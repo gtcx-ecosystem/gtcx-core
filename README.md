@@ -27,3 +27,22 @@ gtcx-core/
 ## Dependencies
 
 None. This is the foundation layer.
+
+## Principles
+
+> Full definitions: [PRINCIPLES.md](https://github.com/gtcx-protocol/gtcx-infrastructure/blob/main/tools/templates/PRINCIPLES.md)
+
+Primary principles for this repo:
+
+- P1 Proof -- every claim requires cryptographic proof
+- P2 Private -- minimal disclosure, data sovereignty
+- P4 Immutable -- verification records cannot be altered
+- P11 Secure -- zero-trust security at every layer
+
+Required across all repos:
+
+- P7 Open -- open-source, no vendor lock-in
+- P13 Modular -- single responsibility, clear boundaries
+- P27 Documented -- every system and API is documented
+- P29 Tested -- automated tests for every module
+- P30 Intentional -- every line of code serves a purpose
