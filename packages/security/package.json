@@ -1,0 +1,77 @@
+{
+  "name": "@gtcx/security",
+  "version": "0.1.0",
+  "description": "Security utilities for GTCX Protocol - validation, auth, offline security, audit logging",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./validation": {
+      "import": "./dist/validation/index.mjs",
+      "require": "./dist/validation/index.js",
+      "types": "./dist/validation/index.d.ts"
+    },
+    "./auth": {
+      "import": "./dist/auth/index.mjs",
+      "require": "./dist/auth/index.js",
+      "types": "./dist/auth/index.d.ts"
+    },
+    "./offline": {
+      "import": "./dist/offline/index.mjs",
+      "require": "./dist/offline/index.js",
+      "types": "./dist/offline/index.d.ts"
+    },
+    "./audit": {
+      "import": "./dist/audit/index.mjs",
+      "require": "./dist/audit/index.js",
+      "types": "./dist/audit/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist node_modules .turbo"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "@gtcx/crypto": "workspace:*",
+    "@gtcx/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@gtcx/typescript-config": "workspace:*",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  },
+  "keywords": [
+    "gtcx",
+    "security",
+    "validation",
+    "authentication",
+    "offline",
+    "audit"
+  ],
+  "author": "GTCX Protocol",
+  "license": "PROPRIETARY",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtcx-protocol/gtcx.git",
+    "directory": "packages/security"
+  }
+}

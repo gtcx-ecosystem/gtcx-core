@@ -1,0 +1,14 @@
+[package]
+name = "gtcx-consensus"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "GTCX Protocol - PANX Weighted PBFT Consensus"
+
+[dependencies]
+gtcx-crypto = { path = "../gtcx-crypto" }
+gtcx-network = { path = "../gtcx-network" }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }

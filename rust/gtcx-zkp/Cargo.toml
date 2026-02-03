@@ -1,0 +1,18 @@
+[package]
+name = "gtcx-zkp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "GTCX Protocol - Zero-Knowledge Proofs"
+
+[dependencies]
+gtcx-crypto = { path = "../gtcx-crypto" }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+# ZKP dependencies (commented until needed)
+# ark-ff = { workspace = true }
+# ark-ec = { workspace = true }
+# ark-relations = { workspace = true }
+# ark-groth16 = { workspace = true }
+# ark-bn254 = { workspace = true }

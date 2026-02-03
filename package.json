@@ -1,0 +1,32 @@
+{
+  "name": "gtcx-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GTCX Core - Shared foundation packages, cryptographic primitives, and type definitions",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtcx-protocol/gtcx-core.git"
+  },
+  "author": "GTCX Protocol",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "prettier": "^3.4.0",
+    "turbo": "^2.3.0",
+    "typescript": "^5.7.0"
+  }
+}

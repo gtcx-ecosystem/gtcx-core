@@ -1,0 +1,10 @@
+{
+  "name": "@gtcx/typescript-config",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared TypeScript configuration for GTCX monorepo",
+  "main": "base.json",
+  "files": [
+    "*.json"
+  ]
+}

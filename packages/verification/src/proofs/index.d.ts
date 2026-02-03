@@ -1,0 +1,3 @@
+export { generateProofBundleId, createLocationProof, createPhotoProof, createCryptographicProofRef, createProofBundle, verifyProofBundleStructure, serializeProofBundle, parseProofBundle, hashProofBundle, extractProofHashes, getProofBundleSummary, type LocationProofInput, type PhotoProofInput, type CreateProofBundleInput, } from './bundler';
+export type { ProofBundle, CryptographicProofRef, LocationProofRef, PhotoProofRef, } from '../types';
+//# sourceMappingURL=index.d.ts.map

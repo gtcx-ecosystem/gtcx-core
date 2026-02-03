@@ -1,0 +1,113 @@
+{
+  "name": "@gtcx/domain",
+  "version": "1.0.0",
+  "description": "Commodity-agnostic domain services for GTCX Protocol - 10/10 architectural compliance",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./schemas": {
+      "import": "./dist/schemas.mjs",
+      "require": "./dist/schemas.js",
+      "types": "./dist/schemas.d.ts"
+    },
+    "./events": {
+      "import": "./dist/events.mjs",
+      "require": "./dist/events.js",
+      "types": "./dist/events.d.ts"
+    },
+    "./ai-logging": {
+      "import": "./dist/ai-logging.mjs",
+      "require": "./dist/ai-logging.js",
+      "types": "./dist/ai-logging.d.ts"
+    },
+    "./ai-integration": {
+      "import": "./dist/ai-integration.mjs",
+      "require": "./dist/ai-integration.js",
+      "types": "./dist/ai-integration.d.ts"
+    },
+    "./metrics": {
+      "import": "./dist/metrics.mjs",
+      "require": "./dist/metrics.js",
+      "types": "./dist/metrics.d.ts"
+    },
+    "./migrations": {
+      "import": "./dist/migrations.mjs",
+      "require": "./dist/migrations.js",
+      "types": "./dist/migrations.d.ts"
+    },
+    "./versioning": {
+      "import": "./dist/versioning.mjs",
+      "require": "./dist/versioning.js",
+      "types": "./dist/versioning.d.ts"
+    },
+    "./offline": {
+      "import": "./dist/internal/offline-queue.mjs",
+      "require": "./dist/internal/offline-queue.js",
+      "types": "./dist/internal/offline-queue.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  },
+  "peerDependencies": {
+    "@gtcx/types": "workspace:*",
+    "@gtcx/crypto": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@gtcx/types": {
+      "optional": true
+    },
+    "@gtcx/crypto": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0",
+    "@vitest/coverage-v8": "^1.4.0"
+  },
+  "keywords": [
+    "gtcx",
+    "domain",
+    "trading",
+    "compliance",
+    "registration",
+    "commodity",
+    "gold",
+    "verification",
+    "offline-first",
+    "ai-native"
+  ],
+  "author": "GTCX Protocol",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtcx/gtcx.git",
+    "directory": "packages/domain"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

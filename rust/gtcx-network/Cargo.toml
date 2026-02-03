@@ -1,0 +1,17 @@
+[package]
+name = "gtcx-network"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "GTCX Protocol - P2P Networking"
+
+[dependencies]
+gtcx-crypto = { path = "../gtcx-crypto" }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+
+# Networking dependencies (commented until needed)
+# libp2p = { workspace = true }
+# quinn = { workspace = true }

@@ -1,0 +1,24 @@
+[package]
+name = "gtcx-node"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "GTCX Protocol - Node.js Bindings (NAPI-RS)"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+gtcx-crypto = { path = "../gtcx-crypto" }
+gtcx-zkp = { path = "../gtcx-zkp" }
+gtcx-consensus = { path = "../gtcx-consensus" }
+gtcx-network = { path = "../gtcx-network" }
+gtcx-edge = { path = "../gtcx-edge" }
+
+napi = { workspace = true, features = ["napi4"] }
+napi-derive = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+[build-dependencies]
+napi-build = "2.1"

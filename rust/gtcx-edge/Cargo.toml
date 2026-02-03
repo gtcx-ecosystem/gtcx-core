@@ -1,0 +1,20 @@
+[package]
+name = "gtcx-edge"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "GTCX Protocol - Edge/WASM Runtime"
+
+[dependencies]
+gtcx-crypto = { path = "../gtcx-crypto" }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+serde = { workspace = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = { workspace = true }
+js-sys = { workspace = true }
+web-sys = { workspace = true }
+
+[lib]
+crate-type = ["cdylib", "rlib"]

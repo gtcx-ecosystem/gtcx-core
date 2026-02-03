@@ -1,0 +1,25 @@
+{
+  "name": "@gtcx/schemas",
+  "version": "0.1.0",
+  "description": "GTCX verification schemas including Core12 compliance framework",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@gtcx/types": "workspace:*",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./core12": "./dist/core12/index.js"
+  }
+}

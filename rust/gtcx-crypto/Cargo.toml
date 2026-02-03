@@ -1,0 +1,53 @@
+[package]
+name = "gtcx-crypto"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description = "GTCX Protocol - Cryptographic Primitives"
+readme = "README.md"
+keywords = ["cryptography", "ed25519", "signing", "hashing", "gtcx"]
+categories = ["cryptography", "no-std"]
+
+[dependencies]
+# Signing
+ed25519-dalek = { workspace = true }
+k256 = { workspace = true }
+
+# Hashing
+sha2 = { workspace = true }
+blake3 = { workspace = true }
+
+# Randomness
+rand = { workspace = true }
+
+# Security
+zeroize = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+hex = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+
+# Tracing (Principle 9: AI-Native)
+tracing = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
+criterion = { workspace = true }
+
+[[bench]]
+name = "signing"
+harness = false
+
+[[bench]]
+name = "hashing"
+harness = false
+
+[features]
+default = ["std"]
+std = []
