@@ -1,72 +1,29 @@
 # GTCX Core
 
-Shared foundation for the GTCX ecosystem. Cryptographic primitives, type definitions, schemas, and domain models consumed by all other repos.
+Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rust), TypeScript type definitions, Zod schemas, and domain models consumed by all other repos. This is the lowest-level dependency in the stack -- it depends on nothing else.
 
----
+## Quick Navigation
 
-## Packages
+| Document | Description |
+|----------|-------------|
+| [Architecture Overview](./docs/architecture/shared-infrastructure.md) | Shared infrastructure and integration patterns |
+| [Cryptographic Verification](./docs/architecture/cryptographic-verification.md) | Crypto design and verification model |
+| [Data Models Spec](./docs/specs/data-models.md) | Core data model specification |
+| [Security Framework](./docs/specs/security-framework.md) | Security architecture and threat model |
+| [Identity Package](./docs/packages/identity.md) | DID, credentials, offline identity cache |
+| [Crypto Package](./docs/packages/crypto.md) | Rust-to-TypeScript crypto bindings |
+| [Security Audit](./packages/security/AUDIT.md) | Security package audit notes |
+| [First Integration Guide](./docs/guides/first-integration.md) | Getting started with gtcx-core |
 
-### Rust Crates (cryptographic foundation)
-
-| Crate | Purpose |
-|-------|---------|
-| `gtcx-crypto` | Ed25519 signing, K256, SHA2, Blake3, key management |
-| `gtcx-zkp` | Zero-knowledge proofs (Arkworks, Groth16, BN254) |
-| `gtcx-consensus` | Byzantine fault-tolerant consensus |
-| `gtcx-network` | P2P networking (libp2p, QUIC, Gossipsub) |
-| `gtcx-edge` | Edge/WASM runtime |
-| `gtcx-node` | Node.js bindings (NAPI-RS) |
-
-### TypeScript Packages (shared libraries)
-
-| Package | Purpose |
-|---------|---------|
-| `@gtcx/types` | Shared TypeScript type definitions |
-| `@gtcx/schemas` | Core12 compliance Zod schemas |
-| `@gtcx/crypto` | Rust-to-TypeScript crypto bindings |
-| `@gtcx/domain` | Business domain models |
-| `@gtcx/utils` | Common utilities |
-| `@gtcx/identity` | DID, credentials, offline identity cache |
-| `@gtcx/security` | Security utilities, offline credential cache |
-| `@gtcx/verification` | Certificates, QR codes, proofs, offline verification |
-
----
-
-## Structure
+## Directory Structure
 
 ```
 gtcx-core/
-├── rust/
-│   ├── gtcx-crypto/
-│   ├── gtcx-zkp/
-│   ├── gtcx-consensus/
-│   ├── gtcx-network/
-│   ├── gtcx-edge/
-│   └── gtcx-node/
-├── packages/
-│   ├── types/
-│   ├── schemas/
-│   ├── crypto/
-│   ├── domain/
-│   ├── utils/
-│   ├── identity/
-│   ├── security/
-│   └── verification/
-└── docs/
+├── rust/                  # Rust crates (crypto, zkp, consensus, network, edge, node)
+├── packages/              # TypeScript packages (types, schemas, crypto, domain, utils, identity, security, verification, config)
+└── docs/                  # Architecture, specs, package docs, and guides
 ```
 
----
+## Dependencies
 
-## Design Principles
-
-- **Cryptographic infrastructure, NOT blockchain.** Governments won't adopt blockchain. We need verification certainty, not distributed consensus.
-- **Rust for security-critical code.** All cryptographic operations in Rust for memory safety and auditability.
-- **Stable versioning.** This repo changes infrequently. Breaking changes require major version bumps with migration guides.
-- **Zero runtime dependencies on other GTCX repos.** This is the foundation — it depends on nothing.
-
----
-
-## Source Reference
-
-- Rust crates: `../gtcx/rust/`
-- TypeScript packages: `../gtcx/packages/{types,schemas,crypto,domain,utils,identity,security,verification}/`
+None. This is the foundation layer.
