@@ -1,20 +1,21 @@
 packages:
   # Core type system and domain models
-  - "packages/types"
-  - "packages/domain"
-  - "packages/schemas"
+  - 'packages/types'
+  - 'packages/domain'
+  - 'packages/schemas'
 
   # Cryptographic and security primitives
-  - "packages/crypto"
-  - "packages/security"
-  - "packages/identity"
-  - "packages/verification"
+  - 'packages/crypto'
+  - 'packages/security'
+  - 'packages/identity'
+  - 'packages/verification'
 
   # Common utilities
-  - "packages/utils"
+  - 'packages/utils'
+  - 'packages/logging'
 
   # Build configuration
-  - "packages/config/eslint"
-  - "packages/config/typescript"
-  - "packages/config/tailwind"
-  - "packages/config/jurisdiction"
+  - 'packages/config/eslint'
+  - 'packages/config/typescript'
+  - 'packages/config/tailwind'
+  - 'packages/config/jurisdiction'
