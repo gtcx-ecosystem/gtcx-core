@@ -73,7 +73,7 @@
   "license": "PROPRIETARY",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gtcx-protocol/gtcx.git",
+    "url": "https://github.com/gtcx-ecosystem/gtcx.git",
     "directory": "packages/security"
   }
 }

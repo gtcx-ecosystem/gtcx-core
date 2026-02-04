@@ -5,7 +5,7 @@
   "description": "GTCX Core - Shared foundation packages, cryptographic primitives, and type definitions",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gtcx-protocol/gtcx-core.git"
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core.git"
   },
   "author": "GTCX Protocol",
   "license": "MIT",

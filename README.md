@@ -31,7 +31,7 @@ None. This is the foundation layer.
 
 ## Principles
 
-> Full definitions: [PRINCIPLES.md](https://github.com/gtcx-protocol/gtcx-infrastructure/blob/main/tools/templates/PRINCIPLES.md)
+> Full definitions: [PRINCIPLES.md](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/tools/templates/PRINCIPLES.md)
 
 Primary principles for this repo:
 

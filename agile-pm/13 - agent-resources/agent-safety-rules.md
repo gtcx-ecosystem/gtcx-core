@@ -282,12 +282,12 @@ Required_Tests:
 
 ### GTCX Ecosystem Structure
 
-> **Note:** The ecosystem migrated from a monorepo (`gtcx-protocol-ecosystem/gtcx-ecosystem-*`) to 12 independent repos at `gtcx-{core,protocols,platforms,intelligence,agentic,app,design,complianceos,hardware,infrastructure,amis,docs}`.
+> **Note:** The ecosystem migrated from a monorepo (`gtcx-ecosystem-ecosystem/gtcx-ecosystem-*`) to 12 independent repos at `gtcx-{core,protocols,platforms,intelligence,agentic,app,design,complianceos,hardware,infrastructure,amis,docs}`.
 
 ```
 gtcx-ecosystem/
 ├── gtcx-core/              # Core protocol definitions
-├── gtcx-protocols/         # TradePass, GCI, GeoTag, VaultMark, PvP
+├── gtcx-ecosystems/         # TradePass, GCI, GeoTag, VaultMark, PvP
 ├── gtcx-platforms/         # CRX, SGX, AGX platforms
 ├── gtcx-intelligence/      # CORTEX, ANISA intelligence layer
 ├── gtcx-agentic/           # Agent framework and knowledge

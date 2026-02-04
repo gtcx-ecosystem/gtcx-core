@@ -12,7 +12,7 @@
 
 ### Step 1: Understand Your Project Context
 
-> **Note:** The ecosystem now uses independent repos (`gtcx-protocols`, `gtcx-platforms`, etc.) instead of the former `gtcx-ecosystem-*` monorepo layout. Each repo has its own `agile-pm/` folder.
+> **Note:** The ecosystem now uses independent repos (`gtcx-ecosystems`, `gtcx-platforms`, etc.) instead of the former `gtcx-ecosystem-*` monorepo layout. Each repo has its own `agile-pm/` folder.
 
 ```bash
 # First, navigate to the project's agile-pm folder

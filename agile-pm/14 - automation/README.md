@@ -231,7 +231,7 @@ console.log(`\nAverage Velocity: ${avg.toFixed(1)} points`);
 
 ### Cross-Project Dashboard Generator
 
-> **Note:** The script below uses legacy monorepo paths (`gtcx-ecosystem-*`). The ecosystem now uses independent repos: `gtcx-protocols`, `gtcx-platforms`, `gtcx-app`, etc. Update paths accordingly when adapting this script.
+> **Note:** The script below uses legacy monorepo paths (`gtcx-ecosystem-*`). The ecosystem now uses independent repos: `gtcx-ecosystems`, `gtcx-platforms`, `gtcx-app`, etc. Update paths accordingly when adapting this script.
 
 ```python
 #!/usr/bin/env python3
@@ -284,7 +284,7 @@ def scan_project(project_path):
 def generate_dashboard():
     """Generate markdown dashboard"""
     projects = [
-        'gtcx-protocols',
+        'gtcx-ecosystems',
         'gtcx-platforms',
         'gtcx-app',
         'gtcx-infrastructure'

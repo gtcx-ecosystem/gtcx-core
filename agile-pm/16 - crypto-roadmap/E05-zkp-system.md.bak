@@ -1,0 +1,994 @@
+# Epic E05: ZK Proof System
+
+## Document Information
+
+- **Project**: GTCX Cryptographic Systems
+- **Epic**: E05 -- ZK Proof System (Zero-Knowledge Proofs)
+- **Phase**: 5
+- **Priority**: P1 (High)
+- **Date**: 2026-02-03
+- **Owner**: Crypto Engineering
+- **Estimated Effort**: 5 sprints (10 weeks)
+- **Total Story Points**: 42
+- **Classification**: CONFIDENTIAL
+- **Dependencies**: Phase 0 (Cryptographic Foundation) -- DONE
+- **Target**: Q3 2026
+- **Success Criteria**: End-to-end zero-knowledge proof infrastructure produces Groth16 proofs on BN254 for four application circuits, with trusted setup ceremony, batch verification, BBS+ selective disclosure, circuit composition, and production monitoring fully operational
+
+
+## Epic Overview
+
+The ZK Proof System epic delivers the zero-knowledge proof infrastructure for the GTCX ecosystem using the arkworks library suite. It establishes a circuit abstraction layer over Groth16 proofs on the BN254 curve, implements four application-specific proof circuits (GCI score threshold, location region membership, asset ownership, and amount range), and hardens the system for production use with performance optimization, batch verification, BBS+ selective disclosure, circuit composition, and operational monitoring. The ZK proof system is a prerequisite for Phase 6 (Identity and Key Management), which depends on selective credential disclosure via the TradePass identity system.
+
+### What Exists Today
+
+| Component | Location | Status |
+|-----------|----------|--------|
+| `kora-crypto/src/zk.rs` | `sensei-rs/kora-crypto/src/zk.rs` | 2-line stub |
+| Arkworks dependencies | `kora-crypto/Cargo.toml` | No arkworks dependencies added yet |
+| ZK proof model | `docs/product/platform/kora/validation-philosophy.md` | Documented in GitBook; defines the proof philosophy and validation approach |
+| TradePass identity system | `docs/developers/components/amani/` | Will consume ZK proofs for selective disclosure of identity attributes |
+
+### What This Epic Delivers
+
+1. Circuit abstraction trait with Groth16 on BN254 backend via arkworks, generic for future proving system backends
+2. Trusted setup ceremony with MPC support and auditable toxic waste disposal using Zeroizing memory
+3. Deterministic proof serialization with versioning for network transmission and persistent storage
+4. Four application circuits: GCI score threshold, location region membership, asset ownership, and amount range
+5. Performance optimization with proof generation <5s and verification <100ms targets at p95
+6. Batch verification of 100 proofs in <5s with fallback to individual identification of invalid proofs
+7. BBS+ selective disclosure for verifiable credential attributes with information-theoretic hiding
+8. Circuit constraint auditing, soundness testing suite, and cross-circuit composition with recursive verification
+9. Setup ceremony automation, proof storage and indexing, and ZK metrics and monitoring for production operations
+
+
+## Sprint Allocation
+
+| Sprint | Theme | Story Points | Stories |
+|--------|-------|-------------|---------|
+| Sprint 18 | Arkworks Integration | 8 | 3 |
+| Sprint 19 | Application Circuits | 13 | 4 |
+| Sprint 20 | Performance and Production | 5 | 3 |
+| Sprint 21 | Circuit Testing and Composition | 10 | 4 |
+| Sprint 22 | ZK Infrastructure Hardening | 6 | 3 |
+| **Total** | | **42** | **17** |
+
+
+---
+
+
+## Sprint 18: Arkworks Integration
+
+**Sprint Goal**: Establish the foundational ZK proof infrastructure including a circuit abstraction trait over Groth16 on BN254, a trusted setup ceremony with MPC support and auditable toxic waste disposal, and deterministic proof serialization for storage and network transmission.
+
+**Sprint Points**: 8
+
+
+### ZKP-US-001: Circuit Abstraction Trait with Groth16 Backend
+
+**Story ID**: ZKP-US-001
+**Priority**: P0
+**Story Points**: 3
+**Sprint**: 18
+**Assignee**: Unassigned
+
+**User Story**:
+As a developer building application-specific ZK circuits, I want a common circuit abstraction trait so that all circuits share a consistent interface for setup, proving, and verification regardless of the specific statement being proved.
+
+**Description**:
+Implement a `ZkCircuit` trait in `kora-crypto/src/zk.rs` that defines the three core operations of any zero-knowledge proof system: `setup()` to generate proving and verification keys from a circuit definition, `prove()` to generate a proof given private witness data and public inputs, and `verify()` to check a proof against a verification key and public inputs. The trait must be generic over the proving system backend so that Groth16 can be swapped for PLONK or other systems in the future without breaking downstream code. The initial and default backend is Groth16 on the BN254 (alt_bn128) curve using the arkworks crate family (`ark-groth16`, `ark-bn254`, `ark-relations`, `ark-serialize`, `ark-std`).
+
+The trait design must enforce security invariants at the type level where possible. All private witness data passed to `prove()` must be wrapped in `Zeroizing<T>` from the `zeroize` crate to ensure automatic memory clearing when the proof generation completes or panics. The trait should define associated types for `Proof`, `ProvingKey`, `VerificationKey`, `PublicInput`, and `Witness` so that each backend can specify its own concrete types. Error handling must use a dedicated `ZkError` enum that distinguishes between setup failures, proving failures, verification failures, serialization failures, and invalid witness data.
+
+**Acceptance Criteria**:
+- `ZkCircuit` trait defines `setup()`, `prove()`, and `verify()` methods with clear associated type signatures
+- Groth16 proving system on BN254 curve is implemented as the default backend via `Groth16Bn254` struct
+- Proof generation and verification work end-to-end for a trivial test circuit (proving knowledge of a SHA-256 preimage)
+- Circuit trait is generic over the proving system backend using associated types, not hardcoded to Groth16
+- All private witness data is wrapped in `Zeroizing<T>` and cleared after proof generation completes
+- `ZkError` enum covers: `SetupError`, `ProvingError`, `VerificationError`, `SerializationError`, `InvalidWitness`
+- Trait supports associated types for `Proof`, `ProvingKey`, `VerificationKey`, `PublicInput`, and `Witness`
+- The trivial test circuit generates and verifies a proof in under 10 seconds on CI hardware
+- `#![deny(unsafe_code)]` is enforced in the module
+- Module-level doc comments describe the trait contract and security properties
+- At least 8 unit tests covering: successful prove/verify, invalid witness rejection, wrong verification key, trait ergonomics
+
+**Dependencies**:
+- Phase 0 `gtcx-crypto` crate (DONE)
+- `kora-crypto/src/zk.rs` stub (exists, 2 lines)
+
+**Definition of Done**:
+- `ZkCircuit` trait and `Groth16Bn254` implementation complete in `kora-crypto/src/zk.rs`
+- arkworks dependencies (`ark-groth16`, `ark-bn254`, `ark-relations`, `ark-serialize`, `ark-std`) added to `kora-crypto/Cargo.toml`
+- `zeroize` dependency added for `Zeroizing<T>` witness wrapping
+- Unit tests written and passing with 100% branch coverage for the module
+- Trivial test circuit (preimage knowledge) included as an integration test
+- No `unsafe` code
+- Code reviewed and approved by designated security reviewer
+- Module-level doc comments describe the trait contract, security model, and backend extensibility
+
+
+---
+
+
+### ZKP-US-002: Trusted Setup Ceremony
+
+**Story ID**: ZKP-US-002
+**Priority**: P0
+**Story Points**: 3
+**Sprint**: 18
+**Assignee**: Unassigned
+
+**User Story**:
+As the security team, I want a trusted setup process that generates proving and verification keys for each circuit type so that the ZK proof system can operate with sound cryptographic parameters and auditable key provenance.
+
+**Description**:
+Implement a trusted setup ceremony module in `kora-crypto/src/zk.rs` (or a dedicated `kora-crypto/src/zk/ceremony.rs` if the module grows large). The setup ceremony generates a structured reference string (SRS) for each circuit type registered in the system. The ceremony must produce deterministic keys given the same circuit definition and entropy source, enabling reproducible builds for audit purposes. The toxic waste -- the secret trapdoor values used during the Groth16 setup -- must be securely destroyed immediately after key generation. All toxic waste values must be wrapped in `Zeroizing<T>` to guarantee that memory is zeroed on drop, even in the event of a panic.
+
+The ceremony supports two operational modes. In **single-party mode** (for development and testing), a single operator provides randomness and generates the SRS locally. In **multi-party computation (MPC) mode** (for production), multiple independent parties each contribute randomness in sequence; the security of the resulting SRS requires that at least one participant honestly destroys their contribution. The MPC mode must produce a transcript that records each participant's contribution hash, timestamp, and attestation of toxic waste disposal. This transcript is stored alongside the generated keys for audit and compliance purposes. Key provenance metadata includes: ceremony timestamp, participant identifiers (in MPC mode), circuit type identifier, and cryptographic fingerprints (SHA-256) of the proving and verification keys.
+
+**Acceptance Criteria**:
+- Setup ceremony generates valid proving and verification keys for each registered circuit type
+- Toxic waste is securely discarded using `Zeroizing<T>` with programmatic verification that memory is cleared
+- Generated keys are deterministic given the same circuit definition and randomness source (verified by generating keys twice with identical seeds)
+- Setup process supports single-party mode for development with a single entropy source
+- Setup process supports multi-party computation mode with sequential participant contributions
+- MPC transcript records: participant ID, contribution hash, timestamp, disposal attestation for each participant
+- Key provenance metadata is generated: ceremony timestamp, participants, circuit type, key fingerprints (SHA-256)
+- Invalid or corrupted contributions in MPC mode are detected and rejected with a clear error
+- Single-party setup for a circuit with 10,000 constraints completes in under 30 seconds
+- Unit tests verify that toxic waste memory is zeroed after ceremony completion
+- At least 10 unit tests covering: single-party setup, MPC two-party setup, deterministic key generation, corrupt contribution rejection
+
+**Dependencies**:
+- ZKP-US-001 (Circuit abstraction trait and Groth16 backend)
+
+**Definition of Done**:
+- Setup ceremony logic implemented in `kora-crypto/src/zk.rs` or `kora-crypto/src/zk/ceremony.rs`
+- Single-party and MPC modes operational with transcript generation
+- Unit tests for both modes, determinism, and toxic waste zeroization
+- MPC transcript format documented in module-level doc comments
+- Private key material handling reviewed by security reviewer for zeroization compliance
+- No toxic waste material appears in any log output, debug format, or serialized form
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-003: Deterministic Proof Serialization
+
+**Story ID**: ZKP-US-003
+**Priority**: P0
+**Story Points**: 2
+**Sprint**: 18
+**Assignee**: Unassigned
+
+**User Story**:
+As the network layer, I want to serialize ZK proofs into a compact binary format for storage and transmission so that proofs can be included in network messages, persisted to disk, and verified by any node with the verification key.
+
+**Description**:
+Implement deterministic proof serialization and deserialization in `kora-crypto/src/zk.rs`. The serialization format must produce identical byte sequences for identical proofs, enabling content-addressable storage and deduplication. The binary format uses a compact layout: a leading version byte (currently `0x01`), followed by the serialized proof data using `ark-serialize`'s canonical serialization, followed by a 4-byte CRC32 checksum for corruption detection. The format must be self-describing enough that a deserializer can detect version mismatches and corrupted data before attempting to parse the proof.
+
+The implementation provides `to_bytes()` and `from_bytes()` methods on the proof wrapper type, as well as `serde::Serialize` and `serde::Deserialize` implementations for JSON encoding (used in debugging and logging contexts). The binary format is the primary format for network transmission and storage; JSON is secondary. Deserialization must validate the version byte, verify the CRC32 checksum, and reject any input that does not conform to the expected structure. A `cargo-fuzz` target must be created for the `from_bytes()` path to ensure robustness against malformed input.
+
+**Acceptance Criteria**:
+- Proofs serialize to a compact binary format with a leading version byte (`0x01`)
+- Serialization is deterministic: the same proof always produces the same byte sequence (verified by serializing the same proof 1000 times)
+- Binary format includes a 4-byte CRC32 checksum for corruption detection
+- Deserialized proofs verify correctly and produce the same verification result as the original in-memory proof
+- `from_bytes()` rejects input with an incorrect version byte, returning a typed `ZkError::SerializationError`
+- `from_bytes()` rejects input with a corrupted CRC32 checksum, returning a typed error
+- `from_bytes()` rejects truncated input without panicking
+- Round-trip serialization via JSON preserves proof validity: `verify(deserialize(serialize(proof)))` returns `true`
+- Binary encoding size is within 1.5x of the raw arkworks canonical serialization size (measured and documented)
+- `cargo-fuzz` target for `from_bytes` created with a minimum of 10 million iterations before merge
+- Proof and verification key serialization formats are documented in module-level doc comments with byte layout diagrams
+
+**Dependencies**:
+- ZKP-US-001 (Circuit abstraction trait and proof types)
+
+**Definition of Done**:
+- Serialization logic implemented in `kora-crypto/src/zk.rs`
+- `to_bytes()`, `from_bytes()`, and serde implementations complete
+- Unit tests for round-trip binary and JSON serialization, corruption detection, version mismatch, truncated input
+- Fuzz target created under `kora-crypto/fuzz/` for proof deserialization
+- Binary format specification documented in doc comments with byte layout
+- Code reviewed and approved
+
+
+---
+
+
+## Sprint 19: Application Circuits
+
+**Sprint Goal**: Implement four application-specific ZK circuits that enable privacy-preserving verification of GCI scores, geographic location, asset ownership, and numeric ranges, forming the foundation for GTCX compliance and transaction privacy.
+
+**Sprint Points**: 13
+
+
+### ZKP-US-004: GCI Score Threshold Circuit
+
+**Story ID**: ZKP-US-004
+**Priority**: P0
+**Story Points**: 3
+**Sprint**: 19
+**Assignee**: Unassigned
+
+**User Story**:
+As a GTCX participant subject to GCI (Governance Compliance Index) requirements, I want to prove that my GCI score meets or exceeds a threshold without revealing my actual score so that I can satisfy compliance checks while preserving the confidentiality of my detailed scoring.
+
+**Description**:
+Implement a `GciThresholdCircuit` struct in a new `kora-crypto/src/zk/circuits/gci.rs` module that proves the statement "my GCI score is at least T" without revealing the score itself. The circuit takes as private witness the participant's GCI score (an integer in the range 0--100) and as public input the required threshold T. The R1CS constraint system encodes the comparison `score >= threshold` by decomposing the difference `score - threshold` into binary and verifying that the result is non-negative. The circuit must be registered with the setup ceremony to obtain its proving and verification keys.
+
+The GCI score is represented as a u8 in the witness, but the circuit operates on field elements from the BN254 scalar field. The implementation must carefully handle the mapping between the application-layer u8 and the field element representation, ensuring that values outside the valid range (0--100) are rejected at witness construction time, not silently accepted. The circuit must be accompanied by thorough soundness tests: an adversarial prover who attempts to prove `score >= threshold` when their actual score is below the threshold must fail to produce a valid proof. These tests exercise the boundary conditions systematically.
+
+**Acceptance Criteria**:
+- `GciThresholdCircuit` implements the `ZkCircuit` trait
+- Prover can generate a proof that their GCI score meets or exceeds a given threshold
+- Verifier learns only pass/fail (score >= threshold), not the actual score value
+- Proof is sound: a prover with a score below the threshold cannot produce a valid proof (verified by adversarial tests for every threshold from 1 to 100)
+- Circuit handles the full range of valid GCI scores (0--100) and thresholds (0--100)
+- Witness construction rejects scores outside the 0--100 range with `ZkError::InvalidWitness`
+- Boundary conditions are tested: score == threshold (pass), score == threshold - 1 (fail), score == 0 with threshold == 0 (pass), score == 100 with threshold == 100 (pass)
+- Constraint count is documented and is less than 1,000 R1CS constraints
+- Proof generation for this circuit completes within the performance budget defined in ZKP-US-008
+- Circuit is registered with the setup ceremony and produces valid proving/verification keys
+- At least 12 unit tests covering all boundary conditions and adversarial scenarios
+
+**Dependencies**:
+- ZKP-US-001 (Circuit abstraction trait)
+- ZKP-US-002 (Trusted setup for key generation)
+
+**Definition of Done**:
+- `GciThresholdCircuit` implemented in `kora-crypto/src/zk/circuits/gci.rs`
+- Registered with setup ceremony; keys generate successfully
+- Unit tests for all boundary conditions and adversarial soundness
+- Constraint count measured and documented in module doc comments
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-005: Location Region Membership Circuit
+
+**Story ID**: ZKP-US-005
+**Priority**: P0
+**Story Points**: 5
+**Sprint**: 19
+**Assignee**: Unassigned
+
+**User Story**:
+As a GTCX participant operating in a licensed geographic area, I want to prove that my location falls within the licensed region without revealing my exact coordinates so that I can demonstrate jurisdictional compliance while protecting location privacy.
+
+**Description**:
+Implement a `LocationRegionCircuit` struct in `kora-crypto/src/zk/circuits/location.rs` that proves the statement "my coordinates (lat, lon) fall within region R" without revealing the exact coordinates. The circuit takes as private witness the participant's latitude and longitude, and as public input a region definition. The region can be specified as either a rectangular bounding box (min_lat, max_lat, min_lon, max_lon) or a convex polygon (ordered list of vertices). The circuit must handle both representations.
+
+Geographic coordinates are inherently floating-point values, but constraint systems operate over finite fields. The implementation must use fixed-point arithmetic to convert decimal coordinates to integers without loss of meaningful precision. The chosen representation uses 6 decimal places of precision (approximately 0.11 meter resolution at the equator), scaling coordinates by 10^6 to produce integer values. For example, latitude 37.774929 becomes the integer 37774929. All arithmetic within the circuit -- comparisons, cross products for polygon containment -- operates on these scaled integers. The polygon containment test uses the cross-product method: a point is inside a convex polygon if and only if it is on the same side of every edge, which can be determined by checking the sign of the cross product of consecutive edge vectors relative to the point.
+
+This is the most complex circuit in the system due to the polygon containment logic and fixed-point arithmetic. The constraint count will be significantly higher than the other circuits, and early profiling is critical to ensure the performance budget is achievable. If the constraint count for polygon containment exceeds the performance budget, the fallback is to support only bounding-box regions (which require only four range comparisons).
+
+**Acceptance Criteria**:
+- `LocationRegionCircuit` implements the `ZkCircuit` trait
+- Prover can generate a proof that their coordinates fall within a specified region
+- Verifier confirms region membership without learning the prover's exact latitude or longitude
+- Region definitions support rectangular bounding boxes (four boundary values)
+- Region definitions support convex polygons (ordered list of vertex coordinates)
+- Floating-point coordinate precision is handled via fixed-point arithmetic with 6 decimal places (scale factor 10^6)
+- Proof is sound: coordinates outside the region cannot produce a valid proof (verified by adversarial tests with points just outside each edge)
+- Polygon containment uses the cross-product method for convex polygon testing
+- Fixed-point arithmetic does not overflow for any valid GPS coordinate pair (-90 to 90 latitude, -180 to 180 longitude)
+- Constraint count is documented for both bounding-box and polygon modes
+- Edge cases tested: point on boundary (defined as inside), point at polygon vertex, degenerate polygon (triangle), region spanning the antimeridian (longitude 180/-180)
+- At least 12 unit tests including adversarial soundness and geometric edge cases
+
+**Dependencies**:
+- ZKP-US-001 (Circuit abstraction trait)
+- ZKP-US-002 (Trusted setup for key generation)
+
+**Definition of Done**:
+- `LocationRegionCircuit` implemented in `kora-crypto/src/zk/circuits/location.rs`
+- Both bounding-box and convex-polygon modes operational
+- Fixed-point arithmetic module implemented and tested independently
+- Constraint count profiled and documented; if polygon mode exceeds budget, bounding-box fallback documented
+- Unit tests for all geometric edge cases and adversarial soundness
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-006: Asset Ownership Circuit
+
+**Story ID**: ZKP-US-006
+**Priority**: P0
+**Story Points**: 3
+**Sprint**: 19
+**Assignee**: Unassigned
+
+**User Story**:
+As an asset holder in the GTCX ecosystem, I want to prove that I own a specific asset without revealing the asset's identity or details so that I can participate in transactions and audits while keeping my asset portfolio confidential.
+
+**Description**:
+Implement an `AssetOwnershipCircuit` struct in `kora-crypto/src/zk/circuits/ownership.rs` that proves the statement "I know the opening of this Pedersen commitment" without revealing the committed values. The circuit takes as private witness the asset identifier, the owner's secret key (or blinding factor), and the commitment randomness. The public input is the Pedersen commitment to the asset. The proof convinces the verifier that the prover knows the values (asset_id, blinding_factor) such that `Commitment = g^asset_id * h^blinding_factor`, where g and h are publicly known generators of the BN254 curve group.
+
+The Pedersen commitment scheme provides computational hiding (the commitment reveals nothing about the asset identity) and computational binding (the prover cannot open the commitment to a different asset). Additionally, the circuit must support unlinkable proofs: two proofs for the same asset by the same owner must be indistinguishable to a verifier. This is achieved by including fresh randomness in each proof, which the Groth16 proving system naturally provides through its random proof generation. The implementation must verify that the unlinkability property holds by generating two proofs for the same commitment and confirming that no public component correlates them.
+
+**Acceptance Criteria**:
+- `AssetOwnershipCircuit` implements the `ZkCircuit` trait
+- Prover can generate a proof of asset ownership without revealing the asset identifier or blinding factor
+- Verifier confirms ownership by checking the proof against a public Pedersen commitment
+- Proof is sound: a non-owner who does not know the opening cannot produce a valid proof
+- Pedersen commitment uses generators g and h from the BN254 curve with verifiable nothing-up-my-sleeve derivation
+- Circuit supports asset identifiers represented as arbitrary byte strings up to 256 bytes
+- Ownership proofs are unlinkable: two proofs for the same asset by the same owner cannot be correlated by the verifier (verified by statistical test over 100 proof pairs)
+- Witness construction rejects asset identifiers exceeding the maximum length with `ZkError::InvalidWitness`
+- Constraint count is documented and is less than 5,000 R1CS constraints
+- At least 10 unit tests covering: valid ownership, non-owner rejection, unlinkability, maximum-length asset ID, empty asset ID
+
+**Dependencies**:
+- ZKP-US-001 (Circuit abstraction trait)
+- ZKP-US-002 (Trusted setup for key generation)
+
+**Definition of Done**:
+- `AssetOwnershipCircuit` implemented in `kora-crypto/src/zk/circuits/ownership.rs`
+- Pedersen commitment generation helper functions included
+- Unlinkability verified by statistical test in unit tests
+- Constraint count measured and documented
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-007: Amount Range Circuit
+
+**Story ID**: ZKP-US-007
+**Priority**: P0
+**Story Points**: 2
+**Sprint**: 19
+**Assignee**: Unassigned
+
+**User Story**:
+As a transaction participant, I want to prove that a transaction amount falls within an acceptable range without revealing the exact amount so that I can satisfy policy constraints (minimum and maximum limits) while keeping transaction values confidential.
+
+**Description**:
+Implement an `AmountRangeCircuit` struct in `kora-crypto/src/zk/circuits/range.rs` that proves the statement "lower <= amount <= upper" without revealing the amount. The circuit takes as private witness the transaction amount (an unsigned 64-bit integer, u64) and as public inputs the lower bound and upper bound (also u64 values). The R1CS constraint system encodes two comparisons: `amount - lower >= 0` and `upper - amount >= 0`. Each comparison is verified by decomposing the difference into 64 binary digits and constraining each digit to be 0 or 1, which proves the difference is non-negative in the u64 range.
+
+The u64 representation is chosen to match the GTCX ledger's amount representation, which uses integer amounts in the smallest denomination unit (similar to satoshis in Bitcoin). The circuit must reject amounts that exceed u64::MAX at witness construction time. The binary decomposition approach yields approximately 128 R1CS constraints for the two range checks (64 bits per decomposition), making this the most lightweight circuit in the system.
+
+**Acceptance Criteria**:
+- `AmountRangeCircuit` implements the `ZkCircuit` trait
+- Prover can generate a proof that an amount falls within specified bounds [lower, upper]
+- Verifier confirms range membership without learning the exact amount
+- Proof is sound: amounts outside the range cannot produce a valid proof (verified by adversarial tests)
+- Circuit handles the full range of u64 values (0 to 2^64 - 1) for amount, lower, and upper
+- Edge cases tested: amount equals lower bound (pass), amount equals upper bound (pass), lower equals upper with matching amount (pass), amount below lower (fail), amount above upper (fail)
+- Witness construction rejects cases where lower > upper with `ZkError::InvalidWitness`
+- Binary decomposition uses exactly 64 bits per value, constraining each bit to {0, 1}
+- Constraint count is documented and is less than 500 R1CS constraints
+- Zero bounds are handled correctly: lower = 0, upper = 0, amount = 0
+- At least 10 unit tests covering all boundary conditions, adversarial soundness, and u64 extremes
+
+**Dependencies**:
+- ZKP-US-001 (Circuit abstraction trait)
+- ZKP-US-002 (Trusted setup for key generation)
+
+**Definition of Done**:
+- `AmountRangeCircuit` implemented in `kora-crypto/src/zk/circuits/range.rs`
+- Binary decomposition verified to constrain each bit to {0, 1}
+- Constraint count measured and documented
+- Unit tests for all boundary conditions and adversarial soundness
+- Code reviewed and approved
+
+
+---
+
+
+## Sprint 20: Performance and Production
+
+**Sprint Goal**: Optimize proof generation and verification performance to meet interactive latency targets, implement batch verification for validator throughput, and add BBS+ selective disclosure for verifiable credential attributes consumed by the TradePass identity system.
+
+**Sprint Points**: 5
+
+
+### ZKP-US-008: Performance Optimization
+
+**Story ID**: ZKP-US-008
+**Priority**: P0
+**Story Points**: 2
+**Sprint**: 20
+**Assignee**: Unassigned
+
+**User Story**:
+As the engineering lead, I want to confirm that proof generation and verification meet their performance targets so that ZK proofs are practical for interactive use cases (real-time compliance checks) and do not become a bottleneck in the verification pipeline.
+
+**Description**:
+Implement comprehensive `criterion` benchmarks for all four application circuits and optimize the proof generation and verification paths to meet the performance targets. The target performance is proof generation under 5 seconds at p95 and proof verification under 100 milliseconds at p95, measured on standard hardware (4-core CPU, 16 GB RAM). Optimization strategies include: enabling parallel witness generation using `rayon` where the arkworks API supports it, pre-computing verification key pairings, minimizing memory allocations during proof generation, and profiling constraint system evaluation to identify hot spots.
+
+Each benchmark must report p50, p95, and p99 latency, peak memory usage, and proof size in bytes. The benchmarks must be reproducible and run as part of the CI pipeline to detect performance regressions. If any circuit exceeds the performance budget, the constraint count must be analyzed and the circuit simplified. The location region circuit (ZKP-US-005) is the most likely to approach the budget due to its polygon containment logic, and may require constraint reduction or algorithmic optimization.
+
+**Acceptance Criteria**:
+- Proof generation completes in under 5 seconds at the 95th percentile on standard hardware (4-core CPU, 16 GB RAM)
+- Proof verification completes in under 100 milliseconds at the 95th percentile on standard hardware
+- `criterion` benchmarks are implemented for all four application circuits (GCI, location, ownership, range)
+- Benchmarks are integrated into the CI pipeline and fail if p95 latency exceeds the target
+- Benchmark results include: p50, p95, p99 latency; peak memory usage (measured via custom allocator or OS metrics); proof size in bytes
+- Performance is measured separately for setup, prove, and verify phases
+- At least one optimization is applied and its impact measured (e.g., parallel witness generation, precomputed pairings)
+- Proof size for each circuit is documented in bytes
+- Memory usage during proof generation does not exceed 2 GB for any circuit
+
+**Dependencies**:
+- ZKP-US-004 (GCI circuit)
+- ZKP-US-005 (Location circuit)
+- ZKP-US-006 (Asset ownership circuit)
+- ZKP-US-007 (Amount range circuit)
+
+**Definition of Done**:
+- `criterion` benchmarks implemented for all four circuits
+- Performance targets met for all circuits at p95
+- Benchmark results documented in module doc comments
+- CI integration configured to detect regressions
+- Any optimizations applied are documented with before/after measurements
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-009: Batch Verification
+
+**Story ID**: ZKP-US-009
+**Priority**: P0
+**Story Points**: 2
+**Sprint**: 20
+**Assignee**: Unassigned
+
+**User Story**:
+As a validator processing many proofs per consensus round, I want to verify multiple proofs in a single batch so that aggregate verification is faster than verifying each proof individually, improving validator throughput.
+
+**Description**:
+Implement batch proof verification in `kora-crypto/src/zk.rs` that exploits the algebraic structure of Groth16 proofs to verify N proofs with fewer pairing operations than N individual verifications. Groth16 batch verification works by computing a random linear combination of the verification equations: for N proofs, the verifier samples random coefficients r_1, ..., r_N and checks a single combined pairing equation. This approach requires only a constant number of pairing operations (3 pairings regardless of N) plus N scalar multiplications, which is significantly cheaper than 3N pairings for individual verification.
+
+The batch verifier must handle mixed circuit types within a single batch (e.g., a batch containing both GCI threshold proofs and amount range proofs, each verified against its respective verification key). If the batch verification fails (indicating at least one invalid proof), the system must fall back to individual verification of each proof in the batch to identify the specific invalid proof(s). This fallback is critical for accountability: validators need to know which prover submitted an invalid proof. The batch size is configurable with a sensible default (100 proofs). Batches exceeding the configured maximum are automatically split into sub-batches.
+
+**Acceptance Criteria**:
+- Batch of 100 proofs verifies in under 5 seconds on standard hardware (4-core CPU, 16 GB RAM)
+- Batch verification is measurably faster than individual verification of the same 100 proofs (speedup documented via `criterion` benchmark)
+- If any proof in the batch is invalid, the batch is rejected and individual verification identifies the specific invalid proof(s)
+- Batch verification produces the same accept/reject result as individual verification for every proof in the batch
+- Mixed circuit types within a single batch are supported (proofs verified against different verification keys)
+- Batch sizes are configurable; oversized batches are automatically split into sub-batches of the configured maximum
+- Random coefficients for batch verification are sampled from a cryptographically secure RNG
+- Empty batch returns success (vacuous truth)
+- Single-proof batch produces the same result as individual verification
+- Fallback to individual verification completes within 2x the time of the original batch verification
+- At least 10 unit tests covering: valid batch, single invalid proof, multiple invalid proofs, mixed circuit types, empty batch, oversized batch
+
+**Dependencies**:
+- ZKP-US-008 (Performance optimization and benchmarks)
+
+**Definition of Done**:
+- Batch verification implemented in `kora-crypto/src/zk.rs`
+- Fallback to individual verification implemented and tested
+- `criterion` benchmark comparing batch vs. sequential verification
+- Mixed circuit type batches tested
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-010: BBS+ Selective Disclosure
+
+**Story ID**: ZKP-US-010
+**Priority**: P1
+**Story Points**: 1
+**Sprint**: 20
+**Assignee**: Unassigned
+
+**User Story**:
+As a credential holder in the TradePass identity system, I want to prove a subset of my credential attributes to a verifier while hiding the remaining attributes so that I can satisfy verification requirements with minimal information disclosure.
+
+**Description**:
+Implement BBS+ selective disclosure in a new `kora-crypto/src/bbs.rs` module using either the `bbs` or `zkryptium` crate (to be evaluated during implementation based on API maturity, audit status, and compliance with the W3C BBS Signature Scheme draft). BBS+ signatures allow the holder of a signed credential containing multiple attributes to derive a proof that reveals only chosen attributes while keeping others information-theoretically hidden. The verifier can confirm that the disclosed attributes are part of a validly signed credential without learning anything about the hidden attributes.
+
+The selective disclosure mechanism works as follows: (1) the issuer signs a credential containing N attributes using a BBS+ signature, (2) the holder receives the credential and signature, (3) when presenting to a verifier, the holder creates a derived proof that commits to the hidden attributes and reveals the disclosed attributes, (4) the verifier checks the derived proof against the issuer's public key and the disclosed attributes. The information-theoretic hiding property means that even an unbounded adversary cannot learn the hidden attributes from the proof, which is strictly stronger than the computational hiding provided by Groth16. The unlinkability property means that two presentations derived from the same credential cannot be correlated by the verifier or any colluding party. This module will be consumed by the TradePass identity system (documented in `docs/developers/components/amani/`) for selective disclosure of identity attributes in verifiable credentials.
+
+**Acceptance Criteria**:
+- Credential holder can select which attributes to disclose and which to hide for each presentation
+- Disclosed attributes are verifiable as part of a validly signed credential using the issuer's public key
+- Hidden attributes are information-theoretically hidden from the verifier (not merely computationally hidden)
+- Selective disclosure proofs are unlinkable: two disclosures from the same credential cannot be correlated by the verifier
+- Implementation supports credentials with up to 32 attributes
+- Issuer key generation, credential signing, and proof derivation are all implemented
+- Proof verification accepts valid selective disclosure proofs and rejects forged proofs
+- Attribute ordering is preserved: disclosed attribute indices map correctly to the original credential
+- At least 8 unit tests covering: full disclosure, partial disclosure, single attribute, all hidden, unlinkability verification, forged proof rejection, 32-attribute credential, empty credential
+
+**Dependencies**:
+- ZKP-US-001 (Circuit abstraction for integration patterns)
+- Phase 0 signing module in `gtcx-crypto` (DONE)
+
+**Definition of Done**:
+- BBS+ selective disclosure implemented in `kora-crypto/src/bbs.rs`
+- BBS+ crate dependency evaluated and selected (decision documented in module doc comments)
+- Unit tests for all disclosure scenarios and security properties
+- Unlinkability verified by statistical test over 100 proof pairs
+- Integration pattern with TradePass identity system documented in doc comments
+- Code reviewed and approved
+
+
+---
+
+
+## Sprint 21: Circuit Testing and Composition
+
+**Sprint Goal**: Harden the circuit implementation with automated constraint auditing, comprehensive soundness testing against adversarial provers, cross-circuit composition for compound statements, and proof metadata for provenance tracking.
+
+**Sprint Points**: 10
+
+
+### ZKP-US-011: Circuit Constraint Auditing
+
+**Story ID**: ZKP-US-011
+**Priority**: P1
+**Story Points**: 2
+**Sprint**: 21
+**Assignee**: Unassigned
+
+**User Story**:
+As a security engineer, I want automated analysis of R1CS constraint systems for every circuit so that I can verify constraint counts, detect redundant or unsatisfied constraints, and measure circuit efficiency before deployment.
+
+**Description**:
+Implement a circuit constraint auditing module in `kora-crypto/src/zk/audit.rs` that provides automated static analysis of R1CS (Rank-1 Constraint System) matrices for any circuit implementing the `ZkCircuit` trait. The auditor synthesizes the circuit's constraint system without generating a proof and analyzes the resulting R1CS matrices (A, B, C) for structural properties. The key analyses are: total constraint count, number of witness variables, number of public inputs, matrix density (fraction of non-zero entries), detection of redundant constraints (constraints that are linear combinations of other constraints), and detection of unsatisfied constraints for a given witness (constraints where A*w . B*w != C*w for witness vector w).
+
+Redundant constraint detection is important because redundant constraints increase proving time without adding soundness. They can arise from naive circuit construction or compiler artifacts. The auditor identifies redundant constraints by computing the rank of the constraint matrix and comparing it to the constraint count. If the rank is less than the count, the difference represents redundant constraints. This information is reported to the developer so they can optimize the circuit.
+
+The auditor also measures matrix density, which affects proving time. Dense matrices (many non-zero entries per row) lead to slower proving. The auditor reports the average number of non-zero entries per row and highlights constraints with unusually high density. All audit results are returned as a structured `CircuitAuditReport` that can be serialized to JSON for CI integration and trend tracking across circuit versions.
+
+**Acceptance Criteria**:
+- Auditor accepts any circuit implementing the `ZkCircuit` trait and produces a `CircuitAuditReport`
+- Report includes: total constraint count, witness variable count, public input count
+- Report includes: matrix density (fraction of non-zero entries in A, B, C matrices)
+- Report includes: count of detected redundant constraints (via matrix rank analysis)
+- Auditor detects unsatisfied constraints for a given test witness and reports which constraints fail
+- `CircuitAuditReport` implements `Serialize` for JSON output
+- Audit of all four application circuits runs in under 10 seconds total
+- Audit results for each circuit are documented in the circuit's module doc comments
+- Redundant constraint count is zero for all four application circuits (or documented and justified if non-zero)
+- At least 8 unit tests covering: circuit with no redundant constraints, circuit with known redundant constraints, unsatisfied constraint detection, matrix density calculation
+
+**Dependencies**:
+- ZKP-US-004 through ZKP-US-007 (Application circuits to audit)
+
+**Definition of Done**:
+- Constraint auditing module implemented in `kora-crypto/src/zk/audit.rs`
+- `CircuitAuditReport` struct with JSON serialization
+- All four application circuits audited with results documented
+- Unit tests for auditor functionality
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-012: Soundness Testing Suite
+
+**Story ID**: ZKP-US-012
+**Priority**: P0
+**Story Points**: 3
+**Sprint**: 21
+**Assignee**: Unassigned
+
+**User Story**:
+As the security team, I want a comprehensive adversarial testing suite that attempts to forge proofs for every circuit so that I have confidence in the soundness of each circuit's constraint system before production deployment.
+
+**Description**:
+Implement a soundness testing suite in `kora-crypto/src/zk/soundness.rs` (or as a dedicated test module) that systematically attempts to violate the soundness property of every application circuit. For each circuit, the suite generates witnesses that do not satisfy the circuit's intended predicate and attempts to produce valid proofs from these invalid witnesses. A sound circuit must reject every such attempt -- the proof generation must either fail (the R1CS system is unsatisfied) or produce a proof that the verifier rejects.
+
+The test suite covers three categories of adversarial attempts for each circuit: (1) **boundary violations** -- witnesses that barely fail the predicate (e.g., GCI score one below the threshold, coordinates one unit outside the region boundary), (2) **type confusion** -- witnesses with values outside the expected domain (e.g., negative numbers represented as large field elements, values exceeding u64::MAX), and (3) **malleability attacks** -- attempts to modify a valid proof to prove a different statement (e.g., changing the public input after proof generation). Each test case is documented with the specific adversarial strategy being tested.
+
+For the GCI threshold circuit, the suite tests every threshold from 1 to 100 with a score exactly one below the threshold. For the location circuit, the suite tests points at calculated distances just outside each edge of a test polygon. For the asset ownership circuit, the suite tests random commitment openings that do not match the target commitment. For the amount range circuit, the suite tests amounts at lower-1 and upper+1.
+
+**Acceptance Criteria**:
+- Every application circuit (GCI, location, ownership, range) has adversarial forge attempt tests
+- Boundary violation tests exist for each circuit with values just outside the valid range
+- Type confusion tests attempt invalid domain values (negative as large field elements, overflow values)
+- Malleability tests attempt to modify valid proofs to change the proven statement
+- All adversarial attempts either fail at proof generation or produce proofs that the verifier rejects
+- GCI circuit is tested with score = threshold - 1 for every threshold from 1 to 100
+- Location circuit is tested with points calculated to be just outside each edge of a test polygon
+- Asset ownership circuit is tested with 100 random incorrect commitment openings
+- Amount range circuit is tested with amount = lower - 1 and amount = upper + 1 for 50 random ranges
+- Invalid witness rejection produces `ZkError::InvalidWitness` or `ZkError::ProvingError` (not a panic)
+- Edge case coverage: zero values, maximum values (u64::MAX, score 100), empty inputs where applicable
+- At least 200 total test cases across all four circuits
+
+**Dependencies**:
+- ZKP-US-004 (GCI circuit)
+- ZKP-US-005 (Location circuit)
+- ZKP-US-006 (Asset ownership circuit)
+- ZKP-US-007 (Amount range circuit)
+
+**Definition of Done**:
+- Soundness testing suite implemented with all test categories
+- All adversarial attempts verified to fail (no false proofs accepted)
+- Each test case documented with the adversarial strategy
+- Test suite runs in CI and all tests pass
+- Code reviewed and approved by security reviewer
+
+
+---
+
+
+### ZKP-US-013: Cross-Circuit Composition
+
+**Story ID**: ZKP-US-013
+**Priority**: P1
+**Story Points**: 3
+**Sprint**: 21
+**Assignee**: Unassigned
+
+**User Story**:
+As a compliance system building compound verification statements, I want to use the output of one circuit as the public input to another circuit so that I can compose proofs for complex policies (e.g., "GCI score above threshold AND location within region AND amount within range") without requiring a single monolithic circuit.
+
+**Description**:
+Implement a cross-circuit composition framework in `kora-crypto/src/zk/compose.rs` that enables one circuit's verified output to serve as another circuit's public input. Composition is critical for building complex compliance policies from simple, auditable circuit primitives. For example, a compliance workflow might require proving: (1) GCI score >= 70, then (2) using the GCI proof's public output as input to a compliance circuit that also requires location within a licensed region. Without composition, this would require a single large circuit that combines both predicates, which is harder to audit and maintain.
+
+The composition framework supports two modes. In **sequential composition**, the verifier checks proof A, extracts its public outputs, and passes them as public inputs to the verification of proof B. This mode does not require any circuit modifications -- it operates at the verification layer. In **recursive verification** (stretch goal), circuit B contains a verification sub-circuit that checks proof A within its own constraint system, producing a single proof that attests to both statements. Recursive verification is significantly more complex (it requires encoding the Groth16 verifier as R1CS constraints) and may be deferred to a future sprint if constraint count or implementation complexity is prohibitive.
+
+The composition framework includes a `ComposedStatement` builder API that chains circuit proofs together with explicit input/output bindings. The builder validates that output types from one circuit match the expected input types of the next circuit at construction time, catching composition errors early.
+
+**Acceptance Criteria**:
+- Sequential composition: one circuit's verified public output can be used as another circuit's public input
+- `ComposedStatement` builder API chains multiple circuit proofs with explicit input/output bindings
+- Type safety: output-to-input bindings are validated at construction time, rejecting type mismatches
+- A composed proof of "GCI >= 70 AND amount in [100, 10000]" verifies correctly when both individual proofs are valid
+- A composed proof fails if either individual proof is invalid
+- Composition supports at least 3 circuits in a chain (A -> B -> C)
+- Input/output binding mismatches produce a clear `ZkError::CompositionError` at construction time, not at verification time
+- Recursive verification is either implemented or documented as a deferred stretch goal with a design sketch
+- Verification of a 3-circuit composed statement completes in under 500 milliseconds
+- At least 10 unit tests covering: two-circuit composition, three-circuit composition, type mismatch rejection, partial failure, all-valid, all-invalid
+
+**Dependencies**:
+- ZKP-US-004 through ZKP-US-007 (Application circuits to compose)
+- ZKP-US-003 (Proof serialization for proof passing between circuits)
+
+**Definition of Done**:
+- Cross-circuit composition framework implemented in `kora-crypto/src/zk/compose.rs`
+- `ComposedStatement` builder API complete with type-safe bindings
+- Sequential composition operational for all four circuit types
+- Recursive verification either implemented or design documented for future sprint
+- Unit tests for all composition scenarios
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-014: Proof Metadata and Provenance
+
+**Story ID**: ZKP-US-014
+**Priority**: P1
+**Story Points**: 2
+**Sprint**: 21
+**Assignee**: Unassigned
+
+**User Story**:
+As an auditor reviewing ZK proofs in the system, I want each proof to carry non-malleable metadata identifying the circuit type, setup ceremony reference, creation timestamp, and prover identity commitment so that I can trace proof provenance and detect anomalous proof submissions.
+
+**Description**:
+Implement a proof metadata and provenance system in `kora-crypto/src/zk/metadata.rs` that attaches structured metadata to every proof generated by the system. The metadata is bound to the proof in a non-malleable way: it is included in the proof's public inputs or hashed into the proof's statement, so that modifying the metadata invalidates the proof. This prevents an adversary from stripping metadata from one proof and attaching it to another.
+
+The metadata structure includes: (1) **circuit type identifier** -- a string or enum identifying which circuit generated the proof (e.g., "gci_threshold_v1", "location_region_v1"), (2) **ceremony reference** -- a hash fingerprint of the setup ceremony that generated the proving and verification keys used for this proof, linking the proof to a specific trusted setup, (3) **timestamp** -- the wall-clock time at which the proof was generated, encoded as a Unix timestamp in seconds, (4) **prover identity commitment** -- a cryptographic commitment (Pedersen or hash) to the prover's identity, enabling the prover to later reveal their identity if needed for dispute resolution without revealing it at proof time.
+
+The prover identity commitment is designed to support optional de-anonymization: the prover can prove they generated a specific proof by revealing the commitment opening, but the commitment itself reveals nothing about the prover's identity. This is important for accountability in regulated environments where anonymity may need to be lifted under legal authority.
+
+**Acceptance Criteria**:
+- Every proof generated by the system includes a `ProofMetadata` struct with circuit type, ceremony reference, timestamp, and prover identity commitment
+- Metadata is non-malleable: modifying any metadata field invalidates the proof (metadata hash is included in public inputs)
+- Circuit type identifier uniquely identifies the circuit and its version
+- Ceremony reference is a SHA-256 fingerprint of the proving key used, linking to the specific setup ceremony
+- Timestamp is a Unix timestamp in seconds, validated to be within a reasonable window (not more than 5 minutes in the future, not more than 24 hours in the past)
+- Prover identity commitment is a Pedersen commitment to the prover's identity bytes
+- Prover can reveal their identity by providing the commitment opening; verification confirms the opening matches the commitment
+- `ProofMetadata` implements `Serialize`, `Deserialize`, `Clone`, `Debug`
+- Metadata serialization is included in the proof binary format (ZKP-US-003) with backward compatibility
+- At least 10 unit tests covering: metadata binding, tampering detection, identity commitment and reveal, timestamp validation, serialization round-trip
+
+**Dependencies**:
+- ZKP-US-001 (Circuit abstraction for metadata integration)
+- ZKP-US-002 (Setup ceremony for ceremony reference)
+- ZKP-US-003 (Proof serialization for metadata inclusion)
+
+**Definition of Done**:
+- Proof metadata and provenance system implemented in `kora-crypto/src/zk/metadata.rs`
+- `ProofMetadata` struct with non-malleable binding to proofs
+- Prover identity commitment and reveal mechanism operational
+- Unit tests for all metadata properties
+- Backward compatibility with existing proof format verified
+- Code reviewed and approved
+
+
+---
+
+
+## Sprint 22: ZK Infrastructure Hardening
+
+**Sprint Goal**: Harden the ZK proof system for production operations with automated setup ceremony execution, content-addressable proof storage with indexing, and structured metrics and monitoring for operational visibility.
+
+**Sprint Points**: 6
+
+
+### ZKP-US-015: Setup Ceremony Automation
+
+**Story ID**: ZKP-US-015
+**Priority**: P1
+**Story Points**: 3
+**Sprint**: 22
+**Assignee**: Unassigned
+
+**User Story**:
+As the operations team, I want a scripted and reproducible setup ceremony process so that MPC ceremonies can be executed reliably across multiple participants, with automated contribution verification and auditable toxic waste disposal attestation.
+
+**Description**:
+Implement setup ceremony automation in `kora-crypto/src/zk/ceremony.rs` (extending the ceremony module from ZKP-US-002) that provides a complete, scripted workflow for executing multi-party computation ceremonies. The automation handles participant coordination, contribution sequencing, contribution verification, and toxic waste disposal attestation. The goal is to make production ceremonies reproducible, auditable, and resistant to operational errors.
+
+The automated ceremony workflow proceeds as follows: (1) the ceremony coordinator initializes the ceremony by specifying the circuit type, participant list, and ceremony parameters, (2) each participant receives the current transcript, adds their randomness contribution, and returns the updated transcript, (3) the coordinator verifies each contribution by checking that the transcript was correctly updated (the new SRS is consistent with the previous SRS plus the new contribution), (4) after all participants have contributed, the coordinator finalizes the ceremony by generating the proving and verification keys from the final transcript, (5) each participant provides a toxic waste disposal attestation (a signed statement that they destroyed their randomness), and (6) the ceremony produces a final report containing: participant list, contribution hashes, verification results, disposal attestations, and key fingerprints.
+
+The ceremony must be resumable: if a participant disconnects or a step fails, the ceremony can be resumed from the last verified contribution rather than starting over. Contribution verification must detect both accidental corruption (e.g., network errors) and malicious contributions (e.g., a participant who does not properly randomize their contribution). The ceremony report is stored alongside the generated keys as a permanent audit artifact.
+
+**Acceptance Criteria**:
+- Ceremony automation handles the full lifecycle: initialization, contribution collection, verification, finalization, attestation
+- Participant coordination supports sequential contributions with verified ordering
+- Each contribution is verified before accepting the next: the new transcript is consistent with the previous transcript plus the new contribution
+- Corrupted contributions (simulated by flipping bits) are detected and rejected with a clear error
+- Malicious contributions (simulated by providing a deterministic non-random contribution) are detected if cryptographically distinguishable
+- Ceremony is resumable from the last verified contribution after a failure
+- Toxic waste disposal attestation is collected from each participant as a signed statement
+- Ceremony report includes: participant list, contribution hashes, verification results, disposal attestations, key fingerprints, timestamps
+- Ceremony report is serializable to JSON for storage and audit
+- Reproducible execution: running the same ceremony with the same randomness inputs produces identical keys (verified in test)
+- At least 10 unit tests covering: successful 3-party ceremony, corrupted contribution, resumption after failure, single-party ceremony, report generation
+
+**Dependencies**:
+- ZKP-US-002 (Trusted setup ceremony foundation)
+
+**Definition of Done**:
+- Ceremony automation implemented in `kora-crypto/src/zk/ceremony.rs`
+- Full lifecycle tested with simulated multi-party ceremony
+- Resumption after failure verified in tests
+- Ceremony report format documented in module doc comments
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-016: Proof Storage and Indexing
+
+**Story ID**: ZKP-US-016
+**Priority**: P1
+**Story Points**: 2
+**Sprint**: 22
+**Assignee**: Unassigned
+
+**User Story**:
+As the verification infrastructure, I want a content-addressable proof store with expiration policies and efficient retrieval by circuit type or public input so that proofs can be persisted, deduplicated, and queried for audit and compliance purposes.
+
+**Description**:
+Implement a proof storage and indexing module in `kora-crypto/src/zk/store.rs` that provides persistent, queryable storage for ZK proofs. The store uses content-addressable storage: each proof is identified by the SHA-256 hash of its serialized binary form (from ZKP-US-003), ensuring natural deduplication. The store supports multiple access patterns: retrieval by content hash (direct lookup), retrieval by circuit type (list all GCI threshold proofs), retrieval by public input value (find all proofs with a specific threshold or region), and retrieval by time range (proofs generated within a time window).
+
+The store implements configurable expiration policies. Proofs can be assigned a time-to-live (TTL) at storage time, after which they are eligible for garbage collection. The default TTL is 90 days, matching the certificate expiration window from the KORA verification pipeline. Expired proofs are not returned by queries but remain in storage until a garbage collection pass removes them. The garbage collector runs on a configurable schedule (default: daily) and produces a report of removed proofs.
+
+Storage is abstracted via a `ProofStore` trait to support multiple backends. The initial implementation provides an in-memory store (for testing) and a filesystem-based store (for development and small deployments). A PostgreSQL-backed store can be added in a future sprint. The store tracks metrics: total proof count, storage size in bytes, proofs by circuit type, and garbage collection statistics.
+
+**Acceptance Criteria**:
+- Proofs are stored with a content-addressable key (SHA-256 hash of serialized proof bytes)
+- Duplicate proofs (identical serialized bytes) map to the same storage key and are not duplicated
+- Retrieval by content hash returns the proof if it exists and has not expired, or `None` otherwise
+- Retrieval by circuit type returns all non-expired proofs of that type, ordered by storage timestamp
+- Retrieval by public input value returns all non-expired proofs with matching public inputs
+- Retrieval by time range returns all non-expired proofs stored within the specified window
+- Expiration policy: proofs with expired TTL are not returned by queries
+- Garbage collector removes expired proofs and produces a removal report
+- `ProofStore` trait abstracts storage with in-memory and filesystem implementations
+- Storage metrics are tracked: total count, size in bytes, count by circuit type, GC statistics
+- At least 10 unit tests covering: store and retrieve, deduplication, expiration, retrieval by circuit type, retrieval by public input, garbage collection, metrics
+
+**Dependencies**:
+- ZKP-US-003 (Proof serialization for content-addressable hashing)
+- ZKP-US-014 (Proof metadata for circuit type and timestamp indexing)
+
+**Definition of Done**:
+- Proof storage and indexing implemented in `kora-crypto/src/zk/store.rs`
+- `ProofStore` trait with in-memory and filesystem implementations
+- Expiration and garbage collection operational
+- Unit tests for all retrieval patterns and lifecycle operations
+- Storage metrics tracking implemented
+- Code reviewed and approved
+
+
+---
+
+
+### ZKP-US-017: ZK Metrics and Monitoring
+
+**Story ID**: ZKP-US-017
+**Priority**: P2
+**Story Points**: 1
+**Sprint**: 22
+**Assignee**: Unassigned
+
+**User Story**:
+As the operations team, I want structured metrics for all ZK proof operations so that I can monitor proof generation time, verification time, constraint count, proof size, and batch throughput in production, with Prometheus-compatible export for dashboarding and alerting.
+
+**Description**:
+Implement a ZK metrics and monitoring module in `kora-crypto/src/zk/metrics.rs` that instruments all proof-related operations with structured metrics. The metrics are emitted as structured data compatible with the Prometheus exposition format, enabling integration with existing monitoring infrastructure (Prometheus scraping, Grafana dashboards, PagerDuty alerts). The module wraps the core ZK operations (setup, prove, verify, batch verify) with timing and counting instrumentation without modifying the core logic.
+
+The metrics collected are: (1) **proof generation time** -- histogram of proof generation duration in milliseconds, labeled by circuit type, (2) **verification time** -- histogram of single-proof verification duration in milliseconds, labeled by circuit type, (3) **batch verification time** -- histogram of batch verification duration in milliseconds, labeled by batch size, (4) **constraint count** -- gauge of R1CS constraint count per circuit type (set at setup time), (5) **proof size** -- histogram of serialized proof size in bytes, labeled by circuit type, (6) **batch throughput** -- counter of proofs verified per second in batch mode, (7) **setup ceremony duration** -- histogram of ceremony duration in seconds, (8) **proof store size** -- gauge of total proofs in storage and total bytes used. All metrics use labels for dimensionality (circuit type, operation phase, success/failure) following Prometheus naming conventions.
+
+The implementation provides a `ZkMetrics` struct that is injected into the ZK subsystem at initialization. If no metrics instance is provided, all instrumentation is a no-op (zero overhead in uninstrumented mode). The metrics are exposed via a `/metrics` HTTP endpoint in Prometheus exposition format for scraping.
+
+**Acceptance Criteria**:
+- Proof generation time is recorded as a histogram labeled by circuit type
+- Verification time is recorded as a histogram labeled by circuit type
+- Batch verification time is recorded as a histogram labeled by batch size
+- Constraint count is recorded as a gauge per circuit type
+- Proof size is recorded as a histogram labeled by circuit type
+- Batch throughput is recorded as a counter (proofs per second)
+- Setup ceremony duration is recorded as a histogram
+- Proof store size (count and bytes) is recorded as a gauge
+- All metrics follow Prometheus naming conventions (`zkp_proof_generation_seconds`, `zkp_verification_seconds`, etc.)
+- Metrics export produces valid Prometheus exposition format text
+- Uninstrumented mode (no `ZkMetrics` injected) has zero overhead -- no allocations, no timing calls
+- At least 8 unit tests covering: metric recording, Prometheus format output, uninstrumented no-op, label correctness
+
+**Dependencies**:
+- ZKP-US-008 (Performance benchmarks provide baseline metrics)
+- ZKP-US-009 (Batch verification for batch metrics)
+- ZKP-US-016 (Proof store for storage metrics)
+
+**Definition of Done**:
+- ZK metrics module implemented in `kora-crypto/src/zk/metrics.rs`
+- `ZkMetrics` struct with Prometheus exposition format export
+- All specified metrics instrumented
+- Zero-overhead uninstrumented mode verified by benchmark
+- Unit tests for metric recording and format output
+- Code reviewed and approved
+
+
+---
+
+
+## Story Point Summary
+
+| Sprint | Theme | Points | Stories | Avg Points per Story |
+|--------|-------|--------|---------|---------------------|
+| Sprint 18 | Arkworks Integration | 8 | 3 | 2.7 |
+| Sprint 19 | Application Circuits | 13 | 4 | 3.3 |
+| Sprint 20 | Performance and Production | 5 | 3 | 1.7 |
+| Sprint 21 | Circuit Testing and Composition | 10 | 4 | 2.5 |
+| Sprint 22 | ZK Infrastructure Hardening | 6 | 3 | 2.0 |
+| **Total** | | **42** | **17** | **2.5** |
+
+
+## Dependency Map
+
+```
+Phase 0: Crypto Foundation (DONE)
+  |
+  +-- ZKP-US-001 (Circuit Abstraction Trait)
+        |
+        +-- ZKP-US-002 (Trusted Setup Ceremony)
+        |     |
+        |     +-- ZKP-US-004 (GCI Score Threshold)
+        |     |
+        |     +-- ZKP-US-005 (Location Region Membership)
+        |     |
+        |     +-- ZKP-US-006 (Asset Ownership)
+        |     |
+        |     +-- ZKP-US-007 (Amount Range)
+        |     |     |
+        |     |     +-- ZKP-US-008 (Performance Optimization)
+        |     |           |
+        |     |           +-- ZKP-US-009 (Batch Verification)
+        |     |                 |
+        |     |                 +-- ZKP-US-017 (ZK Metrics)
+        |     |
+        |     +-- ZKP-US-015 (Setup Ceremony Automation)
+        |
+        +-- ZKP-US-003 (Proof Serialization)
+        |     |
+        |     +-- ZKP-US-014 (Proof Metadata)
+        |           |
+        |           +-- ZKP-US-016 (Proof Storage)
+        |
+        +-- ZKP-US-010 (BBS+ Selective Disclosure)
+        |
+        +-- ZKP-US-004..007 ----+-- ZKP-US-011 (Circuit Constraint Auditing)
+                                |
+                                +-- ZKP-US-012 (Soundness Testing Suite)
+                                |
+                                +-- ZKP-US-013 (Cross-Circuit Composition)
+```
+
+Sprints 18 must complete first as it provides the foundational infrastructure. Sprint 19 depends on Sprint 18. Sprint 20 depends on Sprint 19. Sprints 21 and 22 depend on Sprints 18--19 but can run in parallel with each other given sufficient team capacity. Sprint 22 has a partial dependency on Sprint 20 (ZKP-US-017 depends on ZKP-US-009).
+
+
+## Module Structure
+
+```
+gtcx-zkp/src/
+  lib.rs                          -- crate root, re-exports
+  zk.rs                           -- ZkCircuit trait, Groth16Bn254 backend, ZkError, batch verification
+  zk/
+    ceremony.rs                   -- Trusted setup ceremony (single-party, MPC, automation)
+    circuits/
+      mod.rs                      -- Circuit module re-exports
+      gci.rs                      -- GciThresholdCircuit
+      location.rs                 -- LocationRegionCircuit (bounding box, convex polygon)
+      ownership.rs                -- AssetOwnershipCircuit (Pedersen commitment)
+      range.rs                    -- AmountRangeCircuit (u64 range proof)
+    audit.rs                      -- Circuit constraint auditing, R1CS analysis
+    soundness.rs                  -- Adversarial soundness testing suite
+    compose.rs                    -- Cross-circuit composition, ComposedStatement builder
+    metadata.rs                   -- ProofMetadata, provenance, prover identity commitment
+    store.rs                      -- Content-addressable proof storage, expiration, indexing
+    metrics.rs                    -- ZK metrics, Prometheus export
+  bbs.rs                          -- BBS+ selective disclosure for verifiable credentials
+  fixed_point.rs                  -- Fixed-point arithmetic for location circuit
+```
+
+
+## Technical Notes
+
+- **Primary library**: `arkworks` suite (`ark-groth16`, `ark-bn254`, `ark-relations`, `ark-serialize`, `ark-std`)
+- **Curve**: BN254 (alt_bn128) for Groth16 proofs; provides approximately 110 bits of security, sufficient for medium-term deployments. The `ZkCircuit` trait is designed to support curve migration if BN254 security is deemed insufficient in the future.
+- **BLS12-381**: May be evaluated as an alternative curve for applications requiring higher security margin (~128 bits) or pairing-friendly properties needed by BBS+.
+- **BBS+ library**: Evaluate `bbs` or `zkryptium` crate for selective disclosure; must support unlinkable selective disclosure and be compatible with the W3C BBS Signature Scheme draft. Selection decision to be documented in `kora-crypto/src/bbs.rs` module comments.
+- **Fixed-point arithmetic**: Location circuit uses fixed-point representation with 6 decimal places scaled by 10^6 to convert GPS coordinates to integers. This avoids floating-point non-determinism in R1CS constraint systems. The fixed-point module is implemented separately in `fixed_point.rs` for reuse.
+- **Security -- Zeroizing**: All private witness data, toxic waste, and secret key material is wrapped in `Zeroizing<T>` from the `zeroize` crate. This guarantees that sensitive data is zeroed on drop, even in panic scenarios. No private inputs appear in log output, debug format implementations, or serialized forms.
+- **Fuzz testing**: All proof and key deserialization paths (`from_bytes()`) require `cargo-fuzz` targets per the project Cryptographic Definition of Done. Minimum 10 million iterations before merge for each fuzz target.
+
+
+## Risks
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| arkworks API instability between minor versions | Medium | Medium | Pin exact crate versions in `Cargo.toml`; maintain thin abstraction layer via `ZkCircuit` trait (ZKP-US-001) to isolate downstream code from arkworks API changes |
+| Groth16 trusted setup is a single point of trust; compromised ceremony enables proof forgery | Medium | High | Support MPC ceremony with multiple independent participants (ZKP-US-002, ZKP-US-015); document threat model; require at least 3 participants for production ceremonies |
+| Proof generation may exceed 5s target for complex circuits, especially location polygon containment | Medium | Medium | Profile constraint count early in Sprint 19; simplify region representation to bounding-box only if polygon constraint count is prohibitive; optimize with parallel witness generation |
+| BBS+ crate ecosystem is less mature than arkworks; potential API instability or missing features | High | Medium | Evaluate multiple crates (`bbs`, `zkryptium`) before committing; maintain fallback to attribute-level Groth16 proofs if BBS+ crate is unsuitable; limit BBS+ story to 1 point to contain risk |
+| BN254 security level (~110 bits) may be insufficient for long-term deployments as computational power increases | Low | High | Design `ZkCircuit` trait to support curve migration (associated types, not hardcoded BN254); monitor NIST and IACR cryptographic recommendations; BLS12-381 migration path documented |
+
+
+## Definition of Done -- Epic Level
+
+This epic is complete when:
+
+1. All 17 user stories are implemented and pass their acceptance criteria
+2. All unit tests pass with > 90% code coverage across the ZK module
+3. All `criterion` benchmarks meet their performance targets (proof gen <5s p95, verify <100ms p95, batch 100 <5s)
+4. All `cargo-fuzz` targets have completed 10 million+ iterations without crashes
+5. All four application circuits pass the soundness testing suite (ZKP-US-012) with zero false proofs accepted
+6. Constraint audits (ZKP-US-011) are documented for all four circuits
+7. A full end-to-end integration test exists that: generates setup keys, creates a proof for each circuit type, serializes and deserializes the proofs, verifies them individually and in a batch, and composes a multi-circuit statement
+8. BBS+ selective disclosure produces valid proofs that are information-theoretically hiding and unlinkable
+9. All cryptographic code satisfies the Cryptographic Definition of Done from the master roadmap: audited libraries, zeroizing keys, no unsafe code, constant-time comparisons where applicable, fuzz testing, security review
+10. Setup ceremony automation can execute a reproducible 3-party MPC ceremony with auditable transcript
+11. Proof storage, indexing, and metrics are operational with Prometheus export
+12. Documentation: module-level doc comments, threat model assumptions, binary format specifications, constraint counts, and performance measurements
+13. Security review completed and approved for all PRs
+
+
+---
+
+**Document Status**: Active epic
+**Last Updated**: 2026-02-03
+**Next Review**: Sprint 18 planning
+**Parent Document**: [README.md](README.md) (GTCX Cryptographic Systems Master Roadmap)

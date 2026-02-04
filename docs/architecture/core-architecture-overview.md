@@ -69,7 +69,7 @@ Downstream repos import `@gtcx/*` packages as versioned dependencies from the re
 
 Key integration patterns:
 
-- **Protocol repos** (gtcx-protocols) import `@gtcx/crypto` for signing, `@gtcx/identity` for DID resolution, and `@gtcx/schemas` for data validation.
+- **Protocol repos** (gtcx-ecosystems) import `@gtcx/crypto` for signing, `@gtcx/identity` for DID resolution, and `@gtcx/schemas` for data validation.
 - **Application repos** (gtcx-app) import `@gtcx/domain` for business logic, `@gtcx/security` for auth and validation, and `@gtcx/identity` for credential management.
 - **Platform repos** (gtcx-platforms) import `@gtcx/verification` for proof validation, `@gtcx/schemas` for compliance checks, and `@gtcx/domain` for asset services.
 - **All repos** import `@gtcx/types` for shared type definitions and `@gtcx/utils` for common utilities.
