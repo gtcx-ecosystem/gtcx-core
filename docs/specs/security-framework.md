@@ -2391,4 +2391,75 @@ export class AuditChain {
 
 ---
 
+## 8.13 Security Hardening
+
+### 8.13.1 Penetration Testing
+
+| Activity | Frequency | Scope | Provider |
+|----------|-----------|-------|----------|
+| Third-party penetration test | Annual | Full ecosystem (API, mobile, web, infrastructure) | Independent security firm |
+| Automated vulnerability scan | Quarterly | All deployed containers and endpoints | Trivy + OWASP ZAP |
+| Bug bounty program | Continuous | Public-facing APIs and protocol implementations | Managed platform (HackerOne or equivalent) |
+| Red team exercise | Annual | Social engineering, physical security, infrastructure | Internal or contracted |
+
+### 8.13.2 Dependency Security
+
+| Control | Implementation | SLA |
+|---------|---------------|-----|
+| Automated dependency scanning | Dependabot (GitHub) + Renovate for automated PRs | Continuous |
+| Critical CVE response | Security team alerted, patch deployed | 48 hours |
+| High CVE response | Ticket created, patch scheduled | 7 days |
+| Dependency audit | Review all transitive dependencies for risk | Quarterly |
+| License compliance | Verify all dependencies are MIT/Apache-2.0/BSD compatible | Per new dependency |
+
+### 8.13.3 Secrets Management
+
+| Principle | Implementation |
+|-----------|---------------|
+| No secrets in code | Pre-commit hook (TruffleHog) blocks commits containing secrets |
+| No secrets in config | Environment variables via Kubernetes secrets or Vault |
+| Secret storage | HashiCorp Vault for production, SOPS for development |
+| API key rotation | 90-day rotation, automated via Vault |
+| HSM key rotation | Annual rotation with Shamir key ceremony (3-of-5 threshold) |
+| Service credentials | Short-lived tokens (1 hour max TTL) via Vault |
+| Developer access | No production secrets accessible in development environments |
+
+### 8.13.4 Zero-Trust Implementation Checklist
+
+| Layer | Control | Status |
+|-------|---------|--------|
+| Network | mTLS between all services (Istio/Linkerd service mesh) | Required |
+| API | API key per consumer, rate limiting per key | Required |
+| Authentication | JWT with short expiry (15 min access, 7 day refresh) | Required |
+| Authorization | RBAC at every service boundary, ABAC for data access | Required |
+| Input | Validation at all API boundaries (Zod schemas, request validation) | Required |
+| Output | Response filtering (no internal errors exposed, no stack traces) | Required |
+| Database | Per-service database credentials, no shared database access | Required |
+| Logging | Every auth event logged with correlation ID | Required |
+| Monitoring | Failed auth attempt tracking, anomaly detection on access patterns | Required |
+
+### 8.13.5 Security Audit Trail
+
+Every security-relevant event produces an audit entry:
+
+| Event Category | Examples | Retention |
+|---------------|----------|-----------|
+| Authentication | Login, logout, token refresh, failed attempt | 1 year |
+| Authorization | Permission grant, deny, escalation attempt | 1 year |
+| Data access | Read/write of Restricted or Sovereign data | 7 years |
+| Configuration change | Secret rotation, permission change, policy update | 7 years |
+| Security incident | Vulnerability detection, breach attempt, anomaly alert | 7 years |
+
+Anomaly detection rules:
+
+| Trigger | Response |
+|---------|----------|
+| 5 failed auth attempts in 5 minutes | Account lockout + alert security team |
+| Access from new geographic location | Step-up authentication required |
+| Bulk data export request | Manual approval required from data governance lead |
+| Off-hours access to Sovereign data | Alert security team; access logged with justification requirement |
+| Privilege escalation attempt | Immediate alert; session terminated; incident ticket created |
+
+---
+
 *End of Section 8*

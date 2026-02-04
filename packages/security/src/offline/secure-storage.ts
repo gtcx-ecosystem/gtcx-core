@@ -194,9 +194,14 @@ export abstract class SecureStorageBase {
       const salt = await this.getDeviceSalt();
       this.encryptionKey = await this.deriveKey(secret, salt);
 
+      // Temporarily unlock so verifyKey() can use get()/set()
+      this.state.isLocked = false;
+
       // Verify key by attempting to decrypt a known item
       const verified = await this.verifyKey();
       if (!verified) {
+        this.state.isLocked = true;
+        this.encryptionKey = null;
         this.recordFailedAttempt();
         return {
           success: false,
@@ -206,12 +211,13 @@ export abstract class SecureStorageBase {
       }
 
       // Success
-      this.state.isLocked = false;
       this.state.failedAttempts = 0;
       this.state.lastUnlockedAt = new Date();
 
       return { success: true };
     } catch (error) {
+      this.state.isLocked = true;
+      this.encryptionKey = null;
       this.recordFailedAttempt();
       return {
         success: false,
@@ -361,11 +367,15 @@ export abstract class SecureStorageBase {
     // Try to decrypt a verification marker
     try {
       const marker = await this.get<{ verified: boolean }>('__verify__');
-      return marker?.verified === true;
+      if (marker === null) {
+        // First time setup - create verification marker
+        await this.set('__verify__', { verified: true });
+        return true;
+      }
+      return marker.verified === true;
     } catch {
-      // First time setup - create verification marker
-      await this.set('__verify__', { verified: true });
-      return true;
+      // Decryption failed with current key = wrong secret
+      return false;
     }
   }
 

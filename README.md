@@ -6,7 +6,8 @@ Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rus
 
 | Document | Description |
 |----------|-------------|
-| [Architecture Overview](./docs/architecture/shared-infrastructure.md) | Shared infrastructure and integration patterns |
+| [Architecture Overview](./docs/architecture/core-architecture-overview.md) | Composable architecture and ecosystem integration |
+| [Shared Infrastructure](./docs/architecture/shared-infrastructure.md) | Shared infrastructure and integration patterns |
 | [Cryptographic Verification](./docs/architecture/cryptographic-verification.md) | Crypto design and verification model |
 | [Data Models Spec](./docs/specs/data-models.md) | Core data model specification |
 | [Security Framework](./docs/specs/security-framework.md) | Security architecture and threat model |
