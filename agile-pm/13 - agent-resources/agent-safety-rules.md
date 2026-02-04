@@ -1,16 +1,17 @@
 # GTCX Agent Safety Rules & Development Guards
-*Critical Rules for Protecting the GTCX Codebase*
+
+_Critical Rules for Protecting the GTCX Codebase_
 
 ## PRIME DIRECTIVE: DO NO HARM
 
 **Before ANY action, verify:**
+
 1. Will this break existing functionality?
 2. Am I deleting code someone else depends on?
 3. Have I understood the full context?
 4. Should I ask for clarification first?
 
 **When in doubt, ASK. Don't assume. Don't delete. Don't experiment in production.**
-
 
 ## CRITICAL: NEVER DO THESE
 
@@ -24,21 +25,21 @@ NEVER:
     - DROP database tables or columns
     - DELETE git branches (especially main/master/develop)
     - FORCE PUSH to shared branches
-  
+
   Unauthorized_Changes:
     - Modify .env files with production credentials
     - Change CI/CD pipelines without approval
     - Alter security configurations
     - Update package versions without testing
     - Modify database migrations that have run
-  
+
   Dangerous_Patterns:
     - Commit sensitive data (keys, passwords, tokens)
     - Use 'any' type in TypeScript without comment justification
     - Disable linting rules globally
     - Comment out tests instead of fixing them
     - Use console.log in production code
-    
+
   Breaking_Conventions:
     - Create new patterns without documentation
     - Ignore established project structure
@@ -79,12 +80,12 @@ test(payments): add edge case for negative amounts
 ```typescript
 // Before EVERY commit, verify:
 const preCommitChecklist = {
-  tests: "Do all tests pass?",
-  linting: "No linting errors?",
-  build: "Does the project build successfully?",
-  sensitive: "No sensitive data included?",
-  scope: "Is the change focused and atomic?",
-  message: "Is the commit message descriptive?"
+  tests: 'Do all tests pass?',
+  linting: 'No linting errors?',
+  build: 'Does the project build successfully?',
+  sensitive: 'No sensitive data included?',
+  scope: 'Is the change focused and atomic?',
+  message: 'Is the commit message descriptive?',
 };
 
 // Run these commands before committing:
@@ -105,17 +106,16 @@ Branch_Rules:
     - ALWAYS create feature branches
     - NEVER force push to shared branches
     - NEVER rebase published branches
-  
+
   Naming_Convention:
-    pattern: "type/description-or-ticket"
+    pattern: 'type/description-or-ticket'
     examples:
-      - "feat/user-authentication"
-      - "fix/transaction-decimal-bug"
-      - "chore/update-dependencies"
-      - "hotfix/critical-payment-issue"
-  
-  Lifecycle:
-    1. Create from latest develop/main
+      - 'feat/user-authentication'
+      - 'fix/transaction-decimal-bug'
+      - 'chore/update-dependencies'
+      - 'hotfix/critical-payment-issue'
+
+  Lifecycle: 1. Create from latest develop/main
     2. Make focused changes
     3. Push regularly (backup)
     4. Create PR when ready
@@ -130,24 +130,24 @@ Branch_Rules:
 // ALWAYS follow this sequence:
 
 // 1. Understand the context
-"What does this file/function do?"
-"Who else might be using it?"
-"Are there tests I should check?"
+'What does this file/function do?';
+'Who else might be using it?';
+'Are there tests I should check?';
 
 // 2. Check for dependencies
-"Search entire codebase for references"
-"Check import statements"
-"Look for dynamic calls"
+'Search entire codebase for references';
+'Check import statements';
+'Look for dynamic calls';
 
 // 3. Preserve existing functionality
-"Can I extend instead of replace?"
-"Should I deprecate instead of delete?"
-"Can I make this backward compatible?"
+'Can I extend instead of replace?';
+'Should I deprecate instead of delete?';
+'Can I make this backward compatible?';
 
 // 4. Document your changes
-"Add comments explaining WHY, not just what"
-"Update related documentation"
-"Note any breaking changes"
+'Add comments explaining WHY, not just what';
+'Update related documentation';
+'Note any breaking changes';
 ```
 
 ### The Safe Modification Pattern
@@ -169,7 +169,9 @@ export function oldFunction() {
 }
 
 // ❌ WRONG: Changing function signature
-function processPayment(amount) { /* new logic */ }
+function processPayment(amount) {
+  /* new logic */
+}
 
 // ✅ RIGHT: Maintain compatibility
 function processPayment(amount, options = {}) {
@@ -197,7 +199,7 @@ NEVER_Commit:
     - *.p12
     - secrets.json
     - config/production.json
-  
+
   Patterns:
     - API keys: "sk_live_*", "pk_live_*"
     - AWS credentials: "AKIA*"
@@ -266,12 +268,12 @@ Required_Tests:
     - Unit tests for all public methods
     - Integration tests for API endpoints
     - Edge cases and error conditions
-  
+
   Bug_Fixes:
     - Test that reproduces the bug
     - Test that verifies the fix
     - Related edge cases
-  
+
   Refactoring:
     - All existing tests must still pass
     - No reduction in coverage percentage
@@ -287,7 +289,7 @@ Required_Tests:
 ```
 gtcx-ecosystem/
 ├── gtcx-core/              # Core protocol definitions
-├── gtcx-ecosystems/         # TradePass, GCI, GeoTag, VaultMark, PvP
+├── gtcx-protocols/         # TradePass, GCI, GeoTag, VaultMark, PvP
 ├── gtcx-platforms/         # CRX, SGX, AGX platforms
 ├── gtcx-intelligence/      # CORTEX, ANISA intelligence layer
 ├── gtcx-agentic/           # Agent framework and knowledge
@@ -315,24 +317,24 @@ gtcx-[name]/
 
 ```typescript
 // Enforce consistent naming:
-feature.module.ts       // Modules
-feature.controller.ts   // Controllers
-feature.service.ts      // Services
-feature.repository.ts   // Repositories
-feature.entity.ts       // Entities
-feature.dto.ts          // Data Transfer Objects
-feature.interface.ts    // Interfaces
-feature.spec.ts         // Tests
-feature.e2e-spec.ts     // E2E Tests
+feature.module.ts; // Modules
+feature.controller.ts; // Controllers
+feature.service.ts; // Services
+feature.repository.ts; // Repositories
+feature.entity.ts; // Entities
+feature.dto.ts; // Data Transfer Objects
+feature.interface.ts; // Interfaces
+feature.spec.ts; // Tests
+feature.e2e - spec.ts; // E2E Tests
 
 // ❌ WRONG:
-FeatureModule.ts
-feature-module.ts
-feature_module.ts
-featuremodule.ts
+FeatureModule.ts;
+feature - module.ts;
+feature_module.ts;
+featuremodule.ts;
 
 // ✅ RIGHT:
-feature.module.ts
+feature.module.ts;
 ```
 
 ## DATABASE SAFETY
@@ -347,13 +349,13 @@ feature.module.ts
 // ✅ ALWAYS: Create new migrations for changes
 // migrations/002_add_email_to_users.ts
 export async function up(knex) {
-  await knex.schema.alterTable('users', table => {
+  await knex.schema.alterTable('users', (table) => {
     table.string('email').nullable(); // Start nullable
   });
 }
 
 export async function down(knex) {
-  await knex.schema.alterTable('users', table => {
+  await knex.schema.alterTable('users', (table) => {
     table.dropColumn('email');
   });
 }
@@ -364,13 +366,12 @@ export async function down(knex) {
 ```yaml
 NEVER_Do_Directly:
   - DROP TABLE
-  - DROP COLUMN  
+  - DROP COLUMN
   - RENAME COLUMN (breaks queries)
   - Change column types (may lose data)
   - Add NOT NULL without default
 
-ALWAYS_Safe_Pattern:
-  1. Add new column (nullable)
+ALWAYS_Safe_Pattern: 1. Add new column (nullable)
   2. Backfill data via script
   3. Add constraints in separate migration
   4. Update code to use new schema
@@ -388,7 +389,7 @@ ALWAYS_Safe_Pattern:
 if (process.env.NODE_ENV === 'production') {
   // Be EXTRA careful
   logger.warn('Running in PRODUCTION environment');
-  
+
   // Disable dangerous operations
   config.allowDatabaseDrop = false;
   config.allowForceOverwrite = false;
@@ -399,7 +400,7 @@ if (process.env.NODE_ENV === 'production') {
 if (isProduction()) {
   // DON'T allow:
   // - Database resets
-  // - Force synchronization  
+  // - Force synchronization
   // - Debug endpoints
   // - Test data generation
 }
@@ -417,16 +418,16 @@ Before_Creating_PR:
     - No console.logs (unless intentional)
     - No commented-out code
     - No TODO comments without ticket numbers
-  
+
   Documentation:
     - README updated if needed
     - API docs updated for new endpoints
     - Complex logic has comments
     - Breaking changes noted
-  
+
   PR_Description_Must_Include:
     - What: Clear description of changes
-    - Why: Business/technical justification  
+    - Why: Business/technical justification
     - How: Technical approach taken
     - Testing: How it was tested
     - Screenshots: For UI changes
@@ -439,19 +440,19 @@ Before_Creating_PR:
 // When you need to make significant changes:
 
 // 1. ANNOUNCE before starting
-"I'm going to refactor the payment module to improve performance"
+"I'm going to refactor the payment module to improve performance";
 
 // 2. DOCUMENT your approach
-"Plan: Extract validation, add caching, optimize queries"
+'Plan: Extract validation, add caching, optimize queries';
 
 // 3. REQUEST REVIEW for risky changes
-"This touches critical payment flow - please review approach"
+'This touches critical payment flow - please review approach';
 
 // 4. COMMUNICATE blockers
-"Blocked: Need clarification on tax calculation rules"
+'Blocked: Need clarification on tax calculation rules';
 
 // 5. UPDATE on completion
-"Complete: Payment refactor done, 50% performance improvement"
+'Complete: Payment refactor done, 50% performance improvement';
 ```
 
 ## MONITORING YOUR IMPACT
@@ -484,8 +485,7 @@ git status                  # No unintended files?
 ### The Golden Rules
 
 ```yaml
-Golden_Rules:
-  1. "Don't break what works"
+Golden_Rules: 1. "Don't break what works"
   2. "Ask when uncertain"
   3. "Test before committing"
   4. "Document why, not just what"
@@ -496,7 +496,6 @@ Golden_Rules:
   9. "Respect existing patterns"
   10. "Communicate with the team"
 ```
-
 
 ## EMERGENCY PROCEDURES
 
@@ -524,6 +523,5 @@ git reset --hard origin/main
 # Stash work in progress
 git stash save "WIP: description"
 ```
-
 
 **Remember:** We're building financial infrastructure. Every line of code handles someone's money. Be careful, be thoughtful, be professional.

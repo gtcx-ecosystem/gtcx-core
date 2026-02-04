@@ -1,49 +1,56 @@
 # Automation Scripts & Tools
 
 ## Purpose
+
 This section contains automation scripts and tools to streamline agile processes, reduce manual work, and ensure consistency across the GTCX ecosystem.
 
 ## Available Scripts
 
 ### Project Initialization
+
 - `init-project.sh` - Initialize new project with agile-pm structure
 - `setup-templates.sh` - Copy all templates to project
 - `configure-project.sh` - Set up project-specific configurations
 
 ### Story Management
+
 - `create-user-story.sh` - Generate user story from template
 - `create-epic.sh` - Create epic with linked stories
 - `estimate-stories.sh` - Bulk story point estimation
 - `prioritize-backlog.sh` - Auto-prioritize based on rules
 
 ### Sprint Management
+
 - `start-sprint.sh` - Initialize new sprint
 - `close-sprint.sh` - Close sprint and generate reports
 - `sprint-velocity.sh` - Calculate sprint velocity
 - `burndown-chart.sh` - Generate burndown chart
 
 ### Reporting
+
 - `generate-sprint-report.sh` - Create sprint report
 - `generate-status-report.sh` - Weekly status report
 - `generate-metrics-dashboard.sh` - Metrics dashboard
 - `generate-retrospective.sh` - Retrospective summary
 
 ### Quality Assurance
+
 - `run-quality-checks.sh` - Run all quality gates
 - `check-documentation.sh` - Verify documentation completeness
 - `validate-stories.sh` - Validate user story format
 - `test-coverage-report.sh` - Generate test coverage report
 
 ### Cross-Project Tools
+
 - `sync-templates.sh` - Sync templates across projects
 - `ecosystem-status.sh` - Generate ecosystem-wide status
 - `dependency-check.sh` - Check cross-project dependencies
 - `update-all-projects.sh` - Batch update all projects
 
-
 ## Quick Start Scripts
 
 ### Initialize New Project
+
 ```bash
 #!/bin/bash
 # init-project.sh - Initialize new GTCX project with agile-pm
@@ -80,6 +87,7 @@ echo "📚 Start with: cat agile-pm/README.md"
 ```
 
 ### Create User Story
+
 ```bash
 #!/bin/bash
 # create-user-story.sh - Generate user story from template
@@ -112,6 +120,7 @@ echo "📝 Edit the story: code '$STORY_FILE'"
 ```
 
 ### Generate Sprint Report
+
 ```bash
 #!/bin/bash
 # generate-sprint-report.sh - Generate comprehensive sprint report
@@ -185,10 +194,10 @@ EOF
 echo "✅ Sprint report generated: $OUTPUT_FILE"
 ```
 
-
 ## Metrics Generation Scripts
 
 ### Sprint Velocity Calculator
+
 ```javascript
 // sprint-velocity.js - Calculate sprint velocity trends
 
@@ -196,32 +205,32 @@ const fs = require('fs');
 const path = require('path');
 
 function calculateVelocity(sprintNumber) {
-    const sprintDir = `agile-pm/sprints/sprint-${sprintNumber}`;
-    const stories = fs.readdirSync(`${sprintDir}/completed`);
-    
-    let totalPoints = 0;
-    stories.forEach(story => {
-        const content = fs.readFileSync(`${sprintDir}/completed/${story}`, 'utf8');
-        const points = content.match(/Story Points: (\d+)/);
-        if (points) totalPoints += parseInt(points[1]);
-    });
-    
-    return totalPoints;
+  const sprintDir = `agile-pm/sprints/sprint-${sprintNumber}`;
+  const stories = fs.readdirSync(`${sprintDir}/completed`);
+
+  let totalPoints = 0;
+  stories.forEach((story) => {
+    const content = fs.readFileSync(`${sprintDir}/completed/${story}`, 'utf8');
+    const points = content.match(/Story Points: (\d+)/);
+    if (points) totalPoints += parseInt(points[1]);
+  });
+
+  return totalPoints;
 }
 
 // Calculate last 5 sprints
 const velocities = [];
 for (let i = 1; i <= 5; i++) {
-    velocities.push({
-        sprint: i,
-        velocity: calculateVelocity(i)
-    });
+  velocities.push({
+    sprint: i,
+    velocity: calculateVelocity(i),
+  });
 }
 
 // Generate report
 console.log('Sprint Velocity Trend:');
-velocities.forEach(v => {
-    console.log(`Sprint ${v.sprint}: ${'█'.repeat(v.velocity)} ${v.velocity} points`);
+velocities.forEach((v) => {
+  console.log(`Sprint ${v.sprint}: ${'█'.repeat(v.velocity)} ${v.velocity} points`);
 });
 
 // Calculate average
@@ -231,7 +240,7 @@ console.log(`\nAverage Velocity: ${avg.toFixed(1)} points`);
 
 ### Cross-Project Dashboard Generator
 
-> **Note:** The script below uses legacy monorepo paths (`gtcx-ecosystem-*`). The ecosystem now uses independent repos: `gtcx-ecosystems`, `gtcx-platforms`, `gtcx-app`, etc. Update paths accordingly when adapting this script.
+> **Note:** The script below uses legacy monorepo paths (`gtcx-ecosystem-*`). The ecosystem now uses independent repos: `gtcx-protocols`, `gtcx-platforms`, `gtcx-app`, etc. Update paths accordingly when adapting this script.
 
 ```python
 #!/usr/bin/env python3
@@ -284,12 +293,12 @@ def scan_project(project_path):
 def generate_dashboard():
     """Generate markdown dashboard"""
     projects = [
-        'gtcx-ecosystems',
+        'gtcx-protocols',
         'gtcx-platforms',
         'gtcx-app',
         'gtcx-infrastructure'
     ]
-    
+
     dashboard = f"""# GTCX Ecosystem Dashboard
 **Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M')}
 
@@ -298,12 +307,12 @@ def generate_dashboard():
 | Project | Stories | Completed | P0 | P1 | P2 | P3 | Last Updated |
 |---------|---------|-----------|----|----|----|----|--------------|
 """
-    
+
     for project in projects:
         if os.path.exists(project):
             m = scan_project(project)
             dashboard += f"| {m['name']} | {m['stories']} | {m['completed']} ({m['completed']*100//max(m['stories'],1)}%) | {m['p0']} | {m['p1']} | {m['p2']} | {m['p3']} | {m['last_updated'][:10]} |\n"
-    
+
     return dashboard
 
 if __name__ == "__main__":
@@ -312,7 +321,6 @@ if __name__ == "__main__":
         f.write(dashboard)
     print("✅ Dashboard generated: ecosystem-dashboard.md")
 ```
-
 
 ## Utility Scripts
 
@@ -332,14 +340,14 @@ echo "🔄 Syncing templates from master: $MASTER_TEMPLATE"
 for project in $PROJECTS; do
     if [ -d "$project/agile-pm" ]; then
         echo "Updating: $project"
-        
+
         # Backup current
         cp -r "$project/agile-pm" "$project/agile-pm.backup"
-        
+
         # Sync templates only (preserve project-specific content)
         rsync -av --include="*template.md" --include="*/" --exclude="*" \
             "$MASTER_TEMPLATE/" "$project/agile-pm/"
-        
+
         echo "✅ Updated: $project"
     fi
 done
@@ -348,6 +356,7 @@ echo "🎉 Template sync complete!"
 ```
 
 ### Quality Gate Validator
+
 ```bash
 #!/bin/bash
 # quality-gates.sh - Check if project meets quality gates
@@ -414,10 +423,10 @@ else
 fi
 ```
 
-
 ## Script Usage Guide
 
 ### Installation
+
 ```bash
 # Make scripts executable
 chmod +x agile-pm/14\ -\ automation/*.sh
@@ -427,6 +436,7 @@ export PATH="$PATH:$(pwd)/agile-pm/14 - automation"
 ```
 
 ### Daily Workflow Integration
+
 ```bash
 # Morning routine
 ./ecosystem-status.sh          # Check overall status
@@ -442,6 +452,7 @@ export PATH="$PATH:$(pwd)/agile-pm/14 - automation"
 ```
 
 ### Sprint Ceremonies
+
 ```bash
 # Sprint planning
 ./start-sprint.sh 15           # Start sprint 15
@@ -455,10 +466,10 @@ export PATH="$PATH:$(pwd)/agile-pm/14 - automation"
 ./generate-retrospective.sh 14 # Retro for sprint 14
 ```
 
-
 ## Continuous Improvement
 
 ### Adding New Scripts
+
 1. Create script in this directory
 2. Make it executable
 3. Add documentation here
@@ -466,6 +477,7 @@ export PATH="$PATH:$(pwd)/agile-pm/14 - automation"
 5. Share with team
 
 ### Script Standards
+
 - Use clear, descriptive names
 - Include usage instructions
 - Add error handling
@@ -473,6 +485,7 @@ export PATH="$PATH:$(pwd)/agile-pm/14 - automation"
 - Document dependencies
 
 ### Contribution Guidelines
+
 ```bash
 # Script template
 #!/bin/bash
@@ -494,5 +507,4 @@ echo "🚀 Starting process..."
 echo "✅ Complete!"
 ```
 
-
-*These automation scripts accelerate agile processes and ensure consistency across the GTCX ecosystem.*
+_These automation scripts accelerate agile processes and ensure consistency across the GTCX ecosystem._

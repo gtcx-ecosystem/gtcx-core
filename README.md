@@ -4,17 +4,35 @@ Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rus
 
 ## Quick Navigation
 
-| Document | Description |
-|----------|-------------|
-| [Architecture Overview](./docs/architecture/core-architecture-overview.md) | Composable architecture and ecosystem integration |
-| [Shared Infrastructure](./docs/architecture/shared-infrastructure.md) | Shared infrastructure and integration patterns |
-| [Cryptographic Verification](./docs/architecture/cryptographic-verification.md) | Crypto design and verification model |
-| [Data Models Spec](./docs/specs/data-models.md) | Core data model specification |
-| [Security Framework](./docs/specs/security-framework.md) | Security architecture and threat model |
-| [Identity Package](./docs/packages/identity.md) | DID, credentials, offline identity cache |
-| [Crypto Package](./docs/packages/crypto.md) | Rust-to-TypeScript crypto bindings |
-| [Security Audit](./packages/security/AUDIT.md) | Security package audit notes |
-| [First Integration Guide](./docs/guides/first-integration.md) | Getting started with gtcx-core |
+| Document                                                                        | Description                                       |
+| ------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [Architecture Overview](./docs/architecture/core-architecture-overview.md)      | Composable architecture and ecosystem integration |
+| [Shared Infrastructure](./docs/architecture/shared-infrastructure.md)           | Shared infrastructure and integration patterns    |
+| [Cryptographic Verification](./docs/architecture/cryptographic-verification.md) | Crypto design and verification model              |
+| [Data Models Spec](./docs/specs/data-models.md)                                 | Core data model specification                     |
+| [Security Framework](./docs/specs/security-framework.md)                        | Security architecture and threat model            |
+| [Identity Package](./docs/packages/identity.md)                                 | DID, credentials, offline identity cache          |
+| [Crypto Package](./docs/packages/crypto.md)                                     | Rust-to-TypeScript crypto bindings                |
+| [Security Audit](./packages/security/AUDIT.md)                                  | Security package audit notes                      |
+| [First Integration Guide](./docs/guides/first-integration.md)                   | Getting started with gtcx-core                    |
+
+## Quick Start
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) >= 20.0.0
+- [pnpm](https://pnpm.io/) >= 9.15.0
+
+### Setup
+
+```bash
+pnpm install
+pnpm build
+pnpm test
+pnpm lint
+```
+
+For a step-by-step integration walkthrough, see [First Integration Tutorial](./docs/guides/first-integration.md).
 
 ## Directory Structure
 

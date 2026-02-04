@@ -1,18 +1,18 @@
 # GTCX Agent Guide: How to Use the Agile-PM System
-*Practical Instructions for AI Agents Working with GTCX's Agile-PM Structure*
+
+_Practical Instructions for AI Agents Working with GTCX's Agile-PM Structure_
 
 ## Quick Reference: What is Agile-PM?
 
 **Location**: `[project]/agile-pm/` folder in every GTCX protocol/service  
 **Purpose**: Provides templates, guides, and structure for consistent project management  
-**Your Role**: Use these templates to understand context, track work, and maintain quality  
-
+**Your Role**: Use these templates to understand context, track work, and maintain quality
 
 ## Agent Workflow: Start Here
 
 ### Step 1: Understand Your Project Context
 
-> **Note:** The ecosystem now uses independent repos (`gtcx-ecosystems`, `gtcx-platforms`, etc.) instead of the former `gtcx-ecosystem-*` monorepo layout. Each repo has its own `agile-pm/` folder.
+> **Note:** The ecosystem now uses independent repos (`gtcx-protocols`, `gtcx-platforms`, etc.) instead of the former `gtcx-ecosystem-*` monorepo layout. Each repo has its own `agile-pm/` folder.
 
 ```bash
 # First, navigate to the project's agile-pm folder
@@ -26,6 +26,7 @@ cd gtcx-[repo-name]/agile-pm/
 ```
 
 ### Step 2: Check Current Sprint Status
+
 ```bash
 # Look for current work in planning folder
 cd 06 - planning/
@@ -37,26 +38,26 @@ cd 06 - planning/
 ```
 
 ### Step 3: Understand Your Task
+
 ```yaml
-Before_Coding:
-  1. Find the user story for your task
+Before_Coding: 1. Find the user story for your task
   2. Read acceptance criteria carefully
   3. Check Definition of Done
   4. Note any dependencies
   5. Understand priority level (P0-P3)
 ```
 
-
 ## How to Use Each Agile-PM Section
 
 ### 01 - Overview: Your Starting Point
+
 ```typescript
 // Use this section to:
 interface OverviewUsage {
-  quickLinks: "Find important documents fast";
-  agentGuide: "Understand AI-specific rules";
-  templateCatalog: "See all available templates";
-  navigation: "Know where everything is";
+  quickLinks: 'Find important documents fast';
+  agentGuide: 'Understand AI-specific rules';
+  templateCatalog: 'See all available templates';
+  navigation: 'Know where everything is';
 }
 
 // Key file: agent-guide.md
@@ -64,13 +65,14 @@ interface OverviewUsage {
 ```
 
 ### 02 - Vision: Understanding the Why
+
 ```typescript
 // Use this section to:
 interface VisionUsage {
-  productRequirements: "Understand what to build";
-  businessValue: "Know why it matters";
-  successMetrics: "Understand how success is measured";
-  roiCalculations: "See the business case";
+  productRequirements: 'Understand what to build';
+  businessValue: 'Know why it matters';
+  successMetrics: 'Understand how success is measured';
+  roiCalculations: 'See the business case';
 }
 
 // Before implementing ANY feature, check:
@@ -79,13 +81,14 @@ interface VisionUsage {
 ```
 
 ### 03 - Design: User Experience Context
+
 ```typescript
 // Use this section to:
 interface DesignUsage {
-  userJourneys: "Understand user workflows";
-  designSystem: "Follow UI/UX patterns";
-  accessibility: "Ensure inclusive design";
-  mobileFirst: "Consider mobile users";
+  userJourneys: 'Understand user workflows';
+  designSystem: 'Follow UI/UX patterns';
+  accessibility: 'Ensure inclusive design';
+  mobileFirst: 'Consider mobile users';
 }
 
 // When building UI components:
@@ -94,13 +97,14 @@ interface DesignUsage {
 ```
 
 ### 04 - Spec: Technical Requirements
+
 ```typescript
 // Use this section to:
 interface SpecUsage {
-  architecture: "Understand system design";
-  apiSpecs: "Follow API patterns";
-  deployment: "Know infrastructure needs";
-  technicalDocs: "Get implementation details";
+  architecture: 'Understand system design';
+  apiSpecs: 'Follow API patterns';
+  deployment: 'Know infrastructure needs';
+  technicalDocs: 'Get implementation details';
 }
 
 // CRITICAL: Always check these before coding:
@@ -110,27 +114,29 @@ interface SpecUsage {
 ```
 
 ### 05 - Roadmap: Long-term Planning
+
 ```typescript
 // Use this section to:
 interface RoadmapUsage {
-  epics: "See major features coming";
-  dependencies: "Understand what blocks what";
-  timeline: "Know delivery expectations";
-  milestones: "Track progress markers";
+  epics: 'See major features coming';
+  dependencies: 'Understand what blocks what';
+  timeline: 'Know delivery expectations';
+  milestones: 'Track progress markers';
 }
 
 // Check for dependencies before starting work
 ```
 
 ### 06 - Planning: Your Daily Guide
+
 ```typescript
 // THIS IS YOUR MOST IMPORTANT SECTION
 interface PlanningUsage {
-  userStories: "Get detailed requirements";
+  userStories: 'Get detailed requirements';
   priorities: "Know what's urgent (P0-P3)";
-  sprintPlanning: "Current sprint work";
-  definitionOfDone: "Completion criteria";
-  testPlans: "QA requirements";
+  sprintPlanning: 'Current sprint work';
+  definitionOfDone: 'Completion criteria';
+  testPlans: 'QA requirements';
 }
 
 // Daily workflow:
@@ -140,115 +146,124 @@ interface PlanningUsage {
 ```
 
 ### 07 - Backend: API & Service Patterns
+
 ```typescript
 // Use this section for:
 interface BackendUsage {
-  apiPatterns: "How to structure endpoints";
-  serviceArchitecture: "Microservice design";
-  databaseSchemas: "Data structure patterns";
-  integrations: "External service connections";
+  apiPatterns: 'How to structure endpoints';
+  serviceArchitecture: 'Microservice design';
+  databaseSchemas: 'Data structure patterns';
+  integrations: 'External service connections';
 }
 ```
 
 ### 08 - Frontend: UI Implementation
+
 ```typescript
 // Use this section for:
 interface FrontendUsage {
-  componentStructure: "React/Vue patterns";
-  screenInventory: "All UI screens";
-  frontendRoadmap: "UI development plan";
-  mobileConsiderations: "Mobile-specific needs";
+  componentStructure: 'React/Vue patterns';
+  screenInventory: 'All UI screens';
+  frontendRoadmap: 'UI development plan';
+  mobileConsiderations: 'Mobile-specific needs';
 }
 ```
 
 ### 09 - Security: Critical Requirements
+
 ```typescript
 // Use this section for:
 interface SecurityUsage {
-  authPatterns: "Authentication/authorization";
-  encryptionRequirements: "Data protection";
-  vulnerabilityPrevention: "Security best practices";
-  auditRequirements: "Logging needs";
+  authPatterns: 'Authentication/authorization';
+  encryptionRequirements: 'Data protection';
+  vulnerabilityPrevention: 'Security best practices';
+  auditRequirements: 'Logging needs';
 }
 
 // NEVER skip security requirements!
 ```
 
 ### 10 - Compliance: Regulatory Needs
+
 ```typescript
 // Use this section for:
 interface ComplianceUsage {
-  regulatoryRequirements: "Legal compliance";
-  dataPrivacy: "GDPR/privacy laws";
-  auditTrails: "Compliance logging";
-  certificationNeeds: "Required certifications";
+  regulatoryRequirements: 'Legal compliance';
+  dataPrivacy: 'GDPR/privacy laws';
+  auditTrails: 'Compliance logging';
+  certificationNeeds: 'Required certifications';
 }
 ```
 
 ### 11 - Support: Documentation
+
 ```typescript
 // Use this section for:
 interface SupportUsage {
-  userGuides: "End-user documentation";
-  apiDocs: "Developer documentation";
-  troubleshooting: "Common issues";
-  faqs: "Frequently asked questions";
+  userGuides: 'End-user documentation';
+  apiDocs: 'Developer documentation';
+  troubleshooting: 'Common issues';
+  faqs: 'Frequently asked questions';
 }
 
 // Update docs when you change functionality!
 ```
 
 ### 12 - GTM: Business Context
+
 ```typescript
 // Use this section for:
 interface GTMUsage {
-  marketStrategy: "Go-to-market plans";
-  communityBuilding: "User engagement";
-  partnerships: "Integration partners";
-  revenuePlans: "Monetization strategy";
+  marketStrategy: 'Go-to-market plans';
+  communityBuilding: 'User engagement';
+  partnerships: 'Integration partners';
+  revenuePlans: 'Monetization strategy';
 }
 ```
 
 ### 13 - Agent Resources: Your Specific Guidelines
+
 ```typescript
 // NEW SECTION SPECIFICALLY FOR AGENTS
 interface AgentResourcesUsage {
   safetyRules: "Critical do's and don'ts";
-  behavioralConfig: "How to behave";
-  workflowPatterns: "Common patterns";
-  errorPrevention: "Mistakes to avoid";
-  quickCommands: "Essential shortcuts";
+  behavioralConfig: 'How to behave';
+  workflowPatterns: 'Common patterns';
+  errorPrevention: 'Mistakes to avoid';
+  quickCommands: 'Essential shortcuts';
 }
 
 // ALWAYS START HERE AS AN AGENT!
 ```
 
 ### 14 - Automation: Scripts & Tools
+
 ```typescript
 // Use this section for:
 interface AutomationUsage {
-  initScripts: "Project setup automation";
-  storyGenerators: "Create stories from templates";
-  reportGenerators: "Sprint/status reports";
-  dashboardScripts: "Generate metrics";
+  initScripts: 'Project setup automation';
+  storyGenerators: 'Create stories from templates';
+  reportGenerators: 'Sprint/status reports';
+  dashboardScripts: 'Generate metrics';
 }
 ```
 
 ### 15 - Metrics & Dashboards: Tracking Progress
+
 ```typescript
 // Use this section for:
 interface MetricsUsage {
-  velocityTracking: "Sprint velocity metrics";
-  qualityMetrics: "Code quality indicators";
-  progressDashboards: "Visual progress tracking";
-  crossProjectMetrics: "Ecosystem-wide view";
+  velocityTracking: 'Sprint velocity metrics';
+  qualityMetrics: 'Code quality indicators';
+  progressDashboards: 'Visual progress tracking';
+  crossProjectMetrics: 'Ecosystem-wide view';
 }
 ```
-
 
 ## Agent Development Workflow
 
 ### For New Features
+
 ```bash
 # 1. Start in planning folder
 cd agile-pm/06\ -\ planning/
@@ -270,6 +285,7 @@ echo "- [ ] My New Feature (P2) - 5 points" >> sprint-backlog.md
 ```
 
 ### For Bug Fixes
+
 ```bash
 # 1. Check priority level
 cd agile-pm/06\ -\ planning/
@@ -292,6 +308,7 @@ Testing: [How it was tested]" >> bug-fixes.md
 ```
 
 ### For Documentation Updates
+
 ```bash
 # 1. Identify what needs updating
 - Code changes → Update 04 - spec/
@@ -311,40 +328,40 @@ cd agile-pm/[relevant-folder]/
 git commit -m "docs: update API specification for new endpoint"
 ```
 
-
 ## Understanding Priorities
 
 ### Priority Quick Reference
+
 ```yaml
 P0_Critical:
-  Response: "Drop everything, fix now"
-  Timeline: "0-4 hours"
-  Examples: "System down, data loss, security breach"
-  Action: "Immediate escalation"
+  Response: 'Drop everything, fix now'
+  Timeline: '0-4 hours'
+  Examples: 'System down, data loss, security breach'
+  Action: 'Immediate escalation'
 
 P1_High:
-  Response: "Fix within 24 hours"
-  Timeline: "4-24 hours"
-  Examples: "Major feature broken, integration failure"
-  Action: "Prioritize over P2/P3"
+  Response: 'Fix within 24 hours'
+  Timeline: '4-24 hours'
+  Examples: 'Major feature broken, integration failure'
+  Action: 'Prioritize over P2/P3'
 
 P2_Medium:
-  Response: "Fix within sprint"
-  Timeline: "1-7 days"
-  Examples: "Minor bugs, performance issues"
-  Action: "Normal development cycle"
+  Response: 'Fix within sprint'
+  Timeline: '1-7 days'
+  Examples: 'Minor bugs, performance issues'
+  Action: 'Normal development cycle'
 
 P3_Low:
-  Response: "When resources allow"
-  Timeline: "1-4 weeks"
-  Examples: "Nice-to-have features, minor improvements"
-  Action: "Add to backlog"
+  Response: 'When resources allow'
+  Timeline: '1-4 weeks'
+  Examples: 'Nice-to-have features, minor improvements'
+  Action: 'Add to backlog'
 ```
-
 
 ## Quality Checklist for Agents
 
 ### Before Starting Work
+
 - Read project specification in `04 - spec/`
 - Check current priorities in `06 - planning/priority-framework.md`
 - Review user story and acceptance criteria
@@ -352,6 +369,7 @@ P3_Low:
 - Check for dependencies
 
 ### During Development
+
 - Follow patterns from `04 - spec/technical-architecture-template.md`
 - Use API patterns from `07 - backend/`
 - Apply security requirements from `09 - security/`
@@ -359,6 +377,7 @@ P3_Low:
 - Write tests according to `06 - planning/qa-test-plan-template.md`
 
 ### Before Committing
+
 - Code meets Definition of Done
 - Tests are passing
 - Documentation is updated
@@ -366,43 +385,44 @@ P3_Low:
 - Acceptance criteria satisfied
 
 ### After Completion
+
 - Update user story status
 - Document in sprint notes
 - Update relevant documentation
 - Note any technical debt created
 - Add to release notes if applicable
 
-
 ## Common Agent Mistakes to Avoid
 
 ### DON'T Do These:
+
 ```yaml
 Mistakes_to_Avoid:
   1_Skipping_Context:
-    Wrong: "Jump straight into coding"
-    Right: "Read agile-pm docs first"
-  
-  2_Ignoring_Templates:
-    Wrong: "Create ad-hoc documentation"
-    Right: "Use provided templates"
-  
-  3_Missing_Priorities:
-    Wrong: "Work on random features"
-    Right: "Follow P0→P1→P2→P3 order"
-  
-  4_Breaking_Structure:
-    Wrong: "Create files anywhere"
-    Right: "Follow agile-pm folder structure"
-  
-  5_Incomplete_Work:
-    Wrong: "Code without tests/docs"
-    Right: "Follow Definition of Done"
-```
+    Wrong: 'Jump straight into coding'
+    Right: 'Read agile-pm docs first'
 
+  2_Ignoring_Templates:
+    Wrong: 'Create ad-hoc documentation'
+    Right: 'Use provided templates'
+
+  3_Missing_Priorities:
+    Wrong: 'Work on random features'
+    Right: 'Follow P0→P1→P2→P3 order'
+
+  4_Breaking_Structure:
+    Wrong: 'Create files anywhere'
+    Right: 'Follow agile-pm folder structure'
+
+  5_Incomplete_Work:
+    Wrong: 'Code without tests/docs'
+    Right: 'Follow Definition of Done'
+```
 
 ## Pro Tips for Agents
 
 ### Efficiency Hacks
+
 ```bash
 # Create aliases for common navigation
 alias agile='cd agile-pm'
@@ -421,38 +441,44 @@ alias checklist='cat agile-pm/13\ -\ agent-resources/agent-checklist.md'
 ```
 
 ### Documentation Patterns
+
 ```markdown
 # When updating docs, use this format:
 
 ## Change Log
+
 **Date**: 2024-09-01
 **Author**: AI Agent
-**Changes**: 
+**Changes**:
+
 - Updated API endpoint for user verification
 - Added new error codes
 - Fixed typo in response schema
 
 ## Version
+
 Previous: 1.0.0
 Current: 1.0.1
 ```
 
 ### Communication Template
+
 ```markdown
 # When reporting progress:
 
 ## Task: [User Story ID]
+
 **Status**: In Progress / Complete / Blocked
 **Progress**: 70%
 **Completed**:
+
 - ✅ Implementation complete
 - ✅ Unit tests written
 - ⏳ Integration tests pending
-**Blockers**: None
-**Next Steps**: Complete integration tests
-**ETA**: 2 hours
+  **Blockers**: None
+  **Next Steps**: Complete integration tests
+  **ETA**: 2 hours
 ```
-
 
 ## Summary: Your Agile-PM Mantra
 
@@ -471,7 +497,6 @@ As_an_AI_Agent_I_Will:
   11. "USE agent resources section for guidance" # NEW!
   12. "LEVERAGE automation scripts when available" # NEW!
 ```
-
 
 ## Quick Command Reference
 
@@ -504,7 +529,6 @@ echo "### Bug fixed: [description]" >> bug-fixes.md
 ./14\ -\ automation/sprint-report.sh    # Generate sprint report
 ```
 
-
 **Remember**: The agile-pm system is your guide to excellence. Use it, follow it, and maintain it. The new sections (13, 14, 15) provide additional agent-specific support and automation capabilities!
 
-*This guide ensures AI agents work within GTCX's professional agile framework, maintaining quality and consistency across all development efforts.*
+_This guide ensures AI agents work within GTCX's professional agile framework, maintaining quality and consistency across all development efforts._

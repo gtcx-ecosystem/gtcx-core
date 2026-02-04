@@ -1,11 +1,11 @@
 # GTCX Core -- Architecture Overview
 
-| Field | Value |
-|-------|-------|
-| Layer | Foundation |
-| Depends on | Nothing |
-| Consumed by | All 10 other code repos |
-| Related | [Ecosystem Architecture](../../../docs/architecture/ecosystem-architecture-overview.md), [Dependency Map](../../../docs/architecture/dependency-map.md) |
+| Field       | Value                                                                                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Layer       | Foundation                                                                                                                                              |
+| Depends on  | Nothing                                                                                                                                                 |
+| Consumed by | All 10 other code repos                                                                                                                                 |
+| Related     | [Ecosystem Architecture](../../../docs/architecture/ecosystem-architecture-overview.md), [Dependency Map](../../../docs/architecture/dependency-map.md) |
 
 ## Role in the Ecosystem
 
@@ -17,20 +17,20 @@ The design philosophy is strict modularity with zero commodity-specific code. Co
 
 All packages are published under the `@gtcx/` scope and managed in a pnpm workspace.
 
-| Package | Responsibility |
-|---------|---------------|
-| @gtcx/types | Shared TypeScript type definitions for the entire ecosystem |
-| @gtcx/domain | Domain models, business logic, asset registration services |
-| @gtcx/schemas | Zod validation schemas (Core12 framework) with runtime validation at every boundary |
-| @gtcx/crypto | Cryptographic bindings wrapping the Rust foundation (Ed25519, SHA-256, Blake3, ZKP) |
-| @gtcx/security | Input validation, authentication, RBAC, offline integrity, audit logging |
-| @gtcx/identity | DID/VC identity primitives -- creation, resolution, key rotation, offline cache |
-| @gtcx/verification | Verification logic, certificate issuance, QR codes, proof bundle generation |
-| @gtcx/utils | Shared utilities consumed across the ecosystem |
-| config/eslint | Shared ESLint configuration for consistent code style |
-| config/typescript | Shared TypeScript configuration (strict mode, path aliases) |
-| config/tailwind | Shared Tailwind configuration (design tokens) |
-| config/jurisdiction | Jurisdiction-specific configuration for multi-country deployments |
+| Package             | Responsibility                                                                      |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| @gtcx/types         | Shared TypeScript type definitions for the entire ecosystem                         |
+| @gtcx/domain        | Domain models, business logic, asset registration services                          |
+| @gtcx/schemas       | Zod validation schemas (Core12 framework) with runtime validation at every boundary |
+| @gtcx/crypto        | Cryptographic bindings wrapping the Rust foundation (Ed25519, SHA-256, Blake3, ZKP) |
+| @gtcx/security      | Input validation, authentication, RBAC, offline integrity, audit logging            |
+| @gtcx/identity      | DID/VC identity primitives -- creation, resolution, key rotation, offline cache     |
+| @gtcx/verification  | Verification logic, certificate issuance, QR codes, proof bundle generation         |
+| @gtcx/utils         | Shared utilities consumed across the ecosystem                                      |
+| config/eslint       | Shared ESLint configuration for consistent code style                               |
+| config/typescript   | Shared TypeScript configuration (strict mode, path aliases)                         |
+| config/tailwind     | Shared Tailwind configuration (design tokens)                                       |
+| config/jurisdiction | Jurisdiction-specific configuration for multi-country deployments                   |
 
 ### Internal Dependency Order
 
@@ -53,11 +53,11 @@ No circular dependencies are permitted, enforced by build-time checks. See [Shar
 
 Performance-critical cryptographic operations are implemented in Rust and exposed to TypeScript via NAPI-RS (Node.js) and WASM (browser/React Native).
 
-| Operation | Pure TypeScript | Rust (NAPI-RS) | Speedup |
-|-----------|----------------|----------------|---------|
-| Ed25519 sign | ~2ms | ~0.13ms | 15x |
-| SHA-256 hash | ~0.5ms | ~0.004ms | 120x |
-| ZKP generation | ~500ms | ~8ms | 60x |
+| Operation      | Pure TypeScript | Rust (NAPI-RS) | Speedup |
+| -------------- | --------------- | -------------- | ------- |
+| Ed25519 sign   | ~2ms            | ~0.13ms        | 15x     |
+| SHA-256 hash   | ~0.5ms          | ~0.004ms       | 120x    |
+| ZKP generation | ~500ms          | ~8ms           | 60x     |
 
 Six Rust crates compose the foundation: `gtcx-crypto` (signing and hashing), `gtcx-zkp` (Schnorr proofs, Bulletproofs, Groth16), `gtcx-consensus` (PBFT engine), `gtcx-network` (libp2p mesh), `gtcx-edge` (edge device runtime), and `gtcx-node` (full validator). TypeScript packages fall back to pure-JS implementations when native bindings are unavailable.
 
@@ -69,7 +69,7 @@ Downstream repos import `@gtcx/*` packages as versioned dependencies from the re
 
 Key integration patterns:
 
-- **Protocol repos** (gtcx-ecosystems) import `@gtcx/crypto` for signing, `@gtcx/identity` for DID resolution, and `@gtcx/schemas` for data validation.
+- **Protocol repos** (gtcx-protocols) import `@gtcx/crypto` for signing, `@gtcx/identity` for DID resolution, and `@gtcx/schemas` for data validation.
 - **Application repos** (gtcx-app) import `@gtcx/domain` for business logic, `@gtcx/security` for auth and validation, and `@gtcx/identity` for credential management.
 - **Platform repos** (gtcx-platforms) import `@gtcx/verification` for proof validation, `@gtcx/schemas` for compliance checks, and `@gtcx/domain` for asset services.
 - **All repos** import `@gtcx/types` for shared type definitions and `@gtcx/utils` for common utilities.
@@ -78,11 +78,11 @@ Cross-protocol communication patterns, including the event-driven workflow engin
 
 ## Key Design Decisions
 
-| Decision | Rationale |
-|----------|-----------|
-| Rust for cryptography | Performance (15x-120x speedup) combined with memory safety guarantees; no GC pauses during signing operations |
-| Zod over JSON Schema | Runtime validation with automatic TypeScript type inference; single source of truth for types and validation |
-| pnpm workspace | Strict dependency resolution prevents phantom dependencies; deterministic installs across all environments |
+| Decision                  | Rationale                                                                                                                                                  |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rust for cryptography     | Performance (15x-120x speedup) combined with memory safety guarantees; no GC pauses during signing operations                                              |
+| Zod over JSON Schema      | Runtime validation with automatic TypeScript type inference; single source of truth for types and validation                                               |
+| pnpm workspace            | Strict dependency resolution prevents phantom dependencies; deterministic installs across all environments                                                 |
 | Commodity-agnostic design | `commodityType: string` rather than gold-specific models; new commodities (coffee, cobalt, lithium) added via configuration registration, not code changes |
 
 ## Deep Dives
