@@ -1,0 +1,54 @@
+# Dependencies (will be installed in container)
+node_modules/
+.pnpm-store/
+
+# Build outputs (will be rebuilt in container)
+dist/
+build/
+*.tsbuildinfo
+
+# Coverage and tests output
+coverage/
+.nyc_output/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment (secrets must not be in image)
+.env
+.env.local
+.env.*.local
+
+# Turbo cache
+.turbo/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Git
+.git/
+.gitignore
+
+# Documentation (not needed in image)
+docs/
+agile-pm/
+*.md
+!packages/*/README.md
+
+# CI/CD
+.github/
+
+# Husky hooks
+.husky/
+
+# Rust (not part of Node.js build)
+rust/
