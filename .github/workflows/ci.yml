@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Ensure no tracked dist artifacts
+        run: pnpm check:dist
+
       - name: Lint
         run: pnpm lint
 
@@ -40,15 +43,12 @@ jobs:
 
       - name: Type check
         run: pnpm typecheck
-        continue-on-error: true
 
       - name: Test
         run: pnpm test
-        continue-on-error: true
 
       - name: Build
         run: pnpm build
-        continue-on-error: true
 
   security:
     runs-on: ubuntu-latest
