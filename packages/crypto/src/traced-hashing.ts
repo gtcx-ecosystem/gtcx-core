@@ -4,6 +4,7 @@
 // ============================================================================
 
 import { traced } from '@gtcx/ai';
+
 import {
   hash256 as baseHash256,
   hash512 as baseHash512,
@@ -95,8 +96,11 @@ export const tracedDoubleHash256 = traced(
  * Verify a hash matches expected value (traced)
  */
 export const tracedVerifyHashValue = traced(
-  (input: string | Uint8Array, expectedHash: string, algorithm: HashAlgorithm = 'sha256'): boolean =>
-    baseVerifyHash(input, expectedHash, algorithm),
+  (
+    input: string | Uint8Array,
+    expectedHash: string,
+    algorithm: HashAlgorithm = 'sha256'
+  ): boolean => baseVerifyHash(input, expectedHash, algorithm),
   'crypto.verifyHashValue',
   {
     category: 'crypto',
@@ -156,7 +160,7 @@ export const tracedCombineHashes = traced(
     category: 'crypto',
     logInput: false,
     logOutput: false,
-    sanitizeInput: (input: unknown) => {
+    sanitizeOutput: (input: unknown) => {
       const args = input as string[];
       return {
         hashCount: args.length,

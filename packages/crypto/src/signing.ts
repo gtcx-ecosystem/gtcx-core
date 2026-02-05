@@ -5,7 +5,6 @@
 
 import { ed25519 } from '@noble/curves/ed25519';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
-import { sha256 } from '@noble/hashes/sha256';
 
 export interface SignatureResult {
   signature: string;
@@ -25,10 +24,8 @@ export interface VerificationResult {
  */
 export function sign(message: string | Uint8Array, privateKeyHex: string): string {
   const privateKey = hexToBytes(privateKeyHex);
-  const messageBytes = typeof message === 'string' 
-    ? new TextEncoder().encode(message)
-    : message;
-  
+  const messageBytes = typeof message === 'string' ? new TextEncoder().encode(message) : message;
+
   const signature = ed25519.sign(messageBytes, privateKey);
   return bytesToHex(signature);
 }
@@ -39,7 +36,7 @@ export function sign(message: string | Uint8Array, privateKeyHex: string): strin
 export function signHash(hash: string, privateKeyHex: string): string {
   const privateKey = hexToBytes(privateKeyHex);
   const hashBytes = hexToBytes(hash);
-  
+
   const signature = ed25519.sign(hashBytes, privateKey);
   return bytesToHex(signature);
 }
@@ -48,17 +45,15 @@ export function signHash(hash: string, privateKeyHex: string): string {
  * Verify a signature
  */
 export function verify(
-  message: string | Uint8Array, 
-  signatureHex: string, 
+  message: string | Uint8Array,
+  signatureHex: string,
   publicKeyHex: string
 ): boolean {
   try {
     const signature = hexToBytes(signatureHex);
     const publicKey = hexToBytes(publicKeyHex);
-    const messageBytes = typeof message === 'string'
-      ? new TextEncoder().encode(message)
-      : message;
-    
+    const messageBytes = typeof message === 'string' ? new TextEncoder().encode(message) : message;
+
     return ed25519.verify(signature, messageBytes, publicKey);
   } catch {
     return false;
@@ -68,16 +63,12 @@ export function verify(
 /**
  * Verify a signature against a hash
  */
-export function verifyHash(
-  hashHex: string,
-  signatureHex: string,
-  publicKeyHex: string
-): boolean {
+export function verifyHash(hashHex: string, signatureHex: string, publicKeyHex: string): boolean {
   try {
     const hash = hexToBytes(hashHex);
     const signature = hexToBytes(signatureHex);
     const publicKey = hexToBytes(publicKeyHex);
-    
+
     return ed25519.verify(signature, hash, publicKey);
   } catch {
     return false;
@@ -92,12 +83,11 @@ export function createSignedMessage(
   privateKeyHex: string,
   publicKeyHex: string
 ): SignatureResult {
-  const message = typeof data === 'string' 
-    ? data 
-    : JSON.stringify(data, Object.keys(data as object).sort());
-  
+  const message =
+    typeof data === 'string' ? data : JSON.stringify(data, Object.keys(data as object).sort());
+
   const signature = sign(message, privateKeyHex);
-  
+
   return {
     signature,
     publicKey: publicKeyHex,
@@ -110,12 +100,8 @@ export function createSignedMessage(
  * Verify a signed message object
  */
 export function verifySignedMessage(signedMessage: SignatureResult): VerificationResult {
-  const isValid = verify(
-    signedMessage.message,
-    signedMessage.signature,
-    signedMessage.publicKey
-  );
-  
+  const isValid = verify(signedMessage.message, signedMessage.signature, signedMessage.publicKey);
+
   return {
     valid: isValid,
     publicKey: signedMessage.publicKey,
@@ -133,5 +119,5 @@ export function batchVerify(
     publicKey: string;
   }>
 ): boolean[] {
-  return items.map(item => verify(item.message, item.signature, item.publicKey));
+  return items.map((item) => verify(item.message, item.signature, item.publicKey));
 }

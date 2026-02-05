@@ -5,7 +5,7 @@
 
 import { sha256 } from '@noble/hashes/sha256';
 import { sha512 } from '@noble/hashes/sha512';
-import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
+import { bytesToHex } from '@noble/hashes/utils';
 
 export type HashAlgorithm = 'sha256' | 'sha512';
 
@@ -13,9 +13,7 @@ export type HashAlgorithm = 'sha256' | 'sha512';
  * Hash data using SHA-256
  */
 export function hash256(data: string | Uint8Array): string {
-  const bytes = typeof data === 'string' 
-    ? new TextEncoder().encode(data)
-    : data;
+  const bytes = typeof data === 'string' ? new TextEncoder().encode(data) : data;
   return bytesToHex(sha256(bytes));
 }
 
@@ -23,9 +21,7 @@ export function hash256(data: string | Uint8Array): string {
  * Hash data using SHA-512
  */
 export function hash512(data: string | Uint8Array): string {
-  const bytes = typeof data === 'string'
-    ? new TextEncoder().encode(data)
-    : data;
+  const bytes = typeof data === 'string' ? new TextEncoder().encode(data) : data;
   return bytesToHex(sha512(bytes));
 }
 
@@ -55,9 +51,7 @@ export function hashObject(obj: unknown): string {
  * Double hash (hash of hash) - common in blockchain
  */
 export function doubleHash256(data: string | Uint8Array): string {
-  const firstHash = sha256(
-    typeof data === 'string' ? new TextEncoder().encode(data) : data
-  );
+  const firstHash = sha256(typeof data === 'string' ? new TextEncoder().encode(data) : data);
   return bytesToHex(sha256(firstHash));
 }
 
@@ -83,11 +77,7 @@ export function createCommitment(data: string, salt: string): string {
 /**
  * Verify a commitment
  */
-export function verifyCommitment(
-  data: string,
-  salt: string,
-  commitment: string
-): boolean {
+export function verifyCommitment(data: string, salt: string, commitment: string): boolean {
   const computed = createCommitment(data, salt);
   return computed === commitment.toLowerCase();
 }

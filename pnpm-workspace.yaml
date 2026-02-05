@@ -10,6 +10,9 @@ packages:
   - 'packages/identity'
   - 'packages/verification'
 
+  # AI integration
+  - 'packages/ai'
+
   # Common utilities
   - 'packages/utils'
   - 'packages/logging'

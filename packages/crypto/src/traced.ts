@@ -14,6 +14,7 @@
 // ============================================================================
 
 import { traced, createCategoryLogger } from '@gtcx/ai';
+
 import {
   sign as baseSign,
   signHash as baseSignHash,
@@ -35,11 +36,11 @@ const cryptoLog = createCategoryLogger('crypto');
 
 /**
  * Sign a message with Ed25519 (traced)
- * 
+ *
  * @description
  * Traced version of sign() that logs operation details for debugging
  * and AI analysis. Does NOT log the private key or full message content.
- * 
+ *
  * @param message - Message to sign
  * @param privateKeyHex - Private key in hex format
  * @returns Signature in hex format
@@ -75,17 +76,13 @@ export const tracedSignHash = traced(
 
 /**
  * Verify a signature (traced)
- * 
+ *
  * @description
  * Traced version that logs verification attempts. Useful for debugging
  * failed verifications and analyzing verification patterns.
  */
 export const tracedVerify = traced(
-  (
-    message: string | Uint8Array,
-    signatureHex: string,
-    publicKeyHex: string
-  ): boolean => {
+  (message: string | Uint8Array, signatureHex: string, publicKeyHex: string): boolean => {
     return baseVerify(message, signatureHex, publicKeyHex);
   },
   'crypto.verify',

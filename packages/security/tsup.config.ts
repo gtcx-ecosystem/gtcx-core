@@ -9,7 +9,7 @@ export default defineConfig({
     'audit/index': 'src/audit/index.ts',
   },
   format: ['cjs', 'esm'],
-  dts: true,
+  dts: false, // TODO: Fix duplicate export conflicts between monolithic and refactored modules
   splitting: false,
   sourcemap: true,
   clean: true,

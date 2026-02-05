@@ -1,18 +1,25 @@
 /**
  * Trading Service
- * 
+ *
  * Commodity-agnostic business logic for trading operations and market analysis.
  * Supports any commodity type with configurable market sources and currencies.
- * 
+ *
  * Features:
  * - Runtime validation via Zod schemas (P2, P9)
  * - Event emission for observability (P12)
  * - Dependency injection for all externals (P4)
  * - Offline-first compatible (P8)
- * 
+ *
  * @package @gtcx/domain
  */
 
+import { DomainEventFactory, nullEventEmitter, type IDomainEventEmitter } from './events';
+import {
+  TradeRequestSchema,
+  TradingConfigSchema,
+  TradingOpportunityFilterSchema,
+  safeParse,
+} from './schemas';
 import type {
   AssetLot,
   Transaction,
@@ -20,7 +27,6 @@ import type {
   Location,
   MarketPrice,
   TradingOpportunity,
-  TradeRequest,
   TradeAnalytics,
   QualityGrade,
   ICryptoService,
@@ -28,20 +34,6 @@ import type {
   IPriceService,
   IComplianceService,
 } from './types';
-
-import {
-  TradeRequestSchema,
-  TradingConfigSchema,
-  TradingOpportunityFilterSchema,
-  safeParse,
-  type ValidatedTradeRequest,
-} from './schemas';
-
-import {
-  DomainEventFactory,
-  nullEventEmitter,
-  type IDomainEventEmitter,
-} from './events';
 
 // ============================================================================
 // CONFIGURATION
@@ -116,10 +108,7 @@ export class TradingService {
   /**
    * Get current market prices for a commodity type
    */
-  async getCurrentMarketPrices(
-    commodityType: string,
-    forms?: string[]
-  ): Promise<MarketPrice[]> {
+  async getCurrentMarketPrices(commodityType: string, forms?: string[]): Promise<MarketPrice[]> {
     try {
       const basePrice = await this.priceService.getMarketPrice(commodityType);
       const prices: MarketPrice[] = [];
@@ -179,9 +168,7 @@ export class TradingService {
   /**
    * Calculate fair price for an asset lot
    */
-  async calculateFairPrice(
-    assetLot: AssetLot
-  ): Promise<{
+  async calculateFairPrice(assetLot: AssetLot): Promise<{
     basePrice: number;
     adjustedPrice: number;
     currency: string;
@@ -198,9 +185,7 @@ export class TradingService {
       const basePrice = await this.priceService.getMarketPrice(assetLot.commodityType);
 
       // Calculate adjustments
-      const formAdjustment = assetLot.form
-        ? this.getFormPriceAdjustment(assetLot.form)
-        : 1.0;
+      const formAdjustment = assetLot.form ? this.getFormPriceAdjustment(assetLot.form) : 1.0;
 
       const purityAdjustment = this.calculatePurityAdjustment(assetLot.purity);
       const qualityPremium = this.calculateQualityPremium(assetLot);
@@ -274,7 +259,7 @@ export class TradingService {
   /**
    * Calculate location-based price factor
    */
-  protected async calculateLocationFactor(location: Location): Promise<number> {
+  protected async calculateLocationFactor(_location: Location): Promise<number> {
     // Default: no location adjustment
     // Override for region-specific factors (transport costs, local markets, etc.)
     return 1.0;
@@ -287,9 +272,7 @@ export class TradingService {
   /**
    * Find trading opportunities matching filter criteria
    */
-  async findTradingOpportunities(
-    filters: unknown
-  ): Promise<TradingOpportunity[]> {
+  async findTradingOpportunities(filters: unknown): Promise<TradingOpportunity[]> {
     // Validate filters
     const filterResult = safeParse(TradingOpportunityFilterSchema, filters);
     if (!filterResult.success) {
@@ -396,9 +379,7 @@ export class TradingService {
 
     try {
       // Validate licenses
-      const buyerLicenseValid = await this.complianceService.validateLicenses(
-        validRequest.buyerId
-      );
+      const buyerLicenseValid = await this.complianceService.validateLicenses(validRequest.buyerId);
       const sellerLicenseValid = validRequest.sellerId
         ? await this.complianceService.validateLicenses(validRequest.sellerId)
         : true;
@@ -548,8 +529,14 @@ export class TradingService {
         averagePrice: avgPrice,
         currency: this.config.defaultCurrency,
         priceRange: {
-          min: transactions.length > 0 ? Math.min(...transactions.map((tx) => tx.price / tx.quantity)) : 0,
-          max: transactions.length > 0 ? Math.max(...transactions.map((tx) => tx.price / tx.quantity)) : 0,
+          min:
+            transactions.length > 0
+              ? Math.min(...transactions.map((tx) => tx.price / tx.quantity))
+              : 0,
+          max:
+            transactions.length > 0
+              ? Math.max(...transactions.map((tx) => tx.price / tx.quantity))
+              : 0,
         },
         volumeByForm: this.aggregateByForm(transactions),
         timestamp: new Date().toISOString(),
@@ -572,20 +559,20 @@ export class TradingService {
     return [];
   }
 
-  protected async getTraderInfo(traderId: string): Promise<Trader | undefined> {
+  protected async getTraderInfo(_traderId: string): Promise<Trader | undefined> {
     // Integration point - would query storage
     return undefined;
   }
 
   protected async getTransactionHistory(
-    commodityType: string,
-    period: string
+    _commodityType: string,
+    _period: string
   ): Promise<Transaction[]> {
     // Integration point - would query storage with date filter
     return [];
   }
 
-  protected aggregateByForm(transactions: Transaction[]): Record<string, number> {
+  protected aggregateByForm(_transactions: Transaction[]): Record<string, number> {
     // Integration point - would aggregate transaction data
     return {};
   }

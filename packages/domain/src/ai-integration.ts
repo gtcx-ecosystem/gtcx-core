@@ -1,15 +1,15 @@
 /**
  * AI Integration Interfaces
- * 
+ *
  * Hooks for AI-powered analysis and decision support.
  * Completes P5 (AI-Native) principle.
- * 
+ *
  * @package @gtcx/domain
  */
 
-import type { AssetLot, Transaction, ComplianceRecord, TradingOpportunity } from './types';
 import type { OperationLogEntry } from './ai-logging';
 import type { DomainEvent } from './events';
+import type { AssetLot, Transaction, ComplianceRecord, TradingOpportunity } from './types';
 
 // ============================================================================
 // AI CONTEXT TYPES
@@ -120,59 +120,69 @@ export interface IAIProvider {
   analyzeRegistration(
     assetLot: AssetLot,
     context?: AIAnalysisContext
-  ): Promise<AIAnalysisResult<{
-    qualityAssessment: 'high' | 'medium' | 'low';
-    priceEstimate: { min: number; max: number; expected: number };
-    riskFactors: string[];
-  }>>;
-  
+  ): Promise<
+    AIAnalysisResult<{
+      qualityAssessment: 'high' | 'medium' | 'low';
+      priceEstimate: { min: number; max: number; expected: number };
+      riskFactors: string[];
+    }>
+  >;
+
   /**
    * Analyze trading opportunity
    */
   analyzeTrade(
     opportunity: TradingOpportunity,
     context?: AIAnalysisContext
-  ): Promise<AIAnalysisResult<{
-    recommendation: 'buy' | 'sell' | 'hold' | 'avoid';
-    fairPriceRange: { min: number; max: number };
-    riskLevel: 'low' | 'medium' | 'high';
-  }>>;
-  
+  ): Promise<
+    AIAnalysisResult<{
+      recommendation: 'buy' | 'sell' | 'hold' | 'avoid';
+      fairPriceRange: { min: number; max: number };
+      riskLevel: 'low' | 'medium' | 'high';
+    }>
+  >;
+
   /**
    * Analyze compliance patterns
    */
   analyzeCompliance(
     records: ComplianceRecord[],
     context?: AIAnalysisContext
-  ): Promise<AIAnalysisResult<{
-    trendDirection: 'improving' | 'stable' | 'declining';
-    riskAreas: string[];
-    recommendations: string[];
-  }>>;
-  
+  ): Promise<
+    AIAnalysisResult<{
+      trendDirection: 'improving' | 'stable' | 'declining';
+      riskAreas: string[];
+      recommendations: string[];
+    }>
+  >;
+
   /**
    * Detect fraud patterns
    */
   detectFraud(
     transactions: Transaction[],
     context?: AIAnalysisContext
-  ): Promise<AIAnalysisResult<{
-    suspiciousTransactions: string[];
-    patterns: string[];
-    riskScore: number;
-  }>>;
-  
+  ): Promise<
+    AIAnalysisResult<{
+      suspiciousTransactions: string[];
+      patterns: string[];
+      riskScore: number;
+    }>
+  >;
+
   /**
    * Generate insights from operations
    */
   generateInsights(
     operations: OperationLogEntry[],
     context?: AIAnalysisContext
-  ): Promise<AIAnalysisResult<{
-    performanceInsights: string[];
-    optimizationSuggestions: string[];
-    alertConditions: string[];
-  }>>;
+  ): Promise<
+    AIAnalysisResult<{
+      performanceInsights: string[];
+      optimizationSuggestions: string[];
+      alertConditions: string[];
+    }>
+  >;
 }
 
 // ============================================================================
@@ -195,7 +205,7 @@ export const nullAIProvider: IAIProvider = {
       timestamp: Date.now(),
     };
   },
-  
+
   async analyzeTrade() {
     return {
       type: 'trade_analysis',
@@ -208,7 +218,7 @@ export const nullAIProvider: IAIProvider = {
       timestamp: Date.now(),
     };
   },
-  
+
   async analyzeCompliance() {
     return {
       type: 'compliance_analysis',
@@ -221,7 +231,7 @@ export const nullAIProvider: IAIProvider = {
       timestamp: Date.now(),
     };
   },
-  
+
   async detectFraud() {
     return {
       type: 'fraud_detection',
@@ -234,7 +244,7 @@ export const nullAIProvider: IAIProvider = {
       timestamp: Date.now(),
     };
   },
-  
+
   async generateInsights() {
     return {
       type: 'insights',
@@ -263,26 +273,26 @@ export interface AIServiceHooks {
     warnings?: string[];
     modifications?: Record<string, unknown>;
   }>;
-  
+
   /** Called after registration */
   onAfterRegistration?: (assetLot: AssetLot) => Promise<void>;
-  
+
   /** Called before trade execution */
   onBeforeTrade?: (request: unknown) => Promise<{
     proceed: boolean;
     warnings?: string[];
     riskLevel?: 'low' | 'medium' | 'high';
   }>;
-  
+
   /** Called after trade execution */
   onAfterTrade?: (transaction: Transaction) => Promise<void>;
-  
+
   /** Called when compliance violation detected */
   onComplianceViolation?: (record: ComplianceRecord) => Promise<{
     escalate: boolean;
     alertRecipients?: string[];
   }>;
-  
+
   /** Called periodically for pattern analysis */
   onAnalysisCycle?: () => Promise<AIAnalysisResult[]>;
 }
@@ -308,48 +318,48 @@ export const defaultAIHooks: AIServiceHooks = {
  */
 export class AIContextBuilder {
   private context: Partial<AIAnalysisContext> = {};
-  
+
   operation(op: string): this {
     this.context.operation = op;
     return this;
   }
-  
+
   withAssetLots(lots: AssetLot[]): this {
     this.context.entities = { ...this.context.entities, assetLots: lots };
     return this;
   }
-  
+
   withTransactions(txs: Transaction[]): this {
     this.context.entities = { ...this.context.entities, transactions: txs };
     return this;
   }
-  
+
   withComplianceRecords(records: ComplianceRecord[]): this {
     this.context.entities = { ...this.context.entities, complianceRecords: records };
     return this;
   }
-  
+
   withMarket(market: AIAnalysisContext['market']): this {
     this.context.market = market;
     return this;
   }
-  
+
   withUser(user: AIAnalysisContext['user']): this {
     this.context.user = user;
     return this;
   }
-  
+
   withHistory(events: DomainEvent[], operations: OperationLogEntry[], days = 7): this {
     const now = Date.now();
     const start = now - days * 24 * 60 * 60 * 1000;
     this.context.history = {
-      events: events.filter(e => e.timestamp >= start),
-      operations: operations.filter(o => o.startTime >= start),
+      events: events.filter((e) => e.timestamp >= start),
+      operations: operations.filter((o) => o.startTime >= start),
       timeRange: { start, end: now },
     };
     return this;
   }
-  
+
   build(): AIAnalysisContext {
     return {
       operation: this.context.operation || 'unknown',

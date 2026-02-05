@@ -13,11 +13,12 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@gtcx/ai": "workspace:*",
     "@gtcx/crypto": "workspace:*",
     "@gtcx/types": "workspace:*",
     "zod": "^3.22.4"

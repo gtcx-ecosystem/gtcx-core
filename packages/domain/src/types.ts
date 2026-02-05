@@ -1,6 +1,6 @@
 /**
  * @gtcx/domain - Core Domain Types
- * 
+ *
  * Commodity-agnostic type definitions for GTCX domain services.
  * These types support any commodity type (gold, cocoa, minerals, etc.)
  * and any jurisdiction's regulatory framework.
@@ -42,7 +42,7 @@ export type QualityGrade = 'A' | 'B' | 'C' | 'D' | 'ungraded';
 /**
  * Status of an asset lot in the supply chain
  */
-export type AssetLotStatus = 
+export type AssetLotStatus =
   | 'discovered'
   | 'registered'
   | 'verified'
@@ -61,21 +61,21 @@ export interface AssetLot {
   discoveryLocation: Location;
   discoveryDate: string;
   producerId: string; // Generic term for miner/farmer/extractor
-  
+
   // Physical characteristics
   weight: number;
   weightUnit: string; // 'g', 'kg', 'oz', 'lb'
   purity?: number; // 0-100 percentage
   form?: AssetForm;
   qualityGrade?: QualityGrade;
-  
+
   // Verification
   cryptoProof?: string;
   certificateId?: string;
   geoTagId?: string;
-  
+
   status: AssetLotStatus;
-  
+
   // Metadata
   metadata?: Record<string, unknown>;
   createdAt: string;
@@ -274,7 +274,7 @@ export type RegulatoryAuthority = string; // e.g., 'minerals_commission', 'epa',
 /**
  * Compliance category
  */
-export type ComplianceCategory = 
+export type ComplianceCategory =
   | 'licensing'
   | 'environmental'
   | 'financial'
@@ -301,11 +301,11 @@ export interface ComplianceRecord {
   type: string;
   status: ComplianceStatus;
   severity: ComplianceSeverity;
-  
+
   sourceApp: string;
   sourceEntityId: string;
   sourceEntityType: 'asset_lot' | 'transaction' | 'trader' | 'producer';
-  
+
   regulation: {
     code: string;
     title: string;
@@ -314,7 +314,7 @@ export interface ComplianceRecord {
     category: ComplianceCategory;
     jurisdiction?: string;
   };
-  
+
   finding: {
     description: string;
     evidence?: string[];
@@ -323,7 +323,7 @@ export interface ComplianceRecord {
     reportedBy: string;
     verifiedBy?: string;
   };
-  
+
   resolution?: {
     status: 'pending' | 'in_progress' | 'resolved' | 'escalated';
     actions: string[];
@@ -332,7 +332,7 @@ export interface ComplianceRecord {
     completedDate?: string;
     cost?: number;
   };
-  
+
   metadata: {
     createdAt: string;
     updatedAt: string;
@@ -390,14 +390,17 @@ export interface ComplianceDashboard {
     complianceScore: number;
     trendDirection: 'improving' | 'declining' | 'stable';
   };
-  
-  byCategory: Record<string, {
-    total: number;
-    compliant: number;
-    violations: number;
-    trend: 'up' | 'down' | 'stable';
-  }>;
-  
+
+  byCategory: Record<
+    string,
+    {
+      total: number;
+      compliant: number;
+      violations: number;
+      trend: 'up' | 'down' | 'stable';
+    }
+  >;
+
   urgentActions: ComplianceRecord[];
   recentActivity: ComplianceRecord[];
   upcomingDeadlines: {
@@ -424,7 +427,11 @@ export interface ICryptoService {
  * Location service interface
  */
 export interface ILocationService {
-  getCurrentLocation(options: { accuracy: string; timeout: number; maximumAge: number }): Promise<Location>;
+  getCurrentLocation(options: {
+    accuracy: string;
+    timeout: number;
+    maximumAge: number;
+  }): Promise<Location>;
   reverseGeocode(latitude: number, longitude: number): Promise<{ formattedAddress: string }>;
 }
 
@@ -453,3 +460,26 @@ export interface IComplianceService {
   validateLicenses(traderId: string): Promise<boolean>;
   checkCompliance(entityId: string, entityType: string): Promise<ComplianceRecord[]>;
 }
+
+// ============================================================================
+// ADDITIONAL TYPE ALIASES
+// ============================================================================
+
+/** Role a trader can hold in the supply chain */
+export type TraderRole = 'producer' | 'aggregator' | 'trader' | 'refiner' | 'exporter';
+
+/** Status of a transaction */
+export type TransactionStatus = 'pending' | 'confirmed' | 'completed' | 'disputed' | 'cancelled';
+
+/** Payment method for trades */
+export type PaymentMethod = 'cash' | 'mobile_money' | 'bank_transfer' | 'escrow' | 'crypto';
+
+/** Historical price data point */
+export interface PriceHistory {
+  commodityType: string;
+  prices: Array<{ timestamp: string; price: number; currency: string; source: string }>;
+  period: string;
+}
+
+/** Cryptographic proof (alias for CryptographicProof) */
+export type CryptoProof = CryptographicProof;

@@ -1,13 +1,25 @@
 /**
  * Domain Validation Schemas
- * 
+ *
  * Zod schemas for runtime validation at all service boundaries.
  * Implements P2 (Type Safety) and P9 (Security) principles.
- * 
+ *
  * @package @gtcx/domain
  */
 
 import { z } from 'zod';
+
+// ============================================================================
+// UTILITY
+// ============================================================================
+
+/**
+ * Safe parse utility - wraps Zod safeParse with consistent typing
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function safeParse<T>(schema: z.ZodType<T>, data: any): z.SafeParseReturnType<unknown, T> {
+  return schema.safeParse(data);
+}
 
 // ============================================================================
 // PRIMITIVE SCHEMAS
@@ -32,7 +44,11 @@ export const PercentageSchema = z.number().min(0).max(100);
 export const CurrencyCodeSchema = z.string().length(3).toUpperCase();
 
 /** Commodity type identifier */
-export const CommodityTypeSchema = z.string().min(1).max(50).regex(/^[a-z_]+$/);
+export const CommodityTypeSchema = z
+  .string()
+  .min(1)
+  .max(50)
+  .regex(/^[a-z_]+$/);
 
 // ============================================================================
 // LOCATION SCHEMAS
@@ -100,7 +116,7 @@ export const AssetRegistrationDataSchema = z.object({
   photos: PhotoEvidenceArraySchema,
   estimatedWeight: PositiveNumberSchema.max(1000000), // Max 1M units
   weightUnit: z.enum(['g', 'kg', 'oz', 'lb', 'ton']),
-  
+
   // Optional fields
   form: z.string().max(50).optional(),
   quality: z.enum(['high', 'medium', 'low', 'unknown']).optional(),
@@ -108,7 +124,7 @@ export const AssetRegistrationDataSchema = z.object({
   discoveryDate: IsoDateSchema.optional(),
   notes: z.string().max(2000).optional(),
   assetDetails: AssetDetailsSchema.optional(),
-  
+
   // Metadata
   deviceId: z.string().max(100).optional(),
   appVersion: z.string().max(20).optional(),
@@ -139,11 +155,11 @@ export const TradeRequestSchema = z.object({
   agreedPrice: PositiveNumberSchema,
   currency: CurrencyCodeSchema,
   paymentMethod: PaymentMethodSchema,
-  
+
   // Optional fields
   location: LocationSchema.optional(),
   notes: z.string().max(1000).optional(),
-  
+
   // Security fields
   requestId: UuidSchema.optional(), // Idempotency key
   timestamp: z.number().positive().optional(),
@@ -186,13 +202,14 @@ export const ComplianceCategorySchema = z.enum([
 ]);
 
 export const ComplianceReportOptionsSchema = z.object({
-  dateRange: z.object({
-    start: IsoDateSchema,
-    end: IsoDateSchema,
-  }).refine(
-    (data) => new Date(data.start) <= new Date(data.end),
-    { message: 'Start date must be before or equal to end date' }
-  ),
+  dateRange: z
+    .object({
+      start: IsoDateSchema,
+      end: IsoDateSchema,
+    })
+    .refine((data) => new Date(data.start) <= new Date(data.end), {
+      message: 'Start date must be before or equal to end date',
+    }),
   apps: z.array(z.string().max(50)).max(20).optional(),
   categories: z.array(ComplianceCategorySchema).optional(),
   severity: z.array(ComplianceSeveritySchema).optional(),
@@ -203,33 +220,43 @@ export const ComplianceReportOptionsSchema = z.object({
 // CONFIGURATION SCHEMAS
 // ============================================================================
 
-export const RegistrationConfigSchema = z.object({
-  minGpsAccuracy: PositiveNumberSchema.max(100).default(10),
-  minPhotos: z.number().int().min(1).max(10).default(2),
-  maxPhotos: z.number().int().min(1).max(20).default(10),
-  maxDiscoveryAgeDays: z.number().int().min(1).max(365).default(30),
-  requiredPhotoCategories: z.array(z.string()).optional(),
-  workflowSteps: z.array(z.object({
-    id: z.string(),
-    title: z.string(),
-    required: z.boolean(),
-  })).optional(),
-}).partial();
+export const RegistrationConfigSchema = z
+  .object({
+    minGpsAccuracy: PositiveNumberSchema.max(100).default(10),
+    minPhotos: z.number().int().min(1).max(10).default(2),
+    maxPhotos: z.number().int().min(1).max(20).default(10),
+    maxDiscoveryAgeDays: z.number().int().min(1).max(365).default(30),
+    requiredPhotoCategories: z.array(z.string()).optional(),
+    workflowSteps: z
+      .array(
+        z.object({
+          id: z.string(),
+          title: z.string(),
+          required: z.boolean(),
+        })
+      )
+      .optional(),
+  })
+  .partial();
 
-export const TradingConfigSchema = z.object({
-  defaultCurrency: CurrencyCodeSchema.default('USD'),
-  defaultSpread: PercentageSchema.default(2.5),
-  sellerMarkup: PercentageSchema.default(5),
-  highValueThreshold: PositiveNumberSchema.default(10000),
-  maxTransactionValue: PositiveNumberSchema.optional(),
-}).partial();
+export const TradingConfigSchema = z
+  .object({
+    defaultCurrency: CurrencyCodeSchema.default('USD'),
+    defaultSpread: PercentageSchema.default(2.5),
+    sellerMarkup: PercentageSchema.default(5),
+    highValueThreshold: PositiveNumberSchema.default(10000),
+    maxTransactionValue: PositiveNumberSchema.optional(),
+  })
+  .partial();
 
-export const ComplianceConfigSchema = z.object({
-  defaultJurisdiction: z.string().max(50).default('international'),
-  supportedCommodities: z.array(CommodityTypeSchema).default(['gold']),
-  highValueThreshold: PositiveNumberSchema.default(10000),
-  defaultCurrency: CurrencyCodeSchema.default('USD'),
-}).partial();
+export const ComplianceConfigSchema = z
+  .object({
+    defaultJurisdiction: z.string().max(50).default('international'),
+    supportedCommodities: z.array(CommodityTypeSchema).default(['gold']),
+    highValueThreshold: PositiveNumberSchema.default(10000),
+    defaultCurrency: CurrencyCodeSchema.default('USD'),
+  })
+  .partial();
 
 // ============================================================================
 // TYPE EXPORTS (Inferred from Zod schemas)
@@ -243,6 +270,11 @@ export type ComplianceReportOptions = z.infer<typeof ComplianceReportOptionsSche
 export type RegistrationConfigInput = z.infer<typeof RegistrationConfigSchema>;
 export type TradingConfigInput = z.infer<typeof TradingConfigSchema>;
 export type ComplianceConfigInput = z.infer<typeof ComplianceConfigSchema>;
+
+// Validated type aliases (used by service modules after safeParse succeeds)
+export type ValidatedRegistrationData = AssetRegistrationInput;
+export type ValidatedTradeRequest = TradeRequestInput;
+export type ValidatedComplianceReportOptions = ComplianceReportOptions;
 
 // ============================================================================
 // VALIDATION HELPERS

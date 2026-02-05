@@ -7,6 +7,34 @@ dist/
 build/
 *.tsbuildinfo
 
+# Compiled output in source directories (should never be committed)
+packages/*/src/**/*.js
+packages/*/src/**/*.js.map
+packages/*/src/**/*.d.ts
+packages/*/src/**/*.d.ts.map
+
+# Compiled output in test directories
+packages/*/tests/**/*.js
+packages/*/tests/**/*.js.map
+packages/*/tests/**/*.d.ts
+packages/*/tests/**/*.d.ts.map
+
+# Compiled config files (vitest, tsup etc.)
+packages/*/vitest.config.js
+packages/*/vitest.config.js.map
+packages/*/vitest.config.d.ts
+packages/*/vitest.config.d.ts.map
+packages/*/tsup.config.js
+packages/*/tsup.config.js.map
+packages/*/tsup.config.d.ts
+packages/*/tsup.config.d.ts.map
+
+# Root-level compiled config files
+vitest.workspace.js
+vitest.workspace.js.map
+vitest.workspace.d.ts
+vitest.workspace.d.ts.map
+
 # Coverage
 coverage/
 .nyc_output/

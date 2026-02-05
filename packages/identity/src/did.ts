@@ -3,8 +3,8 @@
 // W3C DID-compatible identity operations
 // ============================================================================
 
-import type { DigitalIdentity, EnhancedIdentity } from '@gtcx/types';
 import { hash256 } from '@gtcx/crypto';
+import type { DigitalIdentity, EnhancedIdentity } from '@gtcx/types';
 
 /**
  * DID method for GTCX
@@ -38,8 +38,7 @@ export interface VerificationMethod {
  * Format: did:gtcx:<fingerprint>
  */
 export function createDID(identity: DigitalIdentity): string {
-  const fingerprint = identity.metadata.fingerprint 
-    ?? hash256(identity.publicKey).substring(0, 32);
+  const fingerprint = identity.metadata.fingerprint ?? hash256(identity.publicKey).substring(0, 32);
   return `did:${DID_METHOD}:${fingerprint}`;
 }
 
@@ -74,7 +73,7 @@ export function isValidDID(did: string): boolean {
  */
 export function createDIDDocument(identity: DigitalIdentity | EnhancedIdentity): DIDDocument {
   const did = createDID(identity);
-  
+
   const verificationMethods: VerificationMethod[] = [
     {
       id: `${did}#keys-1`,
@@ -101,8 +100,8 @@ export function createDIDDocument(identity: DigitalIdentity | EnhancedIdentity):
     ],
     id: did,
     verificationMethod: verificationMethods,
-    authentication: verificationMethods.map(vm => vm.id),
-    assertionMethod: verificationMethods.map(vm => vm.id),
+    authentication: verificationMethods.map((vm) => vm.id),
+    assertionMethod: verificationMethods.map((vm) => vm.id),
     created: new Date(identity.createdAt).toISOString(),
   };
 }
@@ -129,12 +128,9 @@ export async function resolveDID(
 /**
  * Extract the public key from a DID Document
  */
-export function extractPublicKey(
-  document: DIDDocument,
-  keyId?: string
-): string | null {
+export function extractPublicKey(document: DIDDocument, keyId?: string): string | null {
   const method = keyId
-    ? document.verificationMethod.find(vm => vm.id === keyId)
+    ? document.verificationMethod.find((vm) => vm.id === keyId)
     : document.verificationMethod[0];
 
   return method?.publicKeyHex ?? method?.publicKeyMultibase ?? null;

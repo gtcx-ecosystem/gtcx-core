@@ -3,8 +3,7 @@
 // Create and manage digital identities for GTCX participants
 // ============================================================================
 
-import { generateKeyPair } from '@gtcx/crypto';
-import { hash256 } from '@gtcx/crypto';
+import { generateKeyPair, hash256 } from '@gtcx/crypto';
 import type {
   DigitalIdentity,
   EnhancedIdentity,
@@ -52,7 +51,7 @@ export function generateIdentityId(prefix: string = 'GTCX'): string {
 
 /**
  * Create a standard digital identity
- * 
+ *
  * @example
  * ```typescript
  * const { identity, privateKey } = await createIdentity({
@@ -66,19 +65,15 @@ export function generateIdentityId(prefix: string = 'GTCX'): string {
 export async function createIdentity(
   options: CreateIdentityOptions = {}
 ): Promise<IdentityCreationResult> {
-  const {
-    securityLevel = 'standard',
-    metadata = {},
-    algorithm = 'Ed25519',
-  } = options;
+  const { securityLevel = 'standard', metadata = {}, algorithm = 'Ed25519' } = options;
 
   // Generate cryptographic key pair
   const keyPair = await generateKeyPair(algorithm);
-  
+
   // Generate unique identity ID
   const id = generateIdentityId();
   const privateKeyRef = `gtcx_identity_${id}`;
-  
+
   // Create fingerprint from public key
   const fingerprint = hash256(keyPair.publicKey).substring(0, 16);
 
@@ -109,15 +104,11 @@ export async function createEnhancedIdentity(
     keyDerivation?: Partial<KeyDerivationParams>;
   } = {}
 ): Promise<EnhancedIdentityCreationResult> {
-  const {
-    securityLevel = 'military',
-    metadata = {},
-    keyDerivation,
-  } = options;
+  const { securityLevel = 'military', metadata = {}, keyDerivation } = options;
 
   // Generate Ed25519 key pair (primary)
   const ed25519KeyPair = await generateKeyPair('Ed25519');
-  
+
   // Generate Secp256k1 key pair (secondary)
   const secp256k1KeyPair = await generateKeyPair('Secp256k1');
 
@@ -160,11 +151,13 @@ export async function createEnhancedIdentity(
     },
     multiKeyPairs,
     quantumResistantHash: quantumHash,
-    keyDerivation: keyDerivation ? {
-      algorithm: keyDerivation.algorithm ?? 'Argon2',
-      iterations: keyDerivation.iterations ?? 100000,
-      salt: keyDerivation.salt ?? generateIdentityId('SALT'),
-    } : undefined,
+    keyDerivation: keyDerivation
+      ? {
+          algorithm: keyDerivation.algorithm ?? 'Argon2',
+          iterations: keyDerivation.iterations ?? 100000,
+          salt: keyDerivation.salt ?? generateIdentityId('SALT'),
+        }
+      : undefined,
   };
 
   return {
@@ -189,7 +182,7 @@ export function validateIdentity(identity: DigitalIdentity): {
   if (!identity.publicKey) errors.push('Missing public key');
   if (!identity.privateKeyRef) errors.push('Missing private key reference');
   if (!identity.createdAt) errors.push('Missing creation timestamp');
-  
+
   if (identity.publicKey && identity.publicKey.length < 64) {
     errors.push('Invalid public key length');
   }

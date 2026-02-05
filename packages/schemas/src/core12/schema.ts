@@ -3,8 +3,8 @@
 // Migrated from ComplianceOS to GTCX monorepo
 
 // Import types and data
-import type { Domain, Control } from './types';
 import { CORE12_DOMAINS } from './domains';
+import type { Domain, Control } from './types';
 
 // Re-export types
 export type { Control, Domain, FrameworkMapping } from './types';

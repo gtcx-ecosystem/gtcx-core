@@ -5,3 +5,11 @@ build/
 coverage/
 *.js.map
 *.d.ts
+*.d.ts.map
+
+# Compiled output in source and test directories
+packages/*/src/**/*.js
+packages/*/tests/**/*.js
+packages/*/vitest.config.js
+packages/*/tsup.config.js
+vitest.workspace.js

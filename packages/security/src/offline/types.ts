@@ -1,8 +1,8 @@
 /**
  * @gtcx/security - Offline Security Types
- * 
+ *
  * Type definitions for P8-compliant offline security.
- * 
+ *
  * @packageDocumentation
  */
 
@@ -21,47 +21,47 @@ export const OfflineSecurityConfigSchema = z.object({
    * @default 72
    */
   maxOfflineHours: z.number().min(1).max(168).default(72),
-  
+
   /**
    * Hours before expiry to prompt credential refresh
    * @default 24
    */
   credentialRefreshBuffer: z.number().min(1).default(24),
-  
+
   /**
    * Symmetric encryption algorithm for local storage
    */
   storageEncryption: z.literal('AES-256-GCM'),
-  
+
   /**
    * Key derivation function
    */
   keyDerivation: z.literal('ARGON2ID'),
-  
+
   /**
    * Argon2id memory parameter (KB)
    * @default 65536 (64MB)
    */
   argon2Memory: z.number().min(16384).default(65536),
-  
+
   /**
    * Argon2id iterations
    * @default 3
    */
   argon2Iterations: z.number().min(1).default(3),
-  
+
   /**
    * Minutes between integrity checks
    * @default 15
    */
   integrityCheckInterval: z.number().min(1).default(15),
-  
+
   /**
    * Maximum failed unlock attempts before wipe
    * @default 10
    */
   maxFailedAttempts: z.number().min(3).default(10),
-  
+
   /**
    * Whether to wipe data after max failures
    * @default true
@@ -105,9 +105,9 @@ export interface StoredItemMeta {
  * Encrypted storage item
  */
 export interface EncryptedItem {
-  ciphertext: string;    // Base64-encoded encrypted data
-  iv: string;            // Base64-encoded initialization vector
-  tag: string;           // Base64-encoded authentication tag
+  ciphertext: string; // Base64-encoded encrypted data
+  iv: string; // Base64-encoded initialization vector
+  tag: string; // Base64-encoded authentication tag
   meta: StoredItemMeta;
 }
 
@@ -132,16 +132,16 @@ export interface StorageStatus {
 export const CachedCredentialSchema = z.object({
   id: z.string(),
   data: z.unknown(),
-  
+
   // Timing
   cachedAt: z.number(),
   expiresAt: z.number(),
   lastUsedAt: z.number(),
-  
+
   // Integrity
   dataHash: z.string(),
   signatureChain: z.array(z.string()),
-  
+
   // Status
   needsSync: z.boolean(),
 });
@@ -153,34 +153,19 @@ export type CachedCredential = z.infer<typeof CachedCredentialSchema>;
  */
 export interface CacheStatus {
   valid: boolean;
-  expiresIn: number;      // Milliseconds
-  needsRefresh: boolean;  // Within refresh buffer
-  needsSync: boolean;     // Needs server sync
+  expiresIn: number; // Milliseconds
+  needsRefresh: boolean; // Within refresh buffer
+  needsSync: boolean; // Needs server sync
   reason?: CacheInvalidReason;
 }
 
-export type CacheInvalidReason =
-  | 'NOT_FOUND'
-  | 'EXPIRED'
-  | 'TAMPERED'
-  | 'CHAIN_BROKEN'
-  | 'REVOKED';
+export type CacheInvalidReason = 'NOT_FOUND' | 'EXPIRED' | 'TAMPERED' | 'CHAIN_BROKEN' | 'REVOKED';
 
 // =============================================================================
 // INTEGRITY
 // =============================================================================
 
-/**
- * Integrity proof for tamper detection
- */
-export const IntegrityProofSchema = z.object({
-  dataHash: z.string(),
-  timestamp: z.number(),
-  signatureChain: z.array(z.string()),
-  rootKeyId: z.string(),
-});
-
-export type IntegrityProof = z.infer<typeof IntegrityProofSchema>;
+// IntegrityProofSchema and IntegrityProof are defined in tamper-detection.ts
 
 /**
  * Integrity verification result

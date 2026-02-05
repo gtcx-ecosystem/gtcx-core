@@ -1,11 +1,11 @@
 /**
  * @gtcx/security - Input Sanitization
- * 
+ *
  * Utilities for sanitizing untrusted input before processing.
  * Implements P9 (Security by Design).
  */
 
-import { z, ZodError, ZodSchema } from 'zod';
+import { ZodError, ZodSchema } from 'zod';
 
 // =============================================================================
 // STRING SANITIZATION
@@ -37,45 +37,46 @@ const DEFAULT_STRING_OPTIONS: StringSanitizeOptions = {
 /**
  * Sanitize a string input
  */
-export function sanitizeString(
-  input: unknown,
-  options: StringSanitizeOptions = {}
-): string {
+export function sanitizeString(input: unknown, options: StringSanitizeOptions = {}): string {
   const opts = { ...DEFAULT_STRING_OPTIONS, ...options };
-  
+
   // Convert to string
   let result = String(input ?? '');
-  
+
   // Normalize Unicode
   if (opts.normalizeUnicode) {
     result = result.normalize('NFC');
   }
-  
+
   // Strip control characters (keep newlines and tabs)
   if (opts.stripControlChars) {
+    // eslint-disable-next-line no-control-regex
     result = result.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
   }
-  
+
   // Strip HTML tags
   if (opts.stripHtml) {
     result = result.replace(/<[^>]*>/g, '');
   }
-  
+
   // Trim whitespace
   if (opts.trimWhitespace) {
     result = result.trim();
   }
-  
+
   // Apply allowed pattern
   if (opts.allowedPattern) {
-    result = result.split('').filter(c => opts.allowedPattern!.test(c)).join('');
+    result = result
+      .split('')
+      .filter((c) => opts.allowedPattern!.test(c))
+      .join('');
   }
-  
+
   // Truncate to max length
   if (opts.maxLength && result.length > opts.maxLength) {
     result = result.substring(0, opts.maxLength);
   }
-  
+
   return result;
 }
 
@@ -115,61 +116,64 @@ export function sanitizeObject<T = unknown>(
   currentDepth = 0
 ): T {
   const opts = { ...DEFAULT_OBJECT_OPTIONS, ...options };
-  
+
   // Check depth limit
   if (currentDepth > (opts.maxDepth ?? 10)) {
     throw new SanitizationError('Maximum depth exceeded', 'MAX_DEPTH');
   }
-  
+
   // Handle primitives
   if (input === null || input === undefined) {
     return (opts.stripNullish ? undefined : input) as T;
   }
-  
+
   if (typeof input === 'string') {
     return sanitizeString(input, opts.stringOptions) as T;
   }
-  
+
   if (typeof input === 'number' || typeof input === 'boolean') {
     return input as T;
   }
-  
+
   // Handle arrays
   if (Array.isArray(input)) {
     const maxLen = opts.maxArrayLength ?? 1000;
     const truncated = input.slice(0, maxLen);
-    return truncated.map(item => 
-      sanitizeObject(item, opts, currentDepth + 1)
-    ).filter(item => !opts.stripNullish || item !== undefined) as T;
+    return truncated
+      .map((item) => sanitizeObject(item, opts, currentDepth + 1))
+      .filter((item) => !opts.stripNullish || item !== undefined) as T;
   }
-  
+
   // Handle objects
   if (typeof input === 'object') {
     const result: Record<string, unknown> = {};
     const keys = Object.keys(input as object);
-    
+
     // Check key limit
     if (keys.length > (opts.maxKeys ?? 100)) {
       throw new SanitizationError('Maximum keys exceeded', 'MAX_KEYS');
     }
-    
+
     for (const key of keys) {
       // Skip dangerous properties
-      if (opts.stripProto && (key === '__proto__' || key === 'constructor' || key === 'prototype')) {
+      if (
+        opts.stripProto &&
+        (key === '__proto__' || key === 'constructor' || key === 'prototype')
+      ) {
         continue;
       }
-      
+
       const value = (input as Record<string, unknown>)[key];
       const sanitized = sanitizeObject(value, opts, currentDepth + 1);
-      
+
       if (!opts.stripNullish || sanitized !== undefined) {
         result[key] = sanitized;
       }
     }
-    
+
     return result as T;
   }
-  
+
   // Reject functions and other types
   throw new SanitizationError(`Unsupported type: ${typeof input}`, 'UNSUPPORTED_TYPE');
 }
@@ -197,12 +201,12 @@ export type ValidationOutcome<T> = ValidationResult<T> | ValidationError;
 
 /**
  * Create a boundary validator function
- * 
+ *
  * Use at API boundaries, message handlers, and any external input point.
- * 
+ *
  * @example
  * const validateRequest = createBoundaryValidator(RequestSchema);
- * 
+ *
  * // In handler:
  * const result = validateRequest(rawInput);
  * if (!result.success) {
@@ -217,10 +221,8 @@ export function createBoundaryValidator<T>(
   return (input: unknown): ValidationOutcome<T> => {
     try {
       // Optionally sanitize first
-      const toValidate = options?.sanitize 
-        ? sanitizeObject(input, options.sanitizeOptions)
-        : input;
-      
+      const toValidate = options?.sanitize ? sanitizeObject(input, options.sanitizeOptions) : input;
+
       const data = schema.parse(toValidate);
       return { success: true, data };
     } catch (err) {
@@ -236,7 +238,7 @@ export function createBoundaryValidator<T>(
           },
         };
       }
-      
+
       if (err instanceof SanitizationError) {
         return {
           success: false,
@@ -246,7 +248,7 @@ export function createBoundaryValidator<T>(
           },
         };
       }
-      
+
       return {
         success: false,
         error: {
@@ -260,7 +262,7 @@ export function createBoundaryValidator<T>(
 
 /**
  * Strict boundary validator that throws on invalid input
- * 
+ *
  * @throws {ValidationError} if validation fails
  */
 export function createStrictValidator<T>(
@@ -268,7 +270,7 @@ export function createStrictValidator<T>(
   options?: { sanitize?: boolean; sanitizeOptions?: ObjectSanitizeOptions }
 ): (input: unknown) => T {
   const validator = createBoundaryValidator(schema, options);
-  
+
   return (input: unknown): T => {
     const result = validator(input);
     if (!result.success) {
@@ -286,10 +288,8 @@ export function createStrictValidator<T>(
  * Sanitize for SQL (parameterized queries are still preferred!)
  */
 export function sanitizeForSql(input: string): string {
-  return input
-    .replace(/'/g, "''")
-    .replace(/\\/g, '\\\\')
-    .replace(/\x00/g, '');
+  // eslint-disable-next-line no-control-regex
+  return input.replace(/'/g, "''").replace(/\\/g, '\\\\').replace(/\x00/g, '');
 }
 
 /**
@@ -300,7 +300,7 @@ export function sanitizeForUrlPath(input: string): string {
     sanitizeString(input, {
       maxLength: 200,
       stripHtml: true,
-      allowedPattern: /[a-zA-Z0-9\-_\.]/,
+      allowedPattern: /[a-zA-Z0-9\-_.]/,
     })
   );
 }
@@ -312,7 +312,7 @@ export function sanitizeFilename(input: string): string {
   return sanitizeString(input, {
     maxLength: 255,
     stripHtml: true,
-    allowedPattern: /[a-zA-Z0-9\-_\.]/,
+    allowedPattern: /[a-zA-Z0-9\-_.]/,
   }).replace(/^\.+/, ''); // Remove leading dots
 }
 
@@ -320,18 +320,20 @@ export function sanitizeFilename(input: string): string {
  * Sanitize for logging (remove sensitive patterns)
  */
 export function sanitizeForLog(input: string): string {
-  return input
-    // Mask potential API keys
-    .replace(/([a-zA-Z0-9_-]{20,})/g, (match) => {
-      if (match.length > 30) {
-        return `${match.substring(0, 8)}...${match.substring(match.length - 4)}`;
-      }
-      return match;
-    })
-    // Mask emails
-    .replace(/([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, '***@$2')
-    // Mask phone numbers
-    .replace(/\+?[0-9]{10,}/g, '***PHONE***');
+  return (
+    input
+      // Mask potential API keys
+      .replace(/([a-zA-Z0-9_-]{20,})/g, (match) => {
+        if (match.length > 30) {
+          return `${match.substring(0, 8)}...${match.substring(match.length - 4)}`;
+        }
+        return match;
+      })
+      // Mask emails
+      .replace(/([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, '***@$2')
+      // Mask phone numbers
+      .replace(/\+?[0-9]{10,}/g, '***PHONE***')
+  );
 }
 
 // =============================================================================
@@ -349,9 +351,7 @@ export class SanitizationError extends Error {
 }
 
 export class BoundaryValidationError extends Error {
-  constructor(
-    public readonly validationError: ValidationError['error']
-  ) {
+  constructor(public readonly validationError: ValidationError['error']) {
     super(validationError.message);
     this.name = 'BoundaryValidationError';
   }

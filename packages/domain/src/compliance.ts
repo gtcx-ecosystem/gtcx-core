@@ -1,19 +1,26 @@
 /**
  * Unified Compliance Service
- * 
+ *
  * Commodity-agnostic compliance monitoring and reporting.
  * Supports any regulatory framework with configurable requirements,
  * authorities, and jurisdiction-specific rules.
- * 
+ *
  * Features:
  * - Runtime validation via Zod schemas (P2, P9)
  * - Event emission for observability (P12)
  * - Dependency injection for all externals (P4)
  * - Pluggable regulatory frameworks (P6)
- * 
+ *
  * @package @gtcx/domain
  */
 
+import { DomainEventFactory, nullEventEmitter, type IDomainEventEmitter } from './events';
+import {
+  ComplianceConfigSchema,
+  ComplianceReportOptionsSchema,
+  safeParse,
+  type ValidatedComplianceReportOptions,
+} from './schemas';
 import type {
   AssetLot,
   Transaction,
@@ -24,24 +31,10 @@ import type {
   ComplianceCategory,
   ComplianceDashboard,
   RegulatoryFramework,
-  RegulatoryRequirement,
   RegulatoryAuthority,
   ICryptoService,
   IStorageService,
 } from './types';
-
-import {
-  ComplianceConfigSchema,
-  ComplianceReportOptionsSchema,
-  safeParse,
-  type ValidatedComplianceReportOptions,
-} from './schemas';
-
-import {
-  DomainEventFactory,
-  nullEventEmitter,
-  type IDomainEventEmitter,
-} from './events';
 
 // ============================================================================
 // CONFIGURATION
@@ -140,9 +133,7 @@ export class UnifiedComplianceService {
             jurisdiction: this.config.defaultJurisdiction,
           },
         ],
-        penalties: [
-          { violation: 'Operating without license', penalty: 'Fine and cessation' },
-        ],
+        penalties: [{ violation: 'Operating without license', penalty: 'Fine and cessation' }],
         effectiveDate: '2024-01-01',
         lastUpdated: new Date().toISOString().split('T')[0],
       },
@@ -166,9 +157,7 @@ export class UnifiedComplianceService {
             jurisdiction: this.config.defaultJurisdiction,
           },
         ],
-        penalties: [
-          { violation: 'Trading without license', penalty: 'Fine and closure' },
-        ],
+        penalties: [{ violation: 'Trading without license', penalty: 'Fine and closure' }],
         effectiveDate: '2024-01-01',
         lastUpdated: new Date().toISOString().split('T')[0],
       },
@@ -191,9 +180,7 @@ export class UnifiedComplianceService {
             jurisdiction: this.config.defaultJurisdiction,
           },
         ],
-        penalties: [
-          { violation: 'KYC failure', penalty: 'Investigation and sanctions' },
-        ],
+        penalties: [{ violation: 'KYC failure', penalty: 'Investigation and sanctions' }],
         effectiveDate: '2024-01-01',
         lastUpdated: new Date().toISOString().split('T')[0],
       },
@@ -248,15 +235,13 @@ export class UnifiedComplianceService {
       const allRecords = await this.getAllComplianceRecords();
 
       const compliant = allRecords.filter((r) => r.status === 'compliant');
-      const violations = allRecords.filter((r) => r.status === 'violation');
+      const violations = allRecords.filter((r) => r.status === 'violation'); // eslint-disable-line @typescript-eslint/no-unused-vars
       const critical = allRecords.filter((r) => r.severity === 'critical');
       const pending = allRecords.filter(
         (r) => r.status === 'pending_review' || r.resolution?.status === 'pending'
       );
 
-      const score = allRecords.length > 0
-        ? (compliant.length / allRecords.length) * 100
-        : 100;
+      const score = allRecords.length > 0 ? (compliant.length / allRecords.length) * 100 : 100;
 
       return {
         overview: {
@@ -546,9 +531,7 @@ export class UnifiedComplianceService {
         generatedAt: new Date().toISOString(),
         recordCount: records.length,
         complianceScore:
-          records.length > 0
-            ? (report.summary.compliantRecords / records.length) * 100
-            : 100,
+          records.length > 0 ? (report.summary.compliantRecords / records.length) * 100 : 100,
         criticalIssues: records.filter((r) => r.severity === 'critical').length,
       };
 
@@ -585,8 +568,8 @@ export class UnifiedComplianceService {
    * Check compliance (implements IComplianceService)
    */
   async checkCompliance(
-    entityId: string,
-    entityType: 'trader' | 'producer' | 'asset_lot' | 'transaction'
+    _entityId: string,
+    _entityType: 'trader' | 'producer' | 'asset_lot' | 'transaction'
   ): Promise<ComplianceRecord[]> {
     // Placeholder - would delegate to specific check methods
     return [];
@@ -664,19 +647,19 @@ export class UnifiedComplianceService {
   // VERIFICATION METHODS (Override for jurisdiction-specific implementations)
   // ==========================================================================
 
-  protected async checkProducerLicense(producerId: string): Promise<ComplianceCheckResult> {
+  protected async checkProducerLicense(_producerId: string): Promise<ComplianceCheckResult> {
     return { compliant: true };
   }
 
-  protected async checkTraderLicense(traderId: string): Promise<ComplianceCheckResult> {
+  protected async checkTraderLicense(_traderId: string): Promise<ComplianceCheckResult> {
     return { compliant: true };
   }
 
-  protected async checkLocationCompliance(location: Location): Promise<ComplianceCheckResult> {
+  protected async checkLocationCompliance(_location: Location): Promise<ComplianceCheckResult> {
     return { compliant: true };
   }
 
-  protected async checkKYCCompliance(transaction: Transaction): Promise<ComplianceCheckResult> {
+  protected async checkKYCCompliance(_transaction: Transaction): Promise<ComplianceCheckResult> {
     return { compliant: true };
   }
 
@@ -694,9 +677,22 @@ export class UnifiedComplianceService {
 
   protected async getComplianceByCategory(
     records: ComplianceRecord[]
-  ): Promise<Record<string, { total: number; compliant: number; violations: number; trend: 'up' | 'down' | 'stable' }>> {
-    const categories: ComplianceCategory[] = ['licensing', 'environmental', 'financial', 'operational'];
-    const result: Record<string, { total: number; compliant: number; violations: number; trend: 'up' | 'down' | 'stable' }> = {};
+  ): Promise<
+    Record<
+      string,
+      { total: number; compliant: number; violations: number; trend: 'up' | 'down' | 'stable' }
+    >
+  > {
+    const categories: ComplianceCategory[] = [
+      'licensing',
+      'environmental',
+      'financial',
+      'operational',
+    ];
+    const result: Record<
+      string,
+      { total: number; compliant: number; violations: number; trend: 'up' | 'down' | 'stable' }
+    > = {};
 
     for (const category of categories) {
       const catRecords = records.filter((r) => r.regulation.category === category);
@@ -719,7 +715,10 @@ export class UnifiedComplianceService {
 
   protected async getRecentActivity(records: ComplianceRecord[]): Promise<ComplianceRecord[]> {
     return records
-      .sort((a, b) => new Date(b.metadata.updatedAt).getTime() - new Date(a.metadata.updatedAt).getTime())
+      .sort(
+        (a, b) =>
+          new Date(b.metadata.updatedAt).getTime() - new Date(a.metadata.updatedAt).getTime()
+      )
       .slice(0, 20);
   }
 
@@ -738,7 +737,9 @@ export class UnifiedComplianceService {
       .sort((a, b) => a.daysRemaining - b.daysRemaining);
   }
 
-  protected async getFilteredComplianceRecords(options: ValidatedComplianceReportOptions): Promise<ComplianceRecord[]> {
+  protected async getFilteredComplianceRecords(
+    options: ValidatedComplianceReportOptions
+  ): Promise<ComplianceRecord[]> {
     const allRecords = await this.getAllComplianceRecords();
     return allRecords.filter((record) => {
       const recordDate = new Date(record.metadata.createdAt);
@@ -747,7 +748,8 @@ export class UnifiedComplianceService {
 
       if (recordDate < startDate || recordDate > endDate) return false;
       if (options.apps && !options.apps.includes(record.sourceApp)) return false;
-      if (options.categories && !options.categories.includes(record.regulation.category)) return false;
+      if (options.categories && !options.categories.includes(record.regulation.category))
+        return false;
       if (options.severity && !options.severity.includes(record.severity)) return false;
       return true;
     });

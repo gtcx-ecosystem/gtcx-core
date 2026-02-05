@@ -1,11 +1,12 @@
 /**
  * @gtcx/security - Authentication & Authorization
- * 
+ *
  * Token management, session handling, and permission checking.
  * Implements P9 (Security by Design).
  */
 
 import { z } from 'zod';
+
 import { logSecurityEvent } from '../audit/events';
 
 // =============================================================================
@@ -26,33 +27,33 @@ export const Permissions = {
   TRADEPASS_VERIFY: 'tradepass:verify',
   TRADEPASS_REVOKE: 'tradepass:revoke',
   TRADEPASS_READ: 'tradepass:read',
-  
+
   // GeoTag
   GEOTAG_CREATE: 'geotag:create',
   GEOTAG_VERIFY: 'geotag:verify',
   GEOTAG_READ: 'geotag:read',
-  
+
   // VaultMark
   VAULTMARK_CREATE: 'vaultmark:create',
   VAULTMARK_TRANSFER: 'vaultmark:transfer',
   VAULTMARK_VERIFY: 'vaultmark:verify',
   VAULTMARK_READ: 'vaultmark:read',
-  
+
   // PvP Settlement
   PVP_INITIATE: 'pvp:initiate',
   PVP_APPROVE: 'pvp:approve',
   PVP_SETTLE: 'pvp:settle',
   PVP_READ: 'pvp:read',
-  
+
   // GCI Compliance
   GCI_EVALUATE: 'gci:evaluate',
   GCI_CERTIFY: 'gci:certify',
   GCI_READ: 'gci:read',
-  
+
   // PANX Oracle
   PANX_SUBMIT: 'panx:submit',
   PANX_READ: 'panx:read',
-  
+
   // Admin
   ADMIN_ALL: 'admin:*',
   ADMIN_USERS: 'admin:users',
@@ -74,7 +75,7 @@ export const Roles = {
     Permissions.GCI_READ,
     Permissions.PANX_READ,
   ],
-  
+
   /** Field inspector/verifier */
   inspector: [
     Permissions.TRADEPASS_VERIFY,
@@ -86,7 +87,7 @@ export const Roles = {
     Permissions.GCI_EVALUATE,
     Permissions.GCI_READ,
   ],
-  
+
   /** Vault operator */
   vault_operator: [
     Permissions.VAULTMARK_CREATE,
@@ -96,7 +97,7 @@ export const Roles = {
     Permissions.PVP_INITIATE,
     Permissions.PVP_READ,
   ],
-  
+
   /** Government regulator */
   regulator: [
     Permissions.TRADEPASS_ISSUE,
@@ -108,7 +109,7 @@ export const Roles = {
     Permissions.GCI_READ,
     Permissions.ADMIN_AUDIT,
   ],
-  
+
   /** Platform operator */
   operator: [
     Permissions.TRADEPASS_ISSUE,
@@ -129,11 +130,9 @@ export const Roles = {
     Permissions.PANX_SUBMIT,
     Permissions.PANX_READ,
   ],
-  
+
   /** System administrator */
-  admin: [
-    Permissions.ADMIN_ALL,
-  ],
+  admin: [Permissions.ADMIN_ALL],
 } as const;
 
 export type RoleName = keyof typeof Roles;
@@ -158,28 +157,25 @@ export interface PermissionContext {
 /**
  * Check if actor has required permission
  */
-export function hasPermission(
-  required: Permission,
-  context: PermissionContext
-): boolean {
+export function hasPermission(required: Permission, context: PermissionContext): boolean {
   const userPermissions = expandPermissions(context);
-  
+
   // Check for wildcard admin
   if (userPermissions.includes(Permissions.ADMIN_ALL)) {
     return true;
   }
-  
+
   // Check for exact match
   if (userPermissions.includes(required)) {
     return true;
   }
-  
+
   // Check for wildcard in same resource
   const [resource] = required.split(':');
   if (userPermissions.includes(`${resource}:*`)) {
     return true;
   }
-  
+
   return false;
 }
 
@@ -188,7 +184,7 @@ export function hasPermission(
  */
 export function expandPermissions(context: PermissionContext): Permission[] {
   const permissions = new Set<Permission>(context.permissions ?? []);
-  
+
   for (const role of context.roles ?? []) {
     const rolePermissions = Roles[role];
     if (rolePermissions) {
@@ -197,7 +193,7 @@ export function expandPermissions(context: PermissionContext): Permission[] {
       }
     }
   }
-  
+
   return Array.from(permissions);
 }
 
@@ -211,7 +207,7 @@ export async function validatePermission(options: {
   context: PermissionContext;
 }): Promise<boolean> {
   const allowed = hasPermission(options.action, options.context);
-  
+
   await logSecurityEvent({
     timestamp: new Date().toISOString(),
     eventType: allowed ? 'ACCESS_GRANTED' : 'ACCESS_DENIED',
@@ -225,7 +221,7 @@ export async function validatePermission(options: {
       permissionCount: expandPermissions(options.context).length,
     },
   });
-  
+
   return allowed;
 }
 
@@ -263,7 +259,7 @@ export interface CreateSessionOptions {
 export function createSession(options: CreateSessionOptions): Session {
   const now = new Date();
   const maxAge = options.maxAge ?? 24 * 60 * 60 * 1000; // 24 hours default
-  
+
   return {
     id: crypto.randomUUID(),
     userId: options.userId,
@@ -301,12 +297,12 @@ export function extendSession(
     ...session,
     lastActiveAt: now.toISOString(),
   };
-  
+
   if (options?.extendExpiry) {
     const maxAge = options.maxAge ?? 24 * 60 * 60 * 1000;
     extended.expiresAt = new Date(now.getTime() + maxAge).toISOString();
   }
-  
+
   return extended;
 }
 
@@ -350,7 +346,7 @@ export function createTokenPayload(options: {
   claims?: Record<string, unknown>;
 }): TokenPayload {
   const now = Math.floor(Date.now() / 1000);
-  
+
   return {
     sub: options.subject,
     iss: options.issuer,
@@ -374,20 +370,21 @@ export function validateTokenPayload(
   if (!parsed.success) {
     return { valid: false, reason: 'INVALID_PAYLOAD' };
   }
-  
+
   const { data } = parsed;
   const now = Math.floor(Date.now() / 1000);
-  
+
   // Check expiration
   if (data.exp < now) {
     return { valid: false, reason: 'TOKEN_EXPIRED' };
   }
-  
+
   // Check not-before (if token has iat, ensure it's not in the future)
-  if (data.iat > now + 60) { // Allow 60s clock skew
+  if (data.iat > now + 60) {
+    // Allow 60s clock skew
     return { valid: false, reason: 'TOKEN_NOT_YET_VALID' };
   }
-  
+
   return { valid: true, payload: data };
 }
 
@@ -407,7 +404,7 @@ export interface LockoutConfig {
 export const DEFAULT_LOCKOUT_CONFIG: LockoutConfig = {
   maxAttempts: 5,
   lockoutDuration: 15 * 60 * 1000, // 15 minutes
-  attemptWindow: 5 * 60 * 1000,    // 5 minutes
+  attemptWindow: 5 * 60 * 1000, // 5 minutes
 };
 
 export interface LockoutState {
@@ -432,7 +429,7 @@ export function recordFailedAttempt(
   config: LockoutConfig = DEFAULT_LOCKOUT_CONFIG
 ): LockoutState {
   const now = new Date();
-  
+
   // If no state or window expired, start fresh
   if (!state || now.getTime() - new Date(state.firstAttemptAt).getTime() > config.attemptWindow) {
     return {
@@ -440,10 +437,10 @@ export function recordFailedAttempt(
       firstAttemptAt: now.toISOString(),
     };
   }
-  
+
   // Increment attempts
   const newAttempts = state.attempts + 1;
-  
+
   // Check if should lock
   if (newAttempts >= config.maxAttempts) {
     return {
@@ -452,7 +449,7 @@ export function recordFailedAttempt(
       lockedUntil: new Date(now.getTime() + config.lockoutDuration).toISOString(),
     };
   }
-  
+
   return {
     ...state,
     attempts: newAttempts,

@@ -1,3 +1,0 @@
-export { createIdentity, createEnhancedIdentity, deriveIdentity, validateIdentity, isIdentityExpired, generateIdentityId, type CreateIdentityOptions, type IdentityCreationResult, type EnhancedIdentityCreationResult, } from './identity';
-export { DID_METHOD, createDID, parseDID, isValidDID, createDIDDocument, resolveDID, extractPublicKey, type DIDDocument, type VerificationMethod, } from './did';
-//# sourceMappingURL=index.d.ts.map

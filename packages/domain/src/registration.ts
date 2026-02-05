@@ -1,19 +1,26 @@
 /**
  * Asset Lot Registration Service
- * 
+ *
  * Commodity-agnostic business logic for registering asset discoveries.
  * Supports any commodity type (gold, cocoa, minerals, etc.) with
  * configurable validation rules and workflow steps.
- * 
+ *
  * Features:
  * - Runtime validation via Zod schemas (P2, P9)
  * - Event emission for observability (P12)
  * - Dependency injection for all externals (P4)
  * - Offline-first compatible (P8)
- * 
+ *
  * @package @gtcx/domain
  */
 
+import { DomainEventFactory, nullEventEmitter, type IDomainEventEmitter } from './events';
+import {
+  AssetRegistrationDataSchema,
+  RegistrationConfigSchema,
+  safeParse,
+  type ValidatedRegistrationData,
+} from './schemas';
 import type {
   AssetLot,
   AssetRegistrationData,
@@ -25,21 +32,7 @@ import type {
   ICryptoService,
   ILocationService,
   IStorageService,
-  LocationWithAddress,
 } from './types';
-
-import {
-  AssetRegistrationDataSchema,
-  RegistrationConfigSchema,
-  safeParse,
-  type ValidatedRegistrationData,
-} from './schemas';
-
-import {
-  DomainEventFactory,
-  nullEventEmitter,
-  type IDomainEventEmitter,
-} from './events';
 
 // ============================================================================
 // CONFIGURATION
@@ -96,7 +89,7 @@ export class AssetLotRegistrationService {
     this.storageService = dependencies.storageService;
     this.eventEmitter = dependencies.eventEmitter || nullEventEmitter;
     this.eventFactory = new DomainEventFactory();
-    
+
     // Validate config at construction time
     const configResult = safeParse(RegistrationConfigSchema, config);
     if (!configResult.success) {
@@ -180,7 +173,7 @@ export class AssetLotRegistrationService {
     const validData = schemaResult.data;
 
     // Business rule validation
-    
+
     // GPS accuracy check
     if (
       validData.discoveryLocation.accuracy &&
@@ -299,9 +292,7 @@ export class AssetLotRegistrationService {
       producerId: (data as any)?.producerId || 'unknown',
       sessionId,
     };
-    this.eventEmitter.emit(
-      this.eventFactory.registration('registration.started', startPayload)
-    );
+    this.eventEmitter.emit(this.eventFactory.registration('registration.started', startPayload));
 
     try {
       // Validate with Zod schema
@@ -379,12 +370,12 @@ export class AssetLotRegistrationService {
         qualityGrade: validData.qualityGrade,
         discoveryDate: validData.discoveryDate || new Date().toISOString(),
         assetDetails: validData.assetDetails || {},
-        
+
         // Verification
         cryptoProof,
         certificateId: certificate.id,
         verificationStatus: 'pending',
-        
+
         // Metadata
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -450,7 +441,7 @@ export class AssetLotRegistrationService {
       algorithm: 'Ed25519-SHA256',
       dataHash,
       signature,
-      publicKey: await this.cryptoService.getPublicKey?.() || 'system',
+      publicKey: (await this.cryptoService.getPublicKey?.()) || 'system',
       timestamp: Date.now(),
       proofType: 'registration',
     };
