@@ -98,7 +98,8 @@ export class UnifiedComplianceService {
     // Validate config
     const configResult = safeParse(ComplianceConfigSchema, config);
     if (!configResult.success) {
-      throw new Error(`Invalid compliance config: ${configResult.errors.join(', ')}`);
+      const messages = configResult.error.errors.map((issue) => issue.message);
+      throw new Error(`Invalid compliance config: ${messages.join(', ')}`);
     }
     this.config = { ...DEFAULT_CONFIG, ...configResult.data };
     this.frameworks = config.frameworks || this.getDefaultFrameworks();
@@ -135,7 +136,7 @@ export class UnifiedComplianceService {
         ],
         penalties: [{ violation: 'Operating without license', penalty: 'Fine and cessation' }],
         effectiveDate: '2024-01-01',
-        lastUpdated: new Date().toISOString().split('T')[0],
+        lastUpdated: new Date().toISOString().split('T')[0] ?? new Date().toISOString(),
       },
       {
         code: 'TRADE-001',
@@ -159,7 +160,7 @@ export class UnifiedComplianceService {
         ],
         penalties: [{ violation: 'Trading without license', penalty: 'Fine and closure' }],
         effectiveDate: '2024-01-01',
-        lastUpdated: new Date().toISOString().split('T')[0],
+        lastUpdated: new Date().toISOString().split('T')[0] ?? new Date().toISOString(),
       },
       {
         code: 'AML-001',
@@ -182,7 +183,7 @@ export class UnifiedComplianceService {
         ],
         penalties: [{ violation: 'KYC failure', penalty: 'Investigation and sanctions' }],
         effectiveDate: '2024-01-01',
-        lastUpdated: new Date().toISOString().split('T')[0],
+        lastUpdated: new Date().toISOString().split('T')[0] ?? new Date().toISOString(),
       },
     ];
   }
@@ -506,7 +507,8 @@ export class UnifiedComplianceService {
     // Validate options
     const optionsResult = safeParse(ComplianceReportOptionsSchema, options);
     if (!optionsResult.success) {
-      throw new Error(`Invalid report options: ${optionsResult.errors.join(', ')}`);
+      const messages = optionsResult.error.errors.map((issue) => issue.message);
+      throw new Error(`Invalid report options: ${messages.join(', ')}`);
     }
 
     const validOptions = optionsResult.data;

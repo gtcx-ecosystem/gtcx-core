@@ -198,6 +198,7 @@ export const ComplianceCategorySchema = z.enum([
   'financial',
   'operational',
   'export',
+  'labor',
   'safety',
 ]);
 

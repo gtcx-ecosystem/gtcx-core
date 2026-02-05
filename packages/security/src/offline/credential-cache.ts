@@ -82,10 +82,7 @@ export const DEFAULT_CREDENTIAL_CACHE_CONFIG: CredentialCacheConfig = {
 export class CredentialCache {
   private config: CredentialCacheConfig;
 
-  constructor(
-    private readonly storageKey: string = 'credential_cache',
-    config: Partial<CredentialCacheConfig> = {}
-  ) {
+  constructor(config: Partial<CredentialCacheConfig> = {}) {
     this.config = { ...DEFAULT_CREDENTIAL_CACHE_CONFIG, ...config };
   }
 
@@ -135,9 +132,7 @@ export class CredentialCache {
    * Calculate offline expiry from issuance
    */
   calculateOfflineExpiry(issuedAt: Date): Date {
-    return new Date(
-      issuedAt.getTime() + this.config.maxOfflineHours * 60 * 60 * 1000
-    );
+    return new Date(issuedAt.getTime() + this.config.maxOfflineHours * 60 * 60 * 1000);
   }
 
   /**
@@ -205,9 +200,7 @@ export class CredentialCache {
   hasValidSignatureChain(credential: CachedCredential): boolean {
     return (
       credential.signatureChain.length > 0 &&
-      credential.signatureChain.every(
-        (sig) => sig.signature && sig.signerPublicKey && sig.signedAt
-      )
+      credential.signatureChain.every((sig) => sig.signature && sig.signerPublicKey && sig.signedAt)
     );
   }
 }

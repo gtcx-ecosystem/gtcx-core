@@ -1,9 +1,9 @@
 /**
  * API Versioning and Deprecation
- * 
+ *
  * Explicit versioning strategy and deprecation markers.
  * Implements P10 (API Stability) principle.
- * 
+ *
  * @package @gtcx/domain
  */
 
@@ -13,7 +13,7 @@
 
 /**
  * Current API version
- * 
+ *
  * Follows semantic versioning:
  * - Major: Breaking changes
  * - Minor: New features (backward compatible)
@@ -68,14 +68,14 @@ export const DEPRECATIONS: DeprecationInfo[] = [
  * Check if a feature is deprecated
  */
 export function isDeprecated(feature: string): DeprecationInfo | undefined {
-  return DEPRECATIONS.find(d => d.feature === feature);
+  return DEPRECATIONS.find((d) => d.feature === feature);
 }
 
 /**
  * Get all deprecations that will be removed in a specific version
  */
 export function getUpcomingRemovals(version: string): DeprecationInfo[] {
-  return DEPRECATIONS.filter(d => d.removeIn === version);
+  return DEPRECATIONS.filter((d) => d.removeIn === version);
 }
 
 // ============================================================================
@@ -87,26 +87,22 @@ export function getUpcomingRemovals(version: string): DeprecationInfo[] {
  * Logs warning when method is called
  */
 export function deprecated(info: Omit<DeprecationInfo, 'feature'>) {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     const feature = `${target.constructor.name}.${propertyKey}()`;
-    
+
     // Register deprecation
     DEPRECATIONS.push({ feature, ...info });
-    
+
     descriptor.value = function (...args: any[]) {
       console.warn(
         `[DEPRECATED] ${feature} is deprecated since ${info.deprecatedIn} ` +
-        `and will be removed in ${info.removeIn}.` +
-        (info.replacement ? ` Use ${info.replacement} instead.` : '')
+          `and will be removed in ${info.removeIn}.` +
+          (info.replacement ? ` Use ${info.replacement} instead.` : '')
       );
       return originalMethod.apply(this, args);
     };
-    
+
     return descriptor;
   };
 }
@@ -134,38 +130,34 @@ export function checkVersionCompatibility(clientVersion: string): VersionCompati
     warnings: [],
     errors: [],
   };
-  
-  const [clientMajor, clientMinor] = clientVersion.split('.').map(Number);
-  const [serverMajor, serverMinor] = API_VERSION.full.split('.').map(Number);
-  
+
+  const [clientMajor = 0, clientMinor = 0] = clientVersion.split('.').map(Number);
+  const [serverMajor = 0, serverMinor = 0] = API_VERSION.full.split('.').map(Number);
+
   // Major version mismatch = incompatible
   if (clientMajor !== serverMajor) {
     result.compatible = false;
-    result.errors!.push(
-      `Major version mismatch: client=${clientMajor}, server=${serverMajor}`
-    );
+    result.errors!.push(`Major version mismatch: client=${clientMajor}, server=${serverMajor}`);
     return result;
   }
-  
+
   // Client minor version ahead = warn (using features that don't exist)
   if (clientMinor > serverMinor) {
     result.warnings!.push(
       `Client minor version (${clientMinor}) is ahead of server (${serverMinor}). ` +
-      `Some features may not be available.`
+        `Some features may not be available.`
     );
   }
-  
+
   // Check for upcoming deprecations
-  const deprecations = DEPRECATIONS.filter(d => 
-    compareVersions(d.removeIn, API_VERSION.full) <= 0
+  const deprecations = DEPRECATIONS.filter(
+    (d) => compareVersions(d.removeIn, API_VERSION.full) <= 0
   );
-  
+
   if (deprecations.length > 0) {
-    result.warnings!.push(
-      `${deprecations.length} deprecated feature(s) are scheduled for removal`
-    );
+    result.warnings!.push(`${deprecations.length} deprecated feature(s) are scheduled for removal`);
   }
-  
+
   return result;
 }
 
@@ -176,12 +168,12 @@ export function checkVersionCompatibility(clientVersion: string): VersionCompati
 export function compareVersions(a: string, b: string): number {
   const aParts = a.split('.').map(Number);
   const bParts = b.split('.').map(Number);
-  
+
   for (let i = 0; i < 3; i++) {
     const diff = (aParts[i] || 0) - (bParts[i] || 0);
     if (diff !== 0) return diff > 0 ? 1 : -1;
   }
-  
+
   return 0;
 }
 
@@ -202,28 +194,28 @@ export interface StabilityInfo {
  */
 export const API_STABILITY: Record<string, StabilityInfo> = {
   // Core services - stable
-  'AssetLotRegistrationService': { level: 'stable', since: '1.0.0' },
-  'TradingService': { level: 'stable', since: '1.0.0' },
-  'UnifiedComplianceService': { level: 'stable', since: '1.0.0' },
-  
+  AssetLotRegistrationService: { level: 'stable', since: '1.0.0' },
+  TradingService: { level: 'stable', since: '1.0.0' },
+  UnifiedComplianceService: { level: 'stable', since: '1.0.0' },
+
   // Schemas - stable
-  'AssetRegistrationDataSchema': { level: 'stable', since: '1.0.0' },
-  'TradeRequestSchema': { level: 'stable', since: '1.0.0' },
-  'ComplianceReportOptionsSchema': { level: 'stable', since: '1.0.0' },
-  
+  AssetRegistrationDataSchema: { level: 'stable', since: '1.0.0' },
+  TradeRequestSchema: { level: 'stable', since: '1.0.0' },
+  ComplianceReportOptionsSchema: { level: 'stable', since: '1.0.0' },
+
   // Events - stable
-  'DomainEvent': { level: 'stable', since: '1.0.0' },
-  'DomainEventFactory': { level: 'stable', since: '1.0.0' },
-  
+  DomainEvent: { level: 'stable', since: '1.0.0' },
+  DomainEventFactory: { level: 'stable', since: '1.0.0' },
+
   // Migrations - beta
-  'SchemaMigrator': { level: 'beta', since: '1.0.0', notes: 'API may change' },
-  
+  SchemaMigrator: { level: 'beta', since: '1.0.0', notes: 'API may change' },
+
   // Metrics - beta
-  'InMemoryMetricsCollector': { level: 'beta', since: '1.0.0' },
-  
+  InMemoryMetricsCollector: { level: 'beta', since: '1.0.0' },
+
   // Offline queue - experimental
-  'OfflineQueue': { level: 'experimental', since: '1.0.0', notes: 'Conflict resolution may change' },
-  
+  OfflineQueue: { level: 'experimental', since: '1.0.0', notes: 'Conflict resolution may change' },
+
   // Internal utilities - internal
   'internal/*': { level: 'internal', since: '1.0.0', notes: 'Not part of public API' },
 };
@@ -281,5 +273,5 @@ export const CHANGELOG: ChangelogEntry[] = [
  * Get changelog since a specific version
  */
 export function getChangelogSince(version: string): ChangelogEntry[] {
-  return CHANGELOG.filter(entry => compareVersions(entry.version, version) > 0);
+  return CHANGELOG.filter((entry) => compareVersions(entry.version, version) > 0);
 }

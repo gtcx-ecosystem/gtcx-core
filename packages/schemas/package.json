@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "description": "GTCX verification schemas including Core12 compliance framework",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
@@ -17,12 +19,22 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@gtcx/typescript-config": "workspace:*",
+    "tsup": "^8.0.1",
     "typescript": "^5.7.0",
     "vitest": "^2.1.0",
     "@vitest/coverage-v8": "^2.1.0"
   },
   "exports": {
-    ".": "./dist/index.js",
-    "./core12": "./dist/core12/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./core12": {
+      "types": "./dist/core12/index.d.ts",
+      "import": "./dist/core12/index.mjs",
+      "require": "./dist/core12/index.js"
+    }
   }
 }

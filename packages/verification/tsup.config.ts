@@ -3,10 +3,9 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
-    'validation/index': 'src/validation/index.ts',
-    'auth/index': 'src/auth/index.ts',
-    'offline/index': 'src/offline/index.ts',
-    'audit/index': 'src/audit/index.ts',
+    'certificates/index': 'src/certificates/index.ts',
+    'qr/index': 'src/qr/index.ts',
+    'proofs/index': 'src/proofs/index.ts',
   },
   format: ['cjs', 'esm'],
   dts: true,
@@ -14,5 +13,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   treeshake: true,
-  external: ['@gtcx/crypto', '@gtcx/types'],
+  external: ['@gtcx/ai', '@gtcx/crypto', '@gtcx/types', 'zod'],
 });

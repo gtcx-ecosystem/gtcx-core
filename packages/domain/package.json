@@ -7,49 +7,49 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
     "./schemas": {
+      "types": "./dist/schemas.d.ts",
       "import": "./dist/schemas.mjs",
-      "require": "./dist/schemas.js",
-      "types": "./dist/schemas.d.ts"
+      "require": "./dist/schemas.js"
     },
     "./events": {
+      "types": "./dist/events.d.ts",
       "import": "./dist/events.mjs",
-      "require": "./dist/events.js",
-      "types": "./dist/events.d.ts"
+      "require": "./dist/events.js"
     },
     "./ai-logging": {
+      "types": "./dist/ai-logging.d.ts",
       "import": "./dist/ai-logging.mjs",
-      "require": "./dist/ai-logging.js",
-      "types": "./dist/ai-logging.d.ts"
+      "require": "./dist/ai-logging.js"
     },
     "./ai-integration": {
+      "types": "./dist/ai-integration.d.ts",
       "import": "./dist/ai-integration.mjs",
-      "require": "./dist/ai-integration.js",
-      "types": "./dist/ai-integration.d.ts"
+      "require": "./dist/ai-integration.js"
     },
     "./metrics": {
+      "types": "./dist/metrics.d.ts",
       "import": "./dist/metrics.mjs",
-      "require": "./dist/metrics.js",
-      "types": "./dist/metrics.d.ts"
+      "require": "./dist/metrics.js"
     },
     "./migrations": {
+      "types": "./dist/migrations.d.ts",
       "import": "./dist/migrations.mjs",
-      "require": "./dist/migrations.js",
-      "types": "./dist/migrations.d.ts"
+      "require": "./dist/migrations.js"
     },
     "./versioning": {
+      "types": "./dist/versioning.d.ts",
       "import": "./dist/versioning.mjs",
-      "require": "./dist/versioning.js",
-      "types": "./dist/versioning.d.ts"
+      "require": "./dist/versioning.js"
     },
     "./offline": {
+      "types": "./dist/internal/offline-queue.d.ts",
       "import": "./dist/internal/offline-queue.mjs",
-      "require": "./dist/internal/offline-queue.js",
-      "types": "./dist/internal/offline-queue.d.ts"
+      "require": "./dist/internal/offline-queue.js"
     }
   },
   "files": [

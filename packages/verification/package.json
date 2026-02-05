@@ -2,16 +2,33 @@
   "name": "@gtcx/verification",
   "version": "0.1.0",
   "description": "Certificate generation, QR codes, and verification proofs for GTCX Protocol",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./certificates": "./src/certificates/index.ts",
-    "./qr": "./src/qr/index.ts",
-    "./proofs": "./src/proofs/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./certificates": {
+      "types": "./dist/certificates/index.d.ts",
+      "import": "./dist/certificates/index.mjs",
+      "require": "./dist/certificates/index.js"
+    },
+    "./qr": {
+      "types": "./dist/qr/index.d.ts",
+      "import": "./dist/qr/index.mjs",
+      "require": "./dist/qr/index.js"
+    },
+    "./proofs": {
+      "types": "./dist/proofs/index.d.ts",
+      "import": "./dist/proofs/index.mjs",
+      "require": "./dist/proofs/index.js"
+    }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
@@ -25,6 +42,7 @@
   },
   "devDependencies": {
     "@gtcx/typescript-config": "workspace:*",
+    "tsup": "^8.0.1",
     "typescript": "^5.3.0",
     "@vitest/coverage-v8": "^2.1.0",
     "vitest": "^2.1.0"

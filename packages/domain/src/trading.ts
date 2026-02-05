@@ -96,7 +96,8 @@ export class TradingService {
     // Validate config at construction time
     const configResult = safeParse(TradingConfigSchema, config);
     if (!configResult.success) {
-      throw new Error(`Invalid trading config: ${configResult.errors.join(', ')}`);
+      const messages = configResult.error.errors.map((issue) => issue.message);
+      throw new Error(`Invalid trading config: ${messages.join(', ')}`);
     }
     this.config = { ...DEFAULT_CONFIG, ...configResult.data };
   }
@@ -131,7 +132,7 @@ export class TradingService {
         const adjustment = this.getFormPriceAdjustment(form);
         prices.push({
           commodityType,
-          form,
+          assetForm: form,
           basePrice: basePrice * adjustment,
           currency: this.config.defaultCurrency,
           timestamp: new Date().toISOString(),
@@ -196,7 +197,7 @@ export class TradingService {
         basePrice * formAdjustment * purityAdjustment * locationFactor + qualityPremium;
 
       // Total price for the lot
-      const totalPrice = pricePerUnit * assetLot.estimatedWeight;
+      const totalPrice = pricePerUnit * assetLot.weight;
 
       const result = {
         basePrice,
@@ -249,11 +250,13 @@ export class TradingService {
    */
   protected calculateQualityPremium(assetLot: AssetLot): number {
     const premiums: Record<QualityGrade, number> = {
-      premium: 50,
-      standard: 0,
-      below_standard: -25,
+      A: 50,
+      B: 25,
+      C: 0,
+      D: -25,
+      ungraded: 0,
     };
-    return premiums[assetLot.qualityGrade || 'standard'] || 0;
+    return premiums[assetLot.qualityGrade ?? 'ungraded'] ?? 0;
   }
 
   /**
@@ -276,7 +279,8 @@ export class TradingService {
     // Validate filters
     const filterResult = safeParse(TradingOpportunityFilterSchema, filters);
     if (!filterResult.success) {
-      throw new Error(`Invalid filter criteria: ${filterResult.errors.join(', ')}`);
+      const messages = filterResult.error.errors.map((issue) => issue.message);
+      throw new Error(`Invalid filter criteria: ${messages.join(', ')}`);
     }
 
     const validFilters = filterResult.data;
@@ -296,10 +300,10 @@ export class TradingService {
         if (validFilters.maxPurity && lot.purity && lot.purity > validFilters.maxPurity) {
           return false;
         }
-        if (validFilters.minQuantity && lot.estimatedWeight < validFilters.minQuantity) {
+        if (validFilters.minWeight && lot.weight < validFilters.minWeight) {
           return false;
         }
-        if (validFilters.maxQuantity && lot.estimatedWeight > validFilters.maxQuantity) {
+        if (validFilters.maxWeight && lot.weight > validFilters.maxWeight) {
           return false;
         }
         if (validFilters.forms && lot.form && !validFilters.forms.includes(lot.form)) {
@@ -313,16 +317,23 @@ export class TradingService {
       const opportunities: TradingOpportunity[] = await Promise.all(
         filtered.map(async (lot) => {
           const pricing = await this.calculateFairPrice(lot);
+          const seller =
+            (await this.getTraderInfo(lot.producerId)) ??
+            this.createUnknownTrader(lot.producerId, lot.discoveryLocation);
           return {
             id: `opp_${lot.id}`,
+            assetLotId: lot.id,
             assetLot: lot,
-            askingPrice: pricing.adjustedPrice * (1 + this.config.sellerMarkup / 100),
-            fairPrice: pricing.adjustedPrice,
+            seller,
+            askPrice: pricing.adjustedPrice * (1 + this.config.sellerMarkup / 100),
             currency: this.config.defaultCurrency,
-            seller: await this.getTraderInfo(lot.producerId),
-            createdAt: new Date().toISOString(),
-            expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-            status: 'active',
+            location: lot.discoveryLocation,
+            availableUntil: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+            minQuantity: lot.weight,
+            maxQuantity: lot.weight,
+            qualityGrade: lot.qualityGrade ?? 'ungraded',
+            verificationLevel: seller.verificationLevel,
+            complianceStatus: 'pending',
           };
         })
       );
@@ -355,15 +366,16 @@ export class TradingService {
     // Validate request with Zod
     const requestResult = safeParse(TradeRequestSchema, request);
     if (!requestResult.success) {
+      const messages = requestResult.error.errors.map((issue) => issue.message);
       this.eventEmitter.emit(
         this.eventFactory.trading('trading.trade_failed', {
           assetLotId: (request as any)?.assetLotId || 'unknown',
           buyerId: (request as any)?.buyerId || 'unknown',
-          error: `Validation failed: ${requestResult.errors.join(', ')}`,
+          error: `Validation failed: ${messages.join(', ')}`,
           reason: 'validation',
         })
       );
-      throw new Error(`Invalid trade request: ${requestResult.errors.join(', ')}`);
+      throw new Error(`Invalid trade request: ${messages.join(', ')}`);
     }
 
     const validRequest = requestResult.data;
@@ -380,9 +392,9 @@ export class TradingService {
     try {
       // Validate licenses
       const buyerLicenseValid = await this.complianceService.validateLicenses(validRequest.buyerId);
-      const sellerLicenseValid = validRequest.sellerId
-        ? await this.complianceService.validateLicenses(validRequest.sellerId)
-        : true;
+      const sellerLicenseValid = await this.complianceService.validateLicenses(
+        validRequest.sellerId
+      );
 
       if (!buyerLicenseValid || !sellerLicenseValid) {
         this.eventEmitter.emit(
@@ -448,18 +460,26 @@ export class TradingService {
       const transaction: Transaction = {
         id: correlationId,
         assetLotId: validRequest.assetLotId,
-        fromTraderId: validRequest.sellerId || 'producer',
+        fromTraderId: validRequest.sellerId,
         toTraderId: validRequest.buyerId,
         quantity: validRequest.quantity,
-        quantityUnit: validRequest.quantityUnit,
+        quantityUnit: 'unit',
         price: validRequest.agreedPrice,
         currency: validRequest.currency,
-        paymentMethod: validRequest.paymentMethod,
+        timestamp: new Date().toISOString(),
+        location: validRequest.location ?? {
+          latitude: 0,
+          longitude: 0,
+          accuracy: 1,
+          timestamp: Date.now(),
+        },
+        cryptoSignature: proof,
         status: 'pending',
-        cryptoProof: proof,
-        location: validRequest.transactionLocation,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        metadata: {
+          paymentMethod: validRequest.paymentMethod,
+          notes: validRequest.notes,
+          requestId: validRequest.requestId,
+        },
       };
 
       // Store transaction
@@ -473,10 +493,9 @@ export class TradingService {
           buyerId: transaction.toTraderId,
           sellerId: transaction.fromTraderId,
           quantity: transaction.quantity,
-          quantityUnit: transaction.quantityUnit,
           price: transaction.price,
           currency: transaction.currency,
-          paymentMethod: transaction.paymentMethod,
+          paymentMethod: validRequest.paymentMethod,
         })
       );
 
@@ -520,26 +539,18 @@ export class TradingService {
       const totalValue = transactions.reduce((sum, tx) => sum + tx.price, 0);
       const avgPrice = transactions.length > 0 ? totalValue / totalVolume : 0;
 
+      const volumeUnit = transactions[0]?.quantityUnit ?? 'unit';
       return {
-        commodityType,
-        period,
-        totalTransactions: transactions.length,
         totalVolume,
-        totalValue,
+        volumeUnit,
         averagePrice: avgPrice,
         currency: this.config.defaultCurrency,
-        priceRange: {
-          min:
-            transactions.length > 0
-              ? Math.min(...transactions.map((tx) => tx.price / tx.quantity))
-              : 0,
-          max:
-            transactions.length > 0
-              ? Math.max(...transactions.map((tx) => tx.price / tx.quantity))
-              : 0,
-        },
-        volumeByForm: this.aggregateByForm(transactions),
-        timestamp: new Date().toISOString(),
+        priceChange: 0,
+        priceChangePeriod: period,
+        marketTrend: 'neutral',
+        liquidityScore: 0,
+        riskAssessment: 'medium',
+        recommendations: [],
       };
     } catch (error) {
       throw new Error(`Failed to get trade analytics: ${error}`);
@@ -549,6 +560,17 @@ export class TradingService {
   // ==========================================================================
   // HELPER METHODS
   // ==========================================================================
+
+  protected createUnknownTrader(traderId: string, location: Location): Trader {
+    return {
+      id: traderId,
+      licenseNumber: 'unknown',
+      name: 'Unknown Trader',
+      location,
+      verificationLevel: 'basic',
+      roles: ['producer'],
+    };
+  }
 
   protected generateTransactionId(): string {
     return `tx_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;

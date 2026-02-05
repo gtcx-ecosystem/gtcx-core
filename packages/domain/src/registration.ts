@@ -23,7 +23,6 @@ import {
 } from './schemas';
 import type {
   AssetLot,
-  AssetRegistrationData,
   WorkflowStep,
   RegistrationProgress,
   ValidationResult,
@@ -93,9 +92,22 @@ export class AssetLotRegistrationService {
     // Validate config at construction time
     const configResult = safeParse(RegistrationConfigSchema, config);
     if (!configResult.success) {
-      throw new Error(`Invalid registration config: ${configResult.errors.join(', ')}`);
+      const messages = configResult.error.errors.map((issue) => issue.message);
+      throw new Error(`Invalid registration config: ${messages.join(', ')}`);
     }
-    this.config = { ...DEFAULT_CONFIG, ...configResult.data };
+    const workflowSteps = configResult.data.workflowSteps?.map((step, index) => ({
+      id: step.id,
+      title: step.title,
+      description: step.title,
+      icon: 'check-circle',
+      color: 'blue',
+      duration: '1 min',
+      isRequired: step.required,
+      isCompleted: false,
+      order: index + 1,
+    }));
+
+    this.config = { ...DEFAULT_CONFIG, ...configResult.data, workflowSteps };
   }
 
   // ==========================================================================
@@ -117,33 +129,45 @@ export class AssetLotRegistrationService {
         id: 'location',
         title: 'Capture Location',
         description: 'GPS coordinates of discovery site',
-        required: true,
-        order: 1,
         icon: 'map-pin',
+        color: 'blue',
+        duration: '2 min',
+        isRequired: true,
+        isCompleted: false,
+        order: 1,
       },
       {
         id: 'photos',
         title: 'Photo Evidence',
         description: `Capture ${this.config.minPhotos}+ photos of the asset`,
-        required: true,
-        order: 2,
         icon: 'camera',
+        color: 'orange',
+        duration: '5 min',
+        isRequired: true,
+        isCompleted: false,
+        order: 2,
       },
       {
         id: 'details',
         title: 'Asset Details',
         description: 'Weight, quality, and commodity-specific attributes',
-        required: true,
-        order: 3,
         icon: 'clipboard',
+        color: 'purple',
+        duration: '3 min',
+        isRequired: true,
+        isCompleted: false,
+        order: 3,
       },
       {
         id: 'review',
         title: 'Review & Submit',
         description: 'Verify all information before registration',
-        required: true,
-        order: 4,
         icon: 'check-circle',
+        color: 'green',
+        duration: '2 min',
+        isRequired: true,
+        isCompleted: false,
+        order: 4,
       },
     ];
   }
@@ -164,8 +188,8 @@ export class AssetLotRegistrationService {
     const schemaResult = safeParse(AssetRegistrationDataSchema, data);
     if (!schemaResult.success) {
       return {
-        valid: false,
-        errors: schemaResult.errors,
+        isValid: false,
+        errors: schemaResult.error.errors.map((issue) => issue.message),
         warnings: [],
       };
     }
@@ -221,7 +245,7 @@ export class AssetLotRegistrationService {
     }
 
     return {
-      valid: errors.length === 0,
+      isValid: errors.length === 0,
       errors,
       warnings,
     };
@@ -234,7 +258,7 @@ export class AssetLotRegistrationService {
   /**
    * Calculate registration progress
    */
-  calculateProgress(data: Partial<AssetRegistrationData>): RegistrationProgress {
+  calculateProgress(data: Partial<ValidatedRegistrationData>): RegistrationProgress {
     const steps = this.getWorkflowSteps();
     const completedSteps: string[] = [];
 
@@ -254,7 +278,7 @@ export class AssetLotRegistrationService {
     }
 
     // Review is complete when all required steps are done
-    const requiredSteps = steps.filter((s) => s.required).map((s) => s.id);
+    const requiredSteps = steps.filter((s) => s.isRequired).map((s) => s.id);
     const requiredComplete = requiredSteps
       .filter((id) => id !== 'review')
       .every((id) => completedSteps.includes(id));
@@ -264,13 +288,12 @@ export class AssetLotRegistrationService {
     }
 
     const percentage = Math.round((completedSteps.length / steps.length) * 100);
+    const nextStep = steps.find((step) => !completedSteps.includes(step.id))?.id ?? null;
 
     return {
-      currentStep: completedSteps[completedSteps.length - 1] || steps[0].id,
-      completedSteps,
-      totalSteps: steps.length,
       percentage,
-      canSubmit: percentage === 100,
+      completedSteps,
+      nextStep,
     };
   }
 
@@ -298,13 +321,14 @@ export class AssetLotRegistrationService {
       // Validate with Zod schema
       const schemaResult = safeParse(AssetRegistrationDataSchema, data);
       if (!schemaResult.success) {
-        const error = new Error(`Validation failed: ${schemaResult.errors.join(', ')}`);
+        const messages = schemaResult.error.errors.map((issue) => issue.message);
+        const error = new Error(`Validation failed: ${messages.join(', ')}`);
         this.eventEmitter.emit(
           this.eventFactory.registration('registration.failed', {
             commodityType: startPayload.commodityType,
             producerId: startPayload.producerId,
             error: error.message,
-            validationErrors: schemaResult.errors,
+            validationErrors: messages,
           })
         );
         throw error;
@@ -314,7 +338,7 @@ export class AssetLotRegistrationService {
 
       // Business rule validation
       const validation = this.validateRegistrationData(validData);
-      if (!validation.valid) {
+      if (!validation.isValid) {
         const error = new Error(`Business validation failed: ${validation.errors.join(', ')}`);
         this.eventEmitter.emit(
           this.eventFactory.registration('registration.failed', {
@@ -337,15 +361,29 @@ export class AssetLotRegistrationService {
       );
 
       // Generate cryptographic proof
-      const cryptoProof = await this.generateCryptoProof(validData);
+      const proofBase = await this.generateCryptoProof(validData);
 
       // Generate lot ID
       const lotId = this.generateLotId(validData);
 
       // Generate certificate
-      const certificate = await this.generateCertificate(lotId, validData, cryptoProof);
+      const certificate = await this.generateCertificate(lotId, validData, proofBase);
+      const cryptoProof: CryptographicProof = {
+        hash: proofBase.hash,
+        signature: proofBase.signature,
+        certificate,
+      };
 
       // Build asset lot
+      const qualityGrade =
+        validData.quality === 'high'
+          ? 'A'
+          : validData.quality === 'medium'
+            ? 'B'
+            : validData.quality === 'low'
+              ? 'C'
+              : 'ungraded';
+
       const assetLot: AssetLot = {
         id: lotId,
         commodityType: validData.commodityType,
@@ -355,31 +393,25 @@ export class AssetLotRegistrationService {
           longitude: validData.discoveryLocation.longitude,
           altitude: validData.discoveryLocation.altitude,
           accuracy: validData.discoveryLocation.accuracy,
-          timestamp: validData.discoveryLocation.timestamp || new Date().toISOString(),
+          timestamp: validData.discoveryLocation.timestamp,
         },
-        photos: validData.photos.map((p) => ({
-          id: p.id,
-          uri: p.uri,
-          timestamp: p.timestamp,
-          hash: p.hash,
-        })),
-        estimatedWeight: validData.estimatedWeight,
+        discoveryDate: validData.discoveryDate || new Date().toISOString(),
+        weight: validData.estimatedWeight,
         weightUnit: validData.weightUnit,
         form: validData.form,
         purity: validData.purity,
-        qualityGrade: validData.qualityGrade,
-        discoveryDate: validData.discoveryDate || new Date().toISOString(),
-        assetDetails: validData.assetDetails || {},
-
-        // Verification
-        cryptoProof,
+        qualityGrade,
+        status: 'registered',
+        cryptoProof: cryptoProof.hash,
         certificateId: certificate.id,
-        verificationStatus: 'pending',
-
-        // Metadata
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        registrationSessionId: sessionId,
+        metadata: {
+          photos: validData.photos,
+          assetDetails: validData.assetDetails || {},
+          registrationSessionId: sessionId,
+          cryptoProof,
+        },
       };
 
       // Store asset lot
@@ -393,7 +425,7 @@ export class AssetLotRegistrationService {
           commodityType: assetLot.commodityType,
           producerId: assetLot.producerId,
           certificateId: certificate.id,
-          estimatedWeight: assetLot.estimatedWeight,
+          estimatedWeight: assetLot.weight,
           weightUnit: assetLot.weightUnit,
         })
       );
@@ -423,7 +455,7 @@ export class AssetLotRegistrationService {
    */
   protected async generateCryptoProof(
     data: ValidatedRegistrationData
-  ): Promise<CryptographicProof> {
+  ): Promise<{ hash: string; signature: string }> {
     const proofData = {
       commodityType: data.commodityType,
       producerId: data.producerId,
@@ -433,17 +465,12 @@ export class AssetLotRegistrationService {
       timestamp: Date.now(),
     };
 
-    const dataHash = await this.cryptoService.createHash(JSON.stringify(proofData));
-    const signature = await this.cryptoService.sign(dataHash);
+    const hash = await this.cryptoService.createHash(JSON.stringify(proofData));
+    const signature = await this.cryptoService.sign(hash);
 
     return {
-      version: '1.0',
-      algorithm: 'Ed25519-SHA256',
-      dataHash,
+      hash,
       signature,
-      publicKey: (await this.cryptoService.getPublicKey?.()) || 'system',
-      timestamp: Date.now(),
-      proofType: 'registration',
     };
   }
 
@@ -473,31 +500,28 @@ export class AssetLotRegistrationService {
   protected async generateCertificate(
     lotId: string,
     data: ValidatedRegistrationData,
-    proof: CryptographicProof
+    proof: { hash: string; signature: string }
   ): Promise<AssetCertificate> {
     const certificateId = `CERT-${lotId}`;
 
     return {
       id: certificateId,
-      assetLotId: lotId,
-      issuer: 'GTCX Protocol',
-      issuedAt: new Date().toISOString(),
-      expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
-      commodityType: data.commodityType,
-      producerId: data.producerId,
-      weight: data.estimatedWeight,
-      weightUnit: data.weightUnit,
+      lotId,
+      hash: proof.hash,
+      signature: proof.signature,
+      timestamp: new Date().toISOString(),
+      producerLicense: data.producerId,
       location: {
         latitude: data.discoveryLocation.latitude,
         longitude: data.discoveryLocation.longitude,
+        accuracy: data.discoveryLocation.accuracy,
+        altitude: data.discoveryLocation.altitude,
+        timestamp: data.discoveryLocation.timestamp,
       },
-      cryptoProofHash: proof.dataHash,
-      verifyUrl: `${this.config.verifyBaseUrl}/${certificateId}`,
-      qrData: JSON.stringify({
-        id: certificateId,
-        verify: `${this.config.verifyBaseUrl}/${certificateId}`,
-        hash: proof.dataHash.substring(0, 16),
-      }),
+      assetCharacteristics: data.assetDetails || {},
+      verificationLevel: 'preliminary',
+      issuedBy: 'GTCX Protocol',
+      expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
     };
   }
 }
