@@ -1,0 +1,28 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPointStrategy": "packages",
+  "entryPoints": [
+    "packages/types",
+    "packages/crypto",
+    "packages/identity",
+    "packages/verification",
+    "packages/domain",
+    "packages/schemas",
+    "packages/security",
+    "packages/ai",
+    "packages/services",
+    "packages/sync",
+    "packages/api-client",
+    "packages/connectivity",
+    "packages/events",
+    "packages/utils",
+    "packages/logging"
+  ],
+  "out": "docs/api",
+  "plugin": ["typedoc-plugin-markdown"],
+  "name": "GTCX Core API Reference",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "excludeExternals": true
+}

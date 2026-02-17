@@ -50,6 +50,9 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Generate API docs
+        run: pnpm docs
+
   security:
     runs-on: ubuntu-latest
     permissions:
