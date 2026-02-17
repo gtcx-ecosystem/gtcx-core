@@ -10,7 +10,8 @@ gtcx-crypto = { path = "../gtcx-crypto" }
 thiserror = { workspace = true }
 tracing = { workspace = true }
 serde = { workspace = true }
-tokio = { workspace = true }
+serde_json = { workspace = true }
+hex = { workspace = true }
 
 # Networking dependencies (commented until needed)
 # libp2p = { workspace = true }
