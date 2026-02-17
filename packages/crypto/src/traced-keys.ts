@@ -3,8 +3,6 @@
 // Key generation and derivation with operation logging
 // ============================================================================
 
-import { traced, createCategoryLogger } from '@gtcx/ai';
-
 import {
   generateKeyPair as baseGenerateKeyPair,
   derivePublicKey as baseDerivePublicKey,
@@ -15,6 +13,7 @@ import {
   type KeyAlgorithm,
   type KeyPairResult,
 } from './keys';
+import { traced, createCategoryLogger } from './tracing.js';
 
 const cryptoLog = createCategoryLogger('crypto');
 

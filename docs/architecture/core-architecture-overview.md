@@ -41,10 +41,10 @@ All packages are published under the `@gtcx/` scope and managed in a pnpm worksp
 ### Internal Dependency Order
 
 ```
-@gtcx/crypto (depends on @gtcx/ai for traced wrappers, @gtcx/types)
+@gtcx/crypto (no hard internal deps; @gtcx/ai and @gtcx/types are optional peerDependencies)
     ├── @gtcx/identity (DID/VC, key rotation — depends on @gtcx/crypto, @gtcx/types)
     ├── @gtcx/security (auth, RBAC, validation — depends on @gtcx/crypto)
-    └── @gtcx/verification (proof bundles, certs — depends on @gtcx/crypto, @gtcx/ai, @gtcx/types)
+    └── @gtcx/verification (proof bundles, certs — depends on @gtcx/crypto, @gtcx/types; @gtcx/ai is an optional peer)
 
 @gtcx/domain (foundational types, schemas, events, metrics)
     └── @gtcx/services (registration, trading, compliance)

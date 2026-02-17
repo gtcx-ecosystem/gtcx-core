@@ -27,13 +27,13 @@ Shared TypeScript packages for the GTCX Protocol ecosystem. Each package follows
 ## Dependency Graph
 
 ```
-@gtcx/crypto           (depends on @gtcx/ai for traced wrappers, @gtcx/types)
+@gtcx/crypto           (no hard internal deps; @gtcx/ai and @gtcx/types are optional peerDependencies)
     │
     ├── @gtcx/identity      (depends on @gtcx/crypto, @gtcx/types)
     │
     ├── @gtcx/security      (depends on @gtcx/crypto)
     │
-    └── @gtcx/verification  (depends on @gtcx/crypto, @gtcx/ai, @gtcx/types)
+    └── @gtcx/verification  (depends on @gtcx/crypto, @gtcx/types; @gtcx/ai is an optional peerDependency)
 
 @gtcx/domain           (foundational types, schemas, events, metrics)
     │

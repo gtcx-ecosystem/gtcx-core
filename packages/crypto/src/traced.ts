@@ -13,8 +13,6 @@
 //   import { tracedSign, tracedVerify } from '@gtcx/crypto/traced';
 // ============================================================================
 
-import { traced, createCategoryLogger } from '@gtcx/ai';
-
 import {
   sign as baseSign,
   signHash as baseSignHash,
@@ -26,6 +24,7 @@ import {
   type SignatureResult,
   type VerificationResult,
 } from './signing';
+import { traced, createCategoryLogger } from './tracing.js';
 
 // Create crypto-specific logger
 const cryptoLog = createCategoryLogger('crypto');

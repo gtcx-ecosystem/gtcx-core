@@ -3,8 +3,6 @@
 // SHA-256/512 hashing with operation logging
 // ============================================================================
 
-import { traced } from '@gtcx/ai';
-
 import {
   hash256 as baseHash256,
   hash512 as baseHash512,
@@ -18,6 +16,7 @@ import {
   combineHashes as baseCombineHashes,
   type HashAlgorithm,
 } from './hashing';
+import { traced } from './tracing.js';
 
 // ============================================================================
 // TRACED HASHING OPERATIONS

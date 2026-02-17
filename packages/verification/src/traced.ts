@@ -10,7 +10,7 @@
 // - Performance analysis
 // ============================================================================
 
-import { traced, withTrace, createCategoryLogger, type OperationLog } from '@gtcx/ai';
+import { traced, withTrace, createCategoryLogger, type OperationLog } from './tracing.js';
 import type {
   Certificate,
   MilitaryGradeCertificate,
@@ -65,14 +65,16 @@ interface CreateProofBundleInput {
 
 /**
  * Generate a certificate with full tracing
- * 
+ *
  * @description
  * Creates a verification certificate with complete operation logging.
  * All inputs and outputs are logged (with sensitive data sanitized)
  * for audit and AI training purposes.
  */
 export const tracedGenerateCertificate = traced(
-  async (_params: GenerateCertificateInput): Promise<MilitaryGradeCertificate | StandardCertificate> => {
+  async (
+    _params: GenerateCertificateInput
+  ): Promise<MilitaryGradeCertificate | StandardCertificate> => {
     // Implementation would call actual certificate generator
     // This is a placeholder showing the traced pattern
     throw new Error('Implementation required - import from certificates/generator');
@@ -218,14 +220,14 @@ export const tracedCreateProofBundle = traced(
 
 /**
  * Execute a complete verification workflow with correlated tracing
- * 
+ *
  * @description
  * Wraps an entire verification workflow so all operations share
  * the same trace ID. This enables:
  * - End-to-end latency tracking
  * - Workflow visualization
  * - Failure analysis
- * 
+ *
  * @example
  * ```typescript
  * const result = await tracedVerificationWorkflow(async () => {
@@ -243,7 +245,7 @@ export async function tracedVerificationWorkflow<T>(
   metadata?: Record<string, unknown>
 ): Promise<T> {
   verificationLog.info(`workflow.start`, { name: workflowName, ...metadata });
-  
+
   try {
     const result = await withTrace(workflow);
     verificationLog.info(`workflow.complete`, { name: workflowName });
@@ -266,7 +268,12 @@ export async function tracedVerificationWorkflow<T>(
  * Log a compliance event for audit purposes
  */
 export function logComplianceEvent(event: {
-  type: 'verification_requested' | 'verification_completed' | 'verification_failed' | 'claim_issued' | 'claim_revoked';
+  type:
+    | 'verification_requested'
+    | 'verification_completed'
+    | 'verification_failed'
+    | 'claim_issued'
+    | 'claim_revoked';
   subjectId: string;
   credentialType?: string;
   gciScore?: number;
@@ -329,19 +336,19 @@ export interface VerificationSummary {
  * Compute verification analytics from operation logs
  */
 export function computeVerificationSummary(logs: OperationLog[]): VerificationSummary {
-  const verificationLogs = logs.filter(l => l.category === 'verification');
-  
+  const verificationLogs = logs.filter((l) => l.category === 'verification');
+
   const durations = verificationLogs
-    .map(l => l.durationMs)
+    .map((l) => l.durationMs)
     .filter((d): d is number => d !== null);
 
   const operationsByType: Record<string, number> = {};
   const errorsByType: Record<string, number> = {};
 
-  verificationLogs.forEach(log => {
+  verificationLogs.forEach((log) => {
     const type = log.type.split('.').pop() || 'unknown';
     operationsByType[type] = (operationsByType[type] || 0) + 1;
-    
+
     if (!log.success && log.error) {
       const errorType = log.error.name;
       errorsByType[errorType] = (errorsByType[errorType] || 0) + 1;
@@ -350,11 +357,10 @@ export function computeVerificationSummary(logs: OperationLog[]): VerificationSu
 
   return {
     totalOperations: verificationLogs.length,
-    successfulVerifications: verificationLogs.filter(l => l.success).length,
-    failedVerifications: verificationLogs.filter(l => !l.success).length,
-    averageLatencyMs: durations.length > 0 
-      ? durations.reduce((a, b) => a + b, 0) / durations.length 
-      : 0,
+    successfulVerifications: verificationLogs.filter((l) => l.success).length,
+    failedVerifications: verificationLogs.filter((l) => !l.success).length,
+    averageLatencyMs:
+      durations.length > 0 ? durations.reduce((a, b) => a + b, 0) / durations.length : 0,
     operationsByType,
     errorsByType,
   };

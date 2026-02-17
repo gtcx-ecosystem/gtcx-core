@@ -33,10 +33,10 @@ The shared infrastructure layer provides the foundational packages that all GTCX
 ### 2.1 Package Dependency Graph
 
 ```
-@gtcx/crypto           (depends on @gtcx/ai for traced wrappers, @gtcx/types)
+@gtcx/crypto           (no hard internal deps; @gtcx/ai and @gtcx/types are optional peerDependencies)
     ├── @gtcx/identity      (depends on @gtcx/crypto, @gtcx/types)
     ├── @gtcx/security      (depends on @gtcx/crypto)
-    └── @gtcx/verification  (depends on @gtcx/crypto, @gtcx/ai, @gtcx/types)
+    └── @gtcx/verification  (depends on @gtcx/crypto, @gtcx/types; @gtcx/ai is an optional peerDependency)
 
 @gtcx/domain           (foundational types, schemas, events, metrics)
     ├── @gtcx/services  (registration, trading, compliance)
@@ -72,8 +72,8 @@ The shared infrastructure layer provides the foundational packages that all GTCX
 
 ### 2.3 Dependency Rules
 
-1. `@gtcx/crypto` depends on `@gtcx/ai` (for traced wrappers) and `@gtcx/types` — plus external deps `@noble/curves` and `@noble/hashes`
-2. `@gtcx/identity` depends on `@gtcx/crypto` and `@gtcx/types`; `@gtcx/security` depends on `@gtcx/crypto`; `@gtcx/verification` depends on `@gtcx/crypto`, `@gtcx/ai`, and `@gtcx/types`
+1. `@gtcx/crypto` has **zero hard internal dependencies** — `@gtcx/ai` (for traced wrappers) and `@gtcx/types` are optional peerDependencies; external deps are `@noble/curves` and `@noble/hashes`
+2. `@gtcx/identity` depends on `@gtcx/crypto` and `@gtcx/types`; `@gtcx/security` depends on `@gtcx/crypto`; `@gtcx/verification` depends on `@gtcx/crypto` and `@gtcx/types` (hard), with `@gtcx/ai` as an optional peerDependency
 3. `@gtcx/domain` provides foundational types, schemas, and events — no service-level logic
 4. `@gtcx/services` depends on `@gtcx/domain` and provides application-level business logic
 5. **No circular dependencies** — enforced by build-time checks

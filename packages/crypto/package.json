@@ -23,10 +23,20 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@gtcx/ai": "workspace:*",
-    "@gtcx/types": "workspace:*",
     "@noble/curves": "^1.4.0",
     "@noble/hashes": "^1.4.0"
+  },
+  "peerDependencies": {
+    "@gtcx/ai": "workspace:*",
+    "@gtcx/types": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@gtcx/ai": {
+      "optional": true
+    },
+    "@gtcx/types": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@gtcx/typescript-config": "workspace:*",
