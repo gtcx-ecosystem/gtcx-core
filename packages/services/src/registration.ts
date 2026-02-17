@@ -11,27 +11,40 @@
  * - Dependency injection for all externals (P4)
  * - Offline-first compatible (P8)
  *
- * @package @gtcx/domain
+ * @package @gtcx/services
  */
 
-import { DomainEventFactory, nullEventEmitter, type IDomainEventEmitter } from './events';
+import { randomUUID } from 'node:crypto';
+
 import {
+  DomainEventFactory,
+  nullEventEmitter,
+  type IDomainEventEmitter,
   AssetRegistrationDataSchema,
   RegistrationConfigSchema,
   safeParse,
   type ValidatedRegistrationData,
-} from './schemas';
-import type {
-  AssetLot,
-  WorkflowStep,
-  RegistrationProgress,
-  ValidationResult,
-  CryptographicProof,
-  AssetCertificate,
-  ICryptoService,
-  ILocationService,
-  IStorageService,
-} from './types';
+  type AssetLot,
+  type WorkflowStep,
+  type RegistrationProgress,
+  type ValidationResult,
+  type CryptographicProof,
+  type AssetCertificate,
+  type ICryptoService,
+  type ILocationService,
+  type IStorageService,
+} from '@gtcx/domain';
+
+// ============================================================================
+// ERROR CLASSES
+// ============================================================================
+
+export class ValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ValidationError';
+  }
+}
 
 // ============================================================================
 // CONFIGURATION
@@ -310,9 +323,13 @@ export class AssetLotRegistrationService {
     this.eventFactory.setCorrelationId(sessionId);
 
     // Emit start event
+    const dataRecord =
+      data != null && typeof data === 'object' ? (data as Record<string, unknown>) : {};
     const startPayload = {
-      commodityType: (data as any)?.commodityType || 'unknown',
-      producerId: (data as any)?.producerId || 'unknown',
+      commodityType:
+        typeof dataRecord['commodityType'] === 'string' ? dataRecord['commodityType'] : 'unknown',
+      producerId:
+        typeof dataRecord['producerId'] === 'string' ? dataRecord['producerId'] : 'unknown',
       sessionId,
     };
     this.eventEmitter.emit(this.eventFactory.registration('registration.started', startPayload));
@@ -322,7 +339,7 @@ export class AssetLotRegistrationService {
       const schemaResult = safeParse(AssetRegistrationDataSchema, data);
       if (!schemaResult.success) {
         const messages = schemaResult.error.errors.map((issue) => issue.message);
-        const error = new Error(`Validation failed: ${messages.join(', ')}`);
+        const error = new ValidationError(`Validation failed: ${messages.join(', ')}`);
         this.eventEmitter.emit(
           this.eventFactory.registration('registration.failed', {
             commodityType: startPayload.commodityType,
@@ -339,7 +356,9 @@ export class AssetLotRegistrationService {
       // Business rule validation
       const validation = this.validateRegistrationData(validData);
       if (!validation.isValid) {
-        const error = new Error(`Business validation failed: ${validation.errors.join(', ')}`);
+        const error = new ValidationError(
+          `Business validation failed: ${validation.errors.join(', ')}`
+        );
         this.eventEmitter.emit(
           this.eventFactory.registration('registration.failed', {
             commodityType: validData.commodityType,
@@ -433,7 +452,7 @@ export class AssetLotRegistrationService {
       return assetLot;
     } catch (error) {
       // Ensure failure event is emitted for any error
-      if (!(error instanceof Error && error.message.startsWith('Validation'))) {
+      if (!(error instanceof ValidationError)) {
         this.eventEmitter.emit(
           this.eventFactory.registration('registration.failed', {
             commodityType: startPayload.commodityType,
@@ -482,7 +501,7 @@ export class AssetLotRegistrationService {
     const lat = Math.abs(data.discoveryLocation.latitude).toFixed(2).replace('.', '');
     const lng = Math.abs(data.discoveryLocation.longitude).toFixed(2).replace('.', '');
     const time = Date.now().toString(36).toUpperCase();
-    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const random = randomUUID().substring(0, 4).toUpperCase();
 
     return `${prefix}-${lat}-${lng}-${time}-${random}`;
   }
@@ -491,7 +510,7 @@ export class AssetLotRegistrationService {
    * Generate session ID for tracing
    */
   protected generateSessionId(): string {
-    return `reg_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    return `reg_${Date.now()}_${randomUUID()}`;
   }
 
   /**

@@ -13,6 +13,19 @@ packages:
   # AI integration
   - 'packages/ai'
 
+  # Application services
+  - 'packages/services'
+
+  # Sync and API
+  - 'packages/sync'
+  - 'packages/api-client'
+
+  # Connectivity (offline-first, P8)
+  - 'packages/connectivity'
+
+  # Event system
+  - 'packages/events'
+
   # Common utilities
   - 'packages/utils'
   - 'packages/logging'
@@ -21,4 +34,3 @@ packages:
   - 'packages/config/eslint'
   - 'packages/config/typescript'
   - 'packages/config/tailwind'
-  - 'packages/config/jurisdiction'

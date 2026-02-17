@@ -10,30 +10,57 @@
  * - Dependency injection for all externals (P4)
  * - Offline-first compatible (P8)
  *
- * @package @gtcx/domain
+ * @package @gtcx/services
  */
 
-import { DomainEventFactory, nullEventEmitter, type IDomainEventEmitter } from './events';
+import { randomUUID } from 'node:crypto';
+
 import {
+  DomainEventFactory,
+  nullEventEmitter,
+  type IDomainEventEmitter,
   TradeRequestSchema,
   TradingConfigSchema,
   TradingOpportunityFilterSchema,
   safeParse,
-} from './schemas';
-import type {
-  AssetLot,
-  Transaction,
-  Trader,
-  Location,
-  MarketPrice,
-  TradingOpportunity,
-  TradeAnalytics,
-  QualityGrade,
-  ICryptoService,
-  IStorageService,
-  IPriceService,
-  IComplianceService,
-} from './types';
+  type AssetLot,
+  type Transaction,
+  type Trader,
+  type Location,
+  type MarketPrice,
+  type TradingOpportunity,
+  type TradeAnalytics,
+  type QualityGrade,
+  type ICryptoService,
+  type IStorageService,
+  type IPriceService,
+  type IComplianceService,
+} from '@gtcx/domain';
+
+// ============================================================================
+// ERROR CLASSES
+// ============================================================================
+
+export class LicenseValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'LicenseValidationError';
+  }
+}
+
+export class ComplianceError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ComplianceError';
+  }
+}
+
+export class MaxValueError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'MaxValueError';
+  }
+}
 
 // ============================================================================
 // CONFIGURATION
@@ -343,7 +370,7 @@ export class TradingService {
         this.eventFactory.trading('trading.opportunity_found', {
           count: opportunities.length,
           filters: validFilters,
-        } as any)
+        })
       );
 
       return opportunities;
@@ -367,10 +394,13 @@ export class TradingService {
     const requestResult = safeParse(TradeRequestSchema, request);
     if (!requestResult.success) {
       const messages = requestResult.error.errors.map((issue) => issue.message);
+      const reqRecord =
+        request != null && typeof request === 'object' ? (request as Record<string, unknown>) : {};
       this.eventEmitter.emit(
         this.eventFactory.trading('trading.trade_failed', {
-          assetLotId: (request as any)?.assetLotId || 'unknown',
-          buyerId: (request as any)?.buyerId || 'unknown',
+          assetLotId:
+            typeof reqRecord['assetLotId'] === 'string' ? reqRecord['assetLotId'] : 'unknown',
+          buyerId: typeof reqRecord['buyerId'] === 'string' ? reqRecord['buyerId'] : 'unknown',
           error: `Validation failed: ${messages.join(', ')}`,
           reason: 'validation',
         })
@@ -386,7 +416,7 @@ export class TradingService {
         assetLotId: validRequest.assetLotId,
         buyerId: validRequest.buyerId,
         amount: validRequest.agreedPrice,
-      } as any)
+      })
     );
 
     try {
@@ -405,7 +435,7 @@ export class TradingService {
             reason: 'compliance',
           })
         );
-        throw new Error('License validation failed for one or more parties');
+        throw new LicenseValidationError('License validation failed for one or more parties');
       }
 
       // Check for high-value transaction
@@ -423,7 +453,9 @@ export class TradingService {
               reason: 'compliance',
             })
           );
-          throw new Error('Enhanced compliance check required for high-value transactions');
+          throw new ComplianceError(
+            'Enhanced compliance check required for high-value transactions'
+          );
         }
       }
 
@@ -440,7 +472,7 @@ export class TradingService {
             reason: 'validation',
           })
         );
-        throw new Error(`Transaction exceeds maximum allowed value`);
+        throw new MaxValueError(`Transaction exceeds maximum allowed value`);
       }
 
       // Generate cryptographic proof for transaction
@@ -500,19 +532,18 @@ export class TradingService {
       );
 
       return transaction;
-    } catch (error) {
+    } catch (error: unknown) {
       // Emit failure if not already emitted
       if (
-        error instanceof Error &&
-        !error.message.includes('License validation') &&
-        !error.message.includes('compliance') &&
-        !error.message.includes('exceeds maximum')
+        !(error instanceof LicenseValidationError) &&
+        !(error instanceof ComplianceError) &&
+        !(error instanceof MaxValueError)
       ) {
         this.eventEmitter.emit(
           this.eventFactory.trading('trading.trade_failed', {
             assetLotId: validRequest.assetLotId,
             buyerId: validRequest.buyerId,
-            error: error.message,
+            error: error instanceof Error ? error.message : 'Unknown error',
             reason: 'system_error',
           })
         );
@@ -573,7 +604,7 @@ export class TradingService {
   }
 
   protected generateTransactionId(): string {
-    return `tx_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    return `tx_${Date.now()}_${randomUUID()}`;
   }
 
   protected async getAvailableAssetLots(): Promise<AssetLot[]> {

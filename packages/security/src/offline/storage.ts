@@ -11,6 +11,8 @@ import { z } from 'zod';
 
 import { logSecurityEvent } from '../audit/events';
 
+import { secureCompare } from './tamper-detection';
+
 // =============================================================================
 // CONFIGURATION
 // =============================================================================
@@ -104,13 +106,55 @@ export interface SecureStorageOptions {
  * await storage.set('credentials', myCredentials);
  * const creds = await storage.get('credentials');
  */
+/**
+ * Key used to persist lockout state in the backend (stored unencrypted).
+ * This ensures brute-force counters survive process restarts.
+ */
+const LOCKOUT_STATE_KEY = '__lockout_state';
+
+interface LockoutState {
+  failedAttempts: number;
+  lastFailedAt: string | null;
+}
+
 export class SecureStorage {
   private encryptionKey: Uint8Array | null = null;
   private failedAttempts = 0;
+  private lockoutStateLoaded = false;
   private readonly config: OfflineSecurityConfig;
 
   constructor(private readonly options: SecureStorageOptions) {
     this.config = { ...DEFAULT_OFFLINE_CONFIG, ...options.config };
+  }
+
+  /**
+   * Load persisted lockout state from backend.
+   * Called automatically before unlock checks.
+   */
+  private async loadLockoutState(): Promise<void> {
+    if (this.lockoutStateLoaded) return;
+    try {
+      const raw = await this.options.backend.getItem(LOCKOUT_STATE_KEY);
+      if (raw) {
+        const state: LockoutState = JSON.parse(raw);
+        this.failedAttempts = state.failedAttempts ?? 0;
+      }
+    } catch {
+      // If lockout state is corrupted, start fresh
+      this.failedAttempts = 0;
+    }
+    this.lockoutStateLoaded = true;
+  }
+
+  /**
+   * Persist lockout state to backend (unencrypted so it works when locked).
+   */
+  private async persistLockoutState(): Promise<void> {
+    const state: LockoutState = {
+      failedAttempts: this.failedAttempts,
+      lastFailedAt: this.failedAttempts > 0 ? new Date().toISOString() : null,
+    };
+    await this.options.backend.setItem(LOCKOUT_STATE_KEY, JSON.stringify(state));
   }
 
   /**
@@ -120,6 +164,9 @@ export class SecureStorage {
    * Key is held in memory, never persisted.
    */
   async unlock(userSecret: string): Promise<{ success: boolean; attemptsRemaining?: number }> {
+    // Load persisted lockout state before checking
+    await this.loadLockoutState();
+
     // Check if already locked out
     if (this.failedAttempts >= this.config.maxFailedAttempts) {
       if (this.config.wipeOnExceed) {
@@ -144,13 +191,16 @@ export class SecureStorage {
 
       // Verify by attempting to read a known value
       const verification = await this.options.backend.getItem('__verification');
+      const initialized = await this.options.backend.getItem('__initialized');
       if (verification) {
         try {
           await this.options.encryption.decrypt(verification, this.encryptionKey);
         } catch {
-          // Decryption failed - wrong key
+          // Decryption failed - wrong key; zero key before discarding
+          this.encryptionKey.fill(0);
           this.encryptionKey = null;
           this.failedAttempts++;
+          await this.persistLockoutState();
 
           await logSecurityEvent('AUTH_FAILURE', {
             outcome: 'FAILURE',
@@ -165,18 +215,41 @@ export class SecureStorage {
             attemptsRemaining: this.config.maxFailedAttempts - this.failedAttempts,
           };
         }
+      } else if (initialized) {
+        // Storage was previously initialized but verification token is gone
+        // (e.g. after a wipe). Require explicit re-initialization.
+        this.encryptionKey.fill(0);
+        this.encryptionKey = null;
+
+        await logSecurityEvent('AUTH_FAILURE', {
+          outcome: 'FAILURE',
+          reason: 'REQUIRES_REINITIALIZE',
+          metadata: {
+            detail:
+              'Verification token missing after prior initialization. Call reinitialize() instead.',
+          },
+        });
+
+        return { success: false };
       } else {
-        // First time - set verification value
+        // First time - set verification value and mark as initialized
         const verificationData = new TextEncoder().encode('gtcx-verification');
         const encrypted = await this.options.encryption.encrypt(
           verificationData,
           this.encryptionKey
         );
         await this.options.backend.setItem('__verification', encrypted);
+        await this.options.backend.setItem('__initialized', 'true');
+
+        await logSecurityEvent('SECURITY_CONFIG_CHANGED', {
+          outcome: 'SUCCESS',
+          metadata: { detail: 'New verification token created for first-time initialization' },
+        });
       }
 
-      // Success - reset attempts
+      // Success - reset attempts and persist
       this.failedAttempts = 0;
+      await this.persistLockoutState();
 
       await logSecurityEvent('AUTH_SUCCESS', {
         outcome: 'SUCCESS',
@@ -185,7 +258,13 @@ export class SecureStorage {
 
       return { success: true };
     } catch (error) {
+      // Zero key buffer before discarding
+      if (this.encryptionKey) {
+        this.encryptionKey.fill(0);
+        this.encryptionKey = null;
+      }
       this.failedAttempts++;
+      await this.persistLockoutState();
 
       await logSecurityEvent('AUTH_FAILURE', {
         outcome: 'FAILURE',
@@ -268,17 +347,47 @@ export class SecureStorage {
   }
 
   /**
-   * Secure wipe - clear all data
+   * Secure wipe - clear all data.
+   * After wipe, unlock() will refuse to accept new secrets.
+   * Use reinitialize() to set up a new secret after a wipe.
    */
   async wipe(): Promise<void> {
     this.lock();
+    // Preserve initialized flag so unlock() knows this was previously set up
     await this.options.backend.clear();
+    await this.options.backend.setItem('__initialized', 'true');
+    this.failedAttempts = 0;
+    this.lockoutStateLoaded = true;
+    await this.persistLockoutState();
 
     await logSecurityEvent('DATA_DELETED', {
       outcome: 'SUCCESS',
       reason: 'SECURITY_WIPE',
       severity: 'HIGH',
     });
+  }
+
+  /**
+   * Re-initialize storage with a new secret after a wipe.
+   * This explicitly creates a new verification token, unlike unlock()
+   * which refuses to accept any secret after wipe.
+   */
+  async reinitialize(userSecret: string): Promise<{ success: boolean }> {
+    this.encryptionKey = await this.options.encryption.deriveKey(userSecret, this.options.deviceId);
+
+    const verificationData = new TextEncoder().encode('gtcx-verification');
+    const encrypted = await this.options.encryption.encrypt(verificationData, this.encryptionKey);
+    await this.options.backend.setItem('__verification', encrypted);
+    await this.options.backend.setItem('__initialized', 'true');
+    this.failedAttempts = 0;
+    await this.persistLockoutState();
+
+    await logSecurityEvent('SECURITY_CONFIG_CHANGED', {
+      outcome: 'SUCCESS',
+      metadata: { detail: 'Storage re-initialized with new secret after wipe' },
+    });
+
+    return { success: true };
   }
 
   private ensureUnlocked(): void {
@@ -350,6 +459,13 @@ export class CredentialCache {
 
     await this.storage.set(`${this.CACHE_PREFIX}${credential.id}`, cached);
 
+    // Track credential IDs for purgeExpired()
+    const existingKeys = (await this.storage.get<string[]>('__credential_keys')) ?? [];
+    if (!existingKeys.includes(credential.id)) {
+      existingKeys.push(credential.id);
+      await this.storage.set('__credential_keys', existingKeys);
+    }
+
     await logSecurityEvent('OFFLINE_CREDENTIAL_CACHED', {
       outcome: 'SUCCESS',
       resource: credential.id,
@@ -380,14 +496,15 @@ export class CredentialCache {
       expiresAt.getTime() - this.config.credentialRefreshBuffer * 60 * 60 * 1000
     );
 
-    // Check if expired
+    // Check if expired — return null credential and delete the expired entry
     if (now >= expiresAt) {
+      await this.remove(id);
       await logSecurityEvent('OFFLINE_CACHE_EXPIRED', {
         outcome: 'FAILURE',
         resource: id,
         metadata: { expiredAt: cached.expiresAt },
       });
-      return { credential: cached, status: 'expired' };
+      return { credential: null, status: 'expired' };
     }
 
     // Check if needs refresh
@@ -412,15 +529,48 @@ export class CredentialCache {
    */
   async remove(id: string): Promise<void> {
     await this.storage.delete(`${this.CACHE_PREFIX}${id}`);
+
+    // Remove from tracked keys
+    const existingKeys = (await this.storage.get<string[]>('__credential_keys')) ?? [];
+    const updatedKeys = existingKeys.filter((k) => k !== id);
+    await this.storage.set('__credential_keys', updatedKeys);
   }
 
   /**
    * Remove all expired credentials
    */
   async purgeExpired(): Promise<number> {
-    // This would need getAllKeys from storage backend
-    // Implementation depends on backend capabilities
-    return 0;
+    let purgedCount = 0;
+    const now = new Date();
+
+    // Use the storage backend to get all keys, then check each credential
+    const allKeys = (await this.storage.get<string[]>('__credential_keys')) ?? [];
+
+    // Also try to find credential keys by checking known IDs
+    // We'll iterate through stored credentials and check expiry
+    const keysToRemove: string[] = [];
+
+    for (const credId of allKeys) {
+      const cached = await this.storage.get<CachedCredential>(`${this.CACHE_PREFIX}${credId}`);
+      if (cached && new Date(cached.expiresAt) <= now) {
+        await this.storage.delete(`${this.CACHE_PREFIX}${credId}`);
+        keysToRemove.push(credId);
+        purgedCount++;
+      }
+    }
+
+    // Update the credential keys list
+    if (keysToRemove.length > 0) {
+      const remainingKeys = allKeys.filter((k) => !keysToRemove.includes(k));
+      await this.storage.set('__credential_keys', remainingKeys);
+
+      await logSecurityEvent('DATA_DELETED', {
+        outcome: 'SUCCESS',
+        metadata: { purgedCount, reason: 'EXPIRED_CREDENTIALS_PURGED' },
+      });
+    }
+
+    return purgedCount;
   }
 }
 
@@ -443,39 +593,65 @@ export interface IntegrityProvider {
 }
 
 /**
- * Create integrity check for data
+ * Optional signer callback for creating integrity checks with real signatures.
+ * If not provided, the integrity check is hash-only (no cryptographic signature).
+ */
+export type IntegritySigner = (data: string, signingKey: string) => Promise<string>;
+
+/**
+ * Create integrity check for data.
+ *
+ * @param data - Data to protect
+ * @param signingKey - Key identifier for signing
+ * @param integrity - Hash/verify provider
+ * @param signer - Optional callback to produce a cryptographic signature.
+ *   If omitted, the check is hash-only (no signature verification will be performed).
  */
 export async function createIntegrityCheck(
   data: unknown,
   signingKey: string,
-  integrity: IntegrityProvider
+  integrity: IntegrityProvider,
+  signer?: IntegritySigner
 ): Promise<IntegrityCheck> {
   const dataString = JSON.stringify(data);
   const dataHash = await integrity.hash(dataString);
   const now = new Date().toISOString();
 
+  const signatureChain: string[] = [dataHash];
+
+  if (signer) {
+    // Sign the hash and include both hash and signature in the chain
+    const signature = await signer(dataHash, signingKey);
+    signatureChain.push(signature);
+  }
+
   return {
     dataHash,
-    signatureChain: [dataHash], // Would include actual signature in production
+    signatureChain,
     createdAt: now,
     lastVerified: now,
   };
 }
 
 /**
- * Verify data integrity
+ * Verify data integrity.
+ *
+ * If the signature chain has only one entry (hash-only mode, no signer was
+ * provided at creation time), only the hash is verified. If the chain has
+ * two or more entries, each signature in the chain is verified against the
+ * previous entry using the integrity provider.
  */
 export async function verifyIntegrity(
   data: unknown,
   check: IntegrityCheck,
   trustedKey: string,
   integrity: IntegrityProvider
-): Promise<{ valid: boolean; reason?: string }> {
+): Promise<{ valid: boolean; reason?: string; hashOnly?: boolean }> {
   const dataString = JSON.stringify(data);
   const currentHash = await integrity.hash(dataString);
 
-  // Verify hash matches
-  if (currentHash !== check.dataHash) {
+  // Verify hash matches (constant-time comparison to prevent timing attacks)
+  if (!secureCompare(currentHash, check.dataHash)) {
     await logSecurityEvent('TAMPER_DETECTED', {
       outcome: 'BLOCKED',
       severity: 'CRITICAL',
@@ -483,6 +659,15 @@ export async function verifyIntegrity(
       metadata: { expectedHash: check.dataHash, actualHash: currentHash },
     });
     return { valid: false, reason: 'DATA_MODIFIED' };
+  }
+
+  // If signature chain has only the hash (no signer was used), hash-only mode
+  if (check.signatureChain.length <= 1) {
+    await logSecurityEvent('INTEGRITY_CHECK_PASSED', {
+      outcome: 'SUCCESS',
+      metadata: { mode: 'hash-only', detail: 'No signature in chain; hash verification only' },
+    });
+    return { valid: true, hashOnly: true };
   }
 
   // Verify signature chain

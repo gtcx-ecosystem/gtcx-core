@@ -17,7 +17,10 @@
     "dev": "tsup index.ts --format cjs,esm --dts --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "@gtcx/typescript-config": "workspace:*",

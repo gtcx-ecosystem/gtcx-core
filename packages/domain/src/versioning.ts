@@ -87,6 +87,7 @@ export function getUpcomingRemovals(version: string): DeprecationInfo[] {
  * Logs warning when method is called
  */
 export function deprecated(info: Omit<DeprecationInfo, 'feature'>) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     const feature = `${target.constructor.name}.${propertyKey}()`;
@@ -94,6 +95,7 @@ export function deprecated(info: Omit<DeprecationInfo, 'feature'>) {
     // Register deprecation
     DEPRECATIONS.push({ feature, ...info });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     descriptor.value = function (...args: any[]) {
       console.warn(
         `[DEPRECATED] ${feature} is deprecated since ${info.deprecatedIn} ` +

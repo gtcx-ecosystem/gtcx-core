@@ -50,12 +50,12 @@ export function parseDID(did: string): {
   identifier: string;
   fragment?: string;
 } | null {
-  const match = did.match(/^did:([^:]+):([^#]+)(#.*)?$/);
+  const match = did.match(/^did:([a-z0-9]+):([a-zA-Z0-9._:%-]+)(#[a-zA-Z0-9._:%-]*)?$/);
   if (!match) return null;
 
   return {
-    method: match[1],
-    identifier: match[2],
+    method: match[1]!,
+    identifier: match[2]!,
     fragment: match[3]?.substring(1),
   };
 }
@@ -74,6 +74,7 @@ export function isValidDID(did: string): boolean {
 export function createDIDDocument(identity: DigitalIdentity | EnhancedIdentity): DIDDocument {
   const did = createDID(identity);
 
+  // Only extract public key material - never include private keys
   const verificationMethods: VerificationMethod[] = [
     {
       id: `${did}#keys-1`,
@@ -83,17 +84,18 @@ export function createDIDDocument(identity: DigitalIdentity | EnhancedIdentity):
     },
   ];
 
-  // Add Secp256k1 key if enhanced identity
+  // Add Secp256k1 public key if enhanced identity
   if ('multiKeyPairs' in identity && identity.multiKeyPairs.secp256k1) {
+    const { publicKey } = identity.multiKeyPairs.secp256k1;
     verificationMethods.push({
       id: `${did}#keys-2`,
       type: 'EcdsaSecp256k1VerificationKey2019',
       controller: did,
-      publicKeyHex: identity.multiKeyPairs.secp256k1.publicKey,
+      publicKeyHex: publicKey,
     });
   }
 
-  return {
+  const document: DIDDocument = {
     '@context': [
       'https://www.w3.org/ns/did/v1',
       'https://w3id.org/security/suites/ed25519-2020/v1',
@@ -104,6 +106,14 @@ export function createDIDDocument(identity: DigitalIdentity | EnhancedIdentity):
     assertionMethod: verificationMethods.map((vm) => vm.id),
     created: new Date(identity.createdAt).toISOString(),
   };
+
+  // Defensive check: ensure no private key material leaked into the document
+  const serialized = JSON.stringify(document);
+  if (serialized.includes('privateKey') || serialized.includes('privateKeyRef')) {
+    throw new Error('DID document must not contain private key material');
+  }
+
+  return document;
 }
 
 /**

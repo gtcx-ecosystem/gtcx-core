@@ -51,6 +51,24 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(@types/node@22.19.8)
 
+  packages/api-client:
+    devDependencies:
+      '@gtcx/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript
+      '@vitest/coverage-v8':
+        specifier: ^2.1.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.19.8)
+
   packages/config/eslint:
     dependencies:
       eslint:
@@ -78,6 +96,24 @@ importers:
 
   packages/config/typescript: {}
 
+  packages/connectivity:
+    devDependencies:
+      '@gtcx/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript
+      '@vitest/coverage-v8':
+        specifier: ^2.1.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.19.8)
+
   packages/crypto:
     dependencies:
       '@gtcx/ai':
@@ -100,7 +136,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
       tsup:
-        specifier: ^8.0.0
+        specifier: ^8.0.1
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.7.0
@@ -121,6 +157,9 @@ importers:
         specifier: ^3.23.0
         version: 3.25.76
     devDependencies:
+      '@gtcx/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript
       '@types/node':
         specifier: ^20.0.0
         version: 20.19.31
@@ -128,14 +167,33 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(vitest@2.1.9(@types/node@20.19.31))
       tsup:
-        specifier: ^8.0.0
+        specifier: ^8.0.1
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
-        specifier: ^5.4.0
+        specifier: ^5.7.0
         version: 5.9.3
       vitest:
         specifier: ^2.1.0
         version: 2.1.9(@types/node@20.19.31)
+
+  packages/events:
+    dependencies:
+      '@gtcx/domain':
+        specifier: workspace:*
+        version: link:../domain
+    devDependencies:
+      '@vitest/coverage-v8':
+        specifier: ^2.1.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.19.8)
 
   packages/identity:
     dependencies:
@@ -153,10 +211,10 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
       tsup:
-        specifier: ^8.0.0
+        specifier: ^8.0.1
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
-        specifier: ^5.3.0
+        specifier: ^5.7.0
         version: 5.9.3
       vitest:
         specifier: ^2.1.0
@@ -227,7 +285,50 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
-        specifier: ^5.3.3
+        specifier: ^5.7.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.19.8)
+
+  packages/services:
+    dependencies:
+      '@gtcx/domain':
+        specifier: workspace:*
+        version: link:../domain
+    devDependencies:
+      '@gtcx/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.31
+      '@vitest/coverage-v8':
+        specifier: ^2.1.0
+        version: 2.1.9(vitest@2.1.9(@types/node@20.19.31))
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@20.19.31)
+
+  packages/sync:
+    devDependencies:
+      '@gtcx/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript
+      '@vitest/coverage-v8':
+        specifier: ^2.1.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.7.0
         version: 5.9.3
       vitest:
         specifier: ^2.1.0
@@ -242,7 +343,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
       tsup:
-        specifier: ^8.0.0
+        specifier: ^8.0.1
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.7.0
@@ -300,7 +401,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
-        specifier: ^5.3.0
+        specifier: ^5.7.0
         version: 5.9.3
       vitest:
         specifier: ^2.1.0

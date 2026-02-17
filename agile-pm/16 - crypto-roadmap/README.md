@@ -124,15 +124,20 @@ All cryptographic code in GTCX must satisfy the following criteria before merge.
 
 Each phase (1--6) has a dedicated epic file with detailed user stories, acceptance criteria, and story point estimates. The cross-epic backlog provides priority ranking and milestone gates.
 
-| Epic                       | File                                                       | Phase | Stories | Points  |
-| -------------------------- | ---------------------------------------------------------- | ----- | ------- | ------- |
-| KORA Verification Pipeline | [E01-kora-verification.md](E01-kora-verification.md)       | 1     | 20      | 55      |
-| AMANI Privacy Engine       | [E02-amani-privacy-engine.md](E02-amani-privacy-engine.md) | 2     | 22      | 58      |
-| Network Layer              | [E03-network-layer.md](E03-network-layer.md)               | 3     | 18      | 38      |
-| PANX Consensus             | [E04-panx-consensus.md](E04-panx-consensus.md)             | 4     | 18      | 42      |
-| ZK Proof System            | [E05-zkp-system.md](E05-zkp-system.md)                     | 5     | 17      | 53      |
-| Identity & Key Management  | [E06-identity-system.md](E06-identity-system.md)           | 6     | 15      | 29      |
-| **Totals**                 |                                                            |       | **110** | **275** |
+| Epic                       | File                                                       | Phase | Stories | Points  | Repo      |
+| -------------------------- | ---------------------------------------------------------- | ----- | ------- | ------- | --------- |
+| KORA Verification Pipeline | [E01-kora-verification.md](E01-kora-verification.md)       | 1     | 20      | 55      | sensei-ai |
+| AMANI Privacy Engine       | [E02-amani-privacy-engine.md](E02-amani-privacy-engine.md) | 2     | 22      | 58      | sensei-ai |
+| Network Layer              | [E03-network-layer.md](E03-network-layer.md)               | 3     | 18      | 38      | gtcx-core |
+| PANX Consensus             | [E04-panx-consensus.md](E04-panx-consensus.md)             | 4     | 18      | 42      | gtcx-core |
+| ZK Proof System            | [E05-zkp-system.md](E05-zkp-system.md)                     | 5     | 17      | 53      | gtcx-core |
+| Identity & Key Management  | [E06-identity-system.md](E06-identity-system.md)           | 6     | 15      | 29      | gtcx-core |
+| **Totals**                 |                                                            |       | **110** | **275** |           |
+
+> **Repo Ownership Note**: E01 (KORA) targets `sensei-ai/packages/sensei-rs/kora-core/` and
+> E02 (AMANI) targets the Sensei platform's privacy engine. These epics are co-located here
+> for roadmap continuity but their implementation lives in the `sensei-ai` repository, not
+> `gtcx-core`. E03-E06 correctly target gtcx-core Rust crates and TypeScript packages.
 
 ### Cross-Epic Artifacts
 

@@ -1,10 +1,10 @@
 /**
  * @gtcx/domain
- * 
+ *
  * Commodity-agnostic domain services for GTCX Protocol.
- * 
+ *
  * ## Architectural Principles - 10/10
- * 
+ *
  * | Principle | Implementation |
  * |-----------|----------------|
  * | P1 Package Structure | Clean src/ + internal/ separation |
@@ -19,7 +19,7 @@
  * | P10 API Stability | Versioning, deprecation markers, changelog |
  * | P11 Data Evolution | Schema versioning + migrations |
  * | P12 Observability | Events + metrics + AI logging |
- * 
+ *
  * @packageDocumentation
  */
 
@@ -59,7 +59,7 @@ export type {
   AssetCertificate,
   AssetForm,
   QualityGrade,
-  
+
   // Trading types
   Trader,
   TraderRole,
@@ -71,7 +71,7 @@ export type {
   TradingOpportunity,
   TradeRequest,
   TradeAnalytics,
-  
+
   // Compliance types
   ComplianceRecord,
   ComplianceStatus,
@@ -81,12 +81,17 @@ export type {
   RegulatoryFramework,
   RegulatoryRequirement,
   RegulatoryAuthority,
-  
+
   // Infrastructure types
   Location,
   CryptoProof,
   CryptographicProof,
-  
+
+  // Workflow types
+  WorkflowStep,
+  RegistrationProgress,
+  ValidationResult,
+
   // Service interfaces
   ICryptoService,
   ILocationService,
@@ -104,19 +109,19 @@ export {
   AssetRegistrationDataSchema,
   PartialRegistrationDataSchema,
   RegistrationConfigSchema,
-  
+
   // Trading schemas
   TradeRequestSchema,
   TradingConfigSchema,
   TradingOpportunityFilterSchema,
-  
+
   // Compliance schemas
   ComplianceConfigSchema,
   ComplianceReportOptionsSchema,
   ComplianceSeveritySchema,
   ComplianceStatusSchema,
   ComplianceCategorySchema,
-  
+
   // Primitive schemas
   LocationSchema,
   CoordinatesSchema,
@@ -128,8 +133,9 @@ export {
   IsoDateSchema,
   PositiveNumberSchema,
   PercentageSchema,
-  
+
   // Validation helpers
+  safeParse,
   validateRegistrationData,
   validatePartialRegistrationData,
   validateTradeRequest,
@@ -137,7 +143,7 @@ export {
   validateComplianceReportOptions,
   safeValidateRegistrationData,
   safeValidateTradeRequest,
-  
+
   // Inferred types
   type AssetRegistrationInput,
   type PartialRegistrationInput,
@@ -147,6 +153,8 @@ export {
   type RegistrationConfigInput,
   type TradingConfigInput,
   type ComplianceConfigInput,
+  type ValidatedRegistrationData,
+  type ValidatedComplianceReportOptions,
 } from './schemas';
 
 // ============================================================================
@@ -157,28 +165,28 @@ export {
   // Event types
   type DomainEventType,
   type DomainEvent,
-  
+
   // Event payloads - Registration
   type RegistrationStartedPayload,
   type RegistrationValidatedPayload,
   type RegistrationCompletedPayload,
   type RegistrationFailedPayload,
   type RegistrationProgressPayload,
-  
+
   // Event payloads - Trading
   type PriceCalculatedPayload,
   type OpportunityFoundPayload,
   type TradeInitiatedPayload,
   type TradeExecutedPayload,
   type TradeFailedPayload,
-  
+
   // Event payloads - Compliance
   type ComplianceCheckStartedPayload,
   type ComplianceCheckCompletedPayload,
   type ViolationDetectedPayload,
   type WarningIssuedPayload,
   type ReportGeneratedPayload,
-  
+
   // Event infrastructure
   type IDomainEventEmitter,
   DomainEventFactory,
@@ -196,11 +204,11 @@ export {
   type OperationStatus,
   type OperationLogEntry,
   type IOperationLogger,
-  
+
   // Implementations
   InMemoryOperationLogger,
   nullOperationLogger,
-  
+
   // Helpers
   detectAnomalies,
   suggestNextOperations,
@@ -218,7 +226,7 @@ export {
   type AIAnomaly,
   type IAIProvider,
   type AIServiceHooks,
-  
+
   // Implementations
   nullAIProvider,
   defaultAIHooks,
@@ -236,10 +244,10 @@ export {
   type HistogramMetric,
   type SummaryMetric,
   type IMetricsCollector,
-  
+
   // Constants
   METRIC_NAMES,
-  
+
   // Implementations
   InMemoryMetricsCollector,
   nullMetricsCollector,
@@ -256,14 +264,14 @@ export {
   type EntityType,
   type VersionedEntity,
   type Migration,
-  
+
   // Constants
   SCHEMA_VERSIONS,
-  
+
   // Classes
   SchemaMigrator,
   defaultMigrator,
-  
+
   // Helpers
   isVersionedEntity,
   ensureVersioned,
@@ -282,28 +290,15 @@ export {
   type ConflictStrategy,
   type ConflictResolution,
   type IOfflineQueueStorage,
-  
+
   // Classes
   OfflineQueue,
   InMemoryQueueStorage,
 } from './internal/offline-queue';
 
 // ============================================================================
-// SERVICES
+// SERVICES (moved to @gtcx/services)
 // ============================================================================
-
-export {
-  AssetLotRegistrationService,
-  type RegistrationConfig,
-} from './registration';
-
-export {
-  TradingService,
-  type TradingConfig,
-} from './trading';
-
-export {
-  UnifiedComplianceService,
-  type ComplianceConfig,
-  type ComplianceCheckResult,
-} from './compliance';
+// AssetLotRegistrationService, TradingService, and UnifiedComplianceService
+// have been extracted to the @gtcx/services package for clean separation
+// of foundational types from application-level business logic.

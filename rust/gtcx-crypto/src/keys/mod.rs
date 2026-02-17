@@ -25,7 +25,6 @@ use tracing::instrument;
 
 use crate::hashing::blake3_derive;
 use crate::signing::ed25519::{PrivateKey, PublicKey};
-use crate::Result;
 
 /// A key pair consisting of a private and public key.
 #[derive(Debug)]

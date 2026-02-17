@@ -20,14 +20,25 @@ export interface VerificationResult {
 }
 
 /**
+ * Securely wipe a buffer by filling it with zeros.
+ */
+export function secureWipe(buffer: Uint8Array): void {
+  buffer.fill(0);
+}
+
+/**
  * Sign a message with Ed25519
  */
 export function sign(message: string | Uint8Array, privateKeyHex: string): string {
   const privateKey = hexToBytes(privateKeyHex);
   const messageBytes = typeof message === 'string' ? new TextEncoder().encode(message) : message;
 
-  const signature = ed25519.sign(messageBytes, privateKey);
-  return bytesToHex(signature);
+  try {
+    const signature = ed25519.sign(messageBytes, privateKey);
+    return bytesToHex(signature);
+  } finally {
+    secureWipe(privateKey);
+  }
 }
 
 /**
@@ -37,8 +48,12 @@ export function signHash(hash: string, privateKeyHex: string): string {
   const privateKey = hexToBytes(privateKeyHex);
   const hashBytes = hexToBytes(hash);
 
-  const signature = ed25519.sign(hashBytes, privateKey);
-  return bytesToHex(signature);
+  try {
+    const signature = ed25519.sign(hashBytes, privateKey);
+    return bytesToHex(signature);
+  } finally {
+    secureWipe(privateKey);
+  }
 }
 
 /**

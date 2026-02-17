@@ -1,11 +1,13 @@
 /**
  * AI Operation Logging
- * 
+ *
  * Structured logging for AI-assisted operations and analysis.
  * Implements P5 (AI-Native) principle.
- * 
+ *
  * @package @gtcx/domain
  */
+
+import { randomUUID } from 'node:crypto';
 
 // ============================================================================
 // OPERATION TYPES
@@ -88,7 +90,7 @@ export interface IOperationLogger {
       tags?: string[];
     }
   ): string;
-  
+
   /**
    * Mark operation as successful
    */
@@ -97,31 +99,27 @@ export interface IOperationLogger {
     output?: Record<string, unknown>,
     aiContext?: OperationLogEntry['aiContext']
   ): void;
-  
+
   /**
    * Mark operation as failed
    */
-  fail(
-    operationId: string,
-    error: Error | string,
-    errorCode?: string
-  ): void;
-  
+  fail(operationId: string, error: Error | string, errorCode?: string): void;
+
   /**
    * Mark operation as skipped
    */
   skip(operationId: string, reason: string): void;
-  
+
   /**
    * Add tags to an operation
    */
   addTags(operationId: string, tags: string[]): void;
-  
+
   /**
    * Get operation entry
    */
   get(operationId: string): OperationLogEntry | undefined;
-  
+
   /**
    * Get all operations for a correlation ID
    */
@@ -135,11 +133,11 @@ export interface IOperationLogger {
 export class InMemoryOperationLogger implements IOperationLogger {
   private operations: Map<string, OperationLogEntry> = new Map();
   private maxEntries: number;
-  
+
   constructor(maxEntries = 1000) {
     this.maxEntries = maxEntries;
   }
-  
+
   start(
     type: OperationType,
     input?: Record<string, unknown>,
@@ -150,7 +148,7 @@ export class InMemoryOperationLogger implements IOperationLogger {
     }
   ): string {
     const operationId = this.generateId();
-    
+
     const entry: OperationLogEntry = {
       operationId,
       type,
@@ -161,13 +159,13 @@ export class InMemoryOperationLogger implements IOperationLogger {
       correlationId: options?.correlationId,
       tags: options?.tags,
     };
-    
+
     this.operations.set(operationId, entry);
     this.pruneIfNeeded();
-    
+
     return operationId;
   }
-  
+
   success(
     operationId: string,
     output?: Record<string, unknown>,
@@ -175,18 +173,18 @@ export class InMemoryOperationLogger implements IOperationLogger {
   ): void {
     const entry = this.operations.get(operationId);
     if (!entry) return;
-    
+
     entry.status = 'success';
     entry.endTime = Date.now();
     entry.duration = entry.endTime - entry.startTime;
     entry.output = output;
     entry.aiContext = aiContext;
   }
-  
+
   fail(operationId: string, error: Error | string, errorCode?: string): void {
     const entry = this.operations.get(operationId);
     if (!entry) return;
-    
+
     entry.status = 'failed';
     entry.endTime = Date.now();
     entry.duration = entry.endTime - entry.startTime;
@@ -196,28 +194,28 @@ export class InMemoryOperationLogger implements IOperationLogger {
       stack: error instanceof Error ? error.stack : undefined,
     };
   }
-  
+
   skip(operationId: string, reason: string): void {
     const entry = this.operations.get(operationId);
     if (!entry) return;
-    
+
     entry.status = 'skipped';
     entry.endTime = Date.now();
     entry.duration = entry.endTime - entry.startTime;
     entry.output = { skipReason: reason };
   }
-  
+
   addTags(operationId: string, tags: string[]): void {
     const entry = this.operations.get(operationId);
     if (!entry) return;
-    
+
     entry.tags = [...(entry.tags || []), ...tags];
   }
-  
+
   get(operationId: string): OperationLogEntry | undefined {
     return this.operations.get(operationId);
   }
-  
+
   getByCorrelationId(correlationId: string): OperationLogEntry[] {
     const results: OperationLogEntry[] = [];
     this.operations.forEach((entry) => {
@@ -227,28 +225,28 @@ export class InMemoryOperationLogger implements IOperationLogger {
     });
     return results.sort((a, b) => a.startTime - b.startTime);
   }
-  
+
   /**
    * Get all operations (for testing/debugging)
    */
   getAll(): OperationLogEntry[] {
     return Array.from(this.operations.values());
   }
-  
+
   /**
    * Get operations by type
    */
   getByType(type: OperationType): OperationLogEntry[] {
     return Array.from(this.operations.values()).filter((e) => e.type === type);
   }
-  
+
   /**
    * Get failed operations
    */
   getFailed(): OperationLogEntry[] {
     return Array.from(this.operations.values()).filter((e) => e.status === 'failed');
   }
-  
+
   /**
    * Get operations with anomalies
    */
@@ -257,52 +255,51 @@ export class InMemoryOperationLogger implements IOperationLogger {
       (e) => e.aiContext?.anomalies && e.aiContext.anomalies.length > 0
     );
   }
-  
+
   /**
    * Clear all operations
    */
   clear(): void {
     this.operations.clear();
   }
-  
+
   /**
    * Generate unique operation ID
    */
   private generateId(): string {
-    return `op_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    return `op_${randomUUID()}`;
   }
-  
+
   /**
    * Sanitize input to remove PII
    */
   private sanitizeInput(input: Record<string, unknown>): Record<string, unknown> {
     const sanitized: Record<string, unknown> = {};
     const piiKeys = ['name', 'email', 'phone', 'address', 'ssn', 'passport', 'license'];
-    
+
     for (const [key, value] of Object.entries(input)) {
       if (piiKeys.some((pii) => key.toLowerCase().includes(pii))) {
         sanitized[key] = '[REDACTED]';
       } else if (typeof value === 'object' && value !== null) {
-        sanitized[key] = Array.isArray(value)
-          ? `[Array(${value.length})]`
-          : '[Object]';
+        sanitized[key] = Array.isArray(value) ? `[Array(${value.length})]` : '[Object]';
       } else {
         sanitized[key] = value;
       }
     }
-    
+
     return sanitized;
   }
-  
+
   /**
    * Remove oldest entries if over limit
    */
   private pruneIfNeeded(): void {
     if (this.operations.size <= this.maxEntries) return;
-    
-    const entries = Array.from(this.operations.entries())
-      .sort((a, b) => a[1].startTime - b[1].startTime);
-    
+
+    const entries = Array.from(this.operations.entries()).sort(
+      (a, b) => a[1].startTime - b[1].startTime
+    );
+
     const toRemove = entries.slice(0, entries.length - this.maxEntries);
     toRemove.forEach(([id]) => this.operations.delete(id));
   }
@@ -337,17 +334,17 @@ export function detectAnomalies(
   } = {}
 ): string[] {
   const anomalies: string[] = [];
-  
+
   const { maxDuration = 5000, maxInputSize = 100 } = thresholds;
-  
+
   if (entry.duration && entry.duration > maxDuration) {
     anomalies.push(`Slow operation: ${entry.duration}ms > ${maxDuration}ms threshold`);
   }
-  
+
   if (entry.input && Object.keys(entry.input).length > maxInputSize) {
     anomalies.push(`Large input: ${Object.keys(entry.input).length} keys`);
   }
-  
+
   return anomalies;
 }
 
@@ -366,6 +363,6 @@ export function suggestNextOperations(type: OperationType): OperationType[] {
     'compliance.check_transaction': ['compliance.generate_report'],
     'compliance.generate_report': [],
   };
-  
+
   return suggestions[type] || [];
 }

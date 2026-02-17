@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
 import {
   sleep,
   generateId,
@@ -282,9 +283,7 @@ describe('retry', () => {
     vi.useRealTimers();
     const fn = vi.fn().mockImplementation(() => Promise.reject(new Error('always fails')));
 
-    await expect(
-      retry(fn, { maxAttempts: 3, initialDelay: 1 }),
-    ).rejects.toThrow('always fails');
+    await expect(retry(fn, { maxAttempts: 3, initialDelay: 1 })).rejects.toThrow('always fails');
     expect(fn).toHaveBeenCalledTimes(3);
     vi.useFakeTimers();
   });

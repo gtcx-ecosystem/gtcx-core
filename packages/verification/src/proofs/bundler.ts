@@ -3,7 +3,10 @@
 // Combines multiple verification elements into exportable bundles
 // ============================================================================
 
+import { randomUUID } from 'node:crypto';
+
 import { hash256 } from '@gtcx/crypto';
+
 import type {
   ProofBundle,
   Certificate,
@@ -18,9 +21,7 @@ import type {
  * Generate unique proof bundle ID
  */
 export function generateProofBundleId(): string {
-  const timestamp = Date.now().toString(36);
-  const random = Math.random().toString(36).substring(2, 11);
-  return `proof_${timestamp}_${random}`;
+  return `proof_${randomUUID()}`;
 }
 
 /**
@@ -41,9 +42,9 @@ export function createLocationProof(input: LocationProofInput): LocationProofRef
     coordinates: input.coordinates,
     timestamp: input.coordinates.timestamp,
   });
-  
+
   return {
-    id: `loc_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+    id: `loc_${randomUUID()}`,
     coordinates: input.coordinates,
     hash: hash256(dataToHash),
   };
@@ -63,7 +64,7 @@ export interface PhotoProofInput {
  */
 export function createPhotoProof(input: PhotoProofInput): PhotoProofRef {
   return {
-    id: `photo_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+    id: `photo_${randomUUID()}`,
     uri: input.uri,
     hash: input.fileHash,
     timestamp: input.timestamp,
@@ -126,19 +127,19 @@ export function verifyProofBundleStructure(bundle: ProofBundle): {
   errors: string[];
 } {
   const errors: string[] = [];
-  
+
   if (!bundle.id) {
     errors.push('Missing bundle ID');
   }
-  
+
   if (!bundle.type) {
     errors.push('Missing bundle type');
   }
-  
+
   if (!bundle.timestamp) {
     errors.push('Missing timestamp');
   }
-  
+
   if (!bundle.proofs?.cryptographicProof) {
     errors.push('Missing cryptographic proof');
   } else {
@@ -148,20 +149,23 @@ export function verifyProofBundleStructure(bundle: ProofBundle): {
     if (!cp.signature) errors.push('Missing signature in cryptographic proof');
     if (!cp.publicKey) errors.push('Missing publicKey in cryptographic proof');
   }
-  
+
   // Type-specific validation
   if (bundle.type === 'location' && !bundle.proofs.locationProof) {
     errors.push('Location bundle requires locationProof');
   }
-  
-  if (bundle.type === 'photo' && (!bundle.proofs.photoProofs || bundle.proofs.photoProofs.length === 0)) {
+
+  if (
+    bundle.type === 'photo' &&
+    (!bundle.proofs.photoProofs || bundle.proofs.photoProofs.length === 0)
+  ) {
     errors.push('Photo bundle requires at least one photoProof');
   }
-  
+
   if (bundle.type === 'certificate' && !bundle.certificate) {
     errors.push('Certificate bundle requires certificate');
   }
-  
+
   return { valid: errors.length === 0, errors };
 }
 
@@ -195,15 +199,15 @@ export function hashProofBundle(bundle: ProofBundle): string {
  */
 export function extractProofHashes(bundle: ProofBundle): string[] {
   const hashes: string[] = [];
-  
+
   if (bundle.proofs.cryptographicProof?.dataHash) {
     hashes.push(bundle.proofs.cryptographicProof.dataHash);
   }
-  
+
   if (bundle.proofs.locationProof?.hash) {
     hashes.push(bundle.proofs.locationProof.hash);
   }
-  
+
   if (bundle.proofs.photoProofs) {
     for (const photo of bundle.proofs.photoProofs) {
       if (photo.hash) {
@@ -211,7 +215,7 @@ export function extractProofHashes(bundle: ProofBundle): string[] {
       }
     }
   }
-  
+
   return hashes;
 }
 

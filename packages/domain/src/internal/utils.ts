@@ -1,11 +1,13 @@
 /**
  * Internal Utilities
- * 
+ *
  * Private utilities for @gtcx/domain services.
  * NOT part of public API - do not import directly.
- * 
+ *
  * @internal
  */
+
+import crypto from 'crypto';
 
 // ============================================================================
 // ID GENERATION
@@ -16,9 +18,8 @@
  * @internal
  */
 export function generateId(prefix: string): string {
-  const timestamp = Date.now().toString(36);
-  const random = Math.random().toString(36).substring(2, 9);
-  return `${prefix}_${timestamp}_${random}`;
+  const uuid = crypto.randomUUID();
+  return `${prefix}_${uuid}`;
 }
 
 /**
@@ -33,10 +34,7 @@ export function generateCorrelationId(): string {
  * Generate idempotency key
  * @internal
  */
-export function generateIdempotencyKey(
-  operation: string,
-  ...params: string[]
-): string {
+export function generateIdempotencyKey(operation: string, ...params: string[]): string {
   const hash = simpleHash([operation, ...params].join(':'));
   return `idem_${hash}_${Date.now()}`;
 }
@@ -50,13 +48,7 @@ export function generateIdempotencyKey(
  * @internal
  */
 export function simpleHash(str: string): string {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return Math.abs(hash).toString(36);
+  return crypto.createHash('sha256').update(str).digest('hex');
 }
 
 // ============================================================================
@@ -65,31 +57,72 @@ export function simpleHash(str: string): string {
 
 const DANGEROUS_KEYS = ['__proto__', 'constructor', 'prototype'];
 const PII_PATTERNS = [
-  /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i, // Email
-  /\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/, // Phone
-  /\b\d{3}[-]?\d{2}[-]?\d{4}\b/, // SSN
-  /\b\d{16}\b/, // Credit card (basic)
+  /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, // Email
+  /\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g, // Phone
+  /\b\d{3}[-]?\d{2}[-]?\d{4}\b/g, // SSN
+  /\b(?:\d[ -]*?){13,19}\b/g, // Credit card (13-19 digits with optional separators)
+  /\b(?:\d{1,3}\.){3}\d{1,3}\b/g, // IPv4 address
 ];
 
 /**
  * Sanitize object keys to prevent prototype pollution
  * @internal
  */
-export function sanitizeKeys<T extends Record<string, unknown>>(obj: T): T {
+export function sanitizeKeys<T extends Record<string, unknown>>(
+  obj: T,
+  maxDepth = 20,
+  _seen?: WeakSet<object>,
+  _currentDepth = 0
+): T {
+  const seen = _seen ?? new WeakSet<object>();
+
+  if (_currentDepth >= maxDepth) {
+    return {} as T;
+  }
+
+  if (seen.has(obj)) {
+    return {} as T; // Circular reference detected
+  }
+  seen.add(obj);
+
   const sanitized = {} as T;
-  
+
   for (const [key, value] of Object.entries(obj)) {
     if (DANGEROUS_KEYS.includes(key)) {
       continue; // Skip dangerous keys
     }
-    
-    if (value && typeof value === 'object' && !Array.isArray(value)) {
-      sanitized[key as keyof T] = sanitizeKeys(value as Record<string, unknown>) as T[keyof T];
+
+    if (value && typeof value === 'object') {
+      if (Array.isArray(value)) {
+        sanitized[key as keyof T] = value.map((item) => {
+          if (item && typeof item === 'object' && !Array.isArray(item)) {
+            return sanitizeKeys(item as Record<string, unknown>, maxDepth, seen, _currentDepth + 1);
+          }
+          if (Array.isArray(item)) {
+            // Wrap array items in an object to recurse, then extract
+            const wrapper = sanitizeKeys(
+              { _arr: item } as Record<string, unknown>,
+              maxDepth,
+              seen,
+              _currentDepth + 1
+            );
+            return (wrapper as Record<string, unknown>)['_arr'];
+          }
+          return item;
+        }) as T[keyof T];
+      } else {
+        sanitized[key as keyof T] = sanitizeKeys(
+          value as Record<string, unknown>,
+          maxDepth,
+          seen,
+          _currentDepth + 1
+        ) as T[keyof T];
+      }
     } else {
       sanitized[key as keyof T] = value as T[keyof T];
     }
   }
-  
+
   return sanitized;
 }
 
@@ -100,6 +133,7 @@ export function sanitizeKeys<T extends Record<string, unknown>>(obj: T): T {
 export function redactPII(str: string): string {
   let result = str;
   for (const pattern of PII_PATTERNS) {
+    pattern.lastIndex = 0; // Reset state for global regexes
     result = result.replace(pattern, '[REDACTED]');
   }
   return result;
@@ -117,37 +151,58 @@ export function sanitizeForLogging(
   if (currentDepth >= maxDepth) {
     return { _truncated: true };
   }
-  
+
   const result: Record<string, unknown> = {};
-  const piiKeys = ['name', 'email', 'phone', 'address', 'ssn', 'passport', 'license', 'password', 'secret', 'token'];
-  
+  const piiKeys = [
+    'name',
+    'email',
+    'phone',
+    'address',
+    'ssn',
+    'passport',
+    'license',
+    'password',
+    'secret',
+    'token',
+  ];
+
   for (const [key, value] of Object.entries(obj)) {
     const lowerKey = key.toLowerCase();
-    
+
     // Redact PII keys
-    if (piiKeys.some(pii => lowerKey.includes(pii))) {
+    if (piiKeys.some((pii) => lowerKey.includes(pii))) {
       result[key] = '[REDACTED]';
       continue;
     }
-    
+
     // Handle different value types
     if (value === null || value === undefined) {
       result[key] = value;
     } else if (typeof value === 'string') {
-      result[key] = value.length > 200 ? `${value.substring(0, 200)}...` : redactPII(value);
+      const redacted = redactPII(value);
+      result[key] = redacted.length > 200 ? `${redacted.substring(0, 200)}...` : redacted;
     } else if (typeof value === 'number' || typeof value === 'boolean') {
       result[key] = value;
     } else if (Array.isArray(value)) {
-      result[key] = value.length > 10 
-        ? `[Array(${value.length})]` 
-        : value.map(v => typeof v === 'object' ? sanitizeForLogging(v as Record<string, unknown>, maxDepth, currentDepth + 1) : v);
+      result[key] =
+        value.length > 10
+          ? `[Array(${value.length})]`
+          : value.map((v) =>
+              typeof v === 'object'
+                ? sanitizeForLogging(v as Record<string, unknown>, maxDepth, currentDepth + 1)
+                : v
+            );
     } else if (typeof value === 'object') {
-      result[key] = sanitizeForLogging(value as Record<string, unknown>, maxDepth, currentDepth + 1);
+      result[key] = sanitizeForLogging(
+        value as Record<string, unknown>,
+        maxDepth,
+        currentDepth + 1
+      );
     } else {
       result[key] = String(value);
     }
   }
-  
+
   return result;
 }
 
@@ -168,32 +223,68 @@ export class RateLimiter {
   private limits: Map<string, RateLimitEntry> = new Map();
   private maxRequests: number;
   private windowMs: number;
-  
-  constructor(maxRequests = 100, windowMs = 60000) {
+  private callsSinceCleanup = 0;
+  private cleanupEveryNCalls: number;
+  private cleanupTimer?: ReturnType<typeof setInterval>;
+
+  constructor(
+    maxRequests = 100,
+    windowMs = 60000,
+    options?: { cleanupIntervalMs?: number; cleanupEveryNCalls?: number }
+  ) {
     this.maxRequests = maxRequests;
     this.windowMs = windowMs;
+    this.cleanupEveryNCalls = options?.cleanupEveryNCalls ?? 100;
+
+    if (options?.cleanupIntervalMs) {
+      this.cleanupTimer = setInterval(() => this.cleanup(), options.cleanupIntervalMs);
+      // Allow the process to exit without waiting for the timer
+      if (
+        this.cleanupTimer &&
+        typeof this.cleanupTimer === 'object' &&
+        'unref' in this.cleanupTimer
+      ) {
+        this.cleanupTimer.unref();
+      }
+    }
   }
-  
+
+  /**
+   * Stop the periodic cleanup timer
+   */
+  destroy(): void {
+    if (this.cleanupTimer) {
+      clearInterval(this.cleanupTimer);
+      this.cleanupTimer = undefined;
+    }
+  }
+
   /**
    * Check if request is allowed
    */
   isAllowed(key: string): boolean {
+    this.callsSinceCleanup++;
+    if (this.callsSinceCleanup >= this.cleanupEveryNCalls) {
+      this.cleanup();
+      this.callsSinceCleanup = 0;
+    }
+
     const now = Date.now();
     const entry = this.limits.get(key);
-    
+
     if (!entry || now >= entry.resetAt) {
       this.limits.set(key, { count: 1, resetAt: now + this.windowMs });
       return true;
     }
-    
+
     if (entry.count >= this.maxRequests) {
       return false;
     }
-    
+
     entry.count++;
     return true;
   }
-  
+
   /**
    * Get remaining requests
    */
@@ -204,7 +295,7 @@ export class RateLimiter {
     }
     return Math.max(0, this.maxRequests - entry.count);
   }
-  
+
   /**
    * Get reset time
    */
@@ -212,7 +303,7 @@ export class RateLimiter {
     const entry = this.limits.get(key);
     return entry?.resetAt ?? Date.now();
   }
-  
+
   /**
    * Clear expired entries
    */
@@ -264,7 +355,7 @@ export function calculateBackoffDelay(
  * @internal
  */
 export function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
@@ -277,20 +368,20 @@ export async function withRetry<T>(
 ): Promise<T> {
   const opts = { ...DEFAULT_RETRY_OPTIONS, ...options };
   let lastError: Error | undefined;
-  
+
   for (let attempt = 1; attempt <= opts.maxAttempts; attempt++) {
     try {
       return await operation();
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
-      
+
       if (attempt < opts.maxAttempts) {
         const delay = calculateBackoffDelay(attempt, opts);
         await sleep(delay);
       }
     }
   }
-  
+
   throw lastError;
 }
 

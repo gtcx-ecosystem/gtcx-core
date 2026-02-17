@@ -116,7 +116,7 @@ export function checkProofStructure(proof: IntegrityProof): TamperCheckResult {
   }
 
   // Check chain connects to root
-  const lastSigner = proof.signatureChain[proof.signatureChain.length - 1];
+  const lastSigner = proof.signatureChain[proof.signatureChain.length - 1]!;
   if (lastSigner.signerKeyId !== proof.trustedRootKeyId) {
     return {
       valid: false,
@@ -128,8 +128,8 @@ export function checkProofStructure(proof: IntegrityProof): TamperCheckResult {
 
   // Check chain continuity (each hash should be of previous signature)
   for (let i = 1; i < proof.signatureChain.length; i++) {
-    const current = proof.signatureChain[i];
-    const previous = proof.signatureChain[i - 1];
+    const current = proof.signatureChain[i]!;
+    const previous = proof.signatureChain[i - 1]!;
     // The hash in current should reference the previous signature
     // This is structural check only - cryptographic check needs @gtcx/crypto
     if (!current.hash || !previous.signature) {
@@ -153,16 +153,22 @@ export function checkProofStructure(proof: IntegrityProof): TamperCheckResult {
 // =============================================================================
 
 /**
- * Constant-time string comparison to prevent timing attacks
+ * Constant-time string comparison to prevent timing attacks.
+ * When lengths differ, pads the shorter string and still performs
+ * a full constant-time comparison to avoid leaking length information.
  */
 export function secureCompare(a: string, b: string): boolean {
-  if (a.length !== b.length) {
-    return false;
+  const maxLen = Math.max(a.length, b.length);
+  // If either is empty and lengths differ, we still need constant-time work
+  if (maxLen === 0) {
+    return true;
   }
 
-  let result = 0;
-  for (let i = 0; i < a.length; i++) {
-    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  let result = a.length ^ b.length; // Non-zero if lengths differ
+  for (let i = 0; i < maxLen; i++) {
+    const charA = i < a.length ? a.charCodeAt(i) : 0;
+    const charB = i < b.length ? b.charCodeAt(i) : 0;
+    result |= charA ^ charB;
   }
   return result === 0;
 }

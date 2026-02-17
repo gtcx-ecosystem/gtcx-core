@@ -26,6 +26,7 @@ export {
   createSignedMessage,
   verifySignedMessage,
   batchVerify,
+  secureWipe,
   type SignatureResult,
   type VerificationResult,
 } from './signing';
@@ -41,6 +42,7 @@ export {
   verifyCommitment,
   generateSalt,
   combineHashes,
+  constantTimeEqual,
   type HashAlgorithm,
 } from './hashing';
 

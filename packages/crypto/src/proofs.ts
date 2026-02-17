@@ -3,7 +3,7 @@
 // Merkle trees and inclusion proofs
 // ============================================================================
 
-import { hash256, combineHashes } from './hashing';
+import { hash256, combineHashes, constantTimeEqual } from './hashing';
 
 export interface MerkleProof {
   root: string;
@@ -30,15 +30,15 @@ export function buildMerkleTree(items: string[]): MerkleTree {
   }
 
   // Hash all items to create leaves
-  const leaves = items.map(item => hash256(item));
-  
+  const leaves = items.map((item) => hash256(item));
+
   const layers: string[][] = [leaves];
   let currentLayer = leaves;
 
   // Build tree layers bottom-up
   while (currentLayer.length > 1) {
     const nextLayer: string[] = [];
-    
+
     for (let i = 0; i < currentLayer.length; i += 2) {
       const left = currentLayer[i];
       const right = currentLayer[i + 1];
@@ -47,7 +47,7 @@ export function buildMerkleTree(items: string[]): MerkleTree {
         nextLayer.push(combineHashes(left, right ?? left));
       }
     }
-    
+
     layers.push(nextLayer);
     currentLayer = nextLayer;
   }
@@ -73,7 +73,7 @@ export function generateMerkleProof(tree: MerkleTree, leafIndex: number): Merkle
   for (let i = 0; i < tree.layers.length - 1; i++) {
     const layer = tree.layers[i];
     if (!layer) continue;
-    
+
     const isRightNode = currentIndex % 2 === 1;
     const siblingIndex = isRightNode ? currentIndex - 1 : currentIndex + 1;
     const siblingHash = layer[siblingIndex];
@@ -115,40 +115,34 @@ export function verifyMerkleProof(proof: MerkleProof): boolean {
     }
   }
 
-  return currentHash === proof.root;
+  return constantTimeEqual(currentHash, proof.root);
 }
 
 /**
  * Create an inclusion proof for specific data
  */
-export function createInclusionProof(
-  data: string,
-  allData: string[]
-): MerkleProof | null {
+export function createInclusionProof(data: string, allData: string[]): MerkleProof | null {
   const tree = buildMerkleTree(allData);
   const dataHash = hash256(data);
   const leafIndex = tree.leaves.indexOf(dataHash);
-  
+
   if (leafIndex === -1) {
     return null;
   }
-  
+
   return generateMerkleProof(tree, leafIndex);
 }
 
 /**
  * Verify data is included in a set with given root
  */
-export function verifyInclusion(
-  data: string,
-  proof: MerkleProof
-): boolean {
+export function verifyInclusion(data: string, proof: MerkleProof): boolean {
   const dataHash = hash256(data);
-  
-  if (dataHash !== proof.leaf) {
+
+  if (!constantTimeEqual(dataHash, proof.leaf)) {
     return false;
   }
-  
+
   return verifyMerkleProof(proof);
 }
 

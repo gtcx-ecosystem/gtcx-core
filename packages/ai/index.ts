@@ -52,8 +52,8 @@ export function traced<T extends (...args: any[]) => any>(
  * 1. withTrace(fn, name, options) - wraps fn
  * 2. withTrace(fn) - executes fn and returns result
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function withTrace<T>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fn: (() => T) | ((...args: any[]) => any),
   _operationName?: string,
   _options?: TracedOptions

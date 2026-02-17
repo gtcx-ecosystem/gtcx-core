@@ -125,10 +125,22 @@ export interface StorageBackend {
  * Abstract secure storage class
  * Subclass and implement platform-specific crypto and storage
  */
+/**
+ * Key used to persist lockout state in the backend (stored unencrypted).
+ * This ensures brute-force counters survive process restarts.
+ */
+const LOCKOUT_STATE_KEY = 'gtcx_secure___lockout_state';
+
+interface LockoutState {
+  failedAttempts: number;
+  lastFailedAt: string | null;
+}
+
 export abstract class SecureStorageBase {
   protected config: OfflineSecurityConfig;
   protected state: SecureStorageState;
   protected encryptionKey: Uint8Array | null = null;
+  private lockoutStateLoaded = false;
 
   constructor(config: Partial<OfflineSecurityConfig> = {}) {
     this.config = { ...DEFAULT_OFFLINE_CONFIG, ...config };
@@ -139,13 +151,40 @@ export abstract class SecureStorageBase {
   }
 
   /**
+   * Load persisted lockout state from backend.
+   * Called automatically before unlock checks.
+   */
+  private async loadLockoutState(): Promise<void> {
+    if (this.lockoutStateLoaded) return;
+    try {
+      const raw = await this.getStorage().getItem(LOCKOUT_STATE_KEY);
+      if (raw) {
+        const parsed: LockoutState = JSON.parse(raw);
+        this.state.failedAttempts = parsed.failedAttempts ?? 0;
+      }
+    } catch {
+      // If lockout state is corrupted, start fresh
+      this.state.failedAttempts = 0;
+    }
+    this.lockoutStateLoaded = true;
+  }
+
+  /**
+   * Persist lockout state to backend (unencrypted so it works when locked).
+   */
+  private async persistLockoutState(): Promise<void> {
+    const lockoutState: LockoutState = {
+      failedAttempts: this.state.failedAttempts,
+      lastFailedAt: this.state.failedAttempts > 0 ? new Date().toISOString() : null,
+    };
+    await this.getStorage().setItem(LOCKOUT_STATE_KEY, JSON.stringify(lockoutState));
+  }
+
+  /**
    * Derive encryption key from user secret
    * MUST be implemented by subclass using @gtcx/crypto
    */
-  protected abstract deriveKey(
-    secret: string,
-    salt: Uint8Array
-  ): Promise<Uint8Array>;
+  protected abstract deriveKey(secret: string, salt: Uint8Array): Promise<Uint8Array>;
 
   /**
    * Encrypt data with AES-256-GCM
@@ -181,6 +220,9 @@ export abstract class SecureStorageBase {
    * Unlock storage with user secret (PIN, password, biometric key)
    */
   async unlock(secret: string): Promise<UnlockResult> {
+    // Load persisted lockout state before checking
+    await this.loadLockoutState();
+
     // Check lockout
     if (this.isLockedOut()) {
       return {
@@ -201,8 +243,12 @@ export abstract class SecureStorageBase {
       const verified = await this.verifyKey();
       if (!verified) {
         this.state.isLocked = true;
+        // Zero key buffer before discarding
+        if (this.encryptionKey) {
+          this.encryptionKey.fill(0);
+        }
         this.encryptionKey = null;
-        this.recordFailedAttempt();
+        await this.recordFailedAttempt();
         return {
           success: false,
           error: 'INVALID_SECRET',
@@ -210,15 +256,20 @@ export abstract class SecureStorageBase {
         };
       }
 
-      // Success
+      // Success - reset attempts and persist
       this.state.failedAttempts = 0;
+      await this.persistLockoutState();
       this.state.lastUnlockedAt = new Date();
 
       return { success: true };
     } catch (error) {
       this.state.isLocked = true;
+      // Zero key buffer before discarding
+      if (this.encryptionKey) {
+        this.encryptionKey.fill(0);
+      }
       this.encryptionKey = null;
-      this.recordFailedAttempt();
+      await this.recordFailedAttempt();
       return {
         success: false,
         error: 'INVALID_SECRET',
@@ -246,10 +297,7 @@ export abstract class SecureStorageBase {
     this.ensureUnlocked();
 
     const plaintext = new TextEncoder().encode(JSON.stringify(data));
-    const { ciphertext, iv, tag } = await this.encrypt(
-      plaintext,
-      this.encryptionKey!
-    );
+    const { ciphertext, iv, tag } = await this.encrypt(plaintext, this.encryptionKey!);
 
     const now = new Date();
     const item: EncryptedItem = {
@@ -264,10 +312,7 @@ export abstract class SecureStorageBase {
       version: 1,
     };
 
-    await this.getStorage().setItem(
-      this.prefixKey(key),
-      JSON.stringify(item)
-    );
+    await this.getStorage().setItem(this.prefixKey(key), JSON.stringify(item));
   }
 
   /**
@@ -307,12 +352,18 @@ export abstract class SecureStorageBase {
   }
 
   /**
-   * Secure wipe - delete all data
+   * Secure wipe - delete all data.
+   * After wipe, unlock() will refuse to accept new secrets.
+   * Use reinitialize() to set up a new secret after a wipe.
    */
   async wipe(): Promise<void> {
     await this.getStorage().clear();
     this.lock();
     this.state.failedAttempts = 0;
+    // Preserve initialized flag so unlock() knows this was previously set up
+    await this.getStorage().setItem('gtcx_secure___initialized', 'true');
+    this.lockoutStateLoaded = true;
+    await this.persistLockoutState();
   }
 
   /**
@@ -352,8 +403,9 @@ export abstract class SecureStorageBase {
     return new Date(Date.now() + 15 * 60 * 1000);
   }
 
-  private recordFailedAttempt(): void {
+  private async recordFailedAttempt(): Promise<void> {
     this.state.failedAttempts++;
+    await this.persistLockoutState();
 
     if (this.config.wipeOnExceed && this.isLockedOut()) {
       // Trigger async wipe
@@ -364,18 +416,56 @@ export abstract class SecureStorageBase {
   }
 
   private async verifyKey(): Promise<boolean> {
+    const INITIALIZED_KEY = 'gtcx_secure___initialized';
     // Try to decrypt a verification marker
     try {
       const marker = await this.get<{ verified: boolean }>('__verify__');
       if (marker === null) {
-        // First time setup - create verification marker
+        // Check if storage was previously initialized
+        const initialized = await this.getStorage().getItem(INITIALIZED_KEY);
+        if (initialized) {
+          // Previously initialized but verification token gone (e.g. after wipe)
+          // Refuse to accept any secret — require explicit re-initialization
+          return false;
+        }
+        // First time setup - create verification marker and mark initialized
         await this.set('__verify__', { verified: true });
+        await this.getStorage().setItem(INITIALIZED_KEY, 'true');
         return true;
       }
       return marker.verified === true;
     } catch {
       // Decryption failed with current key = wrong secret
       return false;
+    }
+  }
+
+  /**
+   * Re-initialize storage with a new secret after a wipe.
+   * This explicitly creates a new verification token.
+   */
+  async reinitialize(secret: string): Promise<UnlockResult> {
+    const INITIALIZED_KEY = 'gtcx_secure___initialized';
+
+    try {
+      const salt = await this.getDeviceSalt();
+      this.encryptionKey = await this.deriveKey(secret, salt);
+
+      this.state.isLocked = false;
+      await this.set('__verify__', { verified: true });
+      await this.getStorage().setItem(INITIALIZED_KEY, 'true');
+      this.state.failedAttempts = 0;
+      await this.persistLockoutState();
+      this.state.lastUnlockedAt = new Date();
+
+      return { success: true };
+    } catch {
+      this.state.isLocked = true;
+      if (this.encryptionKey) {
+        this.encryptionKey.fill(0);
+      }
+      this.encryptionKey = null;
+      return { success: false, error: 'INVALID_SECRET' };
     }
   }
 

@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+
 import {
   InMemoryMetricsCollector,
   ServiceMetrics,
@@ -379,9 +380,7 @@ describe('ServiceMetrics', () => {
     it('should record a success counter and duration histogram', () => {
       serviceMetrics.success('register', 250);
 
-      expect(
-        collector.getCounter('myservice_register_total', { status: 'success' })
-      ).toBe(1);
+      expect(collector.getCounter('myservice_register_total', { status: 'success' })).toBe(1);
 
       const stats = collector.getHistogramStats('myservice_register_duration_ms');
       expect(stats).toBeDefined();
@@ -394,12 +393,8 @@ describe('ServiceMetrics', () => {
     it('should record failure counter, error counter, and duration histogram', () => {
       serviceMetrics.failure('register', 100, 'TIMEOUT');
 
-      expect(
-        collector.getCounter('myservice_register_total', { status: 'failure' })
-      ).toBe(1);
-      expect(
-        collector.getCounter('myservice_register_errors_total', { error: 'TIMEOUT' })
-      ).toBe(1);
+      expect(collector.getCounter('myservice_register_total', { status: 'failure' })).toBe(1);
+      expect(collector.getCounter('myservice_register_errors_total', { error: 'TIMEOUT' })).toBe(1);
 
       const stats = collector.getHistogramStats('myservice_register_duration_ms');
       expect(stats).toBeDefined();

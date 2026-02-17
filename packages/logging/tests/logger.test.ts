@@ -258,8 +258,8 @@ describe('generateCorrelationId', () => {
 
   it('should produce IDs with hex characters', () => {
     const id = Logger.generateCorrelationId();
-    // The ID should only contain hex chars and hyphens
-    expect(id).toMatch(/^[0-9a-f]+-[0-9a-f]+$/);
+    // The ID should be a valid UUID v4 format
+    expect(id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);
   });
 });
 

@@ -11,30 +11,32 @@
  * - Dependency injection for all externals (P4)
  * - Pluggable regulatory frameworks (P6)
  *
- * @package @gtcx/domain
+ * @package @gtcx/services
  */
 
-import { DomainEventFactory, nullEventEmitter, type IDomainEventEmitter } from './events';
+import { randomUUID } from 'node:crypto';
+
 import {
+  DomainEventFactory,
+  nullEventEmitter,
+  type IDomainEventEmitter,
   ComplianceConfigSchema,
   ComplianceReportOptionsSchema,
   safeParse,
   type ValidatedComplianceReportOptions,
-} from './schemas';
-import type {
-  AssetLot,
-  Transaction,
-  Location,
-  ComplianceRecord,
-  ComplianceStatus,
-  ComplianceSeverity,
-  ComplianceCategory,
-  ComplianceDashboard,
-  RegulatoryFramework,
-  RegulatoryAuthority,
-  ICryptoService,
-  IStorageService,
-} from './types';
+  type AssetLot,
+  type Transaction,
+  type Location,
+  type ComplianceRecord,
+  type ComplianceStatus,
+  type ComplianceSeverity,
+  type ComplianceCategory,
+  type ComplianceDashboard,
+  type RegulatoryFramework,
+  type RegulatoryAuthority,
+  type ICryptoService,
+  type IStorageService,
+} from '@gtcx/domain';
 
 // ============================================================================
 // CONFIGURATION
@@ -55,7 +57,7 @@ export interface ComplianceConfig {
 
 const DEFAULT_CONFIG: ComplianceConfig = {
   defaultJurisdiction: 'international',
-  supportedCommodities: ['gold', 'cocoa', 'minerals', 'agricultural'],
+  supportedCommodities: [],
   highValueThreshold: 10000,
   defaultCurrency: 'USD',
 };
@@ -204,7 +206,7 @@ export class UnifiedComplianceService {
       this.eventFactory.compliance('compliance.framework_registered', {
         frameworkCode: framework.code,
         jurisdiction: framework.jurisdiction,
-      } as any)
+      })
     );
   }
 
@@ -236,7 +238,6 @@ export class UnifiedComplianceService {
       const allRecords = await this.getAllComplianceRecords();
 
       const compliant = allRecords.filter((r) => r.status === 'compliant');
-      const violations = allRecords.filter((r) => r.status === 'violation'); // eslint-disable-line @typescript-eslint/no-unused-vars
       const critical = allRecords.filter((r) => r.severity === 'critical');
       const pending = allRecords.filter(
         (r) => r.status === 'pending_review' || r.resolution?.status === 'pending'
@@ -279,7 +280,7 @@ export class UnifiedComplianceService {
       this.eventFactory.compliance('compliance.check_started', {
         entityId: assetLot.id,
         entityType: 'asset_lot',
-      } as any)
+      })
     );
 
     const records: ComplianceRecord[] = [];
@@ -341,7 +342,7 @@ export class UnifiedComplianceService {
             severity: 'medium',
             regulationCode: 'ENV-001',
             description: record.finding.description,
-          } as any)
+          })
         );
       }
 
@@ -399,7 +400,7 @@ export class UnifiedComplianceService {
       this.eventFactory.compliance('compliance.check_started', {
         entityId: transaction.id,
         entityType: 'transaction',
-      } as any)
+      })
     );
 
     const records: ComplianceRecord[] = [];
@@ -628,11 +629,11 @@ export class UnifiedComplianceService {
   }
 
   protected generateRecordId(): string {
-    return `comp_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    return `comp_${Date.now()}_${randomUUID()}`;
   }
 
   protected generateCorrelationId(): string {
-    return `check_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    return `check_${Date.now()}_${randomUUID()}`;
   }
 
   protected calculatePriority(severity: ComplianceSeverity): number {

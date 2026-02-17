@@ -2,6 +2,8 @@
 // Structured Logger Implementation
 // ============================================================================
 
+import { randomUUID } from 'node:crypto';
+
 /**
  * Supported log levels in ascending order of severity.
  */
@@ -164,9 +166,7 @@ export class Logger {
    * service boundaries.
    */
   static generateCorrelationId(): string {
-    const timestamp = Date.now().toString(16);
-    const random = Math.random().toString(16).substring(2, 10);
-    return `${timestamp}-${random}`;
+    return randomUUID();
   }
 
   /**

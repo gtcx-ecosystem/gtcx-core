@@ -85,7 +85,7 @@ export type SecurityBatchLogHandler = (events: SecurityEvent[]) => void | Promis
 
 /**
  * Security logger with batching and structured output
- * 
+ *
  * @example
  * const logger = new SecurityLogger({ minSeverity: 'WARN' });
  * logger.addHandler(consoleLogHandler);
@@ -126,9 +126,7 @@ export class SecurityLogger {
     }
 
     // Redact sensitive fields if configured
-    const processedEvent = this.config.redactSensitiveFields
-      ? this.redactEvent(event)
-      : event;
+    const processedEvent = this.config.redactSensitiveFields ? this.redactEvent(event) : event;
 
     // Send to immediate handlers
     for (const handler of this.handlers) {
@@ -204,7 +202,11 @@ export class SecurityLogger {
   /**
    * Log authentication success
    */
-  async authSuccess(actorId: string, sessionId: string, metadata?: Record<string, unknown>): Promise<void> {
+  async authSuccess(
+    actorId: string,
+    sessionId: string,
+    metadata?: Record<string, unknown>
+  ): Promise<void> {
     await this.logEvent('AUTH_SUCCESS', 'SUCCESS', {
       actor: actorId,
       sessionId,
@@ -292,8 +294,8 @@ export class SecurityLogger {
 
     for (const [key, value] of Object.entries(obj)) {
       const lowerKey = key.toLowerCase();
-      const isSensitive = this.config.sensitiveFields.some(
-        (field) => lowerKey.includes(field.toLowerCase())
+      const isSensitive = this.config.sensitiveFields.some((field) =>
+        lowerKey.includes(field.toLowerCase())
       );
 
       if (isSensitive) {
@@ -343,6 +345,7 @@ export function consoleLogHandler(event: SecurityEvent): void {
       console.warn(message, event);
       break;
     default:
+      // eslint-disable-next-line no-console
       console.log(message, event);
   }
 }
@@ -351,5 +354,6 @@ export function consoleLogHandler(event: SecurityEvent): void {
  * JSON log handler for production (structured logging)
  */
 export function jsonLogHandler(event: SecurityEvent): void {
+  // eslint-disable-next-line no-console
   console.log(JSON.stringify(event));
 }

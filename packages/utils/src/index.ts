@@ -2,6 +2,8 @@
 // @gtcx/utils - Common Utilities
 // ============================================================================
 
+import { randomUUID } from 'node:crypto';
+
 /**
  * Sleep for a given number of milliseconds
  */
@@ -13,9 +15,8 @@ export function sleep(ms: number): Promise<void> {
  * Generate a unique ID
  */
 export function generateId(prefix = ''): string {
-  const timestamp = Date.now().toString(36);
-  const random = Math.random().toString(36).substring(2, 8);
-  return prefix ? `${prefix}_${timestamp}${random}` : `${timestamp}${random}`;
+  const uuid = randomUUID();
+  return prefix ? `${prefix}_${uuid}` : uuid;
 }
 
 /**
@@ -116,12 +117,7 @@ export async function retry<T>(
     backoffMultiplier?: number;
   } = {}
 ): Promise<T> {
-  const {
-    maxAttempts = 3,
-    initialDelay = 1000,
-    maxDelay = 30000,
-    backoffMultiplier = 2,
-  } = options;
+  const { maxAttempts = 3, initialDelay = 1000, maxDelay = 30000, backoffMultiplier = 2 } = options;
 
   let lastError: Error | undefined;
   let delay = initialDelay;

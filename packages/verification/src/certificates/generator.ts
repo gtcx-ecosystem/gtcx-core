@@ -5,7 +5,10 @@
 // COMMODITY-AGNOSTIC ARCHITECTURE
 // ============================================================================
 
+import { randomUUID } from 'node:crypto';
+
 import { hash256 } from '@gtcx/crypto';
+
 import {
   migrateLegacyLotData,
   type Certificate,
@@ -24,6 +27,7 @@ import {
   type GeologicalContext,
   type CommodityType,
 } from '../types';
+
 import { getEffectiveTemplate } from './templates';
 
 // ============================================================================
@@ -33,14 +37,11 @@ import { getEffectiveTemplate } from './templates';
 /**
  * Generate unique certificate ID
  */
-export function generateCertificateId(
-  type: CertificateType,
-  prefix: string = 'GH'
-): string {
+export function generateCertificateId(type: CertificateType, prefix: string = 'GH'): string {
   const typeCode = type.toUpperCase().replace(/-/g, '_');
   const timestamp = Date.now();
-  const random = Math.random().toString(36).substring(2, 8).toUpperCase();
-  return `${typeCode}_${prefix}_${timestamp}_${random}`;
+  const uuid = randomUUID().substring(0, 6).toUpperCase();
+  return `${typeCode}_${prefix}_${timestamp}_${uuid}`;
 }
 
 // ============================================================================
@@ -78,12 +79,12 @@ export interface CreateCertificateInput {
  */
 function normalizeInput(input: CreateCertificateInput): CreateCertificateInput {
   const normalized = { ...input };
-  
+
   // Migrate legacy lot data to universal AssetLotData if needed
   if (input.goldLotData && !input.assetLotData) {
     normalized.assetLotData = migrateLegacyLotData(input.goldLotData, input.commodityType);
   }
-  
+
   // Migrate geologicalContext to resourceContext if needed
   if (input.geologicalContext && !input.resourceContext) {
     const commodityType = normalized.assetLotData?.commodityType ?? 'gold';
@@ -94,25 +95,26 @@ function normalizeInput(input: CreateCertificateInput): CreateCertificateInput {
       confidence: input.geologicalContext.confidence,
     };
   }
-  
+
   return normalized;
 }
 
 /**
  * Validate certificate input against template rules
  */
-export function validateCertificateInput(
-  input: CreateCertificateInput
-): { valid: boolean; errors: string[] } {
+export function validateCertificateInput(input: CreateCertificateInput): {
+  valid: boolean;
+  errors: string[];
+} {
   const normalizedInput = normalizeInput(input);
   const commodityType = normalizedInput.assetLotData?.commodityType;
   const template = getEffectiveTemplate(input.templateId, commodityType);
   const errors: string[] = [];
-  
+
   if (!template) {
     return { valid: false, errors: [`Template '${input.templateId}' not found`] };
   }
-  
+
   // Check required fields
   for (const field of template.requiredFields) {
     const value = getNestedValue(normalizedInput, field);
@@ -120,26 +122,26 @@ export function validateCertificateInput(
       errors.push(`Required field '${field}' is missing`);
     }
   }
-  
+
   // Check validation rules
   for (const rule of template.validationRules) {
     const value = getNestedValue(normalizedInput, rule.field);
-    
+
     if (value === undefined || value === null) continue;
-    
+
     if (rule.max !== undefined && typeof value === 'number' && value > rule.max) {
       errors.push(rule.message);
     }
-    
+
     if (rule.min !== undefined && typeof value === 'number' && value < rule.min) {
       errors.push(rule.message);
     }
-    
+
     if (rule.value !== undefined && value !== rule.value) {
       errors.push(rule.message);
     }
   }
-  
+
   return { valid: errors.length === 0, errors };
 }
 
@@ -151,7 +153,7 @@ export function createCertificateMetadata(
   issuer: string = 'GTCX Verification System'
 ): CertificateMetadata {
   const normalizedInput = normalizeInput(input);
-  
+
   return {
     issuer,
     issuedAt: Date.now(),
@@ -162,7 +164,8 @@ export function createCertificateMetadata(
     resourceContext: normalizedInput.resourceContext,
     // Keep legacy for backwards compatibility
     geologicalContext: normalizedInput.geologicalContext,
-    environmentalFactors: normalizedInput.environmentalFactors ?? createDefaultEnvironmentalFactors(),
+    environmentalFactors:
+      normalizedInput.environmentalFactors ?? createDefaultEnvironmentalFactors(),
     validationMetrics: normalizedInput.validationMetrics ?? createDefaultValidationMetrics(),
   };
 }
@@ -201,19 +204,19 @@ export function createStandardCertificateData(
   const normalizedInput = normalizeInput(input);
   const commodityType = normalizedInput.assetLotData?.commodityType;
   const template = getEffectiveTemplate(normalizedInput.templateId, commodityType);
-  
+
   if (!template) {
     throw new Error(`Template '${normalizedInput.templateId}' not found`);
   }
-  
+
   const validation = validateCertificateInput(normalizedInput);
   if (!validation.valid) {
     throw new Error(`Validation failed: ${validation.errors.join(', ')}`);
   }
-  
+
   const certificateId = generateCertificateId(template.type);
   const metadata = createCertificateMetadata(normalizedInput);
-  
+
   // Create data hash - use commodity-agnostic field
   const dataToHash = {
     certificateId,
@@ -224,10 +227,10 @@ export function createStandardCertificateData(
     workflowContext: normalizedInput.workflowContext,
     complianceData: normalizedInput.complianceData,
   };
-  
+
   const dataHash = hash256(JSON.stringify(dataToHash));
   const dataToSign = JSON.stringify({ certificateId, metadata, dataHash });
-  
+
   return {
     certificateId,
     version: '1.0',
@@ -249,32 +252,36 @@ export function createStandardCertificateData(
  * Create a military-grade certificate structure (unsigned)
  * Caller must sign with multi-signature crypto service
  */
-export function createMilitaryGradeCertificateData(
-  input: CreateCertificateInput
-): Omit<MilitaryGradeCertificate, 'multiSignature' | 'quantumResistantHash'> & { 
+export function createMilitaryGradeCertificateData(input: CreateCertificateInput): Omit<
+  MilitaryGradeCertificate,
+  'multiSignature' | 'quantumResistantHash'
+> & {
   dataToSign: string;
   dataForQuantumHash: string;
 } {
   const normalizedInput = normalizeInput(input);
   const commodityType = normalizedInput.assetLotData?.commodityType;
   const template = getEffectiveTemplate(normalizedInput.templateId, commodityType);
-  
+
   if (!template) {
     throw new Error(`Template '${normalizedInput.templateId}' not found`);
   }
-  
+
   if (!['military', 'quantum-resistant'].includes(template.securityLevel)) {
     throw new Error(`Template '${normalizedInput.templateId}' is not military-grade`);
   }
-  
+
   const validation = validateCertificateInput(normalizedInput);
   if (!validation.valid) {
     throw new Error(`Validation failed: ${validation.errors.join(', ')}`);
   }
-  
+
   const certificateId = generateCertificateId(template.type, 'MIL');
-  const metadata = createCertificateMetadata(normalizedInput, 'GTCX Military-Grade Verification System');
-  
+  const metadata = createCertificateMetadata(
+    normalizedInput,
+    'GTCX Military-Grade Verification System'
+  );
+
   // Use commodity-agnostic field
   const certificateData = {
     assetLotData: normalizedInput.assetLotData,
@@ -284,21 +291,21 @@ export function createMilitaryGradeCertificateData(
     workflowContext: normalizedInput.workflowContext,
     complianceData: normalizedInput.complianceData,
   };
-  
+
   // Data for quantum-resistant hash
   const dataForQuantumHash = JSON.stringify({
     certificateId,
     metadata,
     certificateData,
   });
-  
+
   // Data to sign (will include quantum hash after it's generated)
   const dataToSign = JSON.stringify({
     certificateId,
     metadata,
     // quantumResistantHash will be added by caller
   });
-  
+
   return {
     certificateId,
     version: '2.0',
@@ -326,24 +333,25 @@ export function createMilitaryGradeCertificateData(
  * Verify certificate structure (without cryptographic verification)
  * Cryptographic verification must be done by platform-specific code
  */
-export function verifyCertificateStructure(
-  certificate: Certificate
-): { valid: boolean; errors: string[] } {
+export function verifyCertificateStructure(certificate: Certificate): {
+  valid: boolean;
+  errors: string[];
+} {
   const errors: string[] = [];
-  
+
   // Basic field checks
   if (!certificate.certificateId) {
     errors.push('Missing certificate ID');
   }
-  
+
   if (!certificate.version) {
     errors.push('Missing version');
   }
-  
+
   if (!certificate.type) {
     errors.push('Missing type');
   }
-  
+
   if (!certificate.metadata) {
     errors.push('Missing metadata');
   } else {
@@ -351,19 +359,19 @@ export function verifyCertificateStructure(
     if (!certificate.metadata.issuedAt) errors.push('Missing issuedAt');
     if (!certificate.metadata.location) errors.push('Missing location');
   }
-  
+
   if (!certificate.verificationData) {
     errors.push('Missing verification data');
   } else {
     if (!certificate.verificationData.publicKey) errors.push('Missing public key');
     if (!certificate.verificationData.signature) errors.push('Missing signature');
   }
-  
+
   // Expiration check
   if (certificate.metadata?.expiresAt && certificate.metadata.expiresAt < Date.now()) {
     errors.push('Certificate has expired');
   }
-  
+
   return { valid: errors.length === 0, errors };
 }
 
@@ -413,14 +421,14 @@ export function formatCertificateForDisplay(certificate: Certificate): {
   commodityType?: string;
 } {
   const { metadata } = certificate;
-  
+
   // Try to get commodity type from certificate data
   let commodityType: string | undefined;
   if ('certificateData' in certificate) {
     const milCert = certificate as MilitaryGradeCertificate;
     commodityType = milCert.certificateData?.assetLotData?.commodityType;
   }
-  
+
   return {
     id: certificate.certificateId,
     type: certificate.type,

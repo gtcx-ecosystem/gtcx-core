@@ -12,6 +12,44 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { z } from 'zod';
 
 // -- Validation imports --
+
+// -- Auth imports --
+import {
+  createSecurityEvent,
+  registerSecurityHandler,
+  clearSecurityHandlers,
+  logSecurityEvent,
+  createAuditTrail,
+} from '../src/audit/events';
+import type { SecurityEvent } from '../src/audit/events';
+import { SecurityLogger } from '../src/audit/logger';
+import { Permissions, hasPermission, expandPermissions } from '../src/auth/permissions';
+import {
+  isSessionValid,
+  isSessionValidOffline,
+  recordFailedAttempt,
+  prepareSessionForOffline,
+  DEFAULT_SESSION_CONFIG,
+} from '../src/auth/sessions';
+import type { Session } from '../src/auth/sessions';
+import {
+  decodeToken,
+  isTokenTemporallyValid,
+  isTokenValidOffline,
+  createTokenPayload,
+} from '../src/auth/tokens';
+import type { GTCXTokenClaims } from '../src/auth/tokens';
+import { CredentialCache } from '../src/offline/credential-cache';
+import type { CachedCredential } from '../src/offline/credential-cache';
+import { SecureStorageBase } from '../src/offline/secure-storage';
+import type { StorageBackend } from '../src/offline/secure-storage';
+import {
+  checkProofStructure,
+  secureCompare,
+  hashesMatch,
+  createTamperDetectionEvent,
+} from '../src/offline/tamper-detection';
+import type { IntegrityProof } from '../src/offline/tamper-detection';
 import {
   UuidSchema,
   DidSchema,
@@ -25,66 +63,7 @@ import {
   sanitizeObject,
   createBoundaryValidator,
   SanitizationError,
-  BoundaryValidationError,
 } from '../src/validation';
-
-// -- Auth imports --
-import {
-  Permissions,
-  Roles,
-  hasPermission,
-  expandPermissions,
-} from '../src/auth/permissions';
-
-import {
-  SessionSchema,
-  isSessionValid,
-  isSessionValidOffline,
-  recordFailedAttempt,
-  prepareSessionForOffline,
-  DEFAULT_SESSION_CONFIG,
-} from '../src/auth/sessions';
-import type { Session, SessionConfig } from '../src/auth/sessions';
-
-import {
-  decodeToken,
-  isTokenTemporallyValid,
-  isTokenValidOffline,
-  createTokenPayload,
-  JWTHeaderSchema,
-  GTCXTokenClaimsSchema,
-} from '../src/auth/tokens';
-import type { GTCXTokenClaims } from '../src/auth/tokens';
-
-// -- Offline imports --
-import { SecureStorageBase } from '../src/offline/secure-storage';
-import type { StorageBackend } from '../src/offline/secure-storage';
-
-import { CredentialCache } from '../src/offline/credential-cache';
-import type { CachedCredential } from '../src/offline/credential-cache';
-
-import {
-  createIntegrityProofStructure,
-  isProofStructureValid,
-  checkProofStructure,
-  secureCompare,
-  hashesMatch,
-  createTamperDetectionEvent,
-} from '../src/offline/tamper-detection';
-import type { IntegrityProof } from '../src/offline/tamper-detection';
-
-// -- Audit imports --
-import {
-  createSecurityEvent,
-  registerSecurityHandler,
-  removeSecurityHandler,
-  clearSecurityHandlers,
-  logSecurityEvent,
-  createAuditTrail,
-} from '../src/audit/events';
-import type { SecurityEvent } from '../src/audit/events';
-
-import { SecurityLogger } from '../src/audit/logger';
 
 // =============================================================================
 // HELPERS
@@ -94,10 +73,7 @@ import { SecurityLogger } from '../src/audit/logger';
 class TestSecureStorage extends SecureStorageBase {
   private store = new Map<string, string>();
 
-  protected async deriveKey(
-    secret: string,
-    _salt: Uint8Array,
-  ): Promise<Uint8Array> {
+  protected async deriveKey(secret: string, _salt: Uint8Array): Promise<Uint8Array> {
     const encoder = new TextEncoder();
     return encoder.encode(secret.padEnd(32, '0').slice(0, 32));
   }
@@ -116,7 +92,7 @@ class TestSecureStorage extends SecureStorageBase {
     ciphertext: Uint8Array,
     key: Uint8Array,
     _iv: Uint8Array,
-    _tag: Uint8Array,
+    _tag: Uint8Array
   ) {
     const plaintext = new Uint8Array(ciphertext.length);
     for (let i = 0; i < ciphertext.length; i++) {
@@ -170,9 +146,7 @@ function createTestSession(overrides: Partial<Session> = {}): Session {
 }
 
 /** Helper to build a valid CachedCredential (for credential-cache.ts) */
-function createMockCredential(
-  overrides: Partial<CachedCredential> = {},
-): CachedCredential {
+function createMockCredential(overrides: Partial<CachedCredential> = {}): CachedCredential {
   const now = new Date();
   return {
     id: 'cred-001',
@@ -201,7 +175,7 @@ function createMockCredential(
 function makeJwt(
   header: Record<string, unknown>,
   claims: Record<string, unknown>,
-  signature = 'test-sig',
+  signature = 'test-sig'
 ): string {
   const h = Buffer.from(JSON.stringify(header))
     .toString('base64')
@@ -259,7 +233,9 @@ describe('@gtcx/security/validation', () => {
 
     it('should validate DID format', () => {
       expect(DidSchema.safeParse('did:web:example.com').success).toBe(true);
-      expect(DidSchema.safeParse('did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK').success).toBe(true);
+      expect(
+        DidSchema.safeParse('did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK').success
+      ).toBe(true);
       expect(DidSchema.safeParse('notadid').success).toBe(false);
       expect(DidSchema.safeParse('did::missing').success).toBe(false);
     });
@@ -268,7 +244,9 @@ describe('@gtcx/security/validation', () => {
       const validTpId = 'tp_f47ac10b-58cc-4372-a567-0e02b2c3d479';
       expect(TradePassIdSchema.safeParse(validTpId).success).toBe(true);
       expect(TradePassIdSchema.safeParse('tp_invalid').success).toBe(false);
-      expect(TradePassIdSchema.safeParse('f47ac10b-58cc-4372-a567-0e02b2c3d479').success).toBe(false);
+      expect(TradePassIdSchema.safeParse('f47ac10b-58cc-4372-a567-0e02b2c3d479').success).toBe(
+        false
+      );
     });
 
     it('should validate email format', () => {
@@ -573,7 +551,7 @@ describe('@gtcx/security/auth', () => {
       const now = Math.floor(Date.now() / 1000);
       const token = makeJwt(
         { alg: 'EdDSA', typ: 'JWT' },
-        { sub: 'user-001', iat: now, exp: now + 3600 },
+        { sub: 'user-001', iat: now, exp: now + 3600 }
       );
       const decoded = decodeToken(token);
       expect(decoded).not.toBeNull();
@@ -587,10 +565,7 @@ describe('@gtcx/security/auth', () => {
       expect(decodeToken('a.b')).toBeNull(); // only 2 parts
       expect(decodeToken('')).toBeNull();
       // Invalid header alg
-      const badAlg = makeJwt(
-        { alg: 'INVALID', typ: 'JWT' },
-        { sub: 'user-001' },
-      );
+      const badAlg = makeJwt({ alg: 'INVALID', typ: 'JWT' }, { sub: 'user-001' });
       expect(decodeToken(badAlg)).toBeNull();
     });
 
@@ -662,10 +637,9 @@ describe('@gtcx/security/auth', () => {
 
       // Decode and verify claims were populated
       const decodedClaims = JSON.parse(
-        Buffer.from(
-          parts[1]!.replace(/-/g, '+').replace(/_/g, '/') + '==',
-          'base64',
-        ).toString('utf8'),
+        Buffer.from(parts[1]!.replace(/-/g, '+').replace(/_/g, '/') + '==', 'base64').toString(
+          'utf8'
+        )
       );
       expect(decodedClaims.sub).toBe('user-001');
       expect(decodedClaims.iat).toBeDefined();
@@ -683,9 +657,7 @@ describe('@gtcx/security/offline', () => {
   describe('secure-storage', () => {
     it('should require unlock before operations', async () => {
       const storage = new TestSecureStorage();
-      await expect(storage.set('key', 'value')).rejects.toThrow(
-        'Storage is locked',
-      );
+      await expect(storage.set('key', 'value')).rejects.toThrow('Storage is locked');
       await expect(storage.get('key')).rejects.toThrow('Storage is locked');
     });
 
@@ -713,9 +685,7 @@ describe('@gtcx/security/offline', () => {
       await storage.unlock('test-secret');
 
       await storage.set('credentials', { token: 'abc123', role: 'admin' });
-      const retrieved = await storage.get<{ token: string; role: string }>(
-        'credentials',
-      );
+      const retrieved = await storage.get<{ token: string; role: string }>('credentials');
       expect(retrieved).toEqual({ token: 'abc123', role: 'admin' });
     });
 
@@ -779,9 +749,13 @@ describe('@gtcx/security/offline', () => {
       // Give wipe a tick to execute
       await new Promise((r) => setTimeout(r, 50));
 
-      // Storage should have been wiped - verify by checking the backend is empty
+      // Storage should have been wiped - verify by checking that user data is gone
+      // (only metadata keys like __initialized and __lockout_state may remain)
       const keys = await storage.getStorage().getAllKeys();
-      expect(keys.length).toBe(0);
+      const userKeys = keys.filter(
+        (k) => k !== 'gtcx_secure___initialized' && k !== 'gtcx_secure___lockout_state'
+      );
+      expect(userKeys.length).toBe(0);
     });
   });
 
@@ -816,9 +790,7 @@ describe('@gtcx/security/offline', () => {
     it('should warn on stale revocation check', () => {
       const cred = createMockCredential({
         // Last revocation check 25 hours ago (threshold is 24h)
-        lastRevocationCheckAt: new Date(
-          Date.now() - 25 * 60 * 60 * 1000,
-        ).toISOString(),
+        lastRevocationCheckAt: new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString(),
       });
       const result = cache.isCredentialValidOffline(cred);
       expect(result.valid).toBe(true);
@@ -840,18 +812,14 @@ describe('@gtcx/security/offline', () => {
 
       // Credential approaching offline expiry (within 24h buffer)
       const approaching = createMockCredential({
-        offlineExpiresAt: new Date(
-          Date.now() + 12 * 60 * 60 * 1000,
-        ).toISOString(), // 12h from now
+        offlineExpiresAt: new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString(), // 12h from now
         syncRequired: false,
       });
       expect(cache.needsSync(approaching)).toBe(true);
 
       // Credential with plenty of time
       const fresh = createMockCredential({
-        offlineExpiresAt: new Date(
-          Date.now() + 48 * 60 * 60 * 1000,
-        ).toISOString(), // 48h from now
+        offlineExpiresAt: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString(), // 48h from now
         syncRequired: false,
       });
       expect(cache.needsSync(fresh)).toBe(false);
@@ -862,12 +830,12 @@ describe('@gtcx/security/offline', () => {
       const synced = cache.markSynced(cred);
       expect(synced.syncRequired).toBe(false);
       expect(new Date(synced.syncedAt).getTime()).toBeGreaterThanOrEqual(
-        new Date(cred.syncedAt).getTime(),
+        new Date(cred.syncedAt).getTime()
       );
       // offlineExpiresAt should be recalculated from now
-      expect(
-        new Date(synced.offlineExpiresAt).getTime(),
-      ).toBeGreaterThanOrEqual(new Date(cred.offlineExpiresAt).getTime());
+      expect(new Date(synced.offlineExpiresAt).getTime()).toBeGreaterThanOrEqual(
+        new Date(cred.offlineExpiresAt).getTime()
+      );
     });
   });
 
@@ -943,7 +911,7 @@ describe('@gtcx/security/offline', () => {
         'TRADEPASS',
         'ON_ACCESS',
         result,
-        'device-abc',
+        'device-abc'
       );
       expect(event.timestamp).toBeDefined();
       expect(event.dataId).toBe('data-001');
@@ -1040,7 +1008,7 @@ describe('@gtcx/security/audit', () => {
           eventType: 'AUTH_SUCCESS',
           severity: 'INFO',
           outcome: 'SUCCESS',
-        }),
+        })
       ).resolves.toBeUndefined();
 
       errorSpy.mockRestore();
@@ -1120,7 +1088,7 @@ describe('@gtcx/security/audit', () => {
         await logger.log(
           createSecurityEvent('AUTH_SUCCESS', 'SUCCESS', {
             severity: 'INFO',
-          }),
+          })
         );
       }
 
@@ -1140,12 +1108,8 @@ describe('@gtcx/security/audit', () => {
       logger.addBatchHandler(batchHandler);
 
       // Log 2 events (below batch threshold)
-      await logger.log(
-        createSecurityEvent('AUTH_SUCCESS', 'SUCCESS', { severity: 'INFO' }),
-      );
-      await logger.log(
-        createSecurityEvent('AUTH_FAILURE', 'FAILURE', { severity: 'WARN' }),
-      );
+      await logger.log(createSecurityEvent('AUTH_SUCCESS', 'SUCCESS', { severity: 'INFO' }));
+      await logger.log(createSecurityEvent('AUTH_FAILURE', 'FAILURE', { severity: 'WARN' }));
 
       expect(batches.length).toBe(0); // Not yet flushed
 
@@ -1245,7 +1209,11 @@ describe('@gtcx/security/audit', () => {
       expect(meta.startedAt).toBeDefined();
       expect(meta.completedAt).toBeDefined();
       expect(Array.isArray(meta.steps)).toBe(true);
-      const steps = meta.steps as Array<{ step: string; timestamp: string; metadata?: Record<string, unknown> }>;
+      const steps = meta.steps as Array<{
+        step: string;
+        timestamp: string;
+        metadata?: Record<string, unknown>;
+      }>;
       expect(steps.length).toBe(3);
       expect(steps[0]!.step).toBe('step-1');
       expect(steps[1]!.step).toBe('step-2');
@@ -1295,16 +1263,13 @@ describe('integration', () => {
     await storage.unlock('pin-1234');
     if (result.success) {
       await storage.set('user_profile', result.data);
-      const retrieved = await storage.get<{ name: string; email: string }>(
-        'user_profile',
-      );
+      const retrieved = await storage.get<{ name: string; email: string }>('user_profile');
       expect(retrieved).toEqual(result.data);
     }
   });
 
   it('should authenticate -> session -> permissions workflow', () => {
     // 1. Create a session with roles
-    const now = new Date();
     const session = createTestSession({
       userId: 'user-producer-001',
       roles: ['producer'],
@@ -1323,12 +1288,8 @@ describe('integration', () => {
     expect(perms).toContain(Permissions.GEOTAG_CREATE);
 
     // 4. Verify permission check
-    expect(
-      hasPermission(Permissions.GEOTAG_CREATE, { roles: ['producer'] }),
-    ).toBe(true);
-    expect(
-      hasPermission(Permissions.TRADEPASS_REVOKE, { roles: ['producer'] }),
-    ).toBe(false);
+    expect(hasPermission(Permissions.GEOTAG_CREATE, { roles: ['producer'] })).toBe(true);
+    expect(hasPermission(Permissions.TRADEPASS_REVOKE, { roles: ['producer'] })).toBe(false);
   });
 
   it('should offline cache -> verify -> audit workflow', async () => {

@@ -5,7 +5,10 @@
 // COMMODITY-AGNOSTIC ARCHITECTURE
 // ============================================================================
 
+import { randomUUID } from 'node:crypto';
+
 import { hash256 } from '@gtcx/crypto';
+
 import type {
   QRCodeData,
   QRCodeType,
@@ -45,9 +48,7 @@ const DEFAULT_CONFIG: QRCodeConfig = {
  * Generate unique QR code ID
  */
 export function generateQRCodeId(): string {
-  const timestamp = Date.now().toString(36);
-  const random = Math.random().toString(36).substring(2, 11);
-  return `qr_${timestamp}_${random}`;
+  return `qr_${randomUUID()}`;
 }
 
 /**
@@ -60,7 +61,7 @@ export function createLocationQRData(
   config: Partial<QRCodeConfig> = {}
 ): QRCodeData {
   const cfg = { ...DEFAULT_CONFIG, ...config };
-  
+
   return {
     certificateId,
     verifyUrl: `${cfg.verifyBaseUrl}/verify/${certificateId}`,
@@ -81,7 +82,7 @@ export function createPhotoQRData(
   config: Partial<QRCodeConfig> = {}
 ): QRCodeData {
   const cfg = { ...DEFAULT_CONFIG, ...config };
-  
+
   return {
     certificateId,
     verifyUrl: `${cfg.verifyBaseUrl}/verify/${certificateId}`,
@@ -111,7 +112,7 @@ export function createAssetLotQRData(
   config: Partial<QRCodeConfig> = {}
 ): QRCodeData {
   const cfg = { ...DEFAULT_CONFIG, ...config };
-  
+
   return {
     certificateId,
     verifyUrl: `${cfg.verifyBaseUrl}/verify/${certificateId}`,
@@ -190,48 +191,48 @@ export function createCertificateQRData(
   config: Partial<QRCodeConfig> = {}
 ): QRCodeData {
   const cfg = { ...DEFAULT_CONFIG, ...config };
-  
+
   const metadata: QRCodeMetadata = {};
-  
+
   if (certificateData.location) {
     metadata.location = certificateData.location;
   }
-  
+
   // Prefer assetLotData over goldLotData
   const lotData = certificateData.assetLotData ?? certificateData.goldLotData;
-  
+
   if (lotData) {
     if ('estimatedWeight' in lotData && lotData.estimatedWeight) {
       metadata.assetWeight = lotData.estimatedWeight;
     }
-    
+
     if ('unit' in lotData && lotData.unit) {
       metadata.assetUnit = lotData.unit;
     }
-    
+
     if ('purity' in lotData && lotData.purity) {
       metadata.purity = lotData.purity;
     }
-    
+
     if ('commodityType' in lotData && lotData.commodityType) {
       metadata.commodityType = lotData.commodityType;
     } else if (certificateData.goldLotData) {
       // Legacy gold data
       metadata.commodityType = 'gold';
     }
-    
+
     if ('producerId' in lotData && lotData.producerId) {
       metadata.producerId = lotData.producerId;
     } else if ('miner' in lotData && lotData.miner) {
       // Legacy miner field
       metadata.producerId = lotData.miner;
     }
-    
+
     if ('operatorRole' in lotData && lotData.operatorRole) {
       metadata.operatorRole = lotData.operatorRole;
     }
   }
-  
+
   return {
     certificateId: certificateData.certificateId,
     verifyUrl: `${cfg.verifyBaseUrl}/verify/${certificateData.certificateId}`,
@@ -268,19 +269,17 @@ export function verifyQRCodeData(
   config: Partial<QRCodeConfig> = {}
 ): QRCodeVerificationResult {
   const cfg = { ...DEFAULT_CONFIG, ...config };
-  
+
   try {
-    const data = typeof qrCodeData === 'string' 
-      ? parseQRData(qrCodeData)
-      : qrCodeData;
-    
+    const data = typeof qrCodeData === 'string' ? parseQRData(qrCodeData) : qrCodeData;
+
     if (!data) {
       return {
         isValid: false,
         error: 'Invalid QR code data format',
       };
     }
-    
+
     // Required fields check
     if (!data.certificateId || !data.verifyUrl || !data.hash) {
       return {
@@ -288,7 +287,7 @@ export function verifyQRCodeData(
         error: 'Missing required QR code data fields',
       };
     }
-    
+
     // Certificate ID format validation
     if (!cfg.certificateIdPattern.test(data.certificateId)) {
       return {
@@ -296,37 +295,37 @@ export function verifyQRCodeData(
         error: 'Invalid certificate ID format',
       };
     }
-    
+
     // Timestamp validation
     const now = Date.now();
     const age = now - data.timestamp;
-    
+
     if (age < 0) {
       return {
         isValid: false,
         error: 'Certificate timestamp is in the future',
       };
     }
-    
+
     if (age > cfg.maxCertificateAge) {
       return {
         isValid: false,
         error: 'Certificate has expired',
       };
     }
-    
+
     // Type validation - support both old and new types
     const validTypes: QRCodeType[] = ['location', 'photo', 'certificate', 'asset-lot'];
     // Also accept legacy 'gold-lot' type
     const legacyTypes = ['gold-lot'];
-    
+
     if (!validTypes.includes(data.type) && !legacyTypes.includes(data.type as string)) {
       return {
         isValid: false,
         error: 'Invalid QR code type',
       };
     }
-    
+
     return {
       isValid: true,
       data,
@@ -359,9 +358,7 @@ export function createQRCodeStructure(
  * Generate data hash for QR code content
  */
 export function hashQRCodeContent(content: unknown): string {
-  const dataString = typeof content === 'string' 
-    ? content 
-    : JSON.stringify(content);
+  const dataString = typeof content === 'string' ? content : JSON.stringify(content);
   return hash256(dataString);
 }
 

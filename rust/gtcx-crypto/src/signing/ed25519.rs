@@ -284,9 +284,7 @@ pub fn verify(signature: &Signature, message: &[u8], public_key: &PublicKey) -> 
     let Ok(verifying_key) = VerifyingKey::from_bytes(&public_key.0) else {
         return false;
     };
-    let Ok(sig) = ed25519_dalek::Signature::from_bytes(&signature.0) else {
-        return false;
-    };
+    let sig = ed25519_dalek::Signature::from_bytes(&signature.0);
     verifying_key.verify(message, &sig).is_ok()
 }
 
@@ -341,11 +339,10 @@ pub fn batch_verify(
     }
 
     // Convert to dalek types
-    let sigs: std::result::Result<Vec<_>, _> = signatures
+    let sigs: Vec<_> = signatures
         .iter()
         .map(|s| ed25519_dalek::Signature::from_bytes(&s.0))
         .collect();
-    let sigs = sigs.map_err(|_| CryptoError::InvalidSignature)?;
 
     let pks: std::result::Result<Vec<_>, _> = public_keys
         .iter()

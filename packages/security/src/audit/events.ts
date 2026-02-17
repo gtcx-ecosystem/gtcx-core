@@ -1,6 +1,6 @@
 /**
  * @gtcx/security - Security Event Types & Logging
- * 
+ *
  * Structured security event logging for observability.
  * Implements P12 (Observability) and P5 (AI-Native).
  */
@@ -22,19 +22,19 @@ export type SecurityEventType =
   | 'AUTH_TOKEN_REVOKED'
   | 'AUTH_SESSION_CREATED'
   | 'AUTH_SESSION_EXPIRED'
-  
+
   // Authorization
   | 'ACCESS_GRANTED'
   | 'ACCESS_DENIED'
   | 'PERMISSION_CHANGED'
   | 'ROLE_ASSIGNED'
   | 'ROLE_REVOKED'
-  
+
   // Validation
   | 'VALIDATION_SUCCESS'
   | 'VALIDATION_FAILURE'
   | 'SANITIZATION_APPLIED'
-  
+
   // Cryptographic
   | 'CRYPTO_SIGN'
   | 'CRYPTO_VERIFY'
@@ -42,7 +42,7 @@ export type SecurityEventType =
   | 'CRYPTO_ENCRYPT'
   | 'CRYPTO_DECRYPT'
   | 'CRYPTO_DECRYPT_FAILED'
-  
+
   // Key lifecycle
   | 'KEY_GENERATED'
   | 'KEY_IMPORTED'
@@ -50,7 +50,7 @@ export type SecurityEventType =
   | 'KEY_ROTATED'
   | 'KEY_REVOKED'
   | 'KEY_EXPIRED'
-  
+
   // Offline (P8)
   | 'OFFLINE_SYNC_START'
   | 'OFFLINE_SYNC_COMPLETE'
@@ -60,18 +60,18 @@ export type SecurityEventType =
   | 'OFFLINE_CACHE_EXPIRED'
   | 'OFFLINE_CREDENTIAL_CACHED'
   | 'OFFLINE_CREDENTIAL_USED'
-  
+
   // Integrity
   | 'TAMPER_DETECTED'
   | 'INTEGRITY_CHECK_PASSED'
   | 'INTEGRITY_CHECK_FAILED'
-  
+
   // Data
   | 'DATA_ACCESSED'
   | 'DATA_MODIFIED'
   | 'DATA_DELETED'
   | 'DATA_EXPORTED'
-  
+
   // System
   | 'SECURITY_CONFIG_CHANGED'
   | 'AUDIT_LOG_ACCESSED'
@@ -93,7 +93,7 @@ export type SecurityOutcome = 'SUCCESS' | 'FAILURE' | 'BLOCKED';
 
 /**
  * Security event structure
- * 
+ *
  * Designed for:
  * - Structured logging (P12)
  * - AI analysis (P5)
@@ -103,53 +103,53 @@ export type SecurityOutcome = 'SUCCESS' | 'FAILURE' | 'BLOCKED';
 export interface SecurityEvent {
   /** ISO 8601 timestamp */
   timestamp: string;
-  
+
   /** Event type */
   eventType: SecurityEventType;
-  
+
   /** Severity level */
   severity: SecuritySeverity;
-  
+
   /** Event outcome */
   outcome: SecurityOutcome;
-  
+
   /** Who performed the action (user ID, service name, etc.) */
   actor?: string;
-  
+
   /** What was accessed/modified (resource identifier) */
   resource?: string;
-  
+
   /** What action was taken */
   action?: string;
-  
+
   /** Reason for outcome (especially for failures) */
   reason?: string;
-  
+
   /** Correlation ID for distributed tracing */
   traceId?: string;
-  
+
   /** Session ID */
   sessionId?: string;
-  
+
   /** Request ID */
   requestId?: string;
-  
+
   /** Client IP address (if applicable) */
   ip?: string;
-  
+
   /** User agent (if applicable) */
   userAgent?: string;
-  
+
   /** Geographic context */
   geo?: {
     country?: string;
     region?: string;
     city?: string;
   };
-  
+
   /** Protocol context (which GTCX protocol) */
   protocol?: 'tradepass' | 'geotag' | 'vaultmark' | 'pvp' | 'gci' | 'panx';
-  
+
   /** Additional structured metadata */
   metadata?: Record<string, unknown>;
 }
@@ -178,15 +178,12 @@ export function createSecurityEvent(
 /**
  * Infer severity from event type and outcome
  */
-function inferSeverity(
-  eventType: SecurityEventType,
-  outcome: SecurityOutcome
-): SecuritySeverity {
+function inferSeverity(eventType: SecurityEventType, outcome: SecurityOutcome): SecuritySeverity {
   // Critical events
   if (eventType === 'TAMPER_DETECTED') return 'CRITICAL';
   if (eventType === 'KEY_REVOKED' && outcome === 'SUCCESS') return 'HIGH';
   if (eventType === 'AUTH_LOCKOUT') return 'HIGH';
-  
+
   // Failures are generally warnings
   if (outcome === 'FAILURE' || outcome === 'BLOCKED') {
     if (eventType.includes('AUTH_')) return 'WARN';
@@ -194,7 +191,7 @@ function inferSeverity(
     if (eventType === 'INTEGRITY_CHECK_FAILED') return 'HIGH';
     return 'WARN';
   }
-  
+
   // Success events are info
   return 'INFO';
 }
@@ -209,7 +206,7 @@ const handlers: SecurityEventHandler[] = [];
 
 /**
  * Register a handler for security events
- * 
+ *
  * @example
  * registerSecurityHandler(async (event) => {
  *   await analyticsService.track(event);
@@ -241,7 +238,7 @@ export function clearSecurityHandlers(): void {
 
 /**
  * Log a security event
- * 
+ *
  * Sends event to all registered handlers.
  * Also logs to console in development.
  */
@@ -249,13 +246,15 @@ export async function logSecurityEvent(
   eventOrType: SecurityEvent | SecurityEventType,
   options?: Partial<Omit<SecurityEvent, 'timestamp' | 'eventType'>>
 ): Promise<void> {
-  const event: SecurityEvent = typeof eventOrType === 'string'
-    ? createSecurityEvent(eventOrType, options?.outcome ?? 'SUCCESS', options)
-    : eventOrType;
-  
+  const event: SecurityEvent =
+    typeof eventOrType === 'string'
+      ? createSecurityEvent(eventOrType, options?.outcome ?? 'SUCCESS', options)
+      : eventOrType;
+
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
     const color = severityColor(event.severity);
+    // eslint-disable-next-line no-console
     console.log(
       `${color}[SECURITY:${event.severity}]`,
       event.eventType,
@@ -266,21 +265,27 @@ export async function logSecurityEvent(
       '\x1b[0m'
     );
   }
-  
+
   // Send to all handlers
-  await Promise.all(handlers.map(handler => 
-    handler(event).catch(err => {
-      console.error('Security handler error:', err);
-    })
-  ));
+  await Promise.all(
+    handlers.map((handler) =>
+      handler(event).catch((err) => {
+        console.error('Security handler error:', err);
+      })
+    )
+  );
 }
 
 function severityColor(severity: SecuritySeverity): string {
   switch (severity) {
-    case 'CRITICAL': return '\x1b[31m'; // Red
-    case 'HIGH': return '\x1b[33m';     // Yellow
-    case 'WARN': return '\x1b[35m';     // Magenta
-    case 'INFO': return '\x1b[36m';     // Cyan
+    case 'CRITICAL':
+      return '\x1b[31m'; // Red
+    case 'HIGH':
+      return '\x1b[33m'; // Yellow
+    case 'WARN':
+      return '\x1b[35m'; // Magenta
+    case 'INFO':
+      return '\x1b[36m'; // Cyan
   }
 }
 
@@ -290,7 +295,7 @@ function severityColor(severity: SecuritySeverity): string {
 
 /**
  * Create an audit trail for a multi-step operation
- * 
+ *
  * @example
  * const audit = createAuditTrail('custody_transfer');
  * audit.record('initiated', { from: vaultA, to: vaultB });
@@ -302,7 +307,7 @@ export interface AuditTrail {
   readonly operationId: string;
   readonly operationType: string;
   readonly startedAt: string;
-  
+
   record(step: string, metadata?: Record<string, unknown>): void;
   finalize(outcome?: SecurityOutcome, reason?: string): Promise<void>;
 }
@@ -314,12 +319,12 @@ export function createAuditTrail(
   const operationId = crypto.randomUUID();
   const startedAt = new Date().toISOString();
   const steps: Array<{ step: string; timestamp: string; metadata?: Record<string, unknown> }> = [];
-  
+
   return {
     operationId,
     operationType,
     startedAt,
-    
+
     record(step: string, metadata?: Record<string, unknown>) {
       steps.push({
         step,
@@ -327,7 +332,7 @@ export function createAuditTrail(
         metadata,
       });
     },
-    
+
     async finalize(outcome: SecurityOutcome = 'SUCCESS', reason?: string) {
       await logSecurityEvent({
         timestamp: new Date().toISOString(),

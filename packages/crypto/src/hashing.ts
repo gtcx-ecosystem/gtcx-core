@@ -3,9 +3,24 @@
 // SHA-256 and other hash functions
 // ============================================================================
 
+import { timingSafeEqual } from 'crypto';
+
 import { sha256 } from '@noble/hashes/sha256';
 import { sha512 } from '@noble/hashes/sha512';
 import { bytesToHex } from '@noble/hashes/utils';
+
+/**
+ * Constant-time string comparison to prevent timing attacks.
+ * Both strings are converted to Buffers and compared using crypto.timingSafeEqual.
+ */
+export function constantTimeEqual(a: string, b: string): boolean {
+  const bufA = Buffer.from(a, 'utf8');
+  const bufB = Buffer.from(b, 'utf8');
+  if (bufA.length !== bufB.length) {
+    return false;
+  }
+  return timingSafeEqual(bufA, bufB);
+}
 
 export type HashAlgorithm = 'sha256' | 'sha512';
 
@@ -40,10 +55,29 @@ export function hash(data: string | Uint8Array, algorithm: HashAlgorithm = 'sha2
 }
 
 /**
+ * Recursively sort all keys in an object for deterministic serialization.
+ */
+function deepSortKeys(value: unknown): unknown {
+  if (value === null || value === undefined || typeof value !== 'object') {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return value.map(deepSortKeys);
+  }
+  const sorted: Record<string, unknown> = {};
+  for (const key of Object.keys(value as Record<string, unknown>).sort()) {
+    sorted[key] = deepSortKeys((value as Record<string, unknown>)[key]);
+  }
+  return sorted;
+}
+
+/**
  * Hash a JSON object (deterministic)
+ * Recursively sorts all keys at every level for consistent hashing.
  */
 export function hashObject(obj: unknown): string {
-  const sortedJson = JSON.stringify(obj, Object.keys(obj as object).sort());
+  const sorted = deepSortKeys(obj);
+  const sortedJson = JSON.stringify(sorted);
   return hash256(sortedJson);
 }
 
@@ -64,7 +98,7 @@ export function verifyHash(
   algorithm: HashAlgorithm = 'sha256'
 ): boolean {
   const computedHash = hash(data, algorithm);
-  return computedHash === expectedHash.toLowerCase();
+  return constantTimeEqual(computedHash, expectedHash.toLowerCase());
 }
 
 /**
@@ -79,7 +113,7 @@ export function createCommitment(data: string, salt: string): string {
  */
 export function verifyCommitment(data: string, salt: string, commitment: string): boolean {
   const computed = createCommitment(data, salt);
-  return computed === commitment.toLowerCase();
+  return constantTimeEqual(computed, commitment.toLowerCase());
 }
 
 /**
@@ -95,6 +129,6 @@ export function generateSalt(length: number = 32): string {
  * Combine multiple hashes into one
  */
 export function combineHashes(...hashes: string[]): string {
-  const combined = hashes.sort().join('');
+  const combined = hashes.join('');
   return hash256(combined);
 }

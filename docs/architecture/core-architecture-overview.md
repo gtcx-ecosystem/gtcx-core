@@ -17,34 +17,48 @@ The design philosophy is strict modularity with zero commodity-specific code. Co
 
 All packages are published under the `@gtcx/` scope and managed in a pnpm workspace.
 
-| Package             | Responsibility                                                                      |
-| ------------------- | ----------------------------------------------------------------------------------- |
-| @gtcx/types         | Shared TypeScript type definitions for the entire ecosystem                         |
-| @gtcx/domain        | Domain models, business logic, asset registration services                          |
-| @gtcx/schemas       | Zod validation schemas (Core12 framework) with runtime validation at every boundary |
-| @gtcx/crypto        | Cryptographic bindings wrapping the Rust foundation (Ed25519, SHA-256, Blake3, ZKP) |
-| @gtcx/security      | Input validation, authentication, RBAC, offline integrity, audit logging            |
-| @gtcx/identity      | DID/VC identity primitives -- creation, resolution, key rotation, offline cache     |
-| @gtcx/verification  | Verification logic, certificate issuance, QR codes, proof bundle generation         |
-| @gtcx/utils         | Shared utilities consumed across the ecosystem                                      |
-| config/eslint       | Shared ESLint configuration for consistent code style                               |
-| config/typescript   | Shared TypeScript configuration (strict mode, path aliases)                         |
-| config/tailwind     | Shared Tailwind configuration (design tokens)                                       |
-| config/jurisdiction | Jurisdiction-specific configuration for multi-country deployments                   |
+| Package            | Responsibility                                                                      |
+| ------------------ | ----------------------------------------------------------------------------------- |
+| @gtcx/types        | Shared TypeScript type definitions for the entire ecosystem                         |
+| @gtcx/domain       | Foundational domain types, schemas, events, metrics, migrations, offline queue      |
+| @gtcx/services     | Application services -- registration, trading, compliance (depends on domain)       |
+| @gtcx/schemas      | Zod validation schemas (Core12 framework) with runtime validation at every boundary |
+| @gtcx/crypto       | Cryptographic bindings wrapping the Rust foundation (Ed25519, SHA-256, Blake3, ZKP) |
+| @gtcx/security     | Input validation, authentication, RBAC, offline integrity, audit logging            |
+| @gtcx/identity     | DID/VC identity primitives -- creation, resolution, key rotation, offline cache     |
+| @gtcx/verification | Verification logic, certificate issuance, QR codes, proof bundle generation         |
+| @gtcx/ai           | AI integration stubs -- tracing, category logging, no-op implementations            |
+| @gtcx/logging      | Structured logging utilities                                                        |
+| @gtcx/utils        | Shared utilities consumed across the ecosystem                                      |
+| @gtcx/events       | Typed event bus with offline buffering and replay                                   |
+| @gtcx/connectivity | Network status detection and connectivity profiles                                  |
+| @gtcx/sync         | Offline-first sync engine (interface stub)                                          |
+| @gtcx/api-client   | Resilient API client with retry (interface stub)                                    |
+| config/eslint      | Shared ESLint configuration for consistent code style                               |
+| config/typescript  | Shared TypeScript configuration (strict mode, path aliases)                         |
+| config/tailwind    | Shared Tailwind configuration (design tokens)                                       |
 
 ### Internal Dependency Order
 
 ```
-@gtcx/crypto (zero deps -- cryptographic foundation)
-    ├── @gtcx/identity (DID/VC, key rotation)
-    ├── @gtcx/security (auth, RBAC, validation)
-    └── @gtcx/verification (proof bundles, certs)
-            └── @gtcx/domain (business logic, assets)
-                    └── @gtcx/schemas (Zod validation)
-                            └── @gtcx/types (shared TS types)
+@gtcx/crypto (depends on @gtcx/ai for traced wrappers, @gtcx/types)
+    ├── @gtcx/identity (DID/VC, key rotation — depends on @gtcx/crypto, @gtcx/types)
+    ├── @gtcx/security (auth, RBAC, validation — depends on @gtcx/crypto)
+    └── @gtcx/verification (proof bundles, certs — depends on @gtcx/crypto, @gtcx/ai, @gtcx/types)
 
+@gtcx/domain (foundational types, schemas, events, metrics)
+    └── @gtcx/services (registration, trading, compliance)
+
+@gtcx/schemas (Core12 Zod validation)
+@gtcx/types (shared TS types)
+@gtcx/ai (AI integration stubs)
+@gtcx/logging (structured logging)
 @gtcx/utils (standalone utilities, no internal deps)
-config/* (eslint, typescript, tailwind, jurisdiction)
+@gtcx/events (typed event bus, offline buffering)
+@gtcx/connectivity (network status detection)
+@gtcx/sync (sync engine stub)
+@gtcx/api-client (API client stub)
+config/* (eslint, typescript, tailwind)
 ```
 
 No circular dependencies are permitted, enforced by build-time checks. See [Shared Infrastructure](./shared-infrastructure.md) Section 2 for the full dependency graph.

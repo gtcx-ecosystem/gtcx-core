@@ -3,6 +3,8 @@
 // Create and manage digital identities for GTCX participants
 // ============================================================================
 
+import { randomUUID, randomBytes } from 'crypto';
+
 import { generateKeyPair, hash256 } from '@gtcx/crypto';
 import type {
   DigitalIdentity,
@@ -12,6 +14,9 @@ import type {
   KeyDerivationParams,
   MultiKeyPairs,
 } from '@gtcx/types';
+
+const VALID_SECURITY_LEVELS: SecurityLevel[] = ['standard', 'enhanced', 'military'];
+const VALID_ALGORITHMS = ['Ed25519', 'Secp256k1'] as const;
 
 /**
  * Options for identity creation
@@ -45,7 +50,7 @@ export interface EnhancedIdentityCreationResult {
  */
 export function generateIdentityId(prefix: string = 'GTCX'): string {
   const timestamp = Date.now().toString(36).toUpperCase();
-  const random = Math.random().toString(36).substring(2, 10).toUpperCase();
+  const random = randomUUID().replace(/-/g, '').substring(0, 8).toUpperCase();
   return `${prefix}_${timestamp}_${random}`;
 }
 
@@ -66,6 +71,21 @@ export async function createIdentity(
   options: CreateIdentityOptions = {}
 ): Promise<IdentityCreationResult> {
   const { securityLevel = 'standard', metadata = {}, algorithm = 'Ed25519' } = options;
+
+  // Validate options
+  if (securityLevel && !VALID_SECURITY_LEVELS.includes(securityLevel)) {
+    throw new Error(
+      `Invalid securityLevel: ${securityLevel}. Must be one of: ${VALID_SECURITY_LEVELS.join(', ')}`
+    );
+  }
+  if (algorithm && !VALID_ALGORITHMS.includes(algorithm)) {
+    throw new Error(
+      `Invalid algorithm: ${algorithm}. Must be one of: ${VALID_ALGORITHMS.join(', ')}`
+    );
+  }
+  if (metadata && typeof metadata !== 'object') {
+    throw new Error('metadata must be an object');
+  }
 
   // Generate cryptographic key pair
   const keyPair = await generateKeyPair(algorithm);
@@ -89,10 +109,16 @@ export async function createIdentity(
     },
   };
 
-  return {
-    identity,
-    privateKey: keyPair.privateKey,
-  };
+  // Protect private key from accidental serialization
+  const result: IdentityCreationResult = { identity } as IdentityCreationResult;
+  Object.defineProperty(result, 'privateKey', {
+    value: keyPair.privateKey,
+    enumerable: false,
+    configurable: false,
+    writable: false,
+  });
+
+  return result;
 }
 
 /**
@@ -155,18 +181,35 @@ export async function createEnhancedIdentity(
       ? {
           algorithm: keyDerivation.algorithm ?? 'Argon2',
           iterations: keyDerivation.iterations ?? 100000,
-          salt: keyDerivation.salt ?? generateIdentityId('SALT'),
+          salt: keyDerivation.salt ?? randomBytes(32).toString('hex'),
         }
       : undefined,
   };
 
-  return {
-    identity,
-    privateKeys: {
-      ed25519: ed25519KeyPair.privateKey,
-      secp256k1: secp256k1KeyPair.privateKey,
-    },
-  };
+  // Protect private keys from accidental serialization
+  const privateKeys = {} as { ed25519: string; secp256k1: string };
+  Object.defineProperty(privateKeys, 'ed25519', {
+    value: ed25519KeyPair.privateKey,
+    enumerable: false,
+    configurable: false,
+    writable: false,
+  });
+  Object.defineProperty(privateKeys, 'secp256k1', {
+    value: secp256k1KeyPair.privateKey,
+    enumerable: false,
+    configurable: false,
+    writable: false,
+  });
+
+  const result: EnhancedIdentityCreationResult = { identity } as EnhancedIdentityCreationResult;
+  Object.defineProperty(result, 'privateKeys', {
+    value: privateKeys,
+    enumerable: false,
+    configurable: false,
+    writable: false,
+  });
+
+  return result;
 }
 
 /**

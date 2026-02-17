@@ -92,8 +92,8 @@ export function decodeToken(token: string): Token | null {
 
     const [headerB64, claimsB64, signature] = parts;
 
-    const header = JSON.parse(base64UrlDecode(headerB64));
-    const claims = JSON.parse(base64UrlDecode(claimsB64));
+    const header = JSON.parse(base64UrlDecode(headerB64!));
+    const claims = JSON.parse(base64UrlDecode(claimsB64!));
 
     const validatedHeader = JWTHeaderSchema.parse(header);
     const validatedClaims = GTCXTokenClaimsSchema.parse(claims);
@@ -101,7 +101,7 @@ export function decodeToken(token: string): Token | null {
     return {
       header: validatedHeader,
       claims: validatedClaims,
-      signature,
+      signature: signature!,
       raw: token,
     };
   } catch {
@@ -122,8 +122,7 @@ export function isTokenTemporallyValid(
   const expired = claims.exp !== undefined && now > claims.exp + clockSkewSeconds;
 
   // Check not-before
-  const notYetValid =
-    claims.nbf !== undefined && now < claims.nbf - clockSkewSeconds;
+  const notYetValid = claims.nbf !== undefined && now < claims.nbf - clockSkewSeconds;
 
   return {
     valid: !expired && !notYetValid,
@@ -135,10 +134,7 @@ export function isTokenTemporallyValid(
 /**
  * Check if token is valid for offline use
  */
-export function isTokenValidOffline(
-  claims: GTCXTokenClaims,
-  maxOfflineHours = 72
-): boolean {
+export function isTokenValidOffline(claims: GTCXTokenClaims, maxOfflineHours = 72): boolean {
   if (!claims.offline) {
     return false;
   }
@@ -162,16 +158,8 @@ export function isTokenValidOffline(
 /**
  * Create unsigned token payload (for signing with @gtcx/crypto)
  */
-export function createTokenPayload(
-  claims: GTCXTokenClaims,
-  options: TokenOptions = {}
-): string {
-  const {
-    algorithm = 'EdDSA',
-    keyId,
-    expiresInSeconds = 3600,
-    offlineExpiresInSeconds,
-  } = options;
+export function createTokenPayload(claims: GTCXTokenClaims, options: TokenOptions = {}): string {
+  const { algorithm = 'EdDSA', keyId, expiresInSeconds = 3600, offlineExpiresInSeconds } = options;
 
   const now = Math.floor(Date.now() / 1000);
 
@@ -205,9 +193,29 @@ export interface TokenOptions {
 }
 
 /**
- * Assemble token from payload and signature
+ * Assemble token from payload and signature.
+ *
+ * @param payload - The base64url-encoded header.claims string
+ * @param signature - Raw signature bytes (Uint8Array/Buffer) or an already
+ *   base64url-encoded string. Raw bytes are preferred to avoid double-encoding.
  */
-export function assembleToken(payload: string, signature: string): string {
+export function assembleToken(payload: string, signature: string | Uint8Array): string {
+  if (signature instanceof Uint8Array) {
+    // Raw bytes — encode once
+    const base64 = Buffer.from(signature).toString('base64');
+    const encoded = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    return `${payload}.${encoded}`;
+  }
+
+  // String signature — check if it's already base64url-encoded
+  // (base64url uses only alphanumeric, '-', and '_'; no '+', '/', or '=')
+  const isBase64Url = /^[A-Za-z0-9_-]+$/.test(signature);
+  if (isBase64Url) {
+    // Already encoded — use as-is
+    return `${payload}.${signature}`;
+  }
+
+  // Not base64url — encode it
   return `${payload}.${base64UrlEncode(signature)}`;
 }
 
