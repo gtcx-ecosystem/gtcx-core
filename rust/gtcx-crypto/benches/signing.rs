@@ -4,7 +4,7 @@ use gtcx_crypto::signing::ed25519::{sign, verify};
 
 fn bench_key_generation(c: &mut Criterion) {
     c.bench_function("ed25519_keygen", |b| {
-        b.iter(|| generate_keypair())
+        b.iter(generate_keypair)
     });
 }
 

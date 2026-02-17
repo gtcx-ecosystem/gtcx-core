@@ -28,7 +28,7 @@
 //! Instead, we use:
 //! - SHA-256 hash chaining
 //! - Ed25519 digital signatures
-//! - PostgreSQL storage (not a distributed ledger)
+//! - `PostgreSQL` storage (not a distributed ledger)
 //!
 //! ## Example
 //!
@@ -206,7 +206,7 @@ pub fn verify_entry(entry: &ChainEntry, public_key: &PublicKey) -> bool {
 /// Checks:
 /// 1. All signatures are valid
 /// 2. Sequence numbers are consecutive starting from 0
-/// 3. Each entry's prev_hash matches the previous entry's hash
+/// 3. Each entry's `prev_hash` matches the previous entry's hash
 ///
 /// # Arguments
 ///
@@ -283,6 +283,11 @@ pub fn verify_chain(chain: &[ChainEntry], public_key: &PublicKey) -> Result<()> 
 /// # Returns
 ///
 /// `Ok(())` if the new entry is a valid extension.
+///
+/// # Errors
+///
+/// - [`CryptoError::ChainIntegrityViolation`] if sequence or hash doesn't match
+/// - [`CryptoError::VerificationFailed`] if the signature is invalid
 #[instrument(skip_all, fields(last_seq = last_entry.sequence, new_seq = new_entry.sequence))]
 pub fn verify_extension(
     last_entry: &ChainEntry,

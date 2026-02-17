@@ -81,7 +81,7 @@ pub enum CryptoError {
 
 impl CryptoError {
     /// Create a length mismatch error for batch operations.
-    pub fn length_mismatch(messages: usize, signatures: usize, keys: usize) -> Self {
+    pub const fn length_mismatch(messages: usize, signatures: usize, keys: usize) -> Self {
         Self::LengthMismatch {
             messages,
             signatures,

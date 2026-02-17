@@ -42,7 +42,7 @@
 //! All private keys are automatically zeroed when dropped:
 //!
 //! ```rust
-//! use gtcx_crypto::keys::PrivateKey;
+//! use gtcx_crypto::signing::ed25519::PrivateKey;
 //!
 //! {
 //!     let key = PrivateKey::generate();

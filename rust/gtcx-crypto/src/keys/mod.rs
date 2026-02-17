@@ -42,7 +42,7 @@ pub struct KeyPair {
 ///
 /// # Returns
 ///
-/// A tuple of (private_key, public_key).
+/// A tuple of (`private_key`, `public_key`).
 ///
 /// # Example
 ///
@@ -58,7 +58,7 @@ pub fn generate_keypair() -> (PrivateKey, PublicKey) {
     (private_key, public_key)
 }
 
-/// Generate a new random key pair as a KeyPair struct.
+/// Generate a new random key pair as a `KeyPair` struct.
 ///
 /// # Example
 ///
@@ -103,6 +103,10 @@ pub fn generate_keypair_struct() -> KeyPair {
 /// let encryption_key = derive_child_key(&master_key, 1);
 /// let auth_key = derive_child_key(&master_key, 2);
 /// ```
+///
+/// # Panics
+///
+/// Panics if Blake3 derivation produces invalid key material (should never happen).
 #[instrument(skip(parent), fields(index = index))]
 pub fn derive_child_key(parent: &PrivateKey, index: u32) -> PrivateKey {
     let context = format!("GTCX-2026 child key derivation index {index}");
@@ -134,6 +138,10 @@ pub fn derive_child_key(parent: &PrivateKey, index: u32) -> PrivateKey {
 /// let signing_key = derive_purpose_key(&master_key, "tradepass-signing");
 /// let geotag_key = derive_purpose_key(&master_key, "geotag-signing");
 /// ```
+///
+/// # Panics
+///
+/// Panics if Blake3 derivation produces invalid key material (should never happen).
 #[instrument(skip(master), fields(purpose = purpose))]
 pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> PrivateKey {
     let context = format!("GTCX-2026 purpose key: {purpose}");
@@ -164,6 +172,10 @@ pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> PrivateKey {
 /// // Derive: master / 44 / 0 / 0 / 0
 /// let derived = derive_path(&master_key, &[44, 0, 0, 0]);
 /// ```
+///
+/// # Panics
+///
+/// Panics if key cloning or derivation produces invalid key material (should never happen).
 #[instrument(skip(master), fields(path_len = path.len()))]
 pub fn derive_path(master: &PrivateKey, path: &[u32]) -> PrivateKey {
     let mut current = PrivateKey::from_bytes(master.as_bytes())

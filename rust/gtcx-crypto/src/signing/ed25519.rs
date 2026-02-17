@@ -173,7 +173,7 @@ impl PublicKey {
     }
 
     /// Get the raw bytes of the public key.
-    pub fn as_bytes(&self) -> &[u8; 32] {
+    pub const fn as_bytes(&self) -> &[u8; 32] {
         &self.0
     }
 
@@ -210,7 +210,7 @@ impl Signature {
     }
 
     /// Get the raw bytes of the signature.
-    pub fn as_bytes(&self) -> &[u8; 64] {
+    pub const fn as_bytes(&self) -> &[u8; 64] {
         &self.0
     }
 
@@ -318,8 +318,8 @@ pub fn verify(signature: &Signature, message: &[u8], public_key: &PublicKey) -> 
 ///     .zip(messages.iter())
 ///     .map(|(k, m)| sign(m, k))
 ///     .collect();
-/// let public_keys: Vec<_> = keys.iter().map(|k| k.public_key()).collect();
-/// let msg_refs: Vec<&[u8]> = messages.iter().map(|m| m.as_slice()).collect();
+/// let public_keys: Vec<_> = keys.iter().map(PrivateKey::public_key).collect();
+/// let msg_refs: Vec<&[u8]> = messages.iter().map(Vec::as_slice).collect();
 ///
 /// assert!(batch_verify(&msg_refs, &signatures, &public_keys).unwrap());
 /// ```
@@ -437,8 +437,8 @@ mod tests {
             .zip(messages.iter())
             .map(|(k, m)| sign(m, k))
             .collect();
-        let public_keys: Vec<_> = keys.iter().map(|k| k.public_key()).collect();
-        let message_refs: Vec<&[u8]> = messages.iter().map(|m| m.as_slice()).collect();
+        let public_keys: Vec<_> = keys.iter().map(PrivateKey::public_key).collect();
+        let message_refs: Vec<&[u8]> = messages.iter().map(Vec::as_slice).collect();
 
         assert!(batch_verify(&message_refs, &signatures, &public_keys).unwrap());
     }
@@ -456,8 +456,8 @@ mod tests {
         // Corrupt one signature
         signatures[5] = sign(b"Different message", &keys[5]);
 
-        let public_keys: Vec<_> = keys.iter().map(|k| k.public_key()).collect();
-        let message_refs: Vec<&[u8]> = messages.iter().map(|m| m.as_slice()).collect();
+        let public_keys: Vec<_> = keys.iter().map(PrivateKey::public_key).collect();
+        let message_refs: Vec<&[u8]> = messages.iter().map(Vec::as_slice).collect();
 
         assert!(!batch_verify(&message_refs, &signatures, &public_keys).unwrap());
     }
@@ -473,8 +473,8 @@ mod tests {
             .collect();
 
         // Wrong number of public keys
-        let public_keys: Vec<_> = keys.iter().take(5).map(|k| k.public_key()).collect();
-        let message_refs: Vec<&[u8]> = messages.iter().map(|m| m.as_slice()).collect();
+        let public_keys: Vec<_> = keys.iter().take(5).map(PrivateKey::public_key).collect();
+        let message_refs: Vec<&[u8]> = messages.iter().map(Vec::as_slice).collect();
 
         let result = batch_verify(&message_refs, &signatures, &public_keys);
         assert!(matches!(result, Err(CryptoError::LengthMismatch { .. })));
@@ -505,7 +505,7 @@ mod tests {
     #[test]
     fn test_private_key_debug_redacted() {
         let private_key = PrivateKey::generate();
-        let debug_str = format!("{:?}", private_key);
+        let debug_str = format!("{private_key:?}");
         assert!(debug_str.contains("REDACTED"));
         assert!(!debug_str.contains(&hex::encode(private_key.as_bytes())));
     }
