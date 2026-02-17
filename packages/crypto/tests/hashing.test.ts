@@ -31,6 +31,32 @@ describe('hash256', () => {
     const fromBytes = hash256(bytes);
     expect(fromBytes).toBe(fromString);
   });
+
+  it('hashes an empty string input', () => {
+    const result = hash256('');
+    expect(result).toMatch(/^[0-9a-f]{64}$/);
+    expect(result).toBe('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+  });
+
+  it('hashes an empty Uint8Array', () => {
+    const result = hash256(new Uint8Array(0));
+    expect(result).toMatch(/^[0-9a-f]{64}$/);
+    expect(result).toBe('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+  });
+
+  it('matches known SHA-256 test vector for "abc"', () => {
+    expect(hash256('abc')).toBe('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
+  });
+
+  it('matches known SHA-256 test vector for empty input', () => {
+    expect(hash256('')).toBe('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+  });
+
+  it('produces the same hash for string and equivalent Uint8Array', () => {
+    const testString = 'determinism check';
+    const testBytes = new TextEncoder().encode(testString);
+    expect(hash256(testString)).toBe(hash256(testBytes));
+  });
 });
 
 describe('hash512', () => {

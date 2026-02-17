@@ -54,6 +54,54 @@ describe('sign and verify', () => {
     const signature = sign('test', kp.privateKey);
     expect(verify('test', signature, 'deadbeef')).toBe(false);
   });
+
+  it('signs and verifies an empty string message', () => {
+    const kp = generateKeyPair('Ed25519');
+    const signature = sign('', kp.privateKey);
+    expect(signature).toMatch(/^[0-9a-f]{128}$/);
+    expect(verify('', signature, kp.publicKey)).toBe(true);
+  });
+
+  it('signs and verifies an empty Uint8Array message', () => {
+    const kp = generateKeyPair('Ed25519');
+    const emptyBytes = new Uint8Array(0);
+    const signature = sign(emptyBytes, kp.privateKey);
+    expect(signature).toMatch(/^[0-9a-f]{128}$/);
+    expect(verify(emptyBytes, signature, kp.publicKey)).toBe(true);
+  });
+
+  it('empty string and empty Uint8Array produce the same signature', () => {
+    const kp = generateKeyPair('Ed25519');
+    const sigFromString = sign('', kp.privateKey);
+    const sigFromBytes = sign(new Uint8Array(0), kp.privateKey);
+    expect(sigFromString).toBe(sigFromBytes);
+  });
+
+  it('signs and verifies a very large message (1 MB)', () => {
+    const kp = generateKeyPair('Ed25519');
+    const largeMessage = 'A'.repeat(1024 * 1024); // 1 MB
+    const signature = sign(largeMessage, kp.privateKey);
+    expect(signature).toMatch(/^[0-9a-f]{128}$/);
+    expect(verify(largeMessage, signature, kp.publicKey)).toBe(true);
+  });
+
+  it('verify returns false for a truncated (wrong-length) signature', () => {
+    const kp = generateKeyPair('Ed25519');
+    const signature = sign('test', kp.privateKey);
+    const truncated = signature.substring(0, 64); // half the signature
+    expect(verify('test', truncated, kp.publicKey)).toBe(false);
+  });
+
+  it('verify returns false for an empty signature string', () => {
+    const kp = generateKeyPair('Ed25519');
+    expect(verify('test', '', kp.publicKey)).toBe(false);
+  });
+
+  it('verify returns false for an empty public key string', () => {
+    const kp = generateKeyPair('Ed25519');
+    const signature = sign('test', kp.privateKey);
+    expect(verify('test', signature, '')).toBe(false);
+  });
 });
 
 describe('signHash and verifyHash', () => {

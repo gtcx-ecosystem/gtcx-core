@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "description": "Application-level business services for GTCX Protocol — registration, trading, compliance",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "./dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {

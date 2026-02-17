@@ -283,3 +283,65 @@ describe('Identity → Verification: DID-bound verification', () => {
     expect(verify(certData.dataToSign, signature, identity.publicKey)).toBe(true);
   });
 });
+
+describe('Identity → Verification: Certificate failure scenarios', () => {
+  it('certificate verification fails with wrong public key', async () => {
+    const alice = await createIdentity();
+    const bob = await createIdentity();
+
+    const certData = createStandardCertificateData(makeStandardInput());
+    const signature = sign(certData.dataToSign, alice.privateKey);
+
+    // Verify with Bob's key should fail
+    expect(verify(certData.dataToSign, signature, bob.identity.publicKey)).toBe(false);
+    expect(verify(certData.dataToSign, signature, alice.identity.publicKey)).toBe(true);
+  });
+
+  it('certificate structure check fails with missing required metadata', () => {
+    const incomplete = {
+      certificateId: 'cert-test',
+      version: '1.0',
+      type: 'location',
+      securityLevel: 'standard',
+      metadata: {
+        issuer: 'test',
+        // missing issuedAt and location
+      },
+      verificationData: {
+        publicKey: 'abc',
+        signature: 'def',
+        timestamp: Date.now(),
+      },
+      createdAt: Date.now(),
+    };
+
+    const result = verifyCertificateStructure(incomplete as never);
+    expect(result.valid).toBe(false);
+    expect(result.errors.length).toBeGreaterThan(0);
+  });
+
+  it('certificate with future issuedAt still passes structure check', async () => {
+    const { identity, privateKey } = await createIdentity();
+    const input = makeStandardInput();
+    const certData = createStandardCertificateData(input);
+    const signature = sign(certData.dataToSign, privateKey);
+
+    // Manually set issuedAt to the future
+    const certificate = {
+      ...certData,
+      metadata: { ...certData.metadata, issuedAt: Date.now() + 365 * 24 * 60 * 60 * 1000 },
+      verificationData: {
+        ...certData.verificationData,
+        publicKey: identity.publicKey,
+        signature,
+      },
+    };
+
+    // Structure check does not reject future issuedAt (no such rule in verifyCertificateStructure)
+    const result = verifyCertificateStructure(certificate as never);
+    expect(result.valid).toBe(true);
+
+    // But the signature is still valid for the original data
+    expect(verify(certData.dataToSign, signature, identity.publicKey)).toBe(true);
+  });
+});

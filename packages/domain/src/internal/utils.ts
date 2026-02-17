@@ -9,12 +9,18 @@
 
 import crypto from 'crypto';
 
+import { sleep } from '@gtcx/utils';
+
+// Re-export sleep from @gtcx/utils (avoids duplication)
+export { sleep };
+
 // ============================================================================
 // ID GENERATION
 // ============================================================================
 
 /**
- * Generate unique ID with prefix
+ * Generate unique ID with prefix.
+ * Note: differs from @gtcx/utils generateId() — prefix is required here.
  * @internal
  */
 export function generateId(prefix: string): string {
@@ -349,14 +355,6 @@ export function calculateBackoffDelay(
   // eslint-disable-next-line no-restricted-properties -- Jitter for backoff; not security-sensitive
   const jitter = delay * 0.1 * (Math.random() * 2 - 1);
   return Math.min(delay + jitter, opts.maxDelayMs);
-}
-
-/**
- * Sleep for specified milliseconds
- * @internal
- */
-export function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**

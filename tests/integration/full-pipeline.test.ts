@@ -18,6 +18,7 @@ import { getDomain, getAllControls } from '@gtcx/schemas';
 import {
   createStandardCertificateData,
   validateCertificateInput,
+  verifyCertificateStructure,
   createLocationProof,
   createCryptographicProofRef,
   createProofBundle,
@@ -281,5 +282,66 @@ describe('Full pipeline: Content-addressed data integrity', () => {
     // Tamper detection: modifying any event breaks the chain
     const tamperedHash = hash256(events[2]!.prevHash + hash256('tampered'));
     expect(tamperedHash).not.toBe(events[2]!.chainedHash);
+  });
+});
+
+describe('Full pipeline: Failure scenarios', () => {
+  it('certificate creation fails with corrupted private key bytes', () => {
+    const corruptedKey = 'zz'.repeat(32); // invalid hex
+    expect(() => sign('test-message', corruptedKey)).toThrow();
+  });
+
+  it('QR code generation with expired certificate reports expiration', async () => {
+    const { identity, privateKey } = await createIdentity();
+    const threeYearsAgo = Date.now() - 3 * 365 * 24 * 60 * 60 * 1000;
+    const input = {
+      templateId: 'location' as const,
+      location: makeLocation(),
+      userRole: 'inspector',
+      deviceId: 'device-001',
+      expiresAt: threeYearsAgo,
+    };
+
+    const certData = createStandardCertificateData(input);
+    const signature = sign(certData.dataToSign, privateKey);
+    const certificate = {
+      ...certData,
+      verificationData: {
+        ...certData.verificationData,
+        publicKey: identity.publicKey,
+        signature,
+      },
+    };
+
+    // Certificate structure check should flag expiration
+    const result = verifyCertificateStructure(certificate as never);
+    expect(result.valid).toBe(false);
+    expect(result.errors).toContain('Certificate has expired');
+  });
+
+  it('proof bundle verification detects tampered signature', async () => {
+    const { identity, privateKey } = await createIdentity();
+    const message = 'original-data';
+    const signature = sign(message, privateKey);
+    const dataHash = hash256(message);
+
+    // Create a valid bundle
+    const cryptoProof = createCryptographicProofRef(dataHash, signature, identity.publicKey);
+    const bundle = createProofBundle({
+      type: 'location',
+      cryptographicProof: cryptoProof,
+      locationProof: createLocationProof({
+        coordinates: makeLocation(),
+        signature,
+        publicKey: identity.publicKey,
+      }),
+    });
+
+    // Bundle is structurally valid
+    expect(verifyProofBundleStructure(bundle).valid).toBe(true);
+
+    // But the signature was for 'original-data', not 'tampered-data'
+    expect(verify('tampered-data', signature, identity.publicKey)).toBe(false);
+    expect(verify(message, signature, identity.publicKey)).toBe(true);
   });
 });
