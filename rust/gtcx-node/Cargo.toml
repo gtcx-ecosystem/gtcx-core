@@ -3,7 +3,14 @@ name = "gtcx-node"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "GTCX Protocol - Node.js Bindings (NAPI-RS)"
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description = "GTCX Protocol - Node.js native bindings via NAPI-RS for cryptographic operations"
+readme = "README.md"
+keywords = ["napi", "nodejs", "bindings", "cryptography", "gtcx"]
+categories = ["api-bindings"]
+publish = false
 
 [lib]
 crate-type = ["cdylib", "rlib"]

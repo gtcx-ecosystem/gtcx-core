@@ -1,8 +1,7 @@
 {
   "name": "@gtcx/security",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Security utilities for GTCX Protocol - validation, auth, offline security, audit logging",
-  "private": true,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -70,10 +69,19 @@
     "audit"
   ],
   "author": "GTCX Protocol",
-  "license": "PROPRIETARY",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gtcx-ecosystem/gtcx.git",
+    "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
     "directory": "packages/security"
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/security#readme",
+  "bugs": {
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
+  },
+  "sideEffects": false
 }

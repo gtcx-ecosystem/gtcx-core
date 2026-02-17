@@ -3,7 +3,13 @@ name = "gtcx-zkp"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "GTCX Protocol - Zero-Knowledge Proofs"
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description = "GTCX Protocol - Zero-Knowledge Proof system with hash-commitment proofs"
+readme = "README.md"
+keywords = ["zero-knowledge", "zkp", "proofs", "cryptography", "gtcx"]
+categories = ["cryptography"]
 
 [dependencies]
 gtcx-crypto = { path = "../gtcx-crypto" }

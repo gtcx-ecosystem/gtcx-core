@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/identity",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Identity management for GTCX protocol",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,5 +33,25 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
+    "directory": "packages/identity"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/identity#readme",
+  "bugs": {
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false
 }

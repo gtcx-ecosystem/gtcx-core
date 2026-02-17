@@ -1,7 +1,6 @@
 {
   "name": "@gtcx/schemas",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "description": "GTCX verification schemas including Core12 compliance framework",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -37,5 +36,25 @@
       "import": "./dist/core12/index.mjs",
       "require": "./dist/core12/index.js"
     }
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
+    "directory": "packages/schemas"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/schemas#readme",
+  "bugs": {
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false
 }

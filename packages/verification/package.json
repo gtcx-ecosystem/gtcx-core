@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/verification",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Certificate generation, QR codes, and verification proofs for GTCX Protocol",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -56,5 +56,25 @@
     "@gtcx/ai": {
       "optional": true
     }
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
+    "directory": "packages/verification"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/verification#readme",
+  "bugs": {
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false
 }

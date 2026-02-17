@@ -1,0 +1,21 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.2/schema.json",
+  "changelog": ["@changesets/changelog-github", { "repo": "gtcx-ecosystem/gtcx-core" }],
+  "commit": false,
+  "fixed": [],
+  "linked": [
+    [
+      "@gtcx/types",
+      "@gtcx/crypto",
+      "@gtcx/identity",
+      "@gtcx/verification",
+      "@gtcx/domain",
+      "@gtcx/schemas",
+      "@gtcx/security"
+    ]
+  ],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": ["@gtcx/integration-tests"]
+}

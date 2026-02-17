@@ -3,7 +3,13 @@ name = "gtcx-network"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "GTCX Protocol - P2P Networking"
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description = "GTCX Protocol - P2P networking types with topic-based pub/sub messaging"
+readme = "README.md"
+keywords = ["networking", "p2p", "pubsub", "messaging", "gtcx"]
+categories = ["network-programming"]
 
 [dependencies]
 gtcx-crypto = { path = "../gtcx-crypto" }

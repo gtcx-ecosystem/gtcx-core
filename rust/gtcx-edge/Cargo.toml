@@ -3,7 +3,13 @@ name = "gtcx-edge"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "GTCX Protocol - Edge/WASM Runtime"
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description = "GTCX Protocol - Edge runtime with resource-constrained device profiles and verification caching"
+readme = "README.md"
+keywords = ["edge", "wasm", "iot", "embedded", "gtcx"]
+categories = ["embedded", "wasm"]
 
 [dependencies]
 gtcx-crypto = { path = "../gtcx-crypto" }

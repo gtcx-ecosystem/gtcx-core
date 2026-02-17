@@ -3,7 +3,13 @@ name = "gtcx-consensus"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "GTCX Protocol - PANX Weighted PBFT Consensus"
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description = "GTCX Protocol - Weighted PBFT consensus engine for multi-stakeholder verification"
+readme = "README.md"
+keywords = ["consensus", "pbft", "blockchain", "distributed", "gtcx"]
+categories = ["algorithms"]
 
 [dependencies]
 gtcx-crypto = { path = "../gtcx-crypto" }

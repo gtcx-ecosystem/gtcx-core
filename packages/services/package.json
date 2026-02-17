@@ -1,7 +1,6 @@
 {
   "name": "@gtcx/services",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
   "description": "Application-level business services for GTCX Protocol — registration, trading, compliance",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -63,10 +62,19 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gtcx/gtcx.git",
+    "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
     "directory": "packages/services"
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/services#readme",
+  "bugs": {
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
+  },
+  "sideEffects": false
 }
