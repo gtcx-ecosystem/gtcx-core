@@ -34,3 +34,6 @@ packages:
   - 'packages/config/eslint'
   - 'packages/config/typescript'
   - 'packages/config/tailwind'
+
+  # Integration tests
+  - 'tests/integration'

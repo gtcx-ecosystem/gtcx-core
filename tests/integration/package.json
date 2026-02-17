@@ -1,0 +1,21 @@
+{
+  "name": "@gtcx/integration-tests",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@gtcx/crypto": "workspace:*",
+    "@gtcx/identity": "workspace:*",
+    "@gtcx/verification": "workspace:*",
+    "@gtcx/domain": "workspace:*",
+    "@gtcx/schemas": "workspace:*",
+    "@gtcx/security": "workspace:*",
+    "@gtcx/types": "workspace:*",
+    "@gtcx/events": "workspace:*",
+    "vitest": "^2.1.0"
+  }
+}
