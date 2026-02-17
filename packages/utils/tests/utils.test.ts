@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { z } from 'zod';
 
 import {
   sleep,
@@ -81,6 +82,32 @@ describe('safeJsonParse', () => {
     const result = safeJsonParse('not valid json', fallback);
     expect(result).toBe(fallback);
   });
+
+  it('should validate with Zod schema when provided', () => {
+    const schema = z.object({ name: z.string(), age: z.number() });
+    const result = safeJsonParse('{"name":"Bob","age":25}', { name: '', age: 0 }, schema);
+    expect(result).toEqual({ name: 'Bob', age: 25 });
+  });
+
+  it('should return fallback when Zod schema validation fails', () => {
+    const schema = z.object({ name: z.string(), age: z.number() });
+    const fallback = { name: 'default', age: 0 };
+    // age is a string, not a number — should fail validation
+    const result = safeJsonParse('{"name":"Bob","age":"not-a-number"}', fallback, schema);
+    expect(result).toBe(fallback);
+  });
+
+  it('should return fallback when JSON is invalid even with schema', () => {
+    const schema = z.object({ name: z.string() });
+    const fallback = { name: 'default' };
+    const result = safeJsonParse('not json at all', fallback, schema);
+    expect(result).toBe(fallback);
+  });
+
+  it('should work without schema (backwards compatible)', () => {
+    const result = safeJsonParse('42', 0);
+    expect(result).toBe(42);
+  });
 });
 
 // ============================================================================
@@ -161,6 +188,58 @@ describe('deepClone', () => {
 
     cloned.outer.inner = 999;
     expect(original.outer.inner).toBe(42);
+  });
+
+  it('should preserve Date instances', () => {
+    const date = new Date('2024-06-15T12:00:00Z');
+    const original = { createdAt: date };
+    const cloned = deepClone(original);
+
+    expect(cloned.createdAt).toBeInstanceOf(Date);
+    expect(cloned.createdAt.getTime()).toBe(date.getTime());
+    expect(cloned.createdAt).not.toBe(date);
+  });
+
+  it('should preserve Map instances', () => {
+    const original = new Map<string, number>([
+      ['a', 1],
+      ['b', 2],
+    ]);
+    const cloned = deepClone(original);
+
+    expect(cloned).toBeInstanceOf(Map);
+    expect(cloned.get('a')).toBe(1);
+    expect(cloned.get('b')).toBe(2);
+    expect(cloned).not.toBe(original);
+  });
+
+  it('should preserve Set instances', () => {
+    const original = new Set([1, 2, 3]);
+    const cloned = deepClone(original);
+
+    expect(cloned).toBeInstanceOf(Set);
+    expect(cloned.has(1)).toBe(true);
+    expect(cloned.has(3)).toBe(true);
+    expect(cloned).not.toBe(original);
+  });
+
+  it('should preserve RegExp instances', () => {
+    const original = { pattern: /^test$/gi };
+    const cloned = deepClone(original);
+
+    expect(cloned.pattern).toBeInstanceOf(RegExp);
+    expect(cloned.pattern.source).toBe('^test$');
+    expect(cloned.pattern.flags).toBe('gi');
+    expect(cloned.pattern).not.toBe(original.pattern);
+  });
+
+  it('should handle arrays', () => {
+    const original = [1, [2, 3], { a: 4 }];
+    const cloned = deepClone(original);
+
+    expect(cloned).toEqual(original);
+    expect(cloned).not.toBe(original);
+    expect(cloned[1]).not.toBe(original[1]);
   });
 });
 

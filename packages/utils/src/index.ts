@@ -4,6 +4,8 @@
 
 import { randomUUID } from 'node:crypto';
 
+import type { ZodType } from 'zod';
+
 /**
  * Sleep for a given number of milliseconds
  */
@@ -20,11 +22,18 @@ export function generateId(prefix = ''): string {
 }
 
 /**
- * Safely parse JSON with error handling
+ * Safely parse JSON with error handling.
+ * When a Zod schema is provided, the parsed value is validated at runtime.
+ * Without a schema, falls back to `as T` (type-only assertion).
  */
-export function safeJsonParse<T>(json: string, fallback: T): T {
+export function safeJsonParse<T>(json: string, fallback: T, schema?: ZodType<T>): T {
   try {
-    return JSON.parse(json) as T;
+    const parsed: unknown = JSON.parse(json);
+    if (schema) {
+      const result = schema.safeParse(parsed);
+      return result.success ? result.data : fallback;
+    }
+    return parsed as T;
   } catch {
     return fallback;
   }
@@ -68,10 +77,12 @@ export function pick<T extends Record<string, unknown>, K extends keyof T>(
 }
 
 /**
- * Deep clone an object
+ * Deep clone an object using structuredClone.
+ * Handles Date, Map, Set, RegExp, ArrayBuffer, and other structured types
+ * that JSON.parse(JSON.stringify()) would destroy.
  */
 export function deepClone<T>(obj: T): T {
-  return JSON.parse(JSON.stringify(obj));
+  return structuredClone(obj);
 }
 
 /**

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { traced, withTrace, createCategoryLogger } from '../index';
+import { traced, withTrace, createCategoryLogger } from '../src/index';
 
 describe('@gtcx/ai', () => {
   describe('traced()', () => {

@@ -44,5 +44,28 @@ module.exports = {
     'prefer-const': 'error',
     'no-var': 'error',
   },
+  overrides: [
+    {
+      // Ban Math.random() in source files — use crypto.randomUUID() or crypto.randomBytes() instead
+      files: ['**/src/**/*.ts', '**/src/**/*.tsx', '**/src/**/*.js', '**/src/**/*.jsx'],
+      excludedFiles: [
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        '**/*.spec.ts',
+        '**/*.spec.tsx',
+        '**/__tests__/**',
+      ],
+      rules: {
+        'no-restricted-properties': [
+          'error',
+          {
+            object: 'Math',
+            property: 'random',
+            message: 'Use crypto.randomUUID() or crypto.randomBytes() instead of Math.random().',
+          },
+        ],
+      },
+    },
+  ],
   ignorePatterns: ['node_modules/', 'dist/', 'build/', '.turbo/'],
 };

@@ -409,8 +409,9 @@ export abstract class SecureStorageBase {
 
     if (this.config.wipeOnExceed && this.isLockedOut()) {
       // Trigger async wipe
-      this.wipe().catch(() => {
-        // Wipe failed - log but don't throw
+      this.wipe().catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('[gtcx/security] wipe failed:', error);
       });
     }
   }

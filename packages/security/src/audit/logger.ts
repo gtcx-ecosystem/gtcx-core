@@ -317,7 +317,8 @@ export class SecurityLogger {
 
     this.flushTimer = setInterval(() => {
       this.flush().catch((error) => {
-        console.error('Security log flush error:', error);
+        // eslint-disable-next-line no-console
+        console.error('[gtcx/security] flush failed:', error);
       });
     }, this.config.flushIntervalMs);
   }

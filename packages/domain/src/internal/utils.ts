@@ -346,6 +346,7 @@ export function calculateBackoffDelay(
   const opts = { ...DEFAULT_RETRY_OPTIONS, ...options };
   const delay = opts.baseDelayMs * Math.pow(opts.backoffMultiplier, attempt - 1);
   // Add jitter (±10%)
+  // eslint-disable-next-line no-restricted-properties -- Jitter for backoff; not security-sensitive
   const jitter = delay * 0.1 * (Math.random() * 2 - 1);
   return Math.min(delay + jitter, opts.maxDelayMs);
 }
