@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@gtcx/types": "workspace:*",
-    "zod": "^3.23.0"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",
