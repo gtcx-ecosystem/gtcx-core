@@ -1,0 +1,96 @@
+{
+  "name": "@gtcx/workproof",
+  "version": "0.1.0",
+  "description": "TradeCV/WorkProof v2.1 — types, Zod schemas, and validation for W3C VC-based employment attestations",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./evidence": {
+      "types": "./dist/evidence/index.d.ts",
+      "import": "./dist/evidence/index.mjs",
+      "require": "./dist/evidence/index.js"
+    },
+    "./predicates": {
+      "types": "./dist/predicates/index.d.ts",
+      "import": "./dist/predicates/index.mjs",
+      "require": "./dist/predicates/index.js"
+    },
+    "./workproof": {
+      "types": "./dist/workproof/index.d.ts",
+      "import": "./dist/workproof/index.mjs",
+      "require": "./dist/workproof/index.js"
+    },
+    "./ai": {
+      "types": "./dist/ai/index.d.ts",
+      "import": "./dist/ai/index.mjs",
+      "require": "./dist/ai/index.js"
+    },
+    "./tradecv": {
+      "types": "./dist/tradecv/index.d.ts",
+      "import": "./dist/tradecv/index.mjs",
+      "require": "./dist/tradecv/index.js"
+    },
+    "./disclosure": {
+      "types": "./dist/disclosure/index.d.ts",
+      "import": "./dist/disclosure/index.mjs",
+      "require": "./dist/disclosure/index.js"
+    },
+    "./offline": {
+      "types": "./dist/offline/index.d.ts",
+      "import": "./dist/offline/index.mjs",
+      "require": "./dist/offline/index.js"
+    },
+    "./trust": {
+      "types": "./dist/trust/index.d.ts",
+      "import": "./dist/trust/index.mjs",
+      "require": "./dist/trust/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@gtcx/types": "workspace:*",
+    "@gtcx/verification": "workspace:*",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@gtcx/tsup-config": "workspace:*",
+    "@gtcx/typescript-config": "workspace:*",
+    "@vitest/coverage-v8": "^2.1.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
+    "directory": "packages/workproof"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/workproof#readme",
+  "bugs": {
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false
+}

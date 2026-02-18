@@ -1,6 +1,8 @@
+import { baseConfig } from '@gtcx/tsup-config';
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
+  ...baseConfig,
   entry: {
     index: 'src/index.ts',
     'validation/index': 'src/validation/index.ts',
@@ -8,11 +10,5 @@ export default defineConfig({
     'offline/index': 'src/offline/index.ts',
     'audit/index': 'src/audit/index.ts',
   },
-  format: ['cjs', 'esm'],
-  dts: true,
-  splitting: false,
-  sourcemap: true,
-  clean: true,
-  treeshake: true,
   external: ['@gtcx/crypto', '@gtcx/types'],
 });

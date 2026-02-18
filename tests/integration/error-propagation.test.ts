@@ -141,7 +141,7 @@ describe('Error propagation: Proof bundle validation failures', () => {
 
   it('malformed serialized proof bundle returns null on parse', () => {
     expect(parseProofBundle('not-json')).toBeNull();
-    expect(parseProofBundle('{}')).not.toBeNull(); // valid JSON, possibly invalid bundle
+    expect(parseProofBundle('{}')).toBeNull(); // valid JSON but fails schema validation
   });
 
   it('malformed QR data returns null on parse', () => {

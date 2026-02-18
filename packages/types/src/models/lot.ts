@@ -3,13 +3,8 @@
 // Physical commodity lot representation
 // ============================================================================
 
-import type { 
-  CommodityType, 
-  LotOrigin, 
-  LotSpecifications, 
-  LotStatus,
-  CustodyChain 
-} from '../protocols/vaultmark';
+import type { CommodityType } from '../protocols/geotag';
+import type { LotOrigin, LotSpecifications, LotStatus, CustodyChain } from '../protocols/vaultmark';
 
 export interface Lot {
   id: string;
@@ -72,11 +67,7 @@ export interface LotPricing {
   updatedAt: number;
 }
 
-export type LotVisibility =
-  | 'private'
-  | 'organization'
-  | 'marketplace'
-  | 'public';
+export type LotVisibility = 'private' | 'organization' | 'marketplace' | 'public';
 
 export interface LotSummary {
   id: string;

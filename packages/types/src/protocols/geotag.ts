@@ -11,34 +11,44 @@
 /**
  * Supported commodity types - extensible
  */
-export type CommodityType = 
-  | 'gold' 
-  | 'silver' 
-  | 'platinum' 
+export type CommodityType =
+  // Precious Metals
+  | 'gold'
+  | 'silver'
+  | 'platinum'
   | 'palladium'
-  | 'copper' 
-  | 'cobalt' 
-  | 'lithium'
-  | 'tantalum'
-  | 'tungsten'
-  | 'tin'
+  | 'rhodium'
+  // Agricultural
   | 'cocoa'
   | 'coffee'
   | 'cotton'
+  | 'sugar'
+  | 'vanilla'
+  | 'palm_oil'
+  | 'rubber'
+  // Industrial Minerals (Critical Minerals)
+  | 'cobalt'
+  | 'lithium'
+  | 'copper'
+  | 'tin'
+  | 'tantalum'
+  | 'tungsten'
+  // Gemstones
+  | 'diamond'
+  | 'ruby'
+  | 'emerald'
+  | 'sapphire'
+  // Energy
+  | 'crude_oil'
+  | 'natural_gas'
+  | 'lng'
+  // Fallback
   | 'other';
 
 /**
  * Measurement units - universal
  */
-export type MeasurementUnit = 
-  | 'g' 
-  | 'kg' 
-  | 'oz' 
-  | 'troy_oz' 
-  | 'lb' 
-  | 'mt'
-  | 'bag'
-  | 'bale';
+export type MeasurementUnit = 'g' | 'kg' | 'oz' | 'troy_oz' | 'lb' | 'mt' | 'bag' | 'bale';
 
 /**
  * Quality grades - universal
@@ -76,10 +86,10 @@ export interface CryptographicProof {
   metadata: ProofMetadata;
 }
 
-export type GeoTagProofType = 
-  | 'location' 
-  | 'photo' 
-  | 'document' 
+export type GeoTagProofType =
+  | 'location'
+  | 'photo'
+  | 'document'
   | 'workflow'
   | 'custody'
   | 'transfer';
@@ -234,6 +244,8 @@ export interface LotData {
 export interface SiteReference {
   siteId: string;
   name: string;
+  /** Site category (ExtractionSite, ProcessingFacility, etc.) */
+  category?: string;
   /** Site type (extraction-site, processing-site, etc.) */
   siteType?: string;
   region: string;

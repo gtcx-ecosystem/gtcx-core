@@ -20,7 +20,7 @@ import { z } from 'zod';
  * JWT Header schema
  */
 export const JWTHeaderSchema = z.object({
-  alg: z.enum(['EdDSA', 'ES256K', 'HS256']),
+  alg: z.enum(['EdDSA', 'ES256K']),
   typ: z.literal('JWT'),
   kid: z.string().optional(),
 });
@@ -186,7 +186,7 @@ export function createTokenPayload(claims: GTCXTokenClaims, options: TokenOption
 }
 
 export interface TokenOptions {
-  algorithm?: 'EdDSA' | 'ES256K' | 'HS256';
+  algorithm?: 'EdDSA' | 'ES256K';
   keyId?: string;
   expiresInSeconds?: number;
   offlineExpiresInSeconds?: number;

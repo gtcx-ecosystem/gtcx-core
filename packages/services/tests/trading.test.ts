@@ -643,4 +643,63 @@ describe('TradingService', () => {
       expect(analytics.volumeUnit).toBe('unit');
     });
   });
+
+  // --------------------------------------------------------------------------
+  // Crypto failure paths
+  // --------------------------------------------------------------------------
+
+  describe('Crypto failure paths', () => {
+    it('signTransaction throwing propagates error from executeTrade', async () => {
+      const crypto = createMockCryptoService();
+      (crypto.signTransaction as ReturnType<typeof vi.fn>).mockRejectedValue(
+        new Error('HSM unavailable')
+      );
+
+      const service = createService({ cryptoService: crypto });
+
+      await expect(service.executeTrade(createValidTradeRequest())).rejects.toThrow(
+        'HSM unavailable'
+      );
+      expect(crypto.signTransaction).toHaveBeenCalled();
+    });
+
+    it('verify returning false rejects trade when used in compliance check', async () => {
+      const crypto = createMockCryptoService();
+      (crypto.verify as ReturnType<typeof vi.fn>).mockResolvedValue(false);
+
+      // Compliance service that uses crypto.verify to validate licenses
+      const compliance = createMockComplianceService();
+      (compliance.validateLicenses as ReturnType<typeof vi.fn>).mockImplementation(
+        async (_traderId: string) => {
+          const valid = await crypto.verify('license-data', 'sig', 'key');
+          return valid;
+        }
+      );
+
+      const service = createService({
+        cryptoService: crypto,
+        complianceService: compliance,
+      });
+
+      await expect(service.executeTrade(createValidTradeRequest())).rejects.toThrow(
+        'License validation failed'
+      );
+      expect(crypto.verify).toHaveBeenCalled();
+    });
+
+    it('createHash returning unexpected value does not affect executeTrade', async () => {
+      const crypto = createMockCryptoService();
+      (crypto.createHash as ReturnType<typeof vi.fn>).mockResolvedValue('unexpected-hash-value');
+
+      const service = createService({ cryptoService: crypto });
+      const request = createValidTradeRequest();
+
+      // executeTrade does not call createHash directly; signTransaction is the crypto entry point
+      // So an unexpected hash should not interfere with trade execution
+      const result = await service.executeTrade(request);
+
+      expect(result).toBeDefined();
+      expect(result.cryptoSignature).toBe('mock-tx-signature');
+    });
+  });
 });

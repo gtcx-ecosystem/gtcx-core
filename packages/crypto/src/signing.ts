@@ -6,6 +6,8 @@
 import { ed25519 } from '@noble/curves/ed25519';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 
+import { deepSortKeys } from './hashing';
+
 export interface SignatureResult {
   signature: string;
   publicKey: string;
@@ -98,8 +100,7 @@ export function createSignedMessage(
   privateKeyHex: string,
   publicKeyHex: string
 ): SignatureResult {
-  const message =
-    typeof data === 'string' ? data : JSON.stringify(data, Object.keys(data as object).sort());
+  const message = typeof data === 'string' ? data : JSON.stringify(deepSortKeys(data));
 
   const signature = sign(message, privateKeyHex);
 

@@ -13,6 +13,12 @@
 // See: conversations on Predicate Architecture
 // ============================================================================
 
+// Canonical types imported from @gtcx/types (single source of truth)
+import type { CommodityType, ResourceContext, GeologicalContext, SiteReference } from '@gtcx/types';
+
+// Re-export so downstream consumers of @gtcx/verification still get these types
+export type { CommodityType, ResourceContext, GeologicalContext, SiteReference };
+
 /**
  * Security levels for certificates
  */
@@ -22,17 +28,17 @@ export type CertificateSecurityLevel = 'standard' | 'enhanced' | 'military' | 'q
  * Certificate type discriminator - ROLE-BASED, not commodity-specific
  * These map to verification activities, not credential types
  */
-export type CertificateType = 
-  | 'asset-origin'              // Origin verification for any commodity
-  | 'location'                  // Pure location verification
-  | 'photo'                     // Photo evidence verification
-  | 'work-site'                 // Site check-in verification
-  | 'compliance'                // Regulatory compliance verification
-  | 'government-inspection'     // Government inspector verification
-  | 'custody-transfer'          // VaultMark custody change
-  | 'settlement'                // PvP settlement verification
-  | 'quality-assay'             // Quality/purity certification
-  | 'chain-of-custody';         // Provenance chain link
+export type CertificateType =
+  | 'asset-origin' // Origin verification for any commodity
+  | 'location' // Pure location verification
+  | 'photo' // Photo evidence verification
+  | 'work-site' // Site check-in verification
+  | 'compliance' // Regulatory compliance verification
+  | 'government-inspection' // Government inspector verification
+  | 'custody-transfer' // VaultMark custody change
+  | 'settlement' // PvP settlement verification
+  | 'quality-assay' // Quality/purity certification
+  | 'chain-of-custody'; // Provenance chain link
 
 /**
  * QR code content types
@@ -47,30 +53,37 @@ export type QRCodeType = 'location' | 'photo' | 'certificate' | 'asset-lot';
 /**
  * Canonical credential types from TradePass™ architecture
  * Each credential authorizes specific activities in the value chain
- * 
+ *
  * @see docs/07-data-model/credential-taxonomy.md
  */
 export type CredentialType =
-  | 'TradePass'       // 01. Universal container
-  | 'ProducerID'      // 02. Extraction/harvesting authorization
-  | 'SiteID'          // 03. Location authorization
-  | 'AggregatorID'    // 04. Consolidation/buying authorization
-  | 'ProcessorID'     // 05. Transformation authorization
-  | 'TraderID'        // 06. Buying/selling authorization
-  | 'CustodyID'       // 07. Storage/security authorization
-  | 'LogisticsID'     // 08. Transport authorization
-  | 'CertifierID'     // 09. Testing/auditing authorization
-  | 'BuyerID'         // 10. End purchase authorization
-  | 'AuthorityID'     // 11. Government/regulatory
-  | 'FinanceID'       // 12. Financial services
-  | 'SecurityID';     // 13. Physical security
+  | 'TradePass' // 01. Universal container
+  | 'ProducerID' // 02. Extraction/harvesting authorization
+  | 'SiteID' // 03. Location authorization
+  | 'AggregatorID' // 04. Consolidation/buying authorization
+  | 'ProcessorID' // 05. Transformation authorization
+  | 'TraderID' // 06. Buying/selling authorization
+  | 'CustodyID' // 07. Storage/security authorization
+  | 'LogisticsID' // 08. Transport authorization
+  | 'CertifierID' // 09. Testing/auditing authorization
+  | 'BuyerID' // 10. End purchase authorization
+  | 'AuthorityID' // 11. Government/regulatory
+  | 'FinanceID' // 12. Financial services
+  | 'SecurityID'; // 13. Physical security
 
 /**
  * Credential subtypes - used as discriminators within each credential type
  */
 export interface CredentialSubtypes {
   ProducerID: 'Individual' | 'Group' | 'Operation' | 'Industrial';
-  SiteID: 'ExtractionSite' | 'ProcessingFacility' | 'StorageFacility' | 'TransitPoint' | 'TradePremises' | 'Port' | 'BorderCrossing';
+  SiteID:
+    | 'ExtractionSite'
+    | 'ProcessingFacility'
+    | 'StorageFacility'
+    | 'TransitPoint'
+    | 'TradePremises'
+    | 'Port'
+    | 'BorderCrossing';
   AggregatorID: 'Local' | 'Regional';
   ProcessorID: 'Primary' | 'Secondary' | 'Refiner' | 'Manufacturer';
   TraderID: 'Dealer' | 'Exporter' | 'Importer' | 'TradingHouse';
@@ -102,22 +115,7 @@ export type AssetCategory =
   | 'Gemstones'
   | 'Energy';
 
-/**
- * Supported commodity types - extensible per category
- */
-export type CommodityType = 
-  // Precious Metals
-  | 'gold' | 'silver' | 'platinum' | 'palladium' | 'rhodium'
-  // Agricultural
-  | 'cocoa' | 'coffee' | 'cotton' | 'sugar' | 'vanilla' | 'palm_oil' | 'rubber'
-  // Industrial Minerals (Critical Minerals)
-  | 'cobalt' | 'lithium' | 'copper' | 'tin' | 'tantalum' | 'tungsten'
-  // Gemstones
-  | 'diamond' | 'ruby' | 'emerald' | 'sapphire'
-  // Energy
-  | 'crude_oil' | 'natural_gas' | 'lng'
-  // Fallback
-  | 'other';
+// CommodityType: imported from @gtcx/types (see top of file)
 
 /**
  * Commodity category mapping
@@ -160,11 +158,19 @@ export const COMMODITY_CATEGORIES: Record<CommodityType, AssetCategory> = {
 /**
  * Measurement units - universal
  */
-export type MeasurementUnit = 
-  | 'g' | 'kg' | 'oz' | 'troy_oz' | 'lb' | 'mt'    // Weight
-  | 'ct'                                           // Carats (gemstones)
-  | 'bag' | 'bale' | 'barrel'                      // Volume/container
-  | 'l' | 'gal';                                   // Liquid
+export type MeasurementUnit =
+  | 'g'
+  | 'kg'
+  | 'oz'
+  | 'troy_oz'
+  | 'lb'
+  | 'mt' // Weight
+  | 'ct' // Carats (gemstones)
+  | 'bag'
+  | 'bale'
+  | 'barrel' // Volume/container
+  | 'l'
+  | 'gal'; // Liquid
 
 /**
  * Quality grades - universal
@@ -180,13 +186,13 @@ export type QualityGrade = 'high' | 'medium' | 'low' | 'ungraded';
  * Assets progress through these states from extraction to final transfer
  */
 export type AssetLifecycleState =
-  | 'RAW'                  // Freshly extracted/harvested, unprocessed
-  | 'PRIMARY_PROCESSED'    // Initial beneficiation (washed, dried, sorted)
-  | 'SECONDARY_PROCESSED'  // Further transformation (smelted, concentrated)
-  | 'REFINED'              // Final purity achieved (refined bar, processed cocoa)
-  | 'CERTIFIED'            // Quality certified, ready for market
-  | 'FINISHED'             // Manufactured into final product
-  | 'TRANSFERRED';         // Ownership transferred to end buyer
+  | 'RAW' // Freshly extracted/harvested, unprocessed
+  | 'PRIMARY_PROCESSED' // Initial beneficiation (washed, dried, sorted)
+  | 'SECONDARY_PROCESSED' // Further transformation (smelted, concentrated)
+  | 'REFINED' // Final purity achieved (refined bar, processed cocoa)
+  | 'CERTIFIED' // Quality certified, ready for market
+  | 'FINISHED' // Manufactured into final product
+  | 'TRANSFERRED'; // Ownership transferred to end buyer
 
 /**
  * Form variations by category
@@ -207,20 +213,26 @@ export interface AssetForms {
  * Site categories - top-level site classification
  */
 export type SiteCategory =
-  | 'ExtractionSite'      // Where commodities are extracted
-  | 'ProcessingFacility'  // Where commodities are transformed
-  | 'StorageFacility'     // Where commodities are stored
-  | 'TransitPoint'        // Intermediate handling locations
-  | 'TradePremises'       // Commercial trading locations
-  | 'Port'                // International transit points
-  | 'BorderCrossing';     // Customs/border points
+  | 'ExtractionSite' // Where commodities are extracted
+  | 'ProcessingFacility' // Where commodities are transformed
+  | 'StorageFacility' // Where commodities are stored
+  | 'TransitPoint' // Intermediate handling locations
+  | 'TradePremises' // Commercial trading locations
+  | 'Port' // International transit points
+  | 'BorderCrossing'; // Customs/border points
 
 /**
  * Site types within each category
  */
 export interface SiteTypes {
   ExtractionSite: 'Mine' | 'Farm' | 'Plantation' | 'Fishery' | 'Forest' | 'Quarry';
-  ProcessingFacility: 'Mill' | 'Refinery' | 'Smelter' | 'DryingFacility' | 'WashingPlant' | 'Factory';
+  ProcessingFacility:
+    | 'Mill'
+    | 'Refinery'
+    | 'Smelter'
+    | 'DryingFacility'
+    | 'WashingPlant'
+    | 'Factory';
   StorageFacility: 'Vault' | 'Warehouse' | 'Silo' | 'FreeZone' | 'BondedWarehouse';
   TransitPoint: 'CollectionCenter' | 'WeighingStation' | 'Checkpoint' | 'TransferHub';
   TradePremises: 'BuyingCenter' | 'TradingOffice' | 'RetailShop' | 'AuctionHouse';
@@ -242,19 +254,43 @@ export interface ExtractionSiteSubtypes {
 /**
  * Flattened site type for simple usage
  */
-export type SiteType = 
+export type SiteType =
   // Extraction
-  | 'mine' | 'farm' | 'plantation' | 'fishery' | 'forest' | 'quarry'
+  | 'mine'
+  | 'farm'
+  | 'plantation'
+  | 'fishery'
+  | 'forest'
+  | 'quarry'
   // Processing
-  | 'mill' | 'refinery' | 'smelter' | 'drying-facility' | 'washing-plant' | 'factory'
+  | 'mill'
+  | 'refinery'
+  | 'smelter'
+  | 'drying-facility'
+  | 'washing-plant'
+  | 'factory'
   // Storage
-  | 'vault' | 'warehouse' | 'silo' | 'free-zone' | 'bonded-warehouse'
+  | 'vault'
+  | 'warehouse'
+  | 'silo'
+  | 'free-zone'
+  | 'bonded-warehouse'
   // Transit
-  | 'collection-center' | 'weighing-station' | 'checkpoint' | 'transfer-hub'
+  | 'collection-center'
+  | 'weighing-station'
+  | 'checkpoint'
+  | 'transfer-hub'
   // Trade
-  | 'buying-center' | 'trading-office' | 'retail-shop' | 'auction-house'
+  | 'buying-center'
+  | 'trading-office'
+  | 'retail-shop'
+  | 'auction-house'
   // Port/Border
-  | 'seaport' | 'airport' | 'inland-port' | 'customs-post' | 'land-border';
+  | 'seaport'
+  | 'airport'
+  | 'inland-port'
+  | 'customs-post'
+  | 'land-border';
 
 // ============================================================================
 // OPERATOR ROLES (maps to CredentialType)
@@ -263,21 +299,21 @@ export type SiteType =
 /**
  * Operator roles in the value chain
  * Each role maps to a CredentialType
- * 
+ *
  * @see CredentialType for the formal credential taxonomy
  */
-export type OperatorRole = 
-  | 'producer'       // ProducerID - Extraction (miner, farmer, harvester)
-  | 'aggregator'     // AggregatorID - Collection/consolidation
-  | 'processor'      // ProcessorID - Transformation (refiner, mill)
-  | 'trader'         // TraderID - Commercial trade
-  | 'custodian'      // CustodyID - Storage (vault operator)
-  | 'transporter'    // LogisticsID - Logistics
-  | 'certifier'      // CertifierID - Testing/auditing
-  | 'buyer'          // BuyerID - End purchaser
-  | 'authority'      // AuthorityID - Government/regulatory
-  | 'financier'      // FinanceID - Financial services
-  | 'security';      // SecurityID - Physical security
+export type OperatorRole =
+  | 'producer' // ProducerID - Extraction (miner, farmer, harvester)
+  | 'aggregator' // AggregatorID - Collection/consolidation
+  | 'processor' // ProcessorID - Transformation (refiner, mill)
+  | 'trader' // TraderID - Commercial trade
+  | 'custodian' // CustodyID - Storage (vault operator)
+  | 'transporter' // LogisticsID - Logistics
+  | 'certifier' // CertifierID - Testing/auditing
+  | 'buyer' // BuyerID - End purchaser
+  | 'authority' // AuthorityID - Government/regulatory
+  | 'financier' // FinanceID - Financial services
+  | 'security'; // SecurityID - Physical security
 
 /**
  * Map operator roles to credential types
@@ -303,7 +339,7 @@ export const ROLE_TO_CREDENTIAL: Record<OperatorRole, CredentialType> = {
 /**
  * Predicate URI structure
  * Format: tradepass://{domain}/{category}/{predicate}
- * 
+ *
  * @example "tradepass://compliance/sanctions/status"
  * @example "tradepass://asset/origin/verified"
  */
@@ -313,14 +349,14 @@ export type PredicateURI = `tradepass://${string}/${string}/${string}`;
  * Predicate domains - top-level namespaces
  */
 export type PredicateDomain =
-  | 'identity'      // Person, organization, device verification
-  | 'compliance'    // Sanctions, PEP, AML, licensing, environmental, labor
-  | 'asset'         // Existence, origin, quality, custody, provenance
-  | 'location'      // Current, historical, residence, jurisdiction
-  | 'relationship'  // Entity relationships, authorization chains
-  | 'temporal'      // Time-based validity, expiration
-  | 'financial'     // Transaction capacity, credit status
-  | 'composite';    // Bundled verification requirements
+  | 'identity' // Person, organization, device verification
+  | 'compliance' // Sanctions, PEP, AML, licensing, environmental, labor
+  | 'asset' // Existence, origin, quality, custody, provenance
+  | 'location' // Current, historical, residence, jurisdiction
+  | 'relationship' // Entity relationships, authorization chains
+  | 'temporal' // Time-based validity, expiration
+  | 'financial' // Transaction capacity, credit status
+  | 'composite'; // Bundled verification requirements
 
 /**
  * Predicate definition structure
@@ -356,11 +392,11 @@ export interface PredicateDefinition {
  */
 export interface PredicateSchema {
   type: 'boolean' | 'enum' | 'string' | 'number' | 'date' | 'object';
-  values?: string[];  // For enum type
-  min?: number;       // For number type
-  max?: number;       // For number type
-  pattern?: string;   // For string type (regex)
-  properties?: Record<string, PredicateSchema>;  // For object type
+  values?: string[]; // For enum type
+  min?: number; // For number type
+  max?: number; // For number type
+  pattern?: string; // For string type (regex)
+  properties?: Record<string, PredicateSchema>; // For object type
 }
 
 /**
@@ -369,7 +405,7 @@ export interface PredicateSchema {
 export interface EvidenceRequirements {
   required: EvidenceType[];
   optional?: EvidenceType[];
-  alternatives?: EvidenceType[][];  // Any one of these sets is acceptable
+  alternatives?: EvidenceType[][]; // Any one of these sets is acceptable
 }
 
 /**
@@ -403,7 +439,7 @@ export interface AttestationRules {
  */
 export interface AttestorPattern {
   type: 'exact' | 'pattern' | 'credential';
-  value: string;  // DID or pattern like "did:tp:gov:*"
+  value: string; // DID or pattern like "did:tp:gov:*"
   credentialRequired?: CredentialType;
 }
 
@@ -415,17 +451,17 @@ export interface ConfidenceRules {
   evidenceWeights: Record<string, number>;
   minimumThreshold: number;
   decayModel?: 'linear' | 'exponential' | 'none';
-  halfLife?: number;  // In days, for decay
+  halfLife?: number; // In days, for decay
 }
 
 /**
  * Temporal validity rules
  */
 export interface TemporalRules {
-  validDuration: string;  // ISO 8601 duration, e.g., "P1Y" for 1 year
+  validDuration: string; // ISO 8601 duration, e.g., "P1Y" for 1 year
   renewalRequired: boolean;
   monitoringType?: 'continuous' | 'periodic' | 'event_triggered';
-  triggers?: string[];  // Events that trigger revalidation
+  triggers?: string[]; // Events that trigger revalidation
 }
 
 /**
@@ -575,26 +611,8 @@ export interface ValidationMetrics {
   integrityCheck: boolean;
 }
 
-/**
- * Resource context - commodity-agnostic
- * Replaces the old GeologicalContext
- */
-export interface ResourceContext {
-  commodityPotential: 'high' | 'medium' | 'low' | 'none';
-  commodityType?: CommodityType;
-  formation?: string;
-  confidence: number;
-  source?: string;
-}
-
-/**
- * @deprecated Use ResourceContext instead
- */
-export interface GeologicalContext {
-  goldPotential: 'high' | 'medium' | 'low' | 'none';
-  formation?: string;
-  confidence: number;
-}
+// ResourceContext: imported from @gtcx/types (see top of file)
+// GeologicalContext: imported from @gtcx/types (see top of file)
 
 /**
  * Certificate metadata
@@ -697,17 +715,7 @@ export interface AssetLotData {
   attributes?: Record<string, unknown>;
 }
 
-/**
- * Site reference
- */
-export interface SiteReference {
-  siteId: string;
-  name: string;
-  category?: SiteCategory;
-  siteType?: SiteType;
-  region: string;
-  country: string;
-}
+// SiteReference: imported from @gtcx/types (see top of file)
 
 /**
  * @deprecated Use AssetLotData with commodityType: 'gold'
@@ -1180,7 +1188,10 @@ export function getCredentialForRole(role: OperatorRole): CredentialType {
  * Convert legacy lot data format to universal AssetLotData
  * @deprecated The GoldLotData type itself is deprecated - use AssetLotData directly
  */
-export function migrateLegacyLotData(legacyData: GoldLotData, commodityType: CommodityType = 'gold'): AssetLotData {
+export function migrateLegacyLotData(
+  legacyData: GoldLotData,
+  commodityType: CommodityType = 'gold'
+): AssetLotData {
   return {
     commodityType,
     category: getCommodityCategory(commodityType),

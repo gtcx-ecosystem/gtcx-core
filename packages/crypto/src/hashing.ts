@@ -57,7 +57,7 @@ export function hash(data: string | Uint8Array, algorithm: HashAlgorithm = 'sha2
 /**
  * Recursively sort all keys in an object for deterministic serialization.
  */
-function deepSortKeys(value: unknown): unknown {
+export function deepSortKeys(value: unknown): unknown {
   if (value === null || value === undefined || typeof value !== 'object') {
     return value;
   }

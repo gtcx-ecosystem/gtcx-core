@@ -2,9 +2,9 @@
   "name": "@gtcx/services",
   "version": "0.2.0",
   "description": "Application-level business services for GTCX Protocol — registration, trading, compliance",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -44,7 +44,8 @@
     "@gtcx/domain": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@types/node": "^22.10.0",
+    "@gtcx/tsup-config": "workspace:*",
     "@gtcx/typescript-config": "workspace:*",
     "tsup": "^8.0.1",
     "typescript": "^5.7.0",

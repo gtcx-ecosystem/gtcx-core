@@ -16,20 +16,14 @@ import { z } from 'zod';
 /**
  * Session state enum
  */
-export const SessionStateSchema = z.enum([
-  'ACTIVE',
-  'EXPIRED',
-  'REVOKED',
-  'LOCKED',
-  'OFFLINE',
-]);
+export const SessionStateSchema = z.enum(['ACTIVE', 'EXPIRED', 'REVOKED', 'LOCKED', 'OFFLINE']);
 
 /**
  * Session metadata
  */
 export const SessionSchema = z.object({
   id: z.string().uuid(),
-  userId: z.string(),
+  userId: z.string().min(1),
   tradePassId: z.string().optional(),
 
   // Timing
@@ -217,9 +211,7 @@ export function recordFailedAttempt(
   const failedAttempts = session.failedAttempts + 1;
 
   if (failedAttempts >= config.maxFailedAttempts) {
-    const lockedUntil = new Date(
-      Date.now() + config.lockoutDurationSeconds * 1000
-    ).toISOString();
+    const lockedUntil = new Date(Date.now() + config.lockoutDurationSeconds * 1000).toISOString();
 
     return {
       ...session,

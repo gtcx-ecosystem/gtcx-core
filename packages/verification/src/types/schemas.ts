@@ -11,7 +11,7 @@ import { z } from 'zod';
 
 export const CertificateSecurityLevelSchema = z.enum([
   'standard',
-  'enhanced', 
+  'enhanced',
   'military',
   'quantum-resistant',
 ]);
@@ -59,24 +59,52 @@ export const AssetCategorySchema = z.enum([
 
 export const CommodityTypeSchema = z.enum([
   // Precious Metals
-  'gold', 'silver', 'platinum', 'palladium', 'rhodium',
+  'gold',
+  'silver',
+  'platinum',
+  'palladium',
+  'rhodium',
   // Agricultural
-  'cocoa', 'coffee', 'cotton', 'sugar', 'vanilla', 'palm_oil', 'rubber',
+  'cocoa',
+  'coffee',
+  'cotton',
+  'sugar',
+  'vanilla',
+  'palm_oil',
+  'rubber',
   // Industrial Minerals
-  'cobalt', 'lithium', 'copper', 'tin', 'tantalum', 'tungsten',
+  'cobalt',
+  'lithium',
+  'copper',
+  'tin',
+  'tantalum',
+  'tungsten',
   // Gemstones
-  'diamond', 'ruby', 'emerald', 'sapphire',
+  'diamond',
+  'ruby',
+  'emerald',
+  'sapphire',
   // Energy
-  'crude_oil', 'natural_gas', 'lng',
+  'crude_oil',
+  'natural_gas',
+  'lng',
   // Fallback
   'other',
 ]);
 
 export const MeasurementUnitSchema = z.enum([
-  'g', 'kg', 'oz', 'troy_oz', 'lb', 'mt',
+  'g',
+  'kg',
+  'oz',
+  'troy_oz',
+  'lb',
+  'mt',
   'ct',
-  'bag', 'bale', 'barrel',
-  'l', 'gal',
+  'bag',
+  'bale',
+  'barrel',
+  'l',
+  'gal',
 ]);
 
 export const QualityGradeSchema = z.enum(['high', 'medium', 'low', 'ungraded']);
@@ -103,17 +131,41 @@ export const SiteCategorySchema = z.enum([
 
 export const SiteTypeSchema = z.enum([
   // Extraction
-  'mine', 'farm', 'plantation', 'fishery', 'forest', 'quarry',
+  'mine',
+  'farm',
+  'plantation',
+  'fishery',
+  'forest',
+  'quarry',
   // Processing
-  'mill', 'refinery', 'smelter', 'drying-facility', 'washing-plant', 'factory',
+  'mill',
+  'refinery',
+  'smelter',
+  'drying-facility',
+  'washing-plant',
+  'factory',
   // Storage
-  'vault', 'warehouse', 'silo', 'free-zone', 'bonded-warehouse',
+  'vault',
+  'warehouse',
+  'silo',
+  'free-zone',
+  'bonded-warehouse',
   // Transit
-  'collection-center', 'weighing-station', 'checkpoint', 'transfer-hub',
+  'collection-center',
+  'weighing-station',
+  'checkpoint',
+  'transfer-hub',
   // Trade
-  'buying-center', 'trading-office', 'retail-shop', 'auction-house',
+  'buying-center',
+  'trading-office',
+  'retail-shop',
+  'auction-house',
   // Port/Border
-  'seaport', 'airport', 'inland-port', 'customs-post', 'land-border',
+  'seaport',
+  'airport',
+  'inland-port',
+  'customs-post',
+  'land-border',
 ]);
 
 export const OperatorRoleSchema = z.enum([
@@ -164,13 +216,13 @@ export const CertificateLocationSchema = z.object({
   longitude: z.number().min(-180).max(180),
   altitude: z.number().optional(),
   accuracy: z.number().positive(),
-  timestamp: z.number(),
+  timestamp: z.number().int().positive(),
 });
 
 export const EnvironmentalFactorsSchema = z.object({
   satelliteCount: z.number().int().nonnegative(),
-  signalStrength: z.number(),
-  atmosphericConditions: z.string(),
+  signalStrength: z.number().min(0).max(100),
+  atmosphericConditions: z.string().min(1),
   multipathIndicator: z.boolean(),
 });
 
@@ -194,12 +246,12 @@ export const ResourceContextSchema = z.object({
 // ============================================================================
 
 export const SiteReferenceSchema = z.object({
-  siteId: z.string(),
-  name: z.string(),
+  siteId: z.string().min(1),
+  name: z.string().min(1),
   category: SiteCategorySchema.optional(),
   siteType: SiteTypeSchema.optional(),
-  region: z.string(),
-  country: z.string(),
+  region: z.string().min(1),
+  country: z.string().min(1),
 });
 
 // ============================================================================
@@ -230,10 +282,12 @@ export const AssetLotDataSchema = z.object({
 // ============================================================================
 
 export const QRCodeMetadataSchema = z.object({
-  location: z.object({
-    latitude: z.number(),
-    longitude: z.number(),
-  }).optional(),
+  location: z
+    .object({
+      latitude: z.number(),
+      longitude: z.number(),
+    })
+    .optional(),
   assetWeight: z.number().optional(),
   assetUnit: MeasurementUnitSchema.optional(),
   commodityType: CommodityTypeSchema.optional(),
@@ -244,21 +298,21 @@ export const QRCodeMetadataSchema = z.object({
 });
 
 export const QRCodeDataSchema = z.object({
-  certificateId: z.string(),
+  certificateId: z.string().min(1),
   verifyUrl: z.string().url(),
-  hash: z.string(),
-  timestamp: z.number(),
+  hash: z.string().min(1),
+  timestamp: z.number().int().positive(),
   type: QRCodeTypeSchema,
   metadata: QRCodeMetadataSchema.optional(),
 });
 
 export const GeneratedQRCodeSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   data: QRCodeDataSchema,
-  qrCodeUri: z.string(),
-  dataString: z.string(),
+  qrCodeUri: z.string().min(1),
+  dataString: z.string().min(1),
   size: z.number().int().positive(),
-  timestamp: z.number(),
+  timestamp: z.number().int().positive(),
 });
 
 export const QRCodeVerificationResultSchema = z.object({
@@ -284,7 +338,7 @@ export const PredicateSchemaSchema: z.ZodType<any> = z.object({
 
 export const AttestorPatternSchema = z.object({
   type: z.enum(['exact', 'pattern', 'credential']),
-  value: z.string(),
+  value: z.string().min(1),
   credentialRequired: CredentialTypeSchema.optional(),
 });
 
@@ -317,19 +371,19 @@ export const TemporalRulesSchema = z.object({
 });
 
 export const AIMetadataSchema = z.object({
-  embeddingModel: z.string(),
-  reasoningHints: z.array(z.string()),
+  embeddingModel: z.string().min(1),
+  reasoningHints: z.array(z.string().min(1)),
   relatedPredicates: z.array(PredicateURISchema),
   contradictoryPredicates: z.array(PredicateURISchema).optional(),
-  contextTemplate: z.string(),
+  contextTemplate: z.string().min(1),
 });
 
 export const PredicateDefinitionSchema = z.object({
   uri: PredicateURISchema,
-  name: z.string(),
-  description: z.string(),
+  name: z.string().min(1),
+  description: z.string().min(1),
   domain: PredicateDomainSchema,
-  version: z.string(),
+  version: z.string().min(1),
   schema: PredicateSchemaSchema,
   evidence: EvidenceRequirementsSchema,
   attestation: AttestationRulesSchema,
@@ -344,28 +398,28 @@ export const PredicateDefinitionSchema = z.object({
 
 export const ClaimProofSchema = z.object({
   type: z.enum(['Ed25519Signature2020', 'EcdsaSecp256k1Signature2019']),
-  created: z.string(),
-  verificationMethod: z.string(),
-  proofValue: z.string(),
+  created: z.string().min(1),
+  verificationMethod: z.string().min(1),
+  proofValue: z.string().min(1),
 });
 
 export const ClaimEvidenceSchema = z.object({
   type: EvidenceTypeSchema,
-  hash: z.string(),
-  timestamp: z.number(),
+  hash: z.string().min(1),
+  timestamp: z.number().int().positive(),
   metadata: z.record(z.unknown()).optional(),
 });
 
 export const ClaimSchema = z.object({
-  id: z.string(),
-  subject: z.string(),
+  id: z.string().min(1),
+  subject: z.string().min(1),
   predicate: PredicateURISchema,
   value: z.unknown(),
   evidence: z.array(ClaimEvidenceSchema),
-  attestor: z.string(),
+  attestor: z.string().min(1),
   confidence: z.number().min(0).max(1),
-  issuedAt: z.number(),
-  validUntil: z.number().optional(),
+  issuedAt: z.number().int().positive(),
+  validUntil: z.number().int().positive().optional(),
   proof: ClaimProofSchema,
 });
 
@@ -374,48 +428,50 @@ export const ClaimSchema = z.object({
 // ============================================================================
 
 export const CertificateMetadataSchema = z.object({
-  issuer: z.string(),
-  issuedAt: z.number(),
-  expiresAt: z.number().optional(),
-  userRole: z.string(),
-  deviceId: z.string(),
+  issuer: z.string().min(1),
+  issuedAt: z.number().int().positive(),
+  expiresAt: z.number().int().positive().optional(),
+  userRole: z.string().min(1),
+  deviceId: z.string().min(1),
   location: CertificateLocationSchema,
   resourceContext: ResourceContextSchema.optional(),
-  geologicalContext: z.object({
-    goldPotential: z.enum(['high', 'medium', 'low', 'none']),
-    formation: z.string().optional(),
-    confidence: z.number(),
-  }).optional(),
+  geologicalContext: z
+    .object({
+      goldPotential: z.enum(['high', 'medium', 'low', 'none']),
+      formation: z.string().optional(),
+      confidence: z.number(),
+    })
+    .optional(),
   environmentalFactors: EnvironmentalFactorsSchema.optional(),
   validationMetrics: ValidationMetricsSchema.optional(),
 });
 
 export const MultiSignatureSchema = z.object({
-  ed25519: z.string(),
-  secp256k1: z.string().optional(),
+  ed25519: z.string().min(1),
+  secp256k1: z.string().min(1).optional(),
 });
 
 export const CertificateVerificationDataSchema = z.object({
-  publicKey: z.string(),
-  signature: z.string(),
-  timestamp: z.number(),
-  entropyQuality: z.number().optional(),
+  publicKey: z.string().min(1),
+  signature: z.string().min(1),
+  timestamp: z.number().int().positive(),
+  entropyQuality: z.number().min(0).max(1).optional(),
 });
 
 export const BaseCertificateSchema = z.object({
-  certificateId: z.string(),
-  version: z.string(),
+  certificateId: z.string().min(1),
+  version: z.string().min(1),
   type: CertificateTypeSchema,
   securityLevel: CertificateSecurityLevelSchema,
   metadata: CertificateMetadataSchema,
   verificationData: CertificateVerificationDataSchema,
-  createdAt: z.number(),
+  createdAt: z.number().int().positive(),
 });
 
 export const PhotoEvidenceRefSchema = z.object({
-  id: z.string(),
-  hash: z.string(),
-  timestamp: z.number(),
+  id: z.string().min(1),
+  hash: z.string().min(1),
+  timestamp: z.number().int().positive(),
 });
 
 export const ComplianceDataSchema = z.object({
@@ -429,23 +485,25 @@ export const ComplianceDataSchema = z.object({
 
 export const StandardCertificateSchema = BaseCertificateSchema.extend({
   securityLevel: z.enum(['standard', 'enhanced']),
-  dataHash: z.string(),
-  signature: z.string(),
+  dataHash: z.string().min(1),
+  signature: z.string().min(1),
 });
 
 export const MilitaryGradeCertificateSchema = BaseCertificateSchema.extend({
   securityLevel: z.enum(['military', 'quantum-resistant']),
-  quantumResistantHash: z.string(),
+  quantumResistantHash: z.string().min(1),
   multiSignature: MultiSignatureSchema,
   certificateData: z.object({
     assetLotData: AssetLotDataSchema.optional(),
-    goldLotData: z.object({
-      estimatedWeight: z.number(),
-      quality: z.enum(['high', 'medium', 'low']).optional(),
-      purity: z.number().optional(),
-      miner: z.string().optional(),
-      discoveryDate: z.string().optional(),
-    }).optional(),
+    goldLotData: z
+      .object({
+        estimatedWeight: z.number(),
+        quality: z.enum(['high', 'medium', 'low']).optional(),
+        purity: z.number().optional(),
+        miner: z.string().optional(),
+        discoveryDate: z.string().optional(),
+      })
+      .optional(),
     photoEvidence: z.array(PhotoEvidenceRefSchema).optional(),
     workflowContext: z.string().optional(),
     complianceData: ComplianceDataSchema.optional(),
@@ -471,17 +529,17 @@ export const CertificateVerificationResultSchema = z.object({
 // ============================================================================
 
 export const ValidationRuleSchema = z.object({
-  field: z.string(),
+  field: z.string().min(1),
   min: z.number().optional(),
   max: z.number().optional(),
   value: z.union([z.boolean(), z.string(), z.number()]).optional(),
-  message: z.string(),
+  message: z.string().min(1),
 });
 
 export const CertificateTemplateSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string(),
+  id: z.string().min(1),
+  name: z.string().min(1),
+  description: z.string().min(1),
   type: CertificateTypeSchema,
   securityLevel: CertificateSecurityLevelSchema,
   requiredFields: z.array(z.string()),
@@ -495,29 +553,29 @@ export const CertificateTemplateSchema = z.object({
 // ============================================================================
 
 export const CryptographicProofRefSchema = z.object({
-  algorithm: z.string(),
-  dataHash: z.string(),
-  signature: z.string(),
-  publicKey: z.string(),
+  algorithm: z.string().min(1),
+  dataHash: z.string().min(1),
+  signature: z.string().min(1),
+  publicKey: z.string().min(1),
 });
 
 export const LocationProofRefSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   coordinates: CertificateLocationSchema,
-  hash: z.string(),
+  hash: z.string().min(1),
 });
 
 export const PhotoProofRefSchema = z.object({
-  id: z.string(),
-  uri: z.string(),
-  hash: z.string(),
-  timestamp: z.number(),
+  id: z.string().min(1),
+  uri: z.string().min(1),
+  hash: z.string().min(1),
+  timestamp: z.number().int().positive(),
 });
 
 export const ProofBundleSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   type: z.enum(['location', 'photo', 'workflow', 'certificate']),
-  timestamp: z.number(),
+  timestamp: z.number().int().positive(),
   proofs: z.object({
     cryptographicProof: CryptographicProofRefSchema,
     locationProof: LocationProofRefSchema.optional(),

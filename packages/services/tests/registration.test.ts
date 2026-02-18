@@ -586,4 +586,41 @@ describe('AssetLotRegistrationService', () => {
       expect(result.metadata!.cryptoProof).toBeDefined();
     });
   });
+
+  // --------------------------------------------------------------------------
+  // Crypto failure paths
+  // --------------------------------------------------------------------------
+
+  describe('Crypto failure paths', () => {
+    it('sign throwing propagates error from registerAssetLot', async () => {
+      const crypto = createMockCryptoService();
+      (crypto.sign as ReturnType<typeof vi.fn>).mockRejectedValue(
+        new Error('Signing key unavailable')
+      );
+
+      const service = createService({ cryptoService: crypto });
+
+      await expect(service.registerAssetLot(createValidRegistrationData())).rejects.toThrow(
+        'Signing key unavailable'
+      );
+      expect(crypto.createHash).toHaveBeenCalled();
+      expect(crypto.sign).toHaveBeenCalled();
+    });
+
+    it('createHash throwing propagates error from registerAssetLot', async () => {
+      const crypto = createMockCryptoService();
+      (crypto.createHash as ReturnType<typeof vi.fn>).mockRejectedValue(
+        new Error('Hash algorithm not supported')
+      );
+
+      const service = createService({ cryptoService: crypto });
+
+      await expect(service.registerAssetLot(createValidRegistrationData())).rejects.toThrow(
+        'Hash algorithm not supported'
+      );
+      expect(crypto.createHash).toHaveBeenCalled();
+      // sign should never be reached since createHash fails first
+      expect(crypto.sign).not.toHaveBeenCalled();
+    });
+  });
 });

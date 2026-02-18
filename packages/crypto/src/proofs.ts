@@ -83,6 +83,12 @@ export function generateMerkleProof(tree: MerkleTree, leafIndex: number): Merkle
         hash: siblingHash,
         position: isRightNode ? 'left' : 'right',
       });
+    } else if (!isRightNode && siblingIndex >= layer.length) {
+      // Unpaired node in odd-length layer — was self-paired during tree construction
+      const selfHash = layer[currentIndex];
+      if (selfHash !== undefined) {
+        siblings.push({ hash: selfHash, position: 'right' });
+      }
     }
 
     currentIndex = Math.floor(currentIndex / 2);

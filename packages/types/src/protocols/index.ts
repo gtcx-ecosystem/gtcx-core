@@ -27,6 +27,7 @@ export * from './pvp';
 
 // VaultMark - exclude CommodityType (use geotag version)
 export {
+  VaultCommodityForm,
   CustodyChain,
   CustodyStatus,
   CustodyEntry,

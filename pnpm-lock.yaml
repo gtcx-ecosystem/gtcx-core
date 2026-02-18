@@ -47,6 +47,9 @@ importers:
 
   packages/ai:
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -65,6 +68,9 @@ importers:
 
   packages/api-client:
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -106,10 +112,19 @@ importers:
         specifier: ^3.4.0
         version: 3.4.19(yaml@2.8.2)
 
+  packages/config/tsup:
+    dependencies:
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+
   packages/config/typescript: {}
 
   packages/connectivity:
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -141,6 +156,9 @@ importers:
         specifier: ^1.4.0
         version: 1.8.0
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -172,15 +190,18 @@ importers:
         specifier: ^3.23.0
         version: 3.25.76
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
       '@types/node':
-        specifier: ^20.0.0
-        version: 20.19.31
+        specifier: ^22.10.0
+        version: 22.19.8
       '@vitest/coverage-v8':
         specifier: ^2.1.0
-        version: 2.1.9(vitest@2.1.9(@types/node@20.19.31))
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
       tsup:
         specifier: ^8.0.1
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
@@ -189,7 +210,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^2.1.0
-        version: 2.1.9(@types/node@20.19.31)
+        version: 2.1.9(@types/node@22.19.8)
 
   packages/events:
     dependencies:
@@ -197,6 +218,9 @@ importers:
         specifier: workspace:*
         version: link:../domain
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@vitest/coverage-v8':
         specifier: ^2.1.0
         version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
@@ -219,6 +243,9 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -237,6 +264,9 @@ importers:
 
   packages/logging:
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -262,6 +292,9 @@ importers:
         specifier: ^3.23.0
         version: 3.25.76
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -290,6 +323,9 @@ importers:
         specifier: ^3.23.0
         version: 3.25.76
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -312,15 +348,18 @@ importers:
         specifier: workspace:*
         version: link:../domain
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
       '@types/node':
-        specifier: ^20.0.0
-        version: 20.19.31
+        specifier: ^22.10.0
+        version: 22.19.8
       '@vitest/coverage-v8':
         specifier: ^2.1.0
-        version: 2.1.9(vitest@2.1.9(@types/node@20.19.31))
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
       tsup:
         specifier: ^8.0.1
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
@@ -329,10 +368,13 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^2.1.0
-        version: 2.1.9(@types/node@20.19.31)
+        version: 2.1.9(@types/node@22.19.8)
 
   packages/sync:
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -351,6 +393,9 @@ importers:
 
   packages/types:
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -373,6 +418,9 @@ importers:
         specifier: ^3.23.0
         version: 3.25.76
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -410,6 +458,40 @@ importers:
         specifier: ^3.23.0
         version: 3.25.76
     devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
+      '@gtcx/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript
+      '@vitest/coverage-v8':
+        specifier: ^2.1.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.8))
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.19.8)
+
+  packages/workproof:
+    dependencies:
+      '@gtcx/types':
+        specifier: workspace:*
+        version: link:../types
+      '@gtcx/verification':
+        specifier: workspace:*
+        version: link:../verification
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+    devDependencies:
+      '@gtcx/tsup-config':
+        specifier: workspace:*
+        version: link:../config/tsup
       '@gtcx/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript
@@ -1093,9 +1175,6 @@ packages:
 
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
-
-  '@types/node@20.19.31':
-    resolution: {integrity: sha512-5jsi0wpncvTD33Sh1UCgacK37FFwDn+EG7wCmEvs62fCvBL+n8/76cAYDok21NF6+jaVWIqKwCZyX7Vbu8eB3A==}
 
   '@types/node@22.19.8':
     resolution: {integrity: sha512-ebO/Yl+EAvVe8DnMfi+iaAyIqYdK0q/q0y0rw82INWEKJOBe6b/P3YWE8NW7oOlF/nXFNrHwhARrN/hdgDkraA==}
@@ -3501,10 +3580,6 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@20.19.31':
-    dependencies:
-      undici-types: 6.21.0
-
   '@types/node@22.19.8':
     dependencies:
       undici-types: 6.21.0
@@ -3593,24 +3668,6 @@ snapshots:
       eslint-visitor-keys: 3.4.3
 
   '@ungap/structured-clone@1.3.0': {}
-
-  '@vitest/coverage-v8@2.1.9(vitest@2.1.9(@types/node@20.19.31))':
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      '@bcoe/v8-coverage': 0.2.3
-      debug: 4.4.3
-      istanbul-lib-coverage: 3.2.2
-      istanbul-lib-report: 3.0.1
-      istanbul-lib-source-maps: 5.0.6
-      istanbul-reports: 3.2.0
-      magic-string: 0.30.21
-      magicast: 0.3.5
-      std-env: 3.10.0
-      test-exclude: 7.0.1
-      tinyrainbow: 1.2.0
-      vitest: 2.1.9(@types/node@20.19.31)
-    transitivePeerDependencies:
-      - supports-color
 
   '@vitest/coverage-v8@2.1.9(vitest@2.1.9(@types/node@22.19.8))':
     dependencies:
@@ -5488,24 +5545,6 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  vite-node@2.1.9(@types/node@20.19.31):
-    dependencies:
-      cac: 6.7.14
-      debug: 4.4.3
-      es-module-lexer: 1.7.0
-      pathe: 1.1.2
-      vite: 5.4.21(@types/node@20.19.31)
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-
   vite-node@2.1.9(@types/node@22.19.8):
     dependencies:
       cac: 6.7.14
@@ -5524,15 +5563,6 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.4.21(@types/node@20.19.31):
-    dependencies:
-      esbuild: 0.21.5
-      postcss: 8.5.6
-      rollup: 4.57.1
-    optionalDependencies:
-      '@types/node': 20.19.31
-      fsevents: 2.3.3
-
   vite@5.4.21(@types/node@22.19.8):
     dependencies:
       esbuild: 0.21.5
@@ -5541,41 +5571,6 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.8
       fsevents: 2.3.3
-
-  vitest@2.1.9(@types/node@20.19.31):
-    dependencies:
-      '@vitest/expect': 2.1.9
-      '@vitest/mocker': 2.1.9(vite@5.4.21(@types/node@22.19.8))
-      '@vitest/pretty-format': 2.1.9
-      '@vitest/runner': 2.1.9
-      '@vitest/snapshot': 2.1.9
-      '@vitest/spy': 2.1.9
-      '@vitest/utils': 2.1.9
-      chai: 5.3.3
-      debug: 4.4.3
-      expect-type: 1.3.0
-      magic-string: 0.30.21
-      pathe: 1.1.2
-      std-env: 3.10.0
-      tinybench: 2.9.0
-      tinyexec: 0.3.2
-      tinypool: 1.1.1
-      tinyrainbow: 1.2.0
-      vite: 5.4.21(@types/node@20.19.31)
-      vite-node: 2.1.9(@types/node@20.19.31)
-      why-is-node-running: 2.3.0
-    optionalDependencies:
-      '@types/node': 20.19.31
-    transitivePeerDependencies:
-      - less
-      - lightningcss
-      - msw
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
 
   vitest@2.1.9(@types/node@22.19.8):
     dependencies:

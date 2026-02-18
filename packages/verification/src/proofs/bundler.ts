@@ -16,6 +16,7 @@ import type {
   PhotoProofRef,
   CertificateLocation,
 } from '../types';
+import { ProofBundleSchema } from '../types/schemas';
 
 /**
  * Generate unique proof bundle ID
@@ -177,14 +178,26 @@ export function serializeProofBundle(bundle: ProofBundle): string {
 }
 
 /**
- * Parse proof bundle from serialized string
+ * Parse proof bundle from serialized string with schema validation.
+ * Returns null if JSON parsing or schema validation fails.
  */
-export function parseProofBundle(serialized: string): ProofBundle | null {
+export function parseProofBundle(
+  serialized: string,
+  onError?: (error: unknown) => void
+): ProofBundle | null {
+  let raw: unknown;
   try {
-    return JSON.parse(serialized) as ProofBundle;
-  } catch {
+    raw = JSON.parse(serialized);
+  } catch (error) {
+    onError?.(error);
     return null;
   }
+  const result = ProofBundleSchema.safeParse(raw);
+  if (!result.success) {
+    onError?.(result.error);
+    return null;
+  }
+  return result.data as ProofBundle;
 }
 
 /**

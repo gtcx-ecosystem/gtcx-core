@@ -9,6 +9,7 @@ packages:
   - 'packages/security'
   - 'packages/identity'
   - 'packages/verification'
+  - 'packages/workproof'
 
   # AI integration
   - 'packages/ai'
@@ -34,6 +35,7 @@ packages:
   - 'packages/config/eslint'
   - 'packages/config/typescript'
   - 'packages/config/tailwind'
+  - 'packages/config/tsup'
 
   # Integration tests
   - 'tests/integration'

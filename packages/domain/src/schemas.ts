@@ -16,8 +16,10 @@ import { z } from 'zod';
 /**
  * Safe parse utility - wraps Zod safeParse with consistent typing
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function safeParse<T>(schema: z.ZodType<T>, data: any): z.SafeParseReturnType<unknown, T> {
+export function safeParse<T>(
+  schema: z.ZodType<T>,
+  data: unknown
+): z.SafeParseReturnType<unknown, T> {
   return schema.safeParse(data);
 }
 

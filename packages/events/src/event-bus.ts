@@ -24,12 +24,14 @@ export class TypedEventBus implements IDomainEventEmitter {
   private readonly maxHistorySize: number;
   private readonly offlineBuffer: OfflineEventBuffer;
   private readonly enableOfflineBuffer: boolean;
+  private readonly onHandlerError?: (error: unknown, event: DomainEvent) => void;
   private _isOnline: boolean = true;
   private _isDestroyed: boolean = false;
 
   constructor(options?: EventBusOptions) {
     this.maxHistorySize = options?.maxHistorySize ?? 1000;
     this.enableOfflineBuffer = options?.enableOfflineBuffer ?? true;
+    this.onHandlerError = options?.onHandlerError;
     this.offlineBuffer = new OfflineEventBuffer({
       maxBufferSize: options?.maxBufferSize ?? 5000,
     });
@@ -213,8 +215,8 @@ export class TypedEventBus implements IDomainEventEmitter {
       for (const handler of typeHandlers) {
         try {
           handler(event);
-        } catch {
-          // Error isolation: handler errors do not propagate
+        } catch (error) {
+          this.onHandlerError?.(error, event);
         }
       }
     }
@@ -223,8 +225,8 @@ export class TypedEventBus implements IDomainEventEmitter {
     for (const handler of this.globalHandlers) {
       try {
         handler(event);
-      } catch {
-        // Error isolation: handler errors do not propagate
+      } catch (error) {
+        this.onHandlerError?.(error, event);
       }
     }
   }

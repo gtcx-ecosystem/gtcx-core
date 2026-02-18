@@ -1,6 +1,8 @@
+import { baseConfig } from '@gtcx/tsup-config';
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
+  ...baseConfig,
   entry: {
     index: 'src/index.ts',
     schemas: 'src/schemas.ts',
@@ -12,12 +14,5 @@ export default defineConfig({
     versioning: 'src/versioning.ts',
     'internal/offline-queue': 'src/internal/offline-queue.ts',
   },
-  format: ['cjs', 'esm'],
-  dts: true,
-  clean: true,
-  sourcemap: true,
-  treeshake: true,
-  splitting: false,
-  minify: false,
   external: ['@gtcx/types', '@gtcx/crypto'],
 });

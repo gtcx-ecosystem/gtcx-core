@@ -1,6 +1,6 @@
 /**
  * @gtcx/security - Validation Schemas
- * 
+ *
  * Common Zod schemas for input validation at system boundaries.
  * Implements P2 (Type Safety) and P9 (Security by Design).
  */
@@ -20,28 +20,29 @@ export const UuidSchema = z.string().uuid();
  * W3C Decentralized Identifier (DID)
  * Format: did:method:identifier
  */
-export const DidSchema = z.string().regex(
-  /^did:[a-z0-9]+:[a-zA-Z0-9._-]+$/,
-  'Invalid DID format'
-);
+export const DidSchema = z.string().regex(/^did:[a-z0-9]+:[a-zA-Z0-9._-]+$/, 'Invalid DID format');
 
 /**
  * TradePass identifier
  * Format: tp_[uuid]
  */
-export const TradePassIdSchema = z.string().regex(
-  /^tp_[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i,
-  'Invalid TradePass ID format'
-);
+export const TradePassIdSchema = z
+  .string()
+  .regex(
+    /^tp_[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i,
+    'Invalid TradePass ID format'
+  );
 
 /**
  * GeoTag identifier
  * Format: gt_[uuid]
  */
-export const GeoTagIdSchema = z.string().regex(
-  /^gt_[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i,
-  'Invalid GeoTag ID format'
-);
+export const GeoTagIdSchema = z
+  .string()
+  .regex(
+    /^gt_[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i,
+    'Invalid GeoTag ID format'
+  );
 
 // =============================================================================
 // CONTACT SCHEMAS
@@ -55,18 +56,20 @@ export const EmailSchema = z.string().email();
 /**
  * Phone number (E.164 format)
  */
-export const PhoneSchema = z.string().regex(
-  /^\+[1-9]\d{1,14}$/,
-  'Phone must be E.164 format (e.g., +1234567890)'
-);
+export const PhoneSchema = z
+  .string()
+  .regex(/^\+[1-9]\d{1,14}$/, 'Phone must be E.164 format (e.g., +1234567890)');
 
 /**
  * URL (http/https only)
  */
-export const UrlSchema = z.string().url().refine(
-  (url) => url.startsWith('http://') || url.startsWith('https://'),
-  'URL must use http or https protocol'
-);
+export const UrlSchema = z
+  .string()
+  .url()
+  .refine(
+    (url) => url.startsWith('http://') || url.startsWith('https://'),
+    'URL must use http or https protocol'
+  );
 
 // =============================================================================
 // TEMPORAL SCHEMAS
@@ -104,15 +107,17 @@ export const CoordinatesSchema = z.object({
 /**
  * Bounding box [minLng, minLat, maxLng, maxLat]
  */
-export const BoundingBoxSchema = z.tuple([
-  z.number().min(-180).max(180), // minLng
-  z.number().min(-90).max(90),   // minLat
-  z.number().min(-180).max(180), // maxLng
-  z.number().min(-90).max(90),   // maxLat
-]).refine(
-  ([minLng, minLat, maxLng, maxLat]) => minLng <= maxLng && minLat <= maxLat,
-  'Invalid bounding box: min values must be less than max values'
-);
+export const BoundingBoxSchema = z
+  .tuple([
+    z.number().min(-180).max(180), // minLng
+    z.number().min(-90).max(90), // minLat
+    z.number().min(-180).max(180), // maxLng
+    z.number().min(-90).max(90), // maxLat
+  ])
+  .refine(
+    ([minLng, minLat, maxLng, maxLat]) => minLng <= maxLng && minLat <= maxLat,
+    'Invalid bounding box: min values must be less than max values'
+  );
 
 // =============================================================================
 // CRYPTOGRAPHIC SCHEMAS
@@ -121,34 +126,30 @@ export const BoundingBoxSchema = z.tuple([
 /**
  * Hex-encoded bytes (general)
  */
-export const HexStringSchema = z.string().regex(
-  /^[a-fA-F0-9]+$/,
-  'Must be valid hexadecimal string'
-);
+export const HexStringSchema = z
+  .string()
+  .regex(/^[a-fA-F0-9]+$/, 'Must be valid hexadecimal string');
 
 /**
  * SHA-256 hash (64 hex chars)
  */
-export const Hash256Schema = z.string().regex(
-  /^[a-fA-F0-9]{64}$/,
-  'Must be 64-character hex string (SHA-256)'
-);
+export const Hash256Schema = z
+  .string()
+  .regex(/^[a-fA-F0-9]{64}$/, 'Must be 64-character hex string (SHA-256)');
 
 /**
  * Ed25519 public key (64 hex chars = 32 bytes)
  */
-export const PublicKeySchema = z.string().regex(
-  /^[a-fA-F0-9]{64}$/,
-  'Must be 64-character hex string (Ed25519 public key)'
-);
+export const PublicKeySchema = z
+  .string()
+  .regex(/^[a-fA-F0-9]{64}$/, 'Must be 64-character hex string (Ed25519 public key)');
 
 /**
  * Ed25519 signature (128 hex chars = 64 bytes)
  */
-export const SignatureSchema = z.string().regex(
-  /^[a-fA-F0-9]{128}$/,
-  'Must be 128-character hex string (Ed25519 signature)'
-);
+export const SignatureSchema = z
+  .string()
+  .regex(/^[a-fA-F0-9]{128}$/, 'Must be 128-character hex string (Ed25519 signature)');
 
 // =============================================================================
 // COMMODITY SCHEMAS (P6 Asset Abstraction)
@@ -162,13 +163,27 @@ export const CommodityTypeSchema = z.enum([
   'silver',
   'platinum',
   'palladium',
-  'copper',
+  'rhodium',
+  'cocoa',
+  'coffee',
+  'cotton',
+  'sugar',
+  'vanilla',
+  'palm_oil',
+  'rubber',
   'cobalt',
   'lithium',
-  'coltan',
-  'diamonds',
-  'coffee',
-  'cocoa',
+  'copper',
+  'tin',
+  'tantalum',
+  'tungsten',
+  'diamond',
+  'ruby',
+  'emerald',
+  'sapphire',
+  'crude_oil',
+  'natural_gas',
+  'lng',
   'other',
 ]);
 
@@ -219,32 +234,32 @@ export const CommonSchemas = {
   did: DidSchema,
   tradePassId: TradePassIdSchema,
   geoTagId: GeoTagIdSchema,
-  
+
   // Contact
   email: EmailSchema,
   phone: PhoneSchema,
   url: UrlSchema,
-  
+
   // Temporal
   datetime: DateTimeSchema,
   timestamp: TimestampSchema,
   duration: DurationSchema,
-  
+
   // Geographic
   coordinates: CoordinatesSchema,
   boundingBox: BoundingBoxSchema,
-  
+
   // Cryptographic
   hexString: HexStringSchema,
   hash256: Hash256Schema,
   publicKey: PublicKeySchema,
   signature: SignatureSchema,
-  
+
   // Commodity
   commodityType: CommodityTypeSchema,
   weight: WeightSchema,
   purity: PuritySchema,
-  
+
   // Protocol
   complianceScore: ComplianceScoreSchema,
   priceData: PriceDataSchema,
@@ -274,11 +289,13 @@ export function createApiResponseSchema<T extends z.ZodType>(dataSchema: T) {
   return z.object({
     success: z.literal(true),
     data: dataSchema,
-    meta: z.object({
-      requestId: UuidSchema,
-      timestamp: DateTimeSchema,
-      version: z.string(),
-    }).optional(),
+    meta: z
+      .object({
+        requestId: UuidSchema,
+        timestamp: DateTimeSchema,
+        version: z.string(),
+      })
+      .optional(),
   });
 }
 
@@ -292,10 +309,12 @@ export const ApiErrorSchema = z.object({
     message: z.string(),
     details: z.record(z.unknown()).optional(),
   }),
-  meta: z.object({
-    requestId: UuidSchema,
-    timestamp: DateTimeSchema,
-  }).optional(),
+  meta: z
+    .object({
+      requestId: UuidSchema,
+      timestamp: DateTimeSchema,
+    })
+    .optional(),
 });
 
 // =============================================================================

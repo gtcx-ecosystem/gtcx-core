@@ -36,6 +36,9 @@ export const OfflineSecurityConfigSchema = z.object({
   // Security limits
   maxFailedAttempts: z.number().int().min(1).default(10),
   wipeOnExceed: z.boolean().default(true),
+
+  // Lockout duration
+  lockoutDurationSeconds: z.number().int().min(60).default(900), // 15 minutes
 });
 
 export type OfflineSecurityConfig = z.infer<typeof OfflineSecurityConfigSchema>;
@@ -51,6 +54,7 @@ export const DEFAULT_OFFLINE_CONFIG: OfflineSecurityConfig = {
   integrityCheckIntervalMinutes: 15,
   maxFailedAttempts: 10,
   wipeOnExceed: true,
+  lockoutDurationSeconds: 900,
 };
 
 // =============================================================================
@@ -163,8 +167,8 @@ export abstract class SecureStorageBase {
         this.state.failedAttempts = parsed.failedAttempts ?? 0;
       }
     } catch {
-      // If lockout state is corrupted, start fresh
-      this.state.failedAttempts = 0;
+      // If lockout state is corrupted, assume maximum failed attempts (locked)
+      this.state.failedAttempts = this.config.maxFailedAttempts;
     }
     this.lockoutStateLoaded = true;
   }
@@ -326,7 +330,12 @@ export abstract class SecureStorageBase {
       return null;
     }
 
-    const item = EncryptedItemSchema.parse(JSON.parse(raw));
+    let item;
+    try {
+      item = EncryptedItemSchema.parse(JSON.parse(raw));
+    } catch {
+      throw new Error(`Secure storage: corrupt entry for key "${key}"`);
+    }
 
     // Check expiration
     if (item.expiresAt && new Date(item.expiresAt) < new Date()) {
@@ -341,7 +350,11 @@ export abstract class SecureStorageBase {
       this.fromBase64(item.tag)
     );
 
-    return JSON.parse(new TextDecoder().decode(plaintext));
+    try {
+      return JSON.parse(new TextDecoder().decode(plaintext));
+    } catch {
+      throw new Error(`Secure storage: decrypted data is not valid JSON for key "${key}"`);
+    }
   }
 
   /**
@@ -399,8 +412,7 @@ export abstract class SecureStorageBase {
     if (!this.isLockedOut()) {
       return undefined;
     }
-    // 15 minute lockout per config
-    return new Date(Date.now() + 15 * 60 * 1000);
+    return new Date(Date.now() + this.config.lockoutDurationSeconds * 1000);
   }
 
   private async recordFailedAttempt(): Promise<void> {

@@ -3,6 +3,11 @@
 // Custody & Audit Trail
 // ============================================================================
 
+import type { CommodityType } from './geotag';
+
+/** Vault-specific commodity forms (refinement states for vault operations) */
+export type VaultCommodityForm = 'gold_dore' | 'gold_refined' | 'gold_ore';
+
 /**
  * Chain of custody record
  */
@@ -16,12 +21,7 @@ export interface CustodyChain {
   updatedAt: number;
 }
 
-export type CustodyStatus =
-  | 'active'
-  | 'transferred'
-  | 'sealed'
-  | 'released'
-  | 'disputed';
+export type CustodyStatus = 'active' | 'transferred' | 'sealed' | 'released' | 'disputed';
 
 /**
  * Individual custody entry
@@ -130,16 +130,8 @@ export interface VaultLot {
   updatedAt: number;
 }
 
-export type CommodityType = 
-  | 'gold_dore'
-  | 'gold_refined'
-  | 'gold_ore'
-  | 'silver'
-  | 'platinum'
-  | 'palladium'
-  | 'coltan'
-  | 'cobalt'
-  | 'other';
+// CommodityType is imported from './geotag' (canonical source)
+// Vault-specific forms (gold_dore, gold_refined, gold_ore) are in VaultCommodityForm above
 
 export interface LotOrigin {
   siteId: string;

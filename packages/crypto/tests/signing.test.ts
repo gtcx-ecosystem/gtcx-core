@@ -160,12 +160,21 @@ describe('createSignedMessage and verifySignedMessage', () => {
     expect(signed.timestamp).toBeLessThanOrEqual(after);
   });
 
-  it('serializes object message as sorted-key JSON', () => {
+  it('serializes object message with deterministic deep-sorted keys', () => {
     const kp = generateKeyPair('Ed25519');
     const data = { z: 1, a: 2 };
     const signed = createSignedMessage(data, kp.privateKey, kp.publicKey);
-    // Object.keys sorts: ['z','a'] sorted -> ['a','z']
-    expect(signed.message).toBe(JSON.stringify(data, ['a', 'z']));
+    expect(signed.message).toBe('{"a":2,"z":1}');
+  });
+
+  it('produces identical signatures for nested objects regardless of key order', () => {
+    const kp = generateKeyPair('Ed25519');
+    const data1 = { a: { z: 1, a: 2 }, b: 1 };
+    const data2 = { b: 1, a: { a: 2, z: 1 } };
+    const signed1 = createSignedMessage(data1, kp.privateKey, kp.publicKey);
+    const signed2 = createSignedMessage(data2, kp.privateKey, kp.publicKey);
+    expect(signed1.message).toBe(signed2.message);
+    expect(signed1.signature).toBe(signed2.signature);
   });
 
   it('rejects tampered signed message', () => {

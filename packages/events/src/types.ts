@@ -59,6 +59,8 @@ export interface EventBusOptions {
   enableOfflineBuffer?: boolean;
   /** Maximum buffer size for offline events. Defaults to 5000. */
   maxBufferSize?: number;
+  /** Called when a handler throws. By default errors are silently swallowed. */
+  onHandlerError?: (error: unknown, event: DomainEvent) => void;
 }
 
 /**

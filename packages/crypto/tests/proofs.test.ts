@@ -138,9 +138,36 @@ describe('verifyMerkleProof', () => {
     }
   });
 
-  // NOTE: Odd-length trees have a known limitation — generateMerkleProof
-  // doesn't include self-pairing siblings for unpaired nodes, so proof
-  // verification fails for some leaves. This is a known bug to fix in Sprint 4.
+  it('accepts valid proofs for all leaves in a 3-item tree (odd)', () => {
+    const items = ['a', 'b', 'c'];
+    const tree = buildMerkleTree(items);
+
+    for (let i = 0; i < items.length; i++) {
+      const proof = generateMerkleProof(tree, i);
+      expect(verifyMerkleProof(proof)).toBe(true);
+    }
+  });
+
+  it('accepts valid proofs for all leaves in a 5-item tree (odd)', () => {
+    const items = ['a', 'b', 'c', 'd', 'e'];
+    const tree = buildMerkleTree(items);
+
+    for (let i = 0; i < items.length; i++) {
+      const proof = generateMerkleProof(tree, i);
+      expect(verifyMerkleProof(proof)).toBe(true);
+    }
+  });
+
+  it('accepts valid proofs for all leaves in a 7-item tree (odd)', () => {
+    const items = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+    const tree = buildMerkleTree(items);
+
+    for (let i = 0; i < items.length; i++) {
+      const proof = generateMerkleProof(tree, i);
+      expect(verifyMerkleProof(proof)).toBe(true);
+    }
+  });
+
   it('accepts valid proofs for all leaves in an 8-item tree', () => {
     const items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     const tree = buildMerkleTree(items);
@@ -277,7 +304,17 @@ describe('computeRootFromProof', () => {
     }
   });
 
-  // NOTE: See odd-length tree limitation note in verifyMerkleProof tests
+  it('matches tree root for 7-item tree (odd)', () => {
+    const items = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+    const tree = buildMerkleTree(items);
+
+    for (let i = 0; i < items.length; i++) {
+      const proof = generateMerkleProof(tree, i);
+      const computedRoot = computeRootFromProof(proof);
+      expect(computedRoot).toBe(tree.root);
+    }
+  });
+
   it('matches tree root for 8-item tree', () => {
     const items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     const tree = buildMerkleTree(items);

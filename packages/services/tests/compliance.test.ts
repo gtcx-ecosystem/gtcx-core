@@ -733,4 +733,64 @@ describe('UnifiedComplianceService', () => {
       expect(licenseRecord!.metadata.priority).toBe(10);
     });
   });
+
+  // --------------------------------------------------------------------------
+  // Crypto failure paths
+  // --------------------------------------------------------------------------
+
+  describe('Crypto failure paths', () => {
+    it('verify returning false flags asset lot as non-compliant via subclass', async () => {
+      const crypto = createMockCryptoService();
+      (crypto.verify as ReturnType<typeof vi.fn>).mockResolvedValue(false);
+
+      // Capture crypto in closure so the subclass can delegate to it
+      const capturedCrypto = crypto;
+      class CryptoVerifyComplianceService extends UnifiedComplianceService {
+        protected override async checkProducerLicense(_producerId: string) {
+          const isValid = await capturedCrypto.verify('data', 'sig', 'key');
+          return isValid
+            ? { compliant: true }
+            : { compliant: false, issue: 'Cryptographic verification failed' };
+        }
+      }
+
+      const service = new CryptoVerifyComplianceService({
+        storageService: createMockStorageService(),
+        cryptoService: crypto,
+      });
+
+      const lot = createMockAssetLot();
+      const records = await service.checkAssetLotCompliance(lot);
+
+      const licenseRecord = records.find((r) => r.regulation.code === 'LICENSE-001');
+      expect(licenseRecord).toBeDefined();
+      expect(licenseRecord!.status).toBe('violation');
+      expect(licenseRecord!.finding.description).toContain('Cryptographic verification failed');
+      expect(crypto.verify).toHaveBeenCalled();
+    });
+
+    it('createHash throwing propagates error from compliance check', async () => {
+      const crypto = createMockCryptoService();
+      (crypto.createHash as ReturnType<typeof vi.fn>).mockRejectedValue(
+        new Error('Hash computation failed')
+      );
+
+      const capturedCrypto = crypto;
+      class CryptoHashComplianceService extends UnifiedComplianceService {
+        protected override async checkProducerLicense(_producerId: string) {
+          await capturedCrypto.createHash('test-data');
+          return { compliant: true };
+        }
+      }
+
+      const service = new CryptoHashComplianceService({
+        storageService: createMockStorageService(),
+        cryptoService: crypto,
+      });
+
+      const lot = createMockAssetLot();
+      await expect(service.checkAssetLotCompliance(lot)).rejects.toThrow('Hash computation failed');
+      expect(crypto.createHash).toHaveBeenCalledWith('test-data');
+    });
+  });
 });
