@@ -53,14 +53,8 @@ const { identity, privateKeys } = await createEnhancedIdentity({
 });
 
 // Store both private keys
-await secureStorage.set(
-  identity.multiKeyPairs.ed25519.privateKeyRef,
-  privateKeys.ed25519
-);
-await secureStorage.set(
-  identity.multiKeyPairs.secp256k1.privateKeyRef,
-  privateKeys.secp256k1
-);
+await secureStorage.set(identity.multiKeyPairs.ed25519.privateKeyRef, privateKeys.ed25519);
+await secureStorage.set(identity.multiKeyPairs.secp256k1.privateKeyRef, privateKeys.secp256k1);
 ```
 
 ### Resolve a DID
@@ -84,10 +78,11 @@ const document = await resolveDID('did:gtcx:tp_a1b2c3d4');
 import { rotateKeys, getKeyHistory } from '@gtcx/identity';
 
 // Rotate to new key pair (old key retained for transition period)
-const { identity: updated, newPrivateKey, previousKey } = await rotateKeys(
-  identity,
-  { reason: 'scheduled_rotation' }
-);
+const {
+  identity: updated,
+  newPrivateKey,
+  previousKey,
+} = await rotateKeys(identity, { reason: 'scheduled_rotation' });
 
 // Previous key remains valid for verification of historical signatures
 // but cannot create new signatures after rotation timestamp
@@ -129,20 +124,20 @@ const document = createDIDDocument(identity);
 
 ## Verification Levels
 
-| Level | Name | Requirements | Capabilities |
-|-------|------|-------------|-------------|
-| `L0` | Unverified | Phone or email only | View-only access |
-| `L1` | Basic | Government ID uploaded | Hold T3 credentials |
-| `L2` | Verified | ID + liveness check | Hold T2 credentials, standard transactions |
-| `L3` | Fully Verified | ID + biometric + in-person | Hold T1 credentials, high-value transactions |
-| `L4` | Government | Government enrollment | Issue credentials, override automated decisions |
+| Level | Name           | Requirements               | Capabilities                                    |
+| ----- | -------------- | -------------------------- | ----------------------------------------------- |
+| `L0`  | Unverified     | Phone or email only        | View-only access                                |
+| `L1`  | Basic          | Government ID uploaded     | Hold T3 credentials                             |
+| `L2`  | Verified       | ID + liveness check        | Hold T2 credentials, standard transactions      |
+| `L3`  | Fully Verified | ID + biometric + in-person | Hold T1 credentials, high-value transactions    |
+| `L4`  | Government     | Government enrollment      | Issue credentials, override automated decisions |
 
 ## Security Levels
 
-| Level | Keys | Algorithm | Use Case |
-|-------|------|-----------|----------|
-| `standard` | Single Ed25519 | Ed25519 | General users, daily operations |
-| `enhanced` | Ed25519 + Secp256k1 | Dual-curve | High-value transactions, vault operators |
+| Level      | Keys                               | Algorithm                   | Use Case                                   |
+| ---------- | ---------------------------------- | --------------------------- | ------------------------------------------ |
+| `standard` | Single Ed25519                     | Ed25519                     | General users, daily operations            |
+| `enhanced` | Ed25519 + Secp256k1                | Dual-curve                  | High-value transactions, vault operators   |
 | `military` | Multi-sig + quantum-resistant hash | Ed25519 + Secp256k1 + SHA-3 | Government inspectors, critical operations |
 
 ## Architecture
@@ -187,15 +182,15 @@ await SecretManager.store(identity.privateKeyRef, privateKey);
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
-| P1 Package Structure | Single-responsibility modules, no circular deps |
-| P2 Type Safety | Zod validation on all identity inputs and DID parsing |
-| P3 Modularity | Identity, DID, keys, validation are independent modules |
-| P4 Composability | Works with any secure storage backend via injection |
-| P6 Asset Abstraction | Zero commodity-specific code — identity is universal |
-| P8 Offline-First | Cached credentials with configurable TTL |
-| P9 Security | Key rotation, multi-sig, verification levels |
+| Principle            | Implementation                                          |
+| -------------------- | ------------------------------------------------------- |
+| P1 Package Structure | Single-responsibility modules, no circular deps         |
+| P2 Type Safety       | Zod validation on all identity inputs and DID parsing   |
+| P3 Modularity        | Identity, DID, keys, validation are independent modules |
+| P4 Composability     | Works with any secure storage backend via injection     |
+| P6 Asset Abstraction | Zero commodity-specific code — identity is universal    |
+| P8 Offline-First     | Cached credentials with configurable TTL                |
+| P9 Security          | Key rotation, multi-sig, verification levels            |
 
 ## Related
 

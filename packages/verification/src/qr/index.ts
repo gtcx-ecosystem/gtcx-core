@@ -10,10 +10,10 @@ export {
   createAssetLotQRData,
   createCertificateQRData,
   createQRCodeStructure,
-  
+
   // Legacy (deprecated)
   createGoldLotQRData,
-  
+
   // Utilities
   generateQRCodeId,
   serializeQRData,
@@ -21,7 +21,7 @@ export {
   verifyQRCodeData,
   hashQRCodeContent,
   getQRCodeCommodityType,
-  
+
   // Types
   type QRCodeConfig,
 } from './generator';

@@ -90,12 +90,12 @@ export interface ComplianceScore {
   trend?: 'improving' | 'stable' | 'declining';
 }
 
-export type ComplianceTier = 
+export type ComplianceTier =
   | 'platinum' // 95-100
-  | 'gold'     // 85-94
-  | 'silver'   // 70-84
-  | 'bronze'   // 50-69
-  | 'pending'  // < 50 or incomplete
+  | 'gold' // 85-94
+  | 'silver' // 70-84
+  | 'bronze' // 50-69
+  | 'pending' // < 50 or incomplete
   | 'blocked'; // critical failure
 
 export interface RuleResult {

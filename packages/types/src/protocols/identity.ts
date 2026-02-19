@@ -11,7 +11,7 @@ export type SecurityLevel = 'standard' | 'enhanced' | 'military';
 /**
  * Supported cryptographic algorithms
  */
-export type CryptoAlgorithm = 
+export type CryptoAlgorithm =
   | 'Ed25519'
   | 'Secp256k1'
   | 'Ed25519-SHA256'

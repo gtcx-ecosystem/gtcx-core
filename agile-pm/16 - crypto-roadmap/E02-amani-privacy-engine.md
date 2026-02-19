@@ -25,16 +25,17 @@ The privacy system is built on five pillars:
 
 ### Current State
 
-| Asset | Status |
-|-------|--------|
-| Feature flag (`enable_privacy_preserving_learning: bool = True`) | Exists in `sensei-ai/packages/sensei-py/sensei_core/config.py` |
-| Specification documents (6 files, ~2,808 lines) | Complete -- covers every algorithm, data structure, and performance target |
-| Implementation code | None whatsoever |
-| Cryptographic foundation (`gtcx-crypto` crate) | DONE -- provides `chain.rs` (hash-chained audit logs), Ed25519 signing, SHA-256/Blake3 hashing, HD key derivation |
+| Asset                                                            | Status                                                                                                            |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Feature flag (`enable_privacy_preserving_learning: bool = True`) | Exists in `sensei-ai/packages/sensei-py/sensei_core/config.py`                                                    |
+| Specification documents (6 files, ~2,808 lines)                  | Complete -- covers every algorithm, data structure, and performance target                                        |
+| Implementation code                                              | None whatsoever                                                                                                   |
+| Cryptographic foundation (`gtcx-crypto` crate)                   | DONE -- provides `chain.rs` (hash-chained audit logs), Ed25519 signing, SHA-256/Blake3 hashing, HD key derivation |
 
 ### Implementation Location
 
 New code will be implemented in one of:
+
 - `sensei-ai/packages/sensei-py/` (Python, for integration with existing Sensei pipeline)
 - A new Rust crate under `gtcx-core/rust/` (for performance-critical cryptographic operations)
 
@@ -42,14 +43,14 @@ The CRDT data types and Paillier operations are strong candidates for Rust. The 
 
 ### Specification References
 
-| Document | Path | Lines |
-|----------|------|-------|
-| Privacy-Preserving Learning (overview) | `sensei-ai/docs/product/platform/amani/privacy-preserving-learning.md` | 106 |
-| CRDT Synchronization | `sensei-ai/docs/developers/components/amani/crdt-sync.md` | 176 |
-| Differential Privacy | `sensei-ai/docs/developers/components/amani/differential-privacy.md` | 114 |
-| Federated Pattern Extraction | `sensei-ai/docs/developers/components/amani/federated-learning.md` | 129 |
-| Homomorphic Pattern Matching | `sensei-ai/docs/developers/components/amani/homomorphic-matching.md` | 127 |
-| Privacy Budget Accounting | `sensei-ai/docs/developers/components/amani/privacy-budget.md` | 149 |
+| Document                               | Path                                                                   | Lines |
+| -------------------------------------- | ---------------------------------------------------------------------- | ----- |
+| Privacy-Preserving Learning (overview) | `sensei-ai/docs/product/platform/amani/privacy-preserving-learning.md` | 106   |
+| CRDT Synchronization                   | `sensei-ai/docs/developers/components/amani/crdt-sync.md`              | 176   |
+| Differential Privacy                   | `sensei-ai/docs/developers/components/amani/differential-privacy.md`   | 114   |
+| Federated Pattern Extraction           | `sensei-ai/docs/developers/components/amani/federated-learning.md`     | 129   |
+| Homomorphic Pattern Matching           | `sensei-ai/docs/developers/components/amani/homomorphic-matching.md`   | 127   |
+| Privacy Budget Accounting              | `sensei-ai/docs/developers/components/amani/privacy-budget.md`         | 149   |
 
 ---
 
@@ -66,6 +67,7 @@ The CRDT data types and Paillier operations are strong candidates for Rust. The 
 The data structure is a map from node ID to a non-negative integer. Increment only affects the local node's slot. The `value()` method returns the sum of all slots.
 
 **Acceptance Criteria**:
+
 - A G-Counter can be incremented from any node, and the increment only affects that node's slot
 - Merge of two G-Counters takes the element-wise maximum of all node slots
 - Concurrent increments from N nodes converge to the correct total after merge
@@ -80,6 +82,7 @@ The data structure is a map from node ID to a non-negative integer. Increment on
 **Dependencies**: None
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: single-node increment, multi-node increment, merge correctness, commutativity, associativity, idempotence, serialization round-trip
 - Property-based tests (proptest) for algebraic invariants
@@ -96,6 +99,7 @@ The data structure is a map from node ID to a non-negative integer. Increment on
 The data structure holds: `value`, `timestamp` (millisecond precision), and `node_id`. The merge operation selects the entry with the higher timestamp, falling back to lexicographic node ID comparison on ties.
 
 **Acceptance Criteria**:
+
 - The register stores a value with a timestamp and node ID
 - Merge selects the value with the higher timestamp
 - Deterministic resolution for concurrent writes with the same timestamp via node ID tie-breaking
@@ -108,6 +112,7 @@ The data structure holds: `value`, `timestamp` (millisecond precision), and `nod
 **Dependencies**: None
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: basic set/get, merge with different timestamps, merge with identical timestamps (tie-breaking), commutativity, associativity, idempotence, serialization round-trip
 - Property-based tests for merge invariants
@@ -124,6 +129,7 @@ The data structure holds: `value`, `timestamp` (millisecond precision), and `nod
 This is used for approved mappings, acknowledged errors, and completed tasks. The OR-Set must handle the key scenario described in the spec: User A adds an element offline while User B removes the same element on the server. After merge, the element is present (add-wins).
 
 **Acceptance Criteria**:
+
 - Elements can be added to and removed from the set
 - Add-wins semantics: a concurrent add and remove results in the element being present
 - Remove only affects tags that were observed at the time of removal
@@ -137,6 +143,7 @@ This is used for approved mappings, acknowledged errors, and completed tasks. Th
 **Dependencies**: None
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: add, remove, concurrent add+remove (add-wins), sequential add then remove, multiple tags for same element, merge correctness, commutativity, associativity, idempotence, serialization round-trip
 - Property-based tests for set algebra invariants
@@ -153,6 +160,7 @@ This is used for approved mappings, acknowledged errors, and completed tasks. Th
 Keys can be added but not removed (use tombstone values for logical deletion, as specified in the docs). Each key's value is resolved independently using the LWW-Register merge semantics.
 
 **Acceptance Criteria**:
+
 - Each key operates as an independent LWW-Register
 - Independent key updates from different nodes merge correctly without interfering with each other
 - A key updated on node A and a different key updated on node B both survive merge
@@ -166,6 +174,7 @@ Keys can be added but not removed (use tombstone values for logical deletion, as
 **Dependencies**: S6.2 (LWW-Register)
 
 **Definition of Done**:
+
 - Implementation that composes LWW-Register per key, with full documentation
 - Unit tests covering: single-key update, multi-key independent updates, same-key conflict resolution, merge correctness, commutativity, associativity, idempotence, tombstone deletion, serialization round-trip
 - Property-based tests for map merge invariants
@@ -186,6 +195,7 @@ Keys can be added but not removed (use tombstone values for logical deletion, as
 This corresponds to Phase 1 (State Exchange) in the CRDT sync spec. The protocol must be incremental -- only missing state is transferred, never the full state.
 
 **Acceptance Criteria**:
+
 - Each peer maintains a state vector summarizing its known state
 - State vector exchange correctly identifies which entries are missing on each side
 - Incremental sync transfers only the missing state, not the full state
@@ -198,6 +208,7 @@ This corresponds to Phase 1 (State Exchange) in the CRDT sync spec. The protocol
 **Dependencies**: Sprint 6 (all CRDT data types)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: no changes needed (already in sync), one-sided changes, two-sided changes, first-ever sync (empty state vector)
 - Benchmark measuring sync payload size for varying offline durations
@@ -214,6 +225,7 @@ This corresponds to Phase 1 (State Exchange) in the CRDT sync spec. The protocol
 After both client and server independently merge the received changes, they exchange state hashes. If hashes match, sync is complete. If hashes do not match (indicating a bug), a full state comparison is triggered to identify the discrepancy.
 
 **Acceptance Criteria**:
+
 - Merge correctly applies received state for all four CRDT types (G-Counter, LWW-Register, OR-Set, LWW-Map)
 - Merge is commutative: both peers arrive at identical state regardless of merge order
 - Merge is associative: multi-peer merge produces the same result regardless of grouping
@@ -226,6 +238,7 @@ After both client and server independently merge the received changes, they exch
 **Dependencies**: S7.1 (State Vector Exchange), Sprint 6 (all CRDT data types)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: merge for each CRDT type, hash verification success, hash verification failure path, commutativity across all types, idempotent re-merge
 - Property-based tests for merge algebraic properties across all CRDT types
@@ -244,6 +257,7 @@ Implement detection of these semantic conflicts by comparing the merge result ag
 Per the spec, semantic conflicts occur in less than 1% of sync operations.
 
 **Acceptance Criteria**:
+
 - Technical conflicts are impossible by construction (guaranteed by CRDT properties)
 - Semantic conflicts are detected when merge result differs from either peer's individual state
 - Detected conflicts are flagged with a "merge decision" marker for human review
@@ -256,6 +270,7 @@ Per the spec, semantic conflicts occur in less than 1% of sync operations.
 **Dependencies**: S7.2 (Merge Operation)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: no semantic conflict (clean merge), semantic conflict detection (concurrent approve/reject), audit trail generation, notification payload generation
 - Test reproducing the spec scenario: User A approves mapping X offline, User B rejects mapping X, merge resolves to approved, semantic conflict flagged
@@ -272,6 +287,7 @@ Per the spec, semantic conflicts occur in less than 1% of sync operations.
 Per the spec, sync must initiate within 1 second of connectivity being detected, and complete within 2--60 seconds depending on the duration of the offline period.
 
 **Acceptance Criteria**:
+
 - All CRDT operations performed offline are buffered in a durable, persistent queue
 - Queue supports offline periods of up to 30 days
 - Sync initiates within 1 second of connectivity being detected
@@ -286,6 +302,7 @@ Per the spec, sync must initiate within 1 second of connectivity being detected,
 **Dependencies**: S7.1 (State Vector Exchange), S7.2 (Merge Operation)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: queue operations (enqueue, dequeue, peek), persistence across restarts, replay order correctness, queue clearing after sync
 - Integration test: simulate offline period, queue operations, restore connectivity, verify sync completion
@@ -308,6 +325,7 @@ The transmitted pattern becomes: `transmitted_pattern = true_pattern + N(0, sigm
 Sigma must be computed as: `sigma = sensitivity * sqrt(2 * ln(1.25 / delta)) / epsilon`, where delta is the failure probability (default 10^-6).
 
 **Acceptance Criteria**:
+
 - Gaussian noise N(0, sigma^2) is added to each dimension of the pattern vector
 - Sigma is correctly computed from sensitivity and epsilon using the Gaussian mechanism formula
 - Noise magnitude matches the theoretical requirement for the target epsilon
@@ -321,6 +339,7 @@ Sigma must be computed as: `sigma = sensitivity * sqrt(2 * ln(1.25 / delta)) / e
 **Dependencies**: None
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: noise magnitude distribution matches N(0, sigma^2), sigma computation correctness for various epsilon and sensitivity values, vector dimension independence
 - Statistical tests: verify noise distribution over 10,000+ samples matches expected Gaussian parameters
@@ -337,16 +356,17 @@ Sigma must be computed as: `sigma = sensitivity * sqrt(2 * ln(1.25 / delta)) / e
 
 Per the spec, the sensitivity classifications are:
 
-| Pattern Category | Sensitivity | Rationale |
-|---|---|---|
-| Schema structural fingerprints | Low | Structure is coarse-grained |
-| Performance profiles | Low | Throughput curves are similar across customers |
-| Error signatures | Medium | Error distributions vary more across customers |
-| Strategy effectiveness | Low | Effectiveness scores are normalized |
+| Pattern Category               | Sensitivity | Rationale                                      |
+| ------------------------------ | ----------- | ---------------------------------------------- |
+| Schema structural fingerprints | Low         | Structure is coarse-grained                    |
+| Performance profiles           | Low         | Throughput curves are similar across customers |
+| Error signatures               | Medium      | Error distributions vary more across customers |
+| Strategy effectiveness         | Low         | Effectiveness scores are normalized            |
 
 Lower sensitivity means less noise is needed, preserving more utility. Higher sensitivity requires more noise to maintain the same privacy guarantee.
 
 **Acceptance Criteria**:
+
 - Sensitivity is correctly classified per the documented pattern taxonomy (schema fingerprints: low, performance profiles: low, error signatures: medium, strategy effectiveness: low)
 - Sensitivity values are configurable but have correct defaults per the spec
 - The calibration module provides a mapping from pattern type to numeric sensitivity value
@@ -359,6 +379,7 @@ Lower sensitivity means less noise is needed, preserving more utility. Higher se
 **Dependencies**: S8.1 (Gaussian Mechanism)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: correct sensitivity for each pattern type, sensitivity feeds into sigma computation correctly, custom sensitivity override
 - Integration test: end-to-end from pattern type to noise magnitude, verifying that low-sensitivity patterns receive less noise than medium-sensitivity patterns
@@ -374,17 +395,18 @@ Lower sensitivity means less noise is needed, preserving more utility. Higher se
 
 Per the spec:
 
-| Epsilon | Adversary Advantage | Practical Meaning |
-|---|---|---|
-| 0.1 | Factor of 1.1 | Extremely strong -- adversary learns almost nothing |
-| 0.5 | Factor of 1.6 | Very strong -- participation nearly undetectable |
-| 1.0 (default) | Factor of 2.7 | Strong -- standard for sensitive data |
-| 2.0 | Factor of 7.4 | Moderate -- detectable but not exploitable |
-| 5.0 | Factor of 148 | Weak -- not recommended for sensitive applications |
+| Epsilon       | Adversary Advantage | Practical Meaning                                   |
+| ------------- | ------------------- | --------------------------------------------------- |
+| 0.1           | Factor of 1.1       | Extremely strong -- adversary learns almost nothing |
+| 0.5           | Factor of 1.6       | Very strong -- participation nearly undetectable    |
+| 1.0 (default) | Factor of 2.7       | Strong -- standard for sensitive data               |
+| 2.0           | Factor of 7.4       | Moderate -- detectable but not exploitable          |
+| 5.0           | Factor of 148       | Weak -- not recommended for sensitive applications  |
 
 Customers should be able to see the privacy/utility tradeoff when choosing their epsilon value.
 
 **Acceptance Criteria**:
+
 - Customer can configure epsilon values in the range [0.1, 5.0]
 - Default epsilon is 1.0
 - Values outside the valid range are rejected with a clear error message
@@ -398,6 +420,7 @@ Customers should be able to see the privacy/utility tradeoff when choosing their
 **Dependencies**: S8.1 (Gaussian Mechanism)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: default value, valid range enforcement, boundary values (0.1, 5.0), rejection of out-of-range values, persistence
 - Integration test: epsilon change affects subsequent noise magnitude
@@ -409,13 +432,14 @@ Customers should be able to see the privacy/utility tradeoff when choosing their
 
 **Title**: Implement advanced composition theorem for cumulative epsilon
 
-**Description**: Implement the advanced composition theorem for tracking cumulative privacy expenditure. Basic composition states that k operations at epsilon each cost k * epsilon total. Advanced composition provides a much tighter bound:
+**Description**: Implement the advanced composition theorem for tracking cumulative privacy expenditure. Basic composition states that k operations at epsilon each cost k \* epsilon total. Advanced composition provides a much tighter bound:
 
 `total_epsilon = sqrt(2k * ln(1/delta)) * epsilon + k * epsilon * (e^epsilon - 1)`
 
 Where k is the number of operations, epsilon is the per-operation epsilon, and delta is the failure probability.
 
 Per the spec, for typical parameters (epsilon = 1.0, delta = 10^-6):
+
 - 10 contributions: ~3.5 epsilon total (not 10 epsilon)
 - 100 contributions: ~12 epsilon total (not 100 epsilon)
 - 1,000 contributions: ~40 epsilon total (not 1,000 epsilon)
@@ -423,6 +447,7 @@ Per the spec, for typical parameters (epsilon = 1.0, delta = 10^-6):
 This dramatically extends how many operations are possible within a fixed budget.
 
 **Acceptance Criteria**:
+
 - Advanced composition theorem is implemented correctly: `total_epsilon = sqrt(2k * ln(1/delta)) * epsilon + k * epsilon * (e^epsilon - 1)`
 - 100 contributions at epsilon = 1.0 yields approximately 12 epsilon total (not 100 epsilon)
 - 10 contributions at epsilon = 1.0 yields approximately 3.5 epsilon total
@@ -436,6 +461,7 @@ This dramatically extends how many operations are possible within a fixed budget
 **Dependencies**: S8.3 (Epsilon Configuration)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: formula correctness for the three documented scenarios (10, 100, 1000 contributions), comparison showing advanced composition is tighter than basic, delta parameter variation, edge cases (k=0, k=1)
 - Numerical verification against published differential privacy composition bounds
@@ -452,6 +478,7 @@ This dramatically extends how many operations are possible within a fixed budget
 Per the spec, the pattern extraction agent logs noise magnitudes (not the noised values themselves). Customers can see their cumulative epsilon expenditure, and external auditors can verify the differential privacy implementation against the claimed parameters.
 
 **Acceptance Criteria**:
+
 - Noise magnitude is logged for every pattern contribution
 - Logs include: timestamp, pattern dimensions, noise magnitude (per dimension and total), target epsilon, computed sigma, actual sigma of injected noise
 - A third-party auditor can verify that the logged noise magnitude was sufficient for the claimed epsilon guarantee
@@ -464,6 +491,7 @@ Per the spec, the pattern extraction agent logs noise magnitudes (not the noised
 **Dependencies**: S8.1 (Gaussian Mechanism), S8.2 (Sensitivity Calibration)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: log entry generation, verification of sufficient noise, verification failure for insufficient noise, append-only log property
 - Integration test: end-to-end from noise injection through logging to third-party verification
@@ -484,6 +512,7 @@ Per the spec, the pattern extraction agent logs noise magnitudes (not the noised
 The agent is deployed as a container in the customer's VPC with read-only access to the migration pipeline. It has no external data access beyond the migration pipeline, and its code and network traffic are customer-auditable.
 
 **Acceptance Criteria**:
+
 - Agent runs as a container deployable in customer VPC infrastructure
 - Agent has read-only access to the migration pipeline (cannot modify migration state)
 - Agent extracts patterns in four categories: schema fingerprints, performance profiles, error signatures, strategy effectiveness
@@ -498,6 +527,7 @@ The agent is deployed as a container in the customer's VPC with read-only access
 **Dependencies**: Sprint 8 (Differential Privacy Engine)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Dockerfile and deployment manifests for customer VPC deployment
 - Unit tests covering: pattern extraction for each category, read-only access enforcement, transmission payload validation (no raw data leakage)
@@ -522,6 +552,7 @@ The agent is deployed as a container in the customer's VPC with read-only access
 The fingerprint must contain zero identifying information: no table names, no column names, no actual values, no database names.
 
 **Acceptance Criteria**:
+
 - Fingerprint includes: type distribution, cardinality ratios, null rates, relationship density, constraint patterns
 - Fingerprint contains zero identifying information (no table names, column names, actual values, database names, schema identifiers)
 - Fingerprint is a fixed-dimension numeric vector suitable for similarity comparison
@@ -534,6 +565,7 @@ The fingerprint must contain zero identifying information: no table names, no co
 **Dependencies**: S9.1 (Pattern Extraction Agent)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: fingerprint computation for known schemas, zero-information verification (no strings from source schema appear in fingerprint), determinism, dimension consistency
 - Integration test: extract fingerprint from a test schema, verify structure matches spec
@@ -555,6 +587,7 @@ The fingerprint must contain zero identifying information: no table names, no co
 All values must be normalized and relative, not absolute. No actual record counts, no timing of specific operations, no absolute throughput numbers.
 
 **Acceptance Criteria**:
+
 - Profiles include: throughput curves, bottleneck classifications, resource utilization patterns, optimization effectiveness
 - All values are normalized/relative, not absolute (e.g., relative throughput as percentage of peak, not records/hour)
 - No actual record counts appear in the output
@@ -567,6 +600,7 @@ All values must be normalized and relative, not absolute. No actual record count
 **Dependencies**: S9.1 (Pattern Extraction Agent)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: profile extraction from simulated migration telemetry, normalization verification (all values relative), absence of absolute numbers
 - Integration test: extract profile from a test migration run, verify structure matches spec
@@ -581,11 +615,13 @@ All values must be normalized and relative, not absolute. No actual record count
 **Description**: Implement extraction of error patterns and strategy effectiveness metrics as statistical abstractions. Per the spec:
 
 Error signatures include:
+
 - Error type frequencies (type mismatch, encoding, constraint violation)
 - Recovery success rates by error type
 - Escalation patterns
 
 Strategy effectiveness includes:
+
 - Strategy parameters used
 - Outcome metrics (speed, accuracy, efficiency)
 - Relative effectiveness compared to alternatives tried
@@ -593,6 +629,7 @@ Strategy effectiveness includes:
 No query text, no error messages, no record identifiers -- only statistical abstractions.
 
 **Acceptance Criteria**:
+
 - Error signatures include: error type frequencies, recovery rates, escalation patterns
 - Strategy effectiveness includes: strategy parameters, outcome metrics, relative effectiveness
 - No query text appears in the output
@@ -606,6 +643,7 @@ No query text, no error messages, no record identifiers -- only statistical abst
 **Dependencies**: S9.1 (Pattern Extraction Agent)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: error signature extraction from simulated error logs, strategy effectiveness extraction from simulated strategy outcomes, statistical abstraction verification
 - Integration test: extract signatures from a test migration with known error patterns, verify correct frequencies
@@ -626,6 +664,7 @@ No query text, no error messages, no record identifiers -- only statistical abst
 Key generation must produce safe primes and pass NIST validation. The private key must be wrapped in zeroizing memory (consistent with the `gtcx-crypto` crate's security practices).
 
 **Acceptance Criteria**:
+
 - Paillier keypair is generated correctly (public key, private key)
 - Customer holds the private key; server holds only the public key
 - Key generation completes in less than 1 second
@@ -639,6 +678,7 @@ Key generation must produce safe primes and pass NIST validation. The private ke
 **Dependencies**: Phase 0 (gtcx-crypto crate -- key management patterns)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: key generation, public/private key separation, serialization round-trip, key validation
 - Performance test: key generation latency (must be <1s)
@@ -656,6 +696,7 @@ Key generation must produce safe primes and pass NIST validation. The private ke
 Round-trip encryption must preserve values exactly: `Decrypt(Encrypt(v, pk), sk) == v` for all valid pattern vectors.
 
 **Acceptance Criteria**:
+
 - Customer can encrypt a pattern vector using the public key
 - Customer can decrypt a result vector using the private key
 - Round-trip encryption preserves values exactly: `Decrypt(Encrypt(v, pk), sk) == v`
@@ -669,6 +710,7 @@ Round-trip encryption must preserve values exactly: `Decrypt(Encrypt(v, pk), sk)
 **Dependencies**: S10.1 (Paillier Key Generation)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: round-trip correctness for various vector sizes, probabilistic encryption verification, error handling for invalid inputs
 - Property-based tests: round-trip identity for random vectors
@@ -691,6 +733,7 @@ The dot product is computed by: for each dimension i, raise `Encrypt(query[i])` 
 The encrypted computation must match the plaintext computation exactly.
 
 **Acceptance Criteria**:
+
 - Server computes dot product on encrypted query vectors using additive homomorphism and scalar multiplication
 - Encrypted computation result, when decrypted by the customer, matches the plaintext dot product computation exactly
 - Server never sees the plaintext query vector or the plaintext result
@@ -702,6 +745,7 @@ The encrypted computation must match the plaintext computation exactly.
 **Dependencies**: S10.2 (Encrypt/Decrypt Operations)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: dot product correctness for known vectors, comparison of encrypted vs. plaintext results, various vector dimensions, zero vectors, orthogonal vectors
 - Property-based tests: encrypted dot product matches plaintext dot product for random vectors
@@ -722,6 +766,7 @@ The encrypted computation must match the plaintext computation exactly.
 This hybrid approach achieves the spec target of less than 500ms query latency for top-10 retrieval while maintaining full privacy for the pattern content.
 
 **Acceptance Criteria**:
+
 - Coarse filtering uses unencrypted metadata to narrow candidates to approximately 1,000 patterns
 - Fine matching uses homomorphic dot product on the candidate set
 - Query latency is less than 500ms for top-10 retrieval from a pattern library of realistic size
@@ -734,6 +779,7 @@ This hybrid approach achieves the spec target of less than 500ms query latency f
 **Dependencies**: S10.3 (Homomorphic Dot Product)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: coarse filtering correctness, fine matching correctness, combined pipeline correctness, ranking accuracy
 - Performance test: end-to-end latency <500ms for top-10 retrieval on a 10,000-pattern test library
@@ -751,6 +797,7 @@ This hybrid approach achieves the spec target of less than 500ms query latency f
 The security is based on the semantic security of the Paillier cryptosystem: ciphertexts are computationally indistinguishable from random, making it infeasible for the server to extract any information about the plaintext.
 
 **Acceptance Criteria**:
+
 - Formal argument (documented) that semantic security of Paillier prevents information leakage from encrypted queries
 - Server-side code provably never accesses plaintext query or result values
 - Code analysis confirms no side channels leak query information (constant-time comparisons where applicable)
@@ -762,6 +809,7 @@ The security is based on the semantic security of the Paillier cryptosystem: cip
 **Dependencies**: S10.3 (Homomorphic Dot Product), S10.4 (Two-Stage Search)
 
 **Definition of Done**:
+
 - Formal privacy argument document written and reviewed by security reviewer
 - Code audit confirming no plaintext access on server side
 - Unit tests: server-side code cannot distinguish between two different encrypted queries (indistinguishability test)
@@ -790,6 +838,7 @@ The security is based on the semantic security of the Paillier cryptosystem: cip
 The ledger must be hash-chained so that modifying any entry breaks the chain, making tampering detectable. This reuses the `ChainEntry`, `create_entry`, `verify_chain`, and `verify_extension` functions from the existing `gtcx-crypto` crate.
 
 **Acceptance Criteria**:
+
 - Each ledger entry contains: timestamp, operation type, epsilon spent, pattern dimensions, noise magnitude, SHA-256 commitment
 - Entries are hash-chained using the `gtcx-crypto` chain module (each entry's hash depends on the previous entry)
 - Modifying any entry breaks the chain (detectable by `verify_chain`)
@@ -803,6 +852,7 @@ The ledger must be hash-chained so that modifying any entry breaks the chain, ma
 **Dependencies**: Phase 0 (gtcx-crypto chain.rs), Sprint 8 (Differential Privacy Engine for epsilon/noise values)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: entry creation, chain integrity verification, tamper detection (modify payload, modify epsilon, modify timestamp), append-only enforcement
 - Integration test with `gtcx-crypto` chain module: create a privacy ledger, verify chain integrity, tamper with an entry, verify chain breaks
@@ -816,18 +866,19 @@ The ledger must be hash-chained so that modifying any entry breaks the chain, ma
 
 **Description**: Implement automatic enforcement of privacy budget thresholds. When a customer's remaining budget crosses defined thresholds, the system's behavior changes automatically:
 
-| Remaining Budget | System Behavior |
-|---|---|
-| >50% | Normal operation |
-| 25--50% | Warnings shown in AMANI interface |
-| 10--25% | Contribution frequency limited |
-| 1--10% | Only high-value patterns contributed; user confirmation required |
-| <1% | Contributions paused; customer can still receive patterns |
-| 0% | No contributions; receive-only mode until budget refreshed |
+| Remaining Budget | System Behavior                                                  |
+| ---------------- | ---------------------------------------------------------------- |
+| >50%             | Normal operation                                                 |
+| 25--50%          | Warnings shown in AMANI interface                                |
+| 10--25%          | Contribution frequency limited                                   |
+| 1--10%           | Only high-value patterns contributed; user confirmation required |
+| <1%              | Contributions paused; customer can still receive patterns        |
+| 0%               | No contributions; receive-only mode until budget refreshed       |
 
 Budget refresh is available (with customer consent) on an annual basis, resetting the cumulative epsilon while preserving the historical ledger.
 
 **Acceptance Criteria**:
+
 - Enforcement triggers at the correct thresholds: >50% (normal), 25--50% (warnings), 10--25% (limited), 1--10% (confirmation required), <1% (paused), 0% (receive-only)
 - Each threshold triggers the correct behavior change as documented
 - Transitions between thresholds are logged in the privacy ledger
@@ -841,6 +892,7 @@ Budget refresh is available (with customer consent) on an annual basis, resettin
 **Dependencies**: S11.1 (Tamper-Proof Ledger), S8.4 (Composition Tracking)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: each threshold transition, correct behavior at each level, budget status query, budget refresh with ledger preservation
 - Integration test: simulate a customer consuming budget through multiple contributions, verify each threshold triggers correctly
@@ -854,15 +906,16 @@ Budget refresh is available (with customer consent) on an annual basis, resettin
 
 **Description**: Implement correct epsilon cost application for each operation type. Per the spec:
 
-| Operation | Epsilon Cost | Rationale |
-|---|---|---|
-| Pattern contribution | 0.5--1.5 epsilon | Reveals information about customer's migration |
-| Pattern query (homomorphic) | 0.0 epsilon | Encrypted query reveals nothing |
-| Pattern query (metadata-filtered) | 0.01--0.1 epsilon | Metadata filtering reveals coarse information |
+| Operation                         | Epsilon Cost      | Rationale                                      |
+| --------------------------------- | ----------------- | ---------------------------------------------- |
+| Pattern contribution              | 0.5--1.5 epsilon  | Reveals information about customer's migration |
+| Pattern query (homomorphic)       | 0.0 epsilon       | Encrypted query reveals nothing                |
+| Pattern query (metadata-filtered) | 0.01--0.1 epsilon | Metadata filtering reveals coarse information  |
 
 The cost within each range depends on the specifics of the operation (e.g., pattern contribution cost varies with pattern dimensionality and sensitivity).
 
 **Acceptance Criteria**:
+
 - Pattern contribution costs 0.5--1.5 epsilon, varying with pattern type and dimensionality
 - Homomorphic query costs 0.0 epsilon (free from a privacy perspective)
 - Metadata-filtered query costs 0.01--0.1 epsilon, varying with the specificity of the metadata filter
@@ -876,6 +929,7 @@ The cost within each range depends on the specifics of the operation (e.g., patt
 **Dependencies**: S11.1 (Tamper-Proof Ledger), S8.4 (Composition Tracking)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: cost computation for each operation type, cost variation within ranges, zero-cost homomorphic queries, cost recording in ledger, cost preview
 - Integration test: sequence of operations with known costs, verify ledger total matches expected cumulative epsilon (using advanced composition)
@@ -892,6 +946,7 @@ The cost within each range depends on the specifics of the operation (e.g., patt
 Per the spec, the privacy ledger is designed for external audit with: immutable history, cryptographic verification (auditors verify noise was correctly applied), composition verification (auditors independently compute cumulative epsilon), and a standard export format for privacy audit tools.
 
 **Acceptance Criteria**:
+
 - Export includes all transactions with: timestamp, operation type, epsilon spent, pattern dimensions, noise magnitude, SHA-256 commitment
 - Cryptographic commitments in the export are independently verifiable by a third party holding the public key
 - Auditor can independently verify the hash chain integrity from the export alone
@@ -905,6 +960,7 @@ Per the spec, the privacy ledger is designed for external audit with: immutable 
 **Dependencies**: S11.1 (Tamper-Proof Ledger), S11.3 (Cost Accounting)
 
 **Definition of Done**:
+
 - Implementation with full documentation
 - Unit tests covering: export generation, chain verification from export, cumulative epsilon recomputation from export, absence of sensitive data in export
 - Integration test: create a ledger with realistic transaction history, export, and independently verify the entire chain and budget computation from the export alone
@@ -957,25 +1013,25 @@ Sprint 11: Privacy Budget Ledger
 
 ## Story Point Summary
 
-| Sprint | Focus | Points |
-|--------|-------|--------|
-| Sprint 6 | CRDT Data Types | 8 |
-| Sprint 7 | CRDT Sync Protocol | 8 |
-| Sprint 8 | Differential Privacy Engine | 13 |
-| Sprint 9 | Federated Pattern Extraction | 8 |
-| Sprint 10 | Homomorphic Pattern Matching | 13 |
-| Sprint 11 | Privacy Budget Ledger | 8 |
-| **Total** | | **58** |
+| Sprint    | Focus                        | Points |
+| --------- | ---------------------------- | ------ |
+| Sprint 6  | CRDT Data Types              | 8      |
+| Sprint 7  | CRDT Sync Protocol           | 8      |
+| Sprint 8  | Differential Privacy Engine  | 13     |
+| Sprint 9  | Federated Pattern Extraction | 8      |
+| Sprint 10 | Homomorphic Pattern Matching | 13     |
+| Sprint 11 | Privacy Budget Ledger        | 8      |
+| **Total** |                              | **58** |
 
 ## Risk Considerations
 
-| Risk | Mitigation |
-|------|------------|
-| Paillier performance at scale (R2 from roadmap) | Benchmark early in Sprint 10; the two-stage search design mitigates by limiting homomorphic operations to ~1,000 candidates |
-| Rust expertise for CRDT and Paillier implementations | Cross-train during Sprint 6 (simpler CRDT types); consider Python prototypes first with Rust optimization later |
-| Privacy budget model complexity | Advanced composition theorem must be numerically verified against published bounds before integration |
-| Patent filing coordination (R6 from roadmap) | Coordinate with legal counsel at Sprint 8 kickoff (differential privacy) and Sprint 10 kickoff (homomorphic matching) |
-| Regulatory requirements (R5 from roadmap) | Design with configurable policy layers; the audit export (S11.4) provides regulatory compliance evidence |
+| Risk                                                 | Mitigation                                                                                                                  |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Paillier performance at scale (R2 from roadmap)      | Benchmark early in Sprint 10; the two-stage search design mitigates by limiting homomorphic operations to ~1,000 candidates |
+| Rust expertise for CRDT and Paillier implementations | Cross-train during Sprint 6 (simpler CRDT types); consider Python prototypes first with Rust optimization later             |
+| Privacy budget model complexity                      | Advanced composition theorem must be numerically verified against published bounds before integration                       |
+| Patent filing coordination (R6 from roadmap)         | Coordinate with legal counsel at Sprint 8 kickoff (differential privacy) and Sprint 10 kickoff (homomorphic matching)       |
+| Regulatory requirements (R5 from roadmap)            | Design with configurable policy layers; the audit export (S11.4) provides regulatory compliance evidence                    |
 
 ---
 

@@ -10,6 +10,8 @@ export * from './identity';
 export {
   TradePassDID,
   TradePassIdentity,
+  TradePassVerifiableCredential,
+  TradePassCredentialProof,
   TradePassRole,
   TradePassRoleType,
   RoleConstraints,

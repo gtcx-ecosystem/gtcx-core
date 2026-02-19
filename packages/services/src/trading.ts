@@ -62,6 +62,10 @@ export class MaxValueError extends Error {
   }
 }
 
+function toErrorCause(error: unknown): Error {
+  return error instanceof Error ? error : new Error(String(error));
+}
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -170,7 +174,7 @@ export class TradingService {
 
       return prices;
     } catch (error) {
-      throw new Error(`Failed to get market prices: ${error}`);
+      throw new Error('Failed to get market prices', { cause: toErrorCause(error) });
     }
   }
 
@@ -258,7 +262,7 @@ export class TradingService {
 
       return result;
     } catch (error) {
-      throw new Error(`Failed to calculate fair price: ${error}`);
+      throw new Error('Failed to calculate fair price', { cause: toErrorCause(error) });
     }
   }
 
@@ -375,7 +379,7 @@ export class TradingService {
 
       return opportunities;
     } catch (error) {
-      throw new Error(`Failed to find trading opportunities: ${error}`);
+      throw new Error('Failed to find trading opportunities', { cause: toErrorCause(error) });
     }
   }
 
@@ -584,7 +588,7 @@ export class TradingService {
         recommendations: [],
       };
     } catch (error) {
-      throw new Error(`Failed to get trade analytics: ${error}`);
+      throw new Error('Failed to get trade analytics', { cause: toErrorCause(error) });
     }
   }
 
@@ -630,5 +634,3 @@ export class TradingService {
     return {};
   }
 }
-
-export default TradingService;

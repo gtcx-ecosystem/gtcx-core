@@ -40,7 +40,7 @@ await queue.enqueue('registration', { lotId: 'lot-001' });
 
 ## Related
 
-- [ADR-004: Commodity-Agnostic Domain](../../docs/adr/004-commodity-agnostic-domain-model.md)
+- [ADR-004: Commodity-Agnostic Domain](../../docs/adr/004-commodity-agnostic-domain.md)
 - [ADR-007: Offline-First Architecture](../../docs/adr/007-offline-first-architecture.md)
 
 ## License

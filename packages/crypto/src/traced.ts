@@ -36,7 +36,6 @@ const cryptoLog = createCategoryLogger('crypto');
 /**
  * Sign a message with Ed25519 (traced)
  *
- * @description
  * Traced version of sign() that logs operation details for debugging
  * and AI analysis. Does NOT log the private key or full message content.
  *
@@ -76,7 +75,6 @@ export const tracedSignHash = traced(
 /**
  * Verify a signature (traced)
  *
- * @description
  * Traced version that logs verification attempts. Useful for debugging
  * failed verifications and analyzing verification patterns.
  */

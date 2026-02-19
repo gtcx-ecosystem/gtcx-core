@@ -1,11 +1,11 @@
 # GTCX Core -- Architecture Overview
 
-| Field       | Value                                                                                                                                                   |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Layer       | Foundation                                                                                                                                              |
-| Depends on  | Nothing                                                                                                                                                 |
-| Consumed by | All 10 other code repos                                                                                                                                 |
-| Related     | [Ecosystem Architecture](../../../docs/architecture/ecosystem-architecture-overview.md), [Dependency Map](../../../docs/architecture/dependency-map.md) |
+| Field       | Value                                                                                                  |
+| ----------- | ------------------------------------------------------------------------------------------------------ |
+| Layer       | Foundation                                                                                             |
+| Depends on  | Nothing                                                                                                |
+| Consumed by | All 10 other code repos                                                                                |
+| Related     | [Shared Infrastructure](./shared-infrastructure.md), [Integration Patterns](./integration-patterns.md) |
 
 ## Role in the Ecosystem
 

@@ -27,6 +27,7 @@
     "quality:kpi:collect": "node ./tools/collect-kpi-history.mjs",
     "quality:kpi:export": "node ./tools/export-quality-kpis.mjs",
     "security:threat-matrix": "node ./tools/check-threat-matrix.mjs",
+    "perf:update-history": "node ./tools/update-benchmark-history.mjs",
     "perf:check-budgets": "node ./tools/check-performance-budgets.mjs",
     "api:check": "node ./tools/check-api-surface.mjs",
     "api:check:release": "API_ENFORCE_SEMVER=true API_BASELINE_REF=HEAD~1 node ./tools/check-api-surface.mjs",

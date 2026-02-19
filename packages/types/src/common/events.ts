@@ -11,20 +11,20 @@ export type EventType =
   | 'identity.suspended'
   | 'role.granted'
   | 'role.revoked'
-  
+
   // Location Events
   | 'location.captured'
   | 'location.verified'
   | 'photo.captured'
   | 'session.started'
   | 'session.completed'
-  
+
   // Compliance Events
   | 'compliance.evaluated'
   | 'compliance.passed'
   | 'compliance.failed'
   | 'attestation.issued'
-  
+
   // Custody Events
   | 'custody.received'
   | 'custody.transferred'
@@ -32,7 +32,7 @@ export type EventType =
   | 'custody.verified'
   | 'lot.registered'
   | 'lot.certified'
-  
+
   // Trading Events
   | 'listing.created'
   | 'listing.updated'
@@ -44,7 +44,7 @@ export type EventType =
   | 'settlement.initiated'
   | 'settlement.completed'
   | 'settlement.failed'
-  
+
   // Permit Events
   | 'permit.submitted'
   | 'permit.approved'

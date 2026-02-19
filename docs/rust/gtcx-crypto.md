@@ -4,12 +4,12 @@ Core cryptographic primitives for GTCX Protocol. This crate is the single source
 
 ## Modules
 
-| Module | Operations |
-|--------|------------|
-| `signing` | Ed25519 and secp256k1 digital signatures |
-| `hashing` | SHA-256, SHA-512, Blake3 |
-| `keys` | Key generation, derivation, HD wallet support |
-| `chain` | Hash-chained audit logs for tamper-evident records |
+| Module    | Operations                                         |
+| --------- | -------------------------------------------------- |
+| `signing` | Ed25519 and secp256k1 digital signatures           |
+| `hashing` | SHA-256, SHA-512, Blake3                           |
+| `keys`    | Key generation, derivation, HD wallet support      |
+| `chain`   | Hash-chained audit logs for tamper-evident records |
 
 ## Quick Start
 
@@ -92,26 +92,26 @@ let entry = create_entry(
 
 ## Performance
 
-| Operation | Time | Throughput |
-|-----------|------|------------|
-| Ed25519 sign | ~50us | 20,000/sec |
-| Ed25519 verify | ~90us | 11,000/sec |
-| Batch verify (100) | ~4ms | 25,000/sec |
-| SHA-256 (1KB) | ~2us | 500 MB/sec |
-| Blake3 (1KB) | ~1us | 1 GB/sec |
+| Operation          | Time  | Throughput |
+| ------------------ | ----- | ---------- |
+| Ed25519 sign       | ~50us | 20,000/sec |
+| Ed25519 verify     | ~90us | 11,000/sec |
+| Batch verify (100) | ~4ms  | 25,000/sec |
+| SHA-256 (1KB)      | ~2us  | 500 MB/sec |
+| Blake3 (1KB)       | ~1us  | 1 GB/sec   |
 
 These benchmarks are approximately 10x faster than the equivalent TypeScript (@noble) implementations, which is why performance-critical paths use the Rust layer via NAPI-RS bindings.
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
+| Principle            | Implementation                                                                 |
+| -------------------- | ------------------------------------------------------------------------------ |
 | P1 Package Structure | Single-responsibility crate; signing, hashing, keys, chain as separate modules |
-| P2 Type Safety | Newtype pattern; Rust's ownership prevents misuse |
-| P3 Modularity | Each module independently usable; pure functions throughout |
-| P5 AI-Native | `#[instrument]` tracing on all public functions |
-| P7 Documentation | `#![deny(missing_docs)]` enforced at compile time |
-| P9 Security | No unsafe code; zeroizing secrets; audited libraries |
+| P2 Type Safety       | Newtype pattern; Rust's ownership prevents misuse                              |
+| P3 Modularity        | Each module independently usable; pure functions throughout                    |
+| P5 AI-Native         | `#[instrument]` tracing on all public functions                                |
+| P7 Documentation     | `#![deny(missing_docs)]` enforced at compile time                              |
+| P9 Security          | No unsafe code; zeroizing secrets; audited libraries                           |
 
 ## Related
 

@@ -29,7 +29,7 @@ export function generateKeyPair(algorithm: KeyAlgorithm = 'Ed25519'): KeyPairRes
   if (algorithm === 'Secp256k1') {
     const privateKey = secp256k1.utils.randomPrivateKey();
     const publicKey = secp256k1.getPublicKey(privateKey);
-    
+
     return {
       publicKey: bytesToHex(publicKey),
       privateKey: bytesToHex(privateKey),
@@ -40,7 +40,7 @@ export function generateKeyPair(algorithm: KeyAlgorithm = 'Ed25519'): KeyPairRes
   // Default: Ed25519
   const privateKey = ed25519.utils.randomPrivateKey();
   const publicKey = ed25519.getPublicKey(privateKey);
-  
+
   return {
     publicKey: bytesToHex(publicKey),
     privateKey: bytesToHex(privateKey),
@@ -56,7 +56,7 @@ export function derivePublicKey(
   algorithm: KeyAlgorithm = 'Ed25519'
 ): string {
   const privateKey = hexToBytes(privateKeyHex);
-  
+
   if (algorithm === 'Secp256k1') {
     const publicKey = secp256k1.getPublicKey(privateKey);
     return bytesToHex(publicKey);
@@ -75,12 +75,12 @@ export function isValidPublicKey(
 ): boolean {
   try {
     const bytes = hexToBytes(publicKeyHex);
-    
+
     if (algorithm === 'Secp256k1') {
       // Secp256k1 compressed public key is 33 bytes, uncompressed is 65
       return bytes.length === 33 || bytes.length === 65;
     }
-    
+
     // Ed25519 public key is 32 bytes
     return bytes.length === 32;
   } catch {
@@ -148,12 +148,12 @@ export function getPublicKeyLength(algorithm: KeyAlgorithm): number {
  */
 export function compressPublicKey(publicKeyHex: string): string {
   const bytes = hexToBytes(publicKeyHex);
-  
+
   // Already compressed
   if (bytes.length === 33) {
     return publicKeyHex;
   }
-  
+
   // Compress 65-byte key to 33-byte
   if (bytes.length === 65) {
     const lastByte = bytes[64];
@@ -166,6 +166,6 @@ export function compressPublicKey(publicKeyHex: string): string {
     compressed.set(bytes.slice(1, 33), 1);
     return bytesToHex(compressed);
   }
-  
+
   throw new Error('Invalid public key length for compression');
 }

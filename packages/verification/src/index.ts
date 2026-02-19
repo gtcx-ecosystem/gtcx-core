@@ -18,7 +18,7 @@
 //
 // Usage:
 // ```typescript
-// import { 
+// import {
 //   createStandardCertificateData,
 //   createAssetLotQRData,
 //   createProofBundle,
@@ -30,7 +30,7 @@
 //   location: { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() },
 //   userRole: 'producer',
 //   deviceId: 'device-123',
-//   assetLotData: { 
+//   assetLotData: {
 //     commodityType: 'gold',  // or 'cocoa', 'cobalt', etc.
 //     estimatedWeight: 15.5,
 //     unit: 'troy_oz',
@@ -79,5 +79,9 @@ export {
   logComplianceEvent,
   logGCICalculation,
   computeVerificationSummary,
+  type GenerateCertificateInput,
+  type GenerateQRCodeInput,
+  type CreateProofBundleInput,
+  type VerificationOperationLog,
   type VerificationSummary,
 } from './traced';

@@ -178,13 +178,13 @@ pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> PrivateKey {
 /// Panics if key cloning or derivation produces invalid key material (should never happen).
 #[instrument(skip(master), fields(path_len = path.len()))]
 pub fn derive_path(master: &PrivateKey, path: &[u32]) -> PrivateKey {
-    let mut current = PrivateKey::from_bytes(master.as_bytes())
-        .expect("Cloning valid key should succeed");
-    
+    let mut current =
+        PrivateKey::from_bytes(master.as_bytes()).expect("Cloning valid key should succeed");
+
     for &index in path {
         current = derive_child_key(&current, index);
     }
-    
+
     current
 }
 
@@ -224,43 +224,43 @@ mod tests {
     #[test]
     fn test_derive_child_key_deterministic() {
         let (master, _) = generate_keypair();
-        
+
         let child1 = derive_child_key(&master, 0);
         let child2 = derive_child_key(&master, 0);
-        
+
         assert_eq!(child1.as_bytes(), child2.as_bytes());
     }
 
     #[test]
     fn test_derive_child_key_different_indices() {
         let (master, _) = generate_keypair();
-        
+
         let child0 = derive_child_key(&master, 0);
         let child1 = derive_child_key(&master, 1);
-        
+
         assert_ne!(child0.as_bytes(), child1.as_bytes());
     }
 
     #[test]
     fn test_derive_purpose_key() {
         let (master, _) = generate_keypair();
-        
+
         let signing = derive_purpose_key(&master, "signing");
         let encryption = derive_purpose_key(&master, "encryption");
-        
+
         assert_ne!(signing.as_bytes(), encryption.as_bytes());
     }
 
     #[test]
     fn test_derive_path() {
         let (master, _) = generate_keypair();
-        
+
         let derived = derive_path(&master, &[44, 0, 0, 0]);
-        
+
         // Should be deterministic
         let derived2 = derive_path(&master, &[44, 0, 0, 0]);
         assert_eq!(derived.as_bytes(), derived2.as_bytes());
-        
+
         // Different path = different key
         let different = derive_path(&master, &[44, 0, 0, 1]);
         assert_ne!(derived.as_bytes(), different.as_bytes());

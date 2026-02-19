@@ -34,7 +34,9 @@ use tracing::instrument;
 #[derive(Debug, Error)]
 pub enum EdgeError {
     /// Device does not meet minimum resource requirements.
-    #[error("Resource constraint violated: {resource} ({available} available, {required} required)")]
+    #[error(
+        "Resource constraint violated: {resource} ({available} available, {required} required)"
+    )]
     ResourceConstraint {
         /// The resource type (e.g., "memory", "storage").
         resource: String,
@@ -91,9 +93,9 @@ impl ResourceLimits {
     /// Default GTCX edge constraints.
     pub fn default_gtcx() -> Self {
         Self {
-            max_memory_bytes: 50 * 1024 * 1024,    // 50 MB
-            max_binary_bytes: 10 * 1024 * 1024,     // 10 MB
-            max_wasm_bytes: 2 * 1024 * 1024,         // 2 MB
+            max_memory_bytes: 50 * 1024 * 1024, // 50 MB
+            max_binary_bytes: 10 * 1024 * 1024, // 10 MB
+            max_wasm_bytes: 2 * 1024 * 1024,    // 2 MB
             max_offline_days: 30,
             max_cache_entries: 10_000,
         }
@@ -102,9 +104,9 @@ impl ResourceLimits {
     /// Relaxed constraints for development/testing.
     pub fn development() -> Self {
         Self {
-            max_memory_bytes: 512 * 1024 * 1024,   // 512 MB
-            max_binary_bytes: 100 * 1024 * 1024,    // 100 MB
-            max_wasm_bytes: 20 * 1024 * 1024,        // 20 MB
+            max_memory_bytes: 512 * 1024 * 1024, // 512 MB
+            max_binary_bytes: 100 * 1024 * 1024, // 100 MB
+            max_wasm_bytes: 20 * 1024 * 1024,    // 20 MB
             max_offline_days: 365,
             max_cache_entries: 100_000,
         }

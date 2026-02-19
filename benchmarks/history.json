@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "generatedAt": "2026-02-19T00:00:00.000Z",
+  "maxEntries": 50,
+  "entries": [
+    {
+      "recordedAt": "2026-02-17",
+      "source": "docs/BENCHMARKS.md",
+      "metrics": {
+        "ed25519.key_generation_us": 23.1,
+        "ed25519.sign_us": 22.7,
+        "ed25519.verify_us": 31.2,
+        "ed25519.roundtrip_us": 53.5,
+        "hash.sha256_256b_ns": 876,
+        "hash.sha512_256b_ns": 663,
+        "hash.blake3_256b_ns": 287
+      }
+    }
+  ]
+}

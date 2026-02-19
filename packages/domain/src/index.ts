@@ -55,6 +55,7 @@ export {
 export type {
   // Asset types
   AssetLot,
+  AssetLotStatus,
   AssetRegistrationData,
   AssetCertificate,
   AssetForm,
@@ -84,6 +85,7 @@ export type {
 
   // Infrastructure types
   Location,
+  LocationWithAddress,
   CryptoProof,
   CryptographicProof,
 

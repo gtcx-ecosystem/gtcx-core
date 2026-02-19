@@ -1,11 +1,13 @@
 # Agent Resources & Guidelines
 
 ## Purpose
+
 This section contains comprehensive resources, guidelines, and best practices specifically designed for AI agents working within the GTCX ecosystem. It ensures consistent, safe, and effective agent contributions across all projects.
 
 ## Contents
 
 ### Core Agent Documentation
+
 - `agent-safety-rules.md` - Critical safety rules and development guards
 - `agent-behavioral-config.md` - Behavioral configuration and context rules
 - `agent-usage-guide.md` - Practical guide for using the agile-pm system
@@ -13,6 +15,7 @@ This section contains comprehensive resources, guidelines, and best practices sp
 - `agent-error-prevention.md` - Common mistakes and how to avoid them
 
 ### Quick Reference Guides
+
 - `agent-quick-commands.md` - Essential commands and shortcuts
 - `agent-checklist.md` - Pre-flight checklists for various tasks
 - `agent-communication-templates.md` - Templates for status updates and reports
@@ -20,6 +23,7 @@ This section contains comprehensive resources, guidelines, and best practices sp
 ## How Agents Should Use This Section
 
 ### 1. Initial Setup
+
 ```bash
 # First time working on GTCX? Start here:
 1. Read agent-safety-rules.md        # Understand boundaries
@@ -29,6 +33,7 @@ This section contains comprehensive resources, guidelines, and best practices sp
 ```
 
 ### 2. Daily Workflow
+
 ```bash
 # Before starting any work:
 1. Check agent-checklist.md         # Run through pre-flight
@@ -37,6 +42,7 @@ This section contains comprehensive resources, guidelines, and best practices sp
 ```
 
 ### 3. Error Prevention
+
 ```bash
 # Avoid common mistakes:
 - Review agent-error-prevention.md regularly
@@ -47,16 +53,19 @@ This section contains comprehensive resources, guidelines, and best practices sp
 ## Quick Links
 
 ### Essential Reading
+
 - [Agent Safety Rules](agent-safety-rules.md)
 - [Agent Usage Guide](agent-usage-guide.md)
 - [Agent Workflow Patterns](agent-workflow-patterns.md)
 
 ### Reference Materials
+
 - [Quick Commands](agent-quick-commands.md)
 - [Checklists](agent-checklist.md)
 - [Communication Templates](agent-communication-templates.md)
 
 ### Related Sections
+
 - [Overview & Navigation](../01%20-%20overview/README.md)
 - [Planning & Priorities](../06%20-%20planning/README.md)
 - [Automation Scripts](../14%20-%20automation/README.md)
@@ -64,6 +73,7 @@ This section contains comprehensive resources, guidelines, and best practices sp
 ## Agent Performance Metrics
 
 ### Quality Indicators
+
 - **Code Quality**: Following established patterns
 - **Documentation**: Keeping docs updated
 - **Testing**: Writing comprehensive tests
@@ -71,6 +81,7 @@ This section contains comprehensive resources, guidelines, and best practices sp
 - **Communication**: Clear status updates
 
 ### Success Metrics
+
 - Zero unauthorized deletions
 - 100% template compliance
 - All changes documented
@@ -80,16 +91,17 @@ This section contains comprehensive resources, guidelines, and best practices sp
 ## Continuous Improvement
 
 ### Feedback Loop
+
 1. **Document Issues**: Note any problems encountered
 2. **Suggest Improvements**: Propose enhancements
 3. **Share Patterns**: Document successful approaches
 4. **Update Guides**: Keep documentation current
 
 ### Learning Resources
+
 - Review successful implementations
 - Study error patterns to avoid
 - Learn from retrospectives
 - Follow best practices evolution
 
-
-*This section ensures AI agents work safely, effectively, and consistently within the GTCX ecosystem.*
+_This section ensures AI agents work safely, effectively, and consistently within the GTCX ecosystem._

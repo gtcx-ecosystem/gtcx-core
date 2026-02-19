@@ -22,6 +22,7 @@
   "plugin": ["typedoc-plugin-markdown"],
   "name": "GTCX Core API Reference",
   "readme": "none",
+  "treatWarningsAsErrors": true,
   "excludePrivate": true,
   "excludeInternal": true,
   "excludeExternals": true

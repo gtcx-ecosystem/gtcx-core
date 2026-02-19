@@ -38,7 +38,7 @@ console.log(validateIdentity(identity).valid); // true
 
 ## Related
 
-- [ADR-005: Ed25519 over secp256k1](../../docs/adr/005-ed25519-over-secp256k1.md)
+- [ADR-005: Ed25519 over secp256k1](../../docs/adr/005-ed25519-signing.md)
 
 ## License
 

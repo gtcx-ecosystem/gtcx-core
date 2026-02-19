@@ -431,7 +431,9 @@ mod tests {
     #[test]
     fn test_batch_verify() {
         let keys: Vec<_> = (0..10).map(|_| PrivateKey::generate()).collect();
-        let messages: Vec<Vec<u8>> = (0..10).map(|i| format!("Message {i}").into_bytes()).collect();
+        let messages: Vec<Vec<u8>> = (0..10)
+            .map(|i| format!("Message {i}").into_bytes())
+            .collect();
         let signatures: Vec<_> = keys
             .iter()
             .zip(messages.iter())
@@ -446,7 +448,9 @@ mod tests {
     #[test]
     fn test_batch_verify_one_invalid() {
         let keys: Vec<_> = (0..10).map(|_| PrivateKey::generate()).collect();
-        let messages: Vec<Vec<u8>> = (0..10).map(|i| format!("Message {i}").into_bytes()).collect();
+        let messages: Vec<Vec<u8>> = (0..10)
+            .map(|i| format!("Message {i}").into_bytes())
+            .collect();
         let mut signatures: Vec<_> = keys
             .iter()
             .zip(messages.iter())
@@ -465,7 +469,9 @@ mod tests {
     #[test]
     fn test_batch_verify_length_mismatch() {
         let keys: Vec<_> = (0..10).map(|_| PrivateKey::generate()).collect();
-        let messages: Vec<Vec<u8>> = (0..10).map(|i| format!("Message {i}").into_bytes()).collect();
+        let messages: Vec<Vec<u8>> = (0..10)
+            .map(|i| format!("Message {i}").into_bytes())
+            .collect();
         let signatures: Vec<_> = keys
             .iter()
             .zip(messages.iter())

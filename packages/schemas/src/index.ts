@@ -6,6 +6,6 @@ export * from './core12';
 
 // Additional schemas will be added here:
 // - TradePass identity schemas
-// - GeoTag provenance schemas  
+// - GeoTag provenance schemas
 // - GCI compliance schemas
 // - VaultMark custody schemas

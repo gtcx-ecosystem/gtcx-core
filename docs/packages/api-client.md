@@ -45,9 +45,9 @@ Automatically retries failed requests with increasing delays. Only retries on tr
 const client = new GTCXClient({
   retry: {
     attempts: 3,
-    baseDelay: 1000,        // 1 second initial delay
-    maxDelay: 30000,        // 30 seconds maximum delay
-    backoffFactor: 2,       // Exponential multiplier
+    baseDelay: 1000, // 1 second initial delay
+    maxDelay: 30000, // 30 seconds maximum delay
+    backoffFactor: 2, // Exponential multiplier
     retryCondition: (error) => error.status >= 500,
   },
 });
@@ -60,17 +60,17 @@ Prevents cascade failures by failing fast when a service is unresponsive. The ci
 ```typescript
 const client = new GTCXClient({
   circuitBreaker: {
-    failureThreshold: 5,    // Open circuit after 5 consecutive failures
-    resetTimeout: 30000,    // Attempt recovery after 30 seconds
-    halfOpenRequests: 1,    // Test with 1 request before fully closing
+    failureThreshold: 5, // Open circuit after 5 consecutive failures
+    resetTimeout: 30000, // Attempt recovery after 30 seconds
+    halfOpenRequests: 1, // Test with 1 request before fully closing
   },
 });
 ```
 
-| State | Behavior |
-|-------|----------|
-| Closed | Requests flow normally; failures are counted |
-| Open | Requests fail immediately with `CircuitOpenError` |
+| State     | Behavior                                             |
+| --------- | ---------------------------------------------------- |
+| Closed    | Requests flow normally; failures are counted         |
+| Open      | Requests fail immediately with `CircuitOpenError`    |
 | Half-Open | One test request allowed; success closes the circuit |
 
 ### Offline Queue
@@ -81,7 +81,7 @@ Queues requests when the device is offline and drains them automatically on reco
 const client = new GTCXClient({
   offline: {
     enabled: true,
-    storage: AsyncStorage,  // React Native AsyncStorage or equivalent
+    storage: AsyncStorage, // React Native AsyncStorage or equivalent
     maxQueueSize: 100,
     syncOnReconnect: true,
   },
@@ -130,23 +130,23 @@ const client = new GTCXClient({
 
 ## Protocol Clients
 
-| Client | Protocol | Description |
-|--------|----------|-------------|
-| `client.tradepass` | TradePass | Identity and credential operations |
-| `client.geotag` | GeoTag | Location verification and proof submission |
-| `client.gci` | GCI | Compliance scoring and certification |
-| `client.vaultmark` | VaultMark | Custody chain verification |
-| `client.pvp` | PvP | Payment-versus-payment settlement |
-| `client.panx` | PANX | Oracle consensus and price feeds |
+| Client             | Protocol  | Description                                |
+| ------------------ | --------- | ------------------------------------------ |
+| `client.tradepass` | TradePass | Identity and credential operations         |
+| `client.geotag`    | GeoTag    | Location verification and proof submission |
+| `client.gci`       | GCI       | Compliance scoring and certification       |
+| `client.vaultmark` | VaultMark | Custody chain verification                 |
+| `client.pvp`       | PvP       | Payment-versus-payment settlement          |
+| `client.panx`      | PANX      | Oracle consensus and price feeds           |
 
 ## Platform Clients
 
-| Client | Platform | Description |
-|--------|----------|-------------|
-| `client.crx` | CRX | Commodity regulatory exchange |
-| `client.sgx` | SGX | Sovereign governance exchange |
-| `client.agx` | AGX | Global commodity exchange |
-| `client.pathways` | Pathways | ASM capital access |
+| Client            | Platform | Description                   |
+| ----------------- | -------- | ----------------------------- |
+| `client.crx`      | CRX      | Commodity regulatory exchange |
+| `client.sgx`      | SGX      | Sovereign governance exchange |
+| `client.agx`      | AGX      | Global commodity exchange     |
+| `client.pathways` | Pathways | ASM capital access            |
 
 ## Error Handling
 
@@ -205,24 +205,24 @@ interface GTCXClientConfig {
   baseUrl: string;
   auth: TradePassAuthConfig | ApiKeyAuthConfig;
   retry?: {
-    attempts: number;         // Default: 3
-    baseDelay: number;        // Default: 1000ms
-    maxDelay: number;         // Default: 30000ms
-    backoffFactor: number;    // Default: 2
+    attempts: number; // Default: 3
+    baseDelay: number; // Default: 1000ms
+    maxDelay: number; // Default: 30000ms
+    backoffFactor: number; // Default: 2
     retryCondition?: (error: GTCXError) => boolean;
   };
   circuitBreaker?: {
     failureThreshold: number; // Default: 5
-    resetTimeout: number;     // Default: 30000ms
+    resetTimeout: number; // Default: 30000ms
     halfOpenRequests: number; // Default: 1
   };
   offline?: {
-    enabled: boolean;         // Default: false
-    storage: AsyncStorage;    // Platform-specific storage
-    maxQueueSize: number;     // Default: 100
+    enabled: boolean; // Default: false
+    storage: AsyncStorage; // Platform-specific storage
+    maxQueueSize: number; // Default: 100
     syncOnReconnect: boolean; // Default: true
   };
-  timeout?: number;           // Request timeout in ms. Default: 30000
+  timeout?: number; // Request timeout in ms. Default: 30000
   headers?: Record<string, string>;
   logger?: Logger;
 }
@@ -230,13 +230,13 @@ interface GTCXClientConfig {
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
-| P2 Type Safety | Typed protocol and platform clients with full IntelliSense |
-| P4 Composability | Pluggable auth, storage, and logger via configuration |
-| P8 Offline-First | Transparent request queuing with automatic drain on reconnect |
-| P9 Security | TradePass credential auth; API key auth for server-to-server |
-| P12 Observability | Lifecycle events for offline, circuit state, auth, and sync |
+| Principle         | Implementation                                                |
+| ----------------- | ------------------------------------------------------------- |
+| P2 Type Safety    | Typed protocol and platform clients with full IntelliSense    |
+| P4 Composability  | Pluggable auth, storage, and logger via configuration         |
+| P8 Offline-First  | Transparent request queuing with automatic drain on reconnect |
+| P9 Security       | TradePass credential auth; API key auth for server-to-server  |
+| P12 Observability | Lifecycle events for offline, circuit state, auth, and sync   |
 
 ## Related
 

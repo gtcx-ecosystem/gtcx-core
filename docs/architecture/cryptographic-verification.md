@@ -2,10 +2,10 @@
 
 ## Document Control
 
-| Attribute | Value |
-|-----------|-------|
-| **Scope** | Architectural decision — cryptographic infrastructure vs. blockchain |
-| **Status** | Publication-Ready |
+| Attribute   | Value                                                                                               |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| **Scope**   | Architectural decision — cryptographic infrastructure vs. blockchain                                |
+| **Status**  | Publication-Ready                                                                                   |
 | **Related** | [Security Framework](../specs/security-framework.md), [Crypto Research Paper](./crypto-research.md) |
 
 ---
@@ -24,23 +24,23 @@ Blockchain's value proposition is delivered by its cryptographic primitives, not
 
 ### 2.1 Primitive-by-Primitive Comparison
 
-| Security Property | Blockchain Mechanism | GTCX Mechanism | Equivalence |
-|-------------------|---------------------|----------------|-------------|
-| **Immutability** | Chained block hashes | Hash-chained audit logs (append-only, signed) | Equivalent — both use SHA-256 chains |
-| **Tamper evidence** | Cryptographic signatures on blocks | Ed25519 signatures on every event (see [EventCore](../specs/eventcore.md)) | Equivalent — same Ed25519 curves |
-| **Consensus** | BFT / PoW / PoS | Multi-party signature requirements (N-of-M) via PANX | Equivalent for permissioned use case |
-| **Auditability** | Public ledger inspection | Cryptographically signed audit trails with Merkle proofs | Equivalent — verifiable by any party with public keys |
-| **Non-repudiation** | Transaction signatures | Per-event Ed25519 signatures bound to TradePass DID | Equivalent — same cryptographic binding |
-| **Privacy** | Limited (public ledger) | Zero-knowledge proofs for selective disclosure | Superior — privacy by design |
+| Security Property   | Blockchain Mechanism               | GTCX Mechanism                                                             | Equivalence                                           |
+| ------------------- | ---------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------- |
+| **Immutability**    | Chained block hashes               | Hash-chained audit logs (append-only, signed)                              | Equivalent — both use SHA-256 chains                  |
+| **Tamper evidence** | Cryptographic signatures on blocks | Ed25519 signatures on every event (see [EventCore](../specs/eventcore.md)) | Equivalent — same Ed25519 curves                      |
+| **Consensus**       | BFT / PoW / PoS                    | Multi-party signature requirements (N-of-M) via PANX                       | Equivalent for permissioned use case                  |
+| **Auditability**    | Public ledger inspection           | Cryptographically signed audit trails with Merkle proofs                   | Equivalent — verifiable by any party with public keys |
+| **Non-repudiation** | Transaction signatures             | Per-event Ed25519 signatures bound to TradePass DID                        | Equivalent — same cryptographic binding               |
+| **Privacy**         | Limited (public ledger)            | Zero-knowledge proofs for selective disclosure                             | Superior — privacy by design                          |
 
 ### 2.2 What Blockchain Adds (and Why We Don't Need It)
 
-| Blockchain Feature | GTCX Alternative | Rationale |
-|-------------------|-----------------|-----------|
-| Decentralized storage | Cloud infrastructure with geographic redundancy | Our validators are known entities (governments, vaults, inspectors), not anonymous miners |
-| Trustless consensus | Multi-party attestation via PANX validators | In commodity verification, validators have real-world identity — trustlessness is unnecessary |
-| Token incentives | Fee-based economics + regulatory mandate | Participation is driven by legal compliance requirements, not token speculation |
-| Smart contracts | Server-side business logic with deterministic execution | Easier to audit, upgrade, and debug |
+| Blockchain Feature    | GTCX Alternative                                        | Rationale                                                                                     |
+| --------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Decentralized storage | Cloud infrastructure with geographic redundancy         | Our validators are known entities (governments, vaults, inspectors), not anonymous miners     |
+| Trustless consensus   | Multi-party attestation via PANX validators             | In commodity verification, validators have real-world identity — trustlessness is unnecessary |
+| Token incentives      | Fee-based economics + regulatory mandate                | Participation is driven by legal compliance requirements, not token speculation               |
+| Smart contracts       | Server-side business logic with deterministic execution | Easier to audit, upgrade, and debug                                                           |
 
 ---
 
@@ -50,32 +50,32 @@ Blockchain's value proposition is delivered by its cryptographic primitives, not
 
 The primary users of GTCX infrastructure are government regulatory bodies. Their technology requirements:
 
-| Requirement | Blockchain Impact | GTCX Approach |
-|-------------|------------------|---------------|
-| Oversight and control | Governments cannot control decentralized networks | Full administrative control with audit access |
-| Legal framework | Unclear legal status of blockchain records in most African jurisdictions | Digital signature laws already recognize Ed25519-signed documents |
-| Regulatory clarity | Cryptocurrency associations create regulatory hesitation | No cryptocurrency, no tokens, no wallet complexity |
-| IT integration | Requires new infrastructure, wallets, node management | Standard REST APIs and PostgreSQL — integrates with existing systems |
-| Procurement | Blockchain infrastructure difficult to procure through government channels | Standard cloud services on existing procurement frameworks |
+| Requirement           | Blockchain Impact                                                          | GTCX Approach                                                        |
+| --------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Oversight and control | Governments cannot control decentralized networks                          | Full administrative control with audit access                        |
+| Legal framework       | Unclear legal status of blockchain records in most African jurisdictions   | Digital signature laws already recognize Ed25519-signed documents    |
+| Regulatory clarity    | Cryptocurrency associations create regulatory hesitation                   | No cryptocurrency, no tokens, no wallet complexity                   |
+| IT integration        | Requires new infrastructure, wallets, node management                      | Standard REST APIs and PostgreSQL — integrates with existing systems |
+| Procurement           | Blockchain infrastructure difficult to procure through government channels | Standard cloud services on existing procurement frameworks           |
 
 ### 3.2 End-User Adoption
 
 40% of target users operate on feature phones with no smartphone access.
 
-| Constraint | Blockchain Impact | GTCX Approach |
-|-----------|------------------|---------------|
-| Feature phone users | Cannot run wallet software or sign blockchain transactions | USSD service codes (`*384#`) — works on any phone |
-| Intermittent connectivity | Blockchain requires eventual network access for finality | 72-hour offline operation with local signing and deferred sync |
-| Technical literacy | Wallet UX, gas fees, key management are barriers | No blockchain concepts exposed to users |
+| Constraint                | Blockchain Impact                                          | GTCX Approach                                                  |
+| ------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------- |
+| Feature phone users       | Cannot run wallet software or sign blockchain transactions | USSD service codes (`*384#`) — works on any phone              |
+| Intermittent connectivity | Blockchain requires eventual network access for finality   | 72-hour offline operation with local signing and deferred sync |
+| Technical literacy        | Wallet UX, gas fees, key management are barriers           | No blockchain concepts exposed to users                        |
 
 ### 3.3 Performance
 
-| Metric | Typical Blockchain | GTCX Infrastructure |
-|--------|-------------------|---------------------|
-| Throughput | 7–3,000 TPS depending on network | 10,000+ TPS (database-limited) |
-| Latency | 10 seconds to 10+ minutes for confirmation | Sub-second response |
-| Cost per transaction | Variable gas fees | Predictable, fixed infrastructure cost |
-| Storage | Full chain history replicated to every node | Standard database with selective replication |
+| Metric               | Typical Blockchain                          | GTCX Infrastructure                          |
+| -------------------- | ------------------------------------------- | -------------------------------------------- |
+| Throughput           | 7–3,000 TPS depending on network            | 10,000+ TPS (database-limited)               |
+| Latency              | 10 seconds to 10+ minutes for confirmation  | Sub-second response                          |
+| Cost per transaction | Variable gas fees                           | Predictable, fixed infrastructure cost       |
+| Storage              | Full chain history replicated to every node | Standard database with selective replication |
 
 ---
 

@@ -1,16 +1,17 @@
 # Backend Architecture Template
 
 ## Project Backend Architecture
+
 **Project Name**: [PROJECT_NAME]  
 **Service Type**: [Monolith/Microservice/Serverless]  
 **Primary Language**: [TypeScript/Python/Go/Java]  
 **Framework**: [Express/NestJS/FastAPI/Spring]  
 **Last Updated**: [DATE]
 
-
 ## Architecture Overview
 
 ### System Layers
+
 ```
 ┌─────────────────────────────────────────────────┐
 │                 API Gateway                      │
@@ -28,18 +29,19 @@
 ## Service Architecture
 
 ### Microservices Map (if applicable)
+
 ```yaml
 Services:
   Authentication_Service:
     Port: 3001
     Database: PostgreSQL
     Dependencies: []
-    
+
   Transaction_Service:
     Port: 3002
     Database: MongoDB
     Dependencies: [Authentication_Service]
-    
+
   Notification_Service:
     Port: 3003
     Database: Redis
@@ -49,11 +51,13 @@ Services:
 ## Database Design
 
 ### Primary Database
+
 - **Type**: [PostgreSQL/MongoDB/DynamoDB]
 - **Version**: [Version]
 - **Hosting**: [AWS RDS/Atlas/Self-hosted]
 
 ### Schema Design
+
 ```sql
 -- Example for SQL databases
 CREATE TABLE users (
@@ -72,6 +76,7 @@ CREATE TABLE transactions (
 ```
 
 ### Indexes Strategy
+
 ```sql
 -- Performance-critical indexes
 CREATE INDEX idx_transactions_user_id ON transactions(user_id);
@@ -82,15 +87,17 @@ CREATE INDEX idx_transactions_created_at ON transactions(created_at DESC);
 ## API Design
 
 ### RESTful Endpoints
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | /api/v1/users | List users | Yes |
-| POST | /api/v1/users | Create user | No |
-| GET | /api/v1/users/:id | Get user details | Yes |
-| PUT | /api/v1/users/:id | Update user | Yes |
-| DELETE | /api/v1/users/:id | Delete user | Admin |
+
+| Method | Endpoint          | Description      | Auth Required |
+| ------ | ----------------- | ---------------- | ------------- |
+| GET    | /api/v1/users     | List users       | Yes           |
+| POST   | /api/v1/users     | Create user      | No            |
+| GET    | /api/v1/users/:id | Get user details | Yes           |
+| PUT    | /api/v1/users/:id | Update user      | Yes           |
+| DELETE | /api/v1/users/:id | Delete user      | Admin         |
 
 ### GraphQL Schema (if applicable)
+
 ```graphql
 type User {
   id: ID!
@@ -113,17 +120,19 @@ type Mutation {
 ## Authentication & Authorization
 
 ### Auth Strategy
+
 - **Type**: [JWT/OAuth2/SAML]
 - **Token Expiry**: [24 hours]
 - **Refresh Token**: [30 days]
 - **MFA**: [Required/Optional]
 
 ### Permission Model
+
 ```typescript
 enum Role {
   ADMIN = 'admin',
   USER = 'user',
-  GUEST = 'guest'
+  GUEST = 'guest',
 }
 
 interface Permission {
@@ -136,16 +145,18 @@ interface Permission {
 ## Message Queue Architecture
 
 ### Queue System
+
 - **Technology**: [RabbitMQ/Kafka/AWS SQS]
 - **Pattern**: [Pub/Sub/Work Queue]
 
 ### Event Flow
+
 ```yaml
 Events:
   UserCreated:
     Publisher: UserService
     Subscribers: [EmailService, AuditService]
-    
+
   TransactionCompleted:
     Publisher: TransactionService
     Subscribers: [NotificationService, ReportingService]
@@ -154,31 +165,35 @@ Events:
 ## Caching Strategy
 
 ### Cache Layers
+
 1. **Application Cache**: In-memory (Node.js)
 2. **Distributed Cache**: Redis
 3. **CDN Cache**: CloudFlare/CloudFront
 
 ### Cache Policies
+
 ```yaml
 CacheRules:
   UserProfile:
-    TTL: 3600  # 1 hour
+    TTL: 3600 # 1 hour
     InvalidateOn: [ProfileUpdate, PasswordChange]
-    
+
   TransactionHistory:
-    TTL: 300  # 5 minutes
+    TTL: 300 # 5 minutes
     InvalidateOn: [NewTransaction]
 ```
 
 ## Performance Optimization
 
 ### Query Optimization
+
 - Use database query explain plans
 - Implement pagination for large datasets
 - Use database connection pooling
 - Implement query result caching
 
 ### Code Optimization
+
 ```typescript
 // Bad: N+1 query problem
 const users = await getUsers();
@@ -193,12 +208,14 @@ const users = await getUsersWithTransactions();
 ## Testing Strategy
 
 ### Test Coverage Requirements
+
 - Unit Tests: >80%
 - Integration Tests: Critical paths
 - Load Tests: 1000 concurrent users
 - Security Tests: OWASP Top 10
 
 ### Test Structure
+
 ```
 tests/
 ├── unit/
@@ -217,17 +234,19 @@ tests/
 ## Logging & Monitoring
 
 ### Logging Standards
+
 ```typescript
 // Structured logging
 logger.info('Transaction processed', {
   transactionId: tx.id,
   userId: user.id,
   amount: tx.amount,
-  duration: processingTime
+  duration: processingTime,
 });
 ```
 
 ### Monitoring Metrics
+
 - Request rate and latency
 - Error rate and types
 - Database query performance
@@ -237,33 +256,36 @@ logger.info('Transaction processed', {
 ## Deployment Architecture
 
 ### Infrastructure
+
 - **Platform**: [AWS/GCP/Azure/On-premise]
 - **Orchestration**: [Kubernetes/ECS/Docker Swarm]
 - **CI/CD**: [GitHub Actions/Jenkins/GitLab CI]
 
 ### Deployment Pipeline
+
 ```yaml
 Pipeline:
   1. Code_Commit:
-     - Linting
-     - Unit tests
+    - Linting
+    - Unit tests
   2. Build:
-     - Docker image
-     - Security scan
+    - Docker image
+    - Security scan
   3. Test:
-     - Integration tests
-     - Load tests
+    - Integration tests
+    - Load tests
   4. Deploy_Staging:
-     - Smoke tests
-     - Manual approval
+    - Smoke tests
+    - Manual approval
   5. Deploy_Production:
-     - Blue-green deployment
-     - Health checks
+    - Blue-green deployment
+    - Health checks
 ```
 
 ## Configuration Management
 
 ### Environment Variables
+
 ```env
 # Application
 NODE_ENV=production
@@ -287,23 +309,26 @@ API_KEY=${EXTERNAL_API_KEY}
 ## Backend Metrics Dashboard
 
 ### Key Performance Indicators
-| Metric | Target | Current | Status |
-|--------|--------|---------|--------|
-| API Response Time | <200ms | 150ms | [Done] |
-| Error Rate | <1% | 0.5% | [Done] |
-| Database Query Time | <50ms | 45ms | [Done] |
-| Cache Hit Rate | >80% | 85% | [Done] |
-| Uptime | 99.9% | 99.95% | [Done] |
+
+| Metric              | Target | Current | Status |
+| ------------------- | ------ | ------- | ------ |
+| API Response Time   | <200ms | 150ms   | [Done] |
+| Error Rate          | <1%    | 0.5%    | [Done] |
+| Database Query Time | <50ms  | 45ms    | [Done] |
+| Cache Hit Rate      | >80%   | 85%     | [Done] |
+| Uptime              | 99.9%  | 99.95%  | [Done] |
 
 ## Maintenance & Operations
 
 ### Backup Strategy
+
 - Database: Daily automated backups
 - Code: Git repository
 - Configurations: Encrypted vault
 - Retention: 30 days
 
 ### Disaster Recovery
+
 - RTO (Recovery Time Objective): 1 hour
 - RPO (Recovery Point Objective): 1 hour
 - Failover: Automated with health checks
@@ -311,6 +336,7 @@ API_KEY=${EXTERNAL_API_KEY}
 ## Backend Documentation
 
 ### Required Documentation
+
 - API Documentation (OpenAPI/Swagger)
 - Database Schema Documentation
 - Service Architecture Diagram
@@ -318,5 +344,4 @@ API_KEY=${EXTERNAL_API_KEY}
 - Troubleshooting Guide
 - Performance Tuning Guide
 
-
-*This template ensures comprehensive backend architecture documentation for GTCX projects.*
+_This template ensures comprehensive backend architecture documentation for GTCX projects._

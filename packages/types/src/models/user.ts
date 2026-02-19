@@ -51,11 +51,7 @@ export interface UserRole {
   expiresAt?: number;
 }
 
-export type UserStatus =
-  | 'pending_verification'
-  | 'active'
-  | 'suspended'
-  | 'deactivated';
+export type UserStatus = 'pending_verification' | 'active' | 'suspended' | 'deactivated';
 
 export interface UserPreferences {
   language: string;

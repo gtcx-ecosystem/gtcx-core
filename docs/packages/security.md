@@ -35,11 +35,7 @@ pnpm add @gtcx/security
 ### Validation (P2, P9)
 
 ```typescript
-import {
-  CommonSchemas,
-  sanitizeString,
-  createBoundaryValidator
-} from '@gtcx/security/validation';
+import { CommonSchemas, sanitizeString, createBoundaryValidator } from '@gtcx/security/validation';
 
 // Use common schemas
 const email = CommonSchemas.email.parse(input.email);
@@ -64,7 +60,7 @@ import {
   createAuthToken,
   verifyAuthToken,
   createSession,
-  validatePermission
+  validatePermission,
 } from '@gtcx/security/auth';
 
 // Create and verify tokens
@@ -94,11 +90,7 @@ const allowed = validatePermission({
 ### Offline Security (P8)
 
 ```typescript
-import {
-  SecureStorage,
-  CredentialCache,
-  verifyIntegrity
-} from '@gtcx/security/offline';
+import { SecureStorage, CredentialCache, verifyIntegrity } from '@gtcx/security/offline';
 
 // Secure local storage with PIN-based unlock
 const storage = new SecureStorage({
@@ -114,7 +106,7 @@ const creds = await storage.get('credentials');
 // Credential caching with expiry
 const cache = new CredentialCache(storage);
 await cache.store(credential, {
-  expiresAt: Date.now() + 72 * 60 * 60 * 1000
+  expiresAt: Date.now() + 72 * 60 * 60 * 1000,
 });
 
 const cached = await cache.get(credentialId);
@@ -136,10 +128,7 @@ if (!integrity.valid) {
 ### Audit Logging (P12)
 
 ```typescript
-import {
-  logSecurityEvent,
-  createAuditTrail
-} from '@gtcx/security/audit';
+import { logSecurityEvent, createAuditTrail } from '@gtcx/security/audit';
 
 // Log security events
 await logSecurityEvent({
@@ -169,21 +158,21 @@ await audit.finalize();
 import { CommonSchemas } from '@gtcx/security/validation';
 
 // Identity schemas
-CommonSchemas.uuid          // UUID v4
-CommonSchemas.did           // W3C DID format
-CommonSchemas.tradePassId   // TradePass identifier
+CommonSchemas.uuid; // UUID v4
+CommonSchemas.did; // W3C DID format
+CommonSchemas.tradePassId; // TradePass identifier
 
 // Data schemas
-CommonSchemas.email         // Email address
-CommonSchemas.phone         // E.164 phone number
-CommonSchemas.url           // Valid URL
-CommonSchemas.datetime      // ISO 8601 datetime
-CommonSchemas.coordinates   // { lat, lng } with bounds
+CommonSchemas.email; // Email address
+CommonSchemas.phone; // E.164 phone number
+CommonSchemas.url; // Valid URL
+CommonSchemas.datetime; // ISO 8601 datetime
+CommonSchemas.coordinates; // { lat, lng } with bounds
 
 // Security schemas
-CommonSchemas.signature     // Hex-encoded signature
-CommonSchemas.publicKey     // Hex-encoded public key
-CommonSchemas.hash          // SHA-256 hash
+CommonSchemas.signature; // Hex-encoded signature
+CommonSchemas.publicKey; // Hex-encoded public key
+CommonSchemas.hash; // SHA-256 hash
 ```
 
 #### Sanitization
@@ -193,17 +182,17 @@ import { sanitizeString, sanitizeObject } from '@gtcx/security/validation';
 
 // String sanitization
 const clean = sanitizeString(input, {
-  maxLength: 1000,         // Truncate if longer
-  stripHtml: true,         // Remove HTML tags
-  trimWhitespace: true,    // Trim leading/trailing
-  normalizeUnicode: true,  // NFC normalization
+  maxLength: 1000, // Truncate if longer
+  stripHtml: true, // Remove HTML tags
+  trimWhitespace: true, // Trim leading/trailing
+  normalizeUnicode: true, // NFC normalization
 });
 
 // Object sanitization (recursive)
 const cleanObj = sanitizeObject(input, {
-  maxDepth: 10,            // Prevent deep nesting attacks
-  maxKeys: 100,            // Limit object size
-  stripProto: true,        // Remove __proto__
+  maxDepth: 10, // Prevent deep nesting attacks
+  maxKeys: 100, // Limit object size
+  stripProto: true, // Remove __proto__
 });
 ```
 
@@ -215,9 +204,9 @@ const cleanObj = sanitizeObject(input, {
 import { createAuthToken, verifyAuthToken } from '@gtcx/security/auth';
 
 interface TokenOptions {
-  subject: string;         // User ID
-  audience: string;        // Target service
-  expiresIn: string;       // '1h', '24h', '72h'
+  subject: string; // User ID
+  audience: string; // Target service
+  expiresIn: string; // '1h', '24h', '72h'
   claims?: Record<string, unknown>;
 }
 
@@ -240,9 +229,9 @@ import { validatePermission } from '@gtcx/security/auth';
 
 // Role-based permission sets
 const ROLES = {
-  producer:  ['tradepass:verify', 'geotag:create'],
+  producer: ['tradepass:verify', 'geotag:create'],
   inspector: ['tradepass:verify', 'geotag:verify', 'gci:evaluate'],
-  admin:     ['admin:*'],
+  admin: ['admin:*'],
 };
 ```
 
@@ -255,9 +244,9 @@ import { SecureStorage } from '@gtcx/security/offline';
 
 interface SecureStorageConfig {
   deviceId: string;
-  maxOfflineHours: number;     // Default: 72
-  maxFailedAttempts: number;   // Default: 10
-  wipeOnExceed: boolean;       // Default: true
+  maxOfflineHours: number; // Default: 72
+  maxFailedAttempts: number; // Default: 10
+  wipeOnExceed: boolean; // Default: true
 }
 
 class SecureStorage {
@@ -335,6 +324,7 @@ registerSecurityHandler(async (event) => {
 ## Scope Boundary
 
 This package does **not**:
+
 - Implement cryptographic primitives (use `@gtcx/crypto`)
 - Provide platform-specific secure storage (iOS Keychain, Android Keystore)
 - Handle network security (use TLS at the transport layer)
@@ -342,14 +332,14 @@ This package does **not**:
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
+| Principle            | Implementation                                              |
+| -------------------- | ----------------------------------------------------------- |
 | P1 Package Structure | Four independent modules (validation, auth, offline, audit) |
-| P2 Type Safety | 30+ Zod schemas for all external inputs |
-| P4 Composability | Pluggable storage backends, handler registration |
-| P8 Offline-First | SecureStorage, CredentialCache with 72h offline support |
-| P9 Security | Input validation, sanitization, RBAC, lockout mechanism |
-| P12 Observability | 40+ categorized security event types with severity levels |
+| P2 Type Safety       | 30+ Zod schemas for all external inputs                     |
+| P4 Composability     | Pluggable storage backends, handler registration            |
+| P8 Offline-First     | SecureStorage, CredentialCache with 72h offline support     |
+| P9 Security          | Input validation, sanitization, RBAC, lockout mechanism     |
+| P12 Observability    | 40+ categorized security event types with severity levels   |
 
 ## Related
 

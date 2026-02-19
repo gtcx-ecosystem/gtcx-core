@@ -4,7 +4,6 @@
  * Zod schemas for runtime validation at all service boundaries.
  * Implements P2 (Type Safety) and P9 (Security) principles.
  *
- * @package @gtcx/domain
  */
 
 import { z } from 'zod';

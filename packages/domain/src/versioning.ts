@@ -4,7 +4,6 @@
  * Explicit versioning strategy and deprecation markers.
  * Implements P10 (API Stability) principle.
  *
- * @package @gtcx/domain
  */
 
 // ============================================================================

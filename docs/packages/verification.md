@@ -79,9 +79,9 @@ import {
 
 // Create QR data for a location verification
 const qrData = createLocationQRData(
-  'CERT-123',                            // certificate ID
-  { latitude: 6.2, longitude: -1.6 },   // coordinates
-  'sha256:abc123...'                     // content hash
+  'CERT-123', // certificate ID
+  { latitude: 6.2, longitude: -1.6 }, // coordinates
+  'sha256:abc123...' // content hash
 );
 
 // Create structure with size hint (platform adapter renders the image)
@@ -148,69 +148,65 @@ const merkleBundle = createMerkleProofBundle([
 const proof = merkleBundle.getInclusionProof(weightVerification);
 
 // A third party can verify inclusion without seeing the other verifications
-const included = verifyMerkleInclusion(
-  weightVerification,
-  proof,
-  merkleBundle.root
-);
+const included = verifyMerkleInclusion(weightVerification, proof, merkleBundle.root);
 // true — weight verification is in the bundle
 ```
 
 ## Certificate Templates
 
-| Template | Security Level | Use Case | Required Fields |
-|----------|---------------|----------|-----------------|
-| `gold-origin` | quantum-resistant | Gold lot origin verification | location, weight, deviceId |
-| `work-site` | enhanced | Daily work site check-in | location, userRole |
+| Template                | Security Level    | Use Case                        | Required Fields                 |
+| ----------------------- | ----------------- | ------------------------------- | ------------------------------- |
+| `gold-origin`           | quantum-resistant | Gold lot origin verification    | location, weight, deviceId      |
+| `work-site`             | enhanced          | Daily work site check-in        | location, userRole              |
 | `government-inspection` | quantum-resistant | Government inspector activities | location, findings, inspectorId |
-| `location` | standard | Basic location verification | coordinates |
-| `photo` | standard | Photo evidence with location | photoHash, coordinates |
-| `compliance` | enhanced | Regulatory compliance | entityId, factors, score |
+| `location`              | standard          | Basic location verification     | coordinates                     |
+| `photo`                 | standard          | Photo evidence with location    | photoHash, coordinates          |
+| `compliance`            | enhanced          | Regulatory compliance           | entityId, factors, score        |
 
 ## Security Levels
 
-| Level | Signing | Hashing | Use Case |
-|-------|---------|---------|----------|
-| `standard` | Ed25519 single signature | SHA-256 | Basic verifications |
-| `enhanced` | Ed25519 with stricter validation | SHA-256 + Blake3 | Compliance, work sites |
-| `military` | Multi-signature (Ed25519 + Secp256k1) | SHA-3 | Government, high-value |
-| `quantum-resistant` | Multi-sig + quantum-resistant hashing | SHA-3 + SHAKE256 | Gold origin, critical |
+| Level               | Signing                               | Hashing          | Use Case               |
+| ------------------- | ------------------------------------- | ---------------- | ---------------------- |
+| `standard`          | Ed25519 single signature              | SHA-256          | Basic verifications    |
+| `enhanced`          | Ed25519 with stricter validation      | SHA-256 + Blake3 | Compliance, work sites |
+| `military`          | Multi-signature (Ed25519 + Secp256k1) | SHA-3            | Government, high-value |
+| `quantum-resistant` | Multi-sig + quantum-resistant hashing | SHA-3 + SHAKE256 | Gold origin, critical  |
 
 ## API Reference
 
 ### Certificates
 
-| Function | Description |
-|----------|------------|
-| `createStandardCertificateData(input)` | Create standard certificate (single sig) |
+| Function                                    | Description                                   |
+| ------------------------------------------- | --------------------------------------------- |
+| `createStandardCertificateData(input)`      | Create standard certificate (single sig)      |
 | `createMilitaryGradeCertificateData(input)` | Create military-grade certificate (multi-sig) |
-| `validateCertificateInput(input)` | Validate against template rules |
-| `verifyCertificateStructure(cert)` | Verify certificate structure integrity |
-| `getTemplate(id)` | Get certificate template by ID |
+| `validateCertificateInput(input)`           | Validate against template rules               |
+| `verifyCertificateStructure(cert)`          | Verify certificate structure integrity        |
+| `getTemplate(id)`                           | Get certificate template by ID                |
 
 ### QR Codes
 
-| Function | Description |
-|----------|------------|
+| Function                                       | Description                       |
+| ---------------------------------------------- | --------------------------------- |
 | `createLocationQRData(certId, location, hash)` | QR data for location verification |
-| `createPhotoQRData(certId, hash, location?)` | QR data for photo evidence |
-| `createGoldLotQRData(certId, goldData, hash)` | QR data for gold lot |
-| `createCertificateQRData(certData, hash)` | QR data for generic certificate |
-| `createQRCodeStructure(data, size)` | Create QR structure for rendering |
-| `verifyQRCodeData(data)` | Verify QR data structure |
+| `createPhotoQRData(certId, hash, location?)`   | QR data for photo evidence        |
+| `createGoldLotQRData(certId, goldData, hash)`  | QR data for gold lot              |
+| `createCertificateQRData(certData, hash)`      | QR data for generic certificate   |
+| `createQRCodeStructure(data, size)`            | Create QR structure for rendering |
+| `verifyQRCodeData(data)`                       | Verify QR data structure          |
 
 ### Proofs
 
-| Function | Description |
-|----------|------------|
-| `createProofBundle(input)` | Create proof bundle from individual proofs |
-| `createLocationProof(input)` | Create location proof reference |
-| `createPhotoProof(input)` | Create photo proof reference |
-| `createCryptographicProofRef(hash, sig, key)` | Create cryptographic proof reference |
-| `createMerkleProofBundle(verifications)` | Create Merkle tree from verifications |
-| `verifyMerkleInclusion(item, proof, root)` | Verify Merkle inclusion proof |
-| `verifyProofBundleStructure(bundle)` | Verify bundle structural integrity |
-| `serializeProofBundle(bundle)` | Export bundle as JSON |
+| Function                                      | Description                                |
+| --------------------------------------------- | ------------------------------------------ |
+| `createProofBundle(input)`                    | Create proof bundle from individual proofs |
+| `createLocationProof(input)`                  | Create location proof reference            |
+| `createPhotoProof(input)`                     | Create photo proof reference               |
+| `createCryptographicProofRef(hash, sig, key)` | Create cryptographic proof reference       |
+| `createMerkleProofBundle(verifications)`      | Create Merkle tree from verifications      |
+| `verifyMerkleInclusion(item, proof, root)`    | Verify Merkle inclusion proof              |
+| `verifyProofBundleStructure(bundle)`          | Verify bundle structural integrity         |
+| `serializeProofBundle(bundle)`                | Export bundle as JSON                      |
 
 ## Platform Integration
 
@@ -248,15 +244,15 @@ export async function generateGovCertificate(input) {
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
-| P1 Package Structure | Certificates, QR, proofs are independent modules |
-| P2 Type Safety | Zod validation on all certificate inputs and proof structures |
-| P3 Modularity | Platform-agnostic data structures; signing delegated to adapters |
-| P4 Composability | Any signing backend (SecureStore, HSM, software) works via injection |
-| P6 Asset Abstraction | Templates are configurable; no hardcoded commodity logic |
-| P8 Offline-First | All data structures generated locally; no network required |
-| P9 Security | Multi-sig support, quantum-resistant hashing, Merkle proofs |
+| Principle            | Implementation                                                       |
+| -------------------- | -------------------------------------------------------------------- |
+| P1 Package Structure | Certificates, QR, proofs are independent modules                     |
+| P2 Type Safety       | Zod validation on all certificate inputs and proof structures        |
+| P3 Modularity        | Platform-agnostic data structures; signing delegated to adapters     |
+| P4 Composability     | Any signing backend (SecureStore, HSM, software) works via injection |
+| P6 Asset Abstraction | Templates are configurable; no hardcoded commodity logic             |
+| P8 Offline-First     | All data structures generated locally; no network required           |
+| P9 Security          | Multi-sig support, quantum-resistant hashing, Merkle proofs          |
 
 ## Related
 

@@ -1,4 +1,3 @@
-import type { OperationLog } from '@gtcx/ai';
 import { describe, it, expect } from 'vitest';
 
 import {
@@ -11,6 +10,7 @@ import {
   logComplianceEvent,
   logGCICalculation,
   computeVerificationSummary,
+  type VerificationOperationLog,
 } from '../src/traced';
 
 // =============================================================================
@@ -22,28 +22,47 @@ describe('tracedGenerateCertificate', () => {
     expect(typeof tracedGenerateCertificate).toBe('function');
   });
 
-  it('should throw with the placeholder implementation error', async () => {
-    await expect(
-      tracedGenerateCertificate({
-        type: 'location',
-        securityLevel: 'standard',
-        location: { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() },
-        privateKey: 'pk_test',
-        publicKey: 'pub_test',
-      })
-    ).rejects.toThrow('Implementation required');
+  it('should generate a standard certificate for standard security level', async () => {
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() },
+      privateKey: 'pk_test',
+      publicKey: 'pub_test',
+    });
+    expect(cert.certificateId).toBeTruthy();
+    expect(cert.verificationData.publicKey).toBe('pub_test');
+    expect(cert.verificationData.signature).toBeTruthy();
+    expect('signature' in cert).toBe(true);
   });
 
-  it('should not swallow errors — they propagate to the caller', async () => {
+  it('should generate a military-grade certificate for military security level', async () => {
+    const cert = await tracedGenerateCertificate({
+      type: 'asset-origin',
+      securityLevel: 'military',
+      location: { latitude: 0, longitude: 0, accuracy: 1, timestamp: Date.now() },
+      privateKey: 'pk',
+      publicKey: 'pub',
+      assetData: {
+        commodityType: 'gold',
+        estimatedWeight: 10,
+        unit: 'kg',
+      },
+      claims: [],
+    });
+    expect('multiSignature' in cert).toBe(true);
+    expect('quantumResistantHash' in cert).toBe(true);
+  });
+
+  it('should not swallow validation errors', async () => {
     const call = tracedGenerateCertificate({
       type: 'asset-origin',
       securityLevel: 'military',
       location: { latitude: 0, longitude: 0, accuracy: 1, timestamp: Date.now() },
       privateKey: 'pk',
       publicKey: 'pub',
-      claims: [],
     });
-    await expect(call).rejects.toThrow();
+    await expect(call).rejects.toThrow('Validation failed');
   });
 });
 
@@ -52,7 +71,7 @@ describe('tracedVerifyCertificate', () => {
     expect(typeof tracedVerifyCertificate).toBe('function');
   });
 
-  it('should throw with placeholder implementation error', async () => {
+  it('should return a validation result', async () => {
     const mockCert = {
       certificateId: 'CERT_001',
       version: '1.0',
@@ -72,7 +91,35 @@ describe('tracedVerifyCertificate', () => {
       },
       createdAt: Date.now(),
     };
-    await expect(tracedVerifyCertificate(mockCert)).rejects.toThrow('Implementation required');
+    const result = await tracedVerifyCertificate(mockCert);
+    expect(result.isValid).toBe(true);
+    expect(result.confidence).toBeGreaterThan(0);
+    expect(result.checks.signatureValid).toBe(true);
+  });
+
+  it('should report invalid certificate structure', async () => {
+    const invalidCert = {
+      certificateId: '',
+      version: '1.0',
+      type: 'location' as const,
+      securityLevel: 'standard' as const,
+      metadata: {
+        issuer: 'test',
+        issuedAt: Date.now(),
+        userRole: 'producer',
+        deviceId: 'dev-1',
+        location: { latitude: 0, longitude: 0, accuracy: 5, timestamp: Date.now() },
+      },
+      verificationData: {
+        publicKey: 'pk_test',
+        signature: 'sig_test',
+        timestamp: Date.now(),
+      },
+      createdAt: Date.now(),
+    };
+    const result = await tracedVerifyCertificate(invalidCert);
+    expect(result.isValid).toBe(false);
+    expect(result.details).toContain('Missing certificate ID');
   });
 });
 
@@ -85,13 +132,14 @@ describe('tracedGenerateQRCode', () => {
     expect(typeof tracedGenerateQRCode).toBe('function');
   });
 
-  it('should throw with placeholder implementation error', async () => {
-    await expect(
-      tracedGenerateQRCode({
-        certificateId: 'CERT_001',
-        type: 'certificate',
-      })
-    ).rejects.toThrow('Implementation required');
+  it('should generate QR code with URI and data payload', async () => {
+    const qr = await tracedGenerateQRCode({
+      certificateId: 'CERT_001',
+      type: 'certificate',
+    });
+    expect(qr.id).toBeTruthy();
+    expect(qr.qrCodeUri.startsWith('data:application/json;base64,')).toBe(true);
+    expect(qr.data.certificateId).toBe('CERT_001');
   });
 });
 
@@ -100,8 +148,21 @@ describe('tracedVerifyQRCode', () => {
     expect(typeof tracedVerifyQRCode).toBe('function');
   });
 
-  it('should throw with placeholder implementation error', async () => {
-    await expect(tracedVerifyQRCode('some-qr-data')).rejects.toThrow('Implementation required');
+  it('should return invalid result for malformed QR data', async () => {
+    const result = await tracedVerifyQRCode('some-qr-data');
+    expect(result.isValid).toBe(false);
+  });
+
+  it('should verify valid generated QR data', async () => {
+    const qr = await tracedGenerateQRCode({
+      certificateId: 'CERT_001',
+      type: 'location',
+      metadata: {
+        location: { latitude: 1, longitude: 2 },
+      },
+    });
+    const result = await tracedVerifyQRCode(qr.dataString);
+    expect(result.isValid).toBe(true);
   });
 });
 
@@ -114,13 +175,14 @@ describe('tracedCreateProofBundle', () => {
     expect(typeof tracedCreateProofBundle).toBe('function');
   });
 
-  it('should throw with placeholder implementation error', async () => {
-    await expect(
-      tracedCreateProofBundle({
-        type: 'location',
-        location: { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() },
-      })
-    ).rejects.toThrow('Implementation required');
+  it('should create a proof bundle with cryptographic proof', async () => {
+    const bundle = await tracedCreateProofBundle({
+      type: 'location',
+      location: { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() },
+    });
+    expect(bundle.id).toBeTruthy();
+    expect(bundle.proofs.cryptographicProof.signature).toBeTruthy();
+    expect(bundle.proofs.locationProof).toBeDefined();
   });
 });
 
@@ -276,7 +338,7 @@ describe('computeVerificationSummary', () => {
   });
 
   it('should filter to only verification category logs', () => {
-    const logs: OperationLog[] = [
+    const logs: VerificationOperationLog[] = [
       {
         operationName: 'verification.generateCertificate',
         type: 'verification.generateCertificate',
@@ -299,7 +361,7 @@ describe('computeVerificationSummary', () => {
   });
 
   it('should count successes and failures', () => {
-    const logs: OperationLog[] = [
+    const logs: VerificationOperationLog[] = [
       {
         operationName: 'v1',
         type: 'verification.generateCertificate',
@@ -333,7 +395,7 @@ describe('computeVerificationSummary', () => {
   });
 
   it('should compute average latency', () => {
-    const logs: OperationLog[] = [
+    const logs: VerificationOperationLog[] = [
       {
         operationName: 'v1',
         type: 'verification.op1',
@@ -356,7 +418,7 @@ describe('computeVerificationSummary', () => {
   });
 
   it('should skip null durations when computing average', () => {
-    const logs: OperationLog[] = [
+    const logs: VerificationOperationLog[] = [
       {
         operationName: 'v1',
         type: 'verification.op1',
@@ -379,7 +441,7 @@ describe('computeVerificationSummary', () => {
   });
 
   it('should group operations by type (last segment)', () => {
-    const logs: OperationLog[] = [
+    const logs: VerificationOperationLog[] = [
       {
         operationName: 'v1',
         type: 'verification.generateCertificate',
@@ -413,7 +475,7 @@ describe('computeVerificationSummary', () => {
   });
 
   it('should group errors by error name', () => {
-    const logs: OperationLog[] = [
+    const logs: VerificationOperationLog[] = [
       {
         operationName: 'v1',
         type: 'verification.verify',
@@ -450,7 +512,7 @@ describe('computeVerificationSummary', () => {
   });
 
   it('should not count failed operations without error object in errorsByType', () => {
-    const logs: OperationLog[] = [
+    const logs: VerificationOperationLog[] = [
       {
         operationName: 'v1',
         type: 'verification.op',
@@ -467,7 +529,7 @@ describe('computeVerificationSummary', () => {
   });
 
   it('should handle type with no dot separator', () => {
-    const logs: OperationLog[] = [
+    const logs: VerificationOperationLog[] = [
       {
         operationName: 'v1',
         type: 'singleword',

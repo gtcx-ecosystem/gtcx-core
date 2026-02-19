@@ -10,32 +10,32 @@ export type ErrorCode =
   | 'AUTH_EXPIRED'
   | 'PERMISSION_DENIED'
   | 'ROLE_REQUIRED'
-  
+
   // Validation
   | 'VALIDATION_ERROR'
   | 'INVALID_INPUT'
   | 'MISSING_FIELD'
   | 'INVALID_FORMAT'
-  
+
   // Resources
   | 'NOT_FOUND'
   | 'ALREADY_EXISTS'
   | 'CONFLICT'
   | 'GONE'
-  
+
   // Business Logic
   | 'COMPLIANCE_FAILED'
   | 'INSUFFICIENT_BALANCE'
   | 'QUOTA_EXCEEDED'
   | 'OPERATION_NOT_ALLOWED'
   | 'WORKFLOW_ERROR'
-  
+
   // Verification
   | 'VERIFICATION_FAILED'
   | 'SIGNATURE_INVALID'
   | 'PROOF_EXPIRED'
   | 'CONSENSUS_NOT_REACHED'
-  
+
   // System
   | 'INTERNAL_ERROR'
   | 'SERVICE_UNAVAILABLE'

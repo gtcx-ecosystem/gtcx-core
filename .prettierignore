@@ -7,6 +7,7 @@ docs/api/
 rust/target/
 artifacts/
 quality/api-surface-report.json
+benchmarks/performance-report.json
 *.min.js
 *.min.css
 pnpm-lock.yaml

@@ -50,8 +50,17 @@ jobs:
       - name: Threat matrix validation
         run: pnpm security:threat-matrix
 
+      - name: Update benchmark history snapshot
+        run: pnpm perf:update-history
+
       - name: Performance budget validation
         run: pnpm perf:check-budgets
+
+      - name: Upload performance report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-performance-report
+          path: benchmarks/performance-report.json
 
       - name: Lint
         run: pnpm lint

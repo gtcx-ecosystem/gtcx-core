@@ -81,7 +81,7 @@ const NETWORKS: Record<string, NetworkConfig> = {
 // Initialize client
 export function createClient(network: keyof typeof NETWORKS = 'testnet') {
   const config = NETWORKS[network];
-  
+
   return new GTCXClient({
     ...config,
     // API key from environment
@@ -104,37 +104,36 @@ import { TradePassCredential, VerificationResult } from '@gtcx/sdk';
 
 async function verifyTradePass(did: string): Promise<VerificationResult> {
   const client = createClient('testnet');
-  
+
   console.log(`\n🔍 Verifying TradePass: ${did}\n`);
-  
+
   try {
     // Fetch the credential
     const credential = await client.tradepass.resolve(did);
-    
+
     if (!credential) {
       return {
         valid: false,
         error: 'Credential not found',
       };
     }
-    
+
     console.log('📋 Credential found:');
     console.log(`   Name: ${credential.subject.name}`);
     console.log(`   Role: ${credential.subject.role}`);
     console.log(`   Issued: ${credential.issuanceDate}`);
     console.log(`   Expires: ${credential.expirationDate}`);
-    
+
     // Verify the credential
     const verification = await client.tradepass.verify(credential);
-    
+
     console.log('\n✅ Verification result:');
     console.log(`   Valid: ${verification.valid}`);
     console.log(`   Issuer trusted: ${verification.issuerTrusted}`);
     console.log(`   Not expired: ${verification.notExpired}`);
     console.log(`   Not revoked: ${verification.notRevoked}`);
-    
+
     return verification;
-    
   } catch (error) {
     console.error('❌ Verification failed:', error);
     return {
@@ -202,29 +201,29 @@ function getTier(score: number): GCITier {
 
 async function checkGCI(entityId: string): Promise<GCIScore> {
   const client = createClient('testnet');
-  
+
   console.log(`\n📊 Checking GCI for: ${entityId}\n`);
-  
+
   try {
     // Fetch current GCI score
     const gci = await client.gci.getScore(entityId);
-    
+
     const tier = getTier(gci.score);
     const tierInfo = TIERS[tier];
-    
+
     console.log(`${tierInfo.emoji} GCI Score: ${gci.score}/100 (${tierInfo.label})`);
     console.log(`\n📈 Factor Breakdown:`);
-    
+
     // Display each factor
     for (const factor of gci.factors) {
-      const bar = '█'.repeat(Math.floor(factor.score / 10)) + 
-                  '░'.repeat(10 - Math.floor(factor.score / 10));
+      const bar =
+        '█'.repeat(Math.floor(factor.score / 10)) + '░'.repeat(10 - Math.floor(factor.score / 10));
       console.log(`   ${factor.name.padEnd(20)} ${bar} ${factor.score}%`);
     }
-    
+
     console.log(`\n📅 Last updated: ${gci.timestamp}`);
     console.log(`🔗 Audit trail: ${gci.auditUrl}`);
-    
+
     // Show improvement suggestions if not premium
     if (tier !== 'premium') {
       console.log('\n💡 Suggestions to improve:');
@@ -233,9 +232,8 @@ async function checkGCI(entityId: string): Promise<GCIScore> {
         console.log(`   • ${suggestion.action} (+${suggestion.potentialPoints} pts)`);
       }
     }
-    
+
     return gci;
-    
   } catch (error) {
     console.error('❌ GCI check failed:', error);
     throw error;
@@ -288,40 +286,38 @@ import { CustodyRecord, CustodyEvent } from '@gtcx/sdk';
 
 async function checkCustody(lotId: string): Promise<CustodyRecord> {
   const client = createClient('testnet');
-  
+
   console.log(`\n📦 Checking custody for lot: ${lotId}\n`);
-  
+
   try {
     // Get current custody status
     const custody = await client.vaultmark.getCustody(lotId);
-    
+
     console.log('📋 Lot Details:');
     console.log(`   Asset: ${custody.asset.type}`);
     console.log(`   Weight: ${custody.asset.weight.value} ${custody.asset.weight.unit}`);
     console.log(`   Purity: ${custody.asset.purity}%`);
-    
+
     console.log(`\n👤 Current Custodian:`);
     console.log(`   Name: ${custody.custodian.name}`);
     console.log(`   DID: ${custody.custodian.did}`);
     console.log(`   Location: ${custody.custodian.location}`);
-    
+
     console.log(`\n🔐 Custody Status:`);
     console.log(`   Status: ${custody.status}`);
     console.log(`   Since: ${custody.timestamp}`);
     console.log(`   Verified: ${custody.verified ? '✅' : '❌'}`);
-    
+
     // Get custody history
     const history = await client.vaultmark.getHistory(lotId);
-    
+
     console.log(`\n📜 Custody History (${history.length} transfers):`);
     for (const event of history.slice(-5)) {
-      const icon = event.type === 'transfer' ? '→' : 
-                   event.type === 'verification' ? '✓' : '•';
+      const icon = event.type === 'transfer' ? '→' : event.type === 'verification' ? '✓' : '•';
       console.log(`   ${event.timestamp.slice(0, 10)} ${icon} ${event.description}`);
     }
-    
+
     return custody;
-    
   } catch (error) {
     console.error('❌ Custody check failed:', error);
     throw error;
@@ -382,34 +378,39 @@ interface VerificationReport {
   overallValid: boolean;
 }
 
-async function fullVerification(
-  producerDid: string,
-  lotId: string
-): Promise<VerificationReport> {
+async function fullVerification(producerDid: string, lotId: string): Promise<VerificationReport> {
   const client = createClient('testnet');
-  
+
   console.log('═══════════════════════════════════════════════════════');
   console.log('           GTCX FULL VERIFICATION REPORT               ');
   console.log('═══════════════════════════════════════════════════════\n');
-  
+
   // 1. Verify TradePass
   console.log('Step 1/3: Verifying TradePass...');
   const credential = await client.tradepass.resolve(producerDid);
   const tpVerification = await client.tradepass.verify(credential!);
   console.log(`   ✅ TradePass valid: ${tpVerification.valid}\n`);
-  
+
   // 2. Check GCI
   console.log('Step 2/3: Checking GCI score...');
   const gci = await client.gci.getScore(credential!.subject.entityId);
-  const tier = gci.score >= 85 ? 'premium' : gci.score >= 75 ? 'verified' : 
-               gci.score >= 65 ? 'standard' : gci.score >= 50 ? 'provisional' : 'unverified';
+  const tier =
+    gci.score >= 85
+      ? 'premium'
+      : gci.score >= 75
+        ? 'verified'
+        : gci.score >= 65
+          ? 'standard'
+          : gci.score >= 50
+            ? 'provisional'
+            : 'unverified';
   console.log(`   ✅ GCI Score: ${gci.score}/100 (${tier})\n`);
-  
+
   // 3. Check Custody
   console.log('Step 3/3: Verifying custody...');
   const custody = await client.vaultmark.getCustody(lotId);
   console.log(`   ✅ Custody status: ${custody.status}\n`);
-  
+
   // Build report
   const report: VerificationReport = {
     tradepass: { valid: tpVerification.valid, role: credential!.subject.role },
@@ -418,7 +419,7 @@ async function fullVerification(
     timestamp: new Date().toISOString(),
     overallValid: tpVerification.valid && gci.score >= 65 && custody.verified,
   };
-  
+
   console.log('═══════════════════════════════════════════════════════');
   console.log('                    SUMMARY                            ');
   console.log('═══════════════════════════════════════════════════════');
@@ -429,7 +430,7 @@ async function fullVerification(
   console.log(`   ─────────────────────────────────────────────────────`);
   console.log(`   OVERALL: ${report.overallValid ? '✅ VERIFIED' : '❌ NOT VERIFIED'}`);
   console.log('═══════════════════════════════════════════════════════\n');
-  
+
   return report;
 }
 
@@ -479,4 +480,3 @@ Error: Request timeout after 30000ms
 ```
 
 **Solution:** Check your internet connection and try again. The testnet may be under maintenance.
-

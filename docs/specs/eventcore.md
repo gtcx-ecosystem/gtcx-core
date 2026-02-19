@@ -1,11 +1,11 @@
 # EventCore v1.0 — Canonical Data Model and Encoding
 
-| Attribute | Value |
-|-----------|-------|
-| **Type** | Protocol Specification |
-| **Status** | Publication-Ready |
-| **Version** | 1.0.0 |
-| **License** | Schema files: Apache 2.0; Documentation: CC BY 4.0 |
+| Attribute   | Value                                                                                                                                       |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Type**    | Protocol Specification                                                                                                                      |
+| **Status**  | Publication-Ready                                                                                                                           |
+| **Version** | 1.0.0                                                                                                                                       |
+| **License** | Schema files: Apache 2.0; Documentation: CC BY 4.0                                                                                          |
 | **Related** | [Data Models](./data-models.md), [Data and Identity Core](../architecture/data-identity-core.md), [Network Protocol](./network-protocol.md) |
 
 A commodity-agnostic event schema for provenance, compliance, and settlement systems.
@@ -71,16 +71,16 @@ All EventCore messages share a common envelope:
 
 ## 3. Event Types
 
-| # | Type | Description |
-|---|------|-------------|
-| 1 | **CustodyTransfer** | Asset moves from one actor to another |
-| 2 | **LocationFix** | GeoTag or UWB fix recorded in field |
-| 3 | **AssayReport** | Lab or handheld reading; includes method and result |
-| 4 | **ComplianceScore** | Output from ComReg; stores score and evidence hash |
-| 5 | **PaymentInstruction** | Hash of PvP escrow or fiat wire |
-| 6 | **SensorTelemetry** | Temperature, humidity, CO2, etc.; includes sensorId |
-| 7 | **InventorySnapshot** | Periodic reconciliation at custody site |
-| 8 | **DisputeOpened / DisputeResolved** | References eventIds under contention |
+| #   | Type                                | Description                                         |
+| --- | ----------------------------------- | --------------------------------------------------- |
+| 1   | **CustodyTransfer**                 | Asset moves from one actor to another               |
+| 2   | **LocationFix**                     | GeoTag or UWB fix recorded in field                 |
+| 3   | **AssayReport**                     | Lab or handheld reading; includes method and result |
+| 4   | **ComplianceScore**                 | Output from ComReg; stores score and evidence hash  |
+| 5   | **PaymentInstruction**              | Hash of PvP escrow or fiat wire                     |
+| 6   | **SensorTelemetry**                 | Temperature, humidity, CO2, etc.; includes sensorId |
+| 7   | **InventorySnapshot**               | Periodic reconciliation at custody site             |
+| 8   | **DisputeOpened / DisputeResolved** | References eventIds under contention                |
 
 Additional types may be registered via Governance RFC (see Section 11).
 
@@ -88,12 +88,12 @@ Additional types may be registered via Governance RFC (see Section 11).
 
 ## 4. Encoding Formats and Media Types
 
-| Encoding | Media Type | Extension | Usage |
-|----------|-----------|-----------|-------|
-| JSON (canonical) | `application/vnd.eventcore.v1+json` | `.ec.json` | Human-readable, API payloads |
-| Protobuf 3 | `application/vnd.eventcore.v1+proto` | `.ec.pb` | High-throughput services |
-| CBOR | `application/vnd.eventcore.v1+cbor` | `.ec.cbor` | Low-bandwidth IoT |
-| Parquet | `application/vnd.eventcore.v1+parquet` | `.ec.parq` | Batch analytics (Spark, DuckDB) |
+| Encoding         | Media Type                             | Extension  | Usage                           |
+| ---------------- | -------------------------------------- | ---------- | ------------------------------- |
+| JSON (canonical) | `application/vnd.eventcore.v1+json`    | `.ec.json` | Human-readable, API payloads    |
+| Protobuf 3       | `application/vnd.eventcore.v1+proto`   | `.ec.pb`   | High-throughput services        |
+| CBOR             | `application/vnd.eventcore.v1+cbor`    | `.ec.cbor` | Low-bandwidth IoT               |
+| Parquet          | `application/vnd.eventcore.v1+parquet` | `.ec.parq` | Batch analytics (Spark, DuckDB) |
 
 Canonical JSON rules: UTF-8, no insignificant whitespace, keys sorted UTF-8 ascending.
 
@@ -170,10 +170,10 @@ CI verifies encoder/decoder parity across languages.
 
 ## 12. Roadmap
 
-| Version | Planned Feature | Target |
-|---------|----------------|--------|
-| 1.1 | Recursive event (bundled batch) field | 2026 Q2 |
-| 1.2 | Merkle-tree aggregation and partial proofs | 2026 Q4 |
+| Version | Planned Feature                            | Target  |
+| ------- | ------------------------------------------ | ------- |
+| 1.1     | Recursive event (bundled batch) field      | 2026 Q2 |
+| 1.2     | Merkle-tree aggregation and partial proofs | 2026 Q4 |
 
 ---
 

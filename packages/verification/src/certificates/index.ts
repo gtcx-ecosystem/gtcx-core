@@ -14,22 +14,22 @@ export {
   CUSTODY_TRANSFER_TEMPLATE,
   SETTLEMENT_TEMPLATE,
   CERTIFICATE_TEMPLATES,
-  
+
   // Legacy alias (deprecated)
   GOLD_ORIGIN_TEMPLATE,
-  
+
   // Commodity-specific configurations
   COMMODITY_CERTIFICATE_CONFIGS,
   getCommodityCertificateConfig,
   createCommodityCertificateConfig,
   getEffectiveTemplate,
-  
+
   // Template utilities
   getTemplate,
   getTemplatesBySecurityLevel,
   getTemplatesByType,
   listTemplateIds,
-  
+
   // Types
   type CommodityCertificateConfig,
 } from './templates';
@@ -43,16 +43,16 @@ export {
   createDefaultValidationMetrics,
   createStandardCertificateData,
   createMilitaryGradeCertificateData,
-  
+
   // Verification
   verifyCertificateStructure,
   isCertificateExpired,
   getCertificateAge,
-  
+
   // Utilities
   formatCertificateForDisplay,
   getCertificateCommodityType,
-  
+
   // Types
   type CreateCertificateInput,
 } from './generator';
@@ -75,12 +75,12 @@ export type {
   ComplianceData,
   EnvironmentalFactors,
   ValidationMetrics,
-  
+
   // Credential types (TradePass™ Taxonomy)
   CredentialType,
   CredentialSubtypes,
   OperatorTier,
-  
+
   // Commodity-agnostic types
   AssetLotData,
   AssetCategory,
@@ -91,13 +91,13 @@ export type {
   QualityGrade,
   OperatorRole,
   CommodityConfig,
-  
+
   // Site taxonomy
   SiteCategory,
   SiteTypes,
   SiteType,
   SiteReference,
-  
+
   // Predicate foundation
   PredicateURI,
   PredicateDomain,
@@ -113,7 +113,7 @@ export type {
   Claim,
   ClaimEvidence,
   ClaimProof,
-  
+
   // Legacy types (deprecated)
   GoldLotData,
   GeologicalContext,

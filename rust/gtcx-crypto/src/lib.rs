@@ -61,7 +61,6 @@
 #![deny(clippy::all)]
 #![warn(clippy::pedantic)]
 #![warn(clippy::nursery)]
-
 // Allow some pedantic lints that conflict with our style
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::must_use_candidate)]
@@ -70,11 +69,11 @@
 // MODULE DECLARATIONS
 // =============================================================================
 
+pub mod chain;
 pub mod error;
-pub mod signing;
 pub mod hashing;
 pub mod keys;
-pub mod chain;
+pub mod signing;
 
 // =============================================================================
 // RE-EXPORTS (Convenience API)
@@ -84,11 +83,11 @@ pub mod chain;
 pub use error::CryptoError;
 
 // Signing (most common operations)
-pub use signing::ed25519::{sign, verify, batch_verify};
+pub use signing::ed25519::{batch_verify, sign, verify};
 pub use signing::ed25519::{PrivateKey, PublicKey, Signature};
 
 // Hashing
-pub use hashing::{sha256, sha512, blake3};
+pub use hashing::{blake3, sha256, sha512};
 
 // Keys
 pub use keys::{generate_keypair, KeyPair};

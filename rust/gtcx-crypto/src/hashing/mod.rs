@@ -172,9 +172,9 @@ mod tests {
     fn test_sha256_known_vector() {
         // Test vector: SHA-256("abc")
         let hash = sha256(b"abc");
-        let expected = hex::decode(
-            "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
-        ).unwrap();
+        let expected =
+            hex::decode("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad")
+                .unwrap();
         assert_eq!(hash.as_slice(), expected.as_slice());
     }
 

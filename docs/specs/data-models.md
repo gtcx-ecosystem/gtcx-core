@@ -2,11 +2,11 @@
 
 ## Document Control
 
-| Attribute | Value |
-|-----------|-------|
-| **Section** | 7 of 14 |
-| **Title** | Data Models and Schemas |
-| **Status** | Publication-Ready |
+| Attribute              | Value                        |
+| ---------------------- | ---------------------------- |
+| **Section**            | 7 of 14                      |
+| **Title**              | Data Models and Schemas      |
+| **Status**             | Publication-Ready            |
 | **Primary Principles** | P1, P2, P3, P6, P7, P10, P11 |
 
 ---
@@ -111,11 +111,7 @@ This section defines the complete data model specification for GTCX Protocol v3.
 
 ```typescript
 // Correct: Import from package root
-import { 
-  AssetIdentitySchema,
-  TradePassDIDDocumentSchema,
-  GCIOutputSchema,
-} from '@gtcx/schemas';
+import { AssetIdentitySchema, TradePassDIDDocumentSchema, GCIOutputSchema } from '@gtcx/schemas';
 
 // Correct: Import specific subpackage for advanced use
 import { AssetRegistry } from '@gtcx/schemas/assets';
@@ -138,26 +134,28 @@ import { z } from 'zod';
 /**
  * GTCX Decentralized Identifier
  * Format: did:gtcx:<type>_<hash>
- * 
+ *
  * @example "did:gtcx:tp_a1b2c3d4e5f67890"
  * @example "did:gtcx:va_9876543210fedcba"
  */
-export const GTCXDIDSchema = z.string().regex(
-  /^did:gtcx:[a-z]{2}_[a-f0-9]{16,32}$/,
-  'Invalid GTCX DID format. Expected: did:gtcx:<type>_<hash>'
-);
+export const GTCXDIDSchema = z
+  .string()
+  .regex(
+    /^did:gtcx:[a-z]{2}_[a-f0-9]{16,32}$/,
+    'Invalid GTCX DID format. Expected: did:gtcx:<type>_<hash>'
+  );
 
 /**
  * DID Types
  */
 export const DIDTypeSchema = z.enum([
-  'tp',  // TradePass (identity)
-  'va',  // Validator
-  'as',  // Asset
-  'es',  // Escrow
-  'cr',  // Credential
-  'gt',  // GeoTag
-  'vm',  // VaultMark
+  'tp', // TradePass (identity)
+  'va', // Validator
+  'as', // Asset
+  'es', // Escrow
+  'cr', // Credential
+  'gt', // GeoTag
+  'vm', // VaultMark
 ]);
 
 export type DIDType = z.infer<typeof DIDTypeSchema>;
@@ -175,10 +173,9 @@ export const DateTimeSchema = z.string().datetime({ offset: true });
 /**
  * ISO 8601 date only
  */
-export const DateSchema = z.string().regex(
-  /^\d{4}-\d{2}-\d{2}$/,
-  'Invalid date format. Expected: YYYY-MM-DD'
-);
+export const DateSchema = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format. Expected: YYYY-MM-DD');
 
 /**
  * ISO 3166-1 alpha-2 country code
@@ -193,34 +190,33 @@ export const CurrencyCodeSchema = z.string().length(3).toUpperCase();
 /**
  * Semantic version
  */
-export const SemVerSchema = z.string().regex(
-  /^\d+\.\d+\.\d+(-[a-zA-Z0-9]+)?$/,
-  'Invalid semantic version. Expected: MAJOR.MINOR.PATCH'
-);
+export const SemVerSchema = z
+  .string()
+  .regex(
+    /^\d+\.\d+\.\d+(-[a-zA-Z0-9]+)?$/,
+    'Invalid semantic version. Expected: MAJOR.MINOR.PATCH'
+  );
 
 /**
  * Ed25519 signature (base64)
  */
-export const SignatureSchema = z.string().regex(
-  /^[A-Za-z0-9+/]{86}==$/,
-  'Invalid Ed25519 signature format'
-);
+export const SignatureSchema = z
+  .string()
+  .regex(/^[A-Za-z0-9+/]{86}==$/, 'Invalid Ed25519 signature format');
 
 /**
  * SHA-256 hash with prefix
  */
-export const SHA256HashSchema = z.string().regex(
-  /^sha256:[a-f0-9]{64}$/,
-  'Invalid SHA-256 hash format. Expected: sha256:<64-hex-chars>'
-);
+export const SHA256HashSchema = z
+  .string()
+  .regex(/^sha256:[a-f0-9]{64}$/, 'Invalid SHA-256 hash format. Expected: sha256:<64-hex-chars>');
 
 /**
  * Multibase-encoded public key
  */
-export const PublicKeyMultibaseSchema = z.string().regex(
-  /^z[1-9A-HJ-NP-Za-km-z]+$/,
-  'Invalid multibase public key'
-);
+export const PublicKeyMultibaseSchema = z
+  .string()
+  .regex(/^z[1-9A-HJ-NP-Za-km-z]+$/, 'Invalid multibase public key');
 ```
 
 ### 7.3.2 Common Types
@@ -235,13 +231,13 @@ import { z } from 'zod';
 export const CoordinatesSchema = z.object({
   /** Latitude in decimal degrees (-90 to 90) */
   latitude: z.number().min(-90).max(90),
-  
+
   /** Longitude in decimal degrees (-180 to 180) */
   longitude: z.number().min(-180).max(180),
-  
+
   /** Altitude in meters above sea level */
   altitude: z.number().optional(),
-  
+
   /** Horizontal accuracy in meters */
   accuracy: z.number().positive().optional(),
 });
@@ -252,10 +248,7 @@ export type Coordinates = z.infer<typeof CoordinatesSchema>;
  * Geohash for spatial indexing
  * @see https://en.wikipedia.org/wiki/Geohash
  */
-export const GeohashSchema = z.string().regex(
-  /^[0-9b-hjkmnp-z]{1,12}$/,
-  'Invalid geohash format'
-);
+export const GeohashSchema = z.string().regex(/^[0-9b-hjkmnp-z]{1,12}$/, 'Invalid geohash format');
 
 /**
  * Monetary amount with currency
@@ -263,10 +256,10 @@ export const GeohashSchema = z.string().regex(
 export const MoneySchema = z.object({
   /** Amount value (supports up to 8 decimal places for crypto) */
   value: z.number().nonnegative(),
-  
+
   /** ISO 4217 currency code */
   currency: CurrencyCodeSchema,
-  
+
   /** Decimal precision for display */
   precision: z.number().int().min(0).max(8).default(2),
 });
@@ -279,7 +272,7 @@ export type Money = z.infer<typeof MoneySchema>;
 export const WeightSchema = z.object({
   /** Numeric value */
   value: z.number().positive(),
-  
+
   /** Unit of measurement */
   unit: z.enum(['g', 'kg', 'oz', 'lb', 'mt']),
 });
@@ -304,7 +297,10 @@ export type Address = z.infer<typeof AddressSchema>;
  */
 export const ContactSchema = z.object({
   name: z.string().min(1).max(200),
-  phone: z.string().regex(/^\+[1-9]\d{6,14}$/).optional(),
+  phone: z
+    .string()
+    .regex(/^\+[1-9]\d{6,14}$/)
+    .optional(),
   email: z.string().email().optional(),
 });
 
@@ -353,10 +349,10 @@ import { z } from 'zod';
 export const AssetTypeConfigSchema = z.object({
   /** Unique identifier for this asset type */
   typeId: z.string().regex(/^[a-z][a-z0-9_]{1,19}$/),
-  
+
   /** Human-readable name */
   displayName: z.string().min(1).max(100),
-  
+
   /** Asset category */
   category: z.enum([
     'precious_metals',
@@ -366,89 +362,111 @@ export const AssetTypeConfigSchema = z.object({
     'fisheries',
     'energy',
   ]),
-  
+
   /** Primary unit of measurement */
   primaryUnit: z.enum(['g', 'kg', 'oz', 'lb', 'mt', 'L', 'm3', 'units']),
-  
+
   /** Required attributes for this asset type */
-  requiredAttributes: z.array(z.object({
-    name: z.string(),
-    type: z.enum(['string', 'number', 'boolean', 'date', 'enum']),
-    validation: z.record(z.string(), z.unknown()).optional(),
-    description: z.string(),
-  })),
-  
+  requiredAttributes: z.array(
+    z.object({
+      name: z.string(),
+      type: z.enum(['string', 'number', 'boolean', 'date', 'enum']),
+      validation: z.record(z.string(), z.unknown()).optional(),
+      description: z.string(),
+    })
+  ),
+
   /** Optional attributes */
-  optionalAttributes: z.array(z.object({
-    name: z.string(),
-    type: z.enum(['string', 'number', 'boolean', 'date', 'enum']),
-    validation: z.record(z.string(), z.unknown()).optional(),
-    description: z.string(),
-    default: z.unknown().optional(),
-  })).default([]),
-  
+  optionalAttributes: z
+    .array(
+      z.object({
+        name: z.string(),
+        type: z.enum(['string', 'number', 'boolean', 'date', 'enum']),
+        validation: z.record(z.string(), z.unknown()).optional(),
+        description: z.string(),
+        default: z.unknown().optional(),
+      })
+    )
+    .default([]),
+
   /** Verification requirements */
   verifications: z.object({
     /** Required verification types */
-    required: z.array(z.enum([
-      'origin',
-      'quality',
-      'weight',
-      'purity',
-      'assay',
-      'esg',
-      'custody',
-      'labor',
-      'environmental',
-      'legal',
-    ])),
-    
+    required: z.array(
+      z.enum([
+        'origin',
+        'quality',
+        'weight',
+        'purity',
+        'assay',
+        'esg',
+        'custody',
+        'labor',
+        'environmental',
+        'legal',
+      ])
+    ),
+
     /** Optional verifications for premium status */
     premium: z.array(z.string()).default([]),
   }),
-  
+
   /** GCI weight configuration */
-  gciWeights: z.object({
-    environmental: z.number().min(0).max(1),
-    safety: z.number().min(0).max(1),
-    financial: z.number().min(0).max(1),
-    social: z.number().min(0).max(1),
-    regulatory: z.number().min(0).max(1),
-  }).refine(
-    (w) => Math.abs(w.environmental + w.safety + w.financial + w.social + w.regulatory - 1) < 0.001,
-    'GCI weights must sum to 1.0'
-  ),
-  
-  /** Custody state configuration */
-  custodyStates: z.array(z.object({
-    state: z.string(),
-    description: z.string(),
-    allowedTransitions: z.array(z.string()),
-    requiredVerifications: z.array(z.string()).default([]),
-  })),
-  
-  /** Jurisdiction-specific overrides */
-  jurisdictionOverrides: z.record(
-    CountryCodeSchema,
-    z.object({
-      gciWeights: z.object({
-        environmental: z.number(),
-        safety: z.number(),
-        financial: z.number(),
-        social: z.number(),
-        regulatory: z.number(),
-      }).partial().optional(),
-      additionalVerifications: z.array(z.string()).optional(),
-      custodyStateOverrides: z.array(z.object({
-        state: z.string(),
-        requiredVerifications: z.array(z.string()),
-      })).optional(),
+  gciWeights: z
+    .object({
+      environmental: z.number().min(0).max(1),
+      safety: z.number().min(0).max(1),
+      financial: z.number().min(0).max(1),
+      social: z.number().min(0).max(1),
+      regulatory: z.number().min(0).max(1),
     })
-  ).optional(),
-  
+    .refine(
+      (w) =>
+        Math.abs(w.environmental + w.safety + w.financial + w.social + w.regulatory - 1) < 0.001,
+      'GCI weights must sum to 1.0'
+    ),
+
+  /** Custody state configuration */
+  custodyStates: z.array(
+    z.object({
+      state: z.string(),
+      description: z.string(),
+      allowedTransitions: z.array(z.string()),
+      requiredVerifications: z.array(z.string()).default([]),
+    })
+  ),
+
+  /** Jurisdiction-specific overrides */
+  jurisdictionOverrides: z
+    .record(
+      CountryCodeSchema,
+      z.object({
+        gciWeights: z
+          .object({
+            environmental: z.number(),
+            safety: z.number(),
+            financial: z.number(),
+            social: z.number(),
+            regulatory: z.number(),
+          })
+          .partial()
+          .optional(),
+        additionalVerifications: z.array(z.string()).optional(),
+        custodyStateOverrides: z
+          .array(
+            z.object({
+              state: z.string(),
+              requiredVerifications: z.array(z.string()),
+            })
+          )
+          .optional(),
+      })
+    )
+    .optional(),
+
   /** Active status */
   active: z.boolean().default(true),
-  
+
   /** Schema version */
   version: SemVerSchema,
 });
@@ -469,7 +487,7 @@ export const GoldConfig: AssetTypeConfig = {
   displayName: 'Gold',
   category: 'precious_metals',
   primaryUnit: 'g',
-  
+
   requiredAttributes: [
     {
       name: 'weightGrams',
@@ -484,7 +502,7 @@ export const GoldConfig: AssetTypeConfig = {
       description: 'Gold purity as percentage (e.g., 99.5 for 99.5%)',
     },
   ],
-  
+
   optionalAttributes: [
     {
       name: 'assayMethod',
@@ -506,20 +524,20 @@ export const GoldConfig: AssetTypeConfig = {
       default: false,
     },
   ],
-  
+
   verifications: {
     required: ['origin', 'weight', 'purity', 'custody'],
     premium: ['assay', 'esg', 'environmental', 'labor'],
   },
-  
+
   gciWeights: {
-    environmental: 0.30,  // Mercury use, land rehabilitation
-    safety: 0.25,         // Mining safety, PPE
-    financial: 0.20,      // Record keeping, taxes
-    social: 0.10,         // Community benefit, labor
-    regulatory: 0.15,     // Licensing, export compliance
+    environmental: 0.3, // Mercury use, land rehabilitation
+    safety: 0.25, // Mining safety, PPE
+    financial: 0.2, // Record keeping, taxes
+    social: 0.1, // Community benefit, labor
+    regulatory: 0.15, // Licensing, export compliance
   },
-  
+
   custodyStates: [
     {
       state: 'origin',
@@ -558,19 +576,19 @@ export const GoldConfig: AssetTypeConfig = {
       requiredVerifications: [],
     },
   ],
-  
+
   jurisdictionOverrides: {
-    'GH': {
+    GH: {
       additionalVerifications: ['pmmc_clearance'],
     },
-    'CD': {
+    CD: {
       gciWeights: {
-        social: 0.20,  // Higher weight for conflict-free verification
+        social: 0.2, // Higher weight for conflict-free verification
       },
       additionalVerifications: ['conflict_free', 'child_labor_free'],
     },
   },
-  
+
   active: true,
   version: '3.0.0',
 };
@@ -587,7 +605,7 @@ export const CoffeeConfig: AssetTypeConfig = {
   displayName: 'Coffee',
   category: 'agricultural',
   primaryUnit: 'kg',
-  
+
   requiredAttributes: [
     {
       name: 'weightKg',
@@ -608,7 +626,7 @@ export const CoffeeConfig: AssetTypeConfig = {
       description: 'Processing method used',
     },
   ],
-  
+
   optionalAttributes: [
     {
       name: 'grade',
@@ -648,20 +666,20 @@ export const CoffeeConfig: AssetTypeConfig = {
       default: 'none',
     },
   ],
-  
+
   verifications: {
     required: ['origin', 'quality', 'weight'],
     premium: ['cupping', 'certification', 'labor', 'environmental'],
   },
-  
+
   gciWeights: {
-    environmental: 0.20,  // Sustainable farming, shade-grown
-    safety: 0.15,         // Handling, storage
-    financial: 0.20,      // Traceability, records
-    social: 0.30,         // Fair wages, community, labor
-    regulatory: 0.15,     // Export licenses, phytosanitary
+    environmental: 0.2, // Sustainable farming, shade-grown
+    safety: 0.15, // Handling, storage
+    financial: 0.2, // Traceability, records
+    social: 0.3, // Fair wages, community, labor
+    regulatory: 0.15, // Export licenses, phytosanitary
   },
-  
+
   custodyStates: [
     {
       state: 'farm_gate',
@@ -706,16 +724,16 @@ export const CoffeeConfig: AssetTypeConfig = {
       requiredVerifications: [],
     },
   ],
-  
+
   jurisdictionOverrides: {
-    'RW': {
+    RW: {
       additionalVerifications: ['naeb_approval'],
     },
-    'ET': {
+    ET: {
       additionalVerifications: ['ece_clearance'],
     },
   },
-  
+
   active: true,
   version: '3.0.0',
 };
@@ -732,7 +750,7 @@ export const CobaltConfig: AssetTypeConfig = {
   displayName: 'Cobalt',
   category: 'critical_minerals',
   primaryUnit: 'kg',
-  
+
   requiredAttributes: [
     {
       name: 'weightKg',
@@ -757,7 +775,7 @@ export const CobaltConfig: AssetTypeConfig = {
       description: 'Verified child labor free',
     },
   ],
-  
+
   optionalAttributes: [
     {
       name: 'oreType',
@@ -778,20 +796,20 @@ export const CobaltConfig: AssetTypeConfig = {
       default: false,
     },
   ],
-  
+
   verifications: {
     required: ['origin', 'weight', 'purity', 'labor', 'esg'],
     premium: ['rmi_audit', 'oecd_due_diligence'],
   },
-  
+
   gciWeights: {
-    environmental: 0.20,  // Mining impact, water use
-    safety: 0.30,         // Critical for ASM safety
-    financial: 0.15,      // Traceability
-    social: 0.25,         // Child labor, community
-    regulatory: 0.10,     // Export compliance
+    environmental: 0.2, // Mining impact, water use
+    safety: 0.3, // Critical for ASM safety
+    financial: 0.15, // Traceability
+    social: 0.25, // Child labor, community
+    regulatory: 0.1, // Export compliance
   },
-  
+
   custodyStates: [
     {
       state: 'mine_site',
@@ -830,17 +848,17 @@ export const CobaltConfig: AssetTypeConfig = {
       requiredVerifications: [],
     },
   ],
-  
+
   jurisdictionOverrides: {
-    'CD': {
+    CD: {
       gciWeights: {
-        social: 0.35,  // Highest priority for child labor
-        safety: 0.30,
+        social: 0.35, // Highest priority for child labor
+        safety: 0.3,
       },
       additionalVerifications: ['child_labor_inspection', 'armed_group_check'],
     },
   },
-  
+
   active: true,
   version: '3.0.0',
 };
@@ -857,7 +875,7 @@ export const TimberConfig: AssetTypeConfig = {
   displayName: 'Timber',
   category: 'forestry',
   primaryUnit: 'm3',
-  
+
   requiredAttributes: [
     {
       name: 'volumeM3',
@@ -876,7 +894,7 @@ export const TimberConfig: AssetTypeConfig = {
       description: 'Verified legally harvested',
     },
   ],
-  
+
   optionalAttributes: [
     {
       name: 'grade',
@@ -908,20 +926,20 @@ export const TimberConfig: AssetTypeConfig = {
       description: 'Forest concession identifier',
     },
   ],
-  
+
   verifications: {
     required: ['origin', 'legal', 'environmental'],
     premium: ['fsc', 'pefc', 'deforestation_free'],
   },
-  
+
   gciWeights: {
-    environmental: 0.35,  // Deforestation, biodiversity
-    safety: 0.15,         // Harvesting safety
-    financial: 0.15,      // Traceability
-    social: 0.15,         // Community rights, FPIC
-    regulatory: 0.20,     // Legal harvest, CITES, EUDR
+    environmental: 0.35, // Deforestation, biodiversity
+    safety: 0.15, // Harvesting safety
+    financial: 0.15, // Traceability
+    social: 0.15, // Community rights, FPIC
+    regulatory: 0.2, // Legal harvest, CITES, EUDR
   },
-  
+
   custodyStates: [
     {
       state: 'standing',
@@ -972,16 +990,16 @@ export const TimberConfig: AssetTypeConfig = {
       requiredVerifications: [],
     },
   ],
-  
+
   jurisdictionOverrides: {
-    'ZM': {
+    ZM: {
       additionalVerifications: ['zaffico_permit'],
     },
-    'CM': {
+    CM: {
       additionalVerifications: ['minfof_permit'],
     },
   },
-  
+
   active: true,
   version: '3.0.0',
 };
@@ -999,22 +1017,22 @@ export const TimberConfig: AssetTypeConfig = {
 export class AssetRegistry {
   private static configs: Map<string, AssetTypeConfig> = new Map();
   private static initialized = false;
-  
+
   /**
    * Initialize registry with default configurations
    */
   static initialize(): void {
     if (this.initialized) return;
-    
+
     // Register built-in commodity types
     this.register(GoldConfig);
     this.register(CoffeeConfig);
     this.register(CobaltConfig);
     this.register(TimberConfig);
-    
+
     this.initialized = true;
   }
-  
+
   /**
    * Register a new asset type
    */
@@ -1026,10 +1044,10 @@ export class AssetRegistry {
         result.error
       );
     }
-    
+
     this.configs.set(config.typeId, result.data);
   }
-  
+
   /**
    * Check if asset type is registered
    */
@@ -1037,7 +1055,7 @@ export class AssetRegistry {
     this.ensureInitialized();
     return this.configs.has(typeId);
   }
-  
+
   /**
    * Get configuration for asset type
    */
@@ -1045,7 +1063,7 @@ export class AssetRegistry {
     this.ensureInitialized();
     return this.configs.get(typeId);
   }
-  
+
   /**
    * Get all registered asset types
    */
@@ -1053,15 +1071,15 @@ export class AssetRegistry {
     this.ensureInitialized();
     return Array.from(this.configs.keys());
   }
-  
+
   /**
    * Get asset types by category
    */
   static getByCategory(category: AssetTypeConfig['category']): AssetTypeConfig[] {
     this.ensureInitialized();
-    return Array.from(this.configs.values()).filter(c => c.category === category);
+    return Array.from(this.configs.values()).filter((c) => c.category === category);
   }
-  
+
   /**
    * Build Zod schema for asset attributes
    */
@@ -1070,29 +1088,29 @@ export class AssetRegistry {
     if (!config) {
       throw new UnknownAssetTypeError(typeId);
     }
-    
+
     const shape: Record<string, z.ZodTypeAny> = {};
-    
+
     // Add required attributes
     for (const attr of config.requiredAttributes) {
       shape[attr.name] = this.buildAttributeValidator(attr);
     }
-    
+
     // Add optional attributes
     for (const attr of config.optionalAttributes) {
       shape[attr.name] = this.buildAttributeValidator(attr).optional();
     }
-    
+
     return z.object(shape);
   }
-  
+
   private static buildAttributeValidator(attr: {
     name: string;
     type: string;
     validation?: Record<string, unknown>;
   }): z.ZodTypeAny {
     let validator: z.ZodTypeAny;
-    
+
     switch (attr.type) {
       case 'string':
         validator = z.string();
@@ -1102,39 +1120,31 @@ export class AssetRegistry {
           );
         }
         if (attr.validation?.minLength) {
-          validator = (validator as z.ZodString).min(
-            attr.validation.minLength as number
-          );
+          validator = (validator as z.ZodString).min(attr.validation.minLength as number);
         }
         if (attr.validation?.maxLength) {
-          validator = (validator as z.ZodString).max(
-            attr.validation.maxLength as number
-          );
+          validator = (validator as z.ZodString).max(attr.validation.maxLength as number);
         }
         break;
-        
+
       case 'number':
         validator = z.number();
         if (attr.validation?.min !== undefined) {
-          validator = (validator as z.ZodNumber).min(
-            attr.validation.min as number
-          );
+          validator = (validator as z.ZodNumber).min(attr.validation.min as number);
         }
         if (attr.validation?.max !== undefined) {
-          validator = (validator as z.ZodNumber).max(
-            attr.validation.max as number
-          );
+          validator = (validator as z.ZodNumber).max(attr.validation.max as number);
         }
         break;
-        
+
       case 'boolean':
         validator = z.boolean();
         break;
-        
+
       case 'date':
         validator = DateSchema;
         break;
-        
+
       case 'enum':
         if (attr.validation?.values && Array.isArray(attr.validation.values)) {
           validator = z.enum(attr.validation.values as [string, ...string[]]);
@@ -1142,14 +1152,14 @@ export class AssetRegistry {
           validator = z.string();
         }
         break;
-        
+
       default:
         validator = z.unknown();
     }
-    
+
     return validator;
   }
-  
+
   private static ensureInitialized(): void {
     if (!this.initialized) {
       this.initialize();
@@ -1171,15 +1181,17 @@ import { z } from 'zod';
 /**
  * Universal Asset Identifier
  * Format: lot:<country>-<commodity>-<date>-<sequence>
- * 
+ *
  * @example "lot:gh-gold-20260115-001"
  * @example "lot:rw-coffee-20260220-042"
  * @example "lot:cd-cobalt-20260310-007"
  */
-export const AssetIdSchema = z.string().regex(
-  /^lot:[a-z]{2}-[a-z]{3,15}-[0-9]{8}-[0-9]{3,6}$/,
-  'Invalid asset ID format. Expected: lot:<country>-<commodity>-<date>-<sequence>'
-);
+export const AssetIdSchema = z
+  .string()
+  .regex(
+    /^lot:[a-z]{2}-[a-z]{3,15}-[0-9]{8}-[0-9]{3,6}$/,
+    'Invalid asset ID format. Expected: lot:<country>-<commodity>-<date>-<sequence>'
+  );
 
 /**
  * Asset Type Schema (validated against registry)
@@ -1195,24 +1207,24 @@ export const AssetTypeSchema = z.string().refine(
 export const VerificationRecordSchema = z.object({
   /** Unique verification ID */
   verificationId: UUIDSchema,
-  
+
   /** Type of verification performed */
   type: z.enum([
-    'origin',        // Location/source verification
-    'quality',       // Quality assessment
-    'weight',        // Weight measurement
-    'purity',        // Purity analysis
-    'assay',         // Laboratory assay
-    'esg',           // ESG compliance
-    'custody',       // Chain of custody
-    'labor',         // Labor compliance (child labor, wages)
+    'origin', // Location/source verification
+    'quality', // Quality assessment
+    'weight', // Weight measurement
+    'purity', // Purity analysis
+    'assay', // Laboratory assay
+    'esg', // ESG compliance
+    'custody', // Chain of custody
+    'labor', // Labor compliance (child labor, wages)
     'environmental', // Environmental impact
-    'legal',         // Legal compliance
+    'legal', // Legal compliance
   ]),
-  
+
   /** When verification was performed */
   timestamp: DateTimeSchema,
-  
+
   /** Who performed the verification */
   verifier: z.object({
     did: GTCXDIDSchema,
@@ -1220,25 +1232,29 @@ export const VerificationRecordSchema = z.object({
     role: z.enum(['inspector', 'validator', 'lab', 'government', 'auditor']),
     certification: z.string().optional(),
   }),
-  
+
   /** Location where verification occurred */
   location: CoordinatesSchema.optional(),
-  
+
   /** Verification result */
   result: z.object({
     passed: z.boolean(),
     score: z.number().min(0).max(100).optional(),
     details: z.record(z.string(), z.unknown()),
   }),
-  
+
   /** Supporting evidence */
-  evidence: z.array(z.object({
-    type: z.enum(['photo', 'document', 'measurement', 'certificate', 'signature']),
-    reference: z.string(),
-    hash: SHA256HashSchema,
-    description: z.string().optional(),
-  })).default([]),
-  
+  evidence: z
+    .array(
+      z.object({
+        type: z.enum(['photo', 'document', 'measurement', 'certificate', 'signature']),
+        reference: z.string(),
+        hash: SHA256HashSchema,
+        description: z.string().optional(),
+      })
+    )
+    .default([]),
+
   /** Cryptographic signature */
   signature: SignatureSchema,
 });
@@ -1251,37 +1267,37 @@ export type VerificationRecord = z.infer<typeof VerificationRecordSchema>;
 export const AssetIdentitySchema = z.object({
   /** Universal asset identifier */
   assetId: AssetIdSchema,
-  
+
   /** Asset type (from registry) */
   assetType: AssetTypeSchema,
-  
+
   /** Schema version */
   schemaVersion: SemVerSchema.default('3.0.0'),
-  
+
   /** Origin information */
   origin: z.object({
     /** Country of origin */
     country: CountryCodeSchema,
-    
+
     /** Region/state/province */
     region: z.string().optional(),
-    
+
     /** Specific location */
     coordinates: CoordinatesSchema.optional(),
-    
+
     /** Source site identifier (mine, farm, etc.) */
     siteId: z.string().optional(),
-    
+
     /** Extraction/harvest date */
     extractionDate: DateSchema.optional(),
   }),
-  
+
   /** Dynamic attributes based on asset type */
   attributes: z.record(z.string(), z.unknown()),
-  
+
   /** Verification chain */
   verifications: z.array(VerificationRecordSchema).default([]),
-  
+
   /** Current custody state */
   currentCustody: z.object({
     state: z.string(),
@@ -1289,20 +1305,20 @@ export const AssetIdentitySchema = z.object({
     location: CoordinatesSchema.optional(),
     since: DateTimeSchema,
   }),
-  
+
   /** Complete custody chain reference */
   custodyChainId: z.string().optional(),
-  
+
   /** Merkle root of all verifications */
   verificationsMerkleRoot: SHA256HashSchema.optional(),
-  
+
   /** Creation metadata */
   created: z.object({
     by: GTCXDIDSchema,
     at: DateTimeSchema,
     txId: z.string(),
   }),
-  
+
   /** Last update metadata */
   updated: z.object({
     by: GTCXDIDSchema,
@@ -1326,7 +1342,7 @@ export const goldLotExample: AssetIdentity = {
   assetId: 'lot:gh-gold-20260115-001',
   assetType: 'gold',
   schemaVersion: '3.0.0',
-  
+
   origin: {
     country: 'GH',
     region: 'Ashanti',
@@ -1338,7 +1354,7 @@ export const goldLotExample: AssetIdentity = {
     siteId: 'site:gh-ash-0042',
     extractionDate: '2026-01-15',
   },
-  
+
   attributes: {
     weightGrams: 1000,
     purityPercentage: 99.5,
@@ -1346,7 +1362,7 @@ export const goldLotExample: AssetIdentity = {
     form: 'dore',
     mercuryFree: true,
   },
-  
+
   verifications: [
     {
       verificationId: '550e8400-e29b-41d4-a716-446655440001',
@@ -1415,22 +1431,22 @@ export const goldLotExample: AssetIdentity = {
       signature: 'base64signature==',
     },
   ],
-  
+
   currentCustody: {
     state: 'vault',
     custodian: 'did:gtcx:tp_vault_accra_001',
-    location: { latitude: 5.5600, longitude: -0.1969 },
+    location: { latitude: 5.56, longitude: -0.1969 },
     since: '2026-01-16T10:00:00Z',
   },
-  
+
   verificationsMerkleRoot: 'sha256:merkle123...',
-  
+
   created: {
     by: 'did:gtcx:tp_miner_kofi_001',
     at: '2026-01-15T08:00:00Z',
     txId: 'tx:gh-20260115-00001',
   },
-  
+
   updated: {
     by: 'did:gtcx:tp_vault_accra_001',
     at: '2026-01-16T10:00:00Z',
@@ -1445,7 +1461,7 @@ export const coffeeLotExample: AssetIdentity = {
   assetId: 'lot:rw-coffee-20260220-042',
   assetType: 'coffee',
   schemaVersion: '3.0.0',
-  
+
   origin: {
     country: 'RW',
     region: 'Nyamasheke',
@@ -1457,7 +1473,7 @@ export const coffeeLotExample: AssetIdentity = {
     siteId: 'farm:rw-nya-0087',
     extractionDate: '2026-02-15',
   },
-  
+
   attributes: {
     weightKg: 500,
     variety: 'arabica',
@@ -1469,7 +1485,7 @@ export const coffeeLotExample: AssetIdentity = {
     harvestYear: 2026,
     certification: 'fairtrade',
   },
-  
+
   verifications: [
     {
       verificationId: '660e8400-e29b-41d4-a716-446655440001',
@@ -1524,20 +1540,20 @@ export const coffeeLotExample: AssetIdentity = {
       signature: 'base64signature==',
     },
   ],
-  
+
   currentCustody: {
     state: 'export_warehouse',
     custodian: 'did:gtcx:tp_exporter_kigali_001',
     location: { latitude: -1.9403, longitude: 29.8739 },
     since: '2026-02-22T14:00:00Z',
   },
-  
+
   created: {
     by: 'did:gtcx:tp_farmer_marie_001',
     at: '2026-02-15T07:00:00Z',
     txId: 'tx:rw-20260215-00042',
   },
-  
+
   updated: {
     by: 'did:gtcx:tp_exporter_kigali_001',
     at: '2026-02-22T14:00:00Z',
@@ -1552,7 +1568,7 @@ export const cobaltLotExample: AssetIdentity = {
   assetId: 'lot:cd-cobalt-20260310-007',
   assetType: 'cobalt',
   schemaVersion: '3.0.0',
-  
+
   origin: {
     country: 'CD',
     region: 'Lualaba',
@@ -1563,7 +1579,7 @@ export const cobaltLotExample: AssetIdentity = {
     siteId: 'mine:cd-lua-0023',
     extractionDate: '2026-03-08',
   },
-  
+
   attributes: {
     weightKg: 2000,
     purityPercentage: 99.3,
@@ -1573,7 +1589,7 @@ export const cobaltLotExample: AssetIdentity = {
     esgScore: 78.5,
     rmiCompliant: true,
   },
-  
+
   verifications: [
     {
       verificationId: '770e8400-e29b-41d4-a716-446655440001',
@@ -1628,20 +1644,20 @@ export const cobaltLotExample: AssetIdentity = {
       signature: 'base64signature==',
     },
   ],
-  
+
   currentCustody: {
     state: 'depot',
     custodian: 'did:gtcx:tp_depot_kolwezi_001',
     location: { latitude: -10.7167, longitude: 25.4667 },
     since: '2026-03-10T08:00:00Z',
   },
-  
+
   created: {
     by: 'did:gtcx:tp_miner_coop_lua_001',
     at: '2026-03-08T06:00:00Z',
     txId: 'tx:cd-20260308-00007',
   },
-  
+
   updated: {
     by: 'did:gtcx:tp_depot_kolwezi_001',
     at: '2026-03-10T08:00:00Z',
@@ -1656,18 +1672,18 @@ export const timberLotExample: AssetIdentity = {
   assetId: 'lot:zm-timber-20260401-012',
   assetType: 'timber',
   schemaVersion: '3.0.0',
-  
+
   origin: {
     country: 'ZM',
     region: 'Copperbelt',
     coordinates: {
-      latitude: -12.8000,
-      longitude: 28.2000,
+      latitude: -12.8,
+      longitude: 28.2,
     },
     siteId: 'concession:zm-cop-0045',
     extractionDate: '2026-03-28',
   },
-  
+
   attributes: {
     volumeM3: 150,
     species: 'Pterocarpus angolensis', // Mukwa
@@ -1678,7 +1694,7 @@ export const timberLotExample: AssetIdentity = {
     pefcCertified: false,
     concessionId: 'ZAFFICO-2024-0045',
   },
-  
+
   verifications: [
     {
       verificationId: '880e8400-e29b-41d4-a716-446655440001',
@@ -1730,20 +1746,20 @@ export const timberLotExample: AssetIdentity = {
       signature: 'base64signature==',
     },
   ],
-  
+
   currentCustody: {
     state: 'log_yard',
     custodian: 'did:gtcx:tp_zaffico_yard_001',
-    location: { latitude: -12.9000, longitude: 28.3000 },
+    location: { latitude: -12.9, longitude: 28.3 },
     since: '2026-04-01T10:00:00Z',
   },
-  
+
   created: {
     by: 'did:gtcx:tp_zaffico_ops_001',
     at: '2026-03-28T08:00:00Z',
     txId: 'tx:zm-20260328-00012',
   },
-  
+
   updated: {
     by: 'did:gtcx:tp_zaffico_yard_001',
     at: '2026-04-01T10:00:00Z',
@@ -1772,45 +1788,50 @@ export const TradePassDIDDocumentSchema = z.object({
     z.literal('https://www.w3.org/ns/did/v1'),
     z.literal('https://gtcx.org/contexts/tradepass/v3'),
   ]),
-  
+
   /** DID identifier */
   id: GTCXDIDSchema,
-  
+
   /** Controller DIDs */
-  controller: z.union([
-    GTCXDIDSchema,
-    z.array(GTCXDIDSchema),
-  ]).optional(),
-  
+  controller: z.union([GTCXDIDSchema, z.array(GTCXDIDSchema)]).optional(),
+
   /** Verification methods (public keys) */
-  verificationMethod: z.array(z.object({
-    id: z.string(),
-    type: z.literal('Ed25519VerificationKey2020'),
-    controller: GTCXDIDSchema,
-    publicKeyMultibase: PublicKeyMultibaseSchema,
-  })).min(1),
-  
+  verificationMethod: z
+    .array(
+      z.object({
+        id: z.string(),
+        type: z.literal('Ed25519VerificationKey2020'),
+        controller: GTCXDIDSchema,
+        publicKeyMultibase: PublicKeyMultibaseSchema,
+      })
+    )
+    .min(1),
+
   /** Authentication key references */
   authentication: z.array(z.string()),
-  
+
   /** Assertion method key references */
   assertionMethod: z.array(z.string()),
-  
+
   /** Key agreement references */
   keyAgreement: z.array(z.string()).optional(),
-  
+
   /** Service endpoints */
-  service: z.array(z.object({
-    id: z.string(),
-    type: z.string(),
-    serviceEndpoint: z.string().url(),
-  })).optional(),
-  
+  service: z
+    .array(
+      z.object({
+        id: z.string(),
+        type: z.string(),
+        serviceEndpoint: z.string().url(),
+      })
+    )
+    .optional(),
+
   /** GTCX-specific extensions */
   gtcx: z.object({
     /** Schema version */
     version: z.literal('3.0'),
-    
+
     /** Primary role */
     role: z.enum([
       'producer',
@@ -1823,19 +1844,19 @@ export const TradePassDIDDocumentSchema = z.object({
       'inspector',
       'government',
     ]),
-    
+
     /** Operating region */
     region: z.string(),
-    
+
     /** Biometric binding hash */
     biometricHash: SHA256HashSchema,
-    
+
     /** KYC verification level */
     kycLevel: z.enum(['basic', 'standard', 'enhanced']).default('basic'),
-    
+
     /** Creation timestamp */
     created: DateTimeSchema,
-    
+
     /** Last update timestamp */
     updated: DateTimeSchema,
   }),
@@ -1862,13 +1883,15 @@ export const VerifiableCredentialSchema = z.object({
   issuanceDate: DateTimeSchema,
   expirationDate: DateTimeSchema.optional(),
   credentialSubject: z.record(z.string(), z.unknown()),
-  proof: z.object({
-    type: z.string(),
-    created: DateTimeSchema,
-    verificationMethod: z.string(),
-    proofPurpose: z.string(),
-    proofValue: z.string(),
-  }).optional(),
+  proof: z
+    .object({
+      type: z.string(),
+      created: DateTimeSchema,
+      verificationMethod: z.string(),
+      proofPurpose: z.string(),
+      proofValue: z.string(),
+    })
+    .optional(),
 });
 
 export type VerifiableCredential = z.infer<typeof VerifiableCredentialSchema>;
@@ -1877,15 +1900,19 @@ export type VerifiableCredential = z.infer<typeof VerifiableCredentialSchema>;
  * TradePass Role Credential
  */
 export const RoleCredentialSchema = VerifiableCredentialSchema.extend({
-  type: z.tuple([
-    z.literal('VerifiableCredential'),
-    z.literal('TradePassRoleCredential'),
-  ]),
+  type: z.tuple([z.literal('VerifiableCredential'), z.literal('TradePassRoleCredential')]),
   credentialSubject: z.object({
     id: GTCXDIDSchema,
     role: z.enum([
-      'producer', 'rco', 'aggregator', 'vault',
-      'refiner', 'buyer', 'validator', 'inspector', 'government',
+      'producer',
+      'rco',
+      'aggregator',
+      'vault',
+      'refiner',
+      'buyer',
+      'validator',
+      'inspector',
+      'government',
     ]),
     jurisdiction: CountryCodeSchema,
     issuingAuthority: z.string(),
@@ -1901,10 +1928,7 @@ export type RoleCredential = z.infer<typeof RoleCredentialSchema>;
  * TradeCV Milestone Credential
  */
 export const TradeCVCredentialSchema = VerifiableCredentialSchema.extend({
-  type: z.tuple([
-    z.literal('VerifiableCredential'),
-    z.literal('TradeCVCredential'),
-  ]),
+  type: z.tuple([z.literal('VerifiableCredential'), z.literal('TradeCVCredential')]),
   credentialSubject: z.object({
     id: GTCXDIDSchema,
     milestone: z.enum([
@@ -1944,50 +1968,60 @@ import { z } from 'zod';
 export const GCIInputSchema = z.object({
   /** Entity being scored */
   entityId: GTCXDIDSchema,
-  
+
   /** Commodity context */
   commodity: AssetTypeSchema,
-  
+
   /** Jurisdiction for weight calibration */
   jurisdiction: CountryCodeSchema.optional(),
-  
+
   /** Factor data */
   factors: z.object({
-    environmental: z.object({
-      mercuryUsage: z.number().min(0).max(100).optional(),
-      wasteManagement: z.number().min(0).max(100).optional(),
-      waterProtection: z.number().min(0).max(100).optional(),
-      landRehabilitation: z.number().min(0).max(100).optional(),
-    }).optional(),
-    
-    safety: z.object({
-      ppeCompliance: z.number().min(0).max(100).optional(),
-      incidentRate: z.number().min(0).optional(),
-      trainingCompletion: z.number().min(0).max(100).optional(),
-      equipmentMaintenance: z.number().min(0).max(100).optional(),
-    }).optional(),
-    
-    financial: z.object({
-      recordKeeping: z.number().min(0).max(100).optional(),
-      taxCompliance: z.number().min(0).max(100).optional(),
-      bankingAccess: z.boolean().optional(),
-      transactionHistory: z.number().int().min(0).optional(),
-    }).optional(),
-    
-    social: z.object({
-      communityBenefit: z.number().min(0).max(100).optional(),
-      laborCompliance: z.number().min(0).max(100).optional(),
-      childLaborFree: z.boolean().optional(),
-      fpicConsent: z.boolean().optional(),
-    }).optional(),
-    
-    regulatory: z.object({
-      licenseStatus: z.enum(['valid', 'expired', 'pending', 'none']).optional(),
-      exportCompliance: z.number().min(0).max(100).optional(),
-      inspectionHistory: z.number().min(0).max(100).optional(),
-    }).optional(),
+    environmental: z
+      .object({
+        mercuryUsage: z.number().min(0).max(100).optional(),
+        wasteManagement: z.number().min(0).max(100).optional(),
+        waterProtection: z.number().min(0).max(100).optional(),
+        landRehabilitation: z.number().min(0).max(100).optional(),
+      })
+      .optional(),
+
+    safety: z
+      .object({
+        ppeCompliance: z.number().min(0).max(100).optional(),
+        incidentRate: z.number().min(0).optional(),
+        trainingCompletion: z.number().min(0).max(100).optional(),
+        equipmentMaintenance: z.number().min(0).max(100).optional(),
+      })
+      .optional(),
+
+    financial: z
+      .object({
+        recordKeeping: z.number().min(0).max(100).optional(),
+        taxCompliance: z.number().min(0).max(100).optional(),
+        bankingAccess: z.boolean().optional(),
+        transactionHistory: z.number().int().min(0).optional(),
+      })
+      .optional(),
+
+    social: z
+      .object({
+        communityBenefit: z.number().min(0).max(100).optional(),
+        laborCompliance: z.number().min(0).max(100).optional(),
+        childLaborFree: z.boolean().optional(),
+        fpicConsent: z.boolean().optional(),
+      })
+      .optional(),
+
+    regulatory: z
+      .object({
+        licenseStatus: z.enum(['valid', 'expired', 'pending', 'none']).optional(),
+        exportCompliance: z.number().min(0).max(100).optional(),
+        inspectionHistory: z.number().min(0).max(100).optional(),
+      })
+      .optional(),
   }),
-  
+
   /** Calculation timestamp */
   calculatedAt: DateTimeSchema.optional(),
 });
@@ -2000,13 +2034,13 @@ export type GCIInput = z.infer<typeof GCIInputSchema>;
 export const GCIOutputSchema = z.object({
   /** Score identifier */
   scoreId: UUIDSchema,
-  
+
   /** Entity scored */
   entityId: GTCXDIDSchema,
-  
+
   /** Overall score (0-100) */
   overall: z.number().min(0).max(100),
-  
+
   /** Category breakdown */
   breakdown: z.object({
     environmental: z.number().min(0).max(100),
@@ -2015,29 +2049,31 @@ export const GCIOutputSchema = z.object({
     social: z.number().min(0).max(100),
     regulatory: z.number().min(0).max(100),
   }),
-  
+
   /** Score category */
   category: z.enum(['PREMIUM', 'VERIFIED', 'PROVISIONAL', 'UNREGISTERED']),
-  
+
   /** Trend indicator */
   trend: z.enum(['improving', 'stable', 'declining']),
-  
+
   /** Improvement recommendations */
-  recommendations: z.array(z.object({
-    factor: z.string(),
-    currentScore: z.number(),
-    targetScore: z.number(),
-    action: z.string(),
-    impact: z.enum(['low', 'medium', 'high']),
-  })),
-  
+  recommendations: z.array(
+    z.object({
+      factor: z.string(),
+      currentScore: z.number(),
+      targetScore: z.number(),
+      action: z.string(),
+      impact: z.enum(['low', 'medium', 'high']),
+    })
+  ),
+
   /** Calculation metadata */
   calculatedAt: DateTimeSchema,
   validUntil: DateTimeSchema,
-  
+
   /** Data completeness */
   dataCompleteness: z.number().min(0).max(1),
-  
+
   /** Cryptographic signature */
   signature: SignatureSchema,
 });
@@ -2094,9 +2130,9 @@ export const ReleaseConditionSchema = z.object({
     'time_elapsed',
     'manual_approval',
   ]),
-  
+
   parameters: z.record(z.string(), z.unknown()),
-  
+
   satisfied: z.boolean().default(false),
   satisfiedAt: DateTimeSchema.optional(),
 });
@@ -2107,24 +2143,24 @@ export const ReleaseConditionSchema = z.object({
 export const EscrowSchema = z.object({
   /** Escrow identifier */
   escrowId: UUIDSchema,
-  
+
   /** Schema version */
   schemaVersion: SemVerSchema.default('3.0.0'),
-  
+
   /** Buyer information */
   buyer: z.object({
     did: GTCXDIDSchema,
     name: z.string(),
     verified: z.boolean(),
   }),
-  
+
   /** Seller information */
   seller: z.object({
     did: GTCXDIDSchema,
     name: z.string(),
     gciScore: z.number().min(0).max(100),
   }),
-  
+
   /** Asset being traded */
   asset: z.object({
     assetId: AssetIdSchema,
@@ -2133,7 +2169,7 @@ export const EscrowSchema = z.object({
     unit: z.string(),
     description: z.string().optional(),
   }),
-  
+
   /** Payment details */
   payment: z.object({
     amount: MoneySchema,
@@ -2141,7 +2177,7 @@ export const EscrowSchema = z.object({
     reference: z.string().optional(),
     fundedAt: DateTimeSchema.optional(),
   }),
-  
+
   /** Release conditions */
   conditions: z.object({
     minGciScore: z.number().min(0).max(100).default(50),
@@ -2150,28 +2186,30 @@ export const EscrowSchema = z.object({
     expiresAt: DateTimeSchema,
     customConditions: z.array(ReleaseConditionSchema).default([]),
   }),
-  
+
   /** Current state */
   state: EscrowStateSchema,
-  
+
   /** Timeline of events */
-  timeline: z.array(z.object({
-    event: z.string(),
-    timestamp: DateTimeSchema,
-    actor: GTCXDIDSchema,
-    details: z.record(z.string(), z.unknown()).optional(),
-  })),
-  
+  timeline: z.array(
+    z.object({
+      event: z.string(),
+      timestamp: DateTimeSchema,
+      actor: GTCXDIDSchema,
+      details: z.record(z.string(), z.unknown()).optional(),
+    })
+  ),
+
   /** Multi-signature requirements */
   signatures: z.object({
     buyer: SignatureSchema.optional(),
     seller: SignatureSchema.optional(),
     validator: SignatureSchema.optional(),
   }),
-  
+
   /** Dispute reference (if any) */
   disputeId: UUIDSchema.optional(),
-  
+
   /** Creation/update timestamps */
   created: DateTimeSchema,
   updated: DateTimeSchema,
@@ -2194,9 +2232,9 @@ import { z } from 'zod';
  * Schema version status
  */
 export const VersionStatusSchema = z.enum([
-  'current',     // Active, recommended version
-  'supported',   // Still supported, but not recommended
-  'deprecated',  // Supported with sunset date
+  'current', // Active, recommended version
+  'supported', // Still supported, but not recommended
+  'deprecated', // Supported with sunset date
   'unsupported', // No longer supported
 ]);
 
@@ -2232,40 +2270,70 @@ export const DefaultSchemaVersionRegistry: SchemaVersionRegistry = {
     currentVersion: '3.0.0',
     versions: [
       { version: '1.0.0', status: 'unsupported', releasedAt: '2024-01-01T00:00:00Z' },
-      { version: '2.0.0', status: 'deprecated', releasedAt: '2025-01-01T00:00:00Z', sunsetAt: '2027-06-01T00:00:00Z' },
-      { version: '2.1.0', status: 'deprecated', releasedAt: '2025-06-01T00:00:00Z', sunsetAt: '2027-12-01T00:00:00Z' },
+      {
+        version: '2.0.0',
+        status: 'deprecated',
+        releasedAt: '2025-01-01T00:00:00Z',
+        sunsetAt: '2027-06-01T00:00:00Z',
+      },
+      {
+        version: '2.1.0',
+        status: 'deprecated',
+        releasedAt: '2025-06-01T00:00:00Z',
+        sunsetAt: '2027-12-01T00:00:00Z',
+      },
       { version: '3.0.0', status: 'current', releasedAt: '2026-01-15T00:00:00Z' },
     ],
   },
-  
+
   TradePassDIDDocument: {
     currentVersion: '3.0.0',
     versions: [
-      { version: '2.0.0', status: 'deprecated', releasedAt: '2025-01-01T00:00:00Z', sunsetAt: '2027-06-01T00:00:00Z' },
+      {
+        version: '2.0.0',
+        status: 'deprecated',
+        releasedAt: '2025-01-01T00:00:00Z',
+        sunsetAt: '2027-06-01T00:00:00Z',
+      },
       { version: '3.0.0', status: 'current', releasedAt: '2026-01-15T00:00:00Z' },
     ],
   },
-  
+
   GCIOutput: {
     currentVersion: '3.0.0',
     versions: [
-      { version: '2.0.0', status: 'deprecated', releasedAt: '2025-01-01T00:00:00Z', sunsetAt: '2027-06-01T00:00:00Z' },
+      {
+        version: '2.0.0',
+        status: 'deprecated',
+        releasedAt: '2025-01-01T00:00:00Z',
+        sunsetAt: '2027-06-01T00:00:00Z',
+      },
       { version: '3.0.0', status: 'current', releasedAt: '2026-01-15T00:00:00Z' },
     ],
   },
-  
+
   GeoTagCredential: {
     currentVersion: '3.0.0',
     versions: [
-      { version: '2.0.0', status: 'deprecated', releasedAt: '2025-01-01T00:00:00Z', sunsetAt: '2027-06-01T00:00:00Z' },
+      {
+        version: '2.0.0',
+        status: 'deprecated',
+        releasedAt: '2025-01-01T00:00:00Z',
+        sunsetAt: '2027-06-01T00:00:00Z',
+      },
       { version: '3.0.0', status: 'current', releasedAt: '2026-01-15T00:00:00Z' },
     ],
   },
-  
+
   Escrow: {
     currentVersion: '3.0.0',
     versions: [
-      { version: '2.0.0', status: 'deprecated', releasedAt: '2025-01-01T00:00:00Z', sunsetAt: '2027-06-01T00:00:00Z' },
+      {
+        version: '2.0.0',
+        status: 'deprecated',
+        releasedAt: '2025-01-01T00:00:00Z',
+        sunsetAt: '2027-06-01T00:00:00Z',
+      },
       { version: '3.0.0', status: 'current', releasedAt: '2026-01-15T00:00:00Z' },
     ],
   },
@@ -2283,16 +2351,16 @@ export const DefaultSchemaVersionRegistry: SchemaVersionRegistry = {
 export interface Migration<TFrom = unknown, TTo = unknown> {
   /** Source version */
   fromVersion: string;
-  
+
   /** Target version */
   toVersion: string;
-  
+
   /** Upgrade function */
   up(data: TFrom): TTo;
-  
+
   /** Downgrade function (optional) */
   down?(data: TTo): TFrom;
-  
+
   /** Validate input data */
   validate(data: unknown): data is TFrom;
 }
@@ -2316,10 +2384,10 @@ export interface MigrationResult<T> {
 export interface MigrationRegistry {
   /** Get migration for a specific version transition */
   getMigration(schema: string, from: string, to: string): Migration | undefined;
-  
+
   /** Get migration path from one version to another */
   getMigrationPath(schema: string, from: string, to: string): Migration[];
-  
+
   /** Register a new migration */
   register(schema: string, migration: Migration): void;
 }
@@ -2357,25 +2425,22 @@ export class SchemaValidator {
   /**
    * Validate data against a schema
    */
-  static validate<T extends z.ZodTypeAny>(
-    schema: T,
-    data: unknown
-  ): ValidationResult<z.infer<T>> {
+  static validate<T extends z.ZodTypeAny>(schema: T, data: unknown): ValidationResult<z.infer<T>> {
     const result = schema.safeParse(data);
-    
+
     if (result.success) {
       return { success: true, data: result.data };
     }
-    
-    const errors: ValidationError[] = result.error.issues.map(issue => ({
-      path: issue.path.map(p => String(p)),
+
+    const errors: ValidationError[] = result.error.issues.map((issue) => ({
+      path: issue.path.map((p) => String(p)),
       message: issue.message,
       code: issue.code,
     }));
-    
+
     return { success: false, errors };
   }
-  
+
   /**
    * Validate with automatic version detection and migration
    */
@@ -2388,68 +2453,72 @@ export class SchemaValidator {
     // Detect version
     const detectedVersion = this.detectVersion(data);
     const targetVersion = this.getSchemaVersion(schemaName);
-    
+
     // If versions match, validate directly
     if (detectedVersion === targetVersion) {
       return this.validate(targetSchema, data);
     }
-    
+
     // Get migration path
     const migrations = migrationRegistry.getMigrationPath(
       schemaName,
       detectedVersion,
       targetVersion
     );
-    
+
     if (migrations.length === 0) {
       return {
         success: false,
-        errors: [{
-          path: [],
-          message: `No migration path from ${detectedVersion} to ${targetVersion}`,
-          code: 'migration_not_found',
-        }],
+        errors: [
+          {
+            path: [],
+            message: `No migration path from ${detectedVersion} to ${targetVersion}`,
+            code: 'migration_not_found',
+          },
+        ],
       };
     }
-    
+
     // Apply migrations
     let currentData = data;
     for (const migration of migrations) {
       if (!migration.validate(currentData)) {
         return {
           success: false,
-          errors: [{
-            path: [],
-            message: `Migration validation failed at ${migration.fromVersion}`,
-            code: 'migration_validation_failed',
-          }],
+          errors: [
+            {
+              path: [],
+              message: `Migration validation failed at ${migration.fromVersion}`,
+              code: 'migration_validation_failed',
+            },
+          ],
         };
       }
       currentData = migration.up(currentData);
     }
-    
+
     // Validate final result
     return this.validate(targetSchema, currentData);
   }
-  
+
   private static detectVersion(data: unknown): string {
     if (typeof data !== 'object' || data === null) {
       return '1.0.0';
     }
-    
+
     // Check for explicit version field
     if ('schemaVersion' in data && typeof (data as any).schemaVersion === 'string') {
       return (data as any).schemaVersion;
     }
-    
+
     // Check for gtcx.version
     if ('gtcx' in data && typeof (data as any).gtcx?.version === 'string') {
       return (data as any).gtcx.version + '.0';
     }
-    
+
     return '2.0.0'; // Default to previous version
   }
-  
+
   private static getSchemaVersion(schemaName: string): string {
     return DefaultSchemaVersionRegistry[schemaName]?.currentVersion ?? '3.0.0';
   }
@@ -2494,14 +2563,7 @@ export {
   PaginatedResponseSchema,
 } from './core/common';
 
-export type {
-  Coordinates,
-  Money,
-  Weight,
-  Address,
-  Contact,
-  Pagination,
-} from './core/common';
+export type { Coordinates, Money, Weight, Address, Contact, Pagination } from './core/common';
 
 // === Asset Schemas ===
 export {
@@ -2513,11 +2575,7 @@ export {
   AssetRegistry,
 } from './assets';
 
-export type {
-  AssetTypeConfig,
-  AssetIdentity,
-  VerificationRecord,
-} from './assets';
+export type { AssetTypeConfig, AssetIdentity, VerificationRecord } from './assets';
 
 // === Commodity Configs ===
 export { GoldConfig } from './config/commodities/gold';
@@ -2541,15 +2599,9 @@ export type {
 } from './identity';
 
 // === Compliance Schemas ===
-export {
-  GCIInputSchema,
-  GCIOutputSchema,
-} from './compliance';
+export { GCIInputSchema, GCIOutputSchema } from './compliance';
 
-export type {
-  GCIInput,
-  GCIOutput,
-} from './compliance';
+export type { GCIInput, GCIOutput } from './compliance';
 
 // === Settlement Schemas ===
 export {
@@ -2559,15 +2611,10 @@ export {
   EscrowSchema,
 } from './settlement';
 
-export type {
-  Escrow,
-} from './settlement';
+export type { Escrow } from './settlement';
 
 // === Versioning ===
-export {
-  SchemaVersionRegistrySchema,
-  DefaultSchemaVersionRegistry,
-} from './migrations/registry';
+export { SchemaVersionRegistrySchema, DefaultSchemaVersionRegistry } from './migrations/registry';
 
 export type {
   SchemaVersionRegistry,
@@ -2607,13 +2654,13 @@ export const CompiledSchemas = {
 
 ### 7.12.2 Validation Performance Targets
 
-| Schema | Target Parse Time | Max Size |
-|--------|-------------------|----------|
-| `AssetIdentity` | <5ms | 100KB |
-| `TradePassDIDDocument` | <2ms | 50KB |
-| `GCIOutput` | <2ms | 20KB |
-| `Escrow` | <3ms | 50KB |
-| `VerificationRecord` | <1ms | 10KB |
+| Schema                 | Target Parse Time | Max Size |
+| ---------------------- | ----------------- | -------- |
+| `AssetIdentity`        | <5ms              | 100KB    |
+| `TradePassDIDDocument` | <2ms              | 50KB     |
+| `GCIOutput`            | <2ms              | 20KB     |
+| `Escrow`               | <3ms              | 50KB     |
+| `VerificationRecord`   | <1ms              | 10KB     |
 
 ---
 
@@ -2621,23 +2668,23 @@ export const CompiledSchemas = {
 
 ### 7.13.1 Inputs
 
-| Source | Data | Schema |
-|--------|------|--------|
-| **TradePass™** | Identity documents | `TradePassDIDDocumentSchema` |
-| **GCI™** | Score calculations | `GCIInputSchema`, `GCIOutputSchema` |
-| **GeoTag™** | Location captures | `CoordinatesSchema`, `GeohashSchema` |
-| **VaultMark™** | Asset records | `AssetIdentitySchema` |
-| **PvP™** | Settlement records | `EscrowSchema` |
+| Source         | Data               | Schema                               |
+| -------------- | ------------------ | ------------------------------------ |
+| **TradePass™** | Identity documents | `TradePassDIDDocumentSchema`         |
+| **GCI™**       | Score calculations | `GCIInputSchema`, `GCIOutputSchema`  |
+| **GeoTag™**    | Location captures  | `CoordinatesSchema`, `GeohashSchema` |
+| **VaultMark™** | Asset records      | `AssetIdentitySchema`                |
+| **PvP™**       | Settlement records | `EscrowSchema`                       |
 
 ### 7.13.2 Outputs
 
-| Destination | Data | Purpose |
-|-------------|------|---------|
-| **All Services** | Validated types | Type-safe runtime |
-| **Storage** | Versioned schemas | Data evolution |
-| **API Layer** | Type definitions | Contract stability |
-| **Documentation** | Type exports | Developer reference |
+| Destination       | Data              | Purpose             |
+| ----------------- | ----------------- | ------------------- |
+| **All Services**  | Validated types   | Type-safe runtime   |
+| **Storage**       | Versioned schemas | Data evolution      |
+| **API Layer**     | Type definitions  | Contract stability  |
+| **Documentation** | Type exports      | Developer reference |
 
 ---
 
-*End of Section 7*
+_End of Section 7_

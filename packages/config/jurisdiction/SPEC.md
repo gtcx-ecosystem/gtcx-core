@@ -1,4 +1,5 @@
 # GTCX Jurisdiction Configuration Schema
+
 ## Universal Parameterization for Multi-Sovereign Deployment
 
 > **"One protocol, infinite jurisdictions. Configuration, not code changes."**
@@ -21,13 +22,12 @@ GTCX deploys in ANY commodity-producing jurisdiction within 90 days of partnersh
 import { z } from 'zod';
 
 export const JurisdictionConfigSchema = z.object({
-  
   // ============================================================
   // SECTION 1: IDENTITY
   // ============================================================
   identity: z.object({
-    countryCode: z.string().length(2),           // ISO 3166-1 alpha-2
-    countryCode3: z.string().length(3),          // ISO 3166-1 alpha-3
+    countryCode: z.string().length(2), // ISO 3166-1 alpha-2
+    countryCode3: z.string().length(3), // ISO 3166-1 alpha-3
     name: z.object({
       official: z.string(),
       common: z.string(),
@@ -35,9 +35,14 @@ export const JurisdictionConfigSchema = z.object({
     }),
     timezone: z.string(),
     region: z.enum([
-      'west_africa', 'east_africa', 'central_africa', 
-      'southern_africa', 'north_africa', 'latin_america', 
-      'south_asia', 'southeast_asia'
+      'west_africa',
+      'east_africa',
+      'central_africa',
+      'southern_africa',
+      'north_africa',
+      'latin_america',
+      'south_asia',
+      'southeast_asia',
     ]),
   }),
 
@@ -50,26 +55,32 @@ export const JurisdictionConfigSchema = z.object({
       abbreviation: z.string(),
       website: z.string().url().optional(),
     }),
-    
+
     licensing: z.object({
-      producerLicenses: z.array(z.object({
-        type: z.string(),
-        code: z.string(),
-        renewalYears: z.number(),
-        requiredForGTCX: z.boolean(),
-      })),
-      buyerLicenses: z.array(z.object({
-        type: z.string(),
-        code: z.string(),
-        requiredForGTCX: z.boolean(),
-      })),
-      exportLicenses: z.array(z.object({
-        type: z.string(),
-        code: z.string(),
-        requiredForGTCX: z.boolean(),
-      })),
+      producerLicenses: z.array(
+        z.object({
+          type: z.string(),
+          code: z.string(),
+          renewalYears: z.number(),
+          requiredForGTCX: z.boolean(),
+        })
+      ),
+      buyerLicenses: z.array(
+        z.object({
+          type: z.string(),
+          code: z.string(),
+          requiredForGTCX: z.boolean(),
+        })
+      ),
+      exportLicenses: z.array(
+        z.object({
+          type: z.string(),
+          code: z.string(),
+          requiredForGTCX: z.boolean(),
+        })
+      ),
     }),
-    
+
     compliance: z.object({
       mercuryRestrictions: z.enum(['banned', 'restricted', 'permitted', 'unregulated']),
       communityConsentRequired: z.boolean(),
@@ -79,7 +90,7 @@ export const JurisdictionConfigSchema = z.object({
       chainOfCustodyRequired: z.boolean(),
       assayRequiredForExport: z.boolean(),
     }),
-    
+
     dataSovereignty: z.object({
       dataResidencyRequired: z.boolean(),
       governmentDataAccess: z.enum(['realtime', 'on_request', 'audit_only', 'none']),
@@ -89,35 +100,39 @@ export const JurisdictionConfigSchema = z.object({
   // ============================================================
   // SECTION 3: COMMODITIES
   // ============================================================
-  commodities: z.array(z.object({
-    type: z.enum(['gold', 'diamond', 'coltan', 'cobalt', 'cocoa', 'coffee', 'cashew', 'shea']),
-    enabled: z.boolean(),
-    config: z.object({
-      weightUnit: z.enum(['gram', 'kilogram', 'ounce', 'troy_ounce']),
-      purityStandard: z.enum(['fineness', 'karat', 'percentage']).optional(),
-      minimumPurityForExport: z.number().optional(),
-      pricingReference: z.enum(['lbma', 'comex', 'local_exchange', 'government_rate']),
-      localPremiumPercent: z.number(),
-    }),
-  })),
+  commodities: z.array(
+    z.object({
+      type: z.enum(['gold', 'diamond', 'coltan', 'cobalt', 'cocoa', 'coffee', 'cashew', 'shea']),
+      enabled: z.boolean(),
+      config: z.object({
+        weightUnit: z.enum(['gram', 'kilogram', 'ounce', 'troy_ounce']),
+        purityStandard: z.enum(['fineness', 'karat', 'percentage']).optional(),
+        minimumPurityForExport: z.number().optional(),
+        pricingReference: z.enum(['lbma', 'comex', 'local_exchange', 'government_rate']),
+        localPremiumPercent: z.number(),
+      }),
+    })
+  ),
 
   // ============================================================
   // SECTION 4: LOCALIZATION
   // ============================================================
   localization: z.object({
     officialLanguages: z.array(z.string()),
-    supportedLanguages: z.array(z.object({
-      code: z.string(),
-      name: z.string(),
-      nativeName: z.string(),
-      rtl: z.boolean(),
-      channels: z.object({
-        app: z.boolean(),
-        ussd: z.boolean(),
-        sms: z.boolean(),
-        voice: z.boolean(),
-      }),
-    })),
+    supportedLanguages: z.array(
+      z.object({
+        code: z.string(),
+        name: z.string(),
+        nativeName: z.string(),
+        rtl: z.boolean(),
+        channels: z.object({
+          app: z.boolean(),
+          ussd: z.boolean(),
+          sms: z.boolean(),
+          voice: z.boolean(),
+        }),
+      })
+    ),
     defaultLanguage: z.string(),
     numberFormat: z.object({
       decimalSeparator: z.enum(['.', ',']),
@@ -140,13 +155,15 @@ export const JurisdictionConfigSchema = z.object({
       name: z.string(),
       decimalPlaces: z.number(),
     }),
-    mobileMoneyProviders: z.array(z.object({
-      name: z.string(),
-      code: z.string(),
-      ussdCode: z.string(),
-      apiAvailable: z.boolean(),
-      marketSharePercent: z.number(),
-    })),
+    mobileMoneyProviders: z.array(
+      z.object({
+        name: z.string(),
+        code: z.string(),
+        ussdCode: z.string(),
+        apiAvailable: z.boolean(),
+        marketSharePercent: z.number(),
+      })
+    ),
     limits: z.object({
       maxCashTransactionUSD: z.number(),
       mobileMoneyDailyLimitUSD: z.number(),
@@ -157,19 +174,21 @@ export const JurisdictionConfigSchema = z.object({
   // SECTION 6: TELECOM
   // ============================================================
   telecom: z.object({
-    operators: z.array(z.object({
-      name: z.string(),
-      code: z.string(),
-      marketSharePercent: z.number(),
-      coverage: z.object({
-        population2G: z.number(),
-        population4G: z.number(),
-      }),
-      ussdPartnership: z.object({
-        available: z.boolean(),
-        shortCode: z.string().optional(),
-      }),
-    })),
+    operators: z.array(
+      z.object({
+        name: z.string(),
+        code: z.string(),
+        marketSharePercent: z.number(),
+        coverage: z.object({
+          population2G: z.number(),
+          population4G: z.number(),
+        }),
+        ussdPartnership: z.object({
+          available: z.boolean(),
+          shortCode: z.string().optional(),
+        }),
+      })
+    ),
     connectivity: z.object({
       smartphonePenetration: z.number(),
       internetPenetration: z.number(),
@@ -209,12 +228,14 @@ export const JurisdictionConfigSchema = z.object({
   // SECTION 8: HARDWARE
   // ============================================================
   hardware: z.object({
-    certifiedDevices: z.array(z.object({
-      manufacturer: z.string(),
-      model: z.string(),
-      certificationLevel: z.enum(['compatible', 'certified', 'verified']),
-      retailPriceUSD: z.number(),
-    })),
+    certifiedDevices: z.array(
+      z.object({
+        manufacturer: z.string(),
+        model: z.string(),
+        certificationLevel: z.enum(['compatible', 'certified', 'verified']),
+        retailPriceUSD: z.number(),
+      })
+    ),
     scales: z.object({
       certificationRequired: z.boolean(),
       recertificationMonths: z.number(),
@@ -302,8 +323,13 @@ export const JurisdictionConfigSchema = z.object({
   // ============================================================
   deployment: z.object({
     status: z.enum([
-      'prospect', 'engaged', 'mou_signed', 
-      'pilot_preparing', 'pilot_active', 'scaling', 'production'
+      'prospect',
+      'engaged',
+      'mou_signed',
+      'pilot_preparing',
+      'pilot_active',
+      'scaling',
+      'production',
     ]),
     targets: z.object({
       month3Users: z.number(),
@@ -347,4 +373,4 @@ packages/config/jurisdiction/
 
 ---
 
-*Last Updated: January 22, 2026*
+_Last Updated: January 22, 2026_

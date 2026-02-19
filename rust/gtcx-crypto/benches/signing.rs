@@ -3,18 +3,14 @@ use gtcx_crypto::keys::generate_keypair;
 use gtcx_crypto::signing::ed25519::{sign, verify};
 
 fn bench_key_generation(c: &mut Criterion) {
-    c.bench_function("ed25519_keygen", |b| {
-        b.iter(generate_keypair)
-    });
+    c.bench_function("ed25519_keygen", |b| b.iter(generate_keypair));
 }
 
 fn bench_sign(c: &mut Criterion) {
     let (private_key, _) = generate_keypair();
     let message = b"benchmark message for signing operations";
 
-    c.bench_function("ed25519_sign", |b| {
-        b.iter(|| sign(message, &private_key))
-    });
+    c.bench_function("ed25519_sign", |b| b.iter(|| sign(message, &private_key)));
 }
 
 fn bench_verify(c: &mut Criterion) {

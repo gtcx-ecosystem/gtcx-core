@@ -17,5 +17,15 @@
     "hash.sha256_256b_ns": 950,
     "hash.sha512_256b_ns": 750,
     "hash.blake3_256b_ns": 350
+  },
+  "trend": {
+    "windowSize": 5,
+    "minSamples": 3,
+    "maxRegressionPercent": 8,
+    "metricOverrides": {
+      "hash.blake3_256b_ns": {
+        "maxRegressionPercent": 12
+      }
+    }
   }
 }

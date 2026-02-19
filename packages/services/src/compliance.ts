@@ -62,6 +62,10 @@ const DEFAULT_CONFIG: ComplianceConfig = {
   defaultCurrency: 'USD',
 };
 
+function toErrorCause(error: unknown): Error {
+  return error instanceof Error ? error : new Error(String(error));
+}
+
 // ============================================================================
 // COMPLIANCE CHECK RESULT
 // ============================================================================
@@ -260,7 +264,7 @@ export class UnifiedComplianceService {
         upcomingDeadlines: await this.getUpcomingDeadlines(allRecords),
       };
     } catch (error) {
-      throw new Error(`Failed to get compliance dashboard: ${error}`);
+      throw new Error('Failed to get compliance dashboard', { cause: toErrorCause(error) });
     }
   }
 
@@ -380,7 +384,7 @@ export class UnifiedComplianceService {
 
       return records;
     } catch (error) {
-      throw new Error(`Failed to check asset lot compliance: ${error}`);
+      throw new Error('Failed to check asset lot compliance', { cause: toErrorCause(error) });
     }
   }
 
@@ -474,7 +478,7 @@ export class UnifiedComplianceService {
 
       return records;
     } catch (error) {
-      throw new Error(`Failed to check transaction compliance: ${error}`);
+      throw new Error('Failed to check transaction compliance', { cause: toErrorCause(error) });
     }
   }
 
@@ -551,7 +555,7 @@ export class UnifiedComplianceService {
 
       return { report, metadata };
     } catch (error) {
-      throw new Error(`Failed to generate compliance report: ${error}`);
+      throw new Error('Failed to generate compliance report', { cause: toErrorCause(error) });
     }
   }
 
@@ -805,5 +809,3 @@ export class UnifiedComplianceService {
       }));
   }
 }
-
-export default UnifiedComplianceService;

@@ -38,7 +38,7 @@ console.log(hash256('data')); // hex string
 ## Related
 
 - [ADR-001: Rust for Cryptography](../../docs/adr/001-rust-for-cryptography.md)
-- [ADR-005: Ed25519 over secp256k1](../../docs/adr/005-ed25519-over-secp256k1.md)
+- [ADR-005: Ed25519 over secp256k1](../../docs/adr/005-ed25519-signing.md)
 
 ## License
 

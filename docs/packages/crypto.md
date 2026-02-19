@@ -28,12 +28,7 @@ pnpm add @gtcx/crypto
 ## Quick Start
 
 ```typescript
-import {
-  generateKeyPair,
-  sign,
-  verify,
-  hash256,
-} from '@gtcx/crypto';
+import { generateKeyPair, sign, verify, hash256 } from '@gtcx/crypto';
 
 // Generate Ed25519 key pair
 const { publicKey, privateKey } = generateKeyPair();
@@ -70,8 +65,8 @@ const { publicKey, privateKey, algorithm } = generateKeyPair('ed25519');
 const pubKey = derivePublicKey(privateKey);
 
 // Validate keys
-isValidPublicKey(someKey);   // boolean
-isValidPrivateKey(someKey);  // boolean
+isValidPublicKey(someKey); // boolean
+isValidPrivateKey(someKey); // boolean
 
 // Generate key identifier (fingerprint for logs and references)
 const keyId = generateKeyId(publicKey);
@@ -152,10 +147,7 @@ const valid = verifyCommitment(commitment, secretData, salt);
 ### Cryptographic Proofs
 
 ```typescript
-import {
-  createCryptographicProof,
-  verifyCryptographicProof,
-} from '@gtcx/crypto';
+import { createCryptographicProof, verifyCryptographicProof } from '@gtcx/crypto';
 
 // Create proof (signs data and packages with metadata)
 const proof = createCryptographicProof({
@@ -175,12 +167,7 @@ const verification = verifyCryptographicProof(proof);
 All operations have traced variants that emit structured logs for AI analysis and observability. The API is identical to the standard functions.
 
 ```typescript
-import {
-  tracedSign,
-  tracedVerify,
-  tracedHash256,
-  tracedGenerateKeyPair,
-} from '@gtcx/crypto';
+import { tracedSign, tracedVerify, tracedHash256, tracedGenerateKeyPair } from '@gtcx/crypto';
 import { registerLogHandler } from '@gtcx/ai';
 
 // Register handler to receive operation logs
@@ -212,12 +199,12 @@ logKeyEvent('revoked', publicKey, { reason: 'compromised' });
 
 ## Algorithm Selection
 
-| Algorithm | Use Case | Security Level | Notes |
-|-----------|----------|----------------|-------|
-| Ed25519 | Primary signatures | 128-bit | Default for all GTCX signing |
-| Secp256k1 | Blockchain interoperability | 128-bit | Used in enhanced/military identities |
-| SHA-256 | General hashing | 128-bit | Default for content hashing |
-| SHA-512 | Extended hashing | 256-bit | Used for key derivation inputs |
+| Algorithm | Use Case                    | Security Level | Notes                                |
+| --------- | --------------------------- | -------------- | ------------------------------------ |
+| Ed25519   | Primary signatures          | 128-bit        | Default for all GTCX signing         |
+| Secp256k1 | Blockchain interoperability | 128-bit        | Used in enhanced/military identities |
+| SHA-256   | General hashing             | 128-bit        | Default for content hashing          |
+| SHA-512   | Extended hashing            | 256-bit        | Used for key derivation inputs       |
 
 ### Post-Quantum Notice
 
@@ -227,24 +214,24 @@ Current algorithms are not quantum-resistant. The package is designed for algori
 
 This package does **not** handle key storage. Use the appropriate secure storage for your platform:
 
-| Platform | Storage | Package |
-|----------|---------|---------|
-| React Native | `expo-secure-store` | `@gtcx/mobile-shared` |
-| Web | WebCrypto (non-extractable keys) | Application-specific |
-| Server | HSM or KMS (AWS KMS, HashiCorp Vault) | Application-specific |
+| Platform     | Storage                               | Package               |
+| ------------ | ------------------------------------- | --------------------- |
+| React Native | `expo-secure-store`                   | `@gtcx/mobile-shared` |
+| Web          | WebCrypto (non-extractable keys)      | Application-specific  |
+| Server       | HSM or KMS (AWS KMS, HashiCorp Vault) | Application-specific  |
 
 ## Performance
 
 Benchmarks on Apple M1:
 
-| Operation | Time | Notes |
-|-----------|------|-------|
-| Key generation | 0.3ms | Ed25519 |
-| Sign | 0.4ms | Ed25519 |
-| Verify | 0.8ms | Ed25519 |
-| Batch verify (100) | 45ms | ~2.2x faster than individual |
-| SHA-256 (1KB) | 0.02ms | |
-| SHA-256 (1MB) | 2.1ms | |
+| Operation          | Time   | Notes                        |
+| ------------------ | ------ | ---------------------------- |
+| Key generation     | 0.3ms  | Ed25519                      |
+| Sign               | 0.4ms  | Ed25519                      |
+| Verify             | 0.8ms  | Ed25519                      |
+| Batch verify (100) | 45ms   | ~2.2x faster than individual |
+| SHA-256 (1KB)      | 0.02ms |                              |
+| SHA-256 (1MB)      | 2.1ms  |                              |
 
 ## Dependencies
 
@@ -254,14 +241,14 @@ Benchmarks on Apple M1:
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
+| Principle            | Implementation                                                            |
+| -------------------- | ------------------------------------------------------------------------- |
 | P1 Package Structure | Single entry point; keys, signing, hashing, proofs as independent modules |
-| P2 Type Safety | Typed key pairs, signatures, and hashes; Uint8Array throughout |
-| P3 Modularity | Each module (keys, signing, hashing) is independently importable |
-| P5 AI-Native | Traced variants of all operations for ML analysis |
-| P8 Offline-First | All operations are local — no network required |
-| P9 Security | No private key logging; audited noble libraries; algorithm agility |
+| P2 Type Safety       | Typed key pairs, signatures, and hashes; Uint8Array throughout            |
+| P3 Modularity        | Each module (keys, signing, hashing) is independently importable          |
+| P5 AI-Native         | Traced variants of all operations for ML analysis                         |
+| P8 Offline-First     | All operations are local — no network required                            |
+| P9 Security          | No private key logging; audited noble libraries; algorithm agility        |
 
 ## Related
 

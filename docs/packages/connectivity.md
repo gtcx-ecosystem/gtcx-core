@@ -5,6 +5,7 @@ Adaptive connectivity profiles and sync strategies for frontier market operation
 ## Overview
 
 This package implements:
+
 - **ADR-0016**: Connectivity Profiles Over Binary Online/Offline
 - **ADR-0019**: USSD as First-Class Channel
 
@@ -46,14 +47,14 @@ connectivityLogger.info('ussd.request_received', 'Processing USSD', {
 
 ## Connectivity Profiles
 
-| Profile | Bandwidth | Latency | Use Case |
-|---------|-----------|---------|----------|
-| `offline` | 0 | ∞ | Rural mine, no signal |
-| `ussd-only` | 140 bytes | — | Feature phone (40% users) |
-| `edge` | <200 Kbps | High | 2G/EDGE coverage |
-| `degraded` | 1-5 Mbps | Variable | 3G intermittent |
-| `standard` | >5 Mbps | Low | 4G/WiFi |
-| `satellite` | 512 Kbps | 500ms+ | Remote sites |
+| Profile     | Bandwidth | Latency  | Use Case                  |
+| ----------- | --------- | -------- | ------------------------- |
+| `offline`   | 0         | ∞        | Rural mine, no signal     |
+| `ussd-only` | 140 bytes | —        | Feature phone (40% users) |
+| `edge`      | <200 Kbps | High     | 2G/EDGE coverage          |
+| `degraded`  | 1-5 Mbps  | Variable | 3G intermittent           |
+| `standard`  | >5 Mbps   | Low      | 4G/WiFi                   |
+| `satellite` | 512 Kbps  | 500ms+   | Remote sites              |
 
 ### Sync Strategies
 
@@ -76,13 +77,13 @@ const strategy = getProfileStrategy('edge');
 
 USSD service codes for feature phone users (40% of target market):
 
-| Code | Function |
-|------|----------|
-| `*384*1#` | Balance & Status |
-| `*384*2#` | Verify Lot |
-| `*384*3#` | Record Sale |
-| `*384*4#` | Price Check |
-| `*384*5#` | Help |
+| Code      | Function           |
+| --------- | ------------------ |
+| `*384*1#` | Balance & Status   |
+| `*384*2#` | Verify Lot         |
+| `*384*3#` | Record Sale        |
+| `*384*4#` | Price Check        |
+| `*384*5#` | Help               |
 | `*384*0#` | Language Selection |
 
 ### Languages Supported
@@ -338,49 +339,49 @@ packages/connectivity/
 
 ### Assets Protected
 
-| Asset | Description | Protection |
-|-------|-------------|------------|
-| MSISDN | Phone numbers (PII) | Hashed in logs, validated on input |
-| TradePass ID | User identity | Session binding, hijack detection |
-| Sale Records | Transaction data | Validated input, audit trail |
-| Session State | User flow state | Timeout, MSISDN binding |
+| Asset         | Description         | Protection                         |
+| ------------- | ------------------- | ---------------------------------- |
+| MSISDN        | Phone numbers (PII) | Hashed in logs, validated on input |
+| TradePass ID  | User identity       | Session binding, hijack detection  |
+| Sale Records  | Transaction data    | Validated input, audit trail       |
+| Session State | User flow state     | Timeout, MSISDN binding            |
 
 ### Threats Addressed
 
-| Threat | Mitigation |
-|--------|------------|
-| **USSD Injection** | Input sanitization removes control chars |
-| **Rate Limiting Bypass** | Per-MSISDN rate limiting with audit |
-| **Session Hijacking** | MSISDN binding, hijack detection |
-| **Phone Number Harvesting** | PII never logged raw |
-| **Replay Attacks** | Session timeout (180s) |
-| **Invalid Input** | Zod validation on all boundaries |
+| Threat                      | Mitigation                               |
+| --------------------------- | ---------------------------------------- |
+| **USSD Injection**          | Input sanitization removes control chars |
+| **Rate Limiting Bypass**    | Per-MSISDN rate limiting with audit      |
+| **Session Hijacking**       | MSISDN binding, hijack detection         |
+| **Phone Number Harvesting** | PII never logged raw                     |
+| **Replay Attacks**          | Session timeout (180s)                   |
+| **Invalid Input**           | Zod validation on all boundaries         |
 
 ### Security Events
 
 The following events are emitted to registered security handlers:
 
-| Event | Severity | Trigger |
-|-------|----------|---------|
-| `security.rate_limit_exceeded` | Medium | >10 requests/minute |
-| `security.invalid_msisdn` | Low | Malformed phone number |
-| `security.session_hijack_attempt` | High | MSISDN mismatch |
-| `security.suspicious_input` | Medium | Control chars in input |
-| `security.authentication_failed` | Medium | Invalid TradePass link |
+| Event                             | Severity | Trigger                |
+| --------------------------------- | -------- | ---------------------- |
+| `security.rate_limit_exceeded`    | Medium   | >10 requests/minute    |
+| `security.invalid_msisdn`         | Low      | Malformed phone number |
+| `security.session_hijack_attempt` | High     | MSISDN mismatch        |
+| `security.suspicious_input`       | Medium   | Control chars in input |
+| `security.authentication_failed`  | Medium   | Invalid TradePass link |
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
-| P1 Package Structure | Clear module boundaries (detection, profiles, adaptive, fallback, hooks) |
-| P2 Type Safety | Zod validation at all boundaries; typed connectivity profiles |
-| P4 Composability | Dependency injection for telco config, storage, and TradePass lookup |
-| P5 AI-Native | Structured logging with `connectivityLogger` for ML analysis |
-| P6 Asset Abstraction | Commodity-agnostic — connectivity profiles are universal |
-| P8 Offline-First | Core design principle; 6 profiles from `offline` to `satellite` |
-| P9 Security | MSISDN validation, rate limiting, input sanitization, audit events |
-| P11 Data Evolution | Schema versioning with migration functions for USSD sessions |
-| P12 Observability | Structured logging, Prometheus-compatible metrics, security event handlers |
+| Principle            | Implementation                                                             |
+| -------------------- | -------------------------------------------------------------------------- |
+| P1 Package Structure | Clear module boundaries (detection, profiles, adaptive, fallback, hooks)   |
+| P2 Type Safety       | Zod validation at all boundaries; typed connectivity profiles              |
+| P4 Composability     | Dependency injection for telco config, storage, and TradePass lookup       |
+| P5 AI-Native         | Structured logging with `connectivityLogger` for ML analysis               |
+| P6 Asset Abstraction | Commodity-agnostic — connectivity profiles are universal                   |
+| P8 Offline-First     | Core design principle; 6 profiles from `offline` to `satellite`            |
+| P9 Security          | MSISDN validation, rate limiting, input sanitization, audit events         |
+| P11 Data Evolution   | Schema versioning with migration functions for USSD sessions               |
+| P12 Observability    | Structured logging, Prometheus-compatible metrics, security event handlers |
 
 ## Related
 

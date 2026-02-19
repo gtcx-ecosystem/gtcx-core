@@ -215,8 +215,7 @@ impl Proof {
         let mut commitment = [0u8; 32];
         commitment.copy_from_slice(&bytes[1..33]);
 
-        let proof_len =
-            u32::from_le_bytes(bytes[33..37].try_into().expect("4 bytes")) as usize;
+        let proof_len = u32::from_le_bytes(bytes[33..37].try_into().expect("4 bytes")) as usize;
 
         if bytes.len() < 37 + proof_len {
             return Err(ZkpError::InvalidProofFormat {

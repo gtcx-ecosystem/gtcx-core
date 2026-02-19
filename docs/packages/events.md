@@ -6,12 +6,12 @@ Type-safe event contracts and offline-capable event bus for GTCX Protocol.
 
 This package provides the communication backbone for GTCX Protocol:
 
-| Component | Purpose | Principles |
-|-----------|---------|------------|
-| **Event Types** | Type-safe contracts per protocol | P2, P7 |
-| **EventBus** | Pub/sub event handling | P4, P12 |
-| **OfflineEventQueue** | Persist events when offline | P8 |
-| **Serialization** | Storage and transport utilities | P11 |
+| Component             | Purpose                          | Principles |
+| --------------------- | -------------------------------- | ---------- |
+| **Event Types**       | Type-safe contracts per protocol | P2, P7     |
+| **EventBus**          | Pub/sub event handling           | P4, P12    |
+| **OfflineEventQueue** | Persist events when offline      | P8         |
+| **Serialization**     | Storage and transport utilities  | P11        |
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -121,26 +121,26 @@ Every GTCX event follows this structure:
 
 ```typescript
 interface GTCXEvent<T, P> {
-  id: string;           // UUID
-  type: T;              // Event type discriminant
-  timestamp: string;    // ISO 8601
-  version: 1;           // Schema version
-  source: EventSource;  // Origin service
-  payload: P;           // Type-specific payload
-  meta: EventMeta;      // Tracing, correlation, offline
+  id: string; // UUID
+  type: T; // Event type discriminant
+  timestamp: string; // ISO 8601
+  version: 1; // Schema version
+  source: EventSource; // Origin service
+  payload: P; // Type-specific payload
+  meta: EventMeta; // Tracing, correlation, offline
 }
 ```
 
 ### Protocol Events
 
-| Protocol | Events | Example |
-|----------|--------|---------|
-| **TradePass** | 16 | `CREDENTIAL_ISSUED`, `TIER_UPGRADED` |
-| **GeoTag** | 10 | `PROOF_CREATED`, `ANOMALY_DETECTED` |
-| **VaultMark** | 15 | `CUSTODY_TRANSFERRED`, `CHAIN_BROKEN` |
-| **PvP** | 15 | `SETTLEMENT_COMPLETED`, `ESCROW_RELEASED` |
-| **GCI** | 13 | `SCORE_CALCULATED`, `CERTIFICATION_GRANTED` |
-| **PANX** | 14 | `CONSENSUS_REACHED`, `PRICE_PUBLISHED` |
+| Protocol      | Events | Example                                     |
+| ------------- | ------ | ------------------------------------------- |
+| **TradePass** | 16     | `CREDENTIAL_ISSUED`, `TIER_UPGRADED`        |
+| **GeoTag**    | 10     | `PROOF_CREATED`, `ANOMALY_DETECTED`         |
+| **VaultMark** | 15     | `CUSTODY_TRANSFERRED`, `CHAIN_BROKEN`       |
+| **PvP**       | 15     | `SETTLEMENT_COMPLETED`, `ESCROW_RELEASED`   |
+| **GCI**       | 13     | `SCORE_CALCULATED`, `CERTIFICATION_GRANTED` |
+| **PANX**      | 14     | `CONSENSUS_REACHED`, `PRICE_PUBLISHED`      |
 
 ### Type Safety
 
@@ -173,25 +173,25 @@ function handleEvent(event: TradePassEvent) {
 class EventBus {
   // Subscribe to specific event type
   on<T>(type: T, handler: EventHandler): Unsubscribe;
-  
+
   // Subscribe to all events from a protocol
   onProtocol(protocol: string, handler: EventHandler): Unsubscribe;
-  
+
   // Subscribe to all events
   onAny(handler: EventHandler): Unsubscribe;
-  
+
   // Subscribe with custom filter
   onFiltered(filter: EventFilter, handler: EventHandler): Unsubscribe;
-  
+
   // Subscribe once
   once<T>(type: T, handler: EventHandler): Unsubscribe;
-  
+
   // Emit event
   emit(event: GTCXEvent): Promise<void>;
-  
+
   // Emit multiple events
   emitAll(events: GTCXEvent[]): Promise<void>;
-  
+
   // Utilities
   handlerCount(type?: string): number;
   hasHandlers(type: string): boolean;
@@ -210,11 +210,11 @@ class OfflineEventQueue {
   getAll(): Promise<QueuedEvent[]>;
   getStats(): Promise<QueueStats>;
   clear(): Promise<void>;
-  
+
   // Sync operations
   sync(sender: (event) => Promise<void>): Promise<SyncResult>;
   syncToBus(bus: EventBus): Promise<SyncResult>;
-  
+
   // Connectivity
   setOnline(online: boolean): void;
   getOnlineStatus(): boolean;
@@ -256,10 +256,10 @@ buildCausationTree(events): Map<string, GTCXEvent[]>;
 
 ```typescript
 interface EventMeta {
-  correlationId?: string;  // Links related events
-  causationId?: string;    // What caused this event
-  traceId?: string;        // Distributed tracing
-  actorId?: string;        // Who triggered the event
+  correlationId?: string; // Links related events
+  causationId?: string; // What caused this event
+  traceId?: string; // Distributed tracing
+  actorId?: string; // Who triggered the event
   actorType?: 'user' | 'system' | 'service' | 'scheduled';
 }
 ```
@@ -268,8 +268,8 @@ interface EventMeta {
 
 ```typescript
 interface EventMeta {
-  offline?: boolean;       // Created while offline
-  syncedAt?: string;       // When synced to server
+  offline?: boolean; // Created while offline
+  syncedAt?: string; // When synced to server
 }
 ```
 
@@ -278,7 +278,7 @@ interface EventMeta {
 ```typescript
 interface EventMeta {
   geo?: {
-    country?: string;      // ISO 3166-1 alpha-2
+    country?: string; // ISO 3166-1 alpha-2
     region?: string;
     coordinates?: { lat: number; lng: number };
   };
@@ -293,20 +293,20 @@ interface EventMeta {
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|----------------|
-| **P1** Package Structure | Clear module separation |
-| **P2** Type Safety | Zod schemas, discriminated unions |
-| **P3** Modularity | Small, focused functions |
-| **P4** Composability | Pluggable storage, handlers |
-| **P5** AI-Native | Structured events for ML analysis |
-| **P6** Asset Abstraction | Protocol-agnostic event base |
-| **P7** Documentation | JSDoc, README, examples |
-| **P8** Offline-First | 72-hour queue, sync on reconnect |
-| **P9** Security | Event validation, source tracking |
-| **P10** API Stability | Versioned event schemas |
-| **P11** Data Evolution | Schema version field |
-| **P12** Observability | Correlation IDs, tracing |
+| Principle                | Implementation                    |
+| ------------------------ | --------------------------------- |
+| **P1** Package Structure | Clear module separation           |
+| **P2** Type Safety       | Zod schemas, discriminated unions |
+| **P3** Modularity        | Small, focused functions          |
+| **P4** Composability     | Pluggable storage, handlers       |
+| **P5** AI-Native         | Structured events for ML analysis |
+| **P6** Asset Abstraction | Protocol-agnostic event base      |
+| **P7** Documentation     | JSDoc, README, examples           |
+| **P8** Offline-First     | 72-hour queue, sync on reconnect  |
+| **P9** Security          | Event validation, source tracking |
+| **P10** API Stability    | Versioned event schemas           |
+| **P11** Data Evolution   | Schema version field              |
+| **P12** Observability    | Correlation IDs, tracing          |
 
 ---
 
@@ -329,7 +329,7 @@ const storage: QueueStorage = {
   },
   async keys(prefix) {
     const all = await AsyncStorage.getAllKeys();
-    return all.filter(k => k.startsWith(prefix));
+    return all.filter((k) => k.startsWith(prefix));
   },
   async clear(prefix) {
     const keys = await this.keys(prefix);
@@ -350,7 +350,7 @@ const storage: QueueStorage = {
   delete: (key) => del(key),
   keys: async (prefix) => {
     const all = await keys();
-    return all.filter(k => String(k).startsWith(prefix));
+    return all.filter((k) => String(k).startsWith(prefix));
   },
   clear: async (prefix) => {
     const toDelete = await storage.keys(prefix);

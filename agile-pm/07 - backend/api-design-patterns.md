@@ -1,15 +1,16 @@
 # API Design Patterns Template
 
 ## API Overview
+
 **Service Name**: [SERVICE_NAME]  
 **API Type**: [REST/GraphQL/gRPC/WebSocket]  
 **Version**: [v1/v2/etc]  
 **Base URL**: [https://api.gtcx.io/v1]
 
-
 ## API Design Principles
 
 ### Core Principles
+
 - **Consistency**: Uniform patterns across all endpoints
 - **Predictability**: Intuitive resource naming and behavior
 - **Versioning**: Clear version strategy for backward compatibility
@@ -17,15 +18,16 @@
 - **Documentation**: Self-documenting with clear examples
 
 ### GTCX-Specific Requirements
+
 - **Offline-First**: Support for queuing and sync
 - **Multi-Currency**: Handle multiple payment contexts
 - **Audit Trail**: Complete transaction history
 - **Compliance**: Regulatory data requirements
 
-
 ## RESTful Patterns
 
 ### Resource Naming Conventions
+
 ```
 # Pattern: /resources/{id}/sub-resources/{id}
 
@@ -43,6 +45,7 @@ POST   /transactions/{id}/confirm
 ```
 
 ### Standard Response Format
+
 ```json
 {
   "success": true,
@@ -70,6 +73,7 @@ POST   /transactions/{id}/confirm
 ```
 
 ### Error Response Format
+
 ```json
 {
   "success": false,
@@ -91,10 +95,10 @@ POST   /transactions/{id}/confirm
 }
 ```
 
-
 ## GraphQL Patterns
 
 ### Schema Design
+
 ```graphql
 type Transaction {
   id: ID!
@@ -127,11 +131,12 @@ type Subscription {
 ```
 
 ### Resolver Patterns
+
 ```typescript
 // Dataloader pattern for N+1 prevention
 const transactionLoader = new DataLoader(async (ids) => {
   const transactions = await Transaction.findByIds(ids);
-  return ids.map(id => transactions.find(t => t.id === id));
+  return ids.map((id) => transactions.find((t) => t.id === id));
 });
 
 // Field resolver with caching
@@ -139,15 +144,15 @@ const resolvers = {
   Transaction: {
     user: (parent, args, context) => {
       return context.loaders.user.load(parent.userId);
-    }
-  }
+    },
+  },
 };
 ```
-
 
 ## Authentication & Authorization
 
 ### Authentication Patterns
+
 ```typescript
 // JWT Bearer Token
 headers: {
@@ -166,6 +171,7 @@ POST /auth/refresh
 ```
 
 ### Authorization Patterns
+
 ```typescript
 // Role-Based Access Control (RBAC)
 @RequireRole(['admin', 'operator'])
@@ -180,10 +186,10 @@ async deleteTransaction(id: string) { }
 async updateTransaction(id: string, userId: string) { }
 ```
 
-
 ## Pagination Patterns
 
 ### Cursor-Based Pagination (Preferred)
+
 ```json
 GET /transactions?after=cursor_xyz&limit=20
 
@@ -200,6 +206,7 @@ GET /transactions?after=cursor_xyz&limit=20
 ```
 
 ### Offset-Based Pagination
+
 ```json
 GET /transactions?page=2&limit=20
 
@@ -214,22 +221,24 @@ GET /transactions?page=2&limit=20
 }
 ```
 
-
 ## Versioning Strategy
 
 ### URL Path Versioning
+
 ```
 https://api.gtcx.io/v1/transactions
 https://api.gtcx.io/v2/transactions
 ```
 
 ### Header Versioning
+
 ```
 Accept: application/vnd.gtcx.v2+json
 X-API-Version: 2
 ```
 
 ### Deprecation Policy
+
 ```json
 {
   "deprecated": true,
@@ -239,10 +248,10 @@ X-API-Version: 2
 }
 ```
 
-
 ## Performance Patterns
 
 ### Caching Strategy
+
 ```typescript
 // Cache headers
 headers: {
@@ -259,6 +268,7 @@ headers: {
 ```
 
 ### Compression
+
 ```typescript
 // Request compression
 headers: {
@@ -268,16 +278,17 @@ headers: {
 ```
 
 ### Field Filtering
+
 ```
 GET /transactions?fields=id,amount,status
 GET /transactions?include=user,audit_log
 GET /transactions?exclude=metadata,internal_notes
 ```
 
-
 ## Search & Filtering
 
 ### Query Parameters
+
 ```
 GET /transactions?status=pending&amount_gte=1000&currency=USD
 GET /transactions?q=search+term
@@ -285,6 +296,7 @@ GET /transactions?filter[status]=pending&filter[amount][gte]=1000
 ```
 
 ### Advanced Filtering
+
 ```json
 POST /transactions/search
 {
@@ -310,10 +322,10 @@ POST /transactions/search
 }
 ```
 
-
 ## Webhook Patterns
 
 ### Webhook Registration
+
 ```json
 POST /webhooks
 {
@@ -324,6 +336,7 @@ POST /webhooks
 ```
 
 ### Webhook Payload
+
 ```json
 {
   "id": "evt_1234567890",
@@ -336,10 +349,10 @@ POST /webhooks
 }
 ```
 
-
 ## Testing Patterns
 
 ### Test Endpoints
+
 ```
 POST /test/reset                    # Reset test data
 POST /test/seed                     # Seed test data
@@ -348,16 +361,17 @@ POST /test/simulate/delay/{ms}      # Simulate latency
 ```
 
 ### Test Authentication
+
 ```typescript
 // Test API keys with prefixes
 const testApiKey = 'gtcx_test_1234567890';
 const liveApiKey = 'gtcx_live_1234567890';
 ```
 
-
 ## Documentation Requirements
 
 ### OpenAPI/Swagger Specification
+
 ```yaml
 openapi: 3.0.0
 info:
@@ -384,16 +398,17 @@ paths:
 ```
 
 ### API Documentation Standards
+
 - **Every endpoint** must have description
 - **Every parameter** must have type and constraints
 - **Every response** must have example
 - **Every error** must be documented
 - **Rate limits** must be specified
 
-
 ## GTCX-Specific Patterns
 
 ### Multi-Tenant Support
+
 ```typescript
 // Header-based tenant identification
 headers: {
@@ -403,6 +418,7 @@ headers: {
 ```
 
 ### Idempotency
+
 ```typescript
 // Idempotency key for safe retries
 headers: {
@@ -411,6 +427,7 @@ headers: {
 ```
 
 ### Audit Trail
+
 ```json
 {
   "audit": {
@@ -423,10 +440,10 @@ headers: {
 }
 ```
 
-
 ## Metrics & Monitoring
 
 ### Required Metrics
+
 - Response time (p50, p95, p99)
 - Error rate by endpoint
 - Request rate per second
@@ -434,6 +451,7 @@ headers: {
 - Cache hit ratio
 
 ### Health Check Endpoint
+
 ```json
 GET /health
 
@@ -449,5 +467,4 @@ GET /health
 }
 ```
 
-
-*This template ensures consistent, scalable, and maintainable API design across the GTCX ecosystem.*
+_This template ensures consistent, scalable, and maintainable API design across the GTCX ecosystem._

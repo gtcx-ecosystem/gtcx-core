@@ -45,18 +45,9 @@ export interface TradeTerms {
   arbitrationClause?: string;
 }
 
-export type SettlementType = 
-  | 'immediate'
-  | 't_plus_1'
-  | 't_plus_2'
-  | 'on_delivery'
-  | 'escrow';
+export type SettlementType = 'immediate' | 't_plus_1' | 't_plus_2' | 'on_delivery' | 'escrow';
 
-export type DeliveryMethod =
-  | 'physical'
-  | 'vault_transfer'
-  | 'title_transfer'
-  | 'certificate_only';
+export type DeliveryMethod = 'physical' | 'vault_transfer' | 'title_transfer' | 'certificate_only';
 
 export type OrderStatus =
   | 'draft'
@@ -197,9 +188,4 @@ export interface AtomicSwap {
   executedAt?: number;
 }
 
-export type SwapStatus =
-  | 'pending'
-  | 'locked'
-  | 'executed'
-  | 'expired'
-  | 'refunded';
+export type SwapStatus = 'pending' | 'locked' | 'executed' | 'expired' | 'refunded';

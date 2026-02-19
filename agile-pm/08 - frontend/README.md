@@ -1,5 +1,7 @@
 # Frontend Development
+
 Use these templates for frontend work:
+
 - templates/frontend-strategy-template.md
 - templates/frontend-prd-template.md
 - templates/frontend-roadmap-template.md
@@ -9,5 +11,6 @@ Use these templates for frontend work:
 - templates/user-journey-maps-template.md
 
 For community/docs:
+
 - templates/developer-quickstart-template.md
 - templates/community-hub-page-template.md

@@ -8,8 +8,24 @@
  */
 
 export * from './types';
-export { SecureStorageBase } from './secure-storage';
-export type { StorageBackend, SecureStorageState, UnlockResult } from './secure-storage';
-export { CredentialCache, DEFAULT_CREDENTIAL_CACHE_CONFIG } from './credential-cache';
-export type { CredentialCacheConfig, CredentialValidation } from './credential-cache';
+export {
+  SecureStorageBase,
+  OfflineSecurityConfigSchema as SecureStorageOfflineSecurityConfigSchema,
+} from './secure-storage';
+export type {
+  StorageBackend,
+  SecureStorageState,
+  UnlockResult,
+  OfflineSecurityConfig as SecureStorageOfflineSecurityConfig,
+} from './secure-storage';
+export {
+  CredentialCache,
+  DEFAULT_CREDENTIAL_CACHE_CONFIG,
+  CachedCredentialSchema as CredentialCacheEntrySchema,
+} from './credential-cache';
+export type {
+  CredentialCacheConfig,
+  CredentialValidation,
+  CachedCredential as CredentialCacheEntry,
+} from './credential-cache';
 export * from './tamper-detection';

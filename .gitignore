@@ -62,6 +62,7 @@ Thumbs.db
 # Generated runtime artifacts
 artifacts/
 quality/api-surface-report.json
+benchmarks/performance-report.json
 
 # Logs
 *.log

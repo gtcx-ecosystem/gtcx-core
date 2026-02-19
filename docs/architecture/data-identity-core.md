@@ -2,10 +2,10 @@
 
 ## Document Control
 
-| Attribute | Value |
-|-----------|-------|
-| **Scope** | gtcx-core architecture |
-| **Status** | Publication-Ready |
+| Attribute   | Value                                                                                                                            |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Scope**   | gtcx-core architecture                                                                                                           |
+| **Status**  | Publication-Ready                                                                                                                |
 | **Related** | [EventCore Spec](../specs/eventcore.md), [Identity Core Spec](../specs/identity-core.md), [Data Models](../specs/data-models.md) |
 
 ---
@@ -50,13 +50,13 @@ Each new EventCore message embeds the `tradePassId` of the signer. Registry serv
 
 ## 3. Shared Design Principles
 
-| Principle | Implementation |
-|-----------|---------------|
-| **Canonical formats** | EventCore uses deterministic JSON and Protobuf; TradePass uses JSON-LD + JSON Schema |
-| **Self-describing** | Both specs carry `schemaVersion` and extension namespaces |
-| **Permissionless extension** | Namespaced keys (`extensions` in EventCore, `credentialSubject.extra` in TradePass) prevent forks |
-| **Cryptographic determinism** | IDs are SHA-3-256 hashes of canonicalized content |
-| **Upgrade path** | SemVer: new optional fields = minor bump; breaking change = major bump via Governance RFC |
+| Principle                     | Implementation                                                                                    |
+| ----------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Canonical formats**         | EventCore uses deterministic JSON and Protobuf; TradePass uses JSON-LD + JSON Schema              |
+| **Self-describing**           | Both specs carry `schemaVersion` and extension namespaces                                         |
+| **Permissionless extension**  | Namespaced keys (`extensions` in EventCore, `credentialSubject.extra` in TradePass) prevent forks |
+| **Cryptographic determinism** | IDs are SHA-3-256 hashes of canonicalized content                                                 |
+| **Upgrade path**              | SemVer: new optional fields = minor bump; breaking change = major bump via Governance RFC         |
 
 ---
 
@@ -82,13 +82,13 @@ Converts EventCore into external schemas (GS1 EPCIS, LBMA Chain of Custody) whil
 
 ## 5. Deployment Lifecycle
 
-| Phase | Action | Specifications Used |
-|-------|--------|-------------------|
-| 1. Identity enrollment | Actor submits KYC/KYB, receives signed TradePass VC | [Identity Core](../specs/identity-core.md) |
-| 2. Edge registration | Device boots, keypair generated in secure element, device TradePass issued | [Identity Core](../specs/identity-core.md) |
-| 3. Event emission | Device or backend wraps data in EventCore, signs with TradePass key, publishes | [EventCore](../specs/eventcore.md) |
-| 4. Validation | Downstream node fetches issuer's DID doc, checks VC status, hashes canonical event, verifies signature | [Security Framework](../specs/security-framework.md) |
-| 5. Aggregation | Data warehouses group EventCore records by `tradePassId` for analytics; wallets present selective proofs | [Data Models](../specs/data-models.md) |
+| Phase                  | Action                                                                                                   | Specifications Used                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| 1. Identity enrollment | Actor submits KYC/KYB, receives signed TradePass VC                                                      | [Identity Core](../specs/identity-core.md)           |
+| 2. Edge registration   | Device boots, keypair generated in secure element, device TradePass issued                               | [Identity Core](../specs/identity-core.md)           |
+| 3. Event emission      | Device or backend wraps data in EventCore, signs with TradePass key, publishes                           | [EventCore](../specs/eventcore.md)                   |
+| 4. Validation          | Downstream node fetches issuer's DID doc, checks VC status, hashes canonical event, verifies signature   | [Security Framework](../specs/security-framework.md) |
+| 5. Aggregation         | Data warehouses group EventCore records by `tradePassId` for analytics; wallets present selective proofs | [Data Models](../specs/data-models.md)               |
 
 Adding a new vertical (e.g., lithium, fisheries) requires implementing one EventCore Extension Pack (if needed) and reusing existing schemas. No changes to the core specifications.
 
@@ -96,9 +96,9 @@ Adding a new vertical (e.g., lithium, fisheries) requires implementing one Event
 
 ## 6. Extensibility Roadmap
 
-| Timeframe | Planned Work |
-|-----------|-------------|
-| Near-term (< 12 months) | SD-JWT selective disclosure for TradePass per-field privacy; `gold-v1` and `grain-eu` EventCore Extension Packs |
+| Timeframe                | Planned Work                                                                                                              |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Near-term (< 12 months)  | SD-JWT selective disclosure for TradePass per-field privacy; `gold-v1` and `grain-eu` EventCore Extension Packs           |
 | Long-term (12-24 months) | Merkle-tree aggregation in EventCore for light-client proofs; decentralized revocation via status-list-2023 for TradePass |
 
 ---

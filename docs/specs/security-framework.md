@@ -2,12 +2,12 @@
 
 ## Document Control
 
-| Attribute | Value |
-|-----------|-------|
-| **Section** | 8 of 14 |
-| **Title** | Security and Privacy |
-| **Status** | Publication-Ready |
-| **Primary Principles** | P2, P7, P9, P12 |
+| Attribute              | Value                |
+| ---------------------- | -------------------- |
+| **Section**            | 8 of 14              |
+| **Title**              | Security and Privacy |
+| **Status**             | Publication-Ready    |
+| **Primary Principles** | P2, P7, P9, P12      |
 
 ---
 
@@ -57,16 +57,16 @@ This section defines the comprehensive security and privacy framework for GTCX P
 
 ### 8.2.1 Algorithm Selection
 
-| Purpose | Algorithm | Key Size | Standard |
-|---------|-----------|----------|----------|
-| **Digital Signatures** | Ed25519 | 256-bit | RFC 8032 |
-| **Key Exchange** | X25519 | 256-bit | RFC 7748 |
-| **Symmetric Encryption** | AES-256-GCM | 256-bit | NIST SP 800-38D |
-| **Hashing** | SHA-256 | 256-bit | FIPS 180-4 |
-| **Hashing (Extended)** | SHA-512 | 512-bit | FIPS 180-4 |
-| **Key Derivation** | HKDF-SHA256 | Variable | RFC 5869 |
-| **Password Hashing** | Argon2id | 256-bit | RFC 9106 |
-| **Random Generation** | CSPRNG | Variable | NIST SP 800-90A |
+| Purpose                  | Algorithm   | Key Size | Standard        |
+| ------------------------ | ----------- | -------- | --------------- |
+| **Digital Signatures**   | Ed25519     | 256-bit  | RFC 8032        |
+| **Key Exchange**         | X25519      | 256-bit  | RFC 7748        |
+| **Symmetric Encryption** | AES-256-GCM | 256-bit  | NIST SP 800-38D |
+| **Hashing**              | SHA-256     | 256-bit  | FIPS 180-4      |
+| **Hashing (Extended)**   | SHA-512     | 512-bit  | FIPS 180-4      |
+| **Key Derivation**       | HKDF-SHA256 | Variable | RFC 5869        |
+| **Password Hashing**     | Argon2id    | 256-bit  | RFC 9106        |
+| **Random Generation**    | CSPRNG      | Variable | NIST SP 800-90A |
 
 ### 8.2.2 Signature Scheme
 
@@ -91,16 +91,13 @@ export const Ed25519Config = {
 export const SignatureDataSchema = z.object({
   /** Algorithm identifier */
   algorithm: z.literal('Ed25519'),
-  
+
   /** Base64-encoded signature (64 bytes) */
-  value: z.string().regex(
-    /^[A-Za-z0-9+/]{86}==$/,
-    'Invalid Ed25519 signature format'
-  ),
-  
+  value: z.string().regex(/^[A-Za-z0-9+/]{86}==$/, 'Invalid Ed25519 signature format'),
+
   /** Key ID used for signing */
   keyId: z.string(),
-  
+
   /** Timestamp of signature */
   created: z.string().datetime(),
 });
@@ -117,7 +114,7 @@ export interface ISigner {
    * @returns Signature with metadata
    */
   sign(message: Uint8Array): Promise<SignatureData>;
-  
+
   /**
    * Verify a signature
    * @param message - Original message
@@ -125,17 +122,13 @@ export interface ISigner {
    * @param publicKey - Public key for verification
    * @returns Whether signature is valid
    */
-  verify(
-    message: Uint8Array,
-    signature: SignatureData,
-    publicKey: Uint8Array
-  ): Promise<boolean>;
-  
+  verify(message: Uint8Array, signature: SignatureData, publicKey: Uint8Array): Promise<boolean>;
+
   /**
    * Get the public key
    */
   getPublicKey(): Uint8Array;
-  
+
   /**
    * Get the key ID
    */
@@ -151,13 +144,10 @@ export async function createSignature(
 ): Promise<SignatureData> {
   // 1. Canonicalize data (deterministic JSON)
   const canonical = JSON.stringify(data, Object.keys(data).sort());
-  
+
   // 2. Hash the canonical form
-  const hash = await crypto.subtle.digest(
-    'SHA-256',
-    new TextEncoder().encode(canonical)
-  );
-  
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonical));
+
   // 3. Sign the hash
   return signer.sign(new Uint8Array(hash));
 }
@@ -185,16 +175,16 @@ export const AES256GCMConfig = {
 export const EncryptedEnvelopeSchema = z.object({
   /** Algorithm identifier */
   algorithm: z.literal('AES-256-GCM'),
-  
+
   /** Base64-encoded initialization vector */
   iv: z.string().regex(/^[A-Za-z0-9+/]{16}$/),
-  
+
   /** Base64-encoded ciphertext with auth tag */
   ciphertext: z.string(),
-  
+
   /** Key ID used for encryption */
   keyId: z.string(),
-  
+
   /** Optional: Ephemeral public key for ECDH */
   ephemeralPublicKey: z.string().optional(),
 });
@@ -212,7 +202,7 @@ export interface IEncryptor {
    * @returns Encrypted envelope
    */
   encrypt(plaintext: Uint8Array, aad?: Uint8Array): Promise<EncryptedEnvelope>;
-  
+
   /**
    * Decrypt data
    * @param envelope - Encrypted envelope
@@ -233,17 +223,17 @@ export async function hybridEncrypt(
 ): Promise<HybridEncryptedEnvelope> {
   // 1. Generate ephemeral X25519 keypair
   const ephemeralKeyPair = await generateX25519KeyPair();
-  
+
   // 2. Derive shared secret via ECDH
   const sharedSecret = await x25519(ephemeralKeyPair.privateKey, recipientPublicKey);
-  
+
   // 3. Derive encryption key via HKDF
   const encryptionKey = await hkdf(sharedSecret, 'GTCX-Encryption', 32);
-  
+
   // 4. Encrypt with AES-256-GCM
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const encrypted = await aesGcmEncrypt(encryptionKey, iv, plaintext, aad);
-  
+
   return {
     algorithm: 'X25519-AES-256-GCM',
     ephemeralPublicKey: base64Encode(ephemeralKeyPair.publicKey),
@@ -283,12 +273,12 @@ export async function hash(
 ): Promise<string> {
   const config = HashConfig[algorithm];
   const input = typeof data === 'string' ? new TextEncoder().encode(data) : data;
-  
+
   const hashBuffer = await crypto.subtle.digest(config.algorithm, input);
   const hashHex = Array.from(new Uint8Array(hashBuffer))
-    .map(b => b.toString(16).padStart(2, '0'))
+    .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
-  
+
   return `${config.prefix}${hashHex}`;
 }
 
@@ -298,7 +288,7 @@ export async function hash(
 export class MerkleTree {
   private leaves: string[] = [];
   private layers: string[][] = [];
-  
+
   /**
    * Add leaf to tree
    */
@@ -306,7 +296,7 @@ export class MerkleTree {
     const leafHash = await hash(data, 'SHA256');
     this.leaves.push(leafHash);
   }
-  
+
   /**
    * Build tree and return root
    */
@@ -314,68 +304,66 @@ export class MerkleTree {
     if (this.leaves.length === 0) {
       return await hash('empty', 'SHA256');
     }
-    
+
     this.layers = [this.leaves];
     let currentLayer = this.leaves;
-    
+
     while (currentLayer.length > 1) {
       const nextLayer: string[] = [];
-      
+
       for (let i = 0; i < currentLayer.length; i += 2) {
         const left = currentLayer[i];
         const right = currentLayer[i + 1] || left; // Duplicate if odd
         const combined = await hash(left + right, 'SHA256');
         nextLayer.push(combined);
       }
-      
+
       this.layers.push(nextLayer);
       currentLayer = nextLayer;
     }
-    
+
     return currentLayer[0];
   }
-  
+
   /**
    * Generate proof for leaf at index
    */
   getProof(index: number): MerkleProof {
     const proof: MerkleProofStep[] = [];
     let currentIndex = index;
-    
+
     for (let layer = 0; layer < this.layers.length - 1; layer++) {
       const isRight = currentIndex % 2 === 1;
       const siblingIndex = isRight ? currentIndex - 1 : currentIndex + 1;
-      
+
       if (siblingIndex < this.layers[layer].length) {
         proof.push({
           hash: this.layers[layer][siblingIndex],
           position: isRight ? 'left' : 'right',
         });
       }
-      
+
       currentIndex = Math.floor(currentIndex / 2);
     }
-    
+
     return {
       leaf: this.leaves[index],
       root: this.layers[this.layers.length - 1][0],
       proof,
     };
   }
-  
+
   /**
    * Verify a Merkle proof
    */
   static async verify(proof: MerkleProof): Promise<boolean> {
     let currentHash = proof.leaf;
-    
+
     for (const step of proof.proof) {
-      const combined = step.position === 'left'
-        ? step.hash + currentHash
-        : currentHash + step.hash;
+      const combined = step.position === 'left' ? step.hash + currentHash : currentHash + step.hash;
       currentHash = await hash(combined, 'SHA256');
     }
-    
+
     return currentHash === proof.root;
   }
 }
@@ -442,10 +430,12 @@ import { z } from 'zod';
 /**
  * Key derivation path schema
  */
-export const KeyPathSchema = z.string().regex(
-  /^gtcx\/[a-z]+\/[a-z]+\/[a-z0-9-]+$/,
-  'Key path format: gtcx/<domain>/<service>/<identifier>'
-);
+export const KeyPathSchema = z
+  .string()
+  .regex(
+    /^gtcx\/[a-z]+\/[a-z]+\/[a-z0-9-]+$/,
+    'Key path format: gtcx/<domain>/<service>/<identifier>'
+  );
 
 /**
  * Key derivation using HKDF
@@ -457,16 +447,12 @@ export async function deriveKey(
 ): Promise<Uint8Array> {
   // Validate path
   KeyPathSchema.parse(path);
-  
+
   // Import parent key
-  const importedKey = await crypto.subtle.importKey(
-    'raw',
-    parentKey,
-    { name: 'HKDF' },
-    false,
-    ['deriveBits']
-  );
-  
+  const importedKey = await crypto.subtle.importKey('raw', parentKey, { name: 'HKDF' }, false, [
+    'deriveBits',
+  ]);
+
   // Derive using HKDF
   const derivedBits = await crypto.subtle.deriveBits(
     {
@@ -478,7 +464,7 @@ export async function deriveKey(
     importedKey,
     length * 8
   );
-  
+
   return new Uint8Array(derivedBits);
 }
 
@@ -490,13 +476,13 @@ export const KeyPaths = {
   identity: (region: string) => `gtcx/identity/root/${region}`,
   settlement: (region: string) => `gtcx/settlement/root/${region}`,
   compliance: (region: string) => `gtcx/compliance/root/${region}`,
-  
+
   // Service keys
   tradepass: (nodeId: string) => `gtcx/identity/tradepass/${nodeId}`,
   gci: (nodeId: string) => `gtcx/compliance/gci/${nodeId}`,
   vaultmark: (nodeId: string) => `gtcx/custody/vaultmark/${nodeId}`,
   pvp: (nodeId: string) => `gtcx/settlement/pvp/${nodeId}`,
-  
+
   // User keys
   userIdentity: (did: string) => `gtcx/user/identity/${did}`,
   userDevice: (did: string, deviceId: string) => `gtcx/user/device/${did}-${deviceId}`,
@@ -522,31 +508,37 @@ export const HSMConfigSchema = z.object({
     'yubihsm',
     'software', // For development only
   ]),
-  
+
   /** Connection configuration */
   connection: z.object({
     endpoint: z.string().url().optional(),
     region: z.string().optional(),
     clusterId: z.string().optional(),
-    credentials: z.object({
-      keyId: z.string().optional(),
-      secretKey: z.string().optional(),
-      certificate: z.string().optional(),
-    }).optional(),
+    credentials: z
+      .object({
+        keyId: z.string().optional(),
+        secretKey: z.string().optional(),
+        certificate: z.string().optional(),
+      })
+      .optional(),
   }),
-  
+
   /** Key protection level */
-  protectionLevel: z.enum([
-    'SOFTWARE',     // Software-protected (dev only)
-    'HSM',          // HSM-protected
-    'HSM_FIPS',     // FIPS 140-2 Level 3
-  ]).default('HSM'),
-  
+  protectionLevel: z
+    .enum([
+      'SOFTWARE', // Software-protected (dev only)
+      'HSM', // HSM-protected
+      'HSM_FIPS', // FIPS 140-2 Level 3
+    ])
+    .default('HSM'),
+
   /** Retry configuration */
-  retry: z.object({
-    maxAttempts: z.number().int().min(1).max(10).default(3),
-    backoffMs: z.number().int().min(100).max(10000).default(1000),
-  }).default({}),
+  retry: z
+    .object({
+      maxAttempts: z.number().int().min(1).max(10).default(3),
+      backoffMs: z.number().int().min(100).max(10000).default(1000),
+    })
+    .default({}),
 });
 
 export type HSMConfig = z.infer<typeof HSMConfigSchema>;
@@ -557,25 +549,27 @@ export type HSMConfig = z.infer<typeof HSMConfigSchema>;
 export const HSMKeyRefSchema = z.object({
   /** Key identifier in HSM */
   keyId: z.string(),
-  
+
   /** Key version */
   version: z.string().optional(),
-  
+
   /** Key algorithm */
   algorithm: z.enum(['Ed25519', 'AES-256', 'RSA-2048']),
-  
+
   /** Key usage */
   usage: z.array(z.enum(['sign', 'verify', 'encrypt', 'decrypt', 'wrap', 'unwrap'])),
-  
+
   /** Creation timestamp */
   createdAt: z.string().datetime(),
-  
+
   /** Rotation schedule */
-  rotationSchedule: z.object({
-    enabled: z.boolean().default(true),
-    intervalDays: z.number().int().min(30).max(365).default(90),
-    nextRotation: z.string().datetime().optional(),
-  }).optional(),
+  rotationSchedule: z
+    .object({
+      enabled: z.boolean().default(true),
+      intervalDays: z.number().int().min(30).max(365).default(90),
+      nextRotation: z.string().datetime().optional(),
+    })
+    .optional(),
 });
 
 export type HSMKeyRef = z.infer<typeof HSMKeyRefSchema>;
@@ -586,44 +580,44 @@ export type HSMKeyRef = z.infer<typeof HSMKeyRefSchema>;
 export interface IHSMProvider {
   /** Initialize HSM connection */
   connect(): Promise<void>;
-  
+
   /** Disconnect from HSM */
   disconnect(): Promise<void>;
-  
+
   /** Generate a new key */
   generateKey(
     algorithm: 'Ed25519' | 'AES-256',
     usage: string[],
     metadata?: Record<string, string>
   ): Promise<HSMKeyRef>;
-  
+
   /** Sign data using HSM key */
   sign(keyRef: HSMKeyRef, data: Uint8Array): Promise<Uint8Array>;
-  
+
   /** Verify signature using HSM key */
   verify(keyRef: HSMKeyRef, data: Uint8Array, signature: Uint8Array): Promise<boolean>;
-  
+
   /** Encrypt data using HSM key */
   encrypt(keyRef: HSMKeyRef, plaintext: Uint8Array): Promise<Uint8Array>;
-  
+
   /** Decrypt data using HSM key */
   decrypt(keyRef: HSMKeyRef, ciphertext: Uint8Array): Promise<Uint8Array>;
-  
+
   /** Wrap a key for export */
   wrapKey(keyRef: HSMKeyRef, keyToWrap: Uint8Array): Promise<Uint8Array>;
-  
+
   /** Unwrap an imported key */
   unwrapKey(keyRef: HSMKeyRef, wrappedKey: Uint8Array): Promise<Uint8Array>;
-  
+
   /** Rotate a key */
   rotateKey(keyRef: HSMKeyRef): Promise<HSMKeyRef>;
-  
+
   /** Get key metadata */
   getKeyInfo(keyId: string): Promise<HSMKeyRef | null>;
-  
+
   /** List all keys */
   listKeys(filter?: { algorithm?: string; usage?: string }): Promise<HSMKeyRef[]>;
-  
+
   /** Destroy a key */
   destroyKey(keyRef: HSMKeyRef): Promise<void>;
 }
@@ -669,13 +663,13 @@ export type HSMOperationLog = z.infer<typeof HSMOperationLogSchema>;
 export interface KeyRotationPolicy {
   /** Enable automatic rotation */
   enabled: boolean;
-  
+
   /** Rotation interval in days */
   intervalDays: number;
-  
+
   /** Grace period for old key (days) */
   gracePeriodDays: number;
-  
+
   /** Notification before rotation (days) */
   notifyBeforeDays: number;
 }
@@ -723,16 +717,16 @@ export class KeyRotationService {
   constructor(
     private readonly hsm: IHSMProvider,
     private readonly logger: ILogger,
-    private readonly metrics: IMetricsCollector,
+    private readonly metrics: IMetricsCollector
   ) {}
-  
+
   async rotateKey(keyRef: HSMKeyRef): Promise<HSMKeyRef> {
     const timer = this.metrics.startTimer('key_rotation_duration');
-    
+
     try {
       // 1. Generate new key version
       const newKeyRef = await this.hsm.rotateKey(keyRef);
-      
+
       // 2. Log rotation
       this.logger.info('Key rotated', {
         oldKeyId: keyRef.keyId,
@@ -740,31 +734,29 @@ export class KeyRotationService {
         newKeyId: newKeyRef.keyId,
         newVersion: newKeyRef.version,
       });
-      
+
       // 3. Update metrics
       this.metrics.increment('key_rotations_total', {
         algorithm: keyRef.algorithm,
       });
-      
+
       return newKeyRef;
-      
     } catch (error) {
       this.logger.error('Key rotation failed', error as Error, {
         keyId: keyRef.keyId,
       });
       throw error;
-      
     } finally {
       timer.end();
     }
   }
-  
+
   async scheduleRotation(keyRef: HSMKeyRef, policy: KeyRotationPolicy): Promise<void> {
     if (!policy.enabled) return;
-    
+
     const nextRotation = new Date();
     nextRotation.setDate(nextRotation.getDate() + policy.intervalDays);
-    
+
     // Schedule rotation job
     // Implementation depends on job scheduler
   }
@@ -785,10 +777,10 @@ import { z } from 'zod';
  * Supported ZK proof systems
  */
 export const ZKProofSystemSchema = z.enum([
-  'schnorr',     // Simple Schnorr proofs (identity)
+  'schnorr', // Simple Schnorr proofs (identity)
   'bulletproofs', // Range proofs (amounts)
-  'groth16',     // General circuits (complex predicates)
-  'plonk',       // Universal setup (flexible circuits)
+  'groth16', // General circuits (complex predicates)
+  'plonk', // Universal setup (flexible circuits)
 ]);
 
 /**
@@ -797,19 +789,19 @@ export const ZKProofSystemSchema = z.enum([
 export const ZKProofSchema = z.object({
   /** Proof system used */
   system: ZKProofSystemSchema,
-  
+
   /** Proof type/circuit identifier */
   proofType: z.string(),
-  
+
   /** Public inputs (known to verifier) */
   publicInputs: z.array(z.string()),
-  
+
   /** The proof data */
   proof: z.string(), // Base64 encoded
-  
+
   /** Verification key reference */
   verificationKeyId: z.string(),
-  
+
   /** Creation timestamp */
   created: z.string().datetime(),
 });
@@ -851,11 +843,11 @@ export async function generateGCIThresholdProof(
   if (actualScore < threshold) {
     throw new Error('Cannot prove: score below threshold');
   }
-  
+
   // Generate score commitment (Pedersen commitment)
   const randomness = crypto.getRandomValues(new Uint8Array(32));
   const commitment = await pedersenCommit(actualScore, randomness);
-  
+
   // Generate range proof: score >= threshold
   const rangeProof = await generateBulletproof(
     actualScore - threshold, // Must be >= 0
@@ -863,15 +855,11 @@ export async function generateGCIThresholdProof(
     100 - threshold, // Upper bound
     randomness
   );
-  
+
   return {
     system: 'bulletproofs',
     proofType: 'gci_threshold',
-    publicInputs: [
-      threshold.toString(),
-      commitment,
-      await hash(entityId, 'SHA256'),
-    ],
+    publicInputs: [threshold.toString(), commitment, await hash(entityId, 'SHA256')],
     proof: base64Encode(rangeProof),
     verificationKeyId: 'bulletproofs-gci-v1',
     created: new Date().toISOString(),
@@ -932,7 +920,7 @@ export interface AmountRangeProof {
 export interface IZKVerifier {
   /** Verify a ZK proof */
   verify(proof: ZKProof): Promise<boolean>;
-  
+
   /** Get verification key for proof type */
   getVerificationKey(proofType: string): Promise<Uint8Array>;
 }
@@ -950,10 +938,10 @@ import { z } from 'zod';
 export const BBSSignatureSchema = z.object({
   /** Signature value */
   signature: z.string(),
-  
+
   /** Number of messages signed */
   messageCount: z.number().int().positive(),
-  
+
   /** Public key used */
   publicKey: z.string(),
 });
@@ -964,13 +952,13 @@ export const BBSSignatureSchema = z.object({
 export const DisclosureProofSchema = z.object({
   /** Original BBS+ signature */
   originalSignature: BBSSignatureSchema,
-  
+
   /** Indices of disclosed attributes */
   disclosedIndices: z.array(z.number().int().nonnegative()),
-  
+
   /** Disclosed attribute values */
   disclosedValues: z.array(z.string()),
-  
+
   /** Zero-knowledge proof of remaining attributes */
   proof: z.string(),
 });
@@ -987,27 +975,25 @@ export async function createDisclosureProof(
 ): Promise<DisclosureProof> {
   // Get all attributes from credential
   const allAttributes = Object.keys(credential.credentialSubject);
-  
+
   // Determine which indices to disclose
-  const disclosedIndices = attributesToDisclose.map(attr => 
-    allAttributes.indexOf(attr)
-  ).filter(i => i >= 0);
-  
+  const disclosedIndices = attributesToDisclose
+    .map((attr) => allAttributes.indexOf(attr))
+    .filter((i) => i >= 0);
+
   // Get disclosed values
-  const disclosedValues = disclosedIndices.map(i => 
+  const disclosedValues = disclosedIndices.map((i) =>
     String(credential.credentialSubject[allAttributes[i]])
   );
-  
+
   // Generate BBS+ proof
   const proof = await bbsCreateProof({
     signature: credential.proof?.proofValue || '',
     publicKey: bbsKeyPair.publicKey,
-    messages: allAttributes.map(attr => 
-      String(credential.credentialSubject[attr])
-    ),
+    messages: allAttributes.map((attr) => String(credential.credentialSubject[attr])),
     disclosedIndices,
   });
-  
+
   return {
     originalSignature: {
       signature: credential.proof?.proofValue || '',
@@ -1081,10 +1067,10 @@ import { z } from 'zod';
  * Threat severity levels
  */
 export const ThreatSeveritySchema = z.enum([
-  'critical',  // System compromise, major financial loss
-  'high',      // Significant impact, data breach
-  'medium',    // Limited impact, service degradation
-  'low',       // Minimal impact, inconvenience
+  'critical', // System compromise, major financial loss
+  'high', // Significant impact, data breach
+  'medium', // Limited impact, service degradation
+  'low', // Minimal impact, inconvenience
 ]);
 
 /**
@@ -1092,10 +1078,10 @@ export const ThreatSeveritySchema = z.enum([
  */
 export const ThreatLikelihoodSchema = z.enum([
   'almost_certain', // >90% probability
-  'likely',         // 50-90% probability
-  'possible',       // 10-50% probability
-  'unlikely',       // 1-10% probability
-  'rare',           // <1% probability
+  'likely', // 50-90% probability
+  'possible', // 10-50% probability
+  'unlikely', // 1-10% probability
+  'rare', // <1% probability
 ]);
 
 /**
@@ -1113,29 +1099,31 @@ export const ThreatSchema = z.object({
     'governance',
   ]),
   description: z.string(),
-  
+
   // Risk assessment
   severity: ThreatSeveritySchema,
   likelihood: ThreatLikelihoodSchema,
   riskScore: z.number().min(1).max(25), // severity × likelihood
-  
+
   // Attack details
   attackVector: z.string(),
   prerequisites: z.array(z.string()),
   affectedComponents: z.array(z.string()),
-  
+
   // Mitigations
-  mitigations: z.array(z.object({
-    id: z.string(),
-    description: z.string(),
-    effectiveness: z.enum(['full', 'partial', 'detection_only']),
-    implemented: z.boolean(),
-  })),
-  
+  mitigations: z.array(
+    z.object({
+      id: z.string(),
+      description: z.string(),
+      effectiveness: z.enum(['full', 'partial', 'detection_only']),
+      implemented: z.boolean(),
+    })
+  ),
+
   // Detection
   indicators: z.array(z.string()),
   detectionMethods: z.array(z.string()),
-  
+
   // References
   cweId: z.string().optional(), // Common Weakness Enumeration
   owaspId: z.string().optional(), // OWASP reference
@@ -1285,21 +1273,21 @@ export const EconomicThreats: Threat[] = [
 
 ### 8.5.3 Risk Matrix
 
-| Threat ID | Name | Severity | Likelihood | Risk Score | Mitigated |
-|-----------|------|----------|------------|------------|-----------|
-| T1.1 | Identity Spoofing | Critical | Possible | 15 | ✅ Yes |
-| T1.2 | Credential Theft | High | Likely | 16 | ✅ Yes |
-| T1.3 | Biometric Replay | High | Unlikely | 8 | ✅ Yes |
-| T1.4 | Sybil Attacks | High | Possible | 12 | ✅ Yes |
-| T2.1 | Data Tampering | Critical | Unlikely | 10 | ✅ Yes |
-| T2.2 | False Attestations | High | Possible | 12 | ✅ Yes |
-| T2.3 | Replay Attacks | Medium | Possible | 6 | ✅ Yes |
-| T3.1 | Unauthorized Access | High | Likely | 16 | ✅ Yes |
-| T3.2 | Traffic Analysis | Medium | Likely | 8 | ⚠️ Partial |
-| T4.1 | Denial of Service | High | Likely | 16 | ✅ Yes |
-| T5.1 | Double Spending | Critical | Possible | 15 | ✅ Yes |
-| T5.2 | Front-Running | Medium | Unlikely | 4 | ✅ Yes |
-| T6.1 | Validator Collusion | High | Unlikely | 8 | ✅ Yes |
+| Threat ID | Name                | Severity | Likelihood | Risk Score | Mitigated  |
+| --------- | ------------------- | -------- | ---------- | ---------- | ---------- |
+| T1.1      | Identity Spoofing   | Critical | Possible   | 15         | ✅ Yes     |
+| T1.2      | Credential Theft    | High     | Likely     | 16         | ✅ Yes     |
+| T1.3      | Biometric Replay    | High     | Unlikely   | 8          | ✅ Yes     |
+| T1.4      | Sybil Attacks       | High     | Possible   | 12         | ✅ Yes     |
+| T2.1      | Data Tampering      | Critical | Unlikely   | 10         | ✅ Yes     |
+| T2.2      | False Attestations  | High     | Possible   | 12         | ✅ Yes     |
+| T2.3      | Replay Attacks      | Medium   | Possible   | 6          | ✅ Yes     |
+| T3.1      | Unauthorized Access | High     | Likely     | 16         | ✅ Yes     |
+| T3.2      | Traffic Analysis    | Medium   | Likely     | 8          | ⚠️ Partial |
+| T4.1      | Denial of Service   | High     | Likely     | 16         | ✅ Yes     |
+| T5.1      | Double Spending     | Critical | Possible   | 15         | ✅ Yes     |
+| T5.2      | Front-Running       | Medium   | Unlikely   | 4          | ✅ Yes     |
+| T6.1      | Validator Collusion | High     | Unlikely   | 8          | ✅ Yes     |
 
 ---
 
@@ -1322,12 +1310,12 @@ export const RoleSchema = z.enum([
   'vault_operator',
   'refiner',
   'buyer',
-  
+
   // Operational roles
   'inspector',
   'validator',
   'auditor',
-  
+
   // Administrative roles
   'government_official',
   'system_admin',
@@ -1344,30 +1332,30 @@ export const PermissionSchema = z.enum([
   'identity:update',
   'identity:delete',
   'identity:verify',
-  
+
   // Assets
   'asset:create',
   'asset:read',
   'asset:transfer',
   'asset:verify',
-  
+
   // Compliance
   'gci:read',
   'gci:calculate',
   'gci:appeal',
   'gci:approve_appeal',
-  
+
   // Settlement
   'escrow:create',
   'escrow:fund',
   'escrow:release',
   'escrow:dispute',
   'escrow:resolve_dispute',
-  
+
   // Validation
   'consensus:vote',
   'consensus:propose',
-  
+
   // Administration
   'system:configure',
   'system:audit',
@@ -1388,7 +1376,7 @@ export const RolePermissions: Record<string, string[]> = {
     'escrow:create',
     'escrow:fund',
   ],
-  
+
   rco: [
     'identity:read',
     'identity:update',
@@ -1402,7 +1390,7 @@ export const RolePermissions: Record<string, string[]> = {
     'escrow:fund',
     'escrow:release',
   ],
-  
+
   validator: [
     'identity:read',
     'identity:verify',
@@ -1413,7 +1401,7 @@ export const RolePermissions: Record<string, string[]> = {
     'consensus:vote',
     'consensus:propose',
   ],
-  
+
   government_official: [
     'identity:read',
     'asset:read',
@@ -1423,12 +1411,8 @@ export const RolePermissions: Record<string, string[]> = {
     'escrow:resolve_dispute',
     'system:audit',
   ],
-  
-  system_admin: [
-    'system:configure',
-    'system:audit',
-    'system:emergency',
-  ],
+
+  system_admin: ['system:configure', 'system:audit', 'system:emergency'],
 };
 
 /**
@@ -1440,18 +1424,18 @@ export function hasPermission(
   context?: { jurisdiction?: string; resource?: string }
 ): boolean {
   const permissions = RolePermissions[role] || [];
-  
+
   // Check direct permission
   if (permissions.includes(permission)) {
     return true;
   }
-  
+
   // Check wildcard permissions
   const [category] = permission.split(':');
   if (permissions.includes(`${category}:*`)) {
     return true;
   }
-  
+
   return false;
 }
 ```
@@ -1469,7 +1453,7 @@ export const PolicySchema = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
-  
+
   // Subject attributes (who)
   subject: z.object({
     roles: z.array(RoleSchema).optional(),
@@ -1477,32 +1461,36 @@ export const PolicySchema = z.object({
     gciMinimum: z.number().optional(),
     verified: z.boolean().optional(),
   }),
-  
+
   // Resource attributes (what)
   resource: z.object({
     types: z.array(z.string()).optional(),
     jurisdictions: z.array(z.string()).optional(),
     sensitivity: z.enum(['public', 'internal', 'confidential', 'restricted']).optional(),
   }),
-  
+
   // Action attributes (how)
   action: z.object({
     operations: z.array(PermissionSchema),
   }),
-  
+
   // Environment attributes (when/where)
-  environment: z.object({
-    timeWindow: z.object({
-      start: z.string().optional(),
-      end: z.string().optional(),
-    }).optional(),
-    ipAllowlist: z.array(z.string()).optional(),
-    mfaRequired: z.boolean().optional(),
-  }).optional(),
-  
+  environment: z
+    .object({
+      timeWindow: z
+        .object({
+          start: z.string().optional(),
+          end: z.string().optional(),
+        })
+        .optional(),
+      ipAllowlist: z.array(z.string()).optional(),
+      mfaRequired: z.boolean().optional(),
+    })
+    .optional(),
+
   // Effect
   effect: z.enum(['allow', 'deny']),
-  
+
   // Priority (higher = evaluated first)
   priority: z.number().int().default(0),
 });
@@ -1524,13 +1512,13 @@ export interface PolicyEvaluation {
  */
 export class PolicyEngine {
   private policies: Policy[] = [];
-  
+
   addPolicy(policy: Policy): void {
     this.policies.push(policy);
     // Sort by priority (descending)
     this.policies.sort((a, b) => b.priority - a.priority);
   }
-  
+
   evaluate(request: AccessRequest): PolicyEvaluation {
     for (const policy of this.policies) {
       if (this.matchesPolicy(request, policy)) {
@@ -1542,55 +1530,56 @@ export class PolicyEngine {
         };
       }
     }
-    
+
     // Default deny
     return {
       allowed: false,
       reason: 'No matching policy found (default deny)',
     };
   }
-  
+
   private matchesPolicy(request: AccessRequest, policy: Policy): boolean {
     // Check subject attributes
     if (policy.subject.roles && !policy.subject.roles.includes(request.subject.role as any)) {
       return false;
     }
-    
-    if (policy.subject.jurisdictions && 
-        !policy.subject.jurisdictions.includes(request.subject.jurisdiction)) {
+
+    if (
+      policy.subject.jurisdictions &&
+      !policy.subject.jurisdictions.includes(request.subject.jurisdiction)
+    ) {
       return false;
     }
-    
-    if (policy.subject.gciMinimum && 
-        (request.subject.gciScore ?? 0) < policy.subject.gciMinimum) {
+
+    if (policy.subject.gciMinimum && (request.subject.gciScore ?? 0) < policy.subject.gciMinimum) {
       return false;
     }
-    
+
     // Check resource attributes
     if (policy.resource.types && !policy.resource.types.includes(request.resource.type)) {
       return false;
     }
-    
+
     // Check action
     if (!policy.action.operations.includes(request.action as any)) {
       return false;
     }
-    
+
     // Check environment
     if (policy.environment?.mfaRequired && !request.environment.mfaVerified) {
       return false;
     }
-    
+
     return true;
   }
-  
+
   private getObligations(policy: Policy): string[] {
     const obligations: string[] = [];
-    
+
     if (policy.environment?.mfaRequired) {
       obligations.push('mfa_verification');
     }
-    
+
     return obligations;
   }
 }
@@ -1623,12 +1612,12 @@ interface AccessRequest {
 
 ### 8.7.1 Data Classification
 
-| Classification | Description | Examples | Controls |
-|----------------|-------------|----------|----------|
-| **Public** | No restrictions | Protocol specs, public APIs | None |
-| **Internal** | Business sensitive | Aggregate statistics, logs | Access control |
-| **Confidential** | User data | TradePass profiles, GCI scores | Encryption + access control |
-| **Restricted** | Highly sensitive | Private keys, biometrics, financial | HSM + encryption + audit |
+| Classification   | Description        | Examples                            | Controls                    |
+| ---------------- | ------------------ | ----------------------------------- | --------------------------- |
+| **Public**       | No restrictions    | Protocol specs, public APIs         | None                        |
+| **Internal**     | Business sensitive | Aggregate statistics, logs          | Access control              |
+| **Confidential** | User data          | TradePass profiles, GCI scores      | Encryption + access control |
+| **Restricted**   | Highly sensitive   | Private keys, biometrics, financial | HSM + encryption + audit    |
 
 ### 8.7.2 Encryption at Rest
 
@@ -1646,26 +1635,21 @@ export const EncryptionAtRestConfig = {
     keyRotationDays: 90,
     keySource: 'HSM',
   },
-  
+
   // Field-level encryption (for sensitive fields)
   fieldLevel: {
     enabled: true,
-    fields: [
-      'biometric_template',
-      'private_key',
-      'financial_account',
-      'personal_identifier',
-    ],
+    fields: ['biometric_template', 'private_key', 'financial_account', 'personal_identifier'],
     algorithm: 'AES-256-GCM',
   },
-  
+
   // Backup encryption
   backup: {
     enabled: true,
     algorithm: 'AES-256-GCM',
     keySource: 'HSM',
   },
-  
+
   // Log encryption (for sensitive logs)
   logs: {
     enabled: true,
@@ -1680,42 +1664,38 @@ export const EncryptionAtRestConfig = {
 export class FieldEncryptor {
   constructor(
     private readonly encryptor: IEncryptor,
-    private readonly sensitiveFields: string[],
+    private readonly sensitiveFields: string[]
   ) {}
-  
-  async encryptSensitiveFields<T extends Record<string, unknown>>(
-    data: T
-  ): Promise<T> {
+
+  async encryptSensitiveFields<T extends Record<string, unknown>>(data: T): Promise<T> {
     const result = { ...data };
-    
+
     for (const field of this.sensitiveFields) {
       if (field in result && result[field] !== null) {
         const plaintext = JSON.stringify(result[field]);
-        const encrypted = await this.encryptor.encrypt(
-          new TextEncoder().encode(plaintext)
-        );
+        const encrypted = await this.encryptor.encrypt(new TextEncoder().encode(plaintext));
         result[field] = { __encrypted: true, data: encrypted } as any;
       }
     }
-    
+
     return result;
   }
-  
-  async decryptSensitiveFields<T extends Record<string, unknown>>(
-    data: T
-  ): Promise<T> {
+
+  async decryptSensitiveFields<T extends Record<string, unknown>>(data: T): Promise<T> {
     const result = { ...data };
-    
+
     for (const field of this.sensitiveFields) {
-      if (field in result && 
-          typeof result[field] === 'object' && 
-          (result[field] as any)?.__encrypted) {
+      if (
+        field in result &&
+        typeof result[field] === 'object' &&
+        (result[field] as any)?.__encrypted
+      ) {
         const encrypted = (result[field] as any).data;
         const decrypted = await this.encryptor.decrypt(encrypted);
         result[field] = JSON.parse(new TextDecoder().decode(decrypted));
       }
     }
-    
+
     return result;
   }
 }
@@ -1732,14 +1712,14 @@ export class FieldEncryptor {
 export const TLSConfig = {
   // Minimum TLS version
   minVersion: 'TLSv1.3',
-  
+
   // Allowed cipher suites (TLS 1.3)
   cipherSuites: [
     'TLS_AES_256_GCM_SHA384',
     'TLS_CHACHA20_POLY1305_SHA256',
     'TLS_AES_128_GCM_SHA256',
   ],
-  
+
   // Certificate requirements
   certificates: {
     minKeySize: 2048, // RSA
@@ -1748,13 +1728,13 @@ export const TLSConfig = {
     maxValidityDays: 397, // 13 months
     requireOCSPStapling: true,
   },
-  
+
   // Client certificate authentication (mTLS)
   clientCerts: {
     required: true, // For internal services
     optional: false, // For external clients
   },
-  
+
   // HSTS configuration
   hsts: {
     enabled: true,
@@ -1777,7 +1757,7 @@ export const ServiceMeshConfig = {
       intervalHours: 24,
     },
   },
-  
+
   // Service identity (SPIFFE)
   identity: {
     format: 'spiffe://gtcx.org/<service>/<instance>',
@@ -1801,28 +1781,28 @@ export const DataRetentionPolicy = {
     inactive: '2 years',
     deleted: '30 days',
   },
-  
+
   // Transaction data
   transactions: {
     completed: '7 years', // Regulatory requirement
     failed: '90 days',
     pending: '7 days',
   },
-  
+
   // Audit logs
   auditLogs: {
     security: '7 years',
     operational: '1 year',
     debug: '30 days',
   },
-  
+
   // Biometric data
   biometrics: {
     templateHash: 'indefinite', // Only hash stored
     rawCapture: '0', // Never stored
     liveness: '24 hours',
   },
-  
+
   // Session data
   sessions: {
     active: '24 hours',
@@ -1838,19 +1818,19 @@ export function anonymizeForAnalytics<T extends Record<string, unknown>>(
   config: AnonymizationConfig
 ): T {
   const result = { ...data };
-  
+
   // Remove PII fields
   for (const field of config.removeFields) {
     delete result[field];
   }
-  
+
   // Hash identifying fields
   for (const field of config.hashFields) {
     if (field in result) {
       result[field] = hash(String(result[field]), 'SHA256') as any;
     }
   }
-  
+
   // Generalize location
   if (config.generalizeLocation && 'coordinates' in result) {
     const coords = result.coordinates as { latitude: number; longitude: number };
@@ -1860,7 +1840,7 @@ export function anonymizeForAnalytics<T extends Record<string, unknown>>(
       longitude: Math.round(coords.longitude * 100) / 100,
     } as any;
   }
-  
+
   // Generalize timestamps
   if (config.generalizeTimestamps) {
     for (const field of ['createdAt', 'updatedAt', 'timestamp']) {
@@ -1872,7 +1852,7 @@ export function anonymizeForAnalytics<T extends Record<string, unknown>>(
       }
     }
   }
-  
+
   return result;
 }
 
@@ -1911,10 +1891,10 @@ export const SecurityEventCategorySchema = z.enum([
  * Security event severity
  */
 export const SecurityEventSeveritySchema = z.enum([
-  'critical',  // Immediate action required
-  'high',      // Action required within 1 hour
-  'medium',    // Action required within 24 hours
-  'low',       // Informational
+  'critical', // Immediate action required
+  'high', // Action required within 1 hour
+  'medium', // Action required within 24 hours
+  'low', // Informational
 ]);
 
 /**
@@ -1923,14 +1903,14 @@ export const SecurityEventSeveritySchema = z.enum([
 export const SecurityEventSchema = z.object({
   eventId: z.string().uuid(),
   timestamp: z.string().datetime(),
-  
+
   category: SecurityEventCategorySchema,
   severity: SecurityEventSeveritySchema,
-  
+
   // Event details
   eventType: z.string(),
   description: z.string(),
-  
+
   // Actor information
   actor: z.object({
     type: z.enum(['user', 'service', 'system', 'unknown']),
@@ -1938,19 +1918,21 @@ export const SecurityEventSchema = z.object({
     ip: z.string().optional(),
     userAgent: z.string().optional(),
   }),
-  
+
   // Target information
-  target: z.object({
-    type: z.string(),
-    id: z.string(),
-  }).optional(),
-  
+  target: z
+    .object({
+      type: z.string(),
+      id: z.string(),
+    })
+    .optional(),
+
   // Outcome
   outcome: z.enum(['success', 'failure', 'blocked', 'unknown']),
-  
+
   // Additional context
   context: z.record(z.string(), z.unknown()).optional(),
-  
+
   // Correlation
   traceId: z.string().optional(),
   sessionId: z.string().optional(),
@@ -1969,22 +1951,22 @@ export const SecurityEventTypes = {
   AUTH_MFA_REQUIRED: 'auth.mfa_required',
   AUTH_MFA_SUCCESS: 'auth.mfa_success',
   AUTH_MFA_FAILURE: 'auth.mfa_failure',
-  
+
   // Authorization events
   AUTHZ_DENIED: 'authz.denied',
   AUTHZ_PRIVILEGE_ESCALATION: 'authz.privilege_escalation',
-  
+
   // Data access events
   DATA_ACCESS_SENSITIVE: 'data.access_sensitive',
   DATA_EXPORT: 'data.export',
   DATA_MODIFICATION: 'data.modification',
   DATA_DELETION: 'data.deletion',
-  
+
   // Cryptographic events
   CRYPTO_KEY_GENERATED: 'crypto.key_generated',
   CRYPTO_KEY_ROTATED: 'crypto.key_rotated',
   CRYPTO_SIGNATURE_INVALID: 'crypto.signature_invalid',
-  
+
   // System events
   SYSTEM_CONFIG_CHANGE: 'system.config_change',
   SYSTEM_EMERGENCY_MODE: 'system.emergency_mode',
@@ -2006,48 +1988,48 @@ export const SecurityMetrics = {
     help: 'Total authentication attempts',
     labelNames: ['method', 'outcome'],
   },
-  
+
   authentication_latency_seconds: {
     name: 'gtcx_auth_latency_seconds',
     help: 'Authentication latency in seconds',
     labelNames: ['method'],
     buckets: [0.1, 0.25, 0.5, 1, 2.5, 5],
   },
-  
+
   // Authorization metrics
   authorization_decisions_total: {
     name: 'gtcx_authz_decisions_total',
     help: 'Total authorization decisions',
     labelNames: ['outcome', 'resource_type'],
   },
-  
+
   // Cryptographic metrics
   crypto_operations_total: {
     name: 'gtcx_crypto_operations_total',
     help: 'Total cryptographic operations',
     labelNames: ['operation', 'algorithm'],
   },
-  
+
   crypto_key_rotations_total: {
     name: 'gtcx_crypto_key_rotations_total',
     help: 'Total key rotations',
     labelNames: ['key_type'],
   },
-  
+
   // Security events
   security_events_total: {
     name: 'gtcx_security_events_total',
     help: 'Total security events',
     labelNames: ['category', 'severity', 'event_type'],
   },
-  
+
   // Active sessions
   active_sessions: {
     name: 'gtcx_active_sessions',
     help: 'Current active sessions',
     labelNames: ['role'],
   },
-  
+
   // Failed attempts (for rate limiting)
   failed_attempts: {
     name: 'gtcx_failed_attempts',
@@ -2078,7 +2060,7 @@ groups:
           description: >
             Authentication failure rate is {{ $value | humanizePercentage }} 
             over the last 5 minutes.
-      
+
       # Critical: Privilege escalation attempt
       - alert: PrivilegeEscalationAttempt
         expr: |
@@ -2092,7 +2074,7 @@ groups:
           summary: Privilege escalation attempt detected
           description: >
             {{ $value }} privilege escalation attempts in the last 5 minutes.
-      
+
       # High: Unusual data export
       - alert: UnusualDataExport
         expr: |
@@ -2106,7 +2088,7 @@ groups:
           summary: Unusual data export activity
           description: >
             {{ $value }} data exports in the last hour (threshold: 100).
-      
+
       # High: HSM operation failure
       - alert: HSMOperationFailure
         expr: |
@@ -2120,7 +2102,7 @@ groups:
           summary: HSM operation failure
           description: >
             {{ $value }} HSM operation failures in the last 5 minutes.
-      
+
       # Medium: Key rotation overdue
       - alert: KeyRotationOverdue
         expr: |
@@ -2140,12 +2122,12 @@ groups:
 
 ### 8.9.1 Incident Classification
 
-| Severity | Description | Response Time | Examples |
-|----------|-------------|---------------|----------|
-| **P1 Critical** | System compromise, data breach | 15 minutes | Key compromise, unauthorized access |
-| **P2 High** | Significant security impact | 1 hour | Failed attacks, anomalies |
-| **P3 Medium** | Limited impact | 4 hours | Policy violations, misconfigurations |
-| **P4 Low** | Minimal impact | 24 hours | False positives, minor issues |
+| Severity        | Description                    | Response Time | Examples                             |
+| --------------- | ------------------------------ | ------------- | ------------------------------------ |
+| **P1 Critical** | System compromise, data breach | 15 minutes    | Key compromise, unauthorized access  |
+| **P2 High**     | Significant security impact    | 1 hour        | Failed attacks, anomalies            |
+| **P3 Medium**   | Limited impact                 | 4 hours       | Policy violations, misconfigurations |
+| **P4 Low**      | Minimal impact                 | 24 hours      | False positives, minor issues        |
 
 ### 8.9.2 Response Procedures
 
@@ -2250,13 +2232,13 @@ export const EmergencyContacts = {
 
 ### 8.10.1 Regulatory Alignment
 
-| Regulation | Scope | GTCX Compliance |
-|------------|-------|-----------------|
-| **GDPR** | EU data protection | Data minimization, consent, deletion rights |
-| **SOC 2 Type II** | Security controls | Annual audit certification |
-| **ISO 27001** | Information security | ISMS implementation |
-| **PCI DSS** | Payment data | Tokenization, encryption, access control |
-| **OWASP ASVS** | Application security | Level 2 compliance target |
+| Regulation        | Scope                | GTCX Compliance                             |
+| ----------------- | -------------------- | ------------------------------------------- |
+| **GDPR**          | EU data protection   | Data minimization, consent, deletion rights |
+| **SOC 2 Type II** | Security controls    | Annual audit certification                  |
+| **ISO 27001**     | Information security | ISMS implementation                         |
+| **PCI DSS**       | Payment data         | Tokenization, encryption, access control    |
+| **OWASP ASVS**    | Application security | Level 2 compliance target                   |
 
 ### 8.10.2 Audit Trail
 
@@ -2270,7 +2252,7 @@ import { z } from 'zod';
 export const AuditLogSchema = z.object({
   logId: z.string().uuid(),
   timestamp: z.string().datetime(),
-  
+
   // Who
   actor: z.object({
     type: z.enum(['user', 'service', 'system']),
@@ -2278,26 +2260,28 @@ export const AuditLogSchema = z.object({
     role: z.string().optional(),
     ip: z.string().optional(),
   }),
-  
+
   // What
   action: z.string(),
   resource: z.object({
     type: z.string(),
     id: z.string(),
   }),
-  
+
   // How
   method: z.string().optional(),
-  
+
   // Result
   outcome: z.enum(['success', 'failure', 'partial']),
-  
+
   // Before/after for modifications
-  changes: z.object({
-    before: z.record(z.string(), z.unknown()).optional(),
-    after: z.record(z.string(), z.unknown()).optional(),
-  }).optional(),
-  
+  changes: z
+    .object({
+      before: z.record(z.string(), z.unknown()).optional(),
+      after: z.record(z.string(), z.unknown()).optional(),
+    })
+    .optional(),
+
   // Integrity
   hash: z.string(),
   previousHash: z.string(),
@@ -2310,45 +2294,45 @@ export type AuditLog = z.infer<typeof AuditLogSchema>;
  */
 export class AuditChain {
   private previousHash: string = 'genesis';
-  
+
   async append(entry: Omit<AuditLog, 'hash' | 'previousHash'>): Promise<AuditLog> {
     const entryWithChain = {
       ...entry,
       previousHash: this.previousHash,
       hash: '', // Will be calculated
     };
-    
+
     // Calculate hash of entry
     const canonical = JSON.stringify(entryWithChain, Object.keys(entryWithChain).sort());
     entryWithChain.hash = await hash(canonical, 'SHA256');
-    
+
     // Update chain
     this.previousHash = entryWithChain.hash;
-    
+
     return entryWithChain as AuditLog;
   }
-  
+
   async verify(entries: AuditLog[]): Promise<boolean> {
     let expectedPreviousHash = 'genesis';
-    
+
     for (const entry of entries) {
       // Verify chain link
       if (entry.previousHash !== expectedPreviousHash) {
         return false;
       }
-      
+
       // Verify entry hash
       const entryForHash = { ...entry, hash: '' };
       const canonical = JSON.stringify(entryForHash, Object.keys(entryForHash).sort());
       const calculatedHash = await hash(canonical, 'SHA256');
-      
+
       if (entry.hash !== calculatedHash) {
         return false;
       }
-      
+
       expectedPreviousHash = entry.hash;
     }
-    
+
     return true;
   }
 }
@@ -2360,34 +2344,34 @@ export class AuditChain {
 
 ### 8.11.1 Security Service Interfaces
 
-| Service | Security Functions | Integration |
-|---------|-------------------|-------------|
+| Service        | Security Functions                           | Integration             |
+| -------------- | -------------------------------------------- | ----------------------- |
 | **TradePass™** | Identity verification, credential management | Authentication provider |
-| **GCI™** | Score-based access control | Authorization input |
-| **PvP™** | Escrow security, payment protection | Transaction security |
-| **PANX™** | Consensus security, validator auth | Multi-party security |
+| **GCI™**       | Score-based access control                   | Authorization input     |
+| **PvP™**       | Escrow security, payment protection          | Transaction security    |
+| **PANX™**      | Consensus security, validator auth           | Multi-party security    |
 
 ### 8.11.2 External Integrations
 
-| System | Purpose | Security Considerations |
-|--------|---------|------------------------|
-| **HSM** | Key storage | mTLS, access control |
-| **SIEM** | Log aggregation | Encrypted transport |
-| **Identity Provider** | Federation | OIDC, SAML |
-| **Threat Intelligence** | Threat feeds | API authentication |
+| System                  | Purpose         | Security Considerations |
+| ----------------------- | --------------- | ----------------------- |
+| **HSM**                 | Key storage     | mTLS, access control    |
+| **SIEM**                | Log aggregation | Encrypted transport     |
+| **Identity Provider**   | Federation      | OIDC, SAML              |
+| **Threat Intelligence** | Threat feeds    | API authentication      |
 
 ---
 
 ## 8.12 Performance Metrics
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| **Authentication latency** | <500ms | P99 response time |
-| **Signature verification** | <10ms | Per-operation timing |
-| **Encryption throughput** | >100MB/s | AES-256-GCM |
-| **HSM operations** | >1000/s | Operations per second |
-| **ZK proof generation** | <5s | Complex proofs |
-| **ZK proof verification** | <100ms | Verification time |
+| Metric                     | Target   | Measurement           |
+| -------------------------- | -------- | --------------------- |
+| **Authentication latency** | <500ms   | P99 response time     |
+| **Signature verification** | <10ms    | Per-operation timing  |
+| **Encryption throughput**  | >100MB/s | AES-256-GCM           |
+| **HSM operations**         | >1000/s  | Operations per second |
+| **ZK proof generation**    | <5s      | Complex proofs        |
+| **ZK proof verification**  | <100ms   | Verification time     |
 
 ---
 
@@ -2395,71 +2379,71 @@ export class AuditChain {
 
 ### 8.13.1 Penetration Testing
 
-| Activity | Frequency | Scope | Provider |
-|----------|-----------|-------|----------|
-| Third-party penetration test | Annual | Full ecosystem (API, mobile, web, infrastructure) | Independent security firm |
-| Automated vulnerability scan | Quarterly | All deployed containers and endpoints | Trivy + OWASP ZAP |
-| Bug bounty program | Continuous | Public-facing APIs and protocol implementations | Managed platform (HackerOne or equivalent) |
-| Red team exercise | Annual | Social engineering, physical security, infrastructure | Internal or contracted |
+| Activity                     | Frequency  | Scope                                                 | Provider                                   |
+| ---------------------------- | ---------- | ----------------------------------------------------- | ------------------------------------------ |
+| Third-party penetration test | Annual     | Full ecosystem (API, mobile, web, infrastructure)     | Independent security firm                  |
+| Automated vulnerability scan | Quarterly  | All deployed containers and endpoints                 | Trivy + OWASP ZAP                          |
+| Bug bounty program           | Continuous | Public-facing APIs and protocol implementations       | Managed platform (HackerOne or equivalent) |
+| Red team exercise            | Annual     | Social engineering, physical security, infrastructure | Internal or contracted                     |
 
 ### 8.13.2 Dependency Security
 
-| Control | Implementation | SLA |
-|---------|---------------|-----|
-| Automated dependency scanning | Dependabot (GitHub) + Renovate for automated PRs | Continuous |
-| Critical CVE response | Security team alerted, patch deployed | 48 hours |
-| High CVE response | Ticket created, patch scheduled | 7 days |
-| Dependency audit | Review all transitive dependencies for risk | Quarterly |
-| License compliance | Verify all dependencies are MIT/Apache-2.0/BSD compatible | Per new dependency |
+| Control                       | Implementation                                            | SLA                |
+| ----------------------------- | --------------------------------------------------------- | ------------------ |
+| Automated dependency scanning | Dependabot (GitHub) + Renovate for automated PRs          | Continuous         |
+| Critical CVE response         | Security team alerted, patch deployed                     | 48 hours           |
+| High CVE response             | Ticket created, patch scheduled                           | 7 days             |
+| Dependency audit              | Review all transitive dependencies for risk               | Quarterly          |
+| License compliance            | Verify all dependencies are MIT/Apache-2.0/BSD compatible | Per new dependency |
 
 ### 8.13.3 Secrets Management
 
-| Principle | Implementation |
-|-----------|---------------|
-| No secrets in code | Pre-commit hook (TruffleHog) blocks commits containing secrets |
-| No secrets in config | Environment variables via Kubernetes secrets or Vault |
-| Secret storage | HashiCorp Vault for production, SOPS for development |
-| API key rotation | 90-day rotation, automated via Vault |
-| HSM key rotation | Annual rotation with Shamir key ceremony (3-of-5 threshold) |
-| Service credentials | Short-lived tokens (1 hour max TTL) via Vault |
-| Developer access | No production secrets accessible in development environments |
+| Principle            | Implementation                                                 |
+| -------------------- | -------------------------------------------------------------- |
+| No secrets in code   | Pre-commit hook (TruffleHog) blocks commits containing secrets |
+| No secrets in config | Environment variables via Kubernetes secrets or Vault          |
+| Secret storage       | HashiCorp Vault for production, SOPS for development           |
+| API key rotation     | 90-day rotation, automated via Vault                           |
+| HSM key rotation     | Annual rotation with Shamir key ceremony (3-of-5 threshold)    |
+| Service credentials  | Short-lived tokens (1 hour max TTL) via Vault                  |
+| Developer access     | No production secrets accessible in development environments   |
 
 ### 8.13.4 Zero-Trust Implementation Checklist
 
-| Layer | Control | Status |
-|-------|---------|--------|
-| Network | mTLS between all services (Istio/Linkerd service mesh) | Required |
-| API | API key per consumer, rate limiting per key | Required |
-| Authentication | JWT with short expiry (15 min access, 7 day refresh) | Required |
-| Authorization | RBAC at every service boundary, ABAC for data access | Required |
-| Input | Validation at all API boundaries (Zod schemas, request validation) | Required |
-| Output | Response filtering (no internal errors exposed, no stack traces) | Required |
-| Database | Per-service database credentials, no shared database access | Required |
-| Logging | Every auth event logged with correlation ID | Required |
-| Monitoring | Failed auth attempt tracking, anomaly detection on access patterns | Required |
+| Layer          | Control                                                            | Status   |
+| -------------- | ------------------------------------------------------------------ | -------- |
+| Network        | mTLS between all services (Istio/Linkerd service mesh)             | Required |
+| API            | API key per consumer, rate limiting per key                        | Required |
+| Authentication | JWT with short expiry (15 min access, 7 day refresh)               | Required |
+| Authorization  | RBAC at every service boundary, ABAC for data access               | Required |
+| Input          | Validation at all API boundaries (Zod schemas, request validation) | Required |
+| Output         | Response filtering (no internal errors exposed, no stack traces)   | Required |
+| Database       | Per-service database credentials, no shared database access        | Required |
+| Logging        | Every auth event logged with correlation ID                        | Required |
+| Monitoring     | Failed auth attempt tracking, anomaly detection on access patterns | Required |
 
 ### 8.13.5 Security Audit Trail
 
 Every security-relevant event produces an audit entry:
 
-| Event Category | Examples | Retention |
-|---------------|----------|-----------|
-| Authentication | Login, logout, token refresh, failed attempt | 1 year |
-| Authorization | Permission grant, deny, escalation attempt | 1 year |
-| Data access | Read/write of Restricted or Sovereign data | 7 years |
-| Configuration change | Secret rotation, permission change, policy update | 7 years |
-| Security incident | Vulnerability detection, breach attempt, anomaly alert | 7 years |
+| Event Category       | Examples                                               | Retention |
+| -------------------- | ------------------------------------------------------ | --------- |
+| Authentication       | Login, logout, token refresh, failed attempt           | 1 year    |
+| Authorization        | Permission grant, deny, escalation attempt             | 1 year    |
+| Data access          | Read/write of Restricted or Sovereign data             | 7 years   |
+| Configuration change | Secret rotation, permission change, policy update      | 7 years   |
+| Security incident    | Vulnerability detection, breach attempt, anomaly alert | 7 years   |
 
 Anomaly detection rules:
 
-| Trigger | Response |
-|---------|----------|
-| 5 failed auth attempts in 5 minutes | Account lockout + alert security team |
-| Access from new geographic location | Step-up authentication required |
-| Bulk data export request | Manual approval required from data governance lead |
-| Off-hours access to Sovereign data | Alert security team; access logged with justification requirement |
-| Privilege escalation attempt | Immediate alert; session terminated; incident ticket created |
+| Trigger                             | Response                                                          |
+| ----------------------------------- | ----------------------------------------------------------------- |
+| 5 failed auth attempts in 5 minutes | Account lockout + alert security team                             |
+| Access from new geographic location | Step-up authentication required                                   |
+| Bulk data export request            | Manual approval required from data governance lead                |
+| Off-hours access to Sovereign data  | Alert security team; access logged with justification requirement |
+| Privilege escalation attempt        | Immediate alert; session terminated; incident ticket created      |
 
 ---
 
-*End of Section 8*
+_End of Section 8_

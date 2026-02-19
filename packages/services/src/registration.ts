@@ -544,5 +544,3 @@ export class AssetLotRegistrationService {
     };
   }
 }
-
-export default AssetLotRegistrationService;

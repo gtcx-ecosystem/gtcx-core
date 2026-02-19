@@ -2,10 +2,10 @@
 
 ## Document Control
 
-| Attribute | Value |
-|-----------|-------|
-| **Type** | Research brief / position paper |
-| **Status** | Publication-Ready |
+| Attribute   | Value                                                                                                               |
+| ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Type**    | Research brief / position paper                                                                                     |
+| **Status**  | Publication-Ready                                                                                                   |
 | **Related** | [Cryptographic Verification](./cryptographic-verification.md), [Security Framework](../specs/security-framework.md) |
 
 ---
@@ -31,6 +31,7 @@ Blockchain's security properties emerge from its cryptographic primitives — ha
 ### 1.3 Research Context
 
 GTCX Protocol is deployed in West African commodity markets where:
+
 - 40% of users operate on feature phones (USSD only)
 - Connectivity is intermittent (6 distinct connectivity profiles)
 - Government regulators require administrative oversight and control
@@ -45,27 +46,30 @@ GTCX Protocol is deployed in West African commodity markets where:
 
 Both approaches rely on the same mathematical foundations:
 
-| Primitive | Blockchain Usage | GTCX Usage | Algorithm |
-|-----------|-----------------|------------|-----------|
-| Hash functions | Block linking, Merkle roots | Event chain linking, audit Merkle roots | SHA-256, SHA-3, Blake3 |
-| Digital signatures | Transaction authorization | Event signing, credential proofs | Ed25519, secp256k1 |
-| Merkle trees | Transaction inclusion proofs | Verification bundle proofs, selective disclosure | Binary Merkle with SHA-256 |
-| Key derivation | HD wallet key generation | Per-protocol key derivation from master identity | HKDF-SHA-256 |
-| Zero-knowledge proofs | Privacy layers (zk-rollups) | GCI score proofs, selective attribute disclosure | Schnorr, Bulletproofs, BBS+ |
+| Primitive             | Blockchain Usage             | GTCX Usage                                       | Algorithm                   |
+| --------------------- | ---------------------------- | ------------------------------------------------ | --------------------------- |
+| Hash functions        | Block linking, Merkle roots  | Event chain linking, audit Merkle roots          | SHA-256, SHA-3, Blake3      |
+| Digital signatures    | Transaction authorization    | Event signing, credential proofs                 | Ed25519, secp256k1          |
+| Merkle trees          | Transaction inclusion proofs | Verification bundle proofs, selective disclosure | Binary Merkle with SHA-256  |
+| Key derivation        | HD wallet key generation     | Per-protocol key derivation from master identity | HKDF-SHA-256                |
+| Zero-knowledge proofs | Privacy layers (zk-rollups)  | GCI score proofs, selective attribute disclosure | Schnorr, Bulletproofs, BBS+ |
 
 The cryptographic strength is identical: an Ed25519 signature provides 128-bit security whether it signs a blockchain transaction or an EventCore message.
 
 ### 2.2 Security Model Comparison
 
 **Trust assumptions:**
+
 - Blockchain: Honest majority of mining/staking power; network availability for finality
 - GTCX: Honest majority of identified validators (PANX); availability of at least one storage replica
 
 **Attack surface:**
+
 - Blockchain: 51% attacks, smart contract vulnerabilities, bridge exploits, MEV extraction
 - GTCX: Server compromise (mitigated by multi-party signatures), key theft (mitigated by HSM), insider threats (mitigated by separation of duties and audit trails)
 
 **Recovery mechanisms:**
+
 - Blockchain: Governance-driven forks (controversial, slow); contract upgrades (limited by immutability)
 - GTCX: Standard incident response; key rotation; service restoration from replicas; no-downtime upgrades
 
@@ -79,22 +83,22 @@ For a permissioned commodity verification system where validators are known gove
 
 Field research with government partners across Ghana, DRC, Rwanda, and Zambia identified consistent adoption barriers for blockchain:
 
-| Barrier | Frequency | GTCX Resolution |
-|---------|-----------|----------------|
-| Cryptocurrency association | 5/5 countries | No tokens, no wallets, no chain |
-| Legal status of records | 4/5 countries | Digital signature laws already apply |
-| Control and oversight | 5/5 countries | Full administrative access, audit dashboard |
-| Procurement complexity | 4/5 countries | Standard cloud services on existing frameworks |
-| IT staff training | 5/5 countries | REST APIs, SQL databases — familiar technology |
+| Barrier                    | Frequency     | GTCX Resolution                                |
+| -------------------------- | ------------- | ---------------------------------------------- |
+| Cryptocurrency association | 5/5 countries | No tokens, no wallets, no chain                |
+| Legal status of records    | 4/5 countries | Digital signature laws already apply           |
+| Control and oversight      | 5/5 countries | Full administrative access, audit dashboard    |
+| Procurement complexity     | 4/5 countries | Standard cloud services on existing frameworks |
+| IT staff training          | 5/5 countries | REST APIs, SQL databases — familiar technology |
 
 ### 3.2 End-User Experience
 
-| User Segment | Blockchain UX | GTCX UX |
-|-------------|--------------|---------|
-| Feature phone miners (40%) | Cannot use — no wallet, no smartphone | USSD service codes: `*384*2#` to verify a lot |
-| Government inspectors | Wallet management, gas fee complexity | TradePass credential + standard mobile app |
-| International buyers | API integration with blockchain nodes | Standard REST API with retry and circuit breaker |
-| Vault operators | Smart contract interaction | Web dashboard with familiar form inputs |
+| User Segment               | Blockchain UX                         | GTCX UX                                          |
+| -------------------------- | ------------------------------------- | ------------------------------------------------ |
+| Feature phone miners (40%) | Cannot use — no wallet, no smartphone | USSD service codes: `*384*2#` to verify a lot    |
+| Government inspectors      | Wallet management, gas fee complexity | TradePass credential + standard mobile app       |
+| International buyers       | API integration with blockchain nodes | Standard REST API with retry and circuit breaker |
+| Vault operators            | Smart contract interaction            | Web dashboard with familiar form inputs          |
 
 ### 3.3 Connectivity Constraints
 
@@ -106,22 +110,22 @@ Blockchain requires eventual network access for transaction finality. GTCX suppo
 
 ### 4.1 Throughput and Latency
 
-| Metric | Public Blockchain | Permissioned Blockchain | GTCX Infrastructure |
-|--------|------------------|------------------------|---------------------|
-| Throughput | 7–30 TPS | 1,000–3,000 TPS | 10,000+ TPS |
-| Confirmation latency | 10 min (Bitcoin), 12 sec (Ethereum) | 1–5 seconds | < 100 ms |
-| Offline support | None | None | 72 hours |
-| Feature phone support | None | None | USSD (140 bytes) |
+| Metric                | Public Blockchain                   | Permissioned Blockchain | GTCX Infrastructure |
+| --------------------- | ----------------------------------- | ----------------------- | ------------------- |
+| Throughput            | 7–30 TPS                            | 1,000–3,000 TPS         | 10,000+ TPS         |
+| Confirmation latency  | 10 min (Bitcoin), 12 sec (Ethereum) | 1–5 seconds             | < 100 ms            |
+| Offline support       | None                                | None                    | 72 hours            |
+| Feature phone support | None                                | None                    | USSD (140 bytes)    |
 
 ### 4.2 Total Cost of Ownership (5-Year Projection)
 
-| Cost Category | Blockchain Deployment | GTCX Deployment |
-|--------------|----------------------|-----------------|
-| Infrastructure | Node hosting, consensus overhead | Standard cloud (AWS/Azure/GCP) |
-| Per-transaction | Variable gas fees | Fixed infrastructure cost |
-| Development | Smart contract audits, specialized skills | Standard TypeScript/Node.js |
-| Upgrades | Governance votes, migration complexity | Standard CI/CD deployment |
-| Training | Blockchain concepts, wallet management | REST API, SQL — existing skills |
+| Cost Category   | Blockchain Deployment                     | GTCX Deployment                 |
+| --------------- | ----------------------------------------- | ------------------------------- |
+| Infrastructure  | Node hosting, consensus overhead          | Standard cloud (AWS/Azure/GCP)  |
+| Per-transaction | Variable gas fees                         | Fixed infrastructure cost       |
+| Development     | Smart contract audits, specialized skills | Standard TypeScript/Node.js     |
+| Upgrades        | Governance votes, migration complexity    | Standard CI/CD deployment       |
+| Training        | Blockchain concepts, wallet management    | REST API, SQL — existing skills |
 
 GTCX infrastructure costs are 60-80% lower than equivalent blockchain deployments based on comparable supply chain projects.
 
@@ -134,6 +138,7 @@ GTCX infrastructure costs are 60-80% lower than equivalent blockchain deployment
 Blockchain's "trustless" design reduces democratic accountability. When a government regulatory body cannot modify, audit, or override a system, that system undermines the sovereignty it claims to protect.
 
 GTCX preserves government sovereignty:
+
 - Regulators can audit any record via administrative API
 - Government inspectors (L4 verification) can override automated decisions
 - Data residency requirements are met through regional deployment
@@ -159,6 +164,7 @@ The GTCX architecture preserves full optionality:
 ### 6.2 Quantum Resistance
 
 Both approaches face the same quantum computing threat to current cryptographic primitives. GTCX's `@gtcx/crypto` package is designed for algorithm agility:
+
 - Post-quantum signature schemes (CRYSTALS-Dilithium, SPHINCS+) can be added without protocol changes
 - Key hierarchy supports algorithm rotation (see [Security Framework](../specs/security-framework.md) Section 8.2)
 - Dual-signing (classical + post-quantum) planned for high-value transactions
@@ -183,12 +189,14 @@ The right technology choice is the one that solves the problem for the people wh
 ## References
 
 ### Standards
+
 - NIST SP 800-186: Recommendations for Discrete Logarithm-Based Cryptography (Ed25519)
 - W3C Verifiable Credentials Data Model v2.0
 - W3C Decentralized Identifiers (DIDs) v1.0
 - IETF RFC 8032: Edwards-Curve Digital Signature Algorithm (EdDSA)
 
 ### Related GTCX Documents
+
 - [Security Framework](../specs/security-framework.md) — Full cryptographic specification
 - [Cryptographic Verification Architecture](./cryptographic-verification.md) — Implementation details
 - [EventCore Specification](../specs/eventcore.md) — Canonical event format with hash chain rules

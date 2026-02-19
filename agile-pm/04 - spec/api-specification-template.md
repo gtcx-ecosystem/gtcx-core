@@ -1,6 +1,7 @@
 # API Specification Template - [PROJECT_NAME]
 
 ## Document Information
+
 - **Project**: [PROJECT_NAME]
 - **API Version**: [VERSION]
 - **Document Version**: [DOC_VERSION]
@@ -10,22 +11,22 @@
 - **Reviewers**: [REVIEWER_LIST]
 - **Classification**: [INTERNAL/CONFIDENTIAL/PUBLIC]
 
-
 ## How to Use This Template
 
 ### Customization Instructions:
+
 1. **Replace all `[PLACEHOLDER]` text** with your project-specific information
 2. **Remove sections** that don't apply to your project
 3. **Add sections** specific to your project needs
 4. **Maintain the structure** for consistency across GTCX projects
 
 ### Required Sections:
+
 - **API Overview** - Always include
 - **Authentication & Authorization** - Always include
 - **Core Endpoints** - Always include
 - **Data Models** - Always include
 - **Error Handling** - Always include
-
 
 ## Table of Contents
 
@@ -40,16 +41,15 @@
 9. [Testing and Validation](#9-testing-and-validation)
 10. [Documentation and Support](#10-documentation-and-support)
 
-
 ## 1. API Overview
 
 ### 1.1 Base URLs
 
-| Environment | Base URL | Purpose |
-|------------|----------|---------|
-| Production | `[PRODUCTION_URL]` | Production deployment |
-| Staging | `[STAGING_URL]` | Pre-production validation |
-| Development | `[DEVELOPMENT_URL]` | Development testing |
+| Environment | Base URL            | Purpose                   |
+| ----------- | ------------------- | ------------------------- |
+| Production  | `[PRODUCTION_URL]`  | Production deployment     |
+| Staging     | `[STAGING_URL]`     | Pre-production validation |
+| Development | `[DEVELOPMENT_URL]` | Development testing       |
 
 ### 1.2 Protocol Requirements
 
@@ -61,13 +61,12 @@
 
 ### 1.3 Request Headers
 
-| Header | Required | Description | Example |
-|--------|----------|-------------|---------|
-| `Authorization` | [Yes/No] | [Description] | `[Example]` |
-| `X-Request-ID` | [Yes/No] | [Description] | `[Example]` |
+| Header              | Required | Description   | Example     |
+| ------------------- | -------- | ------------- | ----------- |
+| `Authorization`     | [Yes/No] | [Description] | `[Example]` |
+| `X-Request-ID`      | [Yes/No] | [Description] | `[Example]` |
 | `X-Idempotency-Key` | [Yes/No] | [Description] | `[Example]` |
-| `[CUSTOM_HEADER]` | [Yes/No] | [Description] | `[Example]` |
-
+| `[CUSTOM_HEADER]`   | [Yes/No] | [Description] | `[Example]` |
 
 ## 2. Authentication and Authorization
 
@@ -106,18 +105,18 @@ Content-Type: [CONTENT_TYPE]
 
 ### 2.3 Authorization Scopes
 
-| Scope | Description | Access Level |
-|-------|-------------|--------------|
+| Scope       | Description   | Access Level   |
+| ----------- | ------------- | -------------- |
 | `[SCOPE_1]` | [Description] | [Access Level] |
 | `[SCOPE_2]` | [Description] | [Access Level] |
 | `[SCOPE_3]` | [Description] | [Access Level] |
-
 
 ## 3. Core Endpoints
 
 ### 3.1 [RESOURCE_1] Endpoints
 
 #### GET /[RESOURCE_1]
+
 **Description**: [What this endpoint does]
 
 **Parameters**:
@@ -127,6 +126,7 @@ Content-Type: [CONTENT_TYPE]
 | `[PARAM_2]` | [Type] | [Yes/No] | [Description] |
 
 **Response**:
+
 ```json
 {
   "data": [
@@ -145,9 +145,11 @@ Content-Type: [CONTENT_TYPE]
 ```
 
 #### POST /[RESOURCE_1]
+
 **Description**: [What this endpoint does]
 
 **Request Body**:
+
 ```json
 {
   "[FIELD_1]": "[TYPE]",
@@ -157,6 +159,7 @@ Content-Type: [CONTENT_TYPE]
 ```
 
 **Response**:
+
 ```json
 {
   "data": {
@@ -172,6 +175,7 @@ Content-Type: [CONTENT_TYPE]
 ### 3.2 [RESOURCE_2] Endpoints
 
 #### GET /[RESOURCE_2]/{id}
+
 **Description**: [What this endpoint does]
 
 **Path Parameters**:
@@ -180,6 +184,7 @@ Content-Type: [CONTENT_TYPE]
 | `id` | [Type] | Yes | [Description] |
 
 **Response**:
+
 ```json
 {
   "data": {
@@ -189,7 +194,6 @@ Content-Type: [CONTENT_TYPE]
   }
 }
 ```
-
 
 ## 4. Data Models
 
@@ -207,6 +211,7 @@ interface [ENTITY_1] {
 ```
 
 **Field Descriptions**:
+
 - **id**: [Description]
 - **[FIELD_1]**: [Description]
 - **[FIELD_2]**: [Description]
@@ -226,6 +231,7 @@ interface [ENTITY_2] {
 ```
 
 **Field Descriptions**:
+
 - **id**: [Description]
 - **[FIELD_1]**: [Description]
 - **[FIELD_2]**: [Description]
@@ -234,6 +240,7 @@ interface [ENTITY_2] {
 ### 4.3 Common Models
 
 #### Pagination Model
+
 ```typescript
 interface PaginationResponse<T> {
   data: T[];
@@ -247,6 +254,7 @@ interface PaginationResponse<T> {
 ```
 
 #### Error Model
+
 ```typescript
 interface APIError {
   error: {
@@ -259,22 +267,21 @@ interface APIError {
 }
 ```
 
-
 ## 5. Error Handling
 
 ### 5.1 HTTP Status Codes
 
-| Status Code | Description | When to Use |
-|-------------|-------------|-------------|
-| `200` | OK | Successful GET requests |
-| `201` | Created | Successful POST requests |
-| `400` | Bad Request | Invalid request data |
-| `401` | Unauthorized | Missing or invalid authentication |
-| `403` | Forbidden | Insufficient permissions |
-| `404` | Not Found | Resource not found |
-| `422` | Unprocessable Entity | Validation errors |
-| `429` | Too Many Requests | Rate limit exceeded |
-| `500` | Internal Server Error | Server-side errors |
+| Status Code | Description           | When to Use                       |
+| ----------- | --------------------- | --------------------------------- |
+| `200`       | OK                    | Successful GET requests           |
+| `201`       | Created               | Successful POST requests          |
+| `400`       | Bad Request           | Invalid request data              |
+| `401`       | Unauthorized          | Missing or invalid authentication |
+| `403`       | Forbidden             | Insufficient permissions          |
+| `404`       | Not Found             | Resource not found                |
+| `422`       | Unprocessable Entity  | Validation errors                 |
+| `429`       | Too Many Requests     | Rate limit exceeded               |
+| `500`       | Internal Server Error | Server-side errors                |
 
 ### 5.2 Error Response Format
 
@@ -295,39 +302,37 @@ interface APIError {
 
 ### 5.3 Common Error Codes
 
-| Error Code | Description | HTTP Status |
-|------------|-------------|-------------|
+| Error Code  | Description   | HTTP Status   |
+| ----------- | ------------- | ------------- |
 | `[ERROR_1]` | [Description] | [Status Code] |
 | `[ERROR_2]` | [Description] | [Status Code] |
 | `[ERROR_3]` | [Description] | [Status Code] |
-
 
 ## 6. Rate Limiting and Quotas
 
 ### 6.1 Rate Limits
 
-| Endpoint | Rate Limit | Window | Description |
-|----------|------------|--------|-------------|
-| `GET /[RESOURCE_1]` | [LIMIT] requests | [WINDOW] | [Description] |
+| Endpoint             | Rate Limit       | Window   | Description   |
+| -------------------- | ---------------- | -------- | ------------- |
+| `GET /[RESOURCE_1]`  | [LIMIT] requests | [WINDOW] | [Description] |
 | `POST /[RESOURCE_1]` | [LIMIT] requests | [WINDOW] | [Description] |
-| `[ENDPOINT]` | [LIMIT] requests | [WINDOW] | [Description] |
+| `[ENDPOINT]`         | [LIMIT] requests | [WINDOW] | [Description] |
 
 ### 6.2 Quota Management
 
-| Plan | Daily Limit | Monthly Limit | Description |
-|------|-------------|---------------|-------------|
-| Free | [LIMIT] requests | [LIMIT] requests | [Description] |
-| Basic | [LIMIT] requests | [LIMIT] requests | [Description] |
+| Plan    | Daily Limit      | Monthly Limit    | Description   |
+| ------- | ---------------- | ---------------- | ------------- |
+| Free    | [LIMIT] requests | [LIMIT] requests | [Description] |
+| Basic   | [LIMIT] requests | [LIMIT] requests | [Description] |
 | Premium | [LIMIT] requests | [LIMIT] requests | [Description] |
 
 ### 6.3 Rate Limit Headers
 
-| Header | Description | Example |
-|--------|-------------|---------|
-| `X-RateLimit-Limit` | Requests per window | `100` |
-| `X-RateLimit-Remaining` | Remaining requests | `95` |
-| `X-RateLimit-Reset` | Window reset time | `1640995200` |
-
+| Header                  | Description         | Example      |
+| ----------------------- | ------------------- | ------------ |
+| `X-RateLimit-Limit`     | Requests per window | `100`        |
+| `X-RateLimit-Remaining` | Remaining requests  | `95`         |
+| `X-RateLimit-Reset`     | Window reset time   | `1640995200` |
 
 ## 7. Versioning Strategy
 
@@ -339,18 +344,17 @@ interface APIError {
 
 ### 7.2 Version Lifecycle
 
-| Version | Status | Release Date | End of Life | Description |
-|---------|--------|--------------|-------------|-------------|
-| `v1` | [STATUS] | [DATE] | [DATE] | [Description] |
-| `v2` | [STATUS] | [DATE] | [DATE] | [Description] |
-| `v3` | [STATUS] | [DATE] | [DATE] | [Description] |
+| Version | Status   | Release Date | End of Life | Description   |
+| ------- | -------- | ------------ | ----------- | ------------- |
+| `v1`    | [STATUS] | [DATE]       | [DATE]      | [Description] |
+| `v2`    | [STATUS] | [DATE]       | [DATE]      | [Description] |
+| `v3`    | [STATUS] | [DATE]       | [DATE]      | [Description] |
 
 ### 7.3 Breaking Changes Policy
 
 - **Major Version**: Breaking changes require new major version
 - **Minor Version**: New features, backward compatible
 - **Patch Version**: Bug fixes, backward compatible
-
 
 ## 8. Security Requirements
 
@@ -370,13 +374,12 @@ interface APIError {
 
 ### 8.3 Security Headers
 
-| Header | Value | Purpose |
-|--------|-------|---------|
+| Header                      | Value                                 | Purpose   |
+| --------------------------- | ------------------------------------- | --------- |
 | `Strict-Transport-Security` | `max-age=31536000; includeSubDomains` | [Purpose] |
-| `X-Content-Type-Options` | `nosniff` | [Purpose] |
-| `X-Frame-Options` | `DENY` | [Purpose] |
-| `X-XSS-Protection` | `1; mode=block` | [Purpose] |
-
+| `X-Content-Type-Options`    | `nosniff`                             | [Purpose] |
+| `X-Frame-Options`           | `DENY`                                | [Purpose] |
+| `X-XSS-Protection`          | `1; mode=block`                       | [Purpose] |
 
 ## 9. Testing and Validation
 
@@ -396,12 +399,11 @@ interface APIError {
 
 ### 9.3 Testing Scenarios
 
-| Scenario | Description | Expected Result |
-|----------|-------------|-----------------|
+| Scenario     | Description   | Expected Result   |
+| ------------ | ------------- | ----------------- |
 | [SCENARIO_1] | [Description] | [Expected Result] |
 | [SCENARIO_2] | [Description] | [Expected Result] |
 | [SCENARIO_3] | [Description] | [Expected Result] |
-
 
 ## 10. Documentation and Support
 
@@ -427,7 +429,6 @@ interface APIError {
 - **Error Logs**: [Error log access]
 - **Performance Metrics**: [Performance dashboard]
 
-
 ## Template Completion Checklist
 
 - **Project Name**: Replaced all `[PROJECT_NAME]` placeholders
@@ -443,10 +444,10 @@ interface APIError {
 - **Testing**: Defined testing approach
 - **Documentation**: Specified support and documentation
 
-
 ## API Specification Best Practices
 
 ### Design Principles
+
 1. **RESTful Design** - Follow REST principles consistently
 2. **Clear Naming** - Use descriptive, consistent endpoint names
 3. **Proper Status Codes** - Use appropriate HTTP status codes
@@ -454,11 +455,11 @@ interface APIError {
 5. **Versioning Strategy** - Plan for API evolution
 
 ### Common Mistakes to Avoid
+
 - [Missing] **Inconsistent naming** - Use consistent naming conventions
 - [Missing] **Poor error handling** - Provide clear, actionable error messages
 - [Missing] **Missing documentation** - Document all endpoints and parameters
 - [Missing] **No versioning plan** - Plan for API changes and evolution
 - [Missing] **Weak security** - Implement proper authentication and authorization
 
-
-*This template ensures consistent, professional API specification documentation across all GTCX projects. Customize it for your specific needs while maintaining the established structure and quality standards.*
+_This template ensures consistent, professional API specification documentation across all GTCX projects. Customize it for your specific needs while maintaining the established structure and quality standards._

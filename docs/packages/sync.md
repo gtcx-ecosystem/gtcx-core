@@ -57,14 +57,14 @@ const pending = await engine.getPendingChanges('tradepass');
 
 Each protocol has a default resolution strategy:
 
-| Protocol | Strategy | Rationale |
-|----------|----------|-----------|
+| Protocol  | Strategy          | Rationale                                      |
+| --------- | ----------------- | ---------------------------------------------- |
 | TradePass | `last-write-wins` | Most recent credential update is authoritative |
-| GeoTag | `append-only` | Location proofs are immutable, never overwrite |
-| VaultMark | `chain-validated` | Custody chain integrity must be maintained |
-| PvP | `highest-version` | Latest settlement state wins |
-| GCI | `highest-version` | Compliance scores use version numbers |
-| PANX | `server-wins` | Oracle prices are server-authoritative |
+| GeoTag    | `append-only`     | Location proofs are immutable, never overwrite |
+| VaultMark | `chain-validated` | Custody chain integrity must be maintained     |
+| PvP       | `highest-version` | Latest settlement state wins                   |
+| GCI       | `highest-version` | Compliance scores use version numbers          |
+| PANX      | `server-wins`     | Oracle prices are server-authoritative         |
 
 ### Manual Resolution
 
@@ -110,7 +110,7 @@ const storage: SyncStorage = {
   },
   async keys(prefix) {
     const all = await AsyncStorage.getAllKeys();
-    return all.filter(k => k.startsWith(prefix));
+    return all.filter((k) => k.startsWith(prefix));
   },
   // ... implement others
 };
@@ -122,9 +122,9 @@ const storage: SyncStorage = {
 import NetInfo from '@react-native-community/netinfo';
 
 const connectivity: ConnectivityProvider = {
-  isOnline: () => NetInfo.fetch().then(state => state.isConnected ?? false),
+  isOnline: () => NetInfo.fetch().then((state) => state.isConnected ?? false),
   onConnectivityChange: (callback) => {
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
       callback(state.isConnected ?? false);
     });
     return unsubscribe;
@@ -186,46 +186,46 @@ globalStrategyRegistry.register('my-custom', new MyCustomStrategy());
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
-| P1 Single Responsibility | Each class has one job |
-| P2 Type Safety | Full Zod validation, discriminated unions |
-| P4 Dependency Injection | Storage, connectivity, strategies injectable |
-| P8 Offline-First | **Core purpose** - changes tracked offline, synced when connected |
-| P9 Security | Changes include hashes, sources tracked |
-| P11 Versioning | Change versions for optimistic locking |
-| P12 Observability | All sync events emitted |
+| Principle                | Implementation                                                    |
+| ------------------------ | ----------------------------------------------------------------- |
+| P1 Single Responsibility | Each class has one job                                            |
+| P2 Type Safety           | Full Zod validation, discriminated unions                         |
+| P4 Dependency Injection  | Storage, connectivity, strategies injectable                      |
+| P8 Offline-First         | **Core purpose** - changes tracked offline, synced when connected |
+| P9 Security              | Changes include hashes, sources tracked                           |
+| P11 Versioning           | Change versions for optimistic locking                            |
+| P12 Observability        | All sync events emitted                                           |
 
 ## API Reference
 
 ### SyncEngine
 
-| Method | Description |
-|--------|-------------|
-| `start()` | Start the sync engine |
-| `stop()` | Stop the sync engine |
-| `registerProtocol(config)` | Register a protocol for syncing |
-| `trackChange(params)` | Track a local change |
-| `sync(protocol?)` | Trigger manual sync |
-| `getState()` | Get current sync state |
-| `getUnresolvedConflicts(protocol?)` | Get conflicts needing resolution |
-| `resolveManually(conflictId, value)` | Manually resolve a conflict |
+| Method                               | Description                      |
+| ------------------------------------ | -------------------------------- |
+| `start()`                            | Start the sync engine            |
+| `stop()`                             | Stop the sync engine             |
+| `registerProtocol(config)`           | Register a protocol for syncing  |
+| `trackChange(params)`                | Track a local change             |
+| `sync(protocol?)`                    | Trigger manual sync              |
+| `getState()`                         | Get current sync state           |
+| `getUnresolvedConflicts(protocol?)`  | Get conflicts needing resolution |
+| `resolveManually(conflictId, value)` | Manually resolve a conflict      |
 
 ### ChangeTracker
 
-| Method | Description |
-|--------|-------------|
-| `track(params)` | Record a new change |
-| `getPending(protocol?)` | Get pending changes |
-| `markSynced(changeIds)` | Mark changes as synced |
+| Method                    | Description               |
+| ------------------------- | ------------------------- |
+| `track(params)`           | Record a new change       |
+| `getPending(protocol?)`   | Get pending changes       |
+| `markSynced(changeIds)`   | Mark changes as synced    |
 | `clearPending(protocol?)` | Clear all pending changes |
 
 ### ConflictDetector
 
-| Method | Description |
-|--------|-------------|
-| `detect(local, remote)` | Detect conflicts between change sets |
-| `detectConflict(local, remote)` | Detect conflict between two changes |
+| Method                          | Description                          |
+| ------------------------------- | ------------------------------------ |
+| `detect(local, remote)`         | Detect conflicts between change sets |
+| `detectConflict(local, remote)` | Detect conflict between two changes  |
 
 ## Security
 

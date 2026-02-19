@@ -57,23 +57,23 @@ This tutorial guides you through deploying your own validator node.
 
 ### Minimum Requirements (Testnet)
 
-| Resource | Minimum | Recommended |
-|----------|---------|-------------|
-| CPU | 2 cores | 4 cores |
-| RAM | 4 GB | 8 GB |
-| Storage | 50 GB SSD | 100 GB SSD |
-| Network | 10 Mbps | 100 Mbps |
-| OS | Ubuntu 22.04+ | Ubuntu 24.04 |
+| Resource | Minimum       | Recommended  |
+| -------- | ------------- | ------------ |
+| CPU      | 2 cores       | 4 cores      |
+| RAM      | 4 GB          | 8 GB         |
+| Storage  | 50 GB SSD     | 100 GB SSD   |
+| Network  | 10 Mbps       | 100 Mbps     |
+| OS       | Ubuntu 22.04+ | Ubuntu 24.04 |
 
 ### Production Requirements
 
-| Resource | Minimum | Recommended |
-|----------|---------|-------------|
-| CPU | 8 cores | 16 cores |
-| RAM | 32 GB | 64 GB |
-| Storage | 500 GB NVMe | 1 TB NVMe |
-| Network | 1 Gbps | 10 Gbps |
-| HSM | Optional | Required |
+| Resource | Minimum     | Recommended |
+| -------- | ----------- | ----------- |
+| CPU      | 8 cores     | 16 cores    |
+| RAM      | 32 GB       | 64 GB       |
+| Storage  | 500 GB NVMe | 1 TB NVMe   |
+| Network  | 1 Gbps      | 10 Gbps     |
+| HSM      | Optional    | Required    |
 
 ---
 
@@ -158,7 +158,7 @@ Output:
 
    Node ID:     gtcx_node_a1b2c3d4e5f6...
    Public Key:  ed25519:7x8y9z...
-   
+
    ⚠️  IMPORTANT: Back up data/keys/ directory securely!
 
 ✅ Node identity created successfully
@@ -176,28 +176,28 @@ Edit `config/validator.yaml`:
 # Node Configuration
 node:
   # Your node's display name
-  moniker: "my-validator-node"
-  
+  moniker: 'my-validator-node'
+
   # Network to join
-  network: "testnet"  # Options: testnet, ghana, mainnet
-  
+  network: 'testnet' # Options: testnet, ghana, mainnet
+
   # Listen addresses
-  api_address: "0.0.0.0:8080"
-  p2p_address: "0.0.0.0:26656"
-  rpc_address: "0.0.0.0:26657"
+  api_address: '0.0.0.0:8080'
+  p2p_address: '0.0.0.0:26656'
+  rpc_address: '0.0.0.0:26657'
 
 # Validation settings
 validation:
   # Enable validation (requires stake)
   enabled: true
-  
+
   # Verification types this node supports
   capabilities:
     - tradepass
     - geotag
     - gci
     - vaultmark
-  
+
   # GeoTag verification settings
   geotag:
     # Maximum distance from claim to verify (km)
@@ -207,23 +207,23 @@ validation:
 
 # Database
 database:
-  host: "postgres"
+  host: 'postgres'
   port: 5432
-  name: "gtcx_validator"
-  user: "gtcx"
+  name: 'gtcx_validator'
+  user: 'gtcx'
   # Password from environment variable
-  password_env: "POSTGRES_PASSWORD"
+  password_env: 'POSTGRES_PASSWORD'
 
 # Logging
 logging:
-  level: "info"  # debug, info, warn, error
-  format: "json"
-  
+  level: 'info' # debug, info, warn, error
+  format: 'json'
+
 # Metrics
 metrics:
   enabled: true
   port: 9090
-  path: "/metrics"
+  path: '/metrics'
 
 # HSM (optional, recommended for production)
 hsm:
@@ -388,13 +388,13 @@ Metrics available at: http://localhost:9090/metrics
 
 Key metrics:
 
-| Metric | Description |
-|--------|-------------|
-| `gtcx_verifications_total` | Total verifications processed |
+| Metric                         | Description                    |
+| ------------------------------ | ------------------------------ |
+| `gtcx_verifications_total`     | Total verifications processed  |
 | `gtcx_verification_latency_ms` | Verification latency histogram |
-| `gtcx_peers_connected` | Number of connected peers |
-| `gtcx_block_height` | Current block height |
-| `gtcx_consensus_rounds` | Consensus rounds participated |
+| `gtcx_peers_connected`         | Number of connected peers      |
+| `gtcx_block_height`            | Current block height           |
+| `gtcx_consensus_rounds`        | Consensus rounds participated  |
 
 ### Grafana Dashboard
 
@@ -463,6 +463,7 @@ WARN Sync stalled at block 123456
 ```
 
 **Solutions:**
+
 1. Check internet connectivity
 2. Verify peers in `config/peers.txt`
 3. Restart the node: `docker compose restart`
@@ -474,6 +475,7 @@ Error: connection refused to seed-eu1.testnet.gtcx.io:26656
 ```
 
 **Solutions:**
+
 1. Check firewall allows outbound 26656
 2. Try different seed nodes
 3. Check if testnet is under maintenance
@@ -485,6 +487,7 @@ Error: connection to database failed
 ```
 
 **Solutions:**
+
 1. Check PostgreSQL is running: `docker compose ps`
 2. Verify password in `.env` matches `validator.yaml`
 3. Check database logs: `docker compose logs postgres`
@@ -496,6 +499,7 @@ Error: no space left on device
 ```
 
 **Solutions:**
+
 1. Prune old Docker images: `docker system prune`
 2. Archive old logs
 3. Expand disk or add storage

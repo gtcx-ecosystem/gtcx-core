@@ -2,10 +2,10 @@
 
 ## Document Control
 
-| Attribute | Value |
-|-----------|-------|
-| **Scope** | gtcx-core architecture |
-| **Status** | Publication-Ready |
+| Attribute         | Value                                                                                                                                          |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Scope**         | gtcx-core architecture                                                                                                                         |
+| **Status**        | Publication-Ready                                                                                                                              |
 | **Related Specs** | [Data Models](../specs/data-models.md), [Security Framework](../specs/security-framework.md), [Network Protocol](../specs/network-protocol.md) |
 
 ---
@@ -33,12 +33,12 @@ Every protocol depends on TradePass for actor identity. PvP depends on all upstr
 
 ### 1.2 Integration Depth Classification
 
-| Integration | Protocols | Shared Surface |
-|-------------|-----------|----------------|
-| **Deep** | TradePass + GeoTag + GCI | Identity, cryptography, data models, verification workflows |
-| **Critical** | VaultMark + TradePass + GeoTag + GCI | Custody chain integrity requires upstream verification at every handoff |
-| **Atomic** | PvP + all upstream protocols | Settlement is blocked until all conditions from all protocols are met |
-| **Consensus** | PANX + PvP + GCI | Oracle price feeds and validator attestations gate settlement |
+| Integration   | Protocols                            | Shared Surface                                                          |
+| ------------- | ------------------------------------ | ----------------------------------------------------------------------- |
+| **Deep**      | TradePass + GeoTag + GCI             | Identity, cryptography, data models, verification workflows             |
+| **Critical**  | VaultMark + TradePass + GeoTag + GCI | Custody chain integrity requires upstream verification at every handoff |
+| **Atomic**    | PvP + all upstream protocols         | Settlement is blocked until all conditions from all protocols are met   |
+| **Consensus** | PANX + PvP + GCI                     | Oracle price feeds and validator attestations gate settlement           |
 
 ---
 
@@ -53,7 +53,7 @@ All protocols share a single identity resolution path through TradePass.
 interface ProtocolOperation {
   // The actor performing the operation
   actor: {
-    did: string;           // did:gtcx:tp_{hash}
+    did: string; // did:gtcx:tp_{hash}
     credential: VerifiableCredential;
     role: OperatorRole;
     verificationLevel: 'L0' | 'L1' | 'L2' | 'L3' | 'L4';
@@ -76,13 +76,13 @@ Identity is verified once at the protocol gateway and propagated via signed JWT 
 
 All protocols share the primitives defined in `@gtcx/crypto`:
 
-| Primitive | Algorithm | Usage |
-|-----------|-----------|-------|
-| Signing | Ed25519 | All protocol signatures, event signing, credential proofs |
-| Hashing | SHA-256, Blake3 | Content addressing, Merkle trees, audit chains |
-| Key Exchange | X25519 | Encrypted protocol-to-protocol messages |
-| Zero-Knowledge | Schnorr, Bulletproofs | GCI selective disclosure, GeoTag privacy proofs |
-| Key Derivation | HKDF-SHA-256 | Per-protocol key derivation from master identity key |
+| Primitive      | Algorithm             | Usage                                                     |
+| -------------- | --------------------- | --------------------------------------------------------- |
+| Signing        | Ed25519               | All protocol signatures, event signing, credential proofs |
+| Hashing        | SHA-256, Blake3       | Content addressing, Merkle trees, audit chains            |
+| Key Exchange   | X25519                | Encrypted protocol-to-protocol messages                   |
+| Zero-Knowledge | Schnorr, Bulletproofs | GCI selective disclosure, GeoTag privacy proofs           |
+| Key Derivation | HKDF-SHA-256          | Per-protocol key derivation from master identity key      |
 
 Key derivation hierarchy (see [Security Framework](../specs/security-framework.md) Section 8.2):
 
@@ -127,15 +127,15 @@ interface WorkflowDefinition {
   id: string;
   name: string;
   steps: WorkflowStep[];
-  compensations: CompensationStep[];  // Rollback on failure
-  timeout: number;                     // Max execution time (ms)
+  compensations: CompensationStep[]; // Rollback on failure
+  timeout: number; // Max execution time (ms)
 }
 
 interface WorkflowStep {
   protocol: 'tradepass' | 'geotag' | 'vaultmark' | 'gci' | 'pvp' | 'panx';
   operation: string;
   input: (context: WorkflowContext) => unknown;
-  guards: StepGuard[];               // Preconditions from prior steps
+  guards: StepGuard[]; // Preconditions from prior steps
   retryPolicy: RetryPolicy;
 }
 ```
@@ -179,15 +179,15 @@ PvP executes atomic settlement:
 
 **Cross-protocol data flow:**
 
-| Step | Protocol | Reads From | Writes To |
-|------|----------|------------|-----------|
-| 1 | TradePass | — | `actor.did`, `actor.credential` |
-| 2 | GeoTag | `actor.did` | `origin.coordinates`, `geoProof` |
-| 3 | VaultMark | `actor.did`, `geoProof` | `assetId`, `verifications[]` |
-| 4 | GCI | `actor.did`, `assetId`, `verifications[]` | `gciScore`, `breakdown` |
-| 5 | PvP | `assetId`, `gciScore`, `actor.did` (buyer + seller) | `escrowId` |
-| 6 | PANX | `escrowId`, `verifications[]` | `consensusAttestation` |
-| 7 | PvP | `consensusAttestation` | `settlementReceipt` |
+| Step | Protocol  | Reads From                                          | Writes To                        |
+| ---- | --------- | --------------------------------------------------- | -------------------------------- |
+| 1    | TradePass | —                                                   | `actor.did`, `actor.credential`  |
+| 2    | GeoTag    | `actor.did`                                         | `origin.coordinates`, `geoProof` |
+| 3    | VaultMark | `actor.did`, `geoProof`                             | `assetId`, `verifications[]`     |
+| 4    | GCI       | `actor.did`, `assetId`, `verifications[]`           | `gciScore`, `breakdown`          |
+| 5    | PvP       | `assetId`, `gciScore`, `actor.did` (buyer + seller) | `escrowId`                       |
+| 6    | PANX      | `escrowId`, `verifications[]`                       | `consensusAttestation`           |
+| 7    | PvP       | `consensusAttestation`                              | `settlementReceipt`              |
 
 ### 3.2 Pattern: Supply Chain Custody Tracking
 
@@ -214,10 +214,10 @@ interface CustodyHandoff {
 
   // Verification at handoff point
   verification: {
-    weight: WeightMeasurement;       // Must match within tolerance
-    location: GeoTagProof;           // GPS of handoff location
-    timestamp: string;               // ISO 8601
-    photos: EvidenceReference[];     // Visual evidence
+    weight: WeightMeasurement; // Must match within tolerance
+    location: GeoTagProof; // GPS of handoff location
+    timestamp: string; // ISO 8601
+    photos: EvidenceReference[]; // Visual evidence
   };
 
   // Both signatures required for handoff to be valid
@@ -264,14 +264,14 @@ PvP: queued in @gtcx/events offline queue    ──►  Settlement executes on s
 
 Conflict resolution per protocol:
 
-| Protocol | Offline Strategy | Rationale |
-|----------|-----------------|-----------|
-| TradePass | Last-write-wins | Most recent credential update is authoritative |
-| GeoTag | Append-only | Location proofs are immutable, never overwrite |
-| VaultMark | Chain-validated | Custody chain integrity must be maintained |
-| PvP | Highest-version | Latest settlement state wins |
-| GCI | Highest-version | Compliance scores use version numbers |
-| PANX | Server-wins | Oracle prices are server-authoritative |
+| Protocol  | Offline Strategy | Rationale                                      |
+| --------- | ---------------- | ---------------------------------------------- |
+| TradePass | Last-write-wins  | Most recent credential update is authoritative |
+| GeoTag    | Append-only      | Location proofs are immutable, never overwrite |
+| VaultMark | Chain-validated  | Custody chain integrity must be maintained     |
+| PvP       | Highest-version  | Latest settlement state wins                   |
+| GCI       | Highest-version  | Compliance scores use version numbers          |
+| PANX      | Server-wins      | Oracle prices are server-authoritative         |
 
 ---
 
@@ -281,19 +281,19 @@ Conflict resolution per protocol:
 
 Each protocol emits typed events that other protocols subscribe to:
 
-| Emitting Protocol | Event | Consuming Protocols |
-|-------------------|-------|---------------------|
-| TradePass | `CREDENTIAL_ISSUED` | GeoTag, VaultMark, GCI, PvP |
-| TradePass | `CREDENTIAL_REVOKED` | All (blocks further operations) |
-| GeoTag | `PROOF_CREATED` | VaultMark, GCI |
-| GeoTag | `ANOMALY_DETECTED` | GCI (triggers score reduction) |
-| VaultMark | `CUSTODY_TRANSFERRED` | PvP, GCI |
-| VaultMark | `CHAIN_BROKEN` | PvP (blocks settlement), GCI |
-| GCI | `SCORE_CALCULATED` | PvP (release condition check) |
-| GCI | `CERTIFICATION_GRANTED` | PvP, PANX |
-| PvP | `ESCROW_CREATED` | PANX (triggers consensus round) |
-| PvP | `SETTLEMENT_COMPLETED` | All (closes workflow) |
-| PANX | `CONSENSUS_REACHED` | PvP (release condition check) |
+| Emitting Protocol | Event                   | Consuming Protocols             |
+| ----------------- | ----------------------- | ------------------------------- |
+| TradePass         | `CREDENTIAL_ISSUED`     | GeoTag, VaultMark, GCI, PvP     |
+| TradePass         | `CREDENTIAL_REVOKED`    | All (blocks further operations) |
+| GeoTag            | `PROOF_CREATED`         | VaultMark, GCI                  |
+| GeoTag            | `ANOMALY_DETECTED`      | GCI (triggers score reduction)  |
+| VaultMark         | `CUSTODY_TRANSFERRED`   | PvP, GCI                        |
+| VaultMark         | `CHAIN_BROKEN`          | PvP (blocks settlement), GCI    |
+| GCI               | `SCORE_CALCULATED`      | PvP (release condition check)   |
+| GCI               | `CERTIFICATION_GRANTED` | PvP, PANX                       |
+| PvP               | `ESCROW_CREATED`        | PANX (triggers consensus round) |
+| PvP               | `SETTLEMENT_COMPLETED`  | All (closes workflow)           |
+| PANX              | `CONSENSUS_REACHED`     | PvP (release condition check)   |
 
 ### 4.2 Cross-Protocol Validation Rules
 
@@ -309,7 +309,11 @@ interface CrossProtocolValidator {
   validateSignature(data: SignedPayload, expectedDid: string): boolean;
   validateFreshness(timestamp: string, maxAgeMs: number): boolean;
   validateSchema<T>(data: unknown, schema: ZodType<T>): ValidationResult<T>;
-  validatePermission(actor: ActorContext, requiredRole: OperatorRole, requiredLevel: string): boolean;
+  validatePermission(
+    actor: ActorContext,
+    requiredRole: OperatorRole,
+    requiredLevel: string
+  ): boolean;
 }
 ```
 
@@ -319,13 +323,13 @@ interface CrossProtocolValidator {
 
 ### 5.1 Cross-Protocol Failure Modes
 
-| Failure | Impact | Recovery |
-|---------|--------|----------|
-| TradePass credential expired mid-workflow | All downstream steps blocked | Re-authenticate, resume from last completed step |
-| GeoTag anomaly detected during custody handoff | VaultMark handoff rejected | Manual review by government inspector (L4) |
-| GCI score drops below threshold during settlement | PvP escrow paused | Seller improves compliance factors, GCI recalculates |
-| PANX consensus timeout | PvP settlement delayed | Retry consensus round with fallback validator set |
-| Network partition during multi-protocol workflow | Partial state across protocols | Compensation steps roll back incomplete operations |
+| Failure                                           | Impact                         | Recovery                                             |
+| ------------------------------------------------- | ------------------------------ | ---------------------------------------------------- |
+| TradePass credential expired mid-workflow         | All downstream steps blocked   | Re-authenticate, resume from last completed step     |
+| GeoTag anomaly detected during custody handoff    | VaultMark handoff rejected     | Manual review by government inspector (L4)           |
+| GCI score drops below threshold during settlement | PvP escrow paused              | Seller improves compliance factors, GCI recalculates |
+| PANX consensus timeout                            | PvP settlement delayed         | Retry consensus round with fallback validator set    |
+| Network partition during multi-protocol workflow  | Partial state across protocols | Compensation steps roll back incomplete operations   |
 
 ### 5.2 Compensation (Saga Pattern)
 

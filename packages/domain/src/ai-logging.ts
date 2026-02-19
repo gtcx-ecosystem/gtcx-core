@@ -4,7 +4,6 @@
  * Structured logging for AI-assisted operations and analysis.
  * Implements P5 (AI-Native) principle.
  *
- * @package @gtcx/domain
  */
 
 import { randomUUID } from 'node:crypto';

@@ -17,7 +17,7 @@ export interface TradePassDID {
 /**
  * Verifiable Credential structure
  */
-export interface VerifiableCredential {
+export interface TradePassVerifiableCredential {
   '@context': string[];
   id: string;
   type: string[];
@@ -28,10 +28,10 @@ export interface VerifiableCredential {
     id: string;
     [key: string]: unknown;
   };
-  proof: CredentialProof;
+  proof: TradePassCredentialProof;
 }
 
-export interface CredentialProof {
+export interface TradePassCredentialProof {
   type: string;
   created: string;
   verificationMethod: string;
@@ -44,12 +44,22 @@ export interface CredentialProof {
  */
 export interface TradePassIdentity {
   did: TradePassDID;
-  credentials: VerifiableCredential[];
+  credentials: TradePassVerifiableCredential[];
   roles: TradePassRole[];
   status: 'active' | 'suspended' | 'revoked';
   createdAt: number;
   updatedAt: number;
 }
+
+/**
+ * @deprecated Use TradePassVerifiableCredential
+ */
+export type VerifiableCredential = TradePassVerifiableCredential;
+
+/**
+ * @deprecated Use TradePassCredentialProof
+ */
+export type CredentialProof = TradePassCredentialProof;
 
 /**
  * Role-based entitlements (time-boxed)

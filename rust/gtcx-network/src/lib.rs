@@ -203,12 +203,7 @@ impl Message {
     /// # Errors
     ///
     /// Returns [`NetworkError::MessageTooLarge`] if payload exceeds [`MAX_MESSAGE_SIZE`].
-    pub fn new(
-        from: PeerId,
-        topic: &str,
-        payload: Vec<u8>,
-        sequence: u64,
-    ) -> Result<Self> {
+    pub fn new(from: PeerId, topic: &str, payload: Vec<u8>, sequence: u64) -> Result<Self> {
         if payload.len() > MAX_MESSAGE_SIZE {
             return Err(NetworkError::MessageTooLarge {
                 size: payload.len(),

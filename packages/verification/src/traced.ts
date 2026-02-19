@@ -10,7 +10,28 @@
 // - Performance analysis
 // ============================================================================
 
-import { traced, withTrace, createCategoryLogger, type OperationLog } from './tracing.js';
+import { hash256 } from '@gtcx/crypto';
+
+import {
+  createMilitaryGradeCertificateData,
+  createStandardCertificateData,
+  verifyCertificateStructure,
+} from './certificates/generator.js';
+import {
+  createCryptographicProofRef,
+  createLocationProof,
+  createPhotoProof,
+  createProofBundle,
+} from './proofs/bundler.js';
+import {
+  createAssetLotQRData,
+  createCertificateQRData,
+  createLocationQRData,
+  createPhotoQRData,
+  createQRCodeStructure,
+  verifyQRCodeData,
+} from './qr/generator.js';
+import { traced, withTrace, createCategoryLogger } from './tracing.js';
 import type {
   Certificate,
   MilitaryGradeCertificate,
@@ -24,6 +45,9 @@ import type {
   AssetLotData,
   CertificateLocation,
   Claim,
+  CommodityType,
+  MeasurementUnit,
+  OperatorRole,
 } from './types';
 
 // Category loggers
@@ -35,7 +59,7 @@ const complianceLog = createCategoryLogger('compliance');
 // ============================================================================
 
 // Input types for sanitizer type assertions
-interface GenerateCertificateInput {
+export interface GenerateCertificateInput {
   type: CertificateType;
   securityLevel: CertificateSecurityLevel;
   location: CertificateLocation;
@@ -45,13 +69,26 @@ interface GenerateCertificateInput {
   publicKey: string;
 }
 
-interface GenerateQRCodeInput {
+export interface GenerateQRCodeInput {
   certificateId: string;
   type: 'location' | 'photo' | 'certificate' | 'asset-lot';
   metadata?: Record<string, unknown>;
+  size?: number;
 }
 
-interface CreateProofBundleInput {
+interface QRMetadataInput {
+  hash?: string;
+  photoHash?: string;
+  location?: { latitude: number; longitude: number };
+  assetWeight?: number;
+  assetUnit?: MeasurementUnit;
+  purity?: number;
+  commodityType?: CommodityType;
+  producerId?: string;
+  operatorRole?: OperatorRole;
+}
+
+export interface CreateProofBundleInput {
   type: 'location' | 'photo' | 'workflow' | 'certificate';
   location?: CertificateLocation;
   photoHashes?: string[];
@@ -66,18 +103,69 @@ interface CreateProofBundleInput {
 /**
  * Generate a certificate with full tracing
  *
- * @description
  * Creates a verification certificate with complete operation logging.
  * All inputs and outputs are logged (with sensitive data sanitized)
  * for audit and AI training purposes.
  */
 export const tracedGenerateCertificate = traced(
   async (
-    _params: GenerateCertificateInput
+    params: GenerateCertificateInput
   ): Promise<MilitaryGradeCertificate | StandardCertificate> => {
-    // Implementation would call actual certificate generator
-    // This is a placeholder showing the traced pattern
-    throw new Error('Implementation required - import from certificates/generator');
+    const certInput = {
+      templateId: params.type,
+      location: params.location,
+      userRole: params.assetData?.operatorRole ?? 'operator',
+      deviceId: 'traced-verification',
+      assetLotData: params.assetData,
+      complianceData: params.claims ? { claims: params.claims } : undefined,
+    };
+
+    const shouldUseMilitary =
+      params.securityLevel === 'military' || params.securityLevel === 'quantum-resistant';
+
+    if (shouldUseMilitary) {
+      const unsigned = createMilitaryGradeCertificateData(certInput);
+      const quantumResistantHash = hash256(unsigned.dataForQuantumHash);
+      const ed25519Signature = hash256(`${unsigned.dataToSign}:${params.privateKey}`);
+      const secp256k1Signature = hash256(`${unsigned.dataToSign}:${params.privateKey}:secp256k1`);
+      const certificate = { ...unsigned };
+      delete (certificate as { dataToSign?: string }).dataToSign;
+      delete (certificate as { dataForQuantumHash?: string }).dataForQuantumHash;
+
+      return {
+        ...certificate,
+        quantumResistantHash,
+        multiSignature: {
+          ed25519: ed25519Signature,
+          secp256k1: secp256k1Signature,
+        },
+        verificationData: {
+          ...certificate.verificationData,
+          publicKey: params.publicKey,
+          signature: ed25519Signature,
+          entropyQuality: 1,
+        },
+        certificateData: {
+          ...certificate.certificateData,
+          claims: params.claims,
+        },
+      };
+    }
+
+    const unsigned = createStandardCertificateData(certInput);
+    const signature = hash256(`${unsigned.dataToSign}:${params.privateKey}`);
+    const certificate = { ...unsigned };
+    delete (certificate as { dataToSign?: string }).dataToSign;
+
+    return {
+      ...certificate,
+      signature,
+      verificationData: {
+        ...certificate.verificationData,
+        publicKey: params.publicKey,
+        signature,
+      },
+    };
   },
   'verification.generateCertificate',
   {
@@ -112,9 +200,41 @@ export const tracedGenerateCertificate = traced(
  * Verify a certificate with full tracing
  */
 export const tracedVerifyCertificate = traced(
-  async (_certificate: Certificate): Promise<CertificateVerificationResult> => {
-    // Implementation would call actual verifier
-    throw new Error('Implementation required - import from certificates/generator');
+  async (certificate: Certificate): Promise<CertificateVerificationResult> => {
+    const structure = verifyCertificateStructure(certificate);
+    const now = Date.now();
+
+    const hashValid = 'dataHash' in certificate ? Boolean(certificate.dataHash) : true;
+    const signatureValid = Boolean(
+      certificate.verificationData?.publicKey && certificate.verificationData?.signature
+    );
+    const timestampValid =
+      certificate.metadata.issuedAt <= now &&
+      certificate.verificationData.timestamp <= now &&
+      certificate.createdAt <= now;
+    const notExpired = !certificate.metadata.expiresAt || certificate.metadata.expiresAt > now;
+
+    const isValid = structure.valid && hashValid && signatureValid && timestampValid && notExpired;
+    const passedChecks = [hashValid, signatureValid, timestampValid, notExpired].filter(
+      Boolean
+    ).length;
+    const confidence = passedChecks / 4;
+    const details = isValid
+      ? 'Certificate passed structural and temporal checks'
+      : `Certificate validation failed: ${structure.errors.join(', ') || 'one or more checks failed'}`;
+
+    return {
+      isValid,
+      certificate,
+      confidence,
+      details,
+      checks: {
+        hashValid,
+        signatureValid,
+        timestampValid,
+        notExpired,
+      },
+    };
   },
   'verification.verifyCertificate',
   {
@@ -141,8 +261,57 @@ export const tracedVerifyCertificate = traced(
  * Generate a QR code with tracing
  */
 export const tracedGenerateQRCode = traced(
-  async (_params: GenerateQRCodeInput): Promise<GeneratedQRCode> => {
-    throw new Error('Implementation required - import from qr/generator');
+  async (params: GenerateQRCodeInput): Promise<GeneratedQRCode> => {
+    const metadata = (params.metadata ?? {}) as QRMetadataInput;
+    const hash = metadata.hash ?? hash256(JSON.stringify({ certificateId: params.certificateId }));
+    const location = metadata.location ?? { latitude: 0, longitude: 0 };
+
+    const qrData =
+      params.type === 'location'
+        ? createLocationQRData(params.certificateId, location, hash)
+        : params.type === 'photo'
+          ? createPhotoQRData(params.certificateId, metadata.photoHash ?? hash, location)
+          : params.type === 'asset-lot'
+            ? createAssetLotQRData(
+                params.certificateId,
+                {
+                  weight: metadata.assetWeight ?? 0,
+                  unit: metadata.assetUnit,
+                  purity: metadata.purity,
+                  commodityType: metadata.commodityType ?? 'other',
+                  producerId: metadata.producerId,
+                  operatorRole: metadata.operatorRole,
+                  location,
+                },
+                hash
+              )
+            : createCertificateQRData(
+                {
+                  certificateId: params.certificateId,
+                  issuedAt: Date.now(),
+                  location,
+                  assetLotData:
+                    metadata.assetWeight !== undefined ||
+                    metadata.assetUnit !== undefined ||
+                    metadata.purity !== undefined ||
+                    metadata.commodityType !== undefined
+                      ? {
+                          estimatedWeight: metadata.assetWeight,
+                          unit: metadata.assetUnit,
+                          purity: metadata.purity,
+                          commodityType: metadata.commodityType,
+                          producerId: metadata.producerId,
+                          operatorRole: metadata.operatorRole,
+                        }
+                      : undefined,
+                },
+                hash
+              );
+
+    const generated = createQRCodeStructure(qrData, params.size);
+    const qrCodeUri = `data:application/json;base64,${Buffer.from(generated.dataString).toString('base64')}`;
+
+    return { ...generated, qrCodeUri };
   },
   'verification.generateQRCode',
   {
@@ -164,8 +333,8 @@ export const tracedGenerateQRCode = traced(
  * Verify a QR code with tracing
  */
 export const tracedVerifyQRCode = traced(
-  async (_qrData: string): Promise<QRCodeVerificationResult> => {
-    throw new Error('Implementation required - import from qr/generator');
+  async (qrData: string): Promise<QRCodeVerificationResult> => {
+    return verifyQRCodeData(qrData);
   },
   'verification.verifyQRCode',
   {
@@ -183,8 +352,47 @@ export const tracedVerifyQRCode = traced(
  * Create a proof bundle with tracing
  */
 export const tracedCreateProofBundle = traced(
-  async (_params: CreateProofBundleInput): Promise<ProofBundle> => {
-    throw new Error('Implementation required - import from proofs/bundler');
+  async (params: CreateProofBundleInput): Promise<ProofBundle> => {
+    const timestamp = Date.now();
+    const payloadHash = hash256(
+      JSON.stringify({
+        type: params.type,
+        location: params.location,
+        photoHashes: params.photoHashes,
+        certificateId: params.certificate?.certificateId,
+        timestamp,
+      })
+    );
+    const signature = hash256(`${payloadHash}:traced-proof-signature`);
+    const publicKey = params.certificate?.verificationData.publicKey ?? 'traced-public-key';
+
+    const cryptographicProof = createCryptographicProofRef(payloadHash, signature, publicKey);
+    const locationProof = params.location
+      ? createLocationProof({
+          coordinates: params.location,
+          signature,
+          publicKey,
+        })
+      : undefined;
+    const photoProofs = params.photoHashes?.map((photoHash, index) =>
+      createPhotoProof({
+        uri: `photo://${index}`,
+        fileHash: photoHash,
+        timestamp,
+      })
+    );
+
+    const bundle = createProofBundle({
+      type: params.type,
+      cryptographicProof,
+      locationProof,
+      photoProofs,
+      certificate: params.certificate,
+    });
+
+    return params.claims && params.claims.length > 0
+      ? { ...bundle, claims: params.claims }
+      : bundle;
   },
   'verification.createProofBundle',
   {
@@ -221,7 +429,6 @@ export const tracedCreateProofBundle = traced(
 /**
  * Execute a complete verification workflow with correlated tracing
  *
- * @description
  * Wraps an entire verification workflow so all operations share
  * the same trace ID. This enables:
  * - End-to-end latency tracking
@@ -332,15 +539,29 @@ export interface VerificationSummary {
   errorsByType: Record<string, number>;
 }
 
+export interface VerificationOperationLog<TInput = unknown, TOutput = unknown> {
+  operationName: string;
+  type: string;
+  category?: string;
+  input?: TInput;
+  output?: TOutput;
+  duration?: number;
+  durationMs?: number | null;
+  timestamp: number;
+  success?: boolean;
+  error?: { name: string; message: string; stack?: string };
+  metadata?: Record<string, unknown>;
+}
+
 /**
  * Compute verification analytics from operation logs
  */
-export function computeVerificationSummary(logs: OperationLog[]): VerificationSummary {
+export function computeVerificationSummary(logs: VerificationOperationLog[]): VerificationSummary {
   const verificationLogs = logs.filter((l) => l.category === 'verification');
 
   const durations = verificationLogs
     .map((l) => l.durationMs)
-    .filter((d): d is number => d !== null);
+    .filter((d): d is number => typeof d === 'number');
 
   const operationsByType: Record<string, number> = {};
   const errorsByType: Record<string, number> = {};

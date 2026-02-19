@@ -4,7 +4,6 @@
  * Performance and business metrics for domain services.
  * Completes P12 (Observability) principle.
  *
- * @package @gtcx/domain
  */
 
 // ============================================================================

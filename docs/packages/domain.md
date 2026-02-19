@@ -35,10 +35,10 @@ eventEmitter.onAny((event) => {
 // Create services with full dependency injection
 const registration = new AssetLotRegistrationService(
   {
-    cryptoService,      // Your ICryptoService implementation
-    locationService,    // Your ILocationService implementation
-    storageService,     // Your IStorageService implementation
-    eventEmitter,       // Domain events
+    cryptoService, // Your ICryptoService implementation
+    locationService, // Your ILocationService implementation
+    storageService, // Your IStorageService implementation
+    eventEmitter, // Domain events
   },
   {
     minPhotos: 2,
@@ -52,7 +52,7 @@ const assetLot = await registration.registerAssetLot({
   producerId: '550e8400-e29b-41d4-a716-446655440000',
   discoveryLocation: {
     latitude: 5.5502,
-    longitude: -1.5500,
+    longitude: -1.55,
     accuracy: 5,
     timestamp: Date.now(),
   },
@@ -77,17 +77,17 @@ const assetLot = await registration.registerAssetLot({
 import { AssetLotRegistrationService } from '@gtcx/domain';
 
 const service = new AssetLotRegistrationService(dependencies, {
-  minGpsAccuracy: 10,      // Max GPS error (meters)
-  minPhotos: 2,            // Minimum photos required
-  maxPhotos: 10,           // Maximum photos allowed
+  minGpsAccuracy: 10, // Max GPS error (meters)
+  minPhotos: 2, // Minimum photos required
+  maxPhotos: 10, // Maximum photos allowed
   maxDiscoveryAgeDays: 30, // Max age of discovery
 });
 
 // Methods
-service.getWorkflowSteps();                    // Get registration steps
-service.validateRegistrationData(data);        // Validate before submit
-service.calculateProgress(partialData);        // Check completion %
-await service.registerAssetLot(data);          // Full registration
+service.getWorkflowSteps(); // Get registration steps
+service.validateRegistrationData(data); // Validate before submit
+service.calculateProgress(partialData); // Check completion %
+await service.registerAssetLot(data); // Full registration
 ```
 
 #### TradingService
@@ -121,11 +121,11 @@ const service = new UnifiedComplianceService(dependencies, {
 });
 
 // Methods
-service.registerFramework(ghanaFramework);           // Add regulations
-await service.checkAssetLotCompliance(assetLot);     // Check asset
-await service.checkTransactionCompliance(tx);        // Check transaction
-await service.generateComplianceReport(options);     // Generate report
-await service.getComplianceDashboard();              // Get overview
+service.registerFramework(ghanaFramework); // Add regulations
+await service.checkAssetLotCompliance(assetLot); // Check asset
+await service.checkTransactionCompliance(tx); // Check transaction
+await service.generateComplianceReport(options); // Generate report
+await service.getComplianceDashboard(); // Get overview
 ```
 
 ---
@@ -155,6 +155,7 @@ const custom = AssetRegistrationDataSchema.pick({ commodityType: true });
 ```
 
 **Available Schemas:**
+
 - `AssetRegistrationDataSchema` - Asset registration input
 - `TradeRequestSchema` - Trade execution input
 - `ComplianceReportOptionsSchema` - Report generation options
@@ -184,17 +185,16 @@ emitter.onAny((event) => {
 });
 
 // Get events by correlation ID (for tracing)
-const related = emitter.getEvents()
-  .filter(e => e.correlationId === traceId);
+const related = emitter.getEvents().filter((e) => e.correlationId === traceId);
 ```
 
 **Event Types:**
 
-| Category | Events |
-|----------|--------|
-| Registration | `started`, `validated`, `completed`, `failed`, `progress_updated` |
-| Trading | `price_calculated`, `opportunity_found`, `trade_initiated`, `trade_executed`, `trade_failed` |
-| Compliance | `check_started`, `check_completed`, `violation_detected`, `warning_issued`, `report_generated` |
+| Category     | Events                                                                                         |
+| ------------ | ---------------------------------------------------------------------------------------------- |
+| Registration | `started`, `validated`, `completed`, `failed`, `progress_updated`                              |
+| Trading      | `price_calculated`, `opportunity_found`, `trade_initiated`, `trade_executed`, `trade_failed`   |
+| Compliance   | `check_started`, `check_completed`, `violation_detected`, `warning_issued`, `report_generated` |
 
 ---
 
@@ -264,10 +264,14 @@ const context = new AIContextBuilder()
 const logger = new InMemoryOperationLogger();
 const opId = logger.start('registration.register', { commodityType: 'gold' });
 // ... operation ...
-logger.success(opId, { assetLotId: 'xxx' }, {
-  suggestedNextOps: ['compliance.check_asset'],
-  confidence: 0.95,
-});
+logger.success(
+  opId,
+  { assetLotId: 'xxx' },
+  {
+    suggestedNextOps: ['compliance.check_asset'],
+    confidence: 0.95,
+  }
+);
 ```
 
 ---
@@ -353,7 +357,10 @@ migrator.registerMigration({
   entityTypes: ['asset_lot'],
   description: 'Add new field',
   migrate: (data) => ({ ...data, newField: 'default' }),
-  rollback: (data) => { delete data.newField; return data; },
+  rollback: (data) => {
+    delete data.newField;
+    return data;
+  },
 });
 ```
 
@@ -403,16 +410,16 @@ const changes = CHANGELOG[0].changes;
 
 ### Threat Model
 
-| Threat | Risk | Mitigation |
-|--------|------|------------|
-| **Malformed Input** | Medium | Zod validation at all entry points |
-| **Injection Attacks** | Medium | Schema blocks `__proto__` keys, sanitization |
-| **Prototype Pollution** | High | `sanitizeKeys()` in internal utils |
-| **License Spoofing** | High | Delegated to `IComplianceService` |
-| **Price Manipulation** | High | Prices from signed PANX attestations |
-| **Replay Attacks** | Medium | Transaction IDs include timestamp + nonce |
-| **PII Leakage** | Medium | `sanitizeForLogging()` redacts sensitive data |
-| **Rate Limiting** | Medium | `RateLimiter` class available |
+| Threat                  | Risk   | Mitigation                                    |
+| ----------------------- | ------ | --------------------------------------------- |
+| **Malformed Input**     | Medium | Zod validation at all entry points            |
+| **Injection Attacks**   | Medium | Schema blocks `__proto__` keys, sanitization  |
+| **Prototype Pollution** | High   | `sanitizeKeys()` in internal utils            |
+| **License Spoofing**    | High   | Delegated to `IComplianceService`             |
+| **Price Manipulation**  | High   | Prices from signed PANX attestations          |
+| **Replay Attacks**      | Medium | Transaction IDs include timestamp + nonce     |
+| **PII Leakage**         | Medium | `sanitizeForLogging()` redacts sensitive data |
+| **Rate Limiting**       | Medium | `RateLimiter` class available                 |
 
 ### Trust Boundaries
 
@@ -443,11 +450,11 @@ const changes = CHANGELOG[0].changes;
 
 ```typescript
 import {
-  sanitizeKeys,        // Remove dangerous object keys
-  sanitizeForLogging,  // Redact PII for logs
-  redactPII,           // Redact PII from strings
-  RateLimiter,         // Rate limit operations
-  withRetry,           // Retry with exponential backoff
+  sanitizeKeys, // Remove dangerous object keys
+  sanitizeForLogging, // Redact PII for logs
+  redactPII, // Redact PII from strings
+  RateLimiter, // Rate limit operations
+  withRetry, // Retry with exponential backoff
 } from '@gtcx/domain/internal'; // ⚠️ Internal API - may change
 ```
 
@@ -549,19 +556,19 @@ const service = new TradingService({
 
 ## Principle Alignment
 
-| Principle | Implementation |
-|-----------|---------------|
-| P1 Package Structure | Clean `src/` + `internal/` separation; no circular deps |
-| P2 Type Safety | Zod schemas at all service boundaries |
-| P3 Modularity | Independent services with granular exports |
-| P4 Composability | Full dependency injection for all external services |
-| P5 AI-Native | AI provider interface, hooks, and structured operation logging |
-| P6 Asset Abstraction | `commodityType: string` throughout — no hardcoded commodities |
-| P8 Offline-First | OfflineQueue with conflict resolution strategies |
-| P9 Security | Input validation, sanitization, rate limiting, threat model |
-| P10 API Stability | Versioning, deprecation markers, changelog |
-| P11 Data Evolution | Schema versioning with migration registry |
-| P12 Observability | Domain events, Prometheus metrics, AI logging |
+| Principle            | Implementation                                                 |
+| -------------------- | -------------------------------------------------------------- |
+| P1 Package Structure | Clean `src/` + `internal/` separation; no circular deps        |
+| P2 Type Safety       | Zod schemas at all service boundaries                          |
+| P3 Modularity        | Independent services with granular exports                     |
+| P4 Composability     | Full dependency injection for all external services            |
+| P5 AI-Native         | AI provider interface, hooks, and structured operation logging |
+| P6 Asset Abstraction | `commodityType: string` throughout — no hardcoded commodities  |
+| P8 Offline-First     | OfflineQueue with conflict resolution strategies               |
+| P9 Security          | Input validation, sanitization, rate limiting, threat model    |
+| P10 API Stability    | Versioning, deprecation markers, changelog                     |
+| P11 Data Evolution   | Schema versioning with migration registry                      |
+| P12 Observability    | Domain events, Prometheus metrics, AI logging                  |
 
 ## Related
 

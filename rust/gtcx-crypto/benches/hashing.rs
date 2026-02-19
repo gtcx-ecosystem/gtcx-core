@@ -1,5 +1,5 @@
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
-use gtcx_crypto::hashing::{sha256, sha512, blake3};
+use gtcx_crypto::hashing::{blake3, sha256, sha512};
 
 fn bench_sha256(c: &mut Criterion) {
     let mut group = c.benchmark_group("sha256");
@@ -43,5 +43,11 @@ fn bench_hash_comparison(c: &mut Criterion) {
     group.finish();
 }
 
-criterion_group!(benches, bench_sha256, bench_sha512, bench_blake3, bench_hash_comparison);
+criterion_group!(
+    benches,
+    bench_sha256,
+    bench_sha512,
+    bench_blake3,
+    bench_hash_comparison
+);
 criterion_main!(benches);

@@ -4,7 +4,6 @@
  * Hooks for AI-powered analysis and decision support.
  * Completes P5 (AI-Native) principle.
  *
- * @package @gtcx/domain
  */
 
 import type { OperationLogEntry } from './ai-logging';

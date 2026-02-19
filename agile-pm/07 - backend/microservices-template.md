@@ -1,41 +1,43 @@
 # Microservices Architecture Template
 
 ## Service Overview
+
 **Service Name**: [SERVICE_NAME]  
 **Service Type**: [Core/Support/Gateway/Integration]  
 **Language**: [TypeScript/Python/Go]  
 **Container**: [Docker/Kubernetes]  
 **Communication**: [REST/gRPC/Message Queue/Event-Driven]
 
-
 ## Service Architecture
 
 ### Service Boundaries
+
 ```yaml
 Service_Responsibility:
-  Domain: "[Specific business domain]"
+  Domain: '[Specific business domain]'
   Capabilities:
-    - "[Core capability 1]"
-    - "[Core capability 2]"
-    - "[Core capability 3]"
-  
+    - '[Core capability 1]'
+    - '[Core capability 2]'
+    - '[Core capability 3]'
+
   Data_Ownership:
-    - "[Entity 1]"
-    - "[Entity 2]"
-  
+    - '[Entity 1]'
+    - '[Entity 2]'
+
   Dependencies:
     Internal:
-      - service: "[Service name]"
-        purpose: "[Why needed]"
-        communication: "[REST/gRPC/Event]"
-    
+      - service: '[Service name]'
+        purpose: '[Why needed]'
+        communication: '[REST/gRPC/Event]'
+
     External:
-      - service: "[External API]"
-        purpose: "[Why needed]"
-        fallback: "[Fallback strategy]"
+      - service: '[External API]'
+        purpose: '[Why needed]'
+        fallback: '[Fallback strategy]'
 ```
 
 ### Service Topology
+
 ```
 ┌─────────────────────────────────────────────────────┐
 │                   API Gateway                        │
@@ -56,10 +58,10 @@ Service_Responsibility:
     └─────────────┘    └───────────┘  └─────────┘
 ```
 
-
 ## Service Communication
 
 ### Synchronous Communication (REST/gRPC)
+
 ```typescript
 // Service Discovery Pattern
 interface ServiceRegistry {
@@ -73,7 +75,7 @@ class CircuitBreaker {
   private failureCount = 0;
   private lastFailureTime?: Date;
   private state: 'CLOSED' | 'OPEN' | 'HALF_OPEN' = 'CLOSED';
-  
+
   async call<T>(fn: () => Promise<T>): Promise<T> {
     if (this.state === 'OPEN') {
       if (this.shouldAttemptReset()) {
@@ -82,7 +84,7 @@ class CircuitBreaker {
         throw new Error('Circuit breaker is OPEN');
       }
     }
-    
+
     try {
       const result = await fn();
       this.onSuccess();
@@ -113,6 +115,7 @@ async function retryWithBackoff<T>(
 ```
 
 ### Asynchronous Communication (Event-Driven)
+
 ```typescript
 // Event Publishing
 interface EventPublisher {
@@ -150,12 +153,12 @@ class PaymentSaga {
     'reserveFunds',
     'processTransaction',
     'updateInventory',
-    'sendConfirmation'
+    'sendConfirmation',
   ];
-  
+
   async execute(context: SagaContext): Promise<void> {
     const compensations: Array<() => Promise<void>> = [];
-    
+
     for (const step of this.steps) {
       try {
         await this[step](context);
@@ -172,27 +175,28 @@ class PaymentSaga {
 }
 ```
 
-
 ## Data Management
 
 ### Database per Service Pattern
+
 ```yaml
 Service_Database:
-  Type: "[PostgreSQL/MongoDB/DynamoDB]"
-  Schema_Management: "[Migrations/Versioned]"
-  Backup_Strategy: "[Daily/Continuous]"
-  
+  Type: '[PostgreSQL/MongoDB/DynamoDB]'
+  Schema_Management: '[Migrations/Versioned]'
+  Backup_Strategy: '[Daily/Continuous]'
+
   Data_Consistency:
-    Pattern: "[Event Sourcing/CQRS/Eventual Consistency]"
-    Sync_Method: "[CDC/Polling/Events]"
-  
+    Pattern: '[Event Sourcing/CQRS/Eventual Consistency]'
+    Sync_Method: '[CDC/Polling/Events]'
+
   Shared_Data_Access:
-    Method: "[API/Events/Data Replication]"
-    Cache: "[Redis/Memcached]"
-    TTL: "[Cache duration]"
+    Method: '[API/Events/Data Replication]'
+    Cache: '[Redis/Memcached]'
+    TTL: '[Cache duration]'
 ```
 
 ### CQRS Pattern Implementation
+
 ```typescript
 // Command Side
 interface CommandHandler<TCommand, TResult> {
@@ -234,10 +238,10 @@ class GetTransactionHandler {
 }
 ```
 
-
 ## Service Security
 
 ### Service-to-Service Authentication
+
 ```typescript
 // mTLS Configuration
 const tlsConfig = {
@@ -245,7 +249,7 @@ const tlsConfig = {
   key: fs.readFileSync('/certs/service.key'),
   ca: fs.readFileSync('/certs/ca.crt'),
   requestCert: true,
-  rejectUnauthorized: true
+  rejectUnauthorized: true,
 };
 
 // Service Token Pattern
@@ -254,47 +258,48 @@ class ServiceAuthenticator {
     const token = await this.tokenProvider.getServiceToken({
       service: process.env.SERVICE_NAME,
       scope: ['read:transactions', 'write:transactions'],
-      audience: 'internal-services'
+      audience: 'internal-services',
     });
     return token;
   }
-  
+
   async validateToken(token: string): Promise<ServiceClaims> {
     return this.tokenValidator.validate(token, {
       issuer: 'auth-service',
-      audience: 'internal-services'
+      audience: 'internal-services',
     });
   }
 }
 ```
 
 ### API Gateway Integration
+
 ```yaml
 API_Gateway_Config:
   Authentication:
-    Type: "OAuth2/JWT"
-    Provider: "Auth0/Cognito/Custom"
-  
-  Rate_Limiting:
-    Default: "1000 req/min"
-    By_Service:
-      ServiceA: "5000 req/min"
-      ServiceB: "2000 req/min"
-  
-  Request_Routing:
-    Path_Prefix: "/api/v1/[service]"
-    Load_Balancing: "Round Robin/Least Connections"
-  
-  Security:
-    CORS: "Enabled"
-    Headers: ["X-Request-ID", "X-Correlation-ID"]
-    Timeout: "30s"
-```
+    Type: 'OAuth2/JWT'
+    Provider: 'Auth0/Cognito/Custom'
 
+  Rate_Limiting:
+    Default: '1000 req/min'
+    By_Service:
+      ServiceA: '5000 req/min'
+      ServiceB: '2000 req/min'
+
+  Request_Routing:
+    Path_Prefix: '/api/v1/[service]'
+    Load_Balancing: 'Round Robin/Least Connections'
+
+  Security:
+    CORS: 'Enabled'
+    Headers: ['X-Request-ID', 'X-Correlation-ID']
+    Timeout: '30s'
+```
 
 ## Service Observability
 
 ### Logging Standards
+
 ```typescript
 // Structured Logging
 interface LogContext {
@@ -314,7 +319,7 @@ class ServiceLogger {
   log(context: LogContext): void {
     console.log(JSON.stringify(context));
   }
-  
+
   error(error: Error, context: Partial<LogContext>): void {
     this.log({
       ...context,
@@ -322,26 +327,24 @@ class ServiceLogger {
       message: error.message,
       metadata: {
         stack: error.stack,
-        ...context.metadata
-      }
+        ...context.metadata,
+      },
     });
   }
 }
 ```
 
 ### Distributed Tracing
+
 ```typescript
 // OpenTelemetry Integration
 import { trace, context, SpanStatusCode } from '@opentelemetry/api';
 
 const tracer = trace.getTracer('service-name', '1.0.0');
 
-async function tracedOperation<T>(
-  name: string,
-  fn: () => Promise<T>
-): Promise<T> {
+async function tracedOperation<T>(name: string, fn: () => Promise<T>): Promise<T> {
   const span = tracer.startSpan(name);
-  
+
   try {
     const result = await fn();
     span.setStatus({ code: SpanStatusCode.OK });
@@ -349,7 +352,7 @@ async function tracedOperation<T>(
   } catch (error) {
     span.setStatus({
       code: SpanStatusCode.ERROR,
-      message: error.message
+      message: error.message,
     });
     span.recordException(error);
     throw error;
@@ -360,6 +363,7 @@ async function tracedOperation<T>(
 ```
 
 ### Metrics Collection
+
 ```typescript
 // Prometheus Metrics
 import { Counter, Histogram, Gauge } from 'prom-client';
@@ -367,26 +371,26 @@ import { Counter, Histogram, Gauge } from 'prom-client';
 const requestCounter = new Counter({
   name: 'http_requests_total',
   help: 'Total HTTP requests',
-  labelNames: ['method', 'path', 'status']
+  labelNames: ['method', 'path', 'status'],
 });
 
 const requestDuration = new Histogram({
   name: 'http_request_duration_seconds',
   help: 'HTTP request duration',
   labelNames: ['method', 'path'],
-  buckets: [0.1, 0.5, 1, 2, 5]
+  buckets: [0.1, 0.5, 1, 2, 5],
 });
 
 const activeConnections = new Gauge({
   name: 'active_connections',
-  help: 'Number of active connections'
+  help: 'Number of active connections',
 });
 ```
-
 
 ## Deployment & Scaling
 
 ### Container Configuration
+
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS builder
@@ -405,6 +409,7 @@ CMD ["node", "dist/index.js"]
 ```
 
 ### Kubernetes Deployment
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -426,35 +431,36 @@ spec:
         app: [service-name]
     spec:
       containers:
-      - name: [service-name]
-        image: gtcx/[service-name]:latest
-        ports:
-        - containerPort: 3000
-        env:
-        - name: NODE_ENV
-          value: "production"
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 3000
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: [service-name]
+          image: gtcx/[service-name]:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: 'production'
+          resources:
+            requests:
+              memory: '256Mi'
+              cpu: '250m'
+            limits:
+              memory: '512Mi'
+              cpu: '500m'
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
 ```
 
 ### Auto-Scaling Configuration
+
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -482,10 +488,10 @@ spec:
         averageUtilization: 80
 ```
 
-
 ## Testing Strategy
 
 ### Service Testing Levels
+
 ```typescript
 // Unit Tests
 describe('TransactionService', () => {
@@ -499,9 +505,7 @@ describe('TransactionService', () => {
 // Integration Tests
 describe('Transaction API', () => {
   it('should handle full transaction flow', async () => {
-    const response = await request(app)
-      .post('/transactions')
-      .send(validTransaction);
+    const response = await request(app).post('/transactions').send(validTransaction);
     expect(response.status).toBe(201);
   });
 });
@@ -514,12 +518,12 @@ describe('Transaction Service Consumer', () => {
       uponReceiving: 'a request for transaction',
       withRequest: {
         method: 'GET',
-        path: '/transactions/123'
+        path: '/transactions/123',
       },
       willRespondWith: {
         status: 200,
-        body: expectedTransaction
-      }
+        body: expectedTransaction,
+      },
     });
   });
 });
@@ -535,48 +539,49 @@ describe('Payment Flow', () => {
 });
 ```
 
-
 ## Service Performance
 
 ### Performance Requirements
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Response Time (p50) | < 100ms | Prometheus |
-| Response Time (p99) | < 500ms | Prometheus |
-| Throughput | > 1000 RPS | Load Testing |
-| Error Rate | < 0.1% | Monitoring |
-| Availability | > 99.9% | Uptime Monitor |
+
+| Metric              | Target     | Measurement    |
+| ------------------- | ---------- | -------------- |
+| Response Time (p50) | < 100ms    | Prometheus     |
+| Response Time (p99) | < 500ms    | Prometheus     |
+| Throughput          | > 1000 RPS | Load Testing   |
+| Error Rate          | < 0.1%     | Monitoring     |
+| Availability        | > 99.9%    | Uptime Monitor |
 
 ### Performance Optimization
+
 ```typescript
 // Connection Pooling
 const pool = new Pool({
   max: 20,
   min: 5,
-  idle: 10000
+  idle: 10000,
 });
 
 // Caching Strategy
 const cache = new NodeCache({
   stdTTL: 600,
-  checkperiod: 120
+  checkperiod: 120,
 });
 
 // Batch Processing
 class BatchProcessor {
   private batch: Item[] = [];
   private timer?: NodeJS.Timeout;
-  
+
   async add(item: Item): Promise<void> {
     this.batch.push(item);
-    
+
     if (this.batch.length >= 100) {
       await this.flush();
     } else if (!this.timer) {
       this.timer = setTimeout(() => this.flush(), 1000);
     }
   }
-  
+
   private async flush(): Promise<void> {
     const items = this.batch.splice(0);
     await this.processBatch(items);
@@ -586,32 +591,33 @@ class BatchProcessor {
 }
 ```
 
-
 ## Service Lifecycle
 
 ### Graceful Shutdown
+
 ```typescript
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, starting graceful shutdown');
-  
+
   // Stop accepting new requests
   server.close();
-  
+
   // Wait for ongoing requests to complete
   await waitForRequestsToComplete();
-  
+
   // Close database connections
   await database.close();
-  
+
   // Close message queue connections
   await messageQueue.close();
-  
+
   // Final cleanup
   process.exit(0);
 });
 ```
 
 ### Health Checks
+
 ```typescript
 app.get('/health', (req, res) => {
   res.json({
@@ -619,24 +625,19 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
     memory: process.memoryUsage(),
-    version: process.env.VERSION
+    version: process.env.VERSION,
   });
 });
 
 app.get('/ready', async (req, res) => {
-  const checks = await Promise.all([
-    checkDatabase(),
-    checkMessageQueue(),
-    checkDependencies()
-  ]);
-  
-  const ready = checks.every(check => check.status === 'ready');
+  const checks = await Promise.all([checkDatabase(), checkMessageQueue(), checkDependencies()]);
+
+  const ready = checks.every((check) => check.status === 'ready');
   res.status(ready ? 200 : 503).json({
     ready,
-    checks
+    checks,
   });
 });
 ```
 
-
-*This template provides a comprehensive guide for building scalable, resilient microservices in the GTCX ecosystem.*
+_This template provides a comprehensive guide for building scalable, resilient microservices in the GTCX ecosystem._

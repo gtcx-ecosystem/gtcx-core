@@ -1,10 +1,9 @@
 /**
  * Domain Events
- * 
+ *
  * Event definitions for cross-service observability.
  * Implements P12 (Observability) principle.
- * 
- * @package @gtcx/domain
+ *
  */
 
 // ============================================================================
@@ -18,7 +17,7 @@ export type DomainEventType =
   | 'registration.completed'
   | 'registration.failed'
   | 'registration.progress_updated'
-  
+
   // Trading events
   | 'trading.price_calculated'
   | 'trading.opportunity_found'
@@ -27,7 +26,7 @@ export type DomainEventType =
   | 'trading.trade_failed'
   | 'trading.settlement_started'
   | 'trading.settlement_completed'
-  
+
   // Compliance events
   | 'compliance.check_started'
   | 'compliance.check_completed'
@@ -221,12 +220,12 @@ export interface IDomainEventEmitter {
    * Emit a domain event
    */
   emit(event: DomainEvent): void;
-  
+
   /**
    * Subscribe to events by type
    */
   on(type: DomainEventType, handler: (event: DomainEvent) => void): () => void;
-  
+
   /**
    * Subscribe to all events
    */
@@ -239,19 +238,19 @@ export interface IDomainEventEmitter {
 
 export class DomainEventFactory {
   private correlationId?: string;
-  
+
   constructor(correlationId?: string) {
     this.correlationId = correlationId;
   }
-  
+
   setCorrelationId(id: string): void {
     this.correlationId = id;
   }
-  
+
   getCorrelationId(): string | undefined {
     return this.correlationId;
   }
-  
+
   /**
    * Create a registration event
    */
@@ -268,14 +267,11 @@ export class DomainEventFactory {
       version: 1,
     };
   }
-  
+
   /**
    * Create a trading event
    */
-  trading<T>(
-    type: Extract<DomainEventType, `trading.${string}`>,
-    payload: T
-  ): DomainEvent<T> {
+  trading<T>(type: Extract<DomainEventType, `trading.${string}`>, payload: T): DomainEvent<T> {
     return {
       type,
       payload,
@@ -285,7 +281,7 @@ export class DomainEventFactory {
       version: 1,
     };
   }
-  
+
   /**
    * Create a compliance event
    */
@@ -322,52 +318,52 @@ export class InMemoryEventEmitter implements IDomainEventEmitter {
   private handlers: Map<DomainEventType, Set<(event: DomainEvent) => void>> = new Map();
   private globalHandlers: Set<(event: DomainEvent) => void> = new Set();
   private events: DomainEvent[] = [];
-  
+
   emit(event: DomainEvent): void {
     this.events.push(event);
-    
+
     // Notify type-specific handlers
     const typeHandlers = this.handlers.get(event.type);
     if (typeHandlers) {
       typeHandlers.forEach((handler) => handler(event));
     }
-    
+
     // Notify global handlers
     this.globalHandlers.forEach((handler) => handler(event));
   }
-  
+
   on(type: DomainEventType, handler: (event: DomainEvent) => void): () => void {
     if (!this.handlers.has(type)) {
       this.handlers.set(type, new Set());
     }
     this.handlers.get(type)!.add(handler);
-    
+
     return () => {
       this.handlers.get(type)?.delete(handler);
     };
   }
-  
+
   onAny(handler: (event: DomainEvent) => void): () => void {
     this.globalHandlers.add(handler);
     return () => {
       this.globalHandlers.delete(handler);
     };
   }
-  
+
   /**
    * Get all emitted events (for testing)
    */
   getEvents(): DomainEvent[] {
     return [...this.events];
   }
-  
+
   /**
    * Get events by type (for testing)
    */
   getEventsByType(type: DomainEventType): DomainEvent[] {
     return this.events.filter((e) => e.type === type);
   }
-  
+
   /**
    * Clear all events (for testing)
    */

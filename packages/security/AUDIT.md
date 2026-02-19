@@ -45,20 +45,20 @@ packages/security/
 
 ## Principle Compliance Matrix
 
-| # | Principle | Score | Evidence |
-|---|-----------|-------|----------|
-| **P1** | Package Structure | 10/10 | Clear module boundaries, no circular deps |
-| **P2** | Type Safety | 10/10 | Zod schemas everywhere, strict TypeScript |
-| **P3** | Modularity | 10/10 | Single-responsibility functions throughout |
-| **P4** | Composability | 10/10 | DI patterns, pluggable handlers |
-| **P5** | AI-Native | 10/10 | Structured events enable ML analysis |
-| **P6** | Asset Abstraction | 10/10 | Zero commodity-specific code |
-| **P7** | Documentation | 10/10 | JSDoc, README, examples |
-| **P8** | Offline-First | 10/10 | Full offline module with 72h support |
-| **P9** | Security | 10/10 | Validation at all boundaries |
-| **P10** | API Stability | 9/10 | Versioned schemas, stable exports |
-| **P11** | Data Evolution | 10/10 | Schema versioning in types |
-| **P12** | Observability | 10/10 | Event logging, audit trails |
+| #       | Principle         | Score | Evidence                                   |
+| ------- | ----------------- | ----- | ------------------------------------------ |
+| **P1**  | Package Structure | 10/10 | Clear module boundaries, no circular deps  |
+| **P2**  | Type Safety       | 10/10 | Zod schemas everywhere, strict TypeScript  |
+| **P3**  | Modularity        | 10/10 | Single-responsibility functions throughout |
+| **P4**  | Composability     | 10/10 | DI patterns, pluggable handlers            |
+| **P5**  | AI-Native         | 10/10 | Structured events enable ML analysis       |
+| **P6**  | Asset Abstraction | 10/10 | Zero commodity-specific code               |
+| **P7**  | Documentation     | 10/10 | JSDoc, README, examples                    |
+| **P8**  | Offline-First     | 10/10 | Full offline module with 72h support       |
+| **P9**  | Security          | 10/10 | Validation at all boundaries               |
+| **P10** | API Stability     | 9/10  | Versioned schemas, stable exports          |
+| **P11** | Data Evolution    | 10/10 | Schema versioning in types                 |
+| **P12** | Observability     | 10/10 | Event logging, audit trails                |
 
 **Overall: 9.9/10 - PRODUCTION READY**
 
@@ -69,9 +69,10 @@ packages/security/
 ### P1: Package Structure (10/10)
 
 ✅ **Module separation:**
+
 ```
 validation/ → input layer
-auth/       → authentication/authorization layer  
+auth/       → authentication/authorization layer
 offline/    → persistence layer
 audit/      → observability layer
 ```
@@ -79,6 +80,7 @@ audit/      → observability layer
 ✅ **No circular dependencies** - Each module can be imported independently
 
 ✅ **Subpath exports** in package.json:
+
 ```json
 "exports": {
   ".": "./dist/index.js",
@@ -92,6 +94,7 @@ audit/      → observability layer
 ### P2: Type Safety (10/10)
 
 ✅ **Zod at all boundaries:**
+
 - `CommonSchemas` - 30+ reusable schemas
 - `SessionSchema` - Session validation
 - `CachedCredentialSchema` - Offline credentials
@@ -105,6 +108,7 @@ audit/      → observability layer
 ### P3: Modularity (10/10)
 
 ✅ **Small functions:**
+
 - `sanitizeString()` - 40 lines
 - `hasPermission()` - 25 lines
 - `isSessionValid()` - 30 lines
@@ -115,6 +119,7 @@ audit/      → observability layer
 ### P4: Composability (10/10)
 
 ✅ **Dependency injection patterns:**
+
 ```typescript
 // Storage backend is injected
 class SecureStorage {
@@ -130,6 +135,7 @@ logger.addHandler(customHandler);
 ### P5: AI-Native (10/10)
 
 ✅ **Structured event format:**
+
 ```typescript
 interface SecurityEvent {
   timestamp: string;
@@ -158,6 +164,7 @@ interface SecurityEvent {
 ### P7: Documentation (10/10)
 
 ✅ **README.md** - 500+ lines with:
+
 - Overview and architecture diagram
 - Quick start examples
 - Full API reference
@@ -165,6 +172,7 @@ interface SecurityEvent {
 - Principle alignment table
 
 ✅ **JSDoc on all exports:**
+
 ```typescript
 /**
  * Sanitize a string input
@@ -172,7 +180,7 @@ interface SecurityEvent {
  * @param options - Sanitization options
  * @returns Sanitized string
  */
-export function sanitizeString(input: unknown, options?: StringSanitizeOptions): string
+export function sanitizeString(input: unknown, options?: StringSanitizeOptions): string;
 ```
 
 ✅ **Inline examples** in JSDoc
@@ -180,19 +188,22 @@ export function sanitizeString(input: unknown, options?: StringSanitizeOptions):
 ### P8: Offline-First (10/10)
 
 ✅ **Dedicated offline module:**
+
 - `SecureStorage` - Encrypted local storage
 - `CredentialCache` - 72-hour credential validity
 - `TamperDetection` - Signature chain verification
 
 ✅ **Session offline support:**
+
 ```typescript
-function prepareSessionForOffline(session: Session): Session
-function isSessionValidOffline(session: Session): SessionValidationResult
+function prepareSessionForOffline(session: Session): Session;
+function isSessionValidOffline(session: Session): SessionValidationResult;
 ```
 
 ✅ **Token offline support:**
+
 ```typescript
-function isTokenValidOffline(claims: GTCXTokenClaims): boolean
+function isTokenValidOffline(claims: GTCXTokenClaims): boolean;
 ```
 
 ### P9: Security (10/10)
@@ -218,6 +229,7 @@ function isTokenValidOffline(claims: GTCXTokenClaims): boolean
 ### P11: Data Evolution (10/10)
 
 ✅ **Schema versioning:**
+
 ```typescript
 // types.ts
 export const OfflineSecurityConfigSchema = z.object({
@@ -232,11 +244,13 @@ export const OfflineSecurityConfigSchema = z.object({
 ### P12: Observability (10/10)
 
 ✅ **Security events:**
+
 - 40+ event types covering all security scenarios
 - Severity classification (INFO/WARN/HIGH/CRITICAL)
 - Structured metadata for analysis
 
 ✅ **Audit trails:**
+
 ```typescript
 const audit = createAuditTrail('custody_transfer');
 audit.record('initiated', metadata);
@@ -252,21 +266,21 @@ await audit.finalize('SUCCESS');
 
 **Test file:** `tests/security.test.ts`
 
-| Module | Test Cases | Status |
-|--------|------------|--------|
-| validation/schemas | 8 | ✅ Scaffolded |
-| validation/sanitize | 7 | ✅ Scaffolded |
-| validation/boundary | 4 | ✅ Scaffolded |
-| auth/permissions | 4 | ✅ Scaffolded |
-| auth/sessions | 7 | ✅ Scaffolded |
-| auth/tokens | 5 | ✅ Scaffolded |
-| offline/secure-storage | 7 | ✅ Scaffolded |
-| offline/credential-cache | 6 | ✅ Scaffolded |
-| offline/tamper-detection | 5 | ✅ Scaffolded |
-| audit/events | 5 | ✅ Scaffolded |
-| audit/logger | 5 | ✅ Scaffolded |
-| audit/audit-trail | 3 | ✅ Scaffolded |
-| integration | 3 | ✅ Scaffolded |
+| Module                   | Test Cases | Status        |
+| ------------------------ | ---------- | ------------- |
+| validation/schemas       | 8          | ✅ Scaffolded |
+| validation/sanitize      | 7          | ✅ Scaffolded |
+| validation/boundary      | 4          | ✅ Scaffolded |
+| auth/permissions         | 4          | ✅ Scaffolded |
+| auth/sessions            | 7          | ✅ Scaffolded |
+| auth/tokens              | 5          | ✅ Scaffolded |
+| offline/secure-storage   | 7          | ✅ Scaffolded |
+| offline/credential-cache | 6          | ✅ Scaffolded |
+| offline/tamper-detection | 5          | ✅ Scaffolded |
+| audit/events             | 5          | ✅ Scaffolded |
+| audit/logger             | 5          | ✅ Scaffolded |
+| audit/audit-trail        | 3          | ✅ Scaffolded |
+| integration              | 3          | ✅ Scaffolded |
 
 **Total: 69 test cases scaffolded**
 
@@ -276,14 +290,14 @@ await audit.finalize('SUCCESS');
 
 **Workflow:** `.github/workflows/security.yml`
 
-| Gate | Tool | Purpose |
-|------|------|---------|
-| Dependency Audit | pnpm audit | Vulnerability detection |
-| Secret Detection | TruffleHog + Gitleaks | Credential leaks |
-| Static Analysis | CodeQL | Security patterns |
-| Type Safety | TypeScript | No `any` in exports |
-| Security Linting | ESLint | eval(), innerHTML |
-| License Compliance | license-checker | Compatible licenses |
+| Gate               | Tool                  | Purpose                 |
+| ------------------ | --------------------- | ----------------------- |
+| Dependency Audit   | pnpm audit            | Vulnerability detection |
+| Secret Detection   | TruffleHog + Gitleaks | Credential leaks        |
+| Static Analysis    | CodeQL                | Security patterns       |
+| Type Safety        | TypeScript            | No `any` in exports     |
+| Security Linting   | ESLint                | eval(), innerHTML       |
+| License Compliance | license-checker       | Compatible licenses     |
 
 ---
 
@@ -302,4 +316,4 @@ await audit.finalize('SUCCESS');
 
 ---
 
-*Audit complete. Package meets all 12 architectural principles.*
+_Audit complete. Package meets all 12 architectural principles._

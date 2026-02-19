@@ -256,8 +256,7 @@ impl ConsensusEngine {
     ///
     /// Returns [`ConsensusError::UnknownProposal`] if the proposal doesn't exist.
     pub fn prepare(&mut self, proposal_id: &str) -> Result<()> {
-        let proposal = self
-            .find_proposal_mut(proposal_id)?;
+        let proposal = self.find_proposal_mut(proposal_id)?;
 
         if proposal.state != ProposalState::PrePrepare {
             return Ok(()); // idempotent
@@ -294,7 +293,11 @@ impl ConsensusEngine {
         }
 
         // Check duplicate
-        if proposal.votes.iter().any(|v| v.validator_id == vote.validator_id) {
+        if proposal
+            .votes
+            .iter()
+            .any(|v| v.validator_id == vote.validator_id)
+        {
             return Err(ConsensusError::DuplicateVote {
                 validator: vote.validator_id,
                 proposal: proposal_id.to_string(),
@@ -444,12 +447,10 @@ mod tests {
     #[test]
     fn test_government_has_highest_weight() {
         assert!(
-            StakeholderType::Government.default_weight()
-                > StakeholderType::Vault.default_weight()
+            StakeholderType::Government.default_weight() > StakeholderType::Vault.default_weight()
         );
         assert!(
-            StakeholderType::Vault.default_weight()
-                > StakeholderType::Industry.default_weight()
+            StakeholderType::Vault.default_weight() > StakeholderType::Industry.default_weight()
         );
         assert!(
             StakeholderType::Industry.default_weight()
@@ -561,9 +562,7 @@ mod tests {
     #[test]
     fn test_prepare_phase() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.prepare("p1").unwrap();
         assert_eq!(
             engine.get_proposal("p1").unwrap().state,
@@ -583,9 +582,7 @@ mod tests {
     #[test]
     fn test_cast_vote() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.prepare("p1").unwrap();
 
         let state = engine
@@ -606,9 +603,7 @@ mod tests {
     #[test]
     fn test_quorum_reached_advances_to_commit() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.prepare("p1").unwrap();
 
         // Gov (40) + Vault (30) = 70 > 67
@@ -640,9 +635,7 @@ mod tests {
     #[test]
     fn test_reject_votes_dont_count() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.prepare("p1").unwrap();
 
         // Gov votes NO (40 weight doesn't count toward quorum)
@@ -675,9 +668,7 @@ mod tests {
     #[test]
     fn test_duplicate_vote_rejected() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.prepare("p1").unwrap();
 
         engine
@@ -708,9 +699,7 @@ mod tests {
     #[test]
     fn test_unknown_validator_vote_rejected() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.prepare("p1").unwrap();
 
         let err = engine
@@ -730,9 +719,7 @@ mod tests {
     #[test]
     fn test_view_mismatch_rejected() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.prepare("p1").unwrap();
 
         let err = engine
@@ -752,9 +739,7 @@ mod tests {
     #[test]
     fn test_vote_on_finalized_rejected() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.finalize("p1", true).unwrap();
 
         let err = engine
@@ -788,9 +773,7 @@ mod tests {
     #[test]
     fn test_manual_finalize_accept() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.finalize("p1", true).unwrap();
         let p = engine.get_proposal("p1").unwrap();
         assert_eq!(p.state, ProposalState::Finalized);
@@ -800,9 +783,7 @@ mod tests {
     #[test]
     fn test_manual_finalize_reject() {
         let mut engine = setup_engine();
-        engine
-            .submit_proposal("p1".to_string(), vec![])
-            .unwrap();
+        engine.submit_proposal("p1".to_string(), vec![]).unwrap();
         engine.finalize("p1", false).unwrap();
         let p = engine.get_proposal("p1").unwrap();
         assert_eq!(p.state, ProposalState::Finalized);

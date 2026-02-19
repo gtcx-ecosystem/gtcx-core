@@ -4,7 +4,6 @@
  * Handles data evolution across schema versions.
  * Implements P11 (Data Evolution) principle.
  *
- * @package @gtcx/domain
  */
 
 // ============================================================================

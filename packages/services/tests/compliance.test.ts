@@ -789,7 +789,17 @@ describe('UnifiedComplianceService', () => {
       });
 
       const lot = createMockAssetLot();
-      await expect(service.checkAssetLotCompliance(lot)).rejects.toThrow('Hash computation failed');
+      await expect(service.checkAssetLotCompliance(lot)).rejects.toThrow(
+        'Failed to check asset lot compliance'
+      );
+
+      try {
+        await service.checkAssetLotCompliance(lot);
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+        expect((error as Error).cause).toBeInstanceOf(Error);
+        expect(((error as Error).cause as Error).message).toContain('Hash computation failed');
+      }
       expect(crypto.createHash).toHaveBeenCalledWith('test-data');
     });
   });

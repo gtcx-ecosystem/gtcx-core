@@ -24,7 +24,6 @@ const cryptoLog = createCategoryLogger('crypto');
 /**
  * Generate a new key pair (traced)
  *
- * @description
  * Generates a new Ed25519 or secp256k1 key pair. The operation is logged
  * but private keys are NEVER included in logs.
  */

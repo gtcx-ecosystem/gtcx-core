@@ -4,14 +4,14 @@ Performance-critical and security-critical infrastructure for GTCX Protocol. The
 
 ## Crates
 
-| Crate | Purpose | Status |
-|-------|---------|--------|
-| `gtcx-crypto` | Cryptographic primitives (Ed25519, secp256k1, SHA-256, Blake3) | In Development |
-| `gtcx-zkp` | Zero-knowledge proofs (arkworks-based) | Planned |
-| `gtcx-consensus` | PANX weighted PBFT consensus | Planned |
-| `gtcx-network` | P2P networking (libp2p) | Planned |
-| `gtcx-edge` | Edge/WASM runtime for offline verification | Planned |
-| `gtcx-node` | Node.js NAPI-RS bindings | Planned |
+| Crate            | Purpose                                                        | Status         |
+| ---------------- | -------------------------------------------------------------- | -------------- |
+| `gtcx-crypto`    | Cryptographic primitives (Ed25519, secp256k1, SHA-256, Blake3) | In Development |
+| `gtcx-zkp`       | Zero-knowledge proofs (arkworks-based)                         | Planned        |
+| `gtcx-consensus` | PANX weighted PBFT consensus                                   | Planned        |
+| `gtcx-network`   | P2P networking (libp2p)                                        | Planned        |
+| `gtcx-edge`      | Edge/WASM runtime for offline verification                     | Planned        |
+| `gtcx-node`      | Node.js NAPI-RS bindings                                       | Planned        |
 
 ## Architecture
 
@@ -113,16 +113,16 @@ cargo bench
 
 ## Principle Alignment
 
-| Principle | Rust Enforcement |
-|-----------|-----------------|
-| P1 Package Structure | Each crate has a single responsibility |
-| P2 Type Safety | Rust's type system + newtype pattern prevents key/signature confusion |
-| P3 Modularity | Ownership system enforces purity; module system requires explicit imports |
-| P5 AI-Native | `tracing` crate integration with `#[instrument]` on public functions |
-| P6 Asset Abstraction | Generic types; commodity passed as parameter |
-| P7 Documentation | `#![deny(missing_docs)]` enforced at compile time |
-| P8 Offline-First | `gtcx-edge` provides offline verification via WASM |
-| P9 Security | No unsafe code; zeroizing secrets; audited crypto libraries |
+| Principle            | Rust Enforcement                                                          |
+| -------------------- | ------------------------------------------------------------------------- |
+| P1 Package Structure | Each crate has a single responsibility                                    |
+| P2 Type Safety       | Rust's type system + newtype pattern prevents key/signature confusion     |
+| P3 Modularity        | Ownership system enforces purity; module system requires explicit imports |
+| P5 AI-Native         | `tracing` crate integration with `#[instrument]` on public functions      |
+| P6 Asset Abstraction | Generic types; commodity passed as parameter                              |
+| P7 Documentation     | `#![deny(missing_docs)]` enforced at compile time                         |
+| P8 Offline-First     | `gtcx-edge` provides offline verification via WASM                        |
+| P9 Security          | No unsafe code; zeroizing secrets; audited crypto libraries               |
 
 ## Related
 
