@@ -17,6 +17,7 @@ pnpm test:coverage:critical
 pnpm build
 pnpm api:check
 pnpm provenance:generate
+pnpm quality:kpi:export
 pnpm run docs
 pnpm docs:check-links
 pnpm security:threat-matrix
@@ -43,6 +44,8 @@ cargo test --workspace --lib
 ## Evidence Artifacts
 
 1. Generate evidence manifest: `pnpm provenance:generate`.
-2. Confirm manifest exists at `artifacts/provenance-manifest.json`.
-3. CI artifact name: `ci-provenance-manifest`.
-4. Release artifact name: `release-provenance-manifest`.
+2. Export KPI metrics: `pnpm quality:kpi:export`.
+3. Confirm manifest exists at `artifacts/provenance-manifest.json`.
+4. Confirm KPI metrics exist at `quality/kpi-metrics.json`.
+5. CI artifact names: `ci-provenance-manifest`, `ci-quality-kpis`.
+6. Release artifact names: `release-provenance-manifest`, `release-quality-kpis`.

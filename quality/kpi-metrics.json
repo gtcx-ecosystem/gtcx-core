@@ -1,0 +1,163 @@
+{
+  "generatedAt": "2026-02-19T18:56:20.057Z",
+  "source": {
+    "runId": null,
+    "runAttempt": null,
+    "sha": null,
+    "ref": null
+  },
+  "criticalCoverage": {
+    "packages": {
+      "crypto": {
+        "statements": {
+          "covered": 644,
+          "total": 681,
+          "pct": 94.56681350954479
+        },
+        "branches": {
+          "covered": 143,
+          "total": 150,
+          "pct": 95.33333333333334
+        },
+        "functions": {
+          "covered": 63,
+          "total": 74,
+          "pct": 85.13513513513513
+        },
+        "lines": {
+          "covered": 644,
+          "total": 681,
+          "pct": 94.56681350954479
+        }
+      },
+      "domain": {
+        "statements": {
+          "covered": 1543,
+          "total": 1601,
+          "pct": 96.37726420986883
+        },
+        "branches": {
+          "covered": 441,
+          "total": 462,
+          "pct": 95.45454545454545
+        },
+        "functions": {
+          "covered": 166,
+          "total": 177,
+          "pct": 93.78531073446328
+        },
+        "lines": {
+          "covered": 1543,
+          "total": 1601,
+          "pct": 96.37726420986883
+        }
+      },
+      "security": {
+        "statements": {
+          "covered": 1899,
+          "total": 2114,
+          "pct": 89.82970671712394
+        },
+        "branches": {
+          "covered": 374,
+          "total": 407,
+          "pct": 91.8918918918919
+        },
+        "functions": {
+          "covered": 117,
+          "total": 130,
+          "pct": 90
+        },
+        "lines": {
+          "covered": 1899,
+          "total": 2114,
+          "pct": 89.82970671712394
+        }
+      },
+      "services": {
+        "statements": {
+          "covered": 1215,
+          "total": 1328,
+          "pct": 91.4909638554217
+        },
+        "branches": {
+          "covered": 197,
+          "total": 224,
+          "pct": 87.94642857142857
+        },
+        "functions": {
+          "covered": 59,
+          "total": 63,
+          "pct": 93.65079365079364
+        },
+        "lines": {
+          "covered": 1215,
+          "total": 1328,
+          "pct": 91.4909638554217
+        }
+      },
+      "verification": {
+        "statements": {
+          "covered": 1622,
+          "total": 1775,
+          "pct": 91.38028169014085
+        },
+        "branches": {
+          "covered": 205,
+          "total": 238,
+          "pct": 86.1344537815126
+        },
+        "functions": {
+          "covered": 51,
+          "total": 66,
+          "pct": 77.27272727272727
+        },
+        "lines": {
+          "covered": 1622,
+          "total": 1775,
+          "pct": 91.38028169014085
+        }
+      }
+    },
+    "aggregate": {
+      "statements": {
+        "covered": 6923,
+        "total": 7499,
+        "pct": 92.31897586344846
+      },
+      "branches": {
+        "covered": 1360,
+        "total": 1481,
+        "pct": 91.82984469952734
+      },
+      "functions": {
+        "covered": 456,
+        "total": 510,
+        "pct": 89.41176470588236
+      },
+      "lines": {
+        "covered": 6923,
+        "total": 7499,
+        "pct": 92.31897586344846
+      }
+    },
+    "thresholdPass": true
+  },
+  "performanceBudget": {
+    "metricsCount": 7,
+    "failedMetrics": [],
+    "pass": true
+  },
+  "evidence": {
+    "hasProvenance": true,
+    "missingEvidenceCount": 0,
+    "missingEvidencePaths": []
+  },
+  "kpis": {
+    "highSeverityEscapeDefectsMonth": 0,
+    "flakyTestRatePercent": 0,
+    "docsApiDriftIncidentsMonth": 0,
+    "securityPolicyViolationsMerged": 0,
+    "ciQualityGatePassRatePercent": 100
+  }
+}

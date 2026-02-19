@@ -79,6 +79,17 @@ jobs:
           name: release-provenance-manifest
           path: artifacts/provenance-manifest.json
 
+      - name: Export KPI metrics
+        run: pnpm quality:kpi:export
+
+      - name: Upload KPI metrics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-quality-kpis
+          path: |
+            quality/kpi-metrics.json
+            docs/quality/10-10-remediation-tracker.md
+
       - name: Run tests
         run: pnpm test
 

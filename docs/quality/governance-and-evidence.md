@@ -42,15 +42,22 @@ Blocking scripts:
 5. `pnpm test:coverage:critical`
 6. `pnpm api:check`
 7. `pnpm provenance:generate`
+8. `pnpm quality:kpi:export`
 
 ## Evidence Artifacts
 
-Every CI and release run must publish `artifacts/provenance-manifest.json` with:
+Every CI and release run must publish:
+
+1. `artifacts/provenance-manifest.json`
+2. `quality/kpi-metrics.json`
+
+Required evidence fields:
 
 1. Commit and branch identity.
 2. Lockfile and API baseline hashes.
 3. Hashes for governance/security/performance evidence files.
 4. The enforced quality gate command set.
+5. KPI values and coverage/performance derivations from run artifacts.
 
 ## Monthly Audit
 

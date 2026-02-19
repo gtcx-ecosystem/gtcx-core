@@ -45,6 +45,7 @@ const requiredScripts = [
   'api:check',
   'test:coverage:critical',
   'provenance:generate',
+  'quality:kpi:export',
   'docs:check-links',
   'quality:governance:check',
 ];
@@ -113,6 +114,8 @@ checkWorkflowStepNames(ciRaw, 'CI workflow', [
   'API surface baseline check',
   'Generate provenance manifest',
   'Upload provenance artifact',
+  'Export KPI metrics',
+  'Upload KPI metrics artifact',
   'Generate API docs',
   'Validate markdown links',
 ]);
@@ -125,6 +128,7 @@ checkWorkflowCommands(ciRaw, 'CI workflow', [
   'pnpm test:coverage:critical',
   'pnpm api:check',
   'pnpm provenance:generate',
+  'pnpm quality:kpi:export',
   'pnpm run docs',
   'pnpm docs:check-links',
 ]);
@@ -138,6 +142,8 @@ checkWorkflowStepNames(releaseRaw, 'Release workflow', [
   'API surface baseline check',
   'Generate provenance manifest',
   'Upload provenance artifact',
+  'Export KPI metrics',
+  'Upload KPI metrics artifact',
   'Generate API docs',
   'Validate markdown links',
 ]);
@@ -150,6 +156,7 @@ checkWorkflowCommands(releaseRaw, 'Release workflow', [
   'pnpm test:coverage:critical',
   'pnpm api:check',
   'pnpm provenance:generate',
+  'pnpm quality:kpi:export',
   'pnpm run docs',
   'pnpm docs:check-links',
 ]);
