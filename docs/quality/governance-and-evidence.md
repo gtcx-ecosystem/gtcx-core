@@ -38,12 +38,13 @@ Blocking scripts:
 1. `pnpm architecture:check`
 2. `pnpm quality:governance:check`
 3. `pnpm security:threat-matrix`
-4. `pnpm perf:check-budgets`
-5. `pnpm test:coverage:critical`
-6. `pnpm api:check`
-7. `pnpm quality:kpi:collect`
-8. `pnpm quality:kpi:export`
-9. `pnpm provenance:generate`
+4. `pnpm perf:update-history`
+5. `pnpm perf:check-budgets`
+6. `pnpm test:coverage:critical`
+7. `pnpm api:check`
+8. `pnpm quality:kpi:collect`
+9. `pnpm quality:kpi:export`
+10. `pnpm provenance:generate`
 
 ## Evidence Artifacts
 
@@ -53,6 +54,7 @@ Every CI and release run must publish:
 2. `artifacts/ci-history.json`
 3. `quality/kpi-metrics.json`
 4. `quality/api-surface-report.json`
+5. `benchmarks/performance-report.json`
 
 Required evidence fields:
 
@@ -62,6 +64,7 @@ Required evidence fields:
 4. The enforced quality gate command set.
 5. KPI values and 30-day workflow/issue derivations from run artifacts.
 6. API diff classification and semver policy outcomes.
+7. Performance trend evaluation mode and outcomes.
 
 ## API Semver Enforcement
 
@@ -77,3 +80,9 @@ Required evidence fields:
 2. Verify CODEOWNERS coverage matches policy scope.
 3. Sample one CI and one release run; confirm provenance artifact availability.
 4. Record drift or policy exceptions in the remediation tracker.
+
+## Performance Trend Enforcement
+
+1. Trend history must be updated before budget checks (`pnpm perf:update-history`).
+2. Strict trend mode is required after trend readiness is reached for all metrics.
+3. Strict mode enablement: set `PERF_ENFORCE_TREND=true` in CI and release workflows once readiness is confirmed.

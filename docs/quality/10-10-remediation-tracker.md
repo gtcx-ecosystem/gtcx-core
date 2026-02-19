@@ -1,6 +1,6 @@
 # 10/10 Remediation Tracker and Scorecard
 
-Last updated: 2026-02-19
+Last updated: 2026-02-20
 Primary reference: `docs/quality/10-10-remediation-plan.md`
 
 ## Scoring Rubric
@@ -29,6 +29,15 @@ Primary reference: `docs/quality/10-10-remediation-plan.md`
 | Maintainability and Developer Experience |   0.05 |      8.5 |     9.0 |   10.0 | Improved |
 
 Current weighted overall score: `9.1/10`
+
+## Remaining to Reach 10.0
+
+1. Performance trend strict-mode readiness:
+   Current state: warning mode (insufficient historical samples for all metrics).
+   Required closeout: collect at least `trend.minSamples` real benchmark snapshots per metric, then set `PERF_ENFORCE_TREND=true` in CI and release workflows.
+2. Branch protection operational verification:
+   Current state: repository policy is documented and enforced in-repo, but GitHub branch protection settings must be re-verified with valid repository admin auth.
+   Required closeout: complete monthly audit checklist and record evidence links.
 
 ## Phase Checklist
 

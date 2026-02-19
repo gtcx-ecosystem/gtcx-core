@@ -22,6 +22,7 @@ pnpm provenance:generate
 pnpm run docs
 pnpm docs:check-links
 pnpm security:threat-matrix
+pnpm perf:update-history
 pnpm perf:check-budgets
 ```
 
@@ -51,8 +52,10 @@ cargo test --workspace --lib
 5. Confirm manifest exists at `artifacts/provenance-manifest.json`.
 6. Confirm API diff report exists at `quality/api-surface-report.json`.
 7. Confirm KPI metrics exist at `quality/kpi-metrics.json`.
-8. CI artifact names: `ci-provenance-manifest`, `ci-quality-kpis`, `ci-api-surface-report`.
-9. Release artifact names: `release-provenance-manifest`, `release-quality-kpis`, `release-api-surface-report`.
+8. Confirm benchmark trend history exists at `benchmarks/history.json`.
+9. Confirm benchmark performance report exists at `benchmarks/performance-report.json`.
+10. CI artifact names: `ci-provenance-manifest`, `ci-quality-kpis`, `ci-api-surface-report`, `ci-performance-report`.
+11. Release artifact names: `release-provenance-manifest`, `release-quality-kpis`, `release-api-surface-report`, `release-performance-report`.
 
 ## Release Semver Policy
 
@@ -60,3 +63,9 @@ cargo test --workspace --lib
    `API_ENFORCE_SEMVER=true API_BASELINE_REF=<previous-main-sha> pnpm api:check`.
 2. Breaking API diffs require a `major` version bump or `major` changeset.
 3. Additive API diffs require a `minor` or `major` version bump (or matching changeset).
+
+## Performance Trend Policy
+
+1. Use `pnpm perf:update-history` before `pnpm perf:check-budgets` in all local and CI release validations.
+2. Trend checks are warning-mode until enough historical samples exist per metric (`minSamples` in `benchmarks/performance-budgets.json`).
+3. After readiness is confirmed for all metrics, enforce strict mode in CI/release with `PERF_ENFORCE_TREND=true`.

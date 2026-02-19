@@ -55,11 +55,27 @@ Performance budgets are tracked in:
 
 - `benchmarks/performance-budgets.json`
 - `benchmarks/latest-results.json`
+- `benchmarks/history.json`
 
-CI validates that the latest recorded metrics do not exceed budget thresholds:
+CI updates history and validates budget/trend policy:
 
 ```bash
+pnpm perf:update-history
 pnpm perf:check-budgets
 ```
 
-When benchmark results change intentionally, update `benchmarks/latest-results.json` with the new measured values and confirm they remain within budget.
+`pnpm perf:check-budgets` writes `benchmarks/performance-report.json` with:
+
+- absolute budget pass/fail per metric
+- trend baseline comparison status
+- warnings/failures and sample counts
+
+Strict trend mode can be enabled with:
+
+```bash
+PERF_ENFORCE_TREND=true pnpm perf:check-budgets
+```
+
+Use strict trend mode after enough historical samples exist per metric (`trend.minSamples` in `benchmarks/performance-budgets.json`).
+
+When benchmark results change intentionally, update `benchmarks/latest-results.json`, then run history + budget checks and confirm report results stay within policy.
