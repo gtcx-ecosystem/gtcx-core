@@ -77,6 +77,7 @@ Required evidence fields:
 ## Monthly Audit
 
 1. Verify required branch protection settings are unchanged.
+   Command: `pnpm quality:verify-branch-protection`.
 2. Verify CODEOWNERS coverage matches policy scope.
 3. Sample one CI and one release run; confirm provenance artifact availability.
 4. Record drift or policy exceptions in the remediation tracker.
