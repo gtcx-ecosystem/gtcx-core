@@ -52,6 +52,7 @@ Every CI and release run must publish:
 1. `artifacts/provenance-manifest.json`
 2. `artifacts/ci-history.json`
 3. `quality/kpi-metrics.json`
+4. `quality/api-surface-report.json`
 
 Required evidence fields:
 
@@ -60,6 +61,15 @@ Required evidence fields:
 3. Hashes for governance/security/performance evidence files.
 4. The enforced quality gate command set.
 5. KPI values and 30-day workflow/issue derivations from run artifacts.
+6. API diff classification and semver policy outcomes.
+
+## API Semver Enforcement
+
+1. Release workflow must run `pnpm api:check` with `API_ENFORCE_SEMVER=true`.
+2. Reference baseline must be set with `API_BASELINE_REF` to the previous mainline SHA.
+3. Policy requirements:
+   breaking diff => `major` bump (version delta or changeset)
+   additive diff => `minor` or `major` bump (version delta or changeset)
 
 ## Monthly Audit
 

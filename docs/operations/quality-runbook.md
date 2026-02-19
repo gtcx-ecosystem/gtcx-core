@@ -15,7 +15,7 @@ pnpm typecheck
 pnpm test
 pnpm test:coverage:critical
 pnpm build
-pnpm api:check
+API_BASELINE_REF=<git-ref> pnpm api:check
 pnpm quality:kpi:collect
 pnpm quality:kpi:export
 pnpm provenance:generate
@@ -49,6 +49,14 @@ cargo test --workspace --lib
 3. Generate evidence manifest: `pnpm provenance:generate`.
 4. Confirm history exists at `artifacts/ci-history.json`.
 5. Confirm manifest exists at `artifacts/provenance-manifest.json`.
-6. Confirm KPI metrics exist at `quality/kpi-metrics.json`.
-7. CI artifact names: `ci-provenance-manifest`, `ci-quality-kpis`.
-8. Release artifact names: `release-provenance-manifest`, `release-quality-kpis`.
+6. Confirm API diff report exists at `quality/api-surface-report.json`.
+7. Confirm KPI metrics exist at `quality/kpi-metrics.json`.
+8. CI artifact names: `ci-provenance-manifest`, `ci-quality-kpis`, `ci-api-surface-report`.
+9. Release artifact names: `release-provenance-manifest`, `release-quality-kpis`, `release-api-surface-report`.
+
+## Release Semver Policy
+
+1. Use release-mode API checks with semver enforcement:
+   `API_ENFORCE_SEMVER=true API_BASELINE_REF=<previous-main-sha> pnpm api:check`.
+2. Breaking API diffs require a `major` version bump or `major` changeset.
+3. Additive API diffs require a `minor` or `major` version bump (or matching changeset).

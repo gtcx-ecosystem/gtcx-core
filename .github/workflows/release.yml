@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -70,7 +72,18 @@ jobs:
         run: pnpm build
 
       - name: API surface baseline check
-        run: pnpm api:check
+        run: |
+          BASELINE_REF="${{ github.event.before }}"
+          if [ -z "$BASELINE_REF" ] || [ "$BASELINE_REF" = "0000000000000000000000000000000000000000" ]; then
+            BASELINE_REF="HEAD~1"
+          fi
+          API_ENFORCE_SEMVER=true API_BASELINE_REF="$BASELINE_REF" pnpm api:check
+
+      - name: Upload API surface report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-api-surface-report
+          path: quality/api-surface-report.json
 
       - name: Collect KPI history
         env:

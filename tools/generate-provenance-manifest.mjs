@@ -70,6 +70,7 @@ const manifest = {
     'pnpm test:coverage:critical',
     'pnpm build',
     'pnpm api:check',
+    'pnpm api:check:release',
     'pnpm quality:kpi:collect',
     'pnpm quality:kpi:export',
     'pnpm run docs',

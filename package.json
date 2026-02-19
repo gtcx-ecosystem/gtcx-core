@@ -29,6 +29,7 @@
     "security:threat-matrix": "node ./tools/check-threat-matrix.mjs",
     "perf:check-budgets": "node ./tools/check-performance-budgets.mjs",
     "api:check": "node ./tools/check-api-surface.mjs",
+    "api:check:release": "API_ENFORCE_SEMVER=true API_BASELINE_REF=HEAD~1 node ./tools/check-api-surface.mjs",
     "api:update-baseline": "node ./tools/check-api-surface.mjs --update",
     "provenance:generate": "node ./tools/generate-provenance-manifest.mjs",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
