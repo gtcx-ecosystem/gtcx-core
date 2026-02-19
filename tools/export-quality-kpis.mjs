@@ -6,6 +6,7 @@ import path from 'node:path';
 const rootDir = process.cwd();
 const trackerPath = path.join(rootDir, 'docs/quality/10-10-remediation-tracker.md');
 const metricsPath = path.join(rootDir, 'quality/kpi-metrics.json');
+const ciHistoryPath = path.join(rootDir, 'artifacts/ci-history.json');
 const provenancePath = path.join(rootDir, 'artifacts/provenance-manifest.json');
 const budgetsPath = path.join(rootDir, 'benchmarks/performance-budgets.json');
 const latestBenchmarksPath = path.join(rootDir, 'benchmarks/latest-results.json');
@@ -42,6 +43,43 @@ function parseEnvNumber(name, fallback) {
     throw new Error(`Invalid numeric value for ${name}: ${raw}`);
   }
   return value;
+}
+
+function loadKpiHistory() {
+  if (!fs.existsSync(ciHistoryPath)) {
+    return null;
+  }
+  return readJson(ciHistoryPath);
+}
+
+function deriveKpisFromHistory(history) {
+  if (!history) {
+    return {
+      source: 'computed-fallback',
+      windowDays: null,
+      highSeverityEscapeDefectsMonth: 0,
+      flakyTestRatePercent: 0,
+      docsApiDriftIncidentsMonth: 0,
+      securityPolicyViolationsMerged: 0,
+      ciQualityGatePassRatePercent: null,
+    };
+  }
+
+  const summary = history.summary ?? {};
+  const issueCounts = history.issueCounts ?? {};
+  const hasNumericPassRate = Number.isFinite(Number(summary.passRatePercent));
+  const hasNumericRerunRate = Number.isFinite(Number(summary.rerunRatePercent));
+  const numericWindowDays = Number(history.windowDays);
+
+  return {
+    source: history.source ?? 'history-file',
+    windowDays: Number.isFinite(numericWindowDays) && numericWindowDays > 0 ? numericWindowDays : null,
+    highSeverityEscapeDefectsMonth: Number(issueCounts.highSeverityEscapeDefectsMonth ?? 0),
+    flakyTestRatePercent: Number(hasNumericRerunRate ? summary.rerunRatePercent : 0),
+    docsApiDriftIncidentsMonth: Number(summary.docsApiDriftIncidents ?? 0),
+    securityPolicyViolationsMerged: Number(issueCounts.securityPolicyViolationsMerged ?? 0),
+    ciQualityGatePassRatePercent: hasNumericPassRate ? Number(summary.passRatePercent) : null,
+  };
 }
 
 function coverageFromFile(filePath) {
@@ -153,6 +191,12 @@ function computeEvidenceStatus() {
 function updateTracker(kpis) {
   ensureFile(trackerPath);
   let tracker = fs.readFileSync(trackerPath, 'utf8').replace(/\r\n/g, '\n');
+  const columnWidths = {
+    label: 34,
+    baseline: 8,
+    target: 6,
+    current: 7,
+  };
 
   const rows = [
     {
@@ -190,7 +234,10 @@ function updateTracker(kpis) {
   for (const row of rows) {
     const escapedLabel = row.label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const rowRegex = new RegExp(`^\\|\\s*${escapedLabel}\\s*\\|[^\\n]*$`, 'm');
-    const replacement = `| ${row.label} | ${row.baseline} | ${row.target} | ${row.current} |`;
+    const replacement = `| ${row.label.padEnd(columnWidths.label, ' ')} | ${row.baseline.padEnd(
+      columnWidths.baseline,
+      ' '
+    )} | ${row.target.padEnd(columnWidths.target, ' ')} | ${row.current.padEnd(columnWidths.current, ' ')} |`;
     if (!rowRegex.test(tracker)) {
       throw new Error(`Unable to update tracker row: ${row.label}`);
     }
@@ -217,13 +264,27 @@ const coverageThresholdPass =
   aggregateCoverageSummary.functions.pct >= 75;
 
 const computedCiPassRate = performanceBudget.pass && coverageThresholdPass && evidence.missingEvidenceCount === 0 ? 100 : 0;
+const kpiHistory = loadKpiHistory();
+const historyDerivedKpis = deriveKpisFromHistory(kpiHistory);
 
 const kpis = {
-  highSeverityEscapeDefectsMonth: parseEnvNumber('KPI_HIGH_SEVERITY_ESCAPE_DEFECTS', 0),
-  flakyTestRatePercent: parseEnvNumber('KPI_FLAKY_TEST_RATE_PERCENT', 0),
-  docsApiDriftIncidentsMonth: parseEnvNumber('KPI_DOCS_API_DRIFT_INCIDENTS', 0),
-  securityPolicyViolationsMerged: parseEnvNumber('KPI_SECURITY_POLICY_VIOLATIONS_MERGED', 0),
-  ciQualityGatePassRatePercent: parseEnvNumber('KPI_CI_QUALITY_GATE_PASS_RATE_PERCENT', computedCiPassRate),
+  highSeverityEscapeDefectsMonth: parseEnvNumber(
+    'KPI_HIGH_SEVERITY_ESCAPE_DEFECTS',
+    historyDerivedKpis.highSeverityEscapeDefectsMonth
+  ),
+  flakyTestRatePercent: parseEnvNumber('KPI_FLAKY_TEST_RATE_PERCENT', historyDerivedKpis.flakyTestRatePercent),
+  docsApiDriftIncidentsMonth: parseEnvNumber(
+    'KPI_DOCS_API_DRIFT_INCIDENTS',
+    historyDerivedKpis.docsApiDriftIncidentsMonth
+  ),
+  securityPolicyViolationsMerged: parseEnvNumber(
+    'KPI_SECURITY_POLICY_VIOLATIONS_MERGED',
+    historyDerivedKpis.securityPolicyViolationsMerged
+  ),
+  ciQualityGatePassRatePercent: parseEnvNumber(
+    'KPI_CI_QUALITY_GATE_PASS_RATE_PERCENT',
+    historyDerivedKpis.ciQualityGatePassRatePercent ?? computedCiPassRate
+  ),
 };
 
 const metrics = {
@@ -233,6 +294,12 @@ const metrics = {
     runAttempt: process.env.GITHUB_RUN_ATTEMPT ?? null,
     sha: process.env.GITHUB_SHA ?? null,
     ref: process.env.GITHUB_REF ?? null,
+  },
+  history: {
+    path: path.relative(rootDir, ciHistoryPath),
+    exists: Boolean(kpiHistory),
+    source: historyDerivedKpis.source,
+    windowDays: historyDerivedKpis.windowDays,
   },
   criticalCoverage: {
     packages: coverageByPackage,

@@ -24,6 +24,7 @@
     "check:dist": "test -z \"$(git ls-files 'packages/*/dist/*')\"",
     "architecture:check": "node ./tools/check-package-boundaries.mjs",
     "quality:governance:check": "node ./tools/check-governance.mjs",
+    "quality:kpi:collect": "node ./tools/collect-kpi-history.mjs",
     "quality:kpi:export": "node ./tools/export-quality-kpis.mjs",
     "security:threat-matrix": "node ./tools/check-threat-matrix.mjs",
     "perf:check-budgets": "node ./tools/check-performance-budgets.mjs",

@@ -12,7 +12,9 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: write
+      issues: read
       packages: write
       pull-requests: write
     steps:
@@ -70,14 +72,13 @@ jobs:
       - name: API surface baseline check
         run: pnpm api:check
 
-      - name: Generate provenance manifest
-        run: pnpm provenance:generate
-
-      - name: Upload provenance artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-provenance-manifest
-          path: artifacts/provenance-manifest.json
+      - name: Collect KPI history
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          KPI_WINDOW_DAYS: '30'
+          KPI_WORKFLOWS: 'ci.yml'
+        run: pnpm quality:kpi:collect
 
       - name: Export KPI metrics
         run: pnpm quality:kpi:export
@@ -87,8 +88,18 @@ jobs:
         with:
           name: release-quality-kpis
           path: |
+            artifacts/ci-history.json
             quality/kpi-metrics.json
             docs/quality/10-10-remediation-tracker.md
+
+      - name: Generate provenance manifest
+        run: pnpm provenance:generate
+
+      - name: Upload provenance artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-provenance-manifest
+          path: artifacts/provenance-manifest.json
 
       - name: Run tests
         run: pnpm test
