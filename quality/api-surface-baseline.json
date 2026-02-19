@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-02-19T17:38:43.095Z",
+  "packages": {
+    "@gtcx/ai": {
+      "hash": "7d68159eea8adcf33e2a5da4cb289475a2b9d815df7e02bb0c3722f283596b98",
+      "typesPath": "packages/ai/dist/index.d.ts"
+    },
+    "@gtcx/api-client": {
+      "hash": "6523b3bad0e29bb2a154d9d75d94d6c8abb834489f6d4031bc916fcc3d12e79b",
+      "typesPath": "packages/api-client/dist/index.d.ts"
+    },
+    "@gtcx/connectivity": {
+      "hash": "68188df4b059614e0448f835e22479ed1967437f03987b0ffd55a03ee9c0fa25",
+      "typesPath": "packages/connectivity/dist/index.d.ts"
+    },
+    "@gtcx/crypto": {
+      "hash": "d31da133452188c356080d4c7ce82b0fad5604227b6fcbd7c63155b31ba8cf5c",
+      "typesPath": "packages/crypto/dist/index.d.ts"
+    },
+    "@gtcx/domain": {
+      "hash": "7cb2f398256302e71951fb24037d44cb09fbfb6d5781bd9ca385ba1d9ecfd9cb",
+      "typesPath": "packages/domain/dist/index.d.ts"
+    },
+    "@gtcx/events": {
+      "hash": "5d2cf7405cac1173ba3bae82798936ada8c797e71521e55bb1fc6094c1b8305b",
+      "typesPath": "packages/events/dist/index.d.ts"
+    },
+    "@gtcx/identity": {
+      "hash": "7e8c543949780dbf315cea7e482419d31886ba3c49cdad71018147bf0e207b8d",
+      "typesPath": "packages/identity/dist/index.d.ts"
+    },
+    "@gtcx/logging": {
+      "hash": "d597ff3b431dd66512d37af1e54fe1475a224af9032be13ec3aee636c056014c",
+      "typesPath": "packages/logging/dist/index.d.ts"
+    },
+    "@gtcx/schemas": {
+      "hash": "84cd23dfa226d10bae47b0497d927ca25cbfb15ce1ec7883517b8e84b958788b",
+      "typesPath": "packages/schemas/dist/index.d.ts"
+    },
+    "@gtcx/security": {
+      "hash": "f9413eb779b6f8f70797444bb98adcf8c49cfb40f661f90e3c86405651697a5e",
+      "typesPath": "packages/security/dist/index.d.ts"
+    },
+    "@gtcx/services": {
+      "hash": "a03e2675d77f087d765abb2fe66acbae3b8cec1e6dd47e72064abff6c3419d73",
+      "typesPath": "packages/services/dist/index.d.ts"
+    },
+    "@gtcx/sync": {
+      "hash": "d48a88e48691cd8acfbae568ea98bc48b44bd4d56dc9f76edf88d9c17fa0fc65",
+      "typesPath": "packages/sync/dist/index.d.ts"
+    },
+    "@gtcx/types": {
+      "hash": "a565ade517c99f209940a5162135d045cd948378f4796b5ce964cf1fee1325ca",
+      "typesPath": "packages/types/dist/index.d.ts"
+    },
+    "@gtcx/utils": {
+      "hash": "90223327e469a66fb6e3178493b007d6c3e33354ddf55b317b958ee0ae13ce6d",
+      "typesPath": "packages/utils/dist/index.d.ts"
+    },
+    "@gtcx/verification": {
+      "hash": "d759b05777d3972dd7c6aac11c8bd4dd478f91d530013ea759e314b1b042183e",
+      "typesPath": "packages/verification/dist/index.d.ts"
+    },
+    "@gtcx/workproof": {
+      "hash": "c0c3805642827b7e63c8547982dbef849216b5d595212e20a3a84157c78e5af1",
+      "typesPath": "packages/workproof/dist/index.d.ts"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+# Global default owner
+* @amanianai
+
+# Core architecture and release governance
+/.github/workflows/ @amanianai
+/docs/adr/ @amanianai
+/quality/ @amanianai
+
+# Core packages
+/packages/types/ @amanianai
+/packages/crypto/ @amanianai
+/packages/domain/ @amanianai
+/packages/security/ @amanianai
+/packages/services/ @amanianai
+/packages/verification/ @amanianai
+/packages/workproof/ @amanianai
+
+# Rust cryptography and consensus crates
+/rust/ @amanianai

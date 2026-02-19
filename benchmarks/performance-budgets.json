@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "units": {
+    "ed25519.key_generation_us": "microseconds",
+    "ed25519.sign_us": "microseconds",
+    "ed25519.verify_us": "microseconds",
+    "ed25519.roundtrip_us": "microseconds",
+    "hash.sha256_256b_ns": "nanoseconds",
+    "hash.sha512_256b_ns": "nanoseconds",
+    "hash.blake3_256b_ns": "nanoseconds"
+  },
+  "metrics": {
+    "ed25519.key_generation_us": 30,
+    "ed25519.sign_us": 30,
+    "ed25519.verify_us": 40,
+    "ed25519.roundtrip_us": 60,
+    "hash.sha256_256b_ns": 950,
+    "hash.sha512_256b_ns": 750,
+    "hash.blake3_256b_ns": 350
+  }
+}

@@ -34,11 +34,73 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Ensure no tracked dist artifacts
+        run: pnpm check:dist
+
+      - name: Architecture boundaries
+        run: pnpm architecture:check
+
+      - name: Governance policy validation
+        run: pnpm quality:governance:check
+
+      - name: Threat matrix validation
+        run: pnpm security:threat-matrix
+
+      - name: Performance budget validation
+        run: pnpm perf:check-budgets
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Generate API docs
+        run: pnpm run docs
+
+      - name: Validate markdown links
+        run: pnpm docs:check-links
+
       - name: Build packages
         run: pnpm build
 
+      - name: API surface baseline check
+        run: pnpm api:check
+
+      - name: Generate provenance manifest
+        run: pnpm provenance:generate
+
+      - name: Upload provenance artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-provenance-manifest
+          path: artifacts/provenance-manifest.json
+
       - name: Run tests
         run: pnpm test
+
+      - name: Critical package coverage
+        run: pnpm test:coverage:critical
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.82'
+
+      - name: Rust format check
+        run: cargo fmt --all -- --check
+        working-directory: rust
+
+      - name: Rust clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+        working-directory: rust
+
+      - name: Rust tests
+        run: cargo test --workspace --lib
+        working-directory: rust
 
       - name: Create Release Pull Request or Publish
         id: changesets

@@ -35,6 +35,18 @@ jobs:
       - name: Ensure no tracked dist artifacts
         run: pnpm check:dist
 
+      - name: Architecture boundaries
+        run: pnpm architecture:check
+
+      - name: Governance policy validation
+        run: pnpm quality:governance:check
+
+      - name: Threat matrix validation
+        run: pnpm security:threat-matrix
+
+      - name: Performance budget validation
+        run: pnpm perf:check-budgets
+
       - name: Lint
         run: pnpm lint
 
@@ -47,11 +59,60 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Critical package coverage
+        run: pnpm test:coverage:critical
+
       - name: Build
         run: pnpm build
 
+      - name: API surface baseline check
+        run: pnpm api:check
+
+      - name: Generate provenance manifest
+        run: pnpm provenance:generate
+
+      - name: Upload provenance artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-provenance-manifest
+          path: artifacts/provenance-manifest.json
+
       - name: Generate API docs
-        run: pnpm docs
+        run: pnpm run docs
+
+      - name: Validate markdown links
+        run: pnpm docs:check-links
+
+  rust:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.82'
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('rust/Cargo.lock') }}
+
+      - name: Rust format check
+        run: cargo fmt --all -- --check
+
+      - name: Rust clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: Rust tests
+        run: cargo test --workspace --lib
 
   security:
     runs-on: ubuntu-latest
@@ -69,16 +130,31 @@ jobs:
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
 
+      - name: Generate SBOM (CycloneDX)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'cyclonedx'
+          output: 'trivy-sbom.cdx.json'
+
       - name: Upload Trivy scan results
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
 
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trivy-sbom
+          path: trivy-sbom.cdx.json
+
   docker:
     name: Docker Build Verification
     runs-on: ubuntu-latest
-    needs: [ci]
+    needs: [ci, rust]
     steps:
       - uses: actions/checkout@v4
 

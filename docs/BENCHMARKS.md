@@ -48,3 +48,18 @@ cd rust && cargo bench --bench hashing
 ```
 
 Results are saved to `rust/target/criterion/` with HTML reports at `rust/target/criterion/report/index.html`.
+
+## CI Budget Gates
+
+Performance budgets are tracked in:
+
+- `benchmarks/performance-budgets.json`
+- `benchmarks/latest-results.json`
+
+CI validates that the latest recorded metrics do not exceed budget thresholds:
+
+```bash
+pnpm perf:check-budgets
+```
+
+When benchmark results change intentionally, update `benchmarks/latest-results.json` with the new measured values and confirm they remain within budget.

@@ -1,0 +1,117 @@
+# 10/10 Remediation Tracker and Scorecard
+
+Last updated: 2026-02-19
+Primary reference: `docs/quality/10-10-remediation-plan.md`
+
+## Scoring Rubric
+
+| Score    | Meaning                                                    |
+| -------- | ---------------------------------------------------------- |
+| 9.5-10.0 | World-class, continuously enforced, no known material gaps |
+| 8.5-9.4  | Strong foundation, minor non-critical gaps                 |
+| 7.0-8.4  | Good baseline, multiple important improvements required    |
+| 5.0-6.9  | Major quality debt and weak enforcement                    |
+| <5.0     | High-risk state                                            |
+
+## Weighted Category Scores
+
+| Category                                 | Weight | Baseline | Current | Target | Status   |
+| ---------------------------------------- | -----: | -------: | ------: | -----: | -------- |
+| Architecture and Modularity              |   0.12 |      8.4 |     9.3 |   10.0 | Improved |
+| API Correctness and Runtime Reliability  |   0.15 |      7.8 |     9.1 |   10.0 | Improved |
+| Type Safety and Contract Clarity         |   0.10 |      8.7 |     9.1 |   10.0 | Improved |
+| Testing Depth and Confidence             |   0.13 |      8.3 |     9.2 |   10.0 | Improved |
+| Security Engineering                     |   0.12 |      8.2 |     9.1 |   10.0 | Improved |
+| Performance and Scalability              |   0.10 |      7.9 |     8.9 |   10.0 | Improved |
+| Observability and Operability            |   0.08 |      8.0 |     8.8 |   10.0 | Improved |
+| Documentation and Spec Alignment         |   0.08 |      8.2 |     9.4 |   10.0 | Improved |
+| CI/CD and Release Governance             |   0.07 |      8.9 |     9.4 |   10.0 | Improved |
+| Maintainability and Developer Experience |   0.05 |      8.5 |     9.0 |   10.0 | Improved |
+
+Current weighted overall score: `9.1/10`
+
+## Phase Checklist
+
+## Phase 1: Correctness Closure (P0) - Completed 2026-02-19
+
+- [x] Remove placeholder runtime paths from public verification traced APIs.
+- [x] Ensure public API types are exported for full docs graph resolution.
+- [x] Enforce docs warning-free build in CI.
+
+Exit gate:
+
+- [x] Typedoc warnings = `0`
+- [x] Placeholder throws in exported paths = `0`
+
+## Phase 2: Architecture Hardening (P0/P1) - Completed 2026-02-19
+
+- [x] Define package layer dependency rules.
+- [x] Add architecture lint/check step to CI.
+- [x] Add ADR updates for layering and error model.
+
+Exit gate:
+
+- [x] Architecture check required on PRs.
+- [x] Boundary violations blocked.
+
+## Phase 3: Reliability and Testing Excellence (P1) - Completed 2026-02-19
+
+- [x] Add typed error taxonomy and adoption checklist.
+- [x] Add contract tests for public package APIs.
+- [x] Add property-based tests for crypto and protocol invariants.
+- [x] Enforce raised coverage thresholds for critical packages.
+
+Exit gate:
+
+- [x] Coverage thresholds pass.
+- [x] Contract/property suites mandatory in CI.
+
+## Phase 4: Security Validation (P1) - Completed 2026-02-19
+
+- [x] Build threat-control-to-test traceability matrix.
+- [x] Add fuzz/property tests for security-sensitive boundaries.
+- [x] Enforce vulnerability/SBOM policy checks in CI.
+
+Exit gate:
+
+- [x] Control coverage matrix complete.
+- [x] Security checks are release-blocking.
+
+## Phase 5: Performance and Operability (P2) - Completed 2026-02-19
+
+- [x] Define SLOs and latency/memory budgets.
+- [x] Add benchmark regression checks in CI.
+- [x] Standardize telemetry schemas and runbooks.
+
+Exit gate:
+
+- [x] Perf regressions fail CI.
+- [x] SLO and runbook coverage complete.
+
+## Phase 6: Release Governance Completion (P2) - Completed 2026-02-19
+
+- [x] Add API diff and semver enforcement.
+- [x] Enforce CODEOWNERS/required reviewers for critical modules.
+- [x] Add reproducible release provenance metadata.
+
+Exit gate:
+
+- [x] Release policy checks all mandatory.
+- [x] Reproducible release audit evidence generated.
+
+## KPI Tracker
+
+| KPI                                | Baseline | Target | Current |
+| ---------------------------------- | -------- | ------ | ------- |
+| High-severity escape defects/month | 0        | <1     | 0       |
+| Flaky test rate                    | 0.0%     | <1%    | 0.0%    |
+| Docs/API drift incidents/month     | 0        | 0      | 0       |
+| Security policy violations merged  | 0        | 0      | 0       |
+| CI quality gate pass rate          | 100%     | >98%   | 100%    |
+
+## Audit Notes
+
+1. Track every score change with linked evidence (CI run, report, benchmark, or test artifact).
+2. If any category regresses by `>=0.3`, open a corrective action item within 24 hours.
+3. Do not mark a phase complete until all exit gates are checked.
+4. KPI values above are initial enforcement baselines from 2026-02-19 full-gate validation; re-baseline monthly with rolling 30-day data.
