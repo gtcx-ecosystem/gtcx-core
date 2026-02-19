@@ -1,6 +1,6 @@
 # Quality Gates Runbook
 
-Last updated: 2026-02-19
+Last updated: 2026-02-20
 
 ## Mandatory Gates
 
@@ -67,5 +67,5 @@ cargo test --workspace --lib
 ## Performance Trend Policy
 
 1. Use `pnpm perf:update-history` before `pnpm perf:check-budgets` in all local and CI release validations.
-2. Trend checks are warning-mode until enough historical samples exist per metric (`minSamples` in `benchmarks/performance-budgets.json`).
-3. After readiness is confirmed for all metrics, enforce strict mode in CI/release with `PERF_ENFORCE_TREND=true`.
+2. Strict trend mode is enforced in CI/release (`PERF_ENFORCE_TREND=true`).
+3. Local validation should use strict mode when validating release readiness.

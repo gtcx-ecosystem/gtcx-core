@@ -114,9 +114,14 @@ function collectHistoryEntries() {
   });
 }
 
-function mean(values) {
+function median(values) {
   if (values.length === 0) return 0;
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
+  const sorted = [...values].sort((a, b) => a - b);
+  const midpoint = Math.floor(sorted.length / 2);
+  if (sorted.length % 2 === 0) {
+    return (sorted[midpoint - 1] + sorted[midpoint]) / 2;
+  }
+  return sorted[midpoint];
 }
 
 function round(value, digits = 4) {
@@ -203,14 +208,15 @@ function main() {
       continue;
     }
 
-    const baselineMean = mean(trendSamples);
-    const allowed = baselineMean * (1 + maxRegressionPercent / 100);
-    const regressionPercent = baselineMean === 0 ? 0 : ((observed - baselineMean) / baselineMean) * 100;
+    const baselineMedian = median(trendSamples);
+    const allowed = baselineMedian * (1 + maxRegressionPercent / 100);
+    const regressionPercent =
+      baselineMedian === 0 ? 0 : ((observed - baselineMedian) / baselineMedian) * 100;
     const trendPass = observed <= allowed;
     if (!trendPass) {
       failures.push(
         `${key}: observed ${round(observed)} regressed ${round(regressionPercent, 2)}% over trend baseline ${round(
-          baselineMean
+          baselineMedian
         )} (allowed <= ${round(allowed)}; max ${maxRegressionPercent}%)`
       );
     }
@@ -224,7 +230,7 @@ function main() {
       sampleCount,
       requiredSamples: trendConfig.minSamples,
       windowSize: trendConfig.windowSize,
-      trendBaselineMean: round(baselineMean),
+      trendBaselineMedian: round(baselineMedian),
       maxRegressionPercent,
       allowedValue: round(allowed),
       regressionPercent: round(regressionPercent, 2),

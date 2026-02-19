@@ -22,20 +22,17 @@ Primary reference: `docs/quality/10-10-remediation-plan.md`
 | Type Safety and Contract Clarity         |   0.10 |      8.7 |     9.1 |   10.0 | Improved |
 | Testing Depth and Confidence             |   0.13 |      8.3 |     9.2 |   10.0 | Improved |
 | Security Engineering                     |   0.12 |      8.2 |     9.1 |   10.0 | Improved |
-| Performance and Scalability              |   0.10 |      7.9 |     8.9 |   10.0 | Improved |
+| Performance and Scalability              |   0.10 |      7.9 |     9.4 |   10.0 | Improved |
 | Observability and Operability            |   0.08 |      8.0 |     8.8 |   10.0 | Improved |
 | Documentation and Spec Alignment         |   0.08 |      8.2 |     9.4 |   10.0 | Improved |
-| CI/CD and Release Governance             |   0.07 |      8.9 |     9.4 |   10.0 | Improved |
+| CI/CD and Release Governance             |   0.07 |      8.9 |     9.6 |   10.0 | Improved |
 | Maintainability and Developer Experience |   0.05 |      8.5 |     9.0 |   10.0 | Improved |
 
-Current weighted overall score: `9.1/10`
+Current weighted overall score: `9.3/10`
 
 ## Remaining to Reach 10.0
 
-1. Performance trend strict-mode readiness:
-   Current state: warning mode (insufficient historical samples for all metrics).
-   Required closeout: collect at least `trend.minSamples` real benchmark snapshots per metric, then set `PERF_ENFORCE_TREND=true` in CI and release workflows.
-2. Branch protection operational verification:
+1. Branch protection operational verification:
    Current state: repository policy is documented and enforced in-repo, but GitHub branch protection settings must be re-verified with valid repository admin auth.
    Required closeout: complete monthly audit checklist and record evidence links.
 

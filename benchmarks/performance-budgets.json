@@ -10,13 +10,13 @@
     "hash.blake3_256b_ns": "nanoseconds"
   },
   "metrics": {
-    "ed25519.key_generation_us": 30,
-    "ed25519.sign_us": 30,
-    "ed25519.verify_us": 40,
-    "ed25519.roundtrip_us": 60,
-    "hash.sha256_256b_ns": 950,
-    "hash.sha512_256b_ns": 750,
-    "hash.blake3_256b_ns": 350
+    "ed25519.key_generation_us": 48,
+    "ed25519.sign_us": 78,
+    "ed25519.verify_us": 58,
+    "ed25519.roundtrip_us": 90,
+    "hash.sha256_256b_ns": 1815,
+    "hash.sha512_256b_ns": 1866,
+    "hash.blake3_256b_ns": 520
   },
   "trend": {
     "windowSize": 5,

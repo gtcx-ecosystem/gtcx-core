@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "generatedAt": "2026-02-19T00:00:00.000Z",
+  "generatedAt": "2026-02-19T23:41:36.210Z",
   "maxEntries": 50,
   "entries": [
     {
-      "recordedAt": "2026-02-17",
+      "recordedAt": "2026-02-17T00:00:00.000Z",
       "source": "docs/BENCHMARKS.md",
       "metrics": {
         "ed25519.key_generation_us": 23.1,
@@ -14,6 +14,45 @@
         "hash.sha256_256b_ns": 876,
         "hash.sha512_256b_ns": 663,
         "hash.blake3_256b_ns": 287
+      }
+    },
+    {
+      "recordedAt": "2026-02-19T23:34:30.195Z",
+      "source": "criterion:rust/gtcx-crypto",
+      "metrics": {
+        "ed25519.key_generation_us": 31.3262,
+        "ed25519.sign_us": 31.6216,
+        "ed25519.verify_us": 49.5745,
+        "ed25519.roundtrip_us": 75.7514,
+        "hash.sha256_256b_ns": 1219.8572,
+        "hash.sha512_256b_ns": 959.2785,
+        "hash.blake3_256b_ns": 407.0824
+      }
+    },
+    {
+      "recordedAt": "2026-02-19T23:38:11.602Z",
+      "source": "criterion:rust/gtcx-crypto",
+      "metrics": {
+        "ed25519.key_generation_us": 41.4657,
+        "ed25519.sign_us": 67.7218,
+        "ed25519.verify_us": 44.4126,
+        "ed25519.roundtrip_us": 75.9834,
+        "hash.sha256_256b_ns": 1577.8563,
+        "hash.sha512_256b_ns": 1622.4235,
+        "hash.blake3_256b_ns": 408.2497
+      }
+    },
+    {
+      "recordedAt": "2026-02-19T23:41:35.627Z",
+      "source": "criterion:rust/gtcx-crypto",
+      "metrics": {
+        "ed25519.key_generation_us": 31.6743,
+        "ed25519.sign_us": 31.8007,
+        "ed25519.verify_us": 44.7856,
+        "ed25519.roundtrip_us": 78.081,
+        "hash.sha256_256b_ns": 1225.2943,
+        "hash.sha512_256b_ns": 963.9331,
+        "hash.blake3_256b_ns": 450.7781
       }
     }
   ]

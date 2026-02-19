@@ -54,7 +54,7 @@ jobs:
         run: pnpm perf:update-history
 
       - name: Performance budget validation
-        run: pnpm perf:check-budgets
+        run: PERF_ENFORCE_TREND=true pnpm perf:check-budgets
 
       - name: Upload performance report artifact
         uses: actions/upload-artifact@v4

@@ -70,12 +70,12 @@ pnpm perf:check-budgets
 - trend baseline comparison status
 - warnings/failures and sample counts
 
-Strict trend mode can be enabled with:
+Strict trend mode command:
 
 ```bash
 PERF_ENFORCE_TREND=true pnpm perf:check-budgets
 ```
 
-Use strict trend mode after enough historical samples exist per metric (`trend.minSamples` in `benchmarks/performance-budgets.json`).
+CI/release enforce strict trend mode.
 
 When benchmark results change intentionally, update `benchmarks/latest-results.json`, then run history + budget checks and confirm report results stay within policy.

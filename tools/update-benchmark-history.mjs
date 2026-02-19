@@ -15,12 +15,12 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
-function toIsoDate(value) {
+function toIsoTimestamp(value) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) {
-    return new Date().toISOString().slice(0, 10);
+    return new Date().toISOString();
   }
-  return date.toISOString().slice(0, 10);
+  return date.toISOString();
 }
 
 if (!fs.existsSync(latestPath)) {
@@ -30,7 +30,7 @@ if (!fs.existsSync(latestPath)) {
 
 const latest = readJson(latestPath);
 const latestEntry = {
-  recordedAt: toIsoDate(latest.recordedAt ?? new Date().toISOString()),
+  recordedAt: toIsoTimestamp(latest.recordedAt ?? new Date().toISOString()),
   source: latest.source ?? 'benchmarks/latest-results.json',
   metrics: latest.metrics ?? {},
 };
@@ -47,11 +47,11 @@ const entries = Array.isArray(history.entries) ? history.entries : [];
 const dedupe = new Set();
 const normalized = [];
 for (const entry of [...entries, latestEntry]) {
-  const key = `${toIsoDate(entry.recordedAt ?? new Date().toISOString())}|${JSON.stringify(entry.metrics ?? {})}`;
+  const key = `${toIsoTimestamp(entry.recordedAt ?? new Date().toISOString())}|${JSON.stringify(entry.metrics ?? {})}`;
   if (dedupe.has(key)) continue;
   dedupe.add(key);
   normalized.push({
-    recordedAt: toIsoDate(entry.recordedAt ?? new Date().toISOString()),
+    recordedAt: toIsoTimestamp(entry.recordedAt ?? new Date().toISOString()),
     source: entry.source ?? 'manual',
     metrics: entry.metrics ?? {},
   });

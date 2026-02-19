@@ -1,6 +1,6 @@
 # Governance and Evidence Policy
 
-Last updated: 2026-02-19
+Last updated: 2026-02-20
 
 ## Branch Protection Policy (`main`)
 
@@ -84,5 +84,5 @@ Required evidence fields:
 ## Performance Trend Enforcement
 
 1. Trend history must be updated before budget checks (`pnpm perf:update-history`).
-2. Strict trend mode is required after trend readiness is reached for all metrics.
-3. Strict mode enablement: set `PERF_ENFORCE_TREND=true` in CI and release workflows once readiness is confirmed.
+2. Strict trend mode is required in CI and release workflows.
+3. Strict mode command requirement: `PERF_ENFORCE_TREND=true pnpm perf:check-budgets`.
