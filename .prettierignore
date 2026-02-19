@@ -3,6 +3,9 @@ dist/
 build/
 .turbo/
 coverage/
+docs/api/
+rust/target/
+artifacts/
 *.min.js
 *.min.css
 pnpm-lock.yaml

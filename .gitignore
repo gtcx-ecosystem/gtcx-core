@@ -6,6 +6,8 @@ node_modules/
 dist/
 build/
 *.tsbuildinfo
+docs/api/
+rust/target/
 
 # Compiled output in source directories (should never be committed)
 packages/*/src/**/*.js
@@ -56,6 +58,9 @@ Thumbs.db
 
 # Turbo
 .turbo/
+
+# Generated runtime artifacts
+artifacts/
 
 # Logs
 *.log
