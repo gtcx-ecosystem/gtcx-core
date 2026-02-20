@@ -78,6 +78,8 @@ const run = async () => {
     nodeB.subscribe('gtcx.mesh', (payload) => received.push(`B:${payload.message}`));
     nodeC.subscribe('gtcx.mesh', (payload) => received.push(`C:${payload.message}`));
 
+    console.log('Bootstrap addrs:', bootstrap);
+
     await nodeB.start();
     await nodeC.start();
     await transportB.connect(bootstrap);
@@ -92,10 +94,22 @@ const run = async () => {
       return false;
     };
 
-    await waitForPeers(nodeA, 1, 8000);
+    const aReady = await waitForPeers(nodeA, 1, 12000);
+    const bReady = await waitForPeers(nodeB, 1, 12000);
+    const cReady = await waitForPeers(nodeC, 1, 12000);
+    console.log('Peer counts:', {
+      a: nodeA.getPeers().length,
+      b: nodeB.getPeers().length,
+      c: nodeC.getPeers().length,
+    });
+    if (!aReady || !bReady || !cReady) {
+      throw new Error('Peers not connected');
+    }
+
+    await sleep(3000);
 
     await sleep(2000);
-    const publishWithRetry = async (payload, attempts = 10) => {
+    const publishWithRetry = async (payload, attempts = 12) => {
       for (let i = 0; i < attempts; i += 1) {
         try {
           await nodeA.publish('gtcx.mesh', payload);
@@ -115,7 +129,7 @@ const run = async () => {
     if (!published) {
       throw new Error('Publish failed: NoPeersSubscribedToTopic');
     }
-    await sleep(1000);
+    await sleep(2000);
 
     try {
       await nodeA.publish('gtcx.blocked', { message: 'blocked' });
