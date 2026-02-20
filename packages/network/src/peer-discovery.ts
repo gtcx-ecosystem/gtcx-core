@@ -42,7 +42,8 @@ export class PeerDiscoveryService {
   constructor(
     private readonly adapters: PeerDiscoveryAdapter[],
     private readonly reputationManager: PeerReputationManager,
-    private readonly config: PeerDiscoveryConfig = {}
+    private readonly config: PeerDiscoveryConfig = {},
+    private readonly onEvent?: (peer: DiscoveredPeer) => Promise<void> | void
   ) {}
 
   async discoverPeers(): Promise<DiscoveredPeer[]> {
@@ -56,6 +57,9 @@ export class PeerDiscoveryService {
           score: this.reputationManager.getScore(peer.id),
         };
         this.discoveredPeers.set(peer.id, merged);
+        if (this.onEvent) {
+          await this.onEvent(merged);
+        }
         discovered.push(merged);
       }
     }

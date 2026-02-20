@@ -34,6 +34,28 @@ describe('@gtcx/network', () => {
     await nodeC.stop();
   });
 
+  it('emits telemetry events for publish and receive', async () => {
+    const events: string[] = [];
+    const nodeA = createP2PNode({ nodeId: 'TA' }, new InMemoryTransport('TA'), {
+      onEvent: (event) => events.push(event.type),
+    });
+    const nodeB = createP2PNode({ nodeId: 'TB' }, new InMemoryTransport('TB'), {
+      onEvent: (event) => events.push(event.type),
+    });
+
+    await nodeA.start();
+    await nodeB.start();
+
+    nodeB.subscribe<string>('topic', () => {});
+    await nodeA.publish('topic', 'payload');
+
+    expect(events).toContain('p2p.publish');
+    expect(events).toContain('p2p.receive');
+
+    await nodeA.stop();
+    await nodeB.stop();
+  });
+
   it('enforces publish rate limits', async () => {
     const node = createP2PNode({ nodeId: 'R', rateLimitPerMinute: 1 }, new InMemoryTransport('R'));
     await node.start();
@@ -83,12 +105,16 @@ describe('@gtcx/network', () => {
       { id: 'peer-1', addresses: ['addr-1'] },
       { id: 'peer-2', addresses: ['addr-2'] },
     ]);
-    const service = new PeerDiscoveryService([adapter], reputation, { maxPeers: 10 });
+    const discoveredEvents: string[] = [];
+    const service = new PeerDiscoveryService([adapter], reputation, { maxPeers: 10 }, (peer) => {
+      discoveredEvents.push(peer.id);
+    });
 
     const discovered = await service.discoverPeers();
     expect(discovered).toHaveLength(2);
     expect(discovered[0]?.id).toBe('peer-1');
     expect(discovered[0]?.score).toBeGreaterThan(discovered[1]?.score ?? 0);
+    expect(discoveredEvents).toEqual(['peer-1', 'peer-2']);
   });
 
   it('throws configuration error when libp2p dependencies are missing', async () => {

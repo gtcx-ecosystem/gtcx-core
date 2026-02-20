@@ -14,6 +14,8 @@ import type {
   PublishOptions,
   Topic,
   TransportAdapter,
+  NetworkTelemetryEvent,
+  TelemetryOptions,
 } from './types';
 
 const DEFAULT_TTL = 8;
@@ -54,7 +56,11 @@ function createMessageId(): string {
   return `msg_${Date.now()}_${messageCounter}`;
 }
 
-export function createP2PNode(config: P2PConfig, adapter: TransportAdapter): P2PNode {
+export function createP2PNode(
+  config: P2PConfig,
+  adapter: TransportAdapter,
+  telemetry: TelemetryOptions = {}
+): P2PNode {
   let status: NodeStatus = 'idle';
   const subscriptions = new Map<Topic, Set<(payload: unknown, message: MessageEnvelope) => void>>();
   const limiter =
@@ -62,10 +68,20 @@ export function createP2PNode(config: P2PConfig, adapter: TransportAdapter): P2P
       ? new RateLimiter(config.rateLimitPerMinute)
       : new RateLimiter(DEFAULT_RATE_LIMIT);
 
+  const emit = async (event: Omit<NetworkTelemetryEvent, 'timestamp' | 'nodeId'>) => {
+    if (!telemetry.onEvent) return;
+    await telemetry.onEvent({
+      timestamp: new Date().toISOString(),
+      nodeId: config.nodeId,
+      ...event,
+    });
+  };
+
   adapter.onMessage(async (message) => {
     if (message.ttl <= 0) return;
     const handlers = subscriptions.get(message.topic);
     if (!handlers) return;
+    await emit({ type: 'p2p.receive', topic: message.topic, peerId: message.source });
     for (const handler of handlers) {
       handler(message.payload, message);
     }
@@ -76,6 +92,7 @@ export function createP2PNode(config: P2PConfig, adapter: TransportAdapter): P2P
       throw new ConfigurationError(`Topic ${topic} is not allowed`);
     }
     if (!limiter.allow()) {
+      await emit({ type: 'p2p.rate_limited', topic });
       throw new RateLimitError('Publish rate limit exceeded');
     }
     const envelope: MessageEnvelope<T> = {
@@ -89,7 +106,9 @@ export function createP2PNode(config: P2PConfig, adapter: TransportAdapter): P2P
     };
     try {
       await adapter.broadcast(envelope);
+      await emit({ type: 'p2p.publish', topic });
     } catch (error) {
+      await emit({ type: 'p2p.peer_error', topic, metadata: { error: (error as Error).message } });
       throw new TransportError((error as Error).message || 'Transport send failed');
     }
   };
@@ -120,12 +139,14 @@ export function createP2PNode(config: P2PConfig, adapter: TransportAdapter): P2P
       status = 'starting';
       await adapter.start();
       status = 'online';
+      await emit({ type: 'p2p.start' });
     },
     stop: async () => {
       if (status === 'offline' || status === 'stopping') return;
       status = 'stopping';
       await adapter.stop();
       status = 'offline';
+      await emit({ type: 'p2p.stop' });
     },
     publish,
     subscribe,

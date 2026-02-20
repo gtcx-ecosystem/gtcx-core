@@ -26,6 +26,16 @@ nodeB.subscribe('updates', (payload) => {
 await nodeA.publish('updates', { status: 'ok' });
 ```
 
+## Telemetry
+
+```typescript
+const node = createP2PNode({ nodeId: 'A' }, new InMemoryTransport('A'), {
+  onEvent: (event) => {
+    console.log(event.type, event.topic);
+  },
+});
+```
+
 ## libp2p (QUIC + gossipsub)
 
 ```bash

@@ -79,7 +79,7 @@
 - [x] Pub/sub delivery + rate limiting
 - [x] QUIC transport + Noise handshake (libp2p adapter scaffold)
 - [x] Gossipsub topics + rate limits (libp2p adapter scaffold)
-- [ ] Peer discovery and telemetry
+- [x] Peer discovery and telemetry
 
 **Exit Criteria**:
 

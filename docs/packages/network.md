@@ -34,6 +34,16 @@ await nodeA.publish('updates', { status: 'ok' });
 - Optional topic allowlists prevent unauthorized publish/subscribe.
 - `PeerDiscoveryService` aggregates discovery adapters and applies reputation scores.
 
+## Telemetry
+
+```typescript
+const node = createP2PNode({ nodeId: 'A' }, new InMemoryTransport('A'), {
+  onEvent: (event) => {
+    console.log(event.type, event.topic);
+  },
+});
+```
+
 ## libp2p Adapter (Optional)
 
 ```bash

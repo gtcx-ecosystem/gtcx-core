@@ -31,6 +31,7 @@
 1. Messages deliver across in-memory peers.
 2. Rate limiting enforced per node.
 3. Node drop and recovery handled without crashes.
+4. Telemetry emits publish/receive and peer discovery events.
 
 ## UAT Scenarios
 

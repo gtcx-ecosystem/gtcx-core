@@ -30,6 +30,30 @@ export interface PublishOptions {
   ttl?: number;
 }
 
+export interface NetworkTelemetryEvent {
+  type:
+    | 'p2p.start'
+    | 'p2p.stop'
+    | 'p2p.publish'
+    | 'p2p.receive'
+    | 'p2p.rate_limited'
+    | 'p2p.peer_discovered'
+    | 'p2p.peer_error';
+  timestamp: string;
+  nodeId: PeerId;
+  peerId?: PeerId;
+  topic?: Topic;
+  metadata?: Record<string, unknown>;
+}
+
+export interface TelemetryHandler {
+  (event: NetworkTelemetryEvent): Promise<void> | void;
+}
+
+export interface TelemetryOptions {
+  onEvent?: TelemetryHandler;
+}
+
 export interface TransportAdapter {
   start(): Promise<void>;
   stop(): Promise<void>;
