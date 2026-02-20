@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import { ConfigurationError, createP2PNode, InMemoryTransport, RateLimitError } from '../src/index';
+import {
+  ConfigurationError,
+  MemoryPeerDiscoveryAdapter,
+  PeerDiscoveryService,
+  PeerReputationManager,
+  createP2PNode,
+  InMemoryTransport,
+  RateLimitError,
+} from '../src/index';
 
 describe('@gtcx/network', () => {
   it('delivers messages across in-memory peers', async () => {
@@ -63,5 +71,22 @@ describe('@gtcx/network', () => {
     await expect(node.publish('forbidden', 'payload')).rejects.toBeInstanceOf(ConfigurationError);
 
     await node.stop();
+  });
+
+  it('discovers peers via adapters and applies reputation scores', async () => {
+    const reputation = new PeerReputationManager();
+    reputation.recordSuccess('peer-1');
+    reputation.recordFailure('peer-2');
+
+    const adapter = new MemoryPeerDiscoveryAdapter([
+      { id: 'peer-1', addresses: ['addr-1'] },
+      { id: 'peer-2', addresses: ['addr-2'] },
+    ]);
+    const service = new PeerDiscoveryService([adapter], reputation, { maxPeers: 10 });
+
+    const discovered = await service.discoverPeers();
+    expect(discovered).toHaveLength(2);
+    expect(discovered[0]?.id).toBe('peer-1');
+    expect(discovered[0]?.score).toBeGreaterThan(discovered[1]?.score ?? 0);
   });
 });

@@ -37,6 +37,6 @@
 - In-memory mesh delivery + rate limiting:
   - Status: ✅ Implemented + executed
   - Evidence: `pnpm --filter @gtcx/network test`
-  - Result: `4 passed` (2026-02-20 22:05)
+  - Result: `5 passed` (2026-02-20 22:11)
 - libp2p/QUIC transport:
   - Status: ⏳ Pending implementation + evidence

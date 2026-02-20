@@ -32,6 +32,7 @@ await nodeA.publish('updates', { status: 'ok' });
 - `InMemoryTransport` is designed for tests and local simulations.
 - Rate limiting is enforced per node to prevent spam.
 - Optional topic allowlists prevent unauthorized publish/subscribe.
+- `PeerDiscoveryService` aggregates discovery adapters and applies reputation scores.
 
 ## Related
 

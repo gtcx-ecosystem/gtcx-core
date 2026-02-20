@@ -1,4 +1,5 @@
 export * from './types';
+export * from './peer-discovery';
 
 import type {
   MessageEnvelope,

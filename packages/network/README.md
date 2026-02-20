@@ -34,12 +34,14 @@ const node = createP2PNode({ nodeId: 'A', topics: ['updates'] }, new InMemoryTra
 
 ## API
 
-| Export              | Description                                |
-| ------------------- | ------------------------------------------ |
-| `createP2PNode`     | Create a P2P node from a transport adapter |
-| `InMemoryTransport` | Local transport adapter for tests and dev  |
-| `P2PConfig`         | Node configuration type                    |
-| `TransportAdapter`  | Adapter interface for libp2p/mesh backends |
+| Export                  | Description                                |
+| ----------------------- | ------------------------------------------ |
+| `createP2PNode`         | Create a P2P node from a transport adapter |
+| `InMemoryTransport`     | Local transport adapter for tests and dev  |
+| `PeerDiscoveryService`  | Adapter-driven peer discovery service      |
+| `PeerReputationManager` | Simple peer reputation scoring             |
+| `P2PConfig`             | Node configuration type                    |
+| `TransportAdapter`      | Adapter interface for libp2p/mesh backends |
 
 ## License
 
