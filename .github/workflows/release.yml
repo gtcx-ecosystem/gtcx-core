@@ -94,6 +94,21 @@ jobs:
           name: release-api-surface-report
           path: quality/api-surface-report.json
 
+      - name: Generate provenance manifest
+        run: pnpm provenance:generate
+
+      - name: Upload provenance artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-provenance-manifest
+          path: artifacts/provenance-manifest.json
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Critical package coverage
+        run: pnpm test:coverage:critical
+
       - name: Collect KPI history
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -113,21 +128,6 @@ jobs:
             artifacts/ci-history.json
             quality/kpi-metrics.json
             docs/quality/10-10-remediation-tracker.md
-
-      - name: Generate provenance manifest
-        run: pnpm provenance:generate
-
-      - name: Upload provenance artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-provenance-manifest
-          path: artifacts/provenance-manifest.json
-
-      - name: Run tests
-        run: pnpm test
-
-      - name: Critical package coverage
-        run: pnpm test:coverage:critical
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
