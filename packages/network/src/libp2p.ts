@@ -76,7 +76,9 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       }
     }
 
-    let listenAddresses = config.listenAddresses;
+    let listenAddresses: unknown[] | undefined = config.listenAddresses
+      ? [...config.listenAddresses]
+      : undefined;
     if (listenAddresses && listenAddresses.length > 0) {
       try {
         const multiaddrModule = await import('@multiformats/multiaddr');
@@ -88,7 +90,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     }
 
     const node = await createLibp2p({
-      addresses: listenAddresses ? { listen: listenAddresses } : undefined,
+      addresses: listenAddresses ? { listen: listenAddresses as any[] } : undefined,
       transports: [quic()],
       connectionEncryption: [noise()],
       peerDiscovery: peerDiscovery.length > 0 ? (peerDiscovery as unknown as any[]) : undefined,
