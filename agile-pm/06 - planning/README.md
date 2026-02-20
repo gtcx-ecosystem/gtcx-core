@@ -12,3 +12,8 @@ For execution tracking:
 - ../templates/daily-standup-template.md
 - ../templates/sprint-retrospective-template.md
 - ../templates/retrospective-workflow.md
+
+GTCX core full-spec planning:
+
+- gtcx-core-full-spec-sprints.md
+- uat-gtcx-core-full-spec.md
