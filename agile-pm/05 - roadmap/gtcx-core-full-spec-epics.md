@@ -133,7 +133,7 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 **Progress**:
 
 - Completed: request signing hooks, mTLS options, structured error taxonomy, tests/docs updates, signed request evidence.
-- Pending: mTLS handshake UAT evidence.
+- Pending: mTLS handshake UAT evidence (requires unrestricted node env).
 
 ### Feature 3.1: Signing and mTLS
 

@@ -24,7 +24,7 @@
 - [x] API-003: Implement structured error taxonomy + classes.
 - [x] API-004: Update README and package docs.
 - [x] API-005: Add tests for signing and error classification.
-- [ ] API-006: UAT evidence run and log entry.
+- [ ] API-006: UAT evidence run and log entry (mTLS pending; sandbox cannot bind).
 
 ## Acceptance Criteria
 

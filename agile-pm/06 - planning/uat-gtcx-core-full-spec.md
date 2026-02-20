@@ -48,6 +48,7 @@
 - [x] Signed request header injection test (`packages/api-client/tests/api-client.test.ts`)
 - [x] Auth error classification test (`packages/api-client/tests/api-client.test.ts`)
 - [ ] mTLS handshake validation evidence (node)
+  - Note: requires unrestricted node environment (local sandbox blocks bind).
 
 ## Sprint 4: P2P Networking Transport
 

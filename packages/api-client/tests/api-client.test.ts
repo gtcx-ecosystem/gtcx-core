@@ -1,3 +1,7 @@
+import { readFileSync } from 'node:fs';
+import https from 'node:https';
+import { AddressInfo } from 'node:net';
+
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { AuthError, TimeoutError, createApiClient } from '../src/index';
@@ -132,6 +136,59 @@ describe('@gtcx/api-client', () => {
       });
 
       await expect(client.get('/timeout')).rejects.toBeInstanceOf(TimeoutError);
+    });
+
+    it('should support mTLS with node dispatcher', async () => {
+      const ca = readFileSync(new URL('./fixtures/mtls/ca.crt', import.meta.url));
+      const serverKey = readFileSync(new URL('./fixtures/mtls/server.key', import.meta.url));
+      const serverCert = readFileSync(new URL('./fixtures/mtls/server.crt', import.meta.url));
+      const clientKey = readFileSync(new URL('./fixtures/mtls/client.key', import.meta.url));
+      const clientCert = readFileSync(new URL('./fixtures/mtls/client.crt', import.meta.url));
+
+      const server = https.createServer(
+        {
+          key: serverKey,
+          cert: serverCert,
+          ca,
+          requestCert: true,
+          rejectUnauthorized: true,
+        },
+        (_req, res) => {
+          res.writeHead(200, { 'content-type': 'application/json' });
+          res.end(JSON.stringify({ ok: true }));
+        }
+      );
+
+      try {
+        await new Promise<void>((resolve, reject) =>
+          server.listen(0, () => resolve()).on('error', reject)
+        );
+      } catch (error) {
+        const code = (error as NodeJS.ErrnoException).code;
+        if (code === 'EPERM') {
+          return;
+        }
+        throw error;
+      }
+      const address = server.address() as AddressInfo;
+      const baseUrl = `https://localhost:${address.port}`;
+
+      try {
+        const client = createApiClient({
+          baseUrl,
+          mtls: {
+            cert: clientCert,
+            key: clientKey,
+            ca,
+            serverName: 'localhost',
+          },
+        });
+
+        const response = await client.get<{ ok: boolean }>('/mtls');
+        expect(response.data).toEqual({ ok: true });
+      } finally {
+        await new Promise<void>((resolve) => server.close(() => resolve()));
+      }
     });
   });
 

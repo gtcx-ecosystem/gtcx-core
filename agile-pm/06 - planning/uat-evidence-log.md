@@ -30,3 +30,4 @@
   - Result: `9 passed` (2026-02-20 21:44)
 - mTLS handshake verification:
   - Status: ⏳ Pending evidence run (node env)
+  - Note: Local sandbox blocks `https.createServer` bind (EPERM). Run in unrestricted node env.
