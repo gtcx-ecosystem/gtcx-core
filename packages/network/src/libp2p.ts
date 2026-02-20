@@ -90,9 +90,12 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       pubsub: node.services?.pubsub as Libp2pRuntime['pubsub'],
     };
   } catch (error) {
-    throw new ConfigurationError(
-      'libp2p dependencies are missing. Install libp2p, @chainsafe/libp2p-quic, @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
-    );
+    const err = error as Error & { code?: string };
+    const isMissingDep = err?.code === 'ERR_MODULE_NOT_FOUND';
+    const message = isMissingDep
+      ? 'libp2p dependencies are missing. Install libp2p, @chainsafe/libp2p-quic, @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
+      : `libp2p init failed: ${err?.message ?? String(error)}`;
+    throw new ConfigurationError(message);
   }
 }
 
