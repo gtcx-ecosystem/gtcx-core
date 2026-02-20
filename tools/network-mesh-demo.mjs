@@ -82,7 +82,26 @@ const run = async () => {
     await waitForPeers(nodeA, 1, 8000);
 
     await sleep(2000);
-    await nodeA.publish('gtcx.mesh', { message: 'hello-mesh' });
+    const publishWithRetry = async (payload, attempts = 5) => {
+      for (let i = 0; i < attempts; i += 1) {
+        try {
+          await nodeA.publish('gtcx.mesh', payload);
+          return true;
+        } catch (error) {
+          if (String(error?.message ?? error).includes('NoPeersSubscribedToTopic')) {
+            await sleep(1000);
+            continue;
+          }
+          throw error;
+        }
+      }
+      return false;
+    };
+
+    const published = await publishWithRetry({ message: 'hello-mesh' });
+    if (!published) {
+      throw new Error('Publish failed: NoPeersSubscribedToTopic');
+    }
     await sleep(1000);
 
     try {
