@@ -8,7 +8,7 @@ This section provides comprehensive metrics tracking, visualization templates, a
 
 ### Project Dashboards
 
-- `project-status-dashboard.md` - Individual project status
+- `project-status-dashboard.md` - Individual project status (gtcx-core now marked Development Complete)
 - `sprint-metrics-dashboard.md` - Sprint performance metrics
 - `velocity-tracking-dashboard.md` - Team velocity trends
 - `burndown-charts.md` - Sprint burndown visualization
