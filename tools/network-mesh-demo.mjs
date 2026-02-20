@@ -66,6 +66,7 @@ const run = async () => {
     const nodeC = createP2PNode({ nodeId: 'validator-c', topics: ['gtcx.mesh'] }, transportC);
 
     const received = [];
+    nodeA.subscribe('gtcx.mesh', () => {});
     nodeB.subscribe('gtcx.mesh', (payload) => received.push(`B:${payload.message}`));
     nodeC.subscribe('gtcx.mesh', (payload) => received.push(`C:${payload.message}`));
 
