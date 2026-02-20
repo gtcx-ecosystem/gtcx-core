@@ -38,6 +38,7 @@ const run = async () => {
       listenAddresses,
       topics: ['gtcx.mesh'],
       enableMdns: true,
+      allowPublishToZeroPeers: true,
     });
     await transportA.start();
     const bootstrap = transportA.getMultiaddrs();
@@ -46,12 +47,14 @@ const run = async () => {
       listenAddresses,
       topics: ['gtcx.mesh'],
       enableMdns: true,
+      allowPublishToZeroPeers: true,
       bootstrap,
     });
     const transportC = new Libp2pTransport({
       listenAddresses,
       topics: ['gtcx.mesh'],
       enableMdns: true,
+      allowPublishToZeroPeers: true,
       bootstrap,
     });
 
@@ -69,6 +72,8 @@ const run = async () => {
     await nodeA.start();
     await nodeB.start();
     await nodeC.start();
+    await transportB.connect(bootstrap);
+    await transportC.connect(bootstrap);
 
     const waitForPeers = async (node, minPeers, maxWaitMs) => {
       const started = Date.now();
@@ -82,14 +87,14 @@ const run = async () => {
     await waitForPeers(nodeA, 1, 8000);
 
     await sleep(2000);
-    const publishWithRetry = async (payload, attempts = 5) => {
+    const publishWithRetry = async (payload, attempts = 10) => {
       for (let i = 0; i < attempts; i += 1) {
         try {
           await nodeA.publish('gtcx.mesh', payload);
           return true;
         } catch (error) {
           if (String(error?.message ?? error).includes('NoPeersSubscribedToTopic')) {
-            await sleep(1000);
+            await sleep(2000);
             continue;
           }
           throw error;

@@ -15,6 +15,7 @@ interface Libp2pRuntime {
     stop: () => Promise<void> | void;
     getPeers?: () => PeerId[];
     getMultiaddrs?: () => Array<{ toString: () => string }>;
+    dial?: (address: unknown) => Promise<void>;
     getConnections?: () => Array<{ remotePeer?: { toString: () => string } }>;
     services?: { pubsub?: unknown };
   };
@@ -199,6 +200,15 @@ export class Libp2pTransport implements TransportAdapter {
     if (!this.runtime) return [];
     const addrs = this.runtime.node.getMultiaddrs?.() ?? [];
     return addrs.map((addr) => addr.toString());
+  }
+
+  async connect(addresses: string[]): Promise<void> {
+    if (!this.runtime?.node.dial) return;
+    if (!addresses.length) return;
+    const multiaddrModule = await import('@multiformats/multiaddr');
+    const toMultiaddr = resolveFactory(multiaddrModule, 'multiaddr');
+    const targets = addresses.map((addr) => toMultiaddr(addr));
+    await Promise.all(targets.map((addr) => this.runtime!.node.dial!(addr)));
   }
 
   private handleEvent(event: unknown): void {
