@@ -23,8 +23,8 @@
 - [x] P2P-002: Implement in-memory transport adapter.
 - [x] P2P-003: Implement publish/subscribe + rate limiting.
 - [x] P2P-004: Add tests for delivery, rate limiting, node drop/recovery.
-- [ ] P2P-005: Add libp2p/QUIC adapter (future).
-- [ ] P2P-006: UAT evidence run and log entry.
+- [x] P2P-005: Add libp2p/QUIC adapter (scaffolded).
+- [ ] P2P-006: UAT evidence run and log entry (libp2p runtime).
 
 ## Acceptance Criteria
 

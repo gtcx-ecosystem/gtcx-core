@@ -77,8 +77,8 @@
 
 - [x] P2P adapter + in-memory transport scaffolding
 - [x] Pub/sub delivery + rate limiting
-- [ ] QUIC transport + Noise handshake
-- [ ] Gossipsub topics + rate limits
+- [x] QUIC transport + Noise handshake (libp2p adapter scaffold)
+- [x] Gossipsub topics + rate limits (libp2p adapter scaffold)
 - [ ] Peer discovery and telemetry
 
 **Exit Criteria**:

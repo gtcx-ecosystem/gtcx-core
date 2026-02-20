@@ -5,6 +5,7 @@ import {
   MemoryPeerDiscoveryAdapter,
   PeerDiscoveryService,
   PeerReputationManager,
+  createLibp2pTransport,
   createP2PNode,
   InMemoryTransport,
   RateLimitError,
@@ -88,5 +89,9 @@ describe('@gtcx/network', () => {
     expect(discovered).toHaveLength(2);
     expect(discovered[0]?.id).toBe('peer-1');
     expect(discovered[0]?.score).toBeGreaterThan(discovered[1]?.score ?? 0);
+  });
+
+  it('throws configuration error when libp2p dependencies are missing', async () => {
+    await expect(createLibp2pTransport({})).rejects.toBeInstanceOf(ConfigurationError);
   });
 });

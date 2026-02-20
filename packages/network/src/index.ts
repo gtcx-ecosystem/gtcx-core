@@ -1,11 +1,13 @@
 export * from './types';
 export * from './peer-discovery';
+export * from './errors';
+export * from './libp2p';
 
+import { ConfigurationError, RateLimitError, TransportError } from './errors';
 import type {
   MessageEnvelope,
   NodeStatus,
   P2PConfig,
-  P2PErrorCode,
   P2PNode,
   PeerId,
   PeerInfo,
@@ -16,39 +18,6 @@ import type {
 
 const DEFAULT_TTL = 8;
 const DEFAULT_RATE_LIMIT = 120;
-
-export class P2PError extends Error {
-  code: P2PErrorCode;
-  retryable: boolean;
-
-  constructor(message: string, code: P2PErrorCode, retryable: boolean) {
-    super(message);
-    this.name = 'P2PError';
-    this.code = code;
-    this.retryable = retryable;
-  }
-}
-
-export class RateLimitError extends P2PError {
-  constructor(message: string) {
-    super(message, 'RATE_LIMIT', true);
-    this.name = 'RateLimitError';
-  }
-}
-
-export class TransportError extends P2PError {
-  constructor(message: string) {
-    super(message, 'TRANSPORT', true);
-    this.name = 'TransportError';
-  }
-}
-
-export class ConfigurationError extends P2PError {
-  constructor(message: string) {
-    super(message, 'CONFIG', false);
-    this.name = 'ConfigurationError';
-  }
-}
 
 class RateLimiter {
   private capacity: number;

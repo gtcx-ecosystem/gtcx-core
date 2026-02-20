@@ -155,8 +155,8 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 
 **Progress**:
 
-- Completed: P2P adapter + in-memory transport scaffolding with tests.
-- Pending: libp2p/QUIC/gossipsub implementation + UAT.
+- Completed: P2P adapter + in-memory transport scaffolding with tests; libp2p adapter scaffold.
+- Pending: libp2p runtime validation + UAT.
 
 ### Feature 4.1: libp2p Transport
 
