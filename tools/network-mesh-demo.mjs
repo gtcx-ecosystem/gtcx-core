@@ -56,7 +56,7 @@ const run = async () => {
     });
 
     const nodeA = createP2PNode(
-      { nodeId: 'validator-a', topics: ['gtcx.mesh'], rateLimitPerMinute: 1 },
+      { nodeId: 'validator-a', topics: ['gtcx.mesh'], rateLimitPerMinute: 10 },
       transportA
     );
     const nodeB = createP2PNode({ nodeId: 'validator-b', topics: ['gtcx.mesh'] }, transportB);
