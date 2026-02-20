@@ -13,6 +13,7 @@ interface Libp2pRuntime {
   node: {
     start: () => Promise<void> | void;
     stop: () => Promise<void> | void;
+    peerId?: { toString: () => string };
     getPeers?: () => PeerId[];
     getMultiaddrs?: () => Array<{ toString: () => string }>;
     dial?: (address: unknown) => Promise<void>;
@@ -200,6 +201,10 @@ export class Libp2pTransport implements TransportAdapter {
     if (!this.runtime) return [];
     const addrs = this.runtime.node.getMultiaddrs?.() ?? [];
     return addrs.map((addr) => addr.toString());
+  }
+
+  getPeerId(): string | null {
+    return this.runtime?.node.peerId?.toString?.() ?? null;
   }
 
   async connect(addresses: string[]): Promise<void> {

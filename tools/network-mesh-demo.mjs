@@ -41,7 +41,11 @@ const run = async () => {
       allowPublishToZeroPeers: true,
     });
     await transportA.start();
-    const bootstrap = transportA.getMultiaddrs();
+    const peerId = transportA.getPeerId?.();
+    const bootstrap = transportA.getMultiaddrs().map((addr) => {
+      if (!peerId || addr.includes('/p2p/')) return addr;
+      return `${addr}/p2p/${peerId}`;
+    });
 
     const transportB = new Libp2pTransport({
       listenAddresses,
