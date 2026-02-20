@@ -1,30 +1,30 @@
-# GTCX Core Full-Spec Epics and Bouts
+# GTCX Core Full-Spec Epics and Sprints
 
 **Updated**: 2026-02-20  
-**Scope**: gtcx-core full-spec delivery, phased into execution bouts  
+**Scope**: gtcx-core full-spec delivery, phased into execution sprints  
 **Objective**: Complete full protocol implementation with enterprise and government-grade readiness.
 
-## Bouts Overview
+## Sprint Overview
 
-**Bout 0: Spec-to-Code Closure**  
+**Sprint 0: Spec-to-Code Closure**  
 Goal: 100% traceability and execution-ready backlog.
 
-**Bout 1: Identity Resolution Core**  
+**Sprint 1: Identity Resolution Core**  
 Goal: DID resolution with caching, revocation checks, and resolver adapters.
 
-**Bout 2: Offline Sync Engine**  
+**Sprint 2: Offline Sync Engine**  
 Goal: Deterministic offline-first sync with conflict resolution.
 
-**Bout 3: API Client Enterprise Hardening**  
+**Sprint 3: API Client Enterprise Hardening**  
 Goal: Secure, resilient integration client with signing and mTLS support.
 
-**Bout 4: P2P Networking Transport**  
+**Sprint 4: P2P Networking Transport**  
 Goal: libp2p transport with QUIC + gossipsub and secure peer discovery.
 
-**Bout 5: ZKP System**  
+**Sprint 5: ZKP System**  
 Goal: Real proof circuits for compliance, provenance, quality, identity.
 
-**Bout 6: secp256k1 Interop**  
+**Sprint 6: secp256k1 Interop**  
 Goal: Rust secp256k1 signing and verification with interop tests.
 
 ## Epic Catalog
@@ -59,7 +59,7 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 3. Cross-epic dependencies are listed.  
    **Definition of Done**: Epics linked to the full-spec roadmap.
 
-## Epic 1: DID Resolver (Bout 1)
+## Epic 1: DID Resolver (Sprint 1)
 
 **Priority**: P0  
 **Estimated Effort**: 4-6 weeks  
@@ -89,7 +89,7 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 3. Cache hit/miss metrics emitted.  
    **Definition of Done**: UAT scenario validates revoked identity detection.
 
-## Epic 2: Offline Sync Engine (Bout 2)
+## Epic 2: Offline Sync Engine (Sprint 2)
 
 **Priority**: P0  
 **Estimated Effort**: 6-8 weeks  
@@ -119,7 +119,7 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 3. Conflicts are captured in audit records.  
    **Definition of Done**: UAT covers conflict and reconciliation outcomes.
 
-## Epic 3: API Client Enterprise Hardening (Bout 3)
+## Epic 3: API Client Enterprise Hardening (Sprint 3)
 
 **Priority**: P1  
 **Estimated Effort**: 3-4 weeks  
@@ -137,7 +137,7 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 3. Failure reasons are structured and actionable.  
    **Definition of Done**: UAT includes signed request validation.
 
-## Epic 4: P2P Networking Transport (Bout 4)
+## Epic 4: P2P Networking Transport (Sprint 4)
 
 **Priority**: P1  
 **Estimated Effort**: 8-12 weeks  
@@ -155,7 +155,7 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 3. Peer discovery is secure and observable.  
    **Definition of Done**: UAT simulates node loss and recovery.
 
-## Epic 5: ZKP System (Bout 5)
+## Epic 5: ZKP System (Sprint 5)
 
 **Priority**: P1  
 **Estimated Effort**: 10-14 weeks  
@@ -173,7 +173,7 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 3. Proofs integrated into verification flow.  
    **Definition of Done**: UAT validates proof acceptance and rejection.
 
-## Epic 6: secp256k1 Interop (Bout 6)
+## Epic 6: secp256k1 Interop (Sprint 6)
 
 **Priority**: P2  
 **Estimated Effort**: 3-4 weeks  
@@ -191,11 +191,11 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 3. NAPI bindings optional but documented.  
    **Definition of Done**: CI adds secp256k1 tests and passes.
 
-## UAT Gates by Bout
+## UAT Gates by Sprint
 
-1. Bout 1: DID resolution passes with revoked identity case.
-2. Bout 2: Offline sync conflict scenarios resolved deterministically.
-3. Bout 3: Signed request and mTLS flow validated.
-4. Bout 4: Node mesh survives peer drop and resumes consensus.
-5. Bout 5: ZKP verification passes with invalid proof negative case.
-6. Bout 6: secp256k1 interop verified against external vectors.
+1. Sprint 1: DID resolution passes with revoked identity case.
+2. Sprint 2: Offline sync conflict scenarios resolved deterministically.
+3. Sprint 3: Signed request and mTLS flow validated.
+4. Sprint 4: Node mesh survives peer drop and resumes consensus.
+5. Sprint 5: ZKP verification passes with invalid proof negative case.
+6. Sprint 6: secp256k1 interop verified against external vectors.
