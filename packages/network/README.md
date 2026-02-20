@@ -39,7 +39,7 @@ const node = createP2PNode({ nodeId: 'A' }, new InMemoryTransport('A'), {
 ## libp2p (QUIC + gossipsub)
 
 ```bash
-pnpm add libp2p @libp2p/quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub
+pnpm add libp2p @libp2p/quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns
 ```
 
 ```typescript
@@ -48,6 +48,7 @@ import { createP2PNode, createLibp2pTransport } from '@gtcx/network';
 const transport = await createLibp2pTransport({
   listenAddresses: ['/ip4/0.0.0.0/udp/0/quic-v1'],
   topics: ['gtcx.mesh'],
+  enableMdns: true,
 });
 const node = createP2PNode({ nodeId: 'validator-1' }, transport);
 await node.start();

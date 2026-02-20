@@ -6,6 +6,7 @@ export interface Libp2pTransportConfig {
   bootstrap?: string[];
   topics?: Topic[];
   allowPublishToZeroPeers?: boolean;
+  enableMdns?: boolean;
 }
 
 interface Libp2pRuntime {
@@ -33,10 +34,29 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       import('@chainsafe/libp2p-gossipsub'),
     ]);
 
+    const peerDiscovery: unknown[] = [];
+    if (config.bootstrap && config.bootstrap.length > 0) {
+      try {
+        const { bootstrap } = await import('@libp2p/bootstrap');
+        peerDiscovery.push(bootstrap({ list: config.bootstrap }));
+      } catch (error) {
+        throw new ConfigurationError('Bootstrap requires @libp2p/bootstrap');
+      }
+    }
+    if (config.enableMdns) {
+      try {
+        const { mdns } = await import('@libp2p/mdns');
+        peerDiscovery.push(mdns());
+      } catch (error) {
+        throw new ConfigurationError('mDNS requires @libp2p/mdns');
+      }
+    }
+
     const node = await createLibp2p({
       addresses: config.listenAddresses ? { listen: config.listenAddresses } : undefined,
       transports: [quic()],
       connectionEncryption: [noise()],
+      peerDiscovery: peerDiscovery.length > 0 ? peerDiscovery : undefined,
       services: {
         pubsub: gossipsub({
           allowPublishToZeroPeers: config.allowPublishToZeroPeers ?? true,

@@ -45,6 +45,7 @@
     "docs:check-links": "node ./tools/check-markdown-links.mjs",
     "docs:rust": "cd rust && cargo doc --workspace --no-deps",
     "bench": "cd rust && cargo bench --workspace",
+    "network:mesh:demo": "node ./tools/network-mesh-demo.mjs",
     "prepare": "husky"
   },
   "devDependencies": {

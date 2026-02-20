@@ -33,7 +33,9 @@
     "libp2p": "^1.0.0",
     "@libp2p/quic": "^1.0.0",
     "@chainsafe/libp2p-noise": "^11.0.0",
-    "@chainsafe/libp2p-gossipsub": "^12.0.0"
+    "@chainsafe/libp2p-gossipsub": "^12.0.0",
+    "@libp2p/bootstrap": "^1.0.0",
+    "@libp2p/mdns": "^1.0.0"
   },
   "peerDependenciesMeta": {
     "libp2p": {
@@ -46,6 +48,12 @@
       "optional": true
     },
     "@chainsafe/libp2p-gossipsub": {
+      "optional": true
+    },
+    "@libp2p/bootstrap": {
+      "optional": true
+    },
+    "@libp2p/mdns": {
       "optional": true
     }
   },

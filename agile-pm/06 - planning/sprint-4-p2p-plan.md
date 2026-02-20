@@ -24,7 +24,7 @@
 - [x] P2P-003: Implement publish/subscribe + rate limiting.
 - [x] P2P-004: Add tests for delivery, rate limiting, node drop/recovery.
 - [x] P2P-005: Add libp2p/QUIC adapter (scaffolded).
-- [ ] P2P-006: UAT evidence run and log entry (libp2p runtime).
+- [ ] P2P-006: UAT evidence run and log entry (libp2p runtime via `pnpm network:mesh:demo`).
 
 ## Acceptance Criteria
 

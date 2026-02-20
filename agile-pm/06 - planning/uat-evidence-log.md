@@ -39,4 +39,5 @@
   - Evidence: `pnpm --filter @gtcx/network test`
   - Result: `7 passed` (2026-02-20 22:27)
 - libp2p/QUIC transport:
-  - Status: ⏳ Pending implementation + evidence
+  - Status: ⏳ Pending runtime evidence
+  - Evidence command: `pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
