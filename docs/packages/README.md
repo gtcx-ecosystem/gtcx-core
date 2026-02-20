@@ -21,7 +21,7 @@ Shared TypeScript packages for the GTCX Protocol ecosystem. Each package follows
 | `@gtcx/utils`                             | Common utility functions                                 | P3 Modularity                    |
 | `@gtcx/events`                            | Typed event bus with offline buffering and replay        | P12 Observability, P8 Offline    |
 | `@gtcx/connectivity`                      | Network status detection and connectivity profiles       | P8 Offline                       |
-| `@gtcx/sync`                              | Offline-first sync engine (interface stub)               | P8 Offline                       |
+| `@gtcx/sync`                              | Offline-first sync engine with conflict resolution       | P8 Offline                       |
 | `@gtcx/api-client`                        | Resilient API client with retry and timeouts             | P4 Composability                 |
 
 ## Dependency Graph
@@ -47,7 +47,7 @@ Shared TypeScript packages for the GTCX Protocol ecosystem. Each package follows
 @gtcx/logging          (structured logging)
 @gtcx/utils            (standalone utilities, no internal deps)
 @gtcx/connectivity     (network status detection, no internal deps)
-@gtcx/sync             (sync engine stub, no internal deps)
+@gtcx/sync             (offline-first sync engine, no internal deps)
 @gtcx/api-client       (resilient API client, no internal deps)
 ```
 

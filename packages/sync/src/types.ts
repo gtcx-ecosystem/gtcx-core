@@ -12,6 +12,12 @@ export interface SyncOptions {
   retryDelayMs?: number; // default 1000
 }
 
+export interface SyncEngineConfig<T = unknown> {
+  fetchRemote?: (ids: string[]) => Promise<SyncItem<T>[]>;
+  pushLocal?: (items: SyncItem<T>[]) => Promise<void>;
+  onResolved?: (items: SyncItem<T>[]) => Promise<void> | void;
+}
+
 export interface SyncResult {
   uploaded: number;
   downloaded: number;

@@ -32,7 +32,7 @@ All packages are published under the `@gtcx/` scope and managed in a pnpm worksp
 | @gtcx/utils        | Shared utilities consumed across the ecosystem                                      |
 | @gtcx/events       | Typed event bus with offline buffering and replay                                   |
 | @gtcx/connectivity | Network status detection and connectivity profiles                                  |
-| @gtcx/sync         | Offline-first sync engine (interface stub)                                          |
+| @gtcx/sync         | Offline-first sync engine with conflict resolution                                  |
 | @gtcx/api-client   | Resilient API client with retry and timeouts                                        |
 | config/eslint      | Shared ESLint configuration for consistent code style                               |
 | config/typescript  | Shared TypeScript configuration (strict mode, path aliases)                         |
@@ -56,7 +56,7 @@ All packages are published under the `@gtcx/` scope and managed in a pnpm worksp
 @gtcx/utils (standalone utilities, no internal deps)
 @gtcx/events (typed event bus, offline buffering)
 @gtcx/connectivity (network status detection)
-@gtcx/sync (sync engine stub)
+@gtcx/sync (offline-first sync engine)
 @gtcx/api-client (resilient API client)
 config/* (eslint, typescript, tailwind)
 ```

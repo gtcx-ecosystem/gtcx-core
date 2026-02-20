@@ -97,7 +97,7 @@ Operational controls depend on deployment policies and infra.
 | Capability       | Current Status              | Location                              | Notes                                    |
 | ---------------- | --------------------------- | ------------------------------------- | ---------------------------------------- |
 | API Client       | Implemented                 | `packages/api-client/src/index.ts`    | Basic retry + timeout client             |
-| Sync Engine      | Stub                        | `packages/sync/src/index.ts`          | Returns error payload                    |
+| Sync Engine      | Implemented                 | `packages/sync/src/index.ts`          | Deterministic conflict resolution        |
 | AI Tracing       | No-op stub                  | `packages/ai/src/index.ts`            | Integration lives in `gtcx-intelligence` |
 | DID Resolution   | Implemented                 | `packages/identity/src/resolver.ts`   | Requires deployment-specific backends    |
 | ZKP System       | Hash-commitment placeholder | `rust/gtcx-zkp/src/**`                | Real circuits planned                    |

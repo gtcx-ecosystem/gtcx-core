@@ -13,16 +13,22 @@ pnpm add @gtcx/sync
 ```typescript
 import { createSyncEngine } from '@gtcx/sync';
 
-const engine = createSyncEngine({ strategy: 'last-write-wins' });
+const engine = createSyncEngine({
+  fetchRemote: async () => [],
+  pushLocal: async () => {},
+});
+
+const result = await engine.sync([], { strategy: 'last-write-wins' });
 ```
 
 ## API
 
-| Export                   | Description              |
-| ------------------------ | ------------------------ |
-| `createSyncEngine(opts)` | Create sync engine       |
-| `ConflictStrategy`       | Resolution strategy type |
-| `SyncOptions`            | Configuration options    |
+| Export                     | Description              |
+| -------------------------- | ------------------------ |
+| `createSyncEngine(config)` | Create sync engine       |
+| `ConflictStrategy`         | Resolution strategy type |
+| `SyncOptions`              | Sync configuration       |
+| `SyncEngineConfig`         | Engine configuration     |
 
 ## License
 
