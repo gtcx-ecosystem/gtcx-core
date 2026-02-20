@@ -76,7 +76,7 @@
 
 - Implement conflict resolution strategies (LWW, merge policies, vector clocks where required).
 - Provide resumable sync, conflict audit logs, and deterministic reconciliation.
-- Progress: core sync engine + deterministic ordering + conflict hooks done; audit logs/metrics pending.
+- Progress: core sync engine + deterministic ordering + conflict hooks + audit/metrics done; integration/UAT pending.
 
 **Workstream C: API Client**
 

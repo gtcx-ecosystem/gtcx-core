@@ -157,6 +157,23 @@ engine.registerProtocol({
 });
 ```
 
+## Audit and Metrics Hooks (Low-Level)
+
+For platform-specific integrations, the low-level `createSyncEngine` provides audit and metrics callbacks:
+
+```typescript
+import { createSyncEngine } from '@gtcx/sync';
+
+const engine = createSyncEngine({
+  onAudit: (event) => {
+    console.log('audit', event.type, event.id);
+  },
+  onMetrics: (metrics) => {
+    console.log('sync metrics', metrics);
+  },
+});
+```
+
 ## Custom Strategies
 
 ```typescript

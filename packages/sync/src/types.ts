@@ -18,12 +18,54 @@ export interface SyncEngineConfig<T = unknown> {
   onResolved?: (items: SyncItem<T>[]) => Promise<void> | void;
   onConflict?: (conflict: SyncConflict<T>) => Promise<void> | void;
   resolveConflict?: (conflict: SyncConflict<T>) => Promise<SyncItem<T> | null>;
+  onAudit?: (event: SyncAuditEvent<T>) => Promise<void> | void;
+  onMetrics?: (metrics: SyncMetrics) => Promise<void> | void;
 }
 
 export interface SyncConflict<T = unknown> {
   id: string;
   local: SyncItem<T>[];
   remote?: SyncItem<T>;
+}
+
+export type SyncAuditEventType =
+  | 'sync.start'
+  | 'sync.conflict'
+  | 'sync.resolved'
+  | 'sync.unresolved'
+  | 'sync.complete'
+  | 'sync.failed'
+  | 'sync.cancelled';
+
+export interface SyncAuditEvent<T = unknown> {
+  type: SyncAuditEventType;
+  timestamp: string;
+  strategy: ConflictStrategy;
+  id?: string;
+  localCount?: number;
+  remotePresent?: boolean;
+  winner?: SyncItem<T>;
+  error?: string;
+  metadata?: Record<string, unknown>;
+}
+
+export interface SyncMetrics {
+  strategy: ConflictStrategy;
+  batchSize: number;
+  retryAttempts: number;
+  retryDelayMs: number;
+  totalItems: number;
+  uniqueIds: number;
+  remoteFetched: number;
+  uploaded: number;
+  downloaded: number;
+  conflicts: number;
+  resolved: number;
+  errors: number;
+  durationMs: number;
+  startedAt: number;
+  finishedAt: number;
+  status: SyncStatus;
 }
 
 export interface SyncResult {

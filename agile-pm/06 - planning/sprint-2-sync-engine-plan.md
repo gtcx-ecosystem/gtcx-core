@@ -29,9 +29,9 @@
 - [x] SYNC-001: Implement sync engine core (`packages/sync/src/index.ts`).
 - [x] SYNC-002: Deterministic ID ordering for conflict evaluation.
 - [x] SYNC-003: Add conflict hooks (`onConflict`, `resolveConflict`).
-- [ ] SYNC-004: Add conflict audit log emitter and metrics callbacks.
+- [x] SYNC-004: Add conflict audit log emitter and metrics callbacks.
 - [ ] SYNC-005: Add offline → online convergence integration test.
-- [ ] SYNC-006: Update docs and examples for conflict hooks and audit logs.
+- [x] SYNC-006: Update docs and examples for conflict hooks and audit logs.
 
 ## Acceptance Criteria
 

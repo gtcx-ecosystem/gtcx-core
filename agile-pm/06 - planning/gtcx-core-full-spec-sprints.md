@@ -46,7 +46,7 @@
 
 - [x] Sync engine core (upload/download)
 - [x] Conflict policies (LWW + merge hooks)
-- [ ] Conflict audit logs + metrics
+- [x] Conflict audit logs + metrics
 
 **Exit Criteria**:
 

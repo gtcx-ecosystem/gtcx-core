@@ -98,8 +98,8 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 
 **Progress**:
 
-- Completed: core sync engine, deterministic ID ordering, conflict hooks (`onConflict`, `resolveConflict`).
-- Pending: conflict audit logs + metrics wiring, offline convergence integration test, UAT scenarios.
+- Completed: core sync engine, deterministic ID ordering, conflict hooks (`onConflict`, `resolveConflict`), audit/metrics callbacks.
+- Pending: offline convergence integration test, UAT scenarios.
 
 ### Feature 2.1: Sync Core
 

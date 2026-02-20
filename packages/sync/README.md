@@ -43,6 +43,8 @@ const result = await engine.sync([], { strategy: 'last-write-wins' });
 - `onResolved(items)` applies remote winners locally.
 - `onConflict(conflict)` hook for conflict telemetry.
 - `resolveConflict(conflict)` custom resolver when built-in strategy cannot decide.
+- `onAudit(event)` audit trail callback for sync lifecycle events.
+- `onMetrics(metrics)` metrics callback for sync completion.
 
 ## License
 

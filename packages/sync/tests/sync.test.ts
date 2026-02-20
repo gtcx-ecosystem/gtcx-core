@@ -8,6 +8,9 @@ import type {
   SyncResult,
   SyncItem,
   SyncStatus,
+  SyncAuditEventType,
+  SyncAuditEvent,
+  SyncMetrics,
 } from '../src/types';
 
 describe('@gtcx/sync', () => {
@@ -93,6 +96,22 @@ describe('@gtcx/sync', () => {
       expect(result.downloaded).toBe(1);
       expect(result.uploaded).toBe(0);
     });
+
+    it('should emit audit and metrics callbacks', async () => {
+      const onAudit = vi.fn();
+      const onMetrics = vi.fn();
+      const engine = createSyncEngine({ onAudit, onMetrics });
+      const items: SyncItem[] = [{ id: '1', data: { value: 1 }, version: 1, updatedAt: 1 }];
+
+      const result = await engine.sync(items, { strategy: 'last-write-wins' });
+      expect(result.errors).toEqual([]);
+      expect(onAudit).toHaveBeenCalled();
+      const auditTypes = onAudit.mock.calls.map((call) => call[0].type);
+      expect(auditTypes).toContain('sync.start');
+      expect(auditTypes).toContain('sync.complete');
+      expect(onMetrics).toHaveBeenCalledTimes(1);
+      expect(onMetrics.mock.calls[0][0].status).toBe('idle');
+    });
   });
 
   describe('types', () => {
@@ -111,6 +130,30 @@ describe('@gtcx/sync', () => {
       };
       const item: SyncItem<string> = { id: '1', data: 'test', version: 1, updatedAt: Date.now() };
       const status: SyncStatus = 'idle';
+      const auditType: SyncAuditEventType = 'sync.start';
+      const auditEvent: SyncAuditEvent = {
+        type: 'sync.complete',
+        timestamp: new Date().toISOString(),
+        strategy: 'last-write-wins',
+      };
+      const metrics: SyncMetrics = {
+        strategy: 'last-write-wins',
+        batchSize: 50,
+        retryAttempts: 1,
+        retryDelayMs: 1000,
+        totalItems: 0,
+        uniqueIds: 0,
+        remoteFetched: 0,
+        uploaded: 0,
+        downloaded: 0,
+        conflicts: 0,
+        resolved: 0,
+        errors: 0,
+        durationMs: 0,
+        startedAt: 0,
+        finishedAt: 0,
+        status: 'idle',
+      };
 
       expect(strategy).toBeDefined();
       expect(options).toBeDefined();
@@ -118,6 +161,9 @@ describe('@gtcx/sync', () => {
       expect(result).toBeDefined();
       expect(item).toBeDefined();
       expect(status).toBeDefined();
+      expect(auditType).toBeDefined();
+      expect(auditEvent).toBeDefined();
+      expect(metrics).toBeDefined();
     });
   });
 });
