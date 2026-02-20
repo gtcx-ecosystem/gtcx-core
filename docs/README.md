@@ -75,6 +75,7 @@ Complete documentation for the GTCX Core monorepo — the shared foundation laye
 | [10/10 Tracker and Scorecard](./quality/10-10-remediation-tracker.md)  | Category ratings, weighted score, and phase execution checklist  |
 | [Error Taxonomy Checklist](./quality/error-taxonomy-checklist.md)      | Required error-model and cause-propagation adoption criteria     |
 | [Governance and Evidence Policy](./quality/governance-and-evidence.md) | Branch protection policy, required checks, and audit evidence    |
+| [Spec-to-Code Traceability](./quality/spec-to-code-traceability.md)    | Mapping of spec requirements to implementation and gaps          |
 
 ## Architecture Decision Records
 
