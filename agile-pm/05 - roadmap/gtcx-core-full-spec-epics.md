@@ -153,6 +153,11 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 **Estimated Effort**: 8-12 weeks  
 **Success Criteria**: Validator mesh operates without centralized relay.
 
+**Progress**:
+
+- Completed: P2P adapter + in-memory transport scaffolding with tests.
+- Pending: libp2p/QUIC/gossipsub implementation + UAT.
+
 ### Feature 4.1: libp2p Transport
 
 **Story Points**: 13

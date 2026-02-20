@@ -50,6 +50,7 @@ The shared infrastructure layer provides the foundational packages that all GTCX
 @gtcx/connectivity     (network status detection, connectivity profiles)
 @gtcx/sync             (offline-first sync engine)
 @gtcx/api-client       (resilient API client)
+@gtcx/network          (p2p networking primitives)
 ```
 
 ### 2.2 Package Inventory
@@ -69,6 +70,7 @@ The shared infrastructure layer provides the foundational packages that all GTCX
 | `@gtcx/connectivity`                                | Network status detection, connectivity profiles          | `ConnectivityDetector`, `classifyProfile()`                                 | Transport     |
 | `@gtcx/sync`                                        | Offline-first sync, conflict resolution                  | `ISyncEngine`, `createSyncEngine()`                                         | Sync          |
 | `@gtcx/api-client`                                  | Resilient API client with retry                          | `IApiClient`, `createApiClient()`                                           | Client        |
+| `@gtcx/network`                                     | P2P networking primitives for validator mesh             | `createP2PNode()`, `InMemoryTransport`                                      | Transport     |
 
 ### 2.3 Dependency Rules
 

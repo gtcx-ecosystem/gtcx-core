@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Roadmap (Enterprise and Military-Grade)
 
 **Updated**: 2026-02-20  
-**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 in progress (API client hardening)  
+**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 in progress (API client hardening); Sprint 4 in progress (P2P scaffolding)  
 **Scope**: gtcx-core monorepo + required downstream integrations to reach full spec functionality  
 **Objective**: Implement the full spec for global south deployment with offline-first capability, government-grade identity, and financial market infrastructure reliability.
 
@@ -97,6 +97,7 @@
 - Implement libp2p transport with QUIC + gossipsub.
 - Add secure peer discovery and identity handshake.
 - Enforce topic permissions and rate limits.
+- Progress: adapter scaffolding + in-memory mesh tests; libp2p transport pending.
 
 **Workstream E: ZKP System**
 

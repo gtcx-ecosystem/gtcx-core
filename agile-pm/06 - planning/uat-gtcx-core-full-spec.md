@@ -56,6 +56,11 @@
 2. Kill one node, ensure consensus continues and state converges on recovery.
 3. Validate topic permissions and rate limit enforcement.
 
+### Sprint 4 Evidence
+
+- [x] In-memory mesh delivery + rate limit tests (`packages/network/tests/network.test.ts`)
+- [ ] libp2p/QUIC mesh evidence (pending)
+
 ## Sprint 5: ZKP System
 
 1. Generate and verify compliance proof; verify acceptance path.

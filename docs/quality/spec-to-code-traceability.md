@@ -5,13 +5,13 @@
 
 ## Summary by Spec
 
-| Spec                    | Primary Code Areas                                            | Status      | Major Gaps                                         |
-| ----------------------- | ------------------------------------------------------------- | ----------- | -------------------------------------------------- |
-| `data-models.md`        | `packages/types`, `packages/domain`, `packages/schemas`       | Implemented | None at spec level; ongoing schema evolution       |
-| `eventcore.md`          | `packages/events`, `packages/domain`                          | Implemented | None                                               |
-| `identity-core.md`      | `packages/identity`, `packages/security`, `packages/types`    | Implemented | Resolver adapters + cache; backend deployment req. |
-| `network-protocol.md`   | `rust/gtcx-network`, `rust/gtcx-consensus`, `packages/events` | Partial     | No libp2p transport; networking is type-level only |
-| `security-framework.md` | `packages/security`, `packages/domain`, `docs/security/*`     | Implemented | Operational controls depend on infra policies      |
+| Spec                    | Primary Code Areas                                         | Status      | Major Gaps                                         |
+| ----------------------- | ---------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| `data-models.md`        | `packages/types`, `packages/domain`, `packages/schemas`    | Implemented | None at spec level; ongoing schema evolution       |
+| `eventcore.md`          | `packages/events`, `packages/domain`                       | Implemented | None                                               |
+| `identity-core.md`      | `packages/identity`, `packages/security`, `packages/types` | Implemented | Resolver adapters + cache; backend deployment req. |
+| `network-protocol.md`   | `packages/network`, `rust/gtcx-network`, `packages/events` | Partial     | No libp2p transport; in-memory adapter only        |
+| `security-framework.md` | `packages/security`, `packages/domain`, `docs/security/*`  | Implemented | Operational controls depend on infra policies      |
 
 ## Detailed Mapping
 
@@ -63,17 +63,17 @@
 
 **Coverage**
 
+- P2P node + transport adapter interfaces mapped to `@gtcx/network`.
 - Network types, topics, and message formats mapped to `rust/gtcx-network`.
-- Consensus structures mapped to `rust/gtcx-consensus`.
 
 **Primary Code**
 
+- `packages/network/src/**`
 - `rust/gtcx-network/src/**`
-- `rust/gtcx-consensus/src/**`
 
 **Gap**
 
-- No libp2p transport implementation; network stack is type-level only.
+- libp2p/QUIC/gossipsub transport not implemented; in-memory adapter only.
 
 **Status**: Partial
 
@@ -101,7 +101,7 @@ Operational controls depend on deployment policies and infra.
 | AI Tracing       | No-op stub                  | `packages/ai/src/index.ts`            | Integration lives in `gtcx-intelligence`  |
 | DID Resolution   | Implemented                 | `packages/identity/src/resolver.ts`   | Requires deployment-specific backends     |
 | ZKP System       | Hash-commitment placeholder | `rust/gtcx-zkp/src/**`                | Real circuits planned                     |
-| P2P Transport    | Not implemented             | `rust/gtcx-network/src/**`            | libp2p/QUIC planned                       |
+| P2P Transport    | Partial                     | `packages/network/src/**`             | libp2p/QUIC planned                       |
 | Rust secp256k1   | TODO                        | `rust/gtcx-crypto/src/signing/mod.rs` | Ed25519 only                              |
 | TS native crypto | Not wired                   | `rust/gtcx-node/src/**`               | No TS bridge in `@gtcx/crypto`            |
 

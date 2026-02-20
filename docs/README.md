@@ -34,9 +34,10 @@ Complete documentation for the GTCX Core monorepo — the shared foundation laye
 | [@gtcx/security](./packages/security.md)         | Auth, validation, offline credentials, audit logging           |
 | [@gtcx/verification](./packages/verification.md) | Certificates, QR codes, proof bundles                          |
 | [@gtcx/events](./packages/events.md)             | Type-safe event bus with offline buffering                     |
-| [@gtcx/api-client](./packages/api-client.md)     | Resilient HTTP client with retry and circuit breakers          |
+| [@gtcx/api-client](./packages/api-client.md)     | Resilient HTTP client with retry, signing, and mTLS            |
 | [@gtcx/connectivity](./packages/connectivity.md) | Network detection and adaptive sync profiles                   |
 | [@gtcx/sync](./packages/sync.md)                 | Offline-first sync engine with conflict resolution             |
+| [@gtcx/network](./packages/network.md)           | P2P networking primitives for validator mesh                   |
 | [Security Audit](./packages/security-audit.md)   | @gtcx/security principle compliance audit                      |
 
 ## Rust Documentation

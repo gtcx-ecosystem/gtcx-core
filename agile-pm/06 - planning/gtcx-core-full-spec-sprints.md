@@ -69,15 +69,17 @@
 - Signed request UAT passes
 - mTLS handshake validated
 
-## Sprint 4: P2P Networking Transport (Planned)
+## Sprint 4: P2P Networking Transport (In Progress)
 
 **Goal**: libp2p transport with QUIC + gossipsub and secure discovery.  
 **Dependencies**: Network protocol spec.  
 **Primary Deliverables**:
 
-- QUIC transport + Noise handshake
-- Gossipsub topics + rate limits
-- Peer discovery and telemetry
+- [x] P2P adapter + in-memory transport scaffolding
+- [x] Pub/sub delivery + rate limiting
+- [ ] QUIC transport + Noise handshake
+- [ ] Gossipsub topics + rate limits
+- [ ] Peer discovery and telemetry
 
 **Exit Criteria**:
 

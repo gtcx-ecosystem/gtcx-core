@@ -31,3 +31,12 @@
 - mTLS handshake verification:
   - Status: ⏳ Pending evidence run (node env)
   - Note: Sandbox blocks `https.createServer` bind (EPERM). Run in unrestricted node env.
+
+## Sprint 4 — P2P Networking Transport
+
+- In-memory mesh delivery + rate limiting:
+  - Status: ✅ Implemented + executed
+  - Evidence: `pnpm --filter @gtcx/network test`
+  - Result: `4 passed` (2026-02-20 22:05)
+- libp2p/QUIC transport:
+  - Status: ⏳ Pending implementation + evidence

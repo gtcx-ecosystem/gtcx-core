@@ -20,6 +20,7 @@ packages:
   # Sync and API
   - 'packages/sync'
   - 'packages/api-client'
+  - 'packages/network'
 
   # Connectivity (offline-first, P8)
   - 'packages/connectivity'

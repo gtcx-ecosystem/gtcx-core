@@ -34,6 +34,7 @@ All packages are published under the `@gtcx/` scope and managed in a pnpm worksp
 | @gtcx/connectivity | Network status detection and connectivity profiles                                  |
 | @gtcx/sync         | Offline-first sync engine with conflict resolution                                  |
 | @gtcx/api-client   | Resilient API client with retry and timeouts                                        |
+| @gtcx/network      | P2P networking primitives for validator mesh                                        |
 | config/eslint      | Shared ESLint configuration for consistent code style                               |
 | config/typescript  | Shared TypeScript configuration (strict mode, path aliases)                         |
 | config/tailwind    | Shared Tailwind configuration (design tokens)                                       |
@@ -58,6 +59,7 @@ All packages are published under the `@gtcx/` scope and managed in a pnpm worksp
 @gtcx/connectivity (network status detection)
 @gtcx/sync (offline-first sync engine)
 @gtcx/api-client (resilient API client)
+@gtcx/network (p2p networking primitives)
 config/* (eslint, typescript, tailwind)
 ```
 
