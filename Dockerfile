@@ -71,10 +71,6 @@ LABEL org.opencontainers.image.licenses="MIT"
 # Install pnpm for production use
 RUN corepack enable && corepack prepare pnpm@${PNPM_VERSION} --activate
 
-# Security: Create non-root user (UID 1000)
-RUN addgroup -g 1000 gtcx && \
-    adduser -D -u 1000 -G gtcx gtcx
-
 WORKDIR /app
 
 # Copy workspace configuration
@@ -82,8 +78,8 @@ COPY --from=builder /build/package.json /build/pnpm-lock.yaml /build/pnpm-worksp
 COPY --from=builder /build/turbo.json ./
 
 # Copy built artifacts with correct ownership
-COPY --from=builder --chown=gtcx:gtcx /build/node_modules ./node_modules
-COPY --from=builder --chown=gtcx:gtcx /build/packages ./packages
+COPY --from=builder --chown=node:node /build/node_modules ./node_modules
+COPY --from=builder --chown=node:node /build/packages ./packages
 
 # Remove TypeScript source files, tests, and dev artifacts to reduce image size
 RUN find /app/packages -name "*.ts" ! -name "*.d.ts" -delete 2>/dev/null; \
@@ -98,7 +94,7 @@ RUN find /app/packages -name "*.ts" ! -name "*.d.ts" -delete 2>/dev/null; \
 ENV NODE_ENV=production
 
 # Security: Switch to non-root user
-USER gtcx
+USER node
 
 # Health check (OBSERVABLE principle)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
