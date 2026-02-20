@@ -40,7 +40,16 @@ const run = async () => {
       enableMdns: true,
       allowPublishToZeroPeers: true,
     });
-    await transportA.start();
+    const nodeA = createP2PNode(
+      { nodeId: 'validator-a', topics: ['gtcx.mesh'], rateLimitPerMinute: 10 },
+      transportA
+    );
+
+    const received = [];
+    nodeA.subscribe('gtcx.mesh', () => {});
+
+    await nodeA.start();
+
     const peerId = transportA.getPeerId?.();
     const bootstrap = transportA.getMultiaddrs().map((addr) => {
       if (!peerId || addr.includes('/p2p/')) return addr;
@@ -62,19 +71,12 @@ const run = async () => {
       bootstrap,
     });
 
-    const nodeA = createP2PNode(
-      { nodeId: 'validator-a', topics: ['gtcx.mesh'], rateLimitPerMinute: 10 },
-      transportA
-    );
     const nodeB = createP2PNode({ nodeId: 'validator-b', topics: ['gtcx.mesh'] }, transportB);
     const nodeC = createP2PNode({ nodeId: 'validator-c', topics: ['gtcx.mesh'] }, transportC);
 
-    const received = [];
-    nodeA.subscribe('gtcx.mesh', () => {});
     nodeB.subscribe('gtcx.mesh', (payload) => received.push(`B:${payload.message}`));
     nodeC.subscribe('gtcx.mesh', (payload) => received.push(`C:${payload.message}`));
 
-    await nodeA.start();
     await nodeB.start();
     await nodeC.start();
     await transportB.connect(bootstrap);

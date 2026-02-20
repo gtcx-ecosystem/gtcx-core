@@ -145,6 +145,7 @@ export class Libp2pTransport implements TransportAdapter {
   private runtime?: Libp2pRuntime;
   private readonly topics: Topic[];
   private readonly config: Libp2pTransportConfig;
+  private started = false;
 
   constructor(config: Libp2pTransportConfig) {
     this.config = config;
@@ -152,8 +153,10 @@ export class Libp2pTransport implements TransportAdapter {
   }
 
   async start(): Promise<void> {
+    if (this.started) return;
     this.runtime = await loadLibp2p(this.config);
     await Promise.resolve(this.runtime.node.start());
+    this.started = true;
     if (this.runtime.pubsub) {
       for (const topic of this.topics) {
         await this.runtime.pubsub.subscribe(topic);
@@ -165,8 +168,9 @@ export class Libp2pTransport implements TransportAdapter {
   }
 
   async stop(): Promise<void> {
-    if (!this.runtime) return;
+    if (!this.runtime || !this.started) return;
     await Promise.resolve(this.runtime.node.stop());
+    this.started = false;
   }
 
   async send(_peerId: PeerId, message: MessageEnvelope): Promise<void> {
