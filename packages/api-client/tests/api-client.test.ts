@@ -1,7 +1,16 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { createApiClient } from '../src/index';
-import type { ApiClientOptions, ApiResponse, ApiError, RequestOptions } from '../src/types';
+import { AuthError, TimeoutError, createApiClient } from '../src/index';
+import type {
+  ApiClientOptions,
+  ApiResponse,
+  ApiError,
+  ApiErrorCategory,
+  ApiErrorCode,
+  MtlsOptions,
+  RequestOptions,
+  RequestSigner,
+} from '../src/types';
 
 describe('@gtcx/api-client', () => {
   afterEach(() => {
@@ -76,6 +85,54 @@ describe('@gtcx/api-client', () => {
         retryable: false,
       });
     });
+
+    it('should apply request signing headers when signer is provided', async () => {
+      const fetcher = vi.fn(async () => {
+        return new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        });
+      });
+      const signer = vi.fn(async () => ({ 'x-signature': 'signed' }));
+      const client = createApiClient({
+        baseUrl: 'https://api.example.com',
+        fetcher,
+        signer,
+      });
+
+      await client.get('/signed');
+      const [, init] = fetcher.mock.calls[0] ?? [];
+      const headers = (init?.headers ?? {}) as Record<string, string>;
+      expect(headers['x-signature']).toBe('signed');
+    });
+
+    it('should classify auth errors', async () => {
+      const fetcher = vi.fn(async () => new Response('unauthorized', { status: 401 }));
+      const client = createApiClient({ baseUrl: 'https://api.example.com', fetcher, retries: 0 });
+
+      await expect(client.get('/auth')).rejects.toBeInstanceOf(AuthError);
+    });
+
+    it('should classify timeouts as timeout errors', async () => {
+      const fetcher = vi.fn(
+        async (_url: string, init?: RequestInit): Promise<Response> =>
+          new Promise((_, reject) => {
+            init?.signal?.addEventListener('abort', () => {
+              const error = new Error('AbortError');
+              error.name = 'AbortError';
+              reject(error);
+            });
+          })
+      );
+      const client = createApiClient({
+        baseUrl: 'https://api.example.com',
+        fetcher,
+        timeout: 1,
+        retries: 0,
+      });
+
+      await expect(client.get('/timeout')).rejects.toBeInstanceOf(TimeoutError);
+    });
   });
 
   describe('types', () => {
@@ -88,12 +145,27 @@ describe('@gtcx/api-client', () => {
         headers: {},
         durationMs: 0,
       };
-      const error: ApiError = { message: 'fail', retryable: false };
+      const error: ApiError = {
+        message: 'fail',
+        retryable: false,
+        category: 'http',
+      };
+      const category: ApiErrorCategory = 'network';
+      const code: ApiErrorCode = 'NETWORK_ERROR';
+      const signer: RequestSigner = () => ({});
+      const mtls: MtlsOptions = {
+        key: 'key',
+        cert: 'cert',
+      };
       const requestOpts: RequestOptions = { timeout: 5000 };
 
       expect(options).toBeDefined();
       expect(response).toBeDefined();
       expect(error).toBeDefined();
+      expect(category).toBeDefined();
+      expect(code).toBeDefined();
+      expect(signer).toBeDefined();
+      expect(mtls).toBeDefined();
       expect(requestOpts).toBeDefined();
     });
   });

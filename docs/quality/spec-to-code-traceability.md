@@ -94,16 +94,16 @@ Operational controls depend on deployment policies and infra.
 
 ## Known Full-Spec Gaps (Cross-Cutting)
 
-| Capability       | Current Status              | Location                              | Notes                                    |
-| ---------------- | --------------------------- | ------------------------------------- | ---------------------------------------- |
-| API Client       | Implemented                 | `packages/api-client/src/index.ts`    | Basic retry + timeout client             |
-| Sync Engine      | Implemented                 | `packages/sync/src/index.ts`          | Deterministic conflict resolution        |
-| AI Tracing       | No-op stub                  | `packages/ai/src/index.ts`            | Integration lives in `gtcx-intelligence` |
-| DID Resolution   | Implemented                 | `packages/identity/src/resolver.ts`   | Requires deployment-specific backends    |
-| ZKP System       | Hash-commitment placeholder | `rust/gtcx-zkp/src/**`                | Real circuits planned                    |
-| P2P Transport    | Not implemented             | `rust/gtcx-network/src/**`            | libp2p/QUIC planned                      |
-| Rust secp256k1   | TODO                        | `rust/gtcx-crypto/src/signing/mod.rs` | Ed25519 only                             |
-| TS native crypto | Not wired                   | `rust/gtcx-node/src/**`               | No TS bridge in `@gtcx/crypto`           |
+| Capability       | Current Status              | Location                              | Notes                                     |
+| ---------------- | --------------------------- | ------------------------------------- | ----------------------------------------- |
+| API Client       | Implemented                 | `packages/api-client/src/index.ts`    | Retry + timeout + signing + mTLS + errors |
+| Sync Engine      | Implemented                 | `packages/sync/src/index.ts`          | Deterministic conflict resolution         |
+| AI Tracing       | No-op stub                  | `packages/ai/src/index.ts`            | Integration lives in `gtcx-intelligence`  |
+| DID Resolution   | Implemented                 | `packages/identity/src/resolver.ts`   | Requires deployment-specific backends     |
+| ZKP System       | Hash-commitment placeholder | `rust/gtcx-zkp/src/**`                | Real circuits planned                     |
+| P2P Transport    | Not implemented             | `rust/gtcx-network/src/**`            | libp2p/QUIC planned                       |
+| Rust secp256k1   | TODO                        | `rust/gtcx-crypto/src/signing/mod.rs` | Ed25519 only                              |
+| TS native crypto | Not wired                   | `rust/gtcx-node/src/**`               | No TS bridge in `@gtcx/crypto`            |
 
 ## Next Actions (Phase 0)
 

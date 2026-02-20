@@ -130,6 +130,11 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 **Estimated Effort**: 3-4 weeks  
 **Success Criteria**: Secure and resilient client ready for partner integration.
 
+**Progress**:
+
+- Completed: request signing hooks, mTLS options, structured error taxonomy, tests/docs updates, signed request evidence.
+- Pending: mTLS handshake UAT evidence.
+
 ### Feature 3.1: Signing and mTLS
 
 **Story Points**: 8

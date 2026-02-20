@@ -43,6 +43,12 @@
 2. Validate mTLS handshake and reject invalid certs.
 3. Confirm retry and timeout behavior under simulated network faults.
 
+### Sprint 3 Evidence
+
+- [x] Signed request header injection test (`packages/api-client/tests/api-client.test.ts`)
+- [x] Auth error classification test (`packages/api-client/tests/api-client.test.ts`)
+- [ ] mTLS handshake validation evidence (node)
+
 ## Sprint 4: P2P Networking Transport
 
 1. Spin up a 3-node validator mesh and verify peer discovery.

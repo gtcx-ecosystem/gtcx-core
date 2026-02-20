@@ -53,15 +53,16 @@
 - [x] Offline → online convergence test passes
 - [x] Deterministic conflict resolution verified
 
-## Sprint 3: API Client Enterprise Hardening (Planned)
+## Sprint 3: API Client Enterprise Hardening (In Progress)
 
 **Goal**: Secure, resilient client with signing and mTLS support.  
 **Dependencies**: Security framework requirements.  
 **Primary Deliverables**:
 
-- Request signing hooks
-- mTLS support for node deployments
-- Structured error taxonomy
+- [x] Request signing hooks
+- [x] mTLS support for node deployments
+- [x] Structured error taxonomy
+- [ ] UAT evidence logged
 
 **Exit Criteria**:
 

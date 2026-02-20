@@ -35,6 +35,25 @@ const lots = await client.crx.listLots({ status: 'available' });
 const trade = await client.agx.createTrade(tradeRequest);
 ```
 
+## Low-Level Client (Sprint 3 Hardening)
+
+The low-level `createApiClient` is now hardened for enterprise use with request signing, mTLS (Node.js), and structured error taxonomy.
+
+```typescript
+import { createApiClient } from '@gtcx/api-client';
+
+const client = createApiClient({
+  baseUrl: 'https://api.gtcx.global',
+  signer: async ({ method, url }) => ({
+    'x-gtcx-signature': signRequest(method, url),
+  }),
+  mtls: {
+    cert: process.env.MTLS_CERT!,
+    key: process.env.MTLS_KEY!,
+  },
+});
+```
+
 ## Resilience Patterns
 
 ### Retry with Exponential Backoff
@@ -171,6 +190,8 @@ try {
   }
 }
 ```
+
+Low-level client also exposes: `HttpError`, `NetworkError`, `TimeoutError`, `AuthError`, `SigningError`, `ConfigurationError`.
 
 ## Events
 

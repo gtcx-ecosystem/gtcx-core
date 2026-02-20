@@ -17,3 +17,16 @@
   - Status: ✅ Implemented + executed
   - Evidence: `pnpm --filter @gtcx/sync test -- -t "audit"`
   - Result: `1 passed` (2026-02-20 20:23)
+
+## Sprint 3 — API Client Enterprise Hardening
+
+- Signed request header injection:
+  - Status: ✅ Implemented + executed
+  - Evidence: `pnpm --filter @gtcx/api-client test`
+  - Result: `9 passed` (2026-02-20 21:44)
+- Auth error classification:
+  - Status: ✅ Implemented + executed
+  - Evidence: `pnpm --filter @gtcx/api-client test`
+  - Result: `9 passed` (2026-02-20 21:44)
+- mTLS handshake verification:
+  - Status: ⏳ Pending evidence run (node env)
