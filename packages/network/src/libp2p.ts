@@ -173,6 +173,13 @@ export class Libp2pTransport implements TransportAdapter {
     this.started = false;
   }
 
+  async resubscribe(): Promise<void> {
+    if (!this.runtime?.pubsub) return;
+    for (const topic of this.topics) {
+      await this.runtime.pubsub.subscribe(topic);
+    }
+  }
+
   async send(_peerId: PeerId, message: MessageEnvelope): Promise<void> {
     await this.broadcast(message);
   }

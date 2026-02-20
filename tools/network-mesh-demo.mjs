@@ -84,6 +84,9 @@ const run = async () => {
     await nodeC.start();
     await transportB.connect(bootstrap);
     await transportC.connect(bootstrap);
+    await transportA.resubscribe();
+    await transportB.resubscribe();
+    await transportC.resubscribe();
 
     const waitForPeers = async (node, minPeers, maxWaitMs) => {
       const started = Date.now();
@@ -106,7 +109,7 @@ const run = async () => {
       throw new Error('Peers not connected');
     }
 
-    await sleep(3000);
+    await sleep(4000);
 
     await sleep(2000);
     const publishWithRetry = async (payload, attempts = 12) => {
