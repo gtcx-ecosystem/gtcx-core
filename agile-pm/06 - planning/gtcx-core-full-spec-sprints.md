@@ -50,7 +50,7 @@
 
 **Exit Criteria**:
 
-- Offline → online convergence test passes
+- [x] Offline → online convergence test passes
 - Deterministic conflict resolution verified
 
 ## Sprint 3: API Client Enterprise Hardening (Planned)

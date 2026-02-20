@@ -14,6 +14,7 @@
     "@gtcx/domain": "workspace:*",
     "@gtcx/schemas": "workspace:*",
     "@gtcx/security": "workspace:*",
+    "@gtcx/sync": "workspace:*",
     "@gtcx/types": "workspace:*",
     "@gtcx/events": "workspace:*",
     "vitest": "^2.1.0"

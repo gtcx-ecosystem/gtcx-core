@@ -30,7 +30,7 @@
 - [x] SYNC-002: Deterministic ID ordering for conflict evaluation.
 - [x] SYNC-003: Add conflict hooks (`onConflict`, `resolveConflict`).
 - [x] SYNC-004: Add conflict audit log emitter and metrics callbacks.
-- [ ] SYNC-005: Add offline → online convergence integration test.
+- [x] SYNC-005: Add offline → online convergence integration test.
 - [x] SYNC-006: Update docs and examples for conflict hooks and audit logs.
 
 ## Acceptance Criteria
