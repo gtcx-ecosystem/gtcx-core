@@ -4,12 +4,12 @@
   "private": true,
   "description": "Shared tsup build configuration for GTCX monorepo",
   "type": "module",
-  "main": "./base.ts",
+  "main": "./base.mjs",
   "exports": {
-    ".": "./base.ts"
+    ".": "./base.mjs"
   },
   "files": [
-    "base.ts"
+    "base.mjs"
   ],
   "dependencies": {
     "tsup": "^8.0.1"

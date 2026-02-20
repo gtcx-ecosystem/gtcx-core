@@ -1,13 +1,13 @@
-import type { Options } from 'tsup';
-
 /**
  * Shared tsup base configuration for GTCX monorepo packages.
  *
  * Usage in tsup.config.ts:
  *   import { baseConfig } from '@gtcx/tsup-config';
  *   export default defineConfig({ ...baseConfig, entry: { ... } });
+ *
+ * @type {import('tsup').Options}
  */
-export const baseConfig: Options = {
+export const baseConfig = {
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
