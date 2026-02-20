@@ -81,7 +81,7 @@ const run = async () => {
   } catch (error) {
     console.error('Failed to run mesh demo:', error?.message ?? error);
     console.error(
-      'Ensure libp2p deps are installed: pnpm add libp2p @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns'
+      'Ensure libp2p deps are installed: pnpm add libp2p @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns @libp2p/identify'
     );
     process.exit(1);
   }

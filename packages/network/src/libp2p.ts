@@ -38,12 +38,14 @@ function resolveFactory<T = unknown>(module: unknown, name: string): FactoryFn<T
 
 async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime> {
   try {
-    const [libp2pModule, quicModule, noiseModule, gossipsubModule] = await Promise.all([
-      import('libp2p'),
-      import('@chainsafe/libp2p-quic'),
-      import('@chainsafe/libp2p-noise'),
-      import('@chainsafe/libp2p-gossipsub'),
-    ]);
+    const [libp2pModule, quicModule, noiseModule, gossipsubModule, identifyModule] =
+      await Promise.all([
+        import('libp2p'),
+        import('@chainsafe/libp2p-quic'),
+        import('@chainsafe/libp2p-noise'),
+        import('@chainsafe/libp2p-gossipsub'),
+        import('@libp2p/identify'),
+      ]);
 
     const createLibp2p = resolveFactory<Promise<Libp2pRuntime['node']>>(
       libp2pModule,
@@ -52,6 +54,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     const quic = resolveFactory(quicModule, 'quic');
     const noise = resolveFactory(noiseModule, 'noise');
     const gossipsub = resolveFactory(gossipsubModule, 'gossipsub');
+    const identify = resolveFactory(identifyModule, 'identify');
 
     const peerDiscovery: unknown[] = [];
     if (config.bootstrap && config.bootstrap.length > 0) {
@@ -79,6 +82,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       connectionEncryption: [noise()],
       peerDiscovery: peerDiscovery.length > 0 ? (peerDiscovery as unknown as any[]) : undefined,
       services: {
+        identify: identify(),
         pubsub: gossipsub({
           allowPublishToZeroPeers: config.allowPublishToZeroPeers ?? true,
         }),
