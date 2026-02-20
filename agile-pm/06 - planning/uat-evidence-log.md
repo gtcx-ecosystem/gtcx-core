@@ -23,11 +23,11 @@
 - Signed request header injection:
   - Status: ✅ Implemented + executed
   - Evidence: `pnpm --filter @gtcx/api-client test`
-  - Result: `9 passed` (2026-02-20 21:44)
+  - Result: `10 passed` (2026-02-20 21:48)
 - Auth error classification:
   - Status: ✅ Implemented + executed
   - Evidence: `pnpm --filter @gtcx/api-client test`
-  - Result: `9 passed` (2026-02-20 21:44)
+  - Result: `10 passed` (2026-02-20 21:48)
 - mTLS handshake verification:
   - Status: ⏳ Pending evidence run (node env)
-  - Note: Local sandbox blocks `https.createServer` bind (EPERM). Run in unrestricted node env.
+  - Note: Sandbox blocks `https.createServer` bind (EPERM). Run in unrestricted node env.
