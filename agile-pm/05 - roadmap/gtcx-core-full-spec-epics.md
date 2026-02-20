@@ -1,30 +1,31 @@
 # GTCX Core Full-Spec Epics and Sprints
 
 **Updated**: 2026-02-20  
+**Status**: Sprint 1 in progress (DID resolver core)  
 **Scope**: gtcx-core full-spec delivery, phased into execution sprints  
 **Objective**: Complete full protocol implementation with enterprise and government-grade readiness.
 
 ## Sprint Overview
 
-**Sprint 0: Spec-to-Code Closure**  
+**Sprint 0: Spec-to-Code Closure** — Complete  
 Goal: 100% traceability and execution-ready backlog.
 
-**Sprint 1: Identity Resolution Core**  
+**Sprint 1: Identity Resolution Core** — In Progress  
 Goal: DID resolution with caching, revocation checks, and resolver adapters.
 
-**Sprint 2: Offline Sync Engine**  
+**Sprint 2: Offline Sync Engine** — Planned  
 Goal: Deterministic offline-first sync with conflict resolution.
 
-**Sprint 3: API Client Enterprise Hardening**  
+**Sprint 3: API Client Enterprise Hardening** — Planned  
 Goal: Secure, resilient integration client with signing and mTLS support.
 
-**Sprint 4: P2P Networking Transport**  
+**Sprint 4: P2P Networking Transport** — Planned  
 Goal: libp2p transport with QUIC + gossipsub and secure peer discovery.
 
-**Sprint 5: ZKP System**  
+**Sprint 5: ZKP System** — Planned  
 Goal: Real proof circuits for compliance, provenance, quality, identity.
 
-**Sprint 6: secp256k1 Interop**  
+**Sprint 6: secp256k1 Interop** — Planned  
 Goal: Rust secp256k1 signing and verification with interop tests.
 
 ## Epic Catalog

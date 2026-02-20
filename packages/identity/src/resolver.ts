@@ -10,6 +10,11 @@ export interface DIDResolutionMetadata {
   revocationStatus?: DIDRevocationStatus;
 }
 
+export interface DIDResolverMetricsEvent extends DIDResolutionMetadata {
+  did: string;
+  errorCode?: DIDResolverErrorCode;
+}
+
 export interface DIDResolutionResult {
   document: DIDDocument | null;
   metadata: DIDResolutionMetadata;
@@ -48,6 +53,7 @@ export interface DIDResolverConfig {
   cacheNullResults?: boolean;
   revocationChecker?: DIDRevocationChecker;
   timeoutMs?: number;
+  metrics?: (event: DIDResolverMetricsEvent) => void;
 }
 
 export type DIDResolverErrorCode = 'INVALID_DID' | 'RESOLUTION_FAILED' | 'REVOKED' | 'TIMEOUT';
@@ -273,17 +279,42 @@ export function createDIDResolver(config: DIDResolverConfig): DIDResolver {
           };
         } catch (error) {
           lastError = error;
+          const resolvedError =
+            error instanceof DIDResolverError
+              ? error
+              : new DIDResolverError('Resolution failed', 'RESOLUTION_FAILED', { cause: error });
+          config.metrics?.({
+            did,
+            resolver: adapter.name,
+            cache: config.cache ? 'miss' : 'bypass',
+            durationMs: Date.now() - started,
+            errorCode: resolvedError.code,
+          });
         }
       }
 
       if (lastError instanceof DIDResolverError) {
+        config.metrics?.({
+          did,
+          resolver: 'none',
+          cache: config.cache ? 'miss' : 'bypass',
+          durationMs: Date.now() - started,
+          errorCode: lastError.code,
+        });
         throw lastError;
       }
       if (lastError) {
+        config.metrics?.({
+          did,
+          resolver: 'none',
+          cache: config.cache ? 'miss' : 'bypass',
+          durationMs: Date.now() - started,
+          errorCode: 'RESOLUTION_FAILED',
+        });
         throw new DIDResolverError('Resolution failed', 'RESOLUTION_FAILED', { cause: lastError });
       }
 
-      return {
+      const result: DIDResolutionResult = {
         document: null,
         metadata: {
           resolver: 'none',
@@ -291,6 +322,8 @@ export function createDIDResolver(config: DIDResolverConfig): DIDResolver {
           durationMs: Date.now() - started,
         },
       };
+      config.metrics?.({ did, ...result.metadata });
+      return result;
     },
   };
 }

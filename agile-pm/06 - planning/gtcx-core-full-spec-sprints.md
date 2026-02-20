@@ -1,10 +1,11 @@
 # GTCX Core Full-Spec Sprint Plan
 
 **Updated**: 2026-02-20  
+**Status**: Sprint 1 in progress (DID resolver core)  
 **Scope**: Execution plan for full-spec delivery  
 **Objective**: Provide a robust, sprint-structured roadmap with dependencies and exit criteria.
 
-## Sprint 0: Spec-to-Code Closure
+## Sprint 0: Spec-to-Code Closure (Complete)
 
 **Goal**: Complete traceability and execution-ready backlog.  
 **Primary Artifacts**:
@@ -22,7 +23,7 @@
 - 100% spec sections mapped to code or backlog items
 - All gaps assigned to epics
 
-## Sprint 1: Identity Resolution Core
+## Sprint 1: Identity Resolution Core (In Progress)
 
 **Goal**: DID resolution with caching, revocation checks, and resolver adapters.  
 **Dependencies**: Identity core spec; security framework revocation policy.  
@@ -37,7 +38,7 @@
 - Resolver works against at least one reference backend
 - Revoked identity case passes UAT
 
-## Sprint 2: Offline Sync Engine
+## Sprint 2: Offline Sync Engine (Planned)
 
 **Goal**: Deterministic offline-first sync with conflict resolution.  
 **Dependencies**: Offline-first ADRs; domain events.  
@@ -52,7 +53,7 @@
 - Offline → online convergence test passes
 - Deterministic conflict resolution verified
 
-## Sprint 3: API Client Enterprise Hardening
+## Sprint 3: API Client Enterprise Hardening (Planned)
 
 **Goal**: Secure, resilient client with signing and mTLS support.  
 **Dependencies**: Security framework requirements.  
@@ -67,7 +68,7 @@
 - Signed request UAT passes
 - mTLS handshake validated
 
-## Sprint 4: P2P Networking Transport
+## Sprint 4: P2P Networking Transport (Planned)
 
 **Goal**: libp2p transport with QUIC + gossipsub and secure discovery.  
 **Dependencies**: Network protocol spec.  
@@ -82,7 +83,7 @@
 - Mesh survives node drop and recovery
 - Rate limiting and topic ACLs enforced
 
-## Sprint 5: ZKP System
+## Sprint 5: ZKP System (Planned)
 
 **Goal**: Real circuits replacing hash-commitment placeholders.  
 **Dependencies**: ZKP design selection; security requirements.  
@@ -97,7 +98,7 @@
 - Proof acceptance/rejection UAT passes
 - Latency budgets met in CI
 
-## Sprint 6: secp256k1 Interop
+## Sprint 6: secp256k1 Interop (Planned)
 
 **Goal**: Rust secp256k1 signing and verification.  
 **Dependencies**: Crypto ADRs; interop requirements.  
