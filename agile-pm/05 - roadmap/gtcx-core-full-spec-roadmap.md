@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Roadmap (Enterprise and Military-Grade)
 
 **Updated**: 2026-02-20  
-**Status**: Sprint 1 complete (DID resolver core); Sprint 2 in progress (offline sync)  
+**Status**: Sprint 1 complete (DID resolver core); Sprint 2 in progress (offline sync core + conflict hooks)  
 **Scope**: gtcx-core monorepo + required downstream integrations to reach full spec functionality  
 **Objective**: Implement the full spec for global south deployment with offline-first capability, government-grade identity, and financial market infrastructure reliability.
 
@@ -76,6 +76,7 @@
 
 - Implement conflict resolution strategies (LWW, merge policies, vector clocks where required).
 - Provide resumable sync, conflict audit logs, and deterministic reconciliation.
+- Progress: core sync engine + deterministic ordering + conflict hooks done; audit logs/metrics pending.
 
 **Workstream C: API Client**
 

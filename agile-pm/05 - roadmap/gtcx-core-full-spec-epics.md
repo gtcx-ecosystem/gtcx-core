@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Epics and Sprints
 
 **Updated**: 2026-02-20  
-**Status**: Sprint 1 in progress (DID resolver core)  
+**Status**: Sprint 2 in progress (offline sync core + conflict hooks implemented)  
 **Scope**: gtcx-core full-spec delivery, phased into execution sprints  
 **Objective**: Complete full protocol implementation with enterprise and government-grade readiness.
 
@@ -95,6 +95,11 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 **Priority**: P0  
 **Estimated Effort**: 6-8 weeks  
 **Success Criteria**: Deterministic sync with conflict audit logs.
+
+**Progress**:
+
+- Completed: core sync engine, deterministic ID ordering, conflict hooks (`onConflict`, `resolveConflict`).
+- Pending: conflict audit logs + metrics wiring, offline convergence integration test, UAT scenarios.
 
 ### Feature 2.1: Sync Core
 

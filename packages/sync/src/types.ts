@@ -16,6 +16,14 @@ export interface SyncEngineConfig<T = unknown> {
   fetchRemote?: (ids: string[]) => Promise<SyncItem<T>[]>;
   pushLocal?: (items: SyncItem<T>[]) => Promise<void>;
   onResolved?: (items: SyncItem<T>[]) => Promise<void> | void;
+  onConflict?: (conflict: SyncConflict<T>) => Promise<void> | void;
+  resolveConflict?: (conflict: SyncConflict<T>) => Promise<SyncItem<T> | null>;
+}
+
+export interface SyncConflict<T = unknown> {
+  id: string;
+  local: SyncItem<T>[];
+  remote?: SyncItem<T>;
 }
 
 export interface SyncResult {

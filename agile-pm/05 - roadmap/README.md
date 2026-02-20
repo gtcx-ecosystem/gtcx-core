@@ -7,7 +7,7 @@ Use these templates for roadmap and planning:
 - templates/frontend-epics-features-template.md
 - project-specification-template.md (Timeline section)
 - gtcx-core-full-spec-roadmap.md (Full-spec implementation roadmap)
-- gtcx-core-full-spec-epics.md (Bouts, epics, stories, and UAT gates)
+- gtcx-core-full-spec-epics.md (Sprints, epics, stories, and UAT gates)
 
 For agile processes:
 

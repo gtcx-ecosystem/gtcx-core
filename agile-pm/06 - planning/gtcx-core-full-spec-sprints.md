@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Sprint Plan
 
 **Updated**: 2026-02-20  
-**Status**: Sprint 1 complete; Sprint 2 in progress (offline sync)  
+**Status**: Sprint 1 complete; Sprint 2 in progress (sync core + conflict hooks complete)  
 **Scope**: Execution plan for full-spec delivery  
 **Objective**: Provide a robust, sprint-structured roadmap with dependencies and exit criteria.
 
@@ -44,9 +44,9 @@
 **Dependencies**: Offline-first ADRs; domain events.  
 **Primary Deliverables**:
 
-- Sync engine core (upload/download)
-- Conflict policies (LWW + merge hooks)
-- Conflict audit logs + metrics
+- [x] Sync engine core (upload/download)
+- [x] Conflict policies (LWW + merge hooks)
+- [ ] Conflict audit logs + metrics
 
 **Exit Criteria**:
 

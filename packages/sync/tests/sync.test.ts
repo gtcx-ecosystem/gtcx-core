@@ -65,6 +65,22 @@ describe('@gtcx/sync', () => {
       expect(result.errors.length).toBe(1);
     });
 
+    it('should allow custom conflict resolution callbacks', async () => {
+      const onConflict = vi.fn();
+      const resolveConflict = vi.fn(async ({ local }: { local: SyncItem[] }) => local[1]);
+      const engine = createSyncEngine({ onConflict, resolveConflict });
+      const items: SyncItem[] = [
+        { id: '1', data: { value: 1 }, version: 1, updatedAt: 1 },
+        { id: '1', data: { value: 2 }, version: 2, updatedAt: 2 },
+      ];
+
+      const result = await engine.sync(items, { strategy: 'append-only' });
+      expect(onConflict).toHaveBeenCalledTimes(1);
+      expect(resolveConflict).toHaveBeenCalledTimes(1);
+      expect(result.resolved).toBe(1);
+      expect(result.errors).toEqual([]);
+    });
+
     it('should respect server-wins when remote data exists', async () => {
       const remoteItem: SyncItem = { id: '1', data: { value: 99 }, version: 99, updatedAt: 99 };
       const config: SyncEngineConfig = {

@@ -3,6 +3,7 @@ export * from './types';
 import type {
   ISyncEngine,
   SyncEngineConfig,
+  SyncConflict,
   SyncItem,
   SyncOptions,
   SyncResult,
@@ -133,7 +134,7 @@ export function createSyncEngine<T = unknown>(config: SyncEngineConfig<T> = {}):
         };
       }
 
-      const ids = Array.from(localMap.keys());
+      const ids = Array.from(localMap.keys()).sort();
       const remoteItems = config.fetchRemote
         ? await retry(() => config.fetchRemote!(ids), retryAttempts, retryDelayMs)
         : [];
@@ -145,14 +146,25 @@ export function createSyncEngine<T = unknown>(config: SyncEngineConfig<T> = {}):
       const toUpload: SyncItem<T>[] = [];
       const toDownload: SyncItem<T>[] = [];
 
-      for (const [id, localItems] of localMap.entries()) {
+      for (const id of ids) {
+        const localItems = localMap.get(id) ?? [];
         const remoteItem = remoteMap.get(id);
         const hasConflict = localItems.length > 1 || (remoteItem && localItems.length > 0);
+        const conflict: SyncConflict<T> = { id, local: localItems, remote: remoteItem };
         if (hasConflict) {
           conflicts += 1;
+          if (config.onConflict) {
+            await config.onConflict(conflict);
+          }
         }
 
-        const resolution = resolveConflict(options.strategy, localItems, remoteItem);
+        let resolution = resolveConflict(options.strategy, localItems, remoteItem);
+        if ((!resolution.resolved || !resolution.winner) && config.resolveConflict) {
+          const resolvedItem = await config.resolveConflict(conflict);
+          if (resolvedItem) {
+            resolution = { resolved: true, winner: resolvedItem };
+          }
+        }
         if (!resolution.resolved || !resolution.winner) {
           if (hasConflict) {
             errors.push(`Unresolved conflict for ${id}`);

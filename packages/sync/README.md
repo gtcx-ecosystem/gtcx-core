@@ -16,6 +16,12 @@ import { createSyncEngine } from '@gtcx/sync';
 const engine = createSyncEngine({
   fetchRemote: async () => [],
   pushLocal: async () => {},
+  onConflict: ({ id }) => {
+    console.log(`Conflict for ${id}`);
+  },
+  resolveConflict: async ({ local, remote }) => {
+    return remote ?? local[0] ?? null;
+  },
 });
 
 const result = await engine.sync([], { strategy: 'last-write-wins' });
@@ -29,6 +35,14 @@ const result = await engine.sync([], { strategy: 'last-write-wins' });
 | `ConflictStrategy`         | Resolution strategy type |
 | `SyncOptions`              | Sync configuration       |
 | `SyncEngineConfig`         | Engine configuration     |
+
+### SyncEngineConfig
+
+- `fetchRemote(ids)` fetches current remote state for ids.
+- `pushLocal(items)` uploads resolved local winners.
+- `onResolved(items)` applies remote winners locally.
+- `onConflict(conflict)` hook for conflict telemetry.
+- `resolveConflict(conflict)` custom resolver when built-in strategy cannot decide.
 
 ## License
 
