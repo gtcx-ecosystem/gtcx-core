@@ -49,7 +49,7 @@ The shared infrastructure layer provides the foundational packages that all GTCX
 @gtcx/utils            (standalone utilities)
 @gtcx/connectivity     (network status detection, connectivity profiles)
 @gtcx/sync             (offline-first sync engine — interface stub)
-@gtcx/api-client       (resilient API client — interface stub)
+@gtcx/api-client       (resilient API client)
 ```
 
 ### 2.2 Package Inventory
@@ -68,7 +68,7 @@ The shared infrastructure layer provides the foundational packages that all GTCX
 | `@gtcx/events`                                      | Typed event bus, offline buffering, replay               | `TypedEventBus`, `OfflineEventBuffer`                                       | Communication |
 | `@gtcx/connectivity`                                | Network status detection, connectivity profiles          | `ConnectivityDetector`, `classifyProfile()`                                 | Transport     |
 | `@gtcx/sync` _(stub)_                               | Offline-first sync, conflict resolution                  | `ISyncEngine`, `createSyncEngine()`                                         | Sync          |
-| `@gtcx/api-client` _(stub)_                         | Resilient API client with retry                          | `IApiClient`, `createApiClient()`                                           | Client        |
+| `@gtcx/api-client`                                  | Resilient API client with retry                          | `IApiClient`, `createApiClient()`                                           | Client        |
 
 ### 2.3 Dependency Rules
 

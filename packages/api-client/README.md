@@ -1,6 +1,6 @@
 # @gtcx/api-client
 
-HTTP API client for GTCX services.
+HTTP API client for GTCX services with retry and timeout handling.
 
 ## Installation
 

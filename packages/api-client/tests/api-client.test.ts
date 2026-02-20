@@ -1,11 +1,15 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { createApiClient } from '../src/index';
 import type { ApiClientOptions, ApiResponse, ApiError, RequestOptions } from '../src/types';
 
 describe('@gtcx/api-client', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   describe('createApiClient', () => {
-    it('should return a stub API client', () => {
+    it('should return a configured API client', () => {
       const client = createApiClient({ baseUrl: 'https://api.example.com' });
       expect(client).toBeDefined();
       expect(typeof client.get).toBe('function');
@@ -14,24 +18,63 @@ describe('@gtcx/api-client', () => {
       expect(typeof client.delete).toBe('function');
     });
 
-    it('should throw "API client not implemented" on get', async () => {
+    it('should perform a GET request and return response data', async () => {
+      const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
       const client = createApiClient({ baseUrl: 'https://api.example.com' });
-      await expect(client.get('/test')).rejects.toThrow('API client not implemented');
+      const response = await client.get<{ ok: boolean }>('/test');
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        'https://api.example.com/test',
+        expect.objectContaining({ method: 'GET' })
+      );
+      expect(response.data).toEqual({ ok: true });
+      expect(response.status).toBe(200);
     });
 
-    it('should throw "API client not implemented" on post', async () => {
-      const client = createApiClient({ baseUrl: 'https://api.example.com' });
-      await expect(client.post('/test', {})).rejects.toThrow('API client not implemented');
+    it('should retry on retryable errors', async () => {
+      const fetchSpy = vi
+        .spyOn(globalThis, 'fetch')
+        .mockResolvedValueOnce(new Response('error', { status: 503 }))
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ ok: true }), {
+            status: 200,
+            headers: { 'content-type': 'application/json' },
+          })
+        );
+      const client = createApiClient({ baseUrl: 'https://api.example.com', retries: 1 });
+      const response = await client.get<{ ok: boolean }>('/retry');
+
+      expect(fetchSpy).toHaveBeenCalledTimes(2);
+      expect(response.data).toEqual({ ok: true });
     });
 
-    it('should throw "API client not implemented" on put', async () => {
+    it('should set JSON content type when posting objects', async () => {
+      const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
       const client = createApiClient({ baseUrl: 'https://api.example.com' });
-      await expect(client.put('/test', {})).rejects.toThrow('API client not implemented');
+      await client.post('/test', { hello: 'world' });
+
+      const [, options] = fetchSpy.mock.calls[0] ?? [];
+      const headers = (options?.headers ?? {}) as Record<string, string>;
+      expect(headers['content-type'] ?? headers['Content-Type']).toBe('application/json');
     });
 
-    it('should throw "API client not implemented" on delete', async () => {
+    it('should throw a structured error on non-retryable failure', async () => {
+      vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('nope', { status: 400 }));
       const client = createApiClient({ baseUrl: 'https://api.example.com' });
-      await expect(client.delete('/test')).rejects.toThrow('API client not implemented');
+      await expect(client.get('/bad')).rejects.toMatchObject({
+        status: 400,
+        retryable: false,
+      });
     });
   });
 

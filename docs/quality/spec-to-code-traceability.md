@@ -100,7 +100,7 @@ Operational controls depend on deployment policies and infra.
 
 | Capability       | Current Status                | Location                              | Notes                                    |
 | ---------------- | ----------------------------- | ------------------------------------- | ---------------------------------------- |
-| API Client       | Stub                          | `packages/api-client/src/index.ts`    | Throws “not implemented”                 |
+| API Client       | Implemented                   | `packages/api-client/src/index.ts`    | Basic retry + timeout client             |
 | Sync Engine      | Stub                          | `packages/sync/src/index.ts`          | Returns error payload                    |
 | AI Tracing       | No-op stub                    | `packages/ai/src/index.ts`            | Integration lives in `gtcx-intelligence` |
 | DID Resolution   | Stub unless resolver injected | `packages/identity/src/did.ts`        | Requires real resolver backends          |
