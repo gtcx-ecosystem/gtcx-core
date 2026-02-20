@@ -19,6 +19,9 @@ const run = async () => {
   try {
     const multiaddrModule = await import('@multiformats/multiaddr');
     toMultiaddr = multiaddrModule.multiaddr ?? multiaddrModule.default ?? multiaddrModule;
+    if (typeof toMultiaddr !== 'function') {
+      throw new Error('multiaddr export is not a function');
+    }
   } catch (error) {
     console.error('Missing @multiformats/multiaddr. Run: pnpm --filter @gtcx/network add -D @multiformats/multiaddr');
     process.exit(1);
