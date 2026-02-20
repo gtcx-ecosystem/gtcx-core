@@ -44,6 +44,13 @@ COPY packages/identity/package.json packages/identity/
 COPY packages/verification/package.json packages/verification/
 COPY packages/utils/package.json packages/utils/
 COPY packages/logging/package.json packages/logging/
+COPY packages/ai/package.json packages/ai/
+COPY packages/api-client/package.json packages/api-client/
+COPY packages/connectivity/package.json packages/connectivity/
+COPY packages/events/package.json packages/events/
+COPY packages/services/package.json packages/services/
+COPY packages/sync/package.json packages/sync/
+COPY packages/workproof/package.json packages/workproof/
 COPY packages/config/ packages/config/
 
 # Install all dependencies with frozen lockfile
