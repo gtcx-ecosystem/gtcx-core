@@ -106,7 +106,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       services: {
         identify: identify(),
         pubsub: gossipsub({
-          allowPublishToZeroPeers: config.allowPublishToZeroPeers ?? true,
+          allowPublishToZeroTopicPeers: config.allowPublishToZeroPeers ?? true,
         }),
       },
     });
