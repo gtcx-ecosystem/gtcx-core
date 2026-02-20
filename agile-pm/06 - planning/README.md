@@ -19,3 +19,4 @@ GTCX core full-spec planning:
 - sprint-1-did-resolver-plan.md
 - sprint-2-sync-engine-plan.md
 - uat-gtcx-core-full-spec.md
+- uat-evidence-log.md

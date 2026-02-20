@@ -31,6 +31,12 @@
 2. Create a conflicting update on two devices, ensure deterministic resolution.
 3. Verify conflict audit logs and reconciliation metadata.
 
+### Sprint 2 Evidence
+
+- [x] Offline → online convergence integration test added (`tests/integration/sync-convergence.test.ts`)
+- [ ] Conflict resolution deterministic evidence run (attach log/output)
+- [ ] Audit/metrics hook evidence run (attach log/output)
+
 ## Sprint 3: API Client Enterprise Hardening
 
 1. Execute signed requests and confirm server-side validation.
