@@ -15,7 +15,7 @@ const run = async () => {
   }
 
   const { createP2PNode, Libp2pTransport } = network;
-  const listenAddress = process.env.GTCX_P2P_LISTEN;
+  const listenAddress = process.env.GTCX_P2P_LISTEN ?? '/ip4/127.0.0.1/udp/0/quic-v1';
   let listenAddresses;
   if (listenAddress) {
     try {
@@ -50,8 +50,22 @@ const run = async () => {
 
     await nodeA.start();
 
+    const waitForAddrs = async (transport, maxWaitMs) => {
+      const started = Date.now();
+      while (Date.now() - started < maxWaitMs) {
+        const addrs = transport.getMultiaddrs();
+        if (addrs.length > 0) return addrs;
+        await sleep(200);
+      }
+      return [];
+    };
+
     const peerId = transportA.getPeerId?.();
-    const bootstrap = transportA.getMultiaddrs().map((addr) => {
+    const rawAddrs = await waitForAddrs(transportA, 8000);
+    if (rawAddrs.length === 0) {
+      throw new Error('No listen addresses found for bootstrap');
+    }
+    const bootstrap = rawAddrs.map((addr) => {
       const normalized = addr.replace('/ip4/0.0.0.0/', '/ip4/127.0.0.1/');
       if (!peerId || normalized.includes('/p2p/')) return normalized;
       return `${normalized}/p2p/${peerId}`;
