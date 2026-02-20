@@ -6,6 +6,8 @@
 import { hash256 } from '@gtcx/crypto';
 import type { DigitalIdentity, EnhancedIdentity } from '@gtcx/types';
 
+import type { DIDResolver, DIDResolverOptions, DIDResolutionResult } from './resolver';
+
 /**
  * DID method for GTCX
  */
@@ -121,18 +123,39 @@ export function createDIDDocument(identity: DigitalIdentity | EnhancedIdentity):
  */
 export async function resolveDID(
   did: string,
-  resolver?: (did: string) => Promise<DIDDocument | null>
+  resolver?: DIDResolver | ((did: string) => Promise<DIDDocument | null>),
+  options?: DIDResolverOptions
 ): Promise<DIDDocument | null> {
   if (!isValidDID(did)) {
     return null;
   }
 
-  if (resolver) {
+  if (!resolver) {
+    return null;
+  }
+
+  if (typeof (resolver as DIDResolver).resolve === 'function') {
+    try {
+      const result = await (resolver as DIDResolver).resolve(did, options);
+      return result.document;
+    } catch {
+      return null;
+    }
+  }
+
+  if (typeof resolver === 'function') {
     return resolver(did);
   }
 
-  // Default: return null (no local resolution capability)
   return null;
+}
+
+export async function resolveDIDWithMetadata(
+  did: string,
+  resolver: DIDResolver,
+  options?: DIDResolverOptions
+): Promise<DIDResolutionResult> {
+  return resolver.resolve(did, options);
 }
 
 /**

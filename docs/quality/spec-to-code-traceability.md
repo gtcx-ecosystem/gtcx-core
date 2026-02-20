@@ -9,7 +9,7 @@
 | ----------------------- | ------------------------------------------------------------- | ----------- | -------------------------------------------------- |
 | `data-models.md`        | `packages/types`, `packages/domain`, `packages/schemas`       | Implemented | None at spec level; ongoing schema evolution       |
 | `eventcore.md`          | `packages/events`, `packages/domain`                          | Implemented | None                                               |
-| `identity-core.md`      | `packages/identity`, `packages/security`, `packages/types`    | Partial     | DID resolution is stub unless resolver injected    |
+| `identity-core.md`      | `packages/identity`, `packages/security`, `packages/types`    | Implemented | Resolver adapters + cache; backend deployment req. |
 | `network-protocol.md`   | `rust/gtcx-network`, `rust/gtcx-consensus`, `packages/events` | Partial     | No libp2p transport; networking is type-level only |
 | `security-framework.md` | `packages/security`, `packages/domain`, `docs/security/*`     | Implemented | Operational controls depend on infra policies      |
 
@@ -57,11 +57,7 @@
 - `packages/identity/src/**`
 - `packages/security/src/**`
 
-**Gap**
-
-- `resolveDID` is a stub unless a resolver is provided at runtime.
-
-**Status**: Partial
+**Status**: Implemented (resolver adapters + cache; backends required)
 
 ### `network-protocol.md`
 
@@ -98,16 +94,16 @@ Operational controls depend on deployment policies and infra.
 
 ## Known Full-Spec Gaps (Cross-Cutting)
 
-| Capability       | Current Status                | Location                              | Notes                                    |
-| ---------------- | ----------------------------- | ------------------------------------- | ---------------------------------------- |
-| API Client       | Implemented                   | `packages/api-client/src/index.ts`    | Basic retry + timeout client             |
-| Sync Engine      | Stub                          | `packages/sync/src/index.ts`          | Returns error payload                    |
-| AI Tracing       | No-op stub                    | `packages/ai/src/index.ts`            | Integration lives in `gtcx-intelligence` |
-| DID Resolution   | Stub unless resolver injected | `packages/identity/src/did.ts`        | Requires real resolver backends          |
-| ZKP System       | Hash-commitment placeholder   | `rust/gtcx-zkp/src/**`                | Real circuits planned                    |
-| P2P Transport    | Not implemented               | `rust/gtcx-network/src/**`            | libp2p/QUIC planned                      |
-| Rust secp256k1   | TODO                          | `rust/gtcx-crypto/src/signing/mod.rs` | Ed25519 only                             |
-| TS native crypto | Not wired                     | `rust/gtcx-node/src/**`               | No TS bridge in `@gtcx/crypto`           |
+| Capability       | Current Status              | Location                              | Notes                                    |
+| ---------------- | --------------------------- | ------------------------------------- | ---------------------------------------- |
+| API Client       | Implemented                 | `packages/api-client/src/index.ts`    | Basic retry + timeout client             |
+| Sync Engine      | Stub                        | `packages/sync/src/index.ts`          | Returns error payload                    |
+| AI Tracing       | No-op stub                  | `packages/ai/src/index.ts`            | Integration lives in `gtcx-intelligence` |
+| DID Resolution   | Implemented                 | `packages/identity/src/resolver.ts`   | Requires deployment-specific backends    |
+| ZKP System       | Hash-commitment placeholder | `rust/gtcx-zkp/src/**`                | Real circuits planned                    |
+| P2P Transport    | Not implemented             | `rust/gtcx-network/src/**`            | libp2p/QUIC planned                      |
+| Rust secp256k1   | TODO                        | `rust/gtcx-crypto/src/signing/mod.rs` | Ed25519 only                             |
+| TS native crypto | Not wired                   | `rust/gtcx-node/src/**`               | No TS bridge in `@gtcx/crypto`           |
 
 ## Next Actions (Phase 0)
 

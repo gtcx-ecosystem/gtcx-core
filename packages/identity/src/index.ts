@@ -24,7 +24,28 @@ export {
   isValidDID,
   createDIDDocument,
   resolveDID,
+  resolveDIDWithMetadata,
   extractPublicKey,
   type DIDDocument,
   type VerificationMethod,
 } from './did';
+
+// DID resolver infrastructure
+export {
+  createDIDResolver,
+  createHttpDIDResolverAdapter,
+  createInMemoryDIDCache,
+  createStaticDIDResolverAdapter,
+  DIDResolverError,
+  type DIDResolver,
+  type DIDResolverAdapter,
+  type DIDResolverCache,
+  type DIDResolverCacheEntry,
+  type DIDResolverConfig,
+  type DIDResolverOptions,
+  type DIDResolutionMetadata,
+  type DIDResolutionResult,
+  type DIDRevocationChecker,
+  type DIDRevocationStatus,
+  type HttpDIDResolverConfig,
+} from './resolver';

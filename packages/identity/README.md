@@ -35,6 +35,9 @@ console.log(validateIdentity(identity).valid); // true
 | `parseDID(did)`                   | Parse DID components              |
 | `isValidDID(did)`                 | Validate DID format               |
 | `createDIDDocument(identity)`     | W3C DID document                  |
+| `createDIDResolver(config)`       | Resolver with adapters + cache    |
+| `createHttpDIDResolverAdapter()`  | HTTP-based resolver adapter       |
+| `createInMemoryDIDCache()`        | In-memory cache                   |
 
 ## Related
 
