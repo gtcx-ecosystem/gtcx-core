@@ -21,6 +21,18 @@ This section defines the network protocol specifications for GTCX Protocol v3.0,
 - **Consensus messaging** for PANX Oracle coordination
 - **Sync protocols** for offline-first operation
 
+### 9.1.1 Current Implementation Scope (v1 Subset)
+
+The current implementation in `@gtcx/network` delivers a scoped subset of this spec:
+
+- **Transport**: in-memory transport and libp2p adapter scaffold with QUIC + gossipsub (`packages/network/src/index.ts`, `packages/network/src/libp2p.ts`).
+- **Serialization**: JSON-only message envelopes; CBOR/MsgPack + compression are planned (see Section 9.4+).
+- **Peer discovery**: adapter-based discovery with reputation scoring; DNS seed/PEX/Bluetooth discovery are planned (see Section 9.4).
+- **Rate limiting**: per-node publish rate limits and topic allowlists enforced.
+- **Telemetry**: publish/receive/start/stop/peer discovery events emitted via telemetry hooks.
+
+This subsection will be removed once full protocol coverage is implemented.
+
 ### Network Design Philosophy
 
 ```

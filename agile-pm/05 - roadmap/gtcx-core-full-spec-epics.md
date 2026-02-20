@@ -1,9 +1,10 @@
 # GTCX Core Full-Spec Epics and Sprints
 
 **Updated**: 2026-02-20  
-**Status**: Sprint 2 complete; Sprint 3 in progress (API client hardening)  
+**Status**: Sprint 2 complete; Sprint 3 in progress (API client hardening); Sprint 4 in progress (P2P scaffolding)  
 **Scope**: gtcx-core full-spec delivery, phased into execution sprints  
 **Objective**: Complete full protocol implementation with enterprise and government-grade readiness.
+**Source of truth**: `agile-pm/06 - planning/gtcx-core-full-spec-sprints.md`
 
 ## Sprint Overview
 
@@ -13,13 +14,13 @@ Goal: 100% traceability and execution-ready backlog.
 **Sprint 1: Identity Resolution Core** — Complete  
 Goal: DID resolution with caching, revocation checks, and resolver adapters.
 
-**Sprint 2: Offline Sync Engine** — In Progress  
+**Sprint 2: Offline Sync Engine** — Complete  
 Goal: Deterministic offline-first sync with conflict resolution.
 
-**Sprint 3: API Client Enterprise Hardening** — Planned  
+**Sprint 3: API Client Enterprise Hardening** — In Progress  
 Goal: Secure, resilient integration client with signing and mTLS support.
 
-**Sprint 4: P2P Networking Transport** — Planned  
+**Sprint 4: P2P Networking Transport** — In Progress  
 Goal: libp2p transport with QUIC + gossipsub and secure peer discovery.
 
 **Sprint 5: ZKP System** — Planned  
