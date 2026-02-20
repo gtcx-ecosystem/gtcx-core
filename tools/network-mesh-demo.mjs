@@ -14,7 +14,7 @@ const run = async () => {
     process.exit(1);
   }
 
-  const { createP2PNode, createLibp2pTransport } = network;
+  const { createP2PNode, Libp2pTransport } = network;
   const listenAddress = process.env.GTCX_P2P_LISTEN;
   let listenAddresses;
   if (listenAddress) {
@@ -34,20 +34,25 @@ const run = async () => {
   }
 
   try {
-    const transportA = await createLibp2pTransport({
+    const transportA = new Libp2pTransport({
       listenAddresses,
       topics: ['gtcx.mesh'],
       enableMdns: true,
     });
-    const transportB = await createLibp2pTransport({
+    await transportA.start();
+    const bootstrap = transportA.getMultiaddrs();
+
+    const transportB = new Libp2pTransport({
       listenAddresses,
       topics: ['gtcx.mesh'],
       enableMdns: true,
+      bootstrap,
     });
-    const transportC = await createLibp2pTransport({
+    const transportC = new Libp2pTransport({
       listenAddresses,
       topics: ['gtcx.mesh'],
       enableMdns: true,
+      bootstrap,
     });
 
     const nodeA = createP2PNode(
@@ -64,6 +69,17 @@ const run = async () => {
     await nodeA.start();
     await nodeB.start();
     await nodeC.start();
+
+    const waitForPeers = async (node, minPeers, maxWaitMs) => {
+      const started = Date.now();
+      while (Date.now() - started < maxWaitMs) {
+        if (node.getPeers().length >= minPeers) return true;
+        await sleep(500);
+      }
+      return false;
+    };
+
+    await waitForPeers(nodeA, 1, 8000);
 
     await sleep(2000);
     await nodeA.publish('gtcx.mesh', { message: 'hello-mesh' });
@@ -95,6 +111,9 @@ const run = async () => {
     await nodeA.stop();
     await nodeB.stop();
     await nodeC.stop();
+    await transportA.stop();
+    await transportB.stop();
+    await transportC.stop();
   } catch (error) {
     console.error('Failed to run mesh demo:', error?.message ?? error);
     console.error(

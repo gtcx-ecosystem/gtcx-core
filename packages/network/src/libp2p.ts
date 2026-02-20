@@ -14,6 +14,7 @@ interface Libp2pRuntime {
     start: () => Promise<void> | void;
     stop: () => Promise<void> | void;
     getPeers?: () => PeerId[];
+    getMultiaddrs?: () => Array<{ toString: () => string }>;
     getConnections?: () => Array<{ remotePeer?: { toString: () => string } }>;
     services?: { pubsub?: unknown };
   };
@@ -192,6 +193,12 @@ export class Libp2pTransport implements TransportAdapter {
       .map((conn) => conn.remotePeer?.toString?.())
       .filter(Boolean)
       .map((peerId) => ({ id: peerId as string }));
+  }
+
+  getMultiaddrs(): string[] {
+    if (!this.runtime) return [];
+    const addrs = this.runtime.node.getMultiaddrs?.() ?? [];
+    return addrs.map((addr) => addr.toString());
   }
 
   private handleEvent(event: unknown): void {
