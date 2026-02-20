@@ -122,6 +122,9 @@ const run = async () => {
       console.log('Rate limit enforced:', error?.message ?? error);
     }
 
+    if (!received.some((entry) => entry.startsWith('B:') || entry.startsWith('C:'))) {
+      throw new Error('No peer received the initial message');
+    }
     console.log('Received before restart:', received.join(', '));
 
     await nodeB.stop();
@@ -131,6 +134,9 @@ const run = async () => {
     await nodeA.publish('gtcx.mesh', { message: 'after-restart' });
     await sleep(1000);
 
+    if (!received.some((entry) => entry.includes('after-restart'))) {
+      throw new Error('No peer received the post-restart message');
+    }
     console.log('Received after restart:', received.join(', '));
 
     await nodeA.stop();
