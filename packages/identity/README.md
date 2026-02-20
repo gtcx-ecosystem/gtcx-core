@@ -39,6 +39,25 @@ console.log(validateIdentity(identity).valid); // true
 | `createHttpDIDResolverAdapter()`  | HTTP-based resolver adapter       |
 | `createInMemoryDIDCache()`        | In-memory cache                   |
 
+## Resolver Example
+
+```typescript
+import {
+  createDIDResolver,
+  createHttpDIDResolverAdapter,
+  createInMemoryDIDCache,
+} from '@gtcx/identity';
+
+const resolver = createDIDResolver({
+  adapters: [createHttpDIDResolverAdapter({ baseUrl: 'https://resolver.gtcx.io' })],
+  cache: createInMemoryDIDCache(),
+  cacheTtlMs: 5 * 60_000,
+});
+
+const result = await resolver.resolve('did:gtcx:abc123');
+console.log(result.document);
+```
+
 ## Related
 
 - [ADR-005: Ed25519 over secp256k1](../../docs/adr/005-ed25519-signing.md)
