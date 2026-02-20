@@ -33,7 +33,10 @@ const run = async () => {
       enableMdns: true,
     });
 
-    const nodeA = createP2PNode({ nodeId: 'validator-a', topics: ['gtcx.mesh'] }, transportA);
+    const nodeA = createP2PNode(
+      { nodeId: 'validator-a', topics: ['gtcx.mesh'], rateLimitPerMinute: 1 },
+      transportA
+    );
     const nodeB = createP2PNode({ nodeId: 'validator-b', topics: ['gtcx.mesh'] }, transportB);
     const nodeC = createP2PNode({ nodeId: 'validator-c', topics: ['gtcx.mesh'] }, transportC);
 
@@ -49,7 +52,28 @@ const run = async () => {
     await nodeA.publish('gtcx.mesh', { message: 'hello-mesh' });
     await sleep(1000);
 
-    console.log('Received:', received.join(', '));
+    try {
+      await nodeA.publish('gtcx.blocked', { message: 'blocked' });
+    } catch (error) {
+      console.log('Topic ACL enforced:', error?.message ?? error);
+    }
+
+    try {
+      await nodeA.publish('gtcx.mesh', { message: 'rate-limit' });
+    } catch (error) {
+      console.log('Rate limit enforced:', error?.message ?? error);
+    }
+
+    console.log('Received before restart:', received.join(', '));
+
+    await nodeB.stop();
+    await sleep(1000);
+    await nodeB.start();
+    await sleep(2000);
+    await nodeA.publish('gtcx.mesh', { message: 'after-restart' });
+    await sleep(1000);
+
+    console.log('Received after restart:', received.join(', '));
 
     await nodeA.stop();
     await nodeB.stop();
@@ -57,7 +81,7 @@ const run = async () => {
   } catch (error) {
     console.error('Failed to run mesh demo:', error?.message ?? error);
     console.error(
-      'Ensure libp2p deps are installed: pnpm add libp2p @libp2p/quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns'
+      'Ensure libp2p deps are installed: pnpm add libp2p @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns'
     );
     process.exit(1);
   }

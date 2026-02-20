@@ -11,33 +11,53 @@ export interface Libp2pTransportConfig {
 
 interface Libp2pRuntime {
   node: {
-    start: () => Promise<void>;
-    stop: () => Promise<void>;
+    start: () => Promise<void> | void;
+    stop: () => Promise<void> | void;
     getPeers?: () => PeerId[];
     getConnections?: () => Array<{ remotePeer?: { toString: () => string } }>;
     services?: { pubsub?: unknown };
   };
   pubsub?: {
-    publish: (topic: string, data: Uint8Array) => Promise<void>;
+    publish: (topic: string, data: Uint8Array) => Promise<unknown>;
     subscribe: (topic: string) => Promise<void> | void;
     addEventListener?: (event: string, handler: (event: unknown) => void) => void;
     removeEventListener?: (event: string, handler: (event: unknown) => void) => void;
   };
 }
 
+type FactoryFn<T = unknown> = (...args: any[]) => T;
+
+function resolveFactory<T = unknown>(module: unknown, name: string): FactoryFn<T> {
+  const record = module as Record<string, unknown>;
+  const candidate = record[name] ?? record['default'] ?? record;
+  if (typeof candidate !== 'function') {
+    throw new ConfigurationError(`${name} factory not available from module`);
+  }
+  return candidate as FactoryFn<T>;
+}
+
 async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime> {
   try {
-    const [{ createLibp2p }, { quic }, { noise }, { gossipsub }] = await Promise.all([
+    const [libp2pModule, quicModule, noiseModule, gossipsubModule] = await Promise.all([
       import('libp2p'),
-      import('@libp2p/quic'),
+      import('@chainsafe/libp2p-quic'),
       import('@chainsafe/libp2p-noise'),
       import('@chainsafe/libp2p-gossipsub'),
     ]);
 
+    const createLibp2p = resolveFactory<Promise<Libp2pRuntime['node']>>(
+      libp2pModule,
+      'createLibp2p'
+    );
+    const quic = resolveFactory(quicModule, 'quic');
+    const noise = resolveFactory(noiseModule, 'noise');
+    const gossipsub = resolveFactory(gossipsubModule, 'gossipsub');
+
     const peerDiscovery: unknown[] = [];
     if (config.bootstrap && config.bootstrap.length > 0) {
       try {
-        const { bootstrap } = await import('@libp2p/bootstrap');
+        const bootstrapModule = await import('@libp2p/bootstrap');
+        const bootstrap = resolveFactory(bootstrapModule, 'bootstrap');
         peerDiscovery.push(bootstrap({ list: config.bootstrap }));
       } catch (error) {
         throw new ConfigurationError('Bootstrap requires @libp2p/bootstrap');
@@ -45,7 +65,8 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     }
     if (config.enableMdns) {
       try {
-        const { mdns } = await import('@libp2p/mdns');
+        const mdnsModule = await import('@libp2p/mdns');
+        const mdns = resolveFactory(mdnsModule, 'mdns');
         peerDiscovery.push(mdns());
       } catch (error) {
         throw new ConfigurationError('mDNS requires @libp2p/mdns');
@@ -56,7 +77,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       addresses: config.listenAddresses ? { listen: config.listenAddresses } : undefined,
       transports: [quic()],
       connectionEncryption: [noise()],
-      peerDiscovery: peerDiscovery.length > 0 ? peerDiscovery : undefined,
+      peerDiscovery: peerDiscovery.length > 0 ? (peerDiscovery as unknown as any[]) : undefined,
       services: {
         pubsub: gossipsub({
           allowPublishToZeroPeers: config.allowPublishToZeroPeers ?? true,
@@ -70,7 +91,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     };
   } catch (error) {
     throw new ConfigurationError(
-      'libp2p dependencies are missing. Install libp2p, @libp2p/quic, @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
+      'libp2p dependencies are missing. Install libp2p, @chainsafe/libp2p-quic, @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
     );
   }
 }
@@ -102,7 +123,7 @@ export class Libp2pTransport implements TransportAdapter {
 
   async start(): Promise<void> {
     this.runtime = await loadLibp2p(this.config);
-    await this.runtime.node.start();
+    await Promise.resolve(this.runtime.node.start());
     if (this.runtime.pubsub) {
       for (const topic of this.topics) {
         await this.runtime.pubsub.subscribe(topic);
@@ -115,7 +136,7 @@ export class Libp2pTransport implements TransportAdapter {
 
   async stop(): Promise<void> {
     if (!this.runtime) return;
-    await this.runtime.node.stop();
+    await Promise.resolve(this.runtime.node.stop());
   }
 
   async send(_peerId: PeerId, message: MessageEnvelope): Promise<void> {

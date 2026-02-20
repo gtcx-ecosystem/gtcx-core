@@ -39,7 +39,7 @@ const node = createP2PNode({ nodeId: 'A' }, new InMemoryTransport('A'), {
 ## libp2p (QUIC + gossipsub)
 
 ```bash
-pnpm add libp2p @libp2p/quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns
+pnpm add libp2p @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns
 ```
 
 ```typescript

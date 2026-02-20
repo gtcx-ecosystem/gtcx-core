@@ -41,3 +41,4 @@
 - libp2p/QUIC transport:
   - Status: ⏳ Pending runtime evidence
   - Evidence command: `pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
+  - Last attempt: 2026-02-20 — blocked by npm registry DNS (ENOTFOUND) while installing libp2p deps.
