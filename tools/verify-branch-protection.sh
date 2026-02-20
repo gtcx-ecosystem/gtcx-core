@@ -17,7 +17,39 @@ if ! gh auth status >/dev/null 2>&1; then
   exit 1
 fi
 
-JSON="$(gh api "repos/${REPO}/branches/${BRANCH}/protection")"
+ARTIFACT_DIR="$ROOT_DIR/artifacts"
+mkdir -p "$ARTIFACT_DIR"
+OUT_PATH="$ARTIFACT_DIR/branch-protection-main.json"
+UNAVAILABLE_PATH="$ARTIFACT_DIR/branch-protection-main.unavailable.json"
+
+set +e
+API_OUTPUT="$(gh api "repos/${REPO}/branches/${BRANCH}/protection" 2>&1)"
+API_EXIT=$?
+set -e
+
+if [[ $API_EXIT -ne 0 ]]; then
+  if grep -q "Upgrade to GitHub Pro or make this repository public to enable this feature" <<<"$API_OUTPUT"; then
+    cat >"$UNAVAILABLE_PATH" <<EOF
+{
+  "status": "unavailable",
+  "repository": "${REPO}",
+  "branch": "${BRANCH}",
+  "checkedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "reason": "GitHub branch protection API unavailable for this repository plan/visibility.",
+  "rawError": $(jq -Rs . <<<"$API_OUTPUT")
+}
+EOF
+    echo "WARN: Branch protection API unavailable for ${REPO}:${BRANCH} (GitHub plan/visibility constraint)"
+    echo "Evidence written: ${UNAVAILABLE_PATH}"
+    exit 0
+  fi
+
+  echo "ERROR: Failed to query branch protection API" >&2
+  echo "$API_OUTPUT" >&2
+  exit 1
+fi
+
+JSON="$API_OUTPUT"
 
 require_bool() {
   local value="$1"
@@ -39,9 +71,6 @@ for check in "CI / ci" "CI / rust" "CI / security" "CI / docker"; do
   fi
 done
 
-ARTIFACT_DIR="$ROOT_DIR/artifacts"
-mkdir -p "$ARTIFACT_DIR"
-OUT_PATH="$ARTIFACT_DIR/branch-protection-main.json"
 printf '%s\n' "$JSON" >"$OUT_PATH"
 
 echo "PASS: Branch protection checks verified for ${REPO}:${BRANCH}"

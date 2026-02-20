@@ -33,8 +33,8 @@ Current weighted overall score: `9.3/10`
 ## Remaining to Reach 10.0
 
 1. Branch protection operational verification:
-   Current state: repository policy is documented and enforced in-repo, but GitHub branch protection settings must be re-verified with valid repository admin auth.
-   Required closeout: complete monthly audit checklist and record evidence links.
+   Current state: repository policy is documented and enforced in-repo; automated verification command exists, but GitHub branch protection API is unavailable for current repository plan/visibility (`HTTP 403`).
+   Required closeout: upgrade plan/visibility to enable API-based verification, or retain `artifacts/branch-protection-main.unavailable.json` in monthly governance evidence.
 
 ## Phase Checklist
 

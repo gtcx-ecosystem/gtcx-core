@@ -78,6 +78,7 @@ Required evidence fields:
 
 1. Verify required branch protection settings are unchanged.
    Command: `pnpm quality:verify-branch-protection`.
+   If GitHub returns plan/visibility API restrictions (HTTP 403), capture and retain `artifacts/branch-protection-main.unavailable.json` as audit evidence.
 2. Verify CODEOWNERS coverage matches policy scope.
 3. Sample one CI and one release run; confirm provenance artifact availability.
 4. Record drift or policy exceptions in the remediation tracker.
