@@ -15,22 +15,20 @@ const run = async () => {
   }
 
   const { createP2PNode, Libp2pTransport } = network;
-  const listenAddress = process.env.GTCX_P2P_LISTEN;
+  const listenAddress = process.env.GTCX_P2P_LISTEN ?? '/ip4/127.0.0.1/udp/0/quic-v1';
   let listenAddresses;
-  if (listenAddress) {
-    try {
-      const multiaddrModule = await import('@multiformats/multiaddr');
-      const toMultiaddr = multiaddrModule.multiaddr ?? multiaddrModule.default ?? multiaddrModule;
-      if (typeof toMultiaddr !== 'function') {
-        throw new Error('multiaddr export is not a function');
-      }
-      listenAddresses = [toMultiaddr(listenAddress)];
-    } catch (error) {
-      console.error(
-        'Missing @multiformats/multiaddr. Run: pnpm --filter @gtcx/network add -D @multiformats/multiaddr'
-      );
-      process.exit(1);
+  try {
+    const multiaddrModule = await import('@multiformats/multiaddr');
+    const toMultiaddr = multiaddrModule.multiaddr ?? multiaddrModule.default ?? multiaddrModule;
+    if (typeof toMultiaddr !== 'function') {
+      throw new Error('multiaddr export is not a function');
     }
+    listenAddresses = [toMultiaddr(listenAddress)];
+  } catch (error) {
+    console.error(
+      'Missing @multiformats/multiaddr. Run: pnpm --filter @gtcx/network add -D @multiformats/multiaddr'
+    );
+    process.exit(1);
   }
 
   try {
@@ -52,8 +50,9 @@ const run = async () => {
 
     const peerId = transportA.getPeerId?.();
     const bootstrap = transportA.getMultiaddrs().map((addr) => {
-      if (!peerId || addr.includes('/p2p/')) return addr;
-      return `${addr}/p2p/${peerId}`;
+      const normalized = addr.replace('/ip4/0.0.0.0/', '/ip4/127.0.0.1/');
+      if (!peerId || normalized.includes('/p2p/')) return normalized;
+      return `${normalized}/p2p/${peerId}`;
     });
 
     const transportB = new Libp2pTransport({
