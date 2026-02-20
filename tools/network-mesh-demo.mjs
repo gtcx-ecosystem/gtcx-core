@@ -15,20 +15,28 @@ const run = async () => {
   }
 
   const { createP2PNode, createLibp2pTransport } = network;
+  let toMultiaddr;
+  try {
+    const multiaddrModule = await import('@multiformats/multiaddr');
+    toMultiaddr = multiaddrModule.multiaddr ?? multiaddrModule.default ?? multiaddrModule;
+  } catch (error) {
+    console.error('Missing @multiformats/multiaddr. Run: pnpm --filter @gtcx/network add -D @multiformats/multiaddr');
+    process.exit(1);
+  }
 
   try {
     const transportA = await createLibp2pTransport({
-      listenAddresses: ['/ip4/0.0.0.0/udp/0/quic-v1'],
+      listenAddresses: [toMultiaddr('/ip4/0.0.0.0/udp/0/quic-v1')],
       topics: ['gtcx.mesh'],
       enableMdns: true,
     });
     const transportB = await createLibp2pTransport({
-      listenAddresses: ['/ip4/0.0.0.0/udp/0/quic-v1'],
+      listenAddresses: [toMultiaddr('/ip4/0.0.0.0/udp/0/quic-v1')],
       topics: ['gtcx.mesh'],
       enableMdns: true,
     });
     const transportC = await createLibp2pTransport({
-      listenAddresses: ['/ip4/0.0.0.0/udp/0/quic-v1'],
+      listenAddresses: [toMultiaddr('/ip4/0.0.0.0/udp/0/quic-v1')],
       topics: ['gtcx.mesh'],
       enableMdns: true,
     });
