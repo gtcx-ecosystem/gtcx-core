@@ -16,4 +16,5 @@ For execution tracking:
 GTCX core full-spec planning:
 
 - gtcx-core-full-spec-sprints.md
+- sprint-1-did-resolver-plan.md
 - uat-gtcx-core-full-spec.md
