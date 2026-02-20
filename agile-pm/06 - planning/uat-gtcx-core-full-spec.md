@@ -34,8 +34,8 @@
 ### Sprint 2 Evidence
 
 - [x] Offline → online convergence integration test added (`tests/integration/sync-convergence.test.ts`)
-- [ ] Conflict resolution deterministic evidence run (attach log/output)
-- [ ] Audit/metrics hook evidence run (attach log/output)
+- [x] Conflict resolution deterministic evidence run (attach log/output)
+- [x] Audit/metrics hook evidence run (attach log/output)
 
 ## Sprint 3: API Client Enterprise Hardening
 

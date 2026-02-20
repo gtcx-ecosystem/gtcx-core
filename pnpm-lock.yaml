@@ -528,6 +528,9 @@ importers:
       '@gtcx/security':
         specifier: workspace:*
         version: link:../../packages/security
+      '@gtcx/sync':
+        specifier: workspace:*
+        version: link:../../packages/sync
       '@gtcx/types':
         specifier: workspace:*
         version: link:../../packages/types

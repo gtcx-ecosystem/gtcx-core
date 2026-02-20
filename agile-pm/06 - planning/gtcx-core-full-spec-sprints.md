@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Sprint Plan
 
 **Updated**: 2026-02-20  
-**Status**: Sprint 1 complete; Sprint 2 in progress (sync core + conflict hooks complete)  
+**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 in progress (API client hardening)  
 **Scope**: Execution plan for full-spec delivery  
 **Objective**: Provide a robust, sprint-structured roadmap with dependencies and exit criteria.
 
@@ -51,7 +51,7 @@
 **Exit Criteria**:
 
 - [x] Offline → online convergence test passes
-- Deterministic conflict resolution verified
+- [x] Deterministic conflict resolution verified
 
 ## Sprint 3: API Client Enterprise Hardening (Planned)
 

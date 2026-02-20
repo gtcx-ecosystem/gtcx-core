@@ -7,9 +7,13 @@
 
 - Offline → online convergence integration test:
   - Test: `tests/integration/sync-convergence.test.ts`
-  - Status: ✅ Implemented
-  - Evidence: Pending run output attachment
+  - Status: ✅ Implemented + executed
+  - Evidence: `pnpm --filter @gtcx/integration-tests test -- -t "sync convergence"`
+  - Result: `1 passed` (2026-02-20 20:22)
 - Deterministic conflict resolution:
-  - Status: ⏳ Pending evidence run
+  - Status: ✅ Implemented + executed
+  - Evidence: `tests/integration/sync-convergence.test.ts` runs twice with identical inputs; state results match.
 - Audit/metrics hook verification:
-  - Status: ⏳ Pending evidence run
+  - Status: ✅ Implemented + executed
+  - Evidence: `pnpm --filter @gtcx/sync test -- -t "audit"`
+  - Result: `1 passed` (2026-02-20 20:23)

@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Roadmap (Enterprise and Military-Grade)
 
 **Updated**: 2026-02-20  
-**Status**: Sprint 1 complete (DID resolver core); Sprint 2 in progress (offline sync core + conflict hooks)  
+**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 in progress (API client hardening)  
 **Scope**: gtcx-core monorepo + required downstream integrations to reach full spec functionality  
 **Objective**: Implement the full spec for global south deployment with offline-first capability, government-grade identity, and financial market infrastructure reliability.
 
