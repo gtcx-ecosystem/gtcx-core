@@ -15,20 +15,22 @@ const run = async () => {
   }
 
   const { createP2PNode, Libp2pTransport } = network;
-  const listenAddress = process.env.GTCX_P2P_LISTEN ?? '/ip4/127.0.0.1/udp/0/quic-v1';
+  const listenAddress = process.env.GTCX_P2P_LISTEN;
   let listenAddresses;
-  try {
-    const multiaddrModule = await import('@multiformats/multiaddr');
-    const toMultiaddr = multiaddrModule.multiaddr ?? multiaddrModule.default ?? multiaddrModule;
-    if (typeof toMultiaddr !== 'function') {
-      throw new Error('multiaddr export is not a function');
+  if (listenAddress) {
+    try {
+      const multiaddrModule = await import('@multiformats/multiaddr');
+      const toMultiaddr = multiaddrModule.multiaddr ?? multiaddrModule.default ?? multiaddrModule;
+      if (typeof toMultiaddr !== 'function') {
+        throw new Error('multiaddr export is not a function');
+      }
+      listenAddresses = [toMultiaddr(listenAddress)];
+    } catch (error) {
+      console.error(
+        'Missing @multiformats/multiaddr. Run: pnpm --filter @gtcx/network add -D @multiformats/multiaddr'
+      );
+      process.exit(1);
     }
-    listenAddresses = [toMultiaddr(listenAddress)];
-  } catch (error) {
-    console.error(
-      'Missing @multiformats/multiaddr. Run: pnpm --filter @gtcx/network add -D @multiformats/multiaddr'
-    );
-    process.exit(1);
   }
 
   try {
