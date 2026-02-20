@@ -1,15 +1,20 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { createDID, createDIDDocument } from '../src/did';
 import { createIdentity } from '../src/identity';
 import {
   createDIDResolver,
+  createHttpDIDResolverAdapter,
   createInMemoryDIDCache,
   createStaticDIDResolverAdapter,
   DIDResolverError,
 } from '../src/resolver';
 
 describe('DID resolver', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it('resolves a DID via adapter', async () => {
     const { identity } = await createIdentity();
     const did = createDID(identity);
@@ -71,5 +76,42 @@ describe('DID resolver', () => {
     await expect(resolver.resolve('not-a-did')).rejects.toMatchObject({
       code: 'INVALID_DID',
     });
+  });
+
+  it('resolves using HTTP adapter and handles 404', async () => {
+    const { identity } = await createIdentity();
+    const did = createDID(identity);
+    const document = createDIDDocument(identity);
+
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    fetchSpy.mockResolvedValueOnce(
+      new Response(JSON.stringify(document), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    );
+    fetchSpy.mockResolvedValueOnce(new Response('', { status: 404 }));
+
+    const adapter = createHttpDIDResolverAdapter({ baseUrl: 'https://resolver.test' });
+    const resolver = createDIDResolver({ adapters: [adapter] });
+
+    const first = await resolver.resolve(did);
+    expect(first.document?.id).toBe(did);
+
+    const second = await resolver.resolve('did:gtcx:missing');
+    expect(second.document).toBeNull();
+  });
+
+  it('emits metrics callback on resolution failure', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response('oops', { status: 500, headers: { 'content-type': 'text/plain' } })
+    );
+
+    const metrics = vi.fn();
+    const adapter = createHttpDIDResolverAdapter({ baseUrl: 'https://resolver.test', retries: 0 });
+    const resolver = createDIDResolver({ adapters: [adapter], metrics });
+
+    await expect(resolver.resolve('did:gtcx:broken')).rejects.toBeInstanceOf(DIDResolverError);
+    expect(metrics).toHaveBeenCalled();
   });
 });
