@@ -2,6 +2,7 @@
 
 **Updated**: 2026-02-20  
 **Sprint Goal**: Implement resolver adapters, caching, and revocation hooks for production identity resolution.  
+**Status**: Complete (2026-02-20)
 **Epic**: Sprint 1 in `agile-pm/05 - roadmap/gtcx-core-full-spec-epics.md`
 
 ## Scope

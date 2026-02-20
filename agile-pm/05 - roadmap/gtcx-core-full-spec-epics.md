@@ -10,10 +10,10 @@
 **Sprint 0: Spec-to-Code Closure** — Complete  
 Goal: 100% traceability and execution-ready backlog.
 
-**Sprint 1: Identity Resolution Core** — In Progress  
+**Sprint 1: Identity Resolution Core** — Complete  
 Goal: DID resolution with caching, revocation checks, and resolver adapters.
 
-**Sprint 2: Offline Sync Engine** — Planned  
+**Sprint 2: Offline Sync Engine** — In Progress  
 Goal: Deterministic offline-first sync with conflict resolution.
 
 **Sprint 3: API Client Enterprise Hardening** — Planned  

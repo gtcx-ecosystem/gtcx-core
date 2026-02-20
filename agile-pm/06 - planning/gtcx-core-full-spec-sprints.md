@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Sprint Plan
 
 **Updated**: 2026-02-20  
-**Status**: Sprint 1 in progress (DID resolver core)  
+**Status**: Sprint 1 complete; Sprint 2 in progress (offline sync)  
 **Scope**: Execution plan for full-spec delivery  
 **Objective**: Provide a robust, sprint-structured roadmap with dependencies and exit criteria.
 
@@ -23,7 +23,7 @@
 - 100% spec sections mapped to code or backlog items
 - All gaps assigned to epics
 
-## Sprint 1: Identity Resolution Core (In Progress)
+## Sprint 1: Identity Resolution Core (Complete)
 
 **Goal**: DID resolution with caching, revocation checks, and resolver adapters.  
 **Dependencies**: Identity core spec; security framework revocation policy.  
@@ -38,7 +38,7 @@
 - Resolver works against at least one reference backend
 - Revoked identity case passes UAT
 
-## Sprint 2: Offline Sync Engine (Planned)
+## Sprint 2: Offline Sync Engine (In Progress)
 
 **Goal**: Deterministic offline-first sync with conflict resolution.  
 **Dependencies**: Offline-first ADRs; domain events.  
