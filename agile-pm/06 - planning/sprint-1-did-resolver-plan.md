@@ -26,14 +26,14 @@
 
 ## Task Breakdown
 
-1. DID-RES-001: Add resolver interface and default resolver wiring in `@gtcx/identity`.
-2. DID-RES-002: Implement HTTP registry adapter with timeout and retry policy.
-3. DID-RES-003: Implement in-memory adapter for local and test use.
-4. DID-RES-004: Implement cache with TTL, invalidation, and metrics hooks.
-5. DID-RES-005: Add revocation hook interface and integrate into resolve flow.
-6. DID-RES-006: Structured error types and cause propagation.
-7. DID-RES-007: Integration tests for resolver + cache + revocation flows.
-8. DID-RES-008: Update docs and examples.
+- [x] DID-RES-001: Add resolver interface and default resolver wiring in `@gtcx/identity`.
+- [x] DID-RES-002: Implement HTTP registry adapter with timeout and retry policy.
+- [x] DID-RES-003: Implement in-memory adapter for local and test use.
+- [x] DID-RES-004: Implement cache with TTL, invalidation, and metrics hooks.
+- [x] DID-RES-005: Add revocation hook interface and integrate into resolve flow.
+- [x] DID-RES-006: Structured error types and cause propagation.
+- [x] DID-RES-007: Integration tests for resolver + cache + revocation flows.
+- [x] DID-RES-008: Update docs and examples.
 
 ## Acceptance Criteria
 
