@@ -1,7 +1,8 @@
 # 10/10 Remediation Tracker and Scorecard
 
-Last updated: 2026-02-20
+Last updated: 2026-02-21
 Primary reference: `docs/quality/10-10-remediation-plan.md`
+Audit report: `docs/quality/10-10-audit-report.md`
 
 ## Scoring Rubric
 
