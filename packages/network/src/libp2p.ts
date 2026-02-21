@@ -22,15 +22,24 @@ interface Libp2pRuntime {
     start: () => Promise<void> | void;
     stop: () => Promise<void> | void;
     peerId?: { toString: () => string };
+    peerStore?: { get: (peerId: unknown) => Promise<{ protocols?: string[] }> };
     getPeers?: () => PeerId[];
     getMultiaddrs?: () => Array<{ toString: () => string }>;
     dial?: (address: unknown) => Promise<void>;
-    getConnections?: () => Array<{ remotePeer?: { toString: () => string } }>;
+    getConnections?: () => Array<{
+      remotePeer?: { toString: () => string };
+      multiplexer?: string;
+      encryption?: string;
+      direction?: string;
+      status?: string;
+    }>;
+    getProtocols?: (peerId?: PeerId) => Promise<string[]> | string[];
     services?: { pubsub?: unknown };
   };
   pubsub?: {
     publish: (topic: string, data: Uint8Array) => Promise<unknown>;
     subscribe: (topic: string) => Promise<void> | void;
+    getPeers?: () => Array<{ toString?: () => string } | string>;
     getSubscribers?: (topic: string) => Array<{ toString?: () => string } | string>;
     getTopics?: () => string[];
     addEventListener?: (event: string, handler: (event: unknown) => void) => void;
@@ -51,13 +60,13 @@ function resolveFactory<T = unknown>(module: unknown, name: string): FactoryFn<T
 
 async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime> {
   try {
-    const [libp2pModule, noiseModule, gossipsubModule, identifyModule, mplexModule] =
+    const [libp2pModule, noiseModule, gossipsubModule, identifyModule, yamuxModule] =
       await Promise.all([
         import('libp2p'),
         import('@chainsafe/libp2p-noise'),
         import('@chainsafe/libp2p-gossipsub'),
         import('@libp2p/identify'),
-        import('@libp2p/mplex'),
+        import('@chainsafe/libp2p-yamux'),
       ]);
 
     const transportKind: P2PTransportKind = config.transport ?? 'tcp';
@@ -73,7 +82,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     const noise = resolveFactory(noiseModule, 'noise');
     const gossipsub = resolveFactory(gossipsubModule, 'gossipsub');
     const identify = resolveFactory(identifyModule, 'identify');
-    const mplex = resolveFactory(mplexModule, 'mplex');
+    const yamux = resolveFactory(yamuxModule, 'yamux');
     const transportFactory =
       transportKind === 'tcp'
         ? resolveFactory(transportModule, 'tcp')
@@ -133,7 +142,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       addresses: listenAddresses ? { listen: listenAddresses as any[] } : undefined,
       transports: [transportFactory()],
       connectionEncrypters: [noise()],
-      streamMuxers: [mplex()],
+      streamMuxers: [yamux()],
       peerDiscovery: peerDiscovery.length > 0 ? (peerDiscovery as unknown as any[]) : undefined,
       services: {
         identify: identify(),
@@ -151,7 +160,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     const err = error as Error & { code?: string };
     const isMissingDep = err?.code === 'ERR_MODULE_NOT_FOUND';
     const message = isMissingDep
-      ? 'libp2p dependencies are missing. Install libp2p, @libp2p/tcp (or @chainsafe/libp2p-quic), @libp2p/mplex, @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
+      ? 'libp2p dependencies are missing. Install libp2p, @libp2p/tcp (or @chainsafe/libp2p-quic), @chainsafe/libp2p-yamux, @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
       : `libp2p init failed: ${err?.message ?? String(error)}`;
     throw new ConfigurationError(message);
   }
@@ -219,6 +228,14 @@ export class Libp2pTransport implements TransportAdapter {
       .filter(Boolean);
   }
 
+  getPubsubPeers(): string[] {
+    if (!this.runtime?.pubsub?.getPeers) return [];
+    return this.runtime.pubsub
+      .getPeers()
+      .map((peer) => (typeof peer === 'string' ? peer : (peer?.toString?.() ?? '')))
+      .filter(Boolean);
+  }
+
   getTopics(): string[] {
     if (!this.runtime?.pubsub?.getTopics) return [];
     return this.runtime.pubsub.getTopics().filter(Boolean);
@@ -252,6 +269,23 @@ export class Libp2pTransport implements TransportAdapter {
       .map((peerId) => ({ id: peerId as string }));
   }
 
+  getConnectionInfo(): Array<{
+    peer: string;
+    multiplexer?: string;
+    encryption?: string;
+    direction?: string;
+    status?: string;
+  }> {
+    if (!this.runtime?.node.getConnections) return [];
+    return this.runtime.node.getConnections().map((conn) => ({
+      peer: conn.remotePeer?.toString?.() ?? '',
+      multiplexer: conn.multiplexer,
+      encryption: conn.encryption,
+      direction: conn.direction,
+      status: conn.status,
+    }));
+  }
+
   getMultiaddrs(): string[] {
     if (!this.runtime) return [];
     const addrs = this.runtime.node.getMultiaddrs?.() ?? [];
@@ -260,6 +294,27 @@ export class Libp2pTransport implements TransportAdapter {
 
   getPeerId(): string | null {
     return this.runtime?.node.peerId?.toString?.() ?? null;
+  }
+
+  async getProtocols(peerId?: PeerId): Promise<string[]> {
+    const node = this.runtime?.node;
+    if (!node?.getProtocols) return [];
+    const result = node.getProtocols(peerId);
+    return Array.isArray(result) ? result : await result;
+  }
+
+  async getPeerProtocols(peerId: PeerId): Promise<string[]> {
+    const store = this.runtime?.node.peerStore;
+    if (!store?.get) return [];
+    try {
+      const nodePeerId = this.runtime?.node.peerId;
+      const lookupId =
+        typeof peerId === 'string' && nodePeerId?.toString?.() === peerId ? nodePeerId : peerId;
+      const info = await store.get(lookupId);
+      return info?.protocols ?? [];
+    } catch {
+      return [];
+    }
   }
 
   async connect(addresses: string[]): Promise<void> {
@@ -274,7 +329,15 @@ export class Libp2pTransport implements TransportAdapter {
   private handleEvent(event: unknown): void {
     const detail = (event as { detail?: { data?: Uint8Array; topic?: string } }).detail;
     if (!detail?.data) return;
-    const decoded = decodeEnvelope(detail.data);
+    const raw = detail.data as unknown as { subarray?: () => Uint8Array };
+    const data =
+      detail.data instanceof Uint8Array
+        ? detail.data
+        : typeof raw?.subarray === 'function'
+          ? raw.subarray()
+          : null;
+    if (!data) return;
+    const decoded = decodeEnvelope(data);
     if (!decoded) return;
     const envelope =
       detail.topic && decoded.topic !== detail.topic

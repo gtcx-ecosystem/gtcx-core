@@ -23,33 +23,33 @@
   },
   "devDependencies": {
     "@chainsafe/libp2p-gossipsub": "^14.1.2",
-    "@chainsafe/libp2p-noise": "^17.0.0",
+    "@chainsafe/libp2p-noise": "^16.1.5",
     "@chainsafe/libp2p-quic": "^1.1.8",
+    "@chainsafe/libp2p-yamux": "^7.0.4",
     "@gtcx/tsup-config": "workspace:*",
     "@gtcx/typescript-config": "workspace:*",
-    "@libp2p/bootstrap": "^12.0.11",
-    "@libp2p/identify": "^2.1.5",
-    "@libp2p/mdns": "^12.0.11",
-    "@libp2p/mplex": "^11.0.47",
-    "@libp2p/tcp": "^11.0.10",
+    "@libp2p/bootstrap": "^11.0.47",
+    "@libp2p/identify": "^3.0.39",
+    "@libp2p/mdns": "^11.0.47",
+    "@libp2p/tcp": "^10.1.19",
     "@multiformats/multiaddr": "^12.5.1",
     "@vitest/coverage-v8": "^2.1.0",
-    "libp2p": "^3.1.3",
+    "libp2p": "^2.10.0",
     "tsup": "^8.0.1",
     "typescript": "^5.7.0",
     "vitest": "^2.1.0"
   },
   "peerDependencies": {
-    "@chainsafe/libp2p-gossipsub": "^12.0.0",
-    "@chainsafe/libp2p-noise": "^11.0.0",
-    "@chainsafe/libp2p-quic": "^1.0.0",
-    "@libp2p/bootstrap": "^1.0.0",
-    "@libp2p/identify": "^2.0.0",
-    "@libp2p/mdns": "^1.0.0",
-    "@libp2p/mplex": "^11.0.0",
-    "@libp2p/tcp": "^11.0.0",
+    "@chainsafe/libp2p-gossipsub": "^14.1.2",
+    "@chainsafe/libp2p-noise": "^16.1.5",
+    "@chainsafe/libp2p-quic": "^1.1.8",
+    "@chainsafe/libp2p-yamux": "^7.0.4",
+    "@libp2p/bootstrap": "^11.0.47",
+    "@libp2p/identify": "^3.0.39",
+    "@libp2p/mdns": "^11.0.47",
+    "@libp2p/tcp": "^10.1.19",
     "@multiformats/multiaddr": "^12.5.1",
-    "libp2p": "^1.0.0"
+    "libp2p": "^2.10.0"
   },
   "peerDependenciesMeta": {
     "libp2p": {
@@ -64,6 +64,9 @@
     "@chainsafe/libp2p-gossipsub": {
       "optional": true
     },
+    "@chainsafe/libp2p-yamux": {
+      "optional": true
+    },
     "@libp2p/bootstrap": {
       "optional": true
     },
@@ -71,9 +74,6 @@
       "optional": true
     },
     "@libp2p/mdns": {
-      "optional": true
-    },
-    "@libp2p/mplex": {
       "optional": true
     },
     "@libp2p/tcp": {
