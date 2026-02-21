@@ -54,11 +54,15 @@
   - Status: ✅ Implemented + executed
   - Evidence: `node tools/uat/zkp-uat.mjs`
   - Result: `valid proof violations 0; invalid proof violations 1` (2026-02-21 15:12)
-- Groth16 GCI threshold circuit tests (Rust):
+- Groth16 circuits (Rust: GCI threshold, asset ownership, location region):
   - Status: ✅ Implemented + executed
   - Evidence: `cargo test -p gtcx-zkp`
-  - Result: `31 passed, 1 ignored (asset ownership Groth16 proof)` (2026-02-21)
+  - Result: `32 passed, 2 ignored (asset ownership + location region Groth16 proofs)` (2026-02-21)
 - Groth16 asset ownership proof (Rust, heavy):
+  - Status: ⚠️ Ignored in default test run (heavy Groth16 proof generation)
+  - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`
+  - Result: `run on demand in high-resource environment`
+- Groth16 location region proof (Rust, heavy):
   - Status: ⚠️ Ignored in default test run (heavy Groth16 proof generation)
   - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`
   - Result: `run on demand in high-resource environment`

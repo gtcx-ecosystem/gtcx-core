@@ -2,7 +2,7 @@
 
 Zero-Knowledge Proof system for privacy-preserving verification.
 Hash-commitment proofs remain available for lightweight flows, and the first
-arkworks Groth16 circuits (GCI threshold, asset ownership) are now implemented.
+arkworks Groth16 circuits (GCI threshold, asset ownership, location region) are now implemented.
 
 ## Usage
 
@@ -57,6 +57,27 @@ let (proof, _inputs) = groth16_prove_asset_ownership(
 assert!(groth16_verify(&proof).unwrap());
 ```
 
+### Groth16 (Location Region)
+
+```rust
+use gtcx_zkp::{
+    Groth16CircuitType, groth16_generate_keys, groth16_prove_location_region, groth16_verify,
+};
+
+let keys = groth16_generate_keys(Groth16CircuitType::LocationRegion).unwrap();
+// Provide lat, lon, timestamp, randomness, and bounds [min_lat, max_lat, min_lon, max_lon].
+let (proof, _inputs) = groth16_prove_location_region(
+    15,
+    35,
+    1_700_000_000,
+    [9u8; 32],
+    [10, 20, 30, 40],
+    &keys,
+)
+.unwrap();
+assert!(groth16_verify(&proof).unwrap());
+```
+
 ## API
 
 | Type/Function                   | Description                               |
@@ -70,6 +91,7 @@ assert!(groth16_verify(&proof).unwrap());
 | `groth16_prove_gci_threshold`   | Prove score >= threshold                  |
 | `groth16_verify`                | Verify Groth16 proofs                     |
 | `groth16_prove_asset_ownership` | Prove asset ownership via Merkle path     |
+| `groth16_prove_location_region` | Prove location within a region            |
 
 ## License
 

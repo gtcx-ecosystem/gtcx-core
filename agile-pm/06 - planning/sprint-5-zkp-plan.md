@@ -29,6 +29,8 @@
 - [x] ZKP-008: Add Groth16 circuit tests for proof generation + verification.
 - [x] ZKP-009: Implement Groth16 asset ownership circuit (Merkle membership) in `rust/gtcx-zkp`.
 - [x] ZKP-010: Add asset ownership circuit tests for proof generation + verification.
+- [x] ZKP-011: Implement Groth16 location region circuit in `rust/gtcx-zkp`.
+- [x] ZKP-012: Add location region circuit tests for proof generation + verification.
 
 ## Acceptance Criteria
 
