@@ -8,6 +8,7 @@ Engineering standards, setup guidance, CI/CD, and quality requirements.
 - `build-and-test.md`
 - `ci-cd.md`
 - `quality-standards.md`
+- `docs-stewardship.md`
 
 ## Supporting References
 
