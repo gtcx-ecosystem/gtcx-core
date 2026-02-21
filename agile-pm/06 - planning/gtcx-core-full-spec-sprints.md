@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Sprint Plan
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range; Schnorr identity attribute); Sprint 6 complete (secp256k1 interop)  
+**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 complete (P2P TCP + QUIC UAT complete); Sprint 5 in progress (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range; Schnorr identity attribute); Sprint 6 complete (secp256k1 interop)  
 **Scope**: Execution plan for full-spec delivery  
 **Objective**: Provide a robust, sprint-structured roadmap with dependencies and exit criteria.
 
@@ -69,7 +69,7 @@
 - Signed request UAT passes
 - mTLS handshake validated
 
-## Sprint 4: P2P Networking Transport (In Progress)
+## Sprint 4: P2P Networking Transport (Complete)
 
 **Goal**: libp2p transport with QUIC + gossipsub and secure discovery.  
 **Dependencies**: Network protocol spec.  
@@ -81,7 +81,7 @@
 - [x] Gossipsub topics + rate limits (libp2p adapter scaffold)
 - [x] Peer discovery and telemetry
 - [x] TCP libp2p mesh UAT evidence logged
-- [ ] QUIC mesh UAT evidence (pending)
+- [x] QUIC mesh UAT evidence
 
 **Exit Criteria**:
 

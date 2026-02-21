@@ -43,10 +43,10 @@
   - Status: ✅ Executed
   - Evidence: `GTCX_P2P_TRANSPORT=tcp pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
   - Result: `mesh publish + restart + ACL + rate limit` (2026-02-21)
-- libp2p/QUIC transport:
-  - Status: ⚠️ Blocked (QUIC transport)
-  - Evidence command (TCP UAT): `GTCX_P2P_TRANSPORT=tcp pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
-  - QUIC blocker: `outbound connection that skipped encryption must have a peer id` with libp2p-quic v1.1.8.
+- libp2p mesh demo (QUIC):
+  - Status: ✅ Executed
+  - Evidence: `GTCX_P2P_TRANSPORT=quic pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
+  - Result: `mesh publish + restart + ACL + rate limit` (2026-02-21)
 
 ## Sprint 5 — ZKP System
 
