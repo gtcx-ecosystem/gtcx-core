@@ -404,6 +404,9 @@ importers:
 
   packages/services:
     dependencies:
+      '@gtcx/crypto':
+        specifier: workspace:*
+        version: link:../crypto
       '@gtcx/domain':
         specifier: workspace:*
         version: link:../domain

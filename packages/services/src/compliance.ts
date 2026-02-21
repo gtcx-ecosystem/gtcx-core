@@ -17,6 +17,12 @@
 import { randomUUID } from 'node:crypto';
 
 import {
+  createHashCommitmentZkpEngine,
+  ZKProofSchema,
+  type ZKProof,
+  type ZkVerifier,
+} from '@gtcx/crypto';
+import {
   DomainEventFactory,
   nullEventEmitter,
   type IDomainEventEmitter,
@@ -87,12 +93,14 @@ export class UnifiedComplianceService {
   private eventFactory: DomainEventFactory;
   private config: ComplianceConfig;
   private frameworks: RegulatoryFramework[];
+  private zkpVerifier: ZkVerifier;
 
   constructor(
     dependencies: {
       storageService: IStorageService;
       cryptoService: ICryptoService;
       eventEmitter?: IDomainEventEmitter;
+      zkpVerifier?: ZkVerifier;
     },
     config: Partial<ComplianceConfig> = {}
   ) {
@@ -100,6 +108,7 @@ export class UnifiedComplianceService {
     this.cryptoService = dependencies.cryptoService;
     this.eventEmitter = dependencies.eventEmitter || nullEventEmitter;
     this.eventFactory = new DomainEventFactory();
+    this.zkpVerifier = dependencies.zkpVerifier ?? createHashCommitmentZkpEngine();
 
     // Validate config
     const configResult = safeParse(ComplianceConfigSchema, config);
@@ -189,6 +198,29 @@ export class UnifiedComplianceService {
         ],
         penalties: [{ violation: 'KYC failure', penalty: 'Investigation and sanctions' }],
         effectiveDate: '2024-01-01',
+        lastUpdated: new Date().toISOString().split('T')[0] ?? new Date().toISOString(),
+      },
+      {
+        code: 'ZKP-001',
+        title: 'Zero-Knowledge Proof Validation',
+        description: 'ZK proof verification for sensitive compliance assertions',
+        authority: 'compliance_authority',
+        category: 'operational',
+        jurisdiction: this.config.defaultJurisdiction,
+        requirements: [
+          {
+            id: 'ZKP-001-01',
+            code: 'ZKP-001-01',
+            title: 'Valid ZK Proof',
+            description: 'Zero-knowledge proof must verify against declared inputs',
+            mandatory: false,
+            applicableTo: ['producer', 'trader', 'exporter'],
+            verificationMethod: 'zk_proof_verification',
+            jurisdiction: this.config.defaultJurisdiction,
+          },
+        ],
+        penalties: [{ violation: 'Invalid proof submission', penalty: 'Manual review required' }],
+        effectiveDate: '2026-01-01',
         lastUpdated: new Date().toISOString().split('T')[0] ?? new Date().toISOString(),
       },
     ];
@@ -368,6 +400,43 @@ export class UnifiedComplianceService {
         );
       }
 
+      // Validate optional ZK proof (metadata.zkProof)
+      const zkProof = this.extractZkProof(assetLot.metadata);
+      if (zkProof) {
+        const isValid = await this.verifyZkProof(zkProof);
+        if (!isValid) {
+          const record = this.createComplianceRecord({
+            type: 'regulatory',
+            status: 'violation',
+            severity: 'high',
+            sourceApp: 'registration',
+            sourceEntityId: assetLot.id,
+            sourceEntityType: 'asset_lot',
+            regulationCode: 'ZKP-001',
+            description: 'Invalid zero-knowledge proof',
+            location: assetLot.discoveryLocation,
+            tags: ['zkp', 'proof', 'verification'],
+          });
+          records.push(record);
+          this.eventEmitter.emit(
+            this.eventFactory.compliance('compliance.zk_proof_invalid', {
+              recordId: record.id,
+              entityId: assetLot.id,
+              entityType: 'asset_lot',
+              proofType: zkProof.proofType,
+            })
+          );
+        } else {
+          this.eventEmitter.emit(
+            this.eventFactory.compliance('compliance.zk_proof_verified', {
+              entityId: assetLot.id,
+              entityType: 'asset_lot',
+              proofType: zkProof.proofType,
+            })
+          );
+        }
+      }
+
       // Emit completion event
       const violations = records.filter((r) => r.status === 'violation').length;
       const warnings = records.filter((r) => r.status === 'warning').length;
@@ -457,6 +526,42 @@ export class UnifiedComplianceService {
               description: 'High-value transaction requires enhanced KYC',
               location: transaction.location,
               tags: ['aml', 'kyc', 'high-value'],
+            })
+          );
+        }
+      }
+
+      const zkProof = this.extractZkProof(transaction.metadata);
+      if (zkProof) {
+        const isValid = await this.verifyZkProof(zkProof);
+        if (!isValid) {
+          const record = this.createComplianceRecord({
+            type: 'financial',
+            status: 'violation',
+            severity: 'high',
+            sourceApp: 'trading',
+            sourceEntityId: transaction.id,
+            sourceEntityType: 'transaction',
+            regulationCode: 'ZKP-001',
+            description: 'Invalid zero-knowledge proof',
+            location: transaction.location,
+            tags: ['zkp', 'proof', 'verification'],
+          });
+          records.push(record);
+          this.eventEmitter.emit(
+            this.eventFactory.compliance('compliance.zk_proof_invalid', {
+              recordId: record.id,
+              entityId: transaction.id,
+              entityType: 'transaction',
+              proofType: zkProof.proofType,
+            })
+          );
+        } else {
+          this.eventEmitter.emit(
+            this.eventFactory.compliance('compliance.zk_proof_verified', {
+              entityId: transaction.id,
+              entityType: 'transaction',
+              proofType: zkProof.proofType,
             })
           );
         }
@@ -585,6 +690,22 @@ export class UnifiedComplianceService {
   // ==========================================================================
   // HELPER METHODS
   // ==========================================================================
+
+  protected extractZkProof(metadata?: Record<string, unknown>): ZKProof | null {
+    if (!metadata) return null;
+    const candidate = metadata.zkProof ?? metadata.zk_proof;
+    if (!candidate) return null;
+    const parsed = ZKProofSchema.safeParse(candidate);
+    return parsed.success ? parsed.data : null;
+  }
+
+  protected async verifyZkProof(proof: ZKProof): Promise<boolean> {
+    try {
+      return await this.zkpVerifier.verify(proof);
+    } catch {
+      return false;
+    }
+  }
 
   protected createComplianceRecord(params: {
     type: string;

@@ -22,8 +22,8 @@
 - [x] ZKP-001: Add ZK proof schemas + engine interfaces in `@gtcx/crypto`.
 - [x] ZKP-002: Implement hash-commitment placeholder engine (generate/verify).
 - [x] ZKP-003: Add unit tests + docs for ZKP primitives.
-- [ ] ZKP-004: Wire verification hooks into compliance flows (accept/reject path).
-- [ ] ZKP-005: Define circuit selection + performance budgets (arkworks plan).
+- [x] ZKP-004: Wire verification hooks into compliance flows (accept/reject path).
+- [x] ZKP-005: Define circuit selection + performance budgets (arkworks plan).
 - [ ] ZKP-006: UAT evidence run and log entry (proof acceptance/rejection).
 
 ## Acceptance Criteria

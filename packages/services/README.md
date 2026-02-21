@@ -18,11 +18,11 @@ pnpm add @gtcx/services
 
 ## API
 
-| Export                        | Description           |
-| ----------------------------- | --------------------- |
-| `AssetLotRegistrationService` | Registration workflow |
-| `TradingService`              | Trade execution       |
-| `UnifiedComplianceService`    | Compliance checks     |
+| Export                        | Description                                               |
+| ----------------------------- | --------------------------------------------------------- |
+| `AssetLotRegistrationService` | Registration workflow                                     |
+| `TradingService`              | Trade execution                                           |
+| `UnifiedComplianceService`    | Compliance checks (includes optional ZK proof validation) |
 
 ## License
 

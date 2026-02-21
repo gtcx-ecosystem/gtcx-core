@@ -6,6 +6,7 @@
  * license validation, and dashboard retrieval.
  */
 
+import { createHashCommitmentZkpEngine, type ZkVerifier } from '@gtcx/crypto';
 import type {
   ICryptoService,
   IStorageService,
@@ -51,6 +52,7 @@ function createService(
     storageService?: IStorageService;
     cryptoService?: ICryptoService;
     eventEmitter?: ReturnType<typeof createMockEventEmitter>;
+    zkpVerifier?: ZkVerifier;
     config?: Record<string, unknown>;
   } = {}
 ) {
@@ -59,6 +61,7 @@ function createService(
       storageService: overrides.storageService ?? createMockStorageService(),
       cryptoService: overrides.cryptoService ?? createMockCryptoService(),
       eventEmitter: overrides.eventEmitter,
+      zkpVerifier: overrides.zkpVerifier,
     },
     overrides.config ?? {}
   );
@@ -301,6 +304,45 @@ describe('UnifiedComplianceService', () => {
       // Default checkProducerLicense and checkLocationCompliance return compliant
       // Asset lot has cryptoProof and certificateId
       expect(records).toHaveLength(0);
+    });
+
+    it('accepts a valid ZK proof in asset lot metadata', async () => {
+      const zkp = createHashCommitmentZkpEngine();
+      const proof = await zkp.generate({
+        system: 'bulletproofs',
+        proofType: 'gci_threshold',
+        publicInputs: ['threshold:50'],
+        witness: 'score:75',
+        verificationKeyId: 'bulletproofs-gci-v1',
+      });
+      const lot = createMockAssetLot({ metadata: { zkProof: proof } });
+      const service = createService({ zkpVerifier: zkp });
+
+      const records = await service.checkAssetLotCompliance(lot);
+
+      const zkRecord = records.find((r) => r.regulation.code === 'ZKP-001');
+      expect(zkRecord).toBeUndefined();
+    });
+
+    it('flags an invalid ZK proof in asset lot metadata', async () => {
+      const zkp = createHashCommitmentZkpEngine();
+      const proof = await zkp.generate({
+        system: 'bulletproofs',
+        proofType: 'gci_threshold',
+        publicInputs: ['threshold:50'],
+        witness: 'score:75',
+        verificationKeyId: 'bulletproofs-gci-v1',
+      });
+      const lot = createMockAssetLot({
+        metadata: { zkProof: { ...proof, proof: 'not-base64' } },
+      });
+      const service = createService({ zkpVerifier: zkp });
+
+      const records = await service.checkAssetLotCompliance(lot);
+
+      const zkRecord = records.find((r) => r.regulation.code === 'ZKP-001');
+      expect(zkRecord).toBeDefined();
+      expect(zkRecord!.status).toBe('violation');
     });
 
     it('detects missing cryptographic proof', async () => {

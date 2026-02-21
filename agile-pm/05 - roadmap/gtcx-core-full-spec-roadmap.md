@@ -105,7 +105,7 @@
 - Replace hash-commitment placeholders with real circuits.
 - Add proof generation/verification performance budgets.
 - Integrate proof verification into compliance workflows.
-- Progress: ZK schema + placeholder engine + unit tests in `@gtcx/crypto`.
+- Progress: ZK schema + placeholder engine + unit tests + compliance hooks + circuit plan.
 
 **Exit Criteria**
 

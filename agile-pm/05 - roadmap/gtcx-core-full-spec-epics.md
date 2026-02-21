@@ -179,8 +179,8 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 
 **Progress**:
 
-- Completed: ZK proof schema + placeholder engine + unit tests (TS).
-- Pending: real circuits, verification flow integration, UAT evidence.
+- Completed: ZK proof schema + placeholder engine + unit tests + compliance hooks + circuit plan (TS).
+- Pending: real circuits, UAT evidence.
 
 ### Feature 5.1: Compliance and Provenance Circuits
 
