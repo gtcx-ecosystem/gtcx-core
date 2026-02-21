@@ -8,6 +8,7 @@ build/
 *.tsbuildinfo
 docs/api/
 rust/target/
+*.node
 
 # Compiled output in source directories (should never be committed)
 packages/*/src/**/*.js
@@ -63,6 +64,7 @@ Thumbs.db
 artifacts/
 quality/api-surface-report.json
 benchmarks/performance-report.json
+packages/crypto-native/native/
 
 # Logs
 *.log
