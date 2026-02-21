@@ -19,9 +19,13 @@ Canonical documentation for gtcx-core. This index reflects the clean, enterprise
 - Operations index: `operations/README.md`
 - Reference index: `reference/index.md`
 
+## SOPs
+
+SOPs live in `SOPs/` and define the required documentation structure, standards, and templates.
+
 ## Legacy Sources (Temporary)
 
-Legacy docs remain as input sources while canonical docs are validated:
+Legacy docs remain as source material while canonical docs are validated:
 
 - `docs/packages/`
 - `docs/rust/`
@@ -29,4 +33,4 @@ Legacy docs remain as input sources while canonical docs are validated:
 - `docs/security/`
 - `docs/guides/`
 
-See `archive.md` for the fallback list.
+See `archive.md` and `reference/legacy-sources.md` for the consolidation map.

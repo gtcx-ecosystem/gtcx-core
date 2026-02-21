@@ -13,3 +13,7 @@ This index links to canonical documentation and data artifacts.
 
 - `quality/` — baselines and evidence inputs
 - `benchmarks/` — performance budgets and historical results
+
+## Legacy Map
+
+- `docs/reference/legacy-sources.md` — consolidation map and source list

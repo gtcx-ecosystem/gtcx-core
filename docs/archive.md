@@ -4,15 +4,15 @@ This file exists as a safety fallback while the canonical doc set is being valid
 
 ## Legacy Sources (Do Not Delete Yet)
 
-These folders/files remain as source material until the new canonical docs are fully approved:
+See `docs/reference/legacy-sources.md` for the active consolidation map.
 
-- `docs/architecture/*.md` (legacy deep dives)
-- `docs/specs/*.md` (detailed specifications)
-- `docs/packages/*.md` (package docs)
+These sources remain until the canonical docs are fully reviewed:
+
+- `docs/architecture/*.md`
+- `docs/specs/*.md`
+- `docs/packages/*.md`
 - `docs/rust/*`
 - `docs/security/*`
 - `docs/quality/*`
 - `docs/guides/*`
 - `docs/operations/*` (legacy runbooks)
-
-Once the canonical docs are accepted, these sources can be consolidated or removed.
