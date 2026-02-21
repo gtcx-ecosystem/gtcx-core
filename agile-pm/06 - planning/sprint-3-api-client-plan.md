@@ -1,8 +1,8 @@
 # Sprint 3 Plan: API Client Enterprise Hardening
 
-**Updated**: 2026-02-20  
+**Updated**: 2026-02-21  
 **Sprint Goal**: Add signing, mTLS, and structured error taxonomy to the API client.  
-**Status**: In progress  
+**Status**: Complete  
 **Epic**: Sprint 3 in `agile-pm/05 - roadmap/gtcx-core-full-spec-epics.md`
 
 ## Scope
@@ -24,7 +24,7 @@
 - [x] API-003: Implement structured error taxonomy + classes.
 - [x] API-004: Update README and package docs.
 - [x] API-005: Add tests for signing and error classification.
-- [ ] API-006: UAT evidence run and log entry (mTLS pending; sandbox cannot bind).
+- [x] API-006: UAT evidence run and log entry (mTLS evidence executed).
 
 ## Acceptance Criteria
 

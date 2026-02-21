@@ -1,6 +1,6 @@
 # Sprint 4 Plan: P2P Networking Transport
 
-**Updated**: 2026-02-20  
+**Updated**: 2026-02-21  
 **Sprint Goal**: Establish P2P transport primitives and adapter model.  
 **Status**: In progress  
 **Epic**: Sprint 4 in `agile-pm/05 - roadmap/gtcx-core-full-spec-epics.md`
@@ -24,7 +24,7 @@
 - [x] P2P-003: Implement publish/subscribe + rate limiting.
 - [x] P2P-004: Add tests for delivery, rate limiting, node drop/recovery.
 - [x] P2P-005: Add libp2p/QUIC adapter (scaffolded).
-- [ ] P2P-006: UAT evidence run and log entry (libp2p runtime via `pnpm network:mesh:demo`).
+- [x] P2P-006: UAT evidence run and log entry (libp2p runtime via `pnpm network:mesh:demo` on TCP).
 
 ## Acceptance Criteria
 

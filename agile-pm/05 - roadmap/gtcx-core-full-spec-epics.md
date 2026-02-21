@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Epics and Sprints
 
-**Updated**: 2026-02-20  
-**Status**: Sprint 2 complete; Sprint 3 in progress (API client hardening); Sprint 4 in progress (P2P scaffolding)  
+**Updated**: 2026-02-21  
+**Status**: Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending)  
 **Scope**: gtcx-core full-spec delivery, phased into execution sprints  
 **Objective**: Complete full protocol implementation with enterprise and government-grade readiness.
 **Source of truth**: `agile-pm/06 - planning/gtcx-core-full-spec-sprints.md`
@@ -17,7 +17,7 @@ Goal: DID resolution with caching, revocation checks, and resolver adapters.
 **Sprint 2: Offline Sync Engine** — Complete  
 Goal: Deterministic offline-first sync with conflict resolution.
 
-**Sprint 3: API Client Enterprise Hardening** — In Progress  
+**Sprint 3: API Client Enterprise Hardening** — Complete  
 Goal: Secure, resilient integration client with signing and mTLS support.
 
 **Sprint 4: P2P Networking Transport** — In Progress  
@@ -156,8 +156,8 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 
 **Progress**:
 
-- Completed: P2P adapter + in-memory transport scaffolding with tests; libp2p adapter scaffold.
-- Pending: libp2p runtime validation + UAT.
+- Completed: P2P adapter + in-memory transport scaffolding with tests; libp2p adapter scaffold; TCP mesh demo UAT.
+- Pending: libp2p QUIC runtime validation + UAT.
 
 ### Feature 4.1: libp2p Transport
 

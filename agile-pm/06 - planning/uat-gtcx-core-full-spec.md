@@ -1,6 +1,6 @@
 # GTCX Core Full-Spec UAT Plan
 
-**Updated**: 2026-02-20  
+**Updated**: 2026-02-21  
 **Scope**: gtcx-core full-spec implementation sprints  
 **Objective**: Validate end-to-end readiness for enterprise and government-grade deployment.
 
@@ -47,8 +47,7 @@
 
 - [x] Signed request header injection test (`packages/api-client/tests/api-client.test.ts`)
 - [x] Auth error classification test (`packages/api-client/tests/api-client.test.ts`)
-- [ ] mTLS handshake validation evidence (node)
-  - Note: requires unrestricted node environment (local sandbox blocks bind).
+- [x] mTLS handshake validation evidence (`pnpm --filter @gtcx/api-client test -- -t "mTLS"`)
 
 ## Sprint 4: P2P Networking Transport
 
@@ -59,6 +58,7 @@
 ### Sprint 4 Evidence
 
 - [x] In-memory mesh delivery + rate limit tests (`packages/network/tests/network.test.ts`)
+- [x] libp2p TCP mesh evidence (`GTCX_P2P_TRANSPORT=tcp pnpm --filter @gtcx/network build && pnpm network:mesh:demo`)
 - [ ] libp2p/QUIC mesh evidence (pending)
 
 ## Sprint 5: ZKP System

@@ -1,6 +1,6 @@
 # UAT Evidence Log — GTCX Core Full-Spec
 
-**Updated**: 2026-02-20  
+**Updated**: 2026-02-21  
 **Purpose**: Capture sprint-level UAT evidence artifacts and links.
 
 ## Sprint 2 — Offline Sync Engine
@@ -29,8 +29,9 @@
   - Evidence: `pnpm --filter @gtcx/api-client test`
   - Result: `10 passed` (2026-02-20 21:48)
 - mTLS handshake verification:
-  - Status: ⏳ Pending evidence run (node env)
-  - Note: Sandbox blocks `https.createServer` bind (EPERM). Run in unrestricted node env.
+  - Status: ✅ Implemented + executed
+  - Evidence: `pnpm --filter @gtcx/api-client test -- -t "mTLS"`
+  - Result: `1 passed` (2026-02-21 14:06)
 
 ## Sprint 4 — P2P Networking Transport
 
@@ -38,6 +39,10 @@
   - Status: ✅ Implemented + executed
   - Evidence: `pnpm --filter @gtcx/network test`
   - Result: `7 passed` (2026-02-20 22:27)
+- libp2p mesh demo (TCP):
+  - Status: ✅ Executed
+  - Evidence: `GTCX_P2P_TRANSPORT=tcp pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
+  - Result: `mesh publish + restart + ACL + rate limit` (2026-02-21)
 - libp2p/QUIC transport:
   - Status: ⚠️ Blocked (QUIC transport)
   - Evidence command (TCP UAT): `GTCX_P2P_TRANSPORT=tcp pnpm --filter @gtcx/network build && pnpm network:mesh:demo`

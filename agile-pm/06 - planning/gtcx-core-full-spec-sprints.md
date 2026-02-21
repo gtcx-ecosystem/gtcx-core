@@ -62,7 +62,7 @@
 - [x] Request signing hooks
 - [x] mTLS support for node deployments
 - [x] Structured error taxonomy
-- [ ] UAT evidence logged
+- [x] UAT evidence logged
 
 **Exit Criteria**:
 
@@ -80,6 +80,8 @@
 - [x] QUIC transport + Noise handshake (libp2p adapter scaffold)
 - [x] Gossipsub topics + rate limits (libp2p adapter scaffold)
 - [x] Peer discovery and telemetry
+- [x] TCP libp2p mesh UAT evidence logged
+- [ ] QUIC mesh UAT evidence (pending)
 
 **Exit Criteria**:
 
