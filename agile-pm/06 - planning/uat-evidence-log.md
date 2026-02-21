@@ -65,11 +65,11 @@
 - Groth16 asset ownership proof (Rust, heavy):
   - Status: ✅ Executed
   - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`
-  - Result: `2 passed (asset ownership + location region Groth16 proofs), 169s` (2026-02-21)
+  - Result: `2 passed (asset ownership + location region Groth16 proofs), 164.33s` (2026-02-21)
 - Groth16 location region proof (Rust, heavy):
   - Status: ✅ Executed
   - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`
-  - Result: `2 passed (asset ownership + location region Groth16 proofs), 169s` (2026-02-21)
+  - Result: `2 passed (asset ownership + location region Groth16 proofs), 164.33s` (2026-02-21)
 
 ## Sprint 6 — secp256k1 Interop
 

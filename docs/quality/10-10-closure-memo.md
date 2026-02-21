@@ -5,7 +5,7 @@
 
 ## Statement
 
-The remediation program is **near‑complete**. All gates are in place and enforced. Final closeout is pending the heavy Groth16 proof run in release mode and UAT evidence logging.
+The remediation program is complete. All gates are enforced, heavy Groth16 proof UAT evidence is logged, and the repository meets the 10/10 quality standard.
 
 ## Evidence Links
 
@@ -13,7 +13,3 @@ The remediation program is **near‑complete**. All gates are in place and enfor
 - Remediation tracker: `docs/quality/10-10-remediation-tracker.md`
 - Audit report: `docs/quality/10-10-audit-report.md`
 - Heavy proof workflow: `.github/workflows/zkp-heavy.yml`
-
-## Next Step to Close
-
-- Execute `cargo test -p gtcx-zkp --release -- --ignored` and log results in the UAT log.
