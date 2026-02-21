@@ -3,7 +3,7 @@
 Zero-Knowledge Proof system for privacy-preserving verification.
 Hash-commitment proofs remain available for lightweight flows, and the first
 arkworks Groth16 circuits (GCI threshold, asset ownership, location region) plus a
-Bulletproofs amount range proof are now implemented.
+Bulletproofs amount range proof and Schnorr identity attribute proofs are now implemented.
 
 ## Usage
 
@@ -88,22 +88,34 @@ let proof = bulletproofs_prove_amount_range(55, 10, 100, [7u8; 32]).unwrap();
 assert!(bulletproofs_verify_amount_range(&proof).unwrap());
 ```
 
+### Schnorr (Identity Attribute)
+
+```rust
+use gtcx_zkp::{schnorr_prove_identity_attribute, schnorr_verify_identity_attribute};
+
+let subject_hash = [3u8; 32];
+let proof = schnorr_prove_identity_attribute(b"citizenship:GTX", subject_hash).unwrap();
+assert!(schnorr_verify_identity_attribute(&proof).unwrap());
+```
+
 ## API
 
-| Type/Function                      | Description                               |
-| ---------------------------------- | ----------------------------------------- |
-| `CircuitType`                      | Compliance, Provenance, Quality, Identity |
-| `Witness`                          | Private inputs for proof generation       |
-| `Proof`                            | Generated proof with serialization        |
-| `generate_proof(witness)`          | Create a ZK proof                         |
-| `verify_proof(proof)`              | Verify a proof                            |
-| `groth16_generate_keys`            | Generate Groth16 keypairs                 |
-| `groth16_prove_gci_threshold`      | Prove score >= threshold                  |
-| `groth16_verify`                   | Verify Groth16 proofs                     |
-| `groth16_prove_asset_ownership`    | Prove asset ownership via Merkle path     |
-| `groth16_prove_location_region`    | Prove location within a region            |
-| `bulletproofs_prove_amount_range`  | Prove amount within [min, max]            |
-| `bulletproofs_verify_amount_range` | Verify amount range proof                 |
+| Type/Function                       | Description                               |
+| ----------------------------------- | ----------------------------------------- |
+| `CircuitType`                       | Compliance, Provenance, Quality, Identity |
+| `Witness`                           | Private inputs for proof generation       |
+| `Proof`                             | Generated proof with serialization        |
+| `generate_proof(witness)`           | Create a ZK proof                         |
+| `verify_proof(proof)`               | Verify a proof                            |
+| `groth16_generate_keys`             | Generate Groth16 keypairs                 |
+| `groth16_prove_gci_threshold`       | Prove score >= threshold                  |
+| `groth16_verify`                    | Verify Groth16 proofs                     |
+| `groth16_prove_asset_ownership`     | Prove asset ownership via Merkle path     |
+| `groth16_prove_location_region`     | Prove location within a region            |
+| `bulletproofs_prove_amount_range`   | Prove amount within [min, max]            |
+| `bulletproofs_verify_amount_range`  | Verify amount range proof                 |
+| `schnorr_prove_identity_attribute`  | Prove identity attribute possession       |
+| `schnorr_verify_identity_attribute` | Verify identity attribute proof           |
 
 ## License
 

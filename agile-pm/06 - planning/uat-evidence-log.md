@@ -54,10 +54,10 @@
   - Status: ✅ Implemented + executed
   - Evidence: `node tools/uat/zkp-uat.mjs`
   - Result: `valid proof violations 0; invalid proof violations 1` (2026-02-21 15:12)
-- Groth16 + Bulletproofs circuit tests (Rust: GCI threshold, asset ownership, location region, amount range):
+- Groth16 + Bulletproofs + Schnorr circuit tests (Rust: GCI threshold, asset ownership, location region, amount range, identity attribute):
   - Status: ✅ Implemented + executed
   - Evidence: `cargo test -p gtcx-zkp`
-  - Result: `35 passed, 2 ignored (asset ownership + location region Groth16 proofs)` (2026-02-21)
+  - Result: `38 passed, 2 ignored (asset ownership + location region Groth16 proofs)` (2026-02-21)
 - Groth16 asset ownership proof (Rust, heavy):
   - Status: ⚠️ Ignored in default test run (heavy Groth16 proof generation)
   - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`

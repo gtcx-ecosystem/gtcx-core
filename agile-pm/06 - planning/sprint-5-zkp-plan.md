@@ -33,6 +33,8 @@
 - [x] ZKP-012: Add location region circuit tests for proof generation + verification.
 - [x] ZKP-013: Implement Bulletproofs amount range circuit in `rust/gtcx-zkp`.
 - [x] ZKP-014: Add amount range circuit tests for proof generation + verification.
+- [x] ZKP-015: Implement Schnorr identity attribute proof in `rust/gtcx-zkp`.
+- [x] ZKP-016: Add identity attribute proof tests for proof generation + verification.
 
 ## Acceptance Criteria
 
