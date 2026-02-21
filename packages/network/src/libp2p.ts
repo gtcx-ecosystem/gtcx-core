@@ -1,5 +1,12 @@
 import { ConfigurationError, TransportError } from './errors';
-import type { MessageEnvelope, PeerId, PeerInfo, Topic, TransportAdapter } from './types';
+import type {
+  MessageEnvelope,
+  PeerId,
+  PeerInfo,
+  Topic,
+  TransportAdapter,
+  P2PTransportKind,
+} from './types';
 
 export interface Libp2pTransportConfig {
   listenAddresses?: string[];
@@ -7,6 +14,7 @@ export interface Libp2pTransportConfig {
   topics?: Topic[];
   allowPublishToZeroPeers?: boolean;
   enableMdns?: boolean;
+  transport?: P2PTransportKind;
 }
 
 interface Libp2pRuntime {
@@ -41,23 +49,30 @@ function resolveFactory<T = unknown>(module: unknown, name: string): FactoryFn<T
 
 async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime> {
   try {
-    const [libp2pModule, quicModule, noiseModule, gossipsubModule, identifyModule] =
-      await Promise.all([
-        import('libp2p'),
-        import('@chainsafe/libp2p-quic'),
-        import('@chainsafe/libp2p-noise'),
-        import('@chainsafe/libp2p-gossipsub'),
-        import('@libp2p/identify'),
-      ]);
+    const [libp2pModule, noiseModule, gossipsubModule, identifyModule] = await Promise.all([
+      import('libp2p'),
+      import('@chainsafe/libp2p-noise'),
+      import('@chainsafe/libp2p-gossipsub'),
+      import('@libp2p/identify'),
+    ]);
+
+    const transportKind: P2PTransportKind = config.transport ?? 'tcp';
+    const transportModule =
+      transportKind === 'tcp'
+        ? await import('@libp2p/tcp')
+        : await import('@chainsafe/libp2p-quic');
 
     const createLibp2p = resolveFactory<Promise<Libp2pRuntime['node']>>(
       libp2pModule,
       'createLibp2p'
     );
-    const quic = resolveFactory(quicModule, 'quic');
     const noise = resolveFactory(noiseModule, 'noise');
     const gossipsub = resolveFactory(gossipsubModule, 'gossipsub');
     const identify = resolveFactory(identifyModule, 'identify');
+    const transportFactory =
+      transportKind === 'tcp'
+        ? resolveFactory(transportModule, 'tcp')
+        : resolveFactory(transportModule, 'quic');
 
     const peerDiscovery: unknown[] = [];
     if (config.bootstrap && config.bootstrap.length > 0) {
@@ -111,7 +126,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
 
     const node = await createLibp2p({
       addresses: listenAddresses ? { listen: listenAddresses as any[] } : undefined,
-      transports: [quic()],
+      transports: [transportFactory()],
       connectionEncrypters: [noise()],
       peerDiscovery: peerDiscovery.length > 0 ? (peerDiscovery as unknown as any[]) : undefined,
       services: {
@@ -130,7 +145,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     const err = error as Error & { code?: string };
     const isMissingDep = err?.code === 'ERR_MODULE_NOT_FOUND';
     const message = isMissingDep
-      ? 'libp2p dependencies are missing. Install libp2p, @chainsafe/libp2p-quic, @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
+      ? 'libp2p dependencies are missing. Install libp2p, @libp2p/tcp (or @chainsafe/libp2p-quic), @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
       : `libp2p init failed: ${err?.message ?? String(error)}`;
     throw new ConfigurationError(message);
   }

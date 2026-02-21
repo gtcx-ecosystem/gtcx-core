@@ -39,6 +39,6 @@
   - Evidence: `pnpm --filter @gtcx/network test`
   - Result: `7 passed` (2026-02-20 22:27)
 - libp2p/QUIC transport:
-  - Status: ⏳ Pending runtime evidence
-  - Evidence command: `pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
-  - Last attempt: 2026-02-20 — blocked by npm registry DNS (ENOTFOUND) while installing libp2p deps.
+  - Status: ⚠️ Blocked (QUIC transport)
+  - Evidence command (TCP UAT): `GTCX_P2P_TRANSPORT=tcp pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
+  - QUIC blocker: `outbound connection that skipped encryption must have a peer id` with libp2p-quic v1.1.8.

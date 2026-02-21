@@ -15,7 +15,12 @@ const run = async () => {
   }
 
   const { createP2PNode, Libp2pTransport } = network;
-  const listenAddress = process.env.GTCX_P2P_LISTEN ?? '/ip4/127.0.0.1/udp/0/quic-v1';
+  const transportKind = process.env.GTCX_P2P_TRANSPORT ?? 'tcp';
+  const listenAddress =
+    process.env.GTCX_P2P_LISTEN ??
+    (transportKind === 'quic'
+      ? '/ip4/127.0.0.1/udp/0/quic-v1'
+      : '/ip4/127.0.0.1/tcp/0');
   let listenAddresses;
   if (listenAddress) {
     try {
@@ -39,6 +44,7 @@ const run = async () => {
       topics: ['gtcx.mesh'],
       enableMdns: true,
       allowPublishToZeroPeers: true,
+      transport: transportKind,
     });
     const nodeA = createP2PNode(
       { nodeId: 'validator-a', topics: ['gtcx.mesh'], rateLimitPerMinute: 10 },
@@ -77,6 +83,7 @@ const run = async () => {
       enableMdns: true,
       allowPublishToZeroPeers: true,
       bootstrap,
+      transport: transportKind,
     });
     const transportC = new Libp2pTransport({
       listenAddresses,
@@ -84,6 +91,7 @@ const run = async () => {
       enableMdns: true,
       allowPublishToZeroPeers: true,
       bootstrap,
+      transport: transportKind,
     });
 
     const nodeB = createP2PNode({ nodeId: 'validator-b', topics: ['gtcx.mesh'] }, transportB);
@@ -186,7 +194,7 @@ const run = async () => {
   } catch (error) {
     console.error('Failed to run mesh demo:', error?.message ?? error);
     console.error(
-      'Ensure libp2p deps are installed: pnpm add libp2p @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns @libp2p/identify'
+      'Ensure libp2p deps are installed: pnpm add libp2p @libp2p/tcp @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns @libp2p/identify'
     );
     process.exit(1);
   }
