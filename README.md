@@ -23,27 +23,28 @@ For a step-by-step integration walkthrough, see [First Integration Tutorial](./d
 
 ## Packages
 
-### TypeScript (17 packages)
+### TypeScript (18 packages)
 
-| Package                                         | Description                                                                            |
-| ----------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [`@gtcx/types`](./packages/types)               | Core type definitions for the GTCX ecosystem                                           |
-| [`@gtcx/schemas`](./packages/schemas)           | Core12 compliance verification schemas                                                 |
-| [`@gtcx/crypto`](./packages/crypto)             | Cryptographic primitives — key generation, signing, hashing, Merkle trees, commitments |
-| [`@gtcx/domain`](./packages/domain)             | Commodity-agnostic domain services with DI, offline queues, and observability          |
-| [`@gtcx/utils`](./packages/utils)               | Common utilities for GTCX applications                                                 |
-| [`@gtcx/identity`](./packages/identity)         | DID creation, credential management, key lifecycle, identity resolution                |
-| [`@gtcx/security`](./packages/security)         | Auth, validation, offline credential management, audit logging                         |
-| [`@gtcx/verification`](./packages/verification) | Certificate generation, QR codes, proof bundles, and verification proofs               |
-| [`@gtcx/events`](./packages/events)             | Type-safe event bus with offline buffering                                             |
-| [`@gtcx/services`](./packages/services)         | Registration, trading, and compliance business services                                |
-| [`@gtcx/workproof`](./packages/workproof)       | TradeCV/WorkProof v2.1 — W3C VC-based work attestations, 40 predicates, AI validation  |
-| [`@gtcx/ai`](./packages/ai)                     | AI integration hooks and tracing utilities                                             |
-| [`@gtcx/api-client`](./packages/api-client)     | Resilient HTTP client with retry, circuit breakers, and offline queue                  |
-| [`@gtcx/connectivity`](./packages/connectivity) | Network connectivity detection and profiling for offline-first apps                    |
-| [`@gtcx/logging`](./packages/logging)           | Structured logging for GTCX services                                                   |
-| [`@gtcx/sync`](./packages/sync)                 | Offline-first sync engine with conflict resolution strategies                          |
-| [`@gtcx/config`](./packages/config)             | Shared build configuration (tsup presets)                                              |
+| Package                                           | Description                                                                            |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [`@gtcx/types`](./packages/types)                 | Core type definitions for the GTCX ecosystem                                           |
+| [`@gtcx/schemas`](./packages/schemas)             | Core12 compliance verification schemas                                                 |
+| [`@gtcx/crypto`](./packages/crypto)               | Cryptographic primitives — key generation, signing, hashing, Merkle trees, commitments |
+| [`@gtcx/crypto-native`](./packages/crypto-native) | Native crypto bindings loader (NAPI-RS)                                                |
+| [`@gtcx/domain`](./packages/domain)               | Commodity-agnostic domain services with DI, offline queues, and observability          |
+| [`@gtcx/utils`](./packages/utils)                 | Common utilities for GTCX applications                                                 |
+| [`@gtcx/identity`](./packages/identity)           | DID creation, credential management, key lifecycle, identity resolution                |
+| [`@gtcx/security`](./packages/security)           | Auth, validation, offline credential management, audit logging                         |
+| [`@gtcx/verification`](./packages/verification)   | Certificate generation, QR codes, proof bundles, and verification proofs               |
+| [`@gtcx/events`](./packages/events)               | Type-safe event bus with offline buffering                                             |
+| [`@gtcx/services`](./packages/services)           | Registration, trading, and compliance business services                                |
+| [`@gtcx/workproof`](./packages/workproof)         | TradeCV/WorkProof v2.1 — W3C VC-based work attestations, 40 predicates, AI validation  |
+| [`@gtcx/ai`](./packages/ai)                       | AI integration hooks and tracing utilities                                             |
+| [`@gtcx/api-client`](./packages/api-client)       | Resilient HTTP client with retry, circuit breakers, and offline queue                  |
+| [`@gtcx/connectivity`](./packages/connectivity)   | Network connectivity detection and profiling for offline-first apps                    |
+| [`@gtcx/logging`](./packages/logging)             | Structured logging for GTCX services                                                   |
+| [`@gtcx/sync`](./packages/sync)                   | Offline-first sync engine with conflict resolution strategies                          |
+| [`@gtcx/config`](./packages/config)               | Shared build configuration (tsup presets)                                              |
 
 ### Rust (6 crates)
 
@@ -64,6 +65,7 @@ gtcx-core/
 │   ├── types/              #   Core types and protocol definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives
+│   ├── crypto-native/      #   Native bindings loader
 │   ├── domain/             #   Domain services
 │   ├── identity/           #   DID and credential management
 │   ├── security/           #   Auth, validation, audit

@@ -7,7 +7,9 @@ import { timingSafeEqual } from 'crypto';
 
 import { sha256 } from '@noble/hashes/sha256';
 import { sha512 } from '@noble/hashes/sha512';
-import { bytesToHex } from '@noble/hashes/utils';
+import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
+
+import { getNativeCrypto } from './native-loader';
 
 /**
  * Constant-time string comparison to prevent timing attacks.
@@ -29,6 +31,10 @@ export type HashAlgorithm = 'sha256' | 'sha512';
  */
 export function hash256(data: string | Uint8Array): string {
   const bytes = typeof data === 'string' ? new TextEncoder().encode(data) : data;
+  const native = getNativeCrypto();
+  if (native) {
+    return native.sha256(bytes);
+  }
   return bytesToHex(sha256(bytes));
 }
 
@@ -37,6 +43,10 @@ export function hash256(data: string | Uint8Array): string {
  */
 export function hash512(data: string | Uint8Array): string {
   const bytes = typeof data === 'string' ? new TextEncoder().encode(data) : data;
+  const native = getNativeCrypto();
+  if (native) {
+    return native.sha512(bytes);
+  }
   return bytesToHex(sha512(bytes));
 }
 
@@ -85,7 +95,13 @@ export function hashObject(obj: unknown): string {
  * Double hash (hash of hash) - common in blockchain
  */
 export function doubleHash256(data: string | Uint8Array): string {
-  const firstHash = sha256(typeof data === 'string' ? new TextEncoder().encode(data) : data);
+  const bytes = typeof data === 'string' ? new TextEncoder().encode(data) : data;
+  const native = getNativeCrypto();
+  if (native) {
+    const first = native.sha256(bytes);
+    return native.sha256(hexToBytes(first));
+  }
+  const firstHash = sha256(bytes);
   return bytesToHex(sha256(firstHash));
 }
 

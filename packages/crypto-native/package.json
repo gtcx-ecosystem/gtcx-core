@@ -1,6 +1,7 @@
 {
-  "name": "@gtcx/crypto",
-  "version": "1.0.0",
+  "name": "@gtcx/crypto-native",
+  "version": "0.1.0",
+  "description": "Native NAPI bindings loader for GTCX cryptographic operations",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -14,39 +15,18 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-    "test": "vitest run --passWithNoTests",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "build:native": "node scripts/build-native.mjs",
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "test": "vitest run --passWithNoTests"
   },
-  "dependencies": {
-    "@noble/curves": "^1.4.0",
-    "@noble/hashes": "^1.4.0",
-    "zod": "^3.23.0"
-  },
-  "optionalDependencies": {
-    "@gtcx/crypto-native": "workspace:*"
-  },
-  "peerDependencies": {
-    "@gtcx/ai": "workspace:*",
-    "@gtcx/types": "workspace:*"
-  },
-  "peerDependenciesMeta": {
-    "@gtcx/ai": {
-      "optional": true
-    },
-    "@gtcx/types": {
-      "optional": true
-    }
-  },
+  "dependencies": {},
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",
     "@gtcx/typescript-config": "workspace:*",
+    "@vitest/coverage-v8": "^2.1.0",
     "tsup": "^8.0.1",
     "typescript": "^5.7.0",
-    "@vitest/coverage-v8": "^2.1.0",
     "vitest": "^2.1.0"
   },
   "publishConfig": {
@@ -56,15 +36,16 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
-    "directory": "packages/crypto"
+    "directory": "packages/crypto-native"
   },
   "license": "MIT",
-  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/crypto#readme",
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/crypto-native#readme",
   "bugs": {
     "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
   },
   "files": [
     "dist",
+    "native",
     "README.md",
     "CHANGELOG.md"
   ],

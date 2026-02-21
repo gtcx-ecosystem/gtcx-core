@@ -7,6 +7,7 @@ import { ed25519 } from '@noble/curves/ed25519';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 
 import { deepSortKeys } from './hashing';
+import { getNativeCrypto } from './native-loader';
 
 export interface SignatureResult {
   signature: string;
@@ -32,8 +33,13 @@ export function secureWipe(buffer: Uint8Array): void {
  * Sign a message with Ed25519
  */
 export function sign(message: string | Uint8Array, privateKeyHex: string): string {
-  const privateKey = hexToBytes(privateKeyHex);
   const messageBytes = typeof message === 'string' ? new TextEncoder().encode(message) : message;
+  const native = getNativeCrypto();
+  if (native) {
+    return native.sign(messageBytes, privateKeyHex);
+  }
+
+  const privateKey = hexToBytes(privateKeyHex);
 
   try {
     const signature = ed25519.sign(messageBytes, privateKey);
@@ -47,8 +53,13 @@ export function sign(message: string | Uint8Array, privateKeyHex: string): strin
  * Sign a hash directly
  */
 export function signHash(hash: string, privateKeyHex: string): string {
-  const privateKey = hexToBytes(privateKeyHex);
   const hashBytes = hexToBytes(hash);
+  const native = getNativeCrypto();
+  if (native) {
+    return native.sign(hashBytes, privateKeyHex);
+  }
+
+  const privateKey = hexToBytes(privateKeyHex);
 
   try {
     const signature = ed25519.sign(hashBytes, privateKey);
@@ -67,9 +78,14 @@ export function verify(
   publicKeyHex: string
 ): boolean {
   try {
+    const messageBytes = typeof message === 'string' ? new TextEncoder().encode(message) : message;
+    const native = getNativeCrypto();
+    if (native) {
+      return native.verify(signatureHex, messageBytes, publicKeyHex);
+    }
+
     const signature = hexToBytes(signatureHex);
     const publicKey = hexToBytes(publicKeyHex);
-    const messageBytes = typeof message === 'string' ? new TextEncoder().encode(message) : message;
 
     return ed25519.verify(signature, messageBytes, publicKey);
   } catch {
@@ -83,6 +99,11 @@ export function verify(
 export function verifyHash(hashHex: string, signatureHex: string, publicKeyHex: string): boolean {
   try {
     const hash = hexToBytes(hashHex);
+    const native = getNativeCrypto();
+    if (native) {
+      return native.verify(signatureHex, hash, publicKeyHex);
+    }
+
     const signature = hexToBytes(signatureHex);
     const publicKey = hexToBytes(publicKeyHex);
 

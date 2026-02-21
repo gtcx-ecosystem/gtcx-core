@@ -87,3 +87,9 @@ export {
   tracedCompressPublicKey,
   logKeyEvent,
 } from './traced-keys';
+
+// ============================================================================
+// BACKEND SELECTION
+// ============================================================================
+
+export { getBackend } from './native-loader';

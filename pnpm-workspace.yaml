@@ -6,6 +6,7 @@ packages:
 
   # Cryptographic and security primitives
   - 'packages/crypto'
+  - 'packages/crypto-native'
   - 'packages/security'
   - 'packages/identity'
   - 'packages/verification'

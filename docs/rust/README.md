@@ -11,7 +11,7 @@ Performance-critical and security-critical infrastructure for GTCX Protocol. The
 | `gtcx-consensus` | PANX weighted PBFT consensus                                   | Planned        |
 | `gtcx-network`   | P2P networking (libp2p)                                        | Planned        |
 | `gtcx-edge`      | Edge/WASM runtime for offline verification                     | Planned        |
-| `gtcx-node`      | Node.js NAPI-RS bindings                                       | Planned        |
+| `gtcx-node`      | Node.js NAPI-RS bindings                                       | In Development |
 
 ## Architecture
 

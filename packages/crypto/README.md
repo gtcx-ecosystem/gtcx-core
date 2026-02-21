@@ -19,6 +19,23 @@ console.log(verify('hello', sig, kp.publicKey)); // true
 console.log(hash256('data')); // hex string
 ```
 
+## Native Backend (Optional)
+
+`@gtcx/crypto` will attempt to load native bindings from `@gtcx/crypto-native` at runtime.
+If unavailable, it falls back to pure TypeScript implementations (ADR-009).
+
+```typescript
+import { getBackend } from '@gtcx/crypto';
+
+console.log(getBackend()); // 'native' | 'js'
+```
+
+To enforce native bindings in production, set:
+
+```
+GTCX_REQUIRE_NATIVE=1
+```
+
 ## API
 
 | Export                                      | Description               |
@@ -36,6 +53,7 @@ console.log(hash256('data')); // hex string
 | `verifyMerkleProof(proof)`                  | Verify Merkle inclusion   |
 | `ZKProofSchema`                             | ZK proof schema (Zod)     |
 | `HashCommitmentZkpEngine`                   | Placeholder ZK engine     |
+| `getBackend()`                              | Active crypto backend     |
 
 ## ZKP (Placeholder)
 

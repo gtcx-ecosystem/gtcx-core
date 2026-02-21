@@ -7,6 +7,8 @@ import { ed25519 } from '@noble/curves/ed25519';
 import { secp256k1 } from '@noble/curves/secp256k1';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 
+import { getNativeCrypto } from './native-loader';
+
 export type KeyAlgorithm = 'Ed25519' | 'Secp256k1';
 
 export interface KeyPairResult {
@@ -38,6 +40,16 @@ export function generateKeyPair(algorithm: KeyAlgorithm = 'Ed25519'): KeyPairRes
   }
 
   // Default: Ed25519
+  const native = getNativeCrypto();
+  if (native) {
+    const nativePair = native.generateKeyPair();
+    return {
+      publicKey: nativePair.publicKey,
+      privateKey: nativePair.privateKey,
+      algorithm: 'Ed25519',
+    };
+  }
+
   const privateKey = ed25519.utils.randomPrivateKey();
   const publicKey = ed25519.getPublicKey(privateKey);
 
