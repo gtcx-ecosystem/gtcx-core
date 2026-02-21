@@ -112,7 +112,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     const node = await createLibp2p({
       addresses: listenAddresses ? { listen: listenAddresses as any[] } : undefined,
       transports: [quic()],
-      connectionEncryption: [noise()],
+      connectionEncrypters: [noise()],
       peerDiscovery: peerDiscovery.length > 0 ? (peerDiscovery as unknown as any[]) : undefined,
       services: {
         identify: identify(),
