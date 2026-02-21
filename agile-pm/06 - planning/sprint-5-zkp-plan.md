@@ -27,6 +27,8 @@
 - [x] ZKP-006: UAT evidence run and log entry (proof acceptance/rejection).
 - [x] ZKP-007: Implement Groth16 GCI threshold circuit in `rust/gtcx-zkp`.
 - [x] ZKP-008: Add Groth16 circuit tests for proof generation + verification.
+- [x] ZKP-009: Implement Groth16 asset ownership circuit (Merkle membership) in `rust/gtcx-zkp`.
+- [x] ZKP-010: Add asset ownership circuit tests for proof generation + verification.
 
 ## Acceptance Criteria
 

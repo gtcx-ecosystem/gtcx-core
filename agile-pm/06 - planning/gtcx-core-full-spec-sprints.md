@@ -99,6 +99,7 @@
 - Verification hooks into compliance flows
 - Circuit selection + performance budgets
 - Rust Groth16 GCI threshold circuit (initial real backend)
+- Rust Groth16 asset ownership circuit (Merkle membership)
 
 **Exit Criteria**:
 

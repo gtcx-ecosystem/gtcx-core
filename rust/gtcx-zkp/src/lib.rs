@@ -22,12 +22,20 @@
 #![deny(missing_docs)]
 
 use ark_bn254::{Bn254, Fr};
+use ark_crypto_primitives::crh::sha256::constraints::{DigestVar, Sha256Gadget, UnitVar};
+use ark_crypto_primitives::crh::sha256::Sha256;
+use ark_crypto_primitives::crh::{CRHScheme, CRHSchemeGadget, TwoToOneCRHScheme};
+use ark_crypto_primitives::merkle_tree::constraints::{
+    BytesVarDigestConverter, ConfigGadget, PathVar,
+};
+use ark_crypto_primitives::merkle_tree::{Config, DigestConverter, MerkleTree, Path};
 use ark_ff::Field;
 use ark_groth16::{Groth16, Proof as Groth16Proof, ProvingKey, VerifyingKey};
 use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
 use ark_r1cs_std::alloc::AllocVar;
 use ark_r1cs_std::boolean::Boolean;
 use ark_r1cs_std::eq::EqGadget;
+use ark_r1cs_std::uint8::UInt8;
 use ark_r1cs_std::uint64::UInt64;
 use ark_serialize::{CanonicalDeserialize, CanonicalSerialize};
 use ark_snark::SNARK;
@@ -111,6 +119,15 @@ pub type Result<T> = std::result::Result<T, ZkpError>;
 
 /// Maximum witness size in bytes (1 MB).
 pub const MAX_WITNESS_SIZE: usize = 1_048_576;
+
+/// Fixed digest size for SHA-256 outputs.
+pub const DIGEST_BYTES: usize = 32;
+/// Asset identifier size (bytes).
+pub const ASSET_ID_BYTES: usize = 32;
+/// Owner hash size (bytes).
+pub const OWNER_HASH_BYTES: usize = 32;
+/// Randomness size (bytes) for commitments.
+pub const RANDOMNESS_BYTES: usize = 32;
 
 /// The type of circuit used for proof generation.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -286,6 +303,8 @@ impl Proof {
 pub enum Groth16CircuitType {
     /// Prove that a GCI score is greater than or equal to a public threshold.
     GciThreshold,
+    /// Prove asset ownership via Merkle membership.
+    AssetOwnership,
 }
 
 /// Groth16 proving/verifying keys (serialized).
@@ -312,10 +331,67 @@ pub struct Groth16ProofBundle {
     pub public_inputs: Vec<Fr>,
 }
 
+/// Public inputs for the asset ownership circuit.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct AssetOwnershipPublicInputs {
+    /// Commitment to the asset id (SHA-256 of asset id + randomness).
+    pub asset_commitment: [u8; DIGEST_BYTES],
+    /// Owner public key hash.
+    pub owner_hash: [u8; DIGEST_BYTES],
+    /// Merkle root of the ownership tree.
+    pub ownership_root: [u8; DIGEST_BYTES],
+}
+
 #[derive(Clone)]
 struct GciThresholdCircuit {
     score: Option<u64>,
     threshold: Option<u64>,
+}
+
+/// Merkle tree configuration for asset ownership proofs (SHA-256).
+pub struct AssetOwnershipMerkleConfig;
+
+/// Digest converter for asset ownership Merkle trees (raw bytes passthrough).
+pub struct AssetOwnershipDigestConverter;
+
+impl DigestConverter<Vec<u8>, [u8]> for AssetOwnershipDigestConverter {
+    type TargetType = Vec<u8>;
+
+    fn convert(item: Vec<u8>) -> std::result::Result<Self::TargetType, ark_crypto_primitives::Error> {
+        Ok(item)
+    }
+}
+
+impl Config for AssetOwnershipMerkleConfig {
+    type Leaf = [u8];
+    type LeafDigest = <Sha256 as CRHScheme>::Output;
+    type LeafInnerDigestConverter = AssetOwnershipDigestConverter;
+    type InnerDigest = <Sha256 as TwoToOneCRHScheme>::Output;
+    type LeafHash = Sha256;
+    type TwoToOneHash = Sha256;
+}
+
+struct AssetOwnershipMerkleConfigGadget;
+
+impl ConfigGadget<AssetOwnershipMerkleConfig, Fr> for AssetOwnershipMerkleConfigGadget {
+    type Leaf = [UInt8<Fr>];
+    type LeafDigest = DigestVar<Fr>;
+    type LeafInnerConverter = BytesVarDigestConverter<Self::LeafDigest, Fr>;
+    type InnerDigest = DigestVar<Fr>;
+    type LeafHash = Sha256Gadget<Fr>;
+    type TwoToOneHash = Sha256Gadget<Fr>;
+}
+
+type AssetOwnershipMerkleTree = MerkleTree<AssetOwnershipMerkleConfig>;
+
+#[derive(Clone)]
+struct AssetOwnershipCircuit {
+    asset_id: Option<[u8; ASSET_ID_BYTES]>,
+    asset_commitment: Option<[u8; DIGEST_BYTES]>,
+    owner_hash: Option<[u8; OWNER_HASH_BYTES]>,
+    randomness: Option<[u8; RANDOMNESS_BYTES]>,
+    ownership_root: Option<[u8; DIGEST_BYTES]>,
+    merkle_path: Option<Path<AssetOwnershipMerkleConfig>>,
 }
 
 fn uint64_is_ge<F: Field>(
@@ -355,6 +431,66 @@ impl ConstraintSynthesizer<Fr> for GciThresholdCircuit {
     }
 }
 
+impl ConstraintSynthesizer<Fr> for AssetOwnershipCircuit {
+    fn generate_constraints(self, cs: ConstraintSystemRef<Fr>) -> std::result::Result<(), SynthesisError> {
+        let asset_commitment = DigestVar::new_input(cs.clone(), || {
+            self.asset_commitment
+                .map(|v| v.to_vec())
+                .ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let owner_hash = DigestVar::new_input(cs.clone(), || {
+            self.owner_hash
+                .map(|v| v.to_vec())
+                .ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let ownership_root = DigestVar::new_input(cs.clone(), || {
+            self.ownership_root
+                .map(|v| v.to_vec())
+                .ok_or(SynthesisError::AssignmentMissing)
+        })?;
+
+        let asset_id_bytes: Vec<UInt8<Fr>> = (0..ASSET_ID_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.asset_id
+                        .map(|v| v[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+
+        let randomness_bytes: Vec<UInt8<Fr>> = (0..RANDOMNESS_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.randomness
+                        .map(|v| v[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+
+        let unit = UnitVar::new_constant(cs.clone(), ())?;
+        let mut commitment_input = Vec::with_capacity(ASSET_ID_BYTES + RANDOMNESS_BYTES);
+        commitment_input.extend_from_slice(&asset_id_bytes);
+        commitment_input.extend_from_slice(&randomness_bytes);
+        let computed_commitment =
+            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &commitment_input)?;
+        computed_commitment.enforce_equal(&asset_commitment)?;
+
+        let mut leaf_bytes = Vec::with_capacity(ASSET_ID_BYTES + OWNER_HASH_BYTES);
+        leaf_bytes.extend_from_slice(&asset_id_bytes);
+        leaf_bytes.extend_from_slice(&owner_hash.0);
+
+        let path = PathVar::<AssetOwnershipMerkleConfig, Fr, AssetOwnershipMerkleConfigGadget>::new_witness(
+            cs.clone(),
+            || self.merkle_path.ok_or(SynthesisError::AssignmentMissing),
+        )?;
+        let is_member = path.verify_membership(&unit, &unit, &ownership_root, leaf_bytes.as_slice())?;
+        is_member.enforce_equal(&Boolean::constant(true))?;
+        Ok(())
+    }
+}
+
 fn serialize<T: CanonicalSerialize>(value: &T) -> Result<Vec<u8>> {
     let mut bytes = Vec::new();
     value
@@ -388,6 +524,101 @@ fn u64_to_fr_bits(value: u64) -> Vec<Fr> {
         .collect()
 }
 
+fn bytes_to_fr_bits(bytes: &[u8]) -> Vec<Fr> {
+    let mut bits = Vec::with_capacity(bytes.len() * 8);
+    for byte in bytes {
+        for i in 0..8 {
+            bits.push(Fr::from(((byte >> i) & 1) as u64));
+        }
+    }
+    bits
+}
+
+fn vec_to_digest(bytes: Vec<u8>) -> Result<[u8; DIGEST_BYTES]> {
+    if bytes.len() != DIGEST_BYTES {
+        return Err(ZkpError::InvalidWitness {
+            reason: format!("digest length {} != {}", bytes.len(), DIGEST_BYTES),
+        });
+    }
+    let mut digest = [0u8; DIGEST_BYTES];
+    digest.copy_from_slice(&bytes);
+    Ok(digest)
+}
+
+fn sha256_digest(data: &[u8]) -> [u8; DIGEST_BYTES] {
+    let digest = <Sha256 as CRHScheme>::evaluate(&(), data).expect("sha256 evaluation");
+    let mut out = [0u8; DIGEST_BYTES];
+    out.copy_from_slice(&digest);
+    out
+}
+
+struct AssetOwnershipSample {
+    asset_id: [u8; ASSET_ID_BYTES],
+    owner_hash: [u8; OWNER_HASH_BYTES],
+    randomness: [u8; RANDOMNESS_BYTES],
+    ownership_root: [u8; DIGEST_BYTES],
+    merkle_path: Path<AssetOwnershipMerkleConfig>,
+    asset_commitment: [u8; DIGEST_BYTES],
+}
+
+fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
+    let asset_id = [1u8; ASSET_ID_BYTES];
+    let owner_hash = sha256_digest(b"owner-1");
+    let randomness = [7u8; RANDOMNESS_BYTES];
+
+    let mut commitment_input = Vec::with_capacity(ASSET_ID_BYTES + RANDOMNESS_BYTES);
+    commitment_input.extend_from_slice(&asset_id);
+    commitment_input.extend_from_slice(&randomness);
+    let asset_commitment = sha256_digest(&commitment_input);
+
+    let make_leaf = |asset: [u8; ASSET_ID_BYTES], owner: [u8; OWNER_HASH_BYTES]| {
+        let mut leaf = Vec::with_capacity(ASSET_ID_BYTES + OWNER_HASH_BYTES);
+        leaf.extend_from_slice(&asset);
+        leaf.extend_from_slice(&owner);
+        leaf
+    };
+
+    let leaves = vec![
+        make_leaf(asset_id, owner_hash),
+        make_leaf([2u8; ASSET_ID_BYTES], sha256_digest(b"owner-2")),
+        make_leaf([3u8; ASSET_ID_BYTES], sha256_digest(b"owner-3")),
+        make_leaf([4u8; ASSET_ID_BYTES], sha256_digest(b"owner-4")),
+    ];
+
+    let mut rng = zk_rng();
+    let leaf_params = <Sha256 as CRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
+    let two_to_one_params =
+        <Sha256 as TwoToOneCRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
+    let tree = AssetOwnershipMerkleTree::new(
+        &leaf_params,
+        &two_to_one_params,
+        leaves.iter().map(|leaf| leaf.as_slice()),
+    )
+    .map_err(map_proof_system_error)?;
+    let ownership_root = vec_to_digest(tree.root())?;
+    let merkle_path = tree.generate_proof(0).map_err(map_proof_system_error)?;
+
+    let leaf = make_leaf(asset_id, owner_hash);
+    let root_vec = tree.root();
+    let is_member = merkle_path
+        .verify(&leaf_params, &two_to_one_params, &root_vec, leaf.as_slice())
+        .map_err(map_proof_system_error)?;
+    if !is_member {
+        return Err(ZkpError::InvalidWitness {
+            reason: "sample merkle path verification failed".to_string(),
+        });
+    }
+
+    Ok(AssetOwnershipSample {
+        asset_id,
+        owner_hash,
+        randomness,
+        ownership_root,
+        merkle_path,
+        asset_commitment,
+    })
+}
+
 /// Generate Groth16 proving and verifying keys for a circuit.
 ///
 /// For now, only `GciThreshold` is supported.
@@ -404,6 +635,25 @@ pub fn groth16_generate_keys(circuit: Groth16CircuitType) -> Result<Groth16Keys>
                 Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng).map_err(map_proof_system_error)?;
             Ok(Groth16Keys {
                 circuit: Groth16CircuitType::GciThreshold,
+                proving_key: serialize(&pk)?,
+                verifying_key: serialize(&vk)?,
+            })
+        }
+        Groth16CircuitType::AssetOwnership => {
+            let mut rng = zk_rng();
+            let sample = sample_asset_ownership()?;
+            let circuit_impl = AssetOwnershipCircuit {
+                asset_id: Some(sample.asset_id),
+                asset_commitment: Some(sample.asset_commitment),
+                owner_hash: Some(sample.owner_hash),
+                randomness: Some(sample.randomness),
+                ownership_root: Some(sample.ownership_root),
+                merkle_path: Some(sample.merkle_path),
+            };
+            let (pk, vk) =
+                Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng).map_err(map_proof_system_error)?;
+            Ok(Groth16Keys {
+                circuit: Groth16CircuitType::AssetOwnership,
                 proving_key: serialize(&pk)?,
                 verifying_key: serialize(&vk)?,
             })
@@ -444,11 +694,72 @@ pub fn groth16_prove_gci_threshold(
     })
 }
 
+/// Generate a Groth16 proof for the asset ownership circuit.
+#[instrument]
+pub fn groth16_prove_asset_ownership(
+    asset_id: [u8; ASSET_ID_BYTES],
+    owner_hash: [u8; OWNER_HASH_BYTES],
+    randomness: [u8; RANDOMNESS_BYTES],
+    ownership_root: [u8; DIGEST_BYTES],
+    merkle_path: Path<AssetOwnershipMerkleConfig>,
+    keys: &Groth16Keys,
+) -> Result<(Groth16ProofBundle, AssetOwnershipPublicInputs)> {
+    if keys.circuit != Groth16CircuitType::AssetOwnership {
+        return Err(ZkpError::UnsupportedCircuit(format!("{:?}", keys.circuit)));
+    }
+
+    let mut commitment_input = Vec::with_capacity(ASSET_ID_BYTES + RANDOMNESS_BYTES);
+    commitment_input.extend_from_slice(&asset_id);
+    commitment_input.extend_from_slice(&randomness);
+    let asset_commitment = sha256_digest(&commitment_input);
+
+    let pk: ProvingKey<Bn254> = deserialize(&keys.proving_key)?;
+    let mut rng = zk_rng();
+    let circuit = AssetOwnershipCircuit {
+        asset_id: Some(asset_id),
+        asset_commitment: Some(asset_commitment),
+        owner_hash: Some(owner_hash),
+        randomness: Some(randomness),
+        ownership_root: Some(ownership_root),
+        merkle_path: Some(merkle_path),
+    };
+    let proof = Groth16::<Bn254>::prove(&pk, circuit, &mut rng).map_err(map_proof_system_error)?;
+
+    let mut public_inputs = Vec::new();
+    public_inputs.extend(bytes_to_fr_bits(&asset_commitment));
+    public_inputs.extend(bytes_to_fr_bits(&owner_hash));
+    public_inputs.extend(bytes_to_fr_bits(&ownership_root));
+
+    let inputs = AssetOwnershipPublicInputs {
+        asset_commitment,
+        owner_hash,
+        ownership_root,
+    };
+
+    Ok((
+        Groth16ProofBundle {
+            circuit: Groth16CircuitType::AssetOwnership,
+            proof: serialize(&proof)?,
+            verifying_key: keys.verifying_key.clone(),
+            public_inputs,
+        },
+        inputs,
+    ))
+}
+
 /// Verify a Groth16 proof bundle.
 #[instrument(skip_all, fields(circuit = ?bundle.circuit))]
 pub fn groth16_verify(bundle: &Groth16ProofBundle) -> Result<bool> {
     match bundle.circuit {
         Groth16CircuitType::GciThreshold => {
+            let proof: Groth16Proof<Bn254> = deserialize(&bundle.proof)?;
+            let vk: VerifyingKey<Bn254> = deserialize(&bundle.verifying_key)?;
+            let pvk =
+                Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;
+            Groth16::<Bn254>::verify_with_processed_vk(&pvk, &bundle.public_inputs, &proof)
+                .map_err(map_proof_system_error)
+        }
+        Groth16CircuitType::AssetOwnership => {
             let proof: Groth16Proof<Bn254> = deserialize(&bundle.proof)?;
             let vk: VerifyingKey<Bn254> = deserialize(&bundle.verifying_key)?;
             let pvk =
@@ -908,6 +1219,49 @@ mod tests {
         let keys = groth16_generate_keys(Groth16CircuitType::GciThreshold).unwrap();
         let mut proof = groth16_prove_gci_threshold(95, 80, &keys).unwrap();
         proof.public_inputs[0] = Fr::from(1u64);
+        assert!(!groth16_verify(&proof).unwrap());
+    }
+
+    #[test]
+    fn test_asset_ownership_constraints_satisfied() {
+        use ark_relations::r1cs::ConstraintSystem;
+
+        let sample = sample_asset_ownership().unwrap();
+        let circuit = AssetOwnershipCircuit {
+            asset_id: Some(sample.asset_id),
+            asset_commitment: Some(sample.asset_commitment),
+            owner_hash: Some(sample.owner_hash),
+            randomness: Some(sample.randomness),
+            ownership_root: Some(sample.ownership_root),
+            merkle_path: Some(sample.merkle_path),
+        };
+        let cs = ConstraintSystem::<Fr>::new_ref();
+        circuit.generate_constraints(cs.clone()).unwrap();
+        if !cs.is_satisfied().unwrap() {
+            let unsatisfied = cs.which_is_unsatisfied().unwrap();
+            panic!("constraints unsatisfied: {:?}", unsatisfied);
+        }
+    }
+
+    #[test]
+    #[ignore = "Groth16 proof generation is heavy; run explicitly for UAT evidence"]
+    fn test_groth16_asset_ownership_proof_and_tamper() {
+        let keys = groth16_generate_keys(Groth16CircuitType::AssetOwnership).unwrap();
+        let sample = sample_asset_ownership().unwrap();
+        let (mut proof, inputs) = groth16_prove_asset_ownership(
+            sample.asset_id,
+            sample.owner_hash,
+            sample.randomness,
+            sample.ownership_root,
+            sample.merkle_path,
+            &keys,
+        )
+        .unwrap();
+        assert_eq!(inputs.ownership_root, sample.ownership_root);
+        assert!(groth16_verify(&proof).unwrap());
+
+        let root_start = DIGEST_BYTES * 8 * 2; // after commitment + owner hash
+        proof.public_inputs[root_start] = Fr::from(1u64) - proof.public_inputs[root_start];
         assert!(!groth16_verify(&proof).unwrap());
     }
 }

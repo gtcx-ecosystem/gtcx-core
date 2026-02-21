@@ -57,7 +57,11 @@
 - Groth16 GCI threshold circuit tests (Rust):
   - Status: ✅ Implemented + executed
   - Evidence: `cargo test -p gtcx-zkp`
-  - Result: `30 passed` (2026-02-21)
+  - Result: `31 passed, 1 ignored (asset ownership Groth16 proof)` (2026-02-21)
+- Groth16 asset ownership proof (Rust, heavy):
+  - Status: ⚠️ Ignored in default test run (heavy Groth16 proof generation)
+  - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`
+  - Result: `run on demand in high-resource environment`
 
 ## Sprint 6 — secp256k1 Interop
 

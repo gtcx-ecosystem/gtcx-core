@@ -77,7 +77,7 @@ Performance-critical cryptographic operations are implemented in Rust and expose
 
 Six Rust crates compose the foundation: `gtcx-crypto` (signing and hashing), `gtcx-zkp` (Schnorr proofs, Bulletproofs, Groth16), `gtcx-consensus` (PBFT engine), `gtcx-network` (libp2p mesh), `gtcx-edge` (edge device runtime), and `gtcx-node` (full validator). TypeScript packages fall back to pure-JS implementations when native bindings are unavailable.
 
-**Maturity note**: TypeScript ZKP flows still use hash-commitment placeholders, while `rust/gtcx-zkp` now includes a Groth16 GCI threshold circuit as the first real backend. NAPI wiring is pending. libp2p transport is scaffolded in TypeScript with runtime validation pending (see `packages/network/src/libp2p.ts`). The ZKP performance numbers are targets for the planned circuit backend, not current measurements. Circuit selection and performance budgets are defined in `docs/architecture/zkp-circuit-plan.md`.
+**Maturity note**: TypeScript ZKP flows still use hash-commitment placeholders, while `rust/gtcx-zkp` now includes Groth16 GCI threshold and asset ownership circuits as the first real backends. NAPI wiring is pending. libp2p transport is scaffolded in TypeScript with runtime validation pending (see `packages/network/src/libp2p.ts`). The ZKP performance numbers are targets for the planned circuit backend, not current measurements. Circuit selection and performance budgets are defined in `docs/architecture/zkp-circuit-plan.md`.
 
 For algorithm selection rationale and blockchain-alternative analysis, see [Crypto Research](./crypto-research.md). For the signing and proof model, see [Cryptographic Verification](./cryptographic-verification.md).
 
