@@ -33,4 +33,9 @@ curve25519-dalek = { workspace = true }
 merlin = { workspace = true }
 
 [dev-dependencies]
+criterion = { workspace = true }
 serde_json = { workspace = true }
+
+[[bench]]
+name = "zkp"
+harness = false

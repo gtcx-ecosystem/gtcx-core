@@ -1,6 +1,6 @@
 # Spec-to-Code Traceability Matrix (gtcx-core)
 
-**Updated**: 2026-02-20  
+**Updated**: 2026-02-21  
 **Scope**: `docs/specs/*` mapped to `packages/*` and `rust/*`
 
 ## Summary by Spec
@@ -73,7 +73,7 @@
 
 **Gap**
 
-- libp2p/QUIC/gossipsub adapter scaffolded; runtime validation pending.
+- libp2p/QUIC/gossipsub transport validated; peer discovery + serialization/compression gaps remain.
 
 **Status**: Partial
 
@@ -94,16 +94,16 @@ Operational controls depend on deployment policies and infra.
 
 ## Known Full-Spec Gaps (Cross-Cutting)
 
-| Capability       | Current Status              | Location                              | Notes                                      |
-| ---------------- | --------------------------- | ------------------------------------- | ------------------------------------------ |
-| API Client       | Implemented                 | `packages/api-client/src/index.ts`    | Retry + timeout + signing + mTLS + errors  |
-| Sync Engine      | Implemented                 | `packages/sync/src/index.ts`          | Deterministic conflict resolution          |
-| AI Tracing       | No-op stub                  | `packages/ai/src/index.ts`            | Integration lives in `gtcx-intelligence`   |
-| DID Resolution   | Implemented                 | `packages/identity/src/resolver.ts`   | Requires deployment-specific backends      |
-| ZKP System       | Hash-commitment placeholder | `rust/gtcx-zkp/src/**`                | Real circuits planned                      |
-| P2P Transport    | Partial                     | `packages/network/src/**`             | libp2p adapter scaffolded; runtime pending |
-| Rust secp256k1   | TODO                        | `rust/gtcx-crypto/src/signing/mod.rs` | Ed25519 only                               |
-| TS native crypto | Not wired                   | `rust/gtcx-node/src/**`               | No TS bridge in `@gtcx/crypto`             |
+| Capability       | Current Status     | Location                                    | Notes                                               |
+| ---------------- | ------------------ | ------------------------------------------- | --------------------------------------------------- |
+| API Client       | Implemented        | `packages/api-client/src/index.ts`          | Retry + timeout + signing + mTLS + errors           |
+| Sync Engine      | Implemented        | `packages/sync/src/index.ts`                | Deterministic conflict resolution                   |
+| AI Tracing       | No-op stub         | `packages/ai/src/index.ts`                  | Integration lives in `gtcx-intelligence`            |
+| DID Resolution   | Implemented        | `packages/identity/src/resolver.ts`         | Requires deployment-specific backends               |
+| ZKP System       | Implemented (Rust) | `rust/gtcx-zkp/src/**`                      | Groth16 + Bulletproofs + Schnorr; TS bridge pending |
+| P2P Transport    | Partial            | `packages/network/src/**`                   | TCP+QUIC UAT complete; discovery/serialization gaps |
+| Rust secp256k1   | Implemented        | `rust/gtcx-crypto/src/signing/secp256k1.rs` | Interop tests complete                              |
+| TS native crypto | Not wired          | `rust/gtcx-node/src/**`                     | No TS bridge in `@gtcx/crypto`                      |
 
 ## Next Actions (Phase 0)
 

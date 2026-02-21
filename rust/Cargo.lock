@@ -895,6 +895,7 @@ dependencies = [
  "ark-snark",
  "ark-std",
  "bulletproofs",
+ "criterion",
  "curve25519-dalek",
  "gtcx-crypto",
  "merlin",

@@ -7,7 +7,13 @@
     "ed25519.roundtrip_us": "microseconds",
     "hash.sha256_256b_ns": "nanoseconds",
     "hash.sha512_256b_ns": "nanoseconds",
-    "hash.blake3_256b_ns": "nanoseconds"
+    "hash.blake3_256b_ns": "nanoseconds",
+    "zkp.groth16_gci_prove_ms": "milliseconds",
+    "zkp.groth16_gci_verify_ms": "milliseconds",
+    "zkp.bulletproofs_amount_range_prove_ms": "milliseconds",
+    "zkp.bulletproofs_amount_range_verify_ms": "milliseconds",
+    "zkp.schnorr_identity_prove_ms": "milliseconds",
+    "zkp.schnorr_identity_verify_ms": "milliseconds"
   },
   "metrics": {
     "ed25519.key_generation_us": 48,
@@ -16,7 +22,13 @@
     "ed25519.roundtrip_us": 90,
     "hash.sha256_256b_ns": 1815,
     "hash.sha512_256b_ns": 1866,
-    "hash.blake3_256b_ns": 520
+    "hash.blake3_256b_ns": 520,
+    "zkp.groth16_gci_prove_ms": 5000,
+    "zkp.groth16_gci_verify_ms": 100,
+    "zkp.bulletproofs_amount_range_prove_ms": 2000,
+    "zkp.bulletproofs_amount_range_verify_ms": 50,
+    "zkp.schnorr_identity_prove_ms": 200,
+    "zkp.schnorr_identity_verify_ms": 20
   },
   "trend": {
     "windowSize": 5,

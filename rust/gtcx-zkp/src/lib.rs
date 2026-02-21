@@ -283,7 +283,9 @@ impl Proof {
         let mut commitment = [0u8; 32];
         commitment.copy_from_slice(&bytes[1..33]);
 
-        let proof_len = u32::from_le_bytes(bytes[33..37].try_into().expect("4 bytes")) as usize;
+        let mut len_bytes = [0u8; 4];
+        len_bytes.copy_from_slice(&bytes[33..37]);
+        let proof_len = u32::from_le_bytes(len_bytes) as usize;
 
         if bytes.len() < 37 + proof_len {
             return Err(ZkpError::InvalidProofFormat {
@@ -726,11 +728,13 @@ fn vec_to_digest(bytes: Vec<u8>) -> Result<[u8; DIGEST_BYTES]> {
     Ok(digest)
 }
 
-fn sha256_digest(data: &[u8]) -> [u8; DIGEST_BYTES] {
-    let digest = <Sha256 as CRHScheme>::evaluate(&(), data).expect("sha256 evaluation");
+fn sha256_digest(data: &[u8]) -> Result<[u8; DIGEST_BYTES]> {
+    let digest = <Sha256 as CRHScheme>::evaluate(&(), data).map_err(|_| ZkpError::ProofSystemError {
+        reason: "sha256 evaluation failed".to_string(),
+    })?;
     let mut out = [0u8; DIGEST_BYTES];
     out.copy_from_slice(&digest);
-    out
+    Ok(out)
 }
 
 struct AssetOwnershipSample {
@@ -754,13 +758,13 @@ struct LocationRegionSample {
 
 fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
     let asset_id = [1u8; ASSET_ID_BYTES];
-    let owner_hash = sha256_digest(b"owner-1");
+    let owner_hash = sha256_digest(b"owner-1")?;
     let randomness = [7u8; RANDOMNESS_BYTES];
 
     let mut commitment_input = Vec::with_capacity(ASSET_ID_BYTES + RANDOMNESS_BYTES);
     commitment_input.extend_from_slice(&asset_id);
     commitment_input.extend_from_slice(&randomness);
-    let asset_commitment = sha256_digest(&commitment_input);
+    let asset_commitment = sha256_digest(&commitment_input)?;
 
     let make_leaf = |asset: [u8; ASSET_ID_BYTES], owner: [u8; OWNER_HASH_BYTES]| {
         let mut leaf = Vec::with_capacity(ASSET_ID_BYTES + OWNER_HASH_BYTES);
@@ -771,9 +775,9 @@ fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
 
     let leaves = vec![
         make_leaf(asset_id, owner_hash),
-        make_leaf([2u8; ASSET_ID_BYTES], sha256_digest(b"owner-2")),
-        make_leaf([3u8; ASSET_ID_BYTES], sha256_digest(b"owner-3")),
-        make_leaf([4u8; ASSET_ID_BYTES], sha256_digest(b"owner-4")),
+        make_leaf([2u8; ASSET_ID_BYTES], sha256_digest(b"owner-2")?),
+        make_leaf([3u8; ASSET_ID_BYTES], sha256_digest(b"owner-3")?),
+        make_leaf([4u8; ASSET_ID_BYTES], sha256_digest(b"owner-4")?),
     ];
 
     let mut rng = zk_rng();
@@ -821,14 +825,14 @@ fn sample_location_region() -> Result<LocationRegionSample> {
     for bound in bounds {
         region_input.extend_from_slice(&u64_to_le_bytes(bound));
     }
-    let region_hash = sha256_digest(&region_input);
+    let region_hash = sha256_digest(&region_input)?;
 
     let mut location_input = Vec::with_capacity(U64_BYTES * 3 + RANDOMNESS_BYTES);
     location_input.extend_from_slice(&u64_to_le_bytes(lat));
     location_input.extend_from_slice(&u64_to_le_bytes(lon));
     location_input.extend_from_slice(&u64_to_le_bytes(timestamp));
     location_input.extend_from_slice(&randomness);
-    let location_commitment = sha256_digest(&location_input);
+    let location_commitment = sha256_digest(&location_input)?;
 
     Ok(LocationRegionSample {
         lat,
@@ -953,7 +957,7 @@ pub fn groth16_prove_asset_ownership(
     let mut commitment_input = Vec::with_capacity(ASSET_ID_BYTES + RANDOMNESS_BYTES);
     commitment_input.extend_from_slice(&asset_id);
     commitment_input.extend_from_slice(&randomness);
-    let asset_commitment = sha256_digest(&commitment_input);
+    let asset_commitment = sha256_digest(&commitment_input)?;
 
     let pk: ProvingKey<Bn254> = deserialize(&keys.proving_key)?;
     let mut rng = zk_rng();
@@ -1012,14 +1016,14 @@ pub fn groth16_prove_location_region(
     for bound in bounds {
         region_input.extend_from_slice(&u64_to_le_bytes(bound));
     }
-    let region_hash = sha256_digest(&region_input);
+    let region_hash = sha256_digest(&region_input)?;
 
     let mut location_input = Vec::with_capacity(U64_BYTES * 3 + RANDOMNESS_BYTES);
     location_input.extend_from_slice(&u64_to_le_bytes(lat));
     location_input.extend_from_slice(&u64_to_le_bytes(lon));
     location_input.extend_from_slice(&u64_to_le_bytes(timestamp));
     location_input.extend_from_slice(&randomness);
-    let location_commitment = sha256_digest(&location_input);
+    let location_commitment = sha256_digest(&location_input)?;
 
     let pk: ProvingKey<Bn254> = deserialize(&keys.proving_key)?;
     let mut rng = zk_rng();

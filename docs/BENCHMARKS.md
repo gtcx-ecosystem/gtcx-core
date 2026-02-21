@@ -45,6 +45,7 @@ pnpm bench
 # Specific benchmark
 cd rust && cargo bench --bench signing
 cd rust && cargo bench --bench hashing
+cd rust && cargo bench -p gtcx-zkp --bench zkp
 ```
 
 Results are saved to `rust/target/criterion/` with HTML reports at `rust/target/criterion/report/index.html`.
@@ -56,6 +57,12 @@ Performance budgets are tracked in:
 - `benchmarks/performance-budgets.json`
 - `benchmarks/latest-results.json`
 - `benchmarks/history.json`
+
+ZKP benchmarks are captured from `gtcx-zkp` with metrics:
+
+- `zkp.groth16_gci_prove_ms` / `zkp.groth16_gci_verify_ms`
+- `zkp.bulletproofs_amount_range_prove_ms` / `zkp.bulletproofs_amount_range_verify_ms`
+- `zkp.schnorr_identity_prove_ms` / `zkp.schnorr_identity_verify_ms`
 
 CI updates history and validates budget/trend policy:
 

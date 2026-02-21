@@ -46,6 +46,36 @@ const metricSpecs = [
     estimatesPath: 'hash_comparison_256b/blake3/new/estimates.json',
     normalize: (ns) => ns,
   },
+  {
+    key: 'zkp.groth16_gci_prove_ms',
+    estimatesPath: 'zkp_groth16_gci_prove/new/estimates.json',
+    normalize: (ns) => ns / 1_000_000,
+  },
+  {
+    key: 'zkp.groth16_gci_verify_ms',
+    estimatesPath: 'zkp_groth16_gci_verify/new/estimates.json',
+    normalize: (ns) => ns / 1_000_000,
+  },
+  {
+    key: 'zkp.bulletproofs_amount_range_prove_ms',
+    estimatesPath: 'zkp_bulletproofs_amount_range_prove/new/estimates.json',
+    normalize: (ns) => ns / 1_000_000,
+  },
+  {
+    key: 'zkp.bulletproofs_amount_range_verify_ms',
+    estimatesPath: 'zkp_bulletproofs_amount_range_verify/new/estimates.json',
+    normalize: (ns) => ns / 1_000_000,
+  },
+  {
+    key: 'zkp.schnorr_identity_prove_ms',
+    estimatesPath: 'zkp_schnorr_identity_prove/new/estimates.json',
+    normalize: (ns) => ns / 1_000_000,
+  },
+  {
+    key: 'zkp.schnorr_identity_verify_ms',
+    estimatesPath: 'zkp_schnorr_identity_verify/new/estimates.json',
+    normalize: (ns) => ns / 1_000_000,
+  },
 ];
 
 function readJson(filePath) {
