@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Roadmap (Enterprise and Military-Grade)
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP kickoff)  
+**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP); Sprint 6 in progress (secp256k1 interop)  
 **Scope**: gtcx-core monorepo + required downstream integrations to reach full spec functionality  
 **Objective**: Implement the full spec for global south deployment with offline-first capability, government-grade identity, and financial market infrastructure reliability.
 **Source of truth**: `agile-pm/06 - planning/gtcx-core-full-spec-sprints.md`
@@ -118,6 +118,7 @@
 
 - Implement secp256k1 signing and verification in Rust.
 - Add test vectors and interop tests against known implementations.
+- Progress: secp256k1 module + interop tests implemented in `rust/gtcx-crypto`.
 
 **Exit Criteria**
 

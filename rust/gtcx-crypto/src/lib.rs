@@ -85,6 +85,7 @@ pub use error::CryptoError;
 // Signing (most common operations)
 pub use signing::ed25519::{batch_verify, sign, verify};
 pub use signing::ed25519::{PrivateKey, PublicKey, Signature};
+pub use signing::secp256k1 as secp256k1;
 
 // Hashing
 pub use hashing::{blake3, sha256, sha512};

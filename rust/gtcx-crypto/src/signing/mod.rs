@@ -22,4 +22,4 @@
 //! ```
 
 pub mod ed25519;
-// pub mod secp256k1; // TODO: Implement in Phase 2
+pub mod secp256k1;

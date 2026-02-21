@@ -21,5 +21,6 @@ GTCX core full-spec planning:
 - sprint-3-api-client-plan.md
 - sprint-4-p2p-plan.md
 - sprint-5-zkp-plan.md
+- sprint-6-secp256k1-plan.md
 - uat-gtcx-core-full-spec.md
 - uat-evidence-log.md
