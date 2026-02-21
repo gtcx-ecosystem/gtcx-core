@@ -30,6 +30,8 @@ export interface PublishOptions {
   ttl?: number;
 }
 
+export type P2PTransportKind = 'tcp' | 'quic';
+
 export interface NetworkTelemetryEvent {
   type:
     | 'p2p.start'

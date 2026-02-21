@@ -141,9 +141,18 @@ const run = async () => {
     };
 
     const subsReady = await waitForSubscribers(transportA, 'gtcx.mesh', 1, 15000);
-    console.log('Subscribers on A:', transportA.getSubscribers?.('gtcx.mesh') ?? []);
+    console.log('Topics:', {
+      a: transportA.getTopics?.() ?? [],
+      b: transportB.getTopics?.() ?? [],
+      c: transportC.getTopics?.() ?? [],
+    });
+    console.log('Subscribers:', {
+      a: transportA.getSubscribers?.('gtcx.mesh') ?? [],
+      b: transportB.getSubscribers?.('gtcx.mesh') ?? [],
+      c: transportC.getSubscribers?.('gtcx.mesh') ?? [],
+    });
     if (!subsReady) {
-      throw new Error('No subscribers detected');
+      console.warn('No subscribers detected yet; continuing to publish test.');
     }
 
     await sleep(2000);
@@ -209,7 +218,7 @@ const run = async () => {
   } catch (error) {
     console.error('Failed to run mesh demo:', error?.message ?? error);
     console.error(
-      'Ensure libp2p deps are installed: pnpm add libp2p @libp2p/tcp @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns @libp2p/identify'
+      'Ensure libp2p deps are installed: pnpm add libp2p @libp2p/tcp @libp2p/mplex @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns @libp2p/identify'
     );
     process.exit(1);
   }

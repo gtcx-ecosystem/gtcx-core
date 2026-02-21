@@ -315,6 +315,12 @@ importers:
       '@libp2p/mdns':
         specifier: ^12.0.11
         version: 12.0.11
+      '@libp2p/mplex':
+        specifier: ^11.0.47
+        version: 11.0.47
+      '@libp2p/tcp':
+        specifier: ^11.0.10
+        version: 11.0.10
       '@multiformats/multiaddr':
         specifier: 12.5.1
         version: 12.5.1
@@ -1159,6 +1165,9 @@ packages:
   '@libp2p/mdns@12.0.11':
     resolution: {integrity: sha512-OB6am5A21Yc5c7KBZONQhTao4BHRDc3MurZ1qHzqU4FQidi719cNRw4ac6TVk4dcdtOYx+1ef8pvvLX+57hXAQ==}
 
+  '@libp2p/mplex@11.0.47':
+    resolution: {integrity: sha512-bZvToaf//ITkLzKx2FxpHP/J7IHvUI7lPHzSYAo2dRfB67VMnTnmAkP4IZmR9DV5oORaUrSt8ZRzQfXO7XjzlQ==}
+
   '@libp2p/multistream-select@7.0.10':
     resolution: {integrity: sha512-6RAFctqWzwQ/qPaN3CxoueSs1b7pBVMZ+0n6G0kcsqVBj0wc4eB+dcJyUNrTV1NGgMCAl6tVAGztZaE8XZc9lw==}
 
@@ -1191,6 +1200,9 @@ packages:
 
   '@libp2p/pubsub@10.1.18':
     resolution: {integrity: sha512-Bxa0cwkaQvadyJNlJlzH0m1eo7m03G2nCpuKbcv+i0qNbyyTOydBcuoslG/UWFYhRBB9Js9R6zNIsaIgpo+iGw==}
+
+  '@libp2p/tcp@11.0.10':
+    resolution: {integrity: sha512-vp1XvbRUU6JyVZMDfrr8UX+xs1sybT2r3PFoN5m07r3GSrMMPOKpWN2HkhT2pCBZWJG6ADQOy5+K0tBRE782oA==}
 
   '@libp2p/utils@5.4.9':
     resolution: {integrity: sha512-0fRdX98WqhTmXU2WEVLegLFxs/kKTtUHanHk5Lzs4oGsIzlPHR7zE6lj/U1WfsFA+Xo1eYQpNLiXEL29hG+Nyw==}
@@ -1428,6 +1440,12 @@ packages:
 
   '@types/node@22.19.8':
     resolution: {integrity: sha512-ebO/Yl+EAvVe8DnMfi+iaAyIqYdK0q/q0y0rw82INWEKJOBe6b/P3YWE8NW7oOlF/nXFNrHwhARrN/hdgDkraA==}
+
+  '@types/sinon@20.0.0':
+    resolution: {integrity: sha512-etYGUC6IEevDGSWvR9WrECRA01ucR2/Oi9XMBUAdV0g4bLkNf4HlZWGiGlDOq5lgwXRwcV+PSeKgFcW4QzzYOg==}
+
+  '@types/sinonjs__fake-timers@15.0.1':
+    resolution: {integrity: sha512-Ko2tjWJq8oozHzHV+reuvS5KYIRAokHnGbDwGh/J64LntgpbuylF74ipEL24HCyRjf9FOlBiBHWBR1RlVKsI1w==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -4160,6 +4178,17 @@ snapshots:
       main-event: 1.0.1
       multicast-dns: 7.2.5
 
+  '@libp2p/mplex@11.0.47':
+    dependencies:
+      '@libp2p/interface': 2.11.0
+      '@libp2p/utils': 6.7.2
+      it-pipe: 3.0.1
+      it-pushable: 3.2.3
+      it-stream-types: 2.0.2
+      uint8-varint: 2.0.4
+      uint8arraylist: 2.4.8
+      uint8arrays: 5.1.0
+
   '@libp2p/multistream-select@7.0.10':
     dependencies:
       '@libp2p/interface': 3.1.0
@@ -4265,6 +4294,18 @@ snapshots:
       p-queue: 8.1.1
       uint8arraylist: 2.4.8
       uint8arrays: 5.1.0
+
+  '@libp2p/tcp@11.0.10':
+    dependencies:
+      '@libp2p/interface': 3.1.0
+      '@libp2p/utils': 7.0.10
+      '@multiformats/multiaddr': 12.5.1
+      '@multiformats/multiaddr-matcher': 3.0.1
+      '@types/sinon': 20.0.0
+      main-event: 1.0.1
+      p-event: 7.1.0
+      progress-events: 1.0.1
+      uint8arraylist: 2.4.8
 
   '@libp2p/utils@5.4.9':
     dependencies:
@@ -4543,6 +4584,12 @@ snapshots:
   '@types/node@22.19.8':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/sinon@20.0.0':
+    dependencies:
+      '@types/sinonjs__fake-timers': 15.0.1
+
+  '@types/sinonjs__fake-timers@15.0.1': {}
 
   '@types/unist@3.0.3': {}
 

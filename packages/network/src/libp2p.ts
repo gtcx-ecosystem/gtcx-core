@@ -32,6 +32,7 @@ interface Libp2pRuntime {
     publish: (topic: string, data: Uint8Array) => Promise<unknown>;
     subscribe: (topic: string) => Promise<void> | void;
     getSubscribers?: (topic: string) => Array<{ toString?: () => string } | string>;
+    getTopics?: () => string[];
     addEventListener?: (event: string, handler: (event: unknown) => void) => void;
     removeEventListener?: (event: string, handler: (event: unknown) => void) => void;
   };
@@ -50,12 +51,14 @@ function resolveFactory<T = unknown>(module: unknown, name: string): FactoryFn<T
 
 async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime> {
   try {
-    const [libp2pModule, noiseModule, gossipsubModule, identifyModule] = await Promise.all([
-      import('libp2p'),
-      import('@chainsafe/libp2p-noise'),
-      import('@chainsafe/libp2p-gossipsub'),
-      import('@libp2p/identify'),
-    ]);
+    const [libp2pModule, noiseModule, gossipsubModule, identifyModule, mplexModule] =
+      await Promise.all([
+        import('libp2p'),
+        import('@chainsafe/libp2p-noise'),
+        import('@chainsafe/libp2p-gossipsub'),
+        import('@libp2p/identify'),
+        import('@libp2p/mplex'),
+      ]);
 
     const transportKind: P2PTransportKind = config.transport ?? 'tcp';
     const transportModule =
@@ -70,6 +73,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     const noise = resolveFactory(noiseModule, 'noise');
     const gossipsub = resolveFactory(gossipsubModule, 'gossipsub');
     const identify = resolveFactory(identifyModule, 'identify');
+    const mplex = resolveFactory(mplexModule, 'mplex');
     const transportFactory =
       transportKind === 'tcp'
         ? resolveFactory(transportModule, 'tcp')
@@ -129,6 +133,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       addresses: listenAddresses ? { listen: listenAddresses as any[] } : undefined,
       transports: [transportFactory()],
       connectionEncrypters: [noise()],
+      streamMuxers: [mplex()],
       peerDiscovery: peerDiscovery.length > 0 ? (peerDiscovery as unknown as any[]) : undefined,
       services: {
         identify: identify(),
@@ -146,7 +151,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     const err = error as Error & { code?: string };
     const isMissingDep = err?.code === 'ERR_MODULE_NOT_FOUND';
     const message = isMissingDep
-      ? 'libp2p dependencies are missing. Install libp2p, @libp2p/tcp (or @chainsafe/libp2p-quic), @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
+      ? 'libp2p dependencies are missing. Install libp2p, @libp2p/tcp (or @chainsafe/libp2p-quic), @libp2p/mplex, @chainsafe/libp2p-noise, @chainsafe/libp2p-gossipsub.'
       : `libp2p init failed: ${err?.message ?? String(error)}`;
     throw new ConfigurationError(message);
   }
@@ -212,6 +217,11 @@ export class Libp2pTransport implements TransportAdapter {
       .getSubscribers(topic)
       .map((peer) => (typeof peer === 'string' ? peer : (peer?.toString?.() ?? '')))
       .filter(Boolean);
+  }
+
+  getTopics(): string[] {
+    if (!this.runtime?.pubsub?.getTopics) return [];
+    return this.runtime.pubsub.getTopics().filter(Boolean);
   }
 
   async send(_peerId: PeerId, message: MessageEnvelope): Promise<void> {
