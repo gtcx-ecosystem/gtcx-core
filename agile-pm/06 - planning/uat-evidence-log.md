@@ -59,13 +59,13 @@
   - Evidence: `cargo test -p gtcx-zkp`
   - Result: `38 passed, 2 ignored (asset ownership + location region Groth16 proofs)` (2026-02-21)
 - Groth16 asset ownership proof (Rust, heavy):
-  - Status: ⚠️ Ignored in default test run (heavy Groth16 proof generation)
+  - Status: ✅ Executed
   - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`
-  - Result: `run on demand in high-resource environment`
+  - Result: `2 passed (asset ownership + location region Groth16 proofs), 169s` (2026-02-21)
 - Groth16 location region proof (Rust, heavy):
-  - Status: ⚠️ Ignored in default test run (heavy Groth16 proof generation)
+  - Status: ✅ Executed
   - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`
-  - Result: `run on demand in high-resource environment`
+  - Result: `2 passed (asset ownership + location region Groth16 proofs), 169s` (2026-02-21)
 
 ## Sprint 6 — secp256k1 Interop
 
