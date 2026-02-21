@@ -33,7 +33,9 @@ export type DomainEventType =
   | 'compliance.violation_detected'
   | 'compliance.warning_issued'
   | 'compliance.report_generated'
-  | 'compliance.framework_registered';
+  | 'compliance.framework_registered'
+  | 'compliance.zk_proof_invalid'
+  | 'compliance.zk_proof_verified';
 
 // ============================================================================
 // BASE EVENT

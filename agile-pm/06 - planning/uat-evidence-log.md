@@ -47,3 +47,10 @@
   - Status: ⚠️ Blocked (QUIC transport)
   - Evidence command (TCP UAT): `GTCX_P2P_TRANSPORT=tcp pnpm --filter @gtcx/network build && pnpm network:mesh:demo`
   - QUIC blocker: `outbound connection that skipped encryption must have a peer id` with libp2p-quic v1.1.8.
+
+## Sprint 5 — ZKP System
+
+- ZKP acceptance/rejection (compliance flow):
+  - Status: ✅ Implemented + executed
+  - Evidence: `node tools/uat/zkp-uat.mjs`
+  - Result: `valid proof violations 0; invalid proof violations 1` (2026-02-21 15:12)

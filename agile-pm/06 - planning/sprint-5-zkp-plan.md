@@ -24,7 +24,7 @@
 - [x] ZKP-003: Add unit tests + docs for ZKP primitives.
 - [x] ZKP-004: Wire verification hooks into compliance flows (accept/reject path).
 - [x] ZKP-005: Define circuit selection + performance budgets (arkworks plan).
-- [ ] ZKP-006: UAT evidence run and log entry (proof acceptance/rejection).
+- [x] ZKP-006: UAT evidence run and log entry (proof acceptance/rejection).
 
 ## Acceptance Criteria
 

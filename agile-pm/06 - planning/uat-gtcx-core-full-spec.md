@@ -67,6 +67,10 @@
 2. Submit invalid proof; verify rejection path and audit logging.
 3. Validate proof generation latency against budgets.
 
+### Sprint 5 Evidence
+
+- [x] ZKP acceptance/rejection via compliance flow (`node tools/uat/zkp-uat.mjs`)
+
 ## Sprint 6: secp256k1 Interop
 
 1. Sign a message with secp256k1 and verify via external library.

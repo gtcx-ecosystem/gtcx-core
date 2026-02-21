@@ -693,7 +693,7 @@ export class UnifiedComplianceService {
 
   protected extractZkProof(metadata?: Record<string, unknown>): ZKProof | null {
     if (!metadata) return null;
-    const candidate = metadata.zkProof ?? metadata.zk_proof;
+    const candidate = metadata['zkProof'] ?? metadata['zk_proof'];
     if (!candidate) return null;
     const parsed = ZKProofSchema.safeParse(candidate);
     return parsed.success ? parsed.data : null;
