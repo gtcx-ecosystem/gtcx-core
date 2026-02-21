@@ -1,15 +1,24 @@
 # Release Checklist
 
-Canonical release checklist for gtcx-core.
+**Updated**: 2026-02-21
 
-## Pre-Release
+Canonical release checklist for `gtcx-core`.
 
-- [ ] `pnpm lint` passes
-- [ ] `pnpm typecheck` passes
-- [ ] `pnpm test` passes
-- [ ] Rust tests pass (`cargo test -p gtcx-zkp`)
-- [ ] UAT evidence log updated (if applicable)
-- [ ] Benchmarks updated if performance-sensitive changes were made
+## Pre‑Release
+
+- [ ] `pnpm lint`
+- [ ] `pnpm format:check`
+- [ ] `pnpm typecheck`
+- [ ] `pnpm test`
+- [ ] `pnpm test:coverage:critical`
+- [ ] `pnpm build`
+- [ ] `pnpm api:check`
+- [ ] `pnpm docs` + `pnpm docs:check-links`
+- [ ] `pnpm security:threat-matrix`
+- [ ] `pnpm perf:update-history` + `pnpm perf:check-budgets`
+- [ ] Rust quality gates (`cargo fmt`, `cargo clippy`, `cargo test --workspace --lib`)
+- [ ] ZKP heavy proofs (scheduled or run): `cargo test -p gtcx-zkp --release -- --ignored`
+- [ ] UAT evidence log updated if applicable
 
 ## Release
 
@@ -17,7 +26,7 @@ Canonical release checklist for gtcx-core.
 - [ ] Release notes prepared
 - [ ] CI required checks green
 
-## Post-Release
+## Post‑Release
 
 - [ ] Verify published artifacts
 - [ ] Update `docs/quality` evidence references if needed

@@ -1,112 +1,29 @@
 # Spec-to-Code Traceability Matrix (gtcx-core)
 
-**Updated**: 2026-02-21  
+**Updated**: 2026-02-21
 **Scope**: `docs/specs/*` mapped to `packages/*` and `rust/*`
 
 ## Summary by Spec
 
-| Spec                    | Primary Code Areas                                         | Status      | Major Gaps                                            |
-| ----------------------- | ---------------------------------------------------------- | ----------- | ----------------------------------------------------- |
-| `data-models.md`        | `packages/types`, `packages/domain`, `packages/schemas`    | Implemented | None at spec level; ongoing schema evolution          |
-| `eventcore.md`          | `packages/events`, `packages/domain`                       | Implemented | None                                                  |
-| `identity-core.md`      | `packages/identity`, `packages/security`, `packages/types` | Implemented | Resolver adapters + cache; backend deployment req.    |
-| `network-protocol.md`   | `packages/network`, `rust/gtcx-network`, `packages/events` | Partial     | libp2p adapter scaffolded; runtime validation pending |
-| `security-framework.md` | `packages/security`, `packages/domain`, `docs/security/*`  | Implemented | Operational controls depend on infra policies         |
-
-## Detailed Mapping
-
-### `data-models.md`
-
-**Coverage**
-
-- Core data models and type aliases mapped to `@gtcx/types`.
-- Runtime validation schemas mapped to `@gtcx/schemas`.
-- Domain objects and services mapped to `@gtcx/domain`.
-
-**Primary Code**
-
-- `packages/types/src/**`
-- `packages/schemas/src/**`
-- `packages/domain/src/**`
-
-**Status**: Implemented
-
-### `eventcore.md`
-
-**Coverage**
-
-- Event types, encoding, and payloads mapped to `@gtcx/events`.
-- Domain event factory and emitters mapped to `@gtcx/domain`.
-
-**Primary Code**
-
-- `packages/events/src/**`
-- `packages/domain/src/events/**`
-
-**Status**: Implemented
-
-### `identity-core.md`
-
-**Coverage**
-
-- DID formats and document construction mapped to `@gtcx/identity`.
-- Credential types and security checks mapped to `@gtcx/security`.
-
-**Primary Code**
-
-- `packages/identity/src/**`
-- `packages/security/src/**`
-
-**Status**: Implemented (resolver adapters + cache; backends required)
-
-### `network-protocol.md`
-
-**Coverage**
-
-- P2P node + transport adapter interfaces mapped to `@gtcx/network`.
-- Network types, topics, and message formats mapped to `rust/gtcx-network`.
-
-**Primary Code**
-
-- `packages/network/src/**`
-- `rust/gtcx-network/src/**`
-
-**Gap**
-
-- libp2p/QUIC/gossipsub transport validated; peer discovery + serialization/compression gaps remain.
-
-**Status**: Partial
-
-### `security-framework.md`
-
-**Coverage**
-
-- Security controls mapped to `@gtcx/security`.
-- Threat control matrix mapped to `docs/security/threat-control-matrix.md`.
-
-**Primary Code**
-
-- `packages/security/src/**`
-- `docs/security/**`
-
-**Status**: Implemented (code-level controls).  
-Operational controls depend on deployment policies and infra.
+| Spec                    | Primary Code Areas                                      | Status      | Notes                           |
+| ----------------------- | ------------------------------------------------------- | ----------- | ------------------------------- |
+| `data-models.md`        | `packages/types`, `packages/schemas`, `packages/domain` | Implemented | Core12 schemas + shared types   |
+| `eventcore.md`          | `packages/domain`, `packages/events`                    | Implemented | Domain events + typed event bus |
+| `identity-core.md`      | `packages/identity`, `packages/crypto`                  | Implemented | DID creation + document helpers |
+| `network-protocol.md`   | `packages/network`                                      | Implemented | TCP/QUIC mesh + libp2p adapter  |
+| `security-framework.md` | `packages/crypto`, `packages/security`, `rust/gtcx-zkp` | Implemented | Native crypto + ZKP proofs      |
 
 ## Known Full-Spec Gaps (Cross-Cutting)
 
-| Capability       | Current Status     | Location                                    | Notes                                               |
-| ---------------- | ------------------ | ------------------------------------------- | --------------------------------------------------- |
-| API Client       | Implemented        | `packages/api-client/src/index.ts`          | Retry + timeout + signing + mTLS + errors           |
-| Sync Engine      | Implemented        | `packages/sync/src/index.ts`                | Deterministic conflict resolution                   |
-| AI Tracing       | No-op stub         | `packages/ai/src/index.ts`                  | Integration lives in `gtcx-intelligence`            |
-| DID Resolution   | Implemented        | `packages/identity/src/resolver.ts`         | Requires deployment-specific backends               |
-| ZKP System       | Implemented (Rust) | `rust/gtcx-zkp/src/**`                      | Groth16 + Bulletproofs + Schnorr; TS bridge pending |
-| P2P Transport    | Partial            | `packages/network/src/**`                   | TCP+QUIC UAT complete; discovery/serialization gaps |
-| Rust secp256k1   | Implemented        | `rust/gtcx-crypto/src/signing/secp256k1.rs` | Interop tests complete                              |
-| TS native crypto | Not wired          | `rust/gtcx-node/src/**`                     | No TS bridge in `@gtcx/crypto`                      |
+| Capability                | Current Status | Location                            | Notes                                                  |
+| ------------------------- | -------------- | ----------------------------------- | ------------------------------------------------------ |
+| Native crypto bindings    | Implemented    | `packages/crypto-native`            | Optional backend, enforced via `GTCX_REQUIRE_NATIVE=1` |
+| DID resolution backend    | External       | `packages/identity/src/resolver.ts` | Resolver interface; storage/deployment required        |
+| ZKP system (TS bridge)    | Partial        | `packages/crypto/src/zkp.ts`        | TS placeholder; Rust provides real proofs              |
+| P2P serialization formats | Partial        | `packages/network/src/*`            | JSON only; no CBOR/Protobuf                            |
 
-## Next Actions (Phase 0)
+## References
 
-1. Expand this matrix to section-level mapping for each spec.
-2. Convert each gap into an epic with acceptance criteria.
-3. Link epics to the full-spec roadmap phases.
+- `docs/specs/*`
+- `docs/architecture/*`
+- `docs/packages/*`

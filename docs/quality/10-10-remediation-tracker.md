@@ -1,129 +1,38 @@
 # 10/10 Remediation Tracker and Scorecard
 
-Last updated: 2026-02-21
-Primary reference: `docs/quality/10-10-remediation-plan.md`
-Audit report: `docs/quality/10-10-audit-report.md`
-Quality standard: `docs/quality/enterprise-quality-standard.md`
-Release checklist: `docs/quality/release-checklist.md`
+**Updated**: 2026-02-21
 
-## Scoring Rubric
+Primary references:
 
-| Score    | Meaning                                                    |
-| -------- | ---------------------------------------------------------- |
-| 9.5-10.0 | World-class, continuously enforced, no known material gaps |
-| 8.5-9.4  | Strong foundation, minor non-critical gaps                 |
-| 7.0-8.4  | Good baseline, multiple important improvements required    |
-| 5.0-6.9  | Major quality debt and weak enforcement                    |
-| <5.0     | High-risk state                                            |
+- `docs/quality/10-10-remediation-plan.md`
+- `docs/quality/10-10-audit-report.md`
+- `docs/quality/enterprise-quality-standard.md`
+
+## Current Score
+
+**9.8/10** (pending heavy Groth16 proof UAT evidence).
 
 ## Weighted Category Scores
 
-| Category                                 | Weight | Baseline | Current | Target | Status   |
-| ---------------------------------------- | -----: | -------: | ------: | -----: | -------- |
-| Architecture and Modularity              |   0.12 |      8.4 |    10.0 |   10.0 | Achieved |
-| API Correctness and Runtime Reliability  |   0.15 |      7.8 |    10.0 |   10.0 | Achieved |
-| Type Safety and Contract Clarity         |   0.10 |      8.7 |    10.0 |   10.0 | Achieved |
-| Testing Depth and Confidence             |   0.13 |      8.3 |    10.0 |   10.0 | Achieved |
-| Security Engineering                     |   0.12 |      8.2 |    10.0 |   10.0 | Achieved |
-| Performance and Scalability              |   0.10 |      7.9 |    10.0 |   10.0 | Achieved |
-| Observability and Operability            |   0.08 |      8.0 |    10.0 |   10.0 | Achieved |
-| Documentation and Spec Alignment         |   0.08 |      8.2 |    10.0 |   10.0 | Achieved |
-| CI/CD and Release Governance             |   0.07 |      8.9 |    10.0 |   10.0 | Achieved |
-| Maintainability and Developer Experience |   0.05 |      8.5 |    10.0 |   10.0 | Achieved |
-
-Current weighted overall score: `10.0/10`
+| Category                                 | Baseline | Current | Target | Status   |
+| ---------------------------------------- | -------: | ------: | -----: | -------- |
+| Architecture and Modularity              |      8.4 |    10.0 |   10.0 | Achieved |
+| API Correctness and Runtime Reliability  |      7.8 |    10.0 |   10.0 | Achieved |
+| Type Safety and Contract Clarity         |      8.7 |    10.0 |   10.0 | Achieved |
+| Testing Depth and Confidence             |      8.3 |     9.5 |   10.0 | Pending  |
+| Security Engineering                     |      8.2 |     9.8 |   10.0 | Pending  |
+| Performance and Scalability              |      7.9 |     9.8 |   10.0 | Pending  |
+| Observability and Operability            |      8.0 |    10.0 |   10.0 | Achieved |
+| Documentation and Spec Alignment         |      8.2 |    10.0 |   10.0 | Achieved |
+| CI/CD and Release Governance             |      8.9 |    10.0 |   10.0 | Achieved |
+| Maintainability and Developer Experience |      8.5 |    10.0 |   10.0 | Achieved |
 
 ## Remaining to Reach 10.0
 
-None. Final closeout evidence captured for branch protection verification limitation:
+- Run and log heavy Groth16 proofs: `cargo test -p gtcx-zkp --release -- --ignored`.
+- Update UAT evidence log with results.
 
-- `artifacts/branch-protection-main.unavailable.json` (2026-02-20).
+## Evidence Links
 
-## Phase Checklist
-
-## Phase 1: Correctness Closure (P0) - Completed 2026-02-19
-
-- [x] Remove placeholder runtime paths from public verification traced APIs.
-- [x] Ensure public API types are exported for full docs graph resolution.
-- [x] Enforce docs warning-free build in CI.
-
-Exit gate:
-
-- [x] Typedoc warnings = `0`
-- [x] Placeholder throws in exported paths = `0`
-
-## Phase 2: Architecture Hardening (P0/P1) - Completed 2026-02-19
-
-- [x] Define package layer dependency rules.
-- [x] Add architecture lint/check step to CI.
-- [x] Add ADR updates for layering and error model.
-
-Exit gate:
-
-- [x] Architecture check required on PRs.
-- [x] Boundary violations blocked.
-
-## Phase 3: Reliability and Testing Excellence (P1) - Completed 2026-02-19
-
-- [x] Add typed error taxonomy and adoption checklist.
-- [x] Add contract tests for public package APIs.
-- [x] Add property-based tests for crypto and protocol invariants.
-- [x] Enforce raised coverage thresholds for critical packages.
-
-Exit gate:
-
-- [x] Coverage thresholds pass.
-- [x] Contract/property suites mandatory in CI.
-
-## Phase 4: Security Validation (P1) - Completed 2026-02-19
-
-- [x] Build threat-control-to-test traceability matrix.
-- [x] Add fuzz/property tests for security-sensitive boundaries.
-- [x] Enforce vulnerability/SBOM policy checks in CI.
-
-Exit gate:
-
-- [x] Control coverage matrix complete.
-- [x] Security checks are release-blocking.
-
-## Phase 5: Performance and Operability (P2) - Completed 2026-02-19
-
-- [x] Define SLOs and latency/memory budgets.
-- [x] Add benchmark regression checks in CI.
-- [x] Standardize telemetry schemas and runbooks.
-
-Exit gate:
-
-- [x] Perf regressions fail CI.
-- [x] SLO and runbook coverage complete.
-
-## Phase 6: Release Governance Completion (P2) - Completed 2026-02-19
-
-- [x] Add API diff and semver enforcement.
-- [x] Enforce CODEOWNERS/required reviewers for critical modules.
-- [x] Add reproducible release provenance metadata.
-
-Exit gate:
-
-- [x] Release policy checks all mandatory.
-- [x] Reproducible release audit evidence generated.
-
-## KPI Tracker
-
-Generated by: `pnpm quality:kpi:collect && pnpm quality:kpi:export`
-
-| KPI                                | Baseline | Target | Current |
-| ---------------------------------- | -------- | ------ | ------- |
-| High-severity escape defects/month | 0        | <1     | 0       |
-| Flaky test rate                    | 0%       | <1%    | 0%      |
-| Docs/API drift incidents/month     | 0        | 0      | 0       |
-| Security policy violations merged  | 0        | 0      | 0       |
-| CI quality gate pass rate          | 100%     | >98%   | 100%    |
-
-## Audit Notes
-
-1. Track every score change with linked evidence (CI run, report, benchmark, or test artifact).
-2. If any category regresses by `>=0.3`, open a corrective action item within 24 hours.
-3. Do not mark a phase complete until all exit gates are checked.
-4. KPI values above are initial enforcement baselines from 2026-02-19 full-gate validation; re-baseline monthly with rolling 30-day data.
-5. Branch protection API verification is currently blocked by GitHub plan/visibility; evidence captured in `artifacts/branch-protection-main.unavailable.json` (2026-02-20).
+- Heavy proofs workflow: `.github/workflows/zkp-heavy.yml`
+- UAT log: `agile-pm/06 - planning/uat-evidence-log.md`

@@ -1,41 +1,42 @@
-# Core System Specification
+# Core System Specification (gtcx-core)
 
-This is the canonical, top-level specification for gtcx-core. It summarizes system goals, capabilities, and non-functional requirements, and points to deeper specs for implementation detail.
+**Status**: Active (2026-02-21)
 
-## Goals
+This is the canonical, top-level specification for `gtcx-core`. It summarizes goals, current scope, and non‑functional requirements, and points to deeper specs for implementation detail.
+
+## Purpose
 
 - Provide secure identity, verification, and proof primitives for the GTCX ecosystem.
-- Support offline-first workflows with deterministic sync.
+- Support offline-first workflows with deterministic sync and event buffering.
 - Enable secure networking and proof exchange across untrusted environments.
 
-## Core Capabilities
+## Current Scope (Repo Reality)
 
-1. **Identity and Credentials**
-   - DID creation and resolution
-   - Credential issuance and verification
-   - Key lifecycle and rotation
+### TypeScript packages
 
-2. **Cryptography and Proofs**
-   - Hashing and signing primitives
-   - ZKP proofs for range, ownership, and attributes
-   - Deterministic proof serialization and verification
+- **Crypto**: `@gtcx/crypto`, `@gtcx/crypto-native` (optional native backend)
+- **Identity**: `@gtcx/identity`
+- **Network**: `@gtcx/network`
+- **Events**: `@gtcx/events`, `@gtcx/domain`
+- **Schemas/Types**: `@gtcx/schemas`, `@gtcx/types`
+- **Security**: `@gtcx/security`
+- **Verification**: `@gtcx/verification`, `@gtcx/workproof`
+- **Services/Sync**: `@gtcx/services`, `@gtcx/sync`
+- **Utilities/Logging**: `@gtcx/utils`, `@gtcx/logging`, `@gtcx/config`
 
-3. **Network and Sync**
-   - P2P mesh transport (TCP/QUIC)
-   - Topic-based publish/subscribe
-   - Offline queueing and sync with conflict resolution
+### Rust crates
 
-4. **Auditability and Compliance**
-   - Hash-chained audit trails
-   - Telemetry schema for monitoring
-   - Evidence and quality gates
+- `rust/gtcx-zkp` — Groth16 circuits + Bulletproofs range + Schnorr attribute proofs.
+- `rust/gtcx-crypto` — low‑level cryptographic primitives.
+- `rust/gtcx-node` — native bindings used by `@gtcx/crypto-native`.
+- `rust/gtcx-network`, `rust/gtcx-edge`, `rust/gtcx-consensus` — supporting crates.
 
-## Non-Functional Requirements
+## Non‑Functional Requirements
 
-- Security first: authenticated transport, cryptographic integrity, and least-privilege boundaries.
-- Reliability: predictable failure modes, retry behavior, and rate limiting.
-- Performance: proof generation and verification within defined budgets.
-- Operability: explicit runbooks, SLOs, and telemetry.
+- **Security-first**: authenticated transport, cryptographic integrity, least-privilege boundaries.
+- **Reliability**: predictable failure modes, retry behavior, and rate limiting.
+- **Performance**: proof generation and verification within defined budgets.
+- **Operability**: explicit runbooks, SLOs, and telemetry.
 
 ## References
 

@@ -13,8 +13,8 @@ resolver = "2"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-repository = "https://github.com/gtcx-protocol/gtcx"
-rust-version = "1.75"
+repository = "https://github.com/gtcx-ecosystem/gtcx-core"
+rust-version = "1.82"
 authors = ["GTCX Protocol <engineering@gtcx.io>"]
 description = "GTCX Protocol - Cryptographic Verification Infrastructure"
 
@@ -37,6 +37,10 @@ ark-groth16 = "0.4"
 ark-bn254 = "0.4"
 ark-serialize = "0.4"
 ark-std = "0.4"
+ark-crypto-primitives = "0.4"
+bulletproofs = "5.0"
+curve25519-dalek = "4.1"
+merlin = "3.0"
 
 # Networking
 libp2p = { version = "0.54", default-features = false, features = [
@@ -77,6 +81,7 @@ hex = "0.4"
 # Testing
 proptest = "1.4"
 criterion = "0.5"
+secp256k1 = { version = "0.29", features = ["rand"] }
 
 [profile.release]
 lto = true

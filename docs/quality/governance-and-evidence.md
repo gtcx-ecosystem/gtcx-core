@@ -1,35 +1,34 @@
 # Governance and Evidence Policy
 
-Last updated: 2026-02-20
+**Updated**: 2026-02-21
 
 ## Branch Protection Policy (`main`)
 
 Required settings:
 
 1. Require pull request before merging.
-2. Require at least one CODEOWNER approval.
+2. Require CODEOWNER approval.
 3. Require status checks to pass before merging.
 4. Do not allow bypassing required checks except designated admins.
 
-Required status checks:
+Required workflow checks (current):
 
-1. `CI / ci`
-2. `CI / rust`
-3. `CI / security`
-4. `CI / docker`
+- `CI` (`.github/workflows/ci.yml`)
+- `Crypto Native CI` (`.github/workflows/crypto-native-ci.yml`)
+- `Release` (`.github/workflows/release.yml`)
+- `Rust Release` (`.github/workflows/rust-release.yml`)
 
 ## CODEOWNERS Scope
 
 CODEOWNERS must cover at least:
 
-1. `/.github/workflows/`
-2. `/quality/`
-3. `/packages/crypto/`
-4. `/packages/domain/`
-5. `/packages/security/`
-6. `/packages/services/`
-7. `/packages/verification/`
-8. `/rust/`
+- `/.github/workflows/`
+- `/quality/`
+- `/packages/crypto/`
+- `/packages/security/`
+- `/packages/services/`
+- `/packages/verification/`
+- `/rust/`
 
 ## Required Governance Gates
 
@@ -48,43 +47,23 @@ Blocking scripts:
 
 ## Evidence Artifacts
 
-Every CI and release run must publish:
+Every CI and release run should publish:
 
-1. `artifacts/provenance-manifest.json`
-2. `artifacts/ci-history.json`
-3. `quality/kpi-metrics.json`
-4. `quality/api-surface-report.json`
-5. `benchmarks/performance-report.json`
-
-Required evidence fields:
-
-1. Commit and branch identity.
-2. Lockfile and API baseline hashes.
-3. Hashes for governance/security/performance evidence files.
-4. The enforced quality gate command set.
-5. KPI values and 30-day workflow/issue derivations from run artifacts.
-6. API diff classification and semver policy outcomes.
-7. Performance trend evaluation mode and outcomes.
+- `artifacts/provenance-manifest.json`
+- `quality/kpi-metrics.json`
+- `quality/api-surface-report.json`
+- `benchmarks/performance-report.json`
 
 ## API Semver Enforcement
 
 1. Release workflow must run `pnpm api:check` with `API_ENFORCE_SEMVER=true`.
 2. Reference baseline must be set with `API_BASELINE_REF` to the previous mainline SHA.
 3. Policy requirements:
-   breaking diff => `major` bump (version delta or changeset)
-   additive diff => `minor` or `major` bump (version delta or changeset)
+   - breaking diff => `major` bump
+   - additive diff => `minor` or `major` bump
 
 ## Monthly Audit
 
-1. Verify required branch protection settings are unchanged.
-   Command: `pnpm quality:verify-branch-protection`.
-   If GitHub returns plan/visibility API restrictions (HTTP 403), capture and retain `artifacts/branch-protection-main.unavailable.json` as audit evidence.
+1. Verify branch protection settings remain intact.
 2. Verify CODEOWNERS coverage matches policy scope.
-3. Sample one CI and one release run; confirm provenance artifact availability.
-4. Record drift or policy exceptions in the remediation tracker.
-
-## Performance Trend Enforcement
-
-1. Trend history must be updated before budget checks (`pnpm perf:update-history`).
-2. Strict trend mode is required in CI and release workflows.
-3. Strict mode command requirement: `PERF_ENFORCE_TREND=true pnpm perf:check-budgets`.
+3. Sample one CI and one release run; confirm provenance artifacts exist.

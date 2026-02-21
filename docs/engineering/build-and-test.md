@@ -1,11 +1,12 @@
 # Build and Test
 
-Canonical build and test commands for gtcx-core.
+Canonical build and test commands for `gtcx-core`.
 
 ## TypeScript Packages
 
 ```bash
 pnpm lint
+pnpm format:check
 pnpm typecheck
 pnpm test
 pnpm build
@@ -14,7 +15,8 @@ pnpm build
 ## Rust Crates
 
 ```bash
-cargo test -p gtcx-zkp
+cd rust
+cargo test --workspace --lib
 ```
 
 Heavy proofs (UAT evidence):
@@ -25,8 +27,4 @@ cargo test -p gtcx-zkp --release -- --ignored
 
 ## Quality Gates
 
-Run the quality gate sequence before release:
-
-```bash
-pnpm lint && pnpm typecheck && pnpm test
-```
+See `docs/operations/quality-runbook.md` for the full gate sequence.

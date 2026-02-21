@@ -1,11 +1,11 @@
 # Developer Setup
 
-This guide is the canonical setup path for gtcx-core development.
+Canonical setup path for `gtcx-core` development.
 
 ## Prerequisites
 
-- Node.js (LTS)
-- pnpm
+- Node.js 20+
+- pnpm 9+
 - Rust toolchain (rustup)
 
 ## Install
@@ -14,22 +14,19 @@ This guide is the canonical setup path for gtcx-core development.
 pnpm install
 ```
 
-## Rust Setup (Optional, required for native builds)
+## Rust Setup (Optional)
 
 ```bash
 rustup update
+cd rust
+cargo build
 ```
 
 ## Common Commands
 
 ```bash
 pnpm lint
+pnpm format:check
 pnpm typecheck
 pnpm test
-```
-
-Rust tests:
-
-```bash
-cargo test -p gtcx-zkp
 ```

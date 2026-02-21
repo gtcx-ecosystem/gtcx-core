@@ -1,16 +1,18 @@
 # @gtcx/network
 
-P2P networking primitives for GTCX validator mesh and edge connectivity.
+P2P networking primitives for the GTCX mesh. Provides a transport‑agnostic node API plus a libp2p transport adapter.
 
-## Installation
+## Scope
 
-```bash
-pnpm add @gtcx/network
-```
+- `createP2PNode` lifecycle + publish/subscribe
+- `InMemoryTransport` for tests
+- `createLibp2pTransport` for TCP/QUIC mesh
+- Peer discovery utilities
+- Network telemetry events
 
-## Quick Start (In-Memory)
+## Quick Start (In‑Memory)
 
-```typescript
+```ts
 import { createP2PNode, InMemoryTransport } from '@gtcx/network';
 
 const nodeA = createP2PNode({ nodeId: 'A' }, new InMemoryTransport('A'));
@@ -26,44 +28,23 @@ nodeB.subscribe('updates', (payload) => {
 await nodeA.publish('updates', { status: 'ok' });
 ```
 
-## Architecture Notes
+## libp2p Adapter
 
-- `TransportAdapter` allows libp2p or mesh backends to be injected.
-- `InMemoryTransport` is designed for tests and local simulations.
-- Rate limiting is enforced per node to prevent spam.
-- Optional topic allowlists prevent unauthorized publish/subscribe.
-- `PeerDiscoveryService` aggregates discovery adapters and applies reputation scores.
-
-## Telemetry
-
-```typescript
-const node = createP2PNode({ nodeId: 'A' }, new InMemoryTransport('A'), {
-  onEvent: (event) => {
-    console.log(event.type, event.topic);
-  },
-});
-```
-
-## libp2p Adapter (Optional)
-
-```bash
-pnpm add libp2p @libp2p/tcp @chainsafe/libp2p-quic @chainsafe/libp2p-noise @chainsafe/libp2p-gossipsub @libp2p/bootstrap @libp2p/mdns @libp2p/identify
-```
-
-```typescript
+```ts
 import { createP2PNode, createLibp2pTransport } from '@gtcx/network';
 
 const transport = await createLibp2pTransport({
-  transport: 'tcp',
-  listenAddresses: ['/ip4/127.0.0.1/tcp/0'],
+  transport: 'quic',
+  listenAddresses: ['/ip4/127.0.0.1/udp/0/quic-v1'],
   topics: ['gtcx.mesh'],
   enableMdns: true,
 });
+
 const node = createP2PNode({ nodeId: 'validator-1' }, transport);
 await node.start();
 ```
 
-## Related
+## References
 
-- [Network Protocol Spec](../specs/network-protocol.md)
-- [@gtcx/connectivity](./connectivity.md)
+- `docs/specs/network-protocol.md`
+- `packages/network/src/libp2p.ts`

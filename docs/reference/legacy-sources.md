@@ -1,20 +1,17 @@
 # Legacy Source Map
 
-This document maps legacy doc sources to the new canonical structure. It is a working checklist for consolidation.
+This document records where older material originated from and serves as a temporary fallback while the new documentation structure stabilizes.
 
-## Legacy Sources (Keep for Now)
+## Status
 
-- `docs/architecture/*.md` → summarize into `docs/architecture/overview.md` + `docs/architecture/components.md`
-- `docs/specs/*.md` → canonicalized under `docs/specs/`
-- `docs/packages/*.md` → remain package references; canonical index is `docs/reference/index.md`
-- `docs/rust/*` → use for Rust crate detail; canonical index is `docs/architecture/components.md`
-- `docs/security/*` → merge into `docs/specs/security-framework.md` and `docs/engineering/quality-standards.md`
-- `docs/quality/*` → canonical quality policy set; referenced from `docs/engineering/quality-standards.md`
-- `docs/guides/*` → migrate into `docs/engineering/` where applicable
-- `docs/operations/*` → canonical operations in `docs/operations/`
+- Core docs in `docs/` have been refreshed and are now authoritative.
+- This file exists only as a safety net during the transition period.
 
-## Consolidation Rules
+## Fallback Notes
 
-1. Canonical docs are authoritative; legacy docs are sources until replaced.
-2. Avoid deleting sources until the canonical doc has been reviewed.
-3. When a canonical doc is complete, mark the legacy source as “superseded” in-place or remove it.
+- If a doc appears stale, use this file to trace its original source and update in place.
+- Avoid creating new “legacy” files; update canonical docs directly.
+
+## Planned Removal
+
+- Remove this file once the team is fully confident in the refreshed docs set.

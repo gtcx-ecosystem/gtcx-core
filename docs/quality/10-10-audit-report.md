@@ -6,52 +6,49 @@
 
 - Repository: `gtcx-core`
 - Code areas: TypeScript packages, Rust crates, CI/CD, performance gates, security scanning, governance evidence
-- Evidence: CI workflows, benchmarks, UAT logs, architecture docs, traceability matrix
 
 ## Executive Summary
 
-The repo now meets 10/10 quality and architecture standards across all audited dimensions. Prior gaps were resolved by updating traceability, removing panic points in non-test cryptographic paths, enforcing ZKP performance budgets via Criterion, and automating heavy proof runs.
+The repo is **near** 10/10 quality. All core gates and standards are in place and enforced, with one remaining evidence item: the heavy Groth16 proof run in release mode for UAT logging.
+
+**Current status**: 9.8/10 (pending heavy proof UAT evidence).
 
 ## Resolved Gaps (Closed)
 
-- Traceability matrix updated to reflect current ZKP, P2P UAT, and secp256k1 status.
-- ZKP performance budgets added to CI performance gates with benchmark capture.
-- Heavy Groth16 proof runs automated on a scheduled workflow.
-- Removed panic points in `gtcx-zkp` parsing/hash helpers.
+- Architecture boundaries enforced via `pnpm architecture:check`.
+- API surface diffs enforced via `pnpm api:check`.
+- Performance budgets + trend gates in CI.
+- Native crypto wrapper package added with CI smoke test.
+- Documentation refreshed and aligned to current code.
+
+## Remaining Evidence
+
+- Run and log heavy Groth16 proofs: `cargo test -p gtcx-zkp --release -- --ignored`.
+  - Evidence location: `agile-pm/06 - planning/uat-evidence-log.md`.
 
 ## Evidence (Key Artifacts)
 
 - CI quality gates: `.github/workflows/ci.yml`
-- Heavy Groth16 workflow: `.github/workflows/zkp-heavy.yml`
-- Performance budgets and latest results: `benchmarks/performance-budgets.json`, `benchmarks/latest-results.json`, `benchmarks/history.json`
-- Benchmark capture logic: `tools/capture-benchmark-results.mjs`
-- ZKP benchmarks: `rust/gtcx-zkp/benches/zkp.rs`
+- Heavy proofs workflow: `.github/workflows/zkp-heavy.yml`
+- Native crypto CI: `.github/workflows/crypto-native-ci.yml`
+- Perf budgets + history: `benchmarks/performance-budgets.json`, `benchmarks/history.json`
 - Traceability matrix: `docs/quality/spec-to-code-traceability.md`
 
-## Ratings (10/10 Standard)
+## Ratings (Target 10/10)
 
-| Area                         | Score | Notes                                                  |
-| ---------------------------- | ----- | ------------------------------------------------------ |
-| Architecture & Modularity    | 10.0  | Clear layering, enforced boundaries, no circular deps  |
-| Dependency Governance        | 10.0  | pnpm workspace, API surface gating, strict CI          |
-| Type Safety & Contracts      | 10.0  | Strict TS config + Zod schemas                         |
-| Testing & QA                 | 10.0  | Unit/integration coverage + heavy ZKP proofs automated |
-| Security & Compliance        | 10.0  | Threat matrix, Trivy scans, SBOM artifacts             |
-| Performance & Scalability    | 10.0  | Budget gates include crypto + ZKP metrics              |
-| Observability & Operability  | 10.0  | Structured logging + audit trails + governance checks  |
-| Documentation & Traceability | 10.0  | Architecture and spec-to-code alignment now current    |
-| CI/CD & Release Governance   | 10.0  | Multi-stage gates, provenance, API checks              |
-| Maintainability & DX         | 10.0  | Shared configs, lint-staged, changesets, typedoc       |
-
-## Quality Gates (Automated)
-
-- Lint/format/typecheck/test/build: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm test`, `pnpm build`
-- Rust format/clippy/tests: `cargo fmt --check`, `cargo clippy -D warnings`, `cargo test --workspace --lib`
-- Perf budgets: `pnpm perf:update-history`, `PERF_ENFORCE_TREND=true pnpm perf:check-budgets`
-- API surface: `pnpm api:check`
-- Governance & security: `pnpm quality:governance:check`, `pnpm security:threat-matrix`
-- Heavy Groth16 proofs: `cargo test -p gtcx-zkp --release -- --ignored` (scheduled workflow)
+| Area                         | Score | Notes                                              |
+| ---------------------------- | ----- | -------------------------------------------------- |
+| Architecture & Modularity    | 10.0  | Boundaries enforced                                |
+| Dependency Governance        | 10.0  | Workspace + API surface gating                     |
+| Type Safety & Contracts      | 10.0  | Strict TS + Zod schemas                            |
+| Testing & QA                 | 9.5   | Heavy proof UAT evidence pending                   |
+| Security & Compliance        | 9.8   | Controls implemented; ops evidence still maturing  |
+| Performance & Scalability    | 9.8   | Trend gates in place; heavy proof evidence pending |
+| Observability & Operability  | 10.0  | Telemetry schema + runbooks                        |
+| Documentation & Traceability | 10.0  | Specs aligned to code                              |
+| CI/CD & Release Governance   | 10.0  | CI + release checks                                |
+| Maintainability & DX         | 10.0  | Shared configs + tooling                           |
 
 ## Next Review
 
-- Re-run full audit after major cryptographic changes or new package additions.
+- Re‑run audit after heavy proof UAT evidence is logged.

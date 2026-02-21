@@ -1,36 +1,33 @@
 # Documentation
 
-Canonical documentation for gtcx-core. This index reflects the clean, enterprise-grade doc set.
+Canonical documentation for `gtcx-core`.
 
-## Canonical Structure
+## Structure
 
 - `architecture/` — system design and decisions
 - `specs/` — product and system specifications
 - `engineering/` — setup, build/test, CI/CD, quality standards
 - `operations/` — runbooks, monitoring, release procedures
+- `packages/` — package‑level docs
+- `rust/` — Rust crate overview
+- `quality/` — 10/10 quality program and evidence
+- `security/` — threat matrix and security posture
+- `guides/` — integration and demo guides
 - `reference/` — indexes and glossaries
 - `gitbook/` — publishing assets
 
 ## Quick Links
 
-- Architecture index: `architecture/README.md`
-- Specs index: `specs/README.md`
-- Engineering index: `engineering/README.md`
-- Operations index: `operations/README.md`
-- Reference index: `reference/index.md`
+- Architecture: `architecture/README.md`
+- Specs: `specs/README.md`
+- Packages: `packages/README.md`
+- Operations: `operations/README.md`
+- Quality: `quality/enterprise-quality-standard.md`
 
 ## SOPs
 
-SOPs live in `SOPs/` and define the required documentation structure, standards, and templates.
+SOPs live in `SOPs/` and define required documentation standards and templates.
 
-## Legacy Sources (Temporary)
+## Archive (Temporary)
 
-Legacy docs remain as source material while canonical docs are validated:
-
-- `docs/packages/`
-- `docs/rust/`
-- `docs/quality/`
-- `docs/security/`
-- `docs/guides/`
-
-See `archive.md` and `reference/legacy-sources.md` for the consolidation map.
+`docs/archive.md` is a temporary fallback list while the new documentation structure stabilizes.

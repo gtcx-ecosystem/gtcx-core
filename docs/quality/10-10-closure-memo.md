@@ -5,18 +5,15 @@
 
 ## Statement
 
-The 10/10 remediation plan is complete and fully evidenced. All quality gates, performance budgets (including ZKP), security scans, and governance checks are enforced in CI, with heavy ZKP proof runs automated via scheduled workflow.
+The remediation program is **near‑complete**. All gates are in place and enforced. Final closeout is pending the heavy Groth16 proof run in release mode and UAT evidence logging.
 
 ## Evidence Links
 
 - Remediation plan: `docs/quality/10-10-remediation-plan.md`
 - Remediation tracker: `docs/quality/10-10-remediation-tracker.md`
-- 10/10 audit report: `docs/quality/10-10-audit-report.md`
-- CI pipeline: `.github/workflows/ci.yml`
-- Heavy ZKP workflow: `.github/workflows/zkp-heavy.yml`
-- Performance budgets + history: `benchmarks/performance-budgets.json`, `benchmarks/latest-results.json`, `benchmarks/history.json`
+- Audit report: `docs/quality/10-10-audit-report.md`
+- Heavy proof workflow: `.github/workflows/zkp-heavy.yml`
 
-## Notes
+## Next Step to Close
 
-- Branch protection verification remains documented via `artifacts/branch-protection-main.unavailable.json` (plan limitation).
-- All other gates are satisfied and continuously enforced.
+- Execute `cargo test -p gtcx-zkp --release -- --ignored` and log results in the UAT log.

@@ -1,18 +1,12 @@
 # Archive Fallback (Temporary)
 
-This file exists as a safety fallback while the canonical doc set is being validated.
+This file exists as a safety fallback while the refreshed documentation set stabilizes.
 
-## Legacy Sources (Do Not Delete Yet)
+## Status
 
-See `docs/reference/legacy-sources.md` for the active consolidation map.
+- Core docs under `docs/` have been refreshed and are authoritative.
+- This file remains temporarily in case a rollback reference is needed.
 
-These sources remain until the canonical docs are fully reviewed:
+## Planned Removal
 
-- `docs/architecture/*.md`
-- `docs/specs/*.md`
-- `docs/packages/*.md`
-- `docs/rust/*`
-- `docs/security/*`
-- `docs/quality/*`
-- `docs/guides/*`
-- `docs/operations/*` (legacy runbooks)
+Remove once the team confirms no further legacy consolidation is required.
