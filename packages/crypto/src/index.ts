@@ -47,6 +47,7 @@ export {
 } from './hashing';
 
 export * from './proofs';
+export * from './zkp';
 
 // ============================================================================
 // TRACED OPERATIONS (AI-Native)

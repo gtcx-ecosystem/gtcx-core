@@ -88,15 +88,16 @@
 - Mesh survives node drop and recovery
 - Rate limiting and topic ACLs enforced
 
-## Sprint 5: ZKP System (Planned)
+## Sprint 5: ZKP System (In Progress)
 
 **Goal**: Real circuits replacing hash-commitment placeholders.  
 **Dependencies**: ZKP design selection; security requirements.  
 **Primary Deliverables**:
 
-- Compliance + provenance circuits
+- ZK proof schema + engine interfaces
+- Placeholder proof engine + tests
 - Verification hooks into compliance flows
-- Performance budgets
+- Circuit selection + performance budgets
 
 **Exit Criteria**:
 

@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Roadmap (Enterprise and Military-Grade)
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending)  
+**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP kickoff)  
 **Scope**: gtcx-core monorepo + required downstream integrations to reach full spec functionality  
 **Objective**: Implement the full spec for global south deployment with offline-first capability, government-grade identity, and financial market infrastructure reliability.
 **Source of truth**: `agile-pm/06 - planning/gtcx-core-full-spec-sprints.md`
@@ -105,6 +105,7 @@
 - Replace hash-commitment placeholders with real circuits.
 - Add proof generation/verification performance budgets.
 - Integrate proof verification into compliance workflows.
+- Progress: ZK schema + placeholder engine + unit tests in `@gtcx/crypto`.
 
 **Exit Criteria**
 

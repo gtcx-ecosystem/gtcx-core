@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Epics and Sprints
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending)  
+**Status**: Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP kickoff)  
 **Scope**: gtcx-core full-spec delivery, phased into execution sprints  
 **Objective**: Complete full protocol implementation with enterprise and government-grade readiness.
 **Source of truth**: `agile-pm/06 - planning/gtcx-core-full-spec-sprints.md`
@@ -23,7 +23,7 @@ Goal: Secure, resilient integration client with signing and mTLS support.
 **Sprint 4: P2P Networking Transport** — In Progress  
 Goal: libp2p transport with QUIC + gossipsub and secure peer discovery.
 
-**Sprint 5: ZKP System** — Planned  
+**Sprint 5: ZKP System** — In Progress  
 Goal: Real proof circuits for compliance, provenance, quality, identity.
 
 **Sprint 6: secp256k1 Interop** — Planned  
@@ -176,6 +176,11 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 **Priority**: P1  
 **Estimated Effort**: 10-14 weeks  
 **Success Criteria**: Proofs validate in CI with acceptable performance.
+
+**Progress**:
+
+- Completed: ZK proof schema + placeholder engine + unit tests (TS).
+- Pending: real circuits, verification flow integration, UAT evidence.
 
 ### Feature 5.1: Compliance and Provenance Circuits
 

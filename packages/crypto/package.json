@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "@noble/curves": "^1.4.0",
-    "@noble/hashes": "^1.4.0"
+    "@noble/hashes": "^1.4.0",
+    "zod": "^3.23.0"
   },
   "peerDependencies": {
     "@gtcx/ai": "workspace:*",

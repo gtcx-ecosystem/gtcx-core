@@ -34,6 +34,25 @@ console.log(hash256('data')); // hex string
 | `generateSalt()`                            | Random salt               |
 | `buildMerkleTree(leaves)`                   | Build Merkle tree         |
 | `verifyMerkleProof(proof)`                  | Verify Merkle inclusion   |
+| `ZKProofSchema`                             | ZK proof schema (Zod)     |
+| `HashCommitmentZkpEngine`                   | Placeholder ZK engine     |
+
+## ZKP (Placeholder)
+
+```typescript
+import { HashCommitmentZkpEngine } from '@gtcx/crypto';
+
+const engine = new HashCommitmentZkpEngine();
+const proof = await engine.generate({
+  system: 'bulletproofs',
+  proofType: 'gci_threshold',
+  publicInputs: ['threshold:50'],
+  witness: 'score:75',
+  verificationKeyId: 'bulletproofs-gci-v1',
+});
+
+const ok = await engine.verify(proof);
+```
 
 ## Related
 

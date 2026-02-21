@@ -162,6 +162,23 @@ const verification = verifyCryptographicProof(proof);
 // { valid: boolean }
 ```
 
+### Zero-Knowledge Proofs (Placeholder)
+
+```typescript
+import { HashCommitmentZkpEngine } from '@gtcx/crypto';
+
+const engine = new HashCommitmentZkpEngine();
+const proof = await engine.generate({
+  system: 'bulletproofs',
+  proofType: 'gci_threshold',
+  publicInputs: ['threshold:50'],
+  witness: 'score:75',
+  verificationKeyId: 'bulletproofs-gci-v1',
+});
+
+const ok = await engine.verify(proof);
+```
+
 ## Traced Operations (P5 AI-Native)
 
 All operations have traced variants that emit structured logs for AI analysis and observability. The API is identical to the standard functions.
