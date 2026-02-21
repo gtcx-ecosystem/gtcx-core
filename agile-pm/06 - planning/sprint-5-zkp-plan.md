@@ -31,6 +31,8 @@
 - [x] ZKP-010: Add asset ownership circuit tests for proof generation + verification.
 - [x] ZKP-011: Implement Groth16 location region circuit in `rust/gtcx-zkp`.
 - [x] ZKP-012: Add location region circuit tests for proof generation + verification.
+- [x] ZKP-013: Implement Bulletproofs amount range circuit in `rust/gtcx-zkp`.
+- [x] ZKP-014: Add amount range circuit tests for proof generation + verification.
 
 ## Acceptance Criteria
 

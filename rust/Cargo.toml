@@ -38,6 +38,9 @@ ark-bn254 = "0.4"
 ark-serialize = "0.4"
 ark-std = "0.4"
 ark-crypto-primitives = "0.4"
+bulletproofs = "5.0"
+curve25519-dalek = "4.1"
+merlin = "3.0"
 
 # Networking
 libp2p = { version = "0.54", default-features = false, features = [

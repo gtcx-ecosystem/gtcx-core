@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Sprint Plan
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP Rust Groth16 circuits landed: GCI threshold, asset ownership, location region); Sprint 6 complete (secp256k1 interop)  
+**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range); Sprint 6 complete (secp256k1 interop)  
 **Scope**: Execution plan for full-spec delivery  
 **Objective**: Provide a robust, sprint-structured roadmap with dependencies and exit criteria.
 
@@ -101,6 +101,7 @@
 - Rust Groth16 GCI threshold circuit (initial real backend)
 - Rust Groth16 asset ownership circuit (Merkle membership)
 - Rust Groth16 location region circuit (geo compliance)
+- Bulletproofs amount range circuit
 
 **Exit Criteria**:
 
