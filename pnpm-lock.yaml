@@ -156,8 +156,8 @@ importers:
         specifier: workspace:*
         version: link:../types
       '@noble/curves':
-        specifier: ^1.4.0
-        version: 1.9.7
+        specifier: ^2.0.1
+        version: 2.0.1
       '@noble/hashes':
         specifier: ^1.4.0
         version: 1.8.0
