@@ -119,9 +119,9 @@ const run = async () => {
       return false;
     };
 
-    const aReady = await waitForPeers(nodeA, 1, 12000);
-    const bReady = await waitForPeers(nodeB, 1, 12000);
-    const cReady = await waitForPeers(nodeC, 1, 12000);
+    const aReady = await waitForPeers(nodeA, 1, 15000);
+    const bReady = await waitForPeers(nodeB, 1, 15000);
+    const cReady = await waitForPeers(nodeC, 1, 15000);
     console.log('Peer counts:', {
       a: nodeA.getPeers().length,
       b: nodeB.getPeers().length,
@@ -131,7 +131,22 @@ const run = async () => {
       throw new Error('Peers not connected');
     }
 
-    await sleep(4000);
+    const waitForSubscribers = async (transport, topic, minSubs, maxWaitMs) => {
+      const started = Date.now();
+      while (Date.now() - started < maxWaitMs) {
+        if (transport.getSubscribers?.(topic).length >= minSubs) return true;
+        await sleep(500);
+      }
+      return false;
+    };
+
+    const subsReady = await waitForSubscribers(transportA, 'gtcx.mesh', 1, 15000);
+    console.log('Subscribers on A:', transportA.getSubscribers?.('gtcx.mesh') ?? []);
+    if (!subsReady) {
+      throw new Error('No subscribers detected');
+    }
+
+    await sleep(2000);
 
     await sleep(2000);
     const publishWithRetry = async (payload, attempts = 12) => {

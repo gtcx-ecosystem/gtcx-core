@@ -31,6 +31,7 @@ interface Libp2pRuntime {
   pubsub?: {
     publish: (topic: string, data: Uint8Array) => Promise<unknown>;
     subscribe: (topic: string) => Promise<void> | void;
+    getSubscribers?: (topic: string) => Array<{ toString?: () => string } | string>;
     addEventListener?: (event: string, handler: (event: unknown) => void) => void;
     removeEventListener?: (event: string, handler: (event: unknown) => void) => void;
   };
@@ -203,6 +204,14 @@ export class Libp2pTransport implements TransportAdapter {
     for (const topic of this.topics) {
       await this.runtime.pubsub.subscribe(topic);
     }
+  }
+
+  getSubscribers(topic: string): string[] {
+    if (!this.runtime?.pubsub?.getSubscribers) return [];
+    return this.runtime.pubsub
+      .getSubscribers(topic)
+      .map((peer) => (typeof peer === 'string' ? peer : (peer?.toString?.() ?? '')))
+      .filter(Boolean);
   }
 
   async send(_peerId: PeerId, message: MessageEnvelope): Promise<void> {
