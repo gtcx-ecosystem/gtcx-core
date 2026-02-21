@@ -33,7 +33,7 @@ They are consistent with `docs/specs/security-framework.md` and will be refined 
 ## Phased Implementation
 
 1. **Phase A (Now):** Placeholder hash-commitment engine in `@gtcx/crypto` to unblock flows.
-2. **Phase B:** Arkworks circuits in `rust/gtcx-zkp` for the above proof types.
+2. **Phase B:** Arkworks circuits in `rust/gtcx-zkp` for the above proof types. The first circuit landed is a Groth16-based GCI threshold proof; Bulletproofs range proofs remain the target for the final `gci_threshold` design.
 3. **Phase C:** Optional NAPI bindings for Node/TypeScript consumers.
 
 ## Verification Hooks

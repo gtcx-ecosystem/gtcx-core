@@ -12,17 +12,29 @@
 //!
 //! ## Design
 //!
-//! Uses Blake3 hash commitments as the proving system foundation.
-//! Full arkworks Groth16/Bulletproofs integration is planned for Phase 2.
-//! The current implementation provides the same API surface with
-//! hash-based commitments for development and testing.
+//! Uses Blake3 hash commitments as the lightweight proof foundation.
+//! The first real circuit backend (Groth16 GCI threshold) is implemented,
+//! while additional circuits (Bulletproofs, Groth16/Plonk) are tracked in the
+//! roadmap and will expand this crate.
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
 #![deny(missing_docs)]
 
+use ark_bn254::{Bn254, Fr};
+use ark_ff::Field;
+use ark_groth16::{Groth16, Proof as Groth16Proof, ProvingKey, VerifyingKey};
+use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
+use ark_r1cs_std::alloc::AllocVar;
+use ark_r1cs_std::boolean::Boolean;
+use ark_r1cs_std::eq::EqGadget;
+use ark_r1cs_std::uint64::UInt64;
+use ark_serialize::{CanonicalDeserialize, CanonicalSerialize};
+use ark_snark::SNARK;
+use ark_std::rand::{rngs::StdRng, SeedableRng};
 use gtcx_crypto::hashing::{blake3, blake3_keyed};
 use serde::{Deserialize, Serialize};
+use std::io::Cursor;
 use thiserror::Error;
 use tracing::instrument;
 
@@ -49,6 +61,34 @@ pub enum ZkpError {
     /// Proof verification failed.
     #[error("Proof verification failed")]
     VerificationFailed,
+
+    /// Witness violates circuit preconditions.
+    #[error("Invalid witness: {reason}")]
+    InvalidWitness {
+        /// Description of the constraint violation.
+        reason: String,
+    },
+
+    /// Proof system error during setup, proving, or verification.
+    #[error("Proof system error: {reason}")]
+    ProofSystemError {
+        /// Description of the proof system failure.
+        reason: String,
+    },
+
+    /// Serialization failed for proof system objects.
+    #[error("Serialization error: {reason}")]
+    SerializationError {
+        /// Description of the serialization failure.
+        reason: String,
+    },
+
+    /// Deserialization failed for proof system objects.
+    #[error("Deserialization error: {reason}")]
+    DeserializationError {
+        /// Description of the deserialization failure.
+        reason: String,
+    },
 
     /// Invalid proof format during deserialization.
     #[error("Invalid proof format: {reason}")]
@@ -238,6 +278,188 @@ impl Proof {
 }
 
 // =============================================================================
+// GROTH16 CIRCUITS (ARKWORKS)
+// =============================================================================
+
+/// Supported Groth16 circuits.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum Groth16CircuitType {
+    /// Prove that a GCI score is greater than or equal to a public threshold.
+    GciThreshold,
+}
+
+/// Groth16 proving/verifying keys (serialized).
+#[derive(Debug, Clone)]
+pub struct Groth16Keys {
+    /// Circuit this keypair belongs to.
+    pub circuit: Groth16CircuitType,
+    /// Proving key (canonical compressed bytes).
+    pub proving_key: Vec<u8>,
+    /// Verifying key (canonical compressed bytes).
+    pub verifying_key: Vec<u8>,
+}
+
+/// Groth16 proof bundle with public inputs and verifying key.
+#[derive(Debug, Clone)]
+pub struct Groth16ProofBundle {
+    /// Circuit this proof belongs to.
+    pub circuit: Groth16CircuitType,
+    /// Proof (canonical compressed bytes).
+    pub proof: Vec<u8>,
+    /// Verifying key (canonical compressed bytes).
+    pub verifying_key: Vec<u8>,
+    /// Public inputs for verification.
+    pub public_inputs: Vec<Fr>,
+}
+
+#[derive(Clone)]
+struct GciThresholdCircuit {
+    score: Option<u64>,
+    threshold: Option<u64>,
+}
+
+fn uint64_is_ge<F: Field>(
+    lhs: &UInt64<F>,
+    rhs: &UInt64<F>,
+) -> std::result::Result<Boolean<F>, SynthesisError> {
+    let lhs_bits = lhs.to_bits_le();
+    let rhs_bits = rhs.to_bits_le();
+    let mut greater = Boolean::constant(false);
+    let mut equal = Boolean::constant(true);
+
+    for i in (0..lhs_bits.len()).rev() {
+        let l = lhs_bits[i].clone();
+        let r = rhs_bits[i].clone();
+        let l_and_not_r = l.and(&r.not())?;
+        let greater_if_equal = equal.and(&l_and_not_r)?;
+        greater = greater.or(&greater_if_equal)?;
+        let bits_equal = l.xor(&r)?.not();
+        equal = equal.and(&bits_equal)?;
+    }
+
+    greater.or(&equal)
+}
+
+impl ConstraintSynthesizer<Fr> for GciThresholdCircuit {
+    fn generate_constraints(self, cs: ConstraintSystemRef<Fr>) -> std::result::Result<(), SynthesisError> {
+        let score = UInt64::new_witness(cs.clone(), || {
+            self.score.ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let threshold = UInt64::new_input(cs.clone(), || {
+            self.threshold.ok_or(SynthesisError::AssignmentMissing)
+        })?;
+
+        let is_ge = uint64_is_ge(&score, &threshold)?;
+        is_ge.enforce_equal(&Boolean::constant(true))?;
+        Ok(())
+    }
+}
+
+fn serialize<T: CanonicalSerialize>(value: &T) -> Result<Vec<u8>> {
+    let mut bytes = Vec::new();
+    value
+        .serialize_compressed(&mut bytes)
+        .map_err(|err| ZkpError::SerializationError {
+            reason: err.to_string(),
+        })?;
+    Ok(bytes)
+}
+
+fn deserialize<T: CanonicalDeserialize>(bytes: &[u8]) -> Result<T> {
+    let mut cursor = Cursor::new(bytes);
+    T::deserialize_compressed(&mut cursor).map_err(|err| ZkpError::DeserializationError {
+        reason: err.to_string(),
+    })
+}
+
+fn map_proof_system_error(err: impl std::fmt::Display) -> ZkpError {
+    ZkpError::ProofSystemError {
+        reason: err.to_string(),
+    }
+}
+
+fn zk_rng() -> StdRng {
+    StdRng::seed_from_u64(42)
+}
+
+fn u64_to_fr_bits(value: u64) -> Vec<Fr> {
+    (0..64)
+        .map(|i| Fr::from(((value >> i) & 1) as u64))
+        .collect()
+}
+
+/// Generate Groth16 proving and verifying keys for a circuit.
+///
+/// For now, only `GciThreshold` is supported.
+#[instrument]
+pub fn groth16_generate_keys(circuit: Groth16CircuitType) -> Result<Groth16Keys> {
+    match circuit {
+        Groth16CircuitType::GciThreshold => {
+            let mut rng = zk_rng();
+            let circuit_impl = GciThresholdCircuit {
+                score: Some(1),
+                threshold: Some(0),
+            };
+            let (pk, vk) =
+                Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng).map_err(map_proof_system_error)?;
+            Ok(Groth16Keys {
+                circuit: Groth16CircuitType::GciThreshold,
+                proving_key: serialize(&pk)?,
+                verifying_key: serialize(&vk)?,
+            })
+        }
+    }
+}
+
+/// Generate a Groth16 proof for the GCI threshold circuit.
+#[instrument]
+pub fn groth16_prove_gci_threshold(
+    score: u64,
+    threshold: u64,
+    keys: &Groth16Keys,
+) -> Result<Groth16ProofBundle> {
+    if keys.circuit != Groth16CircuitType::GciThreshold {
+        return Err(ZkpError::UnsupportedCircuit(format!("{:?}", keys.circuit)));
+    }
+    if score < threshold {
+        return Err(ZkpError::InvalidWitness {
+            reason: "score below threshold".to_string(),
+        });
+    }
+
+    let pk: ProvingKey<Bn254> = deserialize(&keys.proving_key)?;
+    let mut rng = zk_rng();
+    let circuit = GciThresholdCircuit {
+        score: Some(score),
+        threshold: Some(threshold),
+    };
+    let proof = Groth16::<Bn254>::prove(&pk, circuit, &mut rng).map_err(map_proof_system_error)?;
+    let public_inputs = u64_to_fr_bits(threshold);
+
+    Ok(Groth16ProofBundle {
+        circuit: Groth16CircuitType::GciThreshold,
+        proof: serialize(&proof)?,
+        verifying_key: keys.verifying_key.clone(),
+        public_inputs,
+    })
+}
+
+/// Verify a Groth16 proof bundle.
+#[instrument(skip_all, fields(circuit = ?bundle.circuit))]
+pub fn groth16_verify(bundle: &Groth16ProofBundle) -> Result<bool> {
+    match bundle.circuit {
+        Groth16CircuitType::GciThreshold => {
+            let proof: Groth16Proof<Bn254> = deserialize(&bundle.proof)?;
+            let vk: VerifyingKey<Bn254> = deserialize(&bundle.verifying_key)?;
+            let pvk =
+                Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;
+            Groth16::<Bn254>::verify_with_processed_vk(&pvk, &bundle.public_inputs, &proof)
+                .map_err(map_proof_system_error)
+        }
+    }
+}
+
+// =============================================================================
 // PROOF SYSTEM
 // =============================================================================
 
@@ -417,6 +639,14 @@ mod tests {
     fn test_error_display_unsupported_circuit() {
         let err = ZkpError::UnsupportedCircuit("foobar".to_string());
         assert!(err.to_string().contains("foobar"));
+    }
+
+    #[test]
+    fn test_error_display_invalid_witness() {
+        let err = ZkpError::InvalidWitness {
+            reason: "score below threshold".to_string(),
+        };
+        assert!(err.to_string().contains("score below threshold"));
     }
 
     // ── CircuitType ──
@@ -655,5 +885,29 @@ mod tests {
         let deserialized: PublicInputs = serde_json::from_str(&json).unwrap();
         assert_eq!(inputs.circuit, deserialized.circuit);
         assert_eq!(inputs.commitment, deserialized.commitment);
+    }
+
+    // ── Groth16 (GCI threshold) ──
+
+    #[test]
+    fn test_groth16_gci_threshold_proof_valid() {
+        let keys = groth16_generate_keys(Groth16CircuitType::GciThreshold).unwrap();
+        let proof = groth16_prove_gci_threshold(92, 80, &keys).unwrap();
+        assert!(groth16_verify(&proof).unwrap());
+    }
+
+    #[test]
+    fn test_groth16_gci_threshold_invalid_score() {
+        let keys = groth16_generate_keys(Groth16CircuitType::GciThreshold).unwrap();
+        let err = groth16_prove_gci_threshold(10, 80, &keys).unwrap_err();
+        assert!(matches!(err, ZkpError::InvalidWitness { .. }));
+    }
+
+    #[test]
+    fn test_groth16_gci_threshold_tampered_public_inputs_fail() {
+        let keys = groth16_generate_keys(Groth16CircuitType::GciThreshold).unwrap();
+        let mut proof = groth16_prove_gci_threshold(95, 80, &keys).unwrap();
+        proof.public_inputs[0] = Fr::from(1u64);
+        assert!(!groth16_verify(&proof).unwrap());
     }
 }

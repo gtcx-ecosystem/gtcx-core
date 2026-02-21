@@ -16,14 +16,17 @@ gtcx-crypto = { path = "../gtcx-crypto" }
 thiserror = { workspace = true }
 tracing = { workspace = true }
 serde = { workspace = true }
-hex = { workspace = true }
 
-# ZKP dependencies (commented until needed)
-# ark-ff = { workspace = true }
-# ark-ec = { workspace = true }
-# ark-relations = { workspace = true }
-# ark-groth16 = { workspace = true }
-# ark-bn254 = { workspace = true }
+# ZKP dependencies (arkworks)
+ark-ff = { workspace = true }
+ark-ec = { workspace = true }
+ark-relations = { workspace = true }
+ark-r1cs-std = { workspace = true }
+ark-snark = { workspace = true }
+ark-groth16 = { workspace = true }
+ark-bn254 = { workspace = true }
+ark-serialize = { workspace = true }
+ark-std = { workspace = true }
 
 [dev-dependencies]
 serde_json = { workspace = true }

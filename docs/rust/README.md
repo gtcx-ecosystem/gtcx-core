@@ -7,7 +7,7 @@ Performance-critical and security-critical infrastructure for GTCX Protocol. The
 | Crate            | Purpose                                                        | Status         |
 | ---------------- | -------------------------------------------------------------- | -------------- |
 | `gtcx-crypto`    | Cryptographic primitives (Ed25519, secp256k1, SHA-256, Blake3) | In Development |
-| `gtcx-zkp`       | Zero-knowledge proofs (arkworks-based)                         | Planned        |
+| `gtcx-zkp`       | Zero-knowledge proofs (arkworks-based)                         | In Development |
 | `gtcx-consensus` | PANX weighted PBFT consensus                                   | Planned        |
 | `gtcx-network`   | P2P networking (libp2p)                                        | Planned        |
 | `gtcx-edge`      | Edge/WASM runtime for offline verification                     | Planned        |

@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Sprint Plan
 
-**Updated**: 2026-02-20  
-**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 in progress (API client hardening)  
+**Updated**: 2026-02-21  
+**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP Rust Groth16 circuit landed); Sprint 6 complete (secp256k1 interop)  
 **Scope**: Execution plan for full-spec delivery  
 **Objective**: Provide a robust, sprint-structured roadmap with dependencies and exit criteria.
 
@@ -98,6 +98,7 @@
 - Placeholder proof engine + tests
 - Verification hooks into compliance flows
 - Circuit selection + performance budgets
+- Rust Groth16 GCI threshold circuit (initial real backend)
 
 **Exit Criteria**:
 

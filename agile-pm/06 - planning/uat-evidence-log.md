@@ -54,6 +54,10 @@
   - Status: ✅ Implemented + executed
   - Evidence: `node tools/uat/zkp-uat.mjs`
   - Result: `valid proof violations 0; invalid proof violations 1` (2026-02-21 15:12)
+- Groth16 GCI threshold circuit tests (Rust):
+  - Status: ✅ Implemented + executed
+  - Evidence: `cargo test -p gtcx-zkp`
+  - Result: `30 passed` (2026-02-21)
 
 ## Sprint 6 — secp256k1 Interop
 
