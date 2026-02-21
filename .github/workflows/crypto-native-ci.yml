@@ -1,0 +1,58 @@
+name: Crypto Native Bindings CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-bindings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable Corepack and pin pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.15.0 --activate
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.82'
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('rust/Cargo.lock') }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build native bindings
+        run: pnpm --filter @gtcx/crypto-native build:native
+
+      - name: Smoke test native bindings
+        run: |
+          node -e "const n=require('./packages/crypto-native/dist/index.js'); const msg=new TextEncoder().encode('smoke'); const kp=n.generateKeyPair(); const sig=n.sign(msg,kp.privateKey); if(!n.verify(sig,msg,kp.publicKey)) { process.exit(1); } console.log('native-ok');"
+
+      - name: Upload native binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: gtcx-node-native
+          path: packages/crypto-native/native/gtcx_node.node
