@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Sprint Plan
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 complete (P2P TCP + QUIC UAT complete); Sprint 5 in progress (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range; Schnorr identity attribute); Sprint 6 complete (secp256k1 interop)  
+**Status**: Sprint 1 complete; Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 complete (P2P TCP + QUIC UAT complete); Sprint 5 complete (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range; Schnorr identity attribute); Sprint 6 complete (secp256k1 interop)
 **Scope**: Execution plan for full-spec delivery  
 **Objective**: Provide a robust, sprint-structured roadmap with dependencies and exit criteria.
 
@@ -88,7 +88,7 @@
 - Mesh survives node drop and recovery
 - Rate limiting and topic ACLs enforced
 
-## Sprint 5: ZKP System (In Progress)
+## Sprint 5: ZKP System (Complete)
 
 **Goal**: Real circuits replacing hash-commitment placeholders.  
 **Dependencies**: ZKP design selection; security requirements.  

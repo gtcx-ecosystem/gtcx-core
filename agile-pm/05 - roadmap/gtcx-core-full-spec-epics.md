@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Epics and Sprints
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 complete (P2P TCP + QUIC UAT complete); Sprint 5 in progress (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range; Schnorr identity attribute); Sprint 6 complete (secp256k1 interop)  
+**Status**: Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 complete (P2P TCP + QUIC UAT complete); Sprint 5 complete (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range; Schnorr identity attribute); Sprint 6 complete (secp256k1 interop)  
 **Scope**: gtcx-core full-spec delivery, phased into execution sprints  
 **Objective**: Complete full protocol implementation with enterprise and government-grade readiness.
 **Source of truth**: `agile-pm/06 - planning/gtcx-core-full-spec-sprints.md`
@@ -20,10 +20,10 @@ Goal: Deterministic offline-first sync with conflict resolution.
 **Sprint 3: API Client Enterprise Hardening** — Complete  
 Goal: Secure, resilient integration client with signing and mTLS support.
 
-**Sprint 4: P2P Networking Transport** — In Progress  
+**Sprint 4: P2P Networking Transport** — Complete  
 Goal: libp2p transport with QUIC + gossipsub and secure peer discovery.
 
-**Sprint 5: ZKP System** — In Progress  
+**Sprint 5: ZKP System** — Complete  
 Goal: Real proof circuits for compliance, provenance, quality, identity.
 
 **Sprint 6: secp256k1 Interop** — Complete  

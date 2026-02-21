@@ -58,6 +58,10 @@
   - Status: ✅ Implemented + executed
   - Evidence: `cargo test -p gtcx-zkp`
   - Result: `38 passed, 2 ignored (asset ownership + location region Groth16 proofs)` (2026-02-21)
+- ZKP performance budgets (CI strict trend):
+  - Status: ✅ Executed
+  - Evidence: `PERF_ENFORCE_TREND=true pnpm perf:check-budgets`
+  - Result: `Performance budget check passed (7 metrics, trend checked 7 metrics)` (2026-02-21)
 - Groth16 asset ownership proof (Rust, heavy):
   - Status: ✅ Executed
   - Evidence: `cargo test -p gtcx-zkp --release -- --ignored`

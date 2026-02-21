@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Roadmap (Enterprise and Military-Grade)
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 complete (API client hardening); Sprint 4 complete (P2P TCP + QUIC UAT complete); Sprint 5 in progress (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range; Schnorr identity attribute); Sprint 6 complete (secp256k1 interop)  
+**Status**: Sprint 1 complete (DID resolver core); Sprint 2 complete (offline sync); Sprint 3 complete (API client hardening); Sprint 4 complete (P2P TCP + QUIC UAT complete); Sprint 5 complete (ZKP circuits landed: Groth16 GCI threshold, asset ownership, location region; Bulletproofs amount range; Schnorr identity attribute); Sprint 6 complete (secp256k1 interop)
 **Scope**: gtcx-core monorepo + required downstream integrations to reach full spec functionality  
 **Objective**: Implement the full spec for global south deployment with offline-first capability, government-grade identity, and financial market infrastructure reliability.
 **Source of truth**: `agile-pm/06 - planning/gtcx-core-full-spec-sprints.md`
