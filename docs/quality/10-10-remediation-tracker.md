@@ -3,6 +3,8 @@
 Last updated: 2026-02-21
 Primary reference: `docs/quality/10-10-remediation-plan.md`
 Audit report: `docs/quality/10-10-audit-report.md`
+Quality standard: `docs/quality/enterprise-quality-standard.md`
+Release checklist: `docs/quality/release-checklist.md`
 
 ## Scoring Rubric
 
