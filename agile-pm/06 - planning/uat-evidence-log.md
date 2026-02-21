@@ -54,3 +54,10 @@
   - Status: ✅ Implemented + executed
   - Evidence: `node tools/uat/zkp-uat.mjs`
   - Result: `valid proof violations 0; invalid proof violations 1` (2026-02-21 15:12)
+
+## Sprint 6 — secp256k1 Interop
+
+- secp256k1 interop test vectors:
+  - Status: ✅ Implemented + executed
+  - Evidence: `cargo test -p gtcx-crypto secp256k1`
+  - Result: `7 passed` (2026-02-21 15:20)

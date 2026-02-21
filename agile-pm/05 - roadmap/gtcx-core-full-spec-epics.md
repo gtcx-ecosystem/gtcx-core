@@ -1,7 +1,7 @@
 # GTCX Core Full-Spec Epics and Sprints
 
 **Updated**: 2026-02-21  
-**Status**: Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP); Sprint 6 in progress (secp256k1 interop)  
+**Status**: Sprint 2 complete; Sprint 3 complete (API client hardening); Sprint 4 in progress (P2P TCP UAT complete; QUIC pending); Sprint 5 in progress (ZKP); Sprint 6 complete (secp256k1 interop)  
 **Scope**: gtcx-core full-spec delivery, phased into execution sprints  
 **Objective**: Complete full protocol implementation with enterprise and government-grade readiness.
 **Source of truth**: `agile-pm/06 - planning/gtcx-core-full-spec-sprints.md`
@@ -26,7 +26,7 @@ Goal: libp2p transport with QUIC + gossipsub and secure peer discovery.
 **Sprint 5: ZKP System** — In Progress  
 Goal: Real proof circuits for compliance, provenance, quality, identity.
 
-**Sprint 6: secp256k1 Interop** — In Progress  
+**Sprint 6: secp256k1 Interop** — Complete  
 Goal: Rust secp256k1 signing and verification with interop tests.
 
 ## Epic Catalog
@@ -202,8 +202,7 @@ Goal: Rust secp256k1 signing and verification with interop tests.
 
 **Progress**:
 
-- Completed: secp256k1 module + interop tests (Rust).
-- Pending: UAT evidence logging.
+- Completed: secp256k1 module + interop tests + UAT evidence (Rust).
 
 ### Feature 6.1: Rust secp256k1 Module
 

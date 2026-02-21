@@ -76,3 +76,7 @@
 1. Sign a message with secp256k1 and verify via external library.
 2. Validate imported secp256k1 signatures against Rust verifier.
 3. Confirm test vectors match expected output.
+
+### Sprint 6 Evidence
+
+- [x] secp256k1 interop tests (`cargo test -p gtcx-crypto secp256k1`)

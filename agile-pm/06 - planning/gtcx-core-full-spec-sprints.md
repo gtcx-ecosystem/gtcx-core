@@ -104,7 +104,7 @@
 - Proof acceptance/rejection UAT passes
 - Latency budgets met in CI
 
-## Sprint 6: secp256k1 Interop (In Progress)
+## Sprint 6: secp256k1 Interop (Complete)
 
 **Goal**: Rust secp256k1 signing and verification.  
 **Dependencies**: Crypto ADRs; interop requirements.  

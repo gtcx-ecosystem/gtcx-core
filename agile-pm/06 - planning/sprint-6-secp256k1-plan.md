@@ -2,7 +2,7 @@
 
 **Updated**: 2026-02-21  
 **Sprint Goal**: Implement secp256k1 signing + interop validation in Rust core.  
-**Status**: In progress  
+**Status**: Complete  
 **Epic**: Sprint 6 in `agile-pm/05 - roadmap/gtcx-core-full-spec-epics.md`
 
 ## Scope
@@ -21,7 +21,7 @@
 - [x] SECP-001: Implement secp256k1 module (keys, sign, verify).
 - [x] SECP-002: Add interop tests with external library.
 - [x] SECP-003: Update Rust docs and roadmap references.
-- [ ] SECP-004: UAT evidence run and log entry.
+- [x] SECP-004: UAT evidence run and log entry.
 
 ## Acceptance Criteria
 
