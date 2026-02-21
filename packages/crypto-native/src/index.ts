@@ -1,7 +1,6 @@
 import { existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 export interface NativeKeyPair {
   privateKey: string;
@@ -22,16 +21,16 @@ export interface NativeCryptoBindings {
 
 type RawBindings = Record<string, unknown>;
 
-const requireFn = typeof require === 'function' ? require : createRequire(import.meta.url);
-const currentDir = path.dirname(fileURLToPath(import.meta.url));
+const requireFn =
+  typeof require === 'function' ? require : createRequire(path.join(process.cwd(), 'package.json'));
 
 function normalizeKeyPair(value: unknown): NativeKeyPair {
   if (!value || typeof value !== 'object') {
     throw new Error('Native generateKeyPair returned invalid value');
   }
   const record = value as Record<string, unknown>;
-  const privateKey = record.privateKey ?? record.private_key;
-  const publicKey = record.publicKey ?? record.public_key;
+  const privateKey = record['privateKey'] ?? record['private_key'];
+  const publicKey = record['publicKey'] ?? record['public_key'];
   if (typeof privateKey !== 'string' || typeof publicKey !== 'string') {
     throw new Error('Native generateKeyPair returned invalid key data');
   }
@@ -53,13 +52,13 @@ function pickFn<T extends (...args: never[]) => unknown>(
 }
 
 function resolveCandidates(): string[] {
-  const envOverride = process.env.GTCX_CRYPTO_NATIVE_PATH;
+  const envOverride = process.env['GTCX_CRYPTO_NATIVE_PATH'];
   const candidates = [] as string[];
   if (envOverride) {
     candidates.push(envOverride);
   }
-  candidates.push(path.join(currentDir, 'native', 'gtcx_node.node'));
-  candidates.push(path.join(currentDir, '..', 'native', 'gtcx_node.node'));
+  candidates.push(path.join(__dirname, 'native', 'gtcx_node.node'));
+  candidates.push(path.join(__dirname, '..', 'native', 'gtcx_node.node'));
   candidates.push(
     path.join(process.cwd(), 'packages', 'crypto-native', 'native', 'gtcx_node.node')
   );
@@ -114,32 +113,32 @@ export const sha256 = (data: Uint8Array): string => rawSha256(data);
 export const sha512 = (data: Uint8Array): string => rawSha512(data);
 
 export const blake3Hash =
-  typeof raw.blake3_hash === 'function'
-    ? (data: Uint8Array) => (raw.blake3_hash as (bytes: Uint8Array) => string)(data)
-    : typeof raw.blake3Hash === 'function'
-      ? (data: Uint8Array) => (raw.blake3Hash as (bytes: Uint8Array) => string)(data)
+  typeof raw['blake3_hash'] === 'function'
+    ? (data: Uint8Array) => (raw['blake3_hash'] as (bytes: Uint8Array) => string)(data)
+    : typeof raw['blake3Hash'] === 'function'
+      ? (data: Uint8Array) => (raw['blake3Hash'] as (bytes: Uint8Array) => string)(data)
       : undefined;
 
 export const deriveChildKey =
-  typeof raw.derive_child_key === 'function'
+  typeof raw['derive_child_key'] === 'function'
     ? (parentKeyHex: string, index: number) =>
-        (raw.derive_child_key as (key: string, idx: number) => string)(parentKeyHex, index)
-    : typeof raw.deriveChildKey === 'function'
+        (raw['derive_child_key'] as (key: string, idx: number) => string)(parentKeyHex, index)
+    : typeof raw['deriveChildKey'] === 'function'
       ? (parentKeyHex: string, index: number) =>
-          (raw.deriveChildKey as (key: string, idx: number) => string)(parentKeyHex, index)
+          (raw['deriveChildKey'] as (key: string, idx: number) => string)(parentKeyHex, index)
       : undefined;
 
 export const derivePurposeKey =
-  typeof raw.derive_purpose_key === 'function'
+  typeof raw['derive_purpose_key'] === 'function'
     ? (masterKeyHex: string, purpose: string) =>
-        (raw.derive_purpose_key as (key: string, label: string) => string)(masterKeyHex, purpose)
-    : typeof raw.derivePurposeKey === 'function'
+        (raw['derive_purpose_key'] as (key: string, label: string) => string)(masterKeyHex, purpose)
+    : typeof raw['derivePurposeKey'] === 'function'
       ? (masterKeyHex: string, purpose: string) =>
-          (raw.derivePurposeKey as (key: string, label: string) => string)(masterKeyHex, purpose)
+          (raw['derivePurposeKey'] as (key: string, label: string) => string)(masterKeyHex, purpose)
       : undefined;
 
 export const version =
-  typeof raw.version === 'function' ? () => (raw.version as () => string)() : undefined;
+  typeof raw['version'] === 'function' ? () => (raw['version'] as () => string)() : undefined;
 
 export const nativeBindings: NativeCryptoBindings = {
   generateKeyPair,

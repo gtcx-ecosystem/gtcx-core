@@ -11,6 +11,22 @@ import {
   RateLimitError,
 } from '../src/index';
 
+async function hasLibp2pDependencies(): Promise<boolean> {
+  const deps = [
+    'libp2p',
+    '@libp2p/tcp',
+    '@chainsafe/libp2p-noise',
+    '@chainsafe/libp2p-gossipsub',
+    '@chainsafe/libp2p-yamux',
+  ];
+  try {
+    await Promise.all(deps.map((dep) => import(dep)));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 describe('@gtcx/network', () => {
   it('delivers messages across in-memory peers', async () => {
     const nodeA = createP2PNode({ nodeId: 'A' }, new InMemoryTransport('A'));
@@ -118,6 +134,10 @@ describe('@gtcx/network', () => {
   });
 
   it('throws configuration error when libp2p dependencies are missing', async () => {
+    const depsAvailable = await hasLibp2pDependencies();
+    if (depsAvailable) {
+      return;
+    }
     await expect(createLibp2pTransport({})).rejects.toBeInstanceOf(ConfigurationError);
   });
 });

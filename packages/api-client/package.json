@@ -29,6 +29,9 @@
     "vitest": "^2.1.0",
     "@vitest/coverage-v8": "^2.1.0"
   },
+  "dependencies": {
+    "undici": "^6.21.0"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

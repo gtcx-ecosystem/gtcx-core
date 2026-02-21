@@ -1,3 +1,5 @@
+import type { Dispatcher } from 'undici';
+
 export type ApiErrorCategory =
   | 'http'
   | 'network'
@@ -25,7 +27,7 @@ export interface ApiClientOptions {
   headers?: Record<string, string>;
   signer?: RequestSigner;
   fetcher?: typeof fetch;
-  dispatcher?: unknown;
+  dispatcher?: Dispatcher;
   mtls?: MtlsOptions;
 }
 

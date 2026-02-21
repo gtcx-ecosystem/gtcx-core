@@ -62,7 +62,7 @@ export class DIDResolverError extends Error {
   code: DIDResolverErrorCode;
   status?: number;
   retryable?: boolean;
-  cause?: unknown;
+  override cause?: unknown;
 
   constructor(
     message: string,

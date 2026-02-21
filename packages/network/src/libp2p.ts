@@ -47,7 +47,7 @@ interface Libp2pRuntime {
   };
 }
 
-type FactoryFn<T = unknown> = (...args: any[]) => T;
+type FactoryFn<T = unknown> = (...args: unknown[]) => T;
 
 function resolveFactory<T = unknown>(module: unknown, name: string): FactoryFn<T> {
   const record = module as Record<string, unknown>;
@@ -139,11 +139,11 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
     }
 
     const node = await createLibp2p({
-      addresses: listenAddresses ? { listen: listenAddresses as any[] } : undefined,
+      addresses: listenAddresses ? { listen: listenAddresses } : undefined,
       transports: [transportFactory()],
       connectionEncrypters: [noise()],
       streamMuxers: [yamux()],
-      peerDiscovery: peerDiscovery.length > 0 ? (peerDiscovery as unknown as any[]) : undefined,
+      peerDiscovery: peerDiscovery.length > 0 ? peerDiscovery : undefined,
       services: {
         identify: identify(),
         pubsub: gossipsub({

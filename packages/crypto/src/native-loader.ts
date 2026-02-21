@@ -1,4 +1,5 @@
 import { createRequire } from 'node:module';
+import path from 'node:path';
 
 type NativeKeyPair = { privateKey: string; publicKey: string };
 
@@ -32,7 +33,10 @@ function tryLoadNative(): NativeCrypto | null {
     return null;
   }
 
-  const req = typeof require === 'function' ? require : createRequire(import.meta.url);
+  const req =
+    typeof require === 'function'
+      ? require
+      : createRequire(path.join(process.cwd(), 'package.json'));
   try {
     const mod = req('@gtcx/crypto-native') as NativeCrypto;
     if (!mod || typeof mod.generateKeyPair !== 'function') {
@@ -49,7 +53,8 @@ export function getNativeCrypto(): NativeCrypto | null {
     return cached;
   }
   cached = tryLoadNative();
-  const requireNative = typeof process !== 'undefined' && isTruthy(process.env.GTCX_REQUIRE_NATIVE);
+  const requireNative =
+    typeof process !== 'undefined' && isTruthy(process.env['GTCX_REQUIRE_NATIVE']);
   if (!cached && requireNative) {
     throw new Error('Native crypto bindings are required but could not be loaded.');
   }

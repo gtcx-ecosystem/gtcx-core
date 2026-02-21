@@ -1,5 +1,9 @@
 export * from './types';
 
+import { Buffer } from 'node:buffer';
+
+import type { Dispatcher } from 'undici';
+
 import type {
   ApiClientOptions,
   ApiErrorCategory,
@@ -22,7 +26,7 @@ export class ApiClientError extends Error {
   code: ApiErrorCode;
   category: ApiErrorCategory;
   retryable: boolean;
-  cause?: unknown;
+  override cause?: unknown;
 
   constructor(
     message: string,
@@ -144,34 +148,49 @@ function mergeSignals(primary: AbortSignal, secondary: AbortSignal): AbortSignal
   return controller.signal;
 }
 
-function resolveBody(body: unknown, headers: Record<string, string>): BodyInit | undefined {
+type RequestBody = RequestInit['body'];
+
+function resolveBody(body: unknown, headers: Record<string, string>): RequestBody | undefined {
   if (body === undefined || body === null) {
     return undefined;
   }
   if (typeof body === 'string' || body instanceof ArrayBuffer || body instanceof Uint8Array) {
-    return body as BodyInit;
+    return body as RequestBody;
   }
   if (typeof FormData !== 'undefined' && body instanceof FormData) {
-    return body;
+    return body as RequestBody;
   }
   if (typeof Blob !== 'undefined' && body instanceof Blob) {
-    return body;
+    return body as RequestBody;
   }
   if (!headers['content-type'] && !headers['Content-Type']) {
     headers['content-type'] = 'application/json';
   }
-  return JSON.stringify(body);
+  return JSON.stringify(body) as RequestBody;
 }
 
-async function createMtlsDispatcher(options: MtlsOptions): Promise<unknown> {
+function normalizeMtlsValue(value?: string | Uint8Array): string | Buffer | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+  if (typeof value === 'string') {
+    return value;
+  }
+  return Buffer.from(value);
+}
+
+async function createMtlsDispatcher(options: MtlsOptions): Promise<Dispatcher> {
   try {
     const undici = await import('undici');
     const Agent = undici.Agent;
+    const key = normalizeMtlsValue(options.key);
+    const cert = normalizeMtlsValue(options.cert);
+    const ca = normalizeMtlsValue(options.ca);
     return new Agent({
       connect: {
-        key: options.key,
-        cert: options.cert,
-        ca: options.ca,
+        key,
+        cert,
+        ca,
         passphrase: options.passphrase,
         servername: options.serverName,
         rejectUnauthorized: options.rejectUnauthorized,
@@ -199,7 +218,7 @@ async function parseResponse<T>(response: Response): Promise<T> {
 interface RequestRuntime {
   fetcher: typeof fetch;
   signer?: RequestSigner;
-  dispatcherPromise?: Promise<unknown>;
+  dispatcherPromise?: Promise<Dispatcher>;
 }
 
 async function request<T>(
@@ -255,7 +274,7 @@ async function request<T>(
 
     try {
       const dispatcher = runtime.dispatcherPromise ? await runtime.dispatcherPromise : undefined;
-      const init: RequestInit & { dispatcher?: unknown } = {
+      const init: RequestInit & { dispatcher?: Dispatcher } = {
         method,
         headers,
         body: requestBody,
