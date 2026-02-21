@@ -83,14 +83,24 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
       ? [...config.listenAddresses]
       : undefined;
     if (listenAddresses && listenAddresses.length > 0) {
-      const needsCoercion = listenAddresses.some((addr) => typeof addr === 'string');
+      const needsCoercion = listenAddresses.some(
+        (addr) =>
+          typeof addr === 'string' ||
+          typeof (addr as { nodeAddress?: unknown })?.nodeAddress !== 'function'
+      );
       if (needsCoercion) {
         try {
           const multiaddrModule = await import('@multiformats/multiaddr');
           const toMultiaddr = resolveFactory(multiaddrModule, 'multiaddr');
-          listenAddresses = listenAddresses.map((addr) =>
-            typeof addr === 'string' ? toMultiaddr(addr) : addr
-          );
+          listenAddresses = listenAddresses.map((addr) => {
+            if (typeof addr === 'string') {
+              return toMultiaddr(addr);
+            }
+            if (typeof (addr as { nodeAddress?: unknown })?.nodeAddress !== 'function') {
+              return toMultiaddr(String(addr));
+            }
+            return addr;
+          });
         } catch (error) {
           throw new ConfigurationError(
             'multiaddr conversion failed. Install @multiformats/multiaddr or pass Multiaddr instances.'
