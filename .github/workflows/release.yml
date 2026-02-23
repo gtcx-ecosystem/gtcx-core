@@ -57,7 +57,7 @@ jobs:
         run: PERF_ENFORCE_TREND=true pnpm perf:check-budgets
 
       - name: Upload performance report artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: release-performance-report
           path: benchmarks/performance-report.json
@@ -89,7 +89,7 @@ jobs:
           API_ENFORCE_SEMVER=true API_BASELINE_REF="$BASELINE_REF" pnpm api:check
 
       - name: Upload API surface report artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: release-api-surface-report
           path: quality/api-surface-report.json
@@ -98,7 +98,7 @@ jobs:
         run: pnpm provenance:generate
 
       - name: Upload provenance artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: release-provenance-manifest
           path: artifacts/provenance-manifest.json
@@ -121,7 +121,7 @@ jobs:
         run: pnpm quality:kpi:export
 
       - name: Upload KPI metrics artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: release-quality-kpis
           path: |
