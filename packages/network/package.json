@@ -31,7 +31,7 @@
     "@libp2p/bootstrap": "^11.0.47",
     "@libp2p/identify": "^3.0.39",
     "@libp2p/mdns": "^11.0.47",
-    "@libp2p/tcp": "^10.1.19",
+    "@libp2p/tcp": "^11.0.10",
     "@multiformats/multiaddr": "^12.5.1",
     "@vitest/coverage-v8": "^2.1.0",
     "libp2p": "^2.10.0",
@@ -47,7 +47,7 @@
     "@libp2p/bootstrap": "^11.0.47",
     "@libp2p/identify": "^3.0.39",
     "@libp2p/mdns": "^11.0.47",
-    "@libp2p/tcp": "^10.1.19",
+    "@libp2p/tcp": "^11.0.10",
     "@multiformats/multiaddr": "^12.5.1",
     "libp2p": "^2.10.0"
   },
