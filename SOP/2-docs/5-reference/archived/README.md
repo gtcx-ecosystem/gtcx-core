@@ -10,5 +10,5 @@ Historical documents, superseded designs, and deprecated references.
 
 ## What Does Not Belong Here
 
-- Active architecture docs → [`../../../1-architecture/`](../../../1-architecture/)
-- Current package specs → [`../../../2-specs/`](../../../2-specs/)
+- Active architecture docs → [`../../1-architecture/`](../../1-architecture/)
+- Current package specs → [`../../2-specs/`](../../2-specs/)

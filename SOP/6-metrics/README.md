@@ -4,10 +4,10 @@ Quality metrics, performance targets, and SLO tracking for `gtcx-core`.
 
 ## Contents
 
-| Document                                             | Description                                        |
-| ---------------------------------------------------- | -------------------------------------------------- |
-| [`slo-targets.md`](./slo-targets.md)                 | SLO definitions and targets for core quality gates |
-| [`performance-metrics.md`](./performance-metrics.md) | Performance budget tracking and benchmark history  |
+| Document                 | Description                                        |
+| ------------------------ | -------------------------------------------------- |
+| `slo-targets.md`         | SLO definitions and targets for core quality gates |
+| `performance-metrics.md` | Performance budget tracking and benchmark history  |
 
 ## Key Metric Locations
 

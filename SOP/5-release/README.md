@@ -4,10 +4,10 @@ Release planning, versioning policy, and release readiness for `gtcx-core`.
 
 ## Contents
 
-| Document                                         | Description                                                   |
-| ------------------------------------------------ | ------------------------------------------------------------- |
-| [`versioning.md`](./versioning.md)               | Semver policy, monorepo versioning rules, tagging conventions |
-| [`release-checklist.md`](./release-checklist.md) | Step-by-step release gate sequence                            |
+| Document               | Description                                                   |
+| ---------------------- | ------------------------------------------------------------- |
+| `versioning.md`        | Semver policy, monorepo versioning rules, tagging conventions |
+| `release-checklist.md` | Step-by-step release gate sequence                            |
 
 ## Release Gate Summary
 
