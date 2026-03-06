@@ -1,13 +1,15 @@
 # Release — gtcx-core
 
-Release planning, versioning policy, and release readiness for `gtcx-core`.
+Release content for `gtcx-core` lives in the SOP. This folder is a navigational entry point.
 
-## Contents
+## Where to Find Release Content
 
-| Document               | Description                                                   |
-| ---------------------- | ------------------------------------------------------------- |
-| `versioning.md`        | Semver policy, monorepo versioning rules, tagging conventions |
-| `release-checklist.md` | Step-by-step release gate sequence                            |
+| Topic             | Location                                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Versioning policy | [`SOP/2-docs/3-engineering/guides/git-workflow.md`](../2-docs/3-engineering/guides/git-workflow.md)                 |
+| Release checklist | [`SOP/2-docs/4-operations/compliance/release-checklist.md`](../2-docs/4-operations/compliance/release-checklist.md) |
+| Cut release task  | [`SOP/1-agents/tasks/cut-release.md`](../1-agents/tasks/cut-release.md)                                             |
+| Quality runbook   | [`SOP/2-docs/4-operations/runbooks/quality-runbook.md`](../2-docs/4-operations/runbooks/quality-runbook.md)         |
 
 ## Release Gate Summary
 

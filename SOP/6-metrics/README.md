@@ -1,13 +1,15 @@
 # Metrics — gtcx-core
 
-Quality metrics, performance targets, and SLO tracking for `gtcx-core`.
+Metrics content for `gtcx-core` lives in the SOP. This folder is a navigational entry point.
 
-## Contents
+## Where to Find Metrics Content
 
-| Document                 | Description                                        |
-| ------------------------ | -------------------------------------------------- |
-| `slo-targets.md`         | SLO definitions and targets for core quality gates |
-| `performance-metrics.md` | Performance budget tracking and benchmark history  |
+| Topic                  | Location                                                                                                                            |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| SLO targets            | [`SOP/2-docs/4-operations/runbooks/slo-targets.md`](../2-docs/4-operations/runbooks/slo-targets.md)                                 |
+| Benchmarks and budgets | [`SOP/2-docs/5-reference/BENCHMARKS.md`](../2-docs/5-reference/BENCHMARKS.md)                                                       |
+| Quality KPI tracker    | [`SOP/2-docs/4-operations/compliance/10-10-remediation-tracker.md`](../2-docs/4-operations/compliance/10-10-remediation-tracker.md) |
+| Quality runbook        | [`SOP/2-docs/4-operations/runbooks/quality-runbook.md`](../2-docs/4-operations/runbooks/quality-runbook.md)                         |
 
 ## Key Metric Locations
 

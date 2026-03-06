@@ -4,14 +4,14 @@ Developer-facing documentation for `gtcx-core`.
 
 ## Contents
 
-| Section                                            | Documents                                                                         |
-| -------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [`code-standards.md`](./code-standards.md)         | TypeScript and Rust coding rules, error handling, AI-generated code policy        |
-| [`naming-conventions.md`](./naming-conventions.md) | Files, folders, branches, commits, packages, env vars                             |
-| [`guides/`](./guides/)                             | Developer setup, build and test, code review, first integration, validator deploy |
-| [`security/`](./security/)                         | Security framework, threat control matrix                                         |
-| [`testing/`](./testing/)                           | Quality standards                                                                 |
-| [`devops/`](./devops/)                             | CI/CD pipeline                                                                    |
+| Section                                            | Documents                                                                                      |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [`code-standards.md`](./code-standards.md)         | TypeScript and Rust coding rules, error handling, AI-generated code policy                     |
+| [`naming-conventions.md`](./naming-conventions.md) | Files, folders, branches, commits, packages, env vars                                          |
+| [`guides/`](./guides/)                             | Developer setup, build and test, code review, git workflow, AI-assisted dev, first integration |
+| [`security/`](./security/)                         | Security framework, threat control matrix                                                      |
+| [`testing/`](./testing/)                           | Quality standards, testing guide (patterns, coverage, Vitest)                                  |
+| [`devops/`](./devops/)                             | CI/CD pipeline                                                                                 |
 
 ## Doc Stewardship
 

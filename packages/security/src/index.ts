@@ -9,7 +9,7 @@
  * - offline/ - Secure storage, credential caching, tamper detection (P8)
  * - audit/ - Security event logging, audit trails (P12)
  *
- * @see /docs/architecture/security.md for full security architecture
+ * @see /SOP/2-docs/3-engineering/security/security-framework.md for full security architecture
  */
 
 // Re-export all modules

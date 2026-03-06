@@ -15,7 +15,7 @@ Links high-risk security controls to executable evidence in the repository. Run 
 | SEC-009    | Inconsistent domain validation       | Zod schema guardrails and strict parsing utilities            | Enforced | `packages/domain/tests/schemas.test.ts`                                           |
 | SEC-010    | End-to-end trust regression          | Integration tests for identity/verification flows             | Enforced | `tests/integration/identity-verification.test.ts`                                 |
 | SEC-011    | Cryptographic invariant regression   | Property tests for hash determinism and change sensitivity    | Enforced | `packages/crypto/tests/property-hashing.test.ts`                                  |
-| SEC-012    | ZKP proof verification regression    | Groth16/Bulletproofs/Schnorr proof tests                      | Enforced | `rust/gtcx-zkp/src/lib.rs` tests                                                  |
+| SEC-012    | ZKP proof verification regression    | Groth16/Bulletproofs/Schnorr proof tests                      | Enforced | `rust/gtcx-zkp/src/lib.rs`                                                        |
 | SEC-013    | Native crypto fallback errors        | Backend selection + native smoke tests                        | Enforced | `packages/crypto/tests/backend.test.ts`, `.github/workflows/crypto-native-ci.yml` |
 
 ## References

@@ -33,7 +33,7 @@ import type { Identity, TradePass, GeoTag, User, Lot } from '@gtcx/types';
 
 ## Related
 
-- [Architecture Decision Records](../../docs/adr/README.md)
+- [Architecture Decision Records](../../SOP/2-docs/1-architecture/decisions/README.md)
 
 ## License
 

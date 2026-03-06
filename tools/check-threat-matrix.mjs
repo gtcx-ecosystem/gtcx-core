@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const rootDir = process.cwd();
-const matrixPath = path.join(rootDir, 'docs/security/threat-control-matrix.md');
+const matrixPath = path.join(rootDir, 'SOP/2-docs/3-engineering/security/threat-control-matrix.md');
 
 if (!fs.existsSync(matrixPath)) {
   console.error(`Missing threat-control matrix: ${path.relative(rootDir, matrixPath)}`);

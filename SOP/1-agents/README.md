@@ -23,6 +23,8 @@ Any agent or team member entering this repo must read:
 2. `SOP/1-agents/safety-rules.md` — what requires human approval
 3. The role file for the work being performed
 
+For cross-session continuity, see [`context-recovery.md`](./context-recovery.md) — how to recover agent context, maintain memory files, and write session handoffs.
+
 ## 1-agentic Integration
 
 `SOP/1-agents/` connects to `1-agentic` — GTCX's internal AI development platform. The technical wiring between this repo and `1-agentic` is planned but not yet built. See [`1-agentic-integration.md`](./1-agentic-integration.md) for current state and what needs to be established when that work begins.

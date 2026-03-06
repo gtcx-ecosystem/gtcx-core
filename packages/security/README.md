@@ -31,7 +31,7 @@ const clean = sanitizeString('<script>alert("xss")</script>');
 
 ## Related
 
-- [ADR-002: Zod over JSON Schema](../../docs/adr/002-zod-over-json-schema.md)
+- [ADR-002: Zod over JSON Schema](../../SOP/2-docs/1-architecture/decisions/002-zod-over-json-schema.md)
 
 ## License
 

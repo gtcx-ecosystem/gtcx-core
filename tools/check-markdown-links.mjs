@@ -7,7 +7,7 @@ import path from 'node:path';
 const workspaceRoot = process.cwd();
 
 const markdownFiles = execSync(
-  "git ls-files -z README.md 'docs/**/*.md' 'packages/*/README.md' 'tests/**/*.md'",
+  "git ls-files -z README.md 'SOP/**/*.md' 'packages/*/README.md' 'tests/**/*.md'",
   { encoding: 'utf8' }
 )
   .split('\0')
@@ -16,9 +16,15 @@ const markdownFiles = execSync(
 const markdownLinkRegex = /\[[^\]]+\]\(([^)]+)\)/g;
 const brokenLinks = [];
 
+function stripCodeBlocks(text) {
+  // Remove fenced code blocks (``` ... ```) to avoid matching example links
+  return text.replace(/^```[\s\S]*?^```/gm, (block) => '\n'.repeat(block.split('\n').length - 1));
+}
+
 for (const file of markdownFiles) {
   const absoluteFilePath = path.resolve(workspaceRoot, file);
-  const content = readFileSync(absoluteFilePath, 'utf8');
+  const rawContent = readFileSync(absoluteFilePath, 'utf8');
+  const content = stripCodeBlocks(rawContent);
 
   for (const match of content.matchAll(markdownLinkRegex)) {
     const rawHref = (match[1] ?? '').trim();

@@ -22,6 +22,9 @@ Architecture, specifications, engineering standards, and operations documentatio
 | What does each package do?             | [`2-specs/packages/`](./2-specs/packages/README.md)                                                    |
 | What are the coding rules?             | [`3-engineering/code-standards.md`](./3-engineering/code-standards.md)                                 |
 | How do I set up my environment?        | [`3-engineering/guides/dev-setup.md`](./3-engineering/guides/dev-setup.md)                             |
+| How does the git workflow work?        | [`3-engineering/guides/git-workflow.md`](./3-engineering/guides/git-workflow.md)                       |
+| How do I write tests?                  | [`3-engineering/testing/testing-guide.md`](./3-engineering/testing/testing-guide.md)                   |
+| How do I use AI effectively?           | [`3-engineering/guides/ai-assisted-development.md`](./3-engineering/guides/ai-assisted-development.md) |
 | How do I run the full quality gate?    | [`4-operations/runbooks/quality-runbook.md`](./4-operations/runbooks/quality-runbook.md)               |
 | What is the threat model?              | [`3-engineering/security/threat-control-matrix.md`](./3-engineering/security/threat-control-matrix.md) |
 | What are the SLO targets?              | [`4-operations/runbooks/slo-targets.md`](./4-operations/runbooks/slo-targets.md)                       |
