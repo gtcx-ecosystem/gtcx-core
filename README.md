@@ -19,7 +19,7 @@ pnpm test
 pnpm lint
 ```
 
-For a step-by-step integration walkthrough, see [First Integration Tutorial](./docs/guides/first-integration.md).
+For a step-by-step integration walkthrough, see [First Integration Tutorial](./SOP/2-docs/3-engineering/guides/first-integration.md).
 
 ## Packages
 
@@ -89,35 +89,39 @@ gtcx-core/
 │   └── gtcx-node/          #   NAPI-RS bindings
 ├── tests/                  # Integration test suite
 │   └── integration/        #   Cross-package integration tests
-└── docs/                   # Documentation
-    ├── architecture/       #   Architecture overviews
-    ├── specs/              #   Protocol specifications
-    ├── packages/           #   Package-level documentation
-    ├── rust/               #   Rust crate documentation
-    ├── guides/             #   Tutorials and how-tos
-    └── adr/                #   Architecture Decision Records
+├── benchmarks/             # Performance budgets and results
+├── quality/                # API baselines and evidence artifacts
+└── SOP/                    # Standard operating procedures
+    ├── 1-agents/           #   Agent team, roles, safety rules, task playbooks
+    ├── 2-docs/             #   Architecture, specs, engineering guides, operations
+    │   ├── architecture/   #     Layer map, ADRs, data flows
+    │   ├── specs/          #     System and package specifications
+    │   ├── engineering/    #     Dev guides, security, testing
+    │   ├── operations/     #     Runbooks, compliance, release
+    │   └── reference/      #     Benchmarks, API surface, glossary
+    └── 3-agile/            #   Roadmap, sprints, UAT evidence
 ```
 
 ## Quick Navigation
 
-| Document                                                                        | Description                                       |
-| ------------------------------------------------------------------------------- | ------------------------------------------------- |
-| [Documentation Index](./docs/README.md)                                         | Full documentation hub                            |
-| [Architecture Overview](./docs/architecture/core-architecture-overview.md)      | Composable architecture and ecosystem integration |
-| [Shared Infrastructure](./docs/architecture/shared-infrastructure.md)           | Shared infrastructure and integration patterns    |
-| [Cryptographic Verification](./docs/architecture/cryptographic-verification.md) | Crypto design and verification model              |
-| [Integration Patterns](./docs/architecture/integration-patterns.md)             | Cross-protocol integration patterns               |
-| [Data Models Spec](./docs/specs/data-models.md)                                 | Core data model specification                     |
-| [Security Framework](./docs/specs/security-framework.md)                        | Security architecture and threat model            |
-| [Identity Core](./docs/specs/identity-core.md)                                  | TradePass identity specification                  |
-| [EventCore Spec](./docs/specs/eventcore.md)                                     | Event data model and encoding                     |
-| [Network Protocol](./docs/specs/network-protocol.md)                            | P2P network protocol specification                |
-| [Package Docs](./docs/packages/README.md)                                       | TypeScript package documentation index            |
-| [Rust Docs](./docs/rust/README.md)                                              | Rust crate documentation                          |
-| [ADR Index](./docs/adr/README.md)                                               | Architecture Decision Records                     |
-| [Benchmarks](./docs/BENCHMARKS.md)                                              | Cryptographic operation benchmarks                |
-| [First Integration Guide](./docs/guides/first-integration.md)                   | Getting started with gtcx-core                    |
-| [Validator Deployment](./docs/guides/validator-deployment.md)                   | Deploying a GTCX validator node                   |
+| Document                                                                              | Description                                    |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [SOP Index](./SOP/README.md)                                                          | Full documentation and operations hub          |
+| [Orientation](./SOP/1-agents/orientation.md)                                          | Start here — codebase map and session protocol |
+| [Safety Rules](./SOP/1-agents/safety-rules.md)                                        | What requires human approval                   |
+| [Architecture Overview](./SOP/2-docs/1-architecture/overview.md)                      | Layer map, trust boundaries, package graph     |
+| [ADR Index](./SOP/2-docs/1-architecture/decisions/README.md)                          | All 13 architecture decision records           |
+| [Package Specs](./SOP/2-docs/2-specs/packages/README.md)                              | Per-package API and responsibility specs       |
+| [Rust Crate Specs](./SOP/2-docs/2-specs/packages/rust/README.md)                      | Rust crate specs and build targets             |
+| [Security Framework](./SOP/2-docs/3-engineering/security/security-framework.md)       | Security architecture and controls             |
+| [Threat Control Matrix](./SOP/2-docs/3-engineering/security/threat-control-matrix.md) | 13 security controls (SEC-001 – SEC-013)       |
+| [ZKP Circuit Plan](./SOP/2-docs/1-architecture/zkp-circuit-plan.md)                   | ZKP circuit matrix and performance budgets     |
+| [Build and Test Guide](./SOP/2-docs/3-engineering/guides/build-and-test.md)           | Gate sequence and CI commands                  |
+| [First Integration Guide](./SOP/2-docs/3-engineering/guides/first-integration.md)     | Getting started with gtcx-core                 |
+| [Quality Runbook](./SOP/2-docs/4-operations/runbooks/quality-runbook.md)              | CI triage order and gate sequence              |
+| [Release Checklist](./SOP/2-docs/4-operations/compliance/release-checklist.md)        | Release gate and evidence requirements         |
+| [Benchmarks](./SOP/2-docs/5-reference/BENCHMARKS.md)                                  | Cryptographic operation benchmarks and budgets |
+| [Roadmap](./SOP/3-agile/roadmap.md)                                                   | Delivery roadmap and sprint status             |
 
 ## Dependencies
 

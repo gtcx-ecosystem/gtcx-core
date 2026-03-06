@@ -1,0 +1,75 @@
+# CLAUDE.md — gtcx-core
+
+## What This Repo Is
+
+`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 18 TypeScript packages (`@gtcx/*`) and 6 Rust crates (`gtcx-*`) consumed by every downstream GTCX repo. No product surface, no UI, no users — pure primitives. Signing, identity, verification, sync, networking, ZKP.
+
+Breaking changes here break everything downstream.
+
+## Session Start Protocol
+
+Every session, read in this order — no exceptions:
+
+1. `SOP/1-agents/orientation.md` — codebase orientation and where things live
+2. `SOP/1-agents/safety-rules.md` — what requires human approval before acting
+3. The role file for your current work (`SOP/1-agents/roles/`)
+4. The relevant package spec before touching any package (`SOP/2-docs/2-specs/packages/`)
+
+## Product Name
+
+This repo is `gtcx-core`. Do not use other GTCX product names (TradePass, ANISA, PANX, AGX, etc.) in any code, docs, or comments in this repo.
+
+## Governance
+
+All agent work in this repo operates through `1-agentic` — GTCX's internal AI development platform. `SOP/1-agents/` is the per-repo expression of `1-agentic` for `gtcx-core`: roles, safety rules, and task playbooks scoped to this codebase.
+
+`1-agentic` itself runs on Baseline (`ai-1-baseline`). SOP connects to `1-agentic` — not to Baseline directly. Archetype definitions for the four roles live in `1-agentic`; the role files in `SOP/1-agents/roles/` extend those with repo-specific scope and constraints.
+
+## Agent Team
+
+| Role                             | File                                             |
+| -------------------------------- | ------------------------------------------------ |
+| Protocol Architect               | `SOP/1-agents/roles/protocol-architect.md`       |
+| Cryptographic Security Engineer  | `SOP/1-agents/roles/crypto-security-engineer.md` |
+| Frontier Infrastructure Engineer | `SOP/1-agents/roles/frontier-infra-engineer.md`  |
+| Quality & Evidence Lead          | `SOP/1-agents/roles/quality-evidence-lead.md`    |
+
+## Security-Sensitive Packages
+
+These packages require the Cryptographic Security Engineer role and human review before any change ships:
+
+- `@gtcx/crypto`, `@gtcx/security`, `@gtcx/verification`, `@gtcx/identity`, `@gtcx/crypto-native`
+- `rust/gtcx-crypto`, `rust/gtcx-zkp`
+
+## Quality Gates (run before every commit)
+
+```bash
+pnpm architecture:check
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+```
+
+Full gate sequence: `SOP/2-docs/4-operations/runbooks/quality-runbook.md`
+
+## Hard Rules
+
+- Never skip CI gates (`--no-verify`)
+- Never push to `main` without explicit instruction
+- Never force push
+- Never commit `.env` files or secrets
+- Never implement custom cryptographic primitives
+- Never modify the threat control matrix without Cryptographic Security Engineer review
+- Never mark an ADR `Accepted` — that is a human decision
+
+## Key Paths
+
+| Need                   | Location                                                  |
+| ---------------------- | --------------------------------------------------------- |
+| Architecture decisions | `SOP/2-docs/1-architecture/decisions/`                    |
+| Package specs          | `SOP/2-docs/2-specs/packages/`                            |
+| Security framework     | `SOP/2-docs/3-engineering/security/`                      |
+| Quality runbook        | `SOP/2-docs/4-operations/runbooks/quality-runbook.md`     |
+| Release checklist      | `SOP/2-docs/4-operations/compliance/release-checklist.md` |
+| Roadmap                | `SOP/3-agile/roadmap.md`                                  |
