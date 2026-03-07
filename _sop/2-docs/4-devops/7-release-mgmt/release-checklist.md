@@ -1,0 +1,95 @@
+# Release Checklist — gtcx-core
+
+Complete this checklist for every release. All items must be checked before publishing. Gate execution is documented in the quality runbook.
+
+---
+
+## Pre-Release Gates
+
+Run all gates in order. Check each only after the command passes:
+
+**TypeScript gates:**
+
+- [ ] `pnpm lint`
+- [ ] `pnpm format:check`
+- [ ] `pnpm typecheck`
+- [ ] `pnpm test`
+- [ ] `pnpm test:coverage:critical`
+- [ ] `pnpm build`
+- [ ] `pnpm architecture:check`
+- [ ] `pnpm quality:governance:check`
+- [ ] `pnpm security:threat-matrix`
+- [ ] `pnpm perf:update-history` + `pnpm perf:check-budgets`
+- [ ] `pnpm api:check` (review diff before proceeding)
+- [ ] `pnpm provenance:generate`
+- [ ] `pnpm docs` + `pnpm docs:check-links`
+
+**Rust gates:**
+
+- [ ] `cargo fmt --all -- --check`
+- [ ] `cargo clippy --workspace --all-targets -- -D warnings`
+- [ ] `cargo test --workspace --lib`
+- [ ] Heavy ZKP proof validation completed within last 7 days (`cargo test -p gtcx-zkp --release -- --ignored`)
+
+---
+
+## API Surface Review
+
+Review `quality/api-surface-report.json` vs `quality/api-surface-baseline.json`:
+
+| Diff type       | Required action                                          |
+| --------------- | -------------------------------------------------------- |
+| Breaking change | Major version bump — escalate to human before proceeding |
+| Additive change | Minor version bump minimum                               |
+| No change       | Patch version acceptable                                 |
+
+Do not run `pnpm api:update-baseline` until human approval is confirmed.
+
+---
+
+## Release Artifacts
+
+These must exist and be committed before release:
+
+- [ ] `quality/api-surface-report.json`
+- [ ] `benchmarks/performance-report.json`
+- [ ] `artifacts/provenance-manifest.json`
+- [ ] `quality/release-<version>-evidence.md` — gate results summary
+
+---
+
+## Human Approval Signoff
+
+- [ ] CODEOWNERS approval received
+- [ ] Version bump type confirmed by human reviewer (patch / minor / major)
+- [ ] API diff reviewed and version decision made
+- [ ] UAT evidence log updated for any new features (`_sop/3-agile/2-scrum-board/6-testing/uat-evidence-log.md`)
+- [ ] Release notes updated
+
+---
+
+## Post-Approval Steps
+
+Execute only after human approval:
+
+- [ ] `pnpm api:update-baseline` (if API changed)
+- [ ] Version bump applied
+- [ ] Tag created
+- [ ] Published per procedure in `_sop/2-docs/4-devops/3-ci-cd-pipelines/ci-cd.md`
+
+---
+
+## Hard Rules
+
+- Never mark a checklist item complete without running the actual gate
+- Never publish without all gates passing
+- Never run `pnpm api:update-baseline` without human approval
+- Never force-push a release tag
+
+---
+
+## Reference
+
+- [`_sop/2-docs/4-devops/2-runbooks/quality-runbook.md`](../2-runbooks/quality-runbook.md) — full gate sequence and triage order
+- [`_sop/2-docs/5-specs/6-testing/quality-standards.md`](../../5-specs/6-testing/quality-standards.md) — coverage thresholds
+- [`_sop/1-agents/4-workflows/tasks/cut-release.md`](../../../1-agents/4-workflows/tasks/cut-release.md) — release task playbook

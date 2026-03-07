@@ -10,10 +10,10 @@ Breaking changes here break everything downstream.
 
 Every session, read in this order — no exceptions:
 
-1. `SOP/1-agents/orientation.md` — codebase orientation and where things live
-2. `SOP/1-agents/safety-rules.md` — what requires human approval before acting
-3. The role file for your current work (`SOP/1-agents/roles/`)
-4. The relevant package spec before touching any package (`SOP/2-docs/2-specs/packages/`)
+1. `_sop/1-agents/1-onboarding/orientation.md` — codebase orientation and where things live
+2. `_sop/1-agents/4-workflows/safety-rules.md` — what requires human approval before acting
+3. The role file for your current work (`_sop/1-agents/2-roles/`)
+4. The relevant package spec before touching any package (`_sop/2-docs/5-specs/4-backend/packages/`)
 
 ## Product Name
 
@@ -21,18 +21,18 @@ This repo is `gtcx-core`. Do not use other GTCX product names (TradePass, ANISA,
 
 ## Governance
 
-All agent work in this repo operates through `1-agentic` — GTCX's internal AI development platform. `SOP/1-agents/` is the per-repo expression of `1-agentic` for `gtcx-core`: roles, safety rules, and task playbooks scoped to this codebase.
+All agent work in this repo operates through `1-agentic` — GTCX's internal AI development platform. `_sop/1-agents/` is the per-repo expression of `1-agentic` for `gtcx-core`: roles, safety rules, and task playbooks scoped to this codebase.
 
-`1-agentic` itself runs on Baseline (`ai-1-baseline`). SOP connects to `1-agentic` — not to Baseline directly. Archetype definitions for the four roles live in `1-agentic`; the role files in `SOP/1-agents/roles/` extend those with repo-specific scope and constraints.
+`1-agentic` itself runs on Baseline (`ai-1-baseline`). The SOP connects to `1-agentic` — not to Baseline directly. Archetype definitions for the four roles live in `1-agentic`; the role files in `_sop/1-agents/2-roles/` extend those with repo-specific scope and constraints.
 
 ## Agent Team
 
-| Role                             | File                                             |
-| -------------------------------- | ------------------------------------------------ |
-| Protocol Architect               | `SOP/1-agents/roles/protocol-architect.md`       |
-| Cryptographic Security Engineer  | `SOP/1-agents/roles/crypto-security-engineer.md` |
-| Frontier Infrastructure Engineer | `SOP/1-agents/roles/frontier-infra-engineer.md`  |
-| Quality & Evidence Lead          | `SOP/1-agents/roles/quality-evidence-lead.md`    |
+| Role                             | File                                                |
+| -------------------------------- | --------------------------------------------------- |
+| Protocol Architect               | `_sop/1-agents/2-roles/protocol-architect.md`       |
+| Cryptographic Security Engineer  | `_sop/1-agents/2-roles/crypto-security-engineer.md` |
+| Frontier Infrastructure Engineer | `_sop/1-agents/2-roles/frontier-infra-engineer.md`  |
+| Quality & Evidence Lead          | `_sop/1-agents/2-roles/quality-evidence-lead.md`    |
 
 ## Security-Sensitive Packages
 
@@ -51,7 +51,7 @@ pnpm test
 pnpm build
 ```
 
-Full gate sequence: `SOP/2-docs/4-operations/runbooks/quality-runbook.md`
+Full gate sequence: `_sop/2-docs/4-devops/2-runbooks/quality-runbook.md`
 
 ## Hard Rules
 
@@ -65,11 +65,12 @@ Full gate sequence: `SOP/2-docs/4-operations/runbooks/quality-runbook.md`
 
 ## Key Paths
 
-| Need                   | Location                                                  |
-| ---------------------- | --------------------------------------------------------- |
-| Architecture decisions | `SOP/2-docs/1-architecture/decisions/`                    |
-| Package specs          | `SOP/2-docs/2-specs/packages/`                            |
-| Security framework     | `SOP/2-docs/3-engineering/security/`                      |
-| Quality runbook        | `SOP/2-docs/4-operations/runbooks/quality-runbook.md`     |
-| Release checklist      | `SOP/2-docs/4-operations/compliance/release-checklist.md` |
-| Roadmap                | `SOP/3-agile/roadmap.md`                                  |
+| Need                   | Location                                                   |
+| ---------------------- | ---------------------------------------------------------- |
+| Architecture decisions | `_sop/2-docs/3-engineering/6-decisions/`                   |
+| System architecture    | `_sop/2-docs/3-engineering/2-system-design/`               |
+| Package specs          | `_sop/2-docs/5-specs/4-backend/packages/`                  |
+| Security framework     | `_sop/2-docs/3-engineering/7-security/`                    |
+| Quality runbook        | `_sop/2-docs/4-devops/2-runbooks/quality-runbook.md`       |
+| Release checklist      | `_sop/2-docs/4-devops/7-release-mgmt/release-checklist.md` |
+| Roadmap                | `_sop/3-agile/`                                            |
