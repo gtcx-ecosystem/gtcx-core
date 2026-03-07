@@ -30,7 +30,7 @@ Exceptions must include:
 
 ## Ownership
 
-Owner: Platform Lead  
+Owner: Protocol Architect
 Review cadence: quarterly
 
 ---

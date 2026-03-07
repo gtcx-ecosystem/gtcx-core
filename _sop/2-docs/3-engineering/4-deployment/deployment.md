@@ -1,250 +1,124 @@
-# Deployment — {project-name}
+# Package Publishing — gtcx-core
 
-Infrastructure requirements, reference architecture, and deployment procedures.
-
----
-
-## 1. Infrastructure Requirements
-
-### 1.1 Compute
-
-| Tier          | On-Prem Spec | Cloud Equivalent  | Notes   |
-| ------------- | ------------ | ----------------- | ------- |
-| Application   | {cpu/memory} | {instance type}   | {notes} |
-| Database      | {cpu/memory} | {instance type}   | {notes} |
-| Cache         | {memory}     | {instance type}   | {notes} |
-| Load Balancer | {spec}       | {managed service} | {notes} |
-
-### 1.2 Network Requirements
-
-- Bandwidth: {inbound/outbound targets}
-- Latency: {p95 target between components}
-- Segmentation: {VPC, subnet, zone requirements}
-- Security: {WAF, DDoS protection, IPS/IDS}
-
-### 1.3 Software Dependencies
-
-- OS: {version and kernel requirements}
-- Runtime: {version — Node, Python, JVM, etc.}
-- Database: {engine and version}
-- Cache: {engine and version}
+`gtcx-core` is a library, not a service. There are no servers to deploy. "Deployment" means publishing versioned packages to npm and Cargo registries after all CI gates pass.
 
 ---
 
-## 2. Reference Architecture
+## Publishing Targets
 
-{Insert architecture diagram here — ASCII, Mermaid, or image link.}
-
-**Environments**:
-
-| Environment | Purpose                | URL           |
-| ----------- | ---------------------- | ------------- |
-| Production  | Live user traffic      | {prod-url}    |
-| Staging     | Pre-release validation | {staging-url} |
-| Development | Feature development    | {dev-url}     |
-
-**Services**:
-
-| Service     | Technology | CPU   | Memory   | Scale (min/max) |
-| ----------- | ---------- | ----- | -------- | --------------- |
-| {service-1} | {stack}    | {cpu} | {memory} | {min}/{max}     |
-| {service-2} | {stack}    | {cpu} | {memory} | {min}/{max}     |
+| Registry  | Scope / Pattern | Packages                   |
+| --------- | --------------- | -------------------------- |
+| npm       | `@gtcx/*`       | All 18 TypeScript packages |
+| crates.io | `gtcx-*`        | 6 Rust crates (as needed)  |
 
 ---
 
-## 3. Deployment Procedures
+## Release Workflow
 
-### 3.1 Pre-Deployment Checklist
+### 1. Changeset (developer)
 
-- [ ] Infrastructure provisioned and validated
-- [ ] Network configuration verified
-- [ ] TLS certificates valid
-- [ ] Secrets and environment variables configured
-- [ ] Database backups confirmed
-- [ ] Monitoring and alerting active
-- [ ] Rollback plan documented
-
-### 3.2 Deployment Sequence
+When a package changes, the author creates a changeset:
 
 ```bash
-# 1. Build and push image
-{build command}
-
-# 2. Run database migrations (staging)
-{migration command} --env staging
-
-# 3. Deploy to staging
-{deploy command} --env staging
-
-# 4. Validate staging
-{smoke test or health check command}
-
-# 5. Deploy to production (requires approval)
-{deploy command} --env production
-
-# 6. Validate production
-{health check command}
+pnpm changeset
 ```
 
-### 3.3 CI/CD Pipeline
+This records which packages changed and the semver bump type (patch / minor / major). The `.changeset/` file is committed alongside the code change.
 
-```yaml
-# Adapt to your CI system (GitHub Actions, GitLab CI, CircleCI, etc.)
-on:
-  push:
-    branches: [main, staging]
+### 2. CI Gates (automated — required before publish)
 
-jobs:
-  test:
-    steps:
-      - run: { lint command }
-      - run: { type check command }
-      - run: { test command }
-
-  build:
-    needs: test
-    steps:
-      - run: { docker build and push command }
-
-  deploy-staging:
-    needs: build
-    if: { staging branch condition }
-    environment: staging
-    steps:
-      - run: { deploy to staging command }
-
-  deploy-production:
-    needs: build
-    if: { main branch condition }
-    environment: production # requires manual approval
-    steps:
-      - run: { deploy to production command }
-```
-
----
-
-## 4. Operational Runbooks
-
-### Key rotation
+All of the following must pass on `main`:
 
 ```bash
-# Rotate {secret name}
-{rotation command}
-# Update services
-{restart/redeploy command}
+pnpm lint
+pnpm format:check
+pnpm typecheck
+pnpm test
+
+cd rust
+cargo test --workspace --lib
 ```
 
-### Database failover
+ZKP proof evidence (UAT gate, run on release):
 
 ```bash
-# Trigger manual failover
-{failover command}
-# Verify replica is primary
-{verification command}
+cargo test -p gtcx-zkp --release -- --ignored
 ```
 
-### Incident — {critical service} down
-
-1. Check health endpoint: `{health-url}`
-2. Check logs: `{log command}`
-3. Restart service: `{restart command}`
-4. If unresolved — rollback: see section 5
-
----
-
-## 5. Rollback Procedures
-
-### Application rollback
+Native bindings smoke test (required for `@gtcx/crypto-native`):
 
 ```bash
-# List recent deployments
-{list revisions command}
-
-# Roll back to previous version
-{rollback command} --to-revision={revision-id}
+pnpm --filter @gtcx/crypto-native test
 ```
 
-### Database rollback
+### 3. Version Bump (Changesets bot / manual)
+
+When changesets are accumulated on `main`, Changesets creates a "Version Packages" PR:
 
 ```bash
-# Revert last migration
-{migration revert command}
+pnpm changeset version   # bumps versions, generates changelogs
+```
 
-# Point-in-time recovery (last resort)
-{pitr command} --point-in-time {timestamp}
+Review the PR — verify semver correctness and changelog accuracy — then merge.
+
+### 4. Publish (automated via CI after merge)
+
+```bash
+pnpm changeset publish   # publishes all changed packages to npm
+```
+
+The CI publish job runs only on `main` after the version PR merges and all gates pass.
+
+---
+
+## Release Checklist
+
+Before merging a version PR:
+
+- [ ] All CI checks green on `main`
+- [ ] Changeset file reviewed — semver bump is correct
+- [ ] CHANGELOG entries are accurate
+- [ ] No security-sensitive changes without Cryptographic Security Engineer sign-off
+- [ ] SBOM and provenance artifacts generated (for releases with crypto changes)
+- [ ] UAT evidence log updated (`_sop/3-agile/` sprint evidence)
+- [ ] Release signoff from Quality & Evidence Lead
+
+---
+
+## Native Bindings (NAPI-RS)
+
+`@gtcx/crypto-native` links Rust via NAPI-RS. Build targets:
+
+| Platform  | Target triple               |
+| --------- | --------------------------- |
+| macOS ARM | `aarch64-apple-darwin`      |
+| macOS x86 | `x86_64-apple-darwin`       |
+| Linux x86 | `x86_64-unknown-linux-gnu`  |
+| Linux ARM | `aarch64-unknown-linux-gnu` |
+
+Pre-built binaries are included in the npm package. Rebuild locally:
+
+```bash
+cd packages/crypto-native
+pnpm build
 ```
 
 ---
 
-## 6. Capacity Planning
+## Versioning Policy
 
-| Metric     | Current Baseline | Scale-Up Threshold | Growth Model |
-| ---------- | ---------------- | ------------------ | ------------ |
-| {metric-1} | {value}          | {threshold}        | {projection} |
-| {metric-2} | {value}          | {threshold}        | {projection} |
+| Bump  | Triggers                                                      |
+| ----- | ------------------------------------------------------------- |
+| patch | Bug fix with no API change                                    |
+| minor | New exported function, type, or module — backwards-compatible |
+| major | Breaking change to any exported API, type, or module contract |
 
-**Auto-scaling rules**:
-
-| Metric                | Scale-Up At | Scale-Down At |
-| --------------------- | ----------- | ------------- |
-| CPU utilization       | >{n}%       | <{n}%         |
-| Request latency (p95) | >{n}ms      | —             |
+Packages in `@gtcx/*` are independently versioned. A change to `@gtcx/crypto` does not force a version bump on `@gtcx/sync`.
 
 ---
 
-## 7. Disaster Recovery
+## References
 
-**Objectives**:
-
-| Component   | RTO    | RPO    |
-| ----------- | ------ | ------ |
-| Application | {time} | {time} |
-| Database    | {time} | {time} |
-| Full site   | {time} | {time} |
-
-**Backup schedule**:
-
-| Component      | Frequency   | Retention   | Storage    |
-| -------------- | ----------- | ----------- | ---------- |
-| Database       | {frequency} | {retention} | {location} |
-| Object storage | {frequency} | {retention} | {location} |
-| Configuration  | Git         | Indefinite  | VCS        |
-
-**Full site recovery procedure**:
-
-1. {step 1}
-2. {step 2}
-3. Validate with: `{validation command}`
-
----
-
-## 8. Monitoring & Observability
-
-**Metrics**: {collection tool} → {retention period} → {dashboard link}
-
-**Logs**: {aggregation tool} → {retention period}
-
-**Tracing**: {tracing tool} — sampling rate: {rate}
-
-**Alert catalog**:
-
-| Alert     | Severity | Condition   | Action   |
-| --------- | -------- | ----------- | -------- |
-| {alert-1} | Critical | {condition} | {action} |
-| {alert-2} | Major    | {condition} | {action} |
-| {alert-3} | Minor    | {condition} | {action} |
-
----
-
-## Completion Checklist
-
-- [ ] Infrastructure requirements documented by tier
-- [ ] Architecture diagram included
-- [ ] All environments defined with URLs
-- [ ] Deployment sequence scripted and tested
-- [ ] CI/CD pipeline configured
-- [ ] Runbooks authored and validated
-- [ ] Rollback procedures tested
-- [ ] Capacity planning baselines established
-- [ ] DR objectives defined with tested recovery procedure
-- [ ] Monitoring stack and alerting configured
+- `_sop/2-docs/4-devops/` — CI/CD pipeline, environments, quality runbook
+- `_sop/2-docs/3-engineering/6-decisions/013-api-baseline-and-performance-budget-gates.md`
+- `_sop/1-agents/6-tasks/cut-release.md` — agent task: cut a release

@@ -1,98 +1,107 @@
-# {Service Name} — Compliance Requirements
+# Compliance Requirements — gtcx-core
 
-**Document ID**: {SVC}-COMPLIANCE-001
+**Document ID**: GTCX-CORE-COMPLIANCE-001
 **Version**: 1.0
-**Date**: {Month Year}
+**Date**: March 2026
 **Status**: Active
 
 ---
 
-## Regulatory Landscape
+## Scope
 
-{Service Name} must satisfy compliance requirements from three perspectives:
+`gtcx-core` is a cryptographic primitives library. Compliance obligations fall into three categories:
 
-1. **Platform Compliance** — {Service Name} itself must meet platform security and data handling standards
-2. **Client Compliance** — {Service Name} helps clients achieve regulatory compliance in their jurisdictions
-3. **Credential Compliance** — Any credentials or attestations issued must meet applicable standards
+1. **Library compliance** — the packages themselves must meet security and supply-chain standards
+2. **Consumption compliance** — downstream services using `gtcx-core` can satisfy their own regulatory obligations via the standards implemented here
+3. **Government-grade deployment** — packages may be used in government-regulated or FIPS-required environments
 
 ---
 
-## Platform Compliance Requirements
-
-### SOC 2 Type II
-
-| Trust Service Criteria     | {Service Name} Controls                                             |
-| -------------------------- | ------------------------------------------------------------------- |
-| Security (CC6)             | OAuth 2.0, RBAC, TLS 1.3, encryption at rest, network policies      |
-| Availability (CC7)         | {SLA target}, auto-scaling, health checks, circuit breakers         |
-| Processing Integrity (CC8) | Deterministic operations, idempotent writes, audit trail            |
-| Confidentiality (CC9)      | Tenant data isolation, encryption, access controls                  |
-| Privacy                    | Minimal PII collection, consent management, data retention policies |
+## Platform Compliance
 
 ### ISO 27001
 
-- Information Security Management System (ISMS) documentation
-- Risk assessment and treatment plan
-- Asset inventory (APIs, databases, credentials, keys)
-- Access control policy enforcement
-- Incident response procedures
-- Business continuity planning
+| Control Area           | Implementation                                                           |
+| ---------------------- | ------------------------------------------------------------------------ |
+| Access control         | Repository access via GitHub CODEOWNERS and required reviews             |
+| Cryptographic controls | Ed25519, SHA-256, Blake3 — all with RFC test vectors                     |
+| Secure development     | `#![deny(unsafe_code)]`, Zeroizing key material, no `unwrap()` in libs   |
+| Asset inventory        | Package manifest in `pnpm-workspace.yaml`, crate list in `rust/`         |
+| Incident response      | `_sop/2-docs/4-devops/` runbooks; escalation per safety-rules.md         |
+| Change management      | All changes via PR with required reviews; ADRs for architectural changes |
 
-### GDPR
+### SOC 2 Type II
 
-- Data processing agreements with all sub-processors
-- Right to erasure ({data-type} and evidence data)
-- Data portability (export tenant data as JSON)
-- Breach notification within 72 hours
-- Data Protection Impact Assessment (DPIA) completed
-- Data residency controls per tenant
+| Trust Service Criteria     | gtcx-core Controls                                                    |
+| -------------------------- | --------------------------------------------------------------------- |
+| Security (CC6)             | Ed25519 signing, Blake3/SHA-256, `Zeroizing<T>` on all key material   |
+| Processing Integrity (CC8) | Deterministic crypto operations; RFC test vectors enforce correctness |
+| Availability (CC7)         | No runtime service — library availability = npm registry availability |
+| Confidentiality (CC9)      | No PII collected; keys zeroized on drop                               |
 
----
+### Supply Chain (SBOM + Provenance)
 
-## Client Framework Support
+Per release (or on any release containing crypto changes):
 
-{Service Name} supports scoring or verification against the following compliance frameworks:
+- Software Bill of Materials (SBOM) generated for all npm packages
+- Provenance attestation attached to npm publish (via GitHub Actions OIDC)
+- Cargo audit run on every PR (`cargo audit`)
+- npm audit run on every PR (`pnpm audit`)
 
-| Framework        | Profile ID   | Controls |       Status       |
-| ---------------- | ------------ | :------: | :----------------: |
-| {Framework Name} | {PROFILE_ID} | {count}  | {Active / Planned} |
-| {Framework Name} | {PROFILE_ID} | {count}  | {Active / Planned} |
-| {Framework Name} | {PROFILE_ID} | {count}  | {Active / Planned} |
+### Export Control
 
-**Common framework examples** (adapt to your jurisdiction):
-
-- IFC Performance Standards — supply chain / environmental & social
-- OECD Due Diligence Guidance — responsible mineral sourcing
-- ISO 14001 / ISO 45001 — environmental and occupational health management
-- GDPR / CCPA — data privacy
-- SOC 2 / ISO 27001 — information security
-- Basel III — banking capital and collateral
+The crypto primitives in `gtcx-core` (Ed25519, secp256k1, ZKP circuits) are subject to export control review for certain distribution contexts. Before publishing to a new registry, region, or government partner, trigger an export control policy review.
 
 ---
 
-## Data Retention
+## Government-Grade Deployment (Recommended)
 
-| Data Type       | Retention | Justification                 |
-| --------------- | --------- | ----------------------------- |
-| {data-type}     | {period}  | {reason}                      |
-| {data-type}     | {period}  | {reason}                      |
-| Audit logs      | 7 years   | SOC 2 / ISO 27001 requirement |
-| Cache data      | TTL-based | No long-term retention        |
-| API access logs | 2 years   | Security monitoring           |
+For deployments in regulated or public-sector environments:
+
+| Requirement                 | Standard       | Status                                           |
+| --------------------------- | -------------- | ------------------------------------------------ |
+| FIPS 140-3 validated crypto | FIPS 140-3     | Planned — Phase 7                                |
+| HSM-backed key management   | NIST SP 800-57 | Planned — Phase 7                                |
+| Tamper-evident audit logs   | ISO 27001      | Implemented (hash-chain audit in `@gtcx/crypto`) |
+| Secure boot support         | Platform-level | Evaluating (hardware repo)                       |
 
 ---
 
 ## Credential Standards
 
-Where {Service Name} issues digital credentials or attestations, they should align with:
+`gtcx-core` implements or will implement the following credential standards (Phase 7):
 
-- **W3C Verifiable Credentials Data Model** — Credential structure and proof format
-- **DID (Decentralized Identifiers)** — Issuer and subject identification
-- **JSON-LD** — Linked data context for credential semantics
-- **Ed25519 / SHA-256** — Signing algorithm for integrity and authenticity
+| Standard                         | Package / Crate               | Status      |
+| -------------------------------- | ----------------------------- | ----------- |
+| W3C Verifiable Credentials DM    | `@gtcx/credentials`           | Planned     |
+| W3C DID (Decentralized IDs)      | `@gtcx/identity`              | Implemented |
+| Ed25519 signing (JWT / LD-Proof) | `@gtcx/crypto`, `gtcx-crypto` | Implemented |
+| BBS+ credentials                 | `@gtcx/credentials`           | Phase 7     |
+| JSON-LD context                  | `@gtcx/credentials`           | Phase 7     |
+
+---
+
+## Data Retention
+
+`gtcx-core` is a library — it does not store user data. Consuming services are responsible for their own data retention policies. The library exposes:
+
+- Hash-chained audit log primitives (`@gtcx/crypto`) — consumers set their own retention
+- No PII fields in any exported type
+- Key material zeroized on drop — no persistence
+
+---
+
+## Security Review Requirements
+
+| Change Type                       | Required Review                              |
+| --------------------------------- | -------------------------------------------- |
+| Any crypto primitive change       | Cryptographic Security Engineer (required)   |
+| New dependency in crypto packages | Cryptographic Security Engineer (required)   |
+| API surface change                | Protocol Architect + Quality & Evidence Lead |
+| Release with crypto changes       | SBOM + provenance artifacts required         |
 
 ---
 
 **Document Status**: Active
 **Review Cycle**: Quarterly
-**Owner**: {Service Name} Compliance Team
+**Owner**: Protocol Architect + Cryptographic Security Engineer

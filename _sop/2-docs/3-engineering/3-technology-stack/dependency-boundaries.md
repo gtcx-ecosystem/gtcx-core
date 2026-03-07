@@ -30,7 +30,7 @@ Purpose: define which dependency sources are allowed, which are prohibited, and 
 
 ## Ownership
 
-Owner: Platform Lead  
+Owner: Protocol Architect
 Review cadence: quarterly
 
 ---
