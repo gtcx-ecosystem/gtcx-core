@@ -1,154 +1,114 @@
-# QA Process
+# Quality Assurance — gtcx-core
 
-**Owner**: [QA Lead / Engineering Lead]
-**Review Cycle**: Quarterly or after major process changes
+**Owner**: Quality & Evidence Lead
+**Review Cycle**: Quarterly or after major release process changes
 
 ---
 
-## QA Philosophy
+## Quality Philosophy
 
-Quality is a shared responsibility, not a gate at the end. Engineers write tests. QA defines standards, owns the test strategy, and validates release readiness. No feature ships without meeting the exit criteria defined here.
+Quality in `gtcx-core` is enforced by automated gates, not manual gating. Every CI gate is mandatory. No package ships unless all gates pass. The Quality & Evidence Lead owns the gate definitions and monitors for regressions.
 
 ---
 
 ## Test Coverage Requirements
 
-| Layer             | Minimum Coverage                   | Enforcement                           |
-| ----------------- | ---------------------------------- | ------------------------------------- |
-| Unit tests        | ≥ {coverage-target}% line coverage | CI gate — blocks merge                |
-| Integration tests | Critical paths covered             | CI gate — blocks merge                |
-| End-to-end tests  | All core user flows covered        | CI gate on `main`                     |
-| Accessibility     | axe-core zero violations           | CI gate — blocks merge                |
-| Performance       | p95 latency within SLO             | Monitored; blocks release if breached |
+| Layer             | Requirement                                    | Enforcement                                   |
+| ----------------- | ---------------------------------------------- | --------------------------------------------- |
+| Unit tests (TS)   | All exported functions tested                  | Vitest — blocks merge                         |
+| Unit tests (Rust) | All crate public API tested                    | `cargo test --workspace --lib` — blocks merge |
+| Integration tests | Cross-package interactions (crypto ↔ identity) | Vitest integration suite — blocks merge       |
+| Critical paths    | Crypto signing, hashing, ZKP — 100% branch     | `pnpm test:coverage:critical` — blocks merge  |
+| API surface       | No unintentional breaking changes              | `pnpm api:check` — blocks merge               |
+| Performance       | Signing, hashing within budget targets         | `pnpm perf:check-budgets` — blocks release    |
 
 ---
 
-## Environments and Promotion Gates
+## Gate Sequence
 
-```
-Feature branch → Review App
-  ↓ (PR approved + CI green)
-main → Staging
-  ↓ (QA sign-off)
-Staging → Production (canary)
-  ↓ (canary metrics clean for {n} hours)
-Production (full rollout)
-```
+See the full gate sequence with commands at:
+`_sop/2-docs/4-devops/2-runbooks/quality-runbook.md`
 
-### Staging Sign-Off Criteria
+Summary (TypeScript → Rust → evidence):
 
-Before any release from staging to production:
-
-- [ ] All automated tests passing (unit, integration, E2E)
-- [ ] No open P0 or P1 bugs
-- [ ] Smoke test suite run manually on staging
-- [ ] Performance within SLO targets
-- [ ] Accessibility checklist completed for new/changed UI
-- [ ] QA lead has signed off
+1. Architecture boundaries (`pnpm architecture:check`)
+2. Lint + format + typecheck + tests
+3. Build all 18 packages
+4. API surface check
+5. Critical coverage threshold
+6. Performance budgets
+7. Rust: `cargo clippy -D warnings && cargo test --workspace --lib`
+8. Provenance generation + docs
 
 ---
 
-## UAT (User Acceptance Testing)
+## Package-Level Quality Standards
 
-### When Required
-
-UAT is required for:
-
-- New product surfaces or major feature launches
-- Changes to payment, billing, or subscription flows
-- Changes affecting user data or privacy
-- Any feature that departs from existing patterns
-
-### Process
-
-1. **Define acceptance criteria** — Product owner documents criteria before development starts
-2. **Prepare test scenarios** — QA creates UAT test cases from acceptance criteria
-3. **Execute** — Internal team or beta users complete test scenarios
-4. **Record results** — Pass/fail per scenario logged in [test management tool]
-5. **Triage failures** — P0/P1 failures block release; P2/P3 go to backlog
-6. **Sign off** — Product owner confirms acceptance
+| Area                  | Standard                                                         |
+| --------------------- | ---------------------------------------------------------------- |
+| Exported API          | Every exported symbol has a test and a spec in `5-specs/`        |
+| Error handling        | `@gtcx/errors` error taxonomy used — no bare `throw new Error()` |
+| Key material          | `Zeroizing<T>` on all key structs; confirmed by code review      |
+| RFC test vectors      | Required for all crypto primitives (signing, hashing, HD keys)   |
+| Unsafe code           | `#![deny(unsafe_code)]` enforced in all crypto crates            |
+| No `unwrap()` in libs | Enforced via Clippy — `clippy::unwrap_used` deny                 |
 
 ---
 
 ## Defect Classification
 
-| Priority | Definition                                      | Response SLA      | Fix SLA                      |
-| -------- | ----------------------------------------------- | ----------------- | ---------------------------- |
-| P0       | Data loss, security vulnerability, service down | Immediate page    | Fix before any other release |
-| P1       | Core flow broken, major feature unusable        | Within 2 hours    | Fix within {n} hours         |
-| P2       | Significant degradation, workaround exists      | Next business day | Fix within current sprint    |
-| P3       | Minor issue, cosmetic                           | Weekly triage     | Backlog                      |
+| Priority | Definition                                               | Fix SLA                   |
+| -------- | -------------------------------------------------------- | ------------------------- |
+| P0       | Security vulnerability, data loss, key material exposure | Fix before any release    |
+| P1       | Core API broken (signing, verification, sync)            | Fix within current sprint |
+| P2       | Non-critical package broken, workaround exists           | Fix within 2 sprints      |
+| P3       | Documentation error, minor API inconsistency             | Backlog                   |
+
+---
+
+## UAT (Package Acceptance)
+
+UAT for `gtcx-core` means: evidence that new or changed packages meet their spec before release.
+
+**Required for release:**
+
+- All package specs in `_sop/2-docs/5-specs/` match the implementation
+- UAT evidence log updated for significant changes
+- Performance benchmark history updated (`pnpm perf:update-history`)
+- API surface baseline updated if surface changes were intentional
+
+**Who signs off:**
+
+- Quality & Evidence Lead: gate sequence passed, evidence collected
+- Cryptographic Security Engineer: required for any crypto package change
+- Protocol Architect: required for any API surface change
 
 ---
 
 ## Release Readiness Checklist
 
-Run before every production release:
+Before publishing any version:
 
-### Code Quality
-
-- [ ] All CI checks passing on the release commit
-- [ ] No unresolved security advisories in dependencies
-- [ ] Dependency audit run (`pnpm audit` or equivalent)
-- [ ] No `TODO`/`FIXME` comments merged that are tagged as blocking
-
-### Testing
-
-- [ ] Unit test coverage at or above threshold
-- [ ] E2E test suite passing in staging environment
-- [ ] Smoke test run on staging within last 24 hours
-- [ ] Any new/changed API endpoints covered by integration tests
-
-### Performance
-
-- [ ] Load test run for significant backend changes
-- [ ] p95 API latency within SLO on staging
-- [ ] No memory leak or connection leak indicators in staging logs
-
-### Data & Migrations
-
-- [ ] Database migrations tested on a production-size dataset copy
-- [ ] Migration is reversible or rollback plan documented
-- [ ] No destructive schema changes without a phased rollout plan
-
-### Observability
-
-- [ ] New features have logging and metrics instrumented
-- [ ] New alert rules reviewed and thresholds set
-- [ ] Dashboard updated to reflect new features
-
-### Sign-Off
-
-- [ ] QA lead: all test criteria met
-- [ ] Engineering lead: code review complete, no outstanding concerns
-- [ ] Product owner: acceptance criteria met
-- [ ] On-call engineer: briefed on what is shipping and rollback procedure
-
----
-
-## Known Issue Tracking
-
-Open known issues are tracked in [issue tracker] with the label `known-issue`.
-
-Each known issue must have:
-
-- Severity classification
-- Workaround documented (if any)
-- Target fix version or explicit decision to defer
-- Customer-facing impact assessment
-
-Known issues are reviewed at each sprint planning and release gate.
+- [ ] All CI gates passing on the release commit
+- [ ] `pnpm audit` — no critical or high severity advisories
+- [ ] `cargo audit` — no critical or high severity advisories
+- [ ] Changeset reviewed — semver bump correct
+- [ ] CHANGELOG accurate
+- [ ] Spec-to-code traceability map updated (if new package or scope change)
+- [ ] SBOM and provenance artifacts generated
+- [ ] Quality & Evidence Lead sign-off
+- [ ] Cryptographic Security Engineer sign-off (if crypto packages changed)
 
 ---
 
 ## QA Metrics
 
-Tracked monthly:
+Tracked per release:
 
-| Metric                                     | Target      | Current |
-| ------------------------------------------ | ----------- | ------- |
-| Escaped defects (bugs found in production) | < {n}/month |         |
-| Mean time to detect (staging)              | < {n} hours |         |
-| Test coverage (unit)                       | ≥ {n}%      |         |
-| E2E pass rate on staging                   | ≥ 99%       |         |
-| Release rollback rate                      | < {n}%      |         |
+| Metric                              | Target       |
+| ----------------------------------- | ------------ |
+| CI pass rate on `main`              | ≥ 99%        |
+| Critical path test coverage         | 100%         |
+| API surface regressions (unplanned) | 0            |
+| Performance budget violations       | 0 at release |
+| Open P0/P1 defects at release       | 0            |

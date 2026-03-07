@@ -1,182 +1,53 @@
-# Monitoring Setup
+# Monitoring — gtcx-core
 
-**Owner**: [Platform / SRE Lead]
-**Review Cycle**: Quarterly or after significant infrastructure changes
-
----
-
-## Observability Strategy
-
-Every production service must be observable across three signals:
-
-| Signal      | Purpose                                                           | Tooling                                |
-| ----------- | ----------------------------------------------------------------- | -------------------------------------- |
-| **Metrics** | Quantitative health — latency, error rate, throughput, saturation | [Prometheus + Grafana / Datadog]       |
-| **Logs**    | Structured event records for debugging and audit                  | [Loki / Datadog Logs / CloudWatch]     |
-| **Traces**  | Request flow across services for latency attribution              | [Jaeger / Datadog APM / OpenTelemetry] |
+_Not applicable in the service-monitoring sense. `gtcx-core` is a library — it has no running servers, no production services, and no SLOs for uptime or latency._
 
 ---
 
-## Required Metrics Per Service
+## What Is Monitored
 
-Every service must expose the following before shipping to production:
+For a package library, "monitoring" means:
 
-### RED Metrics (Rate, Errors, Duration)
-
-| Metric           | Description                       | Alert Threshold            |
-| ---------------- | --------------------------------- | -------------------------- |
-| Request rate     | Requests per second by endpoint   | Anomaly alert              |
-| Error rate       | 4xx + 5xx / total requests        | > {n}% over 5 min → P1     |
-| Request duration | p50, p95, p99 latency by endpoint | p95 > {target}ms → Warning |
-
-### USE Metrics (Utilization, Saturation, Errors) — Infrastructure
-
-| Metric               | Description          | Alert Threshold            |
-| -------------------- | -------------------- | -------------------------- |
-| CPU utilization      | Per container/pod    | > 80% for 10 min → Warning |
-| Memory utilization   | Per container/pod    | > 85% for 5 min → Warning  |
-| Database connections | Active / pool max    | > 80% pool → Warning       |
-| Queue depth          | Unprocessed messages | > {n} for 5 min → Warning  |
-| Disk usage           | Per volume           | > 80% → Warning            |
+| Signal                     | Source                      | What to watch                                  |
+| -------------------------- | --------------------------- | ---------------------------------------------- |
+| CI pipeline health         | GitHub Actions              | Flaky tests, build failures, gate regressions  |
+| Build times                | Turborepo + GitHub Actions  | Regressions in build or test execution time    |
+| npm package health         | npm registry                | Download counts, version adoption by consumers |
+| Dependency vulnerabilities | `pnpm audit`, `cargo audit` | New CVEs in dependency chain                   |
+| API surface stability      | `pnpm api:check`            | Unintentional breaking changes                 |
 
 ---
 
-## SLO Definitions
+## CI Failure Response
 
-Define SLOs before a service ships. Review quarterly.
+If any CI gate fails on `main`:
 
-### SLO Template
+1. Identify the failing gate from the GitHub Actions log
+2. Reproduce locally using the command from `2-runbooks/quality-runbook.md`
+3. File a P1 if the gate blocks a release; P2 otherwise
+4. Do not publish until all gates pass on `main`
 
-```
-Service: {service-name}
-SLO Window: Rolling 30 days
+For security-related failures (audit warnings, crypto test failures) — escalate to Cryptographic Security Engineer immediately and treat as P0.
 
-Availability SLO:
-  Target: 99.{n}% uptime
-  Good event: HTTP response in < {threshold}ms with 2xx status
-  Bad event: HTTP response ≥ 500 or timeout
-  Error budget: {n} minutes/month downtime allowed
+---
 
-Latency SLO:
-  Target: p95 < {threshold}ms for {endpoint}
-  Measurement: Prometheus histogram, 5-min windows
+## Dependency Vulnerability Monitoring
+
+Run on every PR (automated via CI) and weekly manually:
+
+```bash
+pnpm audit          # npm ecosystem
+cd rust && cargo audit  # Rust/Cargo ecosystem
 ```
 
-### Current SLOs
+For any high or critical severity finding:
 
-| Service     | Availability Target | Latency Target (p95) | Error Budget  |
-| ----------- | ------------------- | -------------------- | ------------- |
-| [Service A] | 99.{n}%             | < {n}ms              | {n} min/month |
-| [Service B] | 99.{n}%             | < {n}ms              | {n} min/month |
+- P0 if in a crypto package (`@gtcx/crypto`, `gtcx-crypto`, `gtcx-zkp`)
+- P1 otherwise
 
 ---
 
-## Alerting Rules
+## References
 
-### Severity Levels
-
-| Level       | Definition                                          | Response                                   | Channel           |
-| ----------- | --------------------------------------------------- | ------------------------------------------ | ----------------- |
-| P0 Critical | Service down, data loss, security breach            | Immediate page — all hands                 | PagerDuty + Slack |
-| P1 High     | Core flow degraded, SLO breach imminent             | Page on-call within 5 min                  | PagerDuty         |
-| P2 Medium   | Performance degraded, non-critical feature down     | Notify in Slack, acknowledge within 30 min | Slack             |
-| P3 Low      | Anomaly detected, investigate during business hours | Ticket created automatically               | Slack + Jira      |
-
-### Required Alert Rules
-
-Every production service must have alerts for:
-
-- [ ] Error rate spike (> {n}% over 5 minutes)
-- [ ] p95 latency breach (> SLO threshold)
-- [ ] Service unavailable (health check failing)
-- [ ] Database connection pool exhaustion
-- [ ] Disk space critical (> 80%)
-- [ ] Error budget burn rate (> 2x expected rate)
-- [ ] Certificate expiry (< 14 days)
-
----
-
-## Logging Standards
-
-### Structured Logging
-
-All logs must be structured JSON. No unstructured log lines in production.
-
-**Required fields:**
-
-```json
-{
-  "timestamp": "ISO 8601",
-  "level": "info | warn | error | debug",
-  "service": "{service-name}",
-  "trace_id": "{trace-id}",
-  "span_id": "{span-id}",
-  "message": "Human-readable summary",
-  "...": "Additional context fields"
-}
-```
-
-### Log Levels
-
-| Level   | When to use                                                                 |
-| ------- | --------------------------------------------------------------------------- |
-| `error` | Unexpected failures requiring investigation                                 |
-| `warn`  | Recoverable issues, deprecated usage, near-threshold conditions             |
-| `info`  | Significant business events (request received, job completed, state change) |
-| `debug` | Detailed diagnostic info — disabled in production by default                |
-
-### Log Retention
-
-| Environment | Retention                                                    |
-| ----------- | ------------------------------------------------------------ |
-| Production  | {n} days (compliance minimum: check regulatory requirements) |
-| Staging     | {n} days                                                     |
-| Development | {n} days                                                     |
-
----
-
-## Dashboards
-
-### Required Dashboards Per Service
-
-Every service must have a dashboard with:
-
-1. **Service Health** — Request rate, error rate, p95 latency (time series, 24h default)
-2. **Infrastructure** — CPU, memory, pod count, restarts
-3. **Dependencies** — Upstream and downstream service health
-4. **Alerts** — Active alerts and recent alert history
-
-### Dashboard Naming Convention
-
-```
-[Team] / [Service Name] / [Dashboard Type]
-Examples:
-  Platform / API Gateway / Service Health
-  Platform / API Gateway / Infrastructure
-```
-
----
-
-## Tracing
-
-All inter-service calls must be instrumented with distributed traces.
-
-**Required trace attributes:**
-
-| Attribute          | Value                            |
-| ------------------ | -------------------------------- |
-| `service.name`     | `{service-name}`                 |
-| `http.method`      | HTTP verb                        |
-| `http.url`         | Request URL (sanitized — no PII) |
-| `http.status_code` | Response code                    |
-| `db.statement`     | Query (sanitized — no values)    |
-
-**Sampling rate**: 100% in staging; {n}% in production (increase to 100% during incidents).
-
----
-
-## On-Call
-
-See [runbook-template.md](../2-runbooks/runbook-template.md) for on-call rotation and incident response procedures.
-
-**Monitoring tool access**: All engineers have read access. Write access (creating/editing dashboards, alert rules) requires [Platform / SRE] team approval.
+- `_sop/2-docs/4-devops/3-ci-cd-pipelines/ci-cd.md` — full CI gate sequence
+- `_sop/2-docs/3-engineering/5-compliance/compliance-requirements.md` — supply chain and SBOM requirements
