@@ -112,7 +112,6 @@ gtcx-core/
 | [Package Specs](./_sop/2-docs/5-specs/4-backend/packages/README.md)                | Per-package API and responsibility specs       |
 | [Rust Crate Specs](./_sop/2-docs/5-specs/4-backend/packages/rust/)                 | Rust crate specs and build targets             |
 | [Security Framework](./_sop/2-docs/3-engineering/7-security/security-framework.md) | Security architecture and controls             |
-| [Threat Model](./_sop/2-docs/3-engineering/7-security/threat-model.md)             | Threat model and security controls             |
 | [Quality Runbook](./_sop/2-docs/4-devops/2-runbooks/quality-runbook.md)            | CI triage order and gate sequence              |
 | [Release Checklist](./_sop/2-docs/4-devops/7-release-mgmt/release-checklist.md)    | Release gate and evidence requirements         |
 | [Roadmap](./_sop/3-agile/2-scrum-board/2-phases/roadmap.md)                        | Delivery roadmap and sprint status             |
@@ -139,11 +138,6 @@ Required across all repos:
 - P27 Documented — every system and API is documented
 - P29 Tested — automated tests for every module
 - P30 Intentional — every line of code serves a purpose
-
-## Spec Canon Alignment
-
-- gtcx-protocols/agile-pm/spec-canon.md
-- gtcx-docs/docs/docs-overview.md
 
 ## Cross-Links
 
