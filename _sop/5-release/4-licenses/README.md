@@ -1,21 +1,21 @@
 # Licenses
 
-License compliance audits and attribution records.
+Dependency license audit records and compliance policy for `gtcx-core` releases.
 
 ## Contents
 
-| File                                           | Description                                                                   |
-| ---------------------------------------------- | ----------------------------------------------------------------------------- |
-| [license-compliance.md](license-compliance.md) | License policy, dependency audit template, attribution requirements, sign-off |
+| File                                           | Purpose                                                            |
+| ---------------------------------------------- | ------------------------------------------------------------------ |
+| [license-compliance.md](license-compliance.md) | License policy, audit procedure, per-release audit records, NOTICE |
 
 ## What belongs here
 
-- Dependency license audit records per release
-- Attribution and NOTICE file requirements
+- Per-release dependency license audit results
 - License policy decisions and exceptions
-- First-party license documentation
+- NOTICE file attribution requirements
+- First-party license documentation (`gtcx-core` is MIT licensed)
 
 ## What does NOT belong here
 
-- Legal review of terms/privacy → `legal/`
-- IP policy → `repo/2-docs/2-company/5-legal/`
+- Legal review of terms/privacy → `3-legal/`
+- Export control → `_sop/2-docs/3-engineering/5-compliance/compliance-requirements.md`

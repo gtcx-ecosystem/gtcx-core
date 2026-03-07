@@ -1,22 +1,19 @@
 # Legal
 
-Release-gate legal reviews — terms, privacy, data processing, and regulatory compliance.
+Release-gate legal review for `gtcx-core`.
 
-## Contents
+## Scope
 
-| File                               | Description                                                                           |
-| ---------------------------------- | ------------------------------------------------------------------------------------- |
-| [legal-review.md](legal-review.md) | Pre-release legal review checklist — ToS, privacy, DPAs, IP, AI disclosures, sign-off |
+Standard product-launch legal review (ToS, privacy, DPAs, user data) does not apply — this is a library with no end users.
 
-## What belongs here
+The one legal concern specific to this repo is **export control** for cryptographic primitives. Before distributing to a new registry, government partner, or jurisdiction with specific crypto export restrictions, trigger an export control policy review.
 
-- Pre-release legal review records
-- Terms of service and privacy policy review sign-offs
-- DPA and vendor contract review status
-- Regulatory filing records per release
+See `_sop/2-docs/3-engineering/5-compliance/compliance-requirements.md` for the full export control context.
 
-## What does NOT belong here
+## Per-Release Legal Check
 
-- Ongoing legal policies → `repo/2-docs/2-company/5-legal/`
-- Compliance requirements → `repo/2-docs/3-engineering/5-compliance/`
-- License audit records → `licenses/`
+Before publishing any release that includes changes to crypto packages (`@gtcx/crypto`, `gtcx-crypto`, `gtcx-zkp`):
+
+- [ ] Export control scope unchanged (no new jurisdictions, no new distribution channels)
+- [ ] SBOM generated and attached to release
+- [ ] Open-source license inventory current (see `4-licenses/`)

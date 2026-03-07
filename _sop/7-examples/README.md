@@ -1,20 +1,22 @@
 # Examples
 
-Filled-in reference examples that demonstrate how templates should be used.
+Reference examples showing what correct `gtcx-core` documentation looks like.
 
-## Files
+## Contents
 
-| File             | Purpose                                                                     |
-| ---------------- | --------------------------------------------------------------------------- |
-| [prd.md](prd.md) | Example PRD for a multi-product portfolio — shows correct placeholder usage |
+| Reference                                                                                                                                | What it demonstrates                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`_sop/2-docs/3-engineering/6-decisions/001-rust-for-cryptography.md`](../2-docs/3-engineering/6-decisions/001-rust-for-cryptography.md) | Completed ADR — structure, rationale, consequences                              |
+| [`_sop/2-docs/5-specs/4-backend/packages/crypto.md`](../2-docs/5-specs/4-backend/packages/crypto.md)                                     | Completed package spec — API surface, security constraints, performance budgets |
+| [`_sop/1-agents/4-workflows/tasks/add-package.md`](../1-agents/4-workflows/tasks/add-package.md)                                         | Completed agent task — step-by-step with decision points                        |
 
 ## What belongs here
 
-- Completed examples of key templates (PRDs, ADRs, sprint plans, audit reports)
-- Reference artifacts that show new contributors what "good" looks like
-- Annotated examples with notes explaining decisions
+- Completed, real examples of key document types (ADRs, specs, task runbooks)
+- Reference artifacts that show what "correct and complete" looks like for this repo
+- Links to the best existing documents as canonical examples
 
 ## What does NOT belong here
 
-- Blank templates (→ `repo/3-agile/` or `repo/1-agents/onboarding/`)
-- Active project documents (→ `repo/2-docs/` or project repos)
+- Blank templates — those live in `3-agile/` or `1-agents/4-workflows/tasks/`
+- Active project documents — those live in `2-docs/` or `3-agile/`
