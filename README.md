@@ -19,7 +19,7 @@ pnpm test
 pnpm lint
 ```
 
-For a step-by-step integration walkthrough, see [First Integration Tutorial](./SOP/2-docs/3-engineering/guides/first-integration.md).
+For a step-by-step integration walkthrough, see [First Integration Tutorial](./_archive/docs/guides/first-integration.md).
 
 ## Packages
 
@@ -91,40 +91,31 @@ gtcx-core/
 │   └── integration/        #   Cross-package integration tests
 ├── benchmarks/             # Performance budgets and results
 ├── quality/                # API baselines and evidence artifacts
-└── SOP/                    # Standard operating procedures
+└── _sop/                   # Standard operating procedures
     ├── 1-agents/           #   Agent team, roles, safety rules, task playbooks
-    ├── 2-docs/             #   Architecture, specs, engineering guides, operations
-    │   ├── 1-architecture/ #     Layer map, ADRs, data flows
-    │   ├── 2-specs/        #     System and package specifications
-    │   ├── 3-engineering/  #     Dev guides, security, testing
-    │   ├── 4-operations/   #     Runbooks, compliance, release
-    │   └── 5-reference/    #     Benchmarks, API surface, glossary
-    └── 3-agile/            #   Roadmap, sprints, UAT evidence
+    ├── 2-docs/             #   Engineering, devops, specs, architecture
+    │   ├── 3-engineering/  #     System design, ADRs, security, tech stack
+    │   ├── 4-devops/       #     CI/CD, runbooks, release management
+    │   └── 5-specs/        #     Package specs, backend, testing
+    └── 3-agile/            #   Roadmap, sprints, backlog
 ```
 
 ## Quick Navigation
 
-| Document                                                                                | Description                                    |
-| --------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| [SOP Index](./SOP/README.md)                                                            | Full documentation and operations hub          |
-| [Orientation](./SOP/1-agents/orientation.md)                                            | Start here — codebase map and session protocol |
-| [Safety Rules](./SOP/1-agents/safety-rules.md)                                          | What requires human approval                   |
-| [Architecture Overview](./SOP/2-docs/1-architecture/overview.md)                        | Layer map, trust boundaries, package graph     |
-| [ADR Index](./SOP/2-docs/1-architecture/decisions/README.md)                            | All 13 architecture decision records           |
-| [Package Specs](./SOP/2-docs/2-specs/packages/README.md)                                | Per-package API and responsibility specs       |
-| [Rust Crate Specs](./SOP/2-docs/2-specs/packages/rust/README.md)                        | Rust crate specs and build targets             |
-| [Security Framework](./SOP/2-docs/3-engineering/security/security-framework.md)         | Security architecture and controls             |
-| [Threat Control Matrix](./SOP/2-docs/3-engineering/security/threat-control-matrix.md)   | 13 security controls (SEC-001 – SEC-013)       |
-| [ZKP Circuit Plan](./SOP/2-docs/1-architecture/zkp-circuit-plan.md)                     | ZKP circuit matrix and performance budgets     |
-| [Build and Test Guide](./SOP/2-docs/3-engineering/guides/build-and-test.md)             | Gate sequence and CI commands                  |
-| [Git Workflow](./SOP/2-docs/3-engineering/guides/git-workflow.md)                       | Branching, commits, PR process, merge strategy |
-| [Testing Guide](./SOP/2-docs/3-engineering/testing/testing-guide.md)                    | Test patterns, coverage targets, Vitest        |
-| [AI-Assisted Development](./SOP/2-docs/3-engineering/guides/ai-assisted-development.md) | Using AI effectively in this codebase          |
-| [First Integration Guide](./SOP/2-docs/3-engineering/guides/first-integration.md)       | Getting started with gtcx-core                 |
-| [Quality Runbook](./SOP/2-docs/4-operations/runbooks/quality-runbook.md)                | CI triage order and gate sequence              |
-| [Release Checklist](./SOP/2-docs/4-operations/compliance/release-checklist.md)          | Release gate and evidence requirements         |
-| [Benchmarks](./SOP/2-docs/5-reference/BENCHMARKS.md)                                    | Cryptographic operation benchmarks and budgets |
-| [Roadmap](./SOP/3-agile/roadmap.md)                                                     | Delivery roadmap and sprint status             |
+| Document                                                                           | Description                                    |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [\_sop Index](./_sop/README.md)                                                    | Full documentation and operations hub          |
+| [Orientation](./_sop/1-agents/1-onboarding/orientation.md)                         | Start here — codebase map and session protocol |
+| [Safety Rules](./_sop/1-agents/4-workflows/safety-rules.md)                        | What requires human approval                   |
+| [Architecture Overview](./_sop/2-docs/3-engineering/2-system-design/overview.md)   | Layer map, trust boundaries, package graph     |
+| [ADR Index](./_sop/2-docs/3-engineering/6-decisions/README.md)                     | All 13 architecture decision records           |
+| [Package Specs](./_sop/2-docs/5-specs/4-backend/packages/README.md)                | Per-package API and responsibility specs       |
+| [Rust Crate Specs](./_sop/2-docs/5-specs/4-backend/packages/rust/)                 | Rust crate specs and build targets             |
+| [Security Framework](./_sop/2-docs/3-engineering/7-security/security-framework.md) | Security architecture and controls             |
+| [Threat Model](./_sop/2-docs/3-engineering/7-security/threat-model.md)             | Threat model and security controls             |
+| [Quality Runbook](./_sop/2-docs/4-devops/2-runbooks/quality-runbook.md)            | CI triage order and gate sequence              |
+| [Release Checklist](./_sop/2-docs/4-devops/7-release-mgmt/release-checklist.md)    | Release gate and evidence requirements         |
+| [Roadmap](./_sop/3-agile/2-scrum-board/2-phases/roadmap.md)                        | Delivery roadmap and sprint status             |
 
 ## Dependencies
 

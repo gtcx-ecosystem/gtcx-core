@@ -1,27 +1,33 @@
-# Decisions
+# Architecture Decision Records
 
-Architecture Decision Records (ADRs) capturing key design choices and their rationale.
+This directory contains Architecture Decision Records (ADRs) for the GTCX Core repository. ADRs document significant architectural decisions, their context, and consequences.
 
-## ADRs
+## Index
 
-| ADR                                                 | Title                               | Status   |
-| --------------------------------------------------- | ----------------------------------- | -------- |
-| [ADR-001](ADR-001-monorepo-structure.md)            | Monorepo Structure                  | Accepted |
-| [ADR-002](ADR-002-commodity-agnostic-design.md)     | Commodity-Agnostic Design           | Accepted |
-| [ADR-003](ADR-003-ai-native-architecture.md)        | AI-Native Architecture              | Accepted |
-| [ADR-004](ADR-004-offline-first-mobile.md)          | Offline-First Mobile Architecture   | Accepted |
-| [ADR-005](ADR-005-jurisdiction-plugins.md)          | Jurisdiction Plugin Architecture    | Accepted |
-| [ADR-006](ADR-006-package-boundaries.md)            | Package Boundaries and Dependencies | Accepted |
-| [ADR-007](ADR-007-content-first-architecture.md)    | Content-First Architecture          | Accepted |
-| [ADR-008](ADR-008-multi-channel-distribution.md)    | Multi-Channel Distribution          | Accepted |
-| [ADR-009](ADR-009-platform-architecture-pattern.md) | Platform Architecture Pattern       | Accepted |
-| [ADR-010](ADR-010-service-taxonomy.md)              | Service Taxonomy — Four-Tier Model  | Accepted |
-| [ADR-011](ADR-011-connectivity-profiles.md)         | Connectivity Profiles               | Accepted |
+| ADR                                                     | Title                                                | Status   | Date       |
+| ------------------------------------------------------- | ---------------------------------------------------- | -------- | ---------- |
+| [001](001-rust-for-cryptography.md)                     | Use Rust for all cryptographic operations            | Accepted | 2025-01-15 |
+| [002](002-zod-over-json-schema.md)                      | Zod over JSON Schema for runtime validation          | Accepted | 2025-01-15 |
+| [003](003-pnpm-workspace-strict-deps.md)                | pnpm workspaces with strict dependency resolution    | Accepted | 2025-01-15 |
+| [004](004-commodity-agnostic-domain.md)                 | Commodity-agnostic domain model                      | Accepted | 2025-01-15 |
+| [005](005-ed25519-signing.md)                           | Ed25519 over secp256k1 for identity signing          | Accepted | 2025-01-15 |
+| [006](006-hash-chain-audit-trail.md)                    | Event-sourced audit trail with hash chains           | Accepted | 2025-01-15 |
+| [007](007-offline-first-architecture.md)                | Offline-first with deterministic conflict resolution | Accepted | 2025-01-15 |
+| [008](008-optional-tracing-peer-deps.md)                | Optional tracing via peer dependencies               | Accepted | 2025-01-15 |
+| [009](009-typescript-rust-fallback.md)                  | TypeScript fallback when Rust bindings unavailable   | Accepted | 2025-01-15 |
+| [010](010-pbft-weighted-consensus.md)                   | PBFT consensus with weighted stake model             | Accepted | 2025-01-15 |
+| [011](011-architecture-boundary-enforcement.md)         | Architecture boundary enforcement in CI              | Accepted | 2026-02-19 |
+| [012](012-error-taxonomy-and-cause-propagation.md)      | Error taxonomy and cause propagation                 | Accepted | 2026-02-19 |
+| [013](013-api-baseline-and-performance-budget-gates.md) | API baseline and performance budget gates            | Accepted | 2026-02-19 |
 
-> Note: ADR-007 and ADR-008 have title/filename number mismatches (internal titles say ADR-004 and ADR-006 respectively). The filenames are canonical.
+## Format
 
-## Adding a New ADR
+Each ADR follows the [template](template.md) format with Status, Date, Context, Decision, and Consequences sections.
 
-Use the template at [`repo/2-docs/3-engineering/6-decisions/adr-template.md`](../../2-docs/engineering/6-decisions/adr-template.md).
+## Process
 
-ADRs follow the format: `ADR-{NNN}-{kebab-case-title}.md`
+1. Copy `template.md` to `NNN-short-title.md`
+2. Fill in all sections with substantive content
+3. Set status to "Proposed"
+4. Submit PR for review
+5. Once merged, update status to "Accepted"
