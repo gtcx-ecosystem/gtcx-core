@@ -1,4 +1,4 @@
-# UAT Evidence Log — {repo-name}
+# UAT Evidence Log — gtcx-core
 
 Tracks user acceptance testing (UAT) evidence for features and sprints. Updated at sprint close and before release.
 

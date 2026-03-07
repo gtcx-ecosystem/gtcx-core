@@ -1,6 +1,6 @@
-# 1-agentic Integration — {repo-name}
+# 1-agentic Integration — gtcx-core
 
-**Status:** {Planned / In Progress / Done}. The governance model is in place. Technical wiring between this repo and `1-agentic` has {not yet begun / begun / been completed}.
+**Status:** Planned. The governance model is in place and operational. Technical wiring between this repo and `1-agentic` has not yet begun.
 
 ---
 
@@ -11,7 +11,7 @@ ai-1-baseline    — Baseline Protocol (open-source AI governance spec)
       ↓
 1-agentic        — GTCX internal AI development platform (runs on Baseline)
       ↓
-_sop/1-agents/   — Per-repo expression: roles, safety rules, playbooks for {repo-name}
+_sop/1-agents/   — Per-repo expression: roles, safety rules, playbooks for gtcx-core
 ```
 
 `_sop/1-agents/` connects to `1-agentic`. It does not connect to Baseline directly. Baseline is `1-agentic`'s concern.
@@ -22,28 +22,28 @@ _sop/1-agents/   — Per-repo expression: roles, safety rules, playbooks for {re
 
 Governance is defined and operational:
 
-| Component                       | Location                                    | Status                      |
-| ------------------------------- | ------------------------------------------- | --------------------------- |
-| Role definitions                | `_sop/1-agents/2-roles/`                    | {Done / In Progress}        |
-| Safety rules                    | `_sop/1-agents/4-workflows/safety-rules.md` | {Done / In Progress}        |
-| Task playbooks                  | `_sop/1-agents/4-workflows/tasks/`          | {Done / In Progress}        |
-| Coordination protocol           | `_sop/1-agents/3-structure/coordination.md` | {Done / In Progress}        |
-| Technical wiring to `1-agentic` | —                                           | {Not started / In progress} |
+| Component                       | Location                                    | Status      |
+| ------------------------------- | ------------------------------------------- | ----------- |
+| Role definitions                | `_sop/1-agents/2-roles/`                    | Done        |
+| Safety rules                    | `_sop/1-agents/4-workflows/safety-rules.md` | Done        |
+| Task playbooks                  | `_sop/1-agents/4-workflows/tasks/`          | Done        |
+| Coordination protocol           | `_sop/1-agents/3-structure/coordination.md` | Done        |
+| Technical wiring to `1-agentic` | —                                           | Not started |
 
 ---
 
 ## Integration Requirements
 
-When `1-agentic` integration work begins for `{repo-name}`, the following must be established:
+When `1-agentic` integration work begins for `gtcx-core`, the following must be established:
 
 ### 1. Archetype library in `1-agentic`
 
-The roles in `_sop/1-agents/2-roles/` reference archetypes at `1-agentic/archetypes/`. Those canonical definitions must be produced by `1-agentic`:
+The four roles in `_sop/1-agents/2-roles/` reference archetypes at `1-agentic/archetypes/`. Those canonical definitions do not yet exist. `1-agentic` must produce:
 
-{List archetypes required for this repo, e.g.:}
-
-- `1-agentic/archetypes/{role-1}`
-- `1-agentic/archetypes/{role-2}`
+- `1-agentic/archetypes/protocol-architect`
+- `1-agentic/archetypes/crypto-security-engineer`
+- `1-agentic/archetypes/frontier-infra-engineer`
+- `1-agentic/archetypes/quality-evidence-lead`
 
 The role files here will extend those definitions rather than stand alone.
 
@@ -73,6 +73,7 @@ Before technical integration begins, confirm:
 2. What is the provisioning model for repo-scoped agents?
 3. Is there a machine-readable safety policy format, or is documentation-as-policy the current model?
 4. What does `1-agentic` currently provide vs. what is still planned?
+5. Is `ai-0-agile` being folded into `1-agentic`? (confirmed directionally — track the decision)
 
 ---
 

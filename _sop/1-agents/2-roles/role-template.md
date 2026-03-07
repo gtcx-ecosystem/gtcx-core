@@ -1,7 +1,7 @@
 # {Role Name} — {repo-name}
 
 **Archetype:** {Role Name} (defined in `1-agentic/archetypes/{role-archetype}`)
-**Repo scope:** `{repo-name}` — {one-sentence description of repo}
+**Repo scope:** `gtcx-core` — shared cryptographic and protocol foundation for the GTCX ecosystem
 
 ---
 

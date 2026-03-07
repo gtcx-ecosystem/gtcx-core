@@ -1,17 +1,19 @@
 # Task Playbook: Add a Secondary-Language Component
 
-**Owner:** {role-name} (depending on component type)
+**Owner:** Frontier Infrastructure Engineer or Cryptographic Security Engineer (depending on crate type)
 **Safety tier:** Requires human approval before proceeding
 
 ---
 
 ## When to Run This
 
-Run when a new component in a secondary language (e.g. Rust, Go, Python) is being added to the workspace. This covers:
+Run when a new Rust crate is being added to the `rust/` workspace. This covers:
 
-- New performance-critical or safety-critical components
-- New native binding targets
-- New runtime or infrastructure components
+- New cryptographic primitive crates — owner: Cryptographic Security Engineer
+- New native binding targets — owner: Frontier Infrastructure Engineer
+- New network or edge runtime crates — owner: Frontier Infrastructure Engineer
+
+See [`add-rust-crate.md`](./add-rust-crate.md) for the full gtcx-core-specific Rust playbook. This document covers the general pattern.
 
 Do not begin until human approval is confirmed. All secondary-language component additions require explicit approval.
 
@@ -21,15 +23,15 @@ Do not begin until human approval is confirmed. All secondary-language component
 
 Confirm with the human reviewer:
 
-- Component name and naming convention
-- Type: {e.g. cryptographic / native binding / network / data processing}
-- Whether it exposes bindings to the primary language (affects integration surface)
-- Whether it introduces a new security or compliance boundary
+- Crate name (`gtcx-<name>`)
+- Type: cryptographic / native binding / network / edge
+- Whether it exposes NAPI bindings (affects `rust/gtcx-node`)
+- Whether it introduces a new FIPS boundary (requires Cryptographic Security Engineer sign-off)
 
 Then read:
 
-- `_sop/2-docs/5-specs/4-backend/packages/{secondary-dir}/README.md` — existing component inventory
-- Any ADR governing why this secondary language is used and what it covers
+- `_sop/2-docs/5-specs/4-backend/packages/rust/README.md` — existing crate inventory
+- ADR-001 (`001-rust-for-cryptography.md`) — why Rust, what it covers
 - The relevant component spec if the new component extends an existing one
 - `_sop/1-agents/4-workflows/safety-rules.md`
 
@@ -39,10 +41,10 @@ Then read:
 
 ### 1. Write the component spec
 
-Before creating any code, write the component spec at:
+Before creating any code, write the crate spec at:
 
 ```
-_sop/2-docs/5-specs/4-backend/packages/{secondary-dir}/{component-name}.md
+_sop/2-docs/5-specs/4-backend/packages/rust/<crate-name>.md
 ```
 
 The spec must include:
@@ -67,11 +69,11 @@ If the component introduces a new algorithm, a new binding contract, or a new se
 Minimum required files:
 
 ```
-{secondary-dir}/{component-name}/
-  {manifest-file}     — name, version
-  src/{entry}         — public API
-  tests/              — integration tests
-  benches/            — if performance-sensitive
+rust/<crate-name>/
+  Cargo.toml     — name: "gtcx-<name>", version: "0.1.0"
+  src/lib.rs     — public API
+  tests/         — integration tests
+  benches/       — if performance-sensitive
 ```
 
 Requirements:
@@ -83,7 +85,7 @@ Requirements:
 
 ### 4. Update the workspace manifest
 
-Add the new component to the workspace members array.
+Add the new crate to `rust/Cargo.toml` workspace `members` array.
 
 ---
 
@@ -95,7 +97,7 @@ Coordinate with the owner of the binding layer. The binding surface must be revi
 
 ### 6. Update the component spec index
 
-Add the new component to `_sop/2-docs/5-specs/4-backend/packages/{secondary-dir}/README.md`.
+Add the new crate to `_sop/2-docs/5-specs/4-backend/packages/rust/README.md`.
 
 ---
 
@@ -108,32 +110,34 @@ Add an entry in `_sop/2-docs/3-engineering/5-compliance/spec-to-code-traceabilit
 ### 8. Run component gates
 
 ```bash
-{build-command} {component-name}
-{test-command} {component-name}
-{lint-command} {component-name}
+cargo build --release --manifest-path rust/<crate-name>/Cargo.toml
+cargo test --manifest-path rust/<crate-name>/Cargo.toml
+cargo clippy --manifest-path rust/<crate-name>/Cargo.toml -- -D warnings
 ```
+
+For cryptographic crates: run against known test vectors before marking complete.
 
 ---
 
 ### 9. Run full workspace gates
 
 ```bash
-{architecture-check-command}
-{lint-command}
-{typecheck-command}
-{test-command}
-{build-command}
+pnpm architecture:check
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
 ```
 
 ---
 
 ## Post-Flight
 
-- [ ] Component spec exists at the correct path
-- [ ] ADR exists if a new boundary was established
-- [ ] Component listed in spec index
-- [ ] Workspace manifest updated
-- [ ] All component gates pass
+- [ ] Crate spec exists at `_sop/2-docs/5-specs/4-backend/packages/rust/<crate-name>.md`
+- [ ] ADR exists if a new protocol boundary was established
+- [ ] Crate listed in `_sop/2-docs/5-specs/4-backend/packages/rust/README.md`
+- [ ] `rust/Cargo.toml` workspace members updated
+- [ ] All Rust gates pass
 - [ ] All workspace gates pass
 - [ ] Traceability matrix updated
 
@@ -141,10 +145,11 @@ Add an entry in `_sop/2-docs/3-engineering/5-compliance/spec-to-code-traceabilit
 
 ## Hard Rules
 
-- Never add a security-critical component without the designated security role co-owning from day one
-- Never use an unaudited library for security-critical operations
-- Never expose a binding without review of the interface surface
-- Never add a component without prior human approval
+- Never add a cryptographic crate without Cryptographic Security Engineer co-ownership from day one
+- Never use an unaudited cryptographic library — check `_sop/2-docs/3-engineering/7-security/` for approved libraries
+- Never implement a custom cryptographic primitive — use existing audited implementations in `rust/gtcx-crypto`
+- Never expose a NAPI binding without security review of the FFI surface
+- Never add a crate without prior human approval
 
 ---
 
