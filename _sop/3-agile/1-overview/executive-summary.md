@@ -1,101 +1,66 @@
-# [Product Name] — Executive Summary
-
-> **Document ID:** [PRD-XXX]
-> **Version:** [1.0]
-> **Date:** [YYYY-MM-DD]
-> **Status:** [Draft / In Review / Approved]
-> **Owner:** [Product Owner]
+# Executive Summary — gtcx-core
 
 ---
 
 ## Product Vision
 
-[2–3 sentences. What is this product? Who is it for? What transformation does it enable for them?]
+`gtcx-core` is the shared cryptographic and type foundation for the entire GTCX ecosystem — 18 TypeScript packages and 6 Rust crates providing the primitives that every other GTCX service depends on. It is not a user-facing product; it is the load-bearing layer beneath all of them. Its purpose is to ensure that every GTCX service signs with the same keys, validates with the same schemas, and speaks the same domain types — so that proofs issued on one service can be verified on any other without translation or trust assumptions.
 
 ---
 
 ## Problem Statement
 
-[Describe the core problem in concrete terms. Be specific. Quantify where possible.]
-
-- **[Problem 1]:** [Description — what it costs, who suffers, what the root cause is]
-- **[Problem 2]:** [Description]
-- **[Problem 3]:** [Description]
-- **[Problem 4]:** [Description]
+- **Crypto divergence:** without a shared signing library, each GTCX service would independently implement Ed25519, creating key format incompatibilities and signature verification failures across service boundaries
+- **Schema drift:** Zod schemas defined independently in each repo diverge over time, causing subtle runtime failures when data crosses service boundaries (e.g., a proof issued by `gtcx-platforms` that fails validation in `compliance-os`)
+- **DID management fragmentation:** decentralized identity management implemented ad hoc across repos creates incompatible DID document formats and key rotation patterns
+- **Performance bottlenecks in TS:** ZKP circuit evaluation and batch signature verification are too slow in pure TypeScript; without native Rust bindings these operations cannot meet latency targets at field scale
 
 ---
 
 ## Solution
 
-[2–4 sentences. What is being built? What is the core mechanism that solves the problem? What is the key differentiator?]
+`gtcx-core` publishes a single versioned API surface: `@gtcx/crypto` for all cryptographic operations (Ed25519, SHA-256, HMAC, key derivation, ZKP engine), `@gtcx/schemas` for Zod schemas shared across TypeScript and Python via codegen, `@gtcx/domain` for core domain types, and `@gtcx/identity` for DID document management. Performance-critical operations (ZKP, batch verification) are backed by Rust via WASM/napi-rs. Every GTCX repo pins to a specific `@gtcx/core` version; the `check:architecture` CI gate blocks any import that bypasses the published API.
 
-**What it delivers:**
-
-- [Capability 1]
-- [Capability 2]
-- [Capability 3]
-- [Capability 4]
-
----
-
-## Target Audience
-
-| Persona     | Role         | Primary Need                       |
-| ----------- | ------------ | ---------------------------------- |
-| [Persona 1] | [Role title] | [What they need from this product] |
-| [Persona 2] | [Role title] | [What they need]                   |
-| [Persona 3] | [Role title] | [What they need]                   |
+| Package          | Provides                                                              |
+| ---------------- | --------------------------------------------------------------------- |
+| `@gtcx/crypto`   | Ed25519 sign/verify, SHA-256, HMAC, key derivation, ZKP engine        |
+| `@gtcx/schemas`  | Zod schemas for all GTCX domain objects (TS + Python codegen)         |
+| `@gtcx/domain`   | Core domain types (EntityId, CommodityGrade, TradeCorridorCode, etc.) |
+| `@gtcx/identity` | DID document CRUD, key rotation, verification method resolution       |
+| Rust crates      | WASM/napi-rs bindings for ZKP, batch Ed25519, hash-to-curve           |
 
 ---
 
-## Release Phases
+## Current Status
 
-| Phase   | Name         | Timeline | Key Deliverable     |
-| ------- | ------------ | -------- | ------------------- |
-| Phase 1 | [Foundation] | [Q/Year] | [Core feature set]  |
-| Phase 2 | [Expansion]  | [Q/Year] | [Second capability] |
-| Phase 3 | [Scale]      | [Q/Year] | [Full capability]   |
+**Phase**: Stable library — active maintenance and API governed by architecture gate
 
----
+**What is live:**
 
-## Success Metrics
+- 18 TypeScript packages published under `@gtcx/*` scope
+- 6 Rust crates with WASM and napi-rs build targets
+- `check:architecture` CI gate — blocks circular deps and direct imports bypassing API surface
+- Schema codegen pipeline (Zod → Python Pydantic models)
+- All GTCX repos pinned to versioned `@gtcx/core` releases
 
-| Metric     | Baseline | 6-Month Target | 12-Month Target |
-| ---------- | -------- | -------------- | --------------- |
-| [Metric 1] | [X]      | [X]            | [X]             |
-| [Metric 2] | [X]      | [X]            | [X]             |
-| [Metric 3] | [X]      | [X]            | [X]             |
+**In progress:**
 
----
-
-## Budget & Resources
-
-| Category              | Estimate   |
-| --------------------- | ---------- |
-| Engineering (Phase 1) | $[X]       |
-| Design                | $[X]       |
-| Infrastructure        | $[X]/month |
-| **Total Phase 1**     | **$[X]**   |
-
-**Team:** [X] engineers, [X] PM, [X] designer, [X] QA
+- ZKP circuit expansion for GCI continuous scoring
+- Key rotation automation for `@gtcx/identity`
+- Performance benchmarks for Rust binding ops (target: < 1 ms Ed25519 verify)
 
 ---
 
-## Top Risks
+## Key Metrics / Gates
 
-| Risk     | Impact              | Mitigation   |
-| -------- | ------------------- | ------------ |
-| [Risk 1] | High / Medium / Low | [Mitigation] |
-| [Risk 2] | High / Medium / Low | [Mitigation] |
-| [Risk 3] | High / Medium / Low | [Mitigation] |
-
----
-
-## Decisions Required
-
-- [ ] [Decision 1 — who decides, by when]
-- [ ] [Decision 2 — who decides, by when]
-- [ ] [Decision 3 — who decides, by when]
+| Gate                                                   | Target                                                   |
+| ------------------------------------------------------ | -------------------------------------------------------- |
+| `check:architecture` pass (no direct internal imports) | Required for every merge                                 |
+| Ed25519 sign latency (napi-rs, single op)              | < 0.5 ms                                                 |
+| Ed25519 batch verify (1000 signatures, WASM)           | < 100 ms                                                 |
+| Zod schema test coverage                               | 100%                                                     |
+| Breaking change approval                               | Requires explicit sign-off — breaks all downstream repos |
+| Python Pydantic codegen parity with Zod schemas        | 100%                                                     |
 
 ---
 
