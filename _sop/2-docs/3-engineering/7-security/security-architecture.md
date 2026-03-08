@@ -1,602 +1,214 @@
-# Security Architecture — {Project Name}
+# Security Architecture — gtcx-core
 
-**Security level:** {Critical / High / Medium / Standard}
-**Compliance requirements:** {GDPR / SOC2 / PCI-DSS / HIPAA / other}
-**Risk tolerance:** {Zero / Low / Medium}
-**Last security review:** {YYYY-MM-DD}
-
----
-
-## Security Architecture Layers
-
-### Defense in depth model
-
-```
-┌──────────────────────────────────────────────────────┐
-│                    Perimeter Security                 │
-│  WAF, DDoS Protection, Rate Limiting, Geo-blocking   │
-├──────────────────────────────────────────────────────┤
-│                    Network Security                   │
-│     VPC, Subnets, Security Groups, NACLs, VPN       │
-├──────────────────────────────────────────────────────┤
-│                  Application Security                 │
-│   Authentication, Authorization, Input Validation     │
-├──────────────────────────────────────────────────────┤
-│                     Data Security                     │
-│    Encryption at Rest, Encryption in Transit, DLP    │
-├──────────────────────────────────────────────────────┤
-│                    Identity & Access                  │
-│      IAM, MFA, SSO, RBAC, Least Privilege           │
-└──────────────────────────────────────────────────────┘
-```
+**Security level:** Critical
+**Compliance requirements:** Internal GTCX security framework (P1 Proof, P2 Private, P4 Immutable, P11 Secure)
+**Risk tolerance:** Zero for cryptographic correctness; Low for operational controls
+**Last security review:** 2026-03-08
 
 ---
 
-## Authentication and Authorization
+## Scope
 
-### Authentication architecture
+This document covers the security architecture of `gtcx-core` as a library. It does not cover network perimeter, WAF, or infrastructure-level controls — those belong to the consuming service's security posture. What it covers:
 
-```yaml
-Authentication_Methods:
-  Primary:
-    Type: 'OAuth 2.0 / OpenID Connect'
-    Provider: '{Auth0 / Cognito / Custom}'
-    MFA:
-      Required: true
-      Methods: ['TOTP', 'SMS', 'WebAuthn']
+- Cryptographic correctness and algorithm selection
+- Key management design
+- Zero-knowledge proof security properties
+- Secure offline storage
+- Supply chain controls
+- Library consumer security obligations
 
-  Service_to_Service:
-    Type: 'mTLS / API Keys / JWT'
-    Rotation: '90 days'
+---
 
-  Session_Management:
-    Storage: '{Redis / JWT}'
-    Duration: '{n} minutes'
-    Refresh: '{n} days'
-    Concurrent_Sessions: { n }
+## Security Architecture
+
+`gtcx-core` is a cryptographic library, not a service. Its threat model is fundamentally different from a deployed application. The security boundary is: **correct cryptographic operations delivered to consumers with no introduction of vulnerabilities through the library itself**.
+
 ```
-
-### Authorization model
-
-```typescript
-// Role-Based Access Control (RBAC)
-interface Role {
-  id: string;
-  name: string;
-  permissions: Permission[];
-}
-
-interface Permission {
-  resource: string;
-  actions: ('create' | 'read' | 'update' | 'delete')[];
-  conditions?: Condition[];
-}
-
-// Attribute-Based Access Control (ABAC)
-interface Policy {
-  id: string;
-  effect: 'allow' | 'deny';
-  principal: Principal;
-  action: string[];
-  resource: string[];
-  condition?: {
-    ipAddress?: string[];
-    timeRange?: { start: Date; end: Date };
-    mfaRequired?: boolean;
-  };
-}
-
-class AuthorizationService {
-  async authorize(user: User, resource: string, action: string): Promise<boolean> {
-    const hasRolePermission = user.roles.some((role) =>
-      role.permissions.some(
-        (permission) => permission.resource === resource && permission.actions.includes(action)
-      )
-    );
-
-    const policies = await this.getPolicies(user, resource, action);
-    const hasPolicy = this.evaluatePolicies(policies, {
-      user,
-      resource,
-      action,
-      context: this.getContext(),
-    });
-
-    return hasRolePermission && hasPolicy;
-  }
-}
+┌─────────────────────────────────────────────────────────┐
+│   Consumer Application Security (consumer's concern)    │
+│   Auth, transport security, secrets management          │
+├─────────────────────────────────────────────────────────┤
+│   API Surface Integrity (gtcx-core's concern)           │
+│   No breaking changes, API surface tracked + reviewed   │
+├─────────────────────────────────────────────────────────┤
+│   Cryptographic Correctness (gtcx-core's concern)       │
+│   Audited libraries only, no custom primitives          │
+├─────────────────────────────────────────────────────────┤
+│   Key Management Design (gtcx-core's concern)           │
+│   Client-side generation, no escrow, deterministic IDs  │
+├─────────────────────────────────────────────────────────┤
+│   Zero-Knowledge Proof Integrity (gtcx-core's concern)  │
+│   Rust production proofs; TypeScript dev-only fallback  │
+├─────────────────────────────────────────────────────────┤
+│   Supply Chain (shared concern)                         │
+│   Audited libraries, cargo audit, dependency gates      │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Data Security
+## Cryptographic Standards
 
-### Encryption standards
+All cryptographic operations use established, audited libraries. No custom primitives — ever. This is an absolute rule enforced by ADR and requires Cryptographic Security Engineer approval to change.
 
-```yaml
-Encryption_at_Rest:
-  Algorithm: 'AES-256-GCM'
-  Key_Management: '{AWS KMS / HashiCorp Vault}'
-  Key_Rotation: 'Yearly'
-
-  Database:
-    Type: 'Transparent Data Encryption'
-    Backup_Encryption: true
-
-  File_Storage:
-    Type: 'Server-Side Encryption'
-    Customer_Managed_Keys: true
-
-Encryption_in_Transit:
-  TLS_Version: '1.3 minimum'
-  Cipher_Suites:
-    - 'TLS_AES_256_GCM_SHA384'
-    - 'TLS_AES_128_GCM_SHA256'
-
-  Certificate_Management:
-    Provider: "{Let's Encrypt / DigiCert}"
-    Renewal: 'Automated'
-    Validation: '{Domain / Organization}'
-```
-
-### Data classification
-
-```yaml
-Data_Classifications:
-  Critical:
-    Description: 'Payment info, credentials, keys'
-    Encryption: 'Required'
-    Access: 'Need-to-know only'
-    Retention: 'As required by law'
-
-  Sensitive:
-    Description: 'PII, health records, financial data'
-    Encryption: 'Required'
-    Access: 'Role-based'
-    Retention: '{n} years'
-
-  Internal:
-    Description: 'Business data, strategies'
-    Encryption: 'Recommended'
-    Access: 'Employee only'
-    Retention: '{n} years'
-
-  Public:
-    Description: 'Marketing, public docs'
-    Encryption: 'Optional'
-    Access: 'Unrestricted'
-    Retention: 'Indefinite'
-```
-
-### Data Loss Prevention (DLP)
-
-```typescript
-interface DLPPolicy {
-  name: string;
-  patterns: RegExp[];
-  actions: DLPAction[];
-  severity: 'critical' | 'high' | 'medium' | 'low';
-}
-
-const dlpPolicies: DLPPolicy[] = [
-  {
-    name: 'Credit Card Detection',
-    patterns: [/\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/],
-    actions: ['block', 'alert', 'log'],
-    severity: 'critical',
-  },
-  {
-    name: 'API Key Detection',
-    // Pattern: match your key format — e.g. {prefix}_[env]_[random-32]
-    patterns: [/{prefix}_[a-zA-Z]+_[a-zA-Z0-9]{32}/],
-    actions: ['redact', 'alert', 'log'],
-    severity: 'high',
-  },
-];
-```
+| Primitive          | Algorithm                    | Implementation                        |
+| ------------------ | ---------------------------- | ------------------------------------- |
+| Digital signatures | Ed25519 (primary)            | `ed25519-dalek` in `rust/gtcx-crypto` |
+| Digital signatures | Secp256k1 (secondary)        | `k256` in `rust/gtcx-zkp`             |
+| Hashing            | SHA-256, SHA-512             | `sha2` in `rust/gtcx-crypto`          |
+| Hashing            | Blake3                       | `blake3` in `rust/gtcx-crypto`        |
+| Commitments        | Hash-commitment scheme       | `@gtcx/crypto`                        |
+| Merkle proofs      | Build and verify             | `@gtcx/crypto`                        |
+| ZKP — Groth16      | Threshold/ownership/location | `bellman` in `rust/gtcx-zkp`          |
+| ZKP — Bulletproofs | Amount range proofs          | `bulletproofs` in `rust/gtcx-zkp`     |
+| ZKP — Schnorr      | Identity attribute proofs    | `k256/schnorr` in `rust/gtcx-zkp`     |
+| Secure storage     | AES-256-GCM                  | `@gtcx/security` (pluggable provider) |
 
 ---
 
-## Network Security
+## Key Management Design
 
-### Network architecture
+### Principles
 
-```yaml
-VPC_Configuration:
-  CIDR: '{10.0.0.0/16}'
+- Keys are generated and stored entirely client-side. No server-side key storage.
+- No key escrow — there is no recovery mechanism through gtcx-core.
+- Key IDs are deterministic fingerprints in `did:gtcx:<prefix>` format.
+- Ed25519 and Secp256k1 keys are stored as hex strings.
 
-  Subnets:
-    Public:
-      - '{10.0.1.0/24}' # Load Balancers
-      - '{10.0.2.0/24}' # NAT Gateways
+### Native vs. fallback
 
-    Private:
-      - '{10.0.10.0/24}' # Application Servers
-      - '{10.0.11.0/24}' # Application Servers
+```
+Production:  GTCX_REQUIRE_NATIVE=true
+             → @gtcx/crypto-native loads Rust module (gtcx-node → gtcx-crypto)
+             → Hard fails if native module unavailable
 
-    Database:
-      - '{10.0.20.0/24}' # Database Primary
-      - '{10.0.21.0/24}' # Database Replica
-
-  Security_Groups:
-    Web_Tier:
-      Inbound:
-        - Protocol: 'HTTPS'
-          Port: 443
-          Source: '0.0.0.0/0'
-      Outbound:
-        - Protocol: 'ALL'
-          Destination: 'Application_Tier_SG'
-
-    App_Tier:
-      Inbound:
-        - Protocol: 'HTTP'
-          Port: 8080
-          Source: 'Web_Tier_SG'
-      Outbound:
-        - Protocol: 'PostgreSQL'
-          Port: 5432
-          Destination: 'Database_Tier_SG'
+Development: GTCX_REQUIRE_NATIVE unset
+             → Falls back to TypeScript crypto engine
+             → Acceptable for dev/test; never acceptable in production
 ```
 
-### Web Application Firewall (WAF)
+### Key lifecycle (consumer responsibility)
 
-```yaml
-WAF_Rules:
-  Core_Rule_Set: 'OWASP CRS 3.3'
+gtcx-core provides the primitives. Consumers are responsible for:
 
-  Custom_Rules:
-    - Name: 'Block SQL Injection'
-      Pattern: '(?i)(union|select|insert|update|delete|drop)'
-      Action: 'Block'
-
-    - Name: 'Rate Limiting'
-      Condition: 'Requests > {n}/minute from same IP'
-      Action: 'Throttle'
-
-    - Name: 'Geo Blocking'
-      Condition: 'Country not in allowed list'
-      Action: 'Block'
-
-  IP_Reputation:
-    Provider: '{AWS / Cloudflare}'
-    Block_Threshold: 'High Risk'
-```
+- Secure storage of private key material (use `@gtcx/security` encrypted storage)
+- Key rotation scheduling
+- Revocation logic (roadmap item — no revocation registry yet; see Known Gaps)
 
 ---
 
-## Threat Detection and Response
+## Zero-Knowledge Proof Security
 
-### Security monitoring
+### Production proofs (Rust)
 
-```yaml
-SIEM_Configuration:
-  Platform: '{Splunk / ELK / Datadog}'
+| Circuit type    | Proof system | Use case                                               |
+| --------------- | ------------ | ------------------------------------------------------ |
+| Threshold proof | Groth16      | Prove quantity above threshold without revealing value |
+| Ownership proof | Groth16      | Prove ownership of a key without exposing it           |
+| Location proof  | Groth16      | Prove geographic attestation with privacy              |
+| Range proof     | Bulletproofs | Prove a value is within a numeric range                |
+| Attribute proof | Schnorr      | Prove identity attribute without full disclosure       |
 
-  Log_Sources:
-    - Application logs
-    - Infrastructure logs
-    - Security service logs
-    - Database audit logs
-    - Network flow logs
+Any circuit change in `rust/gtcx-zkp` requires:
 
-  Alert_Rules:
-    Critical:
-      - 'Multiple failed authentication attempts'
-      - 'Privilege escalation detected'
-      - 'Data exfiltration patterns'
-      - 'Known malware signatures'
+1. Cryptographic Security Engineer review
+2. Human sign-off before merge
+3. ADR update if the change affects proof compatibility
 
-    High:
-      - 'Unusual API usage patterns'
-      - 'Configuration changes'
-      - 'New admin account created'
-      - 'Large data transfers'
-```
+### Development fallback (TypeScript)
 
-### Incident response plan
-
-```yaml
-Incident_Response_Phases:
-  1_Detection:
-    - Automated alerting
-    - Security monitoring
-    - User reports
-
-  2_Containment:
-    - Isolate affected systems
-    - Disable compromised accounts
-    - Block malicious IPs
-
-  3_Eradication:
-    - Remove malware
-    - Patch vulnerabilities
-    - Reset credentials
-
-  4_Recovery:
-    - Restore from backups
-    - Verify system integrity
-    - Resume normal operations
-
-  5_Lessons_Learned:
-    - Post-incident review
-    - Update security controls
-    - Improve detection rules
-
-Response_Team:
-  Security_Lead: '{name / role}'
-  Technical_Lead: '{name / role}'
-  Communications: '{name / role}'
-  Legal_Compliance: '{name / role}'
-```
-
-### Security automation
-
-```typescript
-class SecurityOrchestrator {
-  async handleThreat(threat: ThreatIndicator): Promise<void> {
-    const severity = await this.assessSeverity(threat);
-
-    switch (severity) {
-      case 'CRITICAL':
-        await this.blockIP(threat.sourceIP);
-        await this.disableAccount(threat.userId);
-        await this.alertSecurityTeam(threat);
-        await this.createIncident(threat);
-        break;
-
-      case 'HIGH':
-        await this.increasedMonitoring(threat.userId);
-        await this.requireMFA(threat.userId);
-        await this.alertSecurityTeam(threat);
-        break;
-
-      case 'MEDIUM':
-        await this.logSecurityEvent(threat);
-        await this.notifyUser(threat.userId);
-        break;
-    }
-  }
-}
-```
+`HashCommitmentZkpEngine` provides a compatible API surface for local development and unit testing. It does not provide zero-knowledge guarantees. It must never be used in production. This is enforced by the `GTCX_REQUIRE_NATIVE=true` gate.
 
 ---
 
-## Vulnerability Management
+## Secure Offline Storage
 
-### Vulnerability scanning
+`@gtcx/security` provides:
 
-```yaml
-Scanning_Strategy:
-  SAST:
-    Tool: '{SonarQube / Checkmarx}'
-    Frequency: 'Every commit'
-    Quality_Gate: 'No critical/high vulnerabilities'
+- AES-256-GCM encryption (pluggable provider interface)
+- Key derivation hooks (consumer implements the KDF)
+- Lock/unlock flow for credential stores
+- Encrypted persistence for offline queues and credentials
 
-  DAST:
-    Tool: '{OWASP ZAP / Burp Suite}'
-    Frequency: 'Weekly'
-    Environments: ['Staging', 'Production']
+Security obligations for consumers using `@gtcx/security`:
 
-  Dependency_Scanning:
-    Tool: '{Snyk / Dependabot}'
-    Frequency: 'Daily'
-    Auto_Update: 'Minor versions only'
-
-  Container_Scanning:
-    Tool: '{Trivy / Clair}'
-    Frequency: 'Every build'
-    Registry_Scan: 'Continuous'
-```
-
-### Penetration testing
-
-```yaml
-Penetration_Testing:
-  Frequency: '{Quarterly / Bi-annual}'
-  Scope:
-    - External network
-    - Web applications
-    - Mobile applications
-    - Social engineering
-
-  Methodology: 'OWASP / PTES'
-
-  Remediation_SLA:
-    Critical: '24 hours'
-    High: '7 days'
-    Medium: '30 days'
-    Low: '90 days'
-```
+- Derive encryption keys from user-controlled secrets
+- Never store the derived encryption key alongside the encrypted data
+- Implement lock behavior on session timeout or device sleep
 
 ---
 
-## Application Security
+## Approved Cryptographic Libraries
 
-### Secure coding standards
+Introducing a new cryptographic library requires: Cryptographic Security Engineer approval + ADR + human sign-off.
 
-```typescript
-// Input Validation
-class InputValidator {
-  sanitize(input: string): string {
-    return input
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-      .replace(/[<>'"]/g, '');
-  }
-
-  validateEmail(email: string): boolean {
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return pattern.test(email);
-  }
-
-  validateAmount(amount: number): boolean {
-    return amount > 0 && amount <= 1_000_000;
-  }
-}
-
-// SQL Injection Prevention
-class SecureDatabase {
-  async query(sql: string, params: unknown[]): Promise<unknown> {
-    // Always use parameterized queries — never concatenate user input
-    return this.db.query(sql, params);
-  }
-}
-
-// CSRF Protection
-app.use(
-  csrf({
-    cookie: {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-    },
-  })
-);
-
-// Security Headers
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        imgSrc: ["'self'", 'data:', 'https:'],
-      },
-    },
-    hsts: {
-      maxAge: 31_536_000,
-      includeSubDomains: true,
-      preload: true,
-    },
-  })
-);
-```
+| Library       | Use                 | Location           |
+| ------------- | ------------------- | ------------------ |
+| ed25519-dalek | Ed25519 signing     | `rust/gtcx-crypto` |
+| sha2          | SHA-256 / SHA-512   | `rust/gtcx-crypto` |
+| blake3        | Blake3 hashing      | `rust/gtcx-crypto` |
+| bellman       | Groth16 ZKP         | `rust/gtcx-zkp`    |
+| bulletproofs  | Range proofs        | `rust/gtcx-zkp`    |
+| k256          | Schnorr / Secp256k1 | `rust/gtcx-zkp`    |
 
 ---
 
-## Secrets Management
+## Threat Model
 
-### Secret storage
-
-```yaml
-Secret_Management:
-  Solution: '{HashiCorp Vault / AWS Secrets Manager}'
-
-  Secret_Types:
-    API_Keys:
-      Rotation: '90 days'
-      Format: '{env}_{service}_{random}'
-
-    Database_Credentials:
-      Rotation: '30 days'
-      Dynamic: true
-
-    Encryption_Keys:
-      Rotation: 'Yearly'
-      Algorithm: 'AES-256'
-
-    Certificates:
-      Renewal: '30 days before expiry'
-      Storage: '{Hardware Security Module}'
-```
-
-### Secret rotation
-
-```typescript
-class SecretRotator {
-  async rotateSecret(secretName: string): Promise<void> {
-    const newSecret = await this.generateSecret();
-
-    await this.vault.update(secretName, newSecret, {
-      version: 'AWSPENDING',
-    });
-
-    await this.testSecret(secretName, newSecret);
-
-    await this.vault.promote(secretName, 'AWSPENDING', 'AWSCURRENT');
-
-    await this.vault.deprecate(secretName, 'AWSPREVIOUS');
-  }
-}
-```
+| Threat                  | Mitigation                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------- |
+| Key compromise          | Client-side generation only; no server key storage; strong algorithms             |
+| Replay attacks          | TTL and timestamp in network envelope (`@gtcx/network`)                           |
+| Proof forgery           | Groth16/Bulletproofs/Schnorr in production; TypeScript engine blocked by env flag |
+| Algorithm downgrade     | No custom primitives; audited libraries only; ADR gates any change                |
+| Data at rest            | AES-256-GCM via `@gtcx/security`; consumer controls KDF                           |
+| Supply chain compromise | Audited libraries only; `cargo audit` in CI weekly; dependency review gate        |
+| API surface regression  | `quality/api-surface-baseline.json` tracked; `pnpm api:check` CI gate             |
+| Boundary violation      | `pnpm architecture:check` CI gate; no circular deps; strict layer ordering        |
 
 ---
 
-## Security Metrics
+## Supply Chain Controls
 
-| Metric                        | Target |
-| ----------------------------- | ------ |
-| Vulnerability scan coverage   | 100%   |
-| Critical vulnerabilities open | 0      |
-| Mean time to patch (critical) | < 24h  |
-| Security training completion  | 100%   |
-| Incident response time        | < 1h   |
-| Failed authentication rate    | < {n}% |
-| Encryption coverage           | 100%   |
-
-### Compliance tracking
-
-```yaml
-Compliance_Status:
-  { Framework_1 }:
-    Status: '{Compliant / In Progress / Not Started}'
-    Last_Audit: '{YYYY-MM-DD}'
-    Next_Audit: '{YYYY-MM-DD}'
-
-  { Framework_2 }:
-    Status: '{Compliant / In Progress / Not Started}'
-    Completion: '{n}%'
-    Target_Date: '{YYYY-MM-DD}'
-```
+| Gate                    | Command                                                       | Schedule   |
+| ----------------------- | ------------------------------------------------------------- | ---------- |
+| Rust dependency audit   | `cargo audit`                                                 | Weekly CI  |
+| npm dependency audit    | `npm audit` via pnpm                                          | Weekly CI  |
+| Security threat matrix  | `pnpm security:threat-matrix`                                 | Every PR   |
+| New crypto library gate | Cryptographic Security Engineer review + ADR + human approval | Per change |
 
 ---
 
-## Security Training
+## Security-Sensitive Packages
 
-```yaml
-Security_Training:
-  Onboarding:
-    - Security fundamentals
-    - '{Product} security policies'
-    - Secure coding practices
-    - Incident reporting
+Changes to these packages require Cryptographic Security Engineer review and human approval before merge:
 
-  Annual_Training:
-    - OWASP Top 10
-    - Social engineering
-    - Data handling
-    - Compliance requirements
-
-  Role_Specific:
-    Developers:
-      - Secure SDLC
-      - Code review practices
-      - Vulnerability remediation
-
-    Operations:
-      - Infrastructure security
-      - Incident response
-      - Security monitoring
-```
+| Package               | Sensitive area                                       |
+| --------------------- | ---------------------------------------------------- |
+| `@gtcx/crypto`        | Signing, hashing, ZKP engine, commitments            |
+| `@gtcx/crypto-native` | Native binding loader — determines which engine runs |
+| `@gtcx/security`      | Auth, AES-256-GCM storage, audit logging             |
+| `@gtcx/verification`  | Certificate chains, proof bundle assembly            |
+| `@gtcx/identity`      | DID creation, credential management, key lifecycle   |
+| `rust/gtcx-crypto`    | Ed25519, SHA-256/512, Blake3 — core primitives       |
+| `rust/gtcx-zkp`       | Groth16, Bulletproofs, Schnorr circuits              |
 
 ---
 
-## Checklist
+## Known Gaps (Roadmap)
 
-- [ ] Defense in depth layers defined
-- [ ] Authentication architecture documented
-- [ ] RBAC and ABAC models implemented
-- [ ] Data classification scheme applied
-- [ ] Encryption standards documented (at-rest and in-transit)
-- [ ] Network segmentation and security groups defined
-- [ ] WAF rules configured
-- [ ] SIEM configured with alert rules
-- [ ] Incident response team and phases defined
-- [ ] Vulnerability scanning pipeline active
-- [ ] Pen testing scheduled
-- [ ] Secrets management solution deployed with rotation
-- [ ] Secure coding standards documented and enforced
-- [ ] Security metrics tracked
-- [ ] Compliance frameworks mapped and tracked
-- [ ] Security training program active
+- Full native binding coverage across all app runtimes (in progress)
+- Hardware-backed key storage (HSM / secure enclave) integration
+- Formalized key rotation policy and revocation registry
+- DID resolution and revocation endpoint
+
+---
+
+## Reference
+
+- [Security Framework](security-framework.md) — cryptographic standards in detail
+- [`_sop/2-docs/3-engineering/6-decisions/`](../6-decisions/) — ADRs for crypto decisions
+- [`_sop/1-agents/2-roles/crypto-security-engineer.md`](../../../1-agents/2-roles/crypto-security-engineer.md) — gatekeeper role
+- [`_sop/1-agents/4-workflows/safety-rules.md`](../../../1-agents/4-workflows/safety-rules.md) — what requires human approval
+- [`_sop/2-docs/5-specs/4-backend/packages/`](../../5-specs/4-backend/packages/) — crypto and security package specs

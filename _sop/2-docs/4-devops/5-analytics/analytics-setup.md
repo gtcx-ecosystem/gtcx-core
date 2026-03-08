@@ -1,157 +1,155 @@
-# Analytics Setup
+# Observability & Quality Metrics — gtcx-core
 
-> KPI definitions, instrumentation standards, and dashboard specifications for [Organization Name].
+> gtcx-core is a library with no runtime service. Observability means tracking library health: build reliability, test coverage, API surface stability, performance budgets, and security posture.
 
 ---
 
-## 1. KPI Framework
+## 1. Quality KPI Framework
 
 ### North Star Metric
 
-> **[North Star Metric]** — [One-sentence definition of the metric that best captures the value delivered to users]
+> **Zero regressions shipped to consumers** — no breaking API change, coverage drop, performance regression, or security gap reaches a published version without human review and explicit approval.
 
-_Example: "Weekly Active Subscribers who consumed at least [N] intelligence items" — measures both retention and value delivery._
+### Tier 1 — Release Health
 
-### Tier 1 — Business Health Metrics
+Reviewed before every release.
 
-Reviewed weekly by leadership.
+| Metric                    | Definition                                                   | Target               | Gate command                          |
+| ------------------------- | ------------------------------------------------------------ | -------------------- | ------------------------------------- |
+| API surface stability     | No unreviewed changes to exported symbols                    | 0 unreviewed         | `pnpm api:check`                      |
+| Build success rate        | All 18 packages + 6 crates build cleanly                     | 100%                 | `pnpm build`                          |
+| Test pass rate            | All Vitest and cargo tests pass                              | 100%                 | `pnpm test && cargo test --workspace` |
+| Critical package coverage | Coverage on crypto, domain, security, services, verification | Per-package minimums | `pnpm test:coverage:critical`         |
+| Security threat matrix    | No unresolved critical/high threats                          | 0 open               | `pnpm security:threat-matrix`         |
 
-| Metric                          | Definition                                                   | Target   | Owner    |
-| ------------------------------- | ------------------------------------------------------------ | -------- | -------- |
-| Monthly Active Users (MAU)      | Unique users who performed [core action] in the last 30 days | [Target] | Product  |
-| Monthly Recurring Revenue (MRR) | Total recurring subscription revenue                         | [Target] | Business |
-| Subscriber Retention (30-day)   | % of subscribers still active after 30 days                  | >[N]%    | Product  |
-| Net Revenue Retention (NRR)     | Revenue from existing subscribers including expansions       | >[N]%    | Business |
+### Tier 2 — CI Health
 
-### Tier 2 — Product Health Metrics
+Reviewed weekly.
 
-Reviewed weekly by product and engineering.
+| Metric                           | Definition                                  | Target     | Gate command               |
+| -------------------------------- | ------------------------------------------- | ---------- | -------------------------- |
+| Architecture boundary violations | Circular or boundary-crossing imports       | 0          | `pnpm architecture:check`  |
+| Lint errors                      | ESLint failures across all packages         | 0          | `pnpm lint`                |
+| Type errors                      | TypeScript type check failures              | 0          | `pnpm typecheck`           |
+| Rust clippy warnings             | Clippy warnings treated as errors           | 0          | `cargo clippy -D warnings` |
+| Dependency audit findings        | `cargo audit` and npm audit vulnerabilities | 0 critical | Weekly CI                  |
 
-| Metric                   | Definition                                           | Target       |
-| ------------------------ | ---------------------------------------------------- | ------------ |
-| Daily Active Users (DAU) | Unique users performing [core action] per day        | [Target]     |
-| Feature Adoption Rate    | % of users using [key feature] in first [N] days     | >[N]%        |
-| Time to Value (TTV)      | Median time from signup to first [core value action] | <[N] minutes |
-| Content Consumption Rate | Avg. [items] consumed per active user per week       | [Target]     |
-| Alert Open Rate          | % of distributed alerts opened within [N] hours      | >[N]%        |
+### Tier 3 — Performance Budgets
 
-### Tier 3 — Engineering Health Metrics
+Reviewed per PR; enforced on trend.
 
-Reviewed weekly by engineering.
-
-| Metric               | Definition                                    | Target    |
-| -------------------- | --------------------------------------------- | --------- |
-| API Availability     | % of time API health checks return 200        | >[N]%     |
-| p95 API Latency      | 95th percentile response time (ms)            | <[N]ms    |
-| Error Rate           | % of requests returning 5xx errors            | <[N]%     |
-| Deployment Frequency | Deployments to production per week            | >[N]/week |
-| MTTR                 | Mean time to recover from incidents (minutes) | <[N] min  |
+| Metric                     | Definition                           | Target                  | Gate command              |
+| -------------------------- | ------------------------------------ | ----------------------- | ------------------------- |
+| Ed25519 sign throughput    | Operations per second (Rust native)  | Budget in `benchmarks/` | `pnpm perf:check-budgets` |
+| SHA-256 hashing throughput | MB/s (Rust native)                   | Budget in `benchmarks/` | `pnpm perf:check-budgets` |
+| ZKP proof generation time  | ms per proof (Groth16, Bulletproofs) | Budget in `benchmarks/` | `pnpm perf:check-budgets` |
+| Merkle tree construction   | ms for large verification batches    | Budget in `benchmarks/` | `pnpm perf:check-budgets` |
 
 ---
 
-## 2. Instrumentation Standards
+## 2. Data Collection
 
-### Event Naming Convention
+### Quality KPI collection
 
-```
-[noun]_[verb]                    # user-triggered events
-[noun]_[verb]_[modifier]         # with context
+Quality KPIs are collected and stored in `quality/`:
 
-Examples:
-  alert_viewed
-  subscription_started
-  content_published
-  search_performed
-  onboarding_completed
+```bash
+# Collect current KPI snapshot
+pnpm quality:kpi:collect
+
+# Export quality KPIs report
+pnpm quality:kpi:export
 ```
 
-### Required Properties on Every Event
+### Performance history
 
-| Property      | Type     | Description                             |
-| ------------- | -------- | --------------------------------------- |
-| `user_id`     | string   | Authenticated user ID (or anonymous ID) |
-| `session_id`  | string   | Current session identifier              |
-| `timestamp`   | ISO 8601 | UTC timestamp of event                  |
-| `platform`    | enum     | `web` / `mobile` / `api` / `email`      |
-| `environment` | enum     | `production` / `staging`                |
+Benchmark results are tracked in `benchmarks/`:
 
-### Core Events to Instrument
+```bash
+# Capture latest benchmark results
+pnpm perf:capture-latest
 
-| Event                    | Trigger                   | Key Properties                         |
-| ------------------------ | ------------------------- | -------------------------------------- |
-| `user_signed_up`         | Account creation          | `plan`, `source`, `referral`           |
-| `user_logged_in`         | Successful authentication | `method`, `platform`                   |
-| `content_viewed`         | Content item opened       | `content_id`, `content_type`, `source` |
-| `alert_received`         | Alert delivered to user   | `channel`, `alert_id`                  |
-| `alert_viewed`           | Alert opened              | `channel`, `time_to_open_seconds`      |
-| `search_performed`       | Search submitted          | `query`, `results_count`               |
-| `subscription_started`   | Paid plan activated       | `plan_id`, `price`, `trial`            |
-| `subscription_cancelled` | Cancellation initiated    | `plan_id`, `reason`, `tenure_days`     |
-| `feature_used`           | Key feature interaction   | `feature_name`, `outcome`              |
+# Update benchmark history (per PR in CI)
+pnpm perf:update-history
+```
 
----
+### API surface tracking
 
-## 3. Dashboard Specifications
+The API surface baseline is stored at `quality/api-surface-baseline.json`:
 
-### Executive Dashboard
+```bash
+# Check for regressions against baseline
+pnpm api:check
 
-**Updated**: Daily
-**Audience**: CEO, COO, investors
+# Release-mode check with strict semver enforcement
+pnpm api:check:release
 
-| Widget             | Metric                    | Visualization       |
-| ------------------ | ------------------------- | ------------------- |
-| MRR                | Monthly recurring revenue | Line chart (30-day) |
-| MAU                | Monthly active users      | Line chart (30-day) |
-| Subscriber count   | Total paying subscribers  | Gauge + trend       |
-| Churn rate         | % cancelled this month    | Gauge + benchmark   |
-| Revenue vs. target | MRR vs. monthly target    | Progress bar        |
-
-### Product Health Dashboard
-
-**Updated**: Hourly
-**Audience**: Product, engineering leads
-
-| Widget            | Metric                       | Visualization      |
-| ----------------- | ---------------------------- | ------------------ |
-| DAU/MAU ratio     | Stickiness                   | Line chart (7-day) |
-| Feature adoption  | % users per feature          | Bar chart          |
-| Top content       | Most-viewed items            | Table              |
-| User funnel       | Signup → active → subscriber | Funnel chart       |
-| Alert performance | Open rates by channel        | Bar chart          |
-
-### Engineering Health Dashboard
-
-**Updated**: Real-time
-**Audience**: Engineering team, on-call
-
-| Widget             | Metric                     | Visualization           |
-| ------------------ | -------------------------- | ----------------------- |
-| API availability   | Uptime % (24h rolling)     | Gauge                   |
-| p95 latency        | By endpoint                | Line chart              |
-| Error rate         | 5xx % (1h rolling)         | Gauge + alert threshold |
-| Deployment tracker | Recent deploys + rollbacks | Timeline                |
-| Active incidents   | Open P0/P1 incidents       | Table                   |
+# Update baseline (human approval required)
+pnpm api:update-baseline
+```
 
 ---
 
-## 4. Reporting Cadences
+## 3. CI Observability
 
-| Report                  | Frequency         | Audience                 | Owner                 |
-| ----------------------- | ----------------- | ------------------------ | --------------------- |
-| Weekly metrics digest   | Weekly (Monday)   | Leadership               | Product               |
-| Monthly business review | Monthly           | Board / leadership       | CEO + COO             |
-| Quarterly OKR review    | Quarterly         | All teams                | Product + Engineering |
-| Incident review         | After every P0/P1 | Engineering + leadership | Engineering lead      |
+### Gate results per PR
+
+Every PR produces gate results visible in GitHub Actions:
+
+| Gate                     | Output location                                 |
+| ------------------------ | ----------------------------------------------- |
+| Lint / typecheck / tests | GitHub Actions check summary                    |
+| Architecture check       | Log output from `check-package-boundaries.mjs`  |
+| API surface diff         | Log output from `check-api-surface.mjs`         |
+| Performance budget       | Log output from `check-performance-budgets.mjs` |
+| Security threat matrix   | Log output from `check-threat-matrix.mjs`       |
+| Rust clippy              | Cargo output in CI log                          |
+| Rust tests               | Cargo test output in CI log                     |
+
+### Native binding matrix
+
+Native binding CI runs across 4 platform targets. All must pass:
+
+- Linux x86_64
+- Linux aarch64
+- macOS x86_64
+- macOS aarch64 (Apple Silicon)
+
+Matrix results are visible in the GitHub Actions workflow run.
 
 ---
 
-## 5. Privacy and Compliance
+## 4. Quality Governance
 
-- No PII in analytics event payloads (use opaque user IDs)
-- Respect user opt-out of analytics tracking (GDPR Article 21)
-- Analytics data retained for [N] months; then aggregated and source deleted
-- Consent obtained for analytics tracking where required by jurisdiction
+Governance rules tracked separately from CI gates:
+
+```bash
+# Check governance requirements
+pnpm quality:governance:check
+
+# Verify branch protection rules
+pnpm quality:verify-branch-protection
+```
 
 ---
 
-_Measure what matters. Every metric on a dashboard should inform a decision — if it doesn't, remove it._
+## 5. Reporting Cadences
+
+| Report                   | Frequency            | Audience            | Owner            |
+| ------------------------ | -------------------- | ------------------- | ---------------- |
+| PR gate summary          | Every PR             | Author + reviewers  | CI               |
+| Performance budget check | Every PR             | Engineering         | CI               |
+| Dependency audit         | Weekly               | Engineering         | CI               |
+| ZKP heavy proof tests    | Weekly               | Engineering         | CI               |
+| Release quality review   | Before every release | Engineering + human | Engineering lead |
+| UAT evidence log update  | Before every release | Engineering + human | Engineering lead |
+
+---
+
+## 6. Privacy
+
+`gtcx-core` is a library — it handles no user data and has no analytics pipeline. All metrics described in this document are engineering quality metrics (build, test, performance, security), not product or user analytics.
+
+---
+
+_Measure what blocks a bad release from reaching consumers. If a metric cannot catch a regression before publish, it should not be on this list._

@@ -1,345 +1,201 @@
-# Backend Architecture — {Service Name}
+# Backend Architecture — gtcx-core
 
-**Service type:** Monolith / Microservice / Serverless
-**Primary language:** {TypeScript / Python / Go / Java}
-**Framework:** {Express / NestJS / FastAPI / Spring / other}
-**Last updated:** {YYYY-MM-DD}
+**Repo type:** Library monorepo (18 TypeScript packages, 6 Rust crates)
+**Primary language:** TypeScript 5.x + Rust 1.75+
+**Framework:** None — pure library; no HTTP server, no database
+**Last updated:** 2026-03-08
 
 ---
 
 ## Architecture Overview
 
-### System layers
+`gtcx-core` is not a service — it is the foundational layer consumed by all GTCX services. There is no API gateway, no message queue, and no database. The architecture is a layered package dependency graph with a strict one-directional flow.
+
+### Package layers
 
 ```
-┌─────────────────────────────────────────────────┐
-│                   API Gateway                    │
-├─────────────────────────────────────────────────┤
-│              Business Logic Layer                │
-├─────────────────────────────────────────────────┤
-│                 Service Layer                    │
-├─────────────────────────────────────────────────┤
-│            Data Access Layer (DAL)               │
-├─────────────────────────────────────────────────┤
-│          Database / External Services            │
-└─────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│   Consumer Layer (downstream GTCX repos)                     │
+│   gtcx-protocols, gtcx-platforms, gtcx-app, etc.             │
+├──────────────────────────────────────────────────────────────┤
+│   Service / Application Layer                                │
+│   @gtcx/services, @gtcx/api-client, @gtcx/workproof          │
+├──────────────────────────────────────────────────────────────┤
+│   Domain / Event Layer                                       │
+│   @gtcx/domain, @gtcx/events, @gtcx/sync                     │
+├──────────────────────────────────────────────────────────────┤
+│   Identity / Security / Verification Layer                   │
+│   @gtcx/identity, @gtcx/security, @gtcx/verification         │
+├──────────────────────────────────────────────────────────────┤
+│   Crypto Layer                                               │
+│   @gtcx/crypto, @gtcx/crypto-native                          │
+├──────────────────────────────────────────────────────────────┤
+│   Rust Native Layer                                          │
+│   gtcx-crypto, gtcx-zkp, gtcx-consensus, gtcx-network        │
+│   gtcx-edge, gtcx-node (NAPI-RS)                             │
+└──────────────────────────────────────────────────────────────┘
 ```
+
+Cross-cutting (usable at any layer): `@gtcx/types`, `@gtcx/schemas`, `@gtcx/utils`, `@gtcx/logging`, `@gtcx/ai`, `@gtcx/connectivity`, `@gtcx/config`
 
 ---
 
-## Service Architecture
+## Package Dependency Rules
 
-### Microservices map (if applicable)
+Dependencies flow strictly downward. No circular imports. Enforced by `pnpm architecture:check`:
 
-```yaml
-Services:
-  { ServiceA }:
-    Port: { port }
-    Database: { PostgreSQL / MongoDB / Redis }
-    Dependencies: []
-
-  { ServiceB }:
-    Port: { port }
-    Database: { PostgreSQL / MongoDB / Redis }
-    Dependencies: [{ ServiceA }]
-
-  { ServiceC }:
-    Port: { port }
-    Database: { Redis }
-    Dependencies: [{ ServiceA }, { ServiceB }]
 ```
+@gtcx/crypto              (no hard internal deps)
+      ↓
+@gtcx/identity, @gtcx/security, @gtcx/verification
+      ↓
+@gtcx/domain, @gtcx/schemas, @gtcx/types
+      ↓
+@gtcx/events, @gtcx/sync
+      ↓
+@gtcx/services, @gtcx/api-client
+```
+
+Violations are CI-blocking. Any change that would create a circular dependency or violate the boundary graph must be resolved before merge.
 
 ---
 
-## Database Design
+## TypeScript Package Responsibilities
 
-**Type:** {PostgreSQL / MongoDB / DynamoDB}
-**Version:** {version}
-**Hosting:** {managed service / self-hosted}
+### Cryptographic layer
 
-### Schema design
+| Package               | Responsibility                                                                     |
+| --------------------- | ---------------------------------------------------------------------------------- |
+| `@gtcx/crypto`        | Ed25519/Secp256k1 signing, SHA-256/512, Merkle tree build/verify, hash commitments |
+| `@gtcx/crypto-native` | NAPI-RS binding loader — loads Rust module or falls back to TypeScript engine      |
 
-```sql
-CREATE TABLE {entity_a} (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    {field_1} VARCHAR(255) UNIQUE NOT NULL,
-    {field_2} VARCHAR(100),
-    status VARCHAR(50) DEFAULT 'active',
-    metadata JSONB DEFAULT '{}',
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP WITH TIME ZONE
-);
+### Identity and trust
 
-CREATE TABLE {entity_b} (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    {entity_a}_id UUID REFERENCES {entity_a}(id),
-    {amount_field} DECIMAL(19,4) NOT NULL,
-    status VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-```
+| Package              | Responsibility                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------- |
+| `@gtcx/identity`     | DID (`did:gtcx:*`) creation, credential management, key lifecycle, resolution         |
+| `@gtcx/security`     | Auth, AES-256-GCM encrypted storage, offline credential management, audit logging     |
+| `@gtcx/verification` | W3C VC certificate generation, QR proof codes, proof bundle assembly and verification |
 
-### Index strategy
+### Domain and data
 
-```sql
-CREATE INDEX idx_{entity_a}_{field} ON {entity_a}({field});
-CREATE INDEX idx_{entity_b}_{fk} ON {entity_b}({entity_a}_id);
-CREATE INDEX idx_{entity_b}_status ON {entity_b}(status);
-CREATE INDEX idx_{entity_b}_created ON {entity_b}(created_at DESC);
-```
+| Package           | Responsibility                                                                            |
+| ----------------- | ----------------------------------------------------------------------------------------- |
+| `@gtcx/types`     | All shared TypeScript types for the GTCX ecosystem                                        |
+| `@gtcx/schemas`   | Zod schemas for all Core12 compliance entities; runtime validation                        |
+| `@gtcx/domain`    | Commodity-agnostic domain services with DI container, offline queues, observability hooks |
+| `@gtcx/workproof` | TradeCV/WorkProof v2.1 — W3C VC work attestations with 40 predicates, AI validation hooks |
 
----
+### Infrastructure
 
-## API Design
-
-### RESTful endpoints
-
-| Method | Endpoint                | Description       | Auth     |
-| ------ | ----------------------- | ----------------- | -------- |
-| GET    | /api/v1/{resource}      | List {resource}   | Required |
-| POST   | /api/v1/{resource}      | Create {resource} | Required |
-| GET    | /api/v1/{resource}/{id} | Get {resource}    | Required |
-| PUT    | /api/v1/{resource}/{id} | Update {resource} | Required |
-| DELETE | /api/v1/{resource}/{id} | Delete {resource} | Admin    |
-
-### GraphQL schema (if applicable)
-
-```graphql
-type {Entity} {
-  id: ID!
-  {field}: String!
-  related: [{RelatedEntity}!]!
-  createdAt: DateTime!
-}
-
-type Query {
-  {entity}(id: ID!): {Entity}
-  {entities}(limit: Int, after: String): {Entity}Connection!
-}
-
-type Mutation {
-  create{Entity}(input: Create{Entity}Input!): {Entity}!
-  update{Entity}(id: ID!, input: Update{Entity}Input!): {Entity}!
-}
-```
+| Package              | Responsibility                                                              |
+| -------------------- | --------------------------------------------------------------------------- |
+| `@gtcx/events`       | Type-safe event bus with offline buffering and replay                       |
+| `@gtcx/sync`         | Offline-first sync engine with pluggable conflict resolution strategies     |
+| `@gtcx/api-client`   | Resilient HTTP client: retry, circuit breakers, offline queue, auth headers |
+| `@gtcx/connectivity` | Network connectivity detection and profiling for offline-first behavior     |
+| `@gtcx/services`     | Business-level services: registration, trading, compliance workflows        |
+| `@gtcx/ai`           | AI integration hooks and tracing utilities for downstream AI-native apps    |
+| `@gtcx/logging`      | Structured JSON logging with log levels and correlation IDs                 |
+| `@gtcx/utils`        | Shared utility functions (date, string, collection)                         |
+| `@gtcx/config`       | Shared tsup build presets for consistent package compilation                |
 
 ---
 
-## Authentication and Authorization
+## Rust Crate Responsibilities
 
-**Auth type:** {JWT / OAuth 2.0 / API Key / SAML}
-**Token expiry:** {access: 24h, refresh: 30d}
-**MFA:** {Required / Optional / Not applicable}
-
-### Permission model
-
-```typescript
-enum Role {
-  ADMIN = 'admin',
-  USER = 'user',
-  GUEST = 'guest',
-}
-
-interface Permission {
-  resource: string;
-  actions: string[];
-  conditions?: Record<string, unknown>;
-}
-```
+| Crate            | Responsibility                                                                      |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| `gtcx-crypto`    | Ed25519 (ed25519-dalek), SHA-256/512 (sha2), Blake3 — production-grade impls        |
+| `gtcx-zkp`       | Groth16 (bellman), Bulletproofs, Schnorr (k256) — ZKP proof generation/verification |
+| `gtcx-consensus` | Weighted PBFT consensus engine for multi-stakeholder verification scenarios         |
+| `gtcx-network`   | P2P networking types with topic-based pub/sub messaging                             |
+| `gtcx-edge`      | Edge runtime with resource-constrained device profiles and verification caching     |
+| `gtcx-node`      | NAPI-RS bindings — exposes Rust ops to Node.js; compiled per platform               |
 
 ---
 
-## Message Queue Architecture
+## Native Binding Architecture
 
-**Technology:** {RabbitMQ / Kafka / AWS SQS / Azure Service Bus}
-**Pattern:** {Pub/Sub / Work Queue / Event-Driven}
+`@gtcx/crypto-native` loads the appropriate compiled Rust artifact at runtime:
 
-### Event flow
-
-```yaml
-Events:
-  { EntityCreated }:
-    Publisher: { SourceService }
-    Subscribers: [{ ServiceA }, { ServiceB }]
-
-  { ActionCompleted }:
-    Publisher: { SourceService }
-    Subscribers: [{ NotificationService }, { AuditService }]
 ```
+@gtcx/crypto-native
+  ├── Checks GTCX_REQUIRE_NATIVE env var
+  ├── Tries to load platform-specific .node artifact (compiled by gtcx-node)
+  │     Linux x86_64 / Linux aarch64 / macOS x86_64 / macOS aarch64
+  └── If GTCX_REQUIRE_NATIVE=true and native unavailable → hard fail
+      If GTCX_REQUIRE_NATIVE unset → falls back to TypeScript engine (dev/test only)
+```
+
+CI runs a 4-platform matrix build to produce and cache artifacts for each target before integration tests.
 
 ---
 
-## Caching Strategy
+## API Surface
 
-### Cache layers
+`gtcx-core` exports TypeScript symbols tracked in `quality/api-surface-baseline.json`. This is the contract with all downstream consumers.
 
-1. **Application cache:** In-memory (process-level)
-2. **Distributed cache:** Redis
-3. **CDN cache:** {CloudFront / Cloudflare / other}
-
-### Cache policies
-
-```yaml
-CacheRules:
-  { EntityProfile }:
-    TTL: 3600 # 1 hour
-    InvalidateOn: [{ EntityUpdated }, { EntityDeleted }]
-
-  { ListResource }:
-    TTL: 300 # 5 minutes
-    InvalidateOn: [{ EntityCreated }, { EntityUpdated }]
-```
+- Check for breaking changes: `pnpm api:check`
+- Changes require human review before baseline update: `pnpm api:update-baseline`
+- Semver determination (major/minor/patch) is a human decision based on the diff
 
 ---
 
-## Performance Optimization
+## Performance Architecture
 
-### Query optimization
+Performance budgets are tracked in `benchmarks/`. Key benchmarks:
 
-- Use explain plans to diagnose slow queries
-- Paginate all list endpoints
-- Use connection pooling (min: {n}, max: {n})
-- Cache frequent read queries
+- Ed25519 sign/verify throughput (Rust vs TypeScript fallback)
+- SHA-256 hashing throughput
+- ZKP proof generation time (Groth16, Bulletproofs)
+- Merkle tree construction for large verification batches
 
-### Avoid N+1 queries
+Budget enforcement: `pnpm perf:check-budgets`
+Budget regression: `PERF_ENFORCE_TREND=true pnpm perf:check-budgets`
 
-```typescript
-// Avoid: N+1 queries
-const items = await getItems();
-for (const item of items) {
-  item.related = await getRelated(item.id);
-}
-
-// Prefer: single query with joins or dataloader
-const items = await getItemsWithRelated();
-```
+Do not raise performance budgets when a regression is detected — investigate and fix.
 
 ---
 
 ## Testing Strategy
 
-**Coverage targets:** Unit > {n}%, integration on critical paths
-**Load testing:** {n} concurrent users at steady state
-**Security testing:** OWASP Top 10
-
-### Test structure
+**Framework:** Vitest (TypeScript packages), cargo test (Rust crates)
+**Coverage targets:** Critical packages (`@gtcx/crypto`, `@gtcx/domain`, `@gtcx/security`, `@gtcx/services`, `@gtcx/verification`) require documented coverage minimums
 
 ```
+packages/{name}/
+├── src/           # Package source
+└── __tests__/     # Package unit tests (co-located)
+
 tests/
-├── unit/
-│   ├── services/
-│   ├── controllers/
-│   └── utils/
-├── integration/
-│   ├── api/
-│   └── database/
-├── load/
-│   └── scenarios/
-└── security/
+└── integration/   # Cross-package integration tests
 ```
 
+Run critical coverage: `pnpm test:coverage:critical`
+Run Rust tests: `cargo test --workspace --lib`
+Run ZKP heavy proofs (CI weekly only): `cargo test -p gtcx-zkp --release -- --ignored`
+
 ---
 
-## Logging and Monitoring
+## Build System
 
-### Structured logging
+**Turborepo** orchestrates the build pipeline across all packages. Build order is inferred from the dependency graph.
 
-```typescript
-logger.info('Operation completed', {
-  operationId: op.id,
-  userId: user.id,
-  duration: processingTime,
-  metadata: {},
-});
+```bash
+pnpm build      # All packages via Turborepo
+pnpm test       # All tests via Turborepo
+pnpm lint       # All linting via Turborepo
+pnpm typecheck  # All type checks via Turborepo
 ```
 
-### Monitoring metrics
-
-- Request rate and latency (p50, p95, p99)
-- Error rate by type
-- Database query performance
-- Queue depth and processing lag
-- Memory and CPU utilization
+Each package uses `tsup` with a shared preset from `@gtcx/config`.
 
 ---
 
-## Deployment
+## Reference
 
-**Platform:** {AWS / GCP / Azure / on-premise}
-**Orchestration:** {Kubernetes / ECS / Docker Compose}
-**CI/CD:** {GitHub Actions / GitLab CI / CircleCI}
-
-### Pipeline stages
-
-```yaml
-Pipeline:
-  lint_and_test:
-    - Linting
-    - Type check
-    - Unit tests
-  build:
-    - Container image
-    - Security scan
-  test_integration:
-    - Integration tests
-    - Load tests
-  deploy_staging:
-    - Deploy
-    - Smoke tests
-    - Manual approval gate
-  deploy_production:
-    - Blue-green or rolling deployment
-    - Health checks
-```
-
----
-
-## Configuration Management
-
-### Environment variables
-
-```env
-# Application
-NODE_ENV=production
-PORT=3000
-LOG_LEVEL=info
-
-# Database
-DB_HOST={host}
-DB_PORT=5432
-DB_NAME={db-name}
-DB_USER={app_user}
-DB_PASSWORD=${DB_PASSWORD}
-
-# Cache
-REDIS_URL=redis://{host}:6379
-
-# External services
-EXTERNAL_API_KEY=${EXTERNAL_API_KEY}
-```
-
----
-
-## Key Performance Indicators
-
-| Metric                  | Target  | Current | Status |
-| ----------------------- | ------- | ------- | ------ |
-| API response time (p95) | < {n}ms |         |        |
-| Error rate              | < {n}%  |         |        |
-| DB query time (avg)     | < {n}ms |         |        |
-| Cache hit rate          | > {n}%  |         |        |
-| Uptime                  | {n}%    |         |        |
-
----
-
-## Documentation Checklist
-
-- [ ] API documentation (OpenAPI/Swagger)
-- [ ] Database schema documentation
-- [ ] Service architecture diagram
-- [ ] Deployment guide
-- [ ] Troubleshooting guide
-- [ ] Performance tuning notes
-- [ ] Secret rotation runbook
+- [Architecture Overview](overview.md) — layer map and trust boundaries
+- [`_sop/2-docs/3-engineering/6-decisions/`](../6-decisions/) — all 13 ADRs
+- [`_sop/2-docs/5-specs/4-backend/packages/`](../../5-specs/4-backend/packages/) — per-package specs
+- [`_sop/2-docs/3-engineering/7-security/security-framework.md`](../7-security/security-framework.md) — security controls
