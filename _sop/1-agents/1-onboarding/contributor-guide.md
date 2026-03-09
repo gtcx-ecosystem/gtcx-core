@@ -1,4 +1,4 @@
-# Contributor Guide — {repo-name}
+# Contributor Guide — gtcx-core
 
 ---
 
@@ -10,7 +10,7 @@ Complete the [Developer Setup](developer-setup.md) before contributing. Ensure a
 
 ## Branching Strategy
 
-**Base branch:** `{base-branch}`
+**Base branch:** `main`
 
 **Branch naming convention:**
 
@@ -25,8 +25,8 @@ Complete the [Developer Setup](developer-setup.md) before contributing. Ensure a
 
 ```bash
 # Create a new branch
-git checkout {base-branch}
-git pull origin {base-branch}
+git checkout main
+git pull origin main
 git checkout -b feature/{short-description}
 ```
 
@@ -53,11 +53,11 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/).
 **Examples:**
 
 ```
-feat(auth): add two-factor authentication support
-fix(api): handle null response from payment provider
+feat(crypto): add ed25519 batch verification
+fix(identity): handle null DID resolution response
 docs(readme): update local setup instructions
-refactor(users): extract validation logic to shared util
-test(orders): add edge cases for partial refunds
+refactor(security): extract validation logic to shared util
+test(verification): add edge cases for expired credentials
 ```
 
 **Breaking changes:** Add `!` after the type or include `BREAKING CHANGE:` in the footer.
@@ -74,9 +74,9 @@ feat(api)!: change authentication endpoint response format
 2. **Make your changes** with clear, atomic commits
 3. **Write or update tests** for any changed behavior
 4. **Run the full test suite** locally before pushing
-5. **Push and open a PR** against `{base-branch}`
+5. **Push and open a PR** against `main`
 6. **Fill out the PR template** completely
-7. **Request review** from at least {review-count} reviewer(s)
+7. **Request review** from at least 1 reviewer
 8. **Address review feedback** with new commits (do not force-push during review)
 9. **Merge** once approved and all CI checks pass
 
@@ -85,34 +85,38 @@ feat(api)!: change authentication endpoint response format
 - Title follows conventional commit format
 - Description explains what and why (not just how)
 - Linked to relevant issue(s) where applicable
-- Screenshots or recordings for UI changes
 - No unrelated changes bundled in
 
 **CI checks that must pass:**
 
+- [ ] Architecture check (`pnpm architecture:check`)
 - [ ] Lint
 - [ ] Type check
 - [ ] Unit tests
-- [ ] Integration tests (if applicable)
+- [ ] Coverage thresholds
 - [ ] Build
+- [ ] API compatibility check (if applicable)
 
 ---
 
 ## Code Style
 
-**Linter:** {linter} — configuration in `{linter-config-file}`
+**Linter:** ESLint — configuration in per-package `eslint.config.js`
 
-**Formatter:** {formatter} — configuration in `{formatter-config-file}`
+**Formatter:** Prettier — configuration in `.prettierrc`
 
 ```bash
 # Check linting
-{lint-command}
+pnpm lint
 
-# Auto-fix lint issues
-{lint-fix-command}
+# Auto-fix lint issues (per package — no workspace-level fix script)
+pnpm --filter <package-name> exec eslint src/ --fix
 
 # Format code
-{format-command}
+pnpm format
+
+# Check formatting without writing
+pnpm format:check
 ```
 
 **Configure auto-formatting on save** in your editor to avoid style-only commits.
@@ -123,14 +127,14 @@ feat(api)!: change authentication endpoint response format
 
 - All new features must include tests
 - All bug fixes must include a regression test
-- Minimum coverage threshold: {coverage-threshold}
+- Coverage thresholds enforced per package: 85% statements, 80% branches, 75% functions, 85% lines
 - Tests must pass on CI before merge
 
 **Test naming convention:**
 
 ```
-describe('{ModuleName}', () => {
-  it('should {expected-behavior} when {condition}', () => {
+describe('ModuleName', () => {
+  it('should <expected-behavior> when <condition>', () => {
     // ...
   });
 });
@@ -138,11 +142,10 @@ describe('{ModuleName}', () => {
 
 **What needs tests:**
 
-- New API endpoints
-- Business logic and utility functions
-- State changes and data transformations
+- All cryptographic operations — include test vectors from recognized standards (NIST, RFC)
+- All public API surface in exported packages
 - Error handling and edge cases
-- Security-sensitive code paths
+- Security-sensitive code paths (see CLAUDE.md for the list)
 
 ---
 
@@ -155,31 +158,34 @@ Reviewers should evaluate PRs against the following:
 - [ ] Tests cover the new or changed behavior
 - [ ] No hardcoded secrets, tokens, or credentials
 - [ ] Error handling is present and appropriate
-- [ ] No performance regressions (unnecessary loops, missing indexes, N+1 queries)
-- [ ] API changes are backward-compatible (or breaking change is documented)
+- [ ] No performance regressions — check benchmarks if touching crypto or networking
+- [ ] API changes are backward-compatible (or breaking change is documented and a major version bump is planned)
 - [ ] Documentation is updated if behavior changes
 - [ ] No leftover debugging code (console.log, TODO hacks)
+- [ ] Security-sensitive packages have the Cryptographic Security Engineer as co-reviewer
 
 ---
 
 ## Release Process
 
-{description-of-how-changes-get-to-production}
+gtcx-core uses [Changesets](https://github.com/changesets/changesets) for versioned package releases.
 
-1. Changes are merged to `{base-branch}`
-2. {ci-cd-pipeline-description}
-3. {staging-deployment-step}
-4. {production-deployment-step}
-5. {post-deploy-verification}
+1. Changes are merged to `main`
+2. CI validates all quality gates
+3. Include a changeset file in your PR: `pnpm changeset` — select affected packages and bump type
+4. When ready to release: `pnpm version-packages` bumps all versions and updates changelogs
+5. `pnpm release` publishes updated packages to the registry
+
+Breaking changes require a `major` bump and explicit sign-off from the Protocol Architect.
 
 ---
 
 ## Getting Help
 
-| Channel   | Use For       |
-| --------- | ------------- |
-| {channel} | {description} |
-| {channel} | {description} |
-| {channel} | {description} |
+| Channel            | Use For                                              |
+| ------------------ | ---------------------------------------------------- |
+| GitHub Issues      | Bug reports, feature requests, questions             |
+| GitHub PR comments | Code review feedback, design discussions             |
+| CLAUDE.md          | Repo-specific rules, role assignments, quality gates |
 
 If you are unsure about an approach, open a draft PR early and ask for guidance.
