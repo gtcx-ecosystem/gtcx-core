@@ -1,130 +1,110 @@
-# Implementation Truth Report
+# Implementation Truth — 2-core
 
 **Date:** 2026-03-09
-**Scope:** GTCX Ecosystem — all repos
-**Method:** Direct codebase inspection (source dirs, package.json, git log, CI pipelines)
+**Scope:** gtcx-core — full package inventory, implementation status, and readiness assessment
 
 ---
 
-## Where We Actually Are
+## What This Repo Is
 
-The honest picture: two repos are shipping. Two are production-ready foundations. Four are in early or scaffold stages. The platforms layer — the commercial heart of the product — has not been written yet.
+The lowest-level dependency in the GTCX ecosystem. No upstream GTCX dependencies — everything here is consumed by all other repos. Contains 18 TypeScript packages and 6 Rust crates across cryptographic primitives, type definitions, domain models, verification infrastructure, identity management, and the offline-first connectivity stack.
 
----
-
-## Tier 1: Shipping Today
-
-### compliance-os
-
-- **899 commits** — most active repo in the ecosystem
-- **335 TSX/TS files** across apps (platform, via, vxa, compliance-mobile)
-- **5 CI pipelines:** ci.yml, codeql.yml, execution-evidence.yml, secret-scan.yml, validate-data-source.yml
-- Phases P-S1 (shell rebuild) and P-S2 (auth screens) recently shipped
-- Full-stack Next.js + Python platform with data-driven compliance operations
-- Has CodeQL, secret scanning, data validation — strongest security posture in the ecosystem
-
-### ai-3-fiftyfour (fifty-four)
-
-- **214 commits**, **340 TSX/TS files**
-- **13 product surfaces implemented:** Index54, TradeDesk54, TradeBook54, Intel54, Forum54, DealRoom54, Executive54, Ledger54 + Atlas54, Corridor54, FlowGrid54, Frontier54, Signal54
-- Integrated with Anthropic SDK for AI features
-- Consuming `@gtcx/ui`, `@gtcx/theme`, `@gtcx/tokens` from ledger-ui
-- Active development across multiple surfaces simultaneously
-- Frontend is ahead of the backends it depends on
+182 commits. Production-shaped code — not scaffolding.
 
 ---
 
-## Tier 2: Production-Ready Foundations (Awaiting Activation)
+## Package Inventory and Status
 
-### 2-core (gtcx-core)
+### Fully Implemented — Usable Today
 
-- **182 commits**, **18 TypeScript packages + 6 Rust crates**
-- Crypto package alone: **1,533 lines** of tested code
-- `@noble/curves`, `@noble/hashes` for cryptographic primitives; ZKP, key management, multiaddr, multiformat support
-- **Strongest governance in the ecosystem:** API surface tracking, performance budgets, architecture checks, changeset release management
-- Packages span: crypto, identity, types, schemas, domain, validators, audit, auth, services, verification, sync, events, network, logging, connectivity, utils, workproof
+**`@gtcx/crypto`** (`packages/crypto`)
+Full Ed25519 key generation, signing, verification, SHA-256/512 hashing, Merkle proofs, hash commitments, ZKP type system (Schnorr/Bulletproofs/Groth16/PLONK defined as enum variants). Traced variants of all operations via `@gtcx/ai`. The ZKP system exposes a proper `ZkProver`/`ZkVerifier` interface but only the hash-commitment prover is functional — production ZK backends are not wired. Usable for signatures and hashing now.
 
-### 3-protocols (gtcx-protocols)
+**`@gtcx/identity`** (`packages/identity`)
+DID creation and parsing (`did:gtcx:` method), DID document management, HTTP and in-memory resolver adapters, credential lifecycle. Full `createIdentity`, `createEnhancedIdentity`, multi-key (Ed25519 + Secp256k1) derivation. Revocation interface defined, not backed. Ready for use.
 
-- **248 commits**, all 6 protocols with real implementations
-- **TradePass:** complete 9-step claim lifecycle, confidence scoring, predicate registry, evidence validation, offline queues — **11,438 LOC**
-- **PANX:** Byzantine consensus oracle with multi-stakeholder price discovery
-- **GeoTag, VaultMark, GCI, PvP:** all implemented and SPEC'd
-- **6 CI workflows** including continuous fuzz testing and performance baselines
-- Protocol layer is the most surprisingly mature component in the ecosystem
+**`@gtcx/security`** (`packages/security`)
+Four implemented modules: `validation/` (Zod input sanitization), `auth/` (session tokens, permissions), `offline/` (SecureStorageBase, CredentialCache, tamper detection), `audit/` (security event logging). Offline credential cache has working logic. No JWT library — callers sign tokens themselves.
+
+**`@gtcx/verification`** (`packages/verification`)
+Certificate data generation (unsigned — platform provides signing), QR code data structures, proof bundle assembly. Commodity-agnostic by design: templateId + commodityType as strings. Produces `dataToSign`; mobile/server code does the actual signing. Fully usable.
+
+**`@gtcx/types`** (`packages/types`)
+Core TypeScript interfaces: `DigitalIdentity`, `EnhancedIdentity`, `AssetLot`, `AssetLotStatus`, models for User, Lot, Permit, Site, plus protocol types and API response types. Version 1.0.0. Load-bearing types for the entire stack.
+
+**`@gtcx/domain`** (`packages/domain`)
+Commodity-agnostic domain layer: `AssetLot` lifecycle and status transitions, offline queue factory (`createOfflineQueueExports`), typed domain event definitions (`DomainEventType`), metrics interfaces (`IMetricsCollector`, `ILogger`), replay-attack cache (`checkReplay`), schema migration framework, API versioning with changelog and `checkVersionCompatibility`. Twelve architectural principles documented in the package header and evidenced in the actual code. The most complete foundational package in this repo.
+
+**`@gtcx/services`** (`packages/services`)
+Three business services: `AssetLotRegistrationService`, `TradingService` (market pricing, trade execution), `UnifiedComplianceService`. All use dependency injection. Functional but backed by in-memory adapters — no database persistence wired.
+
+**`@gtcx/events`** (`packages/events`)
+`TypedEventBus` implementing `IDomainEventEmitter`. Offline buffer, event history, typed subscriptions, error isolation between handlers, `goOnline()` flush. Fully implemented.
+
+**`@gtcx/connectivity`** (`packages/connectivity`)
+Six network profiles: `offline`, `ussd-only`, `satellite`, `edge`, `degraded`, `standard`. Classification by bandwidth (Kbps) and latency (ms). USSD and satellite tiers are explicitly modeled — a deliberate Africa-first design choice. Implemented and documented.
+
+**`@gtcx/api-client`** (`packages/api-client`)
+Resilient HTTP client: exponential backoff retry, circuit breaker, offline queue, mTLS options, request signing interface. Typed `ApiErrorCode` and `ApiErrorCategory`. Uses `undici`. Built for hostile-network conditions.
+
+**`@gtcx/sync`** (`packages/sync`)
+Offline-first sync engine: `last-write-wins`, `highest-version`, and merge conflict resolution strategies. Batch chunking, retry with delay. `ISyncEngine` interface with real logic, not types-only.
+
+**`@gtcx/workproof`** (`packages/workproof`)
+TradeCV/WorkProof v2.1. W3C VC-based employment attestation layer. Subdirectories: `evidence/`, `predicates/`, `workproof/`, `tradecv/`, `ai/`, `disclosure/`, `offline/`, `trust/`. The core schemas and types for workproof and tradecv are solid. AI validation hooks present but stub-backed. Offline queue wired through `@gtcx/domain`. Predicate seeds cover identity, compliance, asset, location, financial, certification, and composite domains.
+
+**`@gtcx/schemas`** (`packages/schemas`)
+Core12 compliance framework: 12 domains, 67 controls, harmonizing 120+ global standards. Exports `schema` and `domains` from the Core12 module. Future slots for TradePass, GeoTag, GCI, VaultMark schemas are commented stubs — not implemented.
+
+**`@gtcx/logging`** (`packages/logging`)
+Structured logger. Minimal but consistent interface.
+
+**`@gtcx/utils`** (`packages/utils`)
+Single `index.ts`. Minimal.
+
+### Partially Implemented / Stub-Backed
+
+**`@gtcx/ai`** (`packages/ai`)
+Stub only. `traced()` and `withTrace()` are no-ops — they return the wrapped function without modification. The interface is well-defined (`OperationLog`, `TracedOptions`). Documented as a stub: "full version lives in gtcx-intelligence." All `traced*` calls across `@gtcx/crypto` and `@gtcx/domain` are silent pass-throughs in production.
+
+**`@gtcx/network`** (`packages/network`)
+libp2p transport adapter with peer discovery and pub/sub topics. The libp2p runtime is loaded dynamically — if the actual `@libp2p/*` packages are absent, this throws `ConfigurationError` at runtime. The adapter pattern is well-designed; the deployment wiring is environment-dependent.
+
+**`@gtcx/crypto-native`** (`packages/crypto-native`)
+NAPI-RS binding loader. Single `index.ts` that dynamically requires the compiled `.node` binary from `gtcx-node`. Whether the binary is built and distributed as part of the package is not verifiable from source alone.
 
 ---
 
-## Tier 3: Designed, Not Built
+## Rust Crates (6)
 
-### 6-platforms (gtcx-platforms)
-
-- **64 commits**
-- AGX, CRX, SGX, Veritas, Pathways, Operations: **SPEC.md exists for each, no `src/` directories**
-- Framework declared: NestJS + TypeORM + PostgreSQL
-- Architecture is designed and ready for implementation to begin
-- **This is the critical gap.** The commercial backends that connect protocols to revenue do not exist yet.
-
-### 5-intelligence (gtcx-intelligence)
-
-- **40 commits**
-- SDK has real structure (11 directories: structured output, agent context, operation logging, Cortex pattern recognition)
-- ANISA and PANX analytics: documented, not code-filled
-- The AI/ML layer that creates the competitive moat exists as design and type definitions, not working inference
+| Crate            | Status                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| `gtcx-crypto`    | Ed25519, SHA-256/512, key derivation — implemented                                    |
+| `gtcx-zkp`       | Hash-commitment ZKP — implemented                                                     |
+| `gtcx-consensus` | Weighted PBFT — implemented                                                           |
+| `gtcx-network`   | P2P networking types, topic pub/sub — implemented                                     |
+| `gtcx-edge`      | Offline verification cache, device profiles (<50MB RAM, 30-day offline) — implemented |
+| `gtcx-node`      | NAPI-RS bindings for `@gtcx/crypto-native` — implemented                              |
 
 ---
 
-## Tier 4: Early / Pre-Alpha
+## Known Gaps
 
-### 7-mobile (gtcx-app)
-
-- **26 commits**
-- Expo/React Native structure with 13 support packages (connectivity, sync, events, i18n, verification, crypto, schemas, identity, api-client)
-- WatermelonDB for offline-first local storage — correct architecture choice
-- No substantial feature implementation; package design is done, coding has not started
-
-### ai-7-nyota (nyota)
-
-- **18 commits** — Python packages (api, bot, sdk, commodities, languages, edge)
-- SDK has `client.py`, `models.py`, `exceptions.py`
-- Last meaningful feature commit: mining commodity modules
-- Concept stage — commodity intelligence layer is a very early idea
+- ZKP production backends: Groth16 and PLONK interface exists, only hash-commitment proof is functional
+- `@gtcx/ai`: no-op stub; AI-native observability is infrastructure-only until wired to `5-intelligence`
+- `@gtcx/schemas`: Core12 done; protocol-specific schemas (TradePass, GeoTag, GCI, VaultMark) are placeholder comments
+- `@gtcx/identity` revocation: interface defined, no revocation registry backend
+- `@gtcx/services`: functional but in-memory only — no database persistence adapters
 
 ---
 
 ## Roadmap Position
 
-```
-SHIPPING NOW            READY FOUNDATIONS         NEEDS BUILDING
-────────────────        ─────────────────         ───────────────
-compliance-os      ←→   2-core (18 packages)      6-platforms (AGX/CRX/SGX)
-fifty-four (13UI)  ←→   3-protocols (6 protos)    5-intelligence (ANISA/Cortex)
-                                                   7-mobile
-                                                   nyota
-```
+2-core is the foundation layer and at 182 commits is substantially production-ready at the primitive level. The remaining work falls into four categories:
 
-**The critical path:** 6-platforms is the missing middle. The protocols are ready to be consumed. The frontend is ready to display data. The backend that connects them has not been written.
+1. **AI observability**: connect `@gtcx/ai` stub to real traced implementation in `5-intelligence`
+2. **Protocol schemas**: fill `@gtcx/schemas` with TradePass, GeoTag, GCI, VaultMark Zod schemas (aligned with `3-protocols` SPECs)
+3. **Native binary distribution**: validate `@gtcx/crypto-native` `.node` delivery for mobile and edge targets
+4. **ZKP production backends**: Groth16 for selective disclosure (TradePass), Bulletproofs for range proofs (PvP)
 
----
-
-## Summary by Commit Velocity
-
-| Repo           | Commits | Depth       | Status               |
-| -------------- | ------- | ----------- | -------------------- |
-| compliance-os  | 899     | Substantial | Shipping             |
-| ai-3-fiftyfour | 214     | Production  | Shipping             |
-| 3-protocols    | 248     | Production  | Ready, underutilized |
-| 2-core         | 182     | Production  | Ready, foundation    |
-| 6-platforms    | 64      | Scaffold    | Spec done, no impl   |
-| 5-intelligence | 40      | Partial     | SDK only             |
-| 7-mobile       | 26      | Early       | Structure only       |
-| ai-7-nyota     | 18      | Early       | Concept stage        |
-
----
-
-## Key Risks
-
-1. **Frontend ahead of backends.** fifty-four calls API routes that don't have confirmed implementations. This will surface as broken product surfaces at demo time.
-2. **Protocol layer unused by platforms.** 248 commits of production-grade protocol work is not being consumed by the platforms it was built for.
-3. **Intelligence unconnected.** The moat claim (AI-native) is a design claim, not a product claim. Nothing runs ANISA or Cortex in production today.
-4. **Mobile has no implementation.** 26 commits for the field tool targeting 2G/offline markets — the stated core user base — is the lowest-velocity critical-path repo.
+The core is ready to be consumed. Gaps are in advanced cryptographic backends and AI observability — not in the basic protocol primitives that Q2 requires.

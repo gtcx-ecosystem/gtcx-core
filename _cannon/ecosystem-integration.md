@@ -1,238 +1,109 @@
-# Ecosystem Integration Report
+# Ecosystem Integration — 2-core
 
 **Date:** 2026-03-09
-**Scope:** GTCX Ecosystem — cross-repo integration architecture
-**Method:** package.json dependency analysis, source directory inspection, CI pipeline review
+**Scope:** gtcx-core — what this repo consumes, what consumes it, gaps, and the integration architecture it must enable
 
 ---
 
-## Current Integration Reality
+## What 2-core Consumes from the Ecosystem
 
-What's actually connected (confirmed from code, not documentation):
-
-```
-ai-2-ledger (design system)
-    ↓ @gtcx/ui, @gtcx/theme, @gtcx/tokens
-    ↓
-ai-3-fiftyfour ──────────────── compliance-os
-(13 surfaces)                   (platform + mobile)
-    ↓ HTTP only                     ↓ @gtcx/audit-trail
-    ↓ no typed contract             ↓ @gtcx/agent-runtime
-    [backend undefined]             [WORKING]
-
-2-core (@gtcx/crypto, @gtcx/types, @gtcx/schemas, @gtcx/domain)
-    ↓
-3-protocols (TradePass, GeoTag, GCI, VaultMark, PvP, PANX)
-    ↓ only 3 of 6 consumed downstream
-6-platforms/operations (VaultKit→VaultMark, TapKit→GeoTag, TradeCV→TradePass)
-    AGX, CRX, SGX, Pathways: ZERO protocol imports
-
-5-intelligence (ANISA, Cortex, PANX analytics)
-    → [CONNECTED TO NOTHING]
-
-7-mobile → @gtcx/api-client → [sync implementation unconfirmed]
-```
+Nothing. 2-core is the root of the dependency graph. It imports no `@gtcx/*` packages from other repos. All dependencies are third-party: `@noble/ed25519`, `@noble/hashes`, `zod`, `undici`, libp2p adapters (optional). This is architecturally correct and must stay this way.
 
 ---
 
-## Confirmed Integration Map
+## Confirmed Consumers of 2-core
 
-### What's Actually Wired
+### `3-protocols` (gtcx-protocols)
 
-| Consumer             | Imports From | What It Gets                                                                         |
-| -------------------- | ------------ | ------------------------------------------------------------------------------------ |
-| 3-protocols          | 2-core       | @gtcx/crypto, @gtcx/domain, @gtcx/schemas, @gtcx/audit, @gtcx/auth, @gtcx/validators |
-| ai-3-fiftyfour       | ai-2-ledger  | @gtcx/ui, @gtcx/theme, @gtcx/tokens                                                  |
-| compliance-os        | 2-core       | @gtcx/audit-trail, @gtcx/types, @gtcx/feature-gate, @gtcx/agent-runtime              |
-| 6-platforms/VaultKit | 3-protocols  | @gtcx/protocol-vaultmark, @gtcx/types                                                |
-| 6-platforms/TapKit   | 3-protocols  | @gtcx/protocol-geotag, @gtcx/types                                                   |
-| 6-platforms/TradeCV  | 3-protocols  | @gtcx/protocol-tradepass, @gtcx/types                                                |
-| 7-mobile             | 2-core       | @gtcx/crypto, @gtcx/types, @gtcx/schemas, @gtcx/api-client                           |
+Confirmed via source imports in `protocols/*/src/*.ts` and `packages/*/src/*.ts`:
 
-### What's NOT Wired (Documented Intent vs. Reality)
+| 2-core Package     | Consumed By                                                                                                                                                          |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@gtcx/crypto`     | TradePass (`verification.ts`, `biometrics.ts`), GeoTag (`location.ts`, `chain.ts`), VaultMark (`custody.ts`), PvP (`settlement.ts`, `escrow.ts`), PANX (`oracle.ts`) |
+| `@gtcx/domain`     | All six protocols — for `ILogger`, `IMetricsCollector`, `IAsyncReplayCache`, `checkReplay`, `createOfflineQueueExports`, `stableStringify`, `enforceStubGuard`       |
+| `@gtcx/schemas`    | VaultMark, PvP, GCI — for `defaultRegistry`, `validateById`                                                                                                          |
+| `@gtcx/validators` | All six protocols — for `assertNonEmptyString`, `assertPositiveNumber`, `assertInRange`, `invalidArg`, `GtcxError`, `assertValidW3cDid`, `assertValidDid`            |
 
-| Connection                       | Intent                               | Reality                                         |
-| -------------------------------- | ------------------------------------ | ----------------------------------------------- |
-| Protocols → AGX/CRX/SGX/Pathways | Protocol-driven trade execution      | Zero imports                                    |
-| Intelligence → Platforms         | AI-native risk scoring in trade flow | Zero imports                                    |
-| Intelligence → Frontend          | Cortex insights surfaced to users    | Zero imports                                    |
-| Frontend → Backend               | Full product surfaces                | HTTP calls to undefined routes; no OpenAPI spec |
-| PANX Oracle → Price Discovery    | Market consensus feeds trading       | Not wired                                       |
-| Compliance → Intelligence        | Audit signals feed risk models       | No event bus                                    |
-| Hardware → Platforms             | Device attestation chain             | Integration point undefined                     |
+`3-protocols` also carries its own re-exports of `@gtcx/crypto`, `@gtcx/domain`, `@gtcx/auth`, `@gtcx/audit`, `@gtcx/schemas` as local workspace packages (`packages/crypto`, `packages/domain`, etc.) — these appear to shadow or wrap the 2-core versions for protocol-internal use. This duplication is a latent divergence risk.
 
----
+### `compliance-os`
 
-## Protocol Adoption Status
+Documented as consuming `@gtcx/audit-trail`, `@gtcx/types`, `@gtcx/feature-gate`, `@gtcx/agent-runtime`. Of these, only `@gtcx/types` is confirmed present in 2-core. `@gtcx/audit-trail`, `@gtcx/feature-gate`, and `@gtcx/agent-runtime` do not exist in this repo — they are either in a different repo or not yet built. This is a gap: compliance-os integration with 2-core is incomplete.
 
-| Protocol  | Confirmed Consumers                 | Status              |
-| --------- | ----------------------------------- | ------------------- |
-| TradePass | TradeCV (direct), TapKit (indirect) | In use              |
-| GeoTag    | TapKit (direct)                     | In use              |
-| VaultMark | VaultKit (direct)                   | In use              |
-| PANX      | Intelligence layer (disconnected)   | Built, not consumed |
-| GCI       | None confirmed                      | Built, not consumed |
-| PvP       | None confirmed                      | Built, not consumed |
+### `7-mobile` (gtcx-app)
 
-**3 of 6 protocols have confirmed consumers. AGX, CRX, SGX, Pathways have zero protocol imports.**
+Documented as consuming `@gtcx/crypto`, `@gtcx/types`, `@gtcx/schemas`, `@gtcx/api-client`. All four are present and implemented in 2-core. The `@gtcx/connectivity` package (USSD, satellite profiles) and `@gtcx/sync` are obvious candidates for mobile consumption but are not in the documented integration list. They should be.
+
+### `ai-3-fiftyfour` (Next.js 15 frontend)
+
+No confirmed 2-core consumption documented. A frontend consuming `@gtcx/types` and `@gtcx/api-client` would be standard — this should be audited and formalized.
 
 ---
 
-## Infrastructure Maturity
+## Integration Gaps: Who Should Consume 2-core But Doesn't
 
-### Kubernetes — Production-Ready
+### `6-platforms` (AGX, CRX, SGX, Pathways)
 
-- Base configs: namespace, ConfigMaps, service discovery
-- Overlays for dev, staging, production with distinct ingress, pod security, and network policies
-- Network policy defaults to deny-all with explicit allow rules
-- **Mature enough for stateless services today**
+Currently zero protocol or core imports confirmed. These backends are spec-only with no src. When implemented, they will need:
 
-### Terraform — Partial
+- `@gtcx/types` and `@gtcx/domain` for domain model alignment
+- `@gtcx/security` for auth and audit
+- `@gtcx/api-client` for service-to-service calls
+- `@gtcx/events` for cross-service event coordination
 
-- Modules: VPC (AWS), PostgreSQL database
-- Missing: load balancer, CDN, secret management, autoscaling
-- Multi-environment structure present but not fully populated
+### `5-intelligence` (ANISA, Cortex, PANX analytics)
 
-### Docker — Strong for Dev
+Currently connected to nothing. This repo is the intended production implementation of `@gtcx/ai`. Until `5-intelligence` exports a real `traced()` implementation and 2-core wires it in, all AI observability across the ecosystem is dead.
 
-- Compose files: dev (services), infra (observability: Prometheus/Grafana/Loki), test (integration)
-- Production deployment path unclear
+### `9-hardware` (TapKit, VaultKit)
 
-### Database Strategy — Incomplete
-
-- PostgreSQL only (TypeORM)
-- No caching layer, read replicas, or sharding strategy documented
-- No event streaming infrastructure (Kafka, NATS, RabbitMQ)
+TapKit consumes `@gtcx/protocol-geotag` from `3-protocols`. VaultKit consumes `@gtcx/protocol-vaultmark`. Neither is documented as consuming 2-core directly — but both protocols depend on 2-core. The transitive dependency is there; direct consumption of `@gtcx/crypto-native` (the Rust NAPI bindings) would be beneficial for hardware-speed cryptographic operations on constrained devices.
 
 ---
 
-## The Architecture Vision vs. The Architecture Reality
+## Package Duplication: 2-core vs 3-protocols
 
-### Intended Layer Model (correct and will scale)
+`3-protocols` carries its own `packages/` directory with:
 
-```
-HARDWARE:       TapKit → GeoTag attestation, VaultKit → VaultMark custody
-PROTOCOLS:      TradePass + GeoTag + GCI + VaultMark + PvP + PANX
-PLATFORMS:      AGX + CRX + SGX + Veritas + Pathways + Operations
-INTELLIGENCE:   ANISA + Cortex + PANX Analytics (cross-cutting)
-SURFACES:       fifty-four (13 surfaces) + compliance-os + mobile
-```
+- `@gtcx/crypto` (workspace local)
+- `@gtcx/domain` (workspace local)
+- `@gtcx/auth` (workspace local, no src — stub)
+- `@gtcx/audit` (workspace local, no src — stub)
+- `@gtcx/schemas` (workspace local)
+- `@gtcx/validators` (workspace local)
+- `@gtcx/observability` (workspace local, no src — stub)
 
-### Reality Gap
+These local packages in `3-protocols` declare dependencies on each other (`@gtcx/audit` depends on `@gtcx/crypto`, `@gtcx/domain`, `@gtcx/validators`) but have no `src/` directory — they are stubs pointing to the 2-core implementations via workspace resolution. This is a maintenance risk: any consumer of 3-protocols that imports `@gtcx/auth` or `@gtcx/audit` is importing empty stubs, not the 2-core `@gtcx/security` implementations.
 
-The middle three layers are not connected. The architecture is correct as a diagram. It is not yet correct as a system.
-
----
-
-## Future-Proofed Architecture: What Must Be Built
-
-### 1. Event Bus (Highest Priority)
-
-Every cross-repo action should emit an event. Every layer subscribes to what it needs.
-
-```
-TRADE EVENT (AGX/CRX submit)
-    → emit: trade.submitted, trade.verified, trade.settled
-    → consumed by: compliance-os (audit), intelligence (risk), PANX (price feed)
-
-PROTOCOL EVENT (3-protocols verify)
-    → emit: identity.verified, location.confirmed, quality.certified
-    → consumed by: platforms (unlock execution), compliance (evidence), mobile (status)
-
-INTELLIGENCE EVENT (Cortex/ANISA)
-    → emit: risk.elevated, anomaly.detected, trend.shifted
-    → consumed by: frontends (alert), platforms (pause), compliance (flag)
-```
-
-Technology recommendation: NATS for simplicity and low-latency; Kafka if audit durability is the primary concern.
-
-### 2. OpenAPI Contract at the Frontend Boundary
-
-fifty-four calls `/api/tradebook/search`, `/api/tradedesk/workspace` with no typed contract. Before a second developer touches the API:
-
-- Define OpenAPI spec for all frontend-facing routes
-- Commit spec to 2-core or a dedicated `contracts` package
-- Generate typed clients for TypeScript (frontend) and any Python consumers
-
-### 3. Intelligence as a gRPC Microservice
-
-ANISA and Cortex should not be npm packages imported into platform code. They should be gRPC microservices with defined contracts:
-
-```protobuf
-service IntelligenceService {
-  rpc AssessRisk(TradeRequest) returns (RiskAssessment);
-  rpc DetectAnomaly(EventStream) returns (AnomalyResult);
-  rpc GetMarketContext(CommodityQuery) returns (MarketIntelligence);
-}
-```
-
-Platforms call `IntelligenceService.assessRisk(trade)`. Intelligence upgrades without platform release cycles. This is the architecture that makes AI-native mean something.
-
-### 4. Protocol Middleware for Platforms
-
-AGX, CRX, SGX don't use protocols because there's no activation pattern. The fix:
-
-```typescript
-// NestJS declarative protocol enforcement
-@RequiresProtocol(TradePass, GCI)
-@Post('/trade/submit')
-async submitTrade(@Body() trade: TradeRequest) { ... }
-```
-
-Protocol verification becomes declarative. Backend developers build business logic without becoming protocol experts. This unlocks all 6 protocols across all 6 platforms.
-
-### 5. Single Domain Model (Cross-Language)
-
-`@gtcx/types` (TypeScript), protocol types, Python services — define the same domain entities independently. Define canonical `.proto` files for `Trade`, `Commodity`, `Identity`, `Location`, `Claim`. Generate TypeScript + Python from them. One source of truth, three languages, zero silent divergence.
+**Resolution required:** Either 3-protocols' local packages should re-export from 2-core explicitly, or they should be removed in favor of direct 2-core imports.
 
 ---
 
-## The Moat Gap
+## Future-Proofed Integration Architecture
 
-The research surfaced a hard fact worth naming clearly: **the AI-native claim is currently a design claim, not a product claim.**
+### Event Contract Layer
 
-ANISA, Cortex, PANX analytics — all defined, none connected to execution. A competitor who builds a simpler but integrated intelligence layer on top of existing commodity platforms could credibly claim the same positioning without the protocol sophistication.
+`@gtcx/events` provides `TypedEventBus` and `IDomainEventEmitter`. `@gtcx/domain` defines `DomainEventType` and `DomainEvent<T>`. This is the foundation for async cross-service coordination. What's missing:
 
-**The moat becomes real when:**
+- A shared event contract registry (typed event schemas for cross-repo events)
+- An event schema versioning policy (the `version: number` field on `DomainEvent` is unused downstream)
+- A transport bridge: `TypedEventBus` is in-process only; connecting it to PANX's Kafka/NATS transports requires an adapter not yet defined
 
-- A trader submitting to AGX gets a Cortex-generated counterparty risk score in the same flow
-- PANX oracle consensus feeds live into price discovery on TradeDesk54
-- ANISA's cultural context surfaces in Intel54 market analysis
-- A compliance flag from compliance-os automatically pauses a trade and notifies relevant parties
+### gRPC / Service Boundaries
 
-**None of that is wired today.**
+`@gtcx/api-client` is HTTP/REST. The ecosystem has no gRPC service boundaries defined in 2-core. As `6-platforms` comes online with multiple backends, typed gRPC service contracts should be defined in 2-core (or a new `packages/rpc` package) to avoid REST-based coupling between platforms and protocols.
 
-The 90-day copy test: could a funded team replicate what's currently deployed in 90 days? The honest answer is yes — because what's deployed is UI surfaces and protocol definitions, not the emergent intelligence that compounds across them.
+### Typed Interface Contracts
 
-**Activating the intelligence layer is the single highest-leverage technical decision in Q2.**
+`@gtcx/domain` exports `ILogger`, `IMetricsCollector`, `IAsyncReplayCache` — these are the right pattern. Every package that has cross-repo integration points should expose a typed interface (not a concrete class) in 2-core, so consumers can inject their own adapters without taking on 2-core's implementation opinions.
 
 ---
 
-## Priority Integration Sequence
+## What Must Be Built for First-Class Ecosystem Citizenship
 
-### Phase 1 — Unblock Near-Term (Q2)
-
-1. Define OpenAPI spec for fifty-four → backend boundary; generate typed client
-2. Wire PANX oracle outputs into AGX/CRX as a decision feed
-3. Deploy event bus POC (NATS or Kafka); emit trade, compliance, and audit events
-4. Add `@RequiresProtocol` middleware to platforms (AGX first)
-
-### Phase 2 — Intelligence Activation (Q2-Q3)
-
-1. Deploy Cortex as gRPC microservice with K8s deployment
-2. Wire intelligence risk scoring into trade submission flow
-3. Build feedback loop: compliance audit results → intelligence fine-tuning
-4. Surface anomaly detection in fifty-four dashboard
-
-### Phase 3 — Data Consistency (Q3)
-
-1. Consolidate domain model: protobuf-first type generation
-2. Add integration tests between platforms and protocols
-3. Implement distributed tracing across all layers (OpenTelemetry hooks already partial)
-
-### Phase 4 — Production Hardening (Q3-Q4)
-
-1. Complete Terraform: load balancing, CDN, secret management, autoscaling
-2. Database: replication, read replicas, analytics data warehouse
-3. mTLS for inter-service communication
-4. Chaos engineering tests
+1. **`@gtcx/audit-trail` package**: compliance-os needs it; it doesn't exist in 2-core. Build it or clarify which repo owns it.
+2. **`@gtcx/feature-gate` package**: same — compliance-os dependency that is unresolved.
+3. **Event transport adapter**: bridge `TypedEventBus` to PANX Kafka/NATS so domain events can propagate across service boundaries.
+4. **Resolve 3-protocols package duplication**: either stub-re-export or remove. The current state creates silent integration failures.
+5. **Wire `@gtcx/connectivity` and `@gtcx/sync` into mobile**: they exist and are built for this exact use case — they are not in the mobile integration list.
+6. **Formalize `ai-3-fiftyfour` dependency on `@gtcx/types` and `@gtcx/api-client`**: the frontend is shipping; its 2-core dependency should be explicit, not implicit.

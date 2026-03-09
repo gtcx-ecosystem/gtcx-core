@@ -1,162 +1,102 @@
-# Q2 GTM Strategy — Global South / Africa
+# GTM Q2 Africa — 2-core
 
 **Date:** 2026-03-09
-**Scope:** Q2 go-to-market priorities anchored in Africa / Global South focus
-**Premise:** Ship one country deeply before scaling regionally
+**Scope:** gtcx-core — direct Q2 Ghana GTM dependencies, blockers, and the one ship that unlocks revenue
 
 ---
 
-## Situational Assessment
+## The Q2 Thesis and 2-core's Role
 
-GTCX enters a market with:
+Ghana-first. Target: verified metric tons of commodity transacted. Three GTM plays: cooperative proof point, aggregator commercial hook, DFI partnership. 2-core is the invisible foundation under all three — it does not appear in the product, but every verified transaction, every signed credential, every offline proof depends on what is in this repo.
 
-- **Active DFI investment**: $4B+ pipeline in digital trade infrastructure (AfDB, IFC, World Bank)
-- **Post-AfCFTA scramble**: 54 countries committed to continental free trade with no unified digital layer
-- **Zero dominant AI-native trade platforms**: The category does not yet have a clear winner
-- **Fragmented commodity intelligence**: Price data in most African markets is whatever one buyer tells a producer it is
-
-The window is open but not indefinitely. Tradeteq, Komgo, and AgriDigital are moving into African markets from the top (via established banks). GTCX's structural advantage is going bottom-up (verified producer relationships) while having the infrastructure depth to win enterprise contracts at the top.
+The question for 2-core is not "what do we build?" but "what is not ready that will break things when we go live?"
 
 ---
 
-## Q2 Priority: Pick One Country, Win It Deeply
+## What 2-core Must Deliver for Each Q2 Play
 
-### Primary Recommendation: Ghana
+### Play 1: Cooperative Proof Point
 
-**Why Ghana specifically:**
+**What it requires from 2-core:**
 
-| Factor                 | Detail                                                                                               |
-| ---------------------- | ---------------------------------------------------------------------------------------------------- |
-| Commodity Board        | COCOBOD is single-buyer for all cocoa — one institutional relationship unlocks 800K metric tons/year |
-| Existing Exchange      | Ghana Commodity Exchange (GCX) is active and underpowered — looking for tech partners                |
-| Payment Rails          | GhanaLink banking interoperability provides payment integration surface                              |
-| Regulatory Environment | Progressive on fintech and digital trade; Bank of Ghana sandbox-friendly                             |
-| Language               | English-primary; lowers operational overhead                                                         |
-| Regional Position      | Hub for AfDB, IFC, and major commodity trading firm Africa HQs                                       |
-| Diaspora Network       | UK/US Ghanaian diaspora with investment appetite and business connections                            |
+- `@gtcx/identity` — DID creation for miners, cooperatives, and site operators
+- `@gtcx/workproof` — The "Miner Passport": permit attestations, site credentials, ESG flags
+- `@gtcx/verification` — Certificate generation for asset lots (unsigned data; mobile signs)
+- `@gtcx/crypto` — Ed25519 signing for all credentials
+- `@gtcx/connectivity` — USSD and satellite profile support for field devices in rural Ghana
+- `@gtcx/sync` — Offline-first sync for catchup when connectivity returns
 
-**Secondary:** Ethiopia (coffee, sesame — large producer base, Ethio Telecom integration opportunity)
-**Tertiary:** Kenya (tea, macadamia — mature export infrastructure, East African hub)
+**Status:** All these packages are implemented. The gap is integration: `@gtcx/workproof` has no confirmed consumer. The mobile app (`7-mobile`) is not confirmed to consume `@gtcx/connectivity` or `@gtcx/sync`. The cooperative proof point requires these to be wired into the mobile app before a field pilot can operate reliably.
 
----
+### Play 2: Aggregator Commercial Hook
 
-## Early Win Sequence
+**What it requires from 2-core:**
 
-### Win 1 — The Cooperative Proof Point (Month 1-2)
+- `@gtcx/domain` — `AssetLotStatus` lifecycle (`discovered → registered → verified → at_aggregator → exported`)
+- `@gtcx/services` — `AssetLotRegistrationService` and `TradingService` for aggregator-facing operations
+- `@gtcx/events` — Event log covering `registration.completed`, `trading.trade_executed` for reporting
+- `@gtcx/api-client` — Aggregator-facing API calls with retry and circuit breaker
 
-Partner with one commodity cooperative (target: 500-2,000 member producers). Implement:
+**Status:** The domain model is correct and commodity-agnostic (gold, cocoa, coltan all use the same `AssetLot` with `commodityType: string`). `AssetLotStatus` includes `at_aggregator` as an explicit state — this was designed for this exact use case. The aggregator hook does not require new 2-core work; it requires `6-platforms` to implement the persistence and API layer that sits on top of these primitives.
 
-- TradePass identity registration for all members
-- GCI quality certification for one commodity batch
-- nyota-bot for price intelligence (WhatsApp-first, English + Twi)
+### Play 3: DFI Partnership
 
-**Goal:** Produce a before/after case study showing average price received by producers increased because they could negotiate with real price data. This is the evangelist story. Keep the technology invisible — the story is "producers made more money."
+**What it requires from 2-core:**
 
-**Success metric:** One published case study with real numbers. Not a testimonial — a verified financial outcome.
+- `@gtcx/schemas` (Core12) — The 12-domain, 67-control compliance framework is the DFI's due diligence checklist
+- `@gtcx/crypto` (ZKP interface) — Selective disclosure for privacy-preserving compliance proofs
+- `@gtcx/events` — Tamper-evident supply chain event log as a compliance artifact
+- `@gtcx/domain` — Schema versioning and migration for data provenance guarantees
 
----
-
-### Win 2 — The Aggregator/Exporter Commercial Hook (Month 2-3)
-
-The cooperative proof point creates pull from aggregators and exporters who now face a verification problem: international buyers want GCI-certified lots, producers have GTCX identity — the aggregator in the middle needs to process through the system to maintain their buyer relationships.
-
-This forces adoption without fighting aggregator resistance directly. They adopt because their buyers require it, not because GTCX is better for producers.
-
-**Goal:** Sign 2-3 aggregators to a commercial pilot. These become paying customers. Revenue from aggregators cross-subsidizes free access for producers.
-
-**Pricing model:** Per-lot verification fee (not SaaS). Aggregators pay per certified shipment. Low friction to start, scales with volume.
+**Status:** Core12 is implemented but not connected to GCI scoring or to any DFI-facing export. The ZKP selective disclosure capability is interfaced but not backed by a production prover. The event log exists but has no export format defined. DFI partnership is the most technically incomplete of the three plays from 2-core's perspective.
 
 ---
 
-### Win 3 — The DFI Partnership (Month 3-4)
+## What Is NOT Ready That Blocks Q2
 
-Bring the proof point + pilot data to one development finance institution.
+### Blocker 1: Mobile Integration Gaps
 
-**Primary targets:**
+`@gtcx/connectivity` and `@gtcx/sync` are not confirmed in the mobile integration. A field pilot in rural Ghana where connectivity drops to USSD-only will have undefined behavior if the mobile app is not using the connectivity classifier and sync engine. This is the most immediate Q2 risk in 2-core.
 
-- AfDB Agricultural Finance arm
-- Norfund / Proparco (Nordic/French impact investors with agriculture mandates)
-- Mastercard Foundation (active in Ghana, digital agriculture programs)
+**Required:** Confirm or add `@gtcx/connectivity` and `@gtcx/sync` to `7-mobile`'s dependency list and wire them to the app's request and sync behavior.
 
-**The ask:** Not equity. A pilot grant or concessional finance facility for cooperatives that have verifiable GTCX inventory. "If a cooperative has GCI-certified, VaultKit-tracked inventory, they qualify for a pre-approved working capital facility."
+### Blocker 2: `@gtcx/workproof` Has No Consumer
 
-This transforms GTCX infrastructure from interesting software into the key that unlocks capital for producers — which is worth more than any product feature.
+The Miner Passport lives in `@gtcx/workproof`. It is fully defined and ready to be used. If Q2's cooperative proof point is the first live demo of the system, the demo needs a credential wallet that shows a miner's permits, site verification, and ESG flags. That requires `@gtcx/workproof` to be consumed by the mobile app or a web surface.
 
----
+**Required:** Wire `@gtcx/workproof` into `7-mobile` or `ai-3-fiftyfour` for credential display and issuance.
 
-## Early Evangelist Profile
+### Blocker 3: `@gtcx/ai` Is a Silent No-Op
 
-### Profile 1: The Cooperative Leader
+If the DFI pitch includes AI-native compliance monitoring, the underlying AI tracing infrastructure does nothing in production. Every `traced()` call is a no-op. This is not a product failure — it is a demonstration credibility failure. If the system is presented as AI-native and the AI layer is a stub, that gap will surface in due diligence.
 
-**Who they are:** Runs a cooperative of 500-2,000 smallholder farmers. Speaks English. Has direct relationships with international buyers. Understands they're getting systematically underpaid (sees the export price, knows the farm-gate price, feels the gap). Frustrated with current quality certification costs ($5K+ for organic cert, $3K for Rainforest Alliance audit).
+**Required:** Either wire `@gtcx/ai` to a real tracer from `5-intelligence` before any DFI demo, or stop leading with AI-native compliance as a DFI differentiator until the infrastructure is real.
 
-**What they want:** More money for their members. Simpler certification. Negotiating power with buyers.
+### Blocker 4: No ZKP Production Prover
 
-**What GTCX gives them:** A verifiable quality claim that costs less than Rainforest Alliance certification, price data to negotiate with, and an identity that buyers trust.
+Selective disclosure for DFI due diligence (prove permit validity without revealing permit number) requires a working ZKP prover. The interface exists. No production backend is wired.
 
-**There are ~200 of these individuals in West Africa with real institutional weight.** Finding 5 is the entire Q2 distribution challenge.
+**Required for DFI partnership, not for cooperative or aggregator plays.** Can be deferred past initial Q2 if the DFI pilot is scoped to transparency rather than privacy-preserving proofs.
 
 ---
 
-### Profile 2: The Trading Firm's Africa Lead
+## Priority Q2 Tasks for 2-core
 
-**Who they are:** Works for a mid-size European or Middle Eastern commodity trading house. Sources from 3-5 African countries. Spends significant resources on due diligence, quality verification, and audit paper trails. Has a sustainability reporting obligation (EUDR, CSRD) they're struggling to meet from fragmented data.
-
-**What they want:** A single source of verified origin, quality, and custody data that replaces multiple certification bodies. Compliance evidence they can hand to their EU regulatory team.
-
-**What GTCX gives them:** One integration that replaces five audit relationships. Machine-readable compliance evidence. A competitive advantage when sourcing from certified cooperatives.
-
----
-
-## Financial Sponsors
-
-### Grant / Concessional Finance
-
-| Sponsor               | Program                           | Ask                   | Why They Care                                                |
-| --------------------- | --------------------------------- | --------------------- | ------------------------------------------------------------ |
-| AfDB                  | Digital Infrastructure for Africa | $500K-$2M pilot grant | Active traceability mandate across agriculture programs      |
-| Prosper Africa / DFC  | Trade promotion facility          | $1M-$5M               | US government mandate to expand African trade infrastructure |
-| Mastercard Foundation | Digital agriculture               | $500K-$1M             | Active Ghana programs; farmer financial inclusion mandate    |
-| Nespresso / JDE Peets | Supply chain transparency         | Partnership + funding | ESG commitments require verified traceability                |
-| Rainforest Alliance   | Innovation fund                   | $200K-$500K           | Want digital-native alternatives to paper audit trails       |
-
-### Equity
-
-**Structure recommendation:** Seed/Series A combining:
-
-1. **Pan-African VC lead:** Novastar Ventures, Partech Africa, or Ventures Platform — brings network, regional credibility, governance expertise
-2. **Strategic investor:** Olam Agri, Sucafina, or Louis Dreyfus — brings commodity volume, buyer relationships, distribution. All three have made African agri-tech investments in the past 3 years.
-3. **DFI equity window:** IFC Emerging Africa & Asia Pacific Fund or AfDB Venture Capital Initiative — patient capital, regulatory navigation support, signal to other investors
-
-**The strategic investor is the most important.** A commodity trading firm as a minority investor creates an anchor distribution relationship that no cold sales motion can replicate.
+| Priority | Task                                                                         | Blocks                                  |
+| -------- | ---------------------------------------------------------------------------- | --------------------------------------- |
+| P0       | Confirm and wire `@gtcx/connectivity` + `@gtcx/sync` in `7-mobile`           | Cooperative proof point field operation |
+| P0       | Wire `@gtcx/workproof` into `7-mobile` for Miner Passport credential display | Cooperative proof point demo            |
+| P1       | Wire `@gtcx/ai` to real tracer or gate AI-native claims                      | DFI demo credibility                    |
+| P1       | Export Core12 compliance report format aligned with GCI scores               | DFI partnership artifact                |
+| P2       | Implement Groth16 ZKP prover for permit validity selective disclosure        | DFI privacy-preserving compliance       |
+| P2       | Add supply chain event log export (JSON-LD or structured PDF)                | DFI audit trail artifact                |
 
 ---
 
-## The One Metric That Matters in Q2
+## The One Thing 2-core Must Ship to Unlock Q2 Revenue
 
-Not users. Not transactions. Not MRR.
+**Wire `@gtcx/connectivity` and `@gtcx/sync` into `7-mobile`, and confirm `@gtcx/workproof` is consumed for Miner Passport issuance.**
 
-**Verified metric tons of commodity transacted through GTCX infrastructure.**
+The cryptographic primitives, identity management, and offline-first infrastructure are all built and working. The cooperative proof point — the Q2 top-of-funnel — lives or dies on whether the mobile app can operate reliably in a Ghanaian mining site with USSD-only connectivity, capture a signed lot registration offline, sync it when connectivity returns, and show a verifiable miner credential. Every piece needed to do this exists in 2-core today. The work is wiring, not building.
 
-If you can say "2,000 metric tons of Rainforest Alliance-equivalent certified cocoa verified through GTCX in Q2" — you have:
-
-- A fundable story for DFIs
-- A commercially defensible position for buyers
-- A concrete proof point that the protocol layer works in real markets
-- A basis for the PANX index (2,000 MT is enough to establish a price signal)
-
-Everything else is a vanity metric until you have verified volume.
-
----
-
-## What Could Go Wrong
-
-1. **Aggregator resistance.** If large aggregators feel GTCX threatens their margin, they will actively discourage producer adoption. Mitigation: approach aggregators as partners first, not targets.
-
-2. **Regulatory surprise.** Agricultural commodity regulations vary significantly by country. Some commodities require government licensing to trade (Ghana cocoa is all COCOBOD). Mitigation: engage a local regulatory advisor before any commercial launch.
-
-3. **Infrastructure reality.** 2G connectivity and USD 30 Android phones are the target. The mobile experience must be validated in actual field conditions, not Accra office WiFi. Mitigation: field testing with actual cooperative members before any commercial announcement.
-
-4. **Currency risk.** Commodity prices denominated in USD/EUR; producer payments in GHS/ETB/KES. PvP settlement layer is not production-ready. Mitigation: partner with an established mobile money provider for Q2; PvP is Q3+.
-
-5. **The competitor who moves first.** Agri-tech markets in Africa have winner-take-most dynamics (network effects in verified supplier networks). If a well-funded competitor signs COCOBOD before GTCX, the Ghana market becomes much harder. Mitigation: speed. Q2 timeline for the cooperative proof point is aggressive but necessary.
+If those three packages are integrated into mobile, Q2 cooperative proof point field pilots can run.
