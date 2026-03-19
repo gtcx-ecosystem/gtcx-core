@@ -189,7 +189,16 @@ export interface IAIProvider {
 // ============================================================================
 
 /**
- * Null AI provider for when AI is not configured
+ * Null AI provider — intentional no-op for the foundation layer.
+ *
+ * gtcx-core provides the IAIProvider interface as an extension point.
+ * Real AI integration is injected by consuming packages:
+ *   - 5-intelligence: ANISA cultural intelligence, Cortex pattern analysis
+ *   - 6-platforms: underwriting, screening, trade analysis
+ *
+ * This null implementation returns safe defaults (confidence: 0, empty
+ * arrays) so services can operate without an AI backend configured.
+ * All methods resolve — they never throw.
  */
 export const nullAIProvider: IAIProvider = {
   async analyzeRegistration() {
@@ -297,7 +306,14 @@ export interface AIServiceHooks {
 }
 
 /**
- * Default AI hooks (no-op)
+ * Default AI hooks — null implementations for the foundation layer.
+ *
+ * These hooks allow services to function without AI integration.
+ * Real AI hooks are injected by consuming packages (5-intelligence,
+ * 6-platforms) via the AIServiceHooks interface. This ensures
+ * gtcx-core has zero AI service dependencies.
+ *
+ * All hooks return permissive defaults: proceed=true, escalate=false.
  */
 export const defaultAIHooks: AIServiceHooks = {
   onBeforeRegistration: async () => ({ proceed: true }),

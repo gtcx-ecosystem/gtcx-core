@@ -3,7 +3,7 @@
 
 # Core architecture and release governance
 /.github/workflows/ @amanianai
-/SOP/2-docs/1-architecture/decisions/ @amanianai
+/_sop/2-docs/1-architecture/decisions/ @amanianai
 /quality/ @amanianai
 
 # Core packages
