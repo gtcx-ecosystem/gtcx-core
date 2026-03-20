@@ -49,12 +49,22 @@ function createMockEventEmitter() {
   };
 }
 
+function createMockComplianceRepo(): IComplianceRepository {
+  return {
+    getRecords: vi.fn().mockResolvedValue([]),
+    checkLicense: vi.fn().mockResolvedValue({ compliant: true }),
+    checkLocation: vi.fn().mockResolvedValue({ compliant: true }),
+    checkKYC: vi.fn().mockResolvedValue({ compliant: true }),
+  };
+}
+
 function createService(
   overrides: {
     storageService?: IStorageService;
     cryptoService?: ICryptoService;
     eventEmitter?: ReturnType<typeof createMockEventEmitter>;
     zkpVerifier?: ZkVerifier;
+    complianceRepository?: IComplianceRepository;
     config?: Record<string, unknown>;
   } = {}
 ) {
@@ -64,6 +74,7 @@ function createService(
       cryptoService: overrides.cryptoService ?? createMockCryptoService(),
       eventEmitter: overrides.eventEmitter as never,
       zkpVerifier: overrides.zkpVerifier,
+      complianceRepository: overrides.complianceRepository ?? createMockComplianceRepo(),
     },
     overrides.config ?? {}
   );
@@ -891,6 +902,8 @@ describe('Repository DI: IComplianceRepository', () => {
     const repo: IComplianceRepository = {
       getRecords: vi.fn().mockResolvedValue(records),
       checkLicense: vi.fn().mockResolvedValue({ compliant: true }),
+      checkLocation: vi.fn().mockResolvedValue({ compliant: true }),
+      checkKYC: vi.fn().mockResolvedValue({ compliant: true }),
     };
 
     const service = new UnifiedComplianceService(
@@ -911,6 +924,8 @@ describe('Repository DI: IComplianceRepository', () => {
     const repo: IComplianceRepository = {
       getRecords: vi.fn().mockResolvedValue([]),
       checkLicense: vi.fn().mockResolvedValue({ compliant: false, issue: 'expired' }),
+      checkLocation: vi.fn().mockResolvedValue({ compliant: true }),
+      checkKYC: vi.fn().mockResolvedValue({ compliant: true }),
     };
 
     const service = new UnifiedComplianceService(

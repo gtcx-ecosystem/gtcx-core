@@ -685,10 +685,10 @@ export class UnifiedComplianceService {
    * Check compliance (implements IComplianceService)
    */
   async checkCompliance(
-    _entityId: string,
-    _entityType: 'trader' | 'producer' | 'asset_lot' | 'transaction'
+    entityId: string,
+    entityType: 'trader' | 'producer' | 'asset_lot' | 'transaction'
   ): Promise<ComplianceRecord[]> {
-    // Placeholder - would delegate to specific check methods
+    if (this.complianceRepo) return this.complianceRepo.getRecords(entityId, entityType);
     return [];
   }
 
@@ -782,20 +782,39 @@ export class UnifiedComplianceService {
 
   protected async checkProducerLicense(producerId: string): Promise<ComplianceCheckResult> {
     if (this.complianceRepo) return this.complianceRepo.checkLicense(producerId, 'producer');
-    return { compliant: true };
+    return {
+      compliant: false,
+      issue: 'Compliance repository not configured — cannot verify producer license',
+    };
   }
 
   protected async checkTraderLicense(traderId: string): Promise<ComplianceCheckResult> {
     if (this.complianceRepo) return this.complianceRepo.checkLicense(traderId, 'trader');
-    return { compliant: true };
+    return {
+      compliant: false,
+      issue: 'Compliance repository not configured — cannot verify trader license',
+    };
   }
 
-  protected async checkLocationCompliance(_location: Location): Promise<ComplianceCheckResult> {
-    return { compliant: true };
+  protected async checkLocationCompliance(location: Location): Promise<ComplianceCheckResult> {
+    if (this.complianceRepo) return this.complianceRepo.checkLocation(location);
+    // Without a repository, validate that coordinates are present and within valid ranges
+    if (!location.latitude || !location.longitude) {
+      return { compliant: false, issue: 'Location coordinates missing' };
+    }
+    if (Math.abs(location.latitude) > 90 || Math.abs(location.longitude) > 180) {
+      return { compliant: false, issue: 'Location coordinates out of valid range' };
+    }
+    return { compliant: true, details: { method: 'coordinate_validation_only' } };
   }
 
-  protected async checkKYCCompliance(_transaction: Transaction): Promise<ComplianceCheckResult> {
-    return { compliant: true };
+  protected async checkKYCCompliance(transaction: Transaction): Promise<ComplianceCheckResult> {
+    if (this.complianceRepo) return this.complianceRepo.checkKYC(transaction);
+    // Without a repository, verify essential fields are present
+    if (!transaction.fromTraderId || !transaction.toTraderId) {
+      return { compliant: false, issue: 'Transaction missing buyer or seller identity' };
+    }
+    return { compliant: true, details: { method: 'field_presence_only' } };
   }
 
   // ==========================================================================
@@ -808,6 +827,28 @@ export class UnifiedComplianceService {
   }
 
   protected async calculateComplianceTrend(): Promise<'improving' | 'declining' | 'stable'> {
+    const records = await this.getAllComplianceRecords();
+    if (records.length < 2) return 'stable';
+
+    // Split records into two halves by timestamp and compare compliance rates
+    const sorted = [...records].sort(
+      (a, b) => new Date(a.metadata.createdAt).getTime() - new Date(b.metadata.createdAt).getTime()
+    );
+    const mid = Math.floor(sorted.length / 2);
+    const olderHalf = sorted.slice(0, mid);
+    const newerHalf = sorted.slice(mid);
+
+    const complianceRate = (recs: typeof records) => {
+      if (recs.length === 0) return 0;
+      return recs.filter((r) => r.status === 'compliant').length / recs.length;
+    };
+
+    const olderRate = complianceRate(olderHalf);
+    const newerRate = complianceRate(newerHalf);
+    const delta = newerRate - olderRate;
+
+    if (delta > 0.05) return 'improving';
+    if (delta < -0.05) return 'declining';
     return 'stable';
   }
 

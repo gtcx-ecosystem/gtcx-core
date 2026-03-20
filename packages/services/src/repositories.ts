@@ -7,7 +7,7 @@
  * stub behavior (returns [], undefined, etc.).
  */
 
-import type { AssetLot, ComplianceRecord, Transaction, Trader } from '@gtcx/domain';
+import type { AssetLot, ComplianceRecord, Location, Transaction, Trader } from '@gtcx/domain';
 
 import type { ComplianceCheckResult } from './compliance';
 
@@ -16,6 +16,8 @@ import type { ComplianceCheckResult } from './compliance';
 // ============================================================================
 
 export interface ComplianceRecordFilter {
+  entityId?: string;
+  entityType?: 'trader' | 'producer' | 'asset_lot' | 'transaction';
   dateFrom?: string;
   dateTo?: string;
   apps?: string[];
@@ -24,8 +26,10 @@ export interface ComplianceRecordFilter {
 }
 
 export interface IComplianceRepository {
-  getRecords(filter?: ComplianceRecordFilter): Promise<ComplianceRecord[]>;
+  getRecords(entityId?: string, entityType?: string): Promise<ComplianceRecord[]>;
   checkLicense(id: string, type: 'producer' | 'trader'): Promise<ComplianceCheckResult>;
+  checkLocation(location: Location): Promise<ComplianceCheckResult>;
+  checkKYC(transaction: Transaction): Promise<ComplianceCheckResult>;
 }
 
 // ============================================================================
