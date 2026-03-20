@@ -112,7 +112,7 @@ describe('sanitizeKeys', () => {
 
   it('handles arrays with nested objects', () => {
     const input = {
-      items: [{ good: 1, constructor: 'bad' }, { fine: 2 }],
+      items: [{ good: 1, constructor: 'bad' }, { fine: 2 }] as Record<string, unknown>[],
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = sanitizeKeys(input as any);
@@ -206,41 +206,41 @@ describe('sanitizeForLogging', () => {
       token: 'abc123',
       ok: 'fine',
     });
-    expect(result.email).toBe('[REDACTED]');
-    expect(result.name).toBe('[REDACTED]');
-    expect(result.password).toBe('[REDACTED]');
-    expect(result.token).toBe('[REDACTED]');
-    expect(result.ok).toBe('fine');
+    expect(result['email']).toBe('[REDACTED]');
+    expect(result['name']).toBe('[REDACTED]');
+    expect(result['password']).toBe('[REDACTED]');
+    expect(result['token']).toBe('[REDACTED]');
+    expect(result['ok']).toBe('fine');
   });
 
   it('truncates long strings', () => {
     const long = 'x'.repeat(300);
     const result = sanitizeForLogging({ text: long });
-    expect((result.text as string).length).toBeLessThan(300);
-    expect((result.text as string).endsWith('...')).toBe(true);
+    expect((result['text'] as string).length).toBeLessThan(300);
+    expect((result['text'] as string).endsWith('...')).toBe(true);
   });
 
   it('preserves null and undefined', () => {
     const result = sanitizeForLogging({ a: null, b: undefined });
-    expect(result.a).toBeNull();
-    expect(result.b).toBeUndefined();
+    expect(result['a']).toBeNull();
+    expect(result['b']).toBeUndefined();
   });
 
   it('preserves numbers and booleans', () => {
     const result = sanitizeForLogging({ count: 42, active: true });
-    expect(result.count).toBe(42);
-    expect(result.active).toBe(true);
+    expect(result['count']).toBe(42);
+    expect(result['active']).toBe(true);
   });
 
   it('handles large arrays by summarizing', () => {
     const arr = Array.from({ length: 20 }, (_, i) => i);
     const result = sanitizeForLogging({ items: arr });
-    expect(result.items).toBe('[Array(20)]');
+    expect(result['items']).toBe('[Array(20)]');
   });
 
   it('handles small arrays', () => {
     const result = sanitizeForLogging({ items: [1, 2, 3] });
-    expect(result.items).toEqual([1, 2, 3]);
+    expect(result['items']).toEqual([1, 2, 3]);
   });
 
   it('recurses into nested objects', () => {
@@ -248,24 +248,24 @@ describe('sanitizeForLogging', () => {
       nested: { value: 'ok', email: 'hidden@test.com' },
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect((result.nested as any).value).toBe('ok');
+    expect((result['nested'] as any).value).toBe('ok');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect((result.nested as any).email).toBe('[REDACTED]');
+    expect((result['nested'] as any).email).toBe('[REDACTED]');
   });
 
   it('truncates at maxDepth', () => {
     const deep = { l1: { l2: { l3: { l4: 'deep' } } } };
     const result = sanitizeForLogging(deep, 2);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect((result.l1 as any).l2).toEqual({ _truncated: true });
+    expect((result['l1'] as any).l2).toEqual({ _truncated: true });
   });
 
   it('redacts PII in string values', () => {
     const result = sanitizeForLogging({
       message: 'Sent to user@example.com',
     });
-    expect(result.message).toContain('[REDACTED]');
-    expect(result.message).not.toContain('user@example.com');
+    expect(result['message']).toContain('[REDACTED]');
+    expect(result['message']).not.toContain('user@example.com');
   });
 });
 

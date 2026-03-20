@@ -151,7 +151,7 @@ describe('deprecated decorator', () => {
 
     expect(result).toBe(10);
     expect(warnSpy).toHaveBeenCalledTimes(1);
-    const msg = warnSpy.mock.calls[0][0] as string;
+    const msg = warnSpy.mock.calls[0]![0] as string;
     expect(msg).toContain('[DEPRECATED]');
     expect(msg).toContain('TestService.oldMethod()');
     expect(msg).toContain('1.0.0');
@@ -188,7 +188,7 @@ describe('deprecated decorator', () => {
     const svc = new Svc2();
     expect(svc.legacy()).toBe('ok');
 
-    const msg = warnSpy.mock.calls[0][0] as string;
+    const msg = warnSpy.mock.calls[0]![0] as string;
     expect(msg).not.toContain('Use');
 
     warnSpy.mockRestore();
@@ -204,17 +204,17 @@ describe('deprecated decorator', () => {
 
 describe('API_STABILITY', () => {
   it('marks core services as stable', () => {
-    expect(API_STABILITY.AssetLotRegistrationService.level).toBe('stable');
-    expect(API_STABILITY.TradingService.level).toBe('stable');
-    expect(API_STABILITY.UnifiedComplianceService.level).toBe('stable');
+    expect(API_STABILITY['AssetLotRegistrationService']!.level).toBe('stable');
+    expect(API_STABILITY['TradingService']!.level).toBe('stable');
+    expect(API_STABILITY['UnifiedComplianceService']!.level).toBe('stable');
   });
 
   it('marks SchemaMigrator as beta', () => {
-    expect(API_STABILITY.SchemaMigrator.level).toBe('beta');
+    expect(API_STABILITY['SchemaMigrator']!.level).toBe('beta');
   });
 
   it('marks OfflineQueue as experimental', () => {
-    expect(API_STABILITY.OfflineQueue.level).toBe('experimental');
+    expect(API_STABILITY['OfflineQueue']!.level).toBe('experimental');
   });
 });
 
@@ -267,7 +267,7 @@ describe('getChangelogSince', () => {
   it('returns entries newer than given version', () => {
     const entries = getChangelogSince('0.9.0');
     expect(entries.length).toBeGreaterThan(0);
-    expect(entries[0].version).toBe('1.0.0');
+    expect(entries[0]!.version).toBe('1.0.0');
   });
 
   it('returns empty for current or future version', () => {

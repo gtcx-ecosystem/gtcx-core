@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import https from 'node:https';
 import { AddressInfo } from 'node:net';
+import path from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -105,7 +106,10 @@ describe('@gtcx/api-client', () => {
       });
 
       await client.get('/signed');
-      const [, init] = fetcher.mock.calls[0] ?? [];
+      const call = fetcher.mock.calls[0] as unknown as
+        | [string, RequestInit | undefined]
+        | undefined;
+      const init = call?.[1];
       const headers = (init?.headers ?? {}) as Record<string, string>;
       expect(headers['x-signature']).toBe('signed');
     });
@@ -130,7 +134,7 @@ describe('@gtcx/api-client', () => {
       );
       const client = createApiClient({
         baseUrl: 'https://api.example.com',
-        fetcher,
+        fetcher: fetcher as typeof globalThis.fetch,
         timeout: 1,
         retries: 0,
       });
@@ -139,11 +143,12 @@ describe('@gtcx/api-client', () => {
     });
 
     it('should support mTLS with node dispatcher', async () => {
-      const ca = readFileSync(new URL('./fixtures/mtls/ca.crt', import.meta.url));
-      const serverKey = readFileSync(new URL('./fixtures/mtls/server.key', import.meta.url));
-      const serverCert = readFileSync(new URL('./fixtures/mtls/server.crt', import.meta.url));
-      const clientKey = readFileSync(new URL('./fixtures/mtls/client.key', import.meta.url));
-      const clientCert = readFileSync(new URL('./fixtures/mtls/client.crt', import.meta.url));
+      const fixturesDir = path.join(__dirname, 'fixtures', 'mtls');
+      const ca = readFileSync(path.join(fixturesDir, 'ca.crt'));
+      const serverKey = readFileSync(path.join(fixturesDir, 'server.key'));
+      const serverCert = readFileSync(path.join(fixturesDir, 'server.crt'));
+      const clientKey = readFileSync(path.join(fixturesDir, 'client.key'));
+      const clientCert = readFileSync(path.join(fixturesDir, 'client.crt'));
 
       const server = https.createServer(
         {
@@ -209,7 +214,7 @@ describe('@gtcx/api-client', () => {
       };
       const category: ApiErrorCategory = 'network';
       const code: ApiErrorCode = 'NETWORK_ERROR';
-      const signer: RequestSigner = () => ({});
+      const signer: RequestSigner = (_ctx) => ({});
       const mtls: MtlsOptions = {
         key: 'key',
         cert: 'cert',

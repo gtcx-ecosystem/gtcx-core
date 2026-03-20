@@ -70,7 +70,7 @@ describe('@gtcx/sync', () => {
 
     it('should allow custom conflict resolution callbacks', async () => {
       const onConflict = vi.fn();
-      const resolveConflict = vi.fn(async ({ local }: { local: SyncItem[] }) => local[1]);
+      const resolveConflict = vi.fn(async ({ local }: { local: SyncItem[] }) => local[1] ?? null);
       const engine = createSyncEngine({ onConflict, resolveConflict });
       const items: SyncItem[] = [
         { id: '1', data: { value: 1 }, version: 1, updatedAt: 1 },
@@ -110,7 +110,7 @@ describe('@gtcx/sync', () => {
       expect(auditTypes).toContain('sync.start');
       expect(auditTypes).toContain('sync.complete');
       expect(onMetrics).toHaveBeenCalledTimes(1);
-      expect(onMetrics.mock.calls[0][0].status).toBe('idle');
+      expect(onMetrics.mock.calls[0]![0].status).toBe('idle');
     });
   });
 

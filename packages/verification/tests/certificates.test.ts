@@ -403,7 +403,7 @@ describe('getCertificateAge', () => {
 
 describe('getCertificateCommodityType', () => {
   it('extracts commodity type from MilitaryGradeCertificate', () => {
-    const milCert: MilitaryGradeCertificate = {
+    const milCert = {
       ...makeValidCertificate({ securityLevel: 'military' }),
       quantumResistantHash: 'qr_hash',
       multiSignature: { ed25519: 'sig' },
@@ -414,7 +414,7 @@ describe('getCertificateCommodityType', () => {
           unit: 'kg',
         },
       },
-    };
+    } as unknown as MilitaryGradeCertificate;
     expect(getCertificateCommodityType(milCert)).toBe('cobalt');
   });
 

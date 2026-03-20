@@ -53,10 +53,14 @@ describe('@gtcx/network', () => {
   it('emits telemetry events for publish and receive', async () => {
     const events: string[] = [];
     const nodeA = createP2PNode({ nodeId: 'TA' }, new InMemoryTransport('TA'), {
-      onEvent: (event) => events.push(event.type),
+      onEvent: (event) => {
+        events.push(event.type);
+      },
     });
     const nodeB = createP2PNode({ nodeId: 'TB' }, new InMemoryTransport('TB'), {
-      onEvent: (event) => events.push(event.type),
+      onEvent: (event) => {
+        events.push(event.type);
+      },
     });
 
     await nodeA.start();

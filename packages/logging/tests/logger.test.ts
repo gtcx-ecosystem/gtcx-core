@@ -25,9 +25,9 @@ describe('Logger creation', () => {
     const { logger, entries } = createTestLogger();
     logger.info('hello');
     expect(entries).toHaveLength(1);
-    expect(entries[0].service).toBe('test-service');
-    expect(entries[0].level).toBe('info');
-    expect(entries[0].message).toBe('hello');
+    expect(entries[0]!.service).toBe('test-service');
+    expect(entries[0]!.level).toBe('info');
+    expect(entries[0]!.message).toBe('hello');
   });
 
   it('should create a logger via the createLogger factory function', () => {
@@ -38,7 +38,7 @@ describe('Logger creation', () => {
     });
     logger.info('created');
     expect(entries).toHaveLength(1);
-    expect(entries[0].service).toBe('factory-service');
+    expect(entries[0]!.service).toBe('factory-service');
   });
 });
 
@@ -50,32 +50,32 @@ describe('Log levels', () => {
   it('should produce a debug-level entry', () => {
     const { logger, entries } = createTestLogger();
     logger.debug('debug message');
-    expect(entries[0].level).toBe('debug');
-    expect(entries[0].message).toBe('debug message');
+    expect(entries[0]!.level).toBe('debug');
+    expect(entries[0]!.message).toBe('debug message');
   });
 
   it('should produce an info-level entry', () => {
     const { logger, entries } = createTestLogger();
     logger.info('info message');
-    expect(entries[0].level).toBe('info');
+    expect(entries[0]!.level).toBe('info');
   });
 
   it('should produce a warn-level entry', () => {
     const { logger, entries } = createTestLogger();
     logger.warn('warn message');
-    expect(entries[0].level).toBe('warn');
+    expect(entries[0]!.level).toBe('warn');
   });
 
   it('should produce an error-level entry', () => {
     const { logger, entries } = createTestLogger();
     logger.error('error message');
-    expect(entries[0].level).toBe('error');
+    expect(entries[0]!.level).toBe('error');
   });
 
   it('should produce a fatal-level entry', () => {
     const { logger, entries } = createTestLogger();
     logger.fatal('fatal message');
-    expect(entries[0].level).toBe('fatal');
+    expect(entries[0]!.level).toBe('fatal');
   });
 });
 
@@ -89,7 +89,7 @@ describe('Level filtering', () => {
     logger.debug('should be filtered');
     logger.info('should appear');
     expect(entries).toHaveLength(1);
-    expect(entries[0].message).toBe('should appear');
+    expect(entries[0]!.message).toBe('should appear');
   });
 
   it('should filter debug and info when level is set to warn', () => {
@@ -122,13 +122,13 @@ describe('Correlation ID', () => {
   it('should include correlationId in log entries when configured', () => {
     const { logger, entries } = createTestLogger({ correlationId: 'req-123' });
     logger.info('with correlation');
-    expect(entries[0].correlationId).toBe('req-123');
+    expect(entries[0]!.correlationId).toBe('req-123');
   });
 
   it('should not include correlationId when not configured', () => {
     const { logger, entries } = createTestLogger();
     logger.info('without correlation');
-    expect(entries[0].correlationId).toBeUndefined();
+    expect(entries[0]!.correlationId).toBeUndefined();
   });
 });
 
@@ -145,8 +145,8 @@ describe('Child logger', () => {
     const child = logger.child({});
     child.info('child message');
     expect(entries).toHaveLength(1);
-    expect(entries[0].service).toBe('parent-service');
-    expect(entries[0].correlationId).toBe('parent-corr');
+    expect(entries[0]!.service).toBe('parent-service');
+    expect(entries[0]!.correlationId).toBe('parent-corr');
   });
 
   it('should allow child to override specific config', () => {
@@ -159,8 +159,8 @@ describe('Child logger', () => {
       correlationId: 'child-corr',
     });
     child.info('overridden');
-    expect(entries[0].service).toBe('child-service');
-    expect(entries[0].correlationId).toBe('child-corr');
+    expect(entries[0]!.service).toBe('child-service');
+    expect(entries[0]!.correlationId).toBe('child-corr');
   });
 
   it('should allow child to override log level', () => {
@@ -175,7 +175,7 @@ describe('Child logger', () => {
     child.info('should be filtered');
     child.error('should appear');
     expect(parentEntries).toHaveLength(1);
-    expect(parentEntries[0].level).toBe('error');
+    expect(parentEntries[0]!.level).toBe('error');
   });
 });
 
@@ -189,19 +189,19 @@ describe('Error serialization', () => {
     const err = new Error('something went wrong');
     err.name = 'CustomError';
     logger.error('operation failed', err);
-    expect(entries[0].error).toBeDefined();
-    expect(entries[0].error!.name).toBe('CustomError');
-    expect(entries[0].error!.message).toBe('something went wrong');
-    expect(entries[0].error!.stack).toBeDefined();
-    expect(entries[0].error!.stack).toContain('CustomError');
+    expect(entries[0]!.error).toBeDefined();
+    expect(entries[0]!.error!.name).toBe('CustomError');
+    expect(entries[0]!.error!.message).toBe('something went wrong');
+    expect(entries[0]!.error!.stack).toBeDefined();
+    expect(entries[0]!.error!.stack).toContain('CustomError');
   });
 
   it('should include both error and data when provided together', () => {
     const { logger, entries } = createTestLogger();
     const err = new Error('db timeout');
     logger.error('query failed', err, { query: 'SELECT 1', retries: 3 });
-    expect(entries[0].error!.message).toBe('db timeout');
-    expect(entries[0].data).toEqual({ query: 'SELECT 1', retries: 3 });
+    expect(entries[0]!.error!.message).toBe('db timeout');
+    expect(entries[0]!.data).toEqual({ query: 'SELECT 1', retries: 3 });
   });
 
   it('should handle error without stack gracefully', () => {
@@ -209,7 +209,7 @@ describe('Error serialization', () => {
     const err = new Error('no stack');
     err.stack = undefined;
     logger.error('stackless', err);
-    expect(entries[0].error!.stack).toBeUndefined();
+    expect(entries[0]!.error!.stack).toBeUndefined();
   });
 });
 
@@ -273,7 +273,7 @@ describe('Custom output handler', () => {
     const logger = createLogger({ service: 'custom-output', output: outputFn });
     logger.info('test');
     expect(outputFn).toHaveBeenCalledTimes(1);
-    const entry = outputFn.mock.calls[0][0] as LogEntry;
+    const entry = outputFn.mock.calls[0]![0] as LogEntry;
     expect(entry.message).toBe('test');
     expect(entry.service).toBe('custom-output');
   });
@@ -303,7 +303,7 @@ describe('JSON output format', () => {
   it('should produce an ISO 8601 timestamp', () => {
     const { logger, entries } = createTestLogger();
     logger.info('timestamp check');
-    const timestamp = entries[0].timestamp;
+    const timestamp = entries[0]!.timestamp;
     // ISO 8601 pattern: YYYY-MM-DDTHH:mm:ss.sssZ
     expect(timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
   });
@@ -313,7 +313,7 @@ describe('JSON output format', () => {
     const logger = createLogger({ service: 'stdout-test' });
     logger.info('to stdout');
     expect(stdoutSpy).toHaveBeenCalledTimes(1);
-    const written = stdoutSpy.mock.calls[0][0] as string;
+    const written = stdoutSpy.mock.calls[0]![0] as string;
     const parsed = JSON.parse(written.trim()) as LogEntry;
     expect(parsed.level).toBe('info');
     expect(parsed.message).toBe('to stdout');
@@ -326,8 +326,8 @@ describe('JSON output format', () => {
     logger.error('to stderr');
     logger.fatal('also to stderr');
     expect(stderrSpy).toHaveBeenCalledTimes(2);
-    const firstParsed = JSON.parse((stderrSpy.mock.calls[0][0] as string).trim()) as LogEntry;
-    const secondParsed = JSON.parse((stderrSpy.mock.calls[1][0] as string).trim()) as LogEntry;
+    const firstParsed = JSON.parse((stderrSpy.mock.calls[0]![0] as string).trim()) as LogEntry;
+    const secondParsed = JSON.parse((stderrSpy.mock.calls[1]![0] as string).trim()) as LogEntry;
     expect(firstParsed.level).toBe('error');
     expect(secondParsed.level).toBe('fatal');
     stderrSpy.mockRestore();
@@ -342,12 +342,12 @@ describe('Data attachment', () => {
   it('should attach arbitrary data to log entries', () => {
     const { logger, entries } = createTestLogger();
     logger.info('with data', { userId: 42, action: 'login', nested: { a: 1 } });
-    expect(entries[0].data).toEqual({ userId: 42, action: 'login', nested: { a: 1 } });
+    expect(entries[0]!.data).toEqual({ userId: 42, action: 'login', nested: { a: 1 } });
   });
 
   it('should not include data field when no data is provided', () => {
     const { logger, entries } = createTestLogger();
     logger.info('no data');
-    expect(entries[0].data).toBeUndefined();
+    expect(entries[0]!.data).toBeUndefined();
   });
 });

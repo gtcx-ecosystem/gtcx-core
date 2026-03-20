@@ -167,9 +167,11 @@ describe('Integration: TypedEventBus + DomainEventFactory', () => {
         sellerId: 's1',
         buyerId: 'b1',
         quantity: 10,
-        executedPrice: 1800,
+        quantityUnit: 'oz',
+        finalPrice: 1800,
         currency: 'USD',
-        cryptoProof: { hash: 'h', signature: 's', publicKey: 'pk' },
+        paymentMethod: 'wire',
+        proofHash: 'h',
       })
     );
     bus.emit(
@@ -179,9 +181,11 @@ describe('Integration: TypedEventBus + DomainEventFactory', () => {
         sellerId: 's2',
         buyerId: 'b2',
         quantity: 20,
-        executedPrice: 1900,
+        quantityUnit: 'oz',
+        finalPrice: 1900,
         currency: 'USD',
-        cryptoProof: { hash: 'h2', signature: 's2', publicKey: 'pk2' },
+        paymentMethod: 'wire',
+        proofHash: 'h2',
       })
     );
 

@@ -128,7 +128,7 @@ class TestSecureStorage extends SecureStorageBase {
 }
 
 /** Helper to build a valid Session object */
-function createTestSession(overrides: Partial<Session> = {}): Session {
+function createTestSession(overrides: Partial<Session> & Record<string, unknown> = {}): Session {
   const now = new Date();
   return {
     id: crypto.randomUUID(),
@@ -139,8 +139,6 @@ function createTestSession(overrides: Partial<Session> = {}): Session {
     state: 'ACTIVE',
     offlineCapable: false,
     failedAttempts: 0,
-    roles: [],
-    permissions: [],
     ...overrides,
   } as Session;
 }
@@ -669,7 +667,14 @@ describe('@gtcx/security/offline', () => {
       await storage.set('mydata', { hello: 'world' });
 
       // The raw storage should not contain plaintext
-      const rawStore = storage.getStorage();
+      const rawStore = (
+        storage as unknown as {
+          getStorage(): {
+            getItem(key: string): Promise<string | null>;
+            getAllKeys(): Promise<string[]>;
+          };
+        }
+      ).getStorage();
       const raw = await rawStore.getItem('gtcx_secure_mydata');
       expect(raw).toBeDefined();
       expect(raw).not.toContain('"hello":"world"');
@@ -751,7 +756,16 @@ describe('@gtcx/security/offline', () => {
 
       // Storage should have been wiped - verify by checking that user data is gone
       // (only metadata keys like __initialized and __lockout_state may remain)
-      const keys = await storage.getStorage().getAllKeys();
+      const keys = await (
+        storage as unknown as {
+          getStorage(): {
+            getItem(key: string): Promise<string | null>;
+            getAllKeys(): Promise<string[]>;
+          };
+        }
+      )
+        .getStorage()
+        .getAllKeys();
       const userKeys = keys.filter(
         (k) => k !== 'gtcx_secure___initialized' && k !== 'gtcx_secure___lockout_state'
       );
@@ -763,7 +777,7 @@ describe('@gtcx/security/offline', () => {
     let cache: CredentialCache;
 
     beforeEach(() => {
-      cache = new CredentialCache('test_cache', {
+      cache = new CredentialCache({
         maxOfflineHours: 72,
         revocationCheckIntervalHours: 24,
         maxCachedCredentials: 100,
@@ -1067,9 +1081,9 @@ describe('@gtcx/security/audit', () => {
 
       expect(captured.length).toBe(1);
       const meta = captured[0]!.metadata!;
-      expect(meta.password).toBe('[REDACTED]');
-      expect(meta.username).toBe('alice');
-      expect(meta.apiKey).toBe('[REDACTED]');
+      expect(meta['password']).toBe('[REDACTED]');
+      expect(meta['username']).toBe('alice');
+      expect(meta['apiKey']).toBe('[REDACTED]');
     });
 
     it('should batch events', async () => {
@@ -1205,11 +1219,11 @@ describe('@gtcx/security/audit', () => {
       await trail.finalize('SUCCESS');
 
       const meta = received[0]!.metadata!;
-      expect(meta.operationType).toBe('transfer');
-      expect(meta.startedAt).toBeDefined();
-      expect(meta.completedAt).toBeDefined();
-      expect(Array.isArray(meta.steps)).toBe(true);
-      const steps = meta.steps as Array<{
+      expect(meta['operationType']).toBe('transfer');
+      expect(meta['startedAt']).toBeDefined();
+      expect(meta['completedAt']).toBeDefined();
+      expect(Array.isArray(meta['steps'])).toBe(true);
+      const steps = meta['steps'] as Array<{
         step: string;
         timestamp: string;
         metadata?: Record<string, unknown>;
@@ -1299,7 +1313,7 @@ describe('integration', () => {
     });
 
     // 1. Create and validate a credential for offline use
-    const cache = new CredentialCache('integration_test', {
+    const cache = new CredentialCache({
       maxOfflineHours: 72,
       revocationCheckIntervalHours: 24,
       maxCachedCredentials: 100,
@@ -1329,7 +1343,7 @@ describe('integration', () => {
     const auditEvent = received[received.length - 1]!;
     expect(auditEvent.outcome).toBe('SUCCESS');
     expect(auditEvent.metadata).toBeDefined();
-    const steps = auditEvent.metadata!.steps as Array<{ step: string }>;
+    const steps = auditEvent.metadata!['steps'] as Array<{ step: string }>;
     expect(steps.length).toBe(2);
     expect(steps[0]!.step).toBe('credential_validated');
     expect(steps[1]!.step).toBe('integrity_verified');

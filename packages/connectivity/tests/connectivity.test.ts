@@ -173,10 +173,7 @@ describe('ConnectivityDetector', () => {
 
   describe('start/stop', () => {
     it('performs periodic checks after start', async () => {
-      const checkFn = vi.fn<
-        [],
-        Promise<{ online: boolean; latencyMs: number; bandwidthKbps: number }>
-      >(async () => ({
+      const checkFn = vi.fn(async () => ({
         online: true,
         latencyMs: 50,
         bandwidthKbps: 10000,
@@ -288,7 +285,7 @@ describe('ConnectivityDetector', () => {
 
   describe('destroy', () => {
     it('clears timers and listeners', async () => {
-      const checkFn = vi.fn<[], Promise<{ online: boolean }>>(async () => ({ online: true }));
+      const checkFn = vi.fn(async () => ({ online: true }));
       const detector = new ConnectivityDetector({
         checkFn,
         checkIntervalMs: 1000,
@@ -311,7 +308,7 @@ describe('ConnectivityDetector', () => {
     });
 
     it('prevents start after destroy', async () => {
-      const checkFn = vi.fn<[], Promise<{ online: boolean }>>(async () => ({ online: true }));
+      const checkFn = vi.fn(async () => ({ online: true }));
       const detector = new ConnectivityDetector({
         checkFn,
         checkIntervalMs: 1000,

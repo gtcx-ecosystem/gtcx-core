@@ -281,7 +281,7 @@ describe('createCommodityCertificateConfig', () => {
     expect(config.displayName).toBe('Platinum Origin Certificate');
     expect(config.additionalValidation).toBeDefined();
     expect(config.additionalValidation!.length).toBeGreaterThan(0);
-    expect(config.additionalValidation![0].field).toContain('purity');
+    expect(config.additionalValidation![0]!.field).toContain('purity');
   });
 
   it('creates a config without purity validation for non-purity commodity', () => {

@@ -84,7 +84,7 @@ describe('WorkProofAIValidationResultSchema', () => {
       overallAnomalyScore: 1.01,
     });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_big');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_big');
   });
 
   it('rejects overallAnomalyScore < 0', () => {
@@ -93,7 +93,7 @@ describe('WorkProofAIValidationResultSchema', () => {
       overallAnomalyScore: -0.01,
     });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 
   it('accepts overallConfidence at 0', () => {
@@ -131,7 +131,7 @@ describe('WorkProofAIValidationResultSchema', () => {
   it('rejects empty agents array (min 1)', () => {
     const result = WorkProofAIValidationResultSchema.safeParse({ ...validResult, agents: [] });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 });
 

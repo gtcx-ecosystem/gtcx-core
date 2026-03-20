@@ -104,7 +104,7 @@ describe('WorkProofSchema', () => {
       expect(result.data.credentialSubject.issuerId).toBe('did:example:issuer');
       expect(result.data.credentialSubject.issuerRole).toBe('inspector');
       expect(result.data.credentialSubject.claims).toHaveLength(1);
-      expect(result.data.credentialSubject.claims[0].confidence).toBe(0.95);
+      expect(result.data.credentialSubject.claims[0]!.confidence).toBe(0.95);
     }
   });
 
@@ -113,8 +113,8 @@ describe('WorkProofSchema', () => {
     const result = WorkProofSchema.safeParse(bad);
     expect(result.success).toBe(false);
     if (!result.success) {
-      expect(result.error.issues[0].message).toContain('VerifiableCredential');
-      expect(result.error.issues[0].message).toContain('WorkProof');
+      expect(result.error.issues[0]!.message).toContain('VerifiableCredential');
+      expect(result.error.issues[0]!.message).toContain('WorkProof');
     }
   });
 
@@ -123,7 +123,7 @@ describe('WorkProofSchema', () => {
     const result = WorkProofSchema.safeParse(bad);
     expect(result.success).toBe(false);
     if (!result.success) {
-      expect(result.error.issues[0].message).toContain('WorkProof');
+      expect(result.error.issues[0]!.message).toContain('WorkProof');
     }
   });
 
@@ -131,7 +131,7 @@ describe('WorkProofSchema', () => {
     const bad = { ...validWorkProof, workProofVersion: '1.0' };
     const result = WorkProofSchema.safeParse(bad);
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('invalid_literal');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_literal');
   });
 
   it('rejects missing workProofVersion', () => {
@@ -270,19 +270,19 @@ describe('WorkProofClaimSchema', () => {
   it('rejects confidence above 1', () => {
     const result = WorkProofClaimSchema.safeParse({ ...validClaim, confidence: 1.01 });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_big');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_big');
   });
 
   it('rejects confidence below 0', () => {
     const result = WorkProofClaimSchema.safeParse({ ...validClaim, confidence: -0.01 });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 
   it('rejects empty evidence array (min 1)', () => {
     const result = WorkProofClaimSchema.safeParse({ ...validClaim, evidence: [] });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 
   it('accepts optional validUntil when provided', () => {

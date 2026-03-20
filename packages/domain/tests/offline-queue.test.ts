@@ -198,7 +198,7 @@ describe('OfflineQueue', () => {
       await queue.markFailed(id, 'first error');
 
       const pending = queue.getPending();
-      expect(pending[0].lastError).toBe('first error');
+      expect(pending[0]!.lastError).toBe('first error');
     });
 
     it('does nothing for unknown id', async () => {
@@ -484,7 +484,7 @@ describe('OfflineQueue', () => {
       await q.markCompleted(id);
 
       const loaded = await storage.load();
-      expect(loaded[0].status).toBe('completed');
+      expect(loaded[0]!.status).toBe('completed');
     });
   });
 });
@@ -513,7 +513,7 @@ describe('InMemoryQueueStorage', () => {
     await storage.save(ops);
     const loaded = await storage.load();
     expect(loaded).toHaveLength(1);
-    expect(loaded[0].id).toBe('q1');
+    expect(loaded[0]!.id).toBe('q1');
   });
 
   it('clear empties storage', async () => {

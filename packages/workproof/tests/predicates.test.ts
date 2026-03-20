@@ -122,7 +122,7 @@ describe('PredicateCategorySchema', () => {
   it.each(categoryRanges)(
     'category "%s" has correct count of predicates',
     (category, predicates) => {
-      expect(predicates).toHaveLength(categoryCounts[category]);
+      expect(predicates).toHaveLength(categoryCounts[category as string]!);
       for (const p of predicates) {
         expect(WorkProofPredicateTypeSchema.safeParse(p).success).toBe(true);
       }
@@ -153,13 +153,13 @@ describe('BooleanValueSchema', () => {
   it('rejects wrong kind literal', () => {
     const result = BooleanValueSchema.safeParse({ kind: 'numeric', value: true });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('invalid_literal');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_literal');
   });
 
   it('rejects non-boolean value', () => {
     const result = BooleanValueSchema.safeParse({ kind: 'boolean', value: 'yes' });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('invalid_type');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_type');
   });
 });
 
@@ -213,7 +213,7 @@ describe('NumericValueSchema', () => {
   it('rejects non-number value', () => {
     const result = NumericValueSchema.safeParse({ kind: 'numeric', value: 'forty' });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('invalid_type');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_type');
   });
 
   it('rejects negative precision', () => {
@@ -249,7 +249,7 @@ describe('RangeValueSchema', () => {
   it('rejects range where min > max and checks error message', () => {
     const result = RangeValueSchema.safeParse({ kind: 'range', min: 100, max: 10 });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].message).toBe('min must be <= max');
+    if (!result.success) expect(result.error.issues[0]!.message).toBe('min must be <= max');
   });
 
   it('accepts range with optional unit', () => {
@@ -285,7 +285,7 @@ describe('EnumValueSchema', () => {
     });
     expect(result.success).toBe(false);
     if (!result.success)
-      expect(result.error.issues[0].message).toBe('value must be one of allowedValues');
+      expect(result.error.issues[0]!.message).toBe('value must be one of allowedValues');
   });
 
   it('rejects empty allowedValues array', () => {
@@ -316,7 +316,7 @@ describe('HashValueSchema', () => {
   it('rejects empty value string', () => {
     const result = HashValueSchema.safeParse({ kind: 'hash', algorithm: 'sha256', value: '' });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 });
 
@@ -334,7 +334,7 @@ describe('LocalizedValueSchema', () => {
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.defaultLocale).toBe('en');
-      expect(result.data.value.fr).toBe('Bonjour');
+      expect(result.data.value['fr']).toBe('Bonjour');
     }
   });
 
@@ -346,7 +346,7 @@ describe('LocalizedValueSchema', () => {
     });
     expect(result.success).toBe(false);
     if (!result.success)
-      expect(result.error.issues[0].message).toBe('defaultLocale must exist in value map');
+      expect(result.error.issues[0]!.message).toBe('defaultLocale must exist in value map');
   });
 
   it('rejects defaultLocale shorter than 2 chars', () => {

@@ -179,7 +179,7 @@ describe('Full pipeline: Offline queue with crypto-signed operations', () => {
   it('queues signed operations offline and replays them', async () => {
     const { identity, privateKey } = await createIdentity();
     const storage = new InMemoryQueueStorage();
-    const queue = new OfflineQueue(storage);
+    const queue = new OfflineQueue({ storage });
 
     // Queue signed operations
     for (let i = 0; i < 3; i++) {

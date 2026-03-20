@@ -252,8 +252,8 @@ describe('sanitizeObject', () => {
         name: '<script>x</script>Alice',
         title: '<b>Admin</b>',
       });
-      expect(result.name).toBe('xAlice');
-      expect(result.title).toBe('Admin');
+      expect(result['name']).toBe('xAlice');
+      expect(result['title']).toBe('Admin');
     });
 
     it('should handle nested objects', () => {
@@ -330,14 +330,14 @@ describe('sanitizeObject', () => {
       const malicious = JSON.parse('{"__proto__": {"polluted": true}, "safe": "ok"}');
       const result = sanitizeObject<Record<string, unknown>>(malicious);
       expect(result).not.toHaveProperty('__proto__');
-      expect(result.safe).toBe('ok');
+      expect(result['safe']).toBe('ok');
     });
 
     it('should strip constructor property', () => {
       const malicious = JSON.parse('{"constructor": {"polluted": true}, "safe": "ok"}');
       const result = sanitizeObject<Record<string, unknown>>(malicious);
       expect(result).not.toHaveProperty('constructor');
-      expect(result.safe).toBe('ok');
+      expect(result['safe']).toBe('ok');
     });
 
     it('should strip prototype property', () => {
@@ -355,7 +355,7 @@ describe('sanitizeObject', () => {
         stripProto: false,
       });
       expect(Object.keys(result)).toContain('constructor');
-      expect(result.safe).toBe('ok');
+      expect(result['safe']).toBe('ok');
     });
   });
 
@@ -375,7 +375,7 @@ describe('sanitizeObject', () => {
         { a: 'keep', b: null },
         { stripNullish: false }
       );
-      expect(result.b).toBeNull();
+      expect(result['b']).toBeNull();
     });
 
     it('should strip nullish from arrays', () => {

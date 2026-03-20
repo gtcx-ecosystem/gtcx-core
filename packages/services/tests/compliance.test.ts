@@ -60,7 +60,7 @@ function createService(
     {
       storageService: overrides.storageService ?? createMockStorageService(),
       cryptoService: overrides.cryptoService ?? createMockCryptoService(),
-      eventEmitter: overrides.eventEmitter,
+      eventEmitter: overrides.eventEmitter as never,
       zkpVerifier: overrides.zkpVerifier,
     },
     overrides.config ?? {}
@@ -789,7 +789,7 @@ describe('UnifiedComplianceService', () => {
       const capturedCrypto = crypto;
       class CryptoVerifyComplianceService extends UnifiedComplianceService {
         protected override async checkProducerLicense(_producerId: string) {
-          const isValid = await capturedCrypto.verify('data', 'sig', 'key');
+          const isValid = await capturedCrypto.verify('data', 'sig');
           return isValid
             ? { compliant: true }
             : { compliant: false, issue: 'Cryptographic verification failed' };

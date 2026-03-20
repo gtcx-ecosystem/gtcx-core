@@ -117,7 +117,7 @@ describe('TradeCVSchema', () => {
   it('rejects version other than "2.1"', () => {
     const result = TradeCVSchema.safeParse({ ...validTradeCV, version: '1.0' });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('invalid_literal');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_literal');
   });
 
   it('rejects version "2.0"', () => {
@@ -183,13 +183,13 @@ describe('TradeCVSummarySchema', () => {
   it('rejects gciScore > 100', () => {
     const result = TradeCVSummarySchema.safeParse({ ...validTradeCV.summary, gciScore: 101 });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_big');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_big');
   });
 
   it('rejects gciScore < 0', () => {
     const result = TradeCVSummarySchema.safeParse({ ...validTradeCV.summary, gciScore: -1 });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 });
 
@@ -401,8 +401,8 @@ describe('TradeCVProfileSchema', () => {
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.affiliations).toHaveLength(1);
-      expect(result.data.affiliations[0].type).toBe('cooperative');
-      expect(result.data.affiliations[0].id).toBe('coop-001');
+      expect(result.data.affiliations[0]!.type).toBe('cooperative');
+      expect(result.data.affiliations[0]!.id).toBe('coop-001');
     }
   });
 

@@ -139,10 +139,10 @@ describe('createDIDDocument', () => {
     const did = createDID(identity);
     const vm = doc.verificationMethod[0];
 
-    expect(vm.id).toBe(`${did}#keys-1`);
-    expect(vm.type).toBe('Ed25519VerificationKey2020');
-    expect(vm.controller).toBe(did);
-    expect(vm.publicKeyHex).toBe(identity.publicKey);
+    expect(vm!.id).toBe(`${did}#keys-1`);
+    expect(vm!.type).toBe('Ed25519VerificationKey2020');
+    expect(vm!.controller).toBe(did);
+    expect(vm!.publicKeyHex).toBe(identity.publicKey);
   });
 
   it('authentication references match verification method IDs', async () => {
@@ -162,14 +162,14 @@ describe('createDIDDocument', () => {
     expect(doc.verificationMethod.length).toBe(2);
 
     // First key: Ed25519
-    expect(doc.verificationMethod[0].id).toBe(`${did}#keys-1`);
-    expect(doc.verificationMethod[0].type).toBe('Ed25519VerificationKey2020');
-    expect(doc.verificationMethod[0].publicKeyHex).toBe(identity.publicKey);
+    expect(doc.verificationMethod[0]!.id).toBe(`${did}#keys-1`);
+    expect(doc.verificationMethod[0]!.type).toBe('Ed25519VerificationKey2020');
+    expect(doc.verificationMethod[0]!.publicKeyHex).toBe(identity.publicKey);
 
     // Second key: Secp256k1
-    expect(doc.verificationMethod[1].id).toBe(`${did}#keys-2`);
-    expect(doc.verificationMethod[1].type).toBe('EcdsaSecp256k1VerificationKey2019');
-    expect(doc.verificationMethod[1].publicKeyHex).toBe(
+    expect(doc.verificationMethod[1]!.id).toBe(`${did}#keys-2`);
+    expect(doc.verificationMethod[1]!.type).toBe('EcdsaSecp256k1VerificationKey2019');
+    expect(doc.verificationMethod[1]!.publicKeyHex).toBe(
       identity.multiKeyPairs.secp256k1!.publicKey
     );
 

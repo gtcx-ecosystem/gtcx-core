@@ -32,7 +32,7 @@ import type {
 } from '../src/auth/permissions';
 
 // Mock audit logging
-vi.mock('../src/audit/events', () => ({
+vi.mock('../src/audit/events.js', () => ({
   logSecurityEvent: vi.fn().mockResolvedValue(undefined),
 }));
 
@@ -306,7 +306,7 @@ describe('expandPermissions', () => {
 
 describe('validatePermission', () => {
   it('should return true and log ACCESS_GRANTED for allowed', async () => {
-    const { logSecurityEvent } = await import('../src/audit/events');
+    const { logSecurityEvent } = await import('../src/audit/events.js');
 
     const result = await validatePermission({
       actor: 'user-001',
@@ -328,7 +328,7 @@ describe('validatePermission', () => {
   });
 
   it('should return false and log ACCESS_DENIED for denied', async () => {
-    const { logSecurityEvent } = await import('../src/audit/events');
+    const { logSecurityEvent } = await import('../src/audit/events.js');
 
     const result = await validatePermission({
       actor: 'user-002',
@@ -348,7 +348,7 @@ describe('validatePermission', () => {
   });
 
   it('should include role and permission count in log metadata', async () => {
-    const { logSecurityEvent } = await import('../src/audit/events');
+    const { logSecurityEvent } = await import('../src/audit/events.js');
 
     await validatePermission({
       actor: 'user-003',

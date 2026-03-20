@@ -331,8 +331,10 @@ describe('deriveIdentity', () => {
     expect(result.privateKey).toBeTypeOf('string');
 
     // Should have parent identity reference
-    expect((result.identity.metadata as Record<string, unknown>).parentIdentityId).toBe(parent.id);
-    expect((result.identity.metadata as Record<string, unknown>).derivationContext).toBe(
+    expect((result.identity.metadata as Record<string, unknown>)['parentIdentityId']).toBe(
+      parent.id
+    );
+    expect((result.identity.metadata as Record<string, unknown>)['derivationContext']).toBe(
       'role:admin'
     );
   });
@@ -357,7 +359,7 @@ describe('deriveIdentity', () => {
     });
     const result = await deriveIdentity(parent, 'sub-role');
 
-    expect((result.identity.metadata as Record<string, unknown>).userRole).toBe('supervisor');
+    expect((result.identity.metadata as Record<string, unknown>)['userRole']).toBe('supervisor');
     expect(result.identity.metadata.fingerprint).toBeTypeOf('string');
   });
 
@@ -369,6 +371,6 @@ describe('deriveIdentity', () => {
       metadata: { userRole: 'auditor' },
     });
 
-    expect((result.identity.metadata as Record<string, unknown>).userRole).toBe('auditor');
+    expect((result.identity.metadata as Record<string, unknown>)['userRole']).toBe('auditor');
   });
 });

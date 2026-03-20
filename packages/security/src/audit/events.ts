@@ -252,7 +252,7 @@ export async function logSecurityEvent(
       : eventOrType;
 
   // Log to console in development
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env['NODE_ENV'] === 'development') {
     const color = severityColor(event.severity);
     // eslint-disable-next-line no-console
     console.log(

@@ -207,8 +207,8 @@ describe('InMemoryMetricsCollector', () => {
       collector.increment('my_counter');
 
       const metrics = collector.getMetrics();
-      expect(metrics[0].timestamp).toBeGreaterThan(0);
-      expect(metrics[0].timestamp).toBeLessThanOrEqual(Date.now());
+      expect(metrics[0]!.timestamp).toBeGreaterThan(0);
+      expect(metrics[0]!.timestamp).toBeLessThanOrEqual(Date.now());
     });
   });
 

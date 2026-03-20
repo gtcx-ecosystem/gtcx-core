@@ -71,7 +71,7 @@ describe('AdmissionCriteriaSchema', () => {
       jurisdictions: [],
     });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 
   it('rejects jurisdiction string with single char (min 2)', () => {
@@ -80,7 +80,7 @@ describe('AdmissionCriteriaSchema', () => {
       jurisdictions: ['X'],
     });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 
   it('accepts jurisdiction with exactly 2 chars', () => {
@@ -156,7 +156,7 @@ describe('TrustRegistryEntrySchema', () => {
   it('rejects empty supportedProofTypes (min 1)', () => {
     const result = TrustRegistryEntrySchema.safeParse({ ...validEntry, supportedProofTypes: [] });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('too_small');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('too_small');
   });
 
   it('rejects invalid proof type in supportedProofTypes', () => {

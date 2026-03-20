@@ -33,15 +33,15 @@ import {
 import { createPaginatedSchema, createApiResponseSchema } from '../src/validation/schemas';
 
 describe('logSecurityEvent — development console output', () => {
-  const originalEnv = process.env.NODE_ENV;
+  const originalEnv = process.env['NODE_ENV'];
 
   afterEach(() => {
-    process.env.NODE_ENV = originalEnv;
+    process.env['NODE_ENV'] = originalEnv;
     clearSecurityHandlers();
   });
 
   it('should log to console in development mode', async () => {
-    process.env.NODE_ENV = 'development';
+    process.env['NODE_ENV'] = 'development';
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await logSecurityEvent('AUTH_SUCCESS', { outcome: 'SUCCESS' });
@@ -54,7 +54,7 @@ describe('logSecurityEvent — development console output', () => {
   });
 
   it('should log CRITICAL severity with red color', async () => {
-    process.env.NODE_ENV = 'development';
+    process.env['NODE_ENV'] = 'development';
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await logSecurityEvent('TAMPER_DETECTED', {
@@ -69,7 +69,7 @@ describe('logSecurityEvent — development console output', () => {
   });
 
   it('should log HIGH severity with yellow color', async () => {
-    process.env.NODE_ENV = 'development';
+    process.env['NODE_ENV'] = 'development';
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await logSecurityEvent('DATA_DELETED', {
@@ -84,7 +84,7 @@ describe('logSecurityEvent — development console output', () => {
   });
 
   it('should log WARN severity with magenta color', async () => {
-    process.env.NODE_ENV = 'development';
+    process.env['NODE_ENV'] = 'development';
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await logSecurityEvent('AUTH_FAILURE', {
@@ -99,7 +99,7 @@ describe('logSecurityEvent — development console output', () => {
   });
 
   it('should log INFO severity with cyan color', async () => {
-    process.env.NODE_ENV = 'development';
+    process.env['NODE_ENV'] = 'development';
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await logSecurityEvent('AUTH_SUCCESS', {
@@ -114,7 +114,7 @@ describe('logSecurityEvent — development console output', () => {
   });
 
   it('should include actor and resource when present', async () => {
-    process.env.NODE_ENV = 'development';
+    process.env['NODE_ENV'] = 'development';
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await logSecurityEvent('AUTH_SUCCESS', {

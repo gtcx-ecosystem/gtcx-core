@@ -81,7 +81,7 @@ function createService(
       complianceService: overrides.complianceService ?? createMockComplianceService(),
       cryptoService: overrides.cryptoService ?? createMockCryptoService(),
       storageService: overrides.storageService ?? createMockStorageService(),
-      eventEmitter: overrides.eventEmitter,
+      eventEmitter: overrides.eventEmitter as never,
     },
     overrides.config ?? {}
   );
@@ -671,7 +671,7 @@ describe('TradingService', () => {
       const compliance = createMockComplianceService();
       (compliance.validateLicenses as ReturnType<typeof vi.fn>).mockImplementation(
         async (_traderId: string) => {
-          const valid = await crypto.verify('license-data', 'sig', 'key');
+          const valid = await crypto.verify('license-data', 'sig');
           return valid;
         }
       );

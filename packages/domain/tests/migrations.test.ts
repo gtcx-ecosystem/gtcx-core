@@ -108,11 +108,11 @@ describe('SchemaMigrator', () => {
       const data = result.data as Record<string, unknown>;
 
       expect(result._schemaVersion).toBe('1.1.0');
-      expect(data.producerId).toBe('producer-1');
-      expect(data.minerId).toBeUndefined();
-      expect(data.assetDetails).toEqual({ karat: 22 });
-      expect(data.goldDetails).toBeUndefined();
-      expect(data.weightUnit).toBe('g');
+      expect(data['producerId']).toBe('producer-1');
+      expect(data['minerId']).toBeUndefined();
+      expect(data['assetDetails']).toEqual({ karat: 22 });
+      expect(data['goldDetails']).toBeUndefined();
+      expect(data['weightUnit']).toBe('g');
     });
 
     it('asset_lot migration does not overwrite existing producerId', () => {
@@ -148,8 +148,8 @@ describe('SchemaMigrator', () => {
       const data = result.data as Record<string, unknown>;
 
       expect(result._schemaVersion).toBe('1.1.0');
-      expect(data.quantityUnit).toBe('g');
-      expect(data.cryptoProof).toBeNull();
+      expect(data['quantityUnit']).toBe('g');
+      expect(data['cryptoProof']).toBeNull();
     });
 
     it('records migration IDs in _migrations', () => {
@@ -191,8 +191,8 @@ describe('SchemaMigrator', () => {
       ];
       const results = migrator.migrateMany(entities);
       expect(results).toHaveLength(2);
-      expect(results[0]._schemaVersion).toBe('1.1.0');
-      expect(results[1]._schemaVersion).toBe('1.1.0');
+      expect(results[0]!._schemaVersion).toBe('1.1.0');
+      expect(results[1]!._schemaVersion).toBe('1.1.0');
     });
   });
 
@@ -206,7 +206,7 @@ describe('SchemaMigrator', () => {
         description: 'Add tier field',
         migrate: (data: unknown) => {
           const d = { ...(data as Record<string, unknown>) };
-          d.tier = 'basic';
+          d['tier'] = 'basic';
           return d;
         },
       };
@@ -321,8 +321,8 @@ describe('migrateAndUnwrap', () => {
       _entityType: 'asset_lot',
     };
     const result = migrateAndUnwrap(entity, 'asset_lot') as Record<string, unknown>;
-    expect(result.producerId).toBe('p1');
-    expect(result.minerId).toBeUndefined();
+    expect(result['producerId']).toBe('p1');
+    expect(result['minerId']).toBeUndefined();
   });
 
   it('handles already-current data', () => {

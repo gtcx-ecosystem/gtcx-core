@@ -122,7 +122,7 @@ describe('OfflineMetadataSchema', () => {
       generatedOffline: false,
     });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].code).toBe('invalid_literal');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_literal');
   });
 
   it('accepts localSequenceNumber at 0', () => {

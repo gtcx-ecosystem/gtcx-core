@@ -43,10 +43,10 @@ describe('InMemoryOperationLogger', () => {
         weight: 100,
       });
       const entry = logger.get(id)!;
-      expect(entry.input!.commodityType).toBe('gold');
-      expect(entry.input!.email).toBe('[REDACTED]');
-      expect(entry.input!.phone).toBe('[REDACTED]');
-      expect(entry.input!.weight).toBe(100);
+      expect(entry.input!['commodityType']).toBe('gold');
+      expect(entry.input!['email']).toBe('[REDACTED]');
+      expect(entry.input!['phone']).toBe('[REDACTED]');
+      expect(entry.input!['weight']).toBe(100);
     });
 
     it('sanitizes nested objects and arrays in input', () => {
@@ -55,8 +55,8 @@ describe('InMemoryOperationLogger', () => {
         items: [1, 2, 3],
       });
       const entry = logger.get(id)!;
-      expect(entry.input!.details).toBe('[Object]');
-      expect(entry.input!.items).toBe('[Array(3)]');
+      expect(entry.input!['details']).toBe('[Object]');
+      expect(entry.input!['items']).toBe('[Array(3)]');
     });
 
     it('records parentId, correlationId, and tags', () => {
@@ -172,8 +172,8 @@ describe('InMemoryOperationLogger', () => {
 
       const results = logger.getByCorrelationId('c1');
       expect(results).toHaveLength(2);
-      expect(results[0].operationId).toBe(id1);
-      expect(results[1].operationId).toBe(id2);
+      expect(results[0]!.operationId).toBe(id1);
+      expect(results[1]!.operationId).toBe(id2);
     });
 
     it('returns empty array when no matches', () => {

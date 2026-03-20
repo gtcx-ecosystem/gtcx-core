@@ -89,7 +89,7 @@ function createService(
       cryptoService: overrides.cryptoService ?? createMockCryptoService(),
       locationService: overrides.locationService ?? createMockLocationService(),
       storageService: overrides.storageService ?? createMockStorageService(),
-      eventEmitter: overrides.eventEmitter,
+      eventEmitter: overrides.eventEmitter as never,
     },
     overrides.config ?? {}
   );
@@ -581,9 +581,9 @@ describe('AssetLotRegistrationService', () => {
       const result = await service.registerAssetLot(data);
 
       expect(result.metadata).toBeDefined();
-      expect(result.metadata!.photos).toHaveLength(2);
-      expect(result.metadata!.registrationSessionId).toBeTruthy();
-      expect(result.metadata!.cryptoProof).toBeDefined();
+      expect(result.metadata!['photos']).toHaveLength(2);
+      expect(result.metadata!['registrationSessionId']).toBeTruthy();
+      expect(result.metadata!['cryptoProof']).toBeDefined();
     });
   });
 
