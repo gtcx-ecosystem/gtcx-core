@@ -44,6 +44,8 @@ import {
   type IStorageService,
 } from '@gtcx/domain';
 
+import type { IComplianceRepository } from './repositories';
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -94,6 +96,7 @@ export class UnifiedComplianceService {
   private config: ComplianceConfig;
   private frameworks: RegulatoryFramework[];
   private zkpVerifier: ZkVerifier;
+  private complianceRepo?: IComplianceRepository;
 
   constructor(
     dependencies: {
@@ -101,6 +104,7 @@ export class UnifiedComplianceService {
       cryptoService: ICryptoService;
       eventEmitter?: IDomainEventEmitter;
       zkpVerifier?: ZkVerifier;
+      complianceRepository?: IComplianceRepository;
     },
     config: Partial<ComplianceConfig> = {}
   ) {
@@ -109,6 +113,7 @@ export class UnifiedComplianceService {
     this.eventEmitter = dependencies.eventEmitter || nullEventEmitter;
     this.eventFactory = new DomainEventFactory();
     this.zkpVerifier = dependencies.zkpVerifier ?? createHashCommitmentZkpEngine();
+    this.complianceRepo = dependencies.complianceRepository;
 
     // Validate config
     const configResult = safeParse(ComplianceConfigSchema, config);
@@ -775,11 +780,13 @@ export class UnifiedComplianceService {
   // VERIFICATION METHODS (Override for jurisdiction-specific implementations)
   // ==========================================================================
 
-  protected async checkProducerLicense(_producerId: string): Promise<ComplianceCheckResult> {
+  protected async checkProducerLicense(producerId: string): Promise<ComplianceCheckResult> {
+    if (this.complianceRepo) return this.complianceRepo.checkLicense(producerId, 'producer');
     return { compliant: true };
   }
 
-  protected async checkTraderLicense(_traderId: string): Promise<ComplianceCheckResult> {
+  protected async checkTraderLicense(traderId: string): Promise<ComplianceCheckResult> {
+    if (this.complianceRepo) return this.complianceRepo.checkLicense(traderId, 'trader');
     return { compliant: true };
   }
 
@@ -796,6 +803,7 @@ export class UnifiedComplianceService {
   // ==========================================================================
 
   protected async getAllComplianceRecords(): Promise<ComplianceRecord[]> {
+    if (this.complianceRepo) return this.complianceRepo.getRecords();
     return [];
   }
 

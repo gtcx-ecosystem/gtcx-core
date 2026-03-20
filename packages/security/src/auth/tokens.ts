@@ -10,6 +10,7 @@
  * @packageDocumentation
  */
 
+import { verify } from '@gtcx/crypto';
 import { z } from 'zod';
 
 // =============================================================================
@@ -217,6 +218,67 @@ export function assembleToken(payload: string, signature: string | Uint8Array): 
 
   // Not base64url — encode it
   return `${payload}.${base64UrlEncode(signature)}`;
+}
+
+/**
+ * Verify a token's cryptographic signature and temporal validity.
+ *
+ * @param token - The full JWT string (header.claims.signature)
+ * @param publicKeyHex - Hex-encoded Ed25519 public key of the issuer
+ * @param clockSkewSeconds - Allowed clock skew in seconds (default 60)
+ */
+export function verifyTokenSignature(
+  token: string,
+  publicKeyHex: string,
+  clockSkewSeconds = 60
+): TokenValidationResult {
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    return { valid: false, expired: false, notYetValid: false, error: 'Invalid token format' };
+  }
+
+  const payload = `${parts[0]}.${parts[1]}`;
+  const signatureHex = parts[2]!;
+
+  // Verify cryptographic signature
+  let sigValid: boolean;
+  try {
+    sigValid = verify(payload, signatureHex, publicKeyHex);
+  } catch {
+    return {
+      valid: false,
+      expired: false,
+      notYetValid: false,
+      error: 'Signature verification failed',
+    };
+  }
+
+  if (!sigValid) {
+    return { valid: false, expired: false, notYetValid: false, error: 'Invalid signature' };
+  }
+
+  // Decode and validate claims
+  const decoded = decodeToken(token);
+  if (!decoded) {
+    return {
+      valid: false,
+      expired: false,
+      notYetValid: false,
+      error: 'Failed to decode token claims',
+    };
+  }
+
+  // Check temporal validity
+  const temporal = isTokenTemporallyValid(decoded.claims, clockSkewSeconds);
+
+  return {
+    valid: temporal.valid,
+    expired: temporal.expired,
+    notYetValid: temporal.notYetValid,
+    claims: decoded.claims,
+    ...(temporal.expired ? { error: 'Token has expired' } : {}),
+    ...(temporal.notYetValid ? { error: 'Token is not yet valid' } : {}),
+  };
 }
 
 // =============================================================================

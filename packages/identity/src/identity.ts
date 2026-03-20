@@ -3,7 +3,7 @@
 // Create and manage digital identities for GTCX participants
 // ============================================================================
 
-import { randomUUID, randomBytes } from 'crypto';
+import { createHash, randomUUID, randomBytes } from 'crypto';
 
 import { generateKeyPair, hash256 } from '@gtcx/crypto';
 import type {
@@ -143,9 +143,13 @@ export async function createEnhancedIdentity(
   const ed25519KeyRef = `gtcx_ed25519_${id}`;
   const secp256k1KeyRef = `gtcx_secp256k1_${id}`;
 
-  // Create quantum-resistant hash
+  // Post-quantum hash binding (SHAKE-256, NIST SP 800-185)
+  // SHAKE-256 is a SHA-3 extendable-output function resistant to Grover's algorithm
   const combinedKeys = ed25519KeyPair.publicKey + secp256k1KeyPair.publicKey;
-  const quantumHash = hash256(hash256(combinedKeys) + Date.now().toString());
+  const postQuantumBinding = createHash('shake256', { outputLength: 32 })
+    .update(combinedKeys)
+    .update(Date.now().toString())
+    .digest('hex');
 
   // Create fingerprint
   const fingerprint = hash256(ed25519KeyPair.publicKey).substring(0, 16);
@@ -176,7 +180,7 @@ export async function createEnhancedIdentity(
       ...metadata,
     },
     multiKeyPairs,
-    quantumResistantHash: quantumHash,
+    quantumResistantHash: postQuantumBinding,
     keyDerivation: keyDerivation
       ? {
           algorithm: keyDerivation.algorithm ?? 'Argon2',

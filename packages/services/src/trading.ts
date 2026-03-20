@@ -37,6 +37,8 @@ import {
   type IComplianceService,
 } from '@gtcx/domain';
 
+import type { ITraderRepository, ITransactionRepository } from './repositories';
+
 // ============================================================================
 // ERROR CLASSES
 // ============================================================================
@@ -106,6 +108,8 @@ export class TradingService {
   private eventEmitter: IDomainEventEmitter;
   private eventFactory: DomainEventFactory;
   private config: TradingConfig;
+  private traderRepo?: ITraderRepository;
+  private transactionRepo?: ITransactionRepository;
 
   constructor(
     dependencies: {
@@ -114,6 +118,8 @@ export class TradingService {
       cryptoService: ICryptoService;
       storageService: IStorageService;
       eventEmitter?: IDomainEventEmitter;
+      traderRepository?: ITraderRepository;
+      transactionRepository?: ITransactionRepository;
     },
     config: Partial<TradingConfig> = {}
   ) {
@@ -123,6 +129,8 @@ export class TradingService {
     this.storageService = dependencies.storageService;
     this.eventEmitter = dependencies.eventEmitter || nullEventEmitter;
     this.eventFactory = new DomainEventFactory();
+    this.traderRepo = dependencies.traderRepository;
+    this.transactionRepo = dependencies.transactionRepository;
 
     // Validate config at construction time
     const configResult = safeParse(TradingConfigSchema, config);
@@ -612,20 +620,20 @@ export class TradingService {
   }
 
   protected async getAvailableAssetLots(): Promise<AssetLot[]> {
-    // Integration point - would query storage
+    if (this.traderRepo) return this.traderRepo.getAvailableLots();
     return [];
   }
 
-  protected async getTraderInfo(_traderId: string): Promise<Trader | undefined> {
-    // Integration point - would query storage
+  protected async getTraderInfo(traderId: string): Promise<Trader | undefined> {
+    if (this.traderRepo) return this.traderRepo.getTrader(traderId);
     return undefined;
   }
 
   protected async getTransactionHistory(
-    _commodityType: string,
-    _period: string
+    commodityType: string,
+    period: string
   ): Promise<Transaction[]> {
-    // Integration point - would query storage with date filter
+    if (this.transactionRepo) return this.transactionRepo.getHistory(commodityType, period);
     return [];
   }
 

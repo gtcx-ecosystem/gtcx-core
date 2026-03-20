@@ -571,6 +571,9 @@ importers:
 
   packages/workproof:
     dependencies:
+      '@gtcx/crypto':
+        specifier: workspace:*
+        version: link:../crypto
       '@gtcx/types':
         specifier: workspace:*
         version: link:../types

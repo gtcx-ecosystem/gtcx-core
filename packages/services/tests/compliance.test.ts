@@ -11,11 +11,13 @@ import type {
   ICryptoService,
   IStorageService,
   AssetLot,
+  ComplianceRecord,
   Transaction,
   RegulatoryFramework,
 } from '@gtcx/domain';
 
 import { UnifiedComplianceService } from '../src/compliance';
+import type { IComplianceRepository } from '../src/repositories';
 
 // ============================================================================
 // HELPERS
@@ -844,5 +846,91 @@ describe('UnifiedComplianceService', () => {
       }
       expect(crypto.createHash).toHaveBeenCalledWith('test-data');
     });
+  });
+});
+
+// ============================================================================
+// REPOSITORY DI
+// ============================================================================
+
+describe('Repository DI: IComplianceRepository', () => {
+  function createMockRecord(overrides: Partial<ComplianceRecord> = {}): ComplianceRecord {
+    return {
+      id: 'comp-001',
+      type: 'license_check',
+      status: 'compliant',
+      severity: 'low',
+      sourceApp: 'agx',
+      sourceEntityId: 'trader-1',
+      sourceEntityType: 'trader',
+      regulation: {
+        code: 'MIN-001',
+        title: 'Mining License',
+        description: 'Active mining license required',
+        authority: 'ZMMA' as never,
+        category: 'licensing',
+      },
+      finding: {
+        description: 'License valid',
+        timestamp: new Date().toISOString(),
+        reportedBy: 'system',
+      },
+      metadata: {
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        tags: [],
+        priority: 1,
+        references: [],
+      },
+      ...overrides,
+    } as ComplianceRecord;
+  }
+
+  it('getAllComplianceRecords delegates to repository when provided', async () => {
+    const records = [createMockRecord({ id: 'r1' }), createMockRecord({ id: 'r2' })];
+    const repo: IComplianceRepository = {
+      getRecords: vi.fn().mockResolvedValue(records),
+      checkLicense: vi.fn().mockResolvedValue({ compliant: true }),
+    };
+
+    const service = new UnifiedComplianceService(
+      {
+        storageService: createMockStorageService(),
+        cryptoService: createMockCryptoService(),
+        complianceRepository: repo,
+      },
+      {}
+    );
+
+    const dashboard = await service.getComplianceDashboard();
+    expect(repo.getRecords).toHaveBeenCalled();
+    expect(dashboard.overview.totalRecords).toBe(2);
+  });
+
+  it('checkLicense delegates producer license check to repository', async () => {
+    const repo: IComplianceRepository = {
+      getRecords: vi.fn().mockResolvedValue([]),
+      checkLicense: vi.fn().mockResolvedValue({ compliant: false, issue: 'expired' }),
+    };
+
+    const service = new UnifiedComplianceService(
+      {
+        storageService: createMockStorageService(),
+        cryptoService: createMockCryptoService(),
+        complianceRepository: repo,
+      },
+      {}
+    );
+
+    // validateLicenses calls checkTraderLicense internally
+    const valid = await service.validateLicenses('trader-1');
+    expect(repo.checkLicense).toHaveBeenCalledWith('trader-1', 'trader');
+    expect(valid).toBe(false);
+  });
+
+  it('falls back to default stubs when no repository provided', async () => {
+    const service = createService();
+    const dashboard = await service.getComplianceDashboard();
+    expect(dashboard.overview.totalRecords).toBe(0);
   });
 });

@@ -45,3 +45,14 @@ export {
   type ComplianceConfig,
   type ComplianceCheckResult,
 } from './compliance';
+
+// ============================================================================
+// REPOSITORY INTERFACES
+// ============================================================================
+
+export type {
+  IComplianceRepository,
+  ITraderRepository,
+  ITransactionRepository,
+  ComplianceRecordFilter,
+} from './repositories';

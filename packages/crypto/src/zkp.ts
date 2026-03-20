@@ -39,6 +39,7 @@ export interface ZkVerifier {
 interface ProofPayload {
   salt: string;
   response: string;
+  commitment: string;
 }
 
 const textEncoder = new TextEncoder();
@@ -103,7 +104,7 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
     const salt = generateSalt(32);
     const response = hash256(`${salt}:${witnessHex}`);
     const commitment = hash256(`${input.proofType}:${salt}:${witnessHex}`);
-    const proofPayload: ProofPayload = { salt, response };
+    const proofPayload: ProofPayload = { salt, response, commitment };
 
     return {
       system: input.system,
@@ -115,6 +116,10 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
     };
   }
 
+  /**
+   * @simplified Hash-commitment verification only. Real ZKP verification
+   * requires Rust arkworks circuits via NAPI bindings (not yet wired).
+   */
   async verify(proof: ZKProof): Promise<boolean> {
     const parsed = ZKProofSchema.safeParse(proof);
     if (!parsed.success) return false;
@@ -122,6 +127,15 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
     if (!payload) return false;
     if (!isHex(payload.salt) || !isHex(payload.response)) return false;
     if (payload.salt.length !== 64 || payload.response.length !== 64) return false;
+
+    // Verify the commitment stored in the proof payload appears in publicInputs.
+    // The commitment binds the proof to its declared public inputs — tampering
+    // with either the proof or publicInputs breaks this link.
+    if (!payload.commitment || !isHex(payload.commitment) || payload.commitment.length !== 64) {
+      return false;
+    }
+    if (!proof.publicInputs.includes(payload.commitment)) return false;
+
     return true;
   }
 

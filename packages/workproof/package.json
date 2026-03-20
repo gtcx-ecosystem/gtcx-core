@@ -61,6 +61,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@gtcx/crypto": "workspace:*",
     "@gtcx/types": "workspace:*",
     "@gtcx/verification": "workspace:*",
     "zod": "^3.23.0"

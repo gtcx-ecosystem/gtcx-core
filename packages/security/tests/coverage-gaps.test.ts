@@ -10,6 +10,7 @@
  * - validation/schemas.ts: createPaginatedSchema(), createApiResponseSchema()
  */
 
+import { generateKeyPair, sign } from '@gtcx/crypto';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { z } from 'zod';
 
@@ -20,7 +21,12 @@ import {
   clearSecurityHandlers,
 } from '../src/audit/events';
 import { consoleLogHandler, jsonLogHandler } from '../src/audit/logger';
-import { assembleToken, createTokenPayload, decodeToken } from '../src/auth/tokens';
+import {
+  assembleToken,
+  createTokenPayload,
+  decodeToken,
+  verifyTokenSignature,
+} from '../src/auth/tokens';
 import {
   createIntegrityProofStructure,
   isProofStructureValid,
@@ -487,5 +493,66 @@ describe('createApiResponseSchema', () => {
       data: 'hello',
     });
     expect(result.success).toBe(false);
+  });
+});
+
+// --- auth/tokens.ts — verifyTokenSignature ---
+
+describe('verifyTokenSignature', () => {
+  it('accepts a properly signed token', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({ sub: 'user-1', iss: 'gtcx' });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey);
+    expect(result.valid).toBe(true);
+    expect(result.claims?.sub).toBe('user-1');
+    expect(result.error).toBeUndefined();
+  });
+
+  it('rejects a token with tampered payload', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({ sub: 'user-1' });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    // Tamper: replace the claims segment
+    const parts = token.split('.');
+    const tamperedClaims = createTokenPayload({ sub: 'admin' }).split('.')[1];
+    const tampered = `${parts[0]}.${tamperedClaims}.${parts[2]}`;
+
+    const result = verifyTokenSignature(tampered, keyPair.publicKey);
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Invalid signature');
+  });
+
+  it('rejects a token with wrong public key', async () => {
+    const keyPair1 = await generateKeyPair('Ed25519');
+    const keyPair2 = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({ sub: 'user-1' });
+    const signature = sign(payload, keyPair1.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair2.publicKey);
+    expect(result.valid).toBe(false);
+  });
+
+  it('rejects an expired token', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({ sub: 'user-1' }, { expiresInSeconds: -120 });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey);
+    expect(result.valid).toBe(false);
+    expect(result.expired).toBe(true);
+    expect(result.error).toBe('Token has expired');
+  });
+
+  it('rejects malformed token strings', () => {
+    const result = verifyTokenSignature('not-a-jwt', 'aabbccdd');
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Invalid token format');
   });
 });

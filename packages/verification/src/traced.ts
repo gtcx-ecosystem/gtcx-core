@@ -10,7 +10,7 @@
 // - Performance analysis
 // ============================================================================
 
-import { hash256 } from '@gtcx/crypto';
+import { hash256, verify } from '@gtcx/crypto';
 
 import {
   createMilitaryGradeCertificateData,
@@ -205,9 +205,28 @@ export const tracedVerifyCertificate = traced(
     const now = Date.now();
 
     const hashValid = 'dataHash' in certificate ? Boolean(certificate.dataHash) : true;
-    const signatureValid = Boolean(
-      certificate.verificationData?.publicKey && certificate.verificationData?.signature
-    );
+
+    // Cryptographic signature verification when dataHash is available
+    let signatureValid = false;
+    let cryptoVerified = false;
+    const { publicKey, signature: sig } = certificate.verificationData ?? {};
+    if (publicKey && sig && 'dataHash' in certificate && certificate.dataHash) {
+      const dataToSign = JSON.stringify({
+        certificateId: certificate.certificateId,
+        metadata: certificate.metadata,
+        dataHash: certificate.dataHash,
+      });
+      try {
+        signatureValid = verify(dataToSign, sig, publicKey);
+        cryptoVerified = true;
+      } catch {
+        signatureValid = false;
+        cryptoVerified = true;
+      }
+    } else {
+      // Fallback: presence check for certs without dataHash
+      signatureValid = Boolean(publicKey && sig);
+    }
     const timestampValid =
       certificate.metadata.issuedAt <= now &&
       certificate.verificationData.timestamp <= now &&
@@ -220,7 +239,7 @@ export const tracedVerifyCertificate = traced(
     ).length;
     const confidence = passedChecks / 4;
     const details = isValid
-      ? 'Certificate passed structural and temporal checks'
+      ? `Certificate passed ${cryptoVerified ? 'cryptographic' : 'structural'} and temporal checks`
       : `Certificate validation failed: ${structure.errors.join(', ') || 'one or more checks failed'}`;
 
     return {

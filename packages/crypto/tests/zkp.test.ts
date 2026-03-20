@@ -31,4 +31,58 @@ describe('HashCommitmentZkpEngine', () => {
     const badProof = { ...proof, proof: 'not-base64' };
     await expect(engine.verify(badProof)).resolves.toBe(false);
   });
+
+  it('rejects proof when publicInputs are tampered', async () => {
+    const engine = new HashCommitmentZkpEngine();
+    const proof = await engine.generate({
+      system: 'bulletproofs',
+      proofType: 'gci_threshold',
+      publicInputs: ['threshold:50'],
+      witness: 'score:75',
+      verificationKeyId: 'bulletproofs-gci-v1',
+    });
+
+    // Valid proof passes
+    await expect(engine.verify(proof)).resolves.toBe(true);
+
+    // Tamper with publicInputs — remove the commitment
+    const tampered = { ...proof, publicInputs: ['threshold:50'] };
+    await expect(engine.verify(tampered)).resolves.toBe(false);
+  });
+
+  it('rejects proof when proof payload is tampered', async () => {
+    const engine = new HashCommitmentZkpEngine();
+    const proof = await engine.generate({
+      system: 'groth16',
+      proofType: 'asset_ownership',
+      publicInputs: ['asset:lot-1'],
+      witness: 'owner:did:gtcx:abc',
+      verificationKeyId: 'groth16-asset-v1',
+    });
+
+    await expect(engine.verify(proof)).resolves.toBe(true);
+
+    // Tamper with proof field — replace with a different valid-looking payload
+    const fakePayload = Buffer.from(
+      JSON.stringify({ salt: 'a'.repeat(64), response: 'b'.repeat(64), commitment: 'c'.repeat(64) })
+    ).toString('base64');
+    const tampered = { ...proof, proof: fakePayload };
+    await expect(engine.verify(tampered)).resolves.toBe(false);
+  });
+
+  it('different witnesses produce different proofs', async () => {
+    const engine = new HashCommitmentZkpEngine();
+    const base = {
+      system: 'bulletproofs' as const,
+      proofType: 'gci_threshold',
+      publicInputs: ['threshold:50'],
+      verificationKeyId: 'bulletproofs-gci-v1',
+    };
+
+    const proof1 = await engine.generate({ ...base, witness: 'score:75' });
+    const proof2 = await engine.generate({ ...base, witness: 'score:30' });
+
+    expect(proof1.proof).not.toBe(proof2.proof);
+    expect(proof1.publicInputs).not.toEqual(proof2.publicInputs);
+  });
 });

@@ -12,8 +12,10 @@ import type {
   IPriceService,
   IComplianceService,
   AssetLot,
+  Trader,
 } from '@gtcx/domain';
 
+import type { ITraderRepository } from '../src/repositories';
 import { TradingService } from '../src/trading';
 
 // ============================================================================
@@ -701,5 +703,54 @@ describe('TradingService', () => {
       expect(result).toBeDefined();
       expect(result.cryptoSignature).toBe('mock-tx-signature');
     });
+  });
+});
+
+// ============================================================================
+// REPOSITORY DI
+// ============================================================================
+
+describe('Repository DI: ITraderRepository + ITransactionRepository', () => {
+  it('getTraderInfo delegates to trader repository when provided', async () => {
+    const mockTrader: Trader = {
+      id: 't1',
+      licenseNumber: 'LIC-001',
+      name: 'Test Trader',
+      location: { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() },
+      verificationLevel: 'enhanced',
+    };
+
+    const traderRepo: ITraderRepository = {
+      getTrader: vi.fn().mockResolvedValue(mockTrader),
+      getAvailableLots: vi.fn().mockResolvedValue([]),
+    };
+
+    const service = new TradingService(
+      {
+        priceService: createMockPriceService(),
+        complianceService: createMockComplianceService(),
+        cryptoService: createMockCryptoService(),
+        storageService: createMockStorageService(),
+        traderRepository: traderRepo,
+      },
+      {}
+    );
+
+    // findTradingOpportunities calls getAvailableAssetLots, which delegates to repo
+    await service.findTradingOpportunities({
+      commodityType: 'gold',
+      traderId: 't1',
+    });
+    // The repo was called for available lots
+    expect(traderRepo.getAvailableLots).toHaveBeenCalled();
+  });
+
+  it('falls back to empty when no trader repository', async () => {
+    const service = createService();
+    const opportunities = await service.findTradingOpportunities({
+      commodityType: 'gold',
+      traderId: 't1',
+    });
+    expect(opportunities).toEqual([]);
   });
 });
