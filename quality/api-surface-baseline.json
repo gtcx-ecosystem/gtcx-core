@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-03-17T23:27:15.727Z",
+  "generatedAt": "2026-03-20T00:39:17.024Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.0",
@@ -169,7 +169,7 @@
       "version": "1.0.0",
       "dir": "packages/domain",
       "typesPath": "packages/domain/dist/index.d.ts",
-      "hash": "7cb2f398256302e71951fb24037d44cb09fbfb6d5781bd9ca385ba1d9ecfd9cb",
+      "hash": "9e14cfe28bd5b366b9b6ad0017e7f6d62a03182eb63c0ea936e8e43ed390006e",
       "exports": [
         "AIAction",
         "AIAnalysisContext",
