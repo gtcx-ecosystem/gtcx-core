@@ -72,14 +72,18 @@ export interface CategoryLogger {
 }
 
 /**
- * Create a category-scoped logger (no-op stub)
+ * Create a category-scoped logger that outputs structured JSON to stderr.
  */
-export function createCategoryLogger(_category: string): CategoryLogger {
-  const noop = () => {};
+export function createCategoryLogger(category: string): CategoryLogger {
+  const emit = (level: string, message: string, data?: Record<string, unknown>) => {
+    const entry = { level, category, msg: message, ...data, ts: new Date().toISOString() };
+    // eslint-disable-next-line no-console
+    console.error(JSON.stringify(entry));
+  };
   return {
-    info: noop,
-    warn: noop,
-    error: noop,
-    debug: noop,
+    info: (msg, data) => emit('info', msg, data),
+    warn: (msg, data) => emit('warn', msg, data),
+    error: (msg, ...args) => emit('error', msg, args.length ? { args } : undefined),
+    debug: (msg, data) => emit('debug', msg, data),
   };
 }
