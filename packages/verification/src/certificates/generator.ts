@@ -254,10 +254,10 @@ export function createStandardCertificateData(
  */
 export function createMilitaryGradeCertificateData(input: CreateCertificateInput): Omit<
   MilitaryGradeCertificate,
-  'multiSignature' | 'quantumResistantHash'
+  'multiSignature' | 'postQuantumHash'
 > & {
   dataToSign: string;
-  dataForQuantumHash: string;
+  dataForPostQuantumHash: string;
 } {
   const normalizedInput = normalizeInput(input);
   const commodityType = normalizedInput.assetLotData?.commodityType;
@@ -267,7 +267,7 @@ export function createMilitaryGradeCertificateData(input: CreateCertificateInput
     throw new Error(`Template '${normalizedInput.templateId}' not found`);
   }
 
-  if (!['military', 'quantum-resistant'].includes(template.securityLevel)) {
+  if (!['military', 'post-quantum'].includes(template.securityLevel)) {
     throw new Error(`Template '${normalizedInput.templateId}' is not military-grade`);
   }
 
@@ -292,25 +292,25 @@ export function createMilitaryGradeCertificateData(input: CreateCertificateInput
     complianceData: normalizedInput.complianceData,
   };
 
-  // Data for quantum-resistant hash
-  const dataForQuantumHash = JSON.stringify({
+  // Data for post-quantum hash
+  const dataForPostQuantumHash = JSON.stringify({
     certificateId,
     metadata,
     certificateData,
   });
 
-  // Data to sign (will include quantum hash after it's generated)
+  // Data to sign (will include post-quantum hash after it's generated)
   const dataToSign = JSON.stringify({
     certificateId,
     metadata,
-    // quantumResistantHash will be added by caller
+    // postQuantumHash will be added by caller
   });
 
   return {
     certificateId,
     version: '2.0',
     type: template.type,
-    securityLevel: template.securityLevel as 'military' | 'quantum-resistant',
+    securityLevel: template.securityLevel as 'military' | 'post-quantum',
     metadata,
     certificateData,
     verificationData: {
@@ -321,7 +321,7 @@ export function createMilitaryGradeCertificateData(input: CreateCertificateInput
     },
     createdAt: Date.now(),
     dataToSign,
-    dataForQuantumHash,
+    dataForPostQuantumHash,
   };
 }
 

@@ -51,7 +51,7 @@ describe('tracedGenerateCertificate', () => {
       claims: [],
     });
     expect('multiSignature' in cert).toBe(true);
-    expect('quantumResistantHash' in cert).toBe(true);
+    expect('postQuantumHash' in cert).toBe(true);
   });
 
   it('should not swallow validation errors', async () => {

@@ -180,7 +180,7 @@ export async function createEnhancedIdentity(
       ...metadata,
     },
     multiKeyPairs,
-    quantumResistantHash: postQuantumBinding,
+    postQuantumHash: postQuantumBinding,
     keyDerivation: keyDerivation
       ? {
           algorithm: keyDerivation.algorithm ?? 'Argon2',

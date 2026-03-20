@@ -28,7 +28,7 @@ export const ASSET_ORIGIN_TEMPLATE: CertificateTemplate = {
   name: 'Asset Origin Certificate',
   description: 'Military-grade certificate for commodity lot origin verification',
   type: 'asset-origin',
-  securityLevel: 'quantum-resistant',
+  securityLevel: 'post-quantum',
   requiredFields: ['location', 'assetLotData', 'userRole', 'deviceId'],
   optionalFields: ['photoEvidence', 'resourceContext', 'complianceData'],
   validationRules: [
@@ -83,9 +83,9 @@ export const WORK_SITE_TEMPLATE: CertificateTemplate = {
 export const GOVERNMENT_INSPECTOR_TEMPLATE: CertificateTemplate = {
   id: 'government-inspection',
   name: 'Government Inspector Certificate',
-  description: 'Quantum-resistant certificate for government inspection activities',
+  description: 'Post-quantum certificate for government inspection activities',
   type: 'government-inspection',
-  securityLevel: 'quantum-resistant',
+  securityLevel: 'post-quantum',
   requiredFields: ['location', 'userRole', 'deviceId', 'complianceData'],
   optionalFields: ['photoEvidence', 'resourceContext', 'environmentalFactors'],
   validationRules: [
@@ -225,7 +225,7 @@ export const SETTLEMENT_TEMPLATE: CertificateTemplate = {
   name: 'Settlement Certificate',
   description: 'Certificate for PvP settlement verification',
   type: 'settlement',
-  securityLevel: 'quantum-resistant',
+  securityLevel: 'post-quantum',
   requiredFields: ['location', 'userRole', 'deviceId', 'assetLotData', 'settlementData'],
   optionalFields: ['photoEvidence', 'complianceData'],
   validationRules: [

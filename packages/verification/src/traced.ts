@@ -121,20 +121,20 @@ export const tracedGenerateCertificate = traced(
     };
 
     const shouldUseMilitary =
-      params.securityLevel === 'military' || params.securityLevel === 'quantum-resistant';
+      params.securityLevel === 'military' || params.securityLevel === 'post-quantum';
 
     if (shouldUseMilitary) {
       const unsigned = createMilitaryGradeCertificateData(certInput);
-      const quantumResistantHash = hash256(unsigned.dataForQuantumHash);
+      const postQuantumHash = hash256(unsigned.dataForPostQuantumHash);
       const ed25519Signature = hash256(`${unsigned.dataToSign}:${params.privateKey}`);
       const secp256k1Signature = hash256(`${unsigned.dataToSign}:${params.privateKey}:secp256k1`);
       const certificate = { ...unsigned };
       delete (certificate as { dataToSign?: string }).dataToSign;
-      delete (certificate as { dataForQuantumHash?: string }).dataForQuantumHash;
+      delete (certificate as { dataForPostQuantumHash?: string }).dataForPostQuantumHash;
 
       return {
         ...certificate,
-        quantumResistantHash,
+        postQuantumHash,
         multiSignature: {
           ed25519: ed25519Signature,
           secp256k1: secp256k1Signature,

@@ -22,7 +22,7 @@ export type { CommodityType, ResourceContext, GeologicalContext, SiteReference }
 /**
  * Security levels for certificates
  */
-export type CertificateSecurityLevel = 'standard' | 'enhanced' | 'military' | 'quantum-resistant';
+export type CertificateSecurityLevel = 'standard' | 'enhanced' | 'military' | 'post-quantum';
 
 /**
  * Certificate type discriminator - ROLE-BASED, not commodity-specific
@@ -672,11 +672,11 @@ export interface StandardCertificate extends Certificate {
 }
 
 /**
- * Military-grade certificate (multi-signature, quantum-resistant)
+ * Military-grade certificate (multi-signature, post-quantum)
  */
 export interface MilitaryGradeCertificate extends Certificate {
-  securityLevel: 'military' | 'quantum-resistant';
-  quantumResistantHash: string;
+  securityLevel: 'military' | 'post-quantum';
+  postQuantumHash: string;
   multiSignature: MultiSignature;
   certificateData: {
     assetLotData?: AssetLotData;

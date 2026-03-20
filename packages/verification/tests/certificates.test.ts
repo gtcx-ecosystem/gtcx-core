@@ -258,9 +258,9 @@ describe('createMilitaryGradeCertificateData', () => {
 
     expect(cert.certificateId).toMatch(/^ASSET_ORIGIN_MIL_/);
     expect(cert.version).toBe('2.0');
-    expect(cert.securityLevel).toBe('quantum-resistant');
+    expect(cert.securityLevel).toBe('post-quantum');
     expect(cert.dataToSign).toBeTruthy();
-    expect(cert.dataForQuantumHash).toBeTruthy();
+    expect(cert.dataForPostQuantumHash).toBeTruthy();
     expect(cert.certificateData).toBeDefined();
     expect(cert.metadata.issuer).toContain('Military');
   });
@@ -405,7 +405,7 @@ describe('getCertificateCommodityType', () => {
   it('extracts commodity type from MilitaryGradeCertificate', () => {
     const milCert = {
       ...makeValidCertificate({ securityLevel: 'military' }),
-      quantumResistantHash: 'qr_hash',
+      postQuantumHash: 'qr_hash',
       multiSignature: { ed25519: 'sig' },
       certificateData: {
         assetLotData: {

@@ -13,7 +13,7 @@ export const CertificateSecurityLevelSchema = z.enum([
   'standard',
   'enhanced',
   'military',
-  'quantum-resistant',
+  'post-quantum',
 ]);
 
 export const CertificateTypeSchema = z.enum([
@@ -490,8 +490,8 @@ export const StandardCertificateSchema = BaseCertificateSchema.extend({
 });
 
 export const MilitaryGradeCertificateSchema = BaseCertificateSchema.extend({
-  securityLevel: z.enum(['military', 'quantum-resistant']),
-  quantumResistantHash: z.string().min(1),
+  securityLevel: z.enum(['military', 'post-quantum']),
+  postQuantumHash: z.string().min(1),
   multiSignature: MultiSignatureSchema,
   certificateData: z.object({
     assetLotData: AssetLotDataSchema.optional(),

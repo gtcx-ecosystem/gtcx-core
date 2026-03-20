@@ -140,11 +140,11 @@ describe('createEnhancedIdentity', () => {
     expect(result.identity.multiKeyPairs.secp256k1).toBeDefined();
   });
 
-  it('has a quantumResistantHash', async () => {
+  it('has a postQuantumHash', async () => {
     const result = await createEnhancedIdentity();
-    expect(result.identity.quantumResistantHash).toBeTypeOf('string');
-    // SHA-256 produces 64 hex chars
-    expect(result.identity.quantumResistantHash!.length).toBe(64);
+    expect(result.identity.postQuantumHash).toBeTypeOf('string');
+    // SHAKE-256 produces 64 hex chars
+    expect(result.identity.postQuantumHash!.length).toBe(64);
   });
 
   it('sets keyDerivation when params are provided', async () => {

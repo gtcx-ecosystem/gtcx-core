@@ -30,7 +30,7 @@ describe('template constants', () => {
     expect(ASSET_ORIGIN_TEMPLATE).toBeDefined();
     expect(ASSET_ORIGIN_TEMPLATE.id).toBe('asset-origin');
     expect(ASSET_ORIGIN_TEMPLATE.type).toBe('asset-origin');
-    expect(ASSET_ORIGIN_TEMPLATE.securityLevel).toBe('quantum-resistant');
+    expect(ASSET_ORIGIN_TEMPLATE.securityLevel).toBe('post-quantum');
   });
 
   it('WORK_SITE_TEMPLATE is defined with correct id and type', () => {
@@ -44,7 +44,7 @@ describe('template constants', () => {
     expect(GOVERNMENT_INSPECTOR_TEMPLATE).toBeDefined();
     expect(GOVERNMENT_INSPECTOR_TEMPLATE.id).toBe('government-inspection');
     expect(GOVERNMENT_INSPECTOR_TEMPLATE.type).toBe('government-inspection');
-    expect(GOVERNMENT_INSPECTOR_TEMPLATE.securityLevel).toBe('quantum-resistant');
+    expect(GOVERNMENT_INSPECTOR_TEMPLATE.securityLevel).toBe('post-quantum');
   });
 
   it('LOCATION_TEMPLATE is defined with correct id and type', () => {
@@ -79,7 +79,7 @@ describe('template constants', () => {
     expect(SETTLEMENT_TEMPLATE).toBeDefined();
     expect(SETTLEMENT_TEMPLATE.id).toBe('settlement');
     expect(SETTLEMENT_TEMPLATE.type).toBe('settlement');
-    expect(SETTLEMENT_TEMPLATE.securityLevel).toBe('quantum-resistant');
+    expect(SETTLEMENT_TEMPLATE.securityLevel).toBe('post-quantum');
   });
 
   it('GOLD_ORIGIN_TEMPLATE is an alias for ASSET_ORIGIN_TEMPLATE', () => {
@@ -166,11 +166,11 @@ describe('getTemplatesBySecurityLevel', () => {
     }
   });
 
-  it('filters templates by "quantum-resistant" level', () => {
-    const results = getTemplatesBySecurityLevel('quantum-resistant');
+  it('filters templates by "post-quantum" level', () => {
+    const results = getTemplatesBySecurityLevel('post-quantum');
     expect(results.length).toBeGreaterThan(0);
     for (const t of results) {
-      expect(t.securityLevel).toBe('quantum-resistant');
+      expect(t.securityLevel).toBe('post-quantum');
     }
   });
 

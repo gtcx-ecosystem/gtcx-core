@@ -17,7 +17,7 @@ export type CryptoAlgorithm =
   | 'Ed25519-SHA256'
   | 'Secp256k1-SHA256'
   | 'MultiSig'
-  | 'QuantumResistant';
+  | 'PostQuantum';
 
 /**
  * Key pair representation
@@ -65,7 +65,7 @@ export interface IdentityMetadata {
  */
 export interface EnhancedIdentity extends DigitalIdentity {
   multiKeyPairs: MultiKeyPairs;
-  quantumResistantHash?: string;
+  postQuantumHash?: string;
   keyDerivation?: KeyDerivationParams;
   entropyValidation?: EntropyValidation;
   certificationChain?: string[];
