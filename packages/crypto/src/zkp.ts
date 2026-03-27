@@ -147,7 +147,10 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
   }
 
   async getVerificationKey(_proofType: string): Promise<Uint8Array> {
-    return new Uint8Array();
+    throw new Error(
+      'NotImplementedError: getVerificationKey() requires Rust NAPI bindings (arkworks). ' +
+        'Hash-commitment engine does not produce real verification keys.'
+    );
   }
 }
 
