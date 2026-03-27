@@ -70,6 +70,49 @@ describe('HashCommitmentZkpEngine', () => {
     await expect(engine.verify(tampered)).resolves.toBe(false);
   });
 
+  it('rejects proof when salt is tampered but commitment preserved', async () => {
+    const engine = new HashCommitmentZkpEngine();
+    const proof = await engine.generate({
+      system: 'bulletproofs',
+      proofType: 'gci_threshold',
+      publicInputs: ['threshold:50'],
+      witness: 'score:75',
+      verificationKeyId: 'bulletproofs-gci-v1',
+    });
+
+    await expect(engine.verify(proof)).resolves.toBe(true);
+
+    // Decode the real payload, tamper with only the salt, re-encode
+    const decoded = JSON.parse(Buffer.from(proof.proof, 'base64').toString('utf8'));
+    decoded.salt = 'f'.repeat(64); // different salt, same commitment
+    const tampered = {
+      ...proof,
+      proof: Buffer.from(JSON.stringify(decoded)).toString('base64'),
+    };
+    await expect(engine.verify(tampered)).resolves.toBe(false);
+  });
+
+  it('rejects proof when response is tampered but commitment preserved', async () => {
+    const engine = new HashCommitmentZkpEngine();
+    const proof = await engine.generate({
+      system: 'schnorr',
+      proofType: 'identity_proof',
+      publicInputs: ['subject:abc'],
+      witness: 'secret',
+      verificationKeyId: 'schnorr-id-v1',
+    });
+
+    await expect(engine.verify(proof)).resolves.toBe(true);
+
+    const decoded = JSON.parse(Buffer.from(proof.proof, 'base64').toString('utf8'));
+    decoded.response = 'e'.repeat(64);
+    const tampered = {
+      ...proof,
+      proof: Buffer.from(JSON.stringify(decoded)).toString('base64'),
+    };
+    await expect(engine.verify(tampered)).resolves.toBe(false);
+  });
+
   it('different witnesses produce different proofs', async () => {
     const engine = new HashCommitmentZkpEngine();
     const base = {

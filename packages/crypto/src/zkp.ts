@@ -40,6 +40,8 @@ interface ProofPayload {
   salt: string;
   response: string;
   commitment: string;
+  /** HMAC-like binding: hash(salt:response:commitment). Detects field-level tampering. */
+  binding: string;
 }
 
 const textEncoder = new TextEncoder();
@@ -77,7 +79,7 @@ const decodePayload = (value: string): ProofPayload | null => {
   try {
     const json = new TextDecoder().decode(fromBase64(value));
     const parsed = JSON.parse(json) as ProofPayload;
-    if (!parsed?.salt || !parsed?.response) return null;
+    if (!parsed?.salt || !parsed?.response || !parsed?.commitment || !parsed?.binding) return null;
     return parsed;
   } catch {
     return null;
@@ -104,7 +106,8 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
     const salt = generateSalt(32);
     const response = hash256(`${salt}:${witnessHex}`);
     const commitment = hash256(`${input.proofType}:${salt}:${witnessHex}`);
-    const proofPayload: ProofPayload = { salt, response, commitment };
+    const binding = hash256(`${salt}:${response}:${commitment}`);
+    const proofPayload: ProofPayload = { salt, response, commitment, binding };
 
     return {
       system: input.system,
@@ -135,6 +138,10 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
       return false;
     }
     if (!proof.publicInputs.includes(payload.commitment)) return false;
+
+    // Recompute binding to detect field-level tampering (salt, response, or commitment).
+    const expectedBinding = hash256(`${payload.salt}:${payload.response}:${payload.commitment}`);
+    if (payload.binding !== expectedBinding) return false;
 
     return true;
   }
