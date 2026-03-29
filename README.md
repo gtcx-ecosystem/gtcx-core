@@ -19,7 +19,7 @@ pnpm test
 pnpm lint
 ```
 
-For a step-by-step integration walkthrough, see [First Integration Tutorial](./_archive/docs/guides/first-integration.md).
+For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1-agents/1-onboarding/orientation.md).
 
 ## Packages
 

@@ -71,5 +71,5 @@ packages/crypto-native/native/
 npm-debug.log*
 pnpm-debug.log*
 
-# Local archive (reference only, not tracked)
-_archive/
+# Local archive (historical reference, tracked in git)
+# _archive/

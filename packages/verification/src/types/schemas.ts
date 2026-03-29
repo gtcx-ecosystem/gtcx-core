@@ -327,6 +327,7 @@ export const QRCodeVerificationResultSchema = z.object({
 
 export const PredicateURISchema = z.string().regex(/^tradepass:\/\/[^/]+\/[^/]+\/[^/]+$/);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const PredicateSchemaSchema: z.ZodType<any> = z.object({
   type: z.enum(['boolean', 'enum', 'string', 'number', 'date', 'object']),
   values: z.array(z.string()).optional(),

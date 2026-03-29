@@ -337,12 +337,15 @@ export function consoleLogHandler(event: SecurityEvent): void {
 
   switch (event.severity) {
     case 'CRITICAL':
+      // eslint-disable-next-line no-console
       console.error(message, event);
       break;
     case 'HIGH':
+      // eslint-disable-next-line no-console
       console.warn(message, event);
       break;
     case 'WARN':
+      // eslint-disable-next-line no-console
       console.warn(message, event);
       break;
     default:

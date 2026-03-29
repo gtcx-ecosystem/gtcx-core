@@ -96,6 +96,7 @@ export function deprecated(info: Omit<DeprecationInfo, 'feature'>) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     descriptor.value = function (...args: any[]) {
+      // eslint-disable-next-line no-console
       console.warn(
         `[DEPRECATED] ${feature} is deprecated since ${info.deprecatedIn} ` +
           `and will be removed in ${info.removeIn}.` +
