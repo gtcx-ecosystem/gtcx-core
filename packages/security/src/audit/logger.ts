@@ -134,6 +134,7 @@ export class SecurityLogger {
         await handler(processedEvent);
       } catch (error) {
         // Don't let handler errors break logging
+        // eslint-disable-next-line no-console
         console.error('Security log handler error:', error);
       }
     }
@@ -179,6 +180,7 @@ export class SecurityLogger {
       try {
         await handler(events);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Security batch log handler error:', error);
       }
     }
