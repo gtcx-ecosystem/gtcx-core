@@ -588,6 +588,52 @@ describe('AssetLotRegistrationService', () => {
   });
 
   // --------------------------------------------------------------------------
+  // null-object defaults
+  // --------------------------------------------------------------------------
+
+  describe('null-object defaults', () => {
+    it('works without eventEmitter, metricsCollector, or operationLogger', () => {
+      const service = new AssetLotRegistrationService(
+        {
+          cryptoService: createMockCryptoService(),
+          locationService: createMockLocationService(),
+          storageService: createMockStorageService(),
+        },
+        {}
+      );
+
+      const data = createValidRegistrationData();
+      const result = service.validateRegistrationData(data);
+
+      expect(result.isValid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // event payload verification
+  // --------------------------------------------------------------------------
+
+  describe('event payload verification', () => {
+    it('registration.completed event has assetLotId, commodityType, and certificateId', async () => {
+      const emitter = createMockEventEmitter();
+      const service = createService({ eventEmitter: emitter });
+
+      await service.registerAssetLot(createValidRegistrationData());
+
+      const completedEvent = (emitter.emit as ReturnType<typeof vi.fn>).mock.calls.find(
+        (call) => call[0].type === 'registration.completed'
+      );
+      expect(completedEvent).toBeDefined();
+
+      const payload = completedEvent![0].payload;
+      expect(payload).toHaveProperty('assetLotId');
+      expect(payload).toHaveProperty('commodityType');
+      expect(payload).toHaveProperty('certificateId');
+    });
+  });
+
+  // --------------------------------------------------------------------------
   // Crypto failure paths
   // --------------------------------------------------------------------------
 

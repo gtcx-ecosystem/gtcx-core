@@ -8,6 +8,7 @@ import {
   createSignedMessage,
   verifySignedMessage,
   batchVerify,
+  secureWipe,
 } from '../src/signing';
 
 describe('sign and verify', () => {
@@ -225,5 +226,31 @@ describe('batchVerify', () => {
 
   it('returns empty array for empty input', () => {
     expect(batchVerify([])).toEqual([]);
+  });
+});
+
+describe('secureWipe', () => {
+  it('zeroes all bytes in a Uint8Array', () => {
+    const buffer = new Uint8Array([1, 2, 3, 4, 5]);
+    secureWipe(buffer);
+    expect(buffer).toEqual(new Uint8Array([0, 0, 0, 0, 0]));
+  });
+
+  it('handles empty buffer', () => {
+    const buffer = new Uint8Array(0);
+    secureWipe(buffer);
+    expect(buffer).toEqual(new Uint8Array(0));
+  });
+
+  it('handles single-byte buffer', () => {
+    const buffer = new Uint8Array([0xff]);
+    secureWipe(buffer);
+    expect(buffer).toEqual(new Uint8Array([0]));
+  });
+});
+
+describe('sign with invalid private key', () => {
+  it('throws for invalid private key hex', () => {
+    expect(() => sign('test', 'not-valid-hex')).toThrow();
   });
 });

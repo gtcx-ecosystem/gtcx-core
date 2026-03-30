@@ -790,6 +790,49 @@ describe('UnifiedComplianceService', () => {
   });
 
   // --------------------------------------------------------------------------
+  // null-object defaults
+  // --------------------------------------------------------------------------
+
+  describe('null-object defaults', () => {
+    it('works without eventEmitter, metricsCollector, operationLogger, or complianceRepository', () => {
+      const service = new UnifiedComplianceService(
+        {
+          storageService: createMockStorageService(),
+          cryptoService: createMockCryptoService(),
+        },
+        {}
+      );
+
+      const frameworks = service.getFrameworks();
+
+      expect(frameworks.length).toBeGreaterThanOrEqual(3);
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // event payload verification
+  // --------------------------------------------------------------------------
+
+  describe('event payload verification', () => {
+    it('compliance.check_completed event has recordCount and violations', async () => {
+      const emitter = createMockEventEmitter();
+      const service = createService({ eventEmitter: emitter });
+      const lot = createMockAssetLot();
+
+      await service.checkAssetLotCompliance(lot);
+
+      const completedEvent = (emitter.emit as ReturnType<typeof vi.fn>).mock.calls.find(
+        (call) => call[0].type === 'compliance.check_completed'
+      );
+      expect(completedEvent).toBeDefined();
+
+      const payload = completedEvent![0].payload;
+      expect(payload).toHaveProperty('recordCount');
+      expect(payload).toHaveProperty('violations');
+    });
+  });
+
+  // --------------------------------------------------------------------------
   // Crypto failure paths
   // --------------------------------------------------------------------------
 

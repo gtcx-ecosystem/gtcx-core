@@ -97,6 +97,107 @@ describe('@gtcx/sync', () => {
       expect(result.uploaded).toBe(0);
     });
 
+    it('should resolve conflicts with highest-version — higher version wins', async () => {
+      const engine = createSyncEngine();
+      const items: SyncItem[] = [
+        { id: '1', data: { value: 'old' }, version: 1, updatedAt: 100 },
+        { id: '1', data: { value: 'new' }, version: 5, updatedAt: 50 },
+      ];
+      const result = await engine.sync(items, { strategy: 'highest-version' });
+      expect(result.conflicts).toBe(1);
+      expect(result.resolved).toBe(1);
+      expect(result.uploaded).toBe(1);
+      expect(result.errors).toEqual([]);
+    });
+
+    it('should resolve highest-version — equal versions fall back to timestamp', async () => {
+      const pushed: SyncItem[] = [];
+      const engine = createSyncEngine({
+        pushLocal: async (batch) => {
+          pushed.push(...batch);
+        },
+      });
+      const items: SyncItem[] = [
+        { id: '1', data: { value: 'earlier' }, version: 3, updatedAt: 10 },
+        { id: '1', data: { value: 'later' }, version: 3, updatedAt: 20 },
+      ];
+      const result = await engine.sync(items, { strategy: 'highest-version' });
+      expect(result.conflicts).toBe(1);
+      expect(result.resolved).toBe(1);
+      expect(pushed).toHaveLength(1);
+      expect(pushed[0]!.data).toEqual({ value: 'later' });
+    });
+
+    it('should resolve highest-version — equal versions and timestamps deterministically', async () => {
+      const pushed: SyncItem[] = [];
+      const engine = createSyncEngine({
+        pushLocal: async (batch) => {
+          pushed.push(...batch);
+        },
+      });
+      const items: SyncItem[] = [
+        { id: '1', data: { value: 'first' }, version: 3, updatedAt: 10 },
+        { id: '1', data: { value: 'second' }, version: 3, updatedAt: 10 },
+      ];
+      const result = await engine.sync(items, { strategy: 'highest-version' });
+      expect(result.conflicts).toBe(1);
+      expect(result.resolved).toBe(1);
+      expect(pushed).toHaveLength(1);
+      // reduce keeps `best` when equal — first item wins
+      expect(pushed[0]!.data).toEqual({ value: 'first' });
+    });
+
+    it('should return unresolved for chain-validated strategy', async () => {
+      const engine = createSyncEngine();
+      const items: SyncItem[] = [
+        { id: '1', data: { value: 1 }, version: 1, updatedAt: 1 },
+        { id: '1', data: { value: 2 }, version: 2, updatedAt: 2 },
+      ];
+      const result = await engine.sync(items, { strategy: 'chain-validated' });
+      expect(result.conflicts).toBe(1);
+      expect(result.resolved).toBe(0);
+      expect(result.errors.length).toBe(1);
+      expect(result.errors[0]).toContain('Unresolved conflict');
+    });
+
+    it('should handle conflicts with missing timestamps (updatedAt = 0)', async () => {
+      const pushed: SyncItem[] = [];
+      const engine = createSyncEngine({
+        pushLocal: async (batch) => {
+          pushed.push(...batch);
+        },
+      });
+      const items: SyncItem[] = [
+        { id: '1', data: { value: 'a' }, version: 1, updatedAt: 0 },
+        { id: '1', data: { value: 'b' }, version: 2, updatedAt: 0 },
+      ];
+      const result = await engine.sync(items, { strategy: 'last-write-wins' });
+      expect(result.conflicts).toBe(1);
+      expect(result.resolved).toBe(1);
+      expect(pushed).toHaveLength(1);
+      // Equal timestamps — falls back to higher version
+      expect(pushed[0]!.data).toEqual({ value: 'b' });
+    });
+
+    it('should handle conflict with identical records', async () => {
+      const pushed: SyncItem[] = [];
+      const engine = createSyncEngine({
+        pushLocal: async (batch) => {
+          pushed.push(...batch);
+        },
+      });
+      const items: SyncItem[] = [
+        { id: '1', data: { value: 'same' }, version: 1, updatedAt: 100 },
+        { id: '1', data: { value: 'same' }, version: 1, updatedAt: 100 },
+      ];
+      const result = await engine.sync(items, { strategy: 'last-write-wins' });
+      expect(result.conflicts).toBe(1);
+      expect(result.resolved).toBe(1);
+      expect(pushed).toHaveLength(1);
+      expect(pushed[0]!.data).toEqual({ value: 'same' });
+      expect(pushed[0]!.version).toBe(1);
+    });
+
     it('should emit audit and metrics callbacks', async () => {
       const onAudit = vi.fn();
       const onMetrics = vi.fn();

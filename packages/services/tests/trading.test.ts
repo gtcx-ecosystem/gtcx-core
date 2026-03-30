@@ -647,6 +647,52 @@ describe('TradingService', () => {
   });
 
   // --------------------------------------------------------------------------
+  // null-object defaults
+  // --------------------------------------------------------------------------
+
+  describe('null-object defaults', () => {
+    it('works without eventEmitter, metricsCollector, operationLogger, traderRepository, or transactionRepository', async () => {
+      const service = new TradingService(
+        {
+          priceService: createMockPriceService(),
+          complianceService: createMockComplianceService(),
+          cryptoService: createMockCryptoService(),
+          storageService: createMockStorageService(),
+        },
+        {}
+      );
+
+      const prices = await service.getCurrentMarketPrices('gold');
+
+      expect(prices).toHaveLength(1);
+      expect(prices[0]!.basePrice).toBe(1800);
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // event payload verification
+  // --------------------------------------------------------------------------
+
+  describe('event payload verification', () => {
+    it('trading.trade_executed event has transactionId, quantity, and price', async () => {
+      const emitter = createMockEventEmitter();
+      const service = createService({ eventEmitter: emitter });
+
+      await service.executeTrade(createValidTradeRequest());
+
+      const executedEvent = (emitter.emit as ReturnType<typeof vi.fn>).mock.calls.find(
+        (call) => call[0].type === 'trading.trade_executed'
+      );
+      expect(executedEvent).toBeDefined();
+
+      const payload = executedEvent![0].payload;
+      expect(payload).toHaveProperty('transactionId');
+      expect(payload).toHaveProperty('quantity');
+      expect(payload).toHaveProperty('price');
+    });
+  });
+
+  // --------------------------------------------------------------------------
   // Crypto failure paths
   // --------------------------------------------------------------------------
 
