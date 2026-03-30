@@ -18,8 +18,13 @@ import { randomUUID } from 'node:crypto';
 
 import {
   DomainEventFactory,
+  ServiceMetrics,
   nullEventEmitter,
+  nullMetricsCollector,
+  nullOperationLogger,
   type IDomainEventEmitter,
+  type IMetricsCollector,
+  type IOperationLogger,
   AssetRegistrationDataSchema,
   RegistrationConfigSchema,
   safeParse,
@@ -84,6 +89,8 @@ export class AssetLotRegistrationService {
   private locationService: ILocationService;
   private storageService: IStorageService;
   private eventEmitter: IDomainEventEmitter;
+  private metrics: ServiceMetrics;
+  private operationLogger: IOperationLogger;
   private eventFactory: DomainEventFactory;
   private config: RegistrationConfig;
 
@@ -93,6 +100,8 @@ export class AssetLotRegistrationService {
       locationService: ILocationService;
       storageService: IStorageService;
       eventEmitter?: IDomainEventEmitter;
+      metricsCollector?: IMetricsCollector;
+      operationLogger?: IOperationLogger;
     },
     config: Partial<RegistrationConfig> = {}
   ) {
@@ -100,6 +109,11 @@ export class AssetLotRegistrationService {
     this.locationService = dependencies.locationService;
     this.storageService = dependencies.storageService;
     this.eventEmitter = dependencies.eventEmitter || nullEventEmitter;
+    this.metrics = new ServiceMetrics(
+      dependencies.metricsCollector || nullMetricsCollector,
+      'registration'
+    );
+    this.operationLogger = dependencies.operationLogger || nullOperationLogger;
     this.eventFactory = new DomainEventFactory();
 
     // Validate config at construction time

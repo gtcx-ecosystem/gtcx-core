@@ -17,8 +17,13 @@ import { randomUUID } from 'node:crypto';
 
 import {
   DomainEventFactory,
+  ServiceMetrics,
   nullEventEmitter,
+  nullMetricsCollector,
+  nullOperationLogger,
   type IDomainEventEmitter,
+  type IMetricsCollector,
+  type IOperationLogger,
   TradeRequestSchema,
   TradingConfigSchema,
   TradingOpportunityFilterSchema,
@@ -106,6 +111,8 @@ export class TradingService {
   private cryptoService: ICryptoService;
   private storageService: IStorageService;
   private eventEmitter: IDomainEventEmitter;
+  private metrics: ServiceMetrics;
+  private operationLogger: IOperationLogger;
   private eventFactory: DomainEventFactory;
   private config: TradingConfig;
   private traderRepo?: ITraderRepository;
@@ -118,6 +125,8 @@ export class TradingService {
       cryptoService: ICryptoService;
       storageService: IStorageService;
       eventEmitter?: IDomainEventEmitter;
+      metricsCollector?: IMetricsCollector;
+      operationLogger?: IOperationLogger;
       traderRepository?: ITraderRepository;
       transactionRepository?: ITransactionRepository;
     },
@@ -128,6 +137,11 @@ export class TradingService {
     this.cryptoService = dependencies.cryptoService;
     this.storageService = dependencies.storageService;
     this.eventEmitter = dependencies.eventEmitter || nullEventEmitter;
+    this.metrics = new ServiceMetrics(
+      dependencies.metricsCollector || nullMetricsCollector,
+      'trading'
+    );
+    this.operationLogger = dependencies.operationLogger || nullOperationLogger;
     this.eventFactory = new DomainEventFactory();
     this.traderRepo = dependencies.traderRepository;
     this.transactionRepo = dependencies.transactionRepository;

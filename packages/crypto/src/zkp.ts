@@ -33,6 +33,9 @@ export interface ZkProver {
 
 export interface ZkVerifier {
   verify(proof: ZKProof): Promise<boolean>;
+}
+
+export interface ZkFullVerifier extends ZkVerifier {
   getVerificationKey(proofType: string): Promise<Uint8Array>;
 }
 
@@ -100,6 +103,8 @@ const ensureCommitment = (publicInputs: string[], commitment: string): string[] 
  * while full circuits are implemented in Rust (arkworks).
  */
 export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
+  /** Hash-commitment engine does not produce verification keys. Use Rust NAPI bindings for full ZKP. */
+  readonly supportsVerificationKeys = false;
   async generate(input: ZkProofInput): Promise<ZKProof> {
     const witnessBytes = toBytes(input.witness);
     const witnessHex = bytesToHex(witnessBytes);
@@ -144,13 +149,6 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
     if (payload.binding !== expectedBinding) return false;
 
     return true;
-  }
-
-  async getVerificationKey(_proofType: string): Promise<Uint8Array> {
-    throw new Error(
-      'NotImplementedError: getVerificationKey() requires Rust NAPI bindings (arkworks). ' +
-        'Hash-commitment engine does not produce real verification keys.'
-    );
   }
 }
 

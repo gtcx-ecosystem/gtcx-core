@@ -1,5 +1,5 @@
-// Core 12 Domains - Full Implementation
-// 12 domains, 67 controls total
+// Core 12 Domains
+// 12 domains defined. D01 has controls populated; D02–D12 are placeholders pending spec completion.
 
 import type { Domain } from './types';
 

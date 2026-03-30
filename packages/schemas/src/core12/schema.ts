@@ -32,3 +32,12 @@ export function getAllControls(): Control[] {
 export function getControlCount(): number {
   return getAllControls().length;
 }
+
+export function getPopulatedDomains(): Domain[] {
+  return CORE12_DOMAINS.filter((d) => d.controls.length > 0);
+}
+
+export function isDomainPopulated(domainId: string): boolean {
+  const domain = getDomain(domainId);
+  return domain !== undefined && domain.controls.length > 0;
+}

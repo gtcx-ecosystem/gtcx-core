@@ -24,8 +24,13 @@ import {
 } from '@gtcx/crypto';
 import {
   DomainEventFactory,
+  ServiceMetrics,
   nullEventEmitter,
+  nullMetricsCollector,
+  nullOperationLogger,
   type IDomainEventEmitter,
+  type IMetricsCollector,
+  type IOperationLogger,
   ComplianceConfigSchema,
   ComplianceReportOptionsSchema,
   safeParse,
@@ -92,6 +97,8 @@ export class UnifiedComplianceService {
   private storageService: IStorageService;
   private cryptoService: ICryptoService;
   private eventEmitter: IDomainEventEmitter;
+  private metrics: ServiceMetrics;
+  private operationLogger: IOperationLogger;
   private eventFactory: DomainEventFactory;
   private config: ComplianceConfig;
   private frameworks: RegulatoryFramework[];
@@ -103,6 +110,8 @@ export class UnifiedComplianceService {
       storageService: IStorageService;
       cryptoService: ICryptoService;
       eventEmitter?: IDomainEventEmitter;
+      metricsCollector?: IMetricsCollector;
+      operationLogger?: IOperationLogger;
       zkpVerifier?: ZkVerifier;
       complianceRepository?: IComplianceRepository;
     },
@@ -111,6 +120,11 @@ export class UnifiedComplianceService {
     this.storageService = dependencies.storageService;
     this.cryptoService = dependencies.cryptoService;
     this.eventEmitter = dependencies.eventEmitter || nullEventEmitter;
+    this.metrics = new ServiceMetrics(
+      dependencies.metricsCollector || nullMetricsCollector,
+      'compliance'
+    );
+    this.operationLogger = dependencies.operationLogger || nullOperationLogger;
     this.eventFactory = new DomainEventFactory();
     this.zkpVerifier = dependencies.zkpVerifier ?? createHashCommitmentZkpEngine();
     this.complianceRepo = dependencies.complianceRepository;
