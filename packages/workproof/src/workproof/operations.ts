@@ -4,7 +4,7 @@
  * @simplified Ed25519 signing only. Multi-sig and ZKP integration not yet wired.
  */
 
-import { hash256, sign, verify } from '@gtcx/crypto';
+import { hashObject, sign, verify } from '@gtcx/crypto';
 import type { CredentialProof } from '@gtcx/types';
 
 import { WorkProofSchema } from './schemas';
@@ -41,8 +41,8 @@ export function createWorkProof(input: CreateWorkProofInput): WorkProof {
 
   const now = new Date().toISOString();
 
-  // Canonical serialization of the subject for signing
-  const subjectHash = hash256(JSON.stringify(credentialSubject));
+  // Canonical serialization of the subject for signing (deterministic key ordering)
+  const subjectHash = hashObject(credentialSubject);
   const signature = sign(subjectHash, issuerPrivateKey);
 
   const proof: CredentialProof = {
@@ -104,7 +104,7 @@ export function verifyWorkProof(
   }
 
   // 3. Signature verification
-  const subjectHash = hash256(JSON.stringify(workProof.credentialSubject));
+  const subjectHash = hashObject(workProof.credentialSubject);
   try {
     const sigValid = verify(subjectHash, workProof.proof.proofValue, issuerPublicKey);
     if (!sigValid) {

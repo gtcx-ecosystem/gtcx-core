@@ -250,7 +250,10 @@ describe('assembleToken', () => {
 
 describe('createTokenPayload — offline options', () => {
   it('should include offline claims when offlineExpiresInSeconds set', () => {
-    const payload = createTokenPayload({ sub: 'user-1' }, { offlineExpiresInSeconds: 7200 });
+    const payload = createTokenPayload(
+      { iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 },
+      { offlineExpiresInSeconds: 7200 }
+    );
 
     const token = assembleToken(payload, 'test-sig');
     const decoded = decodeToken(token);
@@ -261,7 +264,10 @@ describe('createTokenPayload — offline options', () => {
   });
 
   it('should include keyId in header when provided', () => {
-    const payload = createTokenPayload({ sub: 'user-1' }, { keyId: 'key-abc-123' });
+    const payload = createTokenPayload(
+      { iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 },
+      { keyId: 'key-abc-123' }
+    );
 
     const token = assembleToken(payload, 'test-sig');
     const decoded = decodeToken(token);
@@ -271,7 +277,10 @@ describe('createTokenPayload — offline options', () => {
   });
 
   it('should use ES256K algorithm when specified', () => {
-    const payload = createTokenPayload({ sub: 'user-1' }, { algorithm: 'ES256K' });
+    const payload = createTokenPayload(
+      { iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 },
+      { algorithm: 'ES256K' }
+    );
 
     const token = assembleToken(payload, 'test-sig');
     const decoded = decodeToken(token);
@@ -378,8 +387,8 @@ describe('OfflineSecurityConfigSchema', () => {
   it('should have correct default values', () => {
     expect(TypesDefaultConfig.storageEncryption).toBe('AES-256-GCM');
     expect(TypesDefaultConfig.keyDerivation).toBe('ARGON2ID');
-    expect(TypesDefaultConfig.argon2Memory).toBe(65536);
-    expect(TypesDefaultConfig.argon2Iterations).toBe(3);
+    expect(TypesDefaultConfig.argon2Memory).toBe(131072);
+    expect(TypesDefaultConfig.argon2Iterations).toBe(4);
     expect(TypesDefaultConfig.maxOfflineHours).toBe(72);
     expect(TypesDefaultConfig.maxFailedAttempts).toBe(10);
     expect(TypesDefaultConfig.wipeOnExceed).toBe(true);
@@ -501,7 +510,7 @@ describe('createApiResponseSchema', () => {
 describe('verifyTokenSignature', () => {
   it('accepts a properly signed token', async () => {
     const keyPair = await generateKeyPair('Ed25519');
-    const payload = createTokenPayload({ sub: 'user-1', iss: 'gtcx' });
+    const payload = createTokenPayload({ iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 });
     const signature = sign(payload, keyPair.privateKey);
     const token = assembleToken(payload, signature);
 
@@ -513,13 +522,15 @@ describe('verifyTokenSignature', () => {
 
   it('rejects a token with tampered payload', async () => {
     const keyPair = await generateKeyPair('Ed25519');
-    const payload = createTokenPayload({ sub: 'user-1' });
+    const payload = createTokenPayload({ iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 });
     const signature = sign(payload, keyPair.privateKey);
     const token = assembleToken(payload, signature);
 
     // Tamper: replace the claims segment
     const parts = token.split('.');
-    const tamperedClaims = createTokenPayload({ sub: 'admin' }).split('.')[1];
+    const tamperedClaims = createTokenPayload({ iss: 'gtcx', sub: 'admin', exp: 0, iat: 0 }).split(
+      '.'
+    )[1];
     const tampered = `${parts[0]}.${tamperedClaims}.${parts[2]}`;
 
     const result = verifyTokenSignature(tampered, keyPair.publicKey);
@@ -530,7 +541,7 @@ describe('verifyTokenSignature', () => {
   it('rejects a token with wrong public key', async () => {
     const keyPair1 = await generateKeyPair('Ed25519');
     const keyPair2 = await generateKeyPair('Ed25519');
-    const payload = createTokenPayload({ sub: 'user-1' });
+    const payload = createTokenPayload({ iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 });
     const signature = sign(payload, keyPair1.privateKey);
     const token = assembleToken(payload, signature);
 
@@ -540,7 +551,10 @@ describe('verifyTokenSignature', () => {
 
   it('rejects an expired token', async () => {
     const keyPair = await generateKeyPair('Ed25519');
-    const payload = createTokenPayload({ sub: 'user-1' }, { expiresInSeconds: -120 });
+    const payload = createTokenPayload(
+      { iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 },
+      { expiresInSeconds: -120 }
+    );
     const signature = sign(payload, keyPair.privateKey);
     const token = assembleToken(payload, signature);
 

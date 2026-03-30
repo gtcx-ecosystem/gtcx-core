@@ -26,8 +26,8 @@ export const OfflineSecurityConfigSchema = z.object({
   keyDerivation: z.literal('ARGON2ID').default('ARGON2ID'),
 
   // Key derivation parameters
-  argon2Memory: z.number().int().min(16384).default(65536), // 64MB default
-  argon2Iterations: z.number().int().min(1).default(3),
+  argon2Memory: z.number().int().min(16384).default(131072), // 128MB default (OWASP minimum)
+  argon2Iterations: z.number().int().min(1).default(4),
   argon2Parallelism: z.number().int().min(1).default(1),
 
   // Tamper detection
@@ -48,8 +48,8 @@ export const DEFAULT_OFFLINE_CONFIG: OfflineSecurityConfig = {
   credentialRefreshBufferHours: 24,
   storageEncryption: 'AES-256-GCM',
   keyDerivation: 'ARGON2ID',
-  argon2Memory: 65536,
-  argon2Iterations: 3,
+  argon2Memory: 131072,
+  argon2Iterations: 4,
   argon2Parallelism: 1,
   integrityCheckIntervalMinutes: 15,
   maxFailedAttempts: 10,

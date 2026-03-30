@@ -207,6 +207,15 @@ async function createMtlsDispatcher(options: MtlsOptions): Promise<Dispatcher> {
 }
 
 async function parseResponse<T>(response: Response): Promise<T> {
+  const contentLength = response.headers.get('content-length');
+  if (contentLength && Number(contentLength) > 10_000_000) {
+    throw new HttpError('Response body exceeds maximum size (10MB)', {
+      status: response.status,
+      code: 'HTTP_ERROR',
+      category: 'http',
+      retryable: false,
+    });
+  }
   const contentType = response.headers.get('content-type') ?? '';
   if (contentType.includes('application/json')) {
     return (await response.json()) as T;

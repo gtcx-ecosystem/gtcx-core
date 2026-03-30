@@ -31,12 +31,12 @@ export const JWTHeaderSchema = z.object({
  */
 export const JWTClaimsSchema = z.object({
   // Registered claims
-  iss: z.string().optional(), // Issuer
-  sub: z.string().optional(), // Subject
+  iss: z.string(), // Issuer
+  sub: z.string(), // Subject
   aud: z.union([z.string(), z.array(z.string())]).optional(), // Audience
-  exp: z.number().optional(), // Expiration time
+  exp: z.number(), // Expiration time
   nbf: z.number().optional(), // Not before
-  iat: z.number().optional(), // Issued at
+  iat: z.number(), // Issued at
   jti: z.string().optional(), // JWT ID
 });
 
@@ -92,6 +92,11 @@ export function decodeToken(token: string): Token | null {
     }
 
     const [headerB64, claimsB64, signature] = parts;
+
+    // Size guard: reject oversized segments before parsing
+    if (headerB64!.length > 10_000 || claimsB64!.length > 200_000) {
+      return null;
+    }
 
     const header = JSON.parse(base64UrlDecode(headerB64!));
     const claims = JSON.parse(base64UrlDecode(claimsB64!));
@@ -230,8 +235,13 @@ export function assembleToken(payload: string, signature: string | Uint8Array): 
 export function verifyTokenSignature(
   token: string,
   publicKeyHex: string,
-  clockSkewSeconds = 60
+  options: {
+    clockSkewSeconds?: number;
+    expectedIssuer?: string;
+    expectedAudience?: string;
+  } = {}
 ): TokenValidationResult {
+  const { clockSkewSeconds = 60, expectedIssuer, expectedAudience } = options;
   const parts = token.split('.');
   if (parts.length !== 3) {
     return { valid: false, expired: false, notYetValid: false, error: 'Invalid token format' };
@@ -271,13 +281,53 @@ export function verifyTokenSignature(
   // Check temporal validity
   const temporal = isTokenTemporallyValid(decoded.claims, clockSkewSeconds);
 
+  if (!temporal.valid) {
+    return {
+      valid: false,
+      expired: temporal.expired,
+      notYetValid: temporal.notYetValid,
+      claims: decoded.claims,
+      ...(temporal.expired ? { error: 'Token has expired' } : {}),
+      ...(temporal.notYetValid ? { error: 'Token is not yet valid' } : {}),
+    };
+  }
+
+  // Issuer validation
+  if (expectedIssuer !== undefined && decoded.claims.iss !== expectedIssuer) {
+    return {
+      valid: false,
+      expired: false,
+      notYetValid: false,
+      claims: decoded.claims,
+      error: 'Issuer mismatch',
+    };
+  }
+
+  // Audience validation
+  if (expectedAudience !== undefined) {
+    const aud = decoded.claims.aud;
+    const audMatch =
+      typeof aud === 'string'
+        ? aud === expectedAudience
+        : Array.isArray(aud)
+          ? aud.includes(expectedAudience)
+          : false;
+    if (!audMatch) {
+      return {
+        valid: false,
+        expired: false,
+        notYetValid: false,
+        claims: decoded.claims,
+        error: 'Audience mismatch',
+      };
+    }
+  }
+
   return {
-    valid: temporal.valid,
-    expired: temporal.expired,
-    notYetValid: temporal.notYetValid,
+    valid: true,
+    expired: false,
+    notYetValid: false,
     claims: decoded.claims,
-    ...(temporal.expired ? { error: 'Token has expired' } : {}),
-    ...(temporal.notYetValid ? { error: 'Token is not yet valid' } : {}),
   };
 }
 

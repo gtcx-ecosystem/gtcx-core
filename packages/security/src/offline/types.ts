@@ -40,15 +40,15 @@ export const OfflineSecurityConfigSchema = z.object({
 
   /**
    * Argon2id memory parameter (KB)
-   * @default 65536 (64MB)
+   * @default 131072 (128MB)
    */
-  argon2Memory: z.number().min(16384).default(65536),
+  argon2Memory: z.number().min(16384).default(131072),
 
   /**
    * Argon2id iterations
-   * @default 3
+   * @default 4
    */
-  argon2Iterations: z.number().min(1).default(3),
+  argon2Iterations: z.number().min(1).default(4),
 
   /**
    * Minutes between integrity checks
@@ -79,8 +79,8 @@ export const DEFAULT_OFFLINE_CONFIG: OfflineSecurityConfig = {
   credentialRefreshBuffer: 24,
   storageEncryption: 'AES-256-GCM',
   keyDerivation: 'ARGON2ID',
-  argon2Memory: 65536,
-  argon2Iterations: 3,
+  argon2Memory: 131072,
+  argon2Iterations: 4,
   integrityCheckInterval: 15,
   maxFailedAttempts: 10,
   wipeOnExceed: true,

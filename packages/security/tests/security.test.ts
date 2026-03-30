@@ -549,7 +549,7 @@ describe('@gtcx/security/auth', () => {
       const now = Math.floor(Date.now() / 1000);
       const token = makeJwt(
         { alg: 'EdDSA', typ: 'JWT' },
-        { sub: 'user-001', iat: now, exp: now + 3600 }
+        { iss: 'gtcx', sub: 'user-001', iat: now, exp: now + 3600 }
       );
       const decoded = decodeToken(token);
       expect(decoded).not.toBeNull();
@@ -571,20 +571,33 @@ describe('@gtcx/security/auth', () => {
       const now = Math.floor(Date.now() / 1000);
 
       // Valid token
-      const valid = isTokenTemporallyValid({ exp: now + 3600, iat: now });
+      const valid = isTokenTemporallyValid({
+        iss: 'gtcx',
+        sub: 'user-001',
+        exp: now + 3600,
+        iat: now,
+      });
       expect(valid.valid).toBe(true);
       expect(valid.expired).toBe(false);
       expect(valid.notYetValid).toBe(false);
 
       // Expired token
-      const expired = isTokenTemporallyValid({ exp: now - 120 });
+      const expired = isTokenTemporallyValid({
+        iss: 'gtcx',
+        sub: 'user-001',
+        exp: now - 120,
+        iat: now - 3720,
+      });
       expect(expired.expired).toBe(true);
       expect(expired.valid).toBe(false);
 
       // Not-before in future
       const future = isTokenTemporallyValid({
+        iss: 'gtcx',
+        sub: 'user-001',
         nbf: now + 3600,
         exp: now + 7200,
+        iat: now,
       });
       expect(future.notYetValid).toBe(true);
       expect(future.valid).toBe(false);
@@ -595,34 +608,44 @@ describe('@gtcx/security/auth', () => {
 
       // Token with offline=true and future offlineExpiry
       const offlineClaims: GTCXTokenClaims = {
+        iss: 'gtcx',
         sub: 'user-001',
+        exp: now + 7200,
+        iat: now,
         offline: true,
         offlineExpiry: now + 3600,
-        iat: now,
       };
       expect(isTokenValidOffline(offlineClaims)).toBe(true);
 
       // Token without offline flag
       const onlineClaims: GTCXTokenClaims = {
+        iss: 'gtcx',
         sub: 'user-001',
-        offline: false,
+        exp: now + 3600,
         iat: now,
+        offline: false,
       };
       expect(isTokenValidOffline(onlineClaims)).toBe(false);
 
       // Expired offline expiry
       const expiredOffline: GTCXTokenClaims = {
+        iss: 'gtcx',
         sub: 'user-001',
+        exp: now + 3600,
+        iat: now - 200,
         offline: true,
         offlineExpiry: now - 100,
-        iat: now - 200,
       };
       expect(isTokenValidOffline(expiredOffline)).toBe(false);
     });
 
     it('should create unsigned payload', () => {
+      const now = Math.floor(Date.now() / 1000);
       const claims: GTCXTokenClaims = {
+        iss: 'gtcx',
         sub: 'user-001',
+        exp: now + 3600,
+        iat: now,
         roles: ['producer'],
       };
       const payload = createTokenPayload(claims, {

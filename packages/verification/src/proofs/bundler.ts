@@ -185,6 +185,10 @@ export function parseProofBundle(
   serialized: string,
   onError?: (error: unknown) => void
 ): ProofBundle | null {
+  if (serialized.length > 1_048_576) {
+    onError?.(new Error('Proof bundle exceeds maximum size'));
+    return null;
+  }
   let raw: unknown;
   try {
     raw = JSON.parse(serialized);

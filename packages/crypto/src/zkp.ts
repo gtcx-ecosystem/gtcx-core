@@ -81,6 +81,7 @@ const encodePayload = (payload: ProofPayload): string => toBase64(JSON.stringify
 const decodePayload = (value: string): ProofPayload | null => {
   try {
     const json = new TextDecoder().decode(fromBase64(value));
+    if (json.length > 100_000) return null; // 100KB max for ZKP payloads
     const parsed = JSON.parse(json) as ProofPayload;
     if (!parsed?.salt || !parsed?.response || !parsed?.commitment || !parsed?.binding) return null;
     return parsed;

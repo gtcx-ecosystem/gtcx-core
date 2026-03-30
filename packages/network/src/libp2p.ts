@@ -174,6 +174,7 @@ function encodeEnvelope(envelope: MessageEnvelope): Uint8Array {
 function decodeEnvelope(data: Uint8Array): MessageEnvelope | null {
   try {
     const text = new TextDecoder().decode(data);
+    if (text.length > 1_048_576) return null; // 1MB max for network messages
     return JSON.parse(text) as MessageEnvelope;
   } catch {
     return null;

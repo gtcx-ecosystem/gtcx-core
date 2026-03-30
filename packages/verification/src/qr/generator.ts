@@ -255,6 +255,7 @@ export function serializeQRData(data: QRCodeData): string {
  */
 export function parseQRData(dataString: string): QRCodeData | null {
   try {
+    if (dataString.length > 50_000) return null; // 50KB max for QR data
     return JSON.parse(dataString) as QRCodeData;
   } catch {
     return null;
