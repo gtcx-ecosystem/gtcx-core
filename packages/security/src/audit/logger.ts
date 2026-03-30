@@ -134,7 +134,6 @@ export class SecurityLogger {
         await handler(processedEvent);
       } catch (error) {
         // Don't let handler errors break logging
-        // eslint-disable-next-line no-console
         console.error('Security log handler error:', error);
       }
     }
@@ -180,7 +179,6 @@ export class SecurityLogger {
       try {
         await handler(events);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Security batch log handler error:', error);
       }
     }
@@ -319,7 +317,6 @@ export class SecurityLogger {
 
     this.flushTimer = setInterval(() => {
       this.flush().catch((error) => {
-        // eslint-disable-next-line no-console
         console.error('[gtcx/security] flush failed:', error);
       });
     }, this.config.flushIntervalMs);
@@ -339,15 +336,12 @@ export function consoleLogHandler(event: SecurityEvent): void {
 
   switch (event.severity) {
     case 'CRITICAL':
-      // eslint-disable-next-line no-console
       console.error(message, event);
       break;
     case 'HIGH':
-      // eslint-disable-next-line no-console
       console.warn(message, event);
       break;
     case 'WARN':
-      // eslint-disable-next-line no-console
       console.warn(message, event);
       break;
     default:

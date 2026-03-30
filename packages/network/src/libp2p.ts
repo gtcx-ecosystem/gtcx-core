@@ -94,7 +94,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
         const bootstrapModule = await import('@libp2p/bootstrap');
         const bootstrap = resolveFactory(bootstrapModule, 'bootstrap');
         peerDiscovery.push(bootstrap({ list: config.bootstrap }));
-      } catch (error) {
+      } catch (_error) {
         throw new ConfigurationError('Bootstrap requires @libp2p/bootstrap');
       }
     }
@@ -103,7 +103,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
         const mdnsModule = await import('@libp2p/mdns');
         const mdns = resolveFactory(mdnsModule, 'mdns');
         peerDiscovery.push(mdns());
-      } catch (error) {
+      } catch (_error) {
         throw new ConfigurationError('mDNS requires @libp2p/mdns');
       }
     }
@@ -130,7 +130,7 @@ async function loadLibp2p(config: Libp2pTransportConfig): Promise<Libp2pRuntime>
             }
             return addr;
           });
-        } catch (error) {
+        } catch (_error) {
           throw new ConfigurationError(
             'multiaddr conversion failed. Install @multiformats/multiaddr or pass Multiaddr instances.'
           );

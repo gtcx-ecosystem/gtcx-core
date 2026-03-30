@@ -53,7 +53,7 @@
     "@changesets/cli": "^2.29.8",
     "@multiformats/multiaddr": "^12.5.1",
     "@types/node": "^22.10.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.4.0",
@@ -61,7 +61,7 @@
     "typedoc": "^0.28.17",
     "typedoc-plugin-markdown": "^4.10.0",
     "typescript": "^5.7.0",
-    "vitest": "^2.1.0"
+    "vitest": "^3.2.0"
   },
   "pnpm": {
     "overrides": {

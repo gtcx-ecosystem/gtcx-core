@@ -270,7 +270,6 @@ export async function logSecurityEvent(
   await Promise.all(
     handlers.map((handler) =>
       handler(event).catch((err) => {
-        // eslint-disable-next-line no-console
         console.error('[gtcx/security] handler dispatch failed:', err);
       })
     )

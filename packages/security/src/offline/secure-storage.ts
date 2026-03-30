@@ -266,7 +266,7 @@ export abstract class SecureStorageBase {
       this.state.lastUnlockedAt = new Date();
 
       return { success: true };
-    } catch (error) {
+    } catch (_error) {
       this.state.isLocked = true;
       // Zero key buffer before discarding
       if (this.encryptionKey) {
@@ -422,7 +422,6 @@ export abstract class SecureStorageBase {
     if (this.config.wipeOnExceed && this.isLockedOut()) {
       // Trigger async wipe
       this.wipe().catch((error) => {
-        // eslint-disable-next-line no-console
         console.error('[gtcx/security] wipe failed:', error);
       });
     }
