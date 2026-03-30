@@ -6,7 +6,7 @@ Session-start protocol for any agent or contributor entering this repo.
 
 ## What This Repo Is
 
-`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 18 TypeScript packages (`@gtcx/*`) and 6 Rust crates (`gtcx-*`) consumed by every downstream GTCX repo. It has no product surface, no UI, and no users. Its output is primitives — signing, identity, verification, sync, networking, and ZKP.
+`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 19 TypeScript packages (`@gtcx/*`) and 6 Rust crates (`gtcx-*`) consumed by every downstream GTCX repo. It has no product surface, no UI, and no users. Its output is primitives — signing, identity, verification, sync, networking, and ZKP.
 
 Downstream repos depend on this. Breaking changes here break everything.
 

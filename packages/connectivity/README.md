@@ -27,7 +27,7 @@ const profile = classifyProfile(await detector.check());
 
 ## Related
 
-- [ADR-007: Offline-First Architecture](../../SOP/2-docs/1-architecture/decisions/007-offline-first-architecture.md)
+- [ADR-007: Offline-First Architecture](../../_sop/2-docs/3-engineering/6-decisions/007-offline-first-architecture.md)
 
 ## License
 

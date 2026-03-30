@@ -23,7 +23,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 
 ## Packages
 
-### TypeScript (18 packages)
+### TypeScript (19 packages)
 
 | Package                                           | Description                                                                            |
 | ------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -43,6 +43,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 | [`@gtcx/api-client`](./packages/api-client)       | Resilient HTTP client with retry, circuit breakers, and offline queue                  |
 | [`@gtcx/connectivity`](./packages/connectivity)   | Network connectivity detection and profiling for offline-first apps                    |
 | [`@gtcx/logging`](./packages/logging)             | Structured logging for GTCX services                                                   |
+| [`@gtcx/network`](./packages/network)             | P2P networking and messaging via libp2p                                                |
 | [`@gtcx/sync`](./packages/sync)                   | Offline-first sync engine with conflict resolution strategies                          |
 | [`@gtcx/config`](./packages/config)               | Shared build configuration (tsup presets)                                              |
 
@@ -61,7 +62,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 
 ```
 gtcx-core/
-├── packages/               # 18 TypeScript packages
+├── packages/               # 19 TypeScript packages
 │   ├── types/              #   Core types and protocol definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives
@@ -77,6 +78,7 @@ gtcx-core/
 │   ├── api-client/         #   HTTP client
 │   ├── connectivity/       #   Network profiling
 │   ├── logging/            #   Structured logging
+│   ├── network/            #   P2P networking
 │   ├── sync/               #   Sync engine
 │   ├── utils/              #   Shared utilities
 │   └── config/             #   Build configuration

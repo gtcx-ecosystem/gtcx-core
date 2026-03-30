@@ -60,7 +60,7 @@ console.log(result.document);
 
 ## Related
 
-- [ADR-005: Ed25519 over secp256k1](../../SOP/2-docs/1-architecture/decisions/005-ed25519-signing.md)
+- [ADR-005: Ed25519 over secp256k1](../../_sop/2-docs/3-engineering/6-decisions/005-ed25519-signing.md)
 
 ## License
 

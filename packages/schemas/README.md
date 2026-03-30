@@ -36,7 +36,7 @@ console.log(domain?.name, domain?.controls.length);
 
 ## Related
 
-- [Architecture Decision Records](../../SOP/2-docs/1-architecture/decisions/README.md)
+- [Architecture Decision Records](../../_sop/2-docs/3-engineering/6-decisions/README.md)
 
 ## License
 

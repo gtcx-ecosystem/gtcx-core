@@ -330,7 +330,7 @@ export function verifyQRCodeData(
       isValid: true,
       data,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       isValid: false,
       error: 'QR code verification failed',

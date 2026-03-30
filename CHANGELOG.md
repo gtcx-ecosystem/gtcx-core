@@ -4,7 +4,7 @@ All notable changes to the GTCX Core monorepo.
 
 ## [1.0.0] — 2026-03-19
 
-### Packages (18 TypeScript + 6 Rust)
+### Packages (19 TypeScript + 6 Rust)
 
 **Core type system and domain models:**
 

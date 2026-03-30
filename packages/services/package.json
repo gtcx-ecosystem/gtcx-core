@@ -38,7 +38,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@gtcx/crypto": "workspace:*",
@@ -50,8 +51,8 @@
     "@gtcx/typescript-config": "workspace:*",
     "tsup": "^8.0.1",
     "typescript": "^5.7.0",
-    "vitest": "^2.1.0",
-    "@vitest/coverage-v8": "^2.1.0"
+    "vitest": "^3.2.0",
+    "@vitest/coverage-v8": "^3.2.0"
   },
   "keywords": [
     "gtcx",

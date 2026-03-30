@@ -18,16 +18,17 @@
     "build:native": "node scripts/build-native.mjs",
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "clean": "rm -rf dist"
   },
   "dependencies": {},
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",
     "@gtcx/typescript-config": "workspace:*",
-    "@vitest/coverage-v8": "^2.1.0",
+    "@vitest/coverage-v8": "^3.2.0",
     "tsup": "^8.0.1",
     "typescript": "^5.7.0",
-    "vitest": "^2.1.0"
+    "vitest": "^3.2.0"
   },
   "publishConfig": {
     "access": "public",
