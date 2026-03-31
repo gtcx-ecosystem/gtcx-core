@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-03-31T13:16:17.615Z",
+  "generatedAt": "2026-03-31T18:19:17.572Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.0",
@@ -629,7 +629,7 @@
       "version": "0.2.0",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
-      "hash": "c1fb136103be6ac8f74843d86032e50ed66cbd7e6586ef15d9f990d107bb5300",
+      "hash": "372d515b42bfe35f6feb0c211cc78b9ed0a81ccb085264c2df26f787c5a3e7e9",
       "exports": [
         "AssetLotRegistrationService",
         "ComplianceCheckResult",
