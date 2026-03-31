@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-03-20T00:39:17.024Z",
+  "generatedAt": "2026-03-31T13:16:17.615Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.0",
       "dir": "packages/ai",
       "typesPath": "packages/ai/dist/index.d.ts",
-      "hash": "7d68159eea8adcf33e2a5da4cb289475a2b9d815df7e02bb0c3722f283596b98",
+      "hash": "0ff961b0b12dc8c3dc3c7c51a27acbc03b1934e16a7558687b13d20c11717fe7",
       "exports": [
         "CategoryLogger",
         "createCategoryLogger",
@@ -64,7 +64,7 @@
       "version": "1.0.0",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "4a0198b702e62a948149fd49faa3b16f8b78ec684f64dfe3d29079ac61a0ee6a",
+      "hash": "a0d3313399364884ba52c6c290afb2b5e64891266609945688c5949a14dc12fb",
       "exports": [
         "batchVerify",
         "batchVerifyProofs",
@@ -136,6 +136,7 @@
         "verifyInclusion",
         "verifyMerkleProof",
         "verifySignedMessage",
+        "ZkFullVerifier",
         "ZKProof",
         "ZkProofInput",
         "ZKProofSchema",
@@ -420,7 +421,7 @@
       "version": "0.1.0",
       "dir": "packages/network",
       "typesPath": "packages/network/dist/index.d.ts",
-      "hash": "3ff67ceea6e6d6635e86ce97e38e409d25455f6cf055e2c7695b949077c0da78",
+      "hash": "6d539547d29e2dfbd4d0abdf730be477bda751f0a6a388b914ba66750697f4e0",
       "exports": [
         "ConfigurationError",
         "createLibp2pTransport",
@@ -457,7 +458,7 @@
       "version": "1.0.0",
       "dir": "packages/schemas",
       "typesPath": "packages/schemas/dist/index.d.ts",
-      "hash": "84cd23dfa226d10bae47b0497d927ca25cbfb15ce1ec7883517b8e84b958788b",
+      "hash": "64160c35c80297c32ed73b38a0f579c0eeedc8e18a2dbabe3e2da813390cda58",
       "exports": [
         "Control",
         "CORE12_DOMAINS",
@@ -466,14 +467,16 @@
         "getAllControls",
         "getControl",
         "getControlCount",
-        "getDomain"
+        "getDomain",
+        "getPopulatedDomains",
+        "isDomainPopulated"
       ]
     },
     "@gtcx/security": {
       "version": "1.0.0",
       "dir": "packages/security",
       "typesPath": "packages/security/dist/index.d.ts",
-      "hash": "f9413eb779b6f8f70797444bb98adcf8c49cfb40f661f90e3c86405651697a5e",
+      "hash": "daf5adb0f20786b931d83ddc70ee5416737119dbb7164fd8754dca4942d3ed81",
       "exports": [
         "ApiErrorSchema",
         "assembleToken",
@@ -617,6 +620,7 @@
         "ValidationError",
         "ValidationOutcome",
         "ValidationResult",
+        "verifyTokenSignature",
         "Weight",
         "WeightSchema"
       ]
@@ -625,12 +629,16 @@
       "version": "0.2.0",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
-      "hash": "7b044758b5b84e6cabd54ecd7495080724251431c6719fc78fd59d676c402fa7",
+      "hash": "c1fb136103be6ac8f74843d86032e50ed66cbd7e6586ef15d9f990d107bb5300",
       "exports": [
         "AssetLotRegistrationService",
         "ComplianceCheckResult",
         "ComplianceConfig",
         "ComplianceError",
+        "ComplianceRecordFilter",
+        "IComplianceRepository",
+        "ITraderRepository",
+        "ITransactionRepository",
         "LicenseValidationError",
         "MaxValueError",
         "RegistrationConfig",
@@ -664,7 +672,7 @@
       "version": "1.0.0",
       "dir": "packages/types",
       "typesPath": "packages/types/dist/index.d.ts",
-      "hash": "a565ade517c99f209940a5162135d045cd948378f4796b5ce964cf1fee1325ca",
+      "hash": "3cfae559c6203614a01948a3174893786fa33d79cb479a4d23788e1f1748e71c",
       "exports": [
         "AgxDiscoveryRequest",
         "AgxDiscoveryResponse",
@@ -733,6 +741,8 @@
         "EventType",
         "FacilityType",
         "FilterParams",
+        "GciScoredData",
+        "GciUpdatedData",
         "GeoCoordinates",
         "GeologicalContext",
         "GeologicalInfo",
@@ -740,7 +750,9 @@
         "GeoTagData",
         "GeoTagProof",
         "GeoTagProofType",
+        "GeoTagRecordedData",
         "GeoTagSession",
+        "GeoTagVerifiedData",
         "GtcxError",
         "GtcxException",
         "HealthCheck",
@@ -797,6 +809,9 @@
         "PrivacyPreferences",
         "ProductionStats",
         "ProofMetadata",
+        "PROTOCOL_EVENT_SUBJECTS",
+        "ProtocolEvent",
+        "ProtocolEventDataMap",
         "QualityGrade",
         "QuantitySpec",
         "ReleaseCondition",
@@ -835,6 +850,8 @@
         "TradePassCredentialProof",
         "TradePassDID",
         "TradePassIdentity",
+        "TradePassIssuedData",
+        "TradePassRevokedData",
         "TradePassRole",
         "TradePassRoleType",
         "TradePassVerifiableCredential",
@@ -881,7 +898,7 @@
       "version": "1.0.0",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "d759b05777d3972dd7c6aac11c8bd4dd478f91d530013ea759e314b1b042183e",
+      "hash": "d643472bd2677203f6dee02dfcfa2bad1a52583e172885b55a8e76434160dcb0",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",
@@ -1081,7 +1098,7 @@
       "version": "0.1.0",
       "dir": "packages/workproof",
       "typesPath": "packages/workproof/dist/index.d.ts",
-      "hash": "c0c3805642827b7e63c8547982dbef849216b5d595212e20a3a84157c78e5af1",
+      "hash": "25fc5b91e38d9a78de7beb4671cf798482eaeb4f0e06a20edc6abe3d7f041173",
       "exports": [
         "AdmissionCriteria",
         "AdmissionCriteriaSchema",
@@ -1101,6 +1118,8 @@
         "ComplianceTierSchema",
         "CompositeValue",
         "ConflictResolutionStrategySchema",
+        "createWorkProof",
+        "CreateWorkProofInput",
         "DisclosureLevel",
         "DisclosureLevelSchema",
         "EnumValue",
@@ -1180,6 +1199,7 @@
         "ValidationAgentRoleSchema",
         "ValidationAgentSchema",
         "VerificationMethodSchema",
+        "verifyWorkProof",
         "WorkProof",
         "WORKPROOF_PREDICATE_URIS",
         "WORKPROOF_PREDICATES",
@@ -1200,7 +1220,8 @@
         "WorkProofPredicateTypeSchema",
         "WorkProofSchema",
         "WorkProofType",
-        "WorkProofTypeSchema"
+        "WorkProofTypeSchema",
+        "WorkProofVerificationResult"
       ]
     }
   }
