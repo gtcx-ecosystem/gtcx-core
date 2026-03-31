@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-03-31T18:19:17.572Z",
+  "generatedAt": "2026-03-31T19:59:09.673Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.0",
@@ -336,7 +336,7 @@
       "version": "0.2.0",
       "dir": "packages/events",
       "typesPath": "packages/events/dist/index.d.ts",
-      "hash": "5d2cf7405cac1173ba3bae82798936ada8c797e71521e55bb1fc6094c1b8305b",
+      "hash": "eac59206cfaa364a412ce192914680ba81b92df686c05d1b1ae502b8b4bcecfc",
       "exports": [
         "BufferedEvent",
         "ComplianceCheckCompletedPayload",
@@ -629,13 +629,15 @@
       "version": "0.2.0",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
-      "hash": "372d515b42bfe35f6feb0c211cc78b9ed0a81ccb085264c2df26f787c5a3e7e9",
+      "hash": "fb2167e48fb40e2b409a022430139ecce3f642634998a4e12778f6d6a1ae2da1",
       "exports": [
         "AssetLotRegistrationService",
         "ComplianceCheckResult",
         "ComplianceConfig",
         "ComplianceError",
         "ComplianceRecordFilter",
+        "ComplianceReport",
+        "ComplianceReportSummary",
         "IComplianceRepository",
         "ITraderRepository",
         "ITransactionRepository",

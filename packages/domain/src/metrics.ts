@@ -122,6 +122,11 @@ export class InMemoryMetricsCollector implements IMetricsCollector {
 
   private defaultBuckets = [5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000];
   private defaultQuantiles = [0.5, 0.9, 0.95, 0.99];
+  private maxObservations: number;
+
+  constructor(options?: { maxObservations?: number }) {
+    this.maxObservations = options?.maxObservations ?? 10000;
+  }
 
   increment(name: string, labels?: Record<string, string>, value = 1): void {
     const key = this.makeKey(name, labels);
@@ -141,6 +146,9 @@ export class InMemoryMetricsCollector implements IMetricsCollector {
     const key = this.makeKey(name, labels);
     const current = this.histograms.get(key);
     if (current) {
+      if (current.values.length >= this.maxObservations) {
+        current.values.shift();
+      }
       current.values.push(value);
     } else {
       this.histograms.set(key, { values: [value], labels });
@@ -151,6 +159,9 @@ export class InMemoryMetricsCollector implements IMetricsCollector {
     const key = this.makeKey(name, labels);
     const current = this.summaries.get(key);
     if (current) {
+      if (current.values.length >= this.maxObservations) {
+        current.values.shift();
+      }
       current.values.push(value);
     } else {
       this.summaries.set(key, { values: [value], labels });

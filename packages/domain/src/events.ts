@@ -245,10 +245,6 @@ export class DomainEventFactory {
     this.correlationId = correlationId;
   }
 
-  setCorrelationId(id: string): void {
-    this.correlationId = id;
-  }
-
   getCorrelationId(): string | undefined {
     return this.correlationId;
   }

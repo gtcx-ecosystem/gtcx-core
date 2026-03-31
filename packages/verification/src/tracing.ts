@@ -42,7 +42,7 @@ export interface OperationLog<TInput = any, TOutput = any> {
 type CreateCategoryLoggerFn = (category: string) => CategoryLogger;
 
 const noopTraced: TraceFn = (fn) => fn;
-const noopWithTrace: WithTraceFn = (fn) => fn() as any;
+const noopWithTrace: WithTraceFn = <T>(fn: () => T) => fn();
 const noopLogger: CategoryLogger = { info() {}, warn() {}, error() {}, debug() {} };
 const noopCreateCategoryLogger: CreateCategoryLoggerFn = () => noopLogger;
 

@@ -58,8 +58,7 @@ export function withTrace<T>(
   _operationName?: string,
   _options?: TracedOptions
 ): T {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (fn as any)();
+  return (fn as () => T)();
 }
 
 export interface CategoryLogger {
@@ -77,7 +76,7 @@ export interface CategoryLogger {
 export function createCategoryLogger(category: string): CategoryLogger {
   const emit = (level: string, message: string, data?: Record<string, unknown>) => {
     const entry = { level, category, msg: message, ...data, ts: new Date().toISOString() };
-    // eslint-disable-next-line no-console
+
     console.error(JSON.stringify(entry));
   };
   return {

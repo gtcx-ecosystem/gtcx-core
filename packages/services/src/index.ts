@@ -44,6 +44,8 @@ export {
   UnifiedComplianceService,
   type ComplianceConfig,
   type ComplianceCheckResult,
+  type ComplianceReport,
+  type ComplianceReportSummary,
 } from './compliance';
 
 // ============================================================================

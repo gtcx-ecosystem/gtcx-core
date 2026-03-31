@@ -50,22 +50,22 @@ import type { ITraderRepository, ITransactionRepository } from './repositories';
 // ============================================================================
 
 export class LicenseValidationError extends Error {
-  constructor(message: string) {
-    super(message);
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
     this.name = 'LicenseValidationError';
   }
 }
 
 export class ComplianceError extends Error {
-  constructor(message: string) {
-    super(message);
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
     this.name = 'ComplianceError';
   }
 }
 
 export class MaxValueError extends Error {
-  constructor(message: string) {
-    super(message);
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
     this.name = 'MaxValueError';
   }
 }

@@ -21,6 +21,8 @@ export class TypedEventBus implements IDomainEventEmitter {
   private handlers: Map<DomainEventType, Set<EventHandler>> = new Map();
   private globalHandlers: Set<EventHandler> = new Set();
   private history: DomainEvent[] = [];
+  private historyHead: number = 0;
+  private historyCount: number = 0;
   private readonly maxHistorySize: number;
   private readonly offlineBuffer: OfflineEventBuffer;
   private readonly enableOfflineBuffer: boolean;
@@ -152,7 +154,18 @@ export class TypedEventBus implements IDomainEventEmitter {
    * Retrieve past events, optionally filtered by type and limited in count.
    */
   getHistory(type?: DomainEventType, limit?: number): DomainEvent[] {
-    let result = type ? this.history.filter((e) => e.type === type) : [...this.history];
+    // Reconstruct ordered array from ring buffer
+    let ordered: DomainEvent[];
+    if (this.historyCount < this.maxHistorySize) {
+      ordered = [...this.history];
+    } else {
+      ordered = [
+        ...this.history.slice(this.historyHead),
+        ...this.history.slice(0, this.historyHead),
+      ];
+    }
+
+    let result = type ? ordered.filter((e) => e.type === type) : ordered;
 
     if (limit !== undefined && limit > 0) {
       result = result.slice(-limit);
@@ -166,6 +179,8 @@ export class TypedEventBus implements IDomainEventEmitter {
    */
   clear(): void {
     this.history = [];
+    this.historyHead = 0;
+    this.historyCount = 0;
   }
 
   // --------------------------------------------------------------------------
@@ -180,6 +195,8 @@ export class TypedEventBus implements IDomainEventEmitter {
     this.handlers.clear();
     this.globalHandlers.clear();
     this.history = [];
+    this.historyHead = 0;
+    this.historyCount = 0;
     this.offlineBuffer.clear();
   }
 
@@ -202,9 +219,13 @@ export class TypedEventBus implements IDomainEventEmitter {
   // --------------------------------------------------------------------------
 
   private addToHistory(event: DomainEvent): void {
-    this.history.push(event);
-    if (this.history.length > this.maxHistorySize) {
-      this.history.shift();
+    if (this.historyCount < this.maxHistorySize) {
+      this.history.push(event);
+      this.historyCount++;
+    } else {
+      // Ring buffer: overwrite oldest entry in O(1)
+      this.history[this.historyHead] = event;
+      this.historyHead = (this.historyHead + 1) % this.maxHistorySize;
     }
   }
 

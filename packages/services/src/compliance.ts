@@ -90,6 +90,29 @@ export interface ComplianceCheckResult {
   details?: Record<string, unknown>;
 }
 
+export interface ComplianceReportSummary {
+  totalRecords: number;
+  compliantRecords: number;
+  violations: number;
+  warnings: number;
+  pendingReviews: number;
+}
+
+export interface ComplianceReport {
+  report: {
+    summary: ComplianceReportSummary;
+    breakdown: Record<string, unknown>;
+    recommendations: string[];
+    actionItems: unknown[];
+  };
+  metadata: {
+    generatedAt: string;
+    recordCount: number;
+    complianceScore: number;
+    criticalIssues: number;
+  };
+}
+
 // ============================================================================
 // UNIFIED COMPLIANCE SERVICE
 // ============================================================================
@@ -308,7 +331,7 @@ export class UnifiedComplianceService {
           pendingIssues: pending.length,
           criticalViolations: critical.length,
           complianceScore: Math.round(score),
-          trendDirection: await this.calculateComplianceTrend(),
+          trendDirection: await this.calculateComplianceTrend(allRecords),
         },
         byCategory: await this.getComplianceByCategory(allRecords),
         urgentActions: await this.getUrgentActions(allRecords),
@@ -560,26 +583,7 @@ export class UnifiedComplianceService {
   /**
    * Generate compliance report
    */
-  async generateComplianceReport(options: unknown): Promise<{
-    report: {
-      summary: {
-        totalRecords: number;
-        compliantRecords: number;
-        violations: number;
-        warnings: number;
-        pendingReviews: number;
-      };
-      breakdown: Record<string, unknown>;
-      recommendations: string[];
-      actionItems: unknown[];
-    };
-    metadata: {
-      generatedAt: string;
-      recordCount: number;
-      complianceScore: number;
-      criticalIssues: number;
-    };
-  }> {
+  async generateComplianceReport(options: unknown): Promise<ComplianceReport> {
     // Validate options
     const optionsResult = safeParse(ComplianceReportOptionsSchema, options);
     if (!optionsResult.success) {
@@ -896,8 +900,10 @@ export class UnifiedComplianceService {
     return [];
   }
 
-  protected async calculateComplianceTrend(): Promise<'improving' | 'declining' | 'stable'> {
-    const records = await this.getAllComplianceRecords();
+  protected async calculateComplianceTrend(
+    records?: ComplianceRecord[]
+  ): Promise<'improving' | 'declining' | 'stable'> {
+    records ??= await this.getAllComplianceRecords();
     if (records.length < 2) return 'stable';
 
     // Split records into two halves by timestamp and compare compliance rates

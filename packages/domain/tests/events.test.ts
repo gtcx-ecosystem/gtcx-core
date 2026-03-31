@@ -18,9 +18,8 @@ describe('DomainEventFactory', () => {
     expect(f.getCorrelationId()).toBe('corr-1');
   });
 
-  it('setCorrelationId updates the id', () => {
-    const f = new DomainEventFactory();
-    f.setCorrelationId('corr-2');
+  it('constructor sets the correlationId', () => {
+    const f = new DomainEventFactory('corr-2');
     expect(f.getCorrelationId()).toBe('corr-2');
   });
 
