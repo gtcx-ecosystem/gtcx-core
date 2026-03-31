@@ -28,7 +28,10 @@ import {
   type CommodityType,
 } from '../types';
 
+import { VerificationError } from './errors';
 import { getEffectiveTemplate } from './templates';
+
+export { VerificationError };
 
 // ============================================================================
 // CERTIFICATE ID GENERATION
@@ -206,12 +209,12 @@ export function createStandardCertificateData(
   const template = getEffectiveTemplate(normalizedInput.templateId, commodityType);
 
   if (!template) {
-    throw new Error(`Template '${normalizedInput.templateId}' not found`);
+    throw new VerificationError(`Template '${normalizedInput.templateId}' not found`);
   }
 
   const validation = validateCertificateInput(normalizedInput);
   if (!validation.valid) {
-    throw new Error(`Validation failed: ${validation.errors.join(', ')}`);
+    throw new VerificationError(`Validation failed: ${validation.errors.join(', ')}`);
   }
 
   const certificateId = generateCertificateId(template.type);
@@ -264,16 +267,16 @@ export function createMilitaryGradeCertificateData(input: CreateCertificateInput
   const template = getEffectiveTemplate(normalizedInput.templateId, commodityType);
 
   if (!template) {
-    throw new Error(`Template '${normalizedInput.templateId}' not found`);
+    throw new VerificationError(`Template '${normalizedInput.templateId}' not found`);
   }
 
   if (!['military', 'post-quantum'].includes(template.securityLevel)) {
-    throw new Error(`Template '${normalizedInput.templateId}' is not military-grade`);
+    throw new VerificationError(`Template '${normalizedInput.templateId}' is not military-grade`);
   }
 
   const validation = validateCertificateInput(normalizedInput);
   if (!validation.valid) {
-    throw new Error(`Validation failed: ${validation.errors.join(', ')}`);
+    throw new VerificationError(`Validation failed: ${validation.errors.join(', ')}`);
   }
 
   const certificateId = generateCertificateId(template.type, 'MIL');

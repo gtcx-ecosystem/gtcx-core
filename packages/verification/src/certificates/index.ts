@@ -35,6 +35,9 @@ export {
 } from './templates';
 
 export {
+  // Error classes
+  VerificationError,
+
   // Generator functions
   generateCertificateId,
   validateCertificateInput,

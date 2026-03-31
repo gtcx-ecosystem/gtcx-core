@@ -70,6 +70,20 @@ export class MaxValueError extends Error {
   }
 }
 
+export class ValidationError extends Error {
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
+    this.name = 'ValidationError';
+  }
+}
+
+export class TradingError extends Error {
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
+    this.name = 'TradingError';
+  }
+}
+
 function toErrorCause(error: unknown): Error {
   return error instanceof Error ? error : new Error(String(error));
 }
@@ -151,7 +165,7 @@ export class TradingService {
     const configResult = safeParse(TradingConfigSchema, config);
     if (!configResult.success) {
       const messages = configResult.error.errors.map((issue) => issue.message);
-      throw new Error(`Invalid trading config: ${messages.join(', ')}`);
+      throw new ValidationError(`Invalid trading config: ${messages.join(', ')}`);
     }
     this.config = { ...DEFAULT_CONFIG, ...configResult.data };
   }
@@ -197,7 +211,7 @@ export class TradingService {
 
       return prices;
     } catch (error) {
-      throw new Error('Failed to get market prices', { cause: toErrorCause(error) });
+      throw new TradingError('Failed to get market prices', { cause: toErrorCause(error) });
     }
   }
 
@@ -285,7 +299,7 @@ export class TradingService {
 
       return result;
     } catch (error) {
-      throw new Error('Failed to calculate fair price', { cause: toErrorCause(error) });
+      throw new TradingError('Failed to calculate fair price', { cause: toErrorCause(error) });
     }
   }
 
@@ -334,7 +348,7 @@ export class TradingService {
     const filterResult = safeParse(TradingOpportunityFilterSchema, filters);
     if (!filterResult.success) {
       const messages = filterResult.error.errors.map((issue) => issue.message);
-      throw new Error(`Invalid filter criteria: ${messages.join(', ')}`);
+      throw new ValidationError(`Invalid filter criteria: ${messages.join(', ')}`);
     }
 
     const validFilters = filterResult.data;
@@ -402,7 +416,9 @@ export class TradingService {
 
       return opportunities;
     } catch (error) {
-      throw new Error('Failed to find trading opportunities', { cause: toErrorCause(error) });
+      throw new TradingError('Failed to find trading opportunities', {
+        cause: toErrorCause(error),
+      });
     }
   }
 
@@ -504,7 +520,7 @@ export class TradingService {
           correlationId
         )
       );
-      throw new Error(`Invalid trade request: ${messages.join(', ')}`);
+      throw new ValidationError(`Invalid trade request: ${messages.join(', ')}`);
     }
     return requestResult.data;
   }
@@ -666,7 +682,7 @@ export class TradingService {
         recommendations: [],
       };
     } catch (error) {
-      throw new Error('Failed to get trade analytics', { cause: toErrorCause(error) });
+      throw new TradingError('Failed to get trade analytics', { cause: toErrorCause(error) });
     }
   }
 

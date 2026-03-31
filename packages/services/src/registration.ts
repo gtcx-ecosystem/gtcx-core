@@ -120,7 +120,7 @@ export class AssetLotRegistrationService {
     const configResult = safeParse(RegistrationConfigSchema, config);
     if (!configResult.success) {
       const messages = configResult.error.errors.map((issue) => issue.message);
-      throw new Error(`Invalid registration config: ${messages.join(', ')}`);
+      throw new ValidationError(`Invalid registration config: ${messages.join(', ')}`);
     }
     const workflowSteps = configResult.data.workflowSteps?.map((step, index) => ({
       id: step.id,

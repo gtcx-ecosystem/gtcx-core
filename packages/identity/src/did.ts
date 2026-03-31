@@ -6,6 +6,7 @@
 import { hash256 } from '@gtcx/crypto';
 import type { DigitalIdentity, EnhancedIdentity } from '@gtcx/types';
 
+import { IdentityError } from './identity';
 import type { DIDResolver, DIDResolverOptions, DIDResolutionResult } from './resolver';
 
 /**
@@ -112,7 +113,10 @@ export function createDIDDocument(identity: DigitalIdentity | EnhancedIdentity):
   // Defensive check: ensure no private key material leaked into the document
   const serialized = JSON.stringify(document);
   if (serialized.includes('privateKey') || serialized.includes('privateKeyRef')) {
-    throw new Error('DID document must not contain private key material');
+    throw new IdentityError(
+      'DID document must not contain private key material',
+      'PRIVATE_KEY_LEAK'
+    );
   }
 
   return document;

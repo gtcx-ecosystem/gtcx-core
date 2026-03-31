@@ -12,6 +12,17 @@
 import crypto from 'crypto';
 
 // ============================================================================
+// ERRORS
+// ============================================================================
+
+export class DomainError extends Error {
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
+    this.name = 'DomainError';
+  }
+}
+
+// ============================================================================
 // TYPES
 // ============================================================================
 
@@ -127,19 +138,19 @@ export class OfflineQueue {
   ): Promise<string> {
     // Validate queue size
     if (this.queue.size >= this.maxQueueSize) {
-      throw new Error(
+      throw new DomainError(
         `Queue is full (max ${this.maxQueueSize} operations). Cannot enqueue new operation.`
       );
     }
 
     // Validate payload
     if (payload === null || payload === undefined) {
-      throw new Error('Payload must not be null or undefined.');
+      throw new DomainError('Payload must not be null or undefined.');
     }
     try {
       JSON.stringify(payload);
     } catch {
-      throw new Error('Payload must be JSON-serializable.');
+      throw new DomainError('Payload must be JSON-serializable.');
     }
 
     const id = this.generateId();
@@ -393,7 +404,7 @@ export class OfflineQueue {
     // Guard against merging excessively large objects
     const MAX_MERGE_KEYS = 1000;
     if (localEntries.length > MAX_MERGE_KEYS || serverEntries.length > MAX_MERGE_KEYS) {
-      throw new Error(`Merge aborted: object has more than ${MAX_MERGE_KEYS} keys.`);
+      throw new DomainError(`Merge aborted: object has more than ${MAX_MERGE_KEYS} keys.`);
     }
 
     return {

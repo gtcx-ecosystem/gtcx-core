@@ -13,6 +13,8 @@ import type {
   MeasurementUnit,
 } from '../types';
 
+import { VerificationError } from './errors';
+
 // ============================================================================
 // CORE TEMPLATES (Commodity-Agnostic)
 // ============================================================================
@@ -428,7 +430,7 @@ export function getEffectiveTemplate(
 ): CertificateTemplate {
   const baseTemplate = getTemplate(templateId);
   if (!baseTemplate) {
-    throw new Error(`Template not found: ${templateId}`);
+    throw new VerificationError(`Template not found: ${templateId}`);
   }
 
   // If no commodity type or no specific config, return base template

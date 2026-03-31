@@ -53,6 +53,24 @@ import {
 import type { IComplianceRepository } from './repositories';
 
 // ============================================================================
+// ERROR CLASSES
+// ============================================================================
+
+export class ComplianceValidationError extends Error {
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
+    this.name = 'ComplianceValidationError';
+  }
+}
+
+export class ComplianceServiceError extends Error {
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
+    this.name = 'ComplianceServiceError';
+  }
+}
+
+// ============================================================================
 // CONFIGURATION
 // ============================================================================
 
@@ -157,7 +175,7 @@ export class UnifiedComplianceService {
     const configResult = safeParse(ComplianceConfigSchema, config);
     if (!configResult.success) {
       const messages = configResult.error.errors.map((issue) => issue.message);
-      throw new Error(`Invalid compliance config: ${messages.join(', ')}`);
+      throw new ComplianceValidationError(`Invalid compliance config: ${messages.join(', ')}`);
     }
     this.config = { ...DEFAULT_CONFIG, ...configResult.data };
     this.frameworks = config.frameworks || this.getDefaultFrameworks();
@@ -339,7 +357,9 @@ export class UnifiedComplianceService {
         upcomingDeadlines: await this.getUpcomingDeadlines(allRecords),
       };
     } catch (error) {
-      throw new Error('Failed to get compliance dashboard', { cause: toErrorCause(error) });
+      throw new ComplianceServiceError('Failed to get compliance dashboard', {
+        cause: toErrorCause(error),
+      });
     }
   }
 
@@ -470,7 +490,9 @@ export class UnifiedComplianceService {
         correlationId
       );
     } catch (error) {
-      throw new Error('Failed to check asset lot compliance', { cause: toErrorCause(error) });
+      throw new ComplianceServiceError('Failed to check asset lot compliance', {
+        cause: toErrorCause(error),
+      });
     }
   }
 
@@ -572,7 +594,9 @@ export class UnifiedComplianceService {
         correlationId
       );
     } catch (error) {
-      throw new Error('Failed to check transaction compliance', { cause: toErrorCause(error) });
+      throw new ComplianceServiceError('Failed to check transaction compliance', {
+        cause: toErrorCause(error),
+      });
     }
   }
 
@@ -588,7 +612,7 @@ export class UnifiedComplianceService {
     const optionsResult = safeParse(ComplianceReportOptionsSchema, options);
     if (!optionsResult.success) {
       const messages = optionsResult.error.errors.map((issue) => issue.message);
-      throw new Error(`Invalid report options: ${messages.join(', ')}`);
+      throw new ComplianceValidationError(`Invalid report options: ${messages.join(', ')}`);
     }
 
     const validOptions = optionsResult.data;
@@ -630,7 +654,9 @@ export class UnifiedComplianceService {
 
       return { report, metadata };
     } catch (error) {
-      throw new Error('Failed to generate compliance report', { cause: toErrorCause(error) });
+      throw new ComplianceServiceError('Failed to generate compliance report', {
+        cause: toErrorCause(error),
+      });
     }
   }
 
