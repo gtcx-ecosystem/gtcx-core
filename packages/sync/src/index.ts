@@ -68,9 +68,31 @@ function resolveConflict<T>(
       );
       return { resolved: true, winner };
     }
-    case 'append-only':
-    case 'chain-validated':
-      return { resolved: false };
+    case 'append-only': {
+      // Append-only: newest item wins, but nothing is deleted.
+      // In the sync loop, both upload and download paths run — this picks
+      // the most recent version as the canonical record.
+      const winner = candidates.reduce((best, current) =>
+        current.updatedAt > best.updatedAt ? current : best
+      );
+      return { resolved: true, winner };
+    }
+    case 'chain-validated': {
+      // Chain-validated: prefer the item with the highest version that
+      // also has a valid chain reference (data.previousHash present).
+      // If no item has chain metadata, defer to resolveConflict callback.
+      const chainCandidates = candidates.filter((c) => {
+        const d = c.data as Record<string, unknown> | null;
+        return d && typeof d === 'object' && 'previousHash' in d;
+      });
+      if (chainCandidates.length === 0) {
+        return { resolved: false };
+      }
+      const winner = chainCandidates.reduce((best, current) =>
+        current.version > best.version ? current : best
+      );
+      return { resolved: true, winner };
+    }
     default:
       return { resolved: false };
   }

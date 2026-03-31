@@ -56,7 +56,7 @@ describe('@gtcx/sync', () => {
       expect(result.errors).toEqual([]);
     });
 
-    it('should report unresolved conflicts for append-only', async () => {
+    it('should resolve append-only by picking newest item', async () => {
       const engine = createSyncEngine();
       const items: SyncItem[] = [
         { id: '1', data: { value: 1 }, version: 1, updatedAt: 1 },
@@ -64,11 +64,11 @@ describe('@gtcx/sync', () => {
       ];
       const result = await engine.sync(items, { strategy: 'append-only' });
       expect(result.conflicts).toBe(1);
-      expect(result.resolved).toBe(0);
-      expect(result.errors.length).toBe(1);
+      expect(result.resolved).toBe(1);
+      expect(result.errors).toEqual([]);
     });
 
-    it('should allow custom conflict resolution callbacks', async () => {
+    it('should allow custom conflict resolution callbacks for unresolved strategies', async () => {
       const onConflict = vi.fn();
       const resolveConflict = vi.fn(async ({ local }: { local: SyncItem[] }) => local[1] ?? null);
       const engine = createSyncEngine({ onConflict, resolveConflict });
@@ -77,7 +77,7 @@ describe('@gtcx/sync', () => {
         { id: '1', data: { value: 2 }, version: 2, updatedAt: 2 },
       ];
 
-      const result = await engine.sync(items, { strategy: 'append-only' });
+      const result = await engine.sync(items, { strategy: 'chain-validated' });
       expect(onConflict).toHaveBeenCalledTimes(1);
       expect(resolveConflict).toHaveBeenCalledTimes(1);
       expect(result.resolved).toBe(1);
@@ -196,6 +196,24 @@ describe('@gtcx/sync', () => {
       expect(pushed).toHaveLength(1);
       expect(pushed[0]!.data).toEqual({ value: 'same' });
       expect(pushed[0]!.version).toBe(1);
+    });
+
+    it('should resolve chain-validated when items have previousHash', async () => {
+      const pushed: SyncItem[] = [];
+      const engine = createSyncEngine({
+        pushLocal: async (batch) => {
+          pushed.push(...batch);
+        },
+      });
+      const items: SyncItem[] = [
+        { id: '1', data: { value: 'v1', previousHash: 'abc' }, version: 1, updatedAt: 10 },
+        { id: '1', data: { value: 'v3', previousHash: 'def' }, version: 3, updatedAt: 30 },
+      ];
+      const result = await engine.sync(items, { strategy: 'chain-validated' });
+      expect(result.conflicts).toBe(1);
+      expect(result.resolved).toBe(1);
+      expect(pushed).toHaveLength(1);
+      expect(pushed[0]!.version).toBe(3);
     });
 
     it('should emit audit and metrics callbacks', async () => {

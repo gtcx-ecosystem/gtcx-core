@@ -159,6 +159,16 @@ jobs:
       - name: Rust clippy
         run: cargo clippy --workspace --all-targets -- -D warnings
 
+      - name: Verify deny(unsafe_code) in all crates
+        run: |
+          for lib in rust/*/src/lib.rs; do
+            if ! grep -q 'deny(unsafe_code)' "$lib"; then
+              echo "ERROR: $lib missing #![deny(unsafe_code)]"
+              exit 1
+            fi
+          done
+          echo "All crates enforce deny(unsafe_code)"
+
       - name: Rust tests
         run: cargo test --workspace --lib
 
