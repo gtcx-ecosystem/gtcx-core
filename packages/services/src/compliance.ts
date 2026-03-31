@@ -33,6 +33,7 @@ import {
   type IOperationLogger,
   ComplianceConfigSchema,
   ComplianceReportOptionsSchema,
+  LocationSchema,
   safeParse,
   type ValidatedComplianceReportOptions,
   type AssetLot,
@@ -812,12 +813,10 @@ export class UnifiedComplianceService {
 
   protected async checkLocationCompliance(location: Location): Promise<ComplianceCheckResult> {
     if (this.complianceRepo) return this.complianceRepo.checkLocation(location);
-    // Without a repository, validate that coordinates are present and within valid ranges
-    if (!location.latitude || !location.longitude) {
-      return { compliant: false, issue: 'Location coordinates missing' };
-    }
-    if (Math.abs(location.latitude) > 90 || Math.abs(location.longitude) > 180) {
-      return { compliant: false, issue: 'Location coordinates out of valid range' };
+    // Without a repository, validate coordinates via LocationSchema
+    const locationValid = safeParse(LocationSchema, location);
+    if (!locationValid.success) {
+      return { compliant: false, issue: 'Invalid location coordinates' };
     }
     return { compliant: true, details: { method: 'coordinate_validation_only' } };
   }

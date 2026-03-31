@@ -650,9 +650,4 @@ export class TradingService {
     if (this.transactionRepo) return this.transactionRepo.getHistory(commodityType, period);
     return [];
   }
-
-  protected aggregateByForm(_transactions: Transaction[]): Record<string, number> {
-    // Integration point - would aggregate transaction data
-    return {};
-  }
 }

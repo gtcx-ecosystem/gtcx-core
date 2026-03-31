@@ -75,6 +75,7 @@ export interface P2PNode {
   ): () => void;
   getPeers(): PeerInfo[];
   getStatus(): NodeStatus;
+  destroy(): Promise<void>;
 }
 
 export type P2PErrorCode = 'RATE_LIMIT' | 'TRANSPORT' | 'CONFIG';

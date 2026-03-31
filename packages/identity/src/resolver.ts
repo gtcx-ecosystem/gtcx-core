@@ -165,7 +165,7 @@ async function fetchWithRetry(
     } catch (error) {
       clearTimeout(timeout);
       if (attempt >= retries) {
-        if ((error as Error).name === 'AbortError') {
+        if (error instanceof Error && error.name === 'AbortError') {
           throw new DIDResolverError('Resolver timeout', 'TIMEOUT', { cause: error });
         }
         throw new DIDResolverError('Resolver request failed', 'RESOLUTION_FAILED', {
@@ -208,7 +208,11 @@ export function createHttpDIDResolverAdapter(config: HttpDIDResolverConfig): DID
         throw new DIDResolverError('Unexpected content type from resolver', 'RESOLUTION_FAILED');
       }
 
-      const document = (await response.json()) as DIDDocument;
+      const rawDoc = await response.json();
+      if (!rawDoc || typeof rawDoc !== 'object' || !('id' in rawDoc)) {
+        throw new DIDResolverError('Invalid DID document structure', 'RESOLUTION_FAILED');
+      }
+      const document = rawDoc as DIDDocument;
       return document;
     },
   };

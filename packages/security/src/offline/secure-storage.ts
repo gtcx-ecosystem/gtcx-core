@@ -10,6 +10,20 @@
 import { z } from 'zod';
 
 // =============================================================================
+// ERROR CLASS
+// =============================================================================
+
+export class SecureStorageError extends Error {
+  constructor(
+    message: string,
+    public readonly code: string
+  ) {
+    super(message);
+    this.name = 'SecureStorageError';
+  }
+}
+
+// =============================================================================
 // CONFIGURATION
 // =============================================================================
 
@@ -334,7 +348,10 @@ export abstract class SecureStorageBase {
     try {
       item = EncryptedItemSchema.parse(JSON.parse(raw));
     } catch {
-      throw new Error(`Secure storage: corrupt entry for key "${key}"`);
+      throw new SecureStorageError(
+        `Secure storage: corrupt entry for key "${key}"`,
+        'CORRUPT_ENTRY'
+      );
     }
 
     // Check expiration
@@ -353,7 +370,10 @@ export abstract class SecureStorageBase {
     try {
       return JSON.parse(new TextDecoder().decode(plaintext));
     } catch {
-      throw new Error(`Secure storage: decrypted data is not valid JSON for key "${key}"`);
+      throw new SecureStorageError(
+        `Secure storage: decrypted data is not valid JSON for key "${key}"`,
+        'INVALID_JSON'
+      );
     }
   }
 
@@ -400,7 +420,7 @@ export abstract class SecureStorageBase {
 
   private ensureUnlocked(): void {
     if (this.state.isLocked || !this.encryptionKey) {
-      throw new Error('Storage is locked. Call unlock() first.');
+      throw new SecureStorageError('Storage is locked. Call unlock() first.', 'STORAGE_LOCKED');
     }
   }
 

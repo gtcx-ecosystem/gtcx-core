@@ -152,6 +152,13 @@ export function createP2PNode(
     subscribe,
     getPeers: () => adapter.getPeers(),
     getStatus: () => status,
+    destroy: async () => {
+      if (typeof (adapter as { stop?: () => Promise<void> }).stop === 'function') {
+        await adapter.stop();
+      }
+      subscriptions.clear();
+      telemetry.onEvent = undefined;
+    },
   };
 }
 

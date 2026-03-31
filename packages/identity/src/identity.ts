@@ -15,6 +15,16 @@ import type {
   MultiKeyPairs,
 } from '@gtcx/types';
 
+export class IdentityError extends Error {
+  constructor(
+    message: string,
+    public readonly code: string
+  ) {
+    super(message);
+    this.name = 'IdentityError';
+  }
+}
+
 const VALID_SECURITY_LEVELS: SecurityLevel[] = ['standard', 'enhanced', 'military'];
 const VALID_ALGORITHMS = ['Ed25519', 'Secp256k1'] as const;
 
@@ -74,17 +84,19 @@ export async function createIdentity(
 
   // Validate options
   if (securityLevel && !VALID_SECURITY_LEVELS.includes(securityLevel)) {
-    throw new Error(
-      `Invalid securityLevel: ${securityLevel}. Must be one of: ${VALID_SECURITY_LEVELS.join(', ')}`
+    throw new IdentityError(
+      `Invalid securityLevel: ${securityLevel}. Must be one of: ${VALID_SECURITY_LEVELS.join(', ')}`,
+      'INVALID_SECURITY_LEVEL'
     );
   }
   if (algorithm && !VALID_ALGORITHMS.includes(algorithm)) {
-    throw new Error(
-      `Invalid algorithm: ${algorithm}. Must be one of: ${VALID_ALGORITHMS.join(', ')}`
+    throw new IdentityError(
+      `Invalid algorithm: ${algorithm}. Must be one of: ${VALID_ALGORITHMS.join(', ')}`,
+      'INVALID_ALGORITHM'
     );
   }
   if (metadata && typeof metadata !== 'object') {
-    throw new Error('metadata must be an object');
+    throw new IdentityError('metadata must be an object', 'INVALID_METADATA');
   }
 
   // Generate cryptographic key pair
