@@ -258,13 +258,14 @@ export class DomainEventFactory {
    */
   registration<T>(
     type: Extract<DomainEventType, `registration.${string}`>,
-    payload: T
+    payload: T,
+    correlationId?: string
   ): DomainEvent<T> {
     return {
       type,
       payload,
       timestamp: Date.now(),
-      correlationId: this.correlationId,
+      correlationId: correlationId ?? this.correlationId,
       source: 'registration',
       version: 1,
     };
@@ -273,12 +274,16 @@ export class DomainEventFactory {
   /**
    * Create a trading event
    */
-  trading<T>(type: Extract<DomainEventType, `trading.${string}`>, payload: T): DomainEvent<T> {
+  trading<T>(
+    type: Extract<DomainEventType, `trading.${string}`>,
+    payload: T,
+    correlationId?: string
+  ): DomainEvent<T> {
     return {
       type,
       payload,
       timestamp: Date.now(),
-      correlationId: this.correlationId,
+      correlationId: correlationId ?? this.correlationId,
       source: 'trading',
       version: 1,
     };
@@ -289,13 +294,14 @@ export class DomainEventFactory {
    */
   compliance<T>(
     type: Extract<DomainEventType, `compliance.${string}`>,
-    payload: T
+    payload: T,
+    correlationId?: string
   ): DomainEvent<T> {
     return {
       type,
       payload,
       timestamp: Date.now(),
-      correlationId: this.correlationId,
+      correlationId: correlationId ?? this.correlationId,
       source: 'compliance',
       version: 1,
     };

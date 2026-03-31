@@ -329,14 +329,18 @@ export class UnifiedComplianceService {
    */
   async checkAssetLotCompliance(assetLot: AssetLot): Promise<ComplianceRecord[]> {
     const correlationId = this.generateCorrelationId();
-    this.eventFactory.setCorrelationId(correlationId);
+    const startTime = Date.now();
 
     // Emit start event
     this.eventEmitter.emit(
-      this.eventFactory.compliance('compliance.check_started', {
-        entityId: assetLot.id,
-        entityType: 'asset_lot',
-      })
+      this.eventFactory.compliance(
+        'compliance.check_started',
+        {
+          entityId: assetLot.id,
+          entityType: 'asset_lot',
+        },
+        correlationId
+      )
     );
 
     const records: ComplianceRecord[] = [];
@@ -361,14 +365,18 @@ export class UnifiedComplianceService {
 
         // Emit violation event
         this.eventEmitter.emit(
-          this.eventFactory.compliance('compliance.violation_detected', {
-            recordId: record.id,
-            entityId: assetLot.id,
-            entityType: 'asset_lot',
-            severity: 'critical',
-            regulationCode: 'LICENSE-001',
-            description: record.finding.description,
-          })
+          this.eventFactory.compliance(
+            'compliance.violation_detected',
+            {
+              recordId: record.id,
+              entityId: assetLot.id,
+              entityType: 'asset_lot',
+              severity: 'critical',
+              regulationCode: 'LICENSE-001',
+              description: record.finding.description,
+            },
+            correlationId
+          )
         );
       }
 
@@ -391,87 +399,53 @@ export class UnifiedComplianceService {
 
         // Emit warning event
         this.eventEmitter.emit(
-          this.eventFactory.compliance('compliance.warning_issued', {
-            recordId: record.id,
-            entityId: assetLot.id,
-            entityType: 'asset_lot',
-            severity: 'medium',
-            regulationCode: 'ENV-001',
-            description: record.finding.description,
-          })
+          this.eventFactory.compliance(
+            'compliance.warning_issued',
+            {
+              recordId: record.id,
+              entityId: assetLot.id,
+              entityType: 'asset_lot',
+              severity: 'medium',
+              regulationCode: 'ENV-001',
+              description: record.finding.description,
+            },
+            correlationId
+          )
         );
       }
 
       // Check documentation compliance
-      if (!assetLot.cryptoProof || !assetLot.certificateId) {
-        records.push(
-          this.createComplianceRecord({
-            type: 'regulatory',
-            status: 'violation',
-            severity: 'high',
-            sourceApp: 'registration',
-            sourceEntityId: assetLot.id,
-            sourceEntityType: 'asset_lot',
-            regulationCode: 'DOC-001',
-            description: 'Missing cryptographic proof or certificate',
-            location: assetLot.discoveryLocation,
-            tags: ['documentation', 'certification'],
-          })
-        );
-      }
-
-      // Validate optional ZK proof (metadata.zkProof)
-      const zkProof = this.extractZkProof(assetLot.metadata);
-      if (zkProof) {
-        const isValid = await this.verifyZkProof(zkProof);
-        if (!isValid) {
-          const record = this.createComplianceRecord({
-            type: 'regulatory',
-            status: 'violation',
-            severity: 'high',
-            sourceApp: 'registration',
-            sourceEntityId: assetLot.id,
-            sourceEntityType: 'asset_lot',
-            regulationCode: 'ZKP-001',
-            description: 'Invalid zero-knowledge proof',
-            location: assetLot.discoveryLocation,
-            tags: ['zkp', 'proof', 'verification'],
-          });
-          records.push(record);
-          this.eventEmitter.emit(
-            this.eventFactory.compliance('compliance.zk_proof_invalid', {
-              recordId: record.id,
-              entityId: assetLot.id,
-              entityType: 'asset_lot',
-              proofType: zkProof.proofType,
-            })
-          );
-        } else {
-          this.eventEmitter.emit(
-            this.eventFactory.compliance('compliance.zk_proof_verified', {
-              entityId: assetLot.id,
-              entityType: 'asset_lot',
-              proofType: zkProof.proofType,
-            })
-          );
-        }
-      }
-
-      // Emit completion event
-      const violations = records.filter((r) => r.status === 'violation').length;
-      const warnings = records.filter((r) => r.status === 'warning').length;
-      this.eventEmitter.emit(
-        this.eventFactory.compliance('compliance.check_completed', {
-          entityId: assetLot.id,
-          entityType: 'asset_lot',
-          recordCount: records.length,
-          violations,
-          warnings,
-          compliant: violations === 0,
-        })
+      this.checkDocumentation(
+        {
+          id: assetLot.id,
+          cryptoProof: assetLot.cryptoProof,
+          certificateId: assetLot.certificateId,
+        },
+        {
+          sourceApp: 'registration',
+          sourceEntityType: 'asset_lot',
+          type: 'regulatory',
+          location: assetLot.discoveryLocation,
+        },
+        records,
+        correlationId
       );
 
-      return records;
+      // Validate optional ZK proof (metadata.zkProof)
+      await this.verifyZkProofIfPresent(
+        { id: assetLot.id, entityType: 'asset_lot', metadata: assetLot.metadata },
+        { sourceApp: 'registration', type: 'regulatory', location: assetLot.discoveryLocation },
+        records,
+        correlationId
+      );
+
+      return this.buildComplianceResult(
+        records,
+        assetLot.id,
+        'asset_lot',
+        startTime,
+        correlationId
+      );
     } catch (error) {
       throw new Error('Failed to check asset lot compliance', { cause: toErrorCause(error) });
     }
@@ -486,14 +460,18 @@ export class UnifiedComplianceService {
    */
   async checkTransactionCompliance(transaction: Transaction): Promise<ComplianceRecord[]> {
     const correlationId = this.generateCorrelationId();
-    this.eventFactory.setCorrelationId(correlationId);
+    const startTime = Date.now();
 
     // Emit start event
     this.eventEmitter.emit(
-      this.eventFactory.compliance('compliance.check_started', {
-        entityId: transaction.id,
-        entityType: 'transaction',
-      })
+      this.eventFactory.compliance(
+        'compliance.check_started',
+        {
+          entityId: transaction.id,
+          entityType: 'transaction',
+        },
+        correlationId
+      )
     );
 
     const records: ComplianceRecord[] = [];
@@ -519,14 +497,18 @@ export class UnifiedComplianceService {
         records.push(record);
 
         this.eventEmitter.emit(
-          this.eventFactory.compliance('compliance.violation_detected', {
-            recordId: record.id,
-            entityId: transaction.id,
-            entityType: 'transaction',
-            severity: 'critical',
-            regulationCode: 'TRADE-001',
-            description: record.finding.description,
-          })
+          this.eventFactory.compliance(
+            'compliance.violation_detected',
+            {
+              recordId: record.id,
+              entityId: transaction.id,
+              entityType: 'transaction',
+              severity: 'critical',
+              regulationCode: 'TRADE-001',
+              description: record.finding.description,
+            },
+            correlationId
+          )
         );
       }
 
@@ -551,57 +533,21 @@ export class UnifiedComplianceService {
         }
       }
 
-      const zkProof = this.extractZkProof(transaction.metadata);
-      if (zkProof) {
-        const isValid = await this.verifyZkProof(zkProof);
-        if (!isValid) {
-          const record = this.createComplianceRecord({
-            type: 'financial',
-            status: 'violation',
-            severity: 'high',
-            sourceApp: 'trading',
-            sourceEntityId: transaction.id,
-            sourceEntityType: 'transaction',
-            regulationCode: 'ZKP-001',
-            description: 'Invalid zero-knowledge proof',
-            location: transaction.location,
-            tags: ['zkp', 'proof', 'verification'],
-          });
-          records.push(record);
-          this.eventEmitter.emit(
-            this.eventFactory.compliance('compliance.zk_proof_invalid', {
-              recordId: record.id,
-              entityId: transaction.id,
-              entityType: 'transaction',
-              proofType: zkProof.proofType,
-            })
-          );
-        } else {
-          this.eventEmitter.emit(
-            this.eventFactory.compliance('compliance.zk_proof_verified', {
-              entityId: transaction.id,
-              entityType: 'transaction',
-              proofType: zkProof.proofType,
-            })
-          );
-        }
-      }
-
-      // Emit completion event
-      const violations = records.filter((r) => r.status === 'violation').length;
-      const warnings = records.filter((r) => r.status === 'warning').length;
-      this.eventEmitter.emit(
-        this.eventFactory.compliance('compliance.check_completed', {
-          entityId: transaction.id,
-          entityType: 'transaction',
-          recordCount: records.length,
-          violations,
-          warnings,
-          compliant: violations === 0,
-        })
+      // Validate optional ZK proof (metadata.zkProof)
+      await this.verifyZkProofIfPresent(
+        { id: transaction.id, entityType: 'transaction', metadata: transaction.metadata },
+        { sourceApp: 'trading', type: 'financial', location: transaction.location },
+        records,
+        correlationId
       );
 
-      return records;
+      return this.buildComplianceResult(
+        records,
+        transaction.id,
+        'transaction',
+        startTime,
+        correlationId
+      );
     } catch (error) {
       throw new Error('Failed to check transaction compliance', { cause: toErrorCause(error) });
     }
@@ -710,6 +656,117 @@ export class UnifiedComplianceService {
   // ==========================================================================
   // HELPER METHODS
   // ==========================================================================
+
+  private checkDocumentation(
+    data: { id: string; cryptoProof?: unknown; certificateId?: string },
+    ctx: {
+      sourceApp: string;
+      sourceEntityType: 'asset_lot' | 'transaction';
+      type: string;
+      location?: Location;
+    },
+    records: ComplianceRecord[],
+    _correlationId: string
+  ): void {
+    if (!data.cryptoProof || !data.certificateId) {
+      records.push(
+        this.createComplianceRecord({
+          type: ctx.type,
+          status: 'violation',
+          severity: 'high',
+          sourceApp: ctx.sourceApp,
+          sourceEntityId: data.id,
+          sourceEntityType: ctx.sourceEntityType,
+          regulationCode: 'DOC-001',
+          description: 'Missing cryptographic proof or certificate',
+          location: ctx.location,
+          tags: ['documentation', 'certification'],
+        })
+      );
+    }
+  }
+
+  private async verifyZkProofIfPresent(
+    data: {
+      id: string;
+      entityType: 'asset_lot' | 'transaction';
+      metadata?: Record<string, unknown>;
+    },
+    ctx: { sourceApp: string; type: string; location?: Location },
+    records: ComplianceRecord[],
+    correlationId: string
+  ): Promise<void> {
+    const zkProof = this.extractZkProof(data.metadata);
+    if (!zkProof) return;
+
+    const isValid = await this.verifyZkProof(zkProof);
+    if (!isValid) {
+      const record = this.createComplianceRecord({
+        type: ctx.type,
+        status: 'violation',
+        severity: 'high',
+        sourceApp: ctx.sourceApp,
+        sourceEntityId: data.id,
+        sourceEntityType: data.entityType,
+        regulationCode: 'ZKP-001',
+        description: 'Invalid zero-knowledge proof',
+        location: ctx.location,
+        tags: ['zkp', 'proof', 'verification'],
+      });
+      records.push(record);
+      this.eventEmitter.emit(
+        this.eventFactory.compliance(
+          'compliance.zk_proof_invalid',
+          {
+            recordId: record.id,
+            entityId: data.id,
+            entityType: data.entityType,
+            proofType: zkProof.proofType,
+          },
+          correlationId
+        )
+      );
+    } else {
+      this.eventEmitter.emit(
+        this.eventFactory.compliance(
+          'compliance.zk_proof_verified',
+          {
+            entityId: data.id,
+            entityType: data.entityType,
+            proofType: zkProof.proofType,
+          },
+          correlationId
+        )
+      );
+    }
+  }
+
+  private buildComplianceResult(
+    records: ComplianceRecord[],
+    entityId: string,
+    entityType: 'asset_lot' | 'transaction',
+    _startTime: number,
+    correlationId: string
+  ): ComplianceRecord[] {
+    const violations = records.filter((r) => r.status === 'violation').length;
+    const warnings = records.filter((r) => r.status === 'warning').length;
+    this.eventEmitter.emit(
+      this.eventFactory.compliance(
+        'compliance.check_completed',
+        {
+          entityId,
+          entityType,
+          recordCount: records.length,
+          violations,
+          warnings,
+          compliant: violations === 0,
+        },
+        correlationId
+      )
+    );
+
+    return records;
+  }
 
   protected extractZkProof(metadata?: Record<string, unknown>): ZKProof | null {
     if (!metadata) return null;

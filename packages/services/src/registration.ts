@@ -334,9 +334,7 @@ export class AssetLotRegistrationService {
    */
   async registerAssetLot(data: unknown): Promise<AssetLot> {
     const sessionId = this.generateSessionId();
-    this.eventFactory.setCorrelationId(sessionId);
 
-    // Emit start event
     const dataRecord =
       data != null && typeof data === 'object' ? (data as Record<string, unknown>) : {};
     const startPayload = {
@@ -346,137 +344,175 @@ export class AssetLotRegistrationService {
         typeof dataRecord['producerId'] === 'string' ? dataRecord['producerId'] : 'unknown',
       sessionId,
     };
-    this.eventEmitter.emit(this.eventFactory.registration('registration.started', startPayload));
+    this.eventEmitter.emit(
+      this.eventFactory.registration('registration.started', startPayload, sessionId)
+    );
 
     try {
-      // Validate with Zod schema
-      const schemaResult = safeParse(AssetRegistrationDataSchema, data);
-      if (!schemaResult.success) {
-        const messages = schemaResult.error.errors.map((issue) => issue.message);
-        const error = new ValidationError(`Validation failed: ${messages.join(', ')}`);
-        this.eventEmitter.emit(
-          this.eventFactory.registration('registration.failed', {
-            commodityType: startPayload.commodityType,
-            producerId: startPayload.producerId,
-            error: error.message,
-            validationErrors: messages,
-          })
-        );
-        throw error;
-      }
-
-      const validData = schemaResult.data;
-
-      // Business rule validation
-      const validation = this.validateRegistrationData(validData);
-      if (!validation.isValid) {
-        const error = new ValidationError(
-          `Business validation failed: ${validation.errors.join(', ')}`
-        );
-        this.eventEmitter.emit(
-          this.eventFactory.registration('registration.failed', {
-            commodityType: validData.commodityType,
-            producerId: validData.producerId,
-            error: error.message,
-            validationErrors: validation.errors,
-          })
-        );
-        throw error;
-      }
-
-      // Emit validated event
-      this.eventEmitter.emit(
-        this.eventFactory.registration('registration.validated', {
-          commodityType: validData.commodityType,
-          producerId: validData.producerId,
-          sessionId,
-        })
-      );
-
-      // Generate cryptographic proof
-      const proofBase = await this.generateCryptoProof(validData);
-
-      // Generate lot ID
+      const validData = await this.validateRegistration(data, startPayload, sessionId);
+      const proofBase = await this.buildCryptoProof(validData);
       const lotId = this.generateLotId(validData);
-
-      // Generate certificate
       const certificate = await this.generateCertificate(lotId, validData, proofBase);
       const cryptoProof: CryptographicProof = {
         hash: proofBase.hash,
         signature: proofBase.signature,
         certificate,
       };
+      const assetLot = this.buildAssetLot(lotId, validData, cryptoProof, certificate, sessionId);
 
-      // Build asset lot
-      const qualityGrade =
-        validData.quality === 'high'
-          ? 'A'
-          : validData.quality === 'medium'
-            ? 'B'
-            : validData.quality === 'low'
-              ? 'C'
-              : 'ungraded';
-
-      const assetLot: AssetLot = {
-        id: lotId,
-        commodityType: validData.commodityType,
-        producerId: validData.producerId,
-        discoveryLocation: {
-          latitude: validData.discoveryLocation.latitude,
-          longitude: validData.discoveryLocation.longitude,
-          altitude: validData.discoveryLocation.altitude,
-          accuracy: validData.discoveryLocation.accuracy,
-          timestamp: validData.discoveryLocation.timestamp,
-        },
-        discoveryDate: validData.discoveryDate || new Date().toISOString(),
-        weight: validData.estimatedWeight,
-        weightUnit: validData.weightUnit,
-        form: validData.form,
-        purity: validData.purity,
-        qualityGrade,
-        status: 'registered',
-        cryptoProof: cryptoProof.hash,
-        certificateId: certificate.id,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        metadata: {
-          photos: validData.photos,
-          assetDetails: validData.assetDetails || {},
-          registrationSessionId: sessionId,
-          cryptoProof,
-        },
-      };
-
-      // Store asset lot
       await this.storageService.saveAssetLot(assetLot);
       await this.storageService.saveCertificate(certificate);
 
-      // Emit completed event
       this.eventEmitter.emit(
-        this.eventFactory.registration('registration.completed', {
-          assetLotId: assetLot.id,
-          commodityType: assetLot.commodityType,
-          producerId: assetLot.producerId,
-          certificateId: certificate.id,
-          estimatedWeight: assetLot.weight,
-          weightUnit: assetLot.weightUnit,
-        })
+        this.eventFactory.registration(
+          'registration.completed',
+          {
+            assetLotId: assetLot.id,
+            commodityType: assetLot.commodityType,
+            producerId: assetLot.producerId,
+            certificateId: certificate.id,
+            estimatedWeight: assetLot.weight,
+            weightUnit: assetLot.weightUnit,
+          },
+          sessionId
+        )
       );
 
       return assetLot;
     } catch (error) {
-      // Ensure failure event is emitted for any error
       if (!(error instanceof ValidationError)) {
         this.eventEmitter.emit(
-          this.eventFactory.registration('registration.failed', {
-            commodityType: startPayload.commodityType,
-            producerId: startPayload.producerId,
-            error: error instanceof Error ? error.message : 'Unknown error',
-          })
+          this.eventFactory.registration(
+            'registration.failed',
+            {
+              commodityType: startPayload.commodityType,
+              producerId: startPayload.producerId,
+              error: error instanceof Error ? error.message : 'Unknown error',
+            },
+            sessionId
+          )
         );
       }
       throw error;
     }
+  }
+
+  // ==========================================================================
+  // REGISTRATION HELPERS
+  // ==========================================================================
+
+  private async validateRegistration(
+    data: unknown,
+    startPayload: { commodityType: string; producerId: string },
+    sessionId: string
+  ): Promise<ValidatedRegistrationData> {
+    const schemaResult = safeParse(AssetRegistrationDataSchema, data);
+    if (!schemaResult.success) {
+      const messages = schemaResult.error.errors.map((issue) => issue.message);
+      const error = new ValidationError(`Validation failed: ${messages.join(', ')}`);
+      this.eventEmitter.emit(
+        this.eventFactory.registration(
+          'registration.failed',
+          {
+            commodityType: startPayload.commodityType,
+            producerId: startPayload.producerId,
+            error: error.message,
+            validationErrors: messages,
+          },
+          sessionId
+        )
+      );
+      throw error;
+    }
+
+    const validData = schemaResult.data;
+
+    const validation = this.validateRegistrationData(validData);
+    if (!validation.isValid) {
+      const error = new ValidationError(
+        `Business validation failed: ${validation.errors.join(', ')}`
+      );
+      this.eventEmitter.emit(
+        this.eventFactory.registration(
+          'registration.failed',
+          {
+            commodityType: validData.commodityType,
+            producerId: validData.producerId,
+            error: error.message,
+            validationErrors: validation.errors,
+          },
+          sessionId
+        )
+      );
+      throw error;
+    }
+
+    this.eventEmitter.emit(
+      this.eventFactory.registration(
+        'registration.validated',
+        {
+          commodityType: validData.commodityType,
+          producerId: validData.producerId,
+          sessionId,
+        },
+        sessionId
+      )
+    );
+
+    return validData;
+  }
+
+  private async buildCryptoProof(
+    data: ValidatedRegistrationData
+  ): Promise<{ hash: string; signature: string }> {
+    return this.generateCryptoProof(data);
+  }
+
+  private buildAssetLot(
+    lotId: string,
+    validData: ValidatedRegistrationData,
+    cryptoProof: CryptographicProof,
+    certificate: AssetCertificate,
+    sessionId: string
+  ): AssetLot {
+    const qualityGrade =
+      validData.quality === 'high'
+        ? 'A'
+        : validData.quality === 'medium'
+          ? 'B'
+          : validData.quality === 'low'
+            ? 'C'
+            : 'ungraded';
+
+    return {
+      id: lotId,
+      commodityType: validData.commodityType,
+      producerId: validData.producerId,
+      discoveryLocation: {
+        latitude: validData.discoveryLocation.latitude,
+        longitude: validData.discoveryLocation.longitude,
+        altitude: validData.discoveryLocation.altitude,
+        accuracy: validData.discoveryLocation.accuracy,
+        timestamp: validData.discoveryLocation.timestamp,
+      },
+      discoveryDate: validData.discoveryDate || new Date().toISOString(),
+      weight: validData.estimatedWeight,
+      weightUnit: validData.weightUnit,
+      form: validData.form,
+      purity: validData.purity,
+      qualityGrade,
+      status: 'registered',
+      cryptoProof: cryptoProof.hash,
+      certificateId: certificate.id,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      metadata: {
+        photos: validData.photos,
+        assetDetails: validData.assetDetails || {},
+        registrationSessionId: sessionId,
+        cryptoProof,
+      },
+    };
   }
 
   // ==========================================================================
