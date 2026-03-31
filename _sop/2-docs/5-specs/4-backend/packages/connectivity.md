@@ -6,7 +6,7 @@
 
 ## Purpose
 
-Network connectivity detection and profile classification for field environments. Detects online/offline state, classifies the quality of available connectivity (GPRS, broadband, metered), and emits state-change events. Used by `@gtcx/sync` to determine when and how aggressively to sync, and by offline-capable services to switch between local and remote operation.
+Network connectivity detection and profile classification for field environments. Detects online/offline state, classifies the quality of available connectivity into one of six profiles (`offline`, `ussd-only`, `edge`, `degraded`, `standard`, `satellite`), and emits state-change events. Used by `@gtcx/sync` to determine when and how aggressively to sync, and by offline-capable services to switch between local and remote operation.
 
 ---
 
@@ -14,33 +14,61 @@ Network connectivity detection and profile classification for field environments
 
 ### Connectivity Detector
 
-| Export                        | Description                                                         |
-| ----------------------------- | ------------------------------------------------------------------- | ------- | --------- |
-| `ConnectivityDetector`        | Class: polls connectivity and emits state changes                   |
-| `ConnectivityDetectorOptions` | Type: polling interval, check function, listener registration       |
-| `ConnectivityCheckFn`         | Type: `() => Promise<ConnectivityCheckResult>` — pluggable check    |
-| `ConnectivityCheckResult`     | Type: `{ online: boolean; latencyMs?: number; bandwidth?: number }` |
-| `ConnectivityListener`        | Type: callback invoked on state change                              |
-| `ConnectivityState`           | Type: `online                                                       | offline | degraded` |
+| Export                        | Description                                                                                                                     |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `ConnectivityDetector`        | Class: polls connectivity and emits state changes                                                                               |
+| `ConnectivityDetectorOptions` | Interface: `checkIntervalMs`, `checkUrl`, `offlineThresholdMs`, `checkFn`                                                       |
+| `ConnectivityCheckFn`         | Type: `() => Promise<ConnectivityCheckResult>` — pluggable check                                                                |
+| `ConnectivityCheckResult`     | Interface: `{ online: boolean; latencyMs?: number; bandwidthKbps?: number }`                                                    |
+| `ConnectivityListener`        | Type: `(state: ConnectivityState) => void` — callback invoked on state change                                                   |
+| `ConnectivityState`           | Interface: `{ online: boolean; profile: ConnectivityProfile; lastChecked: number; latencyMs?: number; bandwidthKbps?: number }` |
 
 ### Profile Classification
 
-| Export                         | Description                                         |
-| ------------------------------ | --------------------------------------------------- | ---- | --------- | ------- | -------- |
-| `classifyProfile(checkResult)` | Classify a check result into a connectivity profile |
-| `ConnectivityProfile`          | Type: `gprs                                         | edge | broadband | metered | offline` |
+| Export                                      | Description                                                                           |
+| ------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `classifyProfile(bandwidthKbps, latencyMs)` | Classify bandwidth (Kbps) and latency (ms) into a connectivity profile                |
+| `ConnectivityProfile`                       | Type: `'offline' \| 'ussd-only' \| 'edge' \| 'degraded' \| 'standard' \| 'satellite'` |
+
+---
+
+## ConnectivityDetector Methods
+
+| Method                                     | Description                                                         |
+| ------------------------------------------ | ------------------------------------------------------------------- |
+| `getState(): ConnectivityState`            | Return a copy of the current connectivity state                     |
+| `onStateChange(listener): () => void`      | Subscribe to state changes; returns an unsubscribe function         |
+| `start(): void`                            | Begin periodic connectivity checks                                  |
+| `stop(): void`                             | Stop periodic connectivity checks                                   |
+| `forceCheck(): Promise<ConnectivityState>` | Trigger an immediate connectivity check                             |
+| `setOnline(online: boolean): void`         | Manually set online/offline state (useful for testing)              |
+| `destroy(): void`                          | Clean up timers and listeners; detector cannot be reused after this |
 
 ---
 
 ## Connectivity Profiles
 
-| Profile     | Criteria                                                      |
-| ----------- | ------------------------------------------------------------- |
-| `gprs`      | Online, latency > 500ms or bandwidth < 256kbps                |
-| `edge`      | Online, latency 200–500ms or bandwidth 256–1024kbps           |
-| `broadband` | Online, latency < 200ms and bandwidth > 1Mbps                 |
-| `metered`   | Online but flagged as metered connection (conserve bandwidth) |
-| `offline`   | Not online                                                    |
+| Profile     | Criteria                                                               |
+| ----------- | ---------------------------------------------------------------------- |
+| `offline`   | Bandwidth <= 0 Kbps                                                    |
+| `ussd-only` | Bandwidth < 1 Kbps                                                     |
+| `satellite` | Bandwidth < 512 Kbps and latency > 500ms                               |
+| `edge`      | Bandwidth < 200 Kbps (not satellite)                                   |
+| `standard`  | Bandwidth > 5 Mbps and latency < 200ms                                 |
+| `degraded`  | Everything else (moderate bandwidth, or high bandwidth + high latency) |
+
+Classification order matters: `offline` -> `ussd-only` -> `satellite` -> `edge` -> `standard` -> `degraded` (fallthrough).
+
+---
+
+## ConnectivityDetectorOptions
+
+| Field                | Type                   | Default            | Description                                       |
+| -------------------- | ---------------------- | ------------------ | ------------------------------------------------- |
+| `checkIntervalMs`    | `number?`              | `30000`            | Polling interval in milliseconds                  |
+| `checkUrl`           | `string?`              | —                  | URL to ping for connectivity check                |
+| `offlineThresholdMs` | `number?`              | `60000`            | After this long without success, consider offline |
+| `checkFn`            | `ConnectivityCheckFn?` | always-online stub | Pluggable check function                          |
 
 ---
 

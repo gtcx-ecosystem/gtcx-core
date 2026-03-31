@@ -25,6 +25,14 @@ const queue = new OfflineQueue(new InMemoryQueueStorage());
 await queue.enqueue('registration', { lotId: 'lot-001' });
 ```
 
+## When to use `@gtcx/domain` vs `@gtcx/types`
+
+- **`@gtcx/domain`** — Business-domain types and runtime services for application layers. Import from here when building registration, trading, or compliance workflows. Provides: `AssetLot`, `Transaction`, `Trader`, `ComplianceRecord`, Zod schemas, event system, metrics, offline queue, and AI integration hooks.
+
+- **`@gtcx/types`** — Protocol-level types with zero runtime code. Import from there when working directly with the six verification protocols (`TradePass`, `GeoTag`, `GCI`, `VaultMark`, `PvP`) or identity primitives.
+
+Both can be used together. Protocol types flow into domain types at the service boundary.
+
 ## Sub-exports
 
 | Path                          | Description               |

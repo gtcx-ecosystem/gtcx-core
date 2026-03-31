@@ -12,42 +12,58 @@ Offline-first data synchronization engine for the GTCX protocol. Manages bi-dire
 
 ## Public API
 
-### Sync Engine
+### Sync Engine Factory
 
-| Export             | Description                                                              |
-| ------------------ | ------------------------------------------------------------------------ |
-| `ISyncEngine`      | Interface: sync engine contract (dependency-injection friendly)          |
-| `SyncEngineConfig` | Type: engine configuration — batch size, retry policy, conflict strategy |
-| `SyncItem<T>`      | Type: a syncable data item with version and timestamps                   |
-| `SyncResult`       | Type: outcome of a sync run                                              |
-| `SyncStatus`       | Type: current engine status (idle/syncing/error)                         |
-| `SyncMetrics`      | Type: counters — items synced, conflicts, retries, failures              |
-| `SyncConflict<T>`  | Type: a detected conflict with local and remote versions                 |
-| `SyncAuditEvent`   | Type: structured audit event emitted per sync operation                  |
-| `SyncOptions`      | Type: per-run options — strategy, filters, dry-run                       |
+| Export                         | Description                                                                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `createSyncEngine<T>(config?)` | Factory: creates an `ISyncEngine` with injected data access hooks                                                                       |
+| `ISyncEngine`                  | Interface: `{ sync(items, options), getStatus(), cancel() }`                                                                            |
+| `SyncEngineConfig<T>`          | Interface: engine configuration — data access hooks and event callbacks                                                                 |
+| `SyncItem<T>`                  | Interface: a syncable data item with `id`, `data`, `version`, `updatedAt`, `syncedAt?`                                                  |
+| `SyncResult`                   | Interface: outcome of a sync run — `uploaded`, `downloaded`, `conflicts`, `resolved`, `errors`, `durationMs`                            |
+| `SyncStatus`                   | Type: `'idle' \| 'syncing' \| 'error' \| 'cancelled'`                                                                                   |
+| `SyncMetrics`                  | Interface: detailed counters emitted via `onMetrics` callback                                                                           |
+| `SyncConflict<T>`              | Interface: `{ id, local: SyncItem<T>[], remote?: SyncItem<T> }`                                                                         |
+| `SyncAuditEvent<T>`            | Interface: structured audit event with `type`, `timestamp`, `strategy`, and optional fields                                             |
+| `SyncAuditEventType`           | Type: `'sync.start' \| 'sync.conflict' \| 'sync.resolved' \| 'sync.unresolved' \| 'sync.complete' \| 'sync.failed' \| 'sync.cancelled'` |
+| `SyncOptions`                  | Interface: per-run options — `strategy`, `batchSize?`, `retryAttempts?`, `retryDelayMs?`                                                |
+| `ConflictStrategy`             | Type: the five conflict resolution strategies (see below)                                                                               |
+
+### SyncEngineConfig<T> Hooks
+
+| Hook              | Type                                                          | Description                                                  |
+| ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------ |
+| `fetchRemote`     | `(ids: string[]) => Promise<SyncItem<T>[]>`                   | Fetch remote items by ID                                     |
+| `pushLocal`       | `(items: SyncItem<T>[]) => Promise<void>`                     | Push resolved items to the remote                            |
+| `onResolved`      | `(items: SyncItem<T>[]) => Promise<void> \| void`             | Called with items that should be saved locally (remote wins) |
+| `onConflict`      | `(conflict: SyncConflict<T>) => Promise<void> \| void`        | Notification when a conflict is detected                     |
+| `resolveConflict` | `(conflict: SyncConflict<T>) => Promise<SyncItem<T> \| null>` | Custom conflict resolver for unresolved conflicts            |
+| `onAudit`         | `(event: SyncAuditEvent<T>) => Promise<void> \| void`         | Audit event callback                                         |
+| `onMetrics`       | `(metrics: SyncMetrics) => Promise<void> \| void`             | Metrics callback emitted after each sync run                 |
 
 ### Conflict Strategies
 
-| Strategy          | Behavior                                            |
-| ----------------- | --------------------------------------------------- |
-| `last-write-wins` | The item with the most recent timestamp wins        |
-| `server-wins`     | Remote version always takes precedence              |
-| `client-wins`     | Local version always takes precedence               |
-| `manual`          | Conflicts are surfaced to the caller for resolution |
+| Strategy          | Behavior                                                                                             |
+| ----------------- | ---------------------------------------------------------------------------------------------------- |
+| `last-write-wins` | The item with the most recent `updatedAt` wins (ties broken by `version`)                            |
+| `server-wins`     | Remote version always takes precedence                                                               |
+| `highest-version` | The item with the highest `version` wins (ties broken by `updatedAt`)                                |
+| `append-only`     | Newest item wins; nothing is deleted                                                                 |
+| `chain-validated` | Prefer the highest-version item that has `data.previousHash`; unresolved if none have chain metadata |
 
 ### Configuration Defaults
 
-| Parameter       | Default                          |
-| --------------- | -------------------------------- |
-| `batchSize`     | 50 items per sync batch          |
-| `retryAttempts` | 3                                |
-| `retryDelayMs`  | 1,000ms with exponential backoff |
+| Parameter       | Default                     |
+| --------------- | --------------------------- |
+| `batchSize`     | 50 items per sync batch     |
+| `retryAttempts` | 3                           |
+| `retryDelayMs`  | 1,000ms with linear backoff |
 
 ---
 
 ## Dependencies
 
-No direct `@gtcx/*` package dependencies (pure sync protocol logic). Consumers inject the data access and network adapters.
+No direct `@gtcx/*` package dependencies (pure sync protocol logic). Consumers inject the data access and network adapters via `SyncEngineConfig`.
 
 ---
 
@@ -55,7 +71,7 @@ No direct `@gtcx/*` package dependencies (pure sync protocol logic). Consumers i
 
 The sync engine is designed for:
 
-- GPRS field agent connectivity (100–200kbps, high latency, frequent drops)
+- GPRS field agent connectivity (100-200kbps, high latency, frequent drops)
 - Validator nodes (high throughput, stable connectivity)
 - Government registry endpoints (batch sync, compliance audit trail required)
 

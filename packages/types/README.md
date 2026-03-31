@@ -31,6 +31,18 @@ import type { Identity, TradePass, GeoTag, User, Lot } from '@gtcx/types';
 
 > **Note:** Types-only package — no runtime dependencies.
 
+## When to use `@gtcx/types` vs `@gtcx/domain`
+
+These packages serve different layers of the stack:
+
+- **`@gtcx/types`** — Protocol-level types. Use when building protocol implementations (3-protocols) or platform integrations that work directly with the six verification protocols. Defines: `TradePass`, `GeoTag`, `GCI`, `VaultMark`, `PvP`, `Identity`, `Lot`, `User`, `Permit`, `Site`.
+
+- **`@gtcx/domain`** — Business-domain types and runtime services. Use when building application services (6-platforms, 7-mobile) that handle asset registration, trading, and compliance workflows. Defines: `AssetLot`, `Transaction`, `Trader`, `ComplianceRecord`, plus events, schemas, metrics, and offline infrastructure.
+
+`@gtcx/types` has zero runtime code and zero internal dependencies. `@gtcx/domain` depends on `@gtcx/utils` and peers on `@gtcx/types` and `@gtcx/crypto`.
+
+If you need both, import protocol types from `@gtcx/types` and business logic types from `@gtcx/domain`.
+
 ## Related
 
 - [Architecture Decision Records](../../_sop/2-docs/3-engineering/6-decisions/README.md)

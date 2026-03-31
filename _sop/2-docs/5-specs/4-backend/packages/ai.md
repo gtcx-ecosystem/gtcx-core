@@ -6,7 +6,7 @@
 
 ## Purpose
 
-AI-native observability infrastructure for the GTCX protocol. Provides traced operation wrappers and structured operation logging that enable AI systems in `gtcx-intelligence` to analyze, monitor, and reason about cryptographic and protocol operations at runtime. This package is a stub in `gtcx-core` — the full implementation lives in `gtcx-intelligence`.
+AI-native observability infrastructure for the GTCX protocol. Provides traced operation wrappers, a higher-order tracing decorator, and category-scoped structured logging that enable AI systems in `gtcx-intelligence` to analyze, monitor, and reason about cryptographic and protocol operations at runtime. This package is a stub in `gtcx-core` — the full implementation lives in `gtcx-intelligence`.
 
 All `traced*` exports across `@gtcx/crypto`, `@gtcx/verification`, and other packages depend on this package's `traced()` wrapper and `OperationLog` type.
 
@@ -34,18 +34,43 @@ interface OperationLog<TInput = any, TOutput = any> {
 
 ### Traced Wrapper
 
-| Export                 | Description                                                                 |
-| ---------------------- | --------------------------------------------------------------------------- |
-| `traced(fn, options?)` | Wrap a function with tracing — emits an `OperationLog` on each call         |
-| `TracedOptions`        | Type: tracing configuration — category, input/output sanitization, metadata |
+| Export                                | Description                                                                             |
+| ------------------------------------- | --------------------------------------------------------------------------------------- |
+| `traced(fn, operationName, options?)` | Wrap a function with tracing — emits an `OperationLog` on each call                     |
+| `TracedOptions`                       | Interface: tracing configuration — category, input/output logging, sanitizers, metadata |
 
-The stub implementation is a no-op — it returns the wrapped function as-is without adding overhead. The full implementation in `gtcx-intelligence` replaces this with active logging to the AI observability pipeline.
+`traced()` requires an `operationName: string` as the second argument. The stub implementation returns the wrapped function as-is without adding overhead. The full implementation in `gtcx-intelligence` replaces this with active logging to the AI observability pipeline.
 
-### Category Logging
+### Higher-Order Trace Decorator
 
-| Export              | Description                           |
-| ------------------- | ------------------------------------- |
-| `logOperation(log)` | Emit a structured operation log entry |
+| Export                                    | Description                                                      |
+| ----------------------------------------- | ---------------------------------------------------------------- |
+| `withTrace(fn, operationName?, options?)` | Higher-order tracing — supports two calling patterns (see below) |
+
+Calling patterns:
+
+1. `withTrace(fn, name, options)` — wraps `fn` with tracing (like `traced` but immediately invokes)
+2. `withTrace(fn)` — executes `fn()` and returns the result directly
+
+The stub implementation calls `fn()` and returns the result.
+
+### Category Logger
+
+| Export                           | Description                                                                      |
+| -------------------------------- | -------------------------------------------------------------------------------- |
+| `createCategoryLogger(category)` | Factory: creates a category-scoped logger that outputs structured JSON to stderr |
+| `CategoryLogger`                 | Interface: `{ info, warn, error, debug }` — structured logging methods           |
+
+```typescript
+interface CategoryLogger {
+  info(message: string, data?: Record<string, unknown>): void;
+  warn(message: string, ...args: any[]): void;
+  error(message: string, ...args: any[]): void;
+  debug(message: string, data?: Record<string, unknown>): void;
+}
+```
+
+`createCategoryLogger` outputs JSON to stderr with the shape `{ level, category, msg, ts, ...data }`.
 
 ---
 
@@ -70,11 +95,11 @@ No npm dependencies. This package is intentionally dependency-free to avoid circ
 
 ## Stub vs. Full Implementation
 
-| Aspect              | Stub (this package)          | Full (gtcx-intelligence)            |
-| ------------------- | ---------------------------- | ----------------------------------- |
-| `traced()` behavior | Returns wrapped fn unchanged | Wraps fn with log emission          |
-| `logOperation()`    | No-op                        | Writes to AI observability pipeline |
-| Output              | None                         | Structured JSON to ANISA            |
+| Aspect                   | Stub (this package)          | Full (gtcx-intelligence)            |
+| ------------------------ | ---------------------------- | ----------------------------------- |
+| `traced()` behavior      | Returns wrapped fn unchanged | Wraps fn with log emission          |
+| `withTrace()` behavior   | Calls fn() directly          | Calls fn() with tracing             |
+| `createCategoryLogger()` | Writes JSON to stderr        | Writes to AI observability pipeline |
 
 Downstream consumers do not need to change when the full implementation is injected — the interface is identical.
 
@@ -83,7 +108,7 @@ Downstream consumers do not need to change when the full implementation is injec
 ## Non-Goals
 
 - Does not implement ML or AI inference
-- Does not ship logs to external services — the stub emits nothing
+- Does not ship logs to external services — the stub emits to stderr only
 - Does not manage AI model configuration
 
 ---
