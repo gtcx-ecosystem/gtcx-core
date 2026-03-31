@@ -1,5 +1,32 @@
+import { z } from 'zod';
+
 import { isValidDID } from './did';
 import type { DIDDocument } from './did';
+
+/**
+ * Zod schema for validating DID documents received from external resolvers.
+ * Covers required W3C DID Core fields without being overly strict on extensions.
+ */
+const DIDDocumentSchema = z.object({
+  '@context': z.array(z.string()).min(1),
+  id: z.string().min(1),
+  controller: z.string().optional(),
+  verificationMethod: z
+    .array(
+      z.object({
+        id: z.string(),
+        type: z.string(),
+        controller: z.string(),
+        publicKeyMultibase: z.string().optional(),
+        publicKeyHex: z.string().optional(),
+      })
+    )
+    .min(1),
+  authentication: z.array(z.string()).min(1),
+  assertionMethod: z.array(z.string()).optional(),
+  created: z.string().optional(),
+  updated: z.string().optional(),
+});
 
 export type DIDRevocationStatus = 'active' | 'revoked' | 'unknown';
 
@@ -209,11 +236,14 @@ export function createHttpDIDResolverAdapter(config: HttpDIDResolverConfig): DID
       }
 
       const rawDoc = await response.json();
-      if (!rawDoc || typeof rawDoc !== 'object' || !('id' in rawDoc)) {
-        throw new DIDResolverError('Invalid DID document structure', 'RESOLUTION_FAILED');
+      const parsed = DIDDocumentSchema.safeParse(rawDoc);
+      if (!parsed.success) {
+        throw new DIDResolverError(
+          `Invalid DID document structure: ${parsed.error.errors.map((e: { message: string }) => e.message).join(', ')}`,
+          'RESOLUTION_FAILED'
+        );
       }
-      const document = rawDoc as DIDDocument;
-      return document;
+      return parsed.data as DIDDocument;
     },
   };
 }

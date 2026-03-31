@@ -228,9 +228,13 @@ export function assembleToken(payload: string, signature: string | Uint8Array): 
 /**
  * Verify a token's cryptographic signature and temporal validity.
  *
- * @param token - The full JWT string (header.claims.signature)
+ * GTCX tokens use hex-encoded Ed25519 signatures in the third JWT segment,
+ * NOT the standard base64url encoding. This means GTCX tokens are NOT
+ * interoperable with standard JWT libraries (e.g., `jsonwebtoken`, `jose`).
+ * Use `assembleToken()` to create tokens and this function to verify them.
+ *
+ * @param token - The full JWT string (header.claims.signature) where signature is hex-encoded
  * @param publicKeyHex - Hex-encoded Ed25519 public key of the issuer
- * @param clockSkewSeconds - Allowed clock skew in seconds (default 60)
  */
 export function verifyTokenSignature(
   token: string,

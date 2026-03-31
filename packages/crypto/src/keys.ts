@@ -11,6 +11,15 @@ import { getNativeCrypto } from './native-loader';
 
 export type KeyAlgorithm = 'Ed25519' | 'Secp256k1';
 
+/**
+ * Result of key pair generation.
+ *
+ * WARNING: `privateKey` is a hex-encoded string. JavaScript strings are immutable
+ * and cannot be securely wiped from memory. Callers MUST:
+ * 1. Never pass `KeyPairResult` to `JSON.stringify()` or logging functions
+ * 2. Transfer the private key to secure storage immediately
+ * 3. Use `@gtcx/identity` which wraps private keys as non-enumerable properties
+ */
 export interface KeyPairResult {
   publicKey: string;
   privateKey: string;

@@ -128,6 +128,7 @@ export const BoundingBoxSchema = z
  */
 export const HexStringSchema = z
   .string()
+  .max(10000)
   .regex(/^[a-fA-F0-9]+$/, 'Must be valid hexadecimal string');
 
 /**

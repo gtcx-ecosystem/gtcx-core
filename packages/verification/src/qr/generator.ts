@@ -19,6 +19,7 @@ import type {
   MeasurementUnit,
   OperatorRole,
 } from '../types';
+import { QRCodeDataSchema } from '../types/schemas';
 
 /**
  * Configuration for QR code generation
@@ -256,7 +257,9 @@ export function serializeQRData(data: QRCodeData): string {
 export function parseQRData(dataString: string): QRCodeData | null {
   try {
     if (dataString.length > 50_000) return null; // 50KB max for QR data
-    return JSON.parse(dataString) as QRCodeData;
+    const parsed: unknown = JSON.parse(dataString);
+    const result = QRCodeDataSchema.safeParse(parsed);
+    return result.success ? (result.data as QRCodeData) : null;
   } catch {
     return null;
   }

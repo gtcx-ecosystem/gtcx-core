@@ -569,4 +569,104 @@ describe('verifyTokenSignature', () => {
     expect(result.valid).toBe(false);
     expect(result.error).toBe('Invalid token format');
   });
+
+  it('rejects token with mismatched issuer', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({ iss: 'other-issuer', sub: 'user-1', exp: 0, iat: 0 });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey, {
+      expectedIssuer: 'gtcx',
+    });
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Issuer mismatch');
+    expect(result.claims?.iss).toBe('other-issuer');
+  });
+
+  it('accepts token with matching issuer', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({ iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey, {
+      expectedIssuer: 'gtcx',
+    });
+    expect(result.valid).toBe(true);
+  });
+
+  it('rejects token with mismatched audience (string)', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({
+      iss: 'gtcx',
+      sub: 'user-1',
+      aud: 'wrong-audience',
+      exp: 0,
+      iat: 0,
+    });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey, {
+      expectedAudience: 'my-service',
+    });
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Audience mismatch');
+  });
+
+  it('accepts token with matching audience (string)', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({
+      iss: 'gtcx',
+      sub: 'user-1',
+      aud: 'my-service',
+      exp: 0,
+      iat: 0,
+    });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey, {
+      expectedAudience: 'my-service',
+    });
+    expect(result.valid).toBe(true);
+  });
+
+  it('accepts token with matching audience (array)', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({
+      iss: 'gtcx',
+      sub: 'user-1',
+      aud: ['service-a', 'service-b'],
+      exp: 0,
+      iat: 0,
+    });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey, {
+      expectedAudience: 'service-b',
+    });
+    expect(result.valid).toBe(true);
+  });
+
+  it('rejects token with audience array not containing expected', async () => {
+    const keyPair = await generateKeyPair('Ed25519');
+    const payload = createTokenPayload({
+      iss: 'gtcx',
+      sub: 'user-1',
+      aud: ['service-a', 'service-b'],
+      exp: 0,
+      iat: 0,
+    });
+    const signature = sign(payload, keyPair.privateKey);
+    const token = assembleToken(payload, signature);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey, {
+      expectedAudience: 'service-c',
+    });
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Audience mismatch');
+  });
 });

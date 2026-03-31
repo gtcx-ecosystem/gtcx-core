@@ -12,8 +12,13 @@ import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 import { getNativeCrypto } from './native-loader';
 
 /**
- * Constant-time string comparison to prevent timing attacks.
+ * Constant-time comparison for fixed-length strings (e.g. hex-encoded hashes).
  * Both strings are converted to Buffers and compared using crypto.timingSafeEqual.
+ *
+ * NOTE: Early-returns `false` when lengths differ, which leaks length information.
+ * This is acceptable for comparing hex-encoded hashes (always same length) but
+ * must NOT be used for variable-length secrets. For variable-length constant-time
+ * comparison, use `secureCompare` from `@gtcx/security/offline/tamper-detection`.
  */
 export function constantTimeEqual(a: string, b: string): boolean {
   const bufA = Buffer.from(a, 'utf8');

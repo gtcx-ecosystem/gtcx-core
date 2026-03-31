@@ -140,8 +140,8 @@ export class SecureStorage {
         this.failedAttempts = state.failedAttempts ?? 0;
       }
     } catch {
-      // If lockout state is corrupted, start fresh
-      this.failedAttempts = 0;
+      // If lockout state is corrupted, fail closed — assume max attempts exhausted
+      this.failedAttempts = this.config.maxFailedAttempts;
     }
     this.lockoutStateLoaded = true;
   }

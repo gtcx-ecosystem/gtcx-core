@@ -313,13 +313,13 @@ describe('SecureStorage', () => {
       expect(result.attemptsRemaining).toBe(1);
     });
 
-    it('should handle corrupted lockout state', async () => {
+    it('should fail closed on corrupted lockout state', async () => {
       // Write corrupt lockout state
       await backend.setItem('__lockout_state', 'not-json');
 
-      // Should not throw, should start fresh
+      // Should fail closed — assume max attempts exhausted
       const result = await storage.unlock('my-secret');
-      expect(result.success).toBe(true);
+      expect(result.success).toBe(false);
     });
   });
 

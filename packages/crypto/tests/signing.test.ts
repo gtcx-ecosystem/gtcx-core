@@ -254,3 +254,28 @@ describe('sign with invalid private key', () => {
     expect(() => sign('test', 'not-valid-hex')).toThrow();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Secp256k1 signing — ensures Ed25519-only sign/verify works with Secp256k1
+// keys at the key-generation level (sign/verify are Ed25519-only by design)
+// ---------------------------------------------------------------------------
+
+describe('Secp256k1 key generation interop', () => {
+  it('generates valid Secp256k1 key pairs', () => {
+    const kp = generateKeyPair('Secp256k1');
+    expect(kp.algorithm).toBe('Secp256k1');
+    expect(kp.publicKey).toMatch(/^[a-f0-9]+$/);
+    expect(kp.privateKey).toMatch(/^[a-f0-9]+$/);
+    // Secp256k1 compressed public key = 33 bytes = 66 hex chars
+    expect(kp.publicKey.length).toBe(66);
+    // Private key = 32 bytes = 64 hex chars
+    expect(kp.privateKey.length).toBe(64);
+  });
+
+  it('generates unique Secp256k1 key pairs', () => {
+    const kp1 = generateKeyPair('Secp256k1');
+    const kp2 = generateKeyPair('Secp256k1');
+    expect(kp1.privateKey).not.toBe(kp2.privateKey);
+    expect(kp1.publicKey).not.toBe(kp2.publicKey);
+  });
+});
