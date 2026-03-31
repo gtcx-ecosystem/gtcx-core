@@ -33,6 +33,9 @@ packages:
   - 'packages/utils'
   - 'packages/logging'
 
+  # Configuration schemas
+  - 'packages/config/jurisdiction'
+
   # Build configuration
   - 'packages/config/eslint'
   - 'packages/config/typescript'

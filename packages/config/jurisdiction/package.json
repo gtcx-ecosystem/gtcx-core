@@ -1,0 +1,56 @@
+{
+  "name": "@gtcx/jurisdiction-config",
+  "version": "1.0.0",
+  "description": "Jurisdiction configuration schema for multi-sovereign deployment",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@gtcx/tsup-config": "workspace:*",
+    "@gtcx/typescript-config": "workspace:*",
+    "tsup": "^8.0.1",
+    "typescript": "^5.7.0",
+    "vitest": "^3.2.0",
+    "@vitest/coverage-v8": "^3.2.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
+    "directory": "packages/config/jurisdiction"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/config/jurisdiction#readme",
+  "bugs": {
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false
+}
