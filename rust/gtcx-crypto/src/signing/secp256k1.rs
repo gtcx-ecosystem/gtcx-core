@@ -70,6 +70,10 @@ impl PrivateKey {
     }
 
     /// Create a private key from raw bytes.
+    ///
+    /// # Errors
+    ///
+    /// Returns `CryptoError::InvalidKeyLength` if `bytes` is not exactly 32 bytes.
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         if bytes.len() != 32 {
             return Err(CryptoError::InvalidKeyLength {
@@ -83,10 +87,14 @@ impl PrivateKey {
     }
 
     /// Derive the corresponding public key (compressed).
+    ///
+    /// # Panics
+    ///
+    /// Panics if the private key bytes do not form a valid secp256k1 scalar.
     pub fn public_key(&self) -> PublicKey {
         let signing_key = signing_key_from_bytes(self.as_bytes())
             .expect("valid private key should produce signing key");
-        PublicKey::from_verifying_key(&signing_key.verifying_key())
+        PublicKey::from_verifying_key(signing_key.verifying_key())
     }
 
     /// Get the raw bytes of the private key.
@@ -107,6 +115,10 @@ impl std::fmt::Debug for PrivateKey {
 
 impl PublicKey {
     /// Create a public key from raw bytes (33-byte compressed or 65-byte uncompressed).
+    ///
+    /// # Errors
+    ///
+    /// Returns `CryptoError::InvalidPublicKey` if bytes are not a valid encoded point.
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         let point = EncodedPoint::from_bytes(bytes).map_err(|_| CryptoError::InvalidPublicKey)?;
         let verifying_key = VerifyingKey::from_encoded_point(&point)
@@ -133,7 +145,7 @@ impl PublicKey {
     }
 
     fn verifying_key(&self) -> Result<VerifyingKey> {
-        let point = EncodedPoint::from_bytes(&self.0).map_err(|_| CryptoError::InvalidPublicKey)?;
+        let point = EncodedPoint::from_bytes(self.0).map_err(|_| CryptoError::InvalidPublicKey)?;
         VerifyingKey::from_encoded_point(&point).map_err(|_| CryptoError::InvalidPublicKey)
     }
 }
@@ -144,6 +156,10 @@ impl PublicKey {
 
 impl Signature {
     /// Create a signature from raw bytes.
+    ///
+    /// # Errors
+    ///
+    /// Returns `CryptoError::InvalidSignatureLength` if `bytes` is not exactly 64 bytes.
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         if bytes.len() != 64 {
             return Err(CryptoError::InvalidSignatureLength {
@@ -162,12 +178,20 @@ impl Signature {
     }
 
     /// Encode the signature as DER for interop.
+    ///
+    /// # Errors
+    ///
+    /// Returns `CryptoError::InvalidSignature` if the raw bytes are not a valid ECDSA signature.
     pub fn to_der(&self) -> Result<Vec<u8>> {
         let sig = K256Signature::from_slice(&self.0).map_err(|_| CryptoError::InvalidSignature)?;
         Ok(sig.to_der().as_bytes().to_vec())
     }
 
     /// Decode a DER signature to raw bytes.
+    ///
+    /// # Errors
+    ///
+    /// Returns `CryptoError::InvalidSignature` if `bytes` is not valid DER-encoded ECDSA.
     pub fn from_der(bytes: &[u8]) -> Result<Self> {
         let sig = K256Signature::from_der(bytes).map_err(|_| CryptoError::InvalidSignature)?;
         Ok(Self(signature_bytes(&sig)))
@@ -179,6 +203,10 @@ impl Signature {
 // =============================================================================
 
 /// Sign a message using secp256k1 (ECDSA + SHA-256).
+///
+/// # Panics
+///
+/// Panics if `private_key` contains bytes that are not a valid secp256k1 scalar.
 #[instrument(name = "secp256k1.sign", skip(message, private_key))]
 pub fn sign(message: &[u8], private_key: &PrivateKey) -> Signature {
     let signing_key = signing_key_from_bytes(private_key.as_bytes())
@@ -190,13 +218,11 @@ pub fn sign(message: &[u8], private_key: &PrivateKey) -> Signature {
 /// Verify a secp256k1 signature (ECDSA + SHA-256).
 #[instrument(name = "secp256k1.verify", skip(signature, message, public_key))]
 pub fn verify(signature: &Signature, message: &[u8], public_key: &PublicKey) -> bool {
-    let verifying_key = match public_key.verifying_key() {
-        Ok(key) => key,
-        Err(_) => return false,
+    let Ok(verifying_key) = public_key.verifying_key() else {
+        return false;
     };
-    let sig = match K256Signature::from_slice(signature.as_bytes()) {
-        Ok(value) => value,
-        Err(_) => return false,
+    let Ok(sig) = K256Signature::from_slice(signature.as_bytes()) else {
+        return false;
     };
     verifying_key.verify(message, &sig).is_ok()
 }

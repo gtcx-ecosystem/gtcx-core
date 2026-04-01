@@ -688,7 +688,7 @@ fn zk_rng() -> StdRng {
 
 fn u64_to_fr_bits(value: u64) -> Vec<Fr> {
     (0..64)
-        .map(|i| Fr::from(((value >> i) & 1) as u64))
+        .map(|i| Fr::from((value >> i) & 1))
         .collect()
 }
 
@@ -696,7 +696,7 @@ fn bytes_to_fr_bits(bytes: &[u8]) -> Vec<Fr> {
     let mut bits = Vec::with_capacity(bytes.len() * 8);
     for byte in bytes {
         for i in 0..8 {
-            bits.push(Fr::from(((byte >> i) & 1) as u64));
+            bits.push(Fr::from(u64::from((byte >> i) & 1)));
         }
     }
     bits
@@ -773,7 +773,7 @@ fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
         leaf
     };
 
-    let leaves = vec![
+    let leaves = [
         make_leaf(asset_id, owner_hash),
         make_leaf([2u8; ASSET_ID_BYTES], sha256_digest(b"owner-2")?),
         make_leaf([3u8; ASSET_ID_BYTES], sha256_digest(b"owner-3")?),
@@ -781,12 +781,11 @@ fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
     ];
 
     let mut rng = zk_rng();
-    let leaf_params = <Sha256 as CRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
-    let two_to_one_params =
-        <Sha256 as TwoToOneCRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
+    <Sha256 as CRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
+    <Sha256 as TwoToOneCRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
     let tree = AssetOwnershipMerkleTree::new(
-        &leaf_params,
-        &two_to_one_params,
+        &(),
+        &(),
         leaves.iter().map(|leaf| leaf.as_slice()),
     )
     .map_err(map_proof_system_error)?;
@@ -796,7 +795,7 @@ fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
     let leaf = make_leaf(asset_id, owner_hash);
     let root_vec = tree.root();
     let is_member = merkle_path
-        .verify(&leaf_params, &two_to_one_params, &root_vec, leaf.as_slice())
+        .verify(&(), &(), &root_vec, leaf.as_slice())
         .map_err(map_proof_system_error)?;
     if !is_member {
         return Err(ZkpError::InvalidWitness {
