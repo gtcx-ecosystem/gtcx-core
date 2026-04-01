@@ -23,7 +23,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 
 ## Packages
 
-### TypeScript (19 packages)
+### TypeScript (19 packages + 5 config packages)
 
 | Package                                           | Description                                                                            |
 | ------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -45,7 +45,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 | [`@gtcx/logging`](./packages/logging)             | Structured logging for GTCX services                                                   |
 | [`@gtcx/network`](./packages/network)             | P2P networking and messaging via libp2p                                                |
 | [`@gtcx/sync`](./packages/sync)                   | Offline-first sync engine with conflict resolution strategies                          |
-| [`@gtcx/config`](./packages/config)               | Shared build configuration (tsup presets)                                              |
+| [`@gtcx/config`](./packages/config)               | Shared build configuration (ESLint, TypeScript, tsup, Tailwind, jurisdiction configs)  |
 
 ### Rust (6 crates)
 
