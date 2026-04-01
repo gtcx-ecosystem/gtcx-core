@@ -159,9 +159,10 @@ export function checkProofStructure(proof: IntegrityProof): TamperCheckResult {
  */
 export function secureCompare(a: string, b: string): boolean {
   const maxLen = Math.max(a.length, b.length);
-  // If either is empty and lengths differ, we still need constant-time work
+  // Two empty strings should not be considered a valid match —
+  // this function is for comparing hashes/digests, not arbitrary secrets.
   if (maxLen === 0) {
-    return true;
+    return false;
   }
 
   let result = a.length ^ b.length; // Non-zero if lengths differ
@@ -196,11 +197,13 @@ export interface TamperDetectionEvent {
   dataType: string;
   checkType: 'SCHEDULED' | 'ON_ACCESS' | 'MANUAL';
   result: TamperCheckResult;
-  deviceId?: string;
-  location?: {
-    latitude: number;
-    longitude: number;
-  };
+  deviceId?: string | undefined;
+  location?:
+    | {
+        latitude: number;
+        longitude: number;
+      }
+    | undefined;
 }
 
 /**

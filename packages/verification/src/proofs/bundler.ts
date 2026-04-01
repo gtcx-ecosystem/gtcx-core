@@ -95,10 +95,10 @@ export function createCryptographicProofRef(
 export interface CreateProofBundleInput {
   type: ProofBundle['type'];
   cryptographicProof: CryptographicProofRef;
-  locationProof?: LocationProofRef;
-  photoProofs?: PhotoProofRef[];
-  certificate?: Certificate;
-  qrCode?: GeneratedQRCode;
+  locationProof?: LocationProofRef | undefined;
+  photoProofs?: PhotoProofRef[] | undefined;
+  certificate?: Certificate | undefined;
+  qrCode?: GeneratedQRCode | undefined;
 }
 
 /**

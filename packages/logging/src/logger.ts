@@ -200,11 +200,12 @@ export class Logger {
     }
 
     if (error) {
-      entry.error = {
+      const errorEntry: { name: string; message: string; stack?: string } = {
         name: error.name,
         message: error.message,
-        stack: error.stack,
       };
+      if (error.stack !== undefined) errorEntry.stack = error.stack;
+      entry.error = errorEntry;
     }
 
     this.config.output(entry);

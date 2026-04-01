@@ -114,9 +114,9 @@ export interface SecureStorageState {
  */
 export interface UnlockResult {
   success: boolean;
-  error?: 'INVALID_SECRET' | 'LOCKED_OUT' | 'CORRUPTED';
-  remainingAttempts?: number;
-  lockoutExpiresAt?: Date;
+  error?: 'INVALID_SECRET' | 'LOCKED_OUT' | 'CORRUPTED' | undefined;
+  remainingAttempts?: number | undefined;
+  lockoutExpiresAt?: Date | undefined;
 }
 
 // =============================================================================

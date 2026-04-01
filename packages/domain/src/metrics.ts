@@ -16,7 +16,7 @@ export interface Metric {
   name: string;
   type: MetricType;
   help: string;
-  labels?: Record<string, string>;
+  labels?: Record<string, string> | undefined;
   value: number;
   timestamp: number;
 }
@@ -114,11 +114,18 @@ export interface IMetricsCollector {
 // ============================================================================
 
 export class InMemoryMetricsCollector implements IMetricsCollector {
-  private counters: Map<string, { value: number; labels?: Record<string, string> }> = new Map();
-  private gauges: Map<string, { value: number; labels?: Record<string, string> }> = new Map();
-  private histograms: Map<string, { values: number[]; labels?: Record<string, string> }> =
+  private counters: Map<string, { value: number; labels?: Record<string, string> | undefined }> =
     new Map();
-  private summaries: Map<string, { values: number[]; labels?: Record<string, string> }> = new Map();
+  private gauges: Map<string, { value: number; labels?: Record<string, string> | undefined }> =
+    new Map();
+  private histograms: Map<
+    string,
+    { values: number[]; labels?: Record<string, string> | undefined }
+  > = new Map();
+  private summaries: Map<
+    string,
+    { values: number[]; labels?: Record<string, string> | undefined }
+  > = new Map();
 
   private defaultBuckets = [5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000];
   private defaultQuantiles = [0.5, 0.9, 0.95, 0.99];

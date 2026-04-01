@@ -21,30 +21,40 @@ interface Libp2pRuntime {
   node: {
     start: () => Promise<void> | void;
     stop: () => Promise<void> | void;
-    peerId?: { toString: () => string };
-    peerStore?: { get: (peerId: unknown) => Promise<{ protocols?: string[] }> };
-    getPeers?: () => PeerId[];
-    getMultiaddrs?: () => Array<{ toString: () => string }>;
-    dial?: (address: unknown) => Promise<void>;
-    getConnections?: () => Array<{
-      remotePeer?: { toString: () => string };
-      multiplexer?: string;
-      encryption?: string;
-      direction?: string;
-      status?: string;
-    }>;
-    getProtocols?: (peerId?: PeerId) => Promise<string[]> | string[];
-    services?: { pubsub?: unknown };
+    peerId?: { toString: () => string } | undefined;
+    peerStore?:
+      | { get: (peerId: unknown) => Promise<{ protocols?: string[] | undefined }> }
+      | undefined;
+    getPeers?: (() => PeerId[]) | undefined;
+    getMultiaddrs?: (() => Array<{ toString: () => string }>) | undefined;
+    dial?: ((address: unknown) => Promise<void>) | undefined;
+    getConnections?:
+      | (() => Array<{
+          remotePeer?: { toString: () => string } | undefined;
+          multiplexer?: string | undefined;
+          encryption?: string | undefined;
+          direction?: string | undefined;
+          status?: string | undefined;
+        }>)
+      | undefined;
+    getProtocols?: ((peerId?: PeerId) => Promise<string[]> | string[]) | undefined;
+    services?: { pubsub?: unknown | undefined } | undefined;
   };
-  pubsub?: {
-    publish: (topic: string, data: Uint8Array) => Promise<unknown>;
-    subscribe: (topic: string) => Promise<void> | void;
-    getPeers?: () => Array<{ toString?: () => string } | string>;
-    getSubscribers?: (topic: string) => Array<{ toString?: () => string } | string>;
-    getTopics?: () => string[];
-    addEventListener?: (event: string, handler: (event: unknown) => void) => void;
-    removeEventListener?: (event: string, handler: (event: unknown) => void) => void;
-  };
+  pubsub?:
+    | {
+        publish: (topic: string, data: Uint8Array) => Promise<unknown>;
+        subscribe: (topic: string) => Promise<void> | void;
+        getPeers?: (() => Array<{ toString?: (() => string) | undefined } | string>) | undefined;
+        getSubscribers?:
+          | ((topic: string) => Array<{ toString?: (() => string) | undefined } | string>)
+          | undefined;
+        getTopics?: (() => string[]) | undefined;
+        addEventListener?: ((event: string, handler: (event: unknown) => void) => void) | undefined;
+        removeEventListener?:
+          | ((event: string, handler: (event: unknown) => void) => void)
+          | undefined;
+      }
+    | undefined;
 }
 
 type FactoryFn<T = unknown> = (...args: unknown[]) => T;
@@ -272,10 +282,10 @@ export class Libp2pTransport implements TransportAdapter {
 
   getConnectionInfo(): Array<{
     peer: string;
-    multiplexer?: string;
-    encryption?: string;
-    direction?: string;
-    status?: string;
+    multiplexer?: string | undefined;
+    encryption?: string | undefined;
+    direction?: string | undefined;
+    status?: string | undefined;
   }> {
     if (!this.runtime?.node.getConnections) return [];
     return this.runtime.node.getConnections().map((conn) => ({

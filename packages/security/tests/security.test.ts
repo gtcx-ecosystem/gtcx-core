@@ -934,7 +934,7 @@ describe('@gtcx/security/offline', () => {
       expect(secureCompare('abc', 'abc')).toBe(true);
       expect(secureCompare('abc', 'abd')).toBe(false);
       expect(secureCompare('abc', 'abcd')).toBe(false); // different lengths
-      expect(secureCompare('', '')).toBe(true);
+      expect(secureCompare('', '')).toBe(false); // empty strings are not valid hashes
 
       // hashesMatch normalizes case
       expect(hashesMatch('ABCDEF', 'abcdef')).toBe(true);

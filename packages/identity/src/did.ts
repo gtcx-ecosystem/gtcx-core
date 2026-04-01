@@ -51,7 +51,7 @@ export function createDID(identity: DigitalIdentity): string {
 export function parseDID(did: string): {
   method: string;
   identifier: string;
-  fragment?: string;
+  fragment?: string | undefined;
 } | null {
   const match = did.match(/^did:([a-z0-9]+):([a-zA-Z0-9._:%-]+)(#[a-zA-Z0-9._:%-]*)?$/);
   if (!match) return null;

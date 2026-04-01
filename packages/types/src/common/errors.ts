@@ -45,11 +45,11 @@ export type ErrorCode =
 export interface GtcxError {
   code: ErrorCode;
   message: string;
-  details?: Record<string, unknown>;
+  details?: Record<string, unknown> | undefined;
   timestamp: number;
-  requestId?: string;
-  retryable?: boolean;
-  retryAfter?: number;
+  requestId?: string | undefined;
+  retryable?: boolean | undefined;
+  retryAfter?: number | undefined;
 }
 
 export class GtcxException extends Error {

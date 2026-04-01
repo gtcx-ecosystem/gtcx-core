@@ -65,11 +65,11 @@ export interface RegistrationConfig {
   /** Maximum age of discovery in days */
   maxDiscoveryAgeDays: number;
   /** Custom workflow steps (optional override) */
-  workflowSteps?: WorkflowStep[];
+  workflowSteps?: WorkflowStep[] | undefined;
   /** Required photo categories */
-  requiredPhotoCategories?: string[];
+  requiredPhotoCategories?: string[] | undefined;
   /** Verification endpoint base URL */
-  verifyBaseUrl?: string;
+  verifyBaseUrl?: string | undefined;
 }
 
 const DEFAULT_CONFIG: RegistrationConfig = {
@@ -134,7 +134,7 @@ export class AssetLotRegistrationService {
       order: index + 1,
     }));
 
-    this.config = { ...DEFAULT_CONFIG, ...configResult.data, workflowSteps };
+    this.config = { ...DEFAULT_CONFIG, ...configResult.data, workflowSteps } as RegistrationConfig;
   }
 
   // ==========================================================================

@@ -231,7 +231,7 @@ export class RateLimiter {
   private windowMs: number;
   private callsSinceCleanup = 0;
   private cleanupEveryNCalls: number;
-  private cleanupTimer?: ReturnType<typeof setInterval>;
+  private cleanupTimer?: ReturnType<typeof setInterval> | undefined;
 
   constructor(
     maxRequests = 100,

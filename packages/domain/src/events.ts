@@ -49,7 +49,7 @@ export interface DomainEvent<T = unknown> {
   /** Unix timestamp (ms) */
   timestamp: number;
   /** Correlation ID for distributed tracing */
-  correlationId?: string;
+  correlationId?: string | undefined;
   /** Source service */
   source: 'registration' | 'trading' | 'compliance';
   /** Schema version for evolution */
@@ -239,7 +239,7 @@ export interface IDomainEventEmitter {
 // ============================================================================
 
 export class DomainEventFactory {
-  private correlationId?: string;
+  private correlationId?: string | undefined;
 
   constructor(correlationId?: string) {
     this.correlationId = correlationId;

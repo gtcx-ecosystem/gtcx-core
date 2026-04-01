@@ -25,7 +25,7 @@ export interface SyncEngineConfig<T = unknown> {
 export interface SyncConflict<T = unknown> {
   id: string;
   local: SyncItem<T>[];
-  remote?: SyncItem<T>;
+  remote?: SyncItem<T> | undefined;
 }
 
 export type SyncAuditEventType =

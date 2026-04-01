@@ -34,7 +34,7 @@ export interface DIDResolutionMetadata {
   resolver: string;
   cache: 'hit' | 'miss' | 'bypass';
   durationMs: number;
-  revocationStatus?: DIDRevocationStatus;
+  revocationStatus?: DIDRevocationStatus | undefined;
 }
 
 export interface DIDResolverMetricsEvent extends DIDResolutionMetadata {
@@ -48,8 +48,8 @@ export interface DIDResolutionResult {
 }
 
 export interface DIDResolverOptions {
-  timeoutMs?: number;
-  signal?: AbortSignal;
+  timeoutMs?: number | undefined;
+  signal?: AbortSignal | undefined;
 }
 
 export interface DIDResolverAdapter {
@@ -87,8 +87,8 @@ export type DIDResolverErrorCode = 'INVALID_DID' | 'RESOLUTION_FAILED' | 'REVOKE
 
 export class DIDResolverError extends Error {
   code: DIDResolverErrorCode;
-  status?: number;
-  retryable?: boolean;
+  status?: number | undefined;
+  retryable?: boolean | undefined;
   override cause?: unknown;
 
   constructor(
@@ -162,10 +162,10 @@ export interface HttpDIDResolverConfig {
 async function fetchWithRetry(
   url: string,
   options: {
-    headers?: Record<string, string>;
-    timeoutMs?: number;
-    signal?: AbortSignal;
-    retries?: number;
+    headers?: Record<string, string> | undefined;
+    timeoutMs?: number | undefined;
+    signal?: AbortSignal | undefined;
+    retries?: number | undefined;
   }
 ): Promise<Response> {
   const retries = options.retries ?? 2;
@@ -178,7 +178,10 @@ async function fetchWithRetry(
       ? mergeSignals(options.signal, controller.signal)
       : controller.signal;
     try {
-      const response = await fetch(url, { headers: options.headers, signal });
+      const response = await fetch(url, {
+        ...(options.headers !== undefined ? { headers: options.headers } : {}),
+        signal,
+      });
       clearTimeout(timeout);
       if (response.ok || response.status === 404) {
         return response;

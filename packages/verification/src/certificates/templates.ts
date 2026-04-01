@@ -309,15 +309,17 @@ export interface CommodityCertificateConfig {
   /** Display name for UI */
   displayName: string;
   /** Additional validation rules specific to this commodity */
-  additionalValidation?: Array<{
-    field: string;
-    min?: number;
-    max?: number;
-    value?: boolean | string | number;
-    message: string;
-  }>;
+  additionalValidation?:
+    | Array<{
+        field: string;
+        min?: number | undefined;
+        max?: number | undefined;
+        value?: (boolean | string | number) | undefined;
+        message: string;
+      }>
+    | undefined;
   /** Custom required fields beyond template defaults */
-  additionalRequiredFields?: string[];
+  additionalRequiredFields?: string[] | undefined;
 }
 
 /**

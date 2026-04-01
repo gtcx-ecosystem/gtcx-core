@@ -191,8 +191,8 @@ export interface ValidationError {
   error: {
     code: string;
     message: string;
-    path?: (string | number)[];
-    details?: unknown;
+    path?: (string | number)[] | undefined;
+    details?: unknown | undefined;
   };
 }
 

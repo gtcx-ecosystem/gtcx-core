@@ -134,13 +134,13 @@ export interface ResourceContext {
   /** Potential for the target commodity at this location */
   commodityPotential: 'high' | 'medium' | 'low' | 'none';
   /** Which commodity this assessment is for */
-  commodityType?: CommodityType;
+  commodityType?: CommodityType | undefined;
   /** Geological formation or agricultural zone */
-  formation?: string;
+  formation?: string | undefined;
   /** Confidence in the assessment (0-1) */
   confidence: number;
   /** Source of the assessment */
-  source?: string;
+  source?: string | undefined;
 }
 
 /**

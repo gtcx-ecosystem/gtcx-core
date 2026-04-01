@@ -538,21 +538,21 @@ export interface QRCodeData {
   hash: string;
   timestamp: number;
   type: QRCodeType;
-  metadata?: QRCodeMetadata;
+  metadata?: QRCodeMetadata | undefined;
 }
 
 /**
  * QR code metadata - commodity-agnostic
  */
 export interface QRCodeMetadata {
-  location?: { latitude: number; longitude: number };
-  assetWeight?: number;
-  assetUnit?: MeasurementUnit;
-  commodityType?: CommodityType;
-  assetState?: AssetLifecycleState;
-  purity?: number;
-  producerId?: string;
-  operatorRole?: OperatorRole;
+  location?: { latitude: number; longitude: number } | undefined;
+  assetWeight?: number | undefined;
+  assetUnit?: MeasurementUnit | undefined;
+  commodityType?: CommodityType | undefined;
+  assetState?: AssetLifecycleState | undefined;
+  purity?: number | undefined;
+  producerId?: string | undefined;
+  operatorRole?: OperatorRole | undefined;
 }
 
 /**
@@ -620,15 +620,15 @@ export interface ValidationMetrics {
 export interface CertificateMetadata {
   issuer: string;
   issuedAt: number;
-  expiresAt?: number;
+  expiresAt?: number | undefined;
   userRole: string;
   deviceId: string;
   location: CertificateLocation;
-  resourceContext?: ResourceContext;
+  resourceContext?: ResourceContext | undefined;
   /** @deprecated Use resourceContext */
-  geologicalContext?: GeologicalContext;
-  environmentalFactors?: EnvironmentalFactors;
-  validationMetrics?: ValidationMetrics;
+  geologicalContext?: GeologicalContext | undefined;
+  environmentalFactors?: EnvironmentalFactors | undefined;
+  validationMetrics?: ValidationMetrics | undefined;
 }
 
 /**
@@ -636,7 +636,7 @@ export interface CertificateMetadata {
  */
 export interface MultiSignature {
   ed25519: string;
-  secp256k1?: string;
+  secp256k1?: string | undefined;
 }
 
 /**
@@ -679,14 +679,14 @@ export interface MilitaryGradeCertificate extends Certificate {
   postQuantumHash: string;
   multiSignature: MultiSignature;
   certificateData: {
-    assetLotData?: AssetLotData;
+    assetLotData?: AssetLotData | undefined;
     /** @deprecated Use assetLotData */
-    goldLotData?: GoldLotData;
-    photoEvidence?: PhotoEvidenceRef[];
-    workflowContext?: string;
-    complianceData?: ComplianceData;
+    goldLotData?: GoldLotData | undefined;
+    photoEvidence?: PhotoEvidenceRef[] | undefined;
+    workflowContext?: string | undefined;
+    complianceData?: ComplianceData | undefined;
     /** Claims associated with this certificate */
-    claims?: Claim[];
+    claims?: Claim[] | undefined;
   };
 }
 
@@ -694,25 +694,25 @@ export interface MilitaryGradeCertificate extends Certificate {
  * Asset lot data - universal
  */
 export interface AssetLotData {
-  lotId?: string;
+  lotId?: string | undefined;
   commodityType: CommodityType;
-  commoditySubtype?: string;
-  category?: AssetCategory;
+  commoditySubtype?: string | undefined;
+  category?: AssetCategory | undefined;
   estimatedWeight: number;
   unit: MeasurementUnit;
-  quality?: QualityGrade;
-  purity?: number;
+  quality?: QualityGrade | undefined;
+  purity?: number | undefined;
   /** Current lifecycle state */
-  state?: AssetLifecycleState;
+  state?: AssetLifecycleState | undefined;
   /** Previous state (for transitions) */
-  previousState?: AssetLifecycleState;
-  producerId?: string;
-  operatorRole?: OperatorRole;
-  discoveryDate?: string;
-  siteId?: string;
+  previousState?: AssetLifecycleState | undefined;
+  producerId?: string | undefined;
+  operatorRole?: OperatorRole | undefined;
+  discoveryDate?: string | undefined;
+  siteId?: string | undefined;
   /** Site reference with full details */
-  site?: SiteReference;
-  attributes?: Record<string, unknown>;
+  site?: SiteReference | undefined;
+  attributes?: Record<string, unknown> | undefined;
 }
 
 // SiteReference: imported from @gtcx/types (see top of file)
@@ -777,9 +777,9 @@ export interface CertificateVerificationResult {
  */
 export interface ValidationRule {
   field: string;
-  min?: number;
-  max?: number;
-  value?: boolean | string | number;
+  min?: number | undefined;
+  max?: number | undefined;
+  value?: (boolean | string | number) | undefined;
   message: string;
 }
 
@@ -796,7 +796,7 @@ export interface CertificateTemplate {
   optionalFields: string[];
   validationRules: ValidationRule[];
   /** Predicates that must be satisfied for this certificate */
-  requiredPredicates?: PredicateURI[];
+  requiredPredicates?: PredicateURI[] | undefined;
 }
 
 // ============================================================================
@@ -812,13 +812,13 @@ export interface ProofBundle {
   timestamp: number;
   proofs: {
     cryptographicProof: CryptographicProofRef;
-    locationProof?: LocationProofRef;
-    photoProofs?: PhotoProofRef[];
+    locationProof?: LocationProofRef | undefined;
+    photoProofs?: PhotoProofRef[] | undefined;
   };
-  certificate?: Certificate;
-  qrCode?: GeneratedQRCode;
+  certificate?: Certificate | undefined;
+  qrCode?: GeneratedQRCode | undefined;
   /** Claims included in this bundle */
-  claims?: Claim[];
+  claims?: Claim[] | undefined;
 }
 
 export interface CryptographicProofRef {

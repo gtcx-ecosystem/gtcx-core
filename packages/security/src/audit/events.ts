@@ -114,44 +114,46 @@ export interface SecurityEvent {
   outcome: SecurityOutcome;
 
   /** Who performed the action (user ID, service name, etc.) */
-  actor?: string;
+  actor?: string | undefined;
 
   /** What was accessed/modified (resource identifier) */
-  resource?: string;
+  resource?: string | undefined;
 
   /** What action was taken */
-  action?: string;
+  action?: string | undefined;
 
   /** Reason for outcome (especially for failures) */
-  reason?: string;
+  reason?: string | undefined;
 
   /** Correlation ID for distributed tracing */
-  traceId?: string;
+  traceId?: string | undefined;
 
   /** Session ID */
-  sessionId?: string;
+  sessionId?: string | undefined;
 
   /** Request ID */
-  requestId?: string;
+  requestId?: string | undefined;
 
   /** Client IP address (if applicable) */
-  ip?: string;
+  ip?: string | undefined;
 
   /** User agent (if applicable) */
-  userAgent?: string;
+  userAgent?: string | undefined;
 
   /** Geographic context */
-  geo?: {
-    country?: string;
-    region?: string;
-    city?: string;
-  };
+  geo?:
+    | {
+        country?: string | undefined;
+        region?: string | undefined;
+        city?: string | undefined;
+      }
+    | undefined;
 
   /** Protocol context (which GTCX protocol) */
-  protocol?: 'tradepass' | 'geotag' | 'vaultmark' | 'pvp' | 'gci' | 'panx';
+  protocol?: ('tradepass' | 'geotag' | 'vaultmark' | 'pvp' | 'gci' | 'panx') | undefined;
 
   /** Additional structured metadata */
-  metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown> | undefined;
 }
 
 // =============================================================================
@@ -318,7 +320,11 @@ export function createAuditTrail(
 ): AuditTrail {
   const operationId = crypto.randomUUID();
   const startedAt = new Date().toISOString();
-  const steps: Array<{ step: string; timestamp: string; metadata?: Record<string, unknown> }> = [];
+  const steps: Array<{
+    step: string;
+    timestamp: string;
+    metadata?: Record<string, unknown> | undefined;
+  }> = [];
 
   return {
     operationId,

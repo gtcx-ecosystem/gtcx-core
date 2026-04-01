@@ -143,15 +143,15 @@ export type RoleName = keyof typeof Roles;
 
 export interface PermissionContext {
   /** User's permissions (or roles to expand) */
-  permissions?: Permission[];
+  permissions?: Permission[] | undefined;
   /** User's roles */
-  roles?: RoleName[];
+  roles?: RoleName[] | undefined;
   /** Resource owner (for ownership checks) */
-  ownerId?: string;
+  ownerId?: string | undefined;
   /** Current user ID */
-  actorId?: string;
+  actorId?: string | undefined;
   /** Additional context */
-  metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown> | undefined;
 }
 
 /**

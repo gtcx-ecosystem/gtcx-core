@@ -14,14 +14,15 @@ export interface Location {
   latitude: number;
   longitude: number;
   accuracy: number;
-  altitude?: number;
+  altitude?: number | undefined;
   timestamp: number;
+  source?: ('gps' | 'network' | 'manual') | undefined;
 }
 
 export interface LocationWithAddress extends Location {
   address: string;
-  region?: string;
-  country?: string;
+  region?: string | undefined;
+  country?: string | undefined;
 }
 
 // ============================================================================
@@ -65,19 +66,19 @@ export interface AssetLot {
   // Physical characteristics
   weight: number;
   weightUnit: string; // 'g', 'kg', 'oz', 'lb'
-  purity?: number; // 0-100 percentage
-  form?: AssetForm;
-  qualityGrade?: QualityGrade;
+  purity?: number | undefined; // 0-100 percentage
+  form?: AssetForm | undefined;
+  qualityGrade?: QualityGrade | undefined;
 
   // Verification
-  cryptoProof?: string;
-  certificateId?: string;
-  geoTagId?: string;
+  cryptoProof?: string | undefined;
+  certificateId?: string | undefined;
+  geoTagId?: string | undefined;
 
   status: AssetLotStatus;
 
   // Metadata
-  metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown> | undefined;
   createdAt: string;
   updatedAt: string;
 }
@@ -96,14 +97,14 @@ export interface AssetRegistrationData {
   assetDetails: {
     estimatedQuantity: number;
     weightUnit: string;
-    purity?: number;
-    form?: AssetForm;
-    characteristics?: Record<string, unknown>; // Commodity-specific attributes
+    purity?: number | undefined;
+    form?: AssetForm | undefined;
+    characteristics?: Record<string, unknown> | undefined; // Commodity-specific attributes
   };
   photos: string[];
-  notes?: string;
+  notes?: string | undefined;
   producerId: string;
-  metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown> | undefined;
 }
 
 /**
@@ -128,7 +129,7 @@ export interface RegistrationProgress {
   percentage: number;
   completedSteps: string[];
   nextStep: string | null;
-  estimatedTimeRemaining?: string;
+  estimatedTimeRemaining?: string | undefined;
 }
 
 /**
@@ -137,7 +138,7 @@ export interface RegistrationProgress {
 export interface ValidationResult {
   isValid: boolean;
   errors: string[];
-  warnings?: string[];
+  warnings?: string[] | undefined;
 }
 
 /**
@@ -163,7 +164,7 @@ export interface AssetCertificate {
   assetCharacteristics: Record<string, unknown>;
   verificationLevel: 'preliminary' | 'standard' | 'enhanced' | 'premium';
   issuedBy: string;
-  expiresAt?: string;
+  expiresAt?: string | undefined;
 }
 
 // ============================================================================
@@ -179,7 +180,7 @@ export interface Trader {
   name: string;
   location: Location;
   verificationLevel: 'basic' | 'enhanced' | 'premium';
-  roles?: ('producer' | 'aggregator' | 'trader' | 'refiner' | 'exporter')[];
+  roles?: ('producer' | 'aggregator' | 'trader' | 'refiner' | 'exporter')[] | undefined;
 }
 
 /**
@@ -198,7 +199,7 @@ export interface Transaction {
   location: Location;
   cryptoSignature: string;
   status: 'pending' | 'confirmed' | 'completed' | 'disputed' | 'cancelled';
-  metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown> | undefined;
 }
 
 /**
@@ -206,13 +207,13 @@ export interface Transaction {
  */
 export interface MarketPrice {
   commodityType: string;
-  assetForm?: AssetForm;
-  purity?: number;
+  assetForm?: AssetForm | undefined;
+  purity?: number | undefined;
   basePrice: number;
   currency: string;
   timestamp: string;
   source: string;
-  spread?: number;
+  spread?: number | undefined;
 }
 
 /**
@@ -243,7 +244,7 @@ export interface TradeRequest {
   quantity: number;
   agreedPrice: number;
   paymentMethod: string;
-  deliveryLocation?: Location;
+  deliveryLocation?: Location | undefined;
 }
 
 /**
@@ -312,26 +313,28 @@ export interface ComplianceRecord {
     description: string;
     authority: RegulatoryAuthority;
     category: ComplianceCategory;
-    jurisdiction?: string;
+    jurisdiction?: string | undefined;
   };
 
   finding: {
     description: string;
-    evidence?: string[];
-    location?: Location;
+    evidence?: string[] | undefined;
+    location?: Location | undefined;
     timestamp: string;
     reportedBy: string;
-    verifiedBy?: string;
+    verifiedBy?: string | undefined;
   };
 
-  resolution?: {
-    status: 'pending' | 'in_progress' | 'resolved' | 'escalated';
-    actions: string[];
-    assignedTo: string;
-    dueDate: string;
-    completedDate?: string;
-    cost?: number;
-  };
+  resolution?:
+    | {
+        status: 'pending' | 'in_progress' | 'resolved' | 'escalated';
+        actions: string[];
+        assignedTo: string;
+        dueDate: string;
+        completedDate?: string | undefined;
+        cost?: number | undefined;
+      }
+    | undefined;
 
   metadata: {
     createdAt: string;
@@ -353,7 +356,7 @@ export interface RegulatoryRequirement {
   mandatory: boolean;
   applicableTo: string[]; // roles
   verificationMethod: string;
-  renewalPeriod?: string;
+  renewalPeriod?: string | undefined;
   jurisdiction: string;
 }
 
@@ -367,12 +370,12 @@ export interface RegulatoryFramework {
   authority: RegulatoryAuthority;
   category: ComplianceCategory;
   jurisdiction: string;
-  commodityTypes?: string[]; // If specific to certain commodities
+  commodityTypes?: string[] | undefined; // If specific to certain commodities
   requirements: RegulatoryRequirement[];
   penalties: {
     violation: string;
     penalty: string;
-    fine?: string;
+    fine?: string | undefined;
   }[];
   effectiveDate: string;
   lastUpdated: string;

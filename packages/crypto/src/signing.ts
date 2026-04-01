@@ -19,7 +19,7 @@ export interface SignatureResult {
 export interface VerificationResult {
   valid: boolean;
   publicKey: string;
-  error?: string;
+  error?: string | undefined;
 }
 
 /**

@@ -39,36 +39,40 @@ export interface OperationLogEntry {
   /** Start timestamp (ms) */
   startTime: number;
   /** End timestamp (ms) */
-  endTime?: number;
+  endTime?: number | undefined;
   /** Duration (ms) */
-  duration?: number;
+  duration?: number | undefined;
   /** Input summary (sanitized, no PII) */
-  input?: Record<string, unknown>;
+  input?: Record<string, unknown> | undefined;
   /** Output summary */
-  output?: Record<string, unknown>;
+  output?: Record<string, unknown> | undefined;
   /** Error details if failed */
-  error?: {
-    message: string;
-    code?: string;
-    stack?: string;
-  };
+  error?:
+    | {
+        message: string;
+        code?: string | undefined;
+        stack?: string | undefined;
+      }
+    | undefined;
   /** Parent operation ID for nested operations */
-  parentId?: string;
+  parentId?: string | undefined;
   /** Correlation ID for distributed tracing */
-  correlationId?: string;
+  correlationId?: string | undefined;
   /** Tags for filtering */
-  tags?: string[];
+  tags?: string[] | undefined;
   /** AI analysis hints */
-  aiContext?: {
-    /** Suggested follow-up operations */
-    suggestedNextOps?: OperationType[];
-    /** Anomaly indicators */
-    anomalies?: string[];
-    /** Pattern matches */
-    patterns?: string[];
-    /** Confidence score (0-1) */
-    confidence?: number;
-  };
+  aiContext?:
+    | {
+        /** Suggested follow-up operations */
+        suggestedNextOps?: OperationType[] | undefined;
+        /** Anomaly indicators */
+        anomalies?: string[] | undefined;
+        /** Pattern matches */
+        patterns?: string[] | undefined;
+        /** Confidence score (0-1) */
+        confidence?: number | undefined;
+      }
+    | undefined;
 }
 
 // ============================================================================

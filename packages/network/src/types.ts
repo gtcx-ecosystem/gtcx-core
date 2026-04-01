@@ -53,7 +53,7 @@ export interface TelemetryHandler {
 }
 
 export interface TelemetryOptions {
-  onEvent?: TelemetryHandler;
+  onEvent?: TelemetryHandler | undefined;
 }
 
 export interface TransportAdapter {

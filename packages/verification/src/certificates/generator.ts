@@ -60,21 +60,21 @@ export interface CreateCertificateInput {
   userRole: string;
   deviceId: string;
   /** Primary: commodity-agnostic asset lot data */
-  assetLotData?: AssetLotData;
+  assetLotData?: AssetLotData | undefined;
   /** @deprecated Use assetLotData instead */
-  goldLotData?: GoldLotData;
+  goldLotData?: GoldLotData | undefined;
   /** Commodity type (optional, can be inferred from assetLotData) */
-  commodityType?: CommodityType;
-  photoEvidence?: PhotoEvidenceRef[];
-  workflowContext?: string;
-  complianceData?: ComplianceData;
+  commodityType?: CommodityType | undefined;
+  photoEvidence?: PhotoEvidenceRef[] | undefined;
+  workflowContext?: string | undefined;
+  complianceData?: ComplianceData | undefined;
   /** Primary: commodity-agnostic resource context */
-  resourceContext?: ResourceContext;
+  resourceContext?: ResourceContext | undefined;
   /** @deprecated Use resourceContext instead */
-  geologicalContext?: GeologicalContext;
-  environmentalFactors?: EnvironmentalFactors;
-  validationMetrics?: ValidationMetrics;
-  expiresAt?: number;
+  geologicalContext?: GeologicalContext | undefined;
+  environmentalFactors?: EnvironmentalFactors | undefined;
+  validationMetrics?: ValidationMetrics | undefined;
+  expiresAt?: number | undefined;
 }
 
 /**
@@ -421,7 +421,7 @@ export function formatCertificateForDisplay(certificate: Certificate): {
   expires: string | null;
   location: string;
   issuer: string;
-  commodityType?: string;
+  commodityType?: string | undefined;
 } {
   const { metadata } = certificate;
 

@@ -102,11 +102,11 @@ export function createAssetLotQRData(
   certificateId: string,
   assetLotData: {
     weight: number;
-    unit?: MeasurementUnit;
-    purity?: number;
+    unit?: MeasurementUnit | undefined;
+    purity?: number | undefined;
     commodityType: CommodityType;
-    producerId?: string;
-    operatorRole?: OperatorRole;
+    producerId?: string | undefined;
+    operatorRole?: OperatorRole | undefined;
     location: { latitude: number; longitude: number };
   },
   hash: string,
@@ -171,22 +171,26 @@ export function createCertificateQRData(
   certificateData: {
     certificateId: string;
     issuedAt: number;
-    location?: { latitude: number; longitude: number };
+    location?: { latitude: number; longitude: number } | undefined;
     /** Primary: commodity-agnostic asset lot data */
-    assetLotData?: {
-      estimatedWeight?: number;
-      unit?: MeasurementUnit;
-      purity?: number;
-      commodityType?: CommodityType;
-      producerId?: string;
-      operatorRole?: OperatorRole;
-    };
+    assetLotData?:
+      | {
+          estimatedWeight?: number | undefined;
+          unit?: MeasurementUnit | undefined;
+          purity?: number | undefined;
+          commodityType?: CommodityType | undefined;
+          producerId?: string | undefined;
+          operatorRole?: OperatorRole | undefined;
+        }
+      | undefined;
     /** @deprecated Use assetLotData instead */
-    goldLotData?: {
-      estimatedWeight?: number;
-      purity?: number;
-      miner?: string;
-    };
+    goldLotData?:
+      | {
+          estimatedWeight?: number | undefined;
+          purity?: number | undefined;
+          miner?: string | undefined;
+        }
+      | undefined;
   },
   proofHash: string,
   config: Partial<QRCodeConfig> = {}

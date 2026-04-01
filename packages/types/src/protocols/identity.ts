@@ -65,10 +65,10 @@ export interface IdentityMetadata {
  */
 export interface EnhancedIdentity extends DigitalIdentity {
   multiKeyPairs: MultiKeyPairs;
-  postQuantumHash?: string;
-  keyDerivation?: KeyDerivationParams;
-  entropyValidation?: EntropyValidation;
-  certificationChain?: string[];
+  postQuantumHash?: string | undefined;
+  keyDerivation?: KeyDerivationParams | undefined;
+  entropyValidation?: EntropyValidation | undefined;
+  certificationChain?: string[] | undefined;
 }
 
 export interface KeyDerivationParams {

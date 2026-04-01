@@ -26,7 +26,7 @@ export class TypedEventBus implements IDomainEventEmitter {
   private readonly maxHistorySize: number;
   private readonly offlineBuffer: OfflineEventBuffer;
   private readonly enableOfflineBuffer: boolean;
-  private readonly onHandlerError?: (error: unknown, event: DomainEvent) => void;
+  private readonly onHandlerError?: ((error: unknown, event: DomainEvent) => void) | undefined;
   private _isOnline: boolean = true;
   private _isDestroyed: boolean = false;
 

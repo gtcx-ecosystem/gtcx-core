@@ -46,24 +46,26 @@ export interface QueuedOperation<T = unknown> {
   /** Created timestamp */
   createdAt: number;
   /** Last attempt timestamp */
-  lastAttemptAt?: number;
+  lastAttemptAt?: number | undefined;
   /** Completed timestamp */
-  completedAt?: number;
+  completedAt?: number | undefined;
   /** Error from last attempt */
-  lastError?: string;
+  lastError?: string | undefined;
   /** Priority (higher = more urgent) */
   priority: number;
   /** Dependencies (other operation IDs that must complete first) */
-  dependsOn?: string[];
+  dependsOn?: string[] | undefined;
   /** Conflict resolution strategy */
   conflictStrategy: ConflictStrategy;
   /** Metadata for conflict resolution */
-  metadata?: {
-    entityId?: string;
-    entityType?: string;
-    version?: number;
-    checksum?: string;
-  };
+  metadata?:
+    | {
+        entityId?: string | undefined;
+        entityType?: string | undefined;
+        version?: number | undefined;
+        checksum?: string | undefined;
+      }
+    | undefined;
 }
 
 export type ConflictStrategy =
@@ -95,9 +97,9 @@ export interface IOfflineQueueStorage {
 
 export class OfflineQueue {
   private queue: Map<string, QueuedOperation> = new Map();
-  private storage?: IOfflineQueueStorage;
+  private storage?: IOfflineQueueStorage | undefined;
   private processing = false;
-  private onConflict?: (conflict: ConflictResolution) => Promise<unknown>;
+  private onConflict?: ((conflict: ConflictResolution) => Promise<unknown>) | undefined;
   private maxQueueSize: number;
 
   constructor(options?: {

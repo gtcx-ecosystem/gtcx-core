@@ -72,28 +72,28 @@ export interface GenerateCertificateInput {
 export interface GenerateQRCodeInput {
   certificateId: string;
   type: 'location' | 'photo' | 'certificate' | 'asset-lot';
-  metadata?: Record<string, unknown>;
-  size?: number;
+  metadata?: Record<string, unknown> | undefined;
+  size?: number | undefined;
 }
 
 interface QRMetadataInput {
-  hash?: string;
-  photoHash?: string;
-  location?: { latitude: number; longitude: number };
-  assetWeight?: number;
-  assetUnit?: MeasurementUnit;
-  purity?: number;
-  commodityType?: CommodityType;
-  producerId?: string;
-  operatorRole?: OperatorRole;
+  hash?: string | undefined;
+  photoHash?: string | undefined;
+  location?: { latitude: number; longitude: number } | undefined;
+  assetWeight?: number | undefined;
+  assetUnit?: MeasurementUnit | undefined;
+  purity?: number | undefined;
+  commodityType?: CommodityType | undefined;
+  producerId?: string | undefined;
+  operatorRole?: OperatorRole | undefined;
 }
 
 export interface CreateProofBundleInput {
   type: 'location' | 'photo' | 'workflow' | 'certificate';
-  location?: CertificateLocation;
-  photoHashes?: string[];
-  certificate?: Certificate;
-  claims?: Claim[];
+  location?: CertificateLocation | undefined;
+  photoHashes?: string[] | undefined;
+  certificate?: Certificate | undefined;
+  claims?: Claim[] | undefined;
 }
 
 // ============================================================================

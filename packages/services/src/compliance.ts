@@ -84,7 +84,7 @@ export interface ComplianceConfig {
   /** Default currency for threshold calculations */
   defaultCurrency: string;
   /** Regulatory frameworks to apply */
-  frameworks?: RegulatoryFramework[];
+  frameworks?: RegulatoryFramework[] | undefined;
 }
 
 const DEFAULT_CONFIG: ComplianceConfig = {
@@ -145,7 +145,7 @@ export class UnifiedComplianceService {
   private config: ComplianceConfig;
   private frameworks: RegulatoryFramework[];
   private zkpVerifier: ZkVerifier;
-  private complianceRepo?: IComplianceRepository;
+  private complianceRepo?: IComplianceRepository | undefined;
 
   constructor(
     dependencies: {
@@ -177,7 +177,7 @@ export class UnifiedComplianceService {
       const messages = configResult.error.errors.map((issue) => issue.message);
       throw new ComplianceValidationError(`Invalid compliance config: ${messages.join(', ')}`);
     }
-    this.config = { ...DEFAULT_CONFIG, ...configResult.data };
+    this.config = { ...DEFAULT_CONFIG, ...configResult.data } as ComplianceConfig;
     this.frameworks = config.frameworks || this.getDefaultFrameworks();
   }
 
@@ -688,12 +688,12 @@ export class UnifiedComplianceService {
   // ==========================================================================
 
   private checkDocumentation(
-    data: { id: string; cryptoProof?: unknown; certificateId?: string },
+    data: { id: string; cryptoProof?: unknown | undefined; certificateId?: string | undefined },
     ctx: {
       sourceApp: string;
       sourceEntityType: 'asset_lot' | 'transaction';
       type: string;
-      location?: Location;
+      location?: Location | undefined;
     },
     records: ComplianceRecord[],
     _correlationId: string
@@ -720,9 +720,9 @@ export class UnifiedComplianceService {
     data: {
       id: string;
       entityType: 'asset_lot' | 'transaction';
-      metadata?: Record<string, unknown>;
+      metadata?: Record<string, unknown> | undefined;
     },
-    ctx: { sourceApp: string; type: string; location?: Location },
+    ctx: { sourceApp: string; type: string; location?: Location | undefined },
     records: ComplianceRecord[],
     correlationId: string
   ): Promise<void> {
@@ -823,7 +823,7 @@ export class UnifiedComplianceService {
     sourceEntityType: 'asset_lot' | 'transaction' | 'trader' | 'producer';
     regulationCode: string;
     description: string;
-    location?: Location;
+    location?: Location | undefined;
     tags: string[];
   }): ComplianceRecord {
     const framework = this.frameworks.find((f) => f.code === params.regulationCode);

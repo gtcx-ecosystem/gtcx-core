@@ -102,11 +102,11 @@ export interface TradingConfig {
   /** High value transaction threshold (requires enhanced KYC) */
   highValueThreshold: number;
   /** Maximum transaction value allowed */
-  maxTransactionValue?: number;
+  maxTransactionValue?: number | undefined;
   /** Allowed payment methods */
-  allowedPaymentMethods?: string[];
+  allowedPaymentMethods?: string[] | undefined;
   /** Market data sources */
-  marketSources?: string[];
+  marketSources?: string[] | undefined;
 }
 
 const DEFAULT_CONFIG: TradingConfig = {
@@ -130,8 +130,8 @@ export class TradingService {
   private operationLogger: IOperationLogger;
   private eventFactory: DomainEventFactory;
   private config: TradingConfig;
-  private traderRepo?: ITraderRepository;
-  private transactionRepo?: ITransactionRepository;
+  private traderRepo?: ITraderRepository | undefined;
+  private transactionRepo?: ITransactionRepository | undefined;
 
   constructor(
     dependencies: {
@@ -167,7 +167,7 @@ export class TradingService {
       const messages = configResult.error.errors.map((issue) => issue.message);
       throw new ValidationError(`Invalid trading config: ${messages.join(', ')}`);
     }
-    this.config = { ...DEFAULT_CONFIG, ...configResult.data };
+    this.config = { ...DEFAULT_CONFIG, ...configResult.data } as TradingConfig;
   }
 
   // ==========================================================================

@@ -13,10 +13,10 @@ export interface NativeCryptoBindings {
   verify: (signatureHex: string, message: Uint8Array, publicKeyHex: string) => boolean;
   sha256: (data: Uint8Array) => string;
   sha512: (data: Uint8Array) => string;
-  blake3Hash?: (data: Uint8Array) => string;
-  deriveChildKey?: (parentKeyHex: string, index: number) => string;
-  derivePurposeKey?: (masterKeyHex: string, purpose: string) => string;
-  version?: () => string;
+  blake3Hash?: ((data: Uint8Array) => string) | undefined;
+  deriveChildKey?: ((parentKeyHex: string, index: number) => string) | undefined;
+  derivePurposeKey?: ((masterKeyHex: string, purpose: string) => string) | undefined;
+  version?: (() => string) | undefined;
 }
 
 type RawBindings = Record<string, unknown>;

@@ -22,30 +22,36 @@ export interface AIAnalysisContext {
   operation: string;
   /** Relevant entities */
   entities: {
-    assetLots?: AssetLot[];
-    transactions?: Transaction[];
-    complianceRecords?: ComplianceRecord[];
-    opportunities?: TradingOpportunity[];
+    assetLots?: AssetLot[] | undefined;
+    transactions?: Transaction[] | undefined;
+    complianceRecords?: ComplianceRecord[] | undefined;
+    opportunities?: TradingOpportunity[] | undefined;
   };
   /** Historical data */
-  history?: {
-    events: DomainEvent[];
-    operations: OperationLogEntry[];
-    timeRange: { start: number; end: number };
-  };
+  history?:
+    | {
+        events: DomainEvent[];
+        operations: OperationLogEntry[];
+        timeRange: { start: number; end: number };
+      }
+    | undefined;
   /** Market context */
-  market?: {
-    commodityType: string;
-    currentPrice: number;
-    priceHistory: { timestamp: number; price: number }[];
-    volatility?: number;
-  };
+  market?:
+    | {
+        commodityType: string;
+        currentPrice: number;
+        priceHistory: { timestamp: number; price: number }[];
+        volatility?: number | undefined;
+      }
+    | undefined;
   /** User context */
-  user?: {
-    id: string;
-    role: string;
-    preferences?: Record<string, unknown>;
-  };
+  user?:
+    | {
+        id: string;
+        role: string;
+        preferences?: Record<string, unknown> | undefined;
+      }
+    | undefined;
 }
 
 /**

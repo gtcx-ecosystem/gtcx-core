@@ -22,11 +22,11 @@ const RETRY_BASE_DELAY_MS = 250;
 const RETRY_MAX_DELAY_MS = 2_000;
 
 export class ApiClientError extends Error {
-  status?: number;
+  status?: number | undefined;
   code: ApiErrorCode;
   category: ApiErrorCategory;
   retryable: boolean;
-  override cause?: unknown;
+  override cause?: unknown | undefined;
 
   constructor(
     message: string,
@@ -226,8 +226,8 @@ async function parseResponse<T>(response: Response): Promise<T> {
 
 interface RequestRuntime {
   fetcher: typeof fetch;
-  signer?: RequestSigner;
-  dispatcherPromise?: Promise<Dispatcher>;
+  signer?: RequestSigner | undefined;
+  dispatcherPromise?: Promise<Dispatcher> | undefined;
 }
 
 async function request<T>(
@@ -283,14 +283,14 @@ async function request<T>(
 
     try {
       const dispatcher = runtime.dispatcherPromise ? await runtime.dispatcherPromise : undefined;
-      const init: RequestInit & { dispatcher?: Dispatcher } = {
+      const init: RequestInit & { dispatcher?: Dispatcher | undefined } = {
         method,
         headers,
-        body: requestBody,
+        ...(requestBody !== undefined ? { body: requestBody } : {}),
         signal,
       };
       if (dispatcher) {
-        init.dispatcher = dispatcher;
+        (init as Record<string, unknown>)['dispatcher'] = dispatcher;
       }
 
       const response = await runtime.fetcher(url, init);
