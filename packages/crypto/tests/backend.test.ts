@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { getBackend } from '../src';
 
 describe('crypto backend selection', () => {

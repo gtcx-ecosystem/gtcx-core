@@ -4,7 +4,7 @@
  */
 
 const prettierConfig = require('eslint-config-prettier');
-const importPlugin = require('eslint-plugin-import');
+const importPlugin = require('eslint-plugin-import-x');
 const tseslint = require('typescript-eslint');
 
 module.exports = [
@@ -36,7 +36,7 @@ module.exports = [
   },
   {
     plugins: {
-      import: importPlugin,
+      'import-x': importPlugin,
     },
     languageOptions: {
       ecmaVersion: 2022,
@@ -54,7 +54,7 @@ module.exports = [
       '@typescript-eslint/no-explicit-any': 'warn',
 
       // Import
-      'import/order': [
+      'import-x/order': [
         'error',
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
@@ -62,7 +62,7 @@ module.exports = [
           alphabetize: { order: 'asc', caseInsensitive: true },
         },
       ],
-      'import/no-duplicates': 'error',
+      'import-x/no-duplicates': 'error',
 
       // General
       'no-console': ['warn', { allow: ['warn', 'error'] }],

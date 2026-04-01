@@ -15,6 +15,7 @@ import type {
   Transaction,
   RegulatoryFramework,
 } from '@gtcx/domain';
+import { describe, expect, it, vi } from 'vitest';
 
 import { UnifiedComplianceService } from '../src/compliance';
 import type { IComplianceRepository } from '../src/repositories';

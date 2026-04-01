@@ -6,6 +6,7 @@
  */
 
 import type { ICryptoService, ILocationService, IStorageService } from '@gtcx/domain';
+import { describe, expect, it, vi } from 'vitest';
 
 import { AssetLotRegistrationService } from '../src/registration';
 

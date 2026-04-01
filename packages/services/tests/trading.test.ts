@@ -14,6 +14,7 @@ import type {
   AssetLot,
   Trader,
 } from '@gtcx/domain';
+import { describe, expect, it, vi } from 'vitest';
 
 import type { ITraderRepository } from '../src/repositories';
 import { TradingService } from '../src/trading';

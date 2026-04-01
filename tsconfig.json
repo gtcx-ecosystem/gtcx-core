@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "target": "ES2022",
     "lib": ["ES2022"],
     "module": "NodeNext",
@@ -16,7 +17,7 @@
     "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    "types": ["vitest/globals"]
+    "types": ["node", "vitest/globals"]
   },
   "exclude": ["node_modules", "dist", "build", "coverage"]
 }
