@@ -7,9 +7,7 @@
  * @package @gtcx/events
  */
 
-import type { DomainEvent } from '@gtcx/domain';
-
-import type { BufferedEvent } from './types.js';
+import type { DomainEvent, BufferedEvent } from './types.js';
 
 // ============================================================================
 // OFFLINE BUFFER OPTIONS

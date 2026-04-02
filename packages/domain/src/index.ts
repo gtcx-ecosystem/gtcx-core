@@ -160,7 +160,8 @@ export {
 } from './schemas';
 
 // ============================================================================
-// EVENTS (P12)
+// EVENTS (P12) — re-exported from @gtcx/events for backwards compatibility.
+// New code should import directly from @gtcx/events.
 // ============================================================================
 
 export {

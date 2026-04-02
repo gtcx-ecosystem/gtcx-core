@@ -43,7 +43,8 @@
   },
   "dependencies": {
     "@gtcx/crypto": "workspace:*",
-    "@gtcx/domain": "workspace:*"
+    "@gtcx/domain": "workspace:*",
+    "@gtcx/events": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

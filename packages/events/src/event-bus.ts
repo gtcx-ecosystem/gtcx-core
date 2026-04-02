@@ -8,10 +8,14 @@
  * @package @gtcx/events
  */
 
-import type { DomainEvent, DomainEventType, IDomainEventEmitter } from '@gtcx/domain';
-
 import { OfflineEventBuffer } from './offline-buffer.js';
-import type { EventBusOptions, EventHandler } from './types.js';
+import type {
+  DomainEvent,
+  DomainEventType,
+  IDomainEventEmitter,
+  EventBusOptions,
+  EventHandler,
+} from './types.js';
 
 // ============================================================================
 // TYPED EVENT BUS

@@ -2,15 +2,13 @@
  * @gtcx/events
  *
  * Core event bus for the GTCX architecture.
+ * Canonical source for domain event types, payloads, and infrastructure.
  * Provides a typed EventEmitter with offline buffering and replay.
  *
  * @packageDocumentation
  */
 
-// Types
-export type { EventHandler, EventSubscription, EventBusOptions, BufferedEvent } from './types.js';
-
-// Re-exports from @gtcx/domain
+// Domain event types, payloads, and infrastructure
 export type {
   DomainEventType,
   DomainEvent,
@@ -30,9 +28,13 @@ export type {
   ViolationDetectedPayload,
   WarningIssuedPayload,
   ReportGeneratedPayload,
+  EventHandler,
+  EventSubscription,
+  EventBusOptions,
+  BufferedEvent,
 } from './types.js';
 
-export { DomainEventFactory, nullEventEmitter } from './types.js';
+export { DomainEventFactory, nullEventEmitter, InMemoryEventEmitter } from './types.js';
 
 // Event bus
 export { TypedEventBus } from './event-bus.js';

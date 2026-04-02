@@ -240,6 +240,9 @@ importers:
       '@gtcx/crypto':
         specifier: workspace:*
         version: link:../crypto
+      '@gtcx/events':
+        specifier: workspace:*
+        version: link:../events
       '@gtcx/types':
         specifier: workspace:*
         version: link:../types
@@ -273,10 +276,6 @@ importers:
         version: 4.1.2(@types/node@22.19.8)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@22.19.8)(esbuild@0.27.2)(jiti@1.21.7)(yaml@2.8.3))
 
   packages/events:
-    dependencies:
-      '@gtcx/domain':
-        specifier: workspace:*
-        version: link:../domain
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -465,6 +464,9 @@ importers:
       '@gtcx/domain':
         specifier: workspace:*
         version: link:../domain
+      '@gtcx/events':
+        specifier: workspace:*
+        version: link:../events
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*

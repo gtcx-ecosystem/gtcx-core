@@ -1,8 +1,8 @@
-import type { DomainEvent, DomainEventType } from '@gtcx/domain';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import { TypedEventBus } from '../src/event-bus.js';
 import { OfflineEventBuffer } from '../src/offline-buffer.js';
+import type { DomainEvent, DomainEventType } from '../src/types.js';
 
 // ============================================================================
 // HELPERS

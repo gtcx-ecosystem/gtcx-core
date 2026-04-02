@@ -14,5 +14,5 @@ export default defineConfig({
     versioning: 'src/versioning.ts',
     'internal/offline-queue': 'src/internal/offline-queue.ts',
   },
-  external: ['@gtcx/types', '@gtcx/crypto'],
+  external: ['@gtcx/events', '@gtcx/types', '@gtcx/crypto'],
 });

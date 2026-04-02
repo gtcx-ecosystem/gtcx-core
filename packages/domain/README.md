@@ -33,18 +33,32 @@ await queue.enqueue('registration', { lotId: 'lot-001' });
 
 Both can be used together. Protocol types flow into domain types at the service boundary.
 
+## Module Map
+
+| Concern                                    | Canonical package             | Domain re-export?      |
+| ------------------------------------------ | ----------------------------- | ---------------------- |
+| Types, schemas, versioning, migrations     | `@gtcx/domain`                | n/a (owned here)       |
+| Events (types, payloads, factory, emitter) | `@gtcx/events`                | Yes — backwards compat |
+| Metrics                                    | `@gtcx/domain/metrics`        | n/a (owned here)       |
+| AI logging                                 | `@gtcx/domain/ai-logging`     | n/a (owned here)       |
+| AI integration                             | `@gtcx/domain/ai-integration` | n/a (owned here)       |
+| Offline queue                              | `@gtcx/domain/offline`        | n/a (owned here)       |
+
+New code should import events directly from `@gtcx/events`. The re-exports from
+`@gtcx/domain` and `@gtcx/domain/events` remain for backwards compatibility.
+
 ## Sub-exports
 
-| Path                          | Description               |
-| ----------------------------- | ------------------------- |
-| `@gtcx/domain/schemas`        | Zod validation schemas    |
-| `@gtcx/domain/events`         | Event factory and emitter |
-| `@gtcx/domain/offline`        | Offline queue and storage |
-| `@gtcx/domain/metrics`        | Metrics collection        |
-| `@gtcx/domain/migrations`     | Schema migrations         |
-| `@gtcx/domain/versioning`     | API versioning            |
-| `@gtcx/domain/ai-logging`     | AI operation logging      |
-| `@gtcx/domain/ai-integration` | AI integration hooks      |
+| Path                          | Description                                         |
+| ----------------------------- | --------------------------------------------------- |
+| `@gtcx/domain/schemas`        | Zod validation schemas                              |
+| `@gtcx/domain/events`         | Event factory and emitter (re-exports @gtcx/events) |
+| `@gtcx/domain/offline`        | Offline queue and storage                           |
+| `@gtcx/domain/metrics`        | Metrics collection                                  |
+| `@gtcx/domain/migrations`     | Schema migrations                                   |
+| `@gtcx/domain/versioning`     | API versioning                                      |
+| `@gtcx/domain/ai-logging`     | AI operation logging                                |
+| `@gtcx/domain/ai-integration` | AI integration hooks                                |
 
 ## Related
 

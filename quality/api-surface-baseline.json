@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-04-01T11:29:34.101Z",
+  "generatedAt": "2026-04-02T11:01:23.863Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.0",
@@ -170,7 +170,7 @@
       "version": "1.0.0",
       "dir": "packages/domain",
       "typesPath": "packages/domain/dist/index.d.ts",
-      "hash": "f1520a08daaded08838c7a30b3e513f3443f2d7a4d2f3fe650df63da02a646de",
+      "hash": "bdb7f781287d39fb4bc1535aa49625bbb5d4f72cc0a34f04d895f225f9a7ff02",
       "exports": [
         "AIAction",
         "AIAnalysisContext",
@@ -336,7 +336,7 @@
       "version": "0.2.0",
       "dir": "packages/events",
       "typesPath": "packages/events/dist/index.d.ts",
-      "hash": "eac59206cfaa364a412ce192914680ba81b92df686c05d1b1ae502b8b4bcecfc",
+      "hash": "49bec870cfcf0d19e3019c71e76ac9d4c7cb28d0df3905c45d77280a966546cf",
       "exports": [
         "BufferedEvent",
         "ComplianceCheckCompletedPayload",
@@ -348,6 +348,7 @@
         "EventHandler",
         "EventSubscription",
         "IDomainEventEmitter",
+        "InMemoryEventEmitter",
         "nullEventEmitter",
         "OfflineBufferOptions",
         "OfflineEventBuffer",

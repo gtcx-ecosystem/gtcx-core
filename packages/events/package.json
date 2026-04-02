@@ -19,9 +19,7 @@
     "lint": "eslint src/",
     "clean": "rm -rf dist"
   },
-  "dependencies": {
-    "@gtcx/domain": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",
     "tsup": "^8.0.1",
