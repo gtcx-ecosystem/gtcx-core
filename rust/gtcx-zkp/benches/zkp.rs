@@ -1,9 +1,8 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use gtcx_zkp::{
-    bulletproofs_prove_amount_range, bulletproofs_verify_amount_range,
-    groth16_generate_keys, groth16_prove_gci_threshold, groth16_verify,
-    schnorr_prove_identity_attribute, schnorr_verify_identity_attribute, Groth16CircuitType,
-    Groth16Keys,
+    bulletproofs_prove_amount_range, bulletproofs_verify_amount_range, groth16_generate_keys,
+    groth16_prove_gci_threshold, groth16_verify, schnorr_prove_identity_attribute,
+    schnorr_verify_identity_attribute, Groth16CircuitType, Groth16Keys,
 };
 use std::sync::OnceLock;
 use std::time::Duration;
@@ -21,9 +20,8 @@ fn bench_groth16_gci_prove(c: &mut Criterion) {
     let keys = gci_keys();
     c.bench_function("zkp_groth16_gci_prove", |b| {
         b.iter(|| {
-            let proof =
-                groth16_prove_gci_threshold(black_box(92), black_box(80), keys)
-                    .expect("Groth16 proof generation should succeed");
+            let proof = groth16_prove_gci_threshold(black_box(92), black_box(80), keys)
+                .expect("Groth16 proof generation should succeed");
             black_box(proof);
         })
     });
@@ -58,9 +56,8 @@ fn bench_bulletproofs_amount_range_prove(c: &mut Criterion) {
 }
 
 fn bench_bulletproofs_amount_range_verify(c: &mut Criterion) {
-    let bundle =
-        bulletproofs_prove_amount_range(55, 10, 100, [7u8; 32])
-            .expect("Bulletproofs range proof should succeed");
+    let bundle = bulletproofs_prove_amount_range(55, 10, 100, [7u8; 32])
+        .expect("Bulletproofs range proof should succeed");
     c.bench_function("zkp_bulletproofs_amount_range_verify", |b| {
         b.iter(|| {
             let valid = bulletproofs_verify_amount_range(black_box(&bundle))

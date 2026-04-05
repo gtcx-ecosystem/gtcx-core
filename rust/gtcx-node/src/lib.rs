@@ -206,8 +206,7 @@ pub fn zkp_commit_and_prove(
     let witness = gtcx_zkp::Witness::new(circuit, witness_data)
         .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
-    let salt_bytes =
-        hex::decode(&salt_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    let salt_bytes = hex::decode(&salt_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
     if salt_bytes.len() != 32 {
         return Err(napi::Error::from_reason(format!(
             "Salt must be 32 bytes, got {}",
@@ -443,11 +442,7 @@ mod tests {
 
         // Tamper with proof data (replace with zeros — will fail trivial proof check)
         let tampered_proof = "00".repeat(64); // 64 bytes of zeros
-        let err = zkp_verify(
-            "provenance".to_string(),
-            result.commitment,
-            tampered_proof,
-        );
+        let err = zkp_verify("provenance".to_string(), result.commitment, tampered_proof);
         assert!(err.is_err());
     }
 
@@ -466,8 +461,11 @@ mod tests {
 
     #[test]
     fn test_zkp_invalid_salt_length() {
-        let err =
-            zkp_commit_and_prove("compliance".to_string(), b"witness".to_vec(), "aabb".to_string());
+        let err = zkp_commit_and_prove(
+            "compliance".to_string(),
+            b"witness".to_vec(),
+            "aabb".to_string(),
+        );
         assert!(err.is_err());
     }
 

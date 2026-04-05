@@ -24,11 +24,11 @@
 //! assert!(verify(&signature, message, &public_key));
 //! ```
 
+use k256::ecdsa::signature::{Signer, Verifier};
 use k256::ecdsa::{Signature as K256Signature, SigningKey, VerifyingKey};
 use k256::{EncodedPoint, FieldBytes};
 use rand::rngs::OsRng;
 use serde::{Deserialize, Serialize};
-use k256::ecdsa::signature::{Signer, Verifier};
 use tracing::instrument;
 use zeroize::{Zeroize, ZeroizeOnDrop, Zeroizing};
 
@@ -121,8 +121,8 @@ impl PublicKey {
     /// Returns `CryptoError::InvalidPublicKey` if bytes are not a valid encoded point.
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         let point = EncodedPoint::from_bytes(bytes).map_err(|_| CryptoError::InvalidPublicKey)?;
-        let verifying_key = VerifyingKey::from_encoded_point(&point)
-            .map_err(|_| CryptoError::InvalidPublicKey)?;
+        let verifying_key =
+            VerifyingKey::from_encoded_point(&point).map_err(|_| CryptoError::InvalidPublicKey)?;
         Ok(Self::from_verifying_key(&verifying_key))
     }
 

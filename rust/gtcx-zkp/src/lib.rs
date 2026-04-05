@@ -32,13 +32,13 @@ use ark_crypto_primitives::merkle_tree::constraints::{
 use ark_crypto_primitives::merkle_tree::{Config, DigestConverter, MerkleTree, Path};
 use ark_ff::Field;
 use ark_groth16::{Groth16, Proof as Groth16Proof, ProvingKey, VerifyingKey};
-use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
 use ark_r1cs_std::alloc::AllocVar;
 use ark_r1cs_std::boolean::Boolean;
 use ark_r1cs_std::eq::EqGadget;
-use ark_r1cs_std::uint8::UInt8;
 use ark_r1cs_std::uint64::UInt64;
+use ark_r1cs_std::uint8::UInt8;
 use ark_r1cs_std::ToBitsGadget;
+use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
 use ark_serialize::{CanonicalDeserialize, CanonicalSerialize};
 use ark_snark::SNARK;
 use ark_std::rand::{rngs::StdRng, SeedableRng};
@@ -288,11 +288,10 @@ impl Proof {
     ///
     /// Returns [`ZkpError::InvalidProofFormat`] if proof_data exceeds u32::MAX bytes.
     pub fn to_bytes(&self) -> Result<Vec<u8>> {
-        let len = u32::try_from(self.proof_data.len()).map_err(|_| {
-            ZkpError::InvalidProofFormat {
+        let len =
+            u32::try_from(self.proof_data.len()).map_err(|_| ZkpError::InvalidProofFormat {
                 reason: format!("proof_data too large: {} bytes", self.proof_data.len()),
-            }
-        })?;
+            })?;
         let mut bytes = Vec::with_capacity(37 + self.proof_data.len());
         // Header: circuit tag (1) + commitment (32)
         bytes.push(self.circuit.to_tag());
@@ -313,17 +312,19 @@ impl Proof {
         }
 
         let circuit = CircuitType::from_tag(bytes[0])?;
-        let commitment: [u8; 32] = bytes[1..33].try_into().map_err(|_| {
-            ZkpError::InvalidProofFormat {
-                reason: "commitment extraction failed".to_string(),
-            }
-        })?;
+        let commitment: [u8; 32] =
+            bytes[1..33]
+                .try_into()
+                .map_err(|_| ZkpError::InvalidProofFormat {
+                    reason: "commitment extraction failed".to_string(),
+                })?;
 
-        let len_bytes: [u8; 4] = bytes[33..37].try_into().map_err(|_| {
-            ZkpError::InvalidProofFormat {
-                reason: "length extraction failed".to_string(),
-            }
-        })?;
+        let len_bytes: [u8; 4] =
+            bytes[33..37]
+                .try_into()
+                .map_err(|_| ZkpError::InvalidProofFormat {
+                    reason: "length extraction failed".to_string(),
+                })?;
         let proof_len = usize::try_from(u32::from_le_bytes(len_bytes)).map_err(|_| {
             ZkpError::InvalidProofFormat {
                 reason: "proof length exceeds platform maximum".to_string(),
@@ -454,7 +455,9 @@ pub struct AssetOwnershipDigestConverter;
 impl DigestConverter<Vec<u8>, [u8]> for AssetOwnershipDigestConverter {
     type TargetType = Vec<u8>;
 
-    fn convert(item: Vec<u8>) -> std::result::Result<Self::TargetType, ark_crypto_primitives::Error> {
+    fn convert(
+        item: Vec<u8>,
+    ) -> std::result::Result<Self::TargetType, ark_crypto_primitives::Error> {
         Ok(item)
     }
 }
@@ -525,7 +528,10 @@ fn uint64_is_ge<F: Field>(
 }
 
 impl ConstraintSynthesizer<Fr> for GciThresholdCircuit {
-    fn generate_constraints(self, cs: ConstraintSystemRef<Fr>) -> std::result::Result<(), SynthesisError> {
+    fn generate_constraints(
+        self,
+        cs: ConstraintSystemRef<Fr>,
+    ) -> std::result::Result<(), SynthesisError> {
         let score = UInt64::new_witness(cs.clone(), || {
             self.score.ok_or(SynthesisError::AssignmentMissing)
         })?;
@@ -540,7 +546,10 @@ impl ConstraintSynthesizer<Fr> for GciThresholdCircuit {
 }
 
 impl ConstraintSynthesizer<Fr> for AssetOwnershipCircuit {
-    fn generate_constraints(self, cs: ConstraintSystemRef<Fr>) -> std::result::Result<(), SynthesisError> {
+    fn generate_constraints(
+        self,
+        cs: ConstraintSystemRef<Fr>,
+    ) -> std::result::Result<(), SynthesisError> {
         let asset_commitment = DigestVar::new_input(cs.clone(), || {
             self.asset_commitment
                 .map(|v| v.to_vec())
@@ -593,14 +602,18 @@ impl ConstraintSynthesizer<Fr> for AssetOwnershipCircuit {
             cs.clone(),
             || self.merkle_path.ok_or(SynthesisError::AssignmentMissing),
         )?;
-        let is_member = path.verify_membership(&unit, &unit, &ownership_root, leaf_bytes.as_slice())?;
+        let is_member =
+            path.verify_membership(&unit, &unit, &ownership_root, leaf_bytes.as_slice())?;
         is_member.enforce_equal(&Boolean::constant(true))?;
         Ok(())
     }
 }
 
 impl ConstraintSynthesizer<Fr> for LocationRegionCircuit {
-    fn generate_constraints(self, cs: ConstraintSystemRef<Fr>) -> std::result::Result<(), SynthesisError> {
+    fn generate_constraints(
+        self,
+        cs: ConstraintSystemRef<Fr>,
+    ) -> std::result::Result<(), SynthesisError> {
         let region_hash = DigestVar::new_input(cs.clone(), || {
             self.region_hash
                 .map(|v| v.to_vec())
@@ -730,9 +743,7 @@ fn zk_rng() -> StdRng {
 }
 
 fn u64_to_fr_bits(value: u64) -> Vec<Fr> {
-    (0..64)
-        .map(|i| Fr::from((value >> i) & 1))
-        .collect()
+    (0..64).map(|i| Fr::from((value >> i) & 1)).collect()
 }
 
 fn bytes_to_fr_bits(bytes: &[u8]) -> Vec<Fr> {
@@ -772,9 +783,10 @@ fn vec_to_digest(bytes: Vec<u8>) -> Result<[u8; DIGEST_BYTES]> {
 }
 
 fn sha256_digest(data: &[u8]) -> Result<[u8; DIGEST_BYTES]> {
-    let digest = <Sha256 as CRHScheme>::evaluate(&(), data).map_err(|_| ZkpError::ProofSystemError {
-        reason: "sha256 evaluation failed".to_string(),
-    })?;
+    let digest =
+        <Sha256 as CRHScheme>::evaluate(&(), data).map_err(|_| ZkpError::ProofSystemError {
+            reason: "sha256 evaluation failed".to_string(),
+        })?;
     let mut out = [0u8; DIGEST_BYTES];
     out.copy_from_slice(&digest);
     Ok(out)
@@ -826,12 +838,8 @@ fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
     let mut rng = zk_rng();
     <Sha256 as CRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
     <Sha256 as TwoToOneCRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
-    let tree = AssetOwnershipMerkleTree::new(
-        &(),
-        &(),
-        leaves.iter().map(|leaf| leaf.as_slice()),
-    )
-    .map_err(map_proof_system_error)?;
+    let tree = AssetOwnershipMerkleTree::new(&(), &(), leaves.iter().map(|leaf| leaf.as_slice()))
+        .map_err(map_proof_system_error)?;
     let ownership_root = vec_to_digest(tree.root())?;
     let merkle_path = tree.generate_proof(0).map_err(map_proof_system_error)?;
 
@@ -899,8 +907,8 @@ pub fn groth16_generate_keys(circuit: Groth16CircuitType) -> Result<Groth16Keys>
                 score: Some(1),
                 threshold: Some(0),
             };
-            let (pk, vk) =
-                Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng).map_err(map_proof_system_error)?;
+            let (pk, vk) = Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng)
+                .map_err(map_proof_system_error)?;
             Ok(Groth16Keys {
                 circuit: Groth16CircuitType::GciThreshold,
                 proving_key: serialize(&pk)?,
@@ -918,8 +926,8 @@ pub fn groth16_generate_keys(circuit: Groth16CircuitType) -> Result<Groth16Keys>
                 ownership_root: Some(sample.ownership_root),
                 merkle_path: Some(sample.merkle_path),
             };
-            let (pk, vk) =
-                Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng).map_err(map_proof_system_error)?;
+            let (pk, vk) = Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng)
+                .map_err(map_proof_system_error)?;
             Ok(Groth16Keys {
                 circuit: Groth16CircuitType::AssetOwnership,
                 proving_key: serialize(&pk)?,
@@ -938,8 +946,8 @@ pub fn groth16_generate_keys(circuit: Groth16CircuitType) -> Result<Groth16Keys>
                 region_hash: Some(sample.region_hash),
                 location_commitment: Some(sample.location_commitment),
             };
-            let (pk, vk) =
-                Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng).map_err(map_proof_system_error)?;
+            let (pk, vk) = Groth16::<Bn254>::circuit_specific_setup(circuit_impl, &mut rng)
+                .map_err(map_proof_system_error)?;
             Ok(Groth16Keys {
                 circuit: Groth16CircuitType::LocationRegion,
                 proving_key: serialize(&pk)?,
@@ -1110,24 +1118,21 @@ pub fn groth16_verify(bundle: &Groth16ProofBundle) -> Result<bool> {
         Groth16CircuitType::GciThreshold => {
             let proof: Groth16Proof<Bn254> = deserialize(&bundle.proof)?;
             let vk: VerifyingKey<Bn254> = deserialize(&bundle.verifying_key)?;
-            let pvk =
-                Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;
+            let pvk = Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;
             Groth16::<Bn254>::verify_with_processed_vk(&pvk, &bundle.public_inputs, &proof)
                 .map_err(map_proof_system_error)
         }
         Groth16CircuitType::AssetOwnership => {
             let proof: Groth16Proof<Bn254> = deserialize(&bundle.proof)?;
             let vk: VerifyingKey<Bn254> = deserialize(&bundle.verifying_key)?;
-            let pvk =
-                Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;
+            let pvk = Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;
             Groth16::<Bn254>::verify_with_processed_vk(&pvk, &bundle.public_inputs, &proof)
                 .map_err(map_proof_system_error)
         }
         Groth16CircuitType::LocationRegion => {
             let proof: Groth16Proof<Bn254> = deserialize(&bundle.proof)?;
             let vk: VerifyingKey<Bn254> = deserialize(&bundle.verifying_key)?;
-            let pvk =
-                Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;
+            let pvk = Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;
             Groth16::<Bn254>::verify_with_processed_vk(&pvk, &bundle.public_inputs, &proof)
                 .map_err(map_proof_system_error)
         }
@@ -1244,9 +1249,7 @@ pub fn bulletproofs_prove_amount_range(
 
 /// Verify a Bulletproofs range proof bundle for [min, max].
 #[instrument(skip_all)]
-pub fn bulletproofs_verify_amount_range(
-    bundle: &BulletproofsRangeProofBundle,
-) -> Result<bool> {
+pub fn bulletproofs_verify_amount_range(bundle: &BulletproofsRangeProofBundle) -> Result<bool> {
     if bundle.min > bundle.max {
         return Err(ZkpError::InvalidWitness {
             reason: "min exceeds max".to_string(),
@@ -1263,10 +1266,8 @@ pub fn bulletproofs_verify_amount_range(
     let derived_low = (amount_point - min_point).compress();
     let derived_high = (max_point - amount_point).compress();
 
-    let proof_low =
-        RangeProof::from_bytes(&bundle.proof_low).map_err(map_proof_system_error)?;
-    let proof_high =
-        RangeProof::from_bytes(&bundle.proof_high).map_err(map_proof_system_error)?;
+    let proof_low = RangeProof::from_bytes(&bundle.proof_low).map_err(map_proof_system_error)?;
+    let proof_high = RangeProof::from_bytes(&bundle.proof_high).map_err(map_proof_system_error)?;
 
     let mut transcript_low =
         amount_range_transcript(b"gtcx.amount_range.low", bundle.min, bundle.max, bits);
@@ -1277,7 +1278,13 @@ pub fn bulletproofs_verify_amount_range(
     let mut transcript_high =
         amount_range_transcript(b"gtcx.amount_range.high", bundle.min, bundle.max, bits);
     let high_ok = proof_high
-        .verify_single(&bp_gens, &pc_gens, &mut transcript_high, &derived_high, bits)
+        .verify_single(
+            &bp_gens,
+            &pc_gens,
+            &mut transcript_high,
+            &derived_high,
+            bits,
+        )
         .is_ok();
 
     Ok(low_ok && high_ok)
@@ -1347,9 +1354,7 @@ pub fn schnorr_prove_identity_attribute(
 
 /// Verify a Schnorr identity attribute proof bundle.
 #[instrument(skip_all)]
-pub fn schnorr_verify_identity_attribute(
-    bundle: &SchnorrIdentityProofBundle,
-) -> Result<bool> {
+pub fn schnorr_verify_identity_attribute(bundle: &SchnorrIdentityProofBundle) -> Result<bool> {
     let public_key = ristretto_point_from_bytes(bundle.attribute_hash)?;
     let nonce_point = ristretto_point_from_bytes(bundle.nonce_commitment)?;
     let response = Scalar::from_canonical_bytes(bundle.response);
@@ -1459,16 +1464,18 @@ pub fn verify_proof(proof: &Proof, public_inputs: &PublicInputs) -> Result<bool>
     }
 
     // Extract salt and response (length already validated)
-    let salt: [u8; 32] = proof.proof_data[..32]
-        .try_into()
-        .map_err(|_| ZkpError::InvalidProofFormat {
-            reason: "salt extraction failed".to_string(),
-        })?;
-    let response: [u8; 32] = proof.proof_data[32..64]
-        .try_into()
-        .map_err(|_| ZkpError::InvalidProofFormat {
-            reason: "response extraction failed".to_string(),
-        })?;
+    let salt: [u8; 32] =
+        proof.proof_data[..32]
+            .try_into()
+            .map_err(|_| ZkpError::InvalidProofFormat {
+                reason: "salt extraction failed".to_string(),
+            })?;
+    let response: [u8; 32] =
+        proof.proof_data[32..64]
+            .try_into()
+            .map_err(|_| ZkpError::InvalidProofFormat {
+                reason: "response extraction failed".to_string(),
+            })?;
 
     // 4. Reject trivial proofs (all-zero salt or response)
     let zero = [0u8; 32];
