@@ -52,7 +52,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 | Crate                                     | Description                                                                     |
 | ----------------------------------------- | ------------------------------------------------------------------------------- |
 | [`gtcx-crypto`](./rust/gtcx-crypto)       | Core cryptographic primitives — Ed25519, SHA-256/512, key derivation            |
-| [`gtcx-zkp`](./rust/gtcx-zkp)             | Zero-knowledge proof system with hash-commitment proofs                         |
+| [`gtcx-zkp`](./rust/gtcx-zkp)             | Proof system: Groth16/Bulletproofs/Schnorr circuits + hash-commitment baseline  |
 | [`gtcx-consensus`](./rust/gtcx-consensus) | Weighted PBFT consensus engine for multi-stakeholder verification               |
 | [`gtcx-network`](./rust/gtcx-network)     | P2P networking types with topic-based pub/sub messaging                         |
 | [`gtcx-edge`](./rust/gtcx-edge)           | Edge runtime with resource-constrained device profiles and verification caching |

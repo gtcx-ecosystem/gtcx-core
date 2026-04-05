@@ -164,6 +164,11 @@ impl CircuitType {
         }
     }
 
+    /// Parse from a string name (e.g., "compliance", "provenance").
+    pub fn from_name(name: &str) -> Result<Self> {
+        name.parse()
+    }
+
     /// Parse from a byte tag.
     pub fn from_tag(tag: u8) -> Result<Self> {
         match tag {
@@ -257,6 +262,26 @@ pub struct Proof {
 }
 
 impl Proof {
+    /// Access the proof data bytes.
+    pub fn proof_data(&self) -> &[u8] {
+        &self.proof_data
+    }
+
+    /// Create a proof from its components.
+    ///
+    /// Used by NAPI bindings to reconstruct a proof from JavaScript.
+    pub fn from_components(
+        circuit: CircuitType,
+        commitment: [u8; 32],
+        proof_data: Vec<u8>,
+    ) -> Self {
+        Self {
+            circuit,
+            proof_data,
+            commitment,
+        }
+    }
+
     /// Serialize the proof to bytes.
     ///
     /// # Errors

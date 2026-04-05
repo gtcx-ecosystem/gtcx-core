@@ -874,6 +874,7 @@ name = "gtcx-node"
 version = "0.1.0"
 dependencies = [
  "gtcx-crypto",
+ "gtcx-zkp",
  "hex",
  "napi",
  "napi-build",

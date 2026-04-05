@@ -38,28 +38,36 @@ GTCX_REQUIRE_NATIVE=1
 
 ## API
 
-| Export                                      | Description               |
-| ------------------------------------------- | ------------------------- |
-| `generateKeyPair()`                         | Generate Ed25519 key pair |
-| `sign(message, privateKey)`                 | Sign a message            |
-| `verify(message, signature, publicKey)`     | Verify a signature        |
-| `hash256(data)`                             | SHA-256 hash (hex)        |
-| `hash512(data)`                             | SHA-512 hash (hex)        |
-| `hashObject(obj)`                           | Deterministic object hash |
-| `createCommitment(value, salt)`             | Cryptographic commitment  |
-| `verifyCommitment(value, salt, commitment)` | Verify commitment         |
-| `generateSalt()`                            | Random salt               |
-| `buildMerkleTree(leaves)`                   | Build Merkle tree         |
-| `verifyMerkleProof(proof)`                  | Verify Merkle inclusion   |
-| `ZKProofSchema`                             | ZK proof schema (Zod)     |
-| `HashCommitmentZkpEngine`                   | Placeholder ZK engine     |
-| `getBackend()`                              | Active crypto backend     |
+| Export                                      | Description                             |
+| ------------------------------------------- | --------------------------------------- |
+| `generateKeyPair()`                         | Generate Ed25519 key pair               |
+| `sign(message, privateKey)`                 | Sign a message                          |
+| `verify(message, signature, publicKey)`     | Verify a signature                      |
+| `hash256(data)`                             | SHA-256 hash (hex)                      |
+| `hash512(data)`                             | SHA-512 hash (hex)                      |
+| `hashObject(obj)`                           | Deterministic object hash               |
+| `createCommitment(value, salt)`             | Cryptographic commitment                |
+| `verifyCommitment(value, salt, commitment)` | Verify commitment                       |
+| `generateSalt()`                            | Random salt                             |
+| `buildMerkleTree(leaves)`                   | Build Merkle tree                       |
+| `verifyMerkleProof(proof)`                  | Verify Merkle inclusion                 |
+| `ZKProofSchema`                             | ZK proof schema (Zod)                   |
+| `HashCommitmentZkpEngine`                   | Hash-commitment engine (see note below) |
+| `isFipsMode()`                              | Check if FIPS mode is active            |
+| `getBackend()`                              | Active crypto backend                   |
 
-## ZKP (Placeholder)
+## Hash-Commitment Proofs (Not Zero-Knowledge)
+
+The TypeScript `HashCommitmentZkpEngine` provides **commitment-based verification**, not zero-knowledge proofs. It proves that a prover knew a witness at commitment time (binding property) but does not provide the zero-knowledge property — the verifier does not learn the witness, but the scheme is not formally ZK.
+
+For production zero-knowledge proofs (Groth16, Bulletproofs, Schnorr), use the Rust `gtcx-zkp` crate via `@gtcx/crypto-native` NAPI bindings.
+
+**Do not claim "ZK-verified" or "zero-knowledge compliance" based on this engine.** Use "commitment-verified" or "cryptographically attested" instead.
 
 ```typescript
 import { HashCommitmentZkpEngine } from '@gtcx/crypto';
 
+// Commitment-based verification — NOT zero-knowledge
 const engine = new HashCommitmentZkpEngine();
 const proof = await engine.generate({
   system: 'bulletproofs',

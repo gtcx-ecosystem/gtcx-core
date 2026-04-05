@@ -43,14 +43,14 @@ All services use dependency injection. Required interfaces are defined in `@gtcx
 
 ## API
 
-| Export                        | Description                                               |
-| ----------------------------- | --------------------------------------------------------- |
-| `AssetLotRegistrationService` | Registration workflow with configurable validation rules  |
-| `TradingService`              | Trade execution with license validation                   |
-| `UnifiedComplianceService`    | Compliance checks (includes optional ZK proof validation) |
-| `ValidationError`             | Thrown on invalid registration input                      |
-| `LicenseValidationError`      | Thrown on invalid trading license                         |
-| `ComplianceError`             | Thrown on compliance check failure                        |
+| Export                        | Description                                                             |
+| ----------------------------- | ----------------------------------------------------------------------- |
+| `AssetLotRegistrationService` | Registration workflow with configurable validation rules                |
+| `TradingService`              | Trade execution with license validation                                 |
+| `UnifiedComplianceService`    | Compliance checks (includes optional commitment-based proof validation) |
+| `ValidationError`             | Thrown on invalid registration input                                    |
+| `LicenseValidationError`      | Thrown on invalid trading license                                       |
+| `ComplianceError`             | Thrown on compliance check failure                                      |
 
 ## License
 
