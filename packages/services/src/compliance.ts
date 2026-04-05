@@ -56,12 +56,18 @@ import type { IComplianceRepository } from './repositories';
 // ERROR CLASSES
 // ============================================================================
 
-export class ComplianceValidationError extends Error {
-  constructor(message: string, options?: { cause?: unknown }) {
+/** Service validation error. Shared across all GTCX services. */
+export class ValidationError extends Error {
+  readonly service: string;
+  constructor(message: string, options?: { cause?: unknown; service?: string }) {
     super(message, options);
-    this.name = 'ComplianceValidationError';
+    this.name = 'ValidationError';
+    this.service = options?.service ?? 'compliance';
   }
 }
+
+/** @deprecated Use ValidationError instead */
+export const ComplianceValidationError = ValidationError;
 
 export class ComplianceServiceError extends Error {
   constructor(message: string, options?: { cause?: unknown }) {
@@ -673,14 +679,21 @@ export class UnifiedComplianceService {
   }
 
   /**
-   * Check compliance (implements IComplianceService)
+   * Check compliance (implements IComplianceService).
+   *
+   * Returns records with an explicit `checked` flag. When the compliance
+   * repository is not configured, returns `{ checked: false }` so callers
+   * can distinguish "no violations found" from "unable to check".
    */
   async checkCompliance(
     entityId: string,
     entityType: 'trader' | 'producer' | 'asset_lot' | 'transaction'
-  ): Promise<ComplianceRecord[]> {
-    if (this.complianceRepo) return this.complianceRepo.getRecords(entityId, entityType);
-    return [];
+  ): Promise<{ checked: boolean; records: ComplianceRecord[] }> {
+    if (!this.complianceRepo) {
+      return { checked: false, records: [] };
+    }
+    const records = await this.complianceRepo.getRecords(entityId, entityType);
+    return { checked: true, records };
   }
 
   // ==========================================================================

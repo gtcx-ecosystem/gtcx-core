@@ -126,7 +126,7 @@ describe('OfflineQueue', () => {
       const id2 = await queue.enqueue('trade', { b: 2 }, { dependsOn: [depId], priority: 100 });
 
       // Complete the dependency
-      queue.markProcessing(depId);
+      await queue.markProcessing(depId);
       await queue.markCompleted(depId);
 
       const next = queue.getNext();
@@ -138,7 +138,7 @@ describe('OfflineQueue', () => {
   describe('markProcessing', () => {
     it('updates status and increments attempts', async () => {
       const id = await queue.enqueue('registration', { x: 1 });
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
 
       const pending = queue.getPending();
       expect(pending).toHaveLength(0);
@@ -147,8 +147,8 @@ describe('OfflineQueue', () => {
       expect(stats.processing).toBe(1);
     });
 
-    it('does nothing for unknown id', () => {
-      queue.markProcessing('nonexistent');
+    it('does nothing for unknown id', async () => {
+      await queue.markProcessing('nonexistent');
       expect(queue.getStats().processing).toBe(0);
     });
   });
@@ -157,7 +157,7 @@ describe('OfflineQueue', () => {
   describe('markCompleted', () => {
     it('marks operation as completed', async () => {
       const id = await queue.enqueue('registration', { x: 1 });
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
       await queue.markCompleted(id);
 
       const stats = queue.getStats();
@@ -174,7 +174,7 @@ describe('OfflineQueue', () => {
   describe('markFailed', () => {
     it('retries when attempts < maxAttempts', async () => {
       const id = await queue.enqueue('registration', { x: 1 }, { maxAttempts: 3 });
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
       await queue.markFailed(id, 'network error');
 
       // Should be back to pending for retry
@@ -185,7 +185,7 @@ describe('OfflineQueue', () => {
 
     it('marks as failed when maxAttempts exceeded', async () => {
       const id = await queue.enqueue('registration', { x: 1 }, { maxAttempts: 1 });
-      queue.markProcessing(id); // attempts becomes 1
+      await queue.markProcessing(id); // attempts becomes 1
       await queue.markFailed(id, 'error');
 
       expect(queue.getFailed()).toHaveLength(1);
@@ -194,7 +194,7 @@ describe('OfflineQueue', () => {
 
     it('records last error', async () => {
       const id = await queue.enqueue('registration', { x: 1 }, { maxAttempts: 2 });
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
       await queue.markFailed(id, 'first error');
 
       const pending = queue.getPending();
@@ -216,7 +216,7 @@ describe('OfflineQueue', () => {
           conflictStrategy: 'client_wins',
         }
       );
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
 
       const resolution = await queue.markConflict(id, { name: 'server' });
 
@@ -235,7 +235,7 @@ describe('OfflineQueue', () => {
           conflictStrategy: 'server_wins',
         }
       );
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
 
       const resolution = await queue.markConflict(id, { name: 'server' });
       expect(resolution!.resolvedData).toEqual({ name: 'server' });
@@ -247,7 +247,7 @@ describe('OfflineQueue', () => {
         { name: 'local', updatedAt: 2000 },
         { conflictStrategy: 'last_write' }
       );
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
 
       const resolution = await queue.markConflict(id, {
         name: 'server',
@@ -263,7 +263,7 @@ describe('OfflineQueue', () => {
         { name: 'local', updatedAt: 1000 },
         { conflictStrategy: 'last_write' }
       );
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
 
       const resolution = await queue.markConflict(id, {
         name: 'server',
@@ -279,7 +279,7 @@ describe('OfflineQueue', () => {
         { name: 'local', extra: 'local_extra' },
         { conflictStrategy: 'merge' }
       );
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
 
       const resolution = await queue.markConflict(id, {
         name: 'server',
@@ -297,7 +297,7 @@ describe('OfflineQueue', () => {
       const id = await queue.enqueue('registration', 'local_string' as any, {
         conflictStrategy: 'merge',
       });
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
 
       const resolution = await queue.markConflict(id, 'server_string');
       expect(resolution!.resolvedData).toBe('local_string');
@@ -314,7 +314,7 @@ describe('OfflineQueue', () => {
           conflictStrategy: 'manual',
         }
       );
-      q.markProcessing(id);
+      await q.markProcessing(id);
 
       const resolution = await q.markConflict(id, { name: 'server' });
       expect(resolution!.resolvedBy).toBe('user');
@@ -332,7 +332,7 @@ describe('OfflineQueue', () => {
           conflictStrategy: 'manual',
         }
       );
-      q.markProcessing(id);
+      await q.markProcessing(id);
 
       const resolution = await q.markConflict(id, { name: 'server' });
       expect(resolution!.resolvedData).toBeUndefined();
@@ -356,14 +356,14 @@ describe('OfflineQueue', () => {
 
     it('getFailed returns failed operations', async () => {
       const id = await queue.enqueue('registration', { a: 1 }, { maxAttempts: 1 });
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
       await queue.markFailed(id, 'err');
       expect(queue.getFailed()).toHaveLength(1);
     });
 
     it('getConflicts returns operations in conflict', async () => {
       const id = await queue.enqueue('registration', { a: 1 }, { conflictStrategy: 'manual' });
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
       await queue.markConflict(id, { a: 2 });
       expect(queue.getConflicts()).toHaveLength(1);
     });
@@ -376,10 +376,10 @@ describe('OfflineQueue', () => {
       await queue.enqueue('trade', { b: 2 });
       const id3 = await queue.enqueue('sync', { c: 3 }, { maxAttempts: 1 });
 
-      queue.markProcessing(id1);
+      await queue.markProcessing(id1);
       await queue.markCompleted(id1);
 
-      queue.markProcessing(id3);
+      await queue.markProcessing(id3);
       await queue.markFailed(id3, 'err');
 
       const stats = queue.getStats();
@@ -396,7 +396,7 @@ describe('OfflineQueue', () => {
       vi.useFakeTimers();
       const q = createQueue();
       const id = await q.enqueue('registration', { a: 1 });
-      q.markProcessing(id);
+      await q.markProcessing(id);
       await q.markCompleted(id);
 
       // Advance time so the completed operation is older than maxAge
@@ -410,7 +410,7 @@ describe('OfflineQueue', () => {
 
     it('does not remove recent completed operations', async () => {
       const id = await queue.enqueue('registration', { a: 1 });
-      queue.markProcessing(id);
+      await queue.markProcessing(id);
       await queue.markCompleted(id);
 
       // Prune with 1 hour age - should not remove
@@ -480,7 +480,7 @@ describe('OfflineQueue', () => {
       const storage = new InMemoryQueueStorage();
       const q = createQueue({ storage });
       const id = await q.enqueue('registration', { a: 1 });
-      q.markProcessing(id);
+      await q.markProcessing(id);
       await q.markCompleted(id);
 
       const loaded = await storage.load();

@@ -687,12 +687,29 @@ describe('UnifiedComplianceService', () => {
   // --------------------------------------------------------------------------
 
   describe('checkCompliance()', () => {
-    it('returns empty array by default', async () => {
+    it('returns checked status with records when repo configured', async () => {
       const service = createService();
 
       const result = await service.checkCompliance('entity-1', 'trader');
 
-      expect(result).toEqual([]);
+      expect(result.checked).toBe(true);
+      expect(result.records).toEqual([]);
+    });
+
+    it('returns unchecked status when repo not configured', async () => {
+      // Create service without compliance repository
+      const service = new UnifiedComplianceService(
+        {
+          storageService: createMockStorageService(),
+          cryptoService: createMockCryptoService(),
+        },
+        {}
+      );
+
+      const result = await service.checkCompliance('entity-1', 'trader');
+
+      expect(result.checked).toBe(false);
+      expect(result.records).toEqual([]);
     });
   });
 

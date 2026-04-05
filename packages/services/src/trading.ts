@@ -70,10 +70,13 @@ export class MaxValueError extends Error {
   }
 }
 
+/** Service validation error. Shared across all GTCX services. */
 export class ValidationError extends Error {
-  constructor(message: string, options?: { cause?: unknown }) {
+  readonly service: string;
+  constructor(message: string, options?: { cause?: unknown; service?: string }) {
     super(message, options);
     this.name = 'ValidationError';
+    this.service = options?.service ?? 'trading';
   }
 }
 

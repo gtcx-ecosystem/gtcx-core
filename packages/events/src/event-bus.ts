@@ -222,14 +222,28 @@ export class TypedEventBus implements IDomainEventEmitter {
   // Internal
   // --------------------------------------------------------------------------
 
+  private writingHistory = false;
+
   private addToHistory(event: DomainEvent): void {
-    if (this.historyCount < this.maxHistorySize) {
-      this.history.push(event);
-      this.historyCount++;
-    } else {
-      // Ring buffer: overwrite oldest entry in O(1)
-      this.history[this.historyHead] = event;
-      this.historyHead = (this.historyHead + 1) % this.maxHistorySize;
+    // Guard against reentrant calls (handler emits another event during dispatch)
+    if (this.writingHistory) {
+      // Defer to next microtask to avoid corrupted ring buffer state
+      queueMicrotask(() => this.addToHistory(event));
+      return;
+    }
+
+    this.writingHistory = true;
+    try {
+      if (this.historyCount < this.maxHistorySize) {
+        this.history.push(event);
+        this.historyCount++;
+      } else {
+        // Ring buffer: overwrite oldest entry in O(1)
+        this.history[this.historyHead] = event;
+        this.historyHead = (this.historyHead + 1) % this.maxHistorySize;
+      }
+    } finally {
+      this.writingHistory = false;
     }
   }
 

@@ -194,15 +194,19 @@ export class OfflineQueue {
   }
 
   /**
-   * Mark operation as processing
+   * Mark operation as processing.
+   * Serialized via persistLock to prevent race conditions with concurrent callers.
    */
-  markProcessing(id: string): void {
-    const op = this.queue.get(id);
-    if (op) {
-      op.status = 'processing';
-      op.attempts++;
-      op.lastAttemptAt = Date.now();
-    }
+  async markProcessing(id: string): Promise<void> {
+    this.persistLock = this.persistLock.then(() => {
+      const op = this.queue.get(id);
+      if (op) {
+        op.status = 'processing';
+        op.attempts++;
+        op.lastAttemptAt = Date.now();
+      }
+    });
+    await this.persistLock;
   }
 
   /**

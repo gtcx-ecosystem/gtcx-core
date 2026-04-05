@@ -35,6 +35,13 @@ export function isFipsMode(): boolean {
  * Log a warning when a non-FIPS algorithm is used in FIPS mode.
  * Only logs once per algorithm to avoid noise.
  */
+/**
+ * Reset the cached FIPS mode flag. For testing only.
+ */
+export function resetFipsMode(): void {
+  _fipsMode = undefined;
+}
+
 const warned = new Set<string>();
 
 export function fipsWarn(algorithm: string, alternative: string): void {
