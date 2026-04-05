@@ -8,7 +8,7 @@ Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rus
 
 - [Node.js](https://nodejs.org/) >= 20.0.0
 - [pnpm](https://pnpm.io/) >= 9.15.0
-- [Rust](https://rustup.rs/) >= 1.75.0 (for Rust crates)
+- [Rust](https://rustup.rs/) >= 1.82.0 (for Rust crates)
 
 ### Setup
 
@@ -23,7 +23,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 
 ## Packages
 
-### TypeScript (19 packages + 5 config packages)
+### TypeScript (19 packages + 4 config packages)
 
 | Package                                           | Description                                                                            |
 | ------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -45,7 +45,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 | [`@gtcx/logging`](./packages/logging)             | Structured logging for GTCX services                                                   |
 | [`@gtcx/network`](./packages/network)             | P2P networking and messaging via libp2p                                                |
 | [`@gtcx/sync`](./packages/sync)                   | Offline-first sync engine with conflict resolution strategies                          |
-| [`@gtcx/config`](./packages/config)               | Shared build configuration (ESLint, TypeScript, tsup, Tailwind, jurisdiction configs)  |
+| [`@gtcx/config`](./packages/config)               | Shared build configuration (ESLint, TypeScript, tsup, jurisdiction configs)            |
 
 ### Rust (6 crates)
 
@@ -124,7 +124,7 @@ None. This is the foundation layer.
 
 ## Principles
 
-> Full definitions: [PRINCIPLES.md](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/tools/templates/PRINCIPLES.md)
+> Full definitions in gtcx-infrastructure repo
 
 Primary principles for this repo:
 

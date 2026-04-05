@@ -39,7 +39,6 @@ packages:
   # Build configuration
   - 'packages/config/eslint'
   - 'packages/config/typescript'
-  - 'packages/config/tailwind'
   - 'packages/config/tsup'
 
   # Integration tests

@@ -4,12 +4,12 @@ Shared build configuration presets for the GTCX monorepo.
 
 ## Packages
 
-| Package                   | Description                                                                |
-| ------------------------- | -------------------------------------------------------------------------- |
-| `@gtcx/eslint-config`     | ESLint 9 flat config with TypeScript, import ordering, and Math.random ban |
-| `@gtcx/typescript-config` | Base tsconfig.json (ES2022, strict, NodeNext)                              |
-| `@gtcx/tsup-config`       | Shared tsup build options (CJS + ESM, DTS, sourcemaps)                     |
-| `@gtcx/tailwind-config`   | Tailwind CSS preset                                                        |
+| Package                     | Description                                                                |
+| --------------------------- | -------------------------------------------------------------------------- |
+| `@gtcx/eslint-config`       | ESLint 9 flat config with TypeScript, import ordering, and Math.random ban |
+| `@gtcx/typescript-config`   | Base tsconfig.json (ES2022, strict, NodeNext)                              |
+| `@gtcx/tsup-config`         | Shared tsup build options (CJS + ESM, DTS, sourcemaps)                     |
+| `@gtcx/jurisdiction-config` | Multi-sovereign jurisdiction configuration schemas                         |
 
 ## Usage
 
