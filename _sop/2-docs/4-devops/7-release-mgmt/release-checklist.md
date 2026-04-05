@@ -79,6 +79,28 @@ Execute only after human approval:
 
 ---
 
+## Bad Release Rollback
+
+If a broken version is published to npm:
+
+1. **Deprecate immediately** — do not wait for a fix:
+   ```bash
+   npm deprecate @gtcx/<package>@<bad-version> "Known issue: <brief description>. Use <previous-version>."
+   ```
+2. **Notify downstream consumers** — post in the relevant channels that the version should not be used
+3. **Cut a patch release** — fix the issue, run all gates, publish a new patch version
+4. **Do NOT use `npm unpublish`** unless the version was published within the last 72 hours AND no downstream consumer has installed it. Unpublishing breaks lockfiles.
+5. **Post-incident**: document what failed and why the gates did not catch it. Update gates if needed.
+
+For security-critical releases (crypto bug, key leak, signature bypass):
+
+- Treat as P0 — Cryptographic Security Engineer must be involved
+- Deprecate all affected versions immediately
+- Patch release within 24 hours
+- Security advisory via `SECURITY.md` disclosure process
+
+---
+
 ## Hard Rules
 
 - Never mark a checklist item complete without running the actual gate

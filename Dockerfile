@@ -39,18 +39,20 @@ COPY packages/types/package.json packages/types/
 COPY packages/domain/package.json packages/domain/
 COPY packages/schemas/package.json packages/schemas/
 COPY packages/crypto/package.json packages/crypto/
+COPY packages/crypto-native/package.json packages/crypto-native/
 COPY packages/security/package.json packages/security/
 COPY packages/identity/package.json packages/identity/
 COPY packages/verification/package.json packages/verification/
+COPY packages/workproof/package.json packages/workproof/
+COPY packages/events/package.json packages/events/
+COPY packages/services/package.json packages/services/
 COPY packages/utils/package.json packages/utils/
 COPY packages/logging/package.json packages/logging/
 COPY packages/ai/package.json packages/ai/
 COPY packages/api-client/package.json packages/api-client/
 COPY packages/connectivity/package.json packages/connectivity/
-COPY packages/events/package.json packages/events/
-COPY packages/services/package.json packages/services/
+COPY packages/network/package.json packages/network/
 COPY packages/sync/package.json packages/sync/
-COPY packages/workproof/package.json packages/workproof/
 COPY packages/config/ packages/config/
 
 # Install all dependencies with frozen lockfile
@@ -103,15 +105,18 @@ ENV NODE_ENV=production
 # Security: Switch to non-root user
 USER node
 
-# Health check (OBSERVABLE principle)
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD node -e "try { require('http').get('http://localhost:3000/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1)); } catch(e) { process.exit(0); }"
+# Health check — verify core packages are loadable (library image, no HTTP server)
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD node -e "require('@gtcx/crypto'); require('@gtcx/types'); require('@gtcx/domain'); process.exit(0);"
 
-# Default port
-EXPOSE 3000
-
-# Default entrypoint verifies core packages are loadable
-CMD ["node", "-e", "console.log('GTCX Core container ready. Node:', process.version)"]
+# Default entrypoint verifies all critical packages are loadable
+CMD ["node", "-e", "\
+  const pkgs = ['@gtcx/types','@gtcx/crypto','@gtcx/domain','@gtcx/schemas',\
+    '@gtcx/security','@gtcx/identity','@gtcx/verification','@gtcx/events',\
+    '@gtcx/services','@gtcx/utils','@gtcx/logging','@gtcx/workproof'];\
+  pkgs.forEach(p => { require(p); });\
+  console.log('GTCX Core container ready.', pkgs.length, 'packages verified. Node:', process.version);\
+"]
 
 # =============================================================================
 # Build:
