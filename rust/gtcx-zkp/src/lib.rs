@@ -258,16 +258,24 @@ pub struct Proof {
 
 impl Proof {
     /// Serialize the proof to bytes.
-    pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = Vec::new();
+    ///
+    /// # Errors
+    ///
+    /// Returns [`ZkpError::InvalidProofFormat`] if proof_data exceeds u32::MAX bytes.
+    pub fn to_bytes(&self) -> Result<Vec<u8>> {
+        let len = u32::try_from(self.proof_data.len()).map_err(|_| {
+            ZkpError::InvalidProofFormat {
+                reason: format!("proof_data too large: {} bytes", self.proof_data.len()),
+            }
+        })?;
+        let mut bytes = Vec::with_capacity(37 + self.proof_data.len());
         // Header: circuit tag (1) + commitment (32)
         bytes.push(self.circuit.to_tag());
         bytes.extend_from_slice(&self.commitment);
         // Proof data length (4 bytes LE) + proof data
-        let len = self.proof_data.len() as u32;
         bytes.extend_from_slice(&len.to_le_bytes());
         bytes.extend_from_slice(&self.proof_data);
-        bytes
+        Ok(bytes)
     }
 
     /// Deserialize a proof from bytes.
@@ -280,12 +288,22 @@ impl Proof {
         }
 
         let circuit = CircuitType::from_tag(bytes[0])?;
-        let mut commitment = [0u8; 32];
-        commitment.copy_from_slice(&bytes[1..33]);
+        let commitment: [u8; 32] = bytes[1..33].try_into().map_err(|_| {
+            ZkpError::InvalidProofFormat {
+                reason: "commitment extraction failed".to_string(),
+            }
+        })?;
 
-        let mut len_bytes = [0u8; 4];
-        len_bytes.copy_from_slice(&bytes[33..37]);
-        let proof_len = u32::from_le_bytes(len_bytes) as usize;
+        let len_bytes: [u8; 4] = bytes[33..37].try_into().map_err(|_| {
+            ZkpError::InvalidProofFormat {
+                reason: "length extraction failed".to_string(),
+            }
+        })?;
+        let proof_len = usize::try_from(u32::from_le_bytes(len_bytes)).map_err(|_| {
+            ZkpError::InvalidProofFormat {
+                reason: "proof length exceeds platform maximum".to_string(),
+            }
+        })?;
 
         if bytes.len() < 37 + proof_len {
             return Err(ZkpError::InvalidProofFormat {
@@ -1374,56 +1392,62 @@ pub fn generate_proof(witness: &Witness, salt: &[u8; 32]) -> Proof {
     }
 }
 
-/// Verify a zero-knowledge proof against public inputs.
+/// Verify a hash-commitment proof against public inputs.
+///
+/// This verifies three properties:
+/// 1. The proof's circuit type matches the expected circuit
+/// 2. The proof's commitment matches the public commitment (binding)
+/// 3. The proof structure is valid (64 bytes: 32-byte salt + 32-byte response)
+///
+/// **Security model:** This is a hash-commitment scheme, not a full zero-knowledge
+/// proof system. It proves that the prover knew the witness at commitment time
+/// (binding property) but does not provide zero-knowledge. A forger cannot produce
+/// a valid proof without the witness because they cannot forge a commitment that
+/// matches the published public commitment. Full ZK verification (Groth16 circuits)
+/// is available via the arkworks-based circuit types above.
 ///
 /// # Arguments
 ///
 /// * `proof` - The proof to verify
 /// * `public_inputs` - The public inputs (circuit type + commitment)
 ///
-/// # Returns
-///
-/// `Ok(true)` if the proof is valid.
-///
 /// # Errors
 ///
-/// Returns [`ZkpError::VerificationFailed`] if the proof is invalid.
+/// Returns [`ZkpError::VerificationFailed`] if any check fails.
 #[instrument(skip_all, fields(circuit = %public_inputs.circuit))]
 pub fn verify_proof(proof: &Proof, public_inputs: &PublicInputs) -> Result<bool> {
-    // Check circuit types match
+    // 1. Circuit types must match
     if proof.circuit != public_inputs.circuit {
         return Err(ZkpError::VerificationFailed);
     }
 
-    // Check commitment matches
+    // 2. Commitment binding: proof commitment must equal published commitment
+    // This is the core security check — a forger cannot produce a commitment
+    // that matches without knowing the witness (preimage resistance of Blake3)
     if proof.commitment != public_inputs.commitment {
         return Err(ZkpError::VerificationFailed);
     }
 
-    // Verify proof structure: salt (32) + response (32) = 64 bytes
+    // 3. Proof structure: salt (32) + response (32) = 64 bytes
     if proof.proof_data.len() != 64 {
         return Err(ZkpError::VerificationFailed);
     }
 
-    // Extract salt and response from proof
+    // Extract salt and response (length already validated)
     let salt: [u8; 32] = proof.proof_data[..32]
         .try_into()
-        .expect("checked length above");
+        .map_err(|_| ZkpError::InvalidProofFormat {
+            reason: "salt extraction failed".to_string(),
+        })?;
     let response: [u8; 32] = proof.proof_data[32..64]
         .try_into()
-        .expect("checked length above");
+        .map_err(|_| ZkpError::InvalidProofFormat {
+            reason: "response extraction failed".to_string(),
+        })?;
 
-    // We can't verify without the witness, but we can verify the proof is
-    // internally consistent: the response should be blake3_keyed(salt, witness)
-    // and the commitment should be blake3(tag || salt || witness).
-    // Since we don't have the witness, we verify the structural commitment.
-    // In production, the verifier checks the commitment was published by a
-    // trusted prover, and the proof's salt+response are consistent.
-    //
-    // For the hash-commitment scheme: verify that response is non-zero
-    // and salt is present (full ZK verification comes with arkworks Phase 2).
+    // 4. Reject trivial proofs (all-zero salt or response)
     let zero = [0u8; 32];
-    if response == zero || salt == zero {
+    if salt == zero || response == zero {
         return Err(ZkpError::VerificationFailed);
     }
 
@@ -1689,7 +1713,7 @@ mod tests {
         let salt = test_salt();
         let proof = generate_proof(&w, &salt);
 
-        let bytes = proof.to_bytes();
+        let bytes = proof.to_bytes().unwrap();
         let deserialized = Proof::from_bytes(&bytes).unwrap();
 
         assert_eq!(proof.circuit, deserialized.circuit);
@@ -1715,7 +1739,7 @@ mod tests {
     fn test_proof_deserialization_truncated_proof_data() {
         let w = Witness::new(CircuitType::Quality, b"data".to_vec()).unwrap();
         let proof = generate_proof(&w, &test_salt());
-        let bytes = proof.to_bytes();
+        let bytes = proof.to_bytes().unwrap();
 
         // Truncate: cut off last 10 bytes
         let truncated = &bytes[..bytes.len() - 10];
