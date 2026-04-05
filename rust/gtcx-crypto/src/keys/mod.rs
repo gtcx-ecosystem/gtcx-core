@@ -104,14 +104,14 @@ pub fn generate_keypair_struct() -> KeyPair {
 /// let auth_key = derive_child_key(&master_key, 2);
 /// ```
 ///
-/// # Panics
+/// # Errors
 ///
-/// Panics if Blake3 derivation produces invalid key material (should never happen).
+/// Returns [`CryptoError::InvalidKeyLength`] if derivation produces invalid key material.
 #[instrument(skip(parent), fields(index = index))]
-pub fn derive_child_key(parent: &PrivateKey, index: u32) -> PrivateKey {
+pub fn derive_child_key(parent: &PrivateKey, index: u32) -> crate::Result<PrivateKey> {
     let context = format!("GTCX-2026 child key derivation index {index}");
     let derived_bytes = blake3_derive(&context, parent.as_bytes());
-    PrivateKey::from_bytes(&derived_bytes).expect("Blake3 always produces valid key material")
+    PrivateKey::from_bytes(&derived_bytes)
 }
 
 /// Derive a key for a specific purpose.
@@ -139,14 +139,14 @@ pub fn derive_child_key(parent: &PrivateKey, index: u32) -> PrivateKey {
 /// let geotag_key = derive_purpose_key(&master_key, "geotag-signing");
 /// ```
 ///
-/// # Panics
+/// # Errors
 ///
-/// Panics if Blake3 derivation produces invalid key material (should never happen).
+/// Returns [`CryptoError::InvalidKeyLength`] if derivation produces invalid key material.
 #[instrument(skip(master), fields(purpose = purpose))]
-pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> PrivateKey {
+pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> crate::Result<PrivateKey> {
     let context = format!("GTCX-2026 purpose key: {purpose}");
     let derived_bytes = blake3_derive(&context, master.as_bytes());
-    PrivateKey::from_bytes(&derived_bytes).expect("Blake3 always produces valid key material")
+    PrivateKey::from_bytes(&derived_bytes)
 }
 
 /// Derive a key using a path (hierarchical derivation).
@@ -173,19 +173,18 @@ pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> PrivateKey {
 /// let derived = derive_path(&master_key, &[44, 0, 0, 0]);
 /// ```
 ///
-/// # Panics
+/// # Errors
 ///
-/// Panics if key cloning or derivation produces invalid key material (should never happen).
+/// Returns [`CryptoError::InvalidKeyLength`] if cloning or derivation produces invalid key material.
 #[instrument(skip(master), fields(path_len = path.len()))]
-pub fn derive_path(master: &PrivateKey, path: &[u32]) -> PrivateKey {
-    let mut current =
-        PrivateKey::from_bytes(master.as_bytes()).expect("Cloning valid key should succeed");
+pub fn derive_path(master: &PrivateKey, path: &[u32]) -> crate::Result<PrivateKey> {
+    let mut current = PrivateKey::from_bytes(master.as_bytes())?;
 
     for &index in path {
-        current = derive_child_key(&current, index);
+        current = derive_child_key(&current, index)?;
     }
 
-    current
+    Ok(current)
 }
 
 /// Verify that a public key matches a private key.
@@ -225,8 +224,8 @@ mod tests {
     fn test_derive_child_key_deterministic() {
         let (master, _) = generate_keypair();
 
-        let child1 = derive_child_key(&master, 0);
-        let child2 = derive_child_key(&master, 0);
+        let child1 = derive_child_key(&master, 0).unwrap();
+        let child2 = derive_child_key(&master, 0).unwrap();
 
         assert_eq!(child1.as_bytes(), child2.as_bytes());
     }
@@ -235,8 +234,8 @@ mod tests {
     fn test_derive_child_key_different_indices() {
         let (master, _) = generate_keypair();
 
-        let child0 = derive_child_key(&master, 0);
-        let child1 = derive_child_key(&master, 1);
+        let child0 = derive_child_key(&master, 0).unwrap();
+        let child1 = derive_child_key(&master, 1).unwrap();
 
         assert_ne!(child0.as_bytes(), child1.as_bytes());
     }
@@ -245,8 +244,8 @@ mod tests {
     fn test_derive_purpose_key() {
         let (master, _) = generate_keypair();
 
-        let signing = derive_purpose_key(&master, "signing");
-        let encryption = derive_purpose_key(&master, "encryption");
+        let signing = derive_purpose_key(&master, "signing").unwrap();
+        let encryption = derive_purpose_key(&master, "encryption").unwrap();
 
         assert_ne!(signing.as_bytes(), encryption.as_bytes());
     }
@@ -255,14 +254,14 @@ mod tests {
     fn test_derive_path() {
         let (master, _) = generate_keypair();
 
-        let derived = derive_path(&master, &[44, 0, 0, 0]);
+        let derived = derive_path(&master, &[44, 0, 0, 0]).unwrap();
 
         // Should be deterministic
-        let derived2 = derive_path(&master, &[44, 0, 0, 0]);
+        let derived2 = derive_path(&master, &[44, 0, 0, 0]).unwrap();
         assert_eq!(derived.as_bytes(), derived2.as_bytes());
 
         // Different path = different key
-        let different = derive_path(&master, &[44, 0, 0, 1]);
+        let different = derive_path(&master, &[44, 0, 0, 1]).unwrap();
         assert_ne!(derived.as_bytes(), different.as_bytes());
     }
 

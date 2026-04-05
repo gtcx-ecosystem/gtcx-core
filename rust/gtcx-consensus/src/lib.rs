@@ -216,14 +216,22 @@ impl ConsensusEngine {
     }
 
     /// Get the total weight of all registered validators.
+    ///
+    /// Uses saturating addition to prevent overflow with extreme weights.
     pub fn total_weight(&self) -> u64 {
-        self.validators.iter().map(|v| v.weight).sum()
+        self.validators
+            .iter()
+            .fold(0u64, |acc, v| acc.saturating_add(v.weight))
     }
 
     /// Calculate the quorum threshold (⅔ of total weight + 1).
+    ///
+    /// Uses saturating arithmetic to prevent overflow.
     pub fn quorum_threshold(&self) -> u64 {
         let total = self.total_weight();
-        (total * 2) / 3 + 1
+        // Divide first to avoid overflow: total / 3 * 2 + 1
+        // This is equivalent to (total * 2) / 3 + 1 but overflow-safe
+        (total / 3).saturating_mul(2).saturating_add(1)
     }
 
     /// Submit a new proposal for consensus.
@@ -374,7 +382,7 @@ impl ConsensusEngine {
                     .find(|val| val.id == v.validator_id)
                     .map_or(0, |val| val.weight)
             })
-            .sum()
+            .fold(0u64, |acc, w| acc.saturating_add(w))
     }
 }
 

@@ -88,7 +88,9 @@ export function verify(
     const publicKey = hexToBytes(publicKeyHex);
 
     return ed25519.verify(signature, messageBytes, publicKey);
-  } catch {
+  } catch (error) {
+    // Surface programming errors; only swallow signature validation failures
+    if (error instanceof TypeError || error instanceof RangeError) throw error;
     return false;
   }
 }
@@ -108,7 +110,9 @@ export function verifyHash(hashHex: string, signatureHex: string, publicKeyHex: 
     const publicKey = hexToBytes(publicKeyHex);
 
     return ed25519.verify(signature, hash, publicKey);
-  } catch {
+  } catch (error) {
+    // Surface programming errors; only swallow signature validation failures
+    if (error instanceof TypeError || error instanceof RangeError) throw error;
     return false;
   }
 }

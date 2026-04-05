@@ -148,7 +148,8 @@ pub fn derive_child_key(parent_key_hex: String, index: u32) -> napi::Result<Stri
     let parent = gtcx_crypto::signing::ed25519::PrivateKey::from_bytes(&key_bytes)
         .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
-    let child = gtcx_crypto::keys::derive_child_key(&parent, index);
+    let child = gtcx_crypto::keys::derive_child_key(&parent, index)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
     Ok(hex::encode(child.as_bytes()))
 }
 
@@ -162,7 +163,8 @@ pub fn derive_purpose_key(master_key_hex: String, purpose: String) -> napi::Resu
     let master = gtcx_crypto::signing::ed25519::PrivateKey::from_bytes(&key_bytes)
         .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
-    let derived = gtcx_crypto::keys::derive_purpose_key(&master, &purpose);
+    let derived = gtcx_crypto::keys::derive_purpose_key(&master, &purpose)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
     Ok(hex::encode(derived.as_bytes()))
 }
 

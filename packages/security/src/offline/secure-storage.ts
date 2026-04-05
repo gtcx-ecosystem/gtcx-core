@@ -177,6 +177,7 @@ export abstract class SecureStorageBase {
     try {
       const raw = await this.getStorage().getItem(LOCKOUT_STATE_KEY);
       if (raw) {
+        if (raw.length > 1024) throw new Error('Lockout state too large');
         const parsed: LockoutState = JSON.parse(raw);
         this.state.failedAttempts = parsed.failedAttempts ?? 0;
       }
@@ -346,6 +347,9 @@ export abstract class SecureStorageBase {
 
     let item;
     try {
+      if (raw.length > 5_000_000) {
+        throw new SecureStorageError('Encrypted entry too large', 'PAYLOAD_TOO_LARGE');
+      }
       item = EncryptedItemSchema.parse(JSON.parse(raw));
     } catch {
       throw new SecureStorageError(
@@ -368,8 +372,13 @@ export abstract class SecureStorageBase {
     );
 
     try {
-      return JSON.parse(new TextDecoder().decode(plaintext));
-    } catch {
+      const decoded = new TextDecoder().decode(plaintext);
+      if (decoded.length > 5_000_000) {
+        throw new SecureStorageError('Decrypted payload too large', 'PAYLOAD_TOO_LARGE');
+      }
+      return JSON.parse(decoded);
+    } catch (error) {
+      if (error instanceof SecureStorageError) throw error;
       throw new SecureStorageError(
         `Secure storage: decrypted data is not valid JSON for key "${key}"`,
         'INVALID_JSON'

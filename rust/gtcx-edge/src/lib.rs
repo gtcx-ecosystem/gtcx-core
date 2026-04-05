@@ -279,9 +279,12 @@ impl VerificationCache {
     }
 
     /// Remove expired entries based on the current time.
+    ///
+    /// Uses saturating arithmetic to prevent overflow with large timestamps or TTLs.
     pub fn evict_expired(&mut self, now_ms: u64) {
         self.entries.retain(|e| {
-            let expiry_ms = e.verified_at_ms + u64::from(e.ttl_days) * 86_400_000;
+            let ttl_ms = u64::from(e.ttl_days).saturating_mul(86_400_000);
+            let expiry_ms = e.verified_at_ms.saturating_add(ttl_ms);
             now_ms < expiry_ms
         });
     }
