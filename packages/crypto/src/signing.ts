@@ -6,6 +6,8 @@
 import { ed25519 } from '@noble/curves/ed25519';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 
+import { isFipsMode } from './fips';
+import { fipsSign, fipsVerify } from './fips-backend';
 import { deepSortKeys } from './hashing';
 import { getNativeCrypto } from './native-loader';
 
@@ -30,15 +32,35 @@ export function secureWipe(buffer: Uint8Array): void {
 }
 
 /**
- * Sign a message with Ed25519
+ * Sign a message.
+ *
+ * In FIPS mode with P256 keys (DER-encoded), routes through node:crypto
+ * which delegates to the OpenSSL FIPS provider. Otherwise uses Ed25519
+ * via native bindings or noble-curves.
+ *
+ * @param message - The message to sign
+ * @param privateKeyHex - Hex-encoded private key (raw Ed25519 or DER P256)
+ * @param options - Optional: `{ algorithm: 'P256' }` to force FIPS backend
  */
-export function sign(message: string | Uint8Array, privateKeyHex: string): string {
+export function sign(
+  message: string | Uint8Array,
+  privateKeyHex: string,
+  options?: { algorithm?: 'Ed25519' | 'P256' }
+): string {
   const messageBytes = typeof message === 'string' ? new TextEncoder().encode(message) : message;
+
+  // FIPS backend: node:crypto ECDSA P-256
+  if (options?.algorithm === 'P256' || (isFipsMode() && options?.algorithm !== 'Ed25519')) {
+    return fipsSign(messageBytes, privateKeyHex);
+  }
+
+  // Native Rust backend (Ed25519)
   const native = getNativeCrypto();
   if (native) {
     return native.sign(messageBytes, privateKeyHex);
   }
 
+  // Pure JS fallback (Ed25519 via noble-curves)
   const privateKey = hexToBytes(privateKeyHex);
 
   try {
@@ -70,20 +92,33 @@ export function signHash(hash: string, privateKeyHex: string): string {
 }
 
 /**
- * Verify a signature
+ * Verify a signature.
+ *
+ * In FIPS mode with P256 keys, routes through node:crypto.
+ *
+ * @param options - Optional: `{ algorithm: 'P256' }` to force FIPS backend
  */
 export function verify(
   message: string | Uint8Array,
   signatureHex: string,
-  publicKeyHex: string
+  publicKeyHex: string,
+  options?: { algorithm?: 'Ed25519' | 'P256' }
 ): boolean {
   try {
     const messageBytes = typeof message === 'string' ? new TextEncoder().encode(message) : message;
+
+    // FIPS backend: node:crypto ECDSA P-256
+    if (options?.algorithm === 'P256' || (isFipsMode() && options?.algorithm !== 'Ed25519')) {
+      return fipsVerify(messageBytes, signatureHex, publicKeyHex);
+    }
+
+    // Native Rust backend (Ed25519)
     const native = getNativeCrypto();
     if (native) {
       return native.verify(signatureHex, messageBytes, publicKeyHex);
     }
 
+    // Pure JS fallback (Ed25519 via noble-curves)
     const signature = hexToBytes(signatureHex);
     const publicKey = hexToBytes(publicKeyHex);
 

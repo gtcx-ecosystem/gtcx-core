@@ -8,9 +8,10 @@ import { secp256k1 } from '@noble/curves/secp256k1';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 
 import { isFipsMode, fipsWarn } from './fips';
+import { fipsGenerateKeyPair } from './fips-backend';
 import { getNativeCrypto } from './native-loader';
 
-export type KeyAlgorithm = 'Ed25519' | 'Secp256k1';
+export type KeyAlgorithm = 'Ed25519' | 'Secp256k1' | 'P256';
 
 /**
  * Result of key pair generation.
@@ -42,10 +43,24 @@ export interface DerivedKey {
  * @param algorithm - 'Ed25519' or 'Secp256k1'. Defaults to Secp256k1 in FIPS mode, Ed25519 otherwise.
  */
 export function generateKeyPair(algorithm?: KeyAlgorithm): KeyPairResult {
-  const algo = algorithm ?? (isFipsMode() ? 'Secp256k1' : 'Ed25519');
+  const algo = algorithm ?? (isFipsMode() ? 'P256' : 'Ed25519');
 
   if (algo === 'Ed25519' && isFipsMode()) {
-    fipsWarn('Ed25519', 'Secp256k1 (FIPS 186-4)');
+    fipsWarn('Ed25519 (noble-curves)', 'P256 via node:crypto (FIPS-validated)');
+  }
+
+  if (algo === 'Secp256k1' && isFipsMode()) {
+    fipsWarn('Secp256k1 (noble-curves)', 'P256 via node:crypto (FIPS-validated)');
+  }
+
+  // FIPS-validated P-256 via node:crypto (routes through OpenSSL FIPS provider)
+  if (algo === 'P256') {
+    const kp = fipsGenerateKeyPair();
+    return {
+      publicKey: kp.publicKey,
+      privateKey: kp.privateKey,
+      algorithm: 'P256',
+    };
   }
 
   if (algo === 'Secp256k1') {
@@ -83,12 +98,24 @@ export function generateKeyPair(algorithm?: KeyAlgorithm): KeyPairResult {
 /**
  * Derive public key from private key.
  *
- * In FIPS mode, defaults to Secp256k1.
+ * In FIPS mode, defaults to P256.
+ *
+ * Note: P256 keys use DER encoding (PKCS8/SPKI) — derivePublicKey is not
+ * applicable since the public key is embedded in the DER structure. Use
+ * generateKeyPair('P256') instead.
  */
 export function derivePublicKey(privateKeyHex: string, algorithm?: KeyAlgorithm): string {
   if (algorithm === undefined) {
-    algorithm = isFipsMode() ? 'Secp256k1' : 'Ed25519';
+    algorithm = isFipsMode() ? 'P256' : 'Ed25519';
   }
+
+  if (algorithm === 'P256') {
+    throw new Error(
+      'P256 keys use DER encoding — use generateKeyPair("P256") to get both keys. ' +
+        'derivePublicKey is not supported for P256.'
+    );
+  }
+
   const privateKey = hexToBytes(privateKeyHex);
 
   if (algorithm === 'Secp256k1') {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-04-05T14:30:11.603Z",
+  "generatedAt": "2026-04-05T17:14:05.555Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.1",
@@ -64,7 +64,7 @@
       "version": "1.0.1",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "0d8f260ef721f66dbf59aebc8b05af14902bfe9da7a08f27b0233ab23216918e",
+      "hash": "f0d73094fe730e13b3ef56f0a12f45cf2c82340cf262847e848ce9a569f5f726",
       "exports": [
         "batchVerify",
         "batchVerifyProofs",

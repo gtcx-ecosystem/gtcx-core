@@ -281,3 +281,46 @@ describe('Secp256k1 key generation interop', () => {
     expect(kp1.publicKey).not.toBe(kp2.publicKey);
   });
 });
+
+// ---------------------------------------------------------------------------
+// FIPS P-256 backend — node:crypto ECDSA via OpenSSL
+// ---------------------------------------------------------------------------
+
+describe('P256 FIPS backend (node:crypto)', () => {
+  it('generates P256 key pair', () => {
+    const kp = generateKeyPair('P256');
+    expect(kp.algorithm).toBe('P256');
+    expect(kp.publicKey).toBeTruthy();
+    expect(kp.privateKey).toBeTruthy();
+  });
+
+  it('signs and verifies with P256', () => {
+    const kp = generateKeyPair('P256');
+    const message = 'FIPS compliance test';
+    const signature = sign(message, kp.privateKey, { algorithm: 'P256' });
+    const valid = verify(message, signature, kp.publicKey, { algorithm: 'P256' });
+    expect(valid).toBe(true);
+  });
+
+  it('rejects tampered message with P256', () => {
+    const kp = generateKeyPair('P256');
+    const signature = sign('original', kp.privateKey, { algorithm: 'P256' });
+    const valid = verify('tampered', signature, kp.publicKey, { algorithm: 'P256' });
+    expect(valid).toBe(false);
+  });
+
+  it('rejects wrong key with P256', () => {
+    const kp1 = generateKeyPair('P256');
+    const kp2 = generateKeyPair('P256');
+    const signature = sign('message', kp1.privateKey, { algorithm: 'P256' });
+    const valid = verify('message', signature, kp2.publicKey, { algorithm: 'P256' });
+    expect(valid).toBe(false);
+  });
+
+  it('generates unique P256 key pairs', () => {
+    const kp1 = generateKeyPair('P256');
+    const kp2 = generateKeyPair('P256');
+    expect(kp1.privateKey).not.toBe(kp2.privateKey);
+    expect(kp1.publicKey).not.toBe(kp2.publicKey);
+  });
+});
