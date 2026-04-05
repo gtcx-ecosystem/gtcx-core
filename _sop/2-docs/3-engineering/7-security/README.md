@@ -8,7 +8,12 @@ Security policies, threat models, and vulnerability management.
 | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`security-policy.md`](security-policy.md)             | Access control, encryption, vulnerability management, dependency audits, pen testing                                                               |
 | [`security-architecture.md`](security-architecture.md) | Defense in depth layers, auth architecture, RBAC/ABAC, data classification, DLP, network segmentation, SIEM, incident response, secrets management |
+| [`security-framework.md`](security-framework.md)       | Security architecture and controls overview                                                                                                        |
 | [`threat-model.md`](threat-model.md)                   | STRIDE analysis, DREAD scoring, attack trees, threat actors, security controls mapping, risk heat map                                              |
+| [`threat-control-matrix.md`](threat-control-matrix.md) | 12 threat controls with evidence references                                                                                                        |
+| [`fips-assessment.md`](fips-assessment.md)             | FIPS 140-2/3 cryptographic inventory, compliance status, and migration pathway                                                                     |
+| [`nist-800-53-mapping.md`](nist-800-53-mapping.md)     | NIST SP 800-53 Rev 5 control mapping (AC, AU, IA, SC, SI, CM, SA families)                                                                         |
+| [`defense-readiness.md`](defense-readiness.md)         | Air-gap capability, telemetry audit, SBOM/provenance, CMMC Level 2 mapping, S6 gap analysis                                                        |
 
 ## What belongs here
 
