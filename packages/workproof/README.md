@@ -22,6 +22,39 @@ pnpm add @gtcx/workproof
 | `@gtcx/workproof/offline`    | Offline credential support           |
 | `@gtcx/workproof/trust`      | Trust chain validation               |
 
+## Usage
+
+```typescript
+import { createWorkProof, verifyWorkProof } from '@gtcx/workproof';
+
+// Create a signed WorkProof (W3C Verifiable Credential)
+const proof = createWorkProof({
+  credentialSubject: {
+    id: 'did:gtcx:worker-001',
+    role: 'Mining Supervisor',
+    employer: 'did:gtcx:org-001',
+    startDate: '2024-01-15',
+    skills: ['extraction', 'safety-compliance'],
+  },
+  issuerDID: 'did:gtcx:org-001',
+  issuerPrivateKey: privateKeyHex,
+  expirationDate: '2026-01-15T00:00:00Z',
+});
+
+// Verify a WorkProof
+const result = verifyWorkProof(proof, issuerPublicKeyHex);
+// result.valid === true | false
+// result.errors === string[]
+```
+
+```typescript
+import { PREDICATE_REGISTRY } from '@gtcx/workproof';
+
+// 40 predicates available for selective disclosure
+const predicate = PREDICATE_REGISTRY['employment.verified'];
+// predicate.id, predicate.description, predicate.category
+```
+
 ## Dependencies
 
 - `@gtcx/crypto` — signing and verification
