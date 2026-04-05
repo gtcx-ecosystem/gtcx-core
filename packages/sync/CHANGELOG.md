@@ -1,5 +1,11 @@
 # @gtcx/sync
 
+## 0.2.1
+
+### Patch Changes
+
+- First published release. AI integration hooks, API client, connectivity detection, event system, logging, networking, services, sync engine, utilities, and WorkProof attestations. Pre-stable (0.x) — API may evolve.
+
 ## 0.2.0
 
 ### Minor Changes
