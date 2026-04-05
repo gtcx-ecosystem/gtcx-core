@@ -47,7 +47,7 @@
     "clean": "rm -rf dist node_modules .turbo"
   },
   "dependencies": {
-    "zod": "^3.23.0"
+    "zod": "^4.3.6"
   },
   "peerDependencies": {
     "@gtcx/crypto": "workspace:*",
