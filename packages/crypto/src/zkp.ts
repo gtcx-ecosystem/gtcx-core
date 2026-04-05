@@ -98,10 +98,21 @@ const ensureCommitment = (publicInputs: string[], commitment: string): string[] 
 };
 
 /**
- * Hash-commitment proof engine (placeholder).
+ * Hash-commitment proof engine — **PLACEHOLDER, NOT PRODUCTION ZK**.
  *
- * This is not a real ZK proof system; it provides a compatible API surface
- * while full circuits are implemented in Rust (arkworks).
+ * WARNING: This engine does NOT provide zero-knowledge proofs. It uses
+ * hash commitments to provide a compatible API surface while full ZK
+ * circuits are implemented in Rust (arkworks/Groth16/Bulletproofs).
+ *
+ * A verifier using this engine cannot distinguish a valid proof from
+ * any 64 random non-zero bytes. Do not rely on this for compliance
+ * claims, regulatory submissions, or any context where proof
+ * correctness matters.
+ *
+ * For real ZK verification, use the Rust NAPI bindings via
+ * `@gtcx/crypto-native` which delegates to `gtcx-zkp`.
+ *
+ * @see rust/gtcx-zkp for production ZK implementation
  */
 export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
   /** Hash-commitment engine does not produce verification keys. Use Rust NAPI bindings for full ZKP. */

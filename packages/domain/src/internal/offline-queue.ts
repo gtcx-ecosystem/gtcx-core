@@ -375,9 +375,15 @@ export class OfflineQueue {
     });
   }
 
+  private persistLock: Promise<void> = Promise.resolve();
+
   private async persist(): Promise<void> {
     if (!this.storage) return;
-    await this.storage.save(Array.from(this.queue.values()));
+    // Serialize persist calls to prevent race conditions
+    this.persistLock = this.persistLock.then(() =>
+      this.storage!.save(Array.from(this.queue.values()))
+    );
+    await this.persistLock;
   }
 
   private resolveByTimestamp<T>(local: T, server: T): T {

@@ -100,14 +100,20 @@ export const CryptoProofSchema = z.object({
 // ASSET REGISTRATION SCHEMAS (P2 + P9)
 // ============================================================================
 
-export const AssetDetailsSchema = z.record(z.string(), z.unknown()).refine(
-  (data) => {
-    // Prevent dangerous keys
-    const dangerousKeys = ['__proto__', 'constructor', 'prototype'];
-    return !Object.keys(data).some((key) => dangerousKeys.includes(key));
-  },
-  { message: 'Invalid object keys detected' }
-);
+/** Check all levels of an object for prototype pollution keys. */
+function hasDangerousKeys(obj: unknown): boolean {
+  if (typeof obj !== 'object' || obj === null) return false;
+  const dangerous = ['__proto__', 'constructor', 'prototype'];
+  for (const key of Object.keys(obj)) {
+    if (dangerous.includes(key)) return true;
+    if (hasDangerousKeys((obj as Record<string, unknown>)[key])) return true;
+  }
+  return false;
+}
+
+export const AssetDetailsSchema = z
+  .record(z.string(), z.unknown())
+  .refine((data) => !hasDangerousKeys(data), { message: 'Invalid object keys detected' });
 
 export const AssetRegistrationDataSchema = z.object({
   // Required fields

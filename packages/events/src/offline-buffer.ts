@@ -37,13 +37,22 @@ export class OfflineEventBuffer {
     this.maxBufferSize = options?.maxBufferSize ?? 5000;
   }
 
+  /** Number of events dropped due to buffer overflow since creation. */
+  droppedCount = 0;
+
   /**
    * Store an event for later dispatch.
-   * If the buffer is full, the oldest event is dropped.
+   * If the buffer is full, the oldest event is dropped and a warning is logged.
    */
   buffer(event: DomainEvent): void {
     if (this.buffered.length >= this.maxBufferSize) {
       this.buffered.shift();
+      this.droppedCount++;
+      if (typeof console !== 'undefined') {
+        console.warn(
+          `[gtcx/events] OfflineEventBuffer overflow: dropped event (total dropped: ${this.droppedCount}, buffer size: ${this.maxBufferSize})`
+        );
+      }
     }
 
     this.buffered.push({

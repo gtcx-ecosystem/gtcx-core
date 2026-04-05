@@ -194,11 +194,20 @@ export async function createEnhancedIdentity(
     multiKeyPairs,
     postQuantumHash: postQuantumBinding,
     keyDerivation: keyDerivation
-      ? {
-          algorithm: keyDerivation.algorithm ?? 'Argon2',
-          iterations: keyDerivation.iterations ?? 100000,
-          salt: keyDerivation.salt ?? randomBytes(32).toString('hex'),
-        }
+      ? (() => {
+          const salt = keyDerivation.salt ?? randomBytes(32).toString('hex');
+          if (salt.length < 32) {
+            throw new IdentityError(
+              'Key derivation salt must be at least 16 bytes (32 hex chars)',
+              'INVALID_SALT'
+            );
+          }
+          return {
+            algorithm: keyDerivation.algorithm ?? 'Argon2',
+            iterations: keyDerivation.iterations ?? 100000,
+            salt,
+          };
+        })()
       : undefined,
   };
 
