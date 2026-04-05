@@ -351,6 +351,25 @@ export type JurisdictionConfig = z.infer<typeof JurisdictionConfigSchema>;
 
 ---
 
+## Dependencies
+
+| Dependency      | Role                                       |
+| --------------- | ------------------------------------------ |
+| `zod` `^3.23.0` | Schema validation for jurisdiction configs |
+
+### devDependencies
+
+| Dependency                              | Version       |
+| --------------------------------------- | ------------- |
+| `@gtcx/tsup-config` `workspace:*`       | Build config  |
+| `@gtcx/typescript-config` `workspace:*` | TS config     |
+| `tsup` `^8.0.1`                         | Bundler       |
+| `typescript` `^6.0.0`                   | Type checking |
+| `vitest` `^3.2.0`                       | Test runner   |
+| `@vitest/coverage-v8` `^3.2.0`          | Test coverage |
+
+---
+
 ## Directory Structure
 
 ```

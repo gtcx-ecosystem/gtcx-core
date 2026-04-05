@@ -33,6 +33,7 @@ All modules re-exported from the package root.
 
 | Dependency                         | Role                                          |
 | ---------------------------------- | --------------------------------------------- |
+| `@gtcx/crypto` `workspace:*`       | Cryptographic primitives (Ed25519 signing)    |
 | `@gtcx/types` `workspace:*`        | Shared protocol types                         |
 | `@gtcx/verification` `workspace:*` | Proof bundling and certificate infrastructure |
 | `zod` `^3.23.0`                    | Schema validation for VC data structures      |
