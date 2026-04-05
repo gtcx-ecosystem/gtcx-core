@@ -7,6 +7,7 @@ import { ed25519 } from '@noble/curves/ed25519';
 import { secp256k1 } from '@noble/curves/secp256k1';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 
+import { isFipsMode, fipsWarn } from './fips';
 import { getNativeCrypto } from './native-loader';
 
 export type KeyAlgorithm = 'Ed25519' | 'Secp256k1';
@@ -33,11 +34,21 @@ export interface DerivedKey {
 }
 
 /**
- * Generate a new key pair
- * @param algorithm - 'Ed25519' (default) or 'Secp256k1'
+ * Generate a new key pair.
+ *
+ * In FIPS mode (`GTCX_FIPS_MODE=true`), defaults to Secp256k1 (FIPS 186-4).
+ * Ed25519 is still available but triggers a FIPS compliance warning.
+ *
+ * @param algorithm - 'Ed25519' or 'Secp256k1'. Defaults to Secp256k1 in FIPS mode, Ed25519 otherwise.
  */
-export function generateKeyPair(algorithm: KeyAlgorithm = 'Ed25519'): KeyPairResult {
-  if (algorithm === 'Secp256k1') {
+export function generateKeyPair(algorithm?: KeyAlgorithm): KeyPairResult {
+  const algo = algorithm ?? (isFipsMode() ? 'Secp256k1' : 'Ed25519');
+
+  if (algo === 'Ed25519' && isFipsMode()) {
+    fipsWarn('Ed25519', 'Secp256k1 (FIPS 186-4)');
+  }
+
+  if (algo === 'Secp256k1') {
     const privateKey = secp256k1.utils.randomPrivateKey();
     const publicKey = secp256k1.getPublicKey(privateKey);
 
@@ -70,12 +81,14 @@ export function generateKeyPair(algorithm: KeyAlgorithm = 'Ed25519'): KeyPairRes
 }
 
 /**
- * Derive public key from private key
+ * Derive public key from private key.
+ *
+ * In FIPS mode, defaults to Secp256k1.
  */
-export function derivePublicKey(
-  privateKeyHex: string,
-  algorithm: KeyAlgorithm = 'Ed25519'
-): string {
+export function derivePublicKey(privateKeyHex: string, algorithm?: KeyAlgorithm): string {
+  if (algorithm === undefined) {
+    algorithm = isFipsMode() ? 'Secp256k1' : 'Ed25519';
+  }
   const privateKey = hexToBytes(privateKeyHex);
 
   if (algorithm === 'Secp256k1') {

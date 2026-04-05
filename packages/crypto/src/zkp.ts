@@ -1,6 +1,7 @@
 import { bytesToHex } from '@noble/hashes/utils';
 import { z } from 'zod';
 
+import { fipsWarn } from './fips';
 import { hash256, generateSalt } from './hashing';
 
 export const ZKProofSystemSchema = z.enum(['schnorr', 'bulletproofs', 'groth16', 'plonk']);
@@ -118,6 +119,7 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
   /** Hash-commitment engine does not produce verification keys. Use Rust NAPI bindings for full ZKP. */
   readonly supportsVerificationKeys = false;
   async generate(input: ZkProofInput): Promise<ZKProof> {
+    fipsWarn('ZKP/HashCommitment', 'No FIPS ZKP standard exists — document as supplementary');
     const witnessBytes = toBytes(input.witness);
     const witnessHex = bytesToHex(witnessBytes);
     const salt = generateSalt(32);

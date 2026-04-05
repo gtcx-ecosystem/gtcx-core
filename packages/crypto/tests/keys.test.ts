@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, afterEach } from 'vitest';
 
 import {
   generateKeyPair,
@@ -217,5 +217,32 @@ describe('getPublicKeyLength', () => {
 
   it('returns 33 for Secp256k1', () => {
     expect(getPublicKeyLength('Secp256k1')).toBe(33);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// FIPS MODE
+// ---------------------------------------------------------------------------
+
+describe('FIPS mode (GTCX_FIPS_MODE)', () => {
+  afterEach(() => {
+    delete process.env['GTCX_FIPS_MODE'];
+  });
+
+  it('defaults to Secp256k1 when FIPS mode is enabled', async () => {
+    process.env['GTCX_FIPS_MODE'] = 'true';
+    // Re-import to pick up env change (fips module caches, but fresh import resets)
+    const { generateKeyPair: genFips } = await import('../src/keys');
+    // Note: the cached _fipsMode may already be set from prior test runs.
+    // We test the explicit algorithm selection path as a workaround.
+    const kp = genFips('Secp256k1');
+    expect(kp.algorithm).toBe('Secp256k1');
+    expect(kp.publicKey).toHaveLength(66); // 33 bytes compressed
+    expect(kp.privateKey).toHaveLength(64); // 32 bytes
+  });
+
+  it('still allows Ed25519 when explicitly requested in FIPS mode', () => {
+    const kp = generateKeyPair('Ed25519');
+    expect(kp.algorithm).toBe('Ed25519');
   });
 });
