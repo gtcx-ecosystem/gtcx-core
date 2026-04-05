@@ -14,6 +14,7 @@ Security policies, threat models, and vulnerability management.
 | [`fips-assessment.md`](fips-assessment.md)             | FIPS 140-2/3 cryptographic inventory, compliance status, and migration pathway                                                                     |
 | [`nist-800-53-mapping.md`](nist-800-53-mapping.md)     | NIST SP 800-53 Rev 5 control mapping (AC, AU, IA, SC, SI, CM, SA families)                                                                         |
 | [`defense-readiness.md`](defense-readiness.md)         | Air-gap capability, telemetry audit, SBOM/provenance, CMMC Level 2 mapping, S6 gap analysis                                                        |
+| [`stig-compliance.md`](stig-compliance.md)             | DISA STIG compliance mapping — Application Security V5R3, Node.js, Rust                                                                            |
 
 ## What belongs here
 
