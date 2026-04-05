@@ -23,7 +23,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 
 ## Packages
 
-### TypeScript (19 packages + 4 config packages)
+### TypeScript (18 packages + 4 config presets)
 
 | Package                                           | Description                                                                            |
 | ------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -62,7 +62,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1
 
 ```
 gtcx-core/
-├── packages/               # 19 TypeScript packages
+├── packages/               # 18 TypeScript packages + config presets
 │   ├── types/              #   Core types and protocol definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives
