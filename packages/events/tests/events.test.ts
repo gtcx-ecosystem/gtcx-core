@@ -2,7 +2,13 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import { TypedEventBus } from '../src/event-bus.js';
 import { OfflineEventBuffer } from '../src/offline-buffer.js';
-import type { DomainEvent, DomainEventType } from '../src/types.js';
+import {
+  DomainEventFactory,
+  InMemoryEventEmitter,
+  nullEventEmitter,
+  type DomainEvent,
+  type DomainEventType,
+} from '../src/types.js';
 
 // ============================================================================
 // HELPERS
@@ -458,5 +464,148 @@ describe('Integration: offline buffering and replay', () => {
 
     const offlineBuffer = bus.getOfflineBuffer();
     expect(offlineBuffer.size).toBe(1);
+  });
+});
+
+// ============================================================================
+// DomainEventFactory
+// ============================================================================
+
+describe('DomainEventFactory', () => {
+  it('should create registration events', () => {
+    const factory = new DomainEventFactory('corr-1');
+    const event = factory.registration('registration.started', { sessionId: 's1' });
+
+    expect(event.type).toBe('registration.started');
+    expect(event.payload).toEqual({ sessionId: 's1' });
+    expect(event.source).toBe('registration');
+    expect(event.correlationId).toBe('corr-1');
+    expect(event.version).toBe(1);
+    expect(event.timestamp).toBeTypeOf('number');
+  });
+
+  it('should create trading events', () => {
+    const factory = new DomainEventFactory();
+    const event = factory.trading('trading.trade_executed', { tradeId: 't1' }, 'override');
+
+    expect(event.type).toBe('trading.trade_executed');
+    expect(event.source).toBe('trading');
+    expect(event.correlationId).toBe('override');
+  });
+
+  it('should create compliance events', () => {
+    const factory = new DomainEventFactory('corr-2');
+    const event = factory.compliance('compliance.check_completed', { result: 'pass' });
+
+    expect(event.type).toBe('compliance.check_completed');
+    expect(event.source).toBe('compliance');
+    expect(event.correlationId).toBe('corr-2');
+  });
+
+  it('should return correlationId via getter', () => {
+    const factory = new DomainEventFactory('test-id');
+    expect(factory.getCorrelationId()).toBe('test-id');
+  });
+
+  it('should return undefined correlationId when not set', () => {
+    const factory = new DomainEventFactory();
+    expect(factory.getCorrelationId()).toBeUndefined();
+  });
+});
+
+// ============================================================================
+// nullEventEmitter
+// ============================================================================
+
+describe('nullEventEmitter', () => {
+  it('should accept emit without error', () => {
+    expect(() => nullEventEmitter.emit(createEvent())).not.toThrow();
+  });
+
+  it('should return unsubscribe function from on', () => {
+    const unsub = nullEventEmitter.on('registration.started', () => {});
+    expect(typeof unsub).toBe('function');
+    expect(() => unsub()).not.toThrow();
+  });
+
+  it('should return unsubscribe function from onAny', () => {
+    const unsub = nullEventEmitter.onAny(() => {});
+    expect(typeof unsub).toBe('function');
+    expect(() => unsub()).not.toThrow();
+  });
+});
+
+// ============================================================================
+// InMemoryEventEmitter
+// ============================================================================
+
+describe('InMemoryEventEmitter', () => {
+  let emitter: InMemoryEventEmitter;
+
+  beforeEach(() => {
+    emitter = new InMemoryEventEmitter();
+  });
+
+  it('should deliver events to type-specific handlers', () => {
+    const handler = vi.fn();
+    emitter.on('registration.started', handler);
+
+    const event = createEvent('registration.started');
+    emitter.emit(event);
+
+    expect(handler).toHaveBeenCalledWith(event);
+  });
+
+  it('should deliver events to global handlers', () => {
+    const handler = vi.fn();
+    emitter.onAny(handler);
+
+    emitter.emit(createEvent('registration.started'));
+    emitter.emit(createEvent('trading.trade_executed'));
+
+    expect(handler).toHaveBeenCalledTimes(2);
+  });
+
+  it('should unsubscribe type-specific handlers', () => {
+    const handler = vi.fn();
+    const unsub = emitter.on('registration.started', handler);
+    unsub();
+
+    emitter.emit(createEvent('registration.started'));
+
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it('should unsubscribe global handlers', () => {
+    const handler = vi.fn();
+    const unsub = emitter.onAny(handler);
+    unsub();
+
+    emitter.emit(createEvent('registration.started'));
+
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it('should record emitted events', () => {
+    emitter.emit(createEvent('registration.started'));
+    emitter.emit(createEvent('trading.trade_executed'));
+
+    expect(emitter.getEvents()).toHaveLength(2);
+  });
+
+  it('should filter events by type', () => {
+    emitter.emit(createEvent('registration.started'));
+    emitter.emit(createEvent('trading.trade_executed'));
+    emitter.emit(createEvent('registration.started'));
+
+    expect(emitter.getEventsByType('registration.started')).toHaveLength(2);
+    expect(emitter.getEventsByType('trading.trade_executed')).toHaveLength(1);
+  });
+
+  it('should clear all events', () => {
+    emitter.emit(createEvent());
+    emitter.clear();
+
+    expect(emitter.getEvents()).toHaveLength(0);
   });
 });
