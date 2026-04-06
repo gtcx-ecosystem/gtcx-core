@@ -49,7 +49,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.2",
+    "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.29.8",
     "@multiformats/multiaddr": "^12.5.1",
     "@types/node": "^22.10.0",
