@@ -1,8 +1,8 @@
-# [Service Name] v[X.Y] GA Release Checklist
+# core v1.0.x GA Release Checklist
 
-**Owner**: [Team Name]
-**Scope**: [Service / Product Name]
-**Target**: v[X.Y] GA
+**Owner**: Core Platform
+**Scope**: core — shared cryptographic and protocol foundation library
+**Target**: v1.0.x GA (internal consumption by downstream GTCX repos)
 
 ---
 
@@ -10,38 +10,46 @@
 
 ### Security
 
-- [ ] All security remediation sprints completed (Critical/High/Medium/Low)
-- [ ] Dependency scans clean (no critical/high CVEs)
-- [ ] SAST clean (no critical/high findings)
-- [ ] Pen test complete and no critical findings
-- [ ] mTLS + internal auth verified for internal routes
+- [x] All security remediation sprints completed (Phases 0-3)
+- [ ] Dependency scans clean (no critical/high CVEs in production deps) — 2026-05-02: 0 production vulns; 4 dev-only findings (vite, postcss)
+- [ ] SAST clean (no critical/high findings) — CodeQL not yet configured
+- [ ] Pen test complete and no critical findings — not yet scheduled
+- [x] Rust crates: `#![deny(unsafe_code)]` enforced; key material zeroized (`Zeroizing<T>`)
 
 ### Performance
 
-- [ ] Sustained {target-rps} req/s at p95 < {target-latency}ms
-- [ ] Error rate < {target-error-rate}%
-- [ ] Load test results archived
+- [x] All 12 crypto benchmarks within budget (Ed25519 sign 78us, verify 58us, key gen 48us)
+- [x] Performance trend enforcement active (8% max regression, 5-sample window)
+- [x] Benchmark results archived (`benchmarks/performance-report.json`, 2026-04-05)
 
 ### Compliance
 
-- [ ] SOC2 evidence pipeline operational
-- [ ] ISO 27001 evidence pipeline operational
-- [ ] Audit log retention + hash chain verified
-- [ ] Change management evidence archived
+- [ ] SOC2 evidence pipeline operational — pipeline documented, evidence not collected
+- [x] ISO 27001 controls mapped (`_sop/2-docs/3-engineering/5-compliance/compliance-requirements.md`)
+- [x] Audit log: hash-chain tamper detection in `rust/gtcx-crypto`
+- [x] Change management: all changes via PR, conventional commits, ADRs for architecture decisions
 
 ### Documentation
 
-- [ ] OpenAPI published and versioned
-- [ ] SDKs updated and aligned with auth headers
-- [ ] Developer portal content complete
+- [x] API surface baselined and drift-checked (`quality/api-surface-baseline.json`, 2026-04-05)
+- [x] Per-package READMEs complete (19 packages)
+- [ ] Cross-package integration guide — missing
+- [x] AI stub status documented (READMEs updated 2026-05-02)
 
-### Reliability & Ops
+### Supply Chain
 
-- [ ] Monitoring dashboards in place (latency, error rate, saturation)
-- [ ] Alerting configured
-- [ ] Runbooks updated (incident response, rollback)
-- [ ] DR drill logged with measured RPO/RTO
-- [ ] SLA metrics logged for {sla-window}-day uptime window
+- [x] Architecture boundary enforcement in CI (`tools/check-package-boundaries.mjs`)
+- [x] Threat matrix validation in CI (`tools/check-threat-matrix.mjs`)
+- [ ] Provenance manifest generated — script exists, artifact not yet created
+- [ ] SBOM published — generation scripted, not yet executed for a release
+
+### Library-Specific (N/A for services)
+
+- [x] No circular dependencies (enforced by `pnpm architecture:check`)
+- [x] Dual CJS/ESM output for all packages
+- [x] TypeScript strict mode with declaration maps
+- [x] Changeset versioning configured (`.changeset/config.json`)
+- [ ] Formal tagged release cut — zero git tags exist
 
 ---
 
@@ -56,4 +64,4 @@
 
 ---
 
-_This checklist is a template. All gates must be ✅ before GA release is authorized._
+_All gates must be complete before GA release is authorized._

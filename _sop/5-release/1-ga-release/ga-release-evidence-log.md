@@ -2,18 +2,15 @@
 
 Track every completed release gate with a dated evidence entry. One row per evidence artifact. Append rows as gates are satisfied — do not edit prior rows.
 
-| Date         | Gate                              | Evidence                                               | Summary                                             | Owner           |
-| ------------ | --------------------------------- | ------------------------------------------------------ | --------------------------------------------------- | --------------- |
-| [YYYY-MM-DD] | Performance ([X] req/s)           | `docs/performance/results/[service]-[timestamp].md`    | [Pass/Fail]: p95 [Xms], error rate [X%], ~[X] req/s | Platform Lead   |
-| [YYYY-MM-DD] | Security (Dependency Audit)       | `[path-to-audit-results]`                              | Dependency audit [Clean / Findings Detected]        | Security Lead   |
-| [YYYY-MM-DD] | Security (SBOM)                   | `[path-to-sbom-file]`                                  | SBOM generated ([date])                             | Security Lead   |
-| [YYYY-MM-DD] | Security (Secret Scan)            | `[path-to-scan-output]`                                | Secret scan completed ([date])                      | Security Lead   |
-| [YYYY-MM-DD] | Security (Pen Test + Remediation) | `[path-to-pen-test-package]`                           | Pen test vendor package generated                   | Security Lead   |
-| [YYYY-MM-DD] | Compliance Evidence (SOC2)        | `docs/operations/evidence-archive-index-[YYYY-MM].md`  | SOC2 evidence bundle generated                      | Compliance Lead |
-| [YYYY-MM-DD] | Compliance Evidence (ISO 27001)   | `docs/operations/evidence-archive-index-[YYYY-MM].md`  | ISO 27001 evidence bundle generated                 | Compliance Lead |
-| [YYYY-MM-DD] | Reliability & Ops (DR Drill)      | `docs/operations/dr-drill-evidence-[YYYY-MM-DD].md`    | DR drill recorded: [failover type]                  | SRE Lead        |
-| [YYYY-MM-DD] | Reliability & Ops (SLA Metrics)   | `docs/operations/sla-metrics-evidence-[YYYY-MM-DD].md` | SLA metrics captured for [YYYY-MM]                  | SRE Lead        |
-| [YYYY-MM-DD] | Pen Test Execution                | `[path-to-pen-test-package]`                           | Pen test [vendor] execution [status]                | Security Lead   |
+| Date       | Gate                               | Evidence                                                       | Summary                                                                                            | Owner         |
+| ---------- | ---------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------- |
+| 2026-05-02 | Security (Dependency Audit — npm)  | `pnpm audit` output                                            | Pass: 0 production vulns; 4 dev-only (vite 8.0.3 x3, postcss 8.5.8 x1 — all via vitest/tsup)       | Core Platform |
+| 2026-05-02 | Security (Dependency Audit — Rust) | `cargo audit` output                                           | Pass: 0 production vulns; 1 test-only warning (rand 0.9.2 RUSTSEC-2026-0097 via proptest)          | Core Platform |
+| 2026-04-05 | Performance (Crypto Benchmarks)    | `benchmarks/performance-report.json`                           | Pass: all 12 metrics within budget; 0 regressions; trend enforcement active                        | Core Platform |
+| 2026-04-05 | API Surface Stability              | `quality/api-surface-report.json`                              | Pass: 18 packages baselined; 0 drift; 0 semver violations                                          | Core Platform |
+| 2026-02-19 | Coverage (Critical Packages)       | `quality/kpi-metrics.json`                                     | Pass: crypto 94.6%, domain 96.4%, security/services/verification all >90%; 0 high-severity escapes | Core Platform |
+| 2026-05-02 | Documentation (AI Stub Caveats)    | README.md, packages/ai/README.md, packages/workproof/README.md | Pass: AI stub status explicitly documented in all READMEs                                          | Core Platform |
+| 2026-03-19 | Change Management                  | CHANGELOG.md (v1.0.0)                                          | Pass: v1.0.0 released with full changelog; 232 commits since 2026-01-01; all via PR with review    | Core Platform |
 
 ## Usage Notes
 

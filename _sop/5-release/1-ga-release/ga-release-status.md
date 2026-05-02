@@ -1,46 +1,53 @@
 # GA Release Readiness Tracker
 
-**Release**: [Service Name] v[X.Y]
-**Owner**: [Team Name]
-**Full-stack GA status**: See `[path-to-ga-audit-document]`
+**Release**: core v1.0.x
+**Owner**: Core Platform
+**Full-stack GA status**: See `_sop/5-release/1-ga-release/ga-release-evidence-log.md`
+
+---
+
+## Context
+
+core is a shared library — no runtime service, no uptime SLA, no request throughput. Gates are adapted accordingly: service-specific gates (error rate, monitoring dashboards, alerting, DR drill, SLA metrics) are marked N/A. Library-relevant gates are tracked below.
 
 ---
 
 ## Gate Status
 
-| Gate                            | Owner      | Status  | Notes                                            |
-| ------------------------------- | ---------- | ------- | ------------------------------------------------ |
-| Security remediation complete   | Security   | Pending | [Sprint N] complete ([date])                     |
-| Pen test complete               | Security   | Pending | Vendor [name] — execution [date]                 |
-| Dependency scans clean          | Security   | Pending | Run `pnpm audit` / `pip audit`; no critical/high |
-| SAST clean                      | Security   | Pending | CodeQL / [tool] scan ([date])                    |
-| Internal auth + mTLS            | Security   | Pending | Verified in [environment]                        |
-| Perf targets (service-specific) | Platform   | Pending | [X] req/s at p95 < [Yms]                         |
-| Error rate < 1%                 | Platform   | Pending | [X]% at peak load                                |
-| OpenAPI v[X] published          | Platform   | Pending | Spec versioned and hosted                        |
-| SDKs aligned                    | Platform   | Pending | [languages] updated                              |
-| Developer portal content        | Product    | Pending | MVP docs + portal page                           |
-| Monitoring dashboards           | Platform   | Pending | Grafana dashboards + alert rules                 |
-| Alerting configured             | Platform   | Pending | [PagerDuty / Opsgenie] + [Slack] routing         |
-| Runbooks updated                | Platform   | Pending | Incident + rollback runbooks                     |
-| SOC2 evidence pipeline          | Compliance | Pending | Evidence archived to [path]                      |
-| Change management evidence      | Compliance | Pending | Export script + doc added                        |
-| Audit log verification          | Compliance | Pending | Verification script + doc added                  |
+| Gate                            | Owner      | Status      | Notes                                                                                                                                                        |
+| ------------------------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Security remediation complete   | Security   | In Progress | Phases 0-3 complete; no known security defects in production deps                                                                                            |
+| Pen test complete               | Security   | Pending     | Not yet scheduled — required before enterprise downstream deployment                                                                                         |
+| Dependency scans clean          | Security   | Partial     | 2026-05-02: pnpm audit — 0 production vulns, 4 dev-only (vite 8.0.3, postcss 8.5.8); cargo audit — 0 production vulns, 1 test-only (rand 0.9.2 via proptest) |
+| SAST clean                      | Security   | Pending     | CodeQL not yet configured for this repo                                                                                                                      |
+| Internal auth + mTLS            | Security   | N/A         | Library — no internal routes; mTLS support implemented in `@gtcx/api-client`                                                                                 |
+| Perf targets (library-specific) | Platform   | Pass        | All 12 crypto benchmarks within budget (2026-04-05); Ed25519 sign 78us, verify 58us; trend enforcement active                                                |
+| Error rate < 1%                 | Platform   | N/A         | Library — no runtime error rate; 1,921 tests passing, 0 flaky                                                                                                |
+| OpenAPI v[X] published          | Platform   | N/A         | Library — no API endpoints; API surface baselined in `quality/api-surface-baseline.json` (2026-04-05)                                                        |
+| SDKs aligned                    | Platform   | Pass        | 18 packages versioned at v1.0.x; API drift = 0 changes (2026-04-05 report)                                                                                   |
+| Developer portal content        | Product    | Partial     | Per-package READMEs complete; cross-package integration guide missing                                                                                        |
+| Monitoring dashboards           | Platform   | N/A         | Library — no runtime dashboards; CI KPI tracking operational (`quality/kpi-metrics.json`)                                                                    |
+| Alerting configured             | Platform   | N/A         | Library — no runtime alerting; CI failure notifications via GitHub Actions                                                                                   |
+| Runbooks updated                | Platform   | Pass        | Quality runbook at `_sop/2-docs/4-devops/2-runbooks/quality-runbook.md`; release checklist at `_sop/2-docs/4-devops/7-release-mgmt/release-checklist.md`     |
+| SOC2 evidence pipeline          | Compliance | Partial     | Pipeline documented at `_sop/2-docs/3-engineering/5-compliance/soc2-evidence-pipeline.md`; evidence not yet collected                                        |
+| Change management evidence      | Compliance | Pass        | All changes via PR with required reviews; conventional commits; ADRs for architectural decisions; 232 commits since 2026-01-01                               |
+| Audit log verification          | Compliance | Partial     | Hash-chain audit log implemented in `rust/gtcx-crypto`; verification script not yet run as formal gate                                                       |
 
 ---
 
 ## Blockers
 
-List open blockers here. Remove entries as blockers are resolved.
-
-1. [Blocker description] — Owner: [Name] — ETA: [date]
+1. **Pen test not scheduled** — Owner: Security — ETA: TBD
+2. **SAST not configured** — Owner: Platform — ETA: TBD
+3. **SOC2 evidence not collected** — Owner: Compliance — ETA: TBD
+4. **Cross-package integration guide missing** — Owner: Product — ETA: TBD
 
 ---
 
 ## Evidence Log
 
-- `[path-to-evidence-log]`
-- `[path-to-evidence-summary]`
+- `_sop/5-release/1-ga-release/ga-release-evidence-log.md`
+- `_sop/5-release/1-ga-release/ga-release-evidence-summary.md`
 
 ---
 
