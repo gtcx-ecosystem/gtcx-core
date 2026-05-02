@@ -2,7 +2,7 @@
 
 Observability stubs and tracing hooks for AI-native operations.
 
-> **Stub package.** `traced()` and `withTrace()` are no-ops in this package. The full tracing implementation lives in `gtcx-intelligence` and is injected at runtime via the optional peer dependency pattern described in [ADR-008](../../_sop/2-docs/3-engineering/6-decisions/008-optional-tracing-peer-deps.md). Downstream packages (`@gtcx/crypto`, `@gtcx/verification`) gracefully degrade when the full implementation is unavailable.
+> **Stub package.** `traced()` and `withTrace()` are no-ops in this package. The full tracing implementation lives in `gtcx-intelligence` and is injected at runtime via the optional peer dependency pattern described in [ADR-008](../../docs/decisions/008-optional-tracing-peer-deps.md). Downstream packages (`@gtcx/crypto`, `@gtcx/verification`) gracefully degrade when the full implementation is unavailable.
 
 ## Installation
 
@@ -35,7 +35,7 @@ logger.info('Done', { confidence: 0.97 });
 
 ## Related
 
-- [ADR-008: Optional Tracing via Peer Dependencies](../../_sop/2-docs/3-engineering/6-decisions/008-optional-tracing-peer-deps.md)
+- [ADR-008: Optional Tracing via Peer Dependencies](../../docs/decisions/008-optional-tracing-peer-deps.md)
 
 ## License
 

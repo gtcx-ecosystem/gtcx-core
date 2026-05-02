@@ -19,7 +19,7 @@ pnpm test
 pnpm lint
 ```
 
-For a step-by-step integration walkthrough, see the [Orientation guide](./_sop/1-agents/1-onboarding/orientation.md).
+For a step-by-step integration walkthrough, see the [Orientation guide](./docs/agents/onboarding/orientation.md).
 
 ## Packages
 
@@ -93,7 +93,7 @@ core/
 │   └── integration/        #   Cross-package integration tests
 ├── benchmarks/             # Performance budgets and results
 ├── quality/                # API baselines and evidence artifacts
-└── _sop/                   # Standard operating procedures
+└── docs/                   # Standard operating procedures
     ├── 1-agents/           #   Agent team, roles, safety rules, task playbooks
     ├── 2-docs/             #   Engineering, devops, specs, architecture
     │   ├── 3-engineering/  #     System design, ADRs, security, tech stack
@@ -104,19 +104,19 @@ core/
 
 ## Quick Navigation
 
-| Document                                                                           | Description                                    |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------- |
-| [\_sop Index](./_sop/README.md)                                                    | Full documentation and operations hub          |
-| [Orientation](./_sop/1-agents/1-onboarding/orientation.md)                         | Start here — codebase map and session protocol |
-| [Safety Rules](./_sop/1-agents/4-workflows/safety-rules.md)                        | What requires human approval                   |
-| [Architecture Overview](./_sop/2-docs/3-engineering/2-system-design/overview.md)   | Layer map, trust boundaries, package graph     |
-| [ADR Index](./_sop/2-docs/3-engineering/6-decisions/README.md)                     | All 13 architecture decision records           |
-| [Package Specs](./_sop/2-docs/5-specs/4-backend/packages/README.md)                | Per-package API and responsibility specs       |
-| [Rust Crate Specs](./_sop/2-docs/5-specs/4-backend/packages/rust/)                 | Rust crate specs and build targets             |
-| [Security Framework](./_sop/2-docs/3-engineering/7-security/security-framework.md) | Security architecture and controls             |
-| [Quality Runbook](./_sop/2-docs/4-devops/2-runbooks/quality-runbook.md)            | CI triage order and gate sequence              |
-| [Release Checklist](./_sop/2-docs/4-devops/7-release-mgmt/release-checklist.md)    | Release gate and evidence requirements         |
-| [Roadmap](./_sop/3-agile/2-scrum-board/2-phases/roadmap.md)                        | Delivery roadmap and sprint status             |
+| Document                                                             | Description                                    |
+| -------------------------------------------------------------------- | ---------------------------------------------- |
+| [Documentation](./docs/README.md)                                    | Full documentation and operations hub          |
+| [Orientation](./docs/agents/onboarding/orientation.md)               | Start here — codebase map and session protocol |
+| [Safety Rules](./docs/agents/workflows/safety-rules.md)              | What requires human approval                   |
+| [Architecture Overview](./docs/architecture/overview.md)             | Layer map, trust boundaries, package graph     |
+| [ADR Index](./docs/decisions/README.md)                              | All 13 architecture decision records           |
+| [Package Specs](./docs/specs/packages/README.md)                     | Per-package API and responsibility specs       |
+| [Rust Crate Specs](./docs/specs/packages/rust/)                      | Rust crate specs and build targets             |
+| [Security Framework](./docs/security/security-framework.md)          | Security architecture and controls             |
+| [Quality Runbook](./docs/devops/runbooks/quality-runbook.md)         | CI triage order and gate sequence              |
+| [Release Checklist](./docs/devops/release-mgmt/release-checklist.md) | Release gate and evidence requirements         |
+| [Roadmap](./docs/agile/roadmap/roadmap.md)                           | Delivery roadmap and sprint status             |
 
 ## Dependencies
 

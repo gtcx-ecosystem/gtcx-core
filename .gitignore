@@ -73,3 +73,6 @@ pnpm-debug.log*
 
 # Local archive (historical reference, preserved in git history)
 _archive/
+
+# BaselineOS runtime state
+.baseline/

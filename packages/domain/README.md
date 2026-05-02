@@ -62,8 +62,8 @@ New code should import events directly from `@gtcx/events`. The re-exports from
 
 ## Related
 
-- [ADR-004: Commodity-Agnostic Domain](../../_sop/2-docs/3-engineering/6-decisions/004-commodity-agnostic-domain.md)
-- [ADR-007: Offline-First Architecture](../../_sop/2-docs/3-engineering/6-decisions/007-offline-first-architecture.md)
+- [ADR-004: Commodity-Agnostic Domain](../../docs/decisions/004-commodity-agnostic-domain.md)
+- [ADR-007: Offline-First Architecture](../../docs/decisions/007-offline-first-architecture.md)
 
 ## License
 

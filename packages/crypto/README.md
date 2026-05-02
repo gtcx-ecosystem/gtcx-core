@@ -82,8 +82,8 @@ const ok = await engine.verify(proof);
 
 ## Related
 
-- [ADR-001: Rust for Cryptography](../../_sop/2-docs/3-engineering/6-decisions/001-rust-for-cryptography.md)
-- [ADR-005: Ed25519 over secp256k1](../../_sop/2-docs/3-engineering/6-decisions/005-ed25519-signing.md)
+- [ADR-001: Rust for Cryptography](../../docs/decisions/001-rust-for-cryptography.md)
+- [ADR-005: Ed25519 over secp256k1](../../docs/decisions/005-ed25519-signing.md)
 
 ## License
 

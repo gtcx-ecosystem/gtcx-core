@@ -14,7 +14,7 @@
  * a FIPS-validated backend (OpenSSL FIPS provider, AWS-LC-FIPS) can be
  * used at the platform level.
  *
- * @see _sop/2-docs/3-engineering/7-security/fips-assessment.md
+ * @see docs/security/fips-assessment.md
  */
 
 let _fipsMode: boolean | undefined;

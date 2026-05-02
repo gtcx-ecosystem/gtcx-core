@@ -1,0 +1,33 @@
+# GA Evidence Summary
+
+Generated: 2026-05-02
+Source: `docs/release/ga-release/ga-release-evidence-log.md`
+
+| Gate                               | Last Evidence Date | Evidence                             | Owner         | Entries |
+| ---------------------------------- | ------------------ | ------------------------------------ | ------------- | ------- |
+| Security (Dependency Audit — npm)  | 2026-05-02         | `pnpm audit` output                  | Core Platform | 1       |
+| Security (Dependency Audit — Rust) | 2026-05-02         | `cargo audit` output                 | Core Platform | 1       |
+| Security (SAST)                    | —                  | —                                    | Security      | 0       |
+| Security (Pen Test + Remediation)  | —                  | —                                    | Security      | 0       |
+| Security (SBOM)                    | —                  | —                                    | Security      | 0       |
+| Security (Secret Scan)             | —                  | —                                    | Security      | 0       |
+| Performance (Crypto Benchmarks)    | 2026-04-05         | `benchmarks/performance-report.json` | Core Platform | 1       |
+| API Surface Stability              | 2026-04-05         | `quality/api-surface-report.json`    | Core Platform | 1       |
+| Coverage (Critical Packages)       | 2026-02-19         | `quality/kpi-metrics.json`           | Core Platform | 1       |
+| Documentation (AI Stub Caveats)    | 2026-05-02         | README.md, packages/ai/README.md     | Core Platform | 1       |
+| Change Management                  | 2026-03-19         | CHANGELOG.md (v1.0.0)                | Core Platform | 1       |
+| Compliance Evidence (SOC2)         | —                  | —                                    | Compliance    | 0       |
+| Compliance Evidence (ISO 27001)    | —                  | —                                    | Compliance    | 0       |
+| Provenance Manifest                | —                  | —                                    | Core Platform | 0       |
+
+## Summary
+
+- **7 of 14 gates have evidence** (50%)
+- **0 of 14 gates have blocking findings**
+- **7 gates require action**: SAST, pen test, SBOM, secret scan, SOC2 evidence, ISO 27001 evidence, provenance manifest
+
+## Usage Notes
+
+- This file is auto-generated from the evidence log. Do not edit manually.
+- Re-run the summary script after new evidence entries are added to the log.
+- All gates with 0 entries require evidence before sign-off can proceed.
