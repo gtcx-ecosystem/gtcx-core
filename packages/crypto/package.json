@@ -46,8 +46,8 @@
     "@gtcx/typescript-config": "workspace:*",
     "tsup": "^8.0.1",
     "typescript": "^6.0.0",
-    "@vitest/coverage-v8": "^4.1.0",
-    "vitest": "^4.1.0"
+    "@vitest/coverage-v8": "^4.1.5",
+    "vitest": "^4.1.5"
   },
   "publishConfig": {
     "access": "public",
