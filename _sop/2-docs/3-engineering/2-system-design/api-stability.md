@@ -1,4 +1,4 @@
-# API Stability Guide — core
+# API Stability Guide — gtcx-core
 
 **Last updated**: 2026-05-02
 **Source**: `quality/api-surface-baseline.json` (2026-04-05)
@@ -7,7 +7,7 @@
 
 ## Versioning Policy
 
-core follows [Semantic Versioning](https://semver.org/). The version number signals stability:
+gtcx-core follows [Semantic Versioning](https://semver.org/). The version number signals stability:
 
 - **v1.x** — Stable. Breaking changes only in major version bumps. Downstream repos can depend on these without risk.
 - **v0.x** — Experimental. API may change in minor versions. Downstream repos should pin exact versions and expect migration work.

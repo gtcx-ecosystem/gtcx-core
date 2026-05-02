@@ -1,7 +1,7 @@
-# core v1.0.x GA Release Checklist
+# gtcx-core v1.0.x GA Release Checklist
 
 **Owner**: Core Platform
-**Scope**: core — shared cryptographic and protocol foundation library
+**Scope**: gtcx-core — shared cryptographic and protocol foundation library
 **Target**: v1.0.x GA (internal consumption by downstream GTCX repos)
 
 ---

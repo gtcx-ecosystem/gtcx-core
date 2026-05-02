@@ -1,4 +1,4 @@
-# Integration Guide — core
+# Integration Guide — gtcx-core
 
 How to use the core packages together to build a complete verification pipeline.
 

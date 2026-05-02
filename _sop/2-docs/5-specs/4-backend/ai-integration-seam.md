@@ -1,15 +1,15 @@
-# AI Integration Seam — core ↔ gtcx-intelligence
+# AI Integration Seam — gtcx-core ↔ gtcx-intelligence
 
-How the AI observability stub in core connects to the full AI implementation in gtcx-intelligence.
+How the AI observability stub in gtcx-core connects to the full AI implementation in gtcx-intelligence.
 
 ---
 
 ## Architecture
 
-core provides the **hook points**. gtcx-intelligence provides the **implementation**. The connection is via the optional peer dependency pattern described in [ADR-008](../../3-engineering/6-decisions/008-optional-tracing-peer-deps.md).
+gtcx-core provides the **hook points**. gtcx-intelligence provides the **implementation**. The connection is via the optional peer dependency pattern described in [ADR-008](../../3-engineering/6-decisions/008-optional-tracing-peer-deps.md).
 
 ```
-core                          gtcx-intelligence
+gtcx-core                      gtcx-intelligence
 ────────────                       ──────────────────
 @gtcx/ai (stub)          ←──→     Full tracing implementation
   traced() → no-op                   traced() → logs to AI pipeline
@@ -51,7 +51,7 @@ When gtcx-intelligence replaces `@gtcx/ai` with its full implementation, the `re
 
 ---
 
-## What core Provides
+## What gtcx-core Provides
 
 ### 1. Operation Tracing Hooks (36+ traced functions)
 
@@ -117,13 +117,13 @@ type ValidationAgentRole =
   | 'satellite_correlator';
 ```
 
-These types define what gtcx-intelligence must produce. core does not validate or consume these — it only defines the schema.
+These types define what gtcx-intelligence must produce. gtcx-core does not validate or consume these — it only defines the schema.
 
 ---
 
-## What core Does NOT Provide
+## What gtcx-core Does NOT Provide
 
-| Concern                  | Status in core                                     | Required in gtcx-intelligence             |
+| Concern                  | Status in gtcx-core                                | Required in gtcx-intelligence             |
 | ------------------------ | -------------------------------------------------- | ----------------------------------------- |
 | AI inference             | Not implemented                                    | Must implement                            |
 | Hallucination guardrails | No confidence thresholds                           | Must define rejection criteria            |
@@ -137,7 +137,7 @@ These types define what gtcx-intelligence must produce. core does not validate o
 
 ## Governance Guarantees Product Surfaces Can Claim
 
-Based on what core actually provides today:
+Based on what gtcx-core actually provides today:
 
 ### Can claim:
 
@@ -149,7 +149,7 @@ Based on what core actually provides today:
 
 ### Cannot claim (until gtcx-intelligence is wired in):
 
-- "AI-powered verification" — no AI runs in core
+- "AI-powered verification" — no AI runs in gtcx-core
 - "Anomaly detection" — types exist, implementation does not
 - "AI validation of attestations" — schema only, no validation logic
 - "Confidence scoring" — types define scores, nothing computes them
@@ -159,7 +159,7 @@ Based on what core actually provides today:
 
 ## Integration Checklist for gtcx-intelligence
 
-When connecting gtcx-intelligence to core:
+When connecting gtcx-intelligence to gtcx-core:
 
 1. **Replace `@gtcx/ai` stub** — publish a full implementation that satisfies the same interface (`traced`, `withTrace`, `createCategoryLogger`)
 2. **Implement `traced()` with real logging** — emit `OperationLog` entries to the AI observability pipeline

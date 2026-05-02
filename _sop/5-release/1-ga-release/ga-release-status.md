@@ -1,6 +1,6 @@
 # GA Release Readiness Tracker
 
-**Release**: core v1.0.x
+**Release**: gtcx-core v1.0.x
 **Owner**: Core Platform
 **Full-stack GA status**: See `_sop/5-release/1-ga-release/ga-release-evidence-log.md`
 
@@ -8,7 +8,7 @@
 
 ## Context
 
-core is a shared library — no runtime service, no uptime SLA, no request throughput. Gates are adapted accordingly: service-specific gates (error rate, monitoring dashboards, alerting, DR drill, SLA metrics) are marked N/A. Library-relevant gates are tracked below.
+gtcx-core is a shared library — no runtime service, no uptime SLA, no request throughput. Gates are adapted accordingly: service-specific gates (error rate, monitoring dashboards, alerting, DR drill, SLA metrics) are marked N/A. Library-relevant gates are tracked below.
 
 ---
 
