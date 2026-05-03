@@ -50,8 +50,7 @@
     "zod": "3.25.76"
   },
   "peerDependencies": {
-    "@gtcx/crypto": "workspace:*",
-    "@gtcx/types": "workspace:*"
+    "@gtcx/crypto": "workspace:*"
   },
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",

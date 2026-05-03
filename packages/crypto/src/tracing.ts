@@ -37,7 +37,7 @@ let _traced: TraceFn = noopTraced;
 let _createCategoryLogger: CreateCategoryLoggerFn = noopCreateCategoryLogger;
 
 try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const ai = require('@gtcx/ai');
   if (ai?.traced) _traced = ai.traced;
   if (ai?.createCategoryLogger) _createCategoryLogger = ai.createCategoryLogger;

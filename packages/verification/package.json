@@ -51,9 +51,7 @@
     "vitest": "^4.1.5"
   },
   "peerDependencies": {
-    "@gtcx/ai": "workspace:*",
-    "@noble/hashes": "^1.3.0",
-    "@noble/curves": "^1.3.0"
+    "@gtcx/ai": "workspace:*"
   },
   "peerDependenciesMeta": {
     "@gtcx/ai": {

@@ -93,13 +93,19 @@ core/
 │   └── integration/        #   Cross-package integration tests
 ├── benchmarks/             # Performance budgets and results
 ├── quality/                # API baselines and evidence artifacts
-└── docs/                   # Standard operating procedures
-    ├── 1-agents/           #   Agent team, roles, safety rules, task playbooks
-    ├── 2-docs/             #   Engineering, devops, specs, architecture
-    │   ├── 3-engineering/  #     System design, ADRs, security, tech stack
-    │   ├── 4-devops/       #     CI/CD, runbooks, release management
-    │   └── 5-specs/        #     Package specs, backend, testing
-    └── 3-agile/            #   Roadmap, sprints, backlog
+└── docs/                   # Documentation and operations
+    ├── agents/             #   Agent team, roles, safety rules, task playbooks
+    ├── architecture/       #   System architecture and layer map
+    ├── decisions/          #   Architecture decision records (ADRs)
+    ├── specs/              #   Package specs, backend, testing
+    ├── security/           #   Security framework and controls
+    ├── devops/             #   CI/CD, runbooks, release management
+    ├── agile/              #   Roadmap, sprints, backlog
+    ├── compliance/         #   Compliance documentation
+    ├── deployment/         #   Deployment guides
+    ├── release/            #   Release notes and history
+    ├── stack/              #   Tech stack documentation
+    └── testing/            #   Test strategy and guides
 ```
 
 ## Quick Navigation

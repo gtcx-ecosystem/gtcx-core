@@ -44,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Typecheck native bindings
+        run: pnpm --filter @gtcx/crypto-native typecheck
+
       - name: Build native bindings
         run: pnpm --filter @gtcx/crypto-native build:native
 

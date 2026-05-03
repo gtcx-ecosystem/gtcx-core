@@ -72,18 +72,6 @@
     "@gtcx/utils": "workspace:*",
     "zod": "3.25.76"
   },
-  "peerDependencies": {
-    "@gtcx/types": "workspace:*",
-    "@gtcx/crypto": "workspace:*"
-  },
-  "peerDependenciesMeta": {
-    "@gtcx/types": {
-      "optional": true
-    },
-    "@gtcx/crypto": {
-      "optional": true
-    }
-  },
   "devDependencies": {
     "@types/node": "^22.10.0",
     "@gtcx/tsup-config": "workspace:*",

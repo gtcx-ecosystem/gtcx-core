@@ -182,9 +182,6 @@ importers:
       '@gtcx/ai':
         specifier: workspace:*
         version: link:../ai
-      '@gtcx/types':
-        specifier: workspace:*
-        version: link:../types
       '@noble/curves':
         specifier: 1.9.0
         version: 1.9.0
@@ -241,15 +238,9 @@ importers:
 
   packages/domain:
     dependencies:
-      '@gtcx/crypto':
-        specifier: workspace:*
-        version: link:../crypto
       '@gtcx/events':
         specifier: workspace:*
         version: link:../events
-      '@gtcx/types':
-        specifier: workspace:*
-        version: link:../types
       '@gtcx/utils':
         specifier: workspace:*
         version: link:../utils
@@ -434,9 +425,6 @@ importers:
       '@gtcx/crypto':
         specifier: workspace:*
         version: link:../crypto
-      '@gtcx/types':
-        specifier: workspace:*
-        version: link:../types
       zod:
         specifier: 3.25.76
         version: 3.25.76
@@ -572,12 +560,6 @@ importers:
       '@gtcx/types':
         specifier: workspace:*
         version: link:../types
-      '@noble/curves':
-        specifier: ^1.3.0
-        version: 1.9.7
-      '@noble/hashes':
-        specifier: ^1.3.0
-        version: 1.8.0
       zod:
         specifier: 3.25.76
         version: 3.25.76
@@ -1157,10 +1139,6 @@ packages:
 
   '@noble/curves@1.9.0':
     resolution: {integrity: sha512-7YDlXiNMdO1YZeH6t/kvopHHbIZzlxrCV9WLqCY6QhcXOoXiNCMDqJIglZ9Yjx5+w7Dz30TITFrlTjnRg7sKEg==}
-    engines: {node: ^14.21.3 || >=16}
-
-  '@noble/curves@1.9.7':
-    resolution: {integrity: sha512-gbKGcRUYIjA3/zCCNaWDciTMFI0dCkvou3TL8Zmy5Nc7sJ47a0jtOeZoTaMxkuqRo9cRhjOdZJXegxYE5FN/xw==}
     engines: {node: ^14.21.3 || >=16}
 
   '@noble/curves@2.0.1':
@@ -3855,10 +3833,6 @@ snapshots:
   '@noble/ciphers@1.3.0': {}
 
   '@noble/curves@1.9.0':
-    dependencies:
-      '@noble/hashes': 1.8.0
-
-  '@noble/curves@1.9.7':
     dependencies:
       '@noble/hashes': 1.8.0
 

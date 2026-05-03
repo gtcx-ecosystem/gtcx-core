@@ -75,9 +75,28 @@ export interface CategoryLogger {
  */
 export function createCategoryLogger(category: string): CategoryLogger {
   const emit = (level: string, message: string, data?: Record<string, unknown>) => {
-    const entry = { level, category, msg: message, ...data, ts: new Date().toISOString() };
+    const entry = JSON.stringify({
+      level,
+      category,
+      msg: message,
+      ...data,
+      ts: new Date().toISOString(),
+    });
 
-    console.error(JSON.stringify(entry));
+    switch (level) {
+      case 'debug':
+        console.debug(entry);
+        break;
+      case 'info':
+        console.info(entry);
+        break;
+      case 'warn':
+        console.warn(entry);
+        break;
+      default:
+        console.error(entry);
+        break;
+    }
   };
   return {
     info: (msg, data) => emit('info', msg, data),

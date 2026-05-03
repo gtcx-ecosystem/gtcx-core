@@ -26,20 +26,16 @@
     "@noble/hashes": "1.8.0",
     "zod": "3.25.76"
   },
-  "optionalDependencies": {
-    "@gtcx/crypto-native": "workspace:*"
-  },
   "peerDependencies": {
-    "@gtcx/ai": "workspace:*",
-    "@gtcx/types": "workspace:*"
+    "@gtcx/ai": "workspace:*"
   },
   "peerDependenciesMeta": {
     "@gtcx/ai": {
       "optional": true
-    },
-    "@gtcx/types": {
-      "optional": true
     }
+  },
+  "optionalDependencies": {
+    "@gtcx/crypto-native": "workspace:*"
   },
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",

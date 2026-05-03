@@ -14,5 +14,5 @@ export default defineConfig({
     'offline/index': 'src/offline/index.ts',
     'trust/index': 'src/trust/index.ts',
   },
-  external: ['@gtcx/types', '@gtcx/verification', 'zod'],
+  external: ['@gtcx/crypto', '@gtcx/types', '@gtcx/verification', 'zod'],
 });
