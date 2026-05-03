@@ -123,7 +123,11 @@ export function createDIDDocument(identity: DigitalIdentity | EnhancedIdentity):
 }
 
 /**
- * Resolve a GTCX DID (stub - would typically call a resolver)
+ * Resolve a GTCX DID.
+ *
+ * When no resolver is provided, uses an in-memory resolver that only knows
+ * DIDs registered via createStaticDIDResolverAdapter. For production use,
+ * provide a resolver configured with appropriate adapters.
  */
 export async function resolveDID(
   did: string,

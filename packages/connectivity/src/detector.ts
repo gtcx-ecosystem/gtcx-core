@@ -10,15 +10,33 @@ import type {
 const DEFAULT_CHECK_INTERVAL_MS = 30_000;
 const DEFAULT_OFFLINE_THRESHOLD_MS = 60_000;
 
+const DEFAULT_HEALTH_URL = 'https://connectivity.gtcx.io/health';
+
 /**
- * Default check function that always reports online with standard connectivity.
- * Replace with a real implementation that pings a health endpoint.
+ * Default connectivity probe that pings a health endpoint and measures latency.
+ * Falls back to offline if the request fails or times out.
  */
-const defaultCheckFn: ConnectivityCheckFn = async (): Promise<ConnectivityCheckResult> => ({
-  online: true,
-  latencyMs: 50,
-  bandwidthKbps: 10_000,
-});
+const defaultCheckFn: ConnectivityCheckFn = async (): Promise<ConnectivityCheckResult> => {
+  const url = process.env['GTCX_HEALTH_URL'] ?? DEFAULT_HEALTH_URL;
+  const timeoutMs = 5_000;
+  const start = Date.now();
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    const response = await fetch(url, { method: 'HEAD', signal: controller.signal });
+    clearTimeout(timeout);
+
+    const latencyMs = Date.now() - start;
+    return {
+      online: response.ok,
+      latencyMs,
+      bandwidthKbps: latencyMs < 200 ? 10_000 : latencyMs < 1000 ? 2_000 : 500,
+    };
+  } catch {
+    return { online: false, latencyMs: Date.now() - start };
+  }
+};
 
 /**
  * ConnectivityDetector provides network status detection for offline-first operation (Principle P8).

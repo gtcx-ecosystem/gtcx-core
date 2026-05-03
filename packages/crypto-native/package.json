@@ -18,7 +18,7 @@
     "build:native": "node scripts/build-native.mjs",
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist"
   },
