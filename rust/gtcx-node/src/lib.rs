@@ -270,6 +270,344 @@ pub fn zkp_verify(
 }
 
 // =============================================================================
+// GROTH16 ZERO-KNOWLEDGE PROOFS
+// =============================================================================
+
+/// Serialized Groth16 keys returned to Node.js.
+#[napi(object)]
+pub struct JsGroth16Keys {
+    /// The circuit type ("gci_threshold", "asset_ownership", "location_region").
+    pub circuit: String,
+    /// The proving key as a hex string.
+    pub proving_key: String,
+    /// The verifying key as a hex string.
+    pub verifying_key: String,
+}
+
+/// A Groth16 proof bundle returned to Node.js.
+#[napi(object)]
+pub struct JsGroth16ProofBundle {
+    /// The circuit type.
+    pub circuit: String,
+    /// The serialized proof as a hex string.
+    pub proof: String,
+    /// The verifying key as a hex string.
+    pub verifying_key: String,
+    /// The public inputs as a JSON-encoded array of field element strings.
+    pub public_inputs_json: String,
+}
+
+fn circuit_type_from_str(s: &str) -> napi::Result<gtcx_zkp::Groth16CircuitType> {
+    match s {
+        "gci_threshold" => Ok(gtcx_zkp::Groth16CircuitType::GciThreshold),
+        "asset_ownership" => Ok(gtcx_zkp::Groth16CircuitType::AssetOwnership),
+        "location_region" => Ok(gtcx_zkp::Groth16CircuitType::LocationRegion),
+        _ => Err(napi::Error::from_reason(format!(
+            "Unknown circuit type: {}",
+            s
+        ))),
+    }
+}
+
+/// Generate Groth16 proving and verifying keys for a circuit type.
+///
+/// # Arguments
+///
+/// * `circuit_type` - One of: "gci_threshold", "asset_ownership", "location_region"
+///
+/// # Returns
+///
+/// Serialized proving and verifying keys as hex strings.
+#[napi]
+pub fn groth16_generate_keys(circuit_type: String) -> napi::Result<JsGroth16Keys> {
+    let ct = circuit_type_from_str(&circuit_type)?;
+    let keys =
+        gtcx_zkp::groth16_generate_keys(ct).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    Ok(JsGroth16Keys {
+        circuit: circuit_type,
+        proving_key: hex::encode(&keys.proving_key),
+        verifying_key: hex::encode(&keys.verifying_key),
+    })
+}
+
+/// Prove a GCI threshold statement: score >= threshold.
+///
+/// # Arguments
+///
+/// * `score` - The actual GCI score
+/// * `threshold` - The minimum acceptable score
+/// * `proving_key_hex` - The proving key from `groth16_generate_keys`
+/// * `verifying_key_hex` - The verifying key from `groth16_generate_keys`
+#[napi]
+pub fn groth16_prove_gci_threshold(
+    score: i64,
+    threshold: i64,
+    proving_key_hex: String,
+    verifying_key_hex: String,
+) -> napi::Result<JsGroth16ProofBundle> {
+    let pk_bytes =
+        hex::decode(&proving_key_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    let vk_bytes =
+        hex::decode(&verifying_key_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    let keys = gtcx_zkp::Groth16Keys {
+        circuit: gtcx_zkp::Groth16CircuitType::GciThreshold,
+        proving_key: pk_bytes,
+        verifying_key: vk_bytes.clone(),
+    };
+
+    let bundle = gtcx_zkp::groth16_prove_gci_threshold(score as u64, threshold as u64, &keys)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
+
+    let mut pi_bytes = Vec::new();
+    for f in &bundle.public_inputs {
+        let mut buf = Vec::new();
+        ark_serialize::CanonicalSerialize::serialize_compressed(f, &mut buf)
+            .map_err(|e| napi::Error::from_reason(e.to_string()))?;
+        pi_bytes.push(hex::encode(&buf));
+    }
+
+    Ok(JsGroth16ProofBundle {
+        circuit: "gci_threshold".to_string(),
+        proof: hex::encode(&bundle.proof),
+        verifying_key: hex::encode(&bundle.verifying_key),
+        public_inputs_json: serde_json::to_string(&pi_bytes)
+            .map_err(|e| napi::Error::from_reason(e.to_string()))?,
+    })
+}
+
+/// Verify a Groth16 proof bundle.
+///
+/// # Arguments
+///
+/// * `circuit_type` - The circuit type
+/// * `proof_hex` - The proof as a hex string
+/// * `verifying_key_hex` - The verifying key as a hex string
+/// * `public_inputs_json` - JSON array of field element strings
+#[napi]
+pub fn groth16_verify_proof(
+    circuit_type: String,
+    proof_hex: String,
+    verifying_key_hex: String,
+    public_inputs_json: String,
+) -> napi::Result<bool> {
+    use ark_bn254::Fr;
+
+    let ct = circuit_type_from_str(&circuit_type)?;
+    let proof_bytes =
+        hex::decode(&proof_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    let vk_bytes =
+        hex::decode(&verifying_key_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    let pi_hex_strings: Vec<String> = serde_json::from_str(&public_inputs_json)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
+
+    let public_inputs: Vec<Fr> = pi_hex_strings
+        .iter()
+        .map(|s| {
+            let bytes = hex::decode(s)
+                .map_err(|e| napi::Error::from_reason(e.to_string()))?;
+            ark_serialize::CanonicalDeserialize::deserialize_compressed(&*bytes)
+                .map_err(|e| napi::Error::from_reason(format!("Invalid field element: {}", e)))
+        })
+        .collect::<napi::Result<Vec<_>>>()?;
+
+    let bundle = gtcx_zkp::Groth16ProofBundle {
+        circuit: ct,
+        proof: proof_bytes,
+        verifying_key: vk_bytes,
+        public_inputs,
+    };
+
+    gtcx_zkp::groth16_verify(&bundle).map_err(|e| napi::Error::from_reason(e.to_string()))
+}
+
+// =============================================================================
+// BULLETPROOFS (AMOUNT RANGE)
+// =============================================================================
+
+/// A Bulletproofs range proof bundle returned to Node.js.
+#[napi(object)]
+pub struct JsBulletproofsBundle {
+    /// Minimum value of the range.
+    pub min: i64,
+    /// Maximum value of the range.
+    pub max: i64,
+    /// The Pedersen commitment as a hex string (64 hex chars).
+    pub commitment: String,
+    /// The low range proof as a hex string.
+    pub proof_low: String,
+    /// The high range proof as a hex string.
+    pub proof_high: String,
+}
+
+/// Prove that an amount lies within [min, max] using Bulletproofs.
+///
+/// # Arguments
+///
+/// * `amount` - The secret value to prove is in range
+/// * `min` - Lower bound (inclusive)
+/// * `max` - Upper bound (inclusive)
+/// * `randomness_hex` - 32-byte randomness as hex string (64 hex chars)
+#[napi]
+pub fn bulletproofs_prove_amount_range(
+    amount: i64,
+    min: i64,
+    max: i64,
+    randomness_hex: String,
+) -> napi::Result<JsBulletproofsBundle> {
+    let rand_bytes =
+        hex::decode(&randomness_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    if rand_bytes.len() != 32 {
+        return Err(napi::Error::from_reason(format!(
+            "Randomness must be 32 bytes, got {}",
+            rand_bytes.len()
+        )));
+    }
+    let mut randomness = [0u8; 32];
+    randomness.copy_from_slice(&rand_bytes);
+
+    let bundle = gtcx_zkp::bulletproofs_prove_amount_range(
+        amount as u64,
+        min as u64,
+        max as u64,
+        randomness,
+    )
+    .map_err(|e| napi::Error::from_reason(e.to_string()))?;
+
+    Ok(JsBulletproofsBundle {
+        min,
+        max,
+        commitment: hex::encode(bundle.commitment),
+        proof_low: hex::encode(&bundle.proof_low),
+        proof_high: hex::encode(&bundle.proof_high),
+    })
+}
+
+/// Verify a Bulletproofs range proof bundle.
+#[napi]
+pub fn bulletproofs_verify_amount_range(
+    min: i64,
+    max: i64,
+    commitment_hex: String,
+    proof_low_hex: String,
+    proof_high_hex: String,
+) -> napi::Result<bool> {
+    let commitment_bytes =
+        hex::decode(&commitment_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    if commitment_bytes.len() != 32 {
+        return Err(napi::Error::from_reason(format!(
+            "Commitment must be 32 bytes, got {}",
+            commitment_bytes.len()
+        )));
+    }
+    let mut commitment = [0u8; 32];
+    commitment.copy_from_slice(&commitment_bytes);
+
+    let proof_low =
+        hex::decode(&proof_low_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    let proof_high =
+        hex::decode(&proof_high_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+
+    let bundle = gtcx_zkp::BulletproofsRangeProofBundle {
+        min: min as u64,
+        max: max as u64,
+        commitment,
+        proof_low,
+        proof_high,
+    };
+
+    gtcx_zkp::bulletproofs_verify_amount_range(&bundle)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))
+}
+
+// =============================================================================
+// SCHNORR (IDENTITY ATTRIBUTE)
+// =============================================================================
+
+/// A Schnorr identity proof bundle returned to Node.js.
+#[napi(object)]
+pub struct JsSchnorrBundle {
+    /// The public attribute hash (commitment) as a hex string.
+    pub attribute_hash: String,
+    /// The subject hash as a hex string.
+    pub subject_hash: String,
+    /// The nonce commitment as a hex string.
+    pub nonce_commitment: String,
+    /// The response scalar as a hex string.
+    pub response: String,
+}
+
+/// Prove knowledge of an identity attribute corresponding to a public hash.
+///
+/// # Arguments
+///
+/// * `attribute` - The secret attribute value (e.g., "John Doe")
+/// * `subject_hash_hex` - 32-byte subject identifier hash as hex string
+#[napi]
+pub fn schnorr_prove_identity_attribute(
+    attribute: Vec<u8>,
+    subject_hash_hex: String,
+) -> napi::Result<JsSchnorrBundle> {
+    let sh_bytes =
+        hex::decode(&subject_hash_hex).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    if sh_bytes.len() != 32 {
+        return Err(napi::Error::from_reason(format!(
+            "Subject hash must be 32 bytes, got {}",
+            sh_bytes.len()
+        )));
+    }
+    let mut subject_hash = [0u8; 32];
+    subject_hash.copy_from_slice(&sh_bytes);
+
+    let bundle = gtcx_zkp::schnorr_prove_identity_attribute(&attribute, subject_hash)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
+
+    Ok(JsSchnorrBundle {
+        attribute_hash: hex::encode(bundle.attribute_hash),
+        subject_hash: hex::encode(bundle.subject_hash),
+        nonce_commitment: hex::encode(bundle.nonce_commitment),
+        response: hex::encode(bundle.response),
+    })
+}
+
+/// Verify a Schnorr identity attribute proof.
+#[napi]
+pub fn schnorr_verify_identity_attribute(
+    attribute_hash_hex: String,
+    subject_hash_hex: String,
+    nonce_commitment_hex: String,
+    response_hex: String,
+) -> napi::Result<bool> {
+    let attribute_hash = decode_32_bytes(&attribute_hash_hex, "attribute_hash")?;
+    let subject_hash = decode_32_bytes(&subject_hash_hex, "subject_hash")?;
+    let nonce_commitment = decode_32_bytes(&nonce_commitment_hex, "nonce_commitment")?;
+    let response = decode_32_bytes(&response_hex, "response")?;
+
+    let bundle = gtcx_zkp::SchnorrIdentityProofBundle {
+        attribute_hash,
+        subject_hash,
+        nonce_commitment,
+        response,
+    };
+
+    gtcx_zkp::schnorr_verify_identity_attribute(&bundle)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))
+}
+
+fn decode_32_bytes(hex_str: &str, name: &str) -> napi::Result<[u8; 32]> {
+    let bytes = hex::decode(hex_str).map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    if bytes.len() != 32 {
+        return Err(napi::Error::from_reason(format!(
+            "{} must be 32 bytes, got {}",
+            name,
+            bytes.len()
+        )));
+    }
+    let mut arr = [0u8; 32];
+    arr.copy_from_slice(&bytes);
+    Ok(arr)
+}
+
+// =============================================================================
 // UTILITY
 // =============================================================================
 
@@ -467,6 +805,103 @@ mod tests {
             "aabb".to_string(),
         );
         assert!(err.is_err());
+    }
+
+    // ── Groth16 ──
+
+    #[test]
+    fn test_groth16_gci_threshold_roundtrip() {
+        let keys = groth16_generate_keys("gci_threshold".to_string()).unwrap();
+        assert!(!keys.proving_key.is_empty());
+        assert!(!keys.verifying_key.is_empty());
+
+        let bundle =
+            groth16_prove_gci_threshold(85, 70, keys.proving_key, keys.verifying_key.clone())
+                .unwrap();
+        assert_eq!(bundle.circuit, "gci_threshold");
+
+        let valid = groth16_verify_proof(
+            bundle.circuit,
+            bundle.proof,
+            bundle.verifying_key,
+            bundle.public_inputs_json,
+        )
+        .unwrap();
+        assert!(valid);
+    }
+
+    #[test]
+    fn test_groth16_score_below_threshold_fails() {
+        let keys = groth16_generate_keys("gci_threshold".to_string()).unwrap();
+        let err = groth16_prove_gci_threshold(50, 70, keys.proving_key, keys.verifying_key);
+        assert!(err.is_err());
+    }
+
+    // ── Bulletproofs ──
+
+    #[test]
+    fn test_bulletproofs_amount_range_roundtrip() {
+        let randomness = "ab".repeat(32); // 32 bytes
+        let bundle =
+            bulletproofs_prove_amount_range(500, 100, 1000, randomness).unwrap();
+        assert_eq!(bundle.min, 100);
+        assert_eq!(bundle.max, 1000);
+
+        let valid = bulletproofs_verify_amount_range(
+            bundle.min,
+            bundle.max,
+            bundle.commitment,
+            bundle.proof_low,
+            bundle.proof_high,
+        )
+        .unwrap();
+        assert!(valid);
+    }
+
+    #[test]
+    fn test_bulletproofs_out_of_range_fails() {
+        let randomness = "cd".repeat(32);
+        let err = bulletproofs_prove_amount_range(50, 100, 1000, randomness);
+        assert!(err.is_err());
+    }
+
+    // ── Schnorr ──
+
+    #[test]
+    fn test_schnorr_identity_roundtrip() {
+        let subject_hash = "ef".repeat(32); // 32 bytes
+        let bundle =
+            schnorr_prove_identity_attribute(b"John Doe".to_vec(), subject_hash).unwrap();
+
+        let valid = schnorr_verify_identity_attribute(
+            bundle.attribute_hash,
+            bundle.subject_hash,
+            bundle.nonce_commitment,
+            bundle.response,
+        )
+        .unwrap();
+        assert!(valid);
+    }
+
+    #[test]
+    fn test_schnorr_tampered_response_fails() {
+        let subject_hash = "ab".repeat(32);
+        let bundle =
+            schnorr_prove_identity_attribute(b"Jane Doe".to_vec(), subject_hash).unwrap();
+
+        // Tamper with response
+        let tampered_response = "00".repeat(32);
+        let result = schnorr_verify_identity_attribute(
+            bundle.attribute_hash,
+            bundle.subject_hash,
+            bundle.nonce_commitment,
+            tampered_response,
+        );
+        // Either returns false or errors — both acceptable
+        match result {
+            Ok(valid) => assert!(!valid),
+            Err(_) => {} // Also acceptable — invalid scalar
+        }
     }
 
     // ── Version ──

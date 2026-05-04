@@ -873,12 +873,15 @@ dependencies = [
 name = "gtcx-node"
 version = "0.1.0"
 dependencies = [
+ "ark-bn254",
+ "ark-serialize",
  "gtcx-crypto",
  "gtcx-zkp",
  "hex",
  "napi",
  "napi-build",
  "napi-derive",
+ "serde_json",
 ]
 
 [[package]]

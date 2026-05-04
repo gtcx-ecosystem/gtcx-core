@@ -109,6 +109,7 @@ for (const pkgDir of packageDirs) {
     ...Object.keys(pkgJson.dependencies ?? {}),
     ...Object.keys(pkgJson.peerDependencies ?? {}),
     ...Object.keys(pkgJson.devDependencies ?? {}),
+    ...Object.keys(pkgJson.optionalDependencies ?? {}),
   ]);
   allowedDepsByPackage.set(pkgName, allowed);
 

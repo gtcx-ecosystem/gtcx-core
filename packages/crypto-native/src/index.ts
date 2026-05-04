@@ -140,6 +140,98 @@ export const derivePurposeKey =
 export const version =
   typeof raw['version'] === 'function' ? () => (raw['version'] as () => string)() : undefined;
 
+// =============================================================================
+// ZKP BINDINGS (Groth16, Bulletproofs, Schnorr)
+// =============================================================================
+
+export interface NativeGroth16Keys {
+  circuit: string;
+  provingKey: string;
+  verifyingKey: string;
+}
+
+export interface NativeGroth16ProofBundle {
+  circuit: string;
+  proof: string;
+  verifyingKey: string;
+  publicInputsJson: string;
+}
+
+export interface NativeBulletproofsBundle {
+  min: number;
+  max: number;
+  commitment: string;
+  proofLow: string;
+  proofHigh: string;
+}
+
+export interface NativeSchnorrBundle {
+  attributeHash: string;
+  subjectHash: string;
+  nonceCommitment: string;
+  response: string;
+}
+
+function optionalNativeFn<T extends (...args: never[]) => unknown>(keys: string[]): T | undefined {
+  for (const key of keys) {
+    const value = raw[key];
+    if (typeof value === 'function') {
+      return value as T;
+    }
+  }
+  return undefined;
+}
+
+export const groth16GenerateKeys = optionalNativeFn<(circuitType: string) => NativeGroth16Keys>([
+  'groth16_generate_keys',
+  'groth16GenerateKeys',
+]);
+
+export const groth16ProveGciThreshold = optionalNativeFn<
+  (
+    score: number,
+    threshold: number,
+    provingKeyHex: string,
+    verifyingKeyHex: string
+  ) => NativeGroth16ProofBundle
+>(['groth16_prove_gci_threshold', 'groth16ProveGciThreshold']);
+
+export const groth16VerifyProof = optionalNativeFn<
+  (
+    circuitType: string,
+    proofHex: string,
+    verifyingKeyHex: string,
+    publicInputsJson: string
+  ) => boolean
+>(['groth16_verify_proof', 'groth16VerifyProof']);
+
+export const bulletproofsProveAmountRange = optionalNativeFn<
+  (amount: number, min: number, max: number, randomnessHex: string) => NativeBulletproofsBundle
+>(['bulletproofs_prove_amount_range', 'bulletproofsProveAmountRange']);
+
+export const bulletproofsVerifyAmountRange = optionalNativeFn<
+  (
+    min: number,
+    max: number,
+    commitmentHex: string,
+    proofLowHex: string,
+    proofHighHex: string
+  ) => boolean
+>(['bulletproofs_verify_amount_range', 'bulletproofsVerifyAmountRange']);
+
+export const schnorrProveIdentityAttribute = optionalNativeFn<
+  (attribute: Uint8Array, subjectHashHex: string) => NativeSchnorrBundle
+>(['schnorr_prove_identity_attribute', 'schnorrProveIdentityAttribute']);
+
+export const schnorrVerifyIdentityAttribute = optionalNativeFn<
+  (
+    attributeHashHex: string,
+    subjectHashHex: string,
+    nonceCommitmentHex: string,
+    responseHex: string
+  ) => boolean
+>(['schnorr_verify_identity_attribute', 'schnorrVerifyIdentityAttribute']);
+
 export const nativeBindings: NativeCryptoBindings = {
   generateKeyPair,
   sign,
