@@ -800,4 +800,47 @@ describe('Repository DI: ITraderRepository + ITransactionRepository', () => {
     });
     expect(opportunities).toEqual([]);
   });
+
+  describe('no-repository fallback behavior', () => {
+    it('returns zero-volume analytics when no transaction repo', async () => {
+      const service = createService();
+      const analytics = await service.getTradeAnalytics('gold', '7d');
+      expect(analytics.totalVolume).toBe(0);
+      expect(analytics.averagePrice).toBe(0);
+      expect(analytics.marketTrend).toBe('neutral');
+    });
+
+    it('returns zero-volume analytics for all period options', async () => {
+      const service = createService();
+      for (const period of ['24h', '7d', '30d', '90d'] as const) {
+        const analytics = await service.getTradeAnalytics('gold', period);
+        expect(analytics.totalVolume).toBe(0);
+        expect(analytics.priceChangePeriod).toBe(period);
+      }
+    });
+
+    it('executes trade using unknown trader fallback when no trader repo', async () => {
+      const storage = createMockStorageService();
+      storage.getAssetLot = vi.fn().mockResolvedValue(createMockAssetLot());
+      const service = createService({ storageService: storage });
+      const request = {
+        assetLotId: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+        buyerId: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+        sellerId: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
+        quantity: 50,
+        agreedPrice: 5000,
+        currency: 'USD',
+        paymentMethod: 'bank_transfer' as const,
+        location: {
+          latitude: 5.6037,
+          longitude: -0.187,
+          accuracy: 5,
+          timestamp: Date.now(),
+        },
+      };
+      const tx = await service.executeTrade(request);
+      expect(tx.id).toBeDefined();
+      expect(tx.status).toBe('pending');
+    });
+  });
 });

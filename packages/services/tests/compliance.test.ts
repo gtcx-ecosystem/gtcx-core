@@ -1009,4 +1009,77 @@ describe('Repository DI: IComplianceRepository', () => {
     const dashboard = await service.getComplianceDashboard();
     expect(dashboard.overview.totalRecords).toBe(0);
   });
+
+  // ==========================================================================
+  // NO-REPOSITORY FALLBACK PATHS
+  // ==========================================================================
+
+  describe('no-repository fallback behavior', () => {
+    function createServiceWithoutRepo() {
+      return new UnifiedComplianceService(
+        {
+          storageService: createMockStorageService(),
+          cryptoService: createMockCryptoService(),
+        },
+        {}
+      );
+    }
+
+    it('returns non-compliant for trader license when no repo configured', async () => {
+      const service = createServiceWithoutRepo();
+      const result = await service.validateLicenses('trader-1');
+      expect(result).toBe(false);
+    });
+
+    it('returns empty dashboard when no repo configured', async () => {
+      const service = createServiceWithoutRepo();
+      const dashboard = await service.getComplianceDashboard();
+      expect(dashboard.overview.totalRecords).toBe(0);
+      expect(dashboard.overview.complianceScore).toBe(100);
+    });
+
+    it('produces compliance records for asset lot without repo', async () => {
+      const service = createServiceWithoutRepo();
+      const lot = createMockAssetLot();
+      const records = await service.checkAssetLotCompliance(lot);
+      expect(Array.isArray(records)).toBe(true);
+    });
+
+    it('produces compliance records for transaction without repo', async () => {
+      const service = createServiceWithoutRepo();
+      const tx = createMockTransaction();
+      const records = await service.checkTransactionCompliance(tx);
+      expect(Array.isArray(records)).toBe(true);
+    });
+
+    it('flags transaction with missing trader IDs in KYC fallback', async () => {
+      const service = createServiceWithoutRepo();
+      const tx = createMockTransaction({ fromTraderId: '', toTraderId: '' });
+      const records = await service.checkTransactionCompliance(tx);
+      const hasViolation = records.some((r) => r.status === 'violation');
+      expect(hasViolation).toBe(true);
+    });
+
+    it('flags invalid location coordinates in location fallback', async () => {
+      const service = createServiceWithoutRepo();
+      const lot = createMockAssetLot({
+        discoveryLocation: {
+          latitude: 999,
+          longitude: -999,
+          accuracy: 5,
+          timestamp: Date.now(),
+        },
+      });
+      const records = await service.checkAssetLotCompliance(lot);
+      const hasViolation = records.some((r) => r.status === 'violation');
+      expect(hasViolation).toBe(true);
+    });
+
+    it('returns checked:false from checkCompliance when no repo', async () => {
+      const service = createServiceWithoutRepo();
+      const result = await service.checkCompliance('entity-1', 'producer');
+      expect(result.checked).toBe(false);
+      expect(result.records).toEqual([]);
+    });
+  });
 });
