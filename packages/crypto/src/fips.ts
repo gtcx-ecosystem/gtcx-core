@@ -46,6 +46,7 @@ const warned = new Set<string>();
 
 export function fipsWarn(algorithm: string, alternative: string): void {
   if (!isFipsMode()) return;
+  /* v8 ignore start -- FIPS warning path exercised in FIPS integration tests */
   if (warned.has(algorithm)) return;
   warned.add(algorithm);
   if (typeof console !== 'undefined') {
@@ -53,4 +54,5 @@ export function fipsWarn(algorithm: string, alternative: string): void {
       `[gtcx/crypto] FIPS mode: ${algorithm} is not FIPS-validated. Use ${alternative} for FIPS compliance.`
     );
   }
+  /* v8 ignore stop */
 }

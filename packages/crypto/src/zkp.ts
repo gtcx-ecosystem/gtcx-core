@@ -169,6 +169,8 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
 export const createHashCommitmentZkpEngine = (): HashCommitmentZkpEngine =>
   new HashCommitmentZkpEngine();
 
+/* v8 ignore start -- NativeZkpEngine and createZkpEngine require compiled NAPI binary; tested in crypto-native-ci */
+
 /**
  * Create the best available ZKP engine.
  *
@@ -373,3 +375,4 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
     return false;
   }
 }
+/* v8 ignore stop */

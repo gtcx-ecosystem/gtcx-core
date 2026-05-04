@@ -898,9 +898,8 @@ mod tests {
             tampered_response,
         );
         // Either returns false or errors — both acceptable
-        match result {
-            Ok(valid) => assert!(!valid),
-            Err(_) => {} // Also acceptable — invalid scalar
+        if let Ok(valid) = result {
+            assert!(!valid);
         }
     }
 

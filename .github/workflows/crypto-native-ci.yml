@@ -20,9 +20,16 @@ jobs:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             artifact-name: gtcx-node-linux-x64
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            artifact-name: gtcx-node-linux-arm64
+            cross: true
           - os: macos-latest
             target: aarch64-apple-darwin
             artifact-name: gtcx-node-darwin-arm64
+          - os: macos-13
+            target: x86_64-apple-darwin
+            artifact-name: gtcx-node-darwin-x64
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     steps:
@@ -58,6 +65,15 @@ jobs:
       - name: Typecheck native bindings
         run: pnpm --filter @gtcx/crypto-native typecheck
 
+      - name: Install cross-compilation tools
+        if: matrix.cross
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+          echo "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
+          echo "CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
+          echo "CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++" >> $GITHUB_ENV
+
       - name: Build native bindings
         run: pnpm --filter @gtcx/crypto-native build:native
 
@@ -65,6 +81,7 @@ jobs:
         run: pnpm --filter @gtcx/crypto-native build
 
       - name: Smoke test native bindings
+        if: ${{ !matrix.cross }}
         run: |
           node -e "const n=require('./packages/crypto-native/dist/index.js'); const msg=new TextEncoder().encode('smoke'); const kp=n.generateKeyPair(); const sig=n.sign(msg,kp.privateKey); if(!n.verify(sig,msg,kp.publicKey)) { process.exit(1); } console.log('native-ok');"
 
