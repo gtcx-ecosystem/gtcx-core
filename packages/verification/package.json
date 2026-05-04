@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/verification",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Certificate generation, QR codes, and verification proofs for GTCX Protocol",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

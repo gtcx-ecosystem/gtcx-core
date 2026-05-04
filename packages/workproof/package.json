@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/workproof",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TradeCV/WorkProof v2.1 — types, Zod schemas, and validation for W3C VC-based employment attestations",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

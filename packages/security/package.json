@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/security",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Security utilities for GTCX Protocol - validation, auth, offline security, audit logging",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

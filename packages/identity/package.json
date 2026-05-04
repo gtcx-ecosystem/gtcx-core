@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/identity",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Identity management for GTCX protocol",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/schemas",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "GTCX verification schemas including Core12 compliance framework",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
