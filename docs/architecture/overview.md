@@ -19,6 +19,7 @@ The canonical high-level view of the `gtcx-core` architecture. Read this before 
 3. **Composable primitives** — small packages independently importable and reusable across GTCX products
 4. **Rust where it matters** — performance-critical crypto and ZKP paths in Rust; TypeScript fallback for portability
 5. **Commodity-agnostic** — new trade verticals added via configuration, not core code changes
+6. **Managed Lifecycle** — explicit revocation registry and certificate expiration for infrastructure-grade trust management
 
 ---
 

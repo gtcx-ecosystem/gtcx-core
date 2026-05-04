@@ -22,7 +22,8 @@ Agent and contributor handbook for `gtcx-core`. Covers orientation, roles, archi
 
 Any agent or contributor entering this repo reads in this order:
 
-1. [`1-agents/1-onboarding/orientation.md`](1-agents/1-onboarding/orientation.md) — codebase map
-2. [`1-agents/4-workflows/safety-rules.md`](1-agents/4-workflows/safety-rules.md) — what requires human approval
-3. The role file for your current work ([`1-agents/2-roles/`](1-agents/2-roles/))
-4. The package spec before touching any package ([`2-docs/5-specs/4-backend/packages/`](2-docs/5-specs/4-backend/packages/))
+1. [`GEMINI.md`](../GEMINI.md) — foundational engineering standards (10/10 requirements)
+2. [`1-agents/1-onboarding/orientation.md`](1-agents/1-onboarding/orientation.md) — codebase map
+3. [`1-agents/4-workflows/safety-rules.md`](1-agents/4-workflows/safety-rules.md) — what requires human approval
+4. The role file for your current work ([`1-agents/2-roles/`](1-agents/2-roles/))
+5. The package spec before touching any package ([`2-docs/5-specs/4-backend/packages/`](2-docs/5-specs/4-backend/packages/))

@@ -53,9 +53,9 @@ Note: `packages/config/` is a shared config directory (eslint, tailwind, tsup, t
 | Requirement | Standard                                                                     |
 | ----------- | ---------------------------------------------------------------------------- |
 | Security    | Authenticated transport, cryptographic integrity, least-privilege boundaries |
-| Reliability | Predictable failure modes, retry behavior, rate limiting                     |
+| Reliability | Continuous fuzzing, property-based testing, predictable failure modes        |
 | Performance | Proof generation and verification within defined budgets (see `benchmarks/`) |
-| Operability | Explicit runbooks, SLOs, and telemetry schema                                |
+| Operability | Mandatory secret sanitization, explicit runbooks, SLOs, and telemetry schema |
 | Portability | JS fallback for all native paths; offline-first by default                   |
 
 ---

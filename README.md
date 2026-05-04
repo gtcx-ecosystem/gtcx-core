@@ -2,6 +2,17 @@
 
 Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rust + TypeScript), type definitions, Zod schemas, domain models, verification infrastructure, and WorkProof/TradeCV attestation schemas consumed by all other repos. This is the lowest-level dependency in the stack — it depends on nothing else.
 
+## Engineering Excellence
+
+This repository adheres to **Infrastructure Grade (10/10)** engineering standards, ensuring the reliability and mathematical correctness required for global trade and governmental systems.
+
+- **Mathematical Verification**: All core cryptographic paths are verified using property-based testing (`fast-check`) and continuous fuzzing (`cargo-fuzz` on nightly).
+- **Security by Design**: Deep object sanitization (`sanitizeSecrets`) prevents cryptographic leakage in observability layers.
+- **Architectural Rigor**: Strictly enforced layering boundaries (zero circular dependencies) and standardized error taxonomy (ADR-012).
+- **Audit Ready**: All code is instrumented for tracing while preserving zero-trust security boundaries.
+
+For a detailed breakdown of these mandates, see [GEMINI.md](./GEMINI.md).
+
 ## Quick Start
 
 ### Prerequisites
