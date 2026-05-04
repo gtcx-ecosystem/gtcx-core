@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-04T09:59:19.883Z",
+  "generatedAt": "2026-05-04T18:56:09.440Z",
   "packages": {
     "@gtcx/ai": {
-      "version": "0.2.1",
+      "version": "0.2.2",
       "dir": "packages/ai",
       "typesPath": "packages/ai/dist/index.d.ts",
       "hash": "0ff961b0b12dc8c3dc3c7c51a27acbc03b1934e16a7558687b13d20c11717fe7",
@@ -17,7 +17,7 @@
       ]
     },
     "@gtcx/api-client": {
-      "version": "0.2.1",
+      "version": "0.3.0",
       "dir": "packages/api-client",
       "typesPath": "packages/api-client/dist/index.d.ts",
       "hash": "755bccb1256dfad8279ae5074ce912fe50949e499319156e73af2f6830ed564a",
@@ -48,7 +48,7 @@
       ]
     },
     "@gtcx/connectivity": {
-      "version": "0.2.1",
+      "version": "0.3.0",
       "dir": "packages/connectivity",
       "typesPath": "packages/connectivity/dist/index.d.ts",
       "hash": "68188df4b059614e0448f835e22479ed1967437f03987b0ffd55a03ee9c0fa25",
@@ -64,10 +64,10 @@
       ]
     },
     "@gtcx/crypto": {
-      "version": "1.0.1",
+      "version": "2.0.0",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "8b5a87b0357c884a6f0dfa5255acd72ef0cec94e54f30c014d682cc7b09803dc",
+      "hash": "243935306d49fcb4b2488f05422a6e6800e14f0fa00c113fe1bb97c24093249b",
       "exports": [
         "batchVerify",
         "batchVerifyProofs",
@@ -153,7 +153,7 @@
       ]
     },
     "@gtcx/crypto-native": {
-      "version": "0.1.1",
+      "version": "0.2.0",
       "dir": "packages/crypto-native",
       "typesPath": "packages/crypto-native/dist/index.d.ts",
       "hash": "befc94ec4cf7ae69ec73cff6adff80797bc67490a705e44a0bb0dfe475caa07c",
@@ -184,7 +184,7 @@
       ]
     },
     "@gtcx/domain": {
-      "version": "1.0.1",
+      "version": "2.0.0",
       "dir": "packages/domain",
       "typesPath": "packages/domain/dist/index.d.ts",
       "hash": "bdb7f781287d39fb4bc1535aa49625bbb5d4f72cc0a34f04d895f225f9a7ff02",
@@ -350,7 +350,7 @@
       ]
     },
     "@gtcx/events": {
-      "version": "0.2.1",
+      "version": "0.2.2",
       "dir": "packages/events",
       "typesPath": "packages/events/dist/index.d.ts",
       "hash": "5f4b75f4f6bf163d194d119d6f434f19226173a33c77713317098a221418e269",
@@ -386,7 +386,7 @@
       ]
     },
     "@gtcx/identity": {
-      "version": "1.0.1",
+      "version": "2.0.0",
       "dir": "packages/identity",
       "typesPath": "packages/identity/dist/index.d.ts",
       "hash": "489b6fdc60f4b91bd42548150c0d9024fee416659819110403ad1a22e95e2726",
@@ -429,14 +429,14 @@
       ]
     },
     "@gtcx/logging": {
-      "version": "0.2.1",
+      "version": "0.2.2",
       "dir": "packages/logging",
       "typesPath": "packages/logging/dist/index.d.ts",
       "hash": "d597ff3b431dd66512d37af1e54fe1475a224af9032be13ec3aee636c056014c",
       "exports": ["createLogger", "LogEntry", "Logger", "LoggerConfig", "LogLevel"]
     },
     "@gtcx/network": {
-      "version": "0.1.1",
+      "version": "0.2.0",
       "dir": "packages/network",
       "typesPath": "packages/network/dist/index.d.ts",
       "hash": "985fe8f602edd635c65f20e5d793c3383e616aa1237e867e1c35323c15e20df4",
@@ -473,7 +473,7 @@
       ]
     },
     "@gtcx/schemas": {
-      "version": "1.0.1",
+      "version": "2.0.0",
       "dir": "packages/schemas",
       "typesPath": "packages/schemas/dist/index.d.ts",
       "hash": "64160c35c80297c32ed73b38a0f579c0eeedc8e18a2dbabe3e2da813390cda58",
@@ -491,10 +491,10 @@
       ]
     },
     "@gtcx/security": {
-      "version": "1.0.1",
+      "version": "2.0.0",
       "dir": "packages/security",
       "typesPath": "packages/security/dist/index.d.ts",
-      "hash": "daf5adb0f20786b931d83ddc70ee5416737119dbb7164fd8754dca4942d3ed81",
+      "hash": "023ea24d7f36db9c2e8e0c21057fc254e89e5d58638af75c0c13da685f3cbcc3",
       "exports": [
         "ApiErrorSchema",
         "assembleToken",
@@ -593,6 +593,7 @@
         "sanitizeForSql",
         "sanitizeForUrlPath",
         "sanitizeObject",
+        "sanitizeSecrets",
         "sanitizeString",
         "secureCompare",
         "SecureStorageBase",
@@ -644,7 +645,7 @@
       ]
     },
     "@gtcx/services": {
-      "version": "0.2.1",
+      "version": "0.2.2",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
       "hash": "dbe17bb56723dfe5d2c08deb2b5fdf45b997314737bb86683d0539d001ed7089",
@@ -669,7 +670,7 @@
       ]
     },
     "@gtcx/sync": {
-      "version": "0.2.1",
+      "version": "0.2.2",
       "dir": "packages/sync",
       "typesPath": "packages/sync/dist/index.d.ts",
       "hash": "dfcb759f9153a6840ac70b3b36a6391a549035569c9ad15ca50f52050d9fc1b4",
@@ -689,7 +690,7 @@
       ]
     },
     "@gtcx/types": {
-      "version": "1.0.1",
+      "version": "2.0.0",
       "dir": "packages/types",
       "typesPath": "packages/types/dist/index.d.ts",
       "hash": "0fc5456d32b3e741f6ba3945088b59b391dacd380eccd5ee42b8b7cc10b93502",
@@ -897,7 +898,7 @@
       ]
     },
     "@gtcx/utils": {
-      "version": "0.2.1",
+      "version": "0.2.2",
       "dir": "packages/utils",
       "typesPath": "packages/utils/dist/index.d.ts",
       "hash": "90223327e469a66fb6e3178493b007d6c3e33354ddf55b317b958ee0ae13ce6d",
@@ -915,13 +916,14 @@
       ]
     },
     "@gtcx/verification": {
-      "version": "1.0.1",
+      "version": "2.0.0",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "67b9c385121147f8c6d8f80384c0352c0bec7907390a9af677ecc6f90fb001d8",
+      "hash": "f2db3984e72e4b83f0f817e1d61723058ed7ce69dce85d2faa17f222d8e24899",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",
+        "assertNotRevoked",
         "ASSET_ORIGIN_TEMPLATE",
         "AssetCategory",
         "AssetCategorySchema",
@@ -951,6 +953,7 @@
         "CertificateVerificationDataSchema",
         "CertificateVerificationResult",
         "CertificateVerificationResultSchema",
+        "checkRevocationStatus",
         "Claim",
         "ClaimEvidence",
         "ClaimEvidenceSchema",
@@ -1080,6 +1083,9 @@
         "QualityGradeSchema",
         "ResourceContext",
         "ResourceContextSchema",
+        "RevocationEntry",
+        "RevocationRegistry",
+        "RevocationStatus",
         "ROLE_TO_CREDENTIAL",
         "serializeProofBundle",
         "serializeQRData",
@@ -1116,7 +1122,7 @@
       ]
     },
     "@gtcx/workproof": {
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dir": "packages/workproof",
       "typesPath": "packages/workproof/dist/index.d.ts",
       "hash": "25fc5b91e38d9a78de7beb4671cf798482eaeb4f0e06a20edc6abe3d7f041173",

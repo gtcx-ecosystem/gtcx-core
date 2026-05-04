@@ -7,6 +7,9 @@ members = [
     "gtcx-edge",
     "gtcx-node",
 ]
+exclude = [
+    "gtcx-crypto/fuzz"
+]
 resolver = "2"
 
 [workspace.package]
