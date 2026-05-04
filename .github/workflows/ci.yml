@@ -42,6 +42,9 @@ jobs:
       - name: Ensure no tracked dist artifacts
         run: pnpm check:dist
 
+      - name: Dependency audit
+        run: pnpm audit --audit-level=high
+
       - name: Architecture boundaries
         run: pnpm architecture:check
 
