@@ -11,6 +11,8 @@ import type {
   ApiResponse,
   IApiClient,
   MtlsOptions,
+  OfflineQueueEntry,
+  QueuedResponse,
   RequestOptions,
   RequestSigner,
   RequestSigningContext,
@@ -377,6 +379,31 @@ async function request<T>(
   });
 }
 
+async function enqueueOrThrow(
+  method: string,
+  path: string,
+  body: unknown,
+  requestOptions: RequestOptions | undefined,
+  offline: ApiClientOptions['offline']
+): Promise<QueuedResponse> {
+  if (offline) {
+    const entry: OfflineQueueEntry = {
+      method,
+      path,
+      body: body !== undefined ? body : undefined,
+      options: requestOptions,
+      enqueuedAt: Date.now(),
+    };
+    const operationId = await offline.enqueue(entry);
+    return { queued: true, operationId };
+  }
+  throw new NetworkError('Device is offline and no offline handler is configured', {
+    code: 'NETWORK_ERROR',
+    category: 'network',
+    retryable: true,
+  });
+}
+
 export function createApiClient(options: ApiClientOptions): IApiClient {
   const baseUrl = options.baseUrl;
   const fetcher = options.fetcher ?? fetch;
@@ -390,14 +417,27 @@ export function createApiClient(options: ApiClientOptions): IApiClient {
     signer: options.signer,
     dispatcherPromise,
   };
+
+  const maybeOffline = async <T>(
+    method: string,
+    path: string,
+    body: unknown,
+    requestOptions: RequestOptions | undefined
+  ): Promise<ApiResponse<T> | QueuedResponse> => {
+    if (options.offline && !options.offline.isOnline()) {
+      return enqueueOrThrow(method, path, body, requestOptions, options.offline);
+    }
+    return request<T>(method, buildUrl(baseUrl, path), body, requestOptions, options, runtime);
+  };
+
   return {
     get: <T>(path: string, requestOptions?: RequestOptions) =>
-      request<T>('GET', buildUrl(baseUrl, path), undefined, requestOptions, options, runtime),
+      maybeOffline<T>('GET', path, undefined, requestOptions),
     post: <T>(path: string, body: unknown, requestOptions?: RequestOptions) =>
-      request<T>('POST', buildUrl(baseUrl, path), body, requestOptions, options, runtime),
+      maybeOffline<T>('POST', path, body, requestOptions),
     put: <T>(path: string, body: unknown, requestOptions?: RequestOptions) =>
-      request<T>('PUT', buildUrl(baseUrl, path), body, requestOptions, options, runtime),
+      maybeOffline<T>('PUT', path, body, requestOptions),
     delete: <T>(path: string, requestOptions?: RequestOptions) =>
-      request<T>('DELETE', buildUrl(baseUrl, path), undefined, requestOptions, options, runtime),
+      maybeOffline<T>('DELETE', path, undefined, requestOptions),
   };
 }

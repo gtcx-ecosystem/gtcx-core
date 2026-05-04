@@ -20,6 +20,19 @@ export type ApiErrorCode =
   | 'CONFIG_ERROR'
   | 'REQUEST_FAILED';
 
+export interface OfflineQueueEntry {
+  method: string;
+  path: string;
+  body?: unknown | undefined;
+  options?: RequestOptions | undefined;
+  enqueuedAt: number;
+}
+
+export interface OfflineHandler {
+  isOnline(): boolean;
+  enqueue(entry: OfflineQueueEntry): Promise<string>;
+}
+
 export interface ApiClientOptions {
   baseUrl: string;
   timeout?: number; // default 30000
@@ -29,6 +42,7 @@ export interface ApiClientOptions {
   fetcher?: typeof fetch;
   dispatcher?: Dispatcher;
   mtls?: MtlsOptions;
+  offline?: OfflineHandler;
 }
 
 export interface ApiResponse<T = unknown> {
@@ -47,11 +61,24 @@ export interface ApiError {
   cause?: unknown;
 }
 
+export interface QueuedResponse {
+  queued: true;
+  operationId: string;
+}
+
 export interface IApiClient {
-  get<T>(path: string, options?: RequestOptions): Promise<ApiResponse<T>>;
-  post<T>(path: string, body: unknown, options?: RequestOptions): Promise<ApiResponse<T>>;
-  put<T>(path: string, body: unknown, options?: RequestOptions): Promise<ApiResponse<T>>;
-  delete<T>(path: string, options?: RequestOptions): Promise<ApiResponse<T>>;
+  get<T>(path: string, options?: RequestOptions): Promise<ApiResponse<T> | QueuedResponse>;
+  post<T>(
+    path: string,
+    body: unknown,
+    options?: RequestOptions
+  ): Promise<ApiResponse<T> | QueuedResponse>;
+  put<T>(
+    path: string,
+    body: unknown,
+    options?: RequestOptions
+  ): Promise<ApiResponse<T> | QueuedResponse>;
+  delete<T>(path: string, options?: RequestOptions): Promise<ApiResponse<T> | QueuedResponse>;
 }
 
 export interface RequestOptions {
