@@ -147,6 +147,11 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
     if (!parsed.success) return false;
     const payload = decodePayload(proof.proof);
     if (!payload) return false;
+
+    // Strict integrity check: The proof string must be the canonical encoding of the payload.
+    // This prevents malleability attacks on the base64 padding or redundant fields.
+    if (encodePayload(payload) !== proof.proof) return false;
+
     if (!isHex(payload.salt) || !isHex(payload.response)) return false;
     if (payload.salt.length !== 64 || payload.response.length !== 64) return false;
 

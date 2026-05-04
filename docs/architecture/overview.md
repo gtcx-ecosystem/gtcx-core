@@ -44,7 +44,7 @@ Dependencies must flow in one direction only. No circular dependencies:
 @gtcx/crypto, @gtcx/schemas        (types only)
       ↓
 @gtcx/identity, @gtcx/security,    (depend on crypto, types)
-@gtcx/verification
+@gtcx/verification, @gtcx/workproof
       ↓
 @gtcx/domain                       (depends on events, utils)
       ↓

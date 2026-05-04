@@ -23,6 +23,7 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "check:dist": "test -z \"$(git ls-files 'packages/*/dist/*')\"",
     "architecture:check": "node ./tools/check-package-boundaries.mjs",
+    "check:native": "ts-node packages/crypto-native/src/preflight.ts",
     "quality:governance:check": "node ./tools/check-governance.mjs",
     "quality:verify-branch-protection": "./tools/verify-branch-protection.sh",
     "quality:kpi:collect": "node ./tools/collect-kpi-history.mjs",
