@@ -334,6 +334,49 @@ export function sanitizeForLog(input: string): string {
   );
 }
 
+/**
+ * Sanitize an object specifically to remove cryptographic secrets and keys.
+ * Use this in tracing and logging callbacks.
+ *
+ * @example
+ * const sanitized = sanitizeSecrets(input);
+ */
+export function sanitizeSecrets<T = unknown>(input: T): T {
+  if (input === null || input === undefined || typeof input !== 'object') {
+    return input;
+  }
+
+  const SENSITIVE_KEYS = [
+    'privateKey',
+    'private_key',
+    'secret',
+    'seed',
+    'mnemonic',
+    'password',
+    'token',
+    'apiKey',
+    'api_key',
+    'randomness',
+  ];
+
+  if (Array.isArray(input)) {
+    return input.map((item) => sanitizeSecrets(item)) as unknown as T;
+  }
+
+  const result: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(input as object)) {
+    if (SENSITIVE_KEYS.some((s) => key.toLowerCase().includes(s.toLowerCase()))) {
+      result[key] = '[REDACTED]';
+    } else if (typeof value === 'object') {
+      result[key] = sanitizeSecrets(value);
+    } else {
+      result[key] = value;
+    }
+  }
+
+  return result as unknown as T;
+}
+
 // =============================================================================
 // ERRORS
 // =============================================================================

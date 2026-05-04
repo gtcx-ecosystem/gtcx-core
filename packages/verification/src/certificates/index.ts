@@ -60,6 +60,15 @@ export {
   type CreateCertificateInput,
 } from './generator';
 
+export {
+  // Revocation
+  RevocationRegistry,
+  checkRevocationStatus,
+  assertNotRevoked,
+  type RevocationStatus,
+  type RevocationEntry,
+} from './revocation';
+
 // Re-export types from central types
 export type {
   // Core certificate types

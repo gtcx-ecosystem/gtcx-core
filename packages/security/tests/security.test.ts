@@ -2,7 +2,7 @@
  * @gtcx/security - Test Suite
  *
  * Security package tests organized by module.
- * FND-202: Convert all 69 .todo() stubs to real test assertions.
+ * [COMPLETED] FND-202: All 69 .todo() stubs converted to real test assertions.
  *
  * Run tests: pnpm test
  * Run with coverage: pnpm test:coverage

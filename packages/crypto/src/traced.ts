@@ -38,6 +38,8 @@ const cryptoLog = createCategoryLogger('crypto');
  *
  * Traced version of sign() that logs operation details for debugging
  * and AI analysis. Does NOT log the private key or full message content.
+ * For complex objects, prefer using sanitizeSecrets() from @gtcx/security
+ * in the sanitizeInput/sanitizeOutput callbacks.
  *
  * @param message - Message to sign
  * @param privateKeyHex - Private key in hex format
