@@ -1,363 +1,203 @@
-# Threat Model — {System Name}
+# Threat Model — gtcx-core
 
-**Version:** {version}
-**Classification:** {Public / Internal / Confidential / Secret}
-**Threat model date:** {YYYY-MM-DD}
-**Review cycle:** {Quarterly / Bi-annual / Annual}
+**Version:** 1.0.0
+**Classification:** Internal
+**Threat model date:** 2026-05-04
+**Review cycle:** Quarterly
+**Scope:** TypeScript packages (`@gtcx/*`) and Rust crates (`gtcx-*`) — cryptographic library primitives consumed by downstream GTCX products
 
 ---
 
-## System Architecture for Threat Analysis
+## System Scope
 
-### System components
+gtcx-core is a **library**, not a service. It has no network listeners, no user-facing API, no persistent storage, and no deployment surface. Threats target the **code supply chain** and the **correctness of cryptographic operations** — not infrastructure.
 
-```yaml
-Components:
-  Frontend:
-    - Web Application
-    - Mobile Apps (iOS/Android)
-    - Admin Portal
+### Components under threat analysis
 
-  Backend:
-    - API Gateway
-    - Microservices
-    - Message Queue
-    - Cache Layer
+| Component                | Package                                 | What it does                                                         |
+| ------------------------ | --------------------------------------- | -------------------------------------------------------------------- |
+| Key generation + signing | `@gtcx/crypto`, `rust/gtcx-crypto`      | Ed25519/Secp256k1 key pairs, message signing, signature verification |
+| Hashing                  | `@gtcx/crypto`                          | SHA-256, SHA-512, BLAKE3 with domain separation                      |
+| ZKP engine               | `@gtcx/crypto`, `rust/gtcx-zkp`         | Hash-commitment (TS fallback), Groth16/Bulletproofs/Schnorr (Rust)   |
+| Identity                 | `@gtcx/identity`                        | DID creation, resolution, credential management                      |
+| Verification             | `@gtcx/verification`                    | Certificate generation, proof bundles, QR codes                      |
+| Security primitives      | `@gtcx/security`                        | Token lifecycle, permissions, sanitization, audit logging            |
+| Offline queue            | `@gtcx/domain`                          | Operation queueing with conflict resolution                          |
+| API client               | `@gtcx/api-client`                      | HTTP requests with signing, retry, offline awareness                 |
+| Native bindings          | `@gtcx/crypto-native`, `rust/gtcx-node` | NAPI-RS bridge for Rust crypto from Node.js                          |
 
-  Data_Stores:
-    - Primary Database
-    - Document Store
-    - Object Storage
-    - Analytics Database
-
-  External_Integrations:
-    - Payment Processors
-    - Identity Providers
-    - Third-party APIs
-    - { Other systems }
-```
-
-### Data flow diagram
+### Data flow
 
 ```
-[User Device] → [CDN/WAF] → [Load Balancer] → [API Gateway]
-                                                      ↓
-[Cache Layer] ← [Application Services] → [Message Queue]
-                            ↓
-                    [Database Layer]
-                            ↓
-                    [Backup Storage]
+[Downstream GTCX App]
+        ↓ imports
+[@gtcx/services, @gtcx/api-client]
+        ↓ calls
+[@gtcx/identity, @gtcx/verification, @gtcx/security]
+        ↓ delegates
+[@gtcx/crypto] ──→ [@gtcx/crypto-native] ──→ [rust/gtcx-node] ──→ [rust/gtcx-crypto, rust/gtcx-zkp]
 ```
+
+Key material flows through: `@gtcx/crypto` (generation) → `@gtcx/identity` (DID binding) → `@gtcx/verification` (proof signing) → `@gtcx/api-client` (request signing). Private keys must never leave the generating context.
 
 ---
 
 ## Threat Actors
 
-### Actor profiles
-
-| Actor type      | Motivation            | Capability    | Risk level |
-| --------------- | --------------------- | ------------- | ---------- |
-| Nation State    | Espionage, Disruption | Very High     | Critical   |
-| Organized Crime | Financial Gain        | High          | High       |
-| Hacktivist      | Ideological           | Medium        | Medium     |
-| Insider Threat  | Various               | High (Access) | High       |
-| Script Kiddie   | Recognition           | Low           | Low        |
-| Competitor      | Business Intelligence | Medium        | Medium     |
-
-### Insider threat categories
-
-```yaml
-Malicious_Insider:
-  Description: 'Employee with intent to harm'
-  Access_Level: 'Varies'
-  Indicators:
-    - Unusual access patterns
-    - Large data downloads
-    - After-hours activity
-
-Negligent_Employee:
-  Description: 'Unintentional security violations'
-  Access_Level: 'Standard user'
-  Common_Issues:
-    - Password sharing
-    - Clicking phishing links
-    - Lost devices
-
-Compromised_Account:
-  Description: 'Legitimate account under attacker control'
-  Access_Level: 'Varies'
-  Detection:
-    - Impossible travel
-    - Unusual behavior
-    - Failed MFA attempts
-```
+| Actor                          | Motivation                                             | Capability    | Relevance to gtcx-core                                         |
+| ------------------------------ | ------------------------------------------------------ | ------------- | -------------------------------------------------------------- |
+| Supply chain attacker          | Compromise downstream products via poisoned dependency | High          | Critical — gtcx-core is the foundation for 6+ downstream repos |
+| Sophisticated adversary        | Forge trade verification proofs                        | High          | Critical — targets ZKP and signing                             |
+| Malicious contributor          | Introduce subtle crypto weakness                       | Medium        | High — single CODEOWNER, open to PRs                           |
+| Insider at downstream consumer | Extract private keys from library misuse               | High (access) | Medium — library must make misuse hard                         |
+| Automated scanner              | Find known CVEs in dependencies                        | Low           | Medium — dependencies must stay patched                        |
 
 ---
 
-## STRIDE Threat Analysis
+## STRIDE Analysis (scoped to library threats)
 
-### Spoofing identity
+### Spoofing
 
-| Component    | Threat           | Impact | Likelihood | Risk     | Mitigation              |
-| ------------ | ---------------- | ------ | ---------- | -------- | ----------------------- |
-| Login System | Credential theft | High   | Medium     | High     | MFA, Rate limiting      |
-| API          | Token replay     | Medium | Low        | Medium   | Token expiration, Nonce |
-| Email        | Phishing         | High   | High       | Critical | SPF/DKIM/DMARC          |
+| Component          | Threat                                    | Impact   | Likelihood | Risk   | Current mitigation                                                            | Evidence |
+| ------------------ | ----------------------------------------- | -------- | ---------- | ------ | ----------------------------------------------------------------------------- | -------- |
+| `@gtcx/crypto`     | Weak key generation allows key prediction | Critical | Low        | High   | Ed25519 via audited @noble/curves; CSPRNG via Web Crypto / Node.js crypto     | TC-001   |
+| `@gtcx/identity`   | DID spoofing via forged DID documents     | High     | Medium     | High   | Cryptographic DID resolution with Zod schema validation of resolved documents | TC-010   |
+| `@gtcx/api-client` | Request forgery via missing/weak signing  | Medium   | Medium     | Medium | HMAC request signing with per-request nonce                                   | TC-012   |
 
-### Tampering with data
+### Tampering
 
-| Component | Threat                 | Impact   | Likelihood | Risk   | Mitigation                |
-| --------- | ---------------------- | -------- | ---------- | ------ | ------------------------- |
-| Database  | SQL Injection          | Critical | Medium     | High   | Parameterized queries     |
-| API       | Parameter manipulation | Medium   | Medium     | Medium | Input validation          |
-| Files     | Malware upload         | High     | Low        | Medium | File scanning, sandboxing |
+| Component            | Threat                                      | Impact   | Likelihood | Risk   | Current mitigation                                                     | Evidence                   |
+| -------------------- | ------------------------------------------- | -------- | ---------- | ------ | ---------------------------------------------------------------------- | -------------------------- |
+| `@gtcx/verification` | Proof bundle modification after signing     | Critical | Low        | High   | Hash-chained proof bundles; signature covers full payload              | TC-011                     |
+| `@gtcx/crypto`       | Hash collision exploitation                 | High     | Very Low   | Medium | SHA-256 + BLAKE3 with domain-separated prefixes                        | TC-002                     |
+| `@gtcx/domain`       | Offline queue payload tampering during sync | Medium   | Medium     | Medium | Conflict resolution strategies; checksum metadata on queued operations | TC-004                     |
+| npm registry         | Published package modified post-publish     | Critical | Low        | High   | Provenance manifest generation; `--provenance` flag on publish         | `pnpm provenance:generate` |
 
 ### Repudiation
 
-| Component     | Threat               | Impact | Likelihood | Risk   | Mitigation                         |
-| ------------- | -------------------- | ------ | ---------- | ------ | ---------------------------------- |
-| Transactions  | Denial of action     | High   | Low        | Medium | Audit logs, digital signatures     |
-| Admin Actions | Unauthorized changes | High   | Low        | Medium | Change tracking, approval workflow |
+| Component            | Threat                          | Impact | Likelihood | Risk   | Current mitigation                                                               | Evidence                       |
+| -------------------- | ------------------------------- | ------ | ---------- | ------ | -------------------------------------------------------------------------------- | ------------------------------ |
+| `@gtcx/security`     | Audit log tampering or omission | High   | Low        | Medium | Structured audit events with severity levels, batch flushing                     | `packages/security/src/audit/` |
+| `@gtcx/verification` | Denial of certificate issuance  | Medium | Low        | Low    | Certificate ID includes timestamp + randomness; proof bundles are self-contained | TC-011                         |
 
-### Information disclosure
+### Information Disclosure
 
-| Component | Threat                 | Impact   | Likelihood | Risk     | Mitigation                    |
-| --------- | ---------------------- | -------- | ---------- | -------- | ----------------------------- |
-| Database  | Data breach            | Critical | Medium     | Critical | Encryption, access controls   |
-| API       | Information leakage    | Medium   | High       | High     | Error handling, rate limiting |
-| Logs      | Sensitive data in logs | High     | Medium     | High     | Log sanitization              |
+| Component          | Threat                                        | Impact   | Likelihood | Risk     | Current mitigation                                                                                          | Evidence                      |
+| ------------------ | --------------------------------------------- | -------- | ---------- | -------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `@gtcx/crypto`     | Private key leakage in error messages or logs | Critical | Medium     | Critical | DID document creation validates no private key material in output; traced operations use sanitize callbacks | TC-001, `identity.ts:115-119` |
+| `@gtcx/security`   | Secrets in console output                     | High     | Medium     | High     | Audit logger uses structured events; no raw credential logging                                              | TC-008                        |
+| `@gtcx/crypto`     | Timing side-channel on signature verification | High     | Low        | Medium   | @noble/curves uses constant-time comparison; Rust ed25519-dalek uses `ct_eq`                                | TC-001                        |
+| `rust/gtcx-crypto` | Key material in memory after use              | Medium   | Low        | Medium   | `zeroize` derive on all key structs                                                                         | `Cargo.toml` zeroize dep      |
 
-### Denial of service
+### Denial of Service
 
-| Component | Threat              | Impact | Likelihood | Risk | Mitigation                             |
-| --------- | ------------------- | ------ | ---------- | ---- | -------------------------------------- |
-| API       | Rate limit abuse    | High   | High       | High | Rate limiting, DDoS protection         |
-| Database  | Resource exhaustion | High   | Medium     | High | Query optimization, connection pooling |
-| Storage   | Disk filling        | Medium | Low        | Low  | Quotas, monitoring                     |
+| Component          | Threat                                   | Impact | Likelihood | Risk   | Current mitigation                                                    | Evidence                              |
+| ------------------ | ---------------------------------------- | ------ | ---------- | ------ | --------------------------------------------------------------------- | ------------------------------------- |
+| `@gtcx/domain`     | Offline queue exhaustion                 | Medium | Medium     | Medium | `maxQueueSize` cap (default 10,000); JSON serialization validation    | `offline-queue.ts:142-146`            |
+| `@gtcx/crypto`     | ZKP proof generation resource exhaustion | High   | Low        | Medium | Performance budgets enforced in CI; Groth16 prove budgeted at ≤5000ms | `benchmarks/performance-budgets.json` |
+| `@gtcx/api-client` | Retry storm amplification                | Medium | Medium     | Medium | Exponential backoff with jitter; max 3 retries; max 2s delay cap      | `api-client/src/index.ts:369-370`     |
 
-### Elevation of privilege
+### Elevation of Privilege
 
-| Component   | Threat               | Impact   | Likelihood | Risk | Mitigation                      |
-| ----------- | -------------------- | -------- | ---------- | ---- | ------------------------------- |
-| Application | Privilege escalation | Critical | Low        | High | RBAC, least privilege           |
-| OS          | Container escape     | Critical | Low        | High | Security patches, hardening     |
-| Cloud       | IAM misconfiguration | High     | Medium     | High | Regular audits, least privilege |
-
----
-
-## Attack Trees
-
-### Financial theft attack tree
-
-```
-Goal: Steal Funds
-├── Compromise User Account
-│   ├── Phishing Attack
-│   │   ├── Email Phishing
-│   │   └── SMS Phishing
-│   ├── Credential Stuffing
-│   └── Social Engineering
-├── Exploit Application Vulnerability
-│   ├── SQL Injection
-│   ├── XSS for Session Hijacking
-│   └── CSRF Attack
-└── Insider Threat
-    ├── Rogue Employee
-    └── Compromised Admin
-```
-
-### Data breach attack tree
-
-```
-Goal: Exfiltrate Sensitive Data
-├── Direct Database Access
-│   ├── SQL Injection
-│   ├── Backup Theft
-│   └── Database Misconfiguration
-├── Application Layer Attack
-│   ├── API Abuse
-│   ├── Broken Access Control
-│   └── Information Disclosure
-└── Supply Chain Attack
-    ├── Compromised Dependency
-    └── Third-party Integration
-```
+| Component        | Threat                                    | Impact   | Likelihood | Risk   | Current mitigation                                                                                                                               | Evidence                                    |
+| ---------------- | ----------------------------------------- | -------- | ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| `@gtcx/security` | Permission bypass via zone escalation     | High     | Low        | Medium | Zone-based permission system with explicit grants                                                                                                | TC-006                                      |
+| `@gtcx/crypto`   | JS fallback ZKP accepted as real ZK proof | Critical | Medium     | High   | `HashCommitmentZkpEngine` is explicitly documented as NOT zero-knowledge; `GTCX_REQUIRE_NATIVE=true` enforces native Rust circuits in production | `packages/crypto/src/zkp.ts` header comment |
+| `rust/gtcx-node` | Unsafe code in NAPI bridge                | Critical | Low        | High   | `#![deny(unsafe_code)]` enforced in all crates; CI verifies this                                                                                 | `ci.yml` unsafe_code check                  |
 
 ---
 
-## DREAD Risk Assessment
+## Supply Chain Threats
 
-### Risk scoring matrix
+This is the highest-risk category for a foundation library.
 
-| Factor              | Score 1–3         | Description                 |
-| ------------------- | ----------------- | --------------------------- |
-| **D**amage          | 1=Low, 3=Critical | How bad would an attack be? |
-| **R**eproducibility | 1=Hard, 3=Easy    | How easy to reproduce?      |
-| **E**xploitability  | 1=Hard, 3=Easy    | How much effort to exploit? |
-| **A**ffected Users  | 1=Few, 3=All      | How many users affected?    |
-| **D**iscoverability | 1=Hard, 3=Easy    | How easy to discover?       |
-
-### Top risks by DREAD score
-
-| Risk                   | D   | R   | E   | A   | D   | Total | Priority |
-| ---------------------- | --- | --- | --- | --- | --- | ----- | -------- |
-| SQL Injection          | 3   | 3   | 2   | 3   | 3   | 14    | Critical |
-| Weak Authentication    | 3   | 3   | 3   | 3   | 2   | 14    | Critical |
-| XSS                    | 2   | 3   | 3   | 2   | 3   | 13    | High     |
-| CSRF                   | 2   | 3   | 2   | 2   | 2   | 11    | Medium   |
-| Information Disclosure | 2   | 2   | 2   | 2   | 2   | 10    | Medium   |
+| Threat                                    | Impact   | Likelihood | Risk     | Current mitigation                                                                            | Gap                                                  |
+| ----------------------------------------- | -------- | ---------- | -------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Compromised npm dependency                | Critical | Medium     | Critical | Trivy scanning in CI; SBOM generation; `pnpm audit` on every PR; pinned versions via lockfile | No runtime SCA in downstream apps                    |
+| Malicious PR introducing crypto weakness  | Critical | Low        | High     | Single CODEOWNER review; lint-staged hooks; architecture boundary check                       | No formal code review checklist for crypto changes   |
+| Typosquatting on `@gtcx/*` scope          | High     | Low        | Medium   | Private registry planned; `publishConfig` set to npm                                          | Scope not yet claimed on npm                         |
+| Build artifact tampering                  | High     | Low        | Medium   | Provenance manifest generated; `--provenance` on publish                                      | Not yet publishing; no Sigstore integration          |
+| Dependency confusion (internal vs public) | High     | Low        | Medium   | `workspace:*` protocol for all internal refs                                                  | Must claim `@gtcx` scope on npm before first publish |
 
 ---
 
 ## Attack Scenarios
 
-### Scenario template
+### Scenario 1: Forged verification proof
 
 ```yaml
 Attack_Scenario:
-  Name: '{Scenario name}'
-
-  Attack_Path: 1. "{Step 1}"
-    2. "{Step 2}"
-    3. "{Step 3}"
-    4. "{Step 4}"
-    5. "{Step 5}"
-
+  Name: 'Forged commodity verification proof'
+  Attack_Path: 1. Attacker obtains a valid proof bundle structure from public QR code
+    2. Modifies certificate data (commodity weight, origin location)
+    3. Attempts to re-sign with a different key pair
+    4. Submits modified proof bundle to downstream verification service
   Impact:
-    Financial: '{estimate or range}'
-    Reputation: '{High / Medium / Low}'
-    Regulatory: '{potential fines or obligations}'
-
+    Financial: 'Fraudulent commodity certification could enable trade of uncertified goods'
+    Reputation: 'Critical — undermines entire verification protocol'
   Current_Controls:
-    - '{control 1}'
-    - '{control 2}'
-
+    - Proof bundles include publicKey; verifier checks key against DID registry
+    - Certificate ID is hash-derived and tamper-evident
+    - Hash-chained proof structure detects any field modification
   Gaps:
-    - '{gap 1}'
-    - '{gap 2}'
-
+    - No revocation check in proof verification flow
+    - Hash-commitment ZKP (JS fallback) is not zero-knowledge — a motivated attacker can forge proofs if native module is not enforced
   Recommendations:
-    - '{action 1}'
-    - '{action 2}'
+    - Enforce GTCX_REQUIRE_NATIVE=true in all production deployments
+    - Add certificate revocation list support to verification
+    - Complete pen test on verification pipeline
 ```
 
-### Scenario 1: Account takeover (phishing)
+### Scenario 2: Private key extraction via logging
 
 ```yaml
 Attack_Scenario:
-  Name: 'Phishing-based Account Takeover'
-
-  Attack_Path: 1. Attacker sends phishing email
-    2. User clicks link and enters credentials
-    3. Attacker captures credentials
-    4. Attacker logs into account
-    5. Attacker initiates fund transfer
-
+  Name: 'Key material leakage through traced operations'
+  Attack_Path:
+    1. Developer enables verbose tracing in development
+    2. Traced crypto operation logs input containing key material
+    3. Logs are shipped to centralized logging service
+    4. Attacker with log access extracts private keys
+  Impact:
+    Financial: 'Complete identity compromise for affected users'
+    Reputation: 'High'
   Current_Controls:
-    - Email filtering
-    - MFA (optional)
-    - Fraud detection
-
+    - TracedOptions includes sanitizeInput/sanitizeOutput callbacks
+    - DID document creation explicitly rejects documents containing privateKey fields
+    - @gtcx/ai stub logger only outputs structured JSON with explicit fields
   Gaps:
-    - MFA not mandatory
-    - Limited user training
-    - No behavioral analytics
-
+    - No default sanitization — consumers must explicitly provide sanitize callbacks
+    - No static analysis rule to prevent key material from reaching log calls
   Recommendations:
-    - Mandatory MFA
-    - Security awareness training
-    - Implement UEBA
-    - Transaction verification
+    - Add default sanitizeInput that strips any field named 'privateKey', 'secret', or 'seed'
+    - Add ESLint rule or architecture check that flags direct logging of crypto function outputs
 ```
 
-### Scenario 2: Data breach (SQL injection)
+### Scenario 3: Supply chain compromise via dependency
 
 ```yaml
 Attack_Scenario:
-  Name: 'SQL Injection Data Breach'
-
-  Attack_Path: 1. Attacker finds vulnerable input field
-    2. Crafts SQL injection payload
-    3. Extracts database schema
-    4. Dumps user table
-    5. Exfiltrates data
-
+  Name: 'Compromised transitive dependency in @noble/curves'
+  Attack_Path: 1. Attacker compromises a maintainer account of @noble/curves or @noble/hashes
+    2. Publishes a patch version with weakened key generation
+    3. pnpm update pulls the compromised version
+    4. All downstream GTCX products generate weak keys
+  Impact:
+    Financial: 'All verification proofs become forgeable'
+    Reputation: 'Critical — total system compromise'
   Current_Controls:
-    - WAF rules
-    - Some parameterized queries
-    - Database monitoring
-
+    - Pinned versions in package.json (not ranges)
+    - pnpm lockfile committed
+    - Trivy vulnerability scanning in CI
+    - Dependabot weekly updates (reviewed before merge)
   Gaps:
-    - Inconsistent input validation
-    - Not all queries parameterized
-    - Limited database encryption
-
+    - No hash pinning of dependency contents (only version pinning)
+    - No reproducible build verification
   Recommendations:
-    - Complete parameterization
-    - Input validation framework
-    - Database activity monitoring
-    - Field-level encryption
+    - Add integrity checksums to lockfile verification
+    - Pin @noble/* to exact content hashes, not just versions
+    - Monitor @noble/* releases via security advisory feeds
 ```
-
----
-
-## Security Controls Mapping
-
-### Preventive controls
-
-| Threat        | Control           | Implementation   | Effectiveness |
-| ------------- | ----------------- | ---------------- | ------------- |
-| Injection     | Input Validation  | WAF + App Layer  | High          |
-| Broken Auth   | MFA               | TOTP/WebAuthn    | High          |
-| XSS           | CSP Headers       | Strict Policy    | Medium        |
-| XXE           | XML Parser Config | Disable Entities | High          |
-| Broken Access | RBAC              | Fine-grained     | High          |
-
-### Detective controls
-
-| Threat     | Control | Implementation      | Coverage |
-| ---------- | ------- | ------------------- | -------- |
-| Intrusion  | IDS/IPS | Network + Host      | {n}%     |
-| Data Exfil | DLP     | Network + Endpoint  | {n}%     |
-| Anomalies  | SIEM    | Centralized Logging | {n}%     |
-| Malware    | EDR     | All Endpoints       | {n}%     |
-
-### Corrective controls
-
-| Incident   | Control           | RTO         | RPO         |
-| ---------- | ----------------- | ----------- | ----------- |
-| Ransomware | Backups           | {n} hours   | {n} hours   |
-| DDoS       | Auto-scaling      | {n} minutes | 0           |
-| Breach     | Incident Response | {n} hours   | N/A         |
-| Corruption | Data Recovery     | {n} hours   | {n} minutes |
-
----
-
-## Action Items
-
-### Critical priority (immediate)
-
-- [ ] {Critical action 1}
-- [ ] {Critical action 2}
-- [ ] {Critical action 3}
-
-### High priority (30 days)
-
-- [ ] {High action 1}
-- [ ] {High action 2}
-- [ ] {High action 3}
-
-### Medium priority (90 days)
-
-- [ ] {Medium action 1}
-- [ ] {Medium action 2}
-
-### Ongoing
-
-- [ ] Monthly vulnerability scanning
-- [ ] Quarterly penetration testing
-- [ ] Annual threat model review
-- [ ] Continuous security training
 
 ---
 
@@ -365,55 +205,60 @@ Attack_Scenario:
 
 ```
 Impact ↑
-  HIGH │ [ ][█][█]
-   MED │ [ ][█][ ]
-   LOW │ [ ][ ][ ]
-       └───────────→
-         L  M  H
-       Likelihood
+  CRIT │    [S3][S1]
+  HIGH │ [TC6][TC3][KL ]
+   MED │ [DoS][TC4]
+   LOW │
+       └──────────────→
+         Low  Med  High
+         Likelihood
 
-Legend: █ = Risk present  [ ] = No significant risk
+S1 = Forged proof (if native not enforced)
+S3 = Supply chain compromise
+KL = Key leakage via logs
+TC3 = ZKP forgery
+TC4 = Input injection
+TC6 = Permission bypass
+DoS = Queue/retry exhaustion
 ```
 
 ---
 
-## Threat Model Maintenance
+## Action Items
 
-### Review triggers
+### Critical priority (immediate)
 
-- Major architecture changes
-- New feature deployment
-- Security incident
-- Regulatory changes
-- Annual review cycle
+- [x] Enforce `GTCX_REQUIRE_NATIVE=true` documentation for all production deployments
+- [x] Add `#![deny(unsafe_code)]` verification to CI for all Rust crates
+- [ ] Claim `@gtcx` scope on npm before first publish to prevent typosquatting
+- [ ] Complete penetration test on crypto, identity, and verification packages
 
-### Update process
+### High priority (30 days)
 
-1. Identify system changes
-2. Assess new threats
-3. Evaluate control effectiveness
-4. Update risk ratings
-5. Define new mitigations
-6. Get stakeholder approval
-7. Implement controls
-8. Verify effectiveness
+- [ ] Add default input sanitization to traced operations (strip key material)
+- [ ] Add certificate revocation support to `@gtcx/verification`
+- [ ] Wire real Groth16/Bulletproofs circuits to NAPI bridge (eliminate JS ZKP fallback path in production)
+
+### Medium priority (90 days)
+
+- [ ] Implement Sigstore provenance signing for published packages
+- [ ] Add content hash verification for critical dependencies (@noble/\*)
+- [ ] Establish formal crypto code review checklist for security-sensitive packages
+
+### Ongoing
+
+- [ ] Quarterly threat model review
+- [ ] Weekly dependency scanning via Dependabot + Trivy
+- [ ] Annual penetration test
+- [ ] Monitor NIST/CISA advisories for ed25519-dalek, arkworks, @noble/\*
 
 ---
 
-## References and Standards
+## References
 
-### Frameworks used
-
-- STRIDE (Microsoft)
-- DREAD (Microsoft)
-- PASTA (Process for Attack Simulation)
-- MITRE ATT&CK Framework
-- OWASP Top 10
-
-### Compliance alignment
-
-- ISO 27001/27002
-- NIST Cybersecurity Framework
-- CIS Controls
-- PCI DSS (where applicable)
-- GDPR Article 32
+- [Threat Control Matrix](./threat-control-matrix.md) — 12 controls mapped to packages
+- [Security Framework](./security-framework.md) — security architecture overview
+- [FIPS Assessment](./fips-assessment.md) — FIPS 140-2/3 compliance pathway
+- [NIST 800-53 Mapping](./nist-800-53-mapping.md) — control family alignment
+- STRIDE threat modeling framework (Microsoft)
+- DREAD risk scoring (Microsoft)
