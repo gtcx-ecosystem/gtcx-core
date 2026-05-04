@@ -47,13 +47,13 @@ The TypeScript ZKP engine must never be used in production. Any circuit change i
 
 ---
 
-## Secure Storage (Offline)
+## Secure Storage & Observability
 
-`@gtcx/security` provides encrypted local storage with:
+`@gtcx/security` provides:
 
-- Key derivation hooks (pluggable)
-- Lock/unlock flow
-- Encrypted persistence for credentials and offline queues
+- Encrypted local storage with pluggable key derivation.
+- Mandatory **Secret Sanitization**: All data entering tracing or logging paths must be processed via `sanitizeSecrets` to prevent cryptographic leakage.
+- Managed **Revocation Registry**: Real-time revocation status checks for all signed credentials.
 
 ---
 
@@ -88,7 +88,7 @@ Introducing a new cryptographic library requires: Cryptographic Security Enginee
 
 - Full native binding coverage across all app runtimes
 - Hardware-backed key storage (HSM/secure enclave) integration
-- Formalized key rotation policy and revocation registry
+- Formal key rotation policy
 
 ---
 

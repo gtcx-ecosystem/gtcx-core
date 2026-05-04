@@ -8,23 +8,25 @@ The enterprise quality standard for `gtcx-core`. Authoritative source for requir
 
 All gates must pass on every pull request. Zero exceptions, zero bypasses:
 
-| Gate                         | Command                                                                         | Blocks   |
-| ---------------------------- | ------------------------------------------------------------------------------- | -------- |
-| Architecture boundaries      | `pnpm architecture:check`                                                       | PR merge |
-| Governance policy            | `pnpm quality:governance:check`                                                 | PR merge |
-| Lint                         | `pnpm lint`                                                                     | PR merge |
-| Format                       | `pnpm format:check`                                                             | PR merge |
-| Type check                   | `pnpm typecheck`                                                                | PR merge |
-| Unit/integration tests       | `pnpm test`                                                                     | PR merge |
-| Coverage (critical packages) | `pnpm test:coverage:critical`                                                   | PR merge |
-| Build                        | `pnpm build`                                                                    | PR merge |
-| API surface                  | `pnpm api:check`                                                                | PR merge |
-| KPI collection               | `pnpm quality:kpi:collect`                                                      | PR merge |
-| Provenance                   | `pnpm provenance:generate`                                                      | PR merge |
-| Docs + link check            | `pnpm docs && pnpm docs:check-links`                                            | PR merge |
-| Threat matrix                | `pnpm security:threat-matrix`                                                   | PR merge |
-| Performance budgets          | `PERF_ENFORCE_TREND=true pnpm perf:check-budgets`                               | PR merge |
-| Rust quality                 | `cargo fmt --check && cargo clippy -D warnings && cargo test --workspace --lib` | PR merge |
+| Gate                         | Command                                                                                            | Blocks   |
+| ---------------------------- | -------------------------------------------------------------------------------------------------- | -------- |
+| Architecture boundaries      | `pnpm architecture:check`                                                                          | PR merge |
+| Governance policy            | `pnpm quality:governance:check`                                                                    | PR merge |
+| Lint                         | `pnpm lint`                                                                                        | PR merge |
+| Format                       | `pnpm format:check`                                                                                | PR merge |
+| Type check                   | `pnpm typecheck`                                                                                   | PR merge |
+| Unit/integration tests       | `pnpm test`                                                                                        | PR merge |
+| Coverage (critical packages) | `pnpm test:coverage:critical`                                                                      | PR merge |
+| Build                        | `pnpm build`                                                                                       | PR merge |
+| API surface                  | `pnpm api:check`                                                                                   | PR merge |
+| KPI collection               | `pnpm quality:kpi:collect`                                                                         | PR merge |
+| Provenance                   | `pnpm provenance:generate`                                                                         | PR merge |
+| Docs + link check            | `pnpm docs && pnpm docs:check-links`                                                               | PR merge |
+| Threat matrix                | `pnpm security:threat-matrix`                                                                      | PR merge |
+| Performance budgets          | `PERF_ENFORCE_TREND=true pnpm perf:check-budgets`                                                  | PR merge |
+| Rust quality                 | `cargo fmt --check && cargo clippy -D warnings && cargo test --workspace --lib`                    | PR merge |
+| Rust Fuzzing                 | `cd rust/gtcx-crypto && cargo +nightly fuzz run fuzz_signature_verification -- -max_total_time=60` | PR merge |
+| TS Property Testing          | `cd packages/crypto && pnpm test tests/property-based.test.ts`                                     | PR merge |
 
 ---
 

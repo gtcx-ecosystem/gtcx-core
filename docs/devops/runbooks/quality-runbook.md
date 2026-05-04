@@ -37,6 +37,10 @@ cd rust
 cargo fmt --all -- --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace --lib
+
+# Mathematical Verification (10/10 Infrastructure Grade)
+cd gtcx-crypto
+cargo +nightly fuzz run fuzz_signature_verification -- -max_total_time=60
 ```
 
 ---
@@ -59,11 +63,12 @@ Resolve failures in this order — fix each before moving to the next:
 2. `typecheck` — type errors indicate structural problems
 3. `lint` — surface errors before running tests
 4. `test` / `test:coverage:critical` — test failures after clean type and lint
-5. `build` — build failures after tests pass
-6. `api:check` — API drift after build
-7. `perf:check-budgets` — performance regression after build
-8. `security:threat-matrix` — escalate to Cryptographic Security Engineer immediately
-9. `quality:governance:check` — update documentation or governance artifacts
+5. **Mathematical Verification** — fuzzing or property failures indicate cryptographic or reliability edge-cases
+6. `build` — build failures after tests pass
+7. `api:check` — API drift after build
+8. `perf:check-budgets` — performance regression after build
+9. `security:threat-matrix` — escalate to Cryptographic Security Engineer immediately
+10. `quality:governance:check` — update documentation or governance artifacts
 
 ---
 
