@@ -38,18 +38,21 @@ The canonical high-level view of the `gtcx-core` architecture. Read this before 
 Dependencies must flow in one direction only. No circular dependencies:
 
 ```
-@gtcx/crypto              (no hard internal deps)
+@gtcx/types, @gtcx/events          (no internal deps — foundation)
       ↓
-@gtcx/identity, @gtcx/security, @gtcx/verification
+@gtcx/crypto, @gtcx/schemas        (types only)
       ↓
-@gtcx/domain, @gtcx/schemas, @gtcx/types
+@gtcx/identity, @gtcx/security,    (depend on crypto, types)
+@gtcx/verification
       ↓
-@gtcx/events, @gtcx/sync, @gtcx/network
+@gtcx/domain                       (depends on events, utils)
       ↓
-@gtcx/services, @gtcx/api-client
+@gtcx/services                     (depends on crypto, domain, events)
+      ↓
+@gtcx/api-client                   (no internal deps — standalone)
 ```
 
-`@gtcx/utils`, `@gtcx/logging`, `@gtcx/ai`, `@gtcx/connectivity` are usable across layers.
+`@gtcx/utils`, `@gtcx/logging`, `@gtcx/ai`, `@gtcx/connectivity`, `@gtcx/sync`, `@gtcx/network` are cross-cutting packages usable at any layer.
 
 Enforced by: `pnpm architecture:check` via `tools/check-package-boundaries.mjs`
 

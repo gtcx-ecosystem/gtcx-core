@@ -33,14 +33,14 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./docs/a
 | [`@gtcx/crypto-native`](./packages/crypto-native) | Native crypto bindings loader (NAPI-RS)                                                     |
 | [`@gtcx/domain`](./packages/domain)               | Commodity-agnostic domain services with DI, offline queues, and observability               |
 | [`@gtcx/utils`](./packages/utils)                 | Common utilities for GTCX applications                                                      |
-| [`@gtcx/identity`](./packages/identity)           | DID creation, credential management, key lifecycle, identity resolution                     |
+| [`@gtcx/identity`](./packages/identity)           | DID creation, identity lifecycle, key management, identity resolution                       |
 | [`@gtcx/security`](./packages/security)           | Auth, validation, offline credential management, audit logging                              |
 | [`@gtcx/verification`](./packages/verification)   | Certificate generation, QR codes, proof bundles, and verification proofs                    |
 | [`@gtcx/events`](./packages/events)               | Type-safe event bus with offline buffering                                                  |
 | [`@gtcx/services`](./packages/services)           | Registration, trading, and compliance business services                                     |
-| [`@gtcx/workproof`](./packages/workproof)         | TradeCV/WorkProof v2.1 — W3C VC-based work attestations, 40 predicates, AI validation types |
+| [`@gtcx/workproof`](./packages/workproof)         | TradeCV/WorkProof v2.1 — W3C VC-based work attestations, 38 predicates, AI validation types |
 | [`@gtcx/ai`](./packages/ai)                       | Observability stubs and tracing hooks (full implementation in `gtcx-intelligence`)          |
-| [`@gtcx/api-client`](./packages/api-client)       | Resilient HTTP client with retry, circuit breakers, and offline queue                       |
+| [`@gtcx/api-client`](./packages/api-client)       | Resilient HTTP client with retry, offline queue, and request signing                        |
 | [`@gtcx/connectivity`](./packages/connectivity)   | Network connectivity detection and profiling for offline-first apps                         |
 | [`@gtcx/logging`](./packages/logging)             | Structured logging for GTCX services                                                        |
 | [`@gtcx/network`](./packages/network)             | P2P networking and messaging via libp2p                                                     |
@@ -116,7 +116,7 @@ core/
 | [Orientation](./docs/agents/onboarding/orientation.md)               | Start here — codebase map and session protocol |
 | [Safety Rules](./docs/agents/workflows/safety-rules.md)              | What requires human approval                   |
 | [Architecture Overview](./docs/architecture/overview.md)             | Layer map, trust boundaries, package graph     |
-| [ADR Index](./docs/decisions/README.md)                              | All 13 architecture decision records           |
+| [ADR Index](./docs/decisions/README.md)                              | All 17 architecture decision records           |
 | [Package Specs](./docs/specs/packages/README.md)                     | Per-package API and responsibility specs       |
 | [Rust Crate Specs](./docs/specs/packages/rust/)                      | Rust crate specs and build targets             |
 | [Security Framework](./docs/security/security-framework.md)          | Security architecture and controls             |

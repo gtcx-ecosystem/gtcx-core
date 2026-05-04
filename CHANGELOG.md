@@ -25,7 +25,7 @@ All notable changes to the GTCX Core monorepo.
 
 - `@gtcx/services` — Registration, trading, and compliance business services
 - `@gtcx/ai` — AI integration hooks and tracing utilities
-- `@gtcx/api-client` — Resilient HTTP client with retry, circuit breakers, offline queue
+- `@gtcx/api-client` — Resilient HTTP client with retry, offline queue, request signing
 - `@gtcx/events` — Type-safe event bus with offline buffering
 - `@gtcx/connectivity` — Network connectivity detection and profiling
 - `@gtcx/sync` — Offline-first sync engine with conflict resolution

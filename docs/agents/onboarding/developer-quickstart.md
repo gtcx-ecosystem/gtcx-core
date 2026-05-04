@@ -68,26 +68,26 @@ pnpm --filter @gtcx/crypto test:coverage
 
 ## Package Overview
 
-| Package               | What It Gives You                                                  |
-| --------------------- | ------------------------------------------------------------------ |
-| `@gtcx/crypto`        | Ed25519/Secp256k1 signing, SHA-256/512, Merkle proofs, commitments |
-| `@gtcx/types`         | Shared TypeScript types for the GTCX ecosystem                     |
-| `@gtcx/schemas`       | Zod validation schemas for all Core12 entities                     |
-| `@gtcx/identity`      | DID creation, credential management, key lifecycle                 |
-| `@gtcx/security`      | Auth, AES-256-GCM storage, offline credential management           |
-| `@gtcx/verification`  | Certificate generation, QR codes, W3C VC proof bundles             |
-| `@gtcx/workproof`     | TradeCV/WorkProof v2.1 — W3C VC work attestations, 40 predicates   |
-| `@gtcx/domain`        | Commodity-agnostic domain services, DI container, observability    |
-| `@gtcx/sync`          | Offline-first sync engine with deterministic conflict resolution   |
-| `@gtcx/events`        | Type-safe event bus with offline buffering                         |
-| `@gtcx/logging`       | Structured logging for GTCX services                               |
-| `@gtcx/api-client`    | Resilient HTTP client with retry and circuit breakers              |
-| `@gtcx/connectivity`  | Network connectivity detection for offline-first apps              |
-| `@gtcx/services`      | Registration, trading, and compliance business services            |
-| `@gtcx/ai`            | AI integration hooks and tracing utilities                         |
-| `@gtcx/utils`         | Shared utility functions                                           |
-| `@gtcx/crypto-native` | NAPI-RS native binding loader                                      |
-| `@gtcx/config`        | Shared Turborepo/tsup build configuration                          |
+| Package               | What It Gives You                                                    |
+| --------------------- | -------------------------------------------------------------------- |
+| `@gtcx/crypto`        | Ed25519/Secp256k1 signing, SHA-256/512, Merkle proofs, commitments   |
+| `@gtcx/types`         | Shared TypeScript types for the GTCX ecosystem                       |
+| `@gtcx/schemas`       | Zod validation schemas for all Core12 entities                       |
+| `@gtcx/identity`      | DID creation, credential management, key lifecycle                   |
+| `@gtcx/security`      | Auth, AES-256-GCM storage, offline credential management             |
+| `@gtcx/verification`  | Certificate generation, QR codes, W3C VC proof bundles               |
+| `@gtcx/workproof`     | TradeCV/WorkProof v2.1 — W3C VC work attestations, 40 predicates     |
+| `@gtcx/domain`        | Commodity-agnostic domain services, DI container, observability      |
+| `@gtcx/sync`          | Offline-first sync engine with deterministic conflict resolution     |
+| `@gtcx/events`        | Type-safe event bus with offline buffering                           |
+| `@gtcx/logging`       | Structured logging for GTCX services                                 |
+| `@gtcx/api-client`    | Resilient HTTP client with retry, offline queue, and request signing |
+| `@gtcx/connectivity`  | Network connectivity detection for offline-first apps                |
+| `@gtcx/services`      | Registration, trading, and compliance business services              |
+| `@gtcx/ai`            | AI integration hooks and tracing utilities                           |
+| `@gtcx/utils`         | Shared utility functions                                             |
+| `@gtcx/crypto-native` | NAPI-RS native binding loader                                        |
+| `@gtcx/config`        | Shared Turborepo/tsup build configuration                            |
 
 For Rust crates: `gtcx-crypto`, `gtcx-zkp`, `gtcx-consensus`, `gtcx-network`, `gtcx-edge`, `gtcx-node`.
 

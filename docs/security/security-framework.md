@@ -64,7 +64,7 @@ The TypeScript ZKP engine must never be used in production. Any circuit change i
 | ed25519-dalek    | Ed25519 signing     | `rust/gtcx-crypto` |
 | sha2             | SHA-256/512         | `rust/gtcx-crypto` |
 | blake3           | Blake3 hashing      | `rust/gtcx-crypto` |
-| bellman          | Groth16 ZKP         | `rust/gtcx-zkp`    |
+| ark-groth16      | Groth16 ZKP         | `rust/gtcx-zkp`    |
 | bulletproofs     | Bulletproofs        | `rust/gtcx-zkp`    |
 | secp256k1 (k256) | Schnorr / Secp256k1 | `rust/gtcx-zkp`    |
 

@@ -30,19 +30,19 @@ gtcx-core follows [Semantic Versioning](https://semver.org/). The version number
 
 ### Experimental (v0.2.x) — API may change
 
-| Package               | Exports | Notes                                                            |
-| --------------------- | ------- | ---------------------------------------------------------------- |
-| `@gtcx/ai`            | 6       | Observability stubs only; full impl in gtcx-intelligence         |
-| `@gtcx/api-client`    | 20      | HTTP client with retry/circuit breaker; API stabilizing          |
-| `@gtcx/connectivity`  | 8       | Network detection and profiling; API stabilizing                 |
-| `@gtcx/crypto-native` | 12      | NAPI-RS bindings; tied to Rust crate releases                    |
-| `@gtcx/events`        | (all)   | Event bus; API stabilizing                                       |
-| `@gtcx/identity`      | (all)   | DID resolver, credentials; API stabilizing toward v1.0 (Phase 7) |
-| `@gtcx/logging`       | (all)   | Structured logging; API stabilizing                              |
-| `@gtcx/network`       | (all)   | P2P networking; depends on Phase 4 delivery                      |
-| `@gtcx/sync`          | (all)   | Offline sync engine; API stabilizing                             |
-| `@gtcx/utils`         | (all)   | Common utilities; API stabilizing                                |
-| `@gtcx/workproof`     | (all)   | WorkProof/TradeCV; ai submodule is types-only                    |
+| Package               | Exports | Notes                                                                   |
+| --------------------- | ------- | ----------------------------------------------------------------------- |
+| `@gtcx/ai`            | 6       | Observability stubs only; full impl in gtcx-intelligence                |
+| `@gtcx/api-client`    | 20      | HTTP client with retry, offline queue, request signing; API stabilizing |
+| `@gtcx/connectivity`  | 8       | Network detection and profiling; API stabilizing                        |
+| `@gtcx/crypto-native` | 12      | NAPI-RS bindings; tied to Rust crate releases                           |
+| `@gtcx/events`        | (all)   | Event bus; API stabilizing                                              |
+| `@gtcx/identity`      | (all)   | DID resolver, credentials; API stabilizing toward v1.0 (Phase 7)        |
+| `@gtcx/logging`       | (all)   | Structured logging; API stabilizing                                     |
+| `@gtcx/network`       | (all)   | P2P networking; depends on Phase 4 delivery                             |
+| `@gtcx/sync`          | (all)   | Offline sync engine; API stabilizing                                    |
+| `@gtcx/utils`         | (all)   | Common utilities; API stabilizing                                       |
+| `@gtcx/workproof`     | (all)   | WorkProof/TradeCV; ai submodule is types-only                           |
 
 ### Rust Crates (all v0.1.0) — Experimental
 

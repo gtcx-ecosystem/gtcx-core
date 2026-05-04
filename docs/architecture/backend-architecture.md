@@ -88,17 +88,17 @@ Violations are CI-blocking. Any change that would create a circular dependency o
 
 ### Infrastructure
 
-| Package              | Responsibility                                                              |
-| -------------------- | --------------------------------------------------------------------------- |
-| `@gtcx/events`       | Type-safe event bus with offline buffering and replay                       |
-| `@gtcx/sync`         | Offline-first sync engine with pluggable conflict resolution strategies     |
-| `@gtcx/api-client`   | Resilient HTTP client: retry, circuit breakers, offline queue, auth headers |
-| `@gtcx/connectivity` | Network connectivity detection and profiling for offline-first behavior     |
-| `@gtcx/services`     | Business-level services: registration, trading, compliance workflows        |
-| `@gtcx/ai`           | AI integration hooks and tracing utilities for downstream AI-native apps    |
-| `@gtcx/logging`      | Structured JSON logging with log levels and correlation IDs                 |
-| `@gtcx/utils`        | Shared utility functions (date, string, collection)                         |
-| `@gtcx/config`       | Shared tsup build presets for consistent package compilation                |
+| Package              | Responsibility                                                             |
+| -------------------- | -------------------------------------------------------------------------- |
+| `@gtcx/events`       | Type-safe event bus with offline buffering and replay                      |
+| `@gtcx/sync`         | Offline-first sync engine with pluggable conflict resolution strategies    |
+| `@gtcx/api-client`   | Resilient HTTP client: retry, offline queue, request signing, auth headers |
+| `@gtcx/connectivity` | Network connectivity detection and profiling for offline-first behavior    |
+| `@gtcx/services`     | Business-level services: registration, trading, compliance workflows       |
+| `@gtcx/ai`           | AI integration hooks and tracing utilities for downstream AI-native apps   |
+| `@gtcx/logging`      | Structured JSON logging with log levels and correlation IDs                |
+| `@gtcx/utils`        | Shared utility functions (date, string, collection)                        |
+| `@gtcx/config`       | Shared tsup build presets for consistent package compilation               |
 
 ---
 

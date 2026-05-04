@@ -39,7 +39,7 @@ Security: `#![deny(unsafe_code)]`, `Zeroizing<T>` for all key material, RFC test
 
 - **DID Resolver** — resolver adapters, cache + revocation checks, injection + fallback strategies
 - **Offline Sync Engine** — conflict resolution (LWW, merge), resumable sync, conflict audit logs, deterministic reconciliation
-- **API Client** — retry, circuit breakers, offline queue, signed request support, mTLS
+- **API Client** — retry, offline queue, signed request support, mTLS
 
 ### Phase 2: Protocol Backbone — Complete (Sprints 3–4)
 
