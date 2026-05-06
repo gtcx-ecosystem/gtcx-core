@@ -12,8 +12,8 @@
 | -------------- | ------- | ----------------------------------- |
 | Node.js        | 20 LTS  | `nvm install 20` or direct download |
 | pnpm           | 9+      | `npm install -g pnpm`               |
-| Rust toolchain | stable  | `rustup install stable`             |
-| Cargo          | stable  | Included with rustup                |
+| Rust toolchain | 1.88    | `rustup install 1.88`               |
+| Cargo          | 1.88    | Included with rustup                |
 
 ### First-Time Setup
 
@@ -50,12 +50,12 @@ Requires the Rust toolchain. Pre-built binaries are bundled in the npm package f
 
 The CI environment is defined in `.github/workflows/`. All gates run in GitHub Actions on Ubuntu (latest).
 
-| Tool        | Version      | Notes                           |
-| ----------- | ------------ | ------------------------------- |
-| Node.js     | 20 LTS       | `actions/setup-node`            |
-| pnpm        | 9+           | `pnpm/action-setup`             |
-| Rust        | stable       | `dtolnay/rust-toolchain@stable` |
-| Cargo cache | GitHub cache | `Swatinem/rust-cache`           |
+| Tool        | Version      | Notes                                                  |
+| ----------- | ------------ | ------------------------------------------------------ |
+| Node.js     | 20 LTS       | `actions/setup-node`                                   |
+| pnpm        | 9+           | `pnpm/action-setup`                                    |
+| Rust        | 1.88         | `dtolnay/rust-toolchain@stable` with `toolchain: 1.88` |
+| Cargo cache | GitHub cache | `Swatinem/rust-cache`                                  |
 
 ### Native Binding Matrix
 

@@ -142,7 +142,7 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: '1.82'
+          toolchain: '1.88'
 
       - name: Rust format check
         run: cargo fmt --all -- --check

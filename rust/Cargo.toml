@@ -17,7 +17,7 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/gtcx-ecosystem/gtcx-core"
-rust-version = "1.82"
+rust-version = "1.88"
 authors = ["GTCX Protocol <engineering@gtcx.io>"]
 description = "GTCX Protocol - Cryptographic Verification Infrastructure"
 

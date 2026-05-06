@@ -14,8 +14,8 @@
 | Build system    | Turborepo       | 2.x     | Task orchestration, incremental builds        |
 | Language (TS)   | TypeScript      | 6.0.x   | Primary language for all TypeScript packages  |
 | Runtime         | Node.js         | 20 LTS  | Package execution and test runner             |
-| Language (Rust) | Rust            | 1.82+   | Cryptographic crates and ZKP circuits         |
-| Build (Rust)    | Cargo           | stable  | Rust crate builds and test execution          |
+| Language (Rust) | Rust            | 1.88    | Pinned cryptographic crates and ZKP circuits  |
+| Build (Rust)    | Cargo           | 1.88    | Rust crate builds and test execution          |
 | Native bindings | NAPI-RS         | 2.x     | TypeScript ↔ Rust FFI (`@gtcx/crypto-native`) |
 
 ---

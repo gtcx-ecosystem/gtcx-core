@@ -35,7 +35,7 @@ Remaining `10/10` blockers are external to the repo:
 
 - [Node.js](https://nodejs.org/) >= 20.0.0
 - [pnpm](https://pnpm.io/) >= 9.15.0
-- [Rust](https://rustup.rs/) >= 1.82.0 (for Rust crates)
+- [Rust](https://rustup.rs/) >= 1.88.0 (for Rust crates)
 
 ### Setup
 

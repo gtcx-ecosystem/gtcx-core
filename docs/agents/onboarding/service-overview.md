@@ -36,7 +36,7 @@
 | Layer            | Technology                              |
 | ---------------- | --------------------------------------- |
 | Primary language | TypeScript 6.0.x                        |
-| Rust layer       | Rust >= 1.82 (crypto + ZKP primitives)  |
+| Rust layer       | Rust >= 1.88 (crypto + ZKP primitives)  |
 | Runtime          | Node.js >= 20                           |
 | Package manager  | pnpm 9.15 (workspaces)                  |
 | Build            | Turborepo + tsup                        |
