@@ -208,7 +208,7 @@ Changes to these packages require Cryptographic Security Engineer review and hum
 ## Reference
 
 - [Security Framework](security-framework.md) — cryptographic standards in detail
-- [`docs/decisions/`](../6-decisions/) — ADRs for crypto decisions
-- [`docs/agents/roles/crypto-security-engineer.md`](../../agents/roles/crypto-security-engineer.md) — gatekeeper role
-- [`docs/agents/workflows/safety-rules.md`](../../agents/workflows/safety-rules.md) — what requires human approval
+- [`docs/decisions/`](../decisions/) — ADRs for crypto decisions
+- [`docs/agents/roles/crypto-security-engineer.md`](../agents/roles/crypto-security-engineer.md) — gatekeeper role
+- [`docs/agents/workflows/safety-rules.md`](../agents/workflows/safety-rules.md) — what requires human approval
 - [`docs/specs/packages/`](../specs/packages/) — crypto and security package specs

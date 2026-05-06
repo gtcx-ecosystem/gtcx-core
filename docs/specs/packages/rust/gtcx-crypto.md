@@ -124,5 +124,5 @@ Benchmarks are defined in `benchmarks/signing` and `benchmarks/hashing`. Run via
 ## Reference
 
 - [`docs/specs/packages/crypto.md`](../crypto.md) — TypeScript package that consumes this crate
-- [`docs/security/security-framework.md`](../../security/security-framework.md) — approved libraries and cryptographic standards
+- [`docs/security/security-framework.md`](../../../security/security-framework.md) — approved libraries and cryptographic standards
 - [`docs/specs/core-spec.md`](../../core-spec.md) — system overview

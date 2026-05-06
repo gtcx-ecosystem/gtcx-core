@@ -6,7 +6,7 @@ Pipeline configuration, deployment workflows, and build standards.
 
 No templates here yet. Add CI/CD pipeline configuration templates as they are developed.
 
-For deployment architecture, see [`engineering/4-deployment/deployment.md`](../deployment/deployment.md).
+For deployment architecture, see [`docs/deployment/deployment.md`](../../deployment/deployment.md).
 
 ## What belongs here
 
@@ -17,6 +17,6 @@ For deployment architecture, see [`engineering/4-deployment/deployment.md`](../d
 
 ## What does NOT belong here
 
-- Environment topology (→ `1-environments/`)
-- Incident response runbooks (→ `2-runbooks/`)
-- QA sign-off criteria (→ `4-quality-assurance/`)
+- Environment topology (see `../environments/`)
+- Incident response runbooks (see `../runbooks/`)
+- QA sign-off criteria (see `../qa/`)

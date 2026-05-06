@@ -77,7 +77,7 @@ Never push to `main` without explicit instruction. Never force-push a release ta
 
 ## Reference
 
-- [`docs/testing/quality-standards.md`](../testing/quality-standards.md) — full gate list and thresholds
-- [`docs/devops/runbooks/quality-runbook.md`](../2-runbooks/quality-runbook.md) — triage order when gates fail
-- [`docs/devops/release-mgmt/release-checklist.md`](../7-release-mgmt/release-checklist.md) — release checklist
+- [`docs/testing/quality-standards.md`](../../testing/quality-standards.md) — full gate list and thresholds
+- [`docs/devops/runbooks/quality-runbook.md`](../runbooks/quality-runbook.md) — triage order when gates fail
+- [`docs/devops/release-mgmt/release-checklist.md`](../release-mgmt/release-checklist.md) — release checklist
 - [`docs/agents/workflows/tasks/cut-release.md`](../../agents/workflows/tasks/cut-release.md) — release task playbook

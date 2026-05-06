@@ -1,146 +1,99 @@
-# [Project Name] Test Plan
+# gtcx-core Test Plan
 
-**Document ID**: [DOC-TEST-NNN]
-**Version**: {version}
-**Date**: {YYYY-MM-DD}
-**Status**: [Draft / Approved]
-
----
+**Document ID**: GTCX-CORE-TEST-PLAN
+**Version**: 1.0
+**Date**: 2026-05-06
+**Status**: Active
 
 ## 1. Scope
 
-### In Scope
+This plan covers `gtcx-core`, the shared TypeScript and Rust foundation library for cryptography, identity, verification, schemas, domain logic, sync, networking, and release evidence.
 
-- [Service / feature area 1]
-- [Service / feature area 2]
-- Integration between [Service A] and [Service B]
+In scope:
 
-### Out of Scope
+1. Public `@gtcx/*` package APIs.
+2. Rust crates under `rust/`.
+3. Cross-package integration behavior.
+4. Critical trust paths: signing, verification, offline lockout, offline replay, ZKP parity, API stability, and release evidence.
 
-- [Component excluded from this test plan and why]
-- Performance testing (see [performance test plan if separate])
+Out of scope:
 
----
+1. Product UI and accessibility testing. This repo has no UI surface.
+2. Runtime service SLOs, request throughput, and uptime dashboards. This repo ships libraries, not a hosted service.
+3. Downstream product UAT. Consumer validation is tracked in `docs/release/downstream-validation-report-template.md`.
 
 ## 2. Test Strategy
 
-### Test Pyramid
+| Layer                       | Tooling / Command                                                                                                     | Release Requirement                                      |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| TypeScript unit tests       | `pnpm test`                                                                                                           | All package suites pass                                  |
+| Cross-package integration   | `pnpm --filter @gtcx/integration-tests test`                                                                          | Trust-path and package-contract tests pass               |
+| Critical coverage           | `pnpm test:coverage:critical`                                                                                         | Critical packages meet enforced thresholds               |
+| Type safety                 | `pnpm typecheck`                                                                                                      | Zero TypeScript errors                                   |
+| Lint and format             | `pnpm lint`, `pnpm format:check`                                                                                      | No lint errors; formatting stable                        |
+| API stability               | `pnpm api:check`, `pnpm api:check:release`                                                                            | No unapproved drift or semver violation                  |
+| Architecture boundaries     | `pnpm architecture:check`                                                                                             | No circular dependencies or forbidden package boundaries |
+| Governance                  | `pnpm quality:governance:check`                                                                                       | Required scripts, CODEOWNERS, and workflows are present  |
+| Release evidence freshness  | `pnpm release:ga:evidence:check`                                                                                      | GA evidence summary matches the evidence log             |
+| Markdown links              | `pnpm docs:check-links`                                                                                               | All tracked markdown links resolve                       |
+| Rust unit and quality gates | `cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace --lib` | Rust workspace is clean                                  |
+| Heavy proof validation      | `cargo test -p gtcx-zkp --release -- --ignored`                                                                       | Required within 7 days of a release                      |
 
-| Layer              | Tool                   | Coverage Target       | Run On               |
-| ------------------ | ---------------------- | --------------------- | -------------------- |
-| Unit tests         | [Vitest / Jest]        | >[N]% line coverage   | Every commit         |
-| Integration tests  | [Supertest / Pytest]   | Core API paths        | Every PR             |
-| E2E tests          | [Playwright / Cypress] | Critical user flows   | Pre-merge to staging |
-| Load tests         | [k6 / Locust]          | [N] RPS at p95 <[N]ms | Pre-GA               |
-| Manual exploratory | QA engineer            | New features          | Per release          |
+## 3. Critical Test Areas
 
----
+| Area                     | Required Evidence                                                 | Owner         |
+| ------------------------ | ----------------------------------------------------------------- | ------------- |
+| Cryptographic signing    | Unit tests, property tests, Rust tests, and integration contracts | Security      |
+| Certificate verification | Negative-path tests for unsigned, malformed, and wrong-key inputs | Security      |
+| Token verification       | Encoding contract tests for assembly and verification             | Security      |
+| Offline lockout          | Persisted timestamp and expiry tests                              | Security      |
+| Offline replay           | Logical sequence tests, restart tests, backward-clock tests       | Core Platform |
+| Public API surface       | API baseline report and release semver check                      | Core Platform |
+| Global-south resilience  | Offline/degraded behavior tests and resilience profile review     | Core Platform |
+| Agentic reproducibility  | Risk-tier gates, evidence templates, and governance checks        | Quality       |
+| Enterprise adoption      | Release artifact pack, downstream checklist, external validation  | Quality       |
 
-## 3. Test Cases by Area
+## 4. Release Gate
 
-### 3.1 [Feature / Service Area 1]
+A production release candidate cannot be approved unless:
 
-| ID     | Test Case     | Type        | Priority | Expected Result |
-| ------ | ------------- | ----------- | -------- | --------------- |
-| TC-001 | [Description] | Unit        | P0       | [Expected]      |
-| TC-002 | [Description] | Integration | P0       | [Expected]      |
-| TC-003 | [Description] | E2E         | P1       | [Expected]      |
+1. All repo-owned gates in `docs/devops/runbooks/quality-runbook.md` pass.
+2. GA release evidence is current and all release gates have dated evidence.
+3. SAST, SBOM, secret scan, dependency audit, and provenance artifacts are attached to the release evidence set.
+4. External security review or pen test findings are closed or explicitly accepted.
+5. At least one downstream consumer validates the release artifact pack.
+6. SOC2 and ISO 27001 evidence is collected for the release period.
+7. Security, Platform, Product, and Compliance signoff is recorded.
 
-### 3.2 [Feature / Service Area 2]
+## 5. Defect Classification
 
-| ID     | Test Case     | Type        | Priority | Expected Result |
-| ------ | ------------- | ----------- | -------- | --------------- |
-| TC-010 | [Description] | Unit        | P0       | [Expected]      |
-| TC-011 | [Description] | Integration | P1       | [Expected]      |
+| Severity | Definition                                          | Release Impact                    |
+| -------- | --------------------------------------------------- | --------------------------------- |
+| P0       | Security vulnerability, key exposure, data loss     | Blocks release                    |
+| P1       | Broken trust path, public API break, sync data loss | Blocks release                    |
+| P2       | Non-critical package defect with safe workaround    | Requires owner-approved exception |
+| P3       | Documentation, examples, or non-critical DX issue   | May ship if tracked               |
 
-### 3.3 API Contract Tests
+## 6. Evidence Locations
 
-| Endpoint           | Method | Test Cases                                                                 |
-| ------------------ | ------ | -------------------------------------------------------------------------- |
-| `[/resource]`      | GET    | 200 with valid auth; 401 without auth; 404 for unknown ID                  |
-| `[/resource]`      | POST   | 201 with valid payload; 400 with missing required fields; 409 on duplicate |
-| `[/resource/{id}]` | PATCH  | 200 on valid update; 403 on wrong owner; 422 on invalid field              |
-| `[/resource/{id}]` | DELETE | 204 on success; 404 on unknown ID                                          |
+| Evidence Type            | Location                                                 |
+| ------------------------ | -------------------------------------------------------- |
+| Current release evidence | `quality/release-2026-05-06-evidence.md`                 |
+| GA evidence log          | `docs/release/ga-release/ga-release-evidence-log.md`     |
+| GA evidence summary      | `docs/release/ga-release/ga-release-evidence-summary.md` |
+| Release checklist        | `docs/release/ga-release/ga-release-checklist.md`        |
+| API report               | `quality/api-surface-report.json`                        |
+| KPI metrics              | `quality/kpi-metrics.json`                               |
+| Provenance manifest      | `artifacts/provenance-manifest.json`                     |
+| Downstream validation    | `docs/release/downstream-validation-report-template.md`  |
+| External findings        | `docs/release/external-validation-findings-log.md`       |
+| Final signoff            | `docs/release/final-signoff-artifact-template.md`        |
 
----
+## 7. Sign-Off
 
-## 4. Critical User Flow Tests
-
-These flows must pass before any production deployment:
-
-| Flow                  | Steps             | Pass Criteria                               |
-| --------------------- | ----------------- | ------------------------------------------- |
-| **[User registers]**  | [Step 1 → Step N] | Account created; welcome email sent         |
-| **[User subscribes]** | [Step 1 → Step N] | Payment charged; access granted immediately |
-| **[Core workflow]**   | [Step 1 → Step N] | [Expected outcome]                          |
-| **[Error scenario]**  | [Step 1 → Step N] | Graceful error shown; no data loss          |
-
----
-
-## 5. Non-Functional Testing
-
-### Performance Targets
-
-| Scenario                 | Target RPS | p50    | p95    | p99    | Max Error Rate |
-| ------------------------ | ---------- | ------ | ------ | ------ | -------------- |
-| [Read-heavy endpoint]    | [N]        | <[N]ms | <[N]ms | <[N]ms | <[N]%          |
-| [Write-heavy endpoint]   | [N]        | <[N]ms | <[N]ms | <[N]ms | <[N]%          |
-| Sustained load ([N] min) | [N]        | —      | <[N]ms | —      | <[N]%          |
-
-### Accessibility
-
-- [ ] WCAG 2.1 AA compliance verified for all user-facing screens
-- [ ] Screen reader testing on [NVDA / VoiceOver]
-- [ ] Keyboard navigation complete for all workflows
-- [ ] Color contrast ratio ≥ 4.5:1 for all text
-
----
-
-## 6. Test Environments
-
-| Test Type   | Environment | Data                       |
-| ----------- | ----------- | -------------------------- |
-| Unit        | Local       | Mocked                     |
-| Integration | Dev         | Seeded test data           |
-| E2E         | Staging     | Anonymized production copy |
-| Load        | Staging     | Synthetic load             |
-| UAT         | Staging     | Tester accounts            |
-
----
-
-## 7. Defect Management
-
-### Severity Classification
-
-| Severity | Definition                                     | Resolution SLA               |
-| -------- | ---------------------------------------------- | ---------------------------- |
-| **P0**   | Crash, data loss, security vulnerability       | Block release; fix before GA |
-| **P1**   | Core feature broken, major UX failure          | Fix before GA                |
-| **P2**   | Non-critical feature broken, workaround exists | Fix before next sprint       |
-| **P3**   | Cosmetic, low impact                           | Backlog                      |
-
-### Release Gate
-
-A release may not proceed to production if any of the following are open:
-
-- [ ] Zero P0 defects
-- [ ] Zero P1 defects
-- [ ] All critical user flows pass E2E
-- [ ] Performance targets met
-- [ ] [N]% unit test coverage maintained
-- [ ] No regressions on previously passing tests
-
----
-
-## 8. Sign-Off
-
-| Area          | Owner            | Sign-off | Date |
-| ------------- | ---------------- | -------- | ---- |
-| Functional    | QA Lead          | [ ]      |      |
-| Performance   | Engineering Lead | [ ]      |      |
-| Security      | Security Lead    | [ ]      |      |
-| Accessibility | [Owner]          | [ ]      |      |
-
----
-
-_A test plan is a contract: it defines what "done" means. Every item on the release gate must be ✅ before shipping._
+| Area       | Owner                | Required Before 10/10 Production Readiness             |
+| ---------- | -------------------- | ------------------------------------------------------ |
+| Security   | CISO / Security Lead | Pen test, SAST, secret scan, dependency evidence       |
+| Platform   | CTO / Core Platform  | All local gates, release artifact pack, tagged release |
+| Product    | Product Owner        | Downstream consumer validation                         |
+| Compliance | Compliance Lead      | SOC2 and ISO evidence collection                       |

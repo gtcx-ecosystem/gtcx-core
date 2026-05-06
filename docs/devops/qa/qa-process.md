@@ -44,14 +44,14 @@ Summary (TypeScript → Rust → evidence):
 
 ## Package-Level Quality Standards
 
-| Area                  | Standard                                                         |
-| --------------------- | ---------------------------------------------------------------- |
-| Exported API          | Every exported symbol has a test and a spec in `5-specs/`        |
-| Error handling        | `@gtcx/errors` error taxonomy used — no bare `throw new Error()` |
-| Key material          | `Zeroizing<T>` on all key structs; confirmed by code review      |
-| RFC test vectors      | Required for all crypto primitives (signing, hashing, HD keys)   |
-| Unsafe code           | `#![deny(unsafe_code)]` enforced in all crypto crates            |
-| No `unwrap()` in libs | Enforced via Clippy — `clippy::unwrap_used` deny                 |
+| Area                  | Standard                                                              |
+| --------------------- | --------------------------------------------------------------------- |
+| Exported API          | Every exported symbol has a test and a spec in `docs/specs/packages/` |
+| Error handling        | Package-local typed errors follow ADR-012 cause propagation standards |
+| Key material          | `Zeroizing<T>` on all key structs; confirmed by code review           |
+| RFC test vectors      | Required for all crypto primitives (signing, hashing, HD keys)        |
+| Unsafe code           | `#![deny(unsafe_code)]` enforced in all crypto crates                 |
+| No `unwrap()` in libs | Enforced via Clippy — `clippy::unwrap_used` deny                      |
 
 ---
 
@@ -72,7 +72,7 @@ UAT for `gtcx-core` means: evidence that new or changed packages meet their spec
 
 **Required for release:**
 
-- All package specs in `docs/5-specs/` match the implementation
+- All package specs in `docs/specs/packages/` match the implementation
 - UAT evidence log updated for significant changes
 - Performance benchmark history updated (`pnpm perf:update-history`)
 - API surface baseline updated if surface changes were intentional

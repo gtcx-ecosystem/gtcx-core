@@ -133,6 +133,6 @@ When escalating: state the gate that failed, the full error output, the root cau
 
 ## Reference
 
-- [`docs/agents/roles/quality-evidence-lead.md`](../roles/quality-evidence-lead.md) — full CI gate sequence and triage order
+- [`docs/agents/roles/quality-evidence-lead.md`](../../roles/quality-evidence-lead.md) — full CI gate sequence and triage order
 - [`docs/agents/workflows/safety-rules.md`](../safety-rules.md) — what requires escalation
-- [`docs/compliance/spec-to-code-traceability.md`](../../compliance/spec-to-code-traceability.md) — traceability matrix
+- [`docs/compliance/spec-to-code-traceability.md`](../../../compliance/spec-to-code-traceability.md) — traceability matrix

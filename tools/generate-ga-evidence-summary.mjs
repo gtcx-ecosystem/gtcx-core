@@ -6,6 +6,7 @@ import path from 'node:path';
 const rootDir = process.cwd();
 const logPath = path.join(rootDir, 'docs/release/ga-release/ga-release-evidence-log.md');
 const summaryPath = path.join(rootDir, 'docs/release/ga-release/ga-release-evidence-summary.md');
+const checkOnly = process.argv.includes('--check');
 
 const gateCatalog = [
   { gate: 'Security (Dependency Audit — npm)', owner: 'Core Platform' },
@@ -62,6 +63,10 @@ function compareDateDesc(a, b) {
   return b.localeCompare(a);
 }
 
+function getLatestEvidenceDate(rows) {
+  return rows.map((row) => row.date).sort(compareDateDesc)[0] ?? '—';
+}
+
 function buildSummaryRows(rows) {
   return gateCatalog.map((gateDef) => {
     const matching = rows
@@ -84,24 +89,36 @@ function countBlockingFindings(summaryRows) {
 }
 
 function renderTable(summaryRows) {
-  const header = [
-    '| Gate | Last Evidence Date | Evidence | Owner | Entries |',
-    '| ---- | ------------------ | -------- | ----- | ------- |',
+  const tableRows = [
+    ['Gate', 'Last Evidence Date', 'Evidence', 'Owner', 'Entries'],
+    ...summaryRows.map((row) => [
+      escapePipes(row.gate),
+      row.lastEvidenceDate,
+      escapePipes(row.evidence),
+      row.owner,
+      String(row.entries),
+    ]),
   ];
 
-  const body = summaryRows.map(
-    (row) =>
-      `| ${escapePipes(row.gate)} | ${row.lastEvidenceDate} | ${escapePipes(row.evidence)} | ${row.owner} | ${row.entries} |`
+  const widths = tableRows[0].map((_, columnIndex) =>
+    Math.max(...tableRows.map((row) => row[columnIndex].length))
   );
 
-  return [...header, ...body].join('\n');
+  const renderRow = (row) =>
+    `| ${row.map((cell, index) => cell.padEnd(widths[index])).join(' | ')} |`;
+
+  const separator = `| ${widths.map((width) => '-'.repeat(width)).join(' | ')} |`;
+
+  return [renderRow(tableRows[0]), separator, ...tableRows.slice(1).map(renderRow)].join('\n');
 }
 
 function renderSummary(summaryRows) {
   const total = summaryRows.length;
   const withEvidence = summaryRows.filter((row) => row.entries > 0).length;
   const blockingFindings = countBlockingFindings(summaryRows);
-  const missingEvidenceGates = summaryRows.filter((row) => row.entries === 0).map((row) => row.gate);
+  const missingEvidenceGates = summaryRows
+    .filter((row) => row.entries === 0)
+    .map((row) => row.gate);
   const coveragePct = Math.round((withEvidence / total) * 100);
 
   return [
@@ -115,11 +132,11 @@ function main() {
   const logMarkdown = fs.readFileSync(logPath, 'utf8');
   const rows = parseLogRows(logMarkdown);
   const summaryRows = buildSummaryRows(rows);
-  const today = new Date().toISOString().slice(0, 10);
+  const latestEvidenceDate = getLatestEvidenceDate(rows);
 
   const output = `# GA Evidence Summary
 
-Generated: ${today}
+Generated: ${latestEvidenceDate}
 Source: \`docs/release/ga-release/ga-release-evidence-log.md\`
 
 ${renderTable(summaryRows)}
@@ -132,8 +149,22 @@ ${renderSummary(summaryRows)}
 
 - This file is generated from the evidence log. Do not edit manually.
 - Re-run \`pnpm release:ga:evidence:summary\` after new evidence entries are added to the log.
+- Use \`pnpm release:ga:evidence:check\` to verify this summary is current.
 - All gates with 0 entries require evidence before sign-off can proceed.
 `;
+
+  if (checkOnly) {
+    const currentOutput = fs.existsSync(summaryPath) ? fs.readFileSync(summaryPath, 'utf8') : '';
+    if (currentOutput !== output) {
+      console.error(
+        `GA evidence summary is stale. Run pnpm release:ga:evidence:summary to regenerate ${path.relative(rootDir, summaryPath)}.`
+      );
+      process.exit(1);
+    }
+
+    console.log(`GA evidence summary is current: ${path.relative(rootDir, summaryPath)}`);
+    return;
+  }
 
   fs.writeFileSync(summaryPath, output);
   console.log(`GA evidence summary generated: ${path.relative(rootDir, summaryPath)}`);

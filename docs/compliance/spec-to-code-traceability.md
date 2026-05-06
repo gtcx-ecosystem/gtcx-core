@@ -53,5 +53,5 @@ Maps each package specification to its implementation module. Updated when packa
 ## Reference
 
 - [`docs/specs/packages/`](../specs/packages/) — package specifications
-- [`docs/agents/workflows/tasks/add-package.md`](../../agents/workflows/tasks/add-package.md) — process for adding a new package
-- [`docs/agents/workflows/tasks/add-rust-crate.md`](../../agents/workflows/tasks/add-rust-crate.md) — process for adding a Rust crate
+- [`docs/agents/workflows/tasks/add-package.md`](../agents/workflows/tasks/add-package.md) — process for adding a new package
+- [`docs/agents/workflows/tasks/add-rust-crate.md`](../agents/workflows/tasks/add-rust-crate.md) — process for adding a Rust crate

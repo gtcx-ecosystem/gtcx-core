@@ -137,6 +137,6 @@ cargo test -p gtcx-zkp --release -- --ignored
 ## Reference
 
 - [`docs/specs/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — foundation crate
-- [`docs/security/security-framework.md`](../../security/security-framework.md) — ZKP layer description and approved libraries
+- [`docs/security/security-framework.md`](../../../security/security-framework.md) — ZKP layer description and approved libraries
 - [`docs/specs/core-spec.md`](../../core-spec.md) — system overview
-- [`docs/devops/ci-cd/ci-cd.md`](../../devops/ci-cd/ci-cd.md) — scheduled ZKP validation
+- [`docs/devops/ci-cd/ci-cd.md`](../../../devops/ci-cd/ci-cd.md) — scheduled ZKP validation

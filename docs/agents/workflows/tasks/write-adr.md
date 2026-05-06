@@ -120,7 +120,7 @@ ADRs in `Proposed` status are complete and reviewable. Do not change status to `
 
 ## Reference
 
-- [`docs/decisions/`](../../decisions/) — ADR index and template
-- [`docs/agents/roles/protocol-architect.md`](../roles/protocol-architect.md) — Protocol Architect role
-- [`docs/agents/roles/crypto-security-engineer.md`](../roles/crypto-security-engineer.md) — required for crypto ADRs
+- [`docs/decisions/`](../../../decisions/) — ADR index and template
+- [`docs/agents/roles/protocol-architect.md`](../../roles/protocol-architect.md) — Protocol Architect role
+- [`docs/agents/roles/crypto-security-engineer.md`](../../roles/crypto-security-engineer.md) — required for crypto ADRs
 - [`docs/agents/workflows/safety-rules.md`](../safety-rules.md) — approval requirements

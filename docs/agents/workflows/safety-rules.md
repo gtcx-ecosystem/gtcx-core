@@ -67,7 +67,7 @@ The cost of pausing is zero. The cost of an unauthorized change to a cryptograph
 
 ## Reference
 
-- [`docs/agents/structure/coordination.md`](../3-structure/coordination.md) — decision matrix and coordination protocols
+- [`docs/agents/structure/coordination.md`](../structure/coordination.md) — decision matrix and coordination protocols
 - [`docs/agents/workflows/tasks/`](./tasks/) — task playbooks for common operations
 - [`../../devops/release-mgmt/release-checklist.md`](../../devops/release-mgmt/release-checklist.md) — release gate checklist
 - `ai-1-baseline` — Baseline Protocol governing these rules

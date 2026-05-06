@@ -19,7 +19,7 @@ GTCX requires tamper-evident audit logs for regulatory compliance. Every event (
 
 Blockchain provides these properties via distributed consensus and chained block hashes. However, GTCX's validators are known entities (governments, vaults, inspectors), not anonymous miners. The overhead of distributed consensus, token economics, and wallet UX is unnecessary for this permissioned use case.
 
-The core insight from the [Cryptographic Verification Architecture](../architecture/cryptographic-verification.md): blockchain's value comes from its cryptographic primitives, not from the consensus mechanism. The same primitives deployed on conventional infrastructure provide equivalent security guarantees.
+The core insight from the [Security Architecture](../security/security-architecture.md): blockchain's value comes from its cryptographic primitives, not from the consensus mechanism. The same primitives deployed on conventional infrastructure provide equivalent security guarantees.
 
 ## Decision
 

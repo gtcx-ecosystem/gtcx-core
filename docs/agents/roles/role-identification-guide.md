@@ -201,8 +201,8 @@ Before submitting the role gap report:
 
 ## References
 
-- [contributors.md](./contributors.md) — contributor role template
-- [examples/bureau-chiefs.md](./examples/bureau-chiefs.md) — regional lead role example
-- [examples/editor-in-chief.md](./examples/editor-in-chief.md) — senior editorial role example
+- [protocol-architect.md](./protocol-architect.md) — architecture owner role
+- [crypto-security-engineer.md](./crypto-security-engineer.md) — security owner role
+- [quality-evidence-lead.md](./quality-evidence-lead.md) — evidence owner role
 - [../workflows/README.md](../workflows/README.md) — workflow and task playbook index
 - [../../security/](../../security/) — governance and security policy area

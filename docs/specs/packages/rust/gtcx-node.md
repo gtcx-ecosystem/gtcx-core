@@ -90,4 +90,4 @@ Build: `cargo build --release -p gtcx-node` — outputs `target/release/libgtcx_
 
 - [`docs/specs/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — Rust source
 - [`docs/specs/packages/crypto-native.md`](../crypto-native.md) — TypeScript consumer
-- [`docs/devops/ci-cd/ci-cd.md`](../../devops/ci-cd/ci-cd.md) — native binding CI matrix
+- [`docs/devops/ci-cd/ci-cd.md`](../../../devops/ci-cd/ci-cd.md) — native binding CI matrix

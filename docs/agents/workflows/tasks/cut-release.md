@@ -203,7 +203,7 @@ If this release closes sprint UAT gates, update `docs/agile/testing/uat-evidence
 
 ## Reference
 
-- [`docs/devops/release-mgmt/release-checklist.md`](../../devops/release-mgmt/release-checklist.md) — release checklist
-- [`docs/devops/ci-cd/ci-cd.md`](../../devops/ci-cd/ci-cd.md) — publish procedure
-- [`docs/agents/roles/quality-evidence-lead.md`](../roles/quality-evidence-lead.md) — gate sequence and triage order
+- [`docs/devops/release-mgmt/release-checklist.md`](../../../devops/release-mgmt/release-checklist.md) — release checklist
+- [`docs/devops/ci-cd/ci-cd.md`](../../../devops/ci-cd/ci-cd.md) — publish procedure
+- [`docs/agents/roles/quality-evidence-lead.md`](../../roles/quality-evidence-lead.md) — gate sequence and triage order
 - [`docs/agents/workflows/safety-rules.md`](../safety-rules.md) — approval requirements

@@ -22,11 +22,11 @@ This directory contains Architecture Decision Records (ADRs) for the GTCX Core r
 
 ## Format
 
-Each ADR follows the [template](template.md) format with Status, Date, Context, Decision, and Consequences sections.
+Each ADR follows the [ADR template](adr-template.md) format with Status, Date, Context, Decision, and Consequences sections.
 
 ## Process
 
-1. Copy `template.md` to `NNN-short-title.md`
+1. Copy `adr-template.md` to `NNN-short-title.md`
 2. Fill in all sections with substantive content
 3. Set status to "Proposed"
 4. Submit PR for review

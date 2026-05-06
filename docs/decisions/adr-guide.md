@@ -23,7 +23,7 @@ When to use an ADR versus a system design document.
 ## Reference
 
 - [ADR Template](./adr-template.md)
-- [System Design Template](../2-system-design/system-design-template.md)
+- [Architecture Overview](../architecture/overview.md)
 
 ## Metadata
 

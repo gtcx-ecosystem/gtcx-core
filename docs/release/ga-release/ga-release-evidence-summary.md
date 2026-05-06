@@ -31,4 +31,5 @@ Source: `docs/release/ga-release/ga-release-evidence-log.md`
 
 - This file is generated from the evidence log. Do not edit manually.
 - Re-run `pnpm release:ga:evidence:summary` after new evidence entries are added to the log.
+- Use `pnpm release:ga:evidence:check` to verify this summary is current.
 - All gates with 0 entries require evidence before sign-off can proceed.

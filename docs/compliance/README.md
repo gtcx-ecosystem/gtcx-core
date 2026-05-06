@@ -8,7 +8,6 @@ Regulatory requirements, data classification, and audit procedures.
 | -------------------------------------------------------- | ---------------------------------------------------------------------- |
 | [compliance-requirements.md](compliance-requirements.md) | Regulatory compliance requirements — SOC 2, ISO 27001, GDPR, Basel III |
 | [soc2-evidence-pipeline.md](soc2-evidence-pipeline.md)   | SOC 2 evidence collection and audit pipeline                           |
-| [accessibility/](accessibility/)                         | WCAG compliance, accessibility testing standards                       |
 
 ## What belongs here
 

@@ -155,7 +155,7 @@ pnpm build
 
 ## Reference
 
-- [`docs/specs/packages/`](../../specs/packages/) — component specifications
-- [`docs/decisions/`](../../decisions/) — ADR index
+- [`docs/specs/packages/`](../../../specs/packages/) — component specifications
+- [`docs/decisions/`](../../../decisions/) — ADR index
 - [`docs/agents/workflows/tasks/write-adr.md`](./write-adr.md) — ADR workflow
 - [`docs/agents/workflows/safety-rules.md`](../safety-rules.md) — approval requirements

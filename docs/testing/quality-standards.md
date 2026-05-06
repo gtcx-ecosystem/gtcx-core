@@ -21,6 +21,7 @@ All gates must pass on every pull request. Zero exceptions, zero bypasses:
 | API surface                  | `pnpm api:check`                                                                                   | PR merge |
 | KPI collection               | `pnpm quality:kpi:collect`                                                                         | PR merge |
 | Provenance                   | `pnpm provenance:generate`                                                                         | PR merge |
+| GA evidence freshness        | `pnpm release:ga:evidence:check`                                                                   | PR merge |
 | Docs + link check            | `pnpm docs && pnpm docs:check-links`                                                               | PR merge |
 | Threat matrix                | `pnpm security:threat-matrix`                                                                      | PR merge |
 | Performance budgets          | `PERF_ENFORCE_TREND=true pnpm perf:check-budgets`                                                  | PR merge |
@@ -78,6 +79,6 @@ Changes to this standard require CODEOWNERS approval and must include evidence o
 ## Reference
 
 - [`docs/devops/runbooks/quality-runbook.md`](../devops/runbooks/quality-runbook.md) — gate sequence and triage order
-- [`docs/devops/release-mgmt/release-checklist.md`](../../4-devops/7-release-mgmt/release-checklist.md) — release checklist
+- [`docs/devops/release-mgmt/release-checklist.md`](../devops/release-mgmt/release-checklist.md) — release checklist
 - [`docs/decisions/011-architecture-boundary-enforcement.md`](../decisions/011-architecture-boundary-enforcement.md) — ADR-011
 - [`docs/decisions/013-api-baseline-and-performance-budget-gates.md`](../decisions/013-api-baseline-and-performance-budget-gates.md) — ADR-013

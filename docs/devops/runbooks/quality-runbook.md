@@ -21,6 +21,7 @@ pnpm api:check                   # API surface baseline comparison
 pnpm quality:kpi:collect         # KPI metrics collection
 pnpm quality:kpi:export          # KPI metrics export
 pnpm provenance:generate         # Provenance manifest generation
+pnpm release:ga:evidence:check   # GA release evidence summary freshness
 pnpm docs                        # TypeDoc generation
 pnpm docs:check-links            # Broken link check in generated docs
 pnpm security:threat-matrix      # Threat control matrix validation
@@ -96,7 +97,7 @@ Resolve failures in this order — fix each before moving to the next:
 
 ## Reference
 
-- [`docs/devops/release-mgmt/release-checklist.md`](../7-release-mgmt/release-checklist.md) — release gate checklist
-- [`docs/testing/quality-standards.md`](../testing/quality-standards.md) — test coverage standards
+- [`docs/devops/release-mgmt/release-checklist.md`](../release-mgmt/release-checklist.md) — release gate checklist
+- [`docs/testing/quality-standards.md`](../../testing/quality-standards.md) — test coverage standards
 - [`docs/agents/roles/quality-evidence-lead.md`](../../agents/roles/quality-evidence-lead.md) — role that owns this runbook
 - [`docs/agents/workflows/tasks/investigate-ci-failure.md`](../../agents/workflows/tasks/investigate-ci-failure.md) — investigation protocol

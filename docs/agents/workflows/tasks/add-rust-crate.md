@@ -162,8 +162,8 @@ pnpm build
 
 ## Reference
 
-- [`docs/specs/packages/rust/`](../../specs/packages/rust/) — Rust crate specs
-- [`docs/decisions/`](../../decisions/) — ADR index
+- [`docs/specs/packages/rust/`](../../../specs/packages/rust/) — Rust crate specs
+- [`docs/decisions/`](../../../decisions/) — ADR index
 - [`docs/agents/workflows/tasks/write-adr.md`](./write-adr.md) — ADR workflow
-- [`docs/security/`](../../security/) — approved cryptographic libraries
+- [`docs/security/`](../../../security/) — approved cryptographic libraries
 - [`docs/agents/workflows/safety-rules.md`](../safety-rules.md) — approval requirements

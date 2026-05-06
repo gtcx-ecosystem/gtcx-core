@@ -4,9 +4,10 @@ Incident response, escalation procedures, and on-call rotation.
 
 ## Contents
 
-| File                                       | Description                                                                            |
-| ------------------------------------------ | -------------------------------------------------------------------------------------- |
-| [runbook-template.md](runbook-template.md) | Incident classification, on-call rotation, response playbooks, escalation, post-mortem |
+| File                                       | Description                                                           |
+| ------------------------------------------ | --------------------------------------------------------------------- |
+| [incident-runbook.md](incident-runbook.md) | Incident classification, response playbooks, escalation, post-mortem  |
+| [quality-runbook.md](quality-runbook.md)   | Quality gate sequence, failure triage, and release evidence artifacts |
 
 ## What belongs here
 
@@ -18,5 +19,5 @@ Incident response, escalation procedures, and on-call rotation.
 
 ## What does NOT belong here
 
-- Monitoring architecture → `architecture/monitoring/`
-- Deployment automation → `engineering/devops/`
+- Monitoring architecture → `docs/devops/monitoring/`
+- Deployment automation → `docs/deployment/`

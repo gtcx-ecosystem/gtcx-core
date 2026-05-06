@@ -37,6 +37,7 @@
     "api:update-baseline": "node ./tools/check-api-surface.mjs --update",
     "provenance:generate": "node ./tools/generate-provenance-manifest.mjs",
     "release:ga:evidence:summary": "node ./tools/generate-ga-evidence-summary.mjs",
+    "release:ga:evidence:check": "node ./tools/generate-ga-evidence-summary.mjs --check",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "typecheck": "turbo run typecheck",

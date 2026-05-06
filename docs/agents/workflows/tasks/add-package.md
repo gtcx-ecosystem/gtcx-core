@@ -153,7 +153,7 @@ All gates must pass before the package is considered complete.
 
 ## Reference
 
-- [`docs/specs/core-spec.md`](../../specs/core-spec.md) — scope and constraints
-- [`docs/decisions/`](../../decisions/) — ADR index
+- [`docs/specs/core-spec.md`](../../../specs/core-spec.md) — scope and constraints
+- [`docs/decisions/`](../../../decisions/) — ADR index
 - [`docs/agents/workflows/tasks/write-adr.md`](./write-adr.md) — ADR workflow
 - [`docs/agents/workflows/safety-rules.md`](../safety-rules.md) — approval requirements

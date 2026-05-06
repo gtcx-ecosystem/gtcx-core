@@ -144,13 +144,14 @@ This program is complete only when all four outcomes are true:
 
 ## Program Tracking
 
-| Sprint | Theme                          | Status    | Primary Dimension Lift          |
-| ------ | ------------------------------ | --------- | ------------------------------- |
-| R1     | Trust Contracts and Governance | Completed | Code trust, agentic governance  |
-| R2     | Global-South Resilience        | Completed | Resilience, deployment realism  |
-| R3     | Agentic Evidence               | Completed | Governance, reproducibility     |
-| R4     | Enterprise Supportability      | Completed | Enterprise adoption risk        |
-| R5     | External Validation            | Blocked   | Final 10/10 signoff credibility |
+| Sprint | Theme                          | Status    | Primary Dimension Lift                                              |
+| ------ | ------------------------------ | --------- | ------------------------------------------------------------------- |
+| R1     | Trust Contracts and Governance | Completed | Code trust, agentic governance                                      |
+| R2     | Global-South Resilience        | Completed | Resilience, deployment realism                                      |
+| R3     | Agentic Evidence               | Completed | Governance, reproducibility                                         |
+| R4     | Enterprise Supportability      | Completed | Enterprise adoption risk                                            |
+| R5     | External Validation            | Pending   | Final 10/10 signoff credibility                                     |
+| P0-P5  | Production Assurance           | Active    | Release evidence, external validation, compliance evidence, signoff |
 
 ---
 
@@ -159,3 +160,4 @@ This program is complete only when all four outcomes are true:
 - [10-10-roadmap-2026-05-06.md](../../audits/10-10-roadmap-2026-05-06.md)
 - [auto-dev-state.md](../../audits/auto-dev-state.md)
 - [gtcx-core-definition-of-done.md](../sprints/gtcx-core-definition-of-done.md)
+- [production-readiness-10-10-roadmap.md](../../release/production-readiness-10-10-roadmap.md)
