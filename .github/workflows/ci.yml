@@ -183,7 +183,10 @@ jobs:
 
       - name: Run benchmarks and capture results
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: cargo bench --workspace
+        run: |
+          cargo bench -p gtcx-crypto --bench hashing -- --sample-size 10 --warm-up-time 1 --measurement-time 2
+          cargo bench -p gtcx-crypto --bench signing -- --sample-size 10 --warm-up-time 1 --measurement-time 2
+          cargo bench -p gtcx-zkp --bench zkp
         working-directory: rust
 
       - name: Capture benchmark results to JSON
