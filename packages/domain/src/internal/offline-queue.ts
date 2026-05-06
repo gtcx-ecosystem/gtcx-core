@@ -33,6 +33,8 @@ export type QueuedOperationStatus = 'pending' | 'processing' | 'completed' | 'fa
 export interface QueuedOperation<T = unknown> {
   /** Unique operation ID */
   id: string;
+  /** Monotonic logical sequence for replay ordering */
+  sequence: number;
   /** Operation type */
   type: QueuedOperationType;
   /** Current status */
@@ -101,6 +103,7 @@ export class OfflineQueue {
   private processing = false;
   private onConflict?: ((conflict: ConflictResolution) => Promise<unknown>) | undefined;
   private maxQueueSize: number;
+  private nextSequence = 1;
 
   constructor(options?: {
     storage?: IOfflineQueueStorage;
@@ -118,9 +121,22 @@ export class OfflineQueue {
   async initialize(): Promise<void> {
     if (!this.storage) return;
 
-    const operations = await this.storage.load();
+    const loadedOperations = await this.storage.load();
+    const needsSequenceBackfill = loadedOperations.some(
+      (operation) =>
+        typeof operation.sequence !== 'number' ||
+        !Number.isFinite(operation.sequence) ||
+        operation.sequence <= 0
+    );
+    const operations = this.normalizeLoadedOperations(loadedOperations);
     for (const op of operations) {
       this.queue.set(op.id, op);
+    }
+    this.nextSequence =
+      operations.reduce((max, operation) => Math.max(max, operation.sequence), 0) + 1;
+
+    if (needsSequenceBackfill) {
+      await this.persist();
     }
   }
 
@@ -159,6 +175,7 @@ export class OfflineQueue {
 
     const operation: QueuedOperation<T> = {
       id,
+      sequence: this.nextSequence++,
       type,
       status: 'pending',
       payload,
@@ -185,9 +202,9 @@ export class OfflineQueue {
       .filter((op) => op.status === 'pending')
       .filter((op) => this.areDependenciesMet(op))
       .sort((a, b) => {
-        // Sort by priority (desc), then by created time (asc)
+        // Sort by priority (desc), then by logical sequence (asc).
         if (b.priority !== a.priority) return b.priority - a.priority;
-        return a.createdAt - b.createdAt;
+        return a.sequence - b.sequence;
       });
 
     return pending[0];
@@ -368,6 +385,24 @@ export class OfflineQueue {
 
   private generateId(): string {
     return `queue_${crypto.randomUUID()}`;
+  }
+
+  private normalizeLoadedOperations(operations: QueuedOperation[]): QueuedOperation[] {
+    let assignedSequence = 0;
+
+    return operations.map((operation) => {
+      const normalizedSequence =
+        typeof operation.sequence === 'number' && Number.isFinite(operation.sequence)
+          ? operation.sequence
+          : ++assignedSequence;
+
+      assignedSequence = Math.max(assignedSequence, normalizedSequence);
+
+      return {
+        ...operation,
+        sequence: normalizedSequence,
+      };
+    });
   }
 
   private areDependenciesMet(op: QueuedOperation): boolean {

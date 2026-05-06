@@ -14,20 +14,20 @@ Commodity-agnostic domain services for the GTCX protocol. Provides the foundatio
 
 This package enforces 10/10 architectural compliance across 12 dimensions:
 
-| Principle            | Implementation                                                    |
-| -------------------- | ----------------------------------------------------------------- |
-| P1 Package structure | Clean `src/` + `internal/` separation                             |
-| P2 Type safety       | Zod schemas at all boundaries                                     |
-| P3 Modularity        | Independent services with granular exports                        |
-| P4 Composability     | Full dependency injection                                         |
-| P5 AI-Native         | AI integration interfaces + operation logging                     |
-| P6 Asset abstraction | `commodityType: string` throughout — no hardcoded commodity types |
-| P7 Documentation     | Complete API reference + threat model                             |
-| P8 Offline-first     | Offline queue with conflict resolution                            |
-| P9 Security          | Input sanitization, rate limiting hooks                           |
-| P10 API stability    | Versioning, deprecation markers, changelog                        |
-| P11 Data evolution   | Schema versioning + migrations                                    |
-| P12 Observability    | Events + metrics + AI logging                                     |
+| Principle            | Implementation                                                     |
+| -------------------- | ------------------------------------------------------------------ |
+| P1 Package structure | Clean `src/` + `internal/` separation                              |
+| P2 Type safety       | Zod schemas at all boundaries                                      |
+| P3 Modularity        | Independent services with granular exports                         |
+| P4 Composability     | Full dependency injection                                          |
+| P5 AI-Native         | AI integration interfaces + operation logging                      |
+| P6 Asset abstraction | `commodityType: string` throughout — no hardcoded commodity types  |
+| P7 Documentation     | Complete API reference + threat model                              |
+| P8 Offline-first     | Offline queue with conflict resolution and logical replay ordering |
+| P9 Security          | Input sanitization, rate limiting hooks                            |
+| P10 API stability    | Versioning, deprecation markers, changelog                         |
+| P11 Data evolution   | Schema versioning + migrations                                     |
+| P12 Observability    | Events + metrics + AI logging                                      |
 
 ---
 
@@ -51,6 +51,12 @@ Concrete implementations live in `@gtcx/services`.
 ### Event Types
 
 All domain events — registration, trade, compliance, provenance — with typed payload shapes. Consumed by `@gtcx/events`.
+
+### Offline Queue
+
+`OfflineQueue` is an experimental public export for buffering operations during disconnected periods.
+Replay order is defined by a monotonic logical sequence assigned at enqueue time, not by wall-clock timestamps.
+This is a resilience requirement, not an implementation detail: device clock drift, user-adjusted time, and battery-reset clocks must not reorder legally consequential operations.
 
 ### API Versioning
 

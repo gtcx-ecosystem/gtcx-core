@@ -2,6 +2,8 @@
 
 What agents and contributors may do autonomously vs. what requires explicit human authorization.
 
+**Last reviewed:** 2026-05-06
+
 Governed by the Baseline Protocol (`ai-1-baseline`) and enforced through `1-agentic`. These rules apply to all AI-assisted work in this repo.
 
 ---
@@ -67,5 +69,5 @@ The cost of pausing is zero. The cost of an unauthorized change to a cryptograph
 
 - [`docs/agents/structure/coordination.md`](../3-structure/coordination.md) — decision matrix and coordination protocols
 - [`docs/agents/workflows/tasks/`](./tasks/) — task playbooks for common operations
-- [`docs/devops/release-mgmt/release-checklist.md`](../../2-docs/4-operations/compliance/release-checklist.md) — release gate checklist
+- [`../../devops/release-mgmt/release-checklist.md`](../../devops/release-mgmt/release-checklist.md) — release gate checklist
 - `ai-1-baseline` — Baseline Protocol governing these rules

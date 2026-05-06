@@ -1,26 +1,22 @@
-# agile/ — Agile Delivery
+# Agile Delivery
 
-> Agile delivery framework: product overview, scrum board, specs, audits, reports, proposals, incidents, and hygiene.
+Planning, sprint execution, and readiness tracking for `gtcx-core`.
 
 ---
 
-## Folders
+## Key Docs
 
-| Folder                                   | Purpose                                                |
-| ---------------------------------------- | ------------------------------------------------------ |
-| [1-overview/](./1-overview/)             | Executive summary, phased roadmap, product orientation |
-| [2-scrum-board/](./2-scrum-board/)       | Epics, sprints, backlog, features, testing             |
-| [3-spec-reference/](./3-spec-reference/) | Technical specification references                     |
-| [4-audits/](./4-audits/)                 | Process and product audits                             |
-| [5-reports/](./5-reports/)               | Sprint and delivery reports                            |
-| [6-proposals/](./6-proposals/)           | Feature proposals and change requests                  |
-| [7-incidents/](./7-incidents/)           | Incident reports and post-mortems                      |
-| [8-hygiene/](./8-hygiene/)               | Backlog hygiene and process health                     |
+| File / Folder                                  | Purpose                                              |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| [executive-summary.md](./executive-summary.md) | Current product and delivery summary                 |
+| [roadmap/](./roadmap/)                         | Core roadmap plus the 10/10 readiness sprint program |
+| [sprints/](./sprints/)                         | Sprint definitions and Definition of Done            |
+| [testing/](./testing/)                         | UAT evidence and delivery-quality tracking           |
 
 ---
 
 ## How to Use
 
-- Start in `1-overview/` for product orientation
-- Active delivery work lives in `2-scrum-board/`
-- Historical records go in `5-reports/` and `7-incidents/`
+- Start with [executive-summary.md](./executive-summary.md) for current context.
+- Use [roadmap/roadmap.md](./roadmap/roadmap.md) for ongoing delivery and [roadmap/10-10-readiness-sprint-roadmap.md](./roadmap/10-10-readiness-sprint-roadmap.md) for readiness work.
+- Use [sprints/gtcx-core-definition-of-done.md](./sprints/gtcx-core-definition-of-done.md) as the completion standard.

@@ -18,7 +18,7 @@ Run this guide when:
 
 ## Step 1: Inventory Existing Role Definitions
 
-Read every file in `2-roles/`. For each role, extract:
+Read every file in `roles/`. For each role, extract:
 
 | Field                     | What to capture                                                    |
 | ------------------------- | ------------------------------------------------------------------ |
@@ -36,9 +36,9 @@ Build a responsibility map: `responsibility → role`. Every claimed responsibil
 
 Scan these document types for role references:
 
-- `4-workflows/` — approval flows, lifecycles, handoffs
-- `5-governance/` — policy documents, decision authorities
-- `1-onboarding/` — who new members are told to contact for what
+- `workflows/` — approval flows, lifecycles, handoffs
+- policy and governance docs elsewhere in the repo
+- `onboarding/` — who new members are told to contact for what
 - Any process diagrams or flowcharts
 
 For each step in a workflow, ask: **who is responsible for this step?** Note the answer — whether it is a named role, a vague reference ("the team", "someone"), or nothing at all.
@@ -76,9 +76,9 @@ One role is doing two or more unrelated categories of work.
 
 ### Signal 3: Undefined Approver
 
-An approval or review step exists in a workflow but the approver role is not defined in `1-roles/`.
+An approval or review step exists in a workflow but the approver role is not defined in `roles/`.
 
-**How to find it:** In `4-workflows/approval-flows.md`, extract every approval step. Cross-reference each approver against the role inventory from Step 1. Flag any that do not match a defined role.
+**How to find it:** Extract every approval step from the repo's workflow docs. Cross-reference each approver against the role inventory from Step 1. Flag any that do not match a defined role.
 
 **What it means:** Define the approver role, or clarify that an existing role owns this approval authority.
 
@@ -153,7 +153,7 @@ One or two sentences describing what is falling through the cracks without this 
 - Hands off to: [Role B]
 - Reports to / escalates to: [Role C]
 
-**Suggested first file:** `1-roles/[role-name].md`
+**Suggested first file:** `roles/[role-name].md`
 ```
 
 Collect all recommendations in a single output document: `role-gap-report-[YYYY-MM].md`.
@@ -189,9 +189,9 @@ Deliver a file named `role-gap-report-[YYYY-MM].md` containing:
 
 Before submitting the role gap report:
 
-- [ ] Every workflow step in `4-workflows/` has an assigned role
-- [ ] Every approval in `4-workflows/approval-flows.md` maps to a defined role
-- [ ] Every escalation path in `1-roles/` points to a defined role
+- [ ] Every workflow step in `workflows/` has an assigned role
+- [ ] Every approval in workflow docs maps to a defined role
+- [ ] Every escalation path in role files points to a defined role
 - [ ] Every domain in the organization's coverage area has at least one owning role
 - [ ] No role definition claims responsibilities from two clearly unrelated domains
 - [ ] Onboarding documents name specific roles, not vague references
@@ -204,5 +204,5 @@ Before submitting the role gap report:
 - [contributors.md](./contributors.md) — contributor role template
 - [examples/bureau-chiefs.md](./examples/bureau-chiefs.md) — regional lead role example
 - [examples/editor-in-chief.md](./examples/editor-in-chief.md) — senior editorial role example
-- [4-workflows/approval-flows.md](../4-workflows/approval-flows.md) — approval authority reference
-- [5-governance/](../5-governance/) — governance and decision authority policies
+- [../workflows/README.md](../workflows/README.md) — workflow and task playbook index
+- [../../security/](../../security/) — governance and security policy area

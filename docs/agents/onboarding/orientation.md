@@ -6,7 +6,7 @@ Session-start protocol for any agent or contributor entering this repo.
 
 ## What This Repo Is
 
-`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 19 TypeScript packages (`@gtcx/*`) and 6 Rust crates (`gtcx-*`) consumed by every downstream GTCX repo. It has no product surface, no UI, and no users. Its output is primitives — signing, identity, verification, sync, networking, and ZKP.
+`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 18 public TypeScript packages (`@gtcx/*`), 4 shared config workspace packages, and 6 Rust crates (`gtcx-*`) consumed by downstream GTCX repos. It has no product surface, no UI, and no end users. Its output is primitives — signing, identity, verification, sync, networking, and ZKP.
 
 Downstream repos depend on this. Breaking changes here break everything.
 
@@ -97,8 +97,8 @@ See `docs/devops/runbooks/quality-runbook.md` for the full gate sequence and tri
 
 ## Reference
 
-- [`safety-rules.md`](../4-workflows/safety-rules.md) — what requires human approval
+- [`safety-rules.md`](../workflows/safety-rules.md) — what requires human approval
 - [`context-recovery.md`](./context-recovery.md) — how to recover agent context across sessions
-- [`core-spec.md`](../../2-docs/5-specs/4-backend/core-spec.md) — top-level system specification
-- [`overview.md`](../../2-docs/3-engineering/2-system-design/overview.md) — architecture overview
-- [`quality-runbook.md`](../../2-docs/4-devops/2-runbooks/quality-runbook.md) — full pre-commit gate sequence and triage
+- [`../../specs/core-spec.md`](../../specs/core-spec.md) — top-level system specification
+- [`../../architecture/overview.md`](../../architecture/overview.md) — architecture overview
+- [`../../devops/runbooks/quality-runbook.md`](../../devops/runbooks/quality-runbook.md) — full pre-commit gate sequence and triage

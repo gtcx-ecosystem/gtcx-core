@@ -2,6 +2,8 @@
 
 The four AI agent roles authorized to work in this repo. Each role has a defined scope of authority, decision standards, escalation triggers, and coordination interfaces.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Role Files
@@ -25,6 +27,6 @@ If a task spans role boundaries (e.g. a change to `@gtcx/crypto` that also trigg
 
 ## Reference
 
-- [`../1-onboarding/orientation.md`](../1-onboarding/orientation.md) — session-start reading order
-- [`../4-workflows/safety-rules.md`](../4-workflows/safety-rules.md) — what requires human approval
-- [`../3-structure/coordination.md`](../3-structure/coordination.md) — cross-role coordination protocols
+- [`../onboarding/orientation.md`](../onboarding/orientation.md) — session-start reading order
+- [`../workflows/safety-rules.md`](../workflows/safety-rules.md) — what requires human approval
+- [`../structure/coordination.md`](../structure/coordination.md) — cross-role coordination protocols

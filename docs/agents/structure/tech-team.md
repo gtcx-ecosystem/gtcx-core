@@ -2,6 +2,8 @@
 
 The four-role agentic team responsible for `gtcx-core`. All roles are instantiated from `1-agentic/archetypes/` and scoped to this repo.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Team Roster
@@ -38,4 +40,4 @@ The four-role agentic team responsible for `gtcx-core`. All roles are instantiat
 
 ## Escalation
 
-Any agent encountering a decision outside their role scope escalates to the human before proceeding. See [`docs/agents/workflows/safety-rules.md`](../4-workflows/safety-rules.md) for the full approval matrix.
+Any agent encountering a decision outside their role scope escalates to the human before proceeding. See [`../workflows/safety-rules.md`](../workflows/safety-rules.md) for the full approval matrix.

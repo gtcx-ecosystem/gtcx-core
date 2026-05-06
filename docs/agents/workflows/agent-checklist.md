@@ -9,8 +9,8 @@ Pre-flight, development, and pre-commit checklists for AI agents. Run the releva
 ### Context
 
 - [ ] Read `CLAUDE.md` (auto-loaded) — confirm repo identity, key paths, and pnpm commands
-- [ ] Read memory files at `.claude/projects/…/memory/` — load confirmed patterns
-- [ ] If continuing prior work: read the last handoff in `docs/4-sessions/6-session-handoff/`
+- [ ] Read the relevant package spec in `docs/specs/packages/` before changing package behavior
+- [ ] If continuing prior work: read `docs/audits/auto-dev-state.md`
 - [ ] Identify which agent role applies to this task — read the role file before acting
 
 ### State
@@ -21,7 +21,8 @@ Pre-flight, development, and pre-commit checklists for AI agents. Run the releva
 
 ### Safety
 
-- [ ] Identify if the task touches a security-sensitive package (`@gtcx/crypto`, `@gtcx/crypto-native`, `@gtcx/security`, `@gtcx/verification`, `@gtcx/identity`, `rust/gtcx-crypto`, `rust/gtcx-zkp`) — if yes, stop and confirm Cryptographic Security Engineer co-review is available
+- [ ] Identify the package risk tier in `quality/package-risk-tiers.json`
+- [ ] If the task touches a `security-sensitive` package, confirm Cryptographic Security Engineer review posture is available
 - [ ] Confirm the task is in the Autonomous tier or that human approval has been given — see `safety-rules.md`
 
 ---
@@ -38,7 +39,6 @@ Pre-flight, development, and pre-commit checklists for AI agents. Run the releva
 
 ### Pattern Compliance
 
-- [ ] Read the relevant package spec in `docs/specs/packages/` before modifying a package
 - [ ] Check `docs/architecture/overview.md` for dependency rules before adding an import
 - [ ] No new `@gtcx/*` internal imports that create circular dependencies
 - [ ] Native bindings only called through `@gtcx/crypto-native` — never `require`d directly
@@ -55,7 +55,7 @@ Pre-flight, development, and pre-commit checklists for AI agents. Run the releva
 
 ### Quality Gates
 
-Run in order — fix failures before proceeding:
+Run the gates required by the package risk tier. The baseline sequence is:
 
 ```bash
 pnpm architecture:check   # Gate 1 — no circular deps, no boundary violations
@@ -65,12 +65,17 @@ pnpm test                 # Gate 4 — full test suite
 pnpm build                # Gate 5 — all packages build clean
 ```
 
-For changes to security-sensitive packages, also run:
+Then add the tier-specific gates from `docs/agents/workflows/risk-tier-gates.md`.
+Examples:
 
 ```bash
-pnpm api:check               # Gate 6 — no unintentional API surface changes
-pnpm security:threat-matrix  # Gate 8 — escalate to human if this fails
+pnpm test:coverage:critical
+pnpm api:check
+pnpm perf:check-budgets
+pnpm security:threat-matrix
 ```
+
+For `security-sensitive` and `release-sensitive` work, prepare evidence using `docs/agents/workflows/agent-evidence-template.md`.
 
 ### Git Hygiene
 
@@ -84,10 +89,10 @@ pnpm security:threat-matrix  # Gate 8 — escalate to human if this fails
 
 ## Post-Task
 
-- [ ] All 5 baseline gates pass clean
+- [ ] Required tier-specific gates passed clean
 - [ ] If an API surface changed: `pnpm api:check` reviewed and baseline update requested from human if intentional
-- [ ] Session handoff written if work is incomplete: `docs/4-sessions/6-session-handoff/YYYY-MM-DD-handoff.md`
-- [ ] Memory files updated if a new confirmed pattern was discovered
+- [ ] If the task was `security-sensitive` or `release-sensitive`: evidence recorded using the standard template
+- [ ] Current-state docs updated if the work changed roadmap, architecture, or release posture
 
 ---
 
@@ -96,7 +101,7 @@ pnpm security:threat-matrix  # Gate 8 — escalate to human if this fails
 Stop immediately if any of these are true:
 
 - Suggesting a file path or function that doesn't exist in the repo
-- About to modify `@gtcx/crypto` without Cryptographic Security Engineer co-review
+- About to modify a `security-sensitive` package without the required review posture
 - About to use `--no-verify` on a commit hook
 - About to push to `main` without explicit human instruction
 - CI gate failing and the proposed fix is to bypass the gate rather than fix the root cause
@@ -109,6 +114,8 @@ When a red flag appears: run the Quick Recovery protocol in `docs/agents/onboard
 ## Reference
 
 - [`safety-rules.md`](safety-rules.md) — three-tier authority structure
-- [`../1-onboarding/context-recovery.md`](../1-onboarding/context-recovery.md) — recovery protocol
-- [`../../2-docs/4-devops/2-runbooks/quality-runbook.md`](../../2-docs/4-devops/2-runbooks/quality-runbook.md) — full gate sequence
-- [`../../2-docs/3-engineering/7-security/security-framework.md`](../../2-docs/3-engineering/7-security/security-framework.md) — security constraints
+- [`risk-tier-gates.md`](risk-tier-gates.md) — tier-specific gate and artifact mapping
+- [`agent-evidence-template.md`](agent-evidence-template.md) — evidence format for high-risk work
+- [`../onboarding/context-recovery.md`](../onboarding/context-recovery.md) — recovery protocol
+- [`../../devops/runbooks/quality-runbook.md`](../../devops/runbooks/quality-runbook.md) — full gate sequence
+- [`../../security/security-framework.md`](../../security/security-framework.md) — security constraints

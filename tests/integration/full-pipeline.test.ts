@@ -28,7 +28,7 @@ import {
   serializeQRData,
   parseQRData,
 } from '@gtcx/verification';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, afterEach, vi } from 'vitest';
 
 // ── Helpers ──
 
@@ -176,6 +176,10 @@ describe('Full pipeline: Domain schema validation', () => {
 });
 
 describe('Full pipeline: Offline queue with crypto-signed operations', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('queues signed operations offline and replays them', async () => {
     const { identity, privateKey } = await createIdentity();
     const storage = new InMemoryQueueStorage();
@@ -206,6 +210,22 @@ describe('Full pipeline: Offline queue with crypto-signed operations', () => {
       };
       expect(verify(payload.message, payload.signature, payload.publicKey)).toBe(true);
     }
+  });
+
+  it('replays offline operations in logical sequence order even if the clock moves backward', async () => {
+    vi.useFakeTimers();
+    const storage = new InMemoryQueueStorage();
+    const queue = new OfflineQueue({ storage });
+
+    vi.setSystemTime(new Date('2026-01-01T00:00:10Z'));
+    const firstId = await queue.enqueue('registration' as never, { step: 'first' });
+
+    vi.setSystemTime(new Date('2026-01-01T00:00:05Z'));
+    await queue.enqueue('trade' as never, { step: 'second' });
+
+    const next = queue.getNext();
+    expect(next!.id).toBe(firstId);
+    expect(next!.sequence).toBe(1);
   });
 });
 

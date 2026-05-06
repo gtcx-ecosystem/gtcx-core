@@ -1,6 +1,6 @@
 # Package Spec — `@gtcx/types`
 
-**Classification:** Standard — changes follow normal PR review process. API surface changes require Protocol Architect review (any removed or renamed type is a breaking change for all 17 downstream consumers).
+**Classification:** Standard — changes follow normal PR review process. API surface changes require Protocol Architect review because removed or renamed types can break every downstream consumer.
 
 ---
 

@@ -21,12 +21,14 @@ Quality criteria that must be satisfied before any work item in `gtcx-core` is c
 - [ ] `pnpm test` — all tests pass
 - [ ] `pnpm build` — all packages build cleanly
 - [ ] `pnpm api:check` — API surface reviewed (no unintentional changes)
+- [ ] Package risk tier checked in `quality/package-risk-tiers.json`; tier-specific gates satisfied
 
 ### Documentation
 
 - [ ] Affected package spec in `docs/specs/packages/` updated if behavior changed
 - [ ] ADR written if an architectural decision was made (status: `Proposed`)
 - [ ] UAT scenario documented if applicable
+- [ ] Trust-bearing behavior changes reflected in `docs/architecture/trust-contract-matrix.md` when applicable
 
 ---
 
@@ -63,6 +65,7 @@ All changes to security-sensitive packages must additionally satisfy:
 - [ ] **Standard test vectors** — Unit tests include test vectors from relevant RFCs, NIST publications, or library reference implementations
 - [ ] **Fuzz targets** — All parsers and deserialization routines have `cargo-fuzz` targets with minimum 10M iterations before initial merge
 - [ ] **Cryptographic Security Engineer review** — Designated reviewer must approve the PR
+- [ ] **Tier evidence attached** — Release/audit evidence updated when trust-bearing behavior or public security contracts change
 
 **Recommended for cryptographic work:**
 
@@ -90,3 +93,5 @@ All changes to security-sensitive packages must additionally satisfy:
 - [`docs/devops/release-mgmt/release-checklist.md`](../../devops/release-mgmt/release-checklist.md) — release gate checklist
 - [`docs/devops/runbooks/quality-runbook.md`](../../devops/runbooks/quality-runbook.md) — full gate sequence
 - [`docs/security/security-framework.md`](../../security/security-framework.md) — security standards
+- [`quality/package-risk-tiers.json`](../../../quality/package-risk-tiers.json) — risk tier manifest
+- [`docs/architecture/trust-contract-matrix.md`](../../architecture/trust-contract-matrix.md) — trust-bearing API contracts

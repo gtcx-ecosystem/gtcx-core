@@ -1,5 +1,7 @@
 # gtcx-core v1.0.x GA Release Checklist
 
+**Last reviewed:** 2026-05-06
+
 **Owner**: Core Platform
 **Scope**: gtcx-core — shared cryptographic and protocol foundation library
 **Target**: v1.0.x GA (internal consumption by downstream GTCX repos)
@@ -32,7 +34,7 @@
 ### Documentation
 
 - [x] API surface baselined and drift-checked (`quality/api-surface-baseline.json`, 2026-04-05)
-- [x] Per-package READMEs complete (19 packages)
+- [x] Per-package READMEs complete (18 public packages + shared config workspace packages)
 - [ ] Cross-package integration guide — missing
 - [x] AI stub status documented (READMEs updated 2026-05-02)
 

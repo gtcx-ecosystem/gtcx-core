@@ -49,7 +49,7 @@
 27. Aligned services coverage thresholds to 0.x status
 28. Version bumped all 18 packages via changesets
 29. Created 18 git tags
-30. Published 19 packages to npm under @gtcx/\* scope
+30. Published public workspace packages to npm under `@gtcx/*` scope
 31. Renamed GitHub repo from 2-core to gtcx-core
 32. Moved \_archive contents to gtcx-ecosystem/gtcx-core-archive
 

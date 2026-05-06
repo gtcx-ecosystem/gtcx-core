@@ -10,7 +10,12 @@ import { tracedGenerateCertificate, tracedVerifyCertificate } from '@gtcx/verifi
 import { describe, it, expect, afterEach, vi } from 'vitest';
 
 class IntegrationTestSecureStorage extends SecureStorageBase {
-  private store = new Map<string, string>();
+  constructor(
+    config: ConstructorParameters<typeof SecureStorageBase>[0] = {},
+    private readonly store: Map<string, string> = new Map()
+  ) {
+    super(config);
+  }
 
   protected async deriveKey(secret: string, _salt: Uint8Array): Promise<Uint8Array> {
     return new TextEncoder().encode(secret.padEnd(32, '0').slice(0, 32));
@@ -142,5 +147,55 @@ describe('Integration: security and verification contracts', () => {
 
     const recovered = await storage.unlock('correct-secret');
     expect(recovered.success).toBe(true);
+  });
+
+  it('preserves secure-storage lockout state across instance restarts', async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-01-01T00:00:00Z'));
+
+    const backingStore = new Map<string, string>();
+    const config = {
+      maxFailedAttempts: 2,
+      wipeOnExceed: false,
+      lockoutDurationSeconds: 30,
+    };
+
+    const firstInstance = new IntegrationTestSecureStorage(config, backingStore);
+    await firstInstance.unlock('correct-secret');
+    firstInstance.lock();
+
+    await firstInstance.unlock('wrong-secret');
+    await firstInstance.unlock('wrong-secret');
+
+    const restartedInstance = new IntegrationTestSecureStorage(config, backingStore);
+    const blocked = await restartedInstance.unlock('correct-secret');
+    expect(blocked.success).toBe(false);
+    expect(blocked.error).toBe('LOCKED_OUT');
+
+    vi.setSystemTime(new Date('2026-01-01T00:00:31Z'));
+
+    const recovered = await restartedInstance.unlock('correct-secret');
+    expect(recovered.success).toBe(true);
+  });
+
+  it('fails safe when persisted lockout state is corrupted after restart', async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-01-01T00:00:00Z'));
+
+    const backingStore = new Map<string, string>();
+    backingStore.set('gtcx_secure___lockout_state', '{corrupted-json');
+
+    const storage = new IntegrationTestSecureStorage(
+      {
+        maxFailedAttempts: 2,
+        wipeOnExceed: false,
+        lockoutDurationSeconds: 30,
+      },
+      backingStore
+    );
+
+    const blocked = await storage.unlock('correct-secret');
+    expect(blocked.success).toBe(false);
+    expect(blocked.error).toBe('LOCKED_OUT');
   });
 });

@@ -2,6 +2,8 @@
 
 > Understand this repo in 5 minutes.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## What It Does
@@ -22,7 +24,7 @@
                          │ imports @gtcx/* packages
   ┌──────────────────────▼───────────────────────────┐
   │   gtcx-core (this repo)                          │
-  │   18 TypeScript packages + 6 Rust crates         │
+  │   18 public TS packages + 4 config packages + 6 Rust crates │
   └──────────────────────────────────────────────────┘
                   (no external dependencies)
 ```
@@ -33,8 +35,8 @@
 
 | Layer            | Technology                              |
 | ---------------- | --------------------------------------- |
-| Primary language | TypeScript 5.x                          |
-| Rust layer       | Rust >= 1.75 (crypto + ZKP primitives)  |
+| Primary language | TypeScript 6.0.x                        |
+| Rust layer       | Rust >= 1.82 (crypto + ZKP primitives)  |
 | Runtime          | Node.js >= 20                           |
 | Package manager  | pnpm 9.15 (workspaces)                  |
 | Build            | Turborepo + tsup                        |
@@ -63,7 +65,7 @@
 
 ```
 gtcx-core/
-├── packages/               # 18 TypeScript packages
+├── packages/               # 18 public packages + shared config workspace packages
 │   ├── types/              #   Shared type definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives
@@ -81,7 +83,10 @@ gtcx-core/
 │   ├── logging/            #   Structured logging
 │   ├── ai/                 #   AI integration hooks
 │   ├── utils/              #   Shared utilities
-│   └── config/             #   Build configuration
+│   ├── config/eslint/      #   Shared ESLint workspace config
+│   ├── config/typescript/  #   Shared TS workspace config
+│   ├── config/tsup/        #   Shared tsup workspace config
+│   └── config/jurisdiction/ #  Shared jurisdiction config
 ├── rust/                   # 6 Rust crates
 │   ├── gtcx-crypto/        #   Ed25519, SHA-256/512, Blake3
 │   ├── gtcx-zkp/           #   Groth16, Bulletproofs, Schnorr

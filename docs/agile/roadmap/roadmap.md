@@ -92,6 +92,22 @@ Depends on: Phase 6.
 
 ---
 
+## 10/10 Readiness Program
+
+The product/feature roadmap above tracks core capability delivery. In parallel, the repo is running a dedicated readiness program to close the remaining gap between strong code quality and fully defensible `10/10` trust, resilience, agentic governance, and enterprise adoption.
+
+| Sprint | Theme                          | Status    | Focus                                                                 |
+| ------ | ------------------------------ | --------- | --------------------------------------------------------------------- |
+| R1     | Trust Contracts and Governance | Completed | Trust matrix, package risk tiers, tier-aware completion rules         |
+| R2     | Global-South Resilience        | Completed | Constrained-environment profiles, offline/restart/clock-skew behavior |
+| R3     | Agentic Evidence               | Completed | Repeatable evidence, task playbooks, metadata-driven gate selection   |
+| R4     | Enterprise Supportability      | Completed | Support policy, consumer checklist, release artifact standard         |
+| R5     | External Validation            | Blocked   | Pen test, downstream validation, final signoff evidence               |
+
+Detailed plan: [10-10-readiness-sprint-roadmap.md](./10-10-readiness-sprint-roadmap.md)
+
+---
+
 ## Security and Compliance Profile
 
 **Baseline (required for all releases)**

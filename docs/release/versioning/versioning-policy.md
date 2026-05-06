@@ -1,5 +1,7 @@
 # Versioning Policy
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Version Scheme
@@ -51,7 +53,7 @@ A change is **breaking** if it:
 3. Remove in the next MAJOR release
 4. Document in CHANGELOG under `### Breaking Changes`
 
-**gtcx-core specific:** Breaking changes in `@gtcx/types`, `@gtcx/crypto`, or `@gtcx/identity` propagate to all 17 downstream repos. These packages require Protocol Architect approval before any breaking change is introduced, regardless of the semver tier.
+**gtcx-core specific:** Breaking changes in `@gtcx/types`, `@gtcx/crypto`, or `@gtcx/identity` propagate broadly across downstream GTCX repos. These packages require Protocol Architect approval before any breaking change is introduced, regardless of the semver tier.
 
 ---
 

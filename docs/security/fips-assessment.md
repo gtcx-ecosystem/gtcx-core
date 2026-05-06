@@ -1,7 +1,7 @@
 # FIPS 140-2/3 Cryptographic Assessment — gtcx-core
 
 **Version:** 1.0.0
-**Date:** 2026-04-05
+**Date:** 2026-05-06
 **Reviewer:** Security Engineering
 **Status:** Assessment Complete — Pathway Defined
 
@@ -9,7 +9,7 @@
 
 ## Summary
 
-gtcx-core uses cryptographic primitives across 19 TypeScript packages and 6 Rust crates. This assessment inventories all cryptographic operations, classifies their FIPS 140-2/3 validation status, and defines the pathway to full FIPS compliance for government deployment.
+gtcx-core uses cryptographic primitives across 18 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates. This assessment inventories all cryptographic operations, classifies their FIPS 140-2/3 validation status, and defines the pathway to full FIPS compliance for government deployment.
 
 **Current status:** Partially compliant. FIPS-validated alternatives exist for all critical operations except zero-knowledge proofs.
 

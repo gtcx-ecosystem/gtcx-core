@@ -2,6 +2,8 @@
 
 `gtcx-core` is a monorepo of shared cryptographic primitives, protocol types, and infrastructure packages consumed by all GTCX product repos. It is not a service — it is a library.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Monorepo Structure
@@ -9,10 +11,10 @@
 | Layer           | Technology      | Version | Purpose                                       |
 | --------------- | --------------- | ------- | --------------------------------------------- |
 | Package manager | pnpm workspaces | 9+      | Dependency management, workspace linking      |
-| Build system    | Turborepo       | latest  | Task orchestration, incremental builds        |
-| Language (TS)   | TypeScript      | 6.x     | Primary language for all TS packages          |
-| Runtime         | Node.js         | 20 LTS  | TS package execution and test runner          |
-| Language (Rust) | Rust            | 1.75+   | Cryptographic crates and ZKP circuits         |
+| Build system    | Turborepo       | 2.x     | Task orchestration, incremental builds        |
+| Language (TS)   | TypeScript      | 6.0.x   | Primary language for all TypeScript packages  |
+| Runtime         | Node.js         | 20 LTS  | Package execution and test runner             |
+| Language (Rust) | Rust            | 1.82+   | Cryptographic crates and ZKP circuits         |
 | Build (Rust)    | Cargo           | stable  | Rust crate builds and test execution          |
 | Native bindings | NAPI-RS         | 2.x     | TypeScript ↔ Rust FFI (`@gtcx/crypto-native`) |
 
@@ -20,24 +22,24 @@
 
 ## TypeScript Packages (`@gtcx/*`)
 
-18 packages across 4 capability groups:
+18 public packages plus 4 shared config workspace packages:
 
-| Group          | Packages                                                                         |
-| -------------- | -------------------------------------------------------------------------------- |
-| **Core types** | `@gtcx/types`, `@gtcx/errors`, `@gtcx/validation`                                |
-| **Crypto**     | `@gtcx/crypto`, `@gtcx/security`, `@gtcx/verification`, `@gtcx/crypto-native`    |
-| **Protocol**   | `@gtcx/identity`, `@gtcx/credentials`, `@gtcx/protocol`                          |
-| **Sync / Net** | `@gtcx/sync`, `@gtcx/network`, `@gtcx/transport`                                 |
-| **Utilities**  | `@gtcx/config`, `@gtcx/logger`, `@gtcx/telemetry`, `@gtcx/testing`, `@gtcx/docs` |
+| Group                | Packages                                                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Foundational**     | `@gtcx/types`, `@gtcx/schemas`, `@gtcx/domain`, `@gtcx/events`                                                           |
+| **Trust / Security** | `@gtcx/crypto`, `@gtcx/crypto-native`, `@gtcx/security`, `@gtcx/verification`, `@gtcx/identity`                          |
+| **Application edge** | `@gtcx/services`, `@gtcx/api-client`, `@gtcx/connectivity`, `@gtcx/network`, `@gtcx/sync`, `@gtcx/workproof`, `@gtcx/ai` |
+| **Utilities**        | `@gtcx/logging`, `@gtcx/utils`                                                                                           |
+| **Config workspace** | `@gtcx/eslint-config`, `@gtcx/typescript-config`, `@gtcx/tsup-config`, `@gtcx/jurisdiction-config`                       |
 
 ### Key TS Dependencies
 
-| Dependency      | Purpose                                          |
-| --------------- | ------------------------------------------------ |
-| `@noble/curves` | Ed25519, secp256k1 — pure TypeScript, audited    |
-| `@noble/hashes` | SHA-256, Blake3, HMAC — pure TypeScript, audited |
-| `zod`           | Schema validation and type inference             |
-| `vitest`        | Unit and integration testing                     |
+| Dependency      | Purpose                                |
+| --------------- | -------------------------------------- |
+| `@noble/curves` | Ed25519 and secp256k1 primitives       |
+| `@noble/hashes` | SHA-256, SHA-512, Blake3, HMAC support |
+| `zod`           | Schema validation and type inference   |
+| `vitest`        | Unit and integration testing           |
 
 ---
 
@@ -45,14 +47,14 @@
 
 6 crates in `rust/`:
 
-| Crate            | Purpose                                                             |
-| ---------------- | ------------------------------------------------------------------- |
-| `gtcx-crypto`    | Ed25519 signing, Blake3/SHA-256 hashing, HD key derivation (BIP-32) |
-| `gtcx-zkp`       | ZKP circuits — Groth16, Bulletproofs, Schnorr                       |
-| `gtcx-node`      | Node runtime primitives for validator mesh                          |
-| `gtcx-network`   | P2P networking layer (libp2p QUIC + gossipsub)                      |
-| `gtcx-edge`      | Edge/offline compute primitives                                     |
-| `gtcx-secp256k1` | secp256k1 signing — EVM and Bitcoin interop                         |
+| Crate            | Purpose                                                        |
+| ---------------- | -------------------------------------------------------------- |
+| `gtcx-crypto`    | Ed25519 signing, SHA-256/Blake3 hashing, key material handling |
+| `gtcx-zkp`       | ZKP circuits — Groth16, Bulletproofs, Schnorr                  |
+| `gtcx-node`      | Node binding/runtime bridge for native operations              |
+| `gtcx-network`   | P2P networking layer (libp2p QUIC + gossipsub)                 |
+| `gtcx-edge`      | Edge/offline compute primitives                                |
+| `gtcx-consensus` | Weighted PBFT and consensus primitives                         |
 
 ### Key Rust Dependencies
 
@@ -67,7 +69,7 @@
 
 ### Security Invariants (enforced in CI)
 
-- `#![deny(unsafe_code)]` on all crypto crates
+- `#![deny(unsafe_code)]` on cryptographic crates
 - `Zeroizing<T>` on all key material
 - RFC test vectors on signing and hashing primitives
 - No `unwrap()` / `expect()` in library code
@@ -88,7 +90,7 @@
 
 ## Package Publishing
 
-`gtcx-core` packages are published to npm (scoped to `@gtcx/*`) via Changesets:
+`gtcx-core` public packages are published to npm (scoped to `@gtcx/*`) via Changesets:
 
 | Tool           | Version | Purpose                                      |
 | -------------- | ------- | -------------------------------------------- |

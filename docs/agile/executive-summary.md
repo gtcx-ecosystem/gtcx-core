@@ -1,5 +1,7 @@
 # Executive Summary — gtcx-core
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Product Vision
@@ -19,7 +21,7 @@
 
 ## Solution
 
-`gtcx-core` publishes a single versioned API surface: `@gtcx/crypto` for all cryptographic operations (Ed25519, SHA-256, HMAC, key derivation, ZKP engine), `@gtcx/schemas` for Zod schemas shared across TypeScript and Python via codegen, `@gtcx/domain` for core domain types, and `@gtcx/identity` for DID document management. Performance-critical operations (ZKP, batch verification) are backed by Rust via WASM/napi-rs. Every GTCX repo pins to a specific `@gtcx/core` version; the `check:architecture` CI gate blocks any import that bypasses the published API.
+`gtcx-core` publishes a versioned API surface across 18 public `@gtcx/*` packages: `@gtcx/crypto` for cryptographic operations, `@gtcx/schemas` for validation schemas, `@gtcx/domain` for core domain types and offline queue semantics, and `@gtcx/identity` for DID document management. Performance-critical operations are backed by Rust via NAPI-RS with explicit native/fallback behavior. Every downstream GTCX repo pins to package versions from this workspace; `pnpm architecture:check` blocks import patterns that violate the published boundary model.
 
 | Package          | Provides                                                              |
 | ---------------- | --------------------------------------------------------------------- |
@@ -33,39 +35,39 @@
 
 ## Current Status
 
-**Phase**: Stable library — active maintenance and API governed by architecture gate
+**Phase**: Stable library — active maintenance, trust-path hardening complete, API governed by architecture and API baseline gates
 
 **What is live:**
 
 - 18 TypeScript packages published under `@gtcx/*` scope
 - 6 Rust crates with WASM and napi-rs build targets
-- `check:architecture` CI gate — blocks circular deps and direct imports bypassing API surface
+- `pnpm architecture:check` CI gate — blocks circular deps and direct imports bypassing API surface
 - Schema codegen pipeline (Zod → Python Pydantic models)
 - All GTCX repos pinned to versioned `@gtcx/core` releases
 
-**In progress:**
+**Current readiness focus:**
 
-- ZKP circuit expansion for GCI continuous scoring
-- Key rotation automation for `@gtcx/identity`
-- Performance benchmarks for Rust binding ops (target: < 1 ms Ed25519 verify)
+- external security review / pen test
+- downstream consumer validation against the release artifact pack
+- final human signoff for release posture
 
 ---
 
 ## Key Metrics / Gates
 
-| Gate                                                   | Target                                                   |
-| ------------------------------------------------------ | -------------------------------------------------------- |
-| `check:architecture` pass (no direct internal imports) | Required for every merge                                 |
-| Ed25519 sign latency (napi-rs, single op)              | < 0.5 ms                                                 |
-| Ed25519 batch verify (1000 signatures, WASM)           | < 100 ms                                                 |
-| Zod schema test coverage                               | 100%                                                     |
-| Breaking change approval                               | Requires explicit sign-off — breaks all downstream repos |
-| Python Pydantic codegen parity with Zod schemas        | 100%                                                     |
+| Gate                                                        | Target                                                   |
+| ----------------------------------------------------------- | -------------------------------------------------------- |
+| `pnpm architecture:check` pass (no direct internal imports) | Required for every merge                                 |
+| Ed25519 sign latency (napi-rs, single op)                   | < 0.5 ms                                                 |
+| Ed25519 batch verify (1000 signatures, WASM)                | < 100 ms                                                 |
+| Zod schema test coverage                                    | 100%                                                     |
+| Breaking change approval                                    | Requires explicit sign-off — breaks all downstream repos |
+| Python Pydantic codegen parity with Zod schemas             | 100%                                                     |
 
 ---
 
 ## References
 
-- [Phased Roadmap](./phased-roadmap.md)
-- [Product Backlog](../2-scrum-board/8-backlog/backlog.md)
-- [Sprint Planning](../2-scrum-board/5-sprints/sprint-planning.md)
+- [Roadmap](./roadmap/roadmap.md)
+- [10/10 Readiness Sprint Roadmap](./roadmap/10-10-readiness-sprint-roadmap.md)
+- [Definition of Done](./sprints/gtcx-core-definition-of-done.md)

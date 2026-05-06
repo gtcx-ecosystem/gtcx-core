@@ -2,6 +2,8 @@
 
 Get a working local build and complete your first integration workflow.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Setup
@@ -20,7 +22,7 @@ Prerequisites: Node.js >= 20, pnpm >= 9.15, Rust >= 1.75. See [Developer Setup](
 
 ## What This Repo Is
 
-`gtcx-core` is a library monorepo — 18 TypeScript packages and 6 Rust crates. It has no server, no database, and produces no deployable artifact. Downstream GTCX repos (`gtcx-protocols`, `gtcx-platforms`, `gtcx-app`, etc.) consume its packages as npm dependencies.
+`gtcx-core` is a library monorepo — 18 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates. It has no server, no database, and produces no deployable application artifact. Downstream GTCX repos (`gtcx-protocols`, `gtcx-platforms`, `gtcx-app`, etc.) consume its public packages as npm dependencies.
 
 There is no "run the app" workflow. All work is package-level: build, test, lint, and verify.
 
@@ -68,26 +70,29 @@ pnpm --filter @gtcx/crypto test:coverage
 
 ## Package Overview
 
-| Package               | What It Gives You                                                    |
-| --------------------- | -------------------------------------------------------------------- |
-| `@gtcx/crypto`        | Ed25519/Secp256k1 signing, SHA-256/512, Merkle proofs, commitments   |
-| `@gtcx/types`         | Shared TypeScript types for the GTCX ecosystem                       |
-| `@gtcx/schemas`       | Zod validation schemas for all Core12 entities                       |
-| `@gtcx/identity`      | DID creation, credential management, key lifecycle                   |
-| `@gtcx/security`      | Auth, AES-256-GCM storage, offline credential management             |
-| `@gtcx/verification`  | Certificate generation, QR codes, W3C VC proof bundles               |
-| `@gtcx/workproof`     | TradeCV/WorkProof v2.1 — W3C VC work attestations, 40 predicates     |
-| `@gtcx/domain`        | Commodity-agnostic domain services, DI container, observability      |
-| `@gtcx/sync`          | Offline-first sync engine with deterministic conflict resolution     |
-| `@gtcx/events`        | Type-safe event bus with offline buffering                           |
-| `@gtcx/logging`       | Structured logging for GTCX services                                 |
-| `@gtcx/api-client`    | Resilient HTTP client with retry, offline queue, and request signing |
-| `@gtcx/connectivity`  | Network connectivity detection for offline-first apps                |
-| `@gtcx/services`      | Registration, trading, and compliance business services              |
-| `@gtcx/ai`            | AI integration hooks and tracing utilities                           |
-| `@gtcx/utils`         | Shared utility functions                                             |
-| `@gtcx/crypto-native` | NAPI-RS native binding loader                                        |
-| `@gtcx/config`        | Shared Turborepo/tsup build configuration                            |
+| Package                     | What It Gives You                                                    |
+| --------------------------- | -------------------------------------------------------------------- |
+| `@gtcx/crypto`              | Ed25519/Secp256k1 signing, SHA-256/512, Merkle proofs, commitments   |
+| `@gtcx/types`               | Shared TypeScript types for the GTCX ecosystem                       |
+| `@gtcx/schemas`             | Zod validation schemas for all Core12 entities                       |
+| `@gtcx/identity`            | DID creation, credential management, key lifecycle                   |
+| `@gtcx/security`            | Auth, AES-256-GCM storage, offline credential management             |
+| `@gtcx/verification`        | Certificate generation, QR codes, W3C VC proof bundles               |
+| `@gtcx/workproof`           | TradeCV/WorkProof v2.1 — W3C VC work attestations, 40 predicates     |
+| `@gtcx/domain`              | Commodity-agnostic domain services, DI container, observability      |
+| `@gtcx/sync`                | Offline-first sync engine with deterministic conflict resolution     |
+| `@gtcx/events`              | Type-safe event bus with offline buffering                           |
+| `@gtcx/logging`             | Structured logging for GTCX services                                 |
+| `@gtcx/api-client`          | Resilient HTTP client with retry, offline queue, and request signing |
+| `@gtcx/connectivity`        | Network connectivity detection for offline-first apps                |
+| `@gtcx/services`            | Registration, trading, and compliance business services              |
+| `@gtcx/ai`                  | AI integration hooks and tracing utilities                           |
+| `@gtcx/utils`               | Shared utility functions                                             |
+| `@gtcx/crypto-native`       | NAPI-RS native binding loader                                        |
+| `@gtcx/eslint-config`       | Shared ESLint workspace configuration                                |
+| `@gtcx/typescript-config`   | Shared TypeScript workspace configuration                            |
+| `@gtcx/tsup-config`         | Shared tsup workspace configuration                                  |
+| `@gtcx/jurisdiction-config` | Shared jurisdictional configuration workspace package                |
 
 For Rust crates: `gtcx-crypto`, `gtcx-zkp`, `gtcx-consensus`, `gtcx-network`, `gtcx-edge`, `gtcx-node`.
 
@@ -120,7 +125,7 @@ cargo test --workspace --lib  # Rust unit tests
 
 ## Need Help?
 
-- Architecture decisions: [`docs/decisions/`](../../2-docs/3-engineering/6-decisions/)
-- Security rules: [`docs/agents/workflows/safety-rules.md`](../4-workflows/safety-rules.md)
-- Package specs: [`docs/specs/packages/`](../../2-docs/5-specs/4-backend/packages/)
+- Architecture decisions: [`../../decisions/`](../../decisions/)
+- Security rules: [`../workflows/safety-rules.md`](../workflows/safety-rules.md)
+- Package specs: [`../../specs/packages/`](../../specs/packages/)
 - Issues: https://github.com/gtcx-ecosystem/gtcx-core/issues

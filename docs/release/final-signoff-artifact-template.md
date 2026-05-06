@@ -1,0 +1,29 @@
+# Final Release Signoff Template
+
+Use this once internal gates, external review, and downstream validation are complete.
+
+---
+
+## Release Candidate
+
+- Version:
+- Date:
+- Included packages:
+
+## Internal Evidence
+
+- Gate summary:
+- API diff status:
+- Release artifact pack attached:
+
+## External Evidence
+
+- Pen test or security review attached:
+- Downstream validation attached:
+- Open findings:
+
+## Final Decision
+
+- Approved by:
+- Decision:
+- Notes:

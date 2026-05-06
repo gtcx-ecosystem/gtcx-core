@@ -2,6 +2,8 @@
 
 **Status:** Planned. The governance model is in place and operational. Technical wiring between this repo and `1-agentic` has not yet begun.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Connection Model
@@ -85,8 +87,8 @@ The substance of this repo's governance is stable regardless of how `1-agentic` 
 
 ## Reference
 
-- [`docs/agents/README.md`](../README.md) — team roster and role overview
-- [`docs/agents/structure/coordination.md`](../3-structure/coordination.md) — multi-role coordination protocol
-- [`docs/agents/workflows/safety-rules.md`](../4-workflows/safety-rules.md) — safety rules
+- [`../README.md`](../README.md) — team roster and role overview
+- [`../structure/coordination.md`](../structure/coordination.md) — multi-role coordination protocol
+- [`../workflows/safety-rules.md`](../workflows/safety-rules.md) — safety rules
 - `1-agentic` — GTCX internal AI development platform
 - `ai-1-baseline` — Baseline Protocol

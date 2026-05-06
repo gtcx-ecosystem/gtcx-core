@@ -2,6 +2,8 @@
 
 How the four-role agent team operates, coordinates, and escalates in this repo.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Team Structure
@@ -127,10 +129,10 @@ Changes to `docs/agents/` files are autonomous for documentation and orientation
 
 ## Reference
 
-- [`docs/agents/roles/protocol-architect.md`](../2-roles/protocol-architect.md) — Protocol Architect role
-- [`docs/agents/roles/crypto-security-engineer.md`](../2-roles/crypto-security-engineer.md) — Cryptographic Security Engineer role
-- [`docs/agents/roles/frontier-infra-engineer.md`](../2-roles/frontier-infra-engineer.md) — Frontier Infrastructure Engineer role
-- [`docs/agents/roles/quality-evidence-lead.md`](../2-roles/quality-evidence-lead.md) — Quality & Evidence Lead role
-- [`docs/agents/workflows/safety-rules.md`](../4-workflows/safety-rules.md) — safety rules and hard escalation triggers
-- [`docs/agents/workflows/tasks/cut-release.md`](../4-workflows/tasks/cut-release.md) — release coordination workflow
+- [`../roles/protocol-architect.md`](../roles/protocol-architect.md) — Protocol Architect role
+- [`../roles/crypto-security-engineer.md`](../roles/crypto-security-engineer.md) — Cryptographic Security Engineer role
+- [`../roles/frontier-infra-engineer.md`](../roles/frontier-infra-engineer.md) — Frontier Infrastructure Engineer role
+- [`../roles/quality-evidence-lead.md`](../roles/quality-evidence-lead.md) — Quality & Evidence Lead role
+- [`../workflows/safety-rules.md`](../workflows/safety-rules.md) — safety rules and hard escalation triggers
+- [`../workflows/tasks/cut-release.md`](../workflows/tasks/cut-release.md) — release coordination workflow
 - `1-agentic` — GTCX internal AI development platform

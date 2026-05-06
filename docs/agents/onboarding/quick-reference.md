@@ -2,26 +2,28 @@
 
 > One-page orientation. Start here, then follow the links.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## What This Repo Is
 
-Shared foundation for the GTCX ecosystem. 18 TypeScript packages + 6 Rust crates. Cryptographic primitives, Zod schemas, DID/credential infrastructure, WorkProof/TradeCV attestations, and the offline sync engine. Depends on nothing else — everything else depends on this.
+Shared foundation for the GTCX ecosystem. 18 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates. Cryptographic primitives, Zod schemas, DID/credential infrastructure, WorkProof/TradeCV attestations, and the offline sync engine. Depends on nothing else in the GTCX stack; everything else depends on it.
 
 ---
 
 ## Key Documents
 
-| What                  | Where                                                                                                                        |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Codebase map          | [`orientation.md`](orientation.md)                                                                                           |
-| Safety rules          | [`../4-workflows/safety-rules.md`](../4-workflows/safety-rules.md)                                                           |
-| Architecture overview | [`../../2-docs/3-engineering/2-system-design/overview.md`](../../2-docs/3-engineering/2-system-design/overview.md)           |
-| ADR index             | [`../../2-docs/3-engineering/6-decisions/README.md`](../../2-docs/3-engineering/6-decisions/README.md)                       |
-| Security framework    | [`../../2-docs/3-engineering/7-security/security-framework.md`](../../2-docs/3-engineering/7-security/security-framework.md) |
-| Quality runbook       | [`../../2-docs/4-devops/2-runbooks/quality-runbook.md`](../../2-docs/4-devops/2-runbooks/quality-runbook.md)                 |
-| Release checklist     | [`../../2-docs/4-devops/7-release-mgmt/release-checklist.md`](../../2-docs/4-devops/7-release-mgmt/release-checklist.md)     |
-| Package specs         | [`../../2-docs/5-specs/4-backend/packages/README.md`](../../2-docs/5-specs/4-backend/packages/README.md)                     |
+| What                  | Where                                                                                              |
+| --------------------- | -------------------------------------------------------------------------------------------------- |
+| Codebase map          | [`orientation.md`](orientation.md)                                                                 |
+| Safety rules          | [`../workflows/safety-rules.md`](../workflows/safety-rules.md)                                     |
+| Architecture overview | [`../../architecture/overview.md`](../../architecture/overview.md)                                 |
+| ADR index             | [`../../decisions/README.md`](../../decisions/README.md)                                           |
+| Security framework    | [`../../security/security-framework.md`](../../security/security-framework.md)                     |
+| Quality runbook       | [`../../devops/runbooks/quality-runbook.md`](../../devops/runbooks/quality-runbook.md)             |
+| Release checklist     | [`../../devops/release-mgmt/release-checklist.md`](../../devops/release-mgmt/release-checklist.md) |
+| Package specs         | [`../../specs/packages/README.md`](../../specs/packages/README.md)                                 |
 
 ---
 
@@ -29,7 +31,7 @@ Shared foundation for the GTCX ecosystem. 18 TypeScript packages + 6 Rust crates
 
 ```
 gtcx-core/
-├── packages/          # 18 TypeScript packages (@gtcx/*)
+├── packages/          # 18 public packages + shared config workspace packages
 ├── rust/              # 6 Rust crates (gtcx-crypto, gtcx-zkp, etc.)
 ├── tests/             # Cross-package integration tests
 ├── benchmarks/        # Performance budgets
@@ -58,7 +60,7 @@ pnpm audit               # Security vulnerability scan
 ## Session Start
 
 1. Read [`orientation.md`](orientation.md) — codebase map and pre-commit gates
-2. Read [`../4-workflows/safety-rules.md`](../4-workflows/safety-rules.md) — what needs human approval
+2. Read [`../workflows/safety-rules.md`](../workflows/safety-rules.md) — what needs human approval
 3. Read the role file for your current work
 4. After a break: [`context-recovery.md`](context-recovery.md)
 

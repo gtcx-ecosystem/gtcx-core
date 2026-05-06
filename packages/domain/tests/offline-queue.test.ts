@@ -34,6 +34,7 @@ describe('OfflineQueue', () => {
       const stats = queue.getStats();
       expect(stats.total).toBe(1);
       expect(stats.pending).toBe(1);
+      expect(queue.getNext()!.sequence).toBe(1);
     });
 
     it('respects custom options', async () => {
@@ -108,6 +109,22 @@ describe('OfflineQueue', () => {
 
       const next = queue.getNext();
       expect(next!.id).toBe(id1);
+    });
+
+    it('uses logical sequence order when the wall clock moves backward', async () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date('2026-01-01T00:00:10Z'));
+
+      const firstId = await queue.enqueue('registration', { step: 'first' }, { priority: 0 });
+
+      vi.setSystemTime(new Date('2026-01-01T00:00:05Z'));
+      await queue.enqueue('trade', { step: 'second' }, { priority: 0 });
+
+      const next = queue.getNext();
+      expect(next!.id).toBe(firstId);
+      expect(next!.sequence).toBe(1);
+
+      vi.useRealTimers();
     });
 
     it('skips operations with unmet dependencies', async () => {
@@ -457,11 +474,48 @@ describe('OfflineQueue', () => {
       const q2 = createQueue({ storage });
       await q2.initialize();
       expect(q2.getStats().total).toBe(2);
+      expect(q2.getNext()!.sequence).toBe(1);
     });
 
     it('does nothing without storage', async () => {
       const q = createQueue();
       await q.initialize(); // should not throw
+    });
+
+    it('backfills logical sequence for persisted legacy operations', async () => {
+      const storage = new InMemoryQueueStorage();
+      await storage.save([
+        {
+          id: 'legacy-1',
+          type: 'registration',
+          status: 'pending',
+          payload: { order: 1 },
+          attempts: 0,
+          maxAttempts: 3,
+          createdAt: 200,
+          priority: 0,
+          conflictStrategy: 'last_write',
+        },
+        {
+          id: 'legacy-2',
+          type: 'trade',
+          status: 'pending',
+          payload: { order: 2 },
+          attempts: 0,
+          maxAttempts: 3,
+          createdAt: 100,
+          priority: 0,
+          conflictStrategy: 'last_write',
+        },
+      ] as QueuedOperation[]);
+
+      const q = createQueue({ storage });
+      await q.initialize();
+
+      const rehydrated = await storage.load();
+      expect(rehydrated[0]!.sequence).toBe(1);
+      expect(rehydrated[1]!.sequence).toBe(2);
+      expect(q.getNext()!.id).toBe('legacy-1');
     });
   });
 
@@ -499,6 +553,7 @@ describe('InMemoryQueueStorage', () => {
     const ops: QueuedOperation[] = [
       {
         id: 'q1',
+        sequence: 1,
         type: 'registration',
         status: 'pending',
         payload: { x: 1 },
@@ -530,6 +585,7 @@ describe('InMemoryQueueStorage', () => {
     const ops: QueuedOperation[] = [
       {
         id: 'q1',
+        sequence: 1,
         type: 'registration',
         status: 'pending',
         payload: {},

@@ -2,6 +2,8 @@
 
 How to recover agent context across sessions, prevent drift, and maintain continuity in a codebase where breaking changes propagate to every downstream repo.
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Why Context Recovery Matters
@@ -133,6 +135,6 @@ When any of these appear: run Quick Recovery before continuing.
 ## Reference
 
 - [`orientation.md`](./orientation.md) — codebase map and session-start reading order
-- [`../4-workflows/safety-rules.md`](../4-workflows/safety-rules.md) — what requires human approval
-- [`../../2-docs/1-architecture/decisions/`](../../2-docs/1-architecture/decisions/README.md) — all 13 ADRs
-- [`../../4-sessions/README.md`](../../4-sessions/README.md) — session document structure
+- [`../workflows/safety-rules.md`](../workflows/safety-rules.md) — what requires human approval
+- [`../../decisions/README.md`](../../decisions/README.md) — ADR index
+- [`../../audits/auto-dev-state.md`](../../audits/auto-dev-state.md) — current remediation and repo state

@@ -1,5 +1,7 @@
 # Developer Setup — gtcx-core
 
+**Last reviewed:** 2026-05-06
+
 ---
 
 ## Prerequisites
@@ -11,7 +13,7 @@
 | Rust    | >= 1.75.0  | `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` |
 | Git     | any recent | system package manager                                            |
 
-Rust is required to build the 6 native Rust crates (`gtcx-crypto`, `gtcx-zkp`, `gtcx-consensus`, `gtcx-network`, `gtcx-edge`, `gtcx-node`). TypeScript packages build without it, but native bindings will fall back to the WASM/JS implementation.
+Rust is required to build the 6 workspace Rust crates (`gtcx-crypto`, `gtcx-zkp`, `gtcx-consensus`, `gtcx-network`, `gtcx-edge`, `gtcx-node`). TypeScript packages build without it, but native bindings will fall back to the JS implementation unless native mode is required.
 
 ---
 
@@ -22,7 +24,7 @@ Rust is required to build the 6 native Rust crates (`gtcx-crypto`, `gtcx-zkp`, `
 git clone https://github.com/gtcx-ecosystem/gtcx-core.git
 cd gtcx-core
 
-# 2. Install all TypeScript dependencies (all 18 packages)
+# 2. Install all workspace dependencies
 pnpm install
 
 # 3. Build all packages (TypeScript + Rust native bindings)
@@ -36,7 +38,7 @@ No `.env` file is required. `gtcx-core` is a library — it has no runtime serve
 ## Running Tests
 
 ```bash
-# Run all tests across all 18 packages
+# Run all tests across the workspace
 pnpm test
 
 # Run tests for a single package
@@ -143,7 +145,7 @@ Without this flag, the TypeScript fallback engine is used. In production, `GTCX_
 Confirm your setup is working by checking each item:
 
 - [ ] `pnpm install` completes without errors
-- [ ] `pnpm build` completes — all 18 TypeScript packages and 6 Rust crates build
+- [ ] `pnpm build` completes — all public packages, shared config packages, and Rust crates build
 - [ ] `pnpm test` passes — all unit tests green
 - [ ] `pnpm typecheck` passes — zero type errors
 - [ ] `pnpm lint` passes — zero lint errors

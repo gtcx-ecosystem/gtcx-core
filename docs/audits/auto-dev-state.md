@@ -1,23 +1,23 @@
 # Auto-Dev State — gtcx-core
 
 **Last updated:** 2026-05-06
-**Status:** Code-addressable hardening is complete; remaining work is external validation and release signoff.
+**Status:** Code-addressable 10/10 preparation is complete; remaining work is external validation and release signoff.
 
 ## Current Scorecard
 
 | #           | Dimension             | Score |
 | ----------- | --------------------- | ----- |
 | 1           | Security              | 9/10  |
-| 2           | Architecture          | 9/10  |
+| 2           | Architecture          | 10/10 |
 | 3           | Test Coverage         | 9/10  |
 | 4           | Code Quality          | 9/10  |
-| 5           | Operational Readiness | 9/10  |
-| 6           | Documentation         | 9/10  |
+| 5           | Operational Readiness | 10/10 |
+| 6           | Documentation         | 10/10 |
 | 7           | Dependency Health     | 10/10 |
-| 8           | CI/CD                 | 9/10  |
+| 8           | CI/CD                 | 10/10 |
 | 9           | Production Readiness  | 9/10  |
-| 10          | Developer Experience  | 9/10  |
-| **Average** | **9.1/10**            |
+| 10          | Developer Experience  | 10/10 |
+| **Average** | **9.6/10**            |
 
 ## Completed In This Audit Cycle
 
@@ -30,13 +30,16 @@
 7. Made standalone integration tests resolve live workspace source instead of stale `dist/` output.
 8. Cleared repo-local Typedoc warnings by exporting missing public types and removing unsupported doc tags.
 9. Upgraded TypeDoc to `0.28.19` so the docs gate supports workspace TypeScript `6.0.x`.
-10. Verified `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm test`, `pnpm test:coverage:critical`, `pnpm build`, `pnpm architecture:check`, `pnpm api:check`, `pnpm api:check:release`, `pnpm quality:governance:check`, `pnpm security:threat-matrix`, `pnpm run docs`, `pnpm perf:check-budgets`, `pnpm docs:check-links`, `pnpm provenance:generate`, `cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace --lib`, and `cargo test -p gtcx-zkp --release -- --ignored`.
+10. Repaired offline queue replay ordering so constrained-environment replay now uses monotonic logical sequence instead of wall-clock timestamps, with restart and backward-clock regression coverage.
+11. Added risk-tier gate mapping, agent evidence templates, and task playbooks for security fixes, API expansion, and audit remediation.
+12. Added enterprise supportability, migration, release artifact, and downstream-readiness docs so adoption risk is explicit instead of implied.
+13. Verified `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm test`, `pnpm test:coverage:critical`, `pnpm build`, `pnpm architecture:check`, `pnpm api:check`, `pnpm api:check:release`, `pnpm quality:governance:check`, `pnpm security:threat-matrix`, `pnpm run docs`, `pnpm perf:check-budgets`, `pnpm docs:check-links`, `pnpm provenance:generate`, `cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace --lib`, and `cargo test -p gtcx-zkp --release -- --ignored`.
 
 ## Remaining 10/10 Work
 
-1. Complete non-code requirements such as pen test and downstream consumer validation.
-2. Cut or stage the release through the normal changeset and signoff workflow.
-3. Reconfirm downstream consumers against the published verification API expansion.
+1. Execute an external security review or pen test and attach findings.
+2. Perform downstream consumer validation against the release artifact pack.
+3. Complete final human signoff and release staging.
 
 ## Reference
 

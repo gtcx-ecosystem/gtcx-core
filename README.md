@@ -2,6 +2,8 @@
 
 Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rust + TypeScript), type definitions, Zod schemas, domain models, verification infrastructure, and WorkProof/TradeCV attestation schemas consumed by all other repos. This is the lowest-level dependency in the stack — it depends on nothing else.
 
+**Last reviewed:** 2026-05-06
+
 ## Engineering Excellence
 
 This repository adheres to **Infrastructure Grade (10/10)** engineering standards, ensuring the reliability and mathematical correctness required for global trade and governmental systems.
@@ -12,6 +14,20 @@ This repository adheres to **Infrastructure Grade (10/10)** engineering standard
 - **Audit Ready**: All code is instrumented for tracing while preserving zero-trust security boundaries.
 
 For a detailed breakdown of these mandates, see [GEMINI.md](./GEMINI.md).
+
+## Current State
+
+The codebase is in a release-grade, code-addressable hardening state:
+
+- trust-path defects in signing, verification, token handling, and offline lockout recovery have been remediated
+- offline replay ordering now uses logical sequence instead of wall-clock time
+- API surface is baselined, docs are aligned to the current architecture, and release/readiness artifacts are in place
+
+Remaining `10/10` blockers are external to the repo:
+
+- external security review / pen test
+- downstream consumer validation
+- final human release signoff
 
 ## Quick Start
 
@@ -30,7 +46,7 @@ pnpm test
 pnpm lint
 ```
 
-For a step-by-step integration walkthrough, see the [Orientation guide](./docs/agents/onboarding/orientation.md).
+For a step-by-step repo walkthrough, see the [Orientation guide](./docs/agents/onboarding/orientation.md). For consumer adoption and release posture, start in [docs/release/README.md](./docs/release/README.md).
 
 ## Packages
 

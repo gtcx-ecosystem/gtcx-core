@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "lastUpdated": "2026-05-06",
+  "tiers": {
+    "security-sensitive": {
+      "description": "Changes can directly affect cryptographic correctness, verification validity, identity trust, or native crypto safety.",
+      "requiredGates": [
+        "pnpm architecture:check",
+        "pnpm lint",
+        "pnpm typecheck",
+        "pnpm test",
+        "pnpm test:coverage:critical",
+        "pnpm build",
+        "pnpm api:check",
+        "pnpm security:threat-matrix"
+      ],
+      "requiredArtifacts": [
+        "quality/api-surface-report.json",
+        "quality/release-<date>-evidence.md"
+      ],
+      "approvalExpectation": "Human review required; Cryptographic Security Engineer posture required."
+    },
+    "foundational": {
+      "description": "Changes affect shared contracts, types, or boundary-critical base layers used by multiple downstream packages.",
+      "requiredGates": [
+        "pnpm architecture:check",
+        "pnpm lint",
+        "pnpm typecheck",
+        "pnpm test",
+        "pnpm build",
+        "pnpm api:check"
+      ],
+      "requiredArtifacts": ["quality/api-surface-report.json"],
+      "approvalExpectation": "Human review required when API or dependency rules change."
+    },
+    "release-sensitive": {
+      "description": "Changes affect downstream integration behavior, release confidence, or operational guarantees without directly changing core cryptographic trust semantics.",
+      "requiredGates": [
+        "pnpm architecture:check",
+        "pnpm lint",
+        "pnpm typecheck",
+        "pnpm test",
+        "pnpm build",
+        "pnpm api:check",
+        "pnpm perf:check-budgets"
+      ],
+      "requiredArtifacts": ["quality/api-surface-report.json"],
+      "approvalExpectation": "Normal peer review plus downstream behavior scrutiny."
+    },
+    "internal-tooling": {
+      "description": "Changes affect workspace build, lint, packaging, or repo governance tooling rather than runtime contracts.",
+      "requiredGates": ["pnpm lint", "pnpm typecheck", "pnpm build"],
+      "requiredArtifacts": [],
+      "approvalExpectation": "Review should focus on workspace-wide blast radius and release tooling impact."
+    }
+  },
+  "packages": {
+    "@gtcx/crypto": "security-sensitive",
+    "@gtcx/crypto-native": "security-sensitive",
+    "@gtcx/security": "security-sensitive",
+    "@gtcx/verification": "security-sensitive",
+    "@gtcx/identity": "security-sensitive",
+    "@gtcx/types": "foundational",
+    "@gtcx/events": "foundational",
+    "@gtcx/schemas": "foundational",
+    "@gtcx/domain": "foundational",
+    "@gtcx/services": "release-sensitive",
+    "@gtcx/api-client": "release-sensitive",
+    "@gtcx/connectivity": "release-sensitive",
+    "@gtcx/network": "release-sensitive",
+    "@gtcx/sync": "release-sensitive",
+    "@gtcx/workproof": "release-sensitive",
+    "@gtcx/logging": "release-sensitive",
+    "@gtcx/utils": "release-sensitive",
+    "@gtcx/ai": "release-sensitive",
+    "@gtcx/eslint-config": "internal-tooling",
+    "@gtcx/typescript-config": "internal-tooling",
+    "@gtcx/tsup-config": "internal-tooling",
+    "@gtcx/jurisdiction-config": "internal-tooling",
+    "rust/gtcx-crypto": "security-sensitive",
+    "rust/gtcx-zkp": "security-sensitive",
+    "rust/gtcx-node": "release-sensitive",
+    "rust/gtcx-network": "release-sensitive",
+    "rust/gtcx-consensus": "release-sensitive",
+    "rust/gtcx-edge": "release-sensitive"
+  }
+}
