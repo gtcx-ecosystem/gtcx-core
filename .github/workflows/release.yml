@@ -81,12 +81,6 @@ jobs:
       - name: Generate API docs
         run: pnpm run docs
 
-      - name: Validate markdown links
-        run: pnpm docs:check-links
-
-      - name: Validate GA release evidence
-        run: pnpm release:ga:evidence:check
-
       - name: Build packages
         run: pnpm build
 
@@ -112,6 +106,12 @@ jobs:
         with:
           name: release-provenance-manifest
           path: artifacts/provenance-manifest.json
+
+      - name: Validate markdown links
+        run: pnpm docs:check-links
+
+      - name: Validate GA release evidence
+        run: pnpm release:ga:evidence:check
 
       - name: Run tests
         run: pnpm test
