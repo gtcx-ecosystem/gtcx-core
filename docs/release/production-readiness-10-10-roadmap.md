@@ -48,6 +48,7 @@ These items require real external artifacts:
 7. ISO 27001 evidence collection output.
 8. Final human signoff.
 9. GitHub Code Security/code scanning enabled for release-candidate SAST and SARIF evidence upload.
+10. GitHub Actions release automation permission enabled before manual release dispatch can create a version PR or publish.
 
 ## 10/10 Exit Gate
 

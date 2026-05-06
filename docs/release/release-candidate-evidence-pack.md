@@ -30,3 +30,5 @@ Use this file to assemble real release-candidate evidence before final signoff. 
 ## Repository Settings Prerequisite
 
 The 2026-05-06 CI run confirmed Trivy and SBOM generation work, but GitHub SARIF/code scanning upload is blocked until GitHub Code Security is enabled for `gtcx-ecosystem/gtcx-core`. Until that repository setting is active, release candidates must attach the `trivy-sarif` and `trivy-sbom` workflow artifacts directly and keep SAST marked pending.
+
+The 2026-05-06 Release run confirmed validation gates pass before the final Changesets mutation, but GitHub Actions is not currently allowed to create pull requests. Push-triggered Release runs are validation-only; enable the repository setting before manually dispatching release automation for a version PR or publish.
