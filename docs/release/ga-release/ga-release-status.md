@@ -21,13 +21,13 @@ gtcx-core is a shared library — no runtime service, no uptime SLA, no request 
 | Security remediation complete   | Security   | Pass    | Trust-path hardening, resilience fixes, and release-grade code-side remediation are complete                                                                 |
 | Pen test complete               | Security   | Pending | Not yet scheduled — required before enterprise downstream deployment                                                                                         |
 | Dependency scans clean          | Security   | Partial | 2026-05-02: pnpm audit — 0 production vulns, 4 dev-only (vite 8.0.3, postcss 8.5.8); cargo audit — 0 production vulns, 1 test-only (rand 0.9.2 via proptest) |
-| SAST clean                      | Security   | Pending | CodeQL not yet configured for this repo                                                                                                                      |
+| SAST clean                      | Security   | Partial | CodeQL is configured in `.github/workflows/ci.yml`; attach the latest clean result to the release evidence set                                               |
 | Internal auth + mTLS            | Security   | N/A     | Library — no internal routes; mTLS support implemented in `@gtcx/api-client`                                                                                 |
 | Perf targets (library-specific) | Platform   | Pass    | All 12 crypto benchmarks within budget (2026-04-05); Ed25519 sign 78us, verify 58us; trend enforcement active                                                |
 | Error rate < 1%                 | Platform   | N/A     | Library — no runtime error rate; 1,921 tests passing, 0 flaky                                                                                                |
 | OpenAPI v[X] published          | Platform   | N/A     | Library — no API endpoints; API surface baselined in `quality/api-surface-baseline.json` (2026-04-05)                                                        |
 | SDKs aligned                    | Platform   | Pass    | Public packages are API-baselined; intentional additive changes have been reviewed and approved                                                              |
-| Developer portal content        | Product    | Partial | Per-package READMEs and release/readiness docs updated; cross-package integration guide still incomplete                                                     |
+| Developer portal content        | Product    | Pass    | Per-package READMEs, internal integration guide, and external integration guide are present and aligned                                                      |
 | Monitoring dashboards           | Platform   | N/A     | Library — no runtime dashboards; CI KPI tracking operational (`quality/kpi-metrics.json`)                                                                    |
 | Alerting configured             | Platform   | N/A     | Library — no runtime alerting; CI failure notifications via GitHub Actions                                                                                   |
 | Runbooks updated                | Platform   | Pass    | Quality runbook at `docs/devops/runbooks/quality-runbook.md`; release checklist at `docs/devops/release-mgmt/release-checklist.md`                           |
@@ -42,7 +42,7 @@ gtcx-core is a shared library — no runtime service, no uptime SLA, no request 
 1. **Pen test not scheduled** — Owner: Security — ETA: TBD
 2. **Downstream consumer validation not yet recorded** — Owner: Platform/Product — ETA: TBD
 3. **SOC2 evidence not collected** — Owner: Compliance — ETA: TBD
-4. **Cross-package integration guide missing** — Owner: Product — ETA: TBD
+4. **Release-candidate SAST/SBOM evidence not yet attached** — Owner: Security/Platform — ETA: TBD
 
 ---
 

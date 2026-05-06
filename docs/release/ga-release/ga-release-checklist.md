@@ -14,7 +14,7 @@
 
 - [x] All security remediation sprints completed (Phases 0-3)
 - [ ] Dependency scans clean (no critical/high CVEs in production deps) — 2026-05-02: 0 production vulns; 4 dev-only findings (vite, postcss)
-- [ ] SAST clean (no critical/high findings) — CodeQL not yet configured
+- [ ] SAST clean (no critical/high findings) — CodeQL is configured in `.github/workflows/ci.yml`; attach latest clean result for the release candidate
 - [ ] Pen test complete and no critical findings — not yet scheduled
 - [x] Rust crates: `#![deny(unsafe_code)]` enforced; key material zeroized (`Zeroizing<T>`)
 
@@ -35,14 +35,14 @@
 
 - [x] API surface baselined and drift-checked (`quality/api-surface-baseline.json`, 2026-04-05)
 - [x] Per-package READMEs complete (18 public packages + shared config workspace packages)
-- [ ] Cross-package integration guide — missing
+- [x] Cross-package integration guide published (`docs/specs/integration-guide.md`, `docs/specs/external-integration-guide.md`)
 - [x] AI stub status documented (READMEs updated 2026-05-02)
 
 ### Supply Chain
 
 - [x] Architecture boundary enforcement in CI (`tools/check-package-boundaries.mjs`)
 - [x] Threat matrix validation in CI (`tools/check-threat-matrix.mjs`)
-- [ ] Provenance manifest generated — script exists, artifact not yet created
+- [x] Provenance manifest generated (`artifacts/provenance-manifest.json`)
 - [ ] SBOM published — generation scripted, not yet executed for a release
 
 ### Library-Specific (N/A for services)
