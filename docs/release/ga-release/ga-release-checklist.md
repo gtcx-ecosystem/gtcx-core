@@ -34,7 +34,7 @@
 
 ### Documentation
 
-- [x] API surface baselined and drift-checked (`quality/api-surface-baseline.json`, 2026-04-05)
+- [x] API surface baselined and drift-checked (`quality/api-surface-baseline.json`, 2026-05-06)
 - [x] Per-package READMEs complete (18 public packages + shared config workspace packages)
 - [x] Cross-package integration guide published (`docs/specs/integration-guide.md`, `docs/specs/external-integration-guide.md`)
 - [x] AI stub status documented (READMEs updated 2026-05-02)

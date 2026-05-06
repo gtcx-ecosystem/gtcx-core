@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-06T09:13:52.210Z",
+  "generatedAt": "2026-05-06T15:25:21.344Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.2",
@@ -67,8 +67,9 @@
       "version": "2.0.0",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "243935306d49fcb4b2488f05422a6e6800e14f0fa00c113fe1bb97c24093249b",
+      "hash": "4449c5acf31a03c471c537e18e98742f9e3a3ce95b0e378850662837af137bb6",
       "exports": [
+        "Backend",
         "batchVerify",
         "batchVerifyProofs",
         "buildMerkleTree",
@@ -353,7 +354,7 @@
       "version": "0.2.2",
       "dir": "packages/events",
       "typesPath": "packages/events/dist/index.d.ts",
-      "hash": "5f4b75f4f6bf163d194d119d6f434f19226173a33c77713317098a221418e269",
+      "hash": "b44e65371ad10effe6320b4615dc1cbb413fb0bc5dfb0203435533c5bfe56f06",
       "exports": [
         "BufferedEvent",
         "ComplianceCheckCompletedPayload",
@@ -389,7 +390,7 @@
       "version": "2.0.0",
       "dir": "packages/identity",
       "typesPath": "packages/identity/dist/index.d.ts",
-      "hash": "489b6fdc60f4b91bd42548150c0d9024fee416659819110403ad1a22e95e2726",
+      "hash": "5104d0fe344f7e3d0f783ccc0eb764a3340b25086055373f8b96b788d5710cab",
       "exports": [
         "createDID",
         "createDIDDocument",
@@ -411,6 +412,8 @@
         "DIDResolverCacheEntry",
         "DIDResolverConfig",
         "DIDResolverError",
+        "DIDResolverErrorCode",
+        "DIDResolverMetricsEvent",
         "DIDResolverOptions",
         "DIDRevocationChecker",
         "DIDRevocationStatus",
@@ -648,7 +651,7 @@
       "version": "0.2.2",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
-      "hash": "dbe17bb56723dfe5d2c08deb2b5fdf45b997314737bb86683d0539d001ed7089",
+      "hash": "a4c1dbec720d000649651ff9b64c54ce93cd9f4ace3818265a86549d6be9d0b9",
       "exports": [
         "AssetLotRegistrationService",
         "ComplianceCheckResult",

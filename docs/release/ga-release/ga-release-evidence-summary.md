@@ -12,7 +12,7 @@ Source: `docs/release/ga-release/ga-release-evidence-log.md`
 | Security (SBOM)                    | —                  | —                                                                             | Security      | 0       |
 | Security (Secret Scan)             | 2026-05-06         | `pnpm security:secret-scan`                                                   | Security      | 1       |
 | Performance (Crypto Benchmarks)    | 2026-04-05         | `benchmarks/performance-report.json`                                          | Core Platform | 1       |
-| API Surface Stability              | 2026-04-05         | `quality/api-surface-report.json`                                             | Core Platform | 1       |
+| API Surface Stability              | 2026-05-06         | `quality/api-surface-report.json`                                             | Core Platform | 2       |
 | Coverage (Critical Packages)       | 2026-02-19         | `quality/kpi-metrics.json`                                                    | Core Platform | 1       |
 | Documentation (Integration Guides) | 2026-05-06         | `docs/specs/integration-guide.md`, `docs/specs/external-integration-guide.md` | Core Platform | 1       |
 | Documentation (AI Stub Caveats)    | 2026-05-02         | README.md, packages/ai/README.md, packages/workproof/README.md                | Core Platform | 1       |

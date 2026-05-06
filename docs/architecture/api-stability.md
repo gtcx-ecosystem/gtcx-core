@@ -1,7 +1,7 @@
 # API Stability Guide — gtcx-core
 
-**Last updated**: 2026-05-02
-**Source**: `quality/api-surface-baseline.json` (2026-04-05)
+**Last updated**: 2026-05-06
+**Source**: `quality/api-surface-baseline.json` (2026-05-06)
 
 ---
 
@@ -16,19 +16,19 @@ gtcx-core follows [Semantic Versioning](https://semver.org/). The version number
 
 ## Package Stability Matrix
 
-### Stable (v1.0.x) — Safe to depend on
+### Stable (v1+) — Safe to depend on
 
 | Package              | Exports | Notes                                               |
 | -------------------- | ------- | --------------------------------------------------- |
-| `@gtcx/crypto`       | 68      | Core signing, hashing, ZKP, Merkle, traced variants |
+| `@gtcx/crypto`       | 82      | Core signing, hashing, ZKP, Merkle, traced variants |
 | `@gtcx/domain`       | 100+    | Domain services, events, schemas, offline queues    |
+| `@gtcx/identity`     | 37      | DID resolver, credentials, resolver metrics         |
 | `@gtcx/types`        | (all)   | Protocol types, models, API types, common types     |
 | `@gtcx/schemas`      | (all)   | Zod validation schemas for Core12 compliance        |
 | `@gtcx/security`     | (all)   | Auth, validation, sanitization, secure storage      |
-| `@gtcx/services`     | (all)   | Registration, trading, compliance business services |
 | `@gtcx/verification` | (all)   | Certificates, QR codes, proof bundles, traced ops   |
 
-### Experimental (v0.2.x) — API may change
+### Experimental (v0.x) — API may change
 
 | Package               | Exports | Notes                                                                   |
 | --------------------- | ------- | ----------------------------------------------------------------------- |
@@ -37,9 +37,9 @@ gtcx-core follows [Semantic Versioning](https://semver.org/). The version number
 | `@gtcx/connectivity`  | 8       | Network detection and profiling; API stabilizing                        |
 | `@gtcx/crypto-native` | 12      | NAPI-RS bindings; tied to Rust crate releases                           |
 | `@gtcx/events`        | (all)   | Event bus; API stabilizing                                              |
-| `@gtcx/identity`      | (all)   | DID resolver, credentials; API stabilizing toward v1.0 (Phase 7)        |
 | `@gtcx/logging`       | (all)   | Structured logging; API stabilizing                                     |
 | `@gtcx/network`       | (all)   | P2P networking; depends on Phase 4 delivery                             |
+| `@gtcx/services`      | 17      | Registration, trading, compliance business services; API stabilizing    |
 | `@gtcx/sync`          | (all)   | Offline sync engine; API stabilizing                                    |
 | `@gtcx/utils`         | (all)   | Common utilities; API stabilizing                                       |
 | `@gtcx/workproof`     | (all)   | WorkProof/TradeCV; ai submodule is types-only                           |
