@@ -189,6 +189,7 @@ jobs:
       - name: Capture benchmark results to JSON
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: node ./tools/capture-benchmark-results.mjs --source=ci:criterion
+        working-directory: .
 
       - name: Upload Criterion results
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
