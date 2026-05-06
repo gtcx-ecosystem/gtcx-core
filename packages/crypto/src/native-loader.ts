@@ -15,7 +15,7 @@ type NativeCrypto = {
   version?: () => string;
 };
 
-type Backend = 'native' | 'js';
+export type Backend = 'native' | 'js';
 
 let cached: NativeCrypto | null | undefined;
 

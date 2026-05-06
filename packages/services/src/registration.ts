@@ -11,7 +11,7 @@
  * - Dependency injection for all externals (P4)
  * - Offline-first compatible (P8)
  *
- * @package @gtcx/services
+ * Package: @gtcx/services
  */
 
 import { randomUUID } from 'node:crypto';

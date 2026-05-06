@@ -107,6 +107,7 @@ export interface SecureStorageState {
   failedAttempts: number;
   lastUnlockedAt?: Date;
   lastIntegrityCheckAt?: Date;
+  lastFailedAt?: Date | undefined;
 }
 
 /**
@@ -180,10 +181,12 @@ export abstract class SecureStorageBase {
         if (raw.length > 1024) throw new Error('Lockout state too large');
         const parsed: LockoutState = JSON.parse(raw);
         this.state.failedAttempts = parsed.failedAttempts ?? 0;
+        this.state.lastFailedAt = parsed.lastFailedAt ? new Date(parsed.lastFailedAt) : undefined;
       }
     } catch {
       // If lockout state is corrupted, assume maximum failed attempts (locked)
       this.state.failedAttempts = this.config.maxFailedAttempts;
+      this.state.lastFailedAt = new Date();
     }
     this.lockoutStateLoaded = true;
   }
@@ -194,7 +197,7 @@ export abstract class SecureStorageBase {
   private async persistLockoutState(): Promise<void> {
     const lockoutState: LockoutState = {
       failedAttempts: this.state.failedAttempts,
-      lastFailedAt: this.state.failedAttempts > 0 ? new Date().toISOString() : null,
+      lastFailedAt: this.state.lastFailedAt?.toISOString() ?? null,
     };
     await this.getStorage().setItem(LOCKOUT_STATE_KEY, JSON.stringify(lockoutState));
   }
@@ -241,6 +244,7 @@ export abstract class SecureStorageBase {
   async unlock(secret: string): Promise<UnlockResult> {
     // Load persisted lockout state before checking
     await this.loadLockoutState();
+    await this.clearExpiredLockoutIfNeeded();
 
     // Check lockout
     if (this.isLockedOut()) {
@@ -277,6 +281,7 @@ export abstract class SecureStorageBase {
 
       // Success - reset attempts and persist
       this.state.failedAttempts = 0;
+      this.state.lastFailedAt = undefined;
       await this.persistLockoutState();
       this.state.lastUnlockedAt = new Date();
 
@@ -402,6 +407,7 @@ export abstract class SecureStorageBase {
     await this.getStorage().clear();
     this.lock();
     this.state.failedAttempts = 0;
+    this.state.lastFailedAt = undefined;
     // Preserve initialized flag so unlock() knows this was previously set up
     await this.getStorage().setItem('gtcx_secure___initialized', 'true');
     this.lockoutStateLoaded = true;
@@ -434,18 +440,29 @@ export abstract class SecureStorageBase {
   }
 
   private isLockedOut(): boolean {
-    return this.state.failedAttempts >= this.config.maxFailedAttempts;
+    if (this.state.failedAttempts < this.config.maxFailedAttempts) {
+      return false;
+    }
+
+    const expiresAt = this.getLockoutExpiry();
+    if (!expiresAt) {
+      return true;
+    }
+
+    return expiresAt.getTime() > Date.now();
   }
 
   private getLockoutExpiry(): Date | undefined {
-    if (!this.isLockedOut()) {
+    if (this.state.failedAttempts < this.config.maxFailedAttempts || !this.state.lastFailedAt) {
       return undefined;
     }
-    return new Date(Date.now() + this.config.lockoutDurationSeconds * 1000);
+
+    return new Date(this.state.lastFailedAt.getTime() + this.config.lockoutDurationSeconds * 1000);
   }
 
   private async recordFailedAttempt(): Promise<void> {
     this.state.failedAttempts++;
+    this.state.lastFailedAt = new Date();
     await this.persistLockoutState();
 
     if (this.config.wipeOnExceed && this.isLockedOut()) {
@@ -496,6 +513,7 @@ export abstract class SecureStorageBase {
       await this.set('__verify__', { verified: true });
       await this.getStorage().setItem(INITIALIZED_KEY, 'true');
       this.state.failedAttempts = 0;
+      this.state.lastFailedAt = undefined;
       await this.persistLockoutState();
       this.state.lastUnlockedAt = new Date();
 
@@ -512,6 +530,17 @@ export abstract class SecureStorageBase {
 
   private prefixKey(key: string): string {
     return `gtcx_secure_${key}`;
+  }
+
+  private async clearExpiredLockoutIfNeeded(): Promise<void> {
+    const expiresAt = this.getLockoutExpiry();
+    if (!expiresAt || expiresAt.getTime() > Date.now()) {
+      return;
+    }
+
+    this.state.failedAttempts = 0;
+    this.state.lastFailedAt = undefined;
+    await this.persistLockoutState();
   }
 
   private toBase64(data: Uint8Array): string {

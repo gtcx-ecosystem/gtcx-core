@@ -1,5 +1,7 @@
 # Auto-Dev Cycle 1 — 2026-05-04
 
+> Historical snapshot. Superseded by [auto-dev-state.md](./auto-dev-state.md) and [10-10-roadmap-2026-05-06.md](./10-10-roadmap-2026-05-06.md).
+
 ## Scorecard
 
 | Dimension          | Score      | Notes                                                                                           |
@@ -56,6 +58,12 @@
 1. User needs to delete `_archive/` and `_sop/` from working tree (denied rm -rf permission)
 2. Services branch coverage at 69% — thresholds lowered to 65, but adding tests for compliance fallback paths would close the gap
 3. `.npmrc` contains auth token — in .gitignore but should be rotated after session
+
+## Resolution Status (as of 2026-05-06)
+
+1. `_archive/` / `_sop/` cleanup was completed in the later audit cycle.
+2. Critical trust-path coverage and release-grade coverage gates are now enforced and passing; broader services branch coverage remains an optimization opportunity, not a release blocker.
+3. `.npmrc` token rotation remains an external operational follow-up if the credential is still valid.
 
 ## Blocked
 

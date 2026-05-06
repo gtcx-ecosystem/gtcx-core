@@ -1,9 +1,9 @@
 # Backend Architecture — gtcx-core
 
-**Repo type:** Library monorepo (18 TypeScript packages, 6 Rust crates)
-**Primary language:** TypeScript 5.x + Rust 1.75+
+**Repo type:** Library monorepo (18 public TypeScript packages, 4 shared config workspace packages, 6 Rust crates)
+**Primary language:** TypeScript 6.0.x + Rust 1.82+
 **Framework:** None — pure library; no HTTP server, no database
-**Last updated:** 2026-03-08
+**Last updated:** 2026-05-06
 
 ---
 
@@ -19,16 +19,19 @@
 │   gtcx-protocols, gtcx-platforms, gtcx-app, etc.             │
 ├──────────────────────────────────────────────────────────────┤
 │   Service / Application Layer                                │
-│   @gtcx/services, @gtcx/api-client, @gtcx/workproof          │
+│   @gtcx/services, @gtcx/api-client                           │
 ├──────────────────────────────────────────────────────────────┤
-│   Domain / Event Layer                                       │
-│   @gtcx/domain, @gtcx/events, @gtcx/sync                     │
+│   Domain Layer                                               │
+│   @gtcx/domain                                               │
 ├──────────────────────────────────────────────────────────────┤
-│   Identity / Security / Verification Layer                   │
-│   @gtcx/identity, @gtcx/security, @gtcx/verification         │
+│   Trust / Workflow Layer                                     │
+│   @gtcx/identity, @gtcx/security, @gtcx/verification,        │
+│   @gtcx/workproof                                            │
 ├──────────────────────────────────────────────────────────────┤
-│   Crypto Layer                                               │
-│   @gtcx/crypto, @gtcx/crypto-native                          │
+│   Foundation / Primitive Layer                               │
+│   @gtcx/types, @gtcx/events, @gtcx/schemas, @gtcx/crypto,   │
+│   @gtcx/crypto-native, @gtcx/utils, @gtcx/logging,          │
+│   @gtcx/ai, @gtcx/connectivity, @gtcx/network, @gtcx/sync   │
 ├──────────────────────────────────────────────────────────────┤
 │   Rust Native Layer                                          │
 │   gtcx-crypto, gtcx-zkp, gtcx-consensus, gtcx-network        │
@@ -36,27 +39,45 @@
 └──────────────────────────────────────────────────────────────┘
 ```
 
-Cross-cutting (usable at any layer): `@gtcx/types`, `@gtcx/schemas`, `@gtcx/utils`, `@gtcx/logging`, `@gtcx/ai`, `@gtcx/connectivity`, `@gtcx/config`
+Cross-cutting runtime packages usable at multiple layers: `@gtcx/types`, `@gtcx/schemas`, `@gtcx/utils`, `@gtcx/logging`, `@gtcx/ai`, `@gtcx/connectivity`, `@gtcx/network`, `@gtcx/sync`
+
+Shared config workspace packages: `@gtcx/eslint-config`, `@gtcx/typescript-config`, `@gtcx/tsup-config`, `@gtcx/jurisdiction-config`
 
 ---
 
 ## Package Dependency Rules
 
-Dependencies flow strictly downward. No circular imports. Enforced by `pnpm architecture:check`:
+Dependencies flow strictly downward and all workspace imports must be declared. No circular imports. The most important constraints are enforced by `pnpm architecture:check`:
 
 ```
-@gtcx/crypto              (no hard internal deps)
+@gtcx/types, @gtcx/events         (foundation)
       ↓
-@gtcx/identity, @gtcx/security, @gtcx/verification
+@gtcx/crypto, @gtcx/schemas
       ↓
-@gtcx/domain, @gtcx/schemas, @gtcx/types
+@gtcx/identity, @gtcx/security, @gtcx/verification, @gtcx/workproof
       ↓
-@gtcx/events, @gtcx/sync
+@gtcx/domain
       ↓
-@gtcx/services, @gtcx/api-client
+@gtcx/services
+
+Standalone / cross-cutting:
+- @gtcx/api-client
+- @gtcx/connectivity
+- @gtcx/network
+- @gtcx/sync
+- @gtcx/utils
+- @gtcx/logging
+- @gtcx/ai
 ```
 
-Violations are CI-blocking. Any change that would create a circular dependency or violate the boundary graph must be resolved before merge.
+Practical boundary rules:
+
+- `@gtcx/types` is foundational and may not import other workspace packages.
+- `@gtcx/crypto` must not depend on higher-level business, sync, or client packages.
+- `@gtcx/security` and `@gtcx/verification` may depend downward on crypto/types but never upward on domain/services/sync/client packages.
+- `@gtcx/domain` must not depend on services, api-client, connectivity, sync, or workproof.
+
+Violations are CI-blocking.
 
 ---
 
@@ -71,11 +92,11 @@ Violations are CI-blocking. Any change that would create a circular dependency o
 
 ### Identity and trust
 
-| Package              | Responsibility                                                                        |
-| -------------------- | ------------------------------------------------------------------------------------- |
-| `@gtcx/identity`     | DID (`did:gtcx:*`) creation, credential management, key lifecycle, resolution         |
-| `@gtcx/security`     | Auth, AES-256-GCM encrypted storage, offline credential management, audit logging     |
-| `@gtcx/verification` | W3C VC certificate generation, QR proof codes, proof bundle assembly and verification |
+| Package              | Responsibility                                                                            |
+| -------------------- | ----------------------------------------------------------------------------------------- |
+| `@gtcx/identity`     | DID (`did:gtcx:*`) creation, credential management, key lifecycle, resolution             |
+| `@gtcx/security`     | Auth, AES-256-GCM encrypted storage, offline credential management, audit logging         |
+| `@gtcx/verification` | Certificate generation, traced signing/verification workflows, QR payloads, proof bundles |
 
 ### Domain and data
 
@@ -88,17 +109,21 @@ Violations are CI-blocking. Any change that would create a circular dependency o
 
 ### Infrastructure
 
-| Package              | Responsibility                                                             |
-| -------------------- | -------------------------------------------------------------------------- |
-| `@gtcx/events`       | Type-safe event bus with offline buffering and replay                      |
-| `@gtcx/sync`         | Offline-first sync engine with pluggable conflict resolution strategies    |
-| `@gtcx/api-client`   | Resilient HTTP client: retry, offline queue, request signing, auth headers |
-| `@gtcx/connectivity` | Network connectivity detection and profiling for offline-first behavior    |
-| `@gtcx/services`     | Business-level services: registration, trading, compliance workflows       |
-| `@gtcx/ai`           | AI integration hooks and tracing utilities for downstream AI-native apps   |
-| `@gtcx/logging`      | Structured JSON logging with log levels and correlation IDs                |
-| `@gtcx/utils`        | Shared utility functions (date, string, collection)                        |
-| `@gtcx/config`       | Shared tsup build presets for consistent package compilation               |
+| Package                     | Responsibility                                                             |
+| --------------------------- | -------------------------------------------------------------------------- |
+| `@gtcx/events`              | Type-safe event bus with offline buffering and replay                      |
+| `@gtcx/sync`                | Offline-first sync engine with pluggable conflict resolution strategies    |
+| `@gtcx/api-client`          | Resilient HTTP client: retry, offline queue, request signing, auth headers |
+| `@gtcx/connectivity`        | Network connectivity detection and profiling for offline-first behavior    |
+| `@gtcx/network`             | Networking primitives and transport utilities                              |
+| `@gtcx/services`            | Business-level services: registration, trading, compliance workflows       |
+| `@gtcx/ai`                  | AI integration hooks and tracing utilities for downstream AI-native apps   |
+| `@gtcx/logging`             | Structured JSON logging with log levels and correlation IDs                |
+| `@gtcx/utils`               | Shared utility functions (date, string, collection)                        |
+| `@gtcx/eslint-config`       | Shared ESLint flat config (internal workspace package)                     |
+| `@gtcx/typescript-config`   | Shared TypeScript config presets (internal workspace package)              |
+| `@gtcx/tsup-config`         | Shared `tsup` build presets (internal workspace package)                   |
+| `@gtcx/jurisdiction-config` | Shared jurisdiction schemas and build config                               |
 
 ---
 
@@ -189,13 +214,13 @@ pnpm lint       # All linting via Turborepo
 pnpm typecheck  # All type checks via Turborepo
 ```
 
-Each package uses `tsup` with a shared preset from `@gtcx/config`.
+Packages use shared build/config presets from `@gtcx/tsup-config` and `@gtcx/typescript-config`.
 
 ---
 
 ## Reference
 
 - [Architecture Overview](overview.md) — layer map and trust boundaries
-- [`docs/decisions/`](../6-decisions/) — all 13 ADRs
+- [`docs/decisions/`](../decisions/) — all 17 ADRs
 - [`docs/specs/packages/`](../specs/packages/) — per-package specs
-- [`docs/security/security-framework.md`](../7-security/security-framework.md) — security controls
+- [`docs/security/security-framework.md`](../security/security-framework.md) — security controls

@@ -98,4 +98,4 @@ export { isFipsMode } from './fips';
 // BACKEND SELECTION
 // ============================================================================
 
-export { getBackend } from './native-loader';
+export { getBackend, type Backend } from './native-loader';

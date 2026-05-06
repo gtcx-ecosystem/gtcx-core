@@ -139,8 +139,8 @@ export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
   }
 
   /**
-   * @simplified Hash-commitment verification only. Real ZKP verification
-   * requires Rust arkworks circuits via NAPI bindings (not yet wired).
+   * Simplified hash-commitment verification only.
+   * Real ZKP verification requires Rust arkworks circuits via NAPI bindings.
    */
   async verify(proof: ZKProof): Promise<boolean> {
     const parsed = ZKProofSchema.safeParse(proof);

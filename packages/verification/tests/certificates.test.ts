@@ -14,7 +14,13 @@ import {
   getCertificateCommodityType,
   type CreateCertificateInput,
 } from '../src/certificates/generator';
-import type { Certificate, CertificateLocation, MilitaryGradeCertificate } from '../src/types';
+import type {
+  Certificate,
+  CertificateLocation,
+  MilitaryGradeCertificate,
+  CustodyEntry,
+  SettlementRecord,
+} from '../src/types';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -60,6 +66,76 @@ function makeValidCertificate(overrides: Partial<Certificate> = {}): Certificate
     },
     createdAt: Date.now(),
     ...overrides,
+  };
+}
+
+function makeCustodyData(): CustodyEntry {
+  return {
+    id: 'custody-001',
+    chainId: 'chain-001',
+    fromHolder: 'holder-a',
+    toHolder: 'holder-b',
+    timestamp: Date.now(),
+    location: {
+      facilityId: 'vault-001',
+      facilityName: 'Central Vault',
+      facilityType: 'vault',
+      coordinates: { latitude: 6.2, longitude: -1.6 },
+    },
+    action: 'transfer',
+    evidence: {
+      photos: ['photo-1'],
+      documents: ['doc-1'],
+      notes: 'handoff verified',
+    },
+    verification: {
+      verifierId: 'verifier-001',
+      verifiedAt: Date.now(),
+      method: 'documentation',
+      result: 'verified',
+      signature: 'sig-001',
+    },
+  };
+}
+
+function makeSettlementData(): SettlementRecord {
+  return {
+    id: 'settlement-001',
+    tradeMatchId: 'match-001',
+    status: 'completed',
+    paymentLeg: {
+      from: 'buyer-001',
+      to: 'seller-001',
+      amount: 1000,
+      currency: 'USD',
+      method: 'bank_transfer',
+      confirmedAt: Date.now(),
+      proof: 'payment-proof-001',
+    },
+    assetLeg: {
+      from: 'seller-001',
+      to: 'buyer-001',
+      lotId: 'lot-001',
+      custodyTransferId: 'custody-001',
+      deliveryMethod: 'vault_transfer',
+      confirmedAt: Date.now(),
+      proof: 'asset-proof-001',
+    },
+    timeline: {
+      initiatedAt: Date.now() - 1_000,
+      paymentDeadline: Date.now() + 3_600_000,
+      assetDeadline: Date.now() + 7_200_000,
+      completedAt: Date.now(),
+    },
+    verification: {
+      paymentVerified: true,
+      paymentVerifiedBy: 'ops-001',
+      paymentVerifiedAt: Date.now(),
+      assetVerified: true,
+      assetVerifiedBy: 'ops-002',
+      assetVerifiedAt: Date.now(),
+      finalSignoff: 'signoff-001',
+    },
   };
 }
 
@@ -123,6 +199,60 @@ describe('validateCertificateInput', () => {
     );
     expect(result.valid).toBe(false);
     expect(result.errors.some((e) => e.includes('accuracy'))).toBe(true);
+  });
+
+  it('accepts valid input for "photo" template', () => {
+    const result = validateCertificateInput(
+      makeValidInput({
+        templateId: 'photo',
+        photoHash: 'feedfacedeadbeef1234567890abcdef',
+      })
+    );
+    expect(result.valid).toBe(true);
+  });
+
+  it('accepts valid input for "custody-transfer" template', () => {
+    const result = validateCertificateInput(
+      makeValidInput({
+        templateId: 'custody-transfer',
+        location: makeLocation({ accuracy: 3 }),
+        assetLotData: {
+          commodityType: 'gold',
+          estimatedWeight: 10,
+          unit: 'kg',
+        },
+        custodyData: makeCustodyData(),
+        validationMetrics: {
+          isJammed: false,
+          isSpoofed: false,
+          confidenceLevel: 0.96,
+          integrityCheck: true,
+        },
+      })
+    );
+    expect(result.valid).toBe(true);
+  });
+
+  it('accepts valid input for "settlement" template', () => {
+    const result = validateCertificateInput(
+      makeValidInput({
+        templateId: 'settlement',
+        location: makeLocation({ accuracy: 3 }),
+        assetLotData: {
+          commodityType: 'gold',
+          estimatedWeight: 10,
+          unit: 'kg',
+        },
+        settlementData: makeSettlementData(),
+        validationMetrics: {
+          isJammed: false,
+          isSpoofed: false,
+          confidenceLevel: 0.99,
+          integrityCheck: true,
+        },
+      })
+    );
+    expect(result.valid).toBe(true);
   });
 });
 
@@ -228,6 +358,18 @@ describe('createStandardCertificateData', () => {
       )
     ).toThrow(/Validation failed/);
   });
+
+  it('supports the photo template when photoHash is provided', () => {
+    const cert = createStandardCertificateData(
+      makeValidInput({
+        templateId: 'photo',
+        photoHash: 'feedfacedeadbeef1234567890abcdef',
+      })
+    );
+
+    expect(cert.type).toBe('photo');
+    expect(cert.dataHash).toBeTruthy();
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -269,6 +411,54 @@ describe('createMilitaryGradeCertificateData', () => {
     expect(() =>
       createMilitaryGradeCertificateData(makeValidInput({ templateId: 'location' }))
     ).toThrow(/not military-grade/);
+  });
+
+  it('supports the custody-transfer template when custodyData is provided', () => {
+    const cert = createMilitaryGradeCertificateData({
+      templateId: 'custody-transfer',
+      location: makeLocation({ accuracy: 3 }),
+      userRole: 'custodian',
+      deviceId: 'device-custody',
+      assetLotData: {
+        commodityType: 'gold',
+        estimatedWeight: 10,
+        unit: 'kg',
+      },
+      custodyData: makeCustodyData(),
+      validationMetrics: {
+        isJammed: false,
+        isSpoofed: false,
+        confidenceLevel: 0.96,
+        integrityCheck: true,
+      },
+    });
+
+    expect(cert.type).toBe('custody-transfer');
+    expect(cert.certificateData.custodyData).toBeDefined();
+  });
+
+  it('supports the settlement template when settlementData is provided', () => {
+    const cert = createMilitaryGradeCertificateData({
+      templateId: 'settlement',
+      location: makeLocation({ accuracy: 3 }),
+      userRole: 'trader',
+      deviceId: 'device-settlement',
+      assetLotData: {
+        commodityType: 'gold',
+        estimatedWeight: 10,
+        unit: 'kg',
+      },
+      settlementData: makeSettlementData(),
+      validationMetrics: {
+        isJammed: false,
+        isSpoofed: false,
+        confidenceLevel: 0.99,
+        integrityCheck: true,
+      },
+    });
+
+    expect(cert.type).toBe('settlement');
+    expect(cert.certificateData.settlementData).toBeDefined();
   });
 });
 

@@ -202,27 +202,23 @@ export interface TokenOptions {
  * Assemble token from payload and signature.
  *
  * @param payload - The base64url-encoded header.claims string
- * @param signature - Raw signature bytes (Uint8Array/Buffer) or an already
- *   base64url-encoded string. Raw bytes are preferred to avoid double-encoding.
+ * @param signature - Raw signature bytes, a hex-encoded signature string,
+ *   or a legacy base64url-encoded signature string.
  */
 export function assembleToken(payload: string, signature: string | Uint8Array): string {
   if (signature instanceof Uint8Array) {
-    // Raw bytes — encode once
-    const base64 = Buffer.from(signature).toString('base64');
-    const encoded = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-    return `${payload}.${encoded}`;
+    return `${payload}.${Buffer.from(signature).toString('hex')}`;
   }
 
-  // String signature — check if it's already base64url-encoded
-  // (base64url uses only alphanumeric, '-', and '_'; no '+', '/', or '=')
-  const isBase64Url = /^[A-Za-z0-9_-]+$/.test(signature);
-  if (isBase64Url) {
-    // Already encoded — use as-is
+  if (isHexSignature(signature)) {
     return `${payload}.${signature}`;
   }
 
-  // Not base64url — encode it
-  return `${payload}.${base64UrlEncode(signature)}`;
+  if (isBase64UrlSignature(signature)) {
+    return `${payload}.${Buffer.from(base64UrlDecodeToBytes(signature)).toString('hex')}`;
+  }
+
+  return `${payload}.${Buffer.from(signature).toString('hex')}`;
 }
 
 /**
@@ -344,13 +340,24 @@ function base64UrlEncode(input: string): string {
   return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 }
 
-function base64UrlDecode(input: string): string {
+function base64UrlDecodeToBytes(input: string): Uint8Array {
   let base64 = input.replace(/-/g, '+').replace(/_/g, '/');
 
-  // Add padding
   while (base64.length % 4 !== 0) {
     base64 += '=';
   }
 
-  return Buffer.from(base64, 'base64').toString('utf8');
+  return Buffer.from(base64, 'base64');
+}
+
+function base64UrlDecode(input: string): string {
+  return Buffer.from(base64UrlDecodeToBytes(input)).toString('utf8');
+}
+
+function isHexSignature(value: string): boolean {
+  return value.length > 0 && value.length % 2 === 0 && /^[0-9a-fA-F]+$/.test(value);
+}
+
+function isBase64UrlSignature(value: string): boolean {
+  return value.length > 0 && /^[A-Za-z0-9_-]+$/.test(value);
 }

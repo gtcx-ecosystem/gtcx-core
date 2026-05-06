@@ -10,7 +10,7 @@
 ## Runtime and Framework
 
 - **Runtime**: [Node.js 20 LTS / Python 3.12 / Go 1.22 / etc.]
-- **Language**: [TypeScript 5.x / Python / Go] ([strict mode / type hints / etc.])
+- **Language**: [TypeScript 6.x / Python / Go] ([strict mode / type hints / etc.])
 - **REST Framework**: [Express.js / Fastify / FastAPI / etc.] with middleware stack
 - **GraphQL Framework**: [Apollo Server / Strawberry / etc.] with [framework] integration
 - **ORM**: [Prisma / SQLAlchemy / GORM / etc.] for [database] schema management

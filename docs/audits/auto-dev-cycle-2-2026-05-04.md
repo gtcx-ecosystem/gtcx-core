@@ -1,5 +1,7 @@
 # Auto-Dev Cycle 2 — 2026-05-04
 
+> Historical snapshot. Superseded by [auto-dev-state.md](./auto-dev-state.md) and [10-10-roadmap-2026-05-06.md](./10-10-roadmap-2026-05-06.md).
+
 ## STANDARDS.md Scorecard
 
 | #   | Dimension             | Score | Standards Met | Top Blocker                                                 |
@@ -51,3 +53,11 @@
 ## Blocked
 
 - \_archive/\_sop deletion: requires user action (rm -rf denied)
+
+## Resolution Status (as of 2026-05-06)
+
+1. The “time injection” concern was retired as a repo-level blocker; the library architecture documents time-sensitive usage explicitly rather than forcing a blanket `now` injection pattern everywhere.
+2. Critical package coverage is now enforced by `pnpm test:coverage:critical`; lower thresholds in non-critical packages remain deliberate package-level tradeoffs.
+3. `_archive/` / `_sop/` cleanup was completed in a later cycle.
+4. The runbooks folder is no longer sparse for release/quality needs; additional runbooks remain a documentation expansion opportunity rather than an audit gap.
+5. External coverage upload (Codecov or equivalent) remains optional CI enrichment, not an unresolved architectural defect.

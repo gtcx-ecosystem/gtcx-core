@@ -1,10 +1,9 @@
 # Auto-Dev State — gtcx-core
 
-**Last updated:** 2026-05-04
-**Last cycle:** Cycle 4 (final)
-**Status:** All code-addressable improvements complete. Average 9.4/10.
+**Last updated:** 2026-05-06
+**Status:** Code-addressable hardening is complete; remaining work is external validation and release signoff.
 
-## Final Scorecard
+## Current Scorecard
 
 | #           | Dimension             | Score |
 | ----------- | --------------------- | ----- |
@@ -13,21 +12,32 @@
 | 3           | Test Coverage         | 9/10  |
 | 4           | Code Quality          | 9/10  |
 | 5           | Operational Readiness | 9/10  |
-| 6           | Documentation         | 10/10 |
+| 6           | Documentation         | 9/10  |
 | 7           | Dependency Health     | 10/10 |
 | 8           | CI/CD                 | 9/10  |
 | 9           | Production Readiness  | 9/10  |
-| 10          | Developer Experience  | 10/10 |
-| **Average** | **9.4/10**            |
+| 10          | Developer Experience  | 9/10  |
+| **Average** | **9.1/10**            |
 
-## Remaining Non-Code Actions
+## Completed In This Audit Cycle
 
-1. Schedule pen test (Security → 10)
-2. Add Codecov integration (CI/CD → 10)
-3. Validate downstream repo against published npm packages
-4. Publish Rust crates to crates.io
-5. Promote events, utils, logging to 1.0
+1. Replaced traced certificate placeholder signing with real `@gtcx/crypto.sign`.
+2. Removed traced verification's signature-presence bypass.
+3. Normalized token signature assembly to the verifier's hex contract.
+4. Implemented offline secure-storage lockout expiry based on persisted timestamps.
+5. Reconciled `@gtcx/verification` template requirements with its public input and type surface.
+6. Added package-level and integration-level regression coverage for the repaired trust paths.
+7. Made standalone integration tests resolve live workspace source instead of stale `dist/` output.
+8. Cleared repo-local Typedoc warnings by exporting missing public types and removing unsupported doc tags.
+9. Upgraded TypeDoc to `0.28.19` so the docs gate supports workspace TypeScript `6.0.x`.
+10. Verified `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm test`, `pnpm test:coverage:critical`, `pnpm build`, `pnpm architecture:check`, `pnpm api:check`, `pnpm api:check:release`, `pnpm quality:governance:check`, `pnpm security:threat-matrix`, `pnpm run docs`, `pnpm perf:check-budgets`, `pnpm docs:check-links`, `pnpm provenance:generate`, `cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace --lib`, and `cargo test -p gtcx-zkp --release -- --ignored`.
 
-## Session Summary
+## Remaining 10/10 Work
 
-4 autonomous dev cycles. 15 commits. Hygiene: 10/10. Spec fidelity: 100%. GTM: S1 (published). STANDARDS.md: 9.4/10 average, all dimensions >= 9.
+1. Complete non-code requirements such as pen test and downstream consumer validation.
+2. Cut or stage the release through the normal changeset and signoff workflow.
+3. Reconfirm downstream consumers against the published verification API expansion.
+
+## Reference
+
+- [10-10-roadmap-2026-05-06.md](./10-10-roadmap-2026-05-06.md)

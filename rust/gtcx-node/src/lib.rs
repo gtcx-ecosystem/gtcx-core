@@ -403,8 +403,7 @@ pub fn groth16_verify_proof(
     let public_inputs: Vec<Fr> = pi_hex_strings
         .iter()
         .map(|s| {
-            let bytes = hex::decode(s)
-                .map_err(|e| napi::Error::from_reason(e.to_string()))?;
+            let bytes = hex::decode(s).map_err(|e| napi::Error::from_reason(e.to_string()))?;
             ark_serialize::CanonicalDeserialize::deserialize_compressed(&*bytes)
                 .map_err(|e| napi::Error::from_reason(format!("Invalid field element: {}", e)))
         })
@@ -842,8 +841,7 @@ mod tests {
     #[test]
     fn test_bulletproofs_amount_range_roundtrip() {
         let randomness = "ab".repeat(32); // 32 bytes
-        let bundle =
-            bulletproofs_prove_amount_range(500, 100, 1000, randomness).unwrap();
+        let bundle = bulletproofs_prove_amount_range(500, 100, 1000, randomness).unwrap();
         assert_eq!(bundle.min, 100);
         assert_eq!(bundle.max, 1000);
 
@@ -870,8 +868,7 @@ mod tests {
     #[test]
     fn test_schnorr_identity_roundtrip() {
         let subject_hash = "ef".repeat(32); // 32 bytes
-        let bundle =
-            schnorr_prove_identity_attribute(b"John Doe".to_vec(), subject_hash).unwrap();
+        let bundle = schnorr_prove_identity_attribute(b"John Doe".to_vec(), subject_hash).unwrap();
 
         let valid = schnorr_verify_identity_attribute(
             bundle.attribute_hash,
@@ -886,8 +883,7 @@ mod tests {
     #[test]
     fn test_schnorr_tampered_response_fails() {
         let subject_hash = "ab".repeat(32);
-        let bundle =
-            schnorr_prove_identity_attribute(b"Jane Doe".to_vec(), subject_hash).unwrap();
+        let bundle = schnorr_prove_identity_attribute(b"Jane Doe".to_vec(), subject_hash).unwrap();
 
         // Tamper with response
         let tampered_response = "00".repeat(32);

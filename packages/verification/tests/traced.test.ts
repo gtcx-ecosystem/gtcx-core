@@ -1,3 +1,4 @@
+import { generateKeyPair } from '@gtcx/crypto';
 import { describe, it, expect } from 'vitest';
 
 import {
@@ -13,6 +14,10 @@ import {
   type VerificationOperationLog,
 } from '../src/traced';
 
+function makeLocation() {
+  return { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() };
+}
+
 // =============================================================================
 // TRACED CERTIFICATE OPERATIONS
 // =============================================================================
@@ -23,26 +28,29 @@ describe('tracedGenerateCertificate', () => {
   });
 
   it('should generate a standard certificate for standard security level', async () => {
+    const keyPair = generateKeyPair();
     const cert = await tracedGenerateCertificate({
       type: 'location',
       securityLevel: 'standard',
-      location: { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() },
-      privateKey: 'pk_test',
-      publicKey: 'pub_test',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
     });
     expect(cert.certificateId).toBeTruthy();
-    expect(cert.verificationData.publicKey).toBe('pub_test');
+    expect(cert.verificationData.publicKey).toBe(keyPair.publicKey);
     expect(cert.verificationData.signature).toBeTruthy();
     expect('signature' in cert).toBe(true);
+    expect('dataHash' in cert).toBe(true);
   });
 
   it('should generate a military-grade certificate for military security level', async () => {
+    const keyPair = generateKeyPair();
     const cert = await tracedGenerateCertificate({
       type: 'asset-origin',
       securityLevel: 'military',
       location: { latitude: 0, longitude: 0, accuracy: 1, timestamp: Date.now() },
-      privateKey: 'pk',
-      publicKey: 'pub',
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
       assetData: {
         commodityType: 'gold',
         estimatedWeight: 10,
@@ -71,8 +79,45 @@ describe('tracedVerifyCertificate', () => {
     expect(typeof tracedVerifyCertificate).toBe('function');
   });
 
-  it('should return a validation result', async () => {
-    const mockCert = {
+  it('should verify a real signed standard certificate', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const result = await tracedVerifyCertificate(cert);
+    expect(result.isValid).toBe(true);
+    expect(result.confidence).toBeGreaterThan(0);
+    expect(result.checks.signatureValid).toBe(true);
+  });
+
+  it('should verify a real signed military-grade certificate', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'asset-origin',
+      securityLevel: 'military',
+      location: { latitude: 0, longitude: 0, accuracy: 1, timestamp: Date.now() },
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+      assetData: {
+        commodityType: 'gold',
+        estimatedWeight: 10,
+        unit: 'kg',
+      },
+      claims: [],
+    });
+
+    const result = await tracedVerifyCertificate(cert);
+    expect(result.isValid).toBe(true);
+    expect(result.checks.signatureValid).toBe(true);
+  });
+
+  it('should reject certificates with placeholder signatures', async () => {
+    const fakeCert = {
       certificateId: 'CERT_001',
       version: '1.0',
       type: 'location' as const,
@@ -82,41 +127,60 @@ describe('tracedVerifyCertificate', () => {
         issuedAt: Date.now(),
         userRole: 'producer',
         deviceId: 'dev-1',
-        location: { latitude: 0, longitude: 0, accuracy: 5, timestamp: Date.now() },
+        location: makeLocation(),
       },
+      dataHash: 'abcd1234',
       verificationData: {
         publicKey: 'pk_test',
         signature: 'sig_test',
         timestamp: Date.now(),
       },
       createdAt: Date.now(),
+      signature: 'sig_test',
     };
-    const result = await tracedVerifyCertificate(mockCert);
-    expect(result.isValid).toBe(true);
-    expect(result.confidence).toBeGreaterThan(0);
-    expect(result.checks.signatureValid).toBe(true);
+
+    const result = await tracedVerifyCertificate(fakeCert);
+    expect(result.isValid).toBe(false);
+    expect(result.checks.signatureValid).toBe(false);
+  });
+
+  it('should reject tampered certificates', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const tampered = {
+      ...cert,
+      metadata: {
+        ...cert.metadata,
+        deviceId: 'tampered-device',
+      },
+    };
+
+    const result = await tracedVerifyCertificate(tampered);
+    expect(result.isValid).toBe(false);
+    expect(result.checks.signatureValid).toBe(false);
   });
 
   it('should report invalid certificate structure', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
     const invalidCert = {
+      ...cert,
       certificateId: '',
-      version: '1.0',
-      type: 'location' as const,
-      securityLevel: 'standard' as const,
-      metadata: {
-        issuer: 'test',
-        issuedAt: Date.now(),
-        userRole: 'producer',
-        deviceId: 'dev-1',
-        location: { latitude: 0, longitude: 0, accuracy: 5, timestamp: Date.now() },
-      },
-      verificationData: {
-        publicKey: 'pk_test',
-        signature: 'sig_test',
-        timestamp: Date.now(),
-      },
-      createdAt: Date.now(),
     };
+
     const result = await tracedVerifyCertificate(invalidCert);
     expect(result.isValid).toBe(false);
     expect(result.details).toContain('Missing certificate ID');

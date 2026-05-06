@@ -26,6 +26,8 @@ import {
   type ResourceContext,
   type GeologicalContext,
   type CommodityType,
+  type CustodyEntry,
+  type SettlementRecord,
 } from '../types';
 
 import { VerificationError } from './errors';
@@ -65,9 +67,12 @@ export interface CreateCertificateInput {
   goldLotData?: GoldLotData | undefined;
   /** Commodity type (optional, can be inferred from assetLotData) */
   commodityType?: CommodityType | undefined;
+  photoHash?: string | undefined;
   photoEvidence?: PhotoEvidenceRef[] | undefined;
   workflowContext?: string | undefined;
   complianceData?: ComplianceData | undefined;
+  custodyData?: CustodyEntry | undefined;
+  settlementData?: SettlementRecord | undefined;
   /** Primary: commodity-agnostic resource context */
   resourceContext?: ResourceContext | undefined;
   /** @deprecated Use resourceContext instead */
@@ -226,9 +231,12 @@ export function createStandardCertificateData(
     type: template.type,
     metadata,
     assetLotData: normalizedInput.assetLotData,
+    photoHash: normalizedInput.photoHash,
     photoEvidence: normalizedInput.photoEvidence,
     workflowContext: normalizedInput.workflowContext,
     complianceData: normalizedInput.complianceData,
+    custodyData: normalizedInput.custodyData,
+    settlementData: normalizedInput.settlementData,
   };
 
   const dataHash = hash256(JSON.stringify(dataToHash));
@@ -290,9 +298,12 @@ export function createMilitaryGradeCertificateData(input: CreateCertificateInput
     assetLotData: normalizedInput.assetLotData,
     // Keep legacy for backwards compatibility
     goldLotData: normalizedInput.goldLotData,
+    photoHash: normalizedInput.photoHash,
     photoEvidence: normalizedInput.photoEvidence,
     workflowContext: normalizedInput.workflowContext,
     complianceData: normalizedInput.complianceData,
+    custodyData: normalizedInput.custodyData,
+    settlementData: normalizedInput.settlementData,
   };
 
   // Data for post-quantum hash

@@ -21,19 +21,20 @@ This repo has no product surface, no UI, and no users. Its output is primitives 
 
 ### TypeScript Packages (18)
 
-| Group         | Packages                                                   |
-| ------------- | ---------------------------------------------------------- |
-| Cryptography  | `@gtcx/crypto`, `@gtcx/crypto-native`                      |
-| Identity      | `@gtcx/identity`                                           |
-| Verification  | `@gtcx/verification`, `@gtcx/workproof`                    |
-| Security      | `@gtcx/security`                                           |
-| Domain        | `@gtcx/domain`, `@gtcx/schemas`, `@gtcx/types`             |
-| Events & Sync | `@gtcx/events`, `@gtcx/sync`                               |
-| Networking    | `@gtcx/network`, `@gtcx/connectivity`                      |
-| Services      | `@gtcx/services`, `@gtcx/api-client`                       |
-| Utilities     | `@gtcx/utils`, `@gtcx/logging`, `@gtcx/ai`, `@gtcx/config` |
+| Group         | Packages                                       |
+| ------------- | ---------------------------------------------- |
+| Cryptography  | `@gtcx/crypto`, `@gtcx/crypto-native`          |
+| Identity      | `@gtcx/identity`                               |
+| Verification  | `@gtcx/verification`, `@gtcx/workproof`        |
+| Security      | `@gtcx/security`                               |
+| Domain        | `@gtcx/domain`, `@gtcx/schemas`, `@gtcx/types` |
+| Events & Sync | `@gtcx/events`, `@gtcx/sync`                   |
+| Networking    | `@gtcx/network`, `@gtcx/connectivity`          |
+| Services      | `@gtcx/services`, `@gtcx/api-client`           |
+| Utilities     | `@gtcx/utils`, `@gtcx/logging`, `@gtcx/ai`     |
 
-Note: `packages/config/` is a shared config directory (eslint, tailwind, tsup, typescript presets) — not a published package.
+Shared config workspace packages live under `packages/config/`:
+`@gtcx/eslint-config`, `@gtcx/typescript-config`, `@gtcx/tsup-config`, and `@gtcx/jurisdiction-config`.
 
 ### Rust Crates (6)
 

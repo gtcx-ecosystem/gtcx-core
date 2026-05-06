@@ -85,7 +85,9 @@ export type {
   ValidationRule,
   PhotoEvidenceRef,
   ComplianceData,
+  CustodyEntry,
   EnvironmentalFactors,
+  SettlementRecord,
   ValidationMetrics,
 
   // Credential types (TradePass™ Taxonomy)

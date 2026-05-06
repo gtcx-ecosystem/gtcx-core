@@ -1,6 +1,6 @@
 # Package Specifications — gtcx-core
 
-Per-package specifications for all 18 TypeScript packages and 6 Rust crates in `gtcx-core`.
+Per-package specifications for all 18 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates in `gtcx-core`.
 
 ---
 
@@ -25,9 +25,17 @@ Per-package specifications for all 18 TypeScript packages and 6 Rust crates in `
 | `@gtcx/api-client`    | `api-client.md`    | Resilient HTTP client with retry and mTLS           |
 | `@gtcx/logging`       | `logging.md`       | Structured logging utilities                        |
 | `@gtcx/ai`            | `ai.md`            | AI integration hooks and tracing stubs              |
-| `@gtcx/config`        | `config.md`        | Shared build configuration presets                  |
 
-Note: `packages/config/` is a shared config directory (eslint, tailwind, tsup, typescript presets) — not a published `@gtcx/*` package.
+## Shared Config Workspace Packages (4)
+
+These live under `packages/config/` and support the workspace/tooling layer rather than the main runtime API surface.
+
+| Package                     | Location                        | Description                       |
+| --------------------------- | ------------------------------- | --------------------------------- |
+| `@gtcx/eslint-config`       | `packages/config/eslint/`       | Shared ESLint flat configuration  |
+| `@gtcx/typescript-config`   | `packages/config/typescript/`   | Shared TypeScript config presets  |
+| `@gtcx/tsup-config`         | `packages/config/tsup/`         | Shared `tsup` build presets       |
+| `@gtcx/jurisdiction-config` | `packages/config/jurisdiction/` | Shared jurisdiction configuration |
 
 ---
 

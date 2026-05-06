@@ -1,5 +1,7 @@
 # Auto-Dev Cycle 3 — 2026-05-04
 
+> Historical snapshot. Superseded by [auto-dev-state.md](./auto-dev-state.md), [10-10-roadmap-2026-05-06.md](./10-10-roadmap-2026-05-06.md), and [release-2026-05-06-evidence.md](../../quality/release-2026-05-06-evidence.md).
+
 ## STANDARDS.md Scorecard
 
 | #   | Dimension             | Score | Notes                                                                                                                                |
@@ -45,3 +47,10 @@
 All 10 dimensions >= 9. Average 9.2/10. TARGET condition (all >= 9, avg >= 9.5) not yet met — 0.3 below average target. Remaining gaps are non-code (user cleanup, external service integration, additional runbooks). These cannot be resolved by code changes.
 
 **BLOCKED: Remaining 0.3 gap requires non-code actions (delete \_archive, add Codecov, write runbooks). Stopping for human input.**
+
+## Resolution Status (as of 2026-05-06)
+
+1. `_archive/` / `_sop/` cleanup was completed in the subsequent cycle.
+2. The “blocked” status is no longer current: all code-addressable release gates now pass.
+3. Remaining external coverage upload is still optional and has been narrowed to a CI enhancement opportunity.
+4. Runbook coverage is sufficient for release/quality workflows; more runbooks may still be added as the operational surface grows.

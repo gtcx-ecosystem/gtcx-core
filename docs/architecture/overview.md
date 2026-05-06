@@ -94,7 +94,7 @@ Before making a change that could break the API surface, run `pnpm api:check` an
 
 ## Reference
 
-- [`docs/specs/core-spec.md`](../../5-specs/4-backend/core-spec.md) — system specification
-- [`docs/decisions/`](../6-decisions/) — all ADRs
-- [`docs/security/security-framework.md`](../7-security/security-framework.md) — security framework
-- [`docs/agents/workflows/safety-rules.md`](../../agents/workflows/safety-rules.md) — what requires approval
+- [`docs/specs/core-spec.md`](../specs/core-spec.md) — system specification
+- [`docs/decisions/`](../decisions/) — all ADRs
+- [`docs/security/security-framework.md`](../security/security-framework.md) — security framework
+- [`docs/agents/workflows/safety-rules.md`](../agents/workflows/safety-rules.md) — what requires approval

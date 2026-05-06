@@ -14,10 +14,24 @@
 // ============================================================================
 
 // Canonical types imported from @gtcx/types (single source of truth)
-import type { CommodityType, ResourceContext, GeologicalContext, SiteReference } from '@gtcx/types';
+import type {
+  CommodityType,
+  ResourceContext,
+  GeologicalContext,
+  SiteReference,
+  CustodyEntry,
+  SettlementRecord,
+} from '@gtcx/types';
 
 // Re-export so downstream consumers of @gtcx/verification still get these types
-export type { CommodityType, ResourceContext, GeologicalContext, SiteReference };
+export type {
+  CommodityType,
+  ResourceContext,
+  GeologicalContext,
+  SiteReference,
+  CustodyEntry,
+  SettlementRecord,
+};
 
 /**
  * Security levels for certificates
@@ -682,9 +696,12 @@ export interface MilitaryGradeCertificate extends Certificate {
     assetLotData?: AssetLotData | undefined;
     /** @deprecated Use assetLotData */
     goldLotData?: GoldLotData | undefined;
+    photoHash?: string | undefined;
     photoEvidence?: PhotoEvidenceRef[] | undefined;
     workflowContext?: string | undefined;
     complianceData?: ComplianceData | undefined;
+    custodyData?: CustodyEntry | undefined;
+    settlementData?: SettlementRecord | undefined;
     /** Claims associated with this certificate */
     claims?: Claim[] | undefined;
   };

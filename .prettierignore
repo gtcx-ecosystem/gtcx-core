@@ -5,6 +5,7 @@ build/
 coverage/
 docs/api/
 rust/target/
+rust/**/target/
 artifacts/
 quality/api-surface-report.json
 benchmarks/performance-report.json

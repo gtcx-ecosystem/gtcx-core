@@ -34,7 +34,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./docs/a
 
 ## Packages
 
-### TypeScript (18 packages + 4 config presets)
+### Public `@gtcx/*` Packages (18)
 
 | Package                                           | Description                                                                                 |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
@@ -54,9 +54,19 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./docs/a
 | [`@gtcx/api-client`](./packages/api-client)       | Resilient HTTP client with retry, offline queue, and request signing                        |
 | [`@gtcx/connectivity`](./packages/connectivity)   | Network connectivity detection and profiling for offline-first apps                         |
 | [`@gtcx/logging`](./packages/logging)             | Structured logging for GTCX services                                                        |
-| [`@gtcx/network`](./packages/network)             | P2P networking and messaging via libp2p                                                     |
+| [`@gtcx/network`](./packages/network)             | P2P networking primitives and transport utilities                                           |
 | [`@gtcx/sync`](./packages/sync)                   | Offline-first sync engine with conflict resolution strategies                               |
-| [`@gtcx/config`](./packages/config)               | Shared build configuration (ESLint, TypeScript, tsup, jurisdiction configs)                 |
+
+### Shared Config Workspace Packages (4)
+
+These live under [`packages/config`](./packages/config) and support the monorepo/tooling layer rather than the main runtime API surface:
+
+| Package                                                       | Description                               |
+| ------------------------------------------------------------- | ----------------------------------------- |
+| [`@gtcx/eslint-config`](./packages/config/eslint)             | Shared ESLint 9 flat configuration        |
+| [`@gtcx/typescript-config`](./packages/config/typescript)     | Shared TypeScript base configs            |
+| [`@gtcx/tsup-config`](./packages/config/tsup)                 | Shared `tsup` build presets               |
+| [`@gtcx/jurisdiction-config`](./packages/config/jurisdiction) | Shared jurisdiction configuration schemas |
 
 ### Rust (6 crates)
 
@@ -73,7 +83,7 @@ For a step-by-step integration walkthrough, see the [Orientation guide](./docs/a
 
 ```
 core/
-├── packages/               # 18 TypeScript packages + config presets
+├── packages/               # 18 public packages + shared config workspace packages
 │   ├── types/              #   Core types and protocol definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives
@@ -89,10 +99,10 @@ core/
 │   ├── api-client/         #   HTTP client
 │   ├── connectivity/       #   Network profiling
 │   ├── logging/            #   Structured logging
-│   ├── network/            #   P2P networking
+│   ├── network/            #   Networking primitives
 │   ├── sync/               #   Sync engine
 │   ├── utils/              #   Shared utilities
-│   └── config/             #   Build configuration
+│   └── config/             #   Internal/shared config workspace packages
 ├── rust/                   # 6 Rust crates
 │   ├── gtcx-crypto/        #   Core crypto primitives
 │   ├── gtcx-zkp/           #   Zero-knowledge proofs

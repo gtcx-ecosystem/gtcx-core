@@ -676,6 +676,10 @@ describe('@gtcx/security/auth', () => {
 
 describe('@gtcx/security/offline', () => {
   describe('secure-storage', () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
     it('should require unlock before operations', async () => {
       const storage = new TestSecureStorage();
       await expect(storage.set('key', 'value')).rejects.toThrow('Storage is locked');
@@ -761,6 +765,33 @@ describe('@gtcx/security/offline', () => {
       const result = await storage.unlock('correct-secret');
       expect(result.success).toBe(false);
       expect(result.error).toBe('LOCKED_OUT');
+    });
+
+    it('should clear lockout after lockoutDurationSeconds elapses', async () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date('2026-01-01T00:00:00Z'));
+
+      const storage = new TestSecureStorage({
+        maxFailedAttempts: 2,
+        wipeOnExceed: false,
+        lockoutDurationSeconds: 60,
+      });
+      await storage.unlock('correct-secret');
+      storage.lock();
+
+      await storage.unlock('wrong-secret');
+      await storage.unlock('wrong-secret');
+
+      const blocked = await storage.unlock('correct-secret');
+      expect(blocked.success).toBe(false);
+      expect(blocked.error).toBe('LOCKED_OUT');
+
+      vi.setSystemTime(new Date('2026-01-01T00:01:01Z'));
+
+      const recovered = await storage.unlock('correct-secret');
+      expect(recovered.success).toBe(true);
+      expect(storage.getState().failedAttempts).toBe(0);
+      expect(storage.getState().lastFailedAt).toBeUndefined();
     });
 
     it('should wipe on lockout if configured', async () => {

@@ -4,7 +4,7 @@
  * Canonical source for all domain event types, payloads, and infrastructure.
  * Other packages (including @gtcx/domain) re-export from here.
  *
- * @package @gtcx/events
+ * Package: @gtcx/events
  */
 
 // ============================================================================

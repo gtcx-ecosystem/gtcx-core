@@ -10,7 +10,7 @@
 // - Performance analysis
 // ============================================================================
 
-import { hash256, verify } from '@gtcx/crypto';
+import { hash256, sign, verify } from '@gtcx/crypto';
 
 import {
   createMilitaryGradeCertificateData,
@@ -126,8 +126,12 @@ export const tracedGenerateCertificate = traced(
     if (shouldUseMilitary) {
       const unsigned = createMilitaryGradeCertificateData(certInput);
       const postQuantumHash = hash256(unsigned.dataForPostQuantumHash);
-      const ed25519Signature = hash256(`${unsigned.dataToSign}:${params.privateKey}`);
-      const secp256k1Signature = hash256(`${unsigned.dataToSign}:${params.privateKey}:secp256k1`);
+      const dataToSign = JSON.stringify({
+        certificateId: unsigned.certificateId,
+        metadata: unsigned.metadata,
+        postQuantumHash,
+      });
+      const ed25519Signature = sign(dataToSign, params.privateKey);
       const certificate = { ...unsigned };
       delete (certificate as { dataToSign?: string }).dataToSign;
       delete (certificate as { dataForPostQuantumHash?: string }).dataForPostQuantumHash;
@@ -137,7 +141,6 @@ export const tracedGenerateCertificate = traced(
         postQuantumHash,
         multiSignature: {
           ed25519: ed25519Signature,
-          secp256k1: secp256k1Signature,
         },
         verificationData: {
           ...certificate.verificationData,
@@ -153,7 +156,7 @@ export const tracedGenerateCertificate = traced(
     }
 
     const unsigned = createStandardCertificateData(certInput);
-    const signature = hash256(`${unsigned.dataToSign}:${params.privateKey}`);
+    const signature = sign(unsigned.dataToSign, params.privateKey);
     const certificate = { ...unsigned };
     delete (certificate as { dataToSign?: string }).dataToSign;
 
@@ -204,28 +207,43 @@ export const tracedVerifyCertificate = traced(
     const structure = verifyCertificateStructure(certificate);
     const now = Date.now();
 
-    const hashValid = 'dataHash' in certificate ? Boolean(certificate.dataHash) : true;
+    const hashValid =
+      'dataHash' in certificate
+        ? Boolean(certificate.dataHash)
+        : 'postQuantumHash' in certificate
+          ? Boolean(certificate.postQuantumHash)
+          : false;
 
-    // Cryptographic signature verification when dataHash is available
+    // Require a cryptographic signature on every certificate variant.
     let signatureValid = false;
     let cryptoVerified = false;
     const { publicKey, signature: sig } = certificate.verificationData ?? {};
-    if (publicKey && sig && 'dataHash' in certificate && certificate.dataHash) {
-      const dataToSign = JSON.stringify({
-        certificateId: certificate.certificateId,
-        metadata: certificate.metadata,
-        dataHash: certificate.dataHash,
-      });
-      try {
-        signatureValid = verify(dataToSign, sig, publicKey);
-        cryptoVerified = true;
-      } catch {
-        signatureValid = false;
-        cryptoVerified = true;
+    if (publicKey && sig) {
+      let dataToSign: string | null = null;
+
+      if ('dataHash' in certificate && certificate.dataHash) {
+        dataToSign = JSON.stringify({
+          certificateId: certificate.certificateId,
+          metadata: certificate.metadata,
+          dataHash: certificate.dataHash,
+        });
+      } else if ('postQuantumHash' in certificate && certificate.postQuantumHash) {
+        dataToSign = JSON.stringify({
+          certificateId: certificate.certificateId,
+          metadata: certificate.metadata,
+          postQuantumHash: certificate.postQuantumHash,
+        });
       }
-    } else {
-      // Fallback: presence check for certs without dataHash
-      signatureValid = Boolean(publicKey && sig);
+
+      if (dataToSign) {
+        try {
+          signatureValid = verify(dataToSign, sig, publicKey);
+          cryptoVerified = true;
+        } catch {
+          signatureValid = false;
+          cryptoVerified = true;
+        }
+      }
     }
     const timestampValid =
       certificate.metadata.issuedAt <= now &&

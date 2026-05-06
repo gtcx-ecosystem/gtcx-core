@@ -2,7 +2,7 @@
 
 ## What This Repo Is
 
-`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 18 TypeScript packages (`@gtcx/*`) plus 4 config presets, and 6 Rust crates (`gtcx-*`) consumed by every downstream GTCX repo. No product surface, no UI, no users — pure primitives. Signing, identity, verification, sync, networking, ZKP.
+`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 18 public TypeScript packages (`@gtcx/*`), maintains 4 shared config workspace packages under `packages/config`, and ships 6 Rust crates (`gtcx-*`) consumed by downstream GTCX repos. No product surface, no UI, no users — pure primitives. Signing, identity, verification, sync, networking, ZKP.
 
 Breaking changes here break everything downstream.
 

@@ -4,7 +4,7 @@
  * Stores domain events when the system is offline and replays them
  * through a provided emit function when connectivity is restored.
  *
- * @package @gtcx/events
+ * Package: @gtcx/events
  */
 
 import type { DomainEvent, BufferedEvent } from './types.js';

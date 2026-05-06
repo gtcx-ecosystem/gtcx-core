@@ -224,27 +224,36 @@ describe('assembleToken', () => {
     expect(token).toContain(payload);
     const parts = token.split('.');
     expect(parts).toHaveLength(3);
-    // Signature part should be base64url (no +, /, =)
-    expect(parts[2]).toMatch(/^[A-Za-z0-9_-]+$/);
+    expect(parts[2]).toBe('0102030405');
   });
 
-  it('should assemble token with base64url-encoded string signature', () => {
+  it('should preserve hex-encoded string signatures', () => {
     const payload = 'header.claims';
-    const sig = 'abc123_-'; // valid base64url
+    const sig = 'deadbeef';
     const token = assembleToken(payload, sig);
 
-    expect(token).toBe('header.claims.abc123_-');
+    expect(token).toBe('header.claims.deadbeef');
   });
 
-  it('should encode non-base64url string signature', () => {
+  it('should normalize legacy base64url string signatures to hex', () => {
     const payload = 'header.claims';
-    const sig = 'has+slash/and=padding'; // not base64url
+    const sig = 'AQIDBAU'; // base64url for 0x01 0x02 0x03 0x04 0x05
     const token = assembleToken(payload, sig);
 
     const parts = token.split('.');
     expect(parts).toHaveLength(3);
-    // Should be re-encoded to base64url
-    expect(parts[2]).toMatch(/^[A-Za-z0-9_-]+$/);
+    expect(parts[2]).toBe('0102030405');
+  });
+
+  it('should assemble byte signatures into tokens that verify successfully', () => {
+    const keyPair = generateKeyPair();
+    const payload = createTokenPayload({ iss: 'gtcx', sub: 'user-1', exp: 0, iat: 0 });
+    const signatureHex = sign(payload, keyPair.privateKey);
+    const signatureBytes = Uint8Array.from(Buffer.from(signatureHex, 'hex'));
+    const token = assembleToken(payload, signatureBytes);
+
+    const result = verifyTokenSignature(token, keyPair.publicKey);
+    expect(result.valid).toBe(true);
   });
 });
 

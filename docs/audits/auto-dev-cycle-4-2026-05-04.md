@@ -1,5 +1,7 @@
 # Auto-Dev Cycle 4 — 2026-05-04 (Final)
 
+> Historical snapshot. Superseded by [auto-dev-state.md](./auto-dev-state.md), [10-10-roadmap-2026-05-06.md](./10-10-roadmap-2026-05-06.md), and [release-2026-05-06-evidence.md](../../quality/release-2026-05-06-evidence.md).
+
 ## STANDARDS.md Scorecard
 
 | #   | Dimension             | Score | Notes                                                                                                    |
@@ -45,3 +47,9 @@ All 10 dimensions >= 9. Average 9.4/10. Target 9.5 not met — 0.1 gap.
 The remaining 0.1 requires external actions (Codecov account, pen test vendor, crates.io publish).
 
 **All code-addressable improvements are complete. Autonomous dev session concluded.**
+
+## Resolution Status (as of 2026-05-06)
+
+1. This report's “final” state has been superseded by the later trust-path remediation and release-gate hardening work.
+2. All code-addressable release gates now pass, including API baseline enforcement, docs generation, critical coverage, provenance generation, Rust formatting, clippy, and heavy ZKP tests.
+3. Remaining items are now limited to external validation and release workflow: pen test, downstream consumer validation, and final human signoff.

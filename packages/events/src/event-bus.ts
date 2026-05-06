@@ -5,7 +5,7 @@
  * with typed subscriptions, offline buffering, event history, and
  * error isolation between handlers.
  *
- * @package @gtcx/events
+ * Package: @gtcx/events
  */
 
 import { OfflineEventBuffer } from './offline-buffer.js';

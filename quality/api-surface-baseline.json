@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-04T18:56:09.440Z",
+  "generatedAt": "2026-05-06T09:13:52.210Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.2",
@@ -919,7 +919,7 @@
       "version": "2.0.0",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "f2db3984e72e4b83f0f817e1d61723058ed7ce69dce85d2faa17f222d8e24899",
+      "hash": "ced84fadaa2080da7a17a8813d46ca6d9f090156aaf3e6dac69f35cbbac7b87e",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",
@@ -998,6 +998,7 @@
         "CryptographicProofRef",
         "CryptographicProofRefSchema",
         "CUSTODY_TRANSFER_TEMPLATE",
+        "CustodyEntry",
         "EnvironmentalFactors",
         "EnvironmentalFactorsSchema",
         "EvidenceRequirements",
@@ -1090,6 +1091,7 @@
         "serializeProofBundle",
         "serializeQRData",
         "SETTLEMENT_TEMPLATE",
+        "SettlementRecord",
         "SiteCategory",
         "SiteCategorySchema",
         "SiteReference",
