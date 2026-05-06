@@ -20,6 +20,7 @@ export interface NativeCryptoBindings {
 }
 
 type RawBindings = Record<string, unknown>;
+type NativeByteArray = number[];
 
 const requireFn =
   typeof require === 'function' ? require : createRequire(path.join(process.cwd(), 'package.json'));
@@ -49,6 +50,10 @@ function pickFn<T extends (...args: never[]) => unknown>(
     }
   }
   throw new Error(`Native bindings missing function: ${label}`);
+}
+
+function toNativeBytes(value: Uint8Array): NativeByteArray {
+  return Array.from(value);
 }
 
 function resolveCandidates(): string[] {
@@ -93,30 +98,32 @@ const rawGenerate = pickFn<() => unknown>(
   ['generateKeyPair', 'generate_key_pair'],
   'generateKeyPair'
 );
-const rawSign = pickFn<(message: Uint8Array, privateKeyHex: string) => string>(
+const rawSign = pickFn<(message: NativeByteArray, privateKeyHex: string) => string>(
   raw,
   ['sign', 'sign_ed25519'],
   'sign'
 );
 const rawVerify = pickFn<
-  (signatureHex: string, message: Uint8Array, publicKeyHex: string) => boolean
+  (signatureHex: string, message: NativeByteArray, publicKeyHex: string) => boolean
 >(raw, ['verify', 'verify_ed25519'], 'verify');
-const rawSha256 = pickFn<(data: Uint8Array) => string>(raw, ['sha256'], 'sha256');
-const rawSha512 = pickFn<(data: Uint8Array) => string>(raw, ['sha512'], 'sha512');
+const rawSha256 = pickFn<(data: NativeByteArray) => string>(raw, ['sha256'], 'sha256');
+const rawSha512 = pickFn<(data: NativeByteArray) => string>(raw, ['sha512'], 'sha512');
 
 export const generateKeyPair = (): NativeKeyPair => normalizeKeyPair(rawGenerate());
 export const sign = (message: Uint8Array, privateKeyHex: string): string =>
-  rawSign(message, privateKeyHex);
+  rawSign(toNativeBytes(message), privateKeyHex);
 export const verify = (signatureHex: string, message: Uint8Array, publicKeyHex: string): boolean =>
-  rawVerify(signatureHex, message, publicKeyHex);
-export const sha256 = (data: Uint8Array): string => rawSha256(data);
-export const sha512 = (data: Uint8Array): string => rawSha512(data);
+  rawVerify(signatureHex, toNativeBytes(message), publicKeyHex);
+export const sha256 = (data: Uint8Array): string => rawSha256(toNativeBytes(data));
+export const sha512 = (data: Uint8Array): string => rawSha512(toNativeBytes(data));
 
 export const blake3Hash =
   typeof raw['blake3_hash'] === 'function'
-    ? (data: Uint8Array) => (raw['blake3_hash'] as (bytes: Uint8Array) => string)(data)
+    ? (data: Uint8Array) =>
+        (raw['blake3_hash'] as (bytes: NativeByteArray) => string)(toNativeBytes(data))
     : typeof raw['blake3Hash'] === 'function'
-      ? (data: Uint8Array) => (raw['blake3Hash'] as (bytes: Uint8Array) => string)(data)
+      ? (data: Uint8Array) =>
+          (raw['blake3Hash'] as (bytes: NativeByteArray) => string)(toNativeBytes(data))
       : undefined;
 
 export const deriveChildKey =
@@ -219,9 +226,14 @@ export const bulletproofsVerifyAmountRange = optionalNativeFn<
   ) => boolean
 >(['bulletproofs_verify_amount_range', 'bulletproofsVerifyAmountRange']);
 
-export const schnorrProveIdentityAttribute = optionalNativeFn<
-  (attribute: Uint8Array, subjectHashHex: string) => NativeSchnorrBundle
+const rawSchnorrProveIdentityAttribute = optionalNativeFn<
+  (attribute: NativeByteArray, subjectHashHex: string) => NativeSchnorrBundle
 >(['schnorr_prove_identity_attribute', 'schnorrProveIdentityAttribute']);
+
+export const schnorrProveIdentityAttribute = rawSchnorrProveIdentityAttribute
+  ? (attribute: Uint8Array, subjectHashHex: string): NativeSchnorrBundle =>
+      rawSchnorrProveIdentityAttribute(toNativeBytes(attribute), subjectHashHex)
+  : undefined;
 
 export const schnorrVerifyIdentityAttribute = optionalNativeFn<
   (

@@ -9,7 +9,10 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const packageDir = path.resolve(scriptDir, '..');
 const repoRoot = path.resolve(packageDir, '..', '..');
 const rustDir = path.join(repoRoot, 'rust');
-const targetDir = path.join(rustDir, 'target', 'release');
+const cargoTarget = process.env.CARGO_BUILD_TARGET;
+const targetDir = cargoTarget
+  ? path.join(rustDir, 'target', cargoTarget, 'release')
+  : path.join(rustDir, 'target', 'release');
 const outDir = path.join(packageDir, 'native');
 const outFile = path.join(outDir, 'gtcx_node.node');
 
@@ -40,7 +43,12 @@ function findArtifact() {
   return null;
 }
 
-execSync('cargo build -p gtcx-node --release', { cwd: rustDir, stdio: 'inherit' });
+const cargoArgs = ['cargo', 'build', '-p', 'gtcx-node', '--release'];
+if (cargoTarget) {
+  cargoArgs.push('--target', cargoTarget);
+}
+
+execSync(cargoArgs.join(' '), { cwd: rustDir, stdio: 'inherit' });
 
 const artifact = findArtifact();
 if (!artifact) {

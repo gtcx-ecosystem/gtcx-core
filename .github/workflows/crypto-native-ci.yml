@@ -75,6 +75,8 @@ jobs:
           echo "CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++" >> $GITHUB_ENV
 
       - name: Build native bindings
+        env:
+          CARGO_BUILD_TARGET: ${{ matrix.target }}
         run: pnpm --filter @gtcx/crypto-native build:native
 
       - name: Build TypeScript package
