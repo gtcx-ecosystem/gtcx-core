@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const rootDir = process.cwd();
-const trackerPath = path.join(rootDir, 'SOP/2-docs/4-operations/compliance/10-10-remediation-tracker.md');
+const trackerPath = path.join(rootDir, 'docs/quality/10-10-remediation-tracker.md');
 const metricsPath = path.join(rootDir, 'quality/kpi-metrics.json');
 const ciHistoryPath = path.join(rootDir, 'artifacts/ci-history.json');
 const provenancePath = path.join(rootDir, 'artifacts/provenance-manifest.json');

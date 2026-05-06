@@ -43,7 +43,7 @@ const qualityEvidencePaths = [
   'benchmarks/history.json',
   'benchmarks/performance-report.json',
   'docs/security/threat-control-matrix.md',
-  'SOP/2-docs/4-operations/compliance/10-10-remediation-tracker.md',
+  'docs/quality/10-10-remediation-tracker.md',
   'quality/api-surface-baseline.json',
 ];
 
