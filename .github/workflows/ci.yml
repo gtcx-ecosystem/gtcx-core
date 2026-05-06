@@ -170,7 +170,7 @@ jobs:
 
       - name: Verify deny(unsafe_code) in all crates
         run: |
-          for lib in rust/*/src/lib.rs; do
+          for lib in */src/lib.rs; do
             if ! grep -q 'deny(unsafe_code)' "$lib"; then
               echo "ERROR: $lib missing #![deny(unsafe_code)]"
               exit 1
@@ -219,6 +219,7 @@ jobs:
   security:
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
       security-events: write
     steps:

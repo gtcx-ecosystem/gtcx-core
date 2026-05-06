@@ -47,10 +47,8 @@
     "clean": "rm -rf dist node_modules .turbo"
   },
   "dependencies": {
+    "@gtcx/crypto": "workspace:*",
     "zod": "3.25.76"
-  },
-  "peerDependencies": {
-    "@gtcx/crypto": "workspace:*"
   },
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",
