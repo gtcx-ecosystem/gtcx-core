@@ -18,8 +18,8 @@
 
 | Sprint | Theme                           | Status      | Exit Criteria                                                                                                       |
 | ------ | ------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
-| P0     | Evidence and docs integrity     | In progress | Broad markdown link check passes; GA evidence check is deterministic; QA docs are real, not template-only           |
-| P1     | Release-candidate evidence pack | Pending     | SAST, SBOM, secret scan, dependency scans, provenance, API report, KPI metrics, and heavy ZKP evidence are attached |
+| P0     | Evidence and docs integrity     | Completed   | Broad markdown link check passes; GA evidence check is deterministic; QA docs are real, not template-only           |
+| P1     | Release-candidate evidence pack | In progress | SAST, SBOM, secret scan, dependency scans, provenance, API report, KPI metrics, and heavy ZKP evidence are attached |
 | P2     | External security validation    | Pending     | External pen test or security review completed; findings logged, remediated, or formally accepted                   |
 | P3     | Downstream consumer validation  | Pending     | At least one downstream consumer validates production-style integration using the release artifact pack             |
 | P4     | Compliance evidence collection  | Pending     | SOC2 and ISO 27001 evidence collected for the release period, not just mapped                                       |

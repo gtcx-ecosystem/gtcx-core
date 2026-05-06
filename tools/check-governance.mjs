@@ -41,6 +41,7 @@ const scripts = pkg.scripts ?? {};
 const requiredScripts = [
   'architecture:check',
   'security:threat-matrix',
+  'security:secret-scan',
   'perf:update-history',
   'perf:check-budgets',
   'api:check',
@@ -51,6 +52,7 @@ const requiredScripts = [
   'quality:kpi:export',
   'docs:check-links',
   'quality:governance:check',
+  'release:ga:evidence:check',
 ];
 
 for (const scriptName of requiredScripts) {
@@ -112,6 +114,7 @@ checkWorkflowStepNames(ciRaw, 'CI workflow', [
   'Architecture boundaries',
   'Governance policy validation',
   'Threat matrix validation',
+  'Secret scan',
   'Update benchmark history snapshot',
   'Performance budget validation',
   'Upload performance report artifact',
@@ -125,12 +128,14 @@ checkWorkflowStepNames(ciRaw, 'CI workflow', [
   'Upload KPI metrics artifact',
   'Generate API docs',
   'Validate markdown links',
+  'Validate GA release evidence',
 ]);
 
 checkWorkflowCommands(ciRaw, 'CI workflow', [
   'pnpm architecture:check',
   'pnpm quality:governance:check',
   'pnpm security:threat-matrix',
+  'pnpm security:secret-scan',
   'pnpm perf:update-history',
   'PERF_ENFORCE_TREND=true pnpm perf:check-budgets',
   'pnpm perf:check-budgets',
@@ -141,12 +146,15 @@ checkWorkflowCommands(ciRaw, 'CI workflow', [
   'pnpm quality:kpi:export',
   'pnpm run docs',
   'pnpm docs:check-links',
+  'pnpm release:ga:evidence:check',
 ]);
 
 checkWorkflowStepNames(releaseRaw, 'Release workflow', [
   'Architecture boundaries',
   'Governance policy validation',
   'Threat matrix validation',
+  'Dependency audit',
+  'Secret scan',
   'Update benchmark history snapshot',
   'Performance budget validation',
   'Upload performance report artifact',
@@ -160,12 +168,15 @@ checkWorkflowStepNames(releaseRaw, 'Release workflow', [
   'Upload KPI metrics artifact',
   'Generate API docs',
   'Validate markdown links',
+  'Validate GA release evidence',
 ]);
 
 checkWorkflowCommands(releaseRaw, 'Release workflow', [
   'pnpm architecture:check',
   'pnpm quality:governance:check',
   'pnpm security:threat-matrix',
+  'pnpm audit --audit-level=high',
+  'pnpm security:secret-scan',
   'pnpm perf:update-history',
   'PERF_ENFORCE_TREND=true pnpm perf:check-budgets',
   'pnpm perf:check-budgets',
@@ -176,6 +187,7 @@ checkWorkflowCommands(releaseRaw, 'Release workflow', [
   'pnpm quality:kpi:export',
   'pnpm run docs',
   'pnpm docs:check-links',
+  'pnpm release:ga:evidence:check',
 ]);
 
 if (failures.length > 0) {

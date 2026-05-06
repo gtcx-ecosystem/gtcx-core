@@ -51,6 +51,12 @@ jobs:
       - name: Threat matrix validation
         run: pnpm security:threat-matrix
 
+      - name: Dependency audit
+        run: pnpm audit --audit-level=high
+
+      - name: Secret scan
+        run: pnpm security:secret-scan
+
       - name: Update benchmark history snapshot
         run: pnpm perf:update-history
 
@@ -77,6 +83,9 @@ jobs:
 
       - name: Validate markdown links
         run: pnpm docs:check-links
+
+      - name: Validate GA release evidence
+        run: pnpm release:ga:evidence:check
 
       - name: Build packages
         run: pnpm build

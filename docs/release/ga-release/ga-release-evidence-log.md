@@ -13,6 +13,7 @@ Track every completed release gate with a dated evidence entry. One row per evid
 | 2026-05-02 | Documentation (AI Stub Caveats)    | README.md, packages/ai/README.md, packages/workproof/README.md                | Pass: AI stub status explicitly documented in all READMEs                                          | Core Platform |
 | 2026-03-19 | Change Management                  | CHANGELOG.md (v1.0.0)                                                         | Pass: v1.0.0 released with full changelog; 232 commits since 2026-01-01; all via PR with review    | Core Platform |
 | 2026-05-06 | Provenance Manifest                | `artifacts/provenance-manifest.json`                                          | Pass: provenance manifest generated and tracked as a release evidence artifact                     | Core Platform |
+| 2026-05-06 | Security (Secret Scan)             | `pnpm security:secret-scan`                                                   | Pass: high-confidence secret scan passed across 625 repo files                                     | Security      |
 
 ## Usage Notes
 

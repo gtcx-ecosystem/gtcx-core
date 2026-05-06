@@ -12,6 +12,7 @@ All gates must pass on every pull request. Zero exceptions, zero bypasses:
 | ---------------------------- | -------------------------------------------------------------------------------------------------- | -------- |
 | Architecture boundaries      | `pnpm architecture:check`                                                                          | PR merge |
 | Governance policy            | `pnpm quality:governance:check`                                                                    | PR merge |
+| Secret scan                  | `pnpm security:secret-scan`                                                                        | PR merge |
 | Lint                         | `pnpm lint`                                                                                        | PR merge |
 | Format                       | `pnpm format:check`                                                                                | PR merge |
 | Type check                   | `pnpm typecheck`                                                                                   | PR merge |

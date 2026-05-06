@@ -45,6 +45,9 @@ jobs:
       - name: Dependency audit
         run: pnpm audit --audit-level=high
 
+      - name: Secret scan
+        run: pnpm security:secret-scan
+
       - name: Architecture boundaries
         run: pnpm architecture:check
 
@@ -133,6 +136,9 @@ jobs:
 
       - name: Validate markdown links
         run: pnpm docs:check-links
+
+      - name: Validate GA release evidence
+        run: pnpm release:ga:evidence:check
 
   rust:
     runs-on: ubuntu-latest

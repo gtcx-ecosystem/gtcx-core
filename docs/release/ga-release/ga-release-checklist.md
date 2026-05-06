@@ -15,6 +15,7 @@
 - [x] All security remediation sprints completed (Phases 0-3)
 - [ ] Dependency scans clean (no critical/high CVEs in production deps) — 2026-05-02: 0 production vulns; 4 dev-only findings (vite, postcss)
 - [ ] SAST clean (no critical/high findings) — CodeQL is configured in `.github/workflows/ci.yml`; attach latest clean result for the release candidate
+- [ ] Secret scan clean — `pnpm security:secret-scan` is configured in CI/release; attach latest release-candidate output
 - [ ] Pen test complete and no critical findings — not yet scheduled
 - [x] Rust crates: `#![deny(unsafe_code)]` enforced; key material zeroized (`Zeroizing<T>`)
 

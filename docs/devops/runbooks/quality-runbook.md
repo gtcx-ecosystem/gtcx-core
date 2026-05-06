@@ -11,6 +11,7 @@ Run in order. Do not skip or reorder. Do not proceed past a failing gate.
 ```bash
 pnpm architecture:check          # Dependency graph + circular dep enforcement
 pnpm quality:governance:check    # Governance artifacts and CODEOWNERS validity
+pnpm security:secret-scan        # High-confidence committed secret scan
 pnpm lint                        # ESLint across all TypeScript packages
 pnpm format:check                # Prettier format check
 pnpm typecheck                   # TypeScript strict mode — all 18 packages

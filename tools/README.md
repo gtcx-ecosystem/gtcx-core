@@ -10,6 +10,7 @@ Quality and automation scripts for the gtcx-core workspace.
 | `check-markdown-links.mjs`         | Scans tracked markdown files for broken internal links                                                              |
 | `check-package-boundaries.mjs`     | Enforces inter-package import restrictions to maintain the dependency graph                                         |
 | `check-performance-budgets.mjs`    | Validates latest benchmark results against defined performance budgets and trend regressions                        |
+| `check-secrets.mjs`                | Scans tracked text files for high-confidence committed secret patterns                                              |
 | `check-threat-matrix.mjs`          | Parses the threat-control matrix doc and validates that all threat entries have required fields                     |
 | `collect-kpi-history.mjs`          | Fetches CI workflow run history and issue metrics from GitHub for KPI tracking                                      |
 | `export-quality-kpis.mjs`          | Aggregates quality KPIs (test coverage, benchmarks, remediation, provenance) into a single report                   |

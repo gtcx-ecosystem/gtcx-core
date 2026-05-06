@@ -13,6 +13,7 @@ Release governance for `gtcx-core` — semver decisions, evidence artifacts, dow
 | [downstream-production-readiness-checklist.md](./downstream-production-readiness-checklist.md) | Consumer-side production validation checklist                             |
 | [downstream-validation-report-template.md](./downstream-validation-report-template.md)         | Template for consumer validation evidence                                 |
 | [enterprise-release-artifact-pack.md](./enterprise-release-artifact-pack.md)                   | Standard release evidence pack for enterprise review                      |
+| [release-candidate-evidence-pack.md](./release-candidate-evidence-pack.md)                     | Concrete release-candidate evidence sources and attachment rules          |
 | [production-readiness-10-10-roadmap.md](./production-readiness-10-10-roadmap.md)               | Sprint roadmap from current assurance state to 10/10 production readiness |
 | [external-validation-findings-log.md](./external-validation-findings-log.md)                   | External security review or pen-test findings log                         |
 | [final-signoff-artifact-template.md](./final-signoff-artifact-template.md)                     | Final human signoff record                                                |

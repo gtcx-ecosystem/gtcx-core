@@ -14,6 +14,7 @@ This is the standard release evidence pack for security-conscious downstream tea
 | `benchmarks/performance-report.json`         | Current benchmark and budget status                      |
 | `artifacts/provenance-manifest.json`         | Build provenance and artifact integrity metadata         |
 | SBOM output from the release workflow        | Supply-chain inventory for the published release         |
+| SAST, secret-scan, and dependency evidence   | Release-candidate security gate proof                    |
 | Docs from `docs/release/` and `docs/audits/` | Supportability, migration, and current-readiness posture |
 
 ---
