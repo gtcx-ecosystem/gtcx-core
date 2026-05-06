@@ -47,6 +47,7 @@ These items require real external artifacts:
 6. SOC2 evidence collection output.
 7. ISO 27001 evidence collection output.
 8. Final human signoff.
+9. GitHub Code Security/code scanning enabled for release-candidate SAST and SARIF evidence upload.
 
 ## 10/10 Exit Gate
 
