@@ -13,6 +13,7 @@ Quality and automation scripts for the gtcx-core workspace.
 | `check-threat-matrix.mjs`          | Parses the threat-control matrix doc and validates that all threat entries have required fields                     |
 | `collect-kpi-history.mjs`          | Fetches CI workflow run history and issue metrics from GitHub for KPI tracking                                      |
 | `export-quality-kpis.mjs`          | Aggregates quality KPIs (test coverage, benchmarks, remediation, provenance) into a single report                   |
+| `generate-ga-evidence-summary.mjs` | Regenerates `docs/release/ga-release/ga-release-evidence-summary.md` from the GA evidence log                       |
 | `generate-provenance-manifest.mjs` | Generates SHA-256 provenance manifest for critical build artifacts                                                  |
 | `network-mesh-demo.mjs`            | Demonstrates the `@gtcx/network` mesh networking package with peer discovery and messaging                          |
 | `update-benchmark-history.mjs`     | Appends latest benchmark results to the rolling history file                                                        |

@@ -36,6 +36,7 @@
     "api:check:release": "API_ENFORCE_SEMVER=true API_BASELINE_REF=HEAD~1 node ./tools/check-api-surface.mjs",
     "api:update-baseline": "node ./tools/check-api-surface.mjs --update",
     "provenance:generate": "node ./tools/generate-provenance-manifest.mjs",
+    "release:ga:evidence:summary": "node ./tools/generate-ga-evidence-summary.mjs",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "typecheck": "turbo run typecheck",

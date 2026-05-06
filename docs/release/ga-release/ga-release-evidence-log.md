@@ -19,4 +19,4 @@ Track every completed release gate with a dated evidence entry. One row per evid
 - Append rows chronologically. Never edit existing rows.
 - Each gate in the checklist must have at least one passing row before sign-off.
 - Use the Summary field to distinguish PASS/FAIL outcomes.
-- Reference this log in the evidence summary using the auto-summary script.
+- Reference this log in the evidence summary using `pnpm release:ga:evidence:summary`.

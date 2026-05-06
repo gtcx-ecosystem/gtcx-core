@@ -15,7 +15,7 @@ Source: `docs/release/ga-release/ga-release-evidence-log.md`
 | API Surface Stability              | 2026-04-05         | `quality/api-surface-report.json`                                             | Core Platform | 1       |
 | Coverage (Critical Packages)       | 2026-02-19         | `quality/kpi-metrics.json`                                                    | Core Platform | 1       |
 | Documentation (Integration Guides) | 2026-05-06         | `docs/specs/integration-guide.md`, `docs/specs/external-integration-guide.md` | Core Platform | 1       |
-| Documentation (AI Stub Caveats)    | 2026-05-02         | README.md, packages/ai/README.md                                              | Core Platform | 1       |
+| Documentation (AI Stub Caveats)    | 2026-05-02         | README.md, packages/ai/README.md, packages/workproof/README.md                | Core Platform | 1       |
 | Change Management                  | 2026-03-19         | CHANGELOG.md (v1.0.0)                                                         | Core Platform | 1       |
 | Compliance Evidence (SOC2)         | —                  | —                                                                             | Compliance    | 0       |
 | Compliance Evidence (ISO 27001)    | —                  | —                                                                             | Compliance    | 0       |
@@ -23,12 +23,12 @@ Source: `docs/release/ga-release/ga-release-evidence-log.md`
 
 ## Summary
 
-- **9 of 14 gates have evidence** (64%)
-- **0 of 14 gates have blocking findings**
-- **6 gates require action**: SAST, pen test, SBOM, secret scan, SOC2 evidence, ISO 27001 evidence
+- **9 of 15 gates have evidence** (60%)
+- **0 of 15 gates have blocking findings**
+- **6 gates require action**: Security (SAST), Security (Pen Test + Remediation), Security (SBOM), Security (Secret Scan), Compliance Evidence (SOC2), Compliance Evidence (ISO 27001)
 
 ## Usage Notes
 
-- This file is maintained from the evidence log and should be regenerated or updated when new evidence entries are added.
-- Re-run the summary script after new evidence entries are added to the log.
+- This file is generated from the evidence log. Do not edit manually.
+- Re-run `pnpm release:ga:evidence:summary` after new evidence entries are added to the log.
 - All gates with 0 entries require evidence before sign-off can proceed.
