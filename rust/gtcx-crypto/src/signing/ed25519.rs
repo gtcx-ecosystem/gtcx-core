@@ -160,7 +160,7 @@ impl PublicKey {
     /// # Errors
     ///
     /// Returns [`CryptoError::InvalidKeyLength`] if bytes is not 32 bytes.
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
+    pub const fn from_bytes(bytes: &[u8]) -> Result<Self> {
         if bytes.len() != 32 {
             return Err(CryptoError::InvalidKeyLength {
                 expected: 32,
@@ -197,7 +197,7 @@ impl Signature {
     /// # Errors
     ///
     /// Returns [`CryptoError::InvalidSignatureLength`] if bytes is not 64 bytes.
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
+    pub const fn from_bytes(bytes: &[u8]) -> Result<Self> {
         if bytes.len() != 64 {
             return Err(CryptoError::InvalidSignatureLength {
                 expected: 64,

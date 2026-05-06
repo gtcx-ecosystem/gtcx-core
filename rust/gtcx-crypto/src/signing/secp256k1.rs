@@ -160,7 +160,7 @@ impl Signature {
     /// # Errors
     ///
     /// Returns `CryptoError::InvalidSignatureLength` if `bytes` is not exactly 64 bytes.
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
+    pub const fn from_bytes(bytes: &[u8]) -> Result<Self> {
         if bytes.len() != 64 {
             return Err(CryptoError::InvalidSignatureLength {
                 expected: 64,

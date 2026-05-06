@@ -1906,7 +1906,7 @@ mod tests {
         circuit.generate_constraints(cs.clone()).unwrap();
         if !cs.is_satisfied().unwrap() {
             let unsatisfied = cs.which_is_unsatisfied().unwrap();
-            panic!("constraints unsatisfied: {:?}", unsatisfied);
+            panic!("constraints unsatisfied: {unsatisfied:?}");
         }
     }
 
@@ -1928,7 +1928,7 @@ mod tests {
         circuit.generate_constraints(cs.clone()).unwrap();
         if !cs.is_satisfied().unwrap() {
             let unsatisfied = cs.which_is_unsatisfied().unwrap();
-            panic!("constraints unsatisfied: {:?}", unsatisfied);
+            panic!("constraints unsatisfied: {unsatisfied:?}");
         }
     }
 
