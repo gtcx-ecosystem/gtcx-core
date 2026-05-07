@@ -18,6 +18,7 @@ import type {
 import { describe, expect, it, vi } from 'vitest';
 
 import { UnifiedComplianceService } from '../src/compliance';
+import type { IMetricsCollector } from '../src/compliance/types';
 import type { IComplianceRepository } from '../src/repositories';
 
 // ============================================================================
@@ -59,6 +60,13 @@ function createMockComplianceRepo(): IComplianceRepository {
   };
 }
 
+function createMockMetricsCollector(): IMetricsCollector {
+  return {
+    counter: vi.fn(),
+    histogram: vi.fn(),
+  };
+}
+
 function createService(
   overrides: {
     storageService?: IStorageService;
@@ -66,6 +74,7 @@ function createService(
     eventEmitter?: ReturnType<typeof createMockEventEmitter>;
     zkpVerifier?: ZkVerifier;
     complianceRepository?: IComplianceRepository;
+    metricsCollector?: IMetricsCollector;
     config?: Record<string, unknown>;
   } = {}
 ) {
@@ -76,6 +85,7 @@ function createService(
       eventEmitter: overrides.eventEmitter as never,
       zkpVerifier: overrides.zkpVerifier,
       complianceRepository: overrides.complianceRepository ?? createMockComplianceRepo(),
+      metricsCollector: overrides.metricsCollector,
     },
     overrides.config ?? {}
   );
@@ -1080,6 +1090,107 @@ describe('Repository DI: IComplianceRepository', () => {
       const result = await service.checkCompliance('entity-1', 'producer');
       expect(result.checked).toBe(false);
       expect(result.records).toEqual([]);
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // metrics emission
+  // --------------------------------------------------------------------------
+
+  describe('metrics emission', () => {
+    it('emits compliance.check counter for asset lot checks', async () => {
+      const metrics = createMockMetricsCollector();
+      const service = createService({ metricsCollector: metrics });
+      const lot = createMockAssetLot();
+
+      await service.checkAssetLotCompliance(lot);
+
+      expect(metrics.counter).toHaveBeenCalledWith(
+        'compliance.compliance.check',
+        1,
+        expect.objectContaining({ entityType: 'asset_lot' })
+      );
+    });
+
+    it('emits compliance.violation counter when asset lot violates license', async () => {
+      const metrics = createMockMetricsCollector();
+      const repo = createMockComplianceRepo();
+      repo.checkLicense = vi.fn().mockResolvedValue({ compliant: false, issue: 'Expired' });
+      const service = createService({ metricsCollector: metrics, complianceRepository: repo });
+      const lot = createMockAssetLot();
+
+      await service.checkAssetLotCompliance(lot);
+
+      expect(metrics.counter).toHaveBeenCalledWith(
+        'compliance.compliance.violation',
+        1,
+        expect.objectContaining({ entityType: 'asset_lot', regulationCode: 'LICENSE-001' })
+      );
+    });
+
+    it('emits compliance.check counter for transaction checks', async () => {
+      const metrics = createMockMetricsCollector();
+      const service = createService({ metricsCollector: metrics });
+      const tx = createMockTransaction();
+
+      await service.checkTransactionCompliance(tx);
+
+      expect(metrics.counter).toHaveBeenCalledWith(
+        'compliance.compliance.check',
+        1,
+        expect.objectContaining({ entityType: 'transaction' })
+      );
+    });
+
+    it('emits compliance.zkproof.verify counter for transactions', async () => {
+      const metrics = createMockMetricsCollector();
+      const service = createService({ metricsCollector: metrics });
+      const tx = createMockTransaction();
+
+      await service.checkTransactionCompliance(tx);
+
+      expect(metrics.counter).toHaveBeenCalledWith(
+        'compliance.compliance.zkproof.verify',
+        1,
+        expect.objectContaining({ entityType: 'transaction' })
+      );
+    });
+
+    it('emits compliance.report.generate counter for report generation', async () => {
+      const metrics = createMockMetricsCollector();
+      const service = createService({ metricsCollector: metrics });
+
+      await service.generateComplianceReport({
+        dateRange: {
+          start: '2025-01-01T00:00:00.000Z',
+          end: '2025-12-31T00:00:00.000Z',
+        },
+        format: 'summary',
+      });
+
+      expect(metrics.counter).toHaveBeenCalledWith(
+        'compliance.compliance.report.generate',
+        1,
+        undefined
+      );
+    });
+
+    it('emits duration histogram after asset lot check', async () => {
+      const metrics = createMockMetricsCollector();
+      const service = createService({ metricsCollector: metrics });
+      const lot = createMockAssetLot();
+
+      await service.checkAssetLotCompliance(lot);
+
+      expect(metrics.histogram).toHaveBeenCalledWith(
+        'compliance.compliance.check.duration_ms',
+        expect.any(Number),
+        expect.objectContaining({ entityType: 'asset_lot' })
+      );
+      const duration = (metrics.histogram as ReturnType<typeof vi.fn>).mock.calls.find(
+        (call) => call[0] === 'compliance.compliance.check.duration_ms'
+      )?.[1] as number;
+      expect(duration).toBeGreaterThanOrEqual(0);
     });
   });
 });

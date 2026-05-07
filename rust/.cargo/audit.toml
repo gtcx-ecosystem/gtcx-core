@@ -1,0 +1,30 @@
+[advisories]
+ignore = [
+    # RUSTSEC-2025-0055: tracing-subscriber ANSI injection
+    # Affected: tracing-subscriber 0.2.25 via ark-relations -> gtcx-zkp
+    # Justification: GTCX does not use tracing-subscriber for user-facing log
+    # output; all logs are structured and processed before display. The arkworks
+    # ecosystem (ark-relations, ark-groth16, etc.) pins this version and an
+    # upgrade requires arkworks 0.5 migration (tracked in #infra-rust-2026).
+    "RUSTSEC-2025-0055",
+
+    # RUSTSEC-2024-0388: derivative unmaintained
+    # Affected: derivative 2.2.0 via ark-ec, ark-ff, ark-poly, ark-r1cs-std
+    # Justification: Transitive dependency of arkworks 0.4.x. The arkworks
+    # team is aware and will address in the 0.5 release cycle.
+    "RUSTSEC-2024-0388",
+
+    # RUSTSEC-2024-0436: paste unmaintained
+    # Affected: paste 1.0.15 via ark-ff
+    # Justification: Same as above — transitive arkworks dependency.
+    "RUSTSEC-2024-0436",
+
+    # RUSTSEC-2026-0097: rand unsoundness with custom logger
+    # Affected: rand 0.8.5 and 0.9.2 via secp256k1, bulletproofs, ark-std
+    # Justification: GTCX does not register a custom logger that interacts
+    # with rand::rng(). The unsoundness requires a specific custom logger
+    # pattern that is not present in the codebase.
+    "RUSTSEC-2026-0097",
+]
+
+

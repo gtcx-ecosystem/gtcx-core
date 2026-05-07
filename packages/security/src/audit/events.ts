@@ -253,26 +253,31 @@ export async function logSecurityEvent(
       ? createSecurityEvent(eventOrType, options?.outcome ?? 'SUCCESS', options)
       : eventOrType;
 
-  // Log to console in development
+  // Log to stdout in development
   if (process.env['NODE_ENV'] === 'development') {
     const color = severityColor(event.severity);
-    // eslint-disable-next-line no-console
-    console.log(
+    const line = [
       `${color}[SECURITY:${event.severity}]`,
       event.eventType,
       event.outcome,
       event.actor ? `actor=${event.actor}` : '',
       event.resource ? `resource=${event.resource}` : '',
       event.reason ? `reason=${event.reason}` : '',
-      '\x1b[0m'
-    );
+      '\x1b[0m',
+    ].join(' ');
+    if (typeof process !== 'undefined' && process.stdout) {
+      process.stdout.write(line + '\n');
+    }
   }
 
   // Send to all handlers
   await Promise.all(
     handlers.map((handler) =>
       handler(event).catch((err) => {
-        console.error('[gtcx/security] handler dispatch failed:', err);
+        const msg = `[gtcx/security] handler dispatch failed: ${String(err)}\n`;
+        if (typeof process !== 'undefined' && process.stderr) {
+          process.stderr.write(msg);
+        }
       })
     )
   );

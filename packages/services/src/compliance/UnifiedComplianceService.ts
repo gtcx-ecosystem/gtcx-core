@@ -200,6 +200,7 @@ export class UnifiedComplianceService {
     const correlationId = generateCorrelationId();
     const startTime = Date.now();
     const records: ComplianceRecord[] = [];
+    this.metrics.counter('compliance.check', 1, { entityType: 'asset_lot' });
 
     this.eventEmitter.emit(
       this.eventFactory.compliance(
@@ -226,6 +227,10 @@ export class UnifiedComplianceService {
           frameworks: this.frameworks,
         });
         records.push(record);
+        this.metrics.counter('compliance.violation', 1, {
+          entityType: 'asset_lot',
+          regulationCode: 'LICENSE-001',
+        });
         this.eventEmitter.emit(
           this.eventFactory.compliance(
             'compliance.violation_detected',
@@ -261,6 +266,10 @@ export class UnifiedComplianceService {
           frameworks: this.frameworks,
         });
         records.push(record);
+        this.metrics.counter('compliance.warning', 1, {
+          entityType: 'asset_lot',
+          regulationCode: 'ENV-001',
+        });
         this.eventEmitter.emit(
           this.eventFactory.compliance(
             'compliance.warning_issued',
@@ -309,7 +318,7 @@ export class UnifiedComplianceService {
         this.eventFactory
       );
 
-      return buildComplianceResult(
+      const result = buildComplianceResult(
         records,
         assetLot.id,
         'asset_lot',
@@ -318,6 +327,10 @@ export class UnifiedComplianceService {
         this.eventEmitter,
         this.eventFactory
       );
+      this.metrics.histogram('compliance.check.duration_ms', Date.now() - startTime, {
+        entityType: 'asset_lot',
+      });
+      return result;
     } catch (error) {
       throw new ComplianceServiceError('Failed to check asset lot compliance', {
         cause: toErrorCause(error),
@@ -333,6 +346,7 @@ export class UnifiedComplianceService {
     const correlationId = generateCorrelationId();
     const startTime = Date.now();
     const records: ComplianceRecord[] = [];
+    this.metrics.counter('compliance.check', 1, { entityType: 'transaction' });
 
     this.eventEmitter.emit(
       this.eventFactory.compliance(
@@ -361,6 +375,10 @@ export class UnifiedComplianceService {
           frameworks: this.frameworks,
         });
         records.push(record);
+        this.metrics.counter('compliance.violation', 1, {
+          entityType: 'transaction',
+          regulationCode: 'TRADE-001',
+        });
         this.eventEmitter.emit(
           this.eventFactory.compliance(
             'compliance.violation_detected',
@@ -413,8 +431,9 @@ export class UnifiedComplianceService {
         this.eventEmitter,
         this.eventFactory
       );
+      this.metrics.counter('compliance.zkproof.verify', 1, { entityType: 'transaction' });
 
-      return buildComplianceResult(
+      const result = buildComplianceResult(
         records,
         transaction.id,
         'transaction',
@@ -423,6 +442,10 @@ export class UnifiedComplianceService {
         this.eventEmitter,
         this.eventFactory
       );
+      this.metrics.histogram('compliance.check.duration_ms', Date.now() - startTime, {
+        entityType: 'transaction',
+      });
+      return result;
     } catch (error) {
       throw new ComplianceServiceError('Failed to check transaction compliance', {
         cause: toErrorCause(error),
@@ -435,6 +458,7 @@ export class UnifiedComplianceService {
   // ==========================================================================
 
   async generateComplianceReport(options: unknown): Promise<ComplianceReport> {
+    this.metrics.counter('compliance.report.generate', 1);
     const optionsResult = safeParse(ComplianceReportOptionsSchema, options);
     if (!optionsResult.success) {
       const messages = optionsResult.error.errors.map((issue) => issue.message);

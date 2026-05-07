@@ -1,0 +1,27 @@
+name: 'GTCX CodeQL Configuration'
+
+paths:
+  - packages
+  - rust
+paths-ignore:
+  - packages/**/dist
+  - packages/**/node_modules
+  - packages/**/tests
+  - rust/target
+  - node_modules
+
+queries:
+  - uses: security-extended
+  - uses: security-and-quality
+
+query-filters:
+  # Exclude known-noisy rules for internal-only / framework code
+  - exclude:
+      id: js/missing-rate-limiting
+      description: 'Rate limiting is handled at the API gateway / ingress layer, not in library code'
+  - exclude:
+      id: js/unsafe-dynamic-method-access
+      description: 'Dynamic method access is intentional in plugin architecture'
+  - exclude:
+      id: ts/unsafe-assignment-from-any
+      description: 'Stricter any budget gate handles this in CI (see tools/check-governance.mjs)'

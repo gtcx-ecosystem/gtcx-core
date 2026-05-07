@@ -22,7 +22,7 @@ import {
   createAuditTrail,
 } from '../src/audit/events';
 import type { SecurityEvent } from '../src/audit/events';
-import { SecurityLogger } from '../src/audit/logger';
+import { SecurityLogger, SecurityLoggerError } from '../src/audit/logger';
 import { Permissions, hasPermission, expandPermissions } from '../src/auth/permissions';
 import {
   isSessionValid,
@@ -1062,7 +1062,7 @@ describe('@gtcx/security/audit', () => {
     });
 
     it('should handle handler errors gracefully', async () => {
-      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const errorSpy = vi.spyOn(process.stderr, 'write').mockImplementation(() => true);
 
       const badHandler = async () => {
         throw new Error('Handler crash');
@@ -1217,6 +1217,50 @@ describe('@gtcx/security/audit', () => {
       await logger.tamperDetected('data-001', 'GEOTAG', 'hash mismatch');
       expect(captured.length).toBe(5);
       expect(captured[4]!.eventType).toBe('TAMPER_DETECTED');
+    });
+
+    it('should throw SecurityLoggerError in strictMode with no handlers', async () => {
+      const logger = new SecurityLogger({ minSeverity: 'INFO', strictMode: true });
+      // No handler registered
+      await expect(logger.authSuccess('user-001', 'session-001')).rejects.toThrow(
+        SecurityLoggerError
+      );
+      await expect(logger.authSuccess('user-001', 'session-001')).rejects.toThrow(
+        /strictMode but no log handler is registered/
+      );
+    });
+
+    it('should allow logging in strictMode once a handler is added', async () => {
+      const captured: SecurityEvent[] = [];
+      const logger = new SecurityLogger({ minSeverity: 'INFO', strictMode: true });
+      logger.addHandler(async (event) => captured.push(event));
+
+      await logger.authSuccess('user-001', 'session-001');
+      expect(captured.length).toBe(1);
+    });
+
+    it('should allow logging in strictMode once a batch handler is added', async () => {
+      const batches: SecurityEvent[][] = [];
+      const logger = new SecurityLogger({ minSeverity: 'INFO', strictMode: true, batchSize: 1 });
+      logger.addBatchHandler(async (events) => batches.push(events));
+
+      await logger.authSuccess('user-001', 'session-001');
+      expect(batches.length).toBe(1);
+    });
+
+    it('should not throw in non-strictMode with no handlers', async () => {
+      const logger = new SecurityLogger({ minSeverity: 'INFO', strictMode: false });
+      // No handler registered, but strictMode is off — should silently drop
+      await expect(logger.authSuccess('user-001', 'session-001')).resolves.toBeUndefined();
+    });
+
+    it('should default strictMode to false when NODE_ENV is not production', () => {
+      const originalEnv = process.env['NODE_ENV'];
+      process.env['NODE_ENV'] = 'development';
+      // Creating a logger without handlers should not throw in development
+      new SecurityLogger({ minSeverity: 'INFO' });
+      process.env['NODE_ENV'] = originalEnv;
+      expect(true).toBe(true);
     });
   });
 

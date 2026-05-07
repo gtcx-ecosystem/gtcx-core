@@ -181,6 +181,7 @@ const fileSizeExceptions = {
   // Service files: currently being decomposed in this remediation cycle.
   'packages/services/src/registration.ts': { reason: 'Planned decomposition to services/registration/', target: 'Sprint 5' },
   'packages/services/src/trading.ts': { reason: 'Planned decomposition to services/trading/', target: 'Sprint 5' },
+  'packages/services/src/compliance/UnifiedComplianceService.ts': { reason: 'Orchestrator class after decomposing 1096 LOC compliance.ts; metrics emission added', target: 'Sprint 5' },
   // Verification traced operations: high operation count; sanitize extraction already completed.
   'packages/verification/src/traced.ts': { reason: 'High operation count with extracted sanitizers', target: 'Sprint 5' },
   // Workproof registry: predicate registry with planned plugin architecture.

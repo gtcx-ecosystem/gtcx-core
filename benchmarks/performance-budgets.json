@@ -16,19 +16,20 @@
     "zkp.schnorr_identity_verify_ms": "milliseconds"
   },
   "metrics": {
-    "ed25519.key_generation_us": 48,
-    "ed25519.sign_us": 78,
-    "ed25519.verify_us": 58,
-    "ed25519.roundtrip_us": 90,
-    "hash.sha256_256b_ns": 1815,
-    "hash.sha512_256b_ns": 1866,
-    "hash.blake3_256b_ns": 520,
-    "zkp.groth16_gci_prove_ms": 5000,
-    "zkp.groth16_gci_verify_ms": 100,
-    "zkp.bulletproofs_amount_range_prove_ms": 2000,
-    "zkp.bulletproofs_amount_range_verify_ms": 50,
-    "zkp.schnorr_identity_prove_ms": 200,
-    "zkp.schnorr_identity_verify_ms": 20
+    "ed25519.key_generation_us": 40,
+    "ed25519.sign_us": 40,
+    "ed25519.verify_us": 55,
+    "ed25519.roundtrip_us": 95,
+    "hash.sha256_256b_ns": 1500,
+    "hash.sha512_256b_ns": 1200,
+    "hash.blake3_256b_ns": 500,
+    "zkp.groth16_gci_prove_ms": 350,
+    "zkp.groth16_gci_verify_ms": 15,
+    "zkp.bulletproofs_amount_range_prove_ms": 5,
+    "zkp.bulletproofs_amount_range_verify_ms": 2,
+    "zkp.schnorr_identity_prove_ms": 1,
+    "zkp.schnorr_identity_verify_ms": 1,
+    "compliance.report_generate_1000records_ms": 100
   },
   "trend": {
     "windowSize": 5,

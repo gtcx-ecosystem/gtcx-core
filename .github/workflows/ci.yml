@@ -178,6 +178,18 @@ jobs:
           done
           echo "All crates enforce deny(unsafe_code)"
 
+      - name: Install cargo-deny
+        run: cargo install cargo-deny --locked
+
+      - name: Run cargo-deny audit
+        run: cargo deny check
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit --locked
+
+      - name: Run cargo audit
+        run: cargo audit
+
       - name: Rust tests
         run: cargo test --workspace --lib
 
@@ -214,10 +226,10 @@ jobs:
         uses: github/codeql-action/init@v4
         with:
           languages: javascript-typescript
+          config-file: ./.github/codeql/codeql-config.yml
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4
-        continue-on-error: true
         with:
           category: '/language:javascript-typescript'
 
@@ -250,7 +262,6 @@ jobs:
       - name: Upload Trivy scan results
         uses: github/codeql-action/upload-sarif@v4
         if: always()
-        continue-on-error: true
         with:
           sarif_file: 'trivy-results.sarif'
 

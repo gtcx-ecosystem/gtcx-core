@@ -91,7 +91,7 @@ impl PrivateKey {
     ///
     /// # Errors
     ///
-    /// Returns [`CryptoError::InvalidKeyLength`] if bytes is not 32 bytes.
+    /// Returns [`crate::CryptoError::InvalidKeyLength`] if bytes is not 32 bytes.
     ///
     /// # Example
     ///
@@ -159,7 +159,7 @@ impl PublicKey {
     ///
     /// # Errors
     ///
-    /// Returns [`CryptoError::InvalidKeyLength`] if bytes is not 32 bytes.
+    /// Returns [`crate::CryptoError::InvalidKeyLength`] if bytes is not 32 bytes.
     pub const fn from_bytes(bytes: &[u8]) -> Result<Self> {
         if bytes.len() != 32 {
             return Err(CryptoError::InvalidKeyLength {

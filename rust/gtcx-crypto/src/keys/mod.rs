@@ -106,7 +106,7 @@ pub fn generate_keypair_struct() -> KeyPair {
 ///
 /// # Errors
 ///
-/// Returns [`CryptoError::InvalidKeyLength`] if derivation produces invalid key material.
+/// Returns [`crate::CryptoError::InvalidKeyLength`] if derivation produces invalid key material.
 #[instrument(skip(parent), fields(index = index))]
 pub fn derive_child_key(parent: &PrivateKey, index: u32) -> crate::Result<PrivateKey> {
     let context = format!("GTCX-2026 child key derivation index {index}");
@@ -141,7 +141,7 @@ pub fn derive_child_key(parent: &PrivateKey, index: u32) -> crate::Result<Privat
 ///
 /// # Errors
 ///
-/// Returns [`CryptoError::InvalidKeyLength`] if derivation produces invalid key material.
+/// Returns [`crate::CryptoError::InvalidKeyLength`] if derivation produces invalid key material.
 #[instrument(skip(master), fields(purpose = purpose))]
 pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> crate::Result<PrivateKey> {
     let context = format!("GTCX-2026 purpose key: {purpose}");
@@ -175,7 +175,7 @@ pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> crate::Result<P
 ///
 /// # Errors
 ///
-/// Returns [`CryptoError::InvalidKeyLength`] if cloning or derivation produces invalid key material.
+/// Returns [`crate::CryptoError::InvalidKeyLength`] if cloning or derivation produces invalid key material.
 #[instrument(skip(master), fields(path_len = path.len()))]
 pub fn derive_path(master: &PrivateKey, path: &[u32]) -> crate::Result<PrivateKey> {
     let mut current = PrivateKey::from_bytes(master.as_bytes())?;

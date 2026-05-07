@@ -85,6 +85,29 @@ Do not:
 - Skip CI gates (`--no-verify`)
 - Force push to `main`
 
+## Dependency Management (Dependabot)
+
+### SLA
+
+| Severity                       | Review SLA | Merge SLA |
+| ------------------------------ | ---------- | --------- |
+| Security ( Dependabot alerts ) | 72 hours   | 7 days    |
+| Routine (version bumps)        | 2 weeks    | 4 weeks   |
+
+### Process
+
+1. **Review** — Assess changelog, breaking changes, and security impact.
+2. **Test** — Run `pnpm test` and `pnpm build` in the affected workspace.
+3. **Group** — Prefer grouped updates (e.g., `@gtcx/*` devDependencies) to reduce noise.
+4. **Merge** — Only after all CI gates pass; never force-merge a Dependabot PR.
+
+### Cleanup
+
+Before each GA release, ensure:
+
+- All open Dependabot security PRs are merged or explicitly deferred with a documented justification.
+- No stale Dependabot branches remain open (> 30 days).
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the MIT License.

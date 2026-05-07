@@ -190,6 +190,51 @@ checkWorkflowCommands(releaseRaw, 'Release workflow', [
   'pnpm release:ga:evidence:check',
 ]);
 
+// ---------------------------------------------------------------------------
+// Any-annotation budget gate
+// ---------------------------------------------------------------------------
+
+const ANY_BUDGET = 40;
+let anyCount = 0;
+
+function countAnyAnnotations() {
+  const srcDirs = fs.readdirSync(path.join(rootDir, 'packages'))
+    .filter((d) => fs.statSync(path.join(rootDir, 'packages', d)).isDirectory())
+    .map((d) => path.join(rootDir, 'packages', d, 'src'));
+
+  for (const srcDir of srcDirs) {
+    if (!fs.existsSync(srcDir)) continue;
+    const files = fs.readdirSync(srcDir, { recursive: true })
+      .filter((f) => typeof f === 'string' && f.endsWith('.ts'))
+      .map((f) => path.join(srcDir, f));
+
+    for (const file of files) {
+      const text = readText(file);
+      // Count : any and as any (excluding comments)
+      const lines = text.split('\n');
+      for (const line of lines) {
+        const code = line.replace(/\/\/.*$/, '');
+        if (/:\s*any\b/.test(code) || /\bas\s+any\b/.test(code)) {
+          anyCount++;
+        }
+      }
+    }
+  }
+}
+
+countAnyAnnotations();
+
+if (anyCount > ANY_BUDGET) {
+  failures.push(
+    `Any-annotation budget exceeded: ${anyCount} > ${ANY_BUDGET}. ` +
+      'Reduce explicit any usage or document justification in an ADR.'
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Result
+// ---------------------------------------------------------------------------
+
 if (failures.length > 0) {
   console.error('Governance policy check failed:\n');
   for (const failure of failures) {
@@ -199,5 +244,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `Governance policy check passed (${requiredScripts.length} scripts, ${requiredCodeownersEntries.length} CODEOWNERS entries, 2 workflows).`
+  `Governance policy check passed (${requiredScripts.length} scripts, ${requiredCodeownersEntries.length} CODEOWNERS entries, 2 workflows, any-budget ${anyCount}/${ANY_BUDGET}).`
 );

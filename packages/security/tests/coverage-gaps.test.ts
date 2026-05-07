@@ -38,7 +38,7 @@ import {
 } from '../src/offline/types';
 import { createPaginatedSchema, createApiResponseSchema } from '../src/validation/schemas';
 
-describe('logSecurityEvent — development console output', () => {
+describe('logSecurityEvent — development stdout output', () => {
   const originalEnv = process.env['NODE_ENV'];
 
   afterEach(() => {
@@ -46,82 +46,82 @@ describe('logSecurityEvent — development console output', () => {
     clearSecurityHandlers();
   });
 
-  it('should log to console in development mode', async () => {
+  it('should log to stdout in development mode', async () => {
     process.env['NODE_ENV'] = 'development';
-    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
 
     await logSecurityEvent('AUTH_SUCCESS', { outcome: 'SUCCESS' });
 
-    expect(consoleSpy).toHaveBeenCalled();
-    const logArgs = consoleSpy.mock.calls[0]!.join(' ');
+    expect(stdoutSpy).toHaveBeenCalled();
+    const logArgs = stdoutSpy.mock.calls[0]![0] as string;
     expect(logArgs).toContain('SECURITY');
     expect(logArgs).toContain('AUTH_SUCCESS');
-    consoleSpy.mockRestore();
+    stdoutSpy.mockRestore();
   });
 
   it('should log CRITICAL severity with red color', async () => {
     process.env['NODE_ENV'] = 'development';
-    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
 
     await logSecurityEvent('TAMPER_DETECTED', {
       outcome: 'BLOCKED',
       severity: 'CRITICAL',
     });
 
-    expect(consoleSpy).toHaveBeenCalled();
-    const logArgs = consoleSpy.mock.calls[0]![0] as string;
+    expect(stdoutSpy).toHaveBeenCalled();
+    const logArgs = stdoutSpy.mock.calls[0]![0] as string;
     expect(logArgs).toContain('\x1b[31m'); // Red
-    consoleSpy.mockRestore();
+    stdoutSpy.mockRestore();
   });
 
   it('should log HIGH severity with yellow color', async () => {
     process.env['NODE_ENV'] = 'development';
-    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
 
     await logSecurityEvent('DATA_DELETED', {
       outcome: 'SUCCESS',
       severity: 'HIGH',
     });
 
-    expect(consoleSpy).toHaveBeenCalled();
-    const logArgs = consoleSpy.mock.calls[0]![0] as string;
+    expect(stdoutSpy).toHaveBeenCalled();
+    const logArgs = stdoutSpy.mock.calls[0]![0] as string;
     expect(logArgs).toContain('\x1b[33m'); // Yellow
-    consoleSpy.mockRestore();
+    stdoutSpy.mockRestore();
   });
 
   it('should log WARN severity with magenta color', async () => {
     process.env['NODE_ENV'] = 'development';
-    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
 
     await logSecurityEvent('AUTH_FAILURE', {
       outcome: 'FAILURE',
       severity: 'WARN',
     });
 
-    expect(consoleSpy).toHaveBeenCalled();
-    const logArgs = consoleSpy.mock.calls[0]![0] as string;
+    expect(stdoutSpy).toHaveBeenCalled();
+    const logArgs = stdoutSpy.mock.calls[0]![0] as string;
     expect(logArgs).toContain('\x1b[35m'); // Magenta
-    consoleSpy.mockRestore();
+    stdoutSpy.mockRestore();
   });
 
   it('should log INFO severity with cyan color', async () => {
     process.env['NODE_ENV'] = 'development';
-    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
 
     await logSecurityEvent('AUTH_SUCCESS', {
       outcome: 'SUCCESS',
       severity: 'INFO',
     });
 
-    expect(consoleSpy).toHaveBeenCalled();
-    const logArgs = consoleSpy.mock.calls[0]![0] as string;
+    expect(stdoutSpy).toHaveBeenCalled();
+    const logArgs = stdoutSpy.mock.calls[0]![0] as string;
     expect(logArgs).toContain('\x1b[36m'); // Cyan
-    consoleSpy.mockRestore();
+    stdoutSpy.mockRestore();
   });
 
   it('should include actor and resource when present', async () => {
     process.env['NODE_ENV'] = 'development';
-    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
 
     await logSecurityEvent('AUTH_SUCCESS', {
       outcome: 'SUCCESS',
@@ -130,15 +130,15 @@ describe('logSecurityEvent — development console output', () => {
       reason: 'VALID_TOKEN',
     });
 
-    const logArgs = consoleSpy.mock.calls[0]!.join(' ');
+    const logArgs = stdoutSpy.mock.calls[0]![0] as string;
     expect(logArgs).toContain('actor=user-123');
     expect(logArgs).toContain('resource=credential-456');
     expect(logArgs).toContain('reason=VALID_TOKEN');
-    consoleSpy.mockRestore();
+    stdoutSpy.mockRestore();
   });
 
   it('should handle handler dispatch errors gracefully', async () => {
-    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const stderrSpy = vi.spyOn(process.stderr, 'write').mockImplementation(() => true);
 
     registerSecurityHandler(async () => {
       throw new Error('handler failed');
@@ -146,70 +146,81 @@ describe('logSecurityEvent — development console output', () => {
 
     await logSecurityEvent('AUTH_SUCCESS', { outcome: 'SUCCESS' });
 
-    expect(errorSpy).toHaveBeenCalledWith(
-      expect.stringContaining('handler dispatch failed'),
-      expect.any(Error)
-    );
-    errorSpy.mockRestore();
+    expect(stderrSpy).toHaveBeenCalled();
+    const written = stderrSpy.mock.calls[0]![0] as string;
+    expect(written).toContain('handler dispatch failed');
+    expect(written).toContain('handler failed');
+    stderrSpy.mockRestore();
   });
 });
 
 // --- audit/logger.ts — consoleLogHandler, jsonLogHandler ---
 
 describe('consoleLogHandler', () => {
-  it('should use console.error for CRITICAL severity', () => {
-    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+  it('should write CRITICAL severity to stderr', () => {
+    const stderrSpy = vi.spyOn(process.stderr, 'write').mockImplementation(() => true);
     const event = createSecurityEvent('TAMPER_DETECTED', 'BLOCKED', { severity: 'CRITICAL' });
 
     consoleLogHandler(event);
 
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining('CRITICAL'), event);
-    spy.mockRestore();
+    expect(stderrSpy).toHaveBeenCalledTimes(1);
+    const written = stderrSpy.mock.calls[0]![0] as string;
+    expect(written).toContain('CRITICAL');
+    expect(written).toContain('TAMPER_DETECTED');
+    expect(written).toContain('BLOCKED');
+    stderrSpy.mockRestore();
   });
 
-  it('should use console.warn for HIGH severity', () => {
-    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  it('should write HIGH severity to stdout', () => {
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
     const event = createSecurityEvent('DATA_DELETED', 'SUCCESS', { severity: 'HIGH' });
 
     consoleLogHandler(event);
 
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining('HIGH'), event);
-    spy.mockRestore();
+    expect(stdoutSpy).toHaveBeenCalledTimes(1);
+    const written = stdoutSpy.mock.calls[0]![0] as string;
+    expect(written).toContain('HIGH');
+    stdoutSpy.mockRestore();
   });
 
-  it('should use console.warn for WARN severity', () => {
-    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  it('should write WARN severity to stdout', () => {
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
     const event = createSecurityEvent('AUTH_FAILURE', 'FAILURE', { severity: 'WARN' });
 
     consoleLogHandler(event);
 
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining('WARN'), event);
-    spy.mockRestore();
+    expect(stdoutSpy).toHaveBeenCalledTimes(1);
+    const written = stdoutSpy.mock.calls[0]![0] as string;
+    expect(written).toContain('WARN');
+    stdoutSpy.mockRestore();
   });
 
-  it('should use console.log for INFO severity', () => {
-    const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
+  it('should write INFO severity to stdout', () => {
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
     const event = createSecurityEvent('AUTH_SUCCESS', 'SUCCESS', { severity: 'INFO' });
 
     consoleLogHandler(event);
 
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining('INFO'), event);
-    spy.mockRestore();
+    expect(stdoutSpy).toHaveBeenCalledTimes(1);
+    const written = stdoutSpy.mock.calls[0]![0] as string;
+    expect(written).toContain('INFO');
+    stdoutSpy.mockRestore();
   });
 });
 
 describe('jsonLogHandler', () => {
-  it('should output JSON-formatted event', () => {
-    const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
+  it('should output JSON-formatted event to stdout', () => {
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
     const event = createSecurityEvent('AUTH_SUCCESS', 'SUCCESS');
 
     jsonLogHandler(event);
 
-    const output = spy.mock.calls[0]![0] as string;
+    expect(stdoutSpy).toHaveBeenCalledTimes(1);
+    const output = stdoutSpy.mock.calls[0]![0] as string;
     const parsed = JSON.parse(output);
     expect(parsed.eventType).toBe('AUTH_SUCCESS');
     expect(parsed.outcome).toBe('SUCCESS');
-    spy.mockRestore();
+    stdoutSpy.mockRestore();
   });
 });
 

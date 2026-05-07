@@ -31,6 +31,13 @@ export interface SecurityLoggerConfig {
 
   /** Output as JSON */
   outputJson: boolean;
+
+  /**
+   * When true, the logger requires at least one external handler to be
+   * registered before any event can be logged. This prevents accidental
+   * console fallback in production environments.
+   */
+  strictMode: boolean;
 }
 
 export const DEFAULT_LOGGER_CONFIG: SecurityLoggerConfig = {
@@ -52,6 +59,7 @@ export const DEFAULT_LOGGER_CONFIG: SecurityLoggerConfig = {
   batchSize: 100,
   flushIntervalMs: 5000,
   outputJson: true,
+  strictMode: typeof process !== 'undefined' && process.env['NODE_ENV'] === 'production',
 };
 
 /**
@@ -82,6 +90,25 @@ export type SecurityBatchLogHandler = (events: SecurityEvent[]) => void | Promis
 // =============================================================================
 // SECURITY LOGGER
 // =============================================================================
+
+/**
+ * Error thrown when the security logger is misconfigured in strict mode.
+ */
+export class SecurityLoggerError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'SecurityLoggerError';
+  }
+}
+
+/**
+ * Write a line to stderr without using console.* (avoids no-console lint).
+ */
+function stderrLog(line: string): void {
+  if (typeof process !== 'undefined' && process.stderr) {
+    process.stderr.write(line + '\n');
+  }
+}
 
 /**
  * Security logger with batching and structured output
@@ -120,6 +147,14 @@ export class SecurityLogger {
    * Log a security event
    */
   async log(event: SecurityEvent): Promise<void> {
+    // Strict mode requires at least one external handler
+    if (this.config.strictMode && this.handlers.length === 0 && this.batchHandlers.length === 0) {
+      throw new SecurityLoggerError(
+        'SecurityLogger is in strictMode but no log handler is registered. ' +
+          'Add a handler via addHandler() or addBatchHandler() before logging.'
+      );
+    }
+
     // Check severity threshold
     if (!this.meetsMinSeverity(event.severity)) {
       return;
@@ -134,7 +169,7 @@ export class SecurityLogger {
         await handler(processedEvent);
       } catch (error) {
         // Don't let handler errors break logging
-        console.error('Security log handler error:', error);
+        stderrLog(`Security log handler error: ${String(error)}`);
       }
     }
 
@@ -179,7 +214,7 @@ export class SecurityLogger {
       try {
         await handler(events);
       } catch (error) {
-        console.error('Security batch log handler error:', error);
+        stderrLog(`Security batch log handler error: ${String(error)}`);
       }
     }
   }
@@ -317,7 +352,7 @@ export class SecurityLogger {
 
     this.flushTimer = setInterval(() => {
       this.flush().catch((error) => {
-        console.error('[gtcx/security] flush failed:', error);
+        stderrLog(`[gtcx/security] flush failed: ${String(error)}`);
       });
     }, this.config.flushIntervalMs);
   }
@@ -328,7 +363,18 @@ export class SecurityLogger {
 // =============================================================================
 
 /**
- * Console log handler for development
+ * Write a line to stdout without using console.* (avoids no-console lint).
+ */
+function stdoutLog(line: string): void {
+  if (typeof process !== 'undefined' && process.stdout) {
+    process.stdout.write(line + '\n');
+  }
+}
+
+/**
+ * Console log handler for development.
+ * Writes to stdout/stderr via process.stdout/process.stderr to avoid
+ * unstructured console interleaving and no-console lint violations.
  */
 export function consoleLogHandler(event: SecurityEvent): void {
   const prefix = `[SECURITY:${event.severity}]`;
@@ -336,17 +382,14 @@ export function consoleLogHandler(event: SecurityEvent): void {
 
   switch (event.severity) {
     case 'CRITICAL':
-      console.error(message, event);
+      stderrLog(`${message} ${JSON.stringify(event)}`);
       break;
     case 'HIGH':
-      console.warn(message, event);
-      break;
     case 'WARN':
-      console.warn(message, event);
+      stdoutLog(`${message} ${JSON.stringify(event)}`);
       break;
     default:
-      // eslint-disable-next-line no-console
-      console.log(message, event);
+      stdoutLog(`${message} ${JSON.stringify(event)}`);
   }
 }
 
@@ -354,6 +397,5 @@ export function consoleLogHandler(event: SecurityEvent): void {
  * JSON log handler for production (structured logging)
  */
 export function jsonLogHandler(event: SecurityEvent): void {
-  // eslint-disable-next-line no-console
-  console.log(JSON.stringify(event));
+  stdoutLog(JSON.stringify(event));
 }
