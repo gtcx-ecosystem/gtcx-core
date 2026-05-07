@@ -15,13 +15,14 @@
  */
 
 import { hash256 } from '@gtcx/crypto';
+
 import type { CanonicalRequestContext, CanonicalRequestString } from './types';
 import {
+  buildSignedHeaderNames,
+  canonicalizeBody,
+  canonicalizeHeaders,
   canonicalizePath,
   canonicalizeQueryString,
-  canonicalizeHeaders,
-  canonicalizeBody,
-  buildSignedHeaderNames,
 } from './normalize';
 
 /** Build the canonical request string and its hash. */
