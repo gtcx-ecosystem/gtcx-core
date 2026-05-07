@@ -47,16 +47,16 @@ import {
   toErrorCause,
 } from './trading/errors';
 import {
+  generateTradeProof,
+  buildTransaction,
+  generateTransactionId,
+} from './trading/execution';
+import {
   createUnknownTrader,
   getAvailableAssetLots,
   getTraderInfo,
   getTransactionHistory,
 } from './trading/helpers';
-import {
-  generateTradeProof,
-  buildTransaction,
-  generateTransactionId,
-} from './trading/execution';
 import {
   getFormPriceAdjustment,
   calculatePurityAdjustment,

@@ -3,6 +3,7 @@
  */
 
 import {
+  DomainEventFactory,
   TradeRequestSchema,
   safeParse,
   type IDomainEventEmitter,
@@ -10,9 +11,8 @@ import {
   type TradeRequestInput,
 } from '@gtcx/domain';
 
-import { DomainEventFactory } from '@gtcx/domain';
-import { LicenseValidationError, ComplianceError, MaxValueError, ValidationError } from './errors';
 import type { TradingConfig } from './config';
+import { LicenseValidationError, ComplianceError, MaxValueError, ValidationError } from './errors';
 
 /** Validate and parse a trade request. Emits trade_failed on invalid input. */
 export function validateTradeRequest(

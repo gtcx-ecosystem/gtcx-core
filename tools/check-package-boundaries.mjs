@@ -179,8 +179,7 @@ const fileSizeExceptions = {
   'packages/security/src/offline/secure-storage.ts': { reason: 'Complex state machine', target: 'Sprint 6' },
   'packages/security/src/offline/storage.ts': { reason: 'Complex state machine', target: 'Sprint 6' },
   // Service files: currently being decomposed in this remediation cycle.
-  // registration.ts decomposed in Sprint 6 — now under 500 LOC
-  'packages/services/src/trading.ts': { reason: 'Planned decomposition to services/trading/', target: 'Sprint 5' },
+  // registration.ts and trading.ts decomposed in Sprint 6 — now under 500 LOC
   // UnifiedComplianceService decomposed in Sprint 6 — now under 500 LOC
   // Verification traced operations: high operation count; sanitize extraction already completed.
   'packages/verification/src/traced.ts': { reason: 'High operation count with extracted sanitizers', target: 'Sprint 5' },
