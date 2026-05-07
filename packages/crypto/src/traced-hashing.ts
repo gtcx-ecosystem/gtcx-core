@@ -149,6 +149,13 @@ export const tracedGenerateSalt = traced(
   }
 );
 
+export function sanitizeCombineHashesOutput(output: unknown): Record<string, unknown> {
+  const args = output as string[];
+  return {
+    hashCount: args.length,
+  };
+}
+
 /**
  * Combine multiple hashes into one (traced)
  */
@@ -159,11 +166,6 @@ export const tracedCombineHashes = traced(
     category: 'crypto',
     logInput: false,
     logOutput: false,
-    sanitizeOutput: (input: unknown) => {
-      const args = input as string[];
-      return {
-        hashCount: args.length,
-      };
-    },
+    sanitizeOutput: sanitizeCombineHashesOutput,
   }
 );

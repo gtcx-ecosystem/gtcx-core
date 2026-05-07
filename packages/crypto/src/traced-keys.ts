@@ -27,6 +27,14 @@ const cryptoLog = createCategoryLogger('crypto');
  * Generates a new Ed25519 or secp256k1 key pair. The operation is logged
  * but private keys are NEVER included in logs.
  */
+export function sanitizeGenerateKeyPairOutput(output: unknown): Record<string, unknown> {
+  const result = output as KeyPairResult;
+  return {
+    algorithm: result.algorithm,
+    publicKeyLength: result.publicKey.length,
+  };
+}
+
 export const tracedGenerateKeyPair = traced(
   (algorithm: KeyAlgorithm = 'Ed25519'): KeyPairResult => {
     return baseGenerateKeyPair(algorithm);
@@ -36,19 +44,20 @@ export const tracedGenerateKeyPair = traced(
     category: 'crypto',
     logInput: true,
     logOutput: false, // Never log key material
-    sanitizeOutput: (output: unknown) => {
-      const result = output as KeyPairResult;
-      return {
-        algorithm: result.algorithm,
-        publicKeyLength: result.publicKey.length,
-      };
-    },
+    sanitizeOutput: sanitizeGenerateKeyPairOutput,
   }
 );
 
 /**
  * Derive public key from private key (traced)
  */
+export function sanitizeDerivePublicKeyOutput(output: unknown): Record<string, unknown> {
+  const publicKey = output as string;
+  return {
+    publicKeyLength: publicKey.length,
+  };
+}
+
 export const tracedDerivePublicKey = traced(
   (privateKeyHex: string, algorithm: KeyAlgorithm = 'Ed25519'): string => {
     return baseDerivePublicKey(privateKeyHex, algorithm);
@@ -58,12 +67,7 @@ export const tracedDerivePublicKey = traced(
     category: 'crypto',
     logInput: false, // Never log private keys
     logOutput: false, // Don't log public keys either
-    sanitizeOutput: (output: unknown) => {
-      const publicKey = output as string;
-      return {
-        publicKeyLength: publicKey.length,
-      };
-    },
+    sanitizeOutput: sanitizeDerivePublicKeyOutput,
   }
 );
 
@@ -100,6 +104,13 @@ export const tracedIsValidPrivateKey = traced(
 /**
  * Generate a key ID from public key (traced)
  */
+export function sanitizeGenerateKeyIdOutput(output: unknown): Record<string, unknown> {
+  const keyId = output as string;
+  return {
+    keyIdPrefix: keyId.slice(0, 8) + '...',
+  };
+}
+
 export const tracedGenerateKeyId = traced(
   (publicKeyHex: string): string => {
     return baseGenerateKeyId(publicKeyHex);
@@ -109,12 +120,7 @@ export const tracedGenerateKeyId = traced(
     category: 'crypto',
     logInput: false,
     logOutput: false,
-    sanitizeOutput: (output: unknown) => {
-      const keyId = output as string;
-      return {
-        keyIdPrefix: keyId.slice(0, 8) + '...',
-      };
-    },
+    sanitizeOutput: sanitizeGenerateKeyIdOutput,
   }
 );
 

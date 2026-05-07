@@ -7,8 +7,7 @@
  * Stub implementation - full version lives in gtcx-intelligence.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface OperationLog<TInput = any, TOutput = any> {
+export interface OperationLog<TInput = unknown, TOutput = unknown> {
   operationName: string;
   type: string;
   category?: string;
@@ -27,46 +26,34 @@ export interface TracedOptions {
   logInput?: boolean;
   logOutput?: boolean;
   metadata?: Record<string, unknown>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  sanitizeInput?: (input: any) => unknown;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  sanitizeOutput?: (output: any) => unknown;
+  sanitizeInput?: (input: unknown) => unknown;
+  sanitizeOutput?: (output: unknown) => unknown;
 }
 
 /**
  * Wrap a function with tracing (no-op stub - returns the function as-is)
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function traced<T extends (...args: any[]) => any>(
-  fn: T,
+export function traced<TArgs extends unknown[], TReturn>(
+  fn: (...args: TArgs) => TReturn,
   _operationName: string,
   _options?: TracedOptions
-): T {
+): (...args: TArgs) => TReturn {
   return fn;
 }
 
 /**
  * Higher-order tracing decorator (no-op stub)
  *
- * Supports two calling patterns:
- * 1. withTrace(fn, name, options) - wraps fn
- * 2. withTrace(fn) - executes fn and returns result
+ * Executes a no-argument function and returns its result.
  */
-export function withTrace<T>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fn: (() => T) | ((...args: any[]) => any),
-  _operationName?: string,
-  _options?: TracedOptions
-): T {
-  return (fn as () => T)();
+export function withTrace<T>(fn: () => T, _operationName?: string, _options?: TracedOptions): T {
+  return fn();
 }
 
 export interface CategoryLogger {
   info(message: string, data?: Record<string, unknown>): void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  warn(message: string, ...args: any[]): void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error(message: string, ...args: any[]): void;
+  warn(message: string, data?: Record<string, unknown>): void;
+  error(message: string, data?: Record<string, unknown>): void;
   debug(message: string, data?: Record<string, unknown>): void;
 }
 
@@ -83,25 +70,12 @@ export function createCategoryLogger(category: string): CategoryLogger {
       ts: new Date().toISOString(),
     });
 
-    switch (level) {
-      case 'debug':
-        console.debug(entry);
-        break;
-      case 'info':
-        console.info(entry);
-        break;
-      case 'warn':
-        console.warn(entry);
-        break;
-      default:
-        console.error(entry);
-        break;
-    }
+    process.stderr.write(entry + '\n');
   };
   return {
     info: (msg, data) => emit('info', msg, data),
     warn: (msg, data) => emit('warn', msg, data),
-    error: (msg, ...args) => emit('error', msg, args.length ? { args } : undefined),
+    error: (msg, data) => emit('error', msg, data),
     debug: (msg, data) => emit('debug', msg, data),
   };
 }

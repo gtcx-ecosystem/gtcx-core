@@ -7,7 +7,7 @@ export default defineConfig({
     index: 'src/index.ts',
     registration: 'src/registration.ts',
     trading: 'src/trading.ts',
-    compliance: 'src/compliance.ts',
+    compliance: 'src/compliance/index.ts',
   },
   external: ['@gtcx/domain'],
 });

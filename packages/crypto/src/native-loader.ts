@@ -64,3 +64,14 @@ export function getNativeCrypto(): NativeCrypto | null {
 export function getBackend(): Backend {
   return getNativeCrypto() ? 'native' : 'js';
 }
+
+/**
+ * Reset the native crypto cache.
+ *
+ * @internal
+ * This is exported solely to support reliable testing of backend selection
+ * and GTCX_REQUIRE_NATIVE enforcement. It should not be used in production.
+ */
+export function resetNativeCryptoCache(): void {
+  cached = undefined;
+}

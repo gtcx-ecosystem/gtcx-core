@@ -6,19 +6,17 @@
  * are used instead.
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-type TraceFn = <T extends (...args: any[]) => any>(
-  fn: T,
+type TraceFn = <TArgs extends unknown[], TReturn>(
+  fn: (...args: TArgs) => TReturn,
   name: string,
   opts?: Record<string, unknown>
-) => T;
+) => (...args: TArgs) => TReturn;
 
 interface CategoryLogger {
-  info(...args: any[]): void;
-  warn(...args: any[]): void;
-  error(...args: any[]): void;
-  debug(...args: any[]): void;
+  info(message: string, data?: Record<string, unknown>): void;
+  warn(message: string, data?: Record<string, unknown>): void;
+  error(message: string, data?: Record<string, unknown>): void;
+  debug(message: string, data?: Record<string, unknown>): void;
 }
 
 type CreateCategoryLoggerFn = (category: string) => CategoryLogger;

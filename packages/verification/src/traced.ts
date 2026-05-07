@@ -97,6 +97,75 @@ export interface CreateProofBundleInput {
 }
 
 // ============================================================================
+// SANITIZER FUNCTIONS
+// Extracted for independent unit testing and to keep traced() calls readable.
+// ============================================================================
+
+export function sanitizeGenerateCertificateInput(input: unknown): Record<string, unknown> {
+  const args = input as GenerateCertificateInput[];
+  const params = args[0];
+  return {
+    type: params?.type,
+    securityLevel: params?.securityLevel,
+    hasAssetData: !!params?.assetData,
+    claimCount: params?.claims?.length ?? 0,
+    // Never log private keys
+    hasPrivateKey: !!params?.privateKey,
+  };
+}
+
+export function sanitizeGenerateCertificateOutput(output: unknown): Record<string, unknown> {
+  const cert = output as Certificate;
+  return {
+    certificateId: cert?.certificateId,
+    type: cert?.type,
+    securityLevel: cert?.securityLevel,
+    issuedAt: cert?.metadata?.issuedAt,
+  };
+}
+
+export function sanitizeVerifyCertificateInput(input: unknown): Record<string, unknown> {
+  const args = input as Certificate[];
+  const cert = args[0];
+  return {
+    certificateId: cert?.certificateId,
+    type: cert?.type,
+    securityLevel: cert?.securityLevel,
+  };
+}
+
+export function sanitizeGenerateQRCodeOutput(output: unknown): Record<string, unknown> {
+  const qr = output as GeneratedQRCode;
+  return {
+    id: qr?.id,
+    type: qr?.data?.type,
+    size: qr?.size,
+  };
+}
+
+export function sanitizeCreateProofBundleInput(input: unknown): Record<string, unknown> {
+  const args = input as CreateProofBundleInput[];
+  const params = args[0];
+  return {
+    type: params?.type,
+    hasLocation: !!params?.location,
+    photoCount: params?.photoHashes?.length ?? 0,
+    hasCertificate: !!params?.certificate,
+    claimCount: params?.claims?.length ?? 0,
+  };
+}
+
+export function sanitizeCreateProofBundleOutput(output: unknown): Record<string, unknown> {
+  const bundle = output as ProofBundle;
+  return {
+    id: bundle?.id,
+    type: bundle?.type,
+    hasCertificate: !!bundle?.certificate,
+    hasQRCode: !!bundle?.qrCode,
+  };
+}
+
+// ============================================================================
 // TRACED CERTIFICATE OPERATIONS
 // ============================================================================
 
@@ -175,27 +244,8 @@ export const tracedGenerateCertificate = traced(
     category: 'verification',
     logInput: true,
     logOutput: true,
-    sanitizeInput: (input: unknown) => {
-      const args = input as GenerateCertificateInput[];
-      const params = args[0];
-      return {
-        type: params?.type,
-        securityLevel: params?.securityLevel,
-        hasAssetData: !!params?.assetData,
-        claimCount: params?.claims?.length ?? 0,
-        // Never log private keys
-        hasPrivateKey: !!params?.privateKey,
-      };
-    },
-    sanitizeOutput: (output: unknown) => {
-      const cert = output as Certificate;
-      return {
-        certificateId: cert?.certificateId,
-        type: cert?.type,
-        securityLevel: cert?.securityLevel,
-        issuedAt: cert?.metadata?.issuedAt,
-      };
-    },
+    sanitizeInput: sanitizeGenerateCertificateInput,
+    sanitizeOutput: sanitizeGenerateCertificateOutput,
   }
 );
 
@@ -278,15 +328,7 @@ export const tracedVerifyCertificate = traced(
     category: 'verification',
     logInput: true,
     logOutput: true,
-    sanitizeInput: (input: unknown) => {
-      const args = input as Certificate[];
-      const cert = args[0];
-      return {
-        certificateId: cert?.certificateId,
-        type: cert?.type,
-        securityLevel: cert?.securityLevel,
-      };
-    },
+    sanitizeInput: sanitizeVerifyCertificateInput,
   }
 );
 
@@ -355,14 +397,7 @@ export const tracedGenerateQRCode = traced(
     category: 'verification',
     logInput: true,
     logOutput: true,
-    sanitizeOutput: (output: unknown) => {
-      const qr = output as GeneratedQRCode;
-      return {
-        id: qr?.id,
-        type: qr?.data?.type,
-        size: qr?.size,
-      };
-    },
+    sanitizeOutput: sanitizeGenerateQRCodeOutput,
   }
 );
 
@@ -436,26 +471,8 @@ export const tracedCreateProofBundle = traced(
     category: 'verification',
     logInput: true,
     logOutput: true,
-    sanitizeInput: (input: unknown) => {
-      const args = input as CreateProofBundleInput[];
-      const params = args[0];
-      return {
-        type: params?.type,
-        hasLocation: !!params?.location,
-        photoCount: params?.photoHashes?.length ?? 0,
-        hasCertificate: !!params?.certificate,
-        claimCount: params?.claims?.length ?? 0,
-      };
-    },
-    sanitizeOutput: (output: unknown) => {
-      const bundle = output as ProofBundle;
-      return {
-        id: bundle?.id,
-        type: bundle?.type,
-        hasCertificate: !!bundle?.certificate,
-        hasQRCode: !!bundle?.qrCode,
-      };
-    },
+    sanitizeInput: sanitizeCreateProofBundleInput,
+    sanitizeOutput: sanitizeCreateProofBundleOutput,
   }
 );
 
@@ -495,11 +512,10 @@ export async function tracedVerificationWorkflow<T>(
     verificationLog.info(`workflow.complete`, { name: workflowName });
     return result;
   } catch (error) {
-    verificationLog.error(
-      `workflow.failed`,
-      error instanceof Error ? error : new Error(String(error)),
-      { name: workflowName }
-    );
+    verificationLog.error(`workflow.failed`, {
+      error: error instanceof Error ? error.message : String(error),
+      name: workflowName,
+    });
     throw error;
   }
 }

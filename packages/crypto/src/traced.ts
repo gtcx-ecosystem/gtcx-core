@@ -141,6 +141,15 @@ export const tracedVerifySignedMessage = traced(
   }
 );
 
+export function sanitizeBatchVerifyOutput(output: unknown): Record<string, unknown> {
+  const results = output as boolean[];
+  return {
+    total: results.length,
+    valid: results.filter(Boolean).length,
+    invalid: results.filter((r) => !r).length,
+  };
+}
+
 /**
  * Batch verify multiple signatures (traced)
  */
@@ -160,14 +169,7 @@ export const tracedBatchVerify = traced(
     logInput: false,
     logOutput: true,
     metadata: { algorithm: 'Ed25519' },
-    sanitizeOutput: (output: unknown) => {
-      const results = output as boolean[];
-      return {
-        total: results.length,
-        valid: results.filter(Boolean).length,
-        invalid: results.filter((r) => !r).length,
-      };
-    },
+    sanitizeOutput: sanitizeBatchVerifyOutput,
   }
 );
 

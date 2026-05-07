@@ -215,11 +215,9 @@ export function createZkpEngine(): ZkProver & ZkVerifier {
  */
 export class NativeZkpEngine implements ZkProver, ZkVerifier {
   readonly supportsVerificationKeys = true;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private native: Record<string, any>;
+  private native: Record<string, unknown>;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(nativeModule: Record<string, any>) {
+  constructor(nativeModule: Record<string, unknown>) {
     this.native = nativeModule;
   }
 

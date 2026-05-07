@@ -166,6 +166,42 @@ for (const [pkgName, files] of sourceFilesByPackage.entries()) {
   }
 }
 
+const MAX_SOURCE_FILE_LINES = 500;
+
+// Files that exceed the limit with documented justification.
+// Each entry must include a reason and a target resolution (e.g., issue number or planned sprint).
+const fileSizeExceptions = {
+  // Type-definition files: inherently large due to exhaustive schema coverage.
+  // Decomposition planned in follow-up architecture sprint.
+  'packages/verification/src/types/index.ts': { reason: 'Exhaustive type definitions', target: 'Sprint 6' },
+  'packages/verification/src/types/schemas.ts': { reason: 'Zod schema definitions', target: 'Sprint 6' },
+  // Security storage: complex state machine with planned extraction to security/storage/.
+  'packages/security/src/offline/secure-storage.ts': { reason: 'Complex state machine', target: 'Sprint 6' },
+  'packages/security/src/offline/storage.ts': { reason: 'Complex state machine', target: 'Sprint 6' },
+  // Service files: currently being decomposed in this remediation cycle.
+  'packages/services/src/registration.ts': { reason: 'Planned decomposition to services/registration/', target: 'Sprint 5' },
+  'packages/services/src/trading.ts': { reason: 'Planned decomposition to services/trading/', target: 'Sprint 5' },
+  // Verification traced operations: high operation count; sanitize extraction already completed.
+  'packages/verification/src/traced.ts': { reason: 'High operation count with extracted sanitizers', target: 'Sprint 5' },
+  // Workproof registry: predicate registry with planned plugin architecture.
+  'packages/workproof/src/predicates/registry.ts': { reason: 'Predicate registry awaiting plugin architecture', target: 'Sprint 6' },
+};
+
+for (const [pkgName, files] of sourceFilesByPackage.entries()) {
+  for (const filePath of files) {
+    const lineCount = fs.readFileSync(filePath, 'utf8').split('\n').length;
+    if (lineCount > MAX_SOURCE_FILE_LINES) {
+      const relFile = toPosix(path.relative(rootDir, filePath));
+      if (fileSizeExceptions[relFile]) {
+        continue;
+      }
+      violations.push(
+        `${relFile} exceeds ${MAX_SOURCE_FILE_LINES} lines (${lineCount})`
+      );
+    }
+  }
+}
+
 if (violations.length > 0) {
   console.error(`Architecture boundary check failed (${violations.length} violation(s)):\n`);
   for (const violation of violations.sort()) {

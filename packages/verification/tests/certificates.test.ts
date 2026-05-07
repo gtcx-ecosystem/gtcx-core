@@ -12,6 +12,8 @@ import {
   isCertificateExpired,
   getCertificateAge,
   getCertificateCommodityType,
+  formatCertificateForDisplay,
+  VerificationError,
   type CreateCertificateInput,
 } from '../src/certificates/generator';
 import type {
@@ -611,5 +613,71 @@ describe('getCertificateCommodityType', () => {
   it('returns undefined for standard certificate without certificateData', () => {
     const cert = makeValidCertificate();
     expect(getCertificateCommodityType(cert)).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// VerificationError
+// ---------------------------------------------------------------------------
+
+describe('VerificationError', () => {
+  it('sets cause when provided in options', () => {
+    const cause = new Error('underlying failure');
+    const err = new VerificationError('verification failed', 'VERIFICATION_FAILED', {}, { cause });
+    expect(err.cause).toBe(cause);
+    expect(err.message).toBe('verification failed');
+    expect(err.name).toBe('VerificationError');
+  });
+
+  it('does not set cause when options are omitted', () => {
+    const err = new VerificationError('verification failed');
+    expect(err.cause).toBeUndefined();
+    expect(err.message).toBe('verification failed');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// createStandardCertificateData — negative paths
+// ---------------------------------------------------------------------------
+
+describe('createStandardCertificateData', () => {
+  it('throws when template is not found', () => {
+    const input = makeValidInput({ templateId: 'nonexistent-template' as any });
+    expect(() => createStandardCertificateData(input)).toThrow(VerificationError);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// createMilitaryGradeCertificateData — negative paths
+// ---------------------------------------------------------------------------
+
+describe('createMilitaryGradeCertificateData', () => {
+  it('throws when template is not found', () => {
+    const input = makeValidInput({ templateId: 'nonexistent-template' as any });
+    expect(() => createMilitaryGradeCertificateData(input)).toThrow(VerificationError);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// formatCertificateForDisplay — military-grade path
+// ---------------------------------------------------------------------------
+
+describe('formatCertificateForDisplay', () => {
+  it('extracts commodity type from military-grade certificate', () => {
+    const milCert = {
+      ...makeValidCertificate({ securityLevel: 'military' }),
+      postQuantumHash: 'pqhash',
+      multiSignature: { ed25519: 'sig' },
+      certificateData: {
+        assetLotData: {
+          commodityType: 'lithium',
+          estimatedWeight: 50,
+          unit: 'kg',
+        },
+      },
+    } as unknown as MilitaryGradeCertificate;
+
+    const display = formatCertificateForDisplay(milCert);
+    expect(display.commodityType).toBe('lithium');
   });
 });

@@ -4,28 +4,22 @@
  * Provides no-op fallbacks so verification doesn't hard-depend on @gtcx/ai.
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-type TraceFn = <T extends (...args: any[]) => any>(
-  fn: T,
+type TraceFn = <TArgs extends unknown[], TReturn>(
+  fn: (...args: TArgs) => TReturn,
   name: string,
   opts?: Record<string, unknown>
-) => T;
+) => (...args: TArgs) => TReturn;
 
-type WithTraceFn = <T>(
-  fn: (() => T) | ((...args: any[]) => any),
-  operationName?: string,
-  options?: Record<string, unknown>
-) => T;
+type WithTraceFn = <T>(fn: () => T, operationName?: string, options?: Record<string, unknown>) => T;
 
 interface CategoryLogger {
-  info(...args: any[]): void;
-  warn(...args: any[]): void;
-  error(...args: any[]): void;
-  debug(...args: any[]): void;
+  info(message: string, data?: Record<string, unknown>): void;
+  warn(message: string, data?: Record<string, unknown>): void;
+  error(message: string, data?: Record<string, unknown>): void;
+  debug(message: string, data?: Record<string, unknown>): void;
 }
 
-export interface OperationLog<TInput = any, TOutput = any> {
+export interface OperationLog<TInput = unknown, TOutput = unknown> {
   operationName: string;
   type: string;
   category?: string;

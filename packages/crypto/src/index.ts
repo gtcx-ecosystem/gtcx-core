@@ -63,6 +63,7 @@ export {
   tracedVerifySignedMessage,
   tracedBatchVerify,
   logSigningOperation,
+  sanitizeBatchVerifyOutput,
 } from './traced';
 
 export {
@@ -76,6 +77,7 @@ export {
   tracedVerifyCommitment,
   tracedGenerateSalt,
   tracedCombineHashes,
+  sanitizeCombineHashesOutput,
 } from './traced-hashing';
 
 export {
@@ -86,6 +88,9 @@ export {
   tracedGenerateKeyId,
   tracedCompressPublicKey,
   logKeyEvent,
+  sanitizeGenerateKeyPairOutput,
+  sanitizeDerivePublicKeyOutput,
+  sanitizeGenerateKeyIdOutput,
 } from './traced-keys';
 
 // ============================================================================

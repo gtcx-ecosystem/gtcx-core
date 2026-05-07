@@ -41,6 +41,10 @@
 2. Perform downstream consumer validation against the release artifact pack.
 3. Complete final human signoff and release staging.
 
+## Active Remediation
+
+- [remediation-plan-2026-05-06.md](./remediation-plan-2026-05-06.md) — Comprehensive plan to close the 1.12-point gap to 10/10.
+
 ## Reference
 
 - [10-10-roadmap-2026-05-06.md](./10-10-roadmap-2026-05-06.md)
