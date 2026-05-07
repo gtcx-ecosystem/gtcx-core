@@ -55,7 +55,7 @@ export function createCanonicalSigner(
     };
 
     const { canonicalHash } = buildCanonicalRequest(
-      { method, url, headers: enrichedHeaders, body },
+      { method, url, headers: enrichedHeaders, body: body as string | Uint8Array | null },
       options?.extraSignedHeaders
     );
 

@@ -62,10 +62,8 @@ export function verifyCanonicalSignature(
 
   const valid = verifyHash(canonicalHash, envelope.signature, publicKeyHex);
 
-  return {
-    valid,
-    envelope,
-    keyId: envelope.keyId,
-    error: valid ? undefined : 'Signature verification failed',
-  };
+  if (valid) {
+    return { valid: true, envelope, keyId: envelope.keyId };
+  }
+  return { valid: false, envelope, keyId: envelope.keyId, error: 'Signature verification failed' };
 }
