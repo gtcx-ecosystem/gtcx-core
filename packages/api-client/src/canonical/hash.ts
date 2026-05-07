@@ -23,7 +23,6 @@ import {
   canonicalizePath,
   canonicalizeQueryString,
 } from './normalize';
-
 import type { CanonicalRequestContext, CanonicalRequestString } from './types';
 
 /** Build the canonical request string and its hash. */

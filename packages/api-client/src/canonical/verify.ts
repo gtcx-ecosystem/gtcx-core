@@ -9,7 +9,6 @@ import { verifyHash } from '@gtcx/crypto';
 
 import { SIGNATURE_HEADER_NAME, parseEnvelope } from './envelope';
 import { buildCanonicalRequest } from './hash';
-
 import type { CanonicalizationOptions, VerificationResult } from './types';
 
 const DEFAULT_CLOCK_SKEW_MS = 5 * 60 * 1000; // 5 minutes

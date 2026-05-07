@@ -8,6 +8,9 @@
 
 import { signHash } from '@gtcx/crypto';
 
+import type { RequestSigner } from '../types';
+
+import { formatKeyId } from './did';
 import {
   KEY_ID_HEADER_NAME,
   NONCE_HEADER_NAME,
@@ -17,9 +20,6 @@ import {
 } from './envelope';
 import { buildCanonicalRequest } from './hash';
 import { generateNonce } from './nonce';
-import { formatKeyId } from './did';
-
-import type { RequestSigner } from '../types';
 import type { CanonicalizationOptions, SigningKeyMaterial } from './types';
 
 /**
