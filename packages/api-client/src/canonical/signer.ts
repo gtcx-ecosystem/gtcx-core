@@ -7,18 +7,19 @@
  */
 
 import { signHash } from '@gtcx/crypto';
+
 import type { RequestSigner } from '../types';
 import type { CanonicalizationOptions, SigningKeyMaterial } from './types';
+import {
+  KEY_ID_HEADER_NAME,
+  NONCE_HEADER_NAME,
+  SIGNATURE_HEADER_NAME,
+  TIMESTAMP_HEADER_NAME,
+  serializeEnvelope,
+} from './envelope';
 import { buildCanonicalRequest } from './hash';
 import { generateNonce } from './nonce';
 import { formatKeyId } from './did';
-import {
-  serializeEnvelope,
-  TIMESTAMP_HEADER_NAME,
-  NONCE_HEADER_NAME,
-  KEY_ID_HEADER_NAME,
-  SIGNATURE_HEADER_NAME,
-} from './envelope';
 
 /**
  * Create a canonical request signer.
