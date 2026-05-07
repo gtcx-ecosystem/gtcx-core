@@ -9,6 +9,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
+    },
+    "./canonical": {
+      "types": "./dist/canonical/index.d.ts",
+      "import": "./dist/canonical/index.mjs",
+      "require": "./dist/canonical/index.js"
     }
   },
   "scripts": {
