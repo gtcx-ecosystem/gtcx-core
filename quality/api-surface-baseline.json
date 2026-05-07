@@ -1,16 +1,19 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-06T15:25:21.344Z",
+  "generatedAt": "2026-05-07T20:30:14.481Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.2",
       "dir": "packages/ai",
       "typesPath": "packages/ai/dist/index.d.ts",
-      "hash": "0ff961b0b12dc8c3dc3c7c51a27acbc03b1934e16a7558687b13d20c11717fe7",
+      "hash": "294fee1ab1ffbe9b566e282170bdec706250fee48ce1260a2c0ba8598b01c719",
       "exports": [
         "CategoryLogger",
         "createCategoryLogger",
+        "getCurrentTraceContext",
         "OperationLog",
+        "runWithTraceContext",
+        "TraceContext",
         "traced",
         "TracedOptions",
         "withTrace"
@@ -67,7 +70,7 @@
       "version": "2.0.0",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "4449c5acf31a03c471c537e18e98742f9e3a3ce95b0e378850662837af137bb6",
+      "hash": "4addf02afd80c2351aad1998d105b7052322c54c9dd08515a328a9a6901d9aca",
       "exports": [
         "Backend",
         "batchVerify",
@@ -108,6 +111,11 @@
         "MerkleProof",
         "MerkleTree",
         "NativeZkpEngine",
+        "sanitizeBatchVerifyOutput",
+        "sanitizeCombineHashesOutput",
+        "sanitizeDerivePublicKeyOutput",
+        "sanitizeGenerateKeyIdOutput",
+        "sanitizeGenerateKeyPairOutput",
         "secureWipe",
         "sign",
         "SignatureResult",
@@ -435,7 +443,7 @@
       "version": "0.2.2",
       "dir": "packages/logging",
       "typesPath": "packages/logging/dist/index.d.ts",
-      "hash": "d597ff3b431dd66512d37af1e54fe1475a224af9032be13ec3aee636c056014c",
+      "hash": "e528d580f75ec1d7db792709420638bb5fb8c24fd9dbcae5c9d44f2208a1df0b",
       "exports": ["createLogger", "LogEntry", "Logger", "LoggerConfig", "LogLevel"]
     },
     "@gtcx/network": {
@@ -497,7 +505,7 @@
       "version": "2.0.0",
       "dir": "packages/security",
       "typesPath": "packages/security/dist/index.d.ts",
-      "hash": "023ea24d7f36db9c2e8e0c21057fc254e89e5d58638af75c0c13da685f3cbcc3",
+      "hash": "f015e1fdcae0175ed9ec1583cf016d8a8fadc21bd1b7d44b5cc5208d278dff92",
       "exports": [
         "ApiErrorSchema",
         "assembleToken",
@@ -609,6 +617,7 @@
         "SecurityEventType",
         "SecurityLogger",
         "SecurityLoggerConfig",
+        "SecurityLoggerError",
         "SecurityLogHandler",
         "SecurityOutcome",
         "SecuritySeverity",
@@ -651,7 +660,7 @@
       "version": "0.2.2",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
-      "hash": "a4c1dbec720d000649651ff9b64c54ce93cd9f4ace3818265a86549d6be9d0b9",
+      "hash": "36ee0635dd54de2cb9e6412386e4302ef010ea181213deef029dff1c7a10eec6",
       "exports": [
         "AssetLotRegistrationService",
         "ComplianceCheckResult",
@@ -660,12 +669,15 @@
         "ComplianceRecordFilter",
         "ComplianceReport",
         "ComplianceReportSummary",
+        "HealthCheckDeps",
+        "HealthCheckResult",
         "IComplianceRepository",
         "ITraderRepository",
         "ITransactionRepository",
         "LicenseValidationError",
         "MaxValueError",
         "RegistrationConfig",
+        "runHealthChecks",
         "TradingConfig",
         "TradingService",
         "UnifiedComplianceService",
@@ -922,7 +934,7 @@
       "version": "2.0.0",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "ced84fadaa2080da7a17a8813d46ca6d9f090156aaf3e6dac69f35cbbac7b87e",
+      "hash": "b5d3584b1fa7499d914fb415520b28a5662907c484e2335f9716c1df5e1c3c3e",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",

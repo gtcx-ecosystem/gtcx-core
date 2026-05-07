@@ -4,30 +4,39 @@ Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rus
 
 **Last reviewed:** 2026-05-06
 
-## Engineering Excellence
+## Engineering Standards
 
-This repository adheres to **Infrastructure Grade (10/10)** engineering standards, ensuring the reliability and mathematical correctness required for global trade and governmental systems.
+This repository targets infrastructure-grade engineering standards suitable for global trade and governmental systems. Current maturity varies by package — see the [Readiness Matrix](#package-readiness-matrix) below.
 
-- **Mathematical Verification**: All core cryptographic paths are verified using property-based testing (`fast-check`) and continuous fuzzing (`cargo-fuzz` on nightly).
-- **Security by Design**: Deep object sanitization (`sanitizeSecrets`) prevents cryptographic leakage in observability layers.
-- **Architectural Rigor**: Strictly enforced layering boundaries (zero circular dependencies) and standardized error taxonomy (ADR-012).
-- **Audit Ready**: All code is instrumented for tracing while preserving zero-trust security boundaries.
+- **Mathematical Verification**: Core cryptographic paths are verified using property-based testing (`fast-check`) and continuous fuzzing (`cargo-fuzz` on nightly).
+- **Security by Design**: Deep object sanitization (`sanitizeSecrets`) prevents cryptographic leakage in observability layers; `SecurityLogger` operates in strict mode in production.
+- **Architectural Rigor**: Enforced layering boundaries (zero circular dependencies), max 500 LOC per source file, and standardized error taxonomy (ADR-012).
+- **Audit Ready**: Structured tracing and security logging preserve zero-trust boundaries.
 
 For a detailed breakdown of these mandates, see [GEMINI.md](./GEMINI.md).
 
 ## Current State
 
-The codebase is in a release-grade, code-addressable hardening state:
+The codebase is in a hardened, code-addressable state with active quality gates:
 
 - trust-path defects in signing, verification, token handling, and offline lockout recovery have been remediated
-- offline replay ordering now uses logical sequence instead of wall-clock time
+- offline replay ordering uses logical sequence instead of wall-clock time
 - API surface is baselined, docs are aligned to the current architecture, and release/readiness artifacts are in place
+- coverage gates enforce ≥85% statements and ≥75% branches for critical packages
+- `cargo deny` and `cargo audit` run in CI; known upstream advisories in the `ark-*` ecosystem are tracked in `rust/.cargo/audit.toml`
 
-Remaining `10/10` blockers are external to the repo:
+### Remaining blockers before production release
+
+**External:**
 
 - external security review / pen test
 - downstream consumer validation
 - final human release signoff
+
+**Internal (known limitations):**
+
+- `@gtcx/crypto-native` loads bindings dynamically; fallback to JS backend is automatic but slower
+- Rust `ark-*` transitive dependencies carry unmaintained crates (`derivative`, `paste`) — mitigated via audit ignore list pending upstream updates
 
 ## Quick Start
 
@@ -48,30 +57,28 @@ pnpm lint
 
 For a step-by-step repo walkthrough, see the [Orientation guide](./docs/agents/onboarding/orientation.md). For consumer adoption and release posture, start in [docs/release/README.md](./docs/release/README.md).
 
-## Packages
+## Package Readiness Matrix
 
-### Public `@gtcx/*` Packages (18)
-
-| Package                                           | Description                                                                                 |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| [`@gtcx/types`](./packages/types)                 | Core type definitions for the GTCX ecosystem                                                |
-| [`@gtcx/schemas`](./packages/schemas)             | Core12 compliance verification schemas                                                      |
-| [`@gtcx/crypto`](./packages/crypto)               | Cryptographic primitives — key generation, signing, hashing, Merkle trees, commitments      |
-| [`@gtcx/crypto-native`](./packages/crypto-native) | Native crypto bindings loader (NAPI-RS)                                                     |
-| [`@gtcx/domain`](./packages/domain)               | Commodity-agnostic domain services with DI, offline queues, and observability               |
-| [`@gtcx/utils`](./packages/utils)                 | Common utilities for GTCX applications                                                      |
-| [`@gtcx/identity`](./packages/identity)           | DID creation, identity lifecycle, key management, identity resolution                       |
-| [`@gtcx/security`](./packages/security)           | Auth, validation, offline credential management, audit logging                              |
-| [`@gtcx/verification`](./packages/verification)   | Certificate generation, QR codes, proof bundles, and verification proofs                    |
-| [`@gtcx/events`](./packages/events)               | Type-safe event bus with offline buffering                                                  |
-| [`@gtcx/services`](./packages/services)           | Registration, trading, and compliance business services                                     |
-| [`@gtcx/workproof`](./packages/workproof)         | TradeCV/WorkProof v2.1 — W3C VC-based work attestations, 38 predicates, AI validation types |
-| [`@gtcx/ai`](./packages/ai)                       | Observability stubs and tracing hooks (full implementation in `gtcx-intelligence`)          |
-| [`@gtcx/api-client`](./packages/api-client)       | Resilient HTTP client with retry, offline queue, and request signing                        |
-| [`@gtcx/connectivity`](./packages/connectivity)   | Network connectivity detection and profiling for offline-first apps                         |
-| [`@gtcx/logging`](./packages/logging)             | Structured logging for GTCX services                                                        |
-| [`@gtcx/network`](./packages/network)             | P2P networking primitives and transport utilities                                           |
-| [`@gtcx/sync`](./packages/sync)                   | Offline-first sync engine with conflict resolution strategies                               |
+| Package               | State                             | Coverage                | Notes                                                                   |
+| --------------------- | --------------------------------- | ----------------------- | ----------------------------------------------------------------------- |
+| `@gtcx/crypto`        | ✅ Production-hardened            | 86.9% stmts, 93.0% func | Property-tested, native + JS backends                                   |
+| `@gtcx/domain`        | ✅ Production-hardened            | 92.9% stmts, 91.5% func | DI container, offline queues, versioning                                |
+| `@gtcx/security`      | ✅ Production-hardened            | 91.7% stmts, 94.0% func | Strict-mode audit logger, redaction                                     |
+| `@gtcx/verification`  | ✅ Production-hardened            | 94.4% stmts, 89.5% func | QR, proofs, bundles                                                     |
+| `@gtcx/services`      | ✅ Production-hardened            | 90.3% stmts, 85.6% func | Compliance decomposed, health checks, metrics                           |
+| `@gtcx/schemas`       | ✅ Production-hardened            | —                       | Core12: 12 domains, 24 controls fully populated                         |
+| `@gtcx/events`        | ⚠️ Stable API, pending validation | —                       | Major refactor staged in changeset                                      |
+| `@gtcx/workproof`     | ⚠️ Stable API, pending validation | —                       | 38 predicates, AI validation types                                      |
+| `@gtcx/ai`            | ⚠️ Functional, narrow surface     | —                       | Synchronous + async tracing with span propagation via AsyncLocalStorage |
+| `@gtcx/identity`      | ⚠️ Functional, pending validation | —                       | Minor changeset staged                                                  |
+| `@gtcx/crypto-native` | ⚠️ Functional, known bug          | —                       | Odd-length hex at NAPI boundary (see blockers)                          |
+| `@gtcx/api-client`    | ⚠️ Functional, pending validation | —                       | Retry, offline queue, request signing                                   |
+| `@gtcx/connectivity`  | ⚠️ Functional, pending validation | —                       | Network detection and profiling                                         |
+| `@gtcx/logging`       | ⚠️ Functional, pending validation | —                       | Structured logging adapters                                             |
+| `@gtcx/network`       | ⚠️ Functional, pending validation | —                       | P2P types, peer discovery, libp2p transport                             |
+| `@gtcx/sync`          | ⚠️ Functional, pending validation | —                       | Offline-first sync engine with conflict resolution                      |
+| `@gtcx/types`         | ✅ Stable                         | —                       | Core type definitions — minimal logic, low risk                         |
+| `@gtcx/utils`         | ✅ Stable                         | —                       | Common utilities — minimal logic, low risk                              |
 
 ### Shared Config Workspace Packages (4)
 
@@ -86,14 +93,14 @@ These live under [`packages/config`](./packages/config) and support the monorepo
 
 ### Rust (6 crates)
 
-| Crate                                     | Description                                                                     |
-| ----------------------------------------- | ------------------------------------------------------------------------------- |
-| [`gtcx-crypto`](./rust/gtcx-crypto)       | Core cryptographic primitives — Ed25519, SHA-256/512, key derivation            |
-| [`gtcx-zkp`](./rust/gtcx-zkp)             | Proof system: Groth16/Bulletproofs/Schnorr circuits + hash-commitment baseline  |
-| [`gtcx-consensus`](./rust/gtcx-consensus) | Weighted PBFT consensus engine for multi-stakeholder verification               |
-| [`gtcx-network`](./rust/gtcx-network)     | P2P networking types with topic-based pub/sub messaging                         |
-| [`gtcx-edge`](./rust/gtcx-edge)           | Edge runtime with resource-constrained device profiles and verification caching |
-| [`gtcx-node`](./rust/gtcx-node)           | Node.js native bindings via NAPI-RS for cryptographic operations                |
+| Crate                                     | State          | Description                                                                     |
+| ----------------------------------------- | -------------- | ------------------------------------------------------------------------------- |
+| [`gtcx-crypto`](./rust/gtcx-crypto)       | ✅ Hardened    | Core cryptographic primitives — Ed25519, SHA-256/512, key derivation            |
+| [`gtcx-zkp`](./rust/gtcx-zkp)             | ⚠️ Functional  | Proof system: Groth16/Bulletproofs/Schnorr circuits + hash-commitment baseline  |
+| [`gtcx-consensus`](./rust/gtcx-consensus) | 🚧 Scaffolding | Weighted PBFT consensus engine for multi-stakeholder verification               |
+| [`gtcx-network`](./rust/gtcx-network)     | 🚧 Scaffolding | P2P networking types with topic-based pub/sub messaging                         |
+| [`gtcx-edge`](./rust/gtcx-edge)           | 🚧 Scaffolding | Edge runtime with resource-constrained device profiles and verification caching |
+| [`gtcx-node`](./rust/gtcx-node)           | ⚠️ Functional  | Node.js native bindings via NAPI-RS for cryptographic operations                |
 
 ## Directory Structure
 

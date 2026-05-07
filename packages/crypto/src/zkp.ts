@@ -99,6 +99,18 @@ const ensureCommitment = (publicInputs: string[], commitment: string): string[] 
 };
 
 /**
+ * Normalize an arbitrary string to a 32-byte (64-char) hex string.
+ * If the input is already a valid 64-char hex string, return it as-is.
+ * Otherwise, hash it with SHA-256 to produce a deterministic 32-byte digest.
+ */
+const normalizeToHash256 = (value: string): string => {
+  if (value.length === 64 && isHex(value)) {
+    return value.toLowerCase();
+  }
+  return hash256(value);
+};
+
+/**
  * Hash-commitment proof engine — **PLACEHOLDER, NOT PRODUCTION ZK**.
  *
  * WARNING: This engine does NOT provide zero-knowledge proofs. It uses
@@ -234,8 +246,8 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
     const witnessBytes = toBytes(input.witness);
 
     if (input.system === 'groth16') {
-      const generateKeys = this.pickFn(['groth16_generate_keys', 'groth16GenerateKeys']);
-      const proveGci = this.pickFn(['groth16_prove_gci_threshold', 'groth16ProveGciThreshold']);
+      const generateKeys = this.pickFn(['groth16GenerateKeys', 'groth16_generate_keys']);
+      const proveGci = this.pickFn(['groth16ProveGciThreshold', 'groth16_prove_gci_threshold']);
 
       const keys = generateKeys('gci_threshold') as {
         provingKey: string;
@@ -269,8 +281,8 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
 
     if (input.system === 'bulletproofs') {
       const prove = this.pickFn([
-        'bulletproofs_prove_amount_range',
         'bulletproofsProveAmountRange',
+        'bulletproofs_prove_amount_range',
       ]);
       const amount = new DataView(witnessBytes.buffer, witnessBytes.byteOffset).getUint32(0, true);
       const min = input.publicInputs.length > 0 ? parseInt(input.publicInputs[0] ?? '0', 10) : 0;
@@ -299,10 +311,10 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
 
     if (input.system === 'schnorr') {
       const prove = this.pickFn([
-        'schnorr_prove_identity_attribute',
         'schnorrProveIdentityAttribute',
+        'schnorr_prove_identity_attribute',
       ]);
-      const subjectHash = input.publicInputs[0] ?? generateSalt(32);
+      const subjectHash = normalizeToHash256(input.publicInputs[0] ?? generateSalt(32));
       const bundle = prove(witnessBytes, subjectHash) as {
         attributeHash: string;
         attribute_hash?: string;
@@ -337,7 +349,7 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
     if (!parsed.success) return false;
 
     if (proof.system === 'groth16') {
-      const verifyFn = this.pickFn(['groth16_verify_proof', 'groth16VerifyProof']);
+      const verifyFn = this.pickFn(['groth16VerifyProof', 'groth16_verify_proof']);
       const publicInputsJson = proof.publicInputs[0] ?? '[]';
       return verifyFn(
         'gci_threshold',
@@ -349,8 +361,8 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
 
     if (proof.system === 'bulletproofs') {
       const verifyFn = this.pickFn([
-        'bulletproofs_verify_amount_range',
         'bulletproofsVerifyAmountRange',
+        'bulletproofs_verify_amount_range',
       ]);
       const min = parseInt(proof.publicInputs[0] ?? '0', 10);
       const max = parseInt(proof.publicInputs[1] ?? '0', 10);
@@ -361,18 +373,27 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
 
     if (proof.system === 'schnorr') {
       const verifyFn = this.pickFn([
-        'schnorr_verify_identity_attribute',
         'schnorrVerifyIdentityAttribute',
+        'schnorr_verify_identity_attribute',
       ]);
-      const attributeHash = proof.publicInputs[0] ?? '';
-      const subjectHash = proof.publicInputs[1] ?? '';
-      const proofData = JSON.parse(proof.proof) as { nonceCommitment: string; response: string };
-      return verifyFn(
-        attributeHash,
-        subjectHash,
-        proofData.nonceCommitment,
-        proofData.response
-      ) as boolean;
+      const attributeHash = normalizeToHash256(proof.publicInputs[0] ?? '');
+      const subjectHash = normalizeToHash256(proof.publicInputs[1] ?? '');
+      let proofData: { nonceCommitment: string; response: string };
+      try {
+        proofData = JSON.parse(proof.proof) as { nonceCommitment: string; response: string };
+      } catch {
+        return false;
+      }
+      try {
+        return verifyFn(
+          attributeHash,
+          subjectHash,
+          proofData.nonceCommitment,
+          proofData.response
+        ) as boolean;
+      } catch {
+        return false;
+      }
     }
 
     return false;

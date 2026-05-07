@@ -69,17 +69,17 @@ export async function runPreflightCheck(): Promise<PreflightResult> {
 if (require.main === module) {
   runPreflightCheck().then((result) => {
     if (result.ok) {
-      console.log('✅ GTCX Native Pre-flight PASSED');
-      console.log(`   Platform: ${result.platform} (${result.arch})`);
-      console.log(`   Version:  ${result.version}`);
+      process.stdout.write('✅ GTCX Native Pre-flight PASSED\n');
+      process.stdout.write(`   Platform: ${result.platform} (${result.arch})\n`);
+      process.stdout.write(`   Version:  ${result.version}\n`);
       process.exit(0);
     } else {
-      console.error('❌ GTCX Native Pre-flight FAILED');
-      console.error(`   Error: ${result.error}`);
-      console.log('   Check Details:');
-      console.log(`   - Load:    ${result.checks.load ? 'PASS' : 'FAIL'}`);
-      console.log(`   - Hashing: ${result.checks.hashing ? 'PASS' : 'FAIL'}`);
-      console.log(`   - Signing: ${result.checks.signing ? 'PASS' : 'FAIL'}`);
+      process.stderr.write('❌ GTCX Native Pre-flight FAILED\n');
+      process.stderr.write(`   Error: ${result.error}\n`);
+      process.stdout.write('   Check Details:\n');
+      process.stdout.write(`   - Load:    ${result.checks.load ? 'PASS' : 'FAIL'}\n`);
+      process.stdout.write(`   - Hashing: ${result.checks.hashing ? 'PASS' : 'FAIL'}\n`);
+      process.stdout.write(`   - Signing: ${result.checks.signing ? 'PASS' : 'FAIL'}\n`);
       process.exit(1);
     }
   });

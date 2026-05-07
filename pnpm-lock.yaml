@@ -330,6 +330,9 @@ importers:
 
   packages/logging:
     devDependencies:
+      '@gtcx/ai':
+        specifier: workspace:*
+        version: link:../ai
       '@gtcx/tsup-config':
         specifier: workspace:*
         version: link:../config/tsup

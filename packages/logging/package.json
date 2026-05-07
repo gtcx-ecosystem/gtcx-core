@@ -22,6 +22,7 @@
     "clean": "rm -rf dist"
   },
   "devDependencies": {
+    "@gtcx/ai": "workspace:*",
     "@gtcx/tsup-config": "workspace:*",
     "@gtcx/typescript-config": "workspace:*",
     "tsup": "^8.0.1",

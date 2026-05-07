@@ -4,6 +4,22 @@
 
 import { randomUUID } from 'node:crypto';
 
+interface TraceContext {
+  traceId: string;
+  spanId: string;
+  parentSpanId?: string | undefined;
+}
+
+function getCurrentTraceContext(): TraceContext | undefined {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const ai = require('@gtcx/ai');
+    return ai?.getCurrentTraceContext?.() as TraceContext | undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 /**
  * Supported log levels in ascending order of severity.
  */
@@ -27,6 +43,8 @@ export interface LogEntry {
   traceId?: string;
   /** Optional span ID within a trace */
   spanId?: string;
+  /** Optional parent span ID for nested trace hierarchies */
+  parentSpanId?: string | undefined;
   /** Arbitrary structured data attached to the log entry */
   data?: Record<string, unknown>;
   /** Serialized error information */
@@ -193,6 +211,15 @@ export class Logger {
 
     if (this.config.correlationId) {
       entry.correlationId = this.config.correlationId;
+    }
+
+    const traceCtx = getCurrentTraceContext();
+    if (traceCtx) {
+      entry.traceId = traceCtx.traceId;
+      entry.spanId = traceCtx.spanId;
+      if (traceCtx.parentSpanId) {
+        entry.parentSpanId = traceCtx.parentSpanId;
+      }
     }
 
     if (data) {

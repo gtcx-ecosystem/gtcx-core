@@ -1,3 +1,4 @@
+import { traced, runWithTraceContext } from '@gtcx/ai';
 import { describe, it, expect, vi } from 'vitest';
 
 import { Logger, createLogger, LogEntry } from '../src/index';
@@ -349,5 +350,84 @@ describe('Data attachment', () => {
     const { logger, entries } = createTestLogger();
     logger.info('no data');
     expect(entries[0]!.data).toBeUndefined();
+  });
+});
+
+// ============================================================================
+// Trace context integration
+// ============================================================================
+
+describe('Trace context integration', () => {
+  it('should include traceId and spanId when inside a traced operation', () => {
+    const entries: LogEntry[] = [];
+    const logger = createLogger({
+      service: 'trace-test',
+      output: (entry) => entries.push(entry),
+    });
+
+    const tracedFn = traced(() => {
+      logger.info('inside trace');
+      return 'done';
+    }, 'traced-op');
+
+    tracedFn();
+
+    const logEntry = entries.find((e) => e.message === 'inside trace');
+    expect(logEntry).toBeDefined();
+    expect(typeof logEntry!.traceId).toBe('string');
+    expect(typeof logEntry!.spanId).toBe('string');
+    expect(logEntry!.traceId).toHaveLength(32);
+    expect(logEntry!.spanId).toHaveLength(16);
+  });
+
+  it('should not include trace fields when outside traced context', () => {
+    const { logger, entries } = createTestLogger();
+    logger.info('outside trace');
+    expect(entries[0]!.traceId).toBeUndefined();
+    expect(entries[0]!.spanId).toBeUndefined();
+  });
+
+  it('should include parentSpanId for nested traced operations', () => {
+    const entries: LogEntry[] = [];
+    const logger = createLogger({
+      service: 'trace-test',
+      output: (entry) => entries.push(entry),
+    });
+
+    const inner = traced(() => {
+      logger.info('inner log');
+    }, 'inner');
+
+    const outer = traced(() => {
+      inner();
+    }, 'outer');
+
+    outer();
+
+    const logEntry = entries.find((e) => e.message === 'inner log');
+    expect(logEntry).toBeDefined();
+    expect(logEntry!.traceId).toBeDefined();
+    expect(logEntry!.spanId).toBeDefined();
+    expect(logEntry!['parentSpanId']).toBeDefined();
+  });
+
+  it('should propagate explicit trace context via runWithTraceContext', () => {
+    const entries: LogEntry[] = [];
+    const logger = createLogger({
+      service: 'trace-test',
+      output: (entry) => entries.push(entry),
+    });
+
+    runWithTraceContext(
+      () => {
+        logger.info('explicit context');
+      },
+      { traceId: 'abc123', spanId: 'def456' }
+    );
+
+    const logEntry = entries.find((e) => e.message === 'explicit context');
+    expect(logEntry).toBeDefined();
+    expect(logEntry!.traceId).toBe('abc123');
+    expect(logEntry!.spanId).toBe('def456');
   });
 });

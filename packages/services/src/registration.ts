@@ -14,8 +14,6 @@
  * Package: @gtcx/services
  */
 
-import { randomUUID } from 'node:crypto';
-
 import {
   DomainEventFactory,
   ServiceMetrics,
@@ -32,56 +30,28 @@ import {
   type AssetLot,
   type WorkflowStep,
   type RegistrationProgress,
-  type ValidationResult,
-  type CryptographicProof,
-  type AssetCertificate,
   type ICryptoService,
   type ILocationService,
   type IStorageService,
 } from '@gtcx/domain';
 
-// ============================================================================
-// ERROR CLASSES
-// ============================================================================
+import {
+  buildAssetLot,
+  generateCertificate,
+  generateCryptoProof,
+  generateLotId,
+  generateSessionId,
+} from './registration/helpers';
+import { ValidationError, DEFAULT_CONFIG } from './registration/types';
+import type { RegistrationConfig } from './registration/types';
+import {
+  createBusinessValidationError,
+  createValidationError,
+  validateRegistrationData,
+} from './registration/validation';
 
-/** Service validation error. Shared across all GTCX services. */
-export class ValidationError extends Error {
-  readonly service: string;
-  constructor(message: string, options?: { cause?: unknown; service?: string }) {
-    super(message, options);
-    this.name = 'ValidationError';
-    this.service = options?.service ?? 'registration';
-  }
-}
-
-// ============================================================================
-// CONFIGURATION
-// ============================================================================
-
-export interface RegistrationConfig {
-  /** Minimum GPS accuracy required in meters */
-  minGpsAccuracy: number;
-  /** Minimum photos required */
-  minPhotos: number;
-  /** Maximum photos allowed */
-  maxPhotos: number;
-  /** Maximum age of discovery in days */
-  maxDiscoveryAgeDays: number;
-  /** Custom workflow steps (optional override) */
-  workflowSteps?: WorkflowStep[] | undefined;
-  /** Required photo categories */
-  requiredPhotoCategories?: string[] | undefined;
-  /** Verification endpoint base URL */
-  verifyBaseUrl?: string | undefined;
-}
-
-const DEFAULT_CONFIG: RegistrationConfig = {
-  minGpsAccuracy: 10,
-  minPhotos: 2,
-  maxPhotos: 10,
-  maxDiscoveryAgeDays: 30,
-  verifyBaseUrl: 'https://verify.gtcx.io',
-};
+export { ValidationError };
+export type { RegistrationConfig };
 
 // ============================================================================
 // ASSET LOT REGISTRATION SERVICE
@@ -210,75 +180,8 @@ export class AssetLotRegistrationService {
    * Validate registration data with Zod schema
    * Returns detailed validation errors for UI feedback
    */
-  validateRegistrationData(data: unknown): ValidationResult {
-    const errors: string[] = [];
-    const warnings: string[] = [];
-
-    // Schema validation
-    const schemaResult = safeParse(AssetRegistrationDataSchema, data);
-    if (!schemaResult.success) {
-      return {
-        isValid: false,
-        errors: schemaResult.error.errors.map((issue) => issue.message),
-        warnings: [],
-      };
-    }
-
-    const validData = schemaResult.data;
-
-    // Business rule validation
-
-    // GPS accuracy check
-    if (
-      validData.discoveryLocation.accuracy &&
-      validData.discoveryLocation.accuracy > this.config.minGpsAccuracy
-    ) {
-      errors.push(
-        `GPS accuracy (${validData.discoveryLocation.accuracy}m) exceeds maximum allowed (${this.config.minGpsAccuracy}m)`
-      );
-    }
-
-    // Photo count check
-    if (validData.photos.length < this.config.minPhotos) {
-      errors.push(
-        `Minimum ${this.config.minPhotos} photos required, got ${validData.photos.length}`
-      );
-    }
-
-    if (validData.photos.length > this.config.maxPhotos) {
-      errors.push(
-        `Maximum ${this.config.maxPhotos} photos allowed, got ${validData.photos.length}`
-      );
-    }
-
-    // Discovery age check
-    if (validData.discoveryDate) {
-      const discoveryDate = new Date(validData.discoveryDate);
-      const maxAge = this.config.maxDiscoveryAgeDays * 24 * 60 * 60 * 1000;
-      const age = Date.now() - discoveryDate.getTime();
-
-      if (age > maxAge) {
-        errors.push(
-          `Discovery date exceeds maximum age of ${this.config.maxDiscoveryAgeDays} days`
-        );
-      }
-    }
-
-    // Weight validation with warnings
-    if (validData.estimatedWeight > 10000) {
-      warnings.push('Large weight detected - consider verification by multiple parties');
-    }
-
-    // Purity warnings
-    if (validData.purity && validData.purity > 99) {
-      warnings.push('Very high purity claimed - lab verification recommended');
-    }
-
-    return {
-      isValid: errors.length === 0,
-      errors,
-      warnings,
-    };
+  validateRegistrationData(data: unknown) {
+    return validateRegistrationData(data, this.config);
   }
 
   // ==========================================================================
@@ -336,7 +239,7 @@ export class AssetLotRegistrationService {
    * Performs validation, generates cryptographic proof, and stores the lot
    */
   async registerAssetLot(data: unknown): Promise<AssetLot> {
-    const sessionId = this.generateSessionId();
+    const sessionId = generateSessionId();
 
     const dataRecord =
       data != null && typeof data === 'object' ? (data as Record<string, unknown>) : {};
@@ -353,15 +256,11 @@ export class AssetLotRegistrationService {
 
     try {
       const validData = await this.validateRegistration(data, startPayload, sessionId);
-      const proofBase = await this.buildCryptoProof(validData);
-      const lotId = this.generateLotId(validData);
-      const certificate = await this.generateCertificate(lotId, validData, proofBase);
-      const cryptoProof: CryptographicProof = {
-        hash: proofBase.hash,
-        signature: proofBase.signature,
-        certificate,
-      };
-      const assetLot = this.buildAssetLot(lotId, validData, cryptoProof, certificate, sessionId);
+      const proofBase = await generateCryptoProof(validData, this.cryptoService);
+      const lotId = generateLotId(validData);
+      const certificate = await generateCertificate(lotId, validData, proofBase);
+      const cryptoProof = { hash: proofBase.hash, signature: proofBase.signature, certificate };
+      const assetLot = buildAssetLot(lotId, validData, cryptoProof, certificate, sessionId);
 
       await this.storageService.saveAssetLot(assetLot);
       await this.storageService.saveCertificate(certificate);
@@ -412,7 +311,7 @@ export class AssetLotRegistrationService {
     const schemaResult = safeParse(AssetRegistrationDataSchema, data);
     if (!schemaResult.success) {
       const messages = schemaResult.error.errors.map((issue) => issue.message);
-      const error = new ValidationError(`Validation failed: ${messages.join(', ')}`);
+      const error = createValidationError(messages);
       this.eventEmitter.emit(
         this.eventFactory.registration(
           'registration.failed',
@@ -432,9 +331,7 @@ export class AssetLotRegistrationService {
 
     const validation = this.validateRegistrationData(validData);
     if (!validation.isValid) {
-      const error = new ValidationError(
-        `Business validation failed: ${validation.errors.join(', ')}`
-      );
+      const error = createBusinessValidationError(validation.errors);
       this.eventEmitter.emit(
         this.eventFactory.registration(
           'registration.failed',
@@ -463,137 +360,5 @@ export class AssetLotRegistrationService {
     );
 
     return validData;
-  }
-
-  private async buildCryptoProof(
-    data: ValidatedRegistrationData
-  ): Promise<{ hash: string; signature: string }> {
-    return this.generateCryptoProof(data);
-  }
-
-  private buildAssetLot(
-    lotId: string,
-    validData: ValidatedRegistrationData,
-    cryptoProof: CryptographicProof,
-    certificate: AssetCertificate,
-    sessionId: string
-  ): AssetLot {
-    const qualityGrade =
-      validData.quality === 'high'
-        ? 'A'
-        : validData.quality === 'medium'
-          ? 'B'
-          : validData.quality === 'low'
-            ? 'C'
-            : 'ungraded';
-
-    return {
-      id: lotId,
-      commodityType: validData.commodityType,
-      producerId: validData.producerId,
-      discoveryLocation: {
-        latitude: validData.discoveryLocation.latitude,
-        longitude: validData.discoveryLocation.longitude,
-        altitude: validData.discoveryLocation.altitude,
-        accuracy: validData.discoveryLocation.accuracy,
-        timestamp: validData.discoveryLocation.timestamp,
-      },
-      discoveryDate: validData.discoveryDate || new Date().toISOString(),
-      weight: validData.estimatedWeight,
-      weightUnit: validData.weightUnit,
-      form: validData.form,
-      purity: validData.purity,
-      qualityGrade,
-      status: 'registered',
-      cryptoProof: cryptoProof.hash,
-      certificateId: certificate.id,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      metadata: {
-        photos: validData.photos,
-        assetDetails: validData.assetDetails || {},
-        registrationSessionId: sessionId,
-        cryptoProof,
-      },
-    };
-  }
-
-  // ==========================================================================
-  // HELPER METHODS
-  // ==========================================================================
-
-  /**
-   * Generate cryptographic proof for asset data
-   */
-  protected async generateCryptoProof(
-    data: ValidatedRegistrationData
-  ): Promise<{ hash: string; signature: string }> {
-    const proofData = {
-      commodityType: data.commodityType,
-      producerId: data.producerId,
-      location: data.discoveryLocation,
-      weight: data.estimatedWeight,
-      photoHashes: data.photos.map((p) => p.hash).filter(Boolean),
-      timestamp: Date.now(),
-    };
-
-    const hash = await this.cryptoService.createHash(JSON.stringify(proofData));
-    const signature = await this.cryptoService.sign(hash);
-
-    return {
-      hash,
-      signature,
-    };
-  }
-
-  /**
-   * Generate unique lot ID
-   */
-  protected generateLotId(data: ValidatedRegistrationData): string {
-    const prefix = data.commodityType.substring(0, 3).toUpperCase();
-    const lat = Math.abs(data.discoveryLocation.latitude).toFixed(2).replace('.', '');
-    const lng = Math.abs(data.discoveryLocation.longitude).toFixed(2).replace('.', '');
-    const time = Date.now().toString(36).toUpperCase();
-    const random = randomUUID().substring(0, 4).toUpperCase();
-
-    return `${prefix}-${lat}-${lng}-${time}-${random}`;
-  }
-
-  /**
-   * Generate session ID for tracing
-   */
-  protected generateSessionId(): string {
-    return `reg_${Date.now()}_${randomUUID()}`;
-  }
-
-  /**
-   * Generate asset certificate
-   */
-  protected async generateCertificate(
-    lotId: string,
-    data: ValidatedRegistrationData,
-    proof: { hash: string; signature: string }
-  ): Promise<AssetCertificate> {
-    const certificateId = `CERT-${lotId}`;
-
-    return {
-      id: certificateId,
-      lotId,
-      hash: proof.hash,
-      signature: proof.signature,
-      timestamp: new Date().toISOString(),
-      producerLicense: data.producerId,
-      location: {
-        latitude: data.discoveryLocation.latitude,
-        longitude: data.discoveryLocation.longitude,
-        accuracy: data.discoveryLocation.accuracy,
-        altitude: data.discoveryLocation.altitude,
-        timestamp: data.discoveryLocation.timestamp,
-      },
-      assetCharacteristics: data.assetDetails || {},
-      verificationLevel: 'preliminary',
-      issuedBy: 'GTCX Protocol',
-      expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
-    };
   }
 }

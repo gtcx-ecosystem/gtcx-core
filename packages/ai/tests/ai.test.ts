@@ -1,203 +1,467 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import { traced, withTrace, createCategoryLogger } from '../src/index';
+import {
+  traced,
+  withTrace,
+  createCategoryLogger,
+  getCurrentTraceContext,
+  runWithTraceContext,
+} from '../src/index';
 
 describe('@gtcx/ai', () => {
+  let stderrSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    stderrSpy = vi.spyOn(process.stderr, 'write').mockImplementation(() => true);
+  });
+
+  afterEach(() => {
+    stderrSpy.mockRestore();
+  });
+
+  function getLastLog(): Record<string, unknown> | null {
+    const calls = stderrSpy.mock.calls;
+    if (calls.length === 0) return null;
+    const last = calls[calls.length - 1]![0] as string;
+    try {
+      return JSON.parse(last);
+    } catch {
+      return null;
+    }
+  }
+
+  // ── traced() ──
+
   describe('traced()', () => {
-    it('returns the original function unchanged (stub behavior)', () => {
+    it('returns a callable wrapper', () => {
       const fn = (x: number) => x * 2;
-      const result = traced(fn, 'multiply');
-      expect(result).toBe(fn);
+      const wrapped = traced(fn, 'multiply');
+      expect(wrapped(5)).toBe(10);
     });
 
-    it('result is callable and returns the correct value', () => {
+    it('logs operation completion on success', () => {
       const fn = (a: number, b: number) => a + b;
-      const wrapped = traced(fn, 'add');
-      expect(wrapped(3, 4)).toBe(7);
+      const wrapped = traced(fn, 'add', { category: 'math' });
+      wrapped(3, 4);
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('info');
+      expect(log!.msg).toContain('add');
+      expect(log!.category).toBe('math');
+      expect(log!.success).toBe(true);
+      expect(typeof log!.durationMs).toBe('number');
     });
 
-    it('preserves function signature for sync functions', () => {
-      const fn = (name: string, age: number): string => `${name} is ${age}`;
-      const wrapped = traced(fn, 'format');
-      expect(wrapped('Alice', 30)).toBe('Alice is 30');
+    it('logs operation start at debug level', () => {
+      const fn = (x: number) => x;
+      const wrapped = traced(fn, 'identity', { category: 'test' });
+      wrapped(42);
+
+      const logs = stderrSpy.mock.calls.map((c) => {
+        try {
+          return JSON.parse(c[0] as string);
+        } catch {
+          return null;
+        }
+      });
+      const startLog = logs.find((l) => l && l.msg && String(l.msg).includes('start'));
+      expect(startLog).toBeDefined();
+      expect(startLog.level).toBe('debug');
     });
 
-    it('preserves function signature for async functions', async () => {
-      const fn = async (x: number): Promise<number> => x * 3;
-      const wrapped = traced(fn, 'asyncMultiply');
+    it('logs errors on thrown exceptions', () => {
+      const fn = () => {
+        throw new Error('boom');
+      };
+      const wrapped = traced(fn, 'boomOp', { category: 'test' });
+      expect(() => wrapped()).toThrow('boom');
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('error');
+      expect(log!.success).toBe(false);
+      expect(log!.error).toBeDefined();
+      expect((log!.error as Record<string, string>).message).toBe('boom');
+    });
+
+    it('logs errors on rejected promises', async () => {
+      const fn = async () => {
+        throw new Error('async-boom');
+      };
+      const wrapped = traced(fn, 'asyncBoom', { category: 'test' });
+      await expect(wrapped()).rejects.toThrow('async-boom');
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('error');
+      expect(log!.success).toBe(false);
+    });
+
+    it('logs async success correctly', async () => {
+      const fn = async (x: number) => x * 3;
+      const wrapped = traced(fn, 'asyncMultiply', { category: 'test' });
       const result = await wrapped(5);
       expect(result).toBe(15);
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('info');
+      expect(log!.success).toBe(true);
     });
 
-    it('accepts options parameter without errors', () => {
-      const fn = (x: number) => x;
-      expect(() =>
-        traced(fn, 'op', {
-          logInput: true,
-          logOutput: true,
-          metadata: { env: 'test' },
-          category: 'unit-test',
-        })
-      ).not.toThrow();
-    });
-
-    it('accepts sanitizeInput and sanitizeOutput options', () => {
-      const fn = (x: number) => x;
-      const wrapped = traced(fn, 'op', {
-        sanitizeInput: (_input) => ({ redacted: true }),
-        sanitizeOutput: (_output) => ({ redacted: true }),
+    it('includes metadata in logs', () => {
+      const fn = () => 'ok';
+      const wrapped = traced(fn, 'metaOp', {
+        category: 'test',
+        metadata: { env: 'test', version: '1.0' },
       });
-      expect(wrapped).toBe(fn);
+      wrapped();
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.metadata).toEqual({ env: 'test', version: '1.0' });
     });
 
-    it('multiple traced wrappings do not cause issues', () => {
-      const fn = (x: number) => x + 1;
-      const once = traced(fn, 'first');
-      const twice = traced(once, 'second');
-      const thrice = traced(twice, 'third');
-      expect(thrice(10)).toBe(11);
+    it('logs input when logInput is true', () => {
+      const fn = (x: number) => x;
+      const wrapped = traced(fn, 'inputOp', {
+        category: 'test',
+        logInput: true,
+      });
+      wrapped(42);
+
+      const logs = stderrSpy.mock.calls.map((c) => {
+        try {
+          return JSON.parse(c[0] as string);
+        } catch {
+          return null;
+        }
+      });
+      const debugLog = logs.find((l) => l && String(l.msg).includes('start'));
+      expect(debugLog).toBeDefined();
+      expect(debugLog.input).toBeDefined();
     });
 
-    it('works with functions that throw errors', () => {
+    it('logs output when logOutput is true', () => {
+      const fn = () => ({ result: 'success' });
+      const wrapped = traced(fn, 'outputOp', {
+        category: 'test',
+        logOutput: true,
+      });
+      wrapped();
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.output).toEqual({ result: 'success' });
+    });
+
+    it('applies sanitizeInput before logging', () => {
+      const fn = (obj: { password: string }) => obj.password;
+      const wrapped = traced(fn, 'sanitizeIn', {
+        category: 'test',
+        logInput: true,
+        sanitizeInput: () => '[REDACTED]',
+      });
+      wrapped({ password: 'secret' });
+
+      const logs = stderrSpy.mock.calls.map((c) => {
+        try {
+          return JSON.parse(c[0] as string);
+        } catch {
+          return null;
+        }
+      });
+      const debugLog = logs.find((l) => l && String(l.msg).includes('start'));
+      expect(debugLog).toBeDefined();
+      expect(debugLog.input).toBe('[REDACTED]');
+    });
+
+    it('applies sanitizeOutput before logging', () => {
+      const fn = () => ({ token: 'abc123' });
+      const wrapped = traced(fn, 'sanitizeOut', {
+        category: 'test',
+        logOutput: true,
+        sanitizeOutput: () => '[REDACTED]',
+      });
+      wrapped();
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.output).toBe('[REDACTED]');
+    });
+
+    it('handles sanitize errors gracefully', () => {
+      const fn = () => 'result';
+      const wrapped = traced(fn, 'badSanitize', {
+        category: 'test',
+        logOutput: true,
+        sanitizeOutput: () => {
+          throw new Error('sanitize fail');
+        },
+      });
+      expect(() => wrapped()).not.toThrow();
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.output).toBe('[sanitize-error]');
+    });
+
+    it('measures duration accurately for sync functions', () => {
+      const fn = () => {
+        const start = Date.now();
+        while (Date.now() - start < 10) {
+          // busy wait
+        }
+        return 'done';
+      };
+      const wrapped = traced(fn, 'slowOp', { category: 'test' });
+      wrapped();
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.durationMs).toBeGreaterThanOrEqual(5);
+    });
+
+    it('propagates the original return value', () => {
+      const data = { nested: { value: [1, 2, 3] } };
+      const fn = () => data;
+      const wrapped = traced(fn, 'complex');
+      expect(wrapped()).toBe(data);
+    });
+
+    it('propagates thrown errors unchanged', () => {
       const fn = () => {
         throw new Error('expected');
       };
       const wrapped = traced(fn, 'throwing');
       expect(() => wrapped()).toThrow('expected');
     });
-
-    it('works with functions that take no arguments', () => {
-      const fn = () => 42;
-      const wrapped = traced(fn, 'constant');
-      expect(wrapped()).toBe(42);
-    });
-
-    it('works with functions returning complex objects', () => {
-      const data = { nested: { value: [1, 2, 3] } };
-      const fn = () => data;
-      const wrapped = traced(fn, 'complex');
-      expect(wrapped()).toBe(data);
-    });
   });
 
+  // ── withTrace() ──
+
   describe('withTrace()', () => {
-    it('returns the function result for sync functions', () => {
+    it('returns sync function result', () => {
       const result = withTrace(() => 'hello', 'greet');
       expect(result).toBe('hello');
     });
 
-    it('works with async functions', async () => {
+    it('returns async function result', async () => {
       const result = await withTrace(async () => 'async-value', 'asyncOp');
       expect(result).toBe('async-value');
     });
 
-    it('returns the result when called without operation name', () => {
-      const result = withTrace(() => 123);
-      expect(result).toBe(123);
+    it('logs completion for sync', () => {
+      withTrace(() => 123, 'syncOp', { category: 'test' });
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('info');
+      expect(log!.success).toBe(true);
     });
 
-    it('accepts options parameter without errors', () => {
-      const result = withTrace(() => 'ok', 'op', {
-        logInput: true,
-        logOutput: false,
-        metadata: { key: 'value' },
-        category: 'test-category',
-      });
-      expect(result).toBe('ok');
-    });
-
-    it('propagates errors from the wrapped function', () => {
+    it('propagates errors', () => {
       expect(() =>
         withTrace(() => {
           throw new Error('inner error');
         }, 'failing')
       ).toThrow('inner error');
-    });
 
-    it('returns complex objects', () => {
-      const obj = { a: 1, b: [2, 3] };
-      const result = withTrace(() => obj, 'complex');
-      expect(result).toBe(obj);
-    });
-
-    it('returns undefined when function returns nothing', () => {
-      const result = withTrace(() => {}, 'void');
-      expect(result).toBeUndefined();
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('error');
     });
   });
 
+  // ── createCategoryLogger() ──
+
   describe('createCategoryLogger()', () => {
-    it('returns an object with info, warn, error, and debug methods', () => {
+    it('returns a logger with all four methods', () => {
       const logger = createCategoryLogger('test');
-      expect(logger).toBeDefined();
       expect(typeof logger.info).toBe('function');
       expect(typeof logger.warn).toBe('function');
       expect(typeof logger.error).toBe('function');
       expect(typeof logger.debug).toBe('function');
     });
 
-    it('info() does not throw when called', () => {
+    it('info writes structured JSON to stderr', () => {
+      const logger = createCategoryLogger('auth');
+      logger.info('login success', { userId: 'u123' });
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('info');
+      expect(log!.category).toBe('auth');
+      expect(log!.msg).toBe('login success');
+      expect(log!.userId).toBe('u123');
+      expect(log!.ts).toBeDefined();
+    });
+
+    it('warn writes structured JSON to stderr', () => {
       const logger = createCategoryLogger('test');
-      expect(() => logger.info('message')).not.toThrow();
+      logger.warn('slow query', { durationMs: 2500 });
+
+      const log = getLastLog();
+      expect(log!.level).toBe('warn');
+      expect(log!.durationMs).toBe(2500);
     });
 
-    it('warn() does not throw when called', () => {
+    it('error writes structured JSON to stderr', () => {
       const logger = createCategoryLogger('test');
-      expect(() => logger.warn('warning')).not.toThrow();
+      logger.error('db connection failed');
+
+      const log = getLastLog();
+      expect(log!.level).toBe('error');
     });
 
-    it('error() does not throw when called', () => {
+    it('debug writes structured JSON to stderr', () => {
       const logger = createCategoryLogger('test');
-      expect(() => logger.error('error')).not.toThrow();
+      logger.debug('checkpoint');
+
+      const log = getLastLog();
+      expect(log!.level).toBe('debug');
     });
 
-    it('debug() does not throw when called', () => {
-      const logger = createCategoryLogger('test');
-      expect(() => logger.debug('debug')).not.toThrow();
-    });
-
-    it('info() accepts message and data arguments', () => {
-      const logger = createCategoryLogger('test');
-      expect(() => logger.info('msg', { key: 'value' })).not.toThrow();
-    });
-
-    it('warn() accepts message and extra arguments', () => {
-      const logger = createCategoryLogger('test');
-      expect(() => logger.warn('msg', { detail: 'x' }, 'extra')).not.toThrow();
-    });
-
-    it('error() accepts message and extra arguments', () => {
-      const logger = createCategoryLogger('test');
-      expect(() => logger.error('msg', new Error('test'), { context: true })).not.toThrow();
-    });
-
-    it('debug() accepts message and data arguments', () => {
-      const logger = createCategoryLogger('test');
-      expect(() => logger.debug('msg', { verbose: true })).not.toThrow();
-    });
-
-    it('methods return undefined (no-op)', () => {
-      const logger = createCategoryLogger('test');
-      expect(logger.info('msg')).toBeUndefined();
-      expect(logger.warn('msg')).toBeUndefined();
-      expect(logger.error('msg')).toBeUndefined();
-      expect(logger.debug('msg')).toBeUndefined();
-    });
-
-    it('works with different category names', () => {
-      const logger1 = createCategoryLogger('auth');
-      const logger2 = createCategoryLogger('verification');
-      const logger3 = createCategoryLogger('');
-
-      expect(() => logger1.info('test')).not.toThrow();
-      expect(() => logger2.info('test')).not.toThrow();
-      expect(() => logger3.info('test')).not.toThrow();
-    });
-
-    it('each call returns a new logger instance', () => {
+    it('each call returns a new instance', () => {
       const logger1 = createCategoryLogger('a');
       const logger2 = createCategoryLogger('b');
       expect(logger1).not.toBe(logger2);
+    });
+  });
+
+  // ── Trace Context & Span Propagation ──
+
+  describe('trace context', () => {
+    it('getCurrentTraceContext returns undefined outside traced', () => {
+      expect(getCurrentTraceContext()).toBeUndefined();
+    });
+
+    it('getCurrentTraceContext returns context inside traced sync function', () => {
+      const fn = () => getCurrentTraceContext();
+      const wrapped = traced(fn, 'ctxSync');
+      const ctx = wrapped();
+      expect(ctx).toBeDefined();
+      expect(typeof ctx!.traceId).toBe('string');
+      expect(typeof ctx!.spanId).toBe('string');
+      expect(ctx!.parentSpanId).toBeUndefined();
+    });
+
+    it('getCurrentTraceContext returns context inside traced async function', async () => {
+      const fn = async () => getCurrentTraceContext();
+      const wrapped = traced(fn, 'ctxAsync');
+      const ctx = await wrapped();
+      expect(ctx).toBeDefined();
+      expect(typeof ctx!.traceId).toBe('string');
+      expect(typeof ctx!.spanId).toBe('string');
+    });
+
+    it('nested traced operations inherit traceId and set parentSpanId', () => {
+      const childFn = () => getCurrentTraceContext();
+      const childTraced = traced(childFn, 'childOp');
+
+      const parentFn = () => childTraced();
+      const parentTraced = traced(parentFn, 'parentOp');
+
+      parentTraced();
+
+      const logs = stderrSpy.mock.calls.map((c) => {
+        try {
+          return JSON.parse(c[0] as string);
+        } catch {
+          return null;
+        }
+      });
+
+      const parentLog = logs.find(
+        (l) => l && String(l.msg).includes('parentOp') && l.level === 'info'
+      );
+      const childLog = logs.find(
+        (l) => l && String(l.msg).includes('childOp') && l.level === 'info'
+      );
+
+      expect(parentLog).toBeDefined();
+      expect(childLog).toBeDefined();
+      expect(parentLog.traceId).toBe(childLog.traceId);
+      expect(parentLog.spanId).toBe(childLog.parentSpanId);
+    });
+
+    it('nested async traced operations propagate context across awaits', async () => {
+      const childFn = async () => {
+        await new Promise((r) => setTimeout(r, 1));
+        return getCurrentTraceContext();
+      };
+      const childTraced = traced(childFn, 'asyncChild');
+
+      const parentFn = async () => {
+        await new Promise((r) => setTimeout(r, 1));
+        return childTraced();
+      };
+      const parentTraced = traced(parentFn, 'asyncParent');
+
+      const childCtx = await parentTraced();
+
+      expect(childCtx).toBeDefined();
+      const logs = stderrSpy.mock.calls.map((c) => {
+        try {
+          return JSON.parse(c[0] as string);
+        } catch {
+          return null;
+        }
+      });
+
+      const parentLog = logs.find(
+        (l) => l && String(l.msg).includes('asyncParent') && l.level === 'info'
+      );
+      const childLog = logs.find(
+        (l) => l && String(l.msg).includes('asyncChild') && l.level === 'info'
+      );
+
+      expect(parentLog).toBeDefined();
+      expect(childLog).toBeDefined();
+      expect(parentLog.traceId).toBe(childLog.traceId);
+      expect(parentLog.spanId).toBe(childLog.parentSpanId);
+    });
+
+    it('runWithTraceContext sets explicit traceId', () => {
+      const ctx = runWithTraceContext(() => getCurrentTraceContext(), {
+        traceId: 'explicit-trace-123',
+      });
+      expect(ctx).toBeDefined();
+      expect(ctx!.traceId).toBe('explicit-trace-123');
+    });
+
+    it('runWithTraceContext sets explicit parentSpanId', () => {
+      const ctx = runWithTraceContext(() => getCurrentTraceContext(), {
+        traceId: 't1',
+        spanId: 's1',
+        parentSpanId: 'p1',
+      });
+      expect(ctx).toBeDefined();
+      expect(ctx!.traceId).toBe('t1');
+      expect(ctx!.spanId).toBe('s1');
+      expect(ctx!.parentSpanId).toBe('p1');
+    });
+
+    it('traced logs include traceId and spanId fields', () => {
+      const fn = () => 'ok';
+      const wrapped = traced(fn, 'traceFields', { category: 'test' });
+      wrapped();
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(typeof log!.traceId).toBe('string');
+      expect(typeof log!.spanId).toBe('string');
+    });
+
+    it('traced with explicit traceId uses provided value', () => {
+      const fn = () => 'ok';
+      const wrapped = traced(fn, 'explicitTrace', { category: 'test', traceId: 'my-trace' });
+      wrapped();
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.traceId).toBe('my-trace');
     });
   });
 });

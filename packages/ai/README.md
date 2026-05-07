@@ -1,8 +1,8 @@
 # @gtcx/ai
 
-Observability stubs and tracing hooks for AI-native operations.
+Observability and tracing instrumentation for GTCX operations.
 
-> **Stub package.** `traced()` and `withTrace()` are no-ops in this package. The full tracing implementation lives in `gtcx-intelligence` and is injected at runtime via the optional peer dependency pattern described in [ADR-008](../../docs/decisions/008-optional-tracing-peer-deps.md). Downstream packages (`@gtcx/crypto`, `@gtcx/verification`) gracefully degrade when the full implementation is unavailable.
+Provides `traced()` function wrappers that measure duration, log structured JSON to stderr, and capture errors — with zero external dependencies. Used by `@gtcx/crypto` and `@gtcx/verification` for operational telemetry and audit trails.
 
 ## Installation
 
@@ -15,23 +15,38 @@ pnpm add @gtcx/ai
 ```typescript
 import { traced, createCategoryLogger } from '@gtcx/ai';
 
-const classify = traced('classify', async (data) => {
-  return { category: 'gold', confidence: 0.97 };
-});
+// Wrap a function with tracing
+const classify = traced(
+  async (data: unknown) => ({ category: 'gold', confidence: 0.97 }),
+  'classify',
+  { category: 'ai', logOutput: true }
+);
 
+// Scoped structured logger
 const logger = createCategoryLogger('ai.classification');
 logger.info('Done', { confidence: 0.97 });
 ```
 
 ## API
 
-| Export                           | Description                |
-| -------------------------------- | -------------------------- |
-| `traced(name, fn)`               | Wrap function with tracing |
-| `withTrace(name, fn)`            | Create traced version      |
-| `createCategoryLogger(category)` | Scoped logger              |
+| Export                           | Description                                      |
+| -------------------------------- | ------------------------------------------------ |
+| `traced(fn, name, opts?)`        | Wrap function with duration + structured logging |
+| `withTrace(fn, name?, opts?)`    | Execute a no-arg function with tracing           |
+| `createCategoryLogger(category)` | Scoped logger emitting JSON lines to stderr      |
 
-> No runtime dependencies.
+### TracedOptions
+
+| Option           | Type                           | Description                          |
+| ---------------- | ------------------------------ | ------------------------------------ |
+| `category`       | `string`                       | Logger category (default: `default`) |
+| `logInput`       | `boolean`                      | Include sanitized input in logs      |
+| `logOutput`      | `boolean`                      | Include sanitized output in logs     |
+| `sanitizeInput`  | `(input: unknown) => unknown`  | Redact sensitive inputs              |
+| `sanitizeOutput` | `(output: unknown) => unknown` | Redact sensitive outputs             |
+| `metadata`       | `Record<string, unknown>`      | Extra fields attached to every log   |
+
+> No runtime dependencies. Safe to use in security-sensitive packages.
 
 ## Related
 

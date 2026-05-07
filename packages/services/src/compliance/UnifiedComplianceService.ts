@@ -1,19 +1,19 @@
 import { createHashCommitmentZkpEngine } from '@gtcx/crypto';
 import { ComplianceConfigSchema, ComplianceReportOptionsSchema, safeParse } from '@gtcx/domain';
 
+import { buildDashboard } from './dashboard';
 import { getFilteredComplianceRecords } from './data-access';
 import { getDefaultFrameworks } from './frameworks';
 import { buildComplianceResult, createComplianceRecord, generateCorrelationId } from './helpers';
 import {
-  calculateComplianceTrend,
-  generateActionItems,
-  generateRecommendations,
-  generateReportBreakdown,
-  getComplianceByCategory,
-  getRecentActivity,
-  getUrgentActions,
-  getUpcomingDeadlines,
-} from './reports';
+  DomainEventFactory,
+  nullEventEmitter,
+  nullMetricsCollector,
+  nullOperationLogger,
+  ServiceMetrics,
+} from './infrastructure';
+import { getAllComplianceRecords } from './queries';
+import { generateActionItems, generateRecommendations, generateReportBreakdown } from './reports';
 import type {
   AssetLot,
   ComplianceConfig,
@@ -36,48 +36,8 @@ import {
   DEFAULT_CONFIG,
   toErrorCause,
 } from './types';
-import {
-  checkDocumentation,
-  checkKYCCompliance,
-  checkLocationCompliance,
-  checkProducerLicense,
-  checkTraderLicense,
-  verifyZkProofIfPresent,
-} from './validators';
-
-// ---------------------------------------------------------------------------
-// SERVICE METRICS & EVENT FACTORY (lightweight local implementations)
-// ---------------------------------------------------------------------------
-
-class ServiceMetrics {
-  constructor(
-    private collector: IMetricsCollector | null,
-    private service: string
-  ) {}
-  counter(name: string, value: number, labels?: Record<string, string>) {
-    this.collector?.counter(`${this.service}.${name}`, value, labels);
-  }
-  histogram(name: string, value: number, labels?: Record<string, string>) {
-    this.collector?.histogram(`${this.service}.${name}`, value, labels);
-  }
-}
-
-class DomainEventFactory {
-  compliance(type: string, payload: unknown, correlationId?: string): unknown {
-    return { type, payload, correlationId, timestamp: new Date().toISOString() };
-  }
-}
-
-const nullEventEmitter: IDomainEventEmitter = { emit: () => {} };
-const nullMetricsCollector: IMetricsCollector = {
-  counter: () => {},
-  histogram: () => {},
-};
-const nullOperationLogger: IOperationLogger = {
-  info: () => {},
-  warn: () => {},
-  error: () => {},
-};
+import { checkDocumentation, checkLocationCompliance, verifyZkProofIfPresent } from './validators';
+import { VerificationMethods } from './verification-methods';
 
 // ============================================================================
 // UNIFIED COMPLIANCE SERVICE
@@ -94,6 +54,7 @@ export class UnifiedComplianceService {
   private frameworks: RegulatoryFramework[];
   private zkpVerifier: ZkVerifier;
   private complianceRepo: IComplianceRepository | undefined;
+  private verificationMethods: VerificationMethods;
 
   constructor(
     dependencies: {
@@ -126,6 +87,7 @@ export class UnifiedComplianceService {
     }
     this.config = { ...DEFAULT_CONFIG, ...configResult.data } as ComplianceConfig;
     this.frameworks = config.frameworks || getDefaultFrameworks(this.config);
+    this.verificationMethods = new VerificationMethods(this.complianceRepo);
   }
 
   // ==========================================================================
@@ -163,28 +125,8 @@ export class UnifiedComplianceService {
 
   async getComplianceDashboard(): Promise<ComplianceDashboard> {
     try {
-      const allRecords = await this.getAllComplianceRecords();
-      const compliant = allRecords.filter((r) => r.status === 'compliant');
-      const critical = allRecords.filter((r) => r.severity === 'critical');
-      const pending = allRecords.filter(
-        (r) => r.status === 'pending_review' || r.resolution?.status === 'pending'
-      );
-      const score = allRecords.length > 0 ? (compliant.length / allRecords.length) * 100 : 100;
-
-      return {
-        overview: {
-          totalRecords: allRecords.length,
-          compliantPercentage: Math.round(score),
-          pendingIssues: pending.length,
-          criticalViolations: critical.length,
-          complianceScore: Math.round(score),
-          trendDirection: await calculateComplianceTrend(allRecords),
-        },
-        byCategory: await getComplianceByCategory(allRecords),
-        urgentActions: await getUrgentActions(allRecords),
-        recentActivity: await getRecentActivity(allRecords),
-        upcomingDeadlines: await getUpcomingDeadlines(allRecords),
-      };
+      const allRecords = await getAllComplianceRecords(this.complianceRepo);
+      return buildDashboard(allRecords);
     } catch (error) {
       throw new ComplianceServiceError('Failed to get compliance dashboard', {
         cause: toErrorCause(error),
@@ -468,7 +410,7 @@ export class UnifiedComplianceService {
 
     try {
       const records = await getFilteredComplianceRecords(validOptions, () =>
-        this.getAllComplianceRecords()
+        getAllComplianceRecords(this.complianceRepo)
       );
       const report = {
         summary: {
@@ -529,27 +471,17 @@ export class UnifiedComplianceService {
   }
 
   // ==========================================================================
-  // PROTECTED VERIFICATION METHODS (overrideable for testing)
+  // VERIFICATION METHODS
   // ==========================================================================
 
   protected async checkProducerLicense(producerId: string) {
-    return checkProducerLicense(producerId, this.complianceRepo);
+    return this.verificationMethods.checkProducerLicense(producerId);
   }
 
   protected async checkTraderLicense(traderId: string) {
-    return checkTraderLicense(traderId, this.complianceRepo);
+    return this.verificationMethods.checkTraderLicense(traderId);
   }
-
   protected async checkKYCCompliance(transaction: Transaction) {
-    return checkKYCCompliance(transaction, this.complianceRepo);
-  }
-
-  // ==========================================================================
-  // DATA ACCESS
-  // ==========================================================================
-
-  private async getAllComplianceRecords(): Promise<ComplianceRecord[]> {
-    if (this.complianceRepo) return this.complianceRepo.getRecords();
-    return [];
+    return this.verificationMethods.checkKYCCompliance(transaction);
   }
 }
