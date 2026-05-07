@@ -16,7 +16,6 @@
 
 import { hash256 } from '@gtcx/crypto';
 
-import type { CanonicalRequestContext, CanonicalRequestString } from './types';
 import {
   buildSignedHeaderNames,
   canonicalizeBody,
@@ -24,6 +23,8 @@ import {
   canonicalizePath,
   canonicalizeQueryString,
 } from './normalize';
+
+import type { CanonicalRequestContext, CanonicalRequestString } from './types';
 
 /** Build the canonical request string and its hash. */
 export function buildCanonicalRequest(
