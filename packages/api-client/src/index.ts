@@ -1,4 +1,5 @@
 export * from './types';
+export * from './canonical';
 
 import { Buffer } from 'node:buffer';
 
