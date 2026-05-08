@@ -118,6 +118,17 @@ describe('isValidDID', () => {
 // createDIDDocument
 // ---------------------------------------------------------------------------
 describe('createDIDDocument', () => {
+  it('throws if private key material is detected in document', async () => {
+    const { identity } = await createIdentity();
+    const originalStringify = JSON.stringify;
+    JSON.stringify = () => '{"privateKey":"leaked"}';
+    try {
+      expect(() => createDIDDocument(identity)).toThrow('DID document must not contain private key material');
+    } finally {
+      JSON.stringify = originalStringify;
+    }
+  });
+
   it('returns a valid W3C DID document structure', async () => {
     const { identity } = await createIdentity();
     const doc = createDIDDocument(identity);

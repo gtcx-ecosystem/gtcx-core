@@ -91,6 +91,16 @@ Tracks user acceptance testing (UAT) evidence for features and sprints. Updated 
 - `services/src/registration.ts` 599→364 LOC (6 submodules)
 - `services/src/trading.ts` 728→411 LOC (6 submodules)
 
+### [2026-05-08] Sprint 6 — Coverage Improvement (identity + connectivity)
+
+**Type:** Regression check
+**Tested by:** Automated test suite + coverage report
+**Status:** Pass
+**Evidence:**
+- `packages/identity/tests/` — 78 tests, coverage: 94.05% stmts / 86.12% branch / 91.17% funcs / 94.81% lines
+- `packages/connectivity/tests/` — 32 tests, coverage: 97.36% stmts / 86.95% branch / 93.75% funcs / 100% lines
+**Notes:** Added targeted tests for error paths, defensive checks, and default behavior. Both packages now exceed 85% threshold across all dimensions.
+
 ---
 
 ## Reference

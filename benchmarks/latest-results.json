@@ -14,6 +14,7 @@
     "zkp.bulletproofs_amount_range_prove_ms": 3.6161,
     "zkp.bulletproofs_amount_range_verify_ms": 0.9579,
     "zkp.schnorr_identity_prove_ms": 0.0964,
-    "zkp.schnorr_identity_verify_ms": 0.096
+    "zkp.schnorr_identity_verify_ms": 0.096,
+    "compliance.report_generate_1000records_ms": 85
   }
 }

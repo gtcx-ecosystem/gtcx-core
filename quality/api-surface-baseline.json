@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-08T10:21:32.394Z",
+  "generatedAt": "2026-05-08T10:38:39.067Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.2",
@@ -974,7 +974,7 @@
       "version": "2.0.0",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "d0a81e538d5f0789e64f4bdb2650e54f9564f386c0e1f45a0f92541fe7f5fb8f",
+      "hash": "a4fd0732fe0ed81f3b0007841417c8dc854d6bfbae50e258e5af01d795ea7e6b",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",
