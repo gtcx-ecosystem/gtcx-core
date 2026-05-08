@@ -141,9 +141,9 @@
         "keyId": "395ab1f99c0bf60c9e09ad01afe8e8d6",
         "timestamp": "2026-05-08T12:00:00.000Z",
         "nonce": "aabbccddeeff00112233445566778899",
-        "audience": "api.gtcx.io",
-        "expectedCanonical": "POST\n/v1/lots\na=2&z=1\n7a38bf81f383f69433ad6e900d35b3e2385593f76a7b7ab5d4355b8ba41ee24b\n2026-05-08T12:00:00.000Z\naabbccddeeff00112233445566778899\ndid:gtcx:tp_8381e261f574193459e3db639d564565\n395ab1f99c0bf60c9e09ad01afe8e8d6\napi.gtcx.io",
-        "expectedCanonicalHash": "aaa9b5c135a4fa60326f776d897eb0e93e201b74ed95e9418c6c359b0a6647bf"
+        "audience": "https://api.gtcx.io",
+        "expectedCanonical": "POST\n/v1/lots\na=2&z=1\n7a38bf81f383f69433ad6e900d35b3e2385593f76a7b7ab5d4355b8ba41ee24b\n2026-05-08T12:00:00.000Z\naabbccddeeff00112233445566778899\ndid:gtcx:tp_8381e261f574193459e3db639d564565\n395ab1f99c0bf60c9e09ad01afe8e8d6\nhttps://api.gtcx.io",
+        "expectedCanonicalHash": "2188416d88e5e5b59824ecfb8ca538367d105a088b6565b568b77bb38260bf95"
       },
       {
         "id": "canonical-minimal",
@@ -157,9 +157,9 @@
         "keyId": "395ab1f99c0bf60c9e09ad01afe8e8d6",
         "timestamp": "2026-05-08T12:00:00.000Z",
         "nonce": "aabbccddeeff00112233445566778899",
-        "audience": "api.gtcx.io",
-        "expectedCanonical": "GET\n/health\n\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n2026-05-08T12:00:00.000Z\naabbccddeeff00112233445566778899\ndid:gtcx:tp_8381e261f574193459e3db639d564565\n395ab1f99c0bf60c9e09ad01afe8e8d6\napi.gtcx.io",
-        "expectedCanonicalHash": "1842555163c88f1fa64ef68b140be1ee4afe1b5bc5aed38c86ef67f4959da6f0"
+        "audience": "https://api.gtcx.io",
+        "expectedCanonical": "GET\n/health\n\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n2026-05-08T12:00:00.000Z\naabbccddeeff00112233445566778899\ndid:gtcx:tp_8381e261f574193459e3db639d564565\n395ab1f99c0bf60c9e09ad01afe8e8d6\nhttps://api.gtcx.io",
+        "expectedCanonicalHash": "c27d054832155d45265fc885f99ca26419f85d1005b155793a0f0eb603c92f08"
       }
     ],
     "envelope": [
