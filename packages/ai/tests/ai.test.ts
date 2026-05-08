@@ -8,6 +8,7 @@ import {
   runWithTraceContext,
   attachProvenance,
   createProvenanceLogger,
+  redactSecrets,
 } from '../src/index';
 
 describe('@gtcx/ai', () => {
@@ -238,6 +239,109 @@ describe('@gtcx/ai', () => {
       };
       const wrapped = traced(fn, 'throwing');
       expect(() => wrapped()).toThrow('expected');
+    });
+  });
+
+  // ── default secret redaction ──
+
+  describe('default secret redaction', () => {
+    it('redactSecrets redacts sensitive keys in objects', () => {
+      const input = { user: 'alice', privateKey: 'deadbeef', nested: { token: 'abc' } };
+      const result = redactSecrets(input) as Record<string, unknown>;
+      expect(result.user).toBe('alice');
+      expect(result.privateKey).toBe('[REDACTED]');
+      expect((result.nested as Record<string, unknown>).token).toBe('[REDACTED]');
+    });
+
+    it('redactSecrets passes through primitives and nulls', () => {
+      expect(redactSecrets(null)).toBeNull();
+      expect(redactSecrets(undefined)).toBeUndefined();
+      expect(redactSecrets(42)).toBe(42);
+      expect(redactSecrets('hello')).toBe('hello');
+    });
+
+    it('redactSecrets handles arrays', () => {
+      const input = [{ secret: '123' }, { name: 'bob' }];
+      const result = redactSecrets(input) as Record<string, unknown>[];
+      expect(result[0]!.secret).toBe('[REDACTED]');
+      expect(result[1]!.name).toBe('bob');
+    });
+
+    it('applies default redaction when logInput is true and no sanitizeInput', () => {
+      const fn = (obj: { password: string; name: string }) => obj.name;
+      const wrapped = traced(fn, 'defaultRedactIn', {
+        category: 'test',
+        logInput: true,
+      });
+      wrapped({ password: 'hunter2', name: 'alice' });
+
+      const logs = stderrSpy.mock.calls.map((c) => {
+        try {
+          return JSON.parse(c[0] as string);
+        } catch {
+          return null;
+        }
+      });
+      const debugLog = logs.find((l) => l && String(l.msg).includes('start'));
+      expect(debugLog).toBeDefined();
+      const inputArr = debugLog.input as Record<string, unknown>[];
+      const firstArg = inputArr[0] as Record<string, unknown>;
+      expect(firstArg.password).toBe('[REDACTED]');
+      expect(firstArg.name).toBe('alice');
+    });
+
+    it('applies default redaction when logOutput is true and no sanitizeOutput', () => {
+      const fn = () => ({ apiKey: 'sk-123', status: 'ok' });
+      const wrapped = traced(fn, 'defaultRedactOut', {
+        category: 'test',
+        logOutput: true,
+      });
+      wrapped();
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      const output = log!.output as Record<string, unknown>;
+      expect(output.apiKey).toBe('[REDACTED]');
+      expect(output.status).toBe('ok');
+    });
+
+    it('explicit sanitizeInput overrides default redaction', () => {
+      const fn = (obj: { secret: string }) => obj.secret;
+      const wrapped = traced(fn, 'explicitOverride', {
+        category: 'test',
+        logInput: true,
+        sanitizeInput: () => '[CUSTOM]',
+      });
+      wrapped({ secret: 'value' });
+
+      const logs = stderrSpy.mock.calls.map((c) => {
+        try {
+          return JSON.parse(c[0] as string);
+        } catch {
+          return null;
+        }
+      });
+      const debugLog = logs.find((l) => l && String(l.msg).includes('start'));
+      expect(debugLog.input).toBe('[CUSTOM]');
+    });
+
+    it('does not apply redaction when logInput is false', () => {
+      const fn = (obj: { privateKey: string }) => obj.privateKey;
+      const wrapped = traced(fn, 'noRedact', {
+        category: 'test',
+        logInput: false,
+      });
+      wrapped({ privateKey: 'should-not-appear' });
+
+      const logs = stderrSpy.mock.calls.map((c) => {
+        try {
+          return JSON.parse(c[0] as string);
+        } catch {
+          return null;
+        }
+      });
+      const debugLog = logs.find((l) => l && String(l.msg).includes('start'));
+      expect(debugLog.input).toBeUndefined();
     });
   });
 

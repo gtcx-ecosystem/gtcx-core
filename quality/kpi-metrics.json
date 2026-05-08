@@ -1,150 +1,156 @@
 {
-  "generatedAt": "2026-02-19T18:56:20.057Z",
+  "generatedAt": "2026-05-08T19:42:23.565Z",
   "source": {
     "runId": null,
     "runAttempt": null,
     "sha": null,
     "ref": null
   },
+  "history": {
+    "path": "artifacts/ci-history.json",
+    "exists": true,
+    "source": "local-or-missing-github-auth",
+    "windowDays": 30
+  },
   "criticalCoverage": {
     "packages": {
       "crypto": {
         "statements": {
-          "covered": 644,
-          "total": 681,
-          "pct": 94.56681350954479
+          "covered": 371,
+          "total": 430,
+          "pct": 86.27906976744187
         },
         "branches": {
-          "covered": 143,
-          "total": 150,
-          "pct": 95.33333333333334
+          "covered": 188,
+          "total": 234,
+          "pct": 80.34188034188034
         },
         "functions": {
-          "covered": 63,
-          "total": 74,
-          "pct": 85.13513513513513
+          "covered": 93,
+          "total": 101,
+          "pct": 92.07920792079209
         },
         "lines": {
-          "covered": 644,
-          "total": 681,
-          "pct": 94.56681350954479
+          "covered": 371,
+          "total": 430,
+          "pct": 86.27906976744187
         }
       },
       "domain": {
         "statements": {
-          "covered": 1543,
-          "total": 1601,
-          "pct": 96.37726420986883
+          "covered": 624,
+          "total": 672,
+          "pct": 92.85714285714286
         },
         "branches": {
-          "covered": 441,
-          "total": 462,
-          "pct": 95.45454545454545
+          "covered": 301,
+          "total": 341,
+          "pct": 88.26979472140762
         },
         "functions": {
-          "covered": 166,
-          "total": 177,
-          "pct": 93.78531073446328
+          "covered": 195,
+          "total": 213,
+          "pct": 91.54929577464789
         },
         "lines": {
-          "covered": 1543,
-          "total": 1601,
-          "pct": 96.37726420986883
+          "covered": 624,
+          "total": 672,
+          "pct": 92.85714285714286
         }
       },
       "security": {
         "statements": {
-          "covered": 1899,
-          "total": 2114,
-          "pct": 89.82970671712394
+          "covered": 765,
+          "total": 833,
+          "pct": 91.83673469387756
         },
         "branches": {
-          "covered": 374,
-          "total": 407,
-          "pct": 91.8918918918919
+          "covered": 412,
+          "total": 471,
+          "pct": 87.47346072186836
         },
         "functions": {
-          "covered": 117,
-          "total": 130,
-          "pct": 90
+          "covered": 145,
+          "total": 154,
+          "pct": 94.15584415584416
         },
         "lines": {
-          "covered": 1899,
-          "total": 2114,
-          "pct": 89.82970671712394
+          "covered": 765,
+          "total": 833,
+          "pct": 91.83673469387756
         }
       },
       "services": {
         "statements": {
-          "covered": 1215,
-          "total": 1328,
-          "pct": 91.4909638554217
+          "covered": 497,
+          "total": 546,
+          "pct": 91.02564102564102
         },
         "branches": {
-          "covered": 197,
-          "total": 224,
-          "pct": 87.94642857142857
+          "covered": 257,
+          "total": 324,
+          "pct": 79.32098765432099
         },
         "functions": {
-          "covered": 59,
-          "total": 63,
-          "pct": 93.65079365079364
+          "covered": 136,
+          "total": 154,
+          "pct": 88.31168831168831
         },
         "lines": {
-          "covered": 1215,
-          "total": 1328,
-          "pct": 91.4909638554217
+          "covered": 497,
+          "total": 546,
+          "pct": 91.02564102564102
         }
       },
       "verification": {
         "statements": {
-          "covered": 1622,
-          "total": 1775,
-          "pct": 91.38028169014085
+          "covered": 446,
+          "total": 476,
+          "pct": 93.69747899159664
         },
         "branches": {
-          "covered": 205,
-          "total": 238,
-          "pct": 86.1344537815126
+          "covered": 281,
+          "total": 338,
+          "pct": 83.13609467455622
         },
         "functions": {
-          "covered": 51,
-          "total": 66,
-          "pct": 77.27272727272727
+          "covered": 77,
+          "total": 90,
+          "pct": 85.55555555555556
         },
         "lines": {
-          "covered": 1622,
-          "total": 1775,
-          "pct": 91.38028169014085
+          "covered": 446,
+          "total": 476,
+          "pct": 93.69747899159664
         }
       }
     },
     "aggregate": {
       "statements": {
-        "covered": 6923,
-        "total": 7499,
-        "pct": 92.31897586344846
+        "covered": 2703,
+        "total": 2957,
+        "pct": 91.41021305377072
       },
       "branches": {
-        "covered": 1360,
-        "total": 1481,
-        "pct": 91.82984469952734
+        "covered": 1439,
+        "total": 1708,
+        "pct": 84.25058548009368
       },
       "functions": {
-        "covered": 456,
-        "total": 510,
-        "pct": 89.41176470588236
+        "covered": 646,
+        "total": 712,
+        "pct": 90.73033707865169
       },
       "lines": {
-        "covered": 6923,
-        "total": 7499,
-        "pct": 92.31897586344846
+        "covered": 2703,
+        "total": 2957,
+        "pct": 91.41021305377072
       }
     },
     "thresholdPass": true
   },
   "performanceBudget": {
-    "metricsCount": 7,
+    "metricsCount": 14,
     "failedMetrics": [],
     "pass": true
   },
@@ -158,6 +164,6 @@
     "flakyTestRatePercent": 0,
     "docsApiDriftIncidentsMonth": 0,
     "securityPolicyViolationsMerged": 0,
-    "ciQualityGatePassRatePercent": 100
+    "ciQualityGatePassRatePercent": 0
   }
 }

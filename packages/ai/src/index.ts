@@ -137,6 +137,51 @@ export function createCategoryLogger(category: string): CategoryLogger {
 }
 
 // ---------------------------------------------------------------------------
+// Default secret redaction (defense-in-depth)
+// ---------------------------------------------------------------------------
+
+/**
+ * Keys whose values are automatically redacted when logged.
+ * Applied as a default when `logInput` or `logOutput` is true
+ * and no explicit sanitizer is provided — prevents accidental
+ * leakage of cryptographic material through traced operations.
+ */
+const REDACTED_KEY_PATTERNS = [
+  'privatekey',
+  'private_key',
+  'secret',
+  'seed',
+  'mnemonic',
+  'password',
+  'token',
+  'apikey',
+  'api_key',
+  'randomness',
+];
+
+export function redactSecrets(value: unknown): unknown {
+  if (value === null || value === undefined || typeof value !== 'object') {
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => redactSecrets(item));
+  }
+
+  const result: Record<string, unknown> = {};
+  for (const [key, val] of Object.entries(value as Record<string, unknown>)) {
+    if (REDACTED_KEY_PATTERNS.some((p) => key.toLowerCase().includes(p))) {
+      result[key] = '[REDACTED]';
+    } else if (typeof val === 'object' && val !== null) {
+      result[key] = redactSecrets(val);
+    } else {
+      result[key] = val;
+    }
+  }
+  return result;
+}
+
+// ---------------------------------------------------------------------------
 // traced — wrap any function with duration + structured logging
 // ---------------------------------------------------------------------------
 
@@ -195,9 +240,11 @@ export function traced<TArgs extends unknown[], TReturn>(
     const timestamp = Date.now();
 
     let input: unknown = args;
-    if (options?.sanitizeInput) {
+    const inputSanitizer =
+      options?.sanitizeInput ?? (options?.logInput ? redactSecrets : undefined);
+    if (inputSanitizer) {
       try {
-        input = options.sanitizeInput(args);
+        input = inputSanitizer(args);
       } catch {
         input = '[sanitize-error]';
       }
@@ -216,9 +263,11 @@ export function traced<TArgs extends unknown[], TReturn>(
     const complete = (result: TReturn): TReturn => {
       const durationMs = performance.now() - start;
       let output: unknown = result;
-      if (options?.sanitizeOutput) {
+      const outputSanitizer =
+        options?.sanitizeOutput ?? (options?.logOutput ? redactSecrets : undefined);
+      if (outputSanitizer) {
         try {
-          output = options.sanitizeOutput(result);
+          output = outputSanitizer(result);
         } catch {
           output = '[sanitize-error]';
         }

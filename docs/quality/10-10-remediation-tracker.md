@@ -14,7 +14,7 @@ This tracker is updated by `pnpm quality:kpi:export` and supports the 10/10 prod
 | Flaky test rate                    | 0%       | <1%    | 0%      |
 | Docs/API drift incidents/month     | 0        | 0      | 0       |
 | Security policy violations merged  | 0        | 0      | 0       |
-| CI quality gate pass rate          | 100%     | >98%   | 100%    |
+| CI quality gate pass rate          | 0%       | >98%   | 0%      |
 
 ## Current Status
 
