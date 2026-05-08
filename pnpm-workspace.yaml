@@ -29,6 +29,15 @@ packages:
   # Event system
   - 'packages/events'
 
+  # Resilience primitives
+  - 'packages/resilience'
+
+  # Telemetry (metrics, traces, logs)
+  - 'packages/telemetry'
+
+  # Runtime substrate (batteries-included)
+  - 'packages/runtime'
+
   # Common utilities
   - 'packages/utils'
   - 'packages/logging'

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-08T11:37:57.962Z",
+  "generatedAt": "2026-05-08T18:33:00.868Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.2",
@@ -27,7 +27,7 @@
       "version": "0.3.0",
       "dir": "packages/api-client",
       "typesPath": "packages/api-client/dist/index.d.ts",
-      "hash": "ce470287c0e65d9db850ab872ec048fbb97c7e16312696e6e46be2121eef02e1",
+      "hash": "1679ab0741da912b9067cfbadb5b19ffcc3e31992d3388187318b7e5e0099d28",
       "exports": [
         "AbortError",
         "ApiClientError",
@@ -73,15 +73,18 @@
         "parseDID",
         "parseEnvelope",
         "QueuedResponse",
+        "RequestInterceptor",
         "RequestOptions",
         "RequestSigner",
         "RequestSigningContext",
+        "ResponseInterceptor",
         "serializeEnvelope",
         "SIGNATURE_HEADER_NAME",
         "SignatureAlgorithm",
         "SignatureEnvelope",
         "SigningError",
         "SigningKeyMaterial",
+        "TelemetryHooks",
         "TimeoutError",
         "TIMESTAMP_HEADER_NAME",
         "VerificationResult",
@@ -92,8 +95,9 @@
       "version": "0.3.0",
       "dir": "packages/connectivity",
       "typesPath": "packages/connectivity/dist/index.d.ts",
-      "hash": "68188df4b059614e0448f835e22479ed1967437f03987b0ffd55a03ee9c0fa25",
+      "hash": "fe0d9a49d284a276f02ccba6b6b6e17928a8c5ba70bf30f1928c7497053010d5",
       "exports": [
+        "adaptClientOptionsForProfile",
         "classifyProfile",
         "ConnectivityCheckFn",
         "ConnectivityCheckResult",
@@ -101,7 +105,10 @@
         "ConnectivityDetectorOptions",
         "ConnectivityListener",
         "ConnectivityProfile",
-        "ConnectivityState"
+        "ConnectivityState",
+        "createAdaptiveClientOptions",
+        "createOfflineHandlerFromDetector",
+        "DEFAULT_PROFILE_CONFIG"
       ]
     },
     "@gtcx/crypto": {
@@ -521,6 +528,40 @@
         "TransportError"
       ]
     },
+    "@gtcx/resilience": {
+      "version": "0.1.0",
+      "dir": "packages/resilience",
+      "typesPath": "packages/resilience/dist/index.d.ts",
+      "hash": "cec87e0c14de482213536a5b6a8afbbadf1bb885aeb7c04a2a88eaefe9b892f9",
+      "exports": [
+        "Bulkhead",
+        "BulkheadConfig",
+        "BulkheadRejectedError",
+        "calculateDelay",
+        "CircuitBreaker",
+        "CircuitBreakerConfig",
+        "CircuitBreakerError",
+        "CircuitBreakerState",
+        "CircuitBreakerStats",
+        "createBulkhead",
+        "createCircuitBreaker",
+        "isRetryableError",
+        "JitterMode",
+        "RetryPolicy",
+        "RetryStrategy",
+        "TimeoutConfig",
+        "TimeoutError",
+        "withRetry",
+        "withTimeout"
+      ]
+    },
+    "@gtcx/runtime": {
+      "version": "0.1.0",
+      "dir": "packages/runtime",
+      "typesPath": "packages/runtime/dist/index.d.ts",
+      "hash": "92b430bcab37a83c2c7532bd63d9f73bed2c602f95366ad5e3b5948f103be771",
+      "exports": ["createRuntime", "DeploymentProfile", "Runtime", "RuntimeOptions"]
+    },
     "@gtcx/schemas": {
       "version": "2.0.0",
       "dir": "packages/schemas",
@@ -750,6 +791,32 @@
         "SyncOptions",
         "SyncResult",
         "SyncStatus"
+      ]
+    },
+    "@gtcx/telemetry": {
+      "version": "0.1.0",
+      "dir": "packages/telemetry",
+      "typesPath": "packages/telemetry/dist/index.d.ts",
+      "hash": "a94dd6f7bc9f6875c0911dbdfed54ba5c8660816d59832740efd05da0e19db4e",
+      "exports": [
+        "Counter",
+        "createInMemoryMetricsCollector",
+        "createNoopTracer",
+        "createOtelTracer",
+        "createSpanContext",
+        "createTelemetryLogger",
+        "extractTraceContext",
+        "Gauge",
+        "getCurrentSpanContext",
+        "Histogram",
+        "injectTraceContext",
+        "MetricsCollector",
+        "PrometheusMetricsCollector",
+        "runWithSpanContext",
+        "Span",
+        "SpanContext",
+        "TelemetryLogger",
+        "Tracer"
       ]
     },
     "@gtcx/types": {

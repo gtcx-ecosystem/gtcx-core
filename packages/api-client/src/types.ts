@@ -1,3 +1,5 @@
+import type { CircuitBreaker, RetryPolicy } from '@gtcx/resilience';
+import type { SpanContext } from '@gtcx/telemetry';
 import type { Dispatcher } from 'undici';
 
 export type ApiErrorCategory =
@@ -33,6 +35,43 @@ export interface OfflineHandler {
   enqueue(entry: OfflineQueueEntry): Promise<string>;
 }
 
+export interface RequestInterceptor {
+  (context: {
+    method: string;
+    url: string;
+    headers: Record<string, string>;
+    body?: unknown;
+  }):
+    | Promise<{ method?: string; url?: string; headers?: Record<string, string>; body?: unknown }>
+    | { method?: string; url?: string; headers?: Record<string, string>; body?: unknown };
+}
+
+export interface ResponseInterceptor {
+  <T>(context: {
+    response: ApiResponse<T>;
+    method: string;
+    url: string;
+  }): Promise<ApiResponse<T> | void> | ApiResponse<T> | void;
+}
+
+export interface TelemetryHooks {
+  onRequestStart?(context: { method: string; url: string; headers: Record<string, string> }): void;
+  onRequestComplete?(context: {
+    method: string;
+    url: string;
+    status: number;
+    durationMs: number;
+    attempt: number;
+  }): void;
+  onRequestError?(context: {
+    method: string;
+    url: string;
+    error: unknown;
+    retryable: boolean;
+    attempt: number;
+  }): void;
+}
+
 export interface ApiClientOptions {
   baseUrl: string;
   timeout?: number; // default 30000
@@ -43,6 +82,21 @@ export interface ApiClientOptions {
   dispatcher?: Dispatcher;
   mtls?: MtlsOptions;
   offline?: OfflineHandler;
+  /** Request/response interceptors for cross-cutting concerns */
+  interceptors?: {
+    request?: RequestInterceptor[];
+    response?: ResponseInterceptor[];
+  };
+  /** Circuit breaker for preventing cascade failures */
+  circuitBreaker?: CircuitBreaker;
+  /** Adaptive retry policy (replaces fixed exponential backoff) */
+  retryPolicy?: RetryPolicy;
+  /** Deduplicate in-flight requests with the same key */
+  dedupe?: boolean;
+  /** Telemetry hooks for metrics/tracing integration */
+  telemetry?: TelemetryHooks;
+  /** Inject W3C traceparent header automatically */
+  traceContext?: SpanContext | (() => SpanContext | undefined);
 }
 
 export interface ApiResponse<T = unknown> {
@@ -78,6 +132,11 @@ export interface IApiClient {
     body: unknown,
     options?: RequestOptions
   ): Promise<ApiResponse<T> | QueuedResponse>;
+  patch<T>(
+    path: string,
+    body: unknown,
+    options?: RequestOptions
+  ): Promise<ApiResponse<T> | QueuedResponse>;
   delete<T>(path: string, options?: RequestOptions): Promise<ApiResponse<T> | QueuedResponse>;
 }
 
@@ -87,6 +146,8 @@ export interface RequestOptions {
   signal?: AbortSignal;
   signer?: RequestSigner;
   unsigned?: boolean;
+  /** Key for request deduplication — in-flight requests with the same key share the same promise */
+  dedupeKey?: string;
 }
 
 export interface RequestSigningContext {

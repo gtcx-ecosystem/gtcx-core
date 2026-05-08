@@ -19,6 +19,7 @@ This directory contains Architecture Decision Records (ADRs) for the GTCX Core r
 | [011](011-architecture-boundary-enforcement.md)         | Architecture boundary enforcement in CI              | Accepted | 2026-02-19 |
 | [012](012-error-taxonomy-and-cause-propagation.md)      | Error taxonomy and cause propagation                 | Accepted | 2026-02-19 |
 | [013](013-api-baseline-and-performance-budget-gates.md) | API baseline and performance budget gates            | Accepted | 2026-02-19 |
+| [014](014-runtime-substrate.md)                         | Runtime substrate — batteries-included foundation    | Accepted | 2026-05-06 |
 
 ## Format
 

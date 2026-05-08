@@ -1,409 +1,16 @@
 export * from './types';
 export * from './canonical';
+export * from './errors';
 
-import { Buffer } from 'node:buffer';
-
-import type { Dispatcher } from 'undici';
-
+import { request, enqueueOrThrow, type RequestRuntime } from './request';
 import type {
   ApiClientOptions,
-  ApiErrorCategory,
-  ApiErrorCode,
   ApiResponse,
   IApiClient,
-  MtlsOptions,
-  OfflineQueueEntry,
   QueuedResponse,
   RequestOptions,
-  RequestSigner,
-  RequestSigningContext,
 } from './types';
-
-const DEFAULT_TIMEOUT_MS = 30_000;
-const DEFAULT_RETRIES = 3;
-const RETRY_BASE_DELAY_MS = 250;
-const RETRY_MAX_DELAY_MS = 2_000;
-
-export class ApiClientError extends Error {
-  status?: number | undefined;
-  code: ApiErrorCode;
-  category: ApiErrorCategory;
-  retryable: boolean;
-  override cause?: unknown | undefined;
-
-  constructor(
-    message: string,
-    options: {
-      status?: number;
-      code: ApiErrorCode;
-      category: ApiErrorCategory;
-      retryable: boolean;
-      cause?: unknown;
-    }
-  ) {
-    super(message);
-    this.name = 'ApiClientError';
-    this.status = options.status;
-    this.code = options.code;
-    this.category = options.category;
-    this.retryable = options.retryable;
-    this.cause = options.cause;
-  }
-}
-
-export class GTCXError extends ApiClientError {
-  constructor(message: string, options: ConstructorParameters<typeof ApiClientError>[1]) {
-    super(message, options);
-    this.name = 'GTCXError';
-  }
-}
-
-export class HttpError extends ApiClientError {
-  constructor(message: string, options: ConstructorParameters<typeof ApiClientError>[1]) {
-    super(message, options);
-    this.name = 'HttpError';
-  }
-}
-
-export class AuthError extends ApiClientError {
-  constructor(message: string, options: ConstructorParameters<typeof ApiClientError>[1]) {
-    super(message, options);
-    this.name = 'AuthError';
-  }
-}
-
-export class NetworkError extends ApiClientError {
-  constructor(message: string, options: ConstructorParameters<typeof ApiClientError>[1]) {
-    super(message, options);
-    this.name = 'NetworkError';
-  }
-}
-
-export class TimeoutError extends ApiClientError {
-  constructor(message: string, options: ConstructorParameters<typeof ApiClientError>[1]) {
-    super(message, options);
-    this.name = 'TimeoutError';
-  }
-}
-
-export class AbortError extends ApiClientError {
-  constructor(message: string, options: ConstructorParameters<typeof ApiClientError>[1]) {
-    super(message, options);
-    this.name = 'AbortError';
-  }
-}
-
-export class SigningError extends ApiClientError {
-  constructor(message: string, options: ConstructorParameters<typeof ApiClientError>[1]) {
-    super(message, options);
-    this.name = 'SigningError';
-  }
-}
-
-export class ConfigurationError extends ApiClientError {
-  constructor(message: string, options: ConstructorParameters<typeof ApiClientError>[1]) {
-    super(message, options);
-    this.name = 'ConfigurationError';
-  }
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function isRetryableStatus(status: number): boolean {
-  return status === 429 || status >= 500;
-}
-
-function buildUrl(baseUrl: string, path: string): string {
-  if (!path) {
-    return baseUrl;
-  }
-  if (baseUrl.endsWith('/') && path.startsWith('/')) {
-    return `${baseUrl}${path.slice(1)}`;
-  }
-  if (!baseUrl.endsWith('/') && !path.startsWith('/')) {
-    return `${baseUrl}/${path}`;
-  }
-  return `${baseUrl}${path}`;
-}
-
-function headersToRecord(headers: Headers): Record<string, string> {
-  const record: Record<string, string> = {};
-  headers.forEach((value, key) => {
-    record[key] = value;
-  });
-  return record;
-}
-
-function mergeSignals(primary: AbortSignal, secondary: AbortSignal): AbortSignal {
-  if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.any === 'function') {
-    return AbortSignal.any([primary, secondary]);
-  }
-  const controller = new AbortController();
-  const onAbort = () => controller.abort();
-  if (primary.aborted || secondary.aborted) {
-    controller.abort();
-  } else {
-    primary.addEventListener('abort', onAbort, { once: true });
-    secondary.addEventListener('abort', onAbort, { once: true });
-  }
-  return controller.signal;
-}
-
-type RequestBody = RequestInit['body'];
-
-function resolveBody(body: unknown, headers: Record<string, string>): RequestBody | undefined {
-  if (body === undefined || body === null) {
-    return undefined;
-  }
-  if (typeof body === 'string' || body instanceof ArrayBuffer || body instanceof Uint8Array) {
-    return body as RequestBody;
-  }
-  if (typeof FormData !== 'undefined' && body instanceof FormData) {
-    return body as RequestBody;
-  }
-  if (typeof Blob !== 'undefined' && body instanceof Blob) {
-    return body as RequestBody;
-  }
-  if (!headers['content-type'] && !headers['Content-Type']) {
-    headers['content-type'] = 'application/json';
-  }
-  return JSON.stringify(body) as RequestBody;
-}
-
-function normalizeMtlsValue(value?: string | Uint8Array): string | Buffer | undefined {
-  if (value === undefined) {
-    return undefined;
-  }
-  if (typeof value === 'string') {
-    return value;
-  }
-  return Buffer.from(value);
-}
-
-async function createMtlsDispatcher(options: MtlsOptions): Promise<Dispatcher> {
-  try {
-    const undici = await import('undici');
-    const Agent = undici.Agent;
-    const key = normalizeMtlsValue(options.key);
-    const cert = normalizeMtlsValue(options.cert);
-    const ca = normalizeMtlsValue(options.ca);
-    return new Agent({
-      connect: {
-        key,
-        cert,
-        ca,
-        passphrase: options.passphrase,
-        servername: options.serverName,
-        rejectUnauthorized: options.rejectUnauthorized,
-      },
-    });
-  } catch (error) {
-    throw new ConfigurationError('mTLS dispatcher unavailable in this runtime', {
-      code: 'CONFIG_ERROR',
-      category: 'config',
-      retryable: false,
-      cause: error,
-    });
-  }
-}
-
-async function parseResponse<T>(response: Response): Promise<T> {
-  const contentLength = response.headers.get('content-length');
-  if (contentLength && Number(contentLength) > 10_000_000) {
-    throw new HttpError('Response body exceeds maximum size (10MB)', {
-      status: response.status,
-      code: 'HTTP_ERROR',
-      category: 'http',
-      retryable: false,
-    });
-  }
-  const contentType = response.headers.get('content-type') ?? '';
-  if (contentType.includes('application/json')) {
-    return (await response.json()) as T;
-  }
-  const text = await response.text();
-  return text as unknown as T;
-}
-
-interface RequestRuntime {
-  fetcher: typeof fetch;
-  signer?: RequestSigner | undefined;
-  dispatcherPromise?: Promise<Dispatcher> | undefined;
-}
-
-async function request<T>(
-  method: string,
-  url: string,
-  body: unknown,
-  options: RequestOptions | undefined,
-  clientOptions: ApiClientOptions,
-  runtime: RequestRuntime
-): Promise<ApiResponse<T>> {
-  const timeoutMs = options?.timeout ?? clientOptions.timeout ?? DEFAULT_TIMEOUT_MS;
-  const retries = clientOptions.retries ?? DEFAULT_RETRIES;
-  const baseHeaders: Record<string, string> = {
-    ...(clientOptions.headers ?? {}),
-    ...(options?.headers ?? {}),
-  };
-  const requestBody = resolveBody(body, baseHeaders);
-  const start = Date.now();
-
-  for (let attempt = 0; attempt <= retries; attempt++) {
-    const headers = { ...baseHeaders };
-    const signer = options?.unsigned ? undefined : (options?.signer ?? runtime.signer);
-    if (signer) {
-      try {
-        const signingContext: RequestSigningContext = {
-          method,
-          url,
-          headers,
-          body,
-          attempt,
-        };
-        const signedHeaders = await signer(signingContext);
-        Object.assign(headers, signedHeaders);
-      } catch (error) {
-        throw new SigningError((error as Error).message || 'Request signing failed', {
-          code: 'SIGNING_ERROR',
-          category: 'signing',
-          retryable: false,
-          cause: error,
-        });
-      }
-    }
-
-    const controller = new AbortController();
-    let timedOut = false;
-    const timeout = setTimeout(() => {
-      timedOut = true;
-      controller.abort();
-    }, timeoutMs);
-    const signal = options?.signal
-      ? mergeSignals(options.signal, controller.signal)
-      : controller.signal;
-
-    try {
-      const dispatcher = runtime.dispatcherPromise ? await runtime.dispatcherPromise : undefined;
-      const init: RequestInit & { dispatcher?: Dispatcher | undefined } = {
-        method,
-        headers,
-        ...(requestBody !== undefined ? { body: requestBody } : {}),
-        signal,
-      };
-      if (dispatcher) {
-        (init as Record<string, unknown>)['dispatcher'] = dispatcher;
-      }
-
-      const response = await runtime.fetcher(url, init);
-      clearTimeout(timeout);
-
-      const durationMs = Date.now() - start;
-      if (response.ok) {
-        const data = await parseResponse<T>(response);
-        return {
-          data,
-          status: response.status,
-          headers: headersToRecord(response.headers),
-          durationMs,
-        };
-      }
-
-      const retryable = isRetryableStatus(response.status);
-      const message = response.statusText || `HTTP ${response.status}`;
-      if (response.status === 401 || response.status === 403) {
-        const error = new AuthError(message, {
-          status: response.status,
-          code: 'AUTH_ERROR',
-          category: 'auth',
-          retryable: false,
-        });
-        throw error;
-      }
-
-      const error = new HttpError(message, {
-        status: response.status,
-        code: 'HTTP_ERROR',
-        category: 'http',
-        retryable,
-      });
-      if (!retryable || attempt >= retries) {
-        throw error;
-      }
-    } catch (error) {
-      clearTimeout(timeout);
-
-      if (error instanceof ApiClientError) {
-        if (!error.retryable || attempt >= retries) {
-          throw error;
-        }
-      } else {
-        let classifiedError: ApiClientError;
-        if (timedOut) {
-          classifiedError = new TimeoutError('Request timed out', {
-            code: 'TIMEOUT',
-            category: 'timeout',
-            retryable: true,
-            cause: error,
-          });
-        } else if ((error as Error).name === 'AbortError') {
-          classifiedError = new AbortError('Request aborted', {
-            code: 'ABORTED',
-            category: 'abort',
-            retryable: false,
-            cause: error,
-          });
-        } else {
-          classifiedError = new NetworkError((error as Error).message || 'Network error', {
-            code: 'NETWORK_ERROR',
-            category: 'network',
-            retryable: true,
-            cause: error,
-          });
-        }
-
-        if (!classifiedError.retryable || attempt >= retries) {
-          throw classifiedError;
-        }
-      }
-    }
-
-    const delay = Math.min(RETRY_BASE_DELAY_MS * 2 ** attempt, RETRY_MAX_DELAY_MS);
-    await sleep(delay);
-  }
-
-  throw new ApiClientError('Request failed', {
-    code: 'REQUEST_FAILED',
-    category: 'unknown',
-    retryable: false,
-  });
-}
-
-async function enqueueOrThrow(
-  method: string,
-  path: string,
-  body: unknown,
-  requestOptions: RequestOptions | undefined,
-  offline: ApiClientOptions['offline']
-): Promise<QueuedResponse> {
-  if (offline) {
-    const entry: OfflineQueueEntry = {
-      method,
-      path,
-      body: body !== undefined ? body : undefined,
-      options: requestOptions,
-      enqueuedAt: Date.now(),
-    };
-    const operationId = await offline.enqueue(entry);
-    return { queued: true, operationId };
-  }
-  throw new NetworkError('Device is offline and no offline handler is configured', {
-    code: 'NETWORK_ERROR',
-    category: 'network',
-    retryable: true,
-  });
-}
+import { buildUrl, createMtlsDispatcher } from './utils';
 
 export function createApiClient(options: ApiClientOptions): IApiClient {
   const baseUrl = options.baseUrl;
@@ -419,6 +26,9 @@ export function createApiClient(options: ApiClientOptions): IApiClient {
     dispatcherPromise,
   };
 
+  // Request deduplication: in-flight promises by dedupe key
+  const inflight = new Map<string, Promise<unknown>>();
+
   const maybeOffline = async <T>(
     method: string,
     path: string,
@@ -428,7 +38,41 @@ export function createApiClient(options: ApiClientOptions): IApiClient {
     if (options.offline && !options.offline.isOnline()) {
       return enqueueOrThrow(method, path, body, requestOptions, options.offline);
     }
-    return request<T>(method, buildUrl(baseUrl, path), body, requestOptions, options, runtime);
+
+    const executeRequest = async (): Promise<ApiResponse<T> | QueuedResponse> => {
+      const dedupeKey = requestOptions?.dedupeKey;
+      if (dedupeKey && options.dedupe !== false) {
+        const existing = inflight.get(dedupeKey);
+        if (existing) {
+          return existing as Promise<ApiResponse<T> | QueuedResponse>;
+        }
+        const promise = request<T>(
+          method,
+          buildUrl(baseUrl, path),
+          body,
+          requestOptions,
+          options,
+          runtime
+        );
+        inflight.set(dedupeKey, promise);
+        promise
+          .then(() => {
+            inflight.delete(dedupeKey);
+          })
+          .catch(() => {
+            inflight.delete(dedupeKey);
+          });
+        return promise;
+      }
+
+      return request<T>(method, buildUrl(baseUrl, path), body, requestOptions, options, runtime);
+    };
+
+    if (options.circuitBreaker) {
+      return options.circuitBreaker.execute(executeRequest);
+    }
+
+    return executeRequest();
   };
 
   return {
@@ -438,6 +82,8 @@ export function createApiClient(options: ApiClientOptions): IApiClient {
       maybeOffline<T>('POST', path, body, requestOptions),
     put: <T>(path: string, body: unknown, requestOptions?: RequestOptions) =>
       maybeOffline<T>('PUT', path, body, requestOptions),
+    patch: <T>(path: string, body: unknown, requestOptions?: RequestOptions) =>
+      maybeOffline<T>('PATCH', path, body, requestOptions),
     delete: <T>(path: string, requestOptions?: RequestOptions) =>
       maybeOffline<T>('DELETE', path, undefined, requestOptions),
   };

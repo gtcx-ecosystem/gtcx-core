@@ -1,6 +1,7 @@
 {
-  "name": "@gtcx/api-client",
-  "version": "0.3.0",
+  "name": "@gtcx/resilience",
+  "version": "0.1.0",
+  "description": "Resilience primitives for service-to-service communication: circuit breaker, adaptive retry, timeout, bulkhead",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -9,16 +10,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    },
-    "./canonical": {
-      "types": "./dist/canonical/index.d.ts",
-      "import": "./dist/canonical/index.mjs",
-      "require": "./dist/canonical/index.js"
-    },
-    "./canonical/test-vectors": {
-      "import": "./src/canonical/test-vectors.json",
-      "require": "./src/canonical/test-vectors.json",
-      "default": "./src/canonical/test-vectors.json"
     }
   },
   "scripts": {
@@ -39,12 +30,6 @@
     "vitest": "^4.1.5",
     "@vitest/coverage-v8": "^4.1.5"
   },
-  "dependencies": {
-    "@gtcx/crypto": "workspace:*",
-    "@gtcx/resilience": "workspace:*",
-    "@gtcx/telemetry": "workspace:*",
-    "undici": "^6.21.0"
-  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -52,17 +37,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
-    "directory": "packages/api-client"
+    "directory": "packages/resilience"
   },
   "license": "MIT",
-  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/api-client#readme",
-  "bugs": {
-    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "CHANGELOG.md"
-  ],
   "sideEffects": false
 }

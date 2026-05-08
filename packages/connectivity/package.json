@@ -21,6 +21,10 @@
     "lint": "eslint src/",
     "clean": "rm -rf dist"
   },
+  "dependencies": {
+    "@gtcx/api-client": "workspace:*",
+    "@gtcx/resilience": "workspace:*"
+  },
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",
     "@gtcx/typescript-config": "workspace:*",
