@@ -173,18 +173,18 @@ const MAX_SOURCE_FILE_LINES = 500;
 const fileSizeExceptions = {
   // Type-definition files: inherently large due to exhaustive schema coverage.
   // Decomposition planned in follow-up architecture sprint.
-  'packages/verification/src/types/index.ts': { reason: 'Exhaustive type definitions', target: 'Sprint 6' },
+  // All file-size exceptions resolved in Sprint 6
   'packages/verification/src/types/schemas.ts': { reason: 'Zod schema definitions', target: 'Sprint 6' },
   // Security storage: complex state machine with planned extraction to security/storage/.
-  'packages/security/src/offline/secure-storage.ts': { reason: 'Complex state machine', target: 'Sprint 6' },
+  // security/src/offline/secure-storage.ts decomposed into secure-storage/ in Sprint 6
   'packages/security/src/offline/storage.ts': { reason: 'Complex state machine', target: 'Sprint 6' },
   // Service files: currently being decomposed in this remediation cycle.
   // registration.ts and trading.ts decomposed in Sprint 6 — now under 500 LOC
   // UnifiedComplianceService decomposed in Sprint 6 — now under 500 LOC
   // Verification traced operations: high operation count; sanitize extraction already completed.
-  'packages/verification/src/traced.ts': { reason: 'High operation count with extracted sanitizers', target: 'Sprint 5' },
+  // verification/src/traced.ts decomposed into traced/ in Sprint 6
   // Workproof registry: predicate registry with planned plugin architecture.
-  'packages/workproof/src/predicates/registry.ts': { reason: 'Predicate registry awaiting plugin architecture', target: 'Sprint 6' },
+  // workproof/src/predicates/registry.ts decomposed into definitions/ in Sprint 6
 };
 
 for (const [pkgName, files] of sourceFilesByPackage.entries()) {

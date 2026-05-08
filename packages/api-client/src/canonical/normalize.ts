@@ -1,81 +1,42 @@
 /**
- * Canonical path, query, header, and body normalization.
+ * Canonical path, query, and body normalization.
  *
- * Normalization rules are deterministic and MUST NOT change between
- * client and server implementations.
+ * Normalization rules match the mobile contract exactly:
+ * @see gtcx-mobile/apps/mobile/gtcx/lib/auth-token.ts
  */
 
 import { hash256 } from '@gtcx/crypto';
 
-/** Headers that are always included in the signature. */
-export const DEFAULT_SIGNED_HEADERS = [
-  'host',
-  'content-type',
-  'x-gtcx-timestamp',
-  'x-gtcx-nonce',
-  'x-gtcx-key-id',
-];
-
-/** Percent-encode a string for canonical form (RFC 3986 safe). */
-function percentEncode(str: string): string {
-  return encodeURIComponent(str).replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`);
-}
-
-/** Normalize a URI path: collapse slashes, resolve '..' (safely), no trailing slash. */
+/** Normalize a URI path: collapse repeated slashes only. */
 export function canonicalizePath(path: string): string {
-  // Remove repeated slashes and resolve relative segments
-  const segments = path.split('/').filter((s) => s !== '' && s !== '.');
-  const resolved: string[] = [];
-  for (const seg of segments) {
-    if (seg === '..') {
-      resolved.pop();
-    } else {
-      resolved.push(seg);
-    }
-  }
-  const normalized = '/' + resolved.map(percentEncode).join('/');
-  // Root path stays as '/'
-  return normalized || '/';
+  return path.replace(/\/{2,}/g, '/');
 }
 
-/** Build canonical query string: sorted keys, URI-encoded, no '?' prefix. */
+/** Build canonical query string: sorted by key then value, no '?' prefix. */
 export function canonicalizeQueryString(searchParams: URLSearchParams | string): string {
   const params =
-    typeof searchParams === 'string'
-      ? new URLSearchParams(searchParams)
-      : searchParams;
+    typeof searchParams === 'string' ? new URLSearchParams(searchParams) : searchParams;
 
   const entries: Array<[string, string]> = [];
   for (const [key, value] of params.entries()) {
-    entries.push([percentEncode(key), percentEncode(value)]);
+    entries.push([key, value]);
   }
-  entries.sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
+  entries.sort(([aKey, aVal], [bKey, bVal]) => {
+    if (aKey < bKey) return -1;
+    if (aKey > bKey) return 1;
+    if (aVal < bVal) return -1;
+    if (aVal > bVal) return 1;
+    return 0;
+  });
 
-  return entries.map(([k, v]) => `${k}=${v}`).join('&');
+  const reconstructed = new URLSearchParams();
+  for (const [k, v] of entries) {
+    reconstructed.append(k, v);
+  }
+  return reconstructed.toString();
 }
 
-/** Build canonical headers block: lowercase keys, trimmed values, sorted. */
-export function canonicalizeHeaders(
-  headers: Record<string, string>,
-  signedHeaderNames: string[]
-): string {
-  const normalized = new Map<string, string>();
-  for (const [key, value] of Object.entries(headers)) {
-    normalized.set(key.toLowerCase().trim(), value.trim());
-  }
-
-  const lines = signedHeaderNames
-    .slice()
-    .sort()
-    .map((name) => {
-      const value = normalized.get(name) ?? '';
-      return `${name}:${value}`;
-    });
-
-  return lines.join('\n');
-}
-
-/** Compute SHA-256 hex digest of a request body. */
+/** Compute SHA-256 hex digest of a request body string. */
 export function canonicalizeBody(body: string | Uint8Array | null): string {
   if (body === null || body === undefined) {
     return hash256('');
@@ -86,13 +47,9 @@ export function canonicalizeBody(body: string | Uint8Array | null): string {
   return hash256(body);
 }
 
-/** Build the ordered list of signed header names. */
-export function buildSignedHeaderNames(
-  headers: Record<string, string>,
-  extraSignedHeaders?: string[]
-): string[] {
-  const all = new Set([...DEFAULT_SIGNED_HEADERS, ...(extraSignedHeaders ?? [])]);
-  // Only include headers that actually exist on the request
-  const present = new Set(Object.keys(headers).map((k) => k.toLowerCase().trim()));
-  return Array.from(all).filter((h) => present.has(h)).sort();
+/** Normalize request body to a string for hashing. */
+export function normalizeBodyForHash(body: unknown): string {
+  if (typeof body === 'string') return body;
+  if (body == null) return '';
+  return JSON.stringify(body);
 }

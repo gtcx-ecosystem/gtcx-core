@@ -1,6 +1,8 @@
 import type { DigitalIdentity } from '@gtcx/types';
 import { describe, it, expect } from 'vitest';
 
+import { IdentityError } from '../src/identity.js';
+
 import {
   generateIdentityId,
   createIdentity,
@@ -321,6 +323,46 @@ describe('isIdentityExpired', () => {
 // ---------------------------------------------------------------------------
 // deriveIdentity
 // ---------------------------------------------------------------------------
+describe('IdentityError', () => {
+  it('has correct name and code', () => {
+    const err = new IdentityError('something went wrong', 'TEST_CODE');
+    expect(err.name).toBe('IdentityError');
+    expect(err.message).toBe('something went wrong');
+    expect(err.code).toBe('TEST_CODE');
+    expect(err instanceof Error).toBe(true);
+  });
+});
+
+describe('createIdentity validation', () => {
+  it('throws for invalid securityLevel', async () => {
+    await expect(
+      createIdentity({ securityLevel: 'invalid' as any })
+    ).rejects.toThrow('Invalid securityLevel');
+  });
+
+  it('throws for invalid algorithm', async () => {
+    await expect(
+      createIdentity({ algorithm: 'RSA' as any })
+    ).rejects.toThrow('Invalid algorithm');
+  });
+
+  it('throws for non-object metadata', async () => {
+    await expect(
+      createIdentity({ metadata: 'bad' as any })
+    ).rejects.toThrow('metadata must be an object');
+  });
+});
+
+describe('createEnhancedIdentity keyDerivation validation', () => {
+  it('throws for salt shorter than 32 hex chars', async () => {
+    await expect(
+      createEnhancedIdentity({
+        keyDerivation: { salt: 'tooshort' },
+      })
+    ).rejects.toThrow('salt must be at least 16 bytes');
+  });
+});
+
 describe('deriveIdentity', () => {
   it('creates a child identity with parent reference in metadata', async () => {
     const { identity: parent } = await createIdentity();

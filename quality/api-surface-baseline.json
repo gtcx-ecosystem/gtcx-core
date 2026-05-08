@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-07T20:30:14.481Z",
+  "generatedAt": "2026-05-08T10:21:32.394Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.2",
@@ -23,7 +23,7 @@
       "version": "0.3.0",
       "dir": "packages/api-client",
       "typesPath": "packages/api-client/dist/index.d.ts",
-      "hash": "755bccb1256dfad8279ae5074ce912fe50949e499319156e73af2f6830ed564a",
+      "hash": "ce470287c0e65d9db850ab872ec048fbb97c7e16312696e6e46be2121eef02e1",
       "exports": [
         "AbortError",
         "ApiClientError",
@@ -32,22 +32,56 @@
         "ApiErrorCategory",
         "ApiErrorCode",
         "ApiResponse",
+        "AUDIENCE_HEADER_NAME",
+        "AUTH_SCHEME_HEADER_NAME",
         "AuthError",
+        "AUTHORIZATION_HEADER_NAME",
+        "AuthScheme",
+        "BODY_HASH_HEADER_NAME",
+        "buildCanonicalRequest",
+        "CanonicalizationOptions",
+        "canonicalizeBody",
+        "canonicalizePath",
+        "canonicalizeQueryString",
+        "CanonicalRequestContext",
+        "CanonicalRequestString",
+        "CanonicalSignerOptions",
+        "CanonicalVersion",
         "ConfigurationError",
         "createApiClient",
+        "createCanonicalSigner",
+        "DID_HEADER_NAME",
+        "formatDID",
+        "formatKeyId",
+        "generateNonce",
         "GTCXError",
         "HttpError",
         "IApiClient",
+        "isValidDID",
+        "isValidKeyId",
+        "KEY_ID_HEADER_NAME",
         "MtlsOptions",
         "NetworkError",
+        "NONCE_HEADER_NAME",
+        "normalizeBodyForHash",
         "OfflineHandler",
         "OfflineQueueEntry",
+        "parseDID",
+        "parseEnvelope",
         "QueuedResponse",
         "RequestOptions",
         "RequestSigner",
         "RequestSigningContext",
+        "serializeEnvelope",
+        "SIGNATURE_HEADER_NAME",
+        "SignatureAlgorithm",
+        "SignatureEnvelope",
         "SigningError",
-        "TimeoutError"
+        "SigningKeyMaterial",
+        "TimeoutError",
+        "TIMESTAMP_HEADER_NAME",
+        "VerificationResult",
+        "verifyCanonicalSignature"
       ]
     },
     "@gtcx/connectivity": {
@@ -444,7 +478,13 @@
       "dir": "packages/logging",
       "typesPath": "packages/logging/dist/index.d.ts",
       "hash": "e528d580f75ec1d7db792709420638bb5fb8c24fd9dbcae5c9d44f2208a1df0b",
-      "exports": ["createLogger", "LogEntry", "Logger", "LoggerConfig", "LogLevel"]
+      "exports": [
+        "createLogger",
+        "LogEntry",
+        "Logger",
+        "LoggerConfig",
+        "LogLevel"
+      ]
     },
     "@gtcx/network": {
       "version": "0.2.0",
@@ -660,7 +700,7 @@
       "version": "0.2.2",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
-      "hash": "36ee0635dd54de2cb9e6412386e4302ef010ea181213deef029dff1c7a10eec6",
+      "hash": "147c799004bc1e20633a2086eb63d79a75b216159cf78da2eb43c90b7586ed92",
       "exports": [
         "AssetLotRegistrationService",
         "ComplianceCheckResult",
@@ -934,7 +974,7 @@
       "version": "2.0.0",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "b5d3584b1fa7499d914fb415520b28a5662907c484e2335f9716c1df5e1c3c3e",
+      "hash": "d0a81e538d5f0789e64f4bdb2650e54f9564f386c0e1f45a0f92541fe7f5fb8f",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",

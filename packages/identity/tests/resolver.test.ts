@@ -114,4 +114,102 @@ describe('DID resolver', () => {
     await expect(resolver.resolve('did:gtcx:broken')).rejects.toBeInstanceOf(DIDResolverError);
     expect(metrics).toHaveBeenCalled();
   });
+
+  it('deletes expired cache entries before resolution', async () => {
+    const { identity } = await createIdentity();
+    const did = createDID(identity);
+    const document = createDIDDocument(identity);
+
+    const cache = createInMemoryDIDCache();
+    await cache.set(did, { document, expiresAt: Date.now() - 1000 }); // expired
+
+    const adapter = {
+      name: 'fresh',
+      resolve: async () => document,
+    };
+
+    const resolver = createDIDResolver({
+      adapters: [adapter],
+      cache,
+      cacheTtlMs: 10_000,
+    });
+
+    const result = await resolver.resolve(did);
+    expect(result.document?.id).toBe(did);
+    expect(result.metadata.cache).toBe('miss');
+  });
+
+  it('throws when HTTP adapter returns invalid JSON structure', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ invalid: 'structure' }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    );
+
+    const adapter = createHttpDIDResolverAdapter({ baseUrl: 'https://resolver.test', retries: 0 });
+    const resolver = createDIDResolver({ adapters: [adapter] });
+
+    await expect(resolver.resolve('did:gtcx:badjson')).rejects.toMatchObject({
+      code: 'RESOLUTION_FAILED',
+    });
+  });
+
+  it('wraps non-DIDResolverError from adapter', async () => {
+    const adapter = {
+      name: 'throwing',
+      resolve: async () => {
+        throw new Error('Random failure');
+      },
+    };
+
+    const resolver = createDIDResolver({ adapters: [adapter] });
+    await expect(resolver.resolve('did:gtcx:throw')).rejects.toMatchObject({
+      code: 'RESOLUTION_FAILED',
+    });
+  });
+
+  it('retries on 5xx and succeeds on retry', async () => {
+    const { identity } = await createIdentity();
+    const did = createDID(identity);
+    const document = createDIDDocument(identity);
+
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    fetchSpy.mockResolvedValueOnce(new Response('error', { status: 502 }));
+    fetchSpy.mockResolvedValueOnce(
+      new Response(JSON.stringify(document), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    );
+
+    const adapter = createHttpDIDResolverAdapter({
+      baseUrl: 'https://resolver.test',
+      retries: 1,
+    });
+    const resolver = createDIDResolver({ adapters: [adapter] });
+
+    const result = await resolver.resolve(did);
+    expect(result.document?.id).toBe(did);
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('throws on unexpected content-type', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response('{}', {
+        status: 200,
+        headers: { 'content-type': 'text/plain' },
+      })
+    );
+
+    const adapter = createHttpDIDResolverAdapter({
+      baseUrl: 'https://resolver.test',
+      retries: 0,
+    });
+    const resolver = createDIDResolver({ adapters: [adapter] });
+
+    await expect(resolver.resolve('did:gtcx:wrongtype')).rejects.toMatchObject({
+      code: 'RESOLUTION_FAILED',
+    });
+  });
 });

@@ -4,8 +4,13 @@
  * This contract is shared between mobile clients and backend servers.
  * Both sides MUST use identical canonicalization logic to prevent signature drift.
  *
+ * Mobile contract reference: gtcx-mobile/apps/mobile/gtcx/lib/auth-token.ts
+ *
  * @packageDocumentation
  */
+
+/** Supported authentication schemes. */
+export type AuthScheme = 'gtcx-signed-bearer-v1' | 'gtcx-queue-envelope-v1';
 
 /** Algorithm used for request signing. */
 export type SignatureAlgorithm = 'ed25519';
@@ -23,7 +28,7 @@ export interface SignatureEnvelope {
   keyId: string;
   /** ISO 8601 timestamp used when signing. */
   timestamp: string;
-  /** Base64url-encoded nonce. */
+  /** Hex-encoded nonce. */
   nonce: string;
   /** Hex-encoded signature. */
   signature: string;
@@ -49,16 +54,16 @@ export interface CanonicalizationOptions {
   algorithm?: SignatureAlgorithm;
   /** Clock skew tolerance in milliseconds (default: 5 minutes). */
   clockSkewMs?: number;
-  /** Additional header names to include in the signature (lowercase). */
-  extraSignedHeaders?: string[];
 }
 
 /** Key material required for canonical request signing. */
 export interface SigningKeyMaterial {
   /** Private key in hex format. */
   privateKeyHex: string;
-  /** Public key in hex format (used to derive the keyId). */
+  /** Public key in hex format (used to derive the DID). */
   publicKeyHex: string;
+  /** Optional key reference for keyId derivation (e.g. 'primary', 'device-01'). */
+  keyRef?: string;
 }
 
 /** Result of canonical request verification. */
@@ -71,6 +76,8 @@ export interface VerificationResult {
   error?: string;
   /** Key ID extracted from the envelope. */
   keyId?: string;
+  /** DID extracted from the envelope or headers. */
+  did?: string;
 }
 
 /** String-serialized canonical request for hashing. */
@@ -79,4 +86,14 @@ export interface CanonicalRequestString {
   canonical: string;
   /** The SHA-256 hex digest of the canonical string. */
   canonicalHash: string;
+}
+
+/** Options for creating a canonical signer. */
+export interface CanonicalSignerOptions extends CanonicalizationOptions {
+  /** Authentication scheme to advertise. */
+  authScheme?: AuthScheme;
+  /** Audience URL or origin. Defaults to request URL origin. */
+  audience?: string;
+  /** Token TTL in milliseconds (default: 5 minutes). */
+  tokenTtlMs?: number;
 }

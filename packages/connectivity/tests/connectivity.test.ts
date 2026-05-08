@@ -4,6 +4,51 @@ import { ConnectivityDetector } from '../src/detector.js';
 import { classifyProfile } from '../src/profiles.js';
 import type { ConnectivityCheckFn } from '../src/types.js';
 
+describe('defaultCheckFn', () => {
+  const originalFetch = globalThis.fetch;
+
+  afterEach(() => {
+    globalThis.fetch = originalFetch;
+    delete process.env.GTCX_HEALTH_URL;
+  });
+
+  it('returns online when fetch succeeds', async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+    });
+
+    const detector = new ConnectivityDetector({ checkIntervalMs: 1000 });
+    await detector.forceCheck();
+    const state = detector.getState();
+    expect(state.online).toBe(true);
+    detector.destroy();
+  });
+
+  it('returns offline when fetch throws', async () => {
+    globalThis.fetch = vi.fn().mockRejectedValue(new Error('Network unreachable'));
+
+    const detector = new ConnectivityDetector({ checkIntervalMs: 1000, offlineThresholdMs: 0 });
+    await detector.forceCheck();
+    const state = detector.getState();
+    expect(state.online).toBe(false);
+    detector.destroy();
+  });
+
+  it('uses GTCX_HEALTH_URL env var when set', async () => {
+    process.env.GTCX_HEALTH_URL = 'https://custom.example.com/health';
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    globalThis.fetch = fetchMock;
+
+    const detector = new ConnectivityDetector({ checkIntervalMs: 1000 });
+    await detector.forceCheck();
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://custom.example.com/health',
+      expect.objectContaining({ method: 'HEAD' })
+    );
+    detector.destroy();
+  });
+});
+
 describe('classifyProfile', () => {
   it('returns offline when bandwidth is 0', () => {
     expect(classifyProfile(0, 100)).toBe('offline');

@@ -29,7 +29,67 @@ Tracks user acceptance testing (UAT) evidence for features and sprints. Updated 
 
 ## Active Log
 
-<!-- Add UAT evidence entries below as sprints close -->
+### [2026-05-06] Sprint 6 — Core12 Domain Population
+
+**Type:** Feature UAT
+**Tested by:** Automated test suite
+**Status:** Pass
+**Evidence:** `packages/schemas/tests/core12.test.ts` — 46 tests, all 12 domains with 2 controls each
+**Notes:** D01–D12 fully populated. No deviations.
+
+### [2026-05-06] Sprint 6 — ZKP NAPI Hex Bug Fix
+
+**Type:** Feature UAT
+**Tested by:** Automated integration test suite
+**Status:** Pass
+**Evidence:** `packages/crypto/tests/zkp-integration.test.ts` — 6 parity tests (JS engine vs native engine)
+**Notes:** Odd-length hex inputs normalized to 32-byte SHA-256 digests before NAPI boundary. Verify path hardened against malformed input.
+
+### [2026-05-06] Sprint 6 — Async Span Propagation (@gtcx/ai)
+
+**Type:** Feature UAT
+**Tested by:** Automated test suite
+**Status:** Pass
+**Evidence:** `packages/ai/tests/tracing.test.ts` — 34 tests for AsyncLocalStorage-based trace context
+**Notes:** `getCurrentTraceContext()`, `runWithTraceContext()`, and `traced()` wrappers verified. Parent span propagation confirmed.
+
+### [2026-05-06] Sprint 6 — Logging Trace Integration (@gtcx/logging)
+
+**Type:** Feature UAT
+**Tested by:** Automated test suite
+**Status:** Pass
+**Evidence:** `packages/logging/tests/logger.test.ts` — 34 tests for structured log enrichment
+**Notes:** Logger auto-enriches entries with traceId/spanId when inside `@gtcx/ai` traced operations. Loose coupling via dynamic require verified.
+
+### [2026-05-07] Sprint 6 — Canonical Signing Contract (@gtcx/api-client)
+
+**Type:** Feature UAT
+**Tested by:** Automated test suite
+**Status:** Pass
+**Evidence:** `packages/api-client/src/canonical/canonical.test.ts` — 29 tests covering sign+verify round-trip, nonce generation, DID/keyId formatting, canonical request construction
+**Notes:** Mobile contract alignment verified. 9-line canonical format matches gtcx-mobile auth-token.ts. All 9 headers emitted and verified.
+
+### [2026-05-07] Sprint 6 — Service Decomposition (registration + trading)
+
+**Type:** Regression check
+**Tested by:** Automated test suite
+**Status:** Pass
+**Evidence:** `packages/services/tests/registration.test.ts` (45 tests) + `packages/services/tests/trading.test.ts` (52 tests)
+**Notes:** Zero test regressions. registration.ts 599→364 LOC, trading.ts 728→411 LOC. Architecture boundary exceptions removed.
+
+### [2026-05-08] Sprint 6 — File-Size Exception Resolution
+
+**Type:** Regression check
+**Tested by:** Automated test suite + architecture boundary check
+**Status:** Pass
+**Evidence:** `node tools/check-package-boundaries.mjs` — 198 files, 0 violations, 0 exceptions
+**Notes:** All 6 documented exceptions resolved:
+- `workproof/src/predicates/registry.ts` 987→111 LOC (8 category definition files)
+- `verification/src/traced.ts` 641→33 LOC (7 operation submodules)
+- `security/src/offline/secure-storage.ts` 553→355 LOC (errors/config/types extracted)
+- `verification/src/types/index.ts` 1,235→28 LOC (8 domain type files)
+- `services/src/registration.ts` 599→364 LOC (6 submodules)
+- `services/src/trading.ts` 728→411 LOC (6 submodules)
 
 ---
 

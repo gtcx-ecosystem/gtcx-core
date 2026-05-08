@@ -6,10 +6,12 @@ import {
   isValidDID,
   createDIDDocument,
   resolveDID,
+  resolveDIDWithMetadata,
   extractPublicKey,
 } from '../src/did';
 import type { DIDDocument } from '../src/did';
-import { createIdentity, createEnhancedIdentity } from '../src/identity';
+import { createIdentity, createEnhancedIdentity, IdentityError } from '../src/identity';
+import type { DIDResolver } from '../src/resolver';
 
 // ---------------------------------------------------------------------------
 // createDID
@@ -238,6 +240,60 @@ describe('resolveDID', () => {
 
     const result = await resolveDID('did:web:example.com', resolver);
     expect(result).toBeNull();
+  });
+
+  it('invokes DIDResolver.resolve() when object resolver provided', async () => {
+    const { identity } = await createIdentity();
+    const doc = createDIDDocument(identity);
+    const did = createDID(identity);
+
+    const resolver: DIDResolver = {
+      resolve: async (inputDid: string) => ({
+        didDocument: { id: inputDid } as any,
+        document: doc,
+        didResolutionMetadata: {},
+        didDocumentMetadata: {},
+      }),
+    };
+
+    const result = await resolveDID(did, resolver);
+    expect(result).not.toBeNull();
+    expect(result!.id).toBe(did);
+  });
+
+  it('returns null when DIDResolver.resolve() throws', async () => {
+    const did = 'did:gtcx:test123';
+    const resolver: DIDResolver = {
+      resolve: async () => {
+        throw new Error('Resolver failure');
+      },
+    };
+
+    const result = await resolveDID(did, resolver);
+    expect(result).toBeNull();
+  });
+
+  it('returns null for an invalid resolver object', async () => {
+    const did = 'did:gtcx:test123';
+    const result = await resolveDID(did, { foo: 'bar' } as any);
+    expect(result).toBeNull();
+  });
+});
+
+describe('resolveDIDWithMetadata', () => {
+  it('delegates to resolver.resolve()', async () => {
+    const did = 'did:gtcx:test123';
+    const resolver: DIDResolver = {
+      resolve: async (inputDid: string) => ({
+        didDocument: { id: inputDid } as any,
+        document: { id: inputDid } as DIDDocument,
+        didResolutionMetadata: { test: true },
+        didDocumentMetadata: {},
+      }),
+    };
+
+    const result = await resolveDIDWithMetadata(did, resolver);
+    expect(result.didResolutionMetadata).toEqual({ test: true });
   });
 });
 

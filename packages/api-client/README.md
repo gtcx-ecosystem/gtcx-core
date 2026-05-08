@@ -1,6 +1,6 @@
 # @gtcx/api-client
 
-HTTP API client for GTCX services with retry and timeout handling.
+HTTP API client for GTCX services with retry, timeout handling, and canonical request signing.
 
 ## Installation
 
@@ -16,16 +16,64 @@ import { createApiClient } from '@gtcx/api-client';
 const client = createApiClient({ baseUrl: 'https://api.gtcx.io' });
 ```
 
-## Signing
+## Canonical Request Signing
+
+Both mobile and backend import the same canonicalization contract from `@gtcx/api-client/canonical` to prevent signature drift:
 
 ```typescript
+import { createCanonicalSigner, verifyCanonicalSignature } from '@gtcx/api-client/canonical';
+
+// Client side
+const signer = createCanonicalSigner({
+  privateKeyHex: 'a1b2...',
+  publicKeyHex: 'c3d4...',
+  keyRef: 'primary',
+});
+
 const client = createApiClient({
   baseUrl: 'https://api.gtcx.io',
-  signer: async ({ method, url }) => ({
-    'x-signature': signRequest(method, url),
-  }),
+  signer,
 });
+
+// Server side
+const result = verifyCanonicalSignature(
+  'POST',
+  'https://api.gtcx.io/trades',
+  headers,
+  body,
+  publicKeyHex
+);
 ```
+
+The canonical signing contract emits these headers on every authenticated request:
+
+| Header | Value |
+|--------|-------|
+| `Authorization` | `Bearer <base64url({did,iat,exp}).<signature>` |
+| `X-GTCX-Auth-Scheme` | `gtcx-signed-bearer-v1` |
+| `X-GTCX-DID` | `did:gtcx:tp_<32-hex-chars>` |
+| `X-GTCX-Key-Id` | `SHA-256("${did}:${keyRef}")[0:32]` |
+| `X-GTCX-Timestamp` | ISO 8601 UTC milliseconds |
+| `X-GTCX-Nonce` | 16-byte hex (32 chars) |
+| `X-GTCX-Audience` | Request URL origin |
+| `X-GTCX-Body-SHA256` | SHA-256 hex of body string |
+| `X-GTCX-Signature` | Ed25519 signature of canonical request hash |
+
+The **canonical request** is a 9-line string:
+
+```
+METHOD
+normalizedPath
+normalizedQueryString
+bodyHash
+timestamp
+nonce
+did
+keyId
+audience
+```
+
+Both sides hash this string with SHA-256, then sign the hash with Ed25519.
 
 ## mTLS (Node.js)
 
@@ -48,11 +96,12 @@ import { AuthError, NetworkError, TimeoutError } from '@gtcx/api-client';
 
 ## API
 
-| Export                  | Description              |
-| ----------------------- | ------------------------ |
+| Export | Description |
+|--------|-------------|
 | `createApiClient(opts)` | Create configured client |
-| `ApiClientOptions`      | Configuration type       |
-| `ApiResponse`           | Response envelope type   |
+| `createCanonicalSigner(keys, opts)` | Canonical request signer |
+| `verifyCanonicalSignature(...)` | Server-side signature verifier |
+| `buildCanonicalRequest(...)` | Build canonical request string |
 
 ## License
 

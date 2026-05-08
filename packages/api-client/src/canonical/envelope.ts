@@ -49,14 +49,33 @@ export function parseEnvelope(value: string): SignatureEnvelope {
   return { version, algorithm, keyId, timestamp, nonce, signature };
 }
 
-/** The header name used to transport the signature envelope. */
-export const SIGNATURE_HEADER_NAME = 'x-gtcx-signature';
+// ============================================================================
+// Header names used in the canonical signing contract
+// ============================================================================
 
-/** The header name used for the signing timestamp. */
+/** Authorization header with bearer token. */
+export const AUTHORIZATION_HEADER_NAME = 'authorization';
+
+/** Authentication scheme header. */
+export const AUTH_SCHEME_HEADER_NAME = 'x-gtcx-auth-scheme';
+
+/** DID header. */
+export const DID_HEADER_NAME = 'x-gtcx-did';
+
+/** Key ID header. */
+export const KEY_ID_HEADER_NAME = 'x-gtcx-key-id';
+
+/** Timestamp header. */
 export const TIMESTAMP_HEADER_NAME = 'x-gtcx-timestamp';
 
-/** The header name used for the nonce. */
+/** Nonce header. */
 export const NONCE_HEADER_NAME = 'x-gtcx-nonce';
 
-/** The header name used for the key identifier. */
-export const KEY_ID_HEADER_NAME = 'x-gtcx-key-id';
+/** Audience header. */
+export const AUDIENCE_HEADER_NAME = 'x-gtcx-audience';
+
+/** Body SHA-256 hash header. */
+export const BODY_HASH_HEADER_NAME = 'x-gtcx-body-sha256';
+
+/** Signature envelope header. */
+export const SIGNATURE_HEADER_NAME = 'x-gtcx-signature';
