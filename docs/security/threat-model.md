@@ -166,10 +166,10 @@ Attack_Scenario:
     - DID document creation explicitly rejects documents containing privateKey fields
     - @gtcx/ai stub logger only outputs structured JSON with explicit fields
   Gaps:
-    - No default sanitization — consumers must explicitly provide sanitize callbacks
+    - CLOSED: Default sanitization added via redactSecrets() in @gtcx/ai (2026-05-08)
     - No static analysis rule to prevent key material from reaching log calls
   Recommendations:
-    - Add default sanitizeInput that strips any field named 'privateKey', 'secret', or 'seed'
+    - DONE: Default sanitizeInput strips fields named 'privateKey', 'secret', 'seed', 'token', 'apiKey', etc.
     - Add ESLint rule or architecture check that flags direct logging of crypto function outputs
 ```
 
@@ -235,7 +235,7 @@ DoS = Queue/retry exhaustion
 
 ### High priority (30 days)
 
-- [ ] Add default input sanitization to traced operations (strip key material)
+- [x] Add default input sanitization to traced operations (strip key material) — redactSecrets() in @gtcx/ai
 - [ ] Add certificate revocation support to `@gtcx/verification`
 - [ ] Wire real Groth16/Bulletproofs circuits to NAPI bridge (eliminate JS ZKP fallback path in production)
 
