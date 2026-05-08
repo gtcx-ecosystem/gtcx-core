@@ -72,6 +72,10 @@ importers:
         version: 4.1.5(@types/node@22.19.8)(@vitest/coverage-v8@4.1.5)(vite@8.0.10(@types/node@22.19.8)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.8.3))
 
   packages/ai:
+    dependencies:
+      '@gtcx/types':
+        specifier: workspace:*
+        version: link:../types
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
