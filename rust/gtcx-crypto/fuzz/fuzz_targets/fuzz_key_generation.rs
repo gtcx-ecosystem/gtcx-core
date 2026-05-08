@@ -1,7 +1,7 @@
 #![no_main]
 
 use libfuzzer_sys::fuzz_target;
-use gtcx_crypto::keys::{generate_keypair, PublicKey, PrivateKey};
+use gtcx_crypto::{generate_keypair, PrivateKey, PublicKey};
 use gtcx_crypto::signing::secp256k1;
 use std::convert::TryInto;
 

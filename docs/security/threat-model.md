@@ -230,7 +230,7 @@ DoS = Queue/retry exhaustion
 
 - [x] Enforce `GTCX_REQUIRE_NATIVE=true` documentation for all production deployments
 - [x] Add `#![deny(unsafe_code)]` verification to CI for all Rust crates
-- [ ] Claim `@gtcx` scope on npm before first publish to prevent typosquatting
+- [x] Claim `@gtcx` scope on npm before first publish to prevent typosquatting — org owned by gtcx-protocol
 - [ ] Complete penetration test on crypto, identity, and verification packages
 
 ### High priority (30 days)

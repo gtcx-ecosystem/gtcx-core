@@ -60,11 +60,11 @@ Full analysis: [../security/attack-tree-signing.md](../security/attack-tree-sign
 
 ## Open Items
 
-| ID     | Item                                            | Priority | Owner |
-| ------ | ----------------------------------------------- | -------- | ----- |
-| SA-001 | Add secondary CODEOWNER for crypto packages     | High     | Team  |
-| SA-003 | Claim `@gtcx` npm scope                         | High     | Team  |
-| SA-006 | Run 24-hour fuzz campaigns and document results | Medium   | Team  |
+| ID     | Item                                                    | Priority | Owner |
+| ------ | ------------------------------------------------------- | -------- | ----- |
+| SA-001 | Add secondary CODEOWNER for crypto packages             | High     | Team  |
+| SA-003 | ~~Claim `@gtcx` npm scope~~ — done (org: gtcx-protocol) | Closed   | Team  |
+| SA-006 | Run 24-hour fuzz campaigns and document results         | Medium   | Team  |
 
 ## Source Documents
 
