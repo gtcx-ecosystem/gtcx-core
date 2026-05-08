@@ -21,6 +21,9 @@
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist"
   },
+  "dependencies": {
+    "@gtcx/types": "workspace:*"
+  },
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",
     "@gtcx/typescript-config": "workspace:*",

@@ -6,6 +6,8 @@ import {
   createCategoryLogger,
   getCurrentTraceContext,
   runWithTraceContext,
+  attachProvenance,
+  createProvenanceLogger,
 } from '../src/index';
 
 describe('@gtcx/ai', () => {
@@ -462,6 +464,86 @@ describe('@gtcx/ai', () => {
       const log = getLastLog();
       expect(log).not.toBeNull();
       expect(log!.traceId).toBe('my-trace');
+    });
+  });
+
+  // ── provenance helpers ──
+
+  describe('attachProvenance()', () => {
+    it('wraps data with a provenance envelope', () => {
+      const data = { result: 42 };
+      const provenance = {
+        trustLevel: 'verified' as const,
+        confidence: 0.95,
+        evidenceRefs: [],
+        methodologyVersion: { framework: 'test', version: '1.0.0', configurationHash: 'abc' },
+        requiresHumanReview: false,
+        decisionProvenance: {
+          decisionId: 'd-1',
+          decisionType: 'test',
+          timestamp: Date.now(),
+          actor: 'test',
+          inputHash: 'in',
+          outputHash: 'out',
+        },
+      };
+      const wrapped = attachProvenance(data, provenance);
+      expect(wrapped.data).toEqual(data);
+      expect(wrapped.provenance.confidence).toBe(0.95);
+    });
+  });
+
+  describe('createProvenanceLogger()', () => {
+    it('logs provenance records as structured JSON', () => {
+      const pl = createProvenanceLogger('test-provenance');
+      const provenance = {
+        trustLevel: 'verified' as const,
+        confidence: 0.92,
+        evidenceRefs: [{ evidenceId: 'ev-1', evidenceType: 'sensor', source: 's1', timestamp: Date.now(), relevanceScore: 0.9 }],
+        methodologyVersion: { framework: 'cortex', version: '2.0.0', configurationHash: 'hash' },
+        requiresHumanReview: false,
+        decisionProvenance: {
+          decisionId: 'd-1',
+          decisionType: 'anomaly',
+          timestamp: Date.now(),
+          actor: 'cortex',
+          inputHash: 'in',
+          outputHash: 'out',
+        },
+      };
+      pl.logProvenance(provenance);
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.msg).toBe('provenance_record');
+      expect(log!.trustLevel).toBe('verified');
+      expect(log!.evidenceCount).toBe(1);
+    });
+
+    it('logs evaluation at warn level when review is required', () => {
+      const pl = createProvenanceLogger('test-provenance');
+      const provenance = {
+        trustLevel: 'uncertain' as const,
+        confidence: 0.4,
+        evidenceRefs: [],
+        methodologyVersion: { framework: 'cortex', version: '2.0.0', configurationHash: 'hash' },
+        requiresHumanReview: true,
+        decisionProvenance: {
+          decisionId: 'd-1',
+          decisionType: 'anomaly',
+          timestamp: Date.now(),
+          actor: 'cortex',
+          inputHash: 'in',
+          outputHash: 'out',
+        },
+      };
+      pl.logEvaluation(provenance, 'escalate', 'low confidence');
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('warn');
+      expect(log!.action).toBe('escalate');
+      expect(log!.reason).toBe('low confidence');
     });
   });
 });

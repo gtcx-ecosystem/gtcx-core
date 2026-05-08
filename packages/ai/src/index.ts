@@ -296,3 +296,14 @@ export function withTrace<T>(fn: () => T, operationName?: string, options?: Trac
   const op = operationName ?? 'anonymous';
   return traced(fn, op, options)();
 }
+
+// ---------------------------------------------------------------------------
+// Provenance-aware tracing
+// ---------------------------------------------------------------------------
+
+export {
+  attachProvenance,
+  createProvenanceLogger,
+  type ProvenanceLogger,
+  type ProvenancedResult,
+} from './provenance';
