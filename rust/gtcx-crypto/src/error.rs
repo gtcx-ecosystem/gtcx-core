@@ -77,6 +77,23 @@ pub enum CryptoError {
     /// Random number generation failed.
     #[error("Random number generation failed")]
     RngFailed,
+
+    /// Key not found in key store.
+    #[error("Key not found: {0}")]
+    KeyNotFound(String),
+
+    /// Key is not in active state (cannot sign).
+    #[error("Key not active: {0}")]
+    KeyNotActive(String),
+
+    /// Invalid key state transition.
+    #[error("Invalid state transition: {from} -> {to}")]
+    InvalidStateTransition {
+        /// Current state.
+        from: String,
+        /// Requested state.
+        to: String,
+    },
 }
 
 impl CryptoError {

@@ -73,6 +73,8 @@ pub mod chain;
 pub mod error;
 pub mod hashing;
 pub mod keys;
+pub mod keystore;
+pub mod provider;
 pub mod signing;
 
 // =============================================================================
