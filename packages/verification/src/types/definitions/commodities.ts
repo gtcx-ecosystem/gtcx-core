@@ -1,5 +1,13 @@
 import type { GoldLotData, AssetLotData } from './certificates';
-import type { CommodityType, AssetCategory, MeasurementUnit, QualityGrade, OperatorRole, SiteType, CredentialType } from './primitives';
+import type {
+  CommodityType,
+  AssetCategory,
+  MeasurementUnit,
+  QualityGrade,
+  OperatorRole,
+  SiteType,
+  CredentialType,
+} from './primitives';
 import { COMMODITY_CATEGORIES, ROLE_TO_CREDENTIAL } from './primitives';
 // COMMODITY CONFIGURATION
 // ============================================================================
@@ -375,4 +383,3 @@ export const migrateGoldLotData = migrateLegacyLotData;
 // ============================================================================
 
 export * from '../schemas';
-

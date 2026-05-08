@@ -10,7 +10,7 @@ import {
   extractPublicKey,
 } from '../src/did';
 import type { DIDDocument } from '../src/did';
-import { createIdentity, createEnhancedIdentity, IdentityError } from '../src/identity';
+import { createIdentity, createEnhancedIdentity } from '../src/identity';
 import type { DIDResolver } from '../src/resolver';
 
 // ---------------------------------------------------------------------------
@@ -123,7 +123,9 @@ describe('createDIDDocument', () => {
     const originalStringify = JSON.stringify;
     JSON.stringify = () => '{"privateKey":"leaked"}';
     try {
-      expect(() => createDIDDocument(identity)).toThrow('DID document must not contain private key material');
+      expect(() => createDIDDocument(identity)).toThrow(
+        'DID document must not contain private key material'
+      );
     } finally {
       JSON.stringify = originalStringify;
     }

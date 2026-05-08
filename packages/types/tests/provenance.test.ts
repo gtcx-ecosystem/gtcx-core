@@ -128,7 +128,11 @@ describe('shouldRequireHumanReview', () => {
   });
 
   it('returns true when provenance explicitly requires review', () => {
-    const p = makeProvenance({ trustLevel: 'verified', confidence: 0.95, requiresHumanReview: true });
+    const p = makeProvenance({
+      trustLevel: 'verified',
+      confidence: 0.95,
+      requiresHumanReview: true,
+    });
     expect(shouldRequireHumanReview(p)).toBe(true);
   });
 
@@ -144,7 +148,12 @@ describe('shouldRequireHumanReview', () => {
 
   it('returns true when custom threshold fires', () => {
     const custom: ReviewThreshold[] = [
-      { condition: 'high_impact_compliance', minConfidence: 0.99, requiredReviewerRole: 'x', escalationLevel: 'review' },
+      {
+        condition: 'high_impact_compliance',
+        minConfidence: 0.99,
+        requiredReviewerRole: 'x',
+        escalationLevel: 'review',
+      },
     ];
     const p = makeProvenance({ trustLevel: 'verified', confidence: 0.9 });
     expect(shouldRequireHumanReview(p, custom)).toBe(true);

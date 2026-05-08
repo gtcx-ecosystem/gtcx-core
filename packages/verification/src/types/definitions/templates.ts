@@ -30,4 +30,3 @@ export interface CertificateTemplate {
   /** Predicates that must be satisfied for this certificate */
   requiredPredicates?: PredicateURI[] | undefined;
 }
-

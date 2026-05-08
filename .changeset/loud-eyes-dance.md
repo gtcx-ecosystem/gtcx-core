@@ -1,5 +1,5 @@
 ---
-"@gtcx/services": patch
+'@gtcx/services': patch
 ---
 
 Decompose `registration.ts` and `trading.ts` into focused submodules

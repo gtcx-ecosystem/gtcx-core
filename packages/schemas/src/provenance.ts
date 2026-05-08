@@ -9,12 +9,7 @@ import { z } from 'zod';
 // Primitives
 // ---------------------------------------------------------------------------
 
-export const TrustLevelSchema = z.enum([
-  'verified',
-  'tentative',
-  'uncertain',
-  'rejected',
-]);
+export const TrustLevelSchema = z.enum(['verified', 'tentative', 'uncertain', 'rejected']);
 
 export const EvidenceRefSchema = z.object({
   evidenceId: z.string().min(1),
@@ -75,12 +70,7 @@ export const ReviewThresholdSchema = z.object({
   description: z.string().optional(),
 });
 
-export const ProvenancePolicyActionSchema = z.enum([
-  'allow',
-  'block',
-  'escalate',
-  'audit',
-]);
+export const ProvenancePolicyActionSchema = z.enum(['allow', 'block', 'escalate', 'audit']);
 
 export const ProvenancePolicySchema = z.object({
   thresholds: z.array(ReviewThresholdSchema),

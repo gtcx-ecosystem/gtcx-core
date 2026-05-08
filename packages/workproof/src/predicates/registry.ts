@@ -64,8 +64,6 @@ import {
 } from './definitions/production';
 import type { WorkProofPredicateType } from './types';
 
-
-
 export { WORKPROOF_PREDICATE_URIS } from './uri';
 
 /** Full predicate definitions for all 38 WorkProof predicate types */

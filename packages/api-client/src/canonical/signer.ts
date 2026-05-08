@@ -41,11 +41,7 @@ function toBase64Url(value: string): string {
 }
 
 /** Generate a short-lived bearer token: base64url(payload).signature */
-function generateAuthToken(
-  did: string,
-  privateKeyHex: string,
-  ttlMs: number
-): string {
+function generateAuthToken(did: string, privateKeyHex: string, ttlMs: number): string {
   const now = Date.now();
   const payload = JSON.stringify({
     did,

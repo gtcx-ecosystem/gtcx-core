@@ -37,17 +37,9 @@ export function buildCanonicalRequest(
   const query = canonicalizeQueryString(url.searchParams);
   const bodyHash = canonicalizeBody(context.body);
 
-  const canonical = [
-    method,
-    path,
-    query,
-    bodyHash,
-    timestamp,
-    nonce,
-    did,
-    keyId,
-    audience,
-  ].join('\n');
+  const canonical = [method, path, query, bodyHash, timestamp, nonce, did, keyId, audience].join(
+    '\n'
+  );
 
   return {
     canonical,

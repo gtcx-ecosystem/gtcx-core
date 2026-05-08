@@ -1,7 +1,22 @@
-import type { ResourceContext, GeologicalContext, CustodyEntry, SettlementRecord } from '@gtcx/types';
+import type {
+  ResourceContext,
+  GeologicalContext,
+  CustodyEntry,
+  SettlementRecord,
+} from '@gtcx/types';
 
 import type { Claim } from './claims';
-import type { CertificateType, AssetCategory, CommodityType, CertificateSecurityLevel, MeasurementUnit, QualityGrade, AssetLifecycleState, OperatorRole, SiteReference } from './primitives';
+import type {
+  CertificateType,
+  AssetCategory,
+  CommodityType,
+  CertificateSecurityLevel,
+  MeasurementUnit,
+  QualityGrade,
+  AssetLifecycleState,
+  OperatorRole,
+  SiteReference,
+} from './primitives';
 // CERTIFICATE TYPES
 // ============================================================================
 
@@ -195,4 +210,3 @@ export interface CertificateVerificationResult {
     notExpired: boolean;
   };
 }
-

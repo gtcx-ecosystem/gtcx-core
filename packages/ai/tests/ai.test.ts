@@ -499,7 +499,15 @@ describe('@gtcx/ai', () => {
       const provenance = {
         trustLevel: 'verified' as const,
         confidence: 0.92,
-        evidenceRefs: [{ evidenceId: 'ev-1', evidenceType: 'sensor', source: 's1', timestamp: Date.now(), relevanceScore: 0.9 }],
+        evidenceRefs: [
+          {
+            evidenceId: 'ev-1',
+            evidenceType: 'sensor',
+            source: 's1',
+            timestamp: Date.now(),
+            relevanceScore: 0.9,
+          },
+        ],
         methodologyVersion: { framework: 'cortex', version: '2.0.0', configurationHash: 'hash' },
         requiresHumanReview: false,
         decisionProvenance: {

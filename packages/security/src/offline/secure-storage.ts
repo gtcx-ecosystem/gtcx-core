@@ -10,7 +10,12 @@
 import { OfflineSecurityConfigSchema, DEFAULT_OFFLINE_CONFIG } from './secure-storage/config';
 import type { OfflineSecurityConfig } from './secure-storage/config';
 import { SecureStorageError } from './secure-storage/errors';
-import type { EncryptedItem, SecureStorageState, UnlockResult, StorageBackend } from './secure-storage/types';
+import type {
+  EncryptedItem,
+  SecureStorageState,
+  UnlockResult,
+  StorageBackend,
+} from './secure-storage/types';
 import { EncryptedItemSchema } from './secure-storage/types';
 
 const LOCKOUT_STATE_KEY = 'gtcx_secure___lockout_state';

@@ -40,8 +40,7 @@ export function verifyCanonicalSignature(
   publicKeyHex: string,
   options?: CanonicalizationOptions
 ): VerificationResult {
-  const signature =
-    headers[SIGNATURE_HEADER_NAME] ?? headers[SIGNATURE_HEADER_NAME.toLowerCase()];
+  const signature = headers[SIGNATURE_HEADER_NAME] ?? headers[SIGNATURE_HEADER_NAME.toLowerCase()];
   if (!signature) {
     return { valid: false, error: 'Missing signature header' };
   }
@@ -56,8 +55,7 @@ export function verifyCanonicalSignature(
     return { valid: false, error: 'Missing key ID header' };
   }
 
-  const timestamp =
-    headers[TIMESTAMP_HEADER_NAME] ?? headers[TIMESTAMP_HEADER_NAME.toLowerCase()];
+  const timestamp = headers[TIMESTAMP_HEADER_NAME] ?? headers[TIMESTAMP_HEADER_NAME.toLowerCase()];
   if (!timestamp) {
     return { valid: false, error: 'Missing timestamp header' };
   }
@@ -67,8 +65,7 @@ export function verifyCanonicalSignature(
     return { valid: false, error: 'Missing nonce header' };
   }
 
-  const audience =
-    headers[AUDIENCE_HEADER_NAME] ?? headers[AUDIENCE_HEADER_NAME.toLowerCase()];
+  const audience = headers[AUDIENCE_HEADER_NAME] ?? headers[AUDIENCE_HEADER_NAME.toLowerCase()];
   if (!audience) {
     return { valid: false, error: 'Missing audience header' };
   }

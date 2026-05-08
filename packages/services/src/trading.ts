@@ -46,11 +46,7 @@ import {
   TradingError,
   toErrorCause,
 } from './trading/errors';
-import {
-  generateTradeProof,
-  buildTransaction,
-  generateTransactionId,
-} from './trading/execution';
+import { generateTradeProof, buildTransaction, generateTransactionId } from './trading/execution';
 import {
   createUnknownTrader,
   getAvailableAssetLots,

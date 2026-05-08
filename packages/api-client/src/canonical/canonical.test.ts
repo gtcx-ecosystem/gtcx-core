@@ -112,7 +112,9 @@ describe('envelope serialization', () => {
       signature: 'deadbeef',
     };
     const serialized = serializeEnvelope(envelope);
-    expect(serialized).toBe('v1;ed25519;a1b2c3d4e5f6789012345678abcdef01;2026-01-01T00:00:00.000Z;abcd1234efgh5678;deadbeef');
+    expect(serialized).toBe(
+      'v1;ed25519;a1b2c3d4e5f6789012345678abcdef01;2026-01-01T00:00:00.000Z;abcd1234efgh5678;deadbeef'
+    );
     expect(parseEnvelope(serialized)).toEqual(envelope);
   });
 

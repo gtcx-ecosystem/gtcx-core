@@ -345,4 +345,3 @@ export const ROLE_TO_CREDENTIAL: Record<OperatorRole, CredentialType> = {
   financier: 'FinanceID',
   security: 'SecurityID',
 };
-

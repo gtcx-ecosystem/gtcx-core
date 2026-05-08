@@ -1,4 +1,10 @@
-import type { QRCodeType, MeasurementUnit, CommodityType, AssetLifecycleState, OperatorRole } from './primitives';
+import type {
+  QRCodeType,
+  MeasurementUnit,
+  CommodityType,
+  AssetLifecycleState,
+  OperatorRole,
+} from './primitives';
 // QR CODE TYPES
 // ============================================================================
 

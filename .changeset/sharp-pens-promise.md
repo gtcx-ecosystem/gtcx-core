@@ -1,5 +1,5 @@
 ---
-"@gtcx/api-client": minor
+'@gtcx/api-client': minor
 ---
 
 Add canonical request canonicalization contract (`@gtcx/api-client/canonical`)

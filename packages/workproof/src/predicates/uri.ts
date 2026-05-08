@@ -61,4 +61,3 @@ export const WORKPROOF_PREDICATE_URIS: Record<WorkProofPredicateType, PredicateU
   CommunityContribution: uri('community', 'community-contribution'),
   MentorshipReceived: uri('community', 'mentorship-received'),
 };
-

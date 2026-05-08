@@ -1,8 +1,6 @@
 import type { DigitalIdentity } from '@gtcx/types';
 import { describe, it, expect } from 'vitest';
 
-import { IdentityError } from '../src/identity.js';
-
 import {
   generateIdentityId,
   createIdentity,
@@ -11,6 +9,7 @@ import {
   isIdentityExpired,
   deriveIdentity,
 } from '../src/identity';
+import { IdentityError } from '../src/identity.js';
 
 // ---------------------------------------------------------------------------
 // generateIdentityId
@@ -335,21 +334,19 @@ describe('IdentityError', () => {
 
 describe('createIdentity validation', () => {
   it('throws for invalid securityLevel', async () => {
-    await expect(
-      createIdentity({ securityLevel: 'invalid' as any })
-    ).rejects.toThrow('Invalid securityLevel');
+    await expect(createIdentity({ securityLevel: 'invalid' as any })).rejects.toThrow(
+      'Invalid securityLevel'
+    );
   });
 
   it('throws for invalid algorithm', async () => {
-    await expect(
-      createIdentity({ algorithm: 'RSA' as any })
-    ).rejects.toThrow('Invalid algorithm');
+    await expect(createIdentity({ algorithm: 'RSA' as any })).rejects.toThrow('Invalid algorithm');
   });
 
   it('throws for non-object metadata', async () => {
-    await expect(
-      createIdentity({ metadata: 'bad' as any })
-    ).rejects.toThrow('metadata must be an object');
+    await expect(createIdentity({ metadata: 'bad' as any })).rejects.toThrow(
+      'metadata must be an object'
+    );
   });
 });
 

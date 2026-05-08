@@ -143,24 +143,21 @@ export const DefaultReviewThresholds: ReviewThreshold[] = [
     minConfidence: 0.6,
     requiredReviewerRole: 'ai_reviewer',
     escalationLevel: 'review',
-    description:
-      'Model uncertainty is flagged when confidence is low or evidence is sparse.',
+    description: 'Model uncertainty is flagged when confidence is low or evidence is sparse.',
   },
   {
     condition: 'stale_or_partial_evidence',
     minConfidence: 0.75,
     requiredReviewerRole: 'domain_expert',
     escalationLevel: 'review',
-    description:
-      'Evidence older than 24 hours or with coverage below 80% triggers review.',
+    description: 'Evidence older than 24 hours or with coverage below 80% triggers review.',
   },
   {
     condition: 'jurisdictional_edge_case',
     minConfidence: 0.85,
     requiredReviewerRole: 'legal_reviewer',
     escalationLevel: 'approval',
-    description:
-      'Cross-jurisdictional decisions with no local validator require legal approval.',
+    description: 'Cross-jurisdictional decisions with no local validator require legal approval.',
   },
 ];
 
@@ -287,9 +284,7 @@ function thresholdFires(provenance: AgenticProvenance, threshold: ReviewThreshol
   // Stale or partial evidence
   if (threshold.condition === 'stale_or_partial_evidence') {
     const now = Date.now();
-    const hasStale = provenance.evidenceRefs.some(
-      (e) => now - e.timestamp > 24 * 60 * 60 * 1000
-    );
+    const hasStale = provenance.evidenceRefs.some((e) => now - e.timestamp > 24 * 60 * 60 * 1000);
     const coverage = provenance.evidenceRefs.reduce((sum, e) => sum + e.relevanceScore, 0);
     if (hasStale || coverage < 0.8) return true;
   }
