@@ -655,6 +655,35 @@ describe('normalizeInput legacy migration', () => {
     expect(result.valid).toBe(true);
   });
 
+  it('validates min rule on purity field', () => {
+    const input = makeValidInput({
+      templateId: 'asset-origin',
+      assetLotData: {
+        commodityType: 'gold',
+        estimatedWeight: 10,
+        unit: 'kg',
+        purity: -1,
+      },
+    });
+    const result = validateCertificateInput(input);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('Purity'))).toBe(true);
+  });
+
+  it('passes min rule when purity is within range', () => {
+    const input = makeValidInput({
+      templateId: 'asset-origin',
+      assetLotData: {
+        commodityType: 'gold',
+        estimatedWeight: 10,
+        unit: 'kg',
+        purity: 0.995,
+      },
+    });
+    const result = validateCertificateInput(input);
+    expect(result.valid).toBe(true);
+  });
+
   it('prefers assetLotData over goldLotData when both present', () => {
     const input = makeValidInput({
       templateId: 'asset-origin',

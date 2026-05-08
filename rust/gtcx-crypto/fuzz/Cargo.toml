@@ -21,3 +21,38 @@ path = "fuzz_targets/fuzz_signature_verification.rs"
 test = false
 doc = false
 bench = false
+
+[[bin]]
+name = "fuzz_key_generation"
+path = "fuzz_targets/fuzz_key_generation.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_secp256k1_verification"
+path = "fuzz_targets/fuzz_secp256k1_verification.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_hashing"
+path = "fuzz_targets/fuzz_hashing.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_chain_integrity"
+path = "fuzz_targets/fuzz_chain_integrity.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_key_derivation"
+path = "fuzz_targets/fuzz_key_derivation.rs"
+test = false
+doc = false
+bench = false
