@@ -205,6 +205,46 @@ describe('tracedGenerateQRCode', () => {
     expect(qr.qrCodeUri.startsWith('data:application/json;base64,')).toBe(true);
     expect(qr.data.certificateId).toBe('CERT_001');
   });
+
+  it('should generate photo QR code', async () => {
+    const qr = await tracedGenerateQRCode({
+      certificateId: 'CERT_002',
+      type: 'photo',
+      metadata: { photoHash: 'abc123', location: { latitude: 1, longitude: 2 } },
+    });
+    expect(qr.id).toBeTruthy();
+    expect(qr.data.type).toBe('photo');
+  });
+
+  it('should generate asset-lot QR code', async () => {
+    const qr = await tracedGenerateQRCode({
+      certificateId: 'CERT_003',
+      type: 'asset-lot',
+      metadata: {
+        assetWeight: 100,
+        assetUnit: 'kg',
+        purity: 0.995,
+        commodityType: 'gold',
+        producerId: 'P001',
+        operatorRole: 'producer',
+        location: { latitude: 6.2, longitude: -1.6 },
+      },
+    });
+    expect(qr.id).toBeTruthy();
+    expect(qr.data.type).toBe('asset-lot');
+  });
+
+  it('should generate certificate QR code with asset metadata', async () => {
+    const qr = await tracedGenerateQRCode({
+      certificateId: 'CERT_004',
+      type: 'certificate',
+      metadata: {
+        assetWeight: 50,
+        commodityType: 'silver',
+      },
+    });
+    expect(qr.id).toBeTruthy();
+  });
 });
 
 describe('tracedVerifyQRCode', () => {
@@ -247,6 +287,47 @@ describe('tracedCreateProofBundle', () => {
     expect(bundle.id).toBeTruthy();
     expect(bundle.proofs.cryptographicProof.signature).toBeTruthy();
     expect(bundle.proofs.locationProof).toBeDefined();
+  });
+
+  it('should create a proof bundle without location proof', async () => {
+    const bundle = await tracedCreateProofBundle({
+      type: 'location',
+    });
+    expect(bundle.id).toBeTruthy();
+    expect(bundle.proofs.cryptographicProof.signature).toBeTruthy();
+    expect(bundle.proofs.locationProof).toBeUndefined();
+  });
+
+  it('should create a proof bundle with photo hashes', async () => {
+    const bundle = await tracedCreateProofBundle({
+      type: 'photo',
+      photoHashes: ['hash1', 'hash2', 'hash3'],
+    });
+    expect(bundle.id).toBeTruthy();
+    expect(bundle.proofs.photoProofs).toBeDefined();
+    expect(bundle.proofs.photoProofs!.length).toBe(3);
+  });
+
+  it('should create a proof bundle with claims', async () => {
+    const bundle = await tracedCreateProofBundle({
+      type: 'compliance',
+      claims: [
+        { type: 'origin', value: 'Ghana', confidence: 0.95 },
+        { type: 'weight', value: '10kg', confidence: 0.99 },
+      ],
+    });
+    expect(bundle.id).toBeTruthy();
+    expect(bundle.claims).toBeDefined();
+    expect(bundle.claims!.length).toBe(2);
+  });
+
+  it('should create a proof bundle without claims when array is empty', async () => {
+    const bundle = await tracedCreateProofBundle({
+      type: 'location',
+      claims: [],
+    });
+    expect(bundle.id).toBeTruthy();
+    expect(bundle.claims).toBeUndefined();
   });
 });
 

@@ -637,6 +637,63 @@ describe('VerificationError', () => {
 });
 
 // ---------------------------------------------------------------------------
+// normalizeInput — legacy migration branches
+// ---------------------------------------------------------------------------
+
+describe('normalizeInput legacy migration', () => {
+  it('migrates goldLotData to assetLotData when assetLotData is absent', () => {
+    const input = makeValidInput({
+      templateId: 'asset-origin',
+      goldLotData: {
+        estimatedWeight: 100,
+        quality: 'high',
+        purity: 0.995,
+        miner: 'miner-001',
+      },
+    });
+    const result = validateCertificateInput(input);
+    expect(result.valid).toBe(true);
+  });
+
+  it('prefers assetLotData over goldLotData when both present', () => {
+    const input = makeValidInput({
+      templateId: 'asset-origin',
+      assetLotData: {
+        commodityType: 'silver',
+        estimatedWeight: 50,
+        unit: 'troy_oz',
+      },
+      goldLotData: {
+        estimatedWeight: 100,
+        quality: 'high',
+        purity: 0.999,
+        miner: 'miner-002',
+      },
+    });
+    const result = validateCertificateInput(input);
+    expect(result.valid).toBe(true);
+  });
+
+  it('migrates geologicalContext to resourceContext when resourceContext is absent', () => {
+    const input = makeValidInput({
+      templateId: 'asset-origin',
+      assetLotData: {
+        commodityType: 'gold',
+        estimatedWeight: 10,
+        unit: 'kg',
+      },
+      geologicalContext: {
+        goldPotential: 0.8,
+        formation: 'alluvial',
+        confidence: 0.9,
+      },
+    });
+    const result = validateCertificateInput(input);
+    expect(result.valid).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // createStandardCertificateData — negative paths
 // ---------------------------------------------------------------------------
 

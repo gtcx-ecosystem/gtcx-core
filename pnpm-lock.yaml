@@ -109,7 +109,7 @@ importers:
         specifier: workspace:*
         version: link:../telemetry
       undici:
-        specifier: ^6.21.0
+        specifier: 6.24.1
         version: 6.24.1
     devDependencies:
       '@gtcx/tsup-config':
@@ -376,16 +376,16 @@ importers:
   packages/network:
     dependencies:
       '@chainsafe/libp2p-gossipsub':
-        specifier: ^14.1.2
+        specifier: 14.1.2
         version: 14.1.2
       '@chainsafe/libp2p-noise':
-        specifier: ^16.1.5
+        specifier: 16.1.5
         version: 16.1.5
       '@chainsafe/libp2p-quic':
         specifier: ^1.1.8
         version: 1.1.8
       '@chainsafe/libp2p-yamux':
-        specifier: ^7.0.4
+        specifier: 7.0.4
         version: 7.0.4
       '@libp2p/bootstrap':
         specifier: ^11.0.47
@@ -397,13 +397,13 @@ importers:
         specifier: ^11.0.47
         version: 11.0.47
       '@libp2p/tcp':
-        specifier: ^10.1.19
+        specifier: 10.1.19
         version: 10.1.19
       '@multiformats/multiaddr':
         specifier: 12.5.1
         version: 12.5.1
       libp2p:
-        specifier: ^2.10.0
+        specifier: 2.10.0
         version: 2.10.0
     devDependencies:
       '@gtcx/tsup-config':

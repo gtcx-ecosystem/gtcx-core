@@ -43,7 +43,7 @@
     "@gtcx/crypto": "workspace:*",
     "@gtcx/resilience": "workspace:*",
     "@gtcx/telemetry": "workspace:*",
-    "undici": "^6.21.0"
+    "undici": "6.24.1"
   },
   "publishConfig": {
     "access": "public",
