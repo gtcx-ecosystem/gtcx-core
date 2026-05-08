@@ -84,6 +84,7 @@ Tracks user acceptance testing (UAT) evidence for features and sprints. Updated 
 **Status:** Pass
 **Evidence:** `node tools/check-package-boundaries.mjs` — 198 files, 0 violations, 0 exceptions
 **Notes:** All 6 documented exceptions resolved:
+
 - `workproof/src/predicates/registry.ts` 987→111 LOC (8 category definition files)
 - `verification/src/traced.ts` 641→33 LOC (7 operation submodules)
 - `security/src/offline/secure-storage.ts` 553→355 LOC (errors/config/types extracted)
@@ -97,9 +98,27 @@ Tracks user acceptance testing (UAT) evidence for features and sprints. Updated 
 **Tested by:** Automated test suite + coverage report
 **Status:** Pass
 **Evidence:**
+
 - `packages/identity/tests/` — 78 tests, coverage: 94.05% stmts / 86.12% branch / 91.17% funcs / 94.81% lines
 - `packages/connectivity/tests/` — 32 tests, coverage: 97.36% stmts / 86.95% branch / 93.75% funcs / 100% lines
-**Notes:** Added targeted tests for error paths, defensive checks, and default behavior. Both packages now exceed 85% threshold across all dimensions.
+  **Notes:** Added targeted tests for error paths, defensive checks, and default behavior. Both packages now exceed 85% threshold across all dimensions.
+
+### [2026-05-08] Phase 5 — Agentic Maturity (Trust/Provenance/Review)
+
+**Type:** Feature integration
+**Tested by:** Automated test suites across 3 repos
+**Status:** Pass
+**Evidence:**
+
+- **gtcx-core** `@gtcx/types` — 12 provenance tests, `@gtcx/schemas` — 10 provenance schema tests, `@gtcx/ai` — 4 provenance tracing tests
+- **gtcx-intelligence** `@gtcx/intelligence` — 11 provenance integration tests (374 total tests pass), auto-provenance attached to all `IntelligenceResult<T>` outputs, `provenancePolicyRule()` added to policy engine
+- **gtcx-protocols** `@gtcx/agent` — 6 provenance gate tests (14 total), `@gtcx/auth` — 9 provenance policy tests (171 total)
+  **Notes:**
+- Canonical `AgenticProvenance` type defined in `@gtcx/types` with `trustLevel`, `confidence`, `evidenceRefs`, `methodologyVersion`, `requiresHumanReview`, `decisionProvenance`
+- 4 default review thresholds: `high_impact_compliance` (0.9), `model_uncertainty` (0.6 + 2 evidence refs), `stale_or_partial_evidence` (24h / 0.8 coverage), `jurisdictional_edge_case` (0.85 + 3+ sources)
+- `evaluateProvenancePolicy()` and `shouldRequireHumanReview()` helpers in all 3 repos
+- `GTCXAgentSDK.gateDecision()` enforces acceptance criterion: consequential AI-derived decisions without provenance are blocked
+- Policy enforcement in `@gtcx/auth` adds 3 provenance-aware operators: `provenance_trust_level`, `provenance_confidence`, `provenance_requires_review`
 
 ---
 

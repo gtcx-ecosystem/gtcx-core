@@ -14,6 +14,11 @@
       "types": "./dist/canonical/index.d.ts",
       "import": "./dist/canonical/index.mjs",
       "require": "./dist/canonical/index.js"
+    },
+    "./canonical/test-vectors": {
+      "import": "./src/canonical/test-vectors.json",
+      "require": "./src/canonical/test-vectors.json",
+      "default": "./src/canonical/test-vectors.json"
     }
   },
   "scripts": {
