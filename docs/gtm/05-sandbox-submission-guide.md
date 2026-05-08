@@ -25,7 +25,7 @@ Priority markets for GTCX (commodity trade verification):
 | UAE          | ADGM / DIFC         | RegLab / Innovation Testing License | International trade hub                   |
 | UK           | FCA                 | Regulatory Sandbox                  | International market access               |
 
-**Start with Ghana and Kenya.** Closest to product-market fit. Regulators actively seeking innovation in commodity verification.
+**Start with Zimbabwe and Namibia.** See [08-target-markets.md](./08-target-markets.md) for the full 5-market strategy (Zimbabwe, Namibia, Zambia, DRC, Ghana).
 
 ## Step 2: Pre-Submission Meeting
 
