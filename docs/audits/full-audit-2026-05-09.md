@@ -380,6 +380,8 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 **Biggest Risk:** 15 unpushed commits suggest the autonomous session ran ahead of human-in-loop checkpoints. Confirm intent before any push.
 
+**Sprint 3 task 1 finding (2026-05-09):** Bus-factor situation is worse than initially scoped. `gtcx-agent` user exists but is not in `gtcx-ecosystem` org; no pending invitation. Branch protection on `main` is **disabled** — CODEOWNERS rules are not enforced, both human and AI reviewers are bypassable. Two human actions required to make the dual-AI CODEOWNER pattern operational: (1) re-invite gtcx-agent to the org, (2) enable branch protection on `main` with required CODEOWNER review + required status checks.
+
 **Biggest Opportunity:** The dual-AI CODEOWNER pattern. As of `7537089`, the schema, prompt, and three playbooks are versioned in `docs/agents/governance/`. Documented externally, it becomes a recruiting + distribution moat — the kind of thing that makes other AI-native teams want to copy GTCX.
 
 ---
