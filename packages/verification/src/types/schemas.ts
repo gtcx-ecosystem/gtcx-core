@@ -521,6 +521,7 @@ export const CertificateVerificationResultSchema = z.object({
     signatureValid: z.boolean(),
     timestampValid: z.boolean(),
     notExpired: z.boolean(),
+    notRevoked: z.boolean(),
   }),
 });
 

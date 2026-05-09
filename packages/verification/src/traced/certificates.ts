@@ -9,6 +9,7 @@ import {
   createStandardCertificateData,
   verifyCertificateStructure,
 } from '../certificates/generator.js';
+import type { RevocationChecker } from '../certificates/revocation.js';
 import { traced } from '../tracing.js';
 import type {
   Certificate,
@@ -98,7 +99,10 @@ export const tracedGenerateCertificate = traced(
 );
 
 export const tracedVerifyCertificate = traced(
-  async (certificate: Certificate): Promise<CertificateVerificationResult> => {
+  async (
+    certificate: Certificate,
+    revocationChecker: RevocationChecker
+  ): Promise<CertificateVerificationResult> => {
     const structure = verifyCertificateStructure(certificate);
     const now = Date.now();
 
@@ -145,14 +149,29 @@ export const tracedVerifyCertificate = traced(
       certificate.createdAt <= now;
     const notExpired = !certificate.metadata.expiresAt || certificate.metadata.expiresAt > now;
 
-    const isValid = structure.valid && hashValid && signatureValid && timestampValid && notExpired;
-    const passedChecks = [hashValid, signatureValid, timestampValid, notExpired].filter(
+    // Revocation check — fail-closed on backend errors per RevocationChecker contract.
+    let notRevoked: boolean;
+    let revocationReason: string | undefined;
+    try {
+      const status = await revocationChecker.check(certificate);
+      notRevoked = !status.revoked;
+      revocationReason = status.reason;
+    } catch (error) {
+      notRevoked = false;
+      revocationReason = `revocation check failed: ${(error as Error).message ?? String(error)}`;
+    }
+
+    const isValid =
+      structure.valid && hashValid && signatureValid && timestampValid && notExpired && notRevoked;
+    const passedChecks = [hashValid, signatureValid, timestampValid, notExpired, notRevoked].filter(
       Boolean
     ).length;
-    const confidence = passedChecks / 4;
+    const confidence = passedChecks / 5;
     const details = isValid
       ? `Certificate passed ${cryptoVerified ? 'cryptographic' : 'structural'} and temporal checks`
-      : `Certificate validation failed: ${structure.errors.join(', ') || 'one or more checks failed'}`;
+      : !notRevoked
+        ? `Certificate revoked: ${revocationReason ?? 'no reason provided'}`
+        : `Certificate validation failed: ${structure.errors.join(', ') || 'one or more checks failed'}`;
 
     return {
       isValid,
@@ -164,6 +183,7 @@ export const tracedVerifyCertificate = traced(
         signatureValid,
         timestampValid,
         notExpired,
+        notRevoked,
       },
     };
   },

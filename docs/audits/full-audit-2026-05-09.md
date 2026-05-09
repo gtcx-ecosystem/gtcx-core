@@ -48,12 +48,12 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 ### Open security findings
 
-| ID              | Severity | File:Line                                 | Status                | Take                                                                                                                                              |
-| --------------- | -------- | ----------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SA-002          | Medium   | `packages/crypto/src/zkp.ts:114-130`      | **Closed** (Sprint 2) | `generate()` now throws unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`. Verify path remains open.                                                      |
-| SA-004 / AT-002 | High     | `packages/verification/src/certificates/` | Phase 7               | No revocation list / status check before accepting a cert                                                                                         |
-| AT-005          | Medium   | `package.json` overrides                  | **Closed** (Sprint 2) | `pnpm.overrides` pins `@noble/curves@1` and `@noble/hashes@1`. `tools/check-crypto-deps.mjs` enforces version allowlist + integrity hashes in CI. |
-| AT-004          | Medium   | `rust/gtcx-crypto/src/keystore.rs`        | Trait done            | Only `MemoryKeyStore`. No PKCS#11/cloud-KMS                                                                                                       |
+| ID              | Severity | File:Line                                 | Status                | Take                                                                                                                                                        |
+| --------------- | -------- | ----------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SA-002          | Medium   | `packages/crypto/src/zkp.ts:114-130`      | **Closed** (Sprint 2) | `generate()` now throws unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`. Verify path remains open.                                                                |
+| SA-004 / AT-002 | High     | `packages/verification/src/certificates/` | **Closed** (Sprint 2) | `RevocationChecker` interface required on `tracedVerifyCertificate()`. Fail-closed on backend errors. Three factories provided: in-memory, deny-all, no-op. |
+| AT-005          | Medium   | `package.json` overrides                  | **Closed** (Sprint 2) | `pnpm.overrides` pins `@noble/curves@1` and `@noble/hashes@1`. `tools/check-crypto-deps.mjs` enforces version allowlist + integrity hashes in CI.           |
+| AT-004          | Medium   | `rust/gtcx-crypto/src/keystore.rs`        | Trait done            | Only `MemoryKeyStore`. No PKCS#11/cloud-KMS                                                                                                                 |
 
 ### New findings
 

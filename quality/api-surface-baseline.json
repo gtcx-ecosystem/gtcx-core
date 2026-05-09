@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-09T08:37:25.642Z",
+  "generatedAt": "2026-05-09T08:51:48.536Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.2",
@@ -1063,7 +1063,7 @@
       "version": "2.0.0",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "a4fd0732fe0ed81f3b0007841417c8dc854d6bfbae50e258e5af01d795ea7e6b",
+      "hash": "3e60329864344e50e508678c7fbd52ec9e8fad46d04e3411f987d461ed372eca",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",
@@ -1126,10 +1126,13 @@
         "createCryptographicProofRef",
         "createDefaultEnvironmentalFactors",
         "createDefaultValidationMetrics",
+        "createDenyAllRevocationChecker",
         "createGoldLotQRData",
+        "createInMemoryRevocationChecker",
         "createLocationProof",
         "createLocationQRData",
         "createMilitaryGradeCertificateData",
+        "createNoopRevocationChecker",
         "createPhotoProof",
         "createPhotoQRData",
         "createProofBundle",
@@ -1228,6 +1231,7 @@
         "QualityGradeSchema",
         "ResourceContext",
         "ResourceContextSchema",
+        "RevocationChecker",
         "RevocationEntry",
         "RevocationRegistry",
         "RevocationStatus",

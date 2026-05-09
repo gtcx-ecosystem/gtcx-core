@@ -1,6 +1,7 @@
 import { generateKeyPair } from '@gtcx/crypto';
 import { describe, it, expect } from 'vitest';
 
+import { createNoopRevocationChecker } from '../src/certificates/revocation';
 import {
   tracedGenerateCertificate,
   tracedVerifyCertificate,
@@ -13,6 +14,11 @@ import {
   computeVerificationSummary,
   type VerificationOperationLog,
 } from '../src/traced';
+
+// Tests for the verify path use the no-op checker — they exercise structure,
+// signature, and timestamp validation, not the revocation backend itself.
+// Revocation behavior is covered separately in tests/revocation.test.ts.
+const revocationChecker = createNoopRevocationChecker();
 
 function makeLocation() {
   return { latitude: 6.2, longitude: -1.6, accuracy: 5, timestamp: Date.now() };
@@ -89,7 +95,7 @@ describe('tracedVerifyCertificate', () => {
       publicKey: keyPair.publicKey,
     });
 
-    const result = await tracedVerifyCertificate(cert);
+    const result = await tracedVerifyCertificate(cert, revocationChecker);
     expect(result.isValid).toBe(true);
     expect(result.confidence).toBeGreaterThan(0);
     expect(result.checks.signatureValid).toBe(true);
@@ -111,7 +117,7 @@ describe('tracedVerifyCertificate', () => {
       claims: [],
     });
 
-    const result = await tracedVerifyCertificate(cert);
+    const result = await tracedVerifyCertificate(cert, revocationChecker);
     expect(result.isValid).toBe(true);
     expect(result.checks.signatureValid).toBe(true);
   });
@@ -139,7 +145,7 @@ describe('tracedVerifyCertificate', () => {
       signature: 'sig_test',
     };
 
-    const result = await tracedVerifyCertificate(fakeCert);
+    const result = await tracedVerifyCertificate(fakeCert, revocationChecker);
     expect(result.isValid).toBe(false);
     expect(result.checks.signatureValid).toBe(false);
   });
@@ -162,7 +168,7 @@ describe('tracedVerifyCertificate', () => {
       },
     };
 
-    const result = await tracedVerifyCertificate(tampered);
+    const result = await tracedVerifyCertificate(tampered, revocationChecker);
     expect(result.isValid).toBe(false);
     expect(result.checks.signatureValid).toBe(false);
   });
@@ -181,9 +187,94 @@ describe('tracedVerifyCertificate', () => {
       certificateId: '',
     };
 
-    const result = await tracedVerifyCertificate(invalidCert);
+    const result = await tracedVerifyCertificate(invalidCert, revocationChecker);
     expect(result.isValid).toBe(false);
     expect(result.details).toContain('Missing certificate ID');
+  });
+});
+
+describe('tracedVerifyCertificate — RevocationChecker integration (SA-004)', () => {
+  it('rejects a certificate when the checker reports revoked', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const revokedChecker = {
+      check: async () => ({ revoked: true, reason: 'fraud detected' }),
+    };
+
+    const result = await tracedVerifyCertificate(cert, revokedChecker);
+    expect(result.isValid).toBe(false);
+    expect(result.checks.notRevoked).toBe(false);
+    expect(result.details).toContain('Certificate revoked');
+    expect(result.details).toContain('fraud detected');
+  });
+
+  it('treats checker errors as revoked (fail-closed)', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const failingChecker = {
+      check: async () => {
+        throw new Error('backend timeout');
+      },
+    };
+
+    const result = await tracedVerifyCertificate(cert, failingChecker);
+    expect(result.isValid).toBe(false);
+    expect(result.checks.notRevoked).toBe(false);
+    expect(result.details).toContain('revocation check failed');
+    expect(result.details).toContain('backend timeout');
+  });
+
+  it('valid certificate passes all 5 checks including notRevoked', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const result = await tracedVerifyCertificate(cert, revocationChecker);
+    expect(result.isValid).toBe(true);
+    expect(result.checks.notRevoked).toBe(true);
+    expect(result.confidence).toBe(1);
+  });
+
+  it('confidence is 4/5 when only revocation fails', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const revokedChecker = {
+      check: async () => ({ revoked: true, reason: 'manual revocation' }),
+    };
+
+    const result = await tracedVerifyCertificate(cert, revokedChecker);
+    expect(result.checks.hashValid).toBe(true);
+    expect(result.checks.signatureValid).toBe(true);
+    expect(result.checks.timestampValid).toBe(true);
+    expect(result.checks.notExpired).toBe(true);
+    expect(result.checks.notRevoked).toBe(false);
+    expect(result.confidence).toBe(0.8);
   });
 });
 

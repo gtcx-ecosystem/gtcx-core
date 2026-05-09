@@ -119,3 +119,80 @@ export async function assertNotRevoked(certificate: Certificate): Promise<void> 
     );
   }
 }
+
+// ============================================================================
+// RevocationChecker — pluggable revocation backend (closes SA-004 / AT-002)
+// ============================================================================
+
+/**
+ * Pluggable revocation backend.
+ *
+ * Implementations consult the source of truth for revocation status —
+ * an HTTP status-list endpoint (RFC 5280 §5), a distributed ledger,
+ * an internal database, or an AI-driven anomaly detector.
+ *
+ * Implementations SHOULD return within a reasonable timeout (≤ 5s).
+ * Callers MUST treat timeouts and errors as "potentially revoked" — never
+ * as "not revoked". The fail-closed posture is the security-correct default
+ * because a transient backend failure must not silently downgrade trust.
+ */
+export interface RevocationChecker {
+  /**
+   * Check whether a certificate has been revoked.
+   *
+   * @param certificate - The certificate whose status is being queried.
+   * @returns Resolves with the revocation status. Implementations that
+   *          cannot answer authoritatively SHOULD return `{ revoked: true,
+   *          reason: '<backend-error>' }` rather than `{ revoked: false }`.
+   */
+  check(certificate: Certificate): Promise<RevocationStatus>;
+}
+
+/**
+ * In-memory revocation checker backed by the singleton {@link RevocationRegistry}.
+ *
+ * Suitable for testing and single-process environments. Not durable — registry
+ * state is lost on process restart. Production deployments must supply their
+ * own {@link RevocationChecker} that consults a persistent source.
+ */
+export function createInMemoryRevocationChecker(): RevocationChecker {
+  return {
+    check: (certificate) => checkRevocationStatus(certificate),
+  };
+}
+
+/**
+ * Revocation checker that always reports "revoked" for every certificate.
+ *
+ * Use during incident response when the real revocation backend cannot be
+ * trusted, or as the default in environments where revocation is mandatory
+ * but no backend is yet wired up. Fail-closed by construction.
+ */
+export function createDenyAllRevocationChecker(
+  reason = 'deny-all checker active'
+): RevocationChecker {
+  return {
+    check: async () => ({ revoked: true, reason }),
+  };
+}
+
+/**
+ * Revocation checker that always reports "not revoked" for every certificate.
+ *
+ * **DO NOT use in production.** This bypasses the entire revocation pathway
+ * and silently reintroduces SA-004. Provided exclusively for tests where
+ * revocation is out of scope. The function name and this docstring are the
+ * load-bearing safeguards — there is no env-flag guard because tests need
+ * to exercise the verify path without a network round-trip.
+ *
+ * If you find yourself reaching for this in production code, the right
+ * answer is `createDenyAllRevocationChecker()` until your real backend
+ * is ready.
+ *
+ * @deprecated for production use only. Tests may use freely.
+ */
+export function createNoopRevocationChecker(): RevocationChecker {
+  return {
+    check: async () => ({ revoked: false }),
+  };
+}

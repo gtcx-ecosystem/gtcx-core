@@ -65,6 +65,11 @@ export {
   RevocationRegistry,
   checkRevocationStatus,
   assertNotRevoked,
+  // Pluggable revocation backend (SA-004 / AT-002)
+  createInMemoryRevocationChecker,
+  createDenyAllRevocationChecker,
+  createNoopRevocationChecker,
+  type RevocationChecker,
   type RevocationStatus,
   type RevocationEntry,
 } from './revocation';

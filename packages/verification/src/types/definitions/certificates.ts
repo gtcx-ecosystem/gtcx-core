@@ -208,5 +208,6 @@ export interface CertificateVerificationResult {
     signatureValid: boolean;
     timestampValid: boolean;
     notExpired: boolean;
+    notRevoked: boolean;
   };
 }

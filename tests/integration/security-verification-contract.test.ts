@@ -6,8 +6,14 @@ import {
   SecureStorageBase,
   type StorageBackend,
 } from '@gtcx/security';
-import { tracedGenerateCertificate, tracedVerifyCertificate } from '@gtcx/verification';
+import {
+  createNoopRevocationChecker,
+  tracedGenerateCertificate,
+  tracedVerifyCertificate,
+} from '@gtcx/verification';
 import { describe, it, expect, afterEach, vi } from 'vitest';
+
+const revocationChecker = createNoopRevocationChecker();
 
 class IntegrationTestSecureStorage extends SecureStorageBase {
   constructor(
@@ -94,7 +100,7 @@ describe('Integration: security and verification contracts', () => {
       publicKey: keyPair.publicKey,
     });
 
-    const validResult = await tracedVerifyCertificate(certificate);
+    const validResult = await tracedVerifyCertificate(certificate, revocationChecker);
     expect(validResult.isValid).toBe(true);
 
     const tamperedCertificate = {
@@ -105,7 +111,7 @@ describe('Integration: security and verification contracts', () => {
       },
     };
 
-    const tamperedResult = await tracedVerifyCertificate(tamperedCertificate);
+    const tamperedResult = await tracedVerifyCertificate(tamperedCertificate, revocationChecker);
     expect(tamperedResult.isValid).toBe(false);
     expect(tamperedResult.checks.signatureValid).toBe(false);
   });

@@ -139,12 +139,13 @@ Attack_Scenario:
     - Proof bundles include publicKey; verifier checks key against DID registry
     - Certificate ID is hash-derived and tamper-evident
     - Hash-chained proof structure detects any field modification
+    - tracedVerifyCertificate() requires a RevocationChecker on every call (SA-004 closed); fail-closed on backend errors
+    - HashCommitmentZkpEngine.generate() throws by default (SA-002 closed)
   Gaps:
-    - No revocation check in proof verification flow
-    - Hash-commitment ZKP (JS fallback) is not zero-knowledge — a motivated attacker can forge proofs if native module is not enforced
+    - No production HTTP/ledger-backed RevocationChecker reference implementation in this repo (consumers supply their own)
   Recommendations:
     - Enforce GTCX_REQUIRE_NATIVE=true in all production deployments
-    - Add certificate revocation list support to verification
+    - Publish a reference RevocationChecker that consults the gtcx-protocols revocation status list
     - Complete pen test on verification pipeline
 ```
 
@@ -236,8 +237,8 @@ DoS = Queue/retry exhaustion
 ### High priority (30 days)
 
 - [x] Add default input sanitization to traced operations (strip key material) — redactSecrets() in @gtcx/ai
-- [ ] Add certificate revocation support to `@gtcx/verification`
-- [ ] Wire real Groth16/Bulletproofs circuits to NAPI bridge (eliminate JS ZKP fallback path in production)
+- [x] Add certificate revocation support to `@gtcx/verification` — RevocationChecker interface required on tracedVerifyCertificate()
+- [ ] Wire real Groth16/Bulletproofs circuits to NAPI bridge (eliminate JS ZKP fallback path in production) — partial: HashCommitmentZkpEngine.generate() now fails closed
 
 ### Medium priority (90 days)
 
