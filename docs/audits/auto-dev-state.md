@@ -43,8 +43,8 @@
 
 ## Active Remediation
 
-- [remediation-plan-2026-05-06.md](./remediation-plan-2026-05-06.md) — Comprehensive plan to close the 1.12-point gap to 10/10.
+- [remediation-roadmap-10-10.md](./remediation-roadmap-10-10.md) — Phase A-F remediation roadmap (Phase A/B complete).
 
 ## Reference
 
-- [10-10-roadmap-2026-05-06.md](./10-10-roadmap-2026-05-06.md)
+- [Budget Readiness Plan](../gtm/06-budget-readiness-plan.md) — $0 path from 9.8 to 10.0

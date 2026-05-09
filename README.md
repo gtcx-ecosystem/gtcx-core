@@ -13,7 +13,7 @@ This repository targets infrastructure-grade engineering standards suitable for 
 - **Architectural Rigor**: Enforced layering boundaries (zero circular dependencies), max 500 LOC per source file, and standardized error taxonomy (ADR-012).
 - **Audit Ready**: Structured tracing and security logging preserve zero-trust boundaries.
 
-For a detailed breakdown of these mandates, see [GEMINI.md](./GEMINI.md).
+For a detailed breakdown of these mandates, see [Quality Standards](./docs/testing/quality-standards.md).
 
 ## Current State
 

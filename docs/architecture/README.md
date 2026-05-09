@@ -11,7 +11,7 @@ Canonical architecture documentation for `gtcx-core`.
 | [api-stability.md](api-stability.md)                           | Public API stability policy and baseline enforcement                             |
 | [api-patterns.md](api-patterns.md)                             | API design and contract patterns used across the workspace                       |
 | [architecture-docs-protocol.md](architecture-docs-protocol.md) | Rules for keeping architecture docs current                                      |
-| [docs-structure-standard.md](docs-structure-standard.md)       | Documentation structure standard                                                 |
+| (removed)                                                      | Documentation structure standard — archived as unfilled template                 |
 | [system-architecture-spec.md](system-architecture-spec.md)     | Formal security-oriented architecture spec template for future system-level work |
 
 ## Notes

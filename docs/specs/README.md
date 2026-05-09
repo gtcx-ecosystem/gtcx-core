@@ -4,9 +4,9 @@ Backend architecture specifications and implementation standards.
 
 ## Contents
 
-| File                                                 | Description                                                                    |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [`backend-architecture.md`](backend-architecture.md) | Runtime, framework, project structure, middleware stack, and database patterns |
+| File                                                                 | Description                                                                    |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [`backend-architecture.md`](../architecture/backend-architecture.md) | Runtime, framework, project structure, middleware stack, and database patterns |
 
 ## What belongs here
 
