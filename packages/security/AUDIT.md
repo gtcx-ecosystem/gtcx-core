@@ -121,9 +121,10 @@ audit/      → observability layer
 ✅ **Dependency injection patterns:**
 
 ```typescript
-// Storage backend is injected
-class SecureStorage {
-  constructor(private readonly backend: StorageBackend) {}
+// Storage backend is injected via abstract base class
+abstract class SecureStorageBase {
+  protected abstract getStorage(): StorageBackend;
+  protected abstract deriveKey(secret: string, salt: Uint8Array): Promise<Uint8Array>;
 }
 
 // Handlers are pluggable
@@ -189,7 +190,7 @@ export function sanitizeString(input: unknown, options?: StringSanitizeOptions):
 
 ✅ **Dedicated offline module:**
 
-- `SecureStorage` - Encrypted local storage
+- `SecureStorageBase` - Abstract encrypted local storage with pluggable backend
 - `CredentialCache` - 72-hour credential validity
 - `TamperDetection` - Signature chain verification
 

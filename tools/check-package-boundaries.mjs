@@ -172,19 +172,19 @@ const MAX_SOURCE_FILE_LINES = 500;
 // Each entry must include a reason and a target resolution (e.g., issue number or planned sprint).
 const fileSizeExceptions = {
   // Type-definition files: inherently large due to exhaustive schema coverage.
-  // Decomposition planned in follow-up architecture sprint.
-  // All file-size exceptions resolved in Sprint 6
-  'packages/verification/src/types/schemas.ts': { reason: 'Zod schema definitions', target: 'Sprint 6' },
-  // Security storage: complex state machine with planned extraction to security/storage/.
-  // security/src/offline/secure-storage.ts decomposed into secure-storage/ in Sprint 6
-  'packages/security/src/offline/storage.ts': { reason: 'Complex state machine', target: 'Sprint 6' },
-  // Service files: currently being decomposed in this remediation cycle.
-  // registration.ts and trading.ts decomposed in Sprint 6 — now under 500 LOC
-  // UnifiedComplianceService decomposed in Sprint 6 — now under 500 LOC
-  // Verification traced operations: high operation count; sanitize extraction already completed.
-  // verification/src/traced.ts decomposed into traced/ in Sprint 6
-  // Workproof registry: predicate registry with planned plugin architecture.
-  // workproof/src/predicates/registry.ts decomposed into definitions/ in Sprint 6
+  // Zod schema files are not decomposable without losing the type-level
+  // benefits of co-located schemas — accepted as a permanent exception.
+  'packages/verification/src/types/schemas.ts': {
+    reason: 'Zod schema definitions',
+    target: 'permanent exception — co-located schemas required for type inference',
+  },
+  // Resolved exceptions:
+  // - packages/security/src/offline/storage.ts — legacy 766-LOC monolith deleted on
+  //   2026-05-09; superseded by secure-storage.ts + secure-storage/ submodules.
+  // - packages/services/src/registration.ts, trading.ts — decomposed in Sprint 6.
+  // - packages/services/src/compliance/UnifiedComplianceService.ts — decomposed in Sprint 6.
+  // - packages/verification/src/traced.ts — decomposed into traced/ in Sprint 6.
+  // - packages/workproof/src/predicates/registry.ts — decomposed into definitions/ in Sprint 6.
 };
 
 for (const [pkgName, files] of sourceFilesByPackage.entries()) {

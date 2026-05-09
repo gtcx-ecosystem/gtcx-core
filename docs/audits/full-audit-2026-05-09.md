@@ -27,7 +27,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 - **[High] [Spec Fidelity] — ADR count claim wrong.** `README.md:163` claims "All 17 architecture decision records". Actual count: 14 numbered ADRs (001-014).
 
-- **[Medium] [Consistency] — Sprint 6 promise unmet.** `tools/check-package-boundaries.mjs:48` comment says "All file-size exceptions resolved in Sprint 6", but the next 4 lines retain exceptions for `verification/src/types/schemas.ts` (604 LOC) and `security/src/offline/storage.ts` (766 LOC). Documentation contradicts code.
+- ~~**[Medium] [Consistency] — Sprint 6 promise unmet.**~~ **Closed (Sprint 3, commit pending).** Legacy `security/src/offline/storage.ts` (766 LOC, dead code superseded by `secure-storage.ts`) deleted along with its 989-LOC test file. Exception list in `tools/check-package-boundaries.mjs` updated: only `verification/types/schemas.ts` remains, marked permanent (Zod schemas co-locate by design). Architecture check now passes with 217 source files (was 218).
 
 - **[Low] [Structural Integrity] — `runtime` package depends on 5 internal packages.** `packages/runtime/src/runtime.ts:8-30` imports `api-client`, `connectivity`, `logging`, `resilience`, `telemetry`. Permitted aggregation per ADR-014 but undocumented in boundary check.
 
