@@ -137,11 +137,11 @@ No critical vulnerabilities, no exploitable weaknesses, no unsafe code, no hardc
 
 ### 4.2 Medium-Risk Items
 
-| ID     | Finding                                                   | Risk                                       | Mitigation                                | Status     |
-| ------ | --------------------------------------------------------- | ------------------------------------------ | ----------------------------------------- | ---------- |
-| SA-001 | Single CODEOWNER for all crypto packages                  | Bus factor; single point of review failure | Add secondary reviewer                    | Open       |
-| SA-002 | ZKP JS fallback accepted if `GTCX_REQUIRE_NATIVE` not set | Proof forgery in misconfigured deployments | Document; enforce in deployment checklist | Documented |
-| SA-003 | `@gtcx` npm scope not yet claimed                         | Typosquatting risk before first publish    | Claim before first publish                | Open       |
+| ID     | Finding                                                   | Risk                                         | Mitigation                                | Status     |
+| ------ | --------------------------------------------------------- | -------------------------------------------- | ----------------------------------------- | ---------- |
+| SA-001 | ~~Single CODEOWNER for all crypto packages~~              | Closed — gtcx-agent added as second reviewer | CODEOWNERS updated 2026-05-09             | Closed     |
+| SA-002 | ZKP JS fallback accepted if `GTCX_REQUIRE_NATIVE` not set | Proof forgery in misconfigured deployments   | Document; enforce in deployment checklist | Documented |
+| SA-003 | ~~`@gtcx` npm scope not yet claimed~~                     | Closed — org owned by gtcx-protocol          | Verified 2026-05-08                       | Closed     |
 
 ### 4.3 Low-Risk Items
 

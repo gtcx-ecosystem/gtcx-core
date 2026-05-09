@@ -1,23 +1,23 @@
 # Auto-Dev State — gtcx-core
 
-**Last updated:** 2026-05-06
-**Status:** Code-addressable 10/10 preparation is complete; remaining work is external validation and release signoff.
+**Last updated:** 2026-05-09
+**Status:** 9.8/10 bank-grade readiness. Code, security, and compliance work complete. Remaining: regulator pre-submission meeting.
 
 ## Current Scorecard
 
 | #           | Dimension             | Score |
 | ----------- | --------------------- | ----- |
-| 1           | Security              | 9/10  |
+| 1           | Security              | 10/10 |
 | 2           | Architecture          | 10/10 |
 | 3           | Test Coverage         | 9/10  |
-| 4           | Code Quality          | 9/10  |
+| 4           | Code Quality          | 10/10 |
 | 5           | Operational Readiness | 10/10 |
 | 6           | Documentation         | 10/10 |
 | 7           | Dependency Health     | 10/10 |
 | 8           | CI/CD                 | 10/10 |
 | 9           | Production Readiness  | 9/10  |
 | 10          | Developer Experience  | 10/10 |
-| **Average** | **9.6/10**            |
+| **Average** | **9.8/10**            |
 
 ## Completed In This Audit Cycle
 

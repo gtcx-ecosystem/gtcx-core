@@ -1,6 +1,6 @@
 # GA Release Readiness Tracker
 
-**Last reviewed:** 2026-05-06
+**Last reviewed:** 2026-05-09
 
 **Release**: gtcx-core v1.0.x
 **Owner**: Core Platform

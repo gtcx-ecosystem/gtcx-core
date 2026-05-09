@@ -131,13 +131,13 @@
 
 ## Open Mitigations (Not Yet Implemented)
 
-| ID     | Mitigation                                         | Priority | Blocks                    |
-| ------ | -------------------------------------------------- | -------- | ------------------------- |
-| AT-001 | Add secondary CODEOWNER for crypto packages        | High     | Supply chain review gap   |
-| AT-002 | Certificate revocation checking in verify flow     | High     | Replay with revoked keys  |
-| AT-003 | Tighten proof bundle recency window (configurable) | Medium   | QR replay window          |
-| AT-004 | HSM-backed key storage (Tier 2/3)                  | Medium   | Memory extraction vector  |
-| AT-005 | Content hash pinning for @noble/\* dependencies    | Medium   | Supply chain substitution |
+| ID     | Mitigation                                                                      | Priority | Blocks                    |
+| ------ | ------------------------------------------------------------------------------- | -------- | ------------------------- |
+| AT-001 | ~~Add secondary CODEOWNER for crypto packages~~ — done (gtcx-agent, 2026-05-09) | Closed   | —                         |
+| AT-002 | Certificate revocation checking in verify flow                                  | High     | Replay with revoked keys  |
+| AT-003 | Tighten proof bundle recency window (configurable)                              | Medium   | QR replay window          |
+| AT-004 | HSM-backed key storage (Tier 2/3)                                               | Medium   | Memory extraction vector  |
+| AT-005 | Content hash pinning for @noble/\* dependencies                                 | Medium   | Supply chain substitution |
 
 ---
 

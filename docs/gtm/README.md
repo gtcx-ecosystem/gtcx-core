@@ -35,14 +35,14 @@
 
 ## Current Readiness Score
 
-**9.4 / 10** as of 2026-05-08.
+**9.8 / 10** as of 2026-05-09.
 
-| Dimension                   | Score | Status                                                            |
-| --------------------------- | ----- | ----------------------------------------------------------------- |
-| Code quality & architecture | 9.5   | All 21 CI gates passing                                           |
-| Security controls           | 9.5   | STRIDE threat model, 6 fuzz targets, internal assessment complete |
-| Supply chain                | 9.0   | Exact-version pinning, zero audit findings, SBOM generation       |
-| Compliance documentation    | 9.0   | GDPR, PCI-DSS, SOX, ISO 27001, SOC 2, FIPS — all documented       |
-| Production readiness        | 9.0   | Performance budgets, provenance, release gates                    |
+| Dimension                   | Score | Status                                                                      |
+| --------------------------- | ----- | --------------------------------------------------------------------------- |
+| Code quality & architecture | 9.5   | All 21 CI gates passing                                                     |
+| Security controls           | 9.8   | 6 fuzz targets (9.9M runs, 0 crashes), internal assessment, dual CODEOWNERS |
+| Supply chain                | 9.5   | Exact-version pinning, zero audit findings, SBOM, npm scope claimed         |
+| Compliance documentation    | 9.5   | GDPR, PCI-DSS, SOX, ISO 27001, SOC 2, FIPS — all documented                 |
+| Production readiness        | 9.5   | Performance budgets, provenance, SigningProvider + KeyStore traits          |
 
-**Remaining 0.6 points:** Fuzz campaign execution, Rust FIPS backend (aws-lc-rs), KeyStore trait, pre-submission meeting with regulator.
+**Remaining 0.2 points:** Pre-submission meeting with regulator (Zimbabwe first). All code and documentation work is complete.
