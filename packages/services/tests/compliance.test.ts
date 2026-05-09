@@ -15,7 +15,7 @@ import type {
   Transaction,
   RegulatoryFramework,
 } from '@gtcx/domain';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { UnifiedComplianceService } from '../src/compliance';
 import type { IMetricsCollector } from '../src/compliance/types';
@@ -172,6 +172,17 @@ function createCustomFramework(overrides: Partial<RegulatoryFramework> = {}): Re
 // ============================================================================
 
 describe('UnifiedComplianceService', () => {
+  // SA-002: HashCommitmentZkpEngine.generate() throws by default. Tests that
+  // exercise the placeholder engine must opt in. verify() remains open without
+  // the flag, so test code that only verifies received proofs does not need it.
+  beforeEach(() => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '1');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   // --------------------------------------------------------------------------
   // Constructor
   // --------------------------------------------------------------------------

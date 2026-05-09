@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
 
 import {
   createHashCommitmentZkpEngine,
@@ -13,6 +13,17 @@ import {
  * adhere to the same logical contract, even if their underlying math differs.
  */
 describe('ZKP Engine Parity', () => {
+  // SA-002: HashCommitmentZkpEngine.generate() throws by default. Parity tests
+  // must opt in because they exercise generate() — this is a controlled test
+  // context, not a regulatory or production claim.
+  beforeEach(() => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '1');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   const engines = [{ name: 'TypeScript (Placeholder)', engine: createHashCommitmentZkpEngine() }];
 
   // Try to load native engine if available

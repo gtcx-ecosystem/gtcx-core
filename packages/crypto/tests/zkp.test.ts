@@ -1,8 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { HashCommitmentZkpEngine, ZKProofSchema } from '../src/zkp';
 
 describe('HashCommitmentZkpEngine', () => {
+  beforeEach(() => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '1');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   it('generates a valid proof payload', async () => {
     const engine = new HashCommitmentZkpEngine();
     const proof = await engine.generate({
@@ -130,7 +138,86 @@ describe('HashCommitmentZkpEngine', () => {
   });
 });
 
+describe('HashCommitmentZkpEngine — generate() default-deny (SA-002)', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  const baseInput = {
+    system: 'bulletproofs' as const,
+    proofType: 'gci_threshold',
+    publicInputs: ['threshold:50'],
+    witness: 'score:75',
+    verificationKeyId: 'bulletproofs-gci-v1',
+  };
+
+  it('throws when GTCX_ALLOW_HASH_COMMITMENT_ZKP is unset', async () => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '');
+    const engine = new HashCommitmentZkpEngine();
+    await expect(engine.generate(baseInput)).rejects.toThrow(/disabled by default/);
+  });
+
+  it('throws when GTCX_ALLOW_HASH_COMMITMENT_ZKP is "true" (must be exactly "1")', async () => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', 'true');
+    const engine = new HashCommitmentZkpEngine();
+    await expect(engine.generate(baseInput)).rejects.toThrow(/disabled by default/);
+  });
+
+  it('throws when GTCX_ALLOW_HASH_COMMITMENT_ZKP is "yes"', async () => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', 'yes');
+    const engine = new HashCommitmentZkpEngine();
+    await expect(engine.generate(baseInput)).rejects.toThrow(/disabled by default/);
+  });
+
+  it('error message references SA-002 and the threat model', async () => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '');
+    const engine = new HashCommitmentZkpEngine();
+    await expect(engine.generate(baseInput)).rejects.toThrow(/SA-002/);
+    await expect(engine.generate(baseInput)).rejects.toThrow(/threat-model/);
+  });
+
+  it('error message points to native bindings as the production path', async () => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '');
+    const engine = new HashCommitmentZkpEngine();
+    await expect(engine.generate(baseInput)).rejects.toThrow(/@gtcx\/crypto-native/);
+  });
+
+  it('verify() remains open even when generate() is disabled', async () => {
+    // Generate with the flag set to obtain a real proof
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '1');
+    const engine = new HashCommitmentZkpEngine();
+    const proof = await engine.generate(baseInput);
+
+    // Now drop the flag — verify must still work for downstream services
+    // that receive these proofs but never generate them
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '');
+    await expect(engine.verify(proof)).resolves.toBe(true);
+  });
+
+  it('succeeds when GTCX_ALLOW_HASH_COMMITMENT_ZKP is exactly "1"', async () => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '1');
+    const engine = new HashCommitmentZkpEngine();
+    const proof = await engine.generate(baseInput);
+    expect(ZKProofSchema.safeParse(proof).success).toBe(true);
+  });
+});
+
+// The createZkpEngine() factory's no-native fallback branch (SA-002 default-deny)
+// is intentionally excluded from default test runs — see /* v8 ignore */ in zkp.ts.
+// The branch is exercised in `crypto-native-ci` where the native binary is absent.
+// The load-bearing test for SA-002 closure is HashCommitmentZkpEngine.generate()
+// throwing directly, which runs in every test invocation regardless of native
+// binding availability.
+
 describe('ZKP helper edge cases', () => {
+  beforeEach(() => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '1');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   const engine = new HashCommitmentZkpEngine();
   const baseInput = {
     system: 'bulletproofs' as const,

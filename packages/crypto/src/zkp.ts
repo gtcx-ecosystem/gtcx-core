@@ -93,6 +93,28 @@ const decodePayload = (value: string): ProofPayload | null => {
 
 const isHex = (value: string): boolean => /^[0-9a-f]+$/i.test(value);
 
+/**
+ * Check whether the placeholder hash-commitment ZKP engine is explicitly
+ * permitted to generate proofs. Reads `GTCX_ALLOW_HASH_COMMITMENT_ZKP` on
+ * every call so test environments can toggle the flag with `vi.stubEnv`.
+ *
+ * The flag must be set to the literal string `'1'` to opt in. Any other
+ * value — including `'true'`, `'yes'`, or unset — keeps the engine disabled.
+ */
+const isHashCommitmentZkpAllowed = (): boolean =>
+  typeof process !== 'undefined' && process.env?.['GTCX_ALLOW_HASH_COMMITMENT_ZKP'] === '1';
+
+const HASH_COMMITMENT_DISABLED_MESSAGE =
+  'HashCommitmentZkpEngine.generate() is disabled by default because it is a placeholder, ' +
+  'not a real zero-knowledge proof system. Output from this engine is indistinguishable ' +
+  'from random bytes to a verifier and must not be relied on for compliance claims, ' +
+  'regulatory submissions, or any context where proof correctness matters.\n\n' +
+  'For real ZK proofs: install @gtcx/crypto-native and use createZkpEngine() — it ' +
+  'auto-selects the native arkworks backend (Groth16, Bulletproofs, Schnorr).\n\n' +
+  'To explicitly opt into the placeholder (testing, non-regulatory contexts), set ' +
+  'GTCX_ALLOW_HASH_COMMITMENT_ZKP=1.\n\n' +
+  'See docs/security/threat-model.md (SA-002) for the full rationale.';
+
 const ensureCommitment = (publicInputs: string[], commitment: string): string[] => {
   if (publicInputs.includes(commitment)) return publicInputs;
   return [...publicInputs, commitment];
@@ -122,15 +144,23 @@ const normalizeToHash256 = (value: string): string => {
  * claims, regulatory submissions, or any context where proof
  * correctness matters.
  *
+ * `generate()` throws by default — opt in with `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`
+ * if you understand the placeholder semantics. `verify()` remains open so
+ * services receiving such proofs can validate them without holding the flag.
+ *
  * For real ZK verification, use the Rust NAPI bindings via
  * `@gtcx/crypto-native` which delegates to `gtcx-zkp`.
  *
  * @see rust/gtcx-zkp for production ZK implementation
+ * @see docs/security/threat-model.md SA-002 for the rationale behind the default-deny
  */
 export class HashCommitmentZkpEngine implements ZkProver, ZkVerifier {
   /** Hash-commitment engine does not produce verification keys. Use Rust NAPI bindings for full ZKP. */
   readonly supportsVerificationKeys = false;
   async generate(input: ZkProofInput): Promise<ZKProof> {
+    if (!isHashCommitmentZkpAllowed()) {
+      throw new Error(HASH_COMMITMENT_DISABLED_MESSAGE);
+    }
     fipsWarn('ZKP/HashCommitment', 'No FIPS ZKP standard exists — document as supplementary');
     const witnessBytes = toBytes(input.witness);
     const witnessHex = bytesToHex(witnessBytes);
@@ -192,11 +222,17 @@ export const createHashCommitmentZkpEngine = (): HashCommitmentZkpEngine =>
  * Create the best available ZKP engine.
  *
  * When `@gtcx/crypto-native` is installed and the Groth16 bindings are available,
- * returns an engine backed by real arkworks circuits via NAPI. Otherwise returns
- * the hash-commitment fallback.
+ * returns an engine backed by real arkworks circuits via NAPI.
  *
- * Set `GTCX_REQUIRE_NATIVE=true` in production to throw if native bindings
- * are unavailable instead of falling back to the placeholder engine.
+ * If native bindings are unavailable, the factory throws by default. Two opt-in
+ * paths exist:
+ *
+ * - Set `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1` to fall back to the placeholder
+ *   hash-commitment engine. Only appropriate for testing or non-regulatory
+ *   contexts. The placeholder is NOT a zero-knowledge proof system.
+ * - Set `GTCX_REQUIRE_NATIVE=true` to make the factory's "no native" branch
+ *   surface a more pointed error message (kept for backwards compatibility;
+ *   default behavior already throws).
  */
 export function createZkpEngine(): ZkProver & ZkVerifier {
   try {
@@ -213,6 +249,17 @@ export function createZkpEngine(): ZkProver & ZkVerifier {
     throw new Error(
       'GTCX_REQUIRE_NATIVE is set but native ZKP bindings are unavailable. ' +
         'Install @gtcx/crypto-native and ensure the native binary is compiled.'
+    );
+  }
+
+  if (!isHashCommitmentZkpAllowed()) {
+    throw new Error(
+      'createZkpEngine() could not load native ZKP bindings and the placeholder ' +
+        'hash-commitment engine is disabled by default.\n\n' +
+        'For real ZK proofs: install @gtcx/crypto-native and ensure the native binary is compiled.\n\n' +
+        'To explicitly opt into the placeholder (testing, non-regulatory contexts), set ' +
+        'GTCX_ALLOW_HASH_COMMITMENT_ZKP=1.\n\n' +
+        'See docs/security/threat-model.md (SA-002).'
     );
   }
 
