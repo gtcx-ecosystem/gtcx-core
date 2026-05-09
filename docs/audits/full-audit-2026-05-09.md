@@ -57,7 +57,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 ### New findings
 
-- **[Medium] [Supply Chain]** — No `pnpm audit-signatures` in CI. 1-line addition.
+- ~~**[Medium] [Supply Chain]** — No `pnpm audit-signatures` in CI.~~ **Withdrawn.** `pnpm` has no `audit-signatures` subcommand (npm-only). The actual gap — content-pinning of crypto deps — is closed by `tools/check-crypto-deps.mjs` (commit `ad78de6`) which enforces a version + sha512 integrity allowlist for `@noble/*` packages.
 - **[Low] [Defense-in-Depth]** — `packages/ai/src/index.ts:36-39` uses `randomBytes(16).toString('hex')` for traceId. `crypto.randomUUID()` is more idiomatic and 5x faster.
 
 ---
