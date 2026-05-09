@@ -59,26 +59,29 @@ For a step-by-step repo walkthrough, see the [Orientation guide](./docs/agents/o
 
 ## Package Readiness Matrix
 
-| Package               | State                             | Coverage                | Notes                                                                   |
-| --------------------- | --------------------------------- | ----------------------- | ----------------------------------------------------------------------- |
-| `@gtcx/crypto`        | ✅ Production-hardened            | 86.9% stmts, 93.0% func | Property-tested, native + JS backends                                   |
-| `@gtcx/domain`        | ✅ Production-hardened            | 92.9% stmts, 91.5% func | DI container, offline queues, versioning                                |
-| `@gtcx/security`      | ✅ Production-hardened            | 91.7% stmts, 94.0% func | Strict-mode audit logger, redaction                                     |
-| `@gtcx/verification`  | ✅ Production-hardened            | 94.4% stmts, 89.5% func | QR, proofs, bundles                                                     |
-| `@gtcx/services`      | ✅ Production-hardened            | 90.3% stmts, 85.6% func | Compliance decomposed, health checks, metrics                           |
-| `@gtcx/schemas`       | ✅ Production-hardened            | —                       | Core12: 12 domains, 24 controls fully populated                         |
-| `@gtcx/events`        | ⚠️ Stable API, pending validation | —                       | Major refactor staged in changeset                                      |
-| `@gtcx/workproof`     | ⚠️ Stable API, pending validation | —                       | 38 predicates, AI validation types                                      |
-| `@gtcx/ai`            | ⚠️ Functional, narrow surface     | —                       | Synchronous + async tracing with span propagation via AsyncLocalStorage |
-| `@gtcx/identity`      | ⚠️ Functional, pending validation | —                       | Minor changeset staged                                                  |
-| `@gtcx/crypto-native` | ⚠️ Functional, known bug          | —                       | Odd-length hex at NAPI boundary (see blockers)                          |
-| `@gtcx/api-client`    | ⚠️ Functional, pending validation | —                       | Retry, offline queue, request signing                                   |
-| `@gtcx/connectivity`  | ⚠️ Functional, pending validation | —                       | Network detection and profiling                                         |
-| `@gtcx/logging`       | ⚠️ Functional, pending validation | —                       | Structured logging adapters                                             |
-| `@gtcx/network`       | ⚠️ Functional, pending validation | —                       | P2P types, peer discovery, libp2p transport                             |
-| `@gtcx/sync`          | ⚠️ Functional, pending validation | —                       | Offline-first sync engine with conflict resolution                      |
-| `@gtcx/types`         | ✅ Stable                         | —                       | Core type definitions — minimal logic, low risk                         |
-| `@gtcx/utils`         | ✅ Stable                         | —                       | Common utilities — minimal logic, low risk                              |
+| Package               | State                             | Coverage                | Notes                                                                                              |
+| --------------------- | --------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------- |
+| `@gtcx/crypto`        | ✅ Production-hardened            | 86.9% stmts, 93.0% func | Property-tested, native + JS backends                                                              |
+| `@gtcx/domain`        | ✅ Production-hardened            | 92.9% stmts, 91.5% func | DI container, offline queues, versioning                                                           |
+| `@gtcx/security`      | ✅ Production-hardened            | 91.7% stmts, 94.0% func | Strict-mode audit logger, redaction                                                                |
+| `@gtcx/verification`  | ✅ Production-hardened            | 94.4% stmts, 89.5% func | QR, proofs, bundles                                                                                |
+| `@gtcx/services`      | ✅ Production-hardened            | 90.3% stmts, 85.6% func | Compliance decomposed, health checks, metrics                                                      |
+| `@gtcx/schemas`       | ✅ Production-hardened            | —                       | Core12: 12 domains, 24 controls fully populated                                                    |
+| `@gtcx/events`        | ⚠️ Stable API, pending validation | —                       | Major refactor staged in changeset                                                                 |
+| `@gtcx/workproof`     | ⚠️ Stable API, pending validation | —                       | 38 predicates, AI validation types                                                                 |
+| `@gtcx/ai`            | ⚠️ Functional, narrow surface     | —                       | Synchronous + async tracing with span propagation via AsyncLocalStorage                            |
+| `@gtcx/identity`      | ⚠️ Functional, pending validation | —                       | Minor changeset staged                                                                             |
+| `@gtcx/crypto-native` | ⚠️ Functional, known bug          | —                       | Odd-length hex at NAPI boundary (see blockers)                                                     |
+| `@gtcx/api-client`    | ⚠️ Functional, pending validation | —                       | Retry, offline queue, request signing                                                              |
+| `@gtcx/connectivity`  | ⚠️ Functional, pending validation | —                       | Network detection and profiling                                                                    |
+| `@gtcx/logging`       | ⚠️ Functional, pending validation | —                       | Structured logging adapters                                                                        |
+| `@gtcx/network`       | ⚠️ Functional, pending validation | —                       | P2P types, peer discovery, libp2p transport                                                        |
+| `@gtcx/sync`          | ⚠️ Functional, pending validation | —                       | Offline-first sync engine with conflict resolution                                                 |
+| `@gtcx/resilience`    | ⚠️ Functional, pending validation | —                       | Circuit breaker, adaptive retry, timeout, bulkhead                                                 |
+| `@gtcx/telemetry`     | ⚠️ Functional, pending validation | —                       | OpenTelemetry-compatible metrics, traces, logs                                                     |
+| `@gtcx/runtime`       | ⚠️ Functional, pending validation | —                       | Batteries-included substrate aggregating api-client, connectivity, resilience, telemetry (ADR-014) |
+| `@gtcx/types`         | ✅ Stable                         | —                       | Core type definitions — minimal logic, low risk                                                    |
+| `@gtcx/utils`         | ✅ Stable                         | —                       | Common utilities — minimal logic, low risk                                                         |
 
 ### Shared Config Workspace Packages (4)
 
@@ -106,7 +109,7 @@ These live under [`packages/config`](./packages/config) and support the monorepo
 
 ```
 core/
-├── packages/               # 18 public packages + shared config workspace packages
+├── packages/               # 21 public packages + shared config workspace packages
 │   ├── types/              #   Core types and protocol definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives
@@ -124,6 +127,9 @@ core/
 │   ├── logging/            #   Structured logging
 │   ├── network/            #   Networking primitives
 │   ├── sync/               #   Sync engine
+│   ├── resilience/         #   Circuit breaker, retry, timeout, bulkhead
+│   ├── telemetry/          #   OpenTelemetry-compatible instrumentation
+│   ├── runtime/            #   Batteries-included runtime substrate (ADR-014)
 │   ├── utils/              #   Shared utilities
 │   └── config/             #   Internal/shared config workspace packages
 ├── rust/                   # 6 Rust crates
@@ -160,7 +166,7 @@ core/
 | [Orientation](./docs/agents/onboarding/orientation.md)               | Start here — codebase map and session protocol |
 | [Safety Rules](./docs/agents/workflows/safety-rules.md)              | What requires human approval                   |
 | [Architecture Overview](./docs/architecture/overview.md)             | Layer map, trust boundaries, package graph     |
-| [ADR Index](./docs/decisions/README.md)                              | All 17 architecture decision records           |
+| [ADR Index](./docs/decisions/README.md)                              | All 14 architecture decision records           |
 | [Package Specs](./docs/specs/packages/README.md)                     | Per-package API and responsibility specs       |
 | [Rust Crate Specs](./docs/specs/packages/rust/)                      | Rust crate specs and build targets             |
 | [Security Framework](./docs/security/security-framework.md)          | Security architecture and controls             |
