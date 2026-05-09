@@ -30,6 +30,12 @@
 | 05  | [Sandbox Submission Guide](./05-sandbox-submission-guide.md) | How to prepare and execute a regulatory sandbox application       |
 | 06  | [Budget Readiness Plan](./06-budget-readiness-plan.md)       | The $0 path to 10/10 — what remains and how to close it           |
 | 07  | [Downstream Integration](./07-downstream-integration.md)     | How consumers validate, integrate, and maintain trust             |
+| 08  | [Target Markets](./08-target-markets.md)                     | Zimbabwe, Namibia, Zambia, DRC, Ghana — strategy and sequencing   |
+| 09  | [Email: Zimbabwe](./09-pre-submission-email-zimbabwe.md)     | RBZ sandbox pre-submission email draft                            |
+| 10  | [Email: Namibia](./10-pre-submission-email-namibia.md)       | BoN Innovation Hub pre-submission email draft                     |
+| 11  | [Email: Zambia](./11-pre-submission-email-zambia.md)         | BoZ sandbox pre-submission email draft                            |
+| 12  | [Brief: DRC](./12-engagement-brief-drc.md)                   | Direct engagement strategy — 3TG via ITSCI/RMI/BGR                |
+| 13  | [Email: Ghana](./13-pre-submission-email-ghana.md)           | BoG sandbox pre-submission email draft                            |
 
 ---
 
