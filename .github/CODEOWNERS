@@ -2,18 +2,22 @@
 * @amanianai
 
 # Core architecture and release governance
-/.github/workflows/ @amanianai
+/.github/workflows/ @amanianai @gtcx-agent
 /_sop/2-docs/1-architecture/decisions/ @amanianai
-/quality/ @amanianai
+/quality/ @amanianai @gtcx-agent
+
+# Security-sensitive packages (require two reviewers)
+/packages/crypto/ @amanianai @gtcx-agent
+/packages/crypto-native/ @amanianai @gtcx-agent
+/packages/security/ @amanianai @gtcx-agent
+/packages/identity/ @amanianai @gtcx-agent
+/packages/verification/ @amanianai @gtcx-agent
 
 # Core packages
 /packages/types/ @amanianai
-/packages/crypto/ @amanianai
 /packages/domain/ @amanianai
-/packages/security/ @amanianai
 /packages/services/ @amanianai
-/packages/verification/ @amanianai
 /packages/workproof/ @amanianai
 
 # Rust cryptography and consensus crates
-/rust/ @amanianai
+/rust/ @amanianai @gtcx-agent
