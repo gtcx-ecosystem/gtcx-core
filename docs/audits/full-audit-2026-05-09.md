@@ -58,7 +58,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 ### New findings
 
 - ~~**[Medium] [Supply Chain]** — No `pnpm audit-signatures` in CI.~~ **Withdrawn.** `pnpm` has no `audit-signatures` subcommand (npm-only). The actual gap — content-pinning of crypto deps — is closed by `tools/check-crypto-deps.mjs` (commit `ad78de6`) which enforces a version + sha512 integrity allowlist for `@noble/*` packages.
-- **[Low] [Defense-in-Depth]** — `packages/ai/src/index.ts:36-39` uses `randomBytes(16).toString('hex')` for traceId. `crypto.randomUUID()` is more idiomatic and 5x faster.
+- ~~**[Low] [Defense-in-Depth]** — `packages/ai/src/index.ts:36-39` uses `randomBytes(16).toString('hex')` for traceId. `crypto.randomUUID()` is more idiomatic and 5x faster.~~ **Withdrawn.** `randomBytes(16).toString('hex')` produces a 32-char hex traceId matching the W3C trace context spec; `randomUUID()` produces a 36-char dashed UUID and is not interchangeable. The existing code is correct.
 
 ---
 
@@ -382,7 +382,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 **Sprint 3 task 1 finding (2026-05-09):** Bus-factor situation is worse than initially scoped. `gtcx-agent` user exists but is not in `gtcx-ecosystem` org; no pending invitation. Branch protection on `main` is **disabled** — CODEOWNERS rules are not enforced, both human and AI reviewers are bypassable. Two human actions required to make the dual-AI CODEOWNER pattern operational: (1) re-invite gtcx-agent to the org, (2) enable branch protection on `main` with required CODEOWNER review + required status checks.
 
-**Biggest Opportunity:** The dual-AI CODEOWNER pattern. As of `7537089`, the schema, prompt, and three playbooks are versioned in `docs/agents/governance/`. Documented externally, it becomes a recruiting + distribution moat — the kind of thing that makes other AI-native teams want to copy GTCX.
+**Biggest Opportunity:** The dual-AI CODEOWNER pattern. As of `7537089`, the schema, prompt, and three playbooks are versioned in `docs/agents/governance/`. As of Sprint 3 (commit pending), the operational runner ships at `.github/scripts/codeowner-review/` + `.github/workflows/ai-codeowner-review.yml`. Once `ANTHROPIC_API_KEY` is set as a repo secret and gtcx-agent is activated with branch protection, the pattern is fully operational. Documented externally, it becomes a recruiting + distribution moat — the kind of thing that makes other AI-native teams want to copy GTCX.
 
 ---
 

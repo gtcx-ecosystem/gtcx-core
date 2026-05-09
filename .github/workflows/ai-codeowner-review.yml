@@ -1,0 +1,44 @@
+name: AI CODEOWNER Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+# This workflow runs the dual-AI CODEOWNER review pattern documented in
+# docs/agents/governance/. It posts a structured review comment with findings
+# against the path-specific playbooks. The bot NEVER approves — a human
+# CODEOWNER must still approve before merge.
+#
+# The job is non-blocking by design (continue-on-error: true). If the AI
+# pipeline fails (Claude API down, schema validation fails), a fallback
+# comment is posted and CI succeeds, so a human reviewer is unblocked.
+
+concurrency:
+  group: ai-codeowner-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run AI CODEOWNER review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node .github/scripts/codeowner-review/run.mjs
+        continue-on-error: true
