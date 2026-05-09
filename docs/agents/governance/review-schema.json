@@ -1,0 +1,219 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gtcx.io/schemas/ai-codeowner-review-v1.json",
+  "title": "GTCX AI CODEOWNER Review",
+  "description": "Schema for structured review output produced by the dual-AI CODEOWNER bot. Every PR review against a code-owned path produces exactly one document conforming to this schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "pr",
+    "reviewedAt",
+    "reviewer",
+    "decision",
+    "playbooksApplied",
+    "filesReviewed",
+    "findings",
+    "summary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0",
+      "description": "Pin to v1.0.0. Changes require ADR + downstream consumer notification."
+    },
+    "pr": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "headSha", "baseSha", "title"],
+      "properties": {
+        "number": { "type": "integer", "minimum": 1 },
+        "headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "baseSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "title": { "type": "string", "maxLength": 200 },
+        "author": { "type": "string" }
+      }
+    },
+    "reviewedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp"
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["account", "model", "playbookVersions"],
+      "properties": {
+        "account": {
+          "type": "string",
+          "description": "GitHub account performing the review (e.g. gtcx-agent)"
+        },
+        "model": {
+          "type": "string",
+          "description": "LLM model identifier (e.g. claude-opus-4-7)"
+        },
+        "actionVersion": {
+          "type": "string",
+          "description": "Version of gtcx-codeowner-action that produced this review"
+        },
+        "playbookVersions": {
+          "type": "object",
+          "description": "Map of playbook name to git SHA of the playbook file at review time",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{7,40}$"
+          }
+        }
+      }
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["COMMENT", "REQUEST_CHANGES"],
+      "description": "APPROVE is intentionally absent. The bot must never approve a PR. A human CODEOWNER retains sole approval authority. If no findings warrant change, the bot still emits COMMENT with an empty findings array and a summary noting the review pass."
+    },
+    "playbooksApplied": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["crypto", "security", "verification", "ci", "evidence"]
+      },
+      "description": "Which playbook(s) were applied based on changed file paths."
+    },
+    "filesReviewed": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Paths reviewed in full."
+    },
+    "filesSkipped": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "binary",
+              "generated",
+              "vendored",
+              "no-applicable-playbook",
+              "size-limit-exceeded"
+            ]
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/finding" }
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 1500,
+      "description": "Human-readable summary posted as the top-level review comment. Should reference finding count by severity and call out the highest-severity finding inline."
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Optional self-reported metrics for the review-log dashboard.",
+      "additionalProperties": false,
+      "properties": {
+        "diffLines": { "type": "integer", "minimum": 0 },
+        "filesChanged": { "type": "integer", "minimum": 0 },
+        "tokensConsumed": { "type": "integer", "minimum": 0 },
+        "wallClockMs": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "definitions": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "severity", "category", "title", "file", "rationale", "playbookRef"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^F-[0-9]{4}$",
+          "description": "Per-review finding ID, F-0001 onward, zero-padded."
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low", "info"]
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "cryptographic-correctness",
+            "supply-chain",
+            "secret-leakage",
+            "threat-model-drift",
+            "fuzz-coverage-gap",
+            "schema-breaking",
+            "audit-trail",
+            "redaction-bypass",
+            "fips-boundary",
+            "constant-time",
+            "domain-separation",
+            "revocation-path",
+            "test-vector-missing",
+            "api-surface-drift",
+            "spec-drift",
+            "documentation",
+            "test-coverage",
+            "other"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "One-line title in the form '<verb> <object>'. Example: 'Custom block-cipher implementation introduced'."
+        },
+        "file": {
+          "type": "string",
+          "description": "Repo-relative path."
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Start line of the offending region in the PR head."
+        },
+        "endLine": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Optional end line for multi-line regions."
+        },
+        "snippet": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Verbatim excerpt from the diff, max 500 chars."
+        },
+        "playbookRef": {
+          "type": "string",
+          "pattern": "^[a-z]+#[0-9]+$",
+          "description": "Reference to the playbook check that surfaced this finding, e.g. 'crypto#3'."
+        },
+        "rationale": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Why this is a finding. Must reference the playbook rule and the specific evidence in the diff. Avoid speculation."
+        },
+        "recommendation": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Concrete fix or mitigation. Should reference an exact alternative pattern or file."
+        },
+        "references": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Links to ADRs, threat-model entries, RFCs, NIST publications, etc."
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low"],
+          "description": "How confident the bot is that this is a true finding. Findings with confidence=low must include rationale explaining the uncertainty."
+        }
+      }
+    }
+  }
+}
