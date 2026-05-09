@@ -59,7 +59,7 @@
 | SA-005 | QR proof bundle recency window not configurable         | Low      | packages/verification/src/traced/qr.ts  | Open                                                                                                                                    |
 | AT-002 | Certificate revocation checking in verify flow          | High     | packages/verification/                  | Closed — `tracedVerifyCertificate()` calls injected `RevocationChecker.check()` on every verify; result captured in `checks.notRevoked` |
 | AT-003 | Tighten proof bundle recency window (configurable)      | Medium   | packages/verification/src/traced/qr.ts  | Open                                                                                                                                    |
-| AT-004 | HSM-backed key storage (Tier 2/3)                       | Medium   | rust/gtcx-crypto/src/keystore.rs        | Trait done, cloud KMS impl pending                                                                                                      |
+| AT-004 | HSM-backed key storage (Tier 2/3)                       | Medium   | rust/gtcx-crypto/src/keystore.rs        | FIPS provider (aws-lc-rs) shipped Sprint 2 task 5; cloud KMS / PKCS#11 backend still pending.                                           |
 | AT-005 | Content hash pinning for @noble/\* deps                 | Medium   | package.json                            | Closed — `pnpm.overrides` pins versions; `tools/check-crypto-deps.mjs` enforces allowlist + integrity hashes in CI                      |
 
 ## Git State

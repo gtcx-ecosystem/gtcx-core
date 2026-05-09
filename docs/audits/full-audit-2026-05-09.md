@@ -48,12 +48,12 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 ### Open security findings
 
-| ID              | Severity | File:Line                                 | Status                | Take                                                                                                                                                        |
-| --------------- | -------- | ----------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SA-002          | Medium   | `packages/crypto/src/zkp.ts:114-130`      | **Closed** (Sprint 2) | `generate()` now throws unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`. Verify path remains open.                                                                |
-| SA-004 / AT-002 | High     | `packages/verification/src/certificates/` | **Closed** (Sprint 2) | `RevocationChecker` interface required on `tracedVerifyCertificate()`. Fail-closed on backend errors. Three factories provided: in-memory, deny-all, no-op. |
-| AT-005          | Medium   | `package.json` overrides                  | **Closed** (Sprint 2) | `pnpm.overrides` pins `@noble/curves@1` and `@noble/hashes@1`. `tools/check-crypto-deps.mjs` enforces version allowlist + integrity hashes in CI.           |
-| AT-004          | Medium   | `rust/gtcx-crypto/src/keystore.rs`        | Trait done            | Only `MemoryKeyStore`. No PKCS#11/cloud-KMS                                                                                                                 |
+| ID              | Severity | File:Line                                 | Status                 | Take                                                                                                                                                        |
+| --------------- | -------- | ----------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SA-002          | Medium   | `packages/crypto/src/zkp.ts:114-130`      | **Closed** (Sprint 2)  | `generate()` now throws unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`. Verify path remains open.                                                                |
+| SA-004 / AT-002 | High     | `packages/verification/src/certificates/` | **Closed** (Sprint 2)  | `RevocationChecker` interface required on `tracedVerifyCertificate()`. Fail-closed on backend errors. Three factories provided: in-memory, deny-all, no-op. |
+| AT-005          | Medium   | `package.json` overrides                  | **Closed** (Sprint 2)  | `pnpm.overrides` pins `@noble/curves@1` and `@noble/hashes@1`. `tools/check-crypto-deps.mjs` enforces version allowlist + integrity hashes in CI.           |
+| AT-004          | Medium   | `rust/gtcx-crypto/src/keystore.rs`        | **Partial** (Sprint 2) | FIPS provider via aws-lc-rs shipped behind `--features fips` (CMVP #4816 inherited). Cloud KMS / PKCS#11 backend for `KeyStore` still pending (Sprint 5).   |
 
 ### New findings
 
@@ -381,6 +381,11 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 **Biggest Risk:** 15 unpushed commits suggest the autonomous session ran ahead of human-in-loop checkpoints. Confirm intent before any push.
 
 **Sprint 3 task 1 finding (2026-05-09):** Bus-factor situation is worse than initially scoped. `gtcx-agent` user exists but is not in `gtcx-ecosystem` org; no pending invitation. Branch protection on `main` is **disabled** — CODEOWNERS rules are not enforced, both human and AI reviewers are bypassable. Two human actions required to make the dual-AI CODEOWNER pattern operational: (1) re-invite gtcx-agent to the org, (2) enable branch protection on `main` with required CODEOWNER review + required status checks.
+
+**Sprint 2 task 5 finding (2026-05-09):** While shipping the FIPS provider, surfaced two pre-existing issues:
+
+1. **CI has been failing on `main` for the last 3 commits** (aacafd3, 3677b1a, 473f7bb) with sub-15-second job durations — workflow infrastructure failure, not lint/test failure. Likely cause: missing `TURBO_TOKEN`, `TURBO_TEAM`, or other action-level config. `pnpm ops:check` already flags these as warnings.
+2. **`rust/gtcx-crypto/src/keystore.rs` has 22 pedantic-clippy errors** (`unnested_or_patterns`, `doc_markdown`, `missing_errors_doc`) that fire under `-D warnings` due to `lib.rs:62 #![warn(clippy::pedantic)]`. Pre-existing — these errors did not enter via the FIPS provider work. Separate cleanup required before workspace clippy passes.
 
 **Biggest Opportunity:** The dual-AI CODEOWNER pattern. As of `7537089`, the schema, prompt, and three playbooks are versioned in `docs/agents/governance/`. As of Sprint 3 (commit pending), the operational runner ships at `.github/scripts/codeowner-review/` + `.github/workflows/ai-codeowner-review.yml`. Once `ANTHROPIC_API_KEY` is set as a repo secret and gtcx-agent is activated with branch protection, the pattern is fully operational. Documented externally, it becomes a recruiting + distribution moat — the kind of thing that makes other AI-native teams want to copy GTCX.
 

@@ -50,7 +50,14 @@ gtcx-core is a **cryptographic library**, not a cryptographic module. Per NIST S
 - Feature flag at compile time selects the provider — no runtime overhead
 - Public API signatures do not change; the abstraction is internal
 
-**Status:** Trait design complete. Implementation tracked in remediation roadmap Phase C.
+**Status:** Implementation complete (Sprint 2 task 5). `AwsLcSigningProvider` and `AwsLcHashProvider` ship in `rust/gtcx-crypto/src/provider/aws_lc.rs` behind `#[cfg(feature = "fips")]`. CI runs `cargo test -p gtcx-crypto --features fips --lib` on every PR. An interop test (`fips_signing_interop_with_dalek`) verifies that signatures produced by either backend verify under the other — wire format compatibility is enforced, not assumed.
+
+**Algorithm coverage in the FIPS backend:**
+
+- Ed25519 signing → FIPS-validated via aws-lc-rs (CMVP #4816)
+- SHA-256 → FIPS-validated via aws-lc-rs
+- SHA-512 → FIPS-validated via aws-lc-rs
+- BLAKE3 → falls through to the `blake3` crate; **not** FIPS-approved at any module level. Consumers in regulatory paths must use SHA-256, not BLAKE3, even with `--features fips` enabled.
 
 ---
 

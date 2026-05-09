@@ -28,7 +28,13 @@
 
 mod dalek;
 
+#[cfg(feature = "fips")]
+mod aws_lc;
+
 pub use dalek::{DalekHashProvider, DalekSigningProvider};
+
+#[cfg(feature = "fips")]
+pub use aws_lc::{AwsLcHashProvider, AwsLcSigningProvider};
 
 // =============================================================================
 // SIGNING PROVIDER TRAIT
@@ -79,19 +85,40 @@ pub trait HashProvider: Send + Sync {
 // =============================================================================
 // DEFAULT PROVIDER SELECTION
 // =============================================================================
+//
+// The default provider returns dyn references so the trait object resolves
+// to the FIPS-validated backend when `--features fips` is enabled, and the
+// performance-optimized dalek backend otherwise. The wire formats are
+// identical (verified by the fips_signing_interop_with_dalek test), so
+// downstream consumers do not observe the swap.
 
 /// Get the default signing provider.
 ///
-/// Returns `DalekSigningProvider` (ed25519-dalek).
-/// When `--features fips` is available, this will return the FIPS provider.
-pub fn default_signing() -> DalekSigningProvider {
-    DalekSigningProvider
+/// - Without `--features fips`: returns the dalek backend (ed25519-dalek + k256).
+/// - With `--features fips`:    returns the AWS-LC backend (CMVP #4816).
+pub fn default_signing() -> &'static dyn SigningProvider {
+    #[cfg(feature = "fips")]
+    {
+        &AwsLcSigningProvider
+    }
+    #[cfg(not(feature = "fips"))]
+    {
+        &DalekSigningProvider
+    }
 }
 
 /// Get the default hash provider.
 ///
-/// Returns `DalekHashProvider` (@noble-equivalent crates).
-/// When `--features fips` is available, this will return the FIPS provider.
-pub fn default_hashing() -> DalekHashProvider {
-    DalekHashProvider
+/// - Without `--features fips`: returns the dalek backend (sha2 + blake3 crates).
+/// - With `--features fips`:    returns the AWS-LC backend (FIPS-validated SHA-256/512).
+///   BLAKE3 always falls through to the blake3 crate; BLAKE3 is not FIPS-approved.
+pub fn default_hashing() -> &'static dyn HashProvider {
+    #[cfg(feature = "fips")]
+    {
+        &AwsLcHashProvider
+    }
+    #[cfg(not(feature = "fips"))]
+    {
+        &DalekHashProvider
+    }
 }

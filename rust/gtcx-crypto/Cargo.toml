@@ -36,6 +36,12 @@ thiserror = { workspace = true }
 # Tracing (Principle 9: AI-Native)
 tracing = { workspace = true }
 
+# FIPS-validated backend (optional). Enabled with --features fips.
+# Inherits FIPS 140-3 validation from AWS-LC CMVP #4816.
+# See docs/security/fips-validation-boundary.md for the full algorithm
+# mapping and ZKP exemption rationale.
+aws-lc-rs = { version = "1.10", optional = true }
+
 [dev-dependencies]
 proptest = { workspace = true }
 criterion = { workspace = true }
@@ -53,3 +59,11 @@ harness = false
 [features]
 default = ["std"]
 std = []
+
+# FIPS 140-3 inherited validation via AWS-LC (CMVP #4816).
+# When enabled, default_signing() and default_hashing() return aws-lc-rs-backed
+# providers for Ed25519, SHA-256, and SHA-512. BLAKE3 falls through to the
+# blake3 crate (BLAKE3 is not FIPS-approved at any module level — documented
+# in docs/security/fips-validation-boundary.md as a supplementary, non-FIPS
+# algorithm).
+fips = ["dep:aws-lc-rs"]
