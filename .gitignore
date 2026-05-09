@@ -5,9 +5,6 @@ node_modules/
 # Auth tokens
 .npmrc
 
-# Staged for deletion (review before removing)
-_delete/
-
 # Build outputs
 dist/
 build/
