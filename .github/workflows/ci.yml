@@ -45,6 +45,9 @@ jobs:
       - name: Dependency audit
         run: pnpm audit --audit-level=high
 
+      - name: Crypto dependency content-pin check
+        run: pnpm security:crypto-deps
+
       - name: Secret scan
         run: pnpm security:secret-scan
 

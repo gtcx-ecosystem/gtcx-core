@@ -52,15 +52,15 @@
 
 ## Open Findings (not yet addressed)
 
-| #      | Finding                                                 | Severity | File:Line                               | Status                                                               |
-| ------ | ------------------------------------------------------- | -------- | --------------------------------------- | -------------------------------------------------------------------- |
-| SA-002 | ZKP JS fallback accepted if GTCX_REQUIRE_NATIVE not set | Medium   | packages/crypto/src/zkp.ts:114          | Closed — default-deny, opt-in via `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1` |
-| SA-004 | No certificate revocation in verification flow          | Low      | packages/verification/src/certificates/ | Phase 7 roadmap                                                      |
-| SA-005 | QR proof bundle recency window not configurable         | Low      | packages/verification/src/traced/qr.ts  | Open                                                                 |
-| AT-002 | Certificate revocation checking in verify flow          | High     | packages/verification/                  | Phase 7 roadmap                                                      |
-| AT-003 | Tighten proof bundle recency window (configurable)      | Medium   | packages/verification/src/traced/qr.ts  | Open                                                                 |
-| AT-004 | HSM-backed key storage (Tier 2/3)                       | Medium   | rust/gtcx-crypto/src/keystore.rs        | Trait done, cloud KMS impl pending                                   |
-| AT-005 | Content hash pinning for @noble/\* deps                 | Medium   | package.json                            | Open                                                                 |
+| #      | Finding                                                 | Severity | File:Line                               | Status                                                                                                             |
+| ------ | ------------------------------------------------------- | -------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| SA-002 | ZKP JS fallback accepted if GTCX_REQUIRE_NATIVE not set | Medium   | packages/crypto/src/zkp.ts:114          | Closed — default-deny, opt-in via `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`                                               |
+| SA-004 | No certificate revocation in verification flow          | Low      | packages/verification/src/certificates/ | Phase 7 roadmap                                                                                                    |
+| SA-005 | QR proof bundle recency window not configurable         | Low      | packages/verification/src/traced/qr.ts  | Open                                                                                                               |
+| AT-002 | Certificate revocation checking in verify flow          | High     | packages/verification/                  | Phase 7 roadmap                                                                                                    |
+| AT-003 | Tighten proof bundle recency window (configurable)      | Medium   | packages/verification/src/traced/qr.ts  | Open                                                                                                               |
+| AT-004 | HSM-backed key storage (Tier 2/3)                       | Medium   | rust/gtcx-crypto/src/keystore.rs        | Trait done, cloud KMS impl pending                                                                                 |
+| AT-005 | Content hash pinning for @noble/\* deps                 | Medium   | package.json                            | Closed — `pnpm.overrides` pins versions; `tools/check-crypto-deps.mjs` enforces allowlist + integrity hashes in CI |
 
 ## Git State
 

@@ -30,6 +30,7 @@
     "quality:kpi:export": "node ./tools/export-quality-kpis.mjs",
     "security:threat-matrix": "node ./tools/check-threat-matrix.mjs",
     "security:secret-scan": "node ./tools/check-secrets.mjs",
+    "security:crypto-deps": "node ./tools/check-crypto-deps.mjs",
     "perf:capture-latest": "node ./tools/capture-benchmark-results.mjs",
     "perf:update-history": "node ./tools/update-benchmark-history.mjs",
     "perf:check-budgets": "node ./tools/check-performance-budgets.mjs",
@@ -74,6 +75,8 @@
   "pnpm": {
     "overrides": {
       "@multiformats/multiaddr": "12.5.1",
+      "@noble/curves@1": "1.9.0",
+      "@noble/hashes@1": "1.8.0",
       "minimatch": ">=9.0.6",
       "yaml": ">=2.8.3",
       "rollup": ">=4.59.0",
