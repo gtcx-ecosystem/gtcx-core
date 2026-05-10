@@ -199,6 +199,9 @@ jobs:
       - name: Rust tests — FIPS feature
         run: cargo test -p gtcx-crypto --features fips --lib
 
+      - name: Rust tests — PKCS#11 feature
+        run: cargo test -p gtcx-crypto --features pkcs11 --lib
+
       - name: Run benchmarks and capture results
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |

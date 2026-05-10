@@ -42,6 +42,12 @@ tracing = { workspace = true }
 # mapping and ZKP exemption rationale.
 aws-lc-rs = { version = "1.10", optional = true }
 
+# PKCS#11 keystore backend (optional). Enabled with --features pkcs11.
+# Wraps a PKCS#11 module (SoftHSM, CloudHSM, hardware HSM) so private keys
+# can live inside an HSM and never leave its boundary. See
+# docs/security/pkcs11-keystore.md for the design + integration guide.
+cryptoki = { version = "0.10", optional = true }
+
 [dev-dependencies]
 proptest = { workspace = true }
 criterion = { workspace = true }
@@ -67,3 +73,11 @@ std = []
 # in docs/security/fips-validation-boundary.md as a supplementary, non-FIPS
 # algorithm).
 fips = ["dep:aws-lc-rs"]
+
+# PKCS#11-backed KeyStore (optional). Enabled with --features pkcs11.
+# Exposes Pkcs11KeyStore which delegates key generation, signing, and
+# destruction to a PKCS#11 module loaded at runtime (SoftHSM, AWS CloudHSM,
+# hardware HSM). Private keys never leave the HSM boundary. Closes AT-004
+# / external Medium #1 — gtcx-core ships a hardware-backed keystore
+# alongside the existing MemoryKeyStore.
+pkcs11 = ["dep:cryptoki"]

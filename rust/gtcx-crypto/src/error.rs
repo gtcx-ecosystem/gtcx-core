@@ -94,6 +94,12 @@ pub enum CryptoError {
         /// Requested state.
         to: String,
     },
+
+    /// Backend-specific `KeyStore` error (PKCS#11 module fault, HSM
+    /// unavailable, network error to cloud KMS, etc.). The wrapped string
+    /// contains backend-specific detail; do not parse it for routing.
+    #[error("KeyStore error: {0}")]
+    KeyStoreError(String),
 }
 
 impl CryptoError {

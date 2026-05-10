@@ -74,6 +74,8 @@ pub mod error;
 pub mod hashing;
 pub mod keys;
 pub mod keystore;
+#[cfg(feature = "pkcs11")]
+pub mod pkcs11_keystore;
 pub mod provider;
 pub mod signing;
 
