@@ -422,7 +422,7 @@ D.3 (open-source AI-CODEOWNER template) — 30+ real PRs of track record, then e
 | F-19    | `docs/gtm/14-first-deal-case-study.md` published                                                 | User (post-customer)       |
 | F-20    | `gtcx-ecosystem/ai-native-governance-template` repo public                                       | User (post-customer)       |
 | F-21    | First regulator response captured                                                                | User (post-Zimbabwe email) |
-| ~~F-22~~ | ~~`docs/security/slsa-attestation.md` asserts Source L2; branch protection requires signed commits~~ **DONE 2026-05-10** | Repo |
+| F-22    | `docs/security/slsa-attestation.md` asserts Source L2; branch protection requires signed commits | Repo                       |
 
 ---
 

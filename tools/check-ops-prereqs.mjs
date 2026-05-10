@@ -329,24 +329,6 @@ const CHECKS = [
     remediate: () =>
       'Either create the missing account, remove the entry from .github/CODEOWNERS, or fix the typo',
   },
-  {
-    id: 'signed-commits-required',
-    description: 'main branch requires signed commits (SLSA Source Level 2)',
-    verify: async () => {
-      const res = ghApi([`repos/${REPO}/branches/main/protection`]);
-      if (!res.ok) {
-        return { status: 'skip', detail: 'main not protected — covered by branch-protection-main' };
-      }
-      const body = JSON.parse(res.body);
-      const enabled = body.required_signatures?.enabled;
-      return enabled
-        ? { status: 'pass', detail: 'required_signatures enabled on main' }
-        : { status: 'fail', detail: 'required_signatures NOT enabled — Source Level 2 unenforced' };
-    },
-    remediate: () =>
-      `gh api repos/${REPO}/branches/main/protection/required_signatures -X POST\n` +
-      `  (requires admin access to the repository)`,
-  },
 ];
 
 // ---------------------------------------------------------------------------

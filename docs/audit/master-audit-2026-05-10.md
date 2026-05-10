@@ -70,9 +70,9 @@ The initial state baseline is the existing full audit plus the documentation dri
   The trait boundary anticipates `CloudKmsKeyStore`, but the implementation is explicitly deferred. That is acceptable for a shared library today, but it keeps institutional cloud custody one hardening step away rather than done.
   **Fix:** bump the Rust toolchain, add the required algorithm extension, and land the backend with integration tests.
 
-- **[P1] Supply Chain Trust — Source Level 2 is enforced** `docs/security/slsa-attestation.md`
-  ~~Build provenance is strong, but source-history verification is still at Level 1 because signed commits and contributor key provisioning are not yet enforced on `main`.~~
-  **CLOSED 2026-05-10.** `required_signatures: true` is enabled on `main`. `@amanianai` GPG key is provisioned and active. Contributor signing workflow is documented in `CONTRIBUTING.md`.
+- **[P1] Supply Chain Trust — Source Level 2 is documented but not enforced** `docs/security/slsa-attestation.md:124-150`
+  Build provenance is strong, but source-history verification is still at Level 1 because signed commits and contributor key provisioning are not yet enforced on `main`.
+  **Fix:** enable `required_signatures`, provision signing keys for the human and bot reviewers, and document the contributor flow.
 
 ### 1.3 GTM Readiness
 
