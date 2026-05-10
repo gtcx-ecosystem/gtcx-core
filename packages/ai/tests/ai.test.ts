@@ -210,6 +210,119 @@ describe('@gtcx/ai', () => {
       expect(log!.output).toBe('[sanitize-error]');
     });
 
+    // ── sanitizer-override telemetry (closes AI Trust Gap #3) ──
+
+    it('emits sanitizer_override event when sanitizeInput is provided', () => {
+      stderrSpy.mockClear();
+      traced(() => 'x', 'overrideIn', {
+        category: 'test',
+        sanitizeInput: () => '[CUSTOM]',
+      });
+
+      const overrideLog = stderrSpy.mock.calls
+        .map((c) => {
+          try {
+            return JSON.parse(c[0] as string);
+          } catch {
+            return null;
+          }
+        })
+        .find((l) => l?.event === 'sanitizer_override');
+
+      expect(overrideLog).toBeDefined();
+      expect(overrideLog.operationName).toBe('overrideIn');
+      expect(overrideLog.overrides).toEqual({ input: true, output: false });
+    });
+
+    it('emits sanitizer_override event when sanitizeOutput is provided', () => {
+      stderrSpy.mockClear();
+      traced(() => 'x', 'overrideOut', {
+        category: 'test',
+        sanitizeOutput: () => '[CUSTOM]',
+      });
+
+      const overrideLog = stderrSpy.mock.calls
+        .map((c) => {
+          try {
+            return JSON.parse(c[0] as string);
+          } catch {
+            return null;
+          }
+        })
+        .find((l) => l?.event === 'sanitizer_override');
+
+      expect(overrideLog).toBeDefined();
+      expect(overrideLog.overrides).toEqual({ input: false, output: true });
+    });
+
+    it('emits sanitizer_override event when both are provided', () => {
+      stderrSpy.mockClear();
+      traced(() => 'x', 'overrideBoth', {
+        category: 'test',
+        sanitizeInput: () => '[CUSTOM]',
+        sanitizeOutput: () => '[CUSTOM]',
+      });
+
+      const overrideLog = stderrSpy.mock.calls
+        .map((c) => {
+          try {
+            return JSON.parse(c[0] as string);
+          } catch {
+            return null;
+          }
+        })
+        .find((l) => l?.event === 'sanitizer_override');
+
+      expect(overrideLog).toBeDefined();
+      expect(overrideLog.overrides).toEqual({ input: true, output: true });
+    });
+
+    it('does NOT emit sanitizer_override when no explicit sanitizer is provided', () => {
+      stderrSpy.mockClear();
+      traced(() => 'x', 'noOverride', {
+        category: 'test',
+        logInput: true, // triggers default redactSecrets, NOT an override
+        logOutput: true,
+      });
+
+      const overrideLog = stderrSpy.mock.calls
+        .map((c) => {
+          try {
+            return JSON.parse(c[0] as string);
+          } catch {
+            return null;
+          }
+        })
+        .find((l) => l?.event === 'sanitizer_override');
+
+      expect(overrideLog).toBeUndefined();
+    });
+
+    it('emits sanitizer_override exactly once per traced() call (factory-time, not invocation-time)', () => {
+      stderrSpy.mockClear();
+      const wrapped = traced(() => 'x', 'oneShot', {
+        category: 'test',
+        sanitizeInput: () => '[CUSTOM]',
+      });
+
+      // Call the wrapped function multiple times
+      wrapped();
+      wrapped();
+      wrapped();
+
+      const overrideLogs = stderrSpy.mock.calls
+        .map((c) => {
+          try {
+            return JSON.parse(c[0] as string);
+          } catch {
+            return null;
+          }
+        })
+        .filter((l) => l?.event === 'sanitizer_override');
+
+      expect(overrideLogs).toHaveLength(1);
+    });
+
     it('measures duration accurately for sync functions', () => {
       const fn = () => {
         const start = Date.now();

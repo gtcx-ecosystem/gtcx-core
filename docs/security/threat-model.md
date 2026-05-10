@@ -166,11 +166,11 @@ Attack_Scenario:
     - TracedOptions includes sanitizeInput/sanitizeOutput callbacks
     - DID document creation explicitly rejects documents containing privateKey fields
     - @gtcx/ai stub logger only outputs structured JSON with explicit fields
+    - Default redactSecrets() sanitizer applied when logInput/logOutput is true (CLOSED 2026-05-08)
+    - sanitizer_override telemetry event emitted at traced() construction time when explicit sanitizer overrides the default — surfaces deliberate overrides for audit (CLOSED 2026-05-10)
   Gaps:
-    - CLOSED: Default sanitization added via redactSecrets() in @gtcx/ai (2026-05-08)
     - No static analysis rule to prevent key material from reaching log calls
   Recommendations:
-    - DONE: Default sanitizeInput strips fields named 'privateKey', 'secret', 'seed', 'token', 'apiKey', etc.
     - Add ESLint rule or architecture check that flags direct logging of crypto function outputs
 ```
 

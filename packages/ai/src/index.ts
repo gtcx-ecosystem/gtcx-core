@@ -234,6 +234,27 @@ export function traced<TArgs extends unknown[], TReturn>(
   const category = options?.category ?? 'default';
   const logger = createCategoryLogger(category);
 
+  // Emit a one-shot telemetry event when the caller provides an explicit
+  // sanitizer that overrides the default `redactSecrets`. Closes AI Trust
+  // Gap #3 from the audit: "Ambient redaction has an opt-out — a
+  // misconfigured downstream consumer can ship `sanitizeInput: (x) => x`
+  // and silently disable redaction."
+  //
+  // The event fires once per traced wrapper construction, not per call —
+  // overrides are typically wired at module-init time, so logging once is
+  // the right cardinality. Aggregators can grep `event=sanitizer_override`
+  // to surface every active override at deployment time.
+  const inputOverridden = options?.sanitizeInput !== undefined;
+  const outputOverridden = options?.sanitizeOutput !== undefined;
+  if (inputOverridden || outputOverridden) {
+    writeLog('info', 'sanitizer_override', {
+      event: 'sanitizer_override',
+      category,
+      operationName,
+      overrides: { input: inputOverridden, output: outputOverridden },
+    });
+  }
+
   return (...args: TArgs): TReturn => {
     const ctx = buildTraceContext(options);
     const start = performance.now();
