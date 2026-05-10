@@ -50,7 +50,8 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 4. [FIPS validation boundary](../security/fips-validation-boundary.md) — algorithm mapping and CMVP inheritance via OpenSSL #4282 for TypeScript and AWS-LC #4816 for Rust
 5. [Key ceremony](../security/key-ceremony.md) — NIST SP 800-57 lifecycle, key tier model, emergency revocation
 6. [Fuzz campaign results](../../quality/fuzz-results/campaign-summary.md) — 9.9M executions, 0 crashes across 6 targets with AddressSanitizer enabled
-7. [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema + prompt + 3 playbooks; the bot is structurally forbidden from approving
+7. [External penetration test scope](../security/pen-test-scope.md) — vendor-ready scope for third-party validation
+8. [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema + prompt + 3 playbooks; the bot is structurally forbidden from approving
 
 ---
 
@@ -58,7 +59,7 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 
 A vendor risk team or sandbox regulator that needs more than self-service can engage on:
 
-- **External penetration test** — currently substituted by the [internal security assessment](../security/internal-security-assessment.md). That assessment combines six methods plus a 9.9M-execution fuzz campaign with ASAN. External pen test is in the budget-readiness plan; ~$8K-$25K.
+- **External penetration test** — currently substituted by the [internal security assessment](../security/internal-security-assessment.md). That assessment combines six methods plus a 9.9M-execution fuzz campaign with ASAN. External pen test is in the budget-readiness plan; ~$8K-$25K. Scope is prewritten in [External penetration test scope](../security/pen-test-scope.md).
 - **SOC 2 Type 1 attestation letter** — readiness gap closed at 78-85% across applicable TSC; CPA engagement required for formal letter. Typical effort: ~$15K-$45K over 8-10 weeks. See [readiness analysis](../compliance/soc2-readiness.md).
 - **Custom security questionnaire response** — the [evidence inventory](../gtm/04-evidence-inventory.md) maps existing artifacts to common questionnaire categories. Most rows answer with a path; a small number require process documentation.
 
@@ -171,7 +172,7 @@ For design partners / pilot deployments:
 
 Honest list of trust artifacts not yet in place. Surfaces them rather than letting a regulator discover the absence:
 
-- **External penetration test** — internal assessment is in place; external pen test budgeted but not yet engaged
+- **External penetration test** — internal assessment is in place; external pen test budgeted but not yet engaged. Scope is ready at [External penetration test scope](../security/pen-test-scope.md).
 - **SOC 2 Type 1 letter** — readiness analysis complete; CPA engagement is the next step (8-10 weeks from start)
 - ~~**PKCS#11 / Cloud KMS keystore backend**~~ — **PKCS#11 done.** `Pkcs11KeyStore` shipped behind `cargo --features pkcs11`. See [`docs/security/pkcs11-keystore.md`](../security/pkcs11-keystore.md). Cloud KMS adapter deferred as a hardening pass.
 - ~~**SLSA Level 3 attestation**~~ — **DONE.** `pnpm release` produces SLSA Build Level 3 provenance via `npm publish --provenance` + GitHub OIDC. SLSA Source Level 1 is also asserted: version-controlled and change-managed. See [`docs/security/slsa-attestation.md`](../security/slsa-attestation.md). Source Level 2 with signed commits is documented and deferred pending explicit team decision.
@@ -190,6 +191,7 @@ This portal is the entry point. The artifacts it points to are the source of tru
 | [Internal security assessment](../security/internal-security-assessment.md) | Six assessment methods, residual risk   |
 | [FIPS validation boundary](../security/fips-validation-boundary.md)         | Inherited validation via CMVP #4816     |
 | [Key ceremony](../security/key-ceremony.md)                                 | NIST SP 800-57 lifecycle                |
+| [External penetration test scope](../security/pen-test-scope.md)            | Third-party validation scope            |
 | [SOC 2 readiness](../compliance/soc2-readiness.md)                          | TSC mapping, 7 documented gaps          |
 | [GDPR / PCI / SOX](../compliance/)                                          | Compliance scope determinations         |
 | [SECURITY.md](../../SECURITY.md)                                            | Public disclosure policy                |

@@ -128,7 +128,7 @@ Source Level 2 adds **verified history** — every commit's authenticity is cryp
 Three concrete requirements for Source Level 2:
 
 1. **Required signed commits on `main`.** Branch protection enforces `required_signatures: true` so unsigned commits cannot land. Every CODEOWNER (currently `@amanianai`, `@gtcx-agent`) must have a configured signing key.
-2. **Documented signing-key provisioning** in `CONTRIBUTING.md` so new contributors know how to set up GPG / SSH / Sigstore signing before their first commit.
+2. **Documented signing-key provisioning** in [`CONTRIBUTING.md`](../../CONTRIBUTING.md) so new contributors know how to set up GPG / SSH / Sigstore signing before their first commit.
 3. **Bot signing strategy.** The AI CODEOWNER action posts reviews via GitHub API (not commits), so it's unaffected. Future automated commits (Dependabot PRs, changesets bot, etc.) would need a strategy — typically a service-account signing key or sigstore-keyless GitHub Actions identity.
 
 ### Why Source Level 2 is deferred (this session)
@@ -140,7 +140,7 @@ gh api repos/gtcx-ecosystem/gtcx-core/branches/main/protection -X PATCH \
   -F required_signatures.enabled=true
 ```
 
-The decision to enable it is a workflow change for the entire contributor set. Today's implications:
+The decision to enable it is a workflow change for the entire contributor set. The contributor setup guide now lives in [`CONTRIBUTING.md`](../../CONTRIBUTING.md#signed-commits). Remaining implications:
 
 - `@amanianai` needs a signing key configured (one-time setup)
 - `@gtcx-agent` needs a signing key configured (one-time setup, on the bot account)
@@ -155,12 +155,12 @@ This is a workflow decision that benefits from a deliberate moment, not a side-e
 | ---------------------------------------------------------------------------------- | ------ | ------------------------- |
 | Generate/configure signing key for `@amanianai`                                    | 15 min | User                      |
 | Generate/configure signing key for `@gtcx-agent`                                   | 15 min | User (bot account access) |
-| Update `CONTRIBUTING.md` with signing-key setup instructions                       | 30 min | Repo maintainer           |
+| Contributor signing-key setup instructions in `CONTRIBUTING.md`                    | Done   | Repo maintainer           |
 | Run the `gh api` PATCH to enable `required_signatures`                             | 1 min  | User                      |
 | Verify by attempting an unsigned push (should be rejected)                         | 5 min  | Repo maintainer           |
 | Update this document: change "Target: Source Level 2" to "Current: Source Level 2" | 10 min | Repo maintainer           |
 
-**Total elapsed: under 1.5 hours of focused work** once the decision is made. The design is ready.
+**Remaining elapsed: under 1 hour of focused work** once the decision is made. The docs are ready; the enforcement step is what remains.
 
 ### Higher levels — Source Level 3, 4
 

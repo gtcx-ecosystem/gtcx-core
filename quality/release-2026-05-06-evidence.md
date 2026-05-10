@@ -52,8 +52,8 @@ The final docs blocker was resolved by upgrading TypeDoc from `0.28.17` to `0.28
 - [quality/api-surface-report.json](./api-surface-report.json)
 - [quality/api-surface-baseline.json](./api-surface-baseline.json)
 - [artifacts/provenance-manifest.json](../artifacts/provenance-manifest.json)
-- [,auto-dev-state.md](../,auto-dev-state.md)
-- [,remediation-roadmap-10-10.md](../,remediation-roadmap-10-10.md)
+- [docs/audit/auto-dev-state.md](../docs/audit/auto-dev-state.md)
+- [docs/audit/remediation-roadmap-10-10.md](../docs/audit/remediation-roadmap-10-10.md)
 - [docs/release/enterprise-release-artifact-pack.md](../docs/release/enterprise-release-artifact-pack.md)
 - [docs/release/downstream-production-readiness-checklist.md](../docs/release/downstream-production-readiness-checklist.md)
 

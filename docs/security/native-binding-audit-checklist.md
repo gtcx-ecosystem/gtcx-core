@@ -83,6 +83,8 @@ nm -C rust/target/release/libgtcx_node.dylib 2>/dev/null | grep -E '\b(malloc|fr
 
 **Recommendation:** Add a nightly CI job that runs `cargo fuzz` (or `proptest` integration) against `gtcx-node` entry points with random inputs (empty, max-size, malformed UTF-8 where applicable).
 
+**Status:** Sprint 1 implementation target. Once the scheduled lane is live, replace this recommendation with the workflow path and command.
+
 ## Sign-off
 
 | Role              | Name | Date |

@@ -4,7 +4,7 @@
 
 - Node.js >= 20.0.0
 - pnpm >= 9.15.0
-- Rust >= 1.75.0 (for Rust crates)
+- Rust 1.88.x (matches the workspace `rust-version`)
 
 ## Setup
 
@@ -55,6 +55,106 @@ feat(domain): add batch validation for asset lots
 test(security): add JWT audience mismatch test
 chore(deps): bump vitest to 3.2
 ```
+
+### Signed commits
+
+`gtcx-core` currently asserts SLSA Source Level 1 and documents the path to
+Source Level 2 in [docs/security/slsa-attestation.md](./docs/security/slsa-attestation.md).
+Source Level 2 requires signed commits on `main`. Enforcement is deferred
+pending contributor key setup, but contributors should configure signing now.
+
+Supported signing approaches:
+
+- SSH signing
+- GPG signing
+- Sigstore-backed signing for automation or service accounts
+
+Recommended developer path: SSH signing if you already authenticate to GitHub
+with SSH.
+
+#### Option A: SSH signing
+
+1. Generate a dedicated signing key if you do not already have one:
+
+   ```bash
+   ssh-keygen -t ed25519 -C "your-email@example.com" -f ~/.ssh/id_ed25519_signing
+   ```
+
+2. Print the public key:
+
+   ```bash
+   cat ~/.ssh/id_ed25519_signing.pub
+   ```
+
+3. Add it to GitHub as a signing key:
+
+   `https://github.com/settings/keys` -> `New SSH key` -> `Signing Key`
+
+4. Configure git:
+
+   ```bash
+   git config --global gpg.format ssh
+   git config --global user.signingkey ~/.ssh/id_ed25519_signing.pub
+   git config --global commit.gpgsign true
+   ```
+
+5. Verify locally:
+
+   ```bash
+   git commit --allow-empty -m "test(signing): verify local commit signing"
+   git log --show-signature -1
+   ```
+
+#### Option B: GPG signing
+
+1. Generate a key:
+
+   ```bash
+   gpg --full-generate-key
+   ```
+
+2. Find the long key ID:
+
+   ```bash
+   gpg --list-secret-keys --keyid-format=long
+   ```
+
+3. Configure git:
+
+   ```bash
+   git config --global user.signingkey <long-key-id>
+   git config --global commit.gpgsign true
+   ```
+
+4. Export the public key:
+
+   ```bash
+   gpg --armor --export <long-key-id>
+   ```
+
+5. Add the exported key to GitHub as a GPG signing key, then verify:
+
+   ```bash
+   git commit --allow-empty -m "test(signing): verify local commit signing"
+   git log --show-signature -1
+   ```
+
+#### Automation and bot accounts
+
+- `@gtcx-agent`, Dependabot, and any future automation that creates commits
+  need a documented signing strategy before `required_signatures` is enabled.
+- Review-only automation, including the AI CODEOWNER action, is unaffected
+  because it does not create commits.
+
+#### Before Source Level 2 enforcement is enabled
+
+The following must be true:
+
+- `@amanianai` has a verified signing key
+- `@gtcx-agent` has a verified signing key
+- bot/service-account commit strategy is chosen and documented
+- branch protection is updated with `required_signatures: true`
+- an unsigned test push is rejected as expected
 
 ### Changesets
 
