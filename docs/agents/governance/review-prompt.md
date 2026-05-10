@@ -203,7 +203,7 @@ The action runner selects playbooks based on changed files. Path-prefix matching
 | `packages/security/`, `packages/identity/`                                           | `security`       |
 | `packages/verification/`, `packages/workproof/`                                      | `verification`   |
 | `.github/workflows/`, `tools/check-*.mjs`                                            | `ci`             |
-| `quality/`, `docs/audits/`, `benchmarks/`                                            | `evidence`       |
+| `quality/`, `,`, `benchmarks/`                                                       | `evidence`       |
 
 A single PR may invoke multiple playbooks. The action concatenates them in alphabetical order before passing to the model.
 

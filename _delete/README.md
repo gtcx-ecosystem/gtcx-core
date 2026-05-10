@@ -15,18 +15,18 @@
 | `docs-structure-standard-TEMPLATE.md`    | `docs/architecture/docs-structure-standard.md` | Unfilled template with `{organization-name}` placeholders. Never customized for gtcx-core.                                                       |
 | `specs-backend-architecture-TEMPLATE.md` | `docs/specs/backend-architecture.md`           | Unfilled template with `[Project Name]` and `{version}` placeholders. Real backend architecture is at docs/architecture/backend-architecture.md. |
 | `uat-evidence-log-DUPLICATE.md`          | `docs/agile/testing/uat/uat-evidence-log.md`   | Exact duplicate of docs/agile/testing/uat-evidence-log.md (which has actual entries). Empty template version.                                    |
-| `auto-dev-cycle-1-2026-05-04.md`         | `docs/audits/`                                 | Point-in-time auto-dev cycle log from 2026-05-04. Findings fully incorporated into remediation-roadmap-10-10.md. No unique information.          |
-| `auto-dev-cycle-2-2026-05-04.md`         | `docs/audits/`                                 | Same — cycle 2 snapshot. Superseded.                                                                                                             |
-| `auto-dev-cycle-3-2026-05-04.md`         | `docs/audits/`                                 | Same — cycle 3 snapshot. Superseded.                                                                                                             |
-| `auto-dev-cycle-4-2026-05-04.md`         | `docs/audits/`                                 | Same — cycle 4 snapshot. Superseded.                                                                                                             |
-| `remediation-plan-2026-05-06.md`         | `docs/audits/`                                 | Earlier remediation plan (563 lines). Fully superseded by remediation-roadmap-10-10.md (316 lines, more current).                                |
-| `10-10-roadmap-2026-05-06.md`            | `docs/audits/`                                 | Earlier 10/10 roadmap. Superseded by remediation-roadmap-10-10.md + docs/gtm/06-budget-readiness-plan.md.                                        |
+| `auto-dev-cycle-1-2026-05-04.md`         | `,`                                            | Point-in-time auto-dev cycle log from 2026-05-04. Findings fully incorporated into remediation-roadmap-10-10.md. No unique information.          |
+| `auto-dev-cycle-2-2026-05-04.md`         | `,`                                            | Same — cycle 2 snapshot. Superseded.                                                                                                             |
+| `auto-dev-cycle-3-2026-05-04.md`         | `,`                                            | Same — cycle 3 snapshot. Superseded.                                                                                                             |
+| `auto-dev-cycle-4-2026-05-04.md`         | `,`                                            | Same — cycle 4 snapshot. Superseded.                                                                                                             |
+| `remediation-plan-2026-05-06.md`         | `,`                                            | Earlier remediation plan (563 lines). Fully superseded by remediation-roadmap-10-10.md (316 lines, more current).                                |
+| `10-10-roadmap-2026-05-06.md`            | `,`                                            | Earlier 10/10 roadmap. Superseded by remediation-roadmap-10-10.md + docs/gtm/06-budget-readiness-plan.md.                                        |
 
 ## Also Fixed
 
-| Change                         | What                                                                                                                                             |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `docs/audit/` → `docs/audits/` | Merged singular `docs/audit/` directory into `docs/audits/`. `gtcx-ecosystem-rating-2026-05-08.md` moved. Empty `docs/audit/` directory removed. |
+| Change    | What                                                                                                              |
+| --------- | ----------------------------------------------------------------------------------------------------------------- |
+| `,` → `,` | Merged singular `,` directory into `,`. `gtcx-ecosystem-rating-2026-05-08.md` moved. Empty `,` directory removed. |
 
 ## File Count Impact
 

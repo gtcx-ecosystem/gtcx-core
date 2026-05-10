@@ -63,7 +63,7 @@ The first three are functions of _time_, not funding. That is the only kind of m
 
 ## Roadmap
 
-Per `docs/audits/full-audit-2026-05-09.md` Sprint plan:
+Per `,full-audit-2026-05-09.md` Sprint plan:
 
 | Sprint | Item                                                                                                |
 | ------ | --------------------------------------------------------------------------------------------------- |
@@ -81,4 +81,4 @@ Per `docs/audits/full-audit-2026-05-09.md` Sprint plan:
 - `.github/CODEOWNERS` — path-to-reviewer mapping
 - `docs/agents/roles/crypto-security-engineer.md` — human role definition the bot's playbooks operationalize
 - `docs/security/threat-model.md` — STRIDE table and threat control matrix the playbooks reference
-- `docs/audits/full-audit-2026-05-09.md` — full audit including the buildout proposal for this pattern
+- `,full-audit-2026-05-09.md` — full audit including the buildout proposal for this pattern

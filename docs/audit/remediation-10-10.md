@@ -1,7 +1,7 @@
 # 10/10 Remediation Plan
 
 **Drafted:** 2026-05-10 (cycle 6 close)
-**Source audit:** [`docs/audits/full-audit-2026-05-09.md`](./full-audit-2026-05-09.md) + same-day re-audit
+**Source audit:** [`,full-audit-2026-05-09.md`](./full-audit-2026-05-09.md) + same-day re-audit
 **Current score:** 9.6/10
 **Target:** 10.0/10
 **Owner of plan:** Cryptographic Security Engineer + repo maintainer

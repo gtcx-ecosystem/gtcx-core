@@ -32,7 +32,7 @@ const PLAYBOOK_RULES = [
   },
   {
     name: 'evidence',
-    prefixes: ['quality/', 'docs/audits/', 'benchmarks/'],
+    prefixes: ['quality/', ',', 'benchmarks/'],
   },
 ];
 

@@ -3,7 +3,7 @@
 **Date:** 2026-05-09
 **Auditor:** AI (claude-opus-4-7)
 **Branch:** main, 15 commits ahead of origin/main
-**Last automated state:** `docs/audits/auto-dev-state.md` — 9.8/10
+**Last automated state:** `,auto-dev-state.md` — 9.8/10
 **Score:** 9.8/10 (re-verified, no regression)
 
 This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces new spec drift introduced by recent runtime-substrate work (ADR-014, packages added: `resilience`, `runtime`, `telemetry`).
@@ -176,7 +176,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 ### Specific issues
 
-- `_delete/` folder still tracked (96K, 12 files). Awaiting human review per `docs/audits/auto-dev-state.md:80`.
+- `_delete/` folder still tracked (96K, 12 files). Awaiting human review per `,auto-dev-state.md:80`.
 - Branch is **14 commits ahead of origin/main** (now 15 with `7537089`). Confirm intent before push.
 - `docs/decisions/014-runtime-substrate.md:5` is `Status: Accepted`. Per `CLAUDE.md:65`, ADR acceptance is a human decision. Likely correct in practice but worth audit-log mention.
 
@@ -399,4 +399,4 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 **Audit confidence:** High on Phases 1, 2, 4, 5 (verified via tool runs). Medium on Phase 3 (relies on existing GTM docs).
 
-**Next session:** Resume Sprint 1 from this document. State persists in `docs/audits/auto-dev-state.md`.
+**Next session:** Resume Sprint 1 from this document. State persists in `,auto-dev-state.md`.

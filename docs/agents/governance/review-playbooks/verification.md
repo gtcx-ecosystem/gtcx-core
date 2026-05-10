@@ -61,7 +61,7 @@
 
 **Category:** `documentation`
 **Severity:** `medium`
-**References:** SA-005, AT-003 (`docs/audits/auto-dev-state.md`)
+**References:** SA-005, AT-003 (`,auto-dev-state.md`)
 
 ---
 

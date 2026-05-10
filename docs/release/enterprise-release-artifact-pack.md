@@ -6,16 +6,16 @@ This is the standard release evidence pack for security-conscious downstream tea
 
 ## Required Artifacts
 
-| Artifact                                     | Purpose                                                  |
-| -------------------------------------------- | -------------------------------------------------------- |
-| `quality/release-<date>-evidence.md`         | Human-readable gate summary and residual risks           |
-| `quality/api-surface-report.json`            | Public API diff against baseline                         |
-| `quality/api-surface-baseline.json`          | Approved API contract baseline                           |
-| `benchmarks/performance-report.json`         | Current benchmark and budget status                      |
-| `artifacts/provenance-manifest.json`         | Build provenance and artifact integrity metadata         |
-| SBOM output from the release workflow        | Supply-chain inventory for the published release         |
-| SAST, secret-scan, and dependency evidence   | Release-candidate security gate proof                    |
-| Docs from `docs/release/` and `docs/audits/` | Supportability, migration, and current-readiness posture |
+| Artifact                                   | Purpose                                                  |
+| ------------------------------------------ | -------------------------------------------------------- |
+| `quality/release-<date>-evidence.md`       | Human-readable gate summary and residual risks           |
+| `quality/api-surface-report.json`          | Public API diff against baseline                         |
+| `quality/api-surface-baseline.json`        | Approved API contract baseline                           |
+| `benchmarks/performance-report.json`       | Current benchmark and budget status                      |
+| `artifacts/provenance-manifest.json`       | Build provenance and artifact integrity metadata         |
+| SBOM output from the release workflow      | Supply-chain inventory for the published release         |
+| SAST, secret-scan, and dependency evidence | Release-candidate security gate proof                    |
+| Docs from `docs/release/` and `,`          | Supportability, migration, and current-readiness posture |
 
 ---
 

@@ -83,7 +83,7 @@ The Common Criteria are required for any SOC 2 report. CC1 through CC9 cover gov
 | Control | Requirement                                                     | gtcx-core status | Evidence                                                                                                                                |
 | ------- | --------------------------------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | CC4.1   | Selects, develops, and performs ongoing or separate evaluations | ⚠                | CI runs every PR (CodeQL, Trivy, cargo-audit, secret scan); ops:check runs on demand; **but no scheduled control-effectiveness review** |
-| CC4.2   | Communicates evaluation deficiencies                            | ✓                | `docs/audits/auto-dev-state.md`, `docs/audits/full-audit-2026-05-09.md`, finding lifecycle in audit table                               |
+| CC4.2   | Communicates evaluation deficiencies                            | ✓                | `,auto-dev-state.md`, `,full-audit-2026-05-09.md`, finding lifecycle in audit table                                                     |
 
 **CC4 readiness: 75%.** Gap: formal periodic control-effectiveness review (e.g., quarterly).
 

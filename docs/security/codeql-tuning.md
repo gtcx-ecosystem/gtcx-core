@@ -33,4 +33,4 @@ This document explains the tuned CodeQL ruleset for the `gtcx-core` monorepo. Th
 ## Related
 
 - `.github/workflows/ci.yml` — CodeQL job definition
-- `docs/audits/remediation-plan-2026-05-06.md` — Phase 4.3 (CodeQL Gating)
+- `,remediation-plan-2026-05-06.md` — Phase 4.3 (CodeQL Gating)

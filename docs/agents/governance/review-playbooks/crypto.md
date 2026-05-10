@@ -85,7 +85,7 @@ The bot applies every check in this playbook to the diff. Each check states the 
 
 **Category:** `cryptographic-correctness`
 **Severity:** `critical`
-**References:** SA-002 (`docs/audits/auto-dev-state.md`)
+**References:** SA-002 (`,auto-dev-state.md`)
 
 ---
 

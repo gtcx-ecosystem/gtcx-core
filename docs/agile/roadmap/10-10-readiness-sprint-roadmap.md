@@ -157,7 +157,7 @@ This program is complete only when all four outcomes are true:
 
 ## References
 
-- [remediation-roadmap-10-10.md](../../audits/remediation-roadmap-10-10.md)
-- [auto-dev-state.md](../../audits/auto-dev-state.md)
+- [remediation-roadmap-10-10.md](../../audit/remediation-roadmap-10-10.md)
+- [auto-dev-state.md](../../audit/auto-dev-state.md)
 - [gtcx-core-definition-of-done.md](../sprints/gtcx-core-definition-of-done.md)
 - [production-readiness-10-10-roadmap.md](../../release/production-readiness-10-10-roadmap.md)

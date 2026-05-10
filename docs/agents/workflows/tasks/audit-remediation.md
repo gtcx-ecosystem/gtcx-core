@@ -18,7 +18,7 @@ Run when closing findings from internal audits, security reviews, QA review, or 
 3. Fix code and tests first if the issue is behavioral.
 4. Update architecture/spec/release docs if the issue is contract or process drift.
 5. Record residual risk explicitly if the remaining blocker is external.
-6. Update the active status doc in `docs/audits/auto-dev-state.md` when the repo posture changes.
+6. Update the active status doc in `,auto-dev-state.md` when the repo posture changes.
 
 ---
 
@@ -41,6 +41,6 @@ Run when closing findings from internal audits, security reviews, QA review, or 
 
 ## Reference
 
-- [auto-dev-state.md](../../../audits/auto-dev-state.md)
+- [auto-dev-state.md](../../../audit/auto-dev-state.md)
 - [10-10-readiness-sprint-roadmap.md](../../../agile/roadmap/10-10-readiness-sprint-roadmap.md)
 - [agent-evidence-template.md](../agent-evidence-template.md)

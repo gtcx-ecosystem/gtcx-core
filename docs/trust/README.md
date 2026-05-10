@@ -193,7 +193,7 @@ This portal is the entry point. The artifacts it points to are the source of tru
 | [Governance](../agents/governance/README.md)                                | Dual-AI CODEOWNER pattern               |
 | [Repo bootstrap](../ops/repo-bootstrap.md)                                  | Live operational prerequisites          |
 | [GTM evidence pack](../gtm/)                                                | Sandbox-regulator-specific materials    |
-| [Full audit](../audits/full-audit-2026-05-09.md)                            | Six-phase audit, score 9.8/10           |
+| [Full audit](../audit/full-audit-2026-05-09.md)                             | Six-phase audit, score 9.8/10           |
 
 ## Changelog
 

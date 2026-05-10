@@ -18,7 +18,7 @@
 
 **Category:** `redaction-bypass`
 **Severity:** `critical`
-**References:** SA-002 closure (`docs/audits/auto-dev-state.md`)
+**References:** SA-002 closure (`,auto-dev-state.md`)
 
 ---
 

@@ -44,7 +44,7 @@
   - `f6315f9` — Forensic cleanup: 11 stale files removed, 6 broken links fixed
 - **Tasks completed (cycle 6 — 2026-05-09 afternoon → 2026-05-10):**
   - `7537089` — AI CODEOWNER review pattern: schema, prompt, 3 playbooks
-  - `8cef161` — Full audit doc (`docs/audits/full-audit-2026-05-09.md`)
+  - `8cef161` — Full audit doc (`,full-audit-2026-05-09.md`)
   - `a53500a` — Sync package matrix to 21 TS packages, ADR count to 14, +3 spec files
   - `bed49b9` — `_delete/` gitignore cleanup
   - `fed8541` — **SA-002 closed** — ZKP placeholder fails closed; opt-in via `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`

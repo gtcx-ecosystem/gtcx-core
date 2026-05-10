@@ -137,4 +137,4 @@ When any of these appear: run Quick Recovery before continuing.
 - [`orientation.md`](./orientation.md) — codebase map and session-start reading order
 - [`../workflows/safety-rules.md`](../workflows/safety-rules.md) — what requires human approval
 - [`../../decisions/README.md`](../../decisions/README.md) — ADR index
-- [`../../audits/auto-dev-state.md`](../../audits/auto-dev-state.md) — current remediation and repo state
+- [`../../audit/auto-dev-state.md`](../../audit/auto-dev-state.md) — current remediation and repo state

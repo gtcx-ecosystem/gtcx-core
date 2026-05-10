@@ -3,7 +3,7 @@
 **Module:** `gtcx_crypto::cloud_kms_keystore` (planned, not yet shipped)
 **Feature flag:** `cloud_kms` (planned)
 **Status:** Design complete; implementation deferred to a Rust toolchain bump
-**Closes:** F-8 from [10/10 remediation plan](../audits/remediation-10-10.md) (architectural design)
+**Closes:** F-8 from [10/10 remediation plan](../audit/remediation-10-10.md) (architectural design)
 **Cross-references:** [PKCS#11 KeyStore](./pkcs11-keystore.md), [Key Ceremony](./key-ceremony.md), [Trust Portal](../trust/README.md)
 
 ---
@@ -223,7 +223,7 @@ The integration tests should:
 - [PKCS#11 KeyStore](./pkcs11-keystore.md) — sibling implementation; same trait, different backend
 - [Key Ceremony](./key-ceremony.md) — NIST SP 800-57 lifecycle context
 - [Trust Portal](../trust/README.md) — section "Cryptographic correctness"
-- [10/10 Remediation Plan](../audits/remediation-10-10.md) — F-8
+- [10/10 Remediation Plan](../audit/remediation-10-10.md) — F-8
 
 ## Changelog
 
