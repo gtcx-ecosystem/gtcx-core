@@ -109,58 +109,40 @@ Each layer is independently verifiable. SLSA L3 is the build-process assertion; 
 
 ## SLSA Source Track — current level and path forward
 
-### Current: Source Level 1
+### Current: Source Level 2
 
-SLSA Source Level 1 requires **version-controlled** sources with **change history**. `gtcx-core` satisfies both:
+SLSA Source Level 2 requires **verified history** — every commit's authenticity is cryptographically verifiable, not just version-controlled. The SLSA spec language: "every change to the source is verified to come from a particular contributor (e.g. via authenticated commit signing)."
 
-| Requirement                           | Mechanism                                  | Evidence                                                         |
-| ------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------- |
-| Source is version-controlled          | Git, hosted on GitHub                      | `git log --all`                                                  |
-| Every change has a recorded history   | All commits retained; no force-push policy | Branch protection `allow_force_pushes: false` enforced on `main` |
-| Sources can be retrieved indefinitely | GitHub repository availability             | The repository itself                                            |
+`gtcx-core` satisfies Source Level 2:
 
-Source Level 1 is the baseline Source Track assertion. Most well-managed open source repositories implicitly satisfy it.
+| Requirement                           | Mechanism                                                | Evidence                                                                   |
+| ------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Source is version-controlled          | Git, hosted on GitHub                                    | `git log --all`                                                            |
+| Every change has a recorded history   | All commits retained; no force-push policy               | Branch protection `allow_force_pushes: false` enforced on `main`           |
+| Sources can be retrieved indefinitely | GitHub repository availability                           | The repository itself                                                      |
+| Every change is authenticated         | Required signed commits on `main`                        | Branch protection `required_signatures: true` enforced on `main`           |
+| Contributor identity is verifiable    | GPG / SSH commit signing with keys tied to GitHub identity | Verified signatures visible on every commit after enforcement date         |
 
-### Target: Source Level 2
+#### Enforcement details
 
-Source Level 2 adds **verified history** — every commit's authenticity is cryptographically verifiable, not just version-controlled. The SLSA spec language: "every change to the source is verified to come from a particular contributor (e.g. via authenticated commit signing)."
+- **Branch protection:** `required_signatures.enabled: true` on `main`
+- **CODEOWNER signing keys:** `@amanianai` (GPG `339E985C9F4A476C47C71E7B40C84A7356404E82`) and `@gtcx-agent` (bot account — commits via GitHub API, not direct pushes)
+- **Contributor onboarding:** signing-key setup documented in [`CONTRIBUTING.md`](../../CONTRIBUTING.md#signed-commits)
+- **Existing unsigned commits:** grandfathered; the rule applies only to *new* commits pushed after enforcement
 
-Three concrete requirements for Source Level 2:
-
-1. **Required signed commits on `main`.** Branch protection enforces `required_signatures: true` so unsigned commits cannot land. Every CODEOWNER (currently `@amanianai`, `@gtcx-agent`) must have a configured signing key.
-2. **Documented signing-key provisioning** in [`CONTRIBUTING.md`](../../CONTRIBUTING.md) so new contributors know how to set up GPG / SSH / Sigstore signing before their first commit.
-3. **Bot signing strategy.** The AI CODEOWNER action posts reviews via GitHub API (not commits), so it's unaffected. Future automated commits (Dependabot PRs, changesets bot, etc.) would need a strategy — typically a service-account signing key or sigstore-keyless GitHub Actions identity.
-
-### Why Source Level 2 is deferred (this session)
-
-The branch-protection change is one `gh api` call:
+#### Verification
 
 ```bash
-gh api repos/gtcx-ecosystem/gtcx-core/branches/main/protection -X PATCH \
-  -F required_signatures.enabled=true
+# Confirm required_signatures is enabled
+gh api repos/gtcx-ecosystem/gtcx-core/branches/main/protection | jq '.required_signatures.enabled'
+# Expected: true
+
+# Confirm recent commits are signed
+git log --show-signature -5 --oneline
+# Expected: "Good signature from ..." on each commit
 ```
 
-The decision to enable it is a workflow change for the entire contributor set. The contributor setup guide now lives in [`CONTRIBUTING.md`](../../CONTRIBUTING.md#signed-commits). Remaining implications:
-
-- `@amanianai` needs a signing key configured (one-time setup)
-- `@gtcx-agent` needs a signing key configured (one-time setup, on the bot account)
-- Existing unsigned commits on `main` are grandfathered (the `required_signatures` rule applies only to new commits)
-- Downstream tooling that auto-commits (lint-staged hooks, etc.) needs to sign too
-
-This is a workflow decision that benefits from a deliberate moment, not a side-effect of an audit cycle. The architectural design ships in this commit; the enforcement step waits for explicit team approval.
-
-### Effort to land Source Level 2 (when approved)
-
-| Step                                                                               | Effort | Who                       |
-| ---------------------------------------------------------------------------------- | ------ | ------------------------- |
-| Generate/configure signing key for `@amanianai`                                    | 15 min | User                      |
-| Generate/configure signing key for `@gtcx-agent`                                   | 15 min | User (bot account access) |
-| Contributor signing-key setup instructions in `CONTRIBUTING.md`                    | Done   | Repo maintainer           |
-| Run the `gh api` PATCH to enable `required_signatures`                             | 1 min  | User                      |
-| Verify by attempting an unsigned push (should be rejected)                         | 5 min  | Repo maintainer           |
-| Update this document: change "Target: Source Level 2" to "Current: Source Level 2" | 10 min | Repo maintainer           |
-
-**Remaining elapsed: under 1 hour of focused work** once the decision is made. The docs are ready; the enforcement step is what remains.
+**Enforced since:** 2026-05-10
 
 ### Higher levels — Source Level 3, 4
 
