@@ -92,6 +92,58 @@ export interface TracedOptions {
   sanitizeOutput?: (output: unknown) => unknown;
   traceId?: string;
   parentSpanId?: string;
+  /**
+   * Optional span emitter for forwarding traces to external systems
+   * (OpenTelemetry, Honeycomb, custom backends). When set, overrides
+   * the process-wide default registered via `setDefaultSpanEmitter`.
+   *
+   * Stderr JSON emission continues regardless — the emitter is additive.
+   */
+  spanEmitter?: SpanEmitter;
+}
+
+/**
+ * Pluggable span lifecycle emitter for routing `traced()` operations to
+ * external observability backends (OTel, Honeycomb, Datadog, etc.).
+ *
+ * Closes AI Trust Gap #4: previously `@gtcx/ai` emitted only structured
+ * JSON to stderr, leaving OTel wiring as consumer-side aspirational work.
+ * The SpanEmitter contract makes the integration explicit; bridge
+ * implementations live in observability-specific packages (`@gtcx/telemetry`
+ * for OTel) so `@gtcx/ai` itself remains zero-deps.
+ *
+ * Implementations MUST:
+ * - Be safe to call from any context (sync, async, error paths)
+ * - Not throw — emitter errors must not derail the traced operation
+ * - Treat `onSpanStart` and `onSpanEnd` as paired: every start is followed
+ *   by exactly one end (success or error). The matching key is `spanId`.
+ */
+export interface SpanEmitter {
+  /** Called when a traced operation begins. */
+  onSpanStart(span: SpanLifecycleStart): void;
+  /** Called when a traced operation completes — success or failure. */
+  onSpanEnd(span: SpanLifecycleEnd): void;
+}
+
+export interface SpanLifecycleStart {
+  operationName: string;
+  category: string;
+  traceId: string;
+  spanId: string;
+  parentSpanId?: string | undefined;
+  startTimestamp: number;
+  metadata?: Record<string, unknown> | undefined;
+}
+
+export interface SpanLifecycleEnd {
+  operationName: string;
+  category: string;
+  traceId: string;
+  spanId: string;
+  durationMs: number;
+  success: boolean;
+  error?: { name: string; message: string } | undefined;
+  metadata?: Record<string, unknown> | undefined;
 }
 
 export interface CategoryLogger {
@@ -114,6 +166,69 @@ function writeLog(level: string, message: string, data?: Record<string, unknown>
   });
   if (typeof process !== 'undefined' && process.stderr) {
     process.stderr.write(entry + '\n');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Default span emitter slot (process-wide)
+// ---------------------------------------------------------------------------
+//
+// Higher-level packages (e.g. `@gtcx/telemetry`) register a default
+// SpanEmitter at process startup so every `traced()` call automatically
+// forwards span lifecycle events without per-call wiring. Per-call
+// `options.spanEmitter` overrides the default.
+//
+// The slot is stored on globalThis so it survives module re-evaluation
+// in test environments (vitest hot-reload, etc.).
+
+const SPAN_EMITTER_KEY = '__gtcx_ai_default_span_emitter__';
+
+function getDefaultEmitterSlot(): SpanEmitter | undefined {
+  const g = globalThis as Record<string, unknown>;
+  return g[SPAN_EMITTER_KEY] as SpanEmitter | undefined;
+}
+
+/**
+ * Register a process-wide default {@link SpanEmitter}. Subsequent `traced()`
+ * calls will forward span lifecycle events to this emitter unless overridden
+ * per-call via `options.spanEmitter`. Pass `undefined` to clear.
+ *
+ * Typical wiring: `@gtcx/telemetry` calls this with an OTel-backed emitter
+ * during runtime initialization, so consumers get OTel forwarding for free.
+ */
+export function setDefaultSpanEmitter(emitter: SpanEmitter | undefined): void {
+  const g = globalThis as Record<string, unknown>;
+  if (emitter === undefined) {
+    delete g[SPAN_EMITTER_KEY];
+  } else {
+    g[SPAN_EMITTER_KEY] = emitter;
+  }
+}
+
+/**
+ * Read the current process-wide default {@link SpanEmitter}, or `undefined`
+ * if none is registered. Primarily useful for diagnostics and tests.
+ */
+export function getDefaultSpanEmitter(): SpanEmitter | undefined {
+  return getDefaultEmitterSlot();
+}
+
+/**
+ * Invoke a SpanEmitter callback safely. Emitter exceptions must never
+ * derail the traced operation — they are caught and surfaced via stderr
+ * (level=warn) so the bug is visible without breaking the call.
+ */
+function safeEmit(fn: () => void, operationName: string, phase: 'start' | 'end'): void {
+  try {
+    fn();
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    writeLog('warn', 'span_emitter_error', {
+      event: 'span_emitter_error',
+      operationName,
+      phase,
+      error: msg,
+    });
   }
 }
 
@@ -281,6 +396,28 @@ export function traced<TArgs extends unknown[], TReturn>(
     }
     logWithContext(logger, 'debug', `[${operationName}] start`, startPayload, ctx);
 
+    // Forward the span-start lifecycle event to the configured emitter
+    // (per-call override, then process-wide default). Stderr emission
+    // continues regardless — the emitter is additive. Errors in the
+    // emitter surface via stderr but never derail the traced operation.
+    const emitter = options?.spanEmitter ?? getDefaultEmitterSlot();
+    if (emitter) {
+      safeEmit(
+        () =>
+          emitter.onSpanStart({
+            operationName,
+            category,
+            traceId: ctx.traceId,
+            spanId: ctx.spanId,
+            parentSpanId: ctx.parentSpanId,
+            startTimestamp: timestamp,
+            metadata: options?.metadata,
+          }),
+        operationName,
+        'start'
+      );
+    }
+
     const complete = (result: TReturn): TReturn => {
       const durationMs = performance.now() - start;
       let output: unknown = result;
@@ -303,6 +440,23 @@ export function traced<TArgs extends unknown[], TReturn>(
         completePayload['output'] = output;
       }
       logWithContext(logger, 'info', `[${operationName}] complete`, completePayload, ctx);
+
+      if (emitter) {
+        safeEmit(
+          () =>
+            emitter.onSpanEnd({
+              operationName,
+              category,
+              traceId: ctx.traceId,
+              spanId: ctx.spanId,
+              durationMs,
+              success: true,
+              metadata: options?.metadata,
+            }),
+          operationName,
+          'end'
+        );
+      }
       return result;
     };
 
@@ -326,6 +480,24 @@ export function traced<TArgs extends unknown[], TReturn>(
         },
         ctx
       );
+
+      if (emitter) {
+        safeEmit(
+          () =>
+            emitter.onSpanEnd({
+              operationName,
+              category,
+              traceId: ctx.traceId,
+              spanId: ctx.spanId,
+              durationMs,
+              success: false,
+              error: { name: error.name, message: error.message },
+              metadata: options?.metadata,
+            }),
+          operationName,
+          'end'
+        );
+      }
       throw reason;
     };
 

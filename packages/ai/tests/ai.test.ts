@@ -9,6 +9,11 @@ import {
   attachProvenance,
   createProvenanceLogger,
   redactSecrets,
+  setDefaultSpanEmitter,
+  getDefaultSpanEmitter,
+  type SpanEmitter,
+  type SpanLifecycleStart,
+  type SpanLifecycleEnd,
 } from '../src/index';
 
 describe('@gtcx/ai', () => {
@@ -321,6 +326,189 @@ describe('@gtcx/ai', () => {
         .filter((l) => l?.event === 'sanitizer_override');
 
       expect(overrideLogs).toHaveLength(1);
+    });
+
+    // ── SpanEmitter contract (closes AI Trust Gap #4) ──
+
+    function makeEmitter(): {
+      emitter: SpanEmitter;
+      starts: SpanLifecycleStart[];
+      ends: SpanLifecycleEnd[];
+    } {
+      const starts: SpanLifecycleStart[] = [];
+      const ends: SpanLifecycleEnd[] = [];
+      return {
+        starts,
+        ends,
+        emitter: {
+          onSpanStart: (s) => starts.push(s),
+          onSpanEnd: (e) => ends.push(e),
+        },
+      };
+    }
+
+    it('invokes per-call spanEmitter on sync success', () => {
+      const { emitter, starts, ends } = makeEmitter();
+      const wrapped = traced((x: number) => x * 2, 'syncOp', {
+        category: 'test',
+        spanEmitter: emitter,
+      });
+
+      const result = wrapped(21);
+      expect(result).toBe(42);
+      expect(starts).toHaveLength(1);
+      expect(ends).toHaveLength(1);
+      expect(starts[0]!.operationName).toBe('syncOp');
+      expect(starts[0]!.category).toBe('test');
+      expect(starts[0]!.traceId).toMatch(/^[0-9a-f]{32}$/);
+      expect(starts[0]!.spanId).toBe(ends[0]!.spanId);
+      expect(ends[0]!.success).toBe(true);
+      expect(ends[0]!.error).toBeUndefined();
+      expect(ends[0]!.durationMs).toBeGreaterThanOrEqual(0);
+    });
+
+    it('invokes per-call spanEmitter on sync failure with error details', () => {
+      const { emitter, starts, ends } = makeEmitter();
+      const wrapped = traced(
+        () => {
+          throw new Error('boom');
+        },
+        'failOp',
+        { category: 'test', spanEmitter: emitter }
+      );
+
+      expect(() => wrapped()).toThrow('boom');
+      expect(starts).toHaveLength(1);
+      expect(ends).toHaveLength(1);
+      expect(ends[0]!.success).toBe(false);
+      expect(ends[0]!.error?.name).toBe('Error');
+      expect(ends[0]!.error?.message).toBe('boom');
+    });
+
+    it('invokes per-call spanEmitter on async success', async () => {
+      const { emitter, starts, ends } = makeEmitter();
+      const wrapped = traced(async (x: number) => x + 1, 'asyncOp', {
+        category: 'test',
+        spanEmitter: emitter,
+      });
+
+      const result = await wrapped(5);
+      expect(result).toBe(6);
+      expect(starts).toHaveLength(1);
+      expect(ends).toHaveLength(1);
+      expect(ends[0]!.success).toBe(true);
+    });
+
+    it('invokes per-call spanEmitter on async failure', async () => {
+      const { emitter, starts, ends } = makeEmitter();
+      const wrapped = traced(
+        async () => {
+          throw new Error('async-boom');
+        },
+        'asyncFail',
+        { category: 'test', spanEmitter: emitter }
+      );
+
+      await expect(wrapped()).rejects.toThrow('async-boom');
+      expect(starts).toHaveLength(1);
+      expect(ends).toHaveLength(1);
+      expect(ends[0]!.success).toBe(false);
+      expect(ends[0]!.error?.message).toBe('async-boom');
+    });
+
+    it('uses process-wide default emitter when no per-call override', () => {
+      const { emitter, starts, ends } = makeEmitter();
+      setDefaultSpanEmitter(emitter);
+      try {
+        const wrapped = traced(() => 'ok', 'usesDefault', { category: 'test' });
+        wrapped();
+        expect(starts).toHaveLength(1);
+        expect(ends).toHaveLength(1);
+      } finally {
+        setDefaultSpanEmitter(undefined);
+      }
+    });
+
+    it('per-call spanEmitter overrides process-wide default', () => {
+      const defaultEmitter = makeEmitter();
+      const callEmitter = makeEmitter();
+      setDefaultSpanEmitter(defaultEmitter.emitter);
+      try {
+        const wrapped = traced(() => 'ok', 'override', {
+          category: 'test',
+          spanEmitter: callEmitter.emitter,
+        });
+        wrapped();
+        expect(defaultEmitter.starts).toHaveLength(0);
+        expect(callEmitter.starts).toHaveLength(1);
+      } finally {
+        setDefaultSpanEmitter(undefined);
+      }
+    });
+
+    it('does NOT call any emitter when none is configured', () => {
+      // Default slot is empty by default (test isolation via afterEach).
+      expect(getDefaultSpanEmitter()).toBeUndefined();
+      const wrapped = traced(() => 'ok', 'noEmitter', { category: 'test' });
+      // No assertion on side-effects — just confirm no crash and no emitter
+      // exists. Stderr emission still happens; we test that elsewhere.
+      expect(() => wrapped()).not.toThrow();
+    });
+
+    it('emitter exceptions do not derail the traced operation', () => {
+      stderrSpy.mockClear();
+      const buggy: SpanEmitter = {
+        onSpanStart: () => {
+          throw new Error('emitter-bug-start');
+        },
+        onSpanEnd: () => {
+          throw new Error('emitter-bug-end');
+        },
+      };
+      const wrapped = traced(() => 'still-ok', 'buggyEmitter', {
+        category: 'test',
+        spanEmitter: buggy,
+      });
+
+      // Operation succeeds despite emitter throwing
+      expect(wrapped()).toBe('still-ok');
+
+      // Both errors get surfaced via stderr (level=warn, event=span_emitter_error)
+      const warnings = stderrSpy.mock.calls
+        .map((c) => {
+          try {
+            return JSON.parse(c[0] as string);
+          } catch {
+            return null;
+          }
+        })
+        .filter((l) => l?.event === 'span_emitter_error');
+
+      expect(warnings.length).toBeGreaterThanOrEqual(2);
+      const phases = warnings.map((w) => w.phase).sort();
+      expect(phases).toEqual(['end', 'start']);
+    });
+
+    it('preserves traceId/spanId pairing between start and end', () => {
+      const { emitter, starts, ends } = makeEmitter();
+      const wrapped = traced(() => 'ok', 'pair', {
+        category: 'test',
+        spanEmitter: emitter,
+      });
+
+      wrapped();
+      wrapped();
+      wrapped();
+
+      expect(starts).toHaveLength(3);
+      expect(ends).toHaveLength(3);
+      for (let i = 0; i < 3; i++) {
+        expect(starts[i]!.traceId).toBe(ends[i]!.traceId);
+        expect(starts[i]!.spanId).toBe(ends[i]!.spanId);
+      }
+      // Three separate calls produce three distinct spanIds
+      const spanIds = new Set(starts.map((s) => s.spanId));
+      expect(spanIds.size).toBe(3);
     });
 
     it('measures duration accurately for sync functions', () => {
