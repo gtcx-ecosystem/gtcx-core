@@ -12,6 +12,21 @@ const importRegexes = [
   /\brequire\(\s*['"]([^'"]+)['"]\s*\)/g,
 ];
 
+// Per-package forbidden-imports table. Each key is a package name; each
+// value is the list of `@gtcx/*` packages it MAY NOT import. Packages
+// not in this table have no restrictions and may import any declared
+// dependency.
+//
+// Notable packages that are intentionally absent from this table:
+// - `@gtcx/runtime` — substrate aggregator per ADR-014. Its purpose is
+//   to compose `api-client`, `connectivity`, `resilience`, `telemetry`,
+//   and `logging` into a single batteries-included surface. It MUST be
+//   able to import all of them; restricting it would defeat its purpose.
+// - `@gtcx/utils`, `@gtcx/types` — minimal-logic leaf packages.
+// - `@gtcx/logging`, `@gtcx/telemetry`, `@gtcx/resilience` — leaf
+//   primitives at the observability/resilience layer; they may be
+//   composed by higher-level packages but do not need import
+//   restrictions of their own.
 const forbiddenImports = {
   '@gtcx/types': ['@gtcx/*'],
   '@gtcx/crypto': [

@@ -6,9 +6,17 @@ import path from 'node:path';
 
 const workspaceRoot = process.cwd();
 
+// Top-level directories that hold archived or staged-for-deletion content.
+// Markdown inside these directories is intentionally vestigial — internal
+// links may have been written for the file's original location and are not
+// expected to resolve. Excluding them from the link check matches the
+// intent (these files are not part of the active documentation surface).
+const EXCLUDED_PREFIXES = ['_delete/', '_archive/'];
+
 const markdownFiles = execSync("git ls-files -z '*.md'", { encoding: 'utf8' })
   .split('\0')
-  .filter(Boolean);
+  .filter(Boolean)
+  .filter((file) => !EXCLUDED_PREFIXES.some((prefix) => file.startsWith(prefix)));
 
 const markdownLinkRegex = /\[[^\]]+\]\(([^)]+)\)/g;
 const brokenLinks = [];
