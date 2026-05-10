@@ -5,7 +5,7 @@
 > **Owner:** Protocol Architect
 
 **Repo type:** Library monorepo (18 public TypeScript packages, 4 shared config workspace packages, 6 Rust crates)
-**Primary language:** TypeScript 6.0.x + Rust 1.88+
+**Primary language:** TypeScript 6.0.x + Rust 1.91+
 **Framework:** None — pure library; no HTTP server, no database
 **Last updated:** 2026-05-06
 

@@ -1,6 +1,6 @@
 # gtcx-crypto
 
-Cryptographic primitives for GTCX — Ed25519 and secp256k1 signing, SHA-256/512, Blake3 hashing, Merkle trees, and hash-chain audit logs.
+Cryptographic primitives for GTCX — Ed25519, ECDSA P-256, and secp256k1 signing, SHA-256/512, Blake3 hashing, Merkle trees, and hash-chain audit logs.
 
 ## Usage
 
@@ -28,6 +28,7 @@ let fast = blake3(b"data");
 | -------------------- | ------------------------------------------------------------ |
 | `keys`               | `generate_keypair`, `derive_child_key`, `derive_purpose_key` |
 | `signing::ed25519`   | `sign`, `verify`, `batch_verify`                             |
+| `signing::p256`      | `sign`, `verify`                                             |
 | `signing::secp256k1` | `sign`, `verify`                                             |
 | `hashing`            | `sha256`, `sha512`, `blake3`, `blake3_keyed`                 |
 | `chain`              | `create_genesis_entry`, `create_entry`, `verify_chain`       |

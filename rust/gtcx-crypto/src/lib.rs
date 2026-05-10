@@ -13,7 +13,7 @@
 //!
 //! ## Modules
 //!
-//! - [`signing`] — Ed25519 and secp256k1 digital signatures
+//! - [`signing`] — Ed25519, ECDSA P-256, and secp256k1 digital signatures
 //! - [`hashing`] — SHA-256, SHA-512, Blake3 hashing
 //! - [`keys`] — Key generation and derivation
 //! - [`chain`] — Hash-chained audit logs
@@ -70,13 +70,15 @@
 // =============================================================================
 
 pub mod chain;
+#[cfg(feature = "cloud_kms")]
+pub mod cloud_kms_keystore;
 pub mod error;
 pub mod hashing;
 pub mod keys;
 pub mod keystore;
 #[cfg(feature = "pkcs11")]
 pub mod pkcs11_keystore;
-#[cfg(feature = "pkcs11")]
+#[cfg(any(feature = "pkcs11", feature = "cloud_kms"))]
 pub mod pkcs11_state;
 pub mod provider;
 pub mod signing;
@@ -91,6 +93,7 @@ pub use error::CryptoError;
 // Signing (most common operations)
 pub use signing::ed25519::{batch_verify, sign, verify};
 pub use signing::ed25519::{PrivateKey, PublicKey, Signature};
+pub use signing::p256;
 pub use signing::secp256k1;
 
 // Hashing

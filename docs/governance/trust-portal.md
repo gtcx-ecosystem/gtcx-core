@@ -49,9 +49,10 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 3. [Internal security assessment](../security/internal-security-assessment.md) — six assessment methods: SAST, dependency audit, secret scan, fuzz, threat modeling, and architecture enforcement
 4. [FIPS validation boundary](../security/fips-validation-boundary.md) — algorithm mapping and CMVP inheritance via OpenSSL #4282 for TypeScript and AWS-LC #4816 for Rust
 5. [Key ceremony](../security/key-ceremony.md) — NIST SP 800-57 lifecycle, key tier model, emergency revocation
-6. [Fuzz campaign results](../../quality/fuzz-results/campaign-summary.md) — 9.9M executions, 0 crashes across 6 targets with AddressSanitizer enabled
-7. [External penetration test scope](../security/pen-test-scope.md) — vendor-ready scope for third-party validation
-8. [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema + prompt + 3 playbooks; the bot is structurally forbidden from approving
+6. [Cloud KMS keystore](../security/cloud-kms-keystore.md) — AWS-first cloud-managed custody path behind `cargo --features cloud_kms`
+7. [Fuzz campaign results](../../quality/fuzz-results/campaign-summary.md) — 9.9M executions, 0 crashes across 6 targets with AddressSanitizer enabled
+8. [External penetration test scope](../security/pen-test-scope.md) — vendor-ready scope for third-party validation
+9. [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema + prompt + 3 playbooks; the bot is structurally forbidden from approving
 
 ---
 
@@ -174,7 +175,7 @@ Honest list of trust artifacts not yet in place. Surfaces them rather than letti
 
 - **External penetration test** — internal assessment is in place; external pen test budgeted but not yet engaged. Scope is ready at [External penetration test scope](../security/pen-test-scope.md).
 - **SOC 2 Type 1 letter** — readiness analysis complete; CPA engagement is the next step (8-10 weeks from start)
-- ~~**PKCS#11 / Cloud KMS keystore backend**~~ — **PKCS#11 done.** `Pkcs11KeyStore` shipped behind `cargo --features pkcs11`. See [`docs/security/pkcs11-keystore.md`](../security/pkcs11-keystore.md). Cloud KMS adapter deferred as a hardening pass.
+- ~~**PKCS#11 / Cloud KMS keystore backend**~~ — **DONE.** `Pkcs11KeyStore` ships behind `cargo --features pkcs11`, and `CloudKmsKeyStore` now ships behind `cargo --features cloud_kms` for AWS-first ECDSA P-256 custody. See [`docs/security/pkcs11-keystore.md`](../security/pkcs11-keystore.md) and [`docs/security/cloud-kms-keystore.md`](../security/cloud-kms-keystore.md).
 - ~~**SLSA Level 3 attestation**~~ — **DONE.** `pnpm release` produces SLSA Build Level 3 provenance via `npm publish --provenance` + GitHub OIDC. SLSA Source Level 1 is also asserted: version-controlled and change-managed. See [`docs/security/slsa-attestation.md`](../security/slsa-attestation.md). Source Level 2 with signed commits is documented and deferred pending explicit team decision.
 - **Reference customer case study** — gtcx-core is consumed by 6 internal repos; first external case study lands after Sprint 4 sandbox engagement
 
@@ -191,6 +192,7 @@ This portal is the entry point. The artifacts it points to are the source of tru
 | [Internal security assessment](../security/internal-security-assessment.md) | Six assessment methods, residual risk   |
 | [FIPS validation boundary](../security/fips-validation-boundary.md)         | Inherited validation via CMVP #4816     |
 | [Key ceremony](../security/key-ceremony.md)                                 | NIST SP 800-57 lifecycle                |
+| [Cloud KMS keystore](../security/cloud-kms-keystore.md)                     | AWS-first cloud-managed key custody     |
 | [External penetration test scope](../security/pen-test-scope.md)            | Third-party validation scope            |
 | [SOC 2 readiness](../compliance/soc2-readiness.md)                          | TSC mapping, 7 documented gaps          |
 | [GDPR / PCI / SOX](../compliance/)                                          | Compliance scope determinations         |

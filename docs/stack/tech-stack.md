@@ -12,15 +12,15 @@
 
 ## Monorepo Structure
 
-| Layer           | Technology      | Version | Purpose                                       |
-| --------------- | --------------- | ------- | --------------------------------------------- |
-| Package manager | pnpm workspaces | 9+      | Dependency management, workspace linking      |
-| Build system    | Turborepo       | 2.x     | Task orchestration, incremental builds        |
-| Language (TS)   | TypeScript      | 6.0.x   | Primary language for all TypeScript packages  |
-| Runtime         | Node.js         | 20 LTS  | Package execution and test runner             |
-| Language (Rust) | Rust            | 1.88    | Pinned cryptographic crates and ZKP circuits  |
-| Build (Rust)    | Cargo           | 1.88    | Rust crate builds and test execution          |
-| Native bindings | NAPI-RS         | 2.x     | TypeScript ↔ Rust FFI (`@gtcx/crypto-native`) |
+| Layer           | Technology      | Version | Purpose                                                      |
+| --------------- | --------------- | ------- | ------------------------------------------------------------ |
+| Package manager | pnpm workspaces | 9+      | Dependency management, workspace linking                     |
+| Build system    | Turborepo       | 2.x     | Task orchestration, incremental builds                       |
+| Language (TS)   | TypeScript      | 6.0.x   | Primary language for all TypeScript packages                 |
+| Runtime         | Node.js         | 20 LTS  | Package execution and test runner                            |
+| Language (Rust) | Rust            | 1.91    | Pinned cryptographic crates, AWS SDK floor, and ZKP circuits |
+| Build (Rust)    | Cargo           | 1.91    | Rust crate builds and test execution                         |
+| Native bindings | NAPI-RS         | 2.x     | TypeScript ↔ Rust FFI (`@gtcx/crypto-native`)                |
 
 ---
 

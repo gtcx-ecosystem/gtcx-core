@@ -46,7 +46,7 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
 use crate::error::CryptoError;
-use crate::signing::ed25519::{self, PrivateKey, PublicKey};
+use crate::signing::{ed25519, p256};
 use crate::Result;
 
 // =============================================================================
@@ -90,7 +90,9 @@ impl std::fmt::Display for KeyId {
 pub enum Algorithm {
     /// Ed25519 (default, 128-bit security)
     Ed25519,
-    // Future: Secp256k1, P256 (FIPS)
+    /// ECDSA over NIST P-256 (FIPS-aligned, cloud KMS compatible)
+    EcdsaP256,
+    // Future: Secp256k1
 }
 
 // =============================================================================
@@ -179,10 +181,19 @@ pub trait KeyStore: Send + Sync {
 // IN-MEMORY KEY STORE
 // =============================================================================
 
+enum StoredKeyMaterial {
+    Ed25519 {
+        private_key: ed25519::PrivateKey,
+        public_key: ed25519::PublicKey,
+    },
+    EcdsaP256 {
+        private_key: p256::PrivateKey,
+        public_key: p256::PublicKey,
+    },
+}
+
 struct StoredKey {
-    private_key: PrivateKey,
-    public_key: PublicKey,
-    _algorithm: Algorithm,
+    material: StoredKeyMaterial,
     state: KeyState,
 }
 
@@ -224,14 +235,35 @@ impl KeyStore for MemoryKeyStore {
     fn generate_key(&self, algorithm: Algorithm) -> Result<KeyId> {
         match algorithm {
             Algorithm::Ed25519 => {
-                let private_key = PrivateKey::generate();
+                let private_key = ed25519::PrivateKey::generate();
                 let public_key = private_key.public_key();
                 let id = self.next_id();
 
                 let stored = StoredKey {
-                    private_key,
-                    public_key,
-                    _algorithm: algorithm,
+                    material: StoredKeyMaterial::Ed25519 {
+                        private_key,
+                        public_key,
+                    },
+                    state: KeyState::Active,
+                };
+
+                self.keys
+                    .lock()
+                    .expect("keys lock poisoned")
+                    .insert(id.clone(), stored);
+
+                Ok(KeyId::new(id))
+            }
+            Algorithm::EcdsaP256 => {
+                let private_key = p256::PrivateKey::generate();
+                let public_key = private_key.public_key();
+                let id = self.next_id();
+
+                let stored = StoredKey {
+                    material: StoredKeyMaterial::EcdsaP256 {
+                        private_key,
+                        public_key,
+                    },
                     state: KeyState::Active,
                 };
 
@@ -261,10 +293,18 @@ impl KeyStore for MemoryKeyStore {
                     return Err(CryptoError::KeyNotFound(key_id.to_string()));
                 }
             }
-
-            ed25519::sign(message, &stored.private_key)
+            match &stored.material {
+                StoredKeyMaterial::Ed25519 {
+                    private_key,
+                    public_key: _,
+                } => ed25519::sign(message, private_key).as_bytes().to_vec(),
+                StoredKeyMaterial::EcdsaP256 {
+                    private_key,
+                    public_key: _,
+                } => p256::sign(message, private_key).as_bytes().to_vec(),
+            }
         };
-        Ok(signature.as_bytes().to_vec())
+        Ok(signature)
     }
 
     fn public_key(&self, key_id: &KeyId) -> Result<Vec<u8>> {
@@ -273,7 +313,16 @@ impl KeyStore for MemoryKeyStore {
             let stored = keys
                 .get(key_id.as_str())
                 .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
-            stored.public_key.as_bytes().to_vec()
+            match &stored.material {
+                StoredKeyMaterial::Ed25519 {
+                    private_key: _,
+                    public_key,
+                } => public_key.as_bytes().to_vec(),
+                StoredKeyMaterial::EcdsaP256 {
+                    private_key: _,
+                    public_key,
+                } => public_key.as_bytes().to_vec(),
+            }
         };
         Ok(bytes)
     }
@@ -325,7 +374,7 @@ impl KeyStore for MemoryKeyStore {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::signing::ed25519;
+    use crate::signing::{ed25519, p256};
 
     #[test]
     fn generate_and_sign() {
@@ -338,6 +387,18 @@ mod tests {
         let pk = ed25519::PublicKey::from_bytes(&pk_bytes).unwrap();
         let sig = ed25519::Signature::from_bytes(&sig_bytes).unwrap();
         assert!(ed25519::verify(&sig, b"hello", &pk));
+    }
+
+    #[test]
+    fn generate_and_sign_p256() {
+        let store = MemoryKeyStore::new();
+        let key_id = store.generate_key(Algorithm::EcdsaP256).unwrap();
+        let sig_bytes = store.sign(&key_id, b"hello").unwrap();
+        let pk_bytes = store.public_key(&key_id).unwrap();
+
+        let pk = p256::PublicKey::from_bytes(&pk_bytes).unwrap();
+        let sig = p256::Signature::from_bytes(&sig_bytes).unwrap();
+        assert!(p256::verify(&sig, b"hello", &pk));
     }
 
     #[test]

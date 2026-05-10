@@ -15,6 +15,7 @@ categories = ["cryptography", "no-std"]
 # Signing
 ed25519-dalek = { workspace = true }
 k256 = { workspace = true }
+p256 = { workspace = true }
 
 # Hashing
 sha2 = { workspace = true }
@@ -53,13 +54,13 @@ cryptoki = { version = "0.10", optional = true }
 # without callers needing to add the dep themselves.
 serde_json = { workspace = true, optional = true }
 
-# Cloud KMS keystore backend — design only, implementation deferred.
-# See docs/security/cloud-kms-keystore.md. The aws-sdk-kms crate
-# requires rustc 1.91+; gtcx-core's toolchain is pinned at 1.88.
-# Toolchain bump is a workspace-wide decision documented in the
-# remediation plan; once it lands, aws-sdk-kms / aws-config / tokio
-# get added here behind a `cloud_kms` feature, mirroring the pkcs11
-# pattern.
+# Cloud KMS keystore backend (optional). Enabled with --features cloud_kms.
+# Wraps AWS KMS behind the same KeyStore trait used by MemoryKeyStore and
+# Pkcs11KeyStore so institutional consumers can keep private keys inside a
+# cloud-managed HSM boundary.
+aws-config = { version = "1", optional = true }
+aws-sdk-kms = { version = "1", optional = true }
+tokio = { workspace = true, optional = true }
 
 [dev-dependencies]
 proptest = { workspace = true }
@@ -94,3 +95,14 @@ fips = ["dep:aws-lc-rs"]
 # / external Medium #1 — gtcx-core ships a hardware-backed keystore
 # alongside the existing MemoryKeyStore.
 pkcs11 = ["dep:cryptoki", "dep:serde_json"]
+
+# AWS KMS-backed KeyStore (optional). Enabled with --features cloud_kms.
+# Exposes CloudKmsKeyStore, which delegates key generation, signing,
+# public-key fetch, and deletion scheduling to AWS KMS while persisting
+# lifecycle state via the shared KeyStateStore trait.
+cloud_kms = [
+    "dep:aws-config",
+    "dep:aws-sdk-kms",
+    "dep:serde_json",
+    "dep:tokio",
+]

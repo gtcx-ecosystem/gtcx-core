@@ -1,12 +1,13 @@
 //! Digital signature algorithms.
 //!
-//! This module provides Ed25519 and secp256k1 digital signatures.
+//! This module provides Ed25519, ECDSA P-256, and secp256k1 digital signatures.
 //!
 //! ## Supported Algorithms
 //!
 //! | Algorithm | Use Case |
 //! |-----------|----------|
 //! | Ed25519 | Default, fastest, recommended |
+//! | ECDSA P-256 | FIPS-aligned interoperability and cloud KMS |
 //! | secp256k1 | Bitcoin/Ethereum compatibility |
 //!
 //! ## Example
@@ -22,4 +23,5 @@
 //! ```
 
 pub mod ed25519;
+pub mod p256;
 pub mod secp256k1;

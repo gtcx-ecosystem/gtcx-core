@@ -12,12 +12,12 @@
 
 ### Prerequisites
 
-| Requirement    | Version | Install                             |
-| -------------- | ------- | ----------------------------------- |
-| Node.js        | 20 LTS  | `nvm install 20` or direct download |
-| pnpm           | 9+      | `npm install -g pnpm`               |
-| Rust toolchain | 1.88    | `rustup install 1.88`               |
-| Cargo          | 1.88    | Included with rustup                |
+| Requirement    | Version | Install                                  |
+| -------------- | ------- | ---------------------------------------- |
+| Node.js        | 20 LTS  | `nvm install 20` or direct download      |
+| pnpm           | 9+      | `npm install -g pnpm`                    |
+| Rust toolchain | 1.91    | `rustup toolchain install 1.91-<target>` |
+| Cargo          | 1.91    | Included with rustup                     |
 
 ### First-Time Setup
 
@@ -58,7 +58,7 @@ The CI environment is defined in `.github/workflows/`. All gates run in GitHub A
 | ----------- | ------------ | ------------------------------------------------------ |
 | Node.js     | 20 LTS       | `actions/setup-node`                                   |
 | pnpm        | 9+           | `pnpm/action-setup`                                    |
-| Rust        | 1.88         | `dtolnay/rust-toolchain@stable` with `toolchain: 1.88` |
+| Rust        | 1.91         | `dtolnay/rust-toolchain@stable` with `toolchain: 1.91` |
 | Cargo cache | GitHub cache | `Swatinem/rust-cache`                                  |
 
 ### Native Binding Matrix

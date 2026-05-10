@@ -17,7 +17,7 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/gtcx-ecosystem/gtcx-core"
-rust-version = "1.88"
+rust-version = "1.91"
 authors = ["GTCX Protocol <engineering@gtcx.io>"]
 description = "GTCX Protocol - Cryptographic Verification Infrastructure"
 
@@ -25,6 +25,7 @@ description = "GTCX Protocol - Cryptographic Verification Infrastructure"
 # Cryptography
 ed25519-dalek = { version = "2.1", features = ["batch", "digest", "zeroize"] }
 k256 = { version = "0.13", features = ["ecdsa", "sha256"] }
+p256 = { version = "0.13", features = ["ecdsa", "pkcs8"] }
 sha2 = "0.10"
 blake3 = "1.5"
 rand = "0.8"

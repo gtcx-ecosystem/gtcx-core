@@ -1,9 +1,9 @@
-# Cloud KMS KeyStore — Design
+# Cloud KMS KeyStore
 
-**Module:** `gtcx_crypto::cloud_kms_keystore` (planned, not yet shipped)
-**Feature flag:** `cloud_kms` (planned)
-**Status:** Design complete; implementation deferred to a Rust toolchain bump
-**Closes:** F-8 from [10/10 remediation plan](../audit/remediation-10-10.md) — architectural design
+**Module:** `gtcx_crypto::cloud_kms_keystore`
+**Feature flag:** `cloud_kms`
+**Status:** Current
+**Closes:** `SEC-001` from [10/10 remediation plan](../remediation/REMEDIATION_PLAN.md) — AWS-first cloud-managed custody path
 **Cross-references:** [PKCS#11 KeyStore](./pkcs11-keystore.md), [Key Ceremony](./key-ceremony.md), [Trust Portal](../governance/trust-portal.md)
 
 ---
@@ -17,28 +17,31 @@ The `KeyStore` trait in `rust/gtcx-crypto/src/keystore.rs` is backend-agnostic. 
 
 The natural third implementation is **cloud-managed KMS**: AWS KMS, GCP Cloud KMS, Azure Key Vault. These are appropriate for cloud-native deployments where the consumer doesn't run their own HSM but trusts a cloud provider's HSM-backed key service.
 
-This document specifies the architecture. The implementation is deferred until the workspace's Rust toolchain is bumped from 1.88 to 1.91+ — `aws-sdk-kms` requires the newer rustc.
+The AWS-first implementation now ships behind `cargo --features cloud_kms`. The workspace toolchain floor moved to Rust `1.91` so the AWS SDK can compile in CI and local development.
 
 ---
 
-## Why deferred
+## What shipped
 
-`aws-sdk-kms 1.34+` (and its transitive deps `aws-smithy-types`, `aws-types`) require Rust 1.91. The workspace pins 1.88 in `rust-toolchain.toml` for cargo-deny and reproducibility reasons.
+Sprint 1 shipped the minimum honest AWS KMS path:
 
-A toolchain bump is a workspace-wide decision because:
+- Workspace bump from Rust `1.88` to `1.91`
+- `Algorithm::EcdsaP256` added to `gtcx_crypto::keystore`
+- `signing::p256` module added for deterministic ECDSA P-256 signing + verification
+- `CloudKmsKeyStore` implemented behind `--features cloud_kms`
+- Feature-gated CI lane added in `.github/workflows/ci.yml`
+- Integration test added at `rust/gtcx-crypto/tests/cloud_kms_integration.rs` and skipped cleanly unless `GTCX_AWS_KMS_INTEGRATION=1`
 
-- Every Rust crate in the repo recompiles
-- Cargo-deny rules may need re-validation
-- Older rust-target deployments (some embedded contexts) may not have 1.91 available
-- CI base images need updating
+Two items are intentionally still external or follow-on work:
 
-This isn't a hard blocker; it's a coordination issue. Bumping to 1.91 is a discrete task, ~1 day, including audit log updates and a CI matrix smoke test. Until that lands, this document specifies the design so the architectural slot is reserved and the code shape is unambiguous.
+- Real AWS-backed integration proof still requires a credentialed account and budgeted key lifecycle exercise.
+- GCP Cloud KMS and Azure Key Vault adapters remain future work.
 
 ---
 
 ## Provider scope
 
-**Phase 1 (this document):** AWS KMS only. AWS provides Ed25519 in KMS as of [2022](https://aws.amazon.com/about-aws/whats-new/2022/02/aws-key-management-service-asymmetric-keys-rsa-ecc-edwards-curve/), supports remote sign/verify operations, and is the most common cloud KMS consumed by institutional financial services.
+**Phase 1 (current):** AWS KMS only. AWS is the institutional default for cloud-native buyer environments and supports ECDSA P-256 remote sign / verify operations.
 
 **Phase 2 (Sprint 5+):** GCP Cloud KMS. Similar API surface, separate SDK (`google-cloud-kms`).
 
@@ -59,7 +62,7 @@ use gtcx_crypto::cloud_kms_keystore::{CloudKmsKeyStore, AwsKmsConfig};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 1. Load AWS config from environment / IMDS / instance profile.
-    let aws_config = aws_config::load_from_env().await;
+    let aws_config = aws_config::load_defaults(aws_config::BehaviorVersion::latest()).await;
 
     // 2. Construct the keystore. Holds an aws-sdk-kms Client internally.
     //    The handle to the current tokio runtime is captured at
@@ -76,7 +79,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     })?;
 
     // 3. Use the standard KeyStore trait.
-    let key_id = store.generate_key(Algorithm::Ed25519)?;
+    let key_id = store.generate_key(Algorithm::EcdsaP256)?;
     let signature = store.sign(&key_id, b"message")?;
     let public_key = store.public_key(&key_id)?;
 
@@ -90,20 +93,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-`KeyId` format: `cloud-kms:aws:<region>:<account>:key/<uuid>` — a parseable URI that can be round-tripped from the AWS KMS key ARN. Distinguishable from `mem-key-N` and `pkcs11:N`.
+`KeyId` format: `cloud-kms:aws:<region>:<account>:key:<uuid>` — a parseable identifier that round-trips from an AWS KMS key ARN. Distinguishable from `mem-key-N` and `pkcs11:N`.
 
 ---
 
 ## KeyStore trait mapping
 
-| `KeyStore` method                  | AWS KMS API call                                                                                                                                                                                                 | Notes                                                                                                                                                                                                                                                                                                                                                                                        |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `generate_key(Algorithm::Ed25519)` | `CreateKey` with `KeySpec=ECC_NIST_P256` for P-256 (KMS doesn't support raw Ed25519 spec naming; uses `ECC_NIST_P256` for ECDSA P-256 or `ECC_SECG_P256K1` for secp256k1, or no `KeySpec` for default symmetric) | Need to confirm Ed25519 spec name; AWS uses `ECC_*` prefixes. As of 2024 the value is `ECC_NIST_P256` only — Ed25519 is not yet a KMS-managed key spec. **This means AWS KMS cannot directly back Ed25519 today.** GCP Cloud KMS does support Ed25519 (`EC_SIGN_ED25519`). Adjust scope: AWS KMS implementation will support ECDSA P-256 and secp256k1; Ed25519 routes through GCP or Azure. |
-| `sign(key_id, message)`            | `Sign` with `MessageType=RAW`, `SigningAlgorithm=ECDSA_SHA_256` (or appropriate)                                                                                                                                 | Async; block on tokio Handle.                                                                                                                                                                                                                                                                                                                                                                |
-| `public_key(key_id)`               | `GetPublicKey`                                                                                                                                                                                                   | Returns DER-encoded SubjectPublicKeyInfo; we strip the SPKI envelope to return raw bytes.                                                                                                                                                                                                                                                                                                    |
-| `key_state(key_id)`                | local read from `KeyStateStore`                                                                                                                                                                                  | Same trait as PKCS#11.                                                                                                                                                                                                                                                                                                                                                                       |
-| `transition(key_id, new)`          | local write to `KeyStateStore` + `EnableKey` / `DisableKey` for KMS-side state coherence                                                                                                                         | Two-write pattern; if KMS write fails, rollback the local store.                                                                                                                                                                                                                                                                                                                             |
-| `destroy_key(key_id)`              | `ScheduleKeyDeletion` (KMS enforces 7-30 day grace period)                                                                                                                                                       | KMS does not allow immediate destruction — the key enters `PendingDeletion`. The gtcx `KeyState::Destroyed` is set locally; the actual KMS key remains for the grace window.                                                                                                                                                                                                                 |
+| `KeyStore` method                    | AWS KMS API call                                                                         | Notes                                                                                                                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `generate_key(Algorithm::EcdsaP256)` | `CreateKey` with `KeySpec=ECC_NIST_P256`, `KeyUsage=SIGN_VERIFY`                         | This is the shipped AWS path. `Algorithm::Ed25519` is rejected explicitly by `CloudKmsKeyStore` because AWS KMS still does not expose an Ed25519 key spec.                   |
+| `sign(key_id, message)`              | `Sign` with `MessageType=RAW`, `SigningAlgorithm=ECDSA_SHA_256` (or appropriate)         | Async; block on tokio Handle.                                                                                                                                                |
+| `public_key(key_id)`                 | `GetPublicKey`                                                                           | Returns DER-encoded SubjectPublicKeyInfo; we strip the SPKI envelope to return raw bytes.                                                                                    |
+| `key_state(key_id)`                  | local read from `KeyStateStore`                                                          | Same trait as PKCS#11.                                                                                                                                                       |
+| `transition(key_id, new)`            | local write to `KeyStateStore` + `EnableKey` / `DisableKey` for KMS-side state coherence | Two-write pattern; if KMS write fails, rollback the local store.                                                                                                             |
+| `destroy_key(key_id)`                | `ScheduleKeyDeletion` (KMS enforces 7-30 day grace period)                               | KMS does not allow immediate destruction — the key enters `PendingDeletion`. The gtcx `KeyState::Destroyed` is set locally; the actual KMS key remains for the grace window. |
 
 The `KeyStateStore` trait from PKCS#11 is **shared** with cloud KMS — same interface, same `MemoryKeyStateStore` and `FileSystemKeyStateStore` implementations work unchanged.
 
@@ -121,9 +124,7 @@ Ed25519 is **not** in the AWS KMS algorithm catalog as of the most recent SDK su
 1. **Add ECDSA P-256 to gtcx-core's `Algorithm` enum.** Use ECDSA P-256 for AWS KMS-backed keys. This matches FIPS-approved algorithms anyway (Ed25519 is FIPS-validated through aws-lc-rs but not via every cloud provider).
 2. **Use GCP Cloud KMS or Azure Key Vault for Ed25519.** Both support Ed25519 directly.
 
-Recommendation: do (1) before (2). Adding `Algorithm::EcdsaP256` is a few hours of trait extension and the secp256k1 module already wired in `rust/gtcx-crypto/src/signing/secp256k1.rs` is a useful reference. The trait extension allows the same `CloudKmsKeyStore` to back ECDSA-using consumers (most banks) and the future GCP / Azure backend to back Ed25519-using consumers (developer-tier services).
-
-This adjustment is documented but not yet executed; tracked as a Sprint 5+ task.
+Recommendation remains: use AWS KMS for P-256 institutional custody today, and add GCP / Azure Ed25519 adapters only when a concrete consumer requires them.
 
 ---
 
@@ -135,7 +136,7 @@ This adjustment is documented but not yet executed; tracked as a Sprint 5+ task.
 - Each method call creates a request future; we `Handle::current().block_on(future)` to bridge sync/async
 - The state store has its own concurrency model (memory or filesystem)
 
-Caller responsibility: a tokio runtime must be available when `CloudKmsKeyStore` methods are invoked. If invoked from a non-tokio context, calls panic with a clear error. The constructor captures the handle at build time and uses it at call time — no runtime is created internally.
+Caller responsibility: a tokio runtime must be active when the keystore is constructed. The constructor captures its handle and the sync `KeyStore` methods use that handle to bridge to AWS's async SDK. No runtime is created internally.
 
 ---
 
@@ -149,7 +150,7 @@ Standard AWS SDK credential chain:
 4. ECS task role
 5. Web identity token (for EKS / OIDC federation)
 
-`gtcx-core` does not implement any AWS auth itself; it uses `aws_config::load_from_env()` which routes through the standard chain.
+`gtcx-core` does not implement any AWS auth itself; callers typically build config with `aws_config::load_defaults(aws_config::BehaviorVersion::latest())`, which routes through the standard chain.
 
 For workloads running in AWS:
 
@@ -174,13 +175,11 @@ GCP Cloud KMS pricing is broadly similar; Azure Key Vault has a different per-op
 
 ## Testing strategy
 
-Once implementation lands:
-
 ### Unit tests (no AWS account)
 
 - `KeyId` ARN parsing / generation round-trip
-- State store integration (using the same `MemoryKeyStateStore` from PKCS#11)
-- Mock the AWS SDK client trait for happy-path and error-path coverage
+- State transition matrix parity with `MemoryKeyStore`
+- Explicit invalid-key-ID rejection
 
 ### Integration tests (AWS account required)
 
@@ -197,24 +196,22 @@ The integration tests should:
 1. Generate an ECDSA P-256 key
 2. Sign a known message
 3. Get the public key
-4. Verify the signature using `signing::secp256k1::verify` (or P-256 equivalent once added)
+4. Verify the signature using `signing::p256::verify`
 5. Schedule deletion (7-day grace) — leaves key in `PendingDeletion`, doesn't affect future test runs
 6. Assert state-store + KMS-side state coherence
 
 ---
 
-## Roadmap to ship
+## Remaining roadmap
 
-| Step                                                   | Effort                | Dependency          |
-| ------------------------------------------------------ | --------------------- | ------------------- |
-| Bump rust-toolchain.toml from 1.88 → 1.91              | ~1 day workspace-wide | None                |
-| Add `Algorithm::EcdsaP256` variant + signing module    | ~half day             | Toolchain bump      |
-| Implement `CloudKmsKeyStore` for AWS KMS               | ~2 days               | Algorithm extension |
-| Integration tests (AWS account, paid for the duration) | ~half day             | AWS account         |
-| GCP Cloud KMS implementation (Ed25519-capable)         | ~2 days               | AWS done            |
-| Azure Key Vault implementation                         | ~2 days               | GCP done            |
+| Step                                                        | Effort    | Dependency                                 |
+| ----------------------------------------------------------- | --------- | ------------------------------------------ |
+| Run credentialed AWS integration proof in CI or staging     | ~half day | AWS account                                |
+| Add state-store rollback coverage for KMS transition errors | ~half day | AWS mocking seam or staged fault injection |
+| GCP Cloud KMS implementation (Ed25519-capable)              | ~2 days   | AWS path stable                            |
+| Azure Key Vault implementation                              | ~2 days   | GCP done                                   |
 
-**Total:** ~1.5 weeks. Currently deferred until workspace toolchain bump is approved.
+**Current shipped scope:** AWS KMS + ECDSA P-256, feature-gated.
 
 ---
 
@@ -223,8 +220,9 @@ The integration tests should:
 - [PKCS#11 KeyStore](./pkcs11-keystore.md) — sibling implementation; same trait, different backend
 - [Key Ceremony](./key-ceremony.md) — NIST SP 800-57 lifecycle context
 - [Trust Portal](../governance/trust-portal.md) — section "Cryptographic correctness"
-- [10/10 Remediation Plan](../audit/remediation-10-10.md) — F-8
+- [10/10 Remediation Plan](../remediation/REMEDIATION_PLAN.md) — `SEC-001`
 
 ## Changelog
 
-- **1.0.0** (2026-05-10) — Initial design. Implementation deferred pending toolchain bump from 1.88 → 1.91. Critical scope finding: AWS KMS does not support Ed25519; the implementation will require adding `Algorithm::EcdsaP256` first.
+- **1.1.0** (2026-05-10) — AWS-first implementation shipped behind `--features cloud_kms`, with Rust `1.91`, `Algorithm::EcdsaP256`, and integration-test scaffolding.
+- **1.0.0** (2026-05-10) — Initial design. Identified the AWS Ed25519 gap and the required `Algorithm::EcdsaP256` extension.

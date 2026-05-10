@@ -10,12 +10,12 @@
 
 ## Prerequisites
 
-| Tool    | Version    | Install                                |
-| ------- | ---------- | -------------------------------------- |
-| Node.js | >= 20.0.0  | https://nodejs.org or `nvm install 20` |
-| pnpm    | >= 9.15.0  | `npm install -g pnpm@9.15.0`           |
-| Rust    | 1.88       | `rustup install 1.88`                  |
-| Git     | any recent | system package manager                 |
+| Tool    | Version    | Install                                                                          |
+| ------- | ---------- | -------------------------------------------------------------------------------- |
+| Node.js | >= 20.0.0  | https://nodejs.org or `nvm install 20`                                           |
+| pnpm    | >= 9.15.0  | `npm install -g pnpm@9.15.0`                                                     |
+| Rust    | 1.91       | `rustup toolchain install 1.91-aarch64-apple-darwin` or your platform equivalent |
+| Git     | any recent | system package manager                                                           |
 
 Rust is required to build the 6 workspace Rust crates (`gtcx-crypto`, `gtcx-zkp`, `gtcx-consensus`, `gtcx-network`, `gtcx-edge`, `gtcx-node`). TypeScript packages build without it, but native bindings will fall back to the JS implementation unless native mode is required.
 

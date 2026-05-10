@@ -154,7 +154,7 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: '1.88'
+          toolchain: '1.91'
 
       - name: Cache cargo
         uses: actions/cache@v4
@@ -201,6 +201,9 @@ jobs:
 
       - name: Rust tests — PKCS#11 feature
         run: cargo test -p gtcx-crypto --features pkcs11 --lib
+
+      - name: Rust tests — Cloud KMS feature
+        run: cargo test -p gtcx-crypto --features cloud_kms --lib --test cloud_kms_integration
 
       - name: Run benchmarks and capture results
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

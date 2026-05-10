@@ -177,6 +177,11 @@ impl KeyStore for Pkcs11KeyStore {
 
         match algorithm {
             Algorithm::Ed25519 => {}
+            Algorithm::EcdsaP256 => {
+                return Err(CryptoError::KeyStoreError(
+                    "PKCS#11 keystore does not yet support Algorithm::EcdsaP256".to_string(),
+                ));
+            }
         }
 
         let public_template = vec![
