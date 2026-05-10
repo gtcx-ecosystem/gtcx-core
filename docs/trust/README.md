@@ -170,7 +170,7 @@ Honest list of trust artifacts not yet in place. Surfaces them rather than letti
 - **External penetration test** — internal assessment is in place; external pen test budgeted but not yet engaged
 - **SOC 2 Type 1 letter** — readiness analysis complete; CPA engagement is the next step (8-10 weeks from start)
 - **PKCS#11 / Cloud KMS keystore backend** — trait shipped, software-only `MemoryKeyStore` implemented, hardware-backed implementation pending
-- **SLSA Level 3 attestation** — provenance manifest already generated; SLSA L3 wiring is Sprint 6 work
+- ~~**SLSA Level 3 attestation**~~ — **DONE.** `pnpm release` produces SLSA Build Level 3 provenance via `npm publish --provenance` + GitHub OIDC. See [`docs/security/slsa-attestation.md`](../security/slsa-attestation.md). Source track not claimed (would require enforced commit signing).
 - **Reference customer case study** — gtcx-core is consumed by 6 internal repos; first external case study lands after Sprint 4 sandbox engagement
 
 ---

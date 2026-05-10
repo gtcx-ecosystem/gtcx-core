@@ -340,7 +340,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | --- | ------------------------------------------------------------------ | ----------------------------------- | ------ |
 | 1   | ~~SOC2 Type 1 readiness gap analysis~~ — **DONE** (commit pending) | `docs/compliance/soc2-readiness.md` | DONE   |
 | 2   | ~~Customer-facing trust portal~~ — **DONE** (commit pending)       | `docs/trust/README.md`              | DONE   |
-| 3   | SLSA L3 attestation in release                                     | `.github/workflows/release.yml`     | 1d     |
+| 3   | ~~SLSA L3 attestation in release~~ — **DONE** (commit pending)     | `docs/security/slsa-attestation.md` | DONE   |
 | 4   | First reference-customer case study                                | `docs/gtm/case-studies/`            | 1d     |
 | 5   | Open-source the FIPS inheritance template                          | new public repo                     | 4h     |
 
