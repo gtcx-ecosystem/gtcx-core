@@ -11,26 +11,37 @@
  *   - Playbooks selected via select-playbooks.mjs based on changed files
  *   - Diff via `git diff <base>..<head>` (workflow checks out both refs)
  *
- * Calls Anthropic API (claude-opus-4-7) with the assembled prompt.
+ * Calls Anthropic Claude (primary) with multi-provider fallback to OpenAI
+ * when Anthropic is rate-limited, unreachable, or returns 5xx errors. The
+ * fallback closes the "bus factor = 1 on AI CODEOWNER review" finding —
+ * the dual-AI pattern is no longer single-provider-dependent.
+ *
  * Validates output against schema. Hard-rejects any decision=APPROVE.
  * Posts a structured comment + review to the PR.
  *
- * Required env:
- *   - ANTHROPIC_API_KEY      Claude API key
- *   - GITHUB_TOKEN           GitHub Actions token (for posting reviews)
- *   - GITHUB_EVENT_PATH      Path to event payload (set by GitHub Actions)
- *   - GITHUB_REPOSITORY      e.g. "gtcx-ecosystem/gtcx-core"
+ * Required env (at least one of the two AI providers):
+ *   - ANTHROPIC_API_KEY     Anthropic Claude key (primary)
+ *   - OPENAI_API_KEY        OpenAI key (fallback)
+ *   - GITHUB_TOKEN          GitHub Actions token (for posting reviews)
+ *   - GITHUB_EVENT_PATH     Path to event payload (set by GitHub Actions)
+ *   - GITHUB_REPOSITORY     e.g. "gtcx-ecosystem/gtcx-core"
  *
- * Exits non-zero only on infrastructure failure. Schema-validation failure of
- * the model output is logged and a fallback comment is posted; CI still succeeds
- * so a human reviewer is unblocked.
+ * Optional env:
+ *   - GTCX_AI_PROVIDER      Force a specific provider: "anthropic" | "openai".
+ *                           If unset, tries primary then falls back. Useful
+ *                           for testing or for cost-driven routing.
+ *
+ * Exits non-zero only on infrastructure failure. Schema-validation failure
+ * of the model output is logged and a fallback comment is posted; CI still
+ * succeeds so a human reviewer is unblocked.
  */
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const MODEL = 'claude-opus-4-7';
+const ANTHROPIC_MODEL = 'claude-opus-4-7';
+const OPENAI_MODEL = 'gpt-4o';
 const REPO_ROOT = process.cwd();
 const PROMPT_PATH = path.join(REPO_ROOT, 'docs/agents/governance/review-prompt.md');
 const SCHEMA_PATH = path.join(REPO_ROOT, 'docs/agents/governance/review-schema.json');
@@ -143,38 +154,162 @@ Emit a single JSON document conforming to docs/agents/governance/review-schema.j
 }
 
 // ---------------------------------------------------------------------------
-// Claude API call
+// AI provider calls — Anthropic primary, OpenAI fallback
 // ---------------------------------------------------------------------------
 
-async function callClaude({ system, user }) {
+class ProviderError extends Error {
+  constructor(message, { provider, status, retryable }) {
+    super(message);
+    this.name = 'ProviderError';
+    this.provider = provider;
+    this.status = status;
+    this.retryable = retryable;
+  }
+}
+
+function isRetryableStatus(status) {
+  // 408 Request Timeout, 425 Too Early, 429 Too Many Requests, 5xx server errors.
+  return status === 408 || status === 425 || status === 429 || (status >= 500 && status < 600);
+}
+
+async function callAnthropic({ system, user }) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    throw new Error('ANTHROPIC_API_KEY is not set');
+    throw new ProviderError('ANTHROPIC_API_KEY is not set', {
+      provider: 'anthropic',
+      status: 0,
+      retryable: false,
+    });
   }
 
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      max_tokens: 8192,
-      system,
-      messages: [{ role: 'user', content: user }],
-    }),
-  });
+  let response;
+  try {
+    response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: ANTHROPIC_MODEL,
+        max_tokens: 8192,
+        system,
+        messages: [{ role: 'user', content: user }],
+      }),
+    });
+  } catch (err) {
+    // Network errors (DNS, TLS, socket reset) — retryable in spirit.
+    throw new ProviderError(`Anthropic network error: ${err.message}`, {
+      provider: 'anthropic',
+      status: 0,
+      retryable: true,
+    });
+  }
 
   if (!response.ok) {
     const errBody = await response.text();
-    throw new Error(`Claude API error ${response.status}: ${errBody}`);
+    throw new ProviderError(`Anthropic API error ${response.status}: ${errBody}`, {
+      provider: 'anthropic',
+      status: response.status,
+      retryable: isRetryableStatus(response.status),
+    });
   }
 
   const body = await response.json();
   const text = body.content?.[0]?.text ?? '';
-  return { text, usage: body.usage };
+  return { text, usage: body.usage, provider: 'anthropic', model: ANTHROPIC_MODEL };
+}
+
+async function callOpenAI({ system, user }) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new ProviderError('OPENAI_API_KEY is not set', {
+      provider: 'openai',
+      status: 0,
+      retryable: false,
+    });
+  }
+
+  let response;
+  try {
+    response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        // The prompt instructs the model to emit a single JSON document.
+        // response_format: json_object enforces this server-side.
+        response_format: { type: 'json_object' },
+        max_tokens: 8192,
+        messages: [
+          { role: 'system', content: system },
+          { role: 'user', content: user },
+        ],
+      }),
+    });
+  } catch (err) {
+    throw new ProviderError(`OpenAI network error: ${err.message}`, {
+      provider: 'openai',
+      status: 0,
+      retryable: true,
+    });
+  }
+
+  if (!response.ok) {
+    const errBody = await response.text();
+    throw new ProviderError(`OpenAI API error ${response.status}: ${errBody}`, {
+      provider: 'openai',
+      status: response.status,
+      retryable: isRetryableStatus(response.status),
+    });
+  }
+
+  const body = await response.json();
+  const text = body.choices?.[0]?.message?.content ?? '';
+  return { text, usage: body.usage, provider: 'openai', model: OPENAI_MODEL };
+}
+
+/**
+ * Provider orchestration. Tries Anthropic first; on retryable failure,
+ * falls back to OpenAI. The `GTCX_AI_PROVIDER` env var forces a specific
+ * provider for testing or cost-driven routing.
+ *
+ * Closes the "bus factor = 1" finding on the AI CODEOWNER review — the
+ * dual-AI pattern is no longer single-provider-dependent. If Anthropic is
+ * down or throttling, OpenAI takes over automatically. The schema's
+ * never-approve enforcement applies regardless of which provider responded.
+ */
+async function callProvider({ system, user }) {
+  const forced = process.env.GTCX_AI_PROVIDER;
+  if (forced === 'openai') return callOpenAI({ system, user });
+  if (forced === 'anthropic') return callAnthropic({ system, user });
+
+  // Default: Anthropic primary, OpenAI fallback on retryable errors.
+  try {
+    return await callAnthropic({ system, user });
+  } catch (err) {
+    if (!(err instanceof ProviderError) || !err.retryable) {
+      // Non-retryable Anthropic failure (auth, quota, bad request) — surface.
+      // Or a non-ProviderError unexpected exception.
+      throw err;
+    }
+    if (!process.env.OPENAI_API_KEY) {
+      // No fallback configured — surface the original Anthropic error
+      // augmented with the bus-factor context.
+      throw new ProviderError(
+        `${err.message} (no OPENAI_API_KEY fallback configured — bus-factor risk)`,
+        { provider: 'anthropic', status: err.status, retryable: false }
+      );
+    }
+    console.error(
+      `Anthropic failed (${err.status}: ${err.message}); falling back to OpenAI`
+    );
+    return await callOpenAI({ system, user });
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -325,9 +460,13 @@ async function main() {
   const user = buildUserMessage({ pr, selection, diff });
 
   let review;
+  let providerUsed;
+  let modelUsed;
   try {
-    const { text, usage } = await callClaude({ system, user });
-    console.log(`Claude usage: ${JSON.stringify(usage)}`);
+    const { text, usage, provider, model } = await callProvider({ system, user });
+    providerUsed = provider;
+    modelUsed = model;
+    console.log(`Provider: ${provider} (${model}); usage: ${JSON.stringify(usage)}`);
     review = parseAndValidate(text);
   } catch (err) {
     console.error(`AI review failed: ${err.message}`);
@@ -340,8 +479,9 @@ async function main() {
   review.reviewedAt = new Date().toISOString();
   review.reviewer = {
     account: 'gtcx-codeowner-action',
-    model: MODEL,
-    actionVersion: '0.1.0-prototype',
+    model: modelUsed,
+    provider: providerUsed,
+    actionVersion: '0.2.0-multi-provider',
     playbookVersions: {},
   };
   review.playbooksApplied = selection.playbooks;

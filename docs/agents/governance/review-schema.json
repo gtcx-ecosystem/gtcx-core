@@ -49,7 +49,12 @@
         },
         "model": {
           "type": "string",
-          "description": "LLM model identifier (e.g. claude-opus-4-7)"
+          "description": "LLM model identifier (e.g. claude-opus-4-7, gpt-4o)"
+        },
+        "provider": {
+          "type": "string",
+          "enum": ["anthropic", "openai"],
+          "description": "Which AI provider produced this review. Captured so audit trails can correlate review quality with provider — and surface fallback events when Anthropic is unavailable and OpenAI took over."
         },
         "actionVersion": {
           "type": "string",

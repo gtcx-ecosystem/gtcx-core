@@ -38,7 +38,14 @@ jobs:
 
       - name: Run AI CODEOWNER review
         env:
+          # Anthropic Claude — primary provider.
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # OpenAI — fallback when Anthropic is rate-limited or down.
+          # Closes the "bus factor = 1 on AI CODEOWNER review" finding —
+          # the dual-AI pattern is no longer single-provider-dependent.
+          # Optional: action runs with Anthropic alone if this is unset,
+          # but logs a bus-factor warning when fallback is needed.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
         run: node .github/scripts/codeowner-review/run.mjs
         continue-on-error: true

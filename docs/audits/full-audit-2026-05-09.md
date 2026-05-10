@@ -382,6 +382,12 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 **Sprint 3 task 1 finding (2026-05-09):** Bus-factor situation is worse than initially scoped. `gtcx-agent` user exists but is not in `gtcx-ecosystem` org; no pending invitation. Branch protection on `main` is **disabled** — CODEOWNERS rules are not enforced, both human and AI reviewers are bypassable. Two human actions required to make the dual-AI CODEOWNER pattern operational: (1) re-invite gtcx-agent to the org, (2) enable branch protection on `main` with required CODEOWNER review + required status checks.
 
+**External assessment finding (2026-05-10) — three Mediums vs gtcx-protocols at parity:**
+
+1. PKCS#11/cloud-KMS `KeyStore` backend unimplemented (trait shipped, binding missing) — Sprint 5 work.
+2. TS-side property-based testing thin (1 fast-check file, 41 LOC) — Sprint 5 work.
+3. ~~Bus factor = 1 on AI CODEOWNER review (single AI provider).~~ **Closed (commit pending).** `gtcx-codeowner-action` now supports OpenAI as a fallback when Anthropic is rate-limited or unreachable. `callProvider()` tries Anthropic first; on retryable failure (HTTP 408/425/429/5xx, network errors), falls back to OpenAI. The schema's never-approve enforcement applies regardless of provider. Review payload now records `reviewer.provider` so audit trails surface fallback events. `GTCX_AI_PROVIDER` env var forces a specific provider for testing. If `OPENAI_API_KEY` is missing, the runner surfaces the bus-factor risk in the failure comment. `pnpm ops:check` adds an `openai-api-key` warn-level check.
+
 **Sprint 2 task 5 finding (2026-05-09):** While shipping the FIPS provider, surfaced two pre-existing issues:
 
 1. **CI has been failing on `main` for the last 3 commits** (aacafd3, 3677b1a, 473f7bb) with sub-15-second job durations — workflow infrastructure failure, not lint/test failure. Likely cause: missing `TURBO_TOKEN`, `TURBO_TEAM`, or other action-level config. `pnpm ops:check` already flags these as warnings.

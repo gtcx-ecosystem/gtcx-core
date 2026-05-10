@@ -29,11 +29,29 @@ The runner uses Node.js builtins only (no `node_modules` dependency) so it can b
 
 ## Required secrets
 
-The workflow requires:
+The workflow requires at least one AI provider key:
 
-- `ANTHROPIC_API_KEY` — Anthropic Claude API key (set in repo secrets at Settings → Secrets → Actions)
+- **`ANTHROPIC_API_KEY`** — Anthropic Claude API key (primary provider)
+- **`OPENAI_API_KEY`** — OpenAI API key (fallback when Anthropic is rate-limited or down)
+
+Set in repo secrets at Settings → Secrets → Actions, or via `gh secret set`.
 
 The `GITHUB_TOKEN` is provided automatically by the workflow runner.
+
+### Why two providers
+
+Closes the "bus factor = 1 on AI CODEOWNER review" finding. With only Anthropic configured, an Anthropic outage means PRs touching security-sensitive paths can't get an AI review until the provider recovers — that's exactly the single-point-of-failure the dual-AI pattern is supposed to prevent.
+
+The orchestration:
+
+1. Try Anthropic Claude (`claude-opus-4-7`) first.
+2. On retryable failures (HTTP 429, 5xx, network errors), fall back to OpenAI (`gpt-4o`).
+3. The schema's never-approve enforcement applies regardless of which provider responded — both providers receive the same prompt forbidding `decision=APPROVE`, and the runner rejects it at parse time anyway.
+4. The review's `reviewer.provider` field records which provider answered, so audit trails can surface fallback events.
+
+`GTCX_AI_PROVIDER=anthropic` or `GTCX_AI_PROVIDER=openai` forces a specific provider — useful for testing or cost-driven routing.
+
+If only `ANTHROPIC_API_KEY` is configured and Anthropic is down, the action exits with a non-blocking comment referencing the bus-factor risk. CI still succeeds; human reviewers are unblocked.
 
 ## Running locally
 

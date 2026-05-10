@@ -86,7 +86,7 @@ const CHECKS = [
   },
   {
     id: 'anthropic-api-key',
-    description: 'ANTHROPIC_API_KEY repo secret is set',
+    description: 'ANTHROPIC_API_KEY repo secret is set (AI CODEOWNER primary provider)',
     verify: async () => {
       const res = ghApi([`repos/${REPO}/actions/secrets`]);
       if (!res.ok) {
@@ -104,6 +104,26 @@ const CHECKS = [
     remediate: () =>
       `gh secret set ANTHROPIC_API_KEY --repo ${REPO}\n` +
       `  UI: https://github.com/${REPO}/settings/secrets/actions`,
+  },
+  {
+    id: 'openai-api-key',
+    description: 'OPENAI_API_KEY repo secret is set (AI CODEOWNER fallback provider)',
+    verify: async () => {
+      const res = ghApi([`repos/${REPO}/actions/secrets`]);
+      if (!res.ok) {
+        return { status: 'skip', detail: 'covered by anthropic-api-key skip' };
+      }
+      const body = JSON.parse(res.body);
+      const has = body.secrets?.some((s) => s.name === 'OPENAI_API_KEY');
+      return has
+        ? { status: 'pass', detail: 'OPENAI_API_KEY present' }
+        : {
+            status: 'warn',
+            detail: 'OPENAI_API_KEY missing — AI CODEOWNER has no fallback if Anthropic is down (bus-factor risk)',
+          };
+    },
+    remediate: () =>
+      `gh secret set OPENAI_API_KEY --repo ${REPO}  # closes bus-factor on ai codeowner review`,
   },
   {
     id: 'turbo-token',
