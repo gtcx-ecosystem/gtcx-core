@@ -1,5 +1,9 @@
 # UAT Evidence Log — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Tracks user acceptance testing (UAT) evidence for features and sprints. Updated at sprint close and before release.
 
 ---

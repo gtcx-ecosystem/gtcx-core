@@ -1,5 +1,9 @@
 # Architecture Decision Records
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 This directory contains Architecture Decision Records (ADRs) for the GTCX Core repository. ADRs document significant architectural decisions, their context, and consequences.
 
 ## Index

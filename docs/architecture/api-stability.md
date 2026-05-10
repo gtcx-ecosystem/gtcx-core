@@ -1,5 +1,9 @@
 # API Stability Guide — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Last updated**: 2026-05-06
 **Source**: `quality/api-surface-baseline.json` (2026-05-06)
 

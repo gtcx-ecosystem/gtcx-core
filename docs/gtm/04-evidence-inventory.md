@@ -1,5 +1,9 @@
 # Evidence Inventory — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Every piece of machine-generated and human-authored evidence, with location and freshness.**
 
 ---

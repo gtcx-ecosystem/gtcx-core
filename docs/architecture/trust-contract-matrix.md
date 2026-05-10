@@ -1,5 +1,9 @@
 # Trust Contract Matrix
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Last updated:** 2026-05-06  
 **Purpose:** Make the public trust-bearing behavior of `gtcx-core` explicit so security fixes, reviews, and audits operate against stable contracts instead of informal assumptions.
 

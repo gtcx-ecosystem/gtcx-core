@@ -1,8 +1,12 @@
 # External Integration Guide — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 How to install and use `@gtcx/*` packages from npm in your own project.
 
-For the internal workspace guide (monorepo contributors), see [integration-guide.md](./integration-guide.md).
+For internal workspace contributors, see [integration-guide.md](./integration-guide.md).
 
 ---
 
@@ -237,4 +241,4 @@ import { UnifiedComplianceService } from '@gtcx/services/compliance';
 ## Support
 
 - Issues: [github.com/gtcx-ecosystem/gtcx-core/issues](https://github.com/gtcx-ecosystem/gtcx-core/issues)
-- Security: security@gtcx.io (see [SECURITY.md](../../SECURITY.md))
+- Security: security@gtcx.io. See [SECURITY.md](../../SECURITY.md).

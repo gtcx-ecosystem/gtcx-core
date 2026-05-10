@@ -1,5 +1,9 @@
 # Spec-to-Code Traceability — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Maps each package specification to its implementation module. Updated when packages are added or when a spec changes scope.
 
 ---

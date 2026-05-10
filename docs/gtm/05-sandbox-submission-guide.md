@@ -1,5 +1,9 @@
 # Sandbox Submission Guide
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **How to apply to a regulatory innovation sandbox with gtcx-core as the cryptographic foundation.**
 
 ---
@@ -25,7 +29,7 @@ Priority markets for GTCX (commodity trade verification):
 | UAE          | ADGM / DIFC         | RegLab / Innovation Testing License | International trade hub                   |
 | UK           | FCA                 | Regulatory Sandbox                  | International market access               |
 
-**Start with Zimbabwe and Namibia.** See [08-target-markets.md](./08-target-markets.md) for the full 5-market strategy (Zimbabwe, Namibia, Zambia, DRC, Ghana).
+**Start with Zimbabwe and Namibia.** See [08-target-markets.md](./08-target-markets.md) for the full five-market strategy covering Zimbabwe, Namibia, Zambia, DRC, and Ghana.
 
 ## Step 2: Pre-Submission Meeting
 
@@ -74,7 +78,7 @@ Bundle these into a PDF or shared folder:
 1. **Executive Brief** — [00-executive-brief.md](./00-executive-brief.md)
 2. **Security Posture** — [01-security-posture.md](./01-security-posture.md)
 3. **Compliance Matrix** — [02-compliance-matrix.md](./02-compliance-matrix.md)
-4. **FIPS Readiness** — [03-fips-readiness.md](./03-fips-readiness.md) (only if asked)
+4. **FIPS Readiness** — [03-fips-readiness.md](./03-fips-readiness.md). Bring it only if asked.
 5. **CI Gate Results** — Fresh run of `pnpm test && pnpm release:ga:evidence:check`
 6. **Fuzz Campaign Results** — After running 24-hour campaigns (pending)
 7. **Architecture Overview** — `docs/architecture/overview.md`

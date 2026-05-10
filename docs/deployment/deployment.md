@@ -1,5 +1,9 @@
 # Package Publishing — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 `gtcx-core` is a library, not a service. There are no servers to deploy. "Deployment" means publishing versioned packages to npm and Cargo registries after all CI gates pass.
 
 ---

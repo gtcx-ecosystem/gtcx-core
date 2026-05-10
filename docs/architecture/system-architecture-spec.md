@@ -1,5 +1,9 @@
 # System Architecture Specification — {system-name}
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 > Formal security-focused specification. For the current component architecture, see [overview.md](overview.md).
 
 ---

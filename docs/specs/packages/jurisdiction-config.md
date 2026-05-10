@@ -1,5 +1,9 @@
 # GTCX Jurisdiction Configuration Schema
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 ## Universal Parameterization for Multi-Sovereign Deployment
 
 > **"One protocol, infinite jurisdictions. Configuration, not code changes."**

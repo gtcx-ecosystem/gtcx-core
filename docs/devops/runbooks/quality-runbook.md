@@ -1,5 +1,9 @@
 # Quality Gates Runbook — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Required quality gates and triage order for `gtcx-core`. Run this sequence before every release and after any CI gate failure.
 
 ---

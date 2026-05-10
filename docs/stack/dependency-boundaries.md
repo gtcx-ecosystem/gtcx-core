@@ -1,5 +1,9 @@
 # Dependency Boundaries
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 Purpose: define which dependency sources are allowed, which are prohibited, and the review rules for exceptions.
 
 ## Approved Sources

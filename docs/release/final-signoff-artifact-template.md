@@ -1,5 +1,9 @@
 # Final Release Signoff Template
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Use this once internal gates, external review, and downstream validation are complete.
 
 ---

@@ -1,5 +1,9 @@
 # Executive Brief — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 ## What It Is
 
 gtcx-core is the cryptographic and protocol foundation for the GTCX ecosystem — a global trade verification platform built for commodity supply chains in the Global South. It provides signing, identity, verification, and zero-knowledge proof primitives consumed by 6+ downstream products.

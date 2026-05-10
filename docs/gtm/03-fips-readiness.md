@@ -1,5 +1,9 @@
 # FIPS Readiness — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 This document consolidates the FIPS 140-3 compliance posture. For the full technical boundary statement, see [../security/fips-validation-boundary.md](../security/fips-validation-boundary.md).
 
 ---

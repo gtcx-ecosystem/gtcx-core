@@ -1,5 +1,9 @@
 # Package Spec — `@gtcx/verification`
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Classification:** Security-sensitive — all changes require Cryptographic Security Engineer co-review and human approval before merge.
 
 ---

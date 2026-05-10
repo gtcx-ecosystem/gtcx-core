@@ -18,5 +18,5 @@ QA strategy, test coverage requirements, and testing frameworks.
 
 ## What does NOT belong here
 
-- **Product acceptance criteria** — User stories, feature requirements, definition of done (→ `../1-product/`)
-- **Compliance audits** — Regulatory testing, certification evidence, audit trails (→ `../../4-engineering/5-compliance/`)
+- **Product acceptance criteria** — User stories, feature requirements, and definition of done. See `../1-product/`.
+- **Compliance audits** — Regulatory testing, certification evidence, and audit trails. See `../../4-engineering/5-compliance/`.

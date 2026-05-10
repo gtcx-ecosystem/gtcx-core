@@ -1,7 +1,11 @@
 # 10/10 Remediation Plan
 
-**Drafted:** 2026-05-10 (cycle 6 close)
-**Source audit:** [`,full-audit-2026-05-09.md`](./full-audit-2026-05-09.md) + same-day re-audit
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
+**Drafted:** 2026-05-10 — cycle 6 close
+**Source audit:** [`full-audit-2026-05-09.md`](./full-audit-2026-05-09.md) plus same-day re-audit
 **Current score:** 9.6/10
 **Target:** 10.0/10
 **Owner of plan:** Cryptographic Security Engineer + repo maintainer
@@ -180,7 +184,7 @@ Eight findings. All technical. No external dependencies. Estimated total: **~8 h
 **Files:**
 
 - `docs/security/slsa-attestation.md` — Source Track section added: claims Source Level 1 (version-controlled, change-managed, retained); documents the path to Level 2 with concrete steps and effort estimate
-- `docs/trust/README.md` — section "Cryptographic correctness" updated to reflect Source Level 1 + deferred Level 2
+- `docs/governance/trust-portal.md` — section "Cryptographic correctness" updated to reflect Source Level 1 + deferred Level 2
 
 **What shipped (this session):** Source Level 1 is asserted. The repo satisfies the SLSA Source Level 1 requirements today — no enforcement change required.
 
@@ -463,9 +467,9 @@ The repo reaches 10/10 when:
 
 ## Cross-references
 
-- [Full audit (cycle 6 close)](./full-audit-2026-05-09.md)
+- [Full audit — cycle 6 close](./full-audit-2026-05-09.md)
 - [Auto-dev state](./auto-dev-state.md)
-- [Trust portal](../trust/README.md)
+- [Trust portal](../governance/trust-portal.md)
 - [SOC 2 readiness](../compliance/soc2-readiness.md)
 - [SLSA attestation](../security/slsa-attestation.md)
 - [PKCS#11 keystore](../security/pkcs11-keystore.md)

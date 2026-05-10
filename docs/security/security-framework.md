@@ -1,5 +1,9 @@
 # Security Framework — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Cryptographic Security Engineer
+
 The security posture of `gtcx-core`. Covers cryptographic primitives, storage security, ZKP capabilities, network controls, and operational safeguards.
 
 ---

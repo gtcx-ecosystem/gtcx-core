@@ -1,5 +1,9 @@
 # Pre-Submission Email — Reserve Bank of Zimbabwe
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **To:** Fintech Regulatory Sandbox Unit, Reserve Bank of Zimbabwe
 **CC:** Securities and Exchange Commission of Zimbabwe (SECZ)
 **Subject:** Pre-Submission Consultation Request — Commodity Verification Protocol

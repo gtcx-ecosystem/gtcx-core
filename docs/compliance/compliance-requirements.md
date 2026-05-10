@@ -1,5 +1,9 @@
 # Compliance Requirements — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Document ID**: GTCX-CORE-COMPLIANCE-001
 **Version**: 1.0
 **Date**: March 2026

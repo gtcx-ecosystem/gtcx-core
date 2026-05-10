@@ -1,5 +1,9 @@
 # Pre-Submission Email — Bank of Zambia
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **To:** Regulatory Sandbox Unit, Bank of Zambia
 **CC:** Securities and Exchange Commission of Zambia
 **Subject:** Pre-Submission Consultation Request — Mining Supply Chain Verification

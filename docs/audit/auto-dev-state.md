@@ -55,7 +55,7 @@
   - `d1900dd` — **Sprint 6 LOC promise delivered** — legacy `storage.ts` deleted (-1,773 LOC)
   - `473f7bb` — gtcx-codeowner-action runtime (selector + runner + workflow)
   - `dbd465b` — **Sprint 2 task 5: FIPS provider operational** — `aws-lc-rs` behind `--features fips`
-  - `3a4f9d2` — Ops verifier (`pnpm ops:check` + `docs/ops/repo-bootstrap.md`)
+  - `3a4f9d2` — Ops verifier (`pnpm ops:check` + `docs/operations/repo-bootstrap.md`)
 - **Tasks completed (cycle 6 — operational changes via `gh api`, no commits):**
   - gtcx-agent invited to `gtcx-ecosystem` org (invitation `75244818`); accepted by user
   - Branch protection enabled on `main` with required CODEOWNER review + 4 status checks
@@ -100,8 +100,8 @@ The repo's operational story is mostly closed. Bus-factor is resolved. Dual-AI C
 
 ## Reference
 
-- [Full audit (2026-05-09)](./full-audit-2026-05-09.md) — six phases, sprint plan, executive summary
-- [Repo bootstrap](../ops/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
+- [Full audit — 2026-05-09](./full-audit-2026-05-09.md) — six phases, sprint plan, executive summary
+- [Repo bootstrap](../operations/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
 - [AI CODEOWNER governance](../agents/governance/README.md) — schema, prompt, playbooks
 - [Budget Readiness Plan](../gtm/06-budget-readiness-plan.md) — $0 path from 9.8 to 10.0
 - [GTM Evidence Pack](../gtm/README.md) — 14-document submission package

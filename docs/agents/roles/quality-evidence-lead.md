@@ -1,5 +1,9 @@
 # Role: Quality & Evidence Lead
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 ## Archetype
 
 `1-agentic/archetypes/quality-evidence-lead`

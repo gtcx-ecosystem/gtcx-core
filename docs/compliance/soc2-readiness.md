@@ -1,5 +1,9 @@
 # SOC 2 Type 1 Readiness Gap Analysis
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Subject:** gtcx-core (cryptographic foundation library)
 **Standard:** AICPA SOC 2 Trust Services Criteria (2017, with 2022 points of focus)
 **Type:** Type 1 (design of controls at a point in time)
@@ -244,7 +248,7 @@ This framing is more credible than claiming SOC 2 compliance you don't have. It 
 - [`docs/security/threat-model.md`](../security/threat-model.md) — STRIDE + threat actors + mitigations
 - [`docs/security/attack-tree-signing.md`](../security/attack-tree-signing.md) — attack-tree analysis for signature forgery
 - [`docs/security/internal-security-assessment.md`](../security/internal-security-assessment.md) — six assessment methods + residual risk
-- [`docs/security/fips-validation-boundary.md`](../security/fips-validation-boundary.md) — FIPS inheritance via aws-lc-rs (CMVP #4816)
+- [`docs/security/fips-validation-boundary.md`](../security/fips-validation-boundary.md) — FIPS inheritance via aws-lc-rs CMVP #4816
 - [`docs/security/key-ceremony.md`](../security/key-ceremony.md) — NIST SP 800-57 key lifecycle
 - [`docs/agents/governance/`](../agents/governance/) — dual-AI CODEOWNER pattern
 - [`SECURITY.md`](../../SECURITY.md) — public disclosure policy

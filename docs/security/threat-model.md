@@ -1,5 +1,9 @@
 # Threat Model — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Cryptographic Security Engineer
+
 **Version:** 1.0.0
 **Classification:** Internal
 **Threat model date:** 2026-05-04

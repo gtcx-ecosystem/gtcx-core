@@ -1,5 +1,9 @@
 # Pre-Submission Email — Bank of Ghana
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **To:** Fintech and Innovation Office, Bank of Ghana
 **CC:** Securities and Exchange Commission of Ghana
 **Subject:** Pre-Submission Consultation Request — Commodity Verification Protocol

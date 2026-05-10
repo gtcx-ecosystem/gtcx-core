@@ -1,5 +1,9 @@
 # Task Playbook: Add a TypeScript Package
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Owner:** Protocol Architect (design) + Quality & Evidence Lead (gates)
 **Safety tier:** Requires human approval before proceeding
 

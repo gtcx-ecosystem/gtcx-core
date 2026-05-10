@@ -1,5 +1,9 @@
 # Pre-Submission Email — Bank of Namibia
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **To:** Innovation Hub, Bank of Namibia
 **CC:** Namibia Financial Institutions Supervisory Authority (NAMFISA)
 **Subject:** Pre-Submission Consultation Request — Digital Commodity Provenance

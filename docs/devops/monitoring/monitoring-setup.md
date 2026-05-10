@@ -1,5 +1,9 @@
 # Monitoring — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 _Not applicable in the service-monitoring sense. `gtcx-core` is a library — it has no running servers, no production services, and no SLOs for uptime or latency._
 
 ---

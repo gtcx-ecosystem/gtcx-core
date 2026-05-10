@@ -1,5 +1,9 @@
 # Service Overview — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 > Understand this repo in 5 minutes.
 
 **Last reviewed:** 2026-05-06

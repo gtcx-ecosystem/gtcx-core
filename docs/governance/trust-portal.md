@@ -1,5 +1,9 @@
 # gtcx-core Trust Portal
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Audience:** vendor risk teams, sandbox regulators, design partners, security auditors
 **What this is:** the evidence index for evaluating gtcx-core's security posture without an NDA. Everything linked here is in this repository — every artifact is independently verifiable.
 **What this is not:** marketing. There are no claims here that aren't backed by a file path or a git command you can run.
@@ -42,8 +46,8 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 
 1. [Threat model](../security/threat-model.md) — STRIDE table, threat actors, attack scenarios, control mappings
 2. [Attack tree for signature forgery](../security/attack-tree-signing.md) — adversarial decomposition with mitigations
-3. [Internal security assessment](../security/internal-security-assessment.md) — six assessment methods (SAST, dependency audit, secret scan, fuzz, threat modeling, architecture enforcement)
-4. [FIPS validation boundary](../security/fips-validation-boundary.md) — algorithm mapping and CMVP inheritance via OpenSSL #4282 (TS) and AWS-LC #4816 (Rust)
+3. [Internal security assessment](../security/internal-security-assessment.md) — six assessment methods: SAST, dependency audit, secret scan, fuzz, threat modeling, and architecture enforcement
+4. [FIPS validation boundary](../security/fips-validation-boundary.md) — algorithm mapping and CMVP inheritance via OpenSSL #4282 for TypeScript and AWS-LC #4816 for Rust
 5. [Key ceremony](../security/key-ceremony.md) — NIST SP 800-57 lifecycle, key tier model, emergency revocation
 6. [Fuzz campaign results](../../quality/fuzz-results/campaign-summary.md) — 9.9M executions, 0 crashes across 6 targets with AddressSanitizer enabled
 7. [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema + prompt + 3 playbooks; the bot is structurally forbidden from approving
@@ -54,28 +58,28 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 
 A vendor risk team or sandbox regulator that needs more than self-service can engage on:
 
-- **External penetration test** — currently substituted by the [internal security assessment](../security/internal-security-assessment.md) (six assessment methods + 9.9M-execution fuzz campaign with ASAN). External pen test is in the budget-readiness plan; ~$8K-$25K.
-- **SOC 2 Type 1 attestation letter** — readiness gap closed at 78-85% across applicable TSC; CPA engagement required for formal letter (~$15K-$45K, 8-10 weeks). See [readiness analysis](../compliance/soc2-readiness.md).
+- **External penetration test** — currently substituted by the [internal security assessment](../security/internal-security-assessment.md). That assessment combines six methods plus a 9.9M-execution fuzz campaign with ASAN. External pen test is in the budget-readiness plan; ~$8K-$25K.
+- **SOC 2 Type 1 attestation letter** — readiness gap closed at 78-85% across applicable TSC; CPA engagement required for formal letter. Typical effort: ~$15K-$45K over 8-10 weeks. See [readiness analysis](../compliance/soc2-readiness.md).
 - **Custom security questionnaire response** — the [evidence inventory](../gtm/04-evidence-inventory.md) maps existing artifacts to common questionnaire categories. Most rows answer with a path; a small number require process documentation.
 
 ---
 
 ## Controls matrix — gtcx-core controls mapped to recognized standards
 
-| Control category            | NIST SP 800-53 ref | SOC 2 TSC ref | gtcx-core evidence                                                                                                                         |
-| --------------------------- | ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Access control to source    | AC-2, AC-3, AC-6   | CC6.1-6.3     | `.github/CODEOWNERS`, branch protection on main, dual-AI review (human + gtcx-agent)                                                       |
-| Cryptographic primitives    | SC-13, SC-12       | CC6.1, C1.1   | FIPS provider via aws-lc-rs (CMVP #4816), Ed25519 via @noble/curves, content-hash allowlist                                                |
-| Key lifecycle               | SC-12, SC-17       | CC6.1, C1.1   | `KeyStore` trait with NIST SP 800-57 states (Created, Active, Rotated, Revoked, Destroyed)                                                 |
-| Data classification         | RA-2, MP-2         | C1.1          | `redactSecrets` default sanitizer; threat model defines confidential categories                                                            |
-| Secure software development | SA-11, SA-15       | CC8.1         | 21 CI gates; CodeQL, Trivy, cargo-audit, secret scan; architecture boundary enforcement                                                    |
-| Supply chain                | SA-12, SR-3        | CC9.2         | `pnpm.overrides` exact-pinning; `tools/check-crypto-deps.mjs` integrity allowlist; SBOM (CycloneDX) on every build                         |
-| Vulnerability management    | RA-5, SI-2         | CC7.1         | Dependabot, `pnpm audit` on every PR, cargo-audit on every PR, public disclosure policy                                                    |
-| Incident response           | IR-4, IR-6         | CC7.3-7.5     | [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md) six-phase runbook with severity classification + bypass procedure                     |
-| Audit and monitoring        | AU-2, AU-12        | CC4.1, CC7.2  | Structured stderr JSON traces; `SpanEmitter` contract for OTel forwarding; sanitizer-override telemetry; provenance manifest on publish    |
-| Change management           | CM-3, CM-4         | CC8.1         | Conventional commits, changesets, branch protection, required CODEOWNER review, API surface baseline (`quality/api-surface-baseline.json`) |
-| Risk assessment             | RA-3               | CC3.1-3.4     | STRIDE table, attack tree, threat actor table, residual risk analysis                                                                      |
-| Reproducibility             | (n/a)              | CC8.1         | `pnpm build:reproducible` verifies bit-for-bit reproducibility per package                                                                 |
+| Control category            | NIST SP 800-53 ref | SOC 2 TSC ref | gtcx-core evidence                                                                                                                          |
+| --------------------------- | ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Access control to source    | AC-2, AC-3, AC-6   | CC6.1-6.3     | `.github/CODEOWNERS`, branch protection on main, dual-AI review with a human reviewer plus `gtcx-agent`                                     |
+| Cryptographic primitives    | SC-13, SC-12       | CC6.1, C1.1   | FIPS provider via aws-lc-rs CMVP #4816, Ed25519 via `@noble/curves`, content-hash allowlist                                                 |
+| Key lifecycle               | SC-12, SC-17       | CC6.1, C1.1   | `KeyStore` trait with NIST SP 800-57 states (Created, Active, Rotated, Revoked, Destroyed)                                                  |
+| Data classification         | RA-2, MP-2         | C1.1          | `redactSecrets` default sanitizer; threat model defines confidential categories                                                             |
+| Secure software development | SA-11, SA-15       | CC8.1         | 21 CI gates; CodeQL, Trivy, cargo-audit, secret scan; architecture boundary enforcement                                                     |
+| Supply chain                | SA-12, SR-3        | CC9.2         | `pnpm.overrides` exact-pinning; `tools/check-crypto-deps.mjs` integrity allowlist; SBOM (CycloneDX) on every build                          |
+| Vulnerability management    | RA-5, SI-2         | CC7.1         | Dependabot, `pnpm audit` on every PR, cargo-audit on every PR, public disclosure policy                                                     |
+| Incident response           | IR-4, IR-6         | CC7.3-7.5     | [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md) six-phase runbook with severity classification + bypass procedure                      |
+| Audit and monitoring        | AU-2, AU-12        | CC4.1, CC7.2  | Structured stderr JSON traces; `SpanEmitter` contract for OTel forwarding; sanitizer-override telemetry; provenance manifest on publish     |
+| Change management           | CM-3, CM-4         | CC8.1         | Conventional commits, changesets, branch protection, required CODEOWNER review, API surface baseline at `quality/api-surface-baseline.json` |
+| Risk assessment             | RA-3               | CC3.1-3.4     | STRIDE table, attack tree, threat actor table, residual risk analysis                                                                       |
+| Reproducibility             | (n/a)              | CC8.1         | `pnpm build:reproducible` verifies bit-for-bit reproducibility per package                                                                  |
 
 ---
 
@@ -101,7 +105,7 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 
 ### Access control and governance
 
-- [`.github/CODEOWNERS`](../../.github/CODEOWNERS) — dual-reviewer enforcement (human `@amanianai` + AI `@gtcx-agent`) on security-sensitive paths
+- [`.github/CODEOWNERS`](../../.github/CODEOWNERS) — dual-reviewer enforcement with `@amanianai` and `@gtcx-agent` on security-sensitive paths
 - Branch protection on `main` — required CODEOWNER review, required status checks (ci, rust, codeql, security)
 - [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema, system prompt, 3 path-specific playbooks
 - AI CODEOWNER never approves — enforced in three layers (schema enum, prompt constraint, runner output filter)
@@ -111,13 +115,13 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 
 - Structured stderr JSON for every traced operation; `SpanEmitter` contract for OTel/Datadog/Honeycomb forwarding
 - Sanitizer-override telemetry — `event=sanitizer_override` fires when explicit sanitizer is wired
-- [`pnpm ops:check`](../ops/repo-bootstrap.md) — auto-verified operational prerequisites with remediation commands
+- [`pnpm ops:check`](../operations/repo-bootstrap.md) — auto-verified operational prerequisites with remediation commands
 - KPI metrics export — `pnpm quality:kpi:export`
 
 ### Incident response
 
 - [`SECURITY.md`](../../SECURITY.md) — public disclosure policy with severity-based response timelines
-- [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md) — six-phase internal runbook (triage, containment, investigation, remediation, disclosure, retrospective) + AI bypass procedure + 3 templates (acknowledgement, downstream notice, public advisory)
+- [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md) — six-phase internal runbook: triage, containment, investigation, remediation, disclosure, and retrospective. Includes the AI bypass procedure plus three templates: acknowledgement, downstream notice, and public advisory.
 - Coordinated disclosure window — 14 days from fix-merged to public for critical/high
 
 ### Compliance posture
@@ -131,7 +135,7 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 
 - [Quality runbook](../devops/runbooks/quality-runbook.md) — CI triage order
 - [Release checklist](../devops/release-mgmt/release-checklist.md) — pre-release gate
-- [Repo bootstrap](../ops/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
+- [Repo bootstrap](../operations/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
 
 ---
 
@@ -139,7 +143,7 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 
 Run `pnpm ops:check` against this repo to see the current state. The checker uses `gh api` to verify runtime configuration (secrets, branch protection, org membership, CODEOWNERS validity) and reports pass/fail/warn/skip with remediation commands inline. The latest snapshot is reproducible by anyone with read access to the org.
 
-The output is also auto-written to [`docs/ops/repo-bootstrap.md`](../ops/repo-bootstrap.md) via `pnpm ops:emit-doc`.
+The output is also auto-written to [`docs/operations/repo-bootstrap.md`](../operations/repo-bootstrap.md) via `pnpm ops:emit-doc`.
 
 ---
 
@@ -154,7 +158,7 @@ For procurement / vendor risk:
 For sandbox regulators (Africa-tier financial regulators reviewing the library for embedded use):
 
 1. Read the [executive brief](../gtm/00-executive-brief.md) + [evidence inventory](../gtm/04-evidence-inventory.md) + [sandbox submission guide](../gtm/05-sandbox-submission-guide.md).
-2. Specific market briefs at [`docs/gtm/`](../gtm/) (Zimbabwe, Namibia, Zambia, DRC, Ghana).
+2. Specific market briefs live at [`docs/gtm/`](../gtm/). Current priority markets are Zimbabwe, Namibia, Zambia, DRC, and Ghana.
 
 For design partners / pilot deployments:
 
@@ -170,7 +174,7 @@ Honest list of trust artifacts not yet in place. Surfaces them rather than letti
 - **External penetration test** — internal assessment is in place; external pen test budgeted but not yet engaged
 - **SOC 2 Type 1 letter** — readiness analysis complete; CPA engagement is the next step (8-10 weeks from start)
 - ~~**PKCS#11 / Cloud KMS keystore backend**~~ — **PKCS#11 done.** `Pkcs11KeyStore` shipped behind `cargo --features pkcs11`. See [`docs/security/pkcs11-keystore.md`](../security/pkcs11-keystore.md). Cloud KMS adapter deferred as a hardening pass.
-- ~~**SLSA Level 3 attestation**~~ — **DONE.** `pnpm release` produces SLSA Build Level 3 provenance via `npm publish --provenance` + GitHub OIDC. SLSA Source Level 1 also asserted (version-controlled, change-managed). See [`docs/security/slsa-attestation.md`](../security/slsa-attestation.md). Source Level 2 (signed commits) is documented and deferred pending explicit team decision.
+- ~~**SLSA Level 3 attestation**~~ — **DONE.** `pnpm release` produces SLSA Build Level 3 provenance via `npm publish --provenance` + GitHub OIDC. SLSA Source Level 1 is also asserted: version-controlled and change-managed. See [`docs/security/slsa-attestation.md`](../security/slsa-attestation.md). Source Level 2 with signed commits is documented and deferred pending explicit team decision.
 - **Reference customer case study** — gtcx-core is consumed by 6 internal repos; first external case study lands after Sprint 4 sandbox engagement
 
 ---
@@ -191,7 +195,7 @@ This portal is the entry point. The artifacts it points to are the source of tru
 | [SECURITY.md](../../SECURITY.md)                                            | Public disclosure policy                |
 | [SECURITY-INCIDENT.md](../../SECURITY-INCIDENT.md)                          | Internal response runbook               |
 | [Governance](../agents/governance/README.md)                                | Dual-AI CODEOWNER pattern               |
-| [Repo bootstrap](../ops/repo-bootstrap.md)                                  | Live operational prerequisites          |
+| [Repo bootstrap](../operations/repo-bootstrap.md)                           | Live operational prerequisites          |
 | [GTM evidence pack](../gtm/)                                                | Sandbox-regulator-specific materials    |
 | [Full audit](../audit/full-audit-2026-05-09.md)                             | Six-phase audit, score 9.8/10           |
 

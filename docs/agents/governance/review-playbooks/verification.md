@@ -1,5 +1,9 @@
 # Verification Review Playbook
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Version:** 1.0.0
 **Applies to:** `packages/verification/`, `packages/workproof/`
 **Owner role:** `docs/agents/roles/crypto-security-engineer.md`

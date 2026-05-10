@@ -1,10 +1,14 @@
 # SLSA Build Level 3 Attestation
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Cryptographic Security Engineer
+
 **Standard:** [SLSA v1.0 Build Track](https://slsa.dev/spec/v1.0/levels#build-track)
 **Level claimed:** Build Level 3
 **Assessment date:** 2026-05-10
 **Owner:** Cryptographic Security Engineer (`docs/agents/roles/crypto-security-engineer.md`)
-**Cross-references:** [Trust Portal](../trust/README.md), [SOC 2 Readiness](../compliance/soc2-readiness.md)
+**Cross-references:** [Trust Portal](../governance/trust-portal.md), [SOC 2 Readiness](../compliance/soc2-readiness.md)
 
 ---
 
@@ -39,7 +43,7 @@ To be honest about scope:
 - **SLSA Source Track Level 1 — claimed** (version-controlled, change-managed, retained). See § SLSA Source Track below for full mapping.
 - **SLSA Source Track Level 2** — not yet claimed. Path is documented; deferred pending explicit team decision on commit-signing enforcement.
 - **SLSA L4** — deprecated in v1.0. Not applicable.
-- **Reproducible builds across all packages** — `@gtcx/utils` reproduces bit-for-bit; packages with `workspace:*` deps fail due to upstream pnpm pack ordering bug. Documented in [`tools/check-reproducible-build.mjs`](../../tools/check-reproducible-build.mjs). Build Level 3 does NOT require reproducibility — that's a separate property tracked under "build hermeticity."
+- **Reproducible builds across all packages** — `@gtcx/utils` reproduces bit-for-bit; packages with `workspace:*` deps fail due to upstream pnpm pack ordering bug. Documented in [`tools/check-reproducible-build.mjs`](../../tools/check-reproducible-build.mjs). Build Level 3 does NOT require reproducibility. It is tracked separately under build hermeticity.
 
 ---
 
@@ -80,12 +84,12 @@ If verification succeeds, the consumer has cryptographic proof that:
 
 ## Attestation lifecycle
 
-| Phase            | Action                                                                                                                                                                                        | Owner                 |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| **Generation**   | Every `pnpm release` invocation produces signed provenance via npm sigstore                                                                                                                   | GitHub Actions runner |
-| **Storage**      | Provenance is stored at npm registry alongside the package tarball                                                                                                                            | npm                   |
-| **Verification** | Consumers run `slsa-verifier` against the published package                                                                                                                                   | Consumer / auditor    |
-| **Revocation**   | Compromised attestations are addressed via [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md) Phase 5 (Coordinated Disclosure) — typically by yanking the affected version and republishing | Incident commander    |
+| Phase            | Action                                                                                                                                                                                               | Owner                 |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| **Generation**   | Every `pnpm release` invocation produces signed provenance via npm sigstore                                                                                                                          | GitHub Actions runner |
+| **Storage**      | Provenance is stored at npm registry alongside the package tarball                                                                                                                                   | npm                   |
+| **Verification** | Consumers run `slsa-verifier` against the published package                                                                                                                                          | Consumer / auditor    |
+| **Revocation**   | Compromised attestations are addressed via [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md), Phase 5: Coordinated Disclosure. Typical response is yanking the affected version and republishing. | Incident commander    |
 
 ---
 
@@ -93,11 +97,11 @@ If verification succeeds, the consumer has cryptographic proof that:
 
 The SLSA assertion sits on top of the existing supply-chain controls:
 
-- **Provenance manifest** ([`tools/generate-provenance-manifest.mjs`](../../tools/generate-provenance-manifest.mjs)) — internal manifest written to `artifacts/provenance-manifest.json`. Captures source SHA, build config, dependency snapshot.
+- **Provenance manifest** — see [`tools/generate-provenance-manifest.mjs`](../../tools/generate-provenance-manifest.mjs). The internal manifest is written to `artifacts/provenance-manifest.json` and captures source SHA, build config, and dependency snapshot.
 - **SBOM (CycloneDX)** — generated by Trivy on every CI build at `quality/release-evidence/`.
-- **Crypto deps content-hash allowlist** ([`tools/check-crypto-deps.mjs`](../../tools/check-crypto-deps.mjs)) — independent supply-chain check that complements SLSA's "provenance includes dependencies" property.
-- **Reproducible build verifier** ([`tools/check-reproducible-build.mjs`](../../tools/check-reproducible-build.mjs)) — independent check that complements SLSA's hermeticity ambitions (separate from Build Level 3 requirements).
-- **AI CODEOWNER review log** (`quality/ai-review-log/` — populated by [`gtcx-codeowner-action`](../../.github/scripts/codeowner-review/)) — independent change-management evidence that maps to SLSA Source Track ambitions even though we don't formally claim a Source Level.
+- **Crypto deps content-hash allowlist** — see [`tools/check-crypto-deps.mjs`](../../tools/check-crypto-deps.mjs). This independent supply-chain check complements SLSA's provenance coverage.
+- **Reproducible build verifier** — see [`tools/check-reproducible-build.mjs`](../../tools/check-reproducible-build.mjs). This independent check complements SLSA's hermeticity ambitions and is separate from Build Level 3 requirements.
+- **AI CODEOWNER review log** — `quality/ai-review-log/` is populated by [`gtcx-codeowner-action`](../../.github/scripts/codeowner-review/). It provides independent change-management evidence even though no formal Source Level claim depends on it.
 
 Each layer is independently verifiable. SLSA L3 is the build-process assertion; the others extend it.
 
@@ -166,7 +170,7 @@ Out of scope. Source Level 3 requires "verified history with a tamper-evident lo
 
 ## Cross-references
 
-- [Trust Portal](../trust/README.md) — section "Supply chain integrity"
+- [Trust Portal](../governance/trust-portal.md) — section "Supply chain integrity"
 - [SOC 2 Readiness](../compliance/soc2-readiness.md) — CC8.1 Change Management mapping
 - [SECURITY-INCIDENT.md](../../SECURITY-INCIDENT.md) — Phase 5 coordinated disclosure
 - [SLSA v1.0 Build Track spec](https://slsa.dev/spec/v1.0/levels#build-track)

@@ -1,5 +1,9 @@
 # Target Markets — Sandbox Strategy
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Priority order:** Zimbabwe, Namibia, Zambia, DRC, Ghana
 
 ---
@@ -22,7 +26,7 @@
 
 These countries have established or emerging sandbox programs. The playbook:
 
-1. **Pre-submission meeting** with the sandbox team (see [05-sandbox-submission-guide.md](./05-sandbox-submission-guide.md))
+1. **Pre-submission meeting** with the sandbox team. See [05-sandbox-submission-guide.md](./05-sandbox-submission-guide.md).
 2. **Application** with GTM evidence pack
 3. **Sandbox period** (typically 6-12 months)
 4. **Graduation** to full authorization

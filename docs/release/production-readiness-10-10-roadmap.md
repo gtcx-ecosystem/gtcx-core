@@ -1,5 +1,9 @@
 # Production Readiness 10/10 Roadmap
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Last reviewed:** 2026-05-09
 **Current score:** 9.8/10 total production assurance
 **Target score:** 10/10 production readiness

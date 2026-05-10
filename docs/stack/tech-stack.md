@@ -1,5 +1,9 @@
 # Technology Stack — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 `gtcx-core` is a monorepo of shared cryptographic primitives, protocol types, and infrastructure packages consumed by all GTCX product repos. It is not a service — it is a library.
 
 **Last reviewed:** 2026-05-06

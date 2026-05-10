@@ -1,5 +1,9 @@
 # Guide: ADRs vs System Design
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 When to use an ADR versus a system design document.
 
 ## Use an ADR When

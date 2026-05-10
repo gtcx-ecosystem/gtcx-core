@@ -1,5 +1,9 @@
 # Task Playbook: Add a Secondary-Language Component
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Owner:** Frontier Infrastructure Engineer or Cryptographic Security Engineer (depending on crate type)
 **Safety tier:** Requires human approval before proceeding
 

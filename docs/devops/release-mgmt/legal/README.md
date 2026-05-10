@@ -17,5 +17,5 @@ Terms of service, privacy policy, and data processing agreements.
 
 ## What does NOT belong here
 
-- Compliance requirements (→ `../../compliance/`)
-- Security policies (→ `../../security/`)
+- Compliance requirements. See `../../compliance/`.
+- Security policies. See `../../security/`.

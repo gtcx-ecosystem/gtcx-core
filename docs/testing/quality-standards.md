@@ -1,5 +1,9 @@
 # Quality Standards — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 The enterprise quality standard for `gtcx-core`. Authoritative source for required CI gates, evidence requirements, and audit cadence.
 
 ---

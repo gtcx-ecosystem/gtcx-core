@@ -1,5 +1,9 @@
 # gtcx-core v1.0.x GA Release Checklist
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Last reviewed:** 2026-05-06
 
 **Owner**: Core Platform

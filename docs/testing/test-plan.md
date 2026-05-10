@@ -1,5 +1,9 @@
 # gtcx-core Test Plan
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Document ID**: GTCX-CORE-TEST-PLAN
 **Version**: 1.0
 **Date**: 2026-05-06

@@ -1,5 +1,9 @@
 # API Change Migration Policy
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Use this policy whenever a public export changes in `gtcx-core`.
 
 ---

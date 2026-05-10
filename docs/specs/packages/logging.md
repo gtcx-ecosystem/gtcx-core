@@ -1,5 +1,9 @@
 # Package Spec — `@gtcx/logging`
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Classification:** Standard — changes follow normal PR review process.
 
 ---
@@ -116,5 +120,5 @@ Never log private keys, tokens, or raw credential material. This package has no 
 
 ## Reference
 
-- [`docs/specs/packages/ai.md`](./ai.md) — AI-native traced operations (higher-level observability)
+- [`docs/specs/packages/ai.md`](./ai.md) — AI-native traced operations for higher-level observability
 - [`docs/specs/core-spec.md`](../core-spec.md) — system overview

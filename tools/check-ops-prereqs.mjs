@@ -22,7 +22,7 @@
  *   - remediate() returns a string with the exact fix command + UI fallback
  *
  * Adding a new check: extend the CHECKS array. The doc table at
- * docs/ops/repo-bootstrap.md is generated from the same array (run
+ * docs/operations/repo-bootstrap.md is generated from the same array (run
  * `node tools/check-ops-prereqs.mjs --emit-doc` to regenerate it).
  */
 
@@ -210,7 +210,7 @@ const CHECKS = [
       `UI: https://github.com/${REPO}/settings/branches\n` +
       `  Required: code owner review, status checks (CI workflows), no force push, no deletion\n` +
       `  CLI: gh api repos/${REPO}/branches/main/protection -X PUT --input - <<EOF\n` +
-      `       (see docs/ops/repo-bootstrap.md for a templated payload)`,
+      `       (see docs/operations/repo-bootstrap.md for a templated payload)`,
   },
   {
     id: 'branch-protection-codeowner-review',
@@ -311,7 +311,7 @@ async function emitDoc() {
   lines.push('');
   lines.push('Refresh: `gh auth refresh -s repo,admin:org`');
 
-  const docPath = path.join(process.cwd(), 'docs/ops/repo-bootstrap.md');
+  const docPath = path.join(process.cwd(), 'docs/operations/repo-bootstrap.md');
   fs.mkdirSync(path.dirname(docPath), { recursive: true });
   fs.writeFileSync(docPath, lines.join('\n') + '\n');
   console.log(`Wrote ${docPath}`);

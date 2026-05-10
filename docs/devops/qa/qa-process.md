@@ -1,5 +1,9 @@
 # Quality Assurance — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Owner**: Quality & Evidence Lead
 **Review Cycle**: Quarterly or after major release process changes
 

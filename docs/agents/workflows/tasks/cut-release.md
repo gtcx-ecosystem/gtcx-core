@@ -1,5 +1,9 @@
 # Task Playbook: Cut a Release
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Owner:** Quality & Evidence Lead (gates + evidence) + Protocol Architect (version decision)
 **Safety tier:** Requires human approval before publishing
 

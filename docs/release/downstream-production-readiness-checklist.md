@@ -1,5 +1,9 @@
 # Downstream Production-Readiness Checklist
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Use this before adopting a `gtcx-core` release in a production downstream system.
 
 ---

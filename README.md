@@ -163,7 +163,7 @@ core/
 | Document                                                             | Description                                       |
 | -------------------------------------------------------------------- | ------------------------------------------------- |
 | [Documentation](./docs/README.md)                                    | Full documentation and operations hub             |
-| [Trust Portal](./docs/trust/README.md)                               | Evidence index for vendor risk teams + regulators |
+| [Trust Portal](./docs/governance/trust-portal.md)                    | Evidence index for vendor risk teams + regulators |
 | [Orientation](./docs/agents/onboarding/orientation.md)               | Start here — codebase map and session protocol    |
 | [Safety Rules](./docs/agents/workflows/safety-rules.md)              | What requires human approval                      |
 | [Architecture Overview](./docs/architecture/overview.md)             | Layer map, trust boundaries, package graph        |

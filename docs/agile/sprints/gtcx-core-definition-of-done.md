@@ -1,5 +1,9 @@
 # Definition of Done — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Quality criteria that must be satisfied before any work item in `gtcx-core` is considered complete.
 
 ---

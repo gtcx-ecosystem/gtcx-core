@@ -1,5 +1,9 @@
 # Task Playbook: Security Fix
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Owner:** Cryptographic Security Engineer posture + package owner  
 **Safety tier:** Requires human review before merge
 

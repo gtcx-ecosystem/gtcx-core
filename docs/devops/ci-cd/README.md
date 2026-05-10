@@ -17,6 +17,6 @@ For deployment architecture, see [`docs/deployment/deployment.md`](../../deploym
 
 ## What does NOT belong here
 
-- Environment topology (see `../environments/`)
-- Incident response runbooks (see `../runbooks/`)
-- QA sign-off criteria (see `../qa/`)
+- Environment topology. See `../environments/`.
+- Incident response runbooks. See `../runbooks/`.
+- QA sign-off criteria. See `../qa/`.

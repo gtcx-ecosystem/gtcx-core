@@ -1,5 +1,9 @@
 # GA Release Evidence Log
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Track every completed release gate with a dated evidence entry. One row per evidence artifact. Append rows as gates are satisfied — do not edit prior rows.
 
 | Date       | Gate                               | Evidence                                                                      | Summary                                                                                            | Owner         |

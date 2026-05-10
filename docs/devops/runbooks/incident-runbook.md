@@ -1,5 +1,9 @@
 # Incident Response Runbook — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Procedures for handling security incidents, broken releases, and critical bugs in published `@gtcx/*` npm packages.
 
 ---

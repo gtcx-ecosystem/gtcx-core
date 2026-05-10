@@ -1,5 +1,9 @@
 # License Compliance — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Per-release audit of all open-source dependencies in `@gtcx/*` packages and `gtcx-*` crates.
 
 ---

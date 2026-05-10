@@ -1,5 +1,9 @@
 # Safety Rules — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 What agents and contributors may do autonomously vs. what requires explicit human authorization.
 
 **Last reviewed:** 2026-05-06

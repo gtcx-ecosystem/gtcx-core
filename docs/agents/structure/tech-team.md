@@ -1,5 +1,9 @@
 # Agent Team — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 The four-role agentic team responsible for `gtcx-core`. All roles are instantiated from `1-agentic/archetypes/` and scoped to this repo.
 
 **Last reviewed:** 2026-05-06

@@ -1,5 +1,9 @@
 # Guide: Identifying Roles That Should Be Added
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 How to systematically audit an organization's role coverage and identify gaps that need new role definitions.
 
 ---

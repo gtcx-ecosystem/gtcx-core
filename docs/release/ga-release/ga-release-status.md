@@ -1,5 +1,9 @@
 # GA Release Readiness Tracker
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Last reviewed:** 2026-05-09
 
 **Release**: gtcx-core v1.0.x

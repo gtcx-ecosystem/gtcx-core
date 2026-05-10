@@ -1,5 +1,9 @@
 # Development Environment — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 `gtcx-core` is a package library. There are no servers, staging environments, or production deployments. "Environments" means: local developer workstations and the GitHub Actions CI environment.
 
 ---

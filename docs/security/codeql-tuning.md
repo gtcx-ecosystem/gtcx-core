@@ -1,5 +1,9 @@
 # CodeQL Tuning
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Cryptographic Security Engineer
+
 **Last updated:** 2026-05-06
 
 ## Purpose

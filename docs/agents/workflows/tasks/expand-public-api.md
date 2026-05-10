@@ -1,5 +1,9 @@
 # Task Playbook: Expand a Public API
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Owner:** Protocol Architect posture + package owner  
 **Safety tier:** Requires human review when API surface changes
 

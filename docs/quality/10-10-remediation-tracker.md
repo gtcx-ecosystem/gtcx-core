@@ -1,5 +1,9 @@
 # 10/10 Remediation Tracker
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Last reviewed:** 2026-05-06
 **Scope:** `gtcx-core` library production assurance
 **Owner:** Core Platform

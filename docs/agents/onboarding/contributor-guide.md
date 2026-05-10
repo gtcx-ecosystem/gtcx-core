@@ -1,5 +1,9 @@
 # Contributor Guide — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 ---
 
 ## Getting Started

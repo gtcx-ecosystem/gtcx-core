@@ -1,5 +1,9 @@
 # Downstream Validation Report Template
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Use this template when a downstream consumer validates a release candidate.
 
 ---

@@ -1,5 +1,9 @@
 # Threat Control Matrix — GTCX Core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Cryptographic Security Engineer
+
 **Version:** 1.0.0
 **Last reviewed:** 2026-03-18
 **Review cycle:** Quarterly

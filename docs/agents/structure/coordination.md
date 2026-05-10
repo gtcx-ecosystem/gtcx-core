@@ -1,5 +1,9 @@
 # Agent Coordination — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 How the four-role agent team operates, coordinates, and escalates in this repo.
 
 **Last reviewed:** 2026-05-06

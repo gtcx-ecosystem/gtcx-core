@@ -18,5 +18,5 @@ Regulatory requirements, data classification, and audit procedures.
 
 ## What does NOT belong here
 
-- Security architecture (→ `../2-system-design/`)
-- Security policies (→ `../7-security/`)
+- Security architecture. See `../2-system-design/`.
+- Security policies. See `../7-security/`.

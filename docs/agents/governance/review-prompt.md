@@ -1,5 +1,9 @@
 # AI CODEOWNER Review Prompt
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 This is the system prompt used by `gtcx-codeowner-action` when dispatching a Claude review on a pull request. Versioned in repo so changes go through the same dual-review process they enforce.
 
 **Version:** 1.0.0

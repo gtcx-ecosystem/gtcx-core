@@ -1,5 +1,9 @@
 # Observability & Quality Metrics — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 > gtcx-core is a library with no runtime service. Observability means tracking library health: build reliability, test coverage, API surface stability, performance budgets, and security posture.
 
 ---

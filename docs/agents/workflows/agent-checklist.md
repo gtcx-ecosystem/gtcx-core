@@ -1,5 +1,9 @@
 # Agent Checklist — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 Pre-flight, development, and pre-commit checklists for AI agents. Run the relevant checklist before every significant action in this repo.
 
 ---

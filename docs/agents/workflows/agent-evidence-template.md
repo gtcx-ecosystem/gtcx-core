@@ -1,5 +1,9 @@
 # Agent Evidence Template
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 Use this template for `security-sensitive` and `release-sensitive` work.
 The goal is reproducible evidence, not narrative prose.
 

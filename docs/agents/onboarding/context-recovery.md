@@ -1,5 +1,9 @@
 # Agent Context Recovery — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 How to recover agent context across sessions, prevent drift, and maintain continuity in a codebase where breaking changes propagate to every downstream repo.
 
 **Last reviewed:** 2026-05-06

@@ -1,5 +1,9 @@
 # Task Playbook: Write an ADR
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Owner:** Protocol Architect
 **Safety tier:** Autonomous (propose) / Requires approval (accept)
 
@@ -67,7 +71,7 @@ Use `docs/decisions/template.md` exactly. Fill every section:
 Add the new ADR to `docs/decisions/README.md`:
 
 ```markdown
-| [ADR-NNN](./NNN-title.md) | Brief description | Proposed |
+| `ADR-NNN` at `./NNN-title.md` | Brief description | Proposed |
 ```
 
 ---
@@ -77,7 +81,7 @@ Add the new ADR to `docs/decisions/README.md`:
 Update the superseded ADR's status field:
 
 ```markdown
-**Status**: Superseded by [ADR-NNN](./NNN-title.md)
+**Status**: Superseded by `ADR-NNN` at `./NNN-title.md`
 ```
 
 Add the superseded ADR to the new ADR's References section.

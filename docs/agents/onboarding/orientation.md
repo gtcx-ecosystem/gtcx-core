@@ -1,5 +1,9 @@
 # Codebase Orientation — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 Session-start protocol for any agent or contributor entering this repo.
 
 ---

@@ -1,5 +1,9 @@
 # AI Integration Seam — gtcx-core ↔ gtcx-intelligence
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 How the AI observability stub in gtcx-core connects to the full AI implementation in gtcx-intelligence.
 
 ---

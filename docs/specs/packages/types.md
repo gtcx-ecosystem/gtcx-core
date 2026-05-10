@@ -1,5 +1,9 @@
 # Package Spec — `@gtcx/types`
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Classification:** Standard — changes follow normal PR review process. API surface changes require Protocol Architect review because removed or renamed types can break every downstream consumer.
 
 ---
@@ -60,5 +64,5 @@ All type removals or renames require Protocol Architect approval and an updated 
 
 ## Reference
 
-- [`docs/specs/core-spec.md`](../core-spec.md) — dependency rules (all packages may depend on `@gtcx/types`)
+- [`docs/specs/core-spec.md`](../core-spec.md) — dependency rules; all packages may depend on `@gtcx/types`
 - [`docs/devops/runbooks/quality-runbook.md`](../../devops/runbooks/quality-runbook.md) — API surface gate

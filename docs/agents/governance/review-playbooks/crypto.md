@@ -1,5 +1,9 @@
 # Crypto Review Playbook
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Version:** 1.0.0
 **Applies to:** `packages/crypto/`, `packages/crypto-native/`, `rust/gtcx-crypto/`, `rust/gtcx-zkp/`
 **Owner role:** `docs/agents/roles/crypto-security-engineer.md`

@@ -1,5 +1,9 @@
 # Task Playbook: Investigate a CI Failure
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Owner:** Quality & Evidence Lead (triage) + relevant role (fix)
 **Safety tier:** Autonomous (investigation) / role-dependent (fix)
 

@@ -1,5 +1,9 @@
 # gtcx-core Roadmap
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Status**: Sprints 0–6 complete. Repo in active development for Phases 4–7 cryptographic systems.
 **Objective**: Production-ready protocol core for global south deployment — offline-first, government-grade identity, financial market infrastructure reliability.
 

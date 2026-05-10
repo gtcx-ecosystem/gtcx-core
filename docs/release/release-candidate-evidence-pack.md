@@ -1,5 +1,9 @@
 # Release-Candidate Evidence Pack
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 **Last reviewed:** 2026-05-06
 
 Use this file to assemble real release-candidate evidence before final signoff. Do not mark an item complete from intent or configuration alone; attach the actual command output, workflow run, or artifact path.

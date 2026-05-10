@@ -1,5 +1,9 @@
 # System Architecture Overview — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 The canonical high-level view of the `gtcx-core` architecture. Read this before making any cross-package or structural change.
 
 ---

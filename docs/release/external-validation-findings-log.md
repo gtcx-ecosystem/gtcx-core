@@ -1,5 +1,9 @@
 # External Validation Findings Log
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Use this file to record the actual external review or pen-test output for a release.
 
 ---

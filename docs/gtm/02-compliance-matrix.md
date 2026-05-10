@@ -1,5 +1,9 @@
 # Compliance Matrix — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **One view across all applicable frameworks.**
 
 ---
@@ -8,13 +12,13 @@
 
 | Framework         | Applicable?     | Rationale                                                    | Document                                                               |
 | ----------------- | --------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| **ISO 27001**     | Yes (partial)   | Cryptographic controls, access management, change management | [compliance-requirements.md](../compliance/compliance-requirements.md) |
-| **SOC 2 Type II** | Yes (partial)   | Security (CC6), Processing Integrity (CC8)                   | [soc2-evidence-pipeline.md](../compliance/soc2-evidence-pipeline.md)   |
-| **GDPR**          | No (zero PII)   | Library processes no personal data                           | [gdpr-assessment.md](../compliance/gdpr-assessment.md)                 |
-| **PCI-DSS**       | No (zero CHD)   | Library does not process cardholder data                     | [pci-dss-scope.md](../compliance/pci-dss-scope.md)                     |
-| **SOX**           | Yes (ITGCs)     | Change management controls for downstream financial systems  | [sox-controls.md](../compliance/sox-controls.md)                       |
-| **FIPS 140-3**    | Yes (inherited) | Cryptographic module validation via OpenSSL/aws-lc-rs        | [fips-validation-boundary.md](../security/fips-validation-boundary.md) |
-| **NIST 800-53**   | Yes (partial)   | Security control families mapped                             | [nist-800-53-mapping.md](../security/nist-800-53-mapping.md)           |
+| **ISO 27001**     | Yes — partial   | Cryptographic controls, access management, change management | [compliance-requirements.md](../compliance/compliance-requirements.md) |
+| **SOC 2 Type II** | Yes — partial   | Security CC6 and Processing Integrity CC8                    | [soc2-evidence-pipeline.md](../compliance/soc2-evidence-pipeline.md)   |
+| **GDPR**          | No — zero PII   | Library processes no personal data                           | [gdpr-assessment.md](../compliance/gdpr-assessment.md)                 |
+| **PCI-DSS**       | No — zero CHD   | Library does not process cardholder data                     | [pci-dss-scope.md](../compliance/pci-dss-scope.md)                     |
+| **SOX**           | Yes — ITGCs     | Change management controls for downstream financial systems  | [sox-controls.md](../compliance/sox-controls.md)                       |
+| **FIPS 140-3**    | Yes — inherited | Cryptographic module validation via OpenSSL and aws-lc-rs    | [fips-validation-boundary.md](../security/fips-validation-boundary.md) |
+| **NIST 800-53**   | Yes — partial   | Security control families mapped                             | [nist-800-53-mapping.md](../security/nist-800-53-mapping.md)           |
 
 ---
 

@@ -1,5 +1,9 @@
 # CI/CD Pipeline — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 CI/CD expectations and workflow for `gtcx-core`. Every change to this repo runs through these gates before it reaches `main`.
 
 ---

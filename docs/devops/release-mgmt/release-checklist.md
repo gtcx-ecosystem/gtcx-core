@@ -1,5 +1,9 @@
 # Release Checklist — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 Complete this checklist for every release. All items must be checked before publishing. Gate execution is documented in the quality runbook.
 
 ---

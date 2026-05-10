@@ -1,5 +1,9 @@
 # Quick Reference — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 > One-page orientation. Start here, then follow the links.
 
 **Last reviewed:** 2026-05-06

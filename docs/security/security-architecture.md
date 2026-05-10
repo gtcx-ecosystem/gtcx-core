@@ -1,5 +1,9 @@
 # Security Architecture — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Cryptographic Security Engineer
+
 **Security level:** Critical
 **Compliance requirements:** Internal GTCX security framework (P1 Proof, P2 Private, P4 Immutable, P11 Secure)
 **Risk tolerance:** Zero for cryptographic correctness; Low for operational controls

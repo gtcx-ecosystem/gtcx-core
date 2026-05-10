@@ -1,5 +1,9 @@
 # Security Posture — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Summary:** No critical vulnerabilities. Three medium-risk items under active management. Defense-in-depth across 6 automated analysis methods.
 
 ---

@@ -1,5 +1,9 @@
 # Legal Sign-Off — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 _Standard legal sign-off for consumer product launches (Terms of Service, Privacy Policy, GA gates) does not apply to `gtcx-core`. This repo is a shared primitives library — it has no end users, no user-facing terms, and no product GA process._
 
 ---

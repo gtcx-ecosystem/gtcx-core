@@ -1,5 +1,9 @@
 # Integration Guide — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 How to use the core packages together to build a complete verification pipeline.
 
 This guide walks through the primary flow: key generation, identity creation, certificate issuance, proof bundling, and QR code generation. It mirrors the integration test at `tests/integration/full-pipeline.test.ts`.

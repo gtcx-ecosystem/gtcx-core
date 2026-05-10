@@ -1,9 +1,13 @@
 # PKCS#11 KeyStore
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Cryptographic Security Engineer
+
 **Module:** `gtcx_crypto::pkcs11_keystore`
 **Feature flag:** `pkcs11` (in `rust/gtcx-crypto/Cargo.toml`)
 **Closes:** AT-004 (audit) / external Medium #1 (procurement assessment)
-**Cross-references:** [Trust Portal](../trust/README.md), [Key Ceremony](./key-ceremony.md), [FIPS Validation Boundary](./fips-validation-boundary.md)
+**Cross-references:** [Trust Portal](../governance/trust-portal.md), [Key Ceremony](./key-ceremony.md), [FIPS Validation Boundary](./fips-validation-boundary.md)
 
 ---
 
@@ -212,7 +216,7 @@ A vendor risk team or sandbox regulator can confirm the implementation as follow
 - [`rust/gtcx-crypto/src/pkcs11_keystore.rs`](../../rust/gtcx-crypto/src/pkcs11_keystore.rs) — this module's source
 - [Key Ceremony](./key-ceremony.md) — NIST SP 800-57 lifecycle context
 - [FIPS Validation Boundary](./fips-validation-boundary.md) — relationship between the FIPS provider and HSM-backed keys
-- [Trust Portal](../trust/README.md) — section "Cryptographic correctness"
+- [Trust Portal](../governance/trust-portal.md) — section "Cryptographic correctness"
 
 ## Changelog
 

@@ -1,5 +1,9 @@
 # Developer Quickstart — gtcx-core
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 Get a working local build and complete your first integration workflow.
 
 **Last reviewed:** 2026-05-06

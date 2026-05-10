@@ -1,5 +1,9 @@
 # Engagement Brief — Democratic Republic of Congo
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **Approach:** Direct engagement (no formal sandbox program)
 **Entry point:** Ministry of Mines + international traceability partners
 **Primary commodity:** 3TG minerals (tin, tantalum, tungsten, gold)

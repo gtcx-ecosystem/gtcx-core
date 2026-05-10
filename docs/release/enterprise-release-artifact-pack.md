@@ -1,5 +1,9 @@
 # Enterprise Release Artifact Pack
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Quality & Evidence Lead
+
 This is the standard release evidence pack for security-conscious downstream teams and auditors.
 
 ---

@@ -26,7 +26,7 @@ Security policies, threat models, and vulnerability management.
 
 ## What does NOT belong here
 
-- **Authentication architecture** — Auth flows, token strategies, identity provider design (→ `../2-system-design/`)
-- **Compliance requirements** — Regulatory frameworks, audit evidence, certification tracking (→ `../5-compliance/`)
+- **Authentication architecture** — Auth flows, token strategies, and identity provider design. See `../2-system-design/`.
+- **Compliance requirements** — Regulatory frameworks, audit evidence, and certification tracking. See `../5-compliance/`.
 
 ---

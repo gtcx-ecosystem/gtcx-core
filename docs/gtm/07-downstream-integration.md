@@ -1,5 +1,9 @@
 # Downstream Integration Guide
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 **For teams consuming gtcx-core in their products.**
 
 ---

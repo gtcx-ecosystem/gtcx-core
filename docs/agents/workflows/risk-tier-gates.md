@@ -1,5 +1,9 @@
 # Risk Tier Gates
 
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
 This doc explains how to use [quality/package-risk-tiers.json](../../../quality/package-risk-tiers.json) during development and review.
 
 ---
