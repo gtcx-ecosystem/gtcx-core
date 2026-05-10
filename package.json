@@ -34,6 +34,7 @@
     "ops:check": "node ./tools/check-ops-prereqs.mjs",
     "ops:check:json": "node ./tools/check-ops-prereqs.mjs --json",
     "ops:emit-doc": "node ./tools/check-ops-prereqs.mjs --emit-doc",
+    "build:reproducible": "node ./tools/check-reproducible-build.mjs",
     "perf:capture-latest": "node ./tools/capture-benchmark-results.mjs",
     "perf:update-history": "node ./tools/update-benchmark-history.mjs",
     "perf:check-budgets": "node ./tools/check-performance-budgets.mjs",
