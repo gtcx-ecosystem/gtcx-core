@@ -88,15 +88,27 @@ The `SessionPin` newtype wraps `cryptoki::types::AuthPin`, which zeroizes on dro
 
 ## State tracking
 
-NIST SP 800-57 lifecycle states (Created, Active, Rotated, Revoked, Destroyed) are tracked **in process memory** alongside PKCS#11 object handles. This is a v1 simplification.
+NIST SP 800-57 lifecycle states (Created, Active, Rotated, Revoked, Destroyed) are tracked through the `KeyStateStore` trait (in `pkcs11_state.rs`). Two implementations ship out of the box:
 
-For production HSM deployments:
+- **`MemoryKeyStateStore`** (default) — in-process `HashMap`. State is lost on process restart. Used by `Pkcs11KeyStore::new()` when no explicit store is provided.
+- **`FileSystemKeyStateStore`** — JSON file persistence. State survives process restarts. Use `Pkcs11KeyStore::with_state_store(module, slot, pin, Arc::new(FileSystemKeyStateStore::open(path)?))`.
 
-- State should persist externally (metadata DB, Redis, etc.) so it survives process restarts
-- The HSM itself does not have a per-key lifecycle state model in PKCS#11 v3
-- A persistent-state implementation should layer on top of the existing `KeyStore` trait — the contract is unchanged
+The HSM itself does not have a per-key lifecycle state model in PKCS#11 v3 — the state machine is a gtcx-core abstraction layered on top.
 
-This is a documented Sprint 5+ extension; the v1 in-process tracking is sufficient for short-running deployments and for testing the trait surface end-to-end.
+```rust
+use std::sync::Arc;
+use gtcx_crypto::pkcs11_keystore::{Pkcs11KeyStore, SessionPin};
+use gtcx_crypto::pkcs11_state::FileSystemKeyStateStore;
+
+let state_store = Arc::new(FileSystemKeyStateStore::open("/var/lib/gtcx/keystate.json")?);
+let store = Pkcs11KeyStore::with_state_store(module, slot, &pin, state_store)?;
+```
+
+### Restart-safety scope
+
+`KeyStateStore` persists **lifecycle state**. PKCS#11 object handles are session-scoped and CANNOT be persisted — restart-safe operation against a real HSM additionally requires CKA_ID-paired key generation so handles can be re-resolved by attribute lookup after restart. That is documented as a separate hardening pass below (#1) and remains Sprint 5+ work.
+
+In practice: with `FileSystemKeyStateStore`, a process restart preserves "key X is in state Active" but the in-process handle map is empty after restart. The next sign call will fail with `KeyNotFound` until handles are re-resolved by CKA_ID. The state-persistence primitive is shippable today; the full restart-safety story requires both layers.
 
 ---
 
@@ -170,7 +182,7 @@ This wiring is documented but not yet active in `.github/workflows/ci.yml` — g
 
 1. **CKA_ID-paired generation** — set the same `CKA_ID` attribute on the public/private pair at generation time so we can re-find the public key after session restart. v1 keeps the public handle in the same process-memory registry as the private handle, which works for short-running deployments but loses the link across process restarts.
 
-2. **Persistent state** — externalize the `KeyState` registry to a database so lifecycle survives restarts. Required before the keystore can back a long-running production service.
+2. ~~**Persistent state**~~ — **DONE.** `KeyStateStore` trait + `FileSystemKeyStateStore` implementation ship in `rust/gtcx-crypto/src/pkcs11_state.rs`. Database-backed implementations (Postgres, Redis) are straightforward to add against the same trait — left to the consumer.
 
 3. **Multi-slot pooling** — accept a `Vec<Slot>` and round-robin across them for higher throughput against a clustered HSM.
 

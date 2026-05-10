@@ -48,6 +48,11 @@ aws-lc-rs = { version = "1.10", optional = true }
 # docs/security/pkcs11-keystore.md for the design + integration guide.
 cryptoki = { version = "0.10", optional = true }
 
+# JSON serialization for FileSystemKeyStateStore (PKCS#11 state persistence).
+# Enabled alongside cryptoki so the file-backed lifecycle store works
+# without callers needing to add the dep themselves.
+serde_json = { workspace = true, optional = true }
+
 [dev-dependencies]
 proptest = { workspace = true }
 criterion = { workspace = true }
@@ -80,4 +85,4 @@ fips = ["dep:aws-lc-rs"]
 # hardware HSM). Private keys never leave the HSM boundary. Closes AT-004
 # / external Medium #1 — gtcx-core ships a hardware-backed keystore
 # alongside the existing MemoryKeyStore.
-pkcs11 = ["dep:cryptoki"]
+pkcs11 = ["dep:cryptoki", "dep:serde_json"]

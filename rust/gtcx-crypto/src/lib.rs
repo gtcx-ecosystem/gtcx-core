@@ -76,6 +76,8 @@ pub mod keys;
 pub mod keystore;
 #[cfg(feature = "pkcs11")]
 pub mod pkcs11_keystore;
+#[cfg(feature = "pkcs11")]
+pub mod pkcs11_state;
 pub mod provider;
 pub mod signing;
 

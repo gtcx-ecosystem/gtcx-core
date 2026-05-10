@@ -66,6 +66,7 @@ use cryptoki::types::AuthPin;
 
 use crate::error::CryptoError;
 use crate::keystore::{Algorithm, KeyId, KeyState, KeyStore};
+use crate::pkcs11_state::{KeyStateStore, MemoryKeyStateStore};
 use crate::Result;
 
 /// PIN supplied to a PKCS#11 token at session login.
@@ -82,32 +83,38 @@ impl SessionPin {
     }
 }
 
-/// Per-key entry in the in-process registry.
+/// Per-key entry in the in-process handle registry.
 ///
 /// PKCS#11 object handles are session-scoped opaque values; the `cryptoki`
 /// crate intentionally does not expose construction so a handle leaked
-/// outside its session can't accidentally collide. We hold the handle here
-/// alongside the lifecycle state.
+/// outside its session can't accidentally collide. Lifecycle state is
+/// tracked separately in the configured `KeyStateStore` (potentially
+/// persistent).
 struct KeyEntry {
     private_handle: ObjectHandle,
     public_handle: ObjectHandle,
-    state: KeyState,
 }
 
 /// PKCS#11-backed `KeyStore` implementation.
 pub struct Pkcs11KeyStore {
     session: Arc<Mutex<Session>>,
-    /// String-keyed registry. KeyId values are minted as `pkcs11:<n>` where
-    /// `<n>` is a monotonic counter — distinguishable from
-    /// `MemoryKeyStore`'s `mem-key-N` format.
+    /// String-keyed handle registry. KeyId values are minted as
+    /// `pkcs11:<n>` where `<n>` is a monotonic counter — distinguishable
+    /// from `MemoryKeyStore`'s `mem-key-N` format. ObjectHandles are
+    /// session-scoped and not persistable.
     keys: Arc<Mutex<HashMap<String, KeyEntry>>>,
+    /// Pluggable state-tracking layer. Default is `MemoryKeyStateStore`
+    /// (in-process); production deployments inject `FileSystemKeyStateStore`
+    /// or a database-backed implementation for restart-safe lifecycle.
+    state_store: Arc<dyn KeyStateStore>,
     counter: Arc<Mutex<u64>>,
     _module: Arc<Pkcs11>,
 }
 
 impl Pkcs11KeyStore {
-    /// Create a new PKCS#11 keystore. Opens an authenticated R/W session
-    /// against the given slot using the supplied PIN.
+    /// Create a new PKCS#11 keystore with default (in-memory) state tracking.
+    /// Opens an authenticated R/W session against the given slot using the
+    /// supplied PIN.
     ///
     /// # Errors
     ///
@@ -116,6 +123,26 @@ impl Pkcs11KeyStore {
     /// - Session opening fails (token not present, hardware unavailable)
     /// - Login fails (wrong PIN, locked token, hardware fault)
     pub fn new(module: Arc<Pkcs11>, slot: Slot, pin: &SessionPin) -> Result<Self> {
+        Self::with_state_store(module, slot, pin, Arc::new(MemoryKeyStateStore::new()))
+    }
+
+    /// Create a new PKCS#11 keystore backed by a caller-supplied state store.
+    ///
+    /// Production deployments should pass a `FileSystemKeyStateStore` or a
+    /// database-backed implementation so lifecycle state survives process
+    /// restarts. Note: ObjectHandles themselves are session-scoped and
+    /// cannot be persisted — restart-safe operation additionally requires
+    /// CKA_ID-paired key generation per `docs/security/pkcs11-keystore.md`.
+    ///
+    /// # Errors
+    ///
+    /// Same as [`Pkcs11KeyStore::new`].
+    pub fn with_state_store(
+        module: Arc<Pkcs11>,
+        slot: Slot,
+        pin: &SessionPin,
+        state_store: Arc<dyn KeyStateStore>,
+    ) -> Result<Self> {
         let session = module
             .open_rw_session(slot)
             .map_err(|e| CryptoError::KeyStoreError(format!("PKCS#11 open session: {e}")))?;
@@ -125,6 +152,7 @@ impl Pkcs11KeyStore {
         Ok(Self {
             session: Arc::new(Mutex::new(session)),
             keys: Arc::new(Mutex::new(HashMap::new())),
+            state_store,
             counter: Arc::new(Mutex::new(0)),
             _module: module,
         })
@@ -182,28 +210,37 @@ impl KeyStore for Pkcs11KeyStore {
             KeyEntry {
                 private_handle,
                 public_handle,
-                state: KeyState::Active,
             },
         );
+        // Persist the initial Active state via the configured store.
+        // If state persistence fails we roll back the in-memory handle
+        // so the registry stays consistent.
+        if let Err(e) = self.state_store.set(&id, KeyState::Active) {
+            self.keys.lock().expect("keys lock poisoned").remove(&id);
+            return Err(e);
+        }
         Ok(KeyId::new(id))
     }
 
     fn sign(&self, key_id: &KeyId, message: &[u8]) -> Result<Vec<u8>> {
+        // State check delegates to the configured store. ObjectHandle
+        // lookup remains process-local.
+        match self.state_store.get(key_id.as_str()) {
+            None => return Err(CryptoError::KeyNotFound(key_id.to_string())),
+            Some(KeyState::Active) => {}
+            Some(KeyState::Created | KeyState::Rotated | KeyState::Revoked) => {
+                return Err(CryptoError::KeyNotActive(key_id.to_string()));
+            }
+            Some(KeyState::Destroyed) => {
+                return Err(CryptoError::KeyNotFound(key_id.to_string()));
+            }
+        }
+
         let private_handle = {
             let keys = self.keys.lock().expect("keys lock poisoned");
             let entry = keys
                 .get(key_id.as_str())
                 .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
-
-            match entry.state {
-                KeyState::Active => {}
-                KeyState::Created | KeyState::Rotated | KeyState::Revoked => {
-                    return Err(CryptoError::KeyNotActive(key_id.to_string()));
-                }
-                KeyState::Destroyed => {
-                    return Err(CryptoError::KeyNotFound(key_id.to_string()));
-                }
-            }
             entry.private_handle
         };
 
@@ -255,33 +292,31 @@ impl KeyStore for Pkcs11KeyStore {
     }
 
     fn key_state(&self, key_id: &KeyId) -> Result<KeyState> {
-        let keys = self.keys.lock().expect("keys lock poisoned");
-        keys.get(key_id.as_str())
-            .map(|e| e.state)
+        self.state_store
+            .get(key_id.as_str())
             .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))
     }
 
     fn transition(&self, key_id: &KeyId, new_state: KeyState) -> Result<()> {
-        let mut keys = self.keys.lock().expect("keys lock poisoned");
-        let entry = keys
-            .get_mut(key_id.as_str())
+        let current = self
+            .state_store
+            .get(key_id.as_str())
             .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
 
         let valid = matches!(
-            (entry.state, new_state),
+            (current, new_state),
             (KeyState::Created, KeyState::Active)
                 | (KeyState::Active, KeyState::Rotated | KeyState::Revoked)
                 | (KeyState::Rotated | KeyState::Revoked, KeyState::Destroyed)
         );
 
         if !valid {
-            let from = format!("{:?}", entry.state);
+            let from = format!("{current:?}");
             let to = format!("{new_state:?}");
             return Err(CryptoError::InvalidStateTransition { from, to });
         }
 
-        entry.state = new_state;
-        Ok(())
+        self.state_store.set(key_id.as_str(), new_state)
     }
 
     fn destroy_key(&self, key_id: &KeyId) -> Result<()> {
@@ -300,6 +335,10 @@ impl KeyStore for Pkcs11KeyStore {
         session
             .destroy_object(public_handle)
             .map_err(|e| CryptoError::KeyStoreError(format!("PKCS#11 destroy public: {e}")))?;
+
+        // Remove from state store last — keeps semantics consistent with
+        // the in-memory handle map (both gone if destroy succeeds).
+        self.state_store.remove(key_id.as_str())?;
         Ok(())
     }
 }

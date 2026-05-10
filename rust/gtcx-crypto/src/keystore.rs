@@ -98,7 +98,11 @@ pub enum Algorithm {
 // =============================================================================
 
 /// Key lifecycle state per NIST SP 800-57.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+///
+/// Serializable so HSM-backed `KeyStore` implementations can persist the
+/// state outside the HSM (the HSM itself does not have a per-key state
+/// machine in PKCS#11 v3).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum KeyState {
     /// Key generated, not yet activated.
     Created,
