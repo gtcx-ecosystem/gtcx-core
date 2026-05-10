@@ -68,7 +68,7 @@ Every finding from the cycle 6 close audit + carryovers from prior sessions, wit
 | F-19 | No reference customer case study                                                                 | Medium     | Phase 3              | User (post-first-customer)              | F-14                                     |
 | F-20 | AI-CODEOWNER template not open-sourced (Sprint 6 task 5)                                         | Low        | Sprint 6 plan        | User (new repo creation)                | Q3+                                      |
 | F-21 | First sandbox regulator response not received                                                    | High       | Phase 3              | User (depends on F-14)                  | F-14                                     |
-| F-22 | SLSA Source Track not asserted (only Build Track L3)                                             | Low        | SLSA doc             | Repo maintainer                         | Requires commit-signing enforcement      |
+| F-22 | ~~SLSA Source Track not asserted~~ — Source L1 claimed; L2 deferred pending team decision        | Low        | SLSA doc             | Repo maintainer (L1 done) + user (L2)   | L2 = commit-signing enforcement          |
 
 **22 findings total.** 8 are in-repo technical (F-1, F-2, F-5, F-6, F-7, F-8, F-9, F-22). 7 require user action (F-3, F-4, F-10, F-11, F-12, F-13, F-14). 7 require external engagement (F-15, F-16, F-17, F-18, F-19, F-20, F-21).
 
@@ -174,23 +174,31 @@ Eight findings. All technical. No external dependencies. Estimated total: **~8 h
 - `pnpm build:reproducible --package=@gtcx/verification --canonicalize` exits 0 (after dep sort, packages with workspace:\* deps reproduce)
 - Documentation in the tool's header explains both modes
 
-### A.8 SLSA Source Track assertion — partial close on F-22
+### A.8 SLSA Source Track — Level 1 claimed, Level 2 deferred
 
-**Effort:** 1 hour
+**Effort:** 30 minutes (doc-only this session)
 **Files:**
 
-- `docs/security/slsa-attestation.md` — add Source Track section
-- `.github/workflows/release.yml` — add commit-signing requirement check (script that fails release if any commit on the release range is unsigned)
+- `docs/security/slsa-attestation.md` — Source Track section added: claims Source Level 1 (version-controlled, change-managed, retained); documents the path to Level 2 with concrete steps and effort estimate
+- `docs/trust/README.md` — section "Cryptographic correctness" updated to reflect Source Level 1 + deferred Level 2
 
-**Approach:** SLSA Source Level 2 requires "version-controlled" + "verified history". GitHub branch protection already enforces required reviews. We need to ALSO enforce signed commits. Update branch protection via `gh api` to set `required_signatures: true`, document in the SLSA doc.
+**What shipped (this session):** Source Level 1 is asserted. The repo satisfies the SLSA Source Level 1 requirements today — no enforcement change required.
 
-**Note:** This is a real change — every contributor will need to sign commits going forward. User must opt in by signing-key setup. Document the migration path.
+**What's deferred:** Source Level 2 (signed commits via branch protection's `required_signatures: true`) requires:
+
+1. Signing-key setup for every CODEOWNER (currently `@amanianai` and `@gtcx-agent`)
+2. Updated `CONTRIBUTING.md` with the signing-key workflow
+3. The `gh api` PATCH to enable `required_signatures` on `main`
+4. Bot signing strategy decision (gtcx-agent and any future automated contributors)
+
+Total effort to land Level 2 once approved: ~1.5 hours of focused work. The architecture is documented; the enforcement step waits for explicit team decision (commit signing affects every contributor's workflow).
 
 **Verification:**
 
-- `docs/security/slsa-attestation.md` asserts SLSA Source L2
-- Trust portal updated
-- Branch protection requires signed commits (verified via `gh api`)
+- `docs/security/slsa-attestation.md` asserts SLSA Source Level 1 ✓
+- Path to Source Level 2 documented with effort estimate and concrete steps ✓
+- Trust portal updated ✓
+- Branch protection NOT changed in this session (deferred to user approval)
 
 ---
 

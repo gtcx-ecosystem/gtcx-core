@@ -36,7 +36,8 @@ All seven Build Level 3 requirements are satisfied. The mechanism for each is do
 
 To be honest about scope:
 
-- **SLSA Source Track (any level)** — not claimed. Source-track levels require additional source-side controls (commit signing, two-party review at the source). We have CODEOWNERS dual-review (human + AI), which is functionally equivalent to two-party review, but we do not currently sign every commit. SLSA Source Level 2+ assertion would require either commit-signing enforcement or a substituting source-verification framework.
+- **SLSA Source Track Level 1 — claimed** (version-controlled, change-managed, retained). See § SLSA Source Track below for full mapping.
+- **SLSA Source Track Level 2** — not yet claimed. Path is documented; deferred pending explicit team decision on commit-signing enforcement.
 - **SLSA L4** — deprecated in v1.0. Not applicable.
 - **Reproducible builds across all packages** — `@gtcx/utils` reproduces bit-for-bit; packages with `workspace:*` deps fail due to upstream pnpm pack ordering bug. Documented in [`tools/check-reproducible-build.mjs`](../../tools/check-reproducible-build.mjs). Build Level 3 does NOT require reproducibility — that's a separate property tracked under "build hermeticity."
 
@@ -102,16 +103,64 @@ Each layer is independently verifiable. SLSA L3 is the build-process assertion; 
 
 ---
 
-## Path to SLSA Source Level 2+
+## SLSA Source Track — current level and path forward
 
-Currently out of scope for this document. The path would require:
+### Current: Source Level 1
 
-1. Enforced commit signing across all CODEOWNERS (Sigstore or GPG)
-2. Branch protection requires signed commits (`require_signed_commits: true` in branch protection settings)
-3. Documented two-party review process — partially in place via `.github/CODEOWNERS` dual-reviewer enforcement
-4. Source provenance attestation tied to the build attestation
+SLSA Source Level 1 requires **version-controlled** sources with **change history**. `gtcx-core` satisfies both:
 
-Estimated effort: 1-2 weeks (mostly process documentation; commit-signing enforcement is a one-line branch protection change).
+| Requirement                           | Mechanism                                  | Evidence                                                         |
+| ------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------- |
+| Source is version-controlled          | Git, hosted on GitHub                      | `git log --all`                                                  |
+| Every change has a recorded history   | All commits retained; no force-push policy | Branch protection `allow_force_pushes: false` enforced on `main` |
+| Sources can be retrieved indefinitely | GitHub repository availability             | The repository itself                                            |
+
+Source Level 1 is the baseline Source Track assertion. Most well-managed open source repositories implicitly satisfy it.
+
+### Target: Source Level 2
+
+Source Level 2 adds **verified history** — every commit's authenticity is cryptographically verifiable, not just version-controlled. The SLSA spec language: "every change to the source is verified to come from a particular contributor (e.g. via authenticated commit signing)."
+
+Three concrete requirements for Source Level 2:
+
+1. **Required signed commits on `main`.** Branch protection enforces `required_signatures: true` so unsigned commits cannot land. Every CODEOWNER (currently `@amanianai`, `@gtcx-agent`) must have a configured signing key.
+2. **Documented signing-key provisioning** in `CONTRIBUTING.md` so new contributors know how to set up GPG / SSH / Sigstore signing before their first commit.
+3. **Bot signing strategy.** The AI CODEOWNER action posts reviews via GitHub API (not commits), so it's unaffected. Future automated commits (Dependabot PRs, changesets bot, etc.) would need a strategy — typically a service-account signing key or sigstore-keyless GitHub Actions identity.
+
+### Why Source Level 2 is deferred (this session)
+
+The branch-protection change is one `gh api` call:
+
+```bash
+gh api repos/gtcx-ecosystem/gtcx-core/branches/main/protection -X PATCH \
+  -F required_signatures.enabled=true
+```
+
+The decision to enable it is a workflow change for the entire contributor set. Today's implications:
+
+- `@amanianai` needs a signing key configured (one-time setup)
+- `@gtcx-agent` needs a signing key configured (one-time setup, on the bot account)
+- Existing unsigned commits on `main` are grandfathered (the `required_signatures` rule applies only to new commits)
+- Downstream tooling that auto-commits (lint-staged hooks, etc.) needs to sign too
+
+This is a workflow decision that benefits from a deliberate moment, not a side-effect of an audit cycle. The architectural design ships in this commit; the enforcement step waits for explicit team approval.
+
+### Effort to land Source Level 2 (when approved)
+
+| Step                                                                               | Effort | Who                       |
+| ---------------------------------------------------------------------------------- | ------ | ------------------------- |
+| Generate/configure signing key for `@amanianai`                                    | 15 min | User                      |
+| Generate/configure signing key for `@gtcx-agent`                                   | 15 min | User (bot account access) |
+| Update `CONTRIBUTING.md` with signing-key setup instructions                       | 30 min | Repo maintainer           |
+| Run the `gh api` PATCH to enable `required_signatures`                             | 1 min  | User                      |
+| Verify by attempting an unsigned push (should be rejected)                         | 5 min  | Repo maintainer           |
+| Update this document: change "Target: Source Level 2" to "Current: Source Level 2" | 10 min | Repo maintainer           |
+
+**Total elapsed: under 1.5 hours of focused work** once the decision is made. The design is ready.
+
+### Higher levels — Source Level 3, 4
+
+Out of scope. Source Level 3 requires "verified history with a tamper-evident log" — typically a centralized append-only log like Sigstore Rekor recording every signed commit. Source Level 4 adds two-party review enforcement at the source layer (which we have via CODEOWNERS but not in a SLSA-conformant tamper-evident form). Both are post-Source-Level-2 hardening passes.
 
 ---
 
