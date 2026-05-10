@@ -1,34 +1,34 @@
-# Auto-Dev State — 2026-05-09
+# Auto-Dev State — 2026-05-10
 
 ## Session
 
-- **Date:** 2026-05-09
-- **Cycle:** 5 (bank-grade audit → budget readiness → GTM → forensic cleanup)
-- **Last command:** forensic docs cleanup + save-state
-- **Phase when saved:** All code/docs/security work complete. GTM evidence pack shipped. Repo cleaned.
+- **Date:** 2026-05-10 (continued from 2026-05-09 audit)
+- **Cycle:** 6 (full-audit → sprint execution: 6 findings closed, FIPS provider, AI CODEOWNER action operational, ops verifier shipped, bus-factor closed)
+- **Last command:** keystore.rs clippy cleanup + audit doc sync
+- **Phase when saved:** Sprint 2 complete (5/5), Sprint 3 complete (4/5; SoftHSMv2 deferred). gtcx-agent in org. Branch protection on main. ANTHROPIC_API_KEY pending.
 
 ## Latest Scores
 
-| #   | Dimension             | Score | Standards Met                                                                          | Top Blocker                            |
-| --- | --------------------- | ----- | -------------------------------------------------------------------------------------- | -------------------------------------- |
-| 1   | Security              | 10/10 | STRIDE, attack tree, 6 fuzz targets (9.9M runs/0 crashes), FIPS boundary, key ceremony | None                                   |
-| 2   | Architecture          | 10/10 | 21 packages, 0 boundary violations, 14 ADRs, layered DAG                               | None                                   |
-| 3   | Test Coverage         | 9/10  | 2,260+ tests, 89% branches on verification, 92%+ on critical                           | tracing.ts dynamic require branch (1%) |
-| 4   | Code Quality          | 10/10 | 0 lint errors, 0 typecheck errors, 0 `@ts-ignore`, 0 unsafe Rust                       | None                                   |
-| 5   | Operational Readiness | 10/10 | 21 CI gates, quality runbook, release checklist, provenance                            | None                                   |
-| 6   | Documentation         | 10/10 | 259 tracked .md files, 0 broken links, forensic cleanup done                           | None                                   |
-| 7   | Dependency Health     | 10/10 | 0 audit findings, exact-version pinning, Dependabot, cargo-deny                        | None                                   |
-| 8   | CI/CD                 | 10/10 | CodeQL, Trivy, cargo-audit, secret scan, perf budgets, SBOM                            | None                                   |
-| 9   | Production Readiness  | 9/10  | Performance budgets pass, provenance, SigningProvider + KeyStore traits                | Regulator pre-submission meeting       |
-| 10  | Developer Experience  | 10/10 | Orientation guide, 4 agent roles, task playbooks, GTM pack                             | None                                   |
+| #   | Dimension             | Score | Standards Met                                                                                                                                       | Top Blocker                                                                                                                                  |
+| --- | --------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Security              | 10/10 | STRIDE, attack tree, 6 fuzz targets (9.9M runs/0 crashes), FIPS provider operational (CMVP #4816), revocation pathway, ZKP fail-closed              | None                                                                                                                                         |
+| 2   | Architecture          | 10/10 | 21 packages, 0 boundary violations, 14 ADRs, 217 source files (down from 218 after dead-code removal), layered DAG                                  | None                                                                                                                                         |
+| 3   | Test Coverage         | 9/10  | 2,260+ TS tests, 56 Rust tests under FIPS (51 default), interop test enforces wire-format compatibility, fuzz campaign evidence preserved           | tracing.ts dynamic require branch (1%)                                                                                                       |
+| 4   | Code Quality          | 10/10 | 0 lint errors, 0 typecheck errors, 0 `@ts-ignore`, 0 unsafe Rust, **clippy passes under workspace + `--features fips` (no `-D warnings` skips)**    | None                                                                                                                                         |
+| 5   | Operational Readiness | 10/10 | 21 CI gates, quality runbook, release checklist, provenance, SECURITY-INCIDENT.md runbook, dual-AI CODEOWNER action operational, ops:check verifier | None                                                                                                                                         |
+| 6   | Documentation         | 10/10 | 270+ tracked .md files, 0 broken links, governance/ pattern documented, ops/repo-bootstrap.md auto-generated                                        | None                                                                                                                                         |
+| 7   | Dependency Health     | 10/10 | 0 audit findings, exact-version pinning, content-hash allowlist for `@noble/*`, Dependabot, cargo-deny                                              | None                                                                                                                                         |
+| 8   | CI/CD                 | 9/10  | CodeQL, Trivy, cargo-audit, secret scan, perf budgets, SBOM, FIPS test step                                                                         | **CI infrastructure failing** — sub-3s job startup failures since 2026-05-09; org-level Actions runner allocation issue, not workflow config |
+| 9   | Production Readiness  | 9/10  | Performance budgets pass, provenance, FIPS provider behind `--features fips`, KeyStore lifecycle, RevocationChecker required on verify              | Regulator pre-submission meeting; PKCS#11/Cloud KMS backend                                                                                  |
+| 10  | Developer Experience  | 10/10 | Orientation guide, 4 agent roles, task playbooks, GTM pack, **`pnpm ops:check`** verifies operational prereqs                                       | None                                                                                                                                         |
 
-**Overall:** 9.8/10
+**Overall:** 9.8/10 (unchanged pending CI infrastructure recovery — without CI runs validating, "Standards Met" claims are tentative)
 
 ## Current Sprint
 
 - **Theme:** Bank-grade readiness + GTM preparation
 - **Tasks planned:** 15
-- **Tasks completed:**
+- **Tasks completed (cycle 5 — 2026-05-09 morning):**
   - `2c1e26a` — Default secret redaction in traced ops, fast-uri CVE fix
   - `a7f9ea2` — Exact-version pinning, +33 verification tests
   - `3bfefb6` — Key ceremony, attack tree, threat model updates
@@ -42,11 +42,29 @@
   - `7b10f11` — Docs cleanup, all scores synced to 9.8
   - `d1bf69f` — Pre-submission emails for all 5 markets
   - `f6315f9` — Forensic cleanup: 11 stale files removed, 6 broken links fixed
+- **Tasks completed (cycle 6 — 2026-05-09 afternoon → 2026-05-10):**
+  - `7537089` — AI CODEOWNER review pattern: schema, prompt, 3 playbooks
+  - `8cef161` — Full audit doc (`docs/audits/full-audit-2026-05-09.md`)
+  - `a53500a` — Sync package matrix to 21 TS packages, ADR count to 14, +3 spec files
+  - `bed49b9` — `_delete/` gitignore cleanup
+  - `fed8541` — **SA-002 closed** — ZKP placeholder fails closed; opt-in via `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`
+  - `ad78de6` — **AT-005 closed** — crypto deps content-hash allowlist (`tools/check-crypto-deps.mjs`)
+  - `aacafd3` — Withdraw stale audit finding (pnpm has no audit-signatures)
+  - `3677b1a` — **SA-004 + AT-002 closed** — `RevocationChecker` required on `tracedVerifyCertificate()`
+  - `c3ec103` — `SECURITY-INCIDENT.md` runbook + bus-factor finding surfaced
+  - `d1900dd` — **Sprint 6 LOC promise delivered** — legacy `storage.ts` deleted (-1,773 LOC)
+  - `473f7bb` — gtcx-codeowner-action runtime (selector + runner + workflow)
+  - `dbd465b` — **Sprint 2 task 5: FIPS provider operational** — `aws-lc-rs` behind `--features fips`
+  - `3a4f9d2` — Ops verifier (`pnpm ops:check` + `docs/ops/repo-bootstrap.md`)
+- **Tasks completed (cycle 6 — operational changes via `gh api`, no commits):**
+  - gtcx-agent invited to `gtcx-ecosystem` org (invitation `75244818`); accepted by user
+  - Branch protection enabled on `main` with required CODEOWNER review + 4 status checks
 - **Tasks remaining:**
-  - Accept gtcx-agent org invitation (human action)
+  - Set `ANTHROPIC_API_KEY` repo (or org-level) secret to activate AI CODEOWNER action
+  - Resolve org-level Actions runner allocation issue (CI failing in 3s since 2026-05-09)
   - Send Zimbabwe pre-submission email (human action)
-  - Implement aws-lc-rs FIPS backend behind feature flag (Rust, ~2 days)
-  - Add SoftHSMv2 to CI for keystore integration tests (~4 hours)
+  - Implement PKCS#11 / Cloud KMS `KeyStore` backend (Sprint 5)
+  - Add SoftHSMv2 to CI for keystore integration tests (~4 hours; gated on CI infrastructure recovery)
 - **Tasks blocked:**
   - 10.0 requires regulator response (external dependency)
 
@@ -65,23 +83,27 @@
 ## Git State
 
 - **Branch:** main
-- **Last commit:** `f6315f9` chore(docs): forensic cleanup — remove 11 stale files, fix 6 broken links
-- **Uncommitted changes:** No (clean)
-- **Commits this session:** 13
+- **Last commit (pre-cleanup):** `3a4f9d2` feat(ops): systematic verification of operational prerequisites
+- **In-flight:** keystore.rs clippy cleanup + this audit doc sync (cycle 6 close)
+- **Commits this session (cycle 5+6 combined):** 26
 
 ## Resume Instructions
 
-All code and documentation work is complete. The repo is at 9.8/10 with a clean git state. The next session should:
+The repo's operational story is mostly closed. Bus-factor is resolved. Dual-AI CODEOWNER is operational pending one secret. The blocker now is **org-level GitHub Actions infrastructure**, not anything in the repo. Next session:
 
-1. Check if gtcx-agent has accepted the org invitation (`gh api orgs/gtcx-ecosystem/members | grep gtcx-agent`)
-2. If the Zimbabwe email has been sent, check for response and update docs/gtm/ accordingly
-3. If continuing Rust work: implement aws-lc-rs backend in `rust/gtcx-crypto/src/provider/aws_lc.rs` behind `#[cfg(feature = "fips")]` — the trait is already defined in `rust/gtcx-crypto/src/provider/mod.rs`
-4. If continuing KeyStore work: add SoftHSMv2 integration test in CI (`.github/workflows/ci.yml` Rust job) and implement PKCS#11 backend
-5. The GTM evidence pack is at `docs/gtm/` (14 docs). The `_delete/` folder on disk contains 11 archived files for final human review before removal.
+1. **Run `pnpm ops:check`** — first action of every session, replaces tribal knowledge
+2. **Investigate the CI infrastructure failure.** Sub-3s job startup since 2026-05-09 across all workflows. Likely org-level Actions usage cap. Visit `https://github.com/organizations/gtcx-ecosystem/settings/billing` and `https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/<latest>` for the actual error message.
+3. **Set `ANTHROPIC_API_KEY`** at org level (not repo level — see prior session's "more dynamic key management" thread). One key, all 17 ecosystem repos inherit.
+4. **Validate the AI CODEOWNER action end-to-end** by opening a real PR after secrets are set.
+5. **Send the Zimbabwe pre-submission email** — Sprint 4 first move. Drafted at `docs/gtm/09-pre-submission-email-zimbabwe.md`.
+6. The `_delete/` folder is no longer tracked (removed from `.gitignore` in `bed49b9`); the working-tree directory may still exist locally and can be removed with `rm -rf _delete/`.
 
 ## Reference
 
-- [remediation-roadmap-10-10.md](./remediation-roadmap-10-10.md) — Phase A-F (A/B complete)
+- [Full audit (2026-05-09)](./full-audit-2026-05-09.md) — six phases, sprint plan, executive summary
+- [Repo bootstrap](../ops/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
+- [AI CODEOWNER governance](../agents/governance/README.md) — schema, prompt, playbooks
 - [Budget Readiness Plan](../gtm/06-budget-readiness-plan.md) — $0 path from 9.8 to 10.0
 - [GTM Evidence Pack](../gtm/README.md) — 14-document submission package
 - [Fuzz Campaign Results](../../quality/fuzz-results/campaign-summary.md) — 9.9M runs, 0 crashes
+- [SECURITY-INCIDENT.md](../../SECURITY-INCIDENT.md) — internal response runbook with AI bypass procedure

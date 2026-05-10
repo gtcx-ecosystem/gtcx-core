@@ -48,7 +48,7 @@ pub use aws_lc::{AwsLcHashProvider, AwsLcSigningProvider};
 /// - Verification is constant-time
 /// - Private key material is zeroized on drop
 pub trait SigningProvider: Send + Sync {
-    /// Generate a new keypair. Returns (private_key_bytes, public_key_bytes).
+    /// Generate a new keypair. Returns `(private_key_bytes, public_key_bytes)`.
     fn generate_keypair(&self) -> (Vec<u8>, Vec<u8>);
 
     /// Sign a message. Returns signature bytes.

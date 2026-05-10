@@ -2,8 +2,21 @@
 //!
 //! Provides a trait for pluggable key storage backends:
 //! - `MemoryKeyStore` — in-process, keys in zeroizing memory (default, testing)
-//! - Future: `Pkcs11KeyStore` — PKCS#11 (SoftHSMv2 in CI, hardware HSM in prod)
+//! - Future: `Pkcs11KeyStore` — `PKCS#11` (`SoftHSMv2` in CI, hardware HSM in prod)
 //! - Future: `CloudKmsKeyStore` — AWS KMS / GCP Cloud KMS ($1/key/month)
+//!
+//! ## A note on `clippy::significant_drop_tightening`
+//!
+//! The methods below acquire a single short-lived lock for the duration of the
+//! call. Clippy's nursery-level `significant_drop_tightening` lint asks for the
+//! lock to be released even earlier — which would require cloning every read
+//! out of the locked block before use. For an in-memory store where the
+//! locked region is microseconds, that trade is wrong: the clones are more
+//! expensive than the lock window. Suppressed at module level. The trait
+//! contract is unchanged; HSM and KMS backends will use their own
+//! concurrency models, not this mutex.
+
+#![allow(clippy::significant_drop_tightening)]
 //!
 //! ## Design
 //!
@@ -44,8 +57,8 @@ use crate::Result;
 ///
 /// Key IDs are handles — they do not contain key material.
 /// The format is backend-specific:
-/// - MemoryKeyStore: UUID-like string
-/// - PKCS#11: CKA_ID hex
+/// - `MemoryKeyStore`: UUID-like string
+/// - `PKCS#11`: `CKA_ID` hex
 /// - Cloud KMS: resource ARN/path
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct KeyId(String);
@@ -110,22 +123,51 @@ pub enum KeyState {
 /// async trait in a downstream crate.
 pub trait KeyStore: Send + Sync {
     /// Generate a new key. Returns an opaque key ID.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error if the backend cannot generate a key (e.g. CSPRNG
+    /// unavailable, HSM session lost, storage full).
     fn generate_key(&self, algorithm: Algorithm) -> Result<KeyId>;
 
     /// Sign a message using the key identified by `key_id`.
     /// The private key never leaves the store.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error if the key does not exist (`KeyNotFound`) or is not
+    /// in the `Active` state (`KeyNotActive`). Backends may also surface
+    /// transient errors (HSM disconnected, KMS rate-limited).
     fn sign(&self, key_id: &KeyId, message: &[u8]) -> Result<Vec<u8>>;
 
     /// Get the public key bytes for a given key ID.
+    ///
+    /// # Errors
+    ///
+    /// Returns `KeyNotFound` if the key does not exist or has been destroyed.
     fn public_key(&self, key_id: &KeyId) -> Result<Vec<u8>>;
 
     /// Get the current state of a key.
+    ///
+    /// # Errors
+    ///
+    /// Returns `KeyNotFound` if the key does not exist or has been destroyed.
     fn key_state(&self, key_id: &KeyId) -> Result<KeyState>;
 
     /// Transition a key to a new state.
+    ///
+    /// # Errors
+    ///
+    /// Returns `KeyNotFound` if the key does not exist; returns
+    /// `InvalidStateTransition` if the requested transition violates the
+    /// NIST SP 800-57 lifecycle (e.g. Active → Created).
     fn transition(&self, key_id: &KeyId, new_state: KeyState) -> Result<()>;
 
     /// Destroy a key (zeroize and remove).
+    ///
+    /// # Errors
+    ///
+    /// Returns `KeyNotFound` if the key does not exist.
     fn destroy_key(&self, key_id: &KeyId) -> Result<()>;
 }
 
@@ -159,9 +201,12 @@ impl MemoryKeyStore {
     }
 
     fn next_id(&self) -> String {
-        let mut counter = self.counter.lock().expect("counter lock poisoned");
-        *counter += 1;
-        format!("mem-key-{counter}")
+        let next = {
+            let mut counter = self.counter.lock().expect("counter lock poisoned");
+            *counter += 1;
+            *counter
+        };
+        format!("mem-key-{next}")
     }
 }
 
@@ -197,42 +242,47 @@ impl KeyStore for MemoryKeyStore {
     }
 
     fn sign(&self, key_id: &KeyId, message: &[u8]) -> Result<Vec<u8>> {
-        let keys = self.keys.lock().expect("keys lock poisoned");
-        let stored = keys
-            .get(key_id.as_str())
-            .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
+        let signature = {
+            let keys = self.keys.lock().expect("keys lock poisoned");
+            let stored = keys
+                .get(key_id.as_str())
+                .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
 
-        match stored.state {
-            KeyState::Active => {}
-            KeyState::Rotated | KeyState::Revoked => {
-                return Err(CryptoError::KeyNotActive(key_id.to_string()));
+            match stored.state {
+                KeyState::Active => {}
+                KeyState::Created | KeyState::Rotated | KeyState::Revoked => {
+                    return Err(CryptoError::KeyNotActive(key_id.to_string()));
+                }
+                KeyState::Destroyed => {
+                    return Err(CryptoError::KeyNotFound(key_id.to_string()));
+                }
             }
-            KeyState::Destroyed => {
-                return Err(CryptoError::KeyNotFound(key_id.to_string()));
-            }
-            KeyState::Created => {
-                return Err(CryptoError::KeyNotActive(key_id.to_string()));
-            }
-        }
 
-        let signature = ed25519::sign(message, &stored.private_key);
+            ed25519::sign(message, &stored.private_key)
+        };
         Ok(signature.as_bytes().to_vec())
     }
 
     fn public_key(&self, key_id: &KeyId) -> Result<Vec<u8>> {
-        let keys = self.keys.lock().expect("keys lock poisoned");
-        let stored = keys
-            .get(key_id.as_str())
-            .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
-        Ok(stored.public_key.as_bytes().to_vec())
+        let bytes = {
+            let keys = self.keys.lock().expect("keys lock poisoned");
+            let stored = keys
+                .get(key_id.as_str())
+                .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
+            stored.public_key.as_bytes().to_vec()
+        };
+        Ok(bytes)
     }
 
     fn key_state(&self, key_id: &KeyId) -> Result<KeyState> {
-        let keys = self.keys.lock().expect("keys lock poisoned");
-        let stored = keys
-            .get(key_id.as_str())
-            .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
-        Ok(stored.state)
+        let state = {
+            let keys = self.keys.lock().expect("keys lock poisoned");
+            let stored = keys
+                .get(key_id.as_str())
+                .ok_or_else(|| CryptoError::KeyNotFound(key_id.to_string()))?;
+            stored.state
+        };
+        Ok(state)
     }
 
     fn transition(&self, key_id: &KeyId, new_state: KeyState) -> Result<()> {
@@ -245,17 +295,14 @@ impl KeyStore for MemoryKeyStore {
         let valid = matches!(
             (stored.state, new_state),
             (KeyState::Created, KeyState::Active)
-                | (KeyState::Active, KeyState::Rotated)
-                | (KeyState::Active, KeyState::Revoked)
-                | (KeyState::Rotated, KeyState::Destroyed)
-                | (KeyState::Revoked, KeyState::Destroyed)
+                | (KeyState::Active, KeyState::Rotated | KeyState::Revoked)
+                | (KeyState::Rotated | KeyState::Revoked, KeyState::Destroyed)
         );
 
         if !valid {
-            return Err(CryptoError::InvalidStateTransition {
-                from: format!("{:?}", stored.state),
-                to: format!("{:?}", new_state),
-            });
+            let from = format!("{:?}", stored.state);
+            let to = format!("{new_state:?}");
+            return Err(CryptoError::InvalidStateTransition { from, to });
         }
 
         stored.state = new_state;

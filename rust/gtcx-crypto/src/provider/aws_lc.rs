@@ -5,14 +5,13 @@
 //! for the algorithm mapping and ZKP exemption rationale.
 //!
 //! Algorithm coverage:
-//! - Ed25519 signing  → FIPS-validated via aws-lc-rs
-//! - SHA-256          → FIPS-validated via aws-lc-rs
-//! - SHA-512          → FIPS-validated via aws-lc-rs
-//! - BLAKE3           → falls through to the blake3 crate; BLAKE3 is not
-//!                      FIPS-approved at any module level. Consumers in
-//!                      regulatory contexts must not use BLAKE3 for the
-//!                      regulated path; it remains available for non-
-//!                      regulatory artifacts (e.g., file integrity).
+//! - Ed25519 signing → FIPS-validated via aws-lc-rs
+//! - SHA-256 → FIPS-validated via aws-lc-rs
+//! - SHA-512 → FIPS-validated via aws-lc-rs
+//! - BLAKE3 → falls through to the `blake3` crate; BLAKE3 is not FIPS-approved
+//!   at any module level. Consumers in regulatory contexts must not use BLAKE3
+//!   for the regulated path; it remains available for non-regulatory artifacts
+//!   (e.g., file integrity).
 
 use aws_lc_rs::{
     digest,
@@ -71,9 +70,9 @@ impl SigningProvider for AwsLcSigningProvider {
 /// FIPS-validated hash provider.
 ///
 /// SHA-256 and SHA-512 route through aws-lc-rs (FIPS-validated).
-/// BLAKE3 routes through the blake3 crate — BLAKE3 has no FIPS-approved
-/// implementation. Consumers in regulatory contexts must use sha256() /
-/// sha512() for the regulated path.
+/// BLAKE3 routes through the `blake3` crate — BLAKE3 has no FIPS-approved
+/// implementation. Consumers in regulatory contexts must use `sha256()` /
+/// `sha512()` for the regulated path.
 pub struct AwsLcHashProvider;
 
 impl HashProvider for AwsLcHashProvider {
