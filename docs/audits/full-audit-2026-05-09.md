@@ -336,13 +336,13 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 **Tasks**
 
-| #   | Task                                      | Files                               | Effort |
-| --- | ----------------------------------------- | ----------------------------------- | ------ |
-| 1   | SOC2 Type 1 readiness gap analysis        | `docs/compliance/soc2-readiness.md` | 1d     |
-| 2   | Customer-facing trust portal              | `docs/trust/` or new repo           | 1d     |
-| 3   | SLSA L3 attestation in release            | `.github/workflows/release.yml`     | 1d     |
-| 4   | First reference-customer case study       | `docs/gtm/case-studies/`            | 1d     |
-| 5   | Open-source the FIPS inheritance template | new public repo                     | 4h     |
+| #   | Task                                                               | Files                               | Effort |
+| --- | ------------------------------------------------------------------ | ----------------------------------- | ------ |
+| 1   | ~~SOC2 Type 1 readiness gap analysis~~ — **DONE** (commit pending) | `docs/compliance/soc2-readiness.md` | DONE   |
+| 2   | Customer-facing trust portal                                       | `docs/trust/` or new repo           | 1d     |
+| 3   | SLSA L3 attestation in release                                     | `.github/workflows/release.yml`     | 1d     |
+| 4   | First reference-customer case study                                | `docs/gtm/case-studies/`            | 1d     |
+| 5   | Open-source the FIPS inheritance template                          | new public repo                     | 4h     |
 
 ### 6.4 Roadmap visualization
 
