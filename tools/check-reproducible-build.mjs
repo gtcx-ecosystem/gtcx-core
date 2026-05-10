@@ -49,6 +49,12 @@ const args = process.argv.slice(2);
 const pkgArg = args.find((a) => a.startsWith('--package='));
 const targetPackage = pkgArg ? pkgArg.split('=')[1] : '@gtcx/crypto';
 
+// `--canonicalize` works around the upstream pnpm pack workspace-dep
+// ordering bug: extract both tarballs, sort dependency keys in
+// `package.json` alphabetically, repack, and re-hash. Default mode
+// surfaces the upstream bug; canonicalize mode masks it for CI assertions.
+const canonicalize = args.includes('--canonicalize');
+
 // SOURCE_DATE_EPOCH neutralizes file-mtime nondeterminism in tar packing.
 // Set to 2026-01-01 UTC — arbitrary fixed point, what matters is that two
 // runs use the same value.
@@ -87,6 +93,69 @@ function listTarballContents(tarPath) {
 function extractTarball(tarPath, destDir) {
   fs.mkdirSync(destDir, { recursive: true });
   run('tar', ['-xzf', tarPath, '-C', destDir]);
+}
+
+/**
+ * Sort dependency-like sections in package.json alphabetically. Works around
+ * the upstream pnpm pack bug where workspace:* deps are rewritten to versions
+ * in non-deterministic order. The contents are equivalent (same keys, same
+ * values); only the byte order changes. Sorting normalizes byte order so
+ * tarballs hash identically.
+ *
+ * Sections sorted: dependencies, devDependencies, peerDependencies,
+ * optionalDependencies, peerDependenciesMeta. Other sections preserved
+ * as-is (the bug is scoped to dep-rewriting).
+ */
+function canonicalizePackageJson(filePath) {
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const pkg = JSON.parse(raw);
+  const SECTIONS = [
+    'dependencies',
+    'devDependencies',
+    'peerDependencies',
+    'optionalDependencies',
+    'peerDependenciesMeta',
+  ];
+  for (const key of SECTIONS) {
+    if (pkg[key] && typeof pkg[key] === 'object' && !Array.isArray(pkg[key])) {
+      const sorted = {};
+      for (const k of Object.keys(pkg[key]).sort()) {
+        sorted[k] = pkg[key][k];
+      }
+      pkg[key] = sorted;
+    }
+  }
+  // pnpm pack uses 2-space indentation for the rewritten package.json;
+  // match that to keep the byte representation comparable across tools.
+  fs.writeFileSync(filePath, `${JSON.stringify(pkg, null, 2)}\n`);
+}
+
+/**
+ * Repack a directory into a new tar.gz with a deterministic file order
+ * (sorted lexicographically). mtimes are normalized via `touch` before
+ * tarring — portable across GNU tar and macOS bsdtar (neither supports
+ * `--mtime` reliably across both).
+ */
+function repackDirectory(srcDir, destPath) {
+  // Normalize mtimes on every file in the source tree. Format: YYYYMMDDhhmm.
+  // 2026-01-01 00:00 UTC = 202601010000 (using local TZ — touch interprets
+  // its arg in local time; for hash-comparison purposes both tarballs use
+  // the same local TZ so the absolute value doesn't matter, only that they
+  // match).
+  const fileList = run('find', ['.', '-type', 'f', '-print'], { cwd: srcDir })
+    .split('\n')
+    .filter(Boolean)
+    .sort();
+  for (const f of fileList) {
+    run('touch', ['-t', '202601010000', f], { cwd: srcDir });
+  }
+
+  // Use `tar -cf` with sorted file list so the archive ordering is
+  // deterministic regardless of filesystem inode order.
+  const fileListPath = `${destPath}.filelist`;
+  fs.writeFileSync(fileListPath, fileList.join('\n'));
+  run('tar', ['-czf', destPath, '-T', fileListPath, '-C', srcDir], { cwd: srcDir });
+  fs.unlinkSync(fileListPath);
 }
 
 // ---------------------------------------------------------------------------
@@ -138,6 +207,49 @@ try {
   if (hashA === hashB) {
     console.log(`✓ Reproducible: ${targetPackage}@<version> sha256:${hashA}`);
     process.exit(0);
+  }
+
+  // Mismatch. If --canonicalize was passed, attempt to reconcile by
+  // sorting package.json dep sections and re-tarballing; report the
+  // canonicalized hash if the contents are equivalent up to dep order.
+  if (canonicalize) {
+    console.error('Hashes differ; --canonicalize active — extracting, sorting deps, repacking...');
+    console.error('');
+    const canonA = path.join(tmpRoot, 'canon-a');
+    const canonB = path.join(tmpRoot, 'canon-b');
+    extractTarball(tarballA, canonA);
+    extractTarball(tarballB, canonB);
+    canonicalizePackageJson(path.join(canonA, 'package', 'package.json'));
+    canonicalizePackageJson(path.join(canonB, 'package', 'package.json'));
+    const canonTarA = path.join(tmpRoot, 'canon-a.tgz');
+    const canonTarB = path.join(tmpRoot, 'canon-b.tgz');
+    repackDirectory(canonA, canonTarA);
+    repackDirectory(canonB, canonTarB);
+    const canonHashA = hashFile(canonTarA);
+    const canonHashB = hashFile(canonTarB);
+    console.error(`Canonicalized hashes:`);
+    console.error(`  A: sha256:${canonHashA}`);
+    console.error(`  B: sha256:${canonHashB}`);
+    console.error('');
+    if (canonHashA === canonHashB) {
+      console.log(
+        `✓ Reproducible (within run, after canonicalization): ${targetPackage}@<version>`
+      );
+      console.error('');
+      console.error('Within-run assertion: two consecutive builds from this source produced');
+      console.error('byte-equivalent artifacts after sorting package.json dep sections. The');
+      console.error('upstream pnpm pack workspace-dep ordering bug is the only nondeterminism');
+      console.error('reconciled here.');
+      console.error('');
+      console.error('Cross-session canonical-hash stability is intentionally out of scope —');
+      console.error('it requires isolated build environments (Docker, Nix). For SLSA Build');
+      console.error('Level 3 the within-run assertion is sufficient: same source + same');
+      console.error('lockfile + same Node version → equivalent artifacts.');
+      process.exit(0);
+    }
+    console.error('Canonicalization did not reconcile — there is real nondeterminism beyond');
+    console.error('dep ordering. Falling through to per-file diff.');
+    console.error('');
   }
 
   // Mismatch — surface what differs
