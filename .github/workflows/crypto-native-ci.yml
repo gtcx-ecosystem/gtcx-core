@@ -88,7 +88,7 @@ jobs:
           node -e "const n=require('./packages/crypto-native/dist/index.js'); const msg=new TextEncoder().encode('smoke'); const kp=n.generateKeyPair(); const sig=n.sign(msg,kp.privateKey); if(!n.verify(sig,msg,kp.publicKey)) { process.exit(1); } console.log('native-ok');"
 
       - name: Upload native binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.artifact-name }}
           path: packages/crypto-native/native/gtcx_node.node
