@@ -53,6 +53,14 @@ cryptoki = { version = "0.10", optional = true }
 # without callers needing to add the dep themselves.
 serde_json = { workspace = true, optional = true }
 
+# Cloud KMS keystore backend — design only, implementation deferred.
+# See docs/security/cloud-kms-keystore.md. The aws-sdk-kms crate
+# requires rustc 1.91+; gtcx-core's toolchain is pinned at 1.88.
+# Toolchain bump is a workspace-wide decision documented in the
+# remediation plan; once it lands, aws-sdk-kms / aws-config / tokio
+# get added here behind a `cloud_kms` feature, mirroring the pkcs11
+# pattern.
+
 [dev-dependencies]
 proptest = { workspace = true }
 criterion = { workspace = true }

@@ -147,21 +147,19 @@ Eight findings. All technical. No external dependencies. Estimated total: **~8 h
 - Unit test creates a store, persists state, reconstructs store from same path, observes preserved state
 - Default fallback unchanged (memory-only) so existing tests pass without modification
 
-### A.6 Cloud KMS adapter design + skeleton — partial close on F-8
+### A.6 Cloud KMS adapter — design only (F-8 architectural close, implementation deferred)
 
-**Effort:** 2 hours (design + AWS KMS skeleton)
+**Effort:** 1 hour (design doc)
 **Files:**
 
-- `docs/security/cloud-kms-keystore.md` (new) — design doc covering AWS KMS, GCP Cloud KMS, Azure Key Vault. Mirror the structure of `pkcs11-keystore.md`.
-- `rust/gtcx-crypto/src/cloud_kms_keystore.rs` (new, behind `cloud_kms` feature) — AWS KMS skeleton using `aws-sdk-kms`. Implement `generate_key`, `sign`, `public_key`, `key_state` (state in process memory v1, same simplification as PKCS#11). Mark unimplemented variants explicitly.
+- `docs/security/cloud-kms-keystore.md` (new) — design doc covering AWS KMS, GCP Cloud KMS, Azure Key Vault.
 
-**Note:** AWS-only for v1. GCP/Azure are listed as future work in the design doc. Full closure of F-8 requires a real cloud account for integration testing — which is external. Skeleton + design closes the architectural gap.
+**Two scope findings from the design exercise:**
 
-**Verification:**
+1. **AWS SDK requires Rust 1.91; workspace pins 1.88.** Implementation requires a workspace-wide toolchain bump, which is a separate decision. The design doc specifies the API, the trait mapping, the auth model, the cost notes, and a 1.5-week roadmap to ship once the toolchain lands.
+2. **AWS KMS does not support Ed25519** as a key spec. The implementation requires adding `Algorithm::EcdsaP256` first; Ed25519 routes through GCP / Azure backends in later phases.
 
-- `cargo build -p gtcx-crypto --features cloud_kms` succeeds
-- `cargo test -p gtcx-crypto --features cloud_kms --lib` runs unit tests for non-network paths
-- Design doc cross-linked from trust portal + audit doc
+**Status:** Architectural close. Implementation parked until toolchain bump is approved. The design doc is the deliverable; F-8 has a documented path forward instead of an open architectural question.
 
 ### A.7 Pnpm-pack reproducibility canonicalization — closes F-9
 
