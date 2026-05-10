@@ -1,7 +1,7 @@
 # Documentation
 
 **Last updated:** 2026-05-10
-**Latest synthesis:** [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)
+**Latest synthesis:** [`audit/master-audit-2026-05-10.md`](./audit/master-audit-2026-05-10.md)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
@@ -157,4 +157,4 @@
 | What are the required quality gates?  | [`operations/runbook.md`](./operations/runbook.md)                       |
 | What is the current security posture? | [`governance/trust-portal.md`](./governance/trust-portal.md)             |
 | Where is the package contract?        | [`specs/packages/README.md`](./specs/packages/README.md)                 |
-| What changed in the latest audit?     | [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)     |
+| What changed in the latest audit?     | [`audit/master-audit-2026-05-10.md`](./audit/master-audit-2026-05-10.md) |

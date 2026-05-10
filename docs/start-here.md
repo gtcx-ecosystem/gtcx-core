@@ -12,7 +12,7 @@
 2. [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md) for codebase layout and session-start protocol.
 3. [`architecture/overview.md`](./architecture/overview.md) for trust boundaries and package structure.
 4. [`operations/runbook.md`](./operations/runbook.md) for gate order, incident handling, and release procedures.
-5. [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md) for the most recent full forensic snapshot before this standardization pass.
+5. [`audit/master-audit-2026-05-10.md`](./audit/master-audit-2026-05-10.md) for the current bank-grade synthesis.
 
 ## What This Does NOT Cover
 
