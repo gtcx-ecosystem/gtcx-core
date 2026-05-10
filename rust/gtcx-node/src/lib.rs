@@ -622,6 +622,7 @@ pub fn version() -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use proptest::prelude::*;
 
     // ── Key generation ──
 
@@ -803,6 +804,66 @@ mod tests {
             "aabb".to_string(),
         );
         assert!(err.is_err());
+    }
+
+    proptest! {
+        #[test]
+        fn prop_sign_rejects_malformed_private_key(
+            key in ".*",
+            message in proptest::collection::vec(any::<u8>(), 0..256)
+        ) {
+            if hex::decode(&key).ok().filter(|bytes| bytes.len() == 32).is_some() {
+                return Ok(());
+            }
+
+            let result = sign(message, key);
+            prop_assert!(result.is_err());
+        }
+
+        #[test]
+        fn prop_verify_rejects_malformed_signature_or_key(
+            signature in ".*",
+            public_key in ".*",
+            message in proptest::collection::vec(any::<u8>(), 0..256)
+        ) {
+            let signature_is_valid = hex::decode(&signature)
+                .ok()
+                .filter(|bytes| bytes.len() == 64)
+                .is_some();
+            let key_is_valid = hex::decode(&public_key)
+                .ok()
+                .filter(|bytes| bytes.len() == 32)
+                .is_some();
+
+            if signature_is_valid && key_is_valid {
+                return Ok(());
+            }
+
+            let result = verify(signature, message, public_key);
+            prop_assert!(result.is_err());
+        }
+
+        #[test]
+        fn prop_zkp_verify_rejects_malformed_commitment_or_proof(
+            commitment in ".*",
+            proof_data in ".*"
+        ) {
+            let commitment_is_valid = hex::decode(&commitment)
+                .ok()
+                .filter(|bytes| bytes.len() == 32)
+                .is_some();
+            let proof_is_valid = hex::decode(&proof_data)
+                .ok()
+                .filter(|bytes| !bytes.is_empty())
+                .is_some();
+
+            if commitment_is_valid && proof_is_valid {
+                return Ok(());
+            }
+
+            let result = zkp_verify("compliance".to_string(), commitment, proof_data);
+            prop_assert!(result.is_err());
+        }
     }
 
     // ── Groth16 ──

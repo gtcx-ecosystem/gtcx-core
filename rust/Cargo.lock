@@ -958,6 +958,7 @@ dependencies = [
  "napi",
  "napi-build",
  "napi-derive",
+ "proptest",
  "serde_json",
 ]
 

@@ -28,3 +28,6 @@ ark-serialize = { workspace = true }
 
 [build-dependencies]
 napi-build = "2.1"
+
+[dev-dependencies]
+proptest = { workspace = true }
