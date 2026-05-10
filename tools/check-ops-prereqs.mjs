@@ -67,6 +67,76 @@ function ghAvailable() {
   }
 }
 
+function listRepoSecrets() {
+  return ghApi([`repos/${REPO}/actions/secrets`]);
+}
+
+function listOrgSecrets() {
+  return ghApi([`orgs/${ORG}/actions/secrets`]);
+}
+
+function listRepoVariables() {
+  return ghApi([`repos/${REPO}/actions/variables`]);
+}
+
+function listOrgVariables() {
+  return ghApi([`orgs/${ORG}/actions/variables`]);
+}
+
+function readNamedItem(res, collectionKey, name) {
+  if (!res.ok) return { ok: false, found: false, status: res.status };
+  const body = JSON.parse(res.body);
+  const collection = body[collectionKey] ?? [];
+  return {
+    ok: true,
+    found: collection.some((item) => item.name === name),
+  };
+}
+
+function findSecret(name) {
+  const repo = readNamedItem(listRepoSecrets(), 'secrets', name);
+  if (repo.ok && repo.found) {
+    return { status: 'pass', detail: `${name} present at repo scope` };
+  }
+
+  const org = readNamedItem(listOrgSecrets(), 'secrets', name);
+  if (org.ok && org.found) {
+    return { status: 'pass', detail: `${name} present at org scope` };
+  }
+
+  if (!repo.ok && !org.ok) {
+    const statuses = [repo.status, org.status].filter(Boolean).join(', ');
+    return {
+      status: 'skip',
+      detail: `insufficient token scope to verify repo/org secrets${statuses ? ` (HTTP ${statuses})` : ''}`,
+    };
+  }
+
+  return { status: 'missing', detail: `${name} missing at repo and org scope` };
+}
+
+function findVariable(name) {
+  const repo = readNamedItem(listRepoVariables(), 'variables', name);
+  if (repo.ok && repo.found) {
+    return { status: 'pass', detail: `${name} present at repo scope` };
+  }
+
+  const org = readNamedItem(listOrgVariables(), 'variables', name);
+  if (org.ok && org.found) {
+    return { status: 'pass', detail: `${name} present at org scope` };
+  }
+
+  if (!repo.ok && !org.ok) {
+    const statuses = [repo.status, org.status].filter(Boolean).join(', ');
+    return {
+      status: 'skip',
+      detail: `insufficient token scope to verify repo/org variables${statuses ? ` (HTTP ${statuses})` : ''}`,
+    };
+  }
+
+  return { status: 'missing', detail: `${name} missing at repo and org scope` };
+}
+
 // ---------------------------------------------------------------------------
 // Checks
 // ---------------------------------------------------------------------------
@@ -81,103 +151,91 @@ const CHECKS = [
       }
       return { status: 'pass', detail: 'gh CLI authenticated' };
     },
-    remediate: () =>
-      'Install: https://cli.github.com/  Then: gh auth login',
+    remediate: () => 'Install: https://cli.github.com/  Then: gh auth login',
   },
   {
     id: 'anthropic-api-key',
-    description: 'ANTHROPIC_API_KEY repo secret is set (AI CODEOWNER primary provider)',
+    description: 'ANTHROPIC_API_KEY org or repo secret is set (AI CODEOWNER primary provider)',
     verify: async () => {
-      const res = ghApi([`repos/${REPO}/actions/secrets`]);
-      if (!res.ok) {
-        if (res.status === 403 || res.status === 404) {
-          return { status: 'skip', detail: `insufficient token scope (HTTP ${res.status}) — need admin on repo` };
-        }
-        return { status: 'fail', detail: `gh api error: ${res.stderr.trim()}` };
+      const result = findSecret('ANTHROPIC_API_KEY');
+      if (result.status === 'missing') {
+        return { status: 'fail', detail: result.detail };
       }
-      const body = JSON.parse(res.body);
-      const has = body.secrets?.some((s) => s.name === 'ANTHROPIC_API_KEY');
-      return has
-        ? { status: 'pass', detail: 'ANTHROPIC_API_KEY present' }
-        : { status: 'fail', detail: 'ANTHROPIC_API_KEY missing' };
+      return result;
     },
     remediate: () =>
-      `gh secret set ANTHROPIC_API_KEY --repo ${REPO}\n` +
-      `  UI: https://github.com/${REPO}/settings/secrets/actions`,
+      `Preferred: gh secret set ANTHROPIC_API_KEY --org ${ORG} --visibility all\n` +
+      `Fallback:  gh secret set ANTHROPIC_API_KEY --repo ${REPO}\n` +
+      `UI: https://github.com/organizations/${ORG}/settings/secrets/actions`,
   },
   {
     id: 'openai-api-key',
-    description: 'OPENAI_API_KEY repo secret is set (AI CODEOWNER fallback provider)',
+    description: 'OPENAI_API_KEY org or repo secret is set (AI CODEOWNER fallback provider)',
     verify: async () => {
-      const res = ghApi([`repos/${REPO}/actions/secrets`]);
-      if (!res.ok) {
-        return { status: 'skip', detail: 'covered by anthropic-api-key skip' };
+      const result = findSecret('OPENAI_API_KEY');
+      if (result.status === 'missing') {
+        return {
+          status: 'warn',
+          detail:
+            'OPENAI_API_KEY missing at repo and org scope — AI CODEOWNER has no fallback if Anthropic is down (bus-factor risk)',
+        };
       }
-      const body = JSON.parse(res.body);
-      const has = body.secrets?.some((s) => s.name === 'OPENAI_API_KEY');
-      return has
-        ? { status: 'pass', detail: 'OPENAI_API_KEY present' }
-        : {
-            status: 'warn',
-            detail: 'OPENAI_API_KEY missing — AI CODEOWNER has no fallback if Anthropic is down (bus-factor risk)',
-          };
+      return result;
     },
     remediate: () =>
-      `gh secret set OPENAI_API_KEY --repo ${REPO}  # closes bus-factor on ai codeowner review`,
+      `Preferred: gh secret set OPENAI_API_KEY --org ${ORG} --visibility all\n` +
+      `Fallback:  gh secret set OPENAI_API_KEY --repo ${REPO}  # closes bus-factor on ai codeowner review`,
   },
   {
     id: 'turbo-token',
-    description: 'TURBO_TOKEN repo secret is set',
+    description: 'TURBO_TOKEN org or repo secret is set',
     verify: async () => {
-      const res = ghApi([`repos/${REPO}/actions/secrets`]);
-      if (!res.ok) {
-        return { status: 'skip', detail: 'covered by anthropic-api-key skip' };
+      const result = findSecret('TURBO_TOKEN');
+      if (result.status === 'missing') {
+        return {
+          status: 'warn',
+          detail: 'TURBO_TOKEN missing at repo and org scope — CI works but turbo cache is cold',
+        };
       }
-      const body = JSON.parse(res.body);
-      const has = body.secrets?.some((s) => s.name === 'TURBO_TOKEN');
-      return has
-        ? { status: 'pass', detail: 'TURBO_TOKEN present' }
-        : {
-            status: 'warn',
-            detail: 'TURBO_TOKEN missing — CI works but turbo cache is cold',
-          };
+      return result;
     },
     remediate: () =>
-      `gh secret set TURBO_TOKEN --repo ${REPO}  # generate at https://vercel.com/account/tokens`,
+      `Preferred: gh secret set TURBO_TOKEN --org ${ORG} --visibility all\n` +
+      `Fallback:  gh secret set TURBO_TOKEN --repo ${REPO}  # generate at https://vercel.com/account/tokens`,
   },
   {
     id: 'turbo-team',
-    description: 'TURBO_TEAM repo variable is set',
+    description: 'TURBO_TEAM org or repo variable is set',
     verify: async () => {
-      const res = ghApi([`repos/${REPO}/actions/variables`]);
-      if (!res.ok) {
-        return { status: 'skip', detail: 'insufficient token scope' };
+      const result = findVariable('TURBO_TEAM');
+      if (result.status === 'missing') {
+        return {
+          status: 'warn',
+          detail: 'TURBO_TEAM missing at repo and org scope — paired with TURBO_TOKEN',
+        };
       }
-      const body = JSON.parse(res.body);
-      const has = body.variables?.some((v) => v.name === 'TURBO_TEAM');
-      return has
-        ? { status: 'pass', detail: 'TURBO_TEAM present' }
-        : { status: 'warn', detail: 'TURBO_TEAM missing — paired with TURBO_TOKEN' };
+      return result;
     },
     remediate: () =>
-      `gh variable set TURBO_TEAM --repo ${REPO} --body "<team-slug>"`,
+      `Preferred: gh variable set TURBO_TEAM --org ${ORG} --body "<team-slug>"\n` +
+      `Fallback:  gh variable set TURBO_TEAM --repo ${REPO} --body "<team-slug>"`,
   },
   {
     id: 'npm-token',
-    description: 'NPM_TOKEN repo secret is set (required for publish workflow)',
+    description: 'NPM_TOKEN org or repo secret is set (required for publish workflow)',
     verify: async () => {
-      const res = ghApi([`repos/${REPO}/actions/secrets`]);
-      if (!res.ok) {
-        return { status: 'skip', detail: 'covered by anthropic-api-key skip' };
+      const result = findSecret('NPM_TOKEN');
+      if (result.status === 'missing') {
+        return {
+          status: 'warn',
+          detail: 'NPM_TOKEN missing at repo and org scope — pnpm publish will fail until set',
+        };
       }
-      const body = JSON.parse(res.body);
-      const has = body.secrets?.some((s) => s.name === 'NPM_TOKEN');
-      return has
-        ? { status: 'pass', detail: 'NPM_TOKEN present' }
-        : { status: 'warn', detail: 'NPM_TOKEN missing — pnpm publish will fail until set' };
+      return result;
     },
     remediate: () =>
-      `gh secret set NPM_TOKEN --repo ${REPO}  # automation token from https://www.npmjs.com/settings/<user>/tokens`,
+      `Preferred: gh secret set NPM_TOKEN --org ${ORG} --visibility all\n` +
+      `Fallback:  gh secret set NPM_TOKEN --repo ${REPO}  # automation token from https://www.npmjs.com/settings/<user>/tokens`,
   },
   {
     id: 'gtcx-agent-org-member',
@@ -226,8 +284,7 @@ const CHECKS = [
         ? { status: 'pass', detail: 'CODEOWNER review required' }
         : { status: 'fail', detail: 'CODEOWNER review NOT required (rule has no teeth)' };
     },
-    remediate: () =>
-      'In branch protection, enable: "Require review from Code Owners"',
+    remediate: () => 'In branch protection, enable: "Require review from Code Owners"',
   },
   {
     id: 'codeowners-accounts-exist',
@@ -289,9 +346,17 @@ async function emitDoc() {
   const lines = [];
   lines.push('# Repository Operational Prerequisites');
   lines.push('');
-  lines.push('Auto-generated from `tools/check-ops-prereqs.mjs`. Do not edit by hand — modify the script and run `node tools/check-ops-prereqs.mjs --emit-doc`.');
+  lines.push('> **Status:** Current');
+  lines.push('> **Date:** 2026-05-10');
+  lines.push('> **Owner:** Quality & Evidence Lead');
   lines.push('');
-  lines.push('Run `pnpm ops:check` to verify state. Run `pnpm ops:check --json` for machine-readable output.');
+  lines.push(
+    'Auto-generated from `tools/check-ops-prereqs.mjs`. Do not edit by hand — modify the script and run `node tools/check-ops-prereqs.mjs --emit-doc`.'
+  );
+  lines.push('');
+  lines.push(
+    'Run `pnpm ops:check` to verify state. Run `pnpm ops:check --json` for machine-readable output.'
+  );
   lines.push('');
   lines.push('## Checks');
   lines.push('');
@@ -304,7 +369,9 @@ async function emitDoc() {
   lines.push('');
   lines.push('## Required Token Scopes');
   lines.push('');
-  lines.push('The runner relies on `gh auth login` having sufficient scopes. To check secret + branch-protection state, the token needs:');
+  lines.push(
+    'The runner relies on `gh auth login` having sufficient scopes. To check secret + branch-protection state, the token needs:'
+  );
   lines.push('');
   lines.push('- `repo` (covers branch protection, secrets read)');
   lines.push('- `admin:org` (covers org membership listing)');
