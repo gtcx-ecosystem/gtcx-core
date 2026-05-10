@@ -160,19 +160,20 @@ core/
 
 ## Quick Navigation
 
-| Document                                                             | Description                                    |
-| -------------------------------------------------------------------- | ---------------------------------------------- |
-| [Documentation](./docs/README.md)                                    | Full documentation and operations hub          |
-| [Orientation](./docs/agents/onboarding/orientation.md)               | Start here — codebase map and session protocol |
-| [Safety Rules](./docs/agents/workflows/safety-rules.md)              | What requires human approval                   |
-| [Architecture Overview](./docs/architecture/overview.md)             | Layer map, trust boundaries, package graph     |
-| [ADR Index](./docs/decisions/README.md)                              | All 14 architecture decision records           |
-| [Package Specs](./docs/specs/packages/README.md)                     | Per-package API and responsibility specs       |
-| [Rust Crate Specs](./docs/specs/packages/rust/)                      | Rust crate specs and build targets             |
-| [Security Framework](./docs/security/security-framework.md)          | Security architecture and controls             |
-| [Quality Runbook](./docs/devops/runbooks/quality-runbook.md)         | CI triage order and gate sequence              |
-| [Release Checklist](./docs/devops/release-mgmt/release-checklist.md) | Release gate and evidence requirements         |
-| [Roadmap](./docs/agile/roadmap/roadmap.md)                           | Delivery roadmap and sprint status             |
+| Document                                                             | Description                                       |
+| -------------------------------------------------------------------- | ------------------------------------------------- |
+| [Documentation](./docs/README.md)                                    | Full documentation and operations hub             |
+| [Trust Portal](./docs/trust/README.md)                               | Evidence index for vendor risk teams + regulators |
+| [Orientation](./docs/agents/onboarding/orientation.md)               | Start here — codebase map and session protocol    |
+| [Safety Rules](./docs/agents/workflows/safety-rules.md)              | What requires human approval                      |
+| [Architecture Overview](./docs/architecture/overview.md)             | Layer map, trust boundaries, package graph        |
+| [ADR Index](./docs/decisions/README.md)                              | All 14 architecture decision records              |
+| [Package Specs](./docs/specs/packages/README.md)                     | Per-package API and responsibility specs          |
+| [Rust Crate Specs](./docs/specs/packages/rust/)                      | Rust crate specs and build targets                |
+| [Security Framework](./docs/security/security-framework.md)          | Security architecture and controls                |
+| [Quality Runbook](./docs/devops/runbooks/quality-runbook.md)         | CI triage order and gate sequence                 |
+| [Release Checklist](./docs/devops/release-mgmt/release-checklist.md) | Release gate and evidence requirements            |
+| [Roadmap](./docs/agile/roadmap/roadmap.md)                           | Delivery roadmap and sprint status                |
 
 ## Dependencies
 
