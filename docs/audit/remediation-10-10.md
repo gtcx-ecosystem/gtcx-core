@@ -399,30 +399,30 @@ D.3 (open-source AI-CODEOWNER template) — 30+ real PRs of track record, then e
 
 ## Verification matrix — every finding has a verifiable closure
 
-| Finding | Closure verification                                                                             | Owner                      |
-| ------- | ------------------------------------------------------------------------------------------------ | -------------------------- |
-| F-1     | `pnpm architecture:check` exits 0                                                                | Repo                       |
-| F-2     | `pnpm docs:check-links` exits 0                                                                  | Repo                       |
-| F-3     | `git status` matches user's chosen state                                                         | User                       |
-| F-4     | `git log origin/main..HEAD` empty                                                                | User                       |
-| F-5     | `tools/check-package-boundaries.mjs` has documenting comment for runtime                         | Repo                       |
-| F-6     | `pnpm test:coverage:critical` shows tracing.ts ≥99% branches                                     | Repo                       |
-| F-7     | Test creates Pkcs11KeyStore, persists state, reconstructs, asserts preservation                  | Repo                       |
-| F-8     | `cargo build --features cloud_kms` succeeds; design doc complete                                 | Repo                       |
-| F-9     | `pnpm build:reproducible --canonicalize` exits 0 on workspace-dep packages                       | Repo                       |
-| F-10    | Next push runs CI for >30 seconds                                                                | User                       |
-| F-11    | `ops:check` shows anthropic-api-key PASS                                                         | User                       |
-| F-12    | `ops:check` shows openai-api-key PASS                                                            | User                       |
-| F-13    | `ops:check` shows zero WARN                                                                      | User                       |
-| F-14    | `docs/gtm/responses/zimbabwe-*.md` exists                                                        | User                       |
-| F-15    | `docs/gtm/responses/{namibia,zambia,ghana,drc}-*.md` exist                                       | User                       |
-| F-16    | SOC 2 Type 1 letter received and committed to `quality/release-evidence/`                        | External CPA               |
-| F-17    | Pen test report received and summarized in `docs/security/external-pentest-2026.md`              | External pen-test firm     |
-| F-18    | `docs/gtm/customer-success-motion.md` documents SLA, pricing, support                            | User (post-customer)       |
-| F-19    | `docs/gtm/14-first-deal-case-study.md` published                                                 | User (post-customer)       |
-| F-20    | `gtcx-ecosystem/ai-native-governance-template` repo public                                       | User (post-customer)       |
-| F-21    | First regulator response captured                                                                | User (post-Zimbabwe email) |
-| F-22    | `docs/security/slsa-attestation.md` asserts Source L2; branch protection requires signed commits | Repo                       |
+| Finding  | Closure verification                                                                                                     | Owner                      |
+| -------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| F-1      | `pnpm architecture:check` exits 0                                                                                        | Repo                       |
+| F-2      | `pnpm docs:check-links` exits 0                                                                                          | Repo                       |
+| F-3      | `git status` matches user's chosen state                                                                                 | User                       |
+| F-4      | `git log origin/main..HEAD` empty                                                                                        | User                       |
+| F-5      | `tools/check-package-boundaries.mjs` has documenting comment for runtime                                                 | Repo                       |
+| F-6      | `pnpm test:coverage:critical` shows tracing.ts ≥99% branches                                                             | Repo                       |
+| F-7      | Test creates Pkcs11KeyStore, persists state, reconstructs, asserts preservation                                          | Repo                       |
+| F-8      | `cargo build --features cloud_kms` succeeds; design doc complete                                                         | Repo                       |
+| F-9      | `pnpm build:reproducible --canonicalize` exits 0 on workspace-dep packages                                               | Repo                       |
+| F-10     | Next push runs CI for >30 seconds                                                                                        | User                       |
+| F-11     | `ops:check` shows anthropic-api-key PASS                                                                                 | User                       |
+| F-12     | `ops:check` shows openai-api-key PASS                                                                                    | User                       |
+| F-13     | `ops:check` shows zero WARN                                                                                              | User                       |
+| F-14     | `docs/gtm/responses/zimbabwe-*.md` exists                                                                                | User                       |
+| F-15     | `docs/gtm/responses/{namibia,zambia,ghana,drc}-*.md` exist                                                               | User                       |
+| F-16     | SOC 2 Type 1 letter received and committed to `quality/release-evidence/`                                                | External CPA               |
+| F-17     | Pen test report received and summarized in `docs/security/external-pentest-2026.md`                                      | External pen-test firm     |
+| F-18     | `docs/gtm/customer-success-motion.md` documents SLA, pricing, support                                                    | User (post-customer)       |
+| F-19     | `docs/gtm/14-first-deal-case-study.md` published                                                                         | User (post-customer)       |
+| F-20     | `gtcx-ecosystem/ai-native-governance-template` repo public                                                               | User (post-customer)       |
+| F-21     | First regulator response captured                                                                                        | User (post-Zimbabwe email) |
+| ~~F-22~~ | ~~`docs/security/slsa-attestation.md` asserts Source L2; branch protection requires signed commits~~ **DONE 2026-05-10** | Repo                       |
 
 ---
 

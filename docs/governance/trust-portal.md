@@ -176,7 +176,7 @@ Honest list of trust artifacts not yet in place. Surfaces them rather than letti
 - **External penetration test** — internal assessment is in place; external pen test budgeted but not yet engaged. Scope is ready at [External penetration test scope](../security/pen-test-scope.md).
 - **SOC 2 Type 1 letter** — readiness analysis complete; CPA engagement is the next step (8-10 weeks from start)
 - ~~**PKCS#11 / Cloud KMS keystore backend**~~ — **DONE.** `Pkcs11KeyStore` ships behind `cargo --features pkcs11`, and `CloudKmsKeyStore` now ships behind `cargo --features cloud_kms` for AWS-first ECDSA P-256 custody. See [`docs/security/pkcs11-keystore.md`](../security/pkcs11-keystore.md) and [`docs/security/cloud-kms-keystore.md`](../security/cloud-kms-keystore.md).
-- ~~**SLSA Level 3 attestation**~~ — **DONE.** `pnpm release` produces SLSA Build Level 3 provenance via `npm publish --provenance` + GitHub OIDC. SLSA Source Level 1 is also asserted: version-controlled and change-managed. See [`docs/security/slsa-attestation.md`](../security/slsa-attestation.md). Source Level 2 with signed commits is documented and deferred pending explicit team decision.
+- ~~**SLSA Level 3 attestation + Source Level 2**~~ — **DONE.** `pnpm release` produces SLSA Build Level 3 provenance via `npm publish --provenance` + GitHub OIDC. SLSA Source Level 2 is also enforced: signed commits are required on `main` via branch protection `required_signatures: true`. See [`docs/security/slsa-attestation.md`](../security/slsa-attestation.md).
 - **Reference customer case study** — gtcx-core is consumed by 6 internal repos; first external case study lands after Sprint 4 sandbox engagement
 
 ---
