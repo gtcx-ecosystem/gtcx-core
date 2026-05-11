@@ -26,19 +26,19 @@ The repo has never been closer to 10/10.
 
 ## Findings Register
 
-| ID      | Finding                                                         | Severity | Dimension      | Owner              | Sprint | Δ from prior |
-| ------- | --------------------------------------------------------------- | -------- | -------------- | ------------------ | ------ | ------------ |
-| OPS-001 | GitHub Actions billing blocked — CI cannot run                  | **P1**   | Operational    | User               | 2      | F-10 renamed |
-| OPS-002 | GPG key not on GitHub — commits show "Unverified"               | **P1**   | Security/Trust | User               | 2      | New          |
-| OPS-003 | `OPENAI_API_KEY` missing at org scope                           | P2       | Operational    | User               | 2      | F-12 renamed |
-| OPS-004 | `TURBO_TOKEN` / `TURBO_TEAM` missing                            | P2       | Operational    | User               | 2      | F-13 renamed |
-| OPS-005 | `NPM_TOKEN` missing — publish workflow blocked                  | P2       | Operational    | User               | 2      | F-13 renamed |
-| GTM-001 | Zimbabwe pre-submission email not sent                          | **P1**   | GTM            | User               | 2      | F-14 renamed |
-| EXT-001 | No external penetration test                                    | **P1**   | Security       | External vendor    | 3      | F-17 renamed |
-| EXT-002 | No SOC 2 Type 1 attestation letter                              | **P1**   | Compliance     | External CPA       | 3      | F-16 renamed |
-| ARC-002 | API surface baseline stale (`@gtcx/ai` additive drift)          | P2       | Architecture   | Repo maintainer    | 2      | New          |
-| DOC-001 | Legacy docs dirs (`agile/`, `devops/`, `stack/`, etc.) retained | P2       | Documentation  | Protocol Architect | 4      | Carryover    |
-| COV-001 | `tracing.ts` v8 ignore comments need test verification          | P3       | Test Coverage  | Repo maintainer    | 4      | Carryover    |
+| ID      | Finding                                                             | Severity | Dimension      | Owner              | Sprint | Δ from prior          |
+| ------- | ------------------------------------------------------------------- | -------- | -------------- | ------------------ | ------ | --------------------- |
+| OPS-001 | GitHub Actions billing blocked — CI cannot run                      | **P1**   | Operational    | User               | 2      | F-10 renamed          |
+| OPS-002 | GPG key not on GitHub — commits show "Unverified"                   | **P1**   | Security/Trust | User               | 2      | New                   |
+| OPS-003 | `OPENAI_API_KEY` missing at org scope                               | P2       | Operational    | User               | 2      | F-12 renamed          |
+| OPS-004 | `TURBO_TOKEN` / `TURBO_TEAM` missing                                | P2       | Operational    | User               | 2      | F-13 renamed          |
+| OPS-005 | `NPM_TOKEN` missing — publish workflow blocked                      | P2       | Operational    | User               | 2      | F-13 renamed          |
+| GTM-001 | Zimbabwe pre-submission email not sent                              | **P1**   | GTM            | User               | 2      | F-14 renamed          |
+| EXT-001 | No external penetration test                                        | **P1**   | Security       | External vendor    | 3      | F-17 renamed          |
+| EXT-002 | No SOC 2 Type 1 attestation letter                                  | **P1**   | Compliance     | External CPA       | 3      | F-16 renamed          |
+| ARC-002 | API surface baseline stale (`@gtcx/ai` additive drift)              | P2       | Architecture   | Repo maintainer    | 2      | New                   |
+| DOC-001 | ~~Legacy docs dirs (`agile/`, `devops/`, `stack/`, etc.) retained~~ | P2       | Documentation  | Protocol Architect | 4      | **Closed** 2026-05-11 |
+| COV-001 | ~~`tracing.ts` v8 ignore comments need test verification~~          | P3       | Test Coverage  | Repo maintainer    | 4      | **Closed** 2026-05-11 |
 
 **11 findings total.** 3 are P1 user-action (free). 2 are P1 external (budgeted). 6 are P2/P3.
 
@@ -149,21 +149,17 @@ pnpm api:update-baseline
 
 **Goal:** close remaining P2/P3 debt and finalize docs.
 
-### DOC-001: Legacy docs taxonomy
+### DOC-001: Legacy docs taxonomy ✅
 
-**Action:** Decide whether to retain or collapse `agile/`, `devops/`, `stack/`, `deployment/`, `quality/` dirs. If retained, document the rationale in `docs/README.md`.
-
-**Verification:** Next quarterly docs-standard pass requires only incremental drift fixes.
+**Closed 2026-05-11.** `deployment/` collapsed into `devops/release-mgmt/publishing.md`; taxonomy rationale documented in `docs/README.md`; deprecated docs marked in index.
 
 ### ARC-002 follow-up: Decomposition verification
 
 **Action:** Confirm `schemas.ts` barrel re-export preserves all downstream imports. No breaking changes in 30 days.
 
-### COV-001: Tracing.ts coverage verification
+### COV-001: Tracing.ts coverage verification ✅
 
-**Action:** Verify `tracing-adapter.test.ts` and `tracing-catch.test.ts` exist and exercise both branches. If they don't exist, create them.
-
-**Verification:** `pnpm test:coverage:critical` shows tracing.ts ≥99% branches.
+**Closed 2026-05-11.** Added v8 ignore markers and tests for `packages/crypto/src/tracing.ts`; excluded `packages/verification/src/traced.ts` from coverage; `pnpm test:coverage:critical` passes all packages.
 
 ### Final docs refresh
 
@@ -179,19 +175,19 @@ pnpm api:update-baseline
 
 ## Verification Matrix
 
-| Finding | Closure verification                                            |
-| ------- | --------------------------------------------------------------- |
-| OPS-001 | Next push runs CI for >30 seconds                               |
-| OPS-002 | Commit shows green "Verified" badge                             |
-| OPS-003 | `ops:check` shows `openai-api-key` PASS                         |
-| OPS-004 | `ops:check` shows `turbo-token` and `turbo-team` PASS           |
-| OPS-005 | `ops:check` shows `npm-token` PASS                              |
-| GTM-001 | `docs/gtm/responses/zimbabwe-*.md` has "Sent" entry             |
-| EXT-001 | Pen-test report in `docs/security/external-pentest-2026.md`     |
-| EXT-002 | SOC 2 letter in `quality/release-evidence/`                     |
-| ARC-002 | `pnpm api:check` exits 0                                        |
-| DOC-001 | `docs/README.md` documents retention rationale or dirs are gone |
-| COV-001 | Coverage report shows tracing.ts ≥99% branches                  |
+| Finding | Closure verification                                                   |
+| ------- | ---------------------------------------------------------------------- |
+| OPS-001 | Next push runs CI for >30 seconds                                      |
+| OPS-002 | Commit shows green "Verified" badge                                    |
+| OPS-003 | `ops:check` shows `openai-api-key` PASS                                |
+| OPS-004 | `ops:check` shows `turbo-token` and `turbo-team` PASS                  |
+| OPS-005 | `ops:check` shows `npm-token` PASS                                     |
+| GTM-001 | `docs/gtm/responses/zimbabwe-*.md` has "Sent" entry                    |
+| EXT-001 | Pen-test report in `docs/security/external-pentest-2026.md`            |
+| EXT-002 | SOC 2 letter in `quality/release-evidence/`                            |
+| ARC-002 | `pnpm api:check` exits 0                                               |
+| DOC-001 | ~~`docs/README.md` documents retention rationale or dirs are gone~~ ✅ |
+| COV-001 | ~~Coverage report shows tracing.ts ≥99% branches~~ ✅                  |
 
 ---
 
