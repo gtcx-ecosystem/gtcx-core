@@ -1,4 +1,4 @@
-# Forensic Audit Prompt — Anti-Inflation Protocol
+# Bank-Grade Certification Audit Methodology
 
 > **Status:** Current
 > **Date:** 2026-05-11
