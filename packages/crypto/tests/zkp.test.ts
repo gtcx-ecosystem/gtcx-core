@@ -300,3 +300,47 @@ describe('ZKP helper edge cases', () => {
     expect(proof.publicInputs).toContain('threshold:50');
   });
 });
+
+describe('zkp.ts coverage edge cases', () => {
+  beforeEach(() => {
+    vi.stubEnv('GTCX_ALLOW_HASH_COMMITMENT_ZKP', '1');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('createHashCommitmentZkpEngine returns a working engine', async () => {
+    const { createHashCommitmentZkpEngine } = await import('../src/zkp');
+    const engine = createHashCommitmentZkpEngine();
+    const proof = await engine.generate({
+      system: 'bulletproofs',
+      proofType: 'gci_threshold',
+      publicInputs: ['threshold:50'],
+      witness: 'score:75',
+      verificationKeyId: 'bulletproofs-gci-v1',
+    });
+    expect(proof.system).toBe('bulletproofs');
+    await expect(engine.verify(proof)).resolves.toBe(true);
+  });
+
+  it('rejects proof with commitment of wrong length', async () => {
+    const engine = new (await import('../src/zkp')).HashCommitmentZkpEngine();
+    const proof = await engine.generate({
+      system: 'bulletproofs',
+      proofType: 'gci_threshold',
+      publicInputs: ['threshold:50'],
+      witness: 'score:75',
+      verificationKeyId: 'bulletproofs-gci-v1',
+    });
+
+    // Decode, tamper commitment to wrong length, re-encode
+    const decoded = JSON.parse(Buffer.from(proof.proof, 'base64').toString('utf8'));
+    decoded.commitment = 'abcd'; // valid hex, wrong length
+    const bad = {
+      ...proof,
+      proof: Buffer.from(JSON.stringify(decoded)).toString('base64'),
+    };
+    await expect(engine.verify(bad)).resolves.toBe(false);
+  });
+});

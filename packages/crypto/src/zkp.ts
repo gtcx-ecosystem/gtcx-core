@@ -58,23 +58,27 @@ const toBase64 = (value: Uint8Array | string): string => {
   if (typeof Buffer !== 'undefined') {
     return Buffer.from(bytes).toString('base64');
   }
+  /* v8 ignore start -- pure-JS fallback only runs when Buffer is unavailable (non-Node env) */
   let binary = '';
   for (const byte of bytes) {
     binary += String.fromCharCode(byte);
   }
   return btoa(binary);
+  /* v8 ignore stop */
 };
 
 const fromBase64 = (value: string): Uint8Array => {
   if (typeof Buffer !== 'undefined') {
     return new Uint8Array(Buffer.from(value, 'base64'));
   }
+  /* v8 ignore start -- pure-JS fallback only runs when Buffer is unavailable (non-Node env) */
   const binary = atob(value);
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i += 1) {
     bytes[i] = binary.charCodeAt(i);
   }
   return bytes;
+  /* v8 ignore stop */
 };
 
 const encodePayload = (payload: ProofPayload): string => toBase64(JSON.stringify(payload));
