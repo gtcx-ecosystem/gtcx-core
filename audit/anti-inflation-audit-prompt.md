@@ -1,4 +1,6 @@
-# No-Bullshit Forensic Audit Prompt
+# Anti-Inflation Audit Prompt
+
+> **Scope:** Score inflation detection, hallucinated claim verification, and documentation-vs-implementation gap analysis. **Not** a general bank-grade audit prompt — use the existing one for that. This prompt specifically targets inflated scores, aspirational certifications passed off as achievements, and coverage numbers that don't match reality.
 
 > **Status:** Current
 > **Date:** 2026-05-11
