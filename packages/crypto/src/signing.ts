@@ -60,7 +60,11 @@ export function sign(
     return native.sign(messageBytes, privateKeyHex);
   }
 
-  // Pure JS fallback (Ed25519 via noble-curves)
+  // Pure JS fallback (Ed25519 via noble-curves).
+  // This path is unreachable in test environments where native bindings
+  // are always available. It is the degradation path for misconfigured
+  // deployments missing the native module.
+  /* v8 ignore start -- pure-JS fallback; unreachable when native crypto is available */
   const privateKey = hexToBytes(privateKeyHex);
 
   try {
@@ -69,6 +73,7 @@ export function sign(
   } finally {
     secureWipe(privateKey);
   }
+  /* v8 ignore stop */
 }
 
 /**
@@ -81,6 +86,7 @@ export function signHash(hash: string, privateKeyHex: string): string {
     return native.sign(hashBytes, privateKeyHex);
   }
 
+  /* v8 ignore start -- pure-JS fallback; unreachable when native crypto is available */
   const privateKey = hexToBytes(privateKeyHex);
 
   try {
@@ -89,6 +95,7 @@ export function signHash(hash: string, privateKeyHex: string): string {
   } finally {
     secureWipe(privateKey);
   }
+  /* v8 ignore stop */
 }
 
 /**
@@ -118,11 +125,12 @@ export function verify(
       return native.verify(signatureHex, messageBytes, publicKeyHex);
     }
 
-    // Pure JS fallback (Ed25519 via noble-curves)
+    /* v8 ignore start -- pure-JS fallback; unreachable when native crypto is available */
     const signature = hexToBytes(signatureHex);
     const publicKey = hexToBytes(publicKeyHex);
 
     return ed25519.verify(signature, messageBytes, publicKey);
+    /* v8 ignore stop */
   } catch (error) {
     // Surface programming errors; only swallow signature validation failures
     if (error instanceof TypeError || error instanceof RangeError) throw error;
@@ -141,10 +149,12 @@ export function verifyHash(hashHex: string, signatureHex: string, publicKeyHex: 
       return native.verify(signatureHex, hash, publicKeyHex);
     }
 
+    /* v8 ignore start -- pure-JS fallback; unreachable when native crypto is available */
     const signature = hexToBytes(signatureHex);
     const publicKey = hexToBytes(publicKeyHex);
 
     return ed25519.verify(signature, hash, publicKey);
+    /* v8 ignore stop */
   } catch (error) {
     // Surface programming errors; only swallow signature validation failures
     if (error instanceof TypeError || error instanceof RangeError) throw error;

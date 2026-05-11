@@ -1,14 +1,21 @@
 # SLSA Build Level 3 Attestation
 
 > **Status:** Current
-> **Date:** 2026-05-10
+> **Date:** 2026-05-11
 > **Owner:** Cryptographic Security Engineer
 
 **Standard:** [SLSA v1.0 Build Track](https://slsa.dev/spec/v1.0/levels#build-track)
 **Level claimed:** Build Level 3
-**Assessment date:** 2026-05-10
+**Level achieved:** Build Level 3 _mechanism configured; not yet proven in production_
+**Assessment date:** 2026-05-11
 **Owner:** Cryptographic Security Engineer (`docs/agents/roles/crypto-security-engineer.md`)
 **Cross-references:** [Trust Portal](../governance/trust-portal.md), [SOC 2 Readiness](../compliance/soc2-readiness.md)
+
+> **Honesty note (2026-05-11):** The Build Level 3 _mechanism_ is fully configured in CI
+> (`npm publish --provenance`, GitHub OIDC, sigstore). However, **no packages have been
+> published yet**, so no SLSA attestations exist in the wild. This document describes
+> the configured pipeline; the attestations themselves will only exist after the first
+> `pnpm release` invocation. Source Level 2 is enforced and current.
 
 ---
 
@@ -32,7 +39,7 @@ This is an **assertion**, not a third-party attestation. The provenance artifact
 | **Build process identified in provenance**                   | Provenance records build configuration            | npm provenance includes workflow file path + ref                                                                           | npm registry attestation field                                               |
 | **Provenance is published**                                  | Provenance is publicly accessible                 | npm registry exposes provenance via `npm view <pkg> --json` and the npmjs.com web UI                                       | After first publish, `npm view @gtcx/<pkg> --json \| jq .dist.attestations`  |
 
-All seven Build Level 3 requirements are satisfied. The mechanism for each is documented above; no requirement relies on private infrastructure or non-public claims.
+All seven Build Level 3 requirements are satisfied **by mechanism configuration**. The pipeline is documented above; no requirement relies on private infrastructure or non-public claims. **Actual attestations will only exist after the first published release.**
 
 ---
 

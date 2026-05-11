@@ -17,6 +17,10 @@
 | **Enterprise Buyer Lens**        | **9.6/10** |              +0.0 | strong institutional platform |
 | **African Sovereign / DFI Lens** | **9.3/10** |              +0.1 | strong institutional platform |
 
+> **Hardcore sanity check (2026-05-11):** Forensic verification found the scores
+> inflated by ~1.0–1.3 points. Honest recalculation: Core ~8.6/10, Investor ~8.5/10,
+> Enterprise ~8.3/10, Sovereign ~8.5/10. See §9 for details.
+
 **Verdict:** `gtcx-core` remains a strong institutional-grade foundation. Sprint 1 closed the two highest-trust hardening gaps (cloud-managed key custody + signed-commit provenance). The repo is now structurally complete for pilot and pre-production institutional use. All remaining gaps are external or operational, not engineering.
 
 **Top 3 priorities for next sprint:**
@@ -31,14 +35,14 @@
 
 ### 1.1 Architecture & Design
 
-| Sub-dimension         |  Score | Evidence                                                  |
-| --------------------- | -----: | --------------------------------------------------------- |
-| Spec fidelity         | 9.5/10 | `docs/specs/` canonical; no drift detected                |
-| Structural integrity  | 9.5/10 | `schemas.ts` decomposed; no source files >500 LOC         |
-| Code quality          | 9.8/10 | Prettier, ESLint, Clippy all clean                        |
-| Testability           | 9.2/10 | 94.79% overall statement coverage; branch coverage 89.11% |
-| Operational readiness | 9.5/10 | `ops:check` verifier ships 11 checks                      |
-| Consistency           | 9.5/10 | Barrel re-exports preserved; no breaking API changes      |
+| Sub-dimension         |  Score | Evidence                                                                                                |
+| --------------------- | -----: | ------------------------------------------------------------------------------------------------------- |
+| Spec fidelity         | 9.5/10 | `docs/specs/` canonical; no drift detected                                                              |
+| Structural integrity  | 9.5/10 | `schemas.ts` decomposed; no TypeScript source files >500 LOC; 6 Rust files exceed limit (max 1,977 LOC) |
+| Code quality          | 9.8/10 | Prettier, ESLint, Clippy all clean                                                                      |
+| Testability           | 9.2/10 | 94.79% overall statement coverage; branch coverage 89.11%                                               |
+| Operational readiness | 9.5/10 | `ops:check` verifier ships 11 checks                                                                    |
+| Consistency           | 9.5/10 | Barrel re-exports preserved; no breaking API changes                                                    |
 
 **Findings**
 
@@ -62,7 +66,7 @@
 
 | Package              | Stmts | Branch | Funcs | Lines |
 | -------------------- | ----: | -----: | ----: | ----: |
-| `@gtcx/crypto`       |   100 |    100 |   100 |   100 |
+| `@gtcx/crypto`       | 86.24 |  81.19 | 92.15 | 87.87 |
 | `@gtcx/domain`       | 94.37 |  85.71 | 94.44 | 95.16 |
 | `@gtcx/security`     | 96.77 |  94.11 | 93.75 | 98.36 |
 | `@gtcx/services`     | 96.26 |   90.9 |  91.3 | 97.56 |
@@ -72,8 +76,12 @@
 
 - `traced.ts` in `@gtcx/ai` shows 0% coverage in the report — this is the barrel re-export file with no runtime logic; expected.
 - `tracing.ts` in `@gtcx/verification` has 76.92% statements but 100% branches; the uncovered lines are no-op declarations covered by v8 ignore comments.
+- `signing.ts` in `@gtcx/crypto` is **65.38% statements** — the pure-JS Ed25519 fallback (lines 64-70, 84-90, 122-125, 144-147) is untested because native bindings are always available in the test environment. This is the most critical coverage gap in the repo.
+- `zkp.ts` in `@gtcx/crypto` is **76.54% statements** — ZKP proof generation edge cases uncovered.
 
 **Score: 9.3/10** (was 9.0)
+
+> **Honest score: ~7.5/10.** The claimed 100% for `@gtcx/crypto` is false.
 
 ### 1.4 Documentation
 
@@ -94,45 +102,51 @@
 
 ### 1.5 Repo / Folder Hygiene
 
-| Sub-dimension   |   Score | Evidence                                                       |
-| --------------- | ------: | -------------------------------------------------------------- |
-| No tracked dist | 10.0/10 | `pnpm check:dist` passes                                       |
-| Archive state   | 10.0/10 | `_delete/` re-gitignored; `_archive/` excluded from link check |
-| Large files     | 10.0/10 | No source files >500 LOC                                       |
-| Commit history  |  9.0/10 | 361 total commits; 129 since May 1; all recent commits signed  |
+| Sub-dimension   |   Score | Evidence                                                                                              |
+| --------------- | ------: | ----------------------------------------------------------------------------------------------------- |
+| No tracked dist | 10.0/10 | `pnpm check:dist` passes                                                                              |
+| Archive state   | 10.0/10 | `_delete/` re-gitignored; `_archive/` excluded from link check                                        |
+| Large files     |  9.0/10 | No TypeScript source files >500 LOC; 6 Rust files exceed limit (max 1,977 LOC in gtcx-zkp/src/lib.rs) |
+| Commit history  |  9.0/10 | 361 total commits; 129 since May 1; all recent commits signed                                         |
 
 **Score: 9.5/10** (was 9.0)
 
 ### 1.6 Security
 
-| Sub-dimension                  |  Score | Evidence                                                        |
-| ------------------------------ | -----: | --------------------------------------------------------------- |
-| Authentication & authorization | 9.5/10 | CODEOWNERS + signed commits + branch protection                 |
-| Data protection                | 9.5/10 | FIPS 140-3 via aws-lc-rs; zeroizing memory in keystores         |
-| Input validation               | 9.5/10 | Zod schemas across verification layer                           |
-| Dependency security            | 9.5/10 | `pnpm audit` clean; crypto deps content-hash verified           |
-| Infrastructure security        | 9.5/10 | SLSA Source L2 + Build L3; threat matrix 12/12                  |
-| Compliance posture             | 9.0/10 | SOC 2 readiness analysis complete; external attestation pending |
+| Sub-dimension                  |  Score | Evidence                                                                                                                                                        |
+| ------------------------------ | -----: | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authentication & authorization | 9.5/10 | CODEOWNERS + signed commits + branch protection                                                                                                                 |
+| Data protection                | 9.5/10 | Zeroizing memory in keystores (real); FIPS feature flag now wires aws-lc-fips-sys                                                                               |
+| Input validation               | 9.5/10 | Zod schemas across verification layer                                                                                                                           |
+| Dependency security            | 9.5/10 | `pnpm audit` clean; crypto deps content-hash verified                                                                                                           |
+| Infrastructure security        | 8.0/10 | SLSA Source L2 enforced (real); Build L3 aspirational (no published packages yet); threat matrix 12/12 is documentation completeness, not control effectiveness |
+| Compliance posture             | 9.0/10 | SOC 2 readiness analysis complete; external attestation pending                                                                                                 |
 
 **Findings**
 
-- **[P1] Cloud-managed key custody** — `CloudKmsKeyStore` ships behind `cloud_kms` feature. Integration test scaffolding in place; needs credentialed AWS proof.
-- **[P1] Source Level 2** — `required_signatures: true` enabled on `main`. Hard rejection of unsigned commits proven. GPG key not yet uploaded to GitHub (shows "Unverified").
+- **[P1] Cloud-managed key custody** — `CloudKmsKeyStore` ships behind `cloud_kms` feature. Real AWS SDK KMS calls (332 LOC). Integration test scaffolding in place; needs credentialed AWS proof.
+- **[P1] Source Level 2** — `required_signatures: true` enabled on `main`. Hard rejection of unsigned commits proven.
+- **[P2] FIPS 140-3** — Feature flag now correctly wires `aws-lc-fips-sys` (CMVP #4816). Previously used non-FIPS `aws-lc-sys`. Fixed 2026-05-11.
+- **[P1] SLSA Build Level 3** — Aspirational. No packages published = no sigstore attestations exist. Release workflow configured but never triggered.
 - **[P1] External pen test** — scope ready; vendor not yet engaged.
 - **[P1] SOC 2 Type 1** — readiness analysis complete; CPA engagement pending.
 
 **Score: 9.5/10** (was 8.9)
 
+> **Honest score: ~7.0/10.** The 9.5 claim conflates "comprehensive security docs" with "verified security properties." FIPS was false (now fixed), Build L3 is aspirational, and threat matrix validation is a file-existence linter.
+
 ### 1.7 Global South Resilience
 
-| Sub-dimension               |  Score | Evidence                                                              |
-| --------------------------- | -----: | --------------------------------------------------------------------- |
-| Offline-first design        | 9.5/10 | `offline-queue.ts` implements durable queue; sync strategy documented |
-| Low-bandwidth adaptation    | 9.0/10 | Compression, batching, and retry jitter in connectivity layer         |
-| No-camera / no-GPS fallback | 8.5/10 | Described at ecosystem level; core contracts present                  |
-| USSD support                | 8.0/10 | Described at ecosystem level; not yet proven in core                  |
+| Sub-dimension               |  Score | Evidence                                                                                          |
+| --------------------------- | -----: | ------------------------------------------------------------------------------------------------- |
+| Offline-first design        | 9.5/10 | `offline-queue.ts` implements durable queue; sync strategy documented                             |
+| Low-bandwidth adaptation    | 9.0/10 | Compression, batching, and retry jitter in connectivity layer                                     |
+| No-camera / no-GPS fallback | 8.5/10 | Described at ecosystem level; core contracts present                                              |
+| USSD support                | 6.0/10 | Enum value `'ussd-only'` in `ConnectivityProfile` only; zero USSD protocol implementation in core |
 
 **Score: 9.0/10** (unchanged)
+
+> **Honest score: ~8.5/10.** Offline-first and low-bandwidth are real and tested. USSD is a string, not a protocol.
 
 ### 1.8 Ecosystem Integration
 
@@ -162,13 +176,13 @@
 
 ### 1.10 Enterprise / Production Readiness
 
-| Sub-dimension                  |  Score | Evidence                                                  |
-| ------------------------------ | -----: | --------------------------------------------------------- |
-| Control Environment            | 9.3/10 | Branch protection, CODEOWNERS, signed commits all active  |
-| Security and Auditability      | 9.3/10 | SLSA Source L2 + Build L3; external validation still open |
-| Integration Reliability        | 9.3/10 | Shared foundation with strong package/test discipline     |
-| Operability and Supportability | 9.0/10 | Runbooks and release artifacts strong for a library repo  |
-| Deployment Readiness           | 9.4/10 | Cloud-managed custody real; CI blocked by billing         |
+| Sub-dimension                  |  Score | Evidence                                                                       |
+| ------------------------------ | -----: | ------------------------------------------------------------------------------ |
+| Control Environment            | 9.3/10 | Branch protection, CODEOWNERS, signed commits all active                       |
+| Security and Auditability      | 9.3/10 | SLSA Source L2 enforced; Build L3 aspirational; external validation still open |
+| Integration Reliability        | 9.3/10 | Shared foundation with strong package/test discipline                          |
+| Operability and Supportability | 9.0/10 | Runbooks and release artifacts strong for a library repo                       |
+| Deployment Readiness           | 9.4/10 | Cloud-managed custody real; CI blocked by billing                              |
 
 **Findings**
 
@@ -219,6 +233,8 @@ However, the Security and Enterprise dimensions carry the most institutional sig
 
 **Final core score: 9.7/10**
 
+> **Honest core score: ~8.6/10.** See §9 for forensic recalculation.
+
 ---
 
 ## 4. Audience Lens Scores
@@ -237,13 +253,13 @@ However, the Security and Enterprise dimensions carry the most institutional sig
 
 ### 4.2 Enterprise Buyer Lens
 
-| Area                           | Weight | Score | Notes                                                  |
-| ------------------------------ | -----: | ----: | ------------------------------------------------------ |
-| Control Environment            |     25 |   9.3 | Branch controls, CODEOWNERS, signed commits all active |
-| Security and Auditability      |     25 |   9.3 | SLSA Source L2 + Build L3; external validation open    |
-| Integration Reliability        |     20 |   9.3 | Shared foundation with strong package/test discipline  |
-| Operability and Supportability |     15 |   9.0 | Runbooks and release artifacts strong                  |
-| Deployment Readiness           |     15 |   9.4 | Cloud custody real; CI billing is the only blocker     |
+| Area                           | Weight | Score | Notes                                                                    |
+| ------------------------------ | -----: | ----: | ------------------------------------------------------------------------ |
+| Control Environment            |     25 |   9.3 | Branch controls, CODEOWNERS, signed commits all active                   |
+| Security and Auditability      |     25 |   9.3 | SLSA Source L2 enforced; Build L3 aspirational; external validation open |
+| Integration Reliability        |     20 |   9.3 | Shared foundation with strong package/test discipline                    |
+| Operability and Supportability |     15 |   9.0 | Runbooks and release artifacts strong                                    |
+| Deployment Readiness           |     15 |   9.4 | Cloud custody real; CI billing is the only blocker                       |
 
 **Enterprise buyer lens score:** 9.6/10
 
@@ -342,6 +358,60 @@ However, the Security and Enterprise dimensions carry the most institutional sig
 | `87e0a88`   | Master audit scores updated |
 | `cccc477`   | GTM response trackers       |
 | _(current)_ | Fresh audit 2026-05-11      |
+
+---
+
+## 9. Honest Score Recalculation (Forensic Audit 2026-05-11)
+
+This section applies corrected scores based on code-level verification, not documentation-level claims.
+
+### 9.1 What Changed
+
+| Claim                   | Original                 | Forensic Finding                                       | Honest             |
+| ----------------------- | ------------------------ | ------------------------------------------------------ | ------------------ |
+| `@gtcx/crypto` coverage | 100% all metrics         | 86.24% stmts, 81.19% branch                            | 86.24%             |
+| FIPS 140-3              | Enabled via feature flag | Used non-FIPS `aws-lc-sys`; fixed to `aws-lc-fips-sys` | Now real           |
+| SLSA Build L3           | Claimed achieved         | No packages published = no attestations                | Aspirational       |
+| No files >500 LOC       | Claimed all sources      | 6 Rust files exceed, max 1,977 LOC                     | False for Rust     |
+| Threat matrix 12/12     | All mitigated            | File-existence linter, not control validation          | Documentation-only |
+| USSD support            | 8.0/10                   | Just an enum string, zero protocol code                | 6.0/10             |
+
+### 9.2 Honest Dimension Scores
+
+| Dimension               | Weight  | Honest Score | Weighted    | Rationale                                                      |
+| ----------------------- | ------- | ------------ | ----------- | -------------------------------------------------------------- |
+| Architecture & Design   | 20      | 9.0          | 1.80        | Real boundary enforcement, schemas decomposed; LOC claim false |
+| Code Quality            | 15      | 9.5          | 1.43        | 0 TODOs, 0 unsafe, clippy clean, ESLint clean; LOC claim false |
+| **Test Coverage**       | 15      | **7.5**      | **1.13**    | Crypto signing 65% stmts is unacceptable for bank-grade        |
+| Documentation           | 10      | 9.0          | 0.90        | Link integrity real, frontmatter real, some inflated claims    |
+| Repo Hygiene            | 10      | 9.5          | 0.95        | `_delete/` handled, commit history clean                       |
+| **Security**            | 20      | **7.0**      | **1.40**    | FIPS fixed, Build L3 aspirational, threat matrix docs-only     |
+| Global South Resilience | 15      | 8.5          | 1.28        | Offline-first real, USSD is a string                           |
+| Ecosystem Integration   | 15      | 9.0          | 1.35        | API baseline current, reproducible builds real                 |
+| Agentic Maturity        | 10      | 9.0          | 0.90        | Signed commits, CODEOWNERS, ops:check all real                 |
+| Enterprise Readiness    | 15      | 8.5          | 1.28        | CI blocked, secrets missing, but controls real                 |
+| **Total**               | **145** |              | **12.42**   |                                                                |
+| **Normalized**          |         |              | **8.56/10** |                                                                |
+
+### 9.3 Honest Audience Lenses
+
+| Lens          | Claimed | Honest | Δ    | Key Driver                                                |
+| ------------- | ------- | ------ | ---- | --------------------------------------------------------- |
+| Investor      | 9.4     | ~8.5   | −0.9 | Coverage inflated, external validation still pending      |
+| Enterprise    | 9.6     | ~8.3   | −1.3 | FIPS was false (fixed), Build L3 aspirational, CI blocked |
+| Sovereign/DFI | 9.3     | ~8.5   | −0.8 | Offline-first real, USSD string-only                      |
+
+### 9.4 What This Means for 10/10
+
+The repo is **not 0.3 points from 10.0**. It is **~1.4 points from 10.0** on an honest scale. The remaining work:
+
+1. **Test the crypto fallback paths** (signing.ts pure-JS Ed25519) — raises Coverage by ~1.0
+2. **Publish packages and verify SLSA Build L3** — raises Security by ~1.0
+3. **Implement USSD protocol** or remove the claim — raises Resilience by ~0.5
+4. **Fix CI billing** — raises Enterprise by ~0.3
+5. **External validation** (pen test or SOC 2) — raises Security by ~0.5
+
+The 9.7/10 score is defensible as a **documentation and process maturity score**. It is not defensible as a **code-level security and coverage score.**
 
 ---
 

@@ -146,6 +146,8 @@ The `docs/` tree is organized by consumer, not by source team. Directories are r
 | `quality/`    | Yes      | Remediation trackers and quality gates for auditors                                             |
 | `deployment/` | ~~No~~   | Collapsed into `devops/release-mgmt/` — content was publishing-oriented, not service-deployment |
 
+**Note on file size limits:** No TypeScript source files exceed 500 LOC. Six Rust source files exceed this limit, with the largest at 1,977 LOC (`rust/gtcx-zkp/src/lib.rs`). The Rust modules are scheduled for decomposition in a future refactor.
+
 Deprecated docs (superseded by newer versions) are retained in-place with frontmatter warnings so git history remains canonical. They are excluded from link-check and index surfaces.
 
 ## Document Lifecycle Conventions
