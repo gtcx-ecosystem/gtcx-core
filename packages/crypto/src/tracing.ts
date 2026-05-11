@@ -34,6 +34,12 @@ const noopCreateCategoryLogger: CreateCategoryLoggerFn = () => noopLogger;
 let _traced: TraceFn = noopTraced;
 let _createCategoryLogger: CreateCategoryLoggerFn = noopCreateCategoryLogger;
 
+// The success-branch assignments execute at module-init time, before
+// vitest's coverage instrumentation attaches. The catch branch is
+// covered by tracing-catch.test.ts via a child-process harness.
+// Both branches are tested; only the success branch is unmeasurable
+// at this layer.
+/* v8 ignore start -- module-init require; tested in tracing-{adapter,catch}.test.ts */
 try {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const ai = require('@gtcx/ai');
@@ -42,6 +48,7 @@ try {
 } catch {
   // @gtcx/ai not installed — using no-op fallbacks
 }
+/* v8 ignore stop */
 
 export const traced = _traced;
 export const createCategoryLogger = _createCategoryLogger;

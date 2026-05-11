@@ -22,11 +22,11 @@
 
 ## §2 Roadmap & Plans
 
-| Document                                                                                           | Purpose                      |
-| -------------------------------------------------------------------------------------------------- | ---------------------------- |
-| [`agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md)                                           | Current delivery roadmap     |
-| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                             | Bank-grade readiness roadmap |
-| [`release/production-readiness-10-10-roadmap.md`](./release/production-readiness-10-10-roadmap.md) | Release-grade readiness plan |
+| Document                                                                                           | Purpose                                                                                         |
+| -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [`agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md)                                           | Current delivery roadmap                                                                        |
+| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                             | Bank-grade readiness roadmap                                                                    |
+| [`release/production-readiness-10-10-roadmap.md`](./release/production-readiness-10-10-roadmap.md) | ~~Release-grade readiness plan~~ (deprecated — superseded by `audit/remediation-2026-05-11.md`) |
 
 ## §3 ADRs
 
@@ -87,12 +87,13 @@
 
 ## §10 Audit
 
-| Document                                                                                   | Purpose                           |
-| ------------------------------------------------------------------------------------------ | --------------------------------- |
-| [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)                       | Latest full forensic audit        |
-| [`audit/auto-dev-state.md`](./audit/auto-dev-state.md)                                     | Rolling posture and session state |
-| [`audit/remediation-10-10.md`](./audit/remediation-10-10.md)                               | Current remediation plan          |
-| [`audit/gtcx-ecosystem-rating-2026-05-08.md`](./audit/gtcx-ecosystem-rating-2026-05-08.md) | Prior ecosystem-level assessment  |
+| Document                                                                                   | Purpose                                 |
+| ------------------------------------------------------------------------------------------ | --------------------------------------- |
+| [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)                       | Latest full forensic audit              |
+| [`audit/auto-dev-state.md`](./audit/auto-dev-state.md)                                     | Rolling posture and session state       |
+| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                     | Current 10/10 remediation plan          |
+| [`audit/remediation-10-10.md`](./audit/remediation-10-10.md)                               | ~~Prior remediation plan~~ (deprecated) |
+| [`audit/gtcx-ecosystem-rating-2026-05-08.md`](./audit/gtcx-ecosystem-rating-2026-05-08.md) | Prior ecosystem-level assessment        |
 
 ## §11 Repo-Specific Sections
 
@@ -132,6 +133,20 @@
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------------- |
 | [`../packages/crypto/tests/property-based.test.ts`](../packages/crypto/tests/property-based.test.ts) | Example property-based verification surface |
 | [`../tests/integration/full-pipeline.test.ts`](../tests/integration/full-pipeline.test.ts)           | Example end-to-end integration behavior     |
+
+## Docs Taxonomy Rationale
+
+The `docs/` tree is organized by consumer, not by source team. Directories are retained when they serve a distinct external audience:
+
+| Directory     | Retained | Rationale                                                                                       |
+| ------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| `agile/`      | Yes      | Delivery roadmap and sprint evidence for investors and regulators                               |
+| `devops/`     | Yes      | CI/CD, runbooks, and release management for operators                                           |
+| `stack/`      | Yes      | Tech-stack decisions and dependency boundaries for architects                                   |
+| `quality/`    | Yes      | Remediation trackers and quality gates for auditors                                             |
+| `deployment/` | ~~No~~   | Collapsed into `devops/release-mgmt/` — content was publishing-oriented, not service-deployment |
+
+Deprecated docs (superseded by newer versions) are retained in-place with frontmatter warnings so git history remains canonical. They are excluded from link-check and index surfaces.
 
 ## Document Lifecycle Conventions
 

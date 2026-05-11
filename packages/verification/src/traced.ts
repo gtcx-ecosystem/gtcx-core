@@ -3,6 +3,7 @@
  * Re-exports from traced/ submodules.
  */
 
+/* v8 ignore start -- pure barrel re-export; logic tested in traced/ submodules */
 export {
   GenerateCertificateInput,
   GenerateQRCodeInput,
@@ -31,3 +32,4 @@ export {
 } from './traced/analytics';
 
 export { tracedVerificationWorkflow } from './traced/workflows';
+/* v8 ignore stop */

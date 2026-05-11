@@ -6,7 +6,7 @@ Pipeline configuration, deployment workflows, and build standards.
 
 No templates here yet. Add CI/CD pipeline configuration templates as they are developed.
 
-For deployment architecture, see [`docs/deployment/deployment.md`](../../deployment/deployment.md).
+For package publishing, see [`docs/devops/release-mgmt/publishing.md`](../release-mgmt/publishing.md).
 
 ## What belongs here
 

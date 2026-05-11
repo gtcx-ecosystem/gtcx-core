@@ -20,4 +20,4 @@ Incident response, escalation procedures, and on-call rotation.
 ## What does NOT belong here
 
 - Monitoring architecture → `docs/devops/monitoring/`
-- Deployment automation → `docs/deployment/`
+- Deployment automation → `docs/devops/release-mgmt/`

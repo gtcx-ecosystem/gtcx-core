@@ -4,9 +4,10 @@ Release process, changelog, legal sign-off, and rollback procedures.
 
 ## Contents
 
-| Path               | Description                                        |
-| ------------------ | -------------------------------------------------- |
-| [`legal/`](legal/) | Legal review and sign-off requirements per release |
+| Path                             | Description                                        |
+| -------------------------------- | -------------------------------------------------- |
+| [`legal/`](legal/)               | Legal review and sign-off requirements per release |
+| [`publishing.md`](publishing.md) | Package publishing to npm and Cargo registries     |
 
 ## What belongs here
 

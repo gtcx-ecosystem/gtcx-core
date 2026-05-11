@@ -21,7 +21,7 @@ Release governance for `gtcx-core` — semver decisions, evidence artifacts, dow
 
 ## Key Process Docs
 
-- Release workflow: [../deployment/deployment.md](../deployment/deployment.md)
+- Release workflow: [../devops/release-mgmt/publishing.md](../devops/release-mgmt/publishing.md)
 - Release checklist: [../devops/release-mgmt/release-checklist.md](../devops/release-mgmt/release-checklist.md)
 - CI gates: [../devops/ci-cd/ci-cd.md](../devops/ci-cd/ci-cd.md)
 - ADRs: [../decisions/](../decisions/)

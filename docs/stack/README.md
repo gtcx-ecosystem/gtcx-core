@@ -19,6 +19,6 @@ Templates for documenting technology choices and baseline standards.
 
 ## What does NOT belong here
 
-- Deployment configuration (→ `4-deployment/`)
+- Deployment configuration (→ `../devops/release-mgmt/`)
 - Per-service specs (→ `6-specs/`)
 - Architecture decisions (→ `6-decisions/`)

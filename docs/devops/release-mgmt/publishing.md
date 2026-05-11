@@ -123,6 +123,7 @@ Packages in `@gtcx/*` are independently versioned. A change to `@gtcx/crypto` do
 
 ## References
 
-- `docs/devops/` — CI/CD pipeline, environments, quality runbook
+- `docs/devops/ci-cd/ci-cd.md` — CI/CD pipeline
+- `docs/devops/runbooks/quality-runbook.md` — quality runbook
 - `docs/decisions/013-api-baseline-and-performance-budget-gates.md`
 - `docs/agents/workflows/tasks/cut-release.md` — agent task: cut a release
