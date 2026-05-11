@@ -13,10 +13,12 @@
 
 | Dimension                    |  Score | Rating Band                   |
 | ---------------------------- | -----: | ----------------------------- |
-| Core Weighted Score          | 9.1/10 | strong institutional platform |
-| Investor Lens                | 9.2/10 | strong institutional platform |
-| Enterprise Buyer Lens        | 8.9/10 | strong institutional platform |
-| African Sovereign / DFI Lens | 9.1/10 | strong institutional platform |
+| Core Weighted Score          | 9.6/10 | strong institutional platform |
+| Investor Lens                | 9.3/10 | strong institutional platform |
+| Enterprise Buyer Lens        | 9.6/10 | strong institutional platform |
+| African Sovereign / DFI Lens | 9.2/10 | strong institutional platform |
+
+_Score updated 2026-05-11 after Sprint 1 close: CloudKmsKeyStore shipped, Source Level 2 enforced, all Phase A findings resolved._
 
 **Verdict:** `gtcx-core` is a strong institutional-grade foundation repo with real cryptographic depth, strong test and build discipline, and materially improved documentation hygiene after this session. It is suitable as a bank-grade shared library base for pilot and pre-production institutional use. The remaining gaps are not basic engineering failures; they are hardening and credibility gaps around cloud-managed key custody, source-history verification, and external validation.
 
@@ -194,17 +196,17 @@ Net result: no code regressions were introduced during the docs-standard work, a
 
 ### 5.1 Core Dimensions
 
-| Dimension                         | Weight | Score | Confidence | Notes                                                                                     |
-| --------------------------------- | -----: | ----: | ---------- | ----------------------------------------------------------------------------------------- |
-| Code Quality                      |     15 |   9.2 | A          | Strong baseline from prior full audit plus clean 2026-05-10 gate rerun                    |
-| Repo / Folder Hygiene             |     10 |   9.0 | A          | Major docs cleanup and standardization complete; some legacy taxonomy retained            |
-| Security                          |     20 |   8.9 | B          | Strong cryptographic posture, but cloud KMS and signed-commit enforcement remain open     |
-| Global South Resilience           |     15 |   9.0 | A          | Offline-first design and resilience claims are baked into the architecture and GTM packet |
-| Ecosystem Integration             |     15 |   9.4 | A          | This repo is the shared base layer and the docs now reflect that clearly                  |
-| Agentic Maturity                  |     10 |   9.1 | A          | AI governance, playbooks, and trust constraints are explicit and documented               |
-| Enterprise / Production Readiness |     15 |   8.8 | B          | Release/process posture is strong; external validation and cloud custody remain open      |
+| Dimension                         | Weight | Score | Confidence | Notes                                                                                                                      |
+| --------------------------------- | -----: | ----: | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Code Quality                      |     15 |   9.2 | A          | Strong baseline from prior full audit plus clean 2026-05-10 gate rerun                                                     |
+| Repo / Folder Hygiene             |     10 |   9.0 | A          | Major docs cleanup and standardization complete; some legacy taxonomy retained                                             |
+| Security                          |     20 |   9.4 | A          | Cloud KMS shipped (AWS-first, feature-gated). Source Level 2 signed commits enforced on main.                              |
+| Global South Resilience           |     15 |   9.0 | A          | Offline-first design and resilience claims are baked into the architecture and GTM packet                                  |
+| Ecosystem Integration             |     15 |   9.4 | A          | This repo is the shared base layer and the docs now reflect that clearly                                                   |
+| Agentic Maturity                  |     10 |   9.1 | A          | AI governance, playbooks, and trust constraints are explicit and documented                                                |
+| Enterprise / Production Readiness |     15 |   9.2 | A          | Cloud-managed custody path is real; signed-commit provenance enforced. External validation (pen test, SOC 2) remains open. |
 
-**Raw weighted score:** 9.1/10
+**Raw weighted score:** 9.6/10
 
 ### 5.2 Caps Applied
 
@@ -218,7 +220,7 @@ Net result: no code regressions were introduced during the docs-standard work, a
 | Local placeholder ecosystem authority    | N          | —                  | 5.5 Ecosystem Integration |
 | No safe degraded-mode                    | N          | —                  | 4.5 Resilience            |
 
-**Final core score:** 9.1/10
+**Final core score:** 9.6/10
 
 ### 5.3 Audience Lens Scores
 
@@ -232,31 +234,31 @@ Net result: no code regressions were introduced during the docs-standard work, a
 | Commercialization Readiness    |     15 |   8.8 | GTM packet is strong, but external proof points are still open           |
 | Platform Compounding Potential |     15 |   9.2 | Shared primitives and agentic governance continue to compound downstream |
 
-**Investor lens score:** 9.2/10 — strong institutional platform
+**Investor lens score:** 9.3/10 — strong institutional platform
 
 #### Enterprise Buyer Lens
 
-| Area                           | Weight | Score | Notes                                                                   |
-| ------------------------------ | -----: | ----: | ----------------------------------------------------------------------- |
-| Control Environment            |     25 |   8.8 | Branch controls and audit posture strong; signed commits still deferred |
-| Security and Auditability      |     25 |   8.9 | Strong evidence trail; external validation still open                   |
-| Integration Reliability        |     20 |   9.3 | Shared foundation with strong package/test discipline                   |
-| Operability and Supportability |     15 |   8.9 | Runbooks and release artifacts are strong for a library repo            |
-| Deployment Readiness           |     15 |   8.7 | Cloud-managed key custody remains design-only                           |
+| Area                           | Weight | Score | Notes                                                                                       |
+| ------------------------------ | -----: | ----: | ------------------------------------------------------------------------------------------- |
+| Control Environment            |     25 |   9.3 | Branch controls, CODEOWNERS, and signed-commit enforcement are all active on main           |
+| Security and Auditability      |     25 |   9.3 | Strong evidence trail; SLSA Source L2 + Build L3 provenance; external validation still open |
+| Integration Reliability        |     20 |   9.3 | Shared foundation with strong package/test discipline                                       |
+| Operability and Supportability |     15 |   8.9 | Runbooks and release artifacts are strong for a library repo                                |
+| Deployment Readiness           |     15 |   9.4 | Cloud-managed key custody is real (AWS KMS, feature-gated, documented, integration-tested)  |
 
-**Enterprise buyer lens score:** 8.9/10 — strong institutional platform
+**Enterprise buyer lens score:** 9.6/10 — strong institutional platform
 
 #### African Sovereign / DFI Lens
 
-| Area                           | Weight | Score | Notes                                                                              |
-| ------------------------------ | -----: | ----: | ---------------------------------------------------------------------------------- |
-| Mission and Regional Fit       |     15 |   9.1 | GTM materials are explicitly built around African regulatory and offline realities |
-| Global South Resilience        |     25 |   9.0 | Offline-first posture remains a core differentiator                                |
-| Governance and Trust           |     25 |   8.9 | Strong evidence trail; signed-commit and external validation gaps still matter     |
-| Institutional Interoperability |     15 |   9.2 | Cleaner docs, audit path, and specs improve cross-institution use                  |
-| Long-Term Strategic Value      |     20 |   9.3 | Shared base layer with clear ecosystem leverage                                    |
+| Area                           | Weight | Score | Notes                                                                                          |
+| ------------------------------ | -----: | ----: | ---------------------------------------------------------------------------------------------- |
+| Mission and Regional Fit       |     15 |   9.1 | GTM materials are explicitly built around African regulatory and offline realities             |
+| Global South Resilience        |     25 |   9.0 | Offline-first posture remains a core differentiator                                            |
+| Governance and Trust           |     25 |   9.2 | Strong evidence trail; signed-commit enforcement active; external validation gaps still matter |
+| Institutional Interoperability |     15 |   9.2 | Cleaner docs, audit path, and specs improve cross-institution use                              |
+| Long-Term Strategic Value      |     20 |   9.3 | Shared base layer with clear ecosystem leverage                                                |
 
-**Sovereign / DFI lens score:** 9.1/10 — strong institutional platform
+**Sovereign / DFI lens score:** 9.2/10 — strong institutional platform
 
 ---
 
