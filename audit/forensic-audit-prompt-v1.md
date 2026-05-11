@@ -350,7 +350,7 @@ Before finalizing any audit, verify NONE of these are present:
 
 ## Cross-References
 
-- [Master Audit 2026-05-11](./master-audit-2026-05-11.md) — first audit using this methodology
-- [10/10 Remediation Plan](./remediation-2026-05-11.md)
-- [Trust Portal](../governance/trust-portal.md)
-- [SLSA Attestation](../security/slsa-attestation.md)
+- [Master Audit 2026-05-11](../docs/audit/master-audit-2026-05-11.md) — first audit using this methodology
+- [10/10 Remediation Plan](../docs/audit/remediation-2026-05-11.md)
+- [Trust Portal](../docs/governance/trust-portal.md)
+- [SLSA Attestation](../docs/security/slsa-attestation.md)
