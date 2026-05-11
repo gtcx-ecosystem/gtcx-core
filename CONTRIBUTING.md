@@ -58,10 +58,12 @@ chore(deps): bump vitest to 3.2
 
 ### Signed commits
 
-`gtcx-core` currently asserts SLSA Source Level 1 and documents the path to
-Source Level 2 in [docs/security/slsa-attestation.md](./docs/security/slsa-attestation.md).
-Source Level 2 requires signed commits on `main`. Enforcement is deferred
-pending contributor key setup, but contributors should configure signing now.
+`gtcx-core` enforces SLSA Source Level 2 on `main`. Signed commits are
+required — unsigned commits are rejected by branch protection. See
+[docs/security/slsa-attestation.md](./docs/security/slsa-attestation.md) for
+verification commands and enforcement details.
+
+**All contributors must configure commit signing before pushing.**
 
 Supported signing approaches:
 
