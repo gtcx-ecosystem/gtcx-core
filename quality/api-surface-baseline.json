@@ -1,17 +1,19 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-10T09:31:29.408Z",
+  "generatedAt": "2026-05-11T15:39:08.329Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.2.2",
       "dir": "packages/ai",
       "typesPath": "packages/ai/dist/index.d.ts",
-      "hash": "90de73b6940c43a8f320e18926e935e1538065b0af447a08410de5809f3d8151",
+      "hash": "da061c7d965683248437e47d7b9ed416c5699bbac18c74ec7dd4273bf3af14f5",
       "exports": [
         "attachProvenance",
         "CategoryLogger",
         "createCategoryLogger",
         "createProvenanceLogger",
+        "generateSpanId",
+        "generateTraceId",
         "getCurrentTraceContext",
         "getDefaultSpanEmitter",
         "OperationLog",
