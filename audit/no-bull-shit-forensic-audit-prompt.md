@@ -1,4 +1,4 @@
-# Score Integrity Audit Prompt — Bank-Grade Certification v1
+# No-Bullshit Forensic Audit Prompt
 
 > **Status:** Current
 > **Date:** 2026-05-11
