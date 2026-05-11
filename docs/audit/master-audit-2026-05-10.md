@@ -26,7 +26,7 @@ _Score updated 2026-05-11 after Sprint 1 close: CloudKmsKeyStore shipped, Source
 
 - Implement the deferred cloud-managed `KeyStore` backend path after the Rust toolchain bump documented in `rust/gtcx-crypto/src/keystore.rs:3-6` and `docs/security/cloud-kms-keystore.md:3-20`.
 - Enforce signed-commit provenance and move from Source Level 1 to Source Level 2 as documented in `docs/security/slsa-attestation.md:124-150`.
-- Close the remaining structural debt in `packages/verification/src/types/schemas.ts:1` (605 LOC) and continue reducing legacy docs taxonomy drift called out in `docs/audit/docs-standard-compliance-2026-05-10.md:14-21`.
+- ~~Close the remaining structural debt in `packages/verification/src/types/schemas.ts:1` (605 LOC)~~ **CLOSED 2026-05-11.** Decomposed into `schemas/enums.ts`, `schemas/primitives.ts`, `schemas/entities.ts`, `schemas/commodity.ts`. Downstream imports preserved via barrel re-export. TypeScript typecheck and all 241 tests pass.
 
 ---
 
