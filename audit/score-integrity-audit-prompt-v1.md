@@ -1,10 +1,12 @@
-# Bank-Grade Certification Audit Methodology
+# Score Integrity Audit Prompt — Bank-Grade Certification v1
 
 > **Status:** Current
 > **Date:** 2026-05-11
 > **Owner:** Quality & Evidence Lead
 > **Version:** 1.0.0
 > **Purpose:** Prevent documentation-inflated scores, hallucinated claims, and implementation vs. aspiration gaps in bank-grade certification audits.
+>
+> **Distinct from:** `docs/agents/governance/review-prompt.md` (AI CODEOWNER PR review prompt). This prompt is for auditors conducting certification score audits, not for code reviewers.
 
 This prompt is the mandatory methodology for any future master audit of `gtcx-core`. It was born from a hardcore sanity check that found the 2026-05-11 audit inflated its core score by ~1.1 points through false coverage claims, aspirational certification assertions, and opaque scoring adjustments.
 
