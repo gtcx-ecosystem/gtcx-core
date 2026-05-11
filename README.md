@@ -2,7 +2,7 @@
 
 Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rust + TypeScript), type definitions, Zod schemas, domain models, verification infrastructure, and WorkProof/TradeCV attestation schemas consumed by all other repos. This is the lowest-level dependency in the stack — it depends on nothing else.
 
-**Last reviewed:** 2026-05-06
+**Last reviewed:** 2026-05-11
 
 ## Engineering Standards
 
@@ -27,16 +27,18 @@ The codebase is in a hardened, code-addressable state with active quality gates:
 
 ### Remaining blockers before production release
 
-**External:**
+**External (budgeted):**
 
-- external security review / pen test
-- downstream consumer validation
-- final human release signoff
+- external security review / pen test ($8–25K, 4–6 weeks)
+- SOC 2 Type 1 attestation ($15–45K, 8–10 weeks)
+- first sandbox regulator response (Zimbabwe email staged, ready to send)
 
 **Internal (known limitations):**
 
 - `@gtcx/crypto-native` loads bindings dynamically; fallback to JS backend is automatic but slower
 - Rust `ark-*` transitive dependencies carry unmaintained crates (`derivative`, `paste`) — mitigated via audit ignore list pending upstream updates
+- GitHub Actions billing/spending limit blocks CI runs (fix: visit org billing settings)
+- 4 org secrets not yet set (`OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM`, `NPM_TOKEN`)
 
 ## Quick Start
 
@@ -44,7 +46,7 @@ The codebase is in a hardened, code-addressable state with active quality gates:
 
 - [Node.js](https://nodejs.org/) >= 20.0.0
 - [pnpm](https://pnpm.io/) >= 9.15.0
-- [Rust](https://rustup.rs/) >= 1.88.0 (for Rust crates)
+- [Rust](https://rustup.rs/) >= 1.91.0 (for Rust crates)
 
 ### Setup
 

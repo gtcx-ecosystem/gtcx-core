@@ -1,7 +1,7 @@
 # gtcx-core Trust Portal
 
 > **Status:** Current
-> **Date:** 2026-05-10
+> **Date:** 2026-05-11
 > **Owner:** Protocol Architect
 
 **Audience:** vendor risk teams, sandbox regulators, design partners, security auditors

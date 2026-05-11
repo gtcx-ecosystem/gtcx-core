@@ -1,7 +1,7 @@
 # Documentation
 
-**Last updated:** 2026-05-10
-**Latest synthesis:** [`audit/master-audit-2026-05-10.md`](./audit/master-audit-2026-05-10.md)
+**Last updated:** 2026-05-11
+**Latest synthesis:** [`audit/master-audit-2026-05-11.md`](./audit/master-audit-2026-05-11.md)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
@@ -25,7 +25,7 @@
 | Document                                                                                           | Purpose                      |
 | -------------------------------------------------------------------------------------------------- | ---------------------------- |
 | [`agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md)                                           | Current delivery roadmap     |
-| [`audit/remediation-roadmap-10-10.md`](./audit/remediation-roadmap-10-10.md)                       | Bank-grade readiness roadmap |
+| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                             | Bank-grade readiness roadmap |
 | [`release/production-readiness-10-10-roadmap.md`](./release/production-readiness-10-10-roadmap.md) | Release-grade readiness plan |
 
 ## §3 ADRs
@@ -157,4 +157,4 @@
 | What are the required quality gates?  | [`operations/runbook.md`](./operations/runbook.md)                       |
 | What is the current security posture? | [`governance/trust-portal.md`](./governance/trust-portal.md)             |
 | Where is the package contract?        | [`specs/packages/README.md`](./specs/packages/README.md)                 |
-| What changed in the latest audit?     | [`audit/master-audit-2026-05-10.md`](./audit/master-audit-2026-05-10.md) |
+| What changed in the latest audit?     | [`audit/master-audit-2026-05-11.md`](./audit/master-audit-2026-05-11.md) |

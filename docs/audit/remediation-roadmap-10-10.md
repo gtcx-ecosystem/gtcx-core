@@ -1,8 +1,11 @@
 # Remediation Roadmap: 10/10 Bank-Grade Readiness
 
-> **Status:** Current
+> **Status:** Superseded
 > **Date:** 2026-05-10
 > **Owner:** Quality & Evidence Lead
+>
+> **⚠️ This document is historical.** The current canonical remediation plan is
+> [`remediation-2026-05-11.md`](./remediation-2026-05-11.md).
 
 **Document ID**: GTCX-CORE-AUDIT-REMEDIATION-001  
 **Version**: 1.0  

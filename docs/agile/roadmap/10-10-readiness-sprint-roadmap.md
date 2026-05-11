@@ -1,8 +1,11 @@
 # 10/10 Readiness Sprint Roadmap
 
 **Last updated:** 2026-05-06  
-**Status:** Active  
+**Status:** Superseded  
 **Objective:** Move `gtcx-core` from strong code quality to defensible `10/10` readiness across code trust, global-south resilience, agentic governance, and enterprise adoption.
+
+> **⚠️ This document is historical.** The current canonical remediation plan is
+> [`docs/audit/remediation-2026-05-11.md`](../../audit/remediation-2026-05-11.md).
 
 ---
 

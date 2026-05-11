@@ -6,7 +6,7 @@
 
 **Drafted:** 2026-05-10 — cycle 6 close
 **Source audit:** [`full-audit-2026-05-09.md`](./full-audit-2026-05-09.md) plus same-day re-audit
-**Current score:** 9.6/10
+**Current score:** 9.7/10
 **Target:** 10.0/10
 **Owner of plan:** Cryptographic Security Engineer + repo maintainer
 

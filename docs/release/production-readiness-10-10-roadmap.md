@@ -1,8 +1,12 @@
 # Production Readiness 10/10 Roadmap
 
-> **Status:** Current
+> **Status:** Superseded
 > **Date:** 2026-05-10
 > **Owner:** Quality & Evidence Lead
+>
+> **⚠️ This document is historical.** The current canonical audit and remediation
+> plan is [`docs/audit/master-audit-2026-05-11.md`](../audit/master-audit-2026-05-11.md)
+> and [`docs/audit/remediation-2026-05-11.md`](../audit/remediation-2026-05-11.md).
 
 **Last reviewed:** 2026-05-09
 **Current score:** 9.8/10 total production assurance

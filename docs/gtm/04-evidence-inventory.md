@@ -91,6 +91,6 @@ Run any of these commands to regenerate fresh evidence:
 | Quality standards            | `docs/testing/quality-standards.md`                  | Mandatory CI gates and PR requirements |
 | GA release status            | `docs/release/ga-release/ga-release-status.md`       | Current 7.8/10 → 10/10 tracker         |
 | Production readiness roadmap | `docs/release/production-readiness-10-10-roadmap.md` | Sprint plan to 10/10                   |
-| Remediation roadmap          | `,remediation-roadmap-10-10.md`                      | Phase A-F remediation plan             |
+| Remediation roadmap          | `docs/audit/remediation-2026-05-11.md`               | Phase A-F remediation plan             |
 | Versioning policy            | `docs/release/versioning/versioning-policy.md`       | Semver enforcement rules               |
 | License compliance           | `docs/release/licenses/license-compliance.md`        | OSS license audit                      |
