@@ -365,7 +365,7 @@ async function emitDoc() {
   lines.push('# Repository Operational Prerequisites');
   lines.push('');
   lines.push('> **Status:** Current');
-  lines.push('> **Date:** 2026-05-10');
+  lines.push('> **Date:** 2026-05-11');
   lines.push('> **Owner:** Quality & Evidence Lead');
   lines.push('');
   lines.push(

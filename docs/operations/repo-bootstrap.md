@@ -1,7 +1,7 @@
 # Repository Operational Prerequisites
 
 > **Status:** Current
-> **Date:** 2026-05-10
+> **Date:** 2026-05-11
 > **Owner:** Quality & Evidence Lead
 
 Auto-generated from `tools/check-ops-prereqs.mjs`. Do not edit by hand — modify the script and run `node tools/check-ops-prereqs.mjs --emit-doc`.
