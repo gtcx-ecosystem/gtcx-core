@@ -79,3 +79,4 @@ _archive/
 
 # BaselineOS runtime state
 .baseline/
+_delete/
