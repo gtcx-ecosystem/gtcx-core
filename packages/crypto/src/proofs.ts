@@ -95,6 +95,7 @@ export function generateMerkleProof(tree: MerkleTree, leafIndex: number): Merkle
   }
 
   const leaf = tree.leaves[leafIndex];
+  /* c8 ignore next 2 -- defensive; leafIndex validated at function entry */
   if (leaf === undefined) {
     throw new Error('Invalid leaf index');
   }

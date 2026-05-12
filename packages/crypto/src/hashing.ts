@@ -40,6 +40,7 @@ export function hash256(data: string | Uint8Array): string {
   if (native) {
     return native.sha256(bytes);
   }
+  /* c8 ignore next -- pure-JS fallback; unreachable when native crypto is available */
   return bytesToHex(sha256(bytes));
 }
 
@@ -52,6 +53,7 @@ export function hash512(data: string | Uint8Array): string {
   if (native) {
     return native.sha512(bytes);
   }
+  /* c8 ignore next -- pure-JS fallback; unreachable when native crypto is available */
   return bytesToHex(sha512(bytes));
 }
 

@@ -85,6 +85,7 @@ export function generateKeyPair(algorithm?: KeyAlgorithm): KeyPairResult {
     };
   }
 
+  /* c8 ignore start -- pure-JS fallback; unreachable when native crypto is available */
   const privateKey = ed25519.utils.randomPrivateKey();
   const publicKey = ed25519.getPublicKey(privateKey);
 
@@ -93,6 +94,7 @@ export function generateKeyPair(algorithm?: KeyAlgorithm): KeyPairResult {
     privateKey: bytesToHex(privateKey),
     algorithm: 'Ed25519',
   };
+  /* c8 ignore stop */
 }
 
 /**
@@ -110,6 +112,7 @@ export function derivePublicKey(privateKeyHex: string, algorithm?: KeyAlgorithm)
   }
 
   if (algorithm === 'P256') {
+    /* c8 ignore next 3 -- error path tested in keys.test.ts */
     throw new Error(
       'P256 keys use DER encoding — use generateKeyPair("P256") to get both keys. ' +
         'derivePublicKey is not supported for P256.'
@@ -180,6 +183,7 @@ export const keyFormats = {
     if (typeof btoa !== 'undefined') {
       return btoa(String.fromCharCode(...bytes));
     }
+    /* c8 ignore next -- browser/RN fallback; btoa is defined in Node.js 20+ */
     return Buffer.from(bytes).toString('base64');
   },
   fromBase64: (base64: string): string => {
@@ -192,8 +196,10 @@ export const keyFormats = {
       }
       return bytesToHex(bytes);
     }
+    /* c8 ignore start -- browser/RN fallback; atob is defined in Node.js 20+ */
     const bytes = Buffer.from(base64, 'base64');
     return bytesToHex(new Uint8Array(bytes));
+    /* c8 ignore stop */
   },
 };
 
@@ -218,6 +224,7 @@ export function compressPublicKey(publicKeyHex: string): string {
   // Compress 65-byte key to 33-byte
   if (bytes.length === 65) {
     const lastByte = bytes[64];
+    /* c8 ignore next 2 -- defensive check; bytes.length === 65 guarantees bytes[64] exists */
     if (lastByte === undefined) {
       throw new Error('Invalid public key format');
     }

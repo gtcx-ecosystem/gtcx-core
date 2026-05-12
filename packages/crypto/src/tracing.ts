@@ -21,7 +21,8 @@ interface CategoryLogger {
 
 type CreateCategoryLoggerFn = (category: string) => CategoryLogger;
 
-// No-op defaults
+// No-op defaults — exercised in tracing-catch.test.ts child-process harness
+/* c8 ignore start */
 const noopTraced: TraceFn = (fn) => fn;
 const noopLogger: CategoryLogger = {
   info() {},
@@ -30,6 +31,7 @@ const noopLogger: CategoryLogger = {
   debug() {},
 };
 const noopCreateCategoryLogger: CreateCategoryLoggerFn = () => noopLogger;
+/* c8 ignore stop */
 
 let _traced: TraceFn = noopTraced;
 let _createCategoryLogger: CreateCategoryLoggerFn = noopCreateCategoryLogger;

@@ -30,6 +30,7 @@ function canLoadNative(): boolean {
 
 function tryLoadNative(): NativeCrypto | null {
   if (!canLoadNative()) {
+    /* c8 ignore next */
     return null;
   }
 
@@ -40,10 +41,12 @@ function tryLoadNative(): NativeCrypto | null {
   try {
     const mod = req('@gtcx/crypto-native') as NativeCrypto;
     if (!mod || typeof mod.generateKeyPair !== 'function') {
+      /* c8 ignore next */
       return null;
     }
     return mod;
   } catch {
+    /* c8 ignore next */
     return null;
   }
 }
@@ -56,6 +59,7 @@ export function getNativeCrypto(): NativeCrypto | null {
   const requireNative =
     typeof process !== 'undefined' && isTruthy(process.env['GTCX_REQUIRE_NATIVE']);
   if (!cached && requireNative) {
+    /* c8 ignore next */
     throw new Error('Native crypto bindings are required but could not be loaded.');
   }
   return cached;

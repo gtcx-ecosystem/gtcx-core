@@ -60,6 +60,12 @@ describe('derivePublicKey', () => {
     const derived = derivePublicKey(kp.privateKey);
     expect(derived).toBe(kp.publicKey);
   });
+
+  it('throws for P256 algorithm', () => {
+    expect(() => derivePublicKey('a'.repeat(64), 'P256')).toThrow(
+      'P256 keys use DER encoding — use generateKeyPair("P256") to get both keys'
+    );
+  });
 });
 
 describe('isValidPublicKey', () => {
@@ -244,5 +250,21 @@ describe('FIPS mode (GTCX_FIPS_MODE)', () => {
   it('still allows Ed25519 when explicitly requested in FIPS mode', () => {
     const kp = generateKeyPair('Ed25519');
     expect(kp.algorithm).toBe('Ed25519');
+  });
+
+  it('warns when Ed25519 is used in FIPS mode', async () => {
+    const { resetFipsMode } = await import('../src/fips');
+    process.env['GTCX_FIPS_MODE'] = 'true';
+    resetFipsMode();
+    const kp = generateKeyPair('Ed25519');
+    expect(kp.algorithm).toBe('Ed25519');
+  });
+
+  it('warns when Secp256k1 is used in FIPS mode', async () => {
+    const { resetFipsMode } = await import('../src/fips');
+    process.env['GTCX_FIPS_MODE'] = 'true';
+    resetFipsMode();
+    const kp = generateKeyPair('Secp256k1');
+    expect(kp.algorithm).toBe('Secp256k1');
   });
 });

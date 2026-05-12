@@ -129,6 +129,7 @@ const ensureCommitment = (publicInputs: string[], commitment: string): string[] 
  * If the input is already a valid 64-char hex string, return it as-is.
  * Otherwise, hash it with SHA-256 to produce a deterministic 32-byte digest.
  */
+/* c8 ignore next 6 -- only called by NativeZkpEngine inside v8 ignore block */
 const normalizeToHash256 = (value: string): string => {
   if (value.length === 64 && isHex(value)) {
     return value.toLowerCase();

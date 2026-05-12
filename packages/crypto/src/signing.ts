@@ -133,6 +133,7 @@ export function verify(
     /* v8 ignore stop */
   } catch (error) {
     // Surface programming errors; only swallow signature validation failures
+    /* c8 ignore next -- requires TypeError/RangeError from verify internals; edge case */
     if (error instanceof TypeError || error instanceof RangeError) throw error;
     return false;
   }

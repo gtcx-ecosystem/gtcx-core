@@ -324,3 +324,29 @@ describe('P256 FIPS backend (node:crypto)', () => {
     expect(kp1.publicKey).not.toBe(kp2.publicKey);
   });
 });
+
+describe('FIPS mode auto-routing (no explicit algorithm)', () => {
+  afterEach(() => {
+    delete process.env['GTCX_FIPS_MODE'];
+  });
+
+  it('sign routes to FIPS backend when GTCX_FIPS_MODE=true', async () => {
+    const { resetFipsMode } = await import('../src/fips');
+    process.env['GTCX_FIPS_MODE'] = 'true';
+    resetFipsMode();
+    const kp = generateKeyPair('P256');
+    const signature = sign('test', kp.privateKey);
+    expect(typeof signature).toBe('string');
+    expect(signature.length).toBeGreaterThan(0);
+  });
+
+  it('verify routes to FIPS backend when GTCX_FIPS_MODE=true', async () => {
+    const { resetFipsMode } = await import('../src/fips');
+    process.env['GTCX_FIPS_MODE'] = 'true';
+    resetFipsMode();
+    const kp = generateKeyPair('P256');
+    const signature = sign('test', kp.privateKey);
+    const valid = verify('test', signature, kp.publicKey);
+    expect(valid).toBe(true);
+  });
+});
