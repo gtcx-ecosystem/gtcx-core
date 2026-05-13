@@ -46,8 +46,32 @@ export {
   type HashAlgorithm,
 } from './hashing';
 
-export * from './proofs';
-export * from './zkp';
+export {
+  buildMerkleTree,
+  generateMerkleProof,
+  verifyMerkleProof,
+  createInclusionProof,
+  verifyInclusion,
+  batchVerifyProofs,
+  computeRootFromProof,
+  type MerkleProof,
+  type MerkleTree,
+} from './proofs';
+
+export {
+  ZKProofSystemSchema,
+  ZKProofSchema,
+  HashCommitmentZkpEngine,
+  createHashCommitmentZkpEngine,
+  createZkpEngine,
+  NativeZkpEngine,
+  type ZKProofSystem,
+  type ZKProof,
+  type ZkProofInput,
+  type ZkProver,
+  type ZkVerifier,
+  type ZkFullVerifier,
+} from './zkp';
 
 // ============================================================================
 // TRACED OPERATIONS (AI-Native)
