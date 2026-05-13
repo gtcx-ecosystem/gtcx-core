@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gtcx-ecosystem/audit/schemas/playbook.schema.json",
+  "title": "GTCX Playbook Schema",
+  "description": "Machine-readable playbook definition for agentic consumption",
+  "type": "object",
+  "required": ["id", "trigger", "output", "steps"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique playbook identifier"
+    },
+    "trigger": {
+      "type": "string",
+      "description": "What event or condition starts this playbook"
+    },
+    "output": {
+      "type": "string",
+      "description": "Expected artifact or result"
+    },
+    "preFlight": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Steps to run before starting"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["number", "action", "verification"],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "action": {
+            "type": "string"
+          },
+          "verification": {
+            "type": "string"
+          },
+          "gates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "postFlight": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Steps to run after completion"
+    },
+    "hardRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule", "scope", "severity"],
+        "properties": {
+          "rule": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "enforcement": {
+            "enum": ["gate", "human-in-loop", "audit"]
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri-reference"
+      }
+    }
+  }
+}

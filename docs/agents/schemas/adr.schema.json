@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gtcx-ecosystem/audit/schemas/adr.schema.json",
+  "title": "GTCX ADR Schema",
+  "description": "Machine-readable architecture decision record schema",
+  "type": "object",
+  "required": ["id", "status", "date", "title", "context", "decision", "consequences"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ADR-[0-9]{3}$",
+      "description": "ADR identifier (e.g., ADR-013)"
+    },
+    "status": {
+      "enum": ["proposed", "accepted", "deprecated", "superseded"],
+      "description": "Current status of the decision"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Decision date (YYYY-MM-DD)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Short title of the decision"
+    },
+    "context": {
+      "type": "string",
+      "description": "What is the issue that we're seeing that is motivating this decision or change?"
+    },
+    "decision": {
+      "type": "string",
+      "description": "What is the change that we're proposing or have agreed to implement?"
+    },
+    "consequences": {
+      "type": "object",
+      "properties": {
+        "positive": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "negative": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "neutral": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "supersededBy": {
+      "type": "string",
+      "pattern": "^ADR-[0-9]{3}$",
+      "description": "ADR that supersedes this one"
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^ADR-[0-9]{3}$"
+      },
+      "description": "Related ADRs"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-12T00:00:00Z",
+  "rules": [
+    {
+      "id": "SR-001",
+      "rule": "never-skip-ci",
+      "description": "Never commit code that bypasses or skips CI verification gates",
+      "scope": "all",
+      "severity": "critical",
+      "enforcement": "gate",
+      "trigger": "pre-commit",
+      "verification": "pnpm lint && pnpm test && pnpm architecture:check"
+    },
+    {
+      "id": "SR-002",
+      "rule": "no-raw-ai-approval",
+      "description": "No raw AI output can approve consequential actions without human review",
+      "scope": "consequential",
+      "severity": "critical",
+      "enforcement": "human-in-loop",
+      "trigger": "ai-output",
+      "verification": "Human CODEOWNER approval required"
+    },
+    {
+      "id": "SR-003",
+      "rule": "no-secrets-in-source",
+      "description": "No API keys, tokens, or passwords in source code",
+      "scope": "all",
+      "severity": "critical",
+      "enforcement": "gate",
+      "trigger": "pre-commit",
+      "verification": "trufflehog filesystem --path ."
+    },
+    {
+      "id": "SR-004",
+      "rule": "signed-commits-required",
+      "description": "All commits must be cryptographically signed",
+      "scope": "all",
+      "severity": "high",
+      "enforcement": "gate",
+      "trigger": "push",
+      "verification": "git verify-commit HEAD"
+    },
+    {
+      "id": "SR-005",
+      "rule": "architecture-boundary-enforced",
+      "description": "No cross-package dependencies without explicit approval",
+      "scope": "packages",
+      "severity": "high",
+      "enforcement": "gate",
+      "trigger": "pr-review",
+      "verification": "pnpm architecture:check"
+    },
+    {
+      "id": "SR-006",
+      "rule": "no-unsafe-code-in-rust",
+      "description": "No unsafe blocks in Rust code without ADR justification",
+      "scope": "rust",
+      "severity": "critical",
+      "enforcement": "gate",
+      "trigger": "pr-review",
+      "verification": "cd rust && cargo clippy --deny unsafe_code"
+    },
+    {
+      "id": "SR-007",
+      "rule": "docs-frontmatter-required",
+      "description": "All docs must have valid YAML frontmatter",
+      "scope": "docs",
+      "severity": "medium",
+      "enforcement": "gate",
+      "trigger": "pre-commit",
+      "verification": "pnpm docs:check-frontmatter"
+    },
+    {
+      "id": "SR-008",
+      "rule": "bundle-budget-enforced",
+      "description": "No package may exceed its bundle size budget",
+      "scope": "packages",
+      "severity": "medium",
+      "enforcement": "gate",
+      "trigger": "ci",
+      "verification": "pnpm bundle:check-budgets"
+    }
+  ]
+}

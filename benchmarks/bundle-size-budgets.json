@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-12T00:00:00Z",
+  "unit": "bytes",
+  "packages": {
+    "@gtcx/utils": {
+      "max": 2048,
+      "rationale": "Single utility file, zero deps"
+    },
+    "@gtcx/types": {
+      "max": 5120,
+      "rationale": "Type-only, erased at runtime"
+    },
+    "@gtcx/runtime": {
+      "max": 4096,
+      "rationale": "Pure aggregator shell"
+    },
+    "@gtcx/resilience": {
+      "max": 8192,
+      "rationale": "Circuit breaker + retry + rate limiter"
+    },
+    "@gtcx/connectivity": {
+      "max": 8192,
+      "rationale": "Network detection, zero heavy deps"
+    },
+    "@gtcx/sync": {
+      "max": 8192,
+      "rationale": "Offline queue engine"
+    },
+    "@gtcx/telemetry": {
+      "max": 12288,
+      "rationale": "OTel instrumentation, peer deps"
+    },
+    "@gtcx/logging": {
+      "max": 16384,
+      "rationale": "Structured logging"
+    },
+    "@gtcx/events": {
+      "max": 10240,
+      "rationale": "Typed event bus"
+    },
+    "@gtcx/schemas": {
+      "max": 24576,
+      "rationale": "Core12 + provenance schemas"
+    },
+    "@gtcx/identity": {
+      "max": 16384,
+      "rationale": "DID, credentials"
+    },
+    "@gtcx/ai": {
+      "max": 10240,
+      "rationale": "AI hooks, zero external deps"
+    },
+    "@gtcx/api-client": {
+      "max": 24576,
+      "rationale": "HTTP client (native fetch target)"
+    },
+    "@gtcx/network": {
+      "max": 16384,
+      "rationale": "P2P primitives (libp2p is peer dep)"
+    },
+    "@gtcx/crypto-native": {
+      "max": 6144,
+      "rationale": "JS wrapper + 1.7 MB .node binary"
+    },
+    "@gtcx/crypto": {
+      "max": 45056,
+      "rationale": "Noble curves + hashes + ZKP engine"
+    },
+    "@gtcx/security": {
+      "max": 32768,
+      "rationale": "Auth + validation + audit (post-barrel-refactor)"
+    },
+    "@gtcx/workproof": {
+      "max": 32768,
+      "rationale": "W3C VC attestation (post-barrel-refactor)"
+    },
+    "@gtcx/domain": {
+      "max": 32768,
+      "rationale": "Domain models (post-barrel-refactor)"
+    },
+    "@gtcx/services": {
+      "max": 32768,
+      "rationale": "Business services"
+    },
+    "@gtcx/verification": {
+      "max": 65536,
+      "rationale": "Certificates + QR + proofs (post-barrel-refactor)"
+    }
+  }
+}

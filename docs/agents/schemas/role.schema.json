@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gtcx-ecosystem/audit/schemas/role.schema.json",
+  "title": "GTCX Role Schema",
+  "description": "Machine-readable role definition for agentic consumption",
+  "type": "object",
+  "required": ["id", "archetype", "owns", "autonomous"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique role identifier"
+    },
+    "archetype": {
+      "type": "string",
+      "description": "Baseline archetype this role instantiates"
+    },
+    "owns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri-reference"
+      },
+      "description": "Files and directories this role owns"
+    },
+    "doesNotOwn": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri-reference"
+      },
+      "description": "Files and directories explicitly outside this role's scope"
+    },
+    "autonomous": {
+      "type": "boolean",
+      "description": "Whether this role can act without human approval"
+    },
+    "autonomousBoundaries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Paths within which this role is autonomous"
+    },
+    "escalationTriggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Conditions that trigger escalation to human review"
+    },
+    "requiredArtifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Artifacts this role must produce or maintain"
+    }
+  }
+}

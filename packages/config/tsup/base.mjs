@@ -10,9 +10,21 @@
 export const baseConfig = {
   format: ['cjs', 'esm'],
   dts: true,
-  splitting: false,
+  splitting: true,
   sourcemap: true,
   clean: true,
   treeshake: true,
   minify: false,
+};
+
+/**
+ * Release configuration — optimized for size.
+ * Use for production builds where debugging is secondary to bundle size.
+ *
+ * @type {import('tsup').Options}
+ */
+export const releaseConfig = {
+  ...baseConfig,
+  minify: true,
+  sourcemap: true,
 };

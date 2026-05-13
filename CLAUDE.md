@@ -1,5 +1,12 @@
 # CLAUDE.md — gtcx-core
 
+> **Agent:** Claude (Anthropic)
+> **Canonical instructions:** `AGENTS.md` (agent-agnostic, always read first)
+> **Status:** Current
+> **Date:** 2026-05-12
+
+---
+
 ## What This Repo Is
 
 `gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 18 public TypeScript packages (`@gtcx/*`), maintains 4 shared config workspace packages under `packages/config`, and ships 6 Rust crates (`gtcx-*`) consumed by downstream GTCX repos. No product surface, no UI, no users — pure primitives. Signing, identity, verification, sync, networking, ZKP.
@@ -8,12 +15,15 @@ Breaking changes here break everything downstream.
 
 ## Session Start Protocol
 
-Every session, read in this order — no exceptions:
+**Read `AGENTS.md` first** — it is the canonical agent instructions for all AI agents (Claude, Kimi, Gemini, Codex, Cursor, Copilot).
+
+Then read in this order:
 
 1. `docs/agents/onboarding/orientation.md` — codebase orientation and where things live
-2. `docs/agents/workflows/safety-rules.md` — what requires human approval before acting
-3. The role file for your current work (`docs/agents/roles/`)
-4. The relevant package spec before touching any package (`docs/specs/packages/`)
+2. `docs/agents/safety-rules.json` — structured safety rules (machine-readable)
+3. `docs/agents/routing-rules.json` — machine-readable role routing
+4. The role file for your current work (`docs/agents/roles/`)
+5. The relevant package spec before touching any package (`docs/specs/packages/`)
 
 ## Product Name
 

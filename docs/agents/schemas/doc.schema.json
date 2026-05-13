@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gtcx-ecosystem/audit/schemas/doc.schema.json",
+  "title": "GTCX Document Frontmatter Schema",
+  "description": "Schema for YAML frontmatter in all GTCX markdown documents",
+  "type": "object",
+  "required": ["title", "status", "date", "owner", "role", "tier", "tags", "review_cycle"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable document title"
+    },
+    "status": {
+      "enum": ["current", "draft", "deprecated", "superseded"],
+      "description": "Document lifecycle status"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Last updated date (YYYY-MM-DD)"
+    },
+    "owner": {
+      "enum": [
+        "protocol-architect",
+        "crypto-security-engineer",
+        "frontier-infra-engineer",
+        "quality-evidence-lead",
+        "product-lead"
+      ],
+      "description": "Person or role responsible for this document"
+    },
+    "role": {
+      "enum": [
+        "protocol-architect",
+        "crypto-security-engineer",
+        "frontier-infra-engineer",
+        "quality-evidence-lead",
+        "product-lead"
+      ],
+      "description": "Agent role that owns this document"
+    },
+    "tier": {
+      "enum": ["critical", "standard", "informational"],
+      "description": "critical = blocks release, standard = governs work, informational = reference"
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "description": "At least one tag from the approved list"
+    },
+    "review_cycle": {
+      "enum": ["quarterly", "monthly", "on-change"],
+      "description": "How often this document must be reviewed"
+    }
+  }
+}

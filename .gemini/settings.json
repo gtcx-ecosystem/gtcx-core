@@ -1,0 +1,16 @@
+{
+  "agent": "gemini-1.5-pro",
+  "context_window": 2000000,
+  "instructions": "Read AGENTS.md for canonical repo instructions. Read GEMINI.md for Gemini-specific overrides.",
+  "permissions": {
+    "filesystem": "read-write",
+    "git": "read-only",
+    "shell": "restricted",
+    "publish": false,
+    "deploy": false
+  },
+  "safety": {
+    "never_execute": ["rm -rf", "sudo", "chmod -R", "git push", "npm publish"],
+    "require_approval": ["git commit", "git merge", "pnpm publish"]
+  }
+}

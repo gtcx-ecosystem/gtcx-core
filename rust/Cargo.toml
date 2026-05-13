@@ -91,6 +91,8 @@ secp256k1 = { version = "0.29", features = ["rand"] }
 lto = true
 codegen-units = 1
 panic = "abort"
+opt-level = "z"
+strip = true
 
 [profile.bench]
 lto = true
