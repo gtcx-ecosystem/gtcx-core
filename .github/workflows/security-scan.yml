@@ -1,0 +1,95 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    # Run daily at 06:00 UTC
+    - cron: '0 6 * * *'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: read
+  issues: read
+
+jobs:
+  trufflehog:
+    name: Secret Scan (TruffleHog)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: TruffleHog scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --only-verified
+
+  cargo-audit:
+    name: Rust Dependency Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit
+
+      - name: Run cargo audit
+        working-directory: rust
+        run: cargo audit
+
+  pnpm-audit:
+    name: Node Dependency Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable Corepack and pin pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.15.0 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run pnpm audit
+        run: pnpm audit --audit-level=moderate
+
+  security-summary:
+    name: Security Summary
+    runs-on: ubuntu-latest
+    needs: [trufflehog, cargo-audit, pnpm-audit]
+    if: always()
+    steps:
+      - name: Report status
+        run: |
+          echo "TruffleHog: ${{ needs.trufflehog.result }}"
+          echo "cargo audit: ${{ needs.cargo-audit.result }}"
+          echo "pnpm audit: ${{ needs.pnpm-audit.result }}"
+
+      - name: Fail if any scan failed
+        if: |
+          needs.trufflehog.result == 'failure' ||
+          needs.cargo-audit.result == 'failure' ||
+          needs.pnpm-audit.result == 'failure'
+        run: |
+          echo "One or more security scans failed."
+          exit 1
