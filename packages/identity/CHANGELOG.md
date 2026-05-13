@@ -1,5 +1,22 @@
 # @gtcx/identity
 
+## 3.0.0
+
+### Minor Changes
+
+- 30126d9: Baseline the reviewed 2026-05-06 public API surface for release readiness.
+
+  The current generated declarations expose additive exports in crypto and identity, and signature-level changes in events and services. This changeset records the required semver intent so release automation does not publish the updated API contract without the appropriate package version movement.
+
+### Patch Changes
+
+- Updated dependencies [5775d52]
+- Updated dependencies [30126d9]
+- Updated dependencies [fed8541]
+- Updated dependencies [b8c5c81]
+  - @gtcx/types@3.0.0
+  - @gtcx/crypto@3.0.0
+
 ## 2.0.0
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @gtcx/security
 
+## 3.0.0
+
+### Patch Changes
+
+- Updated dependencies [30126d9]
+- Updated dependencies [fed8541]
+- Updated dependencies [b8c5c81]
+  - @gtcx/crypto@3.0.0
+
 ## 2.0.0
 
 ### Patch Changes

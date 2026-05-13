@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/services",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Application-level business services for GTCX Protocol — registration, trading, compliance",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

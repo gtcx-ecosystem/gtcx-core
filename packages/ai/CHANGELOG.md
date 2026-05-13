@@ -1,5 +1,20 @@
 # @gtcx/ai
 
+## 0.3.0
+
+### Minor Changes
+
+- b8c5c81: Add async span propagation via `AsyncLocalStorage`. `traced()` and `withTrace()` now emit `traceId`, `spanId`, and `parentSpanId` in structured logs. Nested traced operations inherit parent trace context across sync and async boundaries. New APIs: `getCurrentTraceContext()`, `runWithTraceContext()`.
+- d432014: Provenance-aware tracing helpers
+  - Add `attachProvenance(data, provenance)` to wrap AI output with `AgenticProvenance` envelope
+  - Add `createProvenanceLogger(category)` for structured provenance logging to stderr
+  - Add `ProvenancedResult<T>` type for results carrying provenance metadata
+
+### Patch Changes
+
+- Updated dependencies [5775d52]
+  - @gtcx/types@3.0.0
+
 ## 0.2.2
 
 ### Patch Changes

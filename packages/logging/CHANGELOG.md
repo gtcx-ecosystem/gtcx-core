@@ -1,5 +1,11 @@
 # @gtcx/logging
 
+## 0.3.0
+
+### Minor Changes
+
+- b8c5c81: Auto-enrich `LogEntry` with `traceId`, `spanId`, and `parentSpanId` when emitted inside an `@gtcx/ai` traced operation. Maintains loose coupling via dynamic `require` with graceful fallback when `@gtcx/ai` is not installed.
+
 ## 0.2.2
 
 ### Patch Changes

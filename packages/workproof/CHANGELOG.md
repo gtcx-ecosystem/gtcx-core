@@ -1,5 +1,19 @@
 # @gtcx/workproof
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [5775d52]
+- Updated dependencies [30126d9]
+- Updated dependencies [3677b1a]
+- Updated dependencies [af988b2]
+- Updated dependencies [fed8541]
+- Updated dependencies [b8c5c81]
+  - @gtcx/types@3.0.0
+  - @gtcx/crypto@3.0.0
+  - @gtcx/verification@3.0.0
+
 ## 0.1.2
 
 ### Patch Changes

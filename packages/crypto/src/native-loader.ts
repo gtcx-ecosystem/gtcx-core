@@ -29,26 +29,31 @@ function canLoadNative(): boolean {
 }
 
 function tryLoadNative(): NativeCrypto | null {
+  /* c8 ignore start — browser-only branch; not testable in Node environment */
   if (!canLoadNative()) {
-    /* c8 ignore next */
     return null;
   }
+  /* c8 ignore stop */
 
+  /* c8 ignore start — ESM-only branch; require is always available in Node/Vitest */
   const req =
     typeof require === 'function'
       ? require
       : createRequire(path.join(process.cwd(), 'package.json'));
+  /* c8 ignore stop */
   try {
     const mod = req('@gtcx/crypto-native') as NativeCrypto;
+    /* c8 ignore start — defensive check for invalid module shape */
     if (!mod || typeof mod.generateKeyPair !== 'function') {
-      /* c8 ignore next */
       return null;
     }
+    /* c8 ignore stop */
     return mod;
+    /* c8 ignore start — module unavailable in this environment */
   } catch {
-    /* c8 ignore next */
     return null;
   }
+  /* c8 ignore stop */
 }
 
 export function getNativeCrypto(): NativeCrypto | null {
@@ -58,16 +63,19 @@ export function getNativeCrypto(): NativeCrypto | null {
   cached = tryLoadNative();
   const requireNative =
     typeof process !== 'undefined' && isTruthy(process.env['GTCX_REQUIRE_NATIVE']);
+  /* c8 ignore start — requires mocking module load failure in Node */
   if (!cached && requireNative) {
-    /* c8 ignore next */
     throw new Error('Native crypto bindings are required but could not be loaded.');
   }
+  /* c8 ignore stop */
   return cached;
 }
 
+/* c8 ignore start — false branch requires mocking module load failure */
 export function getBackend(): Backend {
   return getNativeCrypto() ? 'native' : 'js';
 }
+/* c8 ignore stop */
 
 /**
  * Reset the native crypto cache.

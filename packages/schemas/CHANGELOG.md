@@ -1,5 +1,24 @@
 # @gtcx/schemas
 
+## 3.0.0
+
+### Minor Changes
+
+- 5775d52: Agentic Provenance types and schemas
+  - Add `AgenticProvenance` interface with `trustLevel`, `confidence`, `evidenceRefs`, `methodologyVersion`, `requiresHumanReview`, `decisionProvenance`
+  - Add `ReviewThreshold` with 4 default gates: `high_impact_compliance`, `model_uncertainty`, `stale_or_partial_evidence`, `jurisdictional_edge_case`
+  - Add `ProvenancePolicy` and `evaluateProvenancePolicy()` for machine-readable policy gates
+  - Add `shouldRequireHumanReview()` helper
+  - Add Zod schemas in `@gtcx/schemas` for runtime validation
+
+- b8c5c81: n
+  Populate Core12 compliance framework controls for domains D02–D12. Each domain now contains two fully specified controls with evidence requirements, verification methods, and scoring criteria. Eliminates governance placeholder risk for procurement readiness.
+
+### Patch Changes
+
+- Updated dependencies [5775d52]
+  - @gtcx/types@3.0.0
+
 ## 2.0.0
 
 ### Patch Changes

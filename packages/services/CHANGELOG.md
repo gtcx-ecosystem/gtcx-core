@@ -1,5 +1,29 @@
 # @gtcx/services
 
+## 1.0.0
+
+### Major Changes
+
+- 30126d9: Baseline the reviewed 2026-05-06 public API surface for release readiness.
+
+  The current generated declarations expose additive exports in crypto and identity, and signature-level changes in events and services. This changeset records the required semver intent so release automation does not publish the updated API contract without the appropriate package version movement.
+
+### Patch Changes
+
+- c2ce76c: Decompose `registration.ts` and `trading.ts` into focused submodules
+  - `registration.ts`: 599 → 364 LOC (extracted `config`, `errors`, `helpers`, `types`, `validation`, `progress`)
+  - `trading.ts`: 728 → 411 LOC (extracted `config`, `errors`, `pricing`, `validation`, `execution`, `helpers`)
+  - Removed architecture boundary exceptions for both files
+  - All 189 tests pass, zero lint/type errors
+
+- b8c5c81: Decompose `UnifiedComplianceService` into focused modules: `infrastructure.ts` (metrics/event factories), `dashboard.ts` (dashboard builder), `queries.ts` (data access), and `verification-methods.ts` (license/KYC verification). Reduces `UnifiedComplianceService.ts` from 555 to 495 LOC, removing the architecture boundary exception.
+- Updated dependencies [30126d9]
+- Updated dependencies [fed8541]
+- Updated dependencies [b8c5c81]
+  - @gtcx/crypto@3.0.0
+  - @gtcx/events@1.0.0
+  - @gtcx/domain@3.0.0
+
 ## 0.2.2
 
 ### Patch Changes

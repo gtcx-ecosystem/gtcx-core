@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/runtime",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Batteries-included runtime substrate: api-client, connectivity, resilience, telemetry",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

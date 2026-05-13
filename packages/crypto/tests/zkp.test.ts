@@ -136,6 +136,54 @@ describe('HashCommitmentZkpEngine', () => {
     expect(proof1.proof).not.toBe(proof2.proof);
     expect(proof1.publicInputs).not.toEqual(proof2.publicInputs);
   });
+
+  it('accepts Uint8Array witness and produces verifiable proof', async () => {
+    const engine = new HashCommitmentZkpEngine();
+    const proof = await engine.generate({
+      system: 'bulletproofs',
+      proofType: 'gci_threshold',
+      publicInputs: ['threshold:50'],
+      witness: new TextEncoder().encode('score:75'),
+      verificationKeyId: 'bulletproofs-gci-v1',
+    });
+    expect(ZKProofSchema.safeParse(proof).success).toBe(true);
+    await expect(engine.verify(proof)).resolves.toBe(true);
+  });
+
+  it('does not duplicate commitment when already in publicInputs', async () => {
+    const original = globalThis.crypto.getRandomValues.bind(globalThis.crypto);
+    globalThis.crypto.getRandomValues = vi.fn((array: Uint8Array) => {
+      array.fill(0);
+      return array;
+    }) as typeof globalThis.crypto.getRandomValues;
+
+    try {
+      const engine = new HashCommitmentZkpEngine();
+      const proof1 = await engine.generate({
+        system: 'bulletproofs',
+        proofType: 'gci_threshold',
+        publicInputs: ['threshold:50'],
+        witness: 'score:75',
+        verificationKeyId: 'bulletproofs-gci-v1',
+      });
+
+      const decoded1 = JSON.parse(Buffer.from(proof1.proof, 'base64').toString('utf8'));
+      const commitment = decoded1.commitment as string;
+
+      const proof2 = await engine.generate({
+        system: 'bulletproofs',
+        proofType: 'gci_threshold',
+        publicInputs: ['threshold:50', commitment],
+        witness: 'score:75',
+        verificationKeyId: 'bulletproofs-gci-v1',
+      });
+
+      expect(proof2.publicInputs.filter((i) => i === commitment).length).toBe(1);
+      await expect(engine.verify(proof2)).resolves.toBe(true);
+    } finally {
+      globalThis.crypto.getRandomValues = original;
+    }
+  });
 });
 
 describe('HashCommitmentZkpEngine — generate() default-deny (SA-002)', () => {
@@ -298,6 +346,57 @@ describe('ZKP helper edge cases', () => {
     expect(proof.publicInputs.filter((i) => i === commitment)).toHaveLength(1);
     // Original inputs are preserved
     expect(proof.publicInputs).toContain('threshold:50');
+  });
+
+  it('rejects proof that fails ZKProofSchema validation', async () => {
+    await expect(engine.verify({ system: 'invalid' } as any)).resolves.toBe(false);
+    await expect(engine.verify({} as any)).resolves.toBe(false);
+  });
+
+  it('rejects proof with non-canonical base64 encoding (malleability)', async () => {
+    const proof = await engine.generate(baseInput);
+    const decoded = JSON.parse(Buffer.from(proof.proof, 'base64').toString('utf8'));
+    // Re-serialize with indentation — valid JSON but non-canonical encoding
+    const nonCanonical = Buffer.from(JSON.stringify(decoded, null, 2)).toString('base64');
+    const tampered = { ...proof, proof: nonCanonical };
+    await expect(engine.verify(tampered)).resolves.toBe(false);
+  });
+
+  it('rejects proof with oversized payload (>100KB)', async () => {
+    const proof = await engine.generate(baseInput);
+    const decoded = JSON.parse(Buffer.from(proof.proof, 'base64').toString('utf8'));
+    decoded.salt = 'a'.repeat(200_000);
+    const oversized = { ...proof, proof: Buffer.from(JSON.stringify(decoded)).toString('base64') };
+    await expect(engine.verify(oversized)).resolves.toBe(false);
+  });
+
+  it('rejects proof with non-hex response', async () => {
+    const proof = await engine.generate(baseInput);
+    const decoded = JSON.parse(Buffer.from(proof.proof, 'base64').toString('utf8'));
+    decoded.response = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz';
+    const bad = { ...proof, proof: Buffer.from(JSON.stringify(decoded)).toString('base64') };
+    await expect(engine.verify(bad)).resolves.toBe(false);
+  });
+
+  it('rejects proof with wrong-length response', async () => {
+    const proof = await engine.generate(baseInput);
+    const decoded = JSON.parse(Buffer.from(proof.proof, 'base64').toString('utf8'));
+    decoded.response = 'abcdef';
+    const bad = { ...proof, proof: Buffer.from(JSON.stringify(decoded)).toString('base64') };
+    await expect(engine.verify(bad)).resolves.toBe(false);
+  });
+
+  it('works when Buffer is temporarily unavailable', async () => {
+    const originalBuffer = globalThis.Buffer;
+    // @ts-expect-error — intentionally removing Buffer for pure-JS fallback
+    delete globalThis.Buffer;
+    try {
+      const freshProof = await engine.generate(baseInput);
+      expect(freshProof.proof).toBeTruthy();
+      await expect(engine.verify(freshProof)).resolves.toBe(true);
+    } finally {
+      globalThis.Buffer = originalBuffer;
+    }
   });
 });
 

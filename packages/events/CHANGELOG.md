@@ -1,5 +1,13 @@
 # @gtcx/events
 
+## 1.0.0
+
+### Major Changes
+
+- 30126d9: Baseline the reviewed 2026-05-06 public API surface for release readiness.
+
+  The current generated declarations expose additive exports in crypto and identity, and signature-level changes in events and services. This changeset records the required semver intent so release automation does not publish the updated API contract without the appropriate package version movement.
+
 ## 0.2.2
 
 ### Patch Changes
