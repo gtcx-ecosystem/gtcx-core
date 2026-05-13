@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-13T13:11:19.939Z",
+  "generatedAt": "2026-05-13T13:45:17.558Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.3.0",
@@ -103,10 +103,17 @@
       "version": "0.4.0",
       "dir": "packages/connectivity",
       "typesPath": "packages/connectivity/dist/index.d.ts",
-      "hash": "fe0d9a49d284a276f02ccba6b6b6e17928a8c5ba70bf30f1928c7497053010d5",
+      "hash": "eaf8c0df7539314cdcc1b82588d8cdc07402a883233de8169e403285fd332ce4",
       "exports": [
         "adaptClientOptionsForProfile",
+        "AdaptiveMode",
+        "AdaptiveModeConfig",
+        "BatchFlushFn",
+        "BatchRequest",
+        "BatchResponse",
         "classifyProfile",
+        "CompressedPayload",
+        "compressPayload",
         "ConnectivityCheckFn",
         "ConnectivityCheckResult",
         "ConnectivityDetector",
@@ -115,8 +122,16 @@
         "ConnectivityProfile",
         "ConnectivityState",
         "createAdaptiveClientOptions",
+        "createAdaptiveMode",
         "createOfflineHandlerFromDetector",
-        "DEFAULT_PROFILE_CONFIG"
+        "decompressPayload",
+        "DEFAULT_PROFILE_CONFIG",
+        "downsampleConfig",
+        "DownsampleConfig",
+        "RequestBatcher",
+        "RequestBatcherOptions",
+        "shouldCompress",
+        "shouldDownsample"
       ]
     },
     "@gtcx/crypto": {
