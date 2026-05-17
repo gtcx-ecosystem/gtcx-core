@@ -361,6 +361,36 @@ describe('InMemoryMetricsCollector', () => {
       expect(stats!.min).toBeLessThan(300);
     });
   });
+
+  describe('max observations', () => {
+    it('should drop oldest histogram values when max observations exceeded', () => {
+      const limited = new InMemoryMetricsCollector({ maxObservations: 2 });
+      limited.histogram('latency', 10);
+      limited.histogram('latency', 20);
+      limited.histogram('latency', 30);
+
+      const stats = limited.getHistogramStats('latency');
+      expect(stats).toBeDefined();
+      expect(stats!.count).toBe(2);
+      expect(stats!.sum).toBe(50);
+    });
+
+    it('should drop oldest summary values when max observations exceeded', () => {
+      const limited = new InMemoryMetricsCollector({ maxObservations: 2 });
+      limited.summary('size', 100);
+      limited.summary('size', 200);
+      limited.summary('size', 300);
+
+      const metrics = limited.getMetrics();
+      const sumMetric = metrics.find(
+        (m) => m.name === 'size' && m.type === 'summary'
+      ) as SummaryMetric;
+
+      expect(sumMetric).toBeDefined();
+      expect(sumMetric.count).toBe(2);
+      expect(sumMetric.sum).toBe(500);
+    });
+  });
 });
 
 // ============================================================================

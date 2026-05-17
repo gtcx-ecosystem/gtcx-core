@@ -163,6 +163,16 @@ describe('createEnhancedIdentity', () => {
     const result = await createEnhancedIdentity();
     expect(result.identity.keyDerivation).toBeUndefined();
   });
+
+  it('defaults keyDerivation algorithm and iterations when omitted', async () => {
+    const result = await createEnhancedIdentity({
+      keyDerivation: { salt: 'a'.repeat(32) },
+    });
+    expect(result.identity.keyDerivation).toBeDefined();
+    expect(result.identity.keyDerivation!.algorithm).toBe('Argon2');
+    expect(result.identity.keyDerivation!.iterations).toBe(100000);
+    expect(result.identity.keyDerivation!.salt).toBe('a'.repeat(32));
+  });
 });
 
 // ---------------------------------------------------------------------------

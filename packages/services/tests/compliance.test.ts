@@ -1204,4 +1204,150 @@ describe('Repository DI: IComplianceRepository', () => {
       expect(duration).toBeGreaterThanOrEqual(0);
     });
   });
+
+  describe('branch coverage additions', () => {
+    it('detects non-compliant location', async () => {
+      const repo = createMockComplianceRepo();
+      repo.checkLocation = vi
+        .fn()
+        .mockResolvedValue({ compliant: false, issue: 'Restricted area' });
+      const service = createService({ complianceRepository: repo });
+      const lot = createMockAssetLot();
+
+      const records = await service.checkAssetLotCompliance(lot);
+
+      const locRecord = records.find((r) => r.regulation.code === 'ENV-001');
+      expect(locRecord).toBeDefined();
+      expect(locRecord!.status).toBe('warning');
+    });
+
+    it('detects non-compliant location without explicit issue', async () => {
+      const repo = createMockComplianceRepo();
+      repo.checkLocation = vi.fn().mockResolvedValue({ compliant: false });
+      const service = createService({ complianceRepository: repo });
+      const lot = createMockAssetLot();
+
+      const records = await service.checkAssetLotCompliance(lot);
+
+      const locRecord = records.find((r) => r.regulation.code === 'ENV-001');
+      expect(locRecord).toBeDefined();
+      expect(locRecord!.finding.description).toBe('Location compliance issue');
+    });
+
+    it('detects invalid producer license without explicit issue', async () => {
+      class TestService extends UnifiedComplianceService {
+        protected override async checkProducerLicense(_producerId: string) {
+          return { compliant: false };
+        }
+      }
+
+      const service = new TestService({
+        storageService: createMockStorageService(),
+        cryptoService: createMockCryptoService(),
+      });
+      const lot = createMockAssetLot();
+
+      const records = await service.checkAssetLotCompliance(lot);
+
+      const licenseRecord = records.find((r) => r.regulation.code === 'LICENSE-001');
+      expect(licenseRecord).toBeDefined();
+      expect(licenseRecord!.finding.description).toBe('Producer does not have valid license');
+    });
+
+    it('high-value transaction with compliant KYC does not add warning', async () => {
+      class TestService extends UnifiedComplianceService {
+        protected override async checkKYCCompliance(_transaction: Transaction) {
+          return { compliant: true };
+        }
+      }
+
+      const service = new TestService(
+        {
+          storageService: createMockStorageService(),
+          cryptoService: createMockCryptoService(),
+        },
+        { highValueThreshold: 1000 }
+      );
+      const tx = createMockTransaction({ price: 5000 });
+
+      const records = await service.checkTransactionCompliance(tx);
+
+      const amlRecord = records.find((r) => r.regulation.code === 'AML-001');
+      expect(amlRecord).toBeUndefined();
+    });
+
+    it('calculates compliance score from records', async () => {
+      const repo = createMockComplianceRepo();
+      repo.getRecords = vi.fn().mockResolvedValue([
+        {
+          id: 'rec-1',
+          type: 'test',
+          status: 'compliant',
+          severity: 'low',
+          sourceApp: 'test',
+          sourceEntityId: 'ent-1',
+          sourceEntityType: 'asset_lot',
+          regulation: {
+            code: 'TEST-001',
+            title: 'Test',
+            description: 'Test',
+            authority: 'auth',
+            category: 'licensing',
+          },
+          finding: {
+            description: 'Test finding',
+            timestamp: new Date().toISOString(),
+            reportedBy: 'system',
+          },
+          metadata: {
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            tags: [],
+            priority: 1,
+            references: [],
+          },
+        },
+        {
+          id: 'rec-2',
+          type: 'test',
+          status: 'violation',
+          severity: 'high',
+          sourceApp: 'test',
+          sourceEntityId: 'ent-2',
+          sourceEntityType: 'asset_lot',
+          regulation: {
+            code: 'TEST-002',
+            title: 'Test2',
+            description: 'Test2',
+            authority: 'auth',
+            category: 'licensing',
+          },
+          finding: {
+            description: 'Test finding 2',
+            timestamp: new Date().toISOString(),
+            reportedBy: 'system',
+          },
+          metadata: {
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            tags: [],
+            priority: 1,
+            references: [],
+          },
+        },
+      ]);
+      const service = createService({ complianceRepository: repo });
+
+      const result = await service.generateComplianceReport({
+        dateRange: {
+          start: '2024-01-01T00:00:00.000Z',
+          end: '2026-12-31T00:00:00.000Z',
+        },
+        format: 'summary',
+      });
+
+      expect(result.metadata.complianceScore).toBe(50);
+      expect(result.metadata.recordCount).toBe(2);
+    });
+  });
 });

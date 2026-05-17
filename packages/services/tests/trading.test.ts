@@ -16,8 +16,12 @@ import type {
 } from '@gtcx/domain';
 import { describe, expect, it, vi } from 'vitest';
 
-import type { ITraderRepository } from '../src/repositories';
+import type { ITraderRepository, ITransactionRepository } from '../src/repositories';
 import { TradingService } from '../src/trading';
+import { toErrorCause } from '../src/trading/errors';
+import { getTraderInfo, getTransactionHistory } from '../src/trading/helpers';
+import { calculateQualityPremium } from '../src/trading/pricing';
+import { validateTradeRequest } from '../src/trading/validation';
 
 // ============================================================================
 // HELPERS
@@ -352,6 +356,18 @@ describe('TradingService', () => {
       const priceEvent = events.find((call) => call[0].type === 'trading.price_calculated');
       expect(priceEvent).toBeDefined();
       expect(priceEvent![0].payload.assetLotId).toBe(lot.id);
+    });
+
+    it('throws when price service fails during fair price calculation', async () => {
+      const failingPriceService = createMockPriceService();
+      (failingPriceService.getMarketPrice as ReturnType<typeof vi.fn>).mockRejectedValue(
+        new Error('Service unavailable')
+      );
+      const service = createService({ priceService: failingPriceService });
+
+      await expect(service.calculateFairPrice(createMockAssetLot())).rejects.toThrow(
+        /Failed to calculate fair price/
+      );
     });
   });
 
@@ -842,5 +858,325 @@ describe('Repository DI: ITraderRepository + ITransactionRepository', () => {
       expect(tx.id).toBeDefined();
       expect(tx.status).toBe('pending');
     });
+  });
+
+  describe('findTradingOpportunities with repository', () => {
+    it('filters lots by criteria and creates opportunities', async () => {
+      const lots: AssetLot[] = [
+        createMockAssetLot({
+          id: 'lot-1',
+          commodityType: 'gold',
+          weight: 50,
+          purity: 80,
+          form: 'nugget',
+          qualityGrade: 'A',
+        }),
+        createMockAssetLot({
+          id: 'lot-2',
+          commodityType: 'silver',
+          weight: 200,
+          purity: 95,
+          form: 'bar',
+          qualityGrade: 'B',
+        }),
+      ];
+
+      const traderRepo: ITraderRepository = {
+        getTrader: vi.fn().mockResolvedValue(undefined),
+        getAvailableLots: vi.fn().mockResolvedValue(lots),
+      };
+
+      const service = new TradingService(
+        {
+          priceService: createMockPriceService(1000),
+          complianceService: createMockComplianceService(),
+          cryptoService: createMockCryptoService(),
+          storageService: createMockStorageService(),
+          traderRepository: traderRepo,
+        },
+        {}
+      );
+
+      const opportunities = await service.findTradingOpportunities({ commodityType: 'gold' });
+
+      expect(opportunities).toHaveLength(1);
+      expect(opportunities[0].assetLotId).toBe('lot-1');
+      expect(opportunities[0].seller.name).toBe('Unknown Trader');
+    });
+
+    it('filters by minPurity when lot has no purity', async () => {
+      const lots: AssetLot[] = [
+        createMockAssetLot({ id: 'lot-1', commodityType: 'gold', purity: undefined, weight: 50 }),
+        createMockAssetLot({ id: 'lot-2', commodityType: 'gold', purity: 95, weight: 50 }),
+      ];
+
+      const traderRepo: ITraderRepository = {
+        getTrader: vi.fn().mockResolvedValue(undefined),
+        getAvailableLots: vi.fn().mockResolvedValue(lots),
+      };
+
+      const service = new TradingService(
+        {
+          priceService: createMockPriceService(1000),
+          complianceService: createMockComplianceService(),
+          cryptoService: createMockCryptoService(),
+          storageService: createMockStorageService(),
+          traderRepository: traderRepo,
+        },
+        {}
+      );
+
+      const opportunities = await service.findTradingOpportunities({
+        commodityType: 'gold',
+        minPurity: 50,
+      });
+      expect(opportunities).toHaveLength(1);
+      expect(opportunities[0].assetLotId).toBe('lot-2');
+    });
+
+    it('filters by maxPurity, minWeight, maxWeight, and forms', async () => {
+      const lots: AssetLot[] = [
+        createMockAssetLot({
+          id: 'lot-1',
+          commodityType: 'gold',
+          purity: 90,
+          weight: 100,
+          form: 'nugget',
+        }),
+        createMockAssetLot({
+          id: 'lot-2',
+          commodityType: 'gold',
+          purity: 90,
+          weight: 200,
+          form: 'bar',
+        }),
+        createMockAssetLot({
+          id: 'lot-3',
+          commodityType: 'gold',
+          purity: 90,
+          weight: 40,
+          form: 'dust',
+        }),
+        createMockAssetLot({
+          id: 'lot-4',
+          commodityType: 'gold',
+          purity: 90,
+          weight: 80,
+          form: 'bar',
+        }),
+        createMockAssetLot({
+          id: 'lot-5',
+          commodityType: 'gold',
+          purity: 96,
+          weight: 80,
+          form: 'nugget',
+        }),
+      ];
+
+      const traderRepo: ITraderRepository = {
+        getTrader: vi.fn().mockResolvedValue(undefined),
+        getAvailableLots: vi.fn().mockResolvedValue(lots),
+      };
+
+      const service = new TradingService(
+        {
+          priceService: createMockPriceService(1000),
+          complianceService: createMockComplianceService(),
+          cryptoService: createMockCryptoService(),
+          storageService: createMockStorageService(),
+          traderRepository: traderRepo,
+        },
+        {}
+      );
+
+      const opportunities = await service.findTradingOpportunities({
+        commodityType: 'gold',
+        maxPurity: 95,
+        minWeight: 60,
+        maxWeight: 150,
+        forms: ['nugget'],
+      });
+      expect(opportunities).toHaveLength(1);
+      expect(opportunities[0].assetLotId).toBe('lot-1');
+    });
+
+    it('uses ungraded when qualityGrade is missing', async () => {
+      const lots: AssetLot[] = [
+        createMockAssetLot({ id: 'lot-1', commodityType: 'gold', qualityGrade: undefined }),
+      ];
+
+      const traderRepo: ITraderRepository = {
+        getTrader: vi.fn().mockResolvedValue(undefined),
+        getAvailableLots: vi.fn().mockResolvedValue(lots),
+      };
+
+      const service = new TradingService(
+        {
+          priceService: createMockPriceService(1000),
+          complianceService: createMockComplianceService(),
+          cryptoService: createMockCryptoService(),
+          storageService: createMockStorageService(),
+          traderRepository: traderRepo,
+        },
+        {}
+      );
+
+      const opportunities = await service.findTradingOpportunities({});
+      expect(opportunities[0].qualityGrade).toBe('ungraded');
+    });
+
+    it('throws when trader repository fails', async () => {
+      const traderRepo: ITraderRepository = {
+        getTrader: vi.fn().mockRejectedValue(new Error('DB down')),
+        getAvailableLots: vi.fn().mockRejectedValue(new Error('DB down')),
+      };
+
+      const service = new TradingService(
+        {
+          priceService: createMockPriceService(),
+          complianceService: createMockComplianceService(),
+          cryptoService: createMockCryptoService(),
+          storageService: createMockStorageService(),
+          traderRepository: traderRepo,
+        },
+        {}
+      );
+
+      await expect(service.findTradingOpportunities({})).rejects.toThrow(
+        /Failed to find trading opportunities/
+      );
+    });
+  });
+
+  describe('executeTrade error handling', () => {
+    it('emits trade_failed with unknown error on non-Error throw', async () => {
+      const emitter = createMockEventEmitter();
+      const storage = createMockStorageService();
+      (storage.saveTransaction as ReturnType<typeof vi.fn>).mockImplementation(() => {
+        throw 'string error';
+      });
+
+      const service = createService({
+        eventEmitter: emitter,
+        storageService: storage,
+      });
+
+      await expect(service.executeTrade(createValidTradeRequest())).rejects.toBe('string error');
+
+      const failedEvent = (emitter.emit as ReturnType<typeof vi.fn>).mock.calls.find(
+        (call) => call[0].type === 'trading.trade_failed'
+      );
+      expect(failedEvent).toBeDefined();
+      expect(failedEvent![0].payload.error).toBe('Unknown error');
+    });
+  });
+
+  describe('getTradeAnalytics with repository', () => {
+    it('calculates analytics from transaction history', async () => {
+      const txRepo = {
+        getHistory: vi.fn().mockResolvedValue([
+          { quantity: 100, price: 5000, quantityUnit: 'g' },
+          { quantity: 200, price: 12000, quantityUnit: 'g' },
+        ]),
+      };
+
+      const service = new TradingService(
+        {
+          priceService: createMockPriceService(),
+          complianceService: createMockComplianceService(),
+          cryptoService: createMockCryptoService(),
+          storageService: createMockStorageService(),
+          transactionRepository: txRepo as unknown as ITransactionRepository,
+        },
+        {}
+      );
+
+      const analytics = await service.getTradeAnalytics('gold');
+      expect(analytics.totalVolume).toBe(300);
+      expect(analytics.averagePrice).toBe(17000 / 300);
+      expect(analytics.volumeUnit).toBe('g');
+    });
+
+    it('throws when transaction repository fails', async () => {
+      const txRepo = {
+        getHistory: vi.fn().mockRejectedValue(new Error('DB down')),
+      };
+
+      const service = new TradingService(
+        {
+          priceService: createMockPriceService(),
+          complianceService: createMockComplianceService(),
+          cryptoService: createMockCryptoService(),
+          storageService: createMockStorageService(),
+          transactionRepository: txRepo as unknown as ITransactionRepository,
+        },
+        {}
+      );
+
+      await expect(service.getTradeAnalytics('gold')).rejects.toThrow(
+        /Failed to get trade analytics/
+      );
+    });
+  });
+});
+
+describe('trading helpers', () => {
+  it('getTraderInfo returns trader when repo provided', async () => {
+    const trader: Trader = {
+      id: 't1',
+      licenseNumber: 'LIC-001',
+      name: 'Test Trader',
+      location: { latitude: 0, longitude: 0, accuracy: 1, timestamp: 0 },
+      verificationLevel: 'basic',
+      roles: ['producer'],
+    };
+    const repo: ITraderRepository = {
+      getTrader: vi.fn().mockResolvedValue(trader),
+      getAvailableLots: vi.fn().mockResolvedValue([]),
+    };
+    const result = await getTraderInfo('t1', repo);
+    expect(result).toEqual(trader);
+  });
+
+  it('getTraderInfo returns undefined when no repo', async () => {
+    const result = await getTraderInfo('t1', undefined);
+    expect(result).toBeUndefined();
+  });
+
+  it('getTransactionHistory delegates to repo when provided', async () => {
+    const repo = {
+      getHistory: vi.fn().mockResolvedValue([{ id: 'tx-1', quantity: 100, price: 5000 }]),
+    };
+    const result = await getTransactionHistory(
+      'gold',
+      '7d',
+      repo as unknown as ITransactionRepository
+    );
+    expect(result).toHaveLength(1);
+  });
+});
+
+describe('trading validation', () => {
+  it('validateTradeRequest handles null request', () => {
+    const emitter = createMockEventEmitter();
+    const factory = { trading: vi.fn().mockReturnValue({ type: 'event' }) };
+    expect(() => validateTradeRequest(null, 'cid', emitter as never, factory as never)).toThrow(
+      /Invalid trade request/
+    );
+  });
+});
+
+describe('trading pricing', () => {
+  it('calculateQualityPremium returns 0 for unknown grade', () => {
+    const lot = createMockAssetLot({ qualityGrade: 'unknown' as never });
+    expect(calculateQualityPremium(lot)).toBe(0);
+  });
+});
+
+describe('trading errors', () => {
+  it('toErrorCause wraps non-Error values', () => {
+    const result = toErrorCause('string error');
+    expect(result).toBeInstanceOf(Error);
+    expect(result.message).toBe('string error');
   });
 });

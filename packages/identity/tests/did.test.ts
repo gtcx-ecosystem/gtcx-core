@@ -48,6 +48,17 @@ describe('createDID', () => {
 
     expect(did1).not.toBe(did2);
   });
+
+  it('falls back to hashing public key when fingerprint is missing', async () => {
+    const { identity } = await createIdentity();
+    const identityWithoutFingerprint = {
+      ...identity,
+      metadata: { ...identity.metadata, fingerprint: undefined },
+    } as unknown as import('@gtcx/types').DigitalIdentity;
+    const did = createDID(identityWithoutFingerprint);
+    expect(did).toMatch(/^did:gtcx:.+$/);
+    expect(did).not.toBe(`did:gtcx:${identity.metadata.fingerprint}`);
+  });
 });
 
 // ---------------------------------------------------------------------------

@@ -1,8 +1,29 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
+vi.mock('@gtcx/api-client', async () => {
+  const actual = await vi.importActual<typeof import('@gtcx/api-client')>('@gtcx/api-client');
+  return {
+    ...actual,
+    createApiClient: vi.fn((options) => {
+      (globalThis as any).__lastApiClientOptions = options;
+      return {
+        get: vi.fn(),
+        post: vi.fn(),
+        put: vi.fn(),
+        delete: vi.fn(),
+        patch: vi.fn(),
+      } as unknown as import('@gtcx/api-client').IApiClient;
+    }),
+  };
+});
 
 import { createRuntime } from '../src/runtime.js';
 
 describe('createRuntime', () => {
+  afterEach(() => {
+    delete (globalThis as any).__lastApiClientOptions;
+  });
+
   it('creates a runtime with default standard deployment', () => {
     const runtime = createRuntime({ baseUrl: 'https://api.test' });
     expect(runtime.client).toBeDefined();
@@ -101,5 +122,56 @@ describe('createRuntime', () => {
     // There's no public isRunning flag, but we can verify the detector exists
     expect(runtime.connectivity).toBeDefined();
     runtime.destroy();
+  });
+
+  it('uses otel tracer when telemetry is otel', () => {
+    const runtime = createRuntime({ baseUrl: 'https://api.test', telemetry: 'otel' });
+    expect(runtime.tracer).toBeDefined();
+    runtime.destroy();
+  });
+
+  it('passes signer to api client', () => {
+    const signer = vi.fn();
+    const runtime = createRuntime({ baseUrl: 'https://api.test', signer });
+    expect(runtime.client).toBeDefined();
+    runtime.destroy();
+  });
+
+  it('passes fetcher to api client', () => {
+    const fetcher = vi.fn();
+    const runtime = createRuntime({ baseUrl: 'https://api.test', fetcher });
+    expect(runtime.client).toBeDefined();
+    runtime.destroy();
+  });
+
+  it('passes interceptors to api client', () => {
+    const runtime = createRuntime({
+      baseUrl: 'https://api.test',
+      interceptors: { request: [] },
+    });
+    expect(runtime.client).toBeDefined();
+    runtime.destroy();
+  });
+
+  it('passes traceContext to api client', () => {
+    const runtime = createRuntime({
+      baseUrl: 'https://api.test',
+      traceContext: { traceId: 'abc', spanId: 'def' },
+    });
+    expect(runtime.client).toBeDefined();
+    runtime.destroy();
+  });
+
+  it('enables offline queue', () => {
+    const runtime = createRuntime({ baseUrl: 'https://api.test', offlineQueue: true });
+    expect(runtime.client).toBeDefined();
+    runtime.destroy();
+  });
+
+  it('telemetry onRequestError handles missing error', () => {
+    createRuntime({ baseUrl: 'https://api.test', telemetry: 'in-memory' });
+    const options = (globalThis as any).__lastApiClientOptions;
+    expect(options.telemetry.onRequestError).toBeTypeOf('function');
+    expect(() => options.telemetry.onRequestError({ method: 'GET', error: null })).not.toThrow();
   });
 });

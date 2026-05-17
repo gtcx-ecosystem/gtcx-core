@@ -1,5 +1,6 @@
 import { generateKeyPair } from '@gtcx/crypto';
-import { describe, it, expect } from 'vitest';
+import * as crypto from '@gtcx/crypto';
+import { describe, it, expect, vi } from 'vitest';
 
 import { createWorkProof, verifyWorkProof } from '../src/workproof/operations';
 import type { WorkProofCredentialSubject } from '../src/workproof/types';
@@ -126,5 +127,70 @@ describe('verifyWorkProof', () => {
     const result = verifyWorkProof(wp, keyPair.publicKey);
     expect(result.valid).toBe(false);
     expect(result.errors).toContain('WorkProof has expired');
+  });
+
+  it('valid: false when WorkProof fails schema validation', () => {
+    const invalidWp = {
+      '@context': ['https://www.w3.org/2018/credentials/v1'],
+      type: ['WorkProof'],
+      issuer: 'did:example:issuer',
+      issuanceDate: 'not-a-date',
+      credentialSubject: {},
+    } as any;
+
+    const result = verifyWorkProof(invalidWp, 'any-key');
+    expect(result.valid).toBe(false);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors[0]).toMatch(/^Schema:/);
+  });
+
+  it('valid: false when proof envelope is missing', () => {
+    const keyPair = generateKeyPair('Ed25519');
+    const wp = createWorkProof({
+      credentialSubject: makeSubject(),
+      issuerDID: 'did:gtcx:issuer-001',
+      issuerPrivateKey: keyPair.privateKey,
+    });
+
+    // Remove proof after creation so schema still passes (proof is optional in schema)
+    delete wp.proof;
+
+    const result = verifyWorkProof(wp, keyPair.publicKey);
+    expect(result.valid).toBe(false);
+    expect(result.errors).toContain('Missing proof envelope');
+  });
+
+  it('valid: false when signature verification throws', () => {
+    const keyPair = generateKeyPair('Ed25519');
+    const wp = createWorkProof({
+      credentialSubject: makeSubject(),
+      issuerDID: 'did:gtcx:issuer-001',
+      issuerPrivateKey: keyPair.privateKey,
+    });
+
+    const spy = vi.spyOn(crypto, 'verify').mockImplementation(() => {
+      throw new Error('crypto failure');
+    });
+
+    const result = verifyWorkProof(wp, keyPair.publicKey);
+    expect(result.valid).toBe(false);
+    expect(result.errors).toContain('Signature verification failed');
+
+    spy.mockRestore();
+  });
+
+  it('valid: true for non-expired WorkProof with future expirationDate', () => {
+    const keyPair = generateKeyPair('Ed25519');
+    const futureDate = new Date(Date.now() + 86400000).toISOString();
+    const wp = createWorkProof({
+      credentialSubject: makeSubject(),
+      issuerDID: 'did:gtcx:issuer-001',
+      issuerPrivateKey: keyPair.privateKey,
+      expirationDate: futureDate,
+    });
+
+    const result = verifyWorkProof(wp, keyPair.publicKey);
+    expect(result.valid).toBe(true);
+    expect(result.errors).toHaveLength(0);
   });
 });

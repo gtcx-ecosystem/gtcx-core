@@ -933,6 +933,30 @@ describe('@gtcx/ai', () => {
       expect(log!.evidenceCount).toBe(1);
     });
 
+    it('logs provenance without optional context', () => {
+      const pl = createProvenanceLogger('test-provenance');
+      const provenance = {
+        trustLevel: 'verified' as const,
+        confidence: 0.92,
+        evidenceRefs: [],
+        methodologyVersion: { framework: 'cortex', version: '2.0.0', configurationHash: 'hash' },
+        requiresHumanReview: false,
+        decisionProvenance: {
+          decisionId: 'd-1',
+          decisionType: 'anomaly',
+          timestamp: Date.now(),
+          actor: 'cortex',
+          inputHash: 'in',
+          outputHash: 'out',
+        },
+      };
+      pl.logProvenance(provenance);
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.msg).toBe('provenance_record');
+    });
+
     it('logs evaluation at warn level when review is required', () => {
       const pl = createProvenanceLogger('test-provenance');
       const provenance = {
@@ -957,6 +981,79 @@ describe('@gtcx/ai', () => {
       expect(log!.level).toBe('warn');
       expect(log!.action).toBe('escalate');
       expect(log!.reason).toBe('low confidence');
+    });
+
+    it('logs evaluation at info level when review is not required', () => {
+      const pl = createProvenanceLogger('test-provenance');
+      const provenance = {
+        trustLevel: 'verified' as const,
+        confidence: 0.92,
+        evidenceRefs: [],
+        methodologyVersion: { framework: 'cortex', version: '2.0.0', configurationHash: 'hash' },
+        requiresHumanReview: false,
+        decisionProvenance: {
+          decisionId: 'd-1',
+          decisionType: 'anomaly',
+          timestamp: Date.now(),
+          actor: 'cortex',
+          inputHash: 'in',
+          outputHash: 'out',
+        },
+      };
+      pl.logEvaluation(provenance, 'approve', 'high confidence');
+
+      const log = getLastLog();
+      expect(log).not.toBeNull();
+      expect(log!.level).toBe('info');
+      expect(log!.action).toBe('approve');
+    });
+  });
+
+  describe('safeEmit', () => {
+    it('handles non-error throws in emitter callbacks', () => {
+      stderrSpy.mockClear();
+      const buggy: SpanEmitter = {
+        onSpanStart: () => {
+          throw 'string-throw';
+        },
+        onSpanEnd: () => {
+          throw 'string-throw';
+        },
+      };
+      const wrapped = traced(() => 'still-ok', 'stringThrow', {
+        category: 'test',
+        spanEmitter: buggy,
+      });
+      expect(wrapped()).toBe('still-ok');
+
+      const warnings = stderrSpy.mock.calls
+        .map((c) => {
+          try {
+            return JSON.parse(c[0] as string);
+          } catch {
+            return null;
+          }
+        })
+        .filter((l) => l?.event === 'span_emitter_error');
+
+      expect(warnings.length).toBeGreaterThanOrEqual(2);
+    });
+  });
+
+  describe('runWithTraceContext', () => {
+    it('generates traceId when context is omitted', () => {
+      const ctx = runWithTraceContext(() => getCurrentTraceContext());
+      expect(ctx).toBeDefined();
+      expect(ctx!.traceId).toBeDefined();
+      expect(ctx!.traceId.length).toBe(32);
+    });
+
+    it('generates spanId when only traceId is provided', () => {
+      const ctx = runWithTraceContext(() => getCurrentTraceContext(), { traceId: 'custom-trace' });
+      expect(ctx).toBeDefined();
+      expect(ctx!.traceId).toBe('custom-trace');
+      expect(ctx!.spanId).toBeDefined();
+      expect(ctx!.spanId.length).toBe(16);
     });
   });
 });

@@ -1,5 +1,5 @@
 import { generateKeyPair } from '@gtcx/crypto';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
 import { createNoopRevocationChecker } from '../src/certificates/revocation';
 import {
@@ -191,6 +191,81 @@ describe('tracedVerifyCertificate', () => {
     expect(result.isValid).toBe(false);
     expect(result.details).toContain('Missing certificate ID');
   });
+
+  it('should handle certificate without hash but with verificationData', async () => {
+    const fakeCert = {
+      certificateId: 'CERT_NO_HASH',
+      version: '1.0',
+      type: 'location' as const,
+      securityLevel: 'standard' as const,
+      metadata: {
+        issuer: 'test',
+        issuedAt: Date.now(),
+        userRole: 'producer',
+        deviceId: 'dev-1',
+        location: makeLocation(),
+      },
+      verificationData: {
+        publicKey: 'pk_test',
+        signature: 'sig_test',
+        timestamp: Date.now(),
+      },
+      createdAt: Date.now(),
+    };
+
+    const result = await tracedVerifyCertificate(fakeCert as any, revocationChecker);
+    expect(result.isValid).toBe(false);
+    expect(result.checks.hashValid).toBe(false);
+    expect(result.checks.signatureValid).toBe(false);
+  });
+
+  it('should handle certificate with falsy postQuantumHash', async () => {
+    const fakeCert = {
+      certificateId: 'CERT_PQ_EMPTY',
+      version: '1.0',
+      type: 'location' as const,
+      securityLevel: 'standard' as const,
+      metadata: {
+        issuer: 'test',
+        issuedAt: Date.now(),
+        userRole: 'producer',
+        deviceId: 'dev-1',
+        location: makeLocation(),
+      },
+      postQuantumHash: '',
+      verificationData: {
+        publicKey: 'pk_test',
+        signature: 'sig_test',
+        timestamp: Date.now(),
+      },
+      createdAt: Date.now(),
+    };
+
+    const result = await tracedVerifyCertificate(fakeCert as any, revocationChecker);
+    expect(result.checks.hashValid).toBe(false);
+  });
+
+  it('should handle certificate with future expiresAt', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const futureCert = {
+      ...cert,
+      metadata: {
+        ...cert.metadata,
+        expiresAt: Date.now() + 86400000,
+      },
+    };
+
+    const result = await tracedVerifyCertificate(futureCert, revocationChecker);
+    expect(result.checks.notExpired).toBe(true);
+  });
 });
 
 describe('tracedVerifyCertificate — RevocationChecker integration (SA-004)', () => {
@@ -276,6 +351,68 @@ describe('tracedVerifyCertificate — RevocationChecker integration (SA-004)', (
     expect(result.checks.notRevoked).toBe(false);
     expect(result.confidence).toBe(0.8);
   });
+
+  it('should handle crypto verify throwing an exception', async () => {
+    const crypto = await import('@gtcx/crypto');
+    const verifySpy = vi.spyOn(crypto, 'verify').mockImplementation(() => {
+      throw new Error('crypto failure');
+    });
+
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const result = await tracedVerifyCertificate(cert, revocationChecker);
+    expect(result.checks.signatureValid).toBe(false);
+    expect(result.isValid).toBe(false);
+
+    verifySpy.mockRestore();
+  });
+
+  it('should handle revocation checker returning revoked without reason', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const revokedChecker = {
+      check: async () => ({ revoked: true }),
+    };
+
+    const result = await tracedVerifyCertificate(cert, revokedChecker);
+    expect(result.isValid).toBe(false);
+    expect(result.details).toContain('no reason provided');
+  });
+
+  it('should handle revocation checker throwing a non-Error', async () => {
+    const keyPair = generateKeyPair();
+    const cert = await tracedGenerateCertificate({
+      type: 'location',
+      securityLevel: 'standard',
+      location: makeLocation(),
+      privateKey: keyPair.privateKey,
+      publicKey: keyPair.publicKey,
+    });
+
+    const failingChecker = {
+      check: async () => {
+        throw 'plain string error';
+      },
+    };
+
+    const result = await tracedVerifyCertificate(cert, failingChecker);
+    expect(result.isValid).toBe(false);
+    expect(result.details).toContain('revocation check failed');
+  });
 });
 
 // =============================================================================
@@ -335,6 +472,28 @@ describe('tracedGenerateQRCode', () => {
       },
     });
     expect(qr.id).toBeTruthy();
+  });
+
+  it('should generate photo QR code without explicit photoHash', async () => {
+    const qr = await tracedGenerateQRCode({
+      certificateId: 'CERT_PHOTO_NO_HASH',
+      type: 'photo',
+      metadata: { location: { latitude: 1, longitude: 2 } },
+    });
+    expect(qr.id).toBeTruthy();
+    expect(qr.data.type).toBe('photo');
+  });
+
+  it('should generate asset-lot QR code with minimal metadata', async () => {
+    const qr = await tracedGenerateQRCode({
+      certificateId: 'CERT_ASSET_MIN',
+      type: 'asset-lot',
+      metadata: {
+        location: { latitude: 1, longitude: 2 },
+      },
+    });
+    expect(qr.id).toBeTruthy();
+    expect(qr.data.type).toBe('asset-lot');
   });
 });
 
@@ -777,5 +936,20 @@ describe('computeVerificationSummary', () => {
     ];
     const summary = computeVerificationSummary(logs);
     expect(summary.operationsByType).toEqual({ singleword: 1 });
+  });
+
+  it('should handle type ending with dot (falls back to unknown)', () => {
+    const logs: VerificationOperationLog[] = [
+      {
+        operationName: 'v1',
+        type: 'verification.',
+        category: 'verification',
+        timestamp: Date.now(),
+        success: true,
+        durationMs: 10,
+      },
+    ];
+    const summary = computeVerificationSummary(logs);
+    expect(summary.operationsByType).toEqual({ unknown: 1 });
   });
 });

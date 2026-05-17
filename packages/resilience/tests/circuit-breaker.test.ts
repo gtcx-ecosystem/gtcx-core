@@ -158,4 +158,61 @@ describe('createCircuitBreaker', () => {
     await expect(cb.execute(() => Promise.reject(new Error('fail')))).rejects.toThrow('fail');
     expect(cb.state).toBe('open');
   });
+
+  it('reset clears timer and handles repeated resets', async () => {
+    const cb = createCircuitBreaker({ failureThreshold: 1 });
+    await expect(cb.execute(() => Promise.reject(new Error('fail')))).rejects.toThrow();
+    expect(cb.state).toBe('open');
+
+    cb.reset(); // clears active timer
+    expect(cb.state).toBe('closed');
+    expect(cb.stats.stateChanges).toBe(1);
+
+    cb.reset(); // no timer, same state
+    expect(cb.state).toBe('closed');
+    expect(cb.stats.stateChanges).toBe(0);
+  });
+
+  it('recordSuccess in open state does not change state', async () => {
+    const cb = createCircuitBreaker({ failureThreshold: 1 });
+    await expect(cb.execute(() => Promise.reject(new Error('fail')))).rejects.toThrow();
+    expect(cb.state).toBe('open');
+
+    cb.recordSuccess();
+    expect(cb.state).toBe('open');
+    expect(cb.stats.successes).toBe(1);
+  });
+
+  it('recordSuccess in closed state with no failures does not reset', () => {
+    const cb = createCircuitBreaker();
+    cb.recordSuccess();
+    expect(cb.stats.failures).toBe(0);
+    expect(cb.stats.successes).toBe(1);
+  });
+
+  it('resets failures after consecutive successes in closed state', async () => {
+    const cb = createCircuitBreaker({
+      failureThreshold: 1,
+      successThreshold: 2,
+      resetTimeoutMs: 50,
+    });
+
+    await expect(cb.execute(() => Promise.reject(new Error('fail')))).rejects.toThrow();
+    expect(cb.state).toBe('open');
+    expect(cb.stats.failures).toBe(1);
+
+    await wait(100);
+    expect(cb.state).toBe('half-open');
+
+    await cb.execute(() => Promise.resolve(1));
+    await cb.execute(() => Promise.resolve(2));
+    expect(cb.state).toBe('closed');
+    expect(cb.stats.failures).toBe(1);
+
+    cb.recordSuccess();
+    expect(cb.stats.failures).toBe(1);
+
+    cb.recordSuccess();
+    expect(cb.stats.failures).toBe(0);
+  });
 });

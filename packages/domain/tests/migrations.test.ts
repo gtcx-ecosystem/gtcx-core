@@ -173,6 +173,39 @@ describe('SchemaMigrator', () => {
       expect(result._migrations).toContain('prior_migration');
       expect(result._migrations).toContain('asset_lot_1.0.0_to_1.1.0');
     });
+
+    it('returns entity unchanged when no migration path exists', () => {
+      const entity: VersionedEntity = {
+        data: { name: 'test' },
+        _schemaVersion: '0.9.0',
+        _entityType: 'trader',
+      };
+      const result = migrator.migrate(entity);
+      expect(result._schemaVersion).toBe('0.9.0');
+      expect(result.data).toEqual({ name: 'test' });
+    });
+
+    it('transaction migration preserves existing quantityUnit', () => {
+      const entity: VersionedEntity = {
+        data: { id: 'tx-1', quantityUnit: 'kg' },
+        _schemaVersion: '1.0.0',
+        _entityType: 'transaction',
+      };
+      const result = migrator.migrate(entity);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((result.data as any).quantityUnit).toBe('kg');
+    });
+
+    it('transaction migration preserves existing cryptoProof', () => {
+      const entity: VersionedEntity = {
+        data: { id: 'tx-1', cryptoProof: 'abc123' },
+        _schemaVersion: '1.0.0',
+        _entityType: 'transaction',
+      };
+      const result = migrator.migrate(entity);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((result.data as any).cryptoProof).toBe('abc123');
+    });
   });
 
   describe('migrateMany', () => {
@@ -252,6 +285,15 @@ describe('SchemaMigrator', () => {
       });
       expect(result.valid).toBe(true);
       expect(result.migrated).toBe(true);
+    });
+
+    it('returns stringified error for non-Error throws', () => {
+      const entity = migrator.wrap({}, 'trader');
+      const result = migrator.validate(entity, () => {
+        throw 'string error';
+      });
+      expect(result.valid).toBe(false);
+      expect(result.errors).toContain('string error');
     });
   });
 });

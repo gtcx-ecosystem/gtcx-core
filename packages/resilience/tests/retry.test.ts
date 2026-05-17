@@ -71,6 +71,10 @@ describe('isRetryableError', () => {
   it('defaults to retryable', () => {
     expect(isRetryableError(new Error('anything'))).toBe(true);
   });
+
+  it('defaults to retryable when predicate is explicitly undefined', () => {
+    expect(isRetryableError(new Error('anything'), { retryable: undefined })).toBe(true);
+  });
 });
 
 describe('withRetry', () => {

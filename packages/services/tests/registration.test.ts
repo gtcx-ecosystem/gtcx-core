@@ -353,6 +353,14 @@ describe('AssetLotRegistrationService', () => {
 
       expect(result.warnings!.some((w) => w.includes('purity'))).toBe(false);
     });
+
+    it('passes when discoveryDate is omitted', () => {
+      const service = createService();
+      const data = createValidRegistrationData();
+      delete (data as Record<string, unknown>).discoveryDate;
+      const result = service.validateRegistrationData(data);
+      expect(result.isValid).toBe(true);
+    });
   });
 
   // --------------------------------------------------------------------------
@@ -668,6 +676,48 @@ describe('AssetLotRegistrationService', () => {
       expect(crypto.createHash).toHaveBeenCalled();
       // sign should never be reached since createHash fails first
       expect(crypto.sign).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('branch coverage additions', () => {
+    it('maps unknown quality to ungraded', async () => {
+      const service = createService();
+      const result = await service.registerAssetLot(
+        createValidRegistrationData({ quality: 'unknown' as never })
+      );
+      expect(result.qualityGrade).toBe('ungraded');
+    });
+
+    it('uses current date when discoveryDate is omitted', async () => {
+      const service = createService();
+      const data = createValidRegistrationData();
+      delete (data as Record<string, unknown>).discoveryDate;
+      const result = await service.registerAssetLot(data);
+      expect(result.discoveryDate).toBeTruthy();
+    });
+
+    it('handles null data in registration', async () => {
+      const service = createService();
+      await expect(service.registerAssetLot(null as never)).rejects.toThrow(/Validation failed/);
+    });
+
+    it('emits unknown error for non-Error throws', async () => {
+      const emitter = createMockEventEmitter();
+      const storage = createMockStorageService();
+      (storage.saveAssetLot as ReturnType<typeof vi.fn>).mockImplementation(() => {
+        throw 'string error';
+      });
+
+      const service = createService({ eventEmitter: emitter, storageService: storage });
+      await expect(service.registerAssetLot(createValidRegistrationData())).rejects.toBe(
+        'string error'
+      );
+
+      const failedEvent = (emitter.emit as ReturnType<typeof vi.fn>).mock.calls.find(
+        (call) => call[0].type === 'registration.failed'
+      );
+      expect(failedEvent).toBeDefined();
+      expect(failedEvent![0].payload.error).toBe('Unknown error');
     });
   });
 });

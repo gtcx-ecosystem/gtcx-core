@@ -5,6 +5,14 @@ import {
   TradeRequestSchema,
   TradingOpportunityFilterSchema,
   ComplianceReportOptionsSchema,
+  safeParse,
+  validateRegistrationData,
+  validatePartialRegistrationData,
+  validateTradeRequest,
+  validateTradingFilter,
+  validateComplianceReportOptions,
+  safeValidateRegistrationData,
+  safeValidateTradeRequest,
 } from '../src/schemas';
 
 // ---------------------------------------------------------------------------
@@ -259,6 +267,152 @@ describe('ComplianceReportOptionsSchema', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { dateRange: _d, ...noRange } = validOptions;
     const result = ComplianceReportOptionsSchema.safeParse(noRange);
+    expect(result.success).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// safeParse
+// ---------------------------------------------------------------------------
+
+describe('safeParse', () => {
+  it('returns success for valid data', () => {
+    const result = safeParse(AssetRegistrationDataSchema, {
+      commodityType: 'gold',
+      producerId: '11111111-1111-4111-8111-111111111111',
+      discoveryLocation: { latitude: 1, longitude: 2, accuracy: 5, timestamp: Date.now() },
+      photos: [{ uri: 'file://photo.jpg', timestamp: Date.now() }],
+      estimatedWeight: 10,
+      weightUnit: 'kg',
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('returns error for invalid data', () => {
+    const result = safeParse(AssetRegistrationDataSchema, {});
+    expect(result.success).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// AssetRegistrationDataSchema assetDetails
+// ---------------------------------------------------------------------------
+
+describe('AssetRegistrationDataSchema assetDetails', () => {
+  const baseData = {
+    commodityType: 'gold',
+    producerId: '11111111-1111-4111-8111-111111111111',
+    discoveryLocation: { latitude: 1, longitude: 2, accuracy: 5, timestamp: Date.now() },
+    photos: [{ uri: 'file://photo.jpg', timestamp: Date.now() }],
+    estimatedWeight: 10,
+    weightUnit: 'kg',
+  };
+
+  it('rejects assetDetails with dangerous keys', () => {
+    const result = AssetRegistrationDataSchema.safeParse({
+      ...baseData,
+      assetDetails: { constructor: 'bad' },
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects assetDetails with nested dangerous keys', () => {
+    const result = AssetRegistrationDataSchema.safeParse({
+      ...baseData,
+      assetDetails: { nested: { constructor: 'bad' } },
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('accepts assetDetails with safe keys', () => {
+    const result = AssetRegistrationDataSchema.safeParse({
+      ...baseData,
+      assetDetails: { color: 'yellow', purity: 99 },
+    });
+    expect(result.success).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Validation helpers
+// ---------------------------------------------------------------------------
+
+describe('validation helpers', () => {
+  const validRegistration = {
+    commodityType: 'gold',
+    producerId: '11111111-1111-4111-8111-111111111111',
+    discoveryLocation: { latitude: 1, longitude: 2, accuracy: 5, timestamp: Date.now() },
+    photos: [{ uri: 'file://photo.jpg', timestamp: Date.now() }],
+    estimatedWeight: 10,
+    weightUnit: 'kg',
+  };
+
+  const validTrade = {
+    assetLotId: '11111111-1111-4111-8111-111111111111',
+    sellerId: '22222222-2222-4222-8222-222222222222',
+    buyerId: '33333333-3333-4333-8333-333333333333',
+    quantity: 5,
+    agreedPrice: 500,
+    currency: 'USD',
+    paymentMethod: 'cash',
+  };
+
+  it('validateRegistrationData returns valid data', () => {
+    const result = validateRegistrationData(validRegistration);
+    expect(result.commodityType).toBe('gold');
+  });
+
+  it('validateRegistrationData throws on invalid data', () => {
+    expect(() => validateRegistrationData({})).toThrow();
+  });
+
+  it('validatePartialRegistrationData returns partial data', () => {
+    const result = validatePartialRegistrationData({ commodityType: 'gold' });
+    expect(result.commodityType).toBe('gold');
+  });
+
+  it('validateTradeRequest returns valid trade', () => {
+    const result = validateTradeRequest(validTrade);
+    expect(result.quantity).toBe(5);
+  });
+
+  it('validateTradeRequest throws on invalid data', () => {
+    expect(() => validateTradeRequest({})).toThrow();
+  });
+
+  it('validateTradingFilter returns valid filter', () => {
+    const result = validateTradingFilter({ commodityType: 'gold' });
+    expect(result.commodityType).toBe('gold');
+  });
+
+  it('validateComplianceReportOptions returns valid options', () => {
+    const result = validateComplianceReportOptions({
+      dateRange: {
+        start: '2024-01-01T00:00:00.000Z',
+        end: '2024-12-31T00:00:00.000Z',
+      },
+      format: 'summary',
+    });
+    expect(result.format).toBe('summary');
+  });
+
+  it('safeValidateRegistrationData returns success for valid data', () => {
+    const result = safeValidateRegistrationData(validRegistration);
+    expect(result.success).toBe(true);
+  });
+
+  it('safeValidateRegistrationData returns error for invalid data', () => {
+    const result = safeValidateRegistrationData({});
+    expect(result.success).toBe(false);
+  });
+
+  it('safeValidateTradeRequest returns success for valid data', () => {
+    const result = safeValidateTradeRequest(validTrade);
+    expect(result.success).toBe(true);
+  });
+
+  it('safeValidateTradeRequest returns error for invalid data', () => {
+    const result = safeValidateTradeRequest({});
     expect(result.success).toBe(false);
   });
 });

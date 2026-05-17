@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   calculateComplianceTrend,
@@ -23,8 +23,10 @@ import {
   checkKYCCompliance,
   getDefaultFrameworks,
   DEFAULT_CONFIG,
+  toErrorCause as complianceToErrorCause,
 } from '../src/compliance';
 import type { ComplianceRecord, RegulatoryFramework } from '../src/compliance';
+import { VerificationMethods } from '../src/compliance/verification-methods';
 
 function makeRecord(overrides: Partial<ComplianceRecord> = {}): ComplianceRecord {
   const now = new Date().toISOString();
@@ -154,6 +156,16 @@ describe('compliance modules', () => {
       expect(result[0].severity).toBe('critical');
     });
 
+    it('getUrgentActions sorts by priority when severity is equal', async () => {
+      const records = [
+        makeRecord({ severity: 'high', metadata: { ...makeRecord().metadata, priority: 5 } }),
+        makeRecord({ severity: 'high', metadata: { ...makeRecord().metadata, priority: 10 } }),
+      ];
+      const result = await getUrgentActions(records);
+      expect(result).toHaveLength(2);
+      expect(result[0].metadata.priority).toBe(10);
+    });
+
     it('getRecentActivity sorts by updatedAt descending', async () => {
       const records = [
         makeRecord({ metadata: { ...makeRecord().metadata, updatedAt: '2024-01-01T00:00:00Z' } }),
@@ -173,6 +185,20 @@ describe('compliance modules', () => {
       expect(result).toHaveLength(1);
       expect(result[0].daysRemaining).toBeGreaterThan(0);
       expect(result[0].daysRemaining).toBeLessThanOrEqual(30);
+    });
+
+    it('getUpcomingDeadlines excludes past and far-future due dates', async () => {
+      const past = new Date();
+      past.setDate(past.getDate() - 7);
+      const farFuture = new Date();
+      farFuture.setDate(farFuture.getDate() + 60);
+      const records = [
+        makeRecord({ resolution: { dueDate: past.toISOString() } }),
+        makeRecord({ resolution: { dueDate: farFuture.toISOString() } }),
+        makeRecord(),
+      ];
+      const result = await getUpcomingDeadlines(records);
+      expect(result).toHaveLength(0);
     });
   });
 
@@ -289,6 +315,151 @@ describe('compliance modules', () => {
         async () => records
       );
       expect(result).toHaveLength(1);
+    });
+
+    it('filters by apps, categories, and severity', async () => {
+      const records = [
+        makeRecord({
+          sourceApp: 'app-a',
+          regulation: {
+            code: 'TEST-001',
+            title: 'Test',
+            description: 'Test',
+            authority: 'auth',
+            category: 'licensing',
+          },
+          severity: 'high',
+        }),
+        makeRecord({
+          sourceApp: 'app-b',
+          regulation: {
+            code: 'TEST-002',
+            title: 'Test2',
+            description: 'Test2',
+            authority: 'auth',
+            category: 'financial',
+          },
+          severity: 'low',
+        }),
+      ];
+      const result = await getFilteredComplianceRecords(
+        {
+          dateRange: { start: '2024-01-01', end: '2026-12-31' },
+          format: 'test',
+          apps: ['app-a'],
+          categories: ['licensing'],
+          severity: ['high'],
+        },
+        async () => records
+      );
+      expect(result).toHaveLength(1);
+      expect(result[0].sourceApp).toBe('app-a');
+    });
+
+    it('filters by categories and severity with mismatches', async () => {
+      const records = [
+        makeRecord({
+          sourceApp: 'app-a',
+          regulation: {
+            code: 'TEST-001',
+            title: 'Test',
+            description: 'Test',
+            authority: 'auth',
+            category: 'licensing',
+          },
+          severity: 'high',
+        }),
+        makeRecord({
+          sourceApp: 'app-b',
+          regulation: {
+            code: 'TEST-002',
+            title: 'Test2',
+            description: 'Test2',
+            authority: 'auth',
+            category: 'financial',
+          },
+          severity: 'low',
+        }),
+      ];
+      const result = await getFilteredComplianceRecords(
+        {
+          dateRange: { start: '2024-01-01', end: '2026-12-31' },
+          format: 'test',
+          categories: ['licensing'],
+          severity: ['critical'],
+        },
+        async () => records
+      );
+      expect(result).toHaveLength(0);
+    });
+  });
+
+  describe('validators', () => {
+    it('extractZkProof returns null for invalid proof object', () => {
+      expect(extractZkProof({ zkProof: { notValid: true } })).toBeNull();
+    });
+
+    it('checkKYCCompliance delegates to repo when provided', async () => {
+      const repo = { checkKYC: vi.fn().mockResolvedValue({ compliant: true }) };
+      const result = await checkKYCCompliance(
+        { id: 'tx-1', fromTraderId: 'a', toTraderId: 'b', price: 100 },
+        repo
+      );
+      expect(result.compliant).toBe(true);
+      expect(repo.checkKYC).toHaveBeenCalled();
+    });
+
+    it('checkKYCCompliance returns false when missing trader ids and no repo', async () => {
+      const result = await checkKYCCompliance(
+        { id: 'tx-1', fromTraderId: '', toTraderId: 'b', price: 100 },
+        undefined
+      );
+      expect(result.compliant).toBe(false);
+    });
+  });
+
+  describe('reports', () => {
+    it('calculateComplianceTrend detects declining', async () => {
+      const records = [
+        makeRecord({
+          status: 'compliant',
+          metadata: { ...makeRecord().metadata, createdAt: '2024-01-01T00:00:00Z' },
+        }),
+        makeRecord({
+          status: 'compliant',
+          metadata: { ...makeRecord().metadata, createdAt: '2024-02-01T00:00:00Z' },
+        }),
+        makeRecord({
+          status: 'violation',
+          metadata: { ...makeRecord().metadata, createdAt: '2024-03-01T00:00:00Z' },
+        }),
+        makeRecord({
+          status: 'violation',
+          metadata: { ...makeRecord().metadata, createdAt: '2024-04-01T00:00:00Z' },
+        }),
+      ];
+      expect(await calculateComplianceTrend(records)).toBe('declining');
+    });
+  });
+
+  describe('types', () => {
+    it('toErrorCause wraps non-Error values', () => {
+      const result = complianceToErrorCause('string error');
+      expect(result).toBeInstanceOf(Error);
+      expect(result.message).toBe('string error');
+    });
+  });
+
+  describe('verification-methods', () => {
+    it('delegates checkKYCCompliance to validator function', async () => {
+      const methods = new VerificationMethods(undefined);
+      const result = await methods.checkKYCCompliance({
+        id: 'tx-1',
+        fromTraderId: 'a',
+        toTraderId: 'b',
+        price: 100,
+      });
+      expect(result.compliant).toBe(true);
     });
   });
 });

@@ -212,4 +212,152 @@ describe('DID resolver', () => {
       code: 'RESOLUTION_FAILED',
     });
   });
+
+  it('static adapter returns null for unknown DID', async () => {
+    const resolver = createDIDResolver({
+      adapters: [createStaticDIDResolverAdapter({})],
+    });
+    const result = await resolver.resolve('did:gtcx:unknown');
+    expect(result.document).toBeNull();
+  });
+
+  it('HTTP adapter passes headers to fetch', async () => {
+    const { identity } = await createIdentity();
+    const did = createDID(identity);
+    const document = createDIDDocument(identity);
+
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    fetchSpy.mockResolvedValue(
+      new Response(JSON.stringify(document), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    );
+
+    const adapter = createHttpDIDResolverAdapter({
+      baseUrl: 'https://resolver.test',
+      headers: { 'X-Api-Key': 'secret' },
+      retries: 0,
+    });
+    const resolver = createDIDResolver({ adapters: [adapter] });
+
+    await resolver.resolve(did);
+    const reqInit = fetchSpy.mock.calls[0]![1] as RequestInit;
+    expect((reqInit.headers as Record<string, string>)['X-Api-Key']).toBe('secret');
+  });
+
+  it('HTTP adapter builds URL without extra slash', async () => {
+    const { identity } = await createIdentity();
+    const did = createDID(identity);
+    const document = createDIDDocument(identity);
+
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    fetchSpy.mockResolvedValue(
+      new Response(JSON.stringify(document), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    );
+
+    const adapter = createHttpDIDResolverAdapter({
+      baseUrl: 'https://resolver.test',
+      pathTemplate: 'dids/{did}',
+      retries: 0,
+    });
+    const resolver = createDIDResolver({ adapters: [adapter] });
+
+    await resolver.resolve(did);
+    const url = fetchSpy.mock.calls[0]![0] as string;
+    expect(url).toBe(`https://resolver.test/dids/${encodeURIComponent(did)}`);
+  });
+
+  it('HTTP adapter throws when content-type header is missing', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(null, { status: 200 }));
+
+    const adapter = createHttpDIDResolverAdapter({
+      baseUrl: 'https://resolver.test',
+      retries: 0,
+    });
+    const resolver = createDIDResolver({ adapters: [adapter] });
+
+    await expect(resolver.resolve('did:gtcx:missingtype')).rejects.toMatchObject({
+      code: 'RESOLUTION_FAILED',
+    });
+  });
+
+  it('returns document when revocation checker returns active', async () => {
+    const { identity } = await createIdentity();
+    const did = createDID(identity);
+    const document = createDIDDocument(identity);
+
+    const resolver = createDIDResolver({
+      adapters: [createStaticDIDResolverAdapter({ [did]: document })],
+      revocationChecker: async () => 'active',
+    });
+
+    const result = await resolver.resolve(did);
+    expect(result.document?.id).toBe(did);
+  });
+
+  it('emits metrics with cache miss on generic adapter error', async () => {
+    const metrics = vi.fn();
+    const adapter = {
+      name: 'throwing',
+      resolve: async () => {
+        throw new Error('Random failure');
+      },
+    };
+
+    const resolver = createDIDResolver({
+      adapters: [adapter],
+      metrics,
+      cache: createInMemoryDIDCache(),
+    });
+
+    await expect(resolver.resolve('did:gtcx:throw')).rejects.toBeInstanceOf(DIDResolverError);
+    expect(metrics).toHaveBeenCalled();
+  });
+
+  it('emits metrics with cache miss on DIDResolverError after loop', async () => {
+    const metrics = vi.fn();
+    const adapter = {
+      name: 'did-error',
+      resolve: async () => {
+        throw new DIDResolverError('not found', 'RESOLUTION_FAILED');
+      },
+    };
+
+    const resolver = createDIDResolver({
+      adapters: [adapter],
+      metrics,
+      cache: createInMemoryDIDCache(),
+    });
+
+    await expect(resolver.resolve('did:gtcx:diderr')).rejects.toBeInstanceOf(DIDResolverError);
+    expect(metrics).toHaveBeenCalled();
+  });
+
+  it('emits metrics for generic adapter error without cache', async () => {
+    const metrics = vi.fn();
+    const adapter = {
+      name: 'throwing',
+      resolve: async () => {
+        throw new Error('Random failure');
+      },
+    };
+
+    const resolver = createDIDResolver({ adapters: [adapter], metrics });
+    await expect(resolver.resolve('did:gtcx:throw')).rejects.toBeInstanceOf(DIDResolverError);
+    expect(metrics).toHaveBeenCalled();
+  });
+
+  it('returns null result with cache miss when no adapters resolve', async () => {
+    const resolver = createDIDResolver({
+      adapters: [createStaticDIDResolverAdapter({})],
+      cache: createInMemoryDIDCache(),
+    });
+    const result = await resolver.resolve('did:gtcx:unknown');
+    expect(result.document).toBeNull();
+    expect(result.metadata.cache).toBe('miss');
+  });
 });

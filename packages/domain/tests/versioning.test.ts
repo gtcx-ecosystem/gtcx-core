@@ -98,6 +98,20 @@ describe('checkVersionCompatibility', () => {
     const result = checkVersionCompatibility('1.0.0');
     expect(result.compatible).toBe(true);
   });
+
+  it('warns about deprecations scheduled for removal', () => {
+    DEPRECATIONS.push({
+      feature: 'test-feature',
+      deprecatedIn: '1.0.0',
+      removeIn: API_VERSION.full,
+    });
+
+    const result = checkVersionCompatibility('1.0.0');
+    expect(result.warnings!.some((w) => w.includes('deprecated'))).toBe(true);
+
+    const idx = DEPRECATIONS.findIndex((d) => d.feature === 'test-feature');
+    if (idx >= 0) DEPRECATIONS.splice(idx, 1);
+  });
 });
 
 // ---------------------------------------------------------------------------

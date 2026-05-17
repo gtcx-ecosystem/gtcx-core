@@ -141,7 +141,6 @@ describe('sanitizeKeys', () => {
   });
 
   it('preserves primitive values', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const input = { str: 'hello', num: 42, bool: true, nil: null };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = sanitizeKeys(input as any);
@@ -152,6 +151,22 @@ describe('sanitizeKeys', () => {
 
   it('handles empty objects', () => {
     expect(sanitizeKeys({})).toEqual({});
+  });
+
+  it('handles arrays containing primitives', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const input: any = { items: [1, 'two', true] };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = sanitizeKeys(input) as any;
+    expect(result.items).toEqual([1, 'two', true]);
+  });
+
+  it('handles arrays containing nested arrays', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const input: any = { items: [['nested']] };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = sanitizeKeys(input) as any;
+    expect(result.items).toEqual([['nested']]);
   });
 });
 
@@ -266,6 +281,19 @@ describe('sanitizeForLogging', () => {
     });
     expect(result['message']).toContain('[REDACTED]');
     expect(result['message']).not.toContain('user@example.com');
+  });
+
+  it('handles small arrays containing objects', () => {
+    const result = sanitizeForLogging({ items: [{ ok: true }] });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((result['items'] as any)[0].ok).toBe(true);
+  });
+
+  it('handles non-standard types', () => {
+    const sym = Symbol('test');
+    const result = sanitizeForLogging({ fn: () => {}, sym });
+    expect(result['fn']).toBe(String(() => {}));
+    expect(result['sym']).toBe(String(sym));
   });
 });
 
