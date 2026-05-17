@@ -1,3 +1,14 @@
+---
+title: 'Version Standards'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs', 'stack']
+review_cycle: 'on-change'
+---
+
 # Version Standards
 
 > **Status:** Current

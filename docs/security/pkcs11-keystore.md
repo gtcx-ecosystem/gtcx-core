@@ -1,3 +1,14 @@
+---
+title: 'Pkcs11 Keystore'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # PKCS#11 KeyStore
 
 > **Status:** Current

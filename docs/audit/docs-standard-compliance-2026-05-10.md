@@ -1,3 +1,14 @@
+---
+title: 'Docs Standard Compliance 2026 05 10'
+status: 'current'
+date: '2026-05-17'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['docs', 'audit']
+review_cycle: 'quarterly'
+---
+
 # Docs Standard Compliance Audit — 2026-05-10
 
 > **Status:** Current

@@ -1,23 +1,38 @@
 #!/usr/bin/env node
 /**
- * @file Validates YAML frontmatter on all markdown docs.
- * @usage node tools/check-doc-frontmatter.mjs [file]
+ * @file Validates YAML frontmatter on markdown docs.
+ * @usage node tools/check-doc-frontmatter.mjs [file...]
+ * @usage node tools/check-doc-frontmatter.mjs --diff [base-ref]
  */
 
 import { readFileSync, existsSync } from 'node:fs';
 import { globSync } from 'glob';
 import { fileURLToPath } from 'node:url';
-import { dirname, resolve } from 'node:path';
+import { dirname, resolve, relative } from 'node:path';
+import { execSync } from 'node:child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
 // Valid values per docs/agents/docs-standard-machine-readable.md
 const VALID_STATUS = ['current', 'draft', 'deprecated', 'superseded'];
-const VALID_OWNERS = ['protocol-architect', 'crypto-security-engineer', 'frontier-infra-engineer', 'quality-evidence-lead', 'product-lead'];
+const VALID_OWNERS = [
+  'protocol-architect',
+  'crypto-security-engineer',
+  'frontier-infra-engineer',
+  'quality-evidence-lead',
+  'product-lead',
+];
 const VALID_TIERS = ['critical', 'standard', 'informational'];
 const VALID_CYCLES = ['quarterly', 'monthly', 'on-change'];
 const REQUIRED_FIELDS = ['title', 'status', 'date', 'owner', 'role', 'tier', 'tags', 'review_cycle'];
+
+const DEFAULT_EXCLUDES = [
+  '**/README.md',
+  '**/templates/**',
+  'docs/agents/sessions/**',
+  'docs/agents/workflows/agent-*.md',
+];
 
 const errors = [];
 const warnings = [];
@@ -48,7 +63,6 @@ function parseFrontmatter(content) {
       currentArray = null;
       const value = keyValue[2].trim();
       if (value.startsWith('[') && value.endsWith(']')) {
-        // Inline array: ["a", "b"]
         try {
           data[currentKey] = JSON.parse(value.replace(/'/g, '"'));
         } catch {
@@ -81,23 +95,38 @@ function validateFile(filePath) {
   }
 
   if (fm.status && !VALID_STATUS.includes(fm.status)) {
-    errors.push({ file: filePath, message: `Invalid status: "${fm.status}". Must be one of: ${VALID_STATUS.join(', ')}` });
+    errors.push({
+      file: filePath,
+      message: `Invalid status: "${fm.status}". Must be one of: ${VALID_STATUS.join(', ')}`,
+    });
   }
 
   if (fm.owner && !VALID_OWNERS.includes(fm.owner)) {
-    errors.push({ file: filePath, message: `Invalid owner: "${fm.owner}". Must be one of: ${VALID_OWNERS.join(', ')}` });
+    errors.push({
+      file: filePath,
+      message: `Invalid owner: "${fm.owner}". Must be one of: ${VALID_OWNERS.join(', ')}`,
+    });
   }
 
   if (fm.role && !VALID_OWNERS.includes(fm.role)) {
-    errors.push({ file: filePath, message: `Invalid role: "${fm.role}". Must be one of: ${VALID_OWNERS.join(', ')}` });
+    errors.push({
+      file: filePath,
+      message: `Invalid role: "${fm.role}". Must be one of: ${VALID_OWNERS.join(', ')}`,
+    });
   }
 
   if (fm.tier && !VALID_TIERS.includes(fm.tier)) {
-    errors.push({ file: filePath, message: `Invalid tier: "${fm.tier}". Must be one of: ${VALID_TIERS.join(', ')}` });
+    errors.push({
+      file: filePath,
+      message: `Invalid tier: "${fm.tier}". Must be one of: ${VALID_TIERS.join(', ')}`,
+    });
   }
 
   if (fm.review_cycle && !VALID_CYCLES.includes(fm.review_cycle)) {
-    errors.push({ file: filePath, message: `Invalid review_cycle: "${fm.review_cycle}". Must be one of: ${VALID_CYCLES.join(', ')}` });
+    errors.push({
+      file: filePath,
+      message: `Invalid review_cycle: "${fm.review_cycle}". Must be one of: ${VALID_CYCLES.join(', ')}`,
+    });
   }
 
   if (fm.tags) {
@@ -106,7 +135,10 @@ function validateFile(filePath) {
     } else {
       for (const tag of fm.tags) {
         if (!/^[a-z0-9-]+$/.test(tag)) {
-          errors.push({ file: filePath, message: `Invalid tag: "${tag}". Must match /^[a-z0-9-]+$/` });
+          errors.push({
+            file: filePath,
+            message: `Invalid tag: "${tag}". Must match /^[a-z0-9-]+$/`,
+          });
         }
       }
     }
@@ -114,18 +146,84 @@ function validateFile(filePath) {
 
   if (fm.date) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(fm.date)) {
-      errors.push({ file: filePath, message: `Invalid date: "${fm.date}". Must be YYYY-MM-DD` });
+      errors.push({
+        file: filePath,
+        message: `Invalid date: "${fm.date}". Must be YYYY-MM-DD`,
+      });
     }
   }
 }
 
+function getChangedFiles(baseRef) {
+  try {
+    const output = execSync(`git diff --name-only --diff-filter=ACMRT ${baseRef}...HEAD`, {
+      cwd: ROOT,
+      encoding: 'utf-8',
+    });
+    return output
+      .trim()
+      .split('\n')
+      .filter((f) => f.startsWith('docs/') && f.endsWith('.md'))
+      .map((f) => resolve(ROOT, f));
+  } catch {
+    return [];
+  }
+}
+
+function shouldExclude(filePath, patterns) {
+  const rel = relative(ROOT, filePath).replace(/\\/g, '/');
+  for (const pattern of patterns) {
+    const regex = new RegExp(
+      '^' +
+        pattern
+          .replace(/\*\*/g, '{{GLOBSTAR}}')
+          .replace(/\*/g, '[^/]*')
+          .replace(/\{\{GLOBSTAR\}\}/g, '.*')
+          .replace(/\?/g, '[^/]') +
+        '$'
+    );
+    if (regex.test(rel)) return true;
+  }
+  return false;
+}
+
 function main() {
   const args = process.argv.slice(2);
-  const files = args.length > 0
-    ? args.map(f => resolve(ROOT, f))
-    : globSync('docs/**/*.md', { cwd: ROOT, absolute: true });
+  let files = [];
+  let useDiff = false;
+  let baseRef = 'origin/main';
+  let excludePatterns = [...DEFAULT_EXCLUDES];
 
-  for (const file of files) {
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg === '--diff') {
+      useDiff = true;
+      if (args[i + 1] && !args[i + 1].startsWith('--')) {
+        baseRef = args[++i];
+      }
+    } else if (arg === '--exclude') {
+      const pattern = args[++i];
+      if (pattern) excludePatterns.push(pattern);
+    } else if (!arg.startsWith('--')) {
+      files.push(resolve(ROOT, arg));
+    }
+  }
+
+  if (useDiff) {
+    files = getChangedFiles(baseRef);
+    if (files.length === 0) {
+      console.log('No docs changed in this PR. Skipping frontmatter check.');
+      process.exit(0);
+    }
+  } else if (files.length === 0) {
+    files = globSync('docs/**/*.md', { cwd: ROOT, absolute: true });
+  }
+
+  // Filter out excluded files
+  const checkFiles = files.filter((f) => !shouldExclude(f, excludePatterns));
+  const excludedCount = files.length - checkFiles.length;
+
+  for (const file of checkFiles) {
     if (!existsSync(file)) {
       errors.push({ file, message: 'File does not exist' });
       continue;
@@ -133,24 +231,28 @@ function main() {
     validateFile(file);
   }
 
-  const total = files.length;
-  const valid = total - errors.length;
+  const total = checkFiles.length;
+  const filesWithErrors = new Set(errors.map((e) => e.file)).size;
+  const valid = total - filesWithErrors;
 
   console.log(`\nDoc frontmatter check: ${valid}/${total} files valid`);
+  if (excludedCount > 0) {
+    console.log(`  (${excludedCount} file(s) excluded by pattern)`);
+  }
 
   if (errors.length > 0) {
     console.log(`\nErrors (${errors.length}):`);
     for (const err of errors) {
-      const rel = err.file.replace(ROOT + '/', '');
-      console.log(`  ❌ ${rel}: ${err.message}`);
+      const rel = relative(ROOT, err.file);
+      console.log(`  - ${rel}: ${err.message}`);
     }
   }
 
   if (warnings.length > 0) {
     console.log(`\nWarnings (${warnings.length}):`);
     for (const warn of warnings) {
-      const rel = warn.file.replace(ROOT + '/', '');
-      console.log(`  ⚠️  ${rel}: ${warn.message}`);
+      const rel = relative(ROOT, warn.file);
+      console.log(`  - ${rel}: ${warn.message}`);
     }
   }
 
@@ -159,7 +261,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log('\n✅ All docs have valid frontmatter');
+  console.log('\nAll checked docs have valid frontmatter');
   process.exit(0);
 }
 

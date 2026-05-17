@@ -1,3 +1,14 @@
+---
+title: '11 Pre Submission Email Zambia'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # Pre-Submission Email — Bank of Zambia
 
 > **Status:** Current

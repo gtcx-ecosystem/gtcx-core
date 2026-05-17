@@ -1,3 +1,14 @@
+---
+title: 'Spec To Code Traceability'
+status: 'current'
+date: '2026-05-17'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['docs', 'compliance']
+review_cycle: 'quarterly'
+---
+
 # Spec-to-Code Traceability — gtcx-core
 
 > **Status:** Current

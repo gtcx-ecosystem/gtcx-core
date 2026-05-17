@@ -1,3 +1,14 @@
+---
+title: 'Gtcx Ecosystem Rating 2026 05 08'
+status: 'current'
+date: '2026-05-17'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['docs', 'audit']
+review_cycle: 'quarterly'
+---
+
 # GTCX Ecosystem — Comprehensive Rating Assessment
 
 **Date:** 2026-05-08

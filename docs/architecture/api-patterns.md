@@ -1,3 +1,14 @@
+---
+title: 'Api Patterns'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'critical'
+tags: ['docs', 'architecture']
+review_cycle: 'quarterly'
+---
+
 # API Design Patterns
 
 > **Status:** Current

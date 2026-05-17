@@ -1,3 +1,14 @@
+---
+title: 'Nist 800 53 Mapping'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # NIST 800-53 Rev 5 Control Mapping — gtcx-core
 
 **Version:** 1.0.0

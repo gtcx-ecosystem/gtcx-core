@@ -1,3 +1,14 @@
+---
+title: 'Pen Test Scope'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # External Penetration Test Scope
 
 > **Status:** Current

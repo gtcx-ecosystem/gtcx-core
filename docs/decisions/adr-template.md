@@ -1,3 +1,14 @@
+---
+title: 'Adr Template'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'critical'
+tags: ['docs', 'architecture']
+review_cycle: 'quarterly'
+---
+
 > Architecture Decision Records capture significant technical decisions. One ADR per decision. Keep them immutable once accepted — create a new ADR to supersede.
 
 # ADR-{number}: {title}

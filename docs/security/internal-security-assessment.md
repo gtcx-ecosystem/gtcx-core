@@ -1,3 +1,14 @@
+---
+title: 'Internal Security Assessment'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # Internal Cryptographic Security Assessment — gtcx-core
 
 **Document ID:** GTCX-CORE-SEC-ASSESS-001

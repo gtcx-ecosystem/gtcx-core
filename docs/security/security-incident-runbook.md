@@ -1,3 +1,14 @@
+---
+title: 'Security Incident Runbook'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # Security Incident Response Runbook
 
 This runbook governs internal response when a security incident is reported against `gtcx-core`. The reporter-facing disclosure policy is in [`SECURITY.md`](../../SECURITY.md). This document is what the response team executes after a report lands at `security@gtcx.io`.

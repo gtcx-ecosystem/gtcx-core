@@ -1,3 +1,14 @@
+---
+title: '006 Hash Chain Audit Trail'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'critical'
+tags: ['docs', 'architecture']
+review_cycle: 'quarterly'
+---
+
 # ADR-006: Event-Sourced Audit Trail with Hash Chains
 
 ## Status

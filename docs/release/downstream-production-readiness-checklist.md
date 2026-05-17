@@ -1,3 +1,14 @@
+---
+title: 'Downstream Production Readiness Checklist'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # Downstream Production-Readiness Checklist
 
 > **Status:** Current

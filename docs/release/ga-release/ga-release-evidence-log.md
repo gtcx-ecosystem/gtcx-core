@@ -1,3 +1,14 @@
+---
+title: 'Ga Release Evidence Log'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # GA Release Evidence Log
 
 > **Status:** Current

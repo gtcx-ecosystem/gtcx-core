@@ -1,3 +1,14 @@
+---
+title: 'Crypto'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs', 'agentic']
+review_cycle: 'on-change'
+---
+
 # Crypto Review Playbook
 
 > **Status:** Current

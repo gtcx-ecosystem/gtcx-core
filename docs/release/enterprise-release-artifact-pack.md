@@ -1,3 +1,14 @@
+---
+title: 'Enterprise Release Artifact Pack'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # Enterprise Release Artifact Pack
 
 > **Status:** Current

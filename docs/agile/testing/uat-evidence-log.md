@@ -1,3 +1,14 @@
+---
+title: 'Uat Evidence Log'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs', 'testing']
+review_cycle: 'on-change'
+---
+
 # UAT Evidence Log — gtcx-core
 
 > **Status:** Current

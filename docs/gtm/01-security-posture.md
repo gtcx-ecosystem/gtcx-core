@@ -1,3 +1,14 @@
+---
+title: '01 Security Posture'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # Security Posture — gtcx-core
 
 > **Status:** Current

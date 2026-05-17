@@ -1,4 +1,12 @@
 ---
+title: 'gtcx-core Master Audit 2026-05-17'
+status: 'current'
+date: '2026-05-17'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['audit', 'certification', 'master-audit']
+review_cycle: 'quarterly'
 audit_type: master
 target_repo: gtcx-core
 audit_date: 2026-05-17

@@ -1,3 +1,14 @@
+---
+title: 'Security Framework'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # Security Framework — gtcx-core
 
 > **Status:** Current

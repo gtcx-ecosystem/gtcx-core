@@ -1,3 +1,14 @@
+---
+title: 'Fips Validation Boundary'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # FIPS 140-3 Validation Boundary Statement — gtcx-core
 
 **Document ID:** GTCX-CORE-FIPS-BOUNDARY-001

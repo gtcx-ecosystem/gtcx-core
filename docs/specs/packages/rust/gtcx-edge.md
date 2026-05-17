@@ -1,3 +1,14 @@
+---
+title: 'Gtcx Edge'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs', 'specs']
+review_cycle: 'on-change'
+---
+
 # Crate Spec — `gtcx-edge`
 
 > **Status:** Current

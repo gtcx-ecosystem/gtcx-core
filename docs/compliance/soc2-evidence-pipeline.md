@@ -1,3 +1,14 @@
+---
+title: 'Soc2 Evidence Pipeline'
+status: 'current'
+date: '2026-05-17'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['docs', 'compliance']
+review_cycle: 'quarterly'
+---
+
 # SOC 2 Evidence Pipeline (Compliance API)
 
 > **Status:** Current

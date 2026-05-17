@@ -1,3 +1,14 @@
+---
+title: 'Master Audit 2026 05 13'
+status: 'current'
+date: '2026-05-17'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['docs', 'audit']
+review_cycle: 'quarterly'
+---
+
 # gtcx-core — Master Audit & Bank-Grade Certification
 
 > **Date:** 2026-05-13

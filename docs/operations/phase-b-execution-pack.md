@@ -1,3 +1,14 @@
+---
+title: 'Phase B Execution Pack'
+status: 'current'
+date: '2026-05-17'
+owner: 'frontier-infra-engineer'
+role: 'frontier-infra-engineer'
+tier: 'standard'
+tags: ['docs', 'operations']
+review_cycle: 'on-change'
+---
+
 # Phase B Execution Pack
 
 > **Status:** Ready

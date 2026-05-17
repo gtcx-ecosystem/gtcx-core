@@ -1,3 +1,14 @@
+---
+title: 'Slsa Attestation'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # SLSA Build Level 3 Attestation
 
 > **Status:** Current

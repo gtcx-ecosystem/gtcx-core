@@ -1,3 +1,14 @@
+---
+title: 'Remediation 2026 05 11'
+status: 'current'
+date: '2026-05-17'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['docs', 'audit']
+review_cycle: 'quarterly'
+---
+
 # 10/10 Remediation Plan
 
 > **Status:** Current

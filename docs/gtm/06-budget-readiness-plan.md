@@ -1,3 +1,14 @@
+---
+title: '06 Budget Readiness Plan'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # Budget Readiness Plan — $0 Path to 10/10
 
 > **Status:** Current

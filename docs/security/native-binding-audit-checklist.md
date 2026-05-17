@@ -1,3 +1,14 @@
+---
+title: 'Native Binding Audit Checklist'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # Native Binding Safety Audit Checklist
 
 > **Status:** Current

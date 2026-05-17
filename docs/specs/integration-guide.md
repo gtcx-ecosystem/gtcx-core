@@ -1,3 +1,14 @@
+---
+title: 'Integration Guide'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs', 'specs']
+review_cycle: 'on-change'
+---
+
 # Integration Guide — gtcx-core
 
 > **Status:** Current

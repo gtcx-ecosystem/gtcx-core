@@ -1,3 +1,14 @@
+---
+title: '009 Typescript Rust Fallback'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'critical'
+tags: ['docs', 'architecture']
+review_cycle: 'quarterly'
+---
+
 # ADR-009: TypeScript Fallback When Rust Bindings Unavailable
 
 ## Status

@@ -1,3 +1,14 @@
+---
+title: 'Gtcx Core Upstream Tracking'
+status: 'current'
+date: '2026-05-17'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['docs', 'audit']
+review_cycle: 'quarterly'
+---
+
 # gtcx-core Upstream Tracking — Protocols Capabilities
 
 > **Status:** Acknowledged — Phase 1 Complete

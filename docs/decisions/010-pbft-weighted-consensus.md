@@ -1,3 +1,14 @@
+---
+title: '010 Pbft Weighted Consensus'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'critical'
+tags: ['docs', 'architecture']
+review_cycle: 'quarterly'
+---
+
 # ADR-010: PBFT Consensus with Weighted Stake Model
 
 ## Status

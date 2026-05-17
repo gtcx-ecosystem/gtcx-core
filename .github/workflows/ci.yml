@@ -140,6 +140,14 @@ jobs:
       - name: Validate markdown links
         run: pnpm docs:check-links
 
+      - name: Validate docs frontmatter
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            pnpm docs:check-frontmatter --diff "${{ github.event.pull_request.base.sha }}"
+          else
+            pnpm docs:check-frontmatter
+          fi
+
       - name: Validate GA release evidence
         run: pnpm release:ga:evidence:check
 

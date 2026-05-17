@@ -1,3 +1,14 @@
+---
+title: 'Global South Resilience Profile'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'critical'
+tags: ['docs', 'architecture']
+review_cycle: 'quarterly'
+---
+
 # Global-South Resilience Profile
 
 **Last updated:** 2026-05-06  

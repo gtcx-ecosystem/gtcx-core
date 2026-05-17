@@ -1,3 +1,14 @@
+---
+title: '12 Engagement Brief Drc'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # Engagement Brief — Democratic Republic of Congo
 
 > **Status:** Current

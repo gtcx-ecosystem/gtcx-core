@@ -1,3 +1,14 @@
+---
+title: 'Remediation Plan'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # Remediation Plan — gtcx-core
 
 > **Status:** Draft for approval

@@ -1,3 +1,14 @@
+---
+title: '02 Compliance Matrix'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+---
+
 # Compliance Matrix — gtcx-core
 
 > **Status:** Current

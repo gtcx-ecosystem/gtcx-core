@@ -1,3 +1,14 @@
+---
+title: 'Ci Cd'
+status: 'current'
+date: '2026-05-17'
+owner: 'frontier-infra-engineer'
+role: 'frontier-infra-engineer'
+tier: 'standard'
+tags: ['docs', 'operations']
+review_cycle: 'on-change'
+---
+
 # CI/CD Pipeline — gtcx-core
 
 > **Status:** Current

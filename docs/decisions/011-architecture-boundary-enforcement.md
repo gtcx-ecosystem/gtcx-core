@@ -1,3 +1,14 @@
+---
+title: '011 Architecture Boundary Enforcement'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'critical'
+tags: ['docs', 'architecture']
+review_cycle: 'quarterly'
+---
+
 # ADR-011: Architecture Boundary Enforcement in CI
 
 ## Status

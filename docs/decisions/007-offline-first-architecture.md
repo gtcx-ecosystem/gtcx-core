@@ -1,3 +1,14 @@
+---
+title: '007 Offline First Architecture'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'critical'
+tags: ['docs', 'architecture']
+review_cycle: 'quarterly'
+---
+
 # ADR-007: Offline-First with Deterministic Conflict Resolution
 
 ## Status

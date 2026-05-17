@@ -1,3 +1,14 @@
+---
+title: 'Stig Compliance'
+status: 'current'
+date: '2026-05-17'
+owner: 'crypto-security-engineer'
+role: 'crypto-security-engineer'
+tier: 'critical'
+tags: ['docs', 'security']
+review_cycle: 'quarterly'
+---
+
 # DISA STIG Compliance Mapping — gtcx-core
 
 **Version:** 1.0.0

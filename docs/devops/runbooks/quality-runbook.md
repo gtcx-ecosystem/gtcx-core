@@ -1,3 +1,14 @@
+---
+title: 'Quality Runbook'
+status: 'current'
+date: '2026-05-17'
+owner: 'frontier-infra-engineer'
+role: 'frontier-infra-engineer'
+tier: 'standard'
+tags: ['docs', 'operations']
+review_cycle: 'on-change'
+---
+
 # Quality Gates Runbook — gtcx-core
 
 > **Status:** Current

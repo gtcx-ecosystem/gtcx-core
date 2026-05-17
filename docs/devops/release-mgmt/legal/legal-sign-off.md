@@ -1,3 +1,14 @@
+---
+title: 'Legal Sign Off'
+status: 'current'
+date: '2026-05-17'
+owner: 'frontier-infra-engineer'
+role: 'frontier-infra-engineer'
+tier: 'standard'
+tags: ['docs', 'operations']
+review_cycle: 'on-change'
+---
+
 # Legal Sign-Off — gtcx-core
 
 > **Status:** Current

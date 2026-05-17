@@ -52,6 +52,7 @@
     "release": "pnpm build && changeset publish --provenance",
     "docs": "typedoc",
     "docs:check-links": "node ./tools/check-markdown-links.mjs",
+    "docs:check-frontmatter": "node ./tools/check-doc-frontmatter.mjs",
     "docs:rust": "cd rust && cargo doc --workspace --no-deps",
     "bench": "cd rust && cargo bench --workspace",
     "network:mesh:demo": "node ./tools/network-mesh-demo.mjs",

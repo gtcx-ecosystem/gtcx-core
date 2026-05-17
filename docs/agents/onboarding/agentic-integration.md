@@ -1,3 +1,14 @@
+---
+title: 'Agentic Integration'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs', 'agentic']
+review_cycle: 'on-change'
+---
+
 # 1-agentic Integration — gtcx-core
 
 **Status:** Planned. The governance model is in place and operational. Technical wiring between this repo and `1-agentic` has not yet begun.
