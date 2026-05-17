@@ -26,4 +26,13 @@ export type {
   BatchFlushFn,
   RequestBatcherOptions,
 } from './batching.js';
+export { UssdSession, UssdParser, UssdParseError } from './ussd/index.js';
+export type {
+  UssdRequest,
+  UssdResponse,
+  UssdSessionState,
+  UssdSessionData,
+  UssdSessionOptions,
+  UssdParsedInput,
+} from './ussd/index.js';
 export type { AdaptiveModeConfig, AdaptiveMode } from './adaptive-mode.js';
