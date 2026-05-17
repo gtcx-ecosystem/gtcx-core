@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { hash256 } from '../src/hashing';
 import { generateKeyPair } from '../src/keys';
