@@ -106,7 +106,7 @@ None — all tasks in this scope are complete.
 | `docs/agents/schemas/*.json`                                        | Created (4 files) |
 | `docs/agents/safety-rules.json`                                     | Created           |
 | `docs/agents/routing-rules.json`                                    | Created           |
-| `docs/agents/sessions/INDEX.md`                                     | Created           |
+| `docs/agents/sessions/index.md`                                     | Created           |
 | `docs/agents/sessions/2026-05-12-handoff-kimi-any.md`               | Created           |
 | `benchmarks/bundle-size-budgets.json`                               | Created           |
 | `tools/check-doc-frontmatter.mjs`                                   | Created           |

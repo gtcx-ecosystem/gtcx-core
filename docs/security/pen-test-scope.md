@@ -72,7 +72,7 @@ The engagement is only considered complete when it produces:
 ## Severity handling
 
 - Critical / High findings block any 10/10 claim until closed or explicitly accepted.
-- Medium findings require a tracked remediation item in `docs/remediation/REMEDIATION_PLAN.md`.
+- Medium findings require a tracked remediation item in `docs/remediation/remediation-plan.md`.
 - Low findings are still logged and linked in the trust portal.
 
 ## Success criteria

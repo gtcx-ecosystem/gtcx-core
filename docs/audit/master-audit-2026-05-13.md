@@ -121,7 +121,7 @@ New docs created since 2026-05-12:
 | Repo Overview               | `docs/overview/README.md`                       | Business + technical bridge  |
 | Lightweight Standard        | `docs/agents/docs-standard-lightweight.md`      | Bundle budgets, barrel rules |
 | Machine-Readable Standard   | `docs/agents/docs-standard-machine-readable.md` | YAML frontmatter spec        |
-| Session Handoff Protocol    | `docs/agents/sessions/INDEX.md`                 | Cross-agent handoffs         |
+| Session Handoff Protocol    | `docs/agents/sessions/index.md`                 | Cross-agent handoffs         |
 | Safety Rules                | `docs/agents/safety-rules.json`                 | 8 structured safety rules    |
 | Routing Rules               | `docs/agents/routing-rules.json`                | 4 role routing rules         |
 | Protocols Upstream Tracking | `docs/audit/gtcx-core-upstream-tracking.md`     | 7 capabilities to upstream   |

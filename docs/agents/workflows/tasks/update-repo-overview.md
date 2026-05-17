@@ -1,3 +1,14 @@
+---
+title: 'Task: Update Repository Overview Document'
+status: 'current'
+date: '2026-05-12'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['task', 'repo-overview', 'audit']
+review_cycle: 'on-change'
+---
+
 # Task: Update Repository Overview Document
 
 > **Trigger:** After every master audit cycle, milestone completion, or material change to repo state.

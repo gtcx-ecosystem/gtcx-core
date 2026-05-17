@@ -3,7 +3,7 @@
 **Module:** `gtcx_crypto::cloud_kms_keystore`
 **Feature flag:** `cloud_kms`
 **Status:** Current
-**Closes:** `SEC-001` from [10/10 remediation plan](../remediation/REMEDIATION_PLAN.md) — AWS-first cloud-managed custody path
+**Closes:** `SEC-001` from [10/10 remediation plan](../remediation/remediation-plan.md) — AWS-first cloud-managed custody path
 **Cross-references:** [PKCS#11 KeyStore](./pkcs11-keystore.md), [Key Ceremony](./key-ceremony.md), [Trust Portal](../governance/trust-portal.md)
 
 ---
@@ -220,7 +220,7 @@ The integration tests should:
 - [PKCS#11 KeyStore](./pkcs11-keystore.md) — sibling implementation; same trait, different backend
 - [Key Ceremony](./key-ceremony.md) — NIST SP 800-57 lifecycle context
 - [Trust Portal](../governance/trust-portal.md) — section "Cryptographic correctness"
-- [10/10 Remediation Plan](../remediation/REMEDIATION_PLAN.md) — `SEC-001`
+- [10/10 Remediation Plan](../remediation/remediation-plan.md) — `SEC-001`
 
 ## Changelog
 
