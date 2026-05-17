@@ -122,11 +122,11 @@ When the AI pipeline is broken or producing pathological output:
 3. Two human CODEOWNERS review instead of human + AI
 4. Add a retrospective entry to `quality/incidents/<id>/bypass-log.md` within 7 days
 
-Full procedure in [`SECURITY-INCIDENT.md`](../../../SECURITY-INCIDENT.md) § AI Review Bypass.
+Full procedure in [`SECURITY-INCIDENT.md`](../../../docs/security/security-incident-runbook.md) § AI Review Bypass.
 
 ## See also
 
 - [`docs/agents/governance/review-prompt.md`](../../../docs/agents/governance/review-prompt.md) — system prompt with seven hard constraints
 - [`docs/agents/governance/review-schema.json`](../../../docs/agents/governance/review-schema.json) — output schema with never-approve enum
 - [`docs/agents/governance/review-playbooks/`](../../../docs/agents/governance/review-playbooks/) — three path-specific playbooks
-- [`SECURITY-INCIDENT.md`](../../../SECURITY-INCIDENT.md) — bypass procedure, response runbook
+- [`SECURITY-INCIDENT.md`](../../../docs/security/security-incident-runbook.md) — bypass procedure, response runbook

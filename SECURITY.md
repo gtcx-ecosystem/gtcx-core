@@ -8,7 +8,7 @@ If you discover a security vulnerability in gtcx-core, please report it responsi
 
 Email: **security@gtcx.io**
 
-The internal response process is documented in [`SECURITY-INCIDENT.md`](./SECURITY-INCIDENT.md).
+The internal response process is documented in [`SECURITY-INCIDENT.md`](./docs/security/security-incident-runbook.md).
 
 Include:
 

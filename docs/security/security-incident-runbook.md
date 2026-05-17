@@ -1,6 +1,6 @@
 # Security Incident Response Runbook
 
-This runbook governs internal response when a security incident is reported against `gtcx-core`. The reporter-facing disclosure policy is in [`SECURITY.md`](./SECURITY.md). This document is what the response team executes after a report lands at `security@gtcx.io`.
+This runbook governs internal response when a security incident is reported against `gtcx-core`. The reporter-facing disclosure policy is in [`SECURITY.md`](../../SECURITY.md). This document is what the response team executes after a report lands at `security@gtcx.io`.
 
 **Audience:** maintainers, on-call, designated incident commander
 **Scope:** all `@gtcx/*` npm packages and `gtcx-*` Rust crates in this repository
