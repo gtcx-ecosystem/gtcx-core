@@ -230,7 +230,7 @@ The action runner performs three checks before posting the review:
 | Model timeout               | Retry once with same prompt. On second timeout, post a comment from the action saying "AI review timed out — human review required." Do not block the PR. |
 | Schema validation failure   | Log full output as CI artifact. Post comment from the action with link to artifact. Mark CI step failed.                                                  |
 | `decision=APPROVE` detected | Hard fail. Post `SECURITY-EVENT.md` reference. Page the security on-call (post-Sprint 3, when on-call exists).                                            |
-| Anthropic API outage        | Apply `bypass-ai-review` label policy from `SECURITY-INCIDENT.md`. Two human CODEOWNERS required instead of 1+1.                                          |
+| Anthropic API outage        | Apply `bypass-ai-review` label policy from `security-incident-runbook.md`. Two human CODEOWNERS required instead of 1+1.                                  |
 
 ---
 

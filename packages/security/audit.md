@@ -14,7 +14,7 @@ packages/security/
 ├── tsconfig.json         ✅ Extends workspace config
 ├── tsup.config.ts        ✅ Multi-entry build
 ├── README.md             ✅ Comprehensive (500+ lines)
-├── AUDIT.md              ✅ This file
+├── audit.md              ✅ This file
 ├── tests/
 │   └── security.test.ts  ✅ Test scaffolding (67 test cases)
 └── src/

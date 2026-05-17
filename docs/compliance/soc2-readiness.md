@@ -63,11 +63,11 @@ The Common Criteria are required for any SOC 2 report. CC1 through CC9 cover gov
 
 ### CC2 — Communication and Information
 
-| Control | Requirement                                        | gtcx-core status | Evidence                                                                                                                            |
-| ------- | -------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| CC2.1   | Obtains or generates relevant, quality information | ✓                | Threat model (`docs/security/threat-model.md`), STRIDE analysis, attack tree, fuzz campaign results                                 |
-| CC2.2   | Internally communicates control responsibilities   | ✓                | `docs/agents/governance/`, `SECURITY-INCIDENT.md`, agent role docs                                                                  |
-| CC2.3   | Communicates with external parties                 | ✓                | `SECURITY.md` (vulnerability reporting), `docs/gtm/` (sandbox regulator pack), public advisories template in `SECURITY-INCIDENT.md` |
+| Control | Requirement                                        | gtcx-core status | Evidence                                                                                                                                    |
+| ------- | -------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| CC2.1   | Obtains or generates relevant, quality information | ✓                | Threat model (`docs/security/threat-model.md`), STRIDE analysis, attack tree, fuzz campaign results                                         |
+| CC2.2   | Internally communicates control responsibilities   | ✓                | `docs/agents/governance/`, `security-incident-runbook.md`, agent role docs                                                                  |
+| CC2.3   | Communicates with external parties                 | ✓                | `SECURITY.md` (vulnerability reporting), `docs/gtm/` (sandbox regulator pack), public advisories template in `security-incident-runbook.md` |
 
 **CC2 readiness: 95%.**
 
@@ -97,7 +97,7 @@ The Common Criteria are required for any SOC 2 report. CC1 through CC9 cover gov
 | ------- | ----------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------- |
 | CC5.1   | Selects and develops control activities               | ✓                | 21 CI gates, `tools/check-*.mjs` enforcement (architecture, secrets, threat matrix, crypto deps, ops prereqs) |
 | CC5.2   | Selects and develops general controls over technology | ✓                | Branch protection on main, CODEOWNERS, signed commits via husky, dual-AI review                               |
-| CC5.3   | Deploys controls through policies and procedures      | ✓                | `CLAUDE.md` (hard rules), `docs/devops/runbooks/quality-runbook.md`, `SECURITY-INCIDENT.md`                   |
+| CC5.3   | Deploys controls through policies and procedures      | ✓                | `CLAUDE.md` (hard rules), `docs/devops/runbooks/quality-runbook.md`, `security-incident-runbook.md`           |
 
 **CC5 readiness: 100%.**
 
@@ -122,8 +122,8 @@ The Common Criteria are required for any SOC 2 report. CC1 through CC9 cover gov
 | ------- | ----------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------ |
 | CC7.1   | Detection and monitoring procedures for new vulnerabilities | ✓                | Dependabot, `pnpm audit` on PR, cargo-audit, CodeQL daily                                  |
 | CC7.2   | Monitors system components and operation                    | ⚠                | CI gates monitor build/test; **no production runtime monitoring (library has no runtime)** |
-| CC7.3   | Evaluates security events for incident response             | ✓                | `SECURITY-INCIDENT.md` six-phase runbook with severity classification                      |
-| CC7.4   | Responds to identified security incidents                   | ✓                | `SECURITY-INCIDENT.md` Phase 2 (containment), Phase 4 (remediation), templates             |
+| CC7.3   | Evaluates security events for incident response             | ✓                | `security-incident-runbook.md` six-phase runbook with severity classification              |
+| CC7.4   | Responds to identified security incidents                   | ✓                | `security-incident-runbook.md` Phase 2 (containment), Phase 4 (remediation), templates     |
 | CC7.5   | Identifies, develops, implements activities to recover      | ✓                | Runbook Phase 5 (coordinated disclosure), `--provenance` on publish                        |
 
 **CC7 readiness: 85%.** Gap: CC7.2 is mostly N/A for a library; the auditor will note this.
@@ -138,10 +138,10 @@ The Common Criteria are required for any SOC 2 report. CC1 through CC9 cover gov
 
 ### CC9 — Risk Mitigation
 
-| Control | Requirement                                                                           | gtcx-core status | Evidence                                                                                                                                                                    |
-| ------- | ------------------------------------------------------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CC9.1   | Identifies, selects, and develops risk mitigation activities for business disruptions | ⚠                | `SECURITY-INCIDENT.md` covers incidents but not business continuity; library has no operational continuity concern, **but vendor risk assessors expect this even when N/A** |
-| CC9.2   | Assesses and manages risks associated with vendors and business partners              | ⚠                | `tools/check-crypto-deps.mjs` (allowlist for `@noble/*`), `cargo-deny`, Dependabot — but no formal vendor management policy document                                        |
+| Control | Requirement                                                                           | gtcx-core status | Evidence                                                                                                                                                                            |
+| ------- | ------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CC9.1   | Identifies, selects, and develops risk mitigation activities for business disruptions | ⚠                | `security-incident-runbook.md` covers incidents but not business continuity; library has no operational continuity concern, **but vendor risk assessors expect this even when N/A** |
+| CC9.2   | Assesses and manages risks associated with vendors and business partners              | ⚠                | `tools/check-crypto-deps.mjs` (allowlist for `@noble/*`), `cargo-deny`, Dependabot — but no formal vendor management policy document                                                |
 
 **CC9 readiness: 60%.** Gap: business continuity disclaimer + formal vendor management policy.
 
@@ -225,7 +225,7 @@ Critical artifacts to generate continuously starting now:
 1. **CI run logs** — already retained (`gh api`)
 2. **Branch protection event log** — GitHub records this; export quarterly
 3. **CODEOWNER review log** — `quality/ai-review-log/` (when AI CODEOWNER action runs against real PRs); already designed
-4. **Incident response evidence** — `quality/incidents/<id>/` per `SECURITY-INCIDENT.md`
+4. **Incident response evidence** — `quality/incidents/<id>/` per `security-incident-runbook.md`
 5. **Quarterly control-effectiveness reviews** (gap #2 above) — meeting minutes, sign-off
 6. **Vendor / dependency change log** — `pnpm audit` output, `cargo audit` output, Dependabot PR history
 
@@ -252,7 +252,7 @@ This framing is more credible than claiming SOC 2 compliance you don't have. It 
 - [`docs/security/key-ceremony.md`](../security/key-ceremony.md) — NIST SP 800-57 key lifecycle
 - [`docs/agents/governance/`](../agents/governance/) — dual-AI CODEOWNER pattern
 - [`SECURITY.md`](../../SECURITY.md) — public disclosure policy
-- [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md) — internal response runbook
+- [`security-incident-runbook.md`](../security/security-incident-runbook.md) — internal response runbook
 - [`docs/compliance/gdpr-assessment.md`](./gdpr-assessment.md) — zero-PII determination
 - [`docs/compliance/pci-dss-scope.md`](./pci-dss-scope.md) — zero-CHD determination
 - [`docs/compliance/sox-controls.md`](./sox-controls.md) — SOX ITGC mapping

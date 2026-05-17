@@ -161,12 +161,12 @@
 
 ### 1.9 Agentic Maturity
 
-| Sub-dimension        |  Score | Evidence                                                           |
-| -------------------- | -----: | ------------------------------------------------------------------ |
-| AI CODEOWNER action  | 9.5/10 | Dual-provider review (Anthropic primary, OpenAI fallback)          |
-| Governance playbooks | 9.0/10 | `CLAUDE.md`, `CONTRIBUTING.md`, `SECURITY-INCIDENT.md` all current |
-| Trust constraints    | 9.0/10 | Signed commits, CODEOWNERS, ops:check verifier all active          |
-| Review log           | 8.5/10 | `quality/ai-review-log/` populated; 30+ PR threshold not yet hit   |
+| Sub-dimension        |  Score | Evidence                                                                   |
+| -------------------- | -----: | -------------------------------------------------------------------------- |
+| AI CODEOWNER action  | 9.5/10 | Dual-provider review (Anthropic primary, OpenAI fallback)                  |
+| Governance playbooks | 9.0/10 | `CLAUDE.md`, `CONTRIBUTING.md`, `security-incident-runbook.md` all current |
+| Trust constraints    | 9.0/10 | Signed commits, CODEOWNERS, ops:check verifier all active                  |
+| Review log           | 8.5/10 | `quality/ai-review-log/` populated; 30+ PR threshold not yet hit           |
 
 **Findings**
 

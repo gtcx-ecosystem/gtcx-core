@@ -145,7 +145,7 @@ Regional YAML files missing: LatAm, Asia
 
 ### What Earned the Score
 
-- **Shared canonical contracts**: Canonical signing contract with 25 locked test vectors exported from `@gtcx/api-client/canonical/test-vectors`. Formal `CONTRACT.md` specifying all 11 rules. Cross-repo validation source of truth.
+- **Shared canonical contracts**: Canonical signing contract with 25 locked test vectors exported from `@gtcx/api-client/canonical/test-vectors`. Formal `contract.md` specifying all 11 rules. Cross-repo validation source of truth.
 - **Cross-repo provenance**: `AgenticProvenance` type defined in gtcx-core `@gtcx/types`, mirrored in gtcx-intelligence and gtcx-protocols. `evaluateProvenancePolicy()` and `shouldRequireHumanReview()` in all three repos.
 - **pnpm workspaces**: All three repos use pnpm 9.15.0 + Turbo 2.3.0 with identical task topology (`build` → `^build`).
 - **Node engine**: `>=20.0.0` everywhere. TypeScript `^6.0.0` everywhere.

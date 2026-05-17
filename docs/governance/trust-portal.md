@@ -77,7 +77,7 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 | Secure software development | SA-11, SA-15       | CC8.1         | 21 CI gates; CodeQL, Trivy, cargo-audit, secret scan; architecture boundary enforcement                                                     |
 | Supply chain                | SA-12, SR-3        | CC9.2         | `pnpm.overrides` exact-pinning; `tools/check-crypto-deps.mjs` integrity allowlist; SBOM (CycloneDX) on every build                          |
 | Vulnerability management    | RA-5, SI-2         | CC7.1         | Dependabot, `pnpm audit` on every PR, cargo-audit on every PR, public disclosure policy                                                     |
-| Incident response           | IR-4, IR-6         | CC7.3-7.5     | [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md) six-phase runbook with severity classification + bypass procedure                      |
+| Incident response           | IR-4, IR-6         | CC7.3-7.5     | [`SECURITY-INCIDENT.md`](../security/security-incident-runbook.md) six-phase runbook with severity classification + bypass procedure        |
 | Audit and monitoring        | AU-2, AU-12        | CC4.1, CC7.2  | Structured stderr JSON traces; `SpanEmitter` contract for OTel forwarding; sanitizer-override telemetry; provenance manifest on publish     |
 | Change management           | CM-3, CM-4         | CC8.1         | Conventional commits, changesets, branch protection, required CODEOWNER review, API surface baseline at `quality/api-surface-baseline.json` |
 | Risk assessment             | RA-3               | CC3.1-3.4     | STRIDE table, attack tree, threat actor table, residual risk analysis                                                                       |
@@ -123,7 +123,7 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 ### Incident response
 
 - [`SECURITY.md`](../../SECURITY.md) — public disclosure policy with severity-based response timelines
-- [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md) — six-phase internal runbook: triage, containment, investigation, remediation, disclosure, and retrospective. Includes the AI bypass procedure plus three templates: acknowledgement, downstream notice, and public advisory.
+- [`SECURITY-INCIDENT.md`](../security/security-incident-runbook.md) — six-phase internal runbook: triage, containment, investigation, remediation, disclosure, and retrospective. Includes the AI bypass procedure plus three templates: acknowledgement, downstream notice, and public advisory.
 - Coordinated disclosure window — 14 days from fix-merged to public for critical/high
 
 ### Compliance posture
@@ -197,7 +197,7 @@ This portal is the entry point. The artifacts it points to are the source of tru
 | [SOC 2 readiness](../compliance/soc2-readiness.md)                          | TSC mapping, 7 documented gaps          |
 | [GDPR / PCI / SOX](../compliance/)                                          | Compliance scope determinations         |
 | [SECURITY.md](../../SECURITY.md)                                            | Public disclosure policy                |
-| [SECURITY-INCIDENT.md](../../SECURITY-INCIDENT.md)                          | Internal response runbook               |
+| [SECURITY-INCIDENT.md](../security/security-incident-runbook.md)            | Internal response runbook               |
 | [Governance](../agents/governance/README.md)                                | Dual-AI CODEOWNER pattern               |
 | [Repo bootstrap](../operations/repo-bootstrap.md)                           | Live operational prerequisites          |
 | [GTM evidence pack](../gtm/)                                                | Sandbox-regulator-specific materials    |

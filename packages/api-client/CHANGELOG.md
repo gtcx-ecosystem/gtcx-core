@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- db60a11: Add locked canonical signing contract test vectors (`test-vectors.json`) with 25 cross-repo validation vectors. Export from `@gtcx/api-client/canonical/test-vectors` for downstream consumers (mobile, protocols, infrastructure). Include formal `CONTRACT.md` specifying all 11 canonicalization rules.
+- db60a11: Add locked canonical signing contract test vectors (`test-vectors.json`) with 25 cross-repo validation vectors. Export from `@gtcx/api-client/canonical/test-vectors` for downstream consumers (mobile, protocols, infrastructure). Include formal `contract.md` specifying all 11 canonicalization rules.
 - 1b625fc: Runtime Substrate: resilience, telemetry, connectivity bridge, and batteries-included runtime
   - **@gtcx/resilience** (new): Circuit breaker, adaptive retry with jitter, timeout wrapper, bulkhead (45 tests).
   - **@gtcx/telemetry** (new): Metrics (Prometheus + in-memory), W3C traceparent tracing, OTel bridge, logging bridge (22 tests).

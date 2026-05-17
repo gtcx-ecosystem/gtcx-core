@@ -91,12 +91,12 @@ If verification succeeds, the consumer has cryptographic proof that:
 
 ## Attestation lifecycle
 
-| Phase            | Action                                                                                                                                                                                               | Owner                 |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| **Generation**   | Every `pnpm release` invocation produces signed provenance via npm sigstore                                                                                                                          | GitHub Actions runner |
-| **Storage**      | Provenance is stored at npm registry alongside the package tarball                                                                                                                                   | npm                   |
-| **Verification** | Consumers run `slsa-verifier` against the published package                                                                                                                                          | Consumer / auditor    |
-| **Revocation**   | Compromised attestations are addressed via [`SECURITY-INCIDENT.md`](../../SECURITY-INCIDENT.md), Phase 5: Coordinated Disclosure. Typical response is yanking the affected version and republishing. | Incident commander    |
+| Phase            | Action                                                                                                                                                                                                   | Owner                 |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| **Generation**   | Every `pnpm release` invocation produces signed provenance via npm sigstore                                                                                                                              | GitHub Actions runner |
+| **Storage**      | Provenance is stored at npm registry alongside the package tarball                                                                                                                                       | npm                   |
+| **Verification** | Consumers run `slsa-verifier` against the published package                                                                                                                                              | Consumer / auditor    |
+| **Revocation**   | Compromised attestations are addressed via [`SECURITY-INCIDENT.md`](./security-incident-runbook.md), Phase 5: Coordinated Disclosure. Typical response is yanking the affected version and republishing. | Incident commander    |
 
 ---
 
@@ -161,7 +161,7 @@ Out of scope. Source Level 3 requires "verified history with a tamper-evident lo
 
 - [Trust Portal](../governance/trust-portal.md) — section "Supply chain integrity"
 - [SOC 2 Readiness](../compliance/soc2-readiness.md) — CC8.1 Change Management mapping
-- [SECURITY-INCIDENT.md](../../SECURITY-INCIDENT.md) — Phase 5 coordinated disclosure
+- [SECURITY-INCIDENT.md](./security-incident-runbook.md) — Phase 5 coordinated disclosure
 - [SLSA v1.0 Build Track spec](https://slsa.dev/spec/v1.0/levels#build-track)
 - [npm provenance documentation](https://docs.npmjs.com/generating-provenance-statements)
 

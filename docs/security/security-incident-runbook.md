@@ -101,7 +101,7 @@ Within 14 days of advisory publication:
 2. **Update this runbook** if the response surfaced gaps in the process.
 3. **Update threat model + ADRs** if the root cause was a structural decision.
 4. **Publish the retrospective summary** in `docs/security/incidents/<id>-retrospective.md` (public — sandbox regulators value this signal).
-5. **Update `SECURITY-INCIDENT.md` changelog.**
+5. **Update `security-incident-runbook.md` changelog.**
 
 Examples of root-cause patterns that have shaped this runbook:
 

@@ -188,13 +188,13 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | ----------------- | ------------ | ------------------------------------------------------------------------------------------------ |
 | Deployment        | N/A          | This is a library, published to npm                                                              |
 | Monitoring        | Mostly Ready | Telemetry primitives via `@gtcx/telemetry` (Prometheus + OTel); downstream consumers wire alarms |
-| Incident Response | Gaps         | No `SECURITY-INCIDENT.md` runbook; only `SECURITY.md` for reporting                              |
+| Incident Response | Gaps         | No `security-incident-runbook.md` runbook; only `SECURITY.md` for reporting                      |
 | Disaster Recovery | N/A          | Library has no state                                                                             |
 | Capacity          | Ready        | `benchmarks/` has performance budgets; CI fails on regression                                    |
 | Dependencies      | Ready        | `@noble/*` and libp2p pinned; Dockerfile builds                                                  |
 | Provenance        | Ready        | `pnpm provenance:generate` runs in CI; `--provenance` on publish                                 |
 
-**Library-tier: 9.5/10.** Remaining gap is operational governance: bus factor = 1, no `SECURITY-INCIDENT.md`, no documented disclosure SLA.
+**Library-tier: 9.5/10.** Remaining gap is operational governance: bus factor = 1, no `security-incident-runbook.md`, no documented disclosure SLA.
 
 ---
 
@@ -293,7 +293,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | #   | Task                                                        | Files                                                                   | Effort |
 | --- | ----------------------------------------------------------- | ----------------------------------------------------------------------- | ------ |
 | 1   | Confirm gtcx-agent active; if blocked, escalate             | external                                                                | 1h     |
-| 2   | `SECURITY-INCIDENT.md` with disclosure SLA                  | new file                                                                | 3h     |
+| 2   | `security-incident-runbook.md` with disclosure SLA          | new file                                                                | 3h     |
 | 3   | SoftHSMv2 in CI + integration test                          | `.github/workflows/ci.yml`, `rust/gtcx-crypto/tests/hsm_integration.rs` | 4h     |
 | 4   | Decompose `security/src/offline/storage.ts` (766→<500)      | `packages/security/src/offline/storage/*`                               | 1d     |
 | 5   | Build `gtcx-codeowner-action` per `docs/agents/governance/` | new repo                                                                | 2d     |
