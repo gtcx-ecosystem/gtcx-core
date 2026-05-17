@@ -1,7 +1,7 @@
 # gtcx-core — Repository Overview
 
 > **Status:** Current
-> **Date:** 2026-05-12
+> **Date:** 2026-05-17
 > **Owner:** Protocol Architect
 > **Next review:** 2026-08-12 (quarterly, aligned with master audit cycle)
 
@@ -15,7 +15,7 @@
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-capable with known gaps. Honest bank-grade score: **8.63/10 core** (up from 8.56 on 2026-05-11). FIPS 140-3 verified. SLSA Build L3 aspirational. SOC 2 Type 1 pending. No critical security findings. CI blocked by GitHub Actions billing.
+**Maturity state:** Production-capable with known gaps. Honest bank-grade score: **8.7/10 core** (up from 8.65 on 2026-05-13). FIPS 140-3 verified. SLSA Build L3 aspirational. SOC 2 Type 1 pending. No critical security findings. CI operational.
 
 ---
 
@@ -52,9 +52,9 @@
 | DID resolution                     | **Beta**        | `packages/identity/tests/did.test.ts`              | `gtcx-markets`        |
 | ZKP native NAPI bindings           | **Beta**        | `packages/crypto-native/`                          | `gtcx-markets`        |
 | USSD protocol                      | **Scaffolding** | String enum only (`'ussd-only'` profile)           | —                     |
-| Adaptive low-bandwidth mode        | **Config-only** | Profiles defined; no dynamic payload adaptation    | —                     |
-| HSM key storage                    | **Planned**     | Trait designed, not implemented                    | —                     |
-| Cloud KMS integration              | **Planned**     | Trait designed, not implemented                    | —                     |
+| Adaptive low-bandwidth mode        | **Production**  | Dynamic compression, image downsampling, batching  | All mobile clients    |
+| HSM key storage                    | **Beta**        | PKCS#11 keystore implemented in `rust/gtcx-crypto` | `gtcx-infrastructure` |
+| Cloud KMS integration              | **Beta**        | AWS KMS keystore implemented in `rust/gtcx-crypto` | `gtcx-infrastructure` |
 
 ### 2.3 Business Value Proposition
 
@@ -62,7 +62,7 @@
 
 **For Enterprise Buyers:** `gtcx-core` reduces integration risk through a shared foundation with strong package boundaries, reproducible builds, and API surface baselining. FIPS-validated cryptography, zero unsafe code in Rust, and signed commits with branch protection provide a control environment suitable for procurement by banks, commodity exchanges, and government mineral bureaus. The threat-control matrix (12 controls, validated in CI) demonstrates security governance.
 
-**For African Sovereigns / DFIs:** `gtcx-core` preserves data sovereignty by keeping key material client-side and supporting offline-first operation. No raw AI output can approve consequential actions — trust gating is human-in-the-loop. The Global South Resilience profile (8.5/10) explicitly addresses intermittent connectivity, low-bandwidth adaptation, and USSD support — capabilities designed for African market realities rather than retrofitted from Western infrastructure.
+**For African Sovereigns / DFIs:** `gtcx-core` preserves data sovereignty by keeping key material client-side and supporting offline-first operation. No raw AI output can approve consequential actions — trust gating is human-in-the-loop. The Global South Resilience profile (8.8/10) explicitly addresses intermittent connectivity, low-bandwidth adaptation, and USSD support — capabilities designed for African market realities rather than retrofitted from Western infrastructure.
 
 ---
 
