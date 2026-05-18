@@ -162,7 +162,6 @@ Deprecated docs (superseded by newer versions) are retained in-place with frontm
 | Path                           | Why                                               |
 | ------------------------------ | ------------------------------------------------- |
 | [`../CLAUDE.md`](../CLAUDE.md) | Repo entrypoint and hard rules                    |
-| [`../_delete/`](../_delete/)   | Staged-delete forensic holding area               |
 | `artifacts/api-docs/`          | Generated Typedoc output, intentionally untracked |
 | [`../tools/`](../tools/)       | Executable utilities and quality gates            |
 
