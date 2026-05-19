@@ -8,7 +8,7 @@ owner: 'protocol-architect'
 role: 'quality-evidence-lead'
 tier: 'critical'
 tags: ['quality', 'tracking', 'p1', 'incident-management', '10-10']
-review_cycle: 'weekly'
+review_cycle: 'on-change'
 ---
 
 # P1-Free Tracking — 90-Day Window

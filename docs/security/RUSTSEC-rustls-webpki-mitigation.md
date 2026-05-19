@@ -3,10 +3,10 @@ title: 'rustls-webpki Vulnerability Mitigation'
 status: 'current'
 date: '2026-05-19'
 owner: 'protocol-architect'
-role: 'security-engineer'
+role: 'crypto-security-engineer'
 tier: 'critical'
-tags: ['security', 'rust', 'vulnerability', 'mitigation', 'RUSTSEC']
-review_cycle: 'weekly'
+tags: ['security', 'rust', 'vulnerability', 'mitigation', 'rustsec']
+review_cycle: 'on-change'
 advisory_ids:
   - 'RUSTSEC-2026-0098'
   - 'RUSTSEC-2026-0099'
