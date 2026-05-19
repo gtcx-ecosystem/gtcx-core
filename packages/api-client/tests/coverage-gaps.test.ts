@@ -1,3 +1,4 @@
+import type { Dispatcher } from 'undici';
 import { describe, it, expect, vi } from 'vitest';
 
 import {
@@ -11,14 +12,7 @@ import {
   createApiClient,
 } from '../src/index';
 import { enqueueOrThrow } from '../src/request';
-import {
-  buildUrl,
-  mergeSignals,
-  resolveBody,
-  createMtlsDispatcher,
-  parseResponse,
-  sleep,
-} from '../src/utils';
+import { buildUrl, mergeSignals, resolveBody, parseResponse, sleep } from '../src/utils';
 
 describe('api-client coverage gaps', () => {
   describe('error subclasses', () => {
@@ -124,6 +118,23 @@ describe('api-client coverage gaps', () => {
       c2.abort();
       expect(merged.aborted).toBe(true);
     });
+
+    it('falls back to manual signal merging when AbortSignal.any is unavailable', () => {
+      const originalAny = (AbortSignal as unknown as { any?: unknown }).any;
+      // @ts-expect-error removing native helper to test fallback
+      delete (AbortSignal as unknown as { any?: unknown }).any;
+      try {
+        const c1 = new AbortController();
+        const c2 = new AbortController();
+        const merged = mergeSignals(c1.signal, c2.signal);
+        expect(merged.aborted).toBe(false);
+        c1.abort();
+        expect(merged.aborted).toBe(true);
+      } finally {
+        // @ts-expect-error restoring native helper
+        (AbortSignal as unknown as { any?: unknown }).any = originalAny;
+      }
+    });
   });
 
   describe('resolveBody', () => {
@@ -182,16 +193,12 @@ describe('api-client coverage gaps', () => {
 
   describe('createMtlsDispatcher', () => {
     it('throws ConfigurationError when undici is unavailable', async () => {
-      // Simulate import failure by mocking dynamic import in a constrained way
+      vi.resetModules();
       vi.doMock('undici', () => {
         throw new Error('not found');
       });
-      // Since the module caches undici, we test the error path indirectly:
-      // The catch block in createMtlsDispatcher catches any import error.
-      // We can't easily trigger this without module cache busting, so we
-      // verify the error class structure instead.
-      expect(createMtlsDispatcher).toBeDefined();
-      // Cleanup
+      const { createMtlsDispatcher: cmt } = await import('../src/utils');
+      await expect(cmt({ cert: 'c', key: 'k' })).rejects.toThrow(/mTLS dispatcher unavailable/);
       vi.doUnmock('undici');
     });
   });
@@ -292,11 +299,267 @@ describe('api-client coverage gaps', () => {
         mtls: { cert: 'cert', key: 'key' },
       });
 
-      // The mtls path sets a dispatcherPromise internally.
-      // We just verify the client builds and the request path works
-      // by relying on the existing mtls test for deeper validation.
       const result = await client.get('/test');
       expect(result.data).toEqual({ ok: true });
+    });
+
+    it('uses explicit dispatcher when provided', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const dispatcher = { connect: vi.fn() } as unknown as Dispatcher;
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        dispatcher,
+      });
+      const result = await client.get('/test');
+      expect(result.data).toEqual({ ok: true });
+    });
+  });
+
+  describe('offline handling', () => {
+    it('enqueues request when offline.isOnline returns false', async () => {
+      const fetcher = vi.fn();
+      const offline = {
+        isOnline: vi.fn().mockReturnValue(false),
+        enqueue: vi.fn().mockResolvedValue('op-456'),
+      };
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        offline,
+      });
+      const result = await client.get('/test');
+      expect(result).toEqual({ queued: true, operationId: 'op-456' });
+      expect(offline.isOnline).toHaveBeenCalled();
+      expect(fetcher).not.toHaveBeenCalled();
+    });
+
+    it('executes request normally when offline.isOnline returns true', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const offline = {
+        isOnline: vi.fn().mockReturnValue(true),
+        enqueue: vi.fn(),
+      };
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        offline,
+      });
+      const result = await client.get('/test');
+      expect(result.data).toEqual({ ok: true });
+      expect(offline.enqueue).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('traceContext as function', () => {
+    it('resolves traceContext when it is a function', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const traceContext = vi.fn().mockReturnValue({
+        traceId: 'a'.repeat(32),
+        spanId: 'b'.repeat(16),
+        sampled: true,
+      });
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        traceContext,
+      });
+      await client.get('/test');
+      expect(traceContext).toHaveBeenCalled();
+    });
+  });
+
+  describe('request interceptors', () => {
+    it('applies partial request interceptor results with fallbacks', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        interceptors: {
+          request: [async (_ctx) => ({ headers: { 'x-partial': '1' } })],
+        },
+      });
+      await client.post('/test', { body: 'data' });
+      const [url, init] = (fetcher as ReturnType<typeof vi.fn>).mock.calls[0];
+      expect(url).toBe('https://api.test/test');
+      expect(init.method).toBe('POST');
+      expect(init.headers).toMatchObject({ 'x-partial': '1' });
+    });
+
+    it('returns original context when request interceptors array is empty', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        interceptors: { request: [] },
+      });
+      await client.get('/test');
+      expect(fetcher).toHaveBeenCalledWith(
+        'https://api.test/test',
+        expect.objectContaining({ method: 'GET' })
+      );
+    });
+
+    it('returns original response when response interceptors array is empty', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        interceptors: { response: [] },
+      });
+      const result = await client.get('/test');
+      if ('queued' in result) throw new Error('unexpected queue');
+      expect(result.data).toEqual({ ok: true });
+    });
+  });
+
+  describe('request signing options', () => {
+    it('skips signing when request options.unsigned is true', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const signer = vi.fn().mockResolvedValue({ 'x-signature': 'signed' });
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        signer,
+      });
+      const result = await client.get('/test', { unsigned: true });
+      expect(signer).not.toHaveBeenCalled();
+      expect(result.data).toEqual({ ok: true });
+    });
+
+    it('throws SigningError when signer rejects', async () => {
+      const fetcher = vi.fn();
+      const signer = vi.fn().mockRejectedValue(new Error('signing failed'));
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        signer,
+        retries: 0,
+      });
+      await expect(client.get('/test')).rejects.toBeInstanceOf(SigningError);
+    });
+  });
+
+  describe('abort signal handling', () => {
+    it('merges external abort signal with internal timeout signal', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const controller = new AbortController();
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+      });
+      await client.get('/test', { signal: controller.signal });
+      expect(fetcher).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.objectContaining({ signal: expect.any(AbortSignal) })
+      );
+    });
+
+    it('throws AbortError when fetch aborts from external signal', async () => {
+      const fetcher = vi.fn((_url: string, init?: RequestInit) => {
+        return new Promise<Response>((_, reject) => {
+          const onAbort = () => {
+            const err = new Error('The operation was aborted');
+            err.name = 'AbortError';
+            reject(err);
+          };
+          if (init?.signal?.aborted) {
+            onAbort();
+            return;
+          }
+          init?.signal?.addEventListener('abort', onAbort, { once: true });
+        });
+      });
+      const controller = new AbortController();
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher: fetcher as typeof fetch,
+        retries: 0,
+      });
+      const promise = client.get('/test', { signal: controller.signal });
+      await new Promise((r) => setTimeout(r, 10));
+      controller.abort();
+      await expect(promise).rejects.toBeInstanceOf(AbortError);
+    });
+  });
+
+  describe('telemetry resilience', () => {
+    it('survives telemetry hook exceptions', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        telemetry: {
+          onRequestStart: () => {
+            throw new Error('telemetry boom');
+          },
+        },
+      });
+      const result = await client.get('/test');
+      expect(result.data).toEqual({ ok: true });
+    });
+
+    it('does not throw when telemetry complete hook is missing', async () => {
+      const fetcher = vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      const onStart = vi.fn();
+      const client = createApiClient({
+        baseUrl: 'https://api.test',
+        fetcher,
+        telemetry: { onRequestStart: onStart },
+      });
+      const result = await client.get('/test');
+      expect(result.data).toEqual({ ok: true });
+      expect(onStart).toHaveBeenCalled();
     });
   });
 });

@@ -160,6 +160,14 @@ describe('DID / key ID', () => {
     expect(keyId).toMatch(/^[0-9a-f]{32}$/i);
   });
 
+  it('formats keyId without keyRef', () => {
+    const did = formatDID(publicKeyHex);
+    const keyIdWithRef = formatKeyId(did, 'primary');
+    const keyIdWithoutRef = formatKeyId(did);
+    expect(keyIdWithoutRef).toMatch(/^[0-9a-f]{32}$/i);
+    expect(keyIdWithoutRef).not.toBe(keyIdWithRef);
+  });
+
   it('round-trips DID via parseDID', () => {
     const did = formatDID(publicKeyHex);
     expect(parseDID(did)).toBe(did.slice('did:gtcx:tp_'.length));
@@ -290,6 +298,28 @@ describe('end-to-end sign + verify', () => {
     expect(result.error).toBe('Signature verification failed');
   });
 
+  it('uses btoa fallback when Buffer is unavailable', async () => {
+    const originalBuffer = globalThis.Buffer;
+    // @ts-expect-error testing non-Node runtime path
+    globalThis.Buffer = undefined;
+    try {
+      const signer = createCanonicalSigner({
+        privateKeyHex: keys.privateKey,
+        publicKeyHex: keys.publicKey,
+      });
+      const headers = await signer({
+        method: 'GET',
+        url: 'https://api.gtcx.io/test',
+        headers: {},
+        body: null,
+        attempt: 0,
+      });
+      expect(headers.Authorization).toMatch(/^Bearer /);
+    } finally {
+      globalThis.Buffer = originalBuffer;
+    }
+  });
+
   it('fails verification with missing signature header', () => {
     const result = verifyCanonicalSignature(
       'GET',
@@ -339,6 +369,11 @@ describe('parseDID edge cases', () => {
   it('rejects DID with non-hex fingerprint', () => {
     expect(parseDID('did:gtcx:zzzzzz')).toBeUndefined();
     expect(isValidDID('did:gtcx:zzzzzz')).toBe(false);
+  });
+
+  it('rejects DID with correct length but non-hex fingerprint', () => {
+    expect(parseDID('did:gtcx:tp_1234567890abcdef1234567890abcdzz')).toBeUndefined();
+    expect(isValidDID('did:gtcx:tp_1234567890abcdef1234567890abcdzz')).toBe(false);
   });
 });
 
