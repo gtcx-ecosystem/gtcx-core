@@ -54,6 +54,7 @@ const toBytes = (value: Uint8Array | string): Uint8Array =>
   typeof value === 'string' ? textEncoder.encode(value) : value;
 
 const toBase64 = (value: Uint8Array | string): string => {
+  /* v8 ignore next -- unreachable: toBase64 is only called with strings */
   const bytes = typeof value === 'string' ? textEncoder.encode(value) : value;
   if (typeof Buffer !== 'undefined') {
     return Buffer.from(bytes).toString('base64');

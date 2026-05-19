@@ -40,12 +40,10 @@ export function buildMerkleTree(items: string[]): MerkleTree {
     const nextLayer: string[] = [];
 
     for (let i = 0; i < currentLayer.length; i += 2) {
-      const left = currentLayer[i];
+      const left = currentLayer[i]!;
       const right = currentLayer[i + 1];
       // Use left value if right doesn't exist (odd number of nodes)
-      if (left !== undefined) {
-        nextLayer.push(combineHashes(left, right ?? left));
-      }
+      nextLayer.push(combineHashes(left, right ?? left));
     }
 
     layers.push(nextLayer);
@@ -53,7 +51,7 @@ export function buildMerkleTree(items: string[]): MerkleTree {
   }
 
   return {
-    root: currentLayer[0] ?? '',
+    root: currentLayer[0]!,
     leaves,
     layers,
   };
