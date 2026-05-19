@@ -334,3 +334,125 @@ describe('end-to-end sign + verify', () => {
     expect(result.error).toBe('Request timestamp outside allowed clock skew');
   });
 });
+
+describe('parseDID edge cases', () => {
+  it('rejects DID with non-hex fingerprint', () => {
+    expect(parseDID('did:gtcx:zzzzzz')).toBeUndefined();
+    expect(isValidDID('did:gtcx:zzzzzz')).toBe(false);
+  });
+});
+
+describe('parseEnvelope edge cases', () => {
+  it('rejects unsupported algorithm', () => {
+    const envelope = 'v1;RS256;key1;2024-01-01T00:00:00.000Z;nonce1;sig1';
+    expect(() => parseEnvelope(envelope)).toThrow('Unsupported signature algorithm');
+  });
+
+  it('rejects envelope with missing fields', () => {
+    expect(() => parseEnvelope('v1;ed25519;key1;2024-01-01T00:00:00.000Z;;sig1')).toThrow(
+      'Invalid signature envelope'
+    );
+  });
+});
+
+describe('verifyCanonicalSignature missing headers', () => {
+  const keys = { publicKey: 'aabbccdd', privateKey: '11223344' };
+
+  it('fails when DID header is missing', () => {
+    const result = verifyCanonicalSignature(
+      'GET',
+      'https://api.gtcx.io/',
+      {
+        [SIGNATURE_HEADER_NAME]: 'sig',
+        [KEY_ID_HEADER_NAME]: 'key1',
+        [TIMESTAMP_HEADER_NAME]: new Date().toISOString(),
+        [NONCE_HEADER_NAME]: 'nonce1',
+        [AUDIENCE_HEADER_NAME]: 'aud1',
+      },
+      null,
+      keys.publicKey
+    );
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Missing DID header');
+  });
+
+  it('fails when key ID header is missing', () => {
+    const result = verifyCanonicalSignature(
+      'GET',
+      'https://api.gtcx.io/',
+      {
+        [SIGNATURE_HEADER_NAME]: 'sig',
+        [DID_HEADER_NAME]: 'did:gtcx:aabbccdd',
+        [TIMESTAMP_HEADER_NAME]: new Date().toISOString(),
+        [NONCE_HEADER_NAME]: 'nonce1',
+        [AUDIENCE_HEADER_NAME]: 'aud1',
+      },
+      null,
+      keys.publicKey
+    );
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Missing key ID header');
+  });
+
+  it('fails when timestamp header is missing', () => {
+    const result = verifyCanonicalSignature(
+      'GET',
+      'https://api.gtcx.io/',
+      {
+        [SIGNATURE_HEADER_NAME]: 'sig',
+        [DID_HEADER_NAME]: 'did:gtcx:aabbccdd',
+        [KEY_ID_HEADER_NAME]: 'key1',
+        [NONCE_HEADER_NAME]: 'nonce1',
+        [AUDIENCE_HEADER_NAME]: 'aud1',
+      },
+      null,
+      keys.publicKey
+    );
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Missing timestamp header');
+  });
+
+  it('fails when nonce header is missing', () => {
+    const result = verifyCanonicalSignature(
+      'GET',
+      'https://api.gtcx.io/',
+      {
+        [SIGNATURE_HEADER_NAME]: 'sig',
+        [DID_HEADER_NAME]: 'did:gtcx:aabbccdd',
+        [KEY_ID_HEADER_NAME]: 'key1',
+        [TIMESTAMP_HEADER_NAME]: new Date().toISOString(),
+        [AUDIENCE_HEADER_NAME]: 'aud1',
+      },
+      null,
+      keys.publicKey
+    );
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Missing nonce header');
+  });
+
+  it('fails when audience header is missing', () => {
+    const result = verifyCanonicalSignature(
+      'GET',
+      'https://api.gtcx.io/',
+      {
+        [SIGNATURE_HEADER_NAME]: 'sig',
+        [DID_HEADER_NAME]: 'did:gtcx:aabbccdd',
+        [KEY_ID_HEADER_NAME]: 'key1',
+        [TIMESTAMP_HEADER_NAME]: new Date().toISOString(),
+        [NONCE_HEADER_NAME]: 'nonce1',
+      },
+      null,
+      keys.publicKey
+    );
+    expect(result.valid).toBe(false);
+    expect(result.error).toBe('Missing audience header');
+  });
+});
+
+describe('canonicalizeQueryString sort edge case', () => {
+  it('handles equal keys with equal values', () => {
+    const qs = new URLSearchParams('a=1&a=1');
+    const result = canonicalizeQueryString(qs);
+    expect(result).toBe('a=1&a=1');
+  });
+});

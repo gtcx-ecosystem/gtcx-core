@@ -5,6 +5,8 @@ import {
   getControl,
   getAllControls,
   getControlCount,
+  getPopulatedDomains,
+  isDomainPopulated,
   CORE12_DOMAINS,
 } from '../src/core12';
 import type { Domain } from '../src/core12';
@@ -162,6 +164,47 @@ describe('Domain structure', () => {
 
 // ---------------------------------------------------------------------------
 // Control structure validation
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// getPopulatedDomains
+// ---------------------------------------------------------------------------
+describe('getPopulatedDomains', () => {
+  it('returns an array', () => {
+    expect(Array.isArray(getPopulatedDomains())).toBe(true);
+  });
+
+  it('includes only domains with controls', () => {
+    const populated = getPopulatedDomains();
+    for (const domain of populated) {
+      expect(domain.controls.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('matches the count of domains that have controls', () => {
+    const expected = CORE12_DOMAINS.filter((d) => d.controls.length > 0).length;
+    expect(getPopulatedDomains().length).toBe(expected);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// isDomainPopulated
+// ---------------------------------------------------------------------------
+describe('isDomainPopulated', () => {
+  it('returns true for a domain that has controls', () => {
+    expect(isDomainPopulated('D01')).toBe(true);
+  });
+
+  it('returns false for an invalid domain ID', () => {
+    expect(isDomainPopulated('invalid')).toBe(false);
+  });
+
+  it('returns false for an empty string', () => {
+    expect(isDomainPopulated('')).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Control structure
 // ---------------------------------------------------------------------------
 describe('Control structure', () => {
   const allControls = getAllControls();

@@ -158,4 +158,97 @@ describe('shouldRequireHumanReview', () => {
     const p = makeProvenance({ trustLevel: 'verified', confidence: 0.9 });
     expect(shouldRequireHumanReview(p, custom)).toBe(true);
   });
+
+  it('fires stale_or_partial_evidence when coverage is low', () => {
+    const p: AgenticProvenance = {
+      ...makeProvenance({ trustLevel: 'verified', confidence: 0.95 }),
+      evidenceRefs: [
+        {
+          evidenceId: 'ev-1',
+          evidenceType: 'sensor',
+          source: 'a',
+          timestamp: Date.now(),
+          relevanceScore: 0.1,
+        },
+        {
+          evidenceId: 'ev-2',
+          evidenceType: 'sensor',
+          source: 'b',
+          timestamp: Date.now(),
+          relevanceScore: 0.2,
+        },
+      ],
+    };
+    const result = evaluateProvenancePolicy(p, {
+      thresholds: DefaultReviewThresholds,
+      defaultAction: 'allow',
+    });
+    expect(
+      result.triggeredThresholds.some((t) => t.condition === 'stale_or_partial_evidence')
+    ).toBe(true);
+  });
+
+  it('fires jurisdictional_edge_case with multiple sources and low confidence', () => {
+    const p: AgenticProvenance = {
+      ...makeProvenance({ trustLevel: 'verified', confidence: 0.5 }),
+      evidenceRefs: [
+        {
+          evidenceId: 'ev-1',
+          evidenceType: 'sensor',
+          source: 'src-a',
+          timestamp: Date.now(),
+          relevanceScore: 0.3,
+        },
+        {
+          evidenceId: 'ev-2',
+          evidenceType: 'sensor',
+          source: 'src-b',
+          timestamp: Date.now(),
+          relevanceScore: 0.3,
+        },
+        {
+          evidenceId: 'ev-3',
+          evidenceType: 'sensor',
+          source: 'src-c',
+          timestamp: Date.now(),
+          relevanceScore: 0.3,
+        },
+      ],
+    };
+    const result = evaluateProvenancePolicy(p, {
+      thresholds: DefaultReviewThresholds,
+      defaultAction: 'allow',
+    });
+    expect(result.triggeredThresholds.some((t) => t.condition === 'jurisdictional_edge_case')).toBe(
+      true
+    );
+  });
+
+  it('fires model_uncertainty due to sparse evidence even when confidence is high', () => {
+    const p = makeProvenance({ trustLevel: 'verified', confidence: 0.95, evidenceRefsCount: 1 });
+    const result = evaluateProvenancePolicy(p, {
+      thresholds: DefaultReviewThresholds,
+      defaultAction: 'allow',
+    });
+    expect(result.triggeredThresholds.some((t) => t.condition === 'model_uncertainty')).toBe(true);
+  });
+
+  it('uses default action when no thresholds fire', () => {
+    const nonePolicy: ProvenancePolicy = {
+      thresholds: [
+        {
+          condition: 'high_impact_compliance',
+          minConfidence: 0.99,
+          requiredReviewerRole: 'officer',
+          escalationLevel: 'none',
+        },
+      ],
+      defaultAction: 'audit',
+    };
+    const p = makeProvenance({ trustLevel: 'verified', confidence: 0.99 });
+    const result = evaluateProvenancePolicy(p, nonePolicy);
+    expect(result.action).toBe('audit');
+    expect(result.triggeredThresholds).toHaveLength(0);
+    expect(result.reviewRequired).toBe(false);
+  });
 });

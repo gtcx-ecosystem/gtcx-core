@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import {
   createNoopTracer,
+  createOtelTracer,
   createSpanContext,
   injectTraceContext,
   extractTraceContext,
@@ -102,5 +103,40 @@ describe('NoopTracer', () => {
         throw new Error('boom');
       })
     ).rejects.toThrow('boom');
+  });
+});
+
+describe('createOtelTracer', () => {
+  it('creates an OTel tracer when @opentelemetry/api is available', () => {
+    const tracer = createOtelTracer();
+    const span = tracer.startSpan('test-span');
+    expect(span.context.traceId).toBeDefined();
+    expect(span.context.spanId).toBeDefined();
+    span.setAttribute('key', 'value');
+    span.setAttributes({ a: '1' });
+    span.recordException(new Error('test'));
+    span.end();
+  });
+
+  it('executes function within OTel span', async () => {
+    const tracer = createOtelTracer();
+    const result = await tracer.withSpan('test-span', async (span) => {
+      span.setAttribute('inside', true);
+      span.setAttributes({ a: '1', b: '2' });
+      expect(span.context.traceId).toBeDefined();
+      expect(span.context.spanId).toBeDefined();
+      return 42;
+    });
+    expect(result).toBe(42);
+  });
+
+  it('propagates errors from within OTel span', async () => {
+    const tracer = createOtelTracer();
+    await expect(
+      tracer.withSpan('test-span', async (span) => {
+        span.recordException(new Error('inner'));
+        throw new Error('span error');
+      })
+    ).rejects.toThrow('span error');
   });
 });

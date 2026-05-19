@@ -84,4 +84,69 @@ describe('PrometheusMetricsCollector', () => {
     expect(text).toContain('latency_ms_sum 255');
     expect(text).toContain('latency_ms_count 3');
   });
+
+  it('reuses gauges and histograms with same key', () => {
+    const mc = createInMemoryMetricsCollector();
+    const g1 = mc.gauge('temp', { zone: 'A' });
+    g1.set(10);
+    const g2 = mc.gauge('temp', { zone: 'A' });
+    expect(g2.getValue()).toBe(10);
+    expect(g1).toBe(g2);
+
+    const h1 = mc.histogram('lat', [10, 100], { zone: 'A' });
+    h1.observe(5);
+    const h2 = mc.histogram('lat', [10, 100], { zone: 'A' });
+    expect(h2.getCounts()['10']).toBe(1);
+    expect(h1).toBe(h2);
+  });
+
+  it('histogram value above all buckets only increments +Inf', () => {
+    const mc = createInMemoryMetricsCollector();
+    const h = mc.histogram('lat', [10, 50]);
+    h.observe(100);
+    const counts = h.getCounts();
+    expect(counts['10']).toBe(0);
+    expect(counts['50']).toBe(0);
+    expect(counts['+Inf']).toBe(1);
+  });
+
+  it('renders metrics without labels', () => {
+    const mc = new PrometheusMetricsCollector();
+    mc.counter('hits').increment(3);
+    mc.gauge('load').set(0.5);
+
+    const text = mc.renderPrometheusText();
+    expect(text).toContain('hits 3');
+    expect(text).toContain('load 0.5');
+  });
+
+  it('renders empty prometheus text when no metrics', () => {
+    const mc = new PrometheusMetricsCollector();
+    expect(mc.renderPrometheusText()).toBe('\n');
+  });
+
+  it('reuses prometheus metrics with same key', () => {
+    const mc = new PrometheusMetricsCollector();
+    const g1 = mc.gauge('temp', { zone: 'A' });
+    g1.set(10);
+    const g2 = mc.gauge('temp', { zone: 'A' });
+    expect(g2.getValue()).toBe(10);
+    expect(g1).toBe(g2);
+
+    const h1 = mc.histogram('lat', [10], { zone: 'A' });
+    h1.observe(5);
+    const h2 = mc.histogram('lat', [10], { zone: 'A' });
+    expect(h2.getCounts()['10']).toBe(1);
+    expect(h1).toBe(h2);
+  });
+
+  it('renders histogram with empty buckets', () => {
+    const mc = new PrometheusMetricsCollector();
+    const h = mc.histogram('empty', []);
+    h.observe(5);
+    const text = mc.renderPrometheusText();
+    expect(text).toContain('empty_bucket{le="+Inf"} 1');
+    expect(text).toContain('empty_sum 5');
+    expect(text).toContain('empty_count 1');
+  });
 });
