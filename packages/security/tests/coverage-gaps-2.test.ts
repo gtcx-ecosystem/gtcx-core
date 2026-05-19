@@ -13,7 +13,11 @@
 import * as cryptoModule from '@gtcx/crypto';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
-import { createAuditTrail, clearSecurityHandlers } from '../src/audit/events';
+import {
+  createAuditTrail,
+  clearSecurityHandlers,
+  registerSecurityHandler,
+} from '../src/audit/events';
 import { SecurityLogger } from '../src/audit/logger';
 import { isTokenValidOffline, assembleToken, verifyTokenSignature } from '../src/auth/tokens';
 import { SecureStorageBase } from '../src/offline/secure-storage';
@@ -116,9 +120,8 @@ describe('createAuditTrail — finalize branches', () => {
 
   it('should log WARN severity when finalize called with FAILURE', async () => {
     clearSecurityHandlers();
-    const logger = new SecurityLogger({ minSeverity: 'INFO', outputJson: false });
     const logged: unknown[] = [];
-    logger.addHandler((e) => {
+    registerSecurityHandler((e) => {
       logged.push(e);
       return Promise.resolve();
     });
