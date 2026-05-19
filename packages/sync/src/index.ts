@@ -28,7 +28,7 @@ function chunk<T>(items: T[], size: number): T[][] {
   return chunks;
 }
 
-function resolveConflict<T>(
+export function resolveConflict<T>(
   strategy: SyncOptions['strategy'],
   localItems: SyncItem<T>[],
   remoteItem?: SyncItem<T>
