@@ -18,6 +18,7 @@ import {
   createSecurityEvent,
   logSecurityEvent,
   registerSecurityHandler,
+  removeSecurityHandler,
   clearSecurityHandlers,
 } from '../src/audit/events';
 import { consoleLogHandler, jsonLogHandler } from '../src/audit/logger';
@@ -36,7 +37,12 @@ import {
   DEFAULT_OFFLINE_CONFIG as TypesDefaultConfig,
   CachedCredentialSchema as TypesCachedCredentialSchema,
 } from '../src/offline/types';
-import { createPaginatedSchema, createApiResponseSchema } from '../src/validation/schemas';
+import {
+  createPaginatedSchema,
+  createApiResponseSchema,
+  UrlSchema,
+  BoundingBoxSchema,
+} from '../src/validation/schemas';
 
 describe('logSecurityEvent — development stdout output', () => {
   const originalEnv = process.env['NODE_ENV'];
@@ -151,6 +157,23 @@ describe('logSecurityEvent — development stdout output', () => {
     expect(written).toContain('handler dispatch failed');
     expect(written).toContain('handler failed');
     stderrSpy.mockRestore();
+  });
+
+  it('removeSecurityHandler removes a registered handler', async () => {
+    process.env['NODE_ENV'] = 'development';
+    const stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
+
+    const handler = async () => {
+      /* noop */
+    };
+    registerSecurityHandler(handler);
+    removeSecurityHandler(handler);
+
+    await logSecurityEvent('AUTH_SUCCESS', { outcome: 'SUCCESS' });
+
+    // Should not call the removed handler — event is still logged to stdout
+    expect(stdoutSpy).toHaveBeenCalled();
+    stdoutSpy.mockRestore();
   });
 });
 
@@ -522,6 +545,38 @@ describe('createApiResponseSchema', () => {
       data: 'hello',
     });
     expect(result.success).toBe(false);
+  });
+});
+
+describe('UrlSchema', () => {
+  it('accepts http URLs', () => {
+    expect(UrlSchema.safeParse('http://example.com').success).toBe(true);
+  });
+
+  it('accepts https URLs', () => {
+    expect(UrlSchema.safeParse('https://example.com').success).toBe(true);
+  });
+
+  it('rejects ftp URLs', () => {
+    expect(UrlSchema.safeParse('ftp://example.com').success).toBe(false);
+  });
+
+  it('rejects non-URL strings', () => {
+    expect(UrlSchema.safeParse('not-a-url').success).toBe(false);
+  });
+});
+
+describe('BoundingBoxSchema', () => {
+  it('accepts valid bounding box', () => {
+    expect(BoundingBoxSchema.safeParse([10, 20, 30, 40]).success).toBe(true);
+  });
+
+  it('rejects box where minLng > maxLng', () => {
+    expect(BoundingBoxSchema.safeParse([30, 20, 10, 40]).success).toBe(false);
+  });
+
+  it('rejects box where minLat > maxLat', () => {
+    expect(BoundingBoxSchema.safeParse([10, 40, 30, 20]).success).toBe(false);
   });
 });
 

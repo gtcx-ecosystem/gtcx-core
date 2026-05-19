@@ -51,6 +51,27 @@ describe('UssdSession', () => {
     expect(sessionManager.update('nonexistent', { state: 'menu' })).toBeUndefined();
   });
 
+  it('updates state without data', () => {
+    sessionManager.create('sess-1', '+254712345678');
+    const updated = sessionManager.update('sess-1', { state: 'menu' });
+    expect(updated?.state).toBe('menu');
+    expect(updated?.data).toEqual({});
+  });
+
+  it('isExpired returns true for nonexistent session', () => {
+    expect(sessionManager.isExpired('nonexistent')).toBe(true);
+  });
+
+  it('count excludes expired sessions', () => {
+    const shortTtl = new UssdSession({ ttlMs: 50 });
+    shortTtl.create('sess-1', '+254712345678');
+    shortTtl.create('sess-2', '+254712345679');
+    const s1 = shortTtl.get('sess-1');
+    if (s1) s1.lastActivityAt = Date.now() - 100;
+    expect(shortTtl.count()).toBe(1);
+    shortTtl.clear();
+  });
+
   it('merges data rather than replacing', () => {
     sessionManager.create('sess-1', '+254712345678');
     sessionManager.update('sess-1', { data: { a: '1' } });
@@ -134,6 +155,18 @@ describe('UssdParser', () => {
       expect(req.phoneNumber).toBe('+254712345678');
       expect(req.serviceCode).toBe('*384*123#');
       expect(req.text).toBe('1');
+    });
+
+    it('parses payload with networkCode', () => {
+      const payload = {
+        sessionId: 'abc-123',
+        phoneNumber: '+254712345678',
+        serviceCode: '*384#',
+        text: '',
+        networkCode: 'MTN',
+      };
+      const req = parser.parse(payload);
+      expect(req.networkCode).toBe('MTN');
     });
 
     it('parses a valid snake_case payload', () => {

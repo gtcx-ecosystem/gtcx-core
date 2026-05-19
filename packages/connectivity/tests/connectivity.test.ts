@@ -34,6 +34,19 @@ describe('defaultCheckFn', () => {
     detector.destroy();
   });
 
+  it('classifies bandwidth as 500 Kbps when default check latency >= 1000ms', async () => {
+    globalThis.fetch = vi.fn().mockImplementation(async () => {
+      await new Promise((r) => setTimeout(r, 1200));
+      return { ok: true };
+    });
+
+    const detector = new ConnectivityDetector({ checkIntervalMs: 1000 });
+    await detector.forceCheck();
+    const state = detector.getState();
+    expect(state.bandwidthKbps).toBe(500);
+    detector.destroy();
+  });
+
   it('uses GTCX_HEALTH_URL env var when set', async () => {
     process.env.GTCX_HEALTH_URL = 'https://custom.example.com/health';
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
@@ -325,6 +338,14 @@ describe('ConnectivityDetector', () => {
       await detector.forceCheck();
       expect(detector.getState().online).toBe(false);
       detector.destroy();
+    });
+
+    it('skips check after destroy', async () => {
+      const checkFn = vi.fn(async () => ({ online: true, latencyMs: 50, bandwidthKbps: 10_000 }));
+      const detector = new ConnectivityDetector({ checkFn });
+      detector.destroy();
+      await detector.forceCheck();
+      expect(checkFn).not.toHaveBeenCalled();
     });
   });
 
