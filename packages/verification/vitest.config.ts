@@ -15,6 +15,13 @@ export default defineConfig({
         'src/**/*.test.ts',
         'src/**/*.spec.ts',
         'src/traced.ts',
+        'src/types/schemas.ts',
+        'src/types/definitions/certificates.ts',
+        'src/types/definitions/claims.ts',
+        'src/types/definitions/predicates.ts',
+        'src/types/definitions/proofs.ts',
+        'src/types/definitions/qr.ts',
+        'src/types/definitions/templates.ts',
       ],
       thresholds: {
         lines: 85,

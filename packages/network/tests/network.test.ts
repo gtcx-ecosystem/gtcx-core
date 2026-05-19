@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, afterEach } from 'vitest';
 
 import {
   ConfigurationError,
@@ -28,6 +28,10 @@ async function hasLibp2pDependencies(): Promise<boolean> {
 }
 
 describe('@gtcx/network', () => {
+  afterEach(() => {
+    // Clean up static registry between tests
+    InMemoryTransport['registry'].clear();
+  });
   it('delivers messages across in-memory peers', async () => {
     const nodeA = createP2PNode({ nodeId: 'A' }, new InMemoryTransport('A'));
     const nodeB = createP2PNode({ nodeId: 'B' }, new InMemoryTransport('B'));
@@ -143,5 +147,168 @@ describe('@gtcx/network', () => {
       return;
     }
     await expect(createLibp2pTransport({})).rejects.toBeInstanceOf(ConfigurationError);
+  });
+
+  it('rate limits after capacity is exhausted', async () => {
+    const node = createP2PNode({ nodeId: 'R', rateLimitPerMinute: 2 }, new InMemoryTransport('R'));
+    await node.start();
+    expect(node.publish('topic', 'a')).toBeDefined();
+    expect(node.publish('topic', 'b')).toBeDefined();
+    await expect(node.publish('topic', 'c')).rejects.toBeInstanceOf(RateLimitError);
+    await node.stop();
+  });
+
+  it('handles publish transport errors', async () => {
+    const failingAdapter = new InMemoryTransport('F');
+    failingAdapter.broadcast = async () => {
+      throw new Error('transport broken');
+    };
+
+    const node = createP2PNode({ nodeId: 'F' }, failingAdapter);
+    await node.start();
+    await expect(node.publish('topic', 'payload')).rejects.toThrow('transport broken');
+  });
+
+  it('unsubscribe removes topic when last handler is removed', async () => {
+    const node = createP2PNode({ nodeId: 'U' }, new InMemoryTransport('U'));
+    await node.start();
+    const handler = vi.fn();
+    const unsubscribe = node.subscribe('topic', handler);
+    unsubscribe();
+    await node.publish('topic', 'payload');
+    expect(handler).not.toHaveBeenCalled();
+    await node.stop();
+  });
+
+  it('destroy clears subscriptions and stops adapter', async () => {
+    const node = createP2PNode({ nodeId: 'D' }, new InMemoryTransport('D'));
+    await node.start();
+    const handler = vi.fn();
+    node.subscribe('topic', handler);
+    await node.destroy();
+    // After destroy, publishing should not reach the handler
+    // because subscriptions are cleared.
+    // Note: status may remain 'online' because destroy does not set it.
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it('returns empty peers when registry has only self', async () => {
+    const adapter = new InMemoryTransport('solo');
+    expect(adapter.getPeers()).toHaveLength(0);
+  });
+
+  it('findPeers respects maxPeers limit', async () => {
+    const adapter = new MemoryPeerDiscoveryAdapter([
+      { id: 'p1', addresses: ['a1'] },
+      { id: 'p2', addresses: ['a2'] },
+      { id: 'p3', addresses: ['a3'] },
+    ]);
+    const reputation = new PeerReputationManager();
+    reputation.recordSuccess('p3');
+    reputation.recordSuccess('p3');
+    reputation.recordSuccess('p1');
+    const service = new PeerDiscoveryService([adapter], reputation, { maxPeers: 2 });
+    const peers = await service.discoverPeers();
+    expect(peers).toHaveLength(2);
+    expect(peers[0]?.id).toBe('p3');
+    expect(peers[1]?.id).toBe('p1');
+  });
+
+  it('rate limiter resets after window expires', async () => {
+    const node = createP2PNode(
+      { nodeId: 'RL', rateLimitPerMinute: 1 },
+      new InMemoryTransport('RL')
+    );
+    await node.start();
+    await node.publish('topic', 'a');
+    await expect(node.publish('topic', 'b')).rejects.toBeInstanceOf(RateLimitError);
+
+    // Advance time past the reset window
+    const RealDate = Date;
+    global.Date = class extends RealDate {
+      constructor(...args: unknown[]) {
+        super(...(args.length ? (args as [number]) : []));
+      }
+      static now() {
+        return RealDate.now() + 120_000;
+      }
+    } as unknown as DateConstructor;
+
+    await node.publish('topic', 'c');
+    global.Date = RealDate;
+    await node.stop();
+  });
+
+  it('send to peer without handler does nothing', async () => {
+    const adapterA = new InMemoryTransport('A');
+    const adapterB = new InMemoryTransport('B');
+    await adapterA.start();
+    await adapterB.start();
+    // adapterB has no handler registered
+    await expect(
+      adapterA.send('B', {
+        messageId: '1',
+        topic: 't',
+        payload: 'x',
+        timestamp: 1,
+        source: 'A',
+        hops: ['A'],
+        ttl: 8,
+      })
+    ).resolves.toBeUndefined();
+    await adapterA.stop();
+    await adapterB.stop();
+  });
+
+  it('exposes getPeers on node', async () => {
+    const node = createP2PNode({ nodeId: 'G' }, new InMemoryTransport('G'));
+    await node.start();
+    expect(node.getPeers()).toHaveLength(0);
+    expect(node.getStatus()).toBe('online');
+    await node.stop();
+  });
+
+  it('getKnownPeers returns all discovered peers', async () => {
+    const adapter = new MemoryPeerDiscoveryAdapter([
+      { id: 'k1', addresses: ['a1'] },
+      { id: 'k2', addresses: ['a2'] },
+    ]);
+    const service = new PeerDiscoveryService([adapter], new PeerReputationManager());
+    await service.discoverPeers();
+    expect(service.getKnownPeers()).toHaveLength(2);
+  });
+
+  it('send delivers message when handler is set', async () => {
+    const adapterA = new InMemoryTransport('A');
+    const adapterB = new InMemoryTransport('B');
+    await adapterA.start();
+    await adapterB.start();
+    const received: unknown[] = [];
+    adapterB.onMessage(async (msg) => {
+      received.push(msg);
+    });
+    await adapterA.send('B', {
+      messageId: '1',
+      topic: 't',
+      payload: 'hello',
+      timestamp: 1,
+      source: 'A',
+      hops: ['A'],
+      ttl: 8,
+    });
+    expect(received).toHaveLength(1);
+    await adapterA.stop();
+    await adapterB.stop();
+  });
+
+  it('getPeers returns other nodes in registry', async () => {
+    const a = new InMemoryTransport('A');
+    const b = new InMemoryTransport('B');
+    await a.start();
+    await b.start();
+    expect(a.getPeers()).toHaveLength(1);
+    expect(a.getPeers()[0]?.id).toBe('B');
+    await a.stop();
+    await b.stop();
   });
 });

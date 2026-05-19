@@ -284,5 +284,139 @@ describe('@gtcx/sync', () => {
       expect(auditEvent).toBeDefined();
       expect(metrics).toBeDefined();
     });
+
+    it('handles metrics hook errors', async () => {
+      const engine = createSyncEngine({
+        onMetrics: () => {
+          throw new Error('metrics boom');
+        },
+      });
+      const result = await engine.sync([{ id: '1', data: 'x', version: 1, updatedAt: 1 }], {
+        strategy: 'last-write-wins',
+      });
+      expect(result.errors.some((e) => e.includes('metrics boom'))).toBe(true);
+    });
+
+    it('cancels sync before remote fetch', async () => {
+      const engine = createSyncEngine();
+      const syncPromise = engine.sync([{ id: '1', data: 'x', version: 1, updatedAt: 1 }], {
+        strategy: 'last-write-wins',
+      });
+      engine.cancel();
+      const result = await syncPromise;
+      expect(result.errors.some((e) => e.includes('cancelled'))).toBe(true);
+    });
+
+    it('calls onResolved when downloads exist', async () => {
+      const onResolved = vi.fn();
+      const engine = createSyncEngine({
+        fetchRemote: async () => [{ id: '1', data: 'remote', version: 2, updatedAt: 2 }],
+        onResolved,
+      });
+      const result = await engine.sync([{ id: '1', data: 'local', version: 1, updatedAt: 1 }], {
+        strategy: 'server-wins',
+      });
+      expect(result.downloaded).toBe(1);
+      expect(onResolved).toHaveBeenCalledWith(
+        expect.arrayContaining([expect.objectContaining({ data: 'remote' })])
+      );
+    });
+
+    it('handles unexpected errors during sync', async () => {
+      const engine = createSyncEngine({
+        fetchRemote: async () => {
+          throw new Error('network down');
+        },
+      });
+      const result = await engine.sync([{ id: '1', data: 'x', version: 1, updatedAt: 1 }], {
+        strategy: 'last-write-wins',
+        retryAttempts: 0,
+      });
+      expect(result.errors.some((e) => e.includes('network down'))).toBe(true);
+    }, 10000);
+
+    it('resolves server-wins when no remote item exists', async () => {
+      const engine = createSyncEngine();
+      const result = await engine.sync(
+        [
+          { id: '1', data: 'a', version: 1, updatedAt: 2 },
+          { id: '1', data: 'b', version: 1, updatedAt: 1 },
+        ],
+        { strategy: 'server-wins' }
+      );
+      expect(result.uploaded).toBe(1);
+    });
+
+    it('resolves append-only strategy', async () => {
+      const engine = createSyncEngine();
+      const result = await engine.sync(
+        [
+          { id: '1', data: 'a', version: 1, updatedAt: 1 },
+          { id: '1', data: 'b', version: 1, updatedAt: 2 },
+        ],
+        { strategy: 'append-only' }
+      );
+      expect(result.uploaded).toBe(1);
+    });
+
+    it('handles chain-validated with no chain metadata', async () => {
+      const engine = createSyncEngine();
+      const result = await engine.sync(
+        [
+          { id: '1', data: { value: 1 }, version: 1, updatedAt: 1 },
+          { id: '1', data: { value: 2 }, version: 2, updatedAt: 2 },
+        ],
+        { strategy: 'chain-validated' }
+      );
+      expect(result.conflicts).toBeGreaterThan(0);
+      expect(result.errors.length).toBeGreaterThan(0);
+    });
+
+    it('handles audit hook errors', async () => {
+      const engine = createSyncEngine({
+        onAudit: () => {
+          throw new Error('audit boom');
+        },
+      });
+      const result = await engine.sync([{ id: '1', data: 'x', version: 1, updatedAt: 1 }], {
+        strategy: 'last-write-wins',
+      });
+      expect(result.errors.some((e) => e.includes('audit boom'))).toBe(true);
+    });
+
+    it('retries fetchRemote and succeeds on second attempt', async () => {
+      let calls = 0;
+      const engine = createSyncEngine({
+        fetchRemote: async () => {
+          calls += 1;
+          if (calls === 1) {
+            throw new Error('transient');
+          }
+          return [{ id: '1', data: 'remote', version: 2, updatedAt: 2 }];
+        },
+        retryAttempts: 1,
+        retryDelayMs: 10,
+      });
+      const result = await engine.sync([{ id: '1', data: 'local', version: 1, updatedAt: 1 }], {
+        strategy: 'server-wins',
+      });
+      expect(calls).toBe(2);
+      expect(result.downloaded).toBe(1);
+    }, 10000);
+
+    it('returns unresolved for unknown strategy', async () => {
+      const engine = createSyncEngine();
+      const result = await engine.sync(
+        [
+          { id: '1', data: 'a', version: 1, updatedAt: 1 },
+          { id: '1', data: 'b', version: 1, updatedAt: 2 },
+        ],
+        {
+          strategy: 'unknown-strategy' as unknown as SyncOptions['strategy'],
+        }
+      );
+      expect(result.conflicts).toBeGreaterThan(0);
+      expect(result.errors.some((e) => e.includes('Unresolved'))).toBe(true);
+    });
   });
 });
