@@ -15,6 +15,7 @@ export default defineConfig({
         'src/**/*.test.ts',
         'src/**/*.spec.ts',
         'src/traced.ts',
+        'src/tracing.ts',
         'src/types/schemas.ts',
         'src/types/definitions/certificates.ts',
         'src/types/definitions/claims.ts',

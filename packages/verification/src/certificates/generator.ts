@@ -119,10 +119,6 @@ export function validateCertificateInput(input: CreateCertificateInput): {
   const template = getEffectiveTemplate(input.templateId, commodityType);
   const errors: string[] = [];
 
-  if (!template) {
-    return { valid: false, errors: [`Template '${input.templateId}' not found`] };
-  }
-
   // Check required fields
   for (const field of template.requiredFields) {
     const value = getNestedValue(normalizedInput, field);
@@ -213,10 +209,6 @@ export function createStandardCertificateData(
   const commodityType = normalizedInput.assetLotData?.commodityType;
   const template = getEffectiveTemplate(normalizedInput.templateId, commodityType);
 
-  if (!template) {
-    throw new VerificationError(`Template '${normalizedInput.templateId}' not found`);
-  }
-
   const validation = validateCertificateInput(normalizedInput);
   if (!validation.valid) {
     throw new VerificationError(`Validation failed: ${validation.errors.join(', ')}`);
@@ -273,10 +265,6 @@ export function createMilitaryGradeCertificateData(input: CreateCertificateInput
   const normalizedInput = normalizeInput(input);
   const commodityType = normalizedInput.assetLotData?.commodityType;
   const template = getEffectiveTemplate(normalizedInput.templateId, commodityType);
-
-  if (!template) {
-    throw new VerificationError(`Template '${normalizedInput.templateId}' not found`);
-  }
 
   if (!['military', 'post-quantum'].includes(template.securityLevel)) {
     throw new VerificationError(`Template '${normalizedInput.templateId}' is not military-grade`);
