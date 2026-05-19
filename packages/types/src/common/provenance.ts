@@ -292,7 +292,7 @@ function thresholdFires(provenance: AgenticProvenance, threshold: ReviewThreshol
   // Jurisdictional edge case — heuristic: cross-source with no dominant local source
   if (threshold.condition === 'jurisdictional_edge_case') {
     const sources = new Set(provenance.evidenceRefs.map((e) => e.source));
-    if (sources.size >= 3 && provenance.confidence < threshold.minConfidence) return true;
+    if (sources.size >= 3) return true;
   }
 
   return false;
