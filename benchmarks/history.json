@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-02-21T16:56:56.566Z",
+  "generatedAt": "2026-05-19T09:44:51.142Z",
   "maxEntries": 50,
   "entries": [
     {
@@ -116,6 +116,57 @@
       "recordedAt": "2026-02-21T16:56:51.789Z",
       "source": "criterion:rust/gtcx-core",
       "metrics": {
+        "ed25519.key_generation_us": 31.8179,
+        "ed25519.sign_us": 32.2131,
+        "ed25519.verify_us": 44.6915,
+        "ed25519.roundtrip_us": 75.9645,
+        "hash.sha256_256b_ns": 1239.5184,
+        "hash.sha512_256b_ns": 954.5329,
+        "hash.blake3_256b_ns": 410.7395,
+        "zkp.groth16_gci_prove_ms": 273.0611,
+        "zkp.groth16_gci_verify_ms": 10.967,
+        "zkp.bulletproofs_amount_range_prove_ms": 3.6161,
+        "zkp.bulletproofs_amount_range_verify_ms": 0.9579,
+        "zkp.schnorr_identity_prove_ms": 0.0964,
+        "zkp.schnorr_identity_verify_ms": 0.096
+      }
+    },
+    {
+      "recordedAt": "2026-05-19T09:42:07.437Z",
+      "source": "bench:connectivity-adaptive",
+      "metrics": {
+        "connectivity.classify_offline": 4,
+        "connectivity.classify_ussd-only": 13,
+        "connectivity.classify_edge": 13,
+        "connectivity.classify_degraded": 13,
+        "connectivity.classify_standard": 13,
+        "connectivity.classify_satellite": 10,
+        "connectivity.adapt_offline": 23,
+        "connectivity.adapt_ussd-only": 24,
+        "connectivity.adapt_edge": 22,
+        "connectivity.adapt_degraded": 21,
+        "connectivity.adapt_standard": 20,
+        "connectivity.adapt_satellite": 20,
+        "connectivity.batch_add_edge": 751
+      }
+    },
+    {
+      "recordedAt": "2026-05-19T09:44:33.201Z",
+      "source": "merged:criterion+connectivity-adaptive",
+      "metrics": {
+        "connectivity.classify_offline_ns": 3,
+        "connectivity.classify_ussd-only_ns": 13,
+        "connectivity.classify_edge_ns": 14,
+        "connectivity.classify_degraded_ns": 13,
+        "connectivity.classify_standard_ns": 12,
+        "connectivity.classify_satellite_ns": 11,
+        "connectivity.adapt_offline_ns": 25,
+        "connectivity.adapt_ussd-only_ns": 26,
+        "connectivity.adapt_edge_ns": 23,
+        "connectivity.adapt_degraded_ns": 22,
+        "connectivity.adapt_standard_ns": 22,
+        "connectivity.adapt_satellite_ns": 21,
+        "connectivity.batch_add_edge_ns": 744,
         "ed25519.key_generation_us": 31.8179,
         "ed25519.sign_us": 32.2131,
         "ed25519.verify_us": 44.6915,

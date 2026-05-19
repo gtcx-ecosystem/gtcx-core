@@ -1,7 +1,20 @@
 {
-  "recordedAt": "2026-02-21T16:56:51.789Z",
-  "source": "criterion:rust/gtcx-core",
+  "recordedAt": "2026-05-19T09:44:33.201Z",
+  "source": "merged:criterion+connectivity-adaptive",
   "metrics": {
+    "connectivity.classify_offline_ns": 3,
+    "connectivity.classify_ussd-only_ns": 13,
+    "connectivity.classify_edge_ns": 14,
+    "connectivity.classify_degraded_ns": 13,
+    "connectivity.classify_standard_ns": 12,
+    "connectivity.classify_satellite_ns": 11,
+    "connectivity.adapt_offline_ns": 25,
+    "connectivity.adapt_ussd-only_ns": 26,
+    "connectivity.adapt_edge_ns": 23,
+    "connectivity.adapt_degraded_ns": 22,
+    "connectivity.adapt_standard_ns": 22,
+    "connectivity.adapt_satellite_ns": 21,
+    "connectivity.batch_add_edge_ns": 744,
     "ed25519.key_generation_us": 31.8179,
     "ed25519.sign_us": 32.2131,
     "ed25519.verify_us": 44.6915,
@@ -14,7 +27,86 @@
     "zkp.bulletproofs_amount_range_prove_ms": 3.6161,
     "zkp.bulletproofs_amount_range_verify_ms": 0.9579,
     "zkp.schnorr_identity_prove_ms": 0.0964,
-    "zkp.schnorr_identity_verify_ms": 0.096,
-    "compliance.report_generate_1000records_ms": 85
-  }
+    "zkp.schnorr_identity_verify_ms": 0.096
+  },
+  "details": [
+    {
+      "name": "connectivity.classify_offline",
+      "iterations": 500000,
+      "totalMs": 1.38,
+      "perOpNs": 3
+    },
+    {
+      "name": "connectivity.classify_ussd-only",
+      "iterations": 500000,
+      "totalMs": 6.64,
+      "perOpNs": 13
+    },
+    {
+      "name": "connectivity.classify_edge",
+      "iterations": 500000,
+      "totalMs": 6.81,
+      "perOpNs": 14
+    },
+    {
+      "name": "connectivity.classify_degraded",
+      "iterations": 500000,
+      "totalMs": 6.65,
+      "perOpNs": 13
+    },
+    {
+      "name": "connectivity.classify_standard",
+      "iterations": 500000,
+      "totalMs": 6.24,
+      "perOpNs": 12
+    },
+    {
+      "name": "connectivity.classify_satellite",
+      "iterations": 500000,
+      "totalMs": 5.41,
+      "perOpNs": 11
+    },
+    {
+      "name": "connectivity.adapt_offline",
+      "iterations": 200000,
+      "totalMs": 4.95,
+      "perOpNs": 25
+    },
+    {
+      "name": "connectivity.adapt_ussd-only",
+      "iterations": 200000,
+      "totalMs": 5.23,
+      "perOpNs": 26
+    },
+    {
+      "name": "connectivity.adapt_edge",
+      "iterations": 200000,
+      "totalMs": 4.64,
+      "perOpNs": 23
+    },
+    {
+      "name": "connectivity.adapt_degraded",
+      "iterations": 200000,
+      "totalMs": 4.44,
+      "perOpNs": 22
+    },
+    {
+      "name": "connectivity.adapt_standard",
+      "iterations": 200000,
+      "totalMs": 4.4,
+      "perOpNs": 22
+    },
+    {
+      "name": "connectivity.adapt_satellite",
+      "iterations": 200000,
+      "totalMs": 4.21,
+      "perOpNs": 21
+    },
+    {
+      "name": "connectivity.batch_add_edge",
+      "iterations": 10000,
+      "totalMs": 7.44,
+      "perOpNs": 744
+    }
+  ]
 }

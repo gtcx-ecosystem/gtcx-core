@@ -13,7 +13,21 @@
     "zkp.bulletproofs_amount_range_prove_ms": "milliseconds",
     "zkp.bulletproofs_amount_range_verify_ms": "milliseconds",
     "zkp.schnorr_identity_prove_ms": "milliseconds",
-    "zkp.schnorr_identity_verify_ms": "milliseconds"
+    "zkp.schnorr_identity_verify_ms": "milliseconds",
+    "compliance.report_generate_1000records_ms": "milliseconds",
+    "connectivity.classify_offline_ns": "nanoseconds",
+    "connectivity.classify_ussd-only_ns": "nanoseconds",
+    "connectivity.classify_edge_ns": "nanoseconds",
+    "connectivity.classify_degraded_ns": "nanoseconds",
+    "connectivity.classify_standard_ns": "nanoseconds",
+    "connectivity.classify_satellite_ns": "nanoseconds",
+    "connectivity.adapt_offline_ns": "nanoseconds",
+    "connectivity.adapt_ussd-only_ns": "nanoseconds",
+    "connectivity.adapt_edge_ns": "nanoseconds",
+    "connectivity.adapt_degraded_ns": "nanoseconds",
+    "connectivity.adapt_standard_ns": "nanoseconds",
+    "connectivity.adapt_satellite_ns": "nanoseconds",
+    "connectivity.batch_add_edge_ns": "nanoseconds"
   },
   "metrics": {
     "ed25519.key_generation_us": 40,
@@ -29,7 +43,19 @@
     "zkp.bulletproofs_amount_range_verify_ms": 2,
     "zkp.schnorr_identity_prove_ms": 1,
     "zkp.schnorr_identity_verify_ms": 1,
-    "compliance.report_generate_1000records_ms": 100
+    "connectivity.classify_offline_ns": 100,
+    "connectivity.classify_ussd-only_ns": 100,
+    "connectivity.classify_edge_ns": 100,
+    "connectivity.classify_degraded_ns": 100,
+    "connectivity.classify_standard_ns": 100,
+    "connectivity.classify_satellite_ns": 100,
+    "connectivity.adapt_offline_ns": 200,
+    "connectivity.adapt_ussd-only_ns": 200,
+    "connectivity.adapt_edge_ns": 200,
+    "connectivity.adapt_degraded_ns": 200,
+    "connectivity.adapt_standard_ns": 200,
+    "connectivity.adapt_satellite_ns": 200,
+    "connectivity.batch_add_edge_ns": 5000
   },
   "trend": {
     "windowSize": 5,
@@ -38,6 +64,9 @@
     "metricOverrides": {
       "hash.blake3_256b_ns": {
         "maxRegressionPercent": 12
+      },
+      "connectivity.batch_add_edge_ns": {
+        "maxRegressionPercent": 15
       }
     }
   }
