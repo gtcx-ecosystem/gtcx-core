@@ -19,7 +19,7 @@
     "dev": "turbo run dev",
     "test": "turbo run test",
     "test:coverage:critical": "pnpm --filter @gtcx/crypto test:coverage && pnpm --filter @gtcx/domain test:coverage && pnpm --filter @gtcx/security test:coverage && pnpm --filter @gtcx/services test:coverage && pnpm --filter @gtcx/verification test:coverage",
-    "lint": "turbo run lint",
+    "lint": "turbo run lint --concurrency=1",
     "clean": "turbo run clean && rm -rf node_modules",
     "check:dist": "test -z \"$(git ls-files 'packages/*/dist/*')\"",
     "architecture:check": "node ./tools/check-package-boundaries.mjs",
