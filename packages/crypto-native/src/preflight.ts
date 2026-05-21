@@ -64,23 +64,30 @@ export async function runPreflightCheck(): Promise<PreflightResult> {
 }
 
 /**
+ * Execute the CLI output and exit logic for a preflight result.
+ * Exported for testability; not intended for library use.
+ */
+export async function runPreflightCli(): Promise<never> {
+  const result = await runPreflightCheck();
+  if (result.ok) {
+    process.stdout.write('✅ GTCX Native Pre-flight PASSED\n');
+    process.stdout.write(`   Platform: ${result.platform} (${result.arch})\n`);
+    process.stdout.write(`   Version:  ${result.version}\n`);
+    process.exit(0);
+  } else {
+    process.stderr.write('❌ GTCX Native Pre-flight FAILED\n');
+    process.stderr.write(`   Error: ${result.error}\n`);
+    process.stdout.write('   Check Details:\n');
+    process.stdout.write(`   - Load:    ${result.checks.load ? 'PASS' : 'FAIL'}\n`);
+    process.stdout.write(`   - Hashing: ${result.checks.hashing ? 'PASS' : 'FAIL'}\n`);
+    process.stdout.write(`   - Signing: ${result.checks.signing ? 'PASS' : 'FAIL'}\n`);
+    process.exit(1);
+  }
+}
+
+/**
  * CLI Entry point
  */
 if (require.main === module) {
-  runPreflightCheck().then((result) => {
-    if (result.ok) {
-      process.stdout.write('✅ GTCX Native Pre-flight PASSED\n');
-      process.stdout.write(`   Platform: ${result.platform} (${result.arch})\n`);
-      process.stdout.write(`   Version:  ${result.version}\n`);
-      process.exit(0);
-    } else {
-      process.stderr.write('❌ GTCX Native Pre-flight FAILED\n');
-      process.stderr.write(`   Error: ${result.error}\n`);
-      process.stdout.write('   Check Details:\n');
-      process.stdout.write(`   - Load:    ${result.checks.load ? 'PASS' : 'FAIL'}\n`);
-      process.stdout.write(`   - Hashing: ${result.checks.hashing ? 'PASS' : 'FAIL'}\n`);
-      process.stdout.write(`   - Signing: ${result.checks.signing ? 'PASS' : 'FAIL'}\n`);
-      process.exit(1);
-    }
-  });
+  runPreflightCli();
 }
