@@ -12,7 +12,7 @@ export default defineConfig({
       exclude: ['dist/**', 'node_modules/**'],
       thresholds: {
         lines: 95,
-        functions: 90,
+        functions: 95,
         branches: 95,
         statements: 95,
       },

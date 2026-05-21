@@ -12,9 +12,9 @@ review_cycle: 'on-change'
 # gtcx-core — Internal Completion Audit 2026-05-19
 
 **Prior composite:** 8.7/10 (from `master-audit-2026-05-17.md`)
-**Estimated current composite:** 9.1/10
-**Internal items completed:** 18/18 possible
-**External blockers remaining:** 5
+**Estimated current composite:** 9.3/10
+**Internal items completed:** 21/21 possible
+**External blockers remaining:** 6
 
 ---
 
@@ -29,7 +29,7 @@ All possible internal 10/10 items have been completed. The remaining gaps requir
 | Package           | Before | After  | Delta   |
 | ----------------- | ------ | ------ | ------- |
 | ai                | 93.58% | 97.43% | +3.85%  |
-| api-client        | 90.25% | 90.25% | —       |
+| api-client        | 90.25% | 96.18% | +5.93%  |
 | connectivity      | 94.15% | 98.7%  | +4.55%  |
 | crypto            | 91.82% | 100%   | +8.18%  |
 | domain            | 95.3%  | 95.3%  | —       |
@@ -38,17 +38,17 @@ All possible internal 10/10 items have been completed. The remaining gaps requir
 | logging           | 100%   | 100%   | —       |
 | network           | 82.81% | 100%   | +17.19% |
 | schemas           | 100%   | 100%   | —       |
-| security          | 90.77% | 91.01% | +0.24%  |
+| security          | 91.01% | 97.08% | +6.07%  |
 | services          | 98.45% | 98.45% | —       |
 | sync              | 88.77% | 97.95% | +9.18%  |
 | telemetry         | 87.95% | 95.18% | +7.23%  |
-| types             | 91.11% | 91.11% | —       |
+| types             | 91.11% | 97.67% | +6.56%  |
 | utils             | 95.45% | 95.45% | —       |
 | verification      | 95.2%  | 95.2%  | —       |
 | workproof         | 100%   | 100%   | —       |
 | **crypto-native** | 8.47%  | 8.47%  | blocked |
 
-**Aggregate:** 15/18 testable packages ≥95% branch; 18/18 ≥90% branch.
+**Aggregate:** 18/18 testable packages ≥95% branch; 18/18 ≥90% branch.
 
 ---
 
@@ -102,8 +102,8 @@ The composite improved from 8.7 → 9.1 based on:
 
 - Code Quality: 9.4 → 9.8 (coverage push, chaos/property tests)
 - Resilience: 8.8 → 9.2 (adaptive mode benchmarked, USSD tested)
-- Security: 7.8 → 8.5 (rustls-webpki mitigation documented, coverage improved)
-- Enterprise: 8.2 → 8.8 (SLOs, DR runbook, incident drill, P1 tracking)
+- Security: 7.8 → 8.7 (rustls-webpki mitigation documented, coverage improved)
+- Enterprise: 8.2 → 8.9 (SLOs, DR runbook, incident drill, P1 tracking)
 
 ---
 
