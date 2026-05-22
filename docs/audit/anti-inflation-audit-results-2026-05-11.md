@@ -1,3 +1,14 @@
+---
+title: 'Anti-Inflation Audit Results — 2026-05-11'
+status: 'current'
+date: '2026-05-11'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['audit', 'forensic', 'anti-inflation', 'verification']
+review_cycle: 'on-change'
+---
+
 # Anti-Inflation Audit Results — 2026-05-11
 
 **Scope:** 8-phase forensic audit of the 2026-05-11 bank-grade certification audit  
