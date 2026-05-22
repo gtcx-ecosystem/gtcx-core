@@ -1,6 +1,6 @@
 ---
 title: 'Full Audit 2026 05 09'
-status: 'current'
+status: 'superseded'
 date: '2026-05-17'
 owner: 'quality-evidence-lead'
 role: 'quality-evidence-lead'
@@ -10,6 +10,8 @@ review_cycle: 'quarterly'
 ---
 
 # Full Audit — gtcx-core
+
+> **Status:** Superseded — current composite synthesis lives in [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) (9.5/10, 24/24 internal items done) and [10-10-roadmap-2026-05-19.md](./10-10-roadmap-2026-05-19.md). This 2026-05-09 6-phase forensic record is retained as historical evidence of the prior baseline.
 
 **Date:** 2026-05-09
 **Auditor:** AI (claude-opus-4-7)

@@ -1,6 +1,6 @@
 ---
 title: 'Docs Standard Compliance 2026 05 10'
-status: 'current'
+status: 'superseded'
 date: '2026-05-17'
 owner: 'quality-evidence-lead'
 role: 'quality-evidence-lead'
@@ -11,7 +11,7 @@ review_cycle: 'quarterly'
 
 # Docs Standard Compliance Audit — 2026-05-10
 
-> **Status:** Current
+> **Status:** Superseded — see [docs-standard-compliance-2026-05-22.md](./docs-standard-compliance-2026-05-22.md)
 > **Date:** 2026-05-10
 > **Owner:** Quality & Evidence Lead
 
