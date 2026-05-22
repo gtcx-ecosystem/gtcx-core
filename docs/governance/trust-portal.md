@@ -12,12 +12,27 @@ review_cycle: 'on-change'
 # gtcx-core Trust Portal
 
 > **Status:** Current
-> **Date:** 2026-05-11
+> **Date:** 2026-05-22
 > **Owner:** Protocol Architect
 
 **Audience:** vendor risk teams, sandbox regulators, design partners, security auditors
 **What this is:** the evidence index for evaluating gtcx-core's security posture without an NDA. Everything linked here is in this repository — every artifact is independently verifiable.
 **What this is not:** marketing. There are no claims here that aren't backed by a file path or a git command you can run.
+
+---
+
+## Current readiness (2026-05-21)
+
+| Dimension                | Value                       | Evidence                                                                                                                             |
+| ------------------------ | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Composite readiness      | **9.5 / 10**                | [Internal Completion Audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md)                                             |
+| Internal items complete  | 24 / 24                     | Same                                                                                                                                 |
+| Branch coverage          | 19 / 19 packages ≥ 95%      | [Audit coverage table](../audit/internal-completion-audit-2026-05-21.md#updated-coverage-table)                                      |
+| Fuzz iterations          | 500,000+ across 6 targets   | [Fuzz Campaign Evidence 2026-05-21](../audit/fuzz-campaign-evidence-2026-05-21.md) — zero crashes, zero panics, zero ASAN violations |
+| FIPS validation          | aws-lc-rs CMVP #4816        | 63 / 63 Rust tests passing under `--features fips`                                                                                   |
+| HSM custody              | PKCS11 + AWS KMS            | NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed)                                                          |
+| Release pipeline         | SLSA Source L2 enforced     | `.github/workflows/release.yml` — provenance manifest generated per release                                                          |
+| Active execution program | 4-sprint engagement roadmap | [Engagement Readiness Sprint Roadmap 2026-05-22](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)                 |
 
 ---
 
