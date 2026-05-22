@@ -17,6 +17,7 @@
     "@gtcx/sync": "workspace:*",
     "@gtcx/types": "workspace:*",
     "@gtcx/events": "workspace:*",
+    "@gtcx/jurisdiction-config": "workspace:*",
     "vitest": "^4.1.5"
   }
 }
