@@ -18,6 +18,8 @@ review_cycle: 'on-change'
 **Status**: Sprints 0–6 complete. Repo in active development for Phases 4–7 cryptographic systems.
 **Objective**: Production-ready protocol core for global south deployment — offline-first, government-grade identity, financial market infrastructure reliability.
 
+**Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](./engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan to close the customer-visible readiness gap before Zimbabwe/Ghana/Namibia/Botswana/DRC engagements land.
+
 ---
 
 ## Delivery Summary

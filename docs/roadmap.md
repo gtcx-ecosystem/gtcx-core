@@ -23,6 +23,8 @@ This is the canonical roadmap for everything that remains between `gtcx-core` an
 2. **AI Maturity** — governed, measurable, safe agentic development.
 3. **Innovation, Moat, and Defensible Architecture** — the features that make GTCX hard to replicate.
 
+> **Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](./agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — focused 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DRC). Closes the customer-visible readiness gap; this master roadmap remains the long-horizon view.
+
 ---
 
 ## 1. Executive Summary
