@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-13T13:45:17.558Z",
+  "generatedAt": "2026-05-22T02:11:25.449Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.3.0",
@@ -103,7 +103,7 @@
       "version": "0.4.0",
       "dir": "packages/connectivity",
       "typesPath": "packages/connectivity/dist/index.d.ts",
-      "hash": "eaf8c0df7539314cdcc1b82588d8cdc07402a883233de8169e403285fd332ce4",
+      "hash": "c1d2382bc488a88519eb902072d2cb68c912eb3b64e9ebe45d9b0601ff9e5dc2",
       "exports": [
         "adaptClientOptionsForProfile",
         "AdaptiveMode",
@@ -131,7 +131,16 @@
         "RequestBatcher",
         "RequestBatcherOptions",
         "shouldCompress",
-        "shouldDownsample"
+        "shouldDownsample",
+        "UssdParsedInput",
+        "UssdParseError",
+        "UssdParser",
+        "UssdRequest",
+        "UssdResponse",
+        "UssdSession",
+        "UssdSessionData",
+        "UssdSessionOptions",
+        "UssdSessionState"
       ]
     },
     "@gtcx/crypto": {
@@ -233,8 +242,9 @@
       "version": "0.3.0",
       "dir": "packages/crypto-native",
       "typesPath": "packages/crypto-native/dist/index.d.ts",
-      "hash": "befc94ec4cf7ae69ec73cff6adff80797bc67490a705e44a0bb0dfe475caa07c",
+      "hash": "f37bcc63406a56cd405777bc372ea9fe51486b93820f2b79c3a46cea90a31334",
       "exports": [
+        "assertHex",
         "blake3Hash",
         "bulletproofsProveAmountRange",
         "bulletproofsVerifyAmountRange",
@@ -244,6 +254,7 @@
         "groth16GenerateKeys",
         "groth16ProveGciThreshold",
         "groth16VerifyProof",
+        "isHex",
         "nativeBindings",
         "NativeBulletproofsBundle",
         "NativeCryptoBindings",
@@ -800,11 +811,12 @@
       "version": "0.2.2",
       "dir": "packages/sync",
       "typesPath": "packages/sync/dist/index.d.ts",
-      "hash": "dfcb759f9153a6840ac70b3b36a6391a549035569c9ad15ca50f52050d9fc1b4",
+      "hash": "884d4ac80c7d4530c16584a2a939a82b565e577d353757390a79678222233630",
       "exports": [
         "ConflictStrategy",
         "createSyncEngine",
         "ISyncEngine",
+        "resolveConflict",
         "SyncAuditEvent",
         "SyncAuditEventType",
         "SyncConflict",
@@ -1296,7 +1308,7 @@
       "version": "0.1.3",
       "dir": "packages/workproof",
       "typesPath": "packages/workproof/dist/index.d.ts",
-      "hash": "25fc5b91e38d9a78de7beb4671cf798482eaeb4f0e06a20edc6abe3d7f041173",
+      "hash": "e985dc800d2ac2dd6a3f79815669e81d0b3305f6b45a0b725c3975ced813d730",
       "exports": [
         "AdmissionCriteria",
         "AdmissionCriteriaSchema",
@@ -1314,7 +1326,6 @@
         "CommunityStatsSchema",
         "CompliancePredicateType",
         "ComplianceTierSchema",
-        "CompositeValue",
         "ConflictResolutionStrategySchema",
         "createWorkProof",
         "CreateWorkProofInput",
