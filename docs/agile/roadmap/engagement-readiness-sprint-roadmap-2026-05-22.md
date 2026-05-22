@@ -5,20 +5,8 @@ date: '2026-05-22'
 owner: 'protocol-architect'
 role: 'protocol-architect'
 tier: 'critical'
-tags:
-  [
-    'docs',
-    'agile',
-    'roadmap',
-    'engagement',
-    'africa',
-    'zimbabwe',
-    'ghana',
-    'namibia',
-    'botswana',
-    'drc',
-  ]
-review_cycle: 'weekly'
+tags: ['docs', 'agile', 'roadmap', 'engagement', 'africa']
+review_cycle: 'on-change'
 ---
 
 # Engagement Readiness Sprint Roadmap
