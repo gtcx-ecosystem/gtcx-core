@@ -1,6 +1,6 @@
 module.exports = {
-  generateKeyPair: () => ({ privateKey: 'pk', publicKey: 'pub' }),
-  sign: () => 'sig',
+  generateKeyPair: () => ({ privateKey: 'aabb', publicKey: 'ccdd' }),
+  sign: () => 'eeff',
   verify: () => true,
   sha256: (data) => {
     const input = typeof data === 'string' ? data : Buffer.from(data).toString();

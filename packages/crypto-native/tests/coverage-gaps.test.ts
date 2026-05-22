@@ -33,13 +33,13 @@ describe('crypto-native coverage gaps', () => {
       try {
         const native = await import('../src/index');
         const kp = native.generateKeyPair();
-        expect(kp.privateKey).toBe('pk');
-        expect(kp.publicKey).toBe('pub');
+        expect(kp.privateKey).toBe('aabb');
+        expect(kp.publicKey).toBe('ccdd');
 
-        const sig = native.sign(new Uint8Array([1, 2, 3]), 'pk');
-        expect(sig).toBe('sig');
+        const sig = native.sign(new Uint8Array([1, 2, 3]), 'aabb');
+        expect(sig).toBe('eeff');
 
-        const valid = native.verify('sig', new Uint8Array([1, 2, 3]), 'pub');
+        const valid = native.verify('ccdd', new Uint8Array([1, 2, 3]), 'eeff');
         expect(valid).toBe(true);
 
         const h256 = native.sha256(new Uint8Array([1]));
@@ -60,10 +60,10 @@ describe('crypto-native coverage gaps', () => {
         expect(native.blake3Hash!(new Uint8Array([1]))).toBe('blake3hash');
 
         expect(native.deriveChildKey).toBeTypeOf('function');
-        expect(native.deriveChildKey!('parent', 0)).toBe('childkey');
+        expect(native.deriveChildKey!('aa', 0)).toBe('childkey');
 
         expect(native.derivePurposeKey).toBeTypeOf('function');
-        expect(native.derivePurposeKey!('master', 'test')).toBe('purposekey');
+        expect(native.derivePurposeKey!('aa', 'test')).toBe('purposekey');
 
         expect(native.version).toBeTypeOf('function');
         expect(native.version!()).toBe('1.0.0');
@@ -81,25 +81,25 @@ describe('crypto-native coverage gaps', () => {
         expect(keys.circuit).toBe('gci');
 
         expect(native.groth16ProveGciThreshold).toBeTypeOf('function');
-        const proof = native.groth16ProveGciThreshold!(50, 60, 'pk', 'vk');
+        const proof = native.groth16ProveGciThreshold!(50, 60, 'aa', 'bb');
         expect(proof.circuit).toBe('gci');
 
         expect(native.groth16VerifyProof).toBeTypeOf('function');
-        expect(native.groth16VerifyProof!('gci', 'proof', 'vk', '{}')).toBe(true);
+        expect(native.groth16VerifyProof!('gci', 'cc', 'bb', '{}')).toBe(true);
 
         expect(native.bulletproofsProveAmountRange).toBeTypeOf('function');
-        const bp = native.bulletproofsProveAmountRange!(100, 0, 200, 'rand');
+        const bp = native.bulletproofsProveAmountRange!(100, 0, 200, 'aa');
         expect(bp.commitment).toBe('commit');
 
         expect(native.bulletproofsVerifyAmountRange).toBeTypeOf('function');
-        expect(native.bulletproofsVerifyAmountRange!(0, 200, 'c', 'l', 'h')).toBe(true);
+        expect(native.bulletproofsVerifyAmountRange!(0, 200, 'aa', 'bb', 'cc')).toBe(true);
 
         expect(native.schnorrProveIdentityAttribute).toBeTypeOf('function');
-        const schnorr = native.schnorrProveIdentityAttribute!(new Uint8Array([1]), 'subj');
-        expect(schnorr.subjectHash).toBe('subj');
+        const schnorr = native.schnorrProveIdentityAttribute!(new Uint8Array([1]), '1234');
+        expect(schnorr.subjectHash).toBe('1234');
 
         expect(native.schnorrVerifyIdentityAttribute).toBeTypeOf('function');
-        expect(native.schnorrVerifyIdentityAttribute!('ah', 'sh', 'nc', 'resp')).toBe(true);
+        expect(native.schnorrVerifyIdentityAttribute!('aa', 'bb', 'cc', 'dd')).toBe(true);
       } finally {
         env.restore();
       }
@@ -131,8 +131,8 @@ describe('crypto-native coverage gaps', () => {
       try {
         const native = await import('../src/index');
         const kp = native.generateKeyPair();
-        expect(kp.privateKey).toBe('pk_alt');
-        expect(kp.publicKey).toBe('pub_alt');
+        expect(kp.privateKey).toBe('aabbcc');
+        expect(kp.publicKey).toBe('ccddee');
       } finally {
         env.restore();
       }
@@ -142,9 +142,9 @@ describe('crypto-native coverage gaps', () => {
       const env = withMockPath('minimal-bindings.cjs');
       try {
         const native = await import('../src/index');
-        const sig = native.sign(new Uint8Array([1]), 'pk');
-        expect(sig).toBe('sig_alt');
-        const valid = native.verify('sig', new Uint8Array([1]), 'pub');
+        const sig = native.sign(new Uint8Array([1]), 'aabb');
+        expect(sig).toBe('eeffaa');
+        const valid = native.verify('ccdd', new Uint8Array([1]), 'eeff');
         expect(valid).toBe(true);
       } finally {
         env.restore();
@@ -178,18 +178,18 @@ describe('crypto-native coverage gaps', () => {
       try {
         const native = await import('../src/index');
         expect(native.blake3Hash!(new Uint8Array([1]))).toBe('blake3hash_alt');
-        expect(native.deriveChildKey!('p', 0)).toBe('childkey_alt');
-        expect(native.derivePurposeKey!('m', 't')).toBe('purposekey_alt');
+        expect(native.deriveChildKey!('aa', 0)).toBe('childkey_alt');
+        expect(native.derivePurposeKey!('aa', 't')).toBe('purposekey_alt');
         expect(native.version!()).toBe('1.0.0_alt');
         expect(native.groth16GenerateKeys!('c').provingKey).toBe('pk_alt');
-        expect(native.groth16ProveGciThreshold!(1, 2, 'p', 'v').circuit).toBe('gci_alt');
-        expect(native.groth16VerifyProof!('c', 'p', 'v', '{}')).toBe(true);
-        const bp = native.bulletproofsProveAmountRange!(1, 0, 10, 'r');
+        expect(native.groth16ProveGciThreshold!(1, 2, 'aa', 'bb').circuit).toBe('gci_alt');
+        expect(native.groth16VerifyProof!('c', 'cc', 'bb', '{}')).toBe(true);
+        const bp = native.bulletproofsProveAmountRange!(1, 0, 10, 'aa');
         expect(bp.commitment).toBe('commit_alt');
-        expect(native.bulletproofsVerifyAmountRange!(0, 10, 'c', 'l', 'h')).toBe(true);
-        const s = native.schnorrProveIdentityAttribute!(new Uint8Array([1]), 'subj');
+        expect(native.bulletproofsVerifyAmountRange!(0, 10, 'aa', 'bb', 'cc')).toBe(true);
+        const s = native.schnorrProveIdentityAttribute!(new Uint8Array([1]), '1234');
         expect(s.attributeHash).toBe('ah_alt');
-        expect(native.schnorrVerifyIdentityAttribute!('a', 's', 'n', 'r')).toBe(true);
+        expect(native.schnorrVerifyIdentityAttribute!('aa', 'bb', 'cc', 'dd')).toBe(true);
       } finally {
         env.restore();
       }

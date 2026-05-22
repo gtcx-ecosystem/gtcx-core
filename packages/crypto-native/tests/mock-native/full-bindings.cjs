@@ -1,6 +1,6 @@
 module.exports = {
-  generateKeyPair: () => ({ privateKey: 'pk', publicKey: 'pub' }),
-  sign: (msg, pk) => 'sig',
+  generateKeyPair: () => ({ privateKey: 'aabb', publicKey: 'ccdd' }),
+  sign: (msg, pk) => 'eeff',
   verify: (sig, msg, pub) => true,
   sha256: (data) => 'sha256hash',
   sha512: (data) => 'sha512hash',
