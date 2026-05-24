@@ -32,7 +32,7 @@ review_cycle: 'on-change'
 
 ## Strategic context (from prior memory)
 
-Per the [regulatory sandbox strategy](../../../../../.claude/projects/-Users-amanianai-Sites-gtcx-ecosystem-gtcx-core/memory/project_regulatory_strategy.md), African sandbox regulators accept internal assessments as starting evidence; the **pre-submission meeting is the key lever**. The intro email's job is to earn that meeting, not to submit the formal application.
+Per prior engagement intelligence on African regulatory sandboxes: regulators accept internal assessments as starting evidence; the **pre-submission meeting is the key lever**. The intro email's job is to earn that meeting, not to submit the formal application.
 
 ## Email draft
 
