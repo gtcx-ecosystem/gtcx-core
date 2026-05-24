@@ -189,8 +189,15 @@ function main() {
     const sampleCount = trendSamples.length;
 
     if (sampleCount < trendConfig.minSamples) {
+      // sampleCount === 0 means this metric has no historical data — typically
+      // a newly-budgeted metric on its first observation. Structurally not a
+      // regression (no baseline to regress against), so warn even in strict
+      // mode and let the trend window accumulate over subsequent runs.
+      // 0 < sampleCount < minSamples preserves the strict-mode failure: the
+      // trend window was being built but is not yet complete, which signals
+      // a maintenance gap worth surfacing.
       const message = `${key}: insufficient trend samples (${sampleCount}/${trendConfig.minSamples})`;
-      if (strictTrend) {
+      if (strictTrend && sampleCount > 0) {
         failures.push(message);
       } else {
         warnings.push(message);
