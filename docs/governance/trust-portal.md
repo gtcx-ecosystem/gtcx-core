@@ -14,6 +14,7 @@ review_cycle: 'on-change'
 > **Status:** Current
 > **Date:** 2026-05-22
 > **Owner:** Protocol Architect
+> **Hosted at:** [gtcx-ecosystem.github.io/gtcx-core](https://gtcx-ecosystem.github.io/gtcx-core/governance/trust-portal) (custom domain `trust.gtcx.io` pending — see [hosting runbook](../operations/trust-portal-hosting.md))
 
 **Audience:** vendor risk teams, sandbox regulators, design partners, security auditors
 **What this is:** the evidence index for evaluating gtcx-core's security posture without an NDA. Everything linked here is in this repository — every artifact is independently verifiable.

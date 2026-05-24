@@ -1,0 +1,54 @@
+# GitHub Pages — Jekyll config for the gtcx-core trust portal.
+#
+# Renders /docs as a static site at https://gtcx-ecosystem.github.io/gtcx-core/
+# (or trust.gtcx.io once the CNAME is added — see
+# docs/operations/trust-portal-hosting.md).
+#
+# Built and deployed by .github/workflows/pages.yml on every push to main.
+
+title: gtcx-core Trust Portal
+description: >-
+  Cryptographic foundation library for the GTCX ecosystem.
+  Trust portal, security evidence, audit history, and engagement readiness.
+url: https://gtcx-ecosystem.github.io
+baseurl: /gtcx-core
+repository: gtcx-ecosystem/gtcx-core
+
+theme: minima
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-titles-from-headings
+  - jekyll-default-layout
+  - jekyll-readme-index
+
+relative_links:
+  enabled: true
+  collections: true
+
+optional_front_matter:
+  remove_originals: true
+
+titles_from_headings:
+  enabled: true
+  strip_title: true
+  collections: true
+
+readme_index:
+  enabled: true
+  remove_originals: false
+
+defaults:
+  - scope:
+      path: ''
+    values:
+      layout: page
+
+# Excluded: build artifacts, Jekyll cache, the empty historical bucket
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .jekyll-cache/
+  - node_modules/

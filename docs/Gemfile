@@ -1,0 +1,16 @@
+# Pinned to the GitHub-Pages-supported gem set so the deployed site matches
+# what GitHub's Pages builder would produce. See
+# https://pages.github.com/versions/ for the full version manifest.
+
+source "https://rubygems.org"
+
+gem "github-pages", group: :jekyll_plugins
+gem "webrick", "~> 1.8"
+
+group :jekyll_plugins do
+  gem "jekyll-relative-links"
+  gem "jekyll-optional-front-matter"
+  gem "jekyll-titles-from-headings"
+  gem "jekyll-default-layout"
+  gem "jekyll-readme-index"
+end
