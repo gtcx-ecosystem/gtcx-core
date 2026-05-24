@@ -1,4 +1,17 @@
+---
+title: 'GA Release Evidence Summary'
+status: 'current'
+date: '2026-05-24'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['release', 'ga', 'evidence', 'auto-generated']
+review_cycle: 'on-change'
+---
+
 # GA Evidence Summary
+
+> **Auto-generated** by `tools/generate-ga-evidence-summary.mjs`. Frontmatter is added manually; tracked as a tooling-gap follow-up to bake frontmatter emission into the generator.
 
 Generated: 2026-05-06
 Source: `docs/release/ga-release/ga-release-evidence-log.md`

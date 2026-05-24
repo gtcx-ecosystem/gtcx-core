@@ -34,48 +34,9 @@ review_cycle: 'on-change'
 
 Per prior engagement intelligence on African regulatory sandboxes: regulators accept internal assessments as starting evidence; the **pre-submission meeting is the key lever**. The intro email's job is to earn that meeting, not to submit the formal application.
 
-## Email draft
+## Email source
 
-> **Recipient guidance:** the RBZ Fintech Sandbox accepts both fintech-and adjacent-fintech use cases. GTCX is adjacent — commodity-export compliance with mobile-money rails. If RBZ defers, the secondary path is MMMD with a copy to RBZ. **Confirm the correct recipient and current contact name before sending** — the contacts below are illustrative placeholders.
-
----
-
-**To:** `<sandbox@rbz.co.zw>` _(verify current address)_
-**Cc:** `<engagement@gtcx.io>`
-**Subject:** GTCX Protocol — pre-submission meeting request for Zimbabwe commodity-export sandbox cohort
-
-Dear Reserve Bank of Zimbabwe Fintech Sandbox team,
-
-I'm writing on behalf of GTCX Protocol — the open cryptographic foundation we've built to give Zimbabwean commodity producers, regulators, and export partners a shared trust layer for chain-of-custody attestation. Our core library is independently auditable, FIPS-aligned, and designed specifically for the constraints African commodity supply chains face (offline-first, low-bandwidth, sovereign data residency).
-
-We would value a 45-minute pre-submission meeting to walk through our work and understand how it best fits into the RBZ sandbox structure. Three concrete artifacts we'd ask you to review beforehand, all public and independently verifiable:
-
-1. **Trust portal** — [trust.gtcx.io](https://gtcx-ecosystem.github.io/gtcx-core/governance/trust-portal) _(custom domain provisioning in flight)_. Index of every security and compliance artifact, with file paths to each piece of evidence.
-2. **Internal completion audit (2026-05-21)** — [audit/internal-completion-audit-2026-05-21](https://gtcx-ecosystem.github.io/gtcx-core/audit/internal-completion-audit-2026-05-21). Composite 9.5/10 across security, code quality, and operational readiness; 24/24 internal items complete with cited evidence per item.
-3. **Fuzz campaign evidence** — [audit/fuzz-campaign-evidence-2026-05-21](https://gtcx-ecosystem.github.io/gtcx-core/audit/fuzz-campaign-evidence-2026-05-21). Six cryptographic primitives, 500,000+ libFuzzer iterations, zero crashes, zero panics, zero AddressSanitizer violations.
-
-In addition, an external penetration test and SOC 2 Type 1 attestation are contracted and in motion (target completion 2026-08-25 and 2026-09-15 respectively). We can share the engagement letters under NDA at the meeting.
-
-**On Zimbabwe-specific readiness:** we have a per-jurisdiction configuration validated end-to-end against our cryptographic surface, anchored to the country's regulatory authority structure (MMMD), Zimbabwe Dollar settlement, and the three-language localization (English, Shona, Ndebele). The reference fixture sits at [packages/config/jurisdiction](https://gtcx-ecosystem.github.io/gtcx-core/specs/packages) — the production version requires your team's sign-off on the regulatory parameters.
-
-We would be happy to come to Harare in person at your convenience, or to meet by video. We can adapt to your sandbox cohort schedule — please let us know which weeks in June or July work for the team.
-
-For procurement / vendor risk purposes the relevant primary contact is:
-
-- **Cryptographic Security:** _<security@gtcx.io>_
-- **Engineering:** _<engineering@gtcx.io>_
-- **Engagement lead:** _<your name and contact>_
-
-Thank you for the work you've done establishing the Zimbabwean fintech sandbox — the regional precedent it sets matters for the broader continental effort, and we hope GTCX can support that work.
-
-With appreciation,
-
-_<Sender name>_
-_<Title>_
-GTCX Protocol
-trust.gtcx.io
-
----
+The outbound email is rendered from the canonical [`sandbox-intro-email-template.md`](../../gtm/sandbox-intro-email-template.md) using the **Zimbabwe** row in its parameter table — no per-country email draft is maintained here. Updates to shared text (cited artifacts, attestation status, meeting offer) happen once in the template and propagate to every country.
 
 ## Pre-send checklist
 

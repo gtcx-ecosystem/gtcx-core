@@ -1,6 +1,6 @@
 ---
 title: '12 Engagement Brief Drc'
-status: 'current'
+status: 'superseded'
 date: '2026-05-17'
 owner: 'protocol-architect'
 role: 'protocol-architect'
@@ -8,6 +8,8 @@ tier: 'standard'
 tags: ['docs']
 review_cycle: 'on-change'
 ---
+
+> **⚠ Superseded** — this per-country draft is replaced by the canonical [`sandbox-intro-email-template.md`](./sandbox-intro-email-template.md) + per-country parameter table. Retained for historical reference; do NOT cite or send. For the active outbound, render the template against the country's parameter row.
 
 # Engagement Brief — Democratic Republic of Congo
 
