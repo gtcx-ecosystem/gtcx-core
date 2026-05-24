@@ -37,6 +37,55 @@ review_cycle: 'on-change'
 
 ---
 
+## Published versions
+
+> **Status:** Awaiting first publish — Sprint 2.3 of the engagement readiness roadmap. The `release.yml` workflow is wired and dry-run validated (commits `805cda7` + `028e3d9`); the first execution publishes all 21 `@gtcx/*` packages with SLSA provenance attestations. Verification procedure is in [`docs/devops/release-mgmt/npm-publish-runbook.md`](../devops/release-mgmt/npm-publish-runbook.md). This section auto-populates after the first run.
+
+| Package               | npm version | Provenance | Source                                                                                     |
+| --------------------- | ----------- | ---------- | ------------------------------------------------------------------------------------------ |
+| `@gtcx/types`         | _pending_   | _pending_  | [npmjs.com/package/@gtcx/types](https://www.npmjs.com/package/@gtcx/types)                 |
+| `@gtcx/crypto`        | _pending_   | _pending_  | [npmjs.com/package/@gtcx/crypto](https://www.npmjs.com/package/@gtcx/crypto)               |
+| `@gtcx/crypto-native` | _pending_   | _pending_  | [npmjs.com/package/@gtcx/crypto-native](https://www.npmjs.com/package/@gtcx/crypto-native) |
+| `@gtcx/schemas`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/schemas](https://www.npmjs.com/package/@gtcx/schemas)             |
+| `@gtcx/utils`         | _pending_   | _pending_  | [npmjs.com/package/@gtcx/utils](https://www.npmjs.com/package/@gtcx/utils)                 |
+| `@gtcx/domain`        | _pending_   | _pending_  | [npmjs.com/package/@gtcx/domain](https://www.npmjs.com/package/@gtcx/domain)               |
+| `@gtcx/security`      | _pending_   | _pending_  | [npmjs.com/package/@gtcx/security](https://www.npmjs.com/package/@gtcx/security)           |
+| `@gtcx/verification`  | _pending_   | _pending_  | [npmjs.com/package/@gtcx/verification](https://www.npmjs.com/package/@gtcx/verification)   |
+| `@gtcx/identity`      | _pending_   | _pending_  | [npmjs.com/package/@gtcx/identity](https://www.npmjs.com/package/@gtcx/identity)           |
+| `@gtcx/api-client`    | _pending_   | _pending_  | [npmjs.com/package/@gtcx/api-client](https://www.npmjs.com/package/@gtcx/api-client)       |
+| `@gtcx/connectivity`  | _pending_   | _pending_  | [npmjs.com/package/@gtcx/connectivity](https://www.npmjs.com/package/@gtcx/connectivity)   |
+| `@gtcx/logging`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/logging](https://www.npmjs.com/package/@gtcx/logging)             |
+| `@gtcx/network`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/network](https://www.npmjs.com/package/@gtcx/network)             |
+| `@gtcx/sync`          | _pending_   | _pending_  | [npmjs.com/package/@gtcx/sync](https://www.npmjs.com/package/@gtcx/sync)                   |
+| `@gtcx/resilience`    | _pending_   | _pending_  | [npmjs.com/package/@gtcx/resilience](https://www.npmjs.com/package/@gtcx/resilience)       |
+| `@gtcx/telemetry`     | _pending_   | _pending_  | [npmjs.com/package/@gtcx/telemetry](https://www.npmjs.com/package/@gtcx/telemetry)         |
+| `@gtcx/runtime`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/runtime](https://www.npmjs.com/package/@gtcx/runtime)             |
+| `@gtcx/events`        | _pending_   | _pending_  | [npmjs.com/package/@gtcx/events](https://www.npmjs.com/package/@gtcx/events)               |
+| `@gtcx/workproof`     | _pending_   | _pending_  | [npmjs.com/package/@gtcx/workproof](https://www.npmjs.com/package/@gtcx/workproof)         |
+| `@gtcx/services`      | _pending_   | _pending_  | [npmjs.com/package/@gtcx/services](https://www.npmjs.com/package/@gtcx/services)           |
+| `@gtcx/ai`            | _pending_   | _pending_  | [npmjs.com/package/@gtcx/ai](https://www.npmjs.com/package/@gtcx/ai)                       |
+
+### Verifying any version independently
+
+Anyone can verify the current published surface end-to-end with no NDA, no clone:
+
+```bash
+# Per-package version
+for pkg in types crypto crypto-native schemas utils domain security verification identity \
+           api-client connectivity logging network sync resilience telemetry runtime \
+           events workproof services ai; do
+  v=$(npm view "@gtcx/$pkg" version 2>/dev/null)
+  echo "@gtcx/$pkg: ${v:-not-yet-published}"
+done
+
+# Provenance attestation per package (post-publish)
+npm view @gtcx/crypto --json | jq -r '.dist.attestations.url'
+```
+
+The provenance attestation URL is the durable record of _how_ each package was built — workflow name, commit SHA, build environment. SLSA Source L2 enforced; Build L3 aspirational per the release pipeline.
+
+---
+
 ## Quick orientation
 
 `gtcx-core` is the cryptographic foundation library for the GTCX ecosystem. It exports cryptographic primitives, identity types, verification protocols, and observability tooling that 6+ downstream products depend on. It runs as library code inside the consumer's process — no service surface, no deployment runtime, no PII processing.
