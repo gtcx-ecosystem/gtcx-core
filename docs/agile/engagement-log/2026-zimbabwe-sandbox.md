@@ -38,6 +38,8 @@ Per prior engagement intelligence on African regulatory sandboxes: regulators ac
 
 The outbound email is rendered from the canonical [`sandbox-intro-email-template.md`](../../gtm/sandbox-intro-email-template.md) using the **Zimbabwe** row in its parameter table — no per-country email draft is maintained here. Updates to shared text (cited artifacts, attestation status, meeting offer) happen once in the template and propagate to every country.
 
+The send-ready render (every `{{placeholder}}` substituted, copy-paste-ready) lives at [`docs/gtm/renders/zimbabwe-2026.md`](../../gtm/renders/zimbabwe-2026.md).
+
 ## Pre-send checklist
 
 | #   | Item                                                                                               | Status     | Notes                                                                    |
