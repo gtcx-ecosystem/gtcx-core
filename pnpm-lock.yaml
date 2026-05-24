@@ -753,6 +753,9 @@ importers:
       '@gtcx/identity':
         specifier: workspace:*
         version: link:../../packages/identity
+      '@gtcx/jurisdiction-config':
+        specifier: workspace:*
+        version: link:../../packages/config/jurisdiction
       '@gtcx/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
