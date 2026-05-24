@@ -2,7 +2,7 @@
 
 Per-engagement operational log for sovereign-state and institutional partners. One file per engagement, kept as append-only history of the engagement state, communications sent, and decisions made.
 
-Created 2026-05-22 as part of Sprint 3 task 3.3 of the [engagement readiness roadmap](../roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). The generic structure is in the [playbook](./playbook.md); each per-engagement log inherits and overrides only the country-specific fields.
+Created 2026-05-22 as part of Sprint 3 task 3.3 of the [engagement readiness roadmap](../roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). The generic structure is in the [playbook](./playbook.md); each per-engagement log inherits and overrides only the country-specific fields. For a single-screen view across all 5 engagements with shared blockers and travel-pooling opportunities, see the [dashboard](./dashboard.md).
 
 ## Active engagements
 
