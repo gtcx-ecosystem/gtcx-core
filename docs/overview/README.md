@@ -1,8 +1,9 @@
 # gtcx-core — Repository Overview
 
 > **Status:** Current
-> **Date:** 2026-05-17
+> **Date:** 2026-05-24
 > **Owner:** Protocol Architect
+> **Composite score:** 9.5 / 10 (per [internal completion audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md))
 > **Next review:** 2026-08-12 (quarterly, aligned with master audit cycle)
 
 ---
@@ -15,7 +16,11 @@
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-capable with known gaps. Honest bank-grade score: **8.7/10 core** (up from 8.65 on 2026-05-13). FIPS 140-3 verified. SLSA Build L3 aspirational. SOC 2 Type 1 pending. No critical security findings. CI operational.
+**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest composite score: **9.5/10 core** as of [2026-05-21 internal completion audit](../audit/internal-completion-audit-2026-05-21.md) (up from 8.65 on 2026-05-13 → 8.7 → 9.3 on 2026-05-19 → 9.5). All 24/24 internal completion items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); 63/63 Rust tests passing under `--features fips`. **Coverage:** 19/19 testable packages ≥95% branch coverage. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced, Build L3 aspirational; provenance manifest per release. **External attestation:** pen test contracted (target 2026-08-25); SOC 2 Type 1 contracted (target 2026-09-15) — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
+
+**Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DR Congo plus broader continental rollout). See the [cross-jurisdiction dashboard](../agile/engagement-log/dashboard.md) for per-engagement state.
+
+**Honest remaining gaps (externally budgeted):** pen test report not yet delivered (contracted, target 2026-08-25); SOC 2 Type 1 letter not yet delivered (contracted, target 2026-09-15); first `release.yml` execution to npm pending engineering-lead trigger (dry-run validated, all gates green locally).
 
 ---
 

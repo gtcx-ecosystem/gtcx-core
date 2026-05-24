@@ -37,12 +37,16 @@
 
 ## §4 Architecture & Engineering
 
-| Document                                                                           | Purpose                                                 |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [`architecture/overview.md`](./architecture/overview.md)                           | High-level architecture overview                        |
-| [`architecture/trust-contract-matrix.md`](./architecture/trust-contract-matrix.md) | Trust boundary matrix across core surfaces              |
-| [`devops/overview.md`](./devops/overview.md)                                       | Entry point into CI/CD and operational engineering docs |
-| [`stack/tech-stack.md`](./stack/tech-stack.md)                                     | Stack rationale and constraints                         |
+| Document                                                                           | Purpose                                                                                                                       |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [`architecture/system-overview.md`](./architecture/system-overview.md)             | **Canonical** Protocol 13 Tier 1 system overview with Mermaid diagrams (system arch, data flow, trust boundaries, deployment) |
+| [`architecture/ecosystem-integration.md`](./architecture/ecosystem-integration.md) | **Canonical** Protocol 13 Tier 1 cross-repo dependency map; 14 consumers tracked with Mermaid integration diagrams            |
+| [`architecture/business-logic.md`](./architecture/business-logic.md)               | Protocol 13 Tier 2 library-adapted value model — compounding-foundation network effects across the ecosystem                  |
+| [`architecture/adoption-model.md`](./architecture/adoption-model.md)               | Protocol 13 Tier 2 adoption funnel — workspace-to-npm-to-external paths with Mermaid sequence diagrams                        |
+| [`architecture/overview.md`](./architecture/overview.md)                           | Module-level architecture overview (companion to system-overview.md)                                                          |
+| [`architecture/trust-contract-matrix.md`](./architecture/trust-contract-matrix.md) | Trust boundary matrix across core surfaces                                                                                    |
+| [`devops/overview.md`](./devops/overview.md)                                       | Entry point into CI/CD and operational engineering docs                                                                       |
+| [`stack/tech-stack.md`](./stack/tech-stack.md)                                     | Stack rationale and constraints                                                                                               |
 
 ## §5 Specs
 
@@ -63,12 +67,16 @@
 
 ## §7 Security
 
-| Document                                                                         | Purpose                         |
-| -------------------------------------------------------------------------------- | ------------------------------- |
-| [`security/security-framework.md`](./security/security-framework.md)             | Security control model          |
-| [`security/threat-model.md`](./security/threat-model.md)                         | Threat model and mitigations    |
-| [`security/fips-validation-boundary.md`](./security/fips-validation-boundary.md) | FIPS boundary statement         |
-| [`security/pkcs11-keystore.md`](./security/pkcs11-keystore.md)                   | Hardware-backed keystore design |
+| Document                                                                         | Purpose                                                               |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [`security/security-framework.md`](./security/security-framework.md)             | Security control model                                                |
+| [`security/threat-model.md`](./security/threat-model.md)                         | Threat model and mitigations                                          |
+| [`security/fips-validation-boundary.md`](./security/fips-validation-boundary.md) | FIPS boundary statement                                               |
+| [`security/pkcs11-keystore.md`](./security/pkcs11-keystore.md)                   | Hardware-backed keystore design                                       |
+| [`security/vulnerability-disclosure.md`](./security/vulnerability-disclosure.md) | **Protocol 1 v2.0 P2** — VDP policy per CERT CVD + ISO/IEC 29147:2018 |
+| [`security/trust-center.md`](./security/trust-center.md)                         | Redirect to canonical `governance/trust-portal.md`                    |
+| [`security/pen-test-rfp-2026.md`](./security/pen-test-rfp-2026.md)               | Pen test RFP + vendor outreach (Sprint 4.1)                           |
+| [`security/ark-upstream-tracking.md`](./security/ark-upstream-tracking.md)       | Tracker for arkworks 0.5 migration + ignored advisories               |
 
 ## §8 Compliance
 
@@ -97,12 +105,19 @@
 
 ## §11 Repo-Specific Sections
 
-| Document                                                                         | Purpose                                  |
-| -------------------------------------------------------------------------------- | ---------------------------------------- |
-| [`gtm/README.md`](./gtm/README.md)                                               | GTM and regulator-facing packet index    |
-| [`release/README.md`](./release/README.md)                                       | Release artifact set                     |
-| [`testing/README.md`](./testing/README.md)                                       | Test policy entrypoint                   |
-| [`quality/10-10-remediation-tracker.md`](./quality/10-10-remediation-tracker.md) | Quality-tracker view of remediation work |
+| Document                                                                                     | Purpose                                                                   |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [`gtm/README.md`](./gtm/README.md)                                                           | GTM and regulator-facing packet index                                     |
+| [`gtm/sandbox-intro-email-template.md`](./gtm/sandbox-intro-email-template.md)               | **Canonical** sandbox intro email template + per-country parameter table  |
+| [`gtm/sandbox-intro-email-template.fr.md`](./gtm/sandbox-intro-email-template.fr.md)         | French variant for Francophone targets (DRC primary)                      |
+| [`release/README.md`](./release/README.md)                                                   | Release artifact set                                                      |
+| [`devops/release-mgmt/npm-publish-runbook.md`](./devops/release-mgmt/npm-publish-runbook.md) | Operational runbook for first-publish to npm + post-publish verification  |
+| [`operations/trust-portal-hosting.md`](./operations/trust-portal-hosting.md)                 | GitHub Pages hosting runbook for the trust portal                         |
+| [`testing/README.md`](./testing/README.md)                                                   | Test policy entrypoint                                                    |
+| [`agile/engagement-log/dashboard.md`](./agile/engagement-log/dashboard.md)                   | Cross-jurisdiction status across all 5 active sovereign-state engagements |
+| [`agile/engagement-log/playbook.md`](./agile/engagement-log/playbook.md)                     | Generic sovereign-state engagement playbook (7-phase flow)                |
+| [`agile/cross-repo-coordination.md`](./agile/cross-repo-coordination.md)                     | Active coordination threads with other gtcx-ecosystem repos               |
+| [`quality/10-10-remediation-tracker.md`](./quality/10-10-remediation-tracker.md)             | Quality-tracker view of remediation work                                  |
 
 ## §12 Onboarding & Roles
 
