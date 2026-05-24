@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-24T15:10:40.009Z",
+  "generatedAt": "2026-05-24T15:19:09.501Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.3.0",
@@ -147,7 +147,7 @@
       "version": "3.0.0",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "29c9ac0ea257f3f06663048e8547fd26a76bdc49ed5a96c214efdefcf7a3517d",
+      "hash": "7af79a063f968a8ceba23da9b54f719f5b5532f9b0228eeacb5169fc87419760",
       "exports": [
         "Backend",
         "batchVerify",
@@ -163,6 +163,7 @@
         "createSignedMessage",
         "createZkpEngine",
         "DerivedKey",
+        "deriveKeyPbkdf2",
         "derivePublicKey",
         "doubleHash256",
         "generateKeyId",
@@ -188,6 +189,7 @@
         "MerkleProof",
         "MerkleTree",
         "NativeZkpEngine",
+        "Pbkdf2Params",
         "sanitizeBatchVerifyOutput",
         "sanitizeCombineHashesOutput",
         "sanitizeDerivePublicKeyOutput",
