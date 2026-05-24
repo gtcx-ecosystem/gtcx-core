@@ -81,6 +81,12 @@ jobs:
       - name: Type check
         run: pnpm typecheck
 
+      - name: Setup Rust toolchain for native crypto build
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build native crypto bindings
+        run: pnpm --filter @gtcx/crypto-native run build:native
+
       - name: Test
         run: pnpm test
 
