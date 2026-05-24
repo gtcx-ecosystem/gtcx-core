@@ -16,7 +16,7 @@ review_cycle: 'quarterly'
 > **Owner:** Quality & Evidence Lead
 > **Supersedes:** [docs-standard-compliance-2026-05-10.md](./docs-standard-compliance-2026-05-10.md)
 
-**Scope:** Re-application of [`gtcx-ecosystem/audit/prompts/docs/forensic-doc-standard-prompt.md`](../../../gtcx-agentic/audit/prompts/docs/forensic-doc-standard-prompt.md) and [`forensic-repo-hygiene-prompt.md`](../../../gtcx-agentic/audit/prompts/hygiene/forensic-repo-hygiene-prompt.md) to `gtcx-core`.
+**Scope:** Re-application of [`forensic-doc-standard-prompt.md`](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/audit/prompts/docs/forensic-doc-standard-prompt.md) and [`forensic-repo-hygiene-prompt.md`](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/audit/prompts/hygiene/forensic-repo-hygiene-prompt.md) to `gtcx-core`.
 
 **Reference standard versions:**
 
