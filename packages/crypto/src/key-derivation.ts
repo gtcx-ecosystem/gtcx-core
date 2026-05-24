@@ -28,8 +28,23 @@ export interface Pbkdf2Params {
  * #4816) and in every supported browser. If `crypto.subtle.deriveBits` is
  * unavailable, this throws a typed `Error` at call time — there is no
  * non-PBKDF2-spec fallback in the canonical package, by deliberate choice:
- * a silent fallback to iterated SHA-256 would not produce RFC 6070 outputs
- * and would create a regulator-visible discrepancy between consumers.
+ * a silent fallback to iterated SHA-256 would not produce RFC 7914 §11
+ * outputs and would create a regulator-visible discrepancy between consumers.
+ *
+ * **Runtime requirements:**
+ *
+ * - Node 20+ — `globalThis.crypto.subtle` is built in; no action required.
+ * - Modern browsers — WebCrypto is built in; no action required.
+ * - **React Native (Hermes via Expo)** — WebCrypto is NOT shipped by default.
+ *   Install a polyfill that populates `globalThis.crypto.subtle` before any
+ *   call into this function. Recommended: `react-native-quick-crypto` (full
+ *   WebCrypto surface). Import the polyfill at app boot (e.g. in your root
+ *   `_layout.tsx`) so `subtle.importKey` and `subtle.deriveBits` resolve.
+ *   Validate with the RFC 7914 §11 test vectors in
+ *   `packages/crypto/tests/key-derivation.test.ts` from the RN runtime
+ *   before relying on this in production.
+ * - Older Node / restricted environments — call may throw; either upgrade
+ *   the runtime or pre-validate with `globalThis.crypto?.subtle?.deriveBits`.
  *
  * @throws TypeError when params are invalid (non-positive iterations, non-byte-aligned key length, etc.)
  * @throws Error when `crypto.subtle.deriveBits` is unavailable in the runtime

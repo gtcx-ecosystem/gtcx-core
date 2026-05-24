@@ -51,6 +51,10 @@ Some downstream consumers operate under production-sensitive windows during whic
 
 `@gtcx/types` is in the `linked` changeset group with `@gtcx/crypto`, `@gtcx/identity`, `@gtcx/verification`, `@gtcx/domain`, `@gtcx/schemas`, and `@gtcx/security`. A major bump on any member of the linked group propagates through `@gtcx/types` and is therefore in scope.
 
+### Operational surface for sign-off
+
+The canonical channel for raising a sign-off request during this window is the **`#gtcx-mobile-prod` Slack standup** (daily 09:00 GMT, starting 2026-05-26). When opening a PR that queues a major bump on any linked-group member, drop a note in `#gtcx-mobile-prod` with the PR link and the proposed merge window. The gtcx-mobile engineering lead's response (in-thread or via PR comment) is the sign-off record. PRs without that record will not be merged during the window.
+
 ### After window close
 
 When a convention's window ends, the row above is moved to the archive section below and the convention reverts to the normal semver workflow. The same record stays in this doc as a stable URL for any consumer or regulator referring back to the agreement.
