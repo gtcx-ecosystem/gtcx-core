@@ -41,9 +41,8 @@ const cryptoLog = createCategoryLogger('crypto');
  * For complex objects, prefer using sanitizeSecrets() from @gtcx/security
  * in the sanitizeInput/sanitizeOutput callbacks.
  *
- * @param message - Message to sign
- * @param privateKeyHex - Private key in hex format
- * @returns Signature in hex format
+ * Signature matches the underlying `sign(message, privateKeyHex)` from
+ * `@gtcx/crypto`. Returns the signature in hex format.
  */
 export const tracedSign = traced(
   (message: string | Uint8Array, privateKeyHex: string): string => {
