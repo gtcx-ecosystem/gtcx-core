@@ -1,19 +1,4 @@
----
-title: 'Ga Release Evidence Summary'
-status: 'current'
-date: '2026-05-17'
-owner: 'protocol-architect'
-role: 'protocol-architect'
-tier: 'standard'
-tags: ['docs']
-review_cycle: 'on-change'
----
-
 # GA Evidence Summary
-
-> **Status:** Current
-> **Date:** 2026-05-10
-> **Owner:** Quality & Evidence Lead
 
 Generated: 2026-05-06
 Source: `docs/release/ga-release/ga-release-evidence-log.md`
