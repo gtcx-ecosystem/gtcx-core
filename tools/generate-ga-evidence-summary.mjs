@@ -134,7 +134,18 @@ function main() {
   const summaryRows = buildSummaryRows(rows);
   const latestEvidenceDate = getLatestEvidenceDate(rows);
 
-  const output = `# GA Evidence Summary
+  const output = `---
+title: 'GA Release Evidence Summary'
+status: 'current'
+date: '${latestEvidenceDate}'
+owner: 'quality-evidence-lead'
+role: 'quality-evidence-lead'
+tier: 'critical'
+tags: ['release', 'ga', 'evidence', 'auto-generated']
+review_cycle: 'on-change'
+---
+
+# GA Evidence Summary
 
 Generated: ${latestEvidenceDate}
 Source: \`docs/release/ga-release/ga-release-evidence-log.md\`

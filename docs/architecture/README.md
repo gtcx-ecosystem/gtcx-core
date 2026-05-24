@@ -13,6 +13,7 @@ Canonical architecture documentation for `gtcx-core`.
 | [architecture-docs-protocol.md](architecture-docs-protocol.md) | Rules for keeping architecture docs current                                      |
 | (removed)                                                      | Documentation structure standard — archived as unfilled template                 |
 | [system-architecture-spec.md](system-architecture-spec.md)     | Formal security-oriented architecture spec template for future system-level work |
+| [structural-debt.md](structural-debt.md)                       | Tracked structural debt for the `docs/` tree — deferred consolidation plan       |
 
 ## Notes
 
