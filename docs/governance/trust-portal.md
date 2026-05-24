@@ -14,7 +14,7 @@ review_cycle: 'on-change'
 > **Status:** Current
 > **Date:** 2026-05-22
 > **Owner:** Protocol Architect
-> **Hosted at:** [gtcx-ecosystem.github.io/gtcx-core](https://gtcx-ecosystem.github.io/gtcx-core/governance/trust-portal) (custom domain `trust.gtcx.io` pending — see [hosting runbook](../operations/trust-portal-hosting.md))
+> **Hosted at:** [gtcx-ecosystem.github.io/gtcx-core](https://gtcx-ecosystem.github.io/gtcx-core/governance/trust-portal) (custom domain `trust.gtcx.io` pending — see [hosting runbook](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/trust-portal-hosting.md))
 
 **Audience:** vendor risk teams, sandbox regulators, design partners, security auditors
 **What this is:** the evidence index for evaluating gtcx-core's security posture without an NDA. Everything linked here is in this repository — every artifact is independently verifiable.
@@ -22,18 +22,34 @@ review_cycle: 'on-change'
 
 ---
 
+## Bottom line — at a glance
+
+`gtcx-core` is a cryptographic foundation library (TypeScript + Rust) consumed by 14+ products across the GTCX ecosystem. As of 2026-05-21:
+
+- **Composite readiness: 9.5 / 10.** Internal completion audit closes 24 of 24 items.
+- **Cryptography: FIPS-validated** via aws-lc-rs (CMVP #4816). 63/63 Rust tests pass under `--features fips`.
+- **Coverage: 19 / 19 testable packages ≥ 95% branch.** Mock-binding tests close `@gtcx/crypto-native` to 99.07%.
+- **Fuzz: 500,000+ iterations across 6 cargo-fuzz targets, zero crashes, zero panics, zero ASAN violations.**
+- **Key custody: HSM-backed via PKCS11 + AWS KMS.** NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed).
+- **Supply chain: SLSA Source L2 enforced** in CI; Build L3 aspirational; provenance manifest generated per release.
+- **External attestation: pen test contracted, vendor outreach in flight; SOC 2 Type 1 letter targeted 2026-09-15.**
+
+A reviewer who only reads this section has enough to make a procurement decision. The sections below are the underlying evidence each claim above is anchored to — every link points at a specific file in the canonical `gtcx-core` repo, viewable with no NDA.
+
+---
+
 ## Current readiness (2026-05-21)
 
-| Dimension                | Value                       | Evidence                                                                                                                             |
-| ------------------------ | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Composite readiness      | **9.5 / 10**                | [Internal Completion Audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md)                                             |
-| Internal items complete  | 24 / 24                     | Same                                                                                                                                 |
-| Branch coverage          | 19 / 19 packages ≥ 95%      | [Audit coverage table](../audit/internal-completion-audit-2026-05-21.md#updated-coverage-table)                                      |
-| Fuzz iterations          | 500,000+ across 6 targets   | [Fuzz Campaign Evidence 2026-05-21](../audit/fuzz-campaign-evidence-2026-05-21.md) — zero crashes, zero panics, zero ASAN violations |
-| FIPS validation          | aws-lc-rs CMVP #4816        | 63 / 63 Rust tests passing under `--features fips`                                                                                   |
-| HSM custody              | PKCS11 + AWS KMS            | NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed)                                                          |
-| Release pipeline         | SLSA Source L2 enforced     | `.github/workflows/release.yml` — provenance manifest generated per release                                                          |
-| Active execution program | 4-sprint engagement roadmap | [Engagement Readiness Sprint Roadmap 2026-05-22](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)                 |
+| Dimension                | Value                       | Evidence                                                                                                                                                                                     |
+| ------------------------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Composite readiness      | **9.5 / 10**                | [Internal Completion Audit 2026-05-21](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/internal-completion-audit-2026-05-21.md)                                             |
+| Internal items complete  | 24 / 24                     | Same                                                                                                                                                                                         |
+| Branch coverage          | 19 / 19 packages ≥ 95%      | [Audit coverage table](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/internal-completion-audit-2026-05-21.md#updated-coverage-table)                                      |
+| Fuzz iterations          | 500,000+ across 6 targets   | [Fuzz Campaign Evidence 2026-05-21](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/fuzz-campaign-evidence-2026-05-21.md) — zero crashes, zero panics, zero ASAN violations |
+| FIPS validation          | aws-lc-rs CMVP #4816        | 63 / 63 Rust tests passing under `--features fips`                                                                                                                                           |
+| HSM custody              | PKCS11 + AWS KMS            | NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed)                                                                                                                  |
+| Release pipeline         | SLSA Source L2 enforced     | `.github/workflows/release.yml` — provenance manifest generated per release                                                                                                                  |
+| Active execution program | 4-sprint engagement roadmap | [Engagement Readiness Sprint Roadmap 2026-05-22](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)                                                                         |
 
 ---
 
@@ -193,7 +209,7 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 
 - Structured stderr JSON for every traced operation; `SpanEmitter` contract for OTel/Datadog/Honeycomb forwarding
 - Sanitizer-override telemetry — `event=sanitizer_override` fires when explicit sanitizer is wired
-- [`pnpm ops:check`](../operations/repo-bootstrap.md) — auto-verified operational prerequisites with remediation commands
+- [`pnpm ops:check`](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/repo-bootstrap.md) — auto-verified operational prerequisites with remediation commands
 - KPI metrics export — `pnpm quality:kpi:export`
 
 ### Incident response
@@ -213,7 +229,7 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 
 - [Quality runbook](../devops/runbooks/quality-runbook.md) — CI triage order
 - [Release checklist](../devops/release-mgmt/release-checklist.md) — pre-release gate
-- [Repo bootstrap](../operations/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
+- [Repo bootstrap](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
 
 ---
 
@@ -221,7 +237,7 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 
 Run `pnpm ops:check` against this repo to see the current state. The checker uses `gh api` to verify runtime configuration (secrets, branch protection, org membership, CODEOWNERS validity) and reports pass/fail/warn/skip with remediation commands inline. The latest snapshot is reproducible by anyone with read access to the org.
 
-The output is also auto-written to [`docs/operations/repo-bootstrap.md`](../operations/repo-bootstrap.md) via `pnpm ops:emit-doc`.
+The output is also auto-written to [`docs/operations/repo-bootstrap.md`](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/repo-bootstrap.md) via `pnpm ops:emit-doc`.
 
 ---
 
@@ -261,23 +277,23 @@ Honest list of trust artifacts not yet in place. Surfaces them rather than letti
 
 This portal is the entry point. The artifacts it points to are the source of truth. If a claim on this page conflicts with the underlying file, the underlying file wins. To suggest a correction, open a PR — every change to this directory is dual-reviewed by a human CODEOWNER and the AI CODEOWNER.
 
-| Document                                                                    | Purpose                                 |
-| --------------------------------------------------------------------------- | --------------------------------------- |
-| [Threat model](../security/threat-model.md)                                 | STRIDE, threat actors, attack scenarios |
-| [Attack tree](../security/attack-tree-signing.md)                           | Adversarial decomposition               |
-| [Internal security assessment](../security/internal-security-assessment.md) | Six assessment methods, residual risk   |
-| [FIPS validation boundary](../security/fips-validation-boundary.md)         | Inherited validation via CMVP #4816     |
-| [Key ceremony](../security/key-ceremony.md)                                 | NIST SP 800-57 lifecycle                |
-| [Cloud KMS keystore](../security/cloud-kms-keystore.md)                     | AWS-first cloud-managed key custody     |
-| [External penetration test scope](../security/pen-test-scope.md)            | Third-party validation scope            |
-| [SOC 2 readiness](../compliance/soc2-readiness.md)                          | TSC mapping, 7 documented gaps          |
-| [GDPR / PCI / SOX](../compliance/)                                          | Compliance scope determinations         |
-| [SECURITY.md](../../SECURITY.md)                                            | Public disclosure policy                |
-| [SECURITY-INCIDENT.md](../security/security-incident-runbook.md)            | Internal response runbook               |
-| [Governance](../agents/governance/README.md)                                | Dual-AI CODEOWNER pattern               |
-| [Repo bootstrap](../operations/repo-bootstrap.md)                           | Live operational prerequisites          |
-| [GTM evidence pack](../gtm/)                                                | Sandbox-regulator-specific materials    |
-| [Full audit](../audit/full-audit-2026-05-09.md)                             | Six-phase audit, score 9.8/10           |
+| Document                                                                                                  | Purpose                                 |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| [Threat model](../security/threat-model.md)                                                               | STRIDE, threat actors, attack scenarios |
+| [Attack tree](../security/attack-tree-signing.md)                                                         | Adversarial decomposition               |
+| [Internal security assessment](../security/internal-security-assessment.md)                               | Six assessment methods, residual risk   |
+| [FIPS validation boundary](../security/fips-validation-boundary.md)                                       | Inherited validation via CMVP #4816     |
+| [Key ceremony](../security/key-ceremony.md)                                                               | NIST SP 800-57 lifecycle                |
+| [Cloud KMS keystore](../security/cloud-kms-keystore.md)                                                   | AWS-first cloud-managed key custody     |
+| [External penetration test scope](../security/pen-test-scope.md)                                          | Third-party validation scope            |
+| [SOC 2 readiness](../compliance/soc2-readiness.md)                                                        | TSC mapping, 7 documented gaps          |
+| [GDPR / PCI / SOX](../compliance/)                                                                        | Compliance scope determinations         |
+| [SECURITY.md](../../SECURITY.md)                                                                          | Public disclosure policy                |
+| [SECURITY-INCIDENT.md](../security/security-incident-runbook.md)                                          | Internal response runbook               |
+| [Governance](../agents/governance/README.md)                                                              | Dual-AI CODEOWNER pattern               |
+| [Repo bootstrap](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/repo-bootstrap.md) | Live operational prerequisites          |
+| [GTM evidence pack](../gtm/)                                                                              | Sandbox-regulator-specific materials    |
+| [Full audit](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/full-audit-2026-05-09.md)   | Six-phase audit, score 9.8/10           |
 
 ## Changelog
 

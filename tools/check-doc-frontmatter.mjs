@@ -14,8 +14,11 @@ import { execSync } from 'node:child_process';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
-// Valid values per docs/agents/docs-standard-machine-readable.md
-const VALID_STATUS = ['current', 'draft', 'deprecated', 'superseded'];
+// Valid values per Protocol 1 v2.0 §YAML Frontmatter Standard
+// https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/system-sop/1-protocols/1-docs-structure/protocol.md
+// Local schema accepts 'deprecated' and 'superseded' as supersets of the protocol's
+// 'archived' for backwards-compatibility with pre-v2.0 docs.
+const VALID_STATUS = ['current', 'draft', 'archived', 'deprecated', 'superseded'];
 const VALID_OWNERS = [
   'protocol-architect',
   'crypto-security-engineer',
@@ -23,8 +26,8 @@ const VALID_OWNERS = [
   'quality-evidence-lead',
   'product-lead',
 ];
-const VALID_TIERS = ['critical', 'standard', 'informational'];
-const VALID_CYCLES = ['quarterly', 'monthly', 'on-change'];
+const VALID_TIERS = ['strategic', 'critical', 'standard', 'informational'];
+const VALID_CYCLES = ['quarterly', 'monthly', 'bi-weekly', 'weekly', 'on-change'];
 const REQUIRED_FIELDS = ['title', 'status', 'date', 'owner', 'role', 'tier', 'tags', 'review_cycle'];
 
 const DEFAULT_EXCLUDES = [
