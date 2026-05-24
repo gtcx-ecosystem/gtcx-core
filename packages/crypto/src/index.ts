@@ -46,6 +46,8 @@ export {
   type HashAlgorithm,
 } from './hashing';
 
+export { deriveKeyPbkdf2, type Pbkdf2Params } from './key-derivation';
+
 export {
   buildMerkleTree,
   generateMerkleProof,
