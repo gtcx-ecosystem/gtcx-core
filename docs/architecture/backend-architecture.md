@@ -115,12 +115,12 @@ Violations are CI-blocking.
 
 ### Domain and data
 
-| Package           | Responsibility                                                                            |
-| ----------------- | ----------------------------------------------------------------------------------------- |
-| `@gtcx/types`     | All shared TypeScript types for the GTCX ecosystem                                        |
-| `@gtcx/schemas`   | Zod schemas for all Core12 compliance entities; runtime validation                        |
-| `@gtcx/domain`    | Commodity-agnostic domain services with DI container, offline queues, observability hooks |
-| `@gtcx/workproof` | TradeCV/WorkProof v2.1 — W3C VC work attestations with 40 predicates, AI validation hooks |
+| Package           | Responsibility                                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------- |
+| `@gtcx/types`     | All shared TypeScript types for the GTCX ecosystem                                                            |
+| `@gtcx/schemas`   | Zod schemas for all Core12 compliance entities; runtime validation                                            |
+| `@gtcx/domain`    | Commodity-agnostic domain services with DI container, offline queues, observability hooks                     |
+| `@gtcx/workproof` | TradeCV/WorkProof v2.2 — W3C VC work attestations with 47 predicates across 9 categories, AI validation hooks |
 
 ### Infrastructure
 

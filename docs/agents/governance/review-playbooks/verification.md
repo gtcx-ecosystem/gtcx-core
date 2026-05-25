@@ -188,7 +188,7 @@ review_cycle: 'on-change'
 
 ## 11. WorkProof predicate registry consistency
 
-**Rule:** `packages/workproof/src/predicates/` registry has 38 predicates. Adding or removing predicates requires:
+**Rule:** `packages/workproof/src/predicates/` registry has 47 predicates across 9 categories. Adding or removing predicates requires:
 
 - Updated TypeScript type union
 - Updated registry export

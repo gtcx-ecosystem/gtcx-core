@@ -19,7 +19,7 @@ All notable changes to the GTCX Core monorepo.
 - `@gtcx/security` — Auth, validation, offline credential management, audit logging
 - `@gtcx/identity` — DID creation, credential management, key lifecycle
 - `@gtcx/verification` — Certificate generation, QR codes, proof bundles, verification proofs
-- `@gtcx/workproof` — TradeCV/WorkProof v2.1 (W3C VC-based work attestations, 40 predicates)
+- `@gtcx/workproof` — TradeCV/WorkProof v2.2 (W3C VC-based work attestations, 47 predicates across 9 categories)
 
 **Application services:**
 

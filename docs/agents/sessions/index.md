@@ -8,9 +8,10 @@
 
 ## Active Handoffs
 
-| Date       | From | To  | Scope                                                    | File                             | Status   |
-| ---------- | ---- | --- | -------------------------------------------------------- | -------------------------------- | -------- |
-| 2026-05-12 | Kimi | Any | 10/10 roadmap expansion (Lightweight + Machine-Readable) | `2026-05-12-handoff-kimi-any.md` | Complete |
+| Date       | From      | To             | Scope                                                    | File                                           | Status   |
+| ---------- | --------- | -------------- | -------------------------------------------------------- | ---------------------------------------------- | -------- |
+| 2026-05-12 | Kimi      | Any            | 10/10 roadmap expansion (Lightweight + Machine-Readable) | `2026-05-12-handoff-kimi-any.md`               | Complete |
+| 2026-05-25 | gtcx-core | gtcx-protocols | ADR-012 Stage 1 — predicate bridge                       | `2026-05-25-handoff-gtcxcore-gtcxprotocols.md` | Ready    |
 
 ## Handoff Template
 
