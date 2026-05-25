@@ -1,6 +1,6 @@
 // ============================================================================
 // @gtcx/workproof
-// TradeCV/WorkProof v2.1 — Portable Professional Identity & Cryptographic
+// TradeCV/WorkProof v2.2 — Portable Professional Identity & Cryptographic
 // Employment Attestation Layer for the GTCX Protocol
 // ============================================================================
 

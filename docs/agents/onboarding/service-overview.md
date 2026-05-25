@@ -68,7 +68,7 @@ review_cycle: 'on-change'
 | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | Core12             | The 12 compliance entity types (trade parties, documents, etc.) defined in `@gtcx/schemas`                       |
 | WorkProof          | W3C VC-based work attestation standard with 47 predicates across 9 categories — implemented in `@gtcx/workproof` |
-| TradeCV            | The GTCX trade credential format built on WorkProof v2.1                                                         |
+| TradeCV            | The GTCX trade credential format built on WorkProof v2.2                                                         |
 | ZKP engine         | Zero-knowledge proof system: Groth16 + Bulletproofs + Schnorr in Rust; TypeScript dev fallback                   |
 | Package boundaries | Strict one-directional dependency graph enforced by `pnpm architecture:check`                                    |
 | Native bindings    | NAPI-RS compiled Rust modules exposed to Node.js; required in production via `GTCX_REQUIRE_NATIVE=true`          |

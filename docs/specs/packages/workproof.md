@@ -21,7 +21,7 @@ review_cycle: 'on-change'
 
 ## Purpose
 
-TradeCV/WorkProof v2.1 — types, Zod schemas, and validation for W3C Verifiable Credential (VC)-based employment and professional skill attestations. Provides the data layer for portable professional identity in the GTCX protocol.
+TradeCV/WorkProof v2.2 — types, Zod schemas, and validation for W3C Verifiable Credential (VC)-based employment and professional skill attestations. Provides the data layer for portable professional identity in the GTCX protocol. 47 predicates across 9 categories.
 
 ---
 
