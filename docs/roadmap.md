@@ -72,22 +72,22 @@ This is the canonical roadmap for everything that remains between `gtcx-core` an
 - Final release signoff evidence
 - 90-day P1-free streak (time-gated; earliest completion 2026-08-17)
 
-Internal engineering work remaining for R5: Rust file refactors (`gtcx-network` 490 LOC, `gtcx-crypto/keystore` 469 LOC).
+Internal engineering work remaining for R5: None. All internal engineering items are complete.
 
 ### 2.2 Internal Items Still in Progress
 
-| #   | Item                                  | Owner                    | Target     | Status                                                                        |
-| --- | ------------------------------------- | ------------------------ | ---------- | ----------------------------------------------------------------------------- |
-| 1   | **crypto-native mock test execution** | Quality Evidence Lead    | 2026-05-20 | **DONE** — 99.07% statements / 84.74% branch; thresholds raised to 95/80      |
-| 2   | **SLSA provenance trigger**           | DevOps                   | 2026-05-21 | Pipeline ready; **blocked on `NPM_TOKEN` org secret**                         |
-| 3   | **P1-free 90-day window**             | Quality Evidence Lead    | 2026-08-17 | Tracking since 2026-05-19; zero incidents so far                              |
-| 4   | **Fuzz campaign at scale**            | Security Engineer        | 2026-06-01 | 6 targets written; 500K+ iterations zero crashes; 24h runner pending          |
-| 5   | **Rust FIPS backend (aws-lc-rs)**     | Crypto Security Engineer | 2026-06-15 | `cargo test --features fips` passes (30 tests); aws-lc-fips-sys in Cargo.lock |
-| 6   | **HSM key storage trait**             | Crypto Security Engineer | 2026-06-30 | PKCS#11 + AWS Cloud KMS keystores implemented; integration tests pass         |
-| 7   | **@gtcx npm scope claim**             | DevOps                   | 2026-05-22 | Administrative; no code work                                                  |
-| 8   | **Downstream consumer validation**    | Protocol Architect       | 2026-07-01 | Internal prep complete; needs formal report from pilot partner                |
-| 9   | **Rust file refactor (>400 LOC)**     | Frontier Infra Engineer  | 2026-06-15 | `gtcx-network/src/lib.rs` (490 LOC) and `gtcx-crypto/keystore.rs` (469 LOC)   |
-| 10  | **Zimbabwe pre-submission email**     | GTM Lead                 | 2026-05-26 | **Blocked on GTM lead trigger**                                               |
+| #   | Item                                  | Owner                    | Target     | Status                                                                                     |
+| --- | ------------------------------------- | ------------------------ | ---------- | ------------------------------------------------------------------------------------------ |
+| 1   | **crypto-native mock test execution** | Quality Evidence Lead    | 2026-05-20 | **DONE** — 99.07% statements / 84.74% branch; thresholds raised to 95/80                   |
+| 2   | **SLSA provenance trigger**           | DevOps                   | 2026-05-21 | Pipeline ready; **blocked on `NPM_TOKEN` org secret**                                      |
+| 3   | **P1-free 90-day window**             | Quality Evidence Lead    | 2026-08-17 | Tracking since 2026-05-19; zero incidents so far                                           |
+| 4   | **Fuzz campaign at scale**            | Security Engineer        | 2026-06-01 | 6 targets written; 500K+ iterations zero crashes; 24h runner pending                       |
+| 5   | **Rust FIPS backend (aws-lc-rs)**     | Crypto Security Engineer | 2026-06-15 | `cargo test --features fips` passes (30 tests); aws-lc-fips-sys in Cargo.lock              |
+| 6   | **HSM key storage trait**             | Crypto Security Engineer | 2026-06-30 | PKCS#11 + AWS Cloud KMS keystores implemented; integration tests pass                      |
+| 7   | **@gtcx npm scope claim**             | DevOps                   | 2026-05-22 | Administrative; no code work                                                               |
+| 8   | **Downstream consumer validation**    | Protocol Architect       | 2026-07-01 | Internal prep complete; needs formal report from pilot partner                             |
+| 9   | **Rust file refactor (>400 LOC)**     | Frontier Infra Engineer  | 2026-05-25 | **DONE** — `gtcx-network` and `gtcx-crypto/keystore` split into modules (commit `1af709f`) |
+| 10  | **Zimbabwe pre-submission email**     | GTM Lead                 | 2026-05-26 | **Blocked on GTM lead trigger**                                                            |
 
 ### 2.3 Weekly Verification Ritual (until 10.0)
 

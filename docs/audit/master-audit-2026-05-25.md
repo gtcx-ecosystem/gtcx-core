@@ -185,17 +185,19 @@ Phase 2 skipped — repo has only `/docs/` documentation root. `_delete/` was re
 
 ### Closed since 2026-05-17
 
-| Finding                                | Resolution                                   | Commit    |
-| -------------------------------------- | -------------------------------------------- | --------- |
-| USSD protocol string-only              | USSD handlers implemented (parser, session)  | `3cdc511` |
-| `rust/gtcx-zkp/src/groth16.rs` 692 LOC | Refactored into modules                      | `1443f28` |
-| Coverage thresholds <90% on many pkgs  | Raised to 95% across 14 packages             | `da870d3` |
-| SLOs missing                           | `docs/operations/slo-definitions.md` added   | `2792ce4` |
-| DR runbook missing                     | `docs/operations/runbook.md` updated         | `2792ce4` |
-| `_delete/` dir present                 | Removed and orphan dirs consolidated         | `9ac824e` |
-| Trust portal not public                | Published to GitHub Pages                    | `ae792d5` |
-| deriveKeyPbkdf2 not upstreamed         | Added to `@gtcx/crypto`                      | `ab3f544` |
-| Pen-test RFP missing                   | `docs/security/pen-test-rfp-2026.md` drafted | `fbde990` |
+| Finding                                    | Resolution                                         | Commit    |
+| ------------------------------------------ | -------------------------------------------------- | --------- |
+| USSD protocol string-only                  | USSD handlers implemented (parser, session)        | `3cdc511` |
+| `rust/gtcx-zkp/src/groth16.rs` 692 LOC     | Refactored into modules                            | `1443f28` |
+| Coverage thresholds <90% on many pkgs      | Raised to 95% across 14 packages                   | `da870d3` |
+| SLOs missing                               | `docs/operations/slo-definitions.md` added         | `2792ce4` |
+| DR runbook missing                         | `docs/operations/runbook.md` updated               | `2792ce4` |
+| `_delete/` dir present                     | Removed and orphan dirs consolidated               | `9ac824e` |
+| Trust portal not public                    | Published to GitHub Pages                          | `ae792d5` |
+| deriveKeyPbkdf2 not upstreamed             | Added to `@gtcx/crypto`                            | `ab3f544` |
+| Pen-test RFP missing                       | `docs/security/pen-test-rfp-2026.md` drafted       | `fbde990` |
+| `rust/gtcx-network/src/lib.rs` 490 LOC     | Split into error.rs, peer.rs, topic.rs, message.rs | `1af709f` |
+| `rust/gtcx-crypto/src/keystore.rs` 469 LOC | Split into keystore_types.rs + memory_keystore.rs  | `1af709f` |
 
 ### New / Remaining
 
@@ -204,8 +206,6 @@ Phase 2 skipped — repo has only `/docs/` documentation root. `_delete/` was re
 | SEC-007 | 3 `rustls-webpki` vulnerabilities (RUSTSEC-2026-0098/0099) | P1       | M2        |
 | SEC-008 | SLSA provenance not published                              | P1       | M2        |
 | SEC-009 | Pen-test vendor not selected                               | P1       | M2/M3     |
-| ARC-007 | `rust/gtcx-network/src/lib.rs` 490 LOC                     | P2       | M3        |
-| ARC-008 | `rust/gtcx-crypto/src/keystore.rs` 469 LOC                 | P2       | M3        |
 | RES-006 | Zimbabwe pre-submission email not sent                     | P2       | M2        |
 
 ---
