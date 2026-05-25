@@ -86,7 +86,7 @@ None of these conditions apply to `gtcx-core`.
 
 | Check                  | Frequency  | Owner              | Last Run   |
 | ---------------------- | ---------- | ------------------ | ---------- |
-| `cargo audit`          | Every push | CI                 | 2026-05-19 |
+| `cargo audit`          | Every push | CI                 | 2026-05-25 |
 | Upstream issue tracker | Weekly     | protocol-architect | —          |
 | `rustls` release notes | Weekly     | protocol-architect | —          |
 

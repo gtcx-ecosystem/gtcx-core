@@ -25,6 +25,20 @@ ignore = [
     # with rand::rng(). The unsoundness requires a specific custom logger
     # pattern that is not present in the codebase.
     "RUSTSEC-2026-0097",
+
+    # RUSTSEC-2026-0098: Name constraints for URI names were incorrectly accepted
+    # RUSTSEC-2026-0099: Name constraints were accepted for certificates asserting a wildcard name
+    # RUSTSEC-2026-0104: Reachable panic in certificate revocation list parsing
+    # Affected: rustls-webpki 0.101.7 via aws-smithy-http-client -> hyper-rustls -> rustls
+    # Justification: Transitive dependency of the AWS SDK for Rust. GTCX does not
+    # invoke rustls-webpki APIs directly; certificate validation is delegated to
+    # the AWS SDK HTTP client. AWS CA does not issue certificates matching the
+    # vulnerable patterns. Full threat model assessment in:
+    # docs/security/RUSTSEC-rustls-webpki-mitigation.md
+    # Remove when aws-smithy-http-client upgrades to rustls 0.23+ or aws-lc backend.
+    "RUSTSEC-2026-0098",
+    "RUSTSEC-2026-0099",
+    "RUSTSEC-2026-0104",
 ]
 
 

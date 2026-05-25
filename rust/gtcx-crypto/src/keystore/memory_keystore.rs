@@ -22,8 +22,8 @@ use std::sync::{Arc, Mutex};
 
 use crate::error::CryptoError;
 use crate::keystore::keystore_types::{Algorithm, KeyId, KeyState, KeyStore};
-use crate::Result;
 use crate::signing::{ed25519, p256};
+use crate::Result;
 
 // =============================================================================
 // STORED KEY MATERIAL
