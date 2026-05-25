@@ -1,5 +1,12 @@
 # @gtcx/services
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [ab3f544]
+  - @gtcx/crypto@3.1.0
+
 ## 1.0.0
 
 ### Major Changes

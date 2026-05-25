@@ -1,5 +1,78 @@
 # @gtcx/workproof
 
+## 1.0.0
+
+### Major Changes
+
+- 028e3d9: Trim public surface: `CompositeValue` is no longer re-exported from the
+  package index. The type still exists in the package internals as part of
+  the `PredicateValue` discriminated union — consumers needing the shape can
+  pattern-match `{ kind: 'composite' }` or import the underlying Zod schema.
+
+  Background: commit `12fb184` (2026-05-13) migrated workproof barrels from
+  `export *` to explicit named exports as part of an API minimization pass.
+  `CompositeValue` was previously re-exported only via the wildcard. This
+  changeset declares the resulting public-surface narrowing so the next
+  release is semver-correct.
+
+  **Migration**
+
+  If your code did:
+
+  ```ts
+  import type { CompositeValue } from '@gtcx/workproof';
+  ```
+
+  Either pattern-match on the discriminated union:
+
+  ```ts
+  import type { PredicateValue } from '@gtcx/workproof';
+  function handle(v: PredicateValue) {
+    if (v.kind === 'composite') {
+      // v is narrowed to the composite shape
+    }
+  }
+  ```
+
+  Or import the Zod schema for runtime validation:
+
+  ```ts
+  import { PredicateValueSchema } from '@gtcx/workproof';
+  ```
+
+### Minor Changes
+
+- aefba49: Add 9 entity-tier predicates and TradePass migration helper (ADR-012 Stage 0)
+
+  **`@gtcx/workproof`**
+  - New `EntityPredicateType` union with 9 predicates:
+    `EntityRegistered`, `SanctionsCleared`, `PepCleared`, `AdverseMediaCleared`,
+    `BeneficialOwnershipDisclosed`, `AccreditationHeld`, `EntityRecognized`,
+    `IssuedBy`, `OwnershipChain`
+  - `WORKPROOF_PREDICATES` expands from 38 to 47 entries
+  - `PredicateCategory` gains `'Entity'` (9 categories total)
+  - `WorkProofPredicateTypeSchema` and `PredicateCategorySchema` updated
+
+  **`@gtcx/verification`**
+  - New export path `@gtcx/verification/migration` with TradePass legacy ID aliases:
+    - `TRADEPASS_LEGACY_ID_ALIASES` — read-only mapping of legacy IDs to canonical PredicateURIs
+    - `resolveLegacyPredicateId(legacyId)` — forward lookup
+    - `findLegacyIdsForUri(uri)` — reverse lookup
+  - `corporate_registry` evidence type already present in `EvidenceType` union
+
+  **Tests**
+  - 18 new assertions in `packages/workproof/tests/entity.test.ts`
+  - Existing predicate tests updated for 47-count / 9-category
+
+  Unblocks gtcx-intelligence operator taxonomy spec and TradePass predicate reconciliation.
+
+### Patch Changes
+
+- Updated dependencies [ab3f544]
+- Updated dependencies [aefba49]
+  - @gtcx/crypto@3.1.0
+  - @gtcx/verification@3.1.0
+
 ## 0.1.3
 
 ### Patch Changes

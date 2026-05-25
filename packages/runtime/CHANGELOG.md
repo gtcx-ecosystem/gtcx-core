@@ -1,5 +1,13 @@
 # @gtcx/runtime
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [028e3d9]
+  - @gtcx/connectivity@0.5.0
+  - @gtcx/api-client@0.4.1
+
 ## 0.2.0
 
 ### Minor Changes
