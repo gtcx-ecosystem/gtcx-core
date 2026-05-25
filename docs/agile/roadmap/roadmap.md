@@ -12,10 +12,10 @@ review_cycle: 'on-change'
 # gtcx-core Roadmap
 
 > **Status:** Current
-> **Date:** 2026-05-10
-> **Owner:** Quality & Evidence Lead
+> **Date:** 2026-05-25
+> **Owner:** Protocol Architect
 
-**Status**: Sprints 0–6 complete. Repo in active development for Phases 4–7 cryptographic systems.
+**Status**: Sprints 0–6 complete. Phases 0–3 complete. M2 hardening complete. Active execution: M3 external validation + Phase 4 network layer.
 **Objective**: Production-ready protocol core for global south deployment — offline-first, government-grade identity, financial market infrastructure reliability.
 
 **Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](./engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan to close the customer-visible readiness gap before Zimbabwe/Ghana/Namibia/Botswana/DRC engagements land.
@@ -113,15 +113,15 @@ Depends on: Phase 6.
 
 The product/feature roadmap above tracks core capability delivery. In parallel, the repo is running a dedicated readiness program to close the remaining gap between strong code quality and fully defensible `10/10` trust, resilience, agentic governance, and enterprise adoption.
 
-| Sprint | Theme                          | Status    | Focus                                                                 |
-| ------ | ------------------------------ | --------- | --------------------------------------------------------------------- |
-| R1     | Trust Contracts and Governance | Completed | Trust matrix, package risk tiers, tier-aware completion rules         |
-| R2     | Global-South Resilience        | Completed | Constrained-environment profiles, offline/restart/clock-skew behavior |
-| R3     | Agentic Evidence               | Completed | Repeatable evidence, task playbooks, metadata-driven gate selection   |
-| R4     | Enterprise Supportability      | Completed | Support policy, consumer checklist, release artifact standard         |
-| R5     | External Validation            | Blocked   | Pen test, downstream validation, final signoff evidence               |
+| Sprint | Theme                          | Status          | Focus                                                                 |
+| ------ | ------------------------------ | --------------- | --------------------------------------------------------------------- |
+| R1     | Trust Contracts and Governance | Completed       | Trust matrix, package risk tiers, tier-aware completion rules         |
+| R2     | Global-South Resilience        | Completed       | Constrained-environment profiles, offline/restart/clock-skew behavior |
+| R3     | Agentic Evidence               | Completed       | Repeatable evidence, task playbooks, metadata-driven gate selection   |
+| R4     | Enterprise Supportability      | Completed       | Support policy, consumer checklist, release artifact standard         |
+| R5     | External Validation            | **In Progress** | Pen-test RFP drafted; vendor selection active; SOC 2 prep complete    |
 
-Detailed plan: [10-10-readiness-sprint-roadmap.md](./10-10-readiness-sprint-roadmap.md)
+Detailed plan: [10-10-roadmap-2026-05-25.md](../../audit/10-10-roadmap-2026-05-25.md) — honest bank-grade baseline (8.8/10)
 
 ---
 
@@ -144,12 +144,13 @@ Detailed plan: [10-10-readiness-sprint-roadmap.md](./10-10-readiness-sprint-road
 
 ## Risk Register
 
-| ID  | Risk                             | Likelihood | Impact | Mitigation                                     |
-| --- | -------------------------------- | ---------- | ------ | ---------------------------------------------- |
-| R1  | Rust crypto expertise            | High       | High   | Cross-train; specialized contractors           |
-| R2  | arkworks API stability           | Medium     | Medium | Pin exact versions; thin abstraction layer     |
-| R3  | libp2p breaking changes          | Medium     | Medium | Pin to specific release for Phase 4            |
-| R4  | Regulatory requirements shifting | Low        | High   | Quarterly tracking; configurable policy layers |
+| ID  | Risk                             | Likelihood | Impact | Mitigation                                           |
+| --- | -------------------------------- | ---------- | ------ | ---------------------------------------------------- |
+| R1  | Rust crypto expertise            | High       | High   | Cross-train; specialized contractors                 |
+| R2  | arkworks API stability           | Medium     | Medium | Pin exact versions; thin abstraction layer           |
+| R3  | libp2p breaking changes          | Medium     | Medium | Pin to specific release for Phase 4                  |
+| R4  | Regulatory requirements shifting | Low        | High   | Quarterly tracking; configurable policy layers       |
+| R5  | External vendor delays           | Medium     | High   | RFP drafted; 5-vendor longlist; select by 2026-05-30 |
 
 ---
 
