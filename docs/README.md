@@ -1,7 +1,7 @@
 # Documentation
 
-**Last updated:** 2026-05-11
-**Latest synthesis:** [`audit/master-audit-2026-05-11.md`](./audit/master-audit-2026-05-11.md)
+**Last updated:** 2026-05-25
+**Latest synthesis:** [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md) (composite 9.5/10)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
@@ -22,11 +22,12 @@
 
 ## §2 Roadmap & Plans
 
-| Document                                                                                           | Purpose                                                                                         |
-| -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [`agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md)                                           | Current delivery roadmap                                                                        |
-| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                             | Bank-grade readiness roadmap                                                                    |
-| [`release/production-readiness-10-10-roadmap.md`](./release/production-readiness-10-10-roadmap.md) | ~~Release-grade readiness plan~~ (deprecated — superseded by `audit/remediation-2026-05-11.md`) |
+| Document                                                                                                                               | Purpose                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [`agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md`](./agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) | **Active** sovereign-state engagement readiness — 4 sprints (Zimbabwe → Ghana → Namibia → Botswana → DRC) |
+| [`agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md)                                                                               | Current delivery roadmap                                                                                  |
+| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                                                                 | Bank-grade readiness roadmap                                                                              |
+| [`release/production-readiness-10-10-roadmap.md`](./release/production-readiness-10-10-roadmap.md)                                     | ~~Release-grade readiness plan~~ (deprecated — superseded by `audit/remediation-2026-05-11.md`)           |
 
 ## §3 ADRs
 
@@ -45,6 +46,7 @@
 | [`architecture/adoption-model.md`](./architecture/adoption-model.md)               | Protocol 13 Tier 2 adoption funnel — workspace-to-npm-to-external paths with Mermaid sequence diagrams                        |
 | [`architecture/overview.md`](./architecture/overview.md)                           | Module-level architecture overview (companion to system-overview.md)                                                          |
 | [`architecture/trust-contract-matrix.md`](./architecture/trust-contract-matrix.md) | Trust boundary matrix across core surfaces                                                                                    |
+| [`architecture/structural-debt.md`](./architecture/structural-debt.md)             | Tracked structural debt for `docs/` (21 subdirs → 9 target) — deferred consolidation plan                                     |
 | [`devops/overview.md`](./devops/overview.md)                                       | Entry point into CI/CD and operational engineering docs                                                                       |
 | [`stack/tech-stack.md`](./stack/tech-stack.md)                                     | Stack rationale and constraints                                                                                               |
 
@@ -76,15 +78,18 @@
 | [`security/vulnerability-disclosure.md`](./security/vulnerability-disclosure.md) | **Protocol 1 v2.0 P2** — VDP policy per CERT CVD + ISO/IEC 29147:2018 |
 | [`security/trust-center.md`](./security/trust-center.md)                         | Redirect to canonical `governance/trust-portal.md`                    |
 | [`security/pen-test-rfp-2026.md`](./security/pen-test-rfp-2026.md)               | Pen test RFP + vendor outreach (Sprint 4.1)                           |
+| [`security/pen-test-engagement-log.md`](./security/pen-test-engagement-log.md)   | Append-only log of pen-test vendor outreach, SoW, kickoff state       |
 | [`security/ark-upstream-tracking.md`](./security/ark-upstream-tracking.md)       | Tracker for arkworks 0.5 migration + ignored advisories               |
 
 ## §8 Compliance
 
-| Document                                                                               | Purpose                                  |
-| -------------------------------------------------------------------------------------- | ---------------------------------------- |
-| [`compliance/soc2-readiness.md`](./compliance/soc2-readiness.md)                       | SOC 2 readiness gap analysis             |
-| [`compliance/compliance-requirements.md`](./compliance/compliance-requirements.md)     | Compliance obligations and scope         |
-| [`compliance/spec-to-code-traceability.md`](./compliance/spec-to-code-traceability.md) | Traceability from docs to implementation |
+| Document                                                                               | Purpose                                                                                   |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| [`compliance/soc2-readiness.md`](./compliance/soc2-readiness.md)                       | SOC 2 readiness gap analysis                                                              |
+| [`compliance/soc2-readiness-prep.md`](./compliance/soc2-readiness-prep.md)             | SOC 2 Type 1 engagement prep — closes the remaining gap before CPA fieldwork (Sprint 4.2) |
+| [`compliance/soc2-engagement-log.md`](./compliance/soc2-engagement-log.md)             | Append-only log of SOC 2 CPA outreach, contract, and kickoff state                        |
+| [`compliance/compliance-requirements.md`](./compliance/compliance-requirements.md)     | Compliance obligations and scope                                                          |
+| [`compliance/spec-to-code-traceability.md`](./compliance/spec-to-code-traceability.md) | Traceability from docs to implementation                                                  |
 
 ## §9 Governance
 
@@ -95,29 +100,33 @@
 
 ## §10 Audit
 
-| Document                                                                                   | Purpose                                 |
-| ------------------------------------------------------------------------------------------ | --------------------------------------- |
-| [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)                       | Latest full forensic audit              |
-| [`audit/auto-dev-state.md`](./audit/auto-dev-state.md)                                     | Rolling posture and session state       |
-| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                     | Current 10/10 remediation plan          |
-| [`audit/remediation-10-10.md`](./audit/remediation-10-10.md)                               | ~~Prior remediation plan~~ (deprecated) |
-| [`audit/gtcx-ecosystem-rating-2026-05-08.md`](./audit/gtcx-ecosystem-rating-2026-05-08.md) | Prior ecosystem-level assessment        |
+| Document                                                                                           | Purpose                                                                              |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md) | **Latest** internal completion audit — composite 9.5/10, 24/24 items                 |
+| [`audit/fuzz-campaign-evidence-2026-05-21.md`](./audit/fuzz-campaign-evidence-2026-05-21.md)       | 500K+ libFuzzer iterations across 6 primitives, 0 crashes / panics / ASAN violations |
+| [`audit/docs-standard-compliance-2026-05-22.md`](./audit/docs-standard-compliance-2026-05-22.md)   | Protocol 1 v2.0 documentation compliance audit                                       |
+| [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)                               | Prior full forensic audit                                                            |
+| [`audit/auto-dev-state.md`](./audit/auto-dev-state.md)                                             | Rolling posture and session state                                                    |
+| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                             | Prior 10/10 remediation plan                                                         |
+| [`audit/remediation-10-10.md`](./audit/remediation-10-10.md)                                       | ~~Prior remediation plan~~ (deprecated)                                              |
+| [`audit/gtcx-ecosystem-rating-2026-05-08.md`](./audit/gtcx-ecosystem-rating-2026-05-08.md)         | Prior ecosystem-level assessment                                                     |
 
 ## §11 Repo-Specific Sections
 
-| Document                                                                                     | Purpose                                                                   |
-| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [`gtm/README.md`](./gtm/README.md)                                                           | GTM and regulator-facing packet index                                     |
-| [`gtm/sandbox-intro-email-template.md`](./gtm/sandbox-intro-email-template.md)               | **Canonical** sandbox intro email template + per-country parameter table  |
-| [`gtm/sandbox-intro-email-template.fr.md`](./gtm/sandbox-intro-email-template.fr.md)         | French variant for Francophone targets (DRC primary)                      |
-| [`release/README.md`](./release/README.md)                                                   | Release artifact set                                                      |
-| [`devops/release-mgmt/npm-publish-runbook.md`](./devops/release-mgmt/npm-publish-runbook.md) | Operational runbook for first-publish to npm + post-publish verification  |
-| [`operations/trust-portal-hosting.md`](./operations/trust-portal-hosting.md)                 | GitHub Pages hosting runbook for the trust portal                         |
-| [`testing/README.md`](./testing/README.md)                                                   | Test policy entrypoint                                                    |
-| [`agile/engagement-log/dashboard.md`](./agile/engagement-log/dashboard.md)                   | Cross-jurisdiction status across all 5 active sovereign-state engagements |
-| [`agile/engagement-log/playbook.md`](./agile/engagement-log/playbook.md)                     | Generic sovereign-state engagement playbook (7-phase flow)                |
-| [`agile/cross-repo-coordination.md`](./agile/cross-repo-coordination.md)                     | Active coordination threads with other gtcx-ecosystem repos               |
-| [`quality/10-10-remediation-tracker.md`](./quality/10-10-remediation-tracker.md)             | Quality-tracker view of remediation work                                  |
+| Document                                                                                     | Purpose                                                                               |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [`gtm/README.md`](./gtm/README.md)                                                           | GTM and regulator-facing packet index                                                 |
+| [`gtm/sandbox-intro-email-template.md`](./gtm/sandbox-intro-email-template.md)               | **Canonical** sandbox intro email template + per-country parameter table              |
+| [`gtm/sandbox-intro-email-template.fr.md`](./gtm/sandbox-intro-email-template.fr.md)         | French variant for Francophone targets (DRC primary)                                  |
+| [`gtm/renders/README.md`](./gtm/renders/README.md)                                           | Send-ready per-country renders index (Zimbabwe / Ghana / Namibia / Botswana / DRC-FR) |
+| [`release/README.md`](./release/README.md)                                                   | Release artifact set                                                                  |
+| [`devops/release-mgmt/npm-publish-runbook.md`](./devops/release-mgmt/npm-publish-runbook.md) | Operational runbook for first-publish to npm + post-publish verification              |
+| [`operations/trust-portal-hosting.md`](./operations/trust-portal-hosting.md)                 | GitHub Pages hosting runbook for the trust portal                                     |
+| [`testing/README.md`](./testing/README.md)                                                   | Test policy entrypoint                                                                |
+| [`agile/engagement-log/dashboard.md`](./agile/engagement-log/dashboard.md)                   | Cross-jurisdiction status across all 5 active sovereign-state engagements             |
+| [`agile/engagement-log/playbook.md`](./agile/engagement-log/playbook.md)                     | Generic sovereign-state engagement playbook (7-phase flow)                            |
+| [`agile/cross-repo-coordination.md`](./agile/cross-repo-coordination.md)                     | Active coordination threads with other gtcx-ecosystem repos                           |
+| [`quality/10-10-remediation-tracker.md`](./quality/10-10-remediation-tracker.md)             | Quality-tracker view of remediation work                                              |
 
 ## §12 Onboarding & Roles
 

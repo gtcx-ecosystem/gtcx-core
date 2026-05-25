@@ -253,3 +253,63 @@ None. Every raised issue has a home. Items that need long-lead external work (#1
 **Sprint 4 starts the long-lead external compliance work** that will complete _during_ the engagement window. Pen test and SOC 2 are evidence customers want eventually; engagement contracts signed during this sprint mean we can credibly say "third-party attestation in progress, scheduled completion <date>" rather than "we haven't started."
 
 **Total time to first credible customer engagement: 3 weeks.** External attestation completion: 4–10 weeks after Sprint 4 kickoff.
+
+---
+
+## Phase 5 — Status (as of 2026-05-25)
+
+Per-task completion against the plan above. Updated on every meaningful state change.
+
+### Sprint 1 — Front-door truth
+
+| #   | Task                                              | Status          | Evidence                                      |
+| --- | ------------------------------------------------- | --------------- | --------------------------------------------- |
+| 1.1 | Clean working tree (turbo bump + brace-expansion) | ✅ Done         | git history                                   |
+| 1.2 | README alignment to 9.5/10 + 19/19 packages       | ✅ Done         | `README.md` reflects composite 9.5/10         |
+| 1.3 | `TURBO_TOKEN` + `TURBO_TEAM` at org               | ✅ Done         | `pnpm ops:check` shows pass                   |
+| 1.4 | `OPENAI_API_KEY` at org                           | ⏸️ User-blocked | Awaiting org admin (mint + add as org secret) |
+| 1.5 | Trust portal refresh (2026-05-21 audit + fuzz)    | ✅ Done         | `docs/governance/trust-portal.md` updated     |
+
+### Sprint 2 — Release pipeline proven
+
+| #   | Task                                      | Status                       | Evidence                                                                                                                                                    |
+| --- | ----------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done                      | `packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                                             |
+| 2.2 | Changesets for foundation packages        | ✅ Done                      | 6 changeset entries staged (connectivity, crypto, crypto-native, security, sync, workproof); linked group covers types/identity/verification/domain/schemas |
+| 2.3 | First `release.yml` end-to-end publish    | ⏸️ CI-blocked + user-blocked | CI failures iterating (last: rust fmt — fixed local in `bbb7f37`, awaiting push). After CI green: user fires `gh workflow run release.yml`                  |
+| 2.4 | Remaining 17 packages published           | ⏸️ Blocked on 2.3            | Cascades from 2.3                                                                                                                                           |
+| 2.5 | Trust portal "Published versions" section | ⏸️ Blocked on 2.3            | Will reflect `npm view` resolvable URLs                                                                                                                     |
+
+### Sprint 3 — Jurisdiction readiness
+
+| #   | Task                                       | Status                  | Evidence                                                                                                                                                                                       |
+| --- | ------------------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 3.1 | 5 jurisdiction fixtures + integration test | ✅ Done                 | `tests/integration/fixtures/jurisdiction-fixtures.ts` + `tests/integration/jurisdictions.test.ts` (21 tests, ZW/GH/NA/BW/CD)                                                                   |
+| 3.2 | Trust portal at external regulator URL     | ⏸️ User-blocked         | Awaiting repo admin to enable GitHub Pages — see [hosting runbook](../../operations/trust-portal-hosting.md)                                                                                   |
+| 3.3 | Zimbabwe sandbox email sent                | ⏸️ Blocked on 2.3 + 3.2 | Send-ready render staged at [`docs/gtm/renders/zimbabwe-2026.md`](../../gtm/renders/zimbabwe-2026.md). Also pre-staged Ghana/Namibia/Botswana/DRC (FR) renders for parallel send post-Zimbabwe |
+
+### Sprint 4 — External compliance kickoff
+
+| #   | Task                                       | Status     | Evidence                                                                                                                                                                        |
+| --- | ------------------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4.1 | Pen test RFP drafted + vendor longlist     | ✅ Drafted | [`docs/security/pen-test-rfp-2026.md`](../../security/pen-test-rfp-2026.md) + [engagement log](../../security/pen-test-engagement-log.md). **User-blocked:** vendor outreach    |
+| 4.2 | SOC 2 Type 1 readiness prep + CPA criteria | ✅ Drafted | [`docs/compliance/soc2-readiness-prep.md`](../../compliance/soc2-readiness-prep.md) + [engagement log](../../compliance/soc2-engagement-log.md). **User-blocked:** CPA outreach |
+| 4.3 | ark-\* upstream advisory tracker           | ✅ Done    | [`docs/security/ark-upstream-tracking.md`](../../security/ark-upstream-tracking.md)                                                                                             |
+
+### Aggregate status
+
+| State                | Count | Notes                                                                                                                |
+| -------------------- | ----- | -------------------------------------------------------------------------------------------------------------------- |
+| ✅ Done (or drafted) | 11    | 1.1, 1.2, 1.3, 1.5, 2.1, 2.2, 3.1, 4.1 (draft), 4.2 (draft), 4.3, plus pre-staged renders for 4 additional countries |
+| ⏸️ User-blocked      | 4     | 1.4 (OPENAI_API_KEY), 3.2 (Pages), 4.1 vendor outreach, 4.2 CPA outreach                                             |
+| ⏸️ CI + user-blocked | 1     | 2.3 (publish) — CI iterating, fix in `bbb7f37` awaiting push; then user fires workflow                               |
+| ⏸️ Cascade-blocked   | 3     | 2.4, 2.5, 3.3 — all unblock from 2.3 + 3.2                                                                           |
+
+### Critical path right now
+
+```
+[push bbb7f37] → [CI green] → [fire release.yml] → [enable Pages] → [send Zimbabwe email]
+   ↑ user         ↑ automated   ↑ user             ↑ user           ↑ user
+```
+
+Everything else either parallels this path (vendor outreach) or unblocks from it (Sprint 2.4/2.5/3.3).
