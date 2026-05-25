@@ -2,8 +2,9 @@
  * Predicate Registry
  *
  * Aggregates WorkProof predicate definitions from category modules.
- * To add a predicate, define it in the appropriate category file under
- * `definitions/` and re-export it here.
+ * Currently 47 predicates across 9 categories. To add a predicate, define
+ * it in the appropriate category file under `definitions/` and re-export
+ * it here.
  */
 
 import type { PredicateDefinition } from '@gtcx/verification';
@@ -22,6 +23,17 @@ import {
   ViolationFree,
   LicenseValid,
 } from './definitions/compliance';
+import {
+  EntityRegistered,
+  SanctionsCleared,
+  PepCleared,
+  AdverseMediaCleared,
+  BeneficialOwnershipDisclosed,
+  AccreditationHeld,
+  EntityRecognized,
+  IssuedBy,
+  OwnershipChain,
+} from './definitions/entity';
 import {
   PaymentReceived,
   LoanDisbursed,
@@ -66,7 +78,7 @@ import type { WorkProofPredicateType } from './types';
 
 export { WORKPROOF_PREDICATE_URIS } from './uri';
 
-/** Full predicate definitions for all 38 WorkProof predicate types */
+/** Full predicate definitions for all 47 WorkProof predicate types */
 export const WORKPROOF_PREDICATES: Record<WorkProofPredicateType, PredicateDefinition> = {
   IdentityVerified,
   RoleHeld,
@@ -106,4 +118,13 @@ export const WORKPROOF_PREDICATES: Record<WorkProofPredicateType, PredicateDefin
   CooperativeMembership,
   CommunityContribution,
   MentorshipReceived,
+  EntityRegistered,
+  SanctionsCleared,
+  PepCleared,
+  AdverseMediaCleared,
+  BeneficialOwnershipDisclosed,
+  AccreditationHeld,
+  EntityRecognized,
+  IssuedBy,
+  OwnershipChain,
 };

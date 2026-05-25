@@ -25,6 +25,11 @@
       "types": "./dist/proofs/index.d.ts",
       "import": "./dist/proofs/index.mjs",
       "require": "./dist/proofs/index.js"
+    },
+    "./migration": {
+      "types": "./dist/migration/index.d.ts",
+      "import": "./dist/migration/index.mjs",
+      "require": "./dist/migration/index.js"
     }
   },
   "scripts": {

@@ -25,6 +25,7 @@ export {
   BooleanValueSchema,
   CommunityPredicateType,
   CompliancePredicateType,
+  EntityPredicateType,
   EnumValue,
   EnumValueSchema,
   FinancialPredicateType,

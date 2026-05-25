@@ -143,6 +143,13 @@ export {
   migrateLegacyLotData,
 } from './types';
 
+// Migration helpers for cross-repo predicate reconciliation (ADR-012)
+export {
+  TRADEPASS_LEGACY_ID_ALIASES,
+  findLegacyIdsForUri,
+  resolveLegacyPredicateId,
+} from './migration';
+
 // QR Code generation
 export {
   QRCodeConfig,

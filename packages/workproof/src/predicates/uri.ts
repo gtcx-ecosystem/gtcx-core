@@ -1,6 +1,6 @@
 // ============================================================================
 // PREDICATE REGISTRY
-// Canonical WorkProof predicate definitions (38 predicates across 8 categories)
+// Canonical WorkProof predicate definitions (47 predicates across 9 categories)
 // Each entry is a full PredicateDefinition from @gtcx/verification
 // ============================================================================
 
@@ -12,7 +12,7 @@ function uri(category: string, name: string): PredicateURI {
   return `tradepass://workproof/${category}/${name}` as PredicateURI;
 }
 
-/** Canonical URIs for all 38 WorkProof predicate types */
+/** Canonical URIs for all 47 WorkProof predicate types */
 export const WORKPROOF_PREDICATE_URIS: Record<WorkProofPredicateType, PredicateURI> = {
   // Identity
   IdentityVerified: uri('identity', 'verified'),
@@ -60,4 +60,14 @@ export const WORKPROOF_PREDICATE_URIS: Record<WorkProofPredicateType, PredicateU
   CooperativeMembership: uri('community', 'cooperative-membership'),
   CommunityContribution: uri('community', 'community-contribution'),
   MentorshipReceived: uri('community', 'mentorship-received'),
+  // Entity
+  EntityRegistered: uri('entity', 'registered'),
+  SanctionsCleared: uri('entity', 'sanctions-cleared'),
+  PepCleared: uri('entity', 'pep-cleared'),
+  AdverseMediaCleared: uri('entity', 'adverse-media-cleared'),
+  BeneficialOwnershipDisclosed: uri('entity', 'beneficial-ownership-disclosed'),
+  AccreditationHeld: uri('entity', 'accreditation-held'),
+  EntityRecognized: uri('entity', 'recognized'),
+  IssuedBy: uri('entity', 'issued-by'),
+  OwnershipChain: uri('entity', 'ownership-chain'),
 };

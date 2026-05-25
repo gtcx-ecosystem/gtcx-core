@@ -1,7 +1,7 @@
 // ============================================================================
 // PREDICATE TYPES
-// Full predicate taxonomy for WorkProof v2.1
-// 8 categories, 40 predicate types, 7 value variants
+// Full predicate taxonomy for WorkProof v2.2
+// 9 categories, 47 predicate types, 7 value variants
 // ============================================================================
 
 // ─── Category-Grouped Predicate Types ─────────────────────────────────────────
@@ -60,7 +60,18 @@ export type CommunityPredicateType =
   | 'CommunityContribution'
   | 'MentorshipReceived';
 
-/** Union of all 40 WorkProof predicate types */
+export type EntityPredicateType =
+  | 'EntityRegistered'
+  | 'SanctionsCleared'
+  | 'PepCleared'
+  | 'AdverseMediaCleared'
+  | 'BeneficialOwnershipDisclosed'
+  | 'AccreditationHeld'
+  | 'EntityRecognized'
+  | 'IssuedBy'
+  | 'OwnershipChain';
+
+/** Union of all 47 WorkProof predicate types */
 export type WorkProofPredicateType =
   | IdentityPredicateType
   | ProductionPredicateType
@@ -69,7 +80,8 @@ export type WorkProofPredicateType =
   | FinancialPredicateType
   | LearningPredicateType
   | PerformancePredicateType
-  | CommunityPredicateType;
+  | CommunityPredicateType
+  | EntityPredicateType;
 
 // ─── Predicate Value Variants (discriminated by 'kind') ───────────────────────
 
@@ -137,7 +149,8 @@ export type PredicateCategory =
   | 'Financial'
   | 'Learning'
   | 'Performance'
-  | 'Community';
+  | 'Community'
+  | 'Entity';
 
 /** Maps each predicate type to its category */
 export const PREDICATE_CATEGORIES: Record<WorkProofPredicateType, PredicateCategory> = {
@@ -179,4 +192,13 @@ export const PREDICATE_CATEGORIES: Record<WorkProofPredicateType, PredicateCateg
   CooperativeMembership: 'Community',
   CommunityContribution: 'Community',
   MentorshipReceived: 'Community',
+  EntityRegistered: 'Entity',
+  SanctionsCleared: 'Entity',
+  PepCleared: 'Entity',
+  AdverseMediaCleared: 'Entity',
+  BeneficialOwnershipDisclosed: 'Entity',
+  AccreditationHeld: 'Entity',
+  EntityRecognized: 'Entity',
+  IssuedBy: 'Entity',
+  OwnershipChain: 'Entity',
 };

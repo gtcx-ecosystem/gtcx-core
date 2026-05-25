@@ -8,6 +8,7 @@ export default defineConfig({
     'certificates/index': 'src/certificates/index.ts',
     'qr/index': 'src/qr/index.ts',
     'proofs/index': 'src/proofs/index.ts',
+    'migration/index': 'src/migration/index.ts',
   },
   external: ['@gtcx/ai', '@gtcx/crypto', '@gtcx/types', 'zod'],
 });

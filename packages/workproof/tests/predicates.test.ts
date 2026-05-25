@@ -21,8 +21,8 @@ import {
 describe('WorkProofPredicateTypeSchema', () => {
   const ALL_TYPES = WorkProofPredicateTypeSchema.options;
 
-  it('has exactly 38 predicate types', () => {
-    expect(ALL_TYPES).toHaveLength(38);
+  it('has exactly 47 predicate types', () => {
+    expect(ALL_TYPES).toHaveLength(47);
   });
 
   it('parses every predicate type and returns the same value', () => {
@@ -49,8 +49,8 @@ describe('WorkProofPredicateTypeSchema', () => {
 // ---------------------------------------------------------------------------
 
 describe('PredicateCategorySchema', () => {
-  it('has exactly 8 categories', () => {
-    expect(PredicateCategorySchema.options).toHaveLength(8);
+  it('has exactly 9 categories', () => {
+    expect(PredicateCategorySchema.options).toHaveLength(9);
   });
 
   // Expected counts per category from the enum grouping
@@ -63,6 +63,7 @@ describe('PredicateCategorySchema', () => {
     Learning: 5,
     Performance: 4,
     Community: 5,
+    Entity: 9,
   };
 
   // Map each predicate type to its category based on position in the enum
@@ -115,6 +116,20 @@ describe('PredicateCategorySchema', () => {
         'CooperativeMembership',
         'CommunityContribution',
         'MentorshipReceived',
+      ],
+    ],
+    [
+      'Entity',
+      [
+        'EntityRegistered',
+        'SanctionsCleared',
+        'PepCleared',
+        'AdverseMediaCleared',
+        'BeneficialOwnershipDisclosed',
+        'AccreditationHeld',
+        'EntityRecognized',
+        'IssuedBy',
+        'OwnershipChain',
       ],
     ],
   ];
@@ -412,8 +427,8 @@ describe('PredicateValueSchema (composite)', () => {
 describe('WORKPROOF_PREDICATE_URIS', () => {
   const uris = Object.values(WORKPROOF_PREDICATE_URIS);
 
-  it('has 38 URIs', () => {
-    expect(uris).toHaveLength(38);
+  it('has 47 URIs', () => {
+    expect(uris).toHaveLength(47);
   });
 
   it('every URI starts with "tradepass://workproof/"', () => {
@@ -437,8 +452,8 @@ describe('WORKPROOF_PREDICATE_URIS', () => {
 describe('WORKPROOF_PREDICATES', () => {
   const entries = Object.entries(WORKPROOF_PREDICATES);
 
-  it('has 38 entries', () => {
-    expect(entries).toHaveLength(38);
+  it('has 47 entries', () => {
+    expect(entries).toHaveLength(47);
   });
 
   it('each definition has all required fields (uri, name, description, domain, version)', () => {
