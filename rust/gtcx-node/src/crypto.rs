@@ -46,8 +46,8 @@ pub fn generate_key_pair() -> JsKeyPair {
 #[napi]
 pub fn sign(message: Vec<u8>, private_key_hex: String) -> napi::Result<String> {
     let key_bytes = hex::decode(&private_key_hex).map_err(map_hex_err)?;
-    let private_key = gtcx_crypto::signing::ed25519::PrivateKey::from_bytes(&key_bytes)
-        .map_err(map_hex_err)?;
+    let private_key =
+        gtcx_crypto::signing::ed25519::PrivateKey::from_bytes(&key_bytes).map_err(map_hex_err)?;
 
     let signature = gtcx_crypto::sign(&message, &private_key);
     Ok(signature.to_hex())
@@ -73,10 +73,10 @@ pub fn verify(
     let sig_bytes = hex::decode(&signature_hex).map_err(map_hex_err)?;
     let pk_bytes = hex::decode(&public_key_hex).map_err(map_hex_err)?;
 
-    let signature = gtcx_crypto::signing::ed25519::Signature::from_bytes(&sig_bytes)
-        .map_err(map_hex_err)?;
-    let public_key = gtcx_crypto::signing::ed25519::PublicKey::from_bytes(&pk_bytes)
-        .map_err(map_hex_err)?;
+    let signature =
+        gtcx_crypto::signing::ed25519::Signature::from_bytes(&sig_bytes).map_err(map_hex_err)?;
+    let public_key =
+        gtcx_crypto::signing::ed25519::PublicKey::from_bytes(&pk_bytes).map_err(map_hex_err)?;
 
     Ok(gtcx_crypto::verify(&signature, &message, &public_key))
 }
@@ -119,8 +119,8 @@ pub fn blake3_hash(data: Vec<u8>) -> String {
 #[napi]
 pub fn derive_child_key(parent_key_hex: String, index: u32) -> napi::Result<String> {
     let key_bytes = hex::decode(&parent_key_hex).map_err(map_hex_err)?;
-    let parent = gtcx_crypto::signing::ed25519::PrivateKey::from_bytes(&key_bytes)
-        .map_err(map_hex_err)?;
+    let parent =
+        gtcx_crypto::signing::ed25519::PrivateKey::from_bytes(&key_bytes).map_err(map_hex_err)?;
 
     let child = gtcx_crypto::keys::derive_child_key(&parent, index).map_err(map_hex_err)?;
     Ok(hex::encode(child.as_bytes()))
@@ -132,8 +132,8 @@ pub fn derive_child_key(parent_key_hex: String, index: u32) -> napi::Result<Stri
 #[napi]
 pub fn derive_purpose_key(master_key_hex: String, purpose: String) -> napi::Result<String> {
     let key_bytes = hex::decode(&master_key_hex).map_err(map_hex_err)?;
-    let master = gtcx_crypto::signing::ed25519::PrivateKey::from_bytes(&key_bytes)
-        .map_err(map_hex_err)?;
+    let master =
+        gtcx_crypto::signing::ed25519::PrivateKey::from_bytes(&key_bytes).map_err(map_hex_err)?;
 
     let derived = gtcx_crypto::keys::derive_purpose_key(&master, &purpose).map_err(map_hex_err)?;
     Ok(hex::encode(derived.as_bytes()))

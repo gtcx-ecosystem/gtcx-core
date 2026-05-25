@@ -1,22 +1,21 @@
 #[cfg(test)]
 mod tests {
-    use crate::commitment::{commit, generate_proof, prove_and_verify, verify_proof};
     use crate::bulletproofs::{bulletproofs_prove_amount_range, bulletproofs_verify_amount_range};
+    use crate::commitment::{commit, generate_proof, prove_and_verify, verify_proof};
     use crate::error::ZkpError;
     use crate::groth16::{
-        groth16_generate_keys, groth16_prove_gci_threshold, groth16_verify,
-        sample_asset_ownership, sample_location_region,
-        AssetOwnershipCircuit, LocationRegionCircuit,
+        groth16_generate_keys, groth16_prove_gci_threshold, groth16_verify, sample_asset_ownership,
+        sample_location_region, AssetOwnershipCircuit, LocationRegionCircuit,
     };
     use crate::schnorr::{
         schnorr_attribute_hash, schnorr_prove_identity_attribute, schnorr_verify_identity_attribute,
     };
     use crate::types::{
-        CircuitType, Groth16CircuitType, MAX_WITNESS_SIZE, Proof, PublicInputs, Witness,
-        DIGEST_BYTES,
+        CircuitType, Groth16CircuitType, Proof, PublicInputs, Witness, DIGEST_BYTES,
+        MAX_WITNESS_SIZE,
     };
     use ark_bn254::Fr;
-    use ark_relations::r1cs::{ConstraintSystem, ConstraintSynthesizer};
+    use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystem};
 
     fn test_salt() -> [u8; 32] {
         let mut salt = [0u8; 32];

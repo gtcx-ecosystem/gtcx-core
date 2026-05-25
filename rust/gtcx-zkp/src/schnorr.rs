@@ -1,7 +1,9 @@
 //! Schnorr identity attribute proofs.
 
 use crate::error::{Result, ZkpError};
-use crate::types::{COMMITMENT_BYTES, DIGEST_BYTES, ristretto_point_from_bytes, SchnorrIdentityProofBundle, zk_rng};
+use crate::types::{
+    ristretto_point_from_bytes, zk_rng, SchnorrIdentityProofBundle, COMMITMENT_BYTES, DIGEST_BYTES,
+};
 use curve25519_dalek::constants::RISTRETTO_BASEPOINT_POINT;
 use curve25519_dalek::ristretto::RistrettoPoint;
 use curve25519_dalek::scalar::Scalar;

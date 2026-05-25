@@ -1,7 +1,7 @@
 //! Bulletproofs amount range proofs.
 
 use crate::error::{map_proof_system_error, Result, ZkpError};
-use crate::types::{BulletproofsRangeProofBundle, COMMITMENT_BYTES, ristretto_point_from_bytes};
+use crate::types::{ristretto_point_from_bytes, BulletproofsRangeProofBundle, COMMITMENT_BYTES};
 use bulletproofs::{BulletproofGens, PedersenGens, RangeProof};
 use curve25519_dalek::scalar::Scalar;
 use merlin::Transcript;

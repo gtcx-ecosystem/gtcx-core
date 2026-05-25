@@ -135,8 +135,7 @@ fn test_derive_purpose_key_different_purposes() {
 fn test_zkp_commit_prove_verify_roundtrip() {
     let salt = "ab".repeat(32); // 32 bytes = 64 hex chars
     let result =
-        zkp_commit_and_prove("compliance".to_string(), b"secret-witness".to_vec(), salt)
-            .unwrap();
+        zkp_commit_and_prove("compliance".to_string(), b"secret-witness".to_vec(), salt).unwrap();
 
     assert_eq!(result.circuit, "compliance");
     assert_eq!(result.commitment.len(), 64); // 32 bytes hex
@@ -154,8 +153,7 @@ fn test_zkp_commit_prove_verify_roundtrip() {
 #[test]
 fn test_zkp_verify_tampered_proof_data_fails() {
     let salt = "cd".repeat(32);
-    let result =
-        zkp_commit_and_prove("provenance".to_string(), b"witness".to_vec(), salt).unwrap();
+    let result = zkp_commit_and_prove("provenance".to_string(), b"witness".to_vec(), salt).unwrap();
 
     // Tamper with proof data (replace with zeros — will fail trivial proof check)
     let tampered_proof = "00".repeat(64); // 64 bytes of zeros
@@ -167,10 +165,8 @@ fn test_zkp_verify_tampered_proof_data_fails() {
 fn test_zkp_different_witnesses_produce_different_proofs() {
     let salt = "ef".repeat(32);
     let result1 =
-        zkp_commit_and_prove("quality".to_string(), b"witness-a".to_vec(), salt.clone())
-            .unwrap();
-    let result2 =
-        zkp_commit_and_prove("quality".to_string(), b"witness-b".to_vec(), salt).unwrap();
+        zkp_commit_and_prove("quality".to_string(), b"witness-a".to_vec(), salt.clone()).unwrap();
+    let result2 = zkp_commit_and_prove("quality".to_string(), b"witness-b".to_vec(), salt).unwrap();
 
     assert_ne!(result1.commitment, result2.commitment);
     assert_ne!(result1.proof_data, result2.proof_data);
@@ -255,8 +251,7 @@ fn test_groth16_gci_threshold_roundtrip() {
     assert!(!keys.verifying_key.is_empty());
 
     let bundle =
-        groth16_prove_gci_threshold(85, 70, keys.proving_key, keys.verifying_key.clone())
-            .unwrap();
+        groth16_prove_gci_threshold(85, 70, keys.proving_key, keys.verifying_key.clone()).unwrap();
     assert_eq!(bundle.circuit, "gci_threshold");
 
     let valid = groth16_verify_proof(

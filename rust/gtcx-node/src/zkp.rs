@@ -34,8 +34,7 @@ pub fn zkp_commit_and_prove(
 ) -> napi::Result<JsProofResult> {
     let circuit = gtcx_zkp::CircuitType::from_name(&circuit_type).map_err(map_hex_err)?;
 
-    let witness =
-        gtcx_zkp::Witness::new(circuit, witness_data).map_err(map_hex_err)?;
+    let witness = gtcx_zkp::Witness::new(circuit, witness_data).map_err(map_hex_err)?;
 
     let salt_bytes = hex::decode(&salt_hex).map_err(map_hex_err)?;
     if salt_bytes.len() != 32 {

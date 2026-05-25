@@ -2,15 +2,17 @@
 
 use crate::error::{map_proof_system_error, Result, ZkpError};
 use crate::types::{
-    AssetOwnershipMerkleConfig, AssetOwnershipPublicInputs,
-    DIGEST_BYTES, Groth16CircuitType, Groth16Keys, Groth16ProofBundle, LocationRegionPublicInputs,
-    ASSET_ID_BYTES, OWNER_HASH_BYTES, RANDOMNESS_BYTES, U64_BYTES, zk_rng,
+    zk_rng, AssetOwnershipMerkleConfig, AssetOwnershipPublicInputs, Groth16CircuitType,
+    Groth16Keys, Groth16ProofBundle, LocationRegionPublicInputs, ASSET_ID_BYTES, DIGEST_BYTES,
+    OWNER_HASH_BYTES, RANDOMNESS_BYTES, U64_BYTES,
 };
 use ark_bn254::{Bn254, Fr};
 use ark_crypto_primitives::crh::sha256::constraints::{DigestVar, Sha256Gadget, UnitVar};
 use ark_crypto_primitives::crh::sha256::Sha256;
 use ark_crypto_primitives::crh::CRHSchemeGadget;
-use ark_crypto_primitives::merkle_tree::constraints::{BytesVarDigestConverter, ConfigGadget, PathVar};
+use ark_crypto_primitives::merkle_tree::constraints::{
+    BytesVarDigestConverter, ConfigGadget, PathVar,
+};
 use ark_crypto_primitives::merkle_tree::{MerkleTree, Path};
 use ark_ff::Field;
 use ark_groth16::{Groth16, Proof as Groth16Proof, ProvingKey, VerifyingKey};

@@ -1,8 +1,8 @@
-use crate::error::{map_proof_system_error, Result, ZkpError};
 use super::AssetOwnershipMerkleTree;
+use crate::error::{map_proof_system_error, Result, ZkpError};
 use crate::types::{
-    AssetOwnershipMerkleConfig,
-    DIGEST_BYTES, ASSET_ID_BYTES, OWNER_HASH_BYTES, RANDOMNESS_BYTES, U64_BYTES, zk_rng,
+    zk_rng, AssetOwnershipMerkleConfig, ASSET_ID_BYTES, DIGEST_BYTES, OWNER_HASH_BYTES,
+    RANDOMNESS_BYTES, U64_BYTES,
 };
 use ark_bn254::Fr;
 use ark_crypto_primitives::crh::sha256::Sha256;
@@ -51,7 +51,9 @@ pub(crate) fn u64_to_le_bytes(value: u64) -> [u8; U64_BYTES] {
     value.to_le_bytes()
 }
 
-pub(crate) fn uint64_from_le_bytes(bytes: &[UInt8<Fr>]) -> std::result::Result<UInt64<Fr>, SynthesisError> {
+pub(crate) fn uint64_from_le_bytes(
+    bytes: &[UInt8<Fr>],
+) -> std::result::Result<UInt64<Fr>, SynthesisError> {
     if bytes.len() != U64_BYTES {
         return Err(SynthesisError::Unsatisfiable);
     }
