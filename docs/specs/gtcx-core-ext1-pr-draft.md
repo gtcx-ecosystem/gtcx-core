@@ -52,20 +52,22 @@ Add 12 continental-Africa predicates to the WorkProof registry, plus a type-safe
 
 ## Open Questions Before Go-Ahead
 
-### 1. Predicate Name Collisions
+### 1. Predicate Name Collisions — Resolved
 
-Three proposed names overlap with existing predicates:
+| Proposed             | Existing                             | Resolution                                    | Rationale                                                                                                                                                                                                   |
+| -------------------- | ------------------------------------ | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SanctionsCleared`   | `SanctionsCleared` (entity-tier)     | **Rename to `RegionalSanctionsCleared`**      | Existing is entity-tier (corporations). Continental variant targets individuals/artisanal miners with SADC-specific screening lists. Different scope, different evidence requirements.                      |
+| `IdentityProven`     | `IdentityVerified` (individual-tier) | **DROP — extend existing `IdentityVerified`** | Existing already has `optional: ['biometric_face', 'biometric_fingerprint']` and description covers "official documentation and/or biometrics." Add `biometric_attestation` to optional evidence if needed. |
+| `MiningLicenseValid` | `LicenseValid` (generic)             | **DROP — extend existing `LicenseValid`**     | Existing is generic "Operating license current and valid." Add `mining_license` as an additional accepted evidence type alongside `government_id`. Keeps registry clean.                                    |
 
-| Proposed             | Existing (ADR-012)                   | Resolution needed                                                   |
-| -------------------- | ------------------------------------ | ------------------------------------------------------------------- |
-| `SanctionsCleared`   | `SanctionsCleared` (entity-tier)     | Same name, different scope (individual vs. entity) — rename one?    |
-| `IdentityProven`     | `IdentityVerified` (individual-tier) | Same concept — consolidate or differentiate?                        |
-| `MiningLicenseValid` | `LicenseValid` (generic)             | Specific vs. generic — is the specialization worth a new predicate? |
+**Net effect:** 12 proposed predicates → **10 new predicates** (47 → 57, not 59). Two duplicates eliminated through schema extension on existing predicates.
 
-**Recommendation:** Proposer should either:
+#### Schema Extensions (Additive, Non-Breaking)
 
-- (a) Rename continental variants with `Continental` prefix or jurisdiction qualifier, or
-- (b) Provide explicit differentiation rationale showing why the existing predicate cannot cover the use case
+| Predicate          | Change                                              | New Evidence Accepted               |
+| ------------------ | --------------------------------------------------- | ----------------------------------- |
+| `IdentityVerified` | Add `biometric_attestation` to `evidence.optional`  | `biometric_attestation`             |
+| `LicenseValid`     | Expand `evidence.required` to accept multiple types | `government_id` or `mining_license` |
 
 ### 2. Authority Taxonomy Scope
 
