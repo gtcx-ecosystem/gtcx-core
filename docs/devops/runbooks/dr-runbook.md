@@ -42,7 +42,12 @@ review_cycle: 'quarterly'
 
 ```bash
 git verify-commit $(git rev-parse HEAD) && \
-  pnpm architecture:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build
+  pnpm architecture:check && pnpm lint && pnpm format:check && \
+  pnpm typecheck && pnpm test && pnpm build && \
+  pnpm docs:check-links && pnpm docs:check-frontmatter && \
+  pnpm quality:governance:check && \
+  cd rust && cargo test --workspace && cargo clippy --workspace --all-targets && \
+  cargo fmt --all -- --check && cargo test --features fips
 ```
 
 ### Scenario B: npm Package Compromise
@@ -101,7 +106,7 @@ After any DR activation, the following must be true before declaring recovery co
 - [ ] `main` branch HEAD is a GPG-signed commit by a CODEOWNER
 - [ ] Full gate sequence passes: `pnpm architecture:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build`
 - [ ] `cargo test --features fips` passes (30 tests)
-- [ ] `cargo audit` shows zero vulnerabilities
+- [ ] `cargo audit` passes (exceptions documented in `rust/.cargo/audit.toml` if any)
 - [ ] `pnpm docs:check-links` passes
 - [ ] All release artifacts have valid SLSA provenance (if published)
 - [ ] Incident post-mortem written in `docs/security/security-incident-runbook.md`
@@ -110,19 +115,32 @@ After any DR activation, the following must be true before declaring recovery co
 
 ## 4. DR Drill Schedule
 
-| Frequency | Drill                                | Owner                    | Last Drilled |
-| --------- | ------------------------------------ | ------------------------ | ------------ |
-| Quarterly | Scenario A (repo compromise restore) | Protocol Architect       | —            |
-| Quarterly | Scenario B (npm yank + republish)    | Frontier Infra Engineer  | —            |
-| Annually  | Scenario C (key rotation)            | Crypto Security Engineer | —            |
-| Annually  | Scenario D (CI pipeline audit)       | Quality & Evidence Lead  | —            |
+| Frequency | Drill                                         | Owner                    | Last Drilled | Next Due   |
+| --------- | --------------------------------------------- | ------------------------ | ------------ | ---------- |
+| Quarterly | Scenario A (repo compromise restore)          | Protocol Architect       | —            | 2026-06-30 |
+| Quarterly | Scenario B (npm yank + republish)             | Frontier Infra Engineer  | —            | 2026-06-30 |
+| Annually  | Scenario C (key rotation)                     | Crypto Security Engineer | —            | 2026-12-31 |
+| Annually  | Scenario D (CI pipeline audit)                | Quality & Evidence Lead  | —            | 2026-12-31 |
+| Quarterly | Scenario E (cross-repo dependency compromise) | Protocol Architect       | —            | 2026-06-30 |
 
 ---
 
-## 5. Contact Escalation
+## 5. Cross-Repo Considerations
+
+`gtcx-core` is consumed by `gtcx-protocols`, `gtcx-intelligence`, `gtcx-markets`, and `gtcx-infrastructure`. A compromise in gtcx-core affects all downstream repos.
+
+**Cross-repo response:**
+
+1. **Assess downstream impact** — Check which commits from the compromised window are referenced in downstream repos
+2. **Freeze downstream pipelines** — Pause CI in `gtcx-protocols` and other repos until gtcx-core is restored
+3. **Coordinate recovery** — Downstream repos rebase to the restored gtcx-core commit
+4. **Verify transitive trust** — Run cross-repo test matrix (`pnpm test` in gtcx-core + gtcx-protocols)
+
+## 6. Contact Escalation
 
 | Role               | Primary                 | Secondary                |
 | ------------------ | ----------------------- | ------------------------ |
 | Incident Commander | Protocol Architect      | Crypto Security Engineer |
 | Communications     | Quality & Evidence Lead | Protocol Architect       |
 | Technical Recovery | Frontier Infra Engineer | Crypto Security Engineer |
+| Cross-Repo Coord   | Protocol Architect      | Frontier Infra Engineer  |
