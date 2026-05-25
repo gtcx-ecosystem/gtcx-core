@@ -4,9 +4,13 @@ Pre-substituted, copy-paste-ready renders of the [canonical sandbox intro templa
 
 The intent is to remove the last drafting step from the engagement critical path: when send-blocking gates (trust portal live, npm packages published, recipient verified, internal approval) clear, the email body below is ready to drop into a mail client.
 
-| Render                                   | Country  | Status               |
-| ---------------------------------------- | -------- | -------------------- |
-| [`zimbabwe-2026.md`](./zimbabwe-2026.md) | Zimbabwe | Draft — send-blocked |
+| Render                                   | Country  | Status                                               |
+| ---------------------------------------- | -------- | ---------------------------------------------------- |
+| [`zimbabwe-2026.md`](./zimbabwe-2026.md) | Zimbabwe | Draft — send-blocked                                 |
+| [`ghana-2026.md`](./ghana-2026.md)       | Ghana    | Draft — send-blocked (BoG vs MinComm recipient TBD)  |
+| [`namibia-2026.md`](./namibia-2026.md)   | Namibia  | Draft — send-blocked                                 |
+| [`botswana-2026.md`](./botswana-2026.md) | Botswana | Draft — send-blocked (DoM-primary, BoB secondary)    |
+| [`drc-2026.fr.md`](./drc-2026.fr.md)     | DR Congo | Draft — send-blocked + French-fluent review required |
 
 **Audience:** engagement leads at the point of send. The operational state (event log, decisions, blockers) for each engagement lives in [`docs/agile/engagement-log/`](../../agile/engagement-log/) — these renders are pure copy-paste artifacts.
 

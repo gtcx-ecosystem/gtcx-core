@@ -51,6 +51,8 @@ For when the email is drafted — anchored to the [DR Congo fixture](../../../te
 
 The outbound email is rendered from the canonical **French variant** [`sandbox-intro-email-template.fr.md`](../../gtm/sandbox-intro-email-template.fr.md) using the **RDC** row in its parameter table. Updates propagate from the parent [English template](../../gtm/sandbox-intro-email-template.md) where applicable.
 
+The send-ready French render (every `{{placeholder}}` substituted, copy-paste-ready) lives at [`docs/gtm/renders/drc-2026.fr.md`](../../gtm/renders/drc-2026.fr.md). **French-fluent review required before send.**
+
 ## Status against playbook checklist
 
 | #   | Playbook checklist item                                                                  | Status     |

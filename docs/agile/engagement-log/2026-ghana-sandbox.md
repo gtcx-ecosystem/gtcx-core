@@ -48,7 +48,9 @@ For when the email is drafted — anchored to the [Ghana fixture](../../../tests
 
 ## Email source
 
-The outbound email is rendered from the canonical [`sandbox-intro-email-template.md`](../../gtm/sandbox-intro-email-template.md) using the **ughana** row in its parameter table — no per-country email draft is maintained here. Updates to shared text (cited artifacts, attestation status, meeting offer) happen once in the template and propagate to every country.
+The outbound email is rendered from the canonical [`sandbox-intro-email-template.md`](../../gtm/sandbox-intro-email-template.md) using the **Ghana** row in its parameter table — no per-country email draft is maintained here. Updates to shared text (cited artifacts, attestation status, meeting offer) happen once in the template and propagate to every country.
+
+The send-ready render (every `{{placeholder}}` substituted, copy-paste-ready) lives at [`docs/gtm/renders/ghana-2026.md`](../../gtm/renders/ghana-2026.md).
 
 ## Status against playbook checklist
 

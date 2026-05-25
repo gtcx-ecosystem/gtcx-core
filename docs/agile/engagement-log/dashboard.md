@@ -21,13 +21,13 @@ Update cadence: on every meaningful state change to any per-country log (event l
 
 ## All engagements at a glance
 
-| Jurisdiction                           | Phase            | Primary recipient         | Email status | Owner              | Next blocker                                                   |
-| -------------------------------------- | ---------------- | ------------------------- | ------------ | ------------------ | -------------------------------------------------------------- |
-| [Zimbabwe](./2026-zimbabwe-sandbox.md) | **1 — Pre-send** | RBZ Fintech Sandbox       | Drafted      | Protocol Architect | Pages live + contact verified + internal approval              |
-| [Ghana](./2026-ghana-sandbox.md)       | **1 — Pre-send** | BoG Regulatory Sandbox    | Drafted      | Protocol Architect | Verify BoG vs MinComm recipient; internal approval; Pages live |
-| [Namibia](./2026-namibia-sandbox.md)   | **1 — Pre-send** | BoN Innovation Hub        | Drafted      | Protocol Architect | Verify BoN vs MME recipient; internal approval; Pages live     |
-| [Botswana](./2026-botswana-sandbox.md) | **1 — Pre-send** | DoM (primary), BoB (sec.) | Drafted      | Protocol Architect | Verify DoM vs BoB recipient; internal approval; Pages live     |
-| [DR Congo](./2026-drc-sandbox.md)      | **1 — Pre-send** | Cadastre Minier (CAMI)    | Drafted (FR) | Protocol Architect | French-fluent review; local-presence partner; CAMI vs BCC      |
+| Jurisdiction                           | Phase            | Primary recipient         | Email status       | Owner              | Next blocker                                                   |
+| -------------------------------------- | ---------------- | ------------------------- | ------------------ | ------------------ | -------------------------------------------------------------- |
+| [Zimbabwe](./2026-zimbabwe-sandbox.md) | **1 — Pre-send** | RBZ Fintech Sandbox       | Render staged      | Protocol Architect | Pages live + contact verified + internal approval              |
+| [Ghana](./2026-ghana-sandbox.md)       | **1 — Pre-send** | BoG Regulatory Sandbox    | Render staged      | Protocol Architect | Verify BoG vs MinComm recipient; internal approval; Pages live |
+| [Namibia](./2026-namibia-sandbox.md)   | **1 — Pre-send** | BoN Innovation Hub        | Render staged      | Protocol Architect | Verify BoN vs MME recipient; internal approval; Pages live     |
+| [Botswana](./2026-botswana-sandbox.md) | **1 — Pre-send** | DoM (primary), BoB (sec.) | Render staged      | Protocol Architect | Verify DoM vs BoB recipient; internal approval; Pages live     |
+| [DR Congo](./2026-drc-sandbox.md)      | **1 — Pre-send** | Cadastre Minier (CAMI)    | Render staged (FR) | Protocol Architect | French-fluent review; local-presence partner; CAMI vs BCC      |
 
 ## Phase legend (from [playbook](./playbook.md))
 
