@@ -1,0 +1,112 @@
+---
+title: 'Ext-1 PR Draft — Continental Predicate Extension'
+status: 'draft'
+date: '2026-05-25'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['spec', 'pr', 'workproof', 'continental', 'ext1']
+review_cycle: 'on-change'
+---
+
+# Ext-1 PR Draft — Continental Predicate Extension
+
+> **Status:** Draft — awaiting collision review and authority taxonomy specification
+> **Date:** 2026-05-25
+> **Target:** `gtcx-core/packages/workproof/`
+> **Net change:** 47 → 59 predicates (+12 continental)
+
+---
+
+## Proposal Summary
+
+Add 12 continental-Africa predicates to the WorkProof registry, plus a type-safe authority taxonomy for SADC mining, cooperative, identity, and screening authorities.
+
+| Element            | Detail                                                               |
+| ------------------ | -------------------------------------------------------------------- |
+| New file           | `definitions/continental.ts`                                         |
+| Authority taxonomy | `AUTHORITY_SLUGS` const — SADC-wide                                  |
+| Test fixtures      | ≥3 per predicate (Zimbabwe, DRC, +1)                                 |
+| Migration          | TradePass bridge maps legacy country-specific IDs to continental IDs |
+
+---
+
+## Proposed 12 Predicates
+
+| #   | Predicate                       | Category   | Evidence Type             | Notes                                                                            |
+| --- | ------------------------------- | ---------- | ------------------------- | -------------------------------------------------------------------------------- |
+| 1   | `MiningLicenseValid`            | Compliance | `mining_license`          | **Collision check needed:** `LicenseValid` exists                                |
+| 2   | `GoldBuyingLicenseValid`        | Compliance | `gold_buying_license`     | Zimbabwe-specific pattern, generalizable                                         |
+| 3   | `CooperativeRegistered`         | Identity   | `cooperative_registry`    | **Collision check needed:** `EntityRegistered` covers legal registration broadly |
+| 4   | `Traceability3tTagged`          | Production | `traceability_tag`        | ITSCI/iTSCi tag verification                                                     |
+| 5   | `RegionalCertificationIcglrRcm` | Compliance | `regional_certification`  | ICGLR Regional Certification Mechanism                                           |
+| 6   | `RegionalProtocolSignatory`     | Compliance | `protocol_signatory`      | Signatory to regional protocols (AMV, etc.)                                      |
+| 7   | `PricePreciousMetalFix`         | Financial  | `price_fix_record`        | LBMA / local fix participation                                                   |
+| 8   | `ConflictZoneCleared`           | Compliance | `conflict_zone_clearance` | UN/ITSCI cleared-area verification                                               |
+| 9   | `OriginSatelliteVerified`       | Location   | `satellite_imagery`       | Satellite-based origin verification                                              |
+| 10  | `IdentityProven`                | Identity   | `biometric_attestation`   | **Collision check needed:** `IdentityVerified` exists                            |
+| 11  | `PhysicalSealAttested`          | Production | `physical_seal`           | Tamper-evident seal verification                                                 |
+| 12  | `SanctionsCleared`              | Compliance | `sanctions_screening`     | **Collision check needed:** `SanctionsCleared` exists as entity-tier (ADR-012)   |
+
+---
+
+## Open Questions Before Go-Ahead
+
+### 1. Predicate Name Collisions
+
+Three proposed names overlap with existing predicates:
+
+| Proposed             | Existing (ADR-012)                   | Resolution needed                                                   |
+| -------------------- | ------------------------------------ | ------------------------------------------------------------------- |
+| `SanctionsCleared`   | `SanctionsCleared` (entity-tier)     | Same name, different scope (individual vs. entity) — rename one?    |
+| `IdentityProven`     | `IdentityVerified` (individual-tier) | Same concept — consolidate or differentiate?                        |
+| `MiningLicenseValid` | `LicenseValid` (generic)             | Specific vs. generic — is the specialization worth a new predicate? |
+
+**Recommendation:** Proposer should either:
+
+- (a) Rename continental variants with `Continental` prefix or jurisdiction qualifier, or
+- (b) Provide explicit differentiation rationale showing why the existing predicate cannot cover the use case
+
+### 2. Authority Taxonomy Scope
+
+The proposal mentions "all SADC mining, cooperative, identity, and screening authorities." Need clarification:
+
+- **Static const or dynamic registry?** Static const is fine; dynamic registry would need new infrastructure.
+- **Jurisdiction mapping?** Does each authority map to a country code (e.g., `RBZ` → `ZW`, `SARS` → `ZA`)?
+- **Maintenance model?** Who updates when a new authority is recognized (e.g., new national mineral board)?
+
+### 3. Timing vs. Publish Window
+
+- `@gtcx/workproof@1.0.0` publish window: **Wed 2026-05-28 → Fri 2026-05-30**
+- If Ext-1 merges before publish: included in 1.0.0, no immediate follow-up release needed
+- If Ext-1 merges after publish: requires changeset + 1.1.0 release
+
+**Recommendation:** Target merge by **Tue 2026-05-27 EOD** to ensure clean inclusion in 1.0.0.
+
+### 4. Changeset Requirement
+
+If approved, this needs a `@changesets/cli` changeset:
+
+- **Type:** `minor` (additive, no breaking changes)
+- **Scope:** `@gtcx/workproof`
+- **Description:** "Add 12 continental predicates with SADC authority taxonomy"
+
+---
+
+## Acceptance Criteria (for PR review)
+
+- [ ] No predicate name collisions with existing 47 predicates
+- [ ] All 12 predicates have `PredicateDefinition` schema complete (evidence, attestation, confidence, temporal, AI)
+- [ ] `AUTHORITY_SLUGS` const is type-safe and exported
+- [ ] ≥3 test fixtures per predicate (≥36 total assertions)
+- [ ] Migration aliases added to `TRADEPASS_LEGACY_ID_ALIASES` if applicable
+- [ ] Changeset included
+- [ ] All CI gates pass (lint, typecheck, test, build, architecture, docs)
+
+---
+
+## Cross-References
+
+- ADR-012 Stage 0: `gtcx-core/packages/workproof/src/predicates/definitions/entity.ts`
+- Authority taxonomy spec (TBD): `gtcx-intelligence/docs/specs/authority-taxonomy-sadc.md`
+- Migration bridge: `gtcx-core/packages/verification/src/migration/tradepass-aliases.ts`
