@@ -5,7 +5,7 @@ from: 'gtcx-core'
 to: 'gtcx-protocols'
 scope: 'ADR-012 predicate reconciliation Stage 1'
 tags: ['handoff', 'gtcx-core', 'gtcx-protocols', 'ADR-012', 'predicate-reconciliation']
-status: 'ready'
+status: 'complete'
 ---
 
 # Cross-Repo Handoff — ADR-012 Stage 1
