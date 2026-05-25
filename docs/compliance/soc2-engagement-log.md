@@ -1,7 +1,7 @@
 ---
 title: 'SOC 2 Engagement Log'
 status: 'current'
-date: '2026-05-22'
+date: '2026-05-25'
 owner: 'quality-evidence-lead'
 role: 'quality-evidence-lead'
 tier: 'critical'
@@ -11,8 +11,8 @@ review_cycle: 'on-change'
 
 # SOC 2 Type 1 Engagement Log
 
-> **Status:** Active — awaiting CPA outreach kickoff
-> **Date:** 2026-05-22
+> **Status:** Active — readiness prep approved, CPA outreach ready
+> **Date:** 2026-05-25
 > **Owner:** Quality & Evidence Lead
 
 Append-only operational log for the 2026 SOC 2 Type 1 engagement. Cross-references:
@@ -24,16 +24,16 @@ Append-only operational log for the 2026 SOC 2 Type 1 engagement. Cross-referenc
 
 ## Engagement state
 
-| Field                 | Value         |
-| --------------------- | ------------- |
-| Phase                 | **Pre-RFP**   |
-| CPA firm              | Not selected  |
-| Engagement letter     | Not signed    |
-| Kickoff date          | Not scheduled |
-| Fieldwork window      | —             |
-| Draft report received | No            |
-| Final letter received | No            |
-| Budget commitment     | Not committed |
+| Field                 | Value                                            |
+| --------------------- | ------------------------------------------------ |
+| Phase                 | **Readiness prep approved — CPA outreach ready** |
+| CPA firm              | Not selected                                     |
+| Engagement letter     | Not signed                                       |
+| Kickoff date          | Not scheduled                                    |
+| Fieldwork window      | —                                                |
+| Draft report received | No                                               |
+| Final letter received | No                                               |
+| Budget commitment     | Not committed                                    |
 
 ## Event log (newest first)
 
@@ -42,7 +42,7 @@ Append-only operational log for the 2026 SOC 2 Type 1 engagement. Cross-referenc
 - Action: Drafted [SOC 2 Readiness Prep](./soc2-readiness-prep.md) with operational checklist for closing the remaining ~15–22% TSC gap, CPA candidate criteria, and conservative engagement timeline (CPA engagement letter signed by 2026-06-30; final letter by 2026-09-15).
 - Owner: Quality & Evidence Lead
 - Driver: Sprint 4 task 4.2 of the engagement readiness roadmap.
-- Next action: Internal approval, then CPA firm outreach.
+- Next action: Begin CPA firm outreach (target 2026-05-29). Readiness prep approved.
 - Blockers: None internal. External: CPA firm availability windows during summer audit season.
 
 ### 2026-05-10 — Readiness gap analysis completed
@@ -55,7 +55,7 @@ Append-only operational log for the 2026 SOC 2 Type 1 engagement. Cross-referenc
 
 | #   | Decision                                             | Owner                   | Due        |
 | --- | ---------------------------------------------------- | ----------------------- | ---------- |
-| 1   | Approve readiness prep for sub-task execution        | Protocol Architect      | 2026-05-29 |
+| 1   | ~~Approve readiness prep for sub-task execution~~    | Protocol Architect      | 2026-05-25 |
 | 2   | Confirm $15K–$45K budget envelope for Type 1         | Quality & Evidence Lead | 2026-05-29 |
 | 3   | Select preferred CPA firm shape (boutique vs Big 4)  | Quality & Evidence Lead | 2026-06-09 |
 | 4   | Sign engagement letter                               | Quality & Evidence Lead | 2026-06-30 |

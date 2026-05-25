@@ -1,7 +1,7 @@
 ---
 title: '01 Security Posture'
 status: 'current'
-date: '2026-05-17'
+date: '2026-05-25'
 owner: 'protocol-architect'
 role: 'protocol-architect'
 tier: 'standard'
@@ -12,7 +12,7 @@ review_cycle: 'on-change'
 # Security Posture — gtcx-core
 
 > **Status:** Current
-> **Date:** 2026-05-10
+> **Date:** 2026-05-25
 > **Owner:** Protocol Architect
 
 **Summary:** No critical vulnerabilities. Three medium-risk items under active management. Defense-in-depth across 6 automated analysis methods.
@@ -21,14 +21,14 @@ review_cycle: 'on-change'
 
 ## Assessment Methods
 
-| Method                   | Tool                                              | Frequency        | Status          |
-| ------------------------ | ------------------------------------------------- | ---------------- | --------------- |
-| Static analysis (SAST)   | CodeQL (security-extended + security-and-quality) | Every PR         | Running         |
-| Dependency vulnerability | pnpm audit, cargo audit, cargo deny, Trivy        | Every PR         | 0 findings      |
-| Secret scanning          | Custom scanner (tools/check-secrets.mjs)          | Every PR         | 0 findings      |
-| Fuzz testing             | cargo-fuzz (6 targets)                            | Weekly (planned) | Targets written |
-| Threat modeling          | STRIDE + attack trees                             | Quarterly        | Current         |
-| Architecture enforcement | Package boundary check, API surface drift         | Every PR         | 0 violations    |
+| Method                   | Tool                                              | Frequency        | Status               |
+| ------------------------ | ------------------------------------------------- | ---------------- | -------------------- |
+| Static analysis (SAST)   | CodeQL (security-extended + security-and-quality) | Every PR         | Running              |
+| Dependency vulnerability | pnpm audit, cargo audit, cargo deny, Trivy        | Every PR         | 3 mitigated          |
+| Secret scanning          | Custom scanner (tools/check-secrets.mjs)          | Every PR         | 0 findings           |
+| Fuzz testing             | cargo-fuzz (6 targets)                            | Weekly (planned) | 9.9M runs, 0 crashes |
+| Threat modeling          | STRIDE + attack trees                             | Quarterly        | Current              |
+| Architecture enforcement | Package boundary check, API surface drift         | Every PR         | 0 violations         |
 
 ## Key Security Properties
 
@@ -75,11 +75,12 @@ Full analysis: [../security/attack-tree-signing.md](../security/attack-tree-sign
 
 ## Open Items
 
-| ID     | Item                                                        | Priority | Owner |
-| ------ | ----------------------------------------------------------- | -------- | ----- |
-| SA-001 | ~~Add secondary CODEOWNER~~ — done (gtcx-agent, 2026-05-09) | Closed   | Team  |
-| SA-003 | ~~Claim `@gtcx` npm scope~~ — done (org: gtcx-protocol)     | Closed   | Team  |
-| SA-006 | ~~Run fuzz campaigns~~ — done (9.9M runs, 0 crashes)        | Closed   | Team  |
+| ID     | Item                                                        | Priority  | Owner                    |
+| ------ | ----------------------------------------------------------- | --------- | ------------------------ |
+| SA-001 | ~~Add secondary CODEOWNER~~ — done (gtcx-agent, 2026-05-09) | Closed    | Team                     |
+| SA-003 | ~~Claim `@gtcx` npm scope~~ — done (org: gtcx-protocol)     | Closed    | Team                     |
+| SA-007 | rustls-webpki RUSTSEC-2026-0098/0099/0104 — mitigated in CI | Open (P2) | Team                     |
+| SA-008 | External pen-test — RFP drafted, vendor selection pending   | Open (P1) | crypto-security-engineer |
 
 ## Source Documents
 

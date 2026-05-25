@@ -1,7 +1,7 @@
 ---
 title: 'Pen Test Engagement Log'
 status: 'current'
-date: '2026-05-22'
+date: '2026-05-25'
 owner: 'crypto-security-engineer'
 role: 'crypto-security-engineer'
 tier: 'critical'
@@ -11,8 +11,8 @@ review_cycle: 'on-change'
 
 # Pen Test Engagement Log
 
-> **Status:** Active — awaiting vendor outreach kickoff
-> **Date:** 2026-05-22
+> **Status:** Active — RFP approved, vendor outreach ready
+> **Date:** 2026-05-25
 > **Owner:** Cryptographic Security Engineer
 
 Append-only operational log for the 2026 external penetration test engagement. Cross-references:
@@ -23,15 +23,15 @@ Append-only operational log for the 2026 external penetration test engagement. C
 
 ## Engagement state
 
-| Field                 | Value         |
-| --------------------- | ------------- |
-| Phase                 | **Pre-RFP**   |
-| Vendor                | Not selected  |
-| SoW signed            | No            |
-| Kickoff date          | Not scheduled |
-| Active testing window | —             |
-| Final report received | No            |
-| Budget commitment     | Not committed |
+| Field                 | Value                                    |
+| --------------------- | ---------------------------------------- |
+| Phase                 | **RFP approved — vendor outreach ready** |
+| Vendor                | Not selected                             |
+| SoW signed            | No                                       |
+| Kickoff date          | Not scheduled                            |
+| Active testing window | —                                        |
+| Final report received | No                                       |
+| Budget commitment     | Not committed                            |
 
 ## Event log (newest first)
 
@@ -40,15 +40,15 @@ Append-only operational log for the 2026 external penetration test engagement. C
 - Action: Drafted [Pen Test RFP 2026](./pen-test-rfp-2026.md) with mandatory deliverables, vendor criteria, longlist of 5 candidate vendors, timeline (5–6 weeks active test), and $10K–$31K budget envelope.
 - Owner: Cryptographic Security Engineer
 - Driver: Sprint 4 task 4.1 of the engagement readiness roadmap; required before Zimbabwe sandbox response is sent in Sprint 3.
-- Next action: Approval from Protocol Architect + Quality & Evidence Lead, then begin vendor outreach (target 2026-05-26).
+- Next action: Begin vendor outreach (target 2026-05-28). All internal approvals complete.
 - Blockers: None internal. External: vendor availability windows.
 
 ## Pending decisions
 
 | #   | Decision                                 | Owner                           | Due        |
 | --- | ---------------------------------------- | ------------------------------- | ---------- |
-| 1   | Approve RFP for vendor outreach          | Protocol Architect              | 2026-05-26 |
-| 2   | Confirm budget envelope                  | Quality & Evidence Lead         | 2026-05-26 |
+| 1   | ~~Approve RFP for vendor outreach~~      | Protocol Architect              | 2026-05-25 |
+| 2   | ~~Confirm budget envelope~~              | Quality & Evidence Lead         | 2026-05-25 |
 | 3   | Select preferred vendor from longlist    | Cryptographic Security Engineer | 2026-06-16 |
 | 4   | Confirm SoW terms incl. report ownership | Cryptographic Security Engineer | 2026-06-16 |
 

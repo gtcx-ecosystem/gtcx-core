@@ -1,7 +1,7 @@
 ---
 title: '00 Executive Brief'
 status: 'current'
-date: '2026-05-17'
+date: '2026-05-25'
 owner: 'protocol-architect'
 role: 'protocol-architect'
 tier: 'standard'
@@ -12,7 +12,7 @@ review_cycle: 'on-change'
 # Executive Brief — gtcx-core
 
 > **Status:** Current
-> **Date:** 2026-05-10
+> **Date:** 2026-05-25
 > **Owner:** Protocol Architect
 
 ## What It Is
@@ -27,20 +27,20 @@ Every verification proof, every digital identity, every trade certificate in the
 
 ## By the Numbers
 
-| Metric                        | Value                  |
-| ----------------------------- | ---------------------- |
-| TypeScript packages           | 21                     |
-| Rust crates                   | 6                      |
-| Lines of source code          | 31,713                 |
-| Test cases                    | 2,260+                 |
-| CI quality gates              | 21 (all passing)       |
-| Architecture decisions (ADRs) | 14                     |
-| Security documents            | 16                     |
-| Compliance documents          | 7                      |
-| Critical package coverage     | 89-96% statements      |
-| Performance metrics tracked   | 14 (all within budget) |
-| Known vulnerabilities         | 0                      |
-| Commits since Jan 2026        | 298                    |
+| Metric                        | Value                           |
+| ----------------------------- | ------------------------------- |
+| TypeScript packages           | 21                              |
+| Rust crates                   | 6                               |
+| Lines of source code          | 31,713                          |
+| Test cases                    | 2,360+                          |
+| CI quality gates              | 21 (all passing)                |
+| Architecture decisions (ADRs) | 14                              |
+| Security documents            | 16                              |
+| Compliance documents          | 7                               |
+| Critical package coverage     | 89-96% statements               |
+| Performance metrics tracked   | 14 (all within budget)          |
+| Known vulnerabilities         | 3 (mitigated, upstream pending) |
+| Commits since Jan 2026        | 305                             |
 
 ## Cryptographic Foundation
 
@@ -60,7 +60,7 @@ All cryptographic operations delegate to audited, established libraries. No cust
 FIPS validation is inherited from platform cryptographic modules:
 
 - **TypeScript:** OpenSSL 3.x FIPS Provider (CMVP #4282)
-- **Rust (planned):** AWS-LC (CMVP #4816)
+- **Rust:** AWS-LC (CMVP #4816) — `aws-lc-fips-sys` 0.13.14; 30 tests pass with `--features fips`
 
 See [03-fips-readiness.md](./03-fips-readiness.md) for the full validation boundary statement.
 
@@ -78,11 +78,11 @@ See [01-security-posture.md](./01-security-posture.md) for the complete assessme
 
 ## What's Not Done (Honestly)
 
-1. Fuzz campaigns not yet run at scale (targets written, awaiting 24-hour execution)
-2. Rust FIPS backend (aws-lc-rs) — trait designed, not yet implemented
-3. HSM key storage — trait designed, not yet implemented
-4. External penetration test — replaced by internal assessment (acceptable for sandbox)
-5. Downstream consumer validation — no formal report yet
-6. `@gtcx` npm scope — not yet claimed
+1. **External penetration test** — RFP drafted, 5-vendor longlist identified, awaiting selection (P1)
+2. **SOC 2 Type 1** — Readiness prep complete (78-85% TSC), CPA engagement pending (P1)
+3. **SLSA provenance publish** — NPM_TOKEN confirmed, workflow ready, awaiting Wed-Fri operational window (P2)
+4. **Upstream rustls-webpki fix** — 3 RUSTSEC advisories mitigated via CI exceptions; AWS SDK upstream fix pending (P2)
+5. **DR runbook drill** — Runbook complete, never drilled; first drill scheduled Q2 (P2)
+6. **ADR-012 Stage 1** — Stage 0 complete (47 predicates, migration helper); cross-repo handoff delivered to gtcx-protocols (P2)
 
-These are 4-5 days of engineering work plus one regulator meeting. The code is ready. The governance is ready. The remaining work is execution.
+These represent 2-3 weeks of coordination plus engineering execution. The code is ready. The governance is ready. The remaining work is external validation and operational follow-through.

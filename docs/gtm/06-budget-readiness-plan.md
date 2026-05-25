@@ -15,13 +15,13 @@ review_cycle: 'on-change'
 > **Date:** 2026-05-10
 > **Owner:** Protocol Architect
 
-**Current score:** 9.8/10
+**Current score:** 8.9/10
 **Target:** 10/10 bank-grade readiness
-**Budget:** $0 (excluding optional $2-5K bug bounty reserve)
+**Budget:** $0 (excluding optional $2-5K bug bounty reserve and $10-31K pen-test)
 
 ---
 
-## What's Done (8.6 → 9.4, completed 2026-05-08)
+## What's Done (8.6 → 8.9, completed 2026-05-25)
 
 | Item                                              | Score Impact | Commit    |
 | ------------------------------------------------- | ------------ | --------- |
@@ -58,6 +58,9 @@ review_cycle: 'on-change'
 | Rust `SigningProvider` trait + aws-lc-rs backend | 2-3 days | +0.15 | aws-lc-rs build requires CMake + Go |
 | `KeyStore` trait + `MemoryKeyStore`              | 1-2 days | +0.1  | async-trait dependency decision     |
 | SoftHSMv2 CI integration                         | 4 hours  | +0.05 | Ubuntu CI runner (already have)     |
+| ADR-012 Stage 0 — 9 entity predicates            | Complete | +0.3  | Shipped 2026-05-25                  |
+| Migration bridge + property tests                | Complete | +0.1  | Shipped 2026-05-25                  |
+| rustls-webpki CI mitigation                      | Complete | +0.1  | Shipped 2026-05-25                  |
 
 ### Tier 3 — When regulator asks ($0 - $5K)
 
@@ -72,9 +75,9 @@ review_cycle: 'on-change'
 ## Scoring Trajectory
 
 ```
-Today:       ████████████████████████████████████████████░░░░  9.4
-+Tier 1:     █████████████████████████████████████████████░░░  9.6
-+Tier 2:     ██████████████████████████████████████████████░░  9.9
+Today:       ██████████████████████████████████████████░░░░░░  8.9
++Tier 1:     ████████████████████████████████████████████░░░░  9.4
++Tier 2:     ██████████████████████████████████████████████░░  9.7
 +Tier 3:     ████████████████████████████████████████████████  10.0
 ```
 
