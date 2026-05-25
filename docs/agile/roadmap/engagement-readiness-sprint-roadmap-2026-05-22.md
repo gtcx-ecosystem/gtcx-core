@@ -1,7 +1,7 @@
 ---
 title: 'Engagement Readiness Sprint Roadmap'
 status: 'current'
-date: '2026-05-22'
+date: '2026-05-25'
 owner: 'protocol-architect'
 role: 'protocol-architect'
 tier: 'critical'
@@ -262,23 +262,25 @@ Per-task completion against the plan above. Updated on every meaningful state ch
 
 ### Sprint 1 — Front-door truth
 
-| #   | Task                                              | Status          | Evidence                                      |
-| --- | ------------------------------------------------- | --------------- | --------------------------------------------- |
-| 1.1 | Clean working tree (turbo bump + brace-expansion) | ✅ Done         | git history                                   |
-| 1.2 | README alignment to 9.5/10 + 19/19 packages       | ✅ Done         | `README.md` reflects composite 9.5/10         |
-| 1.3 | `TURBO_TOKEN` + `TURBO_TEAM` at org               | ✅ Done         | `pnpm ops:check` shows pass                   |
-| 1.4 | `OPENAI_API_KEY` at org                           | ⏸️ User-blocked | Awaiting org admin (mint + add as org secret) |
-| 1.5 | Trust portal refresh (2026-05-21 audit + fuzz)    | ✅ Done         | `docs/governance/trust-portal.md` updated     |
+| #   | Task                                              | Status          | Evidence                                                           |
+| --- | ------------------------------------------------- | --------------- | ------------------------------------------------------------------ |
+| 1.1 | Clean working tree (turbo bump + brace-expansion) | ✅ Done         | git history                                                        |
+| 1.2 | README alignment to 9.5/10 + 19/19 packages       | ✅ Done         | `README.md` reflects composite 9.5/10                              |
+| 1.3 | `TURBO_TOKEN` + `TURBO_TEAM` at org               | ✅ Done         | `pnpm ops:check` shows pass                                        |
+| 1.4 | `OPENAI_API_KEY` at org                           | ⏸️ User-blocked | Awaiting org admin (mint + add as org secret)                      |
+| 1.6 | Master audit refresh (8.8 → 8.9/10)               | ✅ Done         | `docs/audit/master-audit-2026-05-25.md` delta refresh              |
+| 1.7 | GTM pack refresh + new docs                       | ✅ Done         | 6 updated + 3 new (ADR-012 brief, SLSA guide, readiness checklist) |
+| 1.5 | Trust portal refresh (2026-05-21 audit + fuzz)    | ✅ Done         | `docs/governance/trust-portal.md` updated                          |
 
 ### Sprint 2 — Release pipeline proven
 
-| #   | Task                                      | Status                       | Evidence                                                                                                                                                    |
-| --- | ----------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done                      | `packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                                             |
-| 2.2 | Changesets for foundation packages        | ✅ Done                      | 6 changeset entries staged (connectivity, crypto, crypto-native, security, sync, workproof); linked group covers types/identity/verification/domain/schemas |
-| 2.3 | First `release.yml` end-to-end publish    | ⏸️ CI-blocked + user-blocked | CI failures iterating (last: rust fmt — fixed local in `bbb7f37`, awaiting push). After CI green: user fires `gh workflow run release.yml`                  |
-| 2.4 | Remaining 17 packages published           | ⏸️ Blocked on 2.3            | Cascades from 2.3                                                                                                                                           |
-| 2.5 | Trust portal "Published versions" section | ⏸️ Blocked on 2.3            | Will reflect `npm view` resolvable URLs                                                                                                                     |
+| #   | Task                                      | Status            | Evidence                                                                                                                                                    |
+| --- | ----------------------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done           | `packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                                             |
+| 2.2 | Changesets for foundation packages        | ✅ Done           | 6 changeset entries staged (connectivity, crypto, crypto-native, security, sync, workproof); linked group covers types/identity/verification/domain/schemas |
+| 2.3 | First `release.yml` end-to-end publish    | ⏸️ Ready to fire  | NPM_TOKEN confirmed, provenance ready, workflow green. **Window: Wed 2026-05-28 → Fri 2026-05-30**                                                          |
+| 2.4 | Remaining 17 packages published           | ⏸️ Blocked on 2.3 | Cascades from 2.3                                                                                                                                           |
+| 2.5 | Trust portal "Published versions" section | ⏸️ Blocked on 2.3 | Will reflect `npm view` resolvable URLs                                                                                                                     |
 
 ### Sprint 3 — Jurisdiction readiness
 
@@ -296,20 +298,45 @@ Per-task completion against the plan above. Updated on every meaningful state ch
 | 4.2 | SOC 2 Type 1 readiness prep + CPA criteria | ✅ Drafted | [`docs/compliance/soc2-readiness-prep.md`](../../compliance/soc2-readiness-prep.md) + [engagement log](../../compliance/soc2-engagement-log.md). **User-blocked:** CPA outreach |
 | 4.3 | ark-\* upstream advisory tracker           | ✅ Done    | [`docs/security/ark-upstream-tracking.md`](../../security/ark-upstream-tracking.md)                                                                                             |
 
+### New work completed today (2026-05-25)
+
+| Work                                  | Repo           | Commit               | Impact                                                |
+| ------------------------------------- | -------------- | -------------------- | ----------------------------------------------------- |
+| ADR-012 Stage 0 — 9 entity predicates | gtcx-core      | `27184d0`            | 47 predicates, migration helper, property tests       |
+| rustls-webpki CI unblock              | gtcx-core      | `aefba49`            | cargo audit passes with documented exceptions         |
+| Version packages (7 changesets)       | gtcx-core      | `1ccd05a`            | workproof 1.0.0, verification 3.1.0, +8 others        |
+| Migration-bridge + property tests     | gtcx-core      | `e3eab1a`, `2a10eaf` | 10 + 14 test assertions                               |
+| Master audit delta refresh            | gtcx-core      | `93368b9`            | 8.8 → 8.9/10                                          |
+| GTM pack refresh + new docs           | gtcx-core      | `2fdfd9c`            | 6 updated + 3 new docs                                |
+| ADR-012 Stage 1 — predicate bridge    | gtcx-protocols | `2d765f9`            | 14 tests, resolves legacy IDs to canonical predicates |
+| Ext-1 continental extension spec      | gtcx-core      | `8374ba9`            | Drafted, awaiting collision resolution                |
+
 ### Aggregate status
 
-| State                | Count | Notes                                                                                                                |
-| -------------------- | ----- | -------------------------------------------------------------------------------------------------------------------- |
-| ✅ Done (or drafted) | 11    | 1.1, 1.2, 1.3, 1.5, 2.1, 2.2, 3.1, 4.1 (draft), 4.2 (draft), 4.3, plus pre-staged renders for 4 additional countries |
-| ⏸️ User-blocked      | 4     | 1.4 (OPENAI_API_KEY), 3.2 (Pages), 4.1 vendor outreach, 4.2 CPA outreach                                             |
-| ⏸️ CI + user-blocked | 1     | 2.3 (publish) — CI iterating, fix in `bbb7f37` awaiting push; then user fires workflow                               |
-| ⏸️ Cascade-blocked   | 3     | 2.4, 2.5, 3.3 — all unblock from 2.3 + 3.2                                                                           |
+| State                | Count | Notes                                                                                                             |
+| -------------------- | ----- | ----------------------------------------------------------------------------------------------------------------- |
+| ✅ Done (or drafted) | 18    | All Sprint 1 except 1.4; 2.1, 2.2; 3.1; 4.1, 4.2, 4.3; ADR-012 Stage 0+1; audit refresh; GTM refresh; Ext-1 draft |
+| ⏸️ User-blocked      | 4     | 1.4 (OPENAI_API_KEY), 3.2 (Pages), 4.1 vendor outreach, 4.2 CPA outreach                                          |
+| ⏸️ Ready to fire     | 1     | 2.3 (publish) — workflow green, NPM_TOKEN present, window Wed–Fri                                                 |
+| ⏸️ Cascade-blocked   | 3     | 2.4, 2.5, 3.3 — all unblock from 2.3 + 3.2                                                                        |
+| 🔄 Awaiting decision | 1     | Ext-1 continental extension — collision resolution needed by Tue for 1.0.0 inclusion                              |
 
 ### Critical path right now
 
 ```
-[push bbb7f37] → [CI green] → [fire release.yml] → [enable Pages] → [send Zimbabwe email]
-   ↑ user         ↑ automated   ↑ user             ↑ user           ↑ user
+[Tue 05-27]    [Wed–Fri]          [admin]       [gtm-lead]
+     ↓              ↓                 ↓              ↓
+[Ext-1 merge?] → [fire release.yml] → [enable Pages] → [send Zimbabwe email]
+     ↑                              ↑
+  (optional)                   (mobile-engineering-lead)
 ```
 
-Everything else either parallels this path (vendor outreach) or unblocks from it (Sprint 2.4/2.5/3.3).
+**Five active decision points:**
+
+1. **Publish** — Fire `gh workflow run release.yml` Wed–Fri (mobile-engineering-lead)
+2. **Pen-test vendor** — Begin outreach from 5-vendor longlist (crypto-security-engineer)
+3. **SOC 2 CPA** — Begin outreach from 4-firm shortlist (quality-evidence-lead)
+4. **GitHub Pages** — Enable for trust portal hosting (repo admin)
+5. **Ext-1 merge** — Resolve 3 predicate collisions by Tue if inclusion in 1.0.0 desired (protocol-architect + proposer)
+
+Everything else either parallels this path or unblocks from it.
