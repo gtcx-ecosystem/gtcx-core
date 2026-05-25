@@ -6,10 +6,10 @@ Created 2026-05-22 as part of Sprint 3 task 3.3 of the [engagement readiness roa
 
 ## Active engagements
 
-| Engagement                                             | Status                           | Owner              | Next action                                                    |
-| ------------------------------------------------------ | -------------------------------- | ------------------ | -------------------------------------------------------------- |
-| [Zimbabwe — Sandbox intro](./2026-zimbabwe-sandbox.md) | **Email drafted, awaiting send** | Protocol Architect | Send intro email per draft once approved and Pages is live     |
-| [Ghana — Sandbox intro](./2026-ghana-sandbox.md)       | Pre-send — stub                  | Protocol Architect | Draft intro email; confirm BoG vs MinComm recipient            |
-| [Namibia — Sandbox intro](./2026-namibia-sandbox.md)   | Pre-send — stub                  | Protocol Architect | Draft intro email; confirm BoN vs MME recipient                |
-| [Botswana — Sandbox intro](./2026-botswana-sandbox.md) | Pre-send — stub                  | Protocol Architect | Draft intro email; confirm BoB vs DoM recipient                |
-| [DR Congo — Sandbox intro](./2026-drc-sandbox.md)      | Pre-send — stub                  | Protocol Architect | Draft intro email **in French**; secure local-presence partner |
+| Engagement                                             | Status                               | Owner              | Next action                                                                                                |
+| ------------------------------------------------------ | ------------------------------------ | ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| [Zimbabwe — Sandbox intro](./2026-zimbabwe-sandbox.md) | **Render staged, send-blocked**      | Protocol Architect | Verify recipient + approval + Pages live, then send [render](../../gtm/renders/zimbabwe-2026.md)           |
+| [Ghana — Sandbox intro](./2026-ghana-sandbox.md)       | **Render staged, send-blocked**      | Protocol Architect | Confirm BoG vs MinComm recipient; then send [render](../../gtm/renders/ghana-2026.md)                      |
+| [Namibia — Sandbox intro](./2026-namibia-sandbox.md)   | **Render staged, send-blocked**      | Protocol Architect | Confirm BoN vs MME recipient; then send [render](../../gtm/renders/namibia-2026.md)                        |
+| [Botswana — Sandbox intro](./2026-botswana-sandbox.md) | **Render staged, send-blocked**      | Protocol Architect | Confirm DoM vs BoB recipient; then send [render](../../gtm/renders/botswana-2026.md)                       |
+| [DR Congo — Sandbox intro](./2026-drc-sandbox.md)      | **Render staged (FR), send-blocked** | Protocol Architect | French-fluent review + secure local-presence partner; then send [render](../../gtm/renders/drc-2026.fr.md) |
