@@ -93,7 +93,7 @@ This replaces manual document review with automated, cryptographically verifiabl
 
 ## Cross-References
 
-- [ADR-012 Decision Record](../../decisions/adr-index.md) — full architectural decision
+- [ADR-012 Decision Record](../decisions/adr-index.md) — full architectural decision
 - [WorkProof README](../../packages/workproof/README.md) — consumer-facing documentation
 - [Migration Bridge Tests](../../packages/workproof/tests/migration-bridge.test.ts) — integration test evidence
 - [Property-Based Tests](../../packages/workproof/tests/property-based.test.ts) — invariant test evidence

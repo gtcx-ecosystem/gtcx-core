@@ -121,7 +121,7 @@ When evaluating `@gtcx` packages for your organization's vendor risk process:
 
 ## Cross-References
 
-- [SLSA Attestation Details](../../security/slsa-attestation.md) — technical specification
+- [SLSA Attestation Details](../security/slsa-attestation.md) — technical specification
 - [Provenance Manifest](../../artifacts/provenance-manifest.json) — latest generated manifest
-- [Trust Center](../../governance/trust-portal.md) — organizational trust posture
+- [Trust Center](../governance/trust-portal.md) — organizational trust posture
 - [Release Workflow](../../.github/workflows/release.yml) — build definition
