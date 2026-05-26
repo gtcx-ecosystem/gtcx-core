@@ -100,12 +100,16 @@ export const LicenseValid: PredicateDefinition = {
   domain: 'compliance',
   version: '2.1.0',
   schema: { type: 'boolean' },
-  evidence: { required: ['government_id'] },
+  evidence: { required: ['government_id', 'mining_license'] },
   attestation: {
     allowedAttestors: [{ type: 'credential', value: 'AuthorityID' }],
     selfAttestation: false,
   },
-  confidence: { baseScore: 0.95, evidenceWeights: { government_id: 1.0 }, minimumThreshold: 0.9 },
+  confidence: {
+    baseScore: 0.95,
+    evidenceWeights: { government_id: 0.5, mining_license: 0.5 },
+    minimumThreshold: 0.9,
+  },
   temporal: {
     validDuration: 'P1Y',
     renewalRequired: true,

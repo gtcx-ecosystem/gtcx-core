@@ -186,6 +186,7 @@ export const PredicateDomainSchema = z.enum([
   'relationship',
   'temporal',
   'financial',
+  'entity',
   'composite',
 ]);
 
@@ -214,4 +215,15 @@ export const EvidenceTypeSchema = z.enum([
   'gps_location',
   'document_hash',
   'witness_attestation',
+  'biometric_attestation',
+  'mining_license',
+  'sovereign_registry_record',
+  'cooperative_registry_record',
+  'traceability_record',
+  'regional_certification_record',
+  'protocol_signatory_record',
+  'price_feed_record',
+  'conflict_screening_record',
+  'satellite_imagery_record',
+  'hardware_seal_record',
 ]);

@@ -1,13 +1,13 @@
 // ============================================================================
 // PREDICATE SCHEMAS
-// Zod schemas for the 47 WorkProof predicate types and 7 value variants
+// Zod schemas for the 57 WorkProof predicate types and 7 value variants
 // ============================================================================
 
 import { z } from 'zod';
 
 // ─── Predicate Type Enum ──────────────────────────────────────────────────────
 
-/** All 47 WorkProof predicate type keys */
+/** All 57 WorkProof predicate type keys */
 export const WorkProofPredicateTypeSchema = z.enum([
   // Identity (5)
   'IdentityVerified',
@@ -65,6 +65,17 @@ export const WorkProofPredicateTypeSchema = z.enum([
   'EntityRecognized',
   'IssuedBy',
   'OwnershipChain',
+  // Continental (10)
+  'MiningLicenseValid',
+  'GoldBuyingLicenseValid',
+  'CooperativeRegistered',
+  'Traceability3tTagged',
+  'RegionalCertificationIcglrRcm',
+  'RegionalProtocolSignatory',
+  'PricePreciousMetalFix',
+  'ConflictZoneCleared',
+  'OriginSatelliteVerified',
+  'PhysicalSealAttested',
 ]);
 
 export const PredicateCategorySchema = z.enum([
@@ -77,6 +88,7 @@ export const PredicateCategorySchema = z.enum([
   'Performance',
   'Community',
   'Entity',
+  'Continental',
 ]);
 
 // ─── Predicate Value Schemas ──────────────────────────────────────────────────

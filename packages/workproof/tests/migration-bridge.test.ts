@@ -117,7 +117,7 @@ describe('Migration bridge — gtcx-protocols integration pattern', () => {
     expect(resolvePredicate('')).toBeUndefined();
   });
 
-  it('resolves all 47 predicates by canonical URI', () => {
+  it('resolves all 57 predicates by canonical URI', () => {
     for (const predicate of Object.values(WORKPROOF_PREDICATES)) {
       const resolved = resolvePredicate(predicate.uri);
       expect(resolved).toBe(predicate);

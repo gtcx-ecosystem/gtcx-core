@@ -11,7 +11,7 @@ export const IdentityVerified: PredicateDefinition = {
   schema: { type: 'boolean' },
   evidence: {
     required: ['government_id'],
-    optional: ['biometric_face', 'biometric_fingerprint'],
+    optional: ['biometric_face', 'biometric_fingerprint', 'biometric_attestation'],
   },
   attestation: {
     allowedAttestors: [{ type: 'credential', value: 'AuthorityID' }],
@@ -19,7 +19,12 @@ export const IdentityVerified: PredicateDefinition = {
   },
   confidence: {
     baseScore: 0.9,
-    evidenceWeights: { government_id: 0.7, biometric_face: 0.2, biometric_fingerprint: 0.1 },
+    evidenceWeights: {
+      government_id: 0.7,
+      biometric_face: 0.15,
+      biometric_fingerprint: 0.1,
+      biometric_attestation: 0.05,
+    },
     minimumThreshold: 0.7,
   },
   temporal: { validDuration: 'P1Y', renewalRequired: true, monitoringType: 'periodic' },

@@ -23,6 +23,7 @@ export type PredicateDomain =
   | 'relationship' // Entity relationships, authorization chains
   | 'temporal' // Time-based validity, expiration
   | 'financial' // Transaction capacity, credit status
+  | 'entity' // Formal registration and recognition of legal entities
   | 'composite'; // Bundled verification requirements
 
 /**
@@ -89,7 +90,18 @@ export type EvidenceType =
   | 'photo_evidence'
   | 'gps_location'
   | 'document_hash'
-  | 'witness_attestation';
+  | 'witness_attestation'
+  | 'biometric_attestation'
+  | 'mining_license'
+  | 'sovereign_registry_record'
+  | 'cooperative_registry_record'
+  | 'traceability_record'
+  | 'regional_certification_record'
+  | 'protocol_signatory_record'
+  | 'price_feed_record'
+  | 'conflict_screening_record'
+  | 'satellite_imagery_record'
+  | 'hardware_seal_record';
 
 /**
  * Attestation rules

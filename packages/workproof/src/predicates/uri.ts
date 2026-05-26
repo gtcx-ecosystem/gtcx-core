@@ -1,6 +1,6 @@
 // ============================================================================
 // PREDICATE REGISTRY
-// Canonical WorkProof predicate definitions (47 predicates across 9 categories)
+// Canonical WorkProof predicate definitions (57 predicates across 10 categories)
 // Each entry is a full PredicateDefinition from @gtcx/verification
 // ============================================================================
 
@@ -12,7 +12,7 @@ function uri(category: string, name: string): PredicateURI {
   return `tradepass://workproof/${category}/${name}` as PredicateURI;
 }
 
-/** Canonical URIs for all 47 WorkProof predicate types */
+/** Canonical URIs for all 57 WorkProof predicate types */
 export const WORKPROOF_PREDICATE_URIS: Record<WorkProofPredicateType, PredicateURI> = {
   // Identity
   IdentityVerified: uri('identity', 'verified'),
@@ -70,4 +70,15 @@ export const WORKPROOF_PREDICATE_URIS: Record<WorkProofPredicateType, PredicateU
   EntityRecognized: uri('entity', 'recognized'),
   IssuedBy: uri('entity', 'issued-by'),
   OwnershipChain: uri('entity', 'ownership-chain'),
+  // Continental
+  MiningLicenseValid: uri('continental', 'mining-license-valid'),
+  GoldBuyingLicenseValid: uri('continental', 'gold-buying-license-valid'),
+  CooperativeRegistered: uri('continental', 'cooperative-registered'),
+  Traceability3tTagged: uri('continental', 'traceability-3t-tagged'),
+  RegionalCertificationIcglrRcm: uri('continental', 'regional-certification-icglr-rcm'),
+  RegionalProtocolSignatory: uri('continental', 'regional-protocol-signatory'),
+  PricePreciousMetalFix: uri('continental', 'price-precious-metal-fix'),
+  ConflictZoneCleared: uri('continental', 'conflict-zone-cleared'),
+  OriginSatelliteVerified: uri('continental', 'origin-satellite-verified'),
+  PhysicalSealAttested: uri('continental', 'physical-seal-attested'),
 };

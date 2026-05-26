@@ -2,7 +2,7 @@
  * Predicate Registry
  *
  * Aggregates WorkProof predicate definitions from category modules.
- * Currently 47 predicates across 9 categories. To add a predicate, define
+ * Currently 57 predicates across 10 categories. To add a predicate, define
  * it in the appropriate category file under `definitions/` and re-export
  * it here.
  */
@@ -23,6 +23,18 @@ import {
   ViolationFree,
   LicenseValid,
 } from './definitions/compliance';
+import {
+  MiningLicenseValid,
+  GoldBuyingLicenseValid,
+  CooperativeRegistered,
+  Traceability3tTagged,
+  RegionalCertificationIcglrRcm,
+  RegionalProtocolSignatory,
+  PricePreciousMetalFix,
+  ConflictZoneCleared,
+  OriginSatelliteVerified,
+  PhysicalSealAttested,
+} from './definitions/continental';
 import {
   EntityRegistered,
   SanctionsCleared,
@@ -78,7 +90,7 @@ import type { WorkProofPredicateType } from './types';
 
 export { WORKPROOF_PREDICATE_URIS } from './uri';
 
-/** Full predicate definitions for all 47 WorkProof predicate types */
+/** Full predicate definitions for all 57 WorkProof predicate types */
 export const WORKPROOF_PREDICATES: Record<WorkProofPredicateType, PredicateDefinition> = {
   IdentityVerified,
   RoleHeld,
@@ -127,4 +139,14 @@ export const WORKPROOF_PREDICATES: Record<WorkProofPredicateType, PredicateDefin
   EntityRecognized,
   IssuedBy,
   OwnershipChain,
+  MiningLicenseValid,
+  GoldBuyingLicenseValid,
+  CooperativeRegistered,
+  Traceability3tTagged,
+  RegionalCertificationIcglrRcm,
+  RegionalProtocolSignatory,
+  PricePreciousMetalFix,
+  ConflictZoneCleared,
+  OriginSatelliteVerified,
+  PhysicalSealAttested,
 };

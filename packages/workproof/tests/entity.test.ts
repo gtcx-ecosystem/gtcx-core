@@ -36,8 +36,8 @@ describe('Entity predicates — registration', () => {
     }
   });
 
-  it('expands the registry from 38 to 47 predicates', () => {
-    expect(Object.keys(WORKPROOF_PREDICATES).length).toBe(47);
+  it('expands the registry from 47 to 57 predicates', () => {
+    expect(Object.keys(WORKPROOF_PREDICATES).length).toBe(57);
   });
 });
 

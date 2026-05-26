@@ -25,6 +25,7 @@ const validCategories = [
   'Performance',
   'Community',
   'Entity',
+  'Continental',
 ];
 
 const booleanValueArb = fc.record({
@@ -39,11 +40,16 @@ const numericValueArb = fc.record({
   precision: fc.option(fc.integer({ min: 0, max: 10 }), { nil: undefined }),
 });
 
-const rangeValueArb = fc.tuple(fc.double(), fc.double()).map(([a, b]) => {
-  const min = Math.min(a, b);
-  const max = Math.max(a, b);
-  return { kind: 'range' as const, min, max };
-});
+const rangeValueArb = fc
+  .tuple(
+    fc.double({ noDefaultInfinity: true, noNaN: true }),
+    fc.double({ noDefaultInfinity: true, noNaN: true })
+  )
+  .map(([a, b]) => {
+    const min = Math.min(a, b);
+    const max = Math.max(a, b);
+    return { kind: 'range' as const, min, max };
+  });
 
 const enumValueArb = fc.string({ minLength: 1 }).chain((value) =>
   fc.array(fc.string({ minLength: 1 }), { minLength: 1 }).map((allowedValues) => ({
@@ -85,7 +91,7 @@ const predicateValueArb = fc.oneof(
 // ---------------------------------------------------------------------------
 
 describe('property-based — WorkProofPredicateTypeSchema', () => {
-  it('accepts all 47 canonical predicate types', () => {
+  it('accepts all 57 canonical predicate types', () => {
     for (const t of validPredicateTypes) {
       const result = WorkProofPredicateTypeSchema.safeParse(t);
       expect(result.success).toBe(true);
@@ -108,7 +114,7 @@ describe('property-based — WorkProofPredicateTypeSchema', () => {
 });
 
 describe('property-based — PredicateCategorySchema', () => {
-  it('accepts all 9 valid categories', () => {
+  it('accepts all 10 valid categories', () => {
     for (const c of validCategories) {
       const result = PredicateCategorySchema.safeParse(c);
       expect(result.success).toBe(true);
@@ -159,7 +165,7 @@ describe('property-based — PredicateValueSchema', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Registry invariants — structural properties of all 47 predicates
+// Registry invariants — structural properties of all 57 predicates
 // ---------------------------------------------------------------------------
 
 describe('property-based — WORKPROOF_PREDICATES invariants', () => {
@@ -238,5 +244,6 @@ describe('property-based — PREDICATE_CATEGORIES consistency', () => {
     expect(counts['Performance']).toBe(4);
     expect(counts['Community']).toBe(5);
     expect(counts['Entity']).toBe(9);
+    expect(counts['Continental']).toBe(10);
   });
 });

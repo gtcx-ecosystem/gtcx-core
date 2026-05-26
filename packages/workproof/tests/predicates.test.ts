@@ -21,8 +21,8 @@ import {
 describe('WorkProofPredicateTypeSchema', () => {
   const ALL_TYPES = WorkProofPredicateTypeSchema.options;
 
-  it('has exactly 47 predicate types', () => {
-    expect(ALL_TYPES).toHaveLength(47);
+  it('has exactly 57 predicate types', () => {
+    expect(ALL_TYPES).toHaveLength(57);
   });
 
   it('parses every predicate type and returns the same value', () => {
@@ -49,8 +49,8 @@ describe('WorkProofPredicateTypeSchema', () => {
 // ---------------------------------------------------------------------------
 
 describe('PredicateCategorySchema', () => {
-  it('has exactly 9 categories', () => {
-    expect(PredicateCategorySchema.options).toHaveLength(9);
+  it('has exactly 10 categories', () => {
+    expect(PredicateCategorySchema.options).toHaveLength(10);
   });
 
   // Expected counts per category from the enum grouping
@@ -64,6 +64,7 @@ describe('PredicateCategorySchema', () => {
     Performance: 4,
     Community: 5,
     Entity: 9,
+    Continental: 10,
   };
 
   // Map each predicate type to its category based on position in the enum
@@ -130,6 +131,21 @@ describe('PredicateCategorySchema', () => {
         'EntityRecognized',
         'IssuedBy',
         'OwnershipChain',
+      ],
+    ],
+    [
+      'Continental',
+      [
+        'MiningLicenseValid',
+        'GoldBuyingLicenseValid',
+        'CooperativeRegistered',
+        'Traceability3tTagged',
+        'RegionalCertificationIcglrRcm',
+        'RegionalProtocolSignatory',
+        'PricePreciousMetalFix',
+        'ConflictZoneCleared',
+        'OriginSatelliteVerified',
+        'PhysicalSealAttested',
       ],
     ],
   ];
@@ -427,8 +443,8 @@ describe('PredicateValueSchema (composite)', () => {
 describe('WORKPROOF_PREDICATE_URIS', () => {
   const uris = Object.values(WORKPROOF_PREDICATE_URIS);
 
-  it('has 47 URIs', () => {
-    expect(uris).toHaveLength(47);
+  it('has 57 URIs', () => {
+    expect(uris).toHaveLength(57);
   });
 
   it('every URI starts with "tradepass://workproof/"', () => {
@@ -452,8 +468,8 @@ describe('WORKPROOF_PREDICATE_URIS', () => {
 describe('WORKPROOF_PREDICATES', () => {
   const entries = Object.entries(WORKPROOF_PREDICATES);
 
-  it('has 47 entries', () => {
-    expect(entries).toHaveLength(47);
+  it('has 57 entries', () => {
+    expect(entries).toHaveLength(57);
   });
 
   it('each definition has all required fields (uri, name, description, domain, version)', () => {

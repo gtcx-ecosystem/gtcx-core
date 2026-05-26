@@ -1,7 +1,7 @@
 // ============================================================================
 // PREDICATE TYPES
 // Full predicate taxonomy for WorkProof v2.2
-// 9 categories, 47 predicate types, 7 value variants
+// 10 categories, 57 predicate types, 7 value variants
 // ============================================================================
 
 // ─── Category-Grouped Predicate Types ─────────────────────────────────────────
@@ -71,7 +71,19 @@ export type EntityPredicateType =
   | 'IssuedBy'
   | 'OwnershipChain';
 
-/** Union of all 47 WorkProof predicate types */
+export type ContinentalPredicateType =
+  | 'MiningLicenseValid'
+  | 'GoldBuyingLicenseValid'
+  | 'CooperativeRegistered'
+  | 'Traceability3tTagged'
+  | 'RegionalCertificationIcglrRcm'
+  | 'RegionalProtocolSignatory'
+  | 'PricePreciousMetalFix'
+  | 'ConflictZoneCleared'
+  | 'OriginSatelliteVerified'
+  | 'PhysicalSealAttested';
+
+/** Union of all 57 WorkProof predicate types */
 export type WorkProofPredicateType =
   | IdentityPredicateType
   | ProductionPredicateType
@@ -81,7 +93,8 @@ export type WorkProofPredicateType =
   | LearningPredicateType
   | PerformancePredicateType
   | CommunityPredicateType
-  | EntityPredicateType;
+  | EntityPredicateType
+  | ContinentalPredicateType;
 
 // ─── Predicate Value Variants (discriminated by 'kind') ───────────────────────
 
@@ -150,7 +163,8 @@ export type PredicateCategory =
   | 'Learning'
   | 'Performance'
   | 'Community'
-  | 'Entity';
+  | 'Entity'
+  | 'Continental';
 
 /** Maps each predicate type to its category */
 export const PREDICATE_CATEGORIES: Record<WorkProofPredicateType, PredicateCategory> = {
@@ -201,4 +215,14 @@ export const PREDICATE_CATEGORIES: Record<WorkProofPredicateType, PredicateCateg
   EntityRecognized: 'Entity',
   IssuedBy: 'Entity',
   OwnershipChain: 'Entity',
+  MiningLicenseValid: 'Continental',
+  GoldBuyingLicenseValid: 'Continental',
+  CooperativeRegistered: 'Continental',
+  Traceability3tTagged: 'Continental',
+  RegionalCertificationIcglrRcm: 'Continental',
+  RegionalProtocolSignatory: 'Continental',
+  PricePreciousMetalFix: 'Continental',
+  ConflictZoneCleared: 'Continental',
+  OriginSatelliteVerified: 'Continental',
+  PhysicalSealAttested: 'Continental',
 };

@@ -1,6 +1,6 @@
 # @gtcx/workproof
 
-TradeCV/WorkProof v2.2 — W3C VC-based employment attestations with 47 predicates across 9 categories and selective disclosure.
+TradeCV/WorkProof v2.2 — W3C VC-based employment attestations with 57 predicates across 10 categories and selective disclosure.
 
 ## Installation
 
@@ -14,7 +14,7 @@ pnpm add @gtcx/workproof
 | ---------------------------- | ------------------------------------------------------------------------- |
 | `@gtcx/workproof`            | Aggregates all modules                                                    |
 | `@gtcx/workproof/evidence`   | Evidence types and schemas                                                |
-| `@gtcx/workproof/predicates` | Predicate validation (47 predicates across 9 categories)                  |
+| `@gtcx/workproof/predicates` | Predicate validation (57 predicates across 10 categories)                 |
 | `@gtcx/workproof/workproof`  | Core WorkProof types                                                      |
 | `@gtcx/workproof/tradecv`    | TradeCV v2.2 specific types                                               |
 | `@gtcx/workproof/ai`         | AI validation types and schemas (no runtime AI — see `gtcx-intelligence`) |
@@ -50,7 +50,7 @@ const result = verifyWorkProof(proof, issuerPublicKeyHex);
 ```typescript
 import { WORKPROOF_PREDICATES, WORKPROOF_PREDICATE_URIS } from '@gtcx/workproof';
 
-// 47 predicates available for selective disclosure
+// 57 predicates available for selective disclosure
 const predicate = WORKPROOF_PREDICATES.IdentityVerified;
 // predicate.uri === 'tradepass://workproof/identity/verified'
 // predicate.name, predicate.description, predicate.domain
