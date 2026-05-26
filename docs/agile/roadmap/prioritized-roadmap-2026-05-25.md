@@ -40,9 +40,9 @@ These block the publish window, regulator readiness, or external validation kick
 
 | #    | Item                                           | Repo           | Owner                         | Effort | Blocker                                                | Target Date           |
 | ---- | ---------------------------------------------- | -------------- | ----------------------------- | ------ | ------------------------------------------------------ | --------------------- |
-| P0.1 | **Fire npm publish**                           | gtcx-core      | mobile-engineering-lead       | 15 min | None — workflow green, NPM_TOKEN present               | Wed–Fri 2026-05-28→30 |
+| P0.1 | **Fire npm publish**                           | gtcx-core      | mobile-engineering-lead       | 15 min | ✅ Complete 2026-05-26 — 18 packages published         | Wed–Fri 2026-05-28→30 |
 | P0.2 | **Resolve Ext-1 predicate collisions**         | gtcx-core      | protocol-architect + proposer | 2–4h   | Proposer response on 3 renamed predicates              | Tue 2026-05-27        |
-| P0.3 | **Switch gtcx-protocols deps to npm versions** | gtcx-protocols | protocol-architect            | 15 min | P0.1 complete                                          | Fri 2026-05-30        |
+| P0.3 | **Switch gtcx-protocols deps to npm versions** | gtcx-protocols | protocol-architect            | 15 min | ✅ Complete 2026-05-26 — link: → ^, 714 tests pass     | Fri 2026-05-30        |
 | P0.4 | **Pen-test vendor selection kickoff**          | gtcx-core      | crypto-security-engineer      | 2–4h   | None — RFP approved, 5-vendor longlist ready           | Wed 2026-05-28        |
 | P0.5 | **SOC 2 CPA firm outreach**                    | gtcx-core      | quality-evidence-lead         | 2–4h   | None — readiness prep approved, 4-firm shortlist ready | Thu 2026-05-29        |
 
@@ -143,7 +143,7 @@ Reassess weekly. These are valuable but not on the critical path to first sovere
 
 At the end of Fri 2026-05-30, the following must be true:
 
-- [ ] P0.1 — `@gtcx/workproof@1.0.0` and `@gtcx/verification@3.1.0` are installable from npm
+- [x] P0.1 — `@gtcx/workproof@1.0.0` and `@gtcx/verification@3.1.0` are installable from npm
 - [ ] P0.3 — gtcx-protocols uses npm versions, not `link:`
 - [ ] P0.4 — Pen-test vendor outreach emails sent to ≥2 vendors
 - [ ] P0.5 — SOC 2 CPA outreach emails sent to ≥2 firms
@@ -155,7 +155,7 @@ Optional (nice to have):
 
 - [ ] P0.2 — Ext-1 collision resolution complete, PR open
 - [ ] P1.2 — GitHub Pages enabled, trust portal accessible at external URL
-- [ ] P2.1 — Zimbabwe pre-submission email sent
+- [ ] P2.1 — Zimbabwe pre-submission email sent (blocked on human: recipient contact + approval)
 
 ---
 

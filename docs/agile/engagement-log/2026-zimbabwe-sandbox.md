@@ -55,6 +55,13 @@ The send-ready render (every `{{placeholder}}` substituted, copy-paste-ready) li
 
 ## Event log (newest first)
 
+### 2026-05-26 — gtcx-core published, dep switch complete
+
+- Action: `@gtcx/workproof@1.0.0` and 17 sibling packages published to npm via `release.yml`. `gtcx-protocols` post-publish dependency switch executed: `link:` → `^` for `@gtcx/workproof` and `@gtcx/verification`, root devDependency pins bumped to `^3.0.0`.
+- Owner: Protocol Architect
+- Driver: Sprint 2.3 completion unblocks Sprint 3.3 (Zimbabwe email).
+- Blockers resolved: Publish complete; cross-repo deps now consume npm versions.
+
 ### 2026-05-22 — Email drafted
 
 - Action: Drafted intro email targeting Reserve Bank of Zimbabwe Fintech Sandbox with a 45-minute pre-submission meeting request. Email cites 3 public-verifiable artifacts (trust portal, internal completion audit, fuzz evidence) and acknowledges pen-test + SOC 2 are contracted-in-motion.

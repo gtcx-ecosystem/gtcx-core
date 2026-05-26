@@ -274,21 +274,21 @@ Per-task completion against the plan above. Updated on every meaningful state ch
 
 ### Sprint 2 — Release pipeline proven
 
-| #   | Task                                      | Status            | Evidence                                                                                                                                                    |
-| --- | ----------------------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done           | `packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                                             |
-| 2.2 | Changesets for foundation packages        | ✅ Done           | 6 changeset entries staged (connectivity, crypto, crypto-native, security, sync, workproof); linked group covers types/identity/verification/domain/schemas |
-| 2.3 | First `release.yml` end-to-end publish    | ⏸️ Ready to fire  | NPM_TOKEN confirmed, provenance ready, workflow green. **Window: Wed 2026-05-28 → Fri 2026-05-30**                                                          |
-| 2.4 | Remaining 17 packages published           | ⏸️ Blocked on 2.3 | Cascades from 2.3                                                                                                                                           |
-| 2.5 | Trust portal "Published versions" section | ⏸️ Blocked on 2.3 | Will reflect `npm view` resolvable URLs                                                                                                                     |
+| #   | Task                                      | Status                  | Evidence                                                                                                                                                    |
+| --- | ----------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done                 | `packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                                             |
+| 2.2 | Changesets for foundation packages        | ✅ Done                 | 6 changeset entries staged (connectivity, crypto, crypto-native, security, sync, workproof); linked group covers types/identity/verification/domain/schemas |
+| 2.3 | First `release.yml` end-to-end publish    | ✅ Complete             | 18 of 21 packages published 2026-05-26. `@gtcx/workproof@1.0.0` live. Provenance attempted (attestations null — follow-up needed).                          |
+| 2.4 | Remaining 3 packages published            | ⏸️ Blocked on changeset | `@gtcx/resilience`, `@gtcx/telemetry`, `@gtcx/runtime` need first changeset to trigger version bump.                                                        |
+| 2.5 | Trust portal "Published versions" section | ✅ Complete             | `docs/governance/trust-portal.md` updated with live `npm view` versions.                                                                                    |
 
 ### Sprint 3 — Jurisdiction readiness
 
-| #   | Task                                       | Status              | Evidence                                                                                                                                                                                       |
-| --- | ------------------------------------------ | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 3.1 | 5 jurisdiction fixtures + integration test | ✅ Done             | `tests/integration/fixtures/jurisdiction-fixtures.ts` + `tests/integration/jurisdictions.test.ts` (21 tests, ZW/GH/NA/BW/CD)                                                                   |
-| 3.2 | Trust portal at external regulator URL     | ✅ Live via GitBook | Auto-syncs on push to `gtcx-protocol.gitbook.io/gtcx-open-source` — see [hosting runbook](../../operations/trust-portal-hosting.md)                                                            |
-| 3.3 | Zimbabwe sandbox email sent                | ⏸️ Blocked on 2.3   | Send-ready render staged at [`docs/gtm/renders/zimbabwe-2026.md`](../../gtm/renders/zimbabwe-2026.md). Also pre-staged Ghana/Namibia/Botswana/DRC (FR) renders for parallel send post-Zimbabwe |
+| #   | Task                                       | Status              | Evidence                                                                                                                                        |
+| --- | ------------------------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| 3.1 | 5 jurisdiction fixtures + integration test | ✅ Done             | `tests/integration/fixtures/jurisdiction-fixtures.ts` + `tests/integration/jurisdictions.test.ts` (21 tests, ZW/GH/NA/BW/CD)                    |
+| 3.2 | Trust portal at external regulator URL     | ✅ Live via GitBook | Auto-syncs on push to `gtcx-protocol.gitbook.io/gtcx-open-source` — see [hosting runbook](../../operations/trust-portal-hosting.md)             |
+| 3.3 | Zimbabwe sandbox email sent                | ⏸️ Blocked on human | Publish complete. Send-ready render staged. Blockers: recipient contact verification, engagement-lead designation, Protocol Architect approval. |
 
 ### Sprint 4 — External compliance kickoff
 
@@ -317,8 +317,8 @@ Per-task completion against the plan above. Updated on every meaningful state ch
 | -------------------- | ----- | ----------------------------------------------------------------------------------------------------------------- |
 | ✅ Done (or drafted) | 18    | All Sprint 1 except 1.4; 2.1, 2.2; 3.1; 4.1, 4.2, 4.3; ADR-012 Stage 0+1; audit refresh; GTM refresh; Ext-1 draft |
 | ⏸️ User-blocked      | 3     | 1.4 (OPENAI_API_KEY), 4.1 vendor outreach, 4.2 CPA outreach                                                       |
-| ⏸️ Ready to fire     | 1     | 2.3 (publish) — workflow green, NPM_TOKEN present, window Wed–Fri                                                 |
-| ⏸️ Cascade-blocked   | 3     | 2.4, 2.5, 3.3 — all unblock from 2.3                                                                              |
+| ✅ Complete          | 2     | 2.3 (publish), 2.5 (trust portal versions)                                                                        |
+| ⏸️ Cascade-blocked   | 2     | 2.4 (3 packages), 3.3 (Zimbabwe email)                                                                            |
 | 🔄 Awaiting decision | 1     | Ext-1 continental extension — collision resolution needed by Tue for 1.0.0 inclusion                              |
 
 ### Critical path right now

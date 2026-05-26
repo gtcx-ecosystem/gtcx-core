@@ -55,31 +55,31 @@ A reviewer who only reads this section has enough to make a procurement decision
 
 ## Published versions
 
-> **Status:** Awaiting first publish — Sprint 2.3 of the engagement readiness roadmap. The `release.yml` workflow is wired and dry-run validated (commits `805cda7` + `028e3d9`); the first execution publishes all 21 `@gtcx/*` packages with SLSA provenance attestations. Verification procedure is in [`docs/devops/release-mgmt/npm-publish-runbook.md`](../devops/release-mgmt/npm-publish-runbook.md). This section auto-populates after the first run.
+> **Status:** Published 2026-05-26 via `release.yml` workflow dispatch. 18 of 21 packages live on npm; 3 (`@gtcx/resilience`, `@gtcx/telemetry`, `@gtcx/runtime`) pending their first changeset. Provenance generation attempted; attestation status per package below.
 
 | Package               | npm version | Provenance | Source                                                                                     |
 | --------------------- | ----------- | ---------- | ------------------------------------------------------------------------------------------ |
-| `@gtcx/types`         | _pending_   | _pending_  | [npmjs.com/package/@gtcx/types](https://www.npmjs.com/package/@gtcx/types)                 |
-| `@gtcx/crypto`        | _pending_   | _pending_  | [npmjs.com/package/@gtcx/crypto](https://www.npmjs.com/package/@gtcx/crypto)               |
-| `@gtcx/crypto-native` | _pending_   | _pending_  | [npmjs.com/package/@gtcx/crypto-native](https://www.npmjs.com/package/@gtcx/crypto-native) |
-| `@gtcx/schemas`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/schemas](https://www.npmjs.com/package/@gtcx/schemas)             |
-| `@gtcx/utils`         | _pending_   | _pending_  | [npmjs.com/package/@gtcx/utils](https://www.npmjs.com/package/@gtcx/utils)                 |
-| `@gtcx/domain`        | _pending_   | _pending_  | [npmjs.com/package/@gtcx/domain](https://www.npmjs.com/package/@gtcx/domain)               |
-| `@gtcx/security`      | _pending_   | _pending_  | [npmjs.com/package/@gtcx/security](https://www.npmjs.com/package/@gtcx/security)           |
-| `@gtcx/verification`  | _pending_   | _pending_  | [npmjs.com/package/@gtcx/verification](https://www.npmjs.com/package/@gtcx/verification)   |
-| `@gtcx/identity`      | _pending_   | _pending_  | [npmjs.com/package/@gtcx/identity](https://www.npmjs.com/package/@gtcx/identity)           |
-| `@gtcx/api-client`    | _pending_   | _pending_  | [npmjs.com/package/@gtcx/api-client](https://www.npmjs.com/package/@gtcx/api-client)       |
-| `@gtcx/connectivity`  | _pending_   | _pending_  | [npmjs.com/package/@gtcx/connectivity](https://www.npmjs.com/package/@gtcx/connectivity)   |
-| `@gtcx/logging`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/logging](https://www.npmjs.com/package/@gtcx/logging)             |
-| `@gtcx/network`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/network](https://www.npmjs.com/package/@gtcx/network)             |
-| `@gtcx/sync`          | _pending_   | _pending_  | [npmjs.com/package/@gtcx/sync](https://www.npmjs.com/package/@gtcx/sync)                   |
+| `@gtcx/types`         | 3.0.0       | —          | [npmjs.com/package/@gtcx/types](https://www.npmjs.com/package/@gtcx/types)                 |
+| `@gtcx/crypto`        | 3.1.0       | —          | [npmjs.com/package/@gtcx/crypto](https://www.npmjs.com/package/@gtcx/crypto)               |
+| `@gtcx/crypto-native` | 0.4.0       | —          | [npmjs.com/package/@gtcx/crypto-native](https://www.npmjs.com/package/@gtcx/crypto-native) |
+| `@gtcx/schemas`       | 3.0.0       | —          | [npmjs.com/package/@gtcx/schemas](https://www.npmjs.com/package/@gtcx/schemas)             |
+| `@gtcx/utils`         | 0.2.2       | —          | [npmjs.com/package/@gtcx/utils](https://www.npmjs.com/package/@gtcx/utils)                 |
+| `@gtcx/domain`        | 3.0.0       | —          | [npmjs.com/package/@gtcx/domain](https://www.npmjs.com/package/@gtcx/domain)               |
+| `@gtcx/security`      | 3.1.0       | —          | [npmjs.com/package/@gtcx/security](https://www.npmjs.com/package/@gtcx/security)           |
+| `@gtcx/verification`  | 3.1.0       | —          | [npmjs.com/package/@gtcx/verification](https://www.npmjs.com/package/@gtcx/verification)   |
+| `@gtcx/identity`      | 3.1.0       | —          | [npmjs.com/package/@gtcx/identity](https://www.npmjs.com/package/@gtcx/identity)           |
+| `@gtcx/api-client`    | 0.4.1       | —          | [npmjs.com/package/@gtcx/api-client](https://www.npmjs.com/package/@gtcx/api-client)       |
+| `@gtcx/connectivity`  | 0.5.0       | —          | [npmjs.com/package/@gtcx/connectivity](https://www.npmjs.com/package/@gtcx/connectivity)   |
+| `@gtcx/logging`       | 0.3.0       | —          | [npmjs.com/package/@gtcx/logging](https://www.npmjs.com/package/@gtcx/logging)             |
+| `@gtcx/network`       | 0.2.0       | —          | [npmjs.com/package/@gtcx/network](https://www.npmjs.com/package/@gtcx/network)             |
+| `@gtcx/sync`          | 0.3.0       | —          | [npmjs.com/package/@gtcx/sync](https://www.npmjs.com/package/@gtcx/sync)                   |
 | `@gtcx/resilience`    | _pending_   | _pending_  | [npmjs.com/package/@gtcx/resilience](https://www.npmjs.com/package/@gtcx/resilience)       |
 | `@gtcx/telemetry`     | _pending_   | _pending_  | [npmjs.com/package/@gtcx/telemetry](https://www.npmjs.com/package/@gtcx/telemetry)         |
 | `@gtcx/runtime`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/runtime](https://www.npmjs.com/package/@gtcx/runtime)             |
-| `@gtcx/events`        | _pending_   | _pending_  | [npmjs.com/package/@gtcx/events](https://www.npmjs.com/package/@gtcx/events)               |
-| `@gtcx/workproof`     | _pending_   | _pending_  | [npmjs.com/package/@gtcx/workproof](https://www.npmjs.com/package/@gtcx/workproof)         |
-| `@gtcx/services`      | _pending_   | _pending_  | [npmjs.com/package/@gtcx/services](https://www.npmjs.com/package/@gtcx/services)           |
-| `@gtcx/ai`            | _pending_   | _pending_  | [npmjs.com/package/@gtcx/ai](https://www.npmjs.com/package/@gtcx/ai)                       |
+| `@gtcx/events`        | 1.0.0       | —          | [npmjs.com/package/@gtcx/events](https://www.npmjs.com/package/@gtcx/events)               |
+| `@gtcx/workproof`     | 1.0.0       | —          | [npmjs.com/package/@gtcx/workproof](https://www.npmjs.com/package/@gtcx/workproof)         |
+| `@gtcx/services`      | 1.0.1       | —          | [npmjs.com/package/@gtcx/services](https://www.npmjs.com/package/@gtcx/services)           |
+| `@gtcx/ai`            | 0.3.0       | —          | [npmjs.com/package/@gtcx/ai](https://www.npmjs.com/package/@gtcx/ai)                       |
 
 ### Verifying any version independently
 
