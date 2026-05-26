@@ -162,9 +162,16 @@ jobs:
         run: cargo test --workspace --lib
         working-directory: rust
 
+      - name: Configure npm auth
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Publish packages
         if: github.event_name == 'workflow_dispatch'
         run: pnpm release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
