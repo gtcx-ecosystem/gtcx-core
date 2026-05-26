@@ -6,7 +6,7 @@ owner: 'protocol-architect'
 role: 'protocol-architect'
 tier: 'critical'
 tags: ['roadmap', 'prioritized', 'ecosystem', 'cross-repo']
-review_cycle: 'daily'
+review_cycle: 'weekly'
 ---
 
 # Prioritized Roadmap — GTCX Ecosystem
