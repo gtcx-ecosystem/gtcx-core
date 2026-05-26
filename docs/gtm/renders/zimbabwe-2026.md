@@ -23,7 +23,7 @@ This is the literal send-ready render of the canonical template with every `{{pl
 | Gate                             | Status     | Source                                                                                                            |
 | -------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------- |
 | Trust portal URL returns 200     | ⏸️ Pending | Requires GitHub Pages enablement per [hosting runbook](../../operations/trust-portal-hosting.md)                  |
-| npm packages published           | ⏸️ Pending | Requires `gh workflow run release.yml` after CI green on `4956a10`                                                |
+| npm packages published           | ⏸️ Pending | Requires `gh workflow run release.yml` after CI green on `4f50c37`                                                |
 | Recipient address verified       | ⏸️ Pending | `sandbox@rbz.co.zw` is the candidate; verify via RBZ published directory or partner intro before send             |
 | Engagement-lead name designated  | ⏸️ Pending | Replace `<your name and contact>` below                                                                           |
 | Sender name + title designated   | ⏸️ Pending | Replace `<Sender name>` / `<Title>` below                                                                         |
