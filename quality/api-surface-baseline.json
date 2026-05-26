@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-24T15:19:09.501Z",
+  "generatedAt": "2026-05-26T05:05:45.312Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.3.0",
@@ -32,7 +32,7 @@
       ]
     },
     "@gtcx/api-client": {
-      "version": "0.4.0",
+      "version": "0.4.1",
       "dir": "packages/api-client",
       "typesPath": "packages/api-client/dist/index.d.ts",
       "hash": "1679ab0741da912b9067cfbadb5b19ffcc3e31992d3388187318b7e5e0099d28",
@@ -100,7 +100,7 @@
       ]
     },
     "@gtcx/connectivity": {
-      "version": "0.4.0",
+      "version": "0.5.0",
       "dir": "packages/connectivity",
       "typesPath": "packages/connectivity/dist/index.d.ts",
       "hash": "c1d2382bc488a88519eb902072d2cb68c912eb3b64e9ebe45d9b0601ff9e5dc2",
@@ -144,7 +144,7 @@
       ]
     },
     "@gtcx/crypto": {
-      "version": "3.0.0",
+      "version": "3.1.0",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
       "hash": "7af79a063f968a8ceba23da9b54f719f5b5532f9b0228eeacb5169fc87419760",
@@ -241,7 +241,7 @@
       ]
     },
     "@gtcx/crypto-native": {
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dir": "packages/crypto-native",
       "typesPath": "packages/crypto-native/dist/index.d.ts",
       "hash": "f37bcc63406a56cd405777bc372ea9fe51486b93820f2b79c3a46cea90a31334",
@@ -476,7 +476,7 @@
       ]
     },
     "@gtcx/identity": {
-      "version": "3.0.0",
+      "version": "3.1.0",
       "dir": "packages/identity",
       "typesPath": "packages/identity/dist/index.d.ts",
       "hash": "5104d0fe344f7e3d0f783ccc0eb764a3340b25086055373f8b96b788d5710cab",
@@ -592,7 +592,7 @@
       ]
     },
     "@gtcx/runtime": {
-      "version": "0.2.0",
+      "version": "0.2.1",
       "dir": "packages/runtime",
       "typesPath": "packages/runtime/dist/index.d.ts",
       "hash": "92b430bcab37a83c2c7532bd63d9f73bed2c602f95366ad5e3b5948f103be771",
@@ -627,7 +627,7 @@
       ]
     },
     "@gtcx/security": {
-      "version": "3.0.0",
+      "version": "3.1.0",
       "dir": "packages/security",
       "typesPath": "packages/security/dist/index.d.ts",
       "hash": "f015e1fdcae0175ed9ec1583cf016d8a8fadc21bd1b7d44b5cc5208d278dff92",
@@ -782,7 +782,7 @@
       ]
     },
     "@gtcx/services": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
       "hash": "147c799004bc1e20633a2086eb63d79a75b216159cf78da2eb43c90b7586ed92",
@@ -810,7 +810,7 @@
       ]
     },
     "@gtcx/sync": {
-      "version": "0.2.2",
+      "version": "0.3.0",
       "dir": "packages/sync",
       "typesPath": "packages/sync/dist/index.d.ts",
       "hash": "884d4ac80c7d4530c16584a2a939a82b565e577d353757390a79678222233630",
@@ -1096,10 +1096,10 @@
       ]
     },
     "@gtcx/verification": {
-      "version": "3.0.0",
+      "version": "3.1.0",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "6043b8a4c6c38369a2d92db147af895220af71ecce6e6b27424a7cb8e5a85a0b",
+      "hash": "88f3695a4d5521ddb18211e0ac3b9f5e79892ba4a57ac8483d5c57073478ff1c",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",
@@ -1190,6 +1190,7 @@
         "EvidenceTypeSchema",
         "ExtractionSiteSubtypes",
         "extractProofHashes",
+        "findLegacyIdsForUri",
         "formatCertificateForDisplay",
         "generateCertificateId",
         "GenerateCertificateInput",
@@ -1265,6 +1266,7 @@
         "QRCodeVerificationResultSchema",
         "QualityGrade",
         "QualityGradeSchema",
+        "resolveLegacyPredicateId",
         "ResourceContext",
         "ResourceContextSchema",
         "RevocationChecker",
@@ -1292,6 +1294,7 @@
         "tracedVerificationWorkflow",
         "tracedVerifyCertificate",
         "tracedVerifyQRCode",
+        "TRADEPASS_LEGACY_ID_ALIASES",
         "validateCertificateInput",
         "ValidationMetrics",
         "ValidationMetricsSchema",
@@ -1307,10 +1310,10 @@
       ]
     },
     "@gtcx/workproof": {
-      "version": "0.1.3",
+      "version": "1.0.0",
       "dir": "packages/workproof",
       "typesPath": "packages/workproof/dist/index.d.ts",
-      "hash": "e985dc800d2ac2dd6a3f79815669e81d0b3305f6b45a0b725c3975ced813d730",
+      "hash": "8711032f433390050585b9a98da4f656e0ef0688912a5266fe3599bed4a06bc5",
       "exports": [
         "AdmissionCriteria",
         "AdmissionCriteriaSchema",
@@ -1333,6 +1336,7 @@
         "CreateWorkProofInput",
         "DisclosureLevel",
         "DisclosureLevelSchema",
+        "EntityPredicateType",
         "EnumValue",
         "EnumValueSchema",
         "FinancialPredicateType",
