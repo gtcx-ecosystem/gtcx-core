@@ -14,7 +14,7 @@ review_cycle: 'on-change'
 > **Status:** Draft — awaiting collision review and authority taxonomy specification
 > **Date:** 2026-05-25
 > **Target:** `gtcx-core/packages/workproof/`
-> **Net change:** 47 → 59 predicates (+12 continental)
+> **Net change:** 47 → 57 predicates (+10 continental)
 
 ---
 
@@ -33,20 +33,18 @@ Add 12 continental-Africa predicates to the WorkProof registry, plus a type-safe
 
 ## Proposed 12 Predicates
 
-| #   | Predicate                       | Category   | Evidence Type             | Notes                                                                            |
-| --- | ------------------------------- | ---------- | ------------------------- | -------------------------------------------------------------------------------- |
-| 1   | `MiningLicenseValid`            | Compliance | `mining_license`          | **Collision check needed:** `LicenseValid` exists                                |
-| 2   | `GoldBuyingLicenseValid`        | Compliance | `gold_buying_license`     | Zimbabwe-specific pattern, generalizable                                         |
-| 3   | `CooperativeRegistered`         | Identity   | `cooperative_registry`    | **Collision check needed:** `EntityRegistered` covers legal registration broadly |
-| 4   | `Traceability3tTagged`          | Production | `traceability_tag`        | ITSCI/iTSCi tag verification                                                     |
-| 5   | `RegionalCertificationIcglrRcm` | Compliance | `regional_certification`  | ICGLR Regional Certification Mechanism                                           |
-| 6   | `RegionalProtocolSignatory`     | Compliance | `protocol_signatory`      | Signatory to regional protocols (AMV, etc.)                                      |
-| 7   | `PricePreciousMetalFix`         | Financial  | `price_fix_record`        | LBMA / local fix participation                                                   |
-| 8   | `ConflictZoneCleared`           | Compliance | `conflict_zone_clearance` | UN/ITSCI cleared-area verification                                               |
-| 9   | `OriginSatelliteVerified`       | Location   | `satellite_imagery`       | Satellite-based origin verification                                              |
-| 10  | `IdentityProven`                | Identity   | `biometric_attestation`   | **Collision check needed:** `IdentityVerified` exists                            |
-| 11  | `PhysicalSealAttested`          | Production | `physical_seal`           | Tamper-evident seal verification                                                 |
-| 12  | `SanctionsCleared`              | Compliance | `sanctions_screening`     | **Collision check needed:** `SanctionsCleared` exists as entity-tier (ADR-012)   |
+| #   | Predicate                       | Category   | Evidence Type             | Notes                                                                         |
+| --- | ------------------------------- | ---------- | ------------------------- | ----------------------------------------------------------------------------- |
+| 1   | `GoldBuyingLicenseValid`        | Compliance | `gold_buying_license`     | Zimbabwe-specific pattern, generalizable                                      |
+| 2   | `CooperativeRegistered`         | Identity   | `cooperative_registry`    | Generalizes `EntityRegistered` for cooperative legal structures               |
+| 3   | `Traceability3tTagged`          | Production | `traceability_tag`        | ITSCI/iTSCi tag verification                                                  |
+| 4   | `RegionalCertificationIcglrRcm` | Compliance | `regional_certification`  | ICGLR Regional Certification Mechanism                                        |
+| 5   | `RegionalProtocolSignatory`     | Compliance | `protocol_signatory`      | Signatory to regional protocols (AMV, etc.)                                   |
+| 6   | `PricePreciousMetalFix`         | Financial  | `price_fix_record`        | LBMA / local fix participation                                                |
+| 7   | `ConflictZoneCleared`           | Compliance | `conflict_zone_clearance` | UN/ITSCI cleared-area verification                                            |
+| 8   | `OriginSatelliteVerified`       | Location   | `satellite_imagery`       | Satellite-based origin verification                                           |
+| 9   | `PhysicalSealAttested`          | Production | `physical_seal`           | Tamper-evident seal verification                                              |
+| 10  | `RegionalSanctionsCleared`      | Compliance | `sanctions_screening`     | Renamed from `SanctionsCleared` to avoid collision with entity-tier predicate |
 
 ---
 
@@ -60,14 +58,18 @@ Add 12 continental-Africa predicates to the WorkProof registry, plus a type-safe
 | `IdentityProven`     | `IdentityVerified` (individual-tier) | **DROP — extend existing `IdentityVerified`** | Existing already has `optional: ['biometric_face', 'biometric_fingerprint']` and description covers "official documentation and/or biometrics." Add `biometric_attestation` to optional evidence if needed. |
 | `MiningLicenseValid` | `LicenseValid` (generic)             | **DROP — extend existing `LicenseValid`**     | Existing is generic "Operating license current and valid." Add `mining_license` as an additional accepted evidence type alongside `government_id`. Keeps registry clean.                                    |
 
-**Net effect:** 12 proposed predicates → **10 new predicates** (47 → 57, not 59). Two duplicates eliminated through schema extension on existing predicates.
+**Net effect:** 12 proposed predicates → **10 net-new predicates** (47 → 57). Three collisions resolved:
+
+- `SanctionsCleared` → `RegionalSanctionsCleared` (rename)
+- `IdentityProven` → DROP, extend `IdentityVerified.optional` with `biometric_attestation`
+- `MiningLicenseValid` → DROP, extend `LicenseValid.required` with `mining_license` as alternative
 
 #### Schema Extensions (Additive, Non-Breaking)
 
-| Predicate          | Change                                              | New Evidence Accepted               |
-| ------------------ | --------------------------------------------------- | ----------------------------------- |
-| `IdentityVerified` | Add `biometric_attestation` to `evidence.optional`  | `biometric_attestation`             |
-| `LicenseValid`     | Expand `evidence.required` to accept multiple types | `government_id` or `mining_license` |
+| Predicate          | Change                                                                                     | New Evidence Accepted               |
+| ------------------ | ------------------------------------------------------------------------------------------ | ----------------------------------- |
+| `IdentityVerified` | Add `biometric_attestation` to `evidence.optional`                                         | `biometric_attestation`             |
+| `LicenseValid`     | Expand `evidence.required` to `['government_id', 'mining_license']` (alternative required) | `government_id` or `mining_license` |
 
 ### 2. Authority Taxonomy Scope
 
@@ -98,11 +100,11 @@ If approved, this needs a `@changesets/cli` changeset:
 ## Acceptance Criteria (for PR review)
 
 - [ ] No predicate name collisions with existing 47 predicates
-- [ ] All 12 predicates have `PredicateDefinition` schema complete (evidence, attestation, confidence, temporal, AI)
+- [ ] All 10 net-new predicates have `PredicateDefinition` schema complete (evidence, attestation, confidence, temporal, AI)
 - [ ] `AUTHORITY_SLUGS` const is type-safe and exported
-- [ ] ≥3 test fixtures per predicate (≥36 total assertions)
+- [ ] ≥3 test fixtures per predicate (≥30 total assertions)
 - [ ] Migration aliases added to `TRADEPASS_LEGACY_ID_ALIASES` if applicable
-- [ ] Changeset included
+- [ ] Changeset included (type: `minor`, scope: `@gtcx/workproof`)
 - [ ] All CI gates pass (lint, typecheck, test, build, architecture, docs)
 
 ---
