@@ -144,3 +144,97 @@ describe('Continental predicates — sample evidence validation', () => {
     }
   });
 });
+
+describe('Continental predicates — jurisdiction-specific fixtures', () => {
+  const jurisdictions = [
+    { country: 'Zimbabwe', code: 'ZW', authority: 'Zim Mines' },
+    { country: 'Democratic Republic of Congo', code: 'CD', authority: 'SAESSCAM' },
+    { country: 'Ghana', code: 'GH', authority: 'MinCom' },
+  ];
+
+  it.each(CONTINENTAL_TYPES)('accepts evidence with jurisdiction metadata for %s', (type) => {
+    const requiredTypes = EVIDENCE_MAP[type];
+    for (const jurisdiction of jurisdictions) {
+      const items = requiredTypes.map((t) => ({
+        type: t,
+        hash: `sha256:${jurisdiction.code.toLowerCase()}123def456`,
+        timestamp: 1704067200000,
+        metadata: {
+          jurisdiction: jurisdiction.country,
+          jurisdictionCode: jurisdiction.code,
+          issuingAuthority: jurisdiction.authority,
+          registryUrl: `https://registry.${jurisdiction.country.toLowerCase().replace(/ /g, '-')}.gov`,
+          verifiedAt: '2026-01-15T00:00:00Z',
+        },
+      }));
+      for (const item of items) {
+        const result = WorkProofEvidenceItemSchema.safeParse(item);
+        expect(result.success).toBe(true);
+        if (result.success) {
+          expect(result.data.metadata?.jurisdiction).toBe(jurisdiction.country);
+          expect(result.data.metadata?.jurisdictionCode).toBe(jurisdiction.code);
+        }
+      }
+    }
+  });
+
+  it('MiningLicenseValid validates with Zimbabwe mining license metadata', () => {
+    const item = {
+      type: 'sovereign_registry_record',
+      hash: 'sha256:zw-mining-001',
+      timestamp: 1704067200000,
+      metadata: {
+        jurisdiction: 'Zimbabwe',
+        jurisdictionCode: 'ZW',
+        licenseNumber: 'ML-2024-0042',
+        licenseType: 'gold',
+        issuedBy: 'Ministry of Mines and Mining Development',
+        validFrom: '2024-01-01',
+        validUntil: '2024-12-31',
+        mineLocation: 'Mazowe District',
+      },
+    };
+    const result = WorkProofEvidenceItemSchema.safeParse(item);
+    expect(result.success).toBe(true);
+  });
+
+  it('Traceability3tTagged validates with DRC iTSCi metadata', () => {
+    const item = {
+      type: 'traceability_record',
+      hash: 'sha256:cd-itsci-789',
+      timestamp: 1704067200000,
+      metadata: {
+        jurisdiction: 'Democratic Republic of Congo',
+        jurisdictionCode: 'CD',
+        traceabilitySystem: 'iTSCi',
+        mineral: 'cassiterite',
+        tagNumber: 'CD-TAG-2024-1123',
+        mineOfOrigin: 'Bisie',
+        exporter: 'Societe Miniere de Bisunzu',
+        shipmentDate: '2024-03-15',
+      },
+    };
+    const result = WorkProofEvidenceItemSchema.safeParse(item);
+    expect(result.success).toBe(true);
+  });
+
+  it('CooperativeRegistered validates with Ghana cooperative metadata', () => {
+    const item = {
+      type: 'cooperative_registry_record',
+      hash: 'sha256:gh-cooperative-456',
+      timestamp: 1704067200000,
+      metadata: {
+        jurisdiction: 'Ghana',
+        jurisdictionCode: 'GH',
+        cooperativeName: 'Obuasi Small-Scale Miners Association',
+        registrationNumber: 'GHA-COOP-2019-0047',
+        registeredWith: 'Minerals Commission of Ghana',
+        district: 'Obuasi Municipal',
+        region: 'Ashanti',
+        memberCount: 124,
+      },
+    };
+    const result = WorkProofEvidenceItemSchema.safeParse(item);
+    expect(result.success).toBe(true);
+  });
+});
