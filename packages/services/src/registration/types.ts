@@ -31,10 +31,12 @@ export interface RegistrationConfig {
   verifyBaseUrl?: string | undefined;
 }
 
+const DEFAULT_VERIFY_URL = process.env['GTCX_VERIFY_URL'] || 'https://verify.gtcx.io';
+
 export const DEFAULT_CONFIG: RegistrationConfig = {
   minGpsAccuracy: 10,
   minPhotos: 2,
   maxPhotos: 10,
   maxDiscoveryAgeDays: 30,
-  verifyBaseUrl: 'https://verify.gtcx.io',
+  verifyBaseUrl: DEFAULT_VERIFY_URL,
 };

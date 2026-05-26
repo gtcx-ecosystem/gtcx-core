@@ -38,8 +38,10 @@ export interface QRCodeConfig {
 /**
  * Default configuration
  */
+const DEFAULT_VERIFY_URL = process.env['GTCX_VERIFY_URL'] || 'https://verify.gtcx.io';
+
 const DEFAULT_CONFIG: QRCodeConfig = {
-  verifyBaseUrl: 'https://verify.gtcx.io',
+  verifyBaseUrl: DEFAULT_VERIFY_URL,
   defaultSize: 256,
   certificateIdPattern: /^[A-Z0-9_-]+$/,
   maxCertificateAge: 365 * 24 * 60 * 60 * 1000, // 1 year

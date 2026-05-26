@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
 import { deriveKeyPbkdf2 } from '../src/key-derivation';
 
@@ -155,5 +155,46 @@ describe('deriveKeyPbkdf2 — input validation', () => {
     await expect(
       deriveKeyPbkdf2({ password: 'p', salt: 's', iterations: 1, keyLengthBits: 0 })
     ).rejects.toThrow(/multiple of 8/);
+  });
+
+  it('rejects negative keyLengthBits', async () => {
+    await expect(
+      deriveKeyPbkdf2({ password: 'p', salt: 's', iterations: 1, keyLengthBits: -8 })
+    ).rejects.toThrow(/multiple of 8/);
+  });
+
+  it('rejects fractional keyLengthBits', async () => {
+    await expect(
+      deriveKeyPbkdf2({ password: 'p', salt: 's', iterations: 1, keyLengthBits: 8.5 })
+    ).rejects.toThrow(/multiple of 8/);
+  });
+});
+
+describe('deriveKeyPbkdf2 — runtime availability', () => {
+  it('throws when crypto.subtle is unavailable', async () => {
+    vi.stubGlobal('crypto', undefined);
+    try {
+      await expect(deriveKeyPbkdf2({ password: 'p', salt: 's', iterations: 1 })).rejects.toThrow(
+        /crypto.subtle.deriveBits is unavailable/
+      );
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('throws when crypto.subtle.deriveBits is missing', async () => {
+    vi.stubGlobal('crypto', {
+      subtle: {
+        importKey: async () => ({}),
+        // deriveBits intentionally omitted
+      } as unknown as SubtleCrypto,
+    } as unknown as Crypto);
+    try {
+      await expect(deriveKeyPbkdf2({ password: 'p', salt: 's', iterations: 1 })).rejects.toThrow(
+        /crypto.subtle.deriveBits is unavailable/
+      );
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });

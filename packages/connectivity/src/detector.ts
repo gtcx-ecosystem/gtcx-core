@@ -10,7 +10,8 @@ import type {
 const DEFAULT_CHECK_INTERVAL_MS = 30_000;
 const DEFAULT_OFFLINE_THRESHOLD_MS = 60_000;
 
-const DEFAULT_HEALTH_URL = 'https://connectivity.gtcx.io/health';
+const CONNECTIVITY_URL = process.env['GTCX_CONNECTIVITY_URL'] || 'https://connectivity.gtcx.io';
+const DEFAULT_HEALTH_URL = `${CONNECTIVITY_URL}/health`;
 
 /**
  * Default connectivity probe that pings a health endpoint and measures latency.
