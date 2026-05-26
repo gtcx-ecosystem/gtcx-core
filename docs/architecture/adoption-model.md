@@ -44,7 +44,7 @@ graph TB
     subgraph Production["Production"]
         PIN["Pin to specific @gtcx/* version"]
         SLSA["Verify SLSA provenance<br/>npm view @gtcx/<pkg> --json"]
-        MONITOR["Subscribe to release notifications<br/>via #gtcx-mobile-prod or repo watch"]
+        MONITOR["Subscribe to release notifications<br/>via ClickUp / baseline-os or repo watch"]
     end
 
     ECO --> Evaluation
