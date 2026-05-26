@@ -4,6 +4,8 @@
 
 source "https://rubygems.org"
 
+# GitBook handles live docs publishing. This Gemfile is retained for local Jekyll
+# preview parity only. See docs/operations/trust-portal-hosting.md for the live host.
 gem "github-pages", group: :jekyll_plugins
 gem "webrick", "~> 1.8"
 

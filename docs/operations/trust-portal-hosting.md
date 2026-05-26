@@ -5,7 +5,7 @@ date: '2026-05-22'
 owner: 'frontier-infra-engineer'
 role: 'frontier-infra-engineer'
 tier: 'standard'
-tags: ['operations', 'trust-portal', 'github-pages', 'hosting']
+tags: ['operations', 'trust-portal', 'gitbook', 'hosting']
 review_cycle: 'on-change'
 ---
 

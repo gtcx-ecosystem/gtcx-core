@@ -2,7 +2,7 @@
 
 Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rust + TypeScript), type definitions, Zod schemas, domain models, verification infrastructure, and WorkProof/TradeCV attestation schemas consumed by all other repos. This is the lowest-level dependency in the stack — it depends on nothing else.
 
-**Trust portal:** [gtcx-ecosystem.github.io/gtcx-core](https://gtcx-ecosystem.github.io/gtcx-core/) (custom domain `trust.gtcx.io` pending — see [hosting runbook](./docs/operations/trust-portal-hosting.md))
+**Trust portal:** [gtcx-protocol.gitbook.io/gtcx-open-source](https://gtcx-protocol.gitbook.io/gtcx-open-source/governance/trust-portal) — see [hosting runbook](./docs/operations/trust-portal-hosting.md)
 **Last reviewed:** 2026-05-22
 
 ## Engineering Standards
