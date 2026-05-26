@@ -284,11 +284,11 @@ Per-task completion against the plan above. Updated on every meaningful state ch
 
 ### Sprint 3 — Jurisdiction readiness
 
-| #   | Task                                       | Status                  | Evidence                                                                                                                                                                                       |
-| --- | ------------------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 3.1 | 5 jurisdiction fixtures + integration test | ✅ Done                 | `tests/integration/fixtures/jurisdiction-fixtures.ts` + `tests/integration/jurisdictions.test.ts` (21 tests, ZW/GH/NA/BW/CD)                                                                   |
-| 3.2 | Trust portal at external regulator URL     | ⏸️ User-blocked         | Awaiting repo admin to enable GitHub Pages — see [hosting runbook](../../operations/trust-portal-hosting.md)                                                                                   |
-| 3.3 | Zimbabwe sandbox email sent                | ⏸️ Blocked on 2.3 + 3.2 | Send-ready render staged at [`docs/gtm/renders/zimbabwe-2026.md`](../../gtm/renders/zimbabwe-2026.md). Also pre-staged Ghana/Namibia/Botswana/DRC (FR) renders for parallel send post-Zimbabwe |
+| #   | Task                                       | Status              | Evidence                                                                                                                                                                                       |
+| --- | ------------------------------------------ | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 3.1 | 5 jurisdiction fixtures + integration test | ✅ Done             | `tests/integration/fixtures/jurisdiction-fixtures.ts` + `tests/integration/jurisdictions.test.ts` (21 tests, ZW/GH/NA/BW/CD)                                                                   |
+| 3.2 | Trust portal at external regulator URL     | ✅ Live via GitBook | Auto-syncs on push to `gtcx-protocol.gitbook.io/gtcx-open-source` — see [hosting runbook](../../operations/trust-portal-hosting.md)                                                            |
+| 3.3 | Zimbabwe sandbox email sent                | ⏸️ Blocked on 2.3   | Send-ready render staged at [`docs/gtm/renders/zimbabwe-2026.md`](../../gtm/renders/zimbabwe-2026.md). Also pre-staged Ghana/Namibia/Botswana/DRC (FR) renders for parallel send post-Zimbabwe |
 
 ### Sprint 4 — External compliance kickoff
 
@@ -316,9 +316,9 @@ Per-task completion against the plan above. Updated on every meaningful state ch
 | State                | Count | Notes                                                                                                             |
 | -------------------- | ----- | ----------------------------------------------------------------------------------------------------------------- |
 | ✅ Done (or drafted) | 18    | All Sprint 1 except 1.4; 2.1, 2.2; 3.1; 4.1, 4.2, 4.3; ADR-012 Stage 0+1; audit refresh; GTM refresh; Ext-1 draft |
-| ⏸️ User-blocked      | 4     | 1.4 (OPENAI_API_KEY), 3.2 (Pages), 4.1 vendor outreach, 4.2 CPA outreach                                          |
+| ⏸️ User-blocked      | 3     | 1.4 (OPENAI_API_KEY), 4.1 vendor outreach, 4.2 CPA outreach                                                       |
 | ⏸️ Ready to fire     | 1     | 2.3 (publish) — workflow green, NPM_TOKEN present, window Wed–Fri                                                 |
-| ⏸️ Cascade-blocked   | 3     | 2.4, 2.5, 3.3 — all unblock from 2.3 + 3.2                                                                        |
+| ⏸️ Cascade-blocked   | 3     | 2.4, 2.5, 3.3 — all unblock from 2.3                                                                              |
 | 🔄 Awaiting decision | 1     | Ext-1 continental extension — collision resolution needed by Tue for 1.0.0 inclusion                              |
 
 ### Critical path right now
