@@ -52,7 +52,7 @@ Each per-country engagement log captures:
 
 These three URLs appear in every intro email. They are jurisdiction-agnostic and prove substance up front:
 
-1. **Trust portal** — `https://gtcx-ecosystem.github.io/gtcx-core/governance/trust-portal` (or `https://trust.gtcx.io/governance/trust-portal` after DNS)
+1. **Trust portal** — `https://gtcx-protocol.gitbook.io/gtcx-open-source/governance/trust-portal`
 2. **Internal completion audit (2026-05-21)** — composite 9.5/10, 24/24 internal items complete
 3. **Fuzz campaign evidence (2026-05-21)** — 6 targets, 500K+ iterations, zero crashes
 

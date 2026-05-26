@@ -166,7 +166,7 @@ Cross-jurisdiction precedent reuse is the compounding asset, per [engagement das
 Currently blocking widespread pinned-version adoption:
 
 1. **Sprint 2.3 publish must fire** — 21 `@gtcx/*` packages need to land on npm with provenance ([runbook](../devops/release-mgmt/npm-publish-runbook.md))
-2. **Trust portal must go live externally** — [hosting runbook](../operations/trust-portal-hosting.md) — currently the portal is in-repo only; GitBook deployment in progress
+2. **Trust portal is live externally** — [hosting runbook](../operations/trust-portal-hosting.md) — published via GitBook at `gtcx-protocol.gitbook.io/gtcx-open-source`
 3. **Pen test + SOC 2 attestations** — for institutional consumers that require external attestation gates ([Sprint 4](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md))
 
 None of these gate workspace-consumer adoption (that already works today).

@@ -25,16 +25,16 @@ This redirect exists so:
 
 ## What you're looking for
 
-| Looking for                                           | Go to                                                                                                                                |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Evidence index for vendor risk / regulator review     | [`docs/governance/trust-portal.md`](../governance/trust-portal.md)                                                                   |
-| How to report a security issue                        | [`docs/security/vulnerability-disclosure.md`](./vulnerability-disclosure.md)                                                         |
-| Published package versions (post-Sprint 2.3)          | [`docs/governance/trust-portal.md#published-versions`](../governance/trust-portal.md#published-versions)                             |
-| Threat model                                          | [`docs/security/threat-model.md`](./threat-model.md)                                                                                 |
-| FIPS posture                                          | [`docs/security/fips-validation-boundary.md`](./fips-validation-boundary.md)                                                         |
-| Pen test scope and engagement state                   | [`docs/security/pen-test-scope.md`](./pen-test-scope.md), [`docs/security/pen-test-engagement-log.md`](./pen-test-engagement-log.md) |
-| Current readiness composite (9.5/10 as of 2026-05-21) | [`docs/audit/internal-completion-audit-2026-05-21.md`](../audit/internal-completion-audit-2026-05-21.md)                             |
-| External hosted version of the trust portal           | Pending GitBook deployment — see [`docs/operations/trust-portal-hosting.md`](../operations/trust-portal-hosting.md)                  |
+| Looking for                                           | Go to                                                                                                                                                                                                                   |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Evidence index for vendor risk / regulator review     | [`docs/governance/trust-portal.md`](../governance/trust-portal.md)                                                                                                                                                      |
+| How to report a security issue                        | [`docs/security/vulnerability-disclosure.md`](./vulnerability-disclosure.md)                                                                                                                                            |
+| Published package versions (post-Sprint 2.3)          | [`docs/governance/trust-portal.md#published-versions`](../governance/trust-portal.md#published-versions)                                                                                                                |
+| Threat model                                          | [`docs/security/threat-model.md`](./threat-model.md)                                                                                                                                                                    |
+| FIPS posture                                          | [`docs/security/fips-validation-boundary.md`](./fips-validation-boundary.md)                                                                                                                                            |
+| Pen test scope and engagement state                   | [`docs/security/pen-test-scope.md`](./pen-test-scope.md), [`docs/security/pen-test-engagement-log.md`](./pen-test-engagement-log.md)                                                                                    |
+| Current readiness composite (9.5/10 as of 2026-05-21) | [`docs/audit/internal-completion-audit-2026-05-21.md`](../audit/internal-completion-audit-2026-05-21.md)                                                                                                                |
+| External hosted version of the trust portal           | Live at [gtcx-protocol.gitbook.io/gtcx-open-source](https://gtcx-protocol.gitbook.io/gtcx-open-source/governance/trust-portal) — see [`docs/operations/trust-portal-hosting.md`](../operations/trust-portal-hosting.md) |
 
 ## Why this isn't a duplicate doc
 

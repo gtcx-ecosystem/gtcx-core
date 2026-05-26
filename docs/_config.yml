@@ -1,17 +1,16 @@
-# GitHub Pages — Jekyll config for the gtcx-core trust portal.
+# Jekyll config for local preview parity with GitBook rendering.
 #
-# Renders /docs as a static site at https://gtcx-ecosystem.github.io/gtcx-core/
-# (or trust.gtcx.io once the CNAME is added — see
-# docs/operations/trust-portal-hosting.md).
+# Live docs are published via GitBook sync:
+# https://gtcx-protocol.gitbook.io/gtcx-open-source/
 #
-# Built and deployed by .github/workflows/pages.yml on every push to main.
+# See docs/operations/trust-portal-hosting.md for GitBook setup.
 
 title: gtcx-core Trust Portal
 description: >-
   Cryptographic foundation library for the GTCX ecosystem.
   Trust portal, security evidence, audit history, and engagement readiness.
-url: https://gtcx-ecosystem.github.io
-baseurl: /gtcx-core
+url: https://gtcx-protocol.gitbook.io
+baseurl: /gtcx-open-source
 repository: gtcx-ecosystem/gtcx-core
 
 theme: minima

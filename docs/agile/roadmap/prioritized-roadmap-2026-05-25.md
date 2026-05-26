@@ -134,7 +134,7 @@ Reassess weekly. These are valuable but not on the critical path to first sovere
 | Publish workflow halts                  | Packages not on npm, blocks all downstream | Low        | Standby diagnostics ready; common failure modes documented in `docs/internal/external-readiness-checklist.md` | protocol-architect       |
 | Pen-test vendors unavailable            | Delays external validation by 2–4 weeks    | Medium     | 5-vendor longlist provides alternatives; negotiate phased delivery                                            | crypto-security-engineer |
 | CPA firm summer audit season full       | SOC 2 Type 1 pushed to Q3                  | Medium     | Boutique firms preferred over Big 4; engagement letter with "in progress" attestation language                | quality-evidence-lead    |
-| GitHub Pages admin access delayed       | Trust portal stays internal only           | Low        | Use `gtcx-ecosystem.github.io/gtcx-core` fallback; no DNS/cert required                                       | repo admin               |
+| GitBook sync delay                      | Trust portal may lag repo by minutes       | Low        | GitBook auto-syncs on push; no manual action needed                                                           | gitbook admin            |
 | rustls-webpki upstream fix not released | Cargo audit stays mitigated, not resolved  | Medium     | Monthly reassessment of `rust/.cargo/audit.toml`; escalate to AWS SDK maintainers if critical                 | frontier-infra-engineer  |
 
 ---

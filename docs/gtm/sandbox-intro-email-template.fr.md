@@ -52,7 +52,7 @@ Je vous écris au nom de GTCX Protocol — la fondation cryptographique open sou
 
 Nous souhaiterions une réunion de pré-soumission de 45 minutes pour vous présenter notre travail et comprendre comment il peut s'intégrer dans la structure réglementaire du {{regulator_short}} (ou, si plus approprié, la {{secondary_authority}}). Trois artefacts concrets que nous vous demanderions d'examiner au préalable, tous publics et vérifiables de manière indépendante :
 
-1. **Portail de confiance** — [trust.gtcx.io](https://gtcx-ecosystem.github.io/gtcx-core/governance/trust-portal) _(domaine personnalisé en cours de configuration)_. Index de chaque artefact de sécurité et de conformité, avec chemins de fichiers vers chaque pièce justificative.
+1. **Portail de confiance** — [gtcx-protocol.gitbook.io/gtcx-open-source](https://gtcx-protocol.gitbook.io/gtcx-open-source/governance/trust-portal). Index de chaque artefact de sécurité et de conformité, avec chemins de fichiers vers chaque pièce justificative.
 2. **Audit interne d'achèvement (2026-05-21)** — composite 9,5/10 en sécurité, qualité de code et préparation opérationnelle ; 24/24 éléments internes complets avec preuves citées par élément.
 3. **Évidence de campagne de fuzz (2026-05-21)** — six primitives cryptographiques, 500 000+ itérations libFuzzer, zéro crash, zéro panique, zéro violation AddressSanitizer.
 
@@ -76,7 +76,7 @@ Avec considération,
 _<Nom de l'expéditeur>_
 _<Titre>_
 GTCX Protocol
-trust.gtcx.io
+gtcx-protocol.gitbook.io/gtcx-open-source
 
 ---
 

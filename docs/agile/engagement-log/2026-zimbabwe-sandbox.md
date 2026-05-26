@@ -46,7 +46,7 @@ The send-ready render (every `{{placeholder}}` substituted, copy-paste-ready) li
 | --- | -------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------ |
 | 1   | Confirm current RBZ Fintech Sandbox contact email + lead name                                      | ⏸️ Pending | Direct outreach or Zimbabwean partner intro preferred                    |
 | 2   | Confirm GTCX engagement-lead name + contact                                                        | ⏸️ Pending | Internal — Protocol Architect to designate                               |
-| 3   | Verify trust portal URL is live (post-Sprint 3.2 GitHub Pages enablement)                          | ⏸️ Pending | See [hosting runbook](../../operations/trust-portal-hosting.md)          |
+| 3   | Verify trust portal URL is live (GitBook sync)                                                     | ⏸️ Pending | See [hosting runbook](../../operations/trust-portal-hosting.md)          |
 | 4   | Verify all 3 cited URLs return HTTP 200 from the hosted site                                       | ⏸️ Pending | Block on #3                                                              |
 | 5   | Confirm pen test SoW signed (or accept "contracted, kickoff <date>" language if still pre-signing) | ⏸️ Pending | See [pen-test-engagement-log](../../security/pen-test-engagement-log.md) |
 | 6   | Confirm SOC 2 CPA engagement letter signed (or accept "contracted, kickoff <date>")                | ⏸️ Pending | See [soc2-engagement-log](../../compliance/soc2-engagement-log.md)       |
@@ -60,9 +60,9 @@ The send-ready render (every `{{placeholder}}` substituted, copy-paste-ready) li
 - Action: Drafted intro email targeting Reserve Bank of Zimbabwe Fintech Sandbox with a 45-minute pre-submission meeting request. Email cites 3 public-verifiable artifacts (trust portal, internal completion audit, fuzz evidence) and acknowledges pen-test + SOC 2 are contracted-in-motion.
 - Owner: Protocol Architect
 - Driver: Sprint 3 task 3.3 of the engagement readiness roadmap.
-- Next action: Confirm recipient contact + GTCX engagement-lead name; verify Sprint 3.2 (Pages hosting) live so cited URLs resolve; internal approval; then send.
+- Next action: Confirm recipient contact + GTCX engagement-lead name; verify GitBook sync is live so cited URLs resolve; internal approval; then send.
 - Blockers:
-  - Sprint 3.2 (Pages) requires repo-admin to enable Pages — see [hosting runbook](../../operations/trust-portal-hosting.md).
+  - Sprint 3.2 (GitBook sync) is automatic on push; verify the external URL resolves before send.
   - External: RBZ Fintech Sandbox current contact name + email must be verified independently before send.
 
 ## Pending decisions

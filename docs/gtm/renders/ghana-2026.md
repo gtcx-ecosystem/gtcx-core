@@ -41,7 +41,7 @@ I'm writing on behalf of GTCX Protocol — the open cryptographic foundation we'
 
 We would value a 45-minute pre-submission meeting to walk through our work and understand how it best fits into the BoG structure (or, if more appropriate, the Minerals Commission (MinComm) regulatory framework). Three concrete artifacts we'd ask you to review beforehand, all public and independently verifiable:
 
-1. **Trust portal** — [trust.gtcx.io](https://gtcx-ecosystem.github.io/gtcx-core/governance/trust-portal) _(custom domain provisioning in flight)_. Index of every security and compliance artifact, with file paths to each piece of evidence.
+1. **Trust portal** — [gtcx-protocol.gitbook.io/gtcx-open-source](https://gtcx-protocol.gitbook.io/gtcx-open-source/governance/trust-portal). Index of every security and compliance artifact, with file paths to each piece of evidence.
 2. **Internal completion audit (2026-05-21)** — composite 9.5/10 across security, code quality, and operational readiness; 24/24 internal items complete with cited evidence per item.
 3. **Fuzz campaign evidence (2026-05-21)** — six cryptographic primitives, 500,000+ libFuzzer iterations, zero crashes, zero panics, zero AddressSanitizer violations.
 
@@ -64,7 +64,7 @@ With appreciation,
 _<Sender name>_
 _<Title>_
 GTCX Protocol
-trust.gtcx.io
+gtcx-protocol.gitbook.io/gtcx-open-source
 
 ---
 
