@@ -454,9 +454,9 @@ pnpm api:check
 
 - [Master audit 2026-05-27](../../audit/master-audit-2026-05-27.md)
 - [10/10 Remediation Plan](../../audit/10-10-remediation-plan-2026-05-27.md)
-- [Current Sprint](../../sprints/current.md)
-- [Team Definition](../../team.md)
-- [Backlog](../../backlog.md)
+- [Current Sprint](../sprints/current.md)
+- [Team Definition](../team.md)
+- [Backlog](../backlog.md)
 - [Engagement Readiness Roadmap](./engagement-readiness-sprint-roadmap-2026-05-22.md)
 - [Trust Portal](../../governance/trust-portal.md)
 

@@ -2,8 +2,8 @@
 title: 'Barrel Export Refactor Tracking'
 status: draft
 date: '2026-05-27'
-owner: engineering-lead
-role: engineering-lead
+owner: protocol-architect
+role: protocol-architect
 tier: standard
 tags:
   - quality

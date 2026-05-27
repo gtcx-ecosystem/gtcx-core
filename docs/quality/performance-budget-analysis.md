@@ -2,8 +2,8 @@
 title: 'Performance Budget Analysis'
 status: current
 date: '2026-05-27'
-owner: performance-engineer
-role: performance-engineer
+owner: quality-evidence-lead
+role: quality-evidence-lead
 tier: standard
 tags:
   - quality
