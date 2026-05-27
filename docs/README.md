@@ -1,7 +1,7 @@
 # Documentation
 
-**Last updated:** 2026-05-25
-**Latest synthesis:** [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md) (composite 9.5/10)
+**Last updated:** 2026-05-27
+**Latest synthesis:** [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md) (fresh master audit, composite 8.9/10)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
@@ -103,6 +103,7 @@
 
 | Document                                                                                           | Purpose                                                                              |
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md)               | **Latest** fresh master audit — composite 8.9/10, 0 P0, 3 P1, 2 P2                   |
 | [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md) | **Latest** internal completion audit — composite 9.5/10, 24/24 items                 |
 | [`audit/fuzz-campaign-evidence-2026-05-21.md`](./audit/fuzz-campaign-evidence-2026-05-21.md)       | 500K+ libFuzzer iterations across 6 primitives, 0 crashes / panics / ASAN violations |
 | [`audit/docs-standard-compliance-2026-05-22.md`](./audit/docs-standard-compliance-2026-05-22.md)   | Protocol 1 v2.0 documentation compliance audit                                       |
@@ -171,7 +172,7 @@ The `docs/` tree is organized by consumer, not by source team. Directories are r
 | `quality/`    | Yes      | Remediation trackers and quality gates for auditors                                             |
 | `deployment/` | ~~No~~   | Collapsed into `devops/release-mgmt/` — content was publishing-oriented, not service-deployment |
 
-**Note on file size limits:** No TypeScript source files exceed 500 LOC. Six Rust source files exceed this limit, with the largest at 1,977 LOC (`rust/gtcx-zkp/src/lib.rs`). The Rust modules are scheduled for decomposition in a future refactor.
+**Note on file size limits:** No TypeScript or Rust source files currently exceed 500 LOC. The largest source files are intentionally kept just below the limit and should be split before crossing it.
 
 Deprecated docs (superseded by newer versions) are retained in-place with frontmatter warnings so git history remains canonical. They are excluded from link-check and index surfaces.
 
@@ -192,10 +193,10 @@ Deprecated docs (superseded by newer versions) are retained in-place with frontm
 
 ## How to Find Something
 
-| Question                              | Go here                                                                  |
-| ------------------------------------- | ------------------------------------------------------------------------ |
-| How do I start a session safely?      | [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md) |
-| What are the required quality gates?  | [`operations/runbook.md`](./operations/runbook.md)                       |
-| What is the current security posture? | [`governance/trust-portal.md`](./governance/trust-portal.md)             |
-| Where is the package contract?        | [`specs/packages/README.md`](./specs/packages/README.md)                 |
-| What changed in the latest audit?     | [`audit/master-audit-2026-05-11.md`](./audit/master-audit-2026-05-11.md) |
+| Question                              | Go here                                                                              |
+| ------------------------------------- | ------------------------------------------------------------------------------------ |
+| How do I start a session safely?      | [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md)             |
+| What are the required quality gates?  | [`operations/runbook.md`](./operations/runbook.md)                                   |
+| What is the current security posture? | [`governance/trust-portal.md`](./governance/trust-portal.md)                         |
+| Where is the package contract?        | [`specs/packages/README.md`](./specs/packages/README.md)                             |
+| What changed in the latest audit?     | [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md) |

@@ -46,7 +46,10 @@ function applyBlock(existing, block) {
   const endIdx = existing.indexOf(markerEnd);
   if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
     const before = existing.slice(0, startIdx).trimEnd();
-    const after = existing.slice(endIdx + markerEnd.length).trimStart();
+    const after = existing
+      .slice(endIdx + markerEnd.length)
+      .trimStart()
+      .trimEnd();
     const parts = [before, block, after].filter(Boolean);
     return parts.join('\n\n') + '\n';
   }
