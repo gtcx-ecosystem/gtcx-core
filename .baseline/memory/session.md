@@ -21,20 +21,20 @@ focus: 'Baseline initialization — discovery and enrichment'
 
 - .baseline/definition.json (synced)
 - .baseline/memory/README.md (updated)
-- .baseline/memory/SESSION.md (created)
-- .baseline/memory/PATTERNS.md (enriched with discovered patterns)
-- .baseline/memory/PITFALLS.md (enriched with discovered issues)
-- .baseline/memory/DEPENDENCIES.md (enriched with discovered deps)
+- .baseline/memory/session.md (created)
+- .baseline/memory/patterns.md (enriched with discovered patterns)
+- .baseline/memory/pitfalls.md (enriched with discovered issues)
+- .baseline/memory/dependencies.md (enriched with discovered deps)
 
 ## Key Findings
 
-- Tech stack: See PATTERNS.md
-- Active issues: See PITFALLS.md
-- Dependencies: See DEPENDENCIES.md
+- Tech stack: See patterns.md
+- Active issues: See pitfalls.md
+- Dependencies: See dependencies.md
 
 ## Next Steps
 
 - Review discovered patterns for accuracy
-- Resolve TODOs/FIXMEs flagged in PITFALLS.md
-- Verify ecosystem dependencies in DEPENDENCIES.md
+- Resolve TODOs/FIXMEs flagged in pitfalls.md
+- Verify ecosystem dependencies in dependencies.md
 - Re-run `baseline-init` after significant repo changes

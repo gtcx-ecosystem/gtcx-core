@@ -6,10 +6,10 @@
 
 ## Quick Links
 
-- [Current Session](./SESSION.md)
-- [Confirmed Patterns](./PATTERNS.md)
-- [Known Pitfalls](./PITFALLS.md)
-- [Dependencies](./DEPENDENCIES.md)
+- [Current Session](./session.md)
+- [Confirmed Patterns](./patterns.md)
+- [Known Pitfalls](./pitfalls.md)
+- [Dependencies](./dependencies.md)
 - [Session Archive](./archive/)
 
 ## Status
