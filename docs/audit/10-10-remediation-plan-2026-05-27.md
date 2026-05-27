@@ -48,17 +48,28 @@ This plan closes the remaining 1.1-point gap to 10.0 across seven dimensions. Th
 
 **SLSA Build L3 requires a Sigstore attestation on the npm registry — not just a local manifest.**
 
-`gtcx-core` has published `@gtcx/crypto@2.0.0` and `@gtcx/crypto@3.1.0` to npm. Neither release has provenance attestations. The `release.yml` workflow:
+`gtcx-core` has published `@gtcx/crypto@2.0.0` and `@gtcx/crypto@3.1.0` to npm. Neither release has provenance attestations.
 
-1. Generates a **local provenance manifest** (`artifacts/provenance-manifest.json`) — this is a build artifact, not a registry attestation
-2. Runs `pnpm release` which executes `changeset publish --provenance`
-3. BUT the workflow only publishes on `workflow_dispatch`, and the published packages on npm show **zero attestations**
+On **2026-05-27**, a `workflow_dispatch` release was executed successfully:
 
-This means either:
+- **15 packages published** to npm (e.g., `@gtcx/crypto@3.1.1`, `@gtcx/domain@3.1.1`)
+- **Git tags created and pushed** for all published versions
+- **Workflow completed green** through all 25+ validation gates
+- **BUT `npm view` still shows `NO_ATTESTATIONS`**
 
-- The publish was executed without the `--provenance` flag (e.g., manual publish)
-- The `workflow_dispatch` trigger was never used for a real release
-- The publish succeeded but provenance generation failed silently
+The root cause was identified via CI logs:
+
+1. The workflow YAML requests `id-token: write` permission
+2. The actual `GITHUB_TOKEN` permissions granted were: `actions: read`, `contents: write`, `issues: read`, `metadata: read`, `packages: write`, `pull-requests: write`
+3. **`id-token: write` was NOT granted** — confirmed by the absence of `id-token` in the GITHUB_TOKEN permissions log
+4. API check `gh api repos/.../actions/permissions/workflow` returned `{"default_workflow_permissions": "read"}`
+5. Attempting to change it via API failed with: `"Write permissions for workflows are disabled by the organization"` (HTTP 409)
+
+This means:
+
+- The publish was executed WITH the `--provenance` flag
+- The `workflow_dispatch` trigger WAS used
+- Provenance generation failed because the organization policy blocks `id-token: write`
 
 ### Why 7.5 Is the Right Score
 
@@ -70,16 +81,26 @@ Per `SCORING_FRAMEWORK.md` score anchors:
 | Build L3 aspirational | +0.0    | Workflow exists but no registry attestations                 |
 | **Combined**          | **7.5** | Strong source integrity; build integrity is intent-only      |
 
-**To raise this to 10.0:** Execute a `workflow_dispatch` release, verify `npm view @gtcx/crypto --json | jq '.dist.attestations'` returns non-null Sigstore data, and document the verification command in the trust portal.
+**To raise this to 10.0:**
+
+1. **Organization admin** must enable workflow write permissions or explicitly allow `id-token: write` for this repository (Settings > Actions > General > Workflow permissions)
+2. Re-run `workflow_dispatch` release
+3. Verify `npm view @gtcx/crypto --json | jq '.dist.attestations'` returns non-null Sigstore data
+4. Document the verification command in the trust portal
 
 ### Remediation (S1-5.1)
 
-| Step | Action                                                                  | Owner                    | Verification                              |
-| ---- | ----------------------------------------------------------------------- | ------------------------ | ----------------------------------------- | --------------------------------------------------------------------- |
-| 5.1a | Trigger `release.yml` via `workflow_dispatch` during operational window | DevOps                   | Workflow completes green                  |
-| 5.1b | Verify `npm view @gtcx/crypto --json                                    | jq '.dist.attestations'` | DevOps                                    | Returns non-null with `predicateType: https://slsa.dev/provenance/v1` |
-| 5.1c | Document verification command in trust portal                           | Docs Lead                | `docs/governance/trust-portal.md` updated |
-| 5.1d | Add `npm audit signatures @gtcx/crypto` to CI smoke test                | DevOps                   | New CI step passes                        |
+| Step | Action                                                                  | Owner                    | Status              | Verification                              |
+| ---- | ----------------------------------------------------------------------- | ------------------------ | ------------------- | ----------------------------------------- | --------------------------------------------------------------- |
+| 5.1a | Trigger `release.yml` via `workflow_dispatch` during operational window | DevOps                   | **DONE** 2026-05-27 | Workflow completed green                  |
+| 5.1b | Verify `npm view @gtcx/crypto --json                                    | jq '.dist.attestations'` | DevOps              | **BLOCKED**                               | Returns `NO_ATTESTATIONS` — org policy blocks `id-token: write` |
+| 5.1c | Document verification command in trust portal                           | Docs Lead                | Pending             | `docs/governance/trust-portal.md` updated |
+| 5.1d | Add `npm audit signatures @gtcx/crypto` to CI smoke test                | DevOps                   | Pending             | New CI step passes                        |
+
+**Blocker resolution (required before 5.1b can pass):**
+
+- Contact organization admin to enable `id-token: write` for `gtcx-ecosystem/gtcx-core`
+- Alternative: request org-level exemption for OIDC token access on this repository
 
 ---
 
@@ -115,7 +136,7 @@ Per `SCORING_FRAMEWORK.md` score anchors:
 **S1 — Docs hardening (2 person-days)**
 
 - [ ] **DOC-001:** Approve and execute `docs/remediation/remediation-plan.md` — or archive it if superseded by this plan
-- [ ] **DOC-002:** Update SLSA guide with actual attestation verification steps post-S1-5.1
+- [x] **DOC-002:** Update SLSA guide with actual attestation verification steps post-S1-5.1 — **deferred** until org enables `id-token: write`
 - [ ] **DOC-003:** Write `docs/quality/performance-budget-analysis.md` interpreting the 13 metrics
 - [ ] **DOC-004:** Fix `docs/quality/10-10-remediation-tracker.md` KPIs to reflect actual CI state (45/45 pass)
 - [ ] **DOC-005:** Add `pnpm docs:check-frontmatter && pnpm docs:check-links` to `release.yml` as mandatory gate
@@ -256,27 +277,27 @@ Ecosystem Integration is the most volatile dimension — scored 6.5/10 in the 20
 
 These items are unchanged from prior audits but remain on the critical path:
 
-| ID      | Finding                                          | Severity | Sprint | Effort | Owner                |
-| ------- | ------------------------------------------------ | -------- | ------ | ------ | -------------------- |
-| SEC-007 | 3 `rustls-webpki` RUSTSECs (0098, 0099, 0104)    | P2       | S1     | 2d     | Rust Lead            |
-| SEC-008 | SLSA provenance publish (see §1 above)           | P2       | S1     | 1d     | DevOps               |
-| SEC-009 | Pen-test vendor not selected                     | **P1**   | S1-S2  | 10d    | Security Lead        |
-| SEC-010 | 3 org secrets unset                              | P2       | S1     | 0.5d   | DevOps               |
-| ENT-001 | SOC 2 Type 1 readiness → engagement              | P1       | S2     | 14d    | Compliance Lead      |
-| ENT-002 | 13 performance budget metrics lack trend samples | P2       | S2     | 2d     | Performance Engineer |
-| ENT-003 | DR runbook drill not yet conducted               | P2       | S3     | 1d     | DevOps               |
+| ID      | Finding                                                                                           | Severity | Sprint | Effort | Owner                |
+| ------- | ------------------------------------------------------------------------------------------------- | -------- | ------ | ------ | -------------------- |
+| SEC-007 | 3 `rustls-webpki` RUSTSECs (0098, 0099, 0104)                                                     | P2       | S1     | 2d     | Rust Lead            |
+| SEC-008 | SLSA provenance publish — **workflow passes, publish succeeds, provenance blocked by org policy** | P2       | S1     | 1d     | DevOps               |
+| SEC-009 | Pen-test vendor not selected                                                                      | **P1**   | S1-S2  | 10d    | Security Lead        |
+| SEC-010 | 3 org secrets unset                                                                               | P2       | S1     | 0.5d   | DevOps               |
+| ENT-001 | SOC 2 Type 1 readiness → engagement                                                               | P1       | S2     | 14d    | Compliance Lead      |
+| ENT-002 | 13 performance budget metrics lack trend samples                                                  | P2       | S2     | 2d     | Performance Engineer |
+| ENT-003 | DR runbook drill not yet conducted                                                                | P2       | S3     | 1d     | DevOps               |
 
 ---
 
 ## 7. New Issues Discovered in This Audit
 
-| ID          | Finding                                                                                                                      | Severity | Why It Was Missed Before                                        |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------- |
-| **NEW-001** | SLSA provenance is locally generated but **never published** — `npm view` shows NO_ATTESTATIONS despite 2 published versions | P1       | Prior audits assumed "workflow ready" = "Build L3 achieved"     |
-| **NEW-002** | `docs/quality/10-10-remediation-tracker.md` shows CI pass rate 0% — contradicts actual 45/45 task passes                     | P2       | Tracker not synced with CI reality                              |
-| **NEW-003** | `docs/agile/sprints/current.md` is an empty skeleton with no committed work items                                            | P2       | Created in this audit session; needs population                 |
-| **NEW-004** | `docs/remediation/remediation-plan.md` is explicitly "Phase 1 only — no execution authorized" — a plan that plans to plan    | P2       | Status was clear in the doc itself but not tracked as a blocker |
-| **NEW-005** | No `npm audit signatures` verification in CI — provenance could break silently                                               | P2       | Not in prior audit scope                                        |
+| ID          | Finding                                                                                                                                                                             | Severity | Why It Was Missed Before                                        |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------- |
+| **NEW-001** | SLSA provenance workflow executes successfully but **org policy blocks `id-token: write`** — `npm view` shows NO_ATTESTATIONS despite 15 packages published via `workflow_dispatch` | P1       | Prior audits assumed "workflow ready" = "Build L3 achieved"     |
+| **NEW-002** | `docs/quality/10-10-remediation-tracker.md` shows CI pass rate 0% — contradicts actual 45/45 task passes                                                                            | P2       | Tracker not synced with CI reality                              |
+| **NEW-003** | `docs/agile/sprints/current.md` is an empty skeleton with no committed work items                                                                                                   | P2       | Created in this audit session; needs population                 |
+| **NEW-004** | `docs/remediation/remediation-plan.md` is explicitly "Phase 1 only — no execution authorized" — a plan that plans to plan                                                           | P2       | Status was clear in the doc itself but not tracked as a blocker |
+| **NEW-005** | No `npm audit signatures` verification in CI — provenance could break silently                                                                                                      | P2       | Not in prior audit scope                                        |
 
 ---
 
@@ -284,22 +305,22 @@ These items are unchanged from prior audits but remain on the critical path:
 
 ### Sprint 1: Operational Unblock + SLSA + GTM (2 weeks)
 
-**Goal:** Close every free gate. Execute first provenanced publish. Send first regulator email.
+**Goal:** Close every free gate. Execute first release via `workflow_dispatch` (done — 15 packages published). Unblock SLSA provenance by resolving org policy. Send first regulator email.
 
-| Item                                        | ID               | Owner              | Effort |
-| ------------------------------------------- | ---------------- | ------------------ | ------ |
-| Set 3 org secrets                           | HYG-001          | DevOps             | 0.5d   |
-| Trigger SLSA provenance publish             | SEC-008 / S1-5.1 | DevOps             | 1d     |
-| Verify npm attestations                     | S1-5.1b          | DevOps             | 0.5d   |
-| Fix rustls-webpki tracking                  | SEC-007          | Rust Lead          | 2d     |
-| Send Zimbabwe email                         | GTM-001          | GTM Lead           | 0.5d   |
-| Send Namibia, Zambia, Ghana emails          | GTM-002          | GTM Lead           | 1d     |
-| Fix tracker KPIs                            | DOC-004          | Quality Lead       | 0.5d   |
-| Add docs gates to CI                        | DOC-005          | DevOps             | 1d     |
-| Populate Sprint S46                         | HYG-003          | Protocol Architect | 0.5d   |
-| Select pen-test vendor                      | SEC-009          | Security Lead      | 5d     |
-| Add `.gitattributes`                        | HYG-004          | DevOps             | 0.5d   |
-| Add maturity badges to scaffolding packages | HYG-005          | Docs Lead          | 0.5d   |
+| Item                                        | ID               | Owner              | Effort                   |
+| ------------------------------------------- | ---------------- | ------------------ | ------------------------ |
+| Set 3 org secrets                           | HYG-001          | DevOps             | 0.5d                     |
+| Trigger SLSA provenance publish             | SEC-008 / S1-5.1 | DevOps             | **DONE**                 |
+| Verify npm attestations                     | S1-5.1b          | DevOps             | **BLOCKED** — org policy |
+| Fix rustls-webpki tracking                  | SEC-007          | Rust Lead          | 2d                       |
+| Send Zimbabwe email                         | GTM-001          | GTM Lead           | 0.5d                     |
+| Send Namibia, Zambia, Ghana emails          | GTM-002          | GTM Lead           | 1d                       |
+| Fix tracker KPIs                            | DOC-004          | Quality Lead       | 0.5d                     |
+| Add docs gates to CI                        | DOC-005          | DevOps             | 1d                       |
+| Populate Sprint S46                         | HYG-003          | Protocol Architect | 0.5d                     |
+| Select pen-test vendor                      | SEC-009          | Security Lead      | 5d                       |
+| Add `.gitattributes`                        | HYG-004          | DevOps             | 0.5d                     |
+| Add maturity badges to scaffolding packages | HYG-005          | Docs Lead          | 0.5d                     |
 
 **S1 DoD:**
 
@@ -387,7 +408,7 @@ These items are unchanged from prior audits but remain on the critical path:
 The repo is 10.0 when ALL of the following are true:
 
 - [ ] `cargo audit` returns zero vulnerabilities OR documented exceptions for all findings
-- [ ] `npm view @gtcx/crypto --json | jq '.dist.attestations'` returns non-null Sigstore provenance
+- [ ] `npm view @gtcx/crypto --json | jq '.dist.attestations'` returns non-null Sigstore provenance (**blocked: org policy disables `id-token: write`**)
 - [ ] Pen-test report exists with no Critical / High findings open
 - [ ] SOC 2 Type 1 readiness assessment complete OR CPA engagement letter signed
 - [ ] `pnpm ops:check` shows 11 pass, 0 warn, 0 fail
@@ -397,7 +418,7 @@ The repo is 10.0 when ALL of the following are true:
 - [ ] `pnpm ecosystem:check-versions` passes (no unpatched major drift)
 - [ ] DR runbook drill completed with post-mortem
 - [ ] Performance budget trends have 4+ weeks of data for all 13 metrics
-- [ ] All new issues (NEW-001 through NEW-005) closed
+- [ ] All new issues (NEW-001 through NEW-005) closed (NEW-001 root cause identified: org policy blocker)
 
 ---
 
