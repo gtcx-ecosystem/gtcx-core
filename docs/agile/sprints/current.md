@@ -24,16 +24,42 @@ commitments: []
 
 ## Committed
 
-| ID  | Task | Owner | Est. | Status | Done |
-| --- | ---- | ----- | ---- | ------ | ---- |
+| ID       | Task                                                          | Owner              | Est. | Status      | Done                                |
+| -------- | ------------------------------------------------------------- | ------------------ | ---- | ----------- | ----------------------------------- |
+| SEC-008a | Execute `workflow_dispatch` release via `release.yml`         | DevOps             | 1d   | **DONE**    | 2026-05-27                          |
+| SEC-008b | Verify SLSA provenance on npm                                 | DevOps             | 0.5d | **BLOCKED** | Org policy denies `id-token: write` |
+| HYG-004  | Add `.gitattributes` with `* text=auto eol=lf`                | DevOps             | 0.5d | **DONE**    | 2026-05-27                          |
+| HYG-005  | Add `MATURITY: Scaffolding` badge to `packages/ai/README.md`  | Docs Lead          | 0.5d | **DONE**    | 2026-05-27                          |
+| DOC-005  | Fix frontmatter + link validation gates in CI                 | DevOps             | 1d   | **DONE**    | 2026-05-27                          |
+| WF-001   | Add auto-push git tags step to `release.yml`                  | DevOps             | 0.5d | Open        | —                                   |
+| HYG-001  | Set `OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM` org secrets | DevOps             | 0.5d | Open        | Needs secret values from admin      |
+| SEC-009  | Select pen-test vendor                                        | Security Lead      | 5d   | Open        | Needs vendor outreach               |
+| GTM-001  | Send Zimbabwe pre-submission email                            | GTM Lead           | 0.5d | Open        | Needs human send + log              |
+| GTM-002  | Send Namibia, Zambia, Ghana emails                            | GTM Lead           | 1d   | Open        | Needs human send + log              |
+| DOC-004  | Fix `docs/quality/10-10-remediation-tracker.md` KPIs          | Quality Lead       | 0.5d | Open        | —                                   |
+| NEW-003  | Populate sprint docs with committed items                     | Protocol Architect | 0.5d | **DONE**    | 2026-05-27                          |
 
 ## Blockers
 
-| ID  | Description | Impact | Escalation |
-| --- | ----------- | ------ | ---------- |
+| ID    | Description                                                  | Impact   | Escalation               | Resolution Path                                            |
+| ----- | ------------------------------------------------------------ | -------- | ------------------------ | ---------------------------------------------------------- |
+| B-001 | Org policy blocks `id-token: write` for SLSA provenance      | High     | Product Lead → Org admin | Request org-level exception for `gtcx-ecosystem/gtcx-core` |
+| B-002 | Pen-test vendor not selected                                 | Critical | Security Lead → CTO      | Expand shortlist; consider remote-first firms              |
+| B-003 | `OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM` values unknown | Medium   | DevOps → Org admin       | Collect from respective service admins                     |
+
+## Metrics
+
+| Metric                 | Target          | Current                          |
+| ---------------------- | --------------- | -------------------------------- |
+| `pnpm ops:check`       | 11 pass, 0 warn | 8 pass, 3 warn (missing secrets) |
+| CI pass rate on `main` | 100%            | 100% (last 3 runs)               |
+| Packages published     | 15              | 15 (2026-05-27)                  |
+| SLSA attestations      | 15              | 0 (blocked)                      |
+| Regulator emails sent  | >= 1            | 0                                |
 
 ---
 
 _Sprint started: 2026-05-17_  
 _Sprint ends: 2026-05-31_  
-_Last updated: 2026-05-27_
+_Last updated: 2026-05-27_  
+_Sprint roadmap: [10/10 Remediation Sprint Roadmap](../roadmap/10-10-remediation-sprint-roadmap-2026-05-27.md)_
