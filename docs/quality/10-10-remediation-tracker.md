@@ -15,7 +15,7 @@ review_cycle: 'on-change'
 > **Date:** 2026-05-10
 > **Owner:** Quality & Evidence Lead
 
-**Last reviewed:** 2026-05-06
+**Last reviewed:** 2026-05-27
 **Scope:** `gtcx-core` library production assurance
 **Owner:** Core Platform
 
@@ -29,7 +29,7 @@ This tracker is updated by `pnpm quality:kpi:export` and supports the 10/10 prod
 | Flaky test rate                    | 0%       | <1%    | 0%      |
 | Docs/API drift incidents/month     | 0        | 0      | 0       |
 | Security policy violations merged  | 0        | 0      | 0       |
-| CI quality gate pass rate          | 0%       | >98%   | 0%      |
+| CI quality gate pass rate          | 0%       | >98%   | 100%    |
 
 ## Current Status
 
@@ -50,6 +50,19 @@ This tracker is updated by `pnpm quality:kpi:export` and supports the 10/10 prod
 | SOC2 evidence collection             | Compliance        | Release-period evidence export                                | Pending |
 | ISO 27001 evidence collection        | Compliance        | Release-period evidence export                                | Pending |
 | Final human signoff                  | Security/Platform | Completed signoff artifact                                    | Pending |
+| SLSA provenance on npm registry      | DevOps            | `npm view` shows non-null attestations                        | Pending |
+| Org secrets (3 remaining)            | DevOps            | `ops:check` 11/11 pass                                        | Pending |
+| Regulator email sent (5 markets)     | GTM               | Response tracker shows "Sent" dates                           | Pending |
+
+## New Issues Discovered 2026-05-27
+
+| ID      | Finding                                                      | Severity | Status             |
+| ------- | ------------------------------------------------------------ | -------- | ------------------ |
+| NEW-001 | SLSA provenance locally generated but never published to npm | P1       | Open               |
+| NEW-002 | Tracker KPIs show 0% CI pass rate — contradicts 45/45 actual | P2       | Fixed in this edit |
+| NEW-003 | Sprint S46 tracking skeleton is empty                        | P2       | Open               |
+| NEW-004 | `docs/remediation/remediation-plan.md` is draft-only         | P2       | Open               |
+| NEW-005 | No `npm audit signatures` in CI                              | P2       | Open               |
 
 ## Operating Rule
 

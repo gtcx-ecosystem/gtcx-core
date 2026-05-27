@@ -22,12 +22,13 @@
 
 ## §2 Roadmap & Plans
 
-| Document                                                                                                                               | Purpose                                                                                                   |
-| -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| [`agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md`](./agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) | **Active** sovereign-state engagement readiness — 4 sprints (Zimbabwe → Ghana → Namibia → Botswana → DRC) |
-| [`agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md)                                                                               | Current delivery roadmap                                                                                  |
-| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                                                                 | Bank-grade readiness roadmap                                                                              |
-| [`release/production-readiness-10-10-roadmap.md`](./release/production-readiness-10-10-roadmap.md)                                     | ~~Release-grade readiness plan~~ (deprecated — superseded by `audit/remediation-2026-05-11.md`)           |
+| Document                                                                                                                               | Purpose                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| [`agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md`](./agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) | **Active** sovereign-state engagement readiness — 4 sprints (Zimbabwe → Ghana → Namibia → Botswana → DRC)  |
+| [`agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md)                                                                               | Current delivery roadmap                                                                                   |
+| [`audit/10-10-remediation-plan-2026-05-27.md`](./audit/10-10-remediation-plan-2026-05-27.md)                                           | **Latest** comprehensive 10/10 remediation — docs, hygiene, GTM, ecosystem, SLSA, new issues               |
+| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                                                                 | Bank-grade readiness roadmap (partial — superseded by 2026-05-27 plan)                                     |
+| [`release/production-readiness-10-10-roadmap.md`](./release/production-readiness-10-10-roadmap.md)                                     | ~~Release-grade readiness plan~~ (deprecated — superseded by `audit/10-10-remediation-plan-2026-05-27.md`) |
 
 ## §3 ADRs
 
