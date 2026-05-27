@@ -1,5 +1,18 @@
 # @gtcx/runtime
 
+## 0.2.2
+
+### Patch Changes
+
+- Documentation and supply-chain hygiene improvements
+  - Add SLSA provenance verification section to `@gtcx/crypto` README
+  - Add maturity badges to scaffolding and beta packages (`ai`, `network`, `runtime`, `workproof`, `crypto-native`)
+  - Update `@gtcx/crypto` README with supply-chain verification instructions
+  - Improve package discoverability with explicit maturity state
+  - @gtcx/api-client@0.4.2
+  - @gtcx/logging@0.3.0
+  - @gtcx/connectivity@0.5.1
+
 ## 0.2.1
 
 ### Patch Changes

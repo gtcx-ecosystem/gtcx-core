@@ -1,5 +1,11 @@
 # @gtcx/connectivity
 
+## 0.5.1
+
+### Patch Changes
+
+- @gtcx/api-client@0.4.2
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # @gtcx/api-client
 
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @gtcx/crypto@3.1.1
+
 ## 0.4.1
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1
+
+### Patch Changes
+
+- Documentation and supply-chain hygiene improvements
+  - Add SLSA provenance verification section to `@gtcx/crypto` README
+  - Add maturity badges to scaffolding and beta packages (`ai`, `network`, `runtime`, `workproof`, `crypto-native`)
+  - Update `@gtcx/crypto` README with supply-chain verification instructions
+  - Improve package discoverability with explicit maturity state
+
 ## 0.2.0
 
 ### Minor Changes
