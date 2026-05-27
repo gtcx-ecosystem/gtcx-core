@@ -166,4 +166,4 @@ When working on `gtcx-core`:
 
 - [Team Definition](../../docs/agile/team.md)
 - [Roadmap](../../docs/agile/roadmap.md)
-- [AGENTS.md](../../../AGENTS.md)
+- [AGENTS.md](../../AGENTS.md)
