@@ -147,11 +147,11 @@
 
 ## §14 Reference
 
-| Document                                                             | Purpose                                        |
-| -------------------------------------------------------------------- | ---------------------------------------------- |
-| [`reference/api-reference.md`](./reference/api-reference.md)         | API documentation contract and generation path |
-| [`stack/version-standards.md`](./stack/version-standards.md)         | Versioning and compatibility conventions       |
-| [`stack/dependency-boundaries.md`](./stack/dependency-boundaries.md) | Dependency and layering guidance               |
+| Document                                                                                        | Purpose                                        |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [`reference/api-reference.md`](./reference/api-reference.md)                                    | API documentation contract and generation path |
+| `gtcx-docs/docs/governance/protocols/2-repo-setup/protocol.md` (Protocol 2 — version lifecycle) | Versioning and compatibility conventions       |
+| [`stack/dependency-boundaries.md`](./stack/dependency-boundaries.md)                            | Dependency and layering guidance               |
 
 ## §15 Examples
 

@@ -34,7 +34,7 @@ Your primary goal: **help ship secure, lightweight, well-documented code that se
 **Read these in order — no exceptions:**
 
 1. **This file** (`AGENTS.md`) — you are here
-2. **Machine-readable docs standard** — `docs/agents/docs-standard-machine-readable.md`
+2. **Machine-readable docs standard** — `gtcx-docs/docs/governance/protocols/18-machine-readable-docs/protocol.md`
 3. **Lightweight app standard** — `docs/agents/docs-standard-lightweight.md`
 4. **Safety rules** — `docs/agents/safety-rules.json`
 5. **Routing rules** — `docs/agents/routing-rules.json`
