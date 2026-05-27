@@ -24,27 +24,27 @@ commitments: []
 
 ## Committed
 
-| ID       | Task                                                          | Owner              | Est. | Status      | Done                                |
-| -------- | ------------------------------------------------------------- | ------------------ | ---- | ----------- | ----------------------------------- |
-| SEC-008a | Execute `workflow_dispatch` release via `release.yml`         | DevOps             | 1d   | **DONE**    | 2026-05-27                          |
-| SEC-008b | Verify SLSA provenance on npm                                 | DevOps             | 0.5d | **BLOCKED** | Org policy denies `id-token: write` |
-| HYG-004  | Add `.gitattributes` with `* text=auto eol=lf`                | DevOps             | 0.5d | **DONE**    | 2026-05-27                          |
-| HYG-005  | Add `MATURITY: Scaffolding` badge to `packages/ai/README.md`  | Docs Lead          | 0.5d | **DONE**    | 2026-05-27                          |
-| DOC-005  | Fix frontmatter + link validation gates in CI                 | DevOps             | 1d   | **DONE**    | 2026-05-27                          |
-| WF-001   | Add auto-push git tags step to `release.yml`                  | DevOps             | 0.5d | Open        | —                                   |
-| HYG-001  | Set `OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM` org secrets | DevOps             | 0.5d | Open        | Needs secret values from admin      |
-| SEC-009  | Select pen-test vendor                                        | Security Lead      | 5d   | Open        | Needs vendor outreach               |
-| GTM-001  | Send Zimbabwe pre-submission email                            | GTM Lead           | 0.5d | Open        | Needs human send + log              |
-| GTM-002  | Send Namibia, Zambia, Ghana emails                            | GTM Lead           | 1d   | Open        | Needs human send + log              |
-| DOC-004  | Fix `docs/quality/10-10-remediation-tracker.md` KPIs          | Quality Lead       | 0.5d | Open        | —                                   |
-| NEW-003  | Populate sprint docs with committed items                     | Protocol Architect | 0.5d | **DONE**    | 2026-05-27                          |
+| ID       | Task                                                          | Owner              | Est. | Status      | Done                                                                   |
+| -------- | ------------------------------------------------------------- | ------------------ | ---- | ----------- | ---------------------------------------------------------------------- |
+| SEC-008a | Execute `workflow_dispatch` release via `release.yml`         | DevOps             | 1d   | **DONE**    | 2026-05-27                                                             |
+| SEC-008b | Verify SLSA provenance on npm                                 | DevOps             | 0.5d | **BLOCKED** | Org policy denies `id-token: write`                                    |
+| HYG-004  | Add `.gitattributes` with `* text=auto eol=lf`                | DevOps             | 0.5d | **DONE**    | 2026-05-27                                                             |
+| HYG-005  | Add `MATURITY: Scaffolding` badge to `packages/ai/README.md`  | Docs Lead          | 0.5d | **DONE**    | 2026-05-27                                                             |
+| DOC-005  | Fix frontmatter + link validation gates in CI                 | DevOps             | 1d   | **DONE**    | 2026-05-27                                                             |
+| WF-001   | Add auto-push git tags step to `release.yml`                  | DevOps             | 0.5d | **DONE**    | 2026-05-27                                                             |
+| HYG-001  | Set `OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM` org secrets | DevOps             | 0.5d | **BLOCKED** | Needs secret values from admin                                         |
+| SEC-009  | Select pen-test vendor                                        | Security Lead      | 5d   | **BLOCKED** | Shortlist done; NCC Group recommended. Awaiting RFP send by 2026-05-29 |
+| GTM-001  | Send Zimbabwe pre-submission email                            | GTM Lead           | 0.5d | **BLOCKED** | Render ready. Needs engagement-lead name + human send                  |
+| GTM-002  | Send Namibia, Zambia, Ghana emails                            | GTM Lead           | 1d   | **BLOCKED** | Renders ready. Needs engagement-lead name + human send                 |
+| DOC-004  | Fix `docs/quality/10-10-remediation-tracker.md` KPIs          | Quality Lead       | 0.5d | **DONE**    | 2026-05-27                                                             |
+| NEW-003  | Populate sprint docs with committed items                     | Protocol Architect | 0.5d | **DONE**    | 2026-05-27                                                             |
 
 ## Blockers
 
 | ID    | Description                                                  | Impact   | Escalation               | Resolution Path                                            |
 | ----- | ------------------------------------------------------------ | -------- | ------------------------ | ---------------------------------------------------------- |
 | B-001 | Org policy blocks `id-token: write` for SLSA provenance      | High     | Product Lead → Org admin | Request org-level exception for `gtcx-ecosystem/gtcx-core` |
-| B-002 | Pen-test vendor not selected                                 | Critical | Security Lead → CTO      | Expand shortlist; consider remote-first firms              |
+| B-002 | Pen-test vendor shortlist complete; RFPs not sent            | Critical | Security Lead → CTO      | Send to NCC Group + Kudelski by 2026-05-29                 |
 | B-003 | `OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM` values unknown | Medium   | DevOps → Org admin       | Collect from respective service admins                     |
 
 ## Metrics
