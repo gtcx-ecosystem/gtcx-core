@@ -1,5 +1,8 @@
 # @gtcx/ai
 
+> **Maturity:** Scaffolding — API surface may change. Not recommended for production use without review.
+> **Coverage:** ~50% (NAPI binding loader only; native `.node` artifacts not generated in CI)
+
 Observability and tracing instrumentation for GTCX operations.
 
 Provides `traced()` function wrappers that measure duration, log structured JSON to stderr, and capture errors — with zero external dependencies. Used by `@gtcx/crypto` and `@gtcx/verification` for operational telemetry and audit trails.

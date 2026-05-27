@@ -1,5 +1,8 @@
 # @gtcx/workproof
 
+> **Maturity:** Beta — W3C VC schema stable; predicate set expanding. Used in pilot prep.
+> **Coverage:** ~75%
+
 TradeCV/WorkProof v2.2 — W3C VC-based employment attestations with 57 predicates across 10 categories and selective disclosure.
 
 ## Installation

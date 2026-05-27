@@ -1,5 +1,8 @@
 # @gtcx/network
 
+> **Maturity:** Scaffolding — libp2p transport wrappers; mesh consensus not yet implemented.
+> **Coverage:** ~60% (transport layer only)
+
 P2P networking primitives for GTCX validator mesh and edge connectivity.
 
 ## Installation

@@ -1,5 +1,8 @@
 # @gtcx/runtime
 
+> **Maturity:** Beta — stable API, used in downstream repos, but not all edge cases hardened.
+> **Coverage:** ~80%
+
 Batteries-included runtime substrate that wires together `api-client`, `connectivity`, `resilience`, and `telemetry` into a single deployable runtime.
 
 ## Installation

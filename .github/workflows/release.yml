@@ -110,6 +110,9 @@ jobs:
       - name: Validate markdown links
         run: pnpm docs:check-links
 
+      - name: Validate doc frontmatter
+        run: pnpm docs:check-frontmatter
+
       - name: Validate GA release evidence
         run: pnpm release:ga:evidence:check
 

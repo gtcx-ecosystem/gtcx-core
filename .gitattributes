@@ -1,0 +1,15 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Treat lockfiles as text
+pnpm-lock.yaml text eol=lf
+Cargo.lock text eol=lf
+
+# Treat generated API docs as linguist-generated (excluded from diff stats)
+artifacts/api-docs/** linguist-generated=true
+
+# Treat coverage reports as linguist-generated
+coverage/** linguist-generated=true
+
+# Treat benchmark history as linguist-generated
+benchmarks/history.json linguist-generated=true

@@ -1,5 +1,8 @@
 # @gtcx/crypto-native
 
+> **Maturity:** Beta — NAPI bindings stable; native `.node` binary not generated in CI (local build required).
+> **Coverage:** ~9.5% (loader only; native binary not instrumented in test env)
+
 Native Node.js bindings loader for GTCX cryptographic operations.
 
 This package loads the NAPI-RS binary produced by `rust/gtcx-node` and exposes a stable JS/TS API.

@@ -1,7 +1,7 @@
 ---
 title: 'Remediation Plan'
-status: 'current'
-date: '2026-05-17'
+status: 'superseded'
+date: '2026-05-27'
 owner: 'protocol-architect'
 role: 'protocol-architect'
 tier: 'standard'
@@ -9,13 +9,14 @@ tags: ['docs']
 review_cycle: 'on-change'
 ---
 
-# Remediation Plan — gtcx-core
+# Remediation Plan — gtcx-core (SUPERSEDED)
 
-> **Status:** Draft for approval
-> **Date:** 2026-05-10
+> **Status:** Superseded by [`docs/audit/10-10-remediation-plan-2026-05-27.md`](../audit/10-10-remediation-plan-2026-05-27.md)
+> **Original date:** 2026-05-10
+> **Superseded date:** 2026-05-27
 > **Owner:** Protocol Architect + Quality & Evidence Lead
 
-This plan is Phase 1 only. It is intentionally limited to planning. No execution work beyond creating this file is authorized until approval is given.
+This plan was Phase 1 only and has been superseded by the comprehensive 10/10 remediation plan dated 2026-05-27. All execution work now references the superseding document.
 
 ## Scope and source set
 
