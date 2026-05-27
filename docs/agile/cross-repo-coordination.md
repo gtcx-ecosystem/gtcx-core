@@ -21,10 +21,10 @@ Each thread closes when no open items remain on either side; the section moves t
 
 ## Active threads at a glance
 
-| Repo           | State                             | Our open items                                         | Their open items                                                                        | Next checkpoint                                                 |
-| -------------- | --------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `gtcx-mobile`  | **Active — W1 of 30-day rollout** | Drop in on standup if 7-linked-group major bump needed | Fire `release.yml` ≤2026-05-26; polyfill + retire local @gtcx/crypto fork in Sprint 22+ | Daily 09:00 GMT in `ClickUp / baseline-os` (baseline-os hosted) |
-| `gtcx-agentic` | Deferred — Sprint 22+ items       | None until calibration reports start flowing           | MCP runtime transport selection; UX-doc protocol CI gate as audit finding               | Mobile sends calibration reports W3+ → kicks off                |
+| Repo           | State                             | Our open items                                         | Their open items                                                                        | Next checkpoint                     |
+| -------------- | --------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------- | ----------------------------------- |
+| `gtcx-mobile`  | **Active — W1 of 30-day rollout** | Drop in on standup if 7-linked-group major bump needed | Fire `release.yml` ≤2026-05-26; polyfill + retire local @gtcx/crypto fork in Sprint 22+ | 2026-06-22 (W8 close)               |
+| `gtcx-agentic` | Deferred — Sprint 22+ items       | None until calibration reports start flowing           | MCP runtime transport selection; UX-doc protocol CI gate as audit finding               | 2026-06-15 (calibration reports W3) |
 
 ---
 
@@ -57,10 +57,14 @@ Each thread closes when no open items remain on either side; the section moves t
 
 ### Open items (either side)
 
-- [ ] gtcx-mobile fires the publish (≤2026-05-26)
-- [ ] gtcx-mobile lands react-native-quick-crypto polyfill (Sprint 22+)
-- [ ] gtcx-mobile retires local `packages/crypto/` fork after polyfill (Sprint 22+)
-- [ ] gtcx-core: monitor `ClickUp / baseline-os` for 7-linked-group sign-off requests during W1-W8
+| #   | Item                                                                                         | Target closure             | Owner              | Status                                                                      |
+| --- | -------------------------------------------------------------------------------------------- | -------------------------- | ------------------ | --------------------------------------------------------------------------- |
+| 1   | gtcx-mobile fires the publish                                                                | 2026-05-26                 | Mobile DevOps      | **Overdue** — gtcx-core published 2026-05-27 via internal workflow_dispatch |
+| 2   | gtcx-mobile lands react-native-quick-crypto polyfill                                         | 2026-06-15 (Sprint 22)     | Mobile Engineering | Open                                                                        |
+| 3   | gtcx-mobile retires local `packages/crypto/` fork after polyfill                             | 2026-06-22 (Sprint 22 end) | Mobile Engineering | Blocked on #2                                                               |
+| 4   | gtcx-core: monitor `ClickUp / baseline-os` for 7-linked-group sign-off requests during W1-W8 | 2026-06-22 (W8 close)      | Protocol Architect | In progress                                                                 |
+
+**Resolution for #1:** gtcx-core executed `workflow_dispatch` publish on 2026-05-27 independently. 15 packages published. Mobile should verify `@gtcx/crypto@3.1.1` installs cleanly and retire the 48h commitment as satisfied or superseded.
 
 ### Last update
 
@@ -91,7 +95,9 @@ Each thread closes when no open items remain on either side; the section moves t
 
 ### Open items
 
-- [ ] gtcx-agentic: pick up Sprint 22+ items when calibration stream begins
+| #   | Item                                                                  | Target closure | Owner             | Status   |
+| --- | --------------------------------------------------------------------- | -------------- | ----------------- | -------- |
+| 1   | gtcx-agentic: pick up Sprint 22+ items when calibration stream begins | 2026-06-15     | gtcx-agentic Lead | Deferred |
 
 ### Last update
 

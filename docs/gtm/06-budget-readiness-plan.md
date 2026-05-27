@@ -39,6 +39,18 @@ review_cycle: 'on-change'
 | Internal security assessment                      | +0.15        | `02a83c3` |
 | FIPS validation boundary statement                | +0.1         | `02a83c3` |
 
+## What's Done (8.9 → 8.9, completed 2026-05-27)
+
+| Item                                                | Score Impact | Commit    |
+| --------------------------------------------------- | ------------ | --------- |
+| 15 packages published to npm via workflow_dispatch  | +0.0 (ops)   | `30996c6` |
+| API surface check made resilient to stale baselines | +0.0 (ops)   | `4ab22ce` |
+| Frontmatter + link validation gates fixed in CI     | +0.0 (docs)  | `5691109` |
+| rustls-webpki RUSTSECs resolved (cargo audit clean) | +0.0 (sec)   | `6cf003b` |
+| Pen-test vendor shortlist (3 vendors evaluated)     | +0.0 (sec)   | `30996c6` |
+| Regulator email renders complete (4 markets)        | +0.0 (gtm)   | `30996c6` |
+| SLSA provenance root cause identified (org policy)  | +0.0 (sec)   | `1f4a21b` |
+
 ---
 
 ## What Remains (9.4 → 10.0)
