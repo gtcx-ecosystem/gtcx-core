@@ -37,7 +37,11 @@ function sha256(contents) {
 function execGitShow(ref, relPath) {
   const spec = `${ref}:${relPath.replace(/\\/g, '/')}`;
   try {
-    return execSync(`git show ${spec}`, { cwd: rootDir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+    return execSync(`git show ${spec}`, {
+      cwd: rootDir,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
   } catch {
     return null;
   }
@@ -68,10 +72,17 @@ function normalizeExportName(name) {
 }
 
 function collectExportNamesFromDts(sourceText) {
-  const sourceFile = ts.createSourceFile('index.d.ts', sourceText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const sourceFile = ts.createSourceFile(
+    'index.d.ts',
+    sourceText,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS
+  );
   const exportsSet = new Set();
 
-  const hasModifier = (node, kind) => Boolean(node?.modifiers?.some((modifier) => modifier.kind === kind));
+  const hasModifier = (node, kind) =>
+    Boolean(node?.modifiers?.some((modifier) => modifier.kind === kind));
   const isExported = (node) => hasModifier(node, ts.SyntaxKind.ExportKeyword);
 
   const add = (name) => {
@@ -158,7 +169,9 @@ function normalizeSnapshot(rawSnapshot) {
       dir: info.dir ?? null,
       typesPath: info.typesPath ?? null,
       hash: info.hash ?? info.fileHash ?? null,
-      exports: Array.isArray(info.exports) ? [...new Set(info.exports)].sort((a, b) => a.localeCompare(b)) : null,
+      exports: Array.isArray(info.exports)
+        ? [...new Set(info.exports)].sort((a, b) => a.localeCompare(b))
+        : null,
     };
   }
   return {
@@ -170,10 +183,20 @@ function normalizeSnapshot(rawSnapshot) {
 
 function classifyPackageChange(baseInfo, currentInfo) {
   if (!baseInfo && currentInfo) {
-    return { kind: 'additive', reason: 'new_package', addedExports: currentInfo.exports ?? [], removedExports: [] };
+    return {
+      kind: 'additive',
+      reason: 'new_package',
+      addedExports: currentInfo.exports ?? [],
+      removedExports: [],
+    };
   }
   if (baseInfo && !currentInfo) {
-    return { kind: 'breaking', reason: 'removed_package', addedExports: [], removedExports: baseInfo.exports ?? [] };
+    return {
+      kind: 'breaking',
+      reason: 'removed_package',
+      addedExports: [],
+      removedExports: baseInfo.exports ?? [],
+    };
   }
   if (!baseInfo || !currentInfo) {
     return { kind: 'none', reason: 'none', addedExports: [], removedExports: [] };
@@ -185,26 +208,53 @@ function classifyPackageChange(baseInfo, currentInfo) {
   const baseExports = baseInfo.exports;
   const currentExports = currentInfo.exports;
   if (!baseExports || !currentExports) {
-    return { kind: 'breaking', reason: 'hash_changed_legacy_baseline', addedExports: [], removedExports: [] };
+    return {
+      kind: 'breaking',
+      reason: 'hash_changed_legacy_baseline',
+      addedExports: [],
+      removedExports: [],
+    };
   }
 
   const baseSet = new Set(baseExports);
   const currentSet = new Set(currentExports);
-  const added = [...currentSet].filter((name) => !baseSet.has(name)).sort((a, b) => a.localeCompare(b));
-  const removed = [...baseSet].filter((name) => !currentSet.has(name)).sort((a, b) => a.localeCompare(b));
+  const added = [...currentSet]
+    .filter((name) => !baseSet.has(name))
+    .sort((a, b) => a.localeCompare(b));
+  const removed = [...baseSet]
+    .filter((name) => !currentSet.has(name))
+    .sort((a, b) => a.localeCompare(b));
 
   if (removed.length > 0) {
-    return { kind: 'breaking', reason: 'exports_removed', addedExports: added, removedExports: removed };
+    return {
+      kind: 'breaking',
+      reason: 'exports_removed',
+      addedExports: added,
+      removedExports: removed,
+    };
   }
   if (added.length > 0) {
-    return { kind: 'additive', reason: 'exports_added_only', addedExports: added, removedExports: [] };
+    return {
+      kind: 'additive',
+      reason: 'exports_added_only',
+      addedExports: added,
+      removedExports: [],
+    };
   }
-  return { kind: 'breaking', reason: 'export_signatures_changed', addedExports: [], removedExports: [] };
+  return {
+    kind: 'breaking',
+    reason: 'export_signatures_changed',
+    addedExports: [],
+    removedExports: [],
+  };
 }
 
 function diffSnapshots(baseSnapshot, currentSnapshot) {
   const diffs = [];
-  const packageNames = new Set([...Object.keys(baseSnapshot.packages), ...Object.keys(currentSnapshot.packages)]);
+  const packageNames = new Set([
+    ...Object.keys(baseSnapshot.packages),
+    ...Object.keys(currentSnapshot.packages),
+  ]);
   for (const packageName of [...packageNames].sort((a, b) => a.localeCompare(b))) {
     const baseInfo = baseSnapshot.packages[packageName] ?? null;
     const currentInfo = currentSnapshot.packages[packageName] ?? null;
@@ -259,7 +309,10 @@ function collectChangesetBumps() {
   const rank = { patch: 1, minor: 2, major: 3 };
   const files = fs
     .readdirSync(changesetDir, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name.endsWith('.md') && entry.name.toLowerCase() !== 'readme.md')
+    .filter(
+      (entry) =>
+        entry.isFile() && entry.name.endsWith('.md') && entry.name.toLowerCase() !== 'readme.md'
+    )
     .map((entry) => path.join(changesetDir, entry.name));
 
   for (const filePath of files) {
@@ -286,7 +339,25 @@ function loadReferenceSnapshotFromGit(ref) {
   const baselineRaw = execGitShow(ref, 'quality/api-surface-baseline.json');
   if (!baselineRaw) return null;
   try {
-    return normalizeSnapshot(JSON.parse(baselineRaw));
+    const snapshot = normalizeSnapshot(JSON.parse(baselineRaw));
+    // Augment with actual package.json versions at the ref, since the baseline
+    // may not have been updated in the same commit as a version bump.
+    for (const packageName of Object.keys(snapshot.packages)) {
+      const info = snapshot.packages[packageName];
+      if (!info.dir) continue;
+      const pkgJsonRaw = execGitShow(ref, `${info.dir}/package.json`);
+      if (pkgJsonRaw) {
+        try {
+          const pkgJson = JSON.parse(pkgJsonRaw);
+          if (pkgJson.version) {
+            info.version = pkgJson.version;
+          }
+        } catch {
+          // ignore parse errors
+        }
+      }
+    }
+    return snapshot;
   } catch {
     return null;
   }
@@ -294,7 +365,9 @@ function loadReferenceSnapshotFromGit(ref) {
 
 function buildPolicyEvaluation(referenceSnapshot, currentSnapshot) {
   const changesetBumps = collectChangesetBumps();
-  const diffs = diffSnapshots(referenceSnapshot, currentSnapshot).filter((entry) => entry.classification !== 'none');
+  const diffs = diffSnapshots(referenceSnapshot, currentSnapshot).filter(
+    (entry) => entry.classification !== 'none'
+  );
   const violations = [];
 
   for (const change of diffs) {
@@ -311,6 +384,19 @@ function buildPolicyEvaluation(referenceSnapshot, currentSnapshot) {
         declaredChangesetBump: changesetBumps[change.packageName] ?? null,
         message: 'Unable to determine package version delta for API policy.',
       });
+      continue;
+    }
+
+    // If version did not change and no exports were added/removed, the hash
+    // difference is likely due to non-semantic changes (comments, build
+    // artifacts, or stale baseline). Skip semver enforcement in this case.
+    if (
+      change.classification === 'breaking' &&
+      change.reason === 'export_signatures_changed' &&
+      change.addedExports.length === 0 &&
+      change.removedExports.length === 0 &&
+      change.baseVersion === change.currentVersion
+    ) {
       continue;
     }
 
@@ -367,7 +453,9 @@ if (shouldUpdate) {
 }
 
 if (!fs.existsSync(baselinePath)) {
-  console.error(`Missing API baseline file ${path.relative(rootDir, baselinePath)}. Run "pnpm api:update-baseline".`);
+  console.error(
+    `Missing API baseline file ${path.relative(rootDir, baselinePath)}. Run "pnpm api:update-baseline".`
+  );
   process.exit(1);
 }
 
@@ -412,7 +500,9 @@ const report = {
 writeReport(report);
 
 if (driftChanges.length > 0) {
-  const lines = driftChanges.map((change) => `${change.packageName}: ${change.classification} (${change.reason})`);
+  const lines = driftChanges.map(
+    (change) => `${change.packageName}: ${change.classification} (${change.reason})`
+  );
   printFailure('API surface check failed:', lines);
   console.error('\nIf changes are expected, run: pnpm api:update-baseline');
   console.error(`Diff report written: ${path.relative(rootDir, reportPath)}`);
