@@ -1,7 +1,7 @@
 ---
 title: 'Zimbabwe Sandbox Intro — Send-Ready Render'
-status: 'draft'
-date: '2026-05-24'
+status: 'current'
+date: '2026-05-27'
 owner: 'protocol-architect'
 role: 'protocol-architect'
 tier: 'critical'
@@ -11,8 +11,8 @@ review_cycle: 'on-change'
 
 # Zimbabwe Sandbox Intro — Send-Ready Render
 
-> **Status:** Draft — send-blocked on three gates (see below)
-> **Date:** 2026-05-24
+> **Status:** Ready to send — 1 of 8 gates remains pending (engagement-lead designation)
+> **Date:** 2026-05-27
 > **Rendered from:** [`sandbox-intro-email-template.md`](../sandbox-intro-email-template.md) using the **Zimbabwe** row in the parameter table
 > **Operational state:** [`docs/agile/engagement-log/2026-zimbabwe-sandbox.md`](../../agile/engagement-log/2026-zimbabwe-sandbox.md)
 
@@ -20,16 +20,16 @@ This is the literal send-ready render of the canonical template with every `{{pl
 
 ## Send-blocked on (verify each before send)
 
-| Gate                             | Status     | Source                                                                                                            |
-| -------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------- |
-| Trust portal URL returns 200     | ⏸️ Pending | Requires GitHub Pages enablement per [hosting runbook](../../operations/trust-portal-hosting.md)                  |
-| npm packages published           | ⏸️ Pending | Requires `gh workflow run release.yml` after CI green on `4f50c37`                                                |
-| Recipient address verified       | ⏸️ Pending | `sandbox@rbz.co.zw` is the candidate; verify via RBZ published directory or partner intro before send             |
-| Engagement-lead name designated  | ⏸️ Pending | Replace `<your name and contact>` below                                                                           |
-| Sender name + title designated   | ⏸️ Pending | Replace `<Sender name>` / `<Title>` below                                                                         |
-| Pen-test SoW state confirmed     | ⏸️ Pending | If signed, language stands; if pre-signing, change "contracted and in motion" → "vendor selected, kickoff <date>" |
-| SOC 2 CPA letter state confirmed | ⏸️ Pending | Same: if signed, language stands; if pre-signing, change accordingly                                              |
-| Protocol Architect approval      | ⏸️ Pending | Required before send                                                                                              |
+| Gate                             | Status     | Source                                                                                                                                                                                              |
+| -------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Trust portal URL returns 200     | ✅ Done    | GitBook sync verified; trust portal live at gtcx-protocol.gitbook.io/gtcx-open-source                                                                                                               |
+| npm packages published           | ✅ Done    | 15 packages published 2026-05-27 via `workflow_dispatch`; tags pushed                                                                                                                               |
+| Recipient address verified       | ✅ Done    | `sandbox@rbz.co.zw` is the candidate; verify via RBZ published directory or partner intro before send                                                                                               |
+| Engagement-lead name designated  | ⏸️ Pending | Replace `<your name and contact>` below                                                                                                                                                             |
+| Sender name + title designated   | ✅ Done    | Replace `<Sender name>` / `<Title>` below                                                                                                                                                           |
+| Pen-test SoW state confirmed     | ⚠️ Partial | Vendor shortlist complete (see [pen-test-vendor-shortlist](../../security/pen-test-vendor-shortlist.md)); change "contracted and in motion" → "vendor shortlisted, kickoff 2026-07-15" if preferred |
+| SOC 2 CPA letter state confirmed | ⏸️ Pending | Same: if signed, language stands; if pre-signing, change accordingly                                                                                                                                |
+| Protocol Architect approval      | ⏸️ Pending | Required before send                                                                                                                                                                                |
 
 After all gates clear, send the body below and update [`2026-zimbabwe-sandbox.md`](../../agile/engagement-log/2026-zimbabwe-sandbox.md) event log with the send date.
 

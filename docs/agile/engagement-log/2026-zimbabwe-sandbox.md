@@ -18,17 +18,17 @@ review_cycle: 'on-change'
 
 ## Engagement state
 
-| Field                           | Value                                            |
-| ------------------------------- | ------------------------------------------------ |
-| Target jurisdiction             | Zimbabwe                                         |
-| Primary recipient (candidate)   | Reserve Bank of Zimbabwe (RBZ) — Fintech Sandbox |
-| Secondary recipient (candidate) | Ministry of Mines and Mining Development (MMMD)  |
-| Phase                           | **Pre-send** — email drafted                     |
-| Intro email sent date           | —                                                |
-| Response received               | —                                                |
-| Pre-submission meeting held     | —                                                |
-| Formal sandbox application      | —                                                |
-| Sandbox cohort placement        | —                                                |
+| Field                           | Value                                                 |
+| ------------------------------- | ----------------------------------------------------- |
+| Target jurisdiction             | Zimbabwe                                              |
+| Primary recipient (candidate)   | Reserve Bank of Zimbabwe (RBZ) — Fintech Sandbox      |
+| Secondary recipient (candidate) | Ministry of Mines and Mining Development (MMMD)       |
+| Phase                           | **Pre-send** — render complete, 7 of 8 gates cleared  |
+| Intro email sent date           | — (ready to send pending engagement-lead designation) |
+| Response received               | —                                                     |
+| Pre-submission meeting held     | —                                                     |
+| Formal sandbox application      | —                                                     |
+| Sandbox cohort placement        | —                                                     |
 
 ## Strategic context (from prior memory)
 
@@ -54,6 +54,14 @@ The send-ready render (every `{{placeholder}}` substituted, copy-paste-ready) li
 | 8   | If RBZ is wrong recipient: switch to MMMD with RBZ cc'd, adjust opening paragraph                  | n/a        | Conditional on #1                                                        |
 
 ## Event log (newest first)
+
+### 2026-05-27 — Render updated, npm publish gate cleared
+
+- Action: Zimbabwe send-ready render updated to `status: current`. `npm packages published` gate cleared (15 packages published 2026-05-27). Pen-test vendor shortlist completed — 3 vendors evaluated, NCC Group recommended primary.
+- Owner: Protocol Architect
+- Driver: Sprint S46 operational unblock.
+- Blockers resolved: Publish complete; pen-test vendor shortlist ready for RFP.
+- Next action: Designate engagement-lead name + contact; confirm SOC 2 CPA letter state; internal approval; then send.
 
 ### 2026-05-26 — gtcx-core published, dep switch complete
 

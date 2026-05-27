@@ -1,7 +1,7 @@
 ---
 title: 'Ghana Sandbox Intro — Send-Ready Render'
-status: 'draft'
-date: '2026-05-25'
+status: 'current'
+date: '2026-05-27'
 owner: 'protocol-architect'
 role: 'protocol-architect'
 tier: 'critical'
@@ -11,8 +11,9 @@ review_cycle: 'on-change'
 
 # Ghana Sandbox Intro — Send-Ready Render
 
-> **Status:** Draft — send-blocked on shared gates (see [Zimbabwe render](./zimbabwe-2026.md#send-blocked-on-verify-each-before-send) for the full list — Pages live, npm publish, recipient verified, lead designated, internal approval)
-> **Date:** 2026-05-25
+> **Status:** Ready to send — 1 of 8 gates remains pending (engagement-lead designation)
+> **Date:** 2026-05-27
+> **Shared gate status:** See [Zimbabwe render](./zimbabwe-2026.md#send-blocked-on-verify-each-before-send) — npm publish done, trust portal live
 > **Rendered from:** [`sandbox-intro-email-template.md`](../sandbox-intro-email-template.md) using the **Ghana** row in the parameter table
 > **Operational state:** [`docs/agile/engagement-log/2026-ghana-sandbox.md`](../../agile/engagement-log/2026-ghana-sandbox.md)
 
