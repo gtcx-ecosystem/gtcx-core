@@ -2,8 +2,16 @@
 id: AGENT-CORE
 title: 'GTCX Core — Agent Operating Profile'
 version: '1.0'
-effective_date: '2026-05-27'
-owner: 'core@gtcx.io'
+date: '2026-05-27'
+status: current
+owner: protocol-architect
+role: protocol-architect
+tier: strategic
+tags:
+  - agents
+  - protocol
+  - operations
+review_cycle: quarterly
 ---
 
 # GTCX Core — Agent Operating Profile

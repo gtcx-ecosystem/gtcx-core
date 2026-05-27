@@ -2,8 +2,16 @@
 id: ROADMAP-CORE
 title: 'GTCX Core — Roadmap 2026'
 version: '1.0'
-effective_date: '2026-05-27'
-owner: 'engineering@gtcx.io'
+date: '2026-05-27'
+status: current
+owner: protocol-architect
+role: protocol-architect
+tier: strategic
+tags:
+  - agile
+  - roadmap
+  - planning
+review_cycle: monthly
 ---
 
 # GTCX Core — Roadmap 2026

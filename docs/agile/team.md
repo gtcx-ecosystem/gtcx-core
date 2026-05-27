@@ -2,8 +2,16 @@
 id: TEAM-CORE
 title: 'GTCX Core — Agile Team'
 version: '1.0'
-effective_date: '2026-05-27'
-owner: 'core@gtcx.io'
+date: '2026-05-27'
+status: current
+owner: protocol-architect
+role: protocol-architect
+tier: strategic
+tags:
+  - agile
+  - team
+  - charter
+review_cycle: quarterly
 ---
 
 # GTCX Core — Agile Team

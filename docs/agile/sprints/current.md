@@ -1,5 +1,15 @@
 ---
 sprintId: 'S46'
+title: 'Sprint S46 — gtcx-core'
+date: '2026-05-17'
+status: current
+owner: protocol-architect
+role: protocol-architect
+tier: standard
+tags:
+  - agile
+  - sprint
+review_cycle: bi-weekly
 dates:
   start: '2026-05-17'
   end: '2026-05-31'
