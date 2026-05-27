@@ -21,10 +21,10 @@ Each thread closes when no open items remain on either side; the section moves t
 
 ## Active threads at a glance
 
-| Repo           | State                             | Our open items                                         | Their open items                                                                        | Next checkpoint                                        |
-| -------------- | --------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| Repo           | State                             | Our open items                                         | Their open items                                                                        | Next checkpoint                                                 |
+| -------------- | --------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | `gtcx-mobile`  | **Active — W1 of 30-day rollout** | Drop in on standup if 7-linked-group major bump needed | Fire `release.yml` ≤2026-05-26; polyfill + retire local @gtcx/crypto fork in Sprint 22+ | Daily 09:00 GMT in `ClickUp / baseline-os` (baseline-os hosted) |
-| `gtcx-agentic` | Deferred — Sprint 22+ items       | None until calibration reports start flowing           | MCP runtime transport selection; UX-doc protocol CI gate as audit finding               | Mobile sends calibration reports W3+ → kicks off       |
+| `gtcx-agentic` | Deferred — Sprint 22+ items       | None until calibration reports start flowing           | MCP runtime transport selection; UX-doc protocol CI gate as audit finding               | Mobile sends calibration reports W3+ → kicks off                |
 
 ---
 
@@ -36,12 +36,12 @@ Each thread closes when no open items remain on either side; the section moves t
 
 ### State
 
-| Field                | Value                                                      |
-| -------------------- | ---------------------------------------------------------- |
-| Phase                | **W1 of 30-day rollout**                                   |
-| Window               | 2026-05-24 → 2026-06-22 (W8 close)                         |
+| Field                | Value                                                               |
+| -------------------- | ------------------------------------------------------------------- |
+| Phase                | **W1 of 30-day rollout**                                            |
+| Window               | 2026-05-24 → 2026-06-22 (W8 close)                                  |
 | Standup channel      | `ClickUp / baseline-os` Slack, daily 09:00 GMT (baseline-os hosted) |
-| gtcx-core attendance | Drop-in for 7-linked-group sign-off events only            |
+| gtcx-core attendance | Drop-in for 7-linked-group sign-off events only                     |
 
 ### Outbound — what gtcx-core has committed to mobile
 

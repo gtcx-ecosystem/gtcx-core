@@ -188,3 +188,41 @@ To run any forensic audit on this repo (master-audit, full-audit, 10-10-roadmap,
 
 The audit registry is provider-agnostic — the same prompts work for Claude, Codex, Gemini, Kimi, Deepseek, Grok, etc.
 <!-- AGENT-SYNC:END -->
+
+## Coordination Contract
+
+This repo participates in the GTCX ecosystem coordination system managed by `baseline-os`.
+
+| Field | Value |
+|-------|-------|
+| Repo ID | `gtcx-core` |
+| Tier | Tier 1 (Core) |
+| Human Lead | TBD — update this |
+| Agent Roles | Builder, Reviewer, Coordinator |
+| QA Gates | `typecheck`, `test`, `arch-check`, `spec-drift` |
+
+### Reporting Work
+
+Report work items to the coordination hub:
+
+```bash
+cd /path/to/baseline-os
+pnpm ecosystem:repo:report-work --repo=gtcx-core --item="Description" --status=in-progress
+```
+
+Valid statuses: `pending`, `in-progress`, `blocked`, `completed`, `deferred`.
+
+### Querying Blockers
+
+Check `baseline-os/workstream/coordination/coordination-report-latest.md` for cross-repo blockers.
+
+### Trust Requirements
+
+- Builders: trust ≥ 70 (Permissioned)
+- Reviewers: trust ≥ 80 (Authorized)
+- Coordinators: trust ≥ 85 (Authorized)
+- Cross-repo changes require human approval
+
+---
+
+*Coordination contract added: 2026-05-26*
