@@ -1,11 +1,11 @@
 # gtcx-core — Repository Overview
 
 > **Status:** Current
-> **Date:** 2026-05-25
+> **Date:** 2026-05-27
 > **Owner:** Protocol Architect
-> **Bank-grade composite score:** 8.8 / 10 (per [master audit 2026-05-25](../audit/master-audit-2026-05-25.md))
+> **Bank-grade composite score:** 8.9 / 10 (per [master audit 2026-05-27](../audit/master-audit-2026-05-27.md))
 > **Internal completion score:** 9.5 / 10 (per [internal completion audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md) — all internal items closed)
-> **Next review:** 2026-08-25 (quarterly, aligned with master audit cycle)
+> **Next review:** 2026-08-27 (quarterly, aligned with master audit cycle)
 
 ---
 
@@ -17,7 +17,7 @@
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.8/10** as of [master audit 2026-05-25](../audit/master-audit-2026-05-25.md) (up from 8.7 on 2026-05-17). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced, Build L3 aspirational; provenance manifest generated per release but not yet published to npm registry. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
+**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.9/10** as of [master audit 2026-05-27](../audit/master-audit-2026-05-27.md) (up from 8.63 on 2026-05-12). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced, Build L3 aspirational; provenance manifest generated per release but not yet published to npm registry. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
 
 **Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DR Congo plus broader continental rollout). See the [cross-jurisdiction dashboard](../agile/engagement-log/dashboard.md) for per-engagement state.
 
@@ -404,8 +404,9 @@ Validator: `node tools/check-threat-matrix.mjs` passes.
 
 | Document                                                         | Date       | Core Score         | Key Finding                                              |
 | ---------------------------------------------------------------- | ---------- | ------------------ | -------------------------------------------------------- |
+| [Master Audit 2026-05-27](../audit/master-audit-2026-05-27.md)   | 2026-05-27 | **8.9/10** honest  | Delta audit; no new findings; all gates pass             |
+| [Master Audit 2026-05-26](../audit/master-audit-2026-05-26.md)   | 2026-05-26 | **8.9/10** honest  | Continental predicates; zkp refactor; trust portal live  |
 | [Master Audit 2026-05-12](../audit/master-audit-2026-05-12.md)   | 2026-05-12 | **8.63/10** honest | FIPS verified; SLSA no provenance; threat matrix created |
-| [Master Audit 2026-05-11](../audit/master-audit-2026-05-11.md)   | 2026-05-11 | 8.56/10 honest     | Pre-FIPS verification                                    |
 | [10/10 Roadmap 2026-05-11](../audit/10-10-roadmap-2026-05-11.md) | 2026-05-12 | —                  | M1 Foundation 4/6 complete; M2 Hardening in progress     |
 
 ---
@@ -509,7 +510,7 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 
 | Document                                 | Purpose                  | Audience                         |
 | ---------------------------------------- | ------------------------ | -------------------------------- |
-| `docs/audit/master-audit-2026-05-12.md`  | Bank-grade certification | Security, compliance, investors  |
+| `docs/audit/master-audit-2026-05-27.md`  | Bank-grade certification | Security, compliance, investors  |
 | `docs/audit/10-10-roadmap-2026-05-11.md` | Path to 10.0             | Engineering, product, executives |
 | `docs/architecture/overview.md`          | System architecture      | Engineers, architects            |
 | `docs/security/threat-control-matrix.md` | Security controls        | Security engineers, auditors     |
@@ -533,7 +534,7 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 
 ## 11. Honest Assessment
 
-This document reflects the state of `gtcx-core` as of 2026-05-12. It uses honest scores from forensic verification (§9 of the master audit), not claimed scores.
+This document reflects the state of `gtcx-core` as of 2026-05-27. It uses honest scores from forensic verification (§9 of the master audit), not claimed scores.
 
 **What is real:** FIPS 140-3 verified. Zero unsafe code. 97.86% statement coverage on critical path. Threat-control matrix with 12 validated controls. Offline-first queue tested. API surface baselined.
 
