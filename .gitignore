@@ -77,13 +77,19 @@ pnpm-debug.log*
 # Local archive (historical reference, preserved in git history)
 _archive/
 
-# BaselineOS runtime state
-.baseline/
 _delete/
 provenance-manifest.json
 
+
 # BaselineOS institutional memory (tracked)
-.baseline/
-!.baseline/definition.json
-!.baseline/memory/
-!.baseline/memory/**
+.baseline/checkpoints/
+.baseline/metrics/
+.baseline/offline/
+.baseline/archives/
+.baseline/govern/
+.baseline/index/
+.baseline/data/
+.baseline/evidence/
+.baseline/keys/
+.baseline/knowledge/
+.baseline/security/
