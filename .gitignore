@@ -81,3 +81,9 @@ _archive/
 .baseline/
 _delete/
 provenance-manifest.json
+
+# BaselineOS institutional memory (tracked)
+.baseline/
+!.baseline/definition.json
+!.baseline/memory/
+!.baseline/memory/**
