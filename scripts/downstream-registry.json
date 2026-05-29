@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "downstreams": [
+    {
+      "repo": "gtcx-protocols",
+      "owner": "gtcx-ecosystem",
+      "packages": ["@gtcx/crypto", "@gtcx/types", "@gtcx/workproof"],
+      "bump_strategy": "minor_auto",
+      "required_checks": ["ci", "typecheck", "test"],
+      "reviewers": ["protocol-architect"]
+    },
+    {
+      "repo": "gtcx-intelligence",
+      "owner": "gtcx-ecosystem",
+      "packages": ["@gtcx/ai", "@gtcx/telemetry"],
+      "bump_strategy": "minor_auto",
+      "required_checks": ["ci", "test"],
+      "reviewers": ["frontier-infra-engineer"]
+    },
+    {
+      "repo": "gtcx-platforms",
+      "owner": "gtcx-ecosystem",
+      "packages": ["@gtcx/crypto", "@gtcx/types", "@gtcx/domain", "@gtcx/schemas"],
+      "bump_strategy": "minor_auto",
+      "required_checks": ["ci", "build"],
+      "reviewers": ["platform-lead"]
+    },
+    {
+      "repo": "gtcx-infrastructure",
+      "owner": "gtcx-ecosystem",
+      "packages": ["@gtcx/security", "@gtcx/telemetry"],
+      "bump_strategy": "patch_manual",
+      "required_checks": ["ci", "security-scan"],
+      "reviewers": ["devops-lead"]
+    },
+    {
+      "repo": "baseline-os",
+      "owner": "gtcx-ecosystem",
+      "packages": ["@gtcx/crypto-native"],
+      "bump_strategy": "minor_manual",
+      "required_checks": ["ci", "test", "typecheck"],
+      "reviewers": ["protocol-architect"]
+    }
+  ],
+  "excluded_releases": [],
+  "max_open_prs_per_repo": 5
+}

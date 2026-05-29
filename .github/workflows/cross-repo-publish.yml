@@ -1,0 +1,101 @@
+name: Cross-Repo Publish
+
+on:
+  workflow_run:
+    workflows: ['Release']
+    types: [completed]
+    branches: [main]
+
+concurrency:
+  group: cross-repo-publish-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect-publish:
+    name: Detect Published Packages
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    outputs:
+      published_packages: ${{ steps.detect.outputs.published_packages }}
+      should_run: ${{ steps.detect.outputs.should_run }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect published packages
+        id: detect
+        run: |
+          # Get changed package.json files in the release commit
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep "package.json" || true)
+          PACKAGES="[]"
+
+          if [ -n "$CHANGED" ]; then
+            RESULT="["
+            FIRST=true
+            for f in $CHANGED; do
+              if [ -f "$f" ]; then
+                NAME=$(node -p "require('./$f').name" 2>/dev/null || echo "")
+                NEW_VER=$(node -p "require('./$f').version" 2>/dev/null || echo "")
+                OLD_VER=$(git show HEAD~1:"$f" 2>/dev/null | node -p "JSON.parse(require('fs').readFileSync(0,'utf-8')).version" 2>/dev/null || echo "0.0.0")
+
+                if [ -n "$NAME" ] && [ -n "$NEW_VER" ] && [ "$OLD_VER" != "$NEW_VER" ]; then
+                  if [ "$FIRST" = true ]; then
+                    FIRST=false
+                  else
+                    RESULT="$RESULT,"
+                  fi
+                  RESULT="$RESULT{\"name\":\"$NAME\",\"oldVersion\":\"$OLD_VER\",\"newVersion\":\"$NEW_VER\"}"
+                fi
+              fi
+            done
+            RESULT="$RESULT]"
+            PACKAGES="$RESULT"
+          fi
+
+          echo "published_packages=$PACKAGES" >> "$GITHUB_OUTPUT"
+
+          if [ "$PACKAGES" != "[]" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  open-prs:
+    name: Open Downstream PRs
+    runs-on: ubuntu-latest
+    needs: detect-publish
+    if: ${{ needs.detect-publish.outputs.should_run == 'true' }}
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout gtcx-core
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable Corepack and pin pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.15.0 --activate
+
+      - name: Install tsx
+        run: pnpm add -g tsx
+
+      - name: Run downstream PR opener
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISHED_PACKAGES: ${{ needs.detect-publish.outputs.published_packages }}
+        run: tsx scripts/open-downstream-prs.ts
+
+      - name: Upload summary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cross-repo-publish-summary
+          path: cross-repo-publish-summary.json
+        continue-on-error: true
