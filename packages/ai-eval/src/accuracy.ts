@@ -19,15 +19,15 @@ interface PackageTestResult {
   status: 'PASS' | 'FAIL';
 }
 
-function runTests(repo: string): {
+function runTests(pkgPath: string): {
   total: number;
   passed: number;
   failed: number;
   skipped: number;
 } {
   try {
-    const stdout = execSync('pnpm test --run --reporter=json', {
-      cwd: repo,
+    const stdout = execSync('pnpm test -- --reporter=json', {
+      cwd: pkgPath,
       encoding: 'utf-8',
       timeout: 300000,
       stdio: ['pipe', 'pipe', 'pipe'],
@@ -75,37 +75,52 @@ function runTests(repo: string): {
     }
   }
 
-  // Fallback: parse text output for "X passed, Y failed"
-  try {
-    const stdout = execSync('pnpm test --run', {
-      cwd: repo,
-      encoding: 'utf-8',
-      timeout: 300000,
-      stdio: ['pipe', 'pipe', 'pipe'],
-    });
-    const match = stdout.match(/(\d+)\s+passed.*?(\d+)\s+failed/);
-    if (match && match[1] && match[2]) {
-      const passed = parseInt(match[1], 10);
-      const failed = parseInt(match[2], 10);
-      return { total: passed + failed, passed, failed, skipped: 0 };
-    }
-  } catch (err: unknown) {
-    const e = err as { stdout?: string };
-    if (e.stdout) {
-      const match = e.stdout.match(/(\d+)\s+passed.*?(\d+)\s+failed/);
-      if (match && match[1] && match[2]) {
-        const passed = parseInt(match[1], 10);
-        const failed = parseInt(match[2], 10);
-        return { total: passed + failed, passed, failed, skipped: 0 };
-      }
-    }
-  }
-
   return { total: 0, passed: 0, failed: 0, skipped: 0 };
 }
 
 function getWorkspacePackages(repo: string): Array<{ name: string; path: string }> {
+  try {
+    const stdout = execSync('pnpm list -r --json --depth=-1 2>/dev/null', {
+      cwd: repo,
+      encoding: 'utf-8',
+      timeout: 30000,
+      stdio: ['pipe', 'pipe', 'ignore'],
+    });
+    const data = JSON.parse(stdout) as Array<{ name: string; path: string; private?: boolean }>;
+    const filtered = data
+      .filter((p) => p.name && p.name.startsWith('@gtcx/'))
+      .map((p) => ({ name: p.name, path: p.path }));
+    if (filtered.length > 0) return filtered;
+  } catch {
+    /* empty */
+  }
+
   const packages: Array<{ name: string; path: string }> = [];
+  try {
+    const packagesDir = join(repo, 'packages');
+    if (existsSync(packagesDir)) {
+      const entries = execSync(`find ${packagesDir} -maxdepth 2 -name "package.json" -type f`, {
+        encoding: 'utf-8',
+        timeout: 10000,
+      })
+        .trim()
+        .split('\n')
+        .filter(Boolean);
+      for (const pkgJson of entries) {
+        try {
+          const pkg = JSON.parse(readFileSync(pkgJson, 'utf-8'));
+          if (pkg.name && pkg.name.startsWith('@gtcx/')) {
+            packages.push({ name: pkg.name, path: pkgJson.replace('/package.json', '') });
+          }
+        } catch {
+          /* empty */
+        }
+      }
+    }
+    if (packages.length > 0) return packages;
+  } catch {
+    /* empty */
+  }
 
   const pnpmWorkspace = join(repo, 'pnpm-workspace.yaml');
   if (existsSync(pnpmWorkspace)) {
