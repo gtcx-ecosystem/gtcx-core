@@ -1,18 +1,19 @@
 ---
-title: "External Readiness Checklist"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'External Readiness Checklist'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "internal"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'internal']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'External Readiness Checklist'
 status: 'current'
 date: '2026-05-25'
@@ -21,6 +22,7 @@ role: 'quality-evidence-lead'
 tier: 'critical'
 tags: ['internal', 'readiness', 'checklist', 'gtm']
 review_cycle: 'weekly'
+
 ---
 
 # External Readiness Checklist
@@ -29,7 +31,11 @@ review_cycle: 'weekly'
 > **Date:** 2026-05-25
 > **Owner:** Quality & Evidence Lead
 
+> **Action plan:** `docs/internal/external-blocker-action-plan.md` — hard deadlines, daily actions, escalation paths, and contingency plans for every blocker.
+
 **Purpose:** Track all internal readiness items that must be complete before external outreach to regulators, enterprise customers, or investors. This is the single source of truth for "are we ready to talk to the outside world?"
+
+**For active execution:** See the action plan. This checklist remains the static reference; the action plan contains the dynamic daily/weekly execution tracking.
 
 ---
 

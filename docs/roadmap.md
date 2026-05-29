@@ -1,18 +1,19 @@
 ---
-title: "GTCX Core — Master Roadmap"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'GTCX Core — Master Roadmap'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "roadmap.md"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'roadmap.md']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Gtcx Core Master Roadmap'
 status: 'current'
 date: '2026-05-19'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'critical'
 tags: ['roadmap', 'strategy', '10-10', 'ai-maturity', 'innovation', 'moat']
 review_cycle: 'on-change'
+
 ---
 
 # GTCX Core — Master Roadmap
@@ -120,14 +122,15 @@ pnpm quality:kpi:collect    # KPI snapshot
 
 ### 3.1 Current State (Maturity Level 2 — Governed)
 
-| Capability           | Status           | Evidence                                                             |
-| -------------------- | ---------------- | -------------------------------------------------------------------- |
-| Model cards          | 6 published      | `docs/governance/model-cards/`                                       |
-| AI observability     | Live             | `@gtcx/ai` — `traced()`, category loggers, span emitters, provenance |
-| AI test coverage     | 97.43%           | `@gtcx/ai` branch coverage                                           |
-| Human review matrix  | Defined          | Per model card + `AGENTS.md`                                         |
-| Safety rules         | Machine-readable | `docs/agents/safety-rules.json`                                      |
-| Quarterly evaluation | Scheduled        | Next: 2026-08-19                                                     |
+| Capability           | Status           | Evidence                                                                  |
+| -------------------- | ---------------- | ------------------------------------------------------------------------- |
+| Model cards          | 6 published      | `docs/governance/model-cards/`                                            |
+| AI observability     | Live             | `@gtcx/ai` — `traced()`, category loggers, span emitters, provenance      |
+| AI test coverage     | 97.43%           | `@gtcx/ai` branch coverage                                                |
+| Human review matrix  | Defined          | Per model card + `AGENTS.md`                                              |
+| Safety rules         | Machine-readable | `docs/agents/safety-rules.json`                                           |
+| Quarterly evaluation | Scheduled        | Next: 2026-08-19                                                          |
+| Evaluation pipeline  | Spec complete    | `docs/specs/ai-evaluation-pipeline.md` — implementation begins 2026-05-20 |
 
 ### 3.2 Maturity Levels
 
@@ -144,31 +147,33 @@ Level 5 — Ecosystem       (downstream repos inherit AI governance)
 
 #### Phase A: Measurable (Level 3) — Q2 2026
 
-| Deliverable                    | Description                                  | Acceptance Criteria                                         |
-| ------------------------------ | -------------------------------------------- | ----------------------------------------------------------- |
-| Evaluation pipeline automation | Run quarterly evaluation as CI job           | `pnpm ai:evaluate` produces JSON scorecard                  |
-| Accuracy metrics               | Test pass rate after agent-driven changes    | ≥ 98% for security-sensitive packages                       |
-| Efficiency metrics             | Context utilization score                    | Tokens per task, completion time tracked                    |
-| Safety metrics                 | Zero unauthorized security-sensitive changes | Automated diff scan against `safety-rules.json`             |
-| Model selection heuristic      | Recommend model per task type                | Decision tree published in `docs/agents/model-selection.md` |
+**Engineering spec:** `docs/specs/ai-evaluation-pipeline.md`
+
+| Deliverable                    | Description                                  | Acceptance Criteria                                         | Status                     |
+| ------------------------------ | -------------------------------------------- | ----------------------------------------------------------- | -------------------------- |
+| Evaluation pipeline automation | Run quarterly evaluation as CI job           | `pnpm ai:evaluate` produces JSON scorecard                  | 🚧 In Progress — Step 1/10 |
+| Accuracy metrics               | Test pass rate after agent-driven changes    | ≥ 98% for security-sensitive packages                       | 📋 Planned                 |
+| Efficiency metrics             | Context utilization score                    | Tokens per task, completion time tracked                    | 📋 Planned                 |
+| Safety metrics                 | Zero unauthorized security-sensitive changes | Automated diff scan against `safety-rules.json`             | 📋 Planned                 |
+| Model selection heuristic      | Recommend model per task type                | Decision tree published in `docs/agents/model-selection.md` | 📋 Planned                 |
 
 #### Phase B: Autonomous (Level 4) — Q3 2026
 
-| Deliverable                 | Description                                          | Acceptance Criteria                            |
-| --------------------------- | ---------------------------------------------------- | ---------------------------------------------- |
-| Self-healing agents         | Agent detects its own failure mode and re-routes     | Retry with different model after 2 failures    |
-| Context budget management   | Auto-summarize when context exceeds 80%              | No truncation errors in sessions > 150K tokens |
-| Cross-agent handoff         | Formal handoff protocol with evidence preservation   | `docs/agents/sessions/` auto-populated         |
-| Agent performance dashboard | Real-time view of agent accuracy, safety, efficiency | Prometheus metrics + Grafana dashboard         |
+| Deliverable                 | Description                                          | Acceptance Criteria                            | Status     |
+| --------------------------- | ---------------------------------------------------- | ---------------------------------------------- | ---------- |
+| Self-healing agents         | Agent detects its own failure mode and re-routes     | Retry with different model after 2 failures    | 📋 Planned |
+| Context budget management   | Auto-summarize when context exceeds 80%              | No truncation errors in sessions > 150K tokens | 📋 Planned |
+| Cross-agent handoff         | Formal handoff protocol with evidence preservation   | `docs/agents/sessions/` auto-populated         | 📋 Planned |
+| Agent performance dashboard | Real-time view of agent accuracy, safety, efficiency | Prometheus metrics + Grafana dashboard         | 📋 Planned |
 
 #### Phase C: Ecosystem (Level 5) — Q4 2026
 
-| Deliverable                | Description                                                 | Acceptance Criteria                                 |
-| -------------------------- | ----------------------------------------------------------- | --------------------------------------------------- |
-| Downstream AI governance   | `gtcx-protocols`, `gtcx-infrastructure` inherit model cards | Child repos reference parent model cards            |
-| Federated evaluation       | Cross-repo agent performance comparison                     | Quarterly report across 4+ repos                    |
-| Vendor-agnostic AI gateway | Abstract model provider behind `gtcx-ai-gateway`            | Swap Claude ↔ Gemini ↔ Kimi with config change      |
-| AI compliance evidence     | Automated evidence pack for regulator AI questions          | One-command generation: `pnpm ai:compliance-report` |
+| Deliverable                | Description                                                 | Acceptance Criteria                                 | Status     |
+| -------------------------- | ----------------------------------------------------------- | --------------------------------------------------- | ---------- |
+| Downstream AI governance   | `gtcx-protocols`, `gtcx-infrastructure` inherit model cards | Child repos reference parent model cards            | 📋 Planned |
+| Federated evaluation       | Cross-repo agent performance comparison                     | Quarterly report across 4+ repos                    | 📋 Planned |
+| Vendor-agnostic AI gateway | Abstract model provider behind `gtcx-ai-gateway`            | Swap Claude ↔ Gemini ↔ Kimi with config change      | 📋 Planned |
+| AI compliance evidence     | Automated evidence pack for regulator AI questions          | One-command generation: `pnpm ai:compliance-report` | 📋 Planned |
 
 ### 3.4 Safety Non-Negotiables (All Levels)
 
@@ -417,16 +422,17 @@ Bank-grade cryptographic module validation and build provenance that makes the s
 
 ### Q2 2026 (Now – June 30)
 
-| Week  | Focus                                                    | Status                                               |
-| ----- | -------------------------------------------------------- | ---------------------------------------------------- |
-| 1     | Execute crypto-native mock tests; verify CI green        | **DONE**                                             |
-| 2     | Trigger SLSA provenance release; claim `@gtcx` npm scope | **Blocked** — `NPM_TOKEN` org secret                 |
-| 3     | Run 24-hour fuzz campaign; capture evidence              | **In Progress** — 500K+ iterations complete          |
-| 4     | Zimbabwe + Namibia pre-submission meetings               | **Pending** — email drafted, not sent                |
-| 5-6   | Rust FIPS backend (aws-lc-rs) implementation             | **DONE** — `cargo test --features fips` passes       |
-| 7-8   | AI evaluation pipeline automation (Phase A start)        | **In Progress**                                      |
-| 9-10  | HSM key storage trait implementation                     | **DONE** — PKCS#11 + Cloud KMS keystores operational |
-| 11-12 | Downstream consumer validation pilot                     | **Planned**                                          |
+| Week  | Focus                                                    | Status                                                                |
+| ----- | -------------------------------------------------------- | --------------------------------------------------------------------- |
+| 1     | Execute crypto-native mock tests; verify CI green        | **DONE**                                                              |
+| 2     | Trigger SLSA provenance release; claim `@gtcx` npm scope | **Blocked** — `NPM_TOKEN` org secret                                  |
+| 3     | Run 24-hour fuzz campaign; capture evidence              | **In Progress** — 500K+ iterations complete                           |
+| 4     | Zimbabwe + Namibia pre-submission meetings               | **Pending** — email drafted, not sent                                 |
+| 5-6   | Rust FIPS backend (aws-lc-rs) implementation             | **DONE** — `cargo test --features fips` passes                        |
+| 7-8   | AI evaluation pipeline automation (Phase A start)        | **In Progress** — spec: `docs/specs/ai-evaluation-pipeline.md`        |
+| 7-8   | Cross-repo publish automation (downstream PR opener)     | **In Progress** — spec: `docs/specs/cross-repo-publish-automation.md` |
+| 9-10  | HSM key storage trait implementation                     | **DONE** — PKCS#11 + Cloud KMS keystores operational                  |
+| 11-12 | Downstream consumer validation pilot                     | **Planned**                                                           |
 
 ### Q3 2026 (July 1 – September 30)
 

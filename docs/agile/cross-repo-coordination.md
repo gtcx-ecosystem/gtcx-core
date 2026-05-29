@@ -1,18 +1,19 @@
 ---
-title: "Cross-Repo Coordination"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Cross-Repo Coordination'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "agile"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'agile']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Cross-Repo Coordination'
 status: 'current'
 date: '2026-05-22'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'critical'
 tags: ['agile', 'coordination', 'cross-repo']
 review_cycle: 'on-change'
+
 ---
 
 # Cross-Repo Coordination
@@ -29,9 +31,13 @@ review_cycle: 'on-change'
 > **Date:** 2026-05-22
 > **Owner:** Protocol Architect
 
+> **Automation spec:** `docs/specs/cross-repo-publish-automation.md` — replaces manual coordination with automated downstream PR opening after npm publish.
+
 Append-only operational tracker for active coordination threads between gtcx-core and other repos in the gtcx-ecosystem. One section per active thread; each carries: state, outbound commitments (what we owe them), inbound commitments (what they owe us), open items, last update, next checkpoint.
 
 Each thread closes when no open items remain on either side; the section moves to the [archive](#archive) but stays in the doc as a stable record.
+
+**Note:** The manual process documented below is being replaced by the cross-repo publish automation pipeline. This doc remains the human fallback and escalation path when automation fails.
 
 ## Active threads at a glance
 
