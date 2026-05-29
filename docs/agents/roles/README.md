@@ -1,3 +1,17 @@
+---
+title: "Agent Roles — gtcx-core"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 95
+autonomy_level: "sovereign"
+tier: "critical"
+tags: ["documentation", "agents"]
+review_cycle: "on-change"
+---
+
 # Agent Roles — gtcx-core
 
 The four AI agent roles authorized to work in this repo. Each role has a defined scope of authority, decision standards, escalation triggers, and coordination interfaces.

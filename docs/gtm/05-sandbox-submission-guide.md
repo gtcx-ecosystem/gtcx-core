@@ -1,4 +1,18 @@
 ---
+title: "Sandbox Submission Guide"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 60
+autonomy_level: "permissioned"
+tier: "standard"
+tags: ["documentation", "gtm"]
+review_cycle: "on-change"
+---
+
+---
 title: '05 Sandbox Submission Guide'
 status: 'current'
 date: '2026-05-17'

@@ -1,3 +1,17 @@
+---
+title: "Release Licenses"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 95
+autonomy_level: "sovereign"
+tier: "critical"
+tags: ["documentation", "release"]
+review_cycle: "on-change"
+---
+
 # Release Licenses
 
 License compliance evidence for the GTCX Core release pipeline. Captures which open-source licenses are present in the dependency tree and any obligations they impose on downstream consumers of `@gtcx/*` packages.

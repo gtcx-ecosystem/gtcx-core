@@ -1,3 +1,17 @@
+---
+title: "Agent Session Handoffs"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 95
+autonomy_level: "sovereign"
+tier: "critical"
+tags: ["documentation", "agents"]
+review_cycle: "on-change"
+---
+
 # Agent Session Handoffs
 
 Cross-agent handoff records for multi-agent collaboration on `gtcx-core`. When one agent (Claude, Kimi, Gemini, Codex, Cursor, Aider) finishes a session and another picks up, the outgoing agent writes a handoff doc here so context survives the boundary.

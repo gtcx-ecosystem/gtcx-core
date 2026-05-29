@@ -1,4 +1,18 @@
 ---
+title: "ADR-002: Zod over JSON Schema for Runtime Validation"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 60
+autonomy_level: "permissioned"
+tier: "standard"
+tags: ["documentation", "decisions"]
+review_cycle: "on-change"
+---
+
+---
 title: '002 Zod Over Json Schema'
 status: 'current'
 date: '2026-05-17'

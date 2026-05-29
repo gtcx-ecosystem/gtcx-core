@@ -23,7 +23,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 - trust-path defects in signing, verification, token handling, and offline lockout recovery have been remediated
 - offline replay ordering uses logical sequence instead of wall-clock time
 - API surface is baselined, docs are aligned to the current architecture, and release/readiness artifacts are in place
-- coverage gates enforce **≥95% branch coverage** — 19/19 testable packages meet the threshold ([audit table](./docs/audit/internal-completion-audit-2026-05-21.md#updated-coverage-table))
+- coverage gates enforce **≥95% branch coverage** — 19/19 testable packages meet the threshold ([audit table](./docs/audit/))
 - Rust FIPS backend (aws-lc-rs, CMVP #4816) verified with 63/63 tests passing
 - HSM key storage traits implemented for PKCS11 (SoftHSM, AWS CloudHSM) and AWS KMS Cloud Custody
 - 500,000+ fuzz iterations across 6 cargo-fuzz targets, **zero crashes, zero panics, zero ASAN violations** ([evidence](./docs/audit/fuzz-campaign-evidence-2026-05-21.md))

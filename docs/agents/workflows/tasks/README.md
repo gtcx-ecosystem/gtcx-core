@@ -1,3 +1,17 @@
+---
+title: "Agent Tasks"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 95
+autonomy_level: "sovereign"
+tier: "critical"
+tags: ["documentation", "agents"]
+review_cycle: "on-change"
+---
+
 # Agent Tasks
 
 Step-by-step runbooks for the most common agentic work in `gtcx-core`.

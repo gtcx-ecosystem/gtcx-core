@@ -1,3 +1,17 @@
+---
+title: "Review Playbooks"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 95
+autonomy_level: "sovereign"
+tier: "critical"
+tags: ["documentation", "agents"]
+review_cycle: "on-change"
+---
+
 # Review Playbooks
 
 Domain-specific review playbooks for AI codeowner agents reviewing pull requests on `gtcx-core`. Each playbook codifies the questions the agent must ask, the evidence it must cite, and the failure modes it must catch for a specific package category.

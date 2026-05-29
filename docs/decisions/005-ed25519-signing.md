@@ -1,4 +1,18 @@
 ---
+title: "ADR-005: Ed25519 over secp256k1 for Identity Signing"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 60
+autonomy_level: "permissioned"
+tier: "standard"
+tags: ["documentation", "decisions"]
+review_cycle: "on-change"
+---
+
+---
 title: '005 Ed25519 Signing'
 status: 'current'
 date: '2026-05-17'

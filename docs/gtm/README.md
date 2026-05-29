@@ -1,3 +1,17 @@
+---
+title: "GTM Evidence Pack — gtcx-core"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 95
+autonomy_level: "sovereign"
+tier: "critical"
+tags: ["documentation", "gtm"]
+review_cycle: "on-change"
+---
+
 # GTM Evidence Pack — gtcx-core
 
 **Purpose:** Everything needed to achieve 10/10 bank-grade readiness, in one folder.

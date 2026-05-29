@@ -1,3 +1,17 @@
+---
+title: "Engagement Responses"
+status: "current"
+date: "2026-05-27"
+owner: "gtcx-core"
+role: "protocol-architect"
+agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+trust_score: 95
+autonomy_level: "sovereign"
+tier: "critical"
+tags: ["documentation", "gtm"]
+review_cycle: "on-change"
+---
+
 # Engagement Responses
 
 Recorded responses from sovereign-state regulator engagements — what the regulator said when we made contact, dated for the audit trail.
