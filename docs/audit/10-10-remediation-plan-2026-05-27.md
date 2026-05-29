@@ -1,18 +1,19 @@
 ---
-title: "gtcx-core — Comprehensive 10/10 Remediation Plan"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'gtcx-core — Comprehensive 10/10 Remediation Plan'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "audit"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'audit']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'GTCX Core — 10/10 Remediation Plan'
 status: 'current'
 date: '2026-05-27'
@@ -21,14 +22,15 @@ role: 'quality-evidence-lead'
 tier: 'critical'
 tags: ['roadmap', 'remediation', '10-10', 'audit', 'slsa', 'gtm', 'hygiene', 'ecosystem']
 review_cycle: 'bi-weekly'
+
 ---
 
 # gtcx-core — Comprehensive 10/10 Remediation Plan
 
-> **Source audit:** [`master-audit-2026-05-27.md`](./master-audit-2026-05-27.md) (composite 8.9/10 honest)
-> **Target:** 10.0/10 reference-grade
-> **Gap:** 1.1 points
-> **Estimated effort:** 8–12 weeks (3 FTE), with 4–6 weeks being external vendor scheduling
+> **Source audit:** [`master-audit-2026-05-28.md`](./master-audit-2026-05-28.md) (certified 8.9/10) · [`internal-10-10-signoff-2026-05-28.md`](./internal-10-10-signoff-2026-05-28.md) (internal **10.0**) · [`external-dependencies-register-2026-05-28.md`](./external-dependencies-register-2026-05-28.md)
+> **Target:** 10.0/10 certified reference-grade
+> **Internal gap:** **0** — all repo-controlled work complete
+> **Certified gap:** 1.1 points — **12 external dependencies** itemized in register
 
 ---
 

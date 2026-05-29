@@ -1,0 +1,58 @@
+{
+  "repo": "gtcx-core",
+  "auditDate": "2026-05-28",
+  "head": "b89b15fb7b3727448660db02b6cd8592e335efdf",
+  "sourceAudit": "docs/audit/master-audit-2026-05-28.md",
+  "latestAudit": "docs/audit/master-audit-2026-05-28.md",
+  "internalSignoff": "docs/audit/internal-10-10-signoff-2026-05-28.md",
+  "externalRegister": "docs/audit/external-dependencies-register-2026-05-28.md",
+  "roadmap": "docs/audit/10-10-remediation-plan-2026-05-27.md",
+  "status": "internal-10-10-complete",
+  "scores": {
+    "internalReadiness": 10.0,
+    "composite": 8.9,
+    "compositeRaw": 8.93,
+    "investor": 9.0,
+    "enterprise": 8.7,
+    "sovereignDfi": 9.0
+  },
+  "externalDependencies": {
+    "total": 12,
+    "open": 12,
+    "complete": 0
+  },
+  "gates": {
+    "typecheck": "pass",
+    "lint": "pass",
+    "test": "pass",
+    "build": "pass",
+    "architecture": "pass",
+    "governance": "pass",
+    "criticalCoverage": "pass",
+    "apiCheck": "pass",
+    "threatMatrix": "pass"
+  },
+  "coverage": {
+    "statements": 97.64,
+    "branches": 95.23,
+    "functions": 95.69,
+    "lines": 98.66
+  },
+  "remainingGaps": [
+    "Certified composite 8.9 pending 12 external dependencies (pen-test, SOC 2, npm provenance org policy, RUSTSEC upstream, GTM/regulator, DR live drill, 90-day P1-free window).",
+    "Large uncommitted doc/baseline tree — commit before release tag (hygiene, not gate-blocking at HEAD)."
+  ],
+  "freshVerification": {
+    "verifiedAt": "2026-05-28",
+    "commands": {
+      "pnpm typecheck": "pass",
+      "pnpm lint": "pass",
+      "pnpm test": "pass",
+      "pnpm build": "pass",
+      "pnpm quality:governance:check": "pass",
+      "pnpm test:coverage:critical": "pass",
+      "pnpm api:check": "pass",
+      "pnpm security:threat-matrix": "pass"
+    }
+  }
+}
