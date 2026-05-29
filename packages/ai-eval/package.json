@@ -1,0 +1,60 @@
+{
+  "name": "@gtcx/ai-eval",
+  "version": "0.1.0",
+  "description": "AI evaluation pipeline — accuracy, safety, efficiency, context utilization scoring",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.ts",
+      "import": "./dist/cli.mjs",
+      "require": "./dist/cli.js"
+    }
+  },
+  "bin": {
+    "ai-evaluate": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@gtcx/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@gtcx/tsup-config": "workspace:*",
+    "@gtcx/typescript-config": "workspace:*",
+    "@types/node": "^22.10.0",
+    "tsup": "^8.0.1",
+    "typescript": "^6.0.0",
+    "@vitest/coverage-v8": "^4.1.5",
+    "vitest": "^4.1.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtcx-ecosystem/gtcx-core.git",
+    "directory": "packages/ai-eval"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false
+}
