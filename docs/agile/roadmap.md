@@ -1,18 +1,19 @@
 ---
-title: "GTCX Core — Roadmap 2026"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'GTCX Core — Roadmap 2026'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "agile"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'agile']
+review_cycle: 'on-change'
 ---
 
 ---
+
 id: ROADMAP-CORE
 title: 'GTCX Core — Roadmap 2026'
 version: '1.0'
@@ -22,10 +23,12 @@ owner: protocol-architect
 role: protocol-architect
 tier: strategic
 tags:
-  - agile
-  - roadmap
-  - planning
-review_cycle: monthly
+
+- agile
+- roadmap
+- planning
+  review_cycle: monthly
+
 ---
 
 # GTCX Core — Roadmap 2026
@@ -49,9 +52,9 @@ PvP                                      [====P3====]
 
 ## Quarterly Milestones
 
-### Q2 2026 (Jun) — Shared Types & Crypto
+### Q2 2026 (Jun) — Shared Types, Crypto, AI Maturity
 
-**Goal:** All repos consume shared types from `@gtcx/types`. Crypto primitives (Ed25519, SHA-256) are standardized. No more type drift between Prisma and TypeScript.
+**Goal:** All repos consume shared types from `@gtcx/types`. Crypto primitives (Ed25519, SHA-256) are standardized. No more type drift between Prisma and TypeScript. AI evaluation pipeline spec complete and implementation begins.
 
 | Epic                                   | Priority | Status         | Effort | Owner      | Dependencies      |
 | -------------------------------------- | -------- | -------------- | ------ | ---------- | ----------------- |
@@ -59,6 +62,9 @@ PvP                                      [====P3====]
 | Standardize `@gtcx/crypto` package     | P1       | 📋 Planned     | M      | @amanianai | —                 |
 | Publish `@gtcx/types` v1.0             | P1       | 📋 Planned     | M      | @amanianai | —                 |
 | SLSA provenance spec for builds        | P2       | 📋 Planned     | L      | @amanianai | gtcx-intelligence |
+| AI evaluation pipeline spec            | P1       | ✅ Done        | M      | @amanianai | —                 |
+| Cross-repo publish automation spec     | P1       | ✅ Done        | M      | @amanianai | —                 |
+| External blocker action plan           | P1       | ✅ Done        | S      | @amanianai | —                 |
 
 ### Q3 2026 (Jul–Sep) — Event Bus & SDK
 
@@ -91,6 +97,7 @@ PvP                                      [====P3====]
 | Event types defined       | 0       | 5           | 15          | 25          |
 | SDK protocol coverage     | 0%      | 20%         | 60%         | 100%        |
 | Runtime integrations      | 1       | 3           | 6           | 10          |
+| AI maturity level         | 2       | 3           | 3           | 4           |
 
 ## Dependencies
 
