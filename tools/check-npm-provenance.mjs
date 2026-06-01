@@ -125,6 +125,11 @@ function main() {
           'If the release workflow is still running, wait for the Publish step to finish (~20–25 min), ' +
           'then re-run: pnpm provenance:check-npm:strict'
       );
+    } else if (withAttestation.length > 0) {
+      console.error(
+        `${notPublished.length} package(s) not visible on npm yet; ${withAttestation.length} already have attestations. ` +
+          'This is often npm registry replication lag (2–5 minutes after publish). Re-run: pnpm provenance:check-npm:strict'
+      );
     } else {
       console.error(
         `${notPublished.length} package(s) are not on npm at the version in package.json. ` +
