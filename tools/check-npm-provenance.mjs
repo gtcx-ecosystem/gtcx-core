@@ -119,10 +119,18 @@ function main() {
   }
 
   if (notPublished.length > 0 && strict) {
-    console.error(
-      `${notPublished.length} package(s) are not on npm at the version in package.json. ` +
-        'Publish step may have skipped or failed; do not treat verify as green.'
-    );
+    if (notPublished.length === results.length) {
+      console.error(
+        `All ${results.length} @gtcx/* packages are NOT_PUBLISHED at package.json versions yet. ` +
+          'If the release workflow is still running, wait for the Publish step to finish (~20–25 min), ' +
+          'then re-run: pnpm provenance:check-npm:strict'
+      );
+    } else {
+      console.error(
+        `${notPublished.length} package(s) are not on npm at the version in package.json. ` +
+          'Publish step may have skipped or failed; do not treat verify as green.'
+      );
+    }
     process.exit(1);
   }
 
