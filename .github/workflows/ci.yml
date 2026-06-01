@@ -154,6 +154,19 @@ jobs:
             pnpm docs:check-frontmatter
           fi
 
+      - name: AI evaluation scorecard
+        run: pnpm ai:evaluate --output artifacts/ai-scorecard.json
+
+      - name: Upload AI scorecard artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-ai-scorecard
+          path: artifacts/ai-scorecard.json
+          if-no-files-found: error
+
+      - name: Validate AI scorecard artifact
+        run: node ./tools/check-ai-scorecard.mjs
+
       - name: Validate GA release evidence
         run: pnpm release:ga:evidence:check
 

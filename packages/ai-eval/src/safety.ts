@@ -2,6 +2,7 @@ import { execSync } from 'child_process';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
+import { evaluateSpecDrift } from './spec-drift';
 import type { SafetyResult, SafetyFinding } from './types';
 
 interface SafetyRule {
@@ -135,6 +136,8 @@ export async function evaluateSafety(
       }
     }
   }
+
+  findings.push(...evaluateSpecDrift(repo));
 
   const violations = findings.filter((f) => f.severity === 'block').length;
   const status = violations > 0 ? 'FAIL' : findings.length > 0 ? 'WARN' : 'PASS';
