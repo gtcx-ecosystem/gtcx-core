@@ -1,18 +1,19 @@
 ---
-title: "Executive Brief — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Executive Brief — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "gtm"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'gtm']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: '00 Executive Brief'
 status: 'current'
 date: '2026-05-25'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs']
 review_cycle: 'on-change'
+
 ---
 
 # Executive Brief — gtcx-core
@@ -94,7 +96,7 @@ See [01-security-posture.md](./01-security-posture.md) for the complete assessme
 
 1. **External penetration test** — RFP drafted, 5-vendor longlist identified, awaiting selection (P1)
 2. **SOC 2 Type 1** — Readiness prep complete (78-85% TSC), CPA engagement pending (P1)
-3. **SLSA provenance publish** — NPM_TOKEN confirmed, workflow ready, awaiting Wed-Fri operational window (P2)
+3. **SLSA provenance attestations on npm** — 21/21 packages published; registry attestations often null; follow-up per release (P2)
 4. **Upstream rustls-webpki fix** — 3 RUSTSEC advisories mitigated via CI exceptions; AWS SDK upstream fix pending (P2)
 5. **DR runbook drill** — Runbook complete, never drilled; first drill scheduled Q2 (P2)
 6. **ADR-012 Stage 1** — Stage 0 complete (47 predicates, migration helper); cross-repo handoff delivered to gtcx-protocols (P2)
