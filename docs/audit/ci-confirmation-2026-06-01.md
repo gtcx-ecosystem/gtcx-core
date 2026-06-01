@@ -61,6 +61,10 @@ pnpm provenance:check-npm --strict
 
 **2026-06-01 run [26753651033](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26753651033):** failed at `format:check` before publish — no packages published. Re-run with `provenance_republish=true` (skips doc/format gates; build/test/security gates still run).
 
+**2026-06-01 run [26760156283](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26760156283):** failed at GA evidence (missing `artifacts/ai-scorecard.json`). Fixed: skip GA/ai gates when `provenance_republish=true`.
+
+**2026-06-01 run [26761642015](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26761642015):** failed at **Configure npm auth** — `npm whoami` E401. Causes: (1) auth written to `~/.npmrc` while `setup-node` uses `NPM_CONFIG_USERCONFIG`; (2) org `NPM_TOKEN` expired/revoked or lacks publish scope. Fix workflow path; rotate token if 401 persists after push.
+
 ## Internal 10/10 signoff
 
 **Engineering / DevEx / trust automation:** **complete** for this train (see [execution-roadmap.md](./execution-roadmap.md), [gtm-roadmap-10-10-internal-2026-06-01.md](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md)).
