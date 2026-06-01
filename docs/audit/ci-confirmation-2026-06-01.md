@@ -67,7 +67,17 @@ pnpm provenance:check-npm --strict
 
 **2026-06-01 run [26774707785](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26774707785):** publish **succeeded** but verify failed **0/21 attestations**. Root cause: `changeset publish --provenance` does not pass provenance to `pnpm publish`. Fix: `NPM_CONFIG_PROVENANCE=true`, `publishConfig.provenance`, changeset `.changeset/provenance-pnpm-config.md` for republish.
 
-**2026-06-01 run [26775554752](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26775554752):** **No packages published** (`No unpublished projects to publish` — versions already on npm from prior run). Verify checked `latest` (3.1.2) not the attestation-less 3.1.3 line. Fix: `tools/publish-packages-provenance.mjs` (`pnpm pack` + `npm publish --provenance`), version bump to 3.1.4+ committed before dispatch.
+**2026-06-01 run [26775554752](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26775554752):** Used **`changeset publish`** (no attestations); all packages skipped as already on npm at 3.1.3. Fix landed in `59b628b` (`publish-packages-provenance.mjs` + 3.1.4 bumps).
+
+**Next action (post-`59b628b`):** dispatch with provenance republish — versions **3.1.4** are not on npm yet:
+
+```bash
+gh workflow run release.yml --repo gtcx-ecosystem/gtcx-core -f provenance_republish=true
+# after green (~25 min):
+pnpm provenance:check-npm --strict
+```
+
+Republish skips `changeset version` (versions already committed). Publish fails fast if a version exists on npm **without** attestations (forces a new bump).
 
 ## Internal 10/10 signoff
 
