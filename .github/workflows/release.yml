@@ -239,6 +239,21 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: npm install -g npm@latest && npm --version
 
+      - name: Preflight — public source repo required for npm provenance
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          visibility=$(gh api "repos/${GITHUB_REPOSITORY}" --jq .visibility)
+          echo "Repository visibility: ${visibility}"
+          if [ "${visibility}" != "public" ]; then
+            echo "::error::npm publish --provenance requires a public GitHub source repository."
+            echo "::error::gtcx-core is '${visibility}'. npm returned E422: private repos cannot publish with provenance."
+            echo "::error::Remediation: make gtcx-ecosystem/gtcx-core public (Settings → General → Change visibility), then re-run with provenance_republish=true."
+            echo "::error::Alternative (no registry attestations): publish without --provenance — see docs/audit/ci-confirmation-2026-06-01.md."
+            exit 1
+          fi
+
       - name: Publish packages with npm provenance
         if: github.event_name == 'workflow_dispatch'
         run: |

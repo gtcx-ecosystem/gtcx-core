@@ -1,18 +1,19 @@
 ---
-title: "SLSA Build Level 3 Attestation"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'SLSA Build Level 3 Attestation'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "security"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'security']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Slsa Attestation'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'crypto-security-engineer'
 tier: 'critical'
 tags: ['docs', 'security']
 review_cycle: 'quarterly'
+
 ---
 
 # SLSA Build Level 3 Attestation
@@ -36,11 +38,12 @@ review_cycle: 'quarterly'
 **Owner:** Cryptographic Security Engineer (`docs/agents/roles/crypto-security-engineer.md`)
 **Cross-references:** [Trust Portal](../governance/trust-portal.md), [SOC 2 Readiness](../compliance/soc2-readiness.md)
 
-> **Honesty note (2026-05-11):** The Build Level 3 _mechanism_ is fully configured in CI
-> (`npm publish --provenance`, GitHub OIDC, sigstore). However, **no packages have been
-> published yet**, so no SLSA attestations exist in the wild. This document describes
-> the configured pipeline; the attestations themselves will only exist after the first
-> `pnpm release` invocation. Source Level 2 is enforced and current.
+> **Honesty note (2026-06-01):** The Build Level 3 _mechanism_ is configured in CI
+> (`pnpm pack` + `npm publish --provenance`, GitHub OIDC, sigstore). **npm rejects
+> provenance when the source GitHub repository is private** (E422). `gtcx-core` must be
+> **public** (or use a public release mirror) before registry attestations can exist.
+> See [`../audit/ci-confirmation-2026-06-01.md`](../audit/ci-confirmation-2026-06-01.md).
+> Source Level 2 is enforced and current.
 
 ---
 
