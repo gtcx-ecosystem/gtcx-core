@@ -7,12 +7,15 @@
  */
 
 import { execSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync, unlinkSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { registryAttestationStatus } from './npm-provenance-utils.mjs';
 import { PUBLIC_PACKAGE_DIRS } from './public-packages.mjs';
 
 const ROOT = join(fileURLToPath(new URL('.', import.meta.url)), '..');
+const MANIFEST_PATH = join(ROOT, 'artifacts', 'npm-publish-manifest.json');
 
 function readLocalPackage(shortName) {
   const dir = join(ROOT, 'packages', shortName);
@@ -53,24 +56,24 @@ function publishOrder() {
   return order;
 }
 
-function npmVersionOnRegistry(packageName, version) {
-  try {
-    execSync(`npm view ${packageName}@${version} version`, {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 function publishOne(shortName) {
   const { dir, name, version } = readLocalPackage(shortName);
+  const status = registryAttestationStatus(name, version);
 
-  if (npmVersionOnRegistry(name, version)) {
-    console.log(`skip ${name}@${version} (already on npm)`);
-    return false;
+  if (status.state === 'ok') {
+    console.log(`skip ${name}@${version} (already on npm with provenance)`);
+    return { published: false, skipped: true, name, version, shortName };
+  }
+
+  if (status.state === 'missing') {
+    throw new Error(
+      `${name}@${version} is already on npm without provenance attestations. ` +
+        'Bump the package version (changeset), commit, push, then re-run release.'
+    );
+  }
+
+  if (status.state === 'error') {
+    throw new Error(`npm registry lookup failed for ${name}@${version}: ${status.message}`);
   }
 
   console.log(`publish ${name}@${version} with npm provenance`);
@@ -94,26 +97,56 @@ function publishOne(shortName) {
     }
   }
 
-  return true;
+  return { published: true, skipped: false, name, version, shortName };
+}
+
+function writeManifest(rows) {
+  mkdirSync(join(ROOT, 'artifacts'), { recursive: true });
+  const published = rows.filter((row) => row.published);
+  writeFileSync(
+    MANIFEST_PATH,
+    JSON.stringify(
+      {
+        generatedAt: new Date().toISOString(),
+        published,
+        skipped: rows.filter((row) => row.skipped),
+      },
+      null,
+      2
+    ) + '\n'
+  );
+  console.log(`Wrote publish manifest: ${MANIFEST_PATH}`);
 }
 
 function main() {
-  let published = 0;
+  const rows = [];
 
   for (const shortName of publishOrder()) {
-    if (publishOne(shortName)) {
-      published += 1;
-    }
+    rows.push(publishOne(shortName));
   }
 
-  if (published === 0) {
+  writeManifest(rows);
+
+  const published = rows.filter((row) => row.published);
+  const skipped = rows.filter((row) => row.skipped);
+
+  if (published.length === 0 && skipped.length === 0) {
+    console.error('No packages processed.');
+    process.exit(1);
+  }
+
+  if (published.length === 0) {
     console.error(
-      'No packages published. Run `pnpm version-packages`, commit bumps, push, then re-run release.'
+      'No packages published (all skipped with existing provenance). ' +
+        'If you expected a republish, bump versions first.'
     );
     process.exit(1);
   }
 
-  console.log(`Published ${published} package(s) with npm provenance.`);
+  console.log(
+    `Published ${published.length} package(s) with npm provenance` +
+      (skipped.length > 0 ? `; skipped ${skipped.length} already attested.` : '.')
+  );
 }
 
 main();

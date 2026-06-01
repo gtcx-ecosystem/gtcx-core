@@ -46,6 +46,7 @@
     "api:update-baseline": "node ./tools/check-api-surface.mjs --update",
     "provenance:generate": "node ./tools/generate-provenance-manifest.mjs",
     "provenance:check-npm": "node ./tools/check-npm-provenance.mjs",
+    "test:tools": "node --test tools/*.test.mjs",
     "release:ga:evidence:summary": "node ./tools/generate-ga-evidence-summary.mjs",
     "release:ga:evidence:check": "node ./tools/generate-ga-evidence-summary.mjs --check && node ./tools/check-ai-scorecard.mjs",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
