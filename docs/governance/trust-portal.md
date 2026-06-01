@@ -71,7 +71,7 @@ A reviewer who only reads this section has enough to make a procurement decision
 
 ## Published versions
 
-> **Status:** Published 2026-05-26 via `release.yml` workflow dispatch. 18 of 21 packages live on npm; 3 (`@gtcx/resilience`, `@gtcx/telemetry`, `@gtcx/runtime`) pending their first changeset. Provenance generation attempted; attestation status per package below.
+> **Status:** **21 of 21** public `@gtcx/*` packages live on npm as of 2026-05-27 (`@gtcx/resilience`, `@gtcx/telemetry`, `@gtcx/runtime` published 2026-05-26–27). Provenance generation attempted per release; attestation column reflects npm registry state.
 
 | Package               | npm version | Provenance | Source                                                                                     |
 | --------------------- | ----------- | ---------- | ------------------------------------------------------------------------------------------ |
@@ -89,9 +89,9 @@ A reviewer who only reads this section has enough to make a procurement decision
 | `@gtcx/logging`       | 0.3.0       | —          | [npmjs.com/package/@gtcx/logging](https://www.npmjs.com/package/@gtcx/logging)             |
 | `@gtcx/network`       | 0.2.0       | —          | [npmjs.com/package/@gtcx/network](https://www.npmjs.com/package/@gtcx/network)             |
 | `@gtcx/sync`          | 0.3.0       | —          | [npmjs.com/package/@gtcx/sync](https://www.npmjs.com/package/@gtcx/sync)                   |
-| `@gtcx/resilience`    | _pending_   | _pending_  | [npmjs.com/package/@gtcx/resilience](https://www.npmjs.com/package/@gtcx/resilience)       |
-| `@gtcx/telemetry`     | _pending_   | _pending_  | [npmjs.com/package/@gtcx/telemetry](https://www.npmjs.com/package/@gtcx/telemetry)         |
-| `@gtcx/runtime`       | _pending_   | _pending_  | [npmjs.com/package/@gtcx/runtime](https://www.npmjs.com/package/@gtcx/runtime)             |
+| `@gtcx/resilience`    | 0.2.0       | —          | [npmjs.com/package/@gtcx/resilience](https://www.npmjs.com/package/@gtcx/resilience)       |
+| `@gtcx/telemetry`     | 0.2.0       | —          | [npmjs.com/package/@gtcx/telemetry](https://www.npmjs.com/package/@gtcx/telemetry)         |
+| `@gtcx/runtime`       | 0.2.2       | —          | [npmjs.com/package/@gtcx/runtime](https://www.npmjs.com/package/@gtcx/runtime)             |
 | `@gtcx/events`        | 1.0.0       | —          | [npmjs.com/package/@gtcx/events](https://www.npmjs.com/package/@gtcx/events)               |
 | `@gtcx/workproof`     | 1.0.0       | —          | [npmjs.com/package/@gtcx/workproof](https://www.npmjs.com/package/@gtcx/workproof)         |
 | `@gtcx/services`      | 1.0.1       | —          | [npmjs.com/package/@gtcx/services](https://www.npmjs.com/package/@gtcx/services)           |

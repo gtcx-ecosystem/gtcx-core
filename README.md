@@ -3,7 +3,7 @@
 Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rust + TypeScript), type definitions, Zod schemas, domain models, verification infrastructure, and WorkProof/TradeCV attestation schemas consumed by all other repos. This is the lowest-level dependency in the stack — it depends on nothing else.
 
 **Trust portal:** [gtcx-protocol.gitbook.io/gtcx-open-source](https://gtcx-protocol.gitbook.io/gtcx-open-source/governance/trust-portal) — see [hosting runbook](./docs/operations/trust-portal-hosting.md)
-**Last reviewed:** 2026-05-22
+**Last reviewed:** 2026-06-01
 
 ## Engineering Standards
 
@@ -29,6 +29,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 - 500,000+ fuzz iterations across 6 cargo-fuzz targets, **zero crashes, zero panics, zero ASAN violations** ([evidence](./docs/audit/fuzz-campaign-evidence-2026-05-21.md))
 - `cargo deny` and `cargo audit` run in CI; known upstream advisories in the `ark-*` ecosystem are tracked in `rust/.cargo/audit.toml`
 - SLSA provenance pipeline wired (Source L2 enforced, Build L3 aspirational); `NPM_TOKEN` set at org as of 2026-05-21
+- **21 / 21** public `@gtcx/*` packages published to npm (including `@gtcx/resilience`, `@gtcx/telemetry`, `@gtcx/runtime` as of 2026-05-26) — see [trust portal](./docs/governance/trust-portal.md#published-versions)
 
 ### Active execution program
 
@@ -44,9 +45,8 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 **Internal (known, tracked):**
 
-- `@gtcx/crypto-native` odd-length-hex NAPI boundary edge case (Sprint 2 fix)
-- Rust `ark-*` transitive dependencies carry unmaintained crates (`derivative`, `paste`) — mitigated via audit ignore list pending upstream updates
-- 3 org secrets remain unset: `OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM` (Sprint 1)
+- Rust `ark-*` transitive dependencies carry unmaintained crates (`derivative`, `paste`) — mitigated via `rust/.cargo/audit.toml` pending arkworks 0.5
+- Optional CI ergonomics (not release blockers): `OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM` at org scope — run `pnpm ops:check` for status
 
 ## Quick Start
 
@@ -78,7 +78,7 @@ Coverage numbers reflect the [2026-05-21 internal completion audit](./docs/audit
 | `@gtcx/logging`       | ✅ Production-hardened | 100%            | Structured logging adapters                                                                        |
 | `@gtcx/network`       | ✅ Production-hardened | 100%            | P2P types, peer discovery, libp2p transport                                                        |
 | `@gtcx/workproof`     | ✅ Production-hardened | 100%            | 38 predicates, AI validation types, 293 tests                                                      |
-| `@gtcx/crypto-native` | ✅ Production-hardened | 99.03%          | Mock-binding coverage; odd-length-hex NAPI edge case queued for Sprint 2                           |
+| `@gtcx/crypto-native` | ✅ Production-hardened | 99.03%          | Native NAPI bindings; `assertHex` / `isHex` at boundary (0.4.0+)                                   |
 | `@gtcx/services`      | ✅ Production-hardened | 98.45%          | Compliance decomposed, health checks, metrics, 224 tests                                           |
 | `@gtcx/sync`          | ✅ Production-hardened | 97.95%          | Offline-first sync engine with conflict resolution                                                 |
 | `@gtcx/types`         | ✅ Production-hardened | 97.67%          | Core type definitions, 38 tests                                                                    |
@@ -121,7 +121,7 @@ These live under [`packages/config`](./packages/config) and support the monorepo
 
 ```
 core/
-├── packages/               # 21 public packages + shared config workspace packages
+├── packages/               # 21 public npm packages + workspace tooling (`ai-eval`, config)
 │   ├── types/              #   Core types and protocol definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives

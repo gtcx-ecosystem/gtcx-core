@@ -307,13 +307,13 @@ Per-task completion against the plan above. Updated on every meaningful state ch
 
 ### Sprint 2 — Release pipeline proven
 
-| #   | Task                                      | Status                  | Evidence                                                                                                                                                    |
-| --- | ----------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done                 | `packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                                             |
-| 2.2 | Changesets for foundation packages        | ✅ Done                 | 6 changeset entries staged (connectivity, crypto, crypto-native, security, sync, workproof); linked group covers types/identity/verification/domain/schemas |
-| 2.3 | First `release.yml` end-to-end publish    | ✅ Complete             | 18 of 21 packages published 2026-05-26. `@gtcx/workproof@1.0.0` live. Provenance attempted (attestations null — follow-up needed).                          |
-| 2.4 | Remaining 3 packages published            | ⏸️ Blocked on changeset | `@gtcx/resilience`, `@gtcx/telemetry`, `@gtcx/runtime` need first changeset to trigger version bump.                                                        |
-| 2.5 | Trust portal "Published versions" section | ✅ Complete             | `docs/governance/trust-portal.md` updated with live `npm view` versions.                                                                                    |
+| #   | Task                                      | Status      | Evidence                                                                                                                                                    |
+| --- | ----------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done     | `packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                                             |
+| 2.2 | Changesets for foundation packages        | ✅ Done     | 6 changeset entries staged (connectivity, crypto, crypto-native, security, sync, workproof); linked group covers types/identity/verification/domain/schemas |
+| 2.3 | First `release.yml` end-to-end publish    | ✅ Complete | 18 of 21 packages published 2026-05-26. `@gtcx/workproof@1.0.0` live. Provenance attempted (attestations null — follow-up needed).                          |
+| 2.4 | Remaining 3 packages published            | ✅ Complete | `@gtcx/resilience@0.2.0`, `@gtcx/telemetry@0.2.0`, `@gtcx/runtime@0.2.2` on npm (2026-05-26–27). Trust portal updated 2026-06-01.                           |
+| 2.5 | Trust portal "Published versions" section | ✅ Complete | `docs/governance/trust-portal.md` updated with live `npm view` versions.                                                                                    |
 
 ### Sprint 3 — Jurisdiction readiness
 

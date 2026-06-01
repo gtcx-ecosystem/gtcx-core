@@ -1,18 +1,19 @@
 ---
-title: "Quality Assurance — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Quality Assurance — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "devops"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'devops']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Qa Process'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'frontier-infra-engineer'
 tier: 'standard'
 tags: ['docs', 'operations']
 review_cycle: 'on-change'
+
 ---
 
 # Quality Assurance — gtcx-core
@@ -62,7 +64,7 @@ Summary (TypeScript → Rust → evidence):
 
 1. Architecture boundaries (`pnpm architecture:check`)
 2. Lint + format + typecheck + tests
-3. Build all 18 packages
+3. Build all 21 public TypeScript packages (+ config workspace packages)
 4. API surface check
 5. Critical coverage threshold
 6. Performance budgets

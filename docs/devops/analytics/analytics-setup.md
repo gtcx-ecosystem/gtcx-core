@@ -1,18 +1,19 @@
 ---
-title: "Observability & Quality Metrics — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Observability & Quality Metrics — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "devops"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'devops']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Analytics Setup'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'frontier-infra-engineer'
 tier: 'standard'
 tags: ['docs', 'operations']
 review_cycle: 'on-change'
+
 ---
 
 # Observability & Quality Metrics — gtcx-core
@@ -46,7 +48,7 @@ Reviewed before every release.
 | Metric                    | Definition                                                   | Target               | Gate command                          |
 | ------------------------- | ------------------------------------------------------------ | -------------------- | ------------------------------------- |
 | API surface stability     | No unreviewed changes to exported symbols                    | 0 unreviewed         | `pnpm api:check`                      |
-| Build success rate        | All 18 packages + 6 crates build cleanly                     | 100%                 | `pnpm build`                          |
+| Build success rate        | All 21 public TS packages + 6 Rust crates build cleanly      | 100%                 | `pnpm build`                          |
 | Test pass rate            | All Vitest and cargo tests pass                              | 100%                 | `pnpm test && cargo test --workspace` |
 | Critical package coverage | Coverage on crypto, domain, security, services, verification | Per-package minimums | `pnpm test:coverage:critical`         |
 | Security threat matrix    | No unresolved critical/high threats                          | 0 open               | `pnpm security:threat-matrix`         |

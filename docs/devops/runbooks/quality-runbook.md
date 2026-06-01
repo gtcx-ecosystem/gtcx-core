@@ -1,18 +1,19 @@
 ---
-title: "Quality Gates Runbook — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Quality Gates Runbook — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "devops"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'devops']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Quality Runbook'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'frontier-infra-engineer'
 tier: 'standard'
 tags: ['docs', 'operations']
 review_cycle: 'on-change'
+
 ---
 
 # Quality Gates Runbook — gtcx-core
@@ -43,10 +45,10 @@ pnpm quality:governance:check    # Governance artifacts and CODEOWNERS validity
 pnpm security:secret-scan        # High-confidence committed secret scan
 pnpm lint                        # ESLint across all TypeScript packages
 pnpm format:check                # Prettier format check
-pnpm typecheck                   # TypeScript strict mode — all 18 packages
+pnpm typecheck                   # TypeScript strict mode — all workspace packages
 pnpm test                        # Full test suite (Vitest)
 pnpm test:coverage:critical      # Critical path coverage thresholds
-pnpm build                       # All 18 TypeScript packages and 6 Rust crates
+pnpm build                       # All 21 public TypeScript packages and 6 Rust crates
 pnpm api:check                   # API surface baseline comparison
 pnpm quality:kpi:collect         # KPI metrics collection
 pnpm quality:kpi:export          # KPI metrics export

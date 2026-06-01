@@ -48,7 +48,7 @@ This is the canonical roadmap for everything that remains between `gtcx-core` an
 
 | Metric                    | Value                                                                                    |
 | ------------------------- | ---------------------------------------------------------------------------------------- |
-| TypeScript packages       | 21 (18 public + 3 config)                                                                |
+| TypeScript packages       | 21 public on npm + 4 config workspace + `@gtcx/ai-eval` (workspace tooling, not on npm)  |
 | Rust crates               | 6                                                                                        |
 | Lines of source code      | ~31,700                                                                                  |
 | Test cases                | 2,260+                                                                                   |
@@ -56,7 +56,7 @@ This is the canonical roadmap for everything that remains between `gtcx-core` an
 | Critical package coverage | 14 / 19 testable packages enforce 95% branch thresholds                                  |
 | Known vulnerabilities     | 3 (rustls-webpki, upstream AWS SDK dependency)                                           |
 | FIPS 140-3                | Validated (AWS-LC CMVP #4816); `cargo test --features fips` passes                       |
-| SLSA provenance           | Build L3 aspirational, Source L2 enforced; pipeline ready; awaits `NPM_TOKEN` org secret |
+| SLSA provenance           | Build L3 aspirational, Source L2 enforced; 21/21 packages on npm; attestations follow-up |
 
 **What is done:** Coverage push complete (95% branch thresholds across 14 packages), chaos tests complete, property tests complete, doc-standard gates enforced (252/252 docs valid frontmatter), model cards published, incident drill run, SLOs defined, DR runbook written, Rust groth16 refactored, USSD handlers implemented, adaptive connectivity profiles live, trust portal published to GitHub Pages, deriveKeyPbkdf2 shipped, pen-test RFP drafted.
 
