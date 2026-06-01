@@ -129,7 +129,16 @@ jobs:
           inputs.provenance_republish != true
         run: pnpm docs:check-frontmatter
 
+      - name: Generate AI evaluation scorecard
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
+        run: pnpm ai:evaluate --output artifacts/ai-scorecard.json
+
       - name: Validate GA release evidence
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         run: pnpm release:ga:evidence:check
 
       - name: Setup Rust toolchain for native crypto build
