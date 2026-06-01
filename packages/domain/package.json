@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/domain",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Commodity-agnostic domain services for GTCX Protocol - 10/10 architectural compliance",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

@@ -1,5 +1,18 @@
 # @gtcx/verification
 
+## 3.1.2
+
+### Patch Changes
+
+- 330da2c: chore(release): republish with npm provenance attestations
+
+  No API changes. Publishes Sigstore attestations on the npm registry via `changeset publish --provenance` (SLSA Build L3 pipeline).
+
+- Updated dependencies [330da2c]
+  - @gtcx/types@3.1.2
+  - @gtcx/crypto@3.1.2
+  - @gtcx/ai@0.3.2
+
 ## 3.1.1
 
 ### Patch Changes

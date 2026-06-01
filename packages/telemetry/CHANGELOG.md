@@ -1,5 +1,16 @@
 # @gtcx/telemetry
 
+## 0.2.1
+
+### Patch Changes
+
+- 330da2c: chore(release): republish with npm provenance attestations
+
+  No API changes. Publishes Sigstore attestations on the npm registry via `changeset publish --provenance` (SLSA Build L3 pipeline).
+
+- Updated dependencies [330da2c]
+  - @gtcx/logging@0.3.1
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/ai-eval",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI evaluation pipeline — accuracy, safety, efficiency, context utilization scoring",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
