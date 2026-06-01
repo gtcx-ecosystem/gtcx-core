@@ -1,5 +1,29 @@
 # @gtcx/connectivity
 
+## 0.5.4
+
+### Patch Changes
+
+- chore(release): republish with npm publish --provenance
+
+  Uses publish-packages-provenance.mjs (pnpm pack + npm publish). Prior pnpm publish releases lack registry attestations.
+
+- Updated dependencies
+  - @gtcx/api-client@0.4.5
+  - @gtcx/resilience@0.2.3
+
+## 0.5.3
+
+### Patch Changes
+
+- fe01c1a: chore(release): republish with npm provenance via pnpm publish
+
+  Enables NPM_CONFIG_PROVENANCE / publishConfig.provenance (changeset --provenance is ignored).
+
+- Updated dependencies [fe01c1a]
+  - @gtcx/api-client@0.4.4
+  - @gtcx/resilience@0.2.2
+
 ## 0.5.2
 
 ### Patch Changes

@@ -1,5 +1,31 @@
 # @gtcx/verification
 
+## 3.1.4
+
+### Patch Changes
+
+- chore(release): republish with npm publish --provenance
+
+  Uses publish-packages-provenance.mjs (pnpm pack + npm publish). Prior pnpm publish releases lack registry attestations.
+
+- Updated dependencies
+  - @gtcx/types@3.1.4
+  - @gtcx/crypto@3.1.4
+  - @gtcx/ai@0.3.4
+
+## 3.1.3
+
+### Patch Changes
+
+- fe01c1a: chore(release): republish with npm provenance via pnpm publish
+
+  Enables NPM_CONFIG_PROVENANCE / publishConfig.provenance (changeset --provenance is ignored).
+
+- Updated dependencies [fe01c1a]
+  - @gtcx/types@3.1.3
+  - @gtcx/crypto@3.1.3
+  - @gtcx/ai@0.3.3
+
 ## 3.1.2
 
 ### Patch Changes

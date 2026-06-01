@@ -1,52 +1,41 @@
 #!/usr/bin/env node
 
 import { execSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { PUBLIC_PACKAGE_DIRS } from './public-packages.mjs';
 
-const PACKAGES = [
-  'types',
-  'crypto',
-  'crypto-native',
-  'schemas',
-  'utils',
-  'domain',
-  'security',
-  'verification',
-  'identity',
-  'api-client',
-  'connectivity',
-  'logging',
-  'network',
-  'sync',
-  'resilience',
-  'telemetry',
-  'runtime',
-  'events',
-  'workproof',
-  'services',
-  'ai',
-];
-
+const ROOT = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const strict = process.argv.includes('--strict');
 const json = process.argv.includes('--json');
 
-function viewAttestations(name) {
+function localVersion(shortName) {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'packages', shortName, 'package.json'), 'utf8'));
+  return pkg.version;
+}
+
+function viewAttestations(shortName) {
+  const name = `@gtcx/${shortName}`;
+  const version = localVersion(shortName);
+
   try {
-    const out = execSync(`npm view @gtcx/${name} --json`, {
+    const out = execSync(`npm view ${name}@${version} --json`, {
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     const data = JSON.parse(out);
     const attestations = data.dist?.attestations;
     return {
-      name: `@gtcx/${name}`,
-      version: data.version,
+      name,
+      version,
       hasAttestation: Boolean(attestations?.url || attestations?.provenance),
       attestations: attestations ?? null,
     };
   } catch (error) {
     return {
-      name: `@gtcx/${name}`,
-      version: null,
+      name,
+      version,
       hasAttestation: false,
       error: error instanceof Error ? error.message : String(error),
     };
@@ -54,7 +43,7 @@ function viewAttestations(name) {
 }
 
 function main() {
-  const results = PACKAGES.map(viewAttestations);
+  const results = PUBLIC_PACKAGE_DIRS.map(viewAttestations);
   const withAttestation = results.filter((r) => r.hasAttestation);
   const missing = results.filter((r) => !r.hasAttestation);
 
@@ -64,7 +53,7 @@ function main() {
         {
           total: results.length,
           with_attestation: withAttestation.length,
-          missing: missing.map((r) => r.name),
+          missing: missing.map((r) => `${r.name}@${r.version}`),
           results,
         },
         null,
@@ -77,8 +66,7 @@ function main() {
     );
     for (const row of results) {
       const status = row.hasAttestation ? 'OK' : 'MISSING';
-      const version = row.version ?? 'n/a';
-      console.log(`  [${status}] ${row.name}@${version}`);
+      console.log(`  [${status}] ${row.name}@${row.version}`);
     }
   }
 
@@ -88,10 +76,9 @@ function main() {
   }
 
   const message =
-    `${missing.length} package(s) lack npm registry attestations. ` +
-    'Changesets uses `pnpm publish` — set NPM_CONFIG_PROVENANCE=true (not changeset --provenance). ' +
-    'Requires GitHub Actions id-token:write + repository field in package.json. ' +
-    'Republish via `gh workflow run release.yml -f provenance_republish=true`.';
+    `${missing.length} package(s) lack npm registry attestations at the version in package.json. ` +
+    'Use `node ./tools/publish-packages-provenance.mjs` (npm publish --provenance), not changeset/pnpm publish. ' +
+    'Requires GitHub Actions id-token:write + repository in package.json.';
 
   if (strict) {
     console.error(message);

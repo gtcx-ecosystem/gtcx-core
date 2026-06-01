@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/telemetry",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Unified OpenTelemetry-compatible instrumentation: metrics, traces, logs",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

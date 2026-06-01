@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.4
+
+### Patch Changes
+
+- chore(release): republish with npm publish --provenance
+
+  Uses publish-packages-provenance.mjs (pnpm pack + npm publish). Prior pnpm publish releases lack registry attestations.
+
+## 0.2.3
+
+### Patch Changes
+
+- fe01c1a: chore(release): republish with npm provenance via pnpm publish
+
+  Enables NPM_CONFIG_PROVENANCE / publishConfig.provenance (changeset --provenance is ignored).
+
 ## 0.2.2
 
 ### Patch Changes

@@ -216,12 +216,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish packages
+      - name: Upgrade npm for provenance
+        if: github.event_name == 'workflow_dispatch'
+        run: npm install -g npm@latest && npm --version
+
+      - name: Publish packages with npm provenance
         if: github.event_name == 'workflow_dispatch'
         run: |
-          # changesets calls `pnpm publish`; --provenance on changeset CLI is ignored
           echo "provenance=true" >> "${NPM_CONFIG_USERCONFIG}"
-          pnpm exec changeset publish
+          node ./tools/publish-packages-provenance.mjs
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_USERCONFIG: ${{ env.NPM_CONFIG_USERCONFIG }}

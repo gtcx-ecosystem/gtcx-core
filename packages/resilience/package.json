@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/resilience",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Resilience primitives for service-to-service communication: circuit breaker, adaptive retry, timeout, bulkhead",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

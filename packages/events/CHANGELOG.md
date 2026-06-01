@@ -1,5 +1,21 @@
 # @gtcx/events
 
+## 1.0.3
+
+### Patch Changes
+
+- chore(release): republish with npm publish --provenance
+
+  Uses publish-packages-provenance.mjs (pnpm pack + npm publish). Prior pnpm publish releases lack registry attestations.
+
+## 1.0.2
+
+### Patch Changes
+
+- fe01c1a: chore(release): republish with npm provenance via pnpm publish
+
+  Enables NPM_CONFIG_PROVENANCE / publishConfig.provenance (changeset --provenance is ignored).
+
 ## 1.0.1
 
 ### Patch Changes

@@ -1,5 +1,27 @@
 # @gtcx/telemetry
 
+## 0.2.3
+
+### Patch Changes
+
+- chore(release): republish with npm publish --provenance
+
+  Uses publish-packages-provenance.mjs (pnpm pack + npm publish). Prior pnpm publish releases lack registry attestations.
+
+- Updated dependencies
+  - @gtcx/logging@0.3.3
+
+## 0.2.2
+
+### Patch Changes
+
+- fe01c1a: chore(release): republish with npm provenance via pnpm publish
+
+  Enables NPM_CONFIG_PROVENANCE / publishConfig.provenance (changeset --provenance is ignored).
+
+- Updated dependencies [fe01c1a]
+  - @gtcx/logging@0.3.2
+
 ## 0.2.1
 
 ### Patch Changes

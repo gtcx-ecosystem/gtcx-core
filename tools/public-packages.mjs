@@ -1,0 +1,25 @@
+/** @file Shared list of public @gtcx/* packages published to npm. */
+
+export const PUBLIC_PACKAGE_DIRS = [
+  'types',
+  'crypto',
+  'crypto-native',
+  'schemas',
+  'utils',
+  'domain',
+  'security',
+  'verification',
+  'identity',
+  'api-client',
+  'connectivity',
+  'logging',
+  'network',
+  'sync',
+  'resilience',
+  'telemetry',
+  'runtime',
+  'events',
+  'workproof',
+  'services',
+  'ai',
+];
