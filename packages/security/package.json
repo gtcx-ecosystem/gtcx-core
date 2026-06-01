@@ -75,7 +75,8 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
   },
   "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/security#readme",
   "bugs": {

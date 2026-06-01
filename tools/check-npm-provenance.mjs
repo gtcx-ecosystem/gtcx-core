@@ -89,8 +89,9 @@ function main() {
 
   const message =
     `${missing.length} package(s) lack npm registry attestations. ` +
-    'Republish via `gh workflow run release.yml` (requires NPM_TOKEN + id-token:write). ' +
-    'Local manifest: `pnpm provenance:generate`.';
+    'Changesets uses `pnpm publish` — set NPM_CONFIG_PROVENANCE=true (not changeset --provenance). ' +
+    'Requires GitHub Actions id-token:write + repository field in package.json. ' +
+    'Republish via `gh workflow run release.yml -f provenance_republish=true`.';
 
   if (strict) {
     console.error(message);

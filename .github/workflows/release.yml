@@ -218,19 +218,28 @@ jobs:
 
       - name: Publish packages
         if: github.event_name == 'workflow_dispatch'
-        run: pnpm exec changeset publish --provenance
+        run: |
+          # changesets calls `pnpm publish`; --provenance on changeset CLI is ignored
+          echo "provenance=true" >> "${NPM_CONFIG_USERCONFIG}"
+          pnpm exec changeset publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_USERCONFIG: ${{ env.NPM_CONFIG_USERCONFIG }}
+          NPM_CONFIG_PROVENANCE: 'true'
 
       - name: Verify npm provenance attestations
         if: github.event_name == 'workflow_dispatch'
         run: |
-          node ./tools/check-npm-provenance.mjs --strict || {
-            echo "::warning::Some packages lack npm attestations. Ensure changeset publish ran with --provenance (OIDC id-token: write)."
-            node ./tools/check-npm-provenance.mjs
-            exit 1
-          }
+          for attempt in 1 2 3 4 5; do
+            if node ./tools/check-npm-provenance.mjs --strict; then
+              exit 0
+            fi
+            echo "Attestations not visible yet (attempt ${attempt}/5); waiting 15s..."
+            sleep 15
+          done
+          echo "::warning::Some packages lack npm attestations after publish."
+          node ./tools/check-npm-provenance.mjs
+          exit 1
 
       - name: Push release tags
         if: github.event_name == 'workflow_dispatch'

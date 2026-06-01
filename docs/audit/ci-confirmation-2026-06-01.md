@@ -65,6 +65,8 @@ pnpm provenance:check-npm --strict
 
 **2026-06-01 run [26761642015](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26761642015):** failed at **Configure npm auth** — `npm whoami` E401. Causes: (1) auth written to `~/.npmrc` while `setup-node` uses `NPM_CONFIG_USERCONFIG`; (2) org `NPM_TOKEN` expired/revoked or lacks publish scope. Fix workflow path; rotate token if 401 persists after push.
 
+**2026-06-01 run [26774707785](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26774707785):** publish **succeeded** but verify failed **0/21 attestations**. Root cause: `changeset publish --provenance` does not pass provenance to `pnpm publish`. Fix: `NPM_CONFIG_PROVENANCE=true`, `publishConfig.provenance`, changeset `.changeset/provenance-pnpm-config.md` for republish.
+
 ## Internal 10/10 signoff
 
 **Engineering / DevEx / trust automation:** **complete** for this train (see [execution-roadmap.md](./execution-roadmap.md), [gtm-roadmap-10-10-internal-2026-06-01.md](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md)).
