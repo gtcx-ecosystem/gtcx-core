@@ -122,15 +122,16 @@ pnpm quality:kpi:collect    # KPI snapshot
 
 ### 3.1 Current State (Maturity Level 2 — Governed)
 
-| Capability           | Status           | Evidence                                                                  |
-| -------------------- | ---------------- | ------------------------------------------------------------------------- |
-| Model cards          | 6 published      | `docs/governance/model-cards/`                                            |
-| AI observability     | Live             | `@gtcx/ai` — `traced()`, category loggers, span emitters, provenance      |
-| AI test coverage     | 97.43%           | `@gtcx/ai` branch coverage                                                |
-| Human review matrix  | Defined          | Per model card + `AGENTS.md`                                              |
-| Safety rules         | Machine-readable | `docs/agents/safety-rules.json`                                           |
-| Quarterly evaluation | Scheduled        | Next: 2026-08-19                                                          |
-| Evaluation pipeline  | Spec complete    | `docs/specs/ai-evaluation-pipeline.md` — implementation begins 2026-05-20 |
+| Capability              | Status           | Evidence                                                                         |
+| ----------------------- | ---------------- | -------------------------------------------------------------------------------- |
+| Model cards             | 6 published      | `docs/governance/model-cards/`                                                   |
+| AI observability        | Live             | `@gtcx/ai` — `traced()`, category loggers, span emitters, provenance             |
+| AI test coverage        | 97.43%           | `@gtcx/ai` branch coverage                                                       |
+| Human review matrix     | Defined          | Per model card + `AGENTS.md`                                                     |
+| Safety rules            | Machine-readable | `docs/agents/safety-rules.json`                                                  |
+| Quarterly evaluation    | Scheduled        | Next: 2026-08-19                                                                 |
+| Evaluation pipeline     | Baseline shipped | `@gtcx/ai-eval` + `pnpm ai:evaluate` — scorecard JSON; CI/release wiring planned |
+| Release trust artifacts | Planned          | Per-release machine-readable scorecard + trust bundle (see §4.10)                |
 
 ### 3.2 Maturity Levels
 
@@ -149,13 +150,15 @@ Level 5 — Ecosystem       (downstream repos inherit AI governance)
 
 **Engineering spec:** `docs/specs/ai-evaluation-pipeline.md`
 
-| Deliverable                    | Description                                  | Acceptance Criteria                                         | Status                     |
-| ------------------------------ | -------------------------------------------- | ----------------------------------------------------------- | -------------------------- |
-| Evaluation pipeline automation | Run quarterly evaluation as CI job           | `pnpm ai:evaluate` produces JSON scorecard                  | 🚧 In Progress — Step 1/10 |
-| Accuracy metrics               | Test pass rate after agent-driven changes    | ≥ 98% for security-sensitive packages                       | 📋 Planned                 |
-| Efficiency metrics             | Context utilization score                    | Tokens per task, completion time tracked                    | 📋 Planned                 |
-| Safety metrics                 | Zero unauthorized security-sensitive changes | Automated diff scan against `safety-rules.json`             | 📋 Planned                 |
-| Model selection heuristic      | Recommend model per task type                | Decision tree published in `docs/agents/model-selection.md` | 📋 Planned                 |
+| Deliverable                    | Description                                    | Acceptance Criteria                                         | Status                                             |
+| ------------------------------ | ---------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------- |
+| Evaluation pipeline automation | Run on every release + optional PR             | `pnpm ai:evaluate` produces JSON scorecard                  | 🚧 In Progress — package shipped; CI gate pending  |
+| Release trust artifacts        | Attach scorecard to GA evidence + trust portal | `artifacts/ai-scorecard.json` + `release:ga:evidence:check` | 📋 Planned — Sprint 2 (engagement) / Q2 timeline   |
+| Spec-drift detection           | Flag README blockers, package-count drift      | Scorecard `safety` / `context` dimensions fail on drift     | 📋 Planned — encodes `safety-rules.json` semantics |
+| Accuracy metrics               | Test pass rate after agent-driven changes      | ≥ 98% for security-sensitive packages                       | 🚧 Baseline in `@gtcx/ai-eval`                     |
+| Efficiency metrics             | Context utilization score                      | Tokens per task, completion time tracked                    | 📋 Planned                                         |
+| Safety metrics                 | Zero unauthorized security-sensitive changes   | Automated diff scan against `safety-rules.json`             | 📋 Planned                                         |
+| Model selection heuristic      | Recommend model per task type                  | Decision tree published in `docs/agents/model-selection.md` | 📋 Planned                                         |
 
 #### Phase B: Autonomous (Level 4) — Q3 2026
 
@@ -375,6 +378,31 @@ Bank-grade cryptographic module validation and build provenance that makes the s
 
 **Replication cost:** FIPS validation fees ($50-200K) + SLSA infrastructure engineering + CMVP queue time (12-18 months).
 
+### 4.10 `@gtcx/ai-eval` — Machine-Readable Trust Scorecards (Strategic Moat)
+
+**What it is:**  
+A release-attached evaluation pipeline that emits a JSON **AI scorecard** and, over time, a bundled **machine-readable trust artifact** set (scorecard + gate results + spec-drift signals). Implemented in `@gtcx/ai-eval` (`pnpm ai:evaluate`). Rules encode `docs/agents/safety-rules.json`; dimensions cover accuracy, safety, efficiency, and context utilization.
+
+**Why it is defensible (90-day copy test):**
+
+- Competitors can copy Ed25519 wrappers in weeks; they cannot quickly copy **GTCX-specific safety semantics**, gate choreography, and the habit of shipping **verifiable trust evidence on every release**.
+- Regulators and vendor-risk teams get an artifact they can diff release-over-release without reading 2,000+ tests.
+- Closes the gap between internal 9.5/10 completion scores and **customer-visible, machine-checkable** trust.
+
+**Roadmap deliverables:**
+
+| Milestone    | Acceptance criteria                                                                           | Target  |
+| ------------ | --------------------------------------------------------------------------------------------- | ------- |
+| CI artifact  | `ai-scorecard.json` uploaded on every `main` CI run (non-blocking → blocking)                 | Q2 2026 |
+| Release gate | `release:ga:evidence:check` includes scorecard freshness + `--strict` on security packages    | Q2 2026 |
+| Trust portal | Scorecard linked from [trust portal](./governance/trust-portal.md) per published version      | Q2 2026 |
+| Spec drift   | Scorecard fails when README blockers, package-count drift, or safety-rule violations detected | Q3 2026 |
+
+**Engineering spec:** [`docs/specs/ai-evaluation-pipeline.md`](./specs/ai-evaluation-pipeline.md)  
+**Synthesis source:** [`docs/audit/full-audit-2026-06-01.md`](./audit/full-audit-2026-06-01.md) — executive summary, Sprint 6
+
+**Replication cost:** 2–4 months to replicate package surface; 12+ months to replicate encoded governance + downstream adoption.
+
 ---
 
 ## 5. Architecture at a Glance
@@ -422,17 +450,17 @@ Bank-grade cryptographic module validation and build provenance that makes the s
 
 ### Q2 2026 (Now – June 30)
 
-| Week  | Focus                                                    | Status                                                                |
-| ----- | -------------------------------------------------------- | --------------------------------------------------------------------- |
-| 1     | Execute crypto-native mock tests; verify CI green        | **DONE**                                                              |
-| 2     | Trigger SLSA provenance release; claim `@gtcx` npm scope | **Blocked** — `NPM_TOKEN` org secret                                  |
-| 3     | Run 24-hour fuzz campaign; capture evidence              | **In Progress** — 500K+ iterations complete                           |
-| 4     | Zimbabwe + Namibia pre-submission meetings               | **Pending** — email drafted, not sent                                 |
-| 5-6   | Rust FIPS backend (aws-lc-rs) implementation             | **DONE** — `cargo test --features fips` passes                        |
-| 7-8   | AI evaluation pipeline automation (Phase A start)        | **In Progress** — spec: `docs/specs/ai-evaluation-pipeline.md`        |
-| 7-8   | Cross-repo publish automation (downstream PR opener)     | **In Progress** — spec: `docs/specs/cross-repo-publish-automation.md` |
-| 9-10  | HSM key storage trait implementation                     | **DONE** — PKCS#11 + Cloud KMS keystores operational                  |
-| 11-12 | Downstream consumer validation pilot                     | **Planned**                                                           |
+| Week  | Focus                                                    | Status                                                                      |
+| ----- | -------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 1     | Execute crypto-native mock tests; verify CI green        | **DONE**                                                                    |
+| 2     | Trigger SLSA provenance release; claim `@gtcx` npm scope | **Blocked** — `NPM_TOKEN` org secret                                        |
+| 3     | Run 24-hour fuzz campaign; capture evidence              | **In Progress** — 500K+ iterations complete                                 |
+| 4     | Zimbabwe + Namibia pre-submission meetings               | **Pending** — email drafted, not sent                                       |
+| 5-6   | Rust FIPS backend (aws-lc-rs) implementation             | **DONE** — `cargo test --features fips` passes                              |
+| 7-8   | AI evaluation pipeline + per-release trust scorecards    | **In Progress** — `@gtcx/ai-eval` shipped; CI + trust portal wiring (§4.10) |
+| 7-8   | Cross-repo publish automation (downstream PR opener)     | **In Progress** — spec: `docs/specs/cross-repo-publish-automation.md`       |
+| 9-10  | HSM key storage trait implementation                     | **DONE** — PKCS#11 + Cloud KMS keystores operational                        |
+| 11-12 | Downstream consumer validation pilot                     | **Planned**                                                                 |
 
 ### Q3 2026 (July 1 – September 30)
 

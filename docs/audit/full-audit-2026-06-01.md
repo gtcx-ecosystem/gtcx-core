@@ -418,3 +418,5 @@ Trust compounds per release, not per sales cycle.
 **Biggest Risk:** Sovereign engagement proceeds against stale README blockers and missing pen-test report — pilot converts to "wait and see."
 
 **Biggest Opportunity:** **`@gtcx/ai-eval` + automated trust evidence** — turn this repo into the only commodity-crypto foundation that ships a machine-readable trust scorecard every release. Hard to copy quickly because it encodes GTCX-specific safety rules and gate semantics.
+
+**Tracked in:** [docs/roadmap.md §4.10](../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) · [engagement roadmap Phase 6](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md#phase-6--trust-automation-moat-post-engagement-q2q3-2026) · [trust portal](../governance/trust-portal.md#machine-readable-trust-artifacts-roadmap)

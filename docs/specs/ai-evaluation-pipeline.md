@@ -39,6 +39,22 @@ review_cycle: 'on-change'
 
 This spec defines the `ai:evaluate` command and its CI integration. The pipeline quantifies agent accuracy, safety, and efficiency after every agent-driven change. It is the engineering gateway from Level 2 (Governed) to Level 3 (Measurable) AI maturity.
 
+### 1.1 Strategic opportunity (moat)
+
+**Product thesis:** Ship **`@gtcx/ai-eval` scorecards + machine-readable trust artifacts on every release** so vendor-risk teams and regulators receive verifiable evidence they can diff version-over-version.
+
+**90-day copy test:** Competitors can replicate Ed25519 APIs quickly; they cannot quickly replicate GTCX-encoded **safety-rule semantics**, gate choreography, and the operational habit of attaching scorecards to GA evidence and the [trust portal](../governance/trust-portal.md).
+
+**Roadmap placement:** [docs/roadmap.md §4.10](../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) · Engagement track: [engagement-readiness sprint Phase 6](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md#phase-6--trust-automation-moat-post-engagement-q2q3-2026) · Audit synthesis: [full-audit-2026-06-01](../audit/full-audit-2026-06-01.md).
+
+| Milestone         | Acceptance criteria                                           |
+| ----------------- | ------------------------------------------------------------- | --------------- |
+| M1 — Baseline     | `pnpm ai:evaluate` emits `AIScorecard` JSON (`@gtcx/ai-eval`) | **Done**        |
+| M2 — CI artifact  | `artifacts/ai-scorecard.json` on every `main` CI run          | Planned Q2 2026 |
+| M3 — Release gate | `release:ga:evidence:check` requires fresh scorecard          | Planned Q2 2026 |
+| M4 — Trust portal | Scorecard linked per published npm version                    | Planned Q2 2026 |
+| M5 — Spec drift   | Scorecard fails on README blocker / package-count drift       | Planned Q3 2026 |
+
 ---
 
 ## 2. Scope

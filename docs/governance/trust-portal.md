@@ -1,18 +1,19 @@
 ---
-title: "gtcx-core Trust Portal"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'gtcx-core Trust Portal'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "governance"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'governance']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Trust Portal'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs']
 review_cycle: 'on-change'
+
 ---
 
 # gtcx-core Trust Portal
@@ -159,6 +161,27 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 7. [Fuzz campaign results](../../quality/fuzz-results/campaign-summary.md) — 9.9M executions, 0 crashes across 6 targets with AddressSanitizer enabled
 8. [External penetration test scope](../security/pen-test-scope.md) — vendor-ready scope for third-party validation
 9. [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema + prompt + 3 playbooks; the bot is structurally forbidden from approving
+
+---
+
+## Machine-readable trust artifacts (roadmap)
+
+**Status:** `@gtcx/ai-eval` baseline shipped; per-release scorecard attachment **planned Q2 2026**.
+
+GTCX is adding a **JSON AI scorecard** (`pnpm ai:evaluate`) to every release evidence bundle. The scorecard quantifies agent accuracy, safety (diff scan against [`safety-rules.json`](../agents/safety-rules.json)), efficiency, and context utilization. Regulators and vendor-risk teams can diff scorecards across versions without re-running the full test matrix.
+
+| Artifact                      | Purpose                             | When available                           |
+| ----------------------------- | ----------------------------------- | ---------------------------------------- |
+| `artifacts/ai-scorecard.json` | Per-build / per-release trust score | After CI wiring (roadmap §4.10)          |
+| GA evidence summary           | Includes scorecard freshness gate   | After `release:ga:evidence:check` update |
+
+**Why it matters:** Crypto libraries are commoditized; **governance-encoded, machine-checkable trust per release** is the moat. See [roadmap §4.10](../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) and [full-audit-2026-06-01](../audit/full-audit-2026-06-01.md).
+
+**Verify locally today:**
+
+```bash
+pnpm ai:evaluate --output /tmp/ai-scorecard.json
+```
 
 ---
 

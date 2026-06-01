@@ -1,18 +1,19 @@
 ---
-title: "gtcx-core Roadmap"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'gtcx-core Roadmap'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "agile"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'agile']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Roadmap'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs', 'agile']
 review_cycle: 'on-change'
+
 ---
 
 # gtcx-core Roadmap
@@ -136,6 +138,22 @@ The product/feature roadmap above tracks core capability delivery. In parallel, 
 | R5     | External Validation            | **In Progress** | Pen-test RFP drafted; vendor selection active; SOC 2 prep complete    |
 
 Detailed plan: [10-10-roadmap-2026-05-25.md](../../audit/10-10-roadmap-2026-05-25.md) — honest bank-grade baseline (8.8/10)
+
+---
+
+## Trust Automation Moat (`@gtcx/ai-eval`)
+
+**Strategic opportunity** (from [full-audit-2026-06-01](../../audit/full-audit-2026-06-01.md)): ship **machine-readable trust scorecards on every release** — not a feature competitors can copy in 90 days because it encodes GTCX safety rules, gate semantics, and release evidence choreography.
+
+| Milestone | Deliverable                                                 | Status            |
+| --------- | ----------------------------------------------------------- | ----------------- |
+| T1        | `@gtcx/ai-eval` package + `pnpm ai:evaluate` JSON scorecard | **Done**          |
+| T2        | CI uploads `ai-scorecard.json` artifact (non-blocking)      | Planned — Q2 2026 |
+| T3        | `release:ga:evidence:check` requires fresh scorecard        | Planned — Q2 2026 |
+| T4        | Trust portal links scorecard per npm version                | Planned — Q2 2026 |
+| T5        | Spec-drift dimension (README blockers, package-count drift) | Planned — Q3 2026 |
+
+Canonical detail: [docs/roadmap.md §4.10](../../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) · Spec: [ai-evaluation-pipeline.md](../../specs/ai-evaluation-pipeline.md)
 
 ---
 
