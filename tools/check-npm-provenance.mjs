@@ -136,8 +136,8 @@ function main() {
 
   const message =
     `${missing.length - notPublished.length} package(s) lack npm registry attestations at the version in package.json. ` +
-    'Use `node ./tools/publish-packages-provenance.mjs` (pnpm pack + npm publish --provenance), not changeset/pnpm publish. ' +
-    'Requires GitHub Actions id-token:write + repository in package.json.';
+    'Use `node ./tools/publish-packages-provenance.mjs` (pnpm publish --provenance). ' +
+    'Requires id-token:write, repository in package.json, and a **public** GitHub source repo (private repos: npm E422).';
 
   if (strict) {
     console.error(message);

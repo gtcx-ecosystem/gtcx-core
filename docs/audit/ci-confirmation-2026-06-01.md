@@ -69,15 +69,25 @@ pnpm provenance:check-npm --strict
 
 **2026-06-01 run [26775554752](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26775554752):** Used **`changeset publish`** (no attestations); all packages skipped as already on npm at 3.1.3. Fix landed in `59b628b` (`publish-packages-provenance.mjs` + 3.1.4 bumps).
 
-**Next action (post-`59b628b`):** dispatch with provenance republish — versions **3.1.4** are not on npm yet:
+**2026-06-01 run [26776762740](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26776762740):** `npm publish --provenance` reached Sigstore, then **E422** — `gtcx-core` is a **private** GitHub repo. npm only accepts provenance from **public** source repositories. `@gtcx/types@3.1.4` was not published.
+
+## npm provenance — hard blocker (2026-06-01)
+
+| Requirement                       | Status                                              |
+| --------------------------------- | --------------------------------------------------- |
+| `npm publish --provenance` + OIDC | Works (Sigstore statement generated in CI)          |
+| `id-token: write`                 | Present                                             |
+| `repository` in `package.json`    | Present                                             |
+| **Public GitHub source repo**     | **BLOCKED** — `gtcx-ecosystem/gtcx-core` is private |
+
+**To get 21/21 attestations:** make `gtcx-core` public (org admin), then:
 
 ```bash
 gh workflow run release.yml --repo gtcx-ecosystem/gtcx-core -f provenance_republish=true
-# after green (~25 min):
 pnpm provenance:check-npm --strict
 ```
 
-Republish skips `changeset version` (versions already committed). Publish fails fast if a version exists on npm **without** attestations (forces a new bump).
+Republish skips `changeset version` when versions are already committed. Publish fails fast if a version exists on npm without attestations.
 
 ## Internal 10/10 signoff
 

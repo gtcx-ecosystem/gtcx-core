@@ -220,6 +220,21 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Require public repo for npm provenance
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          visibility=$(gh api "repos/${GITHUB_REPOSITORY}" --jq .visibility)
+          echo "Repository visibility: ${visibility}"
+          if [ "${visibility}" != "public" ]; then
+            echo "::error::npm provenance from GitHub Actions requires a public source repository."
+            echo "::error::${GITHUB_REPOSITORY} is '${visibility}'. npm returns E422 for private repos."
+            echo "::error::Options: make gtcx-core public; or publish without provenance (no Sigstore attestations)."
+            echo "::error::https://docs.npmjs.com/generating-provenance-statements"
+            exit 1
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Upgrade npm for provenance
         if: github.event_name == 'workflow_dispatch'
         run: npm install -g npm@latest && npm --version
