@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-27T13:59:07.955Z",
+  "generatedAt": "2026-06-01T09:47:59.507Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.3.1",
@@ -29,6 +29,29 @@
         "traced",
         "TracedOptions",
         "withTrace"
+      ]
+    },
+    "@gtcx/ai-eval": {
+      "version": "0.1.0",
+      "dir": "packages/ai-eval",
+      "typesPath": "packages/ai-eval/dist/index.d.ts",
+      "hash": "e24a3172b73a5093804cea3bff41de2377d7d0c76807269b9e57d8227392e647",
+      "exports": [
+        "AccuracyResult",
+        "AIScorecard",
+        "AIScorecardMeta",
+        "buildMeta",
+        "buildScorecard",
+        "ContextUtilizationResult",
+        "DimensionResult",
+        "EfficiencyResult",
+        "evaluateAccuracy",
+        "evaluateContextUtilization",
+        "evaluateEfficiency",
+        "EvaluateOptions",
+        "evaluateSafety",
+        "SafetyFinding",
+        "SafetyResult"
       ]
     },
     "@gtcx/api-client": {

@@ -775,6 +775,12 @@ importers:
 
   tests/integration:
     devDependencies:
+      '@gtcx/api-client':
+        specifier: workspace:*
+        version: link:../../packages/api-client
+      '@gtcx/connectivity':
+        specifier: workspace:*
+        version: link:../../packages/connectivity
       '@gtcx/crypto':
         specifier: workspace:*
         version: link:../../packages/crypto
@@ -790,6 +796,15 @@ importers:
       '@gtcx/jurisdiction-config':
         specifier: workspace:*
         version: link:../../packages/config/jurisdiction
+      '@gtcx/logging':
+        specifier: workspace:*
+        version: link:../../packages/logging
+      '@gtcx/resilience':
+        specifier: workspace:*
+        version: link:../../packages/resilience
+      '@gtcx/runtime':
+        specifier: workspace:*
+        version: link:../../packages/runtime
       '@gtcx/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -799,6 +814,9 @@ importers:
       '@gtcx/sync':
         specifier: workspace:*
         version: link:../../packages/sync
+      '@gtcx/telemetry':
+        specifier: workspace:*
+        version: link:../../packages/telemetry
       '@gtcx/types':
         specifier: workspace:*
         version: link:../../packages/types

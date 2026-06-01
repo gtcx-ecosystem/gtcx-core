@@ -14,6 +14,12 @@ export default defineConfig({
       '@gtcx/sync': path.resolve(__dirname, '../../packages/sync/src/index.ts'),
       '@gtcx/types': path.resolve(__dirname, '../../packages/types/src/index.ts'),
       '@gtcx/verification': path.resolve(__dirname, '../../packages/verification/src/index.ts'),
+      '@gtcx/runtime': path.resolve(__dirname, '../../packages/runtime/src/index.ts'),
+      '@gtcx/api-client': path.resolve(__dirname, '../../packages/api-client/src/index.ts'),
+      '@gtcx/connectivity': path.resolve(__dirname, '../../packages/connectivity/src/index.ts'),
+      '@gtcx/resilience': path.resolve(__dirname, '../../packages/resilience/src/index.ts'),
+      '@gtcx/telemetry': path.resolve(__dirname, '../../packages/telemetry/src/index.ts'),
+      '@gtcx/logging': path.resolve(__dirname, '../../packages/logging/src/index.ts'),
     },
   },
   test: {
