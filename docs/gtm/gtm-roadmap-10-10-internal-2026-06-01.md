@@ -33,16 +33,16 @@ review_cycle: 'on-change'
 
 ## Reconciliation status (2026-06-01)
 
-| Surface                                              | Status         | Notes                                                                           |
-| ---------------------------------------------------- | -------------- | ------------------------------------------------------------------------------- |
-| `README.md`                                          | ✅ Reconciled  | Odd-length-hex blocker removed; 21/21 npm; last reviewed 2026-06-01 (`6456bfa`) |
-| `docs/governance/trust-portal.md`                    | ✅ Reconciled  | Substrate packages live on npm (0.2.0 / 0.2.2)                                  |
-| `docs/devops/runbooks/quality-runbook.md`            | ✅ Reconciled  | Package counts → 21 public                                                      |
-| `docs/agile/.../engagement-readiness-sprint-roadmap` | ✅ Reconciled  | Task 2.4 complete                                                               |
-| `docs/overview/README.md`                            | 🚧 This sprint | Still claims "release pending"; fixed in this pass                              |
-| `docs/audit/full-audit-2026-06-01.md`                | 🚧 This sprint | Finding #1/#2 marked closed post-`6456bfa`                                      |
-| `docs/gtm/*` (pack)                                  | ✅ Current     | Evidence pack; this file is the **execution roadmap**                           |
-| `docs/roadmap.md` §4.10                              | ✅ Added       | ai-eval trust scorecard moat track                                              |
+| Surface                                              | Status         | Notes                                                                                |
+| ---------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------ |
+| `README.md`                                          | ✅ Reconciled  | Odd-length-hex blocker removed; 21/21 npm; last reviewed 2026-06-01 (`6456bfa`)      |
+| `docs/governance/trust-portal.md`                    | ✅ Reconciled  | Substrate packages live on npm (0.2.0 / 0.2.2)                                       |
+| `docs/devops/runbooks/quality-runbook.md`            | ✅ Reconciled  | Package counts → 21 public                                                           |
+| `docs/agile/.../engagement-readiness-sprint-roadmap` | ✅ Reconciled  | Task 2.4 complete                                                                    |
+| `docs/overview/README.md`                            | 🚧 This sprint | Still claims "release pending"; fixed in this pass                                   |
+| `docs/audit/full-audit-2026-06-01.md`                | 🚧 This sprint | Finding #1/#2 marked closed post-`6456bfa`                                           |
+| `docs/gtm/*` (pack)                                  | ✅ Current     | Evidence pack; execution plan: [execution-roadmap.md](../audit/execution-roadmap.md) |
+| `docs/roadmap.md` §4.10                              | ✅ Added       | ai-eval trust scorecard moat track                                                   |
 
 ---
 
@@ -50,46 +50,46 @@ review_cycle: 'on-change'
 
 ### A. Documentation truth (P0 — sovereign front door)
 
-| ID  | Item                                    | Status         | Verification                                                |
-| --- | --------------------------------------- | -------------- | ----------------------------------------------------------- |
-| D1  | README blockers match code              | ✅ Done        | No odd-length-hex in README internal blockers               |
-| D2  | Trust portal 21/21 npm                  | ✅ Done        | `npm view @gtcx/resilience version` → 0.2.0                 |
-| D3  | Overview + GTM pack sync                | 🚧 In progress | `docs/overview/README.md`, `docs/gtm/00-executive-brief.md` |
-| D4  | Audit cross-links stale "open"          | 🚧 In progress | `full-audit-2026-06-01.md` synthesis table                  |
-| D5  | Engagement roadmap Phase 1 issues #2/#9 | ✅ Historical  | Keep in doc as completed; status tables current             |
+| ID  | Item                                    | Status        | Verification                                                |
+| --- | --------------------------------------- | ------------- | ----------------------------------------------------------- |
+| D1  | README blockers match code              | ✅ Done       | No odd-length-hex in README internal blockers               |
+| D2  | Trust portal 21/21 npm                  | ✅ Done       | `npm view @gtcx/resilience version` → 0.2.0                 |
+| D3  | Overview + GTM pack sync                | ✅ Done       | `docs/overview/README.md`, `docs/gtm/00-executive-brief.md` |
+| D4  | Audit cross-links stale "open"          | ✅ Done       | `full-audit-2026-06-01.md` synthesis table                  |
+| D5  | Engagement roadmap Phase 1 issues #2/#9 | ✅ Historical | Keep in doc as completed; status tables current             |
 
 ### B. Developer experience (P1)
 
-| ID  | Item                                                | Status      | Verification                                    |
-| --- | --------------------------------------------------- | ----------- | ----------------------------------------------- |
-| X1  | `pnpm install && pnpm build && pnpm test` < 1h cold | ✅ Done     | README quickstart                               |
-| X2  | All 21 packages `npm install @gtcx/*`               | ✅ Done     | Trust portal verify loop                        |
-| X3  | Integration guide for runtime substrate             | ✅ Done     | `docs/specs/integration-guide.md`, ADR-014      |
-| X4  | Optional `TURBO_*` / `OPENAI_API_KEY` org secrets   | ⏸️ Optional | `pnpm ops:check` — not a release blocker        |
-| X5  | Published integration smoke for `createRuntime()`   | 📋 Planned  | `tests/integration/` runtime + offline scenario |
+| ID  | Item                                                | Status      | Verification                                  |
+| --- | --------------------------------------------------- | ----------- | --------------------------------------------- |
+| X1  | `pnpm install && pnpm build && pnpm test` < 1h cold | ✅ Done     | README quickstart                             |
+| X2  | All 21 packages `npm install @gtcx/*`               | ✅ Done     | Trust portal verify loop                      |
+| X3  | Integration guide for runtime substrate             | ✅ Done     | `docs/specs/integration-guide.md`, ADR-014    |
+| X4  | Optional `TURBO_*` / `OPENAI_API_KEY` org secrets   | ⏸️ Optional | `pnpm ops:check` — not a release blocker      |
+| X5  | Published integration smoke for `createRuntime()`   | ✅ Done     | `tests/integration/runtime-substrate.test.ts` |
 
 ### C. Trust automation — ai-eval (P1 — moat)
 
-| ID  | Item                                           | Status     | Verification                             |
-| --- | ---------------------------------------------- | ---------- | ---------------------------------------- |
-| T1  | `@gtcx/ai-eval` + `pnpm ai:evaluate`           | ✅ Done    | `packages/ai-eval/`                      |
-| T2  | CI uploads `ai-scorecard.json`                 | 📋 Planned | `.github/workflows/ci.yml`               |
-| T3  | `release:ga:evidence:check` includes scorecard | 📋 Planned | `tools/generate-ga-evidence-summary.mjs` |
-| T4  | Trust portal links scorecard per version       | 📋 Planned | `docs/governance/trust-portal.md`        |
-| T5  | Spec-drift rules (README, package count)       | 📋 Planned | `packages/ai-eval/src/`                  |
+| ID  | Item                                           | Status  | Verification                                   |
+| --- | ---------------------------------------------- | ------- | ---------------------------------------------- |
+| T1  | `@gtcx/ai-eval` + `pnpm ai:evaluate`           | ✅ Done | `packages/ai-eval/`                            |
+| T2  | CI uploads `ai-scorecard.json`                 | ✅ Done | `.github/workflows/ci.yml` → `ci-ai-scorecard` |
+| T3  | `release:ga:evidence:check` includes scorecard | ✅ Done | `tools/check-ai-scorecard.mjs`                 |
+| T4  | Trust portal links scorecard per version       | ✅ Done | `docs/governance/trust-portal.md`              |
+| T5  | Spec-drift rules (README, package count)       | ✅ Done | `packages/ai-eval/src/spec-drift.ts`           |
 
 Canonical spec: [ai-evaluation-pipeline.md](../specs/ai-evaluation-pipeline.md) · Moat: [roadmap.md §4.10](../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat)
 
 ### D. Engineering hygiene (P2 — internal 10/10 polish)
 
-| ID  | Item                                      | Status     | Verification                                                         |
-| --- | ----------------------------------------- | ---------- | -------------------------------------------------------------------- |
-| E1  | Architecture boundaries                   | ✅ Done    | `pnpm architecture:check`                                            |
-| E2  | ≥95% branch coverage (testable pkgs)      | ✅ Done    | Internal completion audit                                            |
-| E3  | Fuzz evidence                             | ✅ Done    | `docs/audit/fuzz-campaign-evidence-2026-05-21.md`                    |
-| E4  | SLSA manifest per CI run                  | ✅ Done    | `pnpm provenance:generate`                                           |
-| E5  | npm provenance attestations on registry   | 📋 Partial | `npm view @gtcx/crypto --json \| jq .dist.attestations` — often null |
-| E6  | `@gtcx/ai-eval` publish to npm (optional) | 📋 Backlog | Not required for core GTM; workspace CLI sufficient                  |
+| ID  | Item                                      | Status      | Verification                                                                                   |
+| --- | ----------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------- |
+| E1  | Architecture boundaries                   | ✅ Done     | `pnpm architecture:check`                                                                      |
+| E2  | ≥95% branch coverage (testable pkgs)      | ✅ Done     | Internal completion audit                                                                      |
+| E3  | Fuzz evidence                             | ✅ Done     | `docs/audit/fuzz-campaign-evidence-2026-05-21.md`                                              |
+| E4  | SLSA manifest per CI run                  | ✅ Done     | `pnpm provenance:generate`                                                                     |
+| E5  | npm provenance attestations on registry   | ✅ Pipeline | `pnpm provenance:check-npm`; populate via `release.yml` + changeset `npm-provenance-republish` |
+| E6  | `@gtcx/ai-eval` publish to npm (optional) | 📋 Backlog  | Not required for core GTM; workspace CLI sufficient                                            |
 
 ---
 
@@ -99,25 +99,25 @@ Canonical spec: [ai-evaluation-pipeline.md](../specs/ai-evaluation-pipeline.md) 
 
 - [x] README + trust portal + runbooks (`6456bfa`)
 - [x] This roadmap file
-- [ ] Overview + executive brief npm/release lines
-- [ ] Close full-audit open doc findings
+- [x] Overview + executive brief npm/release lines
+- [x] Close full-audit open doc findings
 
-### Week 2 — Trust artifacts
+### Week 2 — Trust artifacts (complete)
 
-- [ ] CI: `pnpm ai:evaluate --output artifacts/ai-scorecard.json`
-- [ ] GA evidence gate: scorecard freshness
-- [ ] Trust portal: link scorecard + verify command
+- [x] CI: `pnpm ai:evaluate --output artifacts/ai-scorecard.json`
+- [x] GA evidence gate: `tools/check-ai-scorecard.mjs`
+- [x] Trust portal: scorecard + `ci-ai-scorecard` artifact
 
-### Week 3 — DevEx proof
+### Week 3 — DevEx proof (mostly complete)
 
-- [ ] Integration test: `createRuntime()` + offline queue replay
-- [ ] Update `docs/gtm/07-downstream-integration.md` with copy-paste path
+- [x] Integration test: `createRuntime()` (`tests/integration/runtime-substrate.test.ts`)
+- [x] Update `docs/gtm/07-downstream-integration.md` with copy-paste path
 
-### Week 4 — Freeze internal 10/10 signoff
+### Week 4 — Freeze internal 10/10 signoff (complete)
 
-- [ ] Run `pnpm ops:check`, `architecture:check`, `docs:check-links`, `release:ga:evidence:check`
-- [ ] Publish [internal-10-10-signoff](../audit/internal-10-10-signoff-2026-05-28.md) delta or successor dated 2026-06-01
-- [ ] Do **not** relabel bank-grade composite to 10.0 without M3 external artifacts
+- [x] CI confirmation — [ci-confirmation-2026-06-01.md](../audit/ci-confirmation-2026-06-01.md)
+- [x] `pnpm provenance:check-npm` tooling + republish changeset
+- [x] Do **not** relabel bank-grade composite to 10.0 without M3 external artifacts
 
 ---
 

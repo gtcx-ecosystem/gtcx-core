@@ -24,6 +24,7 @@ const gateCatalog = [
   { gate: 'Compliance Evidence (SOC2)', owner: 'Compliance' },
   { gate: 'Compliance Evidence (ISO 27001)', owner: 'Compliance' },
   { gate: 'Provenance Manifest', owner: 'Core Platform' },
+  { gate: 'AI Evaluation Scorecard', owner: 'Core Platform' },
 ];
 
 function escapePipes(value) {

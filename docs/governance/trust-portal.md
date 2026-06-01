@@ -170,18 +170,21 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 
 GTCX is adding a **JSON AI scorecard** (`pnpm ai:evaluate`) to every release evidence bundle. The scorecard quantifies agent accuracy, safety (diff scan against [`safety-rules.json`](../agents/safety-rules.json)), efficiency, and context utilization. Regulators and vendor-risk teams can diff scorecards across versions without re-running the full test matrix.
 
-| Artifact                      | Purpose                             | When available                           |
-| ----------------------------- | ----------------------------------- | ---------------------------------------- |
-| `artifacts/ai-scorecard.json` | Per-build / per-release trust score | After CI wiring (roadmap §4.10)          |
-| GA evidence summary           | Includes scorecard freshness gate   | After `release:ga:evidence:check` update |
+| Artifact                      | Purpose                              | When available                            |
+| ----------------------------- | ------------------------------------ | ----------------------------------------- |
+| `artifacts/ai-scorecard.json` | Per-build trust score (4 dimensions) | Every CI run (`ci-ai-scorecard` artifact) |
+| GA evidence summary           | Scorecard freshness gate             | `pnpm release:ga:evidence:check`          |
 
 **Why it matters:** Crypto libraries are commoditized; **governance-encoded, machine-checkable trust per release** is the moat. See [roadmap §4.10](../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) and [full-audit-2026-06-01](../audit/full-audit-2026-06-01.md).
 
 **Verify locally today:**
 
 ```bash
-pnpm ai:evaluate --output /tmp/ai-scorecard.json
+pnpm ai:evaluate --output artifacts/ai-scorecard.json
+node ./tools/check-ai-scorecard.mjs
 ```
+
+Download the latest scorecard from a passing CI run: workflow **CI** → artifact **ci-ai-scorecard**.
 
 ---
 

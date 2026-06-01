@@ -1,18 +1,19 @@
 ---
-title: "Downstream Integration Guide"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Downstream Integration Guide'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "gtm"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'gtm']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: '07 Downstream Integration'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs']
 review_cycle: 'on-change'
+
 ---
 
 # Downstream Integration Guide
@@ -43,21 +45,48 @@ pnpm add @gtcx/crypto @gtcx/identity @gtcx/verification
 node -e "const { generateKeyPair } = require('@gtcx/crypto'); console.log(generateKeyPair());"
 ```
 
+## Runtime substrate (recommended for services)
+
+Batteries-included wiring for API client, connectivity, resilience, and telemetry:
+
+```bash
+pnpm add @gtcx/runtime @gtcx/api-client @gtcx/connectivity @gtcx/resilience @gtcx/telemetry
+```
+
+```typescript
+import { createRuntime } from '@gtcx/runtime';
+
+const runtime = createRuntime({
+  baseUrl: 'https://api.your-service.test',
+  deployment: 'edge', // edge | satellite | standard | test
+  circuitBreaker: true,
+  telemetry: 'in-memory',
+});
+
+await runtime.client.get('/health');
+runtime.destroy();
+```
+
+Integration smoke: `tests/integration/runtime-substrate.test.ts` in gtcx-core.
+
 ## What You Get
 
-| Package              | What It Does                                             | Critical?  |
-| -------------------- | -------------------------------------------------------- | ---------- |
-| `@gtcx/crypto`       | Ed25519/Secp256k1 signing, SHA-256/BLAKE3 hashing, ZKP   | Yes        |
-| `@gtcx/identity`     | DID creation, resolution, credential management          | Yes        |
-| `@gtcx/verification` | Certificates, proof bundles, QR codes                    | Yes        |
-| `@gtcx/security`     | Token lifecycle, permissions, sanitization, audit        | Yes        |
-| `@gtcx/domain`       | Domain models, offline queue, DI container               | Yes        |
-| `@gtcx/services`     | Business services, compliance, health checks             | Yes        |
-| `@gtcx/schemas`      | Zod validation schemas (Core12: 12 domains, 24 controls) | Yes        |
-| `@gtcx/api-client`   | HTTP client with signing, retry, offline queue           | Depends    |
-| `@gtcx/sync`         | Offline-first sync with 5 conflict strategies            | Depends    |
-| `@gtcx/types`        | TypeScript type definitions                              | Foundation |
-| `@gtcx/utils`        | Common utilities                                         | Foundation |
+| Package              | What It Does                                             | Critical?   |
+| -------------------- | -------------------------------------------------------- | ----------- |
+| `@gtcx/crypto`       | Ed25519/Secp256k1 signing, SHA-256/BLAKE3 hashing, ZKP   | Yes         |
+| `@gtcx/identity`     | DID creation, resolution, credential management          | Yes         |
+| `@gtcx/verification` | Certificates, proof bundles, QR codes                    | Yes         |
+| `@gtcx/security`     | Token lifecycle, permissions, sanitization, audit        | Yes         |
+| `@gtcx/domain`       | Domain models, offline queue, DI container               | Yes         |
+| `@gtcx/services`     | Business services, compliance, health checks             | Yes         |
+| `@gtcx/schemas`      | Zod validation schemas (Core12: 12 domains, 24 controls) | Yes         |
+| `@gtcx/api-client`   | HTTP client with signing, retry, offline queue           | Depends     |
+| `@gtcx/sync`         | Offline-first sync with 5 conflict strategies            | Depends     |
+| `@gtcx/types`        | TypeScript type definitions                              | Foundation  |
+| `@gtcx/utils`        | Common utilities                                         | Foundation  |
+| `@gtcx/runtime`      | `createRuntime()` — connectivity + client + telemetry    | Recommended |
+| `@gtcx/resilience`   | Circuit breaker, retry, bulkhead                         | Via runtime |
+| `@gtcx/telemetry`    | Metrics, traces, logs                                    | Via runtime |
 
 ## Production Configuration
 

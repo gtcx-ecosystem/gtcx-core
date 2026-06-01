@@ -1,18 +1,19 @@
 ---
-title: "SLSA Provenance Consumer Guide"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'SLSA Provenance Consumer Guide'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "gtm"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'gtm']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: '15 SLSA Provenance Consumer Guide'
 status: 'current'
 date: '2026-05-25'
@@ -21,6 +22,7 @@ role: 'quality-evidence-lead'
 tier: 'standard'
 tags: ['gtm', 'slsa', 'provenance', 'supply-chain']
 review_cycle: 'on-change'
+
 ---
 
 # SLSA Provenance Consumer Guide
@@ -42,7 +44,7 @@ SLSA (Supply-chain Levels for Software Artifacts) Build Level 3 means:
 - **Dependencies are pinned:** Exact versions of all dependencies are recorded in the attestation
 - **Source is authenticated:** The build came from a specific, verifiable Git commit
 
-**Current status:** Source L2 enforced. Build L3 pipeline ready. Provenance generation passes locally. Publish to npm pending the Wed-Fri operational window.
+**Current status:** Source L2 enforced. Build L3 pipeline ready (`changeset publish --provenance`, `id-token: write` in `release.yml`). **21/21** packages on npm; registry attestations populate on the next provenance publish — verify with `pnpm provenance:check-npm --strict`. Changeset: `.changeset/npm-provenance-republish.md`.
 
 ---
 

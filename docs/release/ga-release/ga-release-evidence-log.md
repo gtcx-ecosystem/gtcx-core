@@ -1,18 +1,19 @@
 ---
-title: "GA Release Evidence Log"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'GA Release Evidence Log'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "release"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'release']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Ga Release Evidence Log'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs']
 review_cycle: 'on-change'
+
 ---
 
 # GA Release Evidence Log
@@ -44,6 +46,8 @@ Track every completed release gate with a dated evidence entry. One row per evid
 | 2026-05-06 | Provenance Manifest                | `artifacts/provenance-manifest.json`                                          | Pass: provenance manifest generated and tracked as a release evidence artifact                     | Core Platform |
 | 2026-05-06 | Security (Secret Scan)             | `pnpm security:secret-scan`                                                   | Pass: high-confidence secret scan passed across 625 repo files                                     | Security      |
 | 2026-05-06 | API Surface Stability              | `quality/api-surface-report.json`                                             | Pass: 18 packages baselined; 0 drift; 0 semver violations; changesets record required versioning   | Core Platform |
+| 2026-06-01 | AI Evaluation Scorecard            | `artifacts/ai-scorecard.json`                                                 | Pass: `pnpm ai:evaluate` + `tools/check-ai-scorecard.mjs`; CI uploads `ci-ai-scorecard` artifact   | Core Platform |
+| 2026-06-01 | npm Provenance Verification        | `tools/check-npm-provenance.mjs`                                              | Pass: tooling + release.yml verify; registry attestations on next `--provenance` publish           | Core Platform |
 
 ## Usage Notes
 

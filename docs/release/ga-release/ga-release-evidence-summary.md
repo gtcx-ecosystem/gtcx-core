@@ -1,21 +1,7 @@
 ---
-title: "GA Evidence Summary"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
-trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "release"]
-review_cycle: "on-change"
----
-
----
 title: 'GA Release Evidence Summary'
 status: 'current'
-date: '2026-05-06'
+date: '2026-06-01'
 owner: 'quality-evidence-lead'
 role: 'quality-evidence-lead'
 tier: 'critical'
@@ -25,7 +11,7 @@ review_cycle: 'on-change'
 
 # GA Evidence Summary
 
-Generated: 2026-05-06
+Generated: 2026-06-01
 Source: `docs/release/ga-release/ga-release-evidence-log.md`
 
 | Gate                               | Last Evidence Date | Evidence                                                                      | Owner         | Entries |
@@ -45,11 +31,12 @@ Source: `docs/release/ga-release/ga-release-evidence-log.md`
 | Compliance Evidence (SOC2)         | —                  | —                                                                             | Compliance    | 0       |
 | Compliance Evidence (ISO 27001)    | —                  | —                                                                             | Compliance    | 0       |
 | Provenance Manifest                | 2026-05-06         | `artifacts/provenance-manifest.json`                                          | Core Platform | 1       |
+| AI Evaluation Scorecard            | 2026-06-01         | `artifacts/ai-scorecard.json`                                                 | Core Platform | 1       |
 
 ## Summary
 
-- **10 of 15 gates have evidence** (67%)
-- **0 of 15 gates have blocking findings**
+- **11 of 16 gates have evidence** (69%)
+- **0 of 16 gates have blocking findings**
 - **5 gates require action**: Security (SAST), Security (Pen Test + Remediation), Security (SBOM), Compliance Evidence (SOC2), Compliance Evidence (ISO 27001)
 
 ## Usage Notes
