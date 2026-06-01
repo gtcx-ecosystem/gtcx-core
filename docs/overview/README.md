@@ -1,15 +1,15 @@
 ---
-title: "gtcx-core — Repository Overview"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'gtcx-core — Repository Overview'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 95
-autonomy_level: "sovereign"
-tier: "critical"
-tags: ["documentation", "overview"]
-review_cycle: "on-change"
+autonomy_level: 'sovereign'
+tier: 'critical'
+tags: ['documentation', 'overview']
+review_cycle: 'on-change'
 ---
 
 # gtcx-core — Repository Overview
@@ -31,11 +31,11 @@ review_cycle: "on-change"
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.9/10** as of [master audit 2026-05-27](../audit/master-audit-2026-05-27.md) (up from 8.63 on 2026-05-12). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced, Build L3 aspirational; provenance manifest generated per release but not yet published to npm registry. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
+**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.9/10** as of [master audit 2026-05-27](../audit/master-audit-2026-05-27.md) (up from 8.63 on 2026-05-12). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced, Build L3 aspirational; **21/21** public `@gtcx/*` packages on npm (2026-05-26–27); provenance manifest per CI release; npm attestations follow-up ongoing. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
 
 **Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DR Congo plus broader continental rollout). See the [cross-jurisdiction dashboard](../agile/engagement-log/dashboard.md) for per-engagement state.
 
-**Honest remaining gaps (externally budgeted):** pen test report not yet delivered (contracted, target 2026-08-25); SOC 2 Type 1 letter not yet delivered (contracted, target 2026-09-15); first `release.yml` execution to npm pending engineering-lead trigger (dry-run validated, all gates green locally).
+**Honest remaining gaps (externally budgeted):** pen test report not yet delivered (target 2026-08-25); SOC 2 Type 1 letter not yet delivered (target 2026-09-15). **Internal doc/devEx track:** [GTM roadmap — internal 10/10](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md).
 
 ---
 

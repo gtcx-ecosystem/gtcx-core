@@ -189,20 +189,20 @@ _Stopped after two consecutive **Not Ready** (S4, S5)._
 
 ### 6.1 Intelligence Synthesis
 
-| #   | Finding                                        | Source          | Severity | Status |
-| --- | ---------------------------------------------- | --------------- | -------- | ------ |
-| 1   | README odd-length-hex blocker stale            | P1              | Medium   | Open   |
-| 2   | Package count 18/21/22 drift                   | P1, P4          | Medium   | Open   |
-| 3   | Pen-test vendor not selected                   | P2, P3          | High     | Open   |
-| 4   | SOC 2 Type 1 not delivered                     | P2, P3          | High     | Open   |
-| 5   | 3 npm packages unpublished                     | P3, P5          | High     | Open   |
-| 6   | Rust P2P transport scaffolding                 | P1              | Low      | Open   |
-| 7   | TURBO_TOKEN / TURBO_TEAM missing               | ops:check       | Medium   | Open   |
-| 8   | OPENAI_API_KEY missing (AI codeowner fallback) | ops:check       | Medium   | Open   |
-| 9   | Jurisdiction config not E2E for 5 states       | P3              | High     | Open   |
-| 10  | `ai-eval` not in CI quality gate               | P4              | Low      | Open   |
-| 11  | Verification LOC near ceiling                  | P1              | Low      | Open   |
-| 12  | Trust portal provenance column empty           | trust-portal.md | Medium   | Open   |
+| #   | Finding                                        | Source          | Severity | Status                                                         |
+| --- | ---------------------------------------------- | --------------- | -------- | -------------------------------------------------------------- |
+| 1   | README odd-length-hex blocker stale            | P1              | Medium   | **Closed** (`6456bfa`)                                         |
+| 2   | Package count 18/21/22 drift                   | P1, P4          | Medium   | **Closed** (runbooks + trust portal; `6456bfa`)                |
+| 3   | Pen-test vendor not selected                   | P2, P3          | High     | Open                                                           |
+| 4   | SOC 2 Type 1 not delivered                     | P2, P3          | High     | Open                                                           |
+| 5   | 3 npm packages unpublished                     | P3, P5          | High     | **Closed** (resilience/telemetry/runtime on npm 2026-05-26–27) |
+| 6   | Rust P2P transport scaffolding                 | P1              | Low      | Open                                                           |
+| 7   | TURBO_TOKEN / TURBO_TEAM missing               | ops:check       | Medium   | Open                                                           |
+| 8   | OPENAI_API_KEY missing (AI codeowner fallback) | ops:check       | Medium   | Open                                                           |
+| 9   | Jurisdiction config not E2E for 5 states       | P3              | High     | Open                                                           |
+| 10  | `ai-eval` not in CI quality gate               | P4              | Low      | Open                                                           |
+| 11  | Verification LOC near ceiling                  | P1              | Low      | Open                                                           |
+| 12  | Trust portal provenance column empty           | trust-portal.md | Medium   | Open                                                           |
 
 ### 6.2 Innovation Scan
 

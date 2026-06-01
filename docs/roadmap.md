@@ -60,7 +60,7 @@ This is the canonical roadmap for everything that remains between `gtcx-core` an
 
 **What is done:** Coverage push complete (95% branch thresholds across 14 packages), chaos tests complete, property tests complete, doc-standard gates enforced (252/252 docs valid frontmatter), model cards published, incident drill run, SLOs defined, DR runbook written, Rust groth16 refactored, USSD handlers implemented, adaptive connectivity profiles live, trust portal published to GitHub Pages, deriveKeyPbkdf2 shipped, pen-test RFP drafted.
 
-**What is blocked externally:** rustls-webpki vulns (AWS SDK upstream), pen-test vendor selection, SOC 2 CPA engagement, FIPS boundary reviewer. **What is blocked by user action:** `NPM_TOKEN` org secret for SLSA provenance publish, Zimbabwe pre-submission email send.
+**What is blocked externally:** rustls-webpki vulns (AWS SDK upstream), pen-test vendor selection, SOC 2 CPA engagement, FIPS boundary reviewer. **What is blocked by user action:** Zimbabwe pre-submission email send (human approval). **Internal doc/devEx track:** [gtm-roadmap-10-10-internal-2026-06-01.md](./gtm/gtm-roadmap-10-10-internal-2026-06-01.md).
 
 **What this roadmap covers:** Every remaining item we _can_ ship without an external vendor, plus the AI maturity program, plus the architectural moat.
 

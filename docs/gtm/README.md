@@ -1,22 +1,22 @@
 ---
-title: "GTM Evidence Pack — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'GTM Evidence Pack — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 95
-autonomy_level: "sovereign"
-tier: "critical"
-tags: ["documentation", "gtm"]
-review_cycle: "on-change"
+autonomy_level: 'sovereign'
+tier: 'critical'
+tags: ['documentation', 'gtm']
+review_cycle: 'on-change'
 ---
 
 # GTM Evidence Pack — gtcx-core
 
 **Purpose:** Everything needed to achieve 10/10 bank-grade readiness, in one folder.
 **Audience:** Regulatory sandbox teams, enterprise auditors, compliance reviewers, investors conducting technical due diligence.
-**Last updated:** 2026-05-25
+**Last updated:** 2026-06-01
 
 ---
 
@@ -29,6 +29,16 @@ review_cycle: "on-change"
 **If you're an enterprise customer:** Start with [07-downstream-integration.md](./07-downstream-integration.md).
 
 **If you're the team:** Start with [05-sandbox-submission-guide.md](./05-sandbox-submission-guide.md).
+
+---
+
+## Execution roadmaps
+
+| Document                                                                                                  | What it is                                                                                           |
+| --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [gtm-roadmap-10-10-internal-2026-06-01.md](./gtm-roadmap-10-10-internal-2026-06-01.md)                    | **Internal** path: engineering, DevEx, documentation to customer-visible 10/10 (no external vendors) |
+| [10-10-roadmap-2026-05-25.md](../audit/10-10-roadmap-2026-05-25.md)                                       | **Bank-grade** path: pen test, SOC 2, time gates                                                     |
+| [engagement-readiness-sprint-roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) | Sovereign engagement sprints                                                                         |
 
 ---
 
