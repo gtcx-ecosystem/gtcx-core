@@ -53,7 +53,7 @@
     "typecheck": "turbo run typecheck",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish --provenance",
+    "release": "pnpm version-packages && pnpm install && pnpm build && changeset publish --provenance",
     "docs": "typedoc",
     "docs:check-links": "node ./tools/check-markdown-links.mjs",
     "docs:check-frontmatter": "node ./tools/check-doc-frontmatter.mjs",

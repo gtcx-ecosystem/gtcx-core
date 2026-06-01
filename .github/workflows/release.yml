@@ -2,6 +2,13 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      provenance_republish:
+        description: >-
+          Skip doc/format gates for attestations-only republish (security/build/test gates still run).
+        required: false
+        type: boolean
+        default: false
   push:
     branches:
       - main
@@ -73,6 +80,9 @@ jobs:
         run: pnpm lint
 
       - name: Format check
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         run: pnpm format:check
 
       - name: Type check
@@ -108,9 +118,15 @@ jobs:
           path: artifacts/provenance-manifest.json
 
       - name: Validate markdown links
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         run: pnpm docs:check-links
 
       - name: Validate doc frontmatter
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         run: pnpm docs:check-frontmatter
 
       - name: Validate GA release evidence
@@ -165,6 +181,18 @@ jobs:
         run: cargo test --workspace --lib
         working-directory: rust
 
+      - name: Version packages (changesets)
+        if: github.event_name == 'workflow_dispatch'
+        run: pnpm version-packages
+
+      - name: Install after version bump
+        if: github.event_name == 'workflow_dispatch'
+        run: pnpm install
+
+      - name: Rebuild for publish
+        if: github.event_name == 'workflow_dispatch'
+        run: pnpm build
+
       - name: Configure npm auth
         if: github.event_name == 'workflow_dispatch'
         run: |
@@ -175,7 +203,7 @@ jobs:
 
       - name: Publish packages
         if: github.event_name == 'workflow_dispatch'
-        run: pnpm release
+        run: pnpm exec changeset publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

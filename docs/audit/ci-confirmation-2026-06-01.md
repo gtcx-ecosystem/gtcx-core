@@ -51,12 +51,15 @@ CI on `main` may use PR-scoped frontmatter check; local full-tree scan fails. Tr
 | Pipeline                    | `pnpm release` uses `changeset publish --provenance`; `release.yml` has `id-token: write` |
 | Tooling                     | `tools/check-npm-provenance.mjs` — `--strict` after publish in `release.yml`              |
 
-**To populate registry attestations:** apply changeset `.changeset/npm-provenance-republish.md`, push `main`, then:
+**To populate registry attestations:** version packages are bumped on `main`; then:
 
 ```bash
-gh workflow run release.yml --repo gtcx-ecosystem/gtcx-core
+gh workflow run release.yml --repo gtcx-ecosystem/gtcx-core -f provenance_republish=true
+# after workflow completes (~20 min):
 pnpm provenance:check-npm --strict
 ```
+
+**2026-06-01 run [26753651033](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26753651033):** failed at `format:check` before publish — no packages published. Re-run with `provenance_republish=true` (skips doc/format gates; build/test/security gates still run).
 
 ## Internal 10/10 signoff
 
