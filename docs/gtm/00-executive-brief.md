@@ -94,11 +94,13 @@ See [01-security-posture.md](./01-security-posture.md) for the complete assessme
 
 ## What's Not Done (Honestly)
 
-1. **External penetration test** — RFP drafted, 5-vendor longlist identified, awaiting selection (P1)
-2. **SOC 2 Type 1** — Readiness prep complete (78-85% TSC), CPA engagement pending (P1)
-3. **SLSA provenance attestations on npm** — 21/21 packages published; registry attestations often null; follow-up per release (P2)
-4. **Upstream rustls-webpki fix** — 3 RUSTSEC advisories mitigated via CI exceptions; AWS SDK upstream fix pending (P2)
-5. **DR runbook drill** — Runbook complete, never drilled; first drill scheduled Q2 (P2)
-6. **ADR-012 Stage 1** — Stage 0 complete (47 predicates, migration helper); cross-repo handoff delivered to gtcx-protocols (P2)
+**In this repo (library):** Nothing blocking S1 developer adoption. npm Sigstore **21/21 @ 3.1.4** (2026-06-01).
 
-These represent 2-3 weeks of coordination plus engineering execution. The code is ready. The governance is ready. The remaining work is external validation and operational follow-through.
+**Ecosystem / sovereign pilot (owned cross-repo — see [16-ecosystem-gtm-alignment](./16-ecosystem-gtm-alignment.md)):**
+
+1. **External penetration test on the live stack** — scope and RFP in [gtcx-infrastructure](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/regulatory/pentest-scope-rfp.md); **EXT-INF-002** SOW signature pending
+2. **SOC 2 Type I** — readiness checklist in infrastructure; CPA engagement; **not** on African sandbox critical path ([Global South plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/plans/global-south-10x-plan.md))
+3. **ZWCMP / Zimbabwe regulator motion** — canonical email: [`sandbox-intro-email-template.md`](./sandbox-intro-email-template.md); **EXT-INF-013–015**; human send not executed
+4. **Live testnet + DR proof** — gtcx-infrastructure Global South Gap 1 (regulators grade running systems)
+
+ADR-012 Stage 0 is complete in core; protocol ratification continues in `gtcx-protocols`.

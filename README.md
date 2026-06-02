@@ -35,13 +35,16 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 [Engagement Readiness Sprint Roadmap (2026-05-22)](./docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DRC). Closes the customer-visible readiness gap.
 
-### Remaining blockers before production release
+### Remaining blockers before sovereign pilot / production release
 
-**External (budgeted, Sprint 4 kickoff per roadmap above):**
+**External clearance (XC) — owned with [gtcx-infrastructure GTM](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/README.md), not in this repo alone:**
 
-- external security review / pen test ($8–25K, 4–6 weeks)
-- SOC 2 Type 1 attestation ($15–45K, 8–10 weeks)
-- first sandbox regulator response (Zimbabwe email staged; Sprint 3 send)
+- regional pen-test on **live stack** ($8–15K, 4–6 weeks) — [EXT-INF-002](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/audit/external-dependencies-register-2026-05-31.md)
+- ZWCMP pilot owner + DPA (EXT-INF-013–015)
+- testnet deploy + DR proof ([Global South plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/plans/global-south-10x-plan.md))
+- Zimbabwe sandbox intro — [`docs/gtm/sandbox-intro-email-template.md`](./docs/gtm/sandbox-intro-email-template.md) (human send)
+
+**Bank track (optional, US/EU):** SOC 2 Type I ($15–45K). See [ecosystem GTM alignment](./docs/gtm/16-ecosystem-gtm-alignment.md) and [GTM reality check 2026-06-02](./docs/gtm/gtm-reality-check-2026-06-02.md).
 
 **Internal (known, tracked):**
 

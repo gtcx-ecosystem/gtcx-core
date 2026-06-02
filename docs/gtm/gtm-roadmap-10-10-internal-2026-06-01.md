@@ -127,11 +127,11 @@ Canonical spec: [ai-evaluation-pipeline.md](../specs/ai-evaluation-pipeline.md) 
 
 **Highest stage where all dimensions are Ready:** **S1 MVP** (developer integrates via npm in < 1 day).
 
-**S2 Pilot Ready:** **Partially Ready** — technical and npm surface yes; **trust** lacks delivered pen-test report (sovereign procurement will ask).
+**S2 Pilot Ready (ecosystem / sovereign):** **Partially Ready** — library + npm provenance yes; **XC blockers** in gtcx-infrastructure (pen-test EXT-INF-002, pilot owner EXT-INF-013, live testnet, DPA EXT-INF-014).
 
-**S3 GA / S4 Enterprise:** **Not Ready** — SOC 2 letter, pen test, standard enterprise commercial wrapper for the _foundation library_ (buyers adopt via downstream products).
+**S3 GA / S4 Enterprise:** **Not Ready** — SOC 2 letter, pen-test report on stack, standard commercial wrapper for deployable product (not library-only).
 
-Full assessment: produced 2026-06-01 in session (see repo chat log) — refresh quarterly.
+Full assessment: [gtm-reality-check-2026-06-02.md](./gtm-reality-check-2026-06-02.md) · Cross-repo ownership: [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md) · Infrastructure strategy: [Global South 10/10](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/plans/global-south-10x-plan.md).
 
 ---
 

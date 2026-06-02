@@ -33,11 +33,13 @@ review_cycle: 'on-change'
 
 **How to apply to a regulatory innovation sandbox with gtcx-core as the cryptographic foundation.**
 
+> **Cross-repo:** The **10-document regulator package** (architecture, data residency, IRP, board resolutions) is assembled from **[gtcx-infrastructure `docs/gtm/sandbox-application/`](https://github.com/gtcx-ecosystem/gtcx-infrastructure/tree/main/docs/gtm/sandbox-application)** via `assemble-sandbox-evidence.sh`. This guide covers **core-specific** evidence and outreach templates. Full sequencing: [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md).
+
 ---
 
 ## The Strategy
 
-The biggest lever is the **pre-submission meeting**. Sandbox teams will tell you exactly what they need. This guide prepares you for that meeting and provides everything they're likely to ask for.
+The biggest lever is the **pre-submission meeting**. Sandbox teams will tell you exactly what they need. Use the **[canonical sandbox email template](./sandbox-intro-email-template.md)** (not superseded per-country drafts `09`–`13`). Strategy and costs follow the **[Global South 10/10 plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/plans/global-south-10x-plan.md)** — regional pen-test ($8–15K), not US bank FFIEC track unless explicitly chosen.
 
 ---
 

@@ -16,7 +16,11 @@ review_cycle: 'on-change'
 
 **Purpose:** Everything needed to achieve 10/10 bank-grade readiness, in one folder.
 **Audience:** Regulatory sandbox teams, enterprise auditors, compliance reviewers, investors conducting technical due diligence.
-**Last updated:** 2026-06-01
+**Last updated:** 2026-06-02
+
+**Ecosystem alignment (canonical):** [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md) — XC blockers, pen-test, SOC 2, and Zimbabwe outreach are owned with [gtcx-infrastructure GTM](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/README.md) per the [Global South 10/10 plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/plans/global-south-10x-plan.md).
+
+**Latest stage assessment:** [gtm-reality-check-2026-06-02.md](./gtm-reality-check-2026-06-02.md) — **S1 Ready** (library); sovereign pilot **S2 Partially Ready** (XC blockers in infrastructure).
 
 ---
 
@@ -44,11 +48,14 @@ Full index: [`inbound-tickets/README.md`](./inbound-tickets/README.md).
 
 ## Execution roadmaps
 
-| Document                                                                                                  | What it is                                                                                           |
-| --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [gtm-roadmap-10-10-internal-2026-06-01.md](./gtm-roadmap-10-10-internal-2026-06-01.md)                    | **Internal** path: engineering, DevEx, documentation to customer-visible 10/10 (no external vendors) |
-| [10-10-roadmap-2026-05-25.md](../audit/10-10-roadmap-2026-05-25.md)                                       | **Bank-grade** path: pen test, SOC 2, time gates                                                     |
-| [engagement-readiness-sprint-roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) | Sovereign engagement sprints                                                                         |
+| Document                                                                                                      | What it is                                                      |
+| ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [gtm-roadmap-10-10-internal-2026-06-01.md](./gtm-roadmap-10-10-internal-2026-06-01.md)                        | **Internal** path: engineering, DevEx, documentation (complete) |
+| [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md)                                              | **Cross-repo** ownership: core vs infrastructure vs protocols   |
+| [gtm-reality-check-2026-06-02.md](./gtm-reality-check-2026-06-02.md)                                          | **GTM stages S0–S6** per `GTM.md` framework                     |
+| [10-10-roadmap-2026-05-25.md](../audit/10-10-roadmap-2026-05-25.md)                                           | **Bank-grade** path: pen test, SOC 2 (US/EU bank track)         |
+| [engagement-readiness-sprint-roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)     | Sovereign engagement sprints                                    |
+| [gtcx-infrastructure GTM](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/README.md) | Sandbox ZIP, pen-test RFP, IRP, EXT-INF register                |
 
 ---
 
@@ -72,19 +79,20 @@ Full index: [`inbound-tickets/README.md`](./inbound-tickets/README.md).
 | 13  | [Email: Ghana](./13-pre-submission-email-ghana.md)                     | BoG sandbox pre-submission email draft                            |
 | 14  | [ADR-012 Ecosystem Integration](./14-adr-012-ecosystem-integration.md) | Entity-tier verification extension for regulators and enterprise  |
 | 15  | [SLSA Provenance Guide](./15-slsa-provenance-guide.md)                 | How to verify supply-chain integrity of @gtcx packages            |
+| 16  | [Ecosystem GTM Alignment](./16-ecosystem-gtm-alignment.md)             | Cross-repo blocker ownership (infra vs core)                      |
 
 ---
 
 ## Current Readiness Score
 
-**8.9 / 10** as of 2026-05-25.
+**Library (gtcx-core):** **9.5/10 internal** · **8.9/10 bank-grade composite** (2026-05-27 master audit) — engineering track complete; **XC blockers** are external.
 
-| Dimension                   | Score | Status                                                                    |
-| --------------------------- | ----- | ------------------------------------------------------------------------- |
-| Code quality & architecture | 9.5   | 336 workproof tests, property-based tests, 21 CI gates passing            |
-| Security controls           | 8.0   | FIPS verified; cargo audit passes with documented exceptions; pen-test P1 |
-| Supply chain                | 9.0   | Exact-version pinning, SBOM, npm scope claimed, SLSA provenance ready     |
-| Compliance documentation    | 9.0   | GDPR, PCI-DSS, SOX, ISO 27001, FIPS documented; SOC 2 Type 1 pending      |
-| Production readiness        | 8.5   | Performance budgets, provenance manifest, publish window ready            |
+| Dimension                   | Score      | Status                                                                                |
+| --------------------------- | ---------- | ------------------------------------------------------------------------------------- |
+| Code quality & architecture | 9.5        | 2,360+ tests; 21 CI gates; internal 10/10 engineering complete                        |
+| Security controls           | 8.5        | FIPS verified; STRIDE matrix; **pen-test on live stack** = infrastructure EXT-INF-002 |
+| Supply chain                | 9.5        | **21/21** npm Sigstore @ 3.1.4 train; downstream consumers pinned                     |
+| Compliance documentation    | 9.0        | Library-scope GDPR/PCI/SOX/FIPS; SOC 2 Type I = infrastructure + CPA                  |
+| GTM / sovereign pilot       | S2 partial | See [gtm-reality-check-2026-06-02](./gtm-reality-check-2026-06-02.md)                 |
 
-**Remaining 1.1 points:** External pen-test engagement, SOC 2 Type 1 fieldwork, SLSA provenance publish, upstream rustls-webpki fix, DR runbook drill.
+**Remaining for sovereign S2 (not owned in this repo):** pen-test report, pilot owner, DPA, live testnet proof, regulator send — [16-ecosystem-gtm-alignment](./16-ecosystem-gtm-alignment.md).

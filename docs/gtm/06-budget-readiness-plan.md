@@ -33,7 +33,9 @@ review_cycle: 'on-change'
 
 **Current score:** 8.9/10
 **Target:** 10/10 bank-grade readiness
-**Budget:** $0 (excluding optional $2-5K bug bounty reserve and $10-31K pen-test)
+**Budget:** $0 in **this repo** for library evidence. **Ecosystem XC costs** (pen-test $8–15K regional, infra ~$800/mo testnet, legal) are budgeted in [gtcx-infrastructure Global South plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/plans/global-south-10x-plan.md).
+
+**Alignment:** [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md)
 
 ---
 
@@ -67,9 +69,33 @@ review_cycle: 'on-change'
 | Regulator email renders complete (4 markets)        | +0.0 (gtm)   | `30996c6` |
 | SLSA provenance root cause identified (org policy)  | +0.0 (sec)   | `1f4a21b` |
 
+## What's Done (library supply chain — 2026-06-01)
+
+| Item                             | Evidence                                                                                                                        |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| npm Sigstore 21/21 @ 3.1.4 train | Release [26778909174](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26778909174); `pnpm provenance:check-npm:strict` |
+| Downstream npm pinning           | `gtcx-protocols`, `gtcx-infrastructure/replay-protection`                                                                       |
+
 ---
 
-## What Remains (9.4 → 10.0)
+## What Remains (library vs ecosystem)
+
+### gtcx-core only ($0)
+
+See Tier 1–3 tables below (fuzz campaigns, npm scope housekeeping).
+
+### Ecosystem XC (not $0 — infrastructure-owned)
+
+| Item                                | Cost       | Owner            | Reference                                                                                                                                   |
+| ----------------------------------- | ---------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Regional pen-test (live stack)      | $8–15K     | GTM + infra      | EXT-INF-002; [pentest-scope-rfp](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/regulatory/pentest-scope-rfp.md)  |
+| Testnet deploy + DR proof           | ~$800/mo   | infra            | Global South Gap 1                                                                                                                          |
+| SOC 2 Type I (bank track)           | $15–45K    | quality-evidence | [soc2-readiness-checklist](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/regulatory/soc2-readiness-checklist.md) |
+| Zimbabwe sandbox send + pilot legal | $0–5K fees | GTM + legal      | EXT-INF-013–015; [sandbox-intro template](./sandbox-intro-email-template.md)                                                                |
+
+---
+
+## What Remains (9.4 → 10.0 library score)
 
 ### Tier 1 — Can do this week ($0)
 
