@@ -23,10 +23,16 @@ review_cycle: 'on-change'
 
 ## Phase B deliverables (EAP-02)
 
-- Admin API: issue / revoke / list fingerprints
-- Tenant + client registry
-- AWS Secrets Manager writer (`eap/clients/{client_id}`)
-- Redacted `eap-issuance-*.json` emitter
+Package: **`packages/eap`** (`@gtcx/eap`) — skeleton shipped:
+
+- `createEapAdminService()` — issue / revoke / list fingerprints
+- In-memory tenant + client registry
+- `StubSecretWriter` (replace with AWS SDK in EAP-03)
+- Redacted issuance evidence builder (`gtcx.eap.issuance.v1`)
+
+```bash
+pnpm --filter @gtcx/eap test
+```
 
 ## Out of scope here
 

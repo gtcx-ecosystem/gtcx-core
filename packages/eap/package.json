@@ -1,0 +1,50 @@
+{
+  "name": "@gtcx/eap",
+  "version": "0.1.0",
+  "description": "External Access Plane — credential issuance control plane (Protocol 23 Phase B)",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./admin": {
+      "types": "./dist/admin.d.ts",
+      "import": "./dist/admin.mjs",
+      "require": "./dist/admin.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@gtcx/tsup-config": "workspace:*",
+    "@gtcx/typescript-config": "workspace:*",
+    "@types/node": "^22.10.0",
+    "tsup": "^8.0.1",
+    "typescript": "^6.0.0",
+    "vitest": "^4.1.5"
+  },
+  "keywords": [
+    "gtcx",
+    "eap",
+    "credentials",
+    "security"
+  ],
+  "license": "MIT",
+  "sideEffects": false
+}

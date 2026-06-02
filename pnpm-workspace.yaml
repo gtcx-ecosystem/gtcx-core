@@ -18,6 +18,7 @@ packages:
 
   # Application services
   - 'packages/services'
+  - 'packages/eap'
 
   # Sync and API
   - 'packages/sync'
