@@ -2,6 +2,7 @@ mod bulletproofs;
 mod commitment;
 mod error;
 mod groth16;
+mod property_based;
 mod schnorr;
 mod serialization;
 mod types;

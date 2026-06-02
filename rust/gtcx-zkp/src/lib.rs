@@ -41,8 +41,10 @@ pub use error::{Result, ZkpError};
 pub use groth16::{
     groth16_generate_keys, groth16_prove_asset_ownership, groth16_prove_commodity_origin,
     groth16_prove_gci_threshold, groth16_prove_location_region, groth16_verify,
-    sample_commodity_origin,
+    sample_asset_ownership, sample_commodity_origin, sample_location_region,
 };
+#[cfg(test)]
+pub use groth16::sample_diamond_origin;
 pub use schnorr::{
     schnorr_attribute_hash, schnorr_prove_identity_attribute, schnorr_verify_identity_attribute,
 };

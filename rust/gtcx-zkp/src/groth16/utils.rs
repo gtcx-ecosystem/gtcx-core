@@ -85,25 +85,41 @@ pub(crate) fn sha256_digest(data: &[u8]) -> Result<[u8; DIGEST_BYTES]> {
     Ok(out)
 }
 
+/// Sample witness data for asset ownership circuit tests and KAT generation.
 pub struct AssetOwnershipSample {
-    pub(crate) asset_id: [u8; ASSET_ID_BYTES],
-    pub(crate) owner_hash: [u8; OWNER_HASH_BYTES],
-    pub(crate) randomness: [u8; RANDOMNESS_BYTES],
-    pub(crate) ownership_root: [u8; DIGEST_BYTES],
-    pub(crate) merkle_path: Path<AssetOwnershipMerkleConfig>,
-    pub(crate) asset_commitment: [u8; DIGEST_BYTES],
+    /// Unique asset identifier.
+    pub asset_id: [u8; ASSET_ID_BYTES],
+    /// Hash of the asset owner.
+    pub owner_hash: [u8; OWNER_HASH_BYTES],
+    /// Randomness for commitment blinding.
+    pub randomness: [u8; RANDOMNESS_BYTES],
+    /// Merkle root of approved ownership tree.
+    pub ownership_root: [u8; DIGEST_BYTES],
+    /// Merkle path proving asset membership.
+    pub merkle_path: Path<AssetOwnershipMerkleConfig>,
+    /// Expected asset commitment.
+    pub asset_commitment: [u8; DIGEST_BYTES],
 }
 
+/// Sample witness data for location region circuit tests and KAT generation.
 pub struct LocationRegionSample {
-    pub(crate) lat: u64,
-    pub(crate) lon: u64,
-    pub(crate) timestamp: u64,
-    pub(crate) randomness: [u8; RANDOMNESS_BYTES],
-    pub(crate) bounds: [u64; 4],
-    pub(crate) region_hash: [u8; DIGEST_BYTES],
-    pub(crate) location_commitment: [u8; DIGEST_BYTES],
+    /// Latitude witness value.
+    pub lat: u64,
+    /// Longitude witness value.
+    pub lon: u64,
+    /// Timestamp witness value.
+    pub timestamp: u64,
+    /// Randomness for location commitment blinding.
+    pub randomness: [u8; RANDOMNESS_BYTES],
+    /// GPS bounds: [min_lat, max_lat, min_lon, max_lon].
+    pub bounds: [u64; 4],
+    /// Expected region hash (SHA-256 of bounds).
+    pub region_hash: [u8; DIGEST_BYTES],
+    /// Expected location commitment.
+    pub location_commitment: [u8; DIGEST_BYTES],
 }
 
+/// Generate a sample asset ownership witness for testing and KAT generation.
 pub fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
     let asset_id = [1u8; ASSET_ID_BYTES];
     let owner_hash = sha256_digest(b"owner-1")?;
@@ -157,6 +173,7 @@ pub fn sample_asset_ownership() -> Result<AssetOwnershipSample> {
     })
 }
 
+/// Generate a sample location region witness for testing and KAT generation.
 pub fn sample_location_region() -> Result<LocationRegionSample> {
     let lat = 15u64;
     let lon = 35u64;

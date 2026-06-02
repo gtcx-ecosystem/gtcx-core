@@ -16,6 +16,13 @@ fn test_groth16_gci_threshold_proof_valid() {
 }
 
 #[test]
+fn test_groth16_gci_threshold_boundary_score_eq_threshold_passes() {
+    let keys = groth16_generate_keys(Groth16CircuitType::GciThreshold).unwrap();
+    let proof = groth16_prove_gci_threshold(80, 80, &keys).unwrap();
+    assert!(groth16_verify(&proof).unwrap());
+}
+
+#[test]
 fn test_groth16_gci_threshold_invalid_score() {
     let keys = groth16_generate_keys(Groth16CircuitType::GciThreshold).unwrap();
     let err = groth16_prove_gci_threshold(10, 80, &keys).unwrap_err();
@@ -28,6 +35,47 @@ fn test_groth16_gci_threshold_tampered_public_inputs_fail() {
     let mut proof = groth16_prove_gci_threshold(95, 80, &keys).unwrap();
     proof.public_inputs[0] = Fr::from(1u64);
     assert!(!groth16_verify(&proof).unwrap());
+}
+
+#[test]
+fn test_asset_ownership_wrong_commitment_fails() {
+    let sample = sample_asset_ownership().unwrap();
+    let mut wrong_commitment = sample.asset_commitment;
+    wrong_commitment[0] ^= 0xFF;
+    let circuit = AssetOwnershipCircuit {
+        asset_id: Some(sample.asset_id),
+        asset_commitment: Some(wrong_commitment),
+        owner_hash: Some(sample.owner_hash),
+        randomness: Some(sample.randomness),
+        ownership_root: Some(sample.ownership_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail with wrong asset commitment"
+    );
+}
+
+#[test]
+fn test_asset_ownership_wrong_asset_id_fails() {
+    let sample = sample_asset_ownership().unwrap();
+    let wrong_asset_id = [99u8; 32];
+    let circuit = AssetOwnershipCircuit {
+        asset_id: Some(wrong_asset_id),
+        asset_commitment: Some(sample.asset_commitment),
+        owner_hash: Some(sample.owner_hash),
+        randomness: Some(sample.randomness),
+        ownership_root: Some(sample.ownership_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail with wrong asset_id (Merkle path invalid)"
+    );
 }
 
 #[test]
@@ -47,6 +95,68 @@ fn test_asset_ownership_constraints_satisfied() {
         let unsatisfied = cs.which_is_unsatisfied().unwrap();
         panic!("constraints unsatisfied: {unsatisfied:?}");
     }
+}
+
+#[test]
+fn test_location_region_lat_below_min_fails() {
+    let sample = sample_location_region().unwrap();
+    let circuit = LocationRegionCircuit {
+        lat: Some(5u64), // below min_lat = 10
+        lon: Some(sample.lon),
+        timestamp: Some(sample.timestamp),
+        randomness: Some(sample.randomness),
+        bounds: Some(sample.bounds),
+        region_hash: Some(sample.region_hash),
+        location_commitment: Some(sample.location_commitment),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail when lat < min_lat"
+    );
+}
+
+#[test]
+fn test_location_region_lon_above_max_fails() {
+    let sample = sample_location_region().unwrap();
+    let circuit = LocationRegionCircuit {
+        lat: Some(sample.lat),
+        lon: Some(45u64), // above max_lon = 40
+        timestamp: Some(sample.timestamp),
+        randomness: Some(sample.randomness),
+        bounds: Some(sample.bounds),
+        region_hash: Some(sample.region_hash),
+        location_commitment: Some(sample.location_commitment),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail when lon > max_lon"
+    );
+}
+
+#[test]
+fn test_location_region_wrong_region_hash_fails() {
+    let sample = sample_location_region().unwrap();
+    let mut wrong_hash = sample.region_hash;
+    wrong_hash[0] ^= 0xFF;
+    let circuit = LocationRegionCircuit {
+        lat: Some(sample.lat),
+        lon: Some(sample.lon),
+        timestamp: Some(sample.timestamp),
+        randomness: Some(sample.randomness),
+        bounds: Some(sample.bounds),
+        region_hash: Some(wrong_hash),
+        location_commitment: Some(sample.location_commitment),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail with wrong region_hash"
+    );
 }
 
 #[test]
@@ -287,6 +397,227 @@ fn test_commodity_origin_boundary_lat_eq_min_passes() {
     assert!(
         cs.is_satisfied().unwrap(),
         "expected constraints to pass when lat == min_lat"
+    );
+}
+
+#[test]
+fn test_commodity_origin_gps_lon_below_min_fails() {
+    let sample = sample_commodity_origin().unwrap();
+    let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
+        mine_id: Some(sample.mine_id),
+        lat: Some(sample.lat),
+        lon: Some(25u64), // below min_lon = 30
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(sample.secondary_metric),
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
+        region_hash: Some(sample.region_hash),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(sample.secondary_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail when lon < min_lon"
+    );
+}
+
+#[test]
+fn test_commodity_origin_gps_lon_above_max_fails() {
+    let sample = sample_commodity_origin().unwrap();
+    let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
+        mine_id: Some(sample.mine_id),
+        lat: Some(sample.lat),
+        lon: Some(45u64), // above max_lon = 40
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(sample.secondary_metric),
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
+        region_hash: Some(sample.region_hash),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(sample.secondary_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail when lon > max_lon"
+    );
+}
+
+#[test]
+fn test_commodity_origin_secondary_below_min_fails() {
+    let sample = sample_commodity_origin().unwrap();
+    let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
+        mine_id: Some(sample.mine_id),
+        lat: Some(sample.lat),
+        lon: Some(sample.lon),
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(400u64), // below min_secondary = 500
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
+        region_hash: Some(sample.region_hash),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(sample.secondary_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail when secondary_metric < min_secondary"
+    );
+}
+
+#[test]
+fn test_commodity_origin_wrong_secondary_commitment_fails() {
+    let sample = sample_commodity_origin().unwrap();
+    let mut wrong_commitment = sample.secondary_commitment;
+    wrong_commitment[0] ^= 0xFF;
+    let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
+        mine_id: Some(sample.mine_id),
+        lat: Some(sample.lat),
+        lon: Some(sample.lon),
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(sample.secondary_metric),
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
+        region_hash: Some(sample.region_hash),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(wrong_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail with wrong secondary commitment"
+    );
+}
+
+#[test]
+fn test_commodity_origin_wrong_merkle_path_fails() {
+    let sample = sample_commodity_origin().unwrap();
+    // Use a different mine_id so the leaf hash doesn't match the path
+    let wrong_mine_id = [99u8; 32];
+    let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
+        mine_id: Some(wrong_mine_id),
+        lat: Some(sample.lat),
+        lon: Some(sample.lon),
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(sample.secondary_metric),
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
+        region_hash: Some(sample.region_hash),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(sample.secondary_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        !cs.is_satisfied().unwrap(),
+        "expected constraints to fail with wrong mine_id (Merkle path invalid)"
+    );
+}
+
+#[test]
+fn test_commodity_origin_boundary_lon_eq_min_passes() {
+    let sample = sample_commodity_origin().unwrap();
+    let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
+        mine_id: Some(sample.mine_id),
+        lat: Some(sample.lat),
+        lon: Some(30u64), // exactly min_lon
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(sample.secondary_metric),
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
+        region_hash: Some(sample.region_hash),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(sample.secondary_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        cs.is_satisfied().unwrap(),
+        "expected constraints to pass when lon == min_lon"
+    );
+}
+
+#[test]
+fn test_commodity_origin_boundary_lat_eq_max_passes() {
+    let sample = sample_commodity_origin().unwrap();
+    let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
+        mine_id: Some(sample.mine_id),
+        lat: Some(20u64), // exactly max_lat
+        lon: Some(sample.lon),
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(sample.secondary_metric),
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
+        region_hash: Some(sample.region_hash),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(sample.secondary_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    assert!(
+        cs.is_satisfied().unwrap(),
+        "expected constraints to pass when lat == max_lat"
     );
 }
 

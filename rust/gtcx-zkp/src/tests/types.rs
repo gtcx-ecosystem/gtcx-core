@@ -1,5 +1,6 @@
 use crate::error::ZkpError;
-use crate::types::{CircuitType, Witness, MAX_WITNESS_SIZE};
+use crate::types::{zk_rng, CircuitType, Witness, MAX_WITNESS_SIZE};
+use ark_std::rand::RngCore;
 
 #[test]
 fn test_circuit_type_tag_roundtrip() {
@@ -70,4 +71,18 @@ fn test_witness_oversized_rejected() {
 fn test_witness_max_size_accepted() {
     let data = vec![0u8; MAX_WITNESS_SIZE];
     assert!(Witness::new(CircuitType::Provenance, data).is_ok());
+}
+
+#[test]
+fn test_zk_rng_non_deterministic() {
+    let mut rng1 = zk_rng();
+    let mut rng2 = zk_rng();
+    let mut bytes1 = [0u8; 32];
+    let mut bytes2 = [0u8; 32];
+    rng1.fill_bytes(&mut bytes1);
+    rng2.fill_bytes(&mut bytes2);
+    assert_ne!(
+        bytes1, bytes2,
+        "zk_rng() must produce different seeds on each call"
+    );
 }
