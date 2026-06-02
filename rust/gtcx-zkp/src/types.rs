@@ -391,8 +391,10 @@ impl Config for AssetOwnershipMerkleConfig {
 }
 
 pub(crate) fn zk_rng() -> ark_std::rand::rngs::StdRng {
-    use ark_std::rand::SeedableRng;
-    ark_std::rand::rngs::StdRng::seed_from_u64(42)
+    use ark_std::rand::{RngCore, SeedableRng};
+    let mut seed = [0u8; 32];
+    ark_std::rand::rngs::OsRng.fill_bytes(&mut seed);
+    ark_std::rand::rngs::StdRng::from_seed(seed)
 }
 
 pub(crate) fn ristretto_point_from_bytes(bytes: [u8; COMMITMENT_BYTES]) -> Result<RistrettoPoint> {
