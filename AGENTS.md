@@ -49,7 +49,12 @@ Before making any code changes, architectural decisions, or recommendations, com
 
 ### Phase 5: Attest & Begin (30 sec)
 14. Summarize context in 3–5 sentences
-15. Add attestation block to commit/PR:
+15. **Phase 5.4 — Select next work (Protocol 22):**
+    - Read `docs/operations/agent-work-selection.md`
+    - Run `npm run agent:next-work`
+    - Announce the selected dimension/milestone and begin implementation
+    - **Never ask the operator which milestone to pick when the roadmap exists**
+16. Add attestation block to commit/PR:
 ```markdown
 ## Agent Context Attestation
 - [x] Phase 1: Baseline loaded
@@ -57,6 +62,7 @@ Before making any code changes, architectural decisions, or recommendations, com
 - [x] Phase 3: Current state discovered
 - [x] Phase 4: Persona & frame selected
 - [x] Phase 5: Context attested
+- [x] Phase 5.4: Next work selected (<DIM> <MILESTONE>) via Protocol 22
 ```
 
 ### Context Refresh (every 2 hours or task switch)
@@ -178,6 +184,25 @@ pnpm bundle:check-budgets
 
 ---
 
+## 7.5 Agent Work Selection (Protocol 22) — MANDATORY
+
+Agents must not ask the operator what to build next when the 10/10 cryptographic defensibility roadmap exists.
+
+| Resource | Path |
+|----------|------|
+| Protocol | `gtcx-docs/docs/governance/protocols/22-agent-work-selection/protocol.md` |
+| Manifest | `docs/operations/agent-work-selection.md` |
+| Command | `npm run agent:next-work` |
+
+1. At session start (after Phase 3), run `npm run agent:next-work` and implement the returned milestone.
+2. Critical-path dimensions (D1, D6) outrank non-critical polish when scores are tied.
+3. External-blocked dimensions (D8, D9) must not be started without explicit human authorization.
+4. In `development` frame, skip `evidence-capture`; take the next automatable code/docs milestone.
+5. Escalate only for true blockers — not for prioritization.
+6. Refresh `.baseline/memory/session.md` after each completed milestone.
+
+---
+
 ## 8. Commit Style
 
 ```
@@ -264,6 +289,53 @@ To run any forensic audit on this repo (master-audit, full-audit, 10-10-roadmap,
 5. Write the output to the path the command specifies (typically `docs/audit/<command>-<YYYY-MM-DD>.md`).
 
 The audit registry is provider-agnostic — the same prompts work for Claude, Codex, Gemini, Kimi, Deepseek, Grok, etc.
+
+## Credentials: system-of-record + ownership split (cross-repo)
+
+**Canonical policy:** `gtcx-docs/docs/governance/protocols/19-agent-credential-access/protocol.md` (see “System-of-Record and Operational Ownership Split”).
+
+- **System-of-record (SoR)**: `gtcx-agentic` Baseline vault (shared provider creds + audited access)
+- **Runtime usage owner**: product repo (e.g. `gtcx-intelligence`) owns its runtime secrets
+- **CI/automation owner**: `gtcx-infrastructure` owns org automation secrets/policy
+- **Contracts only**: `gtcx-protocols` defines env var names, redaction rules, and artifact paths/globs
+
+**Credentialed evidence packs:** run either via vault injection on a dev laptop or in infra-owned CI; write redacted JSON evidence only (no raw secrets).
+
+## Execute roadmap (any LLM, any repo)
+
+Command: **`execute-roadmap`** (not `roadmap`).
+
+1. Read `../gtcx-docs/tools/roadmap/roadmap-framework/AGENT-START.md`
+2. Read `commands/execute-roadmap.md` and `prompts/roadmap/roadmap-reconcile-execute-prompt.md`
+3. Update `docs/strategy/execution-roadmap.md` or `docs/audit/execution-roadmap.md`; execute until active phase done
+4. Quick: `prompts/shareable/execute-roadmap-prompt-RUN.md`
+
+Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, etc.
+
+## Cross-repo coordination (Protocol 24)
+
+**Canonical policy:** [Protocol 24 — Cross-Repo Coordination](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/24-cross-repo-coordination/protocol.md)  
+**Complements:** [Protocol 22 — Agent Work Selection](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/protocol.md) (what to work on next).
+
+When a story is **blocked on a sibling repo** or you **hand off** cross-repo work, follow these five steps in order:
+
+| Step | Action |
+| ---- | ------ |
+| **1. Ack** | Read open handoffs: `baseline-os/workstream/coordination/coordination-report-latest.md` (if present) and any `from-*` / `to-*` tickets naming this repo. Reply with `outbound-ack` template when you receive a durable inbound. |
+| **2. Roadmap** | Record ticket IDs and blocker repo in `docs/audit/auto-dev-state.md`, `.baseline/memory/dependencies.md`, and/or `docs/audit/agent-work-pointer.md` (if used). Do not leave blockers chat-only. |
+| **3. Inbound doc** | File a durable handoff: `docs/gtm/inbound-tickets/from-<this-repo>-<topic>-YYYY-MM-DD.md` or `docs/coordination/<initiative>-coordination.md` ([template](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/reference/templates/agents/3-structure/coordination.md)). |
+| **4. Hub if P0** | Ecosystem-critical path: from `baseline-os`, `pnpm ecosystem:repo:report-work --repo=<repo> --item="..." --status=blocked`. Use `gtcx-docs/docs/gtm/inbound-tickets/` only when the **docs hub** is the coordination witness (releases, standards). |
+| **5. No duplicate** | Link [deployment-proof-index](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/audit/evidence/deployment-proof-index.md) and protocol contracts — **do not** copy harness YAML, evidence indexes, or normative protocol text into product repos. |
+
+**Not in this repo:** inbound archive SoR for ecosystem-wide weekly reports — that stays **`baseline-os`** (`workstream/coordination/`).
+
+**Evidence paths (link only):** production smoke and EAP issuance artifacts live in owning repos per deployment-proof-index (e.g. `gtcx-intelligence/docs/audit/evidence/`).
+
+## Claude-Specific Notes
+
+- Session-start protocol from `~/.claude/CLAUDE.md` applies: read `DESIGN_BAR.md` and `AI_NATIVE_PATTERNS.md` before UI work.
+- Reject conventional UI anti-patterns: AI sidebar, AI tab, "Run AI" buttons, blank forms, dashboard-as-report.
+- No emojis, no preamble, no time estimates, lead with the answer.
 <!-- AGENT-SYNC:END -->
 
 ## Coordination Contract
