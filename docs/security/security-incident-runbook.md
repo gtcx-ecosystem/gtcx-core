@@ -1,18 +1,19 @@
 ---
-title: "Security Incident Response Runbook"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Security Incident Response Runbook'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "security"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'security']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Security Incident Runbook'
 status: 'current'
 date: '2026-05-17'
@@ -21,11 +22,12 @@ role: 'crypto-security-engineer'
 tier: 'critical'
 tags: ['docs', 'security']
 review_cycle: 'quarterly'
+
 ---
 
 # Security Incident Response Runbook
 
-This runbook governs internal response when a security incident is reported against `gtcx-core`. The reporter-facing disclosure policy is in [`SECURITY.md`](../../SECURITY.md). This document is what the response team executes after a report lands at `security@gtcx.io`.
+This runbook governs internal response when a security incident is reported against `gtcx-core`. The reporter-facing disclosure policy is in [`SECURITY.md`](../../SECURITY.md). This document is what the response team executes after a report lands at `security@gtcx.trade`.
 
 **Audience:** maintainers, on-call, designated incident commander
 **Scope:** all `@gtcx/*` npm packages and `gtcx-*` Rust crates in this repository
@@ -49,7 +51,7 @@ The reporter sees these timelines via `SECURITY.md`. The incident commander owns
 
 ## Phase 1 — Triage (first 4 hours)
 
-The first responder to `security@gtcx.io` performs:
+The first responder to `security@gtcx.trade` performs:
 
 1. **Acknowledge the reporter** within the initial-response window above. Use the [Acknowledgement template](#template-1--reporter-acknowledgement).
 2. **Assign an incident ID** in the format `SEC-YYYY-NNNN` (e.g., `SEC-2026-0001`). Track in `quality/incidents/<id>/` (private branch — never on `main`).
@@ -169,7 +171,7 @@ Bus-factor = 1 is currently the **single highest-priority operational risk** in 
 
 ## Communication Channels
 
-- **Primary:** `security@gtcx.io` (publicly listed)
+- **Primary:** `security@gtcx.trade` (publicly listed)
 - **Internal incident channel:** to be established with the second CODEOWNER
 - **Downstream consumer notification:** repository owners of `gtcx-protocols`, `gtcx-platforms`, `gtcx-mobile`, `gtcx-intelligence`, `gtcx-infrastructure`
 - **Public advisory:** GitHub Security Advisories + npm advisory + repo `CHANGELOG.md`
@@ -221,7 +223,7 @@ This notice is confidential until the public advisory ships. Please limit
 distribution to the people on your team who need to act on it.
 
 Incident commander: <name>
-Reply to: security@gtcx.io
+Reply to: security@gtcx.trade
 ```
 
 ---

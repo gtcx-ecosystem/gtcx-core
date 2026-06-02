@@ -66,7 +66,7 @@ function generateAuthToken(did: string, privateKeyHex: string, ttlMs: number): s
  * });
  *
  * const client = createApiClient({
- *   baseUrl: 'https://api.gtcx.io',
+ *   baseUrl: 'https://api.gtcx.trade',
  *   signer,
  * });
  * ```

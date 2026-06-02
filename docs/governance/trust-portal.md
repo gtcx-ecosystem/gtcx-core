@@ -283,7 +283,7 @@ For procurement / vendor risk:
 
 1. Read this page + [security posture one-pager](../gtm/01-security-posture.md) + [SOC 2 readiness](../compliance/soc2-readiness.md). 30 minutes.
 2. Run the verification commands above against a fresh checkout. 10 minutes.
-3. Send a security questionnaire to `security@gtcx.io`. We respond by mapping each row to an artifact above; a small number require process formalization.
+3. Send a security questionnaire to `security@gtcx.trade`. We respond by mapping each row to an artifact above; a small number require process formalization.
 
 For sandbox regulators (Africa-tier financial regulators reviewing the library for embedded use):
 

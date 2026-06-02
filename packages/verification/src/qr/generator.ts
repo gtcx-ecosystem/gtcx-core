@@ -38,7 +38,7 @@ export interface QRCodeConfig {
 /**
  * Default configuration
  */
-const DEFAULT_VERIFY_URL = process.env['GTCX_VERIFY_URL'] || 'https://verify.gtcx.io';
+const DEFAULT_VERIFY_URL = process.env['GTCX_VERIFY_URL'] || 'https://verify.gtcx.trade';
 
 const DEFAULT_CONFIG: QRCodeConfig = {
   verifyBaseUrl: DEFAULT_VERIFY_URL,

@@ -189,7 +189,7 @@ describe('buildCanonicalRequest', () => {
   it('produces 9-line deterministic output', () => {
     const ctx = {
       method: 'POST',
-      url: 'https://api.gtcx.io/lots?z=1&a=2',
+      url: 'https://api.gtcx.trade/lots?z=1&a=2',
       headers: {},
       body: '{"foo":"bar"}',
     };
@@ -200,7 +200,7 @@ describe('buildCanonicalRequest', () => {
       'key1234567890abcdef1234567890ab',
       '2026-01-01T00:00:00.000Z',
       'nonce1234567890abcdef1234567890',
-      'https://api.gtcx.io'
+      'https://api.gtcx.trade'
     );
 
     const lines = result.canonical.split('\n');
@@ -213,7 +213,7 @@ describe('buildCanonicalRequest', () => {
     expect(lines[5]).toBe('nonce1234567890abcdef1234567890');
     expect(lines[6]).toBe('did:gtcx:tp_abc123def4567890abc123def4567890');
     expect(lines[7]).toBe('key1234567890abcdef1234567890ab');
-    expect(lines[8]).toBe('https://api.gtcx.io');
+    expect(lines[8]).toBe('https://api.gtcx.trade');
     expect(result.canonicalHash).toBe(hash256(result.canonical));
   });
 });
@@ -232,11 +232,11 @@ describe('end-to-end sign + verify', () => {
       keyRef: 'primary',
     });
 
-    const originalHeaders = { host: 'api.gtcx.io', 'content-type': 'application/json' };
+    const originalHeaders = { host: 'api.gtcx.trade', 'content-type': 'application/json' };
 
     const signedHeaders = await signer({
       method: 'POST',
-      url: 'https://api.gtcx.io/trades',
+      url: 'https://api.gtcx.trade/trades',
       headers: originalHeaders,
       body: '{"amount":100}',
       attempt: 1,
@@ -247,7 +247,7 @@ describe('end-to-end sign + verify', () => {
     expect(signedHeaders[NONCE_HEADER_NAME]).toMatch(/^[0-9a-f]{32}$/i);
     expect(signedHeaders[DID_HEADER_NAME]).toMatch(/^did:gtcx:tp_/);
     expect(signedHeaders[KEY_ID_HEADER_NAME]).toMatch(/^[0-9a-f]{32}$/i);
-    expect(signedHeaders[AUDIENCE_HEADER_NAME]).toBe('https://api.gtcx.io');
+    expect(signedHeaders[AUDIENCE_HEADER_NAME]).toBe('https://api.gtcx.trade');
     expect(signedHeaders[BODY_HASH_HEADER_NAME]).toBe(hash256('{"amount":100}'));
     expect(signedHeaders[AUTH_SCHEME_HEADER_NAME]).toBe('gtcx-signed-bearer-v1');
     expect(signedHeaders.Authorization).toMatch(/^Bearer /);
@@ -257,7 +257,7 @@ describe('end-to-end sign + verify', () => {
 
     const result = verifyCanonicalSignature(
       'POST',
-      'https://api.gtcx.io/trades',
+      'https://api.gtcx.trade/trades',
       allHeaders,
       '{"amount":100}',
       keys.publicKey
@@ -274,10 +274,10 @@ describe('end-to-end sign + verify', () => {
       publicKeyHex: keys.publicKey,
     });
 
-    const originalHeaders = { host: 'api.gtcx.io' };
+    const originalHeaders = { host: 'api.gtcx.trade' };
     const signedHeaders = await signer({
       method: 'GET',
-      url: 'https://api.gtcx.io/lots',
+      url: 'https://api.gtcx.trade/lots',
       headers: originalHeaders,
       body: null,
       attempt: 1,
@@ -288,7 +288,7 @@ describe('end-to-end sign + verify', () => {
     const otherKeys = await generateKeyPair();
     const result = verifyCanonicalSignature(
       'GET',
-      'https://api.gtcx.io/lots',
+      'https://api.gtcx.trade/lots',
       allHeaders,
       null,
       otherKeys.publicKey
@@ -309,7 +309,7 @@ describe('end-to-end sign + verify', () => {
       });
       const headers = await signer({
         method: 'GET',
-        url: 'https://api.gtcx.io/test',
+        url: 'https://api.gtcx.trade/test',
         headers: {},
         body: null,
         attempt: 0,
@@ -323,8 +323,8 @@ describe('end-to-end sign + verify', () => {
   it('fails verification with missing signature header', () => {
     const result = verifyCanonicalSignature(
       'GET',
-      'https://api.gtcx.io/lots',
-      { host: 'api.gtcx.io', [DID_HEADER_NAME]: 'did:gtcx:tp_test' },
+      'https://api.gtcx.trade/lots',
+      { host: 'api.gtcx.trade', [DID_HEADER_NAME]: 'did:gtcx:tp_test' },
       null,
       keys.publicKey
     );
@@ -338,10 +338,10 @@ describe('end-to-end sign + verify', () => {
       publicKeyHex: keys.publicKey,
     });
 
-    const originalHeaders = { host: 'api.gtcx.io' };
+    const originalHeaders = { host: 'api.gtcx.trade' };
     const signedHeaders = await signer({
       method: 'GET',
-      url: 'https://api.gtcx.io/lots',
+      url: 'https://api.gtcx.trade/lots',
       headers: originalHeaders,
       body: null,
       attempt: 1,
@@ -355,7 +355,7 @@ describe('end-to-end sign + verify', () => {
 
     const result = verifyCanonicalSignature(
       'GET',
-      'https://api.gtcx.io/lots',
+      'https://api.gtcx.trade/lots',
       allHeaders,
       null,
       keys.publicKey
@@ -396,7 +396,7 @@ describe('verifyCanonicalSignature missing headers', () => {
   it('fails when DID header is missing', () => {
     const result = verifyCanonicalSignature(
       'GET',
-      'https://api.gtcx.io/',
+      'https://api.gtcx.trade/',
       {
         [SIGNATURE_HEADER_NAME]: 'sig',
         [KEY_ID_HEADER_NAME]: 'key1',
@@ -414,7 +414,7 @@ describe('verifyCanonicalSignature missing headers', () => {
   it('fails when key ID header is missing', () => {
     const result = verifyCanonicalSignature(
       'GET',
-      'https://api.gtcx.io/',
+      'https://api.gtcx.trade/',
       {
         [SIGNATURE_HEADER_NAME]: 'sig',
         [DID_HEADER_NAME]: 'did:gtcx:aabbccdd',
@@ -432,7 +432,7 @@ describe('verifyCanonicalSignature missing headers', () => {
   it('fails when timestamp header is missing', () => {
     const result = verifyCanonicalSignature(
       'GET',
-      'https://api.gtcx.io/',
+      'https://api.gtcx.trade/',
       {
         [SIGNATURE_HEADER_NAME]: 'sig',
         [DID_HEADER_NAME]: 'did:gtcx:aabbccdd',
@@ -450,7 +450,7 @@ describe('verifyCanonicalSignature missing headers', () => {
   it('fails when nonce header is missing', () => {
     const result = verifyCanonicalSignature(
       'GET',
-      'https://api.gtcx.io/',
+      'https://api.gtcx.trade/',
       {
         [SIGNATURE_HEADER_NAME]: 'sig',
         [DID_HEADER_NAME]: 'did:gtcx:aabbccdd',
@@ -468,7 +468,7 @@ describe('verifyCanonicalSignature missing headers', () => {
   it('fails when audience header is missing', () => {
     const result = verifyCanonicalSignature(
       'GET',
-      'https://api.gtcx.io/',
+      'https://api.gtcx.trade/',
       {
         [SIGNATURE_HEADER_NAME]: 'sig',
         [DID_HEADER_NAME]: 'did:gtcx:aabbccdd',

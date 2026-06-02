@@ -1,18 +1,19 @@
 ---
-title: "Defense Readiness Assessment — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Defense Readiness Assessment — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "security"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'security']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Defense Readiness'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'crypto-security-engineer'
 tier: 'critical'
 tags: ['docs', 'security']
 review_cycle: 'quarterly'
+
 ---
 
 # Defense Readiness Assessment — gtcx-core
@@ -70,11 +72,11 @@ gtcx-core has no required internet connectivity. All cryptographic operations, v
 
 | URL                                                | Package                | Purpose                    | Air-Gap Impact                                     |
 | -------------------------------------------------- | ---------------------- | -------------------------- | -------------------------------------------------- |
-| `https://verify.gtcx.io`                           | verification, services | Default QR verify URL      | Configurable — override via `verifyBaseUrl`        |
+| `https://verify.gtcx.trade`                        | verification, services | Default QR verify URL      | Configurable — override via `verifyBaseUrl`        |
 | `https://www.w3.org/ns/did/v1`                     | identity               | W3C DID context (standard) | Embedded in DID documents as metadata, not fetched |
 | `https://w3id.org/security/suites/ed25519-2020/v1` | identity               | W3C security context       | Same — metadata, not fetched                       |
 | `https://www.w3.org/2018/credentials/v1`           | workproof              | W3C VC context             | Same — metadata, not fetched                       |
-| `https://gtcx.io/credentials/workproof/v2.1`       | workproof              | GTCX VC context            | Same — metadata, not fetched                       |
+| `https://gtcx.trade/credentials/workproof/v2.1`    | workproof              | GTCX VC context            | Same — metadata, not fetched                       |
 
 All W3C URLs are JSON-LD context identifiers embedded in credential documents per W3C spec. They are not fetched at runtime.
 

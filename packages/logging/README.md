@@ -15,7 +15,7 @@ import { createLogger } from '@gtcx/logging';
 
 const logger = createLogger({ level: 'info' });
 logger.info('Service started', { port: 3000 });
-logger.error('Connection failed', { host: 'db.gtcx.io' });
+logger.error('Connection failed', { host: 'db.gtcx.trade' });
 ```
 
 ## API

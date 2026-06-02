@@ -1,18 +1,19 @@
 ---
-title: "Botswana Sandbox Intro — Send-Ready Render"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Botswana Sandbox Intro — Send-Ready Render'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "gtm"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'gtm']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Botswana Sandbox Intro — Send-Ready Render'
 status: 'draft'
 date: '2026-05-25'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'critical'
 tags: ['gtm', 'engagement', 'render', 'botswana', 'sandbox', 'send-ready']
 review_cycle: 'on-change'
+
 ---
 
 # Botswana Sandbox Intro — Send-Ready Render
@@ -40,7 +42,7 @@ Botswana is the one engagement where the **mining authority (Department of Mines
 
 ```
 To: info@mom.gov.bw           ← verify before send
-Cc: engagement@gtcx.io
+Cc: engagement@gtcx.trade
 Subject: GTCX Protocol — pre-submission meeting request for Botswana commodity-export sandbox cohort
 ```
 
@@ -62,8 +64,8 @@ We would be happy to come to Gaborone in person at your convenience, or to meet 
 
 For procurement / vendor risk purposes the relevant primary contact is:
 
-- **Cryptographic Security:** _security@gtcx.io_
-- **Engineering:** _engineering@gtcx.io_
+- **Cryptographic Security:** _security@gtcx.trade_
+- **Engineering:** _engineering@gtcx.trade_
 - **Engagement lead:** _<your name and contact>_
 
 Thank you for the work you've done supporting innovation in Botswana. We hope GTCX can be a useful element of that effort.

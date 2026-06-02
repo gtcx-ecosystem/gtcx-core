@@ -59,7 +59,7 @@ For per-country operational state, see [`docs/agile/engagement-log/`](../agile/e
 ---
 
 **À :** `{{regulator_email}}` _(vérifier l'adresse actuelle avant envoi)_
-**Cc :** `engagement@gtcx.io`
+**Cc :** `engagement@gtcx.trade`
 **Objet :** GTCX Protocol — demande de réunion de pré-soumission pour la cohorte sandbox d'exportation de matières premières {{country}}
 
 Cher {{regulator_recipient}},
@@ -80,8 +80,8 @@ Nous serions heureux de venir à {{travel_city}} à votre convenance, ou de nous
 
 Pour des questions de procurement / risque fournisseur, le contact principal pertinent est :
 
-- **Sécurité cryptographique :** _security@gtcx.io_
-- **Ingénierie :** _engineering@gtcx.io_
+- **Sécurité cryptographique :** _security@gtcx.trade_
+- **Ingénierie :** _engineering@gtcx.trade_
 - **Responsable d'engagement :** _<votre nom et contact>_
 - **Partenaire local ({{country}}) :** _<nom du partenaire si déjà identifié>_
 

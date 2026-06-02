@@ -49,7 +49,7 @@ import {
 } from '@gtcx/identity';
 
 const resolver = createDIDResolver({
-  adapters: [createHttpDIDResolverAdapter({ baseUrl: 'https://resolver.gtcx.io' })],
+  adapters: [createHttpDIDResolverAdapter({ baseUrl: 'https://resolver.gtcx.trade' })],
   cache: createInMemoryDIDCache(),
   cacheTtlMs: 5 * 60_000,
 });

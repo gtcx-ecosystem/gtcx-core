@@ -1,18 +1,19 @@
 ---
-title: "Incident Response Runbook — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Incident Response Runbook — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "devops"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'devops']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Incident Runbook'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'frontier-infra-engineer'
 tier: 'standard'
 tags: ['docs', 'operations']
 review_cycle: 'on-change'
+
 ---
 
 # Incident Response Runbook — gtcx-core
@@ -183,7 +185,7 @@ If a fix can't be shipped fast enough:
 
 ## Contacts
 
-- Security issues: security@gtcx.io (see SECURITY.md for SLA)
+- Security issues: security@gtcx.trade (see SECURITY.md for SLA)
 - CODEOWNERS: @amanianai
 - Cryptographic Security Engineer: required for P0 on crypto/identity/verification
 

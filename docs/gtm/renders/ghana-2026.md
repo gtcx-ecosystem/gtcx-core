@@ -1,18 +1,19 @@
 ---
-title: "Ghana Sandbox Intro — Send-Ready Render"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Ghana Sandbox Intro — Send-Ready Render'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "gtm"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'gtm']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Ghana Sandbox Intro — Send-Ready Render'
 status: 'current'
 date: '2026-05-27'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'critical'
 tags: ['gtm', 'engagement', 'render', 'ghana', 'sandbox', 'send-ready']
 review_cycle: 'on-change'
+
 ---
 
 # Ghana Sandbox Intro — Send-Ready Render
@@ -46,7 +48,7 @@ Default below addresses **BoG** with MinComm cited inline. If outreach intellige
 
 ```
 To: sandbox@bog.gov.gh           ← verify before send
-Cc: engagement@gtcx.io
+Cc: engagement@gtcx.trade
 Subject: GTCX Protocol — pre-submission meeting request for Ghana commodity-export sandbox cohort
 ```
 
@@ -68,8 +70,8 @@ We would be happy to come to Accra in person at your convenience, or to meet by 
 
 For procurement / vendor risk purposes the relevant primary contact is:
 
-- **Cryptographic Security:** _security@gtcx.io_
-- **Engineering:** _engineering@gtcx.io_
+- **Cryptographic Security:** _security@gtcx.trade_
+- **Engineering:** _engineering@gtcx.trade_
 - **Engagement lead:** _<your name and contact>_
 
 Thank you for the work you've done supporting innovation in Ghana. We hope GTCX can be a useful element of that effort.

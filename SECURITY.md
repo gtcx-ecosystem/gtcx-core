@@ -6,7 +6,7 @@ If you discover a security vulnerability in gtcx-core, please report it responsi
 
 **Do NOT open a public GitHub issue for security vulnerabilities.**
 
-Email: **security@gtcx.io**
+Email: **security@gtcx.trade**
 
 The internal response process is documented in [`SECURITY-INCIDENT.md`](./docs/security/security-incident-runbook.md).
 

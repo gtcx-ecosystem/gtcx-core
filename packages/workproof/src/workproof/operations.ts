@@ -56,7 +56,7 @@ export function createWorkProof(input: CreateWorkProofInput): WorkProof {
   const workProof: WorkProof = {
     '@context': [
       'https://www.w3.org/2018/credentials/v1',
-      'https://gtcx.io/credentials/workproof/v2.1',
+      'https://gtcx.trade/credentials/workproof/v2.1',
     ],
     type: ['VerifiableCredential', 'WorkProof'],
     issuer: issuerDID,

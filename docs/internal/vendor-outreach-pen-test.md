@@ -1,18 +1,19 @@
 ---
-title: "Pen-Test Vendor Outreach — Draft Emails"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Pen-Test Vendor Outreach — Draft Emails'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "internal"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'internal']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Pen-Test Vendor Outreach — Draft Emails'
 status: 'draft'
 date: '2026-05-25'
@@ -21,6 +22,7 @@ role: 'crypto-security-engineer'
 tier: 'critical'
 tags: ['internal', 'pen-test', 'vendor', 'outreach']
 review_cycle: 'on-change'
+
 ---
 
 # Pen-Test Vendor Outreach — Draft Emails
@@ -85,7 +87,7 @@ Best regards,
 
 [Cryptographic Security Engineer]
 GTCX Protocol Security
-security@gtcx.io
+security@gtcx.trade
 
 ---
 

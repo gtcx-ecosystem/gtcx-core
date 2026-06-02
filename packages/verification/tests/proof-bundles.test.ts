@@ -485,7 +485,7 @@ describe('getProofBundleSummary', () => {
         id: 'qr_1',
         data: {
           certificateId: 'CERT_1',
-          verifyUrl: 'https://verify.gtcx.io/verify/CERT_1',
+          verifyUrl: 'https://verify.gtcx.trade/verify/CERT_1',
           hash: 'h',
           timestamp: Date.now(),
           type: 'certificate',

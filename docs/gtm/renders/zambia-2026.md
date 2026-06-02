@@ -1,18 +1,19 @@
 ---
-title: "Zambia Sandbox Intro — Send-Ready Render"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Zambia Sandbox Intro — Send-Ready Render'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "gtm"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'gtm']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Zambia Sandbox Intro — Send-Ready Render'
 status: current
 date: '2026-05-27'
@@ -20,13 +21,15 @@ owner: protocol-architect
 role: protocol-architect
 tier: critical
 tags:
-  - gtm
-  - engagement
-  - render
-  - zambia
-  - sandbox
-  - send-ready
-review_cycle: on-change
+
+- gtm
+- engagement
+- render
+- zambia
+- sandbox
+- send-ready
+  review_cycle: on-change
+
 ---
 
 # Zambia Sandbox Intro — Send-Ready Render
@@ -45,7 +48,7 @@ This is the literal send-ready render of the canonical template with every `{{pl
 
 ```
 To: innovation@boz.zm           ← verify before send
-Cc: engagement@gtcx.io
+Cc: engagement@gtcx.trade
 Subject: GTCX Protocol — pre-submission meeting request for Zambia commodity-export sandbox cohort
 ```
 
@@ -67,8 +70,8 @@ We would be happy to come to Lusaka in person at your convenience, or to meet by
 
 For procurement / vendor risk purposes the relevant primary contact is:
 
-- **Cryptographic Security:** _security@gtcx.io_
-- **Engineering:** _engineering@gtcx.io_
+- **Cryptographic Security:** _security@gtcx.trade_
+- **Engineering:** _engineering@gtcx.trade_
 - **Engagement lead:** _<your name and contact>_
 
 Thank you for the work you've done supporting innovation in Zambia. We hope GTCX can be a useful element of that effort.

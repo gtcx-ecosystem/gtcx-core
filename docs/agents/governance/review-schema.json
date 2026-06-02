@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://gtcx.io/schemas/ai-codeowner-review-v1.json",
+  "$id": "https://gtcx.trade/schemas/ai-codeowner-review-v1.json",
   "title": "GTCX AI CODEOWNER Review",
   "description": "Schema for structured review output produced by the dual-AI CODEOWNER bot. Every PR review against a code-owned path produces exactly one document conforming to this schema.",
   "type": "object",

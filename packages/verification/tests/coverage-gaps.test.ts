@@ -134,7 +134,7 @@ describe('createGoldLotQRData', () => {
 describe('verifyQRCodeData — edge branches', () => {
   const baseQR = {
     certificateId: 'GH-12345678',
-    verifyUrl: 'https://gtcx.io/verify',
+    verifyUrl: 'https://gtcx.trade/verify',
     hash: 'abc123',
     timestamp: Date.now(),
     type: 'asset-lot' as const,

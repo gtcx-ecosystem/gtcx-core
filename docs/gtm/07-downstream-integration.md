@@ -186,7 +186,7 @@ API surface is enforced by `pnpm api:check` — breaking changes cannot merge wi
 
 ## Reporting Issues
 
-- **Security vulnerabilities:** security@gtcx.io (24h initial response SLA for critical)
+- **Security vulnerabilities:** security@gtcx.trade (24h initial response SLA for critical)
 - **Bugs:** GitHub issues on gtcx-core repository
 - **Integration questions:** GitHub discussions
 

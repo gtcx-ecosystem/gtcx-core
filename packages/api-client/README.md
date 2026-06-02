@@ -13,7 +13,7 @@ pnpm add @gtcx/api-client
 ```typescript
 import { createApiClient } from '@gtcx/api-client';
 
-const client = createApiClient({ baseUrl: 'https://api.gtcx.io' });
+const client = createApiClient({ baseUrl: 'https://api.gtcx.trade' });
 ```
 
 ## Canonical Request Signing
@@ -31,14 +31,14 @@ const signer = createCanonicalSigner({
 });
 
 const client = createApiClient({
-  baseUrl: 'https://api.gtcx.io',
+  baseUrl: 'https://api.gtcx.trade',
   signer,
 });
 
 // Server side
 const result = verifyCanonicalSignature(
   'POST',
-  'https://api.gtcx.io/trades',
+  'https://api.gtcx.trade/trades',
   headers,
   body,
   publicKeyHex
@@ -79,7 +79,7 @@ Both sides hash this string with SHA-256, then sign the hash with Ed25519.
 
 ```typescript
 const client = createApiClient({
-  baseUrl: 'https://api.gtcx.io',
+  baseUrl: 'https://api.gtcx.trade',
   mtls: {
     cert: process.env.MTLS_CERT!,
     key: process.env.MTLS_KEY!,

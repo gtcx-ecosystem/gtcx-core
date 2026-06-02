@@ -91,7 +91,7 @@ These are the inputs the template needs. All values are derivable from [`tests/i
 ---
 
 **To:** `{{regulator_email}}` _(verify current address before send)_
-**Cc:** `engagement@gtcx.io`
+**Cc:** `engagement@gtcx.trade`
 **Subject:** GTCX Protocol — pre-submission meeting request for {{country}} commodity-export sandbox cohort
 
 Dear {{regulator_recipient}} team,
@@ -112,8 +112,8 @@ We would be happy to come to {{travel_city}} in person at your convenience, or t
 
 For procurement / vendor risk purposes the relevant primary contact is:
 
-- **Cryptographic Security:** _security@gtcx.io_
-- **Engineering:** _engineering@gtcx.io_
+- **Cryptographic Security:** _security@gtcx.trade_
+- **Engineering:** _engineering@gtcx.trade_
 - **Engagement lead:** _<your name and contact>_
 
 Thank you for the work you've done supporting innovation in {{country}}. We hope GTCX can be a useful element of that effort.

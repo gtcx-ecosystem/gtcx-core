@@ -31,7 +31,7 @@ export interface RegistrationConfig {
   verifyBaseUrl?: string | undefined;
 }
 
-const DEFAULT_VERIFY_URL = process.env['GTCX_VERIFY_URL'] || 'https://verify.gtcx.io';
+const DEFAULT_VERIFY_URL = process.env['GTCX_VERIFY_URL'] || 'https://verify.gtcx.trade';
 
 export const DEFAULT_CONFIG: RegistrationConfig = {
   minGpsAccuracy: 10,

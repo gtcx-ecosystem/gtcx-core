@@ -1,18 +1,19 @@
 ---
-title: "External Integration Guide — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'External Integration Guide — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "specs"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'specs']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'External Integration Guide'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs', 'specs']
 review_cycle: 'on-change'
+
 ---
 
 # External Integration Guide — gtcx-core
@@ -266,4 +268,4 @@ import { UnifiedComplianceService } from '@gtcx/services/compliance';
 ## Support
 
 - Issues: [github.com/gtcx-ecosystem/gtcx-core/issues](https://github.com/gtcx-ecosystem/gtcx-core/issues)
-- Security: security@gtcx.io. See [SECURITY.md](../../SECURITY.md).
+- Security: security@gtcx.trade. See [SECURITY.md](../../SECURITY.md).

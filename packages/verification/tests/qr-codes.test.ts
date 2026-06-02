@@ -22,7 +22,7 @@ import type { QRCodeData } from '../src/types';
 function makeValidQRCodeData(overrides: Partial<QRCodeData> = {}): QRCodeData {
   return {
     certificateId: 'CERT_TEST_123',
-    verifyUrl: 'https://verify.gtcx.io/verify/CERT_TEST_123',
+    verifyUrl: 'https://verify.gtcx.trade/verify/CERT_TEST_123',
     hash: 'abcdef1234567890',
     timestamp: Date.now(),
     type: 'location',
