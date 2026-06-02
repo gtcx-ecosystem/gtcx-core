@@ -1,7 +1,7 @@
 ---
 title: 'gtcx-core — Repository Overview'
 status: 'current'
-date: '2026-05-27'
+date: '2026-06-02'
 owner: 'gtcx-core'
 role: 'protocol-architect'
 agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
@@ -17,7 +17,7 @@ review_cycle: 'on-change'
 > **Status:** Current
 > **Date:** 2026-05-27
 > **Owner:** Protocol Architect
-> **Bank-grade composite score:** 8.9 / 10 (per [master audit 2026-05-27](../audit/master-audit-2026-05-27.md))
+> **Bank-grade composite score:** 8.5 / 10 (per [master audit 2026-06-02](../audit/master-audit-2026-06-02.md))
 > **Internal completion score:** 9.5 / 10 (per [internal completion audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md) — all internal items closed)
 > **Next review:** 2026-08-27 (quarterly, aligned with master audit cycle)
 
@@ -31,11 +31,11 @@ review_cycle: 'on-change'
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.7/10** as of [master audit 2026-06-02](../audit/master-audit-2026-06-02.md) (prior: 8.9 on 2026-05-27). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced; **21/21 core `@gtcx/*` packages** on npm with **Sigstore provenance** at the **3.1.4 train** (2026-06-01); `@gtcx/ai-eval@0.1.4` queued for publish with provenance (requires `gtcx-core` **public**). Downstream npm consumers pinned (`gtcx-protocols`, `gtcx-infrastructure/replay-protection`). Verify: `pnpm provenance:check-npm:strict`. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
+**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.5/10** as of [master audit 2026-06-02](../audit/master-audit-2026-06-02.md) (prior: 8.9 on 2026-05-27). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced; **21/21 core `@gtcx/*` packages** on npm with **Sigstore provenance** at the **3.1.4 train** (2026-06-01); `@gtcx/ai-eval@0.1.1` published on npm **without provenance** (requires `gtcx-core` **public** + attestation). Downstream npm consumers pinned (`gtcx-protocols`, `gtcx-infrastructure/replay-protection`). Verify: `pnpm provenance:check-npm:strict`. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
 
 **Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DR Congo plus broader continental rollout). See the [cross-jurisdiction dashboard](../agile/engagement-log/dashboard.md) for per-engagement state.
 
-**Honest remaining gaps (externally budgeted):** pen test report not yet delivered (target 2026-08-25); SOC 2 Type 1 letter not yet delivered (target 2026-09-15). **Internal doc/devEx track:** [GTM roadmap — internal 10/10](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md).
+**Honest remaining gaps (externally budgeted):** pen test report not yet delivered (target 2026-08-25); SOC 2 Type 1 letter not yet delivered (target 2026-09-15). **New findings this audit:** 2 test regressions in `packages/network` (`vi` import missing); empty test suite `tools/npm-provenance-utils.test.mjs`; `@gtcx/ai-eval` lacks npm provenance; 5 broken internal links; ~20+ docs missing frontmatter. **Internal doc/devEx track:** [GTM roadmap — internal 10/10](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md).
 
 ---
 
