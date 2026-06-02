@@ -32,6 +32,16 @@ review_cycle: 'on-change'
 
 ---
 
+## Cross-repo inbound
+
+| Date       | Ticket                                                                                                                   |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------ |
+| 2026-06-02 | [Infrastructure — repo retirements (ADR-012)](./inbound-tickets/from-gtcx-infrastructure-2026-06-02-repo-retirements.md) |
+
+Full index: [`inbound-tickets/README.md`](./inbound-tickets/README.md).
+
+---
+
 ## Execution roadmaps
 
 | Document                                                                                                  | What it is                                                                                           |
