@@ -37,6 +37,30 @@ Sprint 2 delivered the commodity-agnostic ZKP refactor (5 trusted setups → 4) 
 
 ---
 
+## 1.1 Remaining Gaps
+
+| Gap                                        | Severity   | Evidence                                                                                                                                   |
+| ------------------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| No third-party crypto audit                | **High**   | Pen-test vendor not selected. No Trail of Bits, NCC Group, or similar has reviewed ZKP circuits or Rust crypto.                            |
+| No formal verification of ZKP circuits     | **Medium** | CommodityOriginCircuit uses handwritten R1CS constraints. No Circom verifier, no SMT solver checks, no proof-carrying code.                |
+| Limited side-channel resistance            | **Medium** | Only one explicit constant-time claim. No `subtle` or `constant_time_eq` usage on hot paths like key comparison or Merkle path validation. |
+| BLAKE3 not FIPS-approved                   | **Low**    | FIPS mode falls through to `blake3` crate for performance-critical hashing. Documented in `fips-validation-boundary.md` as supplementary.  |
+| No KAT (Known Answer Test) vectors for ZKP | **Low**    | ZKP tests verify constraint satisfaction and tamper rejection, but no NIST-style KAT vectors exist for cross-implementation validation.    |
+
+---
+
+## 1.2 Defensibility Score by Audience
+
+| Audience                    | Before Fix                        | After Fix (Current)                                                | What Would Make It 9+/10                              |
+| --------------------------- | --------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------- |
+| Academic cryptographer      | 3/10 (hardcoded seed = broken ZK) | 7/10 (standard primitives, proper RNG, no formal verification)     | Third-party audit + formal verification + KAT vectors |
+| Enterprise CISO             | 4/10                              | 7.5/10 (FIPS path exists, HSM support, no pen-test yet)            | Pen-test report + SOC 2 attestation + provenance      |
+| African sovereign regulator | 5/10                              | 8/10 (FIPS 140-3 CMVP #4816, open-source primitives, no backdoors) | Sovereign audit trail + local verifiability + KATs    |
+
+> **Bottom line:** The hardcoded seed was a genuine critical vulnerability. With that fix applied, the cryptography is defensible against informed adversaries — standard primitives, proper CSPRNG sourcing, FIPS-validated backend available, no unsafe code. But it is not yet bank-grade without a third-party crypto audit. The gap between "credible" and "reference-grade" is the pen-test + formal verification layer.
+
+---
+
 ## 2. Circuit-by-Circuit Scoring
 
 ### 2.1 CommodityOriginCircuit (was DiamondOriginCircuit)
@@ -278,8 +302,16 @@ Each file: `{ "version": "1", "seed_hash": "sha256_of_seed", "test_vectors": [ {
    - `test_commodity_origin_boundary_lat_eq_min_passes`
 2. [x] **Phase B starter:** Generate 1 KAT vector for `groth16-commodity-origin` and commit to `artifacts/kat/`
 3. [x] Add KAT verification test (`test_kat_commodity_origin_proof_verifies`)
-4. [ ] Update `docs/audit/INDEX.md` with this assessment
-5. [ ] Cross-reference `master-audit-2026-06-02-post-sprint2.md` moat section
+4. [x] Update `docs/audit/README.md` with this assessment
+5. [x] Cross-reference `master-audit-2026-06-02-post-sprint2.md` moat section
+
+---
+
+## 7. Related Documents
+
+- **Remediation roadmap:** [`moat-dimension-roadmap-10-10.md`](./moat-dimension-roadmap-10-10.md) — per-dimension milestones from current scores to 10/10
+- **Master audit:** [`master-audit-2026-06-02-post-sprint2.md`](./master-audit-2026-06-02-post-sprint2.md) — composite 8.5/10 repo health
+- **Repo 10/10 roadmap:** [`10-10-roadmap-2026-05-25.md`](./10-10-roadmap-2026-05-25.md) — bank-grade readiness (SLSA, SOC 2, npm provenance)
 
 ---
 

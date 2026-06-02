@@ -45,6 +45,8 @@ caps_fired: 0
 
 > **Hardcore sanity check:** Forensic verification found the Sprint 2 commit message claimed "typecheck 42/42 pass" and "all tests pass," but a fresh checkout fails typecheck until `pnpm build` runs (stale dist/ artifacts), and `test:coverage` fails on the crypto package due to new ZKP wrapper files. Honest recalculation in §9.
 
+**Cryptographic moat assessment (new):** See [`algorithmic-moat-sprint2-assessment.md`](./algorithmic-moat-sprint2-assessment.md) for feature-specific scoring of ZKP circuits (7.0/10) and [`moat-dimension-roadmap-10-10.md`](./moat-dimension-roadmap-10-10.md) for the per-dimension path to 10/10 defensibility.
+
 ---
 
 ## 1. Initial State (Phase 1 — Pre-Improvement)
