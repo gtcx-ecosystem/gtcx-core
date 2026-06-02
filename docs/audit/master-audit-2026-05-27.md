@@ -1,18 +1,19 @@
 ---
-title: "gtcx-core — Master Audit & Bank-Grade Certification"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'gtcx-core — Master Audit & Bank-Grade Certification'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "audit"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'audit']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'gtcx-core Master Audit 2026-05-27'
 status: 'current'
 date: '2026-05-27'
@@ -28,11 +29,15 @@ composite: 8.9
 composite_raw: 8.92
 investor: 9.0
 enterprise: 8.7
+reconciliation_note: >-
+2026-06-01: npm Sigstore 21/21 @ 3.1.4 train (SEC-008 closed); downstream pinning
+in gtcx-protocols + gtcx-infrastructure. See ci-confirmation-2026-06-01.md.
 sov_dfi: 9.0
 p0_count: 0
 p1_count: 1
 p2_count: 5
 caps_fired: 0
+
 ---
 
 # gtcx-core — Master Audit & Bank-Grade Certification
@@ -136,14 +141,14 @@ Phase 2 skipped — repo has only `/docs/` documentation root. No competing root
 
 ### New / Remaining
 
-| ID      | Finding                                                             | Severity | Milestone |
-| ------- | ------------------------------------------------------------------- | -------- | --------- |
-| SEC-007 | 3 `rustls-webpki` vulnerabilities (RUSTSEC-2026-0098/0099/0104)     | P2       | M2        |
-| SEC-008 | SLSA provenance awaiting publish trigger                            | P2       | M2        |
-| SEC-009 | Pen-test vendor not selected (outreach drafted, selection pending)  | P1       | M2/M3     |
-| SEC-010 | 3 org secrets unset (`OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM`) | P2       | M2        |
-| RES-006 | Zimbabwe pre-submission email not sent                              | P2       | M2        |
-| PERF-01 | 13 performance budget metrics lack trend samples                    | P2       | M3        |
+| ID      | Finding                                                                            | Severity | Milestone |
+| ------- | ---------------------------------------------------------------------------------- | -------- | --------- |
+| SEC-007 | 3 `rustls-webpki` vulnerabilities (RUSTSEC-2026-0098/0099/0104)                    | P2       | M2        |
+| SEC-008 | ~~SLSA provenance awaiting publish trigger~~ **Closed 2026-06-01** — 21/21 @ 3.1.4 | —        | —         |
+| SEC-009 | Pen-test vendor not selected (outreach drafted, selection pending)                 | P1       | M2/M3     |
+| SEC-010 | 3 org secrets unset (`OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM`)                | P2       | M2        |
+| RES-006 | Zimbabwe pre-submission email not sent                                             | P2       | M2        |
+| PERF-01 | 13 performance budget metrics lack trend samples                                   | P2       | M3        |
 
 ---
 
@@ -275,17 +280,17 @@ Phase 2 skipped — repo has only `/docs/` documentation root. No competing root
 
 ### 9.1 What Changed
 
-| Claim                    | Original         | Forensic Finding                                                                | Honest                          |
-| ------------------------ | ---------------- | ------------------------------------------------------------------------------- | ------------------------------- |
-| Test suite fully passing | 45/45 tasks pass | Verified: 376 workproof tests, 45 tasks, 0 failures                             | Same (9.5)                      |
-| FIPS 140-3 validated     | CMVP #4816       | `aws-lc-fips-sys` 0.13.14 in `Cargo.lock`; feature flag wired                   | Same (9.5)                      |
-| `#![deny(unsafe_code)]`  | All 6 crates     | Verified in all 6 `lib.rs` files; `grep "unsafe {"` returns 0 matches           | Same (10.0)                     |
-| Threat matrix 12/12      | Validator passes | `tools/check-threat-matrix.mjs` reads controls; validator passes                | Same (9.0)                      |
-| SLSA Build L3            | Aspirational     | NPM_TOKEN present; provenance manifest generates clean; workflow ready          | Same (7.5 sub-score)            |
-| Coverage 95% branch      | 19 packages      | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes     | Same (9.5)                      |
-| USSD protocol            | Config-only (P2) | `packages/connectivity/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                      |
-| Frontmatter compliance   | 261/261 valid    | 264/264 valid (3 new docs added: current.md + 2 existing fixed)                 | Same (9.5)                      |
-| Coordination contract    | Not present      | Added in AGENTS.md with baseline-os reporting and trust requirements            | Repo Hygiene +0.0 (already 9.5) |
+| Claim                    | Original         | Forensic Finding                                                                | Honest                                                                            |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Test suite fully passing | 45/45 tasks pass | Verified: 376 workproof tests, 45 tasks, 0 failures                             | Same (9.5)                                                                        |
+| FIPS 140-3 validated     | CMVP #4816       | `aws-lc-fips-sys` 0.13.14 in `Cargo.lock`; feature flag wired                   | Same (9.5)                                                                        |
+| `#![deny(unsafe_code)]`  | All 6 crates     | Verified in all 6 `lib.rs` files; `grep "unsafe {"` returns 0 matches           | Same (10.0)                                                                       |
+| Threat matrix 12/12      | Validator passes | `tools/check-threat-matrix.mjs` reads controls; validator passes                | Same (9.0)                                                                        |
+| SLSA Build L3 (npm)      | Aspirational     | **Met 2026-06-01:** 21/21 Sigstore @ 3.1.4; `pnpm provenance:check-npm:strict`  | Supply chain sub-score ↑ (see [ci-confirmation](./ci-confirmation-2026-06-01.md)) |
+| Coverage 95% branch      | 19 packages      | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes     | Same (9.5)                                                                        |
+| USSD protocol            | Config-only (P2) | `packages/connectivity/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                                                                        |
+| Frontmatter compliance   | 261/261 valid    | 264/264 valid (3 new docs added: current.md + 2 existing fixed)                 | Same (9.5)                                                                        |
+| Coordination contract    | Not present      | Added in AGENTS.md with baseline-os reporting and trust requirements            | Repo Hygiene +0.0 (already 9.5)                                                   |
 
 ### 9.2 Honest Dimension Scores
 
