@@ -188,27 +188,47 @@ pub fn sample_location_region() -> Result<LocationRegionSample> {
     })
 }
 
+/// Sample witness data for commodity origin circuit tests and KAT generation.
 pub struct CommodityOriginSample {
-    pub(crate) commodity_type: u64,
-    pub(crate) mine_id: [u8; ASSET_ID_BYTES],
-    pub(crate) lat: u64,
-    pub(crate) lon: u64,
-    pub(crate) primary_metric: u64,
-    pub(crate) secondary_metric: u64,
-    pub(crate) primary_randomness: [u8; RANDOMNESS_BYTES],
-    pub(crate) secondary_randomness: [u8; RANDOMNESS_BYTES],
-    pub(crate) location_randomness: [u8; RANDOMNESS_BYTES],
-    pub(crate) bounds: [u64; 4],
-    pub(crate) min_primary: u64,
-    pub(crate) min_secondary: u64,
-    pub(crate) certification_flags: u64,
-    pub(crate) region_hash: [u8; DIGEST_BYTES],
-    pub(crate) primary_commitment: [u8; DIGEST_BYTES],
-    pub(crate) secondary_commitment: [u8; DIGEST_BYTES],
-    pub(crate) mines_root: [u8; DIGEST_BYTES],
-    pub(crate) merkle_path: Path<AssetOwnershipMerkleConfig>,
+    /// Commodity type identifier (e.g., 0 = gold, 1 = diamond).
+    pub commodity_type: u64,
+    /// Unique mine identifier.
+    pub mine_id: [u8; ASSET_ID_BYTES],
+    /// Latitude witness value.
+    pub lat: u64,
+    /// Longitude witness value.
+    pub lon: u64,
+    /// Primary quality metric (e.g., purity score).
+    pub primary_metric: u64,
+    /// Secondary quality metric (e.g., weight in grams).
+    pub secondary_metric: u64,
+    /// Randomness for primary commitment blinding.
+    pub primary_randomness: [u8; RANDOMNESS_BYTES],
+    /// Randomness for secondary commitment blinding.
+    pub secondary_randomness: [u8; RANDOMNESS_BYTES],
+    /// Randomness for location commitment blinding.
+    pub location_randomness: [u8; RANDOMNESS_BYTES],
+    /// GPS bounds: [min_lat, max_lat, min_lon, max_lon].
+    pub bounds: [u64; 4],
+    /// Minimum required primary metric.
+    pub min_primary: u64,
+    /// Minimum required secondary metric.
+    pub min_secondary: u64,
+    /// Certification bit flags.
+    pub certification_flags: u64,
+    /// Expected region hash (SHA-256 of bounds).
+    pub region_hash: [u8; DIGEST_BYTES],
+    /// Expected primary commitment.
+    pub primary_commitment: [u8; DIGEST_BYTES],
+    /// Expected secondary commitment.
+    pub secondary_commitment: [u8; DIGEST_BYTES],
+    /// Merkle root of approved mines tree.
+    pub mines_root: [u8; DIGEST_BYTES],
+    /// Merkle path proving mine membership.
+    pub merkle_path: Path<AssetOwnershipMerkleConfig>,
 }
 
+/// Generate a sample commodity origin witness for testing and KAT vector generation.
 pub fn sample_commodity_origin() -> Result<CommodityOriginSample> {
     let commodity_type = 0u64; // 0 = gold
     let mine_id = [1u8; ASSET_ID_BYTES];

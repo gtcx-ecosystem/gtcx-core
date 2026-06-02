@@ -64,7 +64,8 @@ Thumbs.db
 .turbo/
 
 # Generated runtime artifacts
-artifacts/
+artifacts/*
+!artifacts/kat/
 quality/api-surface-report.json
 benchmarks/performance-report.json
 packages/crypto-native/native/

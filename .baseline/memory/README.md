@@ -10,7 +10,6 @@
 - [Confirmed Patterns](./patterns.md)
 - [Known Pitfalls](./pitfalls.md)
 - [Dependencies](./dependencies.md)
-- [Session Archive](./archive/)
 
 ## Status
 

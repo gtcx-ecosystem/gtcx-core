@@ -1609,9 +1609,11 @@ dependencies = [
  "criterion",
  "curve25519-dalek",
  "gtcx-crypto",
+ "hex",
  "merlin",
  "serde",
  "serde_json",
+ "sha2 0.10.9",
  "thiserror",
  "tracing",
 ]

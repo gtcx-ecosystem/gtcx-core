@@ -31,10 +31,16 @@ ark-crypto-primitives = { workspace = true, features = ["crh", "merkle_tree", "r
 bulletproofs = { workspace = true }
 curve25519-dalek = { workspace = true }
 merlin = { workspace = true }
+hex = { workspace = true }
+sha2 = { workspace = true }
+serde_json = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
-serde_json = { workspace = true }
+
+[[bin]]
+name = "generate-kat"
+path = "src/bin/generate-kat.rs"
 
 [[bench]]
 name = "zkp"
