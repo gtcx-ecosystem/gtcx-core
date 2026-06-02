@@ -1,10 +1,14 @@
 ---
 last_reconciled: 2026-06-01
+reconciliation_note: >-
+  Downstream npm provenance pinning complete in gtcx-protocols + gtcx-infrastructure;
+  GitBook supply-chain page synced via gtcx-docs hub.
 sources:
   - docs/audit/full-audit-2026-06-01.md
   - docs/gtm/gtm-roadmap-10-10-internal-2026-06-01.md
   - docs/audit/10-10-roadmap-2026-05-25.md
   - docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md
+  - docs/gtm/07-downstream-integration.md
 ---
 
 # Execution roadmap — gtcx-core
@@ -58,6 +62,7 @@ sources:
 | ----- | ----------------------------------------------- | ------ |
 | S3-01 | Integration test `createRuntime()` edge profile | done   |
 | S3-02 | Downstream integration doc copy-paste path      | done   |
+| S3-03 | Downstream npm provenance pinning (ecosystem)   | done   |
 
 ---
 

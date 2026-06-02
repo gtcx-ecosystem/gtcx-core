@@ -54,6 +54,15 @@ CI on `main` may use PR-scoped frontmatter check; local full-tree scan fails. Tr
 
 **Provenance baseline:** pin versions in [trust portal](../governance/trust-portal.md#published-versions) or run `pnpm provenance:check-npm:strict` after clone. Older npm releases (e.g. `3.1.3`) lack registry attestations.
 
+## Downstream npm consumers — **DONE (2026-06-01)**
+
+| Repo                  | Packages pinned                                                                                             | Verified                                                                  |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `gtcx-protocols`      | `@gtcx/crypto`, `@gtcx/types` `^3.1.4`; tradepass `@gtcx/verification` `^3.1.4`, `@gtcx/workproof` `^1.0.4` | Lockfile @ 3.1.4 / 1.0.4; `npm view @gtcx/crypto@3.1.4 dist.attestations` |
+| `gtcx-infrastructure` | `tools/replay-protection` — `@gtcx/crypto` `^3.1.4`                                                         | Lockfile @ 3.1.4                                                          |
+
+Guide: [07-downstream-integration.md](../gtm/07-downstream-integration.md). External docs: gtcx-docs GitBook `supply-chain/gtcx-core-npm.md`.
+
 <details>
 <summary>Release train debug log (collapsed)</summary>
 

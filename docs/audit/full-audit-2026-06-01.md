@@ -24,6 +24,8 @@ audit_date: '2026-06-01'
 
 **Live gates (session):** `pnpm ops:check` 8 pass / 3 warn · `pnpm architecture:check` pass (22 packages, 249 source files) · `pnpm audit` clean
 
+**Reconciliation (2026-06-01, post-audit):** npm Sigstore **21/21** at 3.1.4 train ([ci-confirmation](./ci-confirmation-2026-06-01.md)); trust portal provenance column populated; downstream npm consumers pinned (`gtcx-protocols`, `gtcx-infrastructure/replay-protection`). Finding #12 closed.
+
 ---
 
 ## PHASE 1 — Architecture Audit
@@ -189,20 +191,20 @@ _Stopped after two consecutive **Not Ready** (S4, S5)._
 
 ### 6.1 Intelligence Synthesis
 
-| #   | Finding                                        | Source          | Severity | Status                                                         |
-| --- | ---------------------------------------------- | --------------- | -------- | -------------------------------------------------------------- |
-| 1   | README odd-length-hex blocker stale            | P1              | Medium   | **Closed** (`6456bfa`)                                         |
-| 2   | Package count 18/21/22 drift                   | P1, P4          | Medium   | **Closed** (runbooks + trust portal; `6456bfa`)                |
-| 3   | Pen-test vendor not selected                   | P2, P3          | High     | Open                                                           |
-| 4   | SOC 2 Type 1 not delivered                     | P2, P3          | High     | Open                                                           |
-| 5   | 3 npm packages unpublished                     | P3, P5          | High     | **Closed** (resilience/telemetry/runtime on npm 2026-05-26–27) |
-| 6   | Rust P2P transport scaffolding                 | P1              | Low      | Open                                                           |
-| 7   | TURBO_TOKEN / TURBO_TEAM missing               | ops:check       | Medium   | Open                                                           |
-| 8   | OPENAI_API_KEY missing (AI codeowner fallback) | ops:check       | Medium   | Open                                                           |
-| 9   | Jurisdiction config not E2E for 5 states       | P3              | High     | Open                                                           |
-| 10  | `ai-eval` not in CI quality gate               | P4              | Low      | Open                                                           |
-| 11  | Verification LOC near ceiling                  | P1              | Low      | Open                                                           |
-| 12  | Trust portal provenance column empty           | trust-portal.md | Medium   | Open                                                           |
+| #   | Finding                                        | Source          | Severity | Status                                                                    |
+| --- | ---------------------------------------------- | --------------- | -------- | ------------------------------------------------------------------------- |
+| 1   | README odd-length-hex blocker stale            | P1              | Medium   | **Closed** (`6456bfa`)                                                    |
+| 2   | Package count 18/21/22 drift                   | P1, P4          | Medium   | **Closed** (runbooks + trust portal; `6456bfa`)                           |
+| 3   | Pen-test vendor not selected                   | P2, P3          | High     | Open                                                                      |
+| 4   | SOC 2 Type 1 not delivered                     | P2, P3          | High     | Open                                                                      |
+| 5   | 3 npm packages unpublished                     | P3, P5          | High     | **Closed** (resilience/telemetry/runtime on npm 2026-05-26–27)            |
+| 6   | Rust P2P transport scaffolding                 | P1              | Low      | Open                                                                      |
+| 7   | TURBO_TOKEN / TURBO_TEAM missing               | ops:check       | Medium   | Open                                                                      |
+| 8   | OPENAI_API_KEY missing (AI codeowner fallback) | ops:check       | Medium   | Open                                                                      |
+| 9   | Jurisdiction config not E2E for 5 states       | P3              | High     | Open                                                                      |
+| 10  | `ai-eval` not in CI quality gate               | P4              | Low      | Open                                                                      |
+| 11  | Verification LOC near ceiling                  | P1              | Low      | Open                                                                      |
+| 12  | Trust portal provenance column empty           | trust-portal.md | Medium   | **Closed** (21/21 @ 3.1.4; [trust portal](../governance/trust-portal.md)) |
 
 ### 6.2 Innovation Scan
 
