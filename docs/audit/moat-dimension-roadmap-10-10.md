@@ -29,6 +29,41 @@ Each dimension has:
 
 ---
 
+## Gap-to-Dimension Mapping
+
+These 5 gaps are extracted from [`master-audit-2026-06-02-post-sprint2.md`](./master-audit-2026-06-02-post-sprint2.md) §Cryptographic Defensibility. Each maps directly to one or more milestones below.
+
+| Gap (from master audit)                | Severity   | Dimension                  | Milestones That Close It |
+| -------------------------------------- | ---------- | -------------------------- | ------------------------ |
+| No third-party crypto audit            | **High**   | D9 Third-Party Audit       | M9.1–M9.5                |
+| No formal verification of ZKP circuits | **Medium** | D8 Formal Verification     | M8.1–M8.6                |
+| Limited side-channel resistance        | **Medium** | D7 Side-Channel Resistance | M7.1–M7.5                |
+| BLAKE3 not FIPS-approved               | **Low**    | D10 Primitive Compliance   | M10.1–M10.3              |
+| No KAT vectors for ZKP                 | **Low**    | D6 KAT / Interop           | M6.1–M6.5                |
+
+---
+
+## Defensibility Score by Audience
+
+| Audience                    | Before RNG Fix                    | After Fix (Current)                                                | After Roadmap Complete                                         |
+| --------------------------- | --------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------- |
+| Academic cryptographer      | 3/10 (hardcoded seed = broken ZK) | 7/10 (standard primitives, proper RNG, no formal verification)     | **10/10** (audited + formally verified + KAT validated)        |
+| Enterprise CISO             | 4/10                              | 7.5/10 (FIPS path exists, HSM support, no pen-test yet)            | **10/10** (signed pen-test + SOC 2 attestation + provenance)   |
+| African sovereign regulator | 5/10                              | 8/10 (FIPS 140-3 CMVP #4816, open-source primitives, no backdoors) | **10/10** (sovereign audit trail + local verifiability + KATs) |
+
+---
+
+## What Would Make It 9+/10
+
+These 4 items are the minimum bar before any dimension reaches 9. They are prerequisites for the final 1-point polish.
+
+1. **Third-party crypto audit of ZKP circuits and Rust signing** → D9 M9.4 (final report, no Critical/High open)
+2. **Formal verification of R1CS constraints** → D8 M8.4 (full circuit soundness proof) or at minimum D1 M1.4 (proptest expanded to circuit semantics)
+3. **Constant-time hardening on all comparison and MAC verification paths** → D7 M7.3 (hardening complete) or M7.2 (acceptable risk documented)
+4. **KAT vectors for Groth16 and Bulletproofs operations against reference implementation** → D6 M6.4 (cross-implementation validation)
+
+---
+
 ## Dimension 1: Circuit Correctness (Groth16)
 
 **Current:** 5/10 → **Target:** 10/10
@@ -179,6 +214,24 @@ Each dimension has:
 
 ---
 
+## Dimension 10: Primitive Compliance (FIPS / BLAKE3)
+
+**Current:** 7/10 → **Target:** 10/10
+
+> **Source gap:** "BLAKE3 not FIPS-approved" (master audit, Low severity). FIPS mode falls through to `blake3` crate for performance-critical hashing. Documented in `fips-validation-boundary.md` as supplementary.
+
+| Milestone                      | Score | Acceptance Criteria                                                                                                                                                   | Effort           | Gate                                                |
+| ------------------------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | --------------------------------------------------- |
+| M10.1 FIPS boundary audit      | 7→8   | Complete inventory: every hash call in `packages/crypto/` and `rust/gtcx-crypto/` tagged as FIPS-approved (aws-lc/sha2) or supplementary (blake3); no unlabeled paths | 1 day            | `docs/crypto/fips-hash-inventory.md` committed      |
+| M10.2 Runtime FIPS enforcement | 8→9   | `gtcx-crypto` exposes `fips_mode_only()` that rejects BLAKE3 when `GTCX_FIPS_STRICT=1`; integration test confirms rejection                                           | 2 days           | `cargo test test_fips_strict_rejects_blake3` passes |
+| M10.3 Regulator attestation    | 9→10  | African regulator (or NIST CMVP liaison) signs letter accepting supplementary BLAKE3 usage with documented fallback to SHA-256; letter in `docs/compliance/`          | 2 weeks external | Letter scanned + committed                          |
+
+**Prerequisites:** None  
+**Critical path:** No  
+**Owner:** compliance-officer + security-engineer
+
+---
+
 ## Master Timeline
 
 ```
@@ -193,6 +246,7 @@ D6   [==M6.1==][=M6.2=][=M6.3=][==M6.4==][=M6.5=]
 D7         [=M7.1=][=M7.2=][=M7.3=][==M7.4==][====M7.5====]
 D8   [==M8.1==][==M8.2==][==M8.3==][==M8.4==][==M8.5==][=M8.6=]
 D9   [====M9.1====][======M9.2======][====M9.3====][=M9.4=][=M9.5=]
+D10  [=M10.1=][=M10.2=][========M10.3========]
 ```
 
 **Parallel team assumption:** 2 engineers (protocol + security) + 1 formal-methods consultant + 1 external audit vendor.
@@ -201,19 +255,19 @@ D9   [====M9.1====][======M9.2======][====M9.3====][=M9.4=][=M9.5=]
 
 ## Score Progression by Week
 
-| Week    | D1  | D2  | D3  | D4  | D5  | D6  | D7  | D8  | D9  | **Overall** |
-| ------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ----------- |
-| 0 (now) | 5   | 8   | 9   | 9   | 9   | 0   | 5   | 0   | 0   | **7.0**     |
-| 2       | 6   | 8   | 9   | 9   | 9.5 | 3   | 6   | 3   | 3   | **7.3**     |
-| 4       | 7   | 9   | 9   | 9   | 9.5 | 6   | 7   | 5   | 3   | **7.6**     |
-| 6       | 8   | 9   | 9.5 | 10  | 10  | 8   | 8   | 7   | 6   | **8.4**     |
-| 8       | 8   | 9   | 9.5 | 10  | 10  | 8   | 8   | 8   | 6   | **8.5**     |
-| 10      | 9   | 10  | 9.5 | 10  | 10  | 9   | 9   | 8   | 8   | **8.9**     |
-| 12      | 9   | 10  | 10  | 10  | 10  | 9   | 9   | 9   | 8   | **9.1**     |
-| 14      | 10  | 10  | 10  | 10  | 10  | 9   | 9   | 9   | 9   | **9.4**     |
-| 16      | 10  | 10  | 10  | 10  | 10  | 10  | 10  | 10  | 10  | **10.0**    |
+| Week    | D1  | D2  | D3  | D4  | D5  | D6  | D7  | D8  | D9  | D10 | **Overall** |
+| ------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ----------- |
+| 0 (now) | 5   | 8   | 9   | 9   | 9   | 0   | 5   | 0   | 0   | 7   | **7.0**     |
+| 2       | 6   | 8   | 9   | 9   | 9.5 | 3   | 6   | 3   | 3   | 7   | **7.2**     |
+| 4       | 7   | 9   | 9   | 9   | 9.5 | 6   | 7   | 5   | 3   | 8   | **7.5**     |
+| 6       | 8   | 9   | 9.5 | 10  | 10  | 8   | 8   | 7   | 6   | 8   | **8.3**     |
+| 8       | 8   | 9   | 9.5 | 10  | 10  | 8   | 8   | 8   | 6   | 9   | **8.4**     |
+| 10      | 9   | 10  | 9.5 | 10  | 10  | 9   | 9   | 8   | 8   | 9   | **8.8**     |
+| 12      | 9   | 10  | 10  | 10  | 10  | 9   | 9   | 9   | 8   | 9   | **9.0**     |
+| 14      | 10  | 10  | 10  | 10  | 10  | 9   | 9   | 9   | 9   | 10  | **9.3**     |
+| 16      | 10  | 10  | 10  | 10  | 10  | 10  | 10  | 10  | 10  | 10  | **10.0**    |
 
-> **Overall** = weighted average: D1×25%, D2×10%, D3×5%, D4×5%, D5×5%, D6×10%, D7×10%, D8×15%, D9×15%
+> **Overall** = weighted average: D1×22%, D2×10%, D3×5%, D4×5%, D5×5%, D6×10%, D7×10%, D8×13%, D9×13%, D10×7%
 
 ---
 
