@@ -31,7 +31,7 @@ review_cycle: 'on-change'
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.9/10** as of [master audit 2026-05-27](../audit/master-audit-2026-05-27.md) (up from 8.63 on 2026-05-12). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced, Build L3 aspirational; **21/21** public `@gtcx/*` packages on npm (2026-05-26–27); provenance manifest per CI release; npm attestations follow-up ongoing. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
+**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.9/10** as of [master audit 2026-05-27](../audit/master-audit-2026-05-27.md) (up from 8.63 on 2026-05-12). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced; **21/21** public `@gtcx/*` packages on npm with **Sigstore provenance** at the **3.1.4 train** (2026-06-01); provenance manifest per CI release; downstream npm consumers pinned (`gtcx-protocols`, `gtcx-infrastructure/replay-protection`). Verify: `pnpm provenance:check-npm:strict`. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
 
 **Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DR Congo plus broader continental rollout). See the [cross-jurisdiction dashboard](../agile/engagement-log/dashboard.md) for per-engagement state.
 
@@ -278,7 +278,7 @@ If GTCX fails: The status quo persists — foreign platforms extract value, arti
 
 **Regulator engagement:** The SOC 2 readiness analysis is complete. The FIPS assessment is verified. The threat-control matrix exists (12 controls, 20 evidence references). The Zimbabwe pre-submission email is drafted and ready to send. Missing: external pen-test, SOC 2 Type 1 attestation, first regulator response.
 
-**Partner integration:** `@gtcx/crypto` v2.0.0 is published on npm. The API surface is baselined. Package boundaries are enforced. Missing: SLSA provenance on published packages, `NPM_TOKEN` for further publishes.
+**Partner integration:** `@gtcx/crypto@3.1.4` (and 20 siblings) on npm with Sigstore attestations. Pin `^3.1.4` (core line) or floors in [trust portal](../governance/trust-portal.md#published-versions). API surface baselined; package boundaries enforced.
 
 **Sales collateral:** Executive brief, security posture, compliance matrix, and FIPS readiness documents exist in `docs/gtm/`. Missing: case studies from live pilots, third-party validation report.
 
@@ -383,18 +383,18 @@ If GTCX fails: The status quo persists — foreign platforms extract value, arti
 
 ### 7.1 Current Certification State
 
-| Standard / Framework         | Status                        | Evidence                                                                                            | Gap                                |
-| ---------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| **FIPS 140-3**               | ✅ **Verified**               | `cargo test --features fips` passes (30 tests). `aws-lc-fips-sys` linked. CMVP #4816.               | None                               |
-| **SLSA Build L3**            | 🟡 **Partial**                | `@gtcx/crypto@2.0.0` published. Source L2 enforced. Build L3: **no provenance attestation** on npm. | Add provenance to publish workflow |
-| **STRIDE Threat Model**      | ✅ **Complete**               | 12 controls in `docs/security/threat-control-matrix.md`. Validator passes. 20 evidence references.  | None                               |
-| **Penetration Test**         | 🔴 **Not started**            | Scope ready. Vendor not engaged.                                                                    | Commission vendor                  |
-| **SOC 2 Type 1**             | 🟡 **Readiness**              | Readiness analysis complete. CPA engagement pending.                                                | Engage CPA firm                    |
-| **Code Coverage (critical)** | 🟡 **Approaching**            | `@gtcx/crypto` 97.86% stmts / 86.48% branch. Target: 90% branch.                                    | Push branch coverage to 90%        |
-| **Secret Scanning**          | 🟡 **Configured, CI blocked** | TruffleHog configured. Cannot run in CI due to billing.                                             | Fix CI billing                     |
-| **Dependency Audit**         | ✅ **Clean**                  | `pnpm audit` clean. `cargo audit` clean (ark-\* advisories tracked).                                | None                               |
-| **Signed Commits**           | ✅ **Enforced**               | Branch protection requires signed commits.                                                          | None                               |
-| **CODEOWNERS**               | ✅ **Active**                 | 8 entries. Security-sensitive packages require Crypto Security Engineer.                            | None                               |
+| Standard / Framework         | Status                        | Evidence                                                                                                                                                              | Gap                                                                                         |
+| ---------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| **FIPS 140-3**               | ✅ **Verified**               | `cargo test --features fips` passes (30 tests). `aws-lc-fips-sys` linked. CMVP #4816.                                                                                 | None                                                                                        |
+| **SLSA Build L3 (npm)**      | ✅ **Met (21/21)**            | Sigstore attestations at 3.1.4 train; `publish-packages-provenance.mjs`; [release 26778909174](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26778909174). | Consumers pin ≥ baseline; see [downstream integration](../gtm/07-downstream-integration.md) |
+| **STRIDE Threat Model**      | ✅ **Complete**               | 12 controls in `docs/security/threat-control-matrix.md`. Validator passes. 20 evidence references.                                                                    | None                                                                                        |
+| **Penetration Test**         | 🔴 **Not started**            | Scope ready. Vendor not engaged.                                                                                                                                      | Commission vendor                                                                           |
+| **SOC 2 Type 1**             | 🟡 **Readiness**              | Readiness analysis complete. CPA engagement pending.                                                                                                                  | Engage CPA firm                                                                             |
+| **Code Coverage (critical)** | 🟡 **Approaching**            | `@gtcx/crypto` 97.86% stmts / 86.48% branch. Target: 90% branch.                                                                                                      | Push branch coverage to 90%                                                                 |
+| **Secret Scanning**          | 🟡 **Configured, CI blocked** | TruffleHog configured. Cannot run in CI due to billing.                                                                                                               | Fix CI billing                                                                              |
+| **Dependency Audit**         | ✅ **Clean**                  | `pnpm audit` clean. `cargo audit` clean (ark-\* advisories tracked).                                                                                                  | None                                                                                        |
+| **Signed Commits**           | ✅ **Enforced**               | Branch protection requires signed commits.                                                                                                                            | None                                                                                        |
+| **CODEOWNERS**               | ✅ **Active**                 | 8 entries. Security-sensitive packages require Crypto Security Engineer.                                                                                              | None                                                                                        |
 
 ### 7.2 Security Controls
 
@@ -408,7 +408,7 @@ The threat-control matrix covers 12 STRIDE controls:
 | T04     | Info Disclosure — Leakage | ✅     | Secret redaction, zeroizing memory           |
 | T05     | DoS — Availability        | ✅     | Offline queue, circuit breaker, retry        |
 | T06     | Elevation — Privilege     | ✅     | CODEOWNERS, branch protection                |
-| T07     | Supply Chain              | 🟡     | SLSA Source L2; Build L3 pending             |
+| T07     | Supply Chain              | ✅     | SLSA Source L2; npm Build L3 (21/21 @ 3.1.4) |
 | T08     | AI-Specific               | ✅     | Trust gating, dual-provider review           |
 | T09-T12 | Extended controls         | ✅     | See `docs/security/threat-control-matrix.md` |
 
@@ -471,7 +471,7 @@ Validator: `node tools/check-threat-matrix.mjs` passes.
 
 - **What this repo enables:** Verifiable trade certificates, digital identity for informal producers, and bank-grade trust infrastructure for commodity supply chains in Africa.
 - **When it will be ready:** The cryptographic foundation is ready now. Downstream products (`gtcx-markets`) are in pilot preparation. Full production readiness requires: CI unblocked, external pen-test completed, SOC 2 Type 1 attestation received — estimated 6-9 months.
-- **What risks remain:** CI billing failure blocks automated testing. No SLSA provenance on published packages. USSD protocol is not yet implemented. External validation (pen-test, SOC 2) is pending vendor engagement.
+- **What risks remain:** CI billing failure blocks automated testing. USSD protocol is not yet implemented. External validation (pen-test, SOC 2) is pending vendor engagement. Downstream repos must pin `@gtcx/*` at the provenance baseline when consuming from npm.
 - **Who to contact:** Repo Lead (Protocol Architect), Security Reviewer (Cryptographic Security Engineer), Compliance Reviewer (Head of Compliance)
 
 ---
@@ -489,7 +489,7 @@ M1 Foundation is 4/6 complete. M2 is in progress.
 | Threat-control matrix | ✅ Complete (12 controls, validator passes)       |
 | Coverage push         | ✅ `@gtcx/crypto` at 97.86% stmts / 86.48% branch |
 | Rust LOC refactor     | ✅ `gtcx-zkp/src/lib.rs` split (1,977 → 51 lines) |
-| SLSA publish          | 🟡 Package published, no provenance               |
+| SLSA npm publish      | ✅ 21/21 Sigstore @ 3.1.4 train                   |
 | CI billing fix        | 🔴 Blocked — user action needed                   |
 | Org secrets           | 🔴 4 missing — user action needed                 |
 | Zimbabwe email        | 🔴 Draft ready — user action needed               |
@@ -500,9 +500,9 @@ M1 Foundation is 4/6 complete. M2 is in progress.
 
 1. **Fix CI billing + set 4 org secrets** — unblock automated testing and publishing
 2. **Send Zimbabwe pre-submission email** — kick off regulator engagement
-3. **Add SLSA provenance to npm publish** — achieve Build L3
-4. **Scope and commission external pen-test** — 4-6 weeks execution
-5. **Engage CPA firm for SOC 2 Type 1** — 8-10 weeks process
+3. **Scope and commission external pen-test** — 4-6 weeks execution
+4. **Engage CPA firm for SOC 2 Type 1** — 8-10 weeks process
+5. **Keep downstream npm consumers on provenance baseline** — lockfile + `^3.1.4` floors
 
 ### 9.3 Path to 10.0
 
@@ -512,7 +512,7 @@ M1 Foundation is 4/6 complete. M2 is in progress.
 | M3 Certification | 9.7         | Pen-test report in hand, SOC 2 Type 1 received, regulator response positive, 90% branch coverage |
 | M4 Reference     | 10.0        | Multi-country pilot live, category-defining trust infrastructure, compounding platform effects   |
 
-**Critical path:** CI billing fix → SLSA publish → pen-test → SOC 2 Type 1. Engineering work is parallelizable; external authority work is serial.
+**Critical path:** CI billing fix → pen-test → SOC 2 Type 1. npm provenance complete (2026-06-01). Engineering work is parallelizable; external authority work is serial.
 
 Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-roadmap-2026-05-11.md)
 
@@ -552,7 +552,7 @@ This document reflects the state of `gtcx-core` as of 2026-05-27. It uses honest
 
 **What is real:** FIPS 140-3 verified. Zero unsafe code. 97.86% statement coverage on critical path. Threat-control matrix with 12 validated controls. Offline-first queue tested. API surface baselined.
 
-**What is aspirational:** SLSA Build L3 (package published, no provenance). USSD protocol (string enum only). Adaptive low-bandwidth mode (config-only). External pen-test (not started). SOC 2 Type 1 (readiness complete, no CPA engaged).
+**What is aspirational:** USSD protocol (string enum only). Adaptive low-bandwidth mode (config-only). External pen-test (not started). SOC 2 Type 1 (readiness complete, no CPA engaged).
 
 **What is blocked:** CI billing (user action). 4 org secrets (user action). Zimbabwe email (user action).
 

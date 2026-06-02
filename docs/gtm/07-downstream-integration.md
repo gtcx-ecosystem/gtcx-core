@@ -12,19 +12,6 @@ tags: ['documentation', 'gtm']
 review_cycle: 'on-change'
 ---
 
----
-
-title: '07 Downstream Integration'
-status: 'current'
-date: '2026-05-17'
-owner: 'protocol-architect'
-role: 'protocol-architect'
-tier: 'standard'
-tags: ['docs']
-review_cycle: 'on-change'
-
----
-
 # Downstream Integration Guide
 
 > **Status:** Current
@@ -73,7 +60,7 @@ All **21** public `@gtcx/*` packages from `gtcx-core` are on npm with **Sigstore
 pnpm provenance:check-npm:strict
 ```
 
-**Ecosystem repos updated for npm provenance (2026-06-01):** `gtcx-protocols`, `gtcx-infrastructure` (`tools/replay-protection`).
+**Ecosystem repos updated for npm provenance (2026-06-01):** `gtcx-protocols` (root + `protocol-tradepass`), `gtcx-infrastructure` (`tools/replay-protection`). External GitBook: [gtcx-protocols supply chain](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/gitbooks/gtcx-protocols/supply-chain/gtcx-core-npm.md) (synced from `gtcx-protocols/docs/gitbook/`).
 
 **Not the same package (do not bump for core provenance):** `ledger-ui` `@gtcx/utils` / `@gtcx/ui` (UI kit); `compliance-os` / `gtcx-mobile` / `gtcx-platforms` local `@gtcx/types` workspace forks; `gtcx-intelligence` `@gtcx/types` workspace package.
 
