@@ -1,18 +1,19 @@
 ---
-title: "SOC 2 Type 1 Readiness Preparation"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'SOC 2 Type 1 Readiness Preparation'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "compliance"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'compliance']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'SOC 2 Type 1 Readiness Prep'
 status: 'current'
 date: '2026-05-22'
@@ -21,6 +22,7 @@ role: 'quality-evidence-lead'
 tier: 'critical'
 tags: ['compliance', 'soc2', 'engagement', 'preparation']
 review_cycle: 'on-change'
+
 ---
 
 # SOC 2 Type 1 Readiness Preparation
@@ -84,7 +86,7 @@ review_cycle: 'on-change'
 
 ### 8.1 Verification-chain reproducibility evidence
 
-- `pnpm build:reproducible` already exists; expand to all 21 packages
+- `pnpm build:reproducible` already exists; expand to all 22 packages
 - Capture build hashes per release in `artifacts/reproducible-builds.json`
 
 ### 8.2 Cross-build determinism test

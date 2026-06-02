@@ -1,24 +1,24 @@
 ---
-title: "Package Specifications — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Package Specifications — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 95
-autonomy_level: "sovereign"
-tier: "critical"
-tags: ["documentation", "specs"]
-review_cycle: "on-change"
+autonomy_level: 'sovereign'
+tier: 'critical'
+tags: ['documentation', 'specs']
+review_cycle: 'on-change'
 ---
 
 # Package Specifications — gtcx-core
 
-Per-package specifications for all 21 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates in `gtcx-core`.
+Per-package specifications for all 22 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates in `gtcx-core`.
 
 ---
 
-## TypeScript Packages (21)
+## TypeScript Packages (22)
 
 | Package               | Spec               | Description                                                                                             |
 | --------------------- | ------------------ | ------------------------------------------------------------------------------------------------------- |

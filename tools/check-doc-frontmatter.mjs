@@ -25,6 +25,7 @@ const VALID_OWNERS = [
   'frontier-infra-engineer',
   'quality-evidence-lead',
   'product-lead',
+  'gtcx-core',
 ];
 const VALID_TIERS = ['strategic', 'critical', 'standard', 'informational'];
 const VALID_CYCLES = ['quarterly', 'monthly', 'bi-weekly', 'weekly', 'on-change'];
@@ -35,6 +36,9 @@ const DEFAULT_EXCLUDES = [
   '**/templates/**',
   'docs/agents/sessions/**',
   'docs/agents/workflows/agent-*.md',
+  'docs/audit/**',
+  'docs/roadmap/ROADMAP-*.md',
+  'docs/gtm/inbound-tickets/**',
 ];
 
 const errors = [];

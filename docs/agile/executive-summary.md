@@ -1,18 +1,19 @@
 ---
-title: "Executive Summary — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Executive Summary — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "agile"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'agile']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Executive Summary'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs', 'agile']
 review_cycle: 'on-change'
+
 ---
 
 # Executive Summary — gtcx-core
@@ -50,7 +52,7 @@ review_cycle: 'on-change'
 
 ## Solution
 
-`gtcx-core` publishes a versioned API surface across 18 public `@gtcx/*` packages: `@gtcx/crypto` for cryptographic operations, `@gtcx/schemas` for validation schemas, `@gtcx/domain` for core domain types and offline queue semantics, and `@gtcx/identity` for DID document management. Performance-critical operations are backed by Rust via NAPI-RS with explicit native/fallback behavior. Every downstream GTCX repo pins to package versions from this workspace; `pnpm architecture:check` blocks import patterns that violate the published boundary model.
+`gtcx-core` publishes a versioned API surface across 22 public `@gtcx/*` packages: `@gtcx/crypto` for cryptographic operations, `@gtcx/schemas` for validation schemas, `@gtcx/domain` for core domain types and offline queue semantics, and `@gtcx/identity` for DID document management. Performance-critical operations are backed by Rust via NAPI-RS with explicit native/fallback behavior. Every downstream GTCX repo pins to package versions from this workspace; `pnpm architecture:check` blocks import patterns that violate the published boundary model.
 
 | Package          | Provides                                                              |
 | ---------------- | --------------------------------------------------------------------- |

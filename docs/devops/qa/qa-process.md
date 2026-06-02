@@ -64,7 +64,7 @@ Summary (TypeScript → Rust → evidence):
 
 1. Architecture boundaries (`pnpm architecture:check`)
 2. Lint + format + typecheck + tests
-3. Build all 21 public TypeScript packages (+ config workspace packages)
+3. Build all 22 public TypeScript packages (+ config workspace packages)
 4. API surface check
 5. Critical coverage threshold
 6. Performance budgets

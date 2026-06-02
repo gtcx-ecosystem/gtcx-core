@@ -1,18 +1,19 @@
 ---
-title: "Backend Architecture — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Backend Architecture — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "architecture"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'architecture']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Backend Architecture'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'critical'
 tags: ['docs', 'architecture']
 review_cycle: 'quarterly'
+
 ---
 
 # Backend Architecture — gtcx-core
@@ -29,7 +31,7 @@ review_cycle: 'quarterly'
 > **Date:** 2026-05-10
 > **Owner:** Protocol Architect
 
-**Repo type:** Library monorepo (18 public TypeScript packages, 4 shared config workspace packages, 6 Rust crates)
+**Repo type:** Library monorepo (22 public TypeScript packages, 4 shared config workspace packages, 6 Rust crates)
 **Primary language:** TypeScript 6.0.x + Rust 1.91+
 **Framework:** None — pure library; no HTTP server, no database
 **Last updated:** 2026-05-06

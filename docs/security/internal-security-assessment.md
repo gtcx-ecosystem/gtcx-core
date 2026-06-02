@@ -1,18 +1,19 @@
 ---
-title: "Internal Cryptographic Security Assessment — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Internal Cryptographic Security Assessment — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "security"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'security']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Internal Security Assessment'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'crypto-security-engineer'
 tier: 'critical'
 tags: ['docs', 'security']
 review_cycle: 'quarterly'
+
 ---
 
 # Internal Cryptographic Security Assessment — gtcx-core
@@ -36,7 +38,7 @@ review_cycle: 'quarterly'
 
 ## Executive Summary
 
-gtcx-core is a cryptographic foundation library (21 TypeScript packages, 6 Rust crates) serving as the trust anchor for the GTCX ecosystem. This assessment evaluates the security posture through six automated analysis methods, a manual cryptographic primitive review, and threat modeling. No critical vulnerabilities were identified. Three medium-risk items require ongoing attention.
+gtcx-core is a cryptographic foundation library (22 TypeScript packages, 6 Rust crates) serving as the trust anchor for the GTCX ecosystem. This assessment evaluates the security posture through six automated analysis methods, a manual cryptographic primitive review, and threat modeling. No critical vulnerabilities were identified. Three medium-risk items require ongoing attention.
 
 ---
 
@@ -107,7 +109,7 @@ gtcx-core is a cryptographic foundation library (21 TypeScript packages, 6 Rust 
 
 | Check                     | Enforcement                                   | Status                                  |
 | ------------------------- | --------------------------------------------- | --------------------------------------- |
-| Package import boundaries | `pnpm architecture:check` (CI gate)           | 21 packages, 218 files, zero violations |
+| Package import boundaries | `pnpm architecture:check` (CI gate)           | 22 packages, 254 files, zero violations |
 | File size limits          | 500 LOC max per source file                   | Enforced with documented exceptions     |
 | API surface drift         | `pnpm api:check` with SHA-256 hash comparison | Zero drift from baseline                |
 | Performance budgets       | 14 metrics with 8% regression tolerance       | All within budget                       |
@@ -182,7 +184,7 @@ No critical vulnerabilities, no exploitable weaknesses, no unsafe code, no hardc
 
 | Control                              | Status                                                                             | Evidence                                                     |
 | ------------------------------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Production deps exact-version pinned | Yes                                                                                | All 21 packages use exact versions (no `^` ranges)           |
+| Production deps exact-version pinned | Yes                                                                                | All 22 packages use exact versions (no `^` ranges)           |
 | Lockfile committed                   | Yes                                                                                | `pnpm-lock.yaml` in git                                      |
 | Provenance manifest                  | Yes                                                                                | SHA-256 hashes of lockfile, API baseline, all evidence files |
 | SBOM generation                      | Yes                                                                                | CycloneDX format via Trivy                                   |

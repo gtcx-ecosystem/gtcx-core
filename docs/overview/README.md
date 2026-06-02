@@ -296,7 +296,7 @@ If GTCX fails: The status quo persists — foreign platforms extract value, arti
 | Primary Language    | TypeScript                               | 5.7+              | Business logic, APIs, domain models      |
 | Secondary Language  | Rust                                     | 1.91+             | Cryptography, ZKP, consensus, networking |
 | Runtime             | Node.js                                  | >= 20.0.0         | TypeScript execution                     |
-| Package Manager     | pnpm                                     | 9.15.0            | Workspace monorepo (21 packages)         |
+| Package Manager     | pnpm                                     | 9.15.0            | Workspace monorepo (22 packages)         |
 | Build Tool          | tsup                                     | 8.x               | TypeScript compilation                   |
 | Rust Build          | cargo                                    | 1.91+             | Rust crate compilation                   |
 | Testing (TS)        | vitest                                   | 2.x               | Unit + integration tests                 |

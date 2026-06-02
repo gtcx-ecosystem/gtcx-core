@@ -137,7 +137,7 @@ Run these commands against this repo to confirm the claims below — no source-r
 | Crypto deps are content-hash pinned         | `pnpm security:crypto-deps`                                             |
 | Operational prerequisites configured        | `pnpm ops:check`                                                        |
 | Architecture boundary discipline            | `pnpm architecture:check`                                               |
-| All 21 packages compile                     | `pnpm typecheck`                                                        |
+| All 22 packages compile                     | `pnpm typecheck`                                                        |
 | Reproducible build for at least one package | `pnpm build:reproducible --package=@gtcx/utils`                         |
 
 Each command exits non-zero if the claim fails. CI runs all of them on every PR.

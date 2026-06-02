@@ -1,18 +1,19 @@
 ---
-title: "Service Overview — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Service Overview — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "agents"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'agents']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Service Overview'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs', 'agentic']
 review_cycle: 'on-change'
+
 ---
 
 # Service Overview — gtcx-core
@@ -53,7 +55,7 @@ review_cycle: 'on-change'
                          │ imports @gtcx/* packages
   ┌──────────────────────▼───────────────────────────┐
   │   gtcx-core (this repo)                          │
-  │   18 public TS packages + 4 config packages + 6 Rust crates │
+  │   22 public TS packages + 4 config packages + 6 Rust crates │
   └──────────────────────────────────────────────────┘
                   (no external dependencies)
 ```
@@ -94,7 +96,7 @@ review_cycle: 'on-change'
 
 ```
 gtcx-core/
-├── packages/               # 18 public packages + shared config workspace packages
+├── packages/               # 22 public packages + shared config workspace packages
 │   ├── types/              #   Shared type definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives

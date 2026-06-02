@@ -1,18 +1,19 @@
 ---
-title: "Codebase Orientation — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Codebase Orientation — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "agents"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'agents']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Orientation'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs', 'agentic']
 review_cycle: 'on-change'
+
 ---
 
 # Codebase Orientation — gtcx-core
@@ -35,7 +37,7 @@ Session-start protocol for any agent or contributor entering this repo.
 
 ## What This Repo Is
 
-`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 18 public TypeScript packages (`@gtcx/*`), 4 shared config workspace packages, and 6 Rust crates (`gtcx-*`) consumed by downstream GTCX repos. It has no product surface, no UI, and no end users. Its output is primitives — signing, identity, verification, sync, networking, and ZKP.
+`gtcx-core` is the shared cryptographic and protocol foundation for the GTCX ecosystem. It exports 22 public TypeScript packages (`@gtcx/*`), 4 shared config workspace packages, and 6 Rust crates (`gtcx-*`) consumed by downstream GTCX repos. It has no product surface, no UI, and no end users. Its output is primitives — signing, identity, verification, sync, networking, and ZKP.
 
 Downstream repos depend on this. Breaking changes here break everything.
 

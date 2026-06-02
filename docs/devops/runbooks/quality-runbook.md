@@ -48,7 +48,7 @@ pnpm format:check                # Prettier format check
 pnpm typecheck                   # TypeScript strict mode — all workspace packages
 pnpm test                        # Full test suite (Vitest)
 pnpm test:coverage:critical      # Critical path coverage thresholds
-pnpm build                       # All 21 public TypeScript packages and 6 Rust crates
+pnpm build                       # All 22 public TypeScript packages and 6 Rust crates
 pnpm api:check                   # API surface baseline comparison
 pnpm quality:kpi:collect         # KPI metrics collection
 pnpm quality:kpi:export          # KPI metrics export

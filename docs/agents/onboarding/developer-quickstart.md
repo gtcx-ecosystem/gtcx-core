@@ -1,18 +1,19 @@
 ---
-title: "Developer Quickstart — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Developer Quickstart — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "agents"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'agents']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Developer Quickstart'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs', 'agentic']
 review_cycle: 'on-change'
+
 ---
 
 # Developer Quickstart — gtcx-core
@@ -51,7 +53,7 @@ Prerequisites: Node.js >= 20, pnpm >= 9.15, Rust >= 1.75. See [Developer Setup](
 
 ## What This Repo Is
 
-`gtcx-core` is a library monorepo — 18 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates. It has no server, no database, and produces no deployable application artifact. Downstream GTCX repos (`gtcx-protocols`, `gtcx-platforms`, `gtcx-app`, etc.) consume its public packages as npm dependencies.
+`gtcx-core` is a library monorepo — 22 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates. It has no server, no database, and produces no deployable application artifact. Downstream GTCX repos (`gtcx-protocols`, `gtcx-platforms`, `gtcx-app`, etc.) consume its public packages as npm dependencies.
 
 There is no "run the app" workflow. All work is package-level: build, test, lint, and verify.
 

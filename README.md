@@ -124,7 +124,7 @@ These live under [`packages/config`](./packages/config) and support the monorepo
 
 ```
 core/
-├── packages/               # 21 public npm packages + workspace tooling (`ai-eval`, config)
+├── packages/               # 22 public npm packages + 4 shared config workspace packages
 │   ├── types/              #   Core types and protocol definitions
 │   ├── schemas/            #   Zod validation schemas
 │   ├── crypto/             #   Cryptographic primitives

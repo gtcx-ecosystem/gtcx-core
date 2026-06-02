@@ -1,18 +1,19 @@
 ---
-title: "FIPS 140-2/3 Cryptographic Assessment — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'FIPS 140-2/3 Cryptographic Assessment — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "security"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'security']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Fips Assessment'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'crypto-security-engineer'
 tier: 'critical'
 tags: ['docs', 'security']
 review_cycle: 'quarterly'
+
 ---
 
 # FIPS 140-2/3 Cryptographic Assessment — gtcx-core
@@ -34,7 +36,7 @@ review_cycle: 'quarterly'
 
 ## Summary
 
-gtcx-core uses cryptographic primitives across 18 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates. This assessment inventories all cryptographic operations, classifies their FIPS 140-2/3 validation status, and defines the pathway to full FIPS compliance for government deployment.
+gtcx-core uses cryptographic primitives across 22 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates. This assessment inventories all cryptographic operations, classifies their FIPS 140-2/3 validation status, and defines the pathway to full FIPS compliance for government deployment.
 
 **Current status:** Partially compliant. FIPS-validated alternatives exist for all critical operations except zero-knowledge proofs.
 

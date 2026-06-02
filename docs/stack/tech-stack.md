@@ -1,18 +1,19 @@
 ---
-title: "Technology Stack — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Technology Stack — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "stack"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'stack']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Tech Stack'
 status: 'current'
 date: '2026-05-17'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'standard'
 tags: ['docs', 'stack']
 review_cycle: 'on-change'
+
 ---
 
 # Technology Stack — gtcx-core
@@ -51,15 +53,15 @@ review_cycle: 'on-change'
 
 ## TypeScript Packages (`@gtcx/*`)
 
-18 public packages plus 4 shared config workspace packages:
+22 public packages plus 4 shared config workspace packages:
 
-| Group                | Packages                                                                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **Foundational**     | `@gtcx/types`, `@gtcx/schemas`, `@gtcx/domain`, `@gtcx/events`                                                           |
-| **Trust / Security** | `@gtcx/crypto`, `@gtcx/crypto-native`, `@gtcx/security`, `@gtcx/verification`, `@gtcx/identity`                          |
-| **Application edge** | `@gtcx/services`, `@gtcx/api-client`, `@gtcx/connectivity`, `@gtcx/network`, `@gtcx/sync`, `@gtcx/workproof`, `@gtcx/ai` |
-| **Utilities**        | `@gtcx/logging`, `@gtcx/utils`                                                                                           |
-| **Config workspace** | `@gtcx/eslint-config`, `@gtcx/typescript-config`, `@gtcx/tsup-config`, `@gtcx/jurisdiction-config`                       |
+| Group                | Packages                                                                                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Foundational**     | `@gtcx/types`, `@gtcx/schemas`, `@gtcx/domain`, `@gtcx/events`                                                                                                                 |
+| **Trust / Security** | `@gtcx/crypto`, `@gtcx/crypto-native`, `@gtcx/security`, `@gtcx/verification`, `@gtcx/identity`                                                                                |
+| **Application edge** | `@gtcx/services`, `@gtcx/api-client`, `@gtcx/connectivity`, `@gtcx/network`, `@gtcx/sync`, `@gtcx/workproof`, `@gtcx/ai`, `@gtcx/ai-eval`, `@gtcx/resilience`, `@gtcx/runtime` |
+| **Utilities**        | `@gtcx/logging`, `@gtcx/utils`, `@gtcx/telemetry`                                                                                                                              |
+| **Config workspace** | `@gtcx/eslint-config`, `@gtcx/typescript-config`, `@gtcx/tsup-config`, `@gtcx/jurisdiction-config`                                                                             |
 
 ### Key TS Dependencies
 

@@ -48,7 +48,7 @@ Reviewed before every release.
 | Metric                    | Definition                                                   | Target               | Gate command                          |
 | ------------------------- | ------------------------------------------------------------ | -------------------- | ------------------------------------- |
 | API surface stability     | No unreviewed changes to exported symbols                    | 0 unreviewed         | `pnpm api:check`                      |
-| Build success rate        | All 21 public TS packages + 6 Rust crates build cleanly      | 100%                 | `pnpm build`                          |
+| Build success rate        | All 22 public TS packages + 6 Rust crates build cleanly      | 100%                 | `pnpm build`                          |
 | Test pass rate            | All Vitest and cargo tests pass                              | 100%                 | `pnpm test && cargo test --workspace` |
 | Critical package coverage | Coverage on crypto, domain, security, services, verification | Per-package minimums | `pnpm test:coverage:critical`         |
 | Security threat matrix    | No unresolved critical/high threats                          | 0 open               | `pnpm security:threat-matrix`         |
