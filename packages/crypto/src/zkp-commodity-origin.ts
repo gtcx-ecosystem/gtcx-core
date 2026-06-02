@@ -1,28 +1,32 @@
 import type { ZKProof } from './zkp';
 
 export interface CommodityOriginProofInput {
+  /** Commodity type discriminator (0 = gold, 1 = diamond, etc.). */
+  commodityType: number;
   /** Mine identifier — 32-byte hex string (64 characters). */
   mineId: string;
   /** GPS latitude in micro-degrees or appropriate fixed-point representation. */
   lat: number;
   /** GPS longitude in micro-degrees or appropriate fixed-point representation. */
   lon: number;
-  /** Assayed purity value (e.g. parts per billion). */
-  purity: number;
-  /** Weight value in appropriate units. */
-  weight: number;
-  /** 32-byte hex randomness for purity commitment. */
-  purityRandomness: string;
-  /** 32-byte hex randomness for weight commitment. */
-  weightRandomness: string;
+  /** Primary quality metric (e.g. purity for gold, clarity for diamonds). */
+  primaryMetric: number;
+  /** Secondary quality metric (e.g. weight for gold, carat for diamonds). */
+  secondaryMetric: number;
+  /** 32-byte hex randomness for primary metric commitment. */
+  primaryRandomness: string;
+  /** 32-byte hex randomness for secondary metric commitment. */
+  secondaryRandomness: string;
   /** 32-byte hex randomness for location commitment. */
   locationRandomness: string;
   /** Geographic bounds: [minLat, maxLat, minLon, maxLon]. */
   bounds: [number, number, number, number];
-  /** Minimum purity threshold the proof must satisfy. */
-  minPurity: number;
-  /** Minimum weight threshold the proof must satisfy. */
-  minWeight: number;
+  /** Minimum primary threshold the proof must satisfy. */
+  minPrimary: number;
+  /** Minimum secondary threshold the proof must satisfy. */
+  minSecondary: number;
+  /** Certification flags bitmask (bit 0 = KP certified). */
+  certificationFlags: number;
   /** Serialized Merkle path proving mine registry membership (hex). */
   merklePath: string;
   /** Proving key from {@link generateCommodityOriginKeys}. */
@@ -56,17 +60,19 @@ function assertHexEven(value: string, label: string): void {
 interface NativeZkpModule {
   groth16GenerateKeys: (circuitType: string) => { provingKey: string; verifyingKey: string };
   groth16ProveCommodityOrigin: (
+    commodityType: number,
     mineIdHex: string,
     lat: number,
     lon: number,
-    purity: number,
-    weight: number,
-    purityRandomnessHex: string,
-    weightRandomnessHex: string,
+    primaryMetric: number,
+    secondaryMetric: number,
+    primaryRandomnessHex: string,
+    secondaryRandomnessHex: string,
     locationRandomnessHex: string,
     bounds: number[],
-    minPurity: number,
-    minWeight: number,
+    minPrimary: number,
+    minSecondary: number,
+    certificationFlags: number,
     merklePathHex: string,
     provingKeyHex: string,
     verifyingKeyHex: string
@@ -135,7 +141,7 @@ export async function generateCommodityOriginKeys(): Promise<{
  * Prove a commodity origin statement.
  *
  * Proves that a mine (identified by `mineId`) is within licensed geographic
- * bounds, meets minimum purity and weight thresholds, and is registered in the
+ * bounds, meets minimum quality thresholds, and is registered in the
  * approved mines Merkle tree — without revealing the exact location or identity.
  *
  * @param input - Structured witness and circuit parameters.
@@ -145,8 +151,8 @@ export async function proveCommodityOrigin(
   input: CommodityOriginProofInput
 ): Promise<CommodityOriginProof> {
   assertHex64(input.mineId, 'mineId');
-  assertHex64(input.purityRandomness, 'purityRandomness');
-  assertHex64(input.weightRandomness, 'weightRandomness');
+  assertHex64(input.primaryRandomness, 'primaryRandomness');
+  assertHex64(input.secondaryRandomness, 'secondaryRandomness');
   assertHex64(input.locationRandomness, 'locationRandomness');
   assertHexEven(input.merklePath, 'merklePath');
   assertHexEven(input.provingKey, 'provingKey');
@@ -157,17 +163,19 @@ export async function proveCommodityOrigin(
 
   const native = await loadNativeZkp();
   const bundle = native.groth16ProveCommodityOrigin(
+    input.commodityType,
     input.mineId,
     input.lat,
     input.lon,
-    input.purity,
-    input.weight,
-    input.purityRandomness,
-    input.weightRandomness,
+    input.primaryMetric,
+    input.secondaryMetric,
+    input.primaryRandomness,
+    input.secondaryRandomness,
     input.locationRandomness,
     Array.from(input.bounds),
-    input.minPurity,
-    input.minWeight,
+    input.minPrimary,
+    input.minSecondary,
+    input.certificationFlags,
     input.merklePath,
     input.provingKey,
     input.verifyingKey

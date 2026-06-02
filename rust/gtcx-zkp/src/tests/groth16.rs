@@ -1,8 +1,8 @@
 use crate::error::ZkpError;
 use crate::groth16::{
     groth16_generate_keys, groth16_prove_gci_threshold, groth16_verify, sample_asset_ownership,
-    sample_commodity_origin, sample_location_region, AssetOwnershipCircuit, CommodityOriginCircuit,
-    LocationRegionCircuit,
+    sample_commodity_origin, sample_diamond_origin, sample_location_region, AssetOwnershipCircuit,
+    CommodityOriginCircuit, LocationRegionCircuit,
 };
 use crate::types::{Groth16CircuitType, DIGEST_BYTES};
 use ark_bn254::Fr;
@@ -73,20 +73,22 @@ fn test_location_region_constraints_satisfied() {
 fn test_commodity_origin_constraints_satisfied() {
     let sample = sample_commodity_origin().unwrap();
     let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
         mine_id: Some(sample.mine_id),
         lat: Some(sample.lat),
         lon: Some(sample.lon),
-        purity: Some(sample.purity),
-        weight: Some(sample.weight),
-        purity_randomness: Some(sample.purity_randomness),
-        weight_randomness: Some(sample.weight_randomness),
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(sample.secondary_metric),
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
         location_randomness: Some(sample.location_randomness),
         bounds: Some(sample.bounds),
-        min_purity: Some(sample.min_purity),
-        min_weight: Some(sample.min_weight),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
         region_hash: Some(sample.region_hash),
-        purity_commitment: Some(sample.purity_commitment),
-        weight_commitment: Some(sample.weight_commitment),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(sample.secondary_commitment),
         mines_root: Some(sample.mines_root),
         merkle_path: Some(sample.merkle_path),
     };
@@ -106,17 +108,19 @@ fn test_groth16_commodity_origin_proof_and_tamper() {
     let keys = groth16_generate_keys(Groth16CircuitType::CommodityOrigin).unwrap();
     let sample = sample_commodity_origin().unwrap();
     let (mut proof, _inputs) = groth16_prove_commodity_origin(
+        sample.commodity_type,
         sample.mine_id,
         sample.lat,
         sample.lon,
-        sample.purity,
-        sample.weight,
-        sample.purity_randomness,
-        sample.weight_randomness,
+        sample.primary_metric,
+        sample.secondary_metric,
+        sample.primary_randomness,
+        sample.secondary_randomness,
         sample.location_randomness,
         sample.bounds,
-        sample.min_purity,
-        sample.min_weight,
+        sample.min_primary,
+        sample.min_secondary,
+        sample.certification_flags,
         sample.merkle_path,
         &keys,
     )
@@ -175,3 +179,67 @@ fn test_groth16_location_region_proof_and_tamper() {
     assert!(!groth16_verify(&proof).unwrap());
 }
 
+#[test]
+fn test_diamond_origin_constraints_satisfied() {
+    // Diamond origin is now just commodity origin with commodity_type = 1
+    let sample = sample_diamond_origin().unwrap();
+    let circuit = CommodityOriginCircuit {
+        commodity_type: Some(sample.commodity_type),
+        mine_id: Some(sample.mine_id),
+        lat: Some(sample.lat),
+        lon: Some(sample.lon),
+        primary_metric: Some(sample.primary_metric),
+        secondary_metric: Some(sample.secondary_metric),
+        primary_randomness: Some(sample.primary_randomness),
+        secondary_randomness: Some(sample.secondary_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_primary: Some(sample.min_primary),
+        min_secondary: Some(sample.min_secondary),
+        certification_flags: Some(sample.certification_flags),
+        region_hash: Some(sample.region_hash),
+        primary_commitment: Some(sample.primary_commitment),
+        secondary_commitment: Some(sample.secondary_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    if !cs.is_satisfied().unwrap() {
+        let unsatisfied = cs.which_is_unsatisfied().unwrap();
+        panic!("constraints unsatisfied: {unsatisfied:?}");
+    }
+}
+
+#[test]
+#[ignore = "Groth16 proof generation is heavy; run explicitly for UAT evidence"]
+fn test_groth16_diamond_origin_proof_and_tamper() {
+    use crate::groth16::groth16_prove_commodity_origin;
+
+    // Diamond origin uses the same CommodityOrigin circuit with commodity_type = 1
+    let keys = groth16_generate_keys(Groth16CircuitType::CommodityOrigin).unwrap();
+    let sample = sample_diamond_origin().unwrap();
+    let (mut proof, _inputs) = groth16_prove_commodity_origin(
+        sample.commodity_type,
+        sample.mine_id,
+        sample.lat,
+        sample.lon,
+        sample.primary_metric,
+        sample.secondary_metric,
+        sample.primary_randomness,
+        sample.secondary_randomness,
+        sample.location_randomness,
+        sample.bounds,
+        sample.min_primary,
+        sample.min_secondary,
+        sample.certification_flags,
+        sample.merkle_path,
+        &keys,
+    )
+    .unwrap();
+    assert!(groth16_verify(&proof).unwrap());
+
+    // Tamper with public inputs
+    proof.public_inputs[0] = Fr::from(1u64);
+    assert!(!groth16_verify(&proof).unwrap());
+}

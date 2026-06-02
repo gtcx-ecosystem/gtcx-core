@@ -32,7 +32,10 @@ mod types;
 #[cfg(test)]
 mod tests;
 
-pub use bulletproofs::{bulletproofs_prove_amount_range, bulletproofs_verify_amount_range};
+pub use bulletproofs::{
+    bulletproofs_prove_amount_range, bulletproofs_prove_commodity_range,
+    bulletproofs_verify_amount_range, bulletproofs_verify_commodity_range,
+};
 pub use commitment::{commit, generate_proof, prove_and_verify, verify_proof};
 pub use error::{Result, ZkpError};
 pub use groth16::{
@@ -44,8 +47,9 @@ pub use schnorr::{
 };
 pub use types::{
     AssetOwnershipDigestConverter, AssetOwnershipMerkleConfig, AssetOwnershipPublicInputs,
-    BulletproofsRangeProofBundle, CircuitType, CommodityOriginPublicInputs, Groth16CircuitType,
-    Groth16Keys, Groth16ProofBundle, LocationRegionPublicInputs, Proof, PublicInputs,
+    BulletproofsCommodityRangeBundle, BulletproofsRangeProofBundle, CircuitType,
+    CommodityOriginPublicInputs, Groth16CircuitType, Groth16Keys,
+    Groth16ProofBundle, LocationRegionPublicInputs, Proof, PublicInputs,
     SchnorrIdentityProofBundle, Witness, ASSET_ID_BYTES, COMMITMENT_BYTES, DIGEST_BYTES,
     MAX_WITNESS_SIZE, OWNER_HASH_BYTES, RANDOMNESS_BYTES, U64_BYTES,
 };

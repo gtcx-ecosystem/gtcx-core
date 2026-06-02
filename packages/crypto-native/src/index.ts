@@ -20,7 +20,7 @@ export interface NativeCryptoBindings {
 }
 
 type RawBindings = Record<string, unknown>;
-type NativeByteArray = number[];
+export type NativeByteArray = number[];
 
 const requireFn =
   typeof require === 'function' ? require : createRequire(path.join(process.cwd(), 'package.json'));
@@ -212,251 +212,26 @@ export const derivePurposeKey = rawDerivePurposeKey
 export const version =
   typeof raw['version'] === 'function' ? () => (raw['version'] as () => string)() : undefined;
 
-// =============================================================================
-// ZKP BINDINGS (Groth16, Bulletproofs, Schnorr)
-// =============================================================================
+import { createZkpBindings } from './zkp-bindings';
+export type {
+  NativeGroth16Keys,
+  NativeGroth16ProofBundle,
+  NativeBulletproofsBundle,
+  NativeBulletproofsCommodityRangeBundle,
+  NativeSchnorrBundle,
+} from './zkp-bindings';
 
-export interface NativeGroth16Keys {
-  circuit: string;
-  provingKey: string;
-  verifyingKey: string;
-}
-
-export interface NativeGroth16ProofBundle {
-  circuit: string;
-  proof: string;
-  verifyingKey: string;
-  publicInputsJson: string;
-}
-
-export interface NativeBulletproofsBundle {
-  min: number;
-  max: number;
-  commitment: string;
-  proofLow: string;
-  proofHigh: string;
-}
-
-export interface NativeSchnorrBundle {
-  attributeHash: string;
-  subjectHash: string;
-  nonceCommitment: string;
-  response: string;
-}
-
-function optionalNativeFn<T extends (...args: never[]) => unknown>(keys: string[]): T | undefined {
-  for (const key of keys) {
-    const value = raw[key];
-    if (typeof value === 'function') {
-      return value as T;
-    }
-  }
-  return undefined;
-}
-
-export const groth16GenerateKeys = optionalNativeFn<(circuitType: string) => NativeGroth16Keys>([
-  'groth16_generate_keys',
-  'groth16GenerateKeys',
-]);
-
-export interface NativeCommodityOriginProofBundle extends NativeGroth16ProofBundle {
-  regionHash: string;
-  purityCommitment: string;
-  weightCommitment: string;
-  minesRoot: string;
-  minPurity: number;
-  minWeight: number;
-}
-
-const rawGroth16ProveCommodityOrigin = optionalNativeFn<
-  (
-    mineIdHex: string,
-    lat: number,
-    lon: number,
-    purity: number,
-    weight: number,
-    purityRandomnessHex: string,
-    weightRandomnessHex: string,
-    locationRandomnessHex: string,
-    bounds: number[],
-    minPurity: number,
-    minWeight: number,
-    merklePathHex: string,
-    provingKeyHex: string,
-    verifyingKeyHex: string
-  ) => NativeGroth16ProofBundle
->(['groth16_prove_commodity_origin', 'groth16ProveCommodityOrigin']);
-
-export const groth16ProveCommodityOrigin = rawGroth16ProveCommodityOrigin
-  ? (
-      mineIdHex: string,
-      lat: number,
-      lon: number,
-      purity: number,
-      weight: number,
-      purityRandomnessHex: string,
-      weightRandomnessHex: string,
-      locationRandomnessHex: string,
-      bounds: number[],
-      minPurity: number,
-      minWeight: number,
-      merklePathHex: string,
-      provingKeyHex: string,
-      verifyingKeyHex: string
-    ): NativeGroth16ProofBundle => {
-      assertHex(mineIdHex, 'mineId');
-      assertHex(purityRandomnessHex, 'purityRandomness');
-      assertHex(weightRandomnessHex, 'weightRandomness');
-      assertHex(locationRandomnessHex, 'locationRandomness');
-      assertHex(merklePathHex, 'merklePath');
-      assertHex(provingKeyHex, 'provingKey');
-      assertHex(verifyingKeyHex, 'verifyingKey');
-      if (bounds.length !== 4) {
-        throw new Error('bounds must have exactly 4 elements [minLat, maxLat, minLon, maxLon]');
-      }
-      return rawGroth16ProveCommodityOrigin(
-        mineIdHex,
-        lat,
-        lon,
-        purity,
-        weight,
-        purityRandomnessHex,
-        weightRandomnessHex,
-        locationRandomnessHex,
-        bounds,
-        minPurity,
-        minWeight,
-        merklePathHex,
-        provingKeyHex,
-        verifyingKeyHex
-      );
-    }
-  : undefined;
-
-const rawGroth16ProveGciThreshold = optionalNativeFn<
-  (
-    score: number,
-    threshold: number,
-    provingKeyHex: string,
-    verifyingKeyHex: string
-  ) => NativeGroth16ProofBundle
->(['groth16_prove_gci_threshold', 'groth16ProveGciThreshold']);
-
-export const groth16ProveGciThreshold = rawGroth16ProveGciThreshold
-  ? (
-      score: number,
-      threshold: number,
-      provingKeyHex: string,
-      verifyingKeyHex: string
-    ): NativeGroth16ProofBundle => {
-      assertHex(provingKeyHex, 'provingKey');
-      assertHex(verifyingKeyHex, 'verifyingKey');
-      return rawGroth16ProveGciThreshold(score, threshold, provingKeyHex, verifyingKeyHex);
-    }
-  : undefined;
-
-const rawGroth16VerifyProof = optionalNativeFn<
-  (
-    circuitType: string,
-    proofHex: string,
-    verifyingKeyHex: string,
-    publicInputsJson: string
-  ) => boolean
->(['groth16_verify_proof', 'groth16VerifyProof']);
-
-export const groth16VerifyProof = rawGroth16VerifyProof
-  ? (
-      circuitType: string,
-      proofHex: string,
-      verifyingKeyHex: string,
-      publicInputsJson: string
-    ): boolean => {
-      if (!isHex(proofHex) || !isHex(verifyingKeyHex)) {
-        return false;
-      }
-      return rawGroth16VerifyProof(circuitType, proofHex, verifyingKeyHex, publicInputsJson);
-    }
-  : undefined;
-
-const rawBulletproofsProveAmountRange = optionalNativeFn<
-  (amount: number, min: number, max: number, randomnessHex: string) => NativeBulletproofsBundle
->(['bulletproofs_prove_amount_range', 'bulletproofsProveAmountRange']);
-
-export const bulletproofsProveAmountRange = rawBulletproofsProveAmountRange
-  ? (amount: number, min: number, max: number, randomnessHex: string): NativeBulletproofsBundle => {
-      assertHex(randomnessHex, 'randomness');
-      return rawBulletproofsProveAmountRange(amount, min, max, randomnessHex);
-    }
-  : undefined;
-
-const rawBulletproofsVerifyAmountRange = optionalNativeFn<
-  (
-    min: number,
-    max: number,
-    commitmentHex: string,
-    proofLowHex: string,
-    proofHighHex: string
-  ) => boolean
->(['bulletproofs_verify_amount_range', 'bulletproofsVerifyAmountRange']);
-
-export const bulletproofsVerifyAmountRange = rawBulletproofsVerifyAmountRange
-  ? (
-      min: number,
-      max: number,
-      commitmentHex: string,
-      proofLowHex: string,
-      proofHighHex: string
-    ): boolean => {
-      if (!isHex(commitmentHex) || !isHex(proofLowHex) || !isHex(proofHighHex)) {
-        return false;
-      }
-      return rawBulletproofsVerifyAmountRange(min, max, commitmentHex, proofLowHex, proofHighHex);
-    }
-  : undefined;
-
-const rawSchnorrProveIdentityAttribute = optionalNativeFn<
-  (attribute: NativeByteArray, subjectHashHex: string) => NativeSchnorrBundle
->(['schnorr_prove_identity_attribute', 'schnorrProveIdentityAttribute']);
-
-export const schnorrProveIdentityAttribute = rawSchnorrProveIdentityAttribute
-  ? (attribute: Uint8Array, subjectHashHex: string): NativeSchnorrBundle => {
-      assertHex(subjectHashHex, 'subjectHash');
-      return rawSchnorrProveIdentityAttribute(toNativeBytes(attribute), subjectHashHex);
-    }
-  : undefined;
-
-const rawSchnorrVerifyIdentityAttribute = optionalNativeFn<
-  (
-    attributeHashHex: string,
-    subjectHashHex: string,
-    nonceCommitmentHex: string,
-    responseHex: string
-  ) => boolean
->(['schnorr_verify_identity_attribute', 'schnorrVerifyIdentityAttribute']);
-
-export const schnorrVerifyIdentityAttribute = rawSchnorrVerifyIdentityAttribute
-  ? (
-      attributeHashHex: string,
-      subjectHashHex: string,
-      nonceCommitmentHex: string,
-      responseHex: string
-    ): boolean => {
-      if (
-        !isHex(attributeHashHex) ||
-        !isHex(subjectHashHex) ||
-        !isHex(nonceCommitmentHex) ||
-        !isHex(responseHex)
-      ) {
-        return false;
-      }
-      return rawSchnorrVerifyIdentityAttribute(
-        attributeHashHex,
-        subjectHashHex,
-        nonceCommitmentHex,
-        responseHex
-      );
-    }
-  : undefined;
+const zkp = createZkpBindings(raw);
+export const groth16GenerateKeys = zkp.groth16GenerateKeys;
+export const groth16ProveCommodityOrigin = zkp.groth16ProveCommodityOrigin;
+export const groth16ProveGciThreshold = zkp.groth16ProveGciThreshold;
+export const groth16VerifyProof = zkp.groth16VerifyProof;
+export const bulletproofsProveAmountRange = zkp.bulletproofsProveAmountRange;
+export const bulletproofsVerifyAmountRange = zkp.bulletproofsVerifyAmountRange;
+export const bulletproofsProveCommodityRange = zkp.bulletproofsProveCommodityRange;
+export const bulletproofsVerifyCommodityRange = zkp.bulletproofsVerifyCommodityRange;
+export const schnorrProveIdentityAttribute = zkp.schnorrProveIdentityAttribute;
+export const schnorrVerifyIdentityAttribute = zkp.schnorrVerifyIdentityAttribute;
 
 export const nativeBindings: NativeCryptoBindings = {
   generateKeyPair,

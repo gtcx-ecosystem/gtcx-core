@@ -245,6 +245,7 @@ pub enum Groth16CircuitType {
     /// Prove location lies within a licensed region.
     LocationRegion,
     /// Prove commodity origin: mine in approved set, within region, meets thresholds.
+    /// Commodity-agnostic — works for gold, diamonds, coltan, etc.
     CommodityOrigin,
 }
 
@@ -287,6 +288,25 @@ pub struct BulletproofsRangeProofBundle {
     pub proof_high: Vec<u8>,
 }
 
+/// Bulletproofs commodity range proof bundle with commodity and unit commitments.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BulletproofsCommodityRangeBundle {
+    /// Minimum allowed quantity (inclusive).
+    pub min: u64,
+    /// Maximum allowed quantity (inclusive).
+    pub max: u64,
+    /// Pedersen commitment to the quantity.
+    pub commitment: [u8; COMMITMENT_BYTES],
+    /// Hash of the commodity type (e.g. "gold", "diamonds").
+    pub commodity_hash: [u8; DIGEST_BYTES],
+    /// Hash of the unit of measurement (e.g. "grams", "carats").
+    pub unit_hash: [u8; DIGEST_BYTES],
+    /// Range proof for (quantity - min).
+    pub proof_low: Vec<u8>,
+    /// Range proof for (max - quantity).
+    pub proof_high: Vec<u8>,
+}
+
 /// Schnorr proof bundle for identity attribute possession.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SchnorrIdentityProofBundle {
@@ -323,20 +343,26 @@ pub struct LocationRegionPublicInputs {
 }
 
 /// Public inputs for the commodity origin circuit.
+/// Commodity-agnostic — primary/secondary metrics are interpreted by the verifier
+/// based on `commodity_type` (e.g., 0 = gold: purity/weight, 1 = diamond: clarity/carat).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CommodityOriginPublicInputs {
+    /// Commodity type discriminator (0 = gold, 1 = diamond, etc.).
+    pub commodity_type: u64,
     /// Hash of the region bounds (min/max lat/lon).
     pub region_hash: [u8; DIGEST_BYTES],
-    /// Commitment to the purity value.
-    pub purity_commitment: [u8; DIGEST_BYTES],
-    /// Commitment to the weight value.
-    pub weight_commitment: [u8; DIGEST_BYTES],
+    /// Commitment to the primary quality metric.
+    pub primary_commitment: [u8; DIGEST_BYTES],
+    /// Commitment to the secondary quality metric.
+    pub secondary_commitment: [u8; DIGEST_BYTES],
     /// Merkle root of approved mines.
     pub mines_root: [u8; DIGEST_BYTES],
-    /// Minimum purity threshold.
-    pub min_purity: u64,
-    /// Minimum weight threshold.
-    pub min_weight: u64,
+    /// Minimum primary threshold.
+    pub min_primary: u64,
+    /// Minimum secondary threshold.
+    pub min_secondary: u64,
+    /// Certification flags bitmask (bit 0 = KP certified, etc.).
+    pub certification_flags: u64,
 }
 
 /// Merkle tree configuration for asset ownership proofs (SHA-256).

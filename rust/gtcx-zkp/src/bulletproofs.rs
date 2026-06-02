@@ -1,7 +1,10 @@
 //! Bulletproofs amount range proofs.
 
 use crate::error::{map_proof_system_error, Result, ZkpError};
-use crate::types::{ristretto_point_from_bytes, BulletproofsRangeProofBundle, COMMITMENT_BYTES};
+use crate::types::{
+    ristretto_point_from_bytes, BulletproofsCommodityRangeBundle, BulletproofsRangeProofBundle,
+    COMMITMENT_BYTES, DIGEST_BYTES,
+};
 use bulletproofs::{BulletproofGens, PedersenGens, RangeProof};
 use curve25519_dalek::scalar::Scalar;
 use merlin::Transcript;
@@ -145,4 +148,171 @@ pub fn bulletproofs_verify_amount_range(bundle: &BulletproofsRangeProofBundle) -
         .is_ok();
 
     Ok(low_ok && high_ok)
+}
+
+/// Generate a Bulletproofs range proof for a commodity quantity within [min, max],
+/// with commodity and unit commitments included in the transcript.
+#[instrument]
+pub fn bulletproofs_prove_commodity_range(
+    quantity: u64,
+    min: u64,
+    max: u64,
+    commodity_hash: [u8; DIGEST_BYTES],
+    unit_hash: [u8; DIGEST_BYTES],
+    randomness: [u8; COMMITMENT_BYTES],
+) -> Result<BulletproofsCommodityRangeBundle> {
+    if min > max {
+        return Err(ZkpError::InvalidWitness {
+            reason: "min exceeds max".to_string(),
+        });
+    }
+    if quantity < min || quantity > max {
+        return Err(ZkpError::InvalidWitness {
+            reason: "quantity outside bounds".to_string(),
+        });
+    }
+
+    let range = max - min;
+    let bits = range_bit_size(range);
+    let bp_gens = BulletproofGens::new(bits, 1);
+    let pc_gens = PedersenGens::default();
+    let blinding = Scalar::from_bytes_mod_order(randomness);
+
+    let quantity_point = pc_gens.commit(Scalar::from(quantity), blinding);
+    let quantity_commitment = quantity_point.compress();
+    let min_point = pc_gens.B * Scalar::from(min);
+    let max_point = pc_gens.B * Scalar::from(max);
+    let derived_low = (quantity_point - min_point).compress();
+    let derived_high = (max_point - quantity_point).compress();
+
+    let shifted_low = quantity - min;
+    let mut transcript_low = commodity_range_transcript(
+        b"gtcx.commodity_range.low",
+        min,
+        max,
+        bits,
+        &commodity_hash,
+        &unit_hash,
+    );
+    let (proof_low, commitment_low) = RangeProof::prove_single(
+        &bp_gens,
+        &pc_gens,
+        &mut transcript_low,
+        shifted_low,
+        &blinding,
+        bits,
+    )
+    .map_err(map_proof_system_error)?;
+    if commitment_low != derived_low {
+        return Err(ZkpError::ProofSystemError {
+            reason: "commodity range low commitment mismatch".to_string(),
+        });
+    }
+
+    let shifted_high = max - quantity;
+    let blinding_high = -blinding;
+    let mut transcript_high = commodity_range_transcript(
+        b"gtcx.commodity_range.high",
+        min,
+        max,
+        bits,
+        &commodity_hash,
+        &unit_hash,
+    );
+    let (proof_high, commitment_high) = RangeProof::prove_single(
+        &bp_gens,
+        &pc_gens,
+        &mut transcript_high,
+        shifted_high,
+        &blinding_high,
+        bits,
+    )
+    .map_err(map_proof_system_error)?;
+    if commitment_high != derived_high {
+        return Err(ZkpError::ProofSystemError {
+            reason: "commodity range high commitment mismatch".to_string(),
+        });
+    }
+
+    Ok(BulletproofsCommodityRangeBundle {
+        min,
+        max,
+        commitment: quantity_commitment.to_bytes(),
+        commodity_hash,
+        unit_hash,
+        proof_low: proof_low.to_bytes().to_vec(),
+        proof_high: proof_high.to_bytes().to_vec(),
+    })
+}
+
+/// Verify a Bulletproofs commodity range proof bundle for [min, max].
+#[instrument(skip_all)]
+pub fn bulletproofs_verify_commodity_range(bundle: &BulletproofsCommodityRangeBundle) -> Result<bool> {
+    if bundle.min > bundle.max {
+        return Err(ZkpError::InvalidWitness {
+            reason: "min exceeds max".to_string(),
+        });
+    }
+    let range = bundle.max - bundle.min;
+    let bits = range_bit_size(range);
+    let bp_gens = BulletproofGens::new(bits, 1);
+    let pc_gens = PedersenGens::default();
+
+    let quantity_point = ristretto_point_from_bytes(bundle.commitment)?;
+    let min_point = pc_gens.B * Scalar::from(bundle.min);
+    let max_point = pc_gens.B * Scalar::from(bundle.max);
+    let derived_low = (quantity_point - min_point).compress();
+    let derived_high = (max_point - quantity_point).compress();
+
+    let proof_low = RangeProof::from_bytes(&bundle.proof_low).map_err(map_proof_system_error)?;
+    let proof_high = RangeProof::from_bytes(&bundle.proof_high).map_err(map_proof_system_error)?;
+
+    let mut transcript_low = commodity_range_transcript(
+        b"gtcx.commodity_range.low",
+        bundle.min,
+        bundle.max,
+        bits,
+        &bundle.commodity_hash,
+        &bundle.unit_hash,
+    );
+    let low_ok = proof_low
+        .verify_single(&bp_gens, &pc_gens, &mut transcript_low, &derived_low, bits)
+        .is_ok();
+
+    let mut transcript_high = commodity_range_transcript(
+        b"gtcx.commodity_range.high",
+        bundle.min,
+        bundle.max,
+        bits,
+        &bundle.commodity_hash,
+        &bundle.unit_hash,
+    );
+    let high_ok = proof_high
+        .verify_single(
+            &bp_gens,
+            &pc_gens,
+            &mut transcript_high,
+            &derived_high,
+            bits,
+        )
+        .is_ok();
+
+    Ok(low_ok && high_ok)
+}
+
+fn commodity_range_transcript(
+    label: &'static [u8],
+    min: u64,
+    max: u64,
+    bits: usize,
+    commodity_hash: &[u8; DIGEST_BYTES],
+    unit_hash: &[u8; DIGEST_BYTES],
+) -> Transcript {
+    let mut transcript = Transcript::new(label);
+    transcript.append_message(b"min", &min.to_le_bytes());
+    transcript.append_message(b"max", &max.to_le_bytes());
+    transcript.append_message(b"bits", &(bits as u64).to_le_bytes());
+    transcript.append_message(b"commodity", commodity_hash);
+    transcript.append_message(b"unit", unit_hash);
+    transcript
 }

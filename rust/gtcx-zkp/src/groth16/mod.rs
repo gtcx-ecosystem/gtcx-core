@@ -51,25 +51,31 @@ pub(crate) struct LocationRegionCircuit {
     pub(crate) location_commitment: Option<[u8; DIGEST_BYTES]>,
 }
 
-/// Commodity origin circuit — proves a mine is in an approved set,
-/// within a licensed region, and meets purity/weight thresholds,
-/// without revealing the exact mine ID, GPS coordinates, or measurements.
+/// Commodity origin circuit — commodity-agnostic proof that a mine is in an approved set,
+/// within a licensed region, and meets quality thresholds, without revealing the exact
+/// mine ID, GPS coordinates, or measurements.
+///
+/// Primary and secondary metrics are interpreted by the verifier based on `commodity_type`
+/// (e.g., 0 = gold: purity/weight, 1 = diamond: clarity/carat).
+/// Certification flags are enforced off-chain by the verifier.
 #[derive(Clone)]
 pub(crate) struct CommodityOriginCircuit {
+    pub(crate) commodity_type: Option<u64>,
     pub(crate) mine_id: Option<[u8; ASSET_ID_BYTES]>,
     pub(crate) lat: Option<u64>,
     pub(crate) lon: Option<u64>,
-    pub(crate) purity: Option<u64>,
-    pub(crate) weight: Option<u64>,
-    pub(crate) purity_randomness: Option<[u8; RANDOMNESS_BYTES]>,
-    pub(crate) weight_randomness: Option<[u8; RANDOMNESS_BYTES]>,
+    pub(crate) primary_metric: Option<u64>,
+    pub(crate) secondary_metric: Option<u64>,
+    pub(crate) primary_randomness: Option<[u8; RANDOMNESS_BYTES]>,
+    pub(crate) secondary_randomness: Option<[u8; RANDOMNESS_BYTES]>,
     pub(crate) location_randomness: Option<[u8; RANDOMNESS_BYTES]>,
     pub(crate) bounds: Option<[u64; 4]>,
-    pub(crate) min_purity: Option<u64>,
-    pub(crate) min_weight: Option<u64>,
+    pub(crate) min_primary: Option<u64>,
+    pub(crate) min_secondary: Option<u64>,
+    pub(crate) certification_flags: Option<u64>,
     pub(crate) region_hash: Option<[u8; DIGEST_BYTES]>,
-    pub(crate) purity_commitment: Option<[u8; DIGEST_BYTES]>,
-    pub(crate) weight_commitment: Option<[u8; DIGEST_BYTES]>,
+    pub(crate) primary_commitment: Option<[u8; DIGEST_BYTES]>,
+    pub(crate) secondary_commitment: Option<[u8; DIGEST_BYTES]>,
     pub(crate) mines_root: Option<[u8; DIGEST_BYTES]>,
     pub(crate) merkle_path: Option<Path<AssetOwnershipMerkleConfig>>,
 }
@@ -303,18 +309,21 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
         cs: ConstraintSystemRef<Fr>,
     ) -> std::result::Result<(), SynthesisError> {
         // Public inputs
+        let _commodity_type = UInt64::new_input(cs.clone(), || {
+            self.commodity_type.ok_or(SynthesisError::AssignmentMissing)
+        })?;
         let region_hash = DigestVar::new_input(cs.clone(), || {
             self.region_hash
                 .map(|v| v.to_vec())
                 .ok_or(SynthesisError::AssignmentMissing)
         })?;
-        let purity_commitment = DigestVar::new_input(cs.clone(), || {
-            self.purity_commitment
+        let primary_commitment = DigestVar::new_input(cs.clone(), || {
+            self.primary_commitment
                 .map(|v| v.to_vec())
                 .ok_or(SynthesisError::AssignmentMissing)
         })?;
-        let weight_commitment = DigestVar::new_input(cs.clone(), || {
-            self.weight_commitment
+        let secondary_commitment = DigestVar::new_input(cs.clone(), || {
+            self.secondary_commitment
                 .map(|v| v.to_vec())
                 .ok_or(SynthesisError::AssignmentMissing)
         })?;
@@ -323,11 +332,14 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
                 .map(|v| v.to_vec())
                 .ok_or(SynthesisError::AssignmentMissing)
         })?;
-        let min_purity = UInt64::new_input(cs.clone(), || {
-            self.min_purity.ok_or(SynthesisError::AssignmentMissing)
+        let min_primary = UInt64::new_input(cs.clone(), || {
+            self.min_primary.ok_or(SynthesisError::AssignmentMissing)
         })?;
-        let min_weight = UInt64::new_input(cs.clone(), || {
-            self.min_weight.ok_or(SynthesisError::AssignmentMissing)
+        let min_secondary = UInt64::new_input(cs.clone(), || {
+            self.min_secondary.ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let _certification_flags = UInt64::new_input(cs.clone(), || {
+            self.certification_flags.ok_or(SynthesisError::AssignmentMissing)
         })?;
 
         // Witness: mine_id
@@ -361,20 +373,20 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
             })
             .collect::<std::result::Result<_, _>>()?;
 
-        // Witness: purity and weight
-        let purity_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+        // Witness: primary and secondary metrics
+        let primary_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
             .map(|i| {
                 UInt8::new_witness(cs.clone(), || {
-                    self.purity
+                    self.primary_metric
                         .map(|v| u64_to_le_bytes(v)[i])
                         .ok_or(SynthesisError::AssignmentMissing)
                 })
             })
             .collect::<std::result::Result<_, _>>()?;
-        let weight_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+        let secondary_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
             .map(|i| {
                 UInt8::new_witness(cs.clone(), || {
-                    self.weight
+                    self.secondary_metric
                         .map(|v| u64_to_le_bytes(v)[i])
                         .ok_or(SynthesisError::AssignmentMissing)
                 })
@@ -382,19 +394,19 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
             .collect::<std::result::Result<_, _>>()?;
 
         // Witness: randomness values
-        let purity_randomness_bytes: Vec<UInt8<Fr>> = (0..RANDOMNESS_BYTES)
+        let primary_randomness_bytes: Vec<UInt8<Fr>> = (0..RANDOMNESS_BYTES)
             .map(|i| {
                 UInt8::new_witness(cs.clone(), || {
-                    self.purity_randomness
+                    self.primary_randomness
                         .map(|v| v[i])
                         .ok_or(SynthesisError::AssignmentMissing)
                 })
             })
             .collect::<std::result::Result<_, _>>()?;
-        let weight_randomness_bytes: Vec<UInt8<Fr>> = (0..RANDOMNESS_BYTES)
+        let secondary_randomness_bytes: Vec<UInt8<Fr>> = (0..RANDOMNESS_BYTES)
             .map(|i| {
                 UInt8::new_witness(cs.clone(), || {
-                    self.weight_randomness
+                    self.secondary_randomness
                         .map(|v| v[i])
                         .ok_or(SynthesisError::AssignmentMissing)
                 })
@@ -432,8 +444,8 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
         let max_lat = uint64_from_le_bytes(&max_lat_bytes)?;
         let min_lon = uint64_from_le_bytes(&min_lon_bytes)?;
         let max_lon = uint64_from_le_bytes(&max_lon_bytes)?;
-        let purity = uint64_from_le_bytes(&purity_bytes)?;
-        let weight = uint64_from_le_bytes(&weight_bytes)?;
+        let primary_metric = uint64_from_le_bytes(&primary_bytes)?;
+        let secondary_metric = uint64_from_le_bytes(&secondary_bytes)?;
 
         // 1. GPS within bounds
         let lat_ge_min = uint64_is_ge(&lat, &min_lat)?;
@@ -445,30 +457,30 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
         lon_ge_min.enforce_equal(&Boolean::constant(true))?;
         max_ge_lon.enforce_equal(&Boolean::constant(true))?;
 
-        // 2. Purity >= min_purity
-        let purity_ge_min = uint64_is_ge(&purity, &min_purity)?;
-        purity_ge_min.enforce_equal(&Boolean::constant(true))?;
+        // 2. Primary metric >= min_primary
+        let primary_ge_min = uint64_is_ge(&primary_metric, &min_primary)?;
+        primary_ge_min.enforce_equal(&Boolean::constant(true))?;
 
-        // 3. Weight >= min_weight
-        let weight_ge_min = uint64_is_ge(&weight, &min_weight)?;
-        weight_ge_min.enforce_equal(&Boolean::constant(true))?;
+        // 3. Secondary metric >= min_secondary
+        let secondary_ge_min = uint64_is_ge(&secondary_metric, &min_secondary)?;
+        secondary_ge_min.enforce_equal(&Boolean::constant(true))?;
 
-        // 4. Verify purity_commitment = SHA-256(purity || purity_randomness)
+        // 4. Verify primary_commitment = SHA-256(primary_metric || primary_randomness)
         let unit = UnitVar::new_constant(cs.clone(), ())?;
-        let mut purity_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
-        purity_input.extend_from_slice(&purity_bytes);
-        purity_input.extend_from_slice(&purity_randomness_bytes);
-        let computed_purity_commitment =
-            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &purity_input)?;
-        computed_purity_commitment.enforce_equal(&purity_commitment)?;
+        let mut primary_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
+        primary_input.extend_from_slice(&primary_bytes);
+        primary_input.extend_from_slice(&primary_randomness_bytes);
+        let computed_primary_commitment =
+            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &primary_input)?;
+        computed_primary_commitment.enforce_equal(&primary_commitment)?;
 
-        // 5. Verify weight_commitment = SHA-256(weight || weight_randomness)
-        let mut weight_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
-        weight_input.extend_from_slice(&weight_bytes);
-        weight_input.extend_from_slice(&weight_randomness_bytes);
-        let computed_weight_commitment =
-            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &weight_input)?;
-        computed_weight_commitment.enforce_equal(&weight_commitment)?;
+        // 5. Verify secondary_commitment = SHA-256(secondary_metric || secondary_randomness)
+        let mut secondary_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
+        secondary_input.extend_from_slice(&secondary_bytes);
+        secondary_input.extend_from_slice(&secondary_randomness_bytes);
+        let computed_secondary_commitment =
+            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &secondary_input)?;
+        computed_secondary_commitment.enforce_equal(&secondary_commitment)?;
 
         // 6. Verify location_commitment = SHA-256(lat || lon || location_randomness)
         let mut location_input = Vec::with_capacity(U64_BYTES * 2 + RANDOMNESS_BYTES);
@@ -477,9 +489,6 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
         location_input.extend_from_slice(&location_randomness_bytes);
         let computed_location_commitment =
             <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &location_input)?;
-        // location_commitment is not a direct public input, but we verify it against
-        // the region_hash relationship indirectly via bounds verification above.
-        // For this circuit, we bind location_commitment to a witness and enforce equality.
         let location_commitment_bytes: Vec<UInt8<Fr>> = (0..DIGEST_BYTES)
             .map(|i| {
                 UInt8::new_witness(cs.clone(), || {
@@ -529,6 +538,8 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
 mod utils;
 use utils::*;
 pub use utils::{sample_asset_ownership, sample_commodity_origin, sample_location_region};
+#[cfg(test)]
+pub use utils::sample_diamond_origin;
 
 mod ops;
 pub use ops::*;

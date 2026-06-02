@@ -92,35 +92,42 @@ pub fn groth16_prove_gci_threshold(
 
 /// Prove a commodity origin statement.
 ///
+/// Commodity-agnostic: `primary_metric`/`secondary_metric` and `commodity_type`
+/// are interpreted by the verifier based on the commodity policy.
+///
 /// # Arguments
 ///
+/// * `commodity_type` - Commodity discriminator (0 = gold, 1 = diamond, etc.)
 /// * `mine_id_hex` - The mine identifier (32 bytes hex)
 /// * `lat` - GPS latitude
 /// * `lon` - GPS longitude
-/// * `purity` - Purity value
-/// * `weight` - Weight value
-/// * `purity_randomness_hex` - Randomness for purity commitment (32 bytes hex)
-/// * `weight_randomness_hex` - Randomness for weight commitment (32 bytes hex)
+/// * `primary_metric` - Primary quality metric value
+/// * `secondary_metric` - Secondary quality metric value
+/// * `primary_randomness_hex` - Randomness for primary commitment (32 bytes hex)
+/// * `secondary_randomness_hex` - Randomness for secondary commitment (32 bytes hex)
 /// * `location_randomness_hex` - Randomness for location commitment (32 bytes hex)
 /// * `bounds` - [min_lat, max_lat, min_lon, max_lon]
-/// * `min_purity` - Minimum purity threshold
-/// * `min_weight` - Minimum weight threshold
+/// * `min_primary` - Minimum primary threshold
+/// * `min_secondary` - Minimum secondary threshold
+/// * `certification_flags` - Certification bitmask (bit 0 = KP certified)
 /// * `merkle_path_hex` - Serialized Merkle path (canonical arkworks bytes)
 /// * `proving_key_hex` - The proving key from `groth16_generate_keys`
 /// * `verifying_key_hex` - The verifying key from `groth16_generate_keys`
 #[napi]
 pub fn groth16_prove_commodity_origin(
+    commodity_type: i64,
     mine_id_hex: String,
     lat: i64,
     lon: i64,
-    purity: i64,
-    weight: i64,
-    purity_randomness_hex: String,
-    weight_randomness_hex: String,
+    primary_metric: i64,
+    secondary_metric: i64,
+    primary_randomness_hex: String,
+    secondary_randomness_hex: String,
     location_randomness_hex: String,
     bounds: Vec<i64>,
-    min_purity: i64,
-    min_weight: i64,
+    min_primary: i64,
+    min_secondary: i64,
+    certification_flags: i64,
     merkle_path_hex: String,
     proving_key_hex: String,
     verifying_key_hex: String,
@@ -135,8 +142,8 @@ pub fn groth16_prove_commodity_origin(
     }
 
     let mine_id = decode_32_bytes(&mine_id_hex, "mine_id")?;
-    let purity_randomness = decode_32_bytes(&purity_randomness_hex, "purity_randomness")?;
-    let weight_randomness = decode_32_bytes(&weight_randomness_hex, "weight_randomness")?;
+    let primary_randomness = decode_32_bytes(&primary_randomness_hex, "primary_randomness")?;
+    let secondary_randomness = decode_32_bytes(&secondary_randomness_hex, "secondary_randomness")?;
     let location_randomness = decode_32_bytes(&location_randomness_hex, "location_randomness")?;
 
     let merkle_path_bytes = hex::decode(&merkle_path_hex).map_err(map_hex_err)?;
@@ -154,17 +161,19 @@ pub fn groth16_prove_commodity_origin(
     let bounds_arr = [bounds[0] as u64, bounds[1] as u64, bounds[2] as u64, bounds[3] as u64];
 
     let (bundle, _inputs) = gtcx_zkp::groth16_prove_commodity_origin(
+        commodity_type as u64,
         mine_id,
         lat as u64,
         lon as u64,
-        purity as u64,
-        weight as u64,
-        purity_randomness,
-        weight_randomness,
+        primary_metric as u64,
+        secondary_metric as u64,
+        primary_randomness,
+        secondary_randomness,
         location_randomness,
         bounds_arr,
-        min_purity as u64,
-        min_weight as u64,
+        min_primary as u64,
+        min_secondary as u64,
+        certification_flags as u64,
         merkle_path,
         &keys,
     )

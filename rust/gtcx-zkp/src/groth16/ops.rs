@@ -65,20 +65,22 @@ pub fn groth16_generate_keys(circuit: Groth16CircuitType) -> Result<Groth16Keys>
             let mut rng = zk_rng();
             let sample = sample_commodity_origin()?;
             let circuit_impl = CommodityOriginCircuit {
+                commodity_type: Some(sample.commodity_type),
                 mine_id: Some(sample.mine_id),
                 lat: Some(sample.lat),
                 lon: Some(sample.lon),
-                purity: Some(sample.purity),
-                weight: Some(sample.weight),
-                purity_randomness: Some(sample.purity_randomness),
-                weight_randomness: Some(sample.weight_randomness),
+                primary_metric: Some(sample.primary_metric),
+                secondary_metric: Some(sample.secondary_metric),
+                primary_randomness: Some(sample.primary_randomness),
+                secondary_randomness: Some(sample.secondary_randomness),
                 location_randomness: Some(sample.location_randomness),
                 bounds: Some(sample.bounds),
-                min_purity: Some(sample.min_purity),
-                min_weight: Some(sample.min_weight),
+                min_primary: Some(sample.min_primary),
+                min_secondary: Some(sample.min_secondary),
+                certification_flags: Some(sample.certification_flags),
                 region_hash: Some(sample.region_hash),
-                purity_commitment: Some(sample.purity_commitment),
-                weight_commitment: Some(sample.weight_commitment),
+                primary_commitment: Some(sample.primary_commitment),
+                secondary_commitment: Some(sample.secondary_commitment),
                 mines_root: Some(sample.mines_root),
                 merkle_path: Some(sample.merkle_path),
             };
@@ -248,19 +250,25 @@ pub fn groth16_prove_location_region(
 }
 
 /// Generate a Groth16 proof for the commodity origin circuit.
+///
+/// Commodity-agnostic: `primary_metric`/`secondary_metric` and `commodity_type`
+/// are interpreted by the verifier based on the commodity policy.
 #[instrument]
+#[allow(clippy::too_many_arguments)]
 pub fn groth16_prove_commodity_origin(
+    commodity_type: u64,
     mine_id: [u8; ASSET_ID_BYTES],
     lat: u64,
     lon: u64,
-    purity: u64,
-    weight: u64,
-    purity_randomness: [u8; RANDOMNESS_BYTES],
-    weight_randomness: [u8; RANDOMNESS_BYTES],
+    primary_metric: u64,
+    secondary_metric: u64,
+    primary_randomness: [u8; RANDOMNESS_BYTES],
+    secondary_randomness: [u8; RANDOMNESS_BYTES],
     location_randomness: [u8; RANDOMNESS_BYTES],
     bounds: [u64; 4],
-    min_purity: u64,
-    min_weight: u64,
+    min_primary: u64,
+    min_secondary: u64,
+    certification_flags: u64,
     merkle_path: Path<AssetOwnershipMerkleConfig>,
     keys: &Groth16Keys,
 ) -> Result<(Groth16ProofBundle, CommodityOriginPublicInputs)> {
@@ -272,27 +280,27 @@ pub fn groth16_prove_commodity_origin(
             reason: "location outside bounds".to_string(),
         });
     }
-    if purity < min_purity {
+    if primary_metric < min_primary {
         return Err(ZkpError::InvalidWitness {
-            reason: "purity below minimum".to_string(),
+            reason: "primary metric below minimum".to_string(),
         });
     }
-    if weight < min_weight {
+    if secondary_metric < min_secondary {
         return Err(ZkpError::InvalidWitness {
-            reason: "weight below minimum".to_string(),
+            reason: "secondary metric below minimum".to_string(),
         });
     }
 
     // Compute commitments and hashes
-    let mut purity_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
-    purity_input.extend_from_slice(&u64_to_le_bytes(purity));
-    purity_input.extend_from_slice(&purity_randomness);
-    let purity_commitment = sha256_digest(&purity_input)?;
+    let mut primary_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
+    primary_input.extend_from_slice(&u64_to_le_bytes(primary_metric));
+    primary_input.extend_from_slice(&primary_randomness);
+    let primary_commitment = sha256_digest(&primary_input)?;
 
-    let mut weight_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
-    weight_input.extend_from_slice(&u64_to_le_bytes(weight));
-    weight_input.extend_from_slice(&weight_randomness);
-    let weight_commitment = sha256_digest(&weight_input)?;
+    let mut secondary_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
+    secondary_input.extend_from_slice(&u64_to_le_bytes(secondary_metric));
+    secondary_input.extend_from_slice(&secondary_randomness);
+    let secondary_commitment = sha256_digest(&secondary_input)?;
 
     let mut region_input = Vec::with_capacity(U64_BYTES * 4);
     for bound in bounds {
@@ -333,40 +341,46 @@ pub fn groth16_prove_commodity_origin(
     let pk: ProvingKey<Bn254> = deserialize(&keys.proving_key)?;
     let mut rng = zk_rng();
     let circuit = CommodityOriginCircuit {
+        commodity_type: Some(commodity_type),
         mine_id: Some(mine_id),
         lat: Some(lat),
         lon: Some(lon),
-        purity: Some(purity),
-        weight: Some(weight),
-        purity_randomness: Some(purity_randomness),
-        weight_randomness: Some(weight_randomness),
+        primary_metric: Some(primary_metric),
+        secondary_metric: Some(secondary_metric),
+        primary_randomness: Some(primary_randomness),
+        secondary_randomness: Some(secondary_randomness),
         location_randomness: Some(location_randomness),
         bounds: Some(bounds),
-        min_purity: Some(min_purity),
-        min_weight: Some(min_weight),
+        min_primary: Some(min_primary),
+        min_secondary: Some(min_secondary),
+        certification_flags: Some(certification_flags),
         region_hash: Some(region_hash),
-        purity_commitment: Some(purity_commitment),
-        weight_commitment: Some(weight_commitment),
+        primary_commitment: Some(primary_commitment),
+        secondary_commitment: Some(secondary_commitment),
         mines_root: Some(mines_root),
         merkle_path: Some(merkle_path),
     };
     let proof = Groth16::<Bn254>::prove(&pk, circuit, &mut rng).map_err(map_proof_system_error)?;
 
     let mut public_inputs = Vec::new();
+    public_inputs.extend(u64_to_fr_bits(commodity_type));
     public_inputs.extend(bytes_to_fr_bits(&region_hash));
-    public_inputs.extend(bytes_to_fr_bits(&purity_commitment));
-    public_inputs.extend(bytes_to_fr_bits(&weight_commitment));
+    public_inputs.extend(bytes_to_fr_bits(&primary_commitment));
+    public_inputs.extend(bytes_to_fr_bits(&secondary_commitment));
     public_inputs.extend(bytes_to_fr_bits(&mines_root));
-    public_inputs.extend(u64_to_fr_bits(min_purity));
-    public_inputs.extend(u64_to_fr_bits(min_weight));
+    public_inputs.extend(u64_to_fr_bits(min_primary));
+    public_inputs.extend(u64_to_fr_bits(min_secondary));
+    public_inputs.extend(u64_to_fr_bits(certification_flags));
 
     let inputs = CommodityOriginPublicInputs {
+        commodity_type,
         region_hash,
-        purity_commitment,
-        weight_commitment,
+        primary_commitment,
+        secondary_commitment,
         mines_root,
-        min_purity,
-        min_weight,
+        min_primary,
+        min_secondary,
+        certification_flags,
     };
 
     Ok((

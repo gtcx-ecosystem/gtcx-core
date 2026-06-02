@@ -415,6 +415,40 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
     }
 
     if (proof.system === 'bulletproofs') {
+      if (proof.proofType === 'commodity_range') {
+        const verifyFn = this.pickFn([
+          'bulletproofsVerifyCommodityRange',
+          'bulletproofs_verify_commodity_range',
+        ]);
+        const min = parseInt(proof.publicInputs[0] ?? '0', 10);
+        const max = parseInt(proof.publicInputs[1] ?? '0', 10);
+        const commitment = proof.publicInputs[2] ?? '';
+        let proofData: {
+          proofLow: string;
+          proofHigh: string;
+          commodityHash: string;
+          unitHash: string;
+        };
+        try {
+          proofData = JSON.parse(proof.proof) as typeof proofData;
+        } catch {
+          return false;
+        }
+        try {
+          return verifyFn(
+            min,
+            max,
+            commitment,
+            proofData.commodityHash,
+            proofData.unitHash,
+            proofData.proofLow,
+            proofData.proofHigh
+          ) as boolean;
+        } catch {
+          return false;
+        }
+      }
+
       const verifyFn = this.pickFn([
         'bulletproofsVerifyAmountRange',
         'bulletproofs_verify_amount_range',

@@ -83,6 +83,21 @@ export {
   type CommodityOriginProof,
 } from './zkp-commodity-origin';
 
+export {
+  generateDiamondOriginKeys,
+  proveDiamondOrigin,
+  verifyDiamondOrigin,
+  type DiamondOriginProofInput,
+  type DiamondOriginProof,
+} from './zkp-diamond-origin';
+
+export {
+  proveCommodityRange,
+  verifyCommodityRange,
+  type CommodityRangeProofInput,
+  type CommodityRangeProof,
+} from './zkp-commodity-range';
+
 // ============================================================================
 // TRACED OPERATIONS (AI-Native)
 // Import from '@gtcx/crypto/traced' for operation logging

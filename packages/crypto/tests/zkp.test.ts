@@ -448,17 +448,19 @@ const RUN_HEAVY_ZKP = process.env['GTCX_RUN_HEAVY_ZKP_TESTS'] === '1';
 
 describe('CommodityOrigin ZKP (native)', () => {
   const validInput = {
+    commodityType: 0,
     mineId: '0101010101010101010101010101010101010101010101010101010101010101',
     lat: 15,
     lon: 35,
-    purity: 995,
-    weight: 1000,
-    purityRandomness: '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a',
-    weightRandomness: '0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b',
+    primaryMetric: 995,
+    secondaryMetric: 1000,
+    primaryRandomness: '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a',
+    secondaryRandomness: '0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b',
     locationRandomness: '0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c',
     bounds: [10, 20, 30, 40] as [number, number, number, number],
-    minPurity: 950,
-    minWeight: 500,
+    minPrimary: 950,
+    minSecondary: 500,
+    certificationFlags: 0,
     merklePath:
       '200000000000000099795c4a032e419d11bf6b126146caf2017d9af9f81069e830c1df1e64c96a230100000000000000200000000000000076f751a99f42cf35974e668242fdc5b4e57486a4e95f7b2fc1bd878b99903b410000000000000000',
     provingKey: 'aa'.repeat(128),
@@ -488,8 +490,8 @@ describe('CommodityOrigin ZKP (native)', () => {
   it('proveCommodityOrigin validates randomness hex', async () => {
     const { proveCommodityOrigin } = await import('../src/zkp-commodity-origin');
     await expect(
-      proveCommodityOrigin({ ...validInput, purityRandomness: 'zzzz' } as any)
-    ).rejects.toThrow(/purityRandomness: expected 32-byte hex string/);
+      proveCommodityOrigin({ ...validInput, primaryRandomness: 'zzzz' } as any)
+    ).rejects.toThrow(/primaryRandomness: expected 32-byte hex string/);
   });
 
   it('proveCommodityOrigin validates bounds length', async () => {
@@ -542,4 +544,96 @@ describe('CommodityOrigin ZKP (native)', () => {
     },
     60_000
   );
+});
+
+describe('DiamondOrigin ZKP (native)', () => {
+  const validInput = {
+    mineId: '0202020202020202020202020202020202020202020202020202020202020202',
+    lat: 18,
+    lon: 30,
+    clarity: 85,
+    carat: 500,
+    clarityRandomness: '0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d',
+    caratRandomness: '0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e',
+    locationRandomness: '0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f',
+    bounds: [15, 25, 25, 35] as [number, number, number, number],
+    minClarity: 70,
+    minCarat: 100,
+    kpCertified: true,
+    merklePath:
+      '200000000000000099795c4a032e419d11bf6b126146caf2017d9af9f81069e830c1df1e64c96a230100000000000000200000000000000076f751a99f42cf35974e668242fdc5b4e57486a4e95f7b2fc1bd878b99903b410000000000000000',
+    provingKey: 'aa'.repeat(128),
+    verifyingKey: 'bb'.repeat(128),
+  };
+
+  it('proveDiamondOrigin validates mineId length', async () => {
+    const { proveDiamondOrigin } = await import('../src/zkp-diamond-origin');
+    await expect(proveDiamondOrigin({ ...validInput, mineId: 'abcd' } as any)).rejects.toThrow(
+      /mineId: expected 32-byte hex string/
+    );
+  });
+
+  it('proveDiamondOrigin validates kpCertified is true', async () => {
+    const { proveDiamondOrigin } = await import('../src/zkp-diamond-origin');
+    await expect(proveDiamondOrigin({ ...validInput, kpCertified: false } as any)).rejects.toThrow(
+      /kpCertified must be true/
+    );
+  });
+
+  it('proveDiamondOrigin validates bounds length', async () => {
+    const { proveDiamondOrigin } = await import('../src/zkp-diamond-origin');
+    await expect(proveDiamondOrigin({ ...validInput, bounds: [15, 25] } as any)).rejects.toThrow(
+      /bounds must have exactly 4 elements/
+    );
+  });
+});
+
+describe('CommodityRange ZKP (native)', () => {
+  const validInput = {
+    quantity: 55,
+    min: 10,
+    max: 100,
+    commodityHash: '0101010101010101010101010101010101010101010101010101010101010101',
+    unitHash: '0202020202020202020202020202020202020202020202020202020202020202',
+    randomness: '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a',
+  };
+
+  it('proveCommodityRange validates hex inputs', async () => {
+    const { proveCommodityRange } = await import('../src/zkp-commodity-range');
+    await expect(
+      proveCommodityRange({ ...validInput, commodityHash: 'zzzz' } as any)
+    ).rejects.toThrow(/commodityHash: expected 32-byte hex string/);
+  });
+
+  it('proveCommodityRange validates min <= max', async () => {
+    const { proveCommodityRange } = await import('../src/zkp-commodity-range');
+    await expect(proveCommodityRange({ ...validInput, min: 100, max: 10 } as any)).rejects.toThrow(
+      /min must be <= max/
+    );
+  });
+
+  it('end-to-end prove and verify commodity range', async () => {
+    const { proveCommodityRange, verifyCommodityRange } =
+      await import('../src/zkp-commodity-range');
+
+    const proof = await proveCommodityRange(validInput);
+
+    expect(proof.system).toBe('bulletproofs');
+    expect(proof.proofType).toBe('commodity_range');
+    expect(proof.proof).toMatch(/proofLow/);
+    expect(proof.publicInputs).toEqual(['10', '100', expect.stringMatching(/^[0-9a-f]+$/i)]);
+
+    const valid = await verifyCommodityRange(proof);
+    expect(valid).toBe(true);
+  }, 30_000);
+
+  it('tampered commodity range proof fails verification', async () => {
+    const { proveCommodityRange, verifyCommodityRange } =
+      await import('../src/zkp-commodity-range');
+
+    const proof = await proveCommodityRange(validInput);
+    const tampered = { ...proof, proof: proof.proof.slice(0, -4) + 'dead' };
+    const valid = await verifyCommodityRange(tampered);
+    expect(valid).toBe(false);
+  }, 30_000);
 });
