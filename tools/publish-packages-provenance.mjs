@@ -17,6 +17,34 @@ import { PUBLIC_PACKAGE_DIRS } from './public-packages.mjs';
 const ROOT = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const MANIFEST_PATH = join(ROOT, 'artifacts', 'npm-publish-manifest.json');
 
+/** npm Sigstore provenance requires GitHub Actions OIDC + a public source repo. */
+function assertProvenancePublishEnvironment() {
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    return;
+  }
+
+  console.error(
+    [
+      '',
+      'npm publish --provenance cannot run on a developer laptop.',
+      'npm reports: "Automatic provenance generation not supported for provider: null"',
+      '',
+      'Publish from CI instead:',
+      '  gh workflow run release.yml -f provenance_republish=true',
+      '',
+      'Requirements:',
+      '  - gtcx-ecosystem/gtcx-core must be public (npm E422 on private repos)',
+      '  - release.yml job needs id-token: write (already configured)',
+      '',
+      'After the workflow succeeds:',
+      '  pnpm provenance:check-npm:strict',
+      '  npm view @gtcx/<pkg>@<version> dist.attestations',
+      '',
+    ].join('\n')
+  );
+  process.exit(1);
+}
+
 function readLocalPackage(shortName) {
   const dir = join(ROOT, 'packages', shortName);
   const pkg = JSON.parse(readFileSync(join(dir, 'package.json'), 'utf8'));
@@ -77,6 +105,7 @@ function publishOne(shortName) {
   }
 
   console.log(`publish ${name}@${version} with npm provenance`);
+  assertProvenancePublishEnvironment();
   execSync('pnpm pack', { cwd: dir, stdio: 'inherit' });
 
   const tarball = readdirSync(dir).find((file) => file.endsWith('.tgz'));
