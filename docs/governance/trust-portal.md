@@ -47,7 +47,7 @@ review_cycle: 'on-change'
 - **Coverage: 19 / 19 testable packages ≥ 95% branch.** Mock-binding tests close `@gtcx/crypto-native` to 99.07%.
 - **Fuzz: 500,000+ iterations across 6 cargo-fuzz targets, zero crashes, zero panics, zero ASAN violations.**
 - **Key custody: HSM-backed via PKCS11 + AWS KMS.** NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed).
-- **Supply chain: SLSA Source L2 enforced** in CI; Build L3 aspirational; provenance manifest generated per release.
+- **Supply chain: SLSA Source L2 enforced** in CI; **npm Sigstore provenance on 21/21 packages** at the 3.1.4 provenance baseline (2026-06-01); manifest per release via `pnpm provenance:generate`.
 - **External attestation: pen test contracted, vendor outreach in flight; SOC 2 Type 1 letter targeted 2026-09-15.**
 
 A reviewer who only reads this section has enough to make a procurement decision. The sections below are the underlying evidence each claim above is anchored to — every link points at a specific file in the canonical `gtcx-core` repo, viewable with no NDA.
@@ -56,65 +56,60 @@ A reviewer who only reads this section has enough to make a procurement decision
 
 ## Current readiness (2026-05-21)
 
-| Dimension                | Value                       | Evidence                                                                                                                                                                                     |
-| ------------------------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Composite readiness      | **9.5 / 10**                | [Internal Completion Audit 2026-05-21](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/internal-completion-audit-2026-05-21.md)                                             |
-| Internal items complete  | 24 / 24                     | Same                                                                                                                                                                                         |
-| Branch coverage          | 19 / 19 packages ≥ 95%      | [Audit coverage table](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/internal-completion-audit-2026-05-21.md#updated-coverage-table)                                      |
-| Fuzz iterations          | 500,000+ across 6 targets   | [Fuzz Campaign Evidence 2026-05-21](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/fuzz-campaign-evidence-2026-05-21.md) — zero crashes, zero panics, zero ASAN violations |
-| FIPS validation          | aws-lc-rs CMVP #4816        | 63 / 63 Rust tests passing under `--features fips`                                                                                                                                           |
-| HSM custody              | PKCS11 + AWS KMS            | NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed)                                                                                                                  |
-| Release pipeline         | SLSA Source L2 enforced     | `.github/workflows/release.yml` — provenance manifest generated per release                                                                                                                  |
-| Active execution program | 4-sprint engagement roadmap | [Engagement Readiness Sprint Roadmap 2026-05-22](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)                                                                         |
+| Dimension                | Value                           | Evidence                                                                                                                                                                                     |
+| ------------------------ | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Composite readiness      | **9.5 / 10**                    | [Internal Completion Audit 2026-05-21](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/internal-completion-audit-2026-05-21.md)                                             |
+| Internal items complete  | 24 / 24                         | Same                                                                                                                                                                                         |
+| Branch coverage          | 19 / 19 packages ≥ 95%          | [Audit coverage table](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/internal-completion-audit-2026-05-21.md#updated-coverage-table)                                      |
+| Fuzz iterations          | 500,000+ across 6 targets       | [Fuzz Campaign Evidence 2026-05-21](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/fuzz-campaign-evidence-2026-05-21.md) — zero crashes, zero panics, zero ASAN violations |
+| FIPS validation          | aws-lc-rs CMVP #4816            | 63 / 63 Rust tests passing under `--features fips`                                                                                                                                           |
+| HSM custody              | PKCS11 + AWS KMS                | NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed)                                                                                                                  |
+| Release pipeline         | SLSA Source L2 + npm provenance | `.github/workflows/release.yml` — `publish-packages-provenance.mjs`; verify `pnpm provenance:check-npm:strict`                                                                               |
+| Active execution program | 4-sprint engagement roadmap     | [Engagement Readiness Sprint Roadmap 2026-05-22](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)                                                                         |
 
 ---
 
 ## Published versions
 
-> **Status:** **21 of 21** public `@gtcx/*` packages live on npm as of 2026-05-27 (`@gtcx/resilience`, `@gtcx/telemetry`, `@gtcx/runtime` published 2026-05-26–27). Provenance generation attempted per release; attestation column reflects npm registry state.
+> **Status (2026-06-01):** **21 of 21** public `@gtcx/*` packages on npm with **Sigstore provenance attestations** at the versions below ([release run 26778909174](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26778909174)). **Provenance baseline:** pin these versions or newer. **Older npm releases** (e.g. `3.1.3`, `0.2.2` substrate line) were published **without** registry attestations — do not treat them as SLSA-verifiable.
 
-| Package               | npm version | Provenance | Source                                                                                     |
-| --------------------- | ----------- | ---------- | ------------------------------------------------------------------------------------------ |
-| `@gtcx/types`         | 3.0.0       | —          | [npmjs.com/package/@gtcx/types](https://www.npmjs.com/package/@gtcx/types)                 |
-| `@gtcx/crypto`        | 3.1.0       | —          | [npmjs.com/package/@gtcx/crypto](https://www.npmjs.com/package/@gtcx/crypto)               |
-| `@gtcx/crypto-native` | 0.4.0       | —          | [npmjs.com/package/@gtcx/crypto-native](https://www.npmjs.com/package/@gtcx/crypto-native) |
-| `@gtcx/schemas`       | 3.0.0       | —          | [npmjs.com/package/@gtcx/schemas](https://www.npmjs.com/package/@gtcx/schemas)             |
-| `@gtcx/utils`         | 0.2.2       | —          | [npmjs.com/package/@gtcx/utils](https://www.npmjs.com/package/@gtcx/utils)                 |
-| `@gtcx/domain`        | 3.0.0       | —          | [npmjs.com/package/@gtcx/domain](https://www.npmjs.com/package/@gtcx/domain)               |
-| `@gtcx/security`      | 3.1.0       | —          | [npmjs.com/package/@gtcx/security](https://www.npmjs.com/package/@gtcx/security)           |
-| `@gtcx/verification`  | 3.1.0       | —          | [npmjs.com/package/@gtcx/verification](https://www.npmjs.com/package/@gtcx/verification)   |
-| `@gtcx/identity`      | 3.1.0       | —          | [npmjs.com/package/@gtcx/identity](https://www.npmjs.com/package/@gtcx/identity)           |
-| `@gtcx/api-client`    | 0.4.1       | —          | [npmjs.com/package/@gtcx/api-client](https://www.npmjs.com/package/@gtcx/api-client)       |
-| `@gtcx/connectivity`  | 0.5.0       | —          | [npmjs.com/package/@gtcx/connectivity](https://www.npmjs.com/package/@gtcx/connectivity)   |
-| `@gtcx/logging`       | 0.3.0       | —          | [npmjs.com/package/@gtcx/logging](https://www.npmjs.com/package/@gtcx/logging)             |
-| `@gtcx/network`       | 0.2.0       | —          | [npmjs.com/package/@gtcx/network](https://www.npmjs.com/package/@gtcx/network)             |
-| `@gtcx/sync`          | 0.3.0       | —          | [npmjs.com/package/@gtcx/sync](https://www.npmjs.com/package/@gtcx/sync)                   |
-| `@gtcx/resilience`    | 0.2.0       | —          | [npmjs.com/package/@gtcx/resilience](https://www.npmjs.com/package/@gtcx/resilience)       |
-| `@gtcx/telemetry`     | 0.2.0       | —          | [npmjs.com/package/@gtcx/telemetry](https://www.npmjs.com/package/@gtcx/telemetry)         |
-| `@gtcx/runtime`       | 0.2.2       | —          | [npmjs.com/package/@gtcx/runtime](https://www.npmjs.com/package/@gtcx/runtime)             |
-| `@gtcx/events`        | 1.0.0       | —          | [npmjs.com/package/@gtcx/events](https://www.npmjs.com/package/@gtcx/events)               |
-| `@gtcx/workproof`     | 1.0.0       | —          | [npmjs.com/package/@gtcx/workproof](https://www.npmjs.com/package/@gtcx/workproof)         |
-| `@gtcx/services`      | 1.0.1       | —          | [npmjs.com/package/@gtcx/services](https://www.npmjs.com/package/@gtcx/services)           |
-| `@gtcx/ai`            | 0.3.0       | —          | [npmjs.com/package/@gtcx/ai](https://www.npmjs.com/package/@gtcx/ai)                       |
+| Package               | npm version (provenance baseline) | Provenance | Source                                                                                     |
+| --------------------- | --------------------------------- | ---------- | ------------------------------------------------------------------------------------------ |
+| `@gtcx/types`         | 3.1.4                             | Yes        | [npmjs.com/package/@gtcx/types](https://www.npmjs.com/package/@gtcx/types)                 |
+| `@gtcx/crypto`        | 3.1.4                             | Yes        | [npmjs.com/package/@gtcx/crypto](https://www.npmjs.com/package/@gtcx/crypto)               |
+| `@gtcx/crypto-native` | 0.4.4                             | Yes        | [npmjs.com/package/@gtcx/crypto-native](https://www.npmjs.com/package/@gtcx/crypto-native) |
+| `@gtcx/schemas`       | 3.1.4                             | Yes        | [npmjs.com/package/@gtcx/schemas](https://www.npmjs.com/package/@gtcx/schemas)             |
+| `@gtcx/utils`         | 0.2.5                             | Yes        | [npmjs.com/package/@gtcx/utils](https://www.npmjs.com/package/@gtcx/utils)                 |
+| `@gtcx/domain`        | 3.1.4                             | Yes        | [npmjs.com/package/@gtcx/domain](https://www.npmjs.com/package/@gtcx/domain)               |
+| `@gtcx/security`      | 3.1.4                             | Yes        | [npmjs.com/package/@gtcx/security](https://www.npmjs.com/package/@gtcx/security)           |
+| `@gtcx/verification`  | 3.1.4                             | Yes        | [npmjs.com/package/@gtcx/verification](https://www.npmjs.com/package/@gtcx/verification)   |
+| `@gtcx/identity`      | 3.1.4                             | Yes        | [npmjs.com/package/@gtcx/identity](https://www.npmjs.com/package/@gtcx/identity)           |
+| `@gtcx/api-client`    | 0.4.5                             | Yes        | [npmjs.com/package/@gtcx/api-client](https://www.npmjs.com/package/@gtcx/api-client)       |
+| `@gtcx/connectivity`  | 0.5.4                             | Yes        | [npmjs.com/package/@gtcx/connectivity](https://www.npmjs.com/package/@gtcx/connectivity)   |
+| `@gtcx/logging`       | 0.3.3                             | Yes        | [npmjs.com/package/@gtcx/logging](https://www.npmjs.com/package/@gtcx/logging)             |
+| `@gtcx/network`       | 0.2.4                             | Yes        | [npmjs.com/package/@gtcx/network](https://www.npmjs.com/package/@gtcx/network)             |
+| `@gtcx/sync`          | 0.3.3                             | Yes        | [npmjs.com/package/@gtcx/sync](https://www.npmjs.com/package/@gtcx/sync)                   |
+| `@gtcx/resilience`    | 0.2.3                             | Yes        | [npmjs.com/package/@gtcx/resilience](https://www.npmjs.com/package/@gtcx/resilience)       |
+| `@gtcx/telemetry`     | 0.2.3                             | Yes        | [npmjs.com/package/@gtcx/telemetry](https://www.npmjs.com/package/@gtcx/telemetry)         |
+| `@gtcx/runtime`       | 0.2.5                             | Yes        | [npmjs.com/package/@gtcx/runtime](https://www.npmjs.com/package/@gtcx/runtime)             |
+| `@gtcx/events`        | 1.0.3                             | Yes        | [npmjs.com/package/@gtcx/events](https://www.npmjs.com/package/@gtcx/events)               |
+| `@gtcx/workproof`     | 1.0.4                             | Yes        | [npmjs.com/package/@gtcx/workproof](https://www.npmjs.com/package/@gtcx/workproof)         |
+| `@gtcx/services`      | 1.0.5                             | Yes        | [npmjs.com/package/@gtcx/services](https://www.npmjs.com/package/@gtcx/services)           |
+| `@gtcx/ai`            | 0.3.4                             | Yes        | [npmjs.com/package/@gtcx/ai](https://www.npmjs.com/package/@gtcx/ai)                       |
 
 ### Verifying any version independently
 
 Anyone can verify the current published surface end-to-end with no NDA, no clone:
 
 ```bash
-# Per-package version
-for pkg in types crypto crypto-native schemas utils domain security verification identity \
-           api-client connectivity logging network sync resilience telemetry runtime \
-           events workproof services ai; do
-  v=$(npm view "@gtcx/$pkg" version 2>/dev/null)
-  echo "@gtcx/$pkg: ${v:-not-yet-published}"
-done
+# All 21 packages at provenance-baseline versions (clone gtcx-core first)
+pnpm provenance:check-npm:strict
 
-# Provenance attestation per package (post-publish)
-npm view @gtcx/crypto --json | jq -r '.dist.attestations.url'
+# Single-package attestation URL (example: linked core @ 3.1.4)
+npm view @gtcx/crypto@3.1.4 --json | jq -r '.dist.attestations.url'
 ```
 
-The provenance attestation URL is the durable record of _how_ each package was built — workflow name, commit SHA, build environment. SLSA Source L2 enforced; Build L3 aspirational per the release pipeline.
+The provenance attestation URL is the durable record of _how_ each package was built — workflow name, commit SHA, build environment. Requires **public** `gtcx-ecosystem/gtcx-core` and `npm publish --provenance` from `release.yml`.
 
 ---
 
