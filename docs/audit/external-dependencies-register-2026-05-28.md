@@ -64,10 +64,10 @@ Certified composite reaches **10.0** only when **all rows below** reach status `
 
 ## Cross-repo dependencies (infra / protocols)
 
-| ID               | Upstream repo       | What gtcx-core needs                                                           | Register link                                                                                                                                       |
-| ---------------- | ------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **EXT-CORE-X01** | gtcx-infrastructure | WORM release evidence chain for institutional buyers citing infra attestations | [gtcx-infrastructure external register](../../gtcx-infrastructure/docs/audit/external-dependencies-register-2026-05-28.md) EXT-INF-003, EXT-INF-005 |
-| **EXT-CORE-X02** | gtcx-protocols      | Staging DID HTTP resolution (INF-49) for ecosystem integration proof           | EXT-INF-004                                                                                                                                         |
+| ID               | Upstream repo       | What gtcx-core needs                                                           | Register link                                                    |
+| ---------------- | ------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| **EXT-CORE-X01** | gtcx-infrastructure | WORM release evidence chain for institutional buyers citing infra attestations | gtcx-infrastructure external register (EXT-INF-003, EXT-INF-005) |
+| **EXT-CORE-X02** | gtcx-protocols      | Staging DID HTTP resolution (INF-49) for ecosystem integration proof           | EXT-INF-004                                                      |
 
 ---
 

@@ -98,3 +98,4 @@ provenance-manifest.json
 logs/
 .next/
 out/
+*.bundled_*.mjs
