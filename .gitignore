@@ -99,3 +99,5 @@ logs/
 .next/
 out/
 *.bundled_*.mjs
+.baseline/config.json
+baseline.config.json
