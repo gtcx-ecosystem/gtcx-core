@@ -1,11 +1,14 @@
 ---
-last_reconciled: 2026-06-01
+last_reconciled: 2026-06-02
 reconciliation_note: >-
-  Downstream npm provenance pinning complete in gtcx-protocols + gtcx-infrastructure;
-  GitBook supply-chain page synced via gtcx-docs hub.
+  Internal 10/10 engineering track remains complete. New delta: ai-eval npm publish
+  is prepared (0.1.4 + provenance publish list) but blocked by repo visibility being
+  private; master audit 2026-06-02 records this as a P1 supply-chain issue.
 sources:
+  - docs/audit/master-audit-2026-06-02.md
   - docs/audit/full-audit-2026-06-01.md
   - docs/gtm/gtm-roadmap-10-10-internal-2026-06-01.md
+  - docs/audit/ci-confirmation-2026-06-01.md
   - docs/audit/10-10-roadmap-2026-05-25.md
   - docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md
   - docs/gtm/07-downstream-integration.md
@@ -78,10 +81,22 @@ See [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md).
 
 ---
 
+## Sprint 5: Supply chain continuity — **blocked**
+
+| Story | Title                                         | Status      |
+| ----- | --------------------------------------------- | ----------- |
+| S5-01 | Publish `@gtcx/ai-eval@0.1.4` with provenance | **blocked** |
+
+**Blocker:** npm provenance requires `gtcx-ecosystem/gtcx-core` repo visibility `public` (see `.github/workflows/release.yml` gate and `docs/audit/master-audit-2026-06-02.md` P1).  
+**Acceptance:** after running `release.yml` with `provenance_republish=true`, `pnpm provenance:check-npm:strict` reports **22/22** with attestations and `npm view @gtcx/ai-eval@0.1.4 dist.attestations` returns a non-empty URL.
+
+---
+
 ## Deferred (external)
 
-| Item                   | Owner                    | Reason              |
-| ---------------------- | ------------------------ | ------------------- |
-| Pen-test report        | crypto-security-engineer | Vendor not selected |
-| SOC 2 Type 1           | quality-evidence-lead    | CPA engagement      |
-| Zimbabwe sandbox email | gtm-lead                 | Human approval      |
+| Item                                     | Owner                    | Reason                                      |
+| ---------------------------------------- | ------------------------ | ------------------------------------------- |
+| Pen-test report                          | crypto-security-engineer | Vendor not selected                         |
+| SOC 2 Type 1                             | quality-evidence-lead    | CPA engagement                              |
+| Zimbabwe sandbox email                   | gtm-lead                 | Human approval                              |
+| Repo visibility for provenance publishes | platform / release owner | `private` blocks `npm publish --provenance` |
