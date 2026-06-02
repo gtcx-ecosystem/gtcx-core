@@ -28,7 +28,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 - HSM key storage traits implemented for PKCS11 (SoftHSM, AWS CloudHSM) and AWS KMS Cloud Custody
 - 500,000+ fuzz iterations across 6 cargo-fuzz targets, **zero crashes, zero panics, zero ASAN violations** ([evidence](./docs/audit/fuzz-campaign-evidence-2026-05-21.md))
 - `cargo deny` and `cargo audit` run in CI; known upstream advisories in the `ark-*` ecosystem are tracked in `rust/.cargo/audit.toml`
-- **21 / 21** public `@gtcx/*` packages on npm with **Sigstore provenance attestations** on the **3.1.4 train** (2026-06-01) — verify: `pnpm provenance:check-npm:strict`; older npm versions lack attestations
+- **22** public `@gtcx/*` packages (21 core + `@gtcx/ai-eval`); **21/21** core on npm with **Sigstore provenance** on the **3.1.4 train** (2026-06-01) — verify: `pnpm provenance:check-npm:strict`; publish `@gtcx/ai-eval@0.1.4` via release workflow
 - SLSA: Source L2 enforced in CI; npm registry provenance via `release.yml` + public `gtcx-core` source repo — see [trust portal](./docs/governance/trust-portal.md#published-versions)
 
 ### Active execution program

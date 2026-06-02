@@ -82,15 +82,15 @@ Canonical spec: [ai-evaluation-pipeline.md](../specs/ai-evaluation-pipeline.md) 
 
 ### D. Engineering hygiene (P2 — internal 10/10 polish)
 
-| ID  | Item                                      | Status     | Verification                                                                                                                                                                                        |
-| --- | ----------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| E1  | Architecture boundaries                   | ✅ Done    | `pnpm architecture:check`                                                                                                                                                                           |
-| E2  | ≥95% branch coverage (testable pkgs)      | ✅ Done    | Internal completion audit                                                                                                                                                                           |
-| E3  | Fuzz evidence                             | ✅ Done    | `docs/audit/fuzz-campaign-evidence-2026-05-21.md`                                                                                                                                                   |
-| E4  | SLSA manifest per CI run                  | ✅ Done    | `pnpm provenance:generate`                                                                                                                                                                          |
-| E5  | npm provenance attestations on registry   | ✅ Done    | **21/21** at 3.1.4 train; `pnpm provenance:check-npm:strict`; [release 26778909174](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26778909174)                                           |
-| E6  | Downstream npm consumer pinning           | ✅ Done    | `gtcx-protocols`, `gtcx-infrastructure/replay-protection`; GitBook [supply chain](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/gitbooks/gtcx-protocols/supply-chain/gtcx-core-npm.md) |
-| E7  | `@gtcx/ai-eval` publish to npm (optional) | 📋 Backlog | Not required for core GTM; workspace CLI sufficient                                                                                                                                                 |
+| ID  | Item                                    | Status   | Verification                                                                                                                                                                                        |
+| --- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| E1  | Architecture boundaries                 | ✅ Done  | `pnpm architecture:check`                                                                                                                                                                           |
+| E2  | ≥95% branch coverage (testable pkgs)    | ✅ Done  | Internal completion audit                                                                                                                                                                           |
+| E3  | Fuzz evidence                           | ✅ Done  | `docs/audit/fuzz-campaign-evidence-2026-05-21.md`                                                                                                                                                   |
+| E4  | SLSA manifest per CI run                | ✅ Done  | `pnpm provenance:generate`                                                                                                                                                                          |
+| E5  | npm provenance attestations on registry | ✅ Done  | **21/21** at 3.1.4 train; `pnpm provenance:check-npm:strict`; [release 26778909174](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26778909174)                                           |
+| E6  | Downstream npm consumer pinning         | ✅ Done  | `gtcx-protocols`, `gtcx-infrastructure/replay-protection`; GitBook [supply chain](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/gitbooks/gtcx-protocols/supply-chain/gtcx-core-npm.md) |
+| E7  | `@gtcx/ai-eval` publish to npm          | 🟡 Ready | In `public-packages.mjs` @ **0.1.4**; run `release.yml` with provenance to complete registry attestations                                                                                           |
 
 ---
 

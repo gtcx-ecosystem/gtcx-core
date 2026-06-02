@@ -44,7 +44,7 @@ SLSA (Supply-chain Levels for Software Artifacts) Build Level 3 means:
 - **Dependencies are pinned:** Exact versions of all dependencies are recorded in the attestation
 - **Source is authenticated:** The build came from a specific, verifiable Git commit
 
-**Current status:** Source L2 enforced. Build L3 pipeline ready (`changeset publish --provenance`, `id-token: write` in `release.yml`). **21/21** packages on npm; registry attestations populate on the next provenance publish — verify with `pnpm provenance:check-npm --strict`. Changeset: `.changeset/npm-provenance-republish.md`.
+**Current status:** Source L2 enforced. Build L3 via `tools/publish-packages-provenance.mjs` + `release.yml`. **21/21** core packages attested; **`@gtcx/ai-eval@0.1.4`** added to publish list — run release workflow to complete 22/22. Verify: `pnpm provenance:check-npm:strict`.
 
 ---
 

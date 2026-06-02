@@ -54,6 +54,7 @@ All **21** public `@gtcx/*` packages from `gtcx-core` are on npm with **Sigstore
 | workproof                                                        | `^1.0.4`        |
 | services                                                         | `^1.0.5`        |
 | ai                                                               | `^0.3.4`        |
+| ai-eval                                                          | `^0.1.4`        |
 
 ```bash
 # After install — from a gtcx-core clone
