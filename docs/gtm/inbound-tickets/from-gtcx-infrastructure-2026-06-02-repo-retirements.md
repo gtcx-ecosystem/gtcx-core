@@ -23,9 +23,9 @@ tags: ['gtm', 'cross-repo', 'gtcx-infrastructure', 'ecosystem']
 
 ## Still active — do not link as product repos
 
-| Repo                | Canonical       | Notes                                     |
-| ------------------- | --------------- | ----------------------------------------- |
-| `gtcx-complianceos` | `compliance-os` | Migration program in progress — see below |
+| Repo                | Canonical       | Notes                                                              |
+| ------------------- | --------------- | ------------------------------------------------------------------ |
+| `gtcx-complianceos` | `compliance-os` | Migration **complete** 2026-06-02 — GitHub delete pending approval |
 
 ## Infrastructure ADR checklist (gtcx-core slice)
 
@@ -39,11 +39,11 @@ tags: ['gtm', 'cross-repo', 'gtcx-infrastructure', 'ecosystem']
 
 ## Pending (ecosystem — not gtcx-core blockers)
 
-| Item                                  | Owner           | Tracker                                                                                                                                                                 |
-| ------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `gtcx-complianceos` content migration | `compliance-os` | [`compliance-os/docs/_historical/gtcx-complianceos-migration/`](https://github.com/gtcx-ecosystem/compliance-os/tree/main/docs/_historical/gtcx-complianceos-migration) |
-| Notify `#engineering` Slack           | infra ADR       | Open in [infra ADR-012](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/architecture/decisions/ADR-012-deprecate-gtcx-core12-gtcx-amis.md)         |
-| Local backups on external drive       | ops             | `_local-backups/2026-06-01-retired-repos/sync-to-external-drive.sh`                                                                                                     |
+| Item                              | Owner     | Tracker                                                                                                                                                                       |
+| --------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gtcx-complianceos` GitHub delete | ops       | Migration complete — see [`MIGRATION-COMPLETE`](https://github.com/gtcx-ecosystem/compliance-os/blob/main/docs/_historical/gtcx-complianceos-migration/MIGRATION-COMPLETE.md) |
+| Notify `#engineering` Slack       | infra ADR | Open in [infra ADR-012](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/architecture/decisions/ADR-012-deprecate-gtcx-core12-gtcx-amis.md)               |
+| Local backups on external drive   | ops       | `_local-backups/2026-06-01-retired-repos/sync-to-external-drive.sh`                                                                                                           |
 
 ## Backups
 
