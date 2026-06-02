@@ -6,6 +6,8 @@ export interface SecretWriter {
     clientId: string;
     secret: string;
     fingerprint: string;
+    tenantId?: string;
+    tier?: string;
   }): Promise<{ arn: string }>;
 }
 

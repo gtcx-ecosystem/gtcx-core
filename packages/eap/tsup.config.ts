@@ -6,5 +6,6 @@ export default defineConfig({
   entry: {
     index: 'src/index.ts',
     admin: 'src/admin.ts',
+    server: 'src/server.ts',
   },
 });

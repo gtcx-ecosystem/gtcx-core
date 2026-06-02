@@ -2,12 +2,13 @@
 
 Control plane for **outbound** API credentials (Protocol 23). Complements Baseline Vault (inbound only).
 
-## Scope (EAP-02)
+## Scope (EAP-02 — shipped skeleton)
 
-- Admin API: issue / revoke / list fingerprints
-- In-memory registry (Postgres in production)
-- AWS Secrets Manager writer interface (stub logs ARN path)
-- Redacted `eap-issuance-*.json` evidence emitter
+- `createEapAdminService()` — issue / revoke / list fingerprints
+- `AwsSecretsManagerWriter` — writes `gtcx/eap/<env>/clients/<client_id>`
+- `syncApiKeyToIntelligenceBundle()` — merges into `gtcx/intelligence/<env>/auth-keys`
+- HTTP admin: `pnpm eap:admin` (port 4070, `EAP_ADMIN_TOKEN` optional)
+- Redacted `gtcx.eap.issuance.v1` evidence builder
 
 ## Usage
 

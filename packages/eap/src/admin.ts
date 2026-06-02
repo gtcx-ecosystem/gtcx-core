@@ -55,6 +55,8 @@ export class EapAdminService {
       clientId: input.clientId,
       secret,
       fingerprint: credentialFingerprint,
+      tenantId: input.tenantId,
+      tier: input.tier,
     });
 
     const issuedAt = new Date().toISOString();
