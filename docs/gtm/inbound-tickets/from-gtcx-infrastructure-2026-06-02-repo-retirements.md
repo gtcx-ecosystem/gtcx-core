@@ -39,15 +39,13 @@ tags: ['gtm', 'cross-repo', 'gtcx-infrastructure', 'ecosystem']
 
 ## Pending (ecosystem — not gtcx-core blockers)
 
-| Item                              | Owner     | Tracker                                                                                                                                                                       |
-| --------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `gtcx-complianceos` GitHub delete | ops       | Migration complete — see [`MIGRATION-COMPLETE`](https://github.com/gtcx-ecosystem/compliance-os/blob/main/docs/_historical/gtcx-complianceos-migration/MIGRATION-COMPLETE.md) |
-| Notify `#engineering` Slack       | infra ADR | Open in [infra ADR-012](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/architecture/decisions/ADR-012-deprecate-gtcx-core12-gtcx-amis.md)               |
-| Local backups on external drive   | ops       | `_local-backups/2026-06-01-retired-repos/sync-to-external-drive.sh`                                                                                                           |
+| Item                        | Owner     | Tracker                                                                                                                                                         |
+| --------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Notify `#engineering` Slack | infra ADR | Open in [infra ADR-012](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/architecture/decisions/ADR-012-deprecate-gtcx-core12-gtcx-amis.md) |
 
 ## Backups
 
-`/Users/amanianai/Sites/gtcx-ecosystem/_local-backups/2026-06-01-retired-repos/` — bundles for all deleted repos except `gtcx-complianceos` (repo still on GitHub).
+`/Users/amanianai/Sites/gtcx-ecosystem/_local-backups/2026-06-01-retired-repos/` — all retired-repo bundles; copies on Desktop and iCloud (2026-06-02).
 
 ## Related in gtcx-core
 
