@@ -244,6 +244,8 @@ pub enum Groth16CircuitType {
     AssetOwnership,
     /// Prove location lies within a licensed region.
     LocationRegion,
+    /// Prove commodity origin: mine in approved set, within region, meets thresholds.
+    CommodityOrigin,
 }
 
 /// Groth16 proving/verifying keys (serialized).
@@ -318,6 +320,23 @@ pub struct LocationRegionPublicInputs {
     pub location_commitment: [u8; DIGEST_BYTES],
     /// Timestamp associated with the proof.
     pub timestamp: u64,
+}
+
+/// Public inputs for the commodity origin circuit.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CommodityOriginPublicInputs {
+    /// Hash of the region bounds (min/max lat/lon).
+    pub region_hash: [u8; DIGEST_BYTES],
+    /// Commitment to the purity value.
+    pub purity_commitment: [u8; DIGEST_BYTES],
+    /// Commitment to the weight value.
+    pub weight_commitment: [u8; DIGEST_BYTES],
+    /// Merkle root of approved mines.
+    pub mines_root: [u8; DIGEST_BYTES],
+    /// Minimum purity threshold.
+    pub min_purity: u64,
+    /// Minimum weight threshold.
+    pub min_weight: u64,
 }
 
 /// Merkle tree configuration for asset ownership proofs (SHA-256).

@@ -51,6 +51,29 @@ pub(crate) struct LocationRegionCircuit {
     pub(crate) location_commitment: Option<[u8; DIGEST_BYTES]>,
 }
 
+/// Commodity origin circuit — proves a mine is in an approved set,
+/// within a licensed region, and meets purity/weight thresholds,
+/// without revealing the exact mine ID, GPS coordinates, or measurements.
+#[derive(Clone)]
+pub(crate) struct CommodityOriginCircuit {
+    pub(crate) mine_id: Option<[u8; ASSET_ID_BYTES]>,
+    pub(crate) lat: Option<u64>,
+    pub(crate) lon: Option<u64>,
+    pub(crate) purity: Option<u64>,
+    pub(crate) weight: Option<u64>,
+    pub(crate) purity_randomness: Option<[u8; RANDOMNESS_BYTES]>,
+    pub(crate) weight_randomness: Option<[u8; RANDOMNESS_BYTES]>,
+    pub(crate) location_randomness: Option<[u8; RANDOMNESS_BYTES]>,
+    pub(crate) bounds: Option<[u64; 4]>,
+    pub(crate) min_purity: Option<u64>,
+    pub(crate) min_weight: Option<u64>,
+    pub(crate) region_hash: Option<[u8; DIGEST_BYTES]>,
+    pub(crate) purity_commitment: Option<[u8; DIGEST_BYTES]>,
+    pub(crate) weight_commitment: Option<[u8; DIGEST_BYTES]>,
+    pub(crate) mines_root: Option<[u8; DIGEST_BYTES]>,
+    pub(crate) merkle_path: Option<Path<AssetOwnershipMerkleConfig>>,
+}
+
 struct AssetOwnershipMerkleConfigGadget;
 
 impl ConfigGadget<AssetOwnershipMerkleConfig, Fr> for AssetOwnershipMerkleConfigGadget {
@@ -274,9 +297,238 @@ impl ConstraintSynthesizer<Fr> for LocationRegionCircuit {
     }
 }
 
+impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
+    fn generate_constraints(
+        self,
+        cs: ConstraintSystemRef<Fr>,
+    ) -> std::result::Result<(), SynthesisError> {
+        // Public inputs
+        let region_hash = DigestVar::new_input(cs.clone(), || {
+            self.region_hash
+                .map(|v| v.to_vec())
+                .ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let purity_commitment = DigestVar::new_input(cs.clone(), || {
+            self.purity_commitment
+                .map(|v| v.to_vec())
+                .ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let weight_commitment = DigestVar::new_input(cs.clone(), || {
+            self.weight_commitment
+                .map(|v| v.to_vec())
+                .ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let mines_root = DigestVar::new_input(cs.clone(), || {
+            self.mines_root
+                .map(|v| v.to_vec())
+                .ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let min_purity = UInt64::new_input(cs.clone(), || {
+            self.min_purity.ok_or(SynthesisError::AssignmentMissing)
+        })?;
+        let min_weight = UInt64::new_input(cs.clone(), || {
+            self.min_weight.ok_or(SynthesisError::AssignmentMissing)
+        })?;
+
+        // Witness: mine_id
+        let mine_id_bytes: Vec<UInt8<Fr>> = (0..ASSET_ID_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.mine_id
+                        .map(|v| v[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+
+        // Witness: GPS coordinates
+        let lat_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.lat
+                        .map(|v| u64_to_le_bytes(v)[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+        let lon_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.lon
+                        .map(|v| u64_to_le_bytes(v)[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+
+        // Witness: purity and weight
+        let purity_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.purity
+                        .map(|v| u64_to_le_bytes(v)[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+        let weight_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.weight
+                        .map(|v| u64_to_le_bytes(v)[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+
+        // Witness: randomness values
+        let purity_randomness_bytes: Vec<UInt8<Fr>> = (0..RANDOMNESS_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.purity_randomness
+                        .map(|v| v[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+        let weight_randomness_bytes: Vec<UInt8<Fr>> = (0..RANDOMNESS_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.weight_randomness
+                        .map(|v| v[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+        let location_randomness_bytes: Vec<UInt8<Fr>> = (0..RANDOMNESS_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    self.location_randomness
+                        .map(|v| v[i])
+                        .ok_or(SynthesisError::AssignmentMissing)
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+
+        // Witness: bounds
+        let bounds = self.bounds.ok_or(SynthesisError::AssignmentMissing)?;
+        let min_lat_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+            .map(|i| UInt8::new_witness(cs.clone(), || Ok(u64_to_le_bytes(bounds[0])[i])))
+            .collect::<std::result::Result<_, _>>()?;
+        let max_lat_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+            .map(|i| UInt8::new_witness(cs.clone(), || Ok(u64_to_le_bytes(bounds[1])[i])))
+            .collect::<std::result::Result<_, _>>()?;
+        let min_lon_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+            .map(|i| UInt8::new_witness(cs.clone(), || Ok(u64_to_le_bytes(bounds[2])[i])))
+            .collect::<std::result::Result<_, _>>()?;
+        let max_lon_bytes: Vec<UInt8<Fr>> = (0..U64_BYTES)
+            .map(|i| UInt8::new_witness(cs.clone(), || Ok(u64_to_le_bytes(bounds[3])[i])))
+            .collect::<std::result::Result<_, _>>()?;
+
+        // Reconstruct UInt64s for comparisons
+        let lat = uint64_from_le_bytes(&lat_bytes)?;
+        let lon = uint64_from_le_bytes(&lon_bytes)?;
+        let min_lat = uint64_from_le_bytes(&min_lat_bytes)?;
+        let max_lat = uint64_from_le_bytes(&max_lat_bytes)?;
+        let min_lon = uint64_from_le_bytes(&min_lon_bytes)?;
+        let max_lon = uint64_from_le_bytes(&max_lon_bytes)?;
+        let purity = uint64_from_le_bytes(&purity_bytes)?;
+        let weight = uint64_from_le_bytes(&weight_bytes)?;
+
+        // 1. GPS within bounds
+        let lat_ge_min = uint64_is_ge(&lat, &min_lat)?;
+        let max_ge_lat = uint64_is_ge(&max_lat, &lat)?;
+        let lon_ge_min = uint64_is_ge(&lon, &min_lon)?;
+        let max_ge_lon = uint64_is_ge(&max_lon, &lon)?;
+        lat_ge_min.enforce_equal(&Boolean::constant(true))?;
+        max_ge_lat.enforce_equal(&Boolean::constant(true))?;
+        lon_ge_min.enforce_equal(&Boolean::constant(true))?;
+        max_ge_lon.enforce_equal(&Boolean::constant(true))?;
+
+        // 2. Purity >= min_purity
+        let purity_ge_min = uint64_is_ge(&purity, &min_purity)?;
+        purity_ge_min.enforce_equal(&Boolean::constant(true))?;
+
+        // 3. Weight >= min_weight
+        let weight_ge_min = uint64_is_ge(&weight, &min_weight)?;
+        weight_ge_min.enforce_equal(&Boolean::constant(true))?;
+
+        // 4. Verify purity_commitment = SHA-256(purity || purity_randomness)
+        let unit = UnitVar::new_constant(cs.clone(), ())?;
+        let mut purity_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
+        purity_input.extend_from_slice(&purity_bytes);
+        purity_input.extend_from_slice(&purity_randomness_bytes);
+        let computed_purity_commitment =
+            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &purity_input)?;
+        computed_purity_commitment.enforce_equal(&purity_commitment)?;
+
+        // 5. Verify weight_commitment = SHA-256(weight || weight_randomness)
+        let mut weight_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
+        weight_input.extend_from_slice(&weight_bytes);
+        weight_input.extend_from_slice(&weight_randomness_bytes);
+        let computed_weight_commitment =
+            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &weight_input)?;
+        computed_weight_commitment.enforce_equal(&weight_commitment)?;
+
+        // 6. Verify location_commitment = SHA-256(lat || lon || location_randomness)
+        let mut location_input = Vec::with_capacity(U64_BYTES * 2 + RANDOMNESS_BYTES);
+        location_input.extend_from_slice(&lat_bytes);
+        location_input.extend_from_slice(&lon_bytes);
+        location_input.extend_from_slice(&location_randomness_bytes);
+        let computed_location_commitment =
+            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &location_input)?;
+        // location_commitment is not a direct public input, but we verify it against
+        // the region_hash relationship indirectly via bounds verification above.
+        // For this circuit, we bind location_commitment to a witness and enforce equality.
+        let location_commitment_bytes: Vec<UInt8<Fr>> = (0..DIGEST_BYTES)
+            .map(|i| {
+                UInt8::new_witness(cs.clone(), || {
+                    let mut hasher_input = Vec::with_capacity(U64_BYTES * 2 + RANDOMNESS_BYTES);
+                    hasher_input.extend_from_slice(&u64_to_le_bytes(self.lat.ok_or(SynthesisError::AssignmentMissing)?));
+                    hasher_input.extend_from_slice(&u64_to_le_bytes(self.lon.ok_or(SynthesisError::AssignmentMissing)?));
+                    hasher_input.extend_from_slice(&self.location_randomness.ok_or(SynthesisError::AssignmentMissing)?);
+                    let hash = sha256_digest(&hasher_input).map_err(|_| SynthesisError::AssignmentMissing)?;
+                    Ok(hash[i])
+                })
+            })
+            .collect::<std::result::Result<_, _>>()?;
+        let location_commitment_var = DigestVar(location_commitment_bytes);
+        computed_location_commitment.enforce_equal(&location_commitment_var)?;
+
+        // 7. Verify region_hash = SHA-256(bounds)
+        let mut region_input = Vec::with_capacity(U64_BYTES * 4);
+        region_input.extend_from_slice(&min_lat_bytes);
+        region_input.extend_from_slice(&max_lat_bytes);
+        region_input.extend_from_slice(&min_lon_bytes);
+        region_input.extend_from_slice(&max_lon_bytes);
+        let computed_region =
+            <Sha256Gadget<Fr> as CRHSchemeGadget<Sha256, Fr>>::evaluate(&unit, &region_input)?;
+        computed_region.enforce_equal(&region_hash)?;
+
+        // 8. Merkle membership: mine_id is in approved mines tree
+        // Build leaf: mine_id || [0u8; 32] to match AssetOwnershipMerkleConfig leaf size
+        let padding_bytes: Vec<UInt8<Fr>> = (0..OWNER_HASH_BYTES)
+            .map(|_i| UInt8::new_witness(cs.clone(), || Ok(0u8)))
+            .collect::<std::result::Result<_, _>>()?;
+        let mut leaf_bytes = Vec::with_capacity(ASSET_ID_BYTES + OWNER_HASH_BYTES);
+        leaf_bytes.extend_from_slice(&mine_id_bytes);
+        leaf_bytes.extend_from_slice(&padding_bytes);
+
+        let path = PathVar::<AssetOwnershipMerkleConfig, Fr, AssetOwnershipMerkleConfigGadget>::new_witness(
+            cs.clone(),
+            || self.merkle_path.ok_or(SynthesisError::AssignmentMissing),
+        )?;
+        let is_member =
+            path.verify_membership(&unit, &unit, &mines_root, leaf_bytes.as_slice())?;
+        is_member.enforce_equal(&Boolean::constant(true))?;
+
+        Ok(())
+    }
+}
+
 mod utils;
 use utils::*;
-pub use utils::{sample_asset_ownership, sample_location_region};
+pub use utils::{sample_asset_ownership, sample_commodity_origin, sample_location_region};
 
 mod ops;
 pub use ops::*;

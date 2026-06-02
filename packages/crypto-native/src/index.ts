@@ -259,6 +259,80 @@ export const groth16GenerateKeys = optionalNativeFn<(circuitType: string) => Nat
   'groth16GenerateKeys',
 ]);
 
+export interface NativeCommodityOriginProofBundle extends NativeGroth16ProofBundle {
+  regionHash: string;
+  purityCommitment: string;
+  weightCommitment: string;
+  minesRoot: string;
+  minPurity: number;
+  minWeight: number;
+}
+
+const rawGroth16ProveCommodityOrigin = optionalNativeFn<
+  (
+    mineIdHex: string,
+    lat: number,
+    lon: number,
+    purity: number,
+    weight: number,
+    purityRandomnessHex: string,
+    weightRandomnessHex: string,
+    locationRandomnessHex: string,
+    bounds: number[],
+    minPurity: number,
+    minWeight: number,
+    merklePathHex: string,
+    provingKeyHex: string,
+    verifyingKeyHex: string
+  ) => NativeGroth16ProofBundle
+>(['groth16_prove_commodity_origin', 'groth16ProveCommodityOrigin']);
+
+export const groth16ProveCommodityOrigin = rawGroth16ProveCommodityOrigin
+  ? (
+      mineIdHex: string,
+      lat: number,
+      lon: number,
+      purity: number,
+      weight: number,
+      purityRandomnessHex: string,
+      weightRandomnessHex: string,
+      locationRandomnessHex: string,
+      bounds: number[],
+      minPurity: number,
+      minWeight: number,
+      merklePathHex: string,
+      provingKeyHex: string,
+      verifyingKeyHex: string
+    ): NativeGroth16ProofBundle => {
+      assertHex(mineIdHex, 'mineId');
+      assertHex(purityRandomnessHex, 'purityRandomness');
+      assertHex(weightRandomnessHex, 'weightRandomness');
+      assertHex(locationRandomnessHex, 'locationRandomness');
+      assertHex(merklePathHex, 'merklePath');
+      assertHex(provingKeyHex, 'provingKey');
+      assertHex(verifyingKeyHex, 'verifyingKey');
+      if (bounds.length !== 4) {
+        throw new Error('bounds must have exactly 4 elements [minLat, maxLat, minLon, maxLon]');
+      }
+      return rawGroth16ProveCommodityOrigin(
+        mineIdHex,
+        lat,
+        lon,
+        purity,
+        weight,
+        purityRandomnessHex,
+        weightRandomnessHex,
+        locationRandomnessHex,
+        bounds,
+        minPurity,
+        minWeight,
+        merklePathHex,
+        provingKeyHex,
+        verifyingKeyHex
+      );
+    }
+  : undefined;
+
 const rawGroth16ProveGciThreshold = optionalNativeFn<
   (
     score: number,

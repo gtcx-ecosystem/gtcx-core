@@ -443,3 +443,103 @@ describe('zkp.ts coverage edge cases', () => {
     await expect(engine.verify(bad)).resolves.toBe(false);
   });
 });
+
+const RUN_HEAVY_ZKP = process.env['GTCX_RUN_HEAVY_ZKP_TESTS'] === '1';
+
+describe('CommodityOrigin ZKP (native)', () => {
+  const validInput = {
+    mineId: '0101010101010101010101010101010101010101010101010101010101010101',
+    lat: 15,
+    lon: 35,
+    purity: 995,
+    weight: 1000,
+    purityRandomness: '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a',
+    weightRandomness: '0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b',
+    locationRandomness: '0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c',
+    bounds: [10, 20, 30, 40] as [number, number, number, number],
+    minPurity: 950,
+    minWeight: 500,
+    merklePath:
+      '200000000000000099795c4a032e419d11bf6b126146caf2017d9af9f81069e830c1df1e64c96a230100000000000000200000000000000076f751a99f42cf35974e668242fdc5b4e57486a4e95f7b2fc1bd878b99903b410000000000000000',
+    provingKey: 'aa'.repeat(128),
+    verifyingKey: 'bb'.repeat(128),
+  };
+
+  (RUN_HEAVY_ZKP ? it : it.skip)(
+    'generateCommodityOriginKeys returns hex keys',
+    async () => {
+      const { generateCommodityOriginKeys } = await import('../src/zkp-commodity-origin');
+      const keys = await generateCommodityOriginKeys();
+      expect(keys.provingKey).toMatch(/^[0-9a-f]+$/i);
+      expect(keys.verifyingKey).toMatch(/^[0-9a-f]+$/i);
+      expect(keys.provingKey.length).toBeGreaterThan(64);
+      expect(keys.verifyingKey.length).toBeGreaterThan(64);
+    },
+    60_000
+  );
+
+  it('proveCommodityOrigin validates mineId length', async () => {
+    const { proveCommodityOrigin } = await import('../src/zkp-commodity-origin');
+    await expect(proveCommodityOrigin({ ...validInput, mineId: 'abcd' } as any)).rejects.toThrow(
+      /mineId: expected 32-byte hex string/
+    );
+  });
+
+  it('proveCommodityOrigin validates randomness hex', async () => {
+    const { proveCommodityOrigin } = await import('../src/zkp-commodity-origin');
+    await expect(
+      proveCommodityOrigin({ ...validInput, purityRandomness: 'zzzz' } as any)
+    ).rejects.toThrow(/purityRandomness: expected 32-byte hex string/);
+  });
+
+  it('proveCommodityOrigin validates bounds length', async () => {
+    const { proveCommodityOrigin } = await import('../src/zkp-commodity-origin');
+    await expect(proveCommodityOrigin({ ...validInput, bounds: [10, 20] } as any)).rejects.toThrow(
+      /bounds must have exactly 4 elements/
+    );
+  });
+
+  (RUN_HEAVY_ZKP ? it : it.skip)(
+    'end-to-end prove and verify commodity origin',
+    async () => {
+      const { generateCommodityOriginKeys, proveCommodityOrigin, verifyCommodityOrigin } =
+        await import('../src/zkp-commodity-origin');
+
+      const keys = await generateCommodityOriginKeys();
+      const proof = await proveCommodityOrigin({
+        ...validInput,
+        provingKey: keys.provingKey,
+        verifyingKey: keys.verifyingKey,
+      });
+
+      expect(proof.system).toBe('groth16');
+      expect(proof.proofType).toBe('commodity_origin');
+      expect(proof.proof).toMatch(/^[0-9a-f]+$/i);
+      expect(proof.publicInputs.length).toBeGreaterThanOrEqual(1);
+
+      const valid = await verifyCommodityOrigin(proof);
+      expect(valid).toBe(true);
+    },
+    60_000
+  ); // 30s timeout — Groth16 proving is CPU-heavy
+
+  (RUN_HEAVY_ZKP ? it : it.skip)(
+    'tampered proof fails verification',
+    async () => {
+      const { generateCommodityOriginKeys, proveCommodityOrigin, verifyCommodityOrigin } =
+        await import('../src/zkp-commodity-origin');
+
+      const keys = await generateCommodityOriginKeys();
+      const proof = await proveCommodityOrigin({
+        ...validInput,
+        provingKey: keys.provingKey,
+        verifyingKey: keys.verifyingKey,
+      });
+
+      const tampered = { ...proof, proof: proof.proof.slice(0, -4) + 'dead' };
+      const valid = await verifyCommodityOrigin(tampered);
+      expect(valid).toBe(false);
+    },
+    60_000
+  );
+});

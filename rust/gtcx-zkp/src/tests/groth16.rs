@@ -1,7 +1,8 @@
 use crate::error::ZkpError;
 use crate::groth16::{
     groth16_generate_keys, groth16_prove_gci_threshold, groth16_verify, sample_asset_ownership,
-    sample_location_region, AssetOwnershipCircuit, LocationRegionCircuit,
+    sample_commodity_origin, sample_location_region, AssetOwnershipCircuit, CommodityOriginCircuit,
+    LocationRegionCircuit,
 };
 use crate::types::{Groth16CircuitType, DIGEST_BYTES};
 use ark_bn254::Fr;
@@ -69,6 +70,65 @@ fn test_location_region_constraints_satisfied() {
 }
 
 #[test]
+fn test_commodity_origin_constraints_satisfied() {
+    let sample = sample_commodity_origin().unwrap();
+    let circuit = CommodityOriginCircuit {
+        mine_id: Some(sample.mine_id),
+        lat: Some(sample.lat),
+        lon: Some(sample.lon),
+        purity: Some(sample.purity),
+        weight: Some(sample.weight),
+        purity_randomness: Some(sample.purity_randomness),
+        weight_randomness: Some(sample.weight_randomness),
+        location_randomness: Some(sample.location_randomness),
+        bounds: Some(sample.bounds),
+        min_purity: Some(sample.min_purity),
+        min_weight: Some(sample.min_weight),
+        region_hash: Some(sample.region_hash),
+        purity_commitment: Some(sample.purity_commitment),
+        weight_commitment: Some(sample.weight_commitment),
+        mines_root: Some(sample.mines_root),
+        merkle_path: Some(sample.merkle_path),
+    };
+    let cs = ConstraintSystem::<Fr>::new_ref();
+    circuit.generate_constraints(cs.clone()).unwrap();
+    if !cs.is_satisfied().unwrap() {
+        let unsatisfied = cs.which_is_unsatisfied().unwrap();
+        panic!("constraints unsatisfied: {unsatisfied:?}");
+    }
+}
+
+#[test]
+#[ignore = "Groth16 proof generation is heavy; run explicitly for UAT evidence"]
+fn test_groth16_commodity_origin_proof_and_tamper() {
+    use crate::groth16::groth16_prove_commodity_origin;
+
+    let keys = groth16_generate_keys(Groth16CircuitType::CommodityOrigin).unwrap();
+    let sample = sample_commodity_origin().unwrap();
+    let (mut proof, _inputs) = groth16_prove_commodity_origin(
+        sample.mine_id,
+        sample.lat,
+        sample.lon,
+        sample.purity,
+        sample.weight,
+        sample.purity_randomness,
+        sample.weight_randomness,
+        sample.location_randomness,
+        sample.bounds,
+        sample.min_purity,
+        sample.min_weight,
+        sample.merkle_path,
+        &keys,
+    )
+    .unwrap();
+    assert!(groth16_verify(&proof).unwrap());
+
+    // Tamper with public inputs
+    proof.public_inputs[0] = Fr::from(1u64);
+    assert!(!groth16_verify(&proof).unwrap());
+}
+
+#[test]
 #[ignore = "Groth16 proof generation is heavy; run explicitly for UAT evidence"]
 fn test_groth16_asset_ownership_proof_and_tamper() {
     use crate::groth16::groth16_prove_asset_ownership;
@@ -114,3 +174,4 @@ fn test_groth16_location_region_proof_and_tamper() {
     proof.public_inputs[0] = Fr::from(1u64) - proof.public_inputs[0];
     assert!(!groth16_verify(&proof).unwrap());
 }
+

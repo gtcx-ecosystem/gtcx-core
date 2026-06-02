@@ -404,8 +404,10 @@ export class NativeZkpEngine implements ZkProver, ZkVerifier {
     if (proof.system === 'groth16') {
       const verifyFn = this.pickFn(['groth16VerifyProof', 'groth16_verify_proof']);
       const publicInputsJson = proof.publicInputs[0] ?? '[]';
+      const circuitType =
+        proof.proofType === 'commodity_origin' ? 'commodity_origin' : 'gci_threshold';
       return verifyFn(
-        'gci_threshold',
+        circuitType,
         proof.proof,
         proof.verificationKeyId,
         publicInputsJson

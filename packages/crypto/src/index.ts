@@ -75,6 +75,14 @@ export {
   type ZkFullVerifier,
 } from './zkp';
 
+export {
+  generateCommodityOriginKeys,
+  proveCommodityOrigin,
+  verifyCommodityOrigin,
+  type CommodityOriginProofInput,
+  type CommodityOriginProof,
+} from './zkp-commodity-origin';
+
 // ============================================================================
 // TRACED OPERATIONS (AI-Native)
 // Import from '@gtcx/crypto/traced' for operation logging

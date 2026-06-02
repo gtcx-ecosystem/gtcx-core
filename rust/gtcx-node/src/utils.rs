@@ -26,6 +26,7 @@ pub(crate) fn circuit_type_from_str(s: &str) -> napi::Result<gtcx_zkp::Groth16Ci
         "gci_threshold" => Ok(gtcx_zkp::Groth16CircuitType::GciThreshold),
         "asset_ownership" => Ok(gtcx_zkp::Groth16CircuitType::AssetOwnership),
         "location_region" => Ok(gtcx_zkp::Groth16CircuitType::LocationRegion),
+        "commodity_origin" => Ok(gtcx_zkp::Groth16CircuitType::CommodityOrigin),
         _ => Err(napi::Error::from_reason(format!(
             "Unknown circuit type: {s}"
         ))),
