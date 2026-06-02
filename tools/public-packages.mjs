@@ -22,4 +22,5 @@ export const PUBLIC_PACKAGE_DIRS = [
   'workproof',
   'services',
   'ai',
+  'ai-eval',
 ];

@@ -1,6 +1,6 @@
 {
   "name": "@gtcx/ai-eval",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "AI evaluation pipeline — accuracy, safety, efficiency, context utilization scoring",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -44,7 +44,8 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
   },
   "repository": {
     "type": "git",
@@ -52,6 +53,10 @@
     "directory": "packages/ai-eval"
   },
   "license": "MIT",
+  "homepage": "https://github.com/gtcx-ecosystem/gtcx-core/tree/main/packages/ai-eval#readme",
+  "bugs": {
+    "url": "https://github.com/gtcx-ecosystem/gtcx-core/issues"
+  },
   "files": [
     "dist",
     "README.md"

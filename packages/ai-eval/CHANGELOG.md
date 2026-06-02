@@ -1,5 +1,11 @@
 # @gtcx/ai-eval
 
+## 0.1.4
+
+### Patch Changes
+
+- Publish @gtcx/ai-eval to npm with Sigstore provenance (22nd public package).
+
 ## 0.1.3
 
 ### Patch Changes
