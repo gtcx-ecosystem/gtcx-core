@@ -45,6 +45,38 @@ pnpm add @gtcx/crypto @gtcx/identity @gtcx/verification
 node -e "const { generateKeyPair } = require('@gtcx/crypto'); console.log(generateKeyPair());"
 ```
 
+## npm provenance baseline (2026-06-01)
+
+All **21** public `@gtcx/*` packages from `gtcx-core` are on npm with **Sigstore attestations** at the **3.1.4 train** (see [trust portal](../governance/trust-portal.md#published-versions)). Older releases (e.g. `3.1.3`, `3.1.0`) have **no** registry provenance.
+
+**Pin at or above** these floors in consumer `package.json` (semver-friendly):
+
+| Package                                                          | Minimum version |
+| ---------------------------------------------------------------- | --------------- |
+| types, crypto, schemas, domain, security, verification, identity | `^3.1.4`        |
+| crypto-native                                                    | `^0.4.4`        |
+| utils                                                            | `^0.2.5`        |
+| api-client                                                       | `^0.4.5`        |
+| connectivity                                                     | `^0.5.4`        |
+| logging                                                          | `^0.3.3`        |
+| network                                                          | `^0.2.4`        |
+| sync                                                             | `^0.3.3`        |
+| resilience, telemetry                                            | `^0.2.3`        |
+| runtime                                                          | `^0.2.5`        |
+| events                                                           | `^1.0.3`        |
+| workproof                                                        | `^1.0.4`        |
+| services                                                         | `^1.0.5`        |
+| ai                                                               | `^0.3.4`        |
+
+```bash
+# After install — from a gtcx-core clone
+pnpm provenance:check-npm:strict
+```
+
+**Ecosystem repos updated for npm provenance (2026-06-01):** `gtcx-protocols`, `gtcx-infrastructure` (`tools/replay-protection`).
+
+**Not the same package (do not bump for core provenance):** `ledger-ui` `@gtcx/utils` / `@gtcx/ui` (UI kit); `compliance-os` / `gtcx-mobile` / `gtcx-platforms` local `@gtcx/types` workspace forks; `gtcx-intelligence` `@gtcx/types` workspace package.
+
 ## Runtime substrate (recommended for services)
 
 Batteries-included wiring for API client, connectivity, resilience, and telemetry:
