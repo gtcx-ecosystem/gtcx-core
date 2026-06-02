@@ -63,11 +63,11 @@ sources:
 
 ## Sprint 4: Signoff — **done**
 
-| Story | Title                              | Status |
-| ----- | ---------------------------------- | ------ |
-| S4-01 | CI confirmation evidence           | done   |
-| S4-02 | npm provenance tooling + changeset | done   |
-| S4-03 | Internal GTM roadmap checkboxes    | done   |
+| Story | Title                                                | Status |
+| ----- | ---------------------------------------------------- | ------ |
+| S4-01 | CI confirmation evidence                             | done   |
+| S4-02 | npm provenance tooling + 21/21 registry attestations | done   |
+| S4-03 | Internal GTM roadmap checkboxes                      | done   |
 
 See [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md).
 
@@ -75,9 +75,8 @@ See [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md).
 
 ## Deferred (external)
 
-| Item                      | Owner                    | Reason                                                                      |
-| ------------------------- | ------------------------ | --------------------------------------------------------------------------- |
-| Pen-test report           | crypto-security-engineer | Vendor not selected                                                         |
-| SOC 2 Type 1              | quality-evidence-lead    | CPA engagement                                                              |
-| Zimbabwe sandbox email    | gtm-lead                 | Human approval                                                              |
-| npm registry attestations | devops                   | Push + `gh workflow run release.yml` (changeset `npm-provenance-republish`) |
+| Item                   | Owner                    | Reason              |
+| ---------------------- | ------------------------ | ------------------- |
+| Pen-test report        | crypto-security-engineer | Vendor not selected |
+| SOC 2 Type 1           | quality-evidence-lead    | CPA engagement      |
+| Zimbabwe sandbox email | gtm-lead                 | Human approval      |

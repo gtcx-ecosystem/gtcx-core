@@ -43,51 +43,29 @@ review_cycle: 'on-change'
 
 CI on `main` may use PR-scoped frontmatter check; local full-tree scan fails. Track under doc-hygiene backlog.
 
-## npm provenance attestations
+## npm provenance attestations — **DONE (2026-06-01)**
 
-| Check                       | Result                                                                                    |
-| --------------------------- | ----------------------------------------------------------------------------------------- |
-| `pnpm provenance:check-npm` | **0/21** packages have registry attestations today                                        |
-| Pipeline                    | `pnpm release` uses `changeset publish --provenance`; `release.yml` has `id-token: write` |
-| Tooling                     | `tools/check-npm-provenance.mjs` — `--strict` after publish in `release.yml`              |
+| Check                              | Result                                                                                        |
+| ---------------------------------- | --------------------------------------------------------------------------------------------- |
+| `pnpm provenance:check-npm:strict` | **21/21** at provenance-baseline versions in `package.json` (e.g. `@gtcx/types@3.1.4`)        |
+| Release run                        | [26778909174](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26778909174) — success |
+| Publish path                       | `tools/publish-packages-provenance.mjs` (`pnpm pack` + `npm publish --provenance`)            |
+| Source repo                        | `gtcx-ecosystem/gtcx-core` **public** (required by npm)                                       |
 
-**To populate registry attestations:** version packages are bumped on `main`; then:
+**Provenance baseline:** pin versions in [trust portal](../governance/trust-portal.md#published-versions) or run `pnpm provenance:check-npm:strict` after clone. Older npm releases (e.g. `3.1.3`) lack registry attestations.
 
-```bash
-gh workflow run release.yml --repo gtcx-ecosystem/gtcx-core -f provenance_republish=true
-# after workflow completes (~20 min):
-pnpm provenance:check-npm --strict
-```
+<details>
+<summary>Release train debug log (collapsed)</summary>
 
-**2026-06-01 run [26753651033](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26753651033):** failed at `format:check` before publish — no packages published. Re-run with `provenance_republish=true` (skips doc/format gates; build/test/security gates still run).
+- [26753651033](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26753651033) — `format:check` before publish
+- [26760156283](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26760156283) — GA evidence / scorecard
+- [26761642015](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26761642015) — npm auth E401
+- [26774707785](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26774707785) — `pnpm publish` without attestations
+- [26775554752](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26775554752) — no-op publish (versions already on npm)
+- [26776762740](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26776762740) — E422 private repo
+- [26777614348](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26777614348) — fail-fast private-repo check
 
-**2026-06-01 run [26760156283](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26760156283):** failed at GA evidence (missing `artifacts/ai-scorecard.json`). Fixed: skip GA/ai gates when `provenance_republish=true`.
-
-**2026-06-01 run [26761642015](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26761642015):** failed at **Configure npm auth** — `npm whoami` E401. Causes: (1) auth written to `~/.npmrc` while `setup-node` uses `NPM_CONFIG_USERCONFIG`; (2) org `NPM_TOKEN` expired/revoked or lacks publish scope. Fix workflow path; rotate token if 401 persists after push.
-
-**2026-06-01 run [26774707785](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26774707785):** publish **succeeded** but verify failed **0/21 attestations**. Root cause: `changeset publish --provenance` does not pass provenance to `pnpm publish`. Fix: `NPM_CONFIG_PROVENANCE=true`, `publishConfig.provenance`, changeset `.changeset/provenance-pnpm-config.md` for republish.
-
-**2026-06-01 run [26775554752](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26775554752):** Used **`changeset publish`** (no attestations); all packages skipped as already on npm at 3.1.3. Fix landed in `59b628b` (`publish-packages-provenance.mjs` + 3.1.4 bumps).
-
-**2026-06-01 run [26776762740](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26776762740):** `npm publish --provenance` reached Sigstore, then **E422** — `gtcx-core` is a **private** GitHub repo. npm only accepts provenance from **public** source repositories. `@gtcx/types@3.1.4` was not published.
-
-## npm provenance — hard blocker (2026-06-01)
-
-| Requirement                       | Status                                              |
-| --------------------------------- | --------------------------------------------------- |
-| `npm publish --provenance` + OIDC | Works (Sigstore statement generated in CI)          |
-| `id-token: write`                 | Present                                             |
-| `repository` in `package.json`    | Present                                             |
-| **Public GitHub source repo**     | **BLOCKED** — `gtcx-ecosystem/gtcx-core` is private |
-
-**To get 21/21 attestations:** make `gtcx-core` public (org admin), then:
-
-```bash
-gh workflow run release.yml --repo gtcx-ecosystem/gtcx-core -f provenance_republish=true
-pnpm provenance:check-npm --strict
-```
-
-Republish skips `changeset version` when versions are already committed. Publish fails fast if a version exists on npm without attestations.
+</details>
 
 ## Internal 10/10 signoff
 
