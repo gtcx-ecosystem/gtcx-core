@@ -23,9 +23,9 @@ tags: ['gtm', 'cross-repo', 'gtcx-infrastructure', 'ecosystem']
 
 ## Still active — do not link as product repos
 
-| Repo                | Canonical       | Notes                                                              |
-| ------------------- | --------------- | ------------------------------------------------------------------ |
-| `gtcx-complianceos` | `compliance-os` | Migration **complete** 2026-06-02 — GitHub delete pending approval |
+| Repo                | Canonical       | Notes                              |
+| ------------------- | --------------- | ---------------------------------- |
+| `gtcx-complianceos` | `compliance-os` | **Deleted** from GitHub 2026-06-02 |
 
 ## Infrastructure ADR checklist (gtcx-core slice)
 
