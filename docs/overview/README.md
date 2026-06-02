@@ -15,9 +15,9 @@ review_cycle: 'on-change'
 # gtcx-core — Repository Overview
 
 > **Status:** Current
-> **Date:** 2026-05-27
+> **Date:** 2026-06-02
 > **Owner:** Protocol Architect
-> **Bank-grade composite score:** 8.5 / 10 (per [master audit 2026-06-02](../audit/master-audit-2026-06-02.md))
+> **Bank-grade composite score:** 8.5 / 10 (per [master audit 2026-06-02-post-sprint2](../audit/master-audit-2026-06-02-post-sprint2.md))
 > **Internal completion score:** 9.5 / 10 (per [internal completion audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md) — all internal items closed)
 > **Next review:** 2026-08-27 (quarterly, aligned with master audit cycle)
 
@@ -31,11 +31,11 @@ review_cycle: 'on-change'
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.5/10** as of [master audit 2026-06-02](../audit/master-audit-2026-06-02.md) (prior: 8.9 on 2026-05-27). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced; **21/21 core `@gtcx/*` packages** on npm with **Sigstore provenance** at the **3.1.4 train** (2026-06-01); `@gtcx/ai-eval@0.1.1` published on npm **without provenance** (requires `gtcx-core` **public** + attestation). Downstream npm consumers pinned (`gtcx-protocols`, `gtcx-infrastructure/replay-protection`). Verify: `pnpm provenance:check-npm:strict`. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
+**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.5/10** as of [master audit 2026-06-02-post-sprint2](../audit/master-audit-2026-06-02-post-sprint2.md) (prior: 8.9 on 2026-05-27). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Sprint 2 (2026-06-02):** Commodity-agnostic `CommodityOriginCircuit` (Groth16) replaces diamond-specific circuit; `BulletproofsCommodityRangeBundle` with commodity/unit hash binding; thin `proveDiamondOrigin()` backward-compat wrapper. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced; **21/21 core `@gtcx/*` packages** on npm with **Sigstore provenance** at the **3.1.4 train** (2026-06-01); `@gtcx/ai-eval@0.1.1` published on npm **without provenance** (requires `gtcx-core` **public** + attestation). Downstream npm consumers pinned (`gtcx-protocols`, `gtcx-infrastructure/replay-protection`). Verify: `pnpm provenance:check-npm:strict`. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
 
 **Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DR Congo plus broader continental rollout). See the [cross-jurisdiction dashboard](../agile/engagement-log/dashboard.md) for per-engagement state.
 
-**Honest remaining gaps (externally budgeted):** pen test report not yet delivered (target 2026-08-25); SOC 2 Type 1 letter not yet delivered (target 2026-09-15). **New findings this audit:** 2 test regressions in `packages/network` (`vi` import missing); empty test suite `tools/npm-provenance-utils.test.mjs`; `@gtcx/ai-eval` lacks npm provenance; 5 broken internal links; ~20+ docs missing frontmatter. **Internal doc/devEx track:** [GTM roadmap — internal 10/10](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md).
+**Honest remaining gaps (externally budgeted):** pen test report not yet delivered (target 2026-08-25); SOC 2 Type 1 letter not yet delivered (target 2026-09-15). **Fixed this audit:** 2 test regressions in `packages/network` (vitest `globals: true` conflict); empty test suite `tools/npm-provenance-utils.test.mjs` (converted to vitest); 5 broken internal links. **Open findings:** `@gtcx/ai-eval` lacks npm provenance; crypto package coverage below 95% threshold due to Sprint 2 ZKP wrapper files (`zkp-commodity-origin.ts` 41.17% stmts); ~315 docs with frontmatter errors. **Internal doc/devEx track:** [GTM roadmap — internal 10/10](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md).
 
 ---
 
@@ -58,23 +58,26 @@ review_cycle: 'on-change'
 
 ### 2.2 Feature Matrix
 
-| Feature                            | Status          | Evidence                                           | Consumed By           |
-| ---------------------------------- | --------------- | -------------------------------------------------- | --------------------- |
-| Ed25519 signing & verification     | **Production**  | `packages/crypto/tests/signing.test.ts`            | All downstream        |
-| P256 FIPS-validated signing        | **Production**  | `cargo test --features fips` passes (30 tests)     | All downstream        |
-| SHA-256 / SHA-512 / BLAKE3 hashing | **Production**  | `packages/crypto/tests/hashing.test.ts`            | All downstream        |
-| Groth16 ZKP (GCI threshold)        | **Production**  | `rust/gtcx-zkp` tests pass (38 tests)              | `gtcx-markets`        |
-| Bulletproofs range proof           | **Production**  | `rust/gtcx-zkp` tests pass                         | `gtcx-markets`        |
-| Schnorr identity proof             | **Production**  | `rust/gtcx-zkp` tests pass                         | `gtcx-protocols`      |
-| Offline queue with durable storage | **Production**  | `packages/sync/tests/offline-queue.test.ts`        | `gtcx-markets` mobile |
-| Connectivity profile detection     | **Production**  | `packages/connectivity/tests/connectivity.test.ts` | All mobile clients    |
-| API client with mTLS + retry       | **Production**  | `packages/api-client/tests/canonical/`             | All downstream        |
-| DID resolution                     | **Beta**        | `packages/identity/tests/did.test.ts`              | `gtcx-markets`        |
-| ZKP native NAPI bindings           | **Beta**        | `packages/crypto-native/`                          | `gtcx-markets`        |
-| USSD protocol                      | **Scaffolding** | String enum only (`'ussd-only'` profile)           | —                     |
-| Adaptive low-bandwidth mode        | **Production**  | Dynamic compression, image downsampling, batching  | All mobile clients    |
-| HSM key storage                    | **Beta**        | PKCS#11 keystore implemented in `rust/gtcx-crypto` | `gtcx-infrastructure` |
-| Cloud KMS integration              | **Beta**        | AWS KMS keystore implemented in `rust/gtcx-crypto` | `gtcx-infrastructure` |
+| Feature                            | Status          | Evidence                                                                  | Consumed By           |
+| ---------------------------------- | --------------- | ------------------------------------------------------------------------- | --------------------- |
+| Ed25519 signing & verification     | **Production**  | `packages/crypto/tests/signing.test.ts`                                   | All downstream        |
+| P256 FIPS-validated signing        | **Production**  | `cargo test --features fips` passes (30 tests)                            | All downstream        |
+| SHA-256 / SHA-512 / BLAKE3 hashing | **Production**  | `packages/crypto/tests/hashing.test.ts`                                   | All downstream        |
+| Groth16 ZKP (GCI threshold)        | **Production**  | `rust/gtcx-zkp` tests pass (38 tests)                                     | `gtcx-markets`        |
+| Groth16 ZKP (commodity origin)     | **Beta**        | `rust/gtcx-zkp` tests pass; TS bindings in `packages/crypto/`             | `gtcx-markets`        |
+| Groth16 ZKP (diamond origin)       | **Beta**        | Thin wrapper over commodity origin circuit                                | `gtcx-markets`        |
+| Bulletproofs range proof           | **Production**  | `rust/gtcx-zkp` tests pass                                                | `gtcx-markets`        |
+| Bulletproofs commodity range       | **Beta**        | Commodity/unit hash binding; `packages/crypto/src/zkp-commodity-range.ts` | `gtcx-markets`        |
+| Schnorr identity proof             | **Production**  | `rust/gtcx-zkp` tests pass                                                | `gtcx-protocols`      |
+| Offline queue with durable storage | **Production**  | `packages/sync/tests/offline-queue.test.ts`                               | `gtcx-markets` mobile |
+| Connectivity profile detection     | **Production**  | `packages/connectivity/tests/connectivity.test.ts`                        | All mobile clients    |
+| API client with mTLS + retry       | **Production**  | `packages/api-client/tests/canonical/`                                    | All downstream        |
+| DID resolution                     | **Beta**        | `packages/identity/tests/did.test.ts`                                     | `gtcx-markets`        |
+| ZKP native NAPI bindings           | **Beta**        | `packages/crypto-native/`                                                 | `gtcx-markets`        |
+| USSD protocol                      | **Scaffolding** | String enum only (`'ussd-only'` profile)                                  | —                     |
+| Adaptive low-bandwidth mode        | **Production**  | Dynamic compression, image downsampling, batching                         | All mobile clients    |
+| HSM key storage                    | **Beta**        | PKCS#11 keystore implemented in `rust/gtcx-crypto`                        | `gtcx-infrastructure` |
+| Cloud KMS integration              | **Beta**        | AWS KMS keystore implemented in `rust/gtcx-crypto`                        | `gtcx-infrastructure` |
 
 ### 2.3 Business Value Proposition
 
