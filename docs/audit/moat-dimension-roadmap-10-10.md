@@ -1,0 +1,240 @@
+---
+id: ROADMAP-MOAT-10-10-2026-06-02
+title: Algorithmic Moat — Per-Dimension 10/10 Roadmap
+date: 2026-06-02
+owner: security-engineer
+scope: rust/gtcx-zkp cryptographic defensibility
+status: draft
+---
+
+# Algorithmic Moat — Per-Dimension 10/10 Roadmap
+
+**Source:** [`algorithmic-moat-sprint2-assessment.md`](./algorithmic-moat-sprint2-assessment.md)  
+**Baseline:** 7.0/10 overall (post-Sprint 2, post-RNG-fix)  
+**Target:** 10.0/10 pragmatic (all milestones complete + CI gates passing)
+
+---
+
+## How to Read This Document
+
+Each dimension has:
+
+- **Current → Target** score
+- **Milestones** in ~0.5–1.0 point increments
+- **Acceptance criteria** (must be verifiable in CI or by inspection)
+- **Estimated effort**
+- **Prerequisites** (dimensions that must come first)
+
+> **Scoring rule:** A milestone is only counted when its acceptance criteria are met **and** a corresponding CI gate or documented test passes.
+
+---
+
+## Dimension 1: Circuit Correctness (Groth16)
+
+**Current:** 5/10 → **Target:** 10/10
+
+| Milestone                           | Score | Acceptance Criteria                                                                                          | Effort   | Gate                                        |
+| ----------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------- |
+| M1.1 CommodityOrigin negative tests | 5→6   | All 11 constraint groups have a failing test (GPS ×4, metrics ×2, commitments ×3, region hash ×1, Merkle ×1) | 2–3 days | `cargo test` passes                         |
+| M1.2 All-circuit negative tests     | 6→7   | AssetOwnership, LocationRegion, GciThreshold each have ≥2 constraint-violation tests                         | 1–2 days | `cargo test` passes                         |
+| M1.3 Boundary-value tests           | 7→8   | Edge cases covered: `lat == min_lat`, `primary == min_primary`, `u64::MAX` bounds, zero values               | 1 day    | `cargo test` passes                         |
+| M1.4 Property-based tests           | 8→9   | `proptest` for `uint64_is_ge` (random a,b), GPS bounds (random in/out), commitment consistency               | 2 days   | `cargo test` passes with 10k+ cases         |
+| M1.5 Differential testing           | 9→10  | Independent verifier (snarkjs or arkworks reference) confirms same accept/reject for 100 random witnesses    | 3 days   | CI job `cargo test --features differential` |
+
+**Prerequisites:** None  
+**Critical path:** Yes — blocks most other dimensions  
+**Owner:** protocol-engineer
+
+---
+
+## Dimension 2: Bulletproofs Range Proofs
+
+**Current:** 8/10 → **Target:** 10/10
+
+| Milestone                         | Score | Acceptance Criteria                                                                                              | Effort   | Gate                          |
+| --------------------------------- | ----- | ---------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------- |
+| M2.1 Boundary tests               | 8→9   | Tests for `value == min`, `value == max`, `value == 0`, `max == u64::MAX` for both amount and commodity variants | 0.5 day  | `cargo test` passes           |
+| M2.2 KAT vectors + property tests | 9→10  | KAT files for both variants; `proptest` with 10k+ random (value, min, max) tuples; tamper resistance verified    | 1–2 days | `cargo test --ignored` passes |
+
+**Prerequisites:** Dimension 6 (KAT infrastructure)  
+**Critical path:** No  
+**Owner:** protocol-engineer
+
+---
+
+## Dimension 3: Trusted-Setup Reduction
+
+**Current:** 9/10 → **Target:** 10/10
+
+| Milestone                    | Score  | Acceptance Criteria                                                                              | Effort  | Gate                                         |
+| ---------------------------- | ------ | ------------------------------------------------------------------------------------------------ | ------- | -------------------------------------------- |
+| M3.1 Ceremony documentation  | 9→9.5  | Document: parameter generation process, entropy sources, number of participants, transcript hash | 0.5 day | Doc review + sign-off                        |
+| M3.2 Transcript verification | 9.5→10 | CI test that re-derives verifying key from published transcript and confirms VK hash matches KAT | 1 day   | `cargo test --features trusted-setup-verify` |
+
+**Prerequisites:** Dimension 6 (KAT vectors with VK hashes)  
+**Critical path:** No  
+**Owner:** protocol-engineer
+
+---
+
+## Dimension 4: Backward Compatibility
+
+**Current:** 9/10 → **Target:** 10/10
+
+| Milestone              | Score | Acceptance Criteria                                                                                                            | Effort  | Gate                          |
+| ---------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------ | ------- | ----------------------------- |
+| M4.1 Integration proof | 9→10  | End-to-end test: generate proof with old `proveDiamondOrigin()` API → verify with new `verifyCommodityOrigin()` → assert valid | 0.5 day | `pnpm test` integration suite |
+
+**Prerequisites:** Dimension 1 (circuit correctness stable)  
+**Critical path:** No  
+**Owner:** protocol-engineer
+
+---
+
+## Dimension 5: RNG / Witness Entropy
+
+**Current:** 9/10 → **Target:** 10/10
+
+| Milestone                 | Score  | Acceptance Criteria                                                                                                | Effort  | Gate                                    |
+| ------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ | ------- | --------------------------------------- |
+| M5.1 Entropy source audit | 9→9.5  | Document hierarchy: `OsRng` → `getrandom` → `/dev/urandom` (Unix) / `BCryptGenRandom` (Windows); fallback behavior | 0.5 day | Doc in `rust/gtcx-zkp/RNG.md`           |
+| M5.2 Non-determinism test | 9.5→10 | Test generates 100 proofs from same witness; asserts all proof bytes are distinct (statistical check)              | 0.5 day | `cargo test test_proof_non_determinism` |
+
+**Prerequisites:** None  
+**Critical path:** No  
+**Owner:** security-engineer
+
+---
+
+## Dimension 6: KAT / Interoperability
+
+**Current:** 0/10 → **Target:** 10/10
+
+| Milestone                            | Score | Acceptance Criteria                                                                                               | Effort | Gate                                             |
+| ------------------------------------ | ----- | ----------------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------ |
+| M6.1 Groth16 KATs                    | 0→3   | KAT files for all 4 circuit types (GciThreshold, AssetOwnership, LocationRegion, CommodityOrigin)                 | 2 days | `artifacts/kat/*.kat.json` present               |
+| M6.2 Bulletproofs KATs               | 3→6   | KAT files for amount-range and commodity-range variants                                                           | 1 day  | `artifacts/kat/*.kat.json` present               |
+| M6.3 CI KAT verification gate        | 6→8   | `cargo test --ignored` verifies all KAT proofs on every PR; fails if VK hash changes without KAT regeneration     | 1 day  | Required CI check                                |
+| M6.4 Cross-implementation validation | 8→9   | KAT proofs verified with independent verifier (snarkjs for Groth16, bulletproofs-js for Bulletproofs)             | 3 days | `pnpm test:kat-cross-impl` passes                |
+| M6.5 Published KAT package           | 9→10  | KAT vectors published as `@gtcx/zkp-kat-vectors` npm package with semver; downstream repos consume for regression | 1 day  | Package published + consumed in `gtcx-protocols` |
+
+**Prerequisites:** Dimension 1 (circuit stable enough to generate canonical vectors)  
+**Critical path:** Yes — unlocks Dimensions 2, 3, 7  
+**Owner:** protocol-engineer
+
+---
+
+## Dimension 7: Side-Channel Resistance
+
+**Current:** 5/10 → **Target:** 10/10
+
+| Milestone                                | Score | Acceptance Criteria                                                                                                                   | Effort             | Gate                                             |
+| ---------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------ |
+| M7.1 Threat model document               | 5→6   | Document: attacker capabilities (local vs remote), witness lifetime, what leakage would mean, acceptable risk posture                 | 0.5 day            | `docs/security/zkp-sidechannels.md`              |
+| M7.2 `uint64_is_ge` audit                | 6→7   | Static analysis or manual review confirming bit-decomposition path has no secret-dependent branches; or documented as acceptable risk | 1 day              | Audit report committed                           |
+| M7.3 Constant-time hardening             | 7→8   | If audit finds variable-time behavior: replace with `subtle`-based comparison or ark-ct gadgets; else document why not needed         | 2–3 days           | `cargo test` passes + bench shows no regression  |
+| M7.4 Microbenchmarks                     | 8→9   | `dudect` or `ctgrind` statistical tests for comparison path; p-value > 0.05 for 1M samples                                            | 3 days             | CI job `cargo test --features sidechannel-bench` |
+| M7.5 Third-party side-channel assessment | 9→10  | External lab confirms no exploitable timing leakage in constraint-generation path                                                     | 2–3 weeks external | Signed report in `docs/audit/`                   |
+
+**Prerequisites:** Dimension 1 (circuit code frozen)  
+**Critical path:** No  
+**Owner:** security-engineer
+
+---
+
+## Dimension 8: Formal Verification
+
+**Current:** 0/10 → **Target:** 10/10
+
+| Milestone                     | Score | Acceptance Criteria                                                                                       | Effort    | Gate                                     |
+| ----------------------------- | ----- | --------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------- |
+| M8.1 R1CS export              | 0→3   | `cargo run --bin export-r1cs` writes constraints + variable mapping to JSON for all circuits              | 2 days    | JSON schema validated                    |
+| M8.2 `uint64_is_ge` SMT spec  | 3→5   | Z3/SMT-LIB spec proving: for all 64-bit a,b, `uint64_is_ge(a,b) == true ⟺ a >= b`                         | 3 days    | `z3 uint64_is_ge.smt2` returns `sat`     |
+| M8.3 Gadget verification      | 5→7   | SMT proofs for SHA-256 gadget correctness (input → output matches reference) and Merkle path verification | 5 days    | CI script `tools/verify-r1cs.sh` passes  |
+| M8.4 Full circuit soundness   | 7→8   | Z3/Coq proof that all 11 CommodityOrigin constraint groups jointly imply the specification                | 1 week    | Proof script committed                   |
+| M8.5 Machine-checked proof    | 8→9   | Reproducible Coq/Isabelle proof with `make verify` target; no axioms beyond standard library              | 1–2 weeks | CI gate `make verify` passes             |
+| M8.6 Published proof artifact | 9→10  | Proof artifact (`.vo` file or equivalent) published with release; checksum in KAT package                 | 1 day     | Release workflow includes proof artifact |
+
+**Prerequisites:** Dimension 1 (circuits frozen), Dimension 6 (KAT vectors as oracles)  
+**Critical path:** No (parallelizable after M8.1)  
+**Owner:** protocol-engineer + formal-methods consultant
+
+---
+
+## Dimension 9: Third-Party Audit
+
+**Current:** 0/10 → **Target:** 10/10
+
+| Milestone                  | Score | Acceptance Criteria                                                                                                 | Effort    | Gate                                 |
+| -------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------ |
+| M9.1 Vendor selection      | 0→3   | SOW signed with NCC Group, Trail of Bits, or Least Authority; scope includes circuits, trusted setup, side channels | 1 week    | Contract in `docs/audit/contracts/`  |
+| M9.2 Draft report + triage | 3→6   | Draft received; all Critical/High findings logged in tracker; remediation plan agreed                               | 2–3 weeks | Tracker in `docs/audit/remediation/` |
+| M9.3 Remediation complete  | 6→8   | All Critical + High findings closed; Medium findings have risk-acceptance docs or fixes                             | 2–4 weeks | CI green + sign-off                  |
+| M9.4 Final report          | 8→9   | Signed final report received; no open Critical/High findings                                                        | 1 week    | Report in `docs/audit/`              |
+| M9.5 Publish + cycle       | 9→10  | Report published on trust portal; 12-month re-audit calendar established                                            | 0.5 day   | Trust portal updated                 |
+
+**Prerequisites:** Dimensions 1, 5, 7 complete (auditor needs stable code + threat model)  
+**Critical path:** Yes — longest pole  
+**Owner:** security-engineer + procurement
+
+---
+
+## Master Timeline
+
+```
+Week  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16
+     |--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+D1   [====M1.1====][=M1.2=][=M1.3=][==M1.4==][==M1.5==]
+D2                        [=M2.1=][=M2.2=]
+D3                              [=M3.1=][=M3.2=]
+D4                        [=M4.1=]
+D5   [=M5.1=][=M5.2=]
+D6   [==M6.1==][=M6.2=][=M6.3=][==M6.4==][=M6.5=]
+D7         [=M7.1=][=M7.2=][=M7.3=][==M7.4==][====M7.5====]
+D8   [==M8.1==][==M8.2==][==M8.3==][==M8.4==][==M8.5==][=M8.6=]
+D9   [====M9.1====][======M9.2======][====M9.3====][=M9.4=][=M9.5=]
+```
+
+**Parallel team assumption:** 2 engineers (protocol + security) + 1 formal-methods consultant + 1 external audit vendor.
+
+---
+
+## Score Progression by Week
+
+| Week    | D1  | D2  | D3  | D4  | D5  | D6  | D7  | D8  | D9  | **Overall** |
+| ------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ----------- |
+| 0 (now) | 5   | 8   | 9   | 9   | 9   | 0   | 5   | 0   | 0   | **7.0**     |
+| 2       | 6   | 8   | 9   | 9   | 9.5 | 3   | 6   | 3   | 3   | **7.3**     |
+| 4       | 7   | 9   | 9   | 9   | 9.5 | 6   | 7   | 5   | 3   | **7.6**     |
+| 6       | 8   | 9   | 9.5 | 10  | 10  | 8   | 8   | 7   | 6   | **8.4**     |
+| 8       | 8   | 9   | 9.5 | 10  | 10  | 8   | 8   | 8   | 6   | **8.5**     |
+| 10      | 9   | 10  | 9.5 | 10  | 10  | 9   | 9   | 8   | 8   | **8.9**     |
+| 12      | 9   | 10  | 10  | 10  | 10  | 9   | 9   | 9   | 8   | **9.1**     |
+| 14      | 10  | 10  | 10  | 10  | 10  | 9   | 9   | 9   | 9   | **9.4**     |
+| 16      | 10  | 10  | 10  | 10  | 10  | 10  | 10  | 10  | 10  | **10.0**    |
+
+> **Overall** = weighted average: D1×25%, D2×10%, D3×5%, D4×5%, D5×5%, D6×10%, D7×10%, D8×15%, D9×15%
+
+---
+
+## CI Gates Required
+
+| Gate                   | When                  | Command                                      |
+| ---------------------- | --------------------- | -------------------------------------------- |
+| `test`                 | Every PR              | `cargo test`                                 |
+| `kat-verify`           | Every PR (after M6.3) | `cargo test --ignored`                       |
+| `r1cs-export`          | Weekly (after M8.1)   | `cargo run --bin export-r1cs`                |
+| `smt-verify`           | Every PR (after M8.3) | `z3 scripts/verify-r1cs.smt2`                |
+| `sidechannel-bench`    | Weekly (after M7.4)   | `cargo test --features sidechannel-bench`    |
+| `differential`         | Weekly (after M1.5)   | `cargo test --features differential`         |
+| `trusted-setup-verify` | Release (after M3.2)  | `cargo test --features trusted-setup-verify` |
+
+---
+
+## Agent Context Attestation
+
+- [x] Phase 1: Baseline loaded
+- [x] Phase 2: Repo context established
+- [x] Phase 3: Current state discovered (assessment doc reviewed)
+- [x] Phase 4: Persona: `protocol-engineer` + frame: `regulatory-audit`
+- [x] Phase 5: Context attested
