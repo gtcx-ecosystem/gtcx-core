@@ -12,20 +12,15 @@ tags: ['gtm', 'cross-repo', 'gtcx-infrastructure', 'ecosystem']
 
 **Ask for gtcx-core:** Confirm no published docs, examples, or consumer guides still point at deleted GitHub repos; keep npm / package identity aligned with `sensei-ai` and `compliance-os` only.
 
-## Deletions completed (2026-06-01)
+## Deletions completed
 
-| Repo                           | Superseded by                        | gtcx-core action                                          |
-| ------------------------------ | ------------------------------------ | --------------------------------------------------------- |
-| `gtcx-core12`                  | `compliance-os` → `services/core12/` | None required — no references found in gtcx-core at audit |
-| `gtcx-amis`                    | `sensei-ai`                          | None required — root package is `@gtcx/*` only            |
-| `sensei-ai-docs-*` (3 mirrors) | `sensei-ai`                          | N/A                                                       |
-| `agx-demo1`, `sgx-demo`        | —                                    | N/A                                                       |
-
-## Still active — do not link as product repos
-
-| Repo                | Canonical       | Notes                              |
-| ------------------- | --------------- | ---------------------------------- |
-| `gtcx-complianceos` | `compliance-os` | **Deleted** from GitHub 2026-06-02 |
+| Repo                           | Deleted    | Superseded by                        | gtcx-core action |
+| ------------------------------ | ---------- | ------------------------------------ | ---------------- |
+| `gtcx-core12`                  | 2026-06-01 | `compliance-os` → `services/core12/` | None required    |
+| `gtcx-amis`                    | 2026-06-01 | `sensei-ai`                          | None required    |
+| `gtcx-complianceos`            | 2026-06-02 | `compliance-os`                      | None required    |
+| `sensei-ai-docs-*` (3 mirrors) | 2026-06-01 | `sensei-ai`                          | N/A              |
+| `agx-demo1`, `sgx-demo`        | 2026-06-01 | —                                    | N/A              |
 
 ## Infrastructure ADR checklist (gtcx-core slice)
 
