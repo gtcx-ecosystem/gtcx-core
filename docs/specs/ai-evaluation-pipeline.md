@@ -45,7 +45,7 @@ This spec defines the `ai:evaluate` command and its CI integration. The pipeline
 
 **Defensibility ([DTF-001 Tier 4](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/tiers.md)):** Tier 1 (~90d) covers signing APIs only. Competitors cannot quickly replicate GTCX-encoded **safety-rule semantics**, gate choreography, and the operational habit of attaching scorecards to GA evidence and the [trust portal](../governance/trust-portal.md).
 
-**Roadmap placement:** [docs/roadmap.md §4.10](../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) · Engagement track: [engagement-readiness sprint Phase 6](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md#phase-6--trust-automation-moat-post-engagement-q2q3-2026) · Audit synthesis: [full-audit-2026-06-01](../audit/full-audit-2026-06-01.md).
+**Roadmap placement:** [docs/roadmap.md §4.10](../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) · Engagement track: [engagement-readiness Phase 6](../agile/roadmap/engagement-readiness-trust-automation-phase-6.md) · Audit synthesis: [full-audit-2026-06-01](../audit/full-audit-2026-06-01.md).
 
 | Milestone         | Acceptance criteria                                           |
 | ----------------- | ------------------------------------------------------------- | --------------- |

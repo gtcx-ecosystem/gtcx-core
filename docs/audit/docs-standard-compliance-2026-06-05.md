@@ -13,7 +13,7 @@ supersedes: docs/audit/docs-standard-compliance-2026-05-22.md
 
 # Docs Standard Compliance Audit — 2026-06-05
 
-> **Status:** Current — **P1 remediation applied** 2026-06-05  
+> **Status:** Current — **P1 + P2 remediation applied** through 2026-06-03  
 > **Date:** 2026-06-05  
 > **Owner:** Quality & Evidence Lead  
 > **Supersedes:** [docs-standard-compliance-2026-05-22.md](./docs-standard-compliance-2026-05-22.md)
@@ -34,7 +34,7 @@ supersedes: docs/audit/docs-standard-compliance-2026-05-22.md
 
 `gtcx-core` maintains a **single canonical `/docs/` root** (382 markdown files) with strong structural taxonomy, YAML frontmatter enforcement, and automated link checking (**480 files pass**). Compliance **regressed slightly** from May 2026 due to **five frontmatter gate failures**, **three ALL_CAPS filenames**, and **master INDEX drift** (June audits and Tier-5 closure not reflected in `docs/README.md` §10).
 
-No P0 violations. The repo remains **production-capable for documentation** (~**9.1/10** overall). Remediation is **P1 sprint** (frontmatter + INDEX refresh + naming) unless `/execute-repo-hygiene`-style doc execute is requested.
+No P0 violations. The repo is at **~9.6/10** overall after P1+P2 execute passes (frontmatter, INDEX, naming, trust-portal/integration/overview/agile splits, repo hygiene bootstrap).
 
 ---
 
@@ -52,17 +52,17 @@ No P0 violations. The repo remains **production-capable for documentation** (~**
 
 ## Compliance scores
 
-| Axis         | Score       | Δ vs 2026-05-22 | Top finding                                                                                                             |
-| ------------ | ----------- | --------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Structural   | **9.4/10**  | —               | Single `/docs/`; repo-specific dirs (`agile/`, `gtm/`, `agents/`) justified in INDEX taxonomy table                     |
-| Naming       | **9.0/10**  | −1.0            | **3** non-kebab files (ALL_CAPS / underscores)                                                                          |
-| Frontmatter  | **9.0/10**  | −1.0            | `pnpm docs:check-frontmatter` — **262/265** valid; **5** errors in **3** files                                          |
-| Linking      | **9.6/10**  | −0.4            | `pnpm docs:check-links` — **480/480** pass; stylistic `github.com/.../blob/` URLs remain in trust-portal / coordination |
-| Length       | **8.5/10**  | −0.7            | **10+** docs exceed operational (300) or architectural (500) limits                                                     |
-| Agentic      | **9.0/10**  | —               | New coordination + tier-5 docs table-first; legacy prose-heavy specs unchanged                                          |
-| RAG          | **10.0/10** | —               | `baseline.config.ts` matches canonical exclude contract                                                                 |
-| Master INDEX | **8.2/10**  | −1.2            | `docs/README.md` stale — missing 2026-06 audits, `full-audit-2026-06-04`, `repo-hygiene-2026-06-05`, tier-5 ~88%        |
-| **Overall**  | **9.1/10**  | −0.5            |                                                                                                                         |
+| Axis         | Score       | Δ vs 2026-05-22 | Top finding                                                                                         |
+| ------------ | ----------- | --------------- | --------------------------------------------------------------------------------------------------- |
+| Structural   | **9.4/10**  | —               | Single `/docs/`; repo-specific dirs (`agile/`, `gtm/`, `agents/`) justified in INDEX taxonomy table |
+| Frontmatter  | **10.0/10** | +1.0            | `pnpm docs:check-frontmatter` — **274/274** valid (2026-06-03)                                      |
+| Linking      | **9.8/10**  | +0.2            | `pnpm docs:check-links` — **489** files pass; trust-portal blob URLs fixed in P2                    |
+| Naming       | **10.0/10** | +1.0            | P1 renames complete; no ALL_CAPS violations in scope                                                |
+| Length       | **9.5/10**  | +1.0            | Agile roadmaps split (2026-06-03); prior trust-portal/integration/overview splits complete          |
+| Agentic      | **9.0/10**  | —               | New coordination + tier-5 docs table-first; legacy prose-heavy specs unchanged                      |
+| RAG          | **10.0/10** | —               | `baseline.config.ts` matches canonical exclude contract                                             |
+| Master INDEX | **8.8/10**  | +0.6            | June audits indexed; root README Tier-5 % reconciled (~88%)                                         |
+| **Overall**  | **9.6/10**  | +0.5            | Matches May baseline after full P1+P2 execute pass                                                  |
 
 **Mean of 8 axes:** 9.21 → rounded **9.1** (INDEX drift + frontmatter gate failures weigh P1).
 
@@ -70,10 +70,11 @@ No P0 violations. The repo remains **production-capable for documentation** (~**
 
 ## Automated verification (Protocol 27 evidence)
 
-| Command                       | Exit  | Result                                      |
-| ----------------------------- | ----- | ------------------------------------------- |
-| `pnpm docs:check-links`       | **0** | Markdown link check passed (**480** files)  |
-| `pnpm docs:check-frontmatter` | **1** | **262/265** valid; **5** errors (see below) |
+| Command                                        | Exit  | Result                                     |
+| ---------------------------------------------- | ----- | ------------------------------------------ |
+| `pnpm docs:check-links`                        | **0** | Markdown link check passed (**489** files) |
+| `pnpm docs:check-frontmatter`                  | **0** | **274/274** valid                          |
+| `pnpm check:workspace-root-cleanliness:strict` | **0** | Status PASS (repo hygiene P1–P4)           |
 
 ### Frontmatter errors (P1)
 
@@ -208,9 +209,11 @@ knowledge: {
 
 **Post-remediation (P2 2026-06-05):** trust-portal split + relative links; integration-guide split; overview split; `docs/INDEX.md` redirect.
 
+**Post-remediation (2026-06-03 continue):** agile roadmap splits (`10-10-remediation`, `engagement-readiness`, `algorithmic-moat`); duplicate frontmatter merge on `docs-standard-lightweight.md`; root README Tier-5 ~88%.
+
 ## Violations remaining
 
-See P1/P2 tables below — **P2 doc splits and INDEX complete**; agile roadmaps >300 lines remain deferred. Carried forward justified items from [2026-05-22 audit](./docs-standard-compliance-2026-05-22.md#violations-remaining-justified).
+**P1 and P2 complete** for in-repo automatable scope. Residual **P3** (optional): historical audit docs over length limits (justified evidence). Carried forward from [2026-05-22 audit](./docs-standard-compliance-2026-05-22.md#violations-remaining-justified).
 
 ---
 

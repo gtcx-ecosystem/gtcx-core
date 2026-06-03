@@ -38,13 +38,15 @@ Two scores apply — do not conflate them ([full-audit 2026-06-04](./docs/audit/
 
 ### Defensibility Tier 5 (DTF-001 — jurisdiction ZKP moat)
 
-**Technical Tier 5: ~50%** — in progress (S-T5-3 next). Tiers 1–4 are achieved; Tier 5 requires named jurisdiction **circuit profiles** on one R1CS, KAT portability, verification bundle integration, registry, and commercial gate — not the same bar as library coverage.
+**Technical Tier 5: ~88%** — automatable slice complete (DTF-5.5.1 strict jurisdiction packs shipped). Tiers 1–4 are achieved; remaining Tier 5 work is ceremony-gated (CORE-004 / XR-402) and commercial (Legal/GTM). See [tier-5 workplan](./docs/operations/tier-5-workplan-2026-06.md).
 
-| Track                                   | Status        | Canonical doc                                                   |
-| --------------------------------------- | ------------- | --------------------------------------------------------------- |
-| S-T5-1 gh-gold profile + KAT            | **done**      | [tier-5 workplan](./docs/operations/tier-5-workplan-2026-06.md) |
-| S-T5-2 zw-diamond + verification + KATs | **done**      | [execution roadmap](./docs/audit/execution-roadmap.md)          |
-| Sovereign pilot / bank-grade            | **not ready** | Ecosystem gates below                                           |
+| Track                                   | Status        | Canonical doc                                                                                         |
+| --------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------- |
+| S-T5-1 gh-gold profile + KAT            | **done**      | [tier-5 workplan](./docs/operations/tier-5-workplan-2026-06.md)                                       |
+| S-T5-2 zw-diamond + verification + KATs | **done**      | [execution roadmap](./docs/audit/execution-roadmap.md)                                                |
+| S-T5-3 cross-repo witness + registry    | **done**      | [DTF-5.4.4 ack](./docs/operations/coordination/to-gtcx-protocols-dtf-5-4-4-witness-ack-2026-06-05.md) |
+| S-T5-4 strict jurisdiction packs        | **done**      | `pnpm jurisdiction:validate-packs`                                                                    |
+| Sovereign pilot / bank-grade            | **not ready** | Ecosystem gates below                                                                                 |
 
 **Moat path (in-repo):** WorkProof witness → `@gtcx/crypto` profile prove → `@gtcx/verification` bundle (`commodity-origin-zk`). Cross-package test: [`tests/integration/commodity-origin-zk.test.ts`](./tests/integration/commodity-origin-zk.test.ts).
 
