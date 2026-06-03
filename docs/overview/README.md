@@ -1,7 +1,7 @@
 ---
 title: 'gtcx-core — Repository Overview'
 status: 'current'
-date: '2026-06-02'
+date: '2026-06-03'
 owner: 'gtcx-core'
 role: 'protocol-architect'
 agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
@@ -15,11 +15,12 @@ review_cycle: 'on-change'
 # gtcx-core — Repository Overview
 
 > **Status:** Current
-> **Date:** 2026-06-02
-> **Owner:** Protocol Architect
-> **Bank-grade composite score:** 8.5 / 10 (per [master audit 2026-06-02-post-sprint2](../audit/master-audit-2026-06-02-post-sprint2.md))
-> **Internal completion score:** 9.5 / 10 (per [internal completion audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md) — all internal items closed)
-> **Next review:** 2026-08-27 (quarterly, aligned with master audit cycle)
+> **Date:** 2026-06-03  
+> **Owner:** Protocol Architect  
+> **Bank-grade composite score:** **8.9 / 10** (per [master audit 2026-06-03](../audit/master-audit-2026-06-03.md) refresh @ `bdfe7cb`)  
+> **Internal completion score:** 9.5 / 10 (per [internal completion audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md) — all internal items closed)  
+> **Defensibility Tier 5 technical:** ~88% (automatable slice complete; ceremony/commercial external)  
+> **Next review:** 2026-09-01 (quarterly)
 
 ---
 
@@ -31,11 +32,11 @@ review_cycle: 'on-change'
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-hardened with externally-budgeted blockers in motion. Honest bank-grade composite score: **8.5/10** as of [master audit 2026-06-02-post-sprint2](../audit/master-audit-2026-06-02-post-sprint2.md) (prior: 8.9 on 2026-05-27). Internal completion score is **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)) — all 24/24 internal items closed. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816); Rust tests passing under `--features fips`. **Coverage:** 14 packages enforce 95% branch thresholds; critical path well-covered. **Sprint 2 (2026-06-02):** Commodity-agnostic `CommodityOriginCircuit` (Groth16) replaces diamond-specific circuit; `BulletproofsCommodityRangeBundle` with commodity/unit hash binding; thin `proveDiamondOrigin()` backward-compat wrapper. **Fuzz:** [500,000+ libFuzzer iterations across 6 cargo-fuzz targets, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **Key custody:** HSM-backed (PKCS11 + AWS KMS) with NIST SP 800-57 lifecycle. **Supply chain:** SLSA Source L2 enforced; **21/21 core `@gtcx/*` packages** on npm with **Sigstore provenance** at the **3.1.4 train** (2026-06-01); `@gtcx/ai-eval@0.1.1` published on npm **without provenance** (requires `gtcx-core` **public** + attestation). Downstream npm consumers pinned (`gtcx-protocols`, `gtcx-infrastructure/replay-protection`). Verify: `pnpm provenance:check-npm:strict`. **External attestation:** pen test RFP drafted, vendor selection pending; SOC 2 Type 1 readiness prep complete, CPA engagement pending — see [Sprint 4 of the engagement readiness roadmap](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md). No critical security findings. CI operational.
+**Maturity state:** Production-hardened foundation library with **all in-repo gates green** (2026-06-03 session). Honest bank-grade composite: **8.9/10** per [master audit refresh](../audit/master-audit-2026-06-03.md). Internal completion remains **9.5/10** ([2026-05-21 audit](../audit/internal-completion-audit-2026-05-21.md)). **Defensibility Tier 5 technical ~88%** — DTF-5.4.4 protocols witness `73eaff2b`, DTF-5.5.1 strict jurisdiction packs; **CORE-004** blocked on XR-402 ceremony. **Cryptography:** FIPS-validated via aws-lc-rs (CMVP #4816). **Supply chain:** **22/22** `@gtcx/*` npm packages with **Sigstore provenance** at the 3.1.4 train — verify: `pnpm provenance:check-npm:strict`. **Docs/repo hygiene:** 9.6/10 each — machine CI gates (`docs:check-*`, `check:workspace-root-cleanliness:strict`). **Fuzz:** [500K+ libFuzzer iterations, zero crashes](../audit/fuzz-campaign-evidence-2026-05-21.md). **External attestation:** pen-test RFP drafted; SOC 2 prep complete — no delivered third-party report in-repo (blocks sovereign S2 procurement narrative).
 
-**Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DR Congo plus broader continental rollout). See the [cross-jurisdiction dashboard](../agile/engagement-log/dashboard.md) for per-engagement state.
+**Active execution program:** [Tier 5 workplan](../operations/tier-5-workplan-2026-06.md) (technical complete) · [Engagement Readiness](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) (sovereign engagements) · [execution roadmap](../audit/execution-roadmap.md)
 
-**Honest remaining gaps (externally budgeted):** pen test report not yet delivered (target 2026-08-25); SOC 2 Type 1 letter not yet delivered (target 2026-09-15). **Fixed this audit:** 2 test regressions in `packages/network` (vitest `globals: true` conflict); empty test suite `tools/npm-provenance-utils.test.mjs` (converted to vitest); 5 broken internal links. **Open findings:** `@gtcx/ai-eval` lacks npm provenance; crypto package coverage below 95% threshold due to Sprint 2 ZKP wrapper files (`zkp-commodity-origin.ts` 41.17% stmts); ~315 docs with frontmatter errors. **Internal doc/devEx track:** [GTM roadmap — internal 10/10](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md).
+**Honest remaining gaps (external):** live-stack pen-test (EXT-INF-002); trusted-setup ceremony (XR-402 / CORE-004); testnet/DR proof (EXT-INF-015); Zimbabwe sandbox intro (human send). **In-repo P2:** `@gtcx/network` transport maturity badge; org `TURBO_*` / `OPENAI_API_KEY` warnings in `pnpm ops:check`.
 
 ---
 
@@ -260,18 +261,20 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 
 ### 10.1 Key Documents
 
-| Document                                 | Purpose                  | Audience                         |
-| ---------------------------------------- | ------------------------ | -------------------------------- |
-| `docs/audit/master-audit-2026-05-27.md`  | Bank-grade certification | Security, compliance, investors  |
-| `docs/audit/10-10-roadmap-2026-05-11.md` | Path to 10.0             | Engineering, product, executives |
-| `docs/architecture/overview.md`          | System architecture      | Engineers, architects            |
-| `docs/security/threat-control-matrix.md` | Security controls        | Security engineers, auditors     |
-| `docs/compliance/soc2-readiness.md`      | SOC 2 evidence           | Compliance, buyers               |
-| `docs/gtm/00-executive-brief.md`         | Executive summary        | Investors, board                 |
-| `docs/specs/packages/README.md`          | Package specs            | Engineers, integrators           |
-| `docs/decisions/adr-index.md`            | Architecture decisions   | Engineers, architects            |
-| `CONTRIBUTING.md`                        | Contribution guide       | Open-source contributors         |
-| `CLAUDE.md`                              | Agent context            | AI agents, new developers        |
+| Document                                     | Purpose                             | Audience                        |
+| -------------------------------------------- | ----------------------------------- | ------------------------------- |
+| `docs/audit/master-audit-2026-06-03.md`      | **Latest** bank-grade certification | Security, compliance, investors |
+| `docs/audit/full-audit-2026-06-04.md`        | Six-phase full audit                | Engineering leadership          |
+| `docs/audit/execution-roadmap.md`            | FA + DTF sprint overlay             | Protocol 22 agents              |
+| `docs/operations/tier-5-workplan-2026-06.md` | Defensibility Tier 5 register       | Crypto / protocol architects    |
+| `docs/architecture/overview.md`              | System architecture                 | Engineers, architects           |
+| `docs/security/threat-control-matrix.md`     | Security controls                   | Security engineers, auditors    |
+| `docs/compliance/soc2-readiness.md`          | SOC 2 evidence                      | Compliance, buyers              |
+| `docs/gtm/00-executive-brief.md`             | Executive summary                   | Investors, board                |
+| `docs/specs/packages/README.md`              | Package specs                       | Engineers, integrators          |
+| `docs/decisions/adr-index.md`                | Architecture decisions              | Engineers, architects           |
+| `CONTRIBUTING.md`                            | Contribution guide                  | Open-source contributors        |
+| `CLAUDE.md`                                  | Agent context                       | AI agents, new developers       |
 
 ### 10.2 Contact & Escalation
 
@@ -286,12 +289,12 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 
 ## 11. Honest Assessment
 
-This document reflects the state of `gtcx-core` as of 2026-05-27. It uses honest scores from forensic verification (§9 of the master audit), not claimed scores.
+This document reflects the state of `gtcx-core` as of **2026-06-03**. Scores come from [master audit §9](../audit/master-audit-2026-06-03.md#9-honest-score-recalculation-phase-55--forensic-verification), not aspirational claims.
 
-**What is real:** FIPS 140-3 verified. Zero unsafe code. 97.86% statement coverage on critical path. Threat-control matrix with 12 validated controls. Offline-first queue tested. API surface baselined.
+**What is real:** All documented CI gates pass in-session. **22/22** npm Sigstore provenance. **280/280** doc frontmatter. Root hygiene CI enforced. Defensibility Tier 5 **technical ~88%**. Protocols E2E witness `73eaff2b`. FIPS 140-3 verified module. Zero `unsafe` in Rust. Offline-first queue tested.
 
-**What is aspirational:** USSD protocol (string enum only). Adaptive low-bandwidth mode (config-only). External pen-test (not started). SOC 2 Type 1 (readiness complete, no CPA engaged).
+**What is aspirational:** USSD protocol (profile enum). Full libp2p mesh transport (Phase 2). Commercial Tier 5 (Legal/GTM). Trusted-setup ceremony (XR-402).
 
-**What is blocked:** CI billing (user action). 4 org secrets (user action). Zimbabwe email (user action).
+**What is blocked (external):** Live-stack pen-test. SOC 2 Type I letter. Sovereign pilot testnet/DR proof. CORE-004 until ceremony.
 
-**What this means:** The engineering foundation is strong. The remaining work is external validation and operational unblocking. The path to 10.0 is clear and measured in months, not years.
+**What this means:** The **library foundation** scores **8.9/10** bank-grade. Path to **9.5+** requires **external attestation and ceremony**, not more internal doc splits.

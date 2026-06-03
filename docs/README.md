@@ -17,7 +17,7 @@ review_cycle: 'on-change'
 **Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
 
 **Last updated:** 2026-06-03
-**Latest synthesis:** [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md) · [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md) (P1+P2 **9.6/10**) · [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md) (post-bootstrap **9.6/10**)
+**Latest synthesis:** [`audit/master-audit-2026-06-03.md`](./audit/master-audit-2026-06-03.md) (**8.9/10** refresh) · [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md) · doc-standard **9.6/10** · repo-hygiene **9.6/10**
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
@@ -126,7 +126,8 @@ review_cycle: 'on-change'
 
 | Document                                                                                           | Purpose                                                                              |
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md)                               | **Latest** six-phase full audit — FA-S1 + DTF Tier 5 reconciliation                  |
+| [`audit/master-audit-2026-06-03.md`](./audit/master-audit-2026-06-03.md)                           | **Latest** master audit — **8.9/10** refresh @ bdfe7cb                               |
+| [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md)                               | Six-phase full audit — FA-S1 + DTF Tier 5 reconciliation                             |
 | [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md)   | Doc-standard compliance (**9.6/10** — P1+P2 complete 2026-06-03)                     |
 | [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md)                           | Repo root hygiene (**9.6/10** post-bootstrap; CI gate wired)                         |
 | [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md)               | Fresh master audit — composite 8.9/10                                                |
