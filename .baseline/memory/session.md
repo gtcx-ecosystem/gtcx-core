@@ -1,26 +1,32 @@
 ---
-session_id: '2026-06-03-dtf-5-5-1-jurisdiction-packs'
+session_id: '2026-06-05-dtf-5-5-1-committed'
 agent: 'gtcx-core-agent'
-focus: 'DTF-5.5.1 jurisdiction pack Zod strict CI'
+focus: 'DTF-5.5.1 committed; Tier 5 technical automatable slice complete'
 ---
 
-# Session: DTF-5.5.1 complete
+# Session: DTF-5.5.1 shipped
+
+## Commits
+
+| SHA       | Summary                                             |
+| --------- | --------------------------------------------------- |
+| `96a9167` | feat(jurisdiction-config): strict Zod engagement CI |
+| `762c5c4` | docs(strategy): tier-5 roadmap sync post-hook       |
 
 ## Done
 
-| Milestone | Evidence                                                                                                   |
-| --------- | ---------------------------------------------------------------------------------------------------------- |
-| DTF-5.5.1 | `@gtcx/jurisdiction-config` strict Zod + `zkp` policy packs; `pnpm jurisdiction:validate-packs` (16 tests) |
+| Milestone | Evidence                                                                                            |
+| --------- | --------------------------------------------------------------------------------------------------- |
+| DTF-5.5.1 | `@gtcx/jurisdiction-config` strict Zod + `zkp` packs; `pnpm jurisdiction:validate-packs` (16 tests) |
 
 ## Protocol 22
 
-`pnpm agent:next-work` → **DTF-5.5.2** (certified pack pipeline — external / Legal)
+`pnpm agent:next-work` → **CORE-004** D3 M3.2 trusted-setup verify — **blocked** (`XR-402` ceremony). Tier 5 remainder: **DTF-5.5.2+** external (Legal / GTM).
 
-## Verification
+## Verification (2026-06-05)
 
-| Command                                           | Result             |
-| ------------------------------------------------- | ------------------ |
-| `pnpm --filter @gtcx/jurisdiction-config build`   | exit 0             |
-| `pnpm --filter @gtcx/jurisdiction-config test`    | exit 0 (34 passed) |
-| `pnpm jurisdiction:validate-packs`                | exit 0 (16 passed) |
-| `cd tests/integration && pnpm test jurisdictions` | exit 0 (21 passed) |
+| Command                                        | Result             |
+| ---------------------------------------------- | ------------------ |
+| `pnpm jurisdiction:validate-packs`             | exit 0 (16 passed) |
+| `pnpm --filter @gtcx/jurisdiction-config test` | exit 0 (34 passed) |
+| `pnpm format:check`                            | exit 0             |
