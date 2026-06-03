@@ -72,6 +72,7 @@ review_cycle: 'on-change'
 | Schnorr identity proof             | **Production**  | `rust/gtcx-zkp` tests pass                                                | `gtcx-protocols`      |
 | Offline queue with durable storage | **Production**  | `packages/sync/tests/offline-queue.test.ts`                               | `gtcx-markets` mobile |
 | Connectivity profile detection     | **Production**  | `packages/connectivity/tests/connectivity.test.ts`                        | All mobile clients    |
+| P2P transport (libp2p mesh)        | **Scaffolding** | In-memory transport only; libp2p Phase 2 — `packages/network/README.md`   | —                     |
 | API client with mTLS + retry       | **Production**  | `packages/api-client/tests/canonical/`                                    | All downstream        |
 | DID resolution                     | **Beta**        | `packages/identity/tests/did.test.ts`                                     | `gtcx-markets`        |
 | ZKP native NAPI bindings           | **Beta**        | `packages/crypto-native/`                                                 | `gtcx-markets`        |
