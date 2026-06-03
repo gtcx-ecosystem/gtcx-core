@@ -1,4 +1,9 @@
-import { buildIssuanceEvidence, evidenceFilename } from './evidence.js';
+import {
+  buildIssuanceEvidence,
+  defaultEvidenceDir,
+  evidenceFilename,
+  writeIssuanceEvidenceFile,
+} from './evidence.js';
 import { fingerprintSecret, generateApiKeySecret } from './fingerprint.js';
 import { InMemoryEapRegistry } from './registry.js';
 import { StubSecretWriter, type SecretWriter } from './secrets.js';
@@ -15,6 +20,8 @@ export interface EapAdminServiceOptions {
   registry?: InMemoryEapRegistry;
   secretWriter?: SecretWriter;
   servicesSynced?: string[];
+  /** When set, issue/revoke write redacted `eap-issuance-*.json` artifacts. */
+  evidenceDir?: string;
 }
 
 export class EapAdminService {
@@ -22,12 +29,14 @@ export class EapAdminService {
   private readonly registry: InMemoryEapRegistry;
   private readonly secretWriter: SecretWriter;
   private readonly servicesSynced: string[];
+  private readonly evidenceDir?: string;
 
   constructor(options: EapAdminServiceOptions) {
     this.environment = options.environment;
     this.registry = options.registry ?? new InMemoryEapRegistry();
     this.secretWriter = options.secretWriter ?? new StubSecretWriter();
     this.servicesSynced = options.servicesSynced ?? [`gtcx-intelligence/${options.environment}`];
+    this.evidenceDir = options.evidenceDir;
   }
 
   getRegistry(): InMemoryEapRegistry {
@@ -86,7 +95,10 @@ export class EapAdminService {
       servicesSynced: this.servicesSynced,
     });
 
-    void evidence;
+    const evidencePath = evidenceFilename('issue', input.clientId);
+    if (this.evidenceDir) {
+      await writeIssuanceEvidenceFile(this.evidenceDir, evidence, evidencePath);
+    }
 
     return {
       tenantId: input.tenantId,
@@ -96,7 +108,7 @@ export class EapAdminService {
       credentialFingerprint,
       secretStorageArn: arn,
       secret,
-      evidencePath: evidenceFilename('issue', input.clientId),
+      evidencePath,
     };
   }
 
@@ -124,11 +136,14 @@ export class EapAdminService {
       servicesSynced: this.servicesSynced,
     });
 
-    void evidence;
+    const evidencePath = evidenceFilename('revoke', input.clientId);
+    if (this.evidenceDir) {
+      await writeIssuanceEvidenceFile(this.evidenceDir, evidence, evidencePath);
+    }
 
     return {
       revoked: true,
-      evidencePath: evidenceFilename('revoke', input.clientId),
+      evidencePath,
     };
   }
 
@@ -146,7 +161,10 @@ export class EapAdminService {
 }
 
 export function createEapAdminService(options: EapAdminServiceOptions): EapAdminService {
-  return new EapAdminService(options);
+  const evidenceDir =
+    options.evidenceDir ??
+    (process.env['EAP_PERSIST_EVIDENCE'] === '1' ? defaultEvidenceDir() : undefined);
+  return new EapAdminService({ ...options, evidenceDir });
 }
 
 export type { IssueApiKeyInput, IssueApiKeyResult, ListFingerprintsResult, RevokeInput };

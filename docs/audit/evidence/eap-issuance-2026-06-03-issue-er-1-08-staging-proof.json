@@ -1,0 +1,27 @@
+{
+  "schema": "gtcx.eap.issuance.v1",
+  "event": "issue",
+  "timestamp": "2026-06-03T16:55:33.476Z",
+  "environment": "staging",
+  "tier": "E0",
+  "tenant_id": "gtcx-internal-smoke",
+  "client_id": "er-1-08-staging-proof",
+  "credential_fingerprint": "sha256:6a4d8f19f4f682d3374c8bc480eb4affddcb2bed670b77eca90f46929dc3ff11",
+  "scopes": ["intelligence:health"],
+  "issuer": {
+    "service": "eap",
+    "actor": "human://gtcx/core-er-1-08-ceremony"
+  },
+  "approval": {
+    "required": false,
+    "artifact_ref": null
+  },
+  "secret_storage": {
+    "provider": "aws_secrets_manager",
+    "arn": "arn:aws:secretsmanager:REGION:ACCOUNT:secret:gtcx-eap/staging/clients/er-1-08-staging-proof"
+  },
+  "services_synced": ["gtcx-intelligence/staging"],
+  "redaction": {
+    "secret_included": false
+  }
+}

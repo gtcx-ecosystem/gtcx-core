@@ -1,3 +1,6 @@
+import { mkdir, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+
 import type { EapIssuanceEvidence, EapEnvironment, EapTier } from './types.js';
 
 export function buildIssuanceEvidence(params: {
@@ -41,4 +44,23 @@ export function evidenceFilename(event: string, clientId: string): string {
   const date = new Date().toISOString().slice(0, 10);
   const slug = clientId.replace(/[^a-z0-9-]+/gi, '-').toLowerCase();
   return `eap-issuance-${date}-${event}-${slug}.json`;
+}
+
+/** Default evidence directory under gtcx-core (override with `EAP_EVIDENCE_DIR`). */
+export function defaultEvidenceDir(): string {
+  return (
+    process.env['EAP_EVIDENCE_DIR'] ?? join(process.cwd(), '..', '..', 'docs', 'audit', 'evidence')
+  );
+}
+
+/** Persist redacted issuance JSON for Protocol 23 / ER-1-08. */
+export async function writeIssuanceEvidenceFile(
+  evidenceDir: string,
+  evidence: EapIssuanceEvidence,
+  filename: string
+): Promise<string> {
+  const fullPath = join(evidenceDir, filename);
+  await mkdir(dirname(fullPath), { recursive: true });
+  await writeFile(fullPath, `${JSON.stringify(evidence, null, 2)}\n`, 'utf8');
+  return fullPath;
 }

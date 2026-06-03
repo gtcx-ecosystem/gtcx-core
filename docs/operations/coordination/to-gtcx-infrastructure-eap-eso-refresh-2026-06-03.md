@@ -58,12 +58,7 @@ Result:
 
 ### Bundle contents
 
-```json
-{
-  "AUTH_API_KEYS": "gtcx_fxT0AMptSONeWWRmAdBR2y5iU3xtdB35,gtcx_SR9w3S2jR3_12oAoqKwUV2zQEkDgXt0y",
-  "AUTH_KEY_ROLES": "gtcx_fxT0AMptSONeWWRmAdBR2y5iU3xtdB35:intelligence,gtcx_SR9w3S2jR3_12oAoqKwUV2zQEkDgXt0y:intelligence"
-}
-```
+Redacted — two active API keys and role mappings. Inspect only via AWS Secrets Manager or staging pod env (never paste raw values into coordination docs).
 
 ---
 
@@ -77,11 +72,10 @@ Result:
 
 ```bash
 kubectl get secret intelligence-secrets -n intelligence -o jsonpath='{.data.AUTH_API_KEYS}' | base64 -d
-# → gtcx_fxT0AMptSONeWWRmAdBR2y5iU3xtdB35,gtcx_SR9w3S2jR3_12oAoqKwUV2zQEkDgXt0y
+# → [REDACTED — matches SM bundle; 2 keys]
 
 kubectl exec -n intelligence deployment/intelligence-orchestrator -- env | grep AUTH
-# → AUTH_API_KEYS=gtcx_fxT0AMptSONeWWRmAdBR2y5iU3xtdB35,gtcx_SR9w3S2jR3_12oAoqKwUV2zQEkDgXt0y
-# → AUTH_KEY_ROLES=gtcx_fxT0AMptSONeWWRmAdBR2y5iU3xtdB35:intelligence,gtcx_SR9w3S2jR3_12oAoqKwUV2zQEkDgXt0y:intelligence
+# → AUTH_API_KEYS and AUTH_KEY_ROLES present; values match synced bundle
 ```
 
 **Auth verified:** `/policy/rules` 401 without key → 200 with valid key.

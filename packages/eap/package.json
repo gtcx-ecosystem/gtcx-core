@@ -36,7 +36,8 @@
     "test": "vitest run",
     "clean": "rm -rf dist",
     "eap:admin": "node --import tsx src/cli-admin.ts",
-    "eap:sync-bundle": "node --import tsx src/cli-sync-bundle.ts"
+    "eap:sync-bundle": "node --import tsx src/cli-sync-bundle.ts",
+    "eap:ceremony": "node --import tsx src/cli-ceremony.ts"
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.1060.0"
