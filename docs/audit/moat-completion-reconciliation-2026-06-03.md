@@ -61,10 +61,10 @@ Scores from [moat-dimension-roadmap-10-10.md](./moat-dimension-roadmap-10-10.md)
 
 ### Track A — Internal engineering (gtcx-core)
 
-| Sprint | Theme                                          | Status      | Open stories                                                                            |
-| ------ | ---------------------------------------------- | ----------- | --------------------------------------------------------------------------------------- |
-| S1–S4  | Doc truth, ai-eval CI, DevEx, 21/21 provenance | **Done**    | —                                                                                       |
-| **S5** | Supply chain continuity                        | **Blocked** | S5-01: `@gtcx/ai-eval@0.1.4` npm + Sigstore → repo must be **public** for `release.yml` |
+| Sprint | Theme                                          | Status              | Open stories                                                                                                         |
+| ------ | ---------------------------------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| S1–S4  | Doc truth, ai-eval CI, DevEx, 21/21 provenance | **Done**            | —                                                                                                                    |
+| **S5** | Supply chain continuity                        | **Done** 2026-06-03 | S5-01: 22/22 provenance; [release 26891411936](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26891411936) |
 
 **Exit:** `pnpm provenance:check-npm:strict` → **22/22**; trust portal matches registry.
 
@@ -78,7 +78,7 @@ Scores from [moat-dimension-roadmap-10-10.md](./moat-dimension-roadmap-10-10.md)
 | **AM-4** | External crypto moat                                             | baseline-os / Security | **Blocked**         | CORE-005 pen-test SOW, CORE-006 formal verification, CORE-007 side-channel lab |
 | **AM-5** | Regulator primitive attestation                                  | GTM                    | **Blocked**         | CORE-008 D10 M10.3 letter                                                      |
 
-**Agent rule:** `pnpm agent:next-work` falls through to **Track A S5-01** when moat code is complete; do not re-implement D1–D6.
+**Agent rule:** `pnpm agent:next-work` → **external** handoffs when moat + S5 are complete; do not re-implement D1–D6.
 
 ### Track C — Bank-grade (ecosystem)
 
@@ -110,8 +110,8 @@ Full detail: [remaining-cross-repo-work-2026-06-02.md](../operations/coordinatio
 ## 5. Critical path to “done” (ordered)
 
 ```text
-NOW (gtcx-core, no vendor)
-  └─► S5-01: public repo → publish @gtcx/ai-eval@0.1.4 (Track A)
+DONE (2026-06-03)
+  └─► S5-01: @gtcx/ai-eval@0.1.4 on npm with Sigstore (22/22)
 
 DONE — gtcx-protocols (2026-06-03)
   └─► CORE-003 / AM-2: KAT consumption test + @gtcx/crypto verify path
@@ -134,12 +134,12 @@ TIME
 
 ## 6. What “10/10” means per audience
 
-| Audience                                  | Score today                        | What completes it                                                                |
-| ----------------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------- |
-| **Agent / internal engineering**          | ~9.5/10 internal; Sprint 5 pending | S5-01 ai-eval npm                                                                |
-| **Cryptographic defensibility (in-repo)** | **~8.95/10** weighted dimensions   | AM-2–AM-4 + ceremony                                                             |
-| **Bank-grade procurement**                | **8.7/10** honest                  | M2–M4 + infra GTM                                                                |
-| **90-day competitor copy**                | Strategic bundle shipped           | Maintain provenance + jurisdiction + offline stack; audits close credibility gap |
+| Audience                                  | Score today                      | What completes it                                                                |
+| ----------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------- |
+| **Agent / internal engineering**          | ~9.5/10 internal; Sprint 5 done  | External handoffs only (CORE-004–009)                                            |
+| **Cryptographic defensibility (in-repo)** | **~8.95/10** weighted dimensions | AM-2–AM-4 + ceremony                                                             |
+| **Bank-grade procurement**                | **8.7/10** honest                | M2–M4 + infra GTM                                                                |
+| **90-day competitor copy**                | Strategic bundle shipped         | Maintain provenance + jurisdiction + offline stack; audits close credibility gap |
 
 ---
 

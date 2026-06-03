@@ -75,9 +75,9 @@ These dimensions require external vendors/consultants. Agents must not start the
 
 ## Active phase
 
-**Track A Sprint 5** — `@gtcx/ai-eval` npm provenance (S5-01).  
-Algorithmic moat AM-1 + AM-2 (CORE-003) complete in-repo / protocols.  
-`pnpm agent:next-work` returns **execution-roadmap** tier with S5-01 (blocked until repo is public).
+**Track A Sprint 5** — **done** (22/22 provenance, `@gtcx/ai-eval@0.1.4`, 2026-06-03).  
+Algorithmic moat AM-1 + AM-2 (CORE-003) complete.  
+`pnpm agent:next-work` → **external** tier: CORE-004 (ceremony) or CORE-005–009 (baseline-os/GTM).
 
 ## Critical handoffs
 

@@ -138,23 +138,22 @@ function selectNextWork() {
   return selectExecutionRoadmapFallback();
 }
 
-/** Track A (execution-roadmap) when algorithmic moat has no in-repo code left. */
+/** Track A / cross-repo when algorithmic moat has no in-repo code left. */
 function selectExecutionRoadmapFallback() {
+  // S5-01 complete when strict provenance passes (22/22 including ai-eval@0.1.4).
   return {
     next: {
-      track: 'A',
-      story: 'S5-01',
-      title: 'Publish @gtcx/ai-eval@0.1.4 with npm provenance (22/22)',
+      track: 'B',
+      handoff: 'CORE-004',
+      title: 'D3 M3.2 trusted-setup transcript verify',
       owner: 'gtcx-core',
       blocked: true,
-      blocker: 'gtcx-ecosystem/gtcx-core repo visibility must be public for npm publish --provenance',
-      command:
-        'gh workflow run release.yml -f provenance_republish=true && pnpm provenance:check-npm:strict',
+      blocker: 'XR-402 trusted-setup ceremony — release-gated',
     },
     selection: {
-      tier: 'execution-roadmap',
+      tier: 'external',
       reason:
-        'Algorithmic moat in-repo complete (D1–D6 at 10). Next Track A story; blocked on repo visibility policy.',
+        'Track A S5-01 done (22/22 npm provenance). In-repo moat D1–D6 at 10. Next: CORE-004 (ceremony) or CORE-005–009 (baseline-os/GTM) — human or owner-repo only.',
     },
   };
 }
