@@ -14,6 +14,8 @@ review_cycle: 'on-change'
 
 # Documentation
 
+**Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
+
 **Last updated:** 2026-06-05
 **Latest synthesis:** [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md) (six-phase audit) · [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md) (doc-standard P1)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
@@ -29,11 +31,13 @@ review_cycle: 'on-change'
 
 ## §1 For External Reviewers
 
-| Document                                                                                       | Purpose                                                        |
-| ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| [`governance/trust-portal.md`](./governance/trust-portal.md)                                   | Evidence index for vendor risk teams, regulators, and auditors |
-| [`gtm/00-executive-brief.md`](./gtm/00-executive-brief.md)                                     | External-facing summary of the repo's role in the ecosystem    |
-| [`release/enterprise-release-artifact-pack.md`](./release/enterprise-release-artifact-pack.md) | Enterprise supportability and release-readiness posture        |
+| Document                                                                                               | Purpose                                                        |
+| ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| [`governance/trust-portal.md`](./governance/trust-portal.md)                                           | Evidence index for vendor risk teams, regulators, and auditors |
+| [`governance/trust-portal-zkp-circuit-registry.md`](./governance/trust-portal-zkp-circuit-registry.md) | ZKP circuit profile IDs (DTF-5.4)                              |
+| [`governance/trust-portal-evidence.md`](./governance/trust-portal-evidence.md)                         | Trust portal controls matrix + evidence categories             |
+| [`gtm/00-executive-brief.md`](./gtm/00-executive-brief.md)                                             | External-facing summary of the repo's role in the ecosystem    |
+| [`release/enterprise-release-artifact-pack.md`](./release/enterprise-release-artifact-pack.md)         | Enterprise supportability and release-readiness posture        |
 
 ## §2 Roadmap & Plans
 
@@ -70,11 +74,12 @@ review_cycle: 'on-change'
 
 ## §5 Specs
 
-| Document                                                     | Purpose                           |
-| ------------------------------------------------------------ | --------------------------------- |
-| [`specs/core-spec.md`](./specs/core-spec.md)                 | Core shared-library specification |
-| [`specs/packages/README.md`](./specs/packages/README.md)     | Package-level spec index          |
-| [`specs/integration-guide.md`](./specs/integration-guide.md) | Downstream integration guidance   |
+| Document                                                                       | Purpose                                          |
+| ------------------------------------------------------------------------------ | ------------------------------------------------ |
+| [`specs/core-spec.md`](./specs/core-spec.md)                                   | Core shared-library specification                |
+| [`specs/packages/README.md`](./specs/packages/README.md)                       | Package-level spec index                         |
+| [`specs/integration-guide.md`](./specs/integration-guide.md)                   | Downstream integration guidance                  |
+| [`specs/integration-guide-advanced.md`](./specs/integration-guide-advanced.md) | Domain events, offline queue, multi-party verify |
 
 ## §6 Operations
 

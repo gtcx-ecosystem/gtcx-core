@@ -206,13 +206,11 @@ knowledge: {
 | INDEX drift                      | `docs/README.md` §0/§2/§10 + lookup table refreshed                                                               |
 | `roadmap-2026-07-13` frontmatter | Full YAML after rename (removed `ROADMAP-*.md` exclude)                                                           |
 
-**Post-remediation gates:** `pnpm docs:check-frontmatter` exit 0 · `pnpm docs:check-links` exit 0
-
----
+**Post-remediation (P2 2026-06-05):** trust-portal split + relative links; integration-guide split; overview split; `docs/INDEX.md` redirect.
 
 ## Violations remaining
 
-See P1/P2 tables above (P2 length splits remain). Carried forward justified items from [2026-05-22 audit](./docs-standard-compliance-2026-05-22.md#violations-remaining-justified).
+See P1/P2 tables below — **P2 doc splits and INDEX complete**; agile roadmaps >300 lines remain deferred. Carried forward justified items from [2026-05-22 audit](./docs-standard-compliance-2026-05-22.md#violations-remaining-justified).
 
 ---
 

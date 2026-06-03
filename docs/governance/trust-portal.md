@@ -1,28 +1,12 @@
 ---
 title: 'gtcx-core Trust Portal'
-status: 'current'
-date: '2026-05-27'
-owner: 'gtcx-core'
-role: 'protocol-architect'
-agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
-trust_score: 60
-autonomy_level: 'permissioned'
-tier: 'standard'
-tags: ['documentation', 'governance']
-review_cycle: 'on-change'
----
-
----
-
-title: 'Trust Portal'
-status: 'current'
-date: '2026-05-17'
-owner: 'protocol-architect'
-role: 'protocol-architect'
-tier: 'standard'
-tags: ['docs']
-review_cycle: 'on-change'
-
+status: current
+date: 2026-06-05
+owner: protocol-architect
+role: protocol-architect
+tier: standard
+tags: ['documentation', 'governance', 'trust-portal']
+review_cycle: on-change
 ---
 
 # gtcx-core Trust Portal
@@ -56,16 +40,16 @@ A reviewer who only reads this section has enough to make a procurement decision
 
 ## Current readiness (2026-05-21)
 
-| Dimension                | Value                           | Evidence                                                                                                                                                                                     |
-| ------------------------ | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Composite readiness      | **9.5 / 10**                    | [Internal Completion Audit 2026-05-21](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/internal-completion-audit-2026-05-21.md)                                             |
-| Internal items complete  | 24 / 24                         | Same                                                                                                                                                                                         |
-| Branch coverage          | 19 / 19 packages ≥ 95%          | [Audit coverage table](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/internal-completion-audit-2026-05-21.md#updated-coverage-table)                                      |
-| Fuzz iterations          | 500,000+ across 6 targets       | [Fuzz Campaign Evidence 2026-05-21](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/fuzz-campaign-evidence-2026-05-21.md) — zero crashes, zero panics, zero ASAN violations |
-| FIPS validation          | aws-lc-rs CMVP #4816            | 63 / 63 Rust tests passing under `--features fips`                                                                                                                                           |
-| HSM custody              | PKCS11 + AWS KMS                | NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed)                                                                                                                  |
-| Release pipeline         | SLSA Source L2 + npm provenance | `.github/workflows/release.yml` — `publish-packages-provenance.mjs`; verify `pnpm provenance:check-npm:strict`                                                                               |
-| Active execution program | 4-sprint engagement roadmap     | [Engagement Readiness Sprint Roadmap 2026-05-22](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)                                                                         |
+| Dimension                | Value                           | Evidence                                                                                                                             |
+| ------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Composite readiness      | **9.5 / 10**                    | [Internal Completion Audit 2026-05-21](../audit/internal-completion-audit-2026-05-21.md)                                             |
+| Internal items complete  | 24 / 24                         | Same                                                                                                                                 |
+| Branch coverage          | 19 / 19 packages ≥ 95%          | [Audit coverage table](../audit/internal-completion-audit-2026-05-21.md#updated-coverage-table)                                      |
+| Fuzz iterations          | 500,000+ across 6 targets       | [Fuzz Campaign Evidence 2026-05-21](../audit/fuzz-campaign-evidence-2026-05-21.md) — zero crashes, zero panics, zero ASAN violations |
+| FIPS validation          | aws-lc-rs CMVP #4816            | 63 / 63 Rust tests passing under `--features fips`                                                                                   |
+| HSM custody              | PKCS11 + AWS KMS                | NIST SP 800-57 lifecycle (Created → Active → Rotated → Revoked → Destroyed)                                                          |
+| Release pipeline         | SLSA Source L2 + npm provenance | `.github/workflows/release.yml` — `publish-packages-provenance.mjs`; verify `pnpm provenance:check-npm:strict`                       |
+| Active execution program | 4-sprint engagement roadmap     | [Engagement Readiness Sprint Roadmap 2026-05-22](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)                 |
 
 ---
 
@@ -184,66 +168,9 @@ Download the latest scorecard from a passing CI run: workflow **CI** → artifac
 
 ---
 
-## ZKP circuit registry — profile IDs (DTF-5.4.3)
+## ZKP circuit registry (DTF-5.4.3)
 
-> **Status (2026-06-03):** Tier-5 **circuit ID column** for verifier and regulator UX. One underlying Groth16 R1CS (`CommodityOrigin`); rows below are **policy packs** with semver lifecycle — not separate arkworks circuits.
-
-**System-of-record:** [`packages/crypto/circuit-registry.manifest.json`](../../packages/crypto/circuit-registry.manifest.json) · TypeScript API [`circuit-registry.ts`](../../packages/crypto/src/circuit-registry.ts) · Spec [`zkp-circuit-profiles.md`](../specs/packages/zkp-circuit-profiles.md)
-
-### Circuit ID column (registry snapshot)
-
-| Circuit ID               | Version | Status     | Underlying R1CS   | Jurisdiction | Native prove       | Off-circuit policy                                                  | KAT evidence                                                                                                                        |
-| ------------------------ | ------- | ---------- | ----------------- | ------------ | ------------------ | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `gh-gold-origin`         | 1.0.0   | active     | `CommodityOrigin` | GH           | Yes                | GPS bbox, purity/weight mins, `RegulatoryExportLicense` cert mask   | [`groth16-gh-gold-origin.kat.json`](../../artifacts/kat/groth16-gh-gold-origin.kat.json)                                            |
-| `zw-diamond-origin`      | 1.0.0   | active     | `CommodityOrigin` | ZW           | Yes                | GPS bbox, clarity/carat mins, `RegionalCertification` cert mask     | [`groth16-zw-diamond-origin.kat.json`](../../artifacts/kat/groth16-zw-diamond-origin.kat.json)                                      |
-| `gh-cocoa-origin`        | 1.0.0   | active     | `CommodityOrigin` | GH           | Yes                | GPS bbox, grade/weight mins, `OriginAuthenticated` cert mask        | Generic [`groth16-commodity-origin.kat.json`](../../artifacts/kat/groth16-commodity-origin.kat.json) (profile-specific KAT planned) |
-| `commodity-origin`       | 0.1.0   | active     | `CommodityOrigin` | \* (generic) | No (registry only) | Caller-supplied bounds/mins; use named profiles for sovereign packs | [`groth16-commodity-origin.kat.json`](../../artifacts/kat/groth16-commodity-origin.kat.json)                                        |
-| `gh-gold-origin-preview` | 0.9.0   | deprecated | `CommodityOrigin` | GH           | No                 | Superseded — do not issue new proofs                                | —                                                                                                                                   |
-
-**Native prove** = Rust NAPI + `@gtcx/crypto` helpers ship for that ID. **Registry-only** rows are valid for documentation and `resolveCircuitProfile()` but are not in the native provable subset.
-
-Resolve before prove/verify:
-
-```typescript
-import { resolveCircuitProfile } from '@gtcx/crypto';
-
-const entry = resolveCircuitProfile('gh-gold-origin');
-// entry.version, entry.status, entry.underlyingCircuit
-```
-
-Deprecated IDs throw `CircuitRegistryError` unless `allowDeprecated: true` (lab replay only).
-
-### Off-circuit policy (verifier obligation)
-
-Certification masks, GPS bounding boxes, and minimum grade/weight thresholds are enforced **before** `groth16_prove` via `validate_profile_sample` / `validate_profile_witness` — **not** inside the R1CS. This is intentional: country and commodity names never appear in constraints; policy is data-driven.
-
-| What auditors should know             | Implication                                                                                       |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Proof verifies cryptographically      | Groth16 `CommodityOrigin` + public inputs are sound                                               |
-| Proof does **not** alone prove policy | Integrators must run the same policy gate as the prover, or trust an attested prover path         |
-| Minerals-board UAT                    | Scripted checks in [minerals-board-uat-protocol.md](../operations/minerals-board-uat-protocol.md) |
-
-Implementation: [`rust/gtcx-zkp/src/circuit_profiles/validate.rs`](../../rust/gtcx-zkp/src/circuit_profiles/validate.rs) · full-audit finding closed by this section ([full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md)).
-
-### Verify throughput (DTF-5.4.2)
-
-Minerals-board **verifier SLA** narrative: parallel Groth16 verify on profile-bound proofs.
-
-| Metric     | Lab result (2026-06-03)                                                                  | Gate         |
-| ---------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Mode       | `verify` (not prove)                                                                     | —            |
-| Throughput | **1603** verifications/min (12 workers, release)                                         | ≥ 1000/min   |
-| Evidence   | [`zkp-profile-load-2026-06-03.json`](../audit/evidence/zkp-profile-load-2026-06-03.json) | `pass: true` |
-
-Reproduce: `pnpm perf:zkp-profile-load` (writes dated JSON under `docs/audit/evidence/`).
-
-### Verify registry and KATs locally
-
-```bash
-pnpm --filter @gtcx/crypto test -- circuit-registry
-cargo test -p gtcx-zkp --lib lifecycle
-pnpm test:kat-cross-impl
-```
+Full registry table, off-circuit policy, and verify-throughput evidence: **[trust-portal-zkp-circuit-registry.md](./trust-portal-zkp-circuit-registry.md)**.
 
 ---
 
@@ -257,87 +184,9 @@ A vendor risk team or sandbox regulator that needs more than self-service can en
 
 ---
 
-## Controls matrix — gtcx-core controls mapped to recognized standards
+## Controls matrix and evidence
 
-| Control category            | NIST SP 800-53 ref | SOC 2 TSC ref | gtcx-core evidence                                                                                                                          |
-| --------------------------- | ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Access control to source    | AC-2, AC-3, AC-6   | CC6.1-6.3     | `.github/CODEOWNERS`, branch protection on main, dual-AI review with a human reviewer plus `gtcx-agent`                                     |
-| Cryptographic primitives    | SC-13, SC-12       | CC6.1, C1.1   | FIPS provider via aws-lc-rs CMVP #4816, Ed25519 via `@noble/curves`, content-hash allowlist                                                 |
-| Key lifecycle               | SC-12, SC-17       | CC6.1, C1.1   | `KeyStore` trait with NIST SP 800-57 states (Created, Active, Rotated, Revoked, Destroyed)                                                  |
-| Data classification         | RA-2, MP-2         | C1.1          | `redactSecrets` default sanitizer; threat model defines confidential categories                                                             |
-| Secure software development | SA-11, SA-15       | CC8.1         | 21 CI gates; CodeQL, Trivy, cargo-audit, secret scan; architecture boundary enforcement                                                     |
-| Supply chain                | SA-12, SR-3        | CC9.2         | `pnpm.overrides` exact-pinning; `tools/check-crypto-deps.mjs` integrity allowlist; SBOM (CycloneDX) on every build                          |
-| Vulnerability management    | RA-5, SI-2         | CC7.1         | Dependabot, `pnpm audit` on every PR, cargo-audit on every PR, public disclosure policy                                                     |
-| Incident response           | IR-4, IR-6         | CC7.3-7.5     | [`SECURITY-INCIDENT.md`](../security/security-incident-runbook.md) six-phase runbook with severity classification + bypass procedure        |
-| Audit and monitoring        | AU-2, AU-12        | CC4.1, CC7.2  | Structured stderr JSON traces; `SpanEmitter` contract for OTel forwarding; sanitizer-override telemetry; provenance manifest on publish     |
-| Change management           | CM-3, CM-4         | CC8.1         | Conventional commits, changesets, branch protection, required CODEOWNER review, API surface baseline at `quality/api-surface-baseline.json` |
-| Risk assessment             | RA-3               | CC3.1-3.4     | STRIDE table, attack tree, threat actor table, residual risk analysis                                                                       |
-| Reproducibility             | (n/a)              | CC8.1         | `pnpm build:reproducible` verifies bit-for-bit reproducibility per package                                                                  |
-
----
-
-## Evidence by category
-
-### Cryptographic correctness
-
-- [Threat model TC-001-TC-002](../security/threat-model.md) — key generation, hash collision controls
-- [Attack tree](../security/attack-tree-signing.md) — 4 branches, 20 leaf nodes, 5 mitigations tracked
-- Property-based tests — 25 properties × 50-100 runs each in [`packages/crypto/tests/property-based.test.ts`](../../packages/crypto/tests/property-based.test.ts)
-- [Fuzz campaign](../../quality/fuzz-results/campaign-summary.md) — 9.9M executions, 0 crashes, 6 targets, ASAN enabled
-- [FIPS validation boundary](../security/fips-validation-boundary.md) — inheritance via aws-lc-rs CMVP #4816
-- ZKP fail-closed-by-default (SA-002 closed) — `HashCommitmentZkpEngine.generate()` throws unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`
-- Revocation pathway (SA-004 + AT-002 closed) — `RevocationChecker` interface required on `tracedVerifyCertificate()`
-- [Circuit registry (profile IDs)](#zkp-circuit-registry--profile-ids-dtf-543) — semver lifecycle, off-circuit policy column, verify throughput evidence (DTF-5.4.1–5.4.3)
-
-### Supply chain integrity
-
-- [Crypto dependency allowlist](../../tools/check-crypto-deps.mjs) — pinned versions + sha512 integrity hashes for `@noble/*`
-- [Reproducible-build verifier](../../tools/check-reproducible-build.mjs) — `pnpm build:reproducible`
-- SBOM (CycloneDX) — generated on every CI build via Trivy
-- Provenance manifest — `pnpm provenance:generate`; `--provenance` flag on publish
-- [Threat model supply chain section](../security/threat-model.md#supply-chain-threats)
-
-### Access control and governance
-
-- [`.github/CODEOWNERS`](../../.github/CODEOWNERS) — dual-reviewer enforcement with `@amanianai` and `@gtcx-agent` on security-sensitive paths
-- Branch protection on `main` — required CODEOWNER review, required status checks (ci, rust, codeql, security)
-- [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema, system prompt, 3 path-specific playbooks
-- AI CODEOWNER never approves — enforced in three layers (schema enum, prompt constraint, runner output filter)
-- AI CODEOWNER multi-provider — Anthropic primary, OpenAI fallback (closes single-provider bus-factor)
-
-### Audit and monitoring
-
-- Structured stderr JSON for every traced operation; `SpanEmitter` contract for OTel/Datadog/Honeycomb forwarding
-- Sanitizer-override telemetry — `event=sanitizer_override` fires when explicit sanitizer is wired
-- [`pnpm ops:check`](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/repo-bootstrap.md) — auto-verified operational prerequisites with remediation commands
-- KPI metrics export — `pnpm quality:kpi:export`
-
-### Incident response
-
-- [`SECURITY.md`](../../SECURITY.md) — public disclosure policy with severity-based response timelines
-- [`SECURITY-INCIDENT.md`](../security/security-incident-runbook.md) — six-phase internal runbook: triage, containment, investigation, remediation, disclosure, and retrospective. Includes the AI bypass procedure plus three templates: acknowledgement, downstream notice, and public advisory.
-- Coordinated disclosure window — 14 days from fix-merged to public for critical/high
-
-### Compliance posture
-
-- [SOC 2 Type 1 readiness gap analysis](../compliance/soc2-readiness.md) — TSC mapping + 7 documented gaps
-- [GDPR assessment](../compliance/gdpr-assessment.md) — zero-PII determination, DPIA not required
-- [PCI-DSS scope](../compliance/pci-dss-scope.md) — formal zero-CHD declaration
-- [SOX controls](../compliance/sox-controls.md) — ITGC mapping for change management, access controls, program development
-
-### Operational integrity
-
-- [Quality runbook](../devops/runbooks/quality-runbook.md) — CI triage order
-- [Release checklist](../devops/release-mgmt/release-checklist.md) — pre-release gate
-- [Repo bootstrap](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
-
----
-
-## Live operational state
-
-Run `pnpm ops:check` against this repo to see the current state. The checker uses `gh api` to verify runtime configuration (secrets, branch protection, org membership, CODEOWNERS validity) and reports pass/fail/warn/skip with remediation commands inline. The latest snapshot is reproducible by anyone with read access to the org.
-
-The output is also auto-written to [`docs/operations/repo-bootstrap.md`](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/repo-bootstrap.md) via `pnpm ops:emit-doc`.
+NIST/SOC 2 controls matrix, evidence-by-category index, and live `pnpm ops:check` state: **[trust-portal-evidence.md](./trust-portal-evidence.md)**.
 
 ---
 
@@ -377,23 +226,25 @@ Honest list of trust artifacts not yet in place. Surfaces them rather than letti
 
 This portal is the entry point. The artifacts it points to are the source of truth. If a claim on this page conflicts with the underlying file, the underlying file wins. To suggest a correction, open a PR — every change to this directory is dual-reviewed by a human CODEOWNER and the AI CODEOWNER.
 
-| Document                                                                                                  | Purpose                                 |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| [Threat model](../security/threat-model.md)                                                               | STRIDE, threat actors, attack scenarios |
-| [Attack tree](../security/attack-tree-signing.md)                                                         | Adversarial decomposition               |
-| [Internal security assessment](../security/internal-security-assessment.md)                               | Six assessment methods, residual risk   |
-| [FIPS validation boundary](../security/fips-validation-boundary.md)                                       | Inherited validation via CMVP #4816     |
-| [Key ceremony](../security/key-ceremony.md)                                                               | NIST SP 800-57 lifecycle                |
-| [Cloud KMS keystore](../security/cloud-kms-keystore.md)                                                   | AWS-first cloud-managed key custody     |
-| [External penetration test scope](../security/pen-test-scope.md)                                          | Third-party validation scope            |
-| [SOC 2 readiness](../compliance/soc2-readiness.md)                                                        | TSC mapping, 7 documented gaps          |
-| [GDPR / PCI / SOX](../compliance/)                                                                        | Compliance scope determinations         |
-| [SECURITY.md](../../SECURITY.md)                                                                          | Public disclosure policy                |
-| [SECURITY-INCIDENT.md](../security/security-incident-runbook.md)                                          | Internal response runbook               |
-| [Governance](../agents/governance/README.md)                                                              | Dual-AI CODEOWNER pattern               |
-| [Repo bootstrap](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/repo-bootstrap.md) | Live operational prerequisites          |
-| [GTM evidence pack](../gtm/)                                                                              | Sandbox-regulator-specific materials    |
-| [Full audit](https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/audit/full-audit-2026-05-09.md)   | Six-phase audit, score 9.8/10           |
+| Document                                                                    | Purpose                                 |
+| --------------------------------------------------------------------------- | --------------------------------------- |
+| [Threat model](../security/threat-model.md)                                 | STRIDE, threat actors, attack scenarios |
+| [Attack tree](../security/attack-tree-signing.md)                           | Adversarial decomposition               |
+| [Internal security assessment](../security/internal-security-assessment.md) | Six assessment methods, residual risk   |
+| [FIPS validation boundary](../security/fips-validation-boundary.md)         | Inherited validation via CMVP #4816     |
+| [Key ceremony](../security/key-ceremony.md)                                 | NIST SP 800-57 lifecycle                |
+| [Cloud KMS keystore](../security/cloud-kms-keystore.md)                     | AWS-first cloud-managed key custody     |
+| [External penetration test scope](../security/pen-test-scope.md)            | Third-party validation scope            |
+| [SOC 2 readiness](../compliance/soc2-readiness.md)                          | TSC mapping, 7 documented gaps          |
+| [GDPR / PCI / SOX](../compliance/)                                          | Compliance scope determinations         |
+| [SECURITY.md](../../SECURITY.md)                                            | Public disclosure policy                |
+| [SECURITY-INCIDENT.md](../security/security-incident-runbook.md)            | Internal response runbook               |
+| [Governance](../agents/governance/README.md)                                | Dual-AI CODEOWNER pattern               |
+| [Repo bootstrap](../operations/repo-bootstrap.md)                           | Live operational prerequisites          |
+| [GTM evidence pack](../gtm/)                                                | Sandbox-regulator-specific materials    |
+| [Full audit](../audit/full-audit-2026-06-04.md)                             | Six-phase audit (2026-06-04)            |
+| [ZKP circuit registry](./trust-portal-zkp-circuit-registry.md)              | Profile IDs, KAT, throughput (DTF-5.4)  |
+| [Controls and evidence](./trust-portal-evidence.md)                         | NIST/SOC 2 matrix + evidence categories |
 
 ## Changelog
 
