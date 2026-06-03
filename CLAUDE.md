@@ -105,6 +105,7 @@ Full gate sequence: `docs/devops/runbooks/quality-runbook.md`
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
+4. **Protocol 22 work selection (ESTABLISHED)** — at session start run `pnpm agent:next-work`; read `docs/operations/agent-work-selection.md`; never ask which roadmap story to pick; refresh `.baseline/memory/session.md` after each story. Verify: `pnpm agent:work-selection:check`.
 
 ## Build & Run
 
