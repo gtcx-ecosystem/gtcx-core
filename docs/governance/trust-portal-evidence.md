@@ -65,7 +65,7 @@ review_cycle: on-change
 
 - Structured stderr JSON for every traced operation; `SpanEmitter` contract for OTel/Datadog/Honeycomb forwarding
 - Sanitizer-override telemetry — `event=sanitizer_override` fires when explicit sanitizer is wired
-- [`pnpm ops:check`](<[repo-bootstrap.md](../operations/repo-bootstrap.md)>) — auto-verified operational prerequisites with remediation commands
+- [`pnpm ops:check`](../operations/repo-bootstrap.md) — auto-verified operational prerequisites with remediation commands
 - KPI metrics export — `pnpm quality:kpi:export`
 
 ### Incident response
@@ -85,7 +85,7 @@ review_cycle: on-change
 
 - [Quality runbook](../devops/runbooks/quality-runbook.md) — CI triage order
 - [Release checklist](../devops/release-mgmt/release-checklist.md) — pre-release gate
-- [Repo bootstrap](<[repo-bootstrap.md](../operations/repo-bootstrap.md)>) — auto-generated from `tools/check-ops-prereqs.mjs`
+- [Repo bootstrap](../operations/repo-bootstrap.md) — auto-generated from `tools/check-ops-prereqs.mjs`
 
 ---
 
@@ -93,6 +93,6 @@ review_cycle: on-change
 
 Run `pnpm ops:check` against this repo to see the current state. The checker uses `gh api` to verify runtime configuration (secrets, branch protection, org membership, CODEOWNERS validity) and reports pass/fail/warn/skip with remediation commands inline. The latest snapshot is reproducible by anyone with read access to the org.
 
-The output is also auto-written to [`docs/operations/repo-bootstrap.md`](<[repo-bootstrap.md](../operations/repo-bootstrap.md)>) via `pnpm ops:emit-doc`.
+The output is also auto-written to [`docs/operations/repo-bootstrap.md`](../operations/repo-bootstrap.md) via `pnpm ops:emit-doc`.
 
 ---
