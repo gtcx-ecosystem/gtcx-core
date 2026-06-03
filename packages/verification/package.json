@@ -48,7 +48,6 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@gtcx/workproof": "workspace:*",
     "@gtcx/tsup-config": "workspace:*",
     "@gtcx/typescript-config": "workspace:*",
     "@vitest/coverage-v8": "^4.1.8",

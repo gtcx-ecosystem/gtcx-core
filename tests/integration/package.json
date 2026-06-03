@@ -24,6 +24,7 @@
     "@gtcx/telemetry": "workspace:*",
     "@gtcx/types": "workspace:*",
     "@gtcx/verification": "workspace:*",
+    "@gtcx/workproof": "workspace:*",
     "vitest": "^4.1.8"
   }
 }

@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
-
-import { buildCommodityOriginWitness } from '../../workproof/src/witness';
+/**
+ * Cross-package: WorkProof witness → @gtcx/verification commodity-origin ZK bundle.
+ * Lives here (not in packages/verification) to avoid turbo build cycle with @gtcx/workproof.
+ */
 import {
   commodityOriginWitnessToProfileInput,
   createCommodityOriginZkProofRef,
@@ -10,7 +11,9 @@ import {
   serializeProofBundle,
   verifyCommodityOriginZkProofStructure,
   verifyProofBundleStructure,
-} from '../src/proofs';
+} from '@gtcx/verification';
+import { buildCommodityOriginWitness } from '@gtcx/workproof';
+import { describe, expect, it } from 'vitest';
 
 const ghanaBounds: [number, number, number, number] = [
   4_700_000, 11_200_000, 176_700_000, 181_200_000,
