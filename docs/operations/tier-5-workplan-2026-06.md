@@ -89,14 +89,14 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 | DTF-5.4.1 | `CircuitRegistry` with semver + deprecation                           | S-T5-4 | protocol-architect         | **done** | code             | S-T5-3 exit | 5.4.2–5.4.4       |
 | DTF-5.4.2 | Load test 1000 proofs/min + evidence JSON                             | S-T5-4 | frontier-infra-engineer    | **done** | code             | 5.4.1       | 5.4.3             |
 | DTF-5.4.3 | Trust portal circuit ID column                                        | S-T5-4 | protocol-architect         | **done** | ops-docs         | 5.4.1       | 5.4.4             |
-| DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID                                   | S-T5-4 | gtcx-protocols             | **done** | code             | 5.4.1       | **T5 technical**  |
+| DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID (witness `73eaff2b`)              | S-T5-4 | gtcx-protocols             | **done** | code             | 5.4.1       | **T5 technical**  |
 | DTF-5.5.1 | Jurisdiction pack Zod CI hardening                                    | S-T5-5 | protocol-engineer          | **done** | code             | —           | 5.5.2             |
 | DTF-5.5.2 | Certified pack pipeline (signed manifest)                             | S-T5-5 | Legal + protocol-architect | pending  | external         | 5.5.1       | 5.5.4             |
 | DTF-5.5.3 | Predicate-gated export keys (optional)                                | S-T5-5 | crypto-security-engineer   | deferred | code             | 5.5.1       | —                 |
 | DTF-5.5.4 | Design-partner LOI or regulator letter                                | S-T5-5 | GTM                        | pending  | evidence-capture | infra pilot | **T5 commercial** |
 | DTF-5.5.5 | Evidence index entry                                                  | S-T5-5 | quality-evidence-lead      | pending  | ops-docs         | 5.5.4       | —                 |
 
-**Cross-repo:** DTF-5.4.4 **closed** — protocols witness `73eaff2b` (hub ack in [`cross-repo-agent-bridge.md`](./coordination/cross-repo-agent-bridge.md)); core helper `fc041a6`.
+**Cross-repo (S-T5-4 slice):** DTF-5.4.4 **done** — protocols witness [`73eaff2b`](https://github.com/gtcx-ecosystem/gtcx-protocols/commit/73eaff2b); durable inbound [`from-gtcx-core-dtf-5-4-4-inbound-2026-06-05.md`](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/from-gtcx-core-dtf-5-4-4-inbound-2026-06-05.md); core outbound ack [`to-gtcx-protocols-dtf-5-4-4-witness-ack-2026-06-05.md`](./coordination/to-gtcx-protocols-dtf-5-4-4-witness-ack-2026-06-05.md); hub row [`cross-repo-agent-bridge.md`](./coordination/cross-repo-agent-bridge.md); crypto helper `fc041a6`.
 
 **Ceremony:** XR-402 / CORE-004 runs parallel; production keys not required for S-T5-1 lab proofs.
 
@@ -187,4 +187,4 @@ Reconciles [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) with DT
 
 ---
 
-_Last updated: 2026-06-05 — OPS-T5-001 (DTF-5.5.1 strict engagement jurisdiction packs)_
+_Last updated: 2026-06-05 — OPS-T5-001 (DTF-5.4.4 S-T5-4 closure ack `73eaff2b`; DTF-5.5.1 strict packs)_
