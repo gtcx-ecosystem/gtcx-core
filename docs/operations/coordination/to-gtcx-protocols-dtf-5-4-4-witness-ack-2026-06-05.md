@@ -11,7 +11,7 @@ reply_to: DTF-5.4.4
 protocol: gtcx-docs/docs/governance/protocols/24-cross-repo-coordination/protocol.md
 review_cycle: on-change
 tier: critical
-tags: ['coordination', 'outbound-ack', 'zkp', 'dtf-5.4', 'tier-5', 's-t5-4']
+tags: ['coordination', 'outbound-ack', 'zkp', 'dtf-5-4', 'tier-5', 's-t5-4']
 ---
 
 # Outbound ack — DTF-5.4.4 (gtcx-core accepts protocols witness)

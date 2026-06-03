@@ -51,7 +51,7 @@
 ### Patch Changes
 
 - 02d5641: Add rustls-webpki mitigation documentation, P1-free tracking, and coverage gap tests
-  - docs/security/RUSTSEC-rustls-webpki-mitigation.md: documents 3 RUSTSEC advisories,
+  - docs/security/rustsec-rustls-webpki-mitigation.md: documents 3 RUSTSEC advisories,
     dependency path through AWS SDK, threat model assessment, and monitoring plan
   - docs/quality/p1-free-tracking.md: starts 90-day P1-free clock with weekly checks
   - packages/security/tests/coverage-gaps-2.test.ts: 16 targeted tests pushing branch

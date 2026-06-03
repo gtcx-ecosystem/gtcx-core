@@ -34,7 +34,7 @@ ignore = [
     # invoke rustls-webpki APIs directly; certificate validation is delegated to
     # the AWS SDK HTTP client. AWS CA does not issue certificates matching the
     # vulnerable patterns. Full threat model assessment in:
-    # docs/security/RUSTSEC-rustls-webpki-mitigation.md
+    # docs/security/rustsec-rustls-webpki-mitigation.md
     # Remove when aws-smithy-http-client upgrades to rustls 0.23+ or aws-lc backend.
     "RUSTSEC-2026-0098",
     "RUSTSEC-2026-0099",

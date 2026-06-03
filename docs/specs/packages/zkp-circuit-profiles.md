@@ -3,6 +3,8 @@ title: 'ZKP circuit profiles'
 status: current
 date: 2026-06-03
 owner: protocol-architect
+role: protocol-architect
+tier: critical
 document_id: SPEC-ZKP-PROFILES-001
 review_cycle: quarterly
 tags: ['zkp', 'groth16', 'profiles', 'dtf-001']

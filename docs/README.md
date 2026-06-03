@@ -14,17 +14,18 @@ review_cycle: 'on-change'
 
 # Documentation
 
-**Last updated:** 2026-05-27
-**Latest synthesis:** [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md) (fresh master audit, composite 8.9/10)
+**Last updated:** 2026-06-05
+**Latest synthesis:** [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md) (six-phase audit) · [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md) (doc-standard P1)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
 
-| Document                                                                 | Purpose                                                       |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------- |
-| [`start-here.md`](./start-here.md)                                       | Fastest path to repo identity, current state, and next reads  |
-| [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md) | Session-start protocol and codebase map                       |
-| [`architecture/overview.md`](./architecture/overview.md)                 | Trust boundaries, package layering, and architecture overview |
+| Document                                                                           | Purpose                                                       |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| [`start-here.md`](./start-here.md)                                                 | Fastest path to repo identity, current state, and next reads  |
+| [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md)           | Session-start protocol and codebase map                       |
+| [`operations/agent-protocol-22-brief.md`](./operations/agent-protocol-22-brief.md) | Protocol 22 session opener (paste block for agents)           |
+| [`architecture/overview.md`](./architecture/overview.md)                           | Trust boundaries, package layering, and architecture overview |
 
 ## §1 For External Reviewers
 
@@ -38,9 +39,11 @@ review_cycle: 'on-change'
 
 | Document                                                                                                                               | Purpose                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| [`agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md`](./agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) | **Active** sovereign-state engagement readiness — 4 sprints (Zimbabwe → Ghana → Namibia → Botswana → DRC)  |
+| [`operations/tier-5-workplan-2026-06.md`](./operations/tier-5-workplan-2026-06.md)                                                     | **Active** Defensibility Tier 5 — technical ~88%; S-T5-4/5.5.1 done; 5.5.2+ external                       |
+| [`audit/execution-roadmap.md`](./audit/execution-roadmap.md)                                                                           | FA + DTF sprint overlay reconciled with full-audit 2026-06-04                                              |
+| [`agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md`](./agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) | Sovere-state engagement readiness — 4 sprints (Zimbabwe → Ghana → Namibia → Botswana → DRC)                |
 | [`agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md)                                                                               | Current delivery roadmap                                                                                   |
-| [`audit/10-10-remediation-plan-2026-05-27.md`](./audit/10-10-remediation-plan-2026-05-27.md)                                           | **Latest** comprehensive 10/10 remediation — docs, hygiene, GTM, ecosystem, SLSA, new issues               |
+| [`audit/10-10-remediation-plan-2026-05-27.md`](./audit/10-10-remediation-plan-2026-05-27.md)                                           | Comprehensive 10/10 remediation — docs, hygiene, GTM, ecosystem, SLSA                                      |
 | [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                                                                 | Bank-grade readiness roadmap (partial — superseded by 2026-05-27 plan)                                     |
 | [`release/production-readiness-10-10-roadmap.md`](./release/production-readiness-10-10-roadmap.md)                                     | ~~Release-grade readiness plan~~ (deprecated — superseded by `audit/10-10-remediation-plan-2026-05-27.md`) |
 
@@ -84,17 +87,18 @@ review_cycle: 'on-change'
 
 ## §7 Security
 
-| Document                                                                         | Purpose                                                               |
-| -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| [`security/security-framework.md`](./security/security-framework.md)             | Security control model                                                |
-| [`security/threat-model.md`](./security/threat-model.md)                         | Threat model and mitigations                                          |
-| [`security/fips-validation-boundary.md`](./security/fips-validation-boundary.md) | FIPS boundary statement                                               |
-| [`security/pkcs11-keystore.md`](./security/pkcs11-keystore.md)                   | Hardware-backed keystore design                                       |
-| [`security/vulnerability-disclosure.md`](./security/vulnerability-disclosure.md) | **Protocol 1 v2.0 P2** — VDP policy per CERT CVD + ISO/IEC 29147:2018 |
-| [`security/trust-center.md`](./security/trust-center.md)                         | Redirect to canonical `governance/trust-portal.md`                    |
-| [`security/pen-test-rfp-2026.md`](./security/pen-test-rfp-2026.md)               | Pen test RFP + vendor outreach (Sprint 4.1)                           |
-| [`security/pen-test-engagement-log.md`](./security/pen-test-engagement-log.md)   | Append-only log of pen-test vendor outreach, SoW, kickoff state       |
-| [`security/ark-upstream-tracking.md`](./security/ark-upstream-tracking.md)       | Tracker for arkworks 0.5 migration + ignored advisories               |
+| Document                                                                                         | Purpose                                                               |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| [`security/security-framework.md`](./security/security-framework.md)                             | Security control model                                                |
+| [`security/threat-model.md`](./security/threat-model.md)                                         | Threat model and mitigations                                          |
+| [`security/fips-validation-boundary.md`](./security/fips-validation-boundary.md)                 | FIPS boundary statement                                               |
+| [`security/pkcs11-keystore.md`](./security/pkcs11-keystore.md)                                   | Hardware-backed keystore design                                       |
+| [`security/vulnerability-disclosure.md`](./security/vulnerability-disclosure.md)                 | **Protocol 1 v2.0 P2** — VDP policy per CERT CVD + ISO/IEC 29147:2018 |
+| [`security/trust-center.md`](./security/trust-center.md)                                         | Redirect to canonical `governance/trust-portal.md`                    |
+| [`security/pen-test-rfp-2026.md`](./security/pen-test-rfp-2026.md)                               | Pen test RFP + vendor outreach (Sprint 4.1)                           |
+| [`security/pen-test-engagement-log.md`](./security/pen-test-engagement-log.md)                   | Append-only log of pen-test vendor outreach, SoW, kickoff state       |
+| [`security/ark-upstream-tracking.md`](./security/ark-upstream-tracking.md)                       | Tracker for arkworks 0.5 migration + ignored advisories               |
+| [`security/rustsec-rustls-webpki-mitigation.md`](./security/rustsec-rustls-webpki-mitigation.md) | RUSTSEC rustls/webpki mitigation record                               |
 
 ## §8 Compliance
 
@@ -117,10 +121,13 @@ review_cycle: 'on-change'
 
 | Document                                                                                           | Purpose                                                                              |
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md)               | **Latest** fresh master audit — composite 8.9/10, 0 P0, 3 P1, 2 P2                   |
-| [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md) | **Latest** internal completion audit — composite 9.5/10, 24/24 items                 |
+| [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md)                               | **Latest** six-phase full audit — FA-S1 + DTF Tier 5 reconciliation                  |
+| [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md)   | Doc-standard compliance (P1 remediation 2026-06-05)                                  |
+| [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md)                           | Repo root hygiene audit (8.9/10; policy bootstrap P1)                                |
+| [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md)               | Fresh master audit — composite 8.9/10                                                |
+| [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md) | Internal completion audit — composite 9.5/10, 24/24 items                            |
 | [`audit/fuzz-campaign-evidence-2026-05-21.md`](./audit/fuzz-campaign-evidence-2026-05-21.md)       | 500K+ libFuzzer iterations across 6 primitives, 0 crashes / panics / ASAN violations |
-| [`audit/docs-standard-compliance-2026-05-22.md`](./audit/docs-standard-compliance-2026-05-22.md)   | Protocol 1 v2.0 documentation compliance audit                                       |
+| [`audit/docs-standard-compliance-2026-05-22.md`](./audit/docs-standard-compliance-2026-05-22.md)   | Prior doc-standard compliance (9.6/10)                                               |
 | [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)                               | Prior full forensic audit                                                            |
 | [`audit/auto-dev-state.md`](./audit/auto-dev-state.md)                                             | Rolling posture and session state                                                    |
 | [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                             | Prior 10/10 remediation plan                                                         |
@@ -207,10 +214,11 @@ Deprecated docs (superseded by newer versions) are retained in-place with frontm
 
 ## How to Find Something
 
-| Question                              | Go here                                                                              |
-| ------------------------------------- | ------------------------------------------------------------------------------------ |
-| How do I start a session safely?      | [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md)             |
-| What are the required quality gates?  | [`operations/runbook.md`](./operations/runbook.md)                                   |
-| What is the current security posture? | [`governance/trust-portal.md`](./governance/trust-portal.md)                         |
-| Where is the package contract?        | [`specs/packages/README.md`](./specs/packages/README.md)                             |
-| What changed in the latest audit?     | [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md) |
+| Question                              | Go here                                                                            |
+| ------------------------------------- | ---------------------------------------------------------------------------------- |
+| How do I start a session safely?      | [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md)           |
+| What are the required quality gates?  | [`operations/runbook.md`](./operations/runbook.md)                                 |
+| What is the current security posture? | [`governance/trust-portal.md`](./governance/trust-portal.md)                       |
+| Where is the package contract?        | [`specs/packages/README.md`](./specs/packages/README.md)                           |
+| What changed in the latest audit?     | [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md)               |
+| What is Tier 5 status?                | [`operations/tier-5-workplan-2026-06.md`](./operations/tier-5-workplan-2026-06.md) |

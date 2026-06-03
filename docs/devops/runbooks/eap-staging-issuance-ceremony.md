@@ -3,6 +3,8 @@ title: 'EAP staging issuance ceremony (ER-1-08)'
 status: current
 date: 2026-06-03
 owner: protocol-architect
+role: frontier-infra-engineer
+tier: critical
 document_id: RUNBOOK-EAP-STAGING-001
 review_cycle: quarterly
 tags: ['eap', 'protocol-23', 'staging', 'runbook']

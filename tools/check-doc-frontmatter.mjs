@@ -37,7 +37,6 @@ const DEFAULT_EXCLUDES = [
   'docs/agents/sessions/**',
   'docs/agents/workflows/agent-*.md',
   'docs/audit/**',
-  'docs/roadmap/ROADMAP-*.md',
   'docs/gtm/inbound-tickets/**',
 ];
 

@@ -24,7 +24,7 @@ const manifest = requireFile(
 requireFile('scripts/agent-next-work.mjs', 'selection script');
 requireFile('docs/operations/tier-5-workplan-2026-06.md', 'tier 5 workplan');
 requireFile(
-  'docs/operations/AGENT-PROTOCOL-22-BRIEF.md',
+  'docs/operations/agent-protocol-22-brief.md',
   'agent protocol 22 brief',
 );
 const autoDev = requireFile('docs/audit/auto-dev-state.md', 'session pointer');
