@@ -57,12 +57,14 @@ Apply tiers in order:
 
 **Status:** Tiers 1–4 achieved; **Tier 5 not started**.
 
-| Next (default)                       | Sprint | Owner                 |
-| ------------------------------------ | ------ | --------------------- |
-| **DTF-5.1.1** Witness builder        | S-T5-1 | **done**              |
-| **DTF-5.1.2** gh-gold-origin profile | S-T5-1 | **done**              |
-| **DTF-5.1.3** NAPI (profile-aware)   | S-T5-1 | **done**              |
-| **DTF-5.1.4** KAT + CI               | S-T5-1 | quality-evidence-lead |
+| Next (default)                         | Sprint | Owner             |
+| -------------------------------------- | ------ | ----------------- |
+| **DTF-5.1.1** Witness builder          | S-T5-1 | **done**          |
+| **DTF-5.1.2** gh-gold-origin profile   | S-T5-1 | **done**          |
+| **DTF-5.1.3** NAPI (profile-aware)     | S-T5-1 | **done**          |
+| **DTF-5.1.4** KAT + CI                 | S-T5-1 | **done**          |
+| **DTF-5.2.1** zw-diamond-origin        | S-T5-2 | **done**          |
+| **DTF-5.2.2** verification integration | S-T5-2 | protocol-engineer |
 
 Full register: `docs/operations/tier-5-workplan-2026-06.md`.
 

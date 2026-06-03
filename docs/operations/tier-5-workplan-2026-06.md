@@ -23,7 +23,7 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 | Defensibility tier | State                                                 |
 | -----------------: | ----------------------------------------------------- |
 |                1–4 | **Achieved** (2026-06-03 live audit)                  |
-|    **5 technical** | **In progress** — next automatable work **DTF-5.1.4** |
+|    **5 technical** | **In progress** — next automatable work **DTF-5.2.2** |
 |   **5 commercial** | Blocked on GTM / Legal / infra (P5)                   |
 
 **10/10 note:** Algorithmic dimension scores (~8.95 weighted) measure **Tier 2** test depth. **Tier 5** requires named jurisdiction circuits + registry + commercial gate — not the same bar.
@@ -59,8 +59,8 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 | DTF-5.1.1 | Witness builder: WorkProof → typed witness                            | S-T5-1 | protocol-engineer          | **done** | code             | —           | 5.1.2–5.1.4       |
 | DTF-5.1.2 | Commodity-origin R1CS + **`gh-gold-origin` profile** + negative tests | S-T5-1 | crypto-security-engineer   | **done** | code             | 5.1.1       | 5.1.3             |
 | DTF-5.1.3 | NAPI prove/verify (profile-aware, same R1CS)                          | S-T5-1 | frontier-infra-engineer    | **done** | code             | 5.1.2       | 5.1.4             |
-| DTF-5.1.4 | KAT `groth16-gh-gold-origin.kat.json` + CI                            | S-T5-1 | quality-evidence-lead      | pending  | code             | 5.1.3       | S-T5-2            |
-| DTF-5.2.1 | **`zw-diamond-origin` profile** (same R1CS)                           | S-T5-2 | crypto-security-engineer   | pending  | code             | S-T5-1 exit | 5.2.2             |
+| DTF-5.1.4 | KAT `groth16-gh-gold-origin.kat.json` + CI                            | S-T5-1 | quality-evidence-lead      | **done** | code             | 5.1.3       | S-T5-2            |
+| DTF-5.2.1 | **`zw-diamond-origin` profile** (same R1CS)                           | S-T5-2 | crypto-security-engineer   | **done** | code             | S-T5-1 exit | 5.2.2             |
 | DTF-5.2.2 | Verification package integration test                                 | S-T5-2 | protocol-engineer          | pending  | code             | 5.2.1       | 5.2.3             |
 | DTF-5.2.3 | KATs for diamond + range circuits                                     | S-T5-2 | quality-evidence-lead      | pending  | code             | 5.2.2       | S-T5-3            |
 | DTF-5.3.1 | **`gh-cocoa-origin` profile** (same R1CS)                             | S-T5-3 | crypto-security-engineer   | pending  | code             | S-T5-2 exit | 5.3.2             |
