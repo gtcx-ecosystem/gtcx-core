@@ -52,7 +52,8 @@ focus: 'Cross-repo coordination cleanup + gtcx-infrastructure 10-10 roadmap prep
 - **DTF-5.1.3 done:** `groth16_prove_commodity_origin_profile` NAPI + `@gtcx/crypto` `proveGhGoldOrigin`; verify via `commodity_origin`
 - **DTF-5.1.4 done:** `groth16-gh-gold-origin.kat.json` + `pnpm test:kat-cross-impl` PASS (5/5); CI job at `.github/workflows/ci.yml` L104
 - **DTF-5.2.1 done:** zw-diamond profile tests (20 circuit_profiles), `proveZwDiamondOrigin`, witness mapping
-- **agent:next-work:** **DTF-5.2.2** — verification package integration test
+- **DTF-5.2.2 done:** `@gtcx/verification` commodity-origin ZK bundle + workproof witness bridge; 4 integration tests
+- **agent:next-work:** **DTF-5.2.3** — KATs for diamond + range circuits
 - **ER-1-08 (gtcx-core):** **done** — `ba63d0d` + protocols hub log `2026-06-04T23:45Z`; **pending:** infra hub row only
 - **ER-2:** infra `ENABLE_COST_ROUTER` on intel staging; INT-R2-03; baseline-os router v1.1
 - **Spec:** `docs/specs/packages/zkp-circuit-profiles.md`
