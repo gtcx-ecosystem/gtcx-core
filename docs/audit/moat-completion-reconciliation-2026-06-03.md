@@ -32,7 +32,7 @@ review_cycle: on-change
 | **B — Algorithmic / ZKP moat 10/10** | Circuit tests, KAT, RNG, side-channel docs, trusted setup | [moat-dimension-roadmap-10-10.md](./moat-dimension-roadmap-10-10.md)                                                             | **In-repo code ~complete** (D1–D6, D4–D5, D7 internal at 9); D3 M3.2 release-gated; D8–D9 external |
 | **C — Bank-grade honest 10/10**      | Pen-test, SOC 2, regulator evidence, 90-day P1-free       | [10-10-roadmap-2026-05-25.md](./10-10-roadmap-2026-05-25.md), [16-ecosystem-gtm-alignment](../gtm/16-ecosystem-gtm-alignment.md) | **M1 done (8.7)**; M2 in progress; M3–M4 external/time                                             |
 
-**Strategic moat (90-day copy test)** — not a fourth score, but the **bundle** in [roadmap.md §4](../roadmap.md): offline-first + jurisdiction config + agent safety + provenance train + protocol coupling. Track A ships buyer-visible trust artifacts; Track B ships cryptographic defensibility; Track C ships procurement-grade attestation.
+**Strategic moat (MRT-001 tiers)** — canonical framework: [gtcx-docs MRT v1.0.0](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/moat-replication-tiers/v1.0.0). Not a fourth score; the **bundle** is T2+T3+T4+T5 (see [roadmap.md §4](../roadmap.md)): offline-first + jurisdiction config + agent safety + provenance train + protocol coupling. **T0 alone (~90d) is not the moat.** Track A → T3; Track B → T1/T5; Track C → T4 attestation.
 
 ---
 
@@ -134,12 +134,12 @@ TIME
 
 ## 6. What “10/10” means per audience
 
-| Audience                                  | Score today                      | What completes it                                                                |
-| ----------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------- |
-| **Agent / internal engineering**          | ~9.5/10 internal; Sprint 5 done  | External handoffs only (CORE-004–009)                                            |
-| **Cryptographic defensibility (in-repo)** | **~8.95/10** weighted dimensions | AM-2–AM-4 + ceremony                                                             |
-| **Bank-grade procurement**                | **8.7/10** honest                | M2–M4 + infra GTM                                                                |
-| **90-day competitor copy**                | Strategic bundle shipped         | Maintain provenance + jurisdiction + offline stack; audits close credibility gap |
+| Audience                                  | Score today                      | What completes it                                                                                                                        |
+| ----------------------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Agent / internal engineering**          | ~9.5/10 internal; Sprint 5 done  | External handoffs only (CORE-004–009)                                                                                                    |
+| **Cryptographic defensibility (in-repo)** | **~8.95/10** weighted dimensions | AM-2–AM-4 + ceremony                                                                                                                     |
+| **Bank-grade procurement**                | **8.7/10** honest                | M2–M4 + infra GTM                                                                                                                        |
+| **MRT T5 (domain circuits)**              | T1 done; T5 not started          | Execute [path-to-t5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/moat-replication-tiers/v1.0.0/path-to-t5.md) P1–P5 |
 
 ---
 

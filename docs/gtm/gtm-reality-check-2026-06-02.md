@@ -118,11 +118,13 @@ _Assessment stops here per framework (two consecutive Not Ready)._
 - ai-eval scorecard **WARN** — need one-page explanation for procurement
 - No customer-data processing in library (good) but downstream must not send PII into logging hooks without DPA
 
-**Competitive reality:**
+**Competitive reality (canonical: [MRT-001 v1.0.0](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/moat-replication-tiers/v1.0.0)):**
 
-- **90-day replicate:** A funded team can wrap `@noble/curves` + zod schemas in ~90 days — **not defensible alone**
-- **Defensible:** FIPS path + offline/sync integration kit + jurisdiction fixtures + 21-package provenance train + ecosystem protocol coupling + fuzz/STRIDE evidence volume
-- **Not defensible:** "We publish crypto on npm" — commodity
+- **T0 (~90d):** `@noble/curves` + zod — commodity, not the moat
+- **T1 (6–12mo):** ZKP stack + KAT + differential CI — largely achieved in `gtcx-core` (public)
+- **T2–T3:** 22-package platform + provenance train — achieved
+- **T4:** Sovereign deploy + pen-test + pilot — **not achieved** (infra/GTM)
+- **T5 (12–18mo+):** Named jurisdiction circuits + certified packs — **in progress**; see [path-to-t5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/moat-replication-tiers/v1.0.0/path-to-t5.md)
 
 ---
 

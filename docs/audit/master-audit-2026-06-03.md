@@ -158,6 +158,8 @@ review_cycle: quarterly
 
 ### 1.6 Competitive replication (fresh tiers)
 
+**Canonical framework:** [MRT v1.0.0 (MRT-001)](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/moat-replication-tiers/v1.0.0) — [`path-to-t5.md`](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/moat-replication-tiers/v1.0.0/path-to-t5.md).
+
 Replaces stale single-line “90-day replicate” for **whole stack**:
 
 | Tier   | What                                                | Replication effort (funded team) | Your position (2026-06-03)                                                       |
