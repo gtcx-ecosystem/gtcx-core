@@ -1,11 +1,11 @@
 ---
 title: 'Agent Work Selection Manifest'
 status: current
-date: 2026-06-02
+date: 2026-06-03
 owner: protocol-architect
 role: protocol-architect
 tier: standard
-tags: ['agents', 'roadmap', 'protocol-22', 'work-selection']
+tags: ['agents', 'roadmap', 'protocol-22', 'work-selection', 'dtf-001']
 review_cycle: on-change
 document_id: OPS-AWS-001
 protocol: gtcx-docs/docs/governance/protocols/22-agent-work-selection/
@@ -16,100 +16,107 @@ adoption_status: established
 
 > **Protocol:** [Protocol 22 — Agent Work Selection](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/protocol.md)
 >
-> Agents compute next work from the 10/10 cryptographic defensibility roadmap. **Never ask the operator to choose.**
+> Agents compute next work from the 10/10 roadmap and **Defensibility Tier 5** workplan. **Never ask the operator to choose.**
 
 ## Canonical paths
 
-| Artifact          | Path                                                                    |
-| ----------------- | ----------------------------------------------------------------------- |
-| **Unified index** | `docs/audit/moat-completion-reconciliation-2026-06-03.md`               |
-| 10/10 roadmap     | `docs/audit/moat-dimension-roadmap-10-10.md`                            |
-| Assessment        | `docs/audit/algorithmic-moat-sprint2-assessment.md` (historical scores) |
-| Session pointer   | `.baseline/memory/session.md`                                           |
-| Selection script  | `scripts/agent-next-work.mjs`                                           |
+| Artifact                | Path                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Unified 10/10 index** | `docs/audit/moat-completion-reconciliation-2026-06-03.md`                                                     |
+| **Tier 5 work plan**    | `docs/operations/tier-5-workplan-2026-06.md`                                                                  |
+| **DTF framework**       | [DTF-001 v1.0.0](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0) |
+| 10/10 dimension roadmap | `docs/audit/moat-dimension-roadmap-10-10.md`                                                                  |
+| Session pointer         | `.baseline/memory/session.md`                                                                                 |
+| Selection script        | `scripts/agent-next-work.mjs`                                                                                 |
 
 ## Commands
 
 ```bash
-npm run agent:next-work
+pnpm agent:next-work
+pnpm agent:work-selection:check
 ```
 
 ## Active frame
 
-**Development** (default). In this frame, evidence-capture milestones (UAT, pen-test reports, ministry letters) are skipped; the next automatable code/docs milestone is selected.
+**Development** (default). Skip evidence-capture and external vendor milestones; select next **code** or **ops-docs** work.
 
 ## Selection algorithm
 
-Apply tiers in order. Within a tier, sort by: score ascending, critical path yes before no, dimension number ascending. Skip done, deferred, blocked, and external-only milestones.
+Apply tiers in order:
 
-| Tier                   | Rule                                                                             |
-| ---------------------- | -------------------------------------------------------------------------------- |
-| 1 — Resume             | Any milestone marked `in_progress` in `.baseline/memory/session.md`              |
-| 2 — Critical path code | Lowest-score dimension on critical path with implementable pending milestone     |
-| 3 — Non-critical code  | Lowest-score dimension not on critical path with implementable pending milestone |
-| 4 — Ops-docs           | Author `docs/` when no code milestones remain                                    |
-| 5 — External           | Flag for human handoff (D8, D9, third-party letters) — **do not start**          |
+| Tier                         | Rule                                                                                |
+| ---------------------------- | ----------------------------------------------------------------------------------- |
+| 1 — Resume                   | `in_progress` in session — **DTF-5.x** or **D# M#.#**                               |
+| 2 — Critical path code       | Lowest-score moat dimension (D1–D10) with pending milestone                         |
+| 3 — Non-critical code        | Other dimensions with pending milestones                                            |
+| 4 — Ops-docs                 | Author `docs/` when no code milestones remain                                       |
+| **5 — Defensibility Tier 5** | Next pending **DTF-5.x** from tier-5 workplan (class `code` / `ops-docs`)           |
+| 6 — External                 | CORE-004 ceremony, CORE-005–009, D8/D9/D10 — **do not start** without authorization |
 
-## External-blocked dimensions
+## Defensibility Tier 5 (current automatable track)
 
-These dimensions require external vendors/consultants. Agents must not start them without explicit human authorization:
+**Status:** Tiers 1–4 achieved; **Tier 5 not started**.
 
-- **D8 Formal Verification** — requires Z3/Coq consultant (2–3 weeks)
-- **D9 Third-Party Audit** — requires vendor SOW + engagement (4–6 weeks)
-- **D10 M10.3** — requires regulator sign-off letter (2 weeks external)
+| Next (default)                | Sprint | Owner             |
+| ----------------------------- | ------ | ----------------- |
+| **DTF-5.1.1** Witness builder | S-T5-1 | protocol-engineer |
 
-## Dimension quick-reference
+Full register: `docs/operations/tier-5-workplan-2026-06.md`.
 
-| Dim | Score | Critical | Next implementable milestone                         |
-| --- | ----- | -------- | ---------------------------------------------------- |
-| D1  | 10    | Yes      | **Done**                                             |
-| D2  | 10    | No       | **Done**                                             |
-| D3  | 9.5   | No       | — (M3.2 trusted-setup verification is release-gated) |
-| D4  | 10    | No       | **Done**                                             |
-| D5  | 10    | No       | **Done**                                             |
-| D6  | 10    | Yes      | **Done**                                             |
-| D7  | 9     | No       | — (M7.5 side-channel lab assessment is external)     |
-| D8  | 0     | No       | **EXTERNAL** — Z3/Coq consultant                     |
-| D9  | 0     | No       | **EXTERNAL** — pen-test vendor                       |
-| D10 | 9.5   | No       | — (M10.3 regulator attestation is external)          |
+## External-blocked (moat dimensions)
+
+- **D8** — Z3/Coq consultant
+- **D9** — pen-test vendor SOW
+- **D10 M10.3** — regulator letter
+- **DTF-5.4.4** — `gtcx-protocols` E2E (owner repo)
+- **DTF-5.5.4+** — commercial / GTM
+
+## Dimension quick-reference (moat 10/10)
+
+| Dim   | Score | Critical | Status                        |
+| ----- | ----- | -------- | ----------------------------- |
+| D1–D6 | 10    | mixed    | **Done** in-repo              |
+| D3    | 9.5   | No       | M3.2 release-gated (CORE-004) |
+| D7    | 9     | No       | M7.5 external                 |
+| D8–D9 | 0     | No       | **EXTERNAL**                  |
+| D10   | 9.5   | No       | M10.3 external                |
 
 ## Active phase
 
-**Track A Sprint 5** — **done** (22/22 provenance, `@gtcx/ai-eval@0.1.4`, 2026-06-03).  
-Algorithmic moat AM-1 + AM-2 (CORE-003) complete.  
-`pnpm agent:next-work` → **external** tier: CORE-004 (ceremony) or CORE-005–009 (baseline-os/GTM).
+| Track                  | Status                                          |
+| ---------------------- | ----------------------------------------------- |
+| A — Internal 10/10 S5  | **Done** (22/22 provenance)                     |
+| B — AM-1, AM-2         | **Done**                                        |
+| **T5 — Defensibility** | **DTF-5.1.1 ready** ← `agent:next-work` default |
+| Ceremony / vendors     | CORE-004–009 external                           |
 
 ## Critical handoffs
 
-| Handoff  | Item                                            | Status                  |
-| -------- | ----------------------------------------------- | ----------------------- |
-| CORE-003 | gtcx-protocols consumes `@gtcx/zkp-kat-vectors` | **done** 2026-06-03     |
-| CORE-004 | D3 trusted-setup transcript verification        | release-gated on XR-402 |
-| CORE-005 | Pen-test vendor SOW                             | external — baseline-os  |
-| CORE-006 | Z3/Coq formal verification consultant           | external — baseline-os  |
-| CORE-007 | Side-channel lab assessment (D7 M7.5)           | external — baseline-os  |
-| CORE-008 | Regulator attestation (D10 M10.3)               | external — baseline-os  |
+| Handoff      | Item                                       | Status               |
+| ------------ | ------------------------------------------ | -------------------- |
+| CORE-003     | protocols KAT consumption                  | **done** 2026-06-03  |
+| CORE-004     | D3 transcript verify                       | release-gated XR-402 |
+| CORE-005–009 | pen-test, formal, lab, regulator, ZW email | external             |
 
 ## Implementation classes
 
-| Class            | Examples                                             | Action                        |
-| ---------------- | ---------------------------------------------------- | ----------------------------- |
-| code             | ZKP circuits, Rust crates, TS packages, CI workflows | Select                        |
-| ops-docs         | Audit reports, inventory docs, threat models         | Select (when no code remains) |
-| evidence-capture | UAT logs, pen-test reports, ministry letters         | Skip — human-owned            |
-| external         | Consultant engagement, vendor SOW, formal proofs     | Skip — flag for handoff       |
-
-## Forbidden
-
-- Asking the user which dimension or milestone to pick when this manifest and roadmap exist.
-- Starting D8 or D9 without explicit human authorization.
-- Silently skipping a milestone that is implementable in the current frame.
+| Class            | Action                      |
+| ---------------- | --------------------------- |
+| code             | Select                      |
+| ops-docs         | Select when no code remains |
+| evidence-capture | Skip                        |
+| external         | Skip — handoff              |
 
 ## After completing a milestone
 
-1. Update dimension score in `docs/audit/moat-dimension-roadmap-10-10.md`.
-2. Update `docs/audit/algorithmic-moat-sprint2-assessment.md` if scores changed materially.
-3. Refresh `.baseline/memory/session.md` with completed milestone and computed next milestone.
-4. Run quality gates (`cargo test`, `pnpm architecture:check`, `pnpm docs:check-frontmatter`, etc.).
-5. Micro-commit with conventional commit style.
-6. Re-run `npm run agent:next-work` and continue without asking.
+1. Mark **done** in `tier-5-workplan-2026-06.md` (if DTF-5.x) or update `moat-dimension-roadmap-10-10.md`.
+2. Refresh `.baseline/memory/session.md`.
+3. Run quality gates.
+4. Micro-commit.
+5. Re-run `pnpm agent:next-work`.
+
+## Forbidden
+
+- Asking the user which milestone to pick.
+- Starting D8/D9 or commercial Tier 5 without authorization.
+- Claiming **Tier 5 achieved** from generic circuits only (that is **Tier 2**).

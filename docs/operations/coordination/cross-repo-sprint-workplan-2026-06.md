@@ -48,23 +48,23 @@ tags: ['coordination', 'sprint', 'cross-repo', 'workplan']
 
 ## Master dependency register (gtcx-core obligations)
 
-| Work ID  | Title                                          | Owner                    | Sprint   | Status            | Risk   | Depends on        | Blocks             |
-| -------- | ---------------------------------------------- | ------------------------ | -------- | ----------------- | ------ | ----------------- | ------------------ |
-| CORE-001 | EAP auth-keys bundle sync (staging)            | gtcx-core                | S-CORE-1 | **done**          | R-med  | —                 | XR-201 / INT-S3-08 |
-| CORE-002 | SLSA provenance CI investigation               | gtcx-infrastructure      | S-CORE-1 | **open**          | R-med  | Priority decision | Build L3 claim     |
-| CORE-003 | `@gtcx/zkp-kat-vectors` downstream consumption | gtcx-protocols           | S-CORE-2 | **open**          | R-low  | —                 | M6.5 validation    |
-| CORE-004 | D3 trusted-setup transcript verification       | gtcx-core                | S-CORE-3 | **release-gated** | R-med  | Ceremony complete | D3 9.5 → 10        |
-| CORE-005 | Pen-test vendor selection + SOW                | baseline-os / Security   | S-CORE-2 | **blocked**       | R-high | Vendor responses  | D9 completion      |
-| CORE-006 | Z3/Coq formal verification consultant          | baseline-os / Security   | S-CORE-2 | **blocked**       | R-high | Sourcing          | D8 completion      |
-| CORE-007 | Side-channel analysis lab (D7 M7.5)            | baseline-os / Security   | S-CORE-2 | **blocked**       | R-med  | Vendor selection  | D7 9 → 10          |
-| CORE-008 | Regulator attestation / NIST CMVP liaison      | GTM / Protocol Architect | S-CORE-2 | **blocked**       | R-med  | Introduction      | D10 9 → 10         |
-| CORE-009 | Zimbabwe email human gate routing              | baseline-os / GTM        | S-CORE-1 | **blocked**       | R-low  | 6 human approvals | —                  |
-| CORE-010 | gtcx-core `agent:next-work` CI (P22 W2)        | gtcx-core                | S-CORE-4 | **done**          | R-low  | —                 | Agent ergonomics   |
-| CORE-013 | M10.2 runtime FIPS enforcement for BLAKE3      | gtcx-core                | S-CORE-1 | **done**          | R-med  | —                 | D10 9 → 9.5        |
-| CORE-014 | D4 backward compat integration test            | gtcx-core                | S-CORE-1 | **done**          | R-low  | —                 | D4 9 → 10          |
-| CORE-015 | D5 RNG entropy audit + non-determinism         | gtcx-core                | S-CORE-1 | **done**          | R-low  | —                 | D5 9 → 10          |
-| CORE-011 | EAP admin rotate + redacted export             | gtcx-core                | —        | **done**          | —      | —                 | —                  |
-| CORE-012 | EAP bundle sync CLI implementation             | gtcx-core                | —        | **done**          | —      | —                 | —                  |
+| Work ID  | Title                                          | Owner                    | Sprint   | Status              | Risk   | Depends on        | Blocks             |
+| -------- | ---------------------------------------------- | ------------------------ | -------- | ------------------- | ------ | ----------------- | ------------------ |
+| CORE-001 | EAP auth-keys bundle sync (staging)            | gtcx-core                | S-CORE-1 | **done**            | R-med  | —                 | XR-201 / INT-S3-08 |
+| CORE-002 | SLSA provenance CI investigation               | gtcx-infrastructure      | S-CORE-1 | **open**            | R-med  | Priority decision | Build L3 claim     |
+| CORE-003 | `@gtcx/zkp-kat-vectors` downstream consumption | gtcx-protocols           | S-CORE-2 | **done** 2026-06-03 | R-low  | —                 | M6.5 validation    |
+| CORE-004 | D3 trusted-setup transcript verification       | gtcx-core                | S-CORE-3 | **release-gated**   | R-med  | Ceremony complete | D3 9.5 → 10        |
+| CORE-005 | Pen-test vendor selection + SOW                | baseline-os / Security   | S-CORE-2 | **blocked**         | R-high | Vendor responses  | D9 completion      |
+| CORE-006 | Z3/Coq formal verification consultant          | baseline-os / Security   | S-CORE-2 | **blocked**         | R-high | Sourcing          | D8 completion      |
+| CORE-007 | Side-channel analysis lab (D7 M7.5)            | baseline-os / Security   | S-CORE-2 | **blocked**         | R-med  | Vendor selection  | D7 9 → 10          |
+| CORE-008 | Regulator attestation / NIST CMVP liaison      | GTM / Protocol Architect | S-CORE-2 | **blocked**         | R-med  | Introduction      | D10 9 → 10         |
+| CORE-009 | Zimbabwe email human gate routing              | baseline-os / GTM        | S-CORE-1 | **blocked**         | R-low  | 6 human approvals | —                  |
+| CORE-010 | gtcx-core `agent:next-work` CI (P22 W2)        | gtcx-core                | S-CORE-4 | **done**            | R-low  | —                 | Agent ergonomics   |
+| CORE-013 | M10.2 runtime FIPS enforcement for BLAKE3      | gtcx-core                | S-CORE-1 | **done**            | R-med  | —                 | D10 9 → 9.5        |
+| CORE-014 | D4 backward compat integration test            | gtcx-core                | S-CORE-1 | **done**            | R-low  | —                 | D4 9 → 10          |
+| CORE-015 | D5 RNG entropy audit + non-determinism         | gtcx-core                | S-CORE-1 | **done**            | R-low  | —                 | D5 9 → 10          |
+| CORE-011 | EAP admin rotate + redacted export             | gtcx-core                | —        | **done**            | —      | —                 | —                  |
+| CORE-012 | EAP bundle sync CLI implementation             | gtcx-core                | —        | **done**            | —      | —                 | —                  |
 
 ---
 

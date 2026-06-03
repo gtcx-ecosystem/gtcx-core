@@ -15,7 +15,8 @@ review_cycle: 'weekly'
 > **Owner:** Protocol Architect
 > **Target:** Make the crypto/algorithms themselves a defensible moat (not just operational depth)
 > **Duration:** 12 sprints (24 weeks)
-> **Dependencies:** pen-test vendor selection (external); repo public visibility (for provenance)
+> **Dependencies:** pen-test vendor selection (external); repo public visibility (for provenance)  
+> **Operator work plan:** [`docs/operations/tier-5-workplan-2026-06.md`](../../operations/tier-5-workplan-2026-06.md) (DTF-5.x register, Protocol 22)
 
 ---
 

@@ -22,6 +22,7 @@ const manifest = requireFile(
   'work-selection manifest',
 );
 requireFile('scripts/agent-next-work.mjs', 'selection script');
+requireFile('docs/operations/tier-5-workplan-2026-06.md', 'tier 5 workplan');
 requireFile(
   'docs/operations/AGENT-PROTOCOL-22-BRIEF.md',
   'agent protocol 22 brief',
@@ -51,6 +52,9 @@ if (agents) {
 
 if (manifest && !manifest.includes('OPS-AWS-001')) {
   errors.push('Manifest missing document_id OPS-AWS-001');
+}
+if (manifest && !manifest.includes('tier-5-workplan')) {
+  errors.push('Manifest missing tier-5-workplan reference');
 }
 if (manifest && !/adoption_status:\s*(pilot|established)/.test(manifest)) {
   errors.push('Manifest missing adoption_status (pilot or established)');

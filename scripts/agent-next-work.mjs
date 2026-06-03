@@ -11,6 +11,103 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
 const ROADMAP_PATH = join(REPO_ROOT, 'docs/audit/moat-dimension-roadmap-10-10.md');
 const SESSION_PATH = join(REPO_ROOT, '.baseline/memory/session.md');
+const TIER5_WORKPLAN_PATH = join(REPO_ROOT, 'docs/operations/tier-5-workplan-2026-06.md');
+
+/** Defensibility Tier 5 — ordered implementable milestones (DTF-001). */
+const TIER5_MILESTONES = [
+  {
+    id: 'DTF-5.1.1',
+    title: 'Witness builder: WorkProof → typed witness',
+    sprint: 'S-T5-1',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.1.2',
+    title: 'gh-gold-origin Groth16 R1CS + negative tests',
+    sprint: 'S-T5-1',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.1.3',
+    title: 'NAPI prove/verify for gh-gold-origin',
+    sprint: 'S-T5-1',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.1.4',
+    title: 'KAT groth16-gh-gold-origin + CI',
+    sprint: 'S-T5-1',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.2.1',
+    title: 'zw-diamond-origin circuit',
+    sprint: 'S-T5-2',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.2.2',
+    title: 'Verification package integration test',
+    sprint: 'S-T5-2',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.2.3',
+    title: 'KATs for diamond + range circuits',
+    sprint: 'S-T5-2',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.3.1',
+    title: 'gh-cocoa-origin circuit',
+    sprint: 'S-T5-3',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.3.2',
+    title: 'Five-jurisdiction integration fixtures',
+    sprint: 'S-T5-3',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.3.3',
+    title: 'Minerals board UAT protocol template',
+    sprint: 'S-T5-3',
+    workClass: 'ops-docs',
+  },
+  {
+    id: 'DTF-5.4.1',
+    title: 'CircuitRegistry with semver',
+    sprint: 'S-T5-4',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.4.2',
+    title: 'Load test 1000 proofs/min',
+    sprint: 'S-T5-4',
+    workClass: 'code',
+  },
+  {
+    id: 'DTF-5.4.3',
+    title: 'Trust portal circuit IDs',
+    sprint: 'S-T5-4',
+    workClass: 'ops-docs',
+  },
+  // gtcx-protocols owner — handoff when reached
+  {
+    id: 'DTF-5.4.4',
+    title: 'gtcx-protocols E2E per circuit ID',
+    sprint: 'S-T5-4',
+    workClass: 'external',
+    owner: 'gtcx-protocols',
+  },
+  {
+    id: 'DTF-5.5.1',
+    title: 'Jurisdiction pack Zod CI hardening',
+    sprint: 'S-T5-5',
+    workClass: 'code',
+  },
+];
 
 /** Dimensions ordered by selection priority. */
 const DIMENSION_ORDER = [
@@ -45,12 +142,91 @@ function parseRoadmapScores(md) {
 }
 
 function parseInProgressSession(md) {
+  const dtf = /in_progress[\s\S]*?(DTF-5\.\d+\.\d+)/i.exec(md);
+  if (dtf) {
+    return { track: 'T5', milestone: dtf[1] };
+  }
   const re = /in_progress[\s\S]*?(D\d+)[\s\S]*?(M\d+\.\d+)/i;
   const m = re.exec(md);
   if (m) {
     return { dimension: m[1], milestone: m[2] };
   }
   return null;
+}
+
+function parseCompletedTier5(session, workplan) {
+  const done = new Set();
+  const re = /DTF-5\.\d+\.\d+[^\n]*\|\s*\*\*done\*\*/gi;
+  let m;
+  const sources = [session, workplan].filter(Boolean);
+  for (const src of sources) {
+    while ((m = re.exec(src)) !== null) {
+      const id = m[0].match(/DTF-5\.\d+\.\d+/)?.[0];
+      if (id) done.add(id);
+    }
+  }
+  return done;
+}
+
+function selectTier5NextWork(session) {
+  let workplan = '';
+  try {
+    workplan = readFileSync(TIER5_WORKPLAN_PATH, 'utf-8');
+  } catch {
+    // optional
+  }
+
+  const completed = parseCompletedTier5(session, workplan);
+
+  const inProgress = parseInProgressSession(session);
+  if (inProgress?.track === 'T5') {
+    const item = TIER5_MILESTONES.find((x) => x.id === inProgress.milestone);
+    if (item && !completed.has(item.id)) {
+      return formatTier5Selection(item, 'resume', `Resuming ${item.id} from session`);
+    }
+  }
+
+  for (const item of TIER5_MILESTONES) {
+    if (completed.has(item.id)) continue;
+    if (item.workClass === 'external') {
+      return {
+        next: {
+          track: 'T5',
+          handoff: item.id,
+          title: item.title,
+          owner: item.owner ?? 'gtcx-protocols',
+          milestone: item.id,
+          blocked: true,
+          blocker: 'Owner repo implementation required',
+        },
+        selection: {
+          tier: 'external',
+          reason: `Tier 5 milestone ${item.id} — implement in owner repo per Protocol 24`,
+        },
+      };
+    }
+    return formatTier5Selection(
+      item,
+      'tier-5',
+      `Defensibility Tier 5 — next code milestone (${item.id})`,
+    );
+  }
+
+  return null;
+}
+
+function formatTier5Selection(item, tier, reason) {
+  return {
+    next: {
+      track: 'T5',
+      milestone: item.id,
+      sprint: item.sprint,
+      title: item.title,
+      workplan: 'docs/operations/tier-5-workplan-2026-06.md',
+      framework: 'DTF-001',
+    },
+    selection: { tier, reason },
+  };
 }
 
 function selectNextWork() {
@@ -72,9 +248,13 @@ function selectNextWork() {
     // session file optional
   }
 
-  // Tier 1: Resume in-progress
+  // Tier 1: Resume in-progress (Tier 5 or moat dimension)
   const inProgress = parseInProgressSession(session);
-  if (inProgress) {
+  if (inProgress?.track === 'T5') {
+    const tier5 = selectTier5NextWork(session);
+    if (tier5) return tier5;
+  }
+  if (inProgress?.dimension) {
     const dim = DIMENSION_ORDER.find((d) => d.id === inProgress.dimension);
     return {
       next: {
@@ -105,6 +285,8 @@ function selectNextWork() {
     });
 
   if (candidates.length === 0) {
+    const tier5 = selectTier5NextWork(session);
+    if (tier5) return tier5;
     return selectExecutionRoadmapFallback();
   }
 
@@ -135,6 +317,8 @@ function selectNextWork() {
     };
   }
 
+  const tier5 = selectTier5NextWork(session);
+  if (tier5) return tier5;
   return selectExecutionRoadmapFallback();
 }
 
@@ -153,7 +337,7 @@ function selectExecutionRoadmapFallback() {
     selection: {
       tier: 'external',
       reason:
-        'Track A S5-01 done (22/22 npm provenance). In-repo moat D1–D6 at 10. Next: CORE-004 (ceremony) or CORE-005–009 (baseline-os/GTM) — human or owner-repo only.',
+        'Tier 5 workplan complete or external-only remainders. CORE-004 (ceremony) or CORE-005–009 (baseline-os/GTM) — human or owner-repo only.',
     },
   };
 }

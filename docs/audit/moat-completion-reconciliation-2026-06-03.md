@@ -20,7 +20,7 @@ review_cycle: on-change
 
 **Purpose:** One sprint-based path to completion across three parallel tracks that were documented separately. Use this file as the **index**; do not treat `algorithmic-moat-sprint2-assessment.md` (2026-06-02 pre-hardening) as current scores.
 
-**Authoritative selection:** `pnpm agent:next-work` → currently **tier: complete** for in-repo algorithmic work.
+**Authoritative selection:** `pnpm agent:next-work` → **tier-5** / **DTF-5.1.1** (see [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)); moat dimensions D1–D6 in-repo complete.
 
 ---
 
@@ -134,12 +134,12 @@ TIME
 
 ## 6. What “10/10” means per audience
 
-| Audience                                  | Score today                        | What completes it                                                                                                                     |
-| ----------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **Agent / internal engineering**          | ~9.5/10 internal; Sprint 5 done    | External handoffs only (CORE-004–009)                                                                                                 |
-| **Cryptographic defensibility (in-repo)** | **~8.95/10** weighted dimensions   | AM-2–AM-4 + ceremony                                                                                                                  |
-| **Bank-grade procurement**                | **8.7/10** honest                  | M2–M4 + infra GTM                                                                                                                     |
-| **Defensibility Tier 5**                  | Tiers 1–4 done; Tier 5 not started | [path-to-tier-5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/path-to-tier-5.md) P1–P5 |
+| Audience                                  | Score today                        | What completes it                                                                                                                                                                                            |
+| ----------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Agent / internal engineering**          | ~9.5/10 internal; Sprint 5 done    | External handoffs only (CORE-004–009)                                                                                                                                                                        |
+| **Cryptographic defensibility (in-repo)** | **~8.95/10** weighted dimensions   | AM-2–AM-4 + ceremony                                                                                                                                                                                         |
+| **Bank-grade procurement**                | **8.7/10** honest                  | M2–M4 + infra GTM                                                                                                                                                                                            |
+| **Defensibility Tier 5**                  | Tiers 1–4 done; Tier 5 not started | [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md) · [DTF path-to-tier-5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/path-to-tier-5.md) |
 
 ---
 
