@@ -13,6 +13,7 @@ export default defineConfig({
     'disclosure/index': 'src/disclosure/index.ts',
     'offline/index': 'src/offline/index.ts',
     'trust/index': 'src/trust/index.ts',
+    'witness/index': 'src/witness/index.ts',
   },
   external: ['@gtcx/crypto', '@gtcx/types', '@gtcx/verification', 'zod'],
 });

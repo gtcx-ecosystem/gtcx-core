@@ -545,6 +545,7 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
 }
 
 mod utils;
+pub(crate) use utils::sha256_digest;
 #[cfg(test)]
 pub use utils::sample_diamond_origin;
 use utils::*;

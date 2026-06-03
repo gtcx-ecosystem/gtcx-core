@@ -27,6 +27,7 @@ mod commitment;
 mod error;
 mod groth16;
 mod schnorr;
+mod witness;
 #[cfg(feature = "trusted-setup-verify")]
 mod trusted_setup;
 mod types;
@@ -49,6 +50,10 @@ pub use groth16::{
 };
 pub use schnorr::{
     schnorr_attribute_hash, schnorr_prove_identity_attribute, schnorr_verify_identity_attribute,
+};
+pub use witness::{
+    CommodityOriginMerklePathWitness, CommodityOriginWitness, CommodityOriginWitnessDto,
+    WitnessCircuitTarget,
 };
 pub use types::{
     AssetOwnershipDigestConverter, AssetOwnershipMerkleConfig, AssetOwnershipPublicInputs,

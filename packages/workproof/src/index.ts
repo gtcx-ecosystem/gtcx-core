@@ -146,6 +146,27 @@ export {
   SyncStatusSchema,
 } from './offline';
 
+// ─── Witness (ZKP) ───────────────────────────────────────────────────────────
+export {
+  buildCommodityOriginWitness,
+  serializeCommodityOriginWitness,
+  WitnessBuildError,
+  PRODUCTION_ORIGIN_PREDICATE_FAMILY,
+  commodityTypeFromLabel,
+  coordToCircuitU64,
+  digestHex32,
+  parseGpsFromEvidenceMetadata,
+  randomnessHex32,
+  type BuildCommodityOriginWitnessInput,
+  type CommodityOriginMerklePathWitness,
+  type CommodityOriginWitness,
+  type CommodityOriginWitnessSupplement,
+  type GpsCoordinates,
+  type ProductionOriginPredicateType,
+  type WitnessBuildErrorCode,
+  type WitnessCircuitTarget,
+} from './witness';
+
 // ─── Trust Registry ──────────────────────────────────────────────────────────
 export {
   AdmissionCriteria,

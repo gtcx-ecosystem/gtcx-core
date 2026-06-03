@@ -50,6 +50,11 @@
       "types": "./dist/trust/index.d.ts",
       "import": "./dist/trust/index.mjs",
       "require": "./dist/trust/index.js"
+    },
+    "./witness": {
+      "types": "./dist/witness/index.d.ts",
+      "import": "./dist/witness/index.mjs",
+      "require": "./dist/witness/index.js"
     }
   },
   "scripts": {
