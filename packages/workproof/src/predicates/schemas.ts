@@ -143,7 +143,7 @@ export const HashValueSchema = z.object({
 export const LocalizedValueSchema = z
   .object({
     kind: z.literal('localized'),
-    value: z.record(z.string()),
+    value: z.record(z.string(), z.string()),
     defaultLocale: z.string().min(2),
   })
   .refine((v) => v.defaultLocale in v.value, {
@@ -154,7 +154,10 @@ export const LocalizedValueSchema = z
 const BaseCompositeValueSchema = z.object({
   kind: z.literal('composite'),
   components: z
-    .record(z.lazy((): z.ZodTypeAny => PredicateValueSchema))
+    .record(
+      z.string(),
+      z.lazy((): z.ZodTypeAny => PredicateValueSchema)
+    )
     .refine((obj) => Object.keys(obj).length > 0, {
       message: 'components must have at least one entry',
     }),

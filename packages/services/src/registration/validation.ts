@@ -19,7 +19,7 @@ export function validateRegistrationData(
   if (!schemaResult.success) {
     return {
       isValid: false,
-      errors: schemaResult.error.errors.map((issue) => issue.message),
+      errors: schemaResult.error.issues.map((issue) => issue.message),
       warnings: [],
     };
   }

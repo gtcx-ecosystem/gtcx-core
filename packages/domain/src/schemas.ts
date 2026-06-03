@@ -15,10 +15,7 @@ import { z } from 'zod';
 /**
  * Safe parse utility - wraps Zod safeParse with consistent typing
  */
-export function safeParse<T>(
-  schema: z.ZodType<T>,
-  data: unknown
-): z.SafeParseReturnType<unknown, T> {
+export function safeParse<T>(schema: z.ZodType<T>, data: unknown): z.ZodSafeParseResult<T> {
   return schema.safeParse(data);
 }
 

@@ -23,7 +23,7 @@ export function validateTradeRequest(
 ): TradeRequestInput {
   const requestResult = safeParse(TradeRequestSchema, request);
   if (!requestResult.success) {
-    const messages = requestResult.error.errors.map((issue) => issue.message);
+    const messages = requestResult.error.issues.map((issue) => issue.message);
     const reqRecord =
       request != null && typeof request === 'object' ? (request as Record<string, unknown>) : {};
     eventEmitter.emit(

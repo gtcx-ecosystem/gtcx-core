@@ -92,7 +92,7 @@ export class AssetLotRegistrationService {
     // Validate config at construction time
     const configResult = safeParse(RegistrationConfigSchema, config);
     if (!configResult.success) {
-      const messages = configResult.error.errors.map((issue) => issue.message);
+      const messages = configResult.error.issues.map((issue) => issue.message);
       throw new ValidationError(`Invalid registration config: ${messages.join(', ')}`);
     }
     const workflowSteps = configResult.data.workflowSteps?.map((step, index) => ({
@@ -310,7 +310,7 @@ export class AssetLotRegistrationService {
   ): Promise<ValidatedRegistrationData> {
     const schemaResult = safeParse(AssetRegistrationDataSchema, data);
     if (!schemaResult.success) {
-      const messages = schemaResult.error.errors.map((issue) => issue.message);
+      const messages = schemaResult.error.issues.map((issue) => issue.message);
       const error = createValidationError(messages);
       this.eventEmitter.emit(
         this.eventFactory.registration(

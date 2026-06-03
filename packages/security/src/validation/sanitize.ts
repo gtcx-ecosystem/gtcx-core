@@ -226,14 +226,14 @@ export function createBoundaryValidator<T>(
       return { success: true, data };
     } catch (err) {
       if (err instanceof ZodError) {
-        const firstError = err.errors[0];
+        const firstError = err.issues[0];
         return {
           success: false,
           error: {
             code: 'VALIDATION_ERROR',
             message: firstError?.message ?? 'Validation failed',
-            path: firstError?.path,
-            details: err.errors,
+            path: firstError?.path as (string | number)[] | undefined,
+            details: err.issues,
           },
         };
       }

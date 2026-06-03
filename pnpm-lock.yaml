@@ -186,8 +186,8 @@ importers:
   packages/config/jurisdiction:
     dependencies:
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -256,8 +256,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     optionalDependencies:
       '@gtcx/crypto-native':
         specifier: workspace:*
@@ -312,8 +312,8 @@ importers:
         specifier: workspace:*
         version: link:../utils
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -392,8 +392,8 @@ importers:
         specifier: workspace:*
         version: link:../types
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -554,8 +554,8 @@ importers:
         specifier: workspace:*
         version: link:../types
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -582,8 +582,8 @@ importers:
         specifier: workspace:*
         version: link:../crypto
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -711,8 +711,8 @@ importers:
   packages/utils:
     dependencies:
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -745,8 +745,8 @@ importers:
         specifier: workspace:*
         version: link:../types
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -779,8 +779,8 @@ importers:
         specifier: workspace:*
         version: link:../verification
       zod:
-        specifier: 3.25.76
-        version: 3.25.76
+        specifier: 4.4.3
+        version: 4.4.3
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -3925,8 +3925,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zod@3.25.76:
-    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
 snapshots:
 
@@ -7243,4 +7243,4 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod@3.25.76: {}
+  zod@4.4.3: {}

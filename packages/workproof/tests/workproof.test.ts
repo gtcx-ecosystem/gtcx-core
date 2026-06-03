@@ -131,7 +131,7 @@ describe('WorkProofSchema', () => {
     const bad = { ...validWorkProof, workProofVersion: '1.0' };
     const result = WorkProofSchema.safeParse(bad);
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_literal');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_value');
   });
 
   it('rejects missing workProofVersion', () => {

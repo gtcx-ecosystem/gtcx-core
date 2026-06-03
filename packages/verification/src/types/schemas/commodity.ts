@@ -23,5 +23,5 @@ export const CommodityConfigSchema = z.object({
   qualityGrades: z.array(QualityGradeSchema),
   primaryProducerRole: OperatorRoleSchema,
   primarySiteType: SiteTypeSchema,
-  settings: z.record(z.unknown()).optional(),
+  settings: z.record(z.string(), z.unknown()).optional(),
 });

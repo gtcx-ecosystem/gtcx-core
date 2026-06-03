@@ -184,7 +184,7 @@ describe('BooleanValueSchema', () => {
   it('rejects wrong kind literal', () => {
     const result = BooleanValueSchema.safeParse({ kind: 'numeric', value: true });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_literal');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_value');
   });
 
   it('rejects non-boolean value', () => {

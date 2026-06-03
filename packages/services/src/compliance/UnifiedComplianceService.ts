@@ -82,7 +82,7 @@ export class UnifiedComplianceService {
 
     const configResult = safeParse(ComplianceConfigSchema, config);
     if (!configResult.success) {
-      const messages = configResult.error.errors.map((issue) => issue.message);
+      const messages = configResult.error.issues.map((issue) => issue.message);
       throw new ComplianceValidationError(`Invalid compliance config: ${messages.join(', ')}`);
     }
     this.config = { ...DEFAULT_CONFIG, ...configResult.data } as ComplianceConfig;
@@ -403,7 +403,7 @@ export class UnifiedComplianceService {
     this.metrics.counter('compliance.report.generate', 1);
     const optionsResult = safeParse(ComplianceReportOptionsSchema, options);
     if (!optionsResult.success) {
-      const messages = optionsResult.error.errors.map((issue) => issue.message);
+      const messages = optionsResult.error.issues.map((issue) => issue.message);
       throw new ComplianceValidationError(`Invalid report options: ${messages.join(', ')}`);
     }
     const validOptions = optionsResult.data;

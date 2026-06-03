@@ -30,7 +30,7 @@ export const TradeCVAffiliationSchema = z.object({
 export const TradeCVProfileSchema = z.object({
   tradepassId: z.string().min(1),
   displayName: z.string().min(1),
-  displayNameLocalized: z.record(z.string()).optional(),
+  displayNameLocalized: z.record(z.string(), z.string()).optional(),
   memberSince: z.string().min(1),
   tenureMonths: z.number().int().nonnegative(),
   commodityPrimary: z.string().min(1),
@@ -42,7 +42,7 @@ export const TradeCVProfileSchema = z.object({
 export const ProductionStatsSchema = z.object({
   totalProofs: z.number().int().nonnegative(),
   totalValueUSD: z.number().nonnegative().optional(),
-  commodityBreakdown: z.record(z.number().nonnegative()),
+  commodityBreakdown: z.record(z.string(), z.number().nonnegative()),
   averageQualityScore: z.number().min(0).max(1),
   consistencyScore: z.number().min(0).max(1),
   lastProductionDate: z.string().optional(),
@@ -118,7 +118,7 @@ export const TradeCVPredictionsSchema = z.object({
 
 export const TradeCVVisualRepresentationSchema = z.object({
   iconSummaryUri: z.string().optional(),
-  audioNarrationUris: z.record(z.string()).optional(),
+  audioNarrationUris: z.record(z.string(), z.string()).optional(),
   colorCode: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Must be hex color'),
   tierBadge: ComplianceTierSchema,
 });

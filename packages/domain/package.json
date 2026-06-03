@@ -70,7 +70,7 @@
   "dependencies": {
     "@gtcx/events": "workspace:*",
     "@gtcx/utils": "workspace:*",
-    "zod": "3.25.76"
+    "zod": "4.4.3"
   },
   "devDependencies": {
     "@gtcx/tsup-config": "workspace:*",

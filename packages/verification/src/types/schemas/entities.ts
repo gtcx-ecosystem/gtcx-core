@@ -33,7 +33,12 @@ export const PredicateSchemaSchema: z.ZodType<unknown> = z.object({
   min: z.number().optional(),
   max: z.number().optional(),
   pattern: z.string().optional(),
-  properties: z.record(z.lazy(() => PredicateSchemaSchema)).optional(),
+  properties: z
+    .record(
+      z.string(),
+      z.lazy(() => PredicateSchemaSchema)
+    )
+    .optional(),
 });
 
 export const AttestorPatternSchema = z.object({
@@ -57,7 +62,7 @@ export const AttestationRulesSchema = z.object({
 
 export const ConfidenceRulesSchema = z.object({
   baseScore: z.number().min(0).max(1),
-  evidenceWeights: z.record(z.number()),
+  evidenceWeights: z.record(z.string(), z.number()),
   minimumThreshold: z.number().min(0).max(1),
   decayModel: z.enum(['linear', 'exponential', 'none']).optional(),
   halfLife: z.number().positive().optional(),
@@ -107,7 +112,7 @@ export const ClaimEvidenceSchema = z.object({
   type: EvidenceTypeSchema,
   hash: z.string().min(1),
   timestamp: z.number().int().positive(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const ClaimSchema = z.object({

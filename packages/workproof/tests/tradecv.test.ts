@@ -117,7 +117,7 @@ describe('TradeCVSchema', () => {
   it('rejects version other than "2.1"', () => {
     const result = TradeCVSchema.safeParse({ ...validTradeCV, version: '1.0' });
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_literal');
+    if (!result.success) expect(result.error.issues[0]!.code).toBe('invalid_value');
   });
 
   it('rejects version "2.0"', () => {

@@ -242,7 +242,7 @@ export function createHttpDIDResolverAdapter(config: HttpDIDResolverConfig): DID
       const parsed = DIDDocumentSchema.safeParse(rawDoc);
       if (!parsed.success) {
         throw new DIDResolverError(
-          `Invalid DID document structure: ${parsed.error.errors.map((e: { message: string }) => e.message).join(', ')}`,
+          `Invalid DID document structure: ${parsed.error.issues.map((e: { message: string }) => e.message).join(', ')}`,
           'RESOLUTION_FAILED'
         );
       }

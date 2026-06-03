@@ -45,7 +45,7 @@ export const WorkProofCredentialSubjectSchema = z.object({
   commodityContext: z.string().optional(),
   siteId: z.string().optional(),
   claims: z.array(WorkProofClaimSchema).min(1),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const WorkProofSchema = z.object({

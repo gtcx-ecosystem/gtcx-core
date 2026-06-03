@@ -27,7 +27,7 @@ export const TrustRegistryEntrySchema = z.object({
   revokedAt: z.number().int().positive().optional(),
   revokeReason: z.string().optional(),
   supportedProofTypes: z.array(WorkProofTypeSchema).min(1),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const TrustRegistrySchema = z.object({

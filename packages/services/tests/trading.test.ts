@@ -122,7 +122,7 @@ function createValidTradeRequest(overrides: Record<string, unknown> = {}) {
   return {
     assetLotId: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
     sellerId: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
-    buyerId: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
+    buyerId: 'c3d4e5f6-a7b8-4012-8def-123456789012',
     quantity: 100,
     agreedPrice: 5000,
     currency: 'USD',
@@ -842,7 +842,7 @@ describe('Repository DI: ITraderRepository + ITransactionRepository', () => {
       const request = {
         assetLotId: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
         buyerId: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
-        sellerId: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
+        sellerId: 'c3d4e5f6-a7b8-4012-8def-123456789012',
         quantity: 50,
         agreedPrice: 5000,
         currency: 'USD',

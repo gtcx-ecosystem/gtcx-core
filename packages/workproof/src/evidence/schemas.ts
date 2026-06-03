@@ -44,7 +44,7 @@ export const WorkProofEvidenceItemSchema = z.object({
   captureMode: CaptureModeSchema.optional(),
   deviceId: z.string().optional(),
   aiQuality: AIQualityAssessmentSchema.optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export type WorkProofEvidenceTypeInferred = z.infer<typeof WorkProofEvidenceTypeSchema>;

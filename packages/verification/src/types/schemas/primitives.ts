@@ -84,7 +84,7 @@ export const AssetLotDataSchema = z.object({
   discoveryDate: z.string().optional(),
   siteId: z.string().optional(),
   site: SiteReferenceSchema.optional(),
-  attributes: z.record(z.unknown()).optional(),
+  attributes: z.record(z.string(), z.unknown()).optional(),
 });
 
 // ============================================================================

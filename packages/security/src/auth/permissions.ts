@@ -238,7 +238,7 @@ export const SessionSchema = z.object({
   createdAt: z.string().datetime(),
   expiresAt: z.string().datetime(),
   lastActiveAt: z.string().datetime(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export type Session = z.infer<typeof SessionSchema>;
@@ -329,7 +329,7 @@ export const TokenPayloadSchema = z.object({
   /** Session ID */
   sid: z.string().uuid().optional(),
   /** Custom claims */
-  claims: z.record(z.unknown()).optional(),
+  claims: z.record(z.string(), z.unknown()).optional(),
 });
 
 export type TokenPayload = z.infer<typeof TokenPayloadSchema>;

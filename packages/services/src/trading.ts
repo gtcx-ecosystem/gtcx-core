@@ -111,7 +111,7 @@ export class TradingService {
 
     const configResult = safeParse(TradingConfigSchema, config);
     if (!configResult.success) {
-      const messages = configResult.error.errors.map((issue) => issue.message);
+      const messages = configResult.error.issues.map((issue) => issue.message);
       throw new ValidationError(`Invalid trading config: ${messages.join(', ')}`);
     }
     this.config = { ...DEFAULT_CONFIG, ...configResult.data } as TradingConfig;
@@ -226,7 +226,7 @@ export class TradingService {
   async findTradingOpportunities(filters: unknown): Promise<TradingOpportunity[]> {
     const filterResult = safeParse(TradingOpportunityFilterSchema, filters);
     if (!filterResult.success) {
-      const messages = filterResult.error.errors.map((issue) => issue.message);
+      const messages = filterResult.error.issues.map((issue) => issue.message);
       throw new ValidationError(`Invalid filter criteria: ${messages.join(', ')}`);
     }
 
