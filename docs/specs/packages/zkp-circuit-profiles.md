@@ -63,7 +63,10 @@ cargo test -p gtcx-node test_groth16_gh_gold_origin_profile_roundtrip --release
 
 # KAT for profile (alias)
 cargo run --bin generate-kat -- gh-gold-origin artifacts/kat
+cargo run --bin generate-kat -- zw-diamond-origin artifacts/kat
 ```
+
+KAT artifacts: `groth16-gh-gold-origin.kat.json`, `groth16-zw-diamond-origin.kat.json` (same underlying `CommodityOrigin` R1CS). Range vectors: `bulletproofs-commodity-range.kat.json`. Verify: `pnpm test:kat-cross-impl` (6 Groth16 vectors).
 
 ## Related
 

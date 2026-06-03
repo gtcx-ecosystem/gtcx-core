@@ -1,34 +1,34 @@
 ---
-session_id: '2026-06-04-fa-p0-1-turbo-cycle'
+session_id: '2026-06-04-roadmap-forward-fa-s1-s-t5-2'
 agent: 'gtcx-core-agent'
-start_time: '2026-06-04T12:00:00Z'
-focus: 'FA-P0-1 — break workproof ↔ verification turbo build cycle'
+focus: 'FA-S1 complete + S-T5-2 (DTF-5.2.3) — reconciled with bb955a8 / full-audit'
 ---
 
-# Session: FA-P0-1 complete
+# Session: Roadmap forward (2026-06-04)
 
-## Done
+## Completed this session
 
-| Item    | Evidence                                                                                                                                |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| FA-P0-1 | Removed `@gtcx/workproof` devDep from `@gtcx/verification`; moved cross-package test to `tests/integration/commodity-origin-zk.test.ts` |
+| Milestone | Evidence                                                                  |
+| --------- | ------------------------------------------------------------------------- |
+| FA-P0-2   | README split: library 9.5 vs DTF Tier 5 ~50%                              |
+| FA-P0-3   | `docs/specs/packages/README.md` — 24 packages                             |
+| DTF-5.2.3 | `groth16-zw-diamond-origin.kat.json`; `pnpm test:kat-cross-impl` 6/6 PASS |
+| S-T5-2    | zw-diamond profile + verification + KATs                                  |
 
-## Verification (Protocol 27)
+Prior: FA-P0-1 (`5a0f38f`), roadmap reconcile (`bb955a8`).
 
-| Command                                      | Result                                    |
-| -------------------------------------------- | ----------------------------------------- |
-| `pnpm typecheck`                             | exit 0 (no turbo cycle)                   |
-| `pnpm --filter @gtcx/verification test`      | 265 passed                                |
-| `pnpm --filter @gtcx/integration-tests test` | 114 passed (includes commodity-origin ZK) |
-| `pnpm architecture:check`                    | exit 0                                    |
+## Protocol 22
 
-## Next (Protocol 22)
+`pnpm agent:next-work` → **DTF-5.3.1** (gh-cocoa-origin profile)
 
-`pnpm agent:next-work` → **FA-P0-2** (README library vs Tier 5), then **DTF-5.2.3** (diamond + range KATs).
+## Verification
+
+| Command                                    | Result          |
+| ------------------------------------------ | --------------- |
+| `pnpm typecheck`                           | exit 0          |
+| `pnpm test:kat-cross-impl`                 | 6/6 PASS        |
+| `pnpm --filter @gtcx/zkp-kat-vectors test` | (run on commit) |
 
 ## Ecosystem open
 
-| ID               | Owner               | Status   |
-| ---------------- | ------------------- | -------- |
-| OI-X02 ER-1-08   | gtcx-infrastructure | pending  |
-| OI-X06 INT-S8-04 | baseline-os         | external |
+OI-X02 infra ER-1-08 ack pending; OI-X06 baseline-os cost-router external.

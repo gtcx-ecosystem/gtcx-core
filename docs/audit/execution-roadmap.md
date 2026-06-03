@@ -2,7 +2,7 @@
 last_reconciled: 2026-06-04
 reconciliation_note: >-
   Reconciled with full-audit-2026-06-04.md (6-phase + 6 sprint plan).
-  P0 FA-S1 blocks root typecheck; DTF S-T5-1 complete; S-T5-2 in progress.
+  FA-S1 P0 done; S-T5-1 and S-T5-2 complete; DTF-5.3.1 next.
   Ecosystem open items linked; library maturity ≠ sovereign pilot readiness.
 sources:
   - docs/audit/full-audit-2026-06-04.md
@@ -17,8 +17,8 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **FA-S1 (P0 build graph)** → then DTF-5.2.3  
-**Protocol 22:** `pnpm agent:next-work` → **FA-P0-2** (README split) then DTF-5.2.3
+**Active phase:** **FA-S3 / DTF-5.3.1** (gh-cocoa profile)  
+**Protocol 22:** `pnpm agent:next-work` → **DTF-5.3.1**
 
 ---
 
@@ -28,7 +28,7 @@ sources:
 | -------------------------------- | ------------- | -------------------------------------------------- |
 | Internal engineering (S1–S5)     | **done**      | —                                                  |
 | Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                             |
-| **DTF Tier 5 technical**         | **~45%**      | FA-S1 → FA-S2 (5.2.3 KATs) → FA-S3–S5              |
+| **DTF Tier 5 technical**         | **~50%**      | S-T5-2 done; FA-S3 cocoa + fixtures → FA-S4–S5     |
 | Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)    |
 | **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/` |
 
@@ -56,23 +56,24 @@ sources:
 | Story   | Title                                            | Owner              | Status      | Evidence / gate                           |
 | ------- | ------------------------------------------------ | ------------------ | ----------- | ----------------------------------------- |
 | FA-P0-1 | Break workproof ↔ verification turbo build cycle | frontier-infra     | **done**    | Root `pnpm typecheck` exit 0 (2026-06-04) |
-| FA-P0-2 | README: split library readiness vs DTF Tier 5    | protocol-architect | **pending** | `README.md` + link to tier-5 workplan     |
+| FA-P0-2 | README: split library readiness vs DTF Tier 5    | protocol-architect | **done**    | `README.md` (2026-06-04)                  |
+| FA-P0-3 | Reconcile package count in specs README          | protocol-architect | **done**    | 24 packages per `architecture:check`      |
 | FA-P0-3 | Reconcile package count in specs README          | protocol-architect | **pending** | Match `architecture:check` (24 packages)  |
 | FA-P0-4 | format:check hygiene (agent-sync drift)          | chore              | **pending** | `pnpm format:check` exit 0                |
 
-**Blocks:** All new DTF-5.2.3+ merges should land after FA-P0-1 unless scoped package-only CI is documented.
+**FA-S1:** Complete (FA-P0-1–3, DTF-5.2.3).
 
 ---
 
 ## DTF Tier 5 — sprint status
 
-| Sprint | Theme                                  | Status          | Exit milestone                     |
-| ------ | -------------------------------------- | --------------- | ---------------------------------- |
-| S-T5-1 | gh-gold witness + profile + NAPI + KAT | **done**        | DTF-5.1.4                          |
-| S-T5-2 | zw-diamond + verification + KATs       | **in progress** | DTF-5.2.3 pending                  |
-| S-T5-3 | gh-cocoa + jurisdiction fixtures       | pending         | DTF-5.3.3                          |
-| S-T5-4 | Circuit registry + perf                | pending         | DTF-5.4.4 (protocols E2E external) |
-| S-T5-5 | Commercial / certified packs           | pending         | DTF-5.5.4 external                 |
+| Sprint | Theme                                  | Status   | Exit milestone                     |
+| ------ | -------------------------------------- | -------- | ---------------------------------- |
+| S-T5-1 | gh-gold witness + profile + NAPI + KAT | **done** | DTF-5.1.4                          |
+| S-T5-2 | zw-diamond + verification + KATs       | **done** | DTF-5.2.3; 6/6 groth16 cross-impl  |
+| S-T5-3 | gh-cocoa + jurisdiction fixtures       | pending  | DTF-5.3.3                          |
+| S-T5-4 | Circuit registry + perf                | pending  | DTF-5.4.4 (protocols E2E external) |
+| S-T5-5 | Commercial / certified packs           | pending  | DTF-5.5.4 external                 |
 
 ### Completed (2026-06-03 → 2026-06-04)
 
@@ -84,10 +85,11 @@ sources:
 
 ### Next code (after FA-P0-1)
 
-| ID        | Title                                                        | Owner                    |
-| --------- | ------------------------------------------------------------ | ------------------------ |
-| DTF-5.2.3 | zw-diamond + range KATs; 6+ vectors in `test:kat-cross-impl` | quality-evidence-lead    |
-| DTF-5.3.1 | gh-cocoa-origin profile                                      | crypto-security-engineer |
+| ID        | Title                                           | Owner                    |
+| --------- | ----------------------------------------------- | ------------------------ |
+| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**                 |
+| DTF-5.3.1 | gh-cocoa-origin profile                         | crypto-security-engineer |
+| DTF-5.3.1 | gh-cocoa-origin profile                         | crypto-security-engineer |
 
 ---
 
