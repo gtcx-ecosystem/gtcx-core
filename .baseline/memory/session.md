@@ -49,7 +49,7 @@ focus: 'Cross-repo coordination cleanup + gtcx-infrastructure 10-10 roadmap prep
 
 ## Next Focus (Protocol 22 / 27 — 2026-06-03)
 
-- **DTF-5.1.2 done:** `gh-gold-origin` = CommodityOrigin **profile** (no fork); KAT `groth16-gh-gold-origin.kat.json`; `pnpm test:kat-cross-impl` PASS
-- **agent:next-work:** **DTF-5.1.3** — NAPI prove/verify profile-aware (same R1CS keys)
-- **DTF-5.1.4 partial:** KAT artifact + cross-impl verify; CI job wiring remains with 5.1.3
+- **DTF-5.1.3 done:** `groth16_prove_commodity_origin_profile` NAPI + `@gtcx/crypto` `proveGhGoldOrigin`; verify via `commodity_origin`
+- **agent:next-work:** **DTF-5.1.4** — CI KAT job for `groth16-gh-gold-origin.kat.json` (artifact exists; cross-impl PASS)
+- **DTF-5.1.2:** profile + KAT alias on CommodityOrigin R1CS
 - **Spec:** `docs/specs/packages/zkp-circuit-profiles.md`

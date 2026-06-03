@@ -32,11 +32,23 @@ tags: ['zkp', 'groth16', 'profiles', 'dtf-001']
 
 Certification mask is enforced **before prove** via `validate_profile_sample` (policy gate). The R1CS does not embed country names.
 
+## NAPI (DTF-5.1.3)
+
+| Binding                                       | Role                                                                                  |
+| --------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `groth16_prove_commodity_origin_profile`      | Pre-prove `validate_profile_witness`; uses profile `bounds` / mins / `commodity_type` |
+| `groth16_verify_proof('commodity_origin', …)` | Same verifier as generic commodity origin                                             |
+
+TypeScript: `@gtcx/crypto` — `proveGhGoldOrigin` / `proveCommodityOriginProfile` (`zkp-gh-gold-origin.ts`, `zkp-circuit-profile.ts`).
+
 ## Commands
 
 ```bash
 # Profile negative tests (constraint groups)
 cargo test -p gtcx-zkp circuit_profiles
+
+# NAPI profile roundtrip (release, CPU-heavy)
+cargo test -p gtcx-node test_groth16_gh_gold_origin_profile_roundtrip --release
 
 # KAT for profile (alias)
 cargo run --bin generate-kat -- gh-gold-origin artifacts/kat
