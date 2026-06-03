@@ -116,3 +116,15 @@ No contract change required — existing glob covers `eap-issuance-*.json` with 
 | 5   | Protocols validator       | **done** — §5; validator exit 0 on core evidence dir       |
 
 **gtcx-agentic:** safe to mark ER-1-08 closed on program tracker when intelligence posts AUTH smoke exit code.
+
+---
+
+## Protocols hub log row (append to SoR)
+
+**Repo:** `gtcx-protocols` · **File:** `docs/operations/coordination/cross-repo-agent-log.md`
+
+| Timestamp (UTC)   | Repo      | Work ID | Status | Summary                                                                                                                | Evidence                                                                                              |
+| ----------------- | --------- | ------- | ------ | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| 2026-06-04T23:00Z | gtcx-core | ER-1-08 | done   | EAP staging issue/revoke ceremony; redacted `eap-issuance-2026-06-03-*` under `docs/audit/evidence/`; region SoR in §3 | `docs/operations/coordination/from-gtcx-agentic-er-1-08-inbound-ack-2026-06-03.md` · commit `ba63d0d` |
+
+**Posture:** gtcx-core owner work is **done** — no further automatable implementation in this repo. Remaining ER-1-08 exit is **hub coordination** (sibling acks on the protocols log + intelligence AUTH smoke witness), not agentic code.
