@@ -24,12 +24,12 @@ Living register of **open** cross-repo items originating from or affecting `gtcx
 
 ## Summary
 
-| Priority                  | Count | gtcx-core action                                                      |
-| ------------------------- | ----- | --------------------------------------------------------------------- |
-| **P1 done**               | 2     | EAP bundle sync staging; M10.2 FIPS enforcement — executed 2026-06-03 |
-| **P1 blocked (external)** | 4     | Track — vendor selection, regulator, email gate                       |
-| **P2 open (downstream)**  | 2     | Await protocols consumption; implement D3 after ceremony              |
-| **Done (internal)**       | 12    | 10/10 milestones, EAP CLI, KAT package, handoffs, bundle sync         |
+| Priority                  | Count | gtcx-core action                                                            |
+| ------------------------- | ----- | --------------------------------------------------------------------------- |
+| **P1 done**               | 5     | EAP bundle sync; D4/D5/D10; M10.2; agent:next-work CI — executed 2026-06-03 |
+| **P1 blocked (external)** | 4     | Track — vendor selection, regulator, email gate                             |
+| **P2 open (downstream)**  | 2     | Await protocols consumption; implement D3 after ceremony                    |
+| **Done (internal)**       | 12    | 10/10 milestones, EAP CLI, KAT package, handoffs, bundle sync               |
 
 ---
 
@@ -238,7 +238,9 @@ D3 Trusted-Setup Reduction is at 9.5/10. M3.2 requires CI test that re-derives v
 | D2 Bulletproofs 9 → 10         | `proptest` — 256 cases each, valid/invalid                                     |
 | D6 KAT / Interop 8 → 10        | `@gtcx/zkp-kat-vectors@1.0.0` published                                        |
 | D7 Side-Channel 8 → 9          | `dudect-bencher` — p-value = 0.78                                              |
-| D10 Algorithmic Moat           | Overall ≈ 8.8/10                                                               |
+| D4 Backward compat             | `zkp-diamond-origin` → `zkp-commodity-origin` cross-API test                   |
+| D5 RNG / Entropy               | `RNG.md` + `test_proof_non_determinism` (100 proofs, all distinct)             |
+| D10 Algorithmic Moat           | Overall ≈ 8.95/10                                                              |
 | EAP admin rotate               | `rotate()` + redacted export endpoint                                          |
 | EAP bundle sync CLI            | `pnpm eap:sync-bundle` implemented                                             |
 | KAT cross-impl verify          | `kat-cross-impl-verify` binary — zero gtcx-zkp imports                         |

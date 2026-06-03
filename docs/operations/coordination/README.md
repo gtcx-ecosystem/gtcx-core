@@ -17,9 +17,9 @@ owner: gtcx-core
 
 ## Open cross-repo items
 
-| Work ID | Subject               | Status      |
-| ------- | --------------------- | ----------- |
-| XR-518  | EAP Phase B service   | in_progress |
-| XR-517  | Pen-test vendor + SOW | blocked     |
+| Work ID  | Subject               | Status      |
+| -------- | --------------------- | ----------- |
+| CORE-014 | EAP Phase B service   | in_progress |
+| CORE-005 | Pen-test vendor + SOW | blocked     |
 
 Add `remaining-cross-repo-work-YYYY-MM-DD.md` when repo-specific backlog grows beyond GTM inbound tickets.

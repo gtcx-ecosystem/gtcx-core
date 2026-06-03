@@ -40,9 +40,11 @@ tags: ['coordination', 'bridge', 'agents', 'cross-repo']
 
 | When (UTC) | Agent / repo | Update                                                                                                                                                     |
 | ---------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-06-03 | gtcx-core    | **D4 DONE** — Backward compat M4.1. Cross-API test: `proveDiamondOrigin()` → `verifyCommodityOrigin()` passes (mocked + native). D4 9→10.                  |
+| 2026-06-03 | gtcx-core    | **D5 DONE** — RNG entropy audit M5.1 + non-determinism M5.2. `RNG.md` documents hierarchy; 100 proofs all distinct in ~26s. D5 9→10.                       |
 | 2026-06-03 | gtcx-core    | **M10.2 DONE** — Runtime FIPS enforcement for BLAKE3. Centralized `src/fips.rs`, raw blake3 returns `Result`. 63 crypto tests pass. D10 9→9.5.             |
 | 2026-06-03 | gtcx-core    | Coordination folder created (`docs/operations/coordination/`). Bridge + workplan + remaining-work docs established. 6 open cross-repo obligations tracked. |
-| 2026-06-03 | gtcx-core    | 10/10 cryptographic defensibility internal milestones complete. D1=10, D2=10, D6=10, D7=9, D10=9. Overall ≈ 8.8/10. External/vendor gaps remain.           |
+| 2026-06-03 | gtcx-core    | 10/10 cryptographic defensibility: D1=10, D2=10, D4=10, D5=10, D6=10, D7=9, D10=9.5. Overall ≈ 8.95/10. External/vendor gaps remain.                       |
 | 2026-06-03 | gtcx-core    | `@gtcx/zkp-kat-vectors@1.0.0` published in workspace. Awaiting gtcx-protocols consumption.                                                                 |
 | 2026-06-02 | gtcx-core    | Handoffs created for gtcx-protocols, gtcx-infrastructure, baseline-os. Master tracker: `docs/agents/sessions/2026-06-02-remaining-cross-repo-work.md`.     |
 
