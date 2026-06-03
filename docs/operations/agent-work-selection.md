@@ -9,6 +9,7 @@ tags: ['agents', 'roadmap', 'protocol-22', 'work-selection']
 review_cycle: on-change
 document_id: OPS-AWS-001
 protocol: gtcx-docs/docs/governance/protocols/22-agent-work-selection/
+adoption_status: established
 ---
 
 # Agent Work Selection — gtcx-core
@@ -58,18 +59,35 @@ These dimensions require external vendors/consultants. Agents must not start the
 
 ## Dimension quick-reference
 
-| Dim | Score | Critical | Next implementable milestone                          |
-| --- | ----- | -------- | ----------------------------------------------------- |
-| D1  | 9     | Yes      | M1.5 Differential testing (snarkjs / arkworks ref)    |
-| D2  | 9     | No       | M2.2 Fuzzing / randomized witness gen                 |
-| D3  | 9.5   | No       | — (M3.2 trusted-setup verification is release-gated)  |
-| D4  | 9     | No       | — (M4.2 end-to-end integration test)                  |
-| D5  | 9.5   | No       | — (M5.3 `getrandom` fallback audit)                   |
-| D6  | 8     | Yes      | M6.4 Cross-implementation validation (snarkjs)        |
-| D7  | 8     | No       | M7.4 Microbenchmarks (`dudect` / `ctgrind`)           |
-| D8  | 0     | No       | **EXTERNAL** — Z3/Coq consultant                      |
-| D9  | 0     | No       | **EXTERNAL** — audit vendor                           |
-| D10 | 8     | No       | M10.2 Runtime FIPS enforcement (`GTCX_FIPS_STRICT=1`) |
+| Dim | Score | Critical | Next implementable milestone                         |
+| --- | ----- | -------- | ---------------------------------------------------- |
+| D1  | 10    | Yes      | **Done**                                             |
+| D2  | 10    | No       | **Done**                                             |
+| D3  | 9.5   | No       | — (M3.2 trusted-setup verification is release-gated) |
+| D4  | 10    | No       | **Done**                                             |
+| D5  | 10    | No       | **Done**                                             |
+| D6  | 10    | Yes      | **Done**                                             |
+| D7  | 9     | No       | — (M7.5 side-channel lab assessment is external)     |
+| D8  | 0     | No       | **EXTERNAL** — Z3/Coq consultant                     |
+| D9  | 0     | No       | **EXTERNAL** — pen-test vendor                       |
+| D10 | 9.5   | No       | — (M10.3 regulator attestation is external)          |
+
+## Active phase
+
+Algorithmic Moat Sprint 2 — **Hardening + External Validation**.
+All agent-implementable code milestones are complete. Remaining work is
+release-gated (D3 M3.2) or external (D7 M7.5, D8, D9, D10 M10.3).
+
+## Critical handoffs
+
+| Handoff  | Item                                            | Status                  |
+| -------- | ----------------------------------------------- | ----------------------- |
+| CORE-003 | gtcx-protocols consumes `@gtcx/zkp-kat-vectors` | open — protocols-owned  |
+| CORE-004 | D3 trusted-setup transcript verification        | release-gated on XR-402 |
+| CORE-005 | Pen-test vendor SOW                             | external — baseline-os  |
+| CORE-006 | Z3/Coq formal verification consultant           | external — baseline-os  |
+| CORE-007 | Side-channel lab assessment (D7 M7.5)           | external — baseline-os  |
+| CORE-008 | Regulator attestation (D10 M10.3)               | external — baseline-os  |
 
 ## Implementation classes
 

@@ -22,6 +22,10 @@ const manifest = requireFile(
   'work-selection manifest',
 );
 requireFile('scripts/agent-next-work.mjs', 'selection script');
+requireFile(
+  'docs/operations/AGENT-PROTOCOL-22-BRIEF.md',
+  'agent protocol 22 brief',
+);
 const autoDev = requireFile('docs/audit/auto-dev-state.md', 'session pointer');
 
 const pkgRaw = requireFile('package.json', 'package.json');
@@ -47,6 +51,9 @@ if (agents) {
 
 if (manifest && !manifest.includes('OPS-AWS-001')) {
   errors.push('Manifest missing document_id OPS-AWS-001');
+}
+if (manifest && !/adoption_status:\s*(pilot|established)/.test(manifest)) {
+  errors.push('Manifest missing adoption_status (pilot or established)');
 }
 
 if (autoDev && !/Next work/i.test(autoDev)) {
