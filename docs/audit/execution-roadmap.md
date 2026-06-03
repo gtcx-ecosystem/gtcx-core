@@ -2,7 +2,7 @@
 last_reconciled: 2026-06-04
 reconciliation_note: >-
   Reconciled with full-audit-2026-06-04.md (6-phase + 6 sprint plan).
-  FA-S1 P0 done; S-T5-1/2/3 complete; DTF-5.4.1–5.4.3 done; 5.4.4 protocols E2E (gtcx-protocols).
+  FA-S1 P0 done; S-T5-1/2/3 complete; DTF-5.4.1–5.4.4 done; Tier 5 technical candidate; DTF-5.5.x commercial next.
   Ecosystem open items linked; library maturity ≠ sovereign pilot readiness.
 sources:
   - docs/audit/full-audit-2026-06-04.md
@@ -17,8 +17,8 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **S-T5-4** — DTF-5.4.4 `gtcx-protocols` E2E (owner repo)  
-**Protocol 22:** `pnpm agent:next-work` → **DTF-5.4.4** (cross-repo; hub handoff if blocked)
+**Active phase:** **S-T5-5** — DTF-5.5.x commercial / certified packs (GTM-led)  
+**Protocol 22:** `pnpm agent:next-work` → **DTF-5.5.1** (jurisdiction pack Zod CI)
 
 ---
 
@@ -28,7 +28,7 @@ sources:
 | -------------------------------- | ------------- | -------------------------------------------------- |
 | Internal engineering (S1–S5)     | **done**      | —                                                  |
 | Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                             |
-| **DTF Tier 5 technical**         | **~72%**      | DTF-5.4.3 trust portal done; 5.4.4 protocols E2E   |
+| **DTF Tier 5 technical**         | **~78%**      | DTF-5.4.4 protocols E2E done; 5.5.x commercial     |
 | Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)    |
 | **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/` |
 
@@ -67,13 +67,13 @@ sources:
 
 ## DTF Tier 5 — sprint status
 
-| Sprint | Theme                                  | Status   | Exit milestone                     |
-| ------ | -------------------------------------- | -------- | ---------------------------------- |
-| S-T5-1 | gh-gold witness + profile + NAPI + KAT | **done** | DTF-5.1.4                          |
-| S-T5-2 | zw-diamond + verification + KATs       | **done** | DTF-5.2.3; 6/6 groth16 cross-impl  |
-| S-T5-3 | gh-cocoa + jurisdiction fixtures       | **done** | DTF-5.3.3 UAT protocol             |
-| S-T5-4 | Circuit registry + perf                | pending  | DTF-5.4.4 (protocols E2E external) |
-| S-T5-5 | Commercial / certified packs           | pending  | DTF-5.5.4 external                 |
+| Sprint | Theme                                  | Status   | Exit milestone                    |
+| ------ | -------------------------------------- | -------- | --------------------------------- |
+| S-T5-1 | gh-gold witness + profile + NAPI + KAT | **done** | DTF-5.1.4                         |
+| S-T5-2 | zw-diamond + verification + KATs       | **done** | DTF-5.2.3; 6/6 groth16 cross-impl |
+| S-T5-3 | gh-cocoa + jurisdiction fixtures       | **done** | DTF-5.3.3 UAT protocol            |
+| S-T5-4 | Circuit registry + perf                | **done** | Tier 5 technical candidate        |
+| S-T5-5 | Commercial / certified packs           | pending  | DTF-5.5.4 external                |
 
 ### Completed (2026-06-03 → 2026-06-04)
 
@@ -90,16 +90,16 @@ sources:
 
 ### Next code (after FA-P0-1)
 
-| ID        | Title                                           | Owner          |
-| --------- | ----------------------------------------------- | -------------- |
-| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**       |
-| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**       |
-| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**       |
-| DTF-5.3.3 | Minerals board UAT protocol template            | **done**       |
-| DTF-5.4.1 | CircuitRegistry with semver                     | **done**       |
-| DTF-5.4.2 | Load test 1000 proofs/min                       | **done**       |
-| DTF-5.4.3 | Trust portal circuit ID column                  | **done**       |
-| DTF-5.4.4 | gtcx-protocols E2E per circuit ID               | gtcx-protocols |
+| ID        | Title                                           | Owner                     |
+| --------- | ----------------------------------------------- | ------------------------- |
+| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**                  |
+| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**                  |
+| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**                  |
+| DTF-5.3.3 | Minerals board UAT protocol template            | **done**                  |
+| DTF-5.4.1 | CircuitRegistry with semver                     | **done**                  |
+| DTF-5.4.2 | Load test 1000 proofs/min                       | **done**                  |
+| DTF-5.4.3 | Trust portal circuit ID column                  | **done**                  |
+| DTF-5.4.4 | gtcx-protocols E2E per circuit ID               | gtcx-protocols (**done**) |
 
 ---
 
@@ -154,16 +154,16 @@ See [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md). Stories S1
 
 ## Deferred (external + human)
 
-| Item                             | Owner                 | Reason                           |
-| -------------------------------- | --------------------- | -------------------------------- |
-| Pen-test report (live stack)     | gtcx-infrastructure   | EXT-INF-002; vendor not selected |
-| SOC 2 Type 1                     | quality-evidence-lead | CPA engagement                   |
-| Zimbabwe sandbox email           | gtm-lead              | Human approval                   |
-| Trusted-setup ceremony           | human + gtcx-core     | XR-402 / CORE-004                |
-| D8 formal verification           | baseline-os           | CORE-006                         |
-| D9 third-party crypto audit      | baseline-os           | CORE-005                         |
-| DTF-5.4.4 protocols E2E          | gtcx-protocols        | Owner repo — handoff when S-T5-4 |
-| DTF-5.5.4 LOI / regulator letter | GTM                   | Tier 5 commercial gate           |
+| Item                             | Owner                 | Reason                                                        |
+| -------------------------------- | --------------------- | ------------------------------------------------------------- |
+| Pen-test report (live stack)     | gtcx-infrastructure   | EXT-INF-002; vendor not selected                              |
+| SOC 2 Type 1                     | quality-evidence-lead | CPA engagement                                                |
+| Zimbabwe sandbox email           | gtm-lead              | Human approval                                                |
+| Trusted-setup ceremony           | human + gtcx-core     | XR-402 / CORE-004                                             |
+| D8 formal verification           | baseline-os           | CORE-006                                                      |
+| D9 third-party crypto audit      | baseline-os           | CORE-005                                                      |
+| DTF-5.4.4 protocols E2E          | gtcx-protocols        | **done** — `tests/cross-repo/zkp-circuit-profile-e2e.test.ts` |
+| DTF-5.5.4 LOI / regulator letter | GTM                   | Tier 5 commercial gate                                        |
 
 ---
 

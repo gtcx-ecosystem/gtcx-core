@@ -115,6 +115,13 @@ export {
 } from './zkp-circuit-profile';
 
 export {
+  commodityOriginPublicInputsJsonFromKat,
+  katToCommodityOriginProfileProof,
+  verifyGroth16CommodityOriginKat,
+  type CommodityOriginKatLike,
+} from './groth16-kat-verify';
+
+export {
   generateGhGoldOriginKeys,
   proveGhGoldOrigin,
   verifyGhGoldOrigin,

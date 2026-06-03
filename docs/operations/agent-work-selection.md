@@ -79,6 +79,7 @@ Apply tiers in order:
 | **DTF-5.4.1** CircuitRegistry semver      | S-T5-4 | **done** |
 | **DTF-5.4.2** Load test 1000 proofs/min   | S-T5-4 | **done** |
 | **DTF-5.4.3** Trust portal circuit IDs    | S-T5-4 | **done** |
+| **DTF-5.4.4** gtcx-protocols E2E          | S-T5-4 | **done** |
 
 Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [execution-roadmap.md](../audit/execution-roadmap.md).
 
@@ -87,8 +88,7 @@ Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [
 - **D8** — Z3/Coq consultant
 - **D9** — pen-test vendor SOW
 - **D10 M10.3** — regulator letter
-- **DTF-5.4.4** — `gtcx-protocols` E2E (owner repo)
-- **DTF-5.5.4+** — commercial / GTM
+- **DTF-5.5.4+** — commercial / GTM (LOI / regulator letter)
 
 ## Dimension quick-reference (moat 10/10)
 

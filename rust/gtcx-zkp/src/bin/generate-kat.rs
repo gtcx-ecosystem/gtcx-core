@@ -5,6 +5,7 @@
 //!            bulletproofs-amount | bulletproofs-commodity
 //!   output-dir: defaults to artifacts/kat/
 
+use ark_serialize::CanonicalSerialize;
 use gtcx_zkp::{
     bulletproofs_prove_amount_range, bulletproofs_prove_commodity_range, gh_gold_origin_profile,
     zw_diamond_origin_profile,
@@ -12,10 +13,21 @@ use gtcx_zkp::{
     groth16_prove_gci_threshold, groth16_prove_location_region, groth16_verify,
     sample_asset_ownership, sample_commodity_origin, sample_commodity_origin_for_profile,
     sample_location_region, validate_profile_sample, CommodityOriginSample, Groth16CircuitType,
-    PROFILE_GH_GOLD_ORIGIN, PROFILE_ZW_DIAMOND_ORIGIN,
+    Groth16ProofBundle, PROFILE_GH_GOLD_ORIGIN, PROFILE_ZW_DIAMOND_ORIGIN,
 };
 use sha2::{Digest, Sha256};
 use std::path::PathBuf;
+
+fn public_inputs_json_from_bundle(bundle: &Groth16ProofBundle) -> String {
+    let mut pi_bytes = Vec::new();
+    for f in &bundle.public_inputs {
+        let mut buf = Vec::new();
+        f.serialize_compressed(&mut buf)
+            .expect("serialize public input field element");
+        pi_bytes.push(hex::encode(&buf));
+    }
+    serde_json::to_string(&pi_bytes).expect("public_inputs_json")
+}
 
 fn main() {
     let circuit = std::env::args().nth(1).unwrap_or_else(|| {
@@ -153,6 +165,7 @@ fn write_commodity_origin_kat(
         },
         "proof_bytes": hex::encode(&bundle.proof),
         "verifying_key_bytes": hex::encode(&bundle.verifying_key),
+        "public_inputs_json": public_inputs_json_from_bundle(&bundle),
         "expected_verify": true,
     });
 

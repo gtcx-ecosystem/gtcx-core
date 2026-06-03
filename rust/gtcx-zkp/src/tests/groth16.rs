@@ -1107,3 +1107,17 @@ fn test_groth16_diamond_origin_proof_and_tamper() {
     proof.public_inputs[0] = Fr::from(1u64);
     assert!(!groth16_verify(&proof).unwrap());
 }
+
+/// Emits compressed Fr(0)/Fr(1) hex for TS KAT verify helpers (`--nocapture`).
+#[test]
+fn fr_bit_serialize_constants() {
+    use ark_serialize::CanonicalSerialize;
+
+    for v in 0u64..2 {
+        let mut buf = Vec::new();
+        Fr::from(v)
+            .serialize_compressed(&mut buf)
+            .expect("serialize Fr bit");
+        println!("FR{v}_HEX={}", hex::encode(&buf));
+    }
+}

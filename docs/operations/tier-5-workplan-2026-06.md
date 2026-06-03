@@ -20,11 +20,11 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 ## Status today
 
-| Defensibility tier | State                                                                |
-| -----------------: | -------------------------------------------------------------------- |
-|                1–4 | **Achieved** (2026-06-03 live audit)                                 |
-|    **5 technical** | **~72%** — DTF-5.4.3 **done**; 5.4.4 protocols E2E next (cross-repo) |
-|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                                  |
+| Defensibility tier | State                                                                   |
+| -----------------: | ----------------------------------------------------------------------- |
+|                1–4 | **Achieved** (2026-06-03 live audit)                                    |
+|    **5 technical** | **~78%** — DTF-5.4.4 protocols E2E **done**; Tier 5 technical candidate |
+|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                                     |
 
 **10/10 note:** Algorithmic dimension scores (~8.95 weighted) measure **Tier 2** test depth. **Tier 5** requires named jurisdiction circuits + registry + commercial gate — not the same bar.
 
@@ -89,7 +89,7 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 | DTF-5.4.1 | `CircuitRegistry` with semver + deprecation                           | S-T5-4 | protocol-architect         | **done** | code             | S-T5-3 exit | 5.4.2–5.4.4       |
 | DTF-5.4.2 | Load test 1000 proofs/min + evidence JSON                             | S-T5-4 | frontier-infra-engineer    | **done** | code             | 5.4.1       | 5.4.3             |
 | DTF-5.4.3 | Trust portal circuit ID column                                        | S-T5-4 | protocol-architect         | **done** | ops-docs         | 5.4.1       | 5.4.4             |
-| DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID                                   | S-T5-4 | gtcx-protocols             | pending  | code             | 5.4.1       | **T5 technical**  |
+| DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID                                   | S-T5-4 | gtcx-protocols             | **done** | code             | 5.4.1       | **T5 technical**  |
 | DTF-5.5.1 | Jurisdiction pack Zod CI hardening                                    | S-T5-5 | protocol-engineer          | pending  | code             | —           | 5.5.2             |
 | DTF-5.5.2 | Certified pack pipeline (signed manifest)                             | S-T5-5 | Legal + protocol-architect | pending  | external         | 5.5.1       | 5.5.4             |
 | DTF-5.5.3 | Predicate-gated export keys (optional)                                | S-T5-5 | crypto-security-engineer   | deferred | code             | 5.5.1       | —                 |
