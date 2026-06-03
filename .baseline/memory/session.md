@@ -51,5 +51,6 @@ focus: 'Cross-repo coordination cleanup + gtcx-infrastructure 10-10 roadmap prep
 
 - **DTF-5.1.3 done:** `groth16_prove_commodity_origin_profile` NAPI + `@gtcx/crypto` `proveGhGoldOrigin`; verify via `commodity_origin`
 - **agent:next-work:** **DTF-5.1.4** — CI KAT job for `groth16-gh-gold-origin.kat.json` (artifact exists; cross-impl PASS)
-- **ER-1-08 (gtcx-core):** **done** (`ba63d0d`) — hub log row template in inbound ack; **not** automatable agentic code; await intel/infra hub rows + ER-2 router (infra/intel/baseline-os)
+- **ER-1-08 (gtcx-core):** **done** — `ba63d0d` + protocols hub log `2026-06-04T23:45Z`; **pending:** infra hub row only
+- **ER-2:** infra `ENABLE_COST_ROUTER` on intel staging; INT-R2-03; baseline-os router v1.1
 - **Spec:** `docs/specs/packages/zkp-circuit-profiles.md`
