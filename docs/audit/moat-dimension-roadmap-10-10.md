@@ -128,7 +128,7 @@ These 4 items are the minimum bar before any dimension reaches 9. They are prere
 
 ## Dimension 5: RNG / Witness Entropy
 
-**Current:** 9/10 → **Target:** 10/10
+**Current:** 10/10 → **Target:** 10/10 ✓
 
 | Milestone                 | Score  | Acceptance Criteria                                                                                                | Effort  | Gate                                    |
 | ------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ | ------- | --------------------------------------- |

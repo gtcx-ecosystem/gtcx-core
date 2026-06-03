@@ -11,7 +11,6 @@ use ark_r1cs_std::uint8::UInt8;
 use ark_r1cs_std::ToBitsGadget;
 use ark_relations::r1cs::SynthesisError;
 use ark_serialize::{CanonicalDeserialize, CanonicalSerialize};
-use ark_std::rand::{rngs::StdRng, RngCore, SeedableRng};
 use curve25519_dalek::ristretto::{CompressedRistretto, RistrettoPoint};
 use gtcx_crypto::hashing::sha256;
 
@@ -39,12 +38,6 @@ pub(crate) fn map_proof_system_error(err: impl std::fmt::Display) -> ZkpError {
     ZkpError::ProofSystemError {
         reason: err.to_string(),
     }
-}
-
-pub(crate) fn zk_rng() -> StdRng {
-    let mut seed = [0u8; 32];
-    ark_std::rand::rngs::OsRng.fill_bytes(&mut seed);
-    StdRng::from_seed(seed)
 }
 
 pub(crate) fn u64_to_fr_bits(value: u64) -> Vec<Fr> {

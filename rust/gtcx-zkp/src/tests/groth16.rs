@@ -654,6 +654,23 @@ fn test_groth16_commodity_origin_proof_and_tamper() {
 }
 
 #[test]
+#[ignore = "Groth16 proof generation is heavy; run with --release: cargo test --release -- --ignored test_proof_non_determinism"]
+fn test_proof_non_determinism() {
+    use std::collections::HashSet;
+
+    let keys = groth16_generate_keys(Groth16CircuitType::GciThreshold).unwrap();
+    let mut proofs = HashSet::new();
+    for i in 0..100 {
+        let proof = groth16_prove_gci_threshold(92, 80, &keys).unwrap();
+        assert!(
+            proofs.insert(proof.proof.clone()),
+            "proof {i} is identical to a previous proof — witness entropy is not non-deterministic"
+        );
+    }
+    assert_eq!(proofs.len(), 100, "all 100 proofs must be distinct");
+}
+
+#[test]
 fn test_kat_commodity_origin_proof_verifies() {
     use crate::types::{Groth16CircuitType, Groth16ProofBundle};
 

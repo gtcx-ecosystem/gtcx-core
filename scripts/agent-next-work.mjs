@@ -160,7 +160,7 @@ function guessNextMilestone(dimId, score) {
       9: { id: 'M3.2', title: 'Trusted-setup verification (release-gated)', releaseGated: true },
     },
     D4: { 9: { id: 'M4.1', title: 'End-to-end integration test' } },
-    D5: { 9: { id: 'M5.3', title: 'getrandom fallback audit' } },
+    D5: { 9: { id: 'M5.1', title: 'Entropy source audit' } },
     D6: {
       6: { id: 'M6.3', title: 'CI KAT verification gate' },
       8: { id: 'M6.4', title: 'Cross-implementation validation (snarkjs)' },
