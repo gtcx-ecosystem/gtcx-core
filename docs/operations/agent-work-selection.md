@@ -1,7 +1,7 @@
 ---
 title: 'Agent Work Selection Manifest'
 status: current
-date: 2026-06-03
+date: 2026-06-05
 owner: protocol-architect
 role: protocol-architect
 tier: standard
@@ -59,14 +59,15 @@ Apply tiers in order:
 
 **Source:** [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) — turbo cycle breaks root `pnpm typecheck`.
 
-| Next (default)                                      | Sprint | Owner                   |
-| --------------------------------------------------- | ------ | ----------------------- |
-| FA-P0-1 Break workproof ↔ verification turbo cycle  | FA-S1  | **done**                |
-| **FA-P0-2** README: library readiness vs DTF Tier 5 | FA-S1  | frontier-infra-engineer |
+| Item                                               | Sprint | Status   |
+| -------------------------------------------------- | ------ | -------- |
+| FA-P0-1 Break workproof ↔ verification turbo cycle | FA-S1  | **done** |
+| FA-P0-2 README: library readiness vs DTF Tier 5    | FA-S1  | **done** |
+| FA-P0-3 Reconcile package count in specs README    | FA-S1  | **done** |
 
 ## Defensibility Tier 5 (current automatable track)
 
-**Status:** Tiers 1–4 achieved; **Tier 5 ~45%** (S-T5-1 done; S-T5-2 partial).
+**Status:** Tiers 1–4 achieved; **Tier 5 technical ~88%** — automatable DTF-5.1–5.5.1 **done**; commercial 5.5.2+ external.
 
 | Milestone                                 | Sprint | Status                    |
 | ----------------------------------------- | ------ | ------------------------- |
@@ -103,21 +104,21 @@ Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [
 
 ## Active phase
 
-| Track                  | Status                        |
-| ---------------------- | ----------------------------- |
-| A — Internal 10/10 S5  | **Done** (22/22 provenance)   |
-| B — AM-1, AM-2         | **Done**                      |
-| **FA — Full-audit P0** | **Done** (FA-P0-1–3)          |
-| **T5 — Defensibility** | **~50%** — **DTF-5.3.1** next |
-| Ceremony / vendors     | CORE-004–009 external         |
+| Track                  | Status                                               |
+| ---------------------- | ---------------------------------------------------- |
+| A — Internal 10/10 S5  | **Done** (22/22 provenance)                          |
+| B — AM-1, AM-2         | **Done**                                             |
+| **FA — Full-audit P0** | **Done** (FA-P0-1–3)                                 |
+| **T5 — Defensibility** | **~88% technical** — automatable slice **done**      |
+| Ceremony / vendors     | **CORE-004** blocked (XR-402); CORE-005–009 external |
 
 ## Critical handoffs
 
-| Handoff      | Item                                       | Status               |
-| ------------ | ------------------------------------------ | -------------------- |
-| CORE-003     | protocols KAT consumption                  | **done** 2026-06-03  |
-| CORE-004     | D3 transcript verify                       | release-gated XR-402 |
-| CORE-005–009 | pen-test, formal, lab, regulator, ZW email | external             |
+| Handoff      | Item                                       | Status                      |
+| ------------ | ------------------------------------------ | --------------------------- |
+| CORE-003     | protocols KAT / DTF-5.4.4 E2E              | **done** (`73eaff2b`)       |
+| CORE-004     | D3 transcript verify                       | **blocked** XR-402 ceremony |
+| CORE-005–009 | pen-test, formal, lab, regulator, ZW email | external                    |
 
 ## Implementation classes
 
