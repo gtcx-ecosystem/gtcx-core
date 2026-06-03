@@ -318,6 +318,52 @@ fn test_groth16_gh_gold_origin_profile_roundtrip() {
 }
 
 #[test]
+fn test_groth16_zw_diamond_origin_profile_roundtrip() {
+    use ark_serialize::CanonicalSerialize;
+
+    let profile = gtcx_zkp::zw_diamond_origin_profile();
+    let sample = gtcx_zkp::sample_commodity_origin_for_profile(&profile).unwrap();
+
+    let mut merkle_bytes = Vec::new();
+    sample
+        .merkle_path
+        .serialize_compressed(&mut merkle_bytes)
+        .unwrap();
+    let merkle_path_hex = hex::encode(merkle_bytes);
+
+    let keys = groth16_generate_keys("commodity_origin".to_string()).unwrap();
+
+    let bundle = groth16_prove_commodity_origin_profile(
+        profile.profile_id.to_string(),
+        hex::encode(sample.mine_id),
+        sample.lat as i64,
+        sample.lon as i64,
+        sample.primary_metric as i64,
+        sample.secondary_metric as i64,
+        hex::encode(sample.primary_randomness),
+        hex::encode(sample.secondary_randomness),
+        hex::encode(sample.location_randomness),
+        sample.certification_flags as i64,
+        merkle_path_hex,
+        keys.proving_key,
+        keys.verifying_key.clone(),
+    )
+    .unwrap();
+
+    assert_eq!(bundle.circuit, "commodity_origin");
+    assert_eq!(bundle.profile_id.as_deref(), Some(profile.profile_id));
+
+    let valid = groth16_verify_proof(
+        bundle.circuit,
+        bundle.proof,
+        bundle.verifying_key,
+        bundle.public_inputs_json,
+    )
+    .unwrap();
+    assert!(valid);
+}
+
+#[test]
 fn test_groth16_profile_unknown_id_fails() {
     let keys = groth16_generate_keys("commodity_origin".to_string()).unwrap();
     let err = groth16_prove_commodity_origin_profile(

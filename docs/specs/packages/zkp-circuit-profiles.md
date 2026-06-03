@@ -32,6 +32,17 @@ tags: ['zkp', 'groth16', 'profiles', 'dtf-001']
 
 Certification mask is enforced **before prove** via `validate_profile_sample` (policy gate). The R1CS does not embed country names.
 
+## Zimbabwe diamond profile (`zw-diamond-origin`)
+
+| Field                           | Value                                                   |
+| ------------------------------- | ------------------------------------------------------- |
+| `commodity_type`                | `1`                                                     |
+| GPS bounds                      | Zimbabwe bbox (micro-degrees; lon +180° offset)         |
+| `min_primary` / `min_secondary` | Clarity score / centi-carats                            |
+| `required_certification_mask`   | `RegionalCertification` bit (Kimberley / regional cert) |
+
+TypeScript: `@gtcx/crypto` — `proveZwDiamondOrigin` (`zkp-zw-diamond-origin.ts`).
+
 ## NAPI (DTF-5.1.3)
 
 | Binding                                       | Role                                                                                  |
@@ -39,12 +50,12 @@ Certification mask is enforced **before prove** via `validate_profile_sample` (p
 | `groth16_prove_commodity_origin_profile`      | Pre-prove `validate_profile_witness`; uses profile `bounds` / mins / `commodity_type` |
 | `groth16_verify_proof('commodity_origin', …)` | Same verifier as generic commodity origin                                             |
 
-TypeScript: `@gtcx/crypto` — `proveGhGoldOrigin` / `proveCommodityOriginProfile` (`zkp-gh-gold-origin.ts`, `zkp-circuit-profile.ts`).
+TypeScript: `@gtcx/crypto` — `proveGhGoldOrigin`, `proveZwDiamondOrigin`, `proveCommodityOriginProfile` (`zkp-gh-gold-origin.ts`, `zkp-zw-diamond-origin.ts`, `zkp-circuit-profile.ts`).
 
 ## Commands
 
 ```bash
-# Profile negative tests (constraint groups)
+# Profile negative tests (constraint groups; gh-gold + zw-diamond)
 cargo test -p gtcx-zkp circuit_profiles
 
 # NAPI profile roundtrip (release, CPU-heavy)

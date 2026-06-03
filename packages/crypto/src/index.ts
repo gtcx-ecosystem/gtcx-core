@@ -110,6 +110,15 @@ export {
 } from './zkp-gh-gold-origin';
 
 export {
+  generateZwDiamondOriginKeys,
+  proveZwDiamondOrigin,
+  verifyZwDiamondOrigin,
+  ZW_DIAMOND_REGIONAL_CERT_MASK,
+  type ZwDiamondOriginProofInput,
+  type ZwDiamondOriginProof,
+} from './zkp-zw-diamond-origin';
+
+export {
   proveCommodityRange,
   verifyCommodityRange,
   type CommodityRangeProofInput,

@@ -1,5 +1,6 @@
 import { certificationBitMask, CertificationBit } from '../circuit-profiles/certification';
 import { GH_GOLD_ORIGIN_PROFILE } from '../circuit-profiles/gh-gold-origin';
+import { ZW_DIAMOND_ORIGIN_PROFILE } from '../circuit-profiles/zw-diamond-origin';
 import type { WorkProofClaim, WorkProofCredentialSubject } from '../workproof/types';
 
 import { WitnessBuildError } from './errors';
@@ -66,18 +67,25 @@ export function buildCommodityOriginWitness(
   const useGhGoldProfile =
     supplement.circuitTarget === 'gh-gold-origin' ||
     (supplement.circuitTarget === undefined && commodityType === 0);
+  const useZwDiamondProfile =
+    supplement.circuitTarget === 'zw-diamond-origin' ||
+    (supplement.circuitTarget === undefined && commodityType === 1);
 
   const circuitTarget: WitnessCircuitTarget = useGhGoldProfile
     ? 'gh-gold-origin'
-    : (supplement.circuitTarget ?? 'commodity-origin');
+    : useZwDiamondProfile
+      ? 'zw-diamond-origin'
+      : (supplement.circuitTarget ?? 'commodity-origin');
 
-  const profileBounds = useGhGoldProfile ? GH_GOLD_ORIGIN_PROFILE.bounds : supplement.bounds;
-  const profileMinPrimary = useGhGoldProfile
-    ? GH_GOLD_ORIGIN_PROFILE.minPrimary
-    : supplement.minPrimary;
-  const profileMinSecondary = useGhGoldProfile
-    ? GH_GOLD_ORIGIN_PROFILE.minSecondary
-    : supplement.minSecondary;
+  const activeProfile = useGhGoldProfile
+    ? GH_GOLD_ORIGIN_PROFILE
+    : useZwDiamondProfile
+      ? ZW_DIAMOND_ORIGIN_PROFILE
+      : null;
+
+  const profileBounds = activeProfile?.bounds ?? supplement.bounds;
+  const profileMinPrimary = activeProfile?.minPrimary ?? supplement.minPrimary;
+  const profileMinSecondary = activeProfile?.minSecondary ?? supplement.minSecondary;
 
   let certificationFlags = supplement.certificationFlags ?? 0;
   if (findClaim(claims, 'OriginAuthenticated')) {
@@ -86,8 +94,11 @@ export function buildCommodityOriginWitness(
   if (findClaim(claims, 'GoldBuyingLicenseValid')) {
     certificationFlags |= certificationBitMask(CertificationBit.RegulatoryExportLicense);
   }
-  if (useGhGoldProfile) {
-    certificationFlags |= GH_GOLD_ORIGIN_PROFILE.requiredCertificationMask;
+  if (findClaim(claims, 'KimberleyProcessCertified')) {
+    certificationFlags |= certificationBitMask(CertificationBit.RegionalCertification);
+  }
+  if (activeProfile) {
+    certificationFlags |= activeProfile.requiredCertificationMask;
   }
 
   return {

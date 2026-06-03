@@ -1,4 +1,5 @@
 export { GH_GOLD_ORIGIN_PROFILE } from './gh-gold-origin';
+export { ZW_DIAMOND_ORIGIN_PROFILE } from './zw-diamond-origin';
 export {
   CertificationBit,
   certificationBitMask,
@@ -13,21 +14,11 @@ export type {
 
 import { GH_GOLD_ORIGIN_PROFILE } from './gh-gold-origin';
 import type { CircuitProfileId, CommodityOriginProfileConfig } from './types';
+import { ZW_DIAMOND_ORIGIN_PROFILE } from './zw-diamond-origin';
 
 const REGISTRY: Record<CircuitProfileId, CommodityOriginProfileConfig> = {
   'gh-gold-origin': GH_GOLD_ORIGIN_PROFILE,
-  'zw-diamond-origin': {
-    profileId: 'zw-diamond-origin',
-    underlyingCircuit: 'CommodityOrigin',
-    jurisdictionCode: 'ZW',
-    commodityType: 1,
-    bounds: [15_000_000, 25_000_000, 25_000_000, 35_000_000],
-    minPrimary: 70,
-    minSecondary: 100,
-    requiredCertificationMask: 1 << 0,
-    metricSemantics: 'clarity-and-centi-carats',
-    policyNotes: 'Regional certification bit; clarity + centi-carats',
-  },
+  'zw-diamond-origin': ZW_DIAMOND_ORIGIN_PROFILE,
   'commodity-origin': {
     profileId: 'commodity-origin',
     underlyingCircuit: 'CommodityOrigin',

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { GH_GOLD_ORIGIN_PROFILE } from '../src/circuit-profiles';
+import { GH_GOLD_ORIGIN_PROFILE, ZW_DIAMOND_ORIGIN_PROFILE } from '../src/circuit-profiles';
 import {
   buildCommodityOriginWitness,
   serializeCommodityOriginWitness,
@@ -111,6 +111,56 @@ describe('buildCommodityOriginWitness', () => {
     expect(parsed.circuitTarget).toBe('gh-gold-origin');
     expect(parsed.mineIdHex).toBe(witness.mineIdHex);
     expect(json).not.toMatch(/Uint8Array/);
+  });
+
+  it('maps diamond production claims to typed zw-diamond-origin witness', () => {
+    const diamondSubject: WorkProofCredentialSubject = {
+      ...baseSubject,
+      commodityContext: 'diamond',
+      claims: baseSubject.claims.map((c) =>
+        c.predicateType === 'CommodityProduced'
+          ? {
+              ...c,
+              value: {
+                kind: 'composite' as const,
+                components: {
+                  commodity: {
+                    kind: 'enum' as const,
+                    value: 'diamond',
+                    allowedValues: ['diamond'],
+                  },
+                  quantity: { kind: 'numeric' as const, value: 5.0, unit: 'ct' },
+                },
+              },
+              evidence: [
+                {
+                  type: 'gps_location',
+                  hash: 'sha256:gps-zw',
+                  timestamp: 1704067200000,
+                  metadata: { latitude: -18.5, longitude: 28.0 },
+                },
+              ],
+            }
+          : c
+      ),
+    };
+
+    const witness = buildCommodityOriginWitness({
+      credentialSubject: diamondSubject,
+      supplement: {
+        merklePath: { leafIndex: 0, pathDigestsHex: [] },
+        primaryRandomnessHex: '0a'.repeat(32),
+        secondaryRandomnessHex: '0b'.repeat(32),
+        locationRandomnessHex: '0c'.repeat(32),
+      },
+    });
+
+    expect(witness.circuitTarget).toBe('zw-diamond-origin');
+    expect(witness.commodityType).toBe(commodityTypeFromLabel('diamond'));
+    expect(witness.certificationFlags & ZW_DIAMOND_ORIGIN_PROFILE.requiredCertificationMask).toBe(
+      ZW_DIAMOND_ORIGIN_PROFILE.requiredCertificationMask
+    );
+    expect(witness.bounds).toEqual(ZW_DIAMOND_ORIGIN_PROFILE.bounds);
   });
 
   it('rejects when CommodityProduced is missing', () => {
