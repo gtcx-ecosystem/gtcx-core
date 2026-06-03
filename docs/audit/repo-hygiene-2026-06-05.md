@@ -15,7 +15,9 @@ axis_scores:
   axis_6_size_outliers: 10.0
   axis_7_os_junk: 10.0
   axis_8_empty_dirs: 8.0
-remediation_status: not_run
+remediation_status: executed
+remediation_date: '2026-06-03'
+post_remediation_score: 9.6
 ---
 
 # gtcx-core — Repo Hygiene Audit
@@ -188,6 +190,26 @@ Copy from `gtcx-docs/tools/audit/audit-framework/templates/repo-hygiene/`:
 | 5     | P2       | Reconcile root README Tier 5 % (doc overlap)                   | —          |
 
 **Manual-only:** `_delete/` — do not schedule in agent sprints.
+
+---
+
+## Remediation execution (2026-06-03)
+
+**Execute pass** shipped P1–P4 bootstrap + config README stubs + inventory fix.
+
+| Item                       | Status | Evidence                                                                                                                                            |
+| -------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| P1-1 Repo hygiene protocol | done   | `docs/operations/repo/repo-hygiene-protocol.md`                                                                                                     |
+| P1-2 `root-allowlist.json` | done   | `docs/operations/repo/root-allowlist.json` + schema                                                                                                 |
+| P1-3 Checker + CI          | done   | `scripts/ops/check-workspace-root-cleanliness.py`; `pnpm check:workspace-root-cleanliness:strict` exit **0**; CI step in `.github/workflows/ci.yml` |
+| P1-4 Config READMEs        | done   | `packages/config/{eslint,typescript,tsup}/README.md`                                                                                                |
+| P1-5 Package inventory     | done   | `packages/README.md` → 24 + 4 config (28 workspace entries)                                                                                         |
+
+**Post-remediation score:** **9.6 / 10** (P1–P4 pass; axis 2/M1 complete; axis 8 empty dirs and root README Tier-5 % remain P2).
+
+```bash
+pnpm check:workspace-root-cleanliness:strict   # exit 0, Status PASS
+```
 
 ---
 

@@ -10,16 +10,18 @@ focus: 'Tier 5 automatable slice complete; CORE-004 blocked on XR-402'
 
 | SHA       | Summary                                                |
 | --------- | ------------------------------------------------------ |
-| `3f79cd0` | docs: intelligence DTF-5.4.4 witness + P22 blocker map |
-| `c1eb5af` | docs: DTF-5.4.4 S-T5-4 closure (protocols `73eaff2b`)  |
-| `96a9167` | feat: DTF-5.5.1 strict jurisdiction engagement packs   |
+| (pending) | chore(ops): bootstrap repo hygiene policy + CI gate    |
+| `3a3bd67` | docs: doc-standard p2 splits + trust-portal link style |
+| `6ab4e8b` | docs: ship doc-standard p1 fixes                       |
 
-## Done (automatable Tier 5)
+## Done (2026-06-03 continue)
 
-| Milestone | Evidence                                                              |
-| --------- | --------------------------------------------------------------------- |
-| DTF-5.4.4 | protocols `73eaff2b`; intel witness `5142ff8`; core ack + bridge rows |
-| DTF-5.5.1 | `pnpm jurisdiction:validate-packs` (16) + package test (34)           |
+| Item                  | Evidence                                                                                 |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| Repo hygiene P1–P4    | `docs/operations/repo/` + checker; `pnpm check:workspace-root-cleanliness:strict` exit 0 |
+| Config README stubs   | `packages/config/{eslint,typescript,tsup}/README.md`                                     |
+| Doc-standard P2-3     | Merged duplicate frontmatter in `docs-standard-lightweight.md`                           |
+| Trust portal link fix | `trust-portal-evidence.md` repo-bootstrap links                                          |
 
 ## Protocol 22
 

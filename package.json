@@ -71,7 +71,9 @@
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:work-selection:check": "node scripts/check-agent-work-selection.mjs",
     "test:kat-cross-impl": "cargo run --manifest-path rust/gtcx-zkp/Cargo.toml --bin kat-cross-impl-verify -- --all",
-    "agent:coordination:check": "node scripts/check-coordination-hygiene.mjs"
+    "agent:coordination:check": "node scripts/check-coordination-hygiene.mjs",
+    "check:workspace-root-cleanliness": "python3 scripts/ops/check-workspace-root-cleanliness.py",
+    "check:workspace-root-cleanliness:strict": "python3 scripts/ops/check-workspace-root-cleanliness.py --strict"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",
