@@ -2,7 +2,7 @@
 last_reconciled: 2026-06-04
 reconciliation_note: >-
   Reconciled with full-audit-2026-06-04.md (6-phase + 6 sprint plan).
-  FA-S1 P0 done; S-T5-1/2/3 complete; DTF-5.4.1–5.4.2 done; 5.4.3 trust portal next.
+  FA-S1 P0 done; S-T5-1/2/3 complete; DTF-5.4.1–5.4.3 done; 5.4.4 protocols E2E (gtcx-protocols).
   Ecosystem open items linked; library maturity ≠ sovereign pilot readiness.
 sources:
   - docs/audit/full-audit-2026-06-04.md
@@ -17,8 +17,8 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **S-T5-4** — DTF-5.4.3 trust portal circuit IDs  
-**Protocol 22:** `pnpm agent:next-work` → **DTF-5.4.3**
+**Active phase:** **S-T5-4** — DTF-5.4.4 `gtcx-protocols` E2E (owner repo)  
+**Protocol 22:** `pnpm agent:next-work` → **DTF-5.4.4** (cross-repo; hub handoff if blocked)
 
 ---
 
@@ -28,7 +28,7 @@ sources:
 | -------------------------------- | ------------- | -------------------------------------------------- |
 | Internal engineering (S1–S5)     | **done**      | —                                                  |
 | Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                             |
-| **DTF Tier 5 technical**         | **~68%**      | DTF-5.4.2 perf evidence done; 5.4.3–5.4.4 remain   |
+| **DTF Tier 5 technical**         | **~72%**      | DTF-5.4.3 trust portal done; 5.4.4 protocols E2E   |
 | Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)    |
 | **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/` |
 
@@ -77,27 +77,29 @@ sources:
 
 ### Completed (2026-06-03 → 2026-06-04)
 
-| ID              | Title                                     | Commit / evidence                                      |
-| --------------- | ----------------------------------------- | ------------------------------------------------------ |
-| DTF-5.1.1–5.1.4 | Witness, gh-gold profile, NAPI, KAT       | `803d212`, `baa13e5`                                   |
-| DTF-5.2.1       | zw-diamond-origin profile                 | `803d212`                                              |
-| DTF-5.2.2       | Verification ZK bundle integration        | `6c313ea`                                              |
-| DTF-5.3.2       | Five-jurisdiction proof fixtures          | `tests/integration/tier5-jurisdiction-proofs.test.ts`  |
-| DTF-5.3.3       | Minerals board UAT protocol + L0 evidence | `docs/operations/minerals-board-uat-protocol.md`       |
-| DTF-5.4.1       | CircuitRegistry semver + lifecycle        | `packages/crypto/src/circuit-registry.ts`              |
-| DTF-5.4.2       | Load test 1603 verify/min (12 workers)    | `docs/audit/evidence/zkp-profile-load-2026-06-03.json` |
+| ID              | Title                                        | Commit / evidence                                        |
+| --------------- | -------------------------------------------- | -------------------------------------------------------- |
+| DTF-5.1.1–5.1.4 | Witness, gh-gold profile, NAPI, KAT          | `803d212`, `baa13e5`                                     |
+| DTF-5.2.1       | zw-diamond-origin profile                    | `803d212`                                                |
+| DTF-5.2.2       | Verification ZK bundle integration           | `6c313ea`                                                |
+| DTF-5.3.2       | Five-jurisdiction proof fixtures             | `tests/integration/tier5-jurisdiction-proofs.test.ts`    |
+| DTF-5.3.3       | Minerals board UAT protocol + L0 evidence    | `docs/operations/minerals-board-uat-protocol.md`         |
+| DTF-5.4.1       | CircuitRegistry semver + lifecycle           | `packages/crypto/src/circuit-registry.ts`                |
+| DTF-5.4.2       | Load test 1603 verify/min (12 workers)       | `docs/audit/evidence/zkp-profile-load-2026-06-03.json`   |
+| DTF-5.4.3       | Trust portal circuit ID + off-circuit policy | `docs/governance/trust-portal.md` § ZKP circuit registry |
 
 ### Next code (after FA-P0-1)
 
-| ID        | Title                                           | Owner         |
-| --------- | ----------------------------------------------- | ------------- |
-| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**      |
-| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**      |
-| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**      |
-| DTF-5.3.3 | Minerals board UAT protocol template            | **done**      |
-| DTF-5.4.1 | CircuitRegistry with semver                     | **done**      |
-| DTF-5.4.2 | Load test 1000 proofs/min                       | **done**      |
-| DTF-5.4.3 | Trust portal circuit ID column                  | protocol-arch |
+| ID        | Title                                           | Owner          |
+| --------- | ----------------------------------------------- | -------------- |
+| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**       |
+| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**       |
+| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**       |
+| DTF-5.3.3 | Minerals board UAT protocol template            | **done**       |
+| DTF-5.4.1 | CircuitRegistry with semver                     | **done**       |
+| DTF-5.4.2 | Load test 1000 proofs/min                       | **done**       |
+| DTF-5.4.3 | Trust portal circuit ID column                  | **done**       |
+| DTF-5.4.4 | gtcx-protocols E2E per circuit ID               | gtcx-protocols |
 
 ---
 

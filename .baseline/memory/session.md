@@ -1,24 +1,24 @@
 ---
-session_id: '2026-06-03-dtf-5-4-2-load-test'
+session_id: '2026-06-03-dtf-5-4-3-trust-portal'
 agent: 'gtcx-core-agent'
-focus: 'DTF-5.4.2 ZKP profile verify load test + evidence'
+focus: 'DTF-5.4.3 trust portal circuit ID column'
 ---
 
-# Session: DTF-5.4.2 complete
+# Session: DTF-5.4.3 complete
 
 ## Done
 
-| Milestone | Evidence                                                                                                                                                   |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DTF-5.4.2 | `zkp-profile-load-test` binary + `pnpm perf:zkp-profile-load`; evidence `docs/audit/evidence/zkp-profile-load-2026-06-03.json` — **1603 verify/min**, pass |
+| Milestone | Evidence                                                                                           |
+| --------- | -------------------------------------------------------------------------------------------------- |
+| DTF-5.4.3 | `docs/governance/trust-portal.md` — circuit ID registry table, off-circuit policy, verify SLA link |
 
 ## Protocol 22
 
-`pnpm agent:next-work` → **DTF-5.4.3** (trust portal circuit ID column)
+`pnpm agent:next-work` → **DTF-5.4.4** (`gtcx-protocols` E2E — owner repo, cross-repo)
 
 ## Verification
 
-| Command                                                         | Result            |
-| --------------------------------------------------------------- | ----------------- |
-| `cargo build --release -p gtcx-zkp --bin zkp-profile-load-test` | exit 0            |
-| `pnpm perf:zkp-profile-load` (60s, 12 workers, KAT warmup)      | exit 0, pass=true |
+| Command                       | Result |
+| ----------------------------- | ------ |
+| `pnpm docs:check-links`       | exit 0 |
+| `pnpm docs:check-frontmatter` | exit 0 |
