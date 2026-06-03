@@ -22,8 +22,8 @@ fuzz_target!(|data: &[u8]| {
     assert_eq!(h3, h4, "SHA-512 must be deterministic");
 
     // BLAKE3: must produce 32 bytes, must be deterministic
-    let h5 = blake3(data);
-    let h6 = blake3(data);
+    let h5 = blake3(data).unwrap();
+    let h6 = blake3(data).unwrap();
     assert_eq!(h5.len(), 32);
     assert_eq!(h5, h6, "BLAKE3 must be deterministic");
 

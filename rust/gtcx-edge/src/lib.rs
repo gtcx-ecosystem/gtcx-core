@@ -307,7 +307,7 @@ impl VerificationCache {
 
 /// Compute a cache key from data bytes.
 pub fn cache_key(data: &[u8]) -> String {
-    hex::encode(blake3(data))
+    hex::encode(blake3(data).expect("BLAKE3 not available in FIPS strict mode"))
 }
 
 // ── Internal helpers ──

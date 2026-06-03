@@ -106,7 +106,7 @@ pub fn sha512(data: Vec<u8>) -> String {
 /// Returns the hash as a hex string (64 hex chars = 32 bytes).
 #[napi]
 pub fn blake3_hash(data: Vec<u8>) -> String {
-    hex::encode(gtcx_crypto::blake3(&data))
+    hex::encode(gtcx_crypto::blake3(&data).expect("BLAKE3 not available in FIPS strict mode"))
 }
 
 // =============================================================================

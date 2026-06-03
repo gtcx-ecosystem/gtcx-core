@@ -28,7 +28,7 @@ fn bench_blake3(c: &mut Criterion) {
     for size in [32, 256, 1024, 4096].iter() {
         let data = vec![0xABu8; *size];
         group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, _| {
-            b.iter(|| blake3(&data))
+            b.iter(|| blake3(&data).unwrap())
         });
     }
     group.finish();
@@ -39,7 +39,7 @@ fn bench_hash_comparison(c: &mut Criterion) {
     let mut group = c.benchmark_group("hash_comparison_256b");
     group.bench_function("sha256", |b| b.iter(|| sha256(&data)));
     group.bench_function("sha512", |b| b.iter(|| sha512(&data)));
-    group.bench_function("blake3", |b| b.iter(|| blake3(&data)));
+    group.bench_function("blake3", |b| b.iter(|| blake3(&data).unwrap()));
     group.finish();
 }
 

@@ -50,7 +50,7 @@ impl Message {
         data.extend_from_slice(self.from.as_str().as_bytes());
         data.extend_from_slice(&self.sequence.to_be_bytes());
         data.extend_from_slice(&self.payload);
-        blake3(&data)
+        blake3(&data).expect("BLAKE3 not available in FIPS strict mode")
     }
 
     /// Serialize the message to JSON bytes.

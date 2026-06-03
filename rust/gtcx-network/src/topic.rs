@@ -21,7 +21,7 @@ pub struct Topic {
 impl Topic {
     /// Create a new topic.
     pub fn new(name: &str) -> Self {
-        let hash = blake3(name.as_bytes());
+        let hash = blake3(name.as_bytes()).expect("BLAKE3 not available in FIPS strict mode");
         Self {
             name: name.to_string(),
             hash,

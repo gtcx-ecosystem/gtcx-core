@@ -22,7 +22,7 @@ pub fn commit(witness: &Witness, salt: &[u8; 32]) -> [u8; 32] {
     input.push(witness.circuit.to_tag());
     input.extend_from_slice(salt);
     input.extend_from_slice(&witness.data);
-    blake3(&input)
+    blake3(&input).expect("BLAKE3 not available in FIPS strict mode")
 }
 
 /// Generate a zero-knowledge proof for a witness.
@@ -40,7 +40,8 @@ pub fn generate_proof(witness: &Witness, salt: &[u8; 32]) -> Proof {
     let commitment = commit(witness, salt);
 
     // Proof = keyed_blake3(salt, witness_data) — proves knowledge of witness
-    let response = blake3_keyed(salt, &witness.data);
+    let response = blake3_keyed(salt, &witness.data)
+        .expect("BLAKE3 not available in FIPS strict mode");
 
     let mut proof_data = Vec::with_capacity(64);
     proof_data.extend_from_slice(salt);

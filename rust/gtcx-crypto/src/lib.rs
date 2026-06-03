@@ -73,6 +73,7 @@ pub mod chain;
 #[cfg(feature = "cloud_kms")]
 pub mod cloud_kms_keystore;
 pub mod error;
+pub mod fips;
 pub mod hashing;
 pub mod keys;
 pub mod keystore;
@@ -99,8 +100,11 @@ pub use signing::secp256k1;
 // Hashing
 pub use hashing::{
     blake3, blake3_checked, blake3_derive, blake3_derive_checked, blake3_keyed,
-    blake3_keyed_checked, fips_mode_only, sha256, sha512,
+    blake3_keyed_checked, sha256, sha512,
 };
+
+// FIPS runtime policy
+pub use fips::fips_mode_only;
 
 // Keys
 pub use keys::{generate_keypair, KeyPair};

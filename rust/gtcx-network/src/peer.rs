@@ -14,7 +14,7 @@ impl PeerId {
     ///
     /// The peer ID is the hex-encoded Blake3 hash of the public key bytes.
     pub fn from_public_key(public_key_bytes: &[u8; 32]) -> Self {
-        let hash = blake3(public_key_bytes);
+        let hash = blake3(public_key_bytes).expect("BLAKE3 not available in FIPS strict mode");
         Self(hex::encode(&hash[..16])) // Use first 16 bytes for shorter IDs
     }
 

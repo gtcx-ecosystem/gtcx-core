@@ -4,11 +4,17 @@
 //!
 //! ## Algorithms
 //!
-//! | Algorithm | Output | Speed | Use Case |
-//! |-----------|--------|-------|----------|
-//! | SHA-256 | 32 bytes | Moderate | Standard, compatibility |
-//! | SHA-512 | 64 bytes | Fast on 64-bit | Large hashes |
-//! | Blake3 | 32 bytes | Fastest | Performance-critical |
+//! | Algorithm | Output | Speed | Use Case | FIPS 140-3 |
+//! |-----------|--------|-------|----------|------------|
+//! | SHA-256 | 32 bytes | Moderate | Standard, compatibility | ✅ Approved |
+//! | SHA-512 | 64 bytes | Fast on 64-bit | Large hashes | ✅ Approved |
+//! | Blake3 | 32 bytes | Fastest | Performance-critical | ❌ Supplementary |
+//!
+//! ## FIPS Strict Mode
+//!
+//! When `GTCX_FIPS_STRICT=1` is set in the environment, all BLAKE3
+//! functions return [`CryptoError::NonFipsAlgorithm`]. Use SHA-256 or
+//! SHA-512 for FIPS-compliant hashing.
 //!
 //! ## Example
 //!
@@ -17,42 +23,19 @@
 //!
 //! let hash256 = sha256(b"Hello, GTCX!");
 //! let hash512 = sha512(b"Hello, GTCX!");
-//! let hash_blake = blake3(b"Hello, GTCX!");
+//! let hash_blake = blake3(b"Hello, GTCX!").unwrap();
 //! ```
 
 use sha2::{Digest, Sha256, Sha512};
 use tracing::instrument;
 
 use crate::error::CryptoError;
-
-/// Check if FIPS strict mode is enabled.
-///
-/// When `GTCX_FIPS_STRICT=1` is set in the environment, only FIPS-approved
-/// algorithms (SHA-256, SHA-512) may be used. BLAKE3 is rejected.
-///
-/// # Returns
-///
-/// `true` if `GTCX_FIPS_STRICT` is set to `"1"`, `false` otherwise.
-pub fn fips_mode_only() -> bool {
-    std::env::var("GTCX_FIPS_STRICT")
-        .map(|v| v == "1")
-        .unwrap_or(false)
-}
-
-/// Verify that FIPS strict mode is not active, or return an error.
-///
-/// Call this before using non-FIPS algorithms (e.g., BLAKE3).
-fn assert_fips_permissive(algorithm: &'static str) -> Result<(), CryptoError> {
-    if fips_mode_only() {
-        Err(CryptoError::NonFipsAlgorithm { algorithm })
-    } else {
-        Ok(())
-    }
-}
+use crate::fips::assert_fips_permissive;
 
 /// Compute SHA-256 hash of input data.
 ///
 /// This is a **pure function**: same input always produces same output.
+/// SHA-256 is FIPS 140-3 approved.
 ///
 /// # Arguments
 ///
@@ -80,6 +63,7 @@ pub fn sha256(data: &[u8]) -> [u8; 32] {
 /// Compute SHA-512 hash of input data.
 ///
 /// This is a **pure function**: same input always produces same output.
+/// SHA-512 is FIPS 140-3 approved.
 ///
 /// # Arguments
 ///
@@ -109,7 +93,9 @@ pub fn sha512(data: &[u8]) -> [u8; 64] {
 /// Blake3 is the fastest cryptographic hash function available,
 /// optimized for modern CPUs with SIMD instructions.
 ///
-/// This is a **pure function**: same input always produces same output.
+/// **FIPS Note:** BLAKE3 is NOT FIPS 140-3 approved. When
+/// `GTCX_FIPS_STRICT=1` is set, this function returns
+/// [`CryptoError::NonFipsAlgorithm`].
 ///
 /// # Arguments
 ///
@@ -117,25 +103,27 @@ pub fn sha512(data: &[u8]) -> [u8; 64] {
 ///
 /// # Returns
 ///
-/// A 32-byte Blake3 hash.
+/// A 32-byte Blake3 hash, or an error in FIPS strict mode.
 ///
 /// # Example
 ///
 /// ```rust
 /// use gtcx_crypto::hashing::blake3;
 ///
-/// let hash = blake3(b"Hello, GTCX!");
+/// let hash = blake3(b"Hello, GTCX!").unwrap();
 /// assert_eq!(hash.len(), 32);
 /// ```
 #[instrument(skip_all, fields(data_len = data.len()))]
-pub fn blake3(data: &[u8]) -> [u8; 32] {
-    blake3::hash(data).into()
+pub fn blake3(data: &[u8]) -> Result<[u8; 32], CryptoError> {
+    assert_fips_permissive("blake3")?;
+    Ok(blake3::hash(data).into())
 }
 
-/// Compute Blake3 hash of input data, respecting FIPS strict mode.
+/// Compute Blake3 hash, explicitly checking FIPS strict mode.
 ///
-/// Returns `Err(CryptoError::NonFipsAlgorithm)` when `GTCX_FIPS_STRICT=1`.
-/// Use this in security-critical paths where FIPS compliance is required.
+/// This is an alias for [`blake3`] — since M10.2, the raw `blake3`
+/// function already enforces FIPS strict mode. This function is
+/// kept for backward compatibility.
 ///
 /// # Example
 ///
@@ -147,14 +135,17 @@ pub fn blake3(data: &[u8]) -> [u8; 32] {
 /// ```
 #[instrument(skip_all, fields(data_len = data.len()))]
 pub fn blake3_checked(data: &[u8]) -> Result<[u8; 32], CryptoError> {
-    assert_fips_permissive("blake3")?;
-    Ok(blake3(data))
+    blake3(data)
 }
 
 /// Compute Blake3 hash with a key (keyed hash / MAC).
 ///
 /// This produces a message authentication code (MAC) that can only
 /// be verified by someone who knows the key.
+///
+/// **FIPS Note:** BLAKE3 is NOT FIPS 140-3 approved. When
+/// `GTCX_FIPS_STRICT=1` is set, this function returns
+/// [`CryptoError::NonFipsAlgorithm`].
 ///
 /// # Arguments
 ///
@@ -163,7 +154,7 @@ pub fn blake3_checked(data: &[u8]) -> Result<[u8; 32], CryptoError> {
 ///
 /// # Returns
 ///
-/// A 32-byte keyed Blake3 hash.
+/// A 32-byte keyed Blake3 hash, or an error in FIPS strict mode.
 ///
 /// # Example
 ///
@@ -171,27 +162,31 @@ pub fn blake3_checked(data: &[u8]) -> Result<[u8; 32], CryptoError> {
 /// use gtcx_crypto::hashing::blake3_keyed;
 ///
 /// let key = [0u8; 32]; // Use a proper secret key in production
-/// let mac = blake3_keyed(&key, b"Hello, GTCX!");
+/// let mac = blake3_keyed(&key, b"Hello, GTCX!").unwrap();
 /// assert_eq!(mac.len(), 32);
 /// ```
 #[instrument(skip_all, fields(data_len = data.len()))]
-pub fn blake3_keyed(key: &[u8; 32], data: &[u8]) -> [u8; 32] {
-    blake3::keyed_hash(key, data).into()
+pub fn blake3_keyed(key: &[u8; 32], data: &[u8]) -> Result<[u8; 32], CryptoError> {
+    assert_fips_permissive("blake3-keyed")?;
+    Ok(blake3::keyed_hash(key, data).into())
 }
 
-/// Compute keyed Blake3 hash, respecting FIPS strict mode.
+/// Compute keyed Blake3 hash, explicitly checking FIPS strict mode.
 ///
-/// Returns `Err(CryptoError::NonFipsAlgorithm)` when `GTCX_FIPS_STRICT=1`.
+/// Alias for [`blake3_keyed`] — kept for backward compatibility.
 #[instrument(skip_all, fields(data_len = data.len()))]
 pub fn blake3_keyed_checked(key: &[u8; 32], data: &[u8]) -> Result<[u8; 32], CryptoError> {
-    assert_fips_permissive("blake3-keyed")?;
-    Ok(blake3_keyed(key, data))
+    blake3_keyed(key, data)
 }
 
 /// Compute Blake3 key derivation.
 ///
 /// Derives a subkey from a master key and context string.
 /// Useful for deriving multiple keys from a single master secret.
+///
+/// **FIPS Note:** BLAKE3 is NOT FIPS 140-3 approved. When
+/// `GTCX_FIPS_STRICT=1` is set, this function returns
+/// [`CryptoError::NonFipsAlgorithm`].
 ///
 /// # Arguments
 ///
@@ -200,7 +195,7 @@ pub fn blake3_keyed_checked(key: &[u8; 32], data: &[u8]) -> Result<[u8; 32], Cry
 ///
 /// # Returns
 ///
-/// A 32-byte derived key.
+/// A 32-byte derived key, or an error in FIPS strict mode.
 ///
 /// # Example
 ///
@@ -208,24 +203,24 @@ pub fn blake3_keyed_checked(key: &[u8; 32], data: &[u8]) -> Result<[u8; 32], Cry
 /// use gtcx_crypto::hashing::blake3_derive;
 ///
 /// let master_key = b"my-master-secret-key";
-/// let signing_key = blake3_derive("GTCX signing key v1", master_key);
-/// let encryption_key = blake3_derive("GTCX encryption key v1", master_key);
+/// let signing_key = blake3_derive("GTCX signing key v1", master_key).unwrap();
+/// let encryption_key = blake3_derive("GTCX encryption key v1", master_key).unwrap();
 ///
 /// // Different contexts produce different keys
 /// assert_ne!(signing_key, encryption_key);
 /// ```
 #[instrument(skip_all, fields(context = context))]
-pub fn blake3_derive(context: &str, key_material: &[u8]) -> [u8; 32] {
-    blake3::derive_key(context, key_material)
+pub fn blake3_derive(context: &str, key_material: &[u8]) -> Result<[u8; 32], CryptoError> {
+    assert_fips_permissive("blake3-derive")?;
+    Ok(blake3::derive_key(context, key_material))
 }
 
-/// Derive a subkey via Blake3 KDF, respecting FIPS strict mode.
+/// Derive a subkey via Blake3 KDF, explicitly checking FIPS strict mode.
 ///
-/// Returns `Err(CryptoError::NonFipsAlgorithm)` when `GTCX_FIPS_STRICT=1`.
+/// Alias for [`blake3_derive`] — kept for backward compatibility.
 #[instrument(skip_all, fields(context = context))]
 pub fn blake3_derive_checked(context: &str, key_material: &[u8]) -> Result<[u8; 32], CryptoError> {
-    assert_fips_permissive("blake3-derive")?;
-    Ok(blake3_derive(context, key_material))
+    blake3_derive(context, key_material)
 }
 
 #[cfg(test)]
@@ -255,36 +250,36 @@ mod tests {
 
     #[test]
     fn test_blake3_deterministic() {
-        let hash1 = blake3(b"test data");
-        let hash2 = blake3(b"test data");
+        let hash1 = blake3(b"test data").unwrap();
+        let hash2 = blake3(b"test data").unwrap();
         assert_eq!(hash1, hash2);
     }
 
     #[test]
     fn test_blake3_different_inputs() {
-        let hash1 = blake3(b"input 1");
-        let hash2 = blake3(b"input 2");
+        let hash1 = blake3(b"input 1").unwrap();
+        let hash2 = blake3(b"input 2").unwrap();
         assert_ne!(hash1, hash2);
     }
 
     #[test]
     fn test_blake3_keyed_mac() {
         let key = [42u8; 32];
-        let mac1 = blake3_keyed(&key, b"message");
-        let mac2 = blake3_keyed(&key, b"message");
+        let mac1 = blake3_keyed(&key, b"message").unwrap();
+        let mac2 = blake3_keyed(&key, b"message").unwrap();
         assert_eq!(mac1, mac2);
 
         // Different key = different MAC
         let different_key = [43u8; 32];
-        let mac3 = blake3_keyed(&different_key, b"message");
+        let mac3 = blake3_keyed(&different_key, b"message").unwrap();
         assert_ne!(mac1, mac3);
     }
 
     #[test]
     fn test_blake3_derive_different_contexts() {
         let master = b"master-key-material";
-        let key1 = blake3_derive("context-1", master);
-        let key2 = blake3_derive("context-2", master);
+        let key1 = blake3_derive("context-1", master).unwrap();
+        let key2 = blake3_derive("context-2", master).unwrap();
         assert_ne!(key1, key2);
     }
 
@@ -293,7 +288,7 @@ mod tests {
         // Should not panic on empty input
         let _ = sha256(b"");
         let _ = sha512(b"");
-        let _ = blake3(b"");
+        let _ = blake3(b"").unwrap();
     }
 
     #[test]
@@ -301,7 +296,7 @@ mod tests {
         // Should handle large inputs
         let large_data = vec![0u8; 1_000_000]; // 1 MB
         let _ = sha256(&large_data);
-        let _ = blake3(&large_data);
+        let _ = blake3(&large_data).unwrap();
     }
 
     #[test]
@@ -309,33 +304,54 @@ mod tests {
         // Set FIPS strict mode
         unsafe { std::env::set_var("GTCX_FIPS_STRICT", "1") };
 
-        // blake3_checked should reject
-        let err = blake3_checked(b"test").unwrap_err();
-        assert!(matches!(
-            err,
-            CryptoError::NonFipsAlgorithm {
-                algorithm: "blake3"
-            }
-        ));
+        // blake3 should reject
+        let err = blake3(b"test").unwrap_err();
+        assert!(
+            matches!(
+                err,
+                CryptoError::NonFipsAlgorithm {
+                    algorithm: "blake3"
+                }
+            ),
+            "expected NonFipsAlgorithm for blake3, got {err:?}"
+        );
 
-        // blake3_keyed_checked should reject
+        // blake3_keyed should reject
         let key = [0u8; 32];
-        let err = blake3_keyed_checked(&key, b"test").unwrap_err();
-        assert!(matches!(
-            err,
-            CryptoError::NonFipsAlgorithm {
-                algorithm: "blake3-keyed"
-            }
-        ));
+        let err = blake3_keyed(&key, b"test").unwrap_err();
+        assert!(
+            matches!(
+                err,
+                CryptoError::NonFipsAlgorithm {
+                    algorithm: "blake3-keyed"
+                }
+            ),
+            "expected NonFipsAlgorithm for blake3-keyed, got {err:?}"
+        );
 
-        // blake3_derive_checked should reject
-        let err = blake3_derive_checked("ctx", b"material").unwrap_err();
-        assert!(matches!(
-            err,
-            CryptoError::NonFipsAlgorithm {
-                algorithm: "blake3-derive"
-            }
-        ));
+        // blake3_derive should reject
+        let err = blake3_derive("ctx", b"material").unwrap_err();
+        assert!(
+            matches!(
+                err,
+                CryptoError::NonFipsAlgorithm {
+                    algorithm: "blake3-derive"
+                }
+            ),
+            "expected NonFipsAlgorithm for blake3-derive, got {err:?}"
+        );
+
+        // blake3_checked should also reject (alias)
+        let err = blake3_checked(b"test").unwrap_err();
+        assert!(
+            matches!(
+                err,
+                CryptoError::NonFipsAlgorithm {
+                    algorithm: "blake3"
+                }
+            ),
+            "expected NonFipsAlgorithm for blake3_checked, got {err:?}"
+        );
 
         // Clean up
         unsafe { std::env::remove_var("GTCX_FIPS_STRICT") };
@@ -346,29 +362,15 @@ mod tests {
         // Ensure FIPS mode is off
         unsafe { std::env::remove_var("GTCX_FIPS_STRICT") };
 
-        // blake3_checked should succeed when FIPS strict is off
-        let hash = blake3_checked(b"test").unwrap();
-        assert_eq!(hash, blake3(b"test"));
+        // All BLAKE3 variants should succeed when FIPS strict is off
+        let hash = blake3(b"test").unwrap();
+        assert_eq!(hash, *blake3::hash(b"test").as_bytes());
 
         let key = [0u8; 32];
-        let hash = blake3_keyed_checked(&key, b"test").unwrap();
-        assert_eq!(hash, blake3_keyed(&key, b"test"));
+        let hash = blake3_keyed(&key, b"test").unwrap();
+        assert_eq!(hash, *blake3::keyed_hash(&key, b"test").as_bytes());
 
-        let hash = blake3_derive_checked("ctx", b"material").unwrap();
-        assert_eq!(hash, blake3_derive("ctx", b"material"));
-    }
-
-    #[test]
-    fn test_fips_mode_only() {
-        unsafe { std::env::set_var("GTCX_FIPS_STRICT", "1") };
-        assert!(fips_mode_only());
-
-        unsafe { std::env::remove_var("GTCX_FIPS_STRICT") };
-        assert!(!fips_mode_only());
-
-        unsafe { std::env::set_var("GTCX_FIPS_STRICT", "0") };
-        assert!(!fips_mode_only());
-
-        unsafe { std::env::remove_var("GTCX_FIPS_STRICT") };
+        let hash = blake3_derive("ctx", b"material").unwrap();
+        assert_eq!(hash, blake3::derive_key("ctx", b"material"));
     }
 }

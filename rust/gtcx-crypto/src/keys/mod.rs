@@ -110,7 +110,7 @@ pub fn generate_keypair_struct() -> KeyPair {
 #[instrument(skip(parent), fields(index = index))]
 pub fn derive_child_key(parent: &PrivateKey, index: u32) -> crate::Result<PrivateKey> {
     let context = format!("GTCX-2026 child key derivation index {index}");
-    let derived_bytes = blake3_derive(&context, parent.as_bytes());
+    let derived_bytes = blake3_derive(&context, parent.as_bytes())?;
     PrivateKey::from_bytes(&derived_bytes)
 }
 
@@ -145,7 +145,7 @@ pub fn derive_child_key(parent: &PrivateKey, index: u32) -> crate::Result<Privat
 #[instrument(skip(master), fields(purpose = purpose))]
 pub fn derive_purpose_key(master: &PrivateKey, purpose: &str) -> crate::Result<PrivateKey> {
     let context = format!("GTCX-2026 purpose key: {purpose}");
-    let derived_bytes = blake3_derive(&context, master.as_bytes());
+    let derived_bytes = blake3_derive(&context, master.as_bytes())?;
     PrivateKey::from_bytes(&derived_bytes)
 }
 
