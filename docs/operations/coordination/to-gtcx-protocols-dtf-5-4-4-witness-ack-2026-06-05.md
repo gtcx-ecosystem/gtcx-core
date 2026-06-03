@@ -50,7 +50,14 @@ Circuit profile E2E per trust-portal ID (`gh-gold-origin`, `zw-diamond-origin`, 
 | Execution roadmap    | [`execution-roadmap.md`](../../audit/execution-roadmap.md)                         |
 | Agent work selection | [`agent-work-selection.md`](../agent-work-selection.md)                            |
 
-**Protocols P22:** backlogClear unchanged; blocked items unchanged (P22-EVID-03, S11-03, H-03) per operator note.
+**Protocols P22:** `backlogClear` unchanged; blocked items unchanged (**P22-EVID-03**, S11-03, H-03).
+
+| Blocker class                           | Protocols    | Intelligence (witness mirror `5142ff8`) |
+| --------------------------------------- | ------------ | --------------------------------------- |
+| Staging credentialed smoke / auth vault | P22-EVID-03  | **INT-S9-01** / OI-B08 (Wire #2)        |
+| Other P22 carry                         | S11-03, H-03 | —                                       |
+
+Intelligence: no DTF-5.4.4 code; INT-S9-02–05 done; next P22 item **INT-S9-06** (eval publish on staging) unless operator reprioritizes.
 
 ---
 
