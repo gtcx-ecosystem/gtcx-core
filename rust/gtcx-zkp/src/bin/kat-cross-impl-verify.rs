@@ -30,6 +30,7 @@ fn main() {
             "groth16-asset-ownership.kat.json",
             "groth16-location-region.kat.json",
             "groth16-commodity-origin.kat.json",
+            "groth16-gh-gold-origin.kat.json",
         ];
         let mut all_ok = true;
         for name in &circuits {

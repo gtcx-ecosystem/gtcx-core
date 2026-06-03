@@ -747,6 +747,63 @@ fn test_kat_commodity_origin_proof_verifies() {
 }
 
 #[test]
+fn test_kat_gh_gold_origin_profile_proof_verifies() {
+    use crate::types::{Groth16CircuitType, Groth16ProofBundle};
+
+    let kat_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../artifacts/kat/groth16-gh-gold-origin.kat.json");
+    if !kat_path.exists() {
+        return;
+    }
+    let kat_json: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&kat_path).unwrap()).unwrap();
+
+    assert_eq!(kat_json["circuit"].as_str().unwrap(), "CommodityOrigin");
+    assert_eq!(
+        kat_json["profile_id"].as_str().unwrap(),
+        "gh-gold-origin"
+    );
+    assert!(kat_json["expected_verify"].as_bool().unwrap());
+
+    let proof_bytes = hex::decode(kat_json["proof_bytes"].as_str().unwrap()).unwrap();
+    let vk_bytes = hex::decode(kat_json["verifying_key_bytes"].as_str().unwrap()).unwrap();
+
+    let public_inputs = {
+        let pi = &kat_json["public_inputs"];
+        let mut inputs = Vec::new();
+        let commodity_type = pi["commodity_type"].as_u64().unwrap();
+        inputs.extend((0..64).map(|i| Fr::from((commodity_type >> i) & 1)));
+        for field in [
+            "region_hash",
+            "primary_commitment",
+            "secondary_commitment",
+            "mines_root",
+        ] {
+            let bytes = hex::decode(pi[field].as_str().unwrap()).unwrap();
+            for byte in &bytes {
+                for i in 0..8 {
+                    inputs.push(Fr::from(u64::from((byte >> i) & 1)));
+                }
+            }
+        }
+        for field in ["min_primary", "min_secondary", "certification_flags"] {
+            let v = pi[field].as_u64().unwrap();
+            inputs.extend((0..64).map(|i| Fr::from((v >> i) & 1)));
+        }
+        inputs
+    };
+
+    let bundle = Groth16ProofBundle {
+        circuit: Groth16CircuitType::CommodityOrigin,
+        proof: proof_bytes,
+        verifying_key: vk_bytes,
+        public_inputs,
+    };
+
+    assert!(groth16_verify(&bundle).unwrap(), "gh-gold-origin KAT must verify");
+}
+
+#[test]
 fn test_kat_gci_threshold_proof_verifies() {
     use crate::types::{Groth16CircuitType, Groth16ProofBundle};
 

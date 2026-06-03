@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
+import { GH_GOLD_ORIGIN_PROFILE } from '../src/circuit-profiles';
 import {
   buildCommodityOriginWitness,
   serializeCommodityOriginWitness,
@@ -10,7 +11,7 @@ import {
 import type { WorkProofCredentialSubject } from '../src/workproof/types';
 
 const ghanaBounds: [number, number, number, number] = [
-  4_500_000, 11_500_000, -3_500_000, 1_500_000,
+  4_700_000, 11_200_000, 176_700_000, 181_200_000,
 ];
 
 const baseSubject: WorkProofCredentialSubject = {
@@ -98,10 +99,12 @@ describe('buildCommodityOriginWitness', () => {
     expect(witness.commodityType).toBe(commodityTypeFromLabel('gold'));
     expect(witness.mineIdHex).toHaveLength(64);
     expect(witness.lat).toBe(6_200_000);
-    expect(witness.lon).toBe(-1_680_000);
+    expect(witness.lon).toBe(178_320_000);
     expect(witness.primaryMetric).toBe(995);
     expect(witness.secondaryMetric).toBe(1000);
-    expect(witness.certificationFlags & 1).toBe(1);
+    expect(witness.certificationFlags & GH_GOLD_ORIGIN_PROFILE.requiredCertificationMask).toBe(
+      GH_GOLD_ORIGIN_PROFILE.requiredCertificationMask
+    );
 
     const json = serializeCommodityOriginWitness(witness);
     const parsed = JSON.parse(json) as Record<string, unknown>;

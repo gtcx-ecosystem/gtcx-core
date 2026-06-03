@@ -25,6 +25,10 @@ export interface Groth16KatArtifact {
   proof_bytes: string;
   verifying_key_bytes: string;
   expected_verify: boolean;
+  /** Policy profile ID when this KAT is an alias on CommodityOrigin (e.g. gh-gold-origin). */
+  profile_id?: string;
+  /** Underlying R1CS circuit name for profile aliases. */
+  underlying_circuit?: string;
 }
 
 export interface BulletproofsKatPublicInputs {
@@ -62,5 +66,6 @@ export type KatCircuitName =
   | 'groth16-asset-ownership'
   | 'groth16-location-region'
   | 'groth16-commodity-origin'
+  | 'groth16-gh-gold-origin'
   | 'bulletproofs-amount-range'
   | 'bulletproofs-commodity-range';

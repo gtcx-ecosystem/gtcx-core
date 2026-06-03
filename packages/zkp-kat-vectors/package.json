@@ -32,6 +32,11 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
+    "./groth16-gh-gold-origin": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
     "./bulletproofs-amount-range": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",

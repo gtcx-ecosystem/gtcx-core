@@ -43,7 +43,12 @@ export function commodityTypeFromLabel(commodity: string): number {
   return 0;
 }
 
-/** Encode decimal degrees as u64 fixed-point (micro-degrees). */
+/** Encode latitude micro-degrees (decimal degrees × 1e6). */
 export function coordToCircuitU64(degrees: number): number {
   return Math.round(degrees * 1_000_000);
+}
+
+/** Encode longitude for u64 circuits (micro-degrees with +180° offset). */
+export function lonToCircuitU64(degrees: number): number {
+  return Math.round((degrees + 180) * 1_000_000);
 }

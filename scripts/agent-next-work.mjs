@@ -23,7 +23,7 @@ const TIER5_MILESTONES = [
   },
   {
     id: 'DTF-5.1.2',
-    title: 'gh-gold-origin Groth16 R1CS + negative tests',
+    title: 'Commodity-origin R1CS + gh-gold-origin profile + negative tests',
     sprint: 'S-T5-1',
     workClass: 'code',
   },

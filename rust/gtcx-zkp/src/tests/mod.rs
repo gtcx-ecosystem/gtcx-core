@@ -1,3 +1,4 @@
+mod circuit_profiles;
 mod bulletproofs;
 mod commitment;
 mod error;

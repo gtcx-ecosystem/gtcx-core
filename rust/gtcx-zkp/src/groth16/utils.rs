@@ -205,6 +205,38 @@ pub fn sample_location_region() -> Result<LocationRegionSample> {
     })
 }
 
+/// Inputs for [`build_commodity_origin_sample`] (profile-agnostic builder).
+pub struct CommodityOriginBuildParams {
+    /// Commodity type discriminator.
+    pub commodity_type: u64,
+    /// Mine identifier witness.
+    pub mine_id: [u8; ASSET_ID_BYTES],
+    /// Latitude witness.
+    pub lat: u64,
+    /// Longitude witness.
+    pub lon: u64,
+    /// Primary quality metric witness.
+    pub primary_metric: u64,
+    /// Secondary quality metric witness.
+    pub secondary_metric: u64,
+    /// Primary commitment blinding.
+    pub primary_randomness: [u8; RANDOMNESS_BYTES],
+    /// Secondary commitment blinding.
+    pub secondary_randomness: [u8; RANDOMNESS_BYTES],
+    /// Location commitment blinding.
+    pub location_randomness: [u8; RANDOMNESS_BYTES],
+    /// GPS bounds witness `[min_lat, max_lat, min_lon, max_lon]`.
+    pub bounds: [u64; 4],
+    /// Minimum primary threshold.
+    pub min_primary: u64,
+    /// Minimum secondary threshold.
+    pub min_secondary: u64,
+    /// Certification flags (public input).
+    pub certification_flags: u64,
+    /// Leaf index in the deterministic 4-leaf lab Merkle tree.
+    pub merkle_leaf_index: usize,
+}
+
 /// Sample witness data for commodity origin circuit tests and KAT generation.
 pub struct CommodityOriginSample {
     /// Commodity type identifier (e.g., 0 = gold, 1 = diamond).
@@ -245,40 +277,26 @@ pub struct CommodityOriginSample {
     pub merkle_path: Path<AssetOwnershipMerkleConfig>,
 }
 
-/// Generate a sample commodity origin witness for testing and KAT vector generation.
-pub fn sample_commodity_origin() -> Result<CommodityOriginSample> {
-    let commodity_type = 0u64; // 0 = gold
-    let mine_id = [1u8; ASSET_ID_BYTES];
-    let lat = 15u64;
-    let lon = 35u64;
-    let primary_metric = 995u64; // 99.5% purity
-    let secondary_metric = 1_000u64; // 1kg in grams
-    let primary_randomness = [10u8; RANDOMNESS_BYTES];
-    let secondary_randomness = [11u8; RANDOMNESS_BYTES];
-    let location_randomness = [12u8; RANDOMNESS_BYTES];
-    let bounds = [10u64, 20u64, 30u64, 40u64];
-    let min_primary = 950u64;
-    let min_secondary = 500u64;
-    let certification_flags = 0u64; // no certifications for gold sample
-
-    // Compute commitments
+/// Build a commodity-origin sample from explicit parameters (used by profiles and tests).
+pub fn build_commodity_origin_sample(
+    params: CommodityOriginBuildParams,
+) -> Result<CommodityOriginSample> {
     let mut primary_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
-    primary_input.extend_from_slice(&u64_to_le_bytes(primary_metric));
-    primary_input.extend_from_slice(&primary_randomness);
+    primary_input.extend_from_slice(&u64_to_le_bytes(params.primary_metric));
+    primary_input.extend_from_slice(&params.primary_randomness);
     let primary_commitment = sha256_digest(&primary_input)?;
 
     let mut secondary_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
-    secondary_input.extend_from_slice(&u64_to_le_bytes(secondary_metric));
-    secondary_input.extend_from_slice(&secondary_randomness);
+    secondary_input.extend_from_slice(&u64_to_le_bytes(params.secondary_metric));
+    secondary_input.extend_from_slice(&params.secondary_randomness);
     let secondary_commitment = sha256_digest(&secondary_input)?;
 
     let mut region_input = Vec::with_capacity(U64_BYTES * 4);
-    for bound in bounds {
+    for bound in params.bounds {
         region_input.extend_from_slice(&u64_to_le_bytes(bound));
     }
     let region_hash = sha256_digest(&region_input)?;
 
-    // Build Merkle tree with mine_id || padding leaves
     let make_leaf = |id: [u8; ASSET_ID_BYTES]| {
         let mut leaf = Vec::with_capacity(ASSET_ID_BYTES + OWNER_HASH_BYTES);
         leaf.extend_from_slice(&id);
@@ -287,7 +305,7 @@ pub fn sample_commodity_origin() -> Result<CommodityOriginSample> {
     };
 
     let leaves = [
-        make_leaf(mine_id),
+        make_leaf(params.mine_id),
         make_leaf([2u8; ASSET_ID_BYTES]),
         make_leaf([3u8; ASSET_ID_BYTES]),
         make_leaf([4u8; ASSET_ID_BYTES]),
@@ -299,22 +317,24 @@ pub fn sample_commodity_origin() -> Result<CommodityOriginSample> {
     let tree = AssetOwnershipMerkleTree::new(&(), &(), leaves.iter().map(|leaf| leaf.as_slice()))
         .map_err(map_proof_system_error)?;
     let mines_root = vec_to_digest(tree.root())?;
-    let merkle_path = tree.generate_proof(0).map_err(map_proof_system_error)?;
+    let merkle_path = tree
+        .generate_proof(params.merkle_leaf_index)
+        .map_err(map_proof_system_error)?;
 
     Ok(CommodityOriginSample {
-        commodity_type,
-        mine_id,
-        lat,
-        lon,
-        primary_metric,
-        secondary_metric,
-        primary_randomness,
-        secondary_randomness,
-        location_randomness,
-        bounds,
-        min_primary,
-        min_secondary,
-        certification_flags,
+        commodity_type: params.commodity_type,
+        mine_id: params.mine_id,
+        lat: params.lat,
+        lon: params.lon,
+        primary_metric: params.primary_metric,
+        secondary_metric: params.secondary_metric,
+        primary_randomness: params.primary_randomness,
+        secondary_randomness: params.secondary_randomness,
+        location_randomness: params.location_randomness,
+        bounds: params.bounds,
+        min_primary: params.min_primary,
+        min_secondary: params.min_secondary,
+        certification_flags: params.certification_flags,
         region_hash,
         primary_commitment,
         secondary_commitment,
@@ -323,82 +343,44 @@ pub fn sample_commodity_origin() -> Result<CommodityOriginSample> {
     })
 }
 
+/// Generate a sample commodity origin witness for testing and KAT vector generation.
+pub fn sample_commodity_origin() -> Result<CommodityOriginSample> {
+    build_commodity_origin_sample(CommodityOriginBuildParams {
+        commodity_type: 0u64,
+        mine_id: [1u8; ASSET_ID_BYTES],
+        lat: 15u64,
+        lon: 35u64,
+        primary_metric: 995u64,
+        secondary_metric: 1_000u64,
+        primary_randomness: [10u8; RANDOMNESS_BYTES],
+        secondary_randomness: [11u8; RANDOMNESS_BYTES],
+        location_randomness: [12u8; RANDOMNESS_BYTES],
+        bounds: [10u64, 20u64, 30u64, 40u64],
+        min_primary: 950u64,
+        min_secondary: 500u64,
+        certification_flags: 0u64,
+        merkle_leaf_index: 0,
+    })
+}
+
 /// Create a sample diamond origin witness using the generic commodity origin circuit.
 /// Returns a `CommodityOriginSample` with commodity_type = 1 (diamond) and KP flag set.
 #[cfg(test)]
 pub fn sample_diamond_origin() -> Result<CommodityOriginSample> {
-    let commodity_type = 1u64; // 1 = diamond
-    let mine_id = [2u8; ASSET_ID_BYTES];
-    let lat = 18u64;
-    let lon = 30u64;
-    let primary_metric = 85u64; // VVS1+ clarity score
-    let secondary_metric = 500u64; // 0.5 carat in centi-carats
-    let primary_randomness = [13u8; RANDOMNESS_BYTES];
-    let secondary_randomness = [14u8; RANDOMNESS_BYTES];
-    let location_randomness = [15u8; RANDOMNESS_BYTES];
-    let bounds = [15u64, 25u64, 25u64, 35u64];
-    let min_primary = 70u64;
-    let min_secondary = 100u64;
-    let certification_flags = 1u64; // bit 0 = KP certified
-
-    // Compute commitments
-    let mut primary_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
-    primary_input.extend_from_slice(&u64_to_le_bytes(primary_metric));
-    primary_input.extend_from_slice(&primary_randomness);
-    let primary_commitment = sha256_digest(&primary_input)?;
-
-    let mut secondary_input = Vec::with_capacity(U64_BYTES + RANDOMNESS_BYTES);
-    secondary_input.extend_from_slice(&u64_to_le_bytes(secondary_metric));
-    secondary_input.extend_from_slice(&secondary_randomness);
-    let secondary_commitment = sha256_digest(&secondary_input)?;
-
-    let mut region_input = Vec::with_capacity(U64_BYTES * 4);
-    for bound in bounds {
-        region_input.extend_from_slice(&u64_to_le_bytes(bound));
-    }
-    let region_hash = sha256_digest(&region_input)?;
-
-    // Build Merkle tree with mine_id || padding leaves
-    let make_leaf = |id: [u8; ASSET_ID_BYTES]| {
-        let mut leaf = Vec::with_capacity(ASSET_ID_BYTES + OWNER_HASH_BYTES);
-        leaf.extend_from_slice(&id);
-        leaf.extend_from_slice(&[0u8; OWNER_HASH_BYTES]);
-        leaf
-    };
-
-    let leaves = [
-        make_leaf([1u8; ASSET_ID_BYTES]),
-        make_leaf(mine_id),
-        make_leaf([3u8; ASSET_ID_BYTES]),
-        make_leaf([4u8; ASSET_ID_BYTES]),
-    ];
-
-    let mut rng = zk_rng();
-    <Sha256 as CRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
-    <Sha256 as TwoToOneCRHScheme>::setup(&mut rng).map_err(map_proof_system_error)?;
-    let tree = AssetOwnershipMerkleTree::new(&(), &(), leaves.iter().map(|leaf| leaf.as_slice()))
-        .map_err(map_proof_system_error)?;
-    let mines_root = vec_to_digest(tree.root())?;
-    let merkle_path = tree.generate_proof(1).map_err(map_proof_system_error)?;
-
-    Ok(CommodityOriginSample {
-        commodity_type,
-        mine_id,
-        lat,
-        lon,
-        primary_metric,
-        secondary_metric,
-        primary_randomness,
-        secondary_randomness,
-        location_randomness,
-        bounds,
-        min_primary,
-        min_secondary,
-        certification_flags,
-        region_hash,
-        primary_commitment,
-        secondary_commitment,
-        mines_root,
-        merkle_path,
+    build_commodity_origin_sample(CommodityOriginBuildParams {
+        commodity_type: 1u64,
+        mine_id: [2u8; ASSET_ID_BYTES],
+        lat: 18u64,
+        lon: 30u64,
+        primary_metric: 85u64,
+        secondary_metric: 500u64,
+        primary_randomness: [13u8; RANDOMNESS_BYTES],
+        secondary_randomness: [14u8; RANDOMNESS_BYTES],
+        location_randomness: [15u8; RANDOMNESS_BYTES],
+        bounds: [15u64, 25u64, 25u64, 35u64],
+        min_primary: 70u64,
+        min_secondary: 100u64,
+        certification_flags: 1u64,
+        merkle_leaf_index: 1,
     })
 }

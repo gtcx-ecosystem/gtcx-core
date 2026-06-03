@@ -5,6 +5,7 @@ import {
   groth16AssetOwnership,
   groth16LocationRegion,
   groth16CommodityOrigin,
+  groth16GhGoldOrigin,
   bulletproofsAmountRange,
   bulletproofsCommodityRange,
   katArtifacts,
@@ -12,21 +13,23 @@ import {
 } from '../src/index.js';
 
 describe('KAT artifact exports', () => {
-  it('exports all 6 KAT artifacts individually', () => {
+  it('exports all 7 KAT artifacts individually', () => {
     expect(groth16GciThreshold).toBeDefined();
     expect(groth16AssetOwnership).toBeDefined();
     expect(groth16LocationRegion).toBeDefined();
     expect(groth16CommodityOrigin).toBeDefined();
+    expect(groth16GhGoldOrigin).toBeDefined();
     expect(bulletproofsAmountRange).toBeDefined();
     expect(bulletproofsCommodityRange).toBeDefined();
   });
 
-  it('katArtifacts contains all 6 circuits', () => {
-    expect(Object.keys(katArtifacts)).toHaveLength(6);
+  it('katArtifacts contains all 7 circuits', () => {
+    expect(Object.keys(katArtifacts)).toHaveLength(7);
     expect(katArtifacts['groth16-gci-threshold']).toBe(groth16GciThreshold);
     expect(katArtifacts['groth16-asset-ownership']).toBe(groth16AssetOwnership);
     expect(katArtifacts['groth16-location-region']).toBe(groth16LocationRegion);
     expect(katArtifacts['groth16-commodity-origin']).toBe(groth16CommodityOrigin);
+    expect(katArtifacts['groth16-gh-gold-origin']).toBe(groth16GhGoldOrigin);
     expect(katArtifacts['bulletproofs-amount-range']).toBe(bulletproofsAmountRange);
     expect(katArtifacts['bulletproofs-commodity-range']).toBe(bulletproofsCommodityRange);
   });
@@ -42,6 +45,7 @@ describe('Groth16 KAT artifact structure', () => {
     { name: 'groth16-asset-ownership', artifact: groth16AssetOwnership },
     { name: 'groth16-location-region', artifact: groth16LocationRegion },
     { name: 'groth16-commodity-origin', artifact: groth16CommodityOrigin },
+    { name: 'groth16-gh-gold-origin', artifact: groth16GhGoldOrigin },
   ];
 
   it.each(groth16Artifacts)('$name has required fields', ({ artifact }) => {
@@ -90,6 +94,12 @@ describe('KAT artifact consistency', () => {
     for (const [name, artifact] of Object.entries(katArtifacts)) {
       expect(artifact.expected_verify, `expected_verify for ${name}`).toBe(true);
     }
+  });
+
+  it('gh-gold-origin KAT is a CommodityOrigin profile alias', () => {
+    expect(groth16GhGoldOrigin.circuit).toBe('CommodityOrigin');
+    expect(groth16GhGoldOrigin.profile_id).toBe('gh-gold-origin');
+    expect(groth16GhGoldOrigin.underlying_circuit).toBe('CommodityOrigin');
   });
 
   it('all artifacts have valid hex byte strings', () => {

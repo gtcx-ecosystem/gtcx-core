@@ -59,7 +59,7 @@ pub(crate) struct LocationRegionCircuit {
 /// (e.g., 0 = gold: purity/weight, 1 = diamond: clarity/carat).
 /// Certification flags are enforced off-chain by the verifier.
 #[derive(Clone)]
-pub(crate) struct CommodityOriginCircuit {
+pub struct CommodityOriginCircuit {
     pub(crate) commodity_type: Option<u64>,
     pub(crate) mine_id: Option<[u8; ASSET_ID_BYTES]>,
     pub(crate) lat: Option<u64>,
@@ -550,7 +550,10 @@ pub(crate) use utils::sha256_digest;
 pub use utils::sample_diamond_origin;
 use utils::*;
 pub(crate) use utils::serialize;
-pub use utils::{sample_asset_ownership, sample_commodity_origin, sample_location_region};
+pub use utils::{
+    build_commodity_origin_sample, sample_asset_ownership, sample_commodity_origin,
+    sample_location_region, CommodityOriginBuildParams, CommodityOriginSample,
+};
 
 mod ops;
 pub use ops::*;

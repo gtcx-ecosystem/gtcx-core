@@ -25,6 +25,7 @@
 mod bulletproofs;
 mod commitment;
 mod error;
+mod circuit_profiles;
 mod groth16;
 mod schnorr;
 mod witness;
@@ -44,12 +45,21 @@ pub use error::{Result, ZkpError};
 #[cfg(test)]
 pub use groth16::sample_diamond_origin;
 pub use groth16::{
-    groth16_generate_keys, groth16_prove_asset_ownership, groth16_prove_commodity_origin,
-    groth16_prove_gci_threshold, groth16_prove_location_region, groth16_verify,
-    sample_asset_ownership, sample_commodity_origin, sample_location_region,
+    build_commodity_origin_sample, groth16_generate_keys, groth16_prove_asset_ownership,
+    groth16_prove_commodity_origin, groth16_prove_gci_threshold, groth16_prove_location_region,
+    groth16_verify, sample_asset_ownership, sample_commodity_origin, sample_location_region,
+    CommodityOriginBuildParams, CommodityOriginSample,
 };
 pub use schnorr::{
     schnorr_attribute_hash, schnorr_prove_identity_attribute, schnorr_verify_identity_attribute,
+};
+pub use circuit_profiles::{
+    all_profile_ids, certification_mask_satisfied, commodity_origin_profile,
+    gh_gold_origin_profile, profile_by_id, sample_commodity_origin_for_profile,
+    zw_diamond_origin_profile,
+    validate_profile_sample, CertificationBit, CommodityOriginProfileConfig,
+    MetricSemantics, ProfileValidationError, ProfileValidationResult, PROFILE_GH_GOLD_ORIGIN,
+    PROFILE_ZW_DIAMOND_ORIGIN,
 };
 pub use witness::{
     CommodityOriginMerklePathWitness, CommodityOriginWitness, CommodityOriginWitnessDto,

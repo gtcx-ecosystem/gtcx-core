@@ -6,10 +6,12 @@
 //!   output-dir: defaults to artifacts/kat/
 
 use gtcx_zkp::{
-    bulletproofs_prove_amount_range, bulletproofs_prove_commodity_range, groth16_generate_keys,
-    groth16_prove_asset_ownership, groth16_prove_commodity_origin, groth16_prove_gci_threshold,
-    groth16_prove_location_region, groth16_verify, sample_asset_ownership, sample_commodity_origin,
-    sample_location_region, Groth16CircuitType,
+    bulletproofs_prove_amount_range, bulletproofs_prove_commodity_range, gh_gold_origin_profile,
+    groth16_generate_keys, groth16_prove_asset_ownership, groth16_prove_commodity_origin,
+    groth16_prove_gci_threshold, groth16_prove_location_region, groth16_verify,
+    sample_asset_ownership, sample_commodity_origin, sample_commodity_origin_for_profile,
+    sample_location_region, validate_profile_sample, CommodityOriginSample, Groth16CircuitType,
+    PROFILE_GH_GOLD_ORIGIN,
 };
 use sha2::{Digest, Sha256};
 use std::path::PathBuf;
@@ -18,7 +20,7 @@ fn main() {
     let circuit = std::env::args().nth(1).unwrap_or_else(|| {
         eprintln!("Usage: generate-kat <circuit> [output-dir]");
         eprintln!("Circuits: gci-threshold, asset-ownership, location-region, commodity-origin,");
-        eprintln!("          bulletproofs-amount, bulletproofs-commodity");
+        eprintln!("          gh-gold-origin (profile alias), bulletproofs-amount, bulletproofs-commodity");
         std::process::exit(1);
     });
 
@@ -31,6 +33,7 @@ fn main() {
 
     match circuit.as_str() {
         "commodity-origin" => generate_groth16_commodity_origin(&out_dir),
+        "gh-gold-origin" => generate_groth16_gh_gold_origin_profile(&out_dir),
         "gci-threshold" => generate_groth16_gci_threshold(&out_dir),
         "asset-ownership" => generate_groth16_asset_ownership(&out_dir),
         "location-region" => generate_groth16_location_region(&out_dir),
@@ -45,10 +48,39 @@ fn main() {
 
 fn generate_groth16_commodity_origin(out_dir: &PathBuf) {
     println!("Generating KAT vector for CommodityOrigin circuit...");
+    let sample = sample_commodity_origin().expect("sample generation failed");
+    write_commodity_origin_kat(
+        out_dir,
+        "groth16-commodity-origin.kat.json",
+        "CommodityOrigin",
+        None,
+        &sample,
+    );
+}
 
+fn generate_groth16_gh_gold_origin_profile(out_dir: &PathBuf) {
+    println!("Generating KAT vector for profile {PROFILE_GH_GOLD_ORIGIN} (underlying CommodityOrigin)...");
+    let profile = gh_gold_origin_profile();
+    let sample = sample_commodity_origin_for_profile(&profile).expect("profile sample failed");
+    validate_profile_sample(&profile, &sample).expect("profile validation failed");
+    write_commodity_origin_kat(
+        out_dir,
+        "groth16-gh-gold-origin.kat.json",
+        "CommodityOrigin",
+        Some(PROFILE_GH_GOLD_ORIGIN),
+        &sample,
+    );
+}
+
+fn write_commodity_origin_kat(
+    out_dir: &PathBuf,
+    filename: &str,
+    circuit_label: &str,
+    profile_id: Option<&str>,
+    sample: &CommodityOriginSample,
+) {
     let keys =
         groth16_generate_keys(Groth16CircuitType::CommodityOrigin).expect("key generation failed");
-    let sample = sample_commodity_origin().expect("sample generation failed");
 
     let (bundle, inputs) = groth16_prove_commodity_origin(
         sample.commodity_type,
@@ -64,7 +96,7 @@ fn generate_groth16_commodity_origin(out_dir: &PathBuf) {
         sample.min_primary,
         sample.min_secondary,
         sample.certification_flags,
-        sample.merkle_path,
+        sample.merkle_path.clone(),
         &keys,
     )
     .expect("proof generation failed");
@@ -72,9 +104,9 @@ fn generate_groth16_commodity_origin(out_dir: &PathBuf) {
     assert!(groth16_verify(&bundle).expect("verification error"));
 
     let vk_hash = hex::encode(Sha256::digest(&bundle.verifying_key));
-    let kat = serde_json::json!({
+    let mut kat = serde_json::json!({
         "version": "1.0.0",
-        "circuit": "CommodityOrigin",
+        "circuit": circuit_label,
         "generated_at": std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs(),
         "vk_hash": vk_hash,
         "witness": {
@@ -106,7 +138,12 @@ fn generate_groth16_commodity_origin(out_dir: &PathBuf) {
         "expected_verify": true,
     });
 
-    write_kat(out_dir, "groth16-commodity-origin.kat.json", &kat);
+    if let Some(id) = profile_id {
+        kat["profile_id"] = serde_json::Value::String(id.to_string());
+        kat["underlying_circuit"] = serde_json::Value::String("CommodityOrigin".to_string());
+    }
+
+    write_kat(out_dir, filename, &kat);
     print_summary(&vk_hash, &bundle.proof, &bundle.verifying_key);
 }
 

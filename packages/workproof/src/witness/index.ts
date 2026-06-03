@@ -1,3 +1,4 @@
+export { GH_GOLD_ORIGIN_PROFILE, profileById } from '../circuit-profiles';
 export {
   buildCommodityOriginWitness,
   serializeCommodityOriginWitness,
@@ -15,6 +16,7 @@ export {
 export {
   commodityTypeFromLabel,
   coordToCircuitU64,
+  lonToCircuitU64,
   digestHex32,
   parseGpsFromEvidenceMetadata,
   randomnessHex32,

@@ -1,3 +1,5 @@
+import { certificationBitMask, CertificationBit } from '../circuit-profiles/certification';
+import { GH_GOLD_ORIGIN_PROFILE } from '../circuit-profiles/gh-gold-origin';
 import type { WorkProofClaim, WorkProofCredentialSubject } from '../workproof/types';
 
 import { WitnessBuildError } from './errors';
@@ -9,6 +11,7 @@ import type {
 import {
   commodityTypeFromLabel,
   coordToCircuitU64,
+  lonToCircuitU64,
   digestHex32,
   parseGpsFromEvidenceMetadata,
   randomnessHex32,
@@ -60,15 +63,31 @@ export function buildCommodityOriginWitness(
   const commodityType = commodityTypeFromLabel(commodityLabel);
   const { primaryMetric, secondaryMetric } = extractMetrics(claims, produced);
 
-  const circuitTarget: WitnessCircuitTarget =
-    supplement.circuitTarget ?? (commodityType === 0 ? 'gh-gold-origin' : 'commodity-origin');
+  const useGhGoldProfile =
+    supplement.circuitTarget === 'gh-gold-origin' ||
+    (supplement.circuitTarget === undefined && commodityType === 0);
+
+  const circuitTarget: WitnessCircuitTarget = useGhGoldProfile
+    ? 'gh-gold-origin'
+    : (supplement.circuitTarget ?? 'commodity-origin');
+
+  const profileBounds = useGhGoldProfile ? GH_GOLD_ORIGIN_PROFILE.bounds : supplement.bounds;
+  const profileMinPrimary = useGhGoldProfile
+    ? GH_GOLD_ORIGIN_PROFILE.minPrimary
+    : supplement.minPrimary;
+  const profileMinSecondary = useGhGoldProfile
+    ? GH_GOLD_ORIGIN_PROFILE.minSecondary
+    : supplement.minSecondary;
 
   let certificationFlags = supplement.certificationFlags ?? 0;
   if (findClaim(claims, 'OriginAuthenticated')) {
-    certificationFlags |= 1;
+    certificationFlags |= certificationBitMask(CertificationBit.OriginAuthenticated);
   }
   if (findClaim(claims, 'GoldBuyingLicenseValid')) {
-    certificationFlags |= 2;
+    certificationFlags |= certificationBitMask(CertificationBit.RegulatoryExportLicense);
+  }
+  if (useGhGoldProfile) {
+    certificationFlags |= GH_GOLD_ORIGIN_PROFILE.requiredCertificationMask;
   }
 
   return {
@@ -76,15 +95,15 @@ export function buildCommodityOriginWitness(
     commodityType,
     mineIdHex: digestHex32(`gtcx:mine:${siteId}`),
     lat: coordToCircuitU64(gps.lat),
-    lon: coordToCircuitU64(gps.lon),
+    lon: lonToCircuitU64(gps.lon),
     primaryMetric,
     secondaryMetric,
     primaryRandomnessHex: supplement.primaryRandomnessHex ?? randomnessHex32(),
     secondaryRandomnessHex: supplement.secondaryRandomnessHex ?? randomnessHex32(),
     locationRandomnessHex: supplement.locationRandomnessHex ?? randomnessHex32(),
-    bounds: supplement.bounds,
-    minPrimary: supplement.minPrimary,
-    minSecondary: supplement.minSecondary,
+    bounds: profileBounds,
+    minPrimary: profileMinPrimary,
+    minSecondary: profileMinSecondary,
     certificationFlags,
     merklePath: supplement.merklePath,
   };

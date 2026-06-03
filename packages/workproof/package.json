@@ -55,6 +55,11 @@
       "types": "./dist/witness/index.d.ts",
       "import": "./dist/witness/index.mjs",
       "require": "./dist/witness/index.js"
+    },
+    "./circuit-profiles": {
+      "types": "./dist/circuit-profiles/index.d.ts",
+      "import": "./dist/circuit-profiles/index.mjs",
+      "require": "./dist/circuit-profiles/index.js"
     }
   },
   "scripts": {

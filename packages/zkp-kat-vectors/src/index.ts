@@ -29,6 +29,7 @@ import bulletproofsCommodityRangeJson from './data/bulletproofs-commodity-range.
 import groth16AssetOwnershipJson from './data/groth16-asset-ownership.kat.json' with { type: 'json' };
 import groth16CommodityOriginJson from './data/groth16-commodity-origin.kat.json' with { type: 'json' };
 import groth16GciThresholdJson from './data/groth16-gci-threshold.kat.json' with { type: 'json' };
+import groth16GhGoldOriginJson from './data/groth16-gh-gold-origin.kat.json' with { type: 'json' };
 import groth16LocationRegionJson from './data/groth16-location-region.kat.json' with { type: 'json' };
 
 export const groth16GciThreshold = groth16GciThresholdJson as typeof groth16GciThresholdJson;
@@ -36,6 +37,7 @@ export const groth16AssetOwnership = groth16AssetOwnershipJson as typeof groth16
 export const groth16LocationRegion = groth16LocationRegionJson as typeof groth16LocationRegionJson;
 export const groth16CommodityOrigin =
   groth16CommodityOriginJson as typeof groth16CommodityOriginJson;
+export const groth16GhGoldOrigin = groth16GhGoldOriginJson as typeof groth16GhGoldOriginJson;
 export const bulletproofsAmountRange =
   bulletproofsAmountRangeJson as typeof bulletproofsAmountRangeJson;
 export const bulletproofsCommodityRange =
@@ -47,6 +49,7 @@ export const katArtifacts = {
   'groth16-asset-ownership': groth16AssetOwnership,
   'groth16-location-region': groth16LocationRegion,
   'groth16-commodity-origin': groth16CommodityOrigin,
+  'groth16-gh-gold-origin': groth16GhGoldOrigin,
   'bulletproofs-amount-range': bulletproofsAmountRange,
   'bulletproofs-commodity-range': bulletproofsCommodityRange,
 } as const;
