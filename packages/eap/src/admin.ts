@@ -36,7 +36,9 @@ export class EapAdminService {
     this.registry = options.registry ?? new InMemoryEapRegistry();
     this.secretWriter = options.secretWriter ?? new StubSecretWriter();
     this.servicesSynced = options.servicesSynced ?? [`gtcx-intelligence/${options.environment}`];
-    this.evidenceDir = options.evidenceDir;
+    if (options.evidenceDir !== undefined) {
+      this.evidenceDir = options.evidenceDir;
+    }
   }
 
   getRegistry(): InMemoryEapRegistry {
@@ -164,7 +166,10 @@ export function createEapAdminService(options: EapAdminServiceOptions): EapAdmin
   const evidenceDir =
     options.evidenceDir ??
     (process.env['EAP_PERSIST_EVIDENCE'] === '1' ? defaultEvidenceDir() : undefined);
-  return new EapAdminService({ ...options, evidenceDir });
+  return new EapAdminService({
+    ...options,
+    ...(evidenceDir !== undefined ? { evidenceDir } : {}),
+  });
 }
 
 export type { IssueApiKeyInput, IssueApiKeyResult, ListFingerprintsResult, RevokeInput };
