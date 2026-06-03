@@ -75,7 +75,8 @@ Apply tiers in order:
 | DTF-5.2.3 diamond + range KATs            | S-T5-2 | **done**    |
 | **DTF-5.3.1** gh-cocoa-origin profile     | S-T5-3 | **done**    |
 | **DTF-5.3.2** Five-jurisdiction fixtures  | S-T5-3 | **done**    |
-| **DTF-5.3.3** Minerals board UAT template | S-T5-3 | **pending** |
+| **DTF-5.3.3** Minerals board UAT template | S-T5-3 | **done**    |
+| **DTF-5.4.1** CircuitRegistry semver      | S-T5-4 | **pending** |
 
 Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [execution-roadmap.md](../audit/execution-roadmap.md).
 

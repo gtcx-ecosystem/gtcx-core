@@ -20,11 +20,11 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 ## Status today
 
-| Defensibility tier | State                                                                   |
-| -----------------: | ----------------------------------------------------------------------- |
-|                1–4 | **Achieved** (2026-06-03 live audit)                                    |
-|    **5 technical** | **~58%** — S-T5-3 in progress; DTF-5.3.1–5.3.2 **done**; 5.3.3 UAT next |
-|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                                     |
+| Defensibility tier | State                                                   |
+| -----------------: | ------------------------------------------------------- |
+|                1–4 | **Achieved** (2026-06-03 live audit)                    |
+|    **5 technical** | **~62%** — S-T5-3 **done**; S-T5-4 CircuitRegistry next |
+|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                     |
 
 **10/10 note:** Algorithmic dimension scores (~8.95 weighted) measure **Tier 2** test depth. **Tier 5** requires named jurisdiction circuits + registry + commercial gate — not the same bar.
 
@@ -85,7 +85,7 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 | DTF-5.2.3 | KATs for diamond + range circuits                                     | S-T5-2 | quality-evidence-lead      | **done** | code             | 5.2.2       | S-T5-3            |
 | DTF-5.3.1 | **`gh-cocoa-origin` profile** (same R1CS)                             | S-T5-3 | crypto-security-engineer   | **done** | code             | S-T5-2 exit | 5.3.2             |
 | DTF-5.3.2 | Five-jurisdiction integration fixtures (redacted)                     | S-T5-3 | protocol-engineer          | **done** | code             | 5.3.1       | 5.3.3             |
-| DTF-5.3.3 | Minerals board UAT protocol (evidence template)                       | S-T5-3 | quality-evidence-lead      | pending  | ops-docs         | 5.3.2       | S-T5-4            |
+| DTF-5.3.3 | Minerals board UAT protocol (evidence template)                       | S-T5-3 | quality-evidence-lead      | **done** | ops-docs         | 5.3.2       | S-T5-4            |
 | DTF-5.4.1 | `CircuitRegistry` with semver + deprecation                           | S-T5-4 | protocol-architect         | pending  | code             | S-T5-3 exit | 5.4.2–5.4.4       |
 | DTF-5.4.2 | Load test 1000 proofs/min + evidence JSON                             | S-T5-4 | frontier-infra-engineer    | pending  | code             | 5.4.1       | 5.4.3             |
 | DTF-5.4.3 | Trust portal circuit ID column                                        | S-T5-4 | protocol-architect         | pending  | ops-docs         | 5.4.1       | 5.4.4             |

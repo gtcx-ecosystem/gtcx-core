@@ -2,7 +2,7 @@
 last_reconciled: 2026-06-04
 reconciliation_note: >-
   Reconciled with full-audit-2026-06-04.md (6-phase + 6 sprint plan).
-  FA-S1 P0 done; S-T5-1/2 complete; DTF-5.3.1–5.3.2 done; DTF-5.3.3 next.
+  FA-S1 P0 done; S-T5-1/2/3 complete; DTF-5.4.1 CircuitRegistry next.
   Ecosystem open items linked; library maturity ≠ sovereign pilot readiness.
 sources:
   - docs/audit/full-audit-2026-06-04.md
@@ -17,8 +17,8 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **S-T5-3** — DTF-5.3.3 Minerals board UAT template  
-**Protocol 22:** `pnpm agent:next-work` → **DTF-5.3.3**
+**Active phase:** **S-T5-4** — DTF-5.4.1 CircuitRegistry with semver  
+**Protocol 22:** `pnpm agent:next-work` → **DTF-5.4.1**
 
 ---
 
@@ -28,7 +28,7 @@ sources:
 | -------------------------------- | ------------- | -------------------------------------------------- |
 | Internal engineering (S1–S5)     | **done**      | —                                                  |
 | Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                             |
-| **DTF Tier 5 technical**         | **~58%**      | DTF-5.3.2 done; 5.3.3 UAT template → FA-S4–S5      |
+| **DTF Tier 5 technical**         | **~62%**      | S-T5-3 done; DTF-5.4.1 registry → FA-S4–S5         |
 | Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)    |
 | **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/` |
 
@@ -71,27 +71,29 @@ sources:
 | ------ | -------------------------------------- | -------- | ---------------------------------- |
 | S-T5-1 | gh-gold witness + profile + NAPI + KAT | **done** | DTF-5.1.4                          |
 | S-T5-2 | zw-diamond + verification + KATs       | **done** | DTF-5.2.3; 6/6 groth16 cross-impl  |
-| S-T5-3 | gh-cocoa + jurisdiction fixtures       | pending  | DTF-5.3.3                          |
+| S-T5-3 | gh-cocoa + jurisdiction fixtures       | **done** | DTF-5.3.3 UAT protocol             |
 | S-T5-4 | Circuit registry + perf                | pending  | DTF-5.4.4 (protocols E2E external) |
 | S-T5-5 | Commercial / certified packs           | pending  | DTF-5.5.4 external                 |
 
 ### Completed (2026-06-03 → 2026-06-04)
 
-| ID              | Title                               | Commit / evidence                                     |
-| --------------- | ----------------------------------- | ----------------------------------------------------- |
-| DTF-5.1.1–5.1.4 | Witness, gh-gold profile, NAPI, KAT | `803d212`, `baa13e5`                                  |
-| DTF-5.2.1       | zw-diamond-origin profile           | `803d212`                                             |
-| DTF-5.2.2       | Verification ZK bundle integration  | `6c313ea`                                             |
-| DTF-5.3.2       | Five-jurisdiction proof fixtures    | `tests/integration/tier5-jurisdiction-proofs.test.ts` |
+| ID              | Title                                     | Commit / evidence                                     |
+| --------------- | ----------------------------------------- | ----------------------------------------------------- |
+| DTF-5.1.1–5.1.4 | Witness, gh-gold profile, NAPI, KAT       | `803d212`, `baa13e5`                                  |
+| DTF-5.2.1       | zw-diamond-origin profile                 | `803d212`                                             |
+| DTF-5.2.2       | Verification ZK bundle integration        | `6c313ea`                                             |
+| DTF-5.3.2       | Five-jurisdiction proof fixtures          | `tests/integration/tier5-jurisdiction-proofs.test.ts` |
+| DTF-5.3.3       | Minerals board UAT protocol + L0 evidence | `docs/operations/minerals-board-uat-protocol.md`      |
 
 ### Next code (after FA-P0-1)
 
-| ID        | Title                                           | Owner            |
-| --------- | ----------------------------------------------- | ---------------- |
-| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**         |
-| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**         |
-| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**         |
-| DTF-5.3.3 | Minerals board UAT protocol template            | quality-evidence |
+| ID        | Title                                           | Owner              |
+| --------- | ----------------------------------------------- | ------------------ |
+| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**           |
+| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**           |
+| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**           |
+| DTF-5.3.3 | Minerals board UAT protocol template            | **done**           |
+| DTF-5.4.1 | CircuitRegistry with semver                     | protocol-architect |
 
 ---
 
