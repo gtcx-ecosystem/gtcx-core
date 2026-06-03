@@ -183,6 +183,9 @@ jobs:
           toolchain: '1.91'
 
       - name: Rust format check
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         run: cargo fmt --all -- --check
         working-directory: rust
 
