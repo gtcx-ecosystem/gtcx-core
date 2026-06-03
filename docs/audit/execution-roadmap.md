@@ -2,7 +2,7 @@
 last_reconciled: 2026-06-04
 reconciliation_note: >-
   Reconciled with full-audit-2026-06-04.md (6-phase + 6 sprint plan).
-  FA-S1 P0 done; S-T5-1/2/3 complete; DTF-5.4.1 CircuitRegistry next.
+  FA-S1 P0 done; S-T5-1/2/3 complete; DTF-5.4.1 done; 5.4.2 load test next.
   Ecosystem open items linked; library maturity ≠ sovereign pilot readiness.
 sources:
   - docs/audit/full-audit-2026-06-04.md
@@ -17,8 +17,8 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **S-T5-4** — DTF-5.4.1 CircuitRegistry with semver  
-**Protocol 22:** `pnpm agent:next-work` → **DTF-5.4.1**
+**Active phase:** **S-T5-4** — DTF-5.4.2 load test + perf evidence  
+**Protocol 22:** `pnpm agent:next-work` → **DTF-5.4.2**
 
 ---
 
@@ -28,7 +28,7 @@ sources:
 | -------------------------------- | ------------- | -------------------------------------------------- |
 | Internal engineering (S1–S5)     | **done**      | —                                                  |
 | Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                             |
-| **DTF Tier 5 technical**         | **~62%**      | S-T5-3 done; DTF-5.4.1 registry → FA-S4–S5         |
+| **DTF Tier 5 technical**         | **~65%**      | DTF-5.4.1 registry done; 5.4.2 perf → FA-S4–S5     |
 | Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)    |
 | **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/` |
 
@@ -84,16 +84,18 @@ sources:
 | DTF-5.2.2       | Verification ZK bundle integration        | `6c313ea`                                             |
 | DTF-5.3.2       | Five-jurisdiction proof fixtures          | `tests/integration/tier5-jurisdiction-proofs.test.ts` |
 | DTF-5.3.3       | Minerals board UAT protocol + L0 evidence | `docs/operations/minerals-board-uat-protocol.md`      |
+| DTF-5.4.1       | CircuitRegistry semver + lifecycle        | `packages/crypto/src/circuit-registry.ts`             |
 
 ### Next code (after FA-P0-1)
 
-| ID        | Title                                           | Owner              |
-| --------- | ----------------------------------------------- | ------------------ |
-| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**           |
-| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**           |
-| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**           |
-| DTF-5.3.3 | Minerals board UAT protocol template            | **done**           |
-| DTF-5.4.1 | CircuitRegistry with semver                     | protocol-architect |
+| ID        | Title                                           | Owner          |
+| --------- | ----------------------------------------------- | -------------- |
+| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**       |
+| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**       |
+| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**       |
+| DTF-5.3.3 | Minerals board UAT protocol template            | **done**       |
+| DTF-5.4.1 | CircuitRegistry with semver                     | **done**       |
+| DTF-5.4.2 | Load test 1000 proofs/min                       | frontier-infra |
 
 ---
 

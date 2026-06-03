@@ -1,25 +1,26 @@
 ---
-session_id: '2026-06-04-dtf-5-3-3-minerals-board-uat'
+session_id: '2026-06-04-dtf-5-4-1-circuit-registry'
 agent: 'gtcx-core-agent'
-focus: 'DTF-5.3.3 Minerals board UAT protocol — S-T5-3 exit'
+focus: 'DTF-5.4.1 CircuitRegistry semver + deprecation'
 ---
 
-# Session: DTF-5.3.3 complete — S-T5-3 closed
+# Session: DTF-5.4.1 complete
 
 ## Done
 
-| Milestone | Evidence                                                                                                          |
-| --------- | ----------------------------------------------------------------------------------------------------------------- |
-| DTF-5.3.3 | `docs/operations/minerals-board-uat-protocol.md`, evidence template + L0 run `minerals-board-uat-2026-06-04.json` |
+| Milestone | Evidence                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------- |
+| DTF-5.4.1 | `@gtcx/crypto` `circuit-registry.ts` + manifest; Rust `resolve_profile`; NAPI uses registry |
 
 ## Protocol 22
 
-`pnpm agent:next-work` → **DTF-5.4.1** (CircuitRegistry with semver)
+`pnpm agent:next-work` → **DTF-5.4.2** (load test 1000 proofs/min + evidence JSON)
 
-## Verification (L0 UAT)
+## Verification
 
-| Command                                   | Result            |
-| ----------------------------------------- | ----------------- |
-| `tier5-jurisdiction-proofs`               | 14 passed, exit 0 |
-| `cargo test -p gtcx-zkp circuit_profiles` | 26 passed, exit 0 |
-| `pnpm test:kat-cross-impl`                | 6/6 PASS, exit 0  |
+| Command                                               | Result                  |
+| ----------------------------------------------------- | ----------------------- |
+| `pnpm --filter @gtcx/crypto test -- circuit-registry` | 4 passed                |
+| `cargo test -p gtcx-zkp --lib lifecycle`              | 3 passed                |
+| `pnpm typecheck`                                      | exit 0                  |
+| `pnpm api:update-baseline`                            | crypto additive exports |
