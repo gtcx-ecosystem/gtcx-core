@@ -57,8 +57,9 @@ pub use circuit_profiles::{
     all_profile_ids, certification_mask_satisfied, commodity_origin_profile,
     gh_gold_origin_profile, profile_by_id, sample_commodity_origin_for_profile,
     zw_diamond_origin_profile,
-    validate_profile_sample, CertificationBit, CommodityOriginProfileConfig,
-    MetricSemantics, ProfileValidationError, ProfileValidationResult, PROFILE_GH_GOLD_ORIGIN,
+    validate_profile_sample, validate_profile_witness, CertificationBit,
+    CommodityOriginProfileConfig, MetricSemantics, ProfileValidationError,
+    ProfileValidationResult, ProfileWitnessFields, PROFILE_GH_GOLD_ORIGIN,
     PROFILE_ZW_DIAMOND_ORIGIN,
 };
 pub use witness::{

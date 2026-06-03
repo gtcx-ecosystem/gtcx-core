@@ -224,6 +224,7 @@ export type {
 const zkp = createZkpBindings(raw);
 export const groth16GenerateKeys = zkp.groth16GenerateKeys;
 export const groth16ProveCommodityOrigin = zkp.groth16ProveCommodityOrigin;
+export const groth16ProveCommodityOriginProfile = zkp.groth16ProveCommodityOriginProfile;
 export const groth16ProveGciThreshold = zkp.groth16ProveGciThreshold;
 export const groth16VerifyProof = zkp.groth16VerifyProof;
 export const bulletproofsProveAmountRange = zkp.bulletproofsProveAmountRange;

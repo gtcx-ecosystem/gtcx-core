@@ -16,5 +16,6 @@ pub use registry::{
 };
 pub use sample::sample_commodity_origin_for_profile;
 pub use validate::{
-    validate_profile_sample, ProfileValidationError, ProfileValidationResult,
+    validate_profile_sample, validate_profile_witness, ProfileValidationError,
+    ProfileValidationResult, ProfileWitnessFields,
 };

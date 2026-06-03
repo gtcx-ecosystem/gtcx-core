@@ -9,6 +9,7 @@ export interface NativeGroth16Keys {
 
 export interface NativeGroth16ProofBundle {
   circuit: string;
+  profileId?: string | null;
   proof: string;
   verifyingKey: string;
   publicInputsJson: string;
@@ -78,6 +79,65 @@ export function createZkpBindings(raw: Record<string, unknown>) {
       verifyingKeyHex: string
     ) => NativeGroth16ProofBundle
   >(raw, ['groth16_prove_commodity_origin', 'groth16ProveCommodityOrigin']);
+
+  const rawGroth16ProveCommodityOriginProfile = optionalNativeFn<
+    (
+      profileId: string,
+      mineIdHex: string,
+      lat: number,
+      lon: number,
+      primaryMetric: number,
+      secondaryMetric: number,
+      primaryRandomnessHex: string,
+      secondaryRandomnessHex: string,
+      locationRandomnessHex: string,
+      certificationFlags: number,
+      merklePathHex: string,
+      provingKeyHex: string,
+      verifyingKeyHex: string
+    ) => NativeGroth16ProofBundle
+  >(raw, ['groth16_prove_commodity_origin_profile', 'groth16ProveCommodityOriginProfile']);
+
+  const groth16ProveCommodityOriginProfile = rawGroth16ProveCommodityOriginProfile
+    ? (
+        profileId: string,
+        mineIdHex: string,
+        lat: number,
+        lon: number,
+        primaryMetric: number,
+        secondaryMetric: number,
+        primaryRandomnessHex: string,
+        secondaryRandomnessHex: string,
+        locationRandomnessHex: string,
+        certificationFlags: number,
+        merklePathHex: string,
+        provingKeyHex: string,
+        verifyingKeyHex: string
+      ): NativeGroth16ProofBundle => {
+        assertHex(mineIdHex, 'mineId');
+        assertHex(primaryRandomnessHex, 'primaryRandomness');
+        assertHex(secondaryRandomnessHex, 'secondaryRandomness');
+        assertHex(locationRandomnessHex, 'locationRandomness');
+        assertHex(merklePathHex, 'merklePath');
+        assertHex(provingKeyHex, 'provingKey');
+        assertHex(verifyingKeyHex, 'verifyingKey');
+        return rawGroth16ProveCommodityOriginProfile(
+          profileId,
+          mineIdHex,
+          lat,
+          lon,
+          primaryMetric,
+          secondaryMetric,
+          primaryRandomnessHex,
+          secondaryRandomnessHex,
+          locationRandomnessHex,
+          certificationFlags,
+          merklePathHex,
+          provingKeyHex,
+          verifyingKeyHex
+        );
+      }
+    : undefined;
 
   const groth16ProveCommodityOrigin = rawGroth16ProveCommodityOrigin
     ? (
@@ -339,6 +399,7 @@ export function createZkpBindings(raw: Record<string, unknown>) {
   return {
     groth16GenerateKeys,
     groth16ProveCommodityOrigin,
+    groth16ProveCommodityOriginProfile,
     groth16ProveGciThreshold,
     groth16VerifyProof,
     bulletproofsProveAmountRange,

@@ -15,6 +15,27 @@ module.exports = {
     verifyingKey: vk,
     publicInputsJson: '{}',
   }),
+  groth16_prove_commodity_origin_profile: (
+    profileId,
+    mineId,
+    lat,
+    lon,
+    primary,
+    secondary,
+    pr,
+    sr,
+    lr,
+    cert,
+    merkle,
+    pk,
+    vk
+  ) => ({
+    circuit: 'commodity_origin',
+    profile_id: profileId,
+    proof: 'cc',
+    verifying_key: vk,
+    public_inputs_json: '[]',
+  }),
   groth16_verify_proof: (circuit, proof, vk, inputs) => true,
   bulletproofs_prove_amount_range: (amount, min, max, randomness) => ({
     min,

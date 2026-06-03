@@ -92,6 +92,24 @@ export {
 } from './zkp-diamond-origin';
 
 export {
+  generateCommodityOriginProfileKeys,
+  proveCommodityOriginProfile,
+  verifyCommodityOriginProfile,
+  type CommodityOriginProfileId,
+  type CommodityOriginProfileProofInput,
+  type CommodityOriginProfileProof,
+} from './zkp-circuit-profile';
+
+export {
+  generateGhGoldOriginKeys,
+  proveGhGoldOrigin,
+  verifyGhGoldOrigin,
+  GH_GOLD_REGULATORY_EXPORT_MASK,
+  type GhGoldOriginProofInput,
+  type GhGoldOriginProof,
+} from './zkp-gh-gold-origin';
+
+export {
   proveCommodityRange,
   verifyCommodityRange,
   type CommodityRangeProofInput,
