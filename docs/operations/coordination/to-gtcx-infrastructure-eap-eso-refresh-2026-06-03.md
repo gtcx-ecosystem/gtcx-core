@@ -67,21 +67,24 @@ Result:
 
 ---
 
-## What gtcx-infrastructure needs to do
+## What gtcx-infrastructure did
 
-1. **Force-refresh ESO** so the K8s secret `gtcx-intelligence-staging-auth-keys` picks up the new VersionId
-2. **Verify** staging pods read `AUTH_API_KEYS` and `AUTH_KEY_ROLES` correctly
-3. **Acknowledge** in this ticket or via `baseline-os` `pnpm ecosystem:repo:report-work`
+1. ✅ **Force-refreshed ESO** — annotation + deployment restart triggered reconciliation
+2. ✅ **Verified** staging pods read updated `AUTH_API_KEYS` and `AUTH_KEY_ROLES`
+3. ✅ **Root cause found:** ESO SecretStore region `af-south-1`; gtcx-core EAP sync wrote to `us-east-1`. Secret in `af-south-1` updated to match.
 
-### Verification commands
+### Verification results (2026-06-03T09:20Z)
 
 ```bash
-# Check K8s secret
-kubectl get secret gtcx-intelligence-staging-auth-keys -n intelligence -o jsonpath='{.data.AUTH_API_KEYS}' | base64 -d
+kubectl get secret intelligence-secrets -n intelligence -o jsonpath='{.data.AUTH_API_KEYS}' | base64 -d
+# → gtcx_fxT0AMptSONeWWRmAdBR2y5iU3xtdB35,gtcx_SR9w3S2jR3_12oAoqKwUV2zQEkDgXt0y
 
-# Check pod env
-kubectl exec -n intelligence deployment/intelligence-sdk -- env | grep AUTH
+kubectl exec -n intelligence deployment/intelligence-orchestrator -- env | grep AUTH
+# → AUTH_API_KEYS=gtcx_fxT0AMptSONeWWRmAdBR2y5iU3xtdB35,gtcx_SR9w3S2jR3_12oAoqKwUV2zQEkDgXt0y
+# → AUTH_KEY_ROLES=gtcx_fxT0AMptSONeWWRmAdBR2y5iU3xtdB35:intelligence,gtcx_SR9w3S2jR3_12oAoqKwUV2zQEkDgXt0y:intelligence
 ```
+
+**Auth verified:** `/policy/rules` 401 without key → 200 with valid key.
 
 ---
 

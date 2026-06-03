@@ -48,8 +48,8 @@ Living register of **open** cross-repo items originating from or affecting `gtcx
 | --- | --------------------------------------------------------------- | ---------------------------------------------------- |
 | 1   | ✅ Run `pnpm eap:sync-bundle` for `EAP_ENVIRONMENT=staging`     | Secret `gtcx/intelligence/staging/auth-keys` updated |
 | 2   | ✅ Confirm secret contains `AUTH_API_KEYS` and `AUTH_KEY_ROLES` | 2 keys, 2 roles confirmed                            |
-| 3   | ⏳ Ping gtcx-infrastructure for ESO force-refresh               | This doc + bridge updated                            |
-| 4   | ⏳ Infra ack: K8s secret picks up new value                     | Awaiting gtcx-infrastructure                         |
+| 3   | ✅ Ping gtcx-infrastructure for ESO force-refresh               | ESO refreshed 2026-06-03T09:20Z                      |
+| 4   | ✅ Infra ack: K8s secret picks up new value                     | `AUTH_API_KEYS` + `AUTH_KEY_ROLES` verified in pods  |
 
 #### Execution evidence
 

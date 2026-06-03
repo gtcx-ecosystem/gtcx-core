@@ -168,6 +168,7 @@ function guessNextMilestone(dimId, score) {
     D7: {
       6: { id: 'M7.2', title: 'uint64_is_ge audit' },
       8: { id: 'M7.4', title: 'Microbenchmarks (dudect / ctgrind)' },
+      9: { id: 'M7.5', title: 'Third-party side-channel assessment', external: true },
     },
     D10: {
       8: { id: 'M10.2', title: 'Runtime FIPS enforcement (GTCX_FIPS_STRICT=1)' },
