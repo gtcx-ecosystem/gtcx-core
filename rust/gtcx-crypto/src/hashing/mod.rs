@@ -105,6 +105,10 @@ pub fn sha512(data: &[u8]) -> [u8; 64] {
 ///
 /// A 32-byte Blake3 hash, or an error in FIPS strict mode.
 ///
+/// # Errors
+///
+/// Returns [`CryptoError::NonFipsAlgorithm`] when `GTCX_FIPS_STRICT=1`.
+///
 /// # Example
 ///
 /// ```rust
@@ -124,6 +128,10 @@ pub fn blake3(data: &[u8]) -> Result<[u8; 32], CryptoError> {
 /// This is an alias for [`blake3`] — since M10.2, the raw `blake3`
 /// function already enforces FIPS strict mode. This function is
 /// kept for backward compatibility.
+///
+/// # Errors
+///
+/// Returns [`CryptoError::NonFipsAlgorithm`] when `GTCX_FIPS_STRICT=1`.
 ///
 /// # Example
 ///
@@ -156,6 +164,10 @@ pub fn blake3_checked(data: &[u8]) -> Result<[u8; 32], CryptoError> {
 ///
 /// A 32-byte keyed Blake3 hash, or an error in FIPS strict mode.
 ///
+/// # Errors
+///
+/// Returns [`CryptoError::NonFipsAlgorithm`] when `GTCX_FIPS_STRICT=1`.
+///
 /// # Example
 ///
 /// ```rust
@@ -174,6 +186,10 @@ pub fn blake3_keyed(key: &[u8; 32], data: &[u8]) -> Result<[u8; 32], CryptoError
 /// Compute keyed Blake3 hash, explicitly checking FIPS strict mode.
 ///
 /// Alias for [`blake3_keyed`] — kept for backward compatibility.
+///
+/// # Errors
+///
+/// Returns [`CryptoError::NonFipsAlgorithm`] when `GTCX_FIPS_STRICT=1`.
 #[instrument(skip_all, fields(data_len = data.len()))]
 pub fn blake3_keyed_checked(key: &[u8; 32], data: &[u8]) -> Result<[u8; 32], CryptoError> {
     blake3_keyed(key, data)
@@ -209,6 +225,10 @@ pub fn blake3_keyed_checked(key: &[u8; 32], data: &[u8]) -> Result<[u8; 32], Cry
 /// // Different contexts produce different keys
 /// assert_ne!(signing_key, encryption_key);
 /// ```
+///
+/// # Errors
+///
+/// Returns [`CryptoError::NonFipsAlgorithm`] when `GTCX_FIPS_STRICT=1`.
 #[instrument(skip_all, fields(context = context))]
 pub fn blake3_derive(context: &str, key_material: &[u8]) -> Result<[u8; 32], CryptoError> {
     assert_fips_permissive("blake3-derive")?;
@@ -218,6 +238,10 @@ pub fn blake3_derive(context: &str, key_material: &[u8]) -> Result<[u8; 32], Cry
 /// Derive a subkey via Blake3 KDF, explicitly checking FIPS strict mode.
 ///
 /// Alias for [`blake3_derive`] — kept for backward compatibility.
+///
+/// # Errors
+///
+/// Returns [`CryptoError::NonFipsAlgorithm`] when `GTCX_FIPS_STRICT=1`.
 #[instrument(skip_all, fields(context = context))]
 pub fn blake3_derive_checked(context: &str, key_material: &[u8]) -> Result<[u8; 32], CryptoError> {
     blake3_derive(context, key_material)
