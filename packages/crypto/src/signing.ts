@@ -134,7 +134,7 @@ export function verify(
   } catch (error) {
     // Surface programming errors; only swallow signature validation failures
     /* c8 ignore next -- requires TypeError/RangeError from verify internals; edge case */
-    if (error instanceof TypeError || error instanceof RangeError) throw error;
+    if (error instanceof TypeError) throw error;
     return false;
   }
 }
@@ -158,7 +158,7 @@ export function verifyHash(hashHex: string, signatureHex: string, publicKeyHex: 
     /* v8 ignore stop */
   } catch (error) {
     // Surface programming errors; only swallow signature validation failures
-    if (error instanceof TypeError || error instanceof RangeError) throw error;
+    if (error instanceof TypeError) throw error;
     return false;
   }
 }

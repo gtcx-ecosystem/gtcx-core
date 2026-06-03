@@ -22,8 +22,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@noble/curves": "2.0.1",
-    "@noble/hashes": "2.0.1",
+    "@noble/curves": "2.2.0",
+    "@noble/hashes": "2.2.0",
     "zod": "3.25.76"
   },
   "peerDependencies": {
