@@ -96,29 +96,29 @@ For a step-by-step repo walkthrough, see the [Orientation guide](./docs/agents/o
 
 Coverage numbers reflect the [2026-05-21 internal completion audit](./docs/audit/internal-completion-audit-2026-05-21.md). All testable packages clear the **≥95% branch coverage** gate.
 
-| Package               | State                  | Branch Coverage | Notes                                                                                              |
-| --------------------- | ---------------------- | --------------- | -------------------------------------------------------------------------------------------------- |
-| `@gtcx/crypto`        | ✅ Production-hardened | 100%            | Property-tested, native + JS backends, 386 tests                                                   |
-| `@gtcx/schemas`       | ✅ Production-hardened | 100%            | Core12: 12 domains, 24 controls fully populated                                                    |
-| `@gtcx/logging`       | ✅ Production-hardened | 100%            | Structured logging adapters                                                                        |
-| `@gtcx/network`       | ✅ Production-hardened | 100%            | P2P types, peer discovery, libp2p transport                                                        |
-| `@gtcx/workproof`     | ✅ Production-hardened | 100%            | 38 predicates, AI validation types, 293 tests                                                      |
-| `@gtcx/crypto-native` | ✅ Production-hardened | 99.03%          | Native NAPI bindings; `assertHex` / `isHex` at boundary (0.4.0+)                                   |
-| `@gtcx/services`      | ✅ Production-hardened | 98.45%          | Compliance decomposed, health checks, metrics, 224 tests                                           |
-| `@gtcx/sync`          | ✅ Production-hardened | 97.95%          | Offline-first sync engine with conflict resolution                                                 |
-| `@gtcx/types`         | ✅ Production-hardened | 97.67%          | Core type definitions, 38 tests                                                                    |
-| `@gtcx/ai`            | ✅ Production-hardened | 97.43%          | Synchronous + async tracing with span propagation via AsyncLocalStorage, 68 tests                  |
-| `@gtcx/security`      | ✅ Production-hardened | 97.08%          | Strict-mode audit logger, redaction, 406 tests                                                     |
-| `@gtcx/identity`      | ✅ Production-hardened | 96.53%          | DID and credential management, 93 tests                                                            |
-| `@gtcx/api-client`    | ✅ Production-hardened | 96.18%          | Retry, offline queue, request signing, 133 tests                                                   |
-| `@gtcx/utils`         | ✅ Production-hardened | 95.45%          | Common utilities, 32 tests                                                                         |
-| `@gtcx/verification`  | ✅ Production-hardened | 95.2%           | QR, proofs, bundles, 265 tests                                                                     |
-| `@gtcx/telemetry`     | ✅ Production-hardened | 95.18%          | OpenTelemetry-compatible metrics, traces, logs                                                     |
-| `@gtcx/domain`        | ✅ Production-hardened | 95.3%           | DI container, offline queues, versioning, 346 tests                                                |
-| `@gtcx/events`        | ✅ Production-hardened | 98%             | Event bus, 55 tests                                                                                |
-| `@gtcx/connectivity`  | ✅ Production-hardened | 98.7%           | Network detection and profiling, 127 tests                                                         |
-| `@gtcx/resilience`    | ✅ Production-hardened | —               | Circuit breaker, adaptive retry, timeout, bulkhead, 50 tests                                       |
-| `@gtcx/runtime`       | ✅ Production-hardened | —               | Batteries-included substrate aggregating api-client, connectivity, resilience, telemetry (ADR-014) |
+| Package               | State                  | Branch Coverage | Notes                                                                                                                   |
+| --------------------- | ---------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `@gtcx/crypto`        | ✅ Production-hardened | 100%            | Property-tested, native + JS backends, 386 tests                                                                        |
+| `@gtcx/schemas`       | ✅ Production-hardened | 100%            | Core12: 12 domains, 24 controls fully populated                                                                         |
+| `@gtcx/logging`       | ✅ Production-hardened | 100%            | Structured logging adapters                                                                                             |
+| `@gtcx/network`       | 🚧 Scaffolding         | 100%            | In-memory + transport types; **libp2p mesh Phase 2** — see [`packages/network/README.md`](./packages/network/README.md) |
+| `@gtcx/workproof`     | ✅ Production-hardened | 100%            | 38 predicates, AI validation types, 293 tests                                                                           |
+| `@gtcx/crypto-native` | ✅ Production-hardened | 99.03%          | Native NAPI bindings; `assertHex` / `isHex` at boundary (0.4.0+)                                                        |
+| `@gtcx/services`      | ✅ Production-hardened | 98.45%          | Compliance decomposed, health checks, metrics, 224 tests                                                                |
+| `@gtcx/sync`          | ✅ Production-hardened | 97.95%          | Offline-first sync engine with conflict resolution                                                                      |
+| `@gtcx/types`         | ✅ Production-hardened | 97.67%          | Core type definitions, 38 tests                                                                                         |
+| `@gtcx/ai`            | ✅ Production-hardened | 97.43%          | Synchronous + async tracing with span propagation via AsyncLocalStorage, 68 tests                                       |
+| `@gtcx/security`      | ✅ Production-hardened | 97.08%          | Strict-mode audit logger, redaction, 406 tests                                                                          |
+| `@gtcx/identity`      | ✅ Production-hardened | 96.53%          | DID and credential management, 93 tests                                                                                 |
+| `@gtcx/api-client`    | ✅ Production-hardened | 96.18%          | Retry, offline queue, request signing, 133 tests                                                                        |
+| `@gtcx/utils`         | ✅ Production-hardened | 95.45%          | Common utilities, 32 tests                                                                                              |
+| `@gtcx/verification`  | ✅ Production-hardened | 95.2%           | QR, proofs, bundles, 265 tests                                                                                          |
+| `@gtcx/telemetry`     | ✅ Production-hardened | 95.18%          | OpenTelemetry-compatible metrics, traces, logs                                                                          |
+| `@gtcx/domain`        | ✅ Production-hardened | 95.3%           | DI container, offline queues, versioning, 346 tests                                                                     |
+| `@gtcx/events`        | ✅ Production-hardened | 98%             | Event bus, 55 tests                                                                                                     |
+| `@gtcx/connectivity`  | ✅ Production-hardened | 98.7%           | Network detection and profiling, 127 tests                                                                              |
+| `@gtcx/resilience`    | ✅ Production-hardened | —               | Circuit breaker, adaptive retry, timeout, bulkhead, 50 tests                                                            |
+| `@gtcx/runtime`       | ✅ Production-hardened | —               | Batteries-included substrate aggregating api-client, connectivity, resilience, telemetry (ADR-014)                      |
 
 ### Shared Config Workspace Packages (4)
 

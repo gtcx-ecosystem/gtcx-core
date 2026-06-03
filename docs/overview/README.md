@@ -36,7 +36,7 @@ review_cycle: 'on-change'
 
 **Active execution program:** [Tier 5 workplan](../operations/tier-5-workplan-2026-06.md) (technical complete) · [Engagement Readiness](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) (sovereign engagements) · [execution roadmap](../audit/execution-roadmap.md)
 
-**Honest remaining gaps (external):** live-stack pen-test (EXT-INF-002); trusted-setup ceremony (XR-402 / CORE-004); testnet/DR proof (EXT-INF-015); Zimbabwe sandbox intro (human send). **In-repo P2:** `@gtcx/network` transport maturity badge; org `TURBO_*` / `OPENAI_API_KEY` warnings in `pnpm ops:check`.
+**Honest remaining gaps (external):** live-stack pen-test (EXT-INF-002); trusted-setup ceremony (XR-402 / CORE-004); testnet/DR proof (EXT-INF-015); Zimbabwe sandbox intro (human send). **In-repo P2:** org `TURBO_*` / `OPENAI_API_KEY` warnings in `pnpm ops:check`.
 
 ---
 
@@ -51,7 +51,7 @@ review_cycle: 'on-change'
 | 3   | **Digital Identity**                | DID creation, resolution, credential lifecycle, key management                                                        | `gtcx-markets`, sovereign wallets                 | `packages/identity/` — [spec](../specs/packages/identity.md)                               |
 | 4   | **Verification Infrastructure**     | Certificate generation, QR codes, proof bundles, revocation registries                                                | Compliance officers, export brokers               | `packages/verification/` — [spec](../specs/packages/verification.md)                       |
 | 5   | **Offline-First Sync**              | Durable queue, conflict resolution, replay ordering by logical sequence                                               | Buying station agents in low-connectivity regions | `packages/sync/` — [spec](../specs/packages/sync.md)                                       |
-| 6   | **Resilient Networking**            | Connectivity detection, adaptive retry, circuit breaker, P2P mesh primitives                                          | Field operators, mobile apps                      | `packages/connectivity/`, `packages/network/` — [specs](../specs/packages/connectivity.md) |
+| 6   | **Resilient Networking**            | Connectivity detection, adaptive retry, circuit breaker; P2P **types/scaffolding** (libp2p Phase 2)                   | Field operators, mobile apps                      | `packages/connectivity/`, `packages/network/` — [specs](../specs/packages/connectivity.md) |
 | 7   | **Domain Models**                   | Commodity-agnostic types, events, schemas, metrics, versioning                                                        | All downstream repos                              | `packages/domain/` — [spec](../specs/packages/domain.md)                                   |
 | 8   | **WorkProof / TradeCV Attestation** | W3C Verifiable Credential schemas for supply chain attestation                                                        | Export brokers, regulators                        | `packages/workproof/` — [spec](../specs/packages/workproof.md)                             |
 | 9   | **Structured Observability**        | OpenTelemetry-compatible traces, metrics, logs with secret redaction                                                  | Platform engineers, compliance auditors           | `packages/telemetry/`, `packages/logging/` — [specs](../specs/packages/telemetry.md)       |
