@@ -43,6 +43,17 @@ Certification mask is enforced **before prove** via `validate_profile_sample` (p
 
 TypeScript: `@gtcx/crypto` — `proveZwDiamondOrigin` (`zkp-zw-diamond-origin.ts`).
 
+## Ghana cocoa profile (`gh-cocoa-origin`)
+
+| Field                           | Value                                            |
+| ------------------------------- | ------------------------------------------------ |
+| `commodity_type`                | `2`                                              |
+| GPS bounds                      | Ghana bbox (same encoding as gold profile)       |
+| `min_primary` / `min_secondary` | Grade score / grams                              |
+| `required_certification_mask`   | `OriginAuthenticated` bit (LICOR / traceability) |
+
+TypeScript: `@gtcx/crypto` — `proveGhCocoaOrigin` (`zkp-gh-cocoa-origin.ts`).
+
 ## NAPI (DTF-5.1.3)
 
 | Binding                                       | Role                                                                                  |
@@ -50,7 +61,7 @@ TypeScript: `@gtcx/crypto` — `proveZwDiamondOrigin` (`zkp-zw-diamond-origin.ts
 | `groth16_prove_commodity_origin_profile`      | Pre-prove `validate_profile_witness`; uses profile `bounds` / mins / `commodity_type` |
 | `groth16_verify_proof('commodity_origin', …)` | Same verifier as generic commodity origin                                             |
 
-TypeScript: `@gtcx/crypto` — `proveGhGoldOrigin`, `proveZwDiamondOrigin`, `proveCommodityOriginProfile` (`zkp-gh-gold-origin.ts`, `zkp-zw-diamond-origin.ts`, `zkp-circuit-profile.ts`).
+TypeScript: `@gtcx/crypto` — `proveGhGoldOrigin`, `proveGhCocoaOrigin`, `proveZwDiamondOrigin`, `proveCommodityOriginProfile` (`zkp-gh-gold-origin.ts`, `zkp-gh-cocoa-origin.ts`, `zkp-zw-diamond-origin.ts`, `zkp-circuit-profile.ts`).
 
 ## Commands
 

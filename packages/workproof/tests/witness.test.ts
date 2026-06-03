@@ -1,6 +1,10 @@
 import { describe, it, expect } from 'vitest';
 
-import { GH_GOLD_ORIGIN_PROFILE, ZW_DIAMOND_ORIGIN_PROFILE } from '../src/circuit-profiles';
+import {
+  GH_GOLD_ORIGIN_PROFILE,
+  GH_COCOA_ORIGIN_PROFILE,
+  ZW_DIAMOND_ORIGIN_PROFILE,
+} from '../src/circuit-profiles';
 import {
   buildCommodityOriginWitness,
   serializeCommodityOriginWitness,
@@ -161,6 +165,80 @@ describe('buildCommodityOriginWitness', () => {
       ZW_DIAMOND_ORIGIN_PROFILE.requiredCertificationMask
     );
     expect(witness.bounds).toEqual(ZW_DIAMOND_ORIGIN_PROFILE.bounds);
+  });
+
+  it('maps cocoa production claims to typed gh-cocoa-origin witness', () => {
+    const cocoaSubject: WorkProofCredentialSubject = {
+      ...baseSubject,
+      siteId: 'farm-kumasi-12',
+      commodityContext: 'cocoa',
+      claims: [
+        ...baseSubject.claims.filter((c) => c.predicateType !== 'CommodityProduced'),
+        {
+          predicateType: 'CommodityProduced',
+          predicateURI: 'tradepass://workproof/production/commodity-produced',
+          value: {
+            kind: 'composite' as const,
+            components: {
+              commodity: {
+                kind: 'enum' as const,
+                value: 'cocoa',
+                allowedValues: ['cocoa'],
+              },
+              quantity: { kind: 'numeric' as const, value: 750, unit: 'kg' },
+            },
+          },
+          evidence: [
+            {
+              type: 'gps_location',
+              hash: 'sha256:gps-gh-cocoa',
+              timestamp: 1704067200000,
+              metadata: { latitude: 6.7, longitude: -1.6 },
+            },
+          ],
+          confidence: 0.9,
+          issuedAt: 1704067200000,
+          proof: baseSubject.claims[0]!.proof,
+        },
+        {
+          predicateType: 'OriginAuthenticated',
+          predicateURI: 'tradepass://workproof/production/origin-authenticated',
+          value: { kind: 'boolean' as const, value: true },
+          evidence: [],
+          confidence: 1,
+          issuedAt: 1704067200000,
+          proof: baseSubject.claims[0]!.proof,
+        },
+        {
+          predicateType: 'QualityGraded',
+          predicateURI: 'tradepass://workproof/production/quality-graded',
+          value: { kind: 'enum' as const, value: 'high', allowedValues: ['high', 'medium'] },
+          evidence: [],
+          confidence: 0.95,
+          issuedAt: 1704067200000,
+          proof: baseSubject.claims[0]!.proof,
+        },
+      ],
+    };
+
+    const witness = buildCommodityOriginWitness({
+      credentialSubject: cocoaSubject,
+      supplement: {
+        merklePath: { leafIndex: 0, pathDigestsHex: [] },
+        primaryRandomnessHex: '0a'.repeat(32),
+        secondaryRandomnessHex: '0b'.repeat(32),
+        locationRandomnessHex: '0c'.repeat(32),
+      },
+    });
+
+    expect(witness.circuitTarget).toBe('gh-cocoa-origin');
+    expect(witness.commodityType).toBe(commodityTypeFromLabel('cocoa'));
+    expect(witness.primaryMetric).toBe(90);
+    expect(witness.secondaryMetric).toBe(750_000);
+    expect(witness.certificationFlags & GH_COCOA_ORIGIN_PROFILE.requiredCertificationMask).toBe(
+      GH_COCOA_ORIGIN_PROFILE.requiredCertificationMask
+    );
+    expect(witness.bounds).toEqual(GH_COCOA_ORIGIN_PROFILE.bounds);
   });
 
   it('rejects when CommodityProduced is missing', () => {

@@ -10,6 +10,9 @@ pub const PROFILE_GH_GOLD_ORIGIN: &str = "gh-gold-origin";
 /// Registry ID for the Zimbabwe diamond reference profile (DTF-5.2.1 precursor).
 pub const PROFILE_ZW_DIAMOND_ORIGIN: &str = "zw-diamond-origin";
 
+/// Registry ID for the Ghana cocoa reference profile (DTF-5.3.1).
+pub const PROFILE_GH_COCOA_ORIGIN: &str = "gh-cocoa-origin";
+
 /// How verifiers interpret primary/secondary metrics for a profile (off-circuit).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum MetricSemantics {
@@ -17,6 +20,8 @@ pub enum MetricSemantics {
     PurityBasisPointsAndGrams,
     /// Primary = clarity score; secondary = mass in centi-carats.
     ClarityAndCentiCarats,
+    /// Primary = grade score; secondary = mass in grams (cocoa / agricultural).
+    GradeAndGrams,
 }
 
 /// Policy pack bound to a registry profile ID.
@@ -77,18 +82,39 @@ pub fn zw_diamond_origin_profile() -> CommodityOriginProfileConfig {
     }
 }
 
+/// Ghana cocoa reference profile — LICOR/organic traceability + grade/weight semantics.
+pub fn gh_cocoa_origin_profile() -> CommodityOriginProfileConfig {
+    CommodityOriginProfileConfig {
+        profile_id: PROFILE_GH_COCOA_ORIGIN,
+        groth16_circuit: Groth16CircuitType::CommodityOrigin,
+        jurisdiction_code: "GH",
+        commodity_type: 2,
+        bounds: [4_700_000, 11_200_000, 176_700_000, 181_200_000],
+        min_primary: 80,
+        min_secondary: 500,
+        required_certification_mask: CertificationBit::OriginAuthenticated.mask(),
+        metric_semantics: MetricSemantics::GradeAndGrams,
+        policy_notes: "Origin-authenticated / LICOR traceability bit; grade score + weight grams",
+    }
+}
+
 /// Resolve a profile by registry ID.
 pub fn profile_by_id(profile_id: &str) -> Option<CommodityOriginProfileConfig> {
     match profile_id {
         PROFILE_GH_GOLD_ORIGIN => Some(gh_gold_origin_profile()),
         PROFILE_ZW_DIAMOND_ORIGIN => Some(zw_diamond_origin_profile()),
+        PROFILE_GH_COCOA_ORIGIN => Some(gh_cocoa_origin_profile()),
         _ => None,
     }
 }
 
 /// List registered profile IDs.
 pub fn all_profile_ids() -> &'static [&'static str] {
-    &[PROFILE_GH_GOLD_ORIGIN, PROFILE_ZW_DIAMOND_ORIGIN]
+    &[
+        PROFILE_GH_GOLD_ORIGIN,
+        PROFILE_ZW_DIAMOND_ORIGIN,
+        PROFILE_GH_COCOA_ORIGIN,
+    ]
 }
 
 /// Resolve profile config (alias).

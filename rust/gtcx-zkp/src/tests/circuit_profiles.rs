@@ -3,8 +3,8 @@
 use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystem};
 use crate::circuit_profiles::{
     gh_gold_origin_profile, sample_commodity_origin_for_profile, validate_profile_sample,
-    zw_diamond_origin_profile, ProfileValidationError, PROFILE_GH_GOLD_ORIGIN,
-    PROFILE_ZW_DIAMOND_ORIGIN,
+    zw_diamond_origin_profile, gh_cocoa_origin_profile, ProfileValidationError,
+    PROFILE_GH_GOLD_ORIGIN, PROFILE_ZW_DIAMOND_ORIGIN, PROFILE_GH_COCOA_ORIGIN,
 };
 use crate::groth16::CommodityOriginCircuit;
 use crate::groth16::CommodityOriginSample;
@@ -157,6 +157,70 @@ fn gh_gold_profile_wrong_merkle_path_fails_r1cs() {
     let mut sample = sample_commodity_origin_for_profile(&profile).unwrap();
     sample.mine_id[0] ^= 0xff;
     assert_constraints_unsatisfied(&sample);
+}
+
+#[test]
+fn gh_cocoa_profile_registry_id_and_underlying_circuit() {
+    let profile = gh_cocoa_origin_profile();
+    assert_eq!(profile.profile_id, PROFILE_GH_COCOA_ORIGIN);
+    assert_eq!(
+        format!("{:?}", profile.groth16_circuit),
+        "CommodityOrigin"
+    );
+}
+
+#[test]
+fn gh_cocoa_profile_sample_validates_and_satisfies_r1cs() {
+    let profile = gh_cocoa_origin_profile();
+    let sample = sample_commodity_origin_for_profile(&profile).unwrap();
+    validate_profile_sample(&profile, &sample).unwrap();
+    assert_constraints_satisfied(&sample);
+}
+
+#[test]
+fn gh_cocoa_profile_cert_mask_rejected_before_prove() {
+    let profile = gh_cocoa_origin_profile();
+    let mut sample = sample_commodity_origin_for_profile(&profile).unwrap();
+    sample.certification_flags = 0;
+    let err = validate_profile_sample(&profile, &sample).unwrap_err();
+    assert_eq!(
+        err,
+        ProfileValidationError::CertificationMaskUnsatisfied {
+            required_mask: profile.required_certification_mask,
+            actual: 0,
+        }
+    );
+}
+
+#[test]
+fn gh_cocoa_profile_gps_lat_below_min_fails_r1cs() {
+    let profile = gh_cocoa_origin_profile();
+    let mut sample = sample_commodity_origin_for_profile(&profile).unwrap();
+    sample.lat = profile.bounds[0] - 1;
+    assert_constraints_unsatisfied(&sample);
+}
+
+#[test]
+fn gh_cocoa_profile_primary_below_min_fails_r1cs() {
+    let profile = gh_cocoa_origin_profile();
+    let mut sample = sample_commodity_origin_for_profile(&profile).unwrap();
+    sample.primary_metric = profile.min_primary - 1;
+    assert_constraints_unsatisfied(&sample);
+}
+
+#[test]
+fn gh_cocoa_profile_wrong_commodity_type_fails_validation() {
+    let profile = gh_cocoa_origin_profile();
+    let mut sample = sample_commodity_origin_for_profile(&profile).unwrap();
+    sample.commodity_type = 0;
+    let err = validate_profile_sample(&profile, &sample).unwrap_err();
+    assert_eq!(
+        err,
+        ProfileValidationError::CommodityTypeMismatch {
+            expected: 2,
+            actual: 0,
+        }
+    );
 }
 
 #[test]

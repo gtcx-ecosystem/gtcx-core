@@ -10,9 +10,9 @@ mod validate;
 
 pub use certification::{certification_mask_satisfied, CertificationBit};
 pub use registry::{
-    all_profile_ids, commodity_origin_profile, gh_gold_origin_profile, profile_by_id,
-    zw_diamond_origin_profile, CommodityOriginProfileConfig, MetricSemantics,
-    PROFILE_GH_GOLD_ORIGIN, PROFILE_ZW_DIAMOND_ORIGIN,
+    all_profile_ids, commodity_origin_profile, gh_cocoa_origin_profile, gh_gold_origin_profile,
+    profile_by_id, zw_diamond_origin_profile, CommodityOriginProfileConfig, MetricSemantics,
+    PROFILE_GH_COCOA_ORIGIN, PROFILE_GH_GOLD_ORIGIN, PROFILE_ZW_DIAMOND_ORIGIN,
 };
 pub use sample::sample_commodity_origin_for_profile;
 pub use validate::{

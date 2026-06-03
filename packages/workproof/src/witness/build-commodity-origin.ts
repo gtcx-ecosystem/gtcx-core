@@ -1,4 +1,5 @@
 import { certificationBitMask, CertificationBit } from '../circuit-profiles/certification';
+import { GH_COCOA_ORIGIN_PROFILE } from '../circuit-profiles/gh-cocoa-origin';
 import { GH_GOLD_ORIGIN_PROFILE } from '../circuit-profiles/gh-gold-origin';
 import { ZW_DIAMOND_ORIGIN_PROFILE } from '../circuit-profiles/zw-diamond-origin';
 import type { WorkProofClaim, WorkProofCredentialSubject } from '../workproof/types';
@@ -62,7 +63,7 @@ export function buildCommodityOriginWitness(
   const commodityLabel =
     credentialSubject.commodityContext?.trim() || extractCommodityLabel(produced);
   const commodityType = commodityTypeFromLabel(commodityLabel);
-  const { primaryMetric, secondaryMetric } = extractMetrics(claims, produced);
+  const { primaryMetric, secondaryMetric } = extractMetrics(claims, produced, commodityType);
 
   const useGhGoldProfile =
     supplement.circuitTarget === 'gh-gold-origin' ||
@@ -70,18 +71,25 @@ export function buildCommodityOriginWitness(
   const useZwDiamondProfile =
     supplement.circuitTarget === 'zw-diamond-origin' ||
     (supplement.circuitTarget === undefined && commodityType === 1);
+  const useGhCocoaProfile =
+    supplement.circuitTarget === 'gh-cocoa-origin' ||
+    (supplement.circuitTarget === undefined && commodityType === 2);
 
   const circuitTarget: WitnessCircuitTarget = useGhGoldProfile
     ? 'gh-gold-origin'
     : useZwDiamondProfile
       ? 'zw-diamond-origin'
-      : (supplement.circuitTarget ?? 'commodity-origin');
+      : useGhCocoaProfile
+        ? 'gh-cocoa-origin'
+        : (supplement.circuitTarget ?? 'commodity-origin');
 
   const activeProfile = useGhGoldProfile
     ? GH_GOLD_ORIGIN_PROFILE
     : useZwDiamondProfile
       ? ZW_DIAMOND_ORIGIN_PROFILE
-      : null;
+      : useGhCocoaProfile
+        ? GH_COCOA_ORIGIN_PROFILE
+        : null;
 
   const profileBounds = activeProfile?.bounds ?? supplement.bounds;
   const profileMinPrimary = activeProfile?.minPrimary ?? supplement.minPrimary;
@@ -155,9 +163,34 @@ function extractCommodityLabel(claim: WorkProofClaim): string {
 
 function extractMetrics(
   claims: WorkProofClaim[],
-  produced: WorkProofClaim
+  produced: WorkProofClaim,
+  commodityType: number
 ): { primaryMetric: number; secondaryMetric: number } {
   const quantity = findClaim(claims, 'QuantityVerified');
+  const graded = findClaim(claims, 'QualityGraded');
+
+  const gradeFromQuality = (): number => {
+    if (graded?.value.kind === 'enum') {
+      if (graded.value.value === 'high') return 90;
+      if (graded.value.value === 'medium') return 85;
+      return 80;
+    }
+    return 85;
+  };
+
+  if (commodityType === 2) {
+    let grams = 1000;
+    if (quantity?.value.kind === 'numeric') {
+      grams = Math.round(quantity.value.value * 1000);
+    } else if (produced.value.kind === 'composite') {
+      const q = produced.value.components['quantity'];
+      if (q && typeof q === 'object' && 'kind' in q && q.kind === 'numeric') {
+        grams = Math.round(q.value * 1000);
+      }
+    }
+    return { primaryMetric: gradeFromQuality(), secondaryMetric: grams };
+  }
+
   if (quantity?.value.kind === 'numeric') {
     const grams = Math.round(quantity.value.value * 1000);
     return { primaryMetric: 995, secondaryMetric: grams };
@@ -176,7 +209,6 @@ function extractMetrics(
     }
   }
 
-  const graded = findClaim(claims, 'QualityGraded');
   if (graded?.value.kind === 'enum') {
     const purity =
       graded.value.value === 'high' ? 995 : graded.value.value === 'medium' ? 900 : 800;

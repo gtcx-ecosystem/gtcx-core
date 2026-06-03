@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-03T18:36:36.288Z",
+  "generatedAt": "2026-06-03T19:06:19.683Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.3.4",
@@ -170,7 +170,7 @@
       "version": "3.1.4",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "77e31770dbb493890bb8fa42d7979b5bde8655be3864b9d5bd116fc6c3e9bbfe",
+      "hash": "f336340f18c1ca719790e48e3d5061a38c487ab3c665408247fc07474bdc19c2",
       "exports": [
         "Backend",
         "batchVerify",
@@ -201,6 +201,7 @@
         "generateCommodityOriginKeys",
         "generateCommodityOriginProfileKeys",
         "generateDiamondOriginKeys",
+        "generateGhCocoaOriginKeys",
         "generateGhGoldOriginKeys",
         "generateKeyId",
         "generateKeyPair",
@@ -209,7 +210,10 @@
         "generateZwDiamondOriginKeys",
         "getBackend",
         "getPublicKeyLength",
+        "GH_COCOA_ORIGIN_AUTHENTICATED_MASK",
         "GH_GOLD_REGULATORY_EXPORT_MASK",
+        "GhCocoaOriginProof",
+        "GhCocoaOriginProofInput",
         "GhGoldOriginProof",
         "GhGoldOriginProofInput",
         "hash",
@@ -234,6 +238,7 @@
         "proveCommodityOriginProfile",
         "proveCommodityRange",
         "proveDiamondOrigin",
+        "proveGhCocoaOrigin",
         "proveGhGoldOrigin",
         "proveZwDiamondOrigin",
         "sanitizeBatchVerifyOutput",
@@ -275,6 +280,7 @@
         "verifyCommodityOriginProfile",
         "verifyCommodityRange",
         "verifyDiamondOrigin",
+        "verifyGhCocoaOrigin",
         "verifyGhGoldOrigin",
         "verifyHash",
         "verifyHashValue",
@@ -1191,7 +1197,7 @@
       "version": "3.1.4",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "54f0d75db375f9d847f2164f4868994247a9ffb2671762feaea0e39e6ddd39c1",
+      "hash": "3cbb10c68d06ddbc14258dce7c502f8202f346c16297c53a4a39fb952880d71d",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",
@@ -1416,7 +1422,7 @@
       "version": "1.0.4",
       "dir": "packages/workproof",
       "typesPath": "packages/workproof/dist/index.d.ts",
-      "hash": "7a486a4779fa3d156569ab53fd53963522dce386dbe61de3837ef129d67aa6d4",
+      "hash": "bf220722ab842024710be4239b33278435b650e87dacbf07fcde95b1529b39a0",
       "exports": [
         "AdmissionCriteria",
         "AdmissionCriteriaSchema",

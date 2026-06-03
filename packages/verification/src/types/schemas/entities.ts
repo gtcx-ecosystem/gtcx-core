@@ -278,7 +278,11 @@ export const PhotoProofRefSchema = z.object({
   timestamp: z.number().int().positive(),
 });
 
-export const CommodityOriginProfileIdSchema = z.enum(['gh-gold-origin', 'zw-diamond-origin']);
+export const CommodityOriginProfileIdSchema = z.enum([
+  'gh-gold-origin',
+  'gh-cocoa-origin',
+  'zw-diamond-origin',
+]);
 
 export const CommodityOriginZkProofRefSchema = z.object({
   profileId: CommodityOriginProfileIdSchema,

@@ -1,4 +1,5 @@
 export { GH_GOLD_ORIGIN_PROFILE } from './gh-gold-origin';
+export { GH_COCOA_ORIGIN_PROFILE } from './gh-cocoa-origin';
 export { ZW_DIAMOND_ORIGIN_PROFILE } from './zw-diamond-origin';
 export {
   CertificationBit,
@@ -12,12 +13,14 @@ export type {
   UnderlyingGroth16Circuit,
 } from './types';
 
+import { GH_COCOA_ORIGIN_PROFILE } from './gh-cocoa-origin';
 import { GH_GOLD_ORIGIN_PROFILE } from './gh-gold-origin';
 import type { CircuitProfileId, CommodityOriginProfileConfig } from './types';
 import { ZW_DIAMOND_ORIGIN_PROFILE } from './zw-diamond-origin';
 
 const REGISTRY: Record<CircuitProfileId, CommodityOriginProfileConfig> = {
   'gh-gold-origin': GH_GOLD_ORIGIN_PROFILE,
+  'gh-cocoa-origin': GH_COCOA_ORIGIN_PROFILE,
   'zw-diamond-origin': ZW_DIAMOND_ORIGIN_PROFILE,
   'commodity-origin': {
     profileId: 'commodity-origin',

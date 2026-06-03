@@ -45,7 +45,7 @@ export interface PhotoProofRef {
 }
 
 /** Registry profile IDs for commodity-origin Groth16 proofs (DTF-5.2.2). */
-export type CommodityOriginProfileId = 'gh-gold-origin' | 'zw-diamond-origin';
+export type CommodityOriginProfileId = 'gh-gold-origin' | 'gh-cocoa-origin' | 'zw-diamond-origin';
 
 /** Groth16 commodity-origin proof attached to a verification proof bundle. */
 export interface CommodityOriginZkProofRef {

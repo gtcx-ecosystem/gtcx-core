@@ -1,7 +1,7 @@
 import type { ZKProof } from './zkp';
 
 /** Registry profile IDs over the commodity-origin R1CS. */
-export type CommodityOriginProfileId = 'gh-gold-origin' | 'zw-diamond-origin';
+export type CommodityOriginProfileId = 'gh-gold-origin' | 'gh-cocoa-origin' | 'zw-diamond-origin';
 
 export interface CommodityOriginProfileProofInput {
   profileId: CommodityOriginProfileId;

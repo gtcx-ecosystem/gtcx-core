@@ -4,7 +4,11 @@
 // ============================================================================
 
 /** Groth16 circuit target for commodity-origin family. */
-export type WitnessCircuitTarget = 'commodity-origin' | 'gh-gold-origin' | 'zw-diamond-origin';
+export type WitnessCircuitTarget =
+  | 'commodity-origin'
+  | 'gh-gold-origin'
+  | 'gh-cocoa-origin'
+  | 'zw-diamond-origin';
 
 /** Merkle path witness for approved-mine membership. */
 export interface CommodityOriginMerklePathWitness {

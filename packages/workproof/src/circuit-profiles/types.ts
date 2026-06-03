@@ -3,13 +3,20 @@
 // ============================================================================
 
 /** Registry profile IDs (not separate cryptographic circuits). */
-export type CircuitProfileId = 'gh-gold-origin' | 'zw-diamond-origin' | 'commodity-origin';
+export type CircuitProfileId =
+  | 'gh-gold-origin'
+  | 'gh-cocoa-origin'
+  | 'zw-diamond-origin'
+  | 'commodity-origin';
 
 /** Underlying Groth16 circuit type (always commodity-origin for origin profiles). */
 export type UnderlyingGroth16Circuit = 'CommodityOrigin';
 
 /** Metric interpretation for verifiers (off-chain policy). */
-export type ProfileMetricSemantics = 'purity-basis-points-and-grams' | 'clarity-and-centi-carats';
+export type ProfileMetricSemantics =
+  | 'purity-basis-points-and-grams'
+  | 'clarity-and-centi-carats'
+  | 'grade-and-grams';
 
 /** Configurable policy pack — no jurisdiction literals in crypto code. */
 export interface CommodityOriginProfileConfig {

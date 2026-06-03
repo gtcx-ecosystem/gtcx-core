@@ -119,6 +119,15 @@ export {
 } from './zkp-zw-diamond-origin';
 
 export {
+  generateGhCocoaOriginKeys,
+  proveGhCocoaOrigin,
+  verifyGhCocoaOrigin,
+  GH_COCOA_ORIGIN_AUTHENTICATED_MASK,
+  type GhCocoaOriginProofInput,
+  type GhCocoaOriginProof,
+} from './zkp-gh-cocoa-origin';
+
+export {
   proveCommodityRange,
   verifyCommodityRange,
   type CommodityRangeProofInput,

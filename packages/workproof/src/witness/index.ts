@@ -1,5 +1,6 @@
 export {
   GH_GOLD_ORIGIN_PROFILE,
+  GH_COCOA_ORIGIN_PROFILE,
   ZW_DIAMOND_ORIGIN_PROFILE,
   profileById,
 } from '../circuit-profiles';

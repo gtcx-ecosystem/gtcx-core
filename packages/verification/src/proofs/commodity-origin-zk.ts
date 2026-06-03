@@ -34,7 +34,11 @@ export function commodityOriginWitnessToProfileInput(
   merklePathHex: string = DEFAULT_LAB_MERKLE_PATH_HEX
 ): CommodityOriginProfileProofInput {
   const profileId = witness.circuitTarget;
-  if (profileId !== 'gh-gold-origin' && profileId !== 'zw-diamond-origin') {
+  if (
+    profileId !== 'gh-gold-origin' &&
+    profileId !== 'gh-cocoa-origin' &&
+    profileId !== 'zw-diamond-origin'
+  ) {
     throw new TypeError(
       `commodityOriginWitnessToProfileInput: unsupported circuitTarget ${witness.circuitTarget}`
     );

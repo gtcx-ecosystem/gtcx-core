@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import {
   GH_GOLD_ORIGIN_PROFILE,
+  GH_COCOA_ORIGIN_PROFILE,
   ZW_DIAMOND_ORIGIN_PROFILE,
   profileById,
   certificationMaskSatisfied,
@@ -40,5 +41,25 @@ describe('circuit profiles', () => {
     expect(mask).toBe(certificationBitMask(CertificationBit.RegionalCertification));
     expect(certificationMaskSatisfied(mask, mask)).toBe(true);
     expect(certificationMaskSatisfied(0, mask)).toBe(false);
+  });
+
+  it('gh-cocoa-origin maps to CommodityOrigin underlying circuit', () => {
+    expect(GH_COCOA_ORIGIN_PROFILE.profileId).toBe('gh-cocoa-origin');
+    expect(GH_COCOA_ORIGIN_PROFILE.underlyingCircuit).toBe('CommodityOrigin');
+    expect(GH_COCOA_ORIGIN_PROFILE.commodityType).toBe(2);
+    expect(GH_COCOA_ORIGIN_PROFILE.metricSemantics).toBe('grade-and-grams');
+  });
+
+  it('requires origin-authenticated bit in gh-cocoa profile mask', () => {
+    const mask = GH_COCOA_ORIGIN_PROFILE.requiredCertificationMask;
+    expect(mask).toBe(certificationBitMask(CertificationBit.OriginAuthenticated));
+    expect(certificationMaskSatisfied(mask | 4, mask)).toBe(true);
+    expect(certificationMaskSatisfied(0, mask)).toBe(false);
+  });
+
+  it('profile registry resolves gh-cocoa by id', () => {
+    const p = profileById('gh-cocoa-origin');
+    expect(p.jurisdictionCode).toBe('GH');
+    expect(p.minPrimary).toBe(80);
   });
 });

@@ -41,6 +41,7 @@ fn profile_lab_witness_defaults(
     let (primary_metric, secondary_metric) = match profile.metric_semantics {
         super::registry::MetricSemantics::PurityBasisPointsAndGrams => (995u64, 1_000u64),
         super::registry::MetricSemantics::ClarityAndCentiCarats => (85u64, 500u64),
+        super::registry::MetricSemantics::GradeAndGrams => (85u64, 1_000u64),
     };
 
     let certification_flags = profile.required_certification_mask;
