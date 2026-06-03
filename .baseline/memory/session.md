@@ -1,34 +1,31 @@
 ---
-session_id: '2026-06-04-roadmap-forward-fa-s1-s-t5-2'
+session_id: '2026-06-04-dtf-5-3-1-gh-cocoa'
 agent: 'gtcx-core-agent'
-focus: 'FA-S1 complete + S-T5-2 (DTF-5.2.3) — reconciled with bb955a8 / full-audit'
+focus: 'DTF-5.3.1 gh-cocoa-origin profile on CommodityOrigin R1CS'
 ---
 
-# Session: Roadmap forward (2026-06-04)
+# Session: DTF-5.3.1 complete
 
-## Completed this session
+## Done
 
-| Milestone | Evidence                                                                  |
-| --------- | ------------------------------------------------------------------------- |
-| FA-P0-2   | README split: library 9.5 vs DTF Tier 5 ~50%                              |
-| FA-P0-3   | `docs/specs/packages/README.md` — 24 packages                             |
-| DTF-5.2.3 | `groth16-zw-diamond-origin.kat.json`; `pnpm test:kat-cross-impl` 6/6 PASS |
-| S-T5-2    | zw-diamond profile + verification + KATs                                  |
-
-Prior: FA-P0-1 (`5a0f38f`), roadmap reconcile (`bb955a8`).
+| Milestone | Evidence                                                                                                  |
+| --------- | --------------------------------------------------------------------------------------------------------- |
+| DTF-5.3.1 | `gh-cocoa-origin` profile — Rust registry, workproof witness, `@gtcx/crypto` prove/verify, negative tests |
 
 ## Protocol 22
 
-`pnpm agent:next-work` → **DTF-5.3.1** (gh-cocoa-origin profile)
+`pnpm agent:next-work` → **DTF-5.3.2** (five-jurisdiction integration fixtures)
 
 ## Verification
 
-| Command                                    | Result          |
-| ------------------------------------------ | --------------- |
-| `pnpm typecheck`                           | exit 0          |
-| `pnpm test:kat-cross-impl`                 | 6/6 PASS        |
-| `pnpm --filter @gtcx/zkp-kat-vectors test` | (run on commit) |
+| Command                                           | Result                                                    |
+| ------------------------------------------------- | --------------------------------------------------------- |
+| `cargo test -p gtcx-zkp circuit_profiles`         | 26 passed                                                 |
+| `pnpm --filter @gtcx/workproof test`              | 390 passed                                                |
+| `pnpm --filter @gtcx/crypto test -- zkp-gh-cocoa` | 2 passed                                                  |
+| `pnpm typecheck`                                  | exit 0                                                    |
+| `pnpm api:update-baseline`                        | crypto additive; workproof/verification signature updates |
 
-## Ecosystem open
+## Profile summary
 
-OI-X02 infra ER-1-08 ack pending; OI-X06 baseline-os cost-router external.
+- **ID:** `gh-cocoa-origin` · commodity_type `2` · GH bbox · grade + grams · OriginAuthenticated cert mask
