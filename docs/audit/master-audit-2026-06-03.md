@@ -197,19 +197,19 @@ Sovereign pilot still requires infra + human gates. DTF Tier 5 **technical ~88%*
 | RH-P1     | No repo hygiene policy               | `f512c0d`                                         |
 | DTF-5.4.4 | Protocols E2E witness                | `73eaff2b` ack                                    |
 | DTF-5.5.1 | Strict jurisdiction packs            | `pnpm jurisdiction:validate-packs`                |
+| MA-P2-01  | Network maturity honesty badges      | `0b572f8` — README + overview matrix              |
+| MA-P2-04  | Overview README vs audit scores      | `a48b0c7` Phase 7 + `0b572f8` feature matrix      |
 
 ### 4.5 Findings remaining
 
-| Sev | ID       | Finding                             | Evidence                           |
-| --- | -------- | ----------------------------------- | ---------------------------------- |
-| P1  | MA-P1-01 | No third-party pen-test report      | EXT-INF-002; trust portal gap      |
-| P1  | MA-P1-02 | CORE-004 ceremony blocked           | `pnpm agent:next-work` → XR-402    |
-| P1  | MA-P1-03 | Sovereign pilot ecosystem gates     | EXT-INF-014/015; not core-only     |
-| P2  | MA-P2-01 | `@gtcx/network` transport maturity  | `rust/gtcx-network` Phase 2 libp2p |
-| P2  | MA-P2-02 | USSD protocol scaffolding           | connectivity profile enum only     |
-| P2  | MA-P2-03 | `ops:check` 3 warns                 | OPENAI*API_KEY, TURBO*\* org scope |
-| P2  | MA-P2-04 | Overview README stale vs this audit | `docs/overview/README.md` §1       |
-| P2  | MA-P2-05 | Historical audit docs >300 lines    | Justified evidence retention       |
+| Sev | ID       | Finding                          | Evidence                           |
+| --- | -------- | -------------------------------- | ---------------------------------- |
+| P1  | MA-P1-01 | No third-party pen-test report   | EXT-INF-002; trust portal gap      |
+| P1  | MA-P1-02 | CORE-004 ceremony blocked        | `pnpm agent:next-work` → XR-402    |
+| P1  | MA-P1-03 | Sovereign pilot ecosystem gates  | EXT-INF-014/015; not core-only     |
+| P2  | MA-P2-02 | USSD protocol scaffolding        | connectivity profile enum only     |
+| P2  | MA-P2-03 | `ops:check` 3 warns              | OPENAI*API_KEY, TURBO*\* org scope |
+| P2  | MA-P2-05 | Historical audit docs >300 lines | Justified evidence retention       |
 
 ---
 
@@ -303,13 +303,13 @@ Full register: [execution-roadmap.md](./execution-roadmap.md) · [tier-5-workpla
 
 ## 7. Top 5 Remediation Items
 
-| Priority | Item                                            | Owner               | Dependency   | Expected lift        |
-| -------- | ----------------------------------------------- | ------------------- | ------------ | -------------------- |
-| P1       | Trusted-setup ceremony → CORE-004               | gtcx-core + infra   | XR-402       | D3 → 10; core +0.2   |
-| P1       | Live-stack pen-test report                      | gtcx-infrastructure | EXT-INF-002  | Enterprise +0.5      |
-| P1       | Infra ER-1-08 hub ack                           | gtcx-infrastructure | OI-X02       | Coordination closure |
-| P2       | Refresh `docs/overview/README.md` to honest 8.9 | protocol-architect  | This audit   | Spec fidelity        |
-| P2       | Org secrets: OPENAI*API_KEY, TURBO*\*           | DevOps              | gh org admin | ops:check 11/11      |
+| Priority | Item                                  | Owner               | Dependency   | Expected lift        |
+| -------- | ------------------------------------- | ------------------- | ------------ | -------------------- |
+| P1       | Trusted-setup ceremony → CORE-004     | gtcx-core + infra   | XR-402       | D3 → 10; core +0.2   |
+| P1       | Live-stack pen-test report            | gtcx-infrastructure | EXT-INF-002  | Enterprise +0.5      |
+| P1       | Infra ER-1-08 hub ack                 | gtcx-infrastructure | OI-X02       | Coordination closure |
+| P2       | Org secrets: OPENAI*API_KEY, TURBO*\* | DevOps              | gh org admin | ops:check 11/11      |
+| P2       | USSD protocol spike scope (MA-P2-02)  | gtcx-core           | Product spec | Global South roadmap |
 
 ---
 
