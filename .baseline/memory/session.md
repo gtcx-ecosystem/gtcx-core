@@ -1,31 +1,34 @@
 ---
-session_id: '2026-06-04-dtf-5-3-1-gh-cocoa'
+session_id: '2026-06-04-dtf-5-3-2-jurisdiction-fixtures'
 agent: 'gtcx-core-agent'
-focus: 'DTF-5.3.1 gh-cocoa-origin profile on CommodityOrigin R1CS'
+focus: 'DTF-5.3.2 five-jurisdiction Tier-5 proof fixtures'
 ---
 
-# Session: DTF-5.3.1 complete
+# Session: DTF-5.3.2 complete
 
 ## Done
 
-| Milestone | Evidence                                                                                                  |
-| --------- | --------------------------------------------------------------------------------------------------------- |
-| DTF-5.3.1 | `gh-cocoa-origin` profile — Rust registry, workproof witness, `@gtcx/crypto` prove/verify, negative tests |
+| Milestone | Evidence                                                                                                          |
+| --------- | ----------------------------------------------------------------------------------------------------------------- |
+| DTF-5.3.2 | `tests/integration/fixtures/tier5-jurisdiction-proof-fixtures.ts`, `tier5-jurisdiction-proofs.test.ts` (14 tests) |
 
 ## Protocol 22
 
-`pnpm agent:next-work` → **DTF-5.3.2** (five-jurisdiction integration fixtures)
+`pnpm agent:next-work` → **DTF-5.3.3** (Minerals board UAT protocol template)
 
 ## Verification
 
-| Command                                           | Result                                                    |
-| ------------------------------------------------- | --------------------------------------------------------- |
-| `cargo test -p gtcx-zkp circuit_profiles`         | 26 passed                                                 |
-| `pnpm --filter @gtcx/workproof test`              | 390 passed                                                |
-| `pnpm --filter @gtcx/crypto test -- zkp-gh-cocoa` | 2 passed                                                  |
-| `pnpm typecheck`                                  | exit 0                                                    |
-| `pnpm api:update-baseline`                        | crypto additive; workproof/verification signature updates |
+| Command                                               | Result               |
+| ----------------------------------------------------- | -------------------- |
+| `pnpm test` (integration `tier5-jurisdiction-proofs`) | 14 passed            |
+| `pnpm typecheck`                                      | pending this session |
 
-## Profile summary
+## Fixture map
 
-- **ID:** `gh-cocoa-origin` · commodity_type `2` · GH bbox · grade + grams · OriginAuthenticated cert mask
+| Code       | Profile           | Notes                             |
+| ---------- | ----------------- | --------------------------------- |
+| ZW         | zw-diamond-origin | Kimberley claim                   |
+| GH         | gh-gold-origin    | Gold buying license               |
+| GH (cocoa) | gh-cocoa-origin   | Extra fixture in same file        |
+| NA, CD     | commodity-origin  | Lab bounds until DTF-5.4 registry |
+| BW         | zw-diamond-origin | Regional diamond pack             |
