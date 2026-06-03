@@ -8,22 +8,22 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
+    "@gtcx/api-client": "workspace:*",
+    "@gtcx/connectivity": "workspace:*",
     "@gtcx/crypto": "workspace:*",
-    "@gtcx/identity": "workspace:*",
-    "@gtcx/verification": "workspace:*",
     "@gtcx/domain": "workspace:*",
+    "@gtcx/events": "workspace:*",
+    "@gtcx/identity": "workspace:*",
+    "@gtcx/jurisdiction-config": "workspace:*",
+    "@gtcx/logging": "workspace:*",
+    "@gtcx/resilience": "workspace:*",
+    "@gtcx/runtime": "workspace:*",
     "@gtcx/schemas": "workspace:*",
     "@gtcx/security": "workspace:*",
     "@gtcx/sync": "workspace:*",
-    "@gtcx/types": "workspace:*",
-    "@gtcx/events": "workspace:*",
-    "@gtcx/jurisdiction-config": "workspace:*",
-    "@gtcx/runtime": "workspace:*",
-    "@gtcx/api-client": "workspace:*",
-    "@gtcx/connectivity": "workspace:*",
-    "@gtcx/resilience": "workspace:*",
     "@gtcx/telemetry": "workspace:*",
-    "@gtcx/logging": "workspace:*",
-    "vitest": "^4.1.5"
+    "@gtcx/types": "workspace:*",
+    "@gtcx/verification": "workspace:*",
+    "vitest": "^4.1.8"
   }
 }
