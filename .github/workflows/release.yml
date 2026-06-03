@@ -96,6 +96,9 @@ jobs:
         run: pnpm build
 
       - name: API surface baseline check
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         run: |
           BASELINE_REF="${{ github.event.before }}"
           if [ -z "$BASELINE_REF" ] || [ "$BASELINE_REF" = "0000000000000000000000000000000000000000" ]; then
