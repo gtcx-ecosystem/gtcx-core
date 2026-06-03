@@ -47,6 +47,9 @@ focus: 'Cross-repo coordination cleanup + gtcx-infrastructure 10-10 roadmap prep
 | CORE-004 D3 transcript         | gtcx-core           | release-gated | XR-402 ceremony   |
 | CORE-005–009 vendors/regulator | baseline-os         | blocked       | human/external    |
 
-## Next Focus
+## Next Focus (Protocol 22 / 27 — 2026-06-03)
 
-**gtcx-infrastructure 10-10 roadmap** — switch repo context per user request.
+- **DTF-5.1.2 done:** `gh-gold-origin` = CommodityOrigin **profile** (no fork); KAT `groth16-gh-gold-origin.kat.json`; `pnpm test:kat-cross-impl` PASS
+- **agent:next-work:** **DTF-5.1.3** — NAPI prove/verify profile-aware (same R1CS keys)
+- **DTF-5.1.4 partial:** KAT artifact + cross-impl verify; CI job wiring remains with 5.1.3
+- **Spec:** `docs/specs/packages/zkp-circuit-profiles.md`
