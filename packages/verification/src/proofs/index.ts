@@ -30,5 +30,23 @@ export {
   type CreateProofBundleInput,
 } from './bundler';
 
+export {
+  DEFAULT_LAB_MERKLE_PATH_HEX,
+  attachCommodityOriginZkProof,
+  commodityOriginWitnessToProfileInput,
+  commodityOriginZkProofRefToProfileProof,
+  createCommodityOriginZkProofRef,
+  verifyCommodityOriginZkProofCryptographic,
+  verifyCommodityOriginZkProofStructure,
+  type CommodityOriginWitnessLike,
+} from './commodity-origin-zk';
+
 // Re-export types from central types
-export type { ProofBundle, CryptographicProofRef, LocationProofRef, PhotoProofRef } from '../types';
+export type {
+  ProofBundle,
+  CryptographicProofRef,
+  LocationProofRef,
+  PhotoProofRef,
+  CommodityOriginZkProofRef,
+  CommodityOriginProfileId,
+} from '../types';

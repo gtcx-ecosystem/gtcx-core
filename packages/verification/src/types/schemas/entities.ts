@@ -278,6 +278,17 @@ export const PhotoProofRefSchema = z.object({
   timestamp: z.number().int().positive(),
 });
 
+export const CommodityOriginProfileIdSchema = z.enum(['gh-gold-origin', 'zw-diamond-origin']);
+
+export const CommodityOriginZkProofRefSchema = z.object({
+  profileId: CommodityOriginProfileIdSchema,
+  system: z.literal('groth16'),
+  proofType: z.literal('commodity_origin'),
+  proof: z.string().min(2),
+  verifyingKey: z.string().min(2),
+  publicInputsJson: z.string().min(2),
+});
+
 export const ProofBundleSchema = z.object({
   id: z.string().min(1),
   type: z.enum(['location', 'photo', 'workflow', 'certificate']),
@@ -286,6 +297,7 @@ export const ProofBundleSchema = z.object({
     cryptographicProof: CryptographicProofRefSchema,
     locationProof: LocationProofRefSchema.optional(),
     photoProofs: z.array(PhotoProofRefSchema).optional(),
+    commodityOriginZkProof: CommodityOriginZkProofRefSchema.optional(),
   }),
   certificate: BaseCertificateSchema.optional(),
   qrCode: GeneratedQRCodeSchema.optional(),

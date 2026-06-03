@@ -16,6 +16,7 @@ export interface ProofBundle {
     cryptographicProof: CryptographicProofRef;
     locationProof?: LocationProofRef | undefined;
     photoProofs?: PhotoProofRef[] | undefined;
+    commodityOriginZkProof?: CommodityOriginZkProofRef | undefined;
   };
   certificate?: Certificate | undefined;
   qrCode?: GeneratedQRCode | undefined;
@@ -41,6 +42,19 @@ export interface PhotoProofRef {
   uri: string;
   hash: string;
   timestamp: number;
+}
+
+/** Registry profile IDs for commodity-origin Groth16 proofs (DTF-5.2.2). */
+export type CommodityOriginProfileId = 'gh-gold-origin' | 'zw-diamond-origin';
+
+/** Groth16 commodity-origin proof attached to a verification proof bundle. */
+export interface CommodityOriginZkProofRef {
+  profileId: CommodityOriginProfileId;
+  system: 'groth16';
+  proofType: 'commodity_origin';
+  proof: string;
+  verifyingKey: string;
+  publicInputsJson: string;
 }
 
 // ============================================================================

@@ -15,6 +15,7 @@ import type {
   LocationProofRef,
   PhotoProofRef,
   CertificateLocation,
+  CommodityOriginZkProofRef,
 } from '../types';
 import { ProofBundleSchema } from '../types/schemas';
 
@@ -97,6 +98,7 @@ export interface CreateProofBundleInput {
   cryptographicProof: CryptographicProofRef;
   locationProof?: LocationProofRef | undefined;
   photoProofs?: PhotoProofRef[] | undefined;
+  commodityOriginZkProof?: CommodityOriginZkProofRef | undefined;
   certificate?: Certificate | undefined;
   qrCode?: GeneratedQRCode | undefined;
 }
@@ -113,6 +115,7 @@ export function createProofBundle(input: CreateProofBundleInput): ProofBundle {
       cryptographicProof: input.cryptographicProof,
       locationProof: input.locationProof,
       photoProofs: input.photoProofs,
+      commodityOriginZkProof: input.commodityOriginZkProof,
     },
     certificate: input.certificate,
     qrCode: input.qrCode,
@@ -165,6 +168,20 @@ export function verifyProofBundleStructure(bundle: ProofBundle): {
 
   if (bundle.type === 'certificate' && !bundle.certificate) {
     errors.push('Certificate bundle requires certificate');
+  }
+
+  const zk = bundle.proofs.commodityOriginZkProof;
+  if (zk) {
+    if (zk.system !== 'groth16') {
+      errors.push('commodityOriginZkProof.system must be groth16');
+    }
+    if (zk.proofType !== 'commodity_origin') {
+      errors.push('commodityOriginZkProof.proofType must be commodity_origin');
+    }
+    if (!zk.profileId) errors.push('commodityOriginZkProof missing profileId');
+    if (!zk.proof) errors.push('commodityOriginZkProof missing proof');
+    if (!zk.verifyingKey) errors.push('commodityOriginZkProof missing verifyingKey');
+    if (!zk.publicInputsJson) errors.push('commodityOriginZkProof missing publicInputsJson');
   }
 
   return { valid: errors.length === 0, errors };
