@@ -15,6 +15,8 @@ caps_fired: 0
 
 # gtcx-core — Master Audit & Bank-Grade Certification
 
+> **Historical moat framing.** Superseded for competitive claims by [DTF-001 Defensibility Tiers 1–5](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0). Phrases like “90-day copy” describe **Tier 1** only. Current audit: [master-audit-2026-06-03.md](./master-audit-2026-06-03.md).
+
 **Date:** 2026-06-02
 **Repo:** `gtcx-ecosystem/gtcx-core`
 **Auditor:** Kimi Code CLI (k1.6)

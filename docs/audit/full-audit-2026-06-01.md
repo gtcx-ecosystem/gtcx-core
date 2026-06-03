@@ -17,6 +17,8 @@ audit_date: '2026-06-01'
 
 # Full Audit — gtcx-core
 
+> **Historical moat framing.** “90-day copy test” sections describe **DTF Tier 1** only. Canonical framework: [DTF-001](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0). Consistency audit: [dtf-documentation-consistency-audit-2026-06-03.md](./dtf-documentation-consistency-audit-2026-06-03.md).
+
 **Date:** 2026-06-01  
 **Branch:** `main` @ `7dceb91` (1 commit ahead of origin)  
 **Method:** Cursor `/full-audit` — 6-phase pipeline with live verification  

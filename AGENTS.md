@@ -220,6 +220,10 @@ Agents must not ask the operator what to build next when the 10/10 cryptographic
 | Manifest | `docs/operations/agent-work-selection.md` |
 | Command | `npm run agent:next-work` |
 
+## 7.55 Defensibility tiers (DTF-001) — moat claims
+
+For GTM, investor, or competitive moat language use **Defensibility Tier 1–5** (higher tier = harder to replicate = longer replication time). Canonical: `gtcx-docs/frameworks/defensibility-tiers/v1.0.0/`. Do not use undifferentiated “90-day moat” (that is **Tier 1** only). Path to **Tier 5**: `path-to-tier-5.md` in that framework.
+
 1. At session start (after Phase 3), run `npm run agent:next-work` and implement the returned milestone.
 2. Critical-path dimensions (D1, D6) outrank non-critical polish when scores are tied.
 3. External-blocked dimensions (D8, D9) must not be started without explicit human authorization.

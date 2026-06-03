@@ -383,9 +383,9 @@ Bank-grade cryptographic module validation and build provenance that makes the s
 **What it is:**  
 A release-attached evaluation pipeline that emits a JSON **AI scorecard** and, over time, a bundled **machine-readable trust artifact** set (scorecard + gate results + spec-drift signals). Implemented in `@gtcx/ai-eval` (`pnpm ai:evaluate`). Rules encode `docs/agents/safety-rules.json`; dimensions cover accuracy, safety, efficiency, and context utilization.
 
-**Why it is defensible (90-day copy test):**
+**Why it is defensible ([DTF-001](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0) **Tier 4**):**
 
-- Competitors can copy Ed25519 wrappers in weeks; they cannot quickly copy **GTCX-specific safety semantics**, gate choreography, and the habit of shipping **verifiable trust evidence on every release**.
+- Tier 1 (~90d) covers commodity crypto only; **ai-eval** encodes Tier 4 trust-train habit — GTCX-specific safety semantics, gate choreography, and verifiable trust evidence on every release.
 - Regulators and vendor-risk teams get an artifact they can diff release-over-release without reading 2,000+ tests.
 - Closes the gap between internal 9.5/10 completion scores and **customer-visible, machine-checkable** trust.
 

@@ -21,7 +21,7 @@ review_cycle: 'weekly'
 
 ## Executive Summary
 
-The 2026-06-02 master audit confirmed GTCX Core's operational moat is strong (8.5/10) but the algorithmic layer is **copyable in 90 days** (Ed25519 + arkworks Groth16 are open-source primitives). This program closes that gap by graduating four algorithmic strategies from **scaffolding** → **shipped circuits** with real proofs on real commodities.
+The 2026-06-02 master audit confirmed operational moat is strong; post–AM-1 hardening, the ZKP stack is **Defensibility Tier 2** (~6–12 months to replicate — see [DTF-001](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0)). This program targets **Tier 5** (domain-encoded jurisdiction circuits, 12–18+ months) by graduating four strategies from **scaffolding** → **shipped named circuits** with real proofs on real commodities.
 
 | Strategy                         | Moat Type                | Current State                | Target State                          | Timeline     |
 | -------------------------------- | ------------------------ | ---------------------------- | ------------------------------------- | ------------ |

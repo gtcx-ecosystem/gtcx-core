@@ -49,7 +49,7 @@ review_cycle: quarterly
 
 1. **No third-party crypto / stack pen-test report** in this repo (external; blocks sovereign S2+ procurement narrative)
 2. **README / marketing claims lag live state** (provenance 21/21 wording; composite 9.5 citation from May)
-3. **Competitive framing in GTM docs is stale** — algorithmic layer is no longer “90-day copyable” at prior assessment’s implied depth
+3. **DTF adoption incomplete** — historical audits/specs still use “90-day copy test”; see [dtf-documentation-consistency-audit-2026-06-03.md](./dtf-documentation-consistency-audit-2026-06-03.md)
 
 ---
 
@@ -189,14 +189,14 @@ review_cycle: quarterly
 
 ### Medium (P2)
 
-| ID    | Finding                                                                                                     | Evidence                                                                                                           |
-| ----- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| P2-01 | README claims **21/21** provenance on 3.1.4 train; live strict check is **22/22** including `ai-eval@0.1.4` | `README.md:31-32` vs `pnpm provenance:check-npm:strict` session output                                             |
-| P2-02 | README **composite 9.5/10** cites May 2026 internal audit; fresh core score **8.6** under ecosystem rubric  | This report                                                                                                        |
-| P2-03 | Package count prose drift (**18 / 21 / 22 / 24**)                                                           | `architecture:check` → 24; `public-packages.mjs` → 22 npm                                                          |
-| P2-04 | `gtcx-crypto` FIPS env tests can **flake** if `GTCX_FIPS_STRICT` leaks between tests                        | 1st `cargo test -p gtcx-crypto --lib`: 62 pass / **1 fail** `test_fips_permissive_allows_blake3`; 2nd run: 63 pass |
-| P2-05 | `@gtcx/network` README/matrix implies production transport; Rust crate documents **Phase 2 libp2p**         | `rust/gtcx-network/src/lib.rs:15-18`, README matrix                                                                |
-| P2-06 | GTM “90-day replicate = noble + zod” **understates** ZKP replication cost post–AM-1                         | Live ZKP test time + KAT + CI features vs `gtm-reality-check-2026-06-02.md:121-125`                                |
+| ID    | Finding                                                                                                     | Evidence                                                                                                                      |
+| ----- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| P2-01 | README claims **21/21** provenance on 3.1.4 train; live strict check is **22/22** including `ai-eval@0.1.4` | `README.md:31-32` vs `pnpm provenance:check-npm:strict` session output                                                        |
+| P2-02 | README **composite 9.5/10** cites May 2026 internal audit; fresh core score **8.6** under ecosystem rubric  | This report                                                                                                                   |
+| P2-03 | Package count prose drift (**18 / 21 / 22 / 24**)                                                           | `architecture:check` → 24; `public-packages.mjs` → 22 npm                                                                     |
+| P2-04 | `gtcx-crypto` FIPS env tests can **flake** if `GTCX_FIPS_STRICT` leaks between tests                        | 1st `cargo test -p gtcx-crypto --lib`: 62 pass / **1 fail** `test_fips_permissive_allows_blake3`; 2nd run: 63 pass            |
+| P2-05 | `@gtcx/network` README/matrix implies production transport; Rust crate documents **Phase 2 libp2p**         | `rust/gtcx-network/src/lib.rs:15-18`, README matrix                                                                           |
+| P2-06 | Historical audits/specs still use undifferentiated “90-day copy test”                                       | [dtf-documentation-consistency-audit-2026-06-03.md](./dtf-documentation-consistency-audit-2026-06-03.md) — GTM updated to DTF |
 
 ### Low (P3)
 
