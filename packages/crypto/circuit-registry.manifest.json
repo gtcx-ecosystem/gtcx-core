@@ -1,0 +1,49 @@
+{
+  "schema": "gtcx.circuit-registry.v1",
+  "registry_version": "1.0.0",
+  "underlying_r1cs": "CommodityOrigin",
+  "profiles": [
+    {
+      "profile_id": "gh-gold-origin",
+      "version": "1.0.0",
+      "status": "active",
+      "jurisdiction_code": "GH",
+      "introduced_in": "S-T5-1",
+      "native_provable": true
+    },
+    {
+      "profile_id": "zw-diamond-origin",
+      "version": "1.0.0",
+      "status": "active",
+      "jurisdiction_code": "ZW",
+      "introduced_in": "S-T5-2",
+      "native_provable": true
+    },
+    {
+      "profile_id": "gh-cocoa-origin",
+      "version": "1.0.0",
+      "status": "active",
+      "jurisdiction_code": "GH",
+      "introduced_in": "S-T5-3",
+      "native_provable": true
+    },
+    {
+      "profile_id": "commodity-origin",
+      "version": "0.1.0",
+      "status": "active",
+      "jurisdiction_code": "*",
+      "introduced_in": "S-T5-1",
+      "native_provable": false
+    },
+    {
+      "profile_id": "gh-gold-origin-preview",
+      "version": "0.9.0",
+      "status": "deprecated",
+      "jurisdiction_code": "GH",
+      "introduced_in": "S-T5-1",
+      "deprecated_at": "2026-06-01",
+      "superseded_by": "gh-gold-origin",
+      "native_provable": false
+    }
+  ]
+}

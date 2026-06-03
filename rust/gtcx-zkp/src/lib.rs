@@ -54,13 +54,13 @@ pub use schnorr::{
     schnorr_attribute_hash, schnorr_prove_identity_attribute, schnorr_verify_identity_attribute,
 };
 pub use circuit_profiles::{
-    all_profile_ids, certification_mask_satisfied, commodity_origin_profile,
-    gh_gold_origin_profile, gh_cocoa_origin_profile, profile_by_id, sample_commodity_origin_for_profile,
-    zw_diamond_origin_profile,
-    validate_profile_sample, validate_profile_witness, CertificationBit,
-    CommodityOriginProfileConfig, MetricSemantics, ProfileValidationError,
-    ProfileValidationResult, ProfileWitnessFields, PROFILE_GH_GOLD_ORIGIN,
-    PROFILE_GH_COCOA_ORIGIN, PROFILE_ZW_DIAMOND_ORIGIN,
+    active_profile_ids, all_profile_ids, certification_mask_satisfied, commodity_origin_profile,
+    gh_gold_origin_profile, gh_cocoa_origin_profile, profile_by_id, registry_meta, resolve_profile,
+    sample_commodity_origin_for_profile, zw_diamond_origin_profile, validate_profile_sample,
+    validate_profile_witness, CertificationBit, CircuitRegistryError, CommodityOriginProfileConfig,
+    MetricSemantics, ProfileLifecycleStatus, ProfileRegistryMeta, ProfileValidationError,
+    ProfileValidationResult, ProfileWitnessFields, PROFILE_GH_COCOA_ORIGIN, PROFILE_GH_GOLD_ORIGIN,
+    PROFILE_GH_GOLD_ORIGIN_PREVIEW, PROFILE_ZW_DIAMOND_ORIGIN,
 };
 pub use witness::{
     CommodityOriginMerklePathWitness, CommodityOriginWitness, CommodityOriginWitnessDto,

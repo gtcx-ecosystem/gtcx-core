@@ -82,4 +82,4 @@ KAT artifacts: `groth16-gh-gold-origin.kat.json`, `groth16-zw-diamond-origin.kat
 ## Related
 
 - [tier-5-workplan-2026-06.md](../../operations/tier-5-workplan-2026-06.md)
-- DTF-5.4.1 `CircuitRegistry` (semver registry — future)
+- DTF-5.4.1 `CircuitRegistry` — `@gtcx/crypto` `circuit-registry.ts` + `circuit-registry.manifest.json`; Rust `resolve_profile`

@@ -92,6 +92,20 @@ export {
 } from './zkp-diamond-origin';
 
 export {
+  CircuitRegistry,
+  CircuitRegistryError,
+  circuitRegistry,
+  resolveCircuitProfile,
+  NATIVE_PROVABLE_PROFILE_IDS,
+  type CircuitProfileLifecycleStatus,
+  type CircuitProfileVersion,
+  type CircuitRegistryEntry,
+  type CircuitRegistryErrorCode,
+  type NativeProvableProfileId,
+  type ResolveProfileOptions,
+} from './circuit-registry';
+
+export {
   generateCommodityOriginProfileKeys,
   proveCommodityOriginProfile,
   verifyCommodityOriginProfile,

@@ -13,6 +13,8 @@ export type {
   UnderlyingGroth16Circuit,
 } from './types';
 
+import { circuitRegistry } from '@gtcx/crypto';
+
 import { GH_COCOA_ORIGIN_PROFILE } from './gh-cocoa-origin';
 import { GH_GOLD_ORIGIN_PROFILE } from './gh-gold-origin';
 import type { CircuitProfileId, CommodityOriginProfileConfig } from './types';
@@ -37,5 +39,6 @@ const REGISTRY: Record<CircuitProfileId, CommodityOriginProfileConfig> = {
 };
 
 export function profileById(id: CircuitProfileId): CommodityOriginProfileConfig {
+  circuitRegistry.resolve(id);
   return REGISTRY[id];
 }

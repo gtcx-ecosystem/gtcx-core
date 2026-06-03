@@ -4,11 +4,16 @@
 //! separate R1CS implementations. All profiles map to [`Groth16CircuitType::CommodityOrigin`].
 
 mod certification;
+mod lifecycle;
 mod registry;
 mod sample;
 mod validate;
 
 pub use certification::{certification_mask_satisfied, CertificationBit};
+pub use lifecycle::{
+    active_profile_ids, registry_meta, resolve_profile, CircuitRegistryError,
+    ProfileLifecycleStatus, ProfileRegistryMeta, PROFILE_GH_GOLD_ORIGIN_PREVIEW,
+};
 pub use registry::{
     all_profile_ids, commodity_origin_profile, gh_cocoa_origin_profile, gh_gold_origin_profile,
     profile_by_id, zw_diamond_origin_profile, CommodityOriginProfileConfig, MetricSemantics,

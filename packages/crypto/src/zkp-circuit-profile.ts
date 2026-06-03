@@ -1,7 +1,12 @@
+import {
+  CircuitRegistryError,
+  circuitRegistry,
+  type NativeProvableProfileId,
+} from './circuit-registry';
 import type { ZKProof } from './zkp';
 
-/** Registry profile IDs over the commodity-origin R1CS. */
-export type CommodityOriginProfileId = 'gh-gold-origin' | 'gh-cocoa-origin' | 'zw-diamond-origin';
+/** Registry profile IDs over the commodity-origin R1CS (native provable subset). */
+export type CommodityOriginProfileId = NativeProvableProfileId;
 
 export interface CommodityOriginProfileProofInput {
   profileId: CommodityOriginProfileId;
@@ -120,6 +125,15 @@ export async function generateCommodityOriginProfileKeys(): Promise<{
 export async function proveCommodityOriginProfile(
   input: CommodityOriginProfileProofInput
 ): Promise<CommodityOriginProfileProof> {
+  circuitRegistry.resolve(input.profileId);
+  if (!circuitRegistry.isNativeProvable(input.profileId)) {
+    throw new CircuitRegistryError(
+      'UNKNOWN_PROFILE',
+      input.profileId,
+      `Profile ${input.profileId} is not natively provable`
+    );
+  }
+
   assertHex64(input.mineId, 'mineId');
   assertHex64(input.primaryRandomness, 'primaryRandomness');
   assertHex64(input.secondaryRandomness, 'secondaryRandomness');

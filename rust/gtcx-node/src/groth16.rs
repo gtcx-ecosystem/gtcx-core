@@ -312,8 +312,8 @@ pub fn groth16_prove_commodity_origin_profile(
     proving_key_hex: String,
     verifying_key_hex: String,
 ) -> napi::Result<JsGroth16ProofBundle> {
-    let profile = gtcx_zkp::profile_by_id(&profile_id).ok_or_else(|| {
-        napi::Error::from_reason(format!("Unknown commodity origin profile: {profile_id}"))
+    let profile = gtcx_zkp::resolve_profile(&profile_id, false).map_err(|e| {
+        napi::Error::from_reason(format!("Circuit registry: {e}"))
     })?;
 
     gtcx_zkp::validate_profile_witness(
