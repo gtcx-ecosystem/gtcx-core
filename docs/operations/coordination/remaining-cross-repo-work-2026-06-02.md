@@ -24,12 +24,12 @@ Living register of **open** cross-repo items originating from or affecting `gtcx
 
 ## Summary
 
-| Priority                  | Count | gtcx-core action                                              |
-| ------------------------- | ----- | ------------------------------------------------------------- |
-| **P1 done**               | 1     | EAP bundle sync staging — executed 2026-06-03                 |
-| **P1 blocked (external)** | 4     | Track — vendor selection, regulator, email gate               |
-| **P2 open (downstream)**  | 2     | Await protocols consumption; implement D3 after ceremony      |
-| **Done (internal)**       | 12    | 10/10 milestones, EAP CLI, KAT package, handoffs, bundle sync |
+| Priority                  | Count | gtcx-core action                                                      |
+| ------------------------- | ----- | --------------------------------------------------------------------- |
+| **P1 done**               | 2     | EAP bundle sync staging; M10.2 FIPS enforcement — executed 2026-06-03 |
+| **P1 blocked (external)** | 4     | Track — vendor selection, regulator, email gate                       |
+| **P2 open (downstream)**  | 2     | Await protocols consumption; implement D3 after ceremony              |
+| **Done (internal)**       | 12    | 10/10 milestones, EAP CLI, KAT package, handoffs, bundle sync         |
 
 ---
 
@@ -231,18 +231,19 @@ D3 Trusted-Setup Reduction is at 9.5/10. M3.2 requires CI test that re-derives v
 
 ## 4. Done (reference — do not re-open)
 
-| Handoff / milestone           | Evidence / note                                         |
-| ----------------------------- | ------------------------------------------------------- |
-| D1 Circuit Correctness 9 → 10 | `tests/differential.rs` — 20 witnesses, 0 disagreements |
-| D2 Bulletproofs 9 → 10        | `proptest` — 256 cases each, valid/invalid              |
-| D6 KAT / Interop 8 → 10       | `@gtcx/zkp-kat-vectors@1.0.0` published                 |
-| D7 Side-Channel 8 → 9         | `dudect-bencher` — p-value = 0.78                       |
-| D10 Algorithmic Moat          | Overall ≈ 8.8/10                                        |
-| EAP admin rotate              | `rotate()` + redacted export endpoint                   |
-| EAP bundle sync CLI           | `pnpm eap:sync-bundle` implemented                      |
-| KAT cross-impl verify         | `kat-cross-impl-verify` binary — zero gtcx-zkp imports  |
-| Handoffs                      | protocols, infrastructure, baseline-os                  |
-| Coordination folder           | `docs/operations/coordination/` created 2026-06-03      |
+| Handoff / milestone            | Evidence / note                                                                |
+| ------------------------------ | ------------------------------------------------------------------------------ |
+| M10.2 Runtime FIPS enforcement | `src/fips.rs` — centralized policy; raw blake3 returns `Result`; 63 tests pass |
+| D1 Circuit Correctness 9 → 10  | `tests/differential.rs` — 20 witnesses, 0 disagreements                        |
+| D2 Bulletproofs 9 → 10         | `proptest` — 256 cases each, valid/invalid                                     |
+| D6 KAT / Interop 8 → 10        | `@gtcx/zkp-kat-vectors@1.0.0` published                                        |
+| D7 Side-Channel 8 → 9          | `dudect-bencher` — p-value = 0.78                                              |
+| D10 Algorithmic Moat           | Overall ≈ 8.8/10                                                               |
+| EAP admin rotate               | `rotate()` + redacted export endpoint                                          |
+| EAP bundle sync CLI            | `pnpm eap:sync-bundle` implemented                                             |
+| KAT cross-impl verify          | `kat-cross-impl-verify` binary — zero gtcx-zkp imports                         |
+| Handoffs                       | protocols, infrastructure, baseline-os                                         |
+| Coordination folder            | `docs/operations/coordination/` created 2026-06-03                             |
 
 ---
 

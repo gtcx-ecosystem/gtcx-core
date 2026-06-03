@@ -60,6 +60,7 @@ tags: ['coordination', 'sprint', 'cross-repo', 'workplan']
 | CORE-008 | Regulator attestation / NIST CMVP liaison      | GTM / Protocol Architect | S-CORE-2 | **blocked**       | R-med  | Introduction      | D10 9 → 10         |
 | CORE-009 | Zimbabwe email human gate routing              | baseline-os / GTM        | S-CORE-1 | **blocked**       | R-low  | 6 human approvals | —                  |
 | CORE-010 | gtcx-core `agent:next-work` CI (P22 W2)        | gtcx-core                | S-CORE-4 | **ready**         | R-low  | —                 | Agent ergonomics   |
+| CORE-013 | M10.2 runtime FIPS enforcement for BLAKE3      | gtcx-core                | S-CORE-1 | **done**          | R-med  | —                 | D10 9 → 9.5        |
 | CORE-011 | EAP admin rotate + redacted export             | gtcx-core                | —        | **done**          | —      | —                 | —                  |
 | CORE-012 | EAP bundle sync CLI implementation             | gtcx-core                | —        | **done**          | —      | —                 | —                  |
 
