@@ -156,22 +156,21 @@ review_cycle: quarterly
 | External validation  | **Partial** — internal fuzz evidence; **no** third-party crypto audit report                       |
 | P1-free window       | **Tracking** since 2026-05-19 → target 2026-08-17                                                  |
 
-### 1.6 Competitive replication (fresh tiers)
+### 1.6 Defensibility tiers (DTF-001)
 
-**Canonical framework:** [MRT v1.0.0 (MRT-001)](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/moat-replication-tiers/v1.0.0) — [`path-to-t5.md`](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/moat-replication-tiers/v1.0.0/path-to-t5.md).
+**Canonical framework:** [Defensibility Tiers 1–5 (DTF-001)](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0) — [`path-to-tier-5.md`](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/path-to-tier-5.md).
 
-Replaces stale single-line “90-day replicate” for **whole stack**:
+**Definition:** **Defensibility Tier (1–5)** = how hard work is to replicate, measured by **replication time** (**higher tier = more defensible**). “90-day moat” described **Tier 1 only**.
 
-| Tier   | What                                                | Replication effort (funded team) | Your position (2026-06-03)                                                       |
-| ------ | --------------------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------- |
-| **T0** | Noble + zod signing SDK                             | ~90 days                         | Commodity; MIT + public                                                          |
-| **T1** | GTCX ZKP + tests + KAT + differential CI            | **~6–12 months**                 | **Live:** 81 ZKP tests, 6 KATs, differential job in `.github/workflows/ci.yml`   |
-| **T2** | 22-package platform + offline/sync/connectivity     | **~6–9 months**                  | Public source; ~104k LOC TS+Rust counted in session                              |
-| **T3** | Provenance train + governance gates + ai-eval habit | **~6+ months** process           | **Live:** 22/22 provenance; governance check pass                                |
-| **T4** | Sovereign pilot (deploy + pen-test + regulator)     | Years + relationships            | **Out of repo**; infra/protocols private                                         |
-| **T5** | Per-jurisdiction R1CS (program roadmap)             | 12–18+ months                    | **Not shipped** — generic `CommodityOrigin` circuit, not `gh-gold-origin` matrix |
+| Defensibility tier | Replication horizon | GTCX status (2026-06-03)                       |
+| -----------------: | ------------------- | ---------------------------------------------- |
+|              **1** | ~90 days            | Achieved                                       |
+|              **2** | 6–12 months         | Achieved — ZKP + KAT + differential CI         |
+|              **3** | 6–9 months          | Achieved — 22-package platform                 |
+|              **4** | 6+ months           | Achieved — 22/22 provenance                    |
+|              **5** | 12–18+ months       | **Not achieved** — named jurisdiction circuits |
 
-**Moat conclusion (fresh):** Secrecy is no longer the barrier for T1–T2 (repo is public). Barrier is **T3 habit + T4 operations + T5 domain encoding + ecosystem pins**.
+**Moat conclusion (fresh):** Public source does not collapse Tier 3–5. Sovereign **deal** evidence (pen-test, testnet) is required for revenue in addition to Tier 5 — see DTF tiers.md § commercial gate.
 
 ---
 
@@ -295,13 +294,13 @@ All applicable Protocol 27 gates run in-session (see table above). **Rust worksp
 
 ## Top 5 Remediation (ordered)
 
-| #   | Action                                                                                     | Owner                    | Impact                      |
-| --- | ------------------------------------------------------------------------------------------ | ------------------------ | --------------------------- |
-| 1   | Refresh **README** provenance (22/22), package count, composite citation → link this audit | protocol-architect       | Spec fidelity / buyer trust |
-| 2   | Update **GTM competitive reality** to tiered T0–T5 model                                   | GTM                      | Correct moat narrative      |
-| 3   | Isolate **FIPS env tests** (`GTCX_FIPS_STRICT` reset in `gtcx-crypto` test harness)        | crypto-security-engineer | CI/local flake              |
-| 4   | Close **EXT-INF-002** pen-test in infra; link report from trust portal                     | GTM + infra              | S2 sovereign                |
-| 5   | **`@gtcx/network` maturity badge** in README matrix (types-only transport)                 | frontier-infra-engineer  | Spec fidelity               |
+| #   | Action                                                                                     | Owner                    | Impact                                     |
+| --- | ------------------------------------------------------------------------------------------ | ------------------------ | ------------------------------------------ |
+| 1   | Refresh **README** provenance (22/22), package count, composite citation → link this audit | protocol-architect       | Spec fidelity / buyer trust                |
+| 2   | Update **GTM competitive reality** to DTF Tier 1–5 (defensibility vs replication time)     | GTM                      | Done in framework + gtm-reality-check link |
+| 3   | Isolate **FIPS env tests** (`GTCX_FIPS_STRICT` reset in `gtcx-crypto` test harness)        | crypto-security-engineer | CI/local flake                             |
+| 4   | Close **EXT-INF-002** pen-test in infra; link report from trust portal                     | GTM + infra              | S2 sovereign                               |
+| 5   | **`@gtcx/network` maturity badge** in README matrix (types-only transport)                 | frontier-infra-engineer  | Spec fidelity                              |
 
 ---
 

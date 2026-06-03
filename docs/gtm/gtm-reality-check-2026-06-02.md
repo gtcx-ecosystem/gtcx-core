@@ -118,13 +118,19 @@ _Assessment stops here per framework (two consecutive Not Ready)._
 - ai-eval scorecard **WARN** — need one-page explanation for procurement
 - No customer-data processing in library (good) but downstream must not send PII into logging hooks without DPA
 
-**Competitive reality (canonical: [MRT-001 v1.0.0](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/moat-replication-tiers/v1.0.0)):**
+**Competitive reality (canonical: [DTF-001 Defensibility Tiers 1–5](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0)):**
 
-- **T0 (~90d):** `@noble/curves` + zod — commodity, not the moat
-- **T1 (6–12mo):** ZKP stack + KAT + differential CI — largely achieved in `gtcx-core` (public)
-- **T2–T3:** 22-package platform + provenance train — achieved
-- **T4:** Sovereign deploy + pen-test + pilot — **not achieved** (infra/GTM)
-- **T5 (12–18mo+):** Named jurisdiction circuits + certified packs — **in progress**; see [path-to-t5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/moat-replication-tiers/v1.0.0/path-to-t5.md)
+Higher tier = **more defensible** = **longer replication time** for competitors.
+
+| Defensibility tier | Replication   | GTCX status                                                                                                                                                                     |
+| -----------------: | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|              **1** | ~90 days      | Achieved — commodity crypto                                                                                                                                                     |
+|              **2** | 6–12 months   | Achieved — ZKP + KAT + CI                                                                                                                                                       |
+|              **3** | 6–9 months    | Achieved — platform bundle                                                                                                                                                      |
+|              **4** | 6+ months     | Achieved — 22/22 provenance                                                                                                                                                     |
+|              **5** | 12–18+ months | **Not achieved** — named jurisdiction circuits; [path-to-tier-5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/path-to-tier-5.md) |
+
+Sovereign deals also need pen-test, testnet, pilot owner (infra/GTM) — **deal readiness** on top of Tier 5, not a separate tier.
 
 ---
 
