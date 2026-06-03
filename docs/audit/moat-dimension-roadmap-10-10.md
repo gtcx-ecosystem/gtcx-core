@@ -114,7 +114,7 @@ These 4 items are the minimum bar before any dimension reaches 9. They are prere
 
 ## Dimension 4: Backward Compatibility
 
-**Current:** 9/10 → **Target:** 10/10
+**Current:** 10/10 → **Target:** 10/10 ✓
 
 | Milestone              | Score | Acceptance Criteria                                                                                                            | Effort  | Gate                          |
 | ---------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------ | ------- | ----------------------------- |
@@ -216,7 +216,7 @@ These 4 items are the minimum bar before any dimension reaches 9. They are prere
 
 ## Dimension 10: Primitive Compliance (FIPS / BLAKE3)
 
-**Current:** 9/10 → **Target:** 10/10
+**Current:** 9.5/10 → **Target:** 10/10
 
 > **Source gap:** "BLAKE3 not FIPS-approved" (master audit, Low severity). FIPS mode falls through to `blake3` crate for performance-critical hashing. Documented in `fips-validation-boundary.md` as supplementary.
 

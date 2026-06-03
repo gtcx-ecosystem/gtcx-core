@@ -586,6 +586,29 @@ describe('DiamondOrigin ZKP (native)', () => {
       /bounds must have exactly 4 elements/
     );
   });
+
+  (RUN_HEAVY_ZKP ? it : it.skip)(
+    'proof from proveDiamondOrigin verifies with verifyCommodityOrigin (backward compat)',
+    async () => {
+      const { generateDiamondOriginKeys, proveDiamondOrigin } =
+        await import('../src/zkp-diamond-origin');
+      const { verifyCommodityOrigin } = await import('../src/zkp-commodity-origin');
+
+      const keys = await generateDiamondOriginKeys();
+      const proof = await proveDiamondOrigin({
+        ...validInput,
+        provingKey: keys.provingKey,
+        verifyingKey: keys.verifyingKey,
+      });
+
+      expect(proof.system).toBe('groth16');
+      expect(proof.proofType).toBe('commodity_origin');
+
+      const valid = await verifyCommodityOrigin(proof);
+      expect(valid).toBe(true);
+    },
+    60_000
+  );
 });
 
 describe('CommodityRange ZKP (native)', () => {

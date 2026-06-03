@@ -75,4 +75,12 @@ describe('DiamondOrigin ZKP (mocked native)', () => {
     });
     expect(result).toBe(true);
   });
+
+  it('proof from proveDiamondOrigin verifies with verifyCommodityOrigin (backward compat)', async () => {
+    const { proveDiamondOrigin } = await import('../src/zkp-diamond-origin');
+    const { verifyCommodityOrigin } = await import('../src/zkp-commodity-origin');
+    const proof = await proveDiamondOrigin(validInput);
+    const valid = await verifyCommodityOrigin(proof);
+    expect(valid).toBe(true);
+  });
 });
