@@ -3,9 +3,9 @@
 // Key generation, derivation, and storage utilities
 // ============================================================================
 
-import { ed25519 } from '@noble/curves/ed25519';
-import { secp256k1 } from '@noble/curves/secp256k1';
-import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
+import { ed25519 } from '@noble/curves/ed25519.js';
+import { secp256k1 } from '@noble/curves/secp256k1.js';
+import { bytesToHex, hexToBytes } from '@noble/hashes/utils.js';
 
 import { isFipsMode, fipsWarn } from './fips';
 import { fipsGenerateKeyPair } from './fips-backend';
@@ -64,7 +64,7 @@ export function generateKeyPair(algorithm?: KeyAlgorithm): KeyPairResult {
   }
 
   if (algo === 'Secp256k1') {
-    const privateKey = secp256k1.utils.randomPrivateKey();
+    const privateKey = secp256k1.utils.randomSecretKey();
     const publicKey = secp256k1.getPublicKey(privateKey);
 
     return {
@@ -86,7 +86,7 @@ export function generateKeyPair(algorithm?: KeyAlgorithm): KeyPairResult {
   }
 
   /* c8 ignore start -- pure-JS fallback; unreachable when native crypto is available */
-  const privateKey = ed25519.utils.randomPrivateKey();
+  const privateKey = ed25519.utils.randomSecretKey();
   const publicKey = ed25519.getPublicKey(privateKey);
 
   return {

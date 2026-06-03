@@ -3,7 +3,7 @@
 // Password-based key derivation primitives for the protocol.
 // ============================================================================
 
-import { bytesToHex } from '@noble/hashes/utils';
+import { bytesToHex } from '@noble/hashes/utils.js';
 
 export interface Pbkdf2Params {
   /** Arbitrary string input. May be low-entropy (e.g. a 6-digit PIN). */
