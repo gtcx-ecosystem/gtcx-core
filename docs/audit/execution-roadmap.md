@@ -1,9 +1,8 @@
 ---
-last_reconciled: 2026-06-05
+last_reconciled: 2026-06-03
 reconciliation_note: >-
-  Reconciled with full-audit-2026-06-04.md (6-phase + 6 sprint plan).
-  FA-S1 P0 done; S-T5-1/2/3/4 complete; DTF-5.4.4 ack 73eaff2b; DTF-5.5.1 strict packs; Tier 5 technical ~88%; 5.5.2+ commercial external.
-  Ecosystem open items linked; library maturity ≠ sovereign pilot readiness.
+  FA-S1 complete (FA-P0-1–4). Tier 5 technical ~88% done; doc-standard 9.6/10 + repo hygiene P1–P4.
+  Infra validate-all 41/44 mirrored — core Docs Standard gate closed. CORE-004 blocked XR-402.
 sources:
   - docs/audit/full-audit-2026-06-04.md
   - docs/audit/moat-completion-reconciliation-2026-06-03.md
@@ -53,15 +52,14 @@ sources:
 
 **Source:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) Phase 1 High finding.
 
-| Story   | Title                                            | Owner              | Status      | Evidence / gate                           |
-| ------- | ------------------------------------------------ | ------------------ | ----------- | ----------------------------------------- |
-| FA-P0-1 | Break workproof ↔ verification turbo build cycle | frontier-infra     | **done**    | Root `pnpm typecheck` exit 0 (2026-06-04) |
-| FA-P0-2 | README: split library readiness vs DTF Tier 5    | protocol-architect | **done**    | `README.md` (2026-06-04)                  |
-| FA-P0-3 | Reconcile package count in specs README          | protocol-architect | **done**    | 24 packages per `architecture:check`      |
-| FA-P0-3 | Reconcile package count in specs README          | protocol-architect | **pending** | Match `architecture:check` (24 packages)  |
-| FA-P0-4 | format:check hygiene (agent-sync drift)          | chore              | **pending** | `pnpm format:check` exit 0                |
+| Story   | Title                                            | Owner              | Status   | Evidence / gate                           |
+| ------- | ------------------------------------------------ | ------------------ | -------- | ----------------------------------------- |
+| FA-P0-1 | Break workproof ↔ verification turbo build cycle | frontier-infra     | **done** | Root `pnpm typecheck` exit 0 (2026-06-04) |
+| FA-P0-2 | README: split library readiness vs DTF Tier 5    | protocol-architect | **done** | `README.md` (2026-06-04)                  |
+| FA-P0-3 | Reconcile package count in specs README          | protocol-architect | **done** | 24 packages per `architecture:check`      |
+| FA-P0-4 | format:check hygiene (agent-sync drift)          | chore              | **done** | `pnpm format:check` exit 0 (2026-06-03)   |
 
-**FA-S1:** Complete (FA-P0-1–3, DTF-5.2.3).
+**FA-S1:** **Complete** (FA-P0-1–4, DTF-5.2.3).
 
 ---
 

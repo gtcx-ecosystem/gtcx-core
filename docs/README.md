@@ -16,8 +16,8 @@ review_cycle: 'on-change'
 
 **Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
 
-**Last updated:** 2026-06-05
-**Latest synthesis:** [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md) (six-phase audit) · [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md) (doc-standard P1)
+**Last updated:** 2026-06-03
+**Latest synthesis:** [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md) · [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md) (P1+P2 **9.6/10**) · [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md) (post-bootstrap **9.6/10**)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
@@ -127,8 +127,8 @@ review_cycle: 'on-change'
 | Document                                                                                           | Purpose                                                                              |
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md)                               | **Latest** six-phase full audit — FA-S1 + DTF Tier 5 reconciliation                  |
-| [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md)   | Doc-standard compliance (P1 remediation 2026-06-05)                                  |
-| [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md)                           | Repo root hygiene audit (8.9/10; policy bootstrap P1)                                |
+| [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md)   | Doc-standard compliance (**9.6/10** — P1+P2 complete 2026-06-03)                     |
+| [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md)                           | Repo root hygiene (**9.6/10** post-bootstrap; CI gate wired)                         |
 | [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md)               | Fresh master audit — composite 8.9/10                                                |
 | [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md) | Internal completion audit — composite 9.5/10, 24/24 items                            |
 | [`audit/fuzz-campaign-evidence-2026-05-21.md`](./audit/fuzz-campaign-evidence-2026-05-21.md)       | 500K+ libFuzzer iterations across 6 primitives, 0 crashes / panics / ASAN violations |
@@ -141,20 +141,22 @@ review_cycle: 'on-change'
 
 ## §11 Repo-Specific Sections
 
-| Document                                                                                     | Purpose                                                                               |
-| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [`gtm/README.md`](./gtm/README.md)                                                           | GTM and regulator-facing packet index                                                 |
-| [`gtm/sandbox-intro-email-template.md`](./gtm/sandbox-intro-email-template.md)               | **Canonical** sandbox intro email template + per-country parameter table              |
-| [`gtm/sandbox-intro-email-template.fr.md`](./gtm/sandbox-intro-email-template.fr.md)         | French variant for Francophone targets (DRC primary)                                  |
-| [`gtm/renders/README.md`](./gtm/renders/README.md)                                           | Send-ready per-country renders index (Zimbabwe / Ghana / Namibia / Botswana / DRC-FR) |
-| [`release/README.md`](./release/README.md)                                                   | Release artifact set                                                                  |
-| [`devops/release-mgmt/npm-publish-runbook.md`](./devops/release-mgmt/npm-publish-runbook.md) | Operational runbook for first-publish to npm + post-publish verification              |
-| [`operations/trust-portal-hosting.md`](./operations/trust-portal-hosting.md)                 | GitHub Pages hosting runbook for the trust portal                                     |
-| [`testing/README.md`](./testing/README.md)                                                   | Test policy entrypoint                                                                |
-| [`agile/engagement-log/dashboard.md`](./agile/engagement-log/dashboard.md)                   | Cross-jurisdiction status across all 5 active sovereign-state engagements             |
-| [`agile/engagement-log/playbook.md`](./agile/engagement-log/playbook.md)                     | Generic sovereign-state engagement playbook (7-phase flow)                            |
-| [`agile/cross-repo-coordination.md`](./agile/cross-repo-coordination.md)                     | Active coordination threads with other gtcx-ecosystem repos                           |
-| [`quality/10-10-remediation-tracker.md`](./quality/10-10-remediation-tracker.md)             | Quality-tracker view of remediation work                                              |
+| Document                                                                                                     | Purpose                                                                               |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| [`gtm/README.md`](./gtm/README.md)                                                                           | GTM and regulator-facing packet index                                                 |
+| [`gtm/sandbox-intro-email-template.md`](./gtm/sandbox-intro-email-template.md)                               | **Canonical** sandbox intro email template + per-country parameter table              |
+| [`gtm/sandbox-intro-email-template.fr.md`](./gtm/sandbox-intro-email-template.fr.md)                         | French variant for Francophone targets (DRC primary)                                  |
+| [`gtm/renders/README.md`](./gtm/renders/README.md)                                                           | Send-ready per-country renders index (Zimbabwe / Ghana / Namibia / Botswana / DRC-FR) |
+| [`release/README.md`](./release/README.md)                                                                   | Release artifact set                                                                  |
+| [`devops/release-mgmt/npm-publish-runbook.md`](./devops/release-mgmt/npm-publish-runbook.md)                 | Operational runbook for first-publish to npm + post-publish verification              |
+| [`operations/trust-portal-hosting.md`](./operations/trust-portal-hosting.md)                                 | GitHub Pages hosting runbook for the trust portal                                     |
+| [`testing/README.md`](./testing/README.md)                                                                   | Test policy entrypoint                                                                |
+| [`agile/engagement-log/dashboard.md`](./agile/engagement-log/dashboard.md)                                   | Cross-jurisdiction status across all 5 active sovereign-state engagements             |
+| [`agile/engagement-log/playbook.md`](./agile/engagement-log/playbook.md)                                     | Generic sovereign-state engagement playbook (7-phase flow)                            |
+| [`operations/coordination/cross-repo-agent-bridge.md`](./operations/coordination/cross-repo-agent-bridge.md) | Cross-repo agent bridge — latest ecosystem updates                                    |
+| [`operations/repo/repo-hygiene-protocol.md`](./operations/repo/repo-hygiene-protocol.md)                     | Machine-enforceable root hygiene policy + allowlist                                   |
+| [`agile/cross-repo-coordination.md`](./agile/cross-repo-coordination.md)                                     | Active coordination threads with other gtcx-ecosystem repos                           |
+| [`quality/10-10-remediation-tracker.md`](./quality/10-10-remediation-tracker.md)                             | Quality-tracker view of remediation work                                              |
 
 ## §12 Onboarding & Roles
 
