@@ -117,21 +117,33 @@ function selectNextWork() {
     };
   }
 
-  const chosen = candidates[0];
+  for (const candidate of candidates) {
+    const nextMilestone = guessNextMilestone(candidate.id, candidate.score);
 
-  // Map dimension to its next milestone (heuristic based on score)
-  const nextMilestone = guessNextMilestone(chosen.id, chosen.score);
+    // Skip external or release-gated milestones — no internal agent work available
+    if (nextMilestone.external || nextMilestone.releaseGated) {
+      continue;
+    }
+
+    return {
+      next: {
+        dimension: candidate.id,
+        milestone: nextMilestone.id,
+        name: candidate.name,
+        title: nextMilestone.title,
+      },
+      selection: {
+        tier: candidate.critical ? "critical-path" : "backlog",
+        reason: `Lowest-score implementable dimension: ${candidate.id} (${candidate.score}/10)`,
+      },
+    };
+  }
 
   return {
-    next: {
-      dimension: chosen.id,
-      milestone: nextMilestone.id,
-      name: chosen.name,
-      title: nextMilestone.title,
-    },
+    next: null,
     selection: {
-      tier: chosen.critical ? "critical-path" : "backlog",
-      reason: `Lowest-score implementable dimension: ${chosen.id} (${chosen.score}/10)`,
+      tier: "complete",
+      reason: "All implementable dimensions are at 10/10 or blocked on external/release-gated milestones",
     },
   };
 }
@@ -140,18 +152,22 @@ function guessNextMilestone(dimId, score) {
   const map = {
     D1: { "8": { id: "M1.4", title: "Property-based tests (proptest)" }, "9": { id: "M1.5", title: "Differential testing (snarkjs / arkworks ref)" } },
     D2: { "8": { id: "M2.1", title: "Boundary tests" }, "9": { id: "M2.2", title: "Fuzzing / randomized witness gen" } },
-    D3: { "9": { id: "M3.2", title: "Trusted-setup verification (release-gated)" } },
+    D3: { "9": { id: "M3.2", title: "Trusted-setup verification (release-gated)", releaseGated: true } },
     D4: { "9": { id: "M4.2", title: "End-to-end integration test" } },
     D5: { "9": { id: "M5.3", title: "getrandom fallback audit" } },
     D6: { "6": { id: "M6.3", title: "CI KAT verification gate" }, "8": { id: "M6.4", title: "Cross-implementation validation (snarkjs)" } },
     D7: { "6": { id: "M7.2", title: "uint64_is_ge audit" }, "8": { id: "M7.4", title: "Microbenchmarks (dudect / ctgrind)" } },
-    D10: { "8": { id: "M10.2", title: "Runtime FIPS enforcement (GTCX_FIPS_STRICT=1)" } },
+    D10: {
+      "8": { id: "M10.2", title: "Runtime FIPS enforcement (GTCX_FIPS_STRICT=1)" },
+      "9": { id: "M10.3", title: "Regulator attestation (external)", external: true },
+    },
   };
   const dimMap = map[dimId];
-  if (!dimMap) return { id: "?", title: "Unknown" };
-  // Find the milestone for the current score bracket
-  const scoreKey = Object.keys(dimMap).find((k) => score >= parseFloat(k) && score < parseFloat(k) + 2);
-  return dimMap[scoreKey] ?? { id: "?", title: "Unknown" };
+  if (!dimMap) return { id: "?", title: "Unknown", external: false, releaseGated: false };
+  // Sort keys descending so higher brackets match first (e.g., 9 before 8)
+  const sortedKeys = Object.keys(dimMap).sort((a, b) => parseFloat(b) - parseFloat(a));
+  const scoreKey = sortedKeys.find((k) => score >= parseFloat(k));
+  return dimMap[scoreKey] ?? { id: "?", title: "Unknown", external: false, releaseGated: false };
 }
 
 const result = selectNextWork();
