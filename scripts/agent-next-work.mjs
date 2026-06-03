@@ -115,6 +115,11 @@ function selectNextWork() {
   }
 
   for (const candidate of candidates) {
+    // Score 10 means all implementable milestones are complete
+    if (candidate.score >= 10) {
+      continue;
+    }
+
     const nextMilestone = guessNextMilestone(candidate.id, candidate.score);
 
     // Skip external or release-gated milestones — no internal agent work available
@@ -151,28 +156,40 @@ function guessNextMilestone(dimId, score) {
     D1: {
       8: { id: 'M1.4', title: 'Property-based tests (proptest)' },
       9: { id: 'M1.5', title: 'Differential testing (snarkjs / arkworks ref)' },
+      10: { id: 'M1.6', title: 'All milestones complete', external: true },
     },
     D2: {
       8: { id: 'M2.1', title: 'Boundary tests' },
       9: { id: 'M2.2', title: 'Fuzzing / randomized witness gen' },
+      10: { id: 'M2.3', title: 'All milestones complete', external: true },
     },
     D3: {
       9: { id: 'M3.2', title: 'Trusted-setup verification (release-gated)', releaseGated: true },
+      10: { id: 'M3.3', title: 'All milestones complete', external: true },
     },
-    D4: { 9: { id: 'M4.1', title: 'End-to-end integration test' } },
-    D5: { 9: { id: 'M5.1', title: 'Entropy source audit' } },
+    D4: {
+      9: { id: 'M4.1', title: 'End-to-end integration test' },
+      10: { id: 'M4.2', title: 'All milestones complete', external: true },
+    },
+    D5: {
+      9: { id: 'M5.1', title: 'Entropy source audit' },
+      10: { id: 'M5.2', title: 'All milestones complete', external: true },
+    },
     D6: {
       6: { id: 'M6.3', title: 'CI KAT verification gate' },
       8: { id: 'M6.4', title: 'Cross-implementation validation (snarkjs)' },
+      10: { id: 'M6.5', title: 'All milestones complete', external: true },
     },
     D7: {
       6: { id: 'M7.2', title: 'uint64_is_ge audit' },
       8: { id: 'M7.4', title: 'Microbenchmarks (dudect / ctgrind)' },
       9: { id: 'M7.5', title: 'Third-party side-channel assessment', external: true },
+      10: { id: 'M7.6', title: 'All milestones complete', external: true },
     },
     D10: {
       8: { id: 'M10.2', title: 'Runtime FIPS enforcement (GTCX_FIPS_STRICT=1)' },
       9: { id: 'M10.3', title: 'Regulator attestation (external)', external: true },
+      10: { id: 'M10.4', title: 'All milestones complete', external: true },
     },
   };
   const dimMap = map[dimId];
