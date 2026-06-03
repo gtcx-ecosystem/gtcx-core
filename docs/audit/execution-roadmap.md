@@ -1,22 +1,25 @@
 ---
-last_reconciled: 2026-06-02
+last_reconciled: 2026-06-03
 reconciliation_note: >-
-  Internal 10/10 engineering track remains complete. New delta: ai-eval npm publish
-  is prepared (0.1.4 + provenance publish list) but blocked by repo visibility being
-  private; master audit 2026-06-02 records this as a P1 supply-chain issue.
+  Unified index: moat-completion-reconciliation-2026-06-03.md (Tracks A/B/C + AM sprints).
+  Internal engineering S1–S4 done; S5 blocked on ai-eval npm (repo public).
+  Algorithmic moat in-repo AM-1 done; AM-2 protocols KAT; AM-3–AM-5 external/release-gated.
 sources:
+  - docs/audit/moat-completion-reconciliation-2026-06-03.md
   - docs/audit/master-audit-2026-06-02.md
   - docs/audit/full-audit-2026-06-01.md
   - docs/gtm/gtm-roadmap-10-10-internal-2026-06-01.md
   - docs/audit/ci-confirmation-2026-06-01.md
   - docs/audit/10-10-roadmap-2026-05-25.md
+  - docs/audit/moat-dimension-roadmap-10-10.md
   - docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md
   - docs/gtm/07-downstream-integration.md
 ---
 
 # Execution roadmap — gtcx-core
 
-**Active phase:** Complete — internal 10/10 engineering track  
+**Unified completion index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
+**Active phase:** Track A complete except Sprint 5; Track B AM-1 complete (`pnpm agent:next-work` → tier complete)  
 **Bank-grade 10/10:** blocked on external pen test / SOC 2 ([10-10-roadmap-2026-05-25.md](./10-10-roadmap-2026-05-25.md))  
 **CI confirmation:** [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md)
 

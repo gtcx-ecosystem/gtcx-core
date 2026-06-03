@@ -54,7 +54,20 @@ Before making any code changes, architectural decisions, or recommendations, com
     - Run `npm run agent:next-work`
     - Announce the selected dimension/milestone and begin implementation
     - **Never ask the operator which milestone to pick when the roadmap exists**
-16. Add attestation block to commit/PR:
+16. **Phase 5.5 — Cross-repo coordination (Protocol 24):**
+    - Check `baseline-os/workstream/coordination/coordination-report-latest.md` for blockers
+    - Read open handoffs in `docs/agents/sessions/INDEX.md`
+    - If work is blocked on a sibling repo, file a durable handoff and report status
+17. **Phase 5.6 — Proceed Brief (Protocol 26):**
+    - Before starting implementation, announce what and why to the operator
+    - Allow human stop/correct before irreversible actions
+    - No story menus — state intent and proceed
+18. **Phase 5.7 — Execution Obligation (Protocol 27):**
+    - Run every applicable verification gate in-session before claiming done
+    - Report command + exit code, not "please run locally"
+    - If blocked by permissions, emit a **Permission Unblock Report** with enablement steps
+    - Cross-repo code: execute in owner repo workspace, not gtcx-docs only
+19. Add attestation block to commit/PR:
 ```markdown
 ## Agent Context Attestation
 - [x] Phase 1: Baseline loaded
@@ -63,6 +76,9 @@ Before making any code changes, architectural decisions, or recommendations, com
 - [x] Phase 4: Persona & frame selected
 - [x] Phase 5: Context attested
 - [x] Phase 5.4: Next work selected (<DIM> <MILESTONE>) via Protocol 22
+- [x] Phase 5.5: Cross-repo coordination checked (Protocol 24)
+- [x] Phase 5.6: Proceed Brief issued (Protocol 26)
+- [x] Phase 5.7: Verification ladder executed (Protocol 27)
 ```
 
 ### Context Refresh (every 2 hours or task switch)
@@ -167,19 +183,29 @@ Changes to these require `crypto-security-engineer` review:
 
 ## 7. Verification Gates (must pass before commit)
 
+Protocol 27 V-ladder — execute every applicable step in-session before claiming done:
+
+| Step | Command | Required when |
+| ---- | ------- | ------------- |
+| V1 | `git status`, `git diff` (scoped) | Always |
+| V2 | `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm architecture:check` | Documented in `package.json` or `AGENTS.md` |
+| V3 | `pnpm test` | Tests exist for changed behavior |
+| V4 | `pnpm docs:check-links`, `pnpm docs:check-frontmatter`, `pnpm bundle:check-budgets` | Story touches docs, deploy evidence, or cross-repo probes |
+| V5 | `pnpm quality:governance:check` | Governance-related changes |
+| V6 | Rust: `cargo test`, `cargo test --features trusted-setup-verify --release` | Rust changes |
+
+**Run in session:**
+
 ```bash
 pnpm format:check
 pnpm lint
+pnpm typecheck
+pnpm test
 pnpm architecture:check
 pnpm docs:check-links
-pnpm quality:governance:check
-```
-
-**New gates (M2+):**
-
-```bash
 pnpm docs:check-frontmatter
 pnpm bundle:check-budgets
+pnpm quality:governance:check
 ```
 
 ---

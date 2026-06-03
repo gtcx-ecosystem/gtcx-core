@@ -9,9 +9,10 @@ status: draft
 
 # Algorithmic Moat — Per-Dimension 10/10 Roadmap
 
-**Source:** [`algorithmic-moat-sprint2-assessment.md`](./algorithmic-moat-sprint2-assessment.md)  
-**Baseline:** 7.0/10 overall (post-Sprint 2, post-RNG-fix)  
-**Target:** 10.0/10 pragmatic (all milestones complete + CI gates passing)
+**Unified sprint index:** [`moat-completion-reconciliation-2026-06-03.md`](./moat-completion-reconciliation-2026-06-03.md)  
+**Source:** [`algorithmic-moat-sprint2-assessment.md`](./algorithmic-moat-sprint2-assessment.md) (historical pre–AM-1 scores)  
+**Baseline:** ~8.95/10 weighted (post–AM-1 hardening, 2026-06-03)  
+**Target:** 10.0/10 pragmatic (in-repo + external milestones + CI gates passing)
 
 ---
 

@@ -20,12 +20,13 @@ adoption_status: established
 
 ## Canonical paths
 
-| Artifact         | Path                                                |
-| ---------------- | --------------------------------------------------- |
-| 10/10 roadmap    | `docs/audit/moat-dimension-roadmap-10-10.md`        |
-| Assessment       | `docs/audit/algorithmic-moat-sprint2-assessment.md` |
-| Session pointer  | `.baseline/memory/session.md`                       |
-| Selection script | `scripts/agent-next-work.mjs`                       |
+| Artifact          | Path                                                                    |
+| ----------------- | ----------------------------------------------------------------------- |
+| **Unified index** | `docs/audit/moat-completion-reconciliation-2026-06-03.md`               |
+| 10/10 roadmap     | `docs/audit/moat-dimension-roadmap-10-10.md`                            |
+| Assessment        | `docs/audit/algorithmic-moat-sprint2-assessment.md` (historical scores) |
+| Session pointer   | `.baseline/memory/session.md`                                           |
+| Selection script  | `scripts/agent-next-work.mjs`                                           |
 
 ## Commands
 

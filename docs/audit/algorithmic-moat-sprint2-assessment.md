@@ -2,6 +2,7 @@
 id: AUDIT-MOAT-S2-2026-06-02
 title: Sprint 2 Algorithmic Moat — Feature-Specific Assessment
 date: 2026-06-02
+status: superseded-scores
 auditor: gtcx-core-agent
 scope: rust/gtcx-zkp, packages/crypto/src/zkp-*
 scores:
@@ -11,9 +12,13 @@ scores:
   backward_compat: 9
   rng_security: 9
   overall_moat: 7
+superseded_by: docs/audit/moat-completion-reconciliation-2026-06-03.md
 ---
 
 # Sprint 2 Algorithmic Moat — Feature-Specific Assessment
+
+> **Scores in this file are historical (pre–AM-1 hardening, 2026-06-02).**  
+> **Current planning baseline:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md) and [moat-dimension-roadmap-10-10.md](./moat-dimension-roadmap-10-10.md) (D1–D6 at 10/10; overall ≈ 8.95/10).
 
 **Date:** 2026-06-02  
 **Auditor:** gtcx-core-agent (post-RNG-fix)  
