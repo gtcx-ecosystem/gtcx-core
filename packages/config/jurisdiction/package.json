@@ -13,6 +13,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "validate:packs": "vitest run tests/engagement-packs.test.ts",
     "clean": "rm -rf dist"
   },
   "dependencies": {

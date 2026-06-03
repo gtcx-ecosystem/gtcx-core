@@ -1,12 +1,14 @@
 import { z } from 'zod';
 
+import { strictObject } from './schema-strict';
+
 // ============================================================
 // SECTION 1: IDENTITY
 // ============================================================
-const IdentitySchema = z.object({
+const IdentitySchema = strictObject({
   countryCode: z.string().length(2),
   countryCode3: z.string().length(3),
-  name: z.object({
+  name: strictObject({
     official: z.string(),
     common: z.string(),
     local: z.record(z.string(), z.string()),
@@ -27,16 +29,16 @@ const IdentitySchema = z.object({
 // ============================================================
 // SECTION 2: REGULATORY
 // ============================================================
-const RegulatorySchema = z.object({
-  primaryAuthority: z.object({
+const RegulatorySchema = strictObject({
+  primaryAuthority: strictObject({
     name: z.string(),
     abbreviation: z.string(),
     website: z.string().url().optional(),
   }),
 
-  licensing: z.object({
+  licensing: strictObject({
     producerLicenses: z.array(
-      z.object({
+      strictObject({
         type: z.string(),
         code: z.string(),
         renewalYears: z.number(),
@@ -44,14 +46,14 @@ const RegulatorySchema = z.object({
       })
     ),
     buyerLicenses: z.array(
-      z.object({
+      strictObject({
         type: z.string(),
         code: z.string(),
         requiredForGTCX: z.boolean(),
       })
     ),
     exportLicenses: z.array(
-      z.object({
+      strictObject({
         type: z.string(),
         code: z.string(),
         requiredForGTCX: z.boolean(),
@@ -59,7 +61,7 @@ const RegulatorySchema = z.object({
     ),
   }),
 
-  compliance: z.object({
+  compliance: strictObject({
     mercuryRestrictions: z.enum(['banned', 'restricted', 'permitted', 'unregulated']),
     communityConsentRequired: z.boolean(),
     childLaborProhibition: z.boolean(),
@@ -69,7 +71,7 @@ const RegulatorySchema = z.object({
     assayRequiredForExport: z.boolean(),
   }),
 
-  dataSovereignty: z.object({
+  dataSovereignty: strictObject({
     dataResidencyRequired: z.boolean(),
     governmentDataAccess: z.enum(['realtime', 'on_request', 'audit_only', 'none']),
   }),
@@ -78,10 +80,10 @@ const RegulatorySchema = z.object({
 // ============================================================
 // SECTION 3: COMMODITIES
 // ============================================================
-const CommoditySchema = z.object({
+const CommoditySchema = strictObject({
   type: z.enum(['gold', 'diamond', 'coltan', 'cobalt', 'cocoa', 'coffee', 'cashew', 'shea']),
   enabled: z.boolean(),
-  config: z.object({
+  config: strictObject({
     weightUnit: z.enum(['gram', 'kilogram', 'ounce', 'troy_ounce']),
     purityStandard: z.enum(['fineness', 'karat', 'percentage']).optional(),
     minimumPurityForExport: z.number().optional(),
@@ -95,15 +97,15 @@ const CommoditiesSchema = z.array(CommoditySchema);
 // ============================================================
 // SECTION 4: LOCALIZATION
 // ============================================================
-const LocalizationSchema = z.object({
+const LocalizationSchema = strictObject({
   officialLanguages: z.array(z.string()),
   supportedLanguages: z.array(
-    z.object({
+    strictObject({
       code: z.string(),
       name: z.string(),
       nativeName: z.string(),
       rtl: z.boolean(),
-      channels: z.object({
+      channels: strictObject({
         app: z.boolean(),
         ussd: z.boolean(),
         sms: z.boolean(),
@@ -112,11 +114,11 @@ const LocalizationSchema = z.object({
     })
   ),
   defaultLanguage: z.string(),
-  numberFormat: z.object({
+  numberFormat: strictObject({
     decimalSeparator: z.enum(['.', ',']),
     thousandsSeparator: z.enum([',', '.', ' ', '']),
   }),
-  dateFormat: z.object({
+  dateFormat: strictObject({
     short: z.string(),
     long: z.string(),
     time: z.enum(['12h', '24h']),
@@ -126,15 +128,15 @@ const LocalizationSchema = z.object({
 // ============================================================
 // SECTION 5: FINANCIAL
 // ============================================================
-const FinancialSchema = z.object({
-  currency: z.object({
+const FinancialSchema = strictObject({
+  currency: strictObject({
     code: z.string().length(3),
     symbol: z.string(),
     name: z.string(),
     decimalPlaces: z.number(),
   }),
   mobileMoneyProviders: z.array(
-    z.object({
+    strictObject({
       name: z.string(),
       code: z.string(),
       ussdCode: z.string(),
@@ -142,7 +144,7 @@ const FinancialSchema = z.object({
       marketSharePercent: z.number(),
     })
   ),
-  limits: z.object({
+  limits: strictObject({
     maxCashTransactionUSD: z.number(),
     mobileMoneyDailyLimitUSD: z.number(),
   }),
@@ -151,23 +153,23 @@ const FinancialSchema = z.object({
 // ============================================================
 // SECTION 6: TELECOM
 // ============================================================
-const TelecomSchema = z.object({
+const TelecomSchema = strictObject({
   operators: z.array(
-    z.object({
+    strictObject({
       name: z.string(),
       code: z.string(),
       marketSharePercent: z.number(),
-      coverage: z.object({
+      coverage: strictObject({
         population2G: z.number(),
         population4G: z.number(),
       }),
-      ussdPartnership: z.object({
+      ussdPartnership: strictObject({
         available: z.boolean(),
         shortCode: z.string().optional(),
       }),
     })
   ),
-  connectivity: z.object({
+  connectivity: strictObject({
     smartphonePenetration: z.number(),
     internetPenetration: z.number(),
   }),
@@ -176,27 +178,27 @@ const TelecomSchema = z.object({
 // ============================================================
 // SECTION 7: IDENTITY VERIFICATION
 // ============================================================
-const IdentityVerificationSchema = z.object({
-  nationalId: z.object({
+const IdentityVerificationSchema = strictObject({
+  nationalId: strictObject({
     systemName: z.string(),
     format: z.string(),
     apiAvailable: z.boolean(),
   }),
-  card: z.object({
-    branding: z.object({
+  card: strictObject({
+    branding: strictObject({
       sovereignLogoRequired: z.boolean(),
       primaryLanguage: z.string(),
     }),
-    numbering: z.object({
+    numbering: strictObject({
       prefix: z.string(),
       sequenceLength: z.number(),
     }),
   }),
-  biometrics: z.object({
+  biometrics: strictObject({
     fingerprintRequired: z.boolean(),
     templateStorageLocation: z.enum(['device_only', 'card', 'central']),
   }),
-  kycTiers: z.object({
+  kycTiers: strictObject({
     tier1LimitUSD: z.number(),
     tier2LimitUSD: z.number(),
   }),
@@ -205,21 +207,21 @@ const IdentityVerificationSchema = z.object({
 // ============================================================
 // SECTION 8: HARDWARE
 // ============================================================
-const HardwareSchema = z.object({
+const HardwareSchema = strictObject({
   certifiedDevices: z.array(
-    z.object({
+    strictObject({
       manufacturer: z.string(),
       model: z.string(),
       certificationLevel: z.enum(['compatible', 'certified', 'verified']),
       retailPriceUSD: z.number(),
     })
   ),
-  scales: z.object({
+  scales: strictObject({
     certificationRequired: z.boolean(),
     recertificationMonths: z.number(),
     approvedBrands: z.array(z.string()),
   }),
-  seals: z.object({
+  seals: strictObject({
     prefix: z.string(),
     supplier: z.enum(['sicpa', '3m', 'local', 'multi']),
   }),
@@ -228,7 +230,7 @@ const HardwareSchema = z.object({
 // ============================================================
 // SECTION 9: GEOTAG
 // ============================================================
-const GeoTagSchema = z.object({
+const GeoTagSchema = strictObject({
   accuracyMeters: z.number(),
   spoofDetection: z.enum(['basic', 'enhanced', 'strict']),
   satelliteProvider: z.enum(['planet', 'maxar', 'airbus', 'sovereign', 'none']),
@@ -238,13 +240,13 @@ const GeoTagSchema = z.object({
 // ============================================================
 // SECTION 10: CUSTODY
 // ============================================================
-const CustodySchema = z.object({
-  seals: z.object({
+const CustodySchema = strictObject({
+  seals: strictObject({
     required: z.boolean(),
     prefix: z.string(),
     maxValidityDays: z.number(),
   }),
-  chain: z.object({
+  chain: strictObject({
     minimumCheckpoints: z.number(),
     maxHoursBetweenCheckpoints: z.number(),
   }),
@@ -253,23 +255,23 @@ const CustodySchema = z.object({
 // ============================================================
 // SECTION 11: SUPPORT
 // ============================================================
-const SupportSchema = z.object({
-  channels: z.object({
+const SupportSchema = strictObject({
+  channels: strictObject({
     ussdCode: z.string(),
     smsShortcode: z.string(),
     whatsappNumber: z.string(),
     voiceNumber: z.string(),
   }),
-  hours: z.object({
+  hours: strictObject({
     businessStart: z.string(),
     businessEnd: z.string(),
     emergency24x7: z.boolean(),
   }),
-  rco: z.object({
+  rco: strictObject({
     location: z.string(),
     minimumStaff: z.number(),
   }),
-  peerRewards: z.object({
+  peerRewards: strictObject({
     currency: z.string(),
     answerAccepted: z.number(),
     articleContribution: z.number(),
@@ -279,8 +281,8 @@ const SupportSchema = z.object({
 // ============================================================
 // SECTION 12: GCI SCORING
 // ============================================================
-const GciSchema = z.object({
-  weights: z.object({
+const GciSchema = strictObject({
+  weights: strictObject({
     identity: z.number(),
     location: z.number(),
     documentation: z.number(),
@@ -289,7 +291,7 @@ const GciSchema = z.object({
     financial: z.number(),
     traceability: z.number(),
   }),
-  thresholds: z.object({
+  thresholds: strictObject({
     minimumForTrading: z.number(),
     minimumForExport: z.number(),
     minimumForPremium: z.number(),
@@ -299,7 +301,7 @@ const GciSchema = z.object({
 // ============================================================
 // SECTION 13: DEPLOYMENT
 // ============================================================
-const DeploymentSchema = z.object({
+const DeploymentSchema = strictObject({
   status: z.enum([
     'prospect',
     'engaged',
@@ -309,13 +311,13 @@ const DeploymentSchema = z.object({
     'scaling',
     'production',
   ]),
-  targets: z.object({
+  targets: strictObject({
     month3Users: z.number(),
     month6Users: z.number(),
     year1Users: z.number(),
     buyingStations: z.number(),
   }),
-  readiness: z.object({
+  readiness: strictObject({
     regulatoryApproval: z.boolean(),
     partnerContracts: z.boolean(),
     rcoEstablished: z.boolean(),
@@ -324,9 +326,38 @@ const DeploymentSchema = z.object({
 });
 
 // ============================================================
+// SECTION 14: ZKP (Tier 5 policy packs on CommodityOrigin R1CS)
+// ============================================================
+export const CircuitProfileIdSchema = z.enum([
+  'gh-gold-origin',
+  'gh-cocoa-origin',
+  'zw-diamond-origin',
+  'commodity-origin',
+]);
+
+export const ProfileMetricSemanticsSchema = z.enum([
+  'purity-basis-points-and-grams',
+  'clarity-and-centi-carats',
+  'grade-and-grams',
+]);
+
+const ZkpPolicyPackSchema = strictObject({
+  profileId: CircuitProfileIdSchema,
+  underlyingCircuit: z.literal('CommodityOrigin'),
+  metricSemantics: ProfileMetricSemanticsSchema,
+  /** Lab-only generic pack until a named sovereign profile ships (NA/BW/CD). */
+  labGeneric: z.boolean().optional(),
+});
+
+const ZkpSchema = strictObject({
+  defaultProfileId: CircuitProfileIdSchema,
+  packs: z.array(ZkpPolicyPackSchema).min(1),
+});
+
+// ============================================================
 // COMBINED SCHEMA
 // ============================================================
-export const JurisdictionConfigSchema = z.object({
+export const JurisdictionConfigSchema = strictObject({
   identity: IdentitySchema,
   regulatory: RegulatorySchema,
   commodities: CommoditiesSchema,
@@ -340,9 +371,17 @@ export const JurisdictionConfigSchema = z.object({
   support: SupportSchema,
   gci: GciSchema,
   deployment: DeploymentSchema,
+  /** Tier 5 circuit registry linkage — required for engagement jurisdiction packs. */
+  zkp: ZkpSchema.optional(),
+});
+
+/** Engagement targets (ZW, GH, NA, BW, CD) must include `zkp` and pass strict parsing. */
+export const EngagementJurisdictionPackSchema = JurisdictionConfigSchema.extend({
+  zkp: ZkpSchema,
 });
 
 export type JurisdictionConfig = z.infer<typeof JurisdictionConfigSchema>;
+export type EngagementJurisdictionPack = z.infer<typeof EngagementJurisdictionPackSchema>;
 
 export {
   IdentitySchema,
@@ -359,4 +398,6 @@ export {
   SupportSchema,
   GciSchema,
   DeploymentSchema,
+  ZkpSchema,
+  ZkpPolicyPackSchema,
 };

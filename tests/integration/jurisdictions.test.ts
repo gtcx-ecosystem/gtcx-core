@@ -14,22 +14,26 @@
  */
 
 import { sign, verify, generateKeyPair, hash256 } from '@gtcx/crypto';
-import { JurisdictionConfigSchema } from '@gtcx/jurisdiction-config';
+import {
+  EngagementJurisdictionPackSchema,
+  JurisdictionConfigSchema,
+} from '@gtcx/jurisdiction-config';
 import { describe, it, expect } from 'vitest';
 
 import { ENGAGEMENT_JURISDICTIONS } from './fixtures/jurisdiction-fixtures';
 
 describe('Jurisdiction config validation', () => {
   for (const { code, name, fixture } of ENGAGEMENT_JURISDICTIONS) {
-    it(`${code} (${name}) — fixture passes JurisdictionConfigSchema`, () => {
+    it(`${code} (${name}) — fixture passes strict EngagementJurisdictionPackSchema`, () => {
       const config = fixture();
-      const result = JurisdictionConfigSchema.safeParse(config);
+      const result = EngagementJurisdictionPackSchema.safeParse(config);
       if (!result.success) {
         throw new Error(
           `${code} config failed schema validation:\n${JSON.stringify(result.error.issues, null, 2)}`
         );
       }
       expect(result.success).toBe(true);
+      expect(JurisdictionConfigSchema.safeParse(config).success).toBe(true);
     });
 
     it(`${code} (${name}) — identity section has matching ISO codes`, () => {

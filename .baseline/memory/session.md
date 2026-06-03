@@ -1,27 +1,26 @@
 ---
-session_id: '2026-06-03-dtf-5-4-4-protocols-e2e'
+session_id: '2026-06-03-dtf-5-5-1-jurisdiction-packs'
 agent: 'gtcx-core-agent'
-focus: 'DTF-5.4.4 handoff ack — Tier 5 technical ~85%'
+focus: 'DTF-5.5.1 jurisdiction pack Zod strict CI'
 ---
 
-# Session: DTF-5.4.4 handoff complete
+# Session: DTF-5.5.1 complete
 
 ## Done
 
-| Milestone        | Evidence                                                                            |
-| ---------------- | ----------------------------------------------------------------------------------- |
-| DTF-5.4.4        | Protocols witness **`73eaff2b`**; hub ack `cross-repo-agent-bridge.md` (2026-06-05) |
-| Core helper      | `fc041a6` — `verifyGroth16CommodityOriginKat`                                       |
-| Tier-5 technical | **~85%** — S-T5-4 handoff complete                                                  |
+| Milestone | Evidence                                                                                                   |
+| --------- | ---------------------------------------------------------------------------------------------------------- |
+| DTF-5.5.1 | `@gtcx/jurisdiction-config` strict Zod + `zkp` policy packs; `pnpm jurisdiction:validate-packs` (16 tests) |
 
 ## Protocol 22
 
-`pnpm agent:next-work` → **DTF-5.5.1** (jurisdiction pack Zod CI — S-T5-5)
+`pnpm agent:next-work` → **DTF-5.5.2** (certified pack pipeline — external / Legal)
 
 ## Verification
 
-| Command                                                                   | Result              |
-| ------------------------------------------------------------------------- | ------------------- |
-| `pnpm --filter @gtcx/crypto build`                                        | exit 0              |
-| `pnpm --filter @gtcx/crypto test`                                         | exit 0 (439 passed) |
-| `pnpm exec vitest run … zkp-circuit-profile-e2e.test.ts` (gtcx-protocols) | exit 0 (7 passed)   |
+| Command                                           | Result             |
+| ------------------------------------------------- | ------------------ |
+| `pnpm --filter @gtcx/jurisdiction-config build`   | exit 0             |
+| `pnpm --filter @gtcx/jurisdiction-config test`    | exit 0 (34 passed) |
+| `pnpm jurisdiction:validate-packs`                | exit 0 (16 passed) |
+| `cd tests/integration && pnpm test jurisdictions` | exit 0 (21 passed) |

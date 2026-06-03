@@ -1,5 +1,8 @@
 export {
   JurisdictionConfigSchema,
+  EngagementJurisdictionPackSchema,
+  CircuitProfileIdSchema,
+  ProfileMetricSemanticsSchema,
   IdentitySchema,
   RegulatorySchema,
   CommoditySchema,
@@ -14,10 +17,17 @@ export {
   SupportSchema,
   GciSchema,
   DeploymentSchema,
+  ZkpSchema,
+  ZkpPolicyPackSchema,
 } from './schema';
 
-export type { JurisdictionConfig } from './schema';
+export type { JurisdictionConfig, EngagementJurisdictionPack } from './schema';
 
-export { loadJurisdictionConfig, validateJurisdictionConfig } from './loader';
+export {
+  loadJurisdictionConfig,
+  validateJurisdictionConfig,
+  loadEngagementJurisdictionPack,
+  validateEngagementJurisdictionPack,
+} from './loader';
 
 export type { LoadResult, LoadError, LoadOutcome } from './loader';

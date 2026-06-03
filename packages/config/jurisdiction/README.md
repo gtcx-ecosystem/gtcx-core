@@ -40,21 +40,30 @@ if (validateJurisdictionConfig(raw)) {
 
 ## Schema Sections
 
-| Schema                       | Description                               |
-| ---------------------------- | ----------------------------------------- |
-| `IdentitySchema`             | KYC requirements, age limits              |
-| `RegulatorySchema`           | License and permit requirements           |
-| `CommoditySchema`            | Commodity types, units, purity thresholds |
-| `LocalizationSchema`         | Language, date/number formats             |
-| `FinancialSchema`            | Currency, payment methods, limits         |
-| `TelecomSchema`              | Mobile money, USSD config                 |
-| `IdentityVerificationSchema` | Document types, biometric requirements    |
-| `HardwareSchema`             | Device certification, sensor requirements |
-| `GeoTagSchema`               | GPS accuracy, geofencing                  |
-| `CustodySchema`              | Chain of custody rules                    |
-| `SupportSchema`              | Support channels, SLA                     |
-| `GciSchema`                  | GCI scoring parameters                    |
-| `DeploymentSchema`           | Region, currency, feature flags           |
+| Schema                       | Description                                    |
+| ---------------------------- | ---------------------------------------------- |
+| `IdentitySchema`             | KYC requirements, age limits                   |
+| `RegulatorySchema`           | License and permit requirements                |
+| `CommoditySchema`            | Commodity types, units, purity thresholds      |
+| `LocalizationSchema`         | Language, date/number formats                  |
+| `FinancialSchema`            | Currency, payment methods, limits              |
+| `TelecomSchema`              | Mobile money, USSD config                      |
+| `IdentityVerificationSchema` | Document types, biometric requirements         |
+| `HardwareSchema`             | Device certification, sensor requirements      |
+| `GeoTagSchema`               | GPS accuracy, geofencing                       |
+| `CustodySchema`              | Chain of custody rules                         |
+| `SupportSchema`              | Support channels, SLA                          |
+| `GciSchema`                  | GCI scoring parameters                         |
+| `DeploymentSchema`           | Region, currency, feature flags                |
+| `ZkpSchema`                  | Tier 5 circuit profile packs (CommodityOrigin) |
+
+## Tier 5 engagement packs (DTF-5.5.1)
+
+Five engagement jurisdictions (ZW, GH, NA, BW, CD) must pass `EngagementJurisdictionPackSchema` (strict — unknown keys rejected). CI gate:
+
+```bash
+pnpm jurisdiction:validate-packs
+```
 
 ## Dependencies
 

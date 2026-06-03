@@ -80,6 +80,7 @@ Apply tiers in order:
 | **DTF-5.4.2** Load test 1000 proofs/min   | S-T5-4 | **done**                  |
 | **DTF-5.4.3** Trust portal circuit IDs    | S-T5-4 | **done**                  |
 | **DTF-5.4.4** gtcx-protocols E2E          | S-T5-4 | **done** (ack `73eaff2b`) |
+| **DTF-5.5.1** Jurisdiction pack Zod CI    | S-T5-5 | **done**                  |
 
 Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [execution-roadmap.md](../audit/execution-roadmap.md).
 

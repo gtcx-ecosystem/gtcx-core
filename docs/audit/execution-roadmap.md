@@ -18,19 +18,19 @@ sources:
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
 **Active phase:** **S-T5-5** — DTF-5.5.x commercial / certified packs (GTM-led)  
-**Protocol 22:** `pnpm agent:next-work` → **DTF-5.5.1** (jurisdiction pack Zod CI)
+**Protocol 22:** `pnpm agent:next-work` → **DTF-5.5.2** (certified pack pipeline — external)
 
 ---
 
 ## Executive summary (2026-06-05)
 
-| Track                            | State         | Next                                                   |
-| -------------------------------- | ------------- | ------------------------------------------------------ |
-| Internal engineering (S1–S5)     | **done**      | —                                                      |
-| Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                                 |
-| **DTF Tier 5 technical**         | **~85%**      | S-T5-4 handoff complete (`73eaff2b`); 5.5.x commercial |
-| Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)        |
-| **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/`     |
+| Track                            | State         | Next                                                      |
+| -------------------------------- | ------------- | --------------------------------------------------------- |
+| Internal engineering (S1–S5)     | **done**      | —                                                         |
+| Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                                    |
+| **DTF Tier 5 technical**         | **~88%**      | DTF-5.5.1 strict packs done; 5.5.2+ commercial (external) |
+| Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)           |
+| **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/`        |
 
 **Risk (audit):** Do not equate npm library maturity with sovereign pilot clearance.  
 **Opportunity (audit):** Profile packs + KAT portability on one R1CS + WorkProof→verification chain.

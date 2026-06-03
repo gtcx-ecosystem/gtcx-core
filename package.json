@@ -42,6 +42,7 @@
     "perf:update-history": "node ./tools/update-benchmark-history.mjs",
     "perf:check-budgets": "node ./tools/check-performance-budgets.mjs",
     "perf:zkp-profile-load": "node ./tools/bench/zkp-profile-load-test.mjs",
+    "jurisdiction:validate-packs": "pnpm --filter @gtcx/jurisdiction-config validate:packs",
     "api:check": "node ./tools/check-api-surface.mjs",
     "api:check:release": "API_ENFORCE_SEMVER=true API_BASELINE_REF=HEAD~1 node ./tools/check-api-surface.mjs",
     "api:update-baseline": "node ./tools/check-api-surface.mjs --update",

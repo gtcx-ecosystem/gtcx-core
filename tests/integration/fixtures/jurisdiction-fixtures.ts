@@ -193,6 +193,16 @@ export function zimbabweFixture(): JurisdictionConfig {
     tradePass: { card: { numbering: { prefix: 'ZW', sequenceLength: 10 } } },
     custody: { seals: { prefix: 'ZW', maxValidityDays: 30 } },
     hardware: { seals: { prefix: 'ZW', supplier: 'sicpa' } },
+    zkp: {
+      defaultProfileId: 'zw-diamond-origin',
+      packs: [
+        {
+          profileId: 'zw-diamond-origin',
+          underlyingCircuit: 'CommodityOrigin',
+          metricSemantics: 'clarity-and-centi-carats',
+        },
+      ],
+    },
   });
 }
 
@@ -223,6 +233,21 @@ export function ghanaFixture(): JurisdictionConfig {
     tradePass: { card: { numbering: { prefix: 'GH', sequenceLength: 10 } } },
     custody: { seals: { prefix: 'GH', maxValidityDays: 30 } },
     hardware: { seals: { prefix: 'GH', supplier: 'sicpa' } },
+    zkp: {
+      defaultProfileId: 'gh-gold-origin',
+      packs: [
+        {
+          profileId: 'gh-gold-origin',
+          underlyingCircuit: 'CommodityOrigin',
+          metricSemantics: 'purity-basis-points-and-grams',
+        },
+        {
+          profileId: 'gh-cocoa-origin',
+          underlyingCircuit: 'CommodityOrigin',
+          metricSemantics: 'grade-and-grams',
+        },
+      ],
+    },
   });
 }
 
@@ -253,6 +278,17 @@ export function namibiaFixture(): JurisdictionConfig {
     tradePass: { card: { numbering: { prefix: 'NA', sequenceLength: 10 } } },
     custody: { seals: { prefix: 'NA', maxValidityDays: 30 } },
     hardware: { seals: { prefix: 'NA', supplier: 'sicpa' } },
+    zkp: {
+      defaultProfileId: 'commodity-origin',
+      packs: [
+        {
+          profileId: 'commodity-origin',
+          underlyingCircuit: 'CommodityOrigin',
+          metricSemantics: 'purity-basis-points-and-grams',
+          labGeneric: true,
+        },
+      ],
+    },
   });
 }
 
@@ -283,6 +319,17 @@ export function botswanaFixture(): JurisdictionConfig {
     tradePass: { card: { numbering: { prefix: 'BW', sequenceLength: 10 } } },
     custody: { seals: { prefix: 'BW', maxValidityDays: 30 } },
     hardware: { seals: { prefix: 'BW', supplier: 'sicpa' } },
+    zkp: {
+      defaultProfileId: 'commodity-origin',
+      packs: [
+        {
+          profileId: 'commodity-origin',
+          underlyingCircuit: 'CommodityOrigin',
+          metricSemantics: 'purity-basis-points-and-grams',
+          labGeneric: true,
+        },
+      ],
+    },
   });
 }
 
@@ -322,6 +369,17 @@ export function drcFixture(): JurisdictionConfig {
     tradePass: { card: { numbering: { prefix: 'CD', sequenceLength: 10 } } },
     custody: { seals: { prefix: 'CD', maxValidityDays: 30 } },
     hardware: { seals: { prefix: 'CD', supplier: 'sicpa' } },
+    zkp: {
+      defaultProfileId: 'commodity-origin',
+      packs: [
+        {
+          profileId: 'commodity-origin',
+          underlyingCircuit: 'CommodityOrigin',
+          metricSemantics: 'purity-basis-points-and-grams',
+          labGeneric: true,
+        },
+      ],
+    },
   });
 }
 

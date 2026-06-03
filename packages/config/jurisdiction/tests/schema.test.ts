@@ -191,6 +191,14 @@ describe('JurisdictionConfigSchema', () => {
     expect(result.success).toBe(false);
   });
 
+  it('rejects unknown top-level keys (strict)', () => {
+    const result = JurisdictionConfigSchema.safeParse({
+      ...validConfig,
+      extraField: 'not-allowed',
+    });
+    expect(result.success).toBe(false);
+  });
+
   it('rejects null', () => {
     const result = JurisdictionConfigSchema.safeParse(null);
     expect(result.success).toBe(false);
@@ -199,7 +207,7 @@ describe('JurisdictionConfigSchema', () => {
   it('contains all 13 top-level sections', () => {
     const shape = JurisdictionConfigSchema.shape;
     const keys = Object.keys(shape);
-    expect(keys).toHaveLength(13);
+    expect(keys).toHaveLength(14);
     expect(keys).toEqual(
       expect.arrayContaining([
         'identity',
@@ -215,6 +223,7 @@ describe('JurisdictionConfigSchema', () => {
         'support',
         'gci',
         'deployment',
+        'zkp',
       ])
     );
   });
