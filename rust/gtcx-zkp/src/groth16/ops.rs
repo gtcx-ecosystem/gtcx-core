@@ -398,7 +398,10 @@ pub fn groth16_prove_commodity_origin(
 #[instrument(skip_all, fields(circuit = ?bundle.circuit))]
 pub fn groth16_verify(bundle: &Groth16ProofBundle) -> Result<bool> {
     match bundle.circuit {
-        Groth16CircuitType::GciThreshold | Groth16CircuitType::AssetOwnership | Groth16CircuitType::LocationRegion | Groth16CircuitType::CommodityOrigin => {
+        Groth16CircuitType::GciThreshold
+        | Groth16CircuitType::AssetOwnership
+        | Groth16CircuitType::LocationRegion
+        | Groth16CircuitType::CommodityOrigin => {
             let proof: Groth16Proof<Bn254> = deserialize(&bundle.proof)?;
             let vk: VerifyingKey<Bn254> = deserialize(&bundle.verifying_key)?;
             let pvk = Groth16::<Bn254>::process_vk(&vk).map_err(map_proof_system_error)?;

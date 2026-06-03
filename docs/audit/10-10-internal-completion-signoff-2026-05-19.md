@@ -1,18 +1,19 @@
 ---
-title: "gtcx-core — 10/10 Internal Completion Sign-off"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'gtcx-core — 10/10 Internal Completion Sign-off'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "audit"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'audit']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: '10/10 Internal Completion Sign-off — 2026-05-19'
 status: 'current'
 date: '2026-05-19'
@@ -21,6 +22,7 @@ role: 'protocol-architect'
 tier: 'critical'
 tags: ['audit', 'completion', 'signoff', '10-10']
 review_cycle: 'on-change'
+
 ---
 
 # gtcx-core — 10/10 Internal Completion Sign-off

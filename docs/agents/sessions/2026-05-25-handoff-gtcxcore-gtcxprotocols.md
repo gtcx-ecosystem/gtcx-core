@@ -1,18 +1,19 @@
 ---
-title: "Cross-Repo Handoff — ADR-012 Stage 1"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Cross-Repo Handoff — ADR-012 Stage 1'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "agents"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'agents']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Cross-Repo Handoff — ADR-012 Stage 1 (gtcx-core → gtcx-protocols)'
 date: '2026-05-25'
 from: 'gtcx-core'
@@ -20,6 +21,7 @@ to: 'gtcx-protocols'
 scope: 'ADR-012 predicate reconciliation Stage 1'
 tags: ['handoff', 'gtcx-core', 'gtcx-protocols', 'ADR-012', 'predicate-reconciliation']
 status: 'complete'
+
 ---
 
 # Cross-Repo Handoff — ADR-012 Stage 1

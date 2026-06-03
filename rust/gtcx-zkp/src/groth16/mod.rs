@@ -339,7 +339,8 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
             self.min_secondary.ok_or(SynthesisError::AssignmentMissing)
         })?;
         let _certification_flags = UInt64::new_input(cs.clone(), || {
-            self.certification_flags.ok_or(SynthesisError::AssignmentMissing)
+            self.certification_flags
+                .ok_or(SynthesisError::AssignmentMissing)
         })?;
 
         // Witness: mine_id
@@ -493,10 +494,19 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
             .map(|i| {
                 UInt8::new_witness(cs.clone(), || {
                     let mut hasher_input = Vec::with_capacity(U64_BYTES * 2 + RANDOMNESS_BYTES);
-                    hasher_input.extend_from_slice(&u64_to_le_bytes(self.lat.ok_or(SynthesisError::AssignmentMissing)?));
-                    hasher_input.extend_from_slice(&u64_to_le_bytes(self.lon.ok_or(SynthesisError::AssignmentMissing)?));
-                    hasher_input.extend_from_slice(&self.location_randomness.ok_or(SynthesisError::AssignmentMissing)?);
-                    let hash = sha256_digest(&hasher_input).map_err(|_| SynthesisError::AssignmentMissing)?;
+                    hasher_input.extend_from_slice(&u64_to_le_bytes(
+                        self.lat.ok_or(SynthesisError::AssignmentMissing)?,
+                    ));
+                    hasher_input.extend_from_slice(&u64_to_le_bytes(
+                        self.lon.ok_or(SynthesisError::AssignmentMissing)?,
+                    ));
+                    hasher_input.extend_from_slice(
+                        &self
+                            .location_randomness
+                            .ok_or(SynthesisError::AssignmentMissing)?,
+                    );
+                    let hash = sha256_digest(&hasher_input)
+                        .map_err(|_| SynthesisError::AssignmentMissing)?;
                     Ok(hash[i])
                 })
             })
@@ -527,8 +537,7 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
             cs.clone(),
             || self.merkle_path.ok_or(SynthesisError::AssignmentMissing),
         )?;
-        let is_member =
-            path.verify_membership(&unit, &unit, &mines_root, leaf_bytes.as_slice())?;
+        let is_member = path.verify_membership(&unit, &unit, &mines_root, leaf_bytes.as_slice())?;
         is_member.enforce_equal(&Boolean::constant(true))?;
 
         Ok(())
@@ -536,10 +545,10 @@ impl ConstraintSynthesizer<Fr> for CommodityOriginCircuit {
 }
 
 mod utils;
-use utils::*;
-pub use utils::{sample_asset_ownership, sample_commodity_origin, sample_location_region};
 #[cfg(test)]
 pub use utils::sample_diamond_origin;
+use utils::*;
+pub use utils::{sample_asset_ownership, sample_commodity_origin, sample_location_region};
 
 mod ops;
 pub use ops::*;

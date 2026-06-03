@@ -1,18 +1,19 @@
 ---
-title: "Master Forensic Certification Audit — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Master Forensic Certification Audit — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "audit"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'audit']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Master Forensic Certification Audit — gtcx-core'
 status: current
 date: '2026-05-27'
@@ -20,11 +21,13 @@ owner: quality-evidence-lead
 role: quality-evidence-lead
 tier: critical
 tags:
-  - audit
-  - master-audit
-  - certification
-  - 10-10
-review_cycle: quarterly
+
+- audit
+- master-audit
+- certification
+- 10-10
+  review_cycle: quarterly
+
 ---
 
 # Master Forensic Certification Audit — gtcx-core

@@ -100,6 +100,13 @@ pub enum CryptoError {
     /// contains backend-specific detail; do not parse it for routing.
     #[error("KeyStore error: {0}")]
     KeyStoreError(String),
+
+    /// A non-FIPS-approved algorithm was requested in FIPS strict mode.
+    #[error("Non-FIPS algorithm rejected in strict mode: {algorithm}")]
+    NonFipsAlgorithm {
+        /// Name of the rejected algorithm.
+        algorithm: &'static str,
+    },
 }
 
 impl CryptoError {

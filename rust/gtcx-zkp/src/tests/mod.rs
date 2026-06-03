@@ -5,6 +5,10 @@ mod groth16;
 mod property_based;
 mod schnorr;
 mod serialization;
+#[cfg(feature = "differential")]
+mod differential;
+#[cfg(feature = "sidechannel-bench")]
+mod sidechannel;
 mod types;
 
 pub(crate) fn test_salt() -> [u8; 32] {

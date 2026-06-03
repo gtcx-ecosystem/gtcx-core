@@ -1,15 +1,15 @@
 ---
-title: "Architecture Decision Records — gtcx-core"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Architecture Decision Records — gtcx-core'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 95
-autonomy_level: "sovereign"
-tier: "critical"
-tags: ["documentation", "decisions"]
-review_cycle: "on-change"
+autonomy_level: 'sovereign'
+tier: 'critical'
+tags: ['documentation', 'decisions']
+review_cycle: 'on-change'
 ---
 
 # Architecture Decision Records — gtcx-core

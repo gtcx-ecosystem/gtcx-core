@@ -247,7 +247,9 @@ pub fn bulletproofs_prove_commodity_range(
 
 /// Verify a Bulletproofs commodity range proof bundle for [min, max].
 #[instrument(skip_all)]
-pub fn bulletproofs_verify_commodity_range(bundle: &BulletproofsCommodityRangeBundle) -> Result<bool> {
+pub fn bulletproofs_verify_commodity_range(
+    bundle: &BulletproofsCommodityRangeBundle,
+) -> Result<bool> {
     if bundle.min > bundle.max {
         return Err(ZkpError::InvalidWitness {
             reason: "min exceeds max".to_string(),

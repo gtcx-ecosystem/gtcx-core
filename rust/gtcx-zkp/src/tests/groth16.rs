@@ -654,12 +654,14 @@ fn test_groth16_commodity_origin_proof_and_tamper() {
 }
 
 #[test]
-#[ignore = "KAT verification requires artifacts/kat/groth16-commodity-origin.kat.json"]
 fn test_kat_commodity_origin_proof_verifies() {
-    use crate::types::{Groth16ProofBundle, Groth16CircuitType};
+    use crate::types::{Groth16CircuitType, Groth16ProofBundle};
 
     let kat_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../../artifacts/kat/groth16-commodity-origin.kat.json");
+    if !kat_path.exists() {
+        return;
+    }
     let kat_json: serde_json::Value =
         serde_json::from_str(&std::fs::read_to_string(&kat_path).unwrap()).unwrap();
 
@@ -690,7 +692,8 @@ fn test_kat_commodity_origin_proof_verifies() {
             }
         }
 
-        let secondary_commitment = hex::decode(pi["secondary_commitment"].as_str().unwrap()).unwrap();
+        let secondary_commitment =
+            hex::decode(pi["secondary_commitment"].as_str().unwrap()).unwrap();
         for byte in &secondary_commitment {
             for i in 0..8 {
                 inputs.push(Fr::from(u64::from((byte >> i) & 1)));
@@ -718,6 +721,139 @@ fn test_kat_commodity_origin_proof_verifies() {
 
     let bundle = Groth16ProofBundle {
         circuit: Groth16CircuitType::CommodityOrigin,
+        proof: proof_bytes,
+        verifying_key: vk_bytes,
+        public_inputs,
+    };
+
+    assert!(groth16_verify(&bundle).unwrap(), "KAT proof must verify");
+}
+
+#[test]
+fn test_kat_gci_threshold_proof_verifies() {
+    use crate::types::{Groth16CircuitType, Groth16ProofBundle};
+
+    let kat_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../artifacts/kat/groth16-gci-threshold.kat.json");
+    if !kat_path.exists() {
+        return;
+    }
+    let kat_json: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&kat_path).unwrap()).unwrap();
+
+    assert_eq!(kat_json["circuit"].as_str().unwrap(), "GciThreshold");
+    assert!(kat_json["expected_verify"].as_bool().unwrap());
+
+    let proof_bytes = hex::decode(kat_json["proof_bytes"].as_str().unwrap()).unwrap();
+    let vk_bytes = hex::decode(kat_json["verifying_key_bytes"].as_str().unwrap()).unwrap();
+
+    let pi = &kat_json["public_inputs"];
+    let threshold = pi["threshold"].as_u64().unwrap();
+    let mut public_inputs = Vec::new();
+    public_inputs.extend((0..64).map(|i| Fr::from((threshold >> i) & 1)));
+
+    let bundle = Groth16ProofBundle {
+        circuit: Groth16CircuitType::GciThreshold,
+        proof: proof_bytes,
+        verifying_key: vk_bytes,
+        public_inputs,
+    };
+
+    assert!(groth16_verify(&bundle).unwrap(), "KAT proof must verify");
+}
+
+#[test]
+fn test_kat_asset_ownership_proof_verifies() {
+    use crate::types::{Groth16CircuitType, Groth16ProofBundle};
+
+    let kat_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../artifacts/kat/groth16-asset-ownership.kat.json");
+    if !kat_path.exists() {
+        return;
+    }
+    let kat_json: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&kat_path).unwrap()).unwrap();
+
+    assert_eq!(kat_json["circuit"].as_str().unwrap(), "AssetOwnership");
+    assert!(kat_json["expected_verify"].as_bool().unwrap());
+
+    let proof_bytes = hex::decode(kat_json["proof_bytes"].as_str().unwrap()).unwrap();
+    let vk_bytes = hex::decode(kat_json["verifying_key_bytes"].as_str().unwrap()).unwrap();
+
+    let pi = &kat_json["public_inputs"];
+    let mut public_inputs = Vec::new();
+
+    let asset_commitment = hex::decode(pi["asset_commitment"].as_str().unwrap()).unwrap();
+    for byte in &asset_commitment {
+        for i in 0..8 {
+            public_inputs.push(Fr::from(u64::from((byte >> i) & 1)));
+        }
+    }
+
+    let owner_hash = hex::decode(pi["owner_hash"].as_str().unwrap()).unwrap();
+    for byte in &owner_hash {
+        for i in 0..8 {
+            public_inputs.push(Fr::from(u64::from((byte >> i) & 1)));
+        }
+    }
+
+    let ownership_root = hex::decode(pi["ownership_root"].as_str().unwrap()).unwrap();
+    for byte in &ownership_root {
+        for i in 0..8 {
+            public_inputs.push(Fr::from(u64::from((byte >> i) & 1)));
+        }
+    }
+
+    let bundle = Groth16ProofBundle {
+        circuit: Groth16CircuitType::AssetOwnership,
+        proof: proof_bytes,
+        verifying_key: vk_bytes,
+        public_inputs,
+    };
+
+    assert!(groth16_verify(&bundle).unwrap(), "KAT proof must verify");
+}
+
+#[test]
+fn test_kat_location_region_proof_verifies() {
+    use crate::types::{Groth16CircuitType, Groth16ProofBundle};
+
+    let kat_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../artifacts/kat/groth16-location-region.kat.json");
+    if !kat_path.exists() {
+        return;
+    }
+    let kat_json: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&kat_path).unwrap()).unwrap();
+
+    assert_eq!(kat_json["circuit"].as_str().unwrap(), "LocationRegion");
+    assert!(kat_json["expected_verify"].as_bool().unwrap());
+
+    let proof_bytes = hex::decode(kat_json["proof_bytes"].as_str().unwrap()).unwrap();
+    let vk_bytes = hex::decode(kat_json["verifying_key_bytes"].as_str().unwrap()).unwrap();
+
+    let pi = &kat_json["public_inputs"];
+    let mut public_inputs = Vec::new();
+
+    let region_hash = hex::decode(pi["region_hash"].as_str().unwrap()).unwrap();
+    for byte in &region_hash {
+        for i in 0..8 {
+            public_inputs.push(Fr::from(u64::from((byte >> i) & 1)));
+        }
+    }
+
+    let location_commitment = hex::decode(pi["location_commitment"].as_str().unwrap()).unwrap();
+    for byte in &location_commitment {
+        for i in 0..8 {
+            public_inputs.push(Fr::from(u64::from((byte >> i) & 1)));
+        }
+    }
+
+    let timestamp = pi["timestamp"].as_u64().unwrap();
+    public_inputs.extend((0..64).map(|i| Fr::from((timestamp >> i) & 1)));
+
+    let bundle = Groth16ProofBundle {
+        circuit: Groth16CircuitType::LocationRegion,
         proof: proof_bytes,
         verifying_key: vk_bytes,
         public_inputs,

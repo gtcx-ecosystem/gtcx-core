@@ -38,21 +38,21 @@ pub use bulletproofs::{
 };
 pub use commitment::{commit, generate_proof, prove_and_verify, verify_proof};
 pub use error::{Result, ZkpError};
+#[cfg(test)]
+pub use groth16::sample_diamond_origin;
 pub use groth16::{
     groth16_generate_keys, groth16_prove_asset_ownership, groth16_prove_commodity_origin,
     groth16_prove_gci_threshold, groth16_prove_location_region, groth16_verify,
     sample_asset_ownership, sample_commodity_origin, sample_location_region,
 };
-#[cfg(test)]
-pub use groth16::sample_diamond_origin;
 pub use schnorr::{
     schnorr_attribute_hash, schnorr_prove_identity_attribute, schnorr_verify_identity_attribute,
 };
 pub use types::{
     AssetOwnershipDigestConverter, AssetOwnershipMerkleConfig, AssetOwnershipPublicInputs,
     BulletproofsCommodityRangeBundle, BulletproofsRangeProofBundle, CircuitType,
-    CommodityOriginPublicInputs, Groth16CircuitType, Groth16Keys,
-    Groth16ProofBundle, LocationRegionPublicInputs, Proof, PublicInputs,
-    SchnorrIdentityProofBundle, Witness, ASSET_ID_BYTES, COMMITMENT_BYTES, DIGEST_BYTES,
-    MAX_WITNESS_SIZE, OWNER_HASH_BYTES, RANDOMNESS_BYTES, U64_BYTES,
+    CommodityOriginPublicInputs, Groth16CircuitType, Groth16Keys, Groth16ProofBundle,
+    LocationRegionPublicInputs, Proof, PublicInputs, SchnorrIdentityProofBundle, Witness,
+    ASSET_ID_BYTES, COMMITMENT_BYTES, DIGEST_BYTES, MAX_WITNESS_SIZE, OWNER_HASH_BYTES,
+    RANDOMNESS_BYTES, U64_BYTES,
 };

@@ -35,13 +35,25 @@ hex = { workspace = true }
 sha2 = { workspace = true }
 serde_json = { workspace = true }
 
+# Optional: side-channel benchmarking (D7 M7.4)
+dudect-bencher = { version = "0.7", optional = true }
+
+[features]
+differential = []
+sidechannel-bench = ["dep:dudect-bencher"]
+
 [dev-dependencies]
 criterion = { workspace = true }
 proptest = "1.4"
+rand = "0.8"
 
 [[bin]]
 name = "generate-kat"
 path = "src/bin/generate-kat.rs"
+
+[[bin]]
+name = "kat-cross-impl-verify"
+path = "src/bin/kat-cross-impl-verify.rs"
 
 [[bench]]
 name = "zkp"

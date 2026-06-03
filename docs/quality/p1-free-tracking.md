@@ -1,18 +1,19 @@
 ---
-title: "P1-Free Tracking — 90-Day Window"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'P1-Free Tracking — 90-Day Window'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "quality"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'quality']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'P1-Free Tracking — 90-Day Window'
 status: 'current'
 date: '2026-05-19'
@@ -23,6 +24,7 @@ role: 'quality-evidence-lead'
 tier: 'critical'
 tags: ['quality', 'tracking', 'p1', 'incident-management', '10-10']
 review_cycle: 'on-change'
+
 ---
 
 # P1-Free Tracking — 90-Day Window

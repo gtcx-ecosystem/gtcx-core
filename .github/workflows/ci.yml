@@ -87,6 +87,30 @@ jobs:
       - name: Build native crypto bindings
         run: pnpm --filter @gtcx/crypto-native run build:native
 
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('rust/Cargo.lock') }}
+
+      - name: Rust ZKP tests (includes KAT verification)
+        working-directory: rust
+        run: cargo test -p gtcx-zkp --lib
+
+      - name: Cross-implementation KAT verification (arkworks reference verifier)
+        run: pnpm test:kat-cross-impl
+
+      - name: Side-channel statistical benchmark (uint64_is_ge, 100K samples)
+        working-directory: rust
+        run: cargo test -p gtcx-zkp --lib --features sidechannel-bench -- test_uint64_is_ge_no_timing_leakage
+
+      - name: Differential testing (gtcx-zkp vs arkworks, 100 witnesses)
+        working-directory: rust
+        run: cargo test -p gtcx-zkp --lib --features differential -- test_differential_gci_threshold_100_witnesses
+
       - name: Test
         run: pnpm test
 

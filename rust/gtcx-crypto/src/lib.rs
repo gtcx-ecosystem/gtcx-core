@@ -97,7 +97,10 @@ pub use signing::p256;
 pub use signing::secp256k1;
 
 // Hashing
-pub use hashing::{blake3, sha256, sha512};
+pub use hashing::{
+    blake3, blake3_checked, blake3_derive, blake3_derive_checked, blake3_keyed,
+    blake3_keyed_checked, fips_mode_only, sha256, sha512,
+};
 
 // Keys
 pub use keys::{generate_keypair, KeyPair};

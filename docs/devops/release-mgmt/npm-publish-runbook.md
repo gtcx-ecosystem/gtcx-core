@@ -1,18 +1,19 @@
 ---
-title: "npm Publish Runbook — Executing release.yml"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'npm Publish Runbook — Executing release.yml'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "devops"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'devops']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'NPM Publish Runbook'
 status: 'current'
 date: '2026-05-22'
@@ -21,6 +22,7 @@ role: 'frontier-infra-engineer'
 tier: 'critical'
 tags: ['operations', 'release', 'npm', 'publish', 'runbook']
 review_cycle: 'on-change'
+
 ---
 
 # npm Publish Runbook — Executing release.yml

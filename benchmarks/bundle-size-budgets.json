@@ -86,6 +86,10 @@
     "@gtcx/verification": {
       "max": 65536,
       "rationale": "Certificates + QR + proofs (post-barrel-refactor)"
+    },
+    "@gtcx/zkp-kat-vectors": {
+      "max": 110592,
+      "rationale": "KAT JSON artifacts (6 circuits, ~100KB gzip)"
     }
   }
 }

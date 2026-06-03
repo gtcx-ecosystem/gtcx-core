@@ -6,10 +6,9 @@
 //!   output-dir: defaults to artifacts/kat/
 
 use gtcx_zkp::{
-    bulletproofs_prove_amount_range, bulletproofs_prove_commodity_range,
-    groth16_generate_keys, groth16_prove_asset_ownership, groth16_prove_commodity_origin,
-    groth16_prove_gci_threshold, groth16_prove_location_region, groth16_verify,
-    sample_asset_ownership, sample_commodity_origin,
+    bulletproofs_prove_amount_range, bulletproofs_prove_commodity_range, groth16_generate_keys,
+    groth16_prove_asset_ownership, groth16_prove_commodity_origin, groth16_prove_gci_threshold,
+    groth16_prove_location_region, groth16_verify, sample_asset_ownership, sample_commodity_origin,
     sample_location_region, Groth16CircuitType,
 };
 use sha2::{Digest, Sha256};
@@ -47,17 +46,28 @@ fn main() {
 fn generate_groth16_commodity_origin(out_dir: &PathBuf) {
     println!("Generating KAT vector for CommodityOrigin circuit...");
 
-    let keys = groth16_generate_keys(Groth16CircuitType::CommodityOrigin)
-        .expect("key generation failed");
+    let keys =
+        groth16_generate_keys(Groth16CircuitType::CommodityOrigin).expect("key generation failed");
     let sample = sample_commodity_origin().expect("sample generation failed");
 
     let (bundle, inputs) = groth16_prove_commodity_origin(
-        sample.commodity_type, sample.mine_id, sample.lat, sample.lon,
-        sample.primary_metric, sample.secondary_metric,
-        sample.primary_randomness, sample.secondary_randomness, sample.location_randomness,
-        sample.bounds, sample.min_primary, sample.min_secondary, sample.certification_flags,
-        sample.merkle_path, &keys,
-    ).expect("proof generation failed");
+        sample.commodity_type,
+        sample.mine_id,
+        sample.lat,
+        sample.lon,
+        sample.primary_metric,
+        sample.secondary_metric,
+        sample.primary_randomness,
+        sample.secondary_randomness,
+        sample.location_randomness,
+        sample.bounds,
+        sample.min_primary,
+        sample.min_secondary,
+        sample.certification_flags,
+        sample.merkle_path,
+        &keys,
+    )
+    .expect("proof generation failed");
 
     assert!(groth16_verify(&bundle).expect("verification error"));
 
@@ -103,11 +113,10 @@ fn generate_groth16_commodity_origin(out_dir: &PathBuf) {
 fn generate_groth16_gci_threshold(out_dir: &PathBuf) {
     println!("Generating KAT vector for GciThreshold circuit...");
 
-    let keys = groth16_generate_keys(Groth16CircuitType::GciThreshold)
-        .expect("key generation failed");
+    let keys =
+        groth16_generate_keys(Groth16CircuitType::GciThreshold).expect("key generation failed");
 
-    let bundle = groth16_prove_gci_threshold(95, 80, &keys)
-        .expect("proof generation failed");
+    let bundle = groth16_prove_gci_threshold(95, 80, &keys).expect("proof generation failed");
 
     assert!(groth16_verify(&bundle).expect("verification error"));
 
@@ -131,14 +140,19 @@ fn generate_groth16_gci_threshold(out_dir: &PathBuf) {
 fn generate_groth16_asset_ownership(out_dir: &PathBuf) {
     println!("Generating KAT vector for AssetOwnership circuit...");
 
-    let keys = groth16_generate_keys(Groth16CircuitType::AssetOwnership)
-        .expect("key generation failed");
+    let keys =
+        groth16_generate_keys(Groth16CircuitType::AssetOwnership).expect("key generation failed");
     let sample = sample_asset_ownership().expect("sample generation failed");
 
     let (bundle, inputs) = groth16_prove_asset_ownership(
-        sample.asset_id, sample.owner_hash, sample.randomness,
-        sample.ownership_root, sample.merkle_path, &keys,
-    ).expect("proof generation failed");
+        sample.asset_id,
+        sample.owner_hash,
+        sample.randomness,
+        sample.ownership_root,
+        sample.merkle_path,
+        &keys,
+    )
+    .expect("proof generation failed");
 
     assert!(groth16_verify(&bundle).expect("verification error"));
 
@@ -170,14 +184,19 @@ fn generate_groth16_asset_ownership(out_dir: &PathBuf) {
 fn generate_groth16_location_region(out_dir: &PathBuf) {
     println!("Generating KAT vector for LocationRegion circuit...");
 
-    let keys = groth16_generate_keys(Groth16CircuitType::LocationRegion)
-        .expect("key generation failed");
+    let keys =
+        groth16_generate_keys(Groth16CircuitType::LocationRegion).expect("key generation failed");
     let sample = sample_location_region().expect("sample generation failed");
 
     let (bundle, inputs) = groth16_prove_location_region(
-        sample.lat, sample.lon, sample.timestamp, sample.randomness,
-        sample.bounds, &keys,
-    ).expect("proof generation failed");
+        sample.lat,
+        sample.lon,
+        sample.timestamp,
+        sample.randomness,
+        sample.bounds,
+        &keys,
+    )
+    .expect("proof generation failed");
 
     assert!(groth16_verify(&bundle).expect("verification error"));
 
@@ -196,6 +215,7 @@ fn generate_groth16_location_region(out_dir: &PathBuf) {
         "public_inputs": {
             "region_hash": hex::encode(inputs.region_hash),
             "location_commitment": hex::encode(inputs.location_commitment),
+            "timestamp": inputs.timestamp,
         },
         "proof_bytes": hex::encode(&bundle.proof),
         "verifying_key_bytes": hex::encode(&bundle.verifying_key),
@@ -209,8 +229,8 @@ fn generate_groth16_location_region(out_dir: &PathBuf) {
 fn generate_bulletproofs_amount(out_dir: &PathBuf) {
     println!("Generating KAT vector for BulletproofsAmountRange...");
 
-    let bundle = bulletproofs_prove_amount_range(55, 10, 100, [7u8; 32])
-        .expect("proof generation failed");
+    let bundle =
+        bulletproofs_prove_amount_range(55, 10, 100, [7u8; 32]).expect("proof generation failed");
 
     let kat = serde_json::json!({
         "version": "1.0.0",
@@ -224,15 +244,18 @@ fn generate_bulletproofs_amount(out_dir: &PathBuf) {
     });
 
     write_kat(out_dir, "bulletproofs-amount-range.kat.json", &kat);
-    println!("  Proof sizes: low={} bytes, high={} bytes", bundle.proof_low.len(), bundle.proof_high.len());
+    println!(
+        "  Proof sizes: low={} bytes, high={} bytes",
+        bundle.proof_low.len(),
+        bundle.proof_high.len()
+    );
 }
 
 fn generate_bulletproofs_commodity(out_dir: &PathBuf) {
     println!("Generating KAT vector for BulletproofsCommodityRange...");
 
-    let bundle = bulletproofs_prove_commodity_range(
-        55, 10, 100, [1u8; 32], [2u8; 32], [7u8; 32],
-    ).expect("proof generation failed");
+    let bundle = bulletproofs_prove_commodity_range(55, 10, 100, [1u8; 32], [2u8; 32], [7u8; 32])
+        .expect("proof generation failed");
 
     let kat = serde_json::json!({
         "version": "1.0.0",
@@ -257,13 +280,16 @@ fn generate_bulletproofs_commodity(out_dir: &PathBuf) {
     });
 
     write_kat(out_dir, "bulletproofs-commodity-range.kat.json", &kat);
-    println!("  Proof sizes: low={} bytes, high={} bytes", bundle.proof_low.len(), bundle.proof_high.len());
+    println!(
+        "  Proof sizes: low={} bytes, high={} bytes",
+        bundle.proof_low.len(),
+        bundle.proof_high.len()
+    );
 }
 
 fn write_kat(out_dir: &PathBuf, filename: &str, kat: &serde_json::Value) {
     let out_path = out_dir.join(filename);
-    std::fs::write(&out_path, serde_json::to_string_pretty(kat).unwrap())
-        .expect("write KAT file");
+    std::fs::write(&out_path, serde_json::to_string_pretty(kat).unwrap()).expect("write KAT file");
     println!("KAT vector written to: {}", out_path.display());
 }
 

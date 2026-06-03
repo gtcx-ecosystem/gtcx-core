@@ -1,18 +1,19 @@
 ---
-title: "Trust Portal Hosting Runbook"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'Trust Portal Hosting Runbook'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "operations"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'operations']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'Trust Portal Hosting'
 status: 'current'
 date: '2026-05-22'
@@ -21,6 +22,7 @@ role: 'frontier-infra-engineer'
 tier: 'standard'
 tags: ['operations', 'trust-portal', 'gitbook', 'hosting']
 review_cycle: 'on-change'
+
 ---
 
 # Trust Portal Hosting Runbook

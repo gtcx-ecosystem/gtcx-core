@@ -1,5 +1,6 @@
 import {
   GetSecretValueCommand,
+  ListSecretsCommand,
   PutSecretValueCommand,
   SecretsManagerClient,
 } from '@aws-sdk/client-secrets-manager';
@@ -90,4 +91,80 @@ export async function syncApiKeyToIntelligenceBundle(params: {
   );
 
   return { secretName, bundle };
+}
+
+/**
+ * Rebuild the intelligence auth-keys bundle by scanning all EAP client secrets
+ * in AWS Secrets Manager. Useful for disaster recovery or initial population.
+ */
+export async function rebuildIntelligenceBundleFromEapSecrets(params: {
+  environment: EapEnvironment;
+  region?: string;
+  bundleSecretName?: string;
+  eapSecretPrefix?: string;
+}): Promise<{
+  secretName: string;
+  bundle: AuthKeysBundle;
+  keysFound: number;
+  keysSkipped: number;
+}> {
+  const region = params.region ?? process.env['AWS_REGION'] ?? 'us-east-1';
+  const client = new SecretsManagerClient({ region });
+  const bundleSecretName =
+    params.bundleSecretName ?? `gtcx/intelligence/${params.environment}/auth-keys`;
+  const eapPrefix = params.eapSecretPrefix ?? `gtcx/eap/${params.environment}/clients/`;
+
+  // Scan Secrets Manager for all EAP client secrets.
+  const secretList: string[] = [];
+  let nextToken: string | undefined;
+  do {
+    const listResult = await client.send(
+      new ListSecretsCommand({
+        Filters: [{ Key: 'name', Values: [eapPrefix] }],
+        NextToken: nextToken,
+        MaxResults: 100,
+      })
+    );
+    for (const secret of listResult.SecretList ?? []) {
+      if (secret.Name) {
+        secretList.push(secret.Name);
+      }
+    }
+    nextToken = listResult.NextToken;
+  } while (nextToken);
+
+  // Build bundle from all discovered secrets.
+  let bundle: AuthKeysBundle = { AUTH_API_KEYS: '', AUTH_KEY_ROLES: '' };
+  let keysFound = 0;
+  let keysSkipped = 0;
+
+  for (const secretName of secretList) {
+    try {
+      const value = await client.send(new GetSecretValueCommand({ SecretId: secretName }));
+      if (!value.SecretString) {
+        keysSkipped++;
+        continue;
+      }
+      const parsed = JSON.parse(value.SecretString) as { api_key?: string };
+      const apiKey = parsed.api_key;
+      if (!apiKey || typeof apiKey !== 'string') {
+        keysSkipped++;
+        continue;
+      }
+      bundle = mergeApiKeyIntoBundle(bundle, apiKey);
+      keysFound++;
+    } catch {
+      keysSkipped++;
+    }
+  }
+
+  // Write rebuilt bundle.
+  await client.send(
+    new PutSecretValueCommand({
+      SecretId: bundleSecretName,
+      SecretString: JSON.stringify(bundle),
+    })
+  );
+
+  return { secretName: bundleSecretName, bundle, keysFound, keysSkipped };
 }

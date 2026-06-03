@@ -132,8 +132,8 @@ pub fn groth16_prove_commodity_origin(
     proving_key_hex: String,
     verifying_key_hex: String,
 ) -> napi::Result<JsGroth16ProofBundle> {
-    use gtcx_zkp::AssetOwnershipMerkleConfig;
     use ark_crypto_primitives::merkle_tree::Path;
+    use gtcx_zkp::AssetOwnershipMerkleConfig;
 
     if bounds.len() != 4 {
         return Err(napi::Error::from_reason(
@@ -158,7 +158,12 @@ pub fn groth16_prove_commodity_origin(
         verifying_key: vk_bytes.clone(),
     };
 
-    let bounds_arr = [bounds[0] as u64, bounds[1] as u64, bounds[2] as u64, bounds[3] as u64];
+    let bounds_arr = [
+        bounds[0] as u64,
+        bounds[1] as u64,
+        bounds[2] as u64,
+        bounds[3] as u64,
+    ];
 
     let (bundle, _inputs) = gtcx_zkp::groth16_prove_commodity_origin(
         commodity_type as u64,

@@ -9,6 +9,7 @@ export type { EapAdminServerOptions } from './server.js';
 export {
   mergeApiKeyIntoBundle,
   parseAuthKeysBundle,
+  rebuildIntelligenceBundleFromEapSecrets,
   syncApiKeyToIntelligenceBundle,
 } from './sync-intelligence.js';
 export type { AuthKeysBundle } from './sync-intelligence.js';

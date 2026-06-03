@@ -35,7 +35,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "clean": "rm -rf dist",
-    "eap:admin": "node --import tsx src/cli-admin.ts"
+    "eap:admin": "node --import tsx src/cli-admin.ts",
+    "eap:sync-bundle": "node --import tsx src/cli-sync-bundle.ts"
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.750.0"

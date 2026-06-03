@@ -11,6 +11,7 @@ packages:
   - 'packages/identity'
   - 'packages/verification'
   - 'packages/workproof'
+  - 'packages/zkp-kat-vectors'
 
   # AI integration
   - 'packages/ai'

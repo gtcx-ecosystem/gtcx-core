@@ -1,18 +1,19 @@
 ---
-title: "rustls-webpki Vulnerability Mitigation"
-status: "current"
-date: "2026-05-27"
-owner: "gtcx-core"
-role: "protocol-architect"
-agent_id: "agent://gtcx-core/2026-05-27/session-backfill"
+title: 'rustls-webpki Vulnerability Mitigation'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
 trust_score: 60
-autonomy_level: "permissioned"
-tier: "standard"
-tags: ["documentation", "security"]
-review_cycle: "on-change"
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'security']
+review_cycle: 'on-change'
 ---
 
 ---
+
 title: 'rustls-webpki Vulnerability Mitigation'
 status: 'current'
 date: '2026-05-19'
@@ -22,11 +23,13 @@ tier: 'critical'
 tags: ['security', 'rust', 'vulnerability', 'mitigation', 'rustsec']
 review_cycle: 'on-change'
 advisory_ids:
-  - 'RUSTSEC-2026-0098'
-  - 'RUSTSEC-2026-0099'
-  - 'RUSTSEC-2026-0104'
-affected_crate: 'rustls-webpki'
-affected_version: '0.101.7'
+
+- 'RUSTSEC-2026-0098'
+- 'RUSTSEC-2026-0099'
+- 'RUSTSEC-2026-0104'
+  affected_crate: 'rustls-webpki'
+  affected_version: '0.101.7'
+
 ---
 
 # rustls-webpki Vulnerability Mitigation

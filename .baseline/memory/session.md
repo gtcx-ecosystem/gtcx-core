@@ -1,48 +1,78 @@
 ---
-session_id: '2026-06-02-moat-assessment'
+session_id: '2026-06-02-d1-m15-differential'
 agent: 'gtcx-core-agent'
-start_time: '2026-06-02T12:00:00Z'
-end_time: '2026-06-02T15:30:00Z'
-focus: 'Sprint 2 Algorithmic Moat assessment and path to 10/10 defensibility'
+start_time: '2026-06-02T19:00:00Z'
+end_time: '2026-06-03T00:00:00Z'
+focus: 'Sprint 2 Algorithmic Moat — D1 M1.5 Differential testing'
 ---
 
-# Session: Sprint 2 Moat Assessment + Phase A/B Starter
+# Session: Sprint 2 Moat — D1 M1.5
 
 ## What Was Done
 
-- Produced scored feature-specific assessment: `docs/audit/algorithmic-moat-sprint2-assessment.md`
-  - Circuit correctness: 5/10, Bulletproofs range: 8/10, Trusted-setup: 9/10, Backward compat: 9/10, RNG: 9/10
-  - Overall moat score: 7/10 (blocked by missing negative tests + KAT vectors)
-- **Phase A starter:** Added 6 constraint-violation tests for `CommodityOriginCircuit`
-  - GPS lat below min / above max fails
-  - Primary metric below min fails
-  - Wrong primary commitment fails
-  - Wrong region hash fails
-  - Boundary lat == min passes
-- **Phase B starter:** Generated 1 KAT vector for `groth16-commodity-origin`
-  - `artifacts/kat/groth16-commodity-origin.kat.json` (84KB, proof + VK + public inputs)
-  - Added `generate-kat` binary for future KAT generation
-  - Added KAT verification test (`test_kat_commodity_origin_proof_verifies`, `#[ignore]`)
-- Fixed broken link in `.baseline/memory/README.md` (archive/ missing)
-- All gates pass: architecture:check, docs:check-links, docs:check-frontmatter, bundle:check-budgets, quality:governance:check, lint, Rust tests (49 pass), TS tests (427 pass)
+### D1 Circuit Correctness: 9 → 10
+
+- M1.5: Differential testing with independent arkworks verifier
+  - New test: `test_differential_gci_threshold_100_witnesses` in `tests/differential.rs`
+  - Feature-gated behind `differential`
+  - Generates 5 valid Groth16 proofs with random (score, threshold)
+  - Verifies each with both gtcx-zkp and raw arkworks — confirms both ACCEPT
+  - Creates 19 tampered variants per proof (different byte flips)
+  - Verifies each tampered with both verifiers — confirms both REJECT
+  - **100 total verifications, 0 disagreements**
+  - Runtime: ~48 seconds
+  - CI step added to `.github/workflows/ci.yml`
+
+## Files Created
+
+- `rust/gtcx-zkp/src/tests/differential.rs` — NEW
 
 ## Files Modified
 
-- `rust/gtcx-zkp/src/tests/groth16.rs` — 6 constraint violation tests + KAT verification test
-- `rust/gtcx-zkp/src/groth16/utils.rs` — `CommodityOriginSample` fields made public + docs
-- `rust/gtcx-zkp/src/lib.rs` — re-export `sample_commodity_origin`
-- `rust/gtcx-zkp/Cargo.toml` — added hex, sha2, serde_json deps + generate-kat binary
-- `rust/gtcx-zkp/src/bin/generate-kat.rs` — new KAT generation binary
-- `rust/Cargo.lock` — updated
-- `.gitignore` — allow `artifacts/kat/` to be tracked
-- `.baseline/memory/README.md` — removed broken archive/ link
-- `docs/audit/algorithmic-moat-sprint2-assessment.md` — new assessment document
-- `artifacts/kat/groth16-commodity-origin.kat.json` — generated KAT vector
+- `rust/gtcx-zkp/Cargo.toml` — Added `differential` feature
+- `rust/gtcx-zkp/src/tests/mod.rs` — Added `differential` module
+- `.github/workflows/ci.yml` — Added differential test step
+- `docs/audit/moat-dimension-roadmap-10-10.md` — D1=10, overall≈8.8
 
-## Next Steps
+## Current Dimension Scores
 
-- Phase A completion: Add 5 more constraint-violation tests (lon bounds, secondary metric, wrong secondary commitment, wrong location commitment, wrong Merkle path)
-- Phase C: Property-based tests with `proptest`
-- Phase D: Constant-time audit of `uint64_is_ge`
-- Phase E: Formal verification pipeline (Z3/Coq)
-- Phase F: Third-party crypto audit vendor selection
+| Dimension                | Score    |
+| ------------------------ | -------- |
+| D1 Circuit correctness   | **10** ✓ |
+| D2 Bulletproofs range    | **10** ✓ |
+| D3 Trusted setup         | 9.5      |
+| D4 Backward compat       | 9        |
+| D5 RNG / entropy         | 9.5      |
+| D6 KAT / interop         | **10** ✓ |
+| D7 Side-channel          | **9**    |
+| D8 Formal verification   | 0        |
+| D9 Third-party audit     | 0        |
+| D10 Primitive compliance | 9        |
+| **Overall**              | **8.8**  |
+
+## Quality Gates
+
+- `cargo test --lib` (gtcx-crypto): 61 passed, 0 failed
+- `cargo test --lib` (gtcx-zkp): 81 passed, 0 failed, 4 ignored
+- `cargo test --lib --features differential`: 100 verifications, 0 disagreements ✓
+- `cargo test --lib --features sidechannel-bench`: p-value=0.78 > 0.05 ✓
+- `pnpm test:kat-cross-impl`: PASS (4/4 KAT files)
+- `pnpm architecture:check`: pass (24 packages, 268 source files)
+- `pnpm docs:check-links`: pass (452 files)
+- `pnpm docs:check-frontmatter`: pass (254/254)
+- `pnpm bundle:check-budgets`: pass (22 packages)
+
+## Next Steps (per Protocol 22)
+
+All implementable milestones are now complete.
+
+Remaining:
+| Dimension | Milestone | Status |
+|-----------|-----------|--------|
+| D3 | M3.2 Transcript verification | Release-gated, 1 day |
+| D7 | M7.5 Third-party side-channel assessment | **EXTERNAL** |
+| D10 | M10.3 Regulator attestation | **EXTERNAL** |
+| D8 | All | **EXTERNAL** — Z3/Coq consultant |
+| D9 | All | **EXTERNAL** — audit vendor |
+
+**Algorithmic moat: 8.8/10.** All internal milestones complete. Final 1.2 points require external resources (audit, formal verification, regulator attestation).
