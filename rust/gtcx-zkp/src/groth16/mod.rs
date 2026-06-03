@@ -548,6 +548,7 @@ mod utils;
 #[cfg(test)]
 pub use utils::sample_diamond_origin;
 use utils::*;
+pub(crate) use utils::serialize;
 pub use utils::{sample_asset_ownership, sample_commodity_origin, sample_location_region};
 
 mod ops;

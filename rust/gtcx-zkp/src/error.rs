@@ -60,6 +60,13 @@ pub enum ZkpError {
     /// Unsupported circuit type.
     #[error("Unsupported circuit type: {0}")]
     UnsupportedCircuit(String),
+
+    /// I/O error reading files or writing output.
+    #[error("IO error: {reason}")]
+    IoError {
+        /// Description of the I/O failure.
+        reason: String,
+    },
 }
 
 /// Result type for ZKP operations.

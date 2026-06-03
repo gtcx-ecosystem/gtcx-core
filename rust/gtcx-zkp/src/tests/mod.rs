@@ -9,6 +9,8 @@ mod serialization;
 mod differential;
 #[cfg(feature = "sidechannel-bench")]
 mod sidechannel;
+#[cfg(feature = "trusted-setup-verify")]
+mod trusted_setup;
 mod types;
 
 pub(crate) fn test_salt() -> [u8; 32] {

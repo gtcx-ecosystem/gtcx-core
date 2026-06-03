@@ -27,6 +27,8 @@ mod commitment;
 mod error;
 mod groth16;
 mod schnorr;
+#[cfg(feature = "trusted-setup-verify")]
+mod trusted_setup;
 mod types;
 
 #[cfg(test)]

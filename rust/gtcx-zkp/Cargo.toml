@@ -41,11 +41,13 @@ dudect-bencher = { version = "0.7", optional = true }
 [features]
 differential = []
 sidechannel-bench = ["dep:dudect-bencher"]
+trusted-setup-verify = []
 
 [dev-dependencies]
 criterion = { workspace = true }
 proptest = "1.4"
 rand = "0.8"
+tempfile = "3.10"
 
 [[bin]]
 name = "generate-kat"
