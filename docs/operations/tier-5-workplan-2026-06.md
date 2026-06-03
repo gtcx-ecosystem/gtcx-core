@@ -187,4 +187,4 @@ Reconciles [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) with DT
 
 ---
 
-_Last updated: 2026-06-05 — OPS-T5-001 (DTF-5.4.4 protocols handoff ack `73eaff2b`)_
+_Last updated: 2026-06-05 — OPS-T5-001 (DTF-5.5.1 strict engagement jurisdiction packs)_

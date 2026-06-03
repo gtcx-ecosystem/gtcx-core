@@ -2,7 +2,7 @@
 last_reconciled: 2026-06-05
 reconciliation_note: >-
   Reconciled with full-audit-2026-06-04.md (6-phase + 6 sprint plan).
-  FA-S1 P0 done; S-T5-1/2/3/4 complete; DTF-5.4.4 protocols handoff ack 73eaff2b; Tier 5 technical ~85%; DTF-5.5.x commercial next.
+  FA-S1 P0 done; S-T5-1/2/3/4 complete; DTF-5.4.4 ack 73eaff2b; DTF-5.5.1 strict packs; Tier 5 technical ~88%; 5.5.2+ commercial external.
   Ecosystem open items linked; library maturity ≠ sovereign pilot readiness.
 sources:
   - docs/audit/full-audit-2026-06-04.md
@@ -88,6 +88,7 @@ sources:
 | DTF-5.4.2       | Load test 1603 verify/min (12 workers)       | `docs/audit/evidence/zkp-profile-load-2026-06-03.json`                         |
 | DTF-5.4.3       | Trust portal circuit ID + off-circuit policy | `docs/governance/trust-portal.md` § ZKP circuit registry                       |
 | DTF-5.4.4       | Protocols E2E per circuit profile ID         | gtcx-protocols `73eaff2b` · core `fc041a6` (`verifyGroth16CommodityOriginKat`) |
+| DTF-5.5.1       | Jurisdiction pack Zod strict CI              | `pnpm jurisdiction:validate-packs` · `EngagementJurisdictionPackSchema`        |
 
 ### Next code (after FA-P0-1)
 
