@@ -68,16 +68,16 @@ Apply tiers in order:
 
 **Status:** Tiers 1–4 achieved; **Tier 5 ~45%** (S-T5-1 done; S-T5-2 partial).
 
-| Milestone                                 | Sprint | Status      |
-| ----------------------------------------- | ------ | ----------- |
-| DTF-5.1.1–5.1.4                           | S-T5-1 | **done**    |
-| DTF-5.2.1–5.2.2                           | S-T5-2 | **done**    |
-| DTF-5.2.3 diamond + range KATs            | S-T5-2 | **done**    |
-| **DTF-5.3.1** gh-cocoa-origin profile     | S-T5-3 | **done**    |
-| **DTF-5.3.2** Five-jurisdiction fixtures  | S-T5-3 | **done**    |
-| **DTF-5.3.3** Minerals board UAT template | S-T5-3 | **done**    |
-| **DTF-5.4.1** CircuitRegistry semver      | S-T5-4 | **done**    |
-| **DTF-5.4.2** Load test 1000 proofs/min   | S-T5-4 | **pending** |
+| Milestone                                 | Sprint | Status   |
+| ----------------------------------------- | ------ | -------- |
+| DTF-5.1.1–5.1.4                           | S-T5-1 | **done** |
+| DTF-5.2.1–5.2.2                           | S-T5-2 | **done** |
+| DTF-5.2.3 diamond + range KATs            | S-T5-2 | **done** |
+| **DTF-5.3.1** gh-cocoa-origin profile     | S-T5-3 | **done** |
+| **DTF-5.3.2** Five-jurisdiction fixtures  | S-T5-3 | **done** |
+| **DTF-5.3.3** Minerals board UAT template | S-T5-3 | **done** |
+| **DTF-5.4.1** CircuitRegistry semver      | S-T5-4 | **done** |
+| **DTF-5.4.2** Load test 1000 proofs/min   | S-T5-4 | **done** |
 
 Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [execution-roadmap.md](../audit/execution-roadmap.md).
 

@@ -1,26 +1,24 @@
 ---
-session_id: '2026-06-04-dtf-5-4-1-circuit-registry'
+session_id: '2026-06-03-dtf-5-4-2-load-test'
 agent: 'gtcx-core-agent'
-focus: 'DTF-5.4.1 CircuitRegistry semver + deprecation'
+focus: 'DTF-5.4.2 ZKP profile verify load test + evidence'
 ---
 
-# Session: DTF-5.4.1 complete
+# Session: DTF-5.4.2 complete
 
 ## Done
 
-| Milestone | Evidence                                                                                    |
-| --------- | ------------------------------------------------------------------------------------------- |
-| DTF-5.4.1 | `@gtcx/crypto` `circuit-registry.ts` + manifest; Rust `resolve_profile`; NAPI uses registry |
+| Milestone | Evidence                                                                                                                                                   |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DTF-5.4.2 | `zkp-profile-load-test` binary + `pnpm perf:zkp-profile-load`; evidence `docs/audit/evidence/zkp-profile-load-2026-06-03.json` — **1603 verify/min**, pass |
 
 ## Protocol 22
 
-`pnpm agent:next-work` → **DTF-5.4.2** (load test 1000 proofs/min + evidence JSON)
+`pnpm agent:next-work` → **DTF-5.4.3** (trust portal circuit ID column)
 
 ## Verification
 
-| Command                                               | Result                  |
-| ----------------------------------------------------- | ----------------------- |
-| `pnpm --filter @gtcx/crypto test -- circuit-registry` | 4 passed                |
-| `cargo test -p gtcx-zkp --lib lifecycle`              | 3 passed                |
-| `pnpm typecheck`                                      | exit 0                  |
-| `pnpm api:update-baseline`                            | crypto additive exports |
+| Command                                                         | Result            |
+| --------------------------------------------------------------- | ----------------- |
+| `cargo build --release -p gtcx-zkp --bin zkp-profile-load-test` | exit 0            |
+| `pnpm perf:zkp-profile-load` (60s, 12 workers, KAT warmup)      | exit 0, pass=true |
