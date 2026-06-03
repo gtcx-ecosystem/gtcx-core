@@ -143,7 +143,7 @@
         "nonce": "aabbccddeeff00112233445566778899",
         "audience": "https://api.gtcx.trade",
         "expectedCanonical": "POST\n/v1/lots\na=2&z=1\n7a38bf81f383f69433ad6e900d35b3e2385593f76a7b7ab5d4355b8ba41ee24b\n2026-05-08T12:00:00.000Z\naabbccddeeff00112233445566778899\ndid:gtcx:tp_8381e261f574193459e3db639d564565\n395ab1f99c0bf60c9e09ad01afe8e8d6\nhttps://api.gtcx.trade",
-        "expectedCanonicalHash": "2188416d88e5e5b59824ecfb8ca538367d105a088b6565b568b77bb38260bf95"
+        "expectedCanonicalHash": "ccfff55b209cfcc6c7d8a084a629db52124961a0a122ea5263f07c01d56332a0"
       },
       {
         "id": "canonical-minimal",
@@ -159,7 +159,7 @@
         "nonce": "aabbccddeeff00112233445566778899",
         "audience": "https://api.gtcx.trade",
         "expectedCanonical": "GET\n/health\n\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n2026-05-08T12:00:00.000Z\naabbccddeeff00112233445566778899\ndid:gtcx:tp_8381e261f574193459e3db639d564565\n395ab1f99c0bf60c9e09ad01afe8e8d6\nhttps://api.gtcx.trade",
-        "expectedCanonicalHash": "c27d054832155d45265fc885f99ca26419f85d1005b155793a0f0eb603c92f08"
+        "expectedCanonicalHash": "ea5a72d112b115b1e73de488038327433089a1b83eae467381e08faea66cda40"
       }
     ],
     "envelope": [
