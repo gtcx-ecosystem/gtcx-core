@@ -40,6 +40,7 @@ tags: ['coordination', 'bridge', 'agents', 'cross-repo']
 
 | When (UTC) | Agent / repo | Update                                                                                                                                                     |
 | ---------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-06-05 | gtcx-core    | **DTF-5.4.4 ack** — protocols S-T5-4 witness `73eaff2b` (circuit profile E2E); Tier-5 technical ~85% handoff complete; core `fc041a6`.                     |
 | 2026-06-03 | gtcx-core    | **D4 DONE** — Backward compat M4.1. Cross-API test: `proveDiamondOrigin()` → `verifyCommodityOrigin()` passes (mocked + native). D4 9→10.                  |
 | 2026-06-03 | gtcx-core    | **D5 DONE** — RNG entropy audit M5.1 + non-determinism M5.2. `RNG.md` documents hierarchy; 100 proofs all distinct in ~26s. D5 9→10.                       |
 | 2026-06-03 | gtcx-core    | **M10.2 DONE** — Runtime FIPS enforcement for BLAKE3. Centralized `src/fips.rs`, raw blake3 returns `Result`. 63 crypto tests pass. D10 9→9.5.             |
@@ -74,7 +75,7 @@ flowchart TB
 | **P1**   | EAP-SYNC      | gtcx-core           | **done** 2026-06-03 — bundle synced; infra ESO refresh acked; region mismatch fixed | — (XR-202/INT-S3-08 closed) |
 | **P1**   | PROVENANCE    | gtcx-infrastructure | Investigate OIDC token exchange for `--provenance` publish                          | Build L3 SLSA claim         |
 | **P1**   | VENDORS       | baseline-os         | Select pen-test vendor; source Z3/Coq consultant; source side-channel lab           | D8, D9, D7 M7.5 completion  |
-| **P2**   | KAT-CONSUME   | gtcx-protocols      | Add `@gtcx/zkp-kat-vectors` devDep + one integration test                           | M6.5 downstream validation  |
+| **P2**   | KAT-CONSUME   | gtcx-protocols      | **done** — DTF-5.4.4 E2E + KAT consumption (`73eaff2b`)                             | M6.5 downstream validation  |
 | **P2**   | D3-TRANSCRIPT | gtcx-core           | Implement `trusted-setup-verify` feature after ceremony                             | D3 9.5 → 10                 |
 
 Full backlog: [`cross-repo-sprint-workplan-2026-06.md`](cross-repo-sprint-workplan-2026-06.md)
@@ -108,11 +109,11 @@ Full backlog: [`cross-repo-sprint-workplan-2026-06.md`](cross-repo-sprint-workpl
 - Infra must investigate: `id-token: write`, OIDC exchange, `changeset publish --provenance`
 - **Impact:** Build L3 aspirational claim
 
-### KAT package consumption — **open, protocols-owned**
+### KAT package consumption — **done (DTF-5.4.4)**
 
-- `@gtcx/zkp-kat-vectors@1.0.0` published in workspace
-- Protocols adds devDep + one test that loads KAT and verifies proof
-- **Impact:** Validates M6.5 cross-implementation KAT artifacts
+- `@gtcx/zkp-kat-vectors` linked in gtcx-protocols; circuit profile E2E per trust-portal ID
+- Protocols witness: commit **`73eaff2b`** (hub log SoR: `gtcx-protocols/.../cross-repo-agent-log.md`)
+- **Impact:** M6.5 cross-implementation KAT path closed for S-T5-4
 
 ### External vendor gaps — **open, human-gated**
 
@@ -148,4 +149,4 @@ Full backlog: [`cross-repo-sprint-workplan-2026-06.md`](cross-repo-sprint-workpl
 
 ---
 
-_Last review: 2026-06-03. Maintainer: gtcx-core agents. Sync with protocols bridge on P0 changes._
+_Last review: 2026-06-05. Maintainer: gtcx-core agents. Sync with protocols bridge on P0 changes._

@@ -1,17 +1,18 @@
 ---
 session_id: '2026-06-03-dtf-5-4-4-protocols-e2e'
 agent: 'gtcx-core-agent'
-focus: 'DTF-5.4.4 gtcx-protocols circuit profile E2E (cross-repo)'
+focus: 'DTF-5.4.4 handoff ack — Tier 5 technical ~85%'
 ---
 
-# Session: DTF-5.4.4 complete
+# Session: DTF-5.4.4 handoff complete
 
 ## Done
 
-| Milestone   | Evidence                                                                                                                                                       |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DTF-5.4.4   | `gtcx-protocols/tests/cross-repo/zkp-circuit-profile-e2e.test.ts` — registry resolve + KAT verify per `gh-gold-origin`, `zw-diamond-origin`, `gh-cocoa-origin` |
-| Core helper | `@gtcx/crypto` `verifyGroth16CommodityOriginKat` — `packages/crypto/src/groth16-kat-verify.ts`                                                                 |
+| Milestone        | Evidence                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| DTF-5.4.4        | Protocols witness **`73eaff2b`**; hub ack `cross-repo-agent-bridge.md` (2026-06-05) |
+| Core helper      | `fc041a6` — `verifyGroth16CommodityOriginKat`                                       |
+| Tier-5 technical | **~85%** — S-T5-4 handoff complete                                                  |
 
 ## Protocol 22
 

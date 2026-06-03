@@ -20,11 +20,11 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 ## Status today
 
-| Defensibility tier | State                                                                   |
-| -----------------: | ----------------------------------------------------------------------- |
-|                1–4 | **Achieved** (2026-06-03 live audit)                                    |
-|    **5 technical** | **~78%** — DTF-5.4.4 protocols E2E **done**; Tier 5 technical candidate |
-|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                                     |
+| Defensibility tier | State                                                                                         |
+| -----------------: | --------------------------------------------------------------------------------------------- |
+|                1–4 | **Achieved** (2026-06-03 live audit)                                                          |
+|    **5 technical** | **~85%** — S-T5-4 **handoff complete** (DTF-5.4.4 ack `73eaff2b`); remainder 5.5.x commercial |
+|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                                                           |
 
 **10/10 note:** Algorithmic dimension scores (~8.95 weighted) measure **Tier 2** test depth. **Tier 5** requires named jurisdiction circuits + registry + commercial gate — not the same bar.
 
@@ -34,11 +34,11 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 ## Exit criteria
 
-| Bar                     | Gate                                                                                                                           | Evidence                                          |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
-| **Tier 5 — technical**  | DTF-5.4.\* + [5-T1–5-T5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/tiers.md) | CI green; trust portal circuit IDs; protocols E2E |
-| **Tier 5 — commercial** | DTF-5.5.4 or regulator letter (5-C2)                                                                                           | Redacted LOI/letter in `docs/audit/evidence/`     |
-| **Sovereign deploy**    | XR-402 ceremony + CORE-004                                                                                                     | Parallel; not required for lab P1–P4              |
+| Bar                     | Gate                                                                                                                           | Evidence                                                                        |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| **Tier 5 — technical**  | DTF-5.4.\* + [5-T1–5-T5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/tiers.md) | **S-T5-4 done** — trust portal IDs, load evidence, protocols E2E ack `73eaff2b` |
+| **Tier 5 — commercial** | DTF-5.5.4 or regulator letter (5-C2)                                                                                           | Redacted LOI/letter in `docs/audit/evidence/`                                   |
+| **Sovereign deploy**    | XR-402 ceremony + CORE-004                                                                                                     | Parallel; not required for lab P1–P4                                            |
 
 ---
 
@@ -64,7 +64,7 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 | **S-T5-1** | 2026-06-03 → 06-14 | P1    | Witness + commodity-origin **`gh-gold-origin` profile** + NAPI + KAT | **done** (DTF-5.1.4)            |
 | **S-T5-2** | 2026-06-11 → 06-21 | P2    | `zw-diamond-origin` + verification + diamond/range KAT               | **done** (DTF-5.2.3)            |
 | **S-T5-3** | 2026-06-29 → 07-12 | P3    | `gh-cocoa-origin` + jurisdiction fixtures                            | DTF-5.3.3 script                |
-| **S-T5-4** | 2026-07-13 → 07-26 | P4    | Circuit registry + performance                                       | **Tier 5 technical** candidate  |
+| **S-T5-4** | 2026-07-13 → 07-26 | P4    | Circuit registry + performance                                       | **done** — handoff `73eaff2b`   |
 | **S-T5-5** | 2026-07-27 → 09-30 | P5    | Certified packs + protocols + pilot                                  | **Tier 5 commercial** (GTM-led) |
 
 ---
@@ -96,7 +96,7 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 | DTF-5.5.4 | Design-partner LOI or regulator letter                                | S-T5-5 | GTM                        | pending  | evidence-capture | infra pilot | **T5 commercial** |
 | DTF-5.5.5 | Evidence index entry                                                  | S-T5-5 | quality-evidence-lead      | pending  | ops-docs         | 5.5.4       | —                 |
 
-**Cross-repo:** DTF-5.4.4 owner is `gtcx-protocols` — file inbound handoff when S-T5-4 starts.
+**Cross-repo:** DTF-5.4.4 **closed** — protocols witness `73eaff2b` (hub ack in [`cross-repo-agent-bridge.md`](./coordination/cross-repo-agent-bridge.md)); core helper `fc041a6`.
 
 **Ceremony:** XR-402 / CORE-004 runs parallel; production keys not required for S-T5-1 lab proofs.
 
@@ -187,4 +187,4 @@ Reconciles [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) with DT
 
 ---
 
-_Last updated: 2026-06-04 — OPS-T5-001 (full-audit reconciliation)_
+_Last updated: 2026-06-05 — OPS-T5-001 (DTF-5.4.4 protocols handoff ack `73eaff2b`)_
