@@ -6,6 +6,7 @@ owner: protocol-architect
 status: current
 scope: gtcx-core — algorithmic moat, internal 10/10, bank-grade, cross-repo
 sources:
+  - docs/audit/full-audit-2026-06-04.md
   - docs/audit/moat-dimension-roadmap-10-10.md
   - docs/audit/execution-roadmap.md
   - docs/audit/10-10-roadmap-2026-05-25.md
@@ -20,7 +21,7 @@ review_cycle: on-change
 
 **Purpose:** One sprint-based path to completion across three parallel tracks that were documented separately. Use this file as the **index**; do not treat `algorithmic-moat-sprint2-assessment.md` (2026-06-02 pre-hardening) as current scores.
 
-**Authoritative selection:** `pnpm agent:next-work` → **tier-5** / **DTF-5.1.1** (see [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)); moat dimensions D1–D6 in-repo complete.
+**Authoritative selection:** `pnpm agent:next-work` → **FA-P0-1** (full-audit P0; [execution-roadmap.md](./execution-roadmap.md)); then DTF-5.2.3+. Moat dimensions D1–D6 in-repo complete. **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md).
 
 ---
 
@@ -32,7 +33,7 @@ review_cycle: on-change
 | **B — Algorithmic / ZKP moat 10/10** | Circuit tests, KAT, RNG, side-channel docs, trusted setup | [moat-dimension-roadmap-10-10.md](./moat-dimension-roadmap-10-10.md)                                                             | **In-repo code ~complete** (D1–D6, D4–D5, D7 internal at 9); D3 M3.2 release-gated; D8–D9 external |
 | **C — Bank-grade honest 10/10**      | Pen-test, SOC 2, regulator evidence, 90-day P1-free       | [10-10-roadmap-2026-05-25.md](./10-10-roadmap-2026-05-25.md), [16-ecosystem-gtm-alignment](../gtm/16-ecosystem-gtm-alignment.md) | **M1 done (8.7)**; M2 in progress; M3–M4 external/time                                             |
 
-**Strategic moat (DTF-001 Defensibility Tiers 1–5)** — [canonical framework](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0). Higher tier = harder to replicate. **Tier 1 alone (~90d) is not the moat.** Today: **Tiers 1–4 achieved**; **Tier 5** in progress. Tracks map to tiers: A → Tier 4; B → Tier 2/5; C → sovereign deal evidence (infra).
+**Strategic moat (DTF-001 Defensibility Tiers 1–5)** — [canonical framework](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0). Higher tier = harder to replicate. **Tier 1 alone (~90d) is not the moat.** Today: **Tiers 1–4 achieved**; **Tier 5 ~45%** (gh-gold + zw-diamond profiles, verification bridge; KATs + registry pending). **P0:** workproof↔verification turbo cycle ([FA-P0-1](../operations/tier-5-workplan-2026-06.md)). Tracks map to tiers: A → Tier 4; B → Tier 2/5; C → sovereign deal evidence (infra).
 
 ---
 
@@ -99,7 +100,10 @@ Full detail: [remaining-cross-repo-work-2026-06-02.md](../operations/coordinatio
 | ------------ | ------------------------------------------------------- | ------------------- | ------------------- | ------------------------ |
 | CORE-001     | EAP auth-keys sync                                      | gtcx-core → infra   | **Done** 2026-06-03 | INT staging smoke        |
 | CORE-002     | SLSA provenance in infra replay                         | gtcx-infrastructure | P1 open             | Infra supply-chain story |
-| CORE-003     | `@gtcx/zkp-kat-vectors` consumption                     | gtcx-protocols      | P2 open             | M6.5 downstream proof    |
+| CORE-003     | `@gtcx/zkp-kat-vectors` consumption                     | gtcx-protocols      | **Done** 2026-06-03 | AM-2 complete            |
+| OI-X01       | ER-1-08 hub ack                                         | gtcx-core           | **Done** 2026-06-04 | Protocols log on record  |
+| OI-X02       | ER-1-08 hub ack                                         | gtcx-infrastructure | **Pending**         | Outbound ticket only     |
+| OI-X06       | INT-S8-04 cost-router v1.1                              | baseline-os         | **External**        | No core implementation   |
 | CORE-004     | D3 transcript verify                                    | gtcx-core           | Release-gated       | D3 → 10                  |
 | CORE-005–009 | Pen-test, formal, side-channel lab, regulator, ZW email | baseline-os / GTM   | External            | D7–D10, M2–M3 bank-grade |
 
@@ -134,12 +138,12 @@ TIME
 
 ## 6. What “10/10” means per audience
 
-| Audience                                  | Score today                        | What completes it                                                                                                                                                                                            |
-| ----------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Agent / internal engineering**          | ~9.5/10 internal; Sprint 5 done    | External handoffs only (CORE-004–009)                                                                                                                                                                        |
-| **Cryptographic defensibility (in-repo)** | **~8.95/10** weighted dimensions   | AM-2–AM-4 + ceremony                                                                                                                                                                                         |
-| **Bank-grade procurement**                | **8.7/10** honest                  | M2–M4 + infra GTM                                                                                                                                                                                            |
-| **Defensibility Tier 5**                  | Tiers 1–4 done; Tier 5 not started | [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md) · [DTF path-to-tier-5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/path-to-tier-5.md) |
+| Audience                                  | Score today                                                  | What completes it                                                                                                                                                                |
+| ----------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Agent / internal engineering**          | ~9.5/10 internal; Sprint 5 done                              | External handoffs only (CORE-004–009)                                                                                                                                            |
+| **Cryptographic defensibility (in-repo)** | **~8.95/10** weighted dimensions                             | AM-2–AM-4 + ceremony                                                                                                                                                             |
+| **Bank-grade procurement**                | **8.7/10** honest                                            | M2–M4 + infra GTM                                                                                                                                                                |
+| **Defensibility Tier 5**                  | Tiers 1–4 done; **Tier 5 ~45%** (S-T5-1 done; FA-S1 P0 open) | [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md) · [execution-roadmap.md](./execution-roadmap.md) · [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) |
 
 ---
 

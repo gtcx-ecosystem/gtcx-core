@@ -1,7 +1,7 @@
 ---
 title: 'Remaining cross-repo work — gtcx-core tracker'
 status: current
-date: 2026-06-03
+date: 2026-06-04
 owner: gtcx-core
 role: protocol-architect
 document_id: COORD-REMAINING-CORE-001
@@ -19,6 +19,19 @@ related:
 Living register of **open** cross-repo items originating from or affecting `gtcx-core`. Closed 10/10 milestones are omitted — see `docs/audit/execution-roadmap.md` and `docs/agents/sessions/2026-06-02-remaining-cross-repo-work.md`.
 
 **Hub index:** `baseline-os/workstream/index/blockers.md` · inbound tickets under `baseline-os/workstream/coordination/inbound/`
+
+**Reconciled:** [full-audit-2026-06-04.md](../../audit/full-audit-2026-06-04.md) · [tier-5-workplan-2026-06.md](../tier-5-workplan-2026-06.md)
+
+---
+
+## 0. Ecosystem coordination (2026-06-04)
+
+| ID                 | Item                                          | Owner               | Status              | gtcx-core action                                                    |
+| ------------------ | --------------------------------------------- | ------------------- | ------------------- | ------------------------------------------------------------------- |
+| OI-X01 / ER-1-08   | Hub ack — trusted-setup / ER-1 evidence chain | gtcx-core           | **done** 2026-06-04 | Protocols hub log row; no further core code                         |
+| OI-X02 / ER-1-08   | Hub ack — same initiative                     | gtcx-infrastructure | **pending**         | File outbound ticket only; do not duplicate evidence in core        |
+| OI-X06 / INT-S8-04 | cost-router v1.1                              | baseline-os         | **external**        | Track only; optional for intel env-fallback                         |
+| EXT-INF-002        | Live-stack pen-test                           | gtcx-infrastructure | **open**            | Supply KAT/fuzz/threat-matrix pack when FA-S6 (vendor not selected) |
 
 ---
 

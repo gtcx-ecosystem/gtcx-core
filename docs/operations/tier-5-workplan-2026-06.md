@@ -16,17 +16,19 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 **Horizon:** 2026-06-03 → 2026-09-30 (technical exit target: 8 weeks; commercial: Q4 2026)  
 **Canonical framework:** [DTF-001 path-to-tier-5](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/frameworks/defensibility-tiers/v1.0.0/path-to-tier-5.md)  
-**Related:** [algorithmic moat program](../agile/roadmap/algorithmic-moat-program-2026-06-02.md) · [moat reconciliation](../audit/moat-completion-reconciliation-2026-06-03.md) · [cross-repo sprint workplan](./coordination/cross-repo-sprint-workplan-2026-06.md)
+**Related:** [algorithmic moat program](../agile/roadmap/algorithmic-moat-program-2026-06-02.md) · [moat reconciliation](../audit/moat-completion-reconciliation-2026-06-03.md) · [full-audit 2026-06-04](../audit/full-audit-2026-06-04.md) · [execution roadmap](../audit/execution-roadmap.md) · [cross-repo sprint workplan](./coordination/cross-repo-sprint-workplan-2026-06.md)
 
 ## Status today
 
-| Defensibility tier | State                                                 |
-| -----------------: | ----------------------------------------------------- |
-|                1–4 | **Achieved** (2026-06-03 live audit)                  |
-|    **5 technical** | **In progress** — next automatable work **DTF-5.2.3** |
-|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                   |
+| Defensibility tier | State                                                                   |
+| -----------------: | ----------------------------------------------------------------------- |
+|                1–4 | **Achieved** (2026-06-03 live audit)                                    |
+|    **5 technical** | **~45%** — S-T5-1 **done**; S-T5-2 partial; **P0:** turbo cycle (FA-S1) |
+|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                                     |
 
 **10/10 note:** Algorithmic dimension scores (~8.95 weighted) measure **Tier 2** test depth. **Tier 5** requires named jurisdiction circuits + registry + commercial gate — not the same bar.
+
+**Pilot readiness (audit 2026-06-04):** Library maturity **≠** sovereign pilot readiness — pen-test, testnet, hub acks are ecosystem gates ([full-audit executive summary](../audit/full-audit-2026-06-04.md#output-summary--executive-summary)).
 
 ---
 
@@ -40,12 +42,27 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 ---
 
+## Ecosystem open items (not gtcx-core code — track only)
+
+| ID          | Item                       | Owner               | gtcx-core action                                 | Status             |
+| ----------- | -------------------------- | ------------------- | ------------------------------------------------ | ------------------ |
+| OI-X01      | ER-1-08 hub ack            | gtcx-core           | Protocols log row pushed (`518f2a2` audit chain) | **done** on remote |
+| OI-X02      | ER-1-08 hub ack            | gtcx-infrastructure | Outbound ticket; no duplicate evidence in core   | **pending**        |
+| OI-X06      | INT-S8-04 cost-router v1.1 | baseline-os         | Optional for intel env-fallback; link only       | **external**       |
+| EXT-INF-002 | Live-stack pen-test        | gtcx-infrastructure | Supply KAT/fuzz/threat-matrix pack (FA-S6)       | **external**       |
+| CORE-004    | Trusted-setup ceremony     | gtcx-core + human   | D3 M3.2 release-gated after XR-402               | **blocked**        |
+
+Source: intelligence open-items register · [remaining-cross-repo-work](./coordination/remaining-cross-repo-work-2026-06-02.md)
+
+---
+
 ## Sprint map (gtcx-core engineering)
 
 | Sprint     | Dates (target)     | Phase | Theme                                                                | Exit                            |
 | ---------- | ------------------ | ----- | -------------------------------------------------------------------- | ------------------------------- |
-| **S-T5-1** | 2026-06-03 → 06-14 | P1    | Witness + commodity-origin **`gh-gold-origin` profile** + NAPI + KAT | DTF-5.1.4 CI pass               |
-| **S-T5-2** | 2026-06-15 → 06-28 | P2    | `zw-diamond-origin` + verification integration                       | DTF-5.2.3                       |
+| **FA-S1**  | 2026-06-04 → 06-10 | P0    | **Build graph + doc truth** (full-audit)                             | Root `typecheck`/`build` green  |
+| **S-T5-1** | 2026-06-03 → 06-14 | P1    | Witness + commodity-origin **`gh-gold-origin` profile** + NAPI + KAT | **done** (DTF-5.1.4)            |
+| **S-T5-2** | 2026-06-11 → 06-21 | P2    | `zw-diamond-origin` + verification + diamond/range KAT               | DTF-5.2.3                       |
 | **S-T5-3** | 2026-06-29 → 07-12 | P3    | `gh-cocoa-origin` + jurisdiction fixtures                            | DTF-5.3.3 script                |
 | **S-T5-4** | 2026-07-13 → 07-26 | P4    | Circuit registry + performance                                       | **Tier 5 technical** candidate  |
 | **S-T5-5** | 2026-07-27 → 09-30 | P5    | Certified packs + protocols + pilot                                  | **Tier 5 commercial** (GTM-led) |
@@ -56,6 +73,8 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 | ID        | Title                                                                 | Sprint | Owner                      | Status   | Class            | Depends     | Blocks            |
 | --------- | --------------------------------------------------------------------- | ------ | -------------------------- | -------- | ---------------- | ----------- | ----------------- |
+| FA-P0-1   | Break workproof ↔ verification turbo cycle (root `typecheck`)         | FA-S1  | frontier-infra-engineer    | pending  | code             | —           | all DTF-5.2.3+    |
+| FA-P0-2   | README: library readiness vs DTF Tier 5 split                         | FA-S1  | protocol-architect         | pending  | ops-docs         | —           | —                 |
 | DTF-5.1.1 | Witness builder: WorkProof → typed witness                            | S-T5-1 | protocol-engineer          | **done** | code             | —           | 5.1.2–5.1.4       |
 | DTF-5.1.2 | Commodity-origin R1CS + **`gh-gold-origin` profile** + negative tests | S-T5-1 | crypto-security-engineer   | **done** | code             | 5.1.1       | 5.1.3             |
 | DTF-5.1.3 | NAPI prove/verify (profile-aware, same R1CS)                          | S-T5-1 | frontier-infra-engineer    | **done** | code             | 5.1.2       | 5.1.4             |
@@ -150,4 +169,21 @@ pnpm test:kat-cross-impl   # when KAT touched
 
 ---
 
-_Last updated: 2026-06-03 — OPS-T5-001_
+---
+
+## Full-audit sprint overlay (2026-06-04)
+
+Reconciles [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) with DTF register. **FA-S1 blocks Protocol 22** until `FA-P0-1` is **done**.
+
+| FA sprint | Maps to DTF           | Theme                                           |
+| --------- | --------------------- | ----------------------------------------------- |
+| FA-S1     | FA-P0-1, FA-P0-2      | Turbo cycle, README/doc truth                   |
+| FA-S2     | DTF-5.2.3             | zw-diamond + range KATs                         |
+| FA-S3     | DTF-5.3.x             | Cocoa + jurisdiction fixtures                   |
+| FA-S4     | Ecosystem table above | Hub acks, coordination only                     |
+| FA-S5     | DTF-5.4.x             | Registry + perf evidence                        |
+| FA-S6     | DTF-5.5.5 + external  | Vendor evidence pack (no fake done on pen-test) |
+
+---
+
+_Last updated: 2026-06-04 — OPS-T5-001 (full-audit reconciliation)_

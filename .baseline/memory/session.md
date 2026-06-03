@@ -1,59 +1,57 @@
 ---
-session_id: '2026-06-03-cross-repo-cleanup-infra-prep'
+session_id: '2026-06-04-roadmap-reconcile-full-audit'
 agent: 'gtcx-core-agent'
-start_time: '2026-06-03T07:00:00Z'
-focus: 'Cross-repo coordination cleanup + gtcx-infrastructure 10-10 roadmap prep'
+start_time: '2026-06-04T00:00:00Z'
+focus: 'Roadmap reconcile — full-audit-2026-06-04 + open ecosystem items'
 ---
 
-# Session: Cross-repo cleanup + Infrastructure handoff
+# Session: Roadmap reconcile (full-audit 2026-06-04)
 
-## What Was Done
+## Context
 
-### Cross-repo coordination (gtcx-core)
+Reconciled roadmaps with [full-audit-2026-06-04.md](../../docs/audit/full-audit-2026-06-04.md) (GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)) and open coordination items.
 
-| Item                         | Status           | Evidence                                                 |
-| ---------------------------- | ---------------- | -------------------------------------------------------- |
-| D4 M4.1 backward compat test | **done**         | `packages/crypto/tests/zkp-{diamond-mocked,zkp}.test.ts` |
-| D5 M5.1 RNG entropy audit    | **done**         | `rust/gtcx-zkp/RNG.md`                                   |
-| D5 M5.2 non-determinism test | **done**         | `test_proof_non_determinism` (100 proofs, 26s release)   |
-| D10 M10.2 FIPS enforcement   | **done**         | `rust/gtcx-crypto/src/fips.rs`                           |
-| CORE-010 agent:next-work CI  | **already done** | `.github/workflows/ci.yml` lines 123–127                 |
-| XR-ID collision fix          | **done**         | `XR-517/518` → `CORE-005/014` in coordination README     |
-| Coordination docs updated    | **done**         | Bridge, workplan, remaining-work refreshed               |
+## Tier 5 progress
 
-### Algorithmic Moat Scores (Current)
+| Sprint | Status      | Exit                                |
+| ------ | ----------- | ----------------------------------- |
+| S-T5-1 | **done**    | DTF-5.1.4 (gh-gold KAT)             |
+| S-T5-2 | **partial** | 5.2.1–5.2.2 done; **5.2.3 pending** |
+| FA-S1  | **active**  | FA-P0-1 turbo cycle                 |
 
-| Dimension                | Score               |
-| ------------------------ | ------------------- |
-| D1 Circuit correctness   | **10** ✓            |
-| D2 Bulletproofs range    | **10** ✓            |
-| D3 Trusted setup         | 9.5 (release-gated) |
-| D4 Backward compat       | **10** ✓            |
-| D5 RNG / entropy         | **10** ✓            |
-| D6 KAT / interop         | **10** ✓            |
-| D7 Side-channel          | 9                   |
-| D8 Formal verification   | 0 (external)        |
-| D9 Third-party audit     | 0 (external)        |
-| D10 Primitive compliance | 9.5                 |
-| **Overall**              | **≈ 8.95/10**       |
+**Overall Tier 5 technical:** ~45%
 
-## Open Cross-repo Items (not actionable by gtcx-core)
+## Protocol 22
 
-| ID                             | Owner               | Status        | Blocker           |
-| ------------------------------ | ------------------- | ------------- | ----------------- |
-| CORE-001 EAP ack               | gtcx-infrastructure | awaiting ack  | ESO refresh       |
-| CORE-002 SLSA provenance       | gtcx-infrastructure | open          | priority decision |
-| CORE-003 KAT consumption       | gtcx-protocols      | **done**      | AM-2 complete     |
-| CORE-004 D3 transcript         | gtcx-core           | release-gated | XR-402 ceremony   |
-| CORE-005–009 vendors/regulator | baseline-os         | blocked       | human/external    |
+```bash
+pnpm agent:next-work  # → FA-P0-1
+```
 
-## Next Focus (Protocol 22 / 27 — 2026-06-03)
+## P0 blocker (FA-P0-1)
 
-- **DTF-5.1.3 done:** `groth16_prove_commodity_origin_profile` NAPI + `@gtcx/crypto` `proveGhGoldOrigin`; verify via `commodity_origin`
-- **DTF-5.1.4 done:** `groth16-gh-gold-origin.kat.json` + `pnpm test:kat-cross-impl` PASS (5/5); CI job at `.github/workflows/ci.yml` L104
-- **DTF-5.2.1 done:** zw-diamond profile tests (20 circuit_profiles), `proveZwDiamondOrigin`, witness mapping
-- **DTF-5.2.2 done:** `@gtcx/verification` commodity-origin ZK bundle + workproof witness bridge; 4 integration tests
-- **agent:next-work:** **DTF-5.2.3** — KATs for diamond + range circuits
-- **ER-1-08 (gtcx-core):** **done** — `ba63d0d` + protocols hub log `2026-06-04T23:45Z`; **pending:** infra hub row only
-- **ER-2:** infra `ENABLE_COST_ROUTER` on intel staging; INT-R2-03; baseline-os router v1.1
-- **Spec:** `docs/specs/packages/zkp-circuit-profiles.md`
+Root `pnpm typecheck` fails: turbo cycle `@gtcx/workproof` ↔ `@gtcx/verification`. Fix: move integration tests to `packages/integration-tests` or `tests/integration/`; remove cyclic devDep.
+
+## Ecosystem open (gtcx-core lens)
+
+| ID          | Item                       | Owner               | Status        |
+| ----------- | -------------------------- | ------------------- | ------------- |
+| OI-X01      | ER-1-08 hub ack            | gtcx-core           | **done**      |
+| OI-X02      | ER-1-08 hub ack            | gtcx-infrastructure | **pending**   |
+| OI-X06      | INT-S8-04 cost-router v1.1 | baseline-os         | external      |
+| EXT-INF-002 | Live pen-test              | gtcx-infrastructure | external      |
+| CORE-004    | Trusted-setup ceremony     | gtcx-core           | release-gated |
+
+## Docs updated (2026-06-04)
+
+- `docs/audit/execution-roadmap.md`
+- `docs/operations/agent-work-selection.md`
+- `docs/roadmap.md`
+- `docs/audit/moat-completion-reconciliation-2026-06-03.md`
+- `docs/operations/coordination/remaining-cross-repo-work-2026-06-02.md`
+- `.baseline/memory/session.md`
+
+## Next implementation
+
+1. **FA-P0-1** — break workproof↔verification cycle
+2. **FA-P0-2** — README library vs Tier 5 split
+3. **DTF-5.2.3** — zw-diamond + range KATs (after P0)

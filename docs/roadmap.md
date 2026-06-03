@@ -32,7 +32,7 @@ review_cycle: 'on-change'
 > **Owner:** Protocol Architect  
 > **Bank-Grade Composite Score:** 8.8 / 10 (per [master audit 2026-05-25](./audit/master-audit-2026-05-25.md))  
 > **Internal Completion Score:** 9.5 / 10 (all internal items closed)  
-> **Next Milestone:** 10.0 Reference Grade
+> **Next Milestone:** FA-S1 build graph (then DTF-5.2.3) · 10.0 Reference Grade (bank-grade track)
 
 This is the canonical roadmap for everything that remains between `gtcx-core` and defensible, bank-grade, production-ready infrastructure. It covers three workstreams in parallel:
 
@@ -41,6 +41,8 @@ This is the canonical roadmap for everything that remains between `gtcx-core` an
 3. **Innovation, Moat, and Defensible Architecture** — the features that make GTCX hard to replicate.
 
 > **Active execution program:** [Engagement Readiness Sprint Roadmap (2026-05-22)](./agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — focused 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DRC). Closes the customer-visible readiness gap; this master roadmap remains the long-horizon view.
+
+> **Active engineering (2026-06-04):** [execution-roadmap.md](./audit/execution-roadmap.md) — **FA-S1 (P0)** turbo cycle fix, then DTF Tier 5 (~45%). Reconciled with [full-audit-2026-06-04.md](./audit/full-audit-2026-06-04.md) ([#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)). Protocol 22: `pnpm agent:next-work` → **FA-P0-1**. **Pilot readiness:** library maturity ≠ sovereign pilot — pen-test, testnet, hub acks are ecosystem gates.
 
 ---
 
@@ -482,19 +484,25 @@ A release-attached evaluation pipeline that emits a JSON **AI scorecard** and, o
 
 ## 7. Risk Register
 
-| ID  | Risk                                                    | Likelihood | Impact | Mitigation                                                               |
-| --- | ------------------------------------------------------- | ---------- | ------ | ------------------------------------------------------------------------ |
-| R1  | External vendor delays (pen-test, SOC 2)                | Medium     | High   | RFP drafted 2026-05-22; 5-vendor longlist; select by 2026-05-30          |
-| R2  | rustls-webpki upstream fix delayed                      | Medium     | Medium | Monitored by `cargo audit`; mitigation doc published; no direct exposure |
-| R3  | Field connectivity data unavailable for adaptive tuning | Medium     | Medium | Adaptive mode benchmarked; 13 metrics captured; budgets pass             |
-| R4  | AI governance outpaces tooling                          | Low        | Medium | Quarterly evaluation keeps pace; human review gates are non-negotiable   |
-| R5  | Regulatory sandbox rejection                            | Low        | High   | Multi-market strategy (5 countries) reduces single-point-of-failure      |
-| R6  | SLSA provenance blocked on org secret                   | Low        | Medium | `NPM_TOKEN` configured; dry-run release validated                        |
+| ID  | Risk                                                    | Likelihood | Impact | Mitigation                                                                                                  |
+| --- | ------------------------------------------------------- | ---------- | ------ | ----------------------------------------------------------------------------------------------------------- |
+| R1  | External vendor delays (pen-test, SOC 2)                | Medium     | High   | RFP drafted 2026-05-22; 5-vendor longlist; select by 2026-05-30                                             |
+| R2  | rustls-webpki upstream fix delayed                      | Medium     | Medium | Monitored by `cargo audit`; mitigation doc published; no direct exposure                                    |
+| R3  | Field connectivity data unavailable for adaptive tuning | Medium     | Medium | Adaptive mode benchmarked; 13 metrics captured; budgets pass                                                |
+| R4  | AI governance outpaces tooling                          | Low        | Medium | Quarterly evaluation keeps pace; human review gates are non-negotiable                                      |
+| R5  | Regulatory sandbox rejection                            | Low        | High   | Multi-market strategy (5 countries) reduces single-point-of-failure                                         |
+| R6  | SLSA provenance blocked on org secret                   | Low        | Medium | `NPM_TOKEN` configured; dry-run release validated                                                           |
+| R7  | workproof ↔ verification turbo cycle breaks typecheck   | High       | High   | **FA-P0-1** — move integration test out of package devDeps ([full-audit](./audit/full-audit-2026-06-04.md)) |
+| R8  | Library maturity mistaken for sovereign pilot readiness | Medium     | High   | README split + ecosystem gates (pen-test, ER-1-08 infra ack)                                                |
 
 ---
 
 ## 8. References
 
+- [`docs/audit/execution-roadmap.md`](./audit/execution-roadmap.md) — **Active** sprint program (FA-S1–S6, DTF Tier 5)
+- [`docs/audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md) — Latest 6-phase audit + sprint plan
+- [`docs/operations/tier-5-workplan-2026-06.md`](./operations/tier-5-workplan-2026-06.md) — DTF-5.x register
+- [`docs/audit/moat-completion-reconciliation-2026-06-03.md`](./audit/moat-completion-reconciliation-2026-06-03.md) — Unified 10/10 + moat + Tier 5 index
 - [`docs/agile/roadmap/roadmap.md`](./agile/roadmap/roadmap.md) — Delivery phases 0-7
 - [`docs/audit/10-10-roadmap-2026-05-25.md`](./audit/10-10-roadmap-2026-05-25.md) — 10/10 reference-grade roadmap (honest baseline)
 - [`docs/audit/master-audit-2026-05-25.md`](./audit/master-audit-2026-05-25.md) — Master audit and bank-grade certification
@@ -510,4 +518,4 @@ A release-attached evaluation pipeline that emits a JSON **AI scorecard** and, o
 
 ---
 
-_This roadmap is a living document. Update weekly during active sprints, monthly during steady state. Last updated: 2026-05-25._
+_This roadmap is a living document. Update weekly during active sprints, monthly during steady state. Last updated: 2026-06-04 (reconciled with full-audit-2026-06-04)._

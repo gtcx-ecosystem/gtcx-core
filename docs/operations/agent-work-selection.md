@@ -22,6 +22,8 @@ adoption_status: established
 
 | Artifact                | Path                                                                                                          |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Execution roadmap**   | `docs/audit/execution-roadmap.md` (active phase FA-S1)                                                        |
+| **Full audit (latest)** | `docs/audit/full-audit-2026-06-04.md`                                                                         |
 | **Unified 10/10 index** | `docs/audit/moat-completion-reconciliation-2026-06-03.md`                                                     |
 | **Tier 5 work plan**    | `docs/operations/tier-5-workplan-2026-06.md`                                                                  |
 | **DTF framework**       | [DTF-001 v1.0.0](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0) |
@@ -53,21 +55,25 @@ Apply tiers in order:
 | **5 — Defensibility Tier 5** | Next pending **DTF-5.x** from tier-5 workplan (class `code` / `ops-docs`)           |
 | 6 — External                 | CORE-004 ceremony, CORE-005–009, D8/D9/D10 — **do not start** without authorization |
 
+## P0 — Full-audit pre-flight (blocks Tier 5 until done)
+
+**Source:** [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) — turbo cycle breaks root `pnpm typecheck`.
+
+| Next (default)                                         | Sprint | Owner                   |
+| ------------------------------------------------------ | ------ | ----------------------- |
+| **FA-P0-1** Break workproof ↔ verification turbo cycle | FA-S1  | frontier-infra-engineer |
+
 ## Defensibility Tier 5 (current automatable track)
 
-**Status:** Tiers 1–4 achieved; **Tier 5 not started**.
+**Status:** Tiers 1–4 achieved; **Tier 5 ~45%** (S-T5-1 done; S-T5-2 partial).
 
-| Next (default)                         | Sprint | Owner                 |
-| -------------------------------------- | ------ | --------------------- |
-| **DTF-5.1.1** Witness builder          | S-T5-1 | **done**              |
-| **DTF-5.1.2** gh-gold-origin profile   | S-T5-1 | **done**              |
-| **DTF-5.1.3** NAPI (profile-aware)     | S-T5-1 | **done**              |
-| **DTF-5.1.4** KAT + CI                 | S-T5-1 | **done**              |
-| **DTF-5.2.1** zw-diamond-origin        | S-T5-2 | **done**              |
-| **DTF-5.2.2** verification integration | S-T5-2 | **done**              |
-| **DTF-5.2.3** diamond + range KATs     | S-T5-2 | quality-evidence-lead |
+| Milestone                          | Sprint | Status                      |
+| ---------------------------------- | ------ | --------------------------- |
+| DTF-5.1.1–5.1.4                    | S-T5-1 | **done**                    |
+| DTF-5.2.1–5.2.2                    | S-T5-2 | **done**                    |
+| **DTF-5.2.3** diamond + range KATs | S-T5-2 | **pending** (after FA-P0-1) |
 
-Full register: `docs/operations/tier-5-workplan-2026-06.md`.
+Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [execution-roadmap.md](../audit/execution-roadmap.md).
 
 ## External-blocked (moat dimensions)
 
@@ -89,12 +95,13 @@ Full register: `docs/operations/tier-5-workplan-2026-06.md`.
 
 ## Active phase
 
-| Track                  | Status                                    |
-| ---------------------- | ----------------------------------------- |
-| A — Internal 10/10 S5  | **Done** (22/22 provenance)               |
-| B — AM-1, AM-2         | **Done**                                  |
-| **T5 — Defensibility** | **DTF-5.1.3** ← `agent:next-work` default |
-| Ceremony / vendors     | CORE-004–009 external                     |
+| Track                  | Status                                  |
+| ---------------------- | --------------------------------------- |
+| A — Internal 10/10 S5  | **Done** (22/22 provenance)             |
+| B — AM-1, AM-2         | **Done**                                |
+| **FA — Full-audit P0** | **FA-P0-1** ← `agent:next-work` default |
+| **T5 — Defensibility** | **~45%** — S-T5-2 after FA-P0-1         |
+| Ceremony / vendors     | CORE-004–009 external                   |
 
 ## Critical handoffs
 

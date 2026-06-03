@@ -13,8 +13,20 @@ const ROADMAP_PATH = join(REPO_ROOT, 'docs/audit/moat-dimension-roadmap-10-10.md
 const SESSION_PATH = join(REPO_ROOT, '.baseline/memory/session.md');
 const TIER5_WORKPLAN_PATH = join(REPO_ROOT, 'docs/operations/tier-5-workplan-2026-06.md');
 
-/** Defensibility Tier 5 — ordered implementable milestones (DTF-001). */
+/** Defensibility Tier 5 + full-audit P0 — ordered implementable milestones (DTF-001). */
 const TIER5_MILESTONES = [
+  {
+    id: 'FA-P0-1',
+    title: 'Break workproof/verification turbo cycle (root typecheck)',
+    sprint: 'FA-S1',
+    workClass: 'code',
+  },
+  {
+    id: 'FA-P0-2',
+    title: 'README: library readiness vs DTF Tier 5 split',
+    sprint: 'FA-S1',
+    workClass: 'ops-docs',
+  },
   {
     id: 'DTF-5.1.1',
     title: 'Witness builder: WorkProof → typed witness',
