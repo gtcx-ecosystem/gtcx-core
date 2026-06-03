@@ -7,11 +7,12 @@
 
 use gtcx_zkp::{
     bulletproofs_prove_amount_range, bulletproofs_prove_commodity_range, gh_gold_origin_profile,
+    zw_diamond_origin_profile,
     groth16_generate_keys, groth16_prove_asset_ownership, groth16_prove_commodity_origin,
     groth16_prove_gci_threshold, groth16_prove_location_region, groth16_verify,
     sample_asset_ownership, sample_commodity_origin, sample_commodity_origin_for_profile,
     sample_location_region, validate_profile_sample, CommodityOriginSample, Groth16CircuitType,
-    PROFILE_GH_GOLD_ORIGIN,
+    PROFILE_GH_GOLD_ORIGIN, PROFILE_ZW_DIAMOND_ORIGIN,
 };
 use sha2::{Digest, Sha256};
 use std::path::PathBuf;
@@ -20,7 +21,7 @@ fn main() {
     let circuit = std::env::args().nth(1).unwrap_or_else(|| {
         eprintln!("Usage: generate-kat <circuit> [output-dir]");
         eprintln!("Circuits: gci-threshold, asset-ownership, location-region, commodity-origin,");
-        eprintln!("          gh-gold-origin (profile alias), bulletproofs-amount, bulletproofs-commodity");
+        eprintln!("          gh-gold-origin | zw-diamond-origin (profile aliases), bulletproofs-amount, bulletproofs-commodity");
         std::process::exit(1);
     });
 
@@ -34,6 +35,7 @@ fn main() {
     match circuit.as_str() {
         "commodity-origin" => generate_groth16_commodity_origin(&out_dir),
         "gh-gold-origin" => generate_groth16_gh_gold_origin_profile(&out_dir),
+        "zw-diamond-origin" => generate_groth16_zw_diamond_origin_profile(&out_dir),
         "gci-threshold" => generate_groth16_gci_threshold(&out_dir),
         "asset-ownership" => generate_groth16_asset_ownership(&out_dir),
         "location-region" => generate_groth16_location_region(&out_dir),
@@ -68,6 +70,22 @@ fn generate_groth16_gh_gold_origin_profile(out_dir: &PathBuf) {
         "groth16-gh-gold-origin.kat.json",
         "CommodityOrigin",
         Some(PROFILE_GH_GOLD_ORIGIN),
+        &sample,
+    );
+}
+
+fn generate_groth16_zw_diamond_origin_profile(out_dir: &PathBuf) {
+    println!(
+        "Generating KAT vector for profile {PROFILE_ZW_DIAMOND_ORIGIN} (underlying CommodityOrigin)..."
+    );
+    let profile = zw_diamond_origin_profile();
+    let sample = sample_commodity_origin_for_profile(&profile).expect("profile sample failed");
+    validate_profile_sample(&profile, &sample).expect("profile validation failed");
+    write_commodity_origin_kat(
+        out_dir,
+        "groth16-zw-diamond-origin.kat.json",
+        "CommodityOrigin",
+        Some(PROFILE_ZW_DIAMOND_ORIGIN),
         &sample,
     );
 }

@@ -31,6 +31,7 @@ fn main() {
             "groth16-location-region.kat.json",
             "groth16-commodity-origin.kat.json",
             "groth16-gh-gold-origin.kat.json",
+            "groth16-zw-diamond-origin.kat.json",
         ];
         let mut all_ok = true;
         for name in &circuits {

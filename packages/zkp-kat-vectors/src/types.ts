@@ -67,5 +67,6 @@ export type KatCircuitName =
   | 'groth16-location-region'
   | 'groth16-commodity-origin'
   | 'groth16-gh-gold-origin'
+  | 'groth16-zw-diamond-origin'
   | 'bulletproofs-amount-range'
   | 'bulletproofs-commodity-range';

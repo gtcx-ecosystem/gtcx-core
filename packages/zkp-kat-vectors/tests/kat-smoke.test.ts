@@ -6,6 +6,7 @@ import {
   groth16LocationRegion,
   groth16CommodityOrigin,
   groth16GhGoldOrigin,
+  groth16ZwDiamondOrigin,
   bulletproofsAmountRange,
   bulletproofsCommodityRange,
   katArtifacts,
@@ -13,23 +14,25 @@ import {
 } from '../src/index.js';
 
 describe('KAT artifact exports', () => {
-  it('exports all 7 KAT artifacts individually', () => {
+  it('exports all 8 KAT artifacts individually', () => {
     expect(groth16GciThreshold).toBeDefined();
     expect(groth16AssetOwnership).toBeDefined();
     expect(groth16LocationRegion).toBeDefined();
     expect(groth16CommodityOrigin).toBeDefined();
     expect(groth16GhGoldOrigin).toBeDefined();
+    expect(groth16ZwDiamondOrigin).toBeDefined();
     expect(bulletproofsAmountRange).toBeDefined();
     expect(bulletproofsCommodityRange).toBeDefined();
   });
 
-  it('katArtifacts contains all 7 circuits', () => {
-    expect(Object.keys(katArtifacts)).toHaveLength(7);
+  it('katArtifacts contains all 8 circuits', () => {
+    expect(Object.keys(katArtifacts)).toHaveLength(8);
     expect(katArtifacts['groth16-gci-threshold']).toBe(groth16GciThreshold);
     expect(katArtifacts['groth16-asset-ownership']).toBe(groth16AssetOwnership);
     expect(katArtifacts['groth16-location-region']).toBe(groth16LocationRegion);
     expect(katArtifacts['groth16-commodity-origin']).toBe(groth16CommodityOrigin);
     expect(katArtifacts['groth16-gh-gold-origin']).toBe(groth16GhGoldOrigin);
+    expect(katArtifacts['groth16-zw-diamond-origin']).toBe(groth16ZwDiamondOrigin);
     expect(katArtifacts['bulletproofs-amount-range']).toBe(bulletproofsAmountRange);
     expect(katArtifacts['bulletproofs-commodity-range']).toBe(bulletproofsCommodityRange);
   });
@@ -46,6 +49,7 @@ describe('Groth16 KAT artifact structure', () => {
     { name: 'groth16-location-region', artifact: groth16LocationRegion },
     { name: 'groth16-commodity-origin', artifact: groth16CommodityOrigin },
     { name: 'groth16-gh-gold-origin', artifact: groth16GhGoldOrigin },
+    { name: 'groth16-zw-diamond-origin', artifact: groth16ZwDiamondOrigin },
   ];
 
   it.each(groth16Artifacts)('$name has required fields', ({ artifact }) => {

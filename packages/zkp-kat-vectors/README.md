@@ -13,6 +13,7 @@ This package exports canonical KAT artifacts for all supported ZKP circuits:
 - `groth16-location-region` — Location region proof
 - `groth16-commodity-origin` — Commodity origin proof
 - `groth16-gh-gold-origin` — Commodity origin profile alias (gh-gold-origin policy pack; same R1CS)
+- `groth16-zw-diamond-origin` — Commodity origin profile alias (zw-diamond-origin policy pack; same R1CS)
 
 ### Bulletproofs
 
@@ -53,6 +54,7 @@ cargo run --bin generate-kat -- asset-ownership
 cargo run --bin generate-kat -- location-region
 cargo run --bin generate-kat -- commodity-origin
 cargo run --bin generate-kat -- gh-gold-origin
+cargo run --bin generate-kat -- zw-diamond-origin
 cargo run --bin generate-kat -- bulletproofs-amount
 cargo run --bin generate-kat -- bulletproofs-commodity
 ```
