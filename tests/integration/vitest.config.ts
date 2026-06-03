@@ -14,6 +14,10 @@ export default defineConfig({
       '@gtcx/sync': path.resolve(__dirname, '../../packages/sync/src/index.ts'),
       '@gtcx/types': path.resolve(__dirname, '../../packages/types/src/index.ts'),
       '@gtcx/verification': path.resolve(__dirname, '../../packages/verification/src/index.ts'),
+      '@gtcx/workproof/circuit-profiles': path.resolve(
+        __dirname,
+        '../../packages/workproof/src/circuit-profiles/index.ts'
+      ),
       '@gtcx/workproof': path.resolve(__dirname, '../../packages/workproof/src/index.ts'),
       '@gtcx/runtime': path.resolve(__dirname, '../../packages/runtime/src/index.ts'),
       '@gtcx/api-client': path.resolve(__dirname, '../../packages/api-client/src/index.ts'),
