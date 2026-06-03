@@ -1,0 +1,23 @@
+{
+  "document_id": "DTF-5.4.2",
+  "duration_seconds": 60,
+  "elapsed_seconds": 60.260783833,
+  "latency_us": {
+    "max": 927522,
+    "p50": 445731,
+    "p99": 765157
+  },
+  "mode": "verify",
+  "notes": "Minerals-board verifier SLA — Groth16 verify throughput on profile-bound commodity-origin proofs.",
+  "operation_count": 1610,
+  "pass": true,
+  "profiles": ["gh-gold-origin", "zw-diamond-origin", "gh-cocoa-origin"],
+  "proofs_per_minute": 1603.03,
+  "repo": "gtcx-core",
+  "schema": "gtcx.zkp-profile-load.v1",
+  "target_proofs_per_minute": 1000,
+  "timestamp_unix": 1780517013,
+  "underlying_circuit": "CommodityOrigin",
+  "warmup_kat_dir": "/Users/amanianai/Sites/gtcx-ecosystem/gtcx-core/artifacts/kat",
+  "workers": 12
+}

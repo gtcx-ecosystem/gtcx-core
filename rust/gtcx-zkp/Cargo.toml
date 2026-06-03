@@ -34,6 +34,7 @@ merlin = { workspace = true }
 hex = { workspace = true }
 sha2 = { workspace = true }
 serde_json = { workspace = true }
+rayon = "1.10"
 
 # Optional: side-channel benchmarking (D7 M7.4)
 dudect-bencher = { version = "0.7", optional = true }
@@ -56,6 +57,10 @@ path = "src/bin/generate-kat.rs"
 [[bin]]
 name = "kat-cross-impl-verify"
 path = "src/bin/kat-cross-impl-verify.rs"
+
+[[bin]]
+name = "zkp-profile-load-test"
+path = "src/bin/zkp-profile-load-test.rs"
 
 [[bench]]
 name = "zkp"
