@@ -60,6 +60,19 @@ Tracks user acceptance testing (UAT) evidence for features and sprints. Updated 
 
 ## Active Log
 
+### [2026-06-04] S-T5-3 — Minerals Board UAT (DTF-5.3.3, L0 lab)
+
+**Type:** Sprint UAT / Tier-5 defensibility
+**Tested by:** Automated integration + Rust profile negatives + KAT cross-impl
+**Status:** Pass
+**Evidence:**
+
+- `docs/operations/minerals-board-uat-protocol.md`
+- `docs/audit/evidence/minerals-board-uat-2026-06-04.json`
+- `tests/integration/tier5-jurisdiction-proofs.test.ts` — 14 tests
+
+**Notes:** L0 lab only; sovereign board sign-off (L2) remains external (DTF-5.5.4).
+
 ### [2026-05-06] Sprint 6 — Core12 Domain Population
 
 **Type:** Feature UAT

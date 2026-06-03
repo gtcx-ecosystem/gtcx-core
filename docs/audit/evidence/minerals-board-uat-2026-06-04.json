@@ -1,0 +1,97 @@
+{
+  "schema": "gtcx.minerals-board-uat.v1",
+  "document_id": "DTF-5.3.3",
+  "repo": "gtcx-core",
+  "uat_level": "L0",
+  "timestamp": "2026-06-04T19:37:00.000Z",
+  "sprint": "S-T5-3",
+  "operator": {
+    "role": "quality-evidence-lead",
+    "agent_id": "agent://gtcx-core/2026-06-04/dtf-5-3-3-uat-protocol"
+  },
+  "profiles_under_test": [
+    "gh-gold-origin",
+    "gh-cocoa-origin",
+    "zw-diamond-origin",
+    "commodity-origin"
+  ],
+  "jurisdictions": ["ZW", "GH", "NA", "BW", "CD"],
+  "scenarios": [
+    {
+      "id": "UAT-GH-01",
+      "profile_id": "gh-gold-origin",
+      "status": "pass",
+      "automated": true
+    },
+    {
+      "id": "UAT-GH-02",
+      "profile_id": "gh-cocoa-origin",
+      "status": "pass",
+      "automated": true
+    },
+    {
+      "id": "UAT-ZW-01",
+      "profile_id": "zw-diamond-origin",
+      "status": "pass",
+      "automated": true
+    },
+    {
+      "id": "UAT-BW-01",
+      "profile_id": "zw-diamond-origin",
+      "status": "pass",
+      "automated": true
+    },
+    {
+      "id": "UAT-NA-01",
+      "profile_id": "commodity-origin",
+      "status": "pass",
+      "automated": true
+    },
+    {
+      "id": "UAT-CD-01",
+      "profile_id": "commodity-origin",
+      "status": "pass",
+      "automated": true
+    },
+    {
+      "id": "UAT-X-01",
+      "status": "pass",
+      "automated": true,
+      "test_count": 14
+    },
+    {
+      "id": "UAT-X-02",
+      "status": "pass",
+      "automated": true,
+      "kat_pass": 6,
+      "kat_total": 6
+    }
+  ],
+  "commands": [
+    {
+      "command": "cd tests/integration && pnpm test tier5-jurisdiction-proofs",
+      "exit_code": 0,
+      "summary": "14 passed"
+    },
+    {
+      "command": "cd rust && cargo test -p gtcx-zkp circuit_profiles",
+      "exit_code": 0,
+      "summary": "26 passed"
+    },
+    {
+      "command": "pnpm test:kat-cross-impl",
+      "exit_code": 0,
+      "summary": "6/6 PASS"
+    }
+  ],
+  "redaction": {
+    "pii_in_repo": false,
+    "production_secrets_included": false,
+    "fixture_policy": "did:example and site-* synthetic IDs only"
+  },
+  "sign_off": {
+    "board_name": null,
+    "uat_level_achieved": "L0"
+  },
+  "protocol_ref": "docs/operations/minerals-board-uat-protocol.md"
+}
