@@ -168,12 +168,13 @@ function parseInProgressSession(md) {
 
 function parseCompletedTier5(session, workplan) {
   const done = new Set();
-  const re = /DTF-5\.\d+\.\d+[^\n]*\|\s*\*\*done\*\*/gi;
+  const re = /(?:DTF-5\.\d+\.\d+|FA-P0-\d+)[^\n]*\|\s*\*\*done\*\*/gi;
+  const idRe = /(?:DTF-5\.\d+\.\d+|FA-P0-\d+)/;
   let m;
   const sources = [session, workplan].filter(Boolean);
   for (const src of sources) {
     while ((m = re.exec(src)) !== null) {
-      const id = m[0].match(/DTF-5\.\d+\.\d+/)?.[0];
+      const id = m[0].match(idRe)?.[0];
       if (id) done.add(id);
     }
   }

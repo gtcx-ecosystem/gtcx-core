@@ -59,9 +59,10 @@ Apply tiers in order:
 
 **Source:** [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) — turbo cycle breaks root `pnpm typecheck`.
 
-| Next (default)                                         | Sprint | Owner                   |
-| ------------------------------------------------------ | ------ | ----------------------- |
-| **FA-P0-1** Break workproof ↔ verification turbo cycle | FA-S1  | frontier-infra-engineer |
+| Next (default)                                      | Sprint | Owner                   |
+| --------------------------------------------------- | ------ | ----------------------- |
+| FA-P0-1 Break workproof ↔ verification turbo cycle  | FA-S1  | **done**                |
+| **FA-P0-2** README: library readiness vs DTF Tier 5 | FA-S1  | frontier-infra-engineer |
 
 ## Defensibility Tier 5 (current automatable track)
 
@@ -71,7 +72,7 @@ Apply tiers in order:
 | ---------------------------------- | ------ | --------------------------- |
 | DTF-5.1.1–5.1.4                    | S-T5-1 | **done**                    |
 | DTF-5.2.1–5.2.2                    | S-T5-2 | **done**                    |
-| **DTF-5.2.3** diamond + range KATs | S-T5-2 | **pending** (after FA-P0-1) |
+| **DTF-5.2.3** diamond + range KATs | S-T5-2 | **pending** (after FA-P0-2) |
 
 Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [execution-roadmap.md](../audit/execution-roadmap.md).
 
@@ -99,8 +100,8 @@ Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [
 | ---------------------- | --------------------------------------- |
 | A — Internal 10/10 S5  | **Done** (22/22 provenance)             |
 | B — AM-1, AM-2         | **Done**                                |
-| **FA — Full-audit P0** | **FA-P0-1** ← `agent:next-work` default |
-| **T5 — Defensibility** | **~45%** — S-T5-2 after FA-P0-1         |
+| **FA — Full-audit P0** | **FA-P0-2** ← `agent:next-work` default |
+| **T5 — Defensibility** | **~45%** — DTF-5.2.3 after FA-S1        |
 | Ceremony / vendors     | CORE-004–009 external                   |
 
 ## Critical handoffs

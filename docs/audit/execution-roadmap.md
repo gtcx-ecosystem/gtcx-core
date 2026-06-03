@@ -18,19 +18,19 @@ sources:
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
 **Active phase:** **FA-S1 (P0 build graph)** → then DTF-5.2.3  
-**Protocol 22:** `pnpm agent:next-work` → **FA-P0-1** until turbo cycle fixed
+**Protocol 22:** `pnpm agent:next-work` → **FA-P0-2** (README split) then DTF-5.2.3
 
 ---
 
 ## Executive summary (2026-06-04)
 
-| Track                            | State         | Next                                                         |
-| -------------------------------- | ------------- | ------------------------------------------------------------ |
-| Internal engineering (S1–S5)     | **done**      | —                                                            |
-| Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                                       |
-| **DTF Tier 5 technical**         | **~45%**      | FA-S1 → FA-S2 (5.2.3 KATs) → FA-S3–S5                        |
-| Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)              |
-| **P0 blocker**                   | **Open**      | workproof ↔ verification turbo cycle breaks root `typecheck` |
+| Track                            | State         | Next                                               |
+| -------------------------------- | ------------- | -------------------------------------------------- |
+| Internal engineering (S1–S5)     | **done**      | —                                                  |
+| Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                             |
+| **DTF Tier 5 technical**         | **~45%**      | FA-S1 → FA-S2 (5.2.3 KATs) → FA-S3–S5              |
+| Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)    |
+| **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/` |
 
 **Risk (audit):** Do not equate npm library maturity with sovereign pilot clearance.  
 **Opportunity (audit):** Profile packs + KAT portability on one R1CS + WorkProof→verification chain.
@@ -53,12 +53,12 @@ sources:
 
 **Source:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) Phase 1 High finding.
 
-| Story   | Title                                            | Owner              | Status      | Evidence / gate                          |
-| ------- | ------------------------------------------------ | ------------------ | ----------- | ---------------------------------------- |
-| FA-P0-1 | Break workproof ↔ verification turbo build cycle | frontier-infra     | **pending** | Root `pnpm typecheck` exit 0             |
-| FA-P0-2 | README: split library readiness vs DTF Tier 5    | protocol-architect | **pending** | `README.md` + link to tier-5 workplan    |
-| FA-P0-3 | Reconcile package count in specs README          | protocol-architect | **pending** | Match `architecture:check` (24 packages) |
-| FA-P0-4 | format:check hygiene (agent-sync drift)          | chore              | **pending** | `pnpm format:check` exit 0               |
+| Story   | Title                                            | Owner              | Status      | Evidence / gate                           |
+| ------- | ------------------------------------------------ | ------------------ | ----------- | ----------------------------------------- |
+| FA-P0-1 | Break workproof ↔ verification turbo build cycle | frontier-infra     | **done**    | Root `pnpm typecheck` exit 0 (2026-06-04) |
+| FA-P0-2 | README: split library readiness vs DTF Tier 5    | protocol-architect | **pending** | `README.md` + link to tier-5 workplan     |
+| FA-P0-3 | Reconcile package count in specs README          | protocol-architect | **pending** | Match `architecture:check` (24 packages)  |
+| FA-P0-4 | format:check hygiene (agent-sync drift)          | chore              | **pending** | `pnpm format:check` exit 0                |
 
 **Blocks:** All new DTF-5.2.3+ merges should land after FA-P0-1 unless scoped package-only CI is documented.
 

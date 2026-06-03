@@ -73,7 +73,7 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 
 | ID        | Title                                                                 | Sprint | Owner                      | Status   | Class            | Depends     | Blocks            |
 | --------- | --------------------------------------------------------------------- | ------ | -------------------------- | -------- | ---------------- | ----------- | ----------------- |
-| FA-P0-1   | Break workproof ↔ verification turbo cycle (root `typecheck`)         | FA-S1  | frontier-infra-engineer    | pending  | code             | —           | all DTF-5.2.3+    |
+| FA-P0-1   | Break workproof ↔ verification turbo cycle (root `typecheck`)         | FA-S1  | frontier-infra-engineer    | **done** | code             | —           | all DTF-5.2.3+    |
 | FA-P0-2   | README: library readiness vs DTF Tier 5 split                         | FA-S1  | protocol-architect         | pending  | ops-docs         | —           | —                 |
 | DTF-5.1.1 | Witness builder: WorkProof → typed witness                            | S-T5-1 | protocol-engineer          | **done** | code             | —           | 5.1.2–5.1.4       |
 | DTF-5.1.2 | Commodity-origin R1CS + **`gh-gold-origin` profile** + negative tests | S-T5-1 | crypto-security-engineer   | **done** | code             | 5.1.1       | 5.1.3             |

@@ -484,16 +484,16 @@ A release-attached evaluation pipeline that emits a JSON **AI scorecard** and, o
 
 ## 7. Risk Register
 
-| ID  | Risk                                                    | Likelihood | Impact | Mitigation                                                                                                  |
-| --- | ------------------------------------------------------- | ---------- | ------ | ----------------------------------------------------------------------------------------------------------- |
-| R1  | External vendor delays (pen-test, SOC 2)                | Medium     | High   | RFP drafted 2026-05-22; 5-vendor longlist; select by 2026-05-30                                             |
-| R2  | rustls-webpki upstream fix delayed                      | Medium     | Medium | Monitored by `cargo audit`; mitigation doc published; no direct exposure                                    |
-| R3  | Field connectivity data unavailable for adaptive tuning | Medium     | Medium | Adaptive mode benchmarked; 13 metrics captured; budgets pass                                                |
-| R4  | AI governance outpaces tooling                          | Low        | Medium | Quarterly evaluation keeps pace; human review gates are non-negotiable                                      |
-| R5  | Regulatory sandbox rejection                            | Low        | High   | Multi-market strategy (5 countries) reduces single-point-of-failure                                         |
-| R6  | SLSA provenance blocked on org secret                   | Low        | Medium | `NPM_TOKEN` configured; dry-run release validated                                                           |
-| R7  | workproof ↔ verification turbo cycle breaks typecheck   | High       | High   | **FA-P0-1** — move integration test out of package devDeps ([full-audit](./audit/full-audit-2026-06-04.md)) |
-| R8  | Library maturity mistaken for sovereign pilot readiness | Medium     | High   | README split + ecosystem gates (pen-test, ER-1-08 infra ack)                                                |
+| ID  | Risk                                                    | Likelihood | Impact | Mitigation                                                               |
+| --- | ------------------------------------------------------- | ---------- | ------ | ------------------------------------------------------------------------ |
+| R1  | External vendor delays (pen-test, SOC 2)                | Medium     | High   | RFP drafted 2026-05-22; 5-vendor longlist; select by 2026-05-30          |
+| R2  | rustls-webpki upstream fix delayed                      | Medium     | Medium | Monitored by `cargo audit`; mitigation doc published; no direct exposure |
+| R3  | Field connectivity data unavailable for adaptive tuning | Medium     | Medium | Adaptive mode benchmarked; 13 metrics captured; budgets pass             |
+| R4  | AI governance outpaces tooling                          | Low        | Medium | Quarterly evaluation keeps pace; human review gates are non-negotiable   |
+| R5  | Regulatory sandbox rejection                            | Low        | High   | Multi-market strategy (5 countries) reduces single-point-of-failure      |
+| R6  | SLSA provenance blocked on org secret                   | Low        | Medium | `NPM_TOKEN` configured; dry-run release validated                        |
+| R7  | workproof ↔ verification turbo cycle breaks typecheck   | —          | —      | **Closed** 2026-06-04 — `tests/integration/commodity-origin-zk.test.ts`  |
+| R8  | Library maturity mistaken for sovereign pilot readiness | Medium     | High   | README split + ecosystem gates (pen-test, ER-1-08 infra ack)             |
 
 ---
 
