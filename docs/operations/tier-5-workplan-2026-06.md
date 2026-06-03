@@ -23,7 +23,7 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 | Defensibility tier | State                                                 |
 | -----------------: | ----------------------------------------------------- |
 |                1–4 | **Achieved** (2026-06-03 live audit)                  |
-|    **5 technical** | **Not started** — next automatable work **DTF-5.1.1** |
+|    **5 technical** | **In progress** — next automatable work **DTF-5.1.2** |
 |   **5 commercial** | Blocked on GTM / Legal / infra (P5)                   |
 
 **10/10 note:** Algorithmic dimension scores (~8.95 weighted) measure **Tier 2** test depth. **Tier 5** requires named jurisdiction circuits + registry + commercial gate — not the same bar.
@@ -54,27 +54,27 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 ## Master register
 
-| ID        | Title                                             | Sprint | Owner                      | Status    | Class            | Depends     | Blocks            |
-| --------- | ------------------------------------------------- | ------ | -------------------------- | --------- | ---------------- | ----------- | ----------------- |
-| DTF-5.1.1 | Witness builder: WorkProof → typed witness        | S-T5-1 | protocol-engineer          | **ready** | code             | —           | 5.1.2–5.1.4       |
-| DTF-5.1.2 | `gh-gold-origin` Groth16 R1CS + negative tests    | S-T5-1 | crypto-security-engineer   | pending   | code             | 5.1.1       | 5.1.3             |
-| DTF-5.1.3 | NAPI prove/verify for `gh-gold-origin`            | S-T5-1 | frontier-infra-engineer    | pending   | code             | 5.1.2       | 5.1.4             |
-| DTF-5.1.4 | KAT `groth16-gh-gold-origin.kat.json` + CI        | S-T5-1 | quality-evidence-lead      | pending   | code             | 5.1.3       | S-T5-2            |
-| DTF-5.2.1 | `zw-diamond-origin` circuit                       | S-T5-2 | crypto-security-engineer   | pending   | code             | S-T5-1 exit | 5.2.2             |
-| DTF-5.2.2 | Verification package integration test             | S-T5-2 | protocol-engineer          | pending   | code             | 5.2.1       | 5.2.3             |
-| DTF-5.2.3 | KATs for diamond + range circuits                 | S-T5-2 | quality-evidence-lead      | pending   | code             | 5.2.2       | S-T5-3            |
-| DTF-5.3.1 | `gh-cocoa-origin` circuit                         | S-T5-3 | crypto-security-engineer   | pending   | code             | S-T5-2 exit | 5.3.2             |
-| DTF-5.3.2 | Five-jurisdiction integration fixtures (redacted) | S-T5-3 | protocol-engineer          | pending   | code             | 5.3.1       | 5.3.3             |
-| DTF-5.3.3 | Minerals board UAT protocol (evidence template)   | S-T5-3 | quality-evidence-lead      | pending   | ops-docs         | 5.3.2       | S-T5-4            |
-| DTF-5.4.1 | `CircuitRegistry` with semver + deprecation       | S-T5-4 | protocol-architect         | pending   | code             | S-T5-3 exit | 5.4.2–5.4.4       |
-| DTF-5.4.2 | Load test 1000 proofs/min + evidence JSON         | S-T5-4 | frontier-infra-engineer    | pending   | code             | 5.4.1       | 5.4.3             |
-| DTF-5.4.3 | Trust portal circuit ID column                    | S-T5-4 | protocol-architect         | pending   | ops-docs         | 5.4.1       | 5.4.4             |
-| DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID               | S-T5-4 | gtcx-protocols             | pending   | code             | 5.4.1       | **T5 technical**  |
-| DTF-5.5.1 | Jurisdiction pack Zod CI hardening                | S-T5-5 | protocol-engineer          | pending   | code             | —           | 5.5.2             |
-| DTF-5.5.2 | Certified pack pipeline (signed manifest)         | S-T5-5 | Legal + protocol-architect | pending   | external         | 5.5.1       | 5.5.4             |
-| DTF-5.5.3 | Predicate-gated export keys (optional)            | S-T5-5 | crypto-security-engineer   | deferred  | code             | 5.5.1       | —                 |
-| DTF-5.5.4 | Design-partner LOI or regulator letter            | S-T5-5 | GTM                        | pending   | evidence-capture | infra pilot | **T5 commercial** |
-| DTF-5.5.5 | Evidence index entry                              | S-T5-5 | quality-evidence-lead      | pending   | ops-docs         | 5.5.4       | —                 |
+| ID        | Title                                             | Sprint | Owner                      | Status   | Class            | Depends     | Blocks            |
+| --------- | ------------------------------------------------- | ------ | -------------------------- | -------- | ---------------- | ----------- | ----------------- |
+| DTF-5.1.1 | Witness builder: WorkProof → typed witness        | S-T5-1 | protocol-engineer          | **done** | code             | —           | 5.1.2–5.1.4       |
+| DTF-5.1.2 | `gh-gold-origin` Groth16 R1CS + negative tests    | S-T5-1 | crypto-security-engineer   | pending  | code             | 5.1.1       | 5.1.3             |
+| DTF-5.1.3 | NAPI prove/verify for `gh-gold-origin`            | S-T5-1 | frontier-infra-engineer    | pending  | code             | 5.1.2       | 5.1.4             |
+| DTF-5.1.4 | KAT `groth16-gh-gold-origin.kat.json` + CI        | S-T5-1 | quality-evidence-lead      | pending  | code             | 5.1.3       | S-T5-2            |
+| DTF-5.2.1 | `zw-diamond-origin` circuit                       | S-T5-2 | crypto-security-engineer   | pending  | code             | S-T5-1 exit | 5.2.2             |
+| DTF-5.2.2 | Verification package integration test             | S-T5-2 | protocol-engineer          | pending  | code             | 5.2.1       | 5.2.3             |
+| DTF-5.2.3 | KATs for diamond + range circuits                 | S-T5-2 | quality-evidence-lead      | pending  | code             | 5.2.2       | S-T5-3            |
+| DTF-5.3.1 | `gh-cocoa-origin` circuit                         | S-T5-3 | crypto-security-engineer   | pending  | code             | S-T5-2 exit | 5.3.2             |
+| DTF-5.3.2 | Five-jurisdiction integration fixtures (redacted) | S-T5-3 | protocol-engineer          | pending  | code             | 5.3.1       | 5.3.3             |
+| DTF-5.3.3 | Minerals board UAT protocol (evidence template)   | S-T5-3 | quality-evidence-lead      | pending  | ops-docs         | 5.3.2       | S-T5-4            |
+| DTF-5.4.1 | `CircuitRegistry` with semver + deprecation       | S-T5-4 | protocol-architect         | pending  | code             | S-T5-3 exit | 5.4.2–5.4.4       |
+| DTF-5.4.2 | Load test 1000 proofs/min + evidence JSON         | S-T5-4 | frontier-infra-engineer    | pending  | code             | 5.4.1       | 5.4.3             |
+| DTF-5.4.3 | Trust portal circuit ID column                    | S-T5-4 | protocol-architect         | pending  | ops-docs         | 5.4.1       | 5.4.4             |
+| DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID               | S-T5-4 | gtcx-protocols             | pending  | code             | 5.4.1       | **T5 technical**  |
+| DTF-5.5.1 | Jurisdiction pack Zod CI hardening                | S-T5-5 | protocol-engineer          | pending  | code             | —           | 5.5.2             |
+| DTF-5.5.2 | Certified pack pipeline (signed manifest)         | S-T5-5 | Legal + protocol-architect | pending  | external         | 5.5.1       | 5.5.4             |
+| DTF-5.5.3 | Predicate-gated export keys (optional)            | S-T5-5 | crypto-security-engineer   | deferred | code             | 5.5.1       | —                 |
+| DTF-5.5.4 | Design-partner LOI or regulator letter            | S-T5-5 | GTM                        | pending  | evidence-capture | infra pilot | **T5 commercial** |
+| DTF-5.5.5 | Evidence index entry                              | S-T5-5 | quality-evidence-lead      | pending  | ops-docs         | 5.5.4       | —                 |
 
 **Cross-repo:** DTF-5.4.4 owner is `gtcx-protocols` — file inbound handoff when S-T5-4 starts.
 

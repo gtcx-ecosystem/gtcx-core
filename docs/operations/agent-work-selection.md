@@ -57,9 +57,10 @@ Apply tiers in order:
 
 **Status:** Tiers 1–4 achieved; **Tier 5 not started**.
 
-| Next (default)                | Sprint | Owner             |
-| ----------------------------- | ------ | ----------------- |
-| **DTF-5.1.1** Witness builder | S-T5-1 | protocol-engineer |
+| Next (default)                    | Sprint | Owner                    |
+| --------------------------------- | ------ | ------------------------ |
+| **DTF-5.1.1** Witness builder     | S-T5-1 | **done**                 |
+| **DTF-5.1.2** gh-gold-origin R1CS | S-T5-1 | crypto-security-engineer |
 
 Full register: `docs/operations/tier-5-workplan-2026-06.md`.
 
@@ -83,12 +84,12 @@ Full register: `docs/operations/tier-5-workplan-2026-06.md`.
 
 ## Active phase
 
-| Track                  | Status                                          |
-| ---------------------- | ----------------------------------------------- |
-| A — Internal 10/10 S5  | **Done** (22/22 provenance)                     |
-| B — AM-1, AM-2         | **Done**                                        |
-| **T5 — Defensibility** | **DTF-5.1.1 ready** ← `agent:next-work` default |
-| Ceremony / vendors     | CORE-004–009 external                           |
+| Track                  | Status                                    |
+| ---------------------- | ----------------------------------------- |
+| A — Internal 10/10 S5  | **Done** (22/22 provenance)               |
+| B — AM-1, AM-2         | **Done**                                  |
+| **T5 — Defensibility** | **DTF-5.1.2** ← `agent:next-work` default |
+| Ceremony / vendors     | CORE-004–009 external                     |
 
 ## Critical handoffs
 
