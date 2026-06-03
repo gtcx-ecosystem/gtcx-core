@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-01T09:47:59.507Z",
+  "generatedAt": "2026-06-03T13:59:57.541Z",
   "packages": {
     "@gtcx/ai": {
-      "version": "0.3.1",
+      "version": "0.3.4",
       "dir": "packages/ai",
       "typesPath": "packages/ai/dist/index.d.ts",
       "hash": "da061c7d965683248437e47d7b9ed416c5699bbac18c74ec7dd4273bf3af14f5",
@@ -32,7 +32,7 @@
       ]
     },
     "@gtcx/ai-eval": {
-      "version": "0.1.0",
+      "version": "0.1.4",
       "dir": "packages/ai-eval",
       "typesPath": "packages/ai-eval/dist/index.d.ts",
       "hash": "e24a3172b73a5093804cea3bff41de2377d7d0c76807269b9e57d8227392e647",
@@ -55,10 +55,10 @@
       ]
     },
     "@gtcx/api-client": {
-      "version": "0.4.2",
+      "version": "0.4.5",
       "dir": "packages/api-client",
       "typesPath": "packages/api-client/dist/index.d.ts",
-      "hash": "1679ab0741da912b9067cfbadb5b19ffcc3e31992d3388187318b7e5e0099d28",
+      "hash": "e0776e3e14a07c6304cc14ce4a6c8a127afbc89ee4310e4cec5f28461be75677",
       "exports": [
         "AbortError",
         "ApiClientError",
@@ -123,7 +123,7 @@
       ]
     },
     "@gtcx/connectivity": {
-      "version": "0.5.1",
+      "version": "0.5.4",
       "dir": "packages/connectivity",
       "typesPath": "packages/connectivity/dist/index.d.ts",
       "hash": "c1d2382bc488a88519eb902072d2cb68c912eb3b64e9ebe45d9b0601ff9e5dc2",
@@ -167,16 +167,20 @@
       ]
     },
     "@gtcx/crypto": {
-      "version": "3.1.1",
+      "version": "3.1.4",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "7af79a063f968a8ceba23da9b54f719f5b5532f9b0228eeacb5169fc87419760",
+      "hash": "59ee555e4a0716c0517b0f4862e97512b2535a28ef57b04f1ab18a5a16d25e87",
       "exports": [
         "Backend",
         "batchVerify",
         "batchVerifyProofs",
         "buildMerkleTree",
         "combineHashes",
+        "CommodityOriginProof",
+        "CommodityOriginProofInput",
+        "CommodityRangeProof",
+        "CommodityRangeProofInput",
         "compressPublicKey",
         "computeRootFromProof",
         "constantTimeEqual",
@@ -188,7 +192,11 @@
         "DerivedKey",
         "deriveKeyPbkdf2",
         "derivePublicKey",
+        "DiamondOriginProof",
+        "DiamondOriginProofInput",
         "doubleHash256",
+        "generateCommodityOriginKeys",
+        "generateDiamondOriginKeys",
         "generateKeyId",
         "generateKeyPair",
         "generateMerkleProof",
@@ -213,6 +221,9 @@
         "MerkleTree",
         "NativeZkpEngine",
         "Pbkdf2Params",
+        "proveCommodityOrigin",
+        "proveCommodityRange",
+        "proveDiamondOrigin",
         "sanitizeBatchVerifyOutput",
         "sanitizeCombineHashesOutput",
         "sanitizeDerivePublicKeyOutput",
@@ -248,6 +259,9 @@
         "VerificationResult",
         "verify",
         "verifyCommitment",
+        "verifyCommodityOrigin",
+        "verifyCommodityRange",
+        "verifyDiamondOrigin",
         "verifyHash",
         "verifyHashValue",
         "verifyInclusion",
@@ -264,24 +278,29 @@
       ]
     },
     "@gtcx/crypto-native": {
-      "version": "0.4.1",
+      "version": "0.4.4",
       "dir": "packages/crypto-native",
       "typesPath": "packages/crypto-native/dist/index.d.ts",
-      "hash": "f37bcc63406a56cd405777bc372ea9fe51486b93820f2b79c3a46cea90a31334",
+      "hash": "cf00a3b01a29be66e3692ba7907b16534252695df7c0362e3cc021cfce8b0f85",
       "exports": [
         "assertHex",
         "blake3Hash",
         "bulletproofsProveAmountRange",
+        "bulletproofsProveCommodityRange",
         "bulletproofsVerifyAmountRange",
+        "bulletproofsVerifyCommodityRange",
         "deriveChildKey",
         "derivePurposeKey",
         "generateKeyPair",
         "groth16GenerateKeys",
+        "groth16ProveCommodityOrigin",
         "groth16ProveGciThreshold",
         "groth16VerifyProof",
         "isHex",
         "nativeBindings",
         "NativeBulletproofsBundle",
+        "NativeBulletproofsCommodityRangeBundle",
+        "NativeByteArray",
         "NativeCryptoBindings",
         "NativeGroth16Keys",
         "NativeGroth16ProofBundle",
@@ -297,7 +316,7 @@
       ]
     },
     "@gtcx/domain": {
-      "version": "3.1.1",
+      "version": "3.1.4",
       "dir": "packages/domain",
       "typesPath": "packages/domain/dist/index.d.ts",
       "hash": "a2702634c3287e2a7e2c4aae13ac31f5c2be4f4bce8e41cb952fdf7f113c0f9f",
@@ -462,8 +481,39 @@
         "WorkflowStep"
       ]
     },
+    "@gtcx/eap": {
+      "version": "0.1.0",
+      "dir": "packages/eap",
+      "typesPath": "packages/eap/dist/index.d.ts",
+      "hash": "c6c56c78e78459f09c0490c518182cb4087e75818c36fef7d664e8ee29232727",
+      "exports": [
+        "AuthKeysBundle",
+        "AwsSecretsManagerWriter",
+        "AwsSecretsManagerWriterOptions",
+        "buildIssuanceEvidence",
+        "ClientCredentialRecord",
+        "createEapAdminServer",
+        "createEapAdminService",
+        "EapAdminServerOptions",
+        "EapAdminService",
+        "EapAdminServiceOptions",
+        "EapEnvironment",
+        "EapIssuanceEvidence",
+        "EapTier",
+        "evidenceFilename",
+        "fingerprintSecret",
+        "generateApiKeySecret",
+        "IssueApiKeyInput",
+        "IssueApiKeyResult",
+        "mergeApiKeyIntoBundle",
+        "parseAuthKeysBundle",
+        "rebuildIntelligenceBundleFromEapSecrets",
+        "startEapAdminServer",
+        "syncApiKeyToIntelligenceBundle"
+      ]
+    },
     "@gtcx/events": {
-      "version": "1.0.0",
+      "version": "1.0.3",
       "dir": "packages/events",
       "typesPath": "packages/events/dist/index.d.ts",
       "hash": "b44e65371ad10effe6320b4615dc1cbb413fb0bc5dfb0203435533c5bfe56f06",
@@ -499,7 +549,7 @@
       ]
     },
     "@gtcx/identity": {
-      "version": "3.1.1",
+      "version": "3.1.4",
       "dir": "packages/identity",
       "typesPath": "packages/identity/dist/index.d.ts",
       "hash": "5104d0fe344f7e3d0f783ccc0eb764a3340b25086055373f8b96b788d5710cab",
@@ -544,14 +594,14 @@
       ]
     },
     "@gtcx/logging": {
-      "version": "0.3.0",
+      "version": "0.3.3",
       "dir": "packages/logging",
       "typesPath": "packages/logging/dist/index.d.ts",
       "hash": "e528d580f75ec1d7db792709420638bb5fb8c24fd9dbcae5c9d44f2208a1df0b",
       "exports": ["createLogger", "LogEntry", "Logger", "LoggerConfig", "LogLevel"]
     },
     "@gtcx/network": {
-      "version": "0.2.1",
+      "version": "0.2.4",
       "dir": "packages/network",
       "typesPath": "packages/network/dist/index.d.ts",
       "hash": "985fe8f602edd635c65f20e5d793c3383e616aa1237e867e1c35323c15e20df4",
@@ -588,7 +638,7 @@
       ]
     },
     "@gtcx/resilience": {
-      "version": "0.2.0",
+      "version": "0.2.3",
       "dir": "packages/resilience",
       "typesPath": "packages/resilience/dist/index.d.ts",
       "hash": "cec87e0c14de482213536a5b6a8afbbadf1bb885aeb7c04a2a88eaefe9b892f9",
@@ -615,17 +665,17 @@
       ]
     },
     "@gtcx/runtime": {
-      "version": "0.2.2",
+      "version": "0.2.5",
       "dir": "packages/runtime",
       "typesPath": "packages/runtime/dist/index.d.ts",
       "hash": "92b430bcab37a83c2c7532bd63d9f73bed2c602f95366ad5e3b5948f103be771",
       "exports": ["createRuntime", "DeploymentProfile", "Runtime", "RuntimeOptions"]
     },
     "@gtcx/schemas": {
-      "version": "3.1.1",
+      "version": "3.1.4",
       "dir": "packages/schemas",
       "typesPath": "packages/schemas/dist/index.d.ts",
-      "hash": "90631f9fcc5e6eba2a923dac6fba763736d1456390014ac5400a3deceae2479b",
+      "hash": "07836449c04513e12f41a9c8454e272860e126e45820082715d1560f6d801d24",
       "exports": [
         "AgenticProvenanceSchema",
         "Control",
@@ -650,7 +700,7 @@
       ]
     },
     "@gtcx/security": {
-      "version": "3.1.1",
+      "version": "3.1.4",
       "dir": "packages/security",
       "typesPath": "packages/security/dist/index.d.ts",
       "hash": "f015e1fdcae0175ed9ec1583cf016d8a8fadc21bd1b7d44b5cc5208d278dff92",
@@ -805,7 +855,7 @@
       ]
     },
     "@gtcx/services": {
-      "version": "1.0.2",
+      "version": "1.0.5",
       "dir": "packages/services",
       "typesPath": "packages/services/dist/index.d.ts",
       "hash": "147c799004bc1e20633a2086eb63d79a75b216159cf78da2eb43c90b7586ed92",
@@ -833,7 +883,7 @@
       ]
     },
     "@gtcx/sync": {
-      "version": "0.3.0",
+      "version": "0.3.3",
       "dir": "packages/sync",
       "typesPath": "packages/sync/dist/index.d.ts",
       "hash": "884d4ac80c7d4530c16584a2a939a82b565e577d353757390a79678222233630",
@@ -854,7 +904,7 @@
       ]
     },
     "@gtcx/telemetry": {
-      "version": "0.2.0",
+      "version": "0.2.3",
       "dir": "packages/telemetry",
       "typesPath": "packages/telemetry/dist/index.d.ts",
       "hash": "a94dd6f7bc9f6875c0911dbdfed54ba5c8660816d59832740efd05da0e19db4e",
@@ -880,7 +930,7 @@
       ]
     },
     "@gtcx/types": {
-      "version": "3.1.1",
+      "version": "3.1.4",
       "dir": "packages/types",
       "typesPath": "packages/types/dist/index.d.ts",
       "hash": "02c3b8a8815df1d647ab97e086f63739e45200f8822b5bd884e70902bd0e1d2e",
@@ -1101,7 +1151,7 @@
       ]
     },
     "@gtcx/utils": {
-      "version": "0.2.2",
+      "version": "0.2.5",
       "dir": "packages/utils",
       "typesPath": "packages/utils/dist/index.d.ts",
       "hash": "90223327e469a66fb6e3178493b007d6c3e33354ddf55b317b958ee0ae13ce6d",
@@ -1119,10 +1169,10 @@
       ]
     },
     "@gtcx/verification": {
-      "version": "3.1.1",
+      "version": "3.1.4",
       "dir": "packages/verification",
       "typesPath": "packages/verification/dist/index.d.ts",
-      "hash": "88f3695a4d5521ddb18211e0ac3b9f5e79892ba4a57ac8483d5c57073478ff1c",
+      "hash": "d9012ce107e414b8a7f7366a7d4269046106532675c313acf1138813199cbb2b",
       "exports": [
         "AIMetadata",
         "AIMetadataSchema",
@@ -1333,7 +1383,7 @@
       ]
     },
     "@gtcx/workproof": {
-      "version": "1.0.1",
+      "version": "1.0.4",
       "dir": "packages/workproof",
       "typesPath": "packages/workproof/dist/index.d.ts",
       "hash": "8711032f433390050585b9a98da4f656e0ef0688912a5266fe3599bed4a06bc5",
@@ -1460,6 +1510,30 @@
         "WorkProofType",
         "WorkProofTypeSchema",
         "WorkProofVerificationResult"
+      ]
+    },
+    "@gtcx/zkp-kat-vectors": {
+      "version": "1.0.0",
+      "dir": "packages/zkp-kat-vectors",
+      "typesPath": "packages/zkp-kat-vectors/dist/index.d.ts",
+      "hash": "10926f54e5570a4279d65e4f0ad7fb354c34003bfc812aa3a54bbc5c242f7a75",
+      "exports": [
+        "bulletproofsAmountRange",
+        "bulletproofsCommodityRange",
+        "BulletproofsKatArtifact",
+        "BulletproofsKatPublicInputs",
+        "BulletproofsKatWitness",
+        "groth16AssetOwnership",
+        "groth16CommodityOrigin",
+        "groth16GciThreshold",
+        "Groth16KatArtifact",
+        "Groth16KatPublicInputs",
+        "Groth16KatWitness",
+        "groth16LocationRegion",
+        "KatArtifact",
+        "katArtifacts",
+        "KatCircuitName",
+        "katCircuitNames"
       ]
     }
   }
