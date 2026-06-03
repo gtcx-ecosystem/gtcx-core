@@ -3,7 +3,7 @@
 Shared foundation for the GTCX ecosystem. Contains cryptographic primitives (Rust + TypeScript), type definitions, Zod schemas, domain models, verification infrastructure, and WorkProof/TradeCV attestation schemas consumed by all other repos. This is the lowest-level dependency in the stack — it depends on nothing else.
 
 **Trust portal:** [gtcx-protocol.gitbook.io/gtcx-open-source](https://gtcx-protocol.gitbook.io/gtcx-open-source/governance/trust-portal) — see [hosting runbook](./docs/operations/trust-portal-hosting.md)
-**Last reviewed:** 2026-06-01
+**Last reviewed:** 2026-06-04
 
 ## Engineering Standards
 
@@ -18,7 +18,11 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 ## Current State
 
-**Composite readiness: 9.5/10** as of [2026-05-21](./docs/audit/internal-completion-audit-2026-05-21.md). The codebase is in a hardened, code-addressable state with active quality gates:
+Two scores apply — do not conflate them ([full-audit 2026-06-04](./docs/audit/full-audit-2026-06-04.md)).
+
+### Library readiness (npm / engineering 10/10)
+
+**Composite: 9.5/10** as of [2026-05-21](./docs/audit/internal-completion-audit-2026-05-21.md). The monorepo is in a hardened, code-addressable state with active quality gates:
 
 - trust-path defects in signing, verification, token handling, and offline lockout recovery have been remediated
 - offline replay ordering uses logical sequence instead of wall-clock time
@@ -28,14 +32,30 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 - HSM key storage traits implemented for PKCS11 (SoftHSM, AWS CloudHSM) and AWS KMS Cloud Custody
 - 500,000+ fuzz iterations across 6 cargo-fuzz targets, **zero crashes, zero panics, zero ASAN violations** ([evidence](./docs/audit/fuzz-campaign-evidence-2026-05-21.md))
 - `cargo deny` and `cargo audit` run in CI; known upstream advisories in the `ark-*` ecosystem are tracked in `rust/.cargo/audit.toml`
-- **22** public `@gtcx/*` packages (21 core + `@gtcx/ai-eval`); **21/21** core on npm with **Sigstore provenance** on the **3.1.4 train** (2026-06-01) — verify: `pnpm provenance:check-npm:strict`; publish `@gtcx/ai-eval@0.1.4` via release workflow
-- SLSA: Source L2 enforced in CI; npm registry provenance via `release.yml` + public `gtcx-core` source repo — see [trust portal](./docs/governance/trust-portal.md#published-versions)
+- **24** TypeScript workspace packages under `packages/` (see [package specs](./docs/specs/packages/README.md)); **22** published to npm on the **3.1.4 train** — verify: `pnpm provenance:check-npm:strict`
+- SLSA: Source L2 enforced in CI; npm registry provenance via `release.yml` — see [trust portal](./docs/governance/trust-portal.md#published-versions)
+- Root `pnpm typecheck` / `pnpm build` green (turbo graph; FA-P0-1, 2026-06-04)
+
+### Defensibility Tier 5 (DTF-001 — jurisdiction ZKP moat)
+
+**Technical Tier 5: ~50%** — in progress (S-T5-3 next). Tiers 1–4 are achieved; Tier 5 requires named jurisdiction **circuit profiles** on one R1CS, KAT portability, verification bundle integration, registry, and commercial gate — not the same bar as library coverage.
+
+| Track                                   | Status        | Canonical doc                                                   |
+| --------------------------------------- | ------------- | --------------------------------------------------------------- |
+| S-T5-1 gh-gold profile + KAT            | **done**      | [tier-5 workplan](./docs/operations/tier-5-workplan-2026-06.md) |
+| S-T5-2 zw-diamond + verification + KATs | **done**      | [execution roadmap](./docs/audit/execution-roadmap.md)          |
+| Sovereign pilot / bank-grade            | **not ready** | Ecosystem gates below                                           |
+
+**Moat path (in-repo):** WorkProof witness → `@gtcx/crypto` profile prove → `@gtcx/verification` bundle (`commodity-origin-zk`). Cross-package test: [`tests/integration/commodity-origin-zk.test.ts`](./tests/integration/commodity-origin-zk.test.ts).
 
 ### Active execution program
 
-[Engagement Readiness Sprint Roadmap (2026-05-22)](./docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — 4-sprint plan driven by imminent sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DRC). Closes the customer-visible readiness gap.
+- **FA-S1 / DTF Tier 5:** [execution-roadmap.md](./docs/audit/execution-roadmap.md) (reconciled with [full-audit-2026-06-04](./docs/audit/full-audit-2026-06-04.md))
+- **Engagement readiness:** [sprint roadmap 2026-05-22](./docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DRC)
 
 ### Remaining blockers before sovereign pilot / production release
+
+**Library maturity alone does not clear a sovereign pilot.** The items below are ecosystem or human gates:
 
 **External clearance (XC) — owned with [gtcx-infrastructure GTM](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/README.md), not in this repo alone:**
 
@@ -188,7 +208,10 @@ core/
 | [Security Framework](./docs/security/security-framework.md)          | Security architecture and controls                |
 | [Quality Runbook](./docs/devops/runbooks/quality-runbook.md)         | CI triage order and gate sequence                 |
 | [Release Checklist](./docs/devops/release-mgmt/release-checklist.md) | Release gate and evidence requirements            |
-| [Roadmap](./docs/agile/roadmap/roadmap.md)                           | Delivery roadmap and sprint status                |
+| [Roadmap](./docs/roadmap.md)                                         | Master roadmap + active FA/DTF execution          |
+| [Tier 5 workplan](./docs/operations/tier-5-workplan-2026-06.md)      | DTF-5.x register (Protocol 22)                    |
+| [Execution roadmap](./docs/audit/execution-roadmap.md)               | FA-S1–S6 sprint overlay                           |
+| [Agile roadmap](./docs/agile/roadmap/roadmap.md)                     | Delivery phases 0–7                               |
 
 ## Dependencies
 

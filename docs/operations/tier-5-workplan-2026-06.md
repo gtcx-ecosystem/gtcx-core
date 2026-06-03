@@ -20,11 +20,11 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 ## Status today
 
-| Defensibility tier | State                                                                   |
-| -----------------: | ----------------------------------------------------------------------- |
-|                1–4 | **Achieved** (2026-06-03 live audit)                                    |
-|    **5 technical** | **~45%** — S-T5-1 **done**; S-T5-2 partial; **P0:** turbo cycle (FA-S1) |
-|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                                     |
+| Defensibility tier | State                                                                            |
+| -----------------: | -------------------------------------------------------------------------------- |
+|                1–4 | **Achieved** (2026-06-03 live audit)                                             |
+|    **5 technical** | **~45%** — S-T5-1 **done**; S-T5-2 partial; FA-P0-1 **done**; FA-P0-2/3 in FA-S1 |
+|   **5 commercial** | Blocked on GTM / Legal / infra (P5)                                              |
 
 **10/10 note:** Algorithmic dimension scores (~8.95 weighted) measure **Tier 2** test depth. **Tier 5** requires named jurisdiction circuits + registry + commercial gate — not the same bar.
 
@@ -62,7 +62,7 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 | ---------- | ------------------ | ----- | -------------------------------------------------------------------- | ------------------------------- |
 | **FA-S1**  | 2026-06-04 → 06-10 | P0    | **Build graph + doc truth** (full-audit)                             | Root `typecheck`/`build` green  |
 | **S-T5-1** | 2026-06-03 → 06-14 | P1    | Witness + commodity-origin **`gh-gold-origin` profile** + NAPI + KAT | **done** (DTF-5.1.4)            |
-| **S-T5-2** | 2026-06-11 → 06-21 | P2    | `zw-diamond-origin` + verification + diamond/range KAT               | DTF-5.2.3                       |
+| **S-T5-2** | 2026-06-11 → 06-21 | P2    | `zw-diamond-origin` + verification + diamond/range KAT               | **done** (DTF-5.2.3)            |
 | **S-T5-3** | 2026-06-29 → 07-12 | P3    | `gh-cocoa-origin` + jurisdiction fixtures                            | DTF-5.3.3 script                |
 | **S-T5-4** | 2026-07-13 → 07-26 | P4    | Circuit registry + performance                                       | **Tier 5 technical** candidate  |
 | **S-T5-5** | 2026-07-27 → 09-30 | P5    | Certified packs + protocols + pilot                                  | **Tier 5 commercial** (GTM-led) |
@@ -74,14 +74,15 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 | ID        | Title                                                                 | Sprint | Owner                      | Status   | Class            | Depends     | Blocks            |
 | --------- | --------------------------------------------------------------------- | ------ | -------------------------- | -------- | ---------------- | ----------- | ----------------- |
 | FA-P0-1   | Break workproof ↔ verification turbo cycle (root `typecheck`)         | FA-S1  | frontier-infra-engineer    | **done** | code             | —           | all DTF-5.2.3+    |
-| FA-P0-2   | README: library readiness vs DTF Tier 5 split                         | FA-S1  | protocol-architect         | pending  | ops-docs         | —           | —                 |
+| FA-P0-2   | README: library readiness vs DTF Tier 5 split                         | FA-S1  | protocol-architect         | **done** | ops-docs         | —           | —                 |
+| FA-P0-3   | Reconcile package count in specs README                               | FA-S1  | protocol-architect         | **done** | ops-docs         | —           | —                 |
 | DTF-5.1.1 | Witness builder: WorkProof → typed witness                            | S-T5-1 | protocol-engineer          | **done** | code             | —           | 5.1.2–5.1.4       |
 | DTF-5.1.2 | Commodity-origin R1CS + **`gh-gold-origin` profile** + negative tests | S-T5-1 | crypto-security-engineer   | **done** | code             | 5.1.1       | 5.1.3             |
 | DTF-5.1.3 | NAPI prove/verify (profile-aware, same R1CS)                          | S-T5-1 | frontier-infra-engineer    | **done** | code             | 5.1.2       | 5.1.4             |
 | DTF-5.1.4 | KAT `groth16-gh-gold-origin.kat.json` + CI                            | S-T5-1 | quality-evidence-lead      | **done** | code             | 5.1.3       | S-T5-2            |
 | DTF-5.2.1 | **`zw-diamond-origin` profile** (same R1CS)                           | S-T5-2 | crypto-security-engineer   | **done** | code             | S-T5-1 exit | 5.2.2             |
 | DTF-5.2.2 | Verification package integration test                                 | S-T5-2 | protocol-engineer          | **done** | code             | 5.2.1       | 5.2.3             |
-| DTF-5.2.3 | KATs for diamond + range circuits                                     | S-T5-2 | quality-evidence-lead      | pending  | code             | 5.2.2       | S-T5-3            |
+| DTF-5.2.3 | KATs for diamond + range circuits                                     | S-T5-2 | quality-evidence-lead      | **done** | code             | 5.2.2       | S-T5-3            |
 | DTF-5.3.1 | **`gh-cocoa-origin` profile** (same R1CS)                             | S-T5-3 | crypto-security-engineer   | pending  | code             | S-T5-2 exit | 5.3.2             |
 | DTF-5.3.2 | Five-jurisdiction integration fixtures (redacted)                     | S-T5-3 | protocol-engineer          | pending  | code             | 5.3.1       | 5.3.3             |
 | DTF-5.3.3 | Minerals board UAT protocol (evidence template)                       | S-T5-3 | quality-evidence-lead      | pending  | ops-docs         | 5.3.2       | S-T5-4            |
@@ -173,7 +174,7 @@ pnpm test:kat-cross-impl   # when KAT touched
 
 ## Full-audit sprint overlay (2026-06-04)
 
-Reconciles [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) with DTF register. **FA-S1 blocks Protocol 22** until `FA-P0-1` is **done**.
+Reconciles [full-audit-2026-06-04.md](../audit/full-audit-2026-06-04.md) with DTF register. **FA-S1** FA-P0-1–3 **done**; S-T5-2 **done**.
 
 | FA sprint | Maps to DTF           | Theme                                           |
 | --------- | --------------------- | ----------------------------------------------- |

@@ -14,35 +14,40 @@ review_cycle: 'on-change'
 
 # Package Specifications — gtcx-core
 
-Per-package specifications for all 22 public TypeScript packages, 4 shared config workspace packages, and 6 Rust crates in `gtcx-core`.
+Per-package specifications for **24** TypeScript workspace packages under `packages/` (matches `pnpm architecture:check`), **4** shared config workspace packages, and **6** Rust crates in `gtcx-core`.
+
+**Published to npm:** 22 packages on the current provenance train (`pnpm provenance:check-npm:strict`). Workspace-only: `@gtcx/ai-eval` (release tooling), `@gtcx/eap` (EAP CLI — see `packages/eap/README.md`).
 
 ---
 
-## TypeScript Packages (22)
+## TypeScript Packages (24)
 
-| Package               | Spec               | Description                                                                                             |
-| --------------------- | ------------------ | ------------------------------------------------------------------------------------------------------- |
-| `@gtcx/types`         | `types.md`         | Canonical TypeScript type definitions                                                                   |
-| `@gtcx/schemas`       | `schemas.md`       | Compliance framework schemas                                                                            |
-| `@gtcx/crypto`        | `crypto.md`        | Cryptographic primitives — signing, hashing, proofs                                                     |
-| `@gtcx/crypto-native` | `crypto-native.md` | Native NAPI-RS bindings loader                                                                          |
-| `@gtcx/domain`        | `domain.md`        | Domain types, schemas, events, metrics, versioning                                                      |
-| `@gtcx/identity`      | `identity.md`      | DID creation, resolution, credential lifecycle                                                          |
-| `@gtcx/security`      | `security.md`      | Validation, auth, offline storage, audit logging                                                        |
-| `@gtcx/verification`  | `verification.md`  | Certificates, QR codes, proof bundles                                                                   |
-| `@gtcx/workproof`     | `workproof.md`     | W3C VC attestation schemas                                                                              |
-| `@gtcx/events`        | `events.md`        | Typed event bus with offline buffering                                                                  |
-| `@gtcx/services`      | `services.md`      | Registration, trading, compliance business services                                                     |
-| `@gtcx/sync`          | `sync.md`          | Offline-first sync engine with conflict resolution                                                      |
-| `@gtcx/network`       | `network.md`       | P2P networking primitives for validator mesh                                                            |
-| `@gtcx/connectivity`  | `connectivity.md`  | Network connectivity detection and profiles                                                             |
-| `@gtcx/api-client`    | `api-client.md`    | Resilient HTTP client with retry and mTLS                                                               |
-| `@gtcx/logging`       | `logging.md`       | Structured logging utilities                                                                            |
-| `@gtcx/ai`            | `ai.md`            | AI integration hooks and tracing stubs                                                                  |
-| `@gtcx/resilience`    | `resilience.md`    | Resilience primitives: circuit breaker, adaptive retry, timeout, bulkhead                               |
-| `@gtcx/telemetry`     | `telemetry.md`     | Unified OpenTelemetry-compatible instrumentation: metrics, traces, logs                                 |
-| `@gtcx/runtime`       | `runtime.md`       | Batteries-included runtime substrate aggregating connectivity/resilience/telemetry/api-client (ADR-014) |
-| `@gtcx/utils`         | `utils.md`         | Common utilities — minimal logic                                                                        |
+| Package                 | Spec                                                      | Description                                                                                             |
+| ----------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `@gtcx/types`           | `types.md`                                                | Canonical TypeScript type definitions                                                                   |
+| `@gtcx/schemas`         | `schemas.md`                                              | Compliance framework schemas                                                                            |
+| `@gtcx/crypto`          | `crypto.md`                                               | Cryptographic primitives — signing, hashing, proofs                                                     |
+| `@gtcx/crypto-native`   | `crypto-native.md`                                        | Native NAPI-RS bindings loader                                                                          |
+| `@gtcx/domain`          | `domain.md`                                               | Domain types, schemas, events, metrics, versioning                                                      |
+| `@gtcx/identity`        | `identity.md`                                             | DID creation, resolution, credential lifecycle                                                          |
+| `@gtcx/security`        | `security.md`                                             | Validation, auth, offline storage, audit logging                                                        |
+| `@gtcx/verification`    | `verification.md`                                         | Certificates, QR codes, proof bundles                                                                   |
+| `@gtcx/workproof`       | `workproof.md`                                            | W3C VC attestation schemas                                                                              |
+| `@gtcx/events`          | `events.md`                                               | Typed event bus with offline buffering                                                                  |
+| `@gtcx/services`        | `services.md`                                             | Registration, trading, compliance business services                                                     |
+| `@gtcx/sync`            | `sync.md`                                                 | Offline-first sync engine with conflict resolution                                                      |
+| `@gtcx/network`         | `network.md`                                              | P2P networking primitives for validator mesh                                                            |
+| `@gtcx/connectivity`    | `connectivity.md`                                         | Network connectivity detection and profiles                                                             |
+| `@gtcx/api-client`      | `api-client.md`                                           | Resilient HTTP client with retry and mTLS                                                               |
+| `@gtcx/logging`         | `logging.md`                                              | Structured logging utilities                                                                            |
+| `@gtcx/ai`              | `ai.md`                                                   | AI integration hooks and tracing stubs                                                                  |
+| `@gtcx/resilience`      | `resilience.md`                                           | Resilience primitives: circuit breaker, adaptive retry, timeout, bulkhead                               |
+| `@gtcx/telemetry`       | `telemetry.md`                                            | Unified OpenTelemetry-compatible instrumentation: metrics, traces, logs                                 |
+| `@gtcx/runtime`         | `runtime.md`                                              | Batteries-included runtime substrate aggregating connectivity/resilience/telemetry/api-client (ADR-014) |
+| `@gtcx/utils`           | `utils.md`                                                | Common utilities — minimal logic                                                                        |
+| `@gtcx/zkp-kat-vectors` | `zkp-circuit-profiles.md`                                 | KAT vectors + jurisdiction circuit profile contracts (DTF Tier 5)                                       |
+| `@gtcx/eap`             | —                                                         | Enterprise Auth Pack CLI (workspace-only; `packages/eap/README.md`)                                     |
+| `@gtcx/ai-eval`         | [ai-evaluation-pipeline.md](../ai-evaluation-pipeline.md) | Release-attached AI scorecard pipeline (workspace tooling)                                              |
 
 ## Shared Config Workspace Packages (4)
 
