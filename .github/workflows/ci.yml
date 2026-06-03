@@ -120,6 +120,12 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Protocol 22 next-work smoke
+        run: pnpm run agent:next-work
+
+      - name: Protocol 22 adoption check
+        run: pnpm run agent:work-selection:check
+
       - name: API surface baseline check
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then

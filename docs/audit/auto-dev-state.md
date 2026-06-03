@@ -34,6 +34,10 @@ review_cycle: 'quarterly'
 - **Last command:** keystore.rs clippy cleanup + audit doc sync
 - **Phase when saved:** Sprint 2 complete (5/5), Sprint 3 complete (4/5; SoftHSMv2 deferred). gtcx-agent in org. Branch protection on main. ANTHROPIC_API_KEY pending.
 
+## Next work (computed)
+
+Run `pnpm run agent:next-work` for authoritative story selection from `docs/audit/moat-dimension-roadmap-10-10.md`. Refresh this section after each completed unit.
+
 ## Latest Scores
 
 | #   | Dimension             | Score | Standards Met                                                                                                                                               | Top Blocker                                                                                                                                  |

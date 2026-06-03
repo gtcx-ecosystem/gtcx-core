@@ -67,6 +67,7 @@
     "agent:sync": "node scripts/agent-sync/sync.mjs",
     "agent:check": "node scripts/agent-sync/sync.mjs --check",
     "agent:next-work": "node scripts/agent-next-work.mjs",
+    "agent:work-selection:check": "node scripts/check-agent-work-selection.mjs",
     "test:kat-cross-impl": "cargo run --manifest-path rust/gtcx-zkp/Cargo.toml --bin kat-cross-impl-verify -- --all",
     "agent:coordination:check": "node scripts/check-coordination-hygiene.mjs"
   },
