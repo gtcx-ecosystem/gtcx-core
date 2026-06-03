@@ -178,6 +178,9 @@ jobs:
             docs/quality/10-10-remediation-tracker.md
 
       - name: Setup Rust
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: '1.91'
@@ -190,10 +193,16 @@ jobs:
         working-directory: rust
 
       - name: Rust clippy
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         run: cargo clippy --workspace --all-targets -- -D warnings
         working-directory: rust
 
       - name: Rust tests
+        if: >-
+          github.event_name != 'workflow_dispatch' ||
+          inputs.provenance_republish != true
         run: cargo test --workspace --lib
         working-directory: rust
 
