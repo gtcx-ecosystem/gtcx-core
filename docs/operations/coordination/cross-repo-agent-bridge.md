@@ -69,13 +69,13 @@ flowchart TB
   C2 --> D3
 ```
 
-| Priority | Work ID       | Owner               | Next action                                                                              | Unblocks                   |
-| -------- | ------------- | ------------------- | ---------------------------------------------------------------------------------------- | -------------------------- |
-| **P1**   | EAP-SYNC      | gtcx-core           | Run `EAP_ENVIRONMENT=staging pnpm eap:sync-bundle` → confirm secret written → ping infra | INT-S3-08 auth-gated smoke |
-| **P1**   | PROVENANCE    | gtcx-infrastructure | Investigate OIDC token exchange for `--provenance` publish                               | Build L3 SLSA claim        |
-| **P1**   | VENDORS       | baseline-os         | Select pen-test vendor; source Z3/Coq consultant; source side-channel lab                | D8, D9, D7 M7.5 completion |
-| **P2**   | KAT-CONSUME   | gtcx-protocols      | Add `@gtcx/zkp-kat-vectors` devDep + one integration test                                | M6.5 downstream validation |
-| **P2**   | D3-TRANSCRIPT | gtcx-core           | Implement `trusted-setup-verify` feature after ceremony                                  | D3 9.5 → 10                |
+| Priority | Work ID       | Owner               | Next action                                                               | Unblocks                    |
+| -------- | ------------- | ------------------- | ------------------------------------------------------------------------- | --------------------------- |
+| **P1**   | EAP-SYNC      | gtcx-core           | **done** 2026-06-03 — bundle synced; infra ESO refresh acked              | — (XR-202/INT-S3-08 closed) |
+| **P1**   | PROVENANCE    | gtcx-infrastructure | Investigate OIDC token exchange for `--provenance` publish                | Build L3 SLSA claim         |
+| **P1**   | VENDORS       | baseline-os         | Select pen-test vendor; source Z3/Coq consultant; source side-channel lab | D8, D9, D7 M7.5 completion  |
+| **P2**   | KAT-CONSUME   | gtcx-protocols      | Add `@gtcx/zkp-kat-vectors` devDep + one integration test                 | M6.5 downstream validation  |
+| **P2**   | D3-TRANSCRIPT | gtcx-core           | Implement `trusted-setup-verify` feature after ceremony                   | D3 9.5 → 10                 |
 
 Full backlog: [`cross-repo-sprint-workplan-2026-06.md`](cross-repo-sprint-workplan-2026-06.md)
 
@@ -86,8 +86,8 @@ Full backlog: [`cross-repo-sprint-workplan-2026-06.md`](cross-repo-sprint-workpl
 | Repo                    | Coordination path               | Assessment                                                |
 | ----------------------- | ------------------------------- | --------------------------------------------------------- |
 | **gtcx-protocols**      | `docs/operations/coordination/` | Active hub — operator seed shipped; INF-86 schema ready   |
-| **gtcx-infrastructure** | `docs/operations/coordination/` | Track A done; Track B + INF-86 open; EAP sync pending     |
-| **gtcx-intelligence**   | `docs/operations/coordination/` | Blocked on infra auth gate; bridge hub for ecosystem      |
+| **gtcx-infrastructure** | `docs/operations/coordination/` | Track A/B done; INF-86 + platforms rollout open           |
+| **gtcx-intelligence**   | `docs/operations/coordination/` | **Closed** 2026-06-03 — XR-202/203 done; witness only     |
 | **gtcx-platforms**      | `docs/operations/coordination/` | P0 ECR image pushes; INF-86 consumer after pilot          |
 | **gtcx-core**           | `docs/operations/coordination/` | **New** — upstream obligations only; no internal blockers |
 | **baseline-os**         | `workstream/coordination/`      | Canonical blockers index + vendor tracking                |
@@ -100,7 +100,7 @@ Full backlog: [`cross-repo-sprint-workplan-2026-06.md`](cross-repo-sprint-workpl
 
 - `pnpm eap:sync-bundle` rebuilds `gtcx/intelligence/{env}/auth-keys` from EAP client secrets
 - After gtcx-core confirms write, infra force-refreshes ESO → K8s secret update
-- **Impact:** Unblocks INT-S3-08 auth-gated smoke
+- **Impact:** Fed XR-201/202 chain — **INT-S3-08 closed** 2026-06-03 (intelligence evidence committed)
 
 ### SLSA provenance — **open, infra-owned**
 

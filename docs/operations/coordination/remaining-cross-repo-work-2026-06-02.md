@@ -255,7 +255,7 @@ D3 Trusted-Setup Reduction is at 9.5/10. M3.2 requires CI test that re-derives v
 CORE-001 (EAP bundle sync)
   → gtcx-infrastructure ESO refresh
   → XR-201 intelligence auth gate
-  → INT-S3-08 re-smoke
+  → INT-S3-08 / XR-202 **done** (2026-06-03)
 
 CORE-005–008 (vendors / regulator / email)
   → Human actions
