@@ -28,7 +28,7 @@ Living register of **open** cross-repo items originating from or affecting `gtcx
 | ------------------------- | ----- | --------------------------------------------------------------------------- |
 | **P1 done**               | 5     | EAP bundle sync; D4/D5/D10; M10.2; agent:next-work CI — executed 2026-06-03 |
 | **P1 blocked (external)** | 4     | Track — vendor selection, regulator, email gate                             |
-| **P2 open (downstream)**  | 2     | Await protocols consumption; implement D3 after ceremony                    |
+| **P2 open (downstream)**  | 1     | D3 transcript after ceremony (CORE-004)                                     |
 | **Done (internal)**       | 12    | 10/10 milestones, EAP CLI, KAT package, handoffs, bundle sync               |
 
 ---
@@ -177,7 +177,7 @@ Hub: gtcx-core/docs/operations/coordination/remaining-cross-repo-work-2026-06-02
 
 ### CORE-003: gtcx-protocols consumes `@gtcx/zkp-kat-vectors`
 
-**Status:** open  
+**Status:** done 2026-06-03  
 **Owner:** gtcx-protocols  
 **Sprint:** S-CORE-2  
 **Effort:** 2–4 hours
@@ -198,6 +198,12 @@ Hub: gtcx-core/docs/operations/coordination/remaining-cross-repo-work-2026-06-02
 3. Acceptance: one protocol test loads a KAT file and verifies the proof
 
 **Blockers:** None. Package is ready.
+
+#### Delivered 2026-06-03
+
+- `gtcx-protocols/tests/cross-repo/zkp-kat-vectors-consumption.test.ts` — loads `bulletproofsAmountRange` KAT; verifies via `@gtcx/crypto` `createZkpEngine()` when `@gtcx/crypto-native` is present
+- `pnpm exec vitest run --config vitest.integration.config.ts tests/cross-repo/zkp-kat-vectors-consumption.test.ts` — exit 0 (2/2)
+- DevDep: `@gtcx/zkp-kat-vectors` via `link:../gtcx-core/packages/zkp-kat-vectors` (publish to npm unblocks CI without sibling checkout)
 
 ---
 

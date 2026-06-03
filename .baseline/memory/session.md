@@ -43,7 +43,7 @@ focus: 'Cross-repo coordination cleanup + gtcx-infrastructure 10-10 roadmap prep
 | ------------------------------ | ------------------- | ------------- | ----------------- |
 | CORE-001 EAP ack               | gtcx-infrastructure | awaiting ack  | ESO refresh       |
 | CORE-002 SLSA provenance       | gtcx-infrastructure | open          | priority decision |
-| CORE-003 KAT consumption       | gtcx-protocols      | open          | none              |
+| CORE-003 KAT consumption       | gtcx-protocols      | **done**      | AM-2 complete     |
 | CORE-004 D3 transcript         | gtcx-core           | release-gated | XR-402 ceremony   |
 | CORE-005–009 vendors/regulator | baseline-os         | blocked       | human/external    |
 

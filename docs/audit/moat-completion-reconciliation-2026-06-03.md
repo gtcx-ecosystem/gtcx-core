@@ -70,15 +70,15 @@ Scores from [moat-dimension-roadmap-10-10.md](./moat-dimension-roadmap-10-10.md)
 
 ### Track B — Algorithmic moat (gtcx-core + one downstream)
 
-| Sprint   | Theme                                                            | Owner                  | Status            | Stories                                                                        |
-| -------- | ---------------------------------------------------------------- | ---------------------- | ----------------- | ------------------------------------------------------------------------------ |
-| **AM-1** | ZKP hardening (RNG, constraints, KAT, differential, FIPS blake3) | gtcx-core              | **Done**          | Commits through `166a8f9`                                                      |
-| **AM-2** | Downstream KAT consumption                                       | gtcx-protocols         | **Open**          | CORE-003: devDep `@gtcx/zkp-kat-vectors` + one verify test (2–4h)              |
-| **AM-3** | Trusted-setup transcript CI                                      | gtcx-core              | **Release-gated** | CORE-004 / D3 M3.2 after XR-402 ceremony + transcript publish                  |
-| **AM-4** | External crypto moat                                             | baseline-os / Security | **Blocked**       | CORE-005 pen-test SOW, CORE-006 formal verification, CORE-007 side-channel lab |
-| **AM-5** | Regulator primitive attestation                                  | GTM                    | **Blocked**       | CORE-008 D10 M10.3 letter                                                      |
+| Sprint   | Theme                                                            | Owner                  | Status              | Stories                                                                        |
+| -------- | ---------------------------------------------------------------- | ---------------------- | ------------------- | ------------------------------------------------------------------------------ |
+| **AM-1** | ZKP hardening (RNG, constraints, KAT, differential, FIPS blake3) | gtcx-core              | **Done**            | Commits through `166a8f9`                                                      |
+| **AM-2** | Downstream KAT consumption                                       | gtcx-protocols         | **Done** 2026-06-03 | CORE-003: `zkp-kat-vectors-consumption.test.ts` (vitest 2/2)                   |
+| **AM-3** | Trusted-setup transcript CI                                      | gtcx-core              | **Release-gated**   | CORE-004 / D3 M3.2 after XR-402 ceremony + transcript publish                  |
+| **AM-4** | External crypto moat                                             | baseline-os / Security | **Blocked**         | CORE-005 pen-test SOW, CORE-006 formal verification, CORE-007 side-channel lab |
+| **AM-5** | Regulator primitive attestation                                  | GTM                    | **Blocked**         | CORE-008 D10 M10.3 letter                                                      |
 
-**Agent rule:** `pnpm agent:next-work` returns **null** until AM-2/AM-3/AM-4 unblock — do not re-implement D1–D6.
+**Agent rule:** `pnpm agent:next-work` falls through to **Track A S5-01** when moat code is complete; do not re-implement D1–D6.
 
 ### Track C — Bank-grade (ecosystem)
 
@@ -113,8 +113,8 @@ Full detail: [remaining-cross-repo-work-2026-06-02.md](../operations/coordinatio
 NOW (gtcx-core, no vendor)
   └─► S5-01: public repo → publish @gtcx/ai-eval@0.1.4 (Track A)
 
-PARALLEL (gtcx-protocols, ~half day)
-  └─► CORE-003: consume @gtcx/zkp-kat-vectors in one test (Track B AM-2)
+DONE — gtcx-protocols (2026-06-03)
+  └─► CORE-003 / AM-2: KAT consumption test + @gtcx/crypto verify path
 
 WHEN XR-402 ceremony completes (gtcx-core)
   └─► CORE-004: trusted-setup-verify in release CI (Track B AM-3)

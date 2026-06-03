@@ -105,13 +105,7 @@ function selectNextWork() {
     });
 
   if (candidates.length === 0) {
-    return {
-      next: null,
-      selection: {
-        tier: 'complete',
-        reason: 'All implementable dimensions are at 10/10',
-      },
-    };
+    return selectExecutionRoadmapFallback();
   }
 
   for (const candidate of candidates) {
@@ -141,12 +135,26 @@ function selectNextWork() {
     };
   }
 
+  return selectExecutionRoadmapFallback();
+}
+
+/** Track A (execution-roadmap) when algorithmic moat has no in-repo code left. */
+function selectExecutionRoadmapFallback() {
   return {
-    next: null,
+    next: {
+      track: 'A',
+      story: 'S5-01',
+      title: 'Publish @gtcx/ai-eval@0.1.4 with npm provenance (22/22)',
+      owner: 'gtcx-core',
+      blocked: true,
+      blocker: 'gtcx-ecosystem/gtcx-core repo visibility must be public for npm publish --provenance',
+      command:
+        'gh workflow run release.yml -f provenance_republish=true && pnpm provenance:check-npm:strict',
+    },
     selection: {
-      tier: 'complete',
+      tier: 'execution-roadmap',
       reason:
-        'All implementable dimensions are at 10/10 or blocked on external/release-gated milestones',
+        'Algorithmic moat in-repo complete (D1–D6 at 10). Next Track A story; blocked on repo visibility policy.',
     },
   };
 }

@@ -75,15 +75,15 @@ These dimensions require external vendors/consultants. Agents must not start the
 
 ## Active phase
 
-Algorithmic Moat Sprint 2 — **Hardening + External Validation**.
-All agent-implementable code milestones are complete. Remaining work is
-release-gated (D3 M3.2) or external (D7 M7.5, D8, D9, D10 M10.3).
+**Track A Sprint 5** — `@gtcx/ai-eval` npm provenance (S5-01).  
+Algorithmic moat AM-1 + AM-2 (CORE-003) complete in-repo / protocols.  
+`pnpm agent:next-work` returns **execution-roadmap** tier with S5-01 (blocked until repo is public).
 
 ## Critical handoffs
 
 | Handoff  | Item                                            | Status                  |
 | -------- | ----------------------------------------------- | ----------------------- |
-| CORE-003 | gtcx-protocols consumes `@gtcx/zkp-kat-vectors` | open — protocols-owned  |
+| CORE-003 | gtcx-protocols consumes `@gtcx/zkp-kat-vectors` | **done** 2026-06-03     |
 | CORE-004 | D3 trusted-setup transcript verification        | release-gated on XR-402 |
 | CORE-005 | Pen-test vendor SOW                             | external — baseline-os  |
 | CORE-006 | Z3/Coq formal verification consultant           | external — baseline-os  |
