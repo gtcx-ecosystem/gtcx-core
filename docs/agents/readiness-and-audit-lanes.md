@@ -146,7 +146,17 @@ After `AGENTS.md` Phase 1–3, before scoring or procurement claims:
 
 **Legacy aliases:** `master-audit` / `comprehensive-audit` → `bank-grade-audit` · `full-audit` / `forensic-audit` → `engineering-audit`.
 
-**Sub-audits (lane 2 inputs):** `doc-standard`, `repo-hygiene`, `security-audit` — cited by `compliance-audit`, not lane primaries.
+**Domain audits (depth):** [domain-audits/README](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/domain-audits/README.md) — `sales-audit`, `partnership-audit`, `api-audit`, `security-audit`, `deployment-audit`, … → feed lane audits. Run domains first when refreshing a lane.
+
+| Domain       | Command             | Feeds lane audit                        |
+| ------------ | ------------------- | --------------------------------------- |
+| Sales        | `sales-audit`       | `gtm-audit`                             |
+| Partnerships | `partnership-audit` | `gtm-audit`                             |
+| API          | `api-audit`         | `engineering-audit`                     |
+| Security     | `security-audit`    | `compliance-audit`                      |
+| Deployment   | `deployment-audit`  | `engineering-audit`, `bank-grade-audit` |
+
+**Supporting domains:** `doc-standard`, `repo-hygiene` → `compliance-audit`; `verification-audit` → `bank-grade-audit`.
 
 Ecosystem catalog: [ecosystem-audit-catalog-2026-06-05.md](../audit/ecosystem-audit-catalog-2026-06-05.md)
 

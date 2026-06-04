@@ -3,6 +3,17 @@
   "auditDate": "2026-06-05",
   "readinessModel": "docs/audit/readiness-model.md",
   "laneAuditsRegistry": "gtcx-docs/tools/audit/lane-audits/README.md",
+  "domainAuditsRegistry": "gtcx-docs/tools/audit/domain-audits/README.md",
+  "domainAudits": {
+    "sales": { "command": "sales-audit", "feeds": "gtm-audit" },
+    "partnerships": { "command": "partnership-audit", "feeds": "gtm-audit" },
+    "api": { "command": "api-audit", "feeds": "engineering-audit" },
+    "security": { "command": "security-audit", "feeds": "compliance-audit" },
+    "deployment": {
+      "command": "deployment-audit",
+      "feeds": ["engineering-audit", "bank-grade-audit"]
+    }
+  },
   "laneAudits": {
     "engineering": {
       "command": "engineering-audit",

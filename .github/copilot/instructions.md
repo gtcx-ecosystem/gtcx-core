@@ -133,24 +133,30 @@ Runs Protocol 22 next-work, refreshes `.baseline/memory/session.md`, prints Proc
 
 **Check:** `pnpm readiness:lanes:check` · after audit doc edits update indexes + `latest.json` then `pnpm agent:sync`.
 
-## Audits — one command per goal
+## Audits — lane + domain commands
 
-**Start:** `gtcx-docs/tools/audit/lane-audits/README.md`
+**Lane scores (run for readiness):** `gtcx-docs/tools/audit/lane-audits/README.md`
 
-| Goal | Command | Forensic output |
-| ---- | ------- | --------------- |
-| Engineering | `engineering-audit` | `docs/audit/engineering-audit-<date>.md` |
-| Internal compliance | `compliance-audit` | `docs/audit/compliance-audit-<date>.md` |
-| Industry / external | `external-audit` | `docs/audit/external-audit-<date>.md` |
-| Bank-grade | `bank-grade-audit` | `docs/audit/bank-grade-audit-<date>.md` |
-| GTM-Readiness | `gtm-audit` | `docs/audit/gtm-audit-<date>.md` |
-| Global Compliance (GCR) | `global-compliance-audit` | `docs/audit/global-compliance-audit-<date>.md` |
+| Goal | Command |
+| ---- | ------- |
+| Engineering | `engineering-audit` |
+| Internal compliance | `compliance-audit` |
+| Industry / external | `external-audit` |
+| Bank-grade | `bank-grade-audit` |
+| GTM | `gtm-audit` |
+| GCR rollup | `global-compliance-audit` |
 
-**How to run:** `gtcx-docs/tools/audit/audit-framework/AGENT-START.md` → `commands/<command>.md` → prompt → write forensic → update lane index + `docs/audit/latest.json` → `pnpm readiness:lanes:check`.
+**Domain depth (run first, then lane):** `gtcx-docs/tools/audit/domain-audits/README.md`
 
-**Lane indexes (scores):** `docs/agents/readiness-and-audit-lanes.md` · `docs/audit/latest.json`
+| Domain | Command | Feeds |
+| ------ | ------- | ----- |
+| Sales | `sales-audit` | `gtm-audit` |
+| Partnerships | `partnership-audit` | `gtm-audit` |
+| API | `api-audit` | `engineering-audit` |
+| Security | `security-audit` | `compliance-audit` |
+| Deployment | `deployment-audit` | `engineering-audit`, `bank-grade-audit` |
 
-Legacy aliases: `master-audit` = `bank-grade-audit` · `full-audit` = `engineering-audit`.
+**How to run:** `gtcx-docs/tools/audit/audit-framework/AGENT-START.md` → `commands/<command>.md` → prompt → forensic → lane index + `latest.json` → `pnpm readiness:lanes:check`.
 
 ## Agent protocols (P22–P28) — machine-enforced
 

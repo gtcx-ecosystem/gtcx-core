@@ -17,7 +17,7 @@ Forensic audits and readiness scorecards for `gtcx-core`, organized in **five la
 
 ## Start here
 
-**Run an audit:** [gtcx-docs lane-audits README](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-audits/README.md) — one command per goal.
+**Run an audit:** [lane-audits](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-audits/README.md) (scores) · [domain-audits](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/domain-audits/README.md) (depth: sales, api, security, deployment, …).
 
 | Goal                    | Command                   |
 | ----------------------- | ------------------------- |
