@@ -8,6 +8,10 @@
     {
       "path": "AGENTS.md",
       "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
         "base.md",
         "readiness-pointer.md",
         "audit-pointer.md",
@@ -23,6 +27,10 @@
     {
       "path": "CLAUDE.md",
       "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
         "base.md",
         "readiness-pointer.md",
         "audit-pointer.md",
@@ -38,6 +46,10 @@
     {
       "path": "GEMINI.md",
       "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
         "base.md",
         "readiness-pointer.md",
         "audit-pointer.md",
@@ -54,6 +66,10 @@
     {
       "path": "KIMI.md",
       "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
         "base.md",
         "readiness-pointer.md",
         "audit-pointer.md",
@@ -68,6 +84,10 @@
     {
       "path": "CODEX.md",
       "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
         "base.md",
         "readiness-pointer.md",
         "audit-pointer.md",
@@ -82,6 +102,10 @@
     {
       "path": ".cursor/rules/main.mdc",
       "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
         "base.md",
         "readiness-pointer.md",
         "audit-pointer.md",
@@ -98,6 +122,10 @@
     {
       "path": "CONVENTIONS.md",
       "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
         "base.md",
         "readiness-pointer.md",
         "audit-pointer.md",
@@ -112,8 +140,27 @@
       "createIfMissing": true
     },
     {
+      "path": ".kimi/AGENTS.md",
+      "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
+        "base.md",
+        "audit-pointer.md",
+        "credentials-pointer.md",
+        "execute-roadmap-pointer.md",
+        "coordination-pointer.md"
+      ],
+      "createIfMissing": true
+    },
+    {
       "path": ".github/copilot/instructions.md",
       "partials": [
+        "universal-agent-behavior.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "session-start-pointer.md",
         "readiness-pointer.md",
         "audit-pointer.md",
         "protocols-enforcement-pointer.md",
