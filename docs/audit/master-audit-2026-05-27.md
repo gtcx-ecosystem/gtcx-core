@@ -2,21 +2,6 @@
 title: 'gtcx-core — Master Audit & Bank-Grade Certification'
 status: 'current'
 date: '2026-05-27'
-owner: 'gtcx-core'
-role: 'protocol-architect'
-agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
-trust_score: 60
-autonomy_level: 'permissioned'
-tier: 'standard'
-tags: ['documentation', 'audit']
-review_cycle: 'on-change'
----
-
----
-
-title: 'gtcx-core Master Audit 2026-05-27'
-status: 'current'
-date: '2026-05-27'
 owner: 'quality-evidence-lead'
 role: 'quality-evidence-lead'
 tier: 'critical'
@@ -30,14 +15,13 @@ composite_raw: 8.92
 investor: 9.0
 enterprise: 8.7
 reconciliation_note: >-
-2026-06-01: npm Sigstore 21/21 @ 3.1.4 train (SEC-008 closed); downstream pinning
-in gtcx-protocols + gtcx-infrastructure. See ci-confirmation-2026-06-01.md.
+  2026-06-01: npm Sigstore 21/21 @ 3.1.4 train (SEC-008 closed); downstream pinning
+  in gtcx-protocols + gtcx-infrastructure. See ci-confirmation-2026-06-01.md.
 sov_dfi: 9.0
 p0_count: 0
 p1_count: 1
 p2_count: 5
 caps_fired: 0
-
 ---
 
 # gtcx-core — Master Audit & Bank-Grade Certification

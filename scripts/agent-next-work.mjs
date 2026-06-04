@@ -221,7 +221,7 @@ function selectTier5NextWork(session) {
     return formatTier5Selection(
       item,
       'tier-5',
-      `Defensibility Tier 5 — next code milestone (${item.id})`,
+      `Defensibility Tier 5 — next code milestone (${item.id})`
     );
   }
 
@@ -300,7 +300,7 @@ function selectNextWork() {
   if (candidates.length === 0) {
     const tier5 = selectTier5NextWork(session);
     if (tier5) return tier5;
-    return selectExecutionRoadmapFallback();
+    return selectExecutionRoadmapFallback(session);
   }
 
   for (const candidate of candidates) {
@@ -332,12 +332,63 @@ function selectNextWork() {
 
   const tier5 = selectTier5NextWork(session);
   if (tier5) return tier5;
-  return selectExecutionRoadmapFallback();
+  return selectExecutionRoadmapFallback(session);
 }
 
-/** Track A / cross-repo when algorithmic moat has no in-repo code left. */
-function selectExecutionRoadmapFallback() {
-  // S5-01 complete when strict provenance passes (22/22 including ai-eval@0.1.4).
+/** Ops-docs queue when Tier 5 code complete (Development frame — skip external tier 6). */
+const OPS_DOCS_QUEUE = [
+  {
+    id: 'OPS-AUDIT-FM',
+    title: 'Merge duplicate frontmatter on historical audit files',
+    sprint: 'HYGIENE',
+    workClass: 'ops-docs',
+    paths: [
+      'docs/audit/full-audit-2026-05-09.md',
+      'docs/audit/master-audit-2026-05-27.md',
+      'docs/audit/master-audit-2026-05-12.md',
+      'docs/audit/10-10-roadmap-2026-05-25.md',
+    ],
+  },
+];
+
+function parseCompletedOpsDocs(session) {
+  const done = new Set();
+  const re = /(OPS-[A-Z0-9-]+)[^\n]*\|\s*\*\*done\*\*/gi;
+  let m;
+  while ((m = re.exec(session)) !== null) {
+    done.add(m[1].toUpperCase());
+  }
+  return done;
+}
+
+function selectOpsDocsFallback(session = '') {
+  const completed = parseCompletedOpsDocs(session);
+  for (const item of OPS_DOCS_QUEUE) {
+    if (completed.has(item.id)) continue;
+    return {
+      next: {
+        track: 'ops-docs',
+        milestone: item.id,
+        sprint: item.sprint,
+        title: item.title,
+        paths: item.paths,
+        workplan: 'docs/audit/README.md',
+      },
+      selection: {
+        tier: 'ops-docs',
+        reason:
+          'Tier 5 technical complete; external ceremony blocked — next automatable ops-docs (Protocol 22 Development frame)',
+      },
+    };
+  }
+  return null;
+}
+
+/** Track B / cross-repo when algorithmic moat has no in-repo code or ops-docs left. */
+function selectExecutionRoadmapFallback(session = '') {
+  const ops = selectOpsDocsFallback(session);
+  if (ops) return ops;
+
   return {
     next: {
       track: 'B',
@@ -350,7 +401,7 @@ function selectExecutionRoadmapFallback() {
     selection: {
       tier: 'external',
       reason:
-        'Tier 5 workplan complete or external-only remainders. CORE-004 (ceremony) or CORE-005–009 (baseline-os/GTM) — human or owner-repo only.',
+        'Automatable code and ops-docs exhausted. CORE-004 ceremony blocked — file P24 Blocker Report; do not ask operator to pick backlog.',
     },
   };
 }

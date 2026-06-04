@@ -1,27 +1,22 @@
 ---
-session_id: '2026-06-05-protocol-enforcement-hygiene'
+session_id: '2026-06-05-p22-p27-remediation'
 agent: 'gtcx-core-agent'
-focus: 'P1-P28 runtime enforcement; hygiene H-01–H-09 complete; CORE-004 blocked XR-402'
+focus: 'P22 ops-docs fallback; OPS-AUDIT-FM; CORE-004 blocked XR-402'
 ---
 
-# Session: Protocol enforcement + repo hygiene
+# Session: P22/P27 remediation
 
-## Session bootstrap (2026-06-05 UTC)
+## Session bootstrap (2026-06-05)
 
-- **Command:** `pnpm agent:session-start`
-- **Next work:** CORE-004 — **blocked** (XR-402 ceremony)
-- **Blocked:** yes (release-gated trusted-setup)
-- **Git:** **in sync** with `origin/main` @ `17e4d9a`
+- **Command:** `pnpm agent:session-start` — exit 0
+- **Next work (P22):** OPS-AUDIT-FM — merge duplicate frontmatter on historical audit files
+- **Blocked external:** CORE-004 (XR-402 trusted-setup ceremony — release-gated; authority R)
+- **Git:** pending commit (P22 fix + OPS-AUDIT-FM)
 
-## Recent commits (on origin/main)
+## P22 fix
 
-| SHA       | Summary                                               |
-| --------- | ----------------------------------------------------- |
-| `17e4d9a` | baseline session note                                 |
-| `f6bb11e` | hygiene H-02–H-09 (exec brief, gtm, audit banners)    |
-| `f2ba2fb` | P1-P28 runtime enforcement (session-start, hub drift) |
-| `b0557e8` | P22-P28 machine gate + CI                             |
-| `bf641c8` | governance: readiness + agent-sync                    |
+- `scripts/agent-next-work.mjs`: Development frame selects ops-docs queue before external CORE-004 dead-end
+- **OPS-AUDIT-FM** | **done** — merged duplicate frontmatter on 4 historical audit files
 
 ## Readiness snapshot (2026-06-05)
 
@@ -34,33 +29,18 @@ focus: 'P1-P28 runtime enforcement; hygiene H-01–H-09 complete; CORE-004 block
 | 4 Bank-grade    | **8.9** (lane 4 only)                 |
 | 5 GTM-Readiness | **GR-T1** · sovereign **below GR-T2** |
 
-**SSOT:** `docs/audit/latest.json` · `docs/audit/readiness-model.md` · `docs/agents/readiness-and-audit-lanes.md`
+**SSOT:** `docs/audit/latest.json` · `docs/audit/readiness-model.md`
 
-## Protocol 22 / agents
+## Hygiene pass — complete (H-01–H-09)
 
-- **Session start:** `pnpm agent:session-start` (all terminals / LLMs)
-- **Next work:** CORE-004 — blocked XR-402
-- **Verify:** `pnpm agent:protocols:check` · `pnpm readiness:lanes:check`
+All items done on origin @ `17e4d9a` (prior session).
 
-## Hygiene pass — **complete**
+## Verification (this session)
 
-| ID  | Item                          | Status                                     |
-| --- | ----------------------------- | ------------------------------------------ |
-| H-1 | Push unpushed commits         | **done** — gtcx-core + gtcx-docs on origin |
-| H-2 | session.md refresh            | **done**                                   |
-| H-3 | executive brief frontmatter   | **done**                                   |
-| H-4 | executive brief GR-T banner   | **done**                                   |
-| H-5 | gtm-reality-check GR-T labels | **done**                                   |
-| H-6 | internal GTM roadmap row      | **done**                                   |
-| H-7 | execution-roadmap reconcile   | **done**                                   |
-| H-8 | historical audit banners      | **done**                                   |
-| H-9 | gtcx-agile drift note         | **done**                                   |
-
-## Verification
-
-| Command                         | Result                                              |
-| ------------------------------- | --------------------------------------------------- |
-| `pnpm agent:protocols:check`    | exit 0                                              |
-| `pnpm readiness:lanes:check`    | exit 0                                              |
-| `pnpm quality:governance:check` | exit 0                                              |
-| `git push origin main`          | in sync (gtcx-core @ 17e4d9a; gtcx-docs @ f86ddc3e) |
+| Command                       | Result                |
+| ----------------------------- | --------------------- |
+| `pnpm agent:session-start`    | exit 0                |
+| `pnpm agent:next-work`        | exit 0 → OPS-AUDIT-FM |
+| `pnpm agent:protocols:check`  | pending               |
+| `pnpm format:check`           | pending               |
+| `pnpm docs:check-frontmatter` | pending               |

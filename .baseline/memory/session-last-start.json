@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-06-04T09:21:31.459Z",
+  "nextWork": {
+    "next": {
+      "track": "B",
+      "handoff": "CORE-004",
+      "title": "D3 M3.2 trusted-setup transcript verify",
+      "owner": "gtcx-core",
+      "blocked": true,
+      "blocker": "XR-402 trusted-setup ceremony — release-gated"
+    },
+    "selection": {
+      "tier": "external",
+      "reason": "Tier 5 workplan complete or external-only remainders. CORE-004 (ceremony) or CORE-005–009 (baseline-os/GTM) — human or owner-repo only."
+    }
+  },
+  "gitChanged": 0,
+  "authorityClass": "R"
+}
