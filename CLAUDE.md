@@ -224,6 +224,8 @@ pnpm bundle:check-budgets
 
 **Install slash commands (once):** `gtcx-docs/tools/audit/agent-commands/install.sh` → Claude/Cursor `/engineering-audit` · Gemini `/gtcx:engineering-audit` · Kimi/Codex `/skill:engineering-audit`.
 
+**Aliases:** `master-audit` / `comprehensive-audit` → `bank-grade-audit` · `full-audit` / `forensic-audit` → `engineering-audit`. **Kimi has no bare `/master-audit`** — use `/skill:master-audit` (or `/skill:bank-grade-audit`) after install; restart Kimi session if the skill list is stale.
+
 **How to run:** `gtcx-docs/tools/audit/audit-framework/AGENT-START.md` → `commands/<command>.md` → prompt → forensic → lane index + `latest.json` → `pnpm readiness:lanes:check`.
 
 ## Credentials: system-of-record + ownership split (cross-repo)
@@ -280,11 +282,11 @@ pnpm agent:bout                   # human summary
 
 **North star:** Finish **gtcx-core** foundation so **markets / intelligence / infrastructure** can launch apps → GTM closes sovereign deals (GR-T2+).
 
-| Mode | Meaning |
-| ---- | ------- |
-| **implement** | Drain `workSet.implement` (bout) |
-| **plan** | No code queue — drain `workSet.plan` (reconcile roadmaps/coordination) |
-| **witness** | Human gates only |
+| Mode          | Meaning                                                                |
+| ------------- | ---------------------------------------------------------------------- |
+| **implement** | Drain `workSet.implement` (bout)                                       |
+| **plan**      | No code queue — drain `workSet.plan` (reconcile roadmaps/coordination) |
+| **witness**   | Human gates only                                                       |
 
 ```bash
 pnpm agent:session-start --json
