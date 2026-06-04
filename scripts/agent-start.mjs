@@ -144,4 +144,6 @@ log(`**Authority class:** ${proceedBrief.authorityClass}`);
 log(`**Blocked:** ${blocked ? 'yes' : 'no'}`);
 log(`**Override:** stop | correct: | story ID`);
 log('\nSession updated:', SESSION_PATH);
-log('Close turns with Status Update (Done → Next priority). Forbidden: Say if you want · menus.\n');
+log('Close with Status Update ONLY — message STOPS after Approval needed.');
+log('Forbidden after Status Update: "Want me to proceed with X or Y?" · two stories under Next.');
+log('Next priority = ONE story from agent:next-work (in_progress > pending). Then EXECUTE it.\n');
