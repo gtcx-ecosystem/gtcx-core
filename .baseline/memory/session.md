@@ -6,12 +6,12 @@ focus: 'P22 ops-docs fallback; OPS-AUDIT-FM; CORE-004 blocked XR-402'
 
 # Session: P22/P27 remediation
 
-## Session bootstrap (2026-06-05)
+## Session bootstrap (2026-06-04 11:03:45 UTC)
 
-- **Command:** `pnpm agent:session-start` — exit 0
-- **Next work (P22):** OPS-AUDIT-FM — merge duplicate frontmatter on historical audit files
-- **Blocked external:** CORE-004 (XR-402 trusted-setup ceremony — release-gated; authority R)
-- **Git:** pending commit (P22 fix + OPS-AUDIT-FM)
+- **Command:** `pnpm agent:session-start`
+- **Next work:** CORE-004 — D3 M3.2 trusted-setup transcript verify
+- **Blocked:** yes (XR-402 trusted-setup ceremony — release-gated)
+- **Git:** 13 changed path(s)
 
 ## P22 fix
 

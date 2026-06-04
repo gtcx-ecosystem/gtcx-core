@@ -1,6 +1,18 @@
 {
-  "startedAt": "2026-06-04T09:21:31.459Z",
+  "startedAt": "2026-06-04T11:03:45.416Z",
   "nextWork": {
+    "protocol": "22-agent-work-selection",
+    "repo": "gtcx-core",
+    "frame": "development",
+    "persona": {
+      "institutional": "protocol-engineer",
+      "mcp": "builder",
+      "frame": "development",
+      "docUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/protocol-engineer.md",
+      "bridgeUrl": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-persona-bridge-2026-06.md",
+      "instruction": "Read persona doc before work; re-select persona on task switch (Phase 4)."
+    },
+    "ok": true,
     "next": {
       "track": "B",
       "handoff": "CORE-004",
@@ -11,9 +23,18 @@
     },
     "selection": {
       "tier": "external",
-      "reason": "Tier 5 workplan complete or external-only remainders. CORE-004 (ceremony) or CORE-005–009 (baseline-os/GTM) — human or owner-repo only."
-    }
+      "reason": "Automatable code and ops-docs exhausted. CORE-004 ceremony blocked — file P24 Blocker Report; do not ask operator to pick backlog."
+    },
+    "proceedBrief": {
+      "activePersona": "protocol-engineer",
+      "frame": "development",
+      "personaDocUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/protocol-engineer.md"
+    },
+    "agentInstructions": [
+      "Phase 4: adopt persona **protocol-engineer** (development) — read https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/protocol-engineer.md",
+      "Include **Active persona** + **Frame** in Proceed Brief and Status Update (P26)."
+    ]
   },
-  "gitChanged": 0,
+  "gitChanged": 13,
   "authorityClass": "R"
 }

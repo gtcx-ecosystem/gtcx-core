@@ -2,7 +2,7 @@
 title: 'Agent universal instructions (any LLM)'
 status: current
 date: 2026-06-05
-owner: gtcx-agentic
+owner: protocol-architect
 role: protocol-architect
 document_id: OPS-AGENT-UNIVERSAL
 tier: critical
@@ -128,12 +128,13 @@ Full template: `docs/operations/agent-status-update-template.md` (rolled out wit
 
 ## 4. Protocol 27 — run commands yourself
 
-| You run                                     | You do not ask         |
-| ------------------------------------------- | ---------------------- |
-| `pnpm test`, lint, validate                 | "run locally"          |
-| `npx expo start` (background), Metro health | "focus your terminal"  |
-| `adb reverse`, `am start`                   | "press r/a" only       |
-| `git push` when commits ready               | "Say push if you want" |
+| You run                                                  | You do not ask                         |
+| -------------------------------------------------------- | -------------------------------------- |
+| `pnpm test`, lint, validate                              | "run locally"                          |
+| `aws` / `kubectl` / `terraform` / `scripts/staging/*.sh` | **"Your action needed"** + paste block |
+| `npx expo start` (background), Metro health              | "focus your terminal"                  |
+| `adb reverse`, `am start`                                | "press r/a" only                       |
+| `git push` when commits ready                            | "Say push if you want"                 |
 
 Report: **command + exit code** per step.
 
