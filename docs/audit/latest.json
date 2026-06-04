@@ -73,7 +73,7 @@
       "readinessOutcome": {
         "composite": 9.0,
         "domains": {
-          "repoHygieneOrganization": 9.6,
+          "repoHygieneOrganization": 9.8,
           "documentationQuality": 9.6,
           "documentationQualitySubdimensions": {
             "hygiene": 9.8,

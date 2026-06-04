@@ -34,7 +34,7 @@ Scores rate **in-repo readiness** from forensic audits — not audit-document qu
 
 | Domain                          | Readiness | Primary audit / evidence                                                                                            |
 | ------------------------------- | --------: | ------------------------------------------------------------------------------------------------------------------- |
-| **Repo hygiene & organization** |   **9.6** | [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)                                                          |
+| **Repo hygiene & organization** |   **9.8** | [repo-hygiene-2026-06-04.md](./repo-hygiene-2026-06-04.md)                                                          |
 | **Documentation quality**       |   **9.6** | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md)                                  |
 | **AI trust & safety**           |   **8.8** | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md) · [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) |
 | **Security**                    |   **8.8** | Threat matrix · [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) Phase 2                                      |
@@ -46,18 +46,18 @@ Scores rate **in-repo readiness** from forensic audits — not audit-document qu
 
 ## 1 — Repo hygiene & organization
 
-**Readiness: 9.6/10** — [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md) (post-remediation)
+**Readiness: 9.8/10** — [repo-hygiene-2026-06-04.md](./repo-hygiene-2026-06-04.md) (execute validation)
 
-| Axis                 |         Score | Notes                                                      |
-| -------------------- | ------------: | ---------------------------------------------------------- |
-| Root cleanliness     | 8.5 → **9.6** | `check:workspace-root-cleanliness:strict` PASS after P1–P4 |
-| Per-directory README |           8.0 | 25/28 package roots; 3 config packages gap                 |
-| Build artifacts      |          10.0 | Zero tracked artifacts                                     |
-| Archive handling     |           9.0 | `_delete/` human-owned; `.gitignore` rules                 |
-| Naming               |           8.5 | Root kebab-case; `packages/README.md` count drift          |
-| Size / OS junk       |          10.0 | None tracked                                               |
-| Empty directories    |           8.0 | Fuzz/baseline local empties mostly ignored                 |
-| Inventory accuracy   |       partial | Specs say 24 pkgs; some READMEs say 21                     |
+| Axis                 |    Score | Notes                                                     |
+| -------------------- | -------: | --------------------------------------------------------- |
+| Root cleanliness     | **10.0** | `check:workspace-root-cleanliness:strict` PASS; allowlist |
+| Per-directory README | **10.0** | 100% `packages/*/` README sweep                           |
+| Build artifacts      | **10.0** | Zero tracked artifacts                                    |
+| Archive handling     |  **9.5** | `_delete/` human-owned; allowlist documented              |
+| Naming               |  **9.5** | Root allowlist; inventory 24 + 4 config                   |
+| Size / OS junk       | **10.0** | None tracked                                              |
+| Empty directories    |  **9.0** | Local fuzz/baseline empties — P2 gitignored exception     |
+| Inventory accuracy   |     pass | `packages/README.md` aligned with tree                    |
 
 **Gates:** `pnpm check:workspace-root-cleanliness:strict`
 
