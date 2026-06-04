@@ -16,7 +16,7 @@ review_cycle: quarterly
 
 **Lane 4 of 5** — [readiness-model.md](./readiness-model.md)
 
-**Certified composite** per `gtcx-docs` SCORING_FRAMEWORK — blends engineering, compliance, and buyer lenses. **Not** a substitute for lane 1–3 or GTM.
+**Certified composite** per `gtcx-docs` SCORING_FRAMEWORK — blends engineering, compliance, and buyer lenses. **Not** a substitute for lane 1–3 or GTM-Readiness.
 
 ---
 
@@ -52,7 +52,7 @@ Machine-readable: [latest.json](./latest.json)
 
 ```
 Certified composite ≈ weighted(engineering, security, hygiene, enterprise, …)
-  capped by external-dependent compliance (lane 3)
+  capped by Industry Compliance (lane 3)
 ```
 
 **Path to 9.5+ composite:** Close [external-dependencies-register](./external-dependencies-register-2026-05-28.md) compliance rows + re-run master audit — **not** more internal doc splits.

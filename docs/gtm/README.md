@@ -83,14 +83,14 @@ Full index: [`inbound-tickets/README.md`](./inbound-tickets/README.md).
 
 ---
 
-## Readiness lanes (this folder = lane 5)
+## Readiness lanes (this folder = lane 5 GTM-Readiness)
 
 | Lane                            | Index                                                                                                     |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | 1 Engineering **10.0/9.5**      | [engineering-completeness-quality-2026-06-05.md](../audit/engineering-completeness-quality-2026-06-05.md) |
 | 2 Internal compliance           | [internal-compliance-2026-06-05.md](../audit/internal-compliance-2026-06-05.md)                           |
-| 3 External-dependent compliance | [external-dependent-compliance-2026-06-05.md](../audit/external-dependent-compliance-2026-06-05.md)       |
+| 3 Industry Compliance **IC-T0** | [industry-compliance-2026-06-05.md](../audit/industry-compliance-2026-06-05.md)                           |
 | 4 Bank-grade **8.9**            | [bank-grade-2026-06-05.md](../audit/bank-grade-2026-06-05.md)                                             |
-| 5 GTM                           | [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md)                                       |
+| 5 GTM-Readiness **GR-T1**       | [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md)                                       |
 
 Ecosystem sovereign blockers — [16-ecosystem-gtm-alignment](./16-ecosystem-gtm-alignment.md). Not lane 1.

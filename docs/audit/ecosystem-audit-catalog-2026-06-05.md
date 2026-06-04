@@ -48,7 +48,7 @@ related:
 | `repo-hygiene` / `execute-repo-hygiene` | repo-hygiene                   | 1 + 2                  |
 | `verification-audit`                    | anti-inflation                 | 4 Bank-grade           |
 | `security-audit`                        | security-audit                 | 2 + 3                  |
-| `gtm-audit`                             | gtm-audit                      | 5 GTM                  |
+| `gtm-audit`                             | gtm-audit                      | 5 GTM-Readiness        |
 | `ux-audit` / `worldclass-ux-audit`      | UX                             | N/A (library)          |
 | `docs-machine-readable`                 | frontmatter                    | 2                      |
 | `repo-overview`                         | overview                       | 1 (docs)               |
@@ -116,12 +116,13 @@ related:
 | repo-hygiene-2026-06-05                        |   9.6 |
 | dtf-documentation-consistency-audit-2026-06-03 |     — |
 
-### Lane 3 — External-dependent
+### Lane 3 — Industry Compliance
 
-| Audit                                     | Status            |
-| ----------------------------------------- | ----------------- |
-| external-dependencies-register-2026-05-28 | 0/12 complete     |
-| 10-10-remediation-plan-2026-05-27         | R5 external track |
+| Audit                                     | Tier / status       |
+| ----------------------------------------- | ------------------- |
+| industry-compliance-2026-06-05            | **IC-T0** aggregate |
+| external-dependencies-register-2026-05-28 | OPEN 0/12 complete  |
+| 10-10-remediation-plan-2026-05-27         | R5 industry track   |
 
 ### Lane 4 — Bank-grade
 
@@ -131,12 +132,13 @@ related:
 | master-audit-2026-05-28, master-audit-2026-05-27-\* (series) |               8.9 |
 | gtcx-ecosystem-rating-2026-05-08                             | ecosystem context |
 
-### Lane 5 — GTM
+### Lane 5 — GTM-Readiness
 
-| Audit                                 | Location  |
-| ------------------------------------- | --------- |
-| gtm-reality-check-2026-06-02          | docs/gtm/ |
-| gtm-roadmap-10-10-internal-2026-06-01 | docs/gtm/ |
+| Audit                                 | Tier / location                              |
+| ------------------------------------- | -------------------------------------------- |
+| gtm-readiness-2026-06-05              | **GR-T1** library · sovereign **&lt; GR-T2** |
+| gtm-reality-check-2026-06-02          | docs/gtm/                                    |
+| gtm-roadmap-10-10-internal-2026-06-01 | docs/gtm/                                    |
 
 ### Cross-cutting in core
 

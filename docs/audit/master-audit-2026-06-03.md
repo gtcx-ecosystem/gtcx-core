@@ -22,7 +22,7 @@ supersedes_note: 'Post-remediation refresh at bdfe7cb — doc-standard 9.6, repo
 
 # gtcx-core — Master Audit & Bank-Grade Certification
 
-> **Lane 4 — Bank-grade only.** Do not use **8.9** for engineering, internal compliance, or GTM. [readiness-model.md](./readiness-model.md) — five lanes; indexes: [engineering](./engineering-completeness-quality-2026-06-05.md) · [internal compliance](./internal-compliance-2026-06-05.md) · [external compliance](./external-dependent-compliance-2026-06-05.md) · [bank-grade](./bank-grade-2026-06-05.md) · [gtm](./gtm-readiness-2026-06-05.md).
+> **Lane 4 — Bank-grade only.** Do not use **8.9** for engineering, internal compliance, or GTM-Readiness. [readiness-model.md](./readiness-model.md) — five lanes; indexes: [engineering](./engineering-completeness-quality-2026-06-05.md) · [internal compliance](./internal-compliance-2026-06-05.md) · [Industry Compliance](./industry-compliance-2026-06-05.md) · [bank-grade](./bank-grade-2026-06-05.md) · [GTM-Readiness](./gtm-readiness-2026-06-05.md).
 
 **Date:** 2026-06-03 (refresh)  
 **Repo:** `gtcx-ecosystem/gtcx-core`  

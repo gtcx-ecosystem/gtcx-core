@@ -16,7 +16,7 @@ review_cycle: quarterly
 
 **Lane 2 of 5** — [readiness-model.md](./readiness-model.md)
 
-In-repo **control design and evidence automation** — not third-party attestation (lane 3) or commercial GTM (lane 5).
+In-repo **control design and evidence automation** — not Industry Compliance (lane 3) or GTM-Readiness (lane 5).
 
 ---
 
@@ -62,8 +62,8 @@ pnpm check:workspace-root-cleanliness:strict
 
 ## Not in this lane
 
-| Item                             | Lane                                                                           |
-| -------------------------------- | ------------------------------------------------------------------------------ |
-| Delivered pen-test PDF           | [external-dependent-compliance](./external-dependent-compliance-2026-06-05.md) |
-| SOC 2 Type I **letter** from CPA | [external-dependent-compliance](./external-dependent-compliance-2026-06-05.md) |
-| Regulator sandbox send           | [gtm-readiness](./gtm-readiness-2026-06-05.md)                                 |
+| Item                             | Lane                                                       |
+| -------------------------------- | ---------------------------------------------------------- |
+| Delivered pen-test PDF           | [industry-compliance](./industry-compliance-2026-06-05.md) |
+| SOC 2 Type I **letter** from CPA | [industry-compliance](./industry-compliance-2026-06-05.md) |
+| Regulator sandbox send           | [gtm-readiness](./gtm-readiness-2026-06-05.md)             |

@@ -20,13 +20,13 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 **Five audit lanes** — do not conflate ([readiness model](./docs/audit/readiness-model.md)):
 
-| Lane                      | Audit quality (1–10) | Readiness outcome           | Index                                                                      |
-| ------------------------- | -------------------: | --------------------------- | -------------------------------------------------------------------------- |
-| **1 Engineering**         |                  8.5 | 9.5 / 10.0 signoff          | [engineering](./docs/audit/engineering-completeness-quality-2026-06-05.md) |
-| **2 Internal compliance** |                  8.5 | ~9.6 docs/hygiene           | [internal](./docs/audit/internal-compliance-2026-06-05.md)                 |
-| **3 External-dependent**  |                  8.0 | **OPEN** 0/12 (status/tier) | [external](./docs/audit/external-dependent-compliance-2026-06-05.md)       |
-| **4 Bank-grade**          |                  8.5 | composite 8.9               | [bank-grade](./docs/audit/bank-grade-2026-06-05.md)                        |
-| **5 GTM**                 |                  8.0 | **S1** / sovereign S2 NR    | [gtm](./docs/audit/gtm-readiness-2026-06-05.md)                            |
+| Lane                      | Audit quality (1–10) | Readiness outcome                | Index                                                                      |
+| ------------------------- | -------------------: | -------------------------------- | -------------------------------------------------------------------------- |
+| **1 Engineering**         |                  8.5 | 9.5 / 10.0 signoff               | [engineering](./docs/audit/engineering-completeness-quality-2026-06-05.md) |
+| **2 Internal compliance** |                  8.5 | ~9.6 docs/hygiene                | [internal](./docs/audit/internal-compliance-2026-06-05.md)                 |
+| **3 Industry Compliance** |                  8.0 | **IC-T0** · OPEN 0/12            | [industry](./docs/audit/industry-compliance-2026-06-05.md)                 |
+| **4 Bank-grade**          |                  8.5 | composite 8.9                    | [bank-grade](./docs/audit/bank-grade-2026-06-05.md)                        |
+| **5 GTM-Readiness**       |                  8.0 | **GR-T1** / sovereign &lt; GR-T2 | [gtm-readiness](./docs/audit/gtm-readiness-2026-06-05.md)                  |
 
 ### Engineering completeness & quality (lane 1)
 
@@ -62,17 +62,17 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 Docs, hygiene, threat matrix, SOC 2 **design** — [internal-compliance index](./docs/audit/internal-compliance-2026-06-05.md) · [docs-standard audit](./docs/audit/docs-standard-compliance-2026-06-05.md).
 
-### External-dependent compliance (lane 3)
+### Industry Compliance (lane 3)
 
-Pen-test report, SOC 2 **letter**, ceremony — [external-dependencies-register](./docs/audit/external-dependencies-register-2026-05-28.md) (**0/12** complete).
+Pen-test report, SOC 2 **letter**, ceremony — **IC-T0** aggregate · [industry-compliance index](./docs/audit/industry-compliance-2026-06-05.md) · [register](./docs/audit/external-dependencies-register-2026-05-28.md) (**0/12** complete).
 
 ### Bank-grade (lane 4)
 
 Certified composite **8.9/10** — [master-audit-2026-06-03](./docs/audit/master-audit-2026-06-03.md) only; not engineering score.
 
-### GTM (lane 5)
+### GTM-Readiness (lane 5)
 
-**Library:** S1 Ready. **Ecosystem sovereign stack:** S2 Not Ready — [gtm index](./docs/audit/gtm-readiness-2026-06-05.md).
+**Library:** **GR-T1**. **Ecosystem sovereign stack:** **below GR-T2** — [gtm-readiness index](./docs/audit/gtm-readiness-2026-06-05.md).
 
 ### Active execution program
 

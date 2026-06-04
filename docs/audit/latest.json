@@ -4,8 +4,9 @@
   "readinessModel": "docs/audit/readiness-model.md",
   "ratingScales": {
     "auditQuality": "1-10 — quality of audit artifacts only",
-    "readinessOutcome": "per forensic audit (scores or stages)",
-    "externalDependent": "status and tier only — never 1-10"
+    "readinessOutcome": "per forensic audit (scores or tiers)",
+    "industryCompliance": "IC-T0–IC-T4 tier + status only — never 1-10",
+    "gtmReadiness": "GR-T0–GR-T6 tier + status only — never 1-10"
   },
   "lanes": {
     "engineeringCompletenessQuality": {
@@ -24,18 +25,20 @@
       },
       "index": "docs/audit/internal-compliance-2026-06-05.md"
     },
-    "externalDependentCompliance": {
+    "industryCompliance": {
       "auditQuality1to10": 8.0,
       "readinessOutcome": null,
-      "externalStatus": {
+      "industryComplianceTier": "IC-T0",
+      "industryComplianceStatus": {
         "register": "OPEN",
         "itemsComplete": 0,
         "itemsTotal": 12,
         "complianceRelevantOpen": 7,
-        "tierT0Blockers": "not-started",
-        "tierT3Time": "in-progress"
+        "tierIC-T0Blockers": "active",
+        "tierIC-T2Platform": "blocked",
+        "tierIC-T4Temporal": "in-progress"
       },
-      "index": "docs/audit/external-dependent-compliance-2026-06-05.md"
+      "index": "docs/audit/industry-compliance-2026-06-05.md"
     },
     "bankGrade": {
       "auditQuality1to10": 8.5,
@@ -47,11 +50,13 @@
       },
       "index": "docs/audit/bank-grade-2026-06-05.md"
     },
-    "gtm": {
+    "gtmReadiness": {
       "auditQuality1to10": 8.0,
-      "readinessOutcome": {
-        "libraryStage": "S1",
-        "ecosystemSovereignStage": "S2-not-ready"
+      "readinessOutcome": null,
+      "gtmReadinessTier": {
+        "library": "GR-T1",
+        "integratorPilot": "GR-T2-partial",
+        "ecosystemSovereign": "below-GR-T2"
       },
       "index": "docs/audit/gtm-readiness-2026-06-05.md"
     }
@@ -60,6 +65,10 @@
     "note": "composite and internalReadiness are readiness outcomes in master-audit and signoff — not audit quality ranks",
     "internalReadiness": 10.0,
     "composite": 8.9,
-    "sourceAudit": "docs/audit/master-audit-2026-06-03.md"
+    "sourceAudit": "docs/audit/master-audit-2026-06-03.md",
+    "renamedLanes": {
+      "externalDependentCompliance": "industryCompliance",
+      "gtm": "gtmReadiness"
+    }
   }
 }

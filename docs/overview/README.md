@@ -18,7 +18,7 @@ review_cycle: 'on-change'
 > **Date:** 2026-06-03  
 > **Owner:** Protocol Architect  
 > **Audit quality (1–10):** L1 **8.5** · L2 **8.5** · L3 register **8.0** · L4 **8.5** · L5 **8.0** — [readiness model](../audit/readiness-model.md)  
-> **Readiness outcomes:** eng 9.5/10.0 · compliance ~9.6 · external **OPEN 0/12** · bank-grade **8.9** · GTM **S1** / sovereign **S2 NR**  
+> **Readiness outcomes:** eng 9.5/10.0 · compliance ~9.6 · Industry **IC-T0** OPEN 0/12 · bank-grade **8.9** · GTM-Readiness **GR-T1** / sovereign **&lt; GR-T2**  
 > **Defensibility Tier 5 technical:** ~88% (engineering lane; ceremony/commercial external)  
 > **Next review:** 2026-09-01 (quarterly)
 
@@ -32,9 +32,9 @@ review_cycle: 'on-change'
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** See [readiness-model](../audit/readiness-model.md) — **audit quality 1–10** is separate from **readiness outcomes**. Engineering readiness **9.5/10.0**; bank-grade composite **8.9**; external register **OPEN 0/12**; GTM **S1** / sovereign **S2 not ready**.
+**Maturity state:** See [readiness-model](../audit/readiness-model.md) — **audit quality 1–10** is separate from **readiness outcomes**. Engineering readiness **9.5/10.0**; bank-grade composite **8.9**; Industry Compliance **IC-T0** (OPEN 0/12); GTM-Readiness **GR-T1** / sovereign **below GR-T2**.
 
-**Remaining gaps:** L3 T0 blockers — pen-test, SOC 2 letter, XR-402 ceremony. L5 ecosystem — testnet/DR, sandbox send.
+**Remaining gaps:** L3 IC-T0 blockers — pen-test, SOC 2 letter, XR-402 ceremony. L5 GR-T2 ecosystem — testnet/DR, sandbox send.
 
 ---
 
@@ -265,9 +265,9 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 | `docs/audit/readiness-model.md`                             | **Five lanes** + forensic audit map | All audiences                |
 | `docs/audit/engineering-completeness-quality-2026-06-05.md` | Lane 1 index                        | Engineering                  |
 | `docs/audit/internal-compliance-2026-06-05.md`              | Lane 2 index                        | Compliance                   |
-| `docs/audit/external-dependent-compliance-2026-06-05.md`    | Lane 3 index                        | Procurement                  |
+| `docs/audit/industry-compliance-2026-06-05.md`              | Lane 3 — IC tiers                   | Procurement                  |
 | `docs/audit/bank-grade-2026-06-05.md`                       | Lane 4 — **8.9**                    | Investors                    |
-| `docs/audit/gtm-readiness-2026-06-05.md`                    | Lane 5 GTM                          | GTM, founders                |
+| `docs/audit/gtm-readiness-2026-06-05.md`                    | Lane 5 GTM-Readiness — GR tiers     | GTM, founders                |
 | `docs/audit/internal-10-10-signoff-2026-05-28.md`           | Lane 1 forensic                     | Engineering                  |
 | `docs/audit/master-audit-2026-06-03.md`                     | Lane 4 forensic                     | Investors                    |
 | `docs/audit/full-audit-2026-06-04.md`                       | Six-phase full audit                | Engineering leadership       |
@@ -297,6 +297,6 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 
 This document reflects **2026-06-05** state via [readiness-model.md](../audit/readiness-model.md) — **five lanes**, each with existing forensic audits.
 
-**Lane 1:** CI gates pass; internal signoff **10.0**. **Lane 2:** docs/hygiene **9.6**. **Lane 3:** external register **0/12**. **Lane 4:** certified **8.9** (master audit only). **Lane 5:** library **S1**; ecosystem sovereign **S2 not ready**.
+**Audit quality:** L1–L5 forensic programs rate **8.0–8.5/10** (see readiness-model). **Readiness:** engineering outcomes strong; Industry Compliance **IC-T0**; GTM-Readiness **GR-T1** per gtm-reality-check.
 
-Procurement advances on **lanes 3–5**, not more lane 1 engineering.
+Procurement advances on **IC tiers + GR tiers**, not more engineering audits.

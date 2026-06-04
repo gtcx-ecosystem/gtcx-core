@@ -59,11 +59,11 @@ pnpm test:coverage:critical && pnpm api:check && pnpm security:threat-matrix
 
 ## Out of scope (other lanes)
 
-| Topic                      | Lane                                                                           |
-| -------------------------- | ------------------------------------------------------------------------------ |
-| Pen-test, SOC 2 letter     | [external-dependent-compliance](./external-dependent-compliance-2026-06-05.md) |
-| Sandbox emails, pilot MSAs | [gtm-readiness](./gtm-readiness-2026-06-05.md)                                 |
-| Certified composite 8.9    | [bank-grade](./bank-grade-2026-06-05.md)                                       |
+| Topic                      | Lane                                                       |
+| -------------------------- | ---------------------------------------------------------- |
+| Pen-test, SOC 2 letter     | [industry-compliance](./industry-compliance-2026-06-05.md) |
+| Sandbox emails, pilot MSAs | [gtm-readiness](./gtm-readiness-2026-06-05.md)             |
+| Certified composite 8.9    | [bank-grade](./bank-grade-2026-06-05.md)                   |
 
 ---
 

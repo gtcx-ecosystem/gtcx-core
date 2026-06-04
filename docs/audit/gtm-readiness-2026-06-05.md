@@ -1,61 +1,68 @@
 ---
-title: 'GTM readiness — index'
+title: 'GTM-Readiness — index'
 status: current
 date: 2026-06-05
 owner: gtcx-core
 role: protocol-architect
-document_id: AUDIT-GTM-INDEX-2026-06-05
-audit_lane: gtm
+document_id: AUDIT-GTM-READINESS-2026-06-05
+audit_lane: gtm-readiness
 framework: '~/.claude/GTM.md v1.0'
 tier: standard
-tags: ['audit', 'gtm', 'index']
+tags: ['audit', 'gtm-readiness', 'index', 'tier']
 review_cycle: quarterly
 ---
 
-# GTM readiness — index
+# GTM-Readiness — index
 
 **Lane 5 of 5** — [readiness-model.md](./readiness-model.md)
 
-Commercial adoptability and buyer stages — **non-engineering**.
+Commercial adoptability for **who can buy what today** — non-engineering. Aligns with `~/.claude/GTM.md` S0–S6 stages, expressed here as **GR tiers**.
+
+**Audit quality:** **8.0/10** — [gtm-reality-check-2026-06-02](../gtm/gtm-reality-check-2026-06-02.md)
+
+**Readiness:** **GR tier + status** — never 1–10.
 
 ---
 
-## Audit quality (1–10)
+## GTM-Readiness tiers (GR-T0–GR-T6)
 
-**Lane 5 GTM audit quality:** **8.0/10** — [gtm-reality-check-2026-06-02](../gtm/gtm-reality-check-2026-06-02.md)
+| Tier      | GTM stage     | Buyer can…                                                 | Current placement (gtcx-core)                         |
+| --------- | ------------- | ---------------------------------------------------------- | ----------------------------------------------------- |
+| **GR-T0** | S0 Prototype  | Internal team reproduces build                             | **Achieved**                                          |
+| **GR-T1** | S1 MVP        | Developer integrates `@gtcx/*` in &lt; 1 day               | **Achieved** — library integrator                     |
+| **GR-T2** | S2 Pilot      | Paying customer runs 30-day controlled trial               | **Partial** — technical OK; no library-only pilot MSA |
+| **GR-T3** | S3 GA         | Close commercial deals without custom engineering per deal | **Not ready**                                         |
+| **GR-T4** | S4 Enterprise | Fortune 500 security/legal/procurement approve             | **Not ready**                                         |
+| **GR-T5** | S5 Government | Federal/state ATO pathway                                  | **Not ready**                                         |
+| **GR-T6** | S6 Defense    | Classified / air-gap environments                          | **Not ready**                                         |
 
-## Readiness outcomes (S0–S6 stages — not 1–10)
+**Aggregate GTM-Readiness tier (library SKU):** **GR-T1**
 
-| Buyer                                           | Stage            | Notes                            |
-| ----------------------------------------------- | ---------------- | -------------------------------- |
-| **A — Library integrator** (`pnpm add @gtcx/*`) | **S1 Ready**     | npm + Sigstore + downstream docs |
-| **A — Integrator 30-day trial**                 | **S2 Partial**   | No library-only pilot MSA        |
-| **B — Ecosystem sovereign stack**               | **S2 Not Ready** | Infra/founder gates              |
-
----
-
-## Canonical audits & docs
-
-| Artifact                                                                         | Role                                      |
-| -------------------------------------------------------------------------------- | ----------------------------------------- |
-| [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md)        | Full S0–S6 assessment (historical detail) |
-| [16-ecosystem-gtm-alignment.md](../gtm/16-ecosystem-gtm-alignment.md)            | Core vs infrastructure ownership          |
-| [engagement-log/README.md](../agile/engagement-log/README.md)                    | Sandbox send status (all send-blocked)    |
-| [external-dependencies-register](./external-dependencies-register-2026-05-28.md) | EXT-CORE-007–010 (GTM rows only)          |
-| [gtm/README.md](../gtm/README.md)                                                | Regulator / investor evidence pack index  |
+**Aggregate GTM-Readiness tier (ecosystem sovereign stack):** **below GR-T2** — pen-test, testnet, sandbox send, pilot DPA open ([16-ecosystem-gtm-alignment](../gtm/16-ecosystem-gtm-alignment.md)).
 
 ---
 
-## Ecosystem blockers (buyer B)
+## Buyer tracks
 
-Pen-test on live stack, pilot DPA, testnet/DR — see [16-ecosystem-gtm-alignment](../gtm/16-ecosystem-gtm-alignment.md) and gtcx-infrastructure GTM. **Lane 3** owns pen-test artifact; **lane 5** owns outreach and contracts.
+| Track                                   | Highest tier achieved | Status    |
+| --------------------------------------- | --------------------- | --------- |
+| **A — Library integrator**              | **GR-T1**             | Ready     |
+| **A — Integrator 30-day trial**         | **GR-T2**             | Partial   |
+| **B — Ecosystem sovereign / regulator** | **&lt; GR-T2**        | Not ready |
 
 ---
 
-## Out of scope
+## Register rows (GTM-Readiness only)
 
-| Topic                     | Lane                                                                                 |
-| ------------------------- | ------------------------------------------------------------------------------------ |
-| `pnpm test` pass          | [engineering-completeness-quality](./engineering-completeness-quality-2026-06-05.md) |
-| SOC 2 TSC mapping in-repo | [internal-compliance](./internal-compliance-2026-06-05.md)                           |
-| Certified 8.9 composite   | [bank-grade](./bank-grade-2026-06-05.md)                                             |
+EXT-CORE-007–010 (sandbox emails, pilot, regulator response) — tracked in [external-dependencies-register](./external-dependencies-register-2026-05-28.md), attributed to **lane 5** not Industry Compliance.
+
+---
+
+## Canonical audits
+
+| Artifact                                                                  | Role          |
+| ------------------------------------------------------------------------- | ------------- |
+| [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md) | S0–S6 detail  |
+| [16-ecosystem-gtm-alignment.md](../gtm/16-ecosystem-gtm-alignment.md)     | Owner split   |
+| [engagement-log/README.md](../agile/engagement-log/README.md)             | Send-blocked  |
+| [gtm/README.md](../gtm/README.md)                                         | Evidence pack |
