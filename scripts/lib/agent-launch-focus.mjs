@@ -9,6 +9,7 @@ import {
   TIER5_MILESTONES,
   parseCompletedOpsDocs,
   parseCompletedTier5,
+  parseCompletedLaunchPlan,
 } from './agent-work-queues.mjs';
 
 export const LAUNCH_SCHEMA = 'gtcx.launchFocus.v1';
@@ -268,7 +269,8 @@ export function buildLaunchFocus(repoRoot) {
   ]);
 
   const human = dedupeById(humanGates({}, workplan, executionMd));
-  const plan = [...PLANNING_QUEUE];
+  const completedPlan = parseCompletedLaunchPlan(session);
+  const plan = PLANNING_QUEUE.filter((item) => !completedPlan.has(item.storyId));
   const witness = [
     ...witnessItems(human, {}),
     ...(oiX02OutboundFiled

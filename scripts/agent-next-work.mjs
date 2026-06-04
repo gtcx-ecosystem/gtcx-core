@@ -18,6 +18,7 @@ import {
   TIER5_MILESTONES,
   parseCompletedOpsDocs,
   parseCompletedTier5,
+  isLaunchPlanComplete,
 } from './lib/agent-work-queues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -258,6 +259,7 @@ function core004EngineeringDone() {
 
 /** When automatable in-repo work is exhausted — commercial ceiling + Class R hygiene (P26). */
 function selectBacklogClearGuidance() {
+  const { session } = readRepoContext(REPO_ROOT);
   const commercialDoc =
     'docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md';
   const blockerDoc =
@@ -265,6 +267,7 @@ function selectBacklogClearGuidance() {
   const engineeringCloseout = CORE_004_ENGINEERING_DONE;
   const packDone = certifiedPackManifestReady();
   const core004Done = core004EngineeringDone();
+  const launchPlanDone = isLaunchPlanComplete(session);
 
   const nextStory = !packDone
     ? {
@@ -275,7 +278,7 @@ function selectBacklogClearGuidance() {
         owner: 'gtcx-core',
         implementationClass: 'ops-docs',
       }
-    : core004Done
+    : core004Done && !launchPlanDone
       ? {
           storyId: 'LAUNCH-PLAN-01',
           title: 'Reconcile machine launch state (auto-dev + launch-focus)',
@@ -284,6 +287,16 @@ function selectBacklogClearGuidance() {
           owner: 'gtcx-core',
           implementationClass: 'ops-docs',
         }
+      : core004Done && launchPlanDone
+        ? {
+            storyId: 'DTF-5.5.4',
+            title: 'Design-partner LOI or regulator letter',
+            status: 'awaiting-human',
+            blocked: true,
+            external: true,
+            owner: 'Human / GTM',
+            implementationClass: 'external',
+          }
       : {
           storyId: 'CORE-004',
           title: 'Trusted-setup transcript publish + KAT pin closeout',
@@ -301,27 +314,36 @@ function selectBacklogClearGuidance() {
     frame: 'development',
     protocol: '22-agent-work-selection',
     message: packDone
-      ? core004Done
-        ? 'CORE-004 engineering closed. Launch plan queue + DTF-5.5.4 LOI (Class S parallel).'
-        : 'Tier 5 technical complete. Commercial ceiling: DTF-5.5.4 LOI (Class S). DTF-5.5.2 pipeline shipped.'
+      ? core004Done && launchPlanDone
+        ? 'Launch plan bout complete. Commercial ceiling: DTF-5.5.4 LOI + CORE-004-CEREMONY (Class S).'
+        : core004Done
+          ? 'CORE-004 engineering closed. Launch plan queue + DTF-5.5.4 LOI (Class S parallel).'
+          : 'Tier 5 technical complete. Commercial ceiling: DTF-5.5.4 LOI (Class S). DTF-5.5.2 pipeline shipped.'
       : 'Run DTF-5.5.2 certified pack pipeline (Class R) before commercial witness-only mode.',
     witness: core004Done ? engineeringCloseout : commercialDoc,
     next: nextStory,
     nextPriority: packDone
-      ? core004Done
+      ? core004Done && launchPlanDone
         ? {
-            owner: 'gtcx-core',
-            action: 'LAUNCH-PLAN-01 — pnpm agent:reconcile-launch (Class R)',
-            outbound: engineeringCloseout,
-            because: 'CORE-004 Class R engineering done; ceremony publish Class S parallel',
+            owner: 'Human / GTM',
+            action: 'DTF-5.5.4 — design-partner LOI or regulator letter (Class S)',
+            outbound: commercialDoc,
+            because: 'Launch plan bout complete; automatable repo work exhausted',
           }
-        : {
-            owner: 'gtcx-core',
-            action:
-              'CORE-004 — trusted-setup transcript publish + KAT pin (Class R); DTF-5.5.4 LOI parallel Class S only',
-            outbound: blockerDoc,
-            because: 'Launch implement queue — commercial ceiling is LOI only, not repo-wide blocked',
-          }
+        : core004Done
+          ? {
+              owner: 'gtcx-core',
+              action: 'LAUNCH-PLAN-01 — pnpm agent:reconcile-launch (Class R)',
+              outbound: engineeringCloseout,
+              because: 'CORE-004 Class R engineering done; ceremony publish Class S parallel',
+            }
+          : {
+              owner: 'gtcx-core',
+              action:
+                'CORE-004 — trusted-setup transcript publish + KAT pin (Class R); DTF-5.5.4 LOI parallel Class S only',
+              outbound: blockerDoc,
+              because: 'Launch implement queue — commercial ceiling is LOI only, not repo-wide blocked',
+            }
       : {
           owner: 'gtcx-core',
           action:
@@ -348,17 +370,19 @@ function selectBacklogClearGuidance() {
         : []),
     ],
     repoCompletable: packDone
-      ? core004Done
+      ? core004Done && !launchPlanDone
         ? {
             storyId: 'LAUNCH-PLAN-01',
             action: 'pnpm agent:reconcile-launch',
             priority: 'P1',
           }
-        : {
-            storyId: 'CORE-004',
-            action: 'Optional Class R: publish ZKP transcript under artifacts/trusted-setup/',
-            priority: 'P3',
-          }
+        : core004Done && launchPlanDone
+          ? null
+          : {
+              storyId: 'CORE-004',
+              action: 'Optional Class R: publish ZKP transcript under artifacts/trusted-setup/',
+              priority: 'P3',
+            }
       : {
           storyId: 'DTF-5.5.2',
           action: 'pnpm certified-pack:build-manifest && pnpm certified-pack:verify-manifest',
@@ -377,14 +401,18 @@ function selectBacklogClearGuidance() {
     },
     statusUpdate: {
       done: packDone
-        ? core004Done
-          ? 'CORE-004 engineering closeout (Class R) — trusted-setup verify suite green'
-          : 'DTF-5.5.2 certified pack manifest built + verified (Class R)'
+        ? launchPlanDone
+          ? 'LAUNCH-PLAN bout complete — coordination + readiness lanes green'
+          : core004Done
+            ? 'CORE-004 engineering closeout (Class R) — trusted-setup verify suite green'
+            : 'DTF-5.5.2 certified pack manifest built + verified (Class R)'
         : 'DTF-5.5.1 strict packs + DTF-5.5.5 evidence index',
       nextPriority: packDone
-        ? core004Done
-          ? '**gtcx-core** — LAUNCH-PLAN-01 reconcile (Class R)'
-          : '**gtcx-core** — CORE-004 trusted-setup publish (Class R)'
+        ? launchPlanDone
+          ? '**Human / GTM** — DTF-5.5.4 LOI (Class S); **Custodian** — CORE-004-CEREMONY'
+          : core004Done
+            ? '**gtcx-core** — LAUNCH-PLAN-01 reconcile (Class R)'
+            : '**gtcx-core** — CORE-004 trusted-setup publish (Class R)'
         : '**gtcx-core** — run certified-pack build + verify (Class R)',
       approvalNeeded: packDone
         ? '**DTF-5.5.4** LOI (Class S); **CORE-004-CEREMONY** transcript publish (Class S, parallel)'

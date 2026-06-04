@@ -171,3 +171,26 @@ export function parseCompletedOpsDocs(session) {
   }
   return done;
 }
+
+export function parseCompletedLaunchPlan(session) {
+  const done = new Set();
+  const re = /(LAUNCH-PLAN-\d{2})[^\n|]*\|[^\n]*\*\*done\*\*/gi;
+  let m;
+  while ((m = re.exec(session)) !== null) {
+    done.add(m[1].toUpperCase());
+  }
+  return done;
+}
+
+const LAUNCH_PLAN_IDS = [
+  'LAUNCH-PLAN-01',
+  'LAUNCH-PLAN-02',
+  'LAUNCH-PLAN-03',
+  'LAUNCH-PLAN-04',
+  'LAUNCH-PLAN-05',
+];
+
+export function isLaunchPlanComplete(session) {
+  const completed = parseCompletedLaunchPlan(session);
+  return LAUNCH_PLAN_IDS.every((id) => completed.has(id));
+}

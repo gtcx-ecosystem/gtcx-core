@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 /**
- * GTCX session start — forwards to baseline-os repo-session-core (SSOT).
+ * GTCX session start — forwards to baseline-os `baseline start` (full chain SSOT).
  * Rolled out to ecosystem repos via ecosystem:rollout-agent-start.
  *
- * Full chain (INST-003 + gates): baseline start
+ * Phase B-only (repo-session-core) is deprecated. This now calls the full
+ * `baseline start` chain (Phase A institutional → Phase B repo → Phase C gates).
+ * Use --skip-startup or --skip-gates for lighter variants.
  */
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
@@ -18,9 +20,15 @@ if (!baselineRoot) {
   process.exit(1);
 }
 
-const core = join(baselineRoot, 'scripts/ecosystem/repo-session-core.mjs');
-const result = spawnSync(process.execPath, [core, ...process.argv.slice(2)], {
-  stdio: 'inherit',
-  cwd: process.cwd(),
-});
+// Call baseline start (full chain) instead of repo-session-core (Phase B only)
+const baselineBin = join(baselineRoot, 'packages/baselineos/dist/cli/bin.js');
+const passthrough = process.argv.slice(2);
+const result = spawnSync(
+  process.execPath,
+  [baselineBin, 'start', ...passthrough],
+  {
+    stdio: 'inherit',
+    cwd: process.cwd(),
+  }
+);
 process.exit(result.status ?? 1);

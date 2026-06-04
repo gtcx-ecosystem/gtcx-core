@@ -30,9 +30,11 @@ baseline start
 
 Build once if needed: `cd ../baseline-os && pnpm --filter baselineos build`
 
-**Chain:** gtcx-docs INST-003 → repo `agent start` (prefers `bin/agent`, no pnpm prefix) → repo gates → optional `--ingest` via gtcx-agile/baseline-os work-next.
+**Chain:** gtcx-docs INST-003 → repo session (via `run-repo-session` / `bin/agent`) → repo gates → optional `--ingest` via gtcx-agile/baseline-os work-next.
 
-**Repo-native (minimum — same session script, no institutional report):**
+**Do not treat `pnpm agent:start` alone as session complete.** It runs repo P22 bootstrap (baseline-os `repo-session-core` or repo-specific `agent-session-start.mjs`). It does **not** run INST-003 or repo gates. Use **`baseline start`** for the full L1 chain.
+
+**Repo-native minimum (P22 bootstrap only):**
 
 ```bash
 cd <owner-repo>

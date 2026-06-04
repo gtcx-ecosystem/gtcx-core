@@ -48,9 +48,13 @@ for (const file of markdownFiles) {
       continue;
     }
 
-    const targetPath = href.startsWith('/')
+    let targetPath = href.startsWith('/')
       ? path.resolve(workspaceRoot, `.${href}`)
       : path.resolve(path.dirname(absoluteFilePath), href);
+
+    if (!existsSync(targetPath) && !href.startsWith('/') && href.startsWith('docs/')) {
+      targetPath = path.resolve(workspaceRoot, href);
+    }
 
     if (!existsSync(targetPath)) {
       const line = content.slice(0, match.index ?? 0).split('\n').length;

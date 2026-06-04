@@ -91,7 +91,7 @@ Full gate sequence: `docs/devops/runbooks/quality-runbook.md`
 
 ## Universal agent behavior (ANY LLM — terminal, IDE, CLI)
 
-**Read every session:** [docs/operations/agent-universal-instructions.md](../docs/operations/agent-universal-instructions.md)
+**Read every session:** [docs/operations/agent-universal-instructions.md](docs/operations/agent-universal-instructions.md)
 
 **First command:** `pnpm agent:start` · **Execution bout** drain Class R before check-in · **P22** no menus · **P26** Proceed Brief then work · **P27** you run commands (never "Say push if you want").
 
@@ -178,7 +178,7 @@ Runs Protocol 22 next-work, provisions **launch focus** + **execution bout**, **
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
-4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:start` before implementation (provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; micro-commit per story. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; micro-commit per story. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
 
 ## Build & Run
 
@@ -292,7 +292,7 @@ pnpm agent:bout                   # human summary
 
 ## Bout progress gauge + task backlog (all agents)
 
-**Normative:** [agent-bout-progress-gauge.md](../docs/operations/agent-bout-progress-gauge.md) · [agent-task-backlog-format.md](../docs/operations/agent-task-backlog-format.md)
+**Normative:** [agent-bout-progress-gauge.md](docs/operations/agent-bout-progress-gauge.md) · [agent-task-backlog-format.md](docs/operations/agent-task-backlog-format.md)
 
 **Per repo:** `.baseline/bout-progress.config.json` — dimensions **A** (engineering), **B** (workflow, product repos), **C** (GTM buyer S0–S6).
 
@@ -304,7 +304,7 @@ pnpm agent:reconcile-bout-progress    # sync A from latest.json
 
 **Status Update:** include `### Progress gauge` block (auto text from `pnpm agent:bout-progress`). Use **task IDs** (`EOS-UX-052`, `CORE-004`) — not “next slices”.
 
-**Product repo example:** [bout-progress-exploration-os.config.json](../docs/operations/examples/bout-progress-exploration-os.config.json) — copy to exploration-os `.baseline/`.
+**Product repo example:** [bout-progress-exploration-os.config.json](docs/operations/examples/bout-progress-exploration-os.config.json) — copy to exploration-os `.baseline/`.
 
 **GTM stage assessment:** Cursor `/gtm` or `~/.claude/GTM.md` — buyer truth separate from bout composite.
 
