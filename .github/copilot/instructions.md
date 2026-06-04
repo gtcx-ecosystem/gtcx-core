@@ -166,4 +166,120 @@ Runs Protocol 22 next-work, refreshes `.baseline/memory/session.md`, prints Proc
 **JSON for automation:** `pnpm agent:session-start --json`
 
 **Before PR (agent-path changes):** include attestation from `docs/operations/agent-attestation-template.md` · `pnpm agent:attestation:check --pr`
+
+## Repository
+
+`gtcx-core` — shared TypeScript and Rust protocol foundation for cryptography, identity, verification, resilience, and downstream GTCX integrations.
+
+## Stack
+
+- TypeScript packages under `packages/*`, built with `tsup`, tested with `vitest`, orchestrated by `turbo`.
+- Rust crates under `rust/*`, built and tested with Cargo.
+- Package manager: `pnpm@9.15.0`.
+- Runtime baseline: Node.js 20+ and Rust 1.91+.
+
+## Non-Negotiables
+
+1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
+2. **No emojis** unless explicitly requested.
+3. **No going in circles** — read this file + the repo's own docs before exploring.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` before implementation; then `pnpm agent:next-work` is included. Never ask which roadmap story to pick; refresh `.baseline/memory/session.md` after each story. Verify: `pnpm agent:work-selection:check` · `pnpm agent:protocols:check`.
+
+## Build & Run
+
+```bash
+pnpm install
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm build
+pnpm architecture:check
+pnpm docs:check-links
+pnpm docs:check-frontmatter
+pnpm bundle:check-budgets
+```
+
+## Credentials: system-of-record + ownership split (cross-repo)
+
+**Canonical policy:** `gtcx-docs/docs/governance/protocols/19-agent-credential-access/protocol.md` (see “System-of-Record and Operational Ownership Split”).
+
+- **System-of-record (SoR)**: `gtcx-agentic` Baseline vault (shared provider creds + audited access)
+- **Runtime usage owner**: product repo (e.g. `gtcx-intelligence`) owns its runtime secrets
+- **CI/automation owner**: `gtcx-infrastructure` owns org automation secrets/policy
+- **Contracts only**: `gtcx-protocols` defines env var names, redaction rules, and artifact paths/globs
+
+**Credentialed evidence packs:** run either via vault injection on a dev laptop or in infra-owned CI; write redacted JSON evidence only (no raw secrets).
+
+## LLM routing + token usage (BaselineOS SoR)
+
+| Concern                       | Owner          | Operator entry                                                |
+| ----------------------------- | -------------- | ------------------------------------------------------------- |
+| Route decisions + pricing     | `baseline-os`  | `baseline cost-route --prompt "..." --json`                   |
+| Token usage aggregate         | `baseline-os`  | `baseline cost-stats --json`                                  |
+| Agent vault (populate/verify) | `gtcx-agentic` | `pnpm agent:vault:verify`                                     |
+| Staging vs production keys    | `gtcx-agentic` | `docs/operators/vault-environments.md`                        |
+| Ecosystem coordination        | `baseline-os`  | `workstream/coordination/ECOSYSTEM-COST-ROUTER-2026-06-03.md` |
+
+**Do not** use `baseline-os/infra/docker/.env.staging` for production vault work.
+
+## Execute roadmap (any LLM, any repo)
+
+Command: **`execute-roadmap`** (not `roadmap`).
+
+1. Read `../gtcx-docs/tools/roadmap/roadmap-framework/AGENT-START.md`
+2. Read `commands/execute-roadmap.md` and `prompts/roadmap/roadmap-reconcile-execute-prompt.md`
+3. Update `docs/strategy/execution-roadmap.md` or `docs/audit/execution-roadmap.md`; execute until active phase done
+4. Quick: `prompts/shareable/execute-roadmap-prompt-RUN.md`
+
+Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, etc.
+
+## Cross-repo coordination (Protocol 24)
+
+**Canonical policy:** [Protocol 24 — Cross-Repo Coordination](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/24-cross-repo-coordination/protocol.md)  
+**Complements:** [Protocol 22 — Agent Work Selection](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/protocol.md) (what to work on next).
+
+**Session card (normative — read first):** [ecosystem-unblock-playbook-2026-06.md](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-unblock-playbook-2026-06.md) — INT-S9-01 → IR vs XC; F1–F7; foundation evidence stays in **gtcx-core**.
+
+When a story is **blocked on a sibling repo** or you **hand off** cross-repo work, follow these five steps in order:
+
+| Step                | Action                                                                                                                                                                                                                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Ack**          | Read open handoffs: `baseline-os/workstream/coordination/coordination-report-latest.md` (if present) and any `from-*` / `to-*` tickets naming this repo. Reply with `outbound-ack` template when you receive a durable inbound.                                                |
+| **2. Roadmap**      | Record ticket IDs and blocker repo in `docs/audit/auto-dev-state.md`, `.baseline/memory/dependencies.md`, and/or `docs/audit/agent-work-pointer.md` (if used). Do not leave blockers chat-only.                                                                                |
+| **3. Inbound doc**  | File a durable handoff: `docs/gtm/inbound-tickets/from-<this-repo>-<topic>-YYYY-MM-DD.md` or `docs/coordination/<initiative>-coordination.md` ([template](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/reference/templates/agents/3-structure/coordination.md)). |
+| **4. Hub if P0**    | Ecosystem-critical path: from `baseline-os`, `pnpm ecosystem:repo:report-work --repo=<repo> --item="..." --status=blocked`. Use `gtcx-docs/docs/gtm/inbound-tickets/` only when the **docs hub** is the coordination witness (releases, standards).                            |
+| **5. No duplicate** | Link [deployment-proof-index](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/audit/evidence/deployment-proof-index.md) and protocol contracts — **do not** copy harness YAML, evidence indexes, or normative protocol text into product repos.                |
+
+**Not in this repo:** inbound archive SoR for ecosystem-wide weekly reports — that stays **`baseline-os`** (`workstream/coordination/`).
+
+**Evidence paths (link only):** production smoke and EAP issuance artifacts live in owning repos per deployment-proof-index (e.g. `gtcx-intelligence/docs/audit/evidence/`).
+
+## Claude-Specific Notes
+
+- Session-start protocol from `~/.claude/CLAUDE.md` applies: read `DESIGN_BAR.md` and `AI_NATIVE_PATTERNS.md` before UI work.
+- Reject conventional UI anti-patterns: AI sidebar, AI tab, "Run AI" buttons, blank forms, dashboard-as-report.
+- No emojis, no preamble, no time estimates, lead with the answer.
+
+## Status Update (progress / handoff / end of turn)
+
+Use **after work in the turn** or when reporting cluster/repo state — not instead of Proceed Brief at session start.
+
+```markdown
+## Status Update
+
+### Done
+- <outcome> — <evidence: command exit N, commit SHA, probe result>
+
+### Next priority
+- **Owner:** <repo or role>
+- **Action:** <single imperative>
+- **Because:** <1 line — P22 ID, blocker, witness>
+
+### Approval needed
+- <only Class A or S gates — secret, prod, legal, force-push; omit section if none>
+```
+
+**Rules:** One next priority (not a menu). **Approval needed** only for real gates — never "I can push / I can help / if you want." Class **R**: execute, then show Done + Next.
+
+Template: `docs/operations/agent-status-update-template.md` · Spec: P26 §3b (gtcx-docs).
 <!-- AGENT-SYNC:END -->

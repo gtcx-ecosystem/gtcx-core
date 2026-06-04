@@ -27,6 +27,8 @@ Copy at session start **before** irreversible implementation. Hub: [Protocol 26]
 **Override:** Reply **stop**, **correct:** …, or explicit story ID.
 ```
 
+**Status Update (after work — P26 §3b):** see `docs/operations/agent-status-update-template.md` — **Done** → **Next priority** → **Approval needed** (omit if none).
+
 **Blocker Report (when blocked):**
 
 ```markdown

@@ -290,4 +290,27 @@ Runs Protocol 22 next-work, refreshes `.baseline/memory/session.md`, prints Proc
 - Session-start protocol from `~/.claude/CLAUDE.md` applies: read `DESIGN_BAR.md` and `AI_NATIVE_PATTERNS.md` before UI work.
 - Reject conventional UI anti-patterns: AI sidebar, AI tab, "Run AI" buttons, blank forms, dashboard-as-report.
 - No emojis, no preamble, no time estimates, lead with the answer.
+
+## Status Update (progress / handoff / end of turn)
+
+Use **after work in the turn** or when reporting cluster/repo state — not instead of Proceed Brief at session start.
+
+```markdown
+## Status Update
+
+### Done
+- <outcome> — <evidence: command exit N, commit SHA, probe result>
+
+### Next priority
+- **Owner:** <repo or role>
+- **Action:** <single imperative>
+- **Because:** <1 line — P22 ID, blocker, witness>
+
+### Approval needed
+- <only Class A or S gates — secret, prod, legal, force-push; omit section if none>
+```
+
+**Rules:** One next priority (not a menu). **Approval needed** only for real gates — never "I can push / I can help / if you want." Class **R**: execute, then show Done + Next.
+
+Template: `docs/operations/agent-status-update-template.md` · Spec: P26 §3b (gtcx-docs).
 <!-- AGENT-SYNC:END -->

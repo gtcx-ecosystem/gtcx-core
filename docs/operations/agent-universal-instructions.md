@@ -76,6 +76,40 @@ Emit exactly this shape, then **start work**:
 
 ---
 
+## 3b. Status Update (progress / handoff / end of turn)
+
+After substantive work (not at cold session start), close with this frame:
+
+```markdown
+## Status Update
+
+### Done
+
+- <outcome> — <command exit N · commit · probe>
+
+### Next priority
+
+- **Owner:** <repo | role>
+- **Action:** <single imperative>
+- **Because:** <story / hub / witness>
+
+### Approval needed
+
+- <Class A/S gates only — omit section if none>
+```
+
+| Section             | Purpose                                            |
+| ------------------- | -------------------------------------------------- |
+| **Done**            | What completed this turn, with evidence            |
+| **Next priority**   | One recommended follow-on (agent executes Class R) |
+| **Approval needed** | Human gates only — never menus or "I can …"        |
+
+Full template: `docs/operations/agent-status-update-template.md` (rolled out with universal instructions).
+
+**Start vs report:** Proceed Brief (§3) **before** work · Status Update (§3b) **after** work.
+
+---
+
 ## 4. Protocol 27 — run commands yourself
 
 | You run                                     | You do not ask         |
@@ -116,7 +150,7 @@ All synced from `gtcx-agentic` templates via `pnpm agent:sync`:
 
 **SoR for templates:** `gtcx-agentic/scripts/sync/templates/.agent/`
 
-**Ecosystem rollout:** `pnpm --dir gtcx-agentic ecosystem:rollout-universal`
+**Maintainer gate (CI):** `pnpm ecosystem:rollout-universal:check` in gtcx-agentic. Agents run `ecosystem:rollout-universal` in-session when updating templates (P27) — never tell the operator to run sync/rollout.
 
 ---
 
