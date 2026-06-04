@@ -49,7 +49,7 @@ const nextLabel =
   'unknown';
 
 const blocked = Boolean(nextWork?.next?.blocked);
-const authorityClass = blocked ? 'R' : 'S';
+const authorityClass = blocked ? 'S' : 'R';
 
 const bootstrap = `
 ## Session bootstrap (${stamp} UTC)

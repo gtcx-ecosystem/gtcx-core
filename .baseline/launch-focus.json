@@ -2,7 +2,7 @@
   "schema": "gtcx.launchFocus.v1",
   "normativeDoc": "docs/operations/agent-launch-focus.md",
   "statePath": ".baseline/launch-focus.json",
-  "provisionedAt": "2026-06-04T19:29:05.579Z",
+  "provisionedAt": "2026-06-04T21:13:01.365Z",
   "repo": "gtcx-core",
   "northStar": {
     "outcome": "Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.",
@@ -28,9 +28,9 @@
         "storyId": "CORE-004",
         "title": "Trusted-setup transcript publish + KAT pin closeout",
         "workClass": "ops-docs",
-        "authorityClass": "S",
+        "authorityClass": "R",
         "lane": "ceremony",
-        "because": "D3 / sovereign ZKP defensibility — partial engineering done",
+        "because": "D3 / sovereign ZKP defensibility — Class R engineering publish (legal sign separate)",
         "paths": [
           "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md",
           "docs/operations/coordination/core-004-ceremony-publish-checklist.md",
@@ -43,7 +43,7 @@
         "storyId": "LAUNCH-PLAN-01",
         "title": "Reconcile machine launch state (auto-dev + launch-focus)",
         "workClass": "ops-docs",
-        "authorityClass": "S",
+        "authorityClass": "R",
         "command": "pnpm agent:reconcile-launch",
         "lane": "launch-planning"
       },
@@ -51,7 +51,7 @@
         "storyId": "LAUNCH-PLAN-02",
         "title": "Refresh execution-roadmap open items + executive summary",
         "workClass": "ops-docs",
-        "authorityClass": "S",
+        "authorityClass": "R",
         "paths": ["docs/audit/execution-roadmap.md"],
         "lane": "launch-planning"
       },
@@ -59,7 +59,7 @@
         "storyId": "LAUNCH-PLAN-03",
         "title": "Update cross-repo bridge Latest row (GTM critical path)",
         "workClass": "ops-docs",
-        "authorityClass": "S",
+        "authorityClass": "R",
         "paths": ["docs/operations/coordination/cross-repo-agent-bridge.md"],
         "lane": "launch-planning"
       },
@@ -67,7 +67,7 @@
         "storyId": "LAUNCH-PLAN-04",
         "title": "File or refresh infra outbound OI-X02 (ER-1-08 hub ack)",
         "workClass": "ops-docs",
-        "authorityClass": "S",
+        "authorityClass": "R",
         "paths": ["docs/operations/coordination/remaining-cross-repo-work-2026-06-02.md"],
         "lane": "cross-repo-gtm"
       },
@@ -75,7 +75,7 @@
         "storyId": "LAUNCH-PLAN-05",
         "title": "Probe readiness lanes + fix index drift blocking GTM claims",
         "workClass": "ops-docs",
-        "authorityClass": "S",
+        "authorityClass": "R",
         "command": "pnpm readiness:lanes:check",
         "lane": "launch-planning"
       }
@@ -111,9 +111,9 @@
       "storyId": "CORE-004",
       "title": "Trusted-setup transcript publish + KAT pin closeout",
       "workClass": "ops-docs",
-      "authorityClass": "S",
+      "authorityClass": "R",
       "lane": "ceremony",
-      "because": "D3 / sovereign ZKP defensibility — partial engineering done",
+      "because": "D3 / sovereign ZKP defensibility — Class R engineering publish (legal sign separate)",
       "paths": [
         "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md",
         "docs/operations/coordination/core-004-ceremony-publish-checklist.md",

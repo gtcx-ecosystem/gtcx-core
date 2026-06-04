@@ -270,13 +270,12 @@ function selectBacklogClearGuidance() {
     witness: commercialDoc,
     next: packDone
       ? {
-          storyId: 'DTF-5.5.4',
-          title: 'Design-partner LOI or regulator letter',
-          status: 'awaiting-human',
-          blocked: true,
-          blocker: 'Class S — GTM / Legal / sovereign program',
-          owner: 'Human / GTM',
-          implementationClass: 'external',
+          storyId: 'CORE-004',
+          title: 'Trusted-setup transcript publish + KAT pin closeout',
+          status: 'pending',
+          blocked: false,
+          owner: 'gtcx-core',
+          implementationClass: 'ops-docs',
         }
       : {
           storyId: 'DTF-5.5.2',
@@ -288,11 +287,11 @@ function selectBacklogClearGuidance() {
         },
     nextPriority: packDone
       ? {
-          owner: 'Human / GTM',
+          owner: 'gtcx-core',
           action:
-            'DTF-5.5.4 — file redacted LOI or regulator letter in docs/audit/evidence/ (Class S); intelligence/protocols witness only',
-          outbound: commercialDoc,
-          because: 'Tier 5 commercial gate 5-C2 — engineering pipeline (5.5.2) complete',
+            'CORE-004 — trusted-setup transcript publish + KAT pin (Class R); DTF-5.5.4 LOI parallel Class S only',
+          outbound: blockerDoc,
+          because: 'Launch implement queue — commercial ceiling is LOI only, not repo-wide blocked',
         }
       : {
           owner: 'gtcx-core',
@@ -336,9 +335,9 @@ function selectBacklogClearGuidance() {
         ? 'DTF-5.5.2 certified pack manifest built + verified (Class R)'
         : 'DTF-5.5.1 strict packs + DTF-5.5.5 evidence index',
       nextPriority: packDone
-        ? '**Human / GTM** — DTF-5.5.4 LOI or regulator letter (Class S only)'
+        ? '**gtcx-core** — CORE-004 trusted-setup publish (Class R)'
         : '**gtcx-core** — run certified-pack build + verify (Class R)',
-      approvalNeeded: packDone ? '**DTF-5.5.4** LOI/regulator letter (Class S)' : undefined,
+      approvalNeeded: packDone ? '**DTF-5.5.4** LOI/regulator letter (Class S, parallel)' : undefined,
       deferred: 'DTF-5.5.3 optional; CORE-004 transcript publish (Class R, parallel)',
     },
     communicationPolicy: {
