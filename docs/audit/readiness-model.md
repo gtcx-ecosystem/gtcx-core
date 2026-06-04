@@ -13,7 +13,19 @@ supersedes_note: 'Replaces three-lane model; maps to existing audits in docs/aud
 
 # Readiness model — five audit lanes
 
-**Purpose:** One score per lane. Each lane has **existing audit artifacts** in `docs/audit/` (and `docs/gtm/` for GTM) — lane index files only synthesize and link; they do not replace forensic audits.
+**Purpose:** One score per lane. Each lane has **existing audit artifacts** in `docs/audit/` (and `docs/gtm/` for GTM) — lane index files (`*-2026-06-05.md`) only synthesize and link; they do **not** replace forensic audits.
+
+**Already in repo before 2026-06-05:** The split was documented; the five-lane **names and index files** were added in commit `6067267`. Pre-existing forensic audits:
+
+| Lane                  | Pre-existing audit (date)                                                                                                                                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 Engineering         | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md), [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md), [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) |
+| 2 Internal compliance | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md), [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)                                                                               |
+| 3 External-dependent  | [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md) — **internal 10.0 vs certified 8.9** split                                                                                    |
+| 4 Bank-grade          | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md), [latest.json](./latest.json)                                                                                                                                     |
+| 5 GTM                 | [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md), [gtm-roadmap-10-10-internal-2026-06-01.md](../gtm/gtm-roadmap-10-10-internal-2026-06-01.md) § “Two scores”                                        |
+
+Also: [docs/internal/external-readiness-checklist.md](../internal/external-readiness-checklist.md), README § “Two scores apply” (2026-06-04).
 
 ---
 
@@ -29,15 +41,37 @@ supersedes_note: 'Replaces three-lane model; maps to existing audits in docs/aud
 
 ---
 
+## Rankings (1–10) — 2026-06-05
+
+Conservative **1–10** per lane. Source = forensic audit cited in [audit folder map](#audit-folder-map-by-lane), not the index files alone.
+
+| Lane                                 | Rank (1–10) | Primary evidence                                                                                                                                           | Notes                                                                                                                                                |
+| ------------------------------------ | ----------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 Engineering completeness & quality |     **9.5** | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md)                                                                       | Gate signoff claims **10.0** ([internal-10-10-signoff](./internal-10-10-signoff-2026-05-28.md)); use **9.5** for holistic package/coverage narrative |
+| 2 Internal compliance                |     **9.3** | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md) (9.6), [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md) (9.6) | In-repo controls + docs; SOC 2 **design** only — no Type I letter                                                                                    |
+| 3 External-dependent compliance      |       **2** | [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md)                                                             | **0/12** items `complete`; RFP/prep done (lane 2) does not raise this rank                                                                           |
+| 4 Bank-grade                         |     **8.9** | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md)                                                                                                 | Blended SCORING_FRAMEWORK composite — investor 8.9, enterprise 8.7, sovereign/DFI 9.0                                                                |
+| 5a GTM — library integrator          |       **7** | [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md)                                                                                  | **S1 Ready** — npm integrate &lt; 1 day; not S2 commercial pilot SKU                                                                                 |
+| 5b GTM — ecosystem sovereign stack   |       **3** | [16-ecosystem-gtm-alignment.md](../gtm/16-ecosystem-gtm-alignment.md), [engagement-log](../agile/engagement-log/README.md)                                 | Sandbox sends blocked; pen-test/testnet/DPA open                                                                                                     |
+
+**Do not confuse:** Lane 1 **9.5** ≠ lane 4 **8.9**. Lane 3 **2** ≠ lane 2 **9.3**.
+
+### GTM stage vs 1–10
+
+GTM framework uses **S0–S6 stages**, not a single 1–10. The ranks above map stages to a rough diligence scale (S1 ≈ 7, sovereign S2-not-ready ≈ 3).
+
+---
+
 ## Scores at a glance (2026-06-05)
 
-| Lane                          | Score / status                                       | Do not confuse with    |
-| ----------------------------- | ---------------------------------------------------- | ---------------------- |
-| Engineering                   | **10.0** internal signoff · **9.5** completion audit | Bank-grade 8.9         |
-| Internal compliance           | **~9.3/10**                                          | External pen-test      |
-| External-dependent compliance | **0/12** register items complete                     | Engineering 10.0       |
-| Bank-grade                    | **8.9/10** certified composite                       | Engineering 10.0       |
-| GTM (library)                 | **S1 Ready**                                         | Ecosystem sovereign S2 |
+| Lane                          | Rank | Status shorthand                                  |
+| ----------------------------- | ---: | ------------------------------------------------- |
+| Engineering                   |  9.5 | 10.0 signoff gates · 9.5 completion audit         |
+| Internal compliance           |  9.3 | Docs/hygiene 9.6; governance + threat matrix pass |
+| External-dependent compliance |    2 | 0/12 register complete                            |
+| Bank-grade                    |  8.9 | Certified composite                               |
+| GTM library                   |    7 | S1 Ready                                          |
+| GTM ecosystem sovereign       |    3 | S2 Not Ready                                      |
 
 ---
 

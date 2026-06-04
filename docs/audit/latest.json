@@ -4,6 +4,7 @@
   "readinessModel": "docs/audit/readiness-model.md",
   "lanes": {
     "engineeringCompletenessQuality": {
+      "rank1to10": 9.5,
       "scoreInternalSignoff": 10.0,
       "scoreCompletionAudit": 9.5,
       "index": "docs/audit/engineering-completeness-quality-2026-06-05.md",
@@ -13,6 +14,7 @@
       ]
     },
     "internalCompliance": {
+      "rank1to10": 9.3,
       "score": 9.3,
       "index": "docs/audit/internal-compliance-2026-06-05.md",
       "primaryAudits": [
@@ -21,6 +23,7 @@
       ]
     },
     "externalDependentCompliance": {
+      "rank1to10": 2,
       "registerOpen": 12,
       "registerComplete": 0,
       "complianceRelevantOpen": 7,
@@ -28,6 +31,7 @@
       "primaryAudit": "docs/audit/external-dependencies-register-2026-05-28.md"
     },
     "bankGrade": {
+      "rank1to10": 8.9,
       "certifiedComposite": 8.9,
       "index": "docs/audit/bank-grade-2026-06-05.md",
       "primaryAudit": "docs/audit/master-audit-2026-06-03.md",
@@ -36,6 +40,8 @@
       "sovereignDfi": 9.0
     },
     "gtm": {
+      "libraryRank1to10": 7,
+      "ecosystemSovereignRank1to10": 3,
       "libraryStage": "S1",
       "ecosystemSovereignStage": "S2-not-ready",
       "index": "docs/audit/gtm-readiness-2026-06-05.md"
