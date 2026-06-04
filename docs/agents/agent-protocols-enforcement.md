@@ -27,15 +27,17 @@ review_cycle: on-change
 
 ## Enforcement layers
 
-| Layer                 | Mechanism                                             | What it catches                                                                           |
-| --------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **Structural**        | `pnpm agent:protocols:check`                          | Missing scripts, partials, phases, P27 forbidden phrases, P1–P21 gate wiring              |
-| **Hub drift**         | `pnpm agent:hub-drift:check`                          | gtcx-docs protocol.md changed since snapshot (sibling `../gtcx-docs` or `GTCX_DOCS_ROOT`) |
-| **P24 runtime**       | `pnpm agent:coordination:check --strict`              | P0 blocked without durable coordination record                                            |
-| **Session refresh**   | `pnpm agent:session-start`                            | Stale session; skips Proceed Brief / next-work bootstrap                                  |
-| **Attestation**       | `pnpm agent:attestation:check --pr` / commit-msg hook | Agent-path PRs/commits without attestation block                                          |
-| **LLM entry points**  | `pnpm agent:sync` → 8 targets + `.kimi/AGENTS.md`     | Instruction drift across models                                                           |
-| **Cursor (optional)** | `.cursor/rules/*.mdc`                                 | Extra reminder when using Cursor — not required for terminal LLMs                         |
+| Layer                   | Mechanism                                             | What it catches                                                                                |
+| ----------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Structural**          | `pnpm agent:protocols:check`                          | Missing scripts, partials, phases, P27 forbidden phrases, P1–P21 gate wiring                   |
+| **Universal (any LLM)** | `pnpm agent:universal:check`                          | `agent-universal-instructions.md`, P26/P27 rules, no operator-delegation in `.agent/` (SR-013) |
+| **Ecosystem SoR**       | `gtcx-agentic` `pnpm agent:universal:check`           | All sibling repos: universal doc + cursor rules + partials drift                               |
+| **Hub drift**           | `pnpm agent:hub-drift:check`                          | gtcx-docs protocol.md changed since snapshot (sibling `../gtcx-docs` or `GTCX_DOCS_ROOT`)      |
+| **P24 runtime**         | `pnpm agent:coordination:check --strict`              | P0 blocked without durable coordination record                                                 |
+| **Session refresh**     | `pnpm agent:session-start`                            | Stale session; skips Proceed Brief / next-work bootstrap                                       |
+| **Attestation**         | `pnpm agent:attestation:check --pr` / commit-msg hook | Agent-path PRs/commits without attestation block                                               |
+| **LLM entry points**    | `pnpm agent:sync` → 8 targets + `.kimi/AGENTS.md`     | Instruction drift across models                                                                |
+| **Cursor (optional)**   | `.cursor/rules/*.mdc`                                 | Extra reminder when using Cursor — not required for terminal LLMs                              |
 
 ---
 
@@ -75,6 +77,7 @@ When gtcx-docs protocols change:
 | `pnpm agent:hub-snapshot:update`         | Refresh snapshot after hub review                    |
 | `pnpm agent:coordination:check --strict` | P24 hygiene (embedded in protocols check)            |
 | `pnpm agent:attestation:check --pr`      | PR body attestation (CI workflow)                    |
+| `pnpm agent:universal:check`             | Any-LLM universal doc + anti-delegation partials     |
 
 ---
 

@@ -49,6 +49,7 @@ const pkg = JSON.parse(requireFile('package.json', 'package.json'));
 
 const requiredScripts = [
   'agent:protocols:check',
+  'agent:universal:check',
   'agent:next-work',
   'agent:session-start',
   'agent:work-selection:check',
@@ -68,6 +69,17 @@ requireFile('docs/operations/agent-attestation-template.md', 'attestation templa
 requireFile('scripts/agent-session-start.mjs', 'session-start script');
 requireFile('.cursor/rules/agent-protocols-enforcement.mdc', 'cursor agent protocols rule');
 requireFile('.agent/session-start-pointer.md', 'session-start pointer');
+requireFile('docs/operations/agent-universal-instructions.md', 'universal instructions (any LLM)');
+requireContains('AGENTS.md', ['agent-universal-instructions.md'], 'AGENTS universal');
+
+const universalCheck = join(ROOT, '../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs');
+if (existsSync(universalCheck)) {
+  runNode('../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs', '--repo-only');
+} else {
+  failures.push('Missing ../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs (clone sibling)');
+}
+
+// operator-delegation scan: delegated to gtcx-agentic check-universal-agent-enforcement --repo-only
 
 // --- P22 ---
 const p22 = manifest.protocols.find((p) => p.id === 'P22');
@@ -107,25 +119,42 @@ if (p27) {
   requireContains('AGENTS.md', ['Phase 5.7', 'Protocol 27', 'Permission Unblock'], 'AGENTS P27');
   requireContains('AGENTS.md', ['pnpm format:check', 'agent:protocols:check'], 'AGENTS P27 V-ladder');
 
+  const p26Forbidden = p26?.forbiddenPatterns ?? [];
+  const p27Forbidden = p27.forbiddenPatterns ?? [];
+  const skipDocs = new Set([
+    'agent-universal-instructions.md',
+    'agent-protocols-enforcement.md',
+    'agent-proceed-brief-template.md',
+  ]);
+  function lineDocumentsBan(line) {
+    return /never\s|Forbidden|FORBIDDEN|do not |don't |not ask|Hard-forbidden|forbids |— not |\(never /i.test(
+      line,
+    );
+  }
+  function findImperativeForbidden(content, patterns) {
+    const hits = [];
+    for (const line of content.split('\n')) {
+      if (lineDocumentsBan(line)) continue;
+      for (const phrase of patterns) {
+        if (line.includes(phrase)) hits.push(phrase);
+      }
+    }
+    return [...new Set(hits)];
+  }
   for (const dir of ['docs/agents', 'docs/operations']) {
     const absDir = join(ROOT, dir);
     if (!existsSync(absDir)) continue;
     for (const file of readdirSync(absDir, { recursive: true })) {
       if (typeof file !== 'string' || !file.endsWith('.md')) continue;
-      if (
-        file.includes('agent-protocols-enforcement') ||
-        file.includes('agent-proceed-brief-template')
-      ) {
-        continue;
-      }
+      if (skipDocs.has(file) || file.includes('agent-protocols-enforcement')) continue;
       const content = readRepoFile(join(dir, file));
       if (!content) continue;
-      for (const forbidden of p27.forbiddenPatterns ?? []) {
-        if (content.includes(forbidden)) {
-          failures.push(
-            `${join(dir, file)}: forbidden P27 pattern "${forbidden}"`,
-          );
-        }
+      const rel = join(dir, file);
+      for (const forbidden of findImperativeForbidden(content, p26Forbidden)) {
+        failures.push(`${rel}: forbidden P26 pattern "${forbidden}"`);
+      }
+      for (const forbidden of findImperativeForbidden(content, p27Forbidden)) {
+        failures.push(`${rel}: forbidden P27 pattern "${forbidden}"`);
       }
     }
   }
@@ -158,11 +187,25 @@ if (gov && !gov.includes('agent:protocols:check')) {
 
 // --- Agent sync partials ---
 const targets = JSON.parse(requireFile('.agent/targets.json', 'targets.json'));
-const needsPartials = ['protocols-enforcement-pointer.md', 'session-start-pointer.md'];
+const needsPartials = [
+  'protocols-enforcement-pointer.md',
+  'session-start-pointer.md',
+  'universal-agent-behavior.md',
+  'protocol-26-proceed-pointer.md',
+  'protocol-27-execution-pointer.md',
+];
+const llmTargets = [
+  'AGENTS.md',
+  'CLAUDE.md',
+  'GEMINI.md',
+  'KIMI.md',
+  'CODEX.md',
+  '.cursor/rules/main.mdc',
+  '.kimi/AGENTS.md',
+  '.github/copilot/instructions.md',
+];
 for (const target of targets.targets ?? []) {
-  if (!['AGENTS.md', 'CLAUDE.md', 'KIMI.md', 'CODEX.md', '.cursor/rules/main.mdc'].includes(target.path)) {
-    continue;
-  }
+  if (!llmTargets.includes(target.path)) continue;
   for (const partial of needsPartials) {
     if (!target.partials?.includes(partial)) {
       failures.push(`targets.json: ${target.path} missing ${partial}`);

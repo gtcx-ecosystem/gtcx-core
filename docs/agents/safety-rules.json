@@ -121,6 +121,16 @@
       "enforcement": "gate",
       "trigger": "pr-review",
       "verification": "pnpm agent:attestation:check --pr"
+    },
+    {
+      "id": "SR-013",
+      "rule": "agent-no-operator-delegation",
+      "description": "Agent instruction partials must not tell the operator to run rollout/sync/push locally; agents execute in-session (P27)",
+      "scope": "agents",
+      "severity": "critical",
+      "enforcement": "gate",
+      "trigger": "ci",
+      "verification": "pnpm agent:universal:check && pnpm agent:protocols:check"
     }
   ]
 }

@@ -71,6 +71,7 @@
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:work-selection:check": "node scripts/check-agent-work-selection.mjs",
     "agent:protocols:check": "node ./tools/check-agent-protocols.mjs",
+    "agent:universal:check": "node ../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs --repo-only",
     "agent:session-start": "node scripts/agent-session-start.mjs",
     "agent:attestation:check": "node ./tools/check-agent-attestation.mjs",
     "agent:hub-drift:check": "node ./tools/check-hub-protocol-drift.mjs",
