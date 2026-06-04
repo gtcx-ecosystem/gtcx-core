@@ -132,6 +132,8 @@ review_cycle: 'on-change'
 | [`audit/engineering-completeness-quality-2026-06-05.md`](./audit/engineering-completeness-quality-2026-06-05.md) | Lane 1 index                                                                         |
 | [`audit/internal-compliance-2026-06-05.md`](./audit/internal-compliance-2026-06-05.md)                           | Lane 2 — repo hygiene, docs, AI trust, security, corporate readiness                 |
 | [`audit/industry-compliance-2026-06-05.md`](./audit/industry-compliance-2026-06-05.md)                           | Lane 3 — Industry Compliance (IC-T0–T4)                                              |
+| [`audit/global-compliance-rating-2026-06-05.md`](./audit/global-compliance-rating-2026-06-05.md)                 | **GCR** rollup L2+L3 — **GCR-T0** · **BLOCKED** (not GCI)                            |
+| [`audit/latest.json`](./audit/latest.json)                                                                       | Machine-readable lane scores and tiers                                               |
 | [`audit/bank-grade-2026-06-05.md`](./audit/bank-grade-2026-06-05.md)                                             | Lane 4 index — **8.9**                                                               |
 | [`audit/gtm-readiness-2026-06-05.md`](./audit/gtm-readiness-2026-06-05.md)                                       | Lane 5 — GTM-Readiness (GR-T0–T6)                                                    |
 | [`audit/internal-10-10-signoff-2026-05-28.md`](./audit/internal-10-10-signoff-2026-05-28.md)                     | Lane 1 forensic — **10.0**                                                           |
