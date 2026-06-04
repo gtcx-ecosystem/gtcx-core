@@ -29,11 +29,10 @@ Engineering gates are **green** without production seed. This checklist closes t
 1. Run sovereign ZKP ceremony per protocols CSP policy (not INF-86 KMS).
 2. Place `transcript.seed` under `artifacts/trusted-setup/` (see [README](../../../artifacts/trusted-setup/README.md)).
 3. Copy [trusted-setup-manifest.template.json](../../audit/evidence/trusted-setup-manifest.template.json) → `artifacts/trusted-setup/manifest.json`; fill `generatedAt`, `repoHead`, ceremony refs.
-4. Re-run KAT generation if VK hashes drift; verify pins:
+4. Verify publish gate (transcript + manifest + KAT pins):
 
 ```bash
-cd gtcx-core
-cargo test -p gtcx-zkp --features trusted-setup-verify --release -- groth16_kat_pins_match_published_transcript
+pnpm ops:trusted-setup:verify-publish
 ```
 
 5. Update [execution-roadmap.md](../../audit/execution-roadmap.md) CORE-004 → **done**.
@@ -47,6 +46,7 @@ cargo test -p gtcx-zkp --features trusted-setup-verify --release -- groth16_kat_
 ## Verification ladder
 
 ```bash
+pnpm ops:trusted-setup:verify-publish
 pnpm agent:reconcile-launch
 pnpm agent:launch:check
 cargo test -p gtcx-zkp --features trusted-setup-verify --release

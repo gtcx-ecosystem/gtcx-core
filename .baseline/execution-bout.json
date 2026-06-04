@@ -5,7 +5,7 @@
   "docPath": "docs/operations/agent-execution-bout.md",
   "id": "bout-2026-06-04-auto",
   "mode": "auto",
-  "provisionedAt": "2026-06-04T15:53:19.077Z",
+  "provisionedAt": "2026-06-04T19:29:05.582Z",
   "repo": "gtcx-core",
   "frame": "development",
   "launchMode": "implement",
@@ -20,18 +20,12 @@
       "source": "ceremony",
       "paths": [
         "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md",
+        "docs/operations/coordination/core-004-ceremony-publish-checklist.md",
         "artifacts/trusted-setup/README.md"
       ],
-      "status": "pending"
-    },
-    {
-      "storyId": "OI-X02",
-      "title": "File gtcx-infrastructure outbound ER-1-08 hub ack",
-      "sprint": null,
-      "workClass": "ops-docs",
-      "authorityClass": "S",
-      "source": "ecosystem-open",
-      "status": "pending"
+      "status": "blocked",
+      "blocker": "Custodian ceremony — publish artifacts/trusted-setup/transcript.seed + manifest.json",
+      "witness": "docs/operations/coordination/core-004-ceremony-publish-checklist.md"
     }
   ],
   "humanOnly": [
@@ -75,6 +69,7 @@
     "Say if you want to continue",
     "backlogClear means go idle (it means commercial ceiling — keep draining repoCompletable)"
   ],
-  "boutComplete": false,
-  "classSBlocks": false
+  "boutComplete": true,
+  "classSBlocks": true,
+  "checkInReason": "CORE-004 blocked on ceremony publish; P22 head DTF-5.5.4 Class S only"
 }

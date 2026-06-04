@@ -89,6 +89,7 @@
     "agent:coordination:check": "node scripts/check-coordination-hygiene.mjs",
     "kimi:skills:sync": "node scripts/sync-kimi-project-skills.mjs",
     "kimi:skills:check": "node scripts/check-kimi-project-skills.mjs",
+    "ops:trusted-setup:verify-publish": "node scripts/ops/verify-trusted-setup-publish.mjs",
     "check:workspace-root-cleanliness": "python3 scripts/ops/check-workspace-root-cleanliness.py",
     "check:workspace-root-cleanliness:strict": "python3 scripts/ops/check-workspace-root-cleanliness.py --strict"
   },

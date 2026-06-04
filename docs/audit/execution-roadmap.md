@@ -1,9 +1,9 @@
 ---
 last_reconciled: 2026-06-04
 reconciliation_note: >-
-  Launch-focus reconcile 2026-06-04 — mode implement; implement 1 / plan 5.
-  Repo hygiene execute 9.8 (2026-06-04). Agent hub snapshot + universal rollout synced.
-  CORE-004 blocked XR-402. FA-AGT complete; in-repo automatable slice done.
+  Launch-focus reconcile 2026-06-04 — implement 1 / plan 5 / witness 1 / human 2.
+  Kimi project skills parity (22). CORE-004 engineering green; ceremony publish pending.
+  DTF-5.5.4 Class S (LOI). FA-AGT complete.
 sources:
   - docs/audit/full-audit-2026-06-04.md
   - docs/audit/repo-hygiene-2026-06-04.md
@@ -18,21 +18,22 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **S-T5-5** commercial (external) + **CORE-004** ceremony-blocked  
-**Protocol 22:** `pnpm agent:next-work` → **CORE-004** **blocked** (XR-402); in-repo automatable slice **done**  
-**Last in-repo sprint:** **FA-AGT** complete (2026-06-04)
+**Active phase:** **S-T5-5** commercial (external) + **CORE-004** ceremony-gated  
+**Protocol 22:** `pnpm agent:next-work` → **DTF-5.5.4** Class S; bout drain **CORE-004** (custodian `transcript.seed`)  
+**Last in-repo sprint:** **Kimi skills parity** + CORE-004 verify-publish script (2026-06-04)
 
 ---
 
-## Executive summary (2026-06-05)
+## Executive summary (2026-06-04)
 
-| Track                            | State         | Next                                                      |
-| -------------------------------- | ------------- | --------------------------------------------------------- |
-| Internal engineering (S1–S5)     | **done**      | —                                                         |
-| Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 ceremony-gated                                    |
-| **DTF Tier 5 technical**         | **~88%**      | DTF-5.5.1 strict packs done; 5.5.2+ commercial (external) |
-| Bank-grade / sovereign pilot     | **Not Ready** | External pen-test, testnet, hub (not core-only)           |
-| **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/`        |
+| Track                            | State         | Next                                                                          |
+| -------------------------------- | ------------- | ----------------------------------------------------------------------------- |
+| Internal engineering (S1–S5)     | **done**      | —                                                                             |
+| Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 — publish `transcript.seed` (`pnpm ops:trusted-setup:verify-publish`) |
+| **DTF Tier 5 technical**         | **~88%**      | DTF-5.5.2 done; **5.5.4** LOI/regulator (Class S)                             |
+| Bank-grade / sovereign pilot     | **Not Ready** | EXT-INF-002 pen-test; OI-X02 infra hub ack                                    |
+| **Agent parity**                 | **done**      | 22 Kimi project skills — `pnpm kimi:skills:check`                             |
+| **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/`                            |
 
 **Risk (audit):** Do not equate npm library maturity with sovereign pilot clearance.  
 **Opportunity (audit):** Profile packs + KAT portability on one R1CS + WorkProof→verification chain.
@@ -138,7 +139,7 @@ Aligned with [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) §6.3.
 | OI-X02             | ER-1-08 hub ack                    | gtcx-infrastructure | **outbound-filed** | Core done — [`to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md`](../operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md); await infra hub row |
 | OI-X06 / INT-S8-04 | cost-router v1.1                   | baseline-os         | **external**       | No implementation in core                                                                                                                                                  |
 | EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**           | Evidence pack input (FA-S6)                                                                                                                                                |
-| CORE-004           | Trusted-setup transcript           | gtcx-core           | **partial**        | Verify CI green; transcript publish (Class R)                                                                                                                              |
+| CORE-004           | Trusted-setup transcript           | gtcx-core           | **partial**        | Engineering green; custodian publish + `pnpm ops:trusted-setup:verify-publish`                                                                                             |
 | CORE-005–006       | Pen-test SOW / formal verification | baseline-os         | **blocked**        | Track only                                                                                                                                                                 |
 
 ---
@@ -171,7 +172,7 @@ See [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md). Stories S1
 | Pen-test report (live stack)     | gtcx-infrastructure   | EXT-INF-002; vendor not selected                  |
 | SOC 2 Type 1                     | quality-evidence-lead | CPA engagement                                    |
 | Zimbabwe sandbox email           | gtm-lead              | Human approval                                    |
-| Trusted-setup ceremony           | human + gtcx-core     | XR-402 / CORE-004                                 |
+| Trusted-setup ceremony           | human + gtcx-core     | CORE-004 ZKP transcript (XR-402 KMS **done**)     |
 | D8 formal verification           | baseline-os           | CORE-006                                          |
 | D9 third-party crypto audit      | baseline-os           | CORE-005                                          |
 | DTF-5.4.4 protocols E2E          | gtcx-protocols        | **done** — witness `73eaff2b` (protocols hub log) |
@@ -197,7 +198,8 @@ cd rust && cargo test -p gtcx-zkp --lib
 ## Agent selection
 
 ```bash
-pnpm agent:next-work          # expect DTF-5.5.2 or CORE-004 blocked
+pnpm agent:next-work          # expect DTF-5.5.4 Class S; CORE-004 repoCompletable
+pnpm ops:trusted-setup:verify-publish  # after transcript.seed published
 pnpm agent:work-selection:check
 pnpm agent:protocols:check
 ```
@@ -206,4 +208,4 @@ Refresh `.baseline/memory/session.md` after each milestone.
 
 ---
 
-_Last updated: 2026-06-04 — execute-roadmap reconcile; FA-AGT done; S-T5-5 / CORE-004 external_
+_Last updated: 2026-06-04 — launch reconcile; Kimi skills; CORE-004 verify-publish gate; DTF-5.5.4 Class S_

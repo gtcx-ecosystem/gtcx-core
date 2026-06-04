@@ -1,47 +1,36 @@
 ---
-session_id: '2026-06-04-execute-roadmap'
+session_id: '2026-06-04-launch-gtm'
 agent: 'gtcx-core-agent'
-focus: 'DTF-5.5.2 certified pack pipeline; CORE-004 Class R transcript'
+focus: 'CORE-004 ceremony gate; DTF-5.5.4 Class S witness'
 ---
 
-# Session: Tier 5 + CORE-004
+# Session: Launch GTM — gtcx-core
 
-## State (2026-06-06)
+## State (2026-06-04)
 
-- **Git:** DTF-5.5.2 pipeline commit pending push
-- **Next work (P22):** DTF-5.5.4 Class S (LOI) or CORE-004 Class R (`transcript.seed`)
-- **DTF-5.5.2:** build + verify gates green in-session
-- **CORE-004:** KAT pin CI wired; awaits published ceremony seed
+- **Git:** Kimi skills parity committed (`615b9d9`); CORE-004 verify-publish in progress
+- **P22 head:** DTF-5.5.4 Class S (LOI/regulator letter) — human only
+- **Bout drain:** CORE-004 **blocked** on custodian `transcript.seed` publish
+- **Launch focus:** implement 1 / plan 5 / witness 1 / human 2
 
 ## Completed this session
 
-| Item                  | Evidence                                                            |
-| --------------------- | ------------------------------------------------------------------- |
-| Repo hygiene execute  | 9.8 — `docs/audit/repo-hygiene-2026-06-04.md`                       |
-| FA-AGT sprint         | `agent:protocols:check` exit 0; frontmatter gate green              |
-| CORE-004 P24 blocker  | `docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md` |
-| Agent universal links | `pnpm docs:check-links` exit 0 (`2c9f949`)                          |
-| OPS-AUDIT-FM          | **done** — 30 audit files merged FM; dates on 2026-05-09/12 paths   |
+| Item                           | Evidence                                       |
+| ------------------------------ | ---------------------------------------------- |
+| Kimi skills parity (22)        | `615b9d9` · `pnpm kimi:skills:check` exit 0    |
+| CORE-004 verify-publish script | `scripts/ops/verify-trusted-setup-publish.mjs` |
+| Launch reconcile               | `pnpm agent:reconcile-launch` exit 0           |
+| Execution roadmap refresh      | `docs/audit/execution-roadmap.md`              |
 
 ## Verification
 
-| Command                      | Exit |
-| ---------------------------- | ---- |
-| `pnpm agent:protocols:check` | 0    |
-| `pnpm docs:check-links`      | 0    |
-| `pnpm format:check`          | 0    |
-| `pnpm typecheck`             | 0    |
-| `pnpm readiness:lanes:check` | 0    |
+| Command                                                                          | Exit |
+| -------------------------------------------------------------------------------- | ---- |
+| `pnpm agent:launch:check`                                                        | 0    |
+| `pnpm readiness:lanes:check`                                                     | 0    |
+| `cargo test -p gtcx-zkp --features trusted-setup-verify --release trusted_setup` | 0    |
 
-## Push (operator)
+## Next priority
 
-```bash
-cd /Users/amanianai/Sites/gtcx-ecosystem/gtcx-core && git push origin main
-```
-
-## Session bootstrap (2026-06-04 15:48:13 UTC)
-
-- **Command:** `pnpm agent:start`
-- **Next work:** DTF-5.5.3 — Predicate-gated export keys (optional)
-- **Blocked:** no
-- **Git:** 27 changed path(s)
+**Human / GTM** — DTF-5.5.4 LOI or regulator letter (Class S).  
+**Custodian** — publish `artifacts/trusted-setup/transcript.seed` then `pnpm ops:trusted-setup:verify-publish`.

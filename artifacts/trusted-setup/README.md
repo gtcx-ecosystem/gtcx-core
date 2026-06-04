@@ -16,7 +16,13 @@
 cd rust && cargo test -p gtcx-zkp --features trusted-setup-verify --release
 ```
 
-When `transcript.seed` is published, CI runs the KAT pin test:
+When `transcript.seed` is published, run the publish gate:
+
+```bash
+pnpm ops:trusted-setup:verify-publish
+```
+
+CI runs the KAT pin test when the file exists:
 
 ```bash
 cargo test -p gtcx-zkp --features trusted-setup-verify --release -- groth16_kat_pins_match_published_transcript
