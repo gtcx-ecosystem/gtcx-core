@@ -17,7 +17,9 @@ Forensic audits and readiness scorecards for `gtcx-core`, organized in **five la
 
 ## Start here
 
-**[readiness-model.md](./readiness-model.md)** — five lanes, rules, and full audit-folder map.
+**[readiness-model.md](./readiness-model.md)** — five lanes, 1–10 ranks, local audit map.
+
+**[ecosystem-audit-catalog-2026-06-05.md](./ecosystem-audit-catalog-2026-06-05.md)** — **gtcx-docs / gtcx-agile / gtcx-agentic** audits (not only this folder).
 
 | Lane                                 | Index (rollup)                                                                                     | Primary forensic audits                                                                                                                                |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |

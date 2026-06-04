@@ -27,6 +27,8 @@ supersedes_note: 'Replaces three-lane model; maps to existing audits in docs/aud
 
 Also: [docs/internal/external-readiness-checklist.md](../internal/external-readiness-checklist.md), README § “Two scores apply” (2026-06-04).
 
+**Ecosystem sibling repos:** [ecosystem-audit-catalog-2026-06-05.md](./ecosystem-audit-catalog-2026-06-05.md) — gtcx-docs framework, gtcx-agile per-repo reports, gtcx-agentic ER evidence. Hub: [gtcx-docs/docs/audit/INDEX.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/audit/INDEX.md).
+
 ---
 
 ## The five lanes
