@@ -33,6 +33,7 @@ Structured operator communication for **progress, handoffs, and end-of-turn** su
 
 ### Next priority
 
+- **Active persona:** <institutional> · **Frame:** <frame> (from `agent:next-work`; read persona doc on switch)
 - **Owner:** <repo | role>
 - **Action:** <one imperative the agent or owner will run next>
 - **Because:** <story ID / hub row / witness path>
@@ -89,11 +90,15 @@ Structured operator communication for **progress, handoffs, and end-of-turn** su
 
 ## Anti-patterns
 
-| Wrong                                                | Right                                                                        |
-| ---------------------------------------------------- | ---------------------------------------------------------------------------- |
-| End with "I can push / help populate SM if you want" | **Next priority** + run Class R steps; **Approval needed** only for PAT/prod |
-| Three equal options under Next                       | One **Next priority**; other items in coordination doc                       |
-| Done section empty when commands ran                 | List what ran with exit codes                                                |
+| Wrong                                                             | Right                                                                        |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| End with "I can push / help populate SM if you want"              | **Next priority** + run Class R steps; **Approval needed** only for PAT/prod |
+| **"Want me to tackle anything on the P1 list?"** after push table | Run `agent:next-work`; **Next priority** = that story; start work            |
+| Commit/push tables with no **Next priority**                      | Tables under **Done** only; always one owned **Next**                        |
+| Three equal options under Next                                    | One **Next priority**; matrix lists other repos, not a menu                  |
+| Done section empty when commands ran                              | List what ran with exit codes                                                |
+
+**Owning work after hub delivery:** Done (commits) → `agent:next-work` in owner repo → Next priority (story ID) → implement Class R in-session.
 
 ---
 

@@ -50,13 +50,30 @@ Read after start:
 
 ---
 
-## 3. Protocol 26 — Proceed Brief (no approval menus)
+## 3. Phase 4 — Persona (mandatory)
+
+1. `pnpm agent:next-work` JSON includes **`persona.institutional`**, **`persona.docUrl`**, **`frame`**.
+2. **Read** the persona doc (not only the ID).
+3. Emit in every **Proceed Brief** and **Status Update**:
+
+```markdown
+**Active persona:** <institutional> · **Frame:** <development | regulatory-audit | …>
+**Persona doc:** <persona.docUrl>
+```
+
+4. Re-run on **task switch** (new story ID or repo).
+
+---
+
+## 4. Protocol 26 — Proceed Brief (no approval menus)
 
 Emit exactly this shape, then **start work**:
 
 ```markdown
 ## Proceed Brief
 
+**Active persona:** <from agent:next-work JSON>
+**Frame:** <from JSON>
 **Next:** <single action from agent:next-work>
 **Because:** <selection.reason>
 **Authority class:** R | A | S

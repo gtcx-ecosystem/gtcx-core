@@ -6,9 +6,11 @@
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { enrichWithPersona } from '../../gtcx-agentic/scripts/lib/suggest-persona.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
+const THIS_REPO = 'gtcx-core';
 const ROADMAP_PATH = join(REPO_ROOT, 'docs/audit/moat-dimension-roadmap-10-10.md');
 const SESSION_PATH = join(REPO_ROOT, '.baseline/memory/session.md');
 const TIER5_WORKPLAN_PATH = join(REPO_ROOT, 'docs/operations/tier-5-workplan-2026-06.md');
@@ -456,4 +458,16 @@ function guessNextMilestone(dimId, score) {
 }
 
 const result = selectNextWork();
-console.log(JSON.stringify(result, null, 2));
+const storyId =
+  result.next?.milestone ?? result.next?.handoff ?? result.next?.storyId ?? '';
+const title = result.next?.title ?? '';
+console.log(
+  JSON.stringify(
+    enrichWithPersona(
+      { ok: true, repo: THIS_REPO, ...result },
+      { repo: THIS_REPO, storyId, title },
+    ),
+    null,
+    2,
+  ),
+);

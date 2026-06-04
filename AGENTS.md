@@ -323,6 +323,22 @@ All tasks must route through `docs/agents/routing-rules.json`.
 
 **Ecosystem push (harness):** `pnpm --dir ../gtcx-agentic ecosystem:push-all`
 
+## Persona selection (Phase 4 — mandatory)
+
+**Bridge:** [ecosystem-persona-bridge-2026-06.md](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-persona-bridge-2026-06.md)  
+**Registry:** [gtcx-docs institutional personas](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/docs/governance/institutional/personas)
+
+| Step | Action                                                                                        |
+| ---- | --------------------------------------------------------------------------------------------- |
+| 1    | Run `pnpm agent:next-work` — use JSON `persona.institutional` + `persona.docUrl` when present |
+| 2    | **Read** the persona `.md` file (not only the ID)                                             |
+| 3    | State **Active persona** + **Frame** in every Proceed Brief (Protocol 26)                     |
+| 4    | On **task switch**, re-select persona and read the new doc                                    |
+
+**MCP personas** (`builder`, `security`, …) apply when using BaselineOS MCP tools; **institutional** names apply in chat, commits, and hub docs.
+
+**Forbidden:** defaulting to generic coder voice for security, compliance, or coordination tasks.
+
 ## Protocol 26 — Proceed Brief (no menus)
 
 Template: `docs/operations/agent-proceed-brief-template.md` · **Forbidden:** Your call · Two options · Say push if you want.
@@ -543,14 +559,17 @@ Use **after work in the turn** or when reporting cluster/repo state — not inst
 ## Status Update
 
 ### Done
+
 - <outcome> — <evidence: command exit N, commit SHA, probe result>
 
 ### Next priority
+
 - **Owner:** <repo or role>
 - **Action:** <single imperative>
 - **Because:** <1 line — P22 ID, blocker, witness>
 
 ### Approval needed
+
 - <only Class A or S gates — secret, prod, legal, force-push; omit section if none>
 ```
 

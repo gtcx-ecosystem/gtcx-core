@@ -9,6 +9,7 @@
       "path": "AGENTS.md",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
@@ -29,6 +30,7 @@
       "path": "CLAUDE.md",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
@@ -49,6 +51,7 @@
       "path": "GEMINI.md",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
@@ -70,6 +73,7 @@
       "path": "KIMI.md",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
@@ -90,6 +94,7 @@
       "path": "CODEX.md",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
@@ -110,6 +115,7 @@
       "path": ".cursor/rules/main.mdc",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
@@ -131,6 +137,7 @@
       "path": "CONVENTIONS.md",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
@@ -152,6 +159,7 @@
       "path": ".kimi/AGENTS.md",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
@@ -170,6 +178,7 @@
       "path": ".github/copilot/instructions.md",
       "partials": [
         "universal-agent-behavior.md",
+        "persona-pointer.md",
         "protocol-26-proceed-pointer.md",
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",

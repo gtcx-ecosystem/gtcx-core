@@ -93,7 +93,11 @@ writeFileSync(
   )}\n`,
 );
 
+const persona = nextWork?.persona;
 const proceedBrief = {
+  activePersona: persona?.institutional ?? nextWork?.proceedBrief?.activePersona ?? 'developer',
+  frame: persona?.frame ?? nextWork?.frame ?? 'development',
+  personaDocUrl: persona?.docUrl ?? nextWork?.proceedBrief?.personaDocUrl,
   nextAction: nextWork?.next?.title ?? nextLabel,
   storyId: nextLabel,
   because: nextWork?.selection?.reason ?? 'Protocol 22 manifest',
@@ -126,6 +130,8 @@ log('=== GTCX agent session start (provider-agnostic) ===\n');
 log('Git status:\n', gitStatus || '(clean)\n');
 log('Next work (P22):', JSON.stringify(nextWork?.next ?? nextWork, null, 2));
 log('\n--- Proceed Brief (P26 + P28) — emit to operator, then IMPLEMENT ---\n');
+log(`**Active persona:** ${proceedBrief.activePersona} · **Frame:** ${proceedBrief.frame}`);
+if (proceedBrief.personaDocUrl) log(`**Persona doc:** ${proceedBrief.personaDocUrl}`);
 log(`**Next:** ${proceedBrief.nextAction}`);
 log(`**Story / work ID:** ${proceedBrief.storyId}`);
 log(`**Because:** ${proceedBrief.because}`);
