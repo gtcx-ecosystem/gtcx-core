@@ -73,7 +73,7 @@ If `GEMINI.md` conflicts with `AGENTS.md`, **AGENTS.md wins**.
 
 ## Universal agent behavior (ANY LLM — terminal, IDE, CLI)
 
-**Read every session:** [docs/operations/agent-universal-instructions.md](../docs/operations/agent-universal-instructions.md)
+**Read every session:** [docs/operations/agent-universal-instructions.md](docs/operations/agent-universal-instructions.md)
 
 **First command:** `pnpm agent:session-start` · **P22** no menus · **P26** one Proceed Brief then work · **P27** you run commands (never "Say push if you want").
 
