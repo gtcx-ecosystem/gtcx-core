@@ -1,7 +1,7 @@
 ---
 session_id: '2026-06-05-protocol-enforcement-hygiene'
 agent: 'gtcx-core-agent'
-focus: 'P1-P28 runtime enforcement; hygiene H-01–H-09; CORE-004 blocked XR-402'
+focus: 'P1-P28 runtime enforcement; hygiene H-01–H-09 complete; CORE-004 blocked XR-402'
 ---
 
 # Session: Protocol enforcement + repo hygiene
@@ -11,20 +11,17 @@ focus: 'P1-P28 runtime enforcement; hygiene H-01–H-09; CORE-004 blocked XR-402
 - **Command:** `pnpm agent:session-start`
 - **Next work:** CORE-004 — **blocked** (XR-402 ceremony)
 - **Blocked:** yes (release-gated trusted-setup)
-- **Git:** **10 commits ahead** of `origin/main` (push blocked — sandbox)
+- **Git:** **in sync** with `origin/main` @ `17e4d9a`
 
-## Recent commits
+## Recent commits (on origin/main)
 
 | SHA       | Summary                                               |
 | --------- | ----------------------------------------------------- |
+| `17e4d9a` | baseline session note                                 |
 | `f6bb11e` | hygiene H-02–H-09 (exec brief, gtm, audit banners)    |
 | `f2ba2fb` | P1-P28 runtime enforcement (session-start, hub drift) |
 | `b0557e8` | P22-P28 machine gate + CI                             |
 | `bf641c8` | governance: readiness + agent-sync                    |
-| `691a75b` | GCR tier/status rollup                                |
-| `0f3647a` | five-lane agent guide + anti-drift                    |
-| `419b436` | lane 2 five internal compliance domains               |
-| `b178f79` | Industry Compliance + GTM-Readiness tiers             |
 
 ## Readiness snapshot (2026-06-05)
 
@@ -45,24 +42,25 @@ focus: 'P1-P28 runtime enforcement; hygiene H-01–H-09; CORE-004 blocked XR-402
 - **Next work:** CORE-004 — blocked XR-402
 - **Verify:** `pnpm agent:protocols:check` · `pnpm readiness:lanes:check`
 
-## Hygiene pass (this session)
+## Hygiene pass — **complete**
 
-| ID  | Item                          | Status   |
-| --- | ----------------------------- | -------- |
-| H-1 | Push unpushed commits         | pending  |
-| H-2 | session.md refresh            | **done** |
-| H-3 | executive brief frontmatter   | **done** |
-| H-4 | executive brief GR-T banner   | **done** |
-| H-5 | gtm-reality-check GR-T labels | **done** |
-| H-6 | internal GTM roadmap row      | **done** |
-| H-7 | execution-roadmap reconcile   | **done** |
-| H-8 | historical audit banners      | **done** |
-| H-9 | gtcx-agile drift note         | **done** |
+| ID  | Item                          | Status                                     |
+| --- | ----------------------------- | ------------------------------------------ |
+| H-1 | Push unpushed commits         | **done** — gtcx-core + gtcx-docs on origin |
+| H-2 | session.md refresh            | **done**                                   |
+| H-3 | executive brief frontmatter   | **done**                                   |
+| H-4 | executive brief GR-T banner   | **done**                                   |
+| H-5 | gtm-reality-check GR-T labels | **done**                                   |
+| H-6 | internal GTM roadmap row      | **done**                                   |
+| H-7 | execution-roadmap reconcile   | **done**                                   |
+| H-8 | historical audit banners      | **done**                                   |
+| H-9 | gtcx-agile drift note         | **done**                                   |
 
 ## Verification
 
-| Command                         | Result |
-| ------------------------------- | ------ |
-| `pnpm agent:protocols:check`    | exit 0 |
-| `pnpm readiness:lanes:check`    | exit 0 |
-| `pnpm quality:governance:check` | exit 0 |
+| Command                         | Result                                              |
+| ------------------------------- | --------------------------------------------------- |
+| `pnpm agent:protocols:check`    | exit 0                                              |
+| `pnpm readiness:lanes:check`    | exit 0                                              |
+| `pnpm quality:governance:check` | exit 0                                              |
+| `git push origin main`          | in sync (gtcx-core @ 17e4d9a; gtcx-docs @ f86ddc3e) |
