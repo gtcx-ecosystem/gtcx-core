@@ -1,7 +1,7 @@
 ---
 session_id: '2026-06-04-execute-roadmap'
 agent: 'gtcx-core-agent'
-focus: 'FA-AGT done; link fix; CORE-004 blocked XR-402; push pending operator'
+focus: 'OPS-AUDIT-FM done; CORE-004 blocked XR-402; push pending operator'
 ---
 
 # Session: execute-roadmap + hygiene
@@ -9,7 +9,7 @@ focus: 'FA-AGT done; link fix; CORE-004 blocked XR-402; push pending operator'
 ## State (2026-06-04)
 
 - **Git:** `main` ahead of `origin/main` by 7 commits (push blocked in agent sandbox)
-- **Next work (P22):** CORE-004 — **blocked** XR-402 ceremony
+- **Next work (P22):** CORE-004 — **blocked** XR-402 ceremony (OPS-AUDIT-FM **done**)
 - **In-repo automatable:** exhausted; OI-X02 outbound filed (await gtcx-infrastructure)
 
 ## Completed this session
@@ -20,6 +20,7 @@ focus: 'FA-AGT done; link fix; CORE-004 blocked XR-402; push pending operator'
 | FA-AGT sprint         | `agent:protocols:check` exit 0; frontmatter gate green              |
 | CORE-004 P24 blocker  | `docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md` |
 | Agent universal links | `pnpm docs:check-links` exit 0 (`2c9f949`)                          |
+| OPS-AUDIT-FM          | 30 audit files merged FM; dates fixed on 2026-05-09/12 historical   |
 
 ## Verification
 
@@ -36,3 +37,10 @@ focus: 'FA-AGT done; link fix; CORE-004 blocked XR-402; push pending operator'
 ```bash
 cd /Users/amanianai/Sites/gtcx-ecosystem/gtcx-core && git push origin main
 ```
+
+## Session bootstrap (2026-06-04 14:10:10 UTC)
+
+- **Command:** `pnpm agent:start`
+- **Next work:** OPS-AUDIT-FM — **done** (30 files + date alignment on 4 historical paths)
+- **Blocked:** no
+- **Git:** 0 changed path(s)

@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-06-04T11:03:45.416Z",
+  "startedAt": "2026-06-04T14:10:10.198Z",
   "nextWork": {
     "protocol": "22-agent-work-selection",
     "repo": "gtcx-core",
@@ -14,16 +14,21 @@
     },
     "ok": true,
     "next": {
-      "track": "B",
-      "handoff": "CORE-004",
-      "title": "D3 M3.2 trusted-setup transcript verify",
-      "owner": "gtcx-core",
-      "blocked": true,
-      "blocker": "XR-402 trusted-setup ceremony — release-gated"
+      "track": "ops-docs",
+      "milestone": "OPS-AUDIT-FM",
+      "sprint": "HYGIENE",
+      "title": "Merge duplicate frontmatter on historical audit files",
+      "paths": [
+        "docs/audit/full-audit-2026-05-09.md",
+        "docs/audit/master-audit-2026-05-27.md",
+        "docs/audit/master-audit-2026-05-12.md",
+        "docs/audit/10-10-roadmap-2026-05-25.md"
+      ],
+      "workplan": "docs/audit/README.md"
     },
     "selection": {
-      "tier": "external",
-      "reason": "Automatable code and ops-docs exhausted. CORE-004 ceremony blocked — file P24 Blocker Report; do not ask operator to pick backlog."
+      "tier": "ops-docs",
+      "reason": "Tier 5 technical complete; external ceremony blocked — next automatable ops-docs (Protocol 22 Development frame)"
     },
     "proceedBrief": {
       "activePersona": "protocol-engineer",
@@ -35,6 +40,6 @@
       "Include **Active persona** + **Frame** in Proceed Brief and Status Update (P26)."
     ]
   },
-  "gitChanged": 13,
-  "authorityClass": "R"
+  "gitChanged": 0,
+  "authorityClass": "S"
 }
