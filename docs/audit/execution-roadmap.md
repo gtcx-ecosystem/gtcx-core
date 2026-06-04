@@ -1,10 +1,12 @@
 ---
-last_reconciled: 2026-06-05
+last_reconciled: 2026-06-04
 reconciliation_note: >-
   FA-S1 complete. Tier 5 technical ~88% done. S-T5-5 commercial pending (DTF-5.5.2+).
-  Protocol P1-P28 enforcement shipped. CORE-004 blocked XR-402.
+  Repo hygiene execute 9.8 (2026-06-04). Agent hub snapshot + universal rollout synced.
+  CORE-004 blocked XR-402. FA-AGT complete; in-repo automatable slice done.
 sources:
   - docs/audit/full-audit-2026-06-04.md
+  - docs/audit/repo-hygiene-2026-06-04.md
   - docs/audit/moat-completion-reconciliation-2026-06-03.md
   - docs/operations/tier-5-workplan-2026-06.md
   - docs/operations/coordination/remaining-cross-repo-work-2026-06-02.md
@@ -16,8 +18,9 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **S-T5-5** — DTF-5.5.x commercial / certified packs (GTM-led)  
-**Protocol 22:** `pnpm agent:next-work` → **DTF-5.5.2** (certified pack pipeline — external)
+**Active phase:** **S-T5-5** commercial (external) + **CORE-004** ceremony-blocked  
+**Protocol 22:** `pnpm agent:next-work` → **CORE-004** **blocked** (XR-402); in-repo automatable slice **done**  
+**Last in-repo sprint:** **FA-AGT** complete (2026-06-04)
 
 ---
 
@@ -115,6 +118,18 @@ Aligned with [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) §6.3.
 
 ---
 
+## FA-AGT — Agent protocol hygiene (**done** 2026-06-04)
+
+| Story     | Title                                   | Owner              | Status   | Acceptance / UAT                                                                                        |
+| --------- | --------------------------------------- | ------------------ | -------- | ------------------------------------------------------------------------------------------------------- |
+| FA-AGT-01 | Hub snapshot + universal ops docs sync  | protocol-architect | **done** | `pnpm agent:protocols:check` exit 0                                                                     |
+| FA-AGT-02 | Frontmatter: allow `gtcx-agentic` owner | protocol-architect | **done** | `pnpm docs:check-frontmatter` exit 0                                                                    |
+| FA-AGT-03 | P24 blocker note for CORE-004 / XR-402  | protocol-architect | **done** | [core-004-xr402-blocker-2026-06-04.md](../operations/coordination/core-004-xr402-blocker-2026-06-04.md) |
+
+**Hygiene (done):** [repo-hygiene-2026-06-04.md](./repo-hygiene-2026-06-04.md) post-remediation **9.8**.
+
+---
+
 ## Ecosystem open items (gtcx-core lens)
 
 | ID                 | Item                               | Owner               | Status            | gtcx-core role                    |
@@ -191,4 +206,4 @@ Refresh `.baseline/memory/session.md` after each milestone.
 
 ---
 
-_Last updated: 2026-06-05 — hygiene reconcile; FA-S1 complete; S-T5-5 commercial active_
+_Last updated: 2026-06-04 — execute-roadmap reconcile; FA-AGT done; S-T5-5 / CORE-004 external_

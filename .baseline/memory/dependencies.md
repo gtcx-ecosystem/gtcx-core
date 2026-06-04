@@ -8,9 +8,9 @@ No cross-repo link dependencies detected in package.json.
 
 ## Hard Dependencies (Blocking)
 
-| Needs | From Repo | Status | ETA | Blocking Epic |
-| ----- | --------- | ------ | --- | ------------- |
-| —     | —         | —      | —   | —             |
+| Needs                        | From Repo      | Status  | ETA   | Blocking Epic |
+| ---------------------------- | -------------- | ------- | ----- | ------------- |
+| XR-402 ceremony + transcript | gtcx-protocols | blocked | human | CORE-004      |
 
 ## Soft Dependencies (Nice to have)
 

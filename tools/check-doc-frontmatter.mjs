@@ -26,6 +26,7 @@ const VALID_OWNERS = [
   'quality-evidence-lead',
   'product-lead',
   'gtcx-core',
+  'gtcx-agentic', // ecosystem rollout SSOT for docs/operations/agent-*.md
 ];
 const VALID_TIERS = ['strategic', 'critical', 'standard', 'informational'];
 const VALID_CYCLES = ['quarterly', 'monthly', 'bi-weekly', 'weekly', 'on-change'];
