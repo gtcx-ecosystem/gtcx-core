@@ -11,12 +11,13 @@ focus: 'P1-P28 runtime enforcement; hygiene H-01–H-09; CORE-004 blocked XR-402
 - **Command:** `pnpm agent:session-start`
 - **Next work:** CORE-004 — **blocked** (XR-402 ceremony)
 - **Blocked:** yes (release-gated trusted-setup)
-- **Git:** hygiene pass in progress
+- **Git:** **10 commits ahead** of `origin/main` (push blocked — sandbox)
 
 ## Recent commits
 
 | SHA       | Summary                                               |
 | --------- | ----------------------------------------------------- |
+| `f6bb11e` | hygiene H-02–H-09 (exec brief, gtm, audit banners)    |
 | `f2ba2fb` | P1-P28 runtime enforcement (session-start, hub drift) |
 | `b0557e8` | P22-P28 machine gate + CI                             |
 | `bf641c8` | governance: readiness + agent-sync                    |
