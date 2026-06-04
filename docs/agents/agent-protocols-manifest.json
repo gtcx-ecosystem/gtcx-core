@@ -61,7 +61,9 @@
         "Two options",
         "natural transition point",
         "Which do you prefer",
-        "Do you want me to work on"
+        "Do you want me to work on",
+        "Say push if you want",
+        "if you want all"
       ]
     },
     {
@@ -85,7 +87,9 @@
         "Your call",
         "Two options",
         "natural transition point",
-        "Which do you prefer"
+        "Which do you prefer",
+        "Say push if you want",
+        "if you want all"
       ]
     },
     {
