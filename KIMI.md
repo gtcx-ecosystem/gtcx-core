@@ -8,17 +8,17 @@
 
 ## 1. Skill Loading Protocol
 
-Kimi Code CLI loads skills from `SKILL.md` under `~/.config/agents/skills/` (and `~/.kimi/skills/`). **Slash syntax is `/skill:<name>`**, not Cursor-style `/master-audit`.
+Kimi Code CLI loads **project** skills from `.kimi/skills/<name>/SKILL.md` when cwd is under this repo. **Slash syntax is `/skill:<name>`**, not Cursor-style `/master-audit`.
 
-**GTCX audits (one-time install):**
+**GTCX audits in gtcx-core:**
 
-```bash
-node ../gtcx-docs/tools/audit/agent-commands/install.mjs
-```
+| Skill | Invoke |
+| ----- | ------ |
+| `master-audit` | `/skill:master-audit` |
 
-Then in Kimi (from repo root): `/skill:master-audit`, `/skill:bank-grade-audit`, `/skill:engineering-audit`, etc. Restart the Kimi session after install so skills refresh.
+Project skill path: `.kimi/skills/master-audit/SKILL.md`. Restart Kimi after clone so project skills refresh.
 
-This repo has no project-specific skills under `docs/agents/skills/` yet.
+Optional user-global installs live in `gtcx-docs` (out of scope for gtcx-core commits).
 
 **To create a skill:**
 
@@ -214,9 +214,11 @@ pnpm bundle:check-budgets
 | Security     | `security-audit`    | `compliance-audit`                      |
 | Deployment   | `deployment-audit`  | `engineering-audit`, `bank-grade-audit` |
 
-**Install slash commands (once):** `gtcx-docs/tools/audit/agent-commands/install.sh` → Claude/Cursor `/engineering-audit` · Gemini `/gtcx:engineering-audit` · Kimi/Codex `/skill:engineering-audit`.
+**Kimi (this repo):** project skill `.kimi/skills/master-audit/SKILL.md` → `/skill:master-audit` from `gtcx-core` root (restart session after clone). No bare `/master-audit` in Kimi.
 
-**Aliases:** `master-audit` / `comprehensive-audit` → `bank-grade-audit` · `full-audit` / `forensic-audit` → `engineering-audit`. **Kimi has no bare `/master-audit`** — use `/skill:master-audit` (or `/skill:bank-grade-audit`) after install; restart Kimi session if the skill list is stale.
+**Cursor (this repo):** ecosystem installer optional — `../gtcx-docs/tools/audit/agent-commands/install.sh` for global `~/.cursor/commands/`; or read framework commands directly per AGENT-START.
+
+**Aliases:** `master-audit` / `comprehensive-audit` → `bank-grade-audit` · `full-audit` / `forensic-audit` → `engineering-audit`.
 
 **How to run:** `gtcx-docs/tools/audit/audit-framework/AGENT-START.md` → `commands/<command>.md` → prompt → forensic → lane index + `latest.json` → `pnpm readiness:lanes:check`.
 

@@ -204,9 +204,11 @@ pnpm bundle:check-budgets
 | Security     | `security-audit`    | `compliance-audit`                      |
 | Deployment   | `deployment-audit`  | `engineering-audit`, `bank-grade-audit` |
 
-**Install slash commands (once):** `gtcx-docs/tools/audit/agent-commands/install.sh` → Claude/Cursor `/engineering-audit` · Gemini `/gtcx:engineering-audit` · Kimi/Codex `/skill:engineering-audit`.
+**Kimi (this repo):** project skill `.kimi/skills/master-audit/SKILL.md` → `/skill:master-audit` from `gtcx-core` root (restart session after clone). No bare `/master-audit` in Kimi.
 
-**Aliases:** `master-audit` / `comprehensive-audit` → `bank-grade-audit` · `full-audit` / `forensic-audit` → `engineering-audit`. **Kimi has no bare `/master-audit`** — use `/skill:master-audit` (or `/skill:bank-grade-audit`) after install; restart Kimi session if the skill list is stale.
+**Cursor (this repo):** ecosystem installer optional — `../gtcx-docs/tools/audit/agent-commands/install.sh` for global `~/.cursor/commands/`; or read framework commands directly per AGENT-START.
+
+**Aliases:** `master-audit` / `comprehensive-audit` → `bank-grade-audit` · `full-audit` / `forensic-audit` → `engineering-audit`.
 
 **How to run:** `gtcx-docs/tools/audit/audit-framework/AGENT-START.md` → `commands/<command>.md` → prompt → forensic → lane index + `latest.json` → `pnpm readiness:lanes:check`.
 
