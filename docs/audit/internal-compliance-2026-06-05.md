@@ -17,6 +17,9 @@ supersedes_note: 'Six readiness domains with scores — not docs/hygiene only'
 
 **Lane 2 of 5** — [readiness-model.md](./readiness-model.md)
 
+**Primary command:** `compliance-audit` → `docs/audit/compliance-audit-<date>.md`  
+**Scoring:** [internal-compliance-scoring.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-scoring/internal-compliance-scoring.md)
+
 In-repo **control design, documentation, hygiene, AI safety, security posture, and corporate readiness** — not third-party Industry Compliance (lane 3) or GTM-Readiness (lane 5).
 
 **Lane 2 audit program quality:** **8.5/10**

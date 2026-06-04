@@ -2,6 +2,32 @@
   "repo": "gtcx-core",
   "auditDate": "2026-06-05",
   "readinessModel": "docs/audit/readiness-model.md",
+  "laneAuditsRegistry": "gtcx-docs/tools/audit/lane-audits/README.md",
+  "laneAudits": {
+    "engineering": {
+      "command": "engineering-audit",
+      "forensicGlob": "docs/audit/engineering-audit-*.md"
+    },
+    "internalCompliance": {
+      "command": "compliance-audit",
+      "forensicGlob": "docs/audit/compliance-audit-*.md"
+    },
+    "industryCompliance": {
+      "command": "external-audit",
+      "forensicGlob": "docs/audit/external-audit-*.md"
+    },
+    "bankGrade": {
+      "command": "bank-grade-audit",
+      "forensicGlob": "docs/audit/bank-grade-audit-*.md",
+      "legacyGlob": "docs/audit/master-audit-*.md"
+    },
+    "gtmReadiness": { "command": "gtm-audit", "forensicGlob": "docs/audit/gtm-audit-*.md" },
+    "globalComplianceRating": {
+      "command": "global-compliance-audit",
+      "forensicGlob": "docs/audit/global-compliance-audit-*.md",
+      "requires": ["compliance-audit", "external-audit"]
+    }
+  },
   "ratingScales": {
     "auditQuality": "1-10 — quality of audit artifacts only",
     "readinessOutcome": "per forensic audit (scores or tiers)",

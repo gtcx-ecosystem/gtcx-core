@@ -17,9 +17,20 @@ Forensic audits and readiness scorecards for `gtcx-core`, organized in **five la
 
 ## Start here
 
-**Agents (all providers):** [readiness-and-audit-lanes.md](../agents/readiness-and-audit-lanes.md) — canonical lane names, scores, forensic workflow, anti-drift.
+**Run an audit:** [gtcx-docs lane-audits README](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-audits/README.md) — one command per goal.
 
-**[readiness-model.md](./readiness-model.md)** — five lanes, 1–10 ranks, local audit map. **Machine-readable:** [latest.json](./latest.json) · `pnpm readiness:lanes:check`
+| Goal                    | Command                   |
+| ----------------------- | ------------------------- |
+| Engineering             | `engineering-audit`       |
+| Internal compliance     | `compliance-audit`        |
+| Industry / external     | `external-audit`          |
+| Bank-grade              | `bank-grade-audit`        |
+| GTM                     | `gtm-audit`               |
+| Global Compliance (GCR) | `global-compliance-audit` |
+
+**Agents:** [readiness-and-audit-lanes.md](../agents/readiness-and-audit-lanes.md) — lane names, scores, anti-drift.
+
+**[readiness-model.md](./readiness-model.md)** — five lanes + GCR. **Machine-readable:** [latest.json](./latest.json) · `pnpm readiness:lanes:check`
 
 **[ecosystem-audit-catalog-2026-06-05.md](./ecosystem-audit-catalog-2026-06-05.md)** — **gtcx-docs / gtcx-agile / gtcx-agentic** audits (not only this folder).
 

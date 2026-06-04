@@ -12,6 +12,10 @@ review_cycle: weekly
 
 # Global Compliance Rating (GCR)
 
+**Primary command:** `global-compliance-audit` → `docs/audit/global-compliance-audit-<date>.md`  
+**Scoring:** [global-compliance-scoring.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-scoring/global-compliance-scoring.md)  
+**Prerequisites:** `compliance-audit` + `external-audit`
+
 **Cross-lane rollup** — procurement-facing **tier + status only** (never 1–10).
 
 **Not** the same as:

@@ -146,24 +146,24 @@ pnpm docs:check-frontmatter
 pnpm bundle:check-budgets
 ```
 
-## Audits (cross-repo + five lanes)
+## Audits — one command per goal
 
-### Local readiness (read first)
+**Start:** `gtcx-docs/tools/audit/lane-audits/README.md`
 
-`docs/agents/readiness-and-audit-lanes.md` — lane names, scores, forensic workflow, anti-drift. Machine-readable: `docs/audit/latest.json`.
+| Goal | Command | Forensic output |
+| ---- | ------- | --------------- |
+| Engineering | `engineering-audit` | `docs/audit/engineering-audit-<date>.md` |
+| Internal compliance | `compliance-audit` | `docs/audit/compliance-audit-<date>.md` |
+| Industry / external | `external-audit` | `docs/audit/external-audit-<date>.md` |
+| Bank-grade | `bank-grade-audit` | `docs/audit/bank-grade-audit-<date>.md` |
+| GTM-Readiness | `gtm-audit` | `docs/audit/gtm-audit-<date>.md` |
+| Global Compliance (GCR) | `global-compliance-audit` | `docs/audit/global-compliance-audit-<date>.md` |
 
-### Forensic audit commands (gtcx-docs framework)
+**How to run:** `gtcx-docs/tools/audit/audit-framework/AGENT-START.md` → `commands/<command>.md` → prompt → write forensic → update lane index + `docs/audit/latest.json` → `pnpm readiness:lanes:check`.
 
-To run any forensic audit on this repo (master-audit, full-audit, 10-10-roadmap, repo-overview, doc-cleanup, doc-standard, verification-audit, docs-machine-readable, repo-hygiene, gtm-audit):
+**Lane indexes (scores):** `docs/agents/readiness-and-audit-lanes.md` · `docs/audit/latest.json`
 
-1. Read `../gtcx-docs/tools/audit/audit-framework/AGENT-START.md` — canonical entry: commands, prompts, output paths.
-2. Read the command file (`../gtcx-docs/tools/audit/audit-framework/commands/<command>.md`).
-3. Read the prompt referenced (`../gtcx-docs/tools/audit/audit-framework/prompts/<category>/<file>.md`).
-4. Execute the prompt against this repo.
-5. Write output to the path the command specifies (typically `docs/audit/<command>-<YYYY-MM-DD>.md`).
-6. Update the **lane index** and `docs/audit/latest.json` if readiness outcomes changed.
-
-Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, Copilot, etc.
+Legacy aliases: `master-audit` = `bank-grade-audit` · `full-audit` = `engineering-audit`.
 
 ## Credentials: system-of-record + ownership split (cross-repo)
 

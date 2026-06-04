@@ -16,6 +16,9 @@ supersedes: external-dependent-compliance-2026-06-05.md
 
 **Lane 3 of 5** — [readiness-model.md](./readiness-model.md)
 
+**Primary command:** `external-audit` → `docs/audit/external-audit-<date>.md`  
+**Scoring:** [external-scoring.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-scoring/external-scoring.md)
+
 Third-party, org, and time-based **industry** attestations (pen-test, SOC 2, provenance, ceremony). **Not** engineering in-repo work (lane 1–2) or commercial GTM motion (lane 5).
 
 **Audit quality (register):** **8.0/10**

@@ -15,7 +15,10 @@ review_cycle: quarterly
 
 **Lane 1 of 5** — [readiness-model.md](./readiness-model.md)
 
-This file is a **rollup index**. Forensic evidence lives in the audits listed below.
+**Primary command:** `engineering-audit` → `docs/audit/engineering-audit-<date>.md`  
+**Scoring:** [engineering-scoring.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-scoring/engineering-scoring.md)
+
+This file is a **rollup index**. The lane forensic is `engineering-audit-*`; historical audits below remain evidence.
 
 ---
 

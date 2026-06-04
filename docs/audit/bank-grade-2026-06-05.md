@@ -16,6 +16,9 @@ review_cycle: quarterly
 
 **Lane 4 of 5** — [readiness-model.md](./readiness-model.md)
 
+**Primary command:** `bank-grade-audit` → `docs/audit/bank-grade-audit-<date>.md` (legacy: `master-audit-*.md`)  
+**Scoring:** [bank-grade-scoring.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-scoring/bank-grade-scoring.md)
+
 **Certified composite** per `gtcx-docs` SCORING_FRAMEWORK — blends engineering, compliance, and buyer lenses. **Not** a substitute for lane 1–3 or GTM-Readiness.
 
 ---

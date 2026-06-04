@@ -16,6 +16,9 @@ review_cycle: quarterly
 
 **Lane 5 of 5** — [readiness-model.md](./readiness-model.md)
 
+**Primary command:** `gtm-audit` → `docs/audit/gtm-audit-<date>.md`  
+**Scoring:** [gtm-scoring.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-scoring/gtm-scoring.md)
+
 Commercial adoptability for **who can buy what today** — non-engineering. Aligns with `~/.claude/GTM.md` S0–S6 stages, expressed here as **GR tiers**.
 
 **Audit quality:** **8.0/10** — [gtm-reality-check-2026-06-02](../gtm/gtm-reality-check-2026-06-02.md)

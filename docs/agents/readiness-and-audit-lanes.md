@@ -127,27 +127,26 @@ After `AGENTS.md` Phase 1–3, before scoring or procurement claims:
 
 ---
 
-## 7. Running forensic audits (all agents)
+## 7. Lane audits — one goal, one command (normative)
 
-Same workflow for every provider — no ad-hoc prompts.
+**Registry:** [gtcx-docs/tools/audit/lane-audits/README.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-audits/README.md)
 
-1. `../gtcx-docs/tools/audit/audit-framework/AGENT-START.md`
-2. `commands/<command>.md` (e.g. `master-audit`, `doc-standard`, `repo-hygiene`, `gtm-audit`)
-3. `prompts/<category>/<prompt>.md` referenced by the command
-4. Execute against this repo; write output to path in command (usually `docs/audit/<name>-<date>.md`)
-5. **Update lane index + `latest.json`** if readiness outcomes changed — do not leave orphan audits
+| Goal                    | Command                   | Scoring protocol                              | Forensic output                     | Index to update                      |
+| ----------------------- | ------------------------- | --------------------------------------------- | ----------------------------------- | ------------------------------------ |
+| Engineering             | `engineering-audit`       | `lane-scoring/engineering-scoring.md`         | `engineering-audit-<date>.md`       | `engineering-completeness-quality-*` |
+| Internal compliance     | `compliance-audit`        | `lane-scoring/internal-compliance-scoring.md` | `compliance-audit-<date>.md`        | `internal-compliance-*`              |
+| Industry / external     | `external-audit`          | `lane-scoring/external-scoring.md`            | `external-audit-<date>.md`          | `industry-compliance-*` + register   |
+| Bank-grade              | `bank-grade-audit`        | `lane-scoring/bank-grade-scoring.md`          | `bank-grade-audit-<date>.md`        | `bank-grade-*`                       |
+| GTM-Readiness           | `gtm-audit`               | `lane-scoring/gtm-scoring.md`                 | `gtm-audit-<date>.md`               | `gtm-readiness-*`                    |
+| Global Compliance (GCR) | `global-compliance-audit` | `lane-scoring/global-compliance-scoring.md`   | `global-compliance-audit-<date>.md` | `global-compliance-rating-*`         |
 
-### Command → lane map (gtcx-core)
+**Workflow:** `AGENT-START.md` → `commands/<command>.md` → prompt → execute → update index + `latest.json` → `pnpm readiness:lanes:check`.
 
-| Framework command                     | Primary lane              | Local index to update             |
-| ------------------------------------- | ------------------------- | --------------------------------- |
-| `doc-standard`                        | 2 (documentation quality) | internal-compliance               |
-| `repo-hygiene`                        | 2 (repo hygiene)          | internal-compliance               |
-| `master-audit` / `verification-audit` | 4                         | bank-grade                        |
-| `forensic-audit` / `full-audit`       | 1 + 4 (+ notes for 2–5)   | engineering + bank-grade          |
-| `gtm-audit`                           | 5                         | gtm-readiness                     |
-| `security-audit`                      | 2 (security) + 3 notes    | internal-compliance               |
-| `10-10-roadmap`                       | 1–4 mixed                 | tag items per lane in roadmap doc |
+**GCR order:** `compliance-audit` + `external-audit` first, then `global-compliance-audit`.
+
+**Legacy aliases:** `master-audit` / `comprehensive-audit` → `bank-grade-audit` · `full-audit` / `forensic-audit` → `engineering-audit`.
+
+**Sub-audits (lane 2 inputs):** `doc-standard`, `repo-hygiene`, `security-audit` — cited by `compliance-audit`, not lane primaries.
 
 Ecosystem catalog: [ecosystem-audit-catalog-2026-06-05.md](../audit/ecosystem-audit-catalog-2026-06-05.md)
 

@@ -19,6 +19,8 @@ supersedes_note: 'Industry Compliance + GTM-Readiness tiers; audit quality 1-10 
 
 **Agents:** [readiness-and-audit-lanes.md](../agents/readiness-and-audit-lanes.md) — canonical instructions, prompts, anti-drift. Verify: `pnpm readiness:lanes:check`.
 
+**Lane audits (one command per goal):** [gtcx-docs lane-audits README](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/tools/audit/lane-audits/README.md) — `engineering-audit`, `compliance-audit`, `external-audit`, `bank-grade-audit`, `gtm-audit`, `global-compliance-audit`.
+
 ---
 
 ## Two different numbers (do not mix)
