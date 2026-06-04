@@ -126,7 +126,11 @@ review_cycle: 'on-change'
 
 | Document                                                                                           | Purpose                                                                              |
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [`audit/master-audit-2026-06-03.md`](./audit/master-audit-2026-06-03.md)                           | **Latest** master audit — **8.9/10** refresh @ bdfe7cb                               |
+| [`audit/readiness-model.md`](./audit/readiness-model.md)                                           | **Three lanes** — engineering / compliance / GTM                                     |
+| [`audit/engineering-readiness-2026-06-05.md`](./audit/engineering-readiness-2026-06-05.md)         | Engineering **9.5/10**                                                               |
+| [`audit/compliance-attestation-2026-06-05.md`](./audit/compliance-attestation-2026-06-05.md)       | Compliance attestation **5.5/10**                                                    |
+| [`audit/gtm-readiness-2026-06-05.md`](./audit/gtm-readiness-2026-06-05.md)                         | GTM stages — library S1                                                              |
+| [`audit/master-audit-2026-06-03.md`](./audit/master-audit-2026-06-03.md)                           | Legacy blended lens **8.9/10** (investor)                                            |
 | [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md)                               | Six-phase full audit — FA-S1 + DTF Tier 5 reconciliation                             |
 | [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md)   | Doc-standard compliance (**9.6/10** — P1+P2 complete 2026-06-03)                     |
 | [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md)                           | Repo root hygiene (**9.6/10** post-bootstrap; CI gate wired)                         |
