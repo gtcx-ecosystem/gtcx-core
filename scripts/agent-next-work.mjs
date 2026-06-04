@@ -403,7 +403,7 @@ function selectBacklogClearGuidance() {
     frame: 'development',
     protocol: '22-agent-work-selection',
     message:
-      'No automatable in-repo code or ops-docs. CORE-004 blocked on XR-402 ceremony.',
+      'No automatable in-repo code or ops-docs. CORE-004 engineering gate done; ZKP transcript publish is Class R.',
     next: {
       track: 'B',
       handoff: 'CORE-004',
@@ -411,15 +411,15 @@ function selectBacklogClearGuidance() {
       title: 'D3 M3.2 trusted-setup transcript verify',
       owner: 'gtcx-core',
       blocked: true,
-      blocker: 'XR-402 trusted-setup ceremony — release-gated',
+      blocker: 'ZKP trusted-setup transcript publish — release-gated (INF-86 XR-402 KMS is done)',
     },
     nextPriority: {
-      owner: 'gtcx-protocols',
+      owner: 'gtcx-core',
       action:
-        'Complete XR-402 trusted-setup ceremony; publish transcript paths per deployment-proof-index.',
+        'Class R: publish ZKP ceremony transcript.seed + manifest under artifacts/trusted-setup/; then add KAT vk_hash pin CI gate.',
       outbound: blockerDoc,
       because:
-        'CORE-004 release-gated — gtcx-core runs trusted-setup-verify only after ceremony artifacts land.',
+        'INF-86 XR-402 (protocols KMS) is done — distinct from D3 Groth16 transcript. Engineering tests already pass.',
     },
     humanOnly: [
       {
@@ -443,12 +443,13 @@ function selectBacklogClearGuidance() {
         'Automatable Tier 5 technical + ops-docs complete. CORE-004 blocked — witness in P24 doc; do not ask operator to pick backlog.',
     },
     statusUpdate: {
-      done: 'OPS-AUDIT-FM + DTF-5.5.5 evidence index (in-repo automatable)',
-      nextPriority: `**gtcx-protocols** — XR-402 ceremony + transcript artifacts ([blocker](${blockerDoc}))`,
+      done:
+        'OPS-AUDIT-FM + DTF-5.5.5 + CORE-004 `trusted-setup-verify` CI gate (exit 0 in-session)',
+      nextPriority: `**Class R** — publish ZKP transcript to \`artifacts/trusted-setup/\` per [CORE-004 status](${blockerDoc})`,
       approvalNeeded:
         '**DTF-5.5.4** LOI/regulator letter · **DTF-5.5.2** certified pack pipeline (Class R)',
       deferred:
-        'After XR-402: `cargo test --features trusted-setup-verify --release` in gtcx-core (CORE-004)',
+        'After transcript publish: KAT vk_hash pin test + mark D3 M3.2 done in execution-roadmap',
     },
     communicationPolicy: {
       protocol: '26-agent-proceed-confirmation',
