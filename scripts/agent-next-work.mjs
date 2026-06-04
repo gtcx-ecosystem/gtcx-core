@@ -121,6 +121,12 @@ const TIER5_MILESTONES = [
     sprint: 'S-T5-5',
     workClass: 'code',
   },
+  {
+    id: 'DTF-5.5.5',
+    title: 'Evidence index entry (Tier 5 technical exit)',
+    sprint: 'S-T5-5',
+    workClass: 'ops-docs',
+  },
 ];
 
 /** Dimensions ordered by selection priority. */
@@ -355,7 +361,7 @@ const OPS_DOCS_QUEUE = [
 
 function parseCompletedOpsDocs(session) {
   const done = new Set();
-  const re = /(OPS-[A-Z0-9-]+)[^\n]*\|\s*\*\*done\*\*/gi;
+  const re = /(OPS-[A-Z0-9-]+)[^\n|]*\|[^\n]*\*\*done\*\*/gi;
   let m;
   while ((m = re.exec(session)) !== null) {
     done.add(m[1].toUpperCase());
@@ -386,26 +392,91 @@ function selectOpsDocsFallback(session = '') {
   return null;
 }
 
-/** Track B / cross-repo when algorithmic moat has no in-repo code or ops-docs left. */
-function selectExecutionRoadmapFallback(session = '') {
-  const ops = selectOpsDocsFallback(session);
-  if (ops) return ops;
-
+/** When automatable in-repo work is exhausted — one blocked priority, no menus (P26). */
+function selectBacklogClearGuidance() {
+  const blockerDoc =
+    'docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md';
   return {
+    ok: true,
+    backlogClear: true,
+    automatableExhausted: true,
+    frame: 'development',
+    protocol: '22-agent-work-selection',
+    message:
+      'No automatable in-repo code or ops-docs. CORE-004 blocked on XR-402 ceremony.',
     next: {
       track: 'B',
       handoff: 'CORE-004',
+      milestone: 'CORE-004',
       title: 'D3 M3.2 trusted-setup transcript verify',
       owner: 'gtcx-core',
       blocked: true,
       blocker: 'XR-402 trusted-setup ceremony — release-gated',
     },
+    nextPriority: {
+      owner: 'gtcx-protocols',
+      action:
+        'Complete XR-402 trusted-setup ceremony; publish transcript paths per deployment-proof-index.',
+      outbound: blockerDoc,
+      because:
+        'CORE-004 release-gated — gtcx-core runs trusted-setup-verify only after ceremony artifacts land.',
+    },
+    humanOnly: [
+      {
+        storyId: 'DTF-5.5.4',
+        title: 'Design-partner LOI or regulator letter',
+        authorityClass: 'R',
+      },
+      {
+        storyId: 'DTF-5.5.2',
+        title: 'Certified pack pipeline (signed manifest)',
+        authorityClass: 'R',
+      },
+    ],
+    deferred: [
+      'DTF-5.5.3 predicate-gated export keys (optional, deferred)',
+      'Pen-test vendor engagement (EXT-INF)',
+    ],
     selection: {
       tier: 'external',
       reason:
-        'Automatable code and ops-docs exhausted. CORE-004 ceremony blocked — file P24 Blocker Report; do not ask operator to pick backlog.',
+        'Automatable Tier 5 technical + ops-docs complete. CORE-004 blocked — witness in P24 doc; do not ask operator to pick backlog.',
     },
+    statusUpdate: {
+      done: 'OPS-AUDIT-FM + DTF-5.5.5 evidence index (in-repo automatable)',
+      nextPriority: `**gtcx-protocols** — XR-402 ceremony + transcript artifacts ([blocker](${blockerDoc}))`,
+      approvalNeeded:
+        '**DTF-5.5.4** LOI/regulator letter · **DTF-5.5.2** certified pack pipeline (Class R)',
+      deferred:
+        'After XR-402: `cargo test --features trusted-setup-verify --release` in gtcx-core (CORE-004)',
+    },
+    communicationPolicy: {
+      protocol: '26-agent-proceed-confirmation',
+      version: '1.1.0',
+      forbiddenReplyPatterns: [
+        'Say if you want',
+        'Say which blocked track',
+        'Your call',
+        'Two options',
+        'Which do you prefer',
+        'anything on the P1 list',
+      ],
+    },
+    agentInstructions: [
+      'backlogClear does NOT mean idle — nextPriority is owner-repo ceremony work (P24).',
+      'Emit Status Update with exactly ONE Next priority; then STOP — no questions.',
+      'Do not ask the operator which story or repo to pick.',
+      `Blocker witness: ${blockerDoc}`,
+    ],
   };
+}
+
+/** Track B / cross-repo when algorithmic moat has no in-repo code or ops-docs left. */
+function selectExecutionRoadmapFallback(session = '') {
+  const ops = selectOpsDocsFallback(session);
+  if (ops) return ops;
+
+  return selectBacklogClearGuidance();
 }
 
 function guessNextMilestone(dimId, score) {

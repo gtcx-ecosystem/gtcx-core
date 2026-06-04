@@ -19,6 +19,19 @@ review_cycle: on-change
 
 ## 1. Session start (every repo, every session)
 
+**One-shot (BaselineOS CLI — full status + P22 + gates):**
+
+```bash
+cd <owner-repo>
+# After: cd ../baseline-os && pnpm --filter baselineos build
+node ../baseline-os/packages/baselineos/dist/cli/bin.js session
+# or: baseline session -r .
+```
+
+Chains INST-003 report → `pnpm agent:session-start` → repo gates. Use **`--skip-gates`** for a fast open.
+
+**Repo-native (minimum):**
+
 ```bash
 cd <owner-repo>
 pnpm agent:start

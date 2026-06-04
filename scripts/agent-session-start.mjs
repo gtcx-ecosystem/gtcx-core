@@ -140,5 +140,14 @@ log(`**Authorization artifact:** ${proceedBrief.authorizationArtifact}`);
 log(`**Blocked:** ${blocked ? 'yes' : 'no'}`);
 log(`**Override:** stop | correct: | story ID`);
 log('\n**FORBIDDEN replies (P26 v1.1.0):** Your call · Two options · 1./2. menus · "switch to other repo?"');
+if (nextWork?.backlogClear && nextWork?.statusUpdate) {
+  const su = nextWork.statusUpdate;
+  log('\n--- Status Update skeleton (P26 — backlog clear) ---\n');
+  if (su.done) log(`**Done:** ${su.done}`);
+  if (su.nextPriority) log(`**Next priority:** ${su.nextPriority}`);
+  if (su.approvalNeeded) log(`**Approval needed:** ${su.approvalNeeded}`);
+  if (su.deferred) log(`**Deferred:** ${su.deferred}`);
+  log('\nClose with Status Update ONLY — no "Say if you want" after Approval needed.\n');
+}
 log('\nSession updated:', SESSION_PATH);
 log('Before claiming done: run V-ladder (AGENTS.md §7) and include attestation in PR/commit.\n');
