@@ -17,5 +17,8 @@ pnpm-lock.yaml
 AGENTS.md
 CLAUDE.md
 GEMINI.md
+KIMI.md
+CODEX.md
 CONVENTIONS.md
 .cursor/rules/main.mdc
+.github/copilot/instructions.md

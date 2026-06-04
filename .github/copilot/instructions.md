@@ -92,5 +92,4 @@ To run any forensic audit on this repo (master-audit, full-audit, 10-10-roadmap,
 6. Update the **lane index** and `docs/audit/latest.json` if readiness outcomes changed.
 
 Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, Copilot, etc.
-
 <!-- AGENT-SYNC:END -->

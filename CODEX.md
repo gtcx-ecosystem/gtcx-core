@@ -207,5 +207,4 @@ When a story is **blocked on a sibling repo** or you **hand off** cross-repo wor
 **Not in this repo:** inbound archive SoR for ecosystem-wide weekly reports — that stays **`baseline-os`** (`workstream/coordination/`).
 
 **Evidence paths (link only):** production smoke and EAP issuance artifacts live in owning repos per deployment-proof-index (e.g. `gtcx-intelligence/docs/audit/evidence/`).
-
 <!-- AGENT-SYNC:END -->
