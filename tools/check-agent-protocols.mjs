@@ -52,6 +52,8 @@ const requiredScripts = [
   'agent:universal:check',
   'agent:next-work',
   'agent:session-start',
+  'agent:bout',
+  'agent:bout:check',
   'agent:work-selection:check',
   'agent:coordination:check',
   'agent:hub-drift:check',
@@ -67,6 +69,11 @@ requireFile('docs/agents/agent-protocols-enforcement.md', 'enforcement guide');
 requireFile('docs/agents/agent-protocols-hub-snapshot.json', 'hub snapshot');
 requireFile('docs/operations/agent-attestation-template.md', 'attestation template');
 requireFile('scripts/agent-session-start.mjs', 'session-start script');
+requireFile('docs/operations/agent-execution-bout.md', 'execution bout normative doc');
+requireFile('scripts/lib/agent-execution-bout.mjs', 'execution bout library');
+requireFile('.agent/execution-bout-pointer.md', 'execution bout pointer');
+requireFile('.cursor/rules/agent-execution-bout.mdc', 'execution bout cursor rule');
+requireContains('AGENTS.md', ['agent-execution-bout.md'], 'AGENTS execution bout');
 requireFile('.cursor/rules/agent-protocols-enforcement.mdc', 'cursor agent protocols rule');
 requireFile('.agent/session-start-pointer.md', 'session-start pointer');
 requireFile('docs/operations/agent-universal-instructions.md', 'universal instructions (any LLM)');
@@ -90,6 +97,7 @@ if (p22?.status === 'established') {
   requireContains('AGENTS.md', ['Phase 5.4', 'Protocol 22', 'agent:next-work'], 'AGENTS P22');
   requireContains('.agent/base.md', ['agent:session-start', 'agent:next-work'], 'base session start');
   runScript('agent:work-selection:check');
+  runScript('agent:bout:check');
 }
 
 // --- P24 ---

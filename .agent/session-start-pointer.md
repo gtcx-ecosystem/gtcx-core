@@ -6,7 +6,9 @@
 pnpm agent:session-start
 ```
 
-Runs Protocol 22 next-work, refreshes `.baseline/memory/session.md`, prints Proceed Brief skeleton (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+Runs Protocol 22 next-work, provisions **execution bout** (`.baseline/execution-bout.json`), refreshes `.baseline/memory/session.md`, prints Proceed Brief + bout scope (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+
+**Bout:** `docs/operations/agent-execution-bout.md` · `pnpm agent:bout`
 
 **JSON for automation:** `pnpm agent:session-start --json`
 

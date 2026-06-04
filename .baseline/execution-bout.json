@@ -1,0 +1,67 @@
+{
+  "schema": "gtcx.executionBout.v1",
+  "statePath": ".baseline/execution-bout.json",
+  "normativeDoc": "docs/operations/agent-execution-bout.md",
+  "docPath": "docs/operations/agent-execution-bout.md",
+  "id": "bout-2026-06-04-auto",
+  "mode": "auto",
+  "provisionedAt": "2026-06-04T15:49:55.685Z",
+  "repo": "gtcx-core",
+  "frame": "development",
+  "backlogClear": true,
+  "stories": [
+    {
+      "storyId": "CORE-004",
+      "title": "Optional Class R: publish ZKP transcript under artifacts/trusted-setup/",
+      "sprint": null,
+      "workClass": "ops-docs",
+      "authorityClass": "S",
+      "priority": "P3",
+      "source": "repo-completable",
+      "status": "pending"
+    }
+  ],
+  "humanOnly": [
+    {
+      "storyId": "DTF-5.5.4",
+      "title": "Design-partner LOI or regulator letter",
+      "authorityClass": "S",
+      "workClass": "external",
+      "source": "human-only"
+    }
+  ],
+  "currentStoryId": "DTF-5.5.4",
+  "remainingCount": 0,
+  "stopWhen": ["plan_complete", "class_s_only", "gate_failure", "operator_stop"],
+  "reportEveryStories": 2,
+  "policy": {
+    "microCommitPerStory": true,
+    "endOfTurn": "bout_check_in_only",
+    "continueAfterBacklogClear": true,
+    "reRunNextWorkAfterEachStory": true,
+    "progressReportInChat": true,
+    "fullStatusUpdateAt": "bout_check_in"
+  },
+  "checkInWhen": [
+    "all Class R stories in plan are done",
+    "next P22 head is Class S / external only",
+    "verification gate failed (fix or blocker report)",
+    "operator said stop"
+  ],
+  "agentInstructions": [
+    "Execution bout is provisioned — drain Class R stories in `stories[]` before bout check-in.",
+    "After each story: micro-commit, update session.md row, re-run `pnpm agent:next-work`.",
+    "Progress Status Update in chat every 2 completed stories (short Done bullets).",
+    "Do NOT end the session after one story while `remainingCount` > 0.",
+    "Do NOT ask operator to pick stories — P22 selects head; bout lists the drain queue.",
+    "Full Status Update + optional push only at bout check-in.",
+    "Normative: docs/operations/agent-execution-bout.md"
+  ],
+  "forbidden": [
+    "stop after single story when bout has Class R remaining",
+    "Say if you want to continue",
+    "backlogClear means go idle (it means commercial ceiling — keep draining repoCompletable)"
+  ],
+  "boutComplete": false,
+  "classSBlocks": false
+}

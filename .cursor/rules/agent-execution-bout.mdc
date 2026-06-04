@@ -1,0 +1,21 @@
+---
+description: Execution bout — drain Class R stories before check-in (P22 extension)
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Execution bout (intrinsic)
+
+Read `docs/operations/agent-execution-bout.md` on session start.
+
+After `pnpm agent:session-start`, use JSON `executionBout`:
+
+1. Drain all Class **R** stories in `executionBout.stories` before bout check-in.
+2. Micro-commit each story; re-run `pnpm agent:next-work` after each.
+3. Short progress Status Update every `reportEveryStories` (default 2).
+4. **`backlogClear` is not a stop signal** — continue while bout has Class R items.
+5. Full Status Update only at bout check-in (plan complete or Class S only).
+6. Forbidden: stop after one story; "Say if you want to continue"; story menus.
+
+Planning/reconcile: `execute-roadmap` framework only — implementation uses the bout loop.

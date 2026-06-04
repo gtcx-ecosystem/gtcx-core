@@ -35,9 +35,15 @@ adoption_status: established
 
 ```bash
 pnpm agent:next-work
+pnpm agent:bout              # execution bout plan (Class R drain queue)
+pnpm agent:bout:check
 pnpm agent:work-selection:check
 pnpm agent:protocols:check   # P22–P28 bundle (CI + governance)
 ```
+
+## Execution bout (P22 extension)
+
+P22 selects the **head** story; the **bout** lists remaining Class R work for the session. Provisioned on every `agent:next-work` / `agent:session-start`. See [`agent-execution-bout.md`](agent-execution-bout.md).
 
 ## Active frame
 

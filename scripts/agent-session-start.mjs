@@ -111,12 +111,23 @@ const proceedBrief = {
   blocked,
 };
 
+const executionBout = nextWork?.executionBout ?? null;
+
 const output = {
   startedAt: now,
   gitStatus,
   nextWork,
-  proceedBrief,
+  executionBout,
+  proceedBrief: {
+    ...proceedBrief,
+    boutScope:
+      executionBout?.stories?.length > 0
+        ? `Drain ${executionBout.stories.length} Class R story(ies) before bout check-in`
+        : 'No Class R stories in bout — witness / Class S check-in',
+    boutDoc: 'docs/operations/agent-execution-bout.md',
+  },
   sessionPath: '.baseline/memory/session.md',
+  boutStatePath: '.baseline/execution-bout.json',
   template: 'docs/operations/agent-proceed-brief-template.md',
   attestation: 'docs/operations/agent-attestation-template.md',
 };
@@ -139,6 +150,24 @@ log(`**Authority class:** ${proceedBrief.authorityClass}`);
 log(`**Authorization artifact:** ${proceedBrief.authorizationArtifact}`);
 log(`**Blocked:** ${blocked ? 'yes' : 'no'}`);
 log(`**Override:** stop | correct: | story ID`);
+if (executionBout) {
+  log('\n--- Execution bout (intrinsic — drain before check-in) ---\n');
+  log(`**Scope:** ${output.proceedBrief.boutScope}`);
+  log(`**Current:** ${executionBout.currentStoryId ?? 'none'}`);
+  log(`**Class R in plan:** ${executionBout.stories?.length ?? 0}`);
+  log(`**Bout complete:** ${executionBout.boutComplete}`);
+  log(`**State:** .baseline/execution-bout.json`);
+  log(`**Normative:** ${executionBout.normativeDoc ?? 'docs/operations/agent-execution-bout.md'}`);
+  if (executionBout.stories?.length) {
+    for (const s of executionBout.stories.slice(0, 8)) {
+      log(`  - [${s.status}] ${s.storyId}`);
+    }
+    if (executionBout.stories.length > 8) {
+      log(`  - … +${executionBout.stories.length - 8} more`);
+    }
+  }
+  log('\n**Policy:** micro-commit per story · progress report every 2 stories · no stop until bout complete');
+}
 log('\n**FORBIDDEN replies (P26 v1.1.0):** Your call · Two options · 1./2. menus · "switch to other repo?"');
 if (nextWork?.backlogClear && nextWork?.statusUpdate) {
   const su = nextWork.statusUpdate;

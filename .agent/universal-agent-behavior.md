@@ -2,6 +2,6 @@
 
 **Read every session:** [docs/operations/agent-universal-instructions.md](../docs/operations/agent-universal-instructions.md)
 
-**First command:** `pnpm agent:session-start` · **P22** no menus · **P26** one Proceed Brief then work · **P27** you run commands (never "Say push if you want").
+**First command:** `pnpm agent:session-start` · **Execution bout** drain Class R before check-in · **P22** no menus · **P26** Proceed Brief then work · **P27** you run commands (never "Say push if you want").
 
 **Ecosystem push (harness):** `pnpm --dir ../gtcx-agentic ecosystem:push-all`

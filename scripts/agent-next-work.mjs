@@ -7,6 +7,17 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { enrichWithPersona } from '../../gtcx-agentic/scripts/lib/suggest-persona.mjs';
+import {
+  attachExecutionBout,
+  readRepoContext,
+  writeBoutState,
+} from './lib/agent-execution-bout.mjs';
+import {
+  OPS_DOCS_QUEUE,
+  TIER5_MILESTONES,
+  parseCompletedOpsDocs,
+  parseCompletedTier5,
+} from './lib/agent-work-queues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
@@ -14,126 +25,6 @@ const THIS_REPO = 'gtcx-core';
 const ROADMAP_PATH = join(REPO_ROOT, 'docs/audit/moat-dimension-roadmap-10-10.md');
 const SESSION_PATH = join(REPO_ROOT, '.baseline/memory/session.md');
 const TIER5_WORKPLAN_PATH = join(REPO_ROOT, 'docs/operations/tier-5-workplan-2026-06.md');
-
-/** Defensibility Tier 5 + full-audit P0 — ordered implementable milestones (DTF-001). */
-const TIER5_MILESTONES = [
-  {
-    id: 'FA-P0-1',
-    title: 'Break workproof/verification turbo cycle (root typecheck)',
-    sprint: 'FA-S1',
-    workClass: 'code',
-  },
-  {
-    id: 'FA-P0-2',
-    title: 'README: library readiness vs DTF Tier 5 split',
-    sprint: 'FA-S1',
-    workClass: 'ops-docs',
-  },
-  {
-    id: 'DTF-5.1.1',
-    title: 'Witness builder: WorkProof → typed witness',
-    sprint: 'S-T5-1',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.1.2',
-    title: 'Commodity-origin R1CS + gh-gold-origin profile + negative tests',
-    sprint: 'S-T5-1',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.1.3',
-    title: 'NAPI prove/verify for gh-gold-origin',
-    sprint: 'S-T5-1',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.1.4',
-    title: 'KAT groth16-gh-gold-origin + CI',
-    sprint: 'S-T5-1',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.2.1',
-    title: 'zw-diamond-origin circuit',
-    sprint: 'S-T5-2',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.2.2',
-    title: 'Verification package integration test',
-    sprint: 'S-T5-2',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.2.3',
-    title: 'KATs for diamond + range circuits',
-    sprint: 'S-T5-2',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.3.1',
-    title: 'gh-cocoa-origin circuit',
-    sprint: 'S-T5-3',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.3.2',
-    title: 'Five-jurisdiction integration fixtures',
-    sprint: 'S-T5-3',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.3.3',
-    title: 'Minerals board UAT protocol template',
-    sprint: 'S-T5-3',
-    workClass: 'ops-docs',
-  },
-  {
-    id: 'DTF-5.4.1',
-    title: 'CircuitRegistry with semver',
-    sprint: 'S-T5-4',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.4.2',
-    title: 'Load test 1000 proofs/min',
-    sprint: 'S-T5-4',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.4.3',
-    title: 'Trust portal circuit IDs',
-    sprint: 'S-T5-4',
-    workClass: 'ops-docs',
-  },
-  // gtcx-protocols owner — handoff when reached
-  {
-    id: 'DTF-5.4.4',
-    title: 'gtcx-protocols E2E per circuit ID',
-    sprint: 'S-T5-4',
-    workClass: 'external',
-    owner: 'gtcx-protocols',
-  },
-  {
-    id: 'DTF-5.5.1',
-    title: 'Jurisdiction pack Zod CI hardening',
-    sprint: 'S-T5-5',
-    workClass: 'code',
-  },
-  {
-    id: 'DTF-5.5.2',
-    title: 'Certified pack pipeline (signed manifest)',
-    sprint: 'S-T5-5',
-    workClass: 'ops-docs',
-  },
-  {
-    id: 'DTF-5.5.5',
-    title: 'Evidence index entry (Tier 5 technical exit)',
-    sprint: 'S-T5-5',
-    workClass: 'ops-docs',
-  },
-];
 
 /** Dimensions ordered by selection priority. */
 const DIMENSION_ORDER = [
@@ -180,21 +71,6 @@ function parseInProgressSession(md) {
   return null;
 }
 
-function parseCompletedTier5(session, workplan) {
-  const done = new Set();
-  const re = /(?:DTF-5\.\d+\.\d+|FA-P0-\d+)[^\n]*\|\s*\*\*done\*\*/gi;
-  const idRe = /(?:DTF-5\.\d+\.\d+|FA-P0-\d+)/;
-  let m;
-  const sources = [session, workplan].filter(Boolean);
-  for (const src of sources) {
-    while ((m = re.exec(src)) !== null) {
-      const id = m[0].match(idRe)?.[0];
-      if (id) done.add(id);
-    }
-  }
-  return done;
-}
-
 function selectTier5NextWork(session) {
   let workplan = '';
   try {
@@ -215,22 +91,9 @@ function selectTier5NextWork(session) {
 
   for (const item of TIER5_MILESTONES) {
     if (completed.has(item.id)) continue;
+    if (item.deferred) continue;
     if (item.workClass === 'external') {
-      return {
-        next: {
-          track: 'T5',
-          handoff: item.id,
-          title: item.title,
-          owner: item.owner ?? 'gtcx-protocols',
-          milestone: item.id,
-          blocked: true,
-          blocker: 'Owner repo implementation required',
-        },
-        selection: {
-          tier: 'external',
-          reason: `Tier 5 milestone ${item.id} — implement in owner repo per Protocol 24`,
-        },
-      };
+      continue;
     }
     return formatTier5Selection(
       item,
@@ -347,32 +210,6 @@ function selectNextWork() {
   const tier5 = selectTier5NextWork(session);
   if (tier5) return tier5;
   return selectExecutionRoadmapFallback(session);
-}
-
-/** Ops-docs queue when Tier 5 code complete (Development frame — skip external tier 6). */
-const OPS_DOCS_QUEUE = [
-  {
-    id: 'OPS-AUDIT-FM',
-    title: 'Merge duplicate frontmatter on historical audit files',
-    sprint: 'HYGIENE',
-    workClass: 'ops-docs',
-    paths: [
-      'docs/audit/full-audit-2026-05-09.md',
-      'docs/audit/master-audit-2026-05-27.md',
-      'docs/audit/master-audit-2026-05-12.md',
-      'docs/audit/10-10-roadmap-2026-05-25.md',
-    ],
-  },
-];
-
-function parseCompletedOpsDocs(session) {
-  const done = new Set();
-  const re = /(OPS-[A-Z0-9-]+)[^\n|]*\|[^\n]*\*\*done\*\*/gi;
-  let m;
-  while ((m = re.exec(session)) !== null) {
-    done.add(m[1].toUpperCase());
-  }
-  return done;
 }
 
 function selectOpsDocsFallback(session = '') {
@@ -518,7 +355,7 @@ function selectBacklogClearGuidance() {
     agentInstructions: [
       'DTF-5.5.2 = Class R — run certified-pack commands in-session; never list 5.5.2 under Approval needed.',
       'DTF-5.5.4 = Class S only — LOI/regulator letter; agents witness, do not sign.',
-      'Emit Status Update with exactly ONE Next priority; then STOP — no questions.',
+      'Use executionBout: drain Class R stories before bout check-in — no stop after one story.',
       'Do not ask the operator which story or repo to pick.',
       `Witness: ${commercialDoc}`,
     ],
@@ -586,12 +423,18 @@ const result = selectNextWork();
 const storyId =
   result.next?.milestone ?? result.next?.handoff ?? result.next?.storyId ?? '';
 const title = result.next?.title ?? '';
+const ctx = readRepoContext(REPO_ROOT);
+const base = { ok: true, repo: THIS_REPO, ...result };
+const withBout = attachExecutionBout(base, {
+  repoRoot: REPO_ROOT,
+  nextWork: base,
+  session: ctx.session,
+  workplan: ctx.workplan,
+});
+writeBoutState(REPO_ROOT, withBout.executionBout);
 console.log(
   JSON.stringify(
-    enrichWithPersona(
-      { ok: true, repo: THIS_REPO, ...result },
-      { repo: THIS_REPO, storyId, title },
-    ),
+    enrichWithPersona(withBout, { repo: THIS_REPO, storyId, title }),
     null,
     2,
   ),

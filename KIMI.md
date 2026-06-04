@@ -73,9 +73,9 @@ If `KIMI.md` conflicts with `AGENTS.md`, **AGENTS.md wins**.
 
 ## Universal agent behavior (ANY LLM — terminal, IDE, CLI)
 
-**Read every session:** [docs/operations/agent-universal-instructions.md](docs/operations/agent-universal-instructions.md)
+**Read every session:** [docs/operations/agent-universal-instructions.md](../docs/operations/agent-universal-instructions.md)
 
-**First command:** `pnpm agent:session-start` · **P22** no menus · **P26** one Proceed Brief then work · **P27** you run commands (never "Say push if you want").
+**First command:** `pnpm agent:session-start` · **Execution bout** drain Class R before check-in · **P22** no menus · **P26** Proceed Brief then work · **P27** you run commands (never "Say push if you want").
 
 **Ecosystem push (harness):** `pnpm --dir ../gtcx-agentic ecosystem:push-all`
 
@@ -124,7 +124,9 @@ Template: `docs/operations/agent-proceed-brief-template.md` · **Forbidden:** Yo
 pnpm agent:session-start
 ```
 
-Runs Protocol 22 next-work, refreshes `.baseline/memory/session.md`, prints Proceed Brief skeleton (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+Runs Protocol 22 next-work, provisions **execution bout** (`.baseline/execution-bout.json`), refreshes `.baseline/memory/session.md`, prints Proceed Brief + bout scope (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+
+**Bout:** `docs/operations/agent-execution-bout.md` · `pnpm agent:bout`
 
 **JSON for automation:** `pnpm agent:session-start --json`
 
@@ -146,7 +148,7 @@ Runs Protocol 22 next-work, refreshes `.baseline/memory/session.md`, prints Proc
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
-4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` before implementation; then `pnpm agent:next-work` is included. Never ask which roadmap story to pick; refresh `.baseline/memory/session.md` after each story. Verify: `pnpm agent:work-selection:check` · `pnpm agent:protocols:check`.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` before implementation (provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; micro-commit per story. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
 
 ## Build & Run
 
@@ -229,16 +231,30 @@ pnpm bundle:check-budgets
 
 **Do not** use `baseline-os/infra/docker/.env.staging` for production vault work.
 
-## Execute roadmap (any LLM, any repo)
+## Execute roadmap (planning / reconcile only)
 
-Command: **`execute-roadmap`** (not `roadmap`).
+Use when audits must be **reconciled** into a living plan — not for session-by-session implementation drain.
 
 1. Read `../gtcx-docs/tools/roadmap/roadmap-framework/AGENT-START.md`
-2. Read `commands/execute-roadmap.md` and `prompts/roadmap/roadmap-reconcile-execute-prompt.md`
-3. Update `docs/strategy/execution-roadmap.md` or `docs/audit/execution-roadmap.md`; execute until active phase done
-4. Quick: `prompts/shareable/execute-roadmap-prompt-RUN.md`
+2. Command `execute-roadmap` — update `docs/audit/execution-roadmap.md`
+3. **Then ship** via **execution bout** (intrinsic): `docs/operations/agent-execution-bout.md` · `pnpm agent:session-start`
 
-Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, etc.
+**Do not** stop after planning. **Do not** use execute-roadmap as a substitute for `pnpm agent:next-work` + bout drain.
+
+## Execution bout (intrinsic — prefer over execute-roadmap for shipping)
+
+**Normative:** `docs/operations/agent-execution-bout.md` · state: `.baseline/execution-bout.json`
+
+Every `pnpm agent:session-start` and `pnpm agent:next-work` provisions `executionBout` (Class R drain queue). **Drain the bout before check-in** — micro-commit per story; progress Status Update every 2 stories; full check-in at bout end.
+
+```bash
+pnpm agent:session-start --json   # includes executionBout
+pnpm agent:bout                   # human summary
+```
+
+`backlogClear` ≠ stop — continue `repoCompletable` Class R items in the bout plan.
+
+**Planning only:** `execute-roadmap` (gtcx-docs framework) reconciles audits into `docs/audit/execution-roadmap.md` — does not replace the bout loop for implementation.
 
 ## Cross-repo coordination (Protocol 24)
 
@@ -286,7 +302,9 @@ When a story is **blocked on a sibling repo** or you **hand off** cross-repo wor
 pnpm agent:session-start
 ```
 
-Runs Protocol 22 next-work, refreshes `.baseline/memory/session.md`, prints Proceed Brief skeleton (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+Runs Protocol 22 next-work, provisions **execution bout** (`.baseline/execution-bout.json`), refreshes `.baseline/memory/session.md`, prints Proceed Brief + bout scope (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+
+**Bout:** `docs/operations/agent-execution-bout.md` · `pnpm agent:bout`
 
 **JSON for automation:** `pnpm agent:session-start --json`
 
@@ -323,4 +341,27 @@ Use **after work in the turn** or when reporting cluster/repo state — not inst
 **Rules:** One next priority (not a menu). **Approval needed** only for real gates — never "I can push / I can help / if you want." Class **R**: execute, then show Done + Next.
 
 Template: `docs/operations/agent-status-update-template.md` · Spec: P26 §3b (gtcx-docs).
+
+## Ecosystem agent learning card (normative — read every session)
+
+**Canonical SoR:** [ecosystem-agent-learning-card-2026-06.md](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-agent-learning-card-2026-06.md) (gtcx-protocols).
+
+### Read order
+
+| Step | Link                                                                                                                                                                                     |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | [Unblock playbook F1–F10](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-unblock-playbook-2026-06.md)                                 |
+| 2    | [P26 Status Update + post-pilot gating](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/agent-status-update-and-post-pilot-gating-2026-06-06.md) |
+| 3    | [Human-external register](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/docs/operations/coordination/human-external-blocker-register-2026-06.md)                              |
+| 4    | [Cross-repo bridge — Latest updates](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/cross-repo-agent-bridge.md)                                 |
+| 5    | This repo `docs/operations/agent-work-selection.md` · `docs/audit/auto-dev-state.md`                                                                                                     |
+
+**End of turn:** one P26 Status Update (not a menu) → append [cross-repo-agent-log](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/cross-repo-agent-log.md) if state changed.
+
+### Rules (all repos)
+
+- **`backlogClear`** on a sibling (e.g. gtcx-protocols) does **not** stop IR in **this** repo.
+- **Class S** (H-03, DTF-5.5.4 LOI, pen-test SOW, …) → **Approval needed** only — never execute from wrong repo.
+- **Class R** (tests, manifests, capture scripts) → run in-session; never list under Approval needed.
+- **Never** execute H-03 countersign or XR-518 `--confirm` unless owner repo + Class A artifact says so.
 <!-- AGENT-SYNC:END -->

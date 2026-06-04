@@ -69,6 +69,20 @@ Read after start:
 2. Implement the returned **story ID** in **this repo**.
 3. **Never** ask the operator to choose among stories, repos, or numbered options.
 
+### Execution bout (intrinsic — drain before check-in)
+
+Repos with bout wiring provision `executionBout` on every `agent:session-start` / `agent:next-work`. **gtcx-core** normative: `docs/operations/agent-execution-bout.md` · state: `.baseline/execution-bout.json`.
+
+| Rhythm          | Action                                               |
+| --------------- | ---------------------------------------------------- |
+| Per story       | Implement → gates → micro-commit → `agent:next-work` |
+| Every 2 stories | Short progress Status Update in chat                 |
+| Bout end        | Full Status Update; optional push                    |
+
+**`backlogClear` ≠ stop.** Continue while the bout lists Class R work.
+
+**`execute-roadmap`** is for **planning/reconcile** only — not session implementation drain.
+
 ---
 
 ## 3. Phase 4 — Persona (mandatory)

@@ -39,9 +39,9 @@ focus: 'DTF-5.5.2 certified pack pipeline; CORE-004 Class R transcript'
 cd /Users/amanianai/Sites/gtcx-ecosystem/gtcx-core && git push origin main
 ```
 
-## Session bootstrap (2026-06-04 14:45:03 UTC)
+## Session bootstrap (2026-06-04 15:48:13 UTC)
 
 - **Command:** `pnpm agent:start`
-- **Next work:** CORE-004 — D3 M3.2 trusted-setup transcript verify
-- **Blocked:** yes (XR-402 trusted-setup ceremony — release-gated)
-- **Git:** 0 changed path(s)
+- **Next work:** DTF-5.5.3 — Predicate-gated export keys (optional)
+- **Blocked:** no
+- **Git:** 27 changed path(s)
