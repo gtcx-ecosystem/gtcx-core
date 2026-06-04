@@ -1,14 +1,18 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "repo": "gtcx-core",
   "hubRepo": "gtcx-docs",
+  "hubLocalPath": "../gtcx-docs",
   "hubProtocolsIndex": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/README.md",
   "institutionalStartup": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/agent-startup-protocol.md",
   "enforceCommand": "pnpm agent:protocols:check",
+  "sessionStartCommand": "pnpm agent:session-start",
+  "hubDriftCommand": "pnpm agent:hub-drift:check",
+  "attestationCommand": "pnpm agent:attestation:check",
   "startupPhases": {
     "5.4": "P22",
     "5.5": "P24",
-    "5.6": "P26",
+    "5.6": "P26+P28",
     "5.7": "P27"
   },
   "protocols": [
@@ -28,7 +32,6 @@
       "status": "established",
       "startupPhase": "5.4",
       "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/protocol.md",
-      "agentInstructionsUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/agent-instructions.md",
       "localManifest": "docs/operations/agent-work-selection.md",
       "localBrief": "docs/operations/agent-protocol-22-brief.md",
       "checkScript": "agent:work-selection:check"
@@ -41,7 +44,8 @@
       "startupPhase": "5.5",
       "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/24-cross-repo-coordination/protocol.md",
       "localPointer": ".agent/coordination-pointer.md",
-      "localBridge": "docs/operations/coordination/cross-repo-agent-bridge.md"
+      "localBridge": "docs/operations/coordination/cross-repo-agent-bridge.md",
+      "checkScript": "agent:coordination:check"
     },
     {
       "id": "P26",
@@ -77,18 +81,98 @@
       "authorityClasses": ["S", "A", "R"]
     }
   ],
-  "relatedProtocols": [
+  "foundationProtocols": [
+    {
+      "id": "P1",
+      "slug": "1-docs-structure",
+      "title": "Docs Structure",
+      "localGate": "docs:check-frontmatter"
+    },
+    { "id": "P2", "slug": "2-repo-setup", "title": "Repo Setup", "localGate": "ops:check" },
+    {
+      "id": "P3",
+      "slug": "3-naming-conventions",
+      "title": "Naming Conventions",
+      "localGate": "architecture:check"
+    },
+    {
+      "id": "P4",
+      "slug": "4-git-workflow",
+      "title": "Git Workflow",
+      "localPath": ".husky/commit-msg"
+    },
+    { "id": "P5", "slug": "5-code-standards", "title": "Code Standards", "localGate": "lint" },
+    { "id": "P6", "slug": "6-testing", "title": "Testing", "localGate": "test" },
+    { "id": "P7", "slug": "7-ci-cd", "title": "CI/CD", "localPath": ".github/workflows/ci.yml" },
+    { "id": "P8", "slug": "8-security", "title": "Security", "localGate": "security:secret-scan" },
+    {
+      "id": "P9",
+      "slug": "9-sop-governance",
+      "title": "SOP Governance",
+      "localGate": "quality:governance:check"
+    },
+    {
+      "id": "P10",
+      "slug": "10-enterprise-standards",
+      "title": "Enterprise Standards",
+      "localGate": "quality:governance:check"
+    },
+    {
+      "id": "P11",
+      "slug": "11-enterprise-governance",
+      "title": "Enterprise Governance",
+      "localGate": "quality:governance:check"
+    },
+    { "id": "P12", "slug": "12-monitoring", "title": "Monitoring", "optional": true },
+    {
+      "id": "P13",
+      "slug": "13-architecture-diagrams",
+      "title": "Architecture Diagrams",
+      "optional": true
+    },
+    {
+      "id": "P14",
+      "slug": "14-folder-hygiene",
+      "title": "Folder Hygiene",
+      "localGate": "check:workspace-root-cleanliness"
+    },
+    { "id": "P15", "slug": "15-repo-hygiene", "title": "Repo Hygiene", "localGate": "ops:check" },
     {
       "id": "P16",
       "slug": "16-audit-standard",
       "title": "Audit Standard",
-      "localGuide": "docs/agents/readiness-and-audit-lanes.md"
+      "localGate": "readiness:lanes:check",
+      "localPath": "docs/agents/readiness-and-audit-lanes.md"
+    },
+    {
+      "id": "P17",
+      "slug": "17-specs-standard",
+      "title": "Specs Standard",
+      "localPath": "docs/specs"
     },
     {
       "id": "P18",
       "slug": "18-machine-readable-docs",
       "title": "Machine-Readable Docs",
-      "gate": "pnpm docs:check-frontmatter"
+      "localGate": "docs:check-frontmatter"
+    },
+    {
+      "id": "P19",
+      "slug": "19-agent-credential-access",
+      "title": "Agent Credential Access",
+      "localPointer": ".agent/credentials-pointer.md"
+    },
+    {
+      "id": "P20",
+      "slug": "20-surface-experience",
+      "title": "Surface Experience",
+      "hubOnly": true
+    },
+    {
+      "id": "P21",
+      "slug": "21-ux-documentation-ops",
+      "title": "UX Documentation Ops",
+      "hubOnly": true
     }
   ]
 }

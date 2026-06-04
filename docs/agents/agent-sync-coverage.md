@@ -30,7 +30,7 @@ review_cycle: on-change
 | `.cursor/rules/main.mdc`          | **Cursor Composer**      | yes                 | yes             | `alwaysApply` workspace rule |
 | `.github/copilot/instructions.md` | **GitHub Copilot**       | yes                 | yes             | Human §1–5 above sync        |
 
-**Verify:** `pnpm agent:check` (exit 0 = in sync) · `pnpm agent:protocols:check` (P22–P28 wiring + CI)
+**Verify:** `pnpm agent:check` · `pnpm agent:protocols:check` · first command each session: `pnpm agent:session-start`
 
 ---
 

@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "hubRepo": "gtcx-docs",
+  "hubLocalPath": "../gtcx-docs",
+  "capturedAt": "2026-06-04T09:01:05.578Z",
+  "captureNote": "Run after reviewing hub protocol changes",
+  "protocols": {
+    "19-agent-credential-access": {
+      "sha256": "c8e64e78e05ccd196e54dcb7cf527d756e1579e7aa1c2f17e4c09796e9f6f622",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "22-agent-work-selection": {
+      "sha256": "3eb56ec6e97c629511b63ccbd721e4aa1c6595e4aa164e6820ce9093b23b0417",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "24-cross-repo-coordination": {
+      "sha256": "00c33f20be5571a3d6fd82cd169fd92b773fd566b1ca175a06a60b41cec66ba8",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "26-agent-proceed-confirmation": {
+      "sha256": "af19e098eaba97d3bc54caa8195b576bbad62b667f2cd4c0059cfce706679435",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "27-agent-execution-obligation": {
+      "sha256": "5cb5bde82d3c4d4ed74e9fb29b37bf626d1584083579a4972a2c2d2054869f43",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "28-agent-authority-classification": {
+      "sha256": "fd12c9c8bde2b7a4fdf6e0b448e20766f312e10841133b94d70f3714e4f53514",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "1-docs-structure": {
+      "sha256": "dd2bcb48fa84fad9092a9277d2542ac62f25f26b5e74323e18fa9b0798985240",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "2-repo-setup": {
+      "sha256": "fcdf1991cf8add9a42f557c63dc24e9cb90fa28826daec457dca7e81e405ae4f",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "3-naming-conventions": {
+      "sha256": "ea088681a5e8dc7bb3d8c1ea2f225bf26e53ee543c4e06afa8e88c8d071b3c43",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "4-git-workflow": {
+      "sha256": "e583c78f99ad2d0becb7d66e4d278fab6c0647513d63100463780b40772a5f86",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "5-code-standards": {
+      "sha256": "6a753b7a79366fd9cdbe74a106b8771a3abd54726c19b4742663c33d83648840",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "6-testing": {
+      "sha256": "c9b4665ae869155a345ae30db167087dda726381f37798913b42417d83ad034e",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "7-ci-cd": {
+      "sha256": "59def28ae509d68efb7dc25d5e902dbec80bb69e6185f08af4456d5a3ad4dc64",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "8-security": {
+      "sha256": "386e1b1d86876c120ad10daec9ef7308e2106b250aa99c9574719a82247de7aa",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "9-sop-governance": {
+      "sha256": "a0b453ad2fe37e6909dc94036a80d476ef3bf3872f7e876fb00923a800caa0d3",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "10-enterprise-standards": {
+      "sha256": "f1c5f29a226beb958eb58ff4b65f62c7004cb132ba0e5e0595775142800e77a0",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "11-enterprise-governance": {
+      "sha256": "bc9cd294f60b41706ac53a4799a968ce129513ca802023bda775f7d615b7e60d",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "12-monitoring": {
+      "sha256": "c8898df19c0480472a2a60f9569ab988301bd5055360c860773cc98d43382df5",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "13-architecture-diagrams": {
+      "sha256": "dc8d400524591ab0839e1a514428f3f5640c2765c30b3cc1a1343223db072a8f",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "14-folder-hygiene": {
+      "sha256": "403beb025808e0a47f3a0b1ed73afb482262675b1d3c9a91143478b10a554c35",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "15-repo-hygiene": {
+      "sha256": "f74c020e66ba057f65761bbbeb720fd4f7be43de1759d9236c50c762bafded63",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "16-audit-standard": {
+      "sha256": "7ea51abe16c5f6ae8d7b7b85c15a18dd31f4a5b15f8a69b7fbfd5f9c02d173fc",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "17-specs-standard": {
+      "sha256": "b51023cb2367e28fe3a583724a3cded864e3921157a72b14f1579a9169d482f7",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "18-machine-readable-docs": {
+      "sha256": "d1afdf3a8756dc5715b59f60fd2fb1e949bfc0413bd880b07f25abd41ace8521",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "20-surface-experience": {
+      "sha256": "487f3533685c6b3f3040714a8b5f7ec3e34a77d9e2773506378527ced396129c",
+      "gitCommit": null,
+      "gitDate": null
+    },
+    "21-ux-documentation-ops": {
+      "sha256": "3df690be4f4aab204747b5272dbb984c0d98eb3e66de448530220f7e808b6d65",
+      "gitCommit": null,
+      "gitDate": null
+    }
+  }
+}

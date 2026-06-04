@@ -15,6 +15,7 @@
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
+        "session-start-pointer.md",
         "claude.partial.md"
       ]
     },
@@ -28,6 +29,7 @@
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
+        "session-start-pointer.md",
         "claude.partial.md"
       ]
     },
@@ -41,6 +43,7 @@
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
+        "session-start-pointer.md",
         "claude.partial.md"
       ],
       "createIfMissing": true
@@ -54,7 +57,8 @@
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
-        "protocols-enforcement-pointer.md"
+        "protocols-enforcement-pointer.md",
+        "session-start-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -67,7 +71,8 @@
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
-        "protocols-enforcement-pointer.md"
+        "protocols-enforcement-pointer.md",
+        "session-start-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -81,6 +86,7 @@
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
+        "session-start-pointer.md",
         "claude.partial.md"
       ],
       "createIfMissing": true
@@ -95,13 +101,19 @@
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
+        "session-start-pointer.md",
         "claude.partial.md"
       ],
       "createIfMissing": true
     },
     {
       "path": ".github/copilot/instructions.md",
-      "partials": ["readiness-pointer.md", "audit-pointer.md", "protocols-enforcement-pointer.md"],
+      "partials": [
+        "readiness-pointer.md",
+        "audit-pointer.md",
+        "protocols-enforcement-pointer.md",
+        "session-start-pointer.md"
+      ],
       "createIfMissing": true
     }
   ]

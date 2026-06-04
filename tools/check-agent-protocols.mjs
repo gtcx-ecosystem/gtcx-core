@@ -1,27 +1,21 @@
 #!/usr/bin/env node
 /**
- * Protocol 22–28 adoption enforcement for gtcx-core.
- * Manifest: docs/agents/agent-protocols-manifest.json
+ * Agent protocols bundle — P1–P28 wiring, hub drift, coordination, attestation hooks.
  */
 import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { readRepoFile, runPnpmScript } from './lib/agent-check-utils.mjs';
 
 const ROOT = process.cwd();
 const failures = [];
-
-function read(rel) {
-  const abs = join(ROOT, rel);
-  if (!existsSync(abs)) return null;
-  return readFileSync(abs, 'utf8');
-}
 
 function requireFile(rel, label) {
   if (!existsSync(join(ROOT, rel))) {
     failures.push(`Missing ${label}: ${rel}`);
     return null;
   }
-  return read(rel);
+  return readFileSync(join(ROOT, rel), 'utf8');
 }
 
 function requireContains(rel, patterns, label) {
@@ -33,39 +27,47 @@ function requireContains(rel, patterns, label) {
   }
 }
 
-function runScript(name) {
+function runNode(rel, args = '') {
   try {
-    execSync(`pnpm ${name}`, { cwd: ROOT, stdio: 'pipe', encoding: 'utf8' });
+    execSync(`node ${rel} ${args}`.trim(), { cwd: ROOT, stdio: 'pipe', encoding: 'utf8' });
   } catch (error) {
     const out = [error.stdout, error.stderr].filter(Boolean).join('\n');
-    failures.push(`${name} failed:\n${out.trim()}`);
+    failures.push(`${rel} ${args} failed:\n${out.trim()}`);
   }
 }
 
-const manifestRaw = requireFile('docs/agents/agent-protocols-manifest.json', 'protocols manifest');
-if (!manifestRaw) {
-  report();
-  process.exit(1);
+function runScript(name) {
+  const result = runPnpmScript(name, ROOT);
+  if (!result.ok) failures.push(`${name} failed:\n${result.output}`);
 }
+
+const manifestRaw = requireFile('docs/agents/agent-protocols-manifest.json', 'protocols manifest');
+if (!manifestRaw) reportAndExit();
 
 const manifest = JSON.parse(manifestRaw);
 const pkg = JSON.parse(requireFile('package.json', 'package.json'));
 
-if (!pkg.scripts?.['agent:protocols:check']) {
-  failures.push('package.json missing script: agent:protocols:check');
-}
-if (!pkg.scripts?.['agent:next-work']) {
-  failures.push('package.json missing script: agent:next-work');
-}
-if (!pkg.scripts?.['agent:work-selection:check']) {
-  failures.push('package.json missing script: agent:work-selection:check');
+const requiredScripts = [
+  'agent:protocols:check',
+  'agent:next-work',
+  'agent:session-start',
+  'agent:work-selection:check',
+  'agent:coordination:check',
+  'agent:hub-drift:check',
+  'agent:attestation:check',
+  'agent:foundation-protocols:check',
+];
+
+for (const s of requiredScripts) {
+  if (!pkg.scripts?.[s]) failures.push(`package.json missing script: ${s}`);
 }
 
 requireFile('docs/agents/agent-protocols-enforcement.md', 'enforcement guide');
+requireFile('docs/agents/agent-protocols-hub-snapshot.json', 'hub snapshot');
+requireFile('docs/operations/agent-attestation-template.md', 'attestation template');
+requireFile('scripts/agent-session-start.mjs', 'session-start script');
 requireFile('.cursor/rules/agent-protocols-enforcement.mdc', 'cursor agent protocols rule');
-
-const agents = read('AGENTS.md') ?? '';
-const base = read('.agent/base.md') ?? '';
+requireFile('.agent/session-start-pointer.md', 'session-start pointer');
 
 // --- P22 ---
 const p22 = manifest.protocols.find((p) => p.id === 'P22');
@@ -74,42 +76,41 @@ if (p22?.status === 'established') {
   requireFile(p22.localBrief, 'P22 brief');
   requireFile('scripts/agent-next-work.mjs', 'P22 script');
   requireContains('AGENTS.md', ['Phase 5.4', 'Protocol 22', 'agent:next-work'], 'AGENTS P22');
-  requireContains('.agent/base.md', ['agent:next-work', 'agent:work-selection:check'], 'base P22');
-  if (pkg.scripts?.['agent:work-selection:check']) {
-    runScript('agent:work-selection:check');
-  }
+  requireContains('.agent/base.md', ['agent:session-start', 'agent:next-work'], 'base session start');
+  runScript('agent:work-selection:check');
 }
 
 // --- P24 ---
 requireFile('docs/operations/coordination/cross-repo-agent-bridge.md', 'P24 bridge');
 requireContains('AGENTS.md', ['Phase 5.5', 'Protocol 24'], 'AGENTS P24');
 requireFile('.agent/coordination-pointer.md', 'P24 pointer');
+runNode('scripts/check-coordination-hygiene.mjs', '--strict');
 
-// --- P26 ---
+// --- P26 / P28 ---
 requireFile('docs/operations/agent-proceed-brief-template.md', 'P26 template');
 requireContains('AGENTS.md', ['Phase 5.6', 'Protocol 26', 'Proceed Brief'], 'AGENTS P26');
+requireContains('AGENTS.md', ['Authority class', 'Protocol 28'], 'AGENTS P28');
+requireContains('AGENTS.md', ['agent:session-start'], 'AGENTS session start');
 
 // --- P27 ---
 const p27 = manifest.protocols.find((p) => p.id === 'P27');
 if (p27) {
   requireFile(p27.cursorRule, 'P27 cursor rule');
   requireContains('AGENTS.md', ['Phase 5.7', 'Protocol 27', 'Permission Unblock'], 'AGENTS P27');
-  requireContains('AGENTS.md', ['readiness:lanes:check', 'quality:governance:check'], 'AGENTS P27 gates');
   requireContains('AGENTS.md', ['pnpm format:check', 'agent:protocols:check'], 'AGENTS P27 V-ladder');
 
-  const scanDirs = ['docs/agents', 'docs/operations'];
-  for (const dir of scanDirs) {
+  for (const dir of ['docs/agents', 'docs/operations']) {
     const absDir = join(ROOT, dir);
     if (!existsSync(absDir)) continue;
     for (const file of readdirSync(absDir, { recursive: true })) {
       if (typeof file !== 'string' || !file.endsWith('.md')) continue;
       if (file.includes('agent-protocols-enforcement')) continue;
-      const content = read(join(dir, file));
+      const content = readRepoFile(join(dir, file));
       if (!content) continue;
       for (const forbidden of p27.forbiddenPatterns ?? []) {
         if (content.includes(forbidden)) {
           failures.push(
-            `${join(dir, file)}: forbidden Protocol 27 pattern "${forbidden}" (use Permission Unblock Report instead)`,
+            `${join(dir, file)}: forbidden P27 pattern "${forbidden}"`,
           );
         }
       }
@@ -117,54 +118,55 @@ if (p27) {
   }
 }
 
-// --- P28 ---
-requireContains('AGENTS.md', ['Authority class', 'Protocol 28'], 'AGENTS P28');
+// --- Foundation P1–P21 ---
+runScript('agent:foundation-protocols:check');
 
-// --- CI wiring ---
-const ci = read('.github/workflows/ci.yml');
+// --- Hub drift ---
+runScript('agent:hub-drift:check');
+
+// --- CI ---
+const ci = readRepoFile('.github/workflows/ci.yml');
+const attestationWf = readRepoFile('.github/workflows/agent-attestation.yml');
 if (ci) {
-  if (!/agent:next-work/.test(ci)) failures.push('ci.yml: missing agent:next-work step');
-  if (!/agent:work-selection:check|agent:protocols:check/.test(ci)) {
-    failures.push('ci.yml: missing agent protocol adoption check');
-  }
+  if (!/agent:next-work/.test(ci)) failures.push('ci.yml: missing agent:next-work');
+  if (!/agent:protocols:check/.test(ci)) failures.push('ci.yml: missing agent:protocols:check');
+  if (!/agent:session-start/.test(ci)) failures.push('ci.yml: missing agent:session-start smoke');
 } else {
   failures.push('Missing .github/workflows/ci.yml');
 }
-
-// --- Governance runs readiness ---
-if (read('tools/check-governance.mjs')) {
-  const gov = read('tools/check-governance.mjs');
-  if (!gov?.includes('readiness:lanes:check')) {
-    failures.push('check-governance.mjs must run readiness:lanes:check');
-  }
-  if (!gov?.includes('agent:check')) {
-    failures.push('check-governance.mjs must run agent:check');
-  }
+if (!attestationWf?.includes('agent:attestation:check')) {
+  failures.push('agent-attestation.yml: missing agent:attestation:check job');
 }
 
-// --- Synced agent targets include protocols pointer ---
+const gov = readRepoFile('tools/check-governance.mjs');
+if (gov && !gov.includes('agent:protocols:check')) {
+  failures.push('check-governance.mjs must run agent:protocols:check');
+}
+
+// --- Agent sync partials ---
 const targets = JSON.parse(requireFile('.agent/targets.json', 'targets.json'));
-const needsProtocols = ['AGENTS.md', 'CLAUDE.md', 'KIMI.md', 'CODEX.md', '.cursor/rules/main.mdc'];
+const needsPartials = ['protocols-enforcement-pointer.md', 'session-start-pointer.md'];
 for (const target of targets.targets ?? []) {
-  if (needsProtocols.includes(target.path)) {
-    if (!target.partials?.includes('protocols-enforcement-pointer.md')) {
-      failures.push(`targets.json: ${target.path} missing protocols-enforcement-pointer.md partial`);
+  if (!['AGENTS.md', 'CLAUDE.md', 'KIMI.md', 'CODEX.md', '.cursor/rules/main.mdc'].includes(target.path)) {
+    continue;
+  }
+  for (const partial of needsPartials) {
+    if (!target.partials?.includes(partial)) {
+      failures.push(`targets.json: ${target.path} missing ${partial}`);
     }
   }
 }
 
-function report() {
-  if (failures.length > 0) {
+function reportAndExit() {
+  if (failures.length) {
     console.error('Agent protocols enforcement failed:\n');
-    for (const f of failures) {
-      console.error(`  - ${f}`);
-    }
+    for (const f of failures) console.error(`  - ${f}`);
     console.error(`\nFix: docs/agents/agent-protocols-enforcement.md · ${manifest.enforceCommand}`);
     process.exit(1);
   }
   console.log(
-    `Agent protocols enforcement passed (P22–P28 wiring; hub: ${manifest.hubRepo}).`,
+    `Agent protocols enforcement passed (P1–P28 wiring; hub: ${manifest.hubRepo}).`,
   );
 }
 
-report();
+reportAndExit();

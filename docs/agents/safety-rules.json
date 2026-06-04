@@ -101,6 +101,26 @@
       "enforcement": "gate",
       "trigger": "ci",
       "verification": "pnpm agent:protocols:check"
+    },
+    {
+      "id": "SR-011",
+      "rule": "agent-session-start-required",
+      "description": "Run pnpm agent:session-start at session start (all terminals/LLMs) before implementation",
+      "scope": "agents",
+      "severity": "high",
+      "enforcement": "instruction",
+      "trigger": "session-start",
+      "verification": "pnpm agent:session-start"
+    },
+    {
+      "id": "SR-012",
+      "rule": "agent-attestation-on-agent-path-changes",
+      "description": "PRs/commits touching agent wiring must include Agent Context Attestation block",
+      "scope": "agents",
+      "severity": "high",
+      "enforcement": "gate",
+      "trigger": "pr-review",
+      "verification": "pnpm agent:attestation:check --pr"
     }
   ]
 }

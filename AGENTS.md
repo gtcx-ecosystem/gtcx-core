@@ -50,8 +50,8 @@ Before making any code changes, architectural decisions, or recommendations, com
 ### Phase 5: Attest & Begin (30 sec)
 14. Summarize context in 3–5 sentences
 15. **Phase 5.4 — Select next work (Protocol 22):**
+    - Run `pnpm agent:session-start` (all terminals / LLMs — not IDE-specific)
     - Read `docs/operations/agent-work-selection.md`
-    - Run `npm run agent:next-work`
     - Announce the selected dimension/milestone and begin implementation
     - **Never ask the operator which milestone to pick when the roadmap exists**
 16. **Phase 5.5 — Cross-repo coordination (Protocol 24):**
@@ -217,15 +217,18 @@ pnpm agent:protocols:check
 
 ---
 
-## 7.6 Agent protocols enforcement (P22–P28)
+## 7.6 Agent protocols enforcement (P1–P28)
 
 | Resource | Path |
 |----------|------|
 | Catalog + hub links | `docs/agents/agent-protocols-manifest.json` |
+| Hub drift snapshot | `docs/agents/agent-protocols-hub-snapshot.json` |
 | Enforcement guide | `docs/agents/agent-protocols-enforcement.md` |
+| Session start (terminal) | `pnpm agent:session-start` |
+| Attestation template | `docs/operations/agent-attestation-template.md` |
 | Gate | `pnpm agent:protocols:check` |
 
-CI and `pnpm quality:governance:check` run this gate. It verifies startup phases 5.4–5.7, P22 scripts, P24 bridge, P26 template, P27 Cursor rule, P28 authority class strings, and agent-sync partials.
+CI and `pnpm quality:governance:check` run this gate. Includes P1–P21 foundation wiring, P22–P28 session cluster, hub drift probe, P24 coordination `--strict`, and PR attestation for agent-path changes.
 
 ---
 
@@ -328,7 +331,7 @@ All tasks must route through `docs/agents/routing-rules.json`.
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
-4. **Protocol 22 work selection (ESTABLISHED)** — at session start run `pnpm agent:next-work`; read `docs/operations/agent-work-selection.md`; never ask which roadmap story to pick; refresh `.baseline/memory/session.md` after each story. Verify: `pnpm agent:work-selection:check`.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` before implementation; then `pnpm agent:next-work` is included. Never ask which roadmap story to pick; refresh `.baseline/memory/session.md` after each story. Verify: `pnpm agent:work-selection:check` · `pnpm agent:protocols:check`.
 
 ## Build & Run
 
@@ -437,18 +440,34 @@ When a story is **blocked on a sibling repo** or you **hand off** cross-repo wor
 
 ## Agent protocols (P22–P28) — machine-enforced
 
-| Resource | Path |
-| -------- | ---- |
-| Hub index | `gtcx-docs/docs/governance/protocols/` |
-| Local manifest | `docs/agents/agent-protocols-manifest.json` |
-| Enforcement guide | `docs/agents/agent-protocols-enforcement.md` |
-| P22 manifest | `docs/operations/agent-work-selection.md` |
-| P26 template | `docs/operations/agent-proceed-brief-template.md` |
-| P24 bridge | `docs/operations/coordination/cross-repo-agent-bridge.md` |
+| Resource          | Path                                                      |
+| ----------------- | --------------------------------------------------------- |
+| Hub index         | `gtcx-docs/docs/governance/protocols/`                    |
+| Local manifest    | `docs/agents/agent-protocols-manifest.json`               |
+| Enforcement guide | `docs/agents/agent-protocols-enforcement.md`              |
+| P22 manifest      | `docs/operations/agent-work-selection.md`                 |
+| P26 template      | `docs/operations/agent-proceed-brief-template.md`         |
+| P24 bridge        | `docs/operations/coordination/cross-repo-agent-bridge.md` |
 
-**Startup phases (INST-003):** 5.4 P22 · 5.5 P24 · 5.6 P26+P28 (Proceed Brief + authority class S/A/R) · 5.7 P27 (run gates in-session).
+**Startup phases (INST-003):** 5.4 P22 · 5.5 P24 · 5.6 P26+P28 · 5.7 P27
+
+**Session start (all LLMs):** `pnpm agent:session-start` — run before implementation (terminal, Kimi, Claude Code, Codex; not IDE-specific).
 
 **Verify wiring:** `pnpm agent:protocols:check` (CI + `pnpm quality:governance:check`).
+
+## Session start (all terminals / LLMs — not IDE-specific)
+
+**First command every session:**
+
+```bash
+pnpm agent:session-start
+```
+
+Runs Protocol 22 next-work, refreshes `.baseline/memory/session.md`, prints Proceed Brief skeleton (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+
+**JSON for automation:** `pnpm agent:session-start --json`
+
+**Before PR (agent-path changes):** include attestation from `docs/operations/agent-attestation-template.md` · `pnpm agent:attestation:check --pr`
 
 ## Claude-Specific Notes
 

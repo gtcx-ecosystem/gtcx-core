@@ -9,6 +9,8 @@
 | P26 template      | `docs/operations/agent-proceed-brief-template.md`         |
 | P24 bridge        | `docs/operations/coordination/cross-repo-agent-bridge.md` |
 
-**Startup phases (INST-003):** 5.4 P22 · 5.5 P24 · 5.6 P26+P28 (Proceed Brief + authority class S/A/R) · 5.7 P27 (run gates in-session).
+**Startup phases (INST-003):** 5.4 P22 · 5.5 P24 · 5.6 P26+P28 · 5.7 P27
+
+**Session start (all LLMs):** `pnpm agent:session-start` — run before implementation (terminal, Kimi, Claude Code, Codex; not IDE-specific).
 
 **Verify wiring:** `pnpm agent:protocols:check` (CI + `pnpm quality:governance:check`).

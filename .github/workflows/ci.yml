@@ -126,7 +126,10 @@ jobs:
       - name: Protocol 22 next-work smoke
         run: pnpm run agent:next-work
 
-      - name: Agent protocols adoption (P22–P28)
+      - name: Agent session-start smoke
+        run: pnpm run agent:session-start -- --json
+
+      - name: Agent protocols adoption (P1–P28)
         run: pnpm run agent:protocols:check
 
       - name: API surface baseline check

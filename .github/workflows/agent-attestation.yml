@@ -1,0 +1,41 @@
+name: Agent attestation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/agents/**'
+      - '.agent/**'
+      - 'AGENTS.md'
+      - 'tools/check-agent*.mjs'
+      - 'tools/check-hub-protocol*.mjs'
+      - 'tools/check-foundation-protocol*.mjs'
+      - 'scripts/agent-*.mjs'
+      - 'scripts/check-agent*.mjs'
+      - 'scripts/check-coordination*.mjs'
+
+jobs:
+  attestation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Enable Corepack and pin pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.15.0 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify PR attestation block
+        env:
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: pnpm agent:attestation:check --pr
