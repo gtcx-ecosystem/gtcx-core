@@ -144,8 +144,22 @@ Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [
 4. Micro-commit.
 5. Re-run `pnpm agent:next-work`.
 
+## DTF-5.5.4 (LOI) — human-only, IR continues
+
+**DTF-5.5.4** is **Class S** (GTM / Legal). It blocks **Tier 5 commercial claims** (criterion 5-C2), not in-repo engineering.
+
+| Signal                                           | Meaning                                             |
+| ------------------------------------------------ | --------------------------------------------------- |
+| P22 `next.storyId` = DTF-5.5.4 + `blocked: true` | Commercial ceiling — list under **Approval needed** |
+| `launchFocus.workSet.implement` non-empty        | **Drain implement queue first** (e.g. CORE-004)     |
+| `repoCompletable`                                | Parallel Class R hygiene when bout plan empty       |
+| `commercialCeiling` in JSON                      | Witness only — not the coding head                  |
+
+Witness: [`from-gtcx-core-tier5-commercial-unblock-2026-06-06.md`](coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md)
+
 ## Forbidden
 
 - Asking the user which milestone to pick.
 - Starting D8/D9 or commercial Tier 5 without authorization.
 - Claiming **Tier 5 achieved** from generic circuits only (that is **Tier 2**).
+- Idling because DTF-5.5.4 is awaiting-human while CORE-004 / launch-plan / ops-docs remain.

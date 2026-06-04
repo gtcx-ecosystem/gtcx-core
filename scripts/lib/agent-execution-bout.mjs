@@ -136,10 +136,12 @@ function storiesFromLaunchFocus(launchFocus) {
 export function buildExecutionBout(ctx) {
   const { repoRoot, nextWork, session = '', workplan = '', launchFocus } = ctx;
   const head = storyFromP22Next(nextWork?.next);
-  const currentStoryId =
-    head?.storyId ?? nextWork?.next?.storyId ?? launchFocus?.activeWorkSet?.[0]?.storyId ?? null;
-
   const fromLaunch = storiesFromLaunchFocus(launchFocus);
+  const p22HumanOnly =
+    nextWork?.next?.blocked === true ||
+    nextWork?.next?.implementationClass === 'external' ||
+    nextWork?.next?.status === 'awaiting-human';
+
   const implementable = dedupeStories(
     fromLaunch.length > 0
       ? [...(head ? [head] : []), ...fromLaunch]
@@ -150,6 +152,15 @@ export function buildExecutionBout(ctx) {
           ...(nextWork?.backlogClear ? [repoCompletableStory(nextWork)].filter(Boolean) : []),
         ],
   );
+
+  const currentStoryId =
+    (p22HumanOnly && implementable.length > 0
+      ? implementable[0].storyId
+      : null) ??
+    head?.storyId ??
+    nextWork?.next?.storyId ??
+    launchFocus?.activeWorkSet?.[0]?.storyId ??
+    null;
 
   const humanOnly = humanOnlyStories(nextWork);
   const classRRemaining = implementable.filter((s) => s.status !== 'done');

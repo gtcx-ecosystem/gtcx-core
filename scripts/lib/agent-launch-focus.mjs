@@ -373,6 +373,44 @@ export function attachLaunchFocus(nextWork, repoRoot) {
     merged.backlogClear = false;
     merged.automatableExhausted = false;
     merged.message = `Launch implement queue: ${launchFocus.workSetCounts.implement} Class R items toward GTM.`;
+    const head = launchFocus.workSet.implement[0];
+    const p22Blocked =
+      merged.next?.blocked === true ||
+      merged.next?.implementationClass === 'external' ||
+      merged.next?.status === 'awaiting-human';
+    if (head && p22Blocked) {
+      merged.commercialCeiling = {
+        storyId: merged.next?.storyId ?? 'DTF-5.5.4',
+        title: merged.next?.title ?? 'Design-partner LOI or regulator letter',
+        authorityClass: 'S',
+        owner: merged.next?.owner ?? 'Human / GTM',
+      };
+      merged.next = {
+        storyId: head.storyId,
+        title: head.title,
+        track: 'launch',
+        milestone: head.storyId,
+        workClass: head.workClass ?? 'ops-docs',
+        blocked: false,
+        owner: 'gtcx-core',
+        implementationClass: head.workClass ?? 'ops-docs',
+      };
+      merged.nextPriority = {
+        owner: 'gtcx-core',
+        action: head.title,
+        because: `${head.storyId} — Class R implement queue (DTF-5.5.4 LOI is parallel Class S only)`,
+        outbound: head.paths?.[0] ?? LAUNCH_DOC,
+      };
+      merged.statusUpdate = {
+        ...(merged.statusUpdate ?? {}),
+        nextPriority: `**gtcx-core** — ${head.storyId} (${head.title})`,
+        approvalNeeded: '**DTF-5.5.4** LOI/regulator letter (Class S)',
+      };
+      merged.agentInstructions = [
+        ...(merged.agentInstructions ?? []),
+        'P22 head DTF-5.5.4 is commercial ceiling only — drain workSet.implement first; never sign LOI as agent.',
+      ];
+    }
   }
 
   if (launchFocus.sessionMode === 'plan') {
