@@ -17,6 +17,8 @@ supersedes_note: 'Industry Compliance + GTM-Readiness tiers; audit quality 1-10 
 
 **Ecosystem:** [ecosystem-audit-catalog-2026-06-05.md](./ecosystem-audit-catalog-2026-06-05.md)
 
+**Agents:** [readiness-and-audit-lanes.md](../agents/readiness-and-audit-lanes.md) — canonical instructions, prompts, anti-drift. Verify: `pnpm readiness:lanes:check`.
+
 ---
 
 ## Two different numbers (do not mix)

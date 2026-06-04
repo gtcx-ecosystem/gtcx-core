@@ -81,6 +81,16 @@
       "enforcement": "gate",
       "trigger": "ci",
       "verification": "pnpm bundle:check-budgets"
+    },
+    {
+      "id": "SR-009",
+      "rule": "no-readiness-score-conflation",
+      "description": "Do not cite bank-grade 8.9 as engineering readiness; use five-lane indexes and latest.json",
+      "scope": "docs",
+      "severity": "high",
+      "enforcement": "gate",
+      "trigger": "pr-review",
+      "verification": "pnpm readiness:lanes:check"
     }
   ]
 }

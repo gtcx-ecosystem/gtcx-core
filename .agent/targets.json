@@ -9,6 +9,7 @@
       "path": "AGENTS.md",
       "partials": [
         "base.md",
+        "readiness-pointer.md",
         "audit-pointer.md",
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
@@ -31,6 +32,7 @@
       "path": "GEMINI.md",
       "partials": [
         "base.md",
+        "readiness-pointer.md",
         "audit-pointer.md",
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
@@ -43,6 +45,7 @@
       "path": ".cursor/rules/main.mdc",
       "partials": [
         "base.md",
+        "readiness-pointer.md",
         "audit-pointer.md",
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
@@ -55,6 +58,7 @@
       "path": "CONVENTIONS.md",
       "partials": [
         "base.md",
+        "readiness-pointer.md",
         "audit-pointer.md",
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",

@@ -20,7 +20,7 @@ review_cycle: 'on-change'
 
 **Ecosystem alignment (canonical):** [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md) — XC blockers, pen-test, SOC 2, and Zimbabwe outreach are owned with [gtcx-infrastructure GTM](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/README.md) per the [Global South 10/10 plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/plans/global-south-10x-plan.md).
 
-**Latest stage assessment:** [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md) — library **S1 Ready**; ecosystem sovereign stack **S2 Not Ready** (infra). Prior: [gtm-reality-check-2026-06-02.md](./gtm-reality-check-2026-06-02.md).
+**Latest stage assessment:** [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md) — library **GR-T1**; ecosystem sovereign **below GR-T2** (infra). Detail: [gtm-reality-check-2026-06-02.md](./gtm-reality-check-2026-06-02.md) (S0–S6 maps to GR-T0–T6).
 
 ---
 

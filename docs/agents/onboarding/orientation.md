@@ -52,6 +52,7 @@ In this order — no exceptions:
 3. `docs/decisions/` — all ADRs (understand why things are the way they are)
 4. `docs/specs/packages/` — spec for the package you are working in
 5. `docs/agents/workflows/safety-rules.md` — before making any change
+6. `docs/agents/readiness-and-audit-lanes.md` — five audit lanes, scores, anti-drift (before citing 8.9 or “ready”)
 
 ---
 
@@ -112,17 +113,18 @@ See `docs/devops/runbooks/quality-runbook.md` for the full gate sequence and tri
 
 ## Where Things Live
 
-| Need                   | Location                  |
-| ---------------------- | ------------------------- |
-| System specification   | `docs/specs/core-spec.md` |
-| Package specs          | `docs/specs/packages/`    |
-| System architecture    | `docs/architecture/`      |
-| Architecture decisions | `docs/decisions/`         |
-| Security framework     | `docs/security/`          |
-| CI/CD pipeline         | `docs/devops/ci-cd/`      |
-| Operations runbooks    | `docs/devops/runbooks/`   |
-| Sprint and roadmap     | `docs/agile/`             |
-| Quality evidence       | `quality/`, `benchmarks/` |
+| Need                    | Location                                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| System specification    | `docs/specs/core-spec.md`                                                                             |
+| Package specs           | `docs/specs/packages/`                                                                                |
+| System architecture     | `docs/architecture/`                                                                                  |
+| Architecture decisions  | `docs/decisions/`                                                                                     |
+| Security framework      | `docs/security/`                                                                                      |
+| CI/CD pipeline          | `docs/devops/ci-cd/`                                                                                  |
+| Operations runbooks     | `docs/devops/runbooks/`                                                                               |
+| Sprint and roadmap      | `docs/agile/`                                                                                         |
+| Quality evidence        | `quality/`, `benchmarks/`                                                                             |
+| Readiness & audit lanes | `docs/agents/readiness-and-audit-lanes.md`, `docs/audit/readiness-model.md`, `docs/audit/latest.json` |
 
 ---
 

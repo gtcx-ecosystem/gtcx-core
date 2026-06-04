@@ -17,17 +17,18 @@ review_cycle: 'on-change'
 **Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
 
 **Last updated:** 2026-06-03
-**Five audit lanes:** [model](./audit/readiness-model.md) — **audit quality 1–10** per lane; readiness outcomes separate (external = **status/tier** only)
+**Five audit lanes:** [model](./audit/readiness-model.md) — **audit quality 1–10** per lane; Industry/GTM use **tiers** only. **Agents:** [readiness-and-audit-lanes](./agents/readiness-and-audit-lanes.md)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
 
-| Document                                                                           | Purpose                                                       |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| [`start-here.md`](./start-here.md)                                                 | Fastest path to repo identity, current state, and next reads  |
-| [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md)           | Session-start protocol and codebase map                       |
-| [`operations/agent-protocol-22-brief.md`](./operations/agent-protocol-22-brief.md) | Protocol 22 session opener (paste block for agents)           |
-| [`architecture/overview.md`](./architecture/overview.md)                           | Trust boundaries, package layering, and architecture overview |
+| Document                                                                           | Purpose                                                        |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [`start-here.md`](./start-here.md)                                                 | Fastest path to repo identity, current state, and next reads   |
+| [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md)           | Session-start protocol and codebase map                        |
+| [`agents/readiness-and-audit-lanes.md`](./agents/readiness-and-audit-lanes.md)     | **Canonical** five lanes, scores, forensic prompts, anti-drift |
+| [`operations/agent-protocol-22-brief.md`](./operations/agent-protocol-22-brief.md) | Protocol 22 session opener (paste block for agents)            |
+| [`architecture/overview.md`](./architecture/overview.md)                           | Trust boundaries, package layering, and architecture overview  |
 
 ## §1 For External Reviewers
 

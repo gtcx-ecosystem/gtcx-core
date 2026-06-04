@@ -6,18 +6,25 @@ The generator at `scripts/agent-sync/sync.mjs` injects content from the partials
 
 ## Files
 
-| File                | Purpose                                                             |
-| ------------------- | ------------------------------------------------------------------- |
-| `base.md`           | Shared content emitted to every target                              |
-| `audit-pointer.md`  | Cross-repo audit instructions (points to `../audit/AGENT-START.md`) |
-| `claude.partial.md` | Claude-only addenda (Claude.md only)                                |
-| `targets.json`      | Maps target files → which partials to include                       |
+| File                         | Purpose                                                           |
+| ---------------------------- | ----------------------------------------------------------------- |
+| `base.md`                    | Shared content emitted to every target                            |
+| `readiness-pointer.md`       | **Five audit lanes**, scores, anti-drift (read before citing 8.9) |
+| `audit-pointer.md`           | Cross-repo forensic audit workflow (`gtcx-docs` AGENT-START)      |
+| `credentials-pointer.md`     | Vault / Protocol 19                                               |
+| `execute-roadmap-pointer.md` | execute-roadmap framework                                         |
+| `coordination-pointer.md`    | Protocol 24 cross-repo                                            |
+| `claude.partial.md`          | Claude-only addenda                                               |
+| `targets.json`               | Maps target files → which partials to include                     |
+
+**Full agent guide (not synced — edit directly):** [`docs/agents/readiness-and-audit-lanes.md`](../docs/agents/readiness-and-audit-lanes.md)
 
 ## Commands
 
 ```bash
-pnpm agent:sync      # regenerate target files
-pnpm agent:check     # CI gate: exit non-zero on drift
+pnpm agent:sync              # regenerate target files
+pnpm agent:check             # CI gate: exit non-zero on agent-sync drift
+pnpm readiness:lanes:check   # latest.json + lane indexes + anti-drift hub scan
 ```
 
 ## Generator updates

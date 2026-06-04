@@ -103,17 +103,40 @@ pnpm docs:check-frontmatter
 pnpm bundle:check-budgets
 ```
 
-## Audits (cross-repo)
+## Readiness & audit lanes (canonical — all agents)
 
-To run any forensic audit on this repo (master-audit, full-audit, 10-10-roadmap, repo-overview, doc-cleanup, doc-standard, verification-audit, docs-machine-readable):
+**Read before citing scores:** `docs/agents/readiness-and-audit-lanes.md` · SSOT: `docs/audit/readiness-model.md` · `docs/audit/latest.json`
 
-1. Read `../gtcx-docs/tools/audit/audit-framework/AGENT-START.md` — the canonical entry point lists every command, its prompt file, and the output path.
-2. Read the specific command file (`../gtcx-docs/tools/audit/audit-framework/commands/<command>.md`).
-3. Read the prompt file referenced there (`../gtcx-docs/tools/audit/audit-framework/prompts/<category>/<file>.md`).
+| Lane | Readiness (current) | Index |
+| ---- | ------------------- | ----- |
+| 1 Engineering | 9.5 / 10.0 signoff | `docs/audit/engineering-completeness-quality-2026-06-05.md` |
+| 2 Internal compliance | **9.0** (5 domains) | `docs/audit/internal-compliance-2026-06-05.md` |
+| 3 Industry Compliance | **IC-T0** OPEN 0/12 | `docs/audit/industry-compliance-2026-06-05.md` |
+| 4 Bank-grade | **8.9** composite only | `docs/audit/bank-grade-2026-06-05.md` |
+| 5 GTM-Readiness | **GR-T1** / sovereign &lt; GR-T2 | `docs/audit/gtm-readiness-2026-06-05.md` |
+
+**Anti-drift:** 1–10 = audit *quality* unless labeled readiness. Never use 8.9 for engineering. Industry/GTM use **tiers**, not 1–10 delivery. Deprecated: external-dependent lane, lane-2-only ~9.6, S1/S2 without GR-T.
+
+**Check:** `pnpm readiness:lanes:check` · after audit doc edits update indexes + `latest.json` then `pnpm agent:sync`.
+
+## Audits (cross-repo + five lanes)
+
+### Local readiness (read first)
+
+`docs/agents/readiness-and-audit-lanes.md` — lane names, scores, forensic workflow, anti-drift. Machine-readable: `docs/audit/latest.json`.
+
+### Forensic audit commands (gtcx-docs framework)
+
+To run any forensic audit on this repo (master-audit, full-audit, 10-10-roadmap, repo-overview, doc-cleanup, doc-standard, verification-audit, docs-machine-readable, repo-hygiene, gtm-audit):
+
+1. Read `../gtcx-docs/tools/audit/audit-framework/AGENT-START.md` — canonical entry: commands, prompts, output paths.
+2. Read the command file (`../gtcx-docs/tools/audit/audit-framework/commands/<command>.md`).
+3. Read the prompt referenced (`../gtcx-docs/tools/audit/audit-framework/prompts/<category>/<file>.md`).
 4. Execute the prompt against this repo.
-5. Write the output to the path the command specifies (typically `docs/audit/<command>-<YYYY-MM-DD>.md`).
+5. Write output to the path the command specifies (typically `docs/audit/<command>-<YYYY-MM-DD>.md`).
+6. Update the **lane index** and `docs/audit/latest.json` if readiness outcomes changed.
 
-The audit registry is provider-agnostic — the same prompts work for Claude, Codex, Gemini, Kimi, Deepseek, Grok, etc.
+Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, Copilot, etc.
 
 ## Credentials: system-of-record + ownership split (cross-repo)
 
@@ -153,6 +176,8 @@ Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, etc.
 
 **Canonical policy:** [Protocol 24 — Cross-Repo Coordination](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/24-cross-repo-coordination/protocol.md)  
 **Complements:** [Protocol 22 — Agent Work Selection](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/protocol.md) (what to work on next).
+
+**Session card (normative — read first):** [ecosystem-unblock-playbook-2026-06.md](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-unblock-playbook-2026-06.md) — INT-S9-01 → IR vs XC; F1–F7; foundation evidence stays in **gtcx-core**.
 
 When a story is **blocked on a sibling repo** or you **hand off** cross-repo work, follow these five steps in order:
 

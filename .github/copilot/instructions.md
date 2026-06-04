@@ -23,6 +23,7 @@ When users ask Copilot Chat questions about this repo:
 
 - **"What does this repo do?"** → Reference `docs/overview/README.md` §1-2
 - **"Is this secure?"** → Reference `docs/security/threat-control-matrix.md`
+- **"What's the repo score / readiness?"** → `docs/agents/readiness-and-audit-lanes.md` + `docs/audit/latest.json` (8.9 is bank-grade lane 4 only)
 - **"How do I add a package?"** → Reference `docs/agents/workflows/tasks/add-package.md`
 - **"What's the build command?"** → `pnpm build` for TS, `cargo build --workspace` for Rust
 

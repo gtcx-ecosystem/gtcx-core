@@ -11,6 +11,7 @@
 When using Cursor Composer for multi-file edits:
 
 - **Always read `AGENTS.md` first** — it contains the canonical repo identity
+- **Before citing readiness scores** — read `docs/agents/readiness-and-audit-lanes.md` and `docs/audit/latest.json` (five lanes; 8.9 is lane 4 only)
 - **Reference `docs/agents/routing-rules.json`** — know which role owns which files
 - **Run verification gates after every edit** — `pnpm format:check && pnpm lint`
 - **Use `@` references** — `@AGENTS.md`, `@docs/architecture/overview.md`

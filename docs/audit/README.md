@@ -17,7 +17,9 @@ Forensic audits and readiness scorecards for `gtcx-core`, organized in **five la
 
 ## Start here
 
-**[readiness-model.md](./readiness-model.md)** — five lanes, 1–10 ranks, local audit map.
+**Agents (all providers):** [readiness-and-audit-lanes.md](../agents/readiness-and-audit-lanes.md) — canonical lane names, scores, forensic workflow, anti-drift.
+
+**[readiness-model.md](./readiness-model.md)** — five lanes, 1–10 ranks, local audit map. **Machine-readable:** [latest.json](./latest.json) · `pnpm readiness:lanes:check`
 
 **[ecosystem-audit-catalog-2026-06-05.md](./ecosystem-audit-catalog-2026-06-05.md)** — **gtcx-docs / gtcx-agile / gtcx-agentic** audits (not only this folder).
 
