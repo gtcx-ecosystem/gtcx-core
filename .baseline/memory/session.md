@@ -1,46 +1,38 @@
 ---
-session_id: '2026-06-05-p22-p27-remediation'
+session_id: '2026-06-04-execute-roadmap'
 agent: 'gtcx-core-agent'
-focus: 'P22 ops-docs fallback; OPS-AUDIT-FM; CORE-004 blocked XR-402'
+focus: 'FA-AGT done; link fix; CORE-004 blocked XR-402; push pending operator'
 ---
 
-# Session: P22/P27 remediation
+# Session: execute-roadmap + hygiene
 
-## Session bootstrap (2026-06-04 11:03:45 UTC)
+## State (2026-06-04)
 
-- **Command:** `pnpm agent:session-start`
-- **Next work:** CORE-004 — D3 M3.2 trusted-setup transcript verify
-- **Blocked:** yes (XR-402 trusted-setup ceremony — release-gated)
-- **Git:** 13 changed path(s)
+- **Git:** `main` ahead of `origin/main` by 7 commits (push blocked in agent sandbox)
+- **Next work (P22):** CORE-004 — **blocked** XR-402 ceremony
+- **In-repo automatable:** exhausted; OI-X02 outbound filed (await gtcx-infrastructure)
 
-## P22 fix
+## Completed this session
 
-- `scripts/agent-next-work.mjs`: Development frame selects ops-docs queue before external CORE-004 dead-end
-- **OPS-AUDIT-FM** | **done** — merged duplicate frontmatter on 4 historical audit files
+| Item                  | Evidence                                                            |
+| --------------------- | ------------------------------------------------------------------- |
+| Repo hygiene execute  | 9.8 — `docs/audit/repo-hygiene-2026-06-04.md`                       |
+| FA-AGT sprint         | `agent:protocols:check` exit 0; frontmatter gate green              |
+| CORE-004 P24 blocker  | `docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md` |
+| Agent universal links | `pnpm docs:check-links` exit 0 (`2c9f949`)                          |
 
-## Readiness snapshot (2026-06-05)
+## Verification
 
-| Lane / rollup   | Outcome                               |
-| --------------- | ------------------------------------- |
-| 1 Engineering   | 9.5 / 10.0 signoff                    |
-| 2 Internal      | **9.0** (5 domains)                   |
-| 3 Industry      | **IC-T0** · OPEN 0/12                 |
-| **GCR**         | **GCR-T0** · **BLOCKED**              |
-| 4 Bank-grade    | **8.9** (lane 4 only)                 |
-| 5 GTM-Readiness | **GR-T1** · sovereign **below GR-T2** |
+| Command                      | Exit |
+| ---------------------------- | ---- |
+| `pnpm agent:protocols:check` | 0    |
+| `pnpm docs:check-links`      | 0    |
+| `pnpm format:check`          | 0    |
+| `pnpm typecheck`             | 0    |
+| `pnpm readiness:lanes:check` | 0    |
 
-**SSOT:** `docs/audit/latest.json` · `docs/audit/readiness-model.md`
+## Push (operator)
 
-## Hygiene pass — complete (H-01–H-09)
-
-All items done on origin @ `17e4d9a` (prior session).
-
-## Verification (this session)
-
-| Command                       | Result                |
-| ----------------------------- | --------------------- |
-| `pnpm agent:session-start`    | exit 0                |
-| `pnpm agent:next-work`        | exit 0 → OPS-AUDIT-FM |
-| `pnpm agent:protocols:check`  | pending               |
-| `pnpm format:check`           | pending               |
-| `pnpm docs:check-frontmatter` | pending               |
+```bash
+cd /Users/amanianai/Sites/gtcx-ecosystem/gtcx-core && git push origin main
+```
