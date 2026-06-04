@@ -17,7 +17,7 @@ head: 'b89b15fb7b3727448660db02b6cd8592e335efdf'
 **Date:** 2026-05-28  
 **HEAD:** `b89b15fb7b3727448660db02b6cd8592e335efdf`  
 **Internal readiness:** **10.0 / 10** — all repo-controlled work complete  
-**Certified composite:** **8.9 / 10** — pending [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md)
+**Certified composite (lane 4 bank-grade):** **8.9 / 10** — [bank-grade-2026-06-05.md](./bank-grade-2026-06-05.md) · lane 3 [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md)
 
 ---
 

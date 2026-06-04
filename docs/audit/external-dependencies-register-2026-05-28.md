@@ -13,9 +13,10 @@ certified_composite: 8.9
 
 # gtcx-core — External Dependencies Register
 
-> **Purpose:** Itemize every dependency **outside repo control** that blocks **bank-grade certified composite 10.0/10**.  
-> **Internal engineering readiness:** **10.0/10** — see [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md).  
-> **Certified composite (honest):** **8.9/10** — [master-audit-2026-05-28.md](./master-audit-2026-05-28.md).
+> **Lane 3 — External-dependent compliance** ([index](./external-dependent-compliance-2026-06-05.md)). Five-lane model: [readiness-model.md](./readiness-model.md).  
+> **Lane 1 engineering:** **10.0/10** — [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md).  
+> **Lane 4 bank-grade:** **8.9/10** — [master-audit-2026-06-03.md](./master-audit-2026-06-03.md).  
+> **EXT-CORE-007–010** are **lane 5 GTM**, not lane 3 compliance.
 
 ---
 

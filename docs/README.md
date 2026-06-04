@@ -17,7 +17,7 @@ review_cycle: 'on-change'
 **Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
 
 **Last updated:** 2026-06-03
-**Readiness lanes:** [engineering **9.5**](./audit/engineering-readiness-2026-06-05.md) · [compliance **5.5**](./audit/compliance-attestation-2026-06-05.md) · [GTM **S1**](./audit/gtm-readiness-2026-06-05.md) — [model](./audit/readiness-model.md) · legacy [master 8.9](./audit/master-audit-2026-06-03.md)
+**Five audit lanes:** [model](./audit/readiness-model.md) · Eng **10.0/9.5** · Internal compliance **~9.3** · External **0/12** · Bank-grade **8.9** · GTM **S1**
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here
@@ -124,25 +124,29 @@ review_cycle: 'on-change'
 
 ## §10 Audit
 
-| Document                                                                                           | Purpose                                                                              |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [`audit/readiness-model.md`](./audit/readiness-model.md)                                           | **Three lanes** — engineering / compliance / GTM                                     |
-| [`audit/engineering-readiness-2026-06-05.md`](./audit/engineering-readiness-2026-06-05.md)         | Engineering **9.5/10**                                                               |
-| [`audit/compliance-attestation-2026-06-05.md`](./audit/compliance-attestation-2026-06-05.md)       | Compliance attestation **5.5/10**                                                    |
-| [`audit/gtm-readiness-2026-06-05.md`](./audit/gtm-readiness-2026-06-05.md)                         | GTM stages — library S1                                                              |
-| [`audit/master-audit-2026-06-03.md`](./audit/master-audit-2026-06-03.md)                           | Legacy blended lens **8.9/10** (investor)                                            |
-| [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md)                               | Six-phase full audit — FA-S1 + DTF Tier 5 reconciliation                             |
-| [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md)   | Doc-standard compliance (**9.6/10** — P1+P2 complete 2026-06-03)                     |
-| [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md)                           | Repo root hygiene (**9.6/10** post-bootstrap; CI gate wired)                         |
-| [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md)               | Fresh master audit — composite 8.9/10                                                |
-| [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md) | Internal completion audit — composite 9.5/10, 24/24 items                            |
-| [`audit/fuzz-campaign-evidence-2026-05-21.md`](./audit/fuzz-campaign-evidence-2026-05-21.md)       | 500K+ libFuzzer iterations across 6 primitives, 0 crashes / panics / ASAN violations |
-| [`audit/docs-standard-compliance-2026-05-22.md`](./audit/docs-standard-compliance-2026-05-22.md)   | Prior doc-standard compliance (9.6/10)                                               |
-| [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)                               | Prior full forensic audit                                                            |
-| [`audit/auto-dev-state.md`](./audit/auto-dev-state.md)                                             | Rolling posture and session state                                                    |
-| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                             | Prior 10/10 remediation plan                                                         |
-| [`audit/remediation-10-10.md`](./audit/remediation-10-10.md)                                       | ~~Prior remediation plan~~ (deprecated)                                              |
-| [`audit/gtcx-ecosystem-rating-2026-05-08.md`](./audit/gtcx-ecosystem-rating-2026-05-08.md)         | Prior ecosystem-level assessment                                                     |
+| Document                                                                                                         | Purpose                                                                              |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [`audit/readiness-model.md`](./audit/readiness-model.md)                                                         | **Five lanes** — map to existing forensic audits                                     |
+| [`audit/engineering-completeness-quality-2026-06-05.md`](./audit/engineering-completeness-quality-2026-06-05.md) | Lane 1 index                                                                         |
+| [`audit/internal-compliance-2026-06-05.md`](./audit/internal-compliance-2026-06-05.md)                           | Lane 2 index                                                                         |
+| [`audit/external-dependent-compliance-2026-06-05.md`](./audit/external-dependent-compliance-2026-06-05.md)       | Lane 3 index                                                                         |
+| [`audit/bank-grade-2026-06-05.md`](./audit/bank-grade-2026-06-05.md)                                             | Lane 4 index — **8.9**                                                               |
+| [`audit/gtm-readiness-2026-06-05.md`](./audit/gtm-readiness-2026-06-05.md)                                       | Lane 5 index                                                                         |
+| [`audit/internal-10-10-signoff-2026-05-28.md`](./audit/internal-10-10-signoff-2026-05-28.md)                     | Lane 1 forensic — **10.0**                                                           |
+| [`audit/external-dependencies-register-2026-05-28.md`](./audit/external-dependencies-register-2026-05-28.md)     | Lane 3 forensic — SoR                                                                |
+| [`audit/master-audit-2026-06-03.md`](./audit/master-audit-2026-06-03.md)                                         | Lane 4 forensic                                                                      |
+| [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md)                                             | Six-phase full audit — FA-S1 + DTF Tier 5 reconciliation                             |
+| [`audit/docs-standard-compliance-2026-06-05.md`](./audit/docs-standard-compliance-2026-06-05.md)                 | Doc-standard compliance (**9.6/10** — P1+P2 complete 2026-06-03)                     |
+| [`audit/repo-hygiene-2026-06-05.md`](./audit/repo-hygiene-2026-06-05.md)                                         | Repo root hygiene (**9.6/10** post-bootstrap; CI gate wired)                         |
+| [`audit/master-audit-2026-05-27-fresh.md`](./audit/master-audit-2026-05-27-fresh.md)                             | Fresh master audit — composite 8.9/10                                                |
+| [`audit/internal-completion-audit-2026-05-21.md`](./audit/internal-completion-audit-2026-05-21.md)               | Internal completion audit — composite 9.5/10, 24/24 items                            |
+| [`audit/fuzz-campaign-evidence-2026-05-21.md`](./audit/fuzz-campaign-evidence-2026-05-21.md)                     | 500K+ libFuzzer iterations across 6 primitives, 0 crashes / panics / ASAN violations |
+| [`audit/docs-standard-compliance-2026-05-22.md`](./audit/docs-standard-compliance-2026-05-22.md)                 | Prior doc-standard compliance (9.6/10)                                               |
+| [`audit/full-audit-2026-05-09.md`](./audit/full-audit-2026-05-09.md)                                             | Prior full forensic audit                                                            |
+| [`audit/auto-dev-state.md`](./audit/auto-dev-state.md)                                                           | Rolling posture and session state                                                    |
+| [`audit/remediation-2026-05-11.md`](./audit/remediation-2026-05-11.md)                                           | Prior 10/10 remediation plan                                                         |
+| [`audit/remediation-10-10.md`](./audit/remediation-10-10.md)                                                     | ~~Prior remediation plan~~ (deprecated)                                              |
+| [`audit/gtcx-ecosystem-rating-2026-05-08.md`](./audit/gtcx-ecosystem-rating-2026-05-08.md)                       | Prior ecosystem-level assessment                                                     |
 
 ## §11 Repo-Specific Sections
 

@@ -18,19 +18,19 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 ## Current State
 
-**Three readiness lanes** — do not conflate them ([readiness model](./docs/audit/readiness-model.md)):
+**Five audit lanes** — do not conflate ([readiness model](./docs/audit/readiness-model.md)):
 
-| Lane                         | Score / stage                      | Canonical doc                                                                          |
-| ---------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
-| **Engineering**              | **9.5/10**                         | [engineering-readiness-2026-06-05](./docs/audit/engineering-readiness-2026-06-05.md)   |
-| **Compliance & attestation** | **5.5/10** (third-party artifacts) | [compliance-attestation-2026-06-05](./docs/audit/compliance-attestation-2026-06-05.md) |
-| **GTM (library buyer)**      | **S1 Ready**                       | [gtm-readiness-2026-06-05](./docs/audit/gtm-readiness-2026-06-05.md)                   |
+| Lane                                     | Score / status                        | Index                                                                            |
+| ---------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------- |
+| **1 Engineering completeness & quality** | **10.0** signoff · **9.5** completion | [engineering index](./docs/audit/engineering-completeness-quality-2026-06-05.md) |
+| **2 Internal compliance**                | **~9.3/10**                           | [internal compliance](./docs/audit/internal-compliance-2026-06-05.md)            |
+| **3 External-dependent compliance**      | **0/12** register                     | [external compliance](./docs/audit/external-dependent-compliance-2026-06-05.md)  |
+| **4 Bank-grade**                         | **8.9/10**                            | [bank-grade](./docs/audit/bank-grade-2026-06-05.md)                              |
+| **5 GTM**                                | Library **S1**                        | [gtm](./docs/audit/gtm-readiness-2026-06-05.md)                                  |
 
-Legacy blended lens: [master-audit-2026-06-03](./docs/audit/master-audit-2026-06-03.md) (8.9 investor composite — not engineering).
+### Engineering completeness & quality (lane 1)
 
-### Engineering readiness (in-repo)
-
-**9.5/10** as of [2026-06-05](./docs/audit/engineering-readiness-2026-06-05.md) ([internal completion 2026-05-21](./docs/audit/internal-completion-audit-2026-05-21.md)). The monorepo is in a hardened, code-addressable state with active quality gates:
+**10.0/10** [signoff](./docs/audit/internal-10-10-signoff-2026-05-28.md) · **9.5/10** [completion audit](./docs/audit/internal-completion-audit-2026-05-21.md). Hardened monorepo with active quality gates:
 
 - trust-path defects in signing, verification, token handling, and offline lockout recovery have been remediated
 - offline replay ordering uses logical sequence instead of wall-clock time
@@ -58,13 +58,21 @@ Legacy blended lens: [master-audit-2026-06-03](./docs/audit/master-audit-2026-06
 
 **Moat path (in-repo):** WorkProof witness → `@gtcx/crypto` profile prove → `@gtcx/verification` bundle (`commodity-origin-zk`). Cross-package test: [`tests/integration/commodity-origin-zk.test.ts`](./tests/integration/commodity-origin-zk.test.ts).
 
-### Compliance & attestation (non-engineering)
+### Internal compliance (lane 2)
 
-**5.5/10** third-party attestation — pen-test report and SOC 2 Type I letter not yet delivered. In-repo controls **8.8/10**. See [compliance-attestation-2026-06-05](./docs/audit/compliance-attestation-2026-06-05.md).
+Docs, hygiene, threat matrix, SOC 2 **design** — [internal-compliance index](./docs/audit/internal-compliance-2026-06-05.md) · [docs-standard audit](./docs/audit/docs-standard-compliance-2026-06-05.md).
 
-### GTM (non-engineering)
+### External-dependent compliance (lane 3)
 
-**Library:** S1 Ready (`pnpm add @gtcx/*`). **Ecosystem sovereign stack:** S2 Not Ready — infra/founder gates. See [gtm-readiness-2026-06-05](./docs/audit/gtm-readiness-2026-06-05.md).
+Pen-test report, SOC 2 **letter**, ceremony — [external-dependencies-register](./docs/audit/external-dependencies-register-2026-05-28.md) (**0/12** complete).
+
+### Bank-grade (lane 4)
+
+Certified composite **8.9/10** — [master-audit-2026-06-03](./docs/audit/master-audit-2026-06-03.md) only; not engineering score.
+
+### GTM (lane 5)
+
+**Library:** S1 Ready. **Ecosystem sovereign stack:** S2 Not Ready — [gtm index](./docs/audit/gtm-readiness-2026-06-05.md).
 
 ### Active execution program
 

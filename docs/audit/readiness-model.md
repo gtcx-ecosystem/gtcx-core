@@ -1,76 +1,104 @@
 ---
-title: 'Readiness model — three lanes'
+title: 'Readiness model — five audit lanes'
 status: current
 date: 2026-06-05
 owner: gtcx-core
 role: quality-evidence-lead
-document_id: AUDIT-READINESS-MODEL-001
+document_id: AUDIT-READINESS-MODEL-002
 tier: critical
 tags: ['audit', 'readiness', 'governance']
 review_cycle: on-change
+supersedes_note: 'Replaces three-lane model; maps to existing audits in docs/audit/'
 ---
 
-# Readiness model — three lanes
+# Readiness model — five audit lanes
 
-**Purpose:** Stop conflating **engineering**, **compliance/attestation**, and **GTM** into one “bank-grade composite.” Each lane has its own scorecard, evidence, and owner.
-
-**Applies to:** `gtcx-core` as an **npm/Rust foundation library**. Downstream deployable products (`gtcx-markets`, Cloud stack) carry additional lanes in their owner repos.
-
----
-
-## The three lanes
-
-| Lane                             | Question it answers                                                          | Primary evidence                                                 | Typical owner                           |
-| -------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------- |
-| **1 — Engineering readiness**    | Can we build, test, release, and integrate this code safely?                 | CI gates, coverage, architecture check, fuzz, provenance         | gtcx-core engineering                   |
-| **2 — Compliance & attestation** | Will security/legal/procurement accept **third-party and regulatory proof**? | Pen-test report, SOC 2 letter, ceremony transcript, trust portal | Compliance + infra + human vendors      |
-| **3 — GTM readiness**            | Can a **specific buyer type** adopt or buy **today** (non-engineering)?      | Stage S0–S6, contracts, pilot owner, outbound comms              | Founder/GTM + infra for ecosystem deals |
-
-**Rule:** Never subtract engineering score because pen-test is missing. Never claim “bank-grade 8.9” as “engineering done.”
+**Purpose:** One score per lane. Each lane has **existing audit artifacts** in `docs/audit/` (and `docs/gtm/` for GTM) — lane index files only synthesize and link; they do not replace forensic audits.
 
 ---
 
-## Canonical scorecards (2026-06-05)
+## The five lanes
 
-| Lane                     | Score / stage                                           | Canonical doc                                                                  |
-| ------------------------ | ------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Engineering              | **9.5/10**                                              | [engineering-readiness-2026-06-05.md](./engineering-readiness-2026-06-05.md)   |
-| Compliance & attestation | **5.5/10** (attestation); **8.8/10** (in-repo controls) | [compliance-attestation-2026-06-05.md](./compliance-attestation-2026-06-05.md) |
-| GTM (library buyer)      | **S1 Ready** · integrator pilot **S2 Partial**          | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md)                   |
-
-**Ecosystem sovereign stack GTM** (ZWCMP, regulator sandbox) is tracked under **lane 3 — ecosystem row** in [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md), owned with [gtcx-infrastructure GTM](../gtm/16-ecosystem-gtm-alignment.md) — **not** a downgrade of engineering.
-
----
-
-## Legacy audits
-
-| Doc                                                                                  | Status                                                                                          |
-| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| [master-audit-2026-06-03.md](./master-audit-2026-06-03.md)                           | **Historical composite** — retained for investor lens; superseded for day-to-day by three lanes |
-| [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) | **Engineering lane source** — 9.5/10 internal completion                                        |
-| [full-audit-2026-06-04.md](./full-audit-2026-06-04.md)                               | Architecture sprint snapshot — engineering findings only                                        |
-| [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md)            | Superseded for stage verdict by [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md)    |
+| #   | Lane                                   | Question                                                      | Canonical audits (existing)                                                                                                                                                                                                                                                                                                                                                                                                                | Index (rollup)                                                                                     |
+| --- | -------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| 1   | **Engineering completeness & quality** | Can we build, test, release, and integrate?                   | [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md), [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md), [full-audit-2026-06-04.md](./full-audit-2026-06-04.md), [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md), [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md), [fuzz-campaign-evidence-2026-05-21.md](./fuzz-campaign-evidence-2026-05-21.md) | [engineering-completeness-quality-2026-06-05.md](./engineering-completeness-quality-2026-06-05.md) |
+| 2   | **Internal compliance**                | Are in-repo controls, docs, and governance evidence complete? | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md), [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md), [internal-10-10-signoff § INT-CORE-05/06](../compliance/soc2-readiness.md)                                                                                                                                                                                                                 | [internal-compliance-2026-06-05.md](./internal-compliance-2026-06-05.md)                           |
+| 3   | **External-dependent compliance**      | Are third-party / org / time-based attestations delivered?    | [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md), [external-validation-findings-log.md](../release/external-validation-findings-log.md)                                                                                                                                                                                                                                                      | [external-dependent-compliance-2026-06-05.md](./external-dependent-compliance-2026-06-05.md)       |
+| 4   | **Bank-grade**                         | Blended procurement/investor composite (SCORING_FRAMEWORK)?   | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md), [latest.json](./latest.json)                                                                                                                                                                                                                                                                                                                                                   | [bank-grade-2026-06-05.md](./bank-grade-2026-06-05.md)                                             |
+| 5   | **GTM**                                | Can which buyer adopt or buy today (non-engineering)?         | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md), [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md), [engagement-log](../agile/engagement-log/README.md)                                                                                                                                                                                                                                               | Same                                                                                               |
 
 ---
 
-## Defensibility Tier 5 (DTF) — where it fits
+## Scores at a glance (2026-06-05)
 
-| DTF slice                                           | Lane                                |
-| --------------------------------------------------- | ----------------------------------- |
-| Tiers 1–4, S-T5-1–5.4, DTF-5.5.1 jurisdiction packs | **Engineering** (+ crypto evidence) |
-| CORE-004 trusted-setup ceremony                     | **Compliance & attestation**        |
-| DTF-5.5.2+ Legal, DTF-5.5.4 GTM commercial          | **GTM** (human authorization)       |
-
-Technical Tier 5 **~88%** is an **engineering + crypto evidence** metric, not commercial Tier 5 achieved.
+| Lane                          | Score / status                                       | Do not confuse with    |
+| ----------------------------- | ---------------------------------------------------- | ---------------------- |
+| Engineering                   | **10.0** internal signoff · **9.5** completion audit | Bank-grade 8.9         |
+| Internal compliance           | **~9.3/10**                                          | External pen-test      |
+| External-dependent compliance | **0/12** register items complete                     | Engineering 10.0       |
+| Bank-grade                    | **8.9/10** certified composite                       | Engineering 10.0       |
+| GTM (library)                 | **S1 Ready**                                         | Ecosystem sovereign S2 |
 
 ---
 
-## Verification commands (engineering lane only)
+## Rules
 
-```bash
-pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build
-pnpm architecture:check && pnpm provenance:check-npm:strict
-pnpm docs:check-frontmatter && pnpm check:workspace-root-cleanliness:strict
-```
+1. **Never** cite bank-grade 8.9 as engineering status.
+2. **Never** cite engineering 10.0 as pen-test complete.
+3. **GTM** rows in [external-dependencies-register](./external-dependencies-register-2026-05-28.md) (EXT-CORE-007–010) belong to **lane 5**, not lane 3.
+4. **DTF Tier 5 ~88%** is engineering + crypto evidence; commercial Tier 5 is GTM (human authorization).
 
-Compliance and GTM lanes require **artifact links** (PDF/letter/hub row), not green CI alone.
+---
+
+## Audit folder map (by lane)
+
+### Lane 1 — Engineering
+
+| Audit                                     | Role                            |
+| ----------------------------------------- | ------------------------------- |
+| `internal-10-10-signoff-2026-05-28.md`    | Gate sign-off @ HEAD            |
+| `internal-completion-audit-2026-05-21.md` | Package-level 9.5/10 completion |
+| `full-audit-2026-06-04.md`                | Architecture sprint findings    |
+| `repo-hygiene-2026-06-05.md`              | Workspace policy                |
+| `moat-dimension-roadmap-10-10.md`         | DTF engineering track           |
+| `algorithmic-moat-sprint2-assessment.md`  | ZKP moat scoring                |
+
+### Lane 2 — Internal compliance
+
+| Audit                                        | Role                                     |
+| -------------------------------------------- | ---------------------------------------- |
+| `docs-standard-compliance-2026-06-05.md`     | Machine-readable docs **9.6/10**         |
+| `repo-hygiene-2026-06-05.md`                 | Root allowlist CI                        |
+| `anti-inflation-audit-results-2026-05-11.md` | Score honesty                            |
+| `../compliance/soc2-readiness.md`            | TSC mapping (design — not Type I letter) |
+| `../security/threat-control-matrix.md`       | 12 controls                              |
+
+### Lane 3 — External-dependent compliance
+
+| Audit                                            | Role                                   |
+| ------------------------------------------------ | -------------------------------------- |
+| `external-dependencies-register-2026-05-28.md`   | **SoR** — 12 open external items       |
+| `../release/external-validation-findings-log.md` | Pen-test findings (empty until vendor) |
+| XR-402 / CORE-004                                | Ceremony (compliance, not engineering) |
+
+### Lane 4 — Bank-grade
+
+| Audit                                 | Role                               |
+| ------------------------------------- | ---------------------------------- |
+| `master-audit-2026-06-03.md`          | Latest blended certification       |
+| `master-audit-2026-05-28.md`          | Prior certified 8.9 @ HEAD signoff |
+| `gtcx-ecosystem-rating-2026-05-08.md` | Ecosystem context                  |
+
+### Lane 5 — GTM
+
+| Audit                                    | Role                      |
+| ---------------------------------------- | ------------------------- |
+| `../gtm/gtm-reality-check-2026-06-02.md` | S0–S6 history             |
+| `../gtm/16-ecosystem-gtm-alignment.md`   | Owner split core vs infra |
+| `../agile/engagement-log/`               | Sandbox send status       |
+
+---
+
+## Machine-readable
+
+[latest.json](./latest.json) — update `lanes` when scores change.

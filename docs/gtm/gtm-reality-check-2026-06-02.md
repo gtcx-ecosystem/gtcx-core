@@ -13,7 +13,7 @@ aligned_with: 'gtcx-infrastructure/docs/gtm/plans/global-south-10x-plan.md'
 
 # GTM Reality Check — gtcx-core
 
-> **Superseded (2026-06-05):** Stage verdicts and buyer split live in [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md). Engineering and compliance are separate lanes in [readiness-model.md](../audit/readiness-model.md). This file is retained for history.
+> **Superseded (2026-06-05):** Lane 5 index — [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md). Five lanes — [readiness-model.md](../audit/readiness-model.md). This file retained for S0–S6 detail.
 
 **Assessed as:** npm cryptographic **foundation library** (not a deployable service).  
 **Evidence base:** README, trust portal, `docs/gtm/*`, `docs/audit/ci-confirmation-2026-06-01.md`, infrastructure GTM + EXT-INF register (2026-05-31).  

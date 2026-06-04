@@ -17,8 +17,7 @@ review_cycle: 'on-change'
 > **Status:** Current
 > **Date:** 2026-06-03  
 > **Owner:** Protocol Architect  
-> **Readiness lanes:** Engineering **9.5/10** · Compliance attestation **5.5/10** · GTM library **S1 Ready** — [readiness model](../audit/readiness-model.md)  
-> **Legacy blended lens:** 8.9/10 [master audit 2026-06-03](../audit/master-audit-2026-06-03.md) (investor/enterprise — not engineering)  
+> **Five audit lanes:** Eng **10.0/9.5** · Internal compliance **~9.3** · External **0/12** · Bank-grade **8.9** · GTM **S1** — [readiness model](../audit/readiness-model.md)  
 > **Defensibility Tier 5 technical:** ~88% (engineering lane; ceremony/commercial external)  
 > **Next review:** 2026-09-01 (quarterly)
 
@@ -32,11 +31,9 @@ review_cycle: 'on-change'
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** Production-hardened foundation library with **all in-repo gates green**. **Engineering readiness 9.5/10** ([engineering-readiness-2026-06-05](../audit/engineering-readiness-2026-06-05.md)). **Compliance attestation 5.5/10** — pen-test and SOC 2 letter not delivered ([compliance-attestation-2026-06-05](../audit/compliance-attestation-2026-06-05.md)). **GTM:** library **S1 Ready**; ecosystem sovereign stack **S2 Not Ready** ([gtm-readiness-2026-06-05](../audit/gtm-readiness-2026-06-05.md)). **Defensibility Tier 5 technical ~88%** — DTF-5.4.4 witness `73eaff2b`, DTF-5.5.1 jurisdiction packs; **CORE-004** in compliance lane (XR-402). **Cryptography:** FIPS-validated aws-lc-rs (CMVP #4816). **Supply chain:** **22/22** Sigstore — `pnpm provenance:check-npm:strict`. **Docs/repo hygiene:** 9.6/10 each.
+**Maturity state:** **Lane 1** engineering **10.0** signoff / **9.5** completion ([index](../audit/engineering-completeness-quality-2026-06-05.md)). **Lane 2** internal compliance **~9.3** ([index](../audit/internal-compliance-2026-06-05.md)). **Lane 3** external compliance **0/12** ([register](../audit/external-dependencies-register-2026-05-28.md)). **Lane 4** bank-grade **8.9** ([master audit](../audit/master-audit-2026-06-03.md)). **Lane 5** GTM library **S1** ([index](../audit/gtm-readiness-2026-06-05.md)). Tier 5 technical ~88%; CORE-004 → lane 3 (XR-402).
 
-**Active execution program:** [Tier 5 workplan](../operations/tier-5-workplan-2026-06.md) (technical complete) · [Engagement Readiness](../agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) (sovereign engagements) · [execution roadmap](../audit/execution-roadmap.md)
-
-**Remaining gaps by lane:** Compliance — pen-test (EXT-INF-002), SOC 2 letter, XR-402 ceremony. GTM (ecosystem) — testnet/DR (EXT-INF-015), sandbox send. Engineering P2 — `TURBO_*` / `OPENAI_API_KEY` in `pnpm ops:check`.
+**Remaining gaps by lane:** L3 — pen-test, SOC 2 letter, ceremony. L5 (ecosystem) — testnet/DR, sandbox send. L1 P2 — `TURBO_*` / `OPENAI_API_KEY`.
 
 ---
 
@@ -262,24 +259,27 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 
 ### 10.1 Key Documents
 
-| Document                                          | Purpose                                          | Audience                          |
-| ------------------------------------------------- | ------------------------------------------------ | --------------------------------- |
-| `docs/audit/readiness-model.md`                   | **Three lanes** — engineering / compliance / GTM | All audiences                     |
-| `docs/audit/engineering-readiness-2026-06-05.md`  | Engineering **9.5/10**                           | Engineering leadership            |
-| `docs/audit/compliance-attestation-2026-06-05.md` | Attestation **5.5/10**                           | Security, compliance, procurement |
-| `docs/audit/gtm-readiness-2026-06-05.md`          | GTM stages (library vs ecosystem)                | GTM, founders                     |
-| `docs/audit/master-audit-2026-06-03.md`           | Legacy blended lens (8.9)                        | Investors (historical)            |
-| `docs/audit/full-audit-2026-06-04.md`             | Six-phase full audit                             | Engineering leadership            |
-| `docs/audit/execution-roadmap.md`                 | FA + DTF sprint overlay                          | Protocol 22 agents                |
-| `docs/operations/tier-5-workplan-2026-06.md`      | Defensibility Tier 5 register                    | Crypto / protocol architects      |
-| `docs/architecture/overview.md`                   | System architecture                              | Engineers, architects             |
-| `docs/security/threat-control-matrix.md`          | Security controls                                | Security engineers, auditors      |
-| `docs/compliance/soc2-readiness.md`               | SOC 2 evidence                                   | Compliance, buyers                |
-| `docs/gtm/00-executive-brief.md`                  | Executive summary                                | Investors, board                  |
-| `docs/specs/packages/README.md`                   | Package specs                                    | Engineers, integrators            |
-| `docs/decisions/adr-index.md`                     | Architecture decisions                           | Engineers, architects             |
-| `CONTRIBUTING.md`                                 | Contribution guide                               | Open-source contributors          |
-| `CLAUDE.md`                                       | Agent context                                    | AI agents, new developers         |
+| Document                                                    | Purpose                             | Audience                     |
+| ----------------------------------------------------------- | ----------------------------------- | ---------------------------- |
+| `docs/audit/readiness-model.md`                             | **Five lanes** + forensic audit map | All audiences                |
+| `docs/audit/engineering-completeness-quality-2026-06-05.md` | Lane 1 index                        | Engineering                  |
+| `docs/audit/internal-compliance-2026-06-05.md`              | Lane 2 index                        | Compliance                   |
+| `docs/audit/external-dependent-compliance-2026-06-05.md`    | Lane 3 index                        | Procurement                  |
+| `docs/audit/bank-grade-2026-06-05.md`                       | Lane 4 — **8.9**                    | Investors                    |
+| `docs/audit/gtm-readiness-2026-06-05.md`                    | Lane 5 GTM                          | GTM, founders                |
+| `docs/audit/internal-10-10-signoff-2026-05-28.md`           | Lane 1 forensic                     | Engineering                  |
+| `docs/audit/master-audit-2026-06-03.md`                     | Lane 4 forensic                     | Investors                    |
+| `docs/audit/full-audit-2026-06-04.md`                       | Six-phase full audit                | Engineering leadership       |
+| `docs/audit/execution-roadmap.md`                           | FA + DTF sprint overlay             | Protocol 22 agents           |
+| `docs/operations/tier-5-workplan-2026-06.md`                | Defensibility Tier 5 register       | Crypto / protocol architects |
+| `docs/architecture/overview.md`                             | System architecture                 | Engineers, architects        |
+| `docs/security/threat-control-matrix.md`                    | Security controls                   | Security engineers, auditors |
+| `docs/compliance/soc2-readiness.md`                         | SOC 2 evidence                      | Compliance, buyers           |
+| `docs/gtm/00-executive-brief.md`                            | Executive summary                   | Investors, board             |
+| `docs/specs/packages/README.md`                             | Package specs                       | Engineers, integrators       |
+| `docs/decisions/adr-index.md`                               | Architecture decisions              | Engineers, architects        |
+| `CONTRIBUTING.md`                                           | Contribution guide                  | Open-source contributors     |
+| `CLAUDE.md`                                                 | Agent context                       | AI agents, new developers    |
 
 ### 10.2 Contact & Escalation
 
@@ -294,14 +294,8 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 
 ## 11. Honest Assessment
 
-This document reflects the state of `gtcx-core` as of **2026-06-05**. Scores use [readiness-model.md](../audit/readiness-model.md) — three lanes, not one composite.
+This document reflects **2026-06-05** state via [readiness-model.md](../audit/readiness-model.md) — **five lanes**, each with existing forensic audits.
 
-**Engineering lane (9.5/10):** All documented CI gates pass. **22/22** Sigstore. **281/281** frontmatter. Tier 5 technical ~88%. Protocols witness `73eaff2b`. FIPS module verified. Zero `unsafe` in Rust.
+**Lane 1:** CI gates pass; internal signoff **10.0**. **Lane 2:** docs/hygiene **9.6**. **Lane 3:** external register **0/12**. **Lane 4:** certified **8.9** (master audit only). **Lane 5:** library **S1**; ecosystem sovereign **S2 not ready**.
 
-**Compliance lane (5.5/10 attestation):** Pen-test report and SOC 2 letter not delivered. CORE-004 blocked on XR-402 ceremony.
-
-**GTM lane:** Library **S1 Ready**. Ecosystem sovereign stack **S2 Not Ready** — infra/founder gates, not engineering.
-
-**What is aspirational (engineering P2):** USSD protocol. libp2p Phase 2. Commercial Tier 5 Legal/GTM authorization.
-
-**What this means:** Engineering work is largely complete in-repo. Procurement and sovereign deals advance on **compliance + GTM lanes**, not more internal doc splits.
+Procurement advances on **lanes 3–5**, not more lane 1 engineering.

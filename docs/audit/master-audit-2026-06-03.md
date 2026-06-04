@@ -22,15 +22,7 @@ supersedes_note: 'Post-remediation refresh at bdfe7cb — doc-standard 9.6, repo
 
 # gtcx-core — Master Audit & Bank-Grade Certification
 
-> **Readiness model (2026-06-05):** Do not use this file’s **8.9 composite** as engineering or GTM status. Use the three lanes in [readiness-model.md](./readiness-model.md):
->
-> | Lane                     | Score / stage                                | Canonical doc                                                                  |
-> | ------------------------ | -------------------------------------------- | ------------------------------------------------------------------------------ |
-> | Engineering              | **9.5/10**                                   | [engineering-readiness-2026-06-05.md](./engineering-readiness-2026-06-05.md)   |
-> | Compliance & attestation | **5.5/10** attestation · **8.8/10** controls | [compliance-attestation-2026-06-05.md](./compliance-attestation-2026-06-05.md) |
-> | GTM (library)            | **S1 Ready**                                 | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md)                   |
->
-> This document remains a **historical blended lens** (investor / enterprise / sovereign narrative).
+> **Lane 4 — Bank-grade only.** Do not use **8.9** for engineering, internal compliance, or GTM. [readiness-model.md](./readiness-model.md) — five lanes; indexes: [engineering](./engineering-completeness-quality-2026-06-05.md) · [internal compliance](./internal-compliance-2026-06-05.md) · [external compliance](./external-dependent-compliance-2026-06-05.md) · [bank-grade](./bank-grade-2026-06-05.md) · [gtm](./gtm-readiness-2026-06-05.md).
 
 **Date:** 2026-06-03 (refresh)  
 **Repo:** `gtcx-ecosystem/gtcx-core`  

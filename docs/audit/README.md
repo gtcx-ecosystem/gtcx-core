@@ -11,44 +11,44 @@ review_cycle: on-change
 
 # Audit Documentation
 
-Forensic audits, readiness scorecards, and remediation plans for `gtcx-core`.
+Forensic audits and readiness scorecards for `gtcx-core`, organized in **five lanes**.
 
 ---
 
-## Start here — three readiness lanes
+## Start here
 
-**Do not use a single “bank-grade composite” for engineering status.**
+**[readiness-model.md](./readiness-model.md)** — five lanes, rules, and full audit-folder map.
 
-| Lane                         | Question                                 | Canonical doc (2026-06-05)                                                                              |
-| ---------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| **Engineering**              | Can we build, test, and release?         | [engineering-readiness-2026-06-05.md](./engineering-readiness-2026-06-05.md) — **9.5/10**               |
-| **Compliance & attestation** | Do we have third-party/regulatory proof? | [compliance-attestation-2026-06-05.md](./compliance-attestation-2026-06-05.md) — **5.5/10** attestation |
-| **GTM**                      | Can which buyer adopt today?             | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md) — library **S1 Ready**                     |
+| Lane                                 | Index (rollup)                                                                                     | Primary forensic audits                                                                                                                                |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1 Engineering completeness & quality | [engineering-completeness-quality-2026-06-05.md](./engineering-completeness-quality-2026-06-05.md) | [internal-10-10-signoff](./internal-10-10-signoff-2026-05-28.md), [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) |
+| 2 Internal compliance                | [internal-compliance-2026-06-05.md](./internal-compliance-2026-06-05.md)                           | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md), [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)         |
+| 3 External-dependent compliance      | [external-dependent-compliance-2026-06-05.md](./external-dependent-compliance-2026-06-05.md)       | [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md)                                                         |
+| 4 Bank-grade                         | [bank-grade-2026-06-05.md](./bank-grade-2026-06-05.md)                                             | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md)                                                                                             |
+| 5 GTM                                | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md)                                       | [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md)                                                                              |
 
-**Model:** [readiness-model.md](./readiness-model.md)
-
----
-
-## Key docs
-
-| File                                   | Purpose                                          |
-| -------------------------------------- | ------------------------------------------------ |
-| `engineering-readiness-YYYY-MM-DD.md`  | CI, tests, hygiene, DTF technical — in-repo only |
-| `compliance-attestation-YYYY-MM-DD.md` | Pen-test, SOC 2, ceremony, trust artifacts       |
-| `gtm-readiness-YYYY-MM-DD.md`          | GTM stages S0–S6; library vs ecosystem buyers    |
-| `master-audit-YYYY-MM-DD.md`           | **Legacy** blended investor/enterprise lens      |
-| `internal-completion-audit-*.md`       | Engineering lane source (9.5 internal)           |
-| `full-audit-YYYY-MM-DD.md`             | Architecture sprint snapshots                    |
-| `docs-standard-compliance-*.md`        | Docs machine-readable gate                       |
-| `repo-hygiene-*.md`                    | Workspace root + folder policy                   |
-| `10-10-roadmap-*.md`                   | Improvement program (cross-lane items tagged)    |
-| `moat-dimension-roadmap-10-10.md`      | DTF per-dimension crypto moat                    |
+**Machine-readable:** [latest.json](./latest.json)
 
 ---
 
 ## How to use
 
-1. **Engineering status** → latest `engineering-readiness-*.md` + run gates in that doc.
-2. **Procurement / regulator** → `compliance-attestation-*.md` + [trust portal](../governance/trust-portal.md).
-3. **Commercial adoptability** → `gtm-readiness-*.md` + [gtm/README.md](../gtm/README.md).
-4. **Historical composite** → `master-audit-*.md` (do not cite as engineering score).
+1. **“Are gates green?”** → Lane 1 index + `internal-10-10-signoff`.
+2. **“Are docs/controls in-repo complete?”** → Lane 2 index.
+3. **“Is pen-test / SOC 2 / ceremony done?”** → Lane 3 register.
+4. **“What’s the investor composite?”** → Lane 4 master audit only.
+5. **“Can we sell / pilot?”** → Lane 5 GTM index.
+
+---
+
+## Other audits (tagged by lane in readiness-model)
+
+| File                              | Typical lane                |
+| --------------------------------- | --------------------------- |
+| `full-audit-*.md`                 | 1 Engineering               |
+| `moat-dimension-roadmap-10-10.md` | 1 Engineering               |
+| `10-10-roadmap-*.md`              | 1–4 (mixed — see item tags) |
+| `master-audit-*.md`               | 4 Bank-grade                |
+| `remediation-*.md`                | Cross-lane tracker          |
+
+Historical `master-audit-*` files before 2026-06-03 remain for trend analysis; do not cite as current without checking lane indexes.
