@@ -1,64 +1,35 @@
 ---
-description: Protocol 27 — Agent Execution Obligation
+description: Protocol 27 — Agent Execution Obligation (run commands; diagnose before delegating)
 globs: ["**/*"]
 alwaysApply: true
 ---
 
 # Protocol 27: Agent Execution Obligation (AGENT-EXEC-OBL)
 
-> **Scope:** Agents run verifiable commands and processes themselves — they do not outsource runnable work to the human terminal.
-> **Normative spec:** `gtcx-docs/docs/governance/protocols/27-agent-execution-obligation/protocol.md`
-> **Phase:** 5.7 (follows 5.6 Proceed Brief)
+> **Normative:** `gtcx-docs/docs/governance/protocols/27-agent-execution-obligation/protocol.md` (v1.1.0)
+> **Phase:** 5.7 (after Protocol 26 Proceed Brief)
 
 ## Rule
 
 **You run commands; the human does not substitute for your shell.**
 
-1. Before claiming done: run every applicable gate in the repo (`validate`, `lint`, `test`, `build`, story-specific smoke).
-2. Report **command + exit code** — not "please run locally."
-3. If blocked by permissions: emit **Permission Unblock Report** (enablement steps) — then re-run when unblocked.
-4. Cross-repo code: execute in **owner repo** workspace, not gtcx-docs only.
+1. Run gates, smoke, **dev servers**, and device reload steps in-session.
+2. Report **command + exit code** — never end with “run locally” / “focus your terminal” without trying §9 first.
+3. Metro/Expo: start in **background**; probe with `curl`/`lsof`; Android via **`adb`** — not “press r/a” as the only step.
+4. Blocked: complete **diagnosis ladder D1–D6**, then **Permission Unblock Report** — re-run when unblocked.
 
-## Verification ladder (V1–V6)
+## Diagnosis ladder (before asking human)
 
-| Step | Command | Required |
-| ---- | ------- | -------- |
-| V1 | `git status`, `git diff` | Always |
-| V2 | `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm architecture:check` | Documented gates |
-| V3 | `pnpm test` | Tests exist for changed behavior |
-| V4 | `pnpm docs:check-links`, `pnpm docs:check-frontmatter`, `pnpm bundle:check-budgets` | Docs/deploy/cross-repo probes |
-| V5 | `pnpm quality:governance:check` | Governance changes |
-| V6 | `cargo test`, `cargo test --features trusted-setup-verify --release` | Rust changes |
+D1 Shell → D2 background Shell → D3 node child_process → D4 owner-repo cwd → D5 ecosystem scripts → D6 Unblock Report → D7 human (rare)
 
-## Forbidden closing patterns
+## Forbidden
 
-- "Verify locally: `cd gtcx-core && pnpm test`"
-- "You should run the validators before merge"
-- "Run this in your terminal and share the output"
-- "Let me know when you've run the smoke test"
+- “Verify locally” / “run in your terminal” / “run these commands”
+- “Focus the Cursor terminal” / “press a/r in Metro” (without adb/API attempt)
+- “I can't send keystrokes” (without adb reload attempt)
+- “Let me know when you've run …”
 
-## Allowed patterns
+## Ecosystem helpers
 
-- "Ran `pnpm run validate` — exit 0."
-- "`pnpm test` failed: … — fixing …"
-- "Blocked: `kubectl` denied by sandbox — **Permission Unblock Report** below; after you enable cluster access I will re-run apply."
-
-## Permission Unblock Report template
-
-```markdown
-## Permission Unblock Report
-
-**Blocked command:** `<exact command>`
-**Exit / error:** `<stderr or tool message — no secrets>`
-**Why blocked:** `<sandbox | network | aws | k8s | gh | file write | other>`
-**Impact:** `<what cannot be verified or shipped until unblocked>`
-
-### Enable (operator — one-time)
-
-1. `<concrete step>`
-2. `<optional second step>`
-
-### After enable
-
-Agent will re-run `<command>` in this session. Do not ask operator to paste terminal output unless debugging together.
-```
+- Git push (harness): `pnpm --dir ../gtcx-agentic ecosystem:push-all`
+- Normative spec: gtcx-docs Protocol 27 §8–§9
