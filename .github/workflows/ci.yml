@@ -114,6 +114,10 @@ jobs:
         working-directory: rust
         run: cargo test -p gtcx-zkp --lib --features differential -- test_differential_gci_threshold_100_witnesses
 
+      - name: Trusted-setup verify (M3.2 / CORE-004 engineering gate)
+        working-directory: rust
+        run: cargo test -p gtcx-zkp --features trusted-setup-verify --release
+
       - name: Test
         run: pnpm test
 

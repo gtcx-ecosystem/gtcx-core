@@ -8,9 +8,9 @@ No cross-repo link dependencies detected in package.json.
 
 ## Hard Dependencies (Blocking)
 
-| Needs                        | From Repo      | Status  | ETA   | Blocking Epic |
-| ---------------------------- | -------------- | ------- | ----- | ------------- |
-| XR-402 ceremony + transcript | gtcx-protocols | blocked | human | CORE-004      |
+| Needs                  | From Repo | Status  | ETA   | Blocking Epic                                                    |
+| ---------------------- | --------- | ------- | ----- | ---------------------------------------------------------------- |
+| ZKP transcript publish | gtcx-core | partial | human | CORE-004 (verify gate done; INF-86 XR-402 KMS done in protocols) |
 
 ## Soft Dependencies (Nice to have)
 

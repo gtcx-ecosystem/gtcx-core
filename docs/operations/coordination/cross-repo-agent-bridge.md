@@ -74,13 +74,13 @@ flowchart TB
   C2 --> D3
 ```
 
-| Priority | Work ID       | Owner               | Next action                                                                         | Unblocks                    |
-| -------- | ------------- | ------------------- | ----------------------------------------------------------------------------------- | --------------------------- |
-| **P1**   | EAP-SYNC      | gtcx-core           | **done** 2026-06-03 — bundle synced; infra ESO refresh acked; region mismatch fixed | — (XR-202/INT-S3-08 closed) |
-| **P1**   | PROVENANCE    | gtcx-infrastructure | Investigate OIDC token exchange for `--provenance` publish                          | Build L3 SLSA claim         |
-| **P1**   | VENDORS       | baseline-os         | Select pen-test vendor; source Z3/Coq consultant; source side-channel lab           | D8, D9, D7 M7.5 completion  |
-| **P2**   | KAT-CONSUME   | gtcx-protocols      | **done** — DTF-5.4.4 E2E + KAT consumption (`73eaff2b`)                             | M6.5 downstream validation  |
-| **P2**   | D3-TRANSCRIPT | gtcx-core           | Implement `trusted-setup-verify` feature after ceremony                             | D3 9.5 → 10                 |
+| Priority | Work ID       | Owner               | Next action                                                                                      | Unblocks                     |
+| -------- | ------------- | ------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------- |
+| **P1**   | EAP-SYNC      | gtcx-core           | **done** 2026-06-03 — bundle synced; infra ESO refresh acked; region mismatch fixed              | — (XR-202/INT-S3-08 closed)  |
+| **P1**   | PROVENANCE    | gtcx-infrastructure | Investigate OIDC token exchange for `--provenance` publish                                       | Build L3 SLSA claim          |
+| **P1**   | VENDORS       | baseline-os         | Select pen-test vendor; source Z3/Coq consultant; source side-channel lab                        | D8, D9, D7 M7.5 completion   |
+| **P2**   | KAT-CONSUME   | gtcx-protocols      | **done** — DTF-5.4.4 E2E + KAT consumption (`73eaff2b`)                                          | M6.5 downstream validation   |
+| **P2**   | D3-TRANSCRIPT | gtcx-core           | **partial** — `trusted-setup-verify` CI green; publish `artifacts/trusted-setup/transcript.seed` | D3 9.5 → 10 after transcript |
 
 Full backlog: [`cross-repo-sprint-workplan-2026-06.md`](cross-repo-sprint-workplan-2026-06.md)
 

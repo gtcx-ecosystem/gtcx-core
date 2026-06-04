@@ -132,14 +132,14 @@ Aligned with [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) §6.3.
 
 ## Ecosystem open items (gtcx-core lens)
 
-| ID                 | Item                               | Owner               | Status            | gtcx-core role                    |
-| ------------------ | ---------------------------------- | ------------------- | ----------------- | --------------------------------- |
-| OI-X01             | ER-1-08 hub ack                    | gtcx-core           | **done**          | Protocols log; evidence on record |
-| OI-X02             | ER-1-08 hub ack                    | gtcx-infrastructure | **pending**       | File outbound ticket only         |
-| OI-X06 / INT-S8-04 | cost-router v1.1                   | baseline-os         | **external**      | No implementation in core         |
-| EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**          | Evidence pack input (FA-S6)       |
-| CORE-004           | Trusted-setup transcript           | gtcx-core           | **release-gated** | After XR-402 ceremony             |
-| CORE-005–006       | Pen-test SOW / formal verification | baseline-os         | **blocked**       | Track only                        |
+| ID                 | Item                               | Owner               | Status       | gtcx-core role                                |
+| ------------------ | ---------------------------------- | ------------------- | ------------ | --------------------------------------------- |
+| OI-X01             | ER-1-08 hub ack                    | gtcx-core           | **done**     | Protocols log; evidence on record             |
+| OI-X02             | ER-1-08 hub ack                    | gtcx-infrastructure | **pending**  | File outbound ticket only                     |
+| OI-X06 / INT-S8-04 | cost-router v1.1                   | baseline-os         | **external** | No implementation in core                     |
+| EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**     | Evidence pack input (FA-S6)                   |
+| CORE-004           | Trusted-setup transcript           | gtcx-core           | **partial**  | Verify CI green; transcript publish (Class R) |
+| CORE-005–006       | Pen-test SOW / formal verification | baseline-os         | **blocked**  | Track only                                    |
 
 ---
 
