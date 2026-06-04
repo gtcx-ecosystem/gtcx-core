@@ -2,7 +2,7 @@
 title: 'Agent universal instructions (any LLM)'
 status: current
 date: 2026-06-05
-owner: protocol-architect
+owner: gtcx-agentic
 role: protocol-architect
 document_id: OPS-AGENT-UNIVERSAL
 tier: critical

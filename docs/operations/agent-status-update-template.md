@@ -2,7 +2,7 @@
 title: 'Agent Status Update — template (Protocol 26 §3b)'
 status: current
 date: 2026-06-05
-owner: protocol-architect
+owner: gtcx-agentic
 role: protocol-architect
 document_id: OPS-AGENT-STATUS-UPDATE
 tier: standard
