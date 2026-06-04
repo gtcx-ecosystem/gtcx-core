@@ -1,35 +1,20 @@
 ---
 title: 'Executive Brief — gtcx-core'
-status: 'current'
-date: '2026-05-27'
-owner: 'gtcx-core'
-role: 'protocol-architect'
-agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
-trust_score: 60
-autonomy_level: 'permissioned'
-tier: 'standard'
-tags: ['documentation', 'gtm']
-review_cycle: 'on-change'
----
-
----
-
-title: '00 Executive Brief'
-status: 'current'
-date: '2026-05-25'
-owner: 'protocol-architect'
-role: 'protocol-architect'
-tier: 'standard'
-tags: ['docs']
-review_cycle: 'on-change'
-
+status: current
+date: 2026-06-05
+owner: gtcx-core
+role: protocol-architect
+document_id: GTM-EXEC-BRIEF-001
+tier: standard
+tags: ['documentation', 'gtm', 'executive-brief']
+review_cycle: on-change
 ---
 
 # Executive Brief — gtcx-core
 
-> **Status:** Current
-> **Date:** 2026-05-25
-> **Owner:** Protocol Architect
+> **Readiness (2026-06-05):** Lane 5 **GR-T1** (library integrator) · sovereign ecosystem **below GR-T2** · [gtm-readiness index](../audit/gtm-readiness-2026-06-05.md). Do not cite bank-grade **8.9** as engineering or GTM status — [readiness model](../audit/readiness-model.md).
+
+> **Status:** Current · **Owner:** Protocol Architect
 
 ## What It Is
 
@@ -94,7 +79,7 @@ See [01-security-posture.md](./01-security-posture.md) for the complete assessme
 
 ## What's Not Done (Honestly)
 
-**In this repo (library):** Nothing blocking S1 developer adoption. npm Sigstore **21/21 @ 3.1.4** (2026-06-01).
+**In this repo (library):** Nothing blocking **GR-T1** developer adoption. npm Sigstore **21/21 @ 3.1.4** (2026-06-01). Legacy GTM label: **S1 MVP** — see [gtm-reality-check](./gtm-reality-check-2026-06-02.md) for S↔GR-T mapping.
 
 **Ecosystem / sovereign pilot (owned cross-repo — see [16-ecosystem-gtm-alignment](./16-ecosystem-gtm-alignment.md)):**
 

@@ -1,20 +1,29 @@
 ---
-session_id: '2026-06-05-readiness-lanes-gcr'
+session_id: '2026-06-05-protocol-enforcement-hygiene'
 agent: 'gtcx-core-agent'
-focus: 'Five-lane readiness model, GCR, agent sync; CORE-004 blocked XR-402'
+focus: 'P1-P28 runtime enforcement; hygiene H-01–H-09; CORE-004 blocked XR-402'
 ---
 
-# Session: Readiness lanes + GCR + agent centralization
+# Session: Protocol enforcement + repo hygiene
 
-## Recent commits (lane model)
+## Session bootstrap (2026-06-05 UTC)
 
-| SHA       | Summary                                            |
-| --------- | -------------------------------------------------- |
-| `08583fc` | prettierignore KIMI/Codex/Copilot agent-sync drift |
-| `691a75b` | GCR tier/status rollup                             |
-| `0f3647a` | agent readiness guide + anti-drift checks          |
-| `419b436` | lane 2 five internal compliance domains            |
-| `b178f79` | Industry Compliance + GTM-Readiness tiers          |
+- **Command:** `pnpm agent:session-start`
+- **Next work:** CORE-004 — **blocked** (XR-402 ceremony)
+- **Blocked:** yes (release-gated trusted-setup)
+- **Git:** hygiene pass in progress
+
+## Recent commits
+
+| SHA       | Summary                                               |
+| --------- | ----------------------------------------------------- |
+| `f2ba2fb` | P1-P28 runtime enforcement (session-start, hub drift) |
+| `b0557e8` | P22-P28 machine gate + CI                             |
+| `bf641c8` | governance: readiness + agent-sync                    |
+| `691a75b` | GCR tier/status rollup                                |
+| `0f3647a` | five-lane agent guide + anti-drift                    |
+| `419b436` | lane 2 five internal compliance domains               |
+| `b178f79` | Industry Compliance + GTM-Readiness tiers             |
 
 ## Readiness snapshot (2026-06-05)
 
@@ -29,18 +38,30 @@ focus: 'Five-lane readiness model, GCR, agent sync; CORE-004 blocked XR-402'
 
 **SSOT:** `docs/audit/latest.json` · `docs/audit/readiness-model.md` · `docs/agents/readiness-and-audit-lanes.md`
 
-## Protocol 22
+## Protocol 22 / agents
 
-`pnpm agent:next-work` → **CORE-004** — **blocked** (`XR-402` ceremony).
+- **Session start:** `pnpm agent:session-start` (all terminals / LLMs)
+- **Next work:** CORE-004 — blocked XR-402
+- **Verify:** `pnpm agent:protocols:check` · `pnpm readiness:lanes:check`
 
-**External (IC/GCR):** pen-test, SOC 2 letter, npm provenance org policy, ceremony.
+## Hygiene pass (this session)
 
-**GTM (GR):** sovereign stack — testnet, sandbox send, infra pen-test (not library S1).
+| ID  | Item                          | Status   |
+| --- | ----------------------------- | -------- |
+| H-1 | Push unpushed commits         | pending  |
+| H-2 | session.md refresh            | **done** |
+| H-3 | executive brief frontmatter   | **done** |
+| H-4 | executive brief GR-T banner   | **done** |
+| H-5 | gtm-reality-check GR-T labels | **done** |
+| H-6 | internal GTM roadmap row      | **done** |
+| H-7 | execution-roadmap reconcile   | **done** |
+| H-8 | historical audit banners      | **done** |
+| H-9 | gtcx-agile drift note         | **done** |
 
 ## Verification
 
-| Command                         | Result                       |
-| ------------------------------- | ---------------------------- |
-| `pnpm readiness:lanes:check`    | exit 0                       |
-| `pnpm agent:check`              | exit 0                       |
-| `pnpm quality:governance:check` | runs agent + readiness gates |
+| Command                         | Result |
+| ------------------------------- | ------ |
+| `pnpm agent:protocols:check`    | exit 0 |
+| `pnpm readiness:lanes:check`    | exit 0 |
+| `pnpm quality:governance:check` | exit 0 |

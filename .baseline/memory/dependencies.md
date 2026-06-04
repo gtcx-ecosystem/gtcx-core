@@ -14,9 +14,9 @@ No cross-repo link dependencies detected in package.json.
 
 ## Soft Dependencies (Nice to have)
 
-| Needs | From Repo | Status | ETA |
-| ----- | --------- | ------ | --- |
-| —     | —         | —      | —   |
+| Needs                                                        | From Repo  | Status        | ETA           |
+| ------------------------------------------------------------ | ---------- | ------------- | ------------- |
+| Agile audit refresh (6/10 snapshot stale vs five-lane model) | gtcx-agile | informational | owner refresh |
 
 ## Downstream Consumers
 

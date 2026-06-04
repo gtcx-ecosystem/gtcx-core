@@ -1,8 +1,8 @@
 ---
-last_reconciled: 2026-06-03
+last_reconciled: 2026-06-05
 reconciliation_note: >-
-  FA-S1 complete (FA-P0-1–4). Tier 5 technical ~88% done; doc-standard 9.6/10 + repo hygiene P1–P4.
-  Infra validate-all 41/44 mirrored — core Docs Standard gate closed. CORE-004 blocked XR-402.
+  FA-S1 complete. Tier 5 technical ~88% done. S-T5-5 commercial pending (DTF-5.5.2+).
+  Protocol P1-P28 enforcement shipped. CORE-004 blocked XR-402.
 sources:
   - docs/audit/full-audit-2026-06-04.md
   - docs/audit/moat-completion-reconciliation-2026-06-03.md
@@ -42,13 +42,13 @@ sources:
 | ------- | ------------------------------------------ | --------------------------------------- |
 | P1–P4   | Doc truth, trust artifacts, DevEx, signoff | **done**                                |
 | P5      | Supply chain (`@gtcx/ai-eval` provenance)  | **done**                                |
-| **FA**  | Full-audit reconciliation (2026-06-04)     | **active** — FA-S1                      |
+| **FA**  | Full-audit reconciliation (2026-06-04)     | **done** — FA-S1 complete               |
 | **T5**  | Defensibility Tier 5 technical             | **S-T5-4 done** — handoff to commercial |
 | **EXT** | Pen-test, SOC 2, ceremony, GTM             | **deferred**                            |
 
 ---
 
-## P0 — Build graph (FA-S1) — **active**
+## P0 — Build graph (FA-S1) — **complete**
 
 **Source:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) Phase 1 High finding.
 
@@ -88,18 +88,15 @@ sources:
 | DTF-5.4.4       | Protocols E2E per circuit profile ID         | gtcx-protocols `73eaff2b` · core `fc041a6` (`verifyGroth16CommodityOriginKat`) |
 | DTF-5.5.1       | Jurisdiction pack Zod strict CI              | `pnpm jurisdiction:validate-packs` · `EngagementJurisdictionPackSchema`        |
 
-### Next code (after FA-P0-1)
+### Next commercial (S-T5-5 — not in-repo code)
 
-| ID        | Title                                           | Owner                     |
-| --------- | ----------------------------------------------- | ------------------------- |
-| DTF-5.2.3 | zw-diamond + range KATs; 6/6 groth16 cross-impl | **done**                  |
-| DTF-5.3.1 | gh-cocoa-origin profile                         | **done**                  |
-| DTF-5.3.2 | Five-jurisdiction integration fixtures          | **done**                  |
-| DTF-5.3.3 | Minerals board UAT protocol template            | **done**                  |
-| DTF-5.4.1 | CircuitRegistry with semver                     | **done**                  |
-| DTF-5.4.2 | Load test 1000 proofs/min                       | **done**                  |
-| DTF-5.4.3 | Trust portal circuit ID column                  | **done**                  |
-| DTF-5.4.4 | gtcx-protocols E2E per circuit ID               | **done** — ack `73eaff2b` |
+| ID        | Title                                 | Owner                      | Status  |
+| --------- | ------------------------------------- | -------------------------- | ------- |
+| DTF-5.5.2 | Certified pack pipeline               | Legal + protocol-architect | pending |
+| DTF-5.5.4 | Design-partner LOI / regulator letter | GTM                        | pending |
+| DTF-5.5.5 | Evidence index entry                  | quality-evidence-lead      | pending |
+
+Technical milestones DTF-5.1.1–5.5.1 and DTF-5.4.4 are **done** — see Completed table above.
 
 ---
 
@@ -185,12 +182,13 @@ cd rust && cargo test -p gtcx-zkp --lib
 ## Agent selection
 
 ```bash
-pnpm agent:next-work          # expect FA-P0-1 until done
+pnpm agent:next-work          # expect DTF-5.5.2 or CORE-004 blocked
 pnpm agent:work-selection:check
+pnpm agent:protocols:check
 ```
 
 Refresh `.baseline/memory/session.md` after each milestone.
 
 ---
 
-_Last updated: 2026-06-04 — reconciled with full-audit-2026-06-04_
+_Last updated: 2026-06-05 — hygiene reconcile; FA-S1 complete; S-T5-5 commercial active_

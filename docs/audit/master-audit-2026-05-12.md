@@ -27,6 +27,7 @@ review_cycle: 'quarterly'
 
 # gtcx-core — Master Audit & Bank-Grade Certification
 
+> **Lane 4 (bank-grade) historical snapshot:** Current five-lane indexes → [readiness-model.md](./readiness-model.md) · [bank-grade-2026-06-05.md](./bank-grade-2026-06-05.md). Do not cite composite scores as engineering or GTM readiness.
 > **Date:** 2026-05-12
 > **Repo:** `gtcx-ecosystem/gtcx-core`
 > **Auditor:** Kimi Code CLI (root agent)

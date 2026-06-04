@@ -42,14 +42,15 @@ caps_fired: 0
 
 # gtcx-core — Master Audit & Bank-Grade Certification
 
-**Date:** 2026-05-27 (delta audit — 1 commit since 2026-05-26)
-**Repo:** `gtcx-ecosystem/gtcx-core`
-**Auditor:** Kimi Code CLI (root agent)
-**Methodology:** `gtcx-ecosystem/tools/audit-framework/forensic-master-prompt.md`
-**Reference framework:** `gtcx-ecosystem/tools/audit-framework/SCORING_FRAMEWORK.md`
-**Prior master audit:** `master-audit-2026-05-26.md` (8.9/10)
-**Delta baseline:** `master-audit-2026-05-26.md` (commit `2e74573`)
-**Current HEAD:** `54903f3`
+> **Lane 4 (bank-grade) historical snapshot:** Current five-lane indexes → [readiness-model.md](./readiness-model.md) · [bank-grade-2026-06-05.md](./bank-grade-2026-06-05.md). Do not cite **8.9 composite** as engineering (lane 1) or GTM (lane 5).
+> **Date:** 2026-05-27 (delta audit — 1 commit since 2026-05-26)
+> **Repo:** `gtcx-ecosystem/gtcx-core`
+> **Auditor:** Kimi Code CLI (root agent)
+> **Methodology:** `gtcx-ecosystem/tools/audit-framework/forensic-master-prompt.md`
+> **Reference framework:** `gtcx-ecosystem/tools/audit-framework/SCORING_FRAMEWORK.md`
+> **Prior master audit:** `master-audit-2026-05-26.md` (8.9/10)
+> **Delta baseline:** `master-audit-2026-05-26.md` (commit `2e74573`)
+> **Current HEAD:** `54903f3`
 
 ---
 

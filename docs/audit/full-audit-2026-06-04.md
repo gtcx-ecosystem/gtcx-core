@@ -17,6 +17,8 @@ audit_date: '2026-06-04'
 
 # Full Audit — gtcx-core
 
+> **Five-lane model (since 2026-06-05):** Current readiness → [readiness-model.md](./readiness-model.md) · [latest.json](./latest.json). This 2026-06-04 report is lane-1 engineering + sprint context.
+
 **Date:** 2026-06-04  
 **Branch:** `main` (2 commits ahead of `origin/main` — verification integration + workplan)  
 **Method:** Cursor `/full-audit` — 6-phase pipeline with in-session verification (Protocol 27)  

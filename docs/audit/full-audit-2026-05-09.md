@@ -27,6 +27,8 @@ review_cycle: 'quarterly'
 
 # Full Audit — gtcx-core
 
+> **Historical audit (superseded):** Five-lane readiness since 2026-06-05 → [readiness-model.md](./readiness-model.md) · [latest.json](./latest.json). Retained as forensic evidence only.
+
 > **Status:** Superseded — current composite synthesis lives in [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) (9.5/10, 24/24 internal items done) and [10-10-roadmap-2026-05-19.md](./10-10-roadmap-2026-05-19.md). This 2026-05-09 6-phase forensic record is retained as historical evidence of the prior baseline.
 
 **Date:** 2026-05-09

@@ -56,4 +56,4 @@ Forensic audits and readiness scorecards for `gtcx-core`, organized in **five la
 | `master-audit-*.md`               | 4 Bank-grade                |
 | `remediation-*.md`                | Cross-lane tracker          |
 
-Historical `master-audit-*` files before 2026-06-03 remain for trend analysis; do not cite as current without checking lane indexes.
+Historical `master-audit-*` and `full-audit-*` files before 2026-06-05 remain for trend analysis. **Bannered** snapshots (five-lane pointer): `full-audit-2026-05-09`, `full-audit-2026-06-01`, `full-audit-2026-06-04`, `master-audit-2026-05-12`, `master-audit-2026-05-27`, `10-10-roadmap-2026-05-25`. **Current lane indexes:** dated 2026-06-05 in filenames. **Ecosystem agile audits:** see [ecosystem-audit-catalog-2026-06-05.md](./ecosystem-audit-catalog-2026-06-05.md) — `gtcx-agile` 6/10 snapshot is informational; owner repo refresh pending.

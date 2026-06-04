@@ -25,7 +25,7 @@ review_cycle: 'on-change'
 | --------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | **Internal completion**     | **9.5 / 10**   | All 24/24 engineering-controlled items closed ([internal-completion-audit-2026-05-21](../audit/internal-completion-audit-2026-05-21.md)) |
 | **Bank-grade composite**    | **8.9 / 10**   | Includes external attestation gaps ([master-audit-2026-05-27](../audit/master-audit-2026-05-27.md))                                      |
-| **GTM stage (buyer today)** | **S2 Partial** | Library integrator + sovereign sandbox; not S3 enterprise procurement ([GTM assessment](#gtm-stage-snapshot) below)                      |
+| **GTM stage (buyer today)** | **GR-T1** (S1) | Library integrator ready; sovereign **below GR-T2** ([GTM assessment](#gtm-stage-snapshot) below)                                        |
 
 **This roadmap** closes the remaining **customer-visible doc/devEx gaps** and advances **trust automation** (ai-eval). It does **not** claim bank-grade 10.0 — that requires M3 external validation in the 10-10 program.
 
@@ -33,16 +33,16 @@ review_cycle: 'on-change'
 
 ## Reconciliation status (2026-06-01)
 
-| Surface                                              | Status         | Notes                                                                                |
-| ---------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------ |
-| `README.md`                                          | ✅ Reconciled  | Odd-length-hex blocker removed; 21/21 npm; last reviewed 2026-06-01 (`6456bfa`)      |
-| `docs/governance/trust-portal.md`                    | ✅ Reconciled  | Substrate packages live on npm (0.2.0 / 0.2.2)                                       |
-| `docs/devops/runbooks/quality-runbook.md`            | ✅ Reconciled  | Package counts → 21 public                                                           |
-| `docs/agile/.../engagement-readiness-sprint-roadmap` | ✅ Reconciled  | Task 2.4 complete                                                                    |
-| `docs/overview/README.md`                            | 🚧 This sprint | Still claims "release pending"; fixed in this pass                                   |
-| `docs/audit/full-audit-2026-06-01.md`                | 🚧 This sprint | Finding #1/#2 marked closed post-`6456bfa`                                           |
-| `docs/gtm/*` (pack)                                  | ✅ Current     | Evidence pack; execution plan: [execution-roadmap.md](../audit/execution-roadmap.md) |
-| `docs/roadmap.md` §4.10                              | ✅ Added       | ai-eval trust scorecard moat track                                                   |
+| Surface                                              | Status        | Notes                                                                                |
+| ---------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------ |
+| `README.md`                                          | ✅ Reconciled | Odd-length-hex blocker removed; 21/21 npm; last reviewed 2026-06-01 (`6456bfa`)      |
+| `docs/governance/trust-portal.md`                    | ✅ Reconciled | Substrate packages live on npm (0.2.0 / 0.2.2)                                       |
+| `docs/devops/runbooks/quality-runbook.md`            | ✅ Reconciled | Package counts → 21 public                                                           |
+| `docs/agile/.../engagement-readiness-sprint-roadmap` | ✅ Reconciled | Task 2.4 complete                                                                    |
+| `docs/overview/README.md`                            | ✅ Reconciled | Five-lane readiness banner; npm 21/21 (2026-06-05)                                   |
+| `docs/audit/full-audit-2026-06-01.md`                | ✅ Reconciled | Finding #1/#2 closed post-`6456bfa`; five-lane banner added (2026-06-05)             |
+| `docs/gtm/*` (pack)                                  | ✅ Current    | Evidence pack; execution plan: [execution-roadmap.md](../audit/execution-roadmap.md) |
+| `docs/roadmap.md` §4.10                              | ✅ Added      | ai-eval trust scorecard moat track                                                   |
 
 ---
 

@@ -25,7 +25,7 @@ aligned_with: 'gtcx-infrastructure/docs/gtm/plans/global-south-10x-plan.md'
 
 ## PHASE 1 — Stage assessment
 
-### S0: Prototype — **Ready**
+### S0 / GR-T0: Prototype — **Ready**
 
 | Dimension   | Assessment                                                                                |
 | ----------- | ----------------------------------------------------------------------------------------- |
@@ -39,7 +39,7 @@ aligned_with: 'gtcx-infrastructure/docs/gtm/plans/global-south-10x-plan.md'
 
 ---
 
-### S1: MVP — **Ready**
+### S1 / GR-T1: MVP — **Ready** (library today)
 
 | Dimension   | Assessment                                                                                            |
 | ----------- | ----------------------------------------------------------------------------------------------------- |
@@ -51,11 +51,11 @@ aligned_with: 'gtcx-infrastructure/docs/gtm/plans/global-south-10x-plan.md'
 
 **Evidence:** npm release [26778909174](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26778909174); downstream pins in `gtcx-protocols` / `gtcx-infrastructure` lockfiles.
 
-**Deal killers:** None at S1 for a **developer** integrating the library.
+**Deal killers:** None at GR-T1 for a **developer** integrating the library.
 
 ---
 
-### S2: Pilot Ready — **Partially Ready** (library only) / **Not Ready** (sovereign deal)
+### S2 / GR-T2: Pilot Ready — **Partially Ready** (library only) / **Not Ready** (sovereign deal)
 
 | Dimension   | Assessment                                                                                                                             |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -77,7 +77,7 @@ aligned_with: 'gtcx-infrastructure/docs/gtm/plans/global-south-10x-plan.md'
 
 ---
 
-### S3: General Availability — **Not Ready**
+### S3 / GR-T3: General Availability — **Not Ready**
 
 **Deal killers:** No standard enterprise MSA for the library alone; no billing; no self-service hosted product; regulator path not closed; downstream products still carry custom sovereign work.
 
@@ -86,7 +86,7 @@ aligned_with: 'gtcx-infrastructure/docs/gtm/plans/global-south-10x-plan.md'
 
 ---
 
-### S4: Enterprise — **Not Ready**
+### S4 / GR-T4: Enterprise — **Not Ready**
 
 **Deal killers:** No SOC 2 Type I letter in hand; no delivered pen-test report; no SSO/audit product surface (library-only).
 
@@ -96,9 +96,9 @@ _Assessment stops here per framework (two consecutive Not Ready)._
 
 ## PHASE 2 — Verdict
 
-**Current GTM stage (gtcx-core as product):** **S1 MVP** — a developer can `pnpm add @gtcx/crypto` and integrate with documented primitives and npm Sigstore provenance in under one day.
+**Current GTM stage (gtcx-core as product):** **GR-T1** (S1 MVP) — a developer can `pnpm add @gtcx/crypto` and integrate with documented primitives and npm Sigstore provenance in under one day.
 
-**Current GTM stage (ecosystem deal using gtcx-core):** **S2 Partially Ready** — technical foundation is there; **trust and operational proof live in gtcx-infrastructure**, not in this repo.
+**Current GTM stage (ecosystem deal using gtcx-core):** **below GR-T2** (S2 Partially Ready) — technical foundation is there; **trust and operational proof live in gtcx-infrastructure**, not in this repo.
 
 **First realistic deal (90 days):** **ZWCMP 30-day design partner / pilot** (Zimbabwe commodity verification) sold as **GTCX Cloud/Sovereign + protocols rail**, not as npm library license.
 
