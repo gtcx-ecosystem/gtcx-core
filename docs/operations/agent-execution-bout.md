@@ -12,7 +12,7 @@ review_cycle: on-change
 
 # Agent execution bout
 
-**Replaces ad-hoc `execute-roadmap` for in-repo implementation drain.** Planning/reconcile still uses the [execute-roadmap framework](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/tools/roadmap/roadmap-framework) when audits must be merged into `docs/audit/execution-roadmap.md` — agents **ship work** via the bout loop below.
+**Drains the launch-focus work set** — see [agent-launch-focus.md](agent-launch-focus.md) (GTM north star + full implement/plan/human buckets). Replaces ad-hoc `execute-roadmap` for session implementation. Use [execute-roadmap](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/tools/roadmap/roadmap-framework) only when audit findings must be merged into `docs/audit/execution-roadmap.md`.
 
 ## What it is
 

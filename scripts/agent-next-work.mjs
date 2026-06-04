@@ -12,6 +12,7 @@ import {
   readRepoContext,
   writeBoutState,
 } from './lib/agent-execution-bout.mjs';
+import { attachLaunchFocus, writeLaunchFocusState } from './lib/agent-launch-focus.mjs';
 import {
   OPS_DOCS_QUEUE,
   TIER5_MILESTONES,
@@ -425,16 +426,23 @@ const storyId =
 const title = result.next?.title ?? '';
 const ctx = readRepoContext(REPO_ROOT);
 const base = { ok: true, repo: THIS_REPO, ...result };
-const withBout = attachExecutionBout(base, {
+const withLaunch = attachLaunchFocus(base, REPO_ROOT);
+writeLaunchFocusState(REPO_ROOT, withLaunch.launchFocus);
+const withBout = attachExecutionBout(withLaunch, {
   repoRoot: REPO_ROOT,
-  nextWork: base,
+  nextWork: withLaunch,
+  launchFocus: withLaunch.launchFocus,
   session: ctx.session,
   workplan: ctx.workplan,
 });
 writeBoutState(REPO_ROOT, withBout.executionBout);
 console.log(
   JSON.stringify(
-    enrichWithPersona(withBout, { repo: THIS_REPO, storyId, title }),
+    enrichWithPersona(withBout, {
+      repo: THIS_REPO,
+      storyId: withBout.launchFocus?.activeWorkSet?.[0]?.storyId ?? storyId,
+      title: withBout.launchFocus?.activeWorkSet?.[0]?.title ?? title,
+    }),
     null,
     2,
   ),

@@ -54,6 +54,8 @@ const requiredScripts = [
   'agent:session-start',
   'agent:bout',
   'agent:bout:check',
+  'agent:reconcile-launch',
+  'agent:launch:check',
   'agent:work-selection:check',
   'agent:coordination:check',
   'agent:hub-drift:check',
@@ -70,6 +72,10 @@ requireFile('docs/agents/agent-protocols-hub-snapshot.json', 'hub snapshot');
 requireFile('docs/operations/agent-attestation-template.md', 'attestation template');
 requireFile('scripts/agent-session-start.mjs', 'session-start script');
 requireFile('docs/operations/agent-execution-bout.md', 'execution bout normative doc');
+requireFile('docs/operations/agent-launch-focus.md', 'launch focus normative doc');
+requireFile('scripts/lib/agent-launch-focus.mjs', 'launch focus library');
+requireFile('.agent/launch-focus-pointer.md', 'launch focus pointer');
+requireContains('AGENTS.md', ['agent-launch-focus.md'], 'AGENTS launch focus');
 requireFile('scripts/lib/agent-execution-bout.mjs', 'execution bout library');
 requireFile('.agent/execution-bout-pointer.md', 'execution bout pointer');
 requireFile('.cursor/rules/agent-execution-bout.mdc', 'execution bout cursor rule');
@@ -98,6 +104,7 @@ if (p22?.status === 'established') {
   requireContains('.agent/base.md', ['agent:session-start', 'agent:next-work'], 'base session start');
   runScript('agent:work-selection:check');
   runScript('agent:bout:check');
+  runScript('agent:launch:check');
 }
 
 // --- P24 ---

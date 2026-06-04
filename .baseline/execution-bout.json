@@ -5,19 +5,32 @@
   "docPath": "docs/operations/agent-execution-bout.md",
   "id": "bout-2026-06-04-auto",
   "mode": "auto",
-  "provisionedAt": "2026-06-04T15:49:55.685Z",
+  "provisionedAt": "2026-06-04T15:53:19.077Z",
   "repo": "gtcx-core",
   "frame": "development",
-  "backlogClear": true,
+  "launchMode": "implement",
+  "backlogClear": false,
   "stories": [
     {
       "storyId": "CORE-004",
-      "title": "Optional Class R: publish ZKP transcript under artifacts/trusted-setup/",
+      "title": "Trusted-setup transcript publish + KAT pin closeout",
       "sprint": null,
       "workClass": "ops-docs",
       "authorityClass": "S",
-      "priority": "P3",
-      "source": "repo-completable",
+      "source": "ceremony",
+      "paths": [
+        "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md",
+        "artifacts/trusted-setup/README.md"
+      ],
+      "status": "pending"
+    },
+    {
+      "storyId": "OI-X02",
+      "title": "File gtcx-infrastructure outbound ER-1-08 hub ack",
+      "sprint": null,
+      "workClass": "ops-docs",
+      "authorityClass": "S",
+      "source": "ecosystem-open",
       "status": "pending"
     }
   ],

@@ -75,6 +75,8 @@
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:bout": "node scripts/agent-execution-bout.mjs",
     "agent:bout:check": "node scripts/check-agent-execution-bout.mjs",
+    "agent:reconcile-launch": "node scripts/reconcile-launch-state.mjs",
+    "agent:launch:check": "node scripts/check-agent-launch-focus.mjs",
     "agent:work-selection:check": "node scripts/check-agent-work-selection.mjs",
     "agent:protocols:check": "node ./tools/check-agent-protocols.mjs",
     "agent:universal:check": "node ../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs --repo-only",

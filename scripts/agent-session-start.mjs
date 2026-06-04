@@ -112,14 +112,19 @@ const proceedBrief = {
 };
 
 const executionBout = nextWork?.executionBout ?? null;
+const launchFocus = nextWork?.launchFocus ?? null;
 
 const output = {
   startedAt: now,
   gitStatus,
   nextWork,
   executionBout,
+  launchFocus,
   proceedBrief: {
     ...proceedBrief,
+    launchOutcome: launchFocus?.northStar?.outcome,
+    sessionMode: launchFocus?.sessionMode,
+    workSetSummary: launchFocus?.workSetCounts,
     boutScope:
       executionBout?.stories?.length > 0
         ? `Drain ${executionBout.stories.length} Class R story(ies) before bout check-in`
@@ -128,6 +133,7 @@ const output = {
   },
   sessionPath: '.baseline/memory/session.md',
   boutStatePath: '.baseline/execution-bout.json',
+  launchFocusPath: '.baseline/launch-focus.json',
   template: 'docs/operations/agent-proceed-brief-template.md',
   attestation: 'docs/operations/agent-attestation-template.md',
 };
@@ -138,6 +144,22 @@ if (JSON_OUT) {
 }
 
 log('=== GTCX agent session start (provider-agnostic) ===\n');
+if (launchFocus) {
+  log('--- LAUNCH FOCUS (GTM — read first; no audit needed) ---\n');
+  log(`**Outcome:** ${launchFocus.northStar.outcome}`);
+  log(
+    `**GTM:** ${launchFocus.northStar.gtmTier.library} library · sovereign ${launchFocus.northStar.gtmTier.ecosystemSovereign}`,
+  );
+  log(`**Session mode:** ${launchFocus.sessionMode.toUpperCase()}`);
+  log(
+    `**Work set:** ${launchFocus.workSetCounts.implement} implement · ${launchFocus.workSetCounts.plan} plan · ${launchFocus.workSetCounts.human} human`,
+  );
+  const show = launchFocus.activeWorkSet?.slice(0, 10) ?? [];
+  for (const w of show) {
+    log(`  - ${w.storyId}: ${w.title}`);
+  }
+  log(`**State:** .baseline/launch-focus.json\n`);
+}
 log('Git status:\n', gitStatus || '(clean)\n');
 log('Next work (P22):', JSON.stringify(nextWork?.next ?? nextWork, null, 2));
 log('\n--- Proceed Brief (P26 + P28) — emit to operator, then IMPLEMENT ---\n');

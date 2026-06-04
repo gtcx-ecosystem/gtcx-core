@@ -1,26 +1,39 @@
 ---
-updated: 2026-06-06
+updated: 2026-06-04
 owner: gtcx-core
-status: backlog-clear-commercial-ceiling
+status: launch-focus-implement
 ---
 
-# Auto-dev state — Tier 5 commercial (2026-06-06)
+# Auto-dev state — launch / GTM (machine-generated)
 
-## P22 (development frame)
+**Do not hand-edit** — run `pnpm agent:reconcile-launch`.
 
-**`backlogClear: true`** after **DTF-5.5.2**. Ceiling: **DTF-5.5.4** LOI/regulator letter (Class **S**).
+## North star
 
-| Priority | Item                                   | Owner       | Class |
-| -------- | -------------------------------------- | ----------- | ----- |
-| P1       | **DTF-5.5.4** LOI / regulator letter   | GTM / Legal | **S** |
-| P2       | CORE-004 transcript publish (optional) | Engineering | R     |
+- **Outcome:** Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.
+- **GTM library:** GR-T1 · **Sovereign:** below-GR-T2
 
-## Verification
+## Session mode: **IMPLEMENT**
 
-| Command                               | Exit                                     |
-| ------------------------------------- | ---------------------------------------- |
-| `pnpm certified-pack:build-manifest`  | **0**                                    |
-| `pnpm certified-pack:verify-manifest` | **0**                                    |
-| `pnpm agent:next-work`                | **0** — `approvalNeeded`: DTF-5.5.4 only |
+| Bucket    | Count |
+| --------- | ----- |
+| implement | 2     |
+| plan      | 5     |
+| human     | 1     |
 
-**Witness:** [`from-gtcx-core-tier5-commercial-unblock-2026-06-06.md`](../operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md)
+## Implement queue
+
+- **CORE-004** — Trusted-setup transcript publish + KAT pin closeout
+- **OI-X02** — File gtcx-infrastructure outbound ER-1-08 hub ack
+
+## Plan queue (when implement empty)
+
+- **LAUNCH-PLAN-01** — Reconcile machine launch state (auto-dev + launch-focus) (`pnpm agent:reconcile-launch`)
+- **LAUNCH-PLAN-02** — Refresh execution-roadmap open items + executive summary
+- **LAUNCH-PLAN-03** — Update cross-repo bridge Latest row (GTM critical path)
+- **LAUNCH-PLAN-04** — File or refresh infra outbound OI-X02 (ER-1-08 hub ack)
+- **LAUNCH-PLAN-05** — Probe readiness lanes + fix index drift blocking GTM claims (`pnpm readiness:lanes:check`)
+
+## Human gates
+
+- **EXT-INF-002** — Live-stack pen-test (vendor) — infrastructure owner (gtcx-infrastructure)

@@ -115,17 +115,41 @@ function markCurrent(stories, currentId) {
  * @param {string} [ctx.session]
  * @param {string} [ctx.workplan]
  */
-export function buildExecutionBout(ctx) {
-  const { repoRoot, nextWork, session = '', workplan = '' } = ctx;
-  const head = storyFromP22Next(nextWork?.next);
-  const currentStoryId = head?.storyId ?? nextWork?.next?.storyId ?? null;
+function storiesFromLaunchFocus(launchFocus) {
+  const bucket =
+    launchFocus?.sessionMode === 'plan'
+      ? launchFocus?.workSet?.plan
+      : launchFocus?.workSet?.implement;
+  if (!bucket?.length) return [];
+  return bucket.map((item) => ({
+    storyId: item.storyId,
+    title: item.title,
+    sprint: item.sprint ?? null,
+    workClass: item.workClass ?? 'ops-docs',
+    authorityClass: item.authorityClass ?? 'S',
+    source: item.lane ?? 'launch-focus',
+    command: item.command,
+    paths: item.paths,
+  }));
+}
 
-  const implementable = dedupeStories([
-    ...(head ? [head] : []),
-    ...tier5PendingStories(session, workplan),
-    ...opsPendingStories(session),
-    ...(nextWork?.backlogClear ? [repoCompletableStory(nextWork)].filter(Boolean) : []),
-  ]);
+export function buildExecutionBout(ctx) {
+  const { repoRoot, nextWork, session = '', workplan = '', launchFocus } = ctx;
+  const head = storyFromP22Next(nextWork?.next);
+  const currentStoryId =
+    head?.storyId ?? nextWork?.next?.storyId ?? launchFocus?.activeWorkSet?.[0]?.storyId ?? null;
+
+  const fromLaunch = storiesFromLaunchFocus(launchFocus);
+  const implementable = dedupeStories(
+    fromLaunch.length > 0
+      ? [...(head ? [head] : []), ...fromLaunch]
+      : [
+          ...(head ? [head] : []),
+          ...tier5PendingStories(session, workplan),
+          ...opsPendingStories(session),
+          ...(nextWork?.backlogClear ? [repoCompletableStory(nextWork)].filter(Boolean) : []),
+        ],
+  );
 
   const humanOnly = humanOnlyStories(nextWork);
   const classRRemaining = implementable.filter((s) => s.status !== 'done');
@@ -142,7 +166,8 @@ export function buildExecutionBout(ctx) {
     provisionedAt: new Date().toISOString(),
     repo: 'gtcx-core',
     frame: nextWork?.frame ?? 'development',
-    backlogClear: Boolean(nextWork?.backlogClear),
+    launchMode: launchFocus?.sessionMode ?? 'implement',
+    backlogClear: Boolean(nextWork?.backlogClear) && launchFocus?.sessionMode !== 'plan',
     stories: markCurrent(implementable, currentStoryId),
     humanOnly,
     currentStoryId,
@@ -164,7 +189,9 @@ export function buildExecutionBout(ctx) {
       'operator said stop',
     ],
     agentInstructions: [
-      'Execution bout is provisioned — drain Class R stories in `stories[]` before bout check-in.',
+      launchFocus?.sessionMode === 'plan'
+        ? 'PLAN bout — drain workSet.plan (reconcile roadmaps/coordination) before check-in.'
+        : 'Execution bout is provisioned — drain Class R stories in `stories[]` before bout check-in.',
       'After each story: micro-commit, update session.md row, re-run `pnpm agent:next-work`.',
       `Progress Status Update in chat every ${2} completed stories (short Done bullets).`,
       'Do NOT end the session after one story while `remainingCount` > 0.',
@@ -191,7 +218,7 @@ export function buildExecutionBout(ctx) {
 }
 
 export function attachExecutionBout(nextWork, ctx) {
-  const bout = buildExecutionBout(ctx);
+  const bout = buildExecutionBout({ ...ctx, launchFocus: ctx.launchFocus ?? nextWork?.launchFocus });
   const merged = { ...nextWork, executionBout: bout };
 
   if (nextWork?.backlogClear && Array.isArray(nextWork.agentInstructions)) {

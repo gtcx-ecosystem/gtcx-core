@@ -150,6 +150,9 @@ jobs:
       - name: Agent execution bout provisioned (P22 extension)
         run: pnpm run agent:bout:check
 
+      - name: Agent launch focus provisioned (GTM work set)
+        run: pnpm run agent:launch:check
+
       - name: Agent protocols adoption (P1–P28)
         run: pnpm run agent:protocols:check
 

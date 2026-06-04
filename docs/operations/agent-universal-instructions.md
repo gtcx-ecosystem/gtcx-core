@@ -83,6 +83,10 @@ Repos with bout wiring provision `executionBout` on every `agent:session-start` 
 
 **`execute-roadmap`** is for **planning/reconcile** only — not session implementation drain.
 
+### Launch focus (GTM north star — gtcx-core and wired repos)
+
+**SoR:** `.baseline/launch-focus.json` on session start. Full **work set** (implement / plan / human) — not one story. **PLAN mode** when implement queue empty: reconcile roadmaps and coordination (Class R), do not go idle or ask for audits.
+
 ---
 
 ## 3. Phase 4 — Persona (mandatory)

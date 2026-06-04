@@ -1,0 +1,18 @@
+---
+description: Launch focus — GTM north star and full work set; plan mode when implement empty
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Launch focus (GTM)
+
+Read `docs/operations/agent-launch-focus.md` first every session.
+
+After `pnpm agent:session-start`, use JSON `launchFocus`:
+
+1. **Goal:** Foundation done so sibling repos ship apps → GTM (GR-T2+). Not "run audit to find work."
+2. **Work set:** `workSet.implement` + `workSet.plan` + `workSet.human` — not a single story.
+3. **PLAN mode:** When implement queue empty, drain `workSet.plan` (reconcile launch, roadmaps, coordination) — do not go idle.
+4. **Bout** drains implement or plan per `sessionMode`.
+5. **Forbidden:** "Run master-audit/execute-roadmap first"; story menus; treating gtcx-core as the customer-facing app.
