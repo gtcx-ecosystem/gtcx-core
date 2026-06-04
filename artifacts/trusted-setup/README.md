@@ -16,7 +16,13 @@
 cd rust && cargo test -p gtcx-zkp --features trusted-setup-verify --release
 ```
 
-When `transcript.seed` is published, CI will add a gate that re-derives each circuit VK and compares to `artifacts/kat/*.kat.json` `vk_hash` fields.
+When `transcript.seed` is published, CI runs the KAT pin test:
+
+```bash
+cargo test -p gtcx-zkp --features trusted-setup-verify --release -- groth16_kat_pins_match_published_transcript
+```
+
+Manifest template: [docs/audit/evidence/trusted-setup-manifest.template.json](../../docs/audit/evidence/trusted-setup-manifest.template.json).
 
 ## Evidence index
 

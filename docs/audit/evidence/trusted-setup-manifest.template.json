@@ -1,0 +1,8 @@
+{
+  "ceremony_id": "ceremony:ZKP-GROTH16-PLACEHOLDER",
+  "transcript_sha256": "<sha256 of artifacts/trusted-setup/transcript.seed>",
+  "published_at": "YYYY-MM-DD",
+  "participants": 0,
+  "circuits": ["GciThreshold", "AssetOwnership", "LocationRegion", "CommodityOrigin"],
+  "kat_pin_gate": "cargo test -p gtcx-zkp --features trusted-setup-verify --release -- groth16_kat_pins_match_published_transcript"
+}

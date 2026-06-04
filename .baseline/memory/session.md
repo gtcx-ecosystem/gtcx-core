@@ -1,16 +1,16 @@
 ---
 session_id: '2026-06-04-execute-roadmap'
 agent: 'gtcx-core-agent'
-focus: 'OPS-AUDIT-FM done; CORE-004 blocked XR-402; push pending operator'
+focus: 'CORE-004 partial — KAT pin gate wired; Class R transcript publish'
 ---
 
-# Session: execute-roadmap + hygiene
+# Session: execute-roadmap + CORE-004
 
 ## State (2026-06-04)
 
-- **Git:** `main` ahead of `origin/main` by 7 commits (push blocked in agent sandbox)
-- **Next work (P22):** CORE-004 — **blocked** XR-402 ceremony (OPS-AUDIT-FM **done**)
-- **In-repo automatable:** exhausted; OI-X02 outbound filed (await gtcx-infrastructure)
+- **Git:** KAT pin slice ready to commit/push
+- **Next work (P22):** backlogClear — **Class R** publish `artifacts/trusted-setup/transcript.seed` + manifest
+- **CORE-004:** engineering partial (trusted-setup-verify CI + evidence); KAT pin test skips until seed published
 
 ## Completed this session
 

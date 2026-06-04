@@ -122,6 +122,12 @@ const TIER5_MILESTONES = [
     workClass: 'code',
   },
   {
+    id: 'DTF-5.5.2',
+    title: 'Certified pack pipeline (signed manifest)',
+    sprint: 'S-T5-5',
+    workClass: 'ops-docs',
+  },
+  {
     id: 'DTF-5.5.5',
     title: 'Evidence index entry (Tier 5 technical exit)',
     sprint: 'S-T5-5',
@@ -392,64 +398,110 @@ function selectOpsDocsFallback(session = '') {
   return null;
 }
 
-/** When automatable in-repo work is exhausted — one blocked priority, no menus (P26). */
+function certifiedPackManifestReady() {
+  const latest = join(
+    REPO_ROOT,
+    'docs/audit/evidence/certified-pack-manifest-latest.json'
+  );
+  try {
+    readFileSync(latest, 'utf8');
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** When automatable in-repo work is exhausted — commercial ceiling + Class R hygiene (P26). */
 function selectBacklogClearGuidance() {
+  const commercialDoc =
+    'docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md';
   const blockerDoc =
     'docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md';
+  const packDone = certifiedPackManifestReady();
+
   return {
     ok: true,
-    backlogClear: true,
-    automatableExhausted: true,
+    backlogClear: !packDone ? false : true,
+    automatableExhausted: packDone,
+    certificationCeiling: 'tier-5-commercial',
     frame: 'development',
     protocol: '22-agent-work-selection',
-    message:
-      'No automatable in-repo code or ops-docs. CORE-004 engineering gate done; ZKP transcript publish is Class R.',
-    next: {
-      track: 'B',
-      handoff: 'CORE-004',
-      milestone: 'CORE-004',
-      title: 'D3 M3.2 trusted-setup transcript verify',
-      owner: 'gtcx-core',
-      blocked: true,
-      blocker: 'ZKP trusted-setup transcript publish — release-gated (INF-86 XR-402 KMS is done)',
-    },
-    nextPriority: {
-      owner: 'gtcx-core',
-      action:
-        'Class R: publish ZKP ceremony transcript.seed + manifest under artifacts/trusted-setup/; then add KAT vk_hash pin CI gate.',
-      outbound: blockerDoc,
-      because:
-        'INF-86 XR-402 (protocols KMS) is done — distinct from D3 Groth16 transcript. Engineering tests already pass.',
-    },
+    message: packDone
+      ? 'Tier 5 technical complete. Commercial ceiling: DTF-5.5.4 LOI (Class S). DTF-5.5.2 pipeline shipped.'
+      : 'Run DTF-5.5.2 certified pack pipeline (Class R) before commercial witness-only mode.',
+    witness: commercialDoc,
+    next: packDone
+      ? {
+          storyId: 'DTF-5.5.4',
+          title: 'Design-partner LOI or regulator letter',
+          status: 'awaiting-human',
+          blocked: true,
+          blocker: 'Class S — GTM / Legal / sovereign program',
+          owner: 'Human / GTM',
+          implementationClass: 'external',
+        }
+      : {
+          storyId: 'DTF-5.5.2',
+          title: 'Certified pack pipeline (content-addressed manifest)',
+          status: 'in_progress',
+          blocked: false,
+          owner: 'gtcx-core',
+          implementationClass: 'ops-docs',
+        },
+    nextPriority: packDone
+      ? {
+          owner: 'Human / GTM',
+          action:
+            'DTF-5.5.4 — file redacted LOI or regulator letter in docs/audit/evidence/ (Class S); intelligence/protocols witness only',
+          outbound: commercialDoc,
+          because: 'Tier 5 commercial gate 5-C2 — engineering pipeline (5.5.2) complete',
+        }
+      : {
+          owner: 'gtcx-core',
+          action:
+            'Class R: pnpm certified-pack:build-manifest && pnpm certified-pack:verify-manifest (in-session)',
+          outbound: 'docs/operations/certified-pack-pipeline.md',
+          because: 'DTF-5.5.2 automatable commercial pipeline before LOI gate',
+        },
     humanOnly: [
       {
         storyId: 'DTF-5.5.4',
         title: 'Design-partner LOI or regulator letter',
-        authorityClass: 'R',
-      },
-      {
-        storyId: 'DTF-5.5.2',
-        title: 'Certified pack pipeline (signed manifest)',
-        authorityClass: 'R',
+        authorityClass: 'S',
+        owner: 'Human / GTM',
       },
     ],
+    repoCompletable: packDone
+      ? {
+          storyId: 'CORE-004',
+          action: 'Optional Class R: publish ZKP transcript under artifacts/trusted-setup/',
+          priority: 'P3',
+        }
+      : {
+          storyId: 'DTF-5.5.2',
+          action: 'pnpm certified-pack:build-manifest && pnpm certified-pack:verify-manifest',
+          priority: 'P2',
+        },
     deferred: [
-      'DTF-5.5.3 predicate-gated export keys (optional, deferred)',
-      'Pen-test vendor engagement (EXT-INF)',
+      'DTF-5.5.3 predicate-gated export keys (optional)',
+      'Production manifest Ed25519 via CSP ceremony (Legal)',
+      blockerDoc,
     ],
     selection: {
-      tier: 'external',
-      reason:
-        'Automatable Tier 5 technical + ops-docs complete. CORE-004 blocked — witness in P24 doc; do not ask operator to pick backlog.',
+      tier: packDone ? 'external-attestation' : 'ops-docs',
+      reason: packDone
+        ? 'DTF-5.5.2 pipeline done; Tier 5 commercial waits on LOI/regulator letter (5.5.4).'
+        : 'Execute DTF-5.5.2 certified pack manifest before commercial witness mode.',
     },
     statusUpdate: {
-      done:
-        'OPS-AUDIT-FM + DTF-5.5.5 + CORE-004 `trusted-setup-verify` CI gate (exit 0 in-session)',
-      nextPriority: `**Class R** — publish ZKP transcript to \`artifacts/trusted-setup/\` per [CORE-004 status](${blockerDoc})`,
-      approvalNeeded:
-        '**DTF-5.5.4** LOI/regulator letter · **DTF-5.5.2** certified pack pipeline (Class R)',
-      deferred:
-        'After transcript publish: KAT vk_hash pin test + mark D3 M3.2 done in execution-roadmap',
+      done: packDone
+        ? 'DTF-5.5.2 certified pack manifest built + verified (Class R)'
+        : 'DTF-5.5.1 strict packs + DTF-5.5.5 evidence index',
+      nextPriority: packDone
+        ? '**Human / GTM** — DTF-5.5.4 LOI or regulator letter (Class S only)'
+        : '**gtcx-core** — run certified-pack build + verify (Class R)',
+      approvalNeeded: packDone ? '**DTF-5.5.4** LOI/regulator letter (Class S)' : undefined,
+      deferred: 'DTF-5.5.3 optional; CORE-004 transcript publish (Class R, parallel)',
     },
     communicationPolicy: {
       protocol: '26-agent-proceed-confirmation',
@@ -464,10 +516,11 @@ function selectBacklogClearGuidance() {
       ],
     },
     agentInstructions: [
-      'backlogClear does NOT mean idle — nextPriority is owner-repo ceremony work (P24).',
+      'DTF-5.5.2 = Class R — run certified-pack commands in-session; never list 5.5.2 under Approval needed.',
+      'DTF-5.5.4 = Class S only — LOI/regulator letter; agents witness, do not sign.',
       'Emit Status Update with exactly ONE Next priority; then STOP — no questions.',
       'Do not ask the operator which story or repo to pick.',
-      `Blocker witness: ${blockerDoc}`,
+      `Witness: ${commercialDoc}`,
     ],
   };
 }

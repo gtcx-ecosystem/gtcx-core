@@ -3,7 +3,8 @@
 //! Run with: cargo test --features trusted-setup-verify
 
 use crate::trusted_setup::{
-    groth16_generate_keys_from_seed, verify_trusted_setup_vk, vk_hash, TrustedSetupTranscript,
+    default_kat_dir, default_transcript_path, groth16_generate_keys_from_seed,
+    verify_groth16_kat_pins, verify_trusted_setup_vk, vk_hash, TrustedSetupTranscript,
 };
 use crate::types::Groth16CircuitType;
 use std::io::Write;
@@ -113,4 +114,23 @@ fn end_to_end_all_circuits_with_mock_transcript() {
         let valid = verify_trusted_setup_vk(circuit, tmp.path(), &expected_hash).unwrap();
         assert!(valid, "circuit {:?} must verify with mock transcript", circuit);
     }
+}
+
+/// Release gate: runs when `artifacts/trusted-setup/transcript.seed` exists (Class R publish).
+#[test]
+fn groth16_kat_pins_match_published_transcript() {
+    let transcript = default_transcript_path();
+    if !transcript.exists() {
+        eprintln!(
+            "skip groth16_kat_pins_match_published_transcript: {}",
+            transcript.display()
+        );
+        return;
+    }
+    let mismatches = verify_groth16_kat_pins(&transcript, &default_kat_dir()).unwrap();
+    assert!(
+        mismatches.is_empty(),
+        "KAT vk_hash pin failures: {:?}",
+        mismatches
+    );
 }

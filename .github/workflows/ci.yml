@@ -118,6 +118,15 @@ jobs:
         working-directory: rust
         run: cargo test -p gtcx-zkp --features trusted-setup-verify --release
 
+      - name: Trusted-setup KAT pin (when transcript.seed published)
+        working-directory: rust
+        run: |
+          if [ -f ../artifacts/trusted-setup/transcript.seed ]; then
+            cargo test -p gtcx-zkp --features trusted-setup-verify --release -- groth16_kat_pins_match_published_transcript
+          else
+            echo "skip: artifacts/trusted-setup/transcript.seed not published"
+          fi
+
       - name: Test
         run: pnpm test
 
