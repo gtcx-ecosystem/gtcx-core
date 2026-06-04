@@ -49,6 +49,18 @@ Read after start:
 | `docs/operations/agent-work-selection.md` | P22 manifest (when present)           |
 | `AGENTS.md`                               | Repo-specific gates (synced partials) |
 
+### Ecosystem learning card (normative — every repo)
+
+| Step | Resource                                                                                                                                                                   |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | [Unblock playbook](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-unblock-playbook-2026-06.md) (F1–F10)                 |
+| 2    | [P26 + post-pilot gating](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/agent-status-update-and-post-pilot-gating-2026-06-06.md) |
+| 3    | [Human-external register](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/docs/operations/coordination/human-external-blocker-register-2026-06.md)                |
+| 4    | [Cross-repo bridge](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/cross-repo-agent-bridge.md) — Latest updates                   |
+| 5    | This repo auto-dev-state + work-selection                                                                                                                                  |
+
+**End of turn:** Status Update (§3b) + one [log row](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/cross-repo-agent-log.md). **`backlogClear` on protocols does not stop IR here.** Never execute **H-03** / **XR-518 apply** from non-owner repos.
+
 ---
 
 ## 2. Protocol 22 — pick work (no menus)

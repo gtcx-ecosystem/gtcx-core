@@ -23,7 +23,8 @@
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ]
     },
     {
@@ -44,7 +45,8 @@
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ]
     },
     {
@@ -65,7 +67,8 @@
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -86,7 +89,8 @@
         "protocols-enforcement-pointer.md",
         "session-start-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -107,7 +111,8 @@
         "protocols-enforcement-pointer.md",
         "session-start-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -129,7 +134,8 @@
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -151,7 +157,8 @@
         "protocol-27-execution-pointer.md",
         "session-start-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -170,7 +177,8 @@
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -191,7 +199,8 @@
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
         "claude.partial.md",
-        "agent-status-update-pointer.md"
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
       ],
       "createIfMissing": true
     }
