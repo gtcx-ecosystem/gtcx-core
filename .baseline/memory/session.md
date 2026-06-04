@@ -38,9 +38,9 @@ focus: 'OPS-AUDIT-FM done; CORE-004 blocked XR-402; push pending operator'
 cd /Users/amanianai/Sites/gtcx-ecosystem/gtcx-core && git push origin main
 ```
 
-## Session bootstrap (2026-06-04 14:13:02 UTC)
+## Session bootstrap (2026-06-04 14:15:51 UTC)
 
 - **Command:** `pnpm agent:start`
-- **Next work:** OPS-AUDIT-FM — Merge duplicate frontmatter on historical audit files
-- **Blocked:** no
+- **Next work:** CORE-004 — D3 M3.2 trusted-setup transcript verify
+- **Blocked:** yes (XR-402 trusted-setup ceremony — release-gated)
 - **Git:** 0 changed path(s)
