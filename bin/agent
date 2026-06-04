@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Wrapper so `agent` works when ./bin is on PATH (not `agent.mjs`).
+exec node "$(cd "$(dirname "$0")" && pwd)/agent.mjs" "$@"

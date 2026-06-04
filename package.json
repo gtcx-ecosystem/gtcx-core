@@ -72,6 +72,7 @@
     "agent:check": "node scripts/agent-sync/sync.mjs --check",
     "agent:start": "node scripts/agent-session-start.mjs",
     "agent:session-start": "node scripts/agent-session-start.mjs",
+    "agent:cli:path": "node scripts/agent-cli-path.mjs",
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:bout": "node scripts/agent-execution-bout.mjs",
     "agent:bout:check": "node scripts/check-agent-execution-bout.mjs",
