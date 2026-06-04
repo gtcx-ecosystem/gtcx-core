@@ -21,16 +21,12 @@ review_cycle: on-change
 
 ```bash
 cd <owner-repo>
-pnpm agent:session-start
+pnpm agent:start
 ```
 
-Fallbacks if script missing:
+Optional: `pnpm agent:start --json` for automation.
 
-```bash
-node scripts/agent-session-start.mjs
-node scripts/agent-next-work.mjs
-node scripts/agent-next-work.mjs --json
-```
+Legacy alias: `pnpm agent:session-start` (= `agent:start`).
 
 Read after start:
 
@@ -86,10 +82,13 @@ Emit exactly this shape, then **start work**:
 - Your call / Your call on …
 - Two options / 1. … 2. …
 - Say push if you want / if you want all on origin
+- **Say if you want** / committed next or / left as local WIP
 - Which do you prefer? / Do you want A or B?
 - Asking **approval of the path** you already selected (Class **R**)
 
 **Confirmation ≠ approval:** Human may **stop** or **correct** — not pick backlog items.
+
+**Uncommitted Class R work:** commit in-session (micro-commit) — do not ask operator to choose commit vs WIP.
 
 ---
 

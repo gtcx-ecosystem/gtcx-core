@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 /**
- * Provider-agnostic session start — run from any terminal / LLM CLI before work.
- * Phases 5.4–5.6 bootstrap: git state, next-work, session.md touch, Proceed Brief skeleton.
+ * GTCX session start — one command: `pnpm agent:start`
+ * P22 next-work + session.md touch + Proceed Brief skeleton (P26/P28).
  */
-import { execSync } from 'node:child_process';
+import { execSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, '..');
+const ROOT = process.cwd();
 const SESSION_PATH = join(ROOT, '.baseline/memory/session.md');
 const SESSION_META = join(ROOT, '.baseline/memory/session-last-start.json');
+const NEXT_WORK_SCRIPT = join(ROOT, 'scripts/agent-next-work.mjs');
 const QUIET = process.argv.includes('--quiet');
 const JSON_OUT = process.argv.includes('--json');
 
@@ -31,11 +32,15 @@ try {
 }
 
 let nextWork = null;
-try {
-  const raw = run('node scripts/agent-next-work.mjs');
-  nextWork = JSON.parse(raw);
-} catch (error) {
-  nextWork = { error: String(error.message ?? error) };
+if (!existsSync(NEXT_WORK_SCRIPT)) {
+  nextWork = { error: `Missing ${NEXT_WORK_SCRIPT} — add Protocol 22 next-work script` };
+} else {
+  try {
+    const raw = run('node scripts/agent-next-work.mjs');
+    nextWork = JSON.parse(raw);
+  } catch (error) {
+    nextWork = { error: String(error.message ?? error) };
+  }
 }
 
 const now = new Date().toISOString();
@@ -44,11 +49,12 @@ const stamp = now.slice(0, 19).replace('T', ' ');
 const nextLabel =
   nextWork?.next?.milestone ??
   nextWork?.next?.handoff ??
+  nextWork?.next?.storyId ??
   nextWork?.next?.dimension ??
   'unknown';
 
 const blocked = Boolean(nextWork?.next?.blocked);
-const authorityClass = blocked ? 'R' : 'S';
+const authorityClass = blocked ? 'S' : 'R';
 
 const bootstrap = `
 ## Session bootstrap (${stamp} UTC)
@@ -64,7 +70,6 @@ mkdirSync(dirname(SESSION_PATH), { recursive: true });
 let sessionBody = '';
 if (existsSync(SESSION_PATH)) {
   sessionBody = readFileSync(SESSION_PATH, 'utf8');
-  // Replace prior bootstrap section or prepend
   const marker = '## Session bootstrap (';
   if (sessionBody.includes(marker)) {
     const before = sessionBody.slice(0, sessionBody.indexOf(marker));
@@ -126,19 +131,17 @@ if (JSON_OUT) {
   process.exit(0);
 }
 
-log('=== GTCX agent session start (provider-agnostic) ===\n');
+log('=== GTCX agent:start ===\n');
 log('Git status:\n', gitStatus || '(clean)\n');
 log('Next work (P22):', JSON.stringify(nextWork?.next ?? nextWork, null, 2));
-log('\n--- Proceed Brief (P26 + P28) — emit to operator, then IMPLEMENT ---\n');
+log('\n--- Proceed Brief (P26) — emit to operator, then IMPLEMENT ---\n');
 log(`**Active persona:** ${proceedBrief.activePersona} · **Frame:** ${proceedBrief.frame}`);
 if (proceedBrief.personaDocUrl) log(`**Persona doc:** ${proceedBrief.personaDocUrl}`);
 log(`**Next:** ${proceedBrief.nextAction}`);
 log(`**Story / work ID:** ${proceedBrief.storyId}`);
 log(`**Because:** ${proceedBrief.because}`);
 log(`**Authority class:** ${proceedBrief.authorityClass}`);
-log(`**Authorization artifact:** ${proceedBrief.authorizationArtifact}`);
 log(`**Blocked:** ${blocked ? 'yes' : 'no'}`);
 log(`**Override:** stop | correct: | story ID`);
-log('\n**FORBIDDEN replies (P26 v1.1.0):** Your call · Two options · 1./2. menus · "switch to other repo?"');
 log('\nSession updated:', SESSION_PATH);
-log('Before claiming done: run V-ladder (AGENTS.md §7) and include attestation in PR/commit.\n');
+log('Close turns with Status Update (Done → Next priority). Forbidden: Say if you want · menus.\n');

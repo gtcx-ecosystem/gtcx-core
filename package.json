@@ -68,6 +68,8 @@
     "prepare": "husky",
     "agent:sync": "node scripts/agent-sync/sync.mjs",
     "agent:check": "node scripts/agent-sync/sync.mjs --check",
+    "agent:start": "node scripts/agent-start.mjs",
+    "agent:session-start": "pnpm run agent:start",
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:work-selection:check": "node scripts/check-agent-work-selection.mjs",
     "agent:protocols:check": "node ./tools/check-agent-protocols.mjs",
