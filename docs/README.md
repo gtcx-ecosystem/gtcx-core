@@ -22,13 +22,14 @@ review_cycle: 'on-change'
 
 ## §0 Start Here
 
-| Document                                                                           | Purpose                                                        |
-| ---------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| [`start-here.md`](./start-here.md)                                                 | Fastest path to repo identity, current state, and next reads   |
-| [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md)           | Session-start protocol and codebase map                        |
-| [`agents/readiness-and-audit-lanes.md`](./agents/readiness-and-audit-lanes.md)     | **Canonical** five lanes, scores, forensic prompts, anti-drift |
-| [`operations/agent-protocol-22-brief.md`](./operations/agent-protocol-22-brief.md) | Protocol 22 session opener (paste block for agents)            |
-| [`architecture/overview.md`](./architecture/overview.md)                           | Trust boundaries, package layering, and architecture overview  |
+| Document                                                                           | Purpose                                                         |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [`start-here.md`](./start-here.md)                                                 | Fastest path to repo identity, current state, and next reads    |
+| [`agents/onboarding/orientation.md`](./agents/onboarding/orientation.md)           | Session-start protocol and codebase map                         |
+| [`agents/readiness-and-audit-lanes.md`](./agents/readiness-and-audit-lanes.md)     | **Canonical** five lanes, scores, forensic prompts, anti-drift  |
+| [`agents/agent-sync-coverage.md`](./agents/agent-sync-coverage.md)                 | Which LLM files get synced pointers (Kimi, Cursor, Codex, etc.) |
+| [`operations/agent-protocol-22-brief.md`](./operations/agent-protocol-22-brief.md) | Protocol 22 session opener (paste block for agents)             |
+| [`architecture/overview.md`](./architecture/overview.md)                           | Trust boundaries, package layering, and architecture overview   |
 
 ## §1 For External Reviewers
 

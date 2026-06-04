@@ -66,6 +66,12 @@ Market/regulator outreach rows (007–010) → [GTM-Readiness](./gtm-readiness-2
 
 ---
 
+## Global Compliance Rating (procurement rollup)
+
+**GCR:** **GCR-T0** · **BLOCKED** — [global-compliance-rating-2026-06-05.md](./global-compliance-rating-2026-06-05.md) (derived from this lane + lane 2 corporate readiness).
+
+---
+
 ## Canonical audit
 
 [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md) — **SoR**

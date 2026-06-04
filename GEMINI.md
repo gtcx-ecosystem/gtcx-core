@@ -12,7 +12,7 @@ Gemini has a 1M–2M token context window. Use it aggressively:
 
 - **Read the full `AGENTS.md`** — Gemini's context window handles it easily
 - **Read the full repo overview** — `docs/overview/README.md` (525 lines)
-- **Read the latest master audit** — `docs/audit/master-audit-2026-05-12.md`
+- **Read readiness lanes** — `docs/agents/readiness-and-audit-lanes.md` + `docs/audit/latest.json` (bank-grade **8.9** is lane 4 only)
 - **Read multiple spec files** — Use the large context to hold multiple package specs simultaneously
 
 **Do NOT** use the context-window-constrained reading order from `CLAUDE.md`. Gemini can absorb everything at once.
