@@ -1,9 +1,8 @@
 ---
 last_reconciled: 2026-06-04
 reconciliation_note: >-
-  Launch-focus reconcile 2026-06-04 — mode plan; implement 0 / plan 5.
-  Kimi project skills parity (22). CORE-004 engineering green; ceremony publish pending.
-  DTF-5.5.4 Class S (LOI). FA-AGT complete.
+  Launch-focus reconcile 2026-06-04 — mode witness; implement 0 / plan 0.
+  engineering closed; ceremony Class S parallel. Kimi skills parity done.
 sources:
   - docs/audit/full-audit-2026-06-04.md
   - docs/audit/repo-hygiene-2026-06-04.md
@@ -18,22 +17,24 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **S-T5-5** commercial (external) + **CORE-004** ceremony-gated  
-**Protocol 22:** `pnpm agent:next-work` → **DTF-5.5.4** Class S; bout drain **CORE-004** (custodian `transcript.seed`)  
-**Last in-repo sprint:** **Kimi skills parity** + CORE-004 verify-publish script (2026-06-04)
+**Active phase:** **S-T5-5** commercial (external) + **LAUNCH-PLAN** bout (GTM coordination)  
+**Protocol 22:** `pnpm agent:next-work` → **LAUNCH-PLAN-01..05** (Class R plan drain); **DTF-5.5.4** / **CORE-004-CEREMONY** Class S  
+**Last in-repo sprint:** **CORE-004 engineering closeout** + launch reconcile (2026-06-04)
 
 ---
 
 ## Executive summary (2026-06-04)
 
-| Track                            | State         | Next                                                                          |
-| -------------------------------- | ------------- | ----------------------------------------------------------------------------- |
-| Internal engineering (S1–S5)     | **done**      | —                                                                             |
-| Algorithmic moat D1–D6 (in-repo) | **done**      | D3 M3.2 — publish `transcript.seed` (`pnpm ops:trusted-setup:verify-publish`) |
-| **DTF Tier 5 technical**         | **~88%**      | DTF-5.5.2 done; **5.5.4** LOI/regulator (Class S)                             |
-| Bank-grade / sovereign pilot     | **Not Ready** | EXT-INF-002 pen-test; OI-X02 infra hub ack                                    |
-| **Agent parity**                 | **done**      | 22 Kimi project skills — `pnpm kimi:skills:check`                             |
-| **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/`                            |
+| Track                            | State           | Next                                                                                                                              |
+| -------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Internal engineering (S1–S5)     | **done**        | —                                                                                                                                 |
+| Algorithmic moat D1–D6 (in-repo) | **done**        | D3 ceremony — `transcript.seed` (Class S, custodian)                                                                              |
+| **DTF Tier 5 technical**         | **~88%**        | DTF-5.5.2 done; **5.5.4** LOI/regulator (Class S)                                                                                 |
+| **CORE-004 engineering**         | **done**        | Class R — [`core-004-engineering-closeout-2026-06-06.md`](../operations/coordination/core-004-engineering-closeout-2026-06-06.md) |
+| Bank-grade / sovereign pilot     | **Not Ready**   | EXT-INF-002 pen-test; OI-X02 infra hub ack (witness)                                                                              |
+| **Launch / GTM bout**            | **in progress** | LAUNCH-PLAN-01..05 — reconcile + bridge + readiness lanes                                                                         |
+| **Agent parity**                 | **done**        | 22 Kimi project skills — `pnpm kimi:skills:check`                                                                                 |
+| **P0 blocker**                   | **Closed**      | FA-P0-1 — integration test in `tests/integration/`                                                                                |
 
 **Risk (audit):** Do not equate npm library maturity with sovereign pilot clearance.  
 **Opportunity (audit):** Profile packs + KAT portability on one R1CS + WorkProof→verification chain.

@@ -5,33 +5,23 @@
   "docPath": "docs/operations/agent-execution-bout.md",
   "id": "bout-2026-06-04-auto",
   "mode": "auto",
-  "provisionedAt": "2026-06-04T19:29:05.582Z",
+  "provisionedAt": "2026-06-04T21:59:48.562Z",
   "repo": "gtcx-core",
   "frame": "development",
-  "launchMode": "implement",
-  "backlogClear": false,
-  "stories": [
-    {
-      "storyId": "CORE-004",
-      "title": "Trusted-setup transcript publish + KAT pin closeout",
-      "sprint": null,
-      "workClass": "ops-docs",
-      "authorityClass": "S",
-      "source": "ceremony",
-      "paths": [
-        "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md",
-        "docs/operations/coordination/core-004-ceremony-publish-checklist.md",
-        "artifacts/trusted-setup/README.md"
-      ],
-      "status": "blocked",
-      "blocker": "Custodian ceremony — publish artifacts/trusted-setup/transcript.seed + manifest.json",
-      "witness": "docs/operations/coordination/core-004-ceremony-publish-checklist.md"
-    }
-  ],
+  "launchMode": "witness",
+  "backlogClear": true,
+  "stories": [],
   "humanOnly": [
     {
       "storyId": "DTF-5.5.4",
       "title": "Design-partner LOI or regulator letter",
+      "authorityClass": "S",
+      "workClass": "external",
+      "source": "human-only"
+    },
+    {
+      "storyId": "CORE-004-CEREMONY",
+      "title": "ZKP trusted-setup transcript publish (sovereign ceremony)",
       "authorityClass": "S",
       "workClass": "external",
       "source": "human-only"
@@ -62,7 +52,8 @@
     "Do NOT end the session after one story while `remainingCount` > 0.",
     "Do NOT ask operator to pick stories — P22 selects head; bout lists the drain queue.",
     "Full Status Update + optional push only at bout check-in.",
-    "Normative: docs/operations/agent-execution-bout.md"
+    "Normative: docs/operations/agent-execution-bout.md",
+    "Bout plan empty for Class R — check-in with humanOnly as Approval needed; witness only."
   ],
   "forbidden": [
     "stop after single story when bout has Class R remaining",
@@ -70,6 +61,5 @@
     "backlogClear means go idle (it means commercial ceiling — keep draining repoCompletable)"
   ],
   "boutComplete": true,
-  "classSBlocks": true,
-  "checkInReason": "CORE-004 blocked on ceremony publish; P22 head DTF-5.5.4 Class S only"
+  "classSBlocks": true
 }

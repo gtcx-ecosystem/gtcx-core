@@ -1,6 +1,6 @@
 ---
 title: 'CORE-004 — engineering closeout (Class R)'
-status: done
+status: current
 date: 2026-06-06
 owner: gtcx-core
 role: crypto-security-engineer

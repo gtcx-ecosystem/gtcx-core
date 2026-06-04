@@ -23,7 +23,9 @@ related:
 **Topic:** Append ER-1-08 ecosystem exit row to hub coordination log  
 **Work ID:** OI-X02  
 **Priority:** P1  
-**Status:** gtcx-core done → awaiting infrastructure hub ack
+**Status:** gtcx-core done → awaiting infrastructure hub ack (witness — not blocking LAUNCH-PLAN bout)
+
+**Note (2026-06-04):** Hub #17 terminal W2 key alignment is **gtcx-infrastructure** Class A/S (ESO/AWS SM) — separate from ER-1-08 EAP ack.
 
 ---
 
