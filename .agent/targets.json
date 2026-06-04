@@ -21,11 +21,12 @@
       "path": "CLAUDE.md",
       "partials": [
         "base.md",
+        "readiness-pointer.md",
         "audit-pointer.md",
-        "claude.partial.md",
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
-        "coordination-pointer.md"
+        "coordination-pointer.md",
+        "claude.partial.md"
       ]
     },
     {
@@ -38,6 +39,30 @@
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
         "claude.partial.md"
+      ],
+      "createIfMissing": true
+    },
+    {
+      "path": "KIMI.md",
+      "partials": [
+        "base.md",
+        "readiness-pointer.md",
+        "audit-pointer.md",
+        "credentials-pointer.md",
+        "execute-roadmap-pointer.md",
+        "coordination-pointer.md"
+      ],
+      "createIfMissing": true
+    },
+    {
+      "path": "CODEX.md",
+      "partials": [
+        "base.md",
+        "readiness-pointer.md",
+        "audit-pointer.md",
+        "credentials-pointer.md",
+        "execute-roadmap-pointer.md",
+        "coordination-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -65,6 +90,11 @@
         "coordination-pointer.md",
         "claude.partial.md"
       ],
+      "createIfMissing": true
+    },
+    {
+      "path": ".github/copilot/instructions.md",
+      "partials": ["readiness-pointer.md", "audit-pointer.md"],
       "createIfMissing": true
     }
   ]

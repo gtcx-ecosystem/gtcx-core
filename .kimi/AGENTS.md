@@ -29,3 +29,6 @@ Kimi Code CLI provides these tools for GTCX Core development:
 2. **Grep over Shell:** Use `Grep` tool, never `Shell grep`
 3. **Explore before code:** Use `explore` subagents for codebase research
 4. **Quality gates:** Run tests before committing
+5. **Readiness scores:** Read `../docs/agents/readiness-and-audit-lanes.md` and `../docs/audit/latest.json` before citing 8.9, IC-T*, GR-T*, or GCR. Never use bank-grade **8.9** as engineering readiness.
+
+**GCR today:** **GCR-T0** · **BLOCKED** — `../docs/audit/global-compliance-rating-2026-06-05.md`

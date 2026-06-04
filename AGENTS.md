@@ -141,12 +141,15 @@ Your primary goal: **help ship secure, lightweight, well-documented code that se
 
 | Agent   | Override File                     | What It Contains                                                            |
 | ------- | --------------------------------- | --------------------------------------------------------------------------- |
-| Claude  | `CLAUDE.md`                       | Claude-specific session protocol, `.claude/settings.local.json` permissions |
-| Kimi    | `KIMI.md`                         | Kimi-specific CLI instructions, skill loading protocol                      |
-| Gemini  | `GEMINI.md`                       | Gemini-specific context window strategy, multimodal notes                   |
-| Codex   | `CODEX.md`                        | Codex-specific inline completion hints, tab-trigger patterns                |
-| Cursor  | `.cursor/rules.md`                | Cursor IDE rules, composer instructions                                     |
-| Copilot | `.github/copilot/instructions.md` | Copilot inline completion context                                           |
+| **All** | `AGENTS.md`                       | Canonical + **AGENT-SYNC** readiness/audit pointers                         |
+| Claude  | `CLAUDE.md`                       | Claude-specific + **synced** readiness table                                |
+| Kimi    | `KIMI.md` + `.kimi/AGENTS.md`     | Kimi CLI entry (`.kimi/`) + **synced** pointers in `KIMI.md`                |
+| Gemini  | `GEMINI.md`                       | Gemini-specific + **synced** readiness table                                |
+| Codex   | `CODEX.md`                        | Codex-specific + **synced** readiness table                               |
+| Cursor  | `.cursor/rules/main.mdc` + `.cursor/rules.md` | **main.mdc** synced; rules.md composer hints              |
+| Copilot | `.github/copilot/instructions.md` | Human chat hints + **synced** readiness/audit block                         |
+
+**Sync matrix:** `docs/agents/agent-sync-coverage.md` · verify: `pnpm agent:check`
 
 **Rule:** `AGENTS.md` is canonical. Agent-specific files only override when explicitly stated. If there's a conflict, `AGENTS.md` wins.
 
@@ -331,14 +334,14 @@ pnpm bundle:check-budgets
 
 **Read before citing scores:** `docs/agents/readiness-and-audit-lanes.md` · SSOT: `docs/audit/readiness-model.md` · `docs/audit/latest.json`
 
-| Lane                  | Readiness (current)              | Index                                                       |
-| --------------------- | -------------------------------- | ----------------------------------------------------------- |
-| 1 Engineering         | 9.5 / 10.0 signoff               | `docs/audit/engineering-completeness-quality-2026-06-05.md` |
-| 2 Internal compliance | **9.0** (5 domains)              | `docs/audit/internal-compliance-2026-06-05.md`              |
-| 3 Industry Compliance | **IC-T0** OPEN 0/12              | `docs/audit/industry-compliance-2026-06-05.md`              |
-| **GCR** (rollup L2+L3) | **GCR-T0** **BLOCKED**          | `docs/audit/global-compliance-rating-2026-06-05.md`         |
-| 4 Bank-grade          | **8.9** composite only           | `docs/audit/bank-grade-2026-06-05.md`                       |
-| 5 GTM-Readiness       | **GR-T1** / sovereign &lt; GR-T2 | `docs/audit/gtm-readiness-2026-06-05.md`                    |
+| Lane                   | Readiness (current)              | Index                                                       |
+| ---------------------- | -------------------------------- | ----------------------------------------------------------- |
+| 1 Engineering          | 9.5 / 10.0 signoff               | `docs/audit/engineering-completeness-quality-2026-06-05.md` |
+| 2 Internal compliance  | **9.0** (5 domains)              | `docs/audit/internal-compliance-2026-06-05.md`              |
+| 3 Industry Compliance  | **IC-T0** OPEN 0/12              | `docs/audit/industry-compliance-2026-06-05.md`              |
+| **GCR** (rollup L2+L3) | **GCR-T0** **BLOCKED**           | `docs/audit/global-compliance-rating-2026-06-05.md`         |
+| 4 Bank-grade           | **8.9** composite only           | `docs/audit/bank-grade-2026-06-05.md`                       |
+| 5 GTM-Readiness        | **GR-T1** / sovereign &lt; GR-T2 | `docs/audit/gtm-readiness-2026-06-05.md`                    |
 
 **Anti-drift:** 1–10 = audit _quality_ unless labeled readiness. Never use 8.9 for engineering. Industry/GTM use **tiers**, not 1–10 delivery. Deprecated: external-dependent lane, lane-2-only ~9.6, S1/S2 without GR-T.
 

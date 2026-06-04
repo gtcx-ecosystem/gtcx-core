@@ -1,6 +1,6 @@
 # Agent Instruction Source of Truth
 
-This directory is the **source of truth** for the synced sections of every agent-config file in this repo (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursor/rules/main.mdc`, `CONVENTIONS.md`).
+This directory is the **source of truth** for synced sections in `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `KIMI.md`, `CODEX.md`, `CONVENTIONS.md`, `.cursor/rules/main.mdc`, `.github/copilot/instructions.md` (see `targets.json`).
 
 The generator at `scripts/agent-sync/sync.mjs` injects content from the partials below into target files, between `<!-- AGENT-SYNC:START -->` and `<!-- AGENT-SYNC:END -->` markers. Anything outside those markers is human-managed.
 
@@ -18,6 +18,8 @@ The generator at `scripts/agent-sync/sync.mjs` injects content from the partials
 | `targets.json`               | Maps target files → which partials to include                     |
 
 **Full agent guide (not synced — edit directly):** [`docs/agents/readiness-and-audit-lanes.md`](../docs/agents/readiness-and-audit-lanes.md)
+
+**Coverage matrix:** [`docs/agents/agent-sync-coverage.md`](../docs/agents/agent-sync-coverage.md) — Kimi CLI, Cursor, Codex, Copilot, Claude, Gemini
 
 ## Commands
 

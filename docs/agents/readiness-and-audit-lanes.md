@@ -169,7 +169,7 @@ Ecosystem catalog: [ecosystem-audit-catalog-2026-06-05.md](../audit/ecosystem-au
 
 ## 9. Synced agent files (no drift)
 
-Content in `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `CONVENTIONS.md`, `.cursor/rules/main.mdc` between `AGENT-SYNC` markers is generated from `.agent/`.
+Content in synced targets (see [agent-sync-coverage.md](./agent-sync-coverage.md)): `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `KIMI.md`, `CODEX.md`, `CONVENTIONS.md`, `.cursor/rules/main.mdc`, `.github/copilot/instructions.md` — between `AGENT-SYNC` markers, generated from `.agent/`.
 
 | Partial                | Role                                      |
 | ---------------------- | ----------------------------------------- |

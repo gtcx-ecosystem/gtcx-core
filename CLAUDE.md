@@ -121,6 +121,23 @@ pnpm docs:check-frontmatter
 pnpm bundle:check-budgets
 ```
 
+## Readiness & audit lanes (canonical — all agents)
+
+**Read before citing scores:** `docs/agents/readiness-and-audit-lanes.md` · SSOT: `docs/audit/readiness-model.md` · `docs/audit/latest.json`
+
+| Lane                   | Readiness (current)              | Index                                                       |
+| ---------------------- | -------------------------------- | ----------------------------------------------------------- |
+| 1 Engineering          | 9.5 / 10.0 signoff               | `docs/audit/engineering-completeness-quality-2026-06-05.md` |
+| 2 Internal compliance  | **9.0** (5 domains)              | `docs/audit/internal-compliance-2026-06-05.md`              |
+| 3 Industry Compliance  | **IC-T0** OPEN 0/12              | `docs/audit/industry-compliance-2026-06-05.md`              |
+| **GCR** (rollup L2+L3) | **GCR-T0** **BLOCKED**           | `docs/audit/global-compliance-rating-2026-06-05.md`         |
+| 4 Bank-grade           | **8.9** composite only           | `docs/audit/bank-grade-2026-06-05.md`                       |
+| 5 GTM-Readiness        | **GR-T1** / sovereign &lt; GR-T2 | `docs/audit/gtm-readiness-2026-06-05.md`                    |
+
+**Anti-drift:** 1–10 = audit _quality_ unless labeled readiness. Never use 8.9 for engineering. Industry/GTM use **tiers**, not 1–10 delivery. Deprecated: external-dependent lane, lane-2-only ~9.6, S1/S2 without GR-T.
+
+**Check:** `pnpm readiness:lanes:check` · after audit doc edits update indexes + `latest.json` then `pnpm agent:sync`.
+
 ## Audits (cross-repo + five lanes)
 
 ### Local readiness (read first)
@@ -139,12 +156,6 @@ To run any forensic audit on this repo (master-audit, full-audit, 10-10-roadmap,
 6. Update the **lane index** and `docs/audit/latest.json` if readiness outcomes changed.
 
 Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, Copilot, etc.
-
-## Claude-Specific Notes
-
-- Session-start protocol from `~/.claude/CLAUDE.md` applies: read `DESIGN_BAR.md` and `AI_NATIVE_PATTERNS.md` before UI work.
-- Reject conventional UI anti-patterns: AI sidebar, AI tab, "Run AI" buttons, blank forms, dashboard-as-report.
-- No emojis, no preamble, no time estimates, lead with the answer.
 
 ## Credentials: system-of-record + ownership split (cross-repo)
 
@@ -200,4 +211,10 @@ When a story is **blocked on a sibling repo** or you **hand off** cross-repo wor
 **Not in this repo:** inbound archive SoR for ecosystem-wide weekly reports — that stays **`baseline-os`** (`workstream/coordination/`).
 
 **Evidence paths (link only):** production smoke and EAP issuance artifacts live in owning repos per deployment-proof-index (e.g. `gtcx-intelligence/docs/audit/evidence/`).
+
+## Claude-Specific Notes
+
+- Session-start protocol from `~/.claude/CLAUDE.md` applies: read `DESIGN_BAR.md` and `AI_NATIVE_PATTERNS.md` before UI work.
+- Reject conventional UI anti-patterns: AI sidebar, AI tab, "Run AI" buttons, blank forms, dashboard-as-report.
+- No emojis, no preamble, no time estimates, lead with the answer.
 <!-- AGENT-SYNC:END -->
