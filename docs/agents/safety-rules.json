@@ -91,6 +91,16 @@
       "enforcement": "gate",
       "trigger": "pr-review",
       "verification": "pnpm readiness:lanes:check"
+    },
+    {
+      "id": "SR-010",
+      "rule": "agent-protocols-enforced",
+      "description": "Protocols P22–P28 must be wired (startup phases, scripts, CI, no P27 defer-to-human phrases in agent ops docs)",
+      "scope": "agents",
+      "severity": "high",
+      "enforcement": "gate",
+      "trigger": "ci",
+      "verification": "pnpm agent:protocols:check"
     }
   ]
 }

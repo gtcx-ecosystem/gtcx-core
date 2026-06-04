@@ -238,7 +238,7 @@ if (anyCount > ANY_BUDGET) {
 // Readiness + agent-sync gates (SR-009)
 // ---------------------------------------------------------------------------
 
-for (const scriptName of ['agent:check', 'readiness:lanes:check']) {
+for (const scriptName of ['agent:check', 'readiness:lanes:check', 'agent:protocols:check']) {
   try {
     execSync(`pnpm ${scriptName}`, { cwd: rootDir, stdio: 'pipe', encoding: 'utf8' });
   } catch (error) {

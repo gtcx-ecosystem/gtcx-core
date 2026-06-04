@@ -19,18 +19,18 @@ review_cycle: on-change
 
 ## Synced via `pnpm agent:sync` (AGENT-SYNC block)
 
-| File                              | Provider                 | `readiness-pointer` | `audit-pointer` | Notes                          |
-| --------------------------------- | ------------------------ | ------------------- | --------------- | ------------------------------ |
-| `AGENTS.md`                       | **All (canonical)**      | yes                 | yes             | + human §3, §7.45 outside sync |
-| `CLAUDE.md`                       | Anthropic Claude         | yes                 | yes             | + Claude-specific above sync   |
-| `GEMINI.md`                       | Google Gemini            | yes                 | yes             |                                |
-| `KIMI.md`                         | Moonshot Kimi (IDE/docs) | yes                 | yes             | + Kimi-specific above sync     |
-| `CODEX.md`                        | OpenAI Codex             | yes                 | yes             | + Codex-specific above sync    |
-| `CONVENTIONS.md`                  | Ecosystem conventions    | yes                 | yes             |                                |
-| `.cursor/rules/main.mdc`          | **Cursor Composer**      | yes                 | yes             | `alwaysApply` workspace rule   |
-| `.github/copilot/instructions.md` | **GitHub Copilot**       | yes                 | yes             | Human §1–5 above sync          |
+| File                              | Provider                 | `readiness-pointer` | `audit-pointer` | `protocols-enforcement`      | Notes                               |
+| --------------------------------- | ------------------------ | ------------------- | --------------- | ---------------------------- | ----------------------------------- |
+| `AGENTS.md`                       | **All (canonical)**      | yes                 | yes             | yes                          | + human §3, §7.45–§7.6 outside sync |
+| `CLAUDE.md`                       | Anthropic Claude         | yes                 | yes             | + Claude-specific above sync |
+| `GEMINI.md`                       | Google Gemini            | yes                 | yes             |                              |
+| `KIMI.md`                         | Moonshot Kimi (IDE/docs) | yes                 | yes             | + Kimi-specific above sync   |
+| `CODEX.md`                        | OpenAI Codex             | yes                 | yes             | + Codex-specific above sync  |
+| `CONVENTIONS.md`                  | Ecosystem conventions    | yes                 | yes             |                              |
+| `.cursor/rules/main.mdc`          | **Cursor Composer**      | yes                 | yes             | `alwaysApply` workspace rule |
+| `.github/copilot/instructions.md` | **GitHub Copilot**       | yes                 | yes             | Human §1–5 above sync        |
 
-**Verify:** `pnpm agent:check` (exit 0 = in sync)
+**Verify:** `pnpm agent:check` (exit 0 = in sync) · `pnpm agent:protocols:check` (P22–P28 wiring + CI)
 
 ---
 
@@ -39,7 +39,8 @@ review_cycle: on-change
 | File                                                       | Provider                     | Readiness pointer                           |
 | ---------------------------------------------------------- | ---------------------------- | ------------------------------------------- |
 | `.cursor/rules.md`                                         | Cursor (legacy composer doc) | Points to `readiness-and-audit-lanes.md`    |
-| `.cursor/rules/protocol-27-agent-execution-obligation.mdc` | Cursor                       | Protocol 27 gates                           |
+| `.cursor/rules/agent-protocols-enforcement.mdc`            | Cursor                       | P22–P28 startup + gate pointer              |
+| `.cursor/rules/protocol-27-agent-execution-obligation.mdc` | Cursor                       | Protocol 27 V-ladder detail                 |
 | `.cursor/rules/ecosystem-false-blocks.mdc`                 | Cursor                       | IR vs XC playbook                           |
 | `.kimi/AGENTS.md`                                          | **Kimi Code CLI**            | Read `../AGENTS.md` + readiness paths below |
 | `docs/governance/model-cards/*.md`                         | Model cards                  | Not session entry — governance only         |

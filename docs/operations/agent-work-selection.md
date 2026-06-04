@@ -36,6 +36,7 @@ adoption_status: established
 ```bash
 pnpm agent:next-work
 pnpm agent:work-selection:check
+pnpm agent:protocols:check   # P22–P28 bundle (CI + governance)
 ```
 
 ## Active frame

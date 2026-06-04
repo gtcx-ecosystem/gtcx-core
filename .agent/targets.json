@@ -14,6 +14,7 @@
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
+        "protocols-enforcement-pointer.md",
         "claude.partial.md"
       ]
     },
@@ -26,6 +27,7 @@
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
+        "protocols-enforcement-pointer.md",
         "claude.partial.md"
       ]
     },
@@ -38,6 +40,7 @@
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
+        "protocols-enforcement-pointer.md",
         "claude.partial.md"
       ],
       "createIfMissing": true
@@ -50,7 +53,8 @@
         "audit-pointer.md",
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
-        "coordination-pointer.md"
+        "coordination-pointer.md",
+        "protocols-enforcement-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -62,7 +66,8 @@
         "audit-pointer.md",
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
-        "coordination-pointer.md"
+        "coordination-pointer.md",
+        "protocols-enforcement-pointer.md"
       ],
       "createIfMissing": true
     },
@@ -75,6 +80,7 @@
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
+        "protocols-enforcement-pointer.md",
         "claude.partial.md"
       ],
       "createIfMissing": true
@@ -88,13 +94,14 @@
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",
         "coordination-pointer.md",
+        "protocols-enforcement-pointer.md",
         "claude.partial.md"
       ],
       "createIfMissing": true
     },
     {
       "path": ".github/copilot/instructions.md",
-      "partials": ["readiness-pointer.md", "audit-pointer.md"],
+      "partials": ["readiness-pointer.md", "audit-pointer.md", "protocols-enforcement-pointer.md"],
       "createIfMissing": true
     }
   ]

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "repo": "gtcx-core",
+  "hubRepo": "gtcx-docs",
+  "hubProtocolsIndex": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/README.md",
+  "institutionalStartup": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/agent-startup-protocol.md",
+  "enforceCommand": "pnpm agent:protocols:check",
+  "startupPhases": {
+    "5.4": "P22",
+    "5.5": "P24",
+    "5.6": "P26",
+    "5.7": "P27"
+  },
+  "protocols": [
+    {
+      "id": "P19",
+      "slug": "19-agent-credential-access",
+      "title": "Agent Credential Access",
+      "status": "reference",
+      "startupPhase": null,
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/19-agent-credential-access/protocol.md",
+      "localPointer": ".agent/credentials-pointer.md"
+    },
+    {
+      "id": "P22",
+      "slug": "22-agent-work-selection",
+      "title": "Agent Work Selection",
+      "status": "established",
+      "startupPhase": "5.4",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/protocol.md",
+      "agentInstructionsUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/agent-instructions.md",
+      "localManifest": "docs/operations/agent-work-selection.md",
+      "localBrief": "docs/operations/agent-protocol-22-brief.md",
+      "checkScript": "agent:work-selection:check"
+    },
+    {
+      "id": "P24",
+      "slug": "24-cross-repo-coordination",
+      "title": "Cross-Repo Coordination",
+      "status": "established",
+      "startupPhase": "5.5",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/24-cross-repo-coordination/protocol.md",
+      "localPointer": ".agent/coordination-pointer.md",
+      "localBridge": "docs/operations/coordination/cross-repo-agent-bridge.md"
+    },
+    {
+      "id": "P26",
+      "slug": "26-agent-proceed-confirmation",
+      "title": "Agent Proceed Confirmation",
+      "status": "established",
+      "startupPhase": "5.6",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/26-agent-proceed-confirmation/protocol.md",
+      "localTemplate": "docs/operations/agent-proceed-brief-template.md"
+    },
+    {
+      "id": "P27",
+      "slug": "27-agent-execution-obligation",
+      "title": "Agent Execution Obligation",
+      "status": "established",
+      "startupPhase": "5.7",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/27-agent-execution-obligation/protocol.md",
+      "cursorRule": ".cursor/rules/protocol-27-agent-execution-obligation.mdc",
+      "forbiddenPatterns": [
+        "Verify locally:",
+        "please run locally",
+        "Run this in your terminal and share",
+        "Let me know when you've run"
+      ]
+    },
+    {
+      "id": "P28",
+      "slug": "28-agent-authority-classification",
+      "title": "Agent Authority Classification",
+      "status": "established",
+      "startupPhase": "5.6",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/28-agent-authority-classification/protocol.md",
+      "authorityClasses": ["S", "A", "R"]
+    }
+  ],
+  "relatedProtocols": [
+    {
+      "id": "P16",
+      "slug": "16-audit-standard",
+      "title": "Audit Standard",
+      "localGuide": "docs/agents/readiness-and-audit-lanes.md"
+    },
+    {
+      "id": "P18",
+      "slug": "18-machine-readable-docs",
+      "title": "Machine-Readable Docs",
+      "gate": "pnpm docs:check-frontmatter"
+    }
+  ]
+}

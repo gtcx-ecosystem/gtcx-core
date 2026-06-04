@@ -70,6 +70,7 @@
     "agent:check": "node scripts/agent-sync/sync.mjs --check",
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:work-selection:check": "node scripts/check-agent-work-selection.mjs",
+    "agent:protocols:check": "node ./tools/check-agent-protocols.mjs",
     "readiness:lanes:check": "node ./tools/check-readiness-lanes.mjs",
     "test:kat-cross-impl": "cargo run --manifest-path rust/gtcx-zkp/Cargo.toml --bin kat-cross-impl-verify -- --all",
     "agent:coordination:check": "node scripts/check-coordination-hygiene.mjs",

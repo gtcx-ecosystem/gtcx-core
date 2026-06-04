@@ -58,8 +58,9 @@ Before making any code changes, architectural decisions, or recommendations, com
     - Check `baseline-os/workstream/coordination/coordination-report-latest.md` for blockers
     - Read open handoffs in `docs/agents/sessions/INDEX.md`
     - If work is blocked on a sibling repo, file a durable handoff and report status
-17. **Phase 5.6 — Proceed Brief (Protocol 26):**
-    - Before starting implementation, announce what and why to the operator
+17. **Phase 5.6 — Proceed Brief (Protocol 26) + Authority (Protocol 28):**
+    - Before starting implementation, announce what and why to the operator (`docs/operations/agent-proceed-brief-template.md`)
+    - State **Authority class** (Protocol 28): S (self-execute), A (artifact required), or R (human-only)
     - Allow human stop/correct before irreversible actions
     - No story menus — state intent and proceed
 18. **Phase 5.7 — Execution Obligation (Protocol 27):**
@@ -77,7 +78,7 @@ Before making any code changes, architectural decisions, or recommendations, com
 - [x] Phase 5: Context attested
 - [x] Phase 5.4: Next work selected (<DIM> <MILESTONE>) via Protocol 22
 - [x] Phase 5.5: Cross-repo coordination checked (Protocol 24)
-- [x] Phase 5.6: Proceed Brief issued (Protocol 26)
+- [x] Phase 5.6: Proceed Brief + authority class (Protocol 26 + 28)
 - [x] Phase 5.7: Verification ladder executed (Protocol 27)
 ```
 
@@ -211,7 +212,20 @@ pnpm docs:check-frontmatter
 pnpm bundle:check-budgets
 pnpm quality:governance:check
 pnpm readiness:lanes:check
+pnpm agent:protocols:check
 ```
+
+---
+
+## 7.6 Agent protocols enforcement (P22–P28)
+
+| Resource | Path |
+|----------|------|
+| Catalog + hub links | `docs/agents/agent-protocols-manifest.json` |
+| Enforcement guide | `docs/agents/agent-protocols-enforcement.md` |
+| Gate | `pnpm agent:protocols:check` |
+
+CI and `pnpm quality:governance:check` run this gate. It verifies startup phases 5.4–5.7, P22 scripts, P24 bridge, P26 template, P27 Cursor rule, P28 authority class strings, and agent-sync partials.
 
 ---
 
@@ -420,6 +434,21 @@ When a story is **blocked on a sibling repo** or you **hand off** cross-repo wor
 **Not in this repo:** inbound archive SoR for ecosystem-wide weekly reports — that stays **`baseline-os`** (`workstream/coordination/`).
 
 **Evidence paths (link only):** production smoke and EAP issuance artifacts live in owning repos per deployment-proof-index (e.g. `gtcx-intelligence/docs/audit/evidence/`).
+
+## Agent protocols (P22–P28) — machine-enforced
+
+| Resource | Path |
+| -------- | ---- |
+| Hub index | `gtcx-docs/docs/governance/protocols/` |
+| Local manifest | `docs/agents/agent-protocols-manifest.json` |
+| Enforcement guide | `docs/agents/agent-protocols-enforcement.md` |
+| P22 manifest | `docs/operations/agent-work-selection.md` |
+| P26 template | `docs/operations/agent-proceed-brief-template.md` |
+| P24 bridge | `docs/operations/coordination/cross-repo-agent-bridge.md` |
+
+**Startup phases (INST-003):** 5.4 P22 · 5.5 P24 · 5.6 P26+P28 (Proceed Brief + authority class S/A/R) · 5.7 P27 (run gates in-session).
+
+**Verify wiring:** `pnpm agent:protocols:check` (CI + `pnpm quality:governance:check`).
 
 ## Claude-Specific Notes
 
