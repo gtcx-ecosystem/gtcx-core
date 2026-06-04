@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Provider-agnostic session start — run from any terminal / LLM CLI before work.
- * Phases 5.4–5.6 bootstrap: git state, next-work, session.md touch, Proceed Brief skeleton.
+ * GTCX session start — `pnpm agent:start` (alias: `pnpm agent:session-start`)
+ * P22 next-work + launch focus + execution bout + progress gauge + session.md.
  */
 import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -147,7 +147,7 @@ if (JSON_OUT) {
   process.exit(0);
 }
 
-log('=== GTCX agent session start (provider-agnostic) ===\n');
+log('=== GTCX agent:start ===\n');
 if (launchFocus) {
   log('--- LAUNCH FOCUS (GTM — read first; no audit needed) ---\n');
   log(`**Outcome:** ${launchFocus.northStar.outcome}`);

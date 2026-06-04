@@ -93,7 +93,7 @@ Full gate sequence: `docs/devops/runbooks/quality-runbook.md`
 
 **Read every session:** [docs/operations/agent-universal-instructions.md](../docs/operations/agent-universal-instructions.md)
 
-**First command:** `pnpm agent:session-start` · **Execution bout** drain Class R before check-in · **P22** no menus · **P26** Proceed Brief then work · **P27** you run commands (never "Say push if you want").
+**First command:** `pnpm agent:start` · **Execution bout** drain Class R before check-in · **P22** no menus · **P26** Proceed Brief then work · **P27** you run commands (never "Say push if you want").
 
 **Ecosystem push (harness):** `pnpm --dir ../gtcx-agentic ecosystem:push-all`
 
@@ -139,14 +139,16 @@ Template: `docs/operations/agent-proceed-brief-template.md` · **Forbidden:** Yo
 **First command every session:**
 
 ```bash
-pnpm agent:session-start
+pnpm agent:start
 ```
 
-Runs Protocol 22 next-work, provisions **execution bout** (`.baseline/execution-bout.json`), refreshes `.baseline/memory/session.md`, prints Proceed Brief + bout scope (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+Runs Protocol 22 next-work, provisions **launch focus** + **execution bout**, **progress gauge**, refreshes `.baseline/memory/session.md`, prints Proceed Brief + bout scope (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+
+**Legacy alias:** `pnpm agent:session-start` (same script).
 
 **Bout:** `docs/operations/agent-execution-bout.md` · `pnpm agent:bout`
 
-**JSON for automation:** `pnpm agent:session-start --json`
+**JSON for automation:** `pnpm agent:start --json`
 
 **Before PR (agent-path changes):** include attestation from `docs/operations/agent-attestation-template.md` · `pnpm agent:attestation:check --pr`
 
@@ -166,7 +168,7 @@ Runs Protocol 22 next-work, provisions **execution bout** (`.baseline/execution-
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
-4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` before implementation (provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; micro-commit per story. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:start` before implementation (provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; micro-commit per story. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
 
 ## Build & Run
 
@@ -375,14 +377,16 @@ When a story is **blocked on a sibling repo** or you **hand off** cross-repo wor
 **First command every session:**
 
 ```bash
-pnpm agent:session-start
+pnpm agent:start
 ```
 
-Runs Protocol 22 next-work, provisions **execution bout** (`.baseline/execution-bout.json`), refreshes `.baseline/memory/session.md`, prints Proceed Brief + bout scope (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+Runs Protocol 22 next-work, provisions **launch focus** + **execution bout**, **progress gauge**, refreshes `.baseline/memory/session.md`, prints Proceed Brief + bout scope (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
+
+**Legacy alias:** `pnpm agent:session-start` (same script).
 
 **Bout:** `docs/operations/agent-execution-bout.md` · `pnpm agent:bout`
 
-**JSON for automation:** `pnpm agent:session-start --json`
+**JSON for automation:** `pnpm agent:start --json`
 
 **Before PR (agent-path changes):** include attestation from `docs/operations/agent-attestation-template.md` · `pnpm agent:attestation:check --pr`
 

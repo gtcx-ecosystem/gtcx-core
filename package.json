@@ -70,7 +70,7 @@
     "prepare": "husky",
     "agent:sync": "node scripts/agent-sync/sync.mjs",
     "agent:check": "node scripts/agent-sync/sync.mjs --check",
-    "agent:start": "node scripts/agent-start.mjs",
+    "agent:start": "node scripts/agent-session-start.mjs",
     "agent:session-start": "node scripts/agent-session-start.mjs",
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:bout": "node scripts/agent-execution-bout.mjs",
