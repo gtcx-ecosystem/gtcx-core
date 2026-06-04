@@ -22,34 +22,46 @@ supersedes_note: 'Post-remediation refresh at bdfe7cb — doc-standard 9.6, repo
 
 # gtcx-core — Master Audit & Bank-Grade Certification
 
+> **Readiness model (2026-06-05):** Do not use this file’s **8.9 composite** as engineering or GTM status. Use the three lanes in [readiness-model.md](./readiness-model.md):
+>
+> | Lane                     | Score / stage                                | Canonical doc                                                                  |
+> | ------------------------ | -------------------------------------------- | ------------------------------------------------------------------------------ |
+> | Engineering              | **9.5/10**                                   | [engineering-readiness-2026-06-05.md](./engineering-readiness-2026-06-05.md)   |
+> | Compliance & attestation | **5.5/10** attestation · **8.8/10** controls | [compliance-attestation-2026-06-05.md](./compliance-attestation-2026-06-05.md) |
+> | GTM (library)            | **S1 Ready**                                 | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md)                   |
+>
+> This document remains a **historical blended lens** (investor / enterprise / sovereign narrative).
+
 **Date:** 2026-06-03 (refresh)  
 **Repo:** `gtcx-ecosystem/gtcx-core`  
-**Branch:** `main` @ `bdfe7cb` (unstaged agent-sync drift on `AGENTS.md`, `.agent/` — excluded from score evidence)  
+**Branch:** `main` @ `bdfe7cb`  
 **Auditor:** Cursor agent (master-audit framework)  
 **Methodology:** `gtcx-docs/tools/audit/audit-framework/prompts/master/comprehensive-audit-prompt.md`  
 **Reference:** `gtcx-docs/tools/audit/audit-framework/SCORING_FRAMEWORK.md`  
-**Prior baseline:** [master-audit-2026-06-03.md](./master-audit-2026-06-03.md) morning pass (8.6 @ `6127da5`); [full-audit-2026-06-04.md](./full-audit-2026-06-04.md)
+**Prior baseline:** morning pass (8.6 @ `6127da5`); [full-audit-2026-06-04.md](./full-audit-2026-06-04.md)
 
 ---
 
-## Executive Summary
+## Executive Summary (legacy blended lens)
 
 | Dimension                    |      Score | Rating band                      |
 | ---------------------------- | ---------: | -------------------------------- |
-| **Core weighted**            | **8.9/10** | Strong institutional platform    |
+| **Core weighted (legacy)**   | **8.9/10** | Blended — see three lanes above  |
 | Investor lens                |     8.9/10 | Strong platform asset            |
 | Enterprise buyer lens        |     8.7/10 | Serious library; attestation gap |
 | African sovereign / DFI lens |     9.0/10 | Strong crypto + resilience story |
 
-**Verdict:** `gtcx-core` is a **reference-grade cryptographic foundation library** with **all in-repo quality gates green**, **22/22 npm Sigstore provenance**, **Defensibility Tier 5 technical ~88%** (automatable slice complete), and **machine-enforceable doc/repo hygiene**. It is **not** sovereign-pilot-ready as a standalone product: live-stack pen-test, testnet/DR proof, trusted-setup ceremony (CORE-004 / XR-402), and commercial Tier 5 gates remain **external**.
+**Verdict:** `gtcx-core` is a **reference-grade cryptographic foundation library** with **engineering readiness 9.5/10** (in-repo gates green). **Compliance attestation** and **ecosystem GTM** are separate lanes — pen-test, SOC 2 letter, ceremony (CORE-004 / XR-402), and sovereign stack pilots are **not** engineering blockers.
 
-**Top 3 priorities:**
+**Top 3 priorities (by lane):**
 
-1. **XR-402 trusted-setup ceremony** → unblock CORE-004 D3 M3.2 transcript verify (`rust/gtcx-zkp`, release-gated)
-2. **EXT-INF-002 live-stack pen-test** (gtcx-infrastructure) — link report from [trust portal](../governance/trust-portal.md)
-3. **OI-X02 infra hub ack** for ER-1-08 — await gtcx-infrastructure hub row; mirror only in core
+| Lane            | Priority                                                                  |
+| --------------- | ------------------------------------------------------------------------- |
+| Compliance      | XR-402 ceremony → CORE-004; EXT-INF-002 pen-test; SOC 2 Type I engagement |
+| GTM (ecosystem) | OI-X02 infra hub ack; sandbox outreach (human send)                       |
+| Engineering     | CORE-004 code after ceremony; optional network Phase 2                    |
 
-> **Hardcore sanity check:** Post-remediation hygiene/docs uplift is **verified in-session** (+0.3 core vs morning audit). No score inflation on external attestation — pen-test/SOC 2 still absent (§9).
+> **Hardcore sanity check:** Post-remediation hygiene/docs uplift verified in-session. No score inflation on external attestation — pen-test/SOC 2 still absent (§9).
 
 ---
 

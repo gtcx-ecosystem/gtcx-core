@@ -18,11 +18,19 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 ## Current State
 
-Two scores apply — do not conflate them ([full-audit 2026-06-04](./docs/audit/full-audit-2026-06-04.md)).
+**Three readiness lanes** — do not conflate them ([readiness model](./docs/audit/readiness-model.md)):
 
-### Library readiness (npm / engineering 10/10)
+| Lane                         | Score / stage                      | Canonical doc                                                                          |
+| ---------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
+| **Engineering**              | **9.5/10**                         | [engineering-readiness-2026-06-05](./docs/audit/engineering-readiness-2026-06-05.md)   |
+| **Compliance & attestation** | **5.5/10** (third-party artifacts) | [compliance-attestation-2026-06-05](./docs/audit/compliance-attestation-2026-06-05.md) |
+| **GTM (library buyer)**      | **S1 Ready**                       | [gtm-readiness-2026-06-05](./docs/audit/gtm-readiness-2026-06-05.md)                   |
 
-**Composite: 9.5/10** as of [2026-05-21](./docs/audit/internal-completion-audit-2026-05-21.md). The monorepo is in a hardened, code-addressable state with active quality gates:
+Legacy blended lens: [master-audit-2026-06-03](./docs/audit/master-audit-2026-06-03.md) (8.9 investor composite — not engineering).
+
+### Engineering readiness (in-repo)
+
+**9.5/10** as of [2026-06-05](./docs/audit/engineering-readiness-2026-06-05.md) ([internal completion 2026-05-21](./docs/audit/internal-completion-audit-2026-05-21.md)). The monorepo is in a hardened, code-addressable state with active quality gates:
 
 - trust-path defects in signing, verification, token handling, and offline lockout recovery have been remediated
 - offline replay ordering uses logical sequence instead of wall-clock time
@@ -40,24 +48,32 @@ Two scores apply — do not conflate them ([full-audit 2026-06-04](./docs/audit/
 
 **Technical Tier 5: ~88%** — automatable slice complete (DTF-5.5.1 strict jurisdiction packs shipped). Tiers 1–4 are achieved; remaining Tier 5 work is ceremony-gated (CORE-004 / XR-402) and commercial (Legal/GTM). See [tier-5 workplan](./docs/operations/tier-5-workplan-2026-06.md).
 
-| Track                                   | Status        | Canonical doc                                                                                         |
-| --------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------- |
-| S-T5-1 gh-gold profile + KAT            | **done**      | [tier-5 workplan](./docs/operations/tier-5-workplan-2026-06.md)                                       |
-| S-T5-2 zw-diamond + verification + KATs | **done**      | [execution roadmap](./docs/audit/execution-roadmap.md)                                                |
-| S-T5-3 cross-repo witness + registry    | **done**      | [DTF-5.4.4 ack](./docs/operations/coordination/to-gtcx-protocols-dtf-5-4-4-witness-ack-2026-06-05.md) |
-| S-T5-4 strict jurisdiction packs        | **done**      | `pnpm jurisdiction:validate-packs`                                                                    |
-| Sovereign pilot / bank-grade            | **not ready** | Ecosystem gates below                                                                                 |
+| Track                                   | Status      | Canonical doc                                                                                         |
+| --------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------- |
+| S-T5-1 gh-gold profile + KAT            | **done**    | [tier-5 workplan](./docs/operations/tier-5-workplan-2026-06.md)                                       |
+| S-T5-2 zw-diamond + verification + KATs | **done**    | [execution roadmap](./docs/audit/execution-roadmap.md)                                                |
+| S-T5-3 cross-repo witness + registry    | **done**    | [DTF-5.4.4 ack](./docs/operations/coordination/to-gtcx-protocols-dtf-5-4-4-witness-ack-2026-06-05.md) |
+| S-T5-4 strict jurisdiction packs        | **done**    | `pnpm jurisdiction:validate-packs`                                                                    |
+| Ceremony (CORE-004)                     | **blocked** | Compliance lane — XR-402                                                                              |
 
 **Moat path (in-repo):** WorkProof witness → `@gtcx/crypto` profile prove → `@gtcx/verification` bundle (`commodity-origin-zk`). Cross-package test: [`tests/integration/commodity-origin-zk.test.ts`](./tests/integration/commodity-origin-zk.test.ts).
 
+### Compliance & attestation (non-engineering)
+
+**5.5/10** third-party attestation — pen-test report and SOC 2 Type I letter not yet delivered. In-repo controls **8.8/10**. See [compliance-attestation-2026-06-05](./docs/audit/compliance-attestation-2026-06-05.md).
+
+### GTM (non-engineering)
+
+**Library:** S1 Ready (`pnpm add @gtcx/*`). **Ecosystem sovereign stack:** S2 Not Ready — infra/founder gates. See [gtm-readiness-2026-06-05](./docs/audit/gtm-readiness-2026-06-05.md).
+
 ### Active execution program
 
-- **FA-S1 / DTF Tier 5:** [execution-roadmap.md](./docs/audit/execution-roadmap.md) (reconciled with [full-audit-2026-06-04](./docs/audit/full-audit-2026-06-04.md))
-- **Engagement readiness:** [sprint roadmap 2026-05-22](./docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md) — sovereign-state engagements (Zimbabwe, Ghana, Namibia, Botswana, DRC)
+- **FA-S1 / DTF Tier 5:** [execution-roadmap.md](./docs/audit/execution-roadmap.md)
+- **Engagement readiness:** [sprint roadmap 2026-05-22](./docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)
 
-### Remaining blockers before sovereign pilot / production release
+### Ecosystem blockers (compliance + GTM — not engineering)
 
-**Library maturity alone does not clear a sovereign pilot.** The items below are ecosystem or human gates:
+**These do not lower the engineering score.** They block **sovereign stack** deals owned with [gtcx-infrastructure GTM](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/README.md):
 
 **External clearance (XC) — owned with [gtcx-infrastructure GTM](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/README.md), not in this repo alone:**
 

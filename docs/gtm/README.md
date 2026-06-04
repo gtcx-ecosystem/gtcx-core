@@ -14,13 +14,13 @@ review_cycle: 'on-change'
 
 # GTM Evidence Pack — gtcx-core
 
-**Purpose:** Everything needed to achieve 10/10 bank-grade readiness, in one folder.
+**Purpose:** GTM and regulator-facing evidence. **Not** engineering readiness — see [audit/readiness-model.md](../audit/readiness-model.md).
 **Audience:** Regulatory sandbox teams, enterprise auditors, compliance reviewers, investors conducting technical due diligence.
 **Last updated:** 2026-06-02
 
 **Ecosystem alignment (canonical):** [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md) — XC blockers, pen-test, SOC 2, and Zimbabwe outreach are owned with [gtcx-infrastructure GTM](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/README.md) per the [Global South 10/10 plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/gtm/plans/global-south-10x-plan.md).
 
-**Latest stage assessment:** [gtm-reality-check-2026-06-02.md](./gtm-reality-check-2026-06-02.md) — **S1 Ready** (library); sovereign pilot **S2 Partially Ready** (XC blockers in infrastructure).
+**Latest stage assessment:** [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md) — library **S1 Ready**; ecosystem sovereign stack **S2 Not Ready** (infra). Prior: [gtm-reality-check-2026-06-02.md](./gtm-reality-check-2026-06-02.md).
 
 ---
 
@@ -83,16 +83,12 @@ Full index: [`inbound-tickets/README.md`](./inbound-tickets/README.md).
 
 ---
 
-## Current Readiness Score
+## Current readiness (three lanes)
 
-**Library (gtcx-core):** **9.5/10 internal** · **8.9/10 bank-grade composite** (2026-05-27 master audit) — engineering track complete; **XC blockers** are external.
+| Lane                     | Score / stage | Doc                                                                                   |
+| ------------------------ | ------------- | ------------------------------------------------------------------------------------- |
+| Engineering              | **9.5/10**    | [engineering-readiness-2026-06-05.md](../audit/engineering-readiness-2026-06-05.md)   |
+| Compliance & attestation | **5.5/10**    | [compliance-attestation-2026-06-05.md](../audit/compliance-attestation-2026-06-05.md) |
+| GTM (library buyer)      | **S1 Ready**  | [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md)                   |
 
-| Dimension                   | Score      | Status                                                                                |
-| --------------------------- | ---------- | ------------------------------------------------------------------------------------- |
-| Code quality & architecture | 9.5        | 2,360+ tests; 21 CI gates; internal 10/10 engineering complete                        |
-| Security controls           | 8.5        | FIPS verified; STRIDE matrix; **pen-test on live stack** = infrastructure EXT-INF-002 |
-| Supply chain                | 9.5        | **21/21** npm Sigstore @ 3.1.4 train; downstream consumers pinned                     |
-| Compliance documentation    | 9.0        | Library-scope GDPR/PCI/SOX/FIPS; SOC 2 Type I = infrastructure + CPA                  |
-| GTM / sovereign pilot       | S2 partial | See [gtm-reality-check-2026-06-02](./gtm-reality-check-2026-06-02.md)                 |
-
-**Remaining for sovereign S2 (not owned in this repo):** pen-test report, pilot owner, DPA, live testnet proof, regulator send — [16-ecosystem-gtm-alignment](./16-ecosystem-gtm-alignment.md).
+**Ecosystem sovereign stack S2** blockers (pen-test, pilot DPA, testnet, sandbox send) — [16-ecosystem-gtm-alignment](./16-ecosystem-gtm-alignment.md). **Do not** count these against engineering 9.5.

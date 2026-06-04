@@ -17,7 +17,7 @@ review_cycle: 'on-change'
 **Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
 
 **Last updated:** 2026-06-03
-**Latest synthesis:** [`audit/master-audit-2026-06-03.md`](./audit/master-audit-2026-06-03.md) (**8.9/10** refresh) · [`audit/full-audit-2026-06-04.md`](./audit/full-audit-2026-06-04.md) · doc-standard **9.6/10** · repo-hygiene **9.6/10**
+**Readiness lanes:** [engineering **9.5**](./audit/engineering-readiness-2026-06-05.md) · [compliance **5.5**](./audit/compliance-attestation-2026-06-05.md) · [GTM **S1**](./audit/gtm-readiness-2026-06-05.md) — [model](./audit/readiness-model.md) · legacy [master 8.9](./audit/master-audit-2026-06-03.md)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here

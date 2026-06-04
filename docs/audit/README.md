@@ -1,52 +1,54 @@
 ---
 title: 'Audit Documentation'
-status: 'current'
-date: '2026-05-27'
-owner: 'gtcx-core'
-role: 'protocol-architect'
-agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
-trust_score: 95
-autonomy_level: 'sovereign'
-tier: 'critical'
+status: current
+date: 2026-06-05
+owner: gtcx-core
+role: quality-evidence-lead
+tier: critical
 tags: ['documentation', 'audit']
-review_cycle: 'on-change'
----
-
----
-
-title: 'Audit Documentation'
-status: 'current'
-date: '2026-05-17'
-owner: 'protocol-architect'
-role: 'protocol-architect'
-tier: 'standard'
-tags: ['audit', 'docs']
-review_cycle: 'on-change'
-
+review_cycle: on-change
 ---
 
 # Audit Documentation
 
-Forensic audits, master audits, remediation plans, and ecosystem rating reports for `gtcx-core`.
+Forensic audits, readiness scorecards, and remediation plans for `gtcx-core`.
 
 ---
 
-## Key Docs
+## Start here — three readiness lanes
 
-| File / Folder                            | Purpose                                      |
-| ---------------------------------------- | -------------------------------------------- |
-| `master-audit-YYYY-MM-DD.md`             | Periodic master audits with composite scores |
-| `full-audit-YYYY-MM-DD.md`               | Comprehensive full audits                    |
-| `10-10-roadmap-YYYY-MM-DD.md`            | 10/10 readiness sprint roadmaps (repo-level) |
-| `moat-dimension-roadmap-10-10.md`        | Per-dimension cryptographic moat roadmap     |
-| `algorithmic-moat-sprint2-assessment.md` | Sprint 2 ZKP moat feature scoring            |
-| `remediation-*.md`                       | Remediation plans and trackers               |
-| `_historical/`                           | Archived audit artifacts                     |
+**Do not use a single “bank-grade composite” for engineering status.**
+
+| Lane                         | Question                                 | Canonical doc (2026-06-05)                                                                              |
+| ---------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Engineering**              | Can we build, test, and release?         | [engineering-readiness-2026-06-05.md](./engineering-readiness-2026-06-05.md) — **9.5/10**               |
+| **Compliance & attestation** | Do we have third-party/regulatory proof? | [compliance-attestation-2026-06-05.md](./compliance-attestation-2026-06-05.md) — **5.5/10** attestation |
+| **GTM**                      | Can which buyer adopt today?             | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md) — library **S1 Ready**                     |
+
+**Model:** [readiness-model.md](./readiness-model.md)
 
 ---
 
-## How to Use
+## Key docs
 
-- Start with the latest `master-audit-YYYY-MM-DD.md` for current repo health.
-- Use `10-10-roadmap-YYYY-MM-DD.md` for the active improvement program.
-- Use `remediation-*.md` files for tracking open remediation items.
+| File                                   | Purpose                                          |
+| -------------------------------------- | ------------------------------------------------ |
+| `engineering-readiness-YYYY-MM-DD.md`  | CI, tests, hygiene, DTF technical — in-repo only |
+| `compliance-attestation-YYYY-MM-DD.md` | Pen-test, SOC 2, ceremony, trust artifacts       |
+| `gtm-readiness-YYYY-MM-DD.md`          | GTM stages S0–S6; library vs ecosystem buyers    |
+| `master-audit-YYYY-MM-DD.md`           | **Legacy** blended investor/enterprise lens      |
+| `internal-completion-audit-*.md`       | Engineering lane source (9.5 internal)           |
+| `full-audit-YYYY-MM-DD.md`             | Architecture sprint snapshots                    |
+| `docs-standard-compliance-*.md`        | Docs machine-readable gate                       |
+| `repo-hygiene-*.md`                    | Workspace root + folder policy                   |
+| `10-10-roadmap-*.md`                   | Improvement program (cross-lane items tagged)    |
+| `moat-dimension-roadmap-10-10.md`      | DTF per-dimension crypto moat                    |
+
+---
+
+## How to use
+
+1. **Engineering status** → latest `engineering-readiness-*.md` + run gates in that doc.
+2. **Procurement / regulator** → `compliance-attestation-*.md` + [trust portal](../governance/trust-portal.md).
+3. **Commercial adoptability** → `gtm-readiness-*.md` + [gtm/README.md](../gtm/README.md).
+4. **Historical composite** → `master-audit-*.md` (do not cite as engineering score).
