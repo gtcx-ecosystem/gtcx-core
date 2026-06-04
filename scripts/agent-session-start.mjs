@@ -125,12 +125,14 @@ if (JSON_OUT) {
 log('=== GTCX agent session start (provider-agnostic) ===\n');
 log('Git status:\n', gitStatus || '(clean)\n');
 log('Next work (P22):', JSON.stringify(nextWork?.next ?? nextWork, null, 2));
-log('\n--- Proceed Brief (P26 + P28) — copy to operator ---\n');
-log(`**Next action:** ${proceedBrief.nextAction}`);
+log('\n--- Proceed Brief (P26 + P28) — emit to operator, then IMPLEMENT ---\n');
+log(`**Next:** ${proceedBrief.nextAction}`);
 log(`**Story / work ID:** ${proceedBrief.storyId}`);
 log(`**Because:** ${proceedBrief.because}`);
 log(`**Authority class:** ${proceedBrief.authorityClass}`);
 log(`**Authorization artifact:** ${proceedBrief.authorizationArtifact}`);
 log(`**Blocked:** ${blocked ? 'yes' : 'no'}`);
+log(`**Override:** stop | correct: | story ID`);
+log('\n**FORBIDDEN replies (P26 v1.1.0):** Your call · Two options · 1./2. menus · "switch to other repo?"');
 log('\nSession updated:', SESSION_PATH);
 log('Before claiming done: run V-ladder (AGENTS.md §7) and include attestation in PR/commit.\n');

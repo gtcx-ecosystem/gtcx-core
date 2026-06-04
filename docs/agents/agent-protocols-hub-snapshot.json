@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "hubRepo": "gtcx-docs",
   "hubLocalPath": "../gtcx-docs",
-  "capturedAt": "2026-06-04T10:04:34.665Z",
+  "capturedAt": "2026-06-04T10:20:17.070Z",
   "captureNote": "Run after reviewing hub protocol changes",
   "protocols": {
     "19-agent-credential-access": {
@@ -11,7 +11,7 @@
       "gitDate": null
     },
     "22-agent-work-selection": {
-      "sha256": "3eb56ec6e97c629511b63ccbd721e4aa1c6595e4aa164e6820ce9093b23b0417",
+      "sha256": "9c3d30c388341a9a6c70f45c4147fec311c0622b62466a448acf4efa98092fa5",
       "gitCommit": null,
       "gitDate": null
     },
@@ -21,7 +21,7 @@
       "gitDate": null
     },
     "26-agent-proceed-confirmation": {
-      "sha256": "af19e098eaba97d3bc54caa8195b576bbad62b667f2cd4c0059cfce706679435",
+      "sha256": "3f6be65fb3d161f5f78fabfeb5ae98b9f4daeb8313c63bf5218c3e0f8a6a2d7e",
       "gitCommit": null,
       "gitDate": null
     },

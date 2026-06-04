@@ -36,4 +36,15 @@ Copy at session start **before** irreversible implementation. Hub: [Protocol 26]
 **Owner:** <role or repo>
 **Artifact needed:** <file, ticket, approval>
 **Agent will not:** ask operator to choose between backlog items
+
+## Forbidden operator messages (P26 v1.1.0 — hard stop)
+
+Never end a turn with:
+
+- **Your call** / **Your call on …**
+- **Two options:** or numbered **1. … 2. …** (stories, repos, sprints)
+- **Natural transition point** → menu (e.g. IR-3.2 in infra **or** switch to compliance-os)
+- **Which do you prefer?** / **Do you want A or B?**
+
+**Correct pattern:** one Proceed Brief → start work. Human may **stop** or **correct** only.
 ```

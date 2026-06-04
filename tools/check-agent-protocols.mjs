@@ -87,10 +87,18 @@ requireFile('.agent/coordination-pointer.md', 'P24 pointer');
 runNode('scripts/check-coordination-hygiene.mjs', '--strict');
 
 // --- P26 / P28 ---
+const p26 = manifest.protocols.find((p) => p.id === 'P26');
 requireFile('docs/operations/agent-proceed-brief-template.md', 'P26 template');
 requireContains('AGENTS.md', ['Phase 5.6', 'Protocol 26', 'Proceed Brief'], 'AGENTS P26');
 requireContains('AGENTS.md', ['Authority class', 'Protocol 28'], 'AGENTS P28');
 requireContains('AGENTS.md', ['agent:session-start'], 'AGENTS session start');
+if (p26?.cursorRule) {
+  requireFile(p26.cursorRule, 'P26 cursor rule');
+  const p26Rule = readRepoFile(p26.cursorRule);
+  if (p26Rule && (!p26Rule.includes('Your call') || !p26Rule.includes('Two options'))) {
+    failures.push(`${p26.cursorRule}: missing P26 v1.1.0 menu-forbidden phrases`);
+  }
+}
 
 // --- P27 ---
 const p27 = manifest.protocols.find((p) => p.id === 'P27');
@@ -104,7 +112,12 @@ if (p27) {
     if (!existsSync(absDir)) continue;
     for (const file of readdirSync(absDir, { recursive: true })) {
       if (typeof file !== 'string' || !file.endsWith('.md')) continue;
-      if (file.includes('agent-protocols-enforcement')) continue;
+      if (
+        file.includes('agent-protocols-enforcement') ||
+        file.includes('agent-proceed-brief-template')
+      ) {
+        continue;
+      }
       const content = readRepoFile(join(dir, file));
       if (!content) continue;
       for (const forbidden of p27.forbiddenPatterns ?? []) {
