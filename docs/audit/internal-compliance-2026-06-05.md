@@ -6,7 +6,7 @@ owner: gtcx-core
 role: quality-evidence-lead
 document_id: AUDIT-INT-COMPLIANCE-2026-06-05
 audit_lane: internal-compliance
-composite: 9.3
+audit_quality: 8.5
 tier: critical
 tags: ['audit', 'compliance', 'internal', 'index']
 review_cycle: quarterly
@@ -20,16 +20,18 @@ In-repo **control design and evidence automation** — not third-party attestati
 
 ---
 
-## Rollup score
+## Audit quality (1–10)
 
-**~9.3/10** — weighted from audits below (2026-06-05).
+**Lane 2 audit program quality:** **8.5/10**
 
-| Source audit                                                                                  |       Score |
+## Readiness outcomes (from source audits)
+
+| Source audit                                                                                  |     Outcome |
 | --------------------------------------------------------------------------------------------- | ----------: |
-| [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md)            |         9.6 |
-| [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)                                    |         9.6 |
+| [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md)            |      9.6/10 |
+| [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)                                    |      9.6/10 |
 | [internal-10-10-signoff](./internal-10-10-signoff-2026-05-28.md) — governance + threat matrix |        pass |
-| [soc2-readiness.md](../compliance/soc2-readiness.md) — TSC mapping                            | ~8.5 design |
+| [soc2-readiness.md](../compliance/soc2-readiness.md) — TSC mapping                            | design only |
 
 ---
 

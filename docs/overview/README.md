@@ -17,7 +17,8 @@ review_cycle: 'on-change'
 > **Status:** Current
 > **Date:** 2026-06-03  
 > **Owner:** Protocol Architect  
-> **Five audit lanes:** Eng **10.0/9.5** · Internal compliance **~9.3** · External **0/12** · Bank-grade **8.9** · GTM **S1** — [readiness model](../audit/readiness-model.md)  
+> **Audit quality (1–10):** L1 **8.5** · L2 **8.5** · L3 register **8.0** · L4 **8.5** · L5 **8.0** — [readiness model](../audit/readiness-model.md)  
+> **Readiness outcomes:** eng 9.5/10.0 · compliance ~9.6 · external **OPEN 0/12** · bank-grade **8.9** · GTM **S1** / sovereign **S2 NR**  
 > **Defensibility Tier 5 technical:** ~88% (engineering lane; ceremony/commercial external)  
 > **Next review:** 2026-09-01 (quarterly)
 
@@ -31,9 +32,9 @@ review_cycle: 'on-change'
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** **Lane 1** engineering **10.0** signoff / **9.5** completion ([index](../audit/engineering-completeness-quality-2026-06-05.md)). **Lane 2** internal compliance **~9.3** ([index](../audit/internal-compliance-2026-06-05.md)). **Lane 3** external compliance **0/12** ([register](../audit/external-dependencies-register-2026-05-28.md)). **Lane 4** bank-grade **8.9** ([master audit](../audit/master-audit-2026-06-03.md)). **Lane 5** GTM library **S1** ([index](../audit/gtm-readiness-2026-06-05.md)). Tier 5 technical ~88%; CORE-004 → lane 3 (XR-402).
+**Maturity state:** See [readiness-model](../audit/readiness-model.md) — **audit quality 1–10** is separate from **readiness outcomes**. Engineering readiness **9.5/10.0**; bank-grade composite **8.9**; external register **OPEN 0/12**; GTM **S1** / sovereign **S2 not ready**.
 
-**Remaining gaps by lane:** L3 — pen-test, SOC 2 letter, ceremony. L5 (ecosystem) — testnet/DR, sandbox send. L1 P2 — `TURBO_*` / `OPENAI_API_KEY`.
+**Remaining gaps:** L3 T0 blockers — pen-test, SOC 2 letter, XR-402 ceremony. L5 ecosystem — testnet/DR, sandbox send.
 
 ---
 

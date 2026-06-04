@@ -17,7 +17,7 @@ review_cycle: 'on-change'
 **Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
 
 **Last updated:** 2026-06-03
-**Five audit lanes:** [model](./audit/readiness-model.md) · Eng **10.0/9.5** · Internal compliance **~9.3** · External **0/12** · Bank-grade **8.9** · GTM **S1**
+**Five audit lanes:** [model](./audit/readiness-model.md) — **audit quality 1–10** per lane; readiness outcomes separate (external = **status/tier** only)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here

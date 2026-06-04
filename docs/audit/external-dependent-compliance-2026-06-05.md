@@ -7,7 +7,7 @@ role: crypto-security-engineer
 document_id: AUDIT-EXT-COMPLIANCE-2026-06-05
 audit_lane: external-dependent-compliance
 tier: critical
-tags: ['audit', 'compliance', 'external', 'index']
+tags: ['audit', 'compliance', 'external', 'index', 'status']
 review_cycle: weekly
 ---
 
@@ -15,56 +15,37 @@ review_cycle: weekly
 
 **Lane 3 of 5** — [readiness-model.md](./readiness-model.md)
 
-Dependencies **outside repo control** required for certified uplift. **System of record:** [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md).
+**Audit quality (register as artifact):** **8.0/10** — itemized SoR with owners and impact.
+
+**Readiness:** **status / tier only** — never 1–10 for delivery.
 
 ---
 
-## Status
+## Delivery status (readiness)
 
-| Metric                               | Value                                            |
-| ------------------------------------ | ------------------------------------------------ |
-| Register items (compliance-relevant) | **7** of 12 (excludes GTM-only EXT-CORE-007–010) |
-| Complete                             | **0**                                            |
-| Certified composite cap              | Remains **8.9** until lane 3 closes              |
-
-**GTM-only register rows** (007–010) → [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md), not this lane.
-
----
-
-## Compliance-relevant register rows
-
-| ID                | Item                                    | Owner                    |
-| ----------------- | --------------------------------------- | ------------------------ |
-| EXT-CORE-001      | Pen-test execution + report             | crypto-security-engineer |
-| EXT-CORE-002      | SOC 2 Type I CPA report                 | quality-evidence-lead    |
-| EXT-CORE-003      | FIPS boundary independent review        | crypto-security-engineer |
-| EXT-CORE-004/005  | npm org provenance policy + publish     | frontier-infra-engineer  |
-| EXT-CORE-006      | RUSTSEC upstream (rustls-webpki)        | crypto-security-engineer |
-| EXT-CORE-011      | DR live drill witness                   | frontier-infra-engineer  |
-| EXT-CORE-012      | 90-day P1-free window (ends 2026-08-17) | quality-evidence-lead    |
-| XR-402 / CORE-004 | Trusted-setup ceremony transcript       | core + infra             |
-
-Cross-repo: EXT-CORE-X01, X02 in register.
+| Field        | Value                                                    |
+| ------------ | -------------------------------------------------------- |
+| Register     | **OPEN**                                                 |
+| Complete     | **0 / 12**                                               |
+| Prep in-repo | **PREP-READY** (pen-test RFP, SOC 2 docs, SLSA workflow) |
+| Time gate    | **IN-FLIGHT** — EXT-CORE-012 until 2026-08-17            |
+| Org block    | **BLOCKED** — EXT-CORE-004/005 npm provenance            |
 
 ---
 
-## Canonical audits
+## Item tiers (compliance subset)
 
-| Audit                                                                                          | Role                             |
-| ---------------------------------------------------------------------------------------------- | -------------------------------- |
-| [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md) | **SoR** — itemized blockers      |
-| [external-validation-findings-log.md](../release/external-validation-findings-log.md)          | Pen-test findings when delivered |
-| [../security/pen-test-engagement-log.md](../security/pen-test-engagement-log.md)               | Vendor engagement state          |
-| [../compliance/soc2-engagement-log.md](../compliance/soc2-engagement-log.md)                   | CPA engagement state             |
+| Tier             | EXT-CORE IDs                                      | Status             |
+| ---------------- | ------------------------------------------------- | ------------------ |
+| **T0 — Blocker** | 001 pen-test, 002 SOC 2, XR-402 ceremony          | `not-started`      |
+| **T1 — High**    | 003 FIPS review, 004/005 provenance, 011 DR drill | `open`             |
+| **T2 — Hygiene** | 006 RUSTSEC                                       | `open` (mitigated) |
+| **T3 — Time**    | 012 90-day P1-free                                | `in-progress`      |
 
----
-
-## Repo-side prep (complete — lane 2)
-
-Pen-test RFP, SOC 2 readiness docs, SLSA workflow — see register § “Repo-side materials ready” and [internal-compliance-2026-06-05.md](./internal-compliance-2026-06-05.md).
+GTM rows 007–010 → [gtm-readiness](./gtm-readiness-2026-06-05.md).
 
 ---
 
-## Supersedes
+## Canonical audit
 
-[compliance-attestation-2026-06-05.md](./compliance-attestation-2026-06-05.md) — removed; use this index + external register.
+[external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md) — **SoR**

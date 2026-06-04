@@ -20,15 +20,18 @@ review_cycle: quarterly
 
 ---
 
-## Score
+## Audit quality (1–10)
 
-| Metric                     |       Value | Source                                                                         |
-| -------------------------- | ----------: | ------------------------------------------------------------------------------ |
-| Certified composite        |  **8.9/10** | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md)                     |
-| Internal readiness (input) | **10.0/10** | [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md) |
-| Investor lens              |         8.9 | master audit §5.3                                                              |
-| Enterprise lens            |         8.7 | master audit §5.3                                                              |
-| Sovereign / DFI lens       |         9.0 | master audit §5.3                                                              |
+**Lane 4 master-audit artifact quality:** **8.5/10**
+
+## Readiness outcomes (from master audit)
+
+| Metric              |      Value | Source                                                     |
+| ------------------- | ---------: | ---------------------------------------------------------- |
+| Certified composite | **8.9/10** | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md) |
+| Investor lens       |        8.9 | §5.3                                                       |
+| Enterprise lens     |        8.7 | §5.3                                                       |
+| Sovereign / DFI     |        9.0 | §5.3                                                       |
 
 Machine-readable: [latest.json](./latest.json)
 

@@ -20,13 +20,17 @@ Commercial adoptability and buyer stages — **non-engineering**.
 
 ---
 
-## Scores (by buyer)
+## Audit quality (1–10)
 
-| Buyer                                           | Stage            | Notes                                                  |
-| ----------------------------------------------- | ---------------- | ------------------------------------------------------ |
-| **A — Library integrator** (`pnpm add @gtcx/*`) | **S1 Ready**     | npm + Sigstore + downstream docs                       |
-| **A — Integrator 30-day trial**                 | **S2 Partial**   | Technical OK; no library-only pilot MSA                |
-| **B — Ecosystem sovereign stack**               | **S2 Not Ready** | Infra/founder gates — not a core engineering downgrade |
+**Lane 5 GTM audit quality:** **8.0/10** — [gtm-reality-check-2026-06-02](../gtm/gtm-reality-check-2026-06-02.md)
+
+## Readiness outcomes (S0–S6 stages — not 1–10)
+
+| Buyer                                           | Stage            | Notes                            |
+| ----------------------------------------------- | ---------------- | -------------------------------- |
+| **A — Library integrator** (`pnpm add @gtcx/*`) | **S1 Ready**     | npm + Sigstore + downstream docs |
+| **A — Integrator 30-day trial**                 | **S2 Partial**   | No library-only pilot MSA        |
+| **B — Ecosystem sovereign stack**               | **S2 Not Ready** | Infra/founder gates              |
 
 ---
 

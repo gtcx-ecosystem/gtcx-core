@@ -19,16 +19,17 @@ This file is a **rollup index**. Forensic evidence lives in the audits listed be
 
 ---
 
-## Scores
+## Audit quality (1–10)
+
+**Lane 1 audit program quality:** **8.5/10** — signoff **9**, completion **8.5**, full-audit **8.5**; overlapping masters reduce suite coherence.
+
+## Readiness outcomes (from source audits)
 
 | Metric                          |       Value | Source audit                                                                         |
 | ------------------------------- | ----------: | ------------------------------------------------------------------------------------ |
 | Internal signoff (gates @ HEAD) | **10.0/10** | [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md)       |
 | Internal completion (packages)  |  **9.5/10** | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) |
-| Repo hygiene                    |  **9.6/10** | [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)                           |
 | DTF technical Tier 5            |    **~88%** | [tier-5 workplan](../operations/tier-5-workplan-2026-06.md)                          |
-
-**Report engineering as:** **10.0** for gate sign-off · **9.5** for holistic package completion.
 
 ---
 
