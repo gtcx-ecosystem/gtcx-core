@@ -15,6 +15,8 @@ aligned_with: 'gtcx-infrastructure/docs/gtm/plans/global-south-10x-plan.md'
 
 > **Superseded (2026-06-05):** Lane 5 index — [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md). Five lanes — [readiness-model.md](../audit/readiness-model.md). This file retained for S0–S6 detail.
 
+**S0–S6 → GR-T (lane 5 readiness):** S0→GR-T0 · S1→**GR-T1** (library today) · S2→GR-T2 · S3–S6→GR-T3–T6. Sovereign stack: **below GR-T2**.
+
 **Assessed as:** npm cryptographic **foundation library** (not a deployable service).  
 **Evidence base:** README, trust portal, `docs/gtm/*`, `docs/audit/ci-confirmation-2026-06-01.md`, infrastructure GTM + EXT-INF register (2026-05-31).  
 **Alignment:** [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md)

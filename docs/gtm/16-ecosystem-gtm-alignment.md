@@ -19,15 +19,17 @@ review_cycle: 'on-change'
 
 **External blockers register (XC):** [external-dependencies-register-2026-05-31.md](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/audit/external-dependencies-register-2026-05-31.md)
 
+**gtcx-core readiness (not S-stages alone):** [gtm-readiness-2026-06-05.md](../audit/gtm-readiness-2026-06-05.md) — **GR-T1** library · sovereign **below GR-T2**. **GCR:** **GCR-T0 BLOCKED** — [global-compliance-rating-2026-06-05.md](../audit/global-compliance-rating-2026-06-05.md).
+
 ---
 
 ## Product boundary (what buyers actually adopt)
 
-| Layer                        | Repo                  | What the buyer sees                             | GTM stage driver           |
-| ---------------------------- | --------------------- | ----------------------------------------------- | -------------------------- |
-| **Foundation library**       | `gtcx-core`           | `@gtcx/*` on npm, trust portal, crypto evidence | S1 developer adoption      |
-| **Verification rail + APIs** | `gtcx-protocols`      | `@gtcx/sdk`, container `0.4.4`, sandboxes       | S2 pilot (with infra live) |
-| **Deploy + regulator pack**  | `gtcx-infrastructure` | af-south-1, IRP, pen-test report, sandbox ZIP   | S2→S3 sovereign / sandbox  |
+| Layer                        | Repo                  | What the buyer sees                             | GTM (S / GR-T)               |
+| ---------------------------- | --------------------- | ----------------------------------------------- | ---------------------------- |
+| **Foundation library**       | `gtcx-core`           | `@gtcx/*` on npm, trust portal, crypto evidence | S1 / **GR-T1**               |
+| **Verification rail + APIs** | `gtcx-protocols`      | `@gtcx/sdk`, container `0.4.4`, sandboxes       | S2 / GR-T2 (with infra live) |
+| **Deploy + regulator pack**  | `gtcx-infrastructure` | af-south-1, IRP, pen-test report, sandbox ZIP   | S2→S3 / below GR-T2 today    |
 
 Regulators and DFIs do **not** license `gtcx-core` in isolation. They evaluate the **deployed stack** plus evidence package assembled from infrastructure GTM.
 

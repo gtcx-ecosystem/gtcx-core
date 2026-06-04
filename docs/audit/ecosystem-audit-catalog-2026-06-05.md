@@ -128,6 +128,13 @@ related:
 | external-dependencies-register-2026-05-28 | OPEN 0/12 complete  |
 | 10-10-remediation-plan-2026-05-27         | R5 industry track   |
 
+### Global Compliance Rating (GCR) — rollup L2+L3
+
+| Artifact                                                                           | Tier / status                |
+| ---------------------------------------------------------------------------------- | ---------------------------- |
+| [global-compliance-rating-2026-06-05.md](./global-compliance-rating-2026-06-05.md) | **GCR-T0** · **BLOCKED**     |
+| `docs/audit/latest.json` → `globalComplianceRating`                                | Not GCI · not bank-grade 8.9 |
+
 ### Lane 4 — Bank-grade
 
 | Audit                                                        |         Composite |

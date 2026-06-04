@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -52,6 +53,8 @@ const requiredScripts = [
   'quality:kpi:export',
   'docs:check-links',
   'quality:governance:check',
+  'agent:check',
+  'readiness:lanes:check',
   'release:ga:evidence:check',
 ];
 
@@ -229,6 +232,19 @@ if (anyCount > ANY_BUDGET) {
     `Any-annotation budget exceeded: ${anyCount} > ${ANY_BUDGET}. ` +
       'Reduce explicit any usage or document justification in an ADR.'
   );
+}
+
+// ---------------------------------------------------------------------------
+// Readiness + agent-sync gates (SR-009)
+// ---------------------------------------------------------------------------
+
+for (const scriptName of ['agent:check', 'readiness:lanes:check']) {
+  try {
+    execSync(`pnpm ${scriptName}`, { cwd: rootDir, stdio: 'pipe', encoding: 'utf8' });
+  } catch (error) {
+    const stderr = error.stderr?.toString() ?? error.message;
+    failures.push(`${scriptName} failed:\n${stderr.trim()}`);
+  }
 }
 
 // ---------------------------------------------------------------------------

@@ -16,8 +16,8 @@ review_cycle: 'on-change'
 
 **Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
 
-**Last updated:** 2026-06-03
-**Five audit lanes:** [model](./audit/readiness-model.md) — **audit quality 1–10** per lane; Industry/GTM use **tiers** only. **Agents:** [readiness-and-audit-lanes](./agents/readiness-and-audit-lanes.md)
+**Last updated:** 2026-06-05
+**Five audit lanes + GCR:** [model](./audit/readiness-model.md) · [latest.json](./audit/latest.json) — **GCR-T0 BLOCKED** · IC-T0 · GR-T1. **Agents:** [readiness-and-audit-lanes](./agents/readiness-and-audit-lanes.md)
 **Conflict-free guarantee:** Canonical repo documentation lives under `docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 
 ## §0 Start Here

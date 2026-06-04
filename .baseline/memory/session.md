@@ -1,40 +1,46 @@
 ---
-session_id: '2026-06-03-automatable-slice-clear'
+session_id: '2026-06-05-readiness-lanes-gcr'
 agent: 'gtcx-core-agent'
-focus: 'Automatable backlog clear; CORE-004 blocked XR-402; OI-X02 outbound filed'
+focus: 'Five-lane readiness model, GCR, agent sync; CORE-004 blocked XR-402'
 ---
 
-# Session: Automatable slice complete
+# Session: Readiness lanes + GCR + agent centralization
 
-## Recent commits
+## Recent commits (lane model)
 
-| SHA       | Summary                                              |
-| --------- | ---------------------------------------------------- |
-| `0b572f8` | docs(readme): align network package maturity         |
-| `a48b0c7` | docs(audit): refresh master certification to 8.9     |
-| `bdfe7cb` | docs(ops): mirror infra validate-all and close fa-s1 |
+| SHA       | Summary                                            |
+| --------- | -------------------------------------------------- |
+| `08583fc` | prettierignore KIMI/Codex/Copilot agent-sync drift |
+| `691a75b` | GCR tier/status rollup                             |
+| `0f3647a` | agent readiness guide + anti-drift checks          |
+| `419b436` | lane 2 five internal compliance domains            |
+| `b178f79` | Industry Compliance + GTM-Readiness tiers          |
 
-## Done
+## Readiness snapshot (2026-06-05)
 
-| Item                        | Evidence                                               |
-| --------------------------- | ------------------------------------------------------ |
-| Master audit refresh        | **8.9/10** — `docs/audit/master-audit-2026-06-03.md`   |
-| MA-P2-01 / MA-P2-04         | Network badges + overview matrix reconciled            |
-| Doc-standard + repo hygiene | 9.6/10 each; CI gates wired                            |
-| OI-X02 outbound             | `to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md` |
+| Lane / rollup   | Outcome                               |
+| --------------- | ------------------------------------- |
+| 1 Engineering   | 9.5 / 10.0 signoff                    |
+| 2 Internal      | **9.0** (5 domains)                   |
+| 3 Industry      | **IC-T0** · OPEN 0/12                 |
+| **GCR**         | **GCR-T0** · **BLOCKED**              |
+| 4 Bank-grade    | **8.9** (lane 4 only)                 |
+| 5 GTM-Readiness | **GR-T1** · sovereign **below GR-T2** |
+
+**SSOT:** `docs/audit/latest.json` · `docs/audit/readiness-model.md` · `docs/agents/readiness-and-audit-lanes.md`
 
 ## Protocol 22
 
 `pnpm agent:next-work` → **CORE-004** — **blocked** (`XR-402` ceremony).
 
-**External only:** DTF-5.5.2+ Legal, DTF-5.5.4 GTM, CORE-005–009, pen-test, OI-X02 infra hub ack (outbound filed).
+**External (IC/GCR):** pen-test, SOC 2 letter, npm provenance org policy, ceremony.
+
+**GTM (GR):** sovereign stack — testnet, sandbox send, infra pen-test (not library S1).
 
 ## Verification
 
-| Command                                        | Result                      |
-| ---------------------------------------------- | --------------------------- |
-| `pnpm test`                                    | exit 0 (51 tasks)           |
-| `pnpm provenance:check-npm:strict`             | 22/22                       |
-| `pnpm docs:check-frontmatter`                  | 280/280                     |
-| `pnpm check:workspace-root-cleanliness:strict` | PASS                        |
-| `pnpm agent:next-work`                         | CORE-004 blocked (expected) |
+| Command                         | Result                       |
+| ------------------------------- | ---------------------------- |
+| `pnpm readiness:lanes:check`    | exit 0                       |
+| `pnpm agent:check`              | exit 0                       |
+| `pnpm quality:governance:check` | runs agent + readiness gates |

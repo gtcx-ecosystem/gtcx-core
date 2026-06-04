@@ -188,6 +188,7 @@ Content in synced targets (see [agent-sync-coverage.md](./agent-sync-coverage.md
 ```bash
 pnpm readiness:lanes:check    # latest.json + required indexes + forbidden phrases
 pnpm agent:check              # agent-sync drift
+pnpm quality:governance:check # includes agent:check + readiness:lanes:check (CI)
 pnpm docs:check-links
 ```
 
