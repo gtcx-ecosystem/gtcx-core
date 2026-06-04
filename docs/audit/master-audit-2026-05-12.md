@@ -1,7 +1,7 @@
 ---
 title: 'Master Audit 2026 05 12'
 status: 'current'
-date: '2026-05-17'
+date: '2026-05-12'
 owner: 'quality-evidence-lead'
 role: 'quality-evidence-lead'
 tier: 'critical'

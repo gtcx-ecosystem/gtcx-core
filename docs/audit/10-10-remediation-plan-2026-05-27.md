@@ -1,19 +1,4 @@
 ---
-title: 'gtcx-core — Comprehensive 10/10 Remediation Plan'
-status: 'current'
-date: '2026-05-27'
-owner: 'gtcx-core'
-role: 'protocol-architect'
-agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
-trust_score: 60
-autonomy_level: 'permissioned'
-tier: 'standard'
-tags: ['documentation', 'audit']
-review_cycle: 'on-change'
----
-
----
-
 title: 'GTCX Core — 10/10 Remediation Plan'
 status: 'current'
 date: '2026-05-27'
@@ -22,7 +7,6 @@ role: 'quality-evidence-lead'
 tier: 'critical'
 tags: ['roadmap', 'remediation', '10-10', 'audit', 'slsa', 'gtm', 'hygiene', 'ecosystem']
 review_cycle: 'bi-weekly'
-
 ---
 
 # gtcx-core — Comprehensive 10/10 Remediation Plan

@@ -1,19 +1,4 @@
 ---
-title: 'Remediation Roadmap: 10/10 Bank-Grade Readiness'
-status: 'current'
-date: '2026-05-27'
-owner: 'gtcx-core'
-role: 'protocol-architect'
-agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
-trust_score: 60
-autonomy_level: 'permissioned'
-tier: 'standard'
-tags: ['documentation', 'audit']
-review_cycle: 'on-change'
----
-
----
-
 title: 'Remediation Roadmap 10 10'
 status: 'current'
 date: '2026-05-17'
@@ -22,7 +7,6 @@ role: 'quality-evidence-lead'
 tier: 'critical'
 tags: ['docs', 'audit']
 review_cycle: 'quarterly'
-
 ---
 
 # Remediation Roadmap: 10/10 Bank-Grade Readiness
