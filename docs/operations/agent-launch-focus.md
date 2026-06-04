@@ -5,6 +5,7 @@ date: 2026-06-06
 owner: gtcx-core
 role: protocol-architect
 document_id: OPS-AGENT-LAUNCH-001
+tier: standard
 tags: ['agents', 'gtm', 'launch', 'protocol-22']
 review_cycle: on-change
 ---

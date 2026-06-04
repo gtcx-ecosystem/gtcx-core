@@ -6,6 +6,7 @@ owner: gtcx-core
 role: protocol-architect
 document_id: OPS-AGENT-BOUT-001
 protocol: P22-extension
+tier: standard
 tags: ['agents', 'protocol-22', 'protocol-26', 'protocol-27']
 review_cycle: on-change
 ---

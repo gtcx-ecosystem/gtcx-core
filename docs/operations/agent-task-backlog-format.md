@@ -5,6 +5,7 @@ date: 2026-06-04
 owner: gtcx-core
 role: protocol-architect
 document_id: OPS-AGENT-TASK-BACKLOG
+tier: standard
 tags: ['agents', 'backlog', 'gtm']
 review_cycle: on-change
 ---

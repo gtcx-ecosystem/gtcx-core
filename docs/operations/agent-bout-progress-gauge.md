@@ -5,6 +5,7 @@ date: 2026-06-04
 owner: gtcx-core
 role: protocol-architect
 document_id: OPS-AGENT-BOUT-PROGRESS
+tier: standard
 tags: ['agents', 'gtm', 'progress', 'protocol-22']
 review_cycle: on-change
 ---

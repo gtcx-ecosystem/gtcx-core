@@ -1,36 +1,41 @@
 ---
 session_id: '2026-06-04-launch-gtm'
 agent: 'gtcx-core-agent'
-focus: 'CORE-004 ceremony gate; DTF-5.5.4 Class S witness'
+focus: 'OPS-AUDIT-FM frontmatter hygiene; CORE-004 ceremony witness'
 ---
 
 # Session: Launch GTM — gtcx-core
 
 ## State (2026-06-04)
 
-- **Git:** Kimi skills parity committed (`615b9d9`); CORE-004 verify-publish in progress
-- **P22 head:** DTF-5.5.4 Class S (LOI/regulator letter) — human only
-- **Bout drain:** CORE-004 **blocked** on custodian `transcript.seed` publish
-- **Launch focus:** implement 1 / plan 5 / witness 1 / human 2
+- **P22 head:** OPS-AUDIT-FM → **done**; next CORE-004 (blocked) / DTF-5.5.4 (Class S)
+- **Launch focus:** implement 2 — hygiene + ceremony
+- **Buyer stage:** S2-partial (GR-T1 library)
 
 ## Completed this session
 
-| Item                           | Evidence                                       |
-| ------------------------------ | ---------------------------------------------- |
-| Kimi skills parity (22)        | `615b9d9` · `pnpm kimi:skills:check` exit 0    |
-| CORE-004 verify-publish script | `scripts/ops/verify-trusted-setup-publish.mjs` |
-| Launch reconcile               | `pnpm agent:reconcile-launch` exit 0           |
-| Execution roadmap refresh      | `docs/audit/execution-roadmap.md`              |
+| Item                    | Evidence                                                                |
+| ----------------------- | ----------------------------------------------------------------------- |
+| OPS-AUDIT-FM            | **done** — `pnpm docs:check-frontmatter` 296/296 exit 0                 |
+| Bout progress gauge     | `3c7eefe` · `pnpm agent:bout-progress:check` exit 0                     |
+| CORE-004 verify-publish | `8d93698` · `pnpm ops:trusted-setup:verify-publish` (exit 1 until seed) |
 
 ## Verification
 
-| Command                                                                          | Exit |
-| -------------------------------------------------------------------------------- | ---- |
-| `pnpm agent:launch:check`                                                        | 0    |
-| `pnpm readiness:lanes:check`                                                     | 0    |
-| `cargo test -p gtcx-zkp --features trusted-setup-verify --release trusted_setup` | 0    |
+| Command                          | Exit |
+| -------------------------------- | ---- |
+| `pnpm docs:check-frontmatter`    | 0    |
+| `pnpm agent:bout-progress:check` | 0    |
+| `pnpm kimi:skills:check`         | 0    |
 
 ## Next priority
 
-**Human / GTM** — DTF-5.5.4 LOI or regulator letter (Class S).  
-**Custodian** — publish `artifacts/trusted-setup/transcript.seed` then `pnpm ops:trusted-setup:verify-publish`.
+**Custodian** — `artifacts/trusted-setup/transcript.seed` + `pnpm ops:trusted-setup:verify-publish`.  
+**Human / GTM** — DTF-5.5.4 LOI/regulator letter (Class S).
+
+## Session bootstrap (2026-06-04 20:27:51 UTC)
+
+- **Command:** `pnpm agent:start`
+- **Next work:** OPS-AUDIT-FM — Merge duplicate frontmatter on historical audit files
+- **Blocked:** no
+- **Git:** 3 changed path(s)

@@ -18,7 +18,7 @@ review_cycle: 'quarterly'
 **Date:** 2026-05-09
 **Auditor:** AI (claude-opus-4-7)
 **Branch:** main, 15 commits ahead of origin/main
-**Last automated state:** `,auto-dev-state.md` — 9.8/10
+**Last automated state:** `auto-dev-state.md` — 9.8/10
 **Score:** 9.8/10 (re-verified, no regression)
 
 This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces new spec drift introduced by recent runtime-substrate work (ADR-014, packages added: `resilience`, `runtime`, `telemetry`).

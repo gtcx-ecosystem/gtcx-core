@@ -29,6 +29,17 @@
   },
   "tasks": [
     {
+      "id": "OPS-AUDIT-FM",
+      "priority": "P2",
+      "repo": "gtcx-core",
+      "title": "Ops docs frontmatter + audit hygiene",
+      "primaryFiles": ["docs/operations/", "docs/audit/full-audit-2026-05-09.md"],
+      "doneWhen": "pnpm docs:check-frontmatter exit 0",
+      "gtmLever": "A +0.05 — defensible launch claims",
+      "boutDelta": { "engineering": 0.05 },
+      "status": "done"
+    },
+    {
       "id": "CORE-004",
       "priority": "P1",
       "repo": "gtcx-core",

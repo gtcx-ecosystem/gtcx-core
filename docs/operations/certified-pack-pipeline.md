@@ -3,6 +3,10 @@ title: 'Certified pack pipeline (DTF-5.5.2)'
 status: current
 date: 2026-06-06
 owner: gtcx-core
+role: crypto-security-engineer
+tier: standard
+tags: ['tier-5', 'certified-pack', 'dtf-552']
+review_cycle: on-change
 story_id: DTF-5.5.2
 document_id: OPS-CERT-PACK-001
 ---

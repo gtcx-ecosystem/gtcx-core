@@ -3,6 +3,10 @@ title: 'Tier 5 commercial unblock — DTF-5.5.2 (R) vs 5.5.4 (S)'
 status: current
 date: 2026-06-06
 owner: gtcx-core
+role: protocol-architect
+tier: standard
+tags: ['coordination', 'tier-5', 'dtf-554']
+review_cycle: on-change
 document_id: COORD-CORE-T5-COMM-001
 ---
 
