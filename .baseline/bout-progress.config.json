@@ -1,0 +1,59 @@
+{
+  "schema": "gtcx.boutProgress.v1",
+  "repo": "gtcx-core",
+  "normativeDoc": "docs/operations/agent-bout-progress-gauge.md",
+  "antiDrift": "Engineering 9.5 ≠ buyer S3. GR-T tiers for library GTM; S0–S6 for deployable products.",
+  "dimensions": {
+    "engineering": {
+      "id": "A",
+      "label": "Repo engineering",
+      "current": 9.5,
+      "ceiling": 10,
+      "source": "docs/audit/latest.json → lanes.engineeringCompletenessQuality.readinessOutcome.completionAudit",
+      "autoFromLatestJson": "lanes.engineeringCompletenessQuality.readinessOutcome.completionAudit"
+    },
+    "gtmBuyer": {
+      "id": "C",
+      "label": "GTM buyer readiness (foundation library)",
+      "current": 5.5,
+      "ceiling": 10,
+      "buyerStage": "S2-partial",
+      "buyerStageNote": "Library GR-T1 — downstream apps pilot; not sovereign GA",
+      "gtmTier": "GR-T1",
+      "source": "docs/audit/gtm-readiness-2026-06-05.md"
+    }
+  },
+  "weights": {
+    "engineering": 0.4,
+    "gtmBuyer": 0.6
+  },
+  "tasks": [
+    {
+      "id": "CORE-004",
+      "priority": "P1",
+      "repo": "gtcx-core",
+      "title": "Trusted-setup transcript publish + KAT pin",
+      "primaryFiles": [
+        "artifacts/trusted-setup/transcript.seed",
+        "artifacts/trusted-setup/manifest.json"
+      ],
+      "doneWhen": "pnpm ops:trusted-setup:verify-publish exit 0",
+      "gtmLever": "D3 M3.2 sovereign ZKP; C +0.3 when published",
+      "boutDelta": { "engineering": 0.05, "gtmBuyer": 0.3 },
+      "status": "blocked",
+      "blocker": "Custodian ceremony — Class S publish"
+    },
+    {
+      "id": "DTF-5.5.4",
+      "priority": "P0",
+      "repo": "gtcx-core",
+      "title": "Design-partner LOI or regulator letter",
+      "primaryFiles": ["docs/audit/evidence/"],
+      "doneWhen": "Redacted LOI or regulator letter on file; witness in tier-5 index",
+      "gtmLever": "Tier 5 commercial gate 5-C2; C +1.0",
+      "boutDelta": { "gtmBuyer": 1.0 },
+      "status": "human",
+      "owner": "Human / GTM"
+    }
+  ]
+}

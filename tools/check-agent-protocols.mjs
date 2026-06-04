@@ -63,6 +63,8 @@ const requiredScripts = [
   'agent:foundation-protocols:check',
   'kimi:skills:check',
   'kimi:skills:sync',
+  'agent:bout-progress:check',
+  'agent:reconcile-bout-progress',
 ];
 
 for (const s of requiredScripts) {
@@ -110,6 +112,10 @@ if (p22?.status === 'established') {
   requireFile('.agent/kimi-skills-pointer.md', 'Kimi skills pointer');
   requireFile('scripts/sync-kimi-project-skills.mjs', 'Kimi skills sync');
   runScript('kimi:skills:check');
+  requireFile('.agent/bout-progress-pointer.md', 'bout progress pointer');
+  requireFile('docs/operations/agent-bout-progress-gauge.md', 'bout progress gauge doc');
+  requireFile('.baseline/bout-progress.config.json', 'bout progress config');
+  runScript('agent:bout-progress:check');
 }
 
 // --- P24 ---

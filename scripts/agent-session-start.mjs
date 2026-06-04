@@ -7,6 +7,7 @@ import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildProgressGauge } from './lib/agent-bout-progress-gauge.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -113,6 +114,7 @@ const proceedBrief = {
 
 const executionBout = nextWork?.executionBout ?? null;
 const launchFocus = nextWork?.launchFocus ?? null;
+const progressGauge = buildProgressGauge(ROOT);
 
 const output = {
   startedAt: now,
@@ -120,6 +122,7 @@ const output = {
   nextWork,
   executionBout,
   launchFocus,
+  progressGauge,
   proceedBrief: {
     ...proceedBrief,
     launchOutcome: launchFocus?.northStar?.outcome,
@@ -134,6 +137,7 @@ const output = {
   sessionPath: '.baseline/memory/session.md',
   boutStatePath: '.baseline/execution-bout.json',
   launchFocusPath: '.baseline/launch-focus.json',
+  boutProgressConfigPath: '.baseline/bout-progress.config.json',
   template: 'docs/operations/agent-proceed-brief-template.md',
   attestation: 'docs/operations/agent-attestation-template.md',
 };
@@ -189,6 +193,11 @@ if (executionBout) {
     }
   }
   log('\n**Policy:** micro-commit per story · progress report every 2 stories · no stop until bout complete');
+}
+if (progressGauge) {
+  log('\n--- Progress gauge (bout composite — not buyer GA) ---\n');
+  log(progressGauge.reportMarkdown);
+  log(`\n**Detail:** pnpm agent:bout-progress · ${progressGauge.normativeDoc}`);
 }
 log('\n**FORBIDDEN replies (P26 v1.1.0):** Your call · Two options · 1./2. menus · "switch to other repo?"');
 if (nextWork?.backlogClear && nextWork?.statusUpdate) {

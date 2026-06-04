@@ -26,11 +26,11 @@ State file: `.baseline/execution-bout.json` (schema `gtcx.executionBout.v1`).
 
 ## Rhythms (three checkpoints)
 
-| Rhythm           | When                                   | Operator                           | Git           |
-| ---------------- | -------------------------------------- | ---------------------------------- | ------------- |
-| Story checkpoint | Each story done                        | Optional 1-line chat               | Micro-commit  |
-| Progress report  | Every `reportEveryStories` (default 2) | Short Status Update (Done bullets) | —             |
-| Bout check-in    | Plan complete or Class S wall          | Full Status Update + session.md    | Push optional |
+| Rhythm           | When                                   | Operator                                 | Git           |
+| ---------------- | -------------------------------------- | ---------------------------------------- | ------------- |
+| Story checkpoint | Each story done                        | Optional 1-line chat                     | Micro-commit  |
+| Progress report  | Every `reportEveryStories` (default 2) | Short Status Update + **Progress gauge** | —             |
+| Bout check-in    | Plan complete or Class S wall          | Full Status Update + session.md          | Push optional |
 
 **`backlogClear` does not mean stop.** It means P22 has no mandatory next story; the bout may still list `repoCompletable` Class R work (e.g. CORE-004).
 
