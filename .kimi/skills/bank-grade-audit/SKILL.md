@@ -1,15 +1,15 @@
 ---
-name: master-audit
+name: bank-grade-audit
 description: GTCX lane-4 audit (lane 4; 3–6 hours)
 ---
 
-# master-audit
+# bank-grade-audit
 
-Run the GTCX **master-audit** audit in **this repo** (`gtcx-core`).
+Run the GTCX **bank-grade-audit** audit in **this repo** (`gtcx-core`).
 
 ## Steps
 
-1. Read command spec: `../gtcx-docs/tools/audit/audit-framework/commands/master-audit.md`
+1. Read command spec: `../gtcx-docs/tools/audit/audit-framework/commands/bank-grade-audit.md`
 2. Read prompt (BEGIN PROMPT → END PROMPT): `../gtcx-docs/tools/audit/audit-framework/prompts/lanes/bank-grade-audit-prompt.md`
 3. Read scoring protocol: `../gtcx-docs/tools/audit/lane-scoring/bank-grade-scoring.md`
 4. **Protocol 27:** Run verification gates in-session; report command + exit code
@@ -24,4 +24,4 @@ Run the GTCX **master-audit** audit in **this repo** (`gtcx-core`).
 - Lane audits: `../gtcx-docs/tools/audit/lane-audits/README.md`
 - Domain audits: `../gtcx-docs/tools/audit/domain-audits/README.md`
 
-**Kimi invoke:** `/skill:master-audit` (not `/master-audit`).
+**Kimi invoke:** `/skill:bank-grade-audit` (not `/bank-grade-audit`).

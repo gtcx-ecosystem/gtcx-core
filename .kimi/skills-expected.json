@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "description": "GTCX-native slash commands mirrored for Kimi CLI (/skill:<name>). Sync: pnpm kimi:skills:sync",
+  "skills": [
+    "api-audit",
+    "bank-grade-audit",
+    "compliance-audit",
+    "comprehensive-audit",
+    "deployment-audit",
+    "doc-standard",
+    "docs-machine-readable",
+    "engineering-audit",
+    "execute-repo-hygiene",
+    "execute-roadmap",
+    "external-audit",
+    "forensic-audit",
+    "full-audit",
+    "global-compliance-audit",
+    "gtcx-reconcile-roadmap",
+    "gtm-audit",
+    "master-audit",
+    "partnership-audit",
+    "repo-hygiene",
+    "sales-audit",
+    "security-audit",
+    "verification-audit"
+  ]
+}

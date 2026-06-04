@@ -61,6 +61,8 @@ const requiredScripts = [
   'agent:hub-drift:check',
   'agent:attestation:check',
   'agent:foundation-protocols:check',
+  'kimi:skills:check',
+  'kimi:skills:sync',
 ];
 
 for (const s of requiredScripts) {
@@ -105,6 +107,9 @@ if (p22?.status === 'established') {
   runScript('agent:work-selection:check');
   runScript('agent:bout:check');
   runScript('agent:launch:check');
+  requireFile('.agent/kimi-skills-pointer.md', 'Kimi skills pointer');
+  requireFile('scripts/sync-kimi-project-skills.mjs', 'Kimi skills sync');
+  runScript('kimi:skills:check');
 }
 
 // --- P24 ---
