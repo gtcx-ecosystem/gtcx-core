@@ -17,14 +17,13 @@ status: launch-focus-implement
 
 | Bucket    | Count |
 | --------- | ----- |
-| implement | 2     |
+| implement | 1     |
 | plan      | 5     |
 | human     | 1     |
 
 ## Implement queue
 
 - **CORE-004** — Trusted-setup transcript publish + KAT pin closeout
-- **OI-X02** — File gtcx-infrastructure outbound ER-1-08 hub ack
 
 ## Plan queue (when implement empty)
 

@@ -1,7 +1,7 @@
 ---
 last_reconciled: 2026-06-04
 reconciliation_note: >-
-  Launch-focus reconcile 2026-06-04 — mode implement; implement 2 / plan 5.
+  Launch-focus reconcile 2026-06-04 — mode implement; implement 1 / plan 5.
   Repo hygiene execute 9.8 (2026-06-04). Agent hub snapshot + universal rollout synced.
   CORE-004 blocked XR-402. FA-AGT complete; in-repo automatable slice done.
 sources:
@@ -132,14 +132,14 @@ Aligned with [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) §6.3.
 
 ## Ecosystem open items (gtcx-core lens)
 
-| ID                 | Item                               | Owner               | Status       | gtcx-core role                                |
-| ------------------ | ---------------------------------- | ------------------- | ------------ | --------------------------------------------- |
-| OI-X01             | ER-1-08 hub ack                    | gtcx-core           | **done**     | Protocols log; evidence on record             |
-| OI-X02             | ER-1-08 hub ack                    | gtcx-infrastructure | **pending**  | File outbound ticket only                     |
-| OI-X06 / INT-S8-04 | cost-router v1.1                   | baseline-os         | **external** | No implementation in core                     |
-| EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**     | Evidence pack input (FA-S6)                   |
-| CORE-004           | Trusted-setup transcript           | gtcx-core           | **partial**  | Verify CI green; transcript publish (Class R) |
-| CORE-005–006       | Pen-test SOW / formal verification | baseline-os         | **blocked**  | Track only                                    |
+| ID                 | Item                               | Owner               | Status             | gtcx-core role                                                                                                                                                             |
+| ------------------ | ---------------------------------- | ------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OI-X01             | ER-1-08 hub ack                    | gtcx-core           | **done**           | Protocols log; evidence on record                                                                                                                                          |
+| OI-X02             | ER-1-08 hub ack                    | gtcx-infrastructure | **outbound-filed** | Core done — [`to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md`](../operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md); await infra hub row |
+| OI-X06 / INT-S8-04 | cost-router v1.1                   | baseline-os         | **external**       | No implementation in core                                                                                                                                                  |
+| EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**           | Evidence pack input (FA-S6)                                                                                                                                                |
+| CORE-004           | Trusted-setup transcript           | gtcx-core           | **partial**        | Verify CI green; transcript publish (Class R)                                                                                                                              |
+| CORE-005–006       | Pen-test SOW / formal verification | baseline-os         | **blocked**        | Track only                                                                                                                                                                 |
 
 ---
 

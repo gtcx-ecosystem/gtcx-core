@@ -149,6 +149,7 @@ const LAUNCH_IMPLEMENT_STATIC = [
     because: 'D3 / sovereign ZKP defensibility — partial engineering done',
     paths: [
       'docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md',
+      'docs/operations/coordination/core-004-ceremony-publish-checklist.md',
       'artifacts/trusted-setup/README.md',
     ],
   },
@@ -227,6 +228,13 @@ export function buildLaunchFocus(repoRoot) {
     ...parseOpenItems(remainingMd, 'remaining-cross-repo'),
   ];
 
+  const oiX02OutboundFiled = existsSync(
+    join(
+      repoRoot,
+      'docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md',
+    ),
+  );
+
   const implement = dedupeById([
     ...tier5Implementable(session, workplan),
     ...opsImplementable(session),
@@ -237,13 +245,10 @@ export function buildLaunchFocus(repoRoot) {
       return true;
     }),
     ...parsedOpen
-      .filter((p) => ['CORE-004', 'OI-X02'].includes(p.storyId))
+      .filter((p) => p.storyId === 'CORE-004')
       .map((p) => ({
         storyId: p.storyId,
-        title:
-          p.storyId === 'OI-X02'
-            ? 'File gtcx-infrastructure outbound ER-1-08 hub ack'
-            : 'Close CORE-004 ceremony evidence',
+        title: 'Close CORE-004 ceremony evidence',
         workClass: 'ops-docs',
         authorityClass: 'S',
         lane: 'ecosystem-open',
@@ -253,7 +258,20 @@ export function buildLaunchFocus(repoRoot) {
 
   const human = dedupeById(humanGates({}, workplan, executionMd));
   const plan = [...PLANNING_QUEUE];
-  const witness = witnessItems(human, {});
+  const witness = [
+    ...witnessItems(human, {}),
+    ...(oiX02OutboundFiled
+      ? [
+          {
+            storyId: 'OI-X02',
+            title: 'Await infra hub ack — core outbound filed 2026-06-03',
+            path: 'docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md',
+            authorityClass: 'A',
+            owner: 'gtcx-infrastructure',
+          },
+        ]
+      : []),
+  ];
 
   let sessionMode = 'implement';
   if (implement.length === 0) sessionMode = 'plan';

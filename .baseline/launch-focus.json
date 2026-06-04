@@ -2,7 +2,7 @@
   "schema": "gtcx.launchFocus.v1",
   "normativeDoc": "docs/operations/agent-launch-focus.md",
   "statePath": ".baseline/launch-focus.json",
-  "provisionedAt": "2026-06-04T15:53:19.074Z",
+  "provisionedAt": "2026-06-04T16:54:15.420Z",
   "repo": "gtcx-core",
   "northStar": {
     "outcome": "Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.",
@@ -33,16 +33,9 @@
         "because": "D3 / sovereign ZKP defensibility — partial engineering done",
         "paths": [
           "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md",
+          "docs/operations/coordination/core-004-ceremony-publish-checklist.md",
           "artifacts/trusted-setup/README.md"
         ]
-      },
-      {
-        "storyId": "OI-X02",
-        "title": "File gtcx-infrastructure outbound ER-1-08 hub ack",
-        "workClass": "ops-docs",
-        "authorityClass": "S",
-        "lane": "ecosystem-open",
-        "because": "Open on execution-roadmap: pending"
       }
     ],
     "plan": [
@@ -87,7 +80,15 @@
         "lane": "launch-planning"
       }
     ],
-    "witness": [],
+    "witness": [
+      {
+        "storyId": "OI-X02",
+        "title": "Await infra hub ack — core outbound filed 2026-06-03",
+        "path": "docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md",
+        "authorityClass": "A",
+        "owner": "gtcx-infrastructure"
+      }
+    ],
     "human": [
       {
         "storyId": "DTF-5.5.4",
@@ -115,22 +116,15 @@
       "because": "D3 / sovereign ZKP defensibility — partial engineering done",
       "paths": [
         "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md",
+        "docs/operations/coordination/core-004-ceremony-publish-checklist.md",
         "artifacts/trusted-setup/README.md"
       ]
-    },
-    {
-      "storyId": "OI-X02",
-      "title": "File gtcx-infrastructure outbound ER-1-08 hub ack",
-      "workClass": "ops-docs",
-      "authorityClass": "S",
-      "lane": "ecosystem-open",
-      "because": "Open on execution-roadmap: pending"
     }
   ],
   "workSetCounts": {
-    "implement": 2,
+    "implement": 1,
     "plan": 5,
-    "witness": 0,
+    "witness": 1,
     "human": 2
   },
   "sources": [
@@ -149,7 +143,7 @@
   "agentInstructions": [
     "Launch focus is provisioned — read northStar + workSet before any audit/roadmap prompt.",
     "Goal: finish foundation + coordination so sibling repos can ship apps and GTM can close deals.",
-    "Session mode IMPLEMENT — drain workSet.implement (2 items) via execution bout.",
+    "Session mode IMPLEMENT — drain workSet.implement (1 items) via execution bout.",
     "Full work set is in launch-focus.json — not a single story.",
     "Normative: docs/operations/agent-launch-focus.md"
   ]
