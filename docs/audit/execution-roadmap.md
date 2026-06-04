@@ -93,11 +93,11 @@ sources:
 
 ### Next commercial (S-T5-5 — not in-repo code)
 
-| ID        | Title                                 | Owner                      | Status  |
-| --------- | ------------------------------------- | -------------------------- | ------- |
-| DTF-5.5.2 | Certified pack pipeline               | Legal + protocol-architect | pending |
-| DTF-5.5.4 | Design-partner LOI / regulator letter | GTM                        | pending |
-| DTF-5.5.5 | Evidence index entry                  | quality-evidence-lead      | pending |
+| ID        | Title                                 | Owner                      | Status   |
+| --------- | ------------------------------------- | -------------------------- | -------- |
+| DTF-5.5.2 | Certified pack pipeline               | Legal + protocol-architect | pending  |
+| DTF-5.5.4 | Design-partner LOI / regulator letter | GTM                        | pending  |
+| DTF-5.5.5 | Evidence index entry                  | quality-evidence-lead      | **done** |
 
 Technical milestones DTF-5.1.1–5.5.1 and DTF-5.4.4 are **done** — see Completed table above.
 

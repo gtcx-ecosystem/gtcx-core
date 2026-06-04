@@ -175,7 +175,7 @@ Stages assessed per `docs/gtm/gtm-reality-check-2026-06-02.md` (foundation libra
 ### Failures
 
 - **✗ Package/Build** — turbo dependency cycle (see Phase 1).
-- **~ Documentation** — duplicate frontmatter blocks still in some older audit files (cosmetic).
+- **~ Documentation** — duplicate frontmatter on historical audits merged (OPS-AUDIT-FM); Tier 5 evidence index at `docs/audit/evidence/README.md` (DTF-5.5.5).
 - **~ Git** — `.agent/credentials-pointer.md`, `AGENTS.md` drift unstaged (do not commit secrets).
 
 ---

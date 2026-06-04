@@ -18,6 +18,8 @@ review_cycle: on-change
 
 **Audience:** vendor risk teams, sandbox regulators, design partners, security auditors
 **What this is:** the evidence index for evaluating gtcx-core's security posture without an NDA. Everything linked here is in this repository — every artifact is independently verifiable.
+
+**Tier 5 technical artifacts (DTF-5.5.5):** [audit evidence index](../audit/evidence/README.md#tier-5-technical-exit-register-dtf-555) — KATs, load bench JSON, minerals-board UAT, circuit registry, protocols E2E witness.
 **What this is not:** marketing. There are no claims here that aren't backed by a file path or a git command you can run.
 
 ---
