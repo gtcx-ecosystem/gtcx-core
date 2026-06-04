@@ -20,13 +20,13 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 **Five audit lanes** — do not conflate ([readiness model](./docs/audit/readiness-model.md)):
 
-| Lane                                     | Score / status                        | Index                                                                            |
-| ---------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------- |
-| **1 Engineering completeness & quality** | **10.0** signoff · **9.5** completion | [engineering index](./docs/audit/engineering-completeness-quality-2026-06-05.md) |
-| **2 Internal compliance**                | **~9.3/10**                           | [internal compliance](./docs/audit/internal-compliance-2026-06-05.md)            |
-| **3 External-dependent compliance**      | **0/12** register                     | [external compliance](./docs/audit/external-dependent-compliance-2026-06-05.md)  |
-| **4 Bank-grade**                         | **8.9/10**                            | [bank-grade](./docs/audit/bank-grade-2026-06-05.md)                              |
-| **5 GTM**                                | Library **S1**                        | [gtm](./docs/audit/gtm-readiness-2026-06-05.md)                                  |
+| Lane                      | Audit quality (1–10) | Readiness outcome           | Index                                                                      |
+| ------------------------- | -------------------: | --------------------------- | -------------------------------------------------------------------------- |
+| **1 Engineering**         |                  8.5 | 9.5 / 10.0 signoff          | [engineering](./docs/audit/engineering-completeness-quality-2026-06-05.md) |
+| **2 Internal compliance** |                  8.5 | ~9.6 docs/hygiene           | [internal](./docs/audit/internal-compliance-2026-06-05.md)                 |
+| **3 External-dependent**  |                  8.0 | **OPEN** 0/12 (status/tier) | [external](./docs/audit/external-dependent-compliance-2026-06-05.md)       |
+| **4 Bank-grade**          |                  8.5 | composite 8.9               | [bank-grade](./docs/audit/bank-grade-2026-06-05.md)                        |
+| **5 GTM**                 |                  8.0 | **S1** / sovereign S2 NR    | [gtm](./docs/audit/gtm-readiness-2026-06-05.md)                            |
 
 ### Engineering completeness & quality (lane 1)
 

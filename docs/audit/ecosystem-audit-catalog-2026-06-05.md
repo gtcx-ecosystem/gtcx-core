@@ -149,17 +149,16 @@ related:
 
 ---
 
-## Score conflicts (read carefully)
+## Audit quality vs readiness (read carefully)
 
-| Source                                                                                                                                | gtcx-core score | Lens                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------- |
-| [2-core-audit.md](https://github.com/gtcx-ecosystem/gtcx-agile/blob/main/docs/audits/reports/2-core-audit.md)                         | **6/10**        | Agile implementation truth (2026-03-09) |
-| [internal-10-10-signoff](internal-10-10-signoff-2026-05-28.md)                                                                        | **10.0**        | In-repo gates only                      |
-| [internal-completion-audit](internal-completion-audit-2026-05-21.md)                                                                  | **9.5**         | Package completion                      |
-| [master-audit-2026-06-03](master-audit-2026-06-03.md)                                                                                 | **8.9**         | Bank-grade composite                    |
-| [sister-repo-audit](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/audit/2026-Q2/agentic/sister-repo-audit-2026-05-22.md) | **92/100**      | Docs hub rubric                         |
+| Source                                                                                                        | Audit quality (1–10) | Readiness outcome   |
+| ------------------------------------------------------------------------------------------------------------- | -------------------: | ------------------- |
+| [2-core-audit.md](https://github.com/gtcx-ecosystem/gtcx-agile/blob/main/docs/audits/reports/2-core-audit.md) |        **4** (stale) | Old repo score 6/10 |
+| [internal-10-10-signoff](internal-10-10-signoff-2026-05-28.md)                                                |                **9** | Gates 10.0          |
+| [master-audit-2026-06-03](master-audit-2026-06-03.md)                                                         |              **8.5** | Composite 8.9       |
+| [external-dependencies-register](external-dependencies-register-2026-05-28.md)                                |                **8** | Status OPEN 0/12    |
 
-**Canonical for five lanes:** [readiness-model.md](./readiness-model.md) ranks — not agile `2-core-audit` alone.
+**Canonical:** [readiness-model.md](./readiness-model.md) — **1–10 = audit quality only**.
 
 ---
 
