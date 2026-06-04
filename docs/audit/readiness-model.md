@@ -28,7 +28,9 @@ supersedes_note: 'Industry Compliance + GTM-Readiness tiers; audit quality 1-10 
 | **Audit quality**     | **1–10**      | How good the audit document is                                                                          |
 | **Readiness outcome** | Repo-specific | Engineering 9.5; bank-grade 8.9; Industry **IC-T0**; GTM-Readiness **GR-T1** / sovereign **&lt; GR-T2** |
 
-**Industry Compliance and GTM-Readiness:** use **tier + status only** for readiness — never 1–10.
+**Industry Compliance**, **Global Compliance Rating (GCR)**, and **GTM-Readiness:** use **tier + status only** for readiness — never 1–10.
+
+**GCR (rollup):** [global-compliance-rating-2026-06-05.md](./global-compliance-rating-2026-06-05.md) — **GCR-T0** · **BLOCKED** (derived from IC-T0 + register OPEN). Not GCI. Not bank-grade 8.9.
 
 ---
 
@@ -46,13 +48,14 @@ supersedes_note: 'Industry Compliance + GTM-Readiness tiers; audit quality 1-10 
 
 ## Readiness outcomes (not audit quality)
 
-| Lane                  | Outcome                   | Current                                                                     | Source                                                           |
-| --------------------- | ------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| 1 Engineering         | Completion / signoff      | **9.5** / **10.0**                                                          | internal-completion, signoff                                     |
-| 2 Internal compliance | Domain composite          | **9.0** (repo **9.6**, docs **9.6**, AI **8.8**, sec **8.8**, corp **8.2**) | [internal-compliance index](./internal-compliance-2026-06-05.md) |
-| 3 Industry Compliance | Register + aggregate tier | **OPEN 0/12** · **IC-T0**                                                   | [industry-compliance index](./industry-compliance-2026-06-05.md) |
-| 4 Bank-grade          | Certified composite       | **8.9**                                                                     | master-audit                                                     |
-| 5 GTM-Readiness       | GR tier by buyer          | Library **GR-T1** · sovereign **&lt; GR-T2**                                | [gtm-readiness index](./gtm-readiness-2026-06-05.md)             |
+| Lane                                 | Outcome                      | Current                                                                     | Source                                                                             |
+| ------------------------------------ | ---------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| 1 Engineering                        | Completion / signoff         | **9.5** / **10.0**                                                          | internal-completion, signoff                                                       |
+| 2 Internal compliance                | Domain composite             | **9.0** (repo **9.6**, docs **9.6**, AI **8.8**, sec **8.8**, corp **8.2**) | [internal-compliance index](./internal-compliance-2026-06-05.md)                   |
+| 3 Industry Compliance                | Register + aggregate tier    | **OPEN 0/12** · **IC-T0**                                                   | [industry-compliance index](./industry-compliance-2026-06-05.md)                   |
+| — **Global Compliance Rating (GCR)** | Tier + status rollup (L2+L3) | **GCR-T0** · **BLOCKED**                                                    | [global-compliance-rating-2026-06-05.md](./global-compliance-rating-2026-06-05.md) |
+| 4 Bank-grade                         | Certified composite          | **8.9**                                                                     | master-audit                                                                       |
+| 5 GTM-Readiness                      | GR tier by buyer             | Library **GR-T1** · sovereign **&lt; GR-T2**                                | [gtm-readiness index](./gtm-readiness-2026-06-05.md)                               |
 
 ---
 

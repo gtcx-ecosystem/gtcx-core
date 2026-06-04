@@ -20,13 +20,14 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 **Five audit lanes** — do not conflate ([readiness model](./docs/audit/readiness-model.md)):
 
-| Lane                      | Audit quality (1–10) | Readiness outcome                | Index                                                                      |
-| ------------------------- | -------------------: | -------------------------------- | -------------------------------------------------------------------------- |
-| **1 Engineering**         |                  8.5 | 9.5 / 10.0 signoff               | [engineering](./docs/audit/engineering-completeness-quality-2026-06-05.md) |
-| **2 Internal compliance** |                  8.5 | **9.0** (5 domains)              | [internal](./docs/audit/internal-compliance-2026-06-05.md)                 |
-| **3 Industry Compliance** |                  8.0 | **IC-T0** · OPEN 0/12            | [industry](./docs/audit/industry-compliance-2026-06-05.md)                 |
-| **4 Bank-grade**          |                  8.5 | composite 8.9                    | [bank-grade](./docs/audit/bank-grade-2026-06-05.md)                        |
-| **5 GTM-Readiness**       |                  8.0 | **GR-T1** / sovereign &lt; GR-T2 | [gtm-readiness](./docs/audit/gtm-readiness-2026-06-05.md)                  |
+| Lane                      | Audit quality (1–10) | Readiness outcome                | Index                                                                           |
+| ------------------------- | -------------------: | -------------------------------- | ------------------------------------------------------------------------------- |
+| **1 Engineering**         |                  8.5 | 9.5 / 10.0 signoff               | [engineering](./docs/audit/engineering-completeness-quality-2026-06-05.md)      |
+| **2 Internal compliance** |                  8.5 | **9.0** (5 domains)              | [internal](./docs/audit/internal-compliance-2026-06-05.md)                      |
+| **3 Industry Compliance** |                  8.0 | **IC-T0** · OPEN 0/12            | [industry](./docs/audit/industry-compliance-2026-06-05.md)                      |
+| **GCR** (L2+L3 rollup)    |                    — | **GCR-T0** · **BLOCKED**         | [global compliance rating](./docs/audit/global-compliance-rating-2026-06-05.md) |
+| **4 Bank-grade**          |                  8.5 | composite 8.9                    | [bank-grade](./docs/audit/bank-grade-2026-06-05.md)                             |
+| **5 GTM-Readiness**       |                  8.0 | **GR-T1** / sovereign &lt; GR-T2 | [gtm-readiness](./docs/audit/gtm-readiness-2026-06-05.md)                       |
 
 ### Engineering completeness & quality (lane 1)
 

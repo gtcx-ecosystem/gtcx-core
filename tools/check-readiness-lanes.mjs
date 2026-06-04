@@ -62,9 +62,17 @@ const requiredIndexes = [
   'docs/audit/readiness-model.md',
   'docs/audit/internal-compliance-2026-06-05.md',
   'docs/audit/industry-compliance-2026-06-05.md',
+  'docs/audit/global-compliance-rating-2026-06-05.md',
   'docs/audit/gtm-readiness-2026-06-05.md',
   'docs/agents/readiness-and-audit-lanes.md',
 ];
+
+if (latest && !latest.globalComplianceRating?.tier) {
+  failures.push('latest.json: globalComplianceRating.tier required (GCR-T0–T4)');
+}
+if (latest && !latest.globalComplianceRating?.status) {
+  failures.push('latest.json: globalComplianceRating.status required');
+}
 
 for (const rel of requiredIndexes) {
   if (!existsSync(join(root, rel))) failures.push(`Missing required index: ${rel}`);

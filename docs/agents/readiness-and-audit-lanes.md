@@ -58,6 +58,23 @@ Register SoR (lane 3): [external-dependencies-register-2026-05-28.md](../audit/e
 
 ---
 
+## 3b. Global Compliance Rating (GCR) — tier + status
+
+**Canonical:** [global-compliance-rating-2026-06-05.md](../audit/global-compliance-rating-2026-06-05.md) · `latest.json` → `globalComplianceRating`
+
+| Field          | Current     | Scale                                           |
+| -------------- | ----------- | ----------------------------------------------- |
+| **GCR tier**   | **GCR-T0**  | GCR-T0 (blocked) → GCR-T4 (sustained)           |
+| **GCR status** | **BLOCKED** | BLOCKED · OPEN · PREP-READY · IN-FLIGHT · CLEAR |
+
+**Rollup of lanes 2 + 3** (corporate design + industry attestation). **Never 1–10.**
+
+**Not GCI** (Global Compliance **Index** — protocol product). **Not 8.9** (bank-grade lane 4).
+
+Update GCR when IC tier or EXT-CORE register changes.
+
+---
+
 ## 4. Lane 2 — Internal compliance (five domains)
 
 Lane 2 is **not** “docs/hygiene only.” Use domain scores from [internal-compliance index](../audit/internal-compliance-2026-06-05.md):

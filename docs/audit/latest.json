@@ -6,7 +6,21 @@
     "auditQuality": "1-10 — quality of audit artifacts only",
     "readinessOutcome": "per forensic audit (scores or tiers)",
     "industryCompliance": "IC-T0–IC-T4 tier + status only — never 1-10",
+    "globalComplianceRating": "GCR-T0–GCR-T4 tier + GCR status only — never 1-10; rollup of lanes 2+3",
     "gtmReadiness": "GR-T0–GR-T6 tier + status only — never 1-10"
+  },
+  "globalComplianceRating": {
+    "tier": "GCR-T0",
+    "status": "BLOCKED",
+    "derivedFrom": {
+      "industryComplianceTier": "IC-T0",
+      "industryRegister": "OPEN",
+      "itemsComplete": 0,
+      "itemsTotal": 12,
+      "internalCorporateReadiness": 8.2
+    },
+    "index": "docs/audit/global-compliance-rating-2026-06-05.md",
+    "notSameAs": ["GCI", "bankGrade.certifiedComposite", "internalCompliance.composite"]
   },
   "lanes": {
     "engineeringCompletenessQuality": {
