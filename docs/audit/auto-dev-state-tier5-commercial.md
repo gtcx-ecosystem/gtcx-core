@@ -1,7 +1,7 @@
 ---
 updated: 2026-06-04
 owner: gtcx-core
-status: launch-focus-implement
+status: launch-focus-plan
 ---
 
 # Auto-dev state — launch / GTM (machine-generated)
@@ -13,17 +13,17 @@ status: launch-focus-implement
 - **Outcome:** Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.
 - **GTM library:** GR-T1 · **Sovereign:** below-GR-T2
 
-## Session mode: **IMPLEMENT**
+## Session mode: **PLAN**
 
 | Bucket    | Count |
 | --------- | ----- |
-| implement | 1     |
+| implement | 0     |
 | plan      | 5     |
 | human     | 1     |
 
 ## Implement queue
 
-- **CORE-004** — Trusted-setup transcript publish + KAT pin closeout
+- _(empty — agent in PLAN mode)_
 
 ## Plan queue (when implement empty)
 

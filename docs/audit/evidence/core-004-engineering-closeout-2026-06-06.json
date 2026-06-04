@@ -1,0 +1,23 @@
+{
+  "kind": "core-004-engineering-closeout",
+  "storyId": "CORE-004",
+  "phase": "engineering-class-r",
+  "finishedAt": "2026-06-06T21:20:00.000Z",
+  "ok": true,
+  "gates": [
+    {
+      "name": "cargo test trusted-setup-verify",
+      "command": "cargo test -p gtcx-zkp --features trusted-setup-verify --release",
+      "exitCode": 0
+    },
+    {
+      "name": "ops:trusted-setup:verify-publish",
+      "command": "pnpm ops:trusted-setup:verify-publish",
+      "exitCode": 1,
+      "expectedUntilPublish": true,
+      "note": "missing artifacts/trusted-setup/transcript.seed — Class S ceremony remainder"
+    }
+  ],
+  "witnessDoc": "docs/operations/coordination/core-004-engineering-closeout-2026-06-06.md",
+  "ceremonyRemainder": "Class S — publish transcript.seed + manifest.json per core-004-ceremony-publish-checklist.md"
+}

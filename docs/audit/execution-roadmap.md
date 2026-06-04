@@ -1,7 +1,7 @@
 ---
 last_reconciled: 2026-06-04
 reconciliation_note: >-
-  Launch-focus reconcile 2026-06-04 — implement 1 / plan 5 / witness 1 / human 2.
+  Launch-focus reconcile 2026-06-04 — mode plan; implement 0 / plan 5.
   Kimi project skills parity (22). CORE-004 engineering green; ceremony publish pending.
   DTF-5.5.4 Class S (LOI). FA-AGT complete.
 sources:
@@ -133,14 +133,14 @@ Aligned with [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) §6.3.
 
 ## Ecosystem open items (gtcx-core lens)
 
-| ID                 | Item                               | Owner               | Status             | gtcx-core role                                                                                                                                                             |
-| ------------------ | ---------------------------------- | ------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OI-X01             | ER-1-08 hub ack                    | gtcx-core           | **done**           | Protocols log; evidence on record                                                                                                                                          |
-| OI-X02             | ER-1-08 hub ack                    | gtcx-infrastructure | **outbound-filed** | Core done — [`to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md`](../operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md); await infra hub row |
-| OI-X06 / INT-S8-04 | cost-router v1.1                   | baseline-os         | **external**       | No implementation in core                                                                                                                                                  |
-| EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**           | Evidence pack input (FA-S6)                                                                                                                                                |
-| CORE-004           | Trusted-setup transcript           | gtcx-core           | **partial**        | Engineering green; custodian publish + `pnpm ops:trusted-setup:verify-publish`                                                                                             |
-| CORE-005–006       | Pen-test SOW / formal verification | baseline-os         | **blocked**        | Track only                                                                                                                                                                 |
+| ID                 | Item                               | Owner               | Status               | gtcx-core role                                                                                                                                                             |
+| ------------------ | ---------------------------------- | ------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OI-X01             | ER-1-08 hub ack                    | gtcx-core           | **done**             | Protocols log; evidence on record                                                                                                                                          |
+| OI-X02             | ER-1-08 hub ack                    | gtcx-infrastructure | **outbound-filed**   | Core done — [`to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md`](../operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md); await infra hub row |
+| OI-X06 / INT-S8-04 | cost-router v1.1                   | baseline-os         | **external**         | No implementation in core                                                                                                                                                  |
+| EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**             | Evidence pack input (FA-S6)                                                                                                                                                |
+| CORE-004           | Trusted-setup transcript           | gtcx-core           | **engineering-done** | Class R closed — [`core-004-engineering-closeout-2026-06-06.md`](../operations/coordination/core-004-engineering-closeout-2026-06-06.md); ceremony Class S                 |
+| CORE-005–006       | Pen-test SOW / formal verification | baseline-os         | **blocked**          | Track only                                                                                                                                                                 |
 
 ---
 

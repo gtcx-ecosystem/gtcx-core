@@ -139,6 +139,13 @@ const PLANNING_QUEUE = [
   },
 ];
 
+const CORE_004_ENGINEERING_DONE =
+  'docs/operations/coordination/core-004-engineering-closeout-2026-06-06.md';
+
+function core004EngineeringDone(repoRoot) {
+  return existsSync(join(repoRoot, CORE_004_ENGINEERING_DONE));
+}
+
 const LAUNCH_IMPLEMENT_STATIC = [
   {
     storyId: 'CORE-004',
@@ -240,7 +247,11 @@ export function buildLaunchFocus(repoRoot) {
     ...opsImplementable(session),
     ...LAUNCH_IMPLEMENT_STATIC.filter((s) => {
       if (s.storyId === 'CORE-004') {
-        return executionMd.includes('CORE-004') && executionMd.includes('partial');
+        return (
+          !core004EngineeringDone(repoRoot) &&
+          executionMd.includes('CORE-004') &&
+          executionMd.includes('partial')
+        );
       }
       return true;
     }),
