@@ -357,6 +357,8 @@ Provider-agnostic — Claude, Codex, Gemini, Kimi, Cursor, etc.
 
 ## Cross-repo coordination (Protocol 24)
 
+**Session card (read first):** [ecosystem-unblock-playbook-2026-06.md](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-unblock-playbook-2026-06.md) — INT-S9-01 critical path; **IR vs XC**; false blocks F1–F7. **gtcx-core** = foundation layer; EXT-INF/ceremony does not freeze engineering lane merges.
+
 **Canonical policy:** [Protocol 24 — Cross-Repo Coordination](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/24-cross-repo-coordination/protocol.md)  
 **Complements:** [Protocol 22 — Agent Work Selection](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/22-agent-work-selection/protocol.md) (what to work on next).
 

@@ -1,0 +1,13 @@
+---
+description: Ecosystem unblock playbook — gtcx-core is foundation layer; IR vs XC
+globs:
+  - docs/**
+  - AGENTS.md
+alwaysApply: true
+---
+
+# Ecosystem session card (normative)
+
+Read first: [ecosystem-unblock-playbook-2026-06.md](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-unblock-playbook-2026-06.md)
+
+**gtcx-core** = lowest stack layer (libraries/crypto). EXT-INF/ceremony (XC) does **not** freeze in-repo engineering merges. Assurance evidence stays in this repo; program index on **gtcx-protocols**.
