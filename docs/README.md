@@ -128,7 +128,7 @@ review_cycle: 'on-change'
 | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | [`audit/readiness-model.md`](./audit/readiness-model.md)                                                         | **Five lanes** — map to existing forensic audits                                     |
 | [`audit/engineering-completeness-quality-2026-06-05.md`](./audit/engineering-completeness-quality-2026-06-05.md) | Lane 1 index                                                                         |
-| [`audit/internal-compliance-2026-06-05.md`](./audit/internal-compliance-2026-06-05.md)                           | Lane 2 index                                                                         |
+| [`audit/internal-compliance-2026-06-05.md`](./audit/internal-compliance-2026-06-05.md)                           | Lane 2 — repo hygiene, docs, AI trust, security, corporate readiness                 |
 | [`audit/industry-compliance-2026-06-05.md`](./audit/industry-compliance-2026-06-05.md)                           | Lane 3 — Industry Compliance (IC-T0–T4)                                              |
 | [`audit/bank-grade-2026-06-05.md`](./audit/bank-grade-2026-06-05.md)                                             | Lane 4 index — **8.9**                                                               |
 | [`audit/gtm-readiness-2026-06-05.md`](./audit/gtm-readiness-2026-06-05.md)                                       | Lane 5 — GTM-Readiness (GR-T0–T6)                                                    |

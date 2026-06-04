@@ -18,7 +18,7 @@ review_cycle: 'on-change'
 > **Date:** 2026-06-03  
 > **Owner:** Protocol Architect  
 > **Audit quality (1–10):** L1 **8.5** · L2 **8.5** · L3 register **8.0** · L4 **8.5** · L5 **8.0** — [readiness model](../audit/readiness-model.md)  
-> **Readiness outcomes:** eng 9.5/10.0 · compliance ~9.6 · Industry **IC-T0** OPEN 0/12 · bank-grade **8.9** · GTM-Readiness **GR-T1** / sovereign **&lt; GR-T2**  
+> **Readiness outcomes:** eng 9.5/10.0 · internal **9.0** (5 domains) · Industry **IC-T0** OPEN 0/12 · bank-grade **8.9** · GTM-Readiness **GR-T1** / sovereign **&lt; GR-T2**  
 > **Defensibility Tier 5 technical:** ~88% (engineering lane; ceremony/commercial external)  
 > **Next review:** 2026-09-01 (quarterly)
 
@@ -32,7 +32,7 @@ review_cycle: 'on-change'
 
 **In one sentence for an investor:** `gtcx-core` is the compounding platform layer of the GTCX ecosystem — every verification proof, digital identity, and trade certificate traces its trust back to this repo; as downstream products multiply, the value of this foundation compounds non-linearly.
 
-**Maturity state:** See [readiness-model](../audit/readiness-model.md) — **audit quality 1–10** is separate from **readiness outcomes**. Engineering readiness **9.5/10.0**; bank-grade composite **8.9**; Industry Compliance **IC-T0** (OPEN 0/12); GTM-Readiness **GR-T1** / sovereign **below GR-T2**.
+**Maturity state:** See [readiness-model](../audit/readiness-model.md) — **audit quality 1–10** is separate from **readiness outcomes**. Engineering **9.5/10.0**; internal compliance **9.0** (repo/docs **9.6**, AI/security **8.8**, corporate **8.2**); bank-grade **8.9**; Industry **IC-T0**; GTM-Readiness **GR-T1** / sovereign **below GR-T2**.
 
 **Remaining gaps:** L3 IC-T0 blockers — pen-test, SOC 2 letter, XR-402 ceremony. L5 GR-T2 ecosystem — testnet/DR, sandbox send.
 
@@ -264,7 +264,7 @@ Detailed roadmap: [`docs/audit/10-10-roadmap-2026-05-11.md`](../audit/10-10-road
 | ----------------------------------------------------------- | ----------------------------------- | ---------------------------- |
 | `docs/audit/readiness-model.md`                             | **Five lanes** + forensic audit map | All audiences                |
 | `docs/audit/engineering-completeness-quality-2026-06-05.md` | Lane 1 index                        | Engineering                  |
-| `docs/audit/internal-compliance-2026-06-05.md`              | Lane 2 index                        | Compliance                   |
+| `docs/audit/internal-compliance-2026-06-05.md`              | Lane 2 — 5 domain scorecard         | Compliance, docs, security   |
 | `docs/audit/industry-compliance-2026-06-05.md`              | Lane 3 — IC tiers                   | Procurement                  |
 | `docs/audit/bank-grade-2026-06-05.md`                       | Lane 4 — **8.9**                    | Investors                    |
 | `docs/audit/gtm-readiness-2026-06-05.md`                    | Lane 5 GTM-Readiness — GR tiers     | GTM, founders                |

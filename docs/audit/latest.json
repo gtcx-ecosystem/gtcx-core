@@ -20,8 +20,21 @@
     "internalCompliance": {
       "auditQuality1to10": 8.5,
       "readinessOutcome": {
-        "docsStandard": 9.6,
-        "repoHygiene": 9.6
+        "composite": 9.0,
+        "domains": {
+          "repoHygieneOrganization": 9.6,
+          "documentationQuality": 9.6,
+          "documentationQualitySubdimensions": {
+            "hygiene": 9.8,
+            "accuracy": 9.9,
+            "organization": 9.1,
+            "breadth": 9.2,
+            "quality": 9.5
+          },
+          "aiTrustAndSafety": 8.8,
+          "securityInRepo": 8.8,
+          "corporateReadiness": 8.2
+        }
       },
       "index": "docs/audit/internal-compliance-2026-06-05.md"
     },
@@ -69,6 +82,11 @@
     "renamedLanes": {
       "externalDependentCompliance": "industryCompliance",
       "gtm": "gtmReadiness"
+    },
+    "internalComplianceDeprecated": {
+      "docsStandard": 9.6,
+      "repoHygiene": 9.6,
+      "note": "superseded by internalCompliance.readinessOutcome.domains"
     }
   }
 }

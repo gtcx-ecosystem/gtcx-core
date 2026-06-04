@@ -23,7 +23,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 | Lane                      | Audit quality (1–10) | Readiness outcome                | Index                                                                      |
 | ------------------------- | -------------------: | -------------------------------- | -------------------------------------------------------------------------- |
 | **1 Engineering**         |                  8.5 | 9.5 / 10.0 signoff               | [engineering](./docs/audit/engineering-completeness-quality-2026-06-05.md) |
-| **2 Internal compliance** |                  8.5 | ~9.6 docs/hygiene                | [internal](./docs/audit/internal-compliance-2026-06-05.md)                 |
+| **2 Internal compliance** |                  8.5 | **9.0** (5 domains)              | [internal](./docs/audit/internal-compliance-2026-06-05.md)                 |
 | **3 Industry Compliance** |                  8.0 | **IC-T0** · OPEN 0/12            | [industry](./docs/audit/industry-compliance-2026-06-05.md)                 |
 | **4 Bank-grade**          |                  8.5 | composite 8.9                    | [bank-grade](./docs/audit/bank-grade-2026-06-05.md)                        |
 | **5 GTM-Readiness**       |                  8.0 | **GR-T1** / sovereign &lt; GR-T2 | [gtm-readiness](./docs/audit/gtm-readiness-2026-06-05.md)                  |
@@ -60,7 +60,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 ### Internal compliance (lane 2)
 
-Docs, hygiene, threat matrix, SOC 2 **design** — [internal-compliance index](./docs/audit/internal-compliance-2026-06-05.md) · [docs-standard audit](./docs/audit/docs-standard-compliance-2026-06-05.md).
+**9.0 composite** — repo hygiene **9.6** · documentation **9.6** · AI trust **8.8** · security **8.8** · corporate readiness **8.2** — [internal-compliance index](./docs/audit/internal-compliance-2026-06-05.md).
 
 ### Industry Compliance (lane 3)
 

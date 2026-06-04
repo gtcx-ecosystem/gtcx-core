@@ -108,13 +108,17 @@ related:
 | 10-10-roadmap-\* (multiple dates)                      | roadmap    |
 | anti-inflation-audit-results-2026-05-11                | 2026-05    |
 
-### Lane 2 — Internal compliance
+### Lane 2 — Internal compliance (five domains)
 
-| Audit                                          | Score |
-| ---------------------------------------------- | ----: |
-| docs-standard-compliance-2026-06-05            |   9.6 |
-| repo-hygiene-2026-06-05                        |   9.6 |
-| dtf-documentation-consistency-audit-2026-06-03 |     — |
+| Domain                                         | Audit                                                                              | Readiness |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------- | --------: |
+| Repo hygiene & organization                    | [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)                         |   **9.6** |
+| Documentation quality                          | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md) |   **9.6** |
+| AI trust & safety                              | [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · `@gtcx/ai-eval`           |   **8.8** |
+| Security (in-repo)                             | threat matrix · full-audit Phase 2                                                 |   **8.8** |
+| Corporate readiness                            | [soc2-readiness.md](../compliance/soc2-readiness.md)                               |   **8.2** |
+| **Composite**                                  | [internal-compliance-2026-06-05.md](./internal-compliance-2026-06-05.md)           |   **9.0** |
+| dtf-documentation-consistency-audit-2026-06-03 | —                                                                                  | cross-cut |
 
 ### Lane 3 — Industry Compliance
 

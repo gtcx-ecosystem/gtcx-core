@@ -69,4 +69,4 @@ pnpm test:coverage:critical && pnpm api:check && pnpm security:threat-matrix
 
 ## Supersedes
 
-[engineering-readiness-2026-06-05.md](./engineering-readiness-2026-06-05.md) — removed; use this index + signoff audits above.
+`engineering-readiness-2026-06-05.md` (removed) — use this index + signoff audits above.

@@ -21,13 +21,13 @@ Forensic audits and readiness scorecards for `gtcx-core`, organized in **five la
 
 **[ecosystem-audit-catalog-2026-06-05.md](./ecosystem-audit-catalog-2026-06-05.md)** — **gtcx-docs / gtcx-agile / gtcx-agentic** audits (not only this folder).
 
-| Lane                                 | Index (rollup)                                                                                     | Primary forensic audits                                                                                                                                |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1 Engineering completeness & quality | [engineering-completeness-quality-2026-06-05.md](./engineering-completeness-quality-2026-06-05.md) | [internal-10-10-signoff](./internal-10-10-signoff-2026-05-28.md), [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) |
-| 2 Internal compliance                | [internal-compliance-2026-06-05.md](./internal-compliance-2026-06-05.md)                           | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md), [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)         |
-| 3 Industry Compliance                | [industry-compliance-2026-06-05.md](./industry-compliance-2026-06-05.md)                           | [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md)                                                         |
-| 4 Bank-grade                         | [bank-grade-2026-06-05.md](./bank-grade-2026-06-05.md)                                             | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md)                                                                                             |
-| 5 GTM-Readiness                      | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md)                                       | [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md)                                                                              |
+| Lane                                 | Index (rollup)                                                                                     | Primary forensic audits                                                                                                                                    |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 Engineering completeness & quality | [engineering-completeness-quality-2026-06-05.md](./engineering-completeness-quality-2026-06-05.md) | [internal-10-10-signoff](./internal-10-10-signoff-2026-05-28.md), [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md)     |
+| 2 Internal compliance                | [internal-compliance-2026-06-05.md](./internal-compliance-2026-06-05.md)                           | [docs-standard](./docs-standard-compliance-2026-06-05.md), [repo-hygiene](./repo-hygiene-2026-06-05.md), [soc2-readiness](../compliance/soc2-readiness.md) |
+| 3 Industry Compliance                | [industry-compliance-2026-06-05.md](./industry-compliance-2026-06-05.md)                           | [external-dependencies-register-2026-05-28.md](./external-dependencies-register-2026-05-28.md)                                                             |
+| 4 Bank-grade                         | [bank-grade-2026-06-05.md](./bank-grade-2026-06-05.md)                                             | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md)                                                                                                 |
+| 5 GTM-Readiness                      | [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md)                                       | [gtm-reality-check-2026-06-02.md](../gtm/gtm-reality-check-2026-06-02.md)                                                                                  |
 
 **Machine-readable:** [latest.json](./latest.json)
 
@@ -36,7 +36,7 @@ Forensic audits and readiness scorecards for `gtcx-core`, organized in **five la
 ## How to use
 
 1. **“Are gates green?”** → Lane 1 index + `internal-10-10-signoff`.
-2. **“Are docs/controls in-repo complete?”** → Lane 2 index.
+2. **“Are docs/hygiene/AI/security/corporate controls in-repo?”** → Lane 2 domain scorecard.
 3. **“Is pen-test / SOC 2 / ceremony done?”** → Lane 3 Industry Compliance (IC tiers).
 4. **“What’s the investor composite?”** → Lane 4 master audit only.
 5. **“Can we sell / pilot?”** → Lane 5 GTM-Readiness (GR tiers).
