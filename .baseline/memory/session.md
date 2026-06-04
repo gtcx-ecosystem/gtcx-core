@@ -1,16 +1,17 @@
 ---
 session_id: '2026-06-04-execute-roadmap'
 agent: 'gtcx-core-agent'
-focus: 'CORE-004 partial — KAT pin gate wired; Class R transcript publish'
+focus: 'DTF-5.5.2 certified pack pipeline; CORE-004 Class R transcript'
 ---
 
-# Session: execute-roadmap + CORE-004
+# Session: Tier 5 + CORE-004
 
-## State (2026-06-04)
+## State (2026-06-06)
 
-- **Git:** KAT pin slice ready to commit/push
-- **Next work (P22):** backlogClear — **Class R** publish `artifacts/trusted-setup/transcript.seed` + manifest
-- **CORE-004:** engineering partial (trusted-setup-verify CI + evidence); KAT pin test skips until seed published
+- **Git:** DTF-5.5.2 pipeline commit pending push
+- **Next work (P22):** DTF-5.5.4 Class S (LOI) or CORE-004 Class R (`transcript.seed`)
+- **DTF-5.5.2:** build + verify gates green in-session
+- **CORE-004:** KAT pin CI wired; awaits published ceremony seed
 
 ## Completed this session
 

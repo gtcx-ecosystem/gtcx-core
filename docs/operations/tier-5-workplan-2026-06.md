@@ -91,7 +91,7 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 | DTF-5.4.3 | Trust portal circuit ID column                                        | S-T5-4 | protocol-architect         | **done** | ops-docs         | 5.4.1       | 5.4.4             |
 | DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID (witness `73eaff2b`)              | S-T5-4 | gtcx-protocols             | **done** | code             | 5.4.1       | **T5 technical**  |
 | DTF-5.5.1 | Jurisdiction pack Zod CI hardening                                    | S-T5-5 | protocol-engineer          | **done** | code             | —           | 5.5.2             |
-| DTF-5.5.2 | Certified pack pipeline (signed manifest)                             | S-T5-5 | Legal + protocol-architect | pending  | external         | 5.5.1       | 5.5.4             |
+| DTF-5.5.2 | Certified pack pipeline (signed manifest)                             | S-T5-5 | Legal + protocol-architect | **done** | ops-docs         | 5.5.1       | 5.5.4             |
 | DTF-5.5.3 | Predicate-gated export keys (optional)                                | S-T5-5 | crypto-security-engineer   | deferred | code             | 5.5.1       | —                 |
 | DTF-5.5.4 | Design-partner LOI or regulator letter                                | S-T5-5 | GTM                        | pending  | evidence-capture | infra pilot | **T5 commercial** |
 | DTF-5.5.5 | Evidence index entry                                                  | S-T5-5 | quality-evidence-lead      | **done** | ops-docs         | 5.5.1       | CORE-004 blocked  |

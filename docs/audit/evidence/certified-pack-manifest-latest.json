@@ -1,0 +1,49 @@
+{
+  "schema": "gtcx.certifiedPackManifest.v1",
+  "storyId": "DTF-5.5.2",
+  "generatedAt": "2026-06-04T14:53:16.469Z",
+  "repoHead": "910108bcbd3a7b671bd50408d5ce95b7e4aa884a",
+  "packCount": 5,
+  "packs": [
+    {
+      "jurisdictionCode": "BW",
+      "path": "artifacts/certified-pack/packs/bw-engagement-pack.json",
+      "sha256": "82f59a8569498fbe2ba5bb6a4d9da4c0fe499413ffd49b8e04f23a5c6a9c22e5",
+      "bytes": 3443
+    },
+    {
+      "jurisdictionCode": "CD",
+      "path": "artifacts/certified-pack/packs/cd-engagement-pack.json",
+      "sha256": "13790181ade9182c2b755448dde2c2913d452218d2efec8a61f7ad5e5c3b9c78",
+      "bytes": 3502
+    },
+    {
+      "jurisdictionCode": "GH",
+      "path": "artifacts/certified-pack/packs/gh-engagement-pack.json",
+      "sha256": "6798a273268279369724ee370238689e2ccef3b985ecd21166f9c5b1baae0dbb",
+      "bytes": 3509
+    },
+    {
+      "jurisdictionCode": "NA",
+      "path": "artifacts/certified-pack/packs/na-engagement-pack.json",
+      "sha256": "a7ea3573aa696f54fac39a1f5a7eacd39d8495da3a9f3415b79c77b760343078",
+      "bytes": 3447
+    },
+    {
+      "jurisdictionCode": "ZW",
+      "path": "artifacts/certified-pack/packs/zw-engagement-pack.json",
+      "sha256": "0d6053353b9e1c9e8977dbb85483fdc535b55c7dff3323d524ee27feb237dfd0",
+      "bytes": 3467
+    }
+  ],
+  "gates": ["pnpm jurisdiction:validate-packs", "pnpm certified-pack:verify-manifest"],
+  "commercialGate": {
+    "storyId": "DTF-5.5.4",
+    "requirement": "Design-partner LOI or regulator letter (Class S — GTM/Legal)",
+    "status": "awaiting-human"
+  },
+  "signing": {
+    "signed": false,
+    "reason": "hash-only manifest (optional: set GTCX_CERTIFIED_PACK_SIGNING_SEED_HEX for Ed25519; Class A with vault)"
+  }
+}

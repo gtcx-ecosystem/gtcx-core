@@ -60,6 +60,11 @@ jobs:
       - name: Governance policy validation
         run: pnpm quality:governance:check
 
+      - name: Certified pack manifest (DTF-5.5.2)
+        run: |
+          pnpm certified-pack:build-manifest
+          pnpm certified-pack:verify-manifest
+
       - name: Threat matrix validation
         run: pnpm security:threat-matrix
 
