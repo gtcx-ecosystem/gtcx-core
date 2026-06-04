@@ -19,25 +19,28 @@ review_cycle: on-change
 
 ## 1. Session start (every repo, every session)
 
-**One-shot (BaselineOS CLI — full status + P22 + gates):**
+**Canonical (BaselineOS — orchestrates gtcx-docs + repo + gates + gtcx-agile ingest):**
 
 ```bash
 cd <owner-repo>
-# After: cd ../baseline-os && pnpm --filter baselineos build
-node ../baseline-os/packages/baselineos/dist/cli/bin.js session
+baseline start
 # or: baseline session -r .
+# or: baseline start --skip-gates   # fast open
 ```
 
-Chains INST-003 report → `pnpm agent:session-start` → repo gates. Use **`--skip-gates`** for a fast open.
+Build once if needed: `cd ../baseline-os && pnpm --filter baselineos build`
 
-**Repo-native (minimum):**
+**Chain:** gtcx-docs INST-003 → repo `agent start` (prefers `bin/agent`, no pnpm prefix) → repo gates → optional `--ingest` via gtcx-agile/baseline-os work-next.
+
+**Repo-native (minimum — same session script, no institutional report):**
 
 ```bash
 cd <owner-repo>
-pnpm agent:start
+agent start
+# or: pnpm agent:start
 ```
 
-Optional: `pnpm agent:start --json` for automation.
+Optional: `agent start --json` or `baseline start --json` for automation.
 
 Legacy alias: `pnpm agent:session-start` (= `agent:start`).
 
@@ -82,12 +85,6 @@ Repos with bout wiring provision `executionBout` on every `agent:session-start` 
 **`backlogClear` ≠ stop.** Continue while the bout lists Class R work.
 
 **`execute-roadmap`** is for **planning/reconcile** only — not session implementation drain.
-
-### Bout progress gauge (engineering ≠ buyer GA)
-
-**Config:** `.baseline/bout-progress.config.json` · **Commands:** `pnpm agent:bout-progress` · **Normative:** `docs/operations/agent-bout-progress-gauge.md`
-
-Report **A** (engineering), **B** (workflow — product repos), **C** (GTM buyer S0–S6) separately. Include `### Progress gauge` in progress Status Updates. Use **task IDs** (`EOS-UX-052`) — not “next slices”. Copy exploration-os example from `docs/operations/examples/bout-progress-exploration-os.config.json`.
 
 ### Launch focus (GTM north star — gtcx-core and wired repos)
 
