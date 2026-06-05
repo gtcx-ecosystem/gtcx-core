@@ -11,8 +11,12 @@ import { execSync } from 'node:child_process';
 
 const dryRun = process.argv.includes('--dry-run');
 
-function run(cmd) {
-  return execSync(cmd, { encoding: 'utf8', stdio: dryRun ? 'pipe' : 'inherit' }).trim();
+function run(cmd, { inherit = false } = {}) {
+  const out = execSync(cmd, {
+    encoding: 'utf8',
+    stdio: inherit ? 'inherit' : 'pipe',
+  });
+  return (out ?? '').trim();
 }
 
 const branch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
@@ -31,5 +35,5 @@ if (dryRun) {
   process.exit(0);
 }
 
-run(`git push -u origin ${branch}`);
+run(`git push -u origin ${branch}`, { inherit: true });
 console.log(JSON.stringify({ ok: true, branch, ahead, pushed: true }));
