@@ -80,6 +80,15 @@ Full SHA-256 list: manifest JSON on `main`.
 
 ---
 
+## Related (gtcx-infrastructure SoR)
+
+| Artifact                                                                                                                                                                                       | Role                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| [`pen-test-intake-evidence-2026-05-31.md`](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/audit/pen-test-intake-evidence-2026-05-31.md)                                  | Live-stack / deployment pen-test intake |
+| [`ext-inf-human-gates-unblock-2026-06-06.md`](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/docs/operations/coordination/outbound/ext-inf-human-gates-unblock-2026-06-06.md) | EXT-INF-002 human SOW gate              |
+
+**Rollup:** [`to-gtcx-infrastructure-open-acks-rollup-2026-06-07.md`](./to-gtcx-infrastructure-open-acks-rollup-2026-06-07.md) (OI-X02 + EXT-INF-002)
+
 ## Witness
 
 When infra accepts pack: reply inbound `from-gtcx-infrastructure-ext-inf-002-ack-YYYY-MM-DD.md` or bridge row — gtcx-core will mark EXT-INF-002 **outbound-acknowledged** in `remaining-cross-repo-work`.
