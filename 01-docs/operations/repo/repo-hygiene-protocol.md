@@ -59,14 +59,14 @@ These files are generated/maintained by the agent-sync pipeline where noted. Do 
 | `package.json`         | Root workspace manifest    |
 | `pnpm-workspace.yaml`  | pnpm workspace definitions |
 | `pnpm-lock.yaml`       | Lockfile (committed)       |
-| `turbo.json`           | Turborepo task graph       |
-| `tsconfig.json`        | Root TypeScript config     |
-| `vitest.workspace.ts`  | Vitest workspace topology  |
-| `eslint.config.js`     | ESLint flat config         |
-| `commitlint.config.js` | Conventional commit lint   |
-| `typedoc.json`         | API doc generation config  |
-| `baseline.config.ts`   | BaselineOS repo config     |
-| `Dockerfile`           | Container build            |
+| `turbo.json`           | Turborepo task graph (stub — sync from `config/toolchain/`) |
+| `tsconfig.json`        | Root TypeScript stub → `config/toolchain/tsconfig.base.json` |
+| `eslint.config.js`     | ESLint flat config                                         |
+| `commitlint.config.js` | Conventional commit lint                                   |
+| `baseline.config.ts`   | BaselineOS RAG config                                      |
+| `hygiene.config.json`  | gtcx-hygiene root policy                                   |
+
+TypeDoc, Vitest workspace, and Docker live under **`config/toolchain/`** and **`04-ship/docker/`** — not at repo root.
 
 ## Tier E — Quality / CI dotfiles
 

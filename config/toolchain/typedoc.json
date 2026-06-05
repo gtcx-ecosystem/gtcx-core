@@ -18,7 +18,7 @@
     "03-platform/packages/utils",
     "03-platform/packages/logging"
   ],
-  "out": "artifacts/api-docs",
+  "out": "00-archive/artifacts/api-docs",
   "plugin": ["typedoc-plugin-markdown"],
   "name": "GTCX Core API Reference",
   "readme": "none",

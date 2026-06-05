@@ -1,9 +1,9 @@
 {
   "$schema": "https://gtcx.org/schemas/audit/root-allowlist.schema.json",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "schema_version": "1.0.0",
   "updated": "2026-06-05",
-  "description": "Repo-specific root allowlist for gtcx-core. Source of truth for CI root-cleanliness checks. Mirrors 01-docs/04-ops/repo/repo-hygiene-protocol.md.",
+  "description": "Repo-specific root allowlist for gtcx-core (five-hub layout). Source of truth for CI root-cleanliness checks.",
 
   "required_files": ["README.md", "AGENTS.md"],
 
@@ -13,22 +13,15 @@
     "SECURITY.md",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
-    "CLAUDE.md",
-    "GEMINI.md",
-    "CONVENTIONS.md",
-    "CODEX.md",
-    "KIMI.md",
     "package.json",
     "pnpm-workspace.yaml",
     "pnpm-lock.yaml",
     "turbo.json",
     "tsconfig.json",
-    "vitest.workspace.ts",
     "eslint.config.js",
     "commitlint.config.js",
-    "typedoc.json",
     "baseline.config.ts",
-    "Dockerfile",
+    "hygiene.config.json",
     ".gitignore",
     ".gitattributes",
     ".dockerignore",
@@ -39,19 +32,14 @@
   ],
 
   "allowed_directories": [
-    "agents",
-    "artifacts",
-    "benchmarks",
-    "bin",
-    "deploy",
-    "docs",
-    "packages",
-    "quality",
-    "rust",
-    "scripts",
-    "tests",
-    "tools",
-    "workspace"
+    "00-archive",
+    "01-docs",
+    "02-ops",
+    "03-platform",
+    "04-ship",
+    "05-audit",
+    "config",
+    "rust"
   ],
 
   "allowed_dot_directories": [
@@ -76,7 +64,11 @@
     "audit": "Move to 01-docs/05-audit/. The gitignored audit/ is a developer-local scratch dir and must never be tracked.",
     "coverage": "Build artifact — gitignored. Never commit.",
     "session-notes": "Use 01-docs/session-notes/.",
-    "_archive": "Gitignored historical tree; must not be committed at root."
+    "_archive": "Gitignored historical tree; must not be committed at root.",
+    "Dockerfile": "Use 04-ship/docker/Dockerfile.",
+    "typedoc.json": "Use config/toolchain/typedoc.json.",
+    "vitest.workspace.ts": "Use config/toolchain/vitest.workspace.ts.",
+    "baseline.config.json": "Use baseline.config.ts (RAG) only."
   },
 
   "forbidden_name_prefixes": ["IMG_", "Screenshot", "Untitled"],
@@ -87,7 +79,7 @@
       "agent_action": "none — do not delete, move, empty, or schedule in sprints/PRs",
       "ci_enforcement": "excluded from root-cleanliness check",
       "audit_reporting": "may note as out-of-scope; never score as P0/P1",
-      "rationale": "Maintainer-managed terminal cleanup. Not present in this repo today; convention preserved for future use."
+      "rationale": "Maintainer-managed terminal cleanup."
     }
   },
 
@@ -95,12 +87,9 @@
     "audits": "01-docs/05-audit/",
     "session_analysis": "01-docs/session-notes/",
     "local_scratch": ".local/",
-    "pm_artifacts": "01-docs/05-audit/agile/",
-    "repo_policy": "01-docs/04-ops/repo/",
-    "performance_baselines": "benchmarks/",
-    "kat_fixtures": "artifacts/kat/",
-    "agent_cli": "bin/",
-    "agent_terminal_index": "agents/",
-    "operational_workspace": "workspace/"
+    "repo_policy": "01-docs/operations/repo/",
+    "ship_docker": "04-ship/docker/",
+    "toolchain": "config/toolchain/",
+    "rust_workspace": "rust/"
   }
 }

@@ -18,9 +18,9 @@ import subprocess
 import sys
 
 SEMVER_RE = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
-ROOT = pathlib.Path(__file__).resolve().parents[2]
-ALLOWLIST_PATH = ROOT / "01-docs/04-ops/repo/root-allowlist.json"
-SCHEMA_PATH = ROOT / "01-docs/04-ops/repo/root-allowlist.schema.json"
+ROOT = pathlib.Path(__file__).resolve().parents[3]
+ALLOWLIST_PATH = ROOT / "01-docs/operations/repo/root-allowlist.json"
+SCHEMA_PATH = ROOT / "01-docs/operations/repo/root-allowlist.schema.json"
 
 # Deterministic axis configuration
 BUILD_ARTIFACT_RE = re.compile(

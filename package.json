@@ -63,7 +63,7 @@
     "version-packages": "changeset version",
     "release": "pnpm version-packages && pnpm install && pnpm build && node ./03-platform/tools/publish-packages-provenance.mjs",
     "release:publish:provenance": "node ./03-platform/tools/publish-packages-provenance.mjs",
-    "docs": "typedoc",
+    "docs": "typedoc --options config/toolchain/typedoc.json",
     "docs:check-links": "node ./03-platform/tools/check-markdown-links.mjs",
     "docs:check-frontmatter": "node ./03-platform/tools/check-doc-frontmatter.mjs",
     "docs:rust": "cd rust && cargo doc --workspace --no-deps",
@@ -109,7 +109,9 @@
     "hub": "node ../baseline-os/scripts/ecosystem/hub-sync.mjs",
     "workspace:check": "node 03-platform/scripts/workspace/check.mjs",
     "pm:sync": "node 03-platform/scripts/workspace/pm-sync.mjs",
-    "pm:status": "node 03-platform/scripts/workspace/pm-status.mjs"
+    "pm:status": "node 03-platform/scripts/workspace/pm-status.mjs",
+    "config:stubs:sync": "node 03-platform/scripts/config/sync-root-stubs.mjs",
+    "config:stubs:check": "node 03-platform/scripts/config/sync-root-stubs.mjs --check"
   },
   "devDependencies": {
     "@gtcx/eslint-config": "workspace:*",
