@@ -2,7 +2,7 @@
   "schema": "gtcx.launchFocus.v1",
   "normativeDoc": "docs/operations/agent-launch-focus.md",
   "statePath": ".baseline/launch-focus.json",
-  "provisionedAt": "2026-06-05T03:18:36.094Z",
+  "provisionedAt": "2026-06-05T03:20:36.645Z",
   "repo": "gtcx-core",
   "northStar": {
     "outcome": "Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.",
@@ -31,8 +31,8 @@
         "storyId": "DTF-5.5.4",
         "title": "Design-partner LOI or regulator letter",
         "authorityClass": "S",
-        "owner": "Human / GTM",
-        "lane": "p22-human"
+        "owner": "GTM / Legal",
+        "lane": "tier-5-commercial"
       },
       {
         "storyId": "CORE-004-CEREMONY",
