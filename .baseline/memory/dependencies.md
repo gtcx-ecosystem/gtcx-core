@@ -8,9 +8,11 @@ No cross-repo link dependencies detected in package.json.
 
 ## Hard Dependencies (Blocking)
 
-| Needs                  | From Repo | Status  | ETA   | Blocking Epic                                                    |
-| ---------------------- | --------- | ------- | ----- | ---------------------------------------------------------------- |
-| ZKP transcript publish | gtcx-core | partial | human | CORE-004 (verify gate done; INF-86 XR-402 KMS done in protocols) |
+| Needs                  | From Repo           | Status         | ETA   | Blocking Epic                                        |
+| ---------------------- | ------------------- | -------------- | ----- | ---------------------------------------------------- |
+| ZKP transcript publish | gtcx-core           | partial        | human | CORE-004 (verify gate done; ceremony Class S)        |
+| EXT-INF-002 vendor SOW | gtcx-infrastructure | outbound-filed | infra | FA-S6-02 pack delivered 2026-06-05 — await infra ack |
+| OI-X02 hub ack         | gtcx-infrastructure | outbound-filed | infra | ER-1-08 — core done; witness only                    |
 
 ## Soft Dependencies (Nice to have)
 

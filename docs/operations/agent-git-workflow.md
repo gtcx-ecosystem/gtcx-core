@@ -42,14 +42,14 @@ related:
 
 **You run commands.** The operator does not substitute for your shell.
 
-| Ladder | When bare Shell fails | Action                                                |
-| ------ | --------------------- | ----------------------------------------------------- |
-| **D1** | Default               | Run via agent Shell tool                              |
-| **D2** | Long-running          | Background shell + poll                               |
-| **D3** | IDE blocks `git push` | `pnpm agent:git-push` (node child_process)            |
-| **D4** | Wrong repo            | Switch to owner checkout (P24)                        |
-| **D5** | Ecosystem-wide        | `pnpm --dir ../gtcx-agentic ecosystem:push-all`       |
-| **D6** | All paths fail        | Permission Unblock Report — then retry when unblocked |
+| Ladder | When bare Shell fails | Action                                                                                |
+| ------ | --------------------- | ------------------------------------------------------------------------------------- |
+| **D1** | Default               | Run via agent Shell tool                                                              |
+| **D2** | Long-running          | Background shell + poll                                                               |
+| **D3** | IDE blocks `git push` | `pnpm agent:git-push` (node child_process)                                            |
+| **D4** | Wrong repo            | Switch to owner checkout (P24)                                                        |
+| **D5** | Ecosystem-wide        | `pnpm --dir ../gtcx-agentic ecosystem:push-all` or `ecosystem:git-push --repo <name>` |
+| **D6** | All paths fail        | Permission Unblock Report — then retry when unblocked                                 |
 
 ### Forbidden (P27)
 
