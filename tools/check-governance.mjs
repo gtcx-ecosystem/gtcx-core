@@ -56,6 +56,7 @@ const requiredScripts = [
   'agent:check',
   'readiness:lanes:check',
   'agent:cross-repo-deps:check',
+  'agent:git-push',
   'agent:coordination:check',
   'release:ga:evidence:check',
 ];

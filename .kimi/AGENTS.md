@@ -75,11 +75,11 @@ Template: `docs/operations/agent-proceed-brief-template.md` · **Forbidden:** Yo
 | Hub spec   | `gtcx-docs/docs/governance/protocols/27-agent-execution-obligation/protocol.md` |
 | Local rule | `.cursor/rules/protocol-27-agent-execution-obligation.mdc`                      |
 
-**Before asking the human to run anything:** diagnosis D1 Shell → D2 background → D3 node spawn → D4 owner repo → D5 ecosystem scripts → D6 Permission Unblock Report.
+**Before asking the human to run anything:** D1 Shell → D2 background → D3 `pnpm agent:git-push` (node spawn) → D4 owner repo → D5 `pnpm --dir ../gtcx-agentic ecosystem:push-all` → D6 Permission Unblock Report.
+
+**IDE vs CLI:** Yolo (`~/.cursor/cli-config.json`, `approvalMode: unrestricted`) applies to **Cursor CLI** — not IDE Composer. IDE push: `pnpm agent:git-push`.
 
 **Mobile:** background `expo start` / Metro; `adb reverse` + `am start` — not “press r” alone.
-
-**Git push (IDE harness):** `pnpm --dir ../gtcx-agentic ecosystem:push-all` when bare `git push` is denied.
 
 **Forbidden:** “verify locally”, “focus your terminal”, “run these commands”, “let me know when you've run”.
 
@@ -87,17 +87,20 @@ Template: `docs/operations/agent-proceed-brief-template.md` · **Forbidden:** Yo
 
 **Normative:** [agent-git-workflow.md](docs/operations/agent-git-workflow.md)
 
-| Action         | Practice                                                                            |
-| -------------- | ----------------------------------------------------------------------------------- |
-| **Commit**     | Micro-commit **immediately** after each Class R story (gates pass) — **never ask**  |
-| **Push**       | **After every micro-commit** when branch ahead — preserve on origin — **never ask** |
+| Action | Practice |
+| ------ | -------- |
+| **Commit** | Micro-commit **immediately** after each Class R story (gates pass) — **never ask** |
+| **Push** | **After every micro-commit** — `pnpm agent:git-push` when IDE blocks bare `git push` |
+| **Run commands** | P27 ladder D1→D6 — agents execute gates/probes/git; never defer to operator |
 | **Owner repo** | Git writes **only** in owner checkout (P24); wrong repo → handoff, switch workspace |
 
-**Forbidden:** "Should I commit?", "Say push if you want", commit/WIP menus.
+**IDE vs CLI:** Yolo (`~/.cursor/cli-config.json`) applies to **Cursor CLI**; Composer uses `pnpm agent:git-push`.
+
+**Forbidden:** "Should I commit?", "Say push if you want", "run in your terminal".
 
 **Cross-repo deps (session):** `pnpm agent:cross-repo-deps:check`
 
-**Report:** Status Update **Done** — `commit <sha>` · `git push` exit code.
+**Report:** Status Update **Done** — `commit <sha>` · `pnpm agent:git-push` exit code.
 
 ## Session start (all terminals / LLMs — not IDE-specific)
 
