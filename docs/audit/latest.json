@@ -88,9 +88,9 @@
     "internalCompliance": {
       "auditQuality1to10": 8.5,
       "readinessOutcome": {
-        "composite": 9,
+        "composite": 8.7,
         "domains": {
-          "repoHygieneOrganization": 9.8,
+          "repoHygieneOrganization": 7.4,
           "documentationQuality": 9.6,
           "documentationQualitySubdimensions": {
             "hygiene": 9.8,
