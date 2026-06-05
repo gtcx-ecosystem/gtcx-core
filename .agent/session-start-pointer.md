@@ -1,27 +1,11 @@
-## Session start (all terminals / LLMs — not IDE-specific)
-
-**First command every session:**
+## Session start (all terminals / LLMs)
 
 ```bash
-pnpm agent:start
+pnpm session
+# or: baseline session
+pnpm session --json
 ```
 
-**Without `pnpm`** (one-time — from gtcx-core root):
+**Lookup:** `session` → `next` → `gates` → `hub` — see `docs/operations/agent-command-lookup.md`
 
-```bash
-pnpm agent:cli:path   # copy export line into ~/.zshrc
-# then:
-agent start
-agent next-work --json
-agent bout-progress
-```
-
-Runs Protocol 22 next-work, provisions **launch focus** + **execution bout**, **progress gauge**, refreshes `.baseline/memory/session.md`, prints Proceed Brief + bout scope (P26 + P28). Works in Cursor, Claude Code, Kimi CLI, Codex, plain terminal.
-
-**Legacy alias:** `pnpm agent:session-start` (same script).
-
-**Bout:** `docs/operations/agent-execution-bout.md` · `pnpm agent:bout`
-
-**JSON for automation:** `pnpm agent:start --json`
-
-**Before PR (agent-path changes):** include attestation from `docs/operations/agent-attestation-template.md` · `pnpm agent:attestation:check --pr`
+Prints P22 next-work + P26 Proceed Brief skeleton. Not IDE-specific.
