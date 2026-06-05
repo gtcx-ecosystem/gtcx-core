@@ -16,7 +16,7 @@ Run the GTCX **docs-machine-readable** audit in **this repo** (`gtcx-core`).
 5. Write forensic: `All docs with YAML frontmatter` (today's date)
 6. Update lane index + `docs/audit/latest.json` if readiness changed
 7. `pnpm readiness:lanes:check`
-8. Commit audit artifacts; push in-session when done unless operator said **do not push**
+8. Commit audit artifacts; push after each micro-commit per docs/operations/agent-git-workflow.md
 
 ## Registry
 

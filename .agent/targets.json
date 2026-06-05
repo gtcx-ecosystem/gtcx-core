@@ -24,9 +24,6 @@
         "launch-focus-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
         "claude.partial.md",
         "agent-status-update-pointer.md",
         "ecosystem-learning-pointer.md"
@@ -51,9 +48,6 @@
         "launch-focus-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
         "claude.partial.md",
         "agent-status-update-pointer.md",
         "ecosystem-learning-pointer.md"
@@ -78,9 +72,6 @@
         "launch-focus-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
         "claude.partial.md",
         "agent-status-update-pointer.md",
         "ecosystem-learning-pointer.md"
@@ -106,7 +97,6 @@
         "launch-focus-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
-        "session-start-pointer.md",
         "claude.partial.md",
         "agent-status-update-pointer.md",
         "ecosystem-learning-pointer.md"
@@ -132,7 +122,6 @@
         "launch-focus-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
-        "session-start-pointer.md",
         "claude.partial.md",
         "agent-status-update-pointer.md",
         "ecosystem-learning-pointer.md"
@@ -158,9 +147,6 @@
         "launch-focus-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
         "claude.partial.md",
         "agent-status-update-pointer.md",
         "ecosystem-learning-pointer.md"
@@ -186,9 +172,6 @@
         "launch-focus-pointer.md",
         "coordination-pointer.md",
         "protocols-enforcement-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
         "claude.partial.md",
         "agent-status-update-pointer.md",
         "ecosystem-learning-pointer.md"
@@ -231,7 +214,6 @@
         "readiness-pointer.md",
         "audit-pointer.md",
         "protocols-enforcement-pointer.md",
-        "session-start-pointer.md",
         "base.md",
         "credentials-pointer.md",
         "execute-roadmap-pointer.md",

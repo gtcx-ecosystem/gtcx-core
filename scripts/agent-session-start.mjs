@@ -39,6 +39,14 @@ try {
   nextWork = { error: String(error.message ?? error) };
 }
 
+let crossRepoDeps = { ok: true };
+try {
+  const raw = run('node scripts/check-cross-repo-dependencies.mjs');
+  crossRepoDeps = JSON.parse(raw);
+} catch (error) {
+  crossRepoDeps = { ok: false, error: String(error.message ?? error) };
+}
+
 const now = new Date().toISOString();
 const stamp = now.slice(0, 19).replace('T', ' ');
 
@@ -134,6 +142,7 @@ const output = {
         : 'No Class R stories in bout — witness / Class S check-in',
     boutDoc: 'docs/operations/agent-execution-bout.md',
   },
+  crossRepoDeps,
   sessionPath: '.baseline/memory/session.md',
   boutStatePath: '.baseline/execution-bout.json',
   launchFocusPath: '.baseline/launch-focus.json',
@@ -165,6 +174,11 @@ if (launchFocus) {
   log(`**State:** .baseline/launch-focus.json\n`);
 }
 log('Git status:\n', gitStatus || '(clean)\n');
+if (!crossRepoDeps.ok) {
+  log('Cross-repo deps (P24): issues — run `pnpm agent:cross-repo-deps:check --strict`');
+} else {
+  log('Cross-repo deps (P24): ok');
+}
 log('Next work (P22):', JSON.stringify(nextWork?.next ?? nextWork, null, 2));
 log('\n--- Proceed Brief (P26 + P28) — emit to operator, then IMPLEMENT ---\n');
 log(`**Active persona:** ${proceedBrief.activePersona} · **Frame:** ${proceedBrief.frame}`);

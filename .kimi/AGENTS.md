@@ -83,19 +83,21 @@ Template: `docs/operations/agent-proceed-brief-template.md` · **Forbidden:** Yo
 
 **Forbidden:** “verify locally”, “focus your terminal”, “run these commands”, “let me know when you've run”.
 
-## Agent git workflow — commit and push (P4 + P26 + P27)
+## Agent git workflow — micro-commit and preserve (P4 + P24 + P26 + P27)
 
 **Normative:** [agent-git-workflow.md](docs/operations/agent-git-workflow.md)
 
-| Action | Default | Ask operator? |
-| ------ | ------- | ------------- |
-| **Commit** Class R story (gates pass) | **yes** — micro-commit | **never** |
-| **Push** at bout check-in (branch ahead) | **yes** — `git push -u origin HEAD` | **never** |
-| Operator said `do not commit` / `do not push` | respect for session | — |
+| Action | Practice |
+| ------ | -------- |
+| **Commit** | Micro-commit **immediately** after each Class R story (gates pass) — **never ask** |
+| **Push** | **After every micro-commit** when branch ahead — preserve on origin — **never ask** |
+| **Owner repo** | Git writes **only** in owner checkout (P24); wrong repo → handoff, switch workspace |
 
-**Forbidden:** "Should I commit?", "Say push if you want", "commit or WIP?", push delegation tables.
+**Forbidden:** "Should I commit?", "Say push if you want", commit/WIP menus.
 
-**Report:** Status Update **Done** — `commit <sha>` · `git push` exit code (not "ready to commit").
+**Cross-repo deps (session):** `pnpm agent:cross-repo-deps:check`
+
+**Report:** Status Update **Done** — `commit <sha>` · `git push` exit code.
 
 ## Session start (all terminals / LLMs — not IDE-specific)
 
@@ -158,7 +160,7 @@ Runs Protocol 22 next-work, provisions **launch focus** + **execution bout**, **
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
-4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; **micro-commit per story; push at bout check-in** — see `docs/operations/agent-git-workflow.md`. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; **micro-commit per story; push after each commit** — see `docs/operations/agent-git-workflow.md`. `pnpm agent:cross-repo-deps:check` at session start. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
 
 ## Build & Run
 

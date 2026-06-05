@@ -14,7 +14,7 @@
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
-4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; **micro-commit per story; push at bout check-in** — see `docs/operations/agent-git-workflow.md`. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; **micro-commit per story; push after each commit** — see `docs/operations/agent-git-workflow.md`. `pnpm agent:cross-repo-deps:check` at session start. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
 
 ## Build & Run
 

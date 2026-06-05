@@ -1,175 +1,161 @@
 ---
-title: 'Agent git workflow — commit and push (normative)'
+title: 'Agent git workflow — micro-commit and preserve (normative)'
 status: current
 date: 2026-06-04
 owner: gtcx-core
 role: protocol-architect
 document_id: OPS-AGENT-GIT-001
-protocol: P4 + P26 + P27
+protocol: P4 + P24 + P26 + P27
 tier: critical
-tags: ['agents', 'git', 'protocol-26', 'protocol-27', 'micro-commit']
+tags: ['agents', 'git', 'micro-commit', 'protocol-24', 'protocol-27']
 review_cycle: on-change
 related:
   - agent-execution-bout.md
-  - agent-universal-instructions.md
   - agent-status-update-template.md
+  - coordination/cross-repo-agent-bridge.md
 ---
 
-# Agent git workflow — commit and push
+# Agent git workflow — micro-commit and preserve
 
-**Problem:** Agents ask operators _"should I commit?"_, _"say push if you want"_, or _"commit or leave as WIP?"_ — forbidden by [Protocol 26](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/26-agent-proceed-confirmation/protocol.md) and [Protocol 27](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/27-agent-execution-obligation/protocol.md).
+**Problem:** Agents ask _"should I commit?"_ or _"say push if you want"_ — wasting operator time and leaving work un-preserved.
 
-**This doc:** Single SoR for **when agents commit and push** without asking.
+**Practice:** **Micro-commit always** · **push after each commit** on the working branch · **never ask** the operator about commit/push menus.
 
----
-
-## Precedence (highest wins)
-
-| Priority | Source                               | Effect                                                                  |
-| -------- | ------------------------------------ | ----------------------------------------------------------------------- |
-| 1        | Explicit operator override in-thread | `"do not commit"`, `"do not push"`, story ID override                   |
-| 2        | Protocol 28 authority class          | Class **S** / **A** — no irreversible git on gated actions              |
-| 3        | Repo safety                          | No force-push `main`, no `--no-verify`, no secrets in commits           |
-| 4        | **This protocol**                    | Default commit/push behavior                                            |
-| 5        | Tool-specific hints                  | `execute-roadmap` reconcile-only may defer commit until ship slice done |
+> **Scrub note (2026-06-04):** An earlier draft listed `"do not commit"` / `"do not push"` session overrides — removed. That text was a mistaken merge of conflicting tool hints (`execute-roadmap` reconcile-only, old Cursor rules). **Default is preserve work**, not defer it.
 
 ---
 
-## Commit — default **ON** (never ask)
+## Non-negotiables
 
-| When                                                    | Action                                                                             |
-| ------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Class **R** story done + applicable V-ladder gates pass | **Micro-commit** immediately — one concern per commit                              |
-| Bout policy (`microCommitPerStory`)                     | Commit before `agent:next-work` refresh                                            |
-| Mid-story WIP                                           | **Do not** commit half-finished work; finish story first                           |
-| Operator said **do not commit**                         | Leave WIP; note in Status Update **Done** — `commits deferred (operator override)` |
-| `execute-roadmap` reconcile-only (no implementation)    | May defer until implementation slice; **do not** ask operator to choose            |
+| Rule                | Detail                                                             |
+| ------------------- | ------------------------------------------------------------------ |
+| **Micro-commit**    | One concern per commit, immediately after Class R story + gates    |
+| **Push**            | After every micro-commit when branch is ahead — preserve on origin |
+| **Never ask**       | No commit/push/WIP menus (P26 / P27)                               |
+| **Owner repo only** | Commit/push **only** in the git root that owns the files (P24)     |
+| **Branch safety**   | Prefer `feature/*` / `fix/*`; no force-push `main`                 |
 
-### Commit format
+---
+
+## Repo ownership gate (before `git add`)
+
+Run **before** any commit in a session:
+
+```bash
+git rev-parse --show-toplevel
+node -p "require('./package.json').name"   # must match owner repo (e.g. gtcx-core)
+git remote get-url origin
+```
+
+| Check                                                   | Fail action                                                  |
+| ------------------------------------------------------- | ------------------------------------------------------------ |
+| CWD git root ≠ intended owner repo                      | **Stop git** — switch workspace to owner repo (P24)          |
+| Implementing XR-\* / product code in gtcx-docs hub only | **No commit here** — file inbound ticket; code in owner repo |
+| Cross-repo change spans 2+ repos                        | **Micro-commit per repo** — never one commit across repos    |
+
+Wrong-repo work: durable handoff (`docs/gtm/inbound-tickets/to-<owner>-*.md`) — then continue in owner checkout.
+
+---
+
+## Commit rhythm
+
+```text
+story → V-ladder gates → git add (scoped) → micro-commit → git push -u origin HEAD
+  → update session.md → agent:next-work → repeat
+```
+
+| When                                            | Commit?                                      |
+| ----------------------------------------------- | -------------------------------------------- |
+| Class R story done, gates pass                  | **yes — immediately**                        |
+| Mid-story partial                               | **no** — finish story first                  |
+| Docs-only coordination (Class R)                | **yes** — one concern per ticket/bridge row  |
+| `execute-roadmap` reconcile + ship in same pass | commit per shipped story, not one giant dump |
+
+### Format
 
 ```
 type(scope): imperative subject
-
-Optional body — why, not what.
-
-## Agent Context Attestation   # when husky requires (gtcx-core agent-path)
 ```
 
-- Conventional commits per [Protocol 4](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/4-git-workflow/protocol.md)
-- Report in Status Update: `commit <sha>` — not _"ready to commit"_
+gtcx-core agent-path commits: include **Agent Context Attestation** when husky requires.
 
-### Forbidden (commit)
+### Forbidden phrases
 
-- "Should I commit?"
-- "Want me to commit?"
-- "Say if you want … committed or left as WIP"
-- "I'll commit if you'd like"
-- Ending turn with uncommitted Class R work **without** operator `do not commit`
+- "Should I commit?" / "Want me to commit?"
+- "Commit or leave as WIP?"
+- "Say if you want … committed"
+- Ending session with uncommitted Class R work
 
 ---
 
-## Push — default **ON at bout check-in** (never ask)
+## Push rhythm
 
-| When                                                                                           | Action                                                                                                                                                                                                           |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bout check-in or session end; branch **ahead** of remote; operator did **not** say do not push | `git push -u origin HEAD` — report exit code                                                                                                                                                                     |
-| Cross-repo handoff needs remote witness (coordination ticket, infra consumption)               | Push after commit; link branch or SHA in outbound doc                                                                                                                                                            |
-| No commits ahead                                                                               | Skip push silently                                                                                                                                                                                               |
-| Operator said **do not push**                                                                  | Commits stay local; Status Update notes `pushed: no (operator override)`                                                                                                                                         |
-| Harness denies `git push`                                                                      | [Permission Unblock Report](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/protocols/27-agent-execution-obligation/protocol.md) → retry `pnpm ecosystem:push-all` or `node` child_process |
+| When                                    | Push?                                                                                      |
+| --------------------------------------- | ------------------------------------------------------------------------------------------ |
+| After every micro-commit (branch ahead) | **yes** — `git push -u origin HEAD`                                                        |
+| No new commits                          | skip                                                                                       |
+| `main` without operator PR flow         | **prefer PR** — push feature branch, `gh pr create` when slice is review-ready             |
+| Harness denies push                     | Permission Unblock Report → `pnpm ecosystem:push-all` (gtcx-agentic) or node child_process |
 
-### Push safety
-
-| Rule                                   |                                                               |
-| -------------------------------------- | ------------------------------------------------------------- |
-| **Never** force-push `main` / `master` | Warn if operator explicitly requests                          |
-| **Never** push without commits         |                                                               |
-| **Never** push secrets                 | Pre-commit hook is SoR                                        |
-| Direct push to `main`                  | **Only** when operator explicitly instructs (rare); prefer PR |
-
-### Forbidden (push)
+### Forbidden phrases
 
 - "Say push if you want"
-- "If you want all on origin"
 - "I can push when you're ready"
-- Push queue table with no `git push` execution
-- Asking push vs PR vs WIP as a menu
+- Push delegation tables without executing `git push`
+
+### Safety
+
+- Never `--no-verify`, never force-push `main`
+- Never commit secrets (pre-commit hook)
+- Report: `commit <sha>` · `git push` exit `<code>` in Status Update **Done**
 
 ---
 
-## Rhythm (bout + session)
+## Cross-repo dependency checks (regular)
 
-```text
-story → gates → micro-commit → session.md → agent:next-work
-  … repeat while Class R remains …
-bout check-in → full Status Update → git push (if ahead) → optional gh pr create (if asked)
+**Light (every session)** — owner repo:
+
+```bash
+pnpm agent:cross-repo-deps:check
 ```
 
-| Checkpoint                   | Commit                       | Push              |
-| ---------------------------- | ---------------------------- | ----------------- |
-| Per story                    | **yes**                      | no                |
-| Bout check-in                | if pending gates-fixed files | **yes** (default) |
-| `execute-roadmap` ship slice | yes per story                | at slice end      |
+**Full (weekly / before ecosystem handoff)** — from `baseline-os` when sibling checkout exists:
+
+```bash
+cd ../baseline-os && pnpm ecosystem:deps:sync && pnpm ecosystem:alignment:check
+```
+
+| Check                                     | What it validates                                                                                |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `agent:cross-repo-deps:check`             | `dependencies.md`, open items in `remaining-cross-repo-work`, P24 inbound docs, bridge freshness |
+| `agent:coordination:check --strict`       | Blocked P0 has durable coordination record                                                       |
+| `ecosystem:deps:sync` (baseline-os)       | Unified dependency graph across ecosystem                                                        |
+| `ecosystem:alignment:check` (baseline-os) | Repo alignment vs workstream index                                                               |
+
+Refresh `.baseline/memory/dependencies.md` when blockers change — not chat-only.
 
 ---
 
 ## Status Update evidence
 
-**Done** section must include when applicable:
-
 ```markdown
-- <story> — `pnpm test` exit 0 · commit `a1b2c3d` · `git push -u origin HEAD` exit 0
-```
+### Done
 
-If push skipped by override:
-
-```markdown
-- <story> — commit `a1b2c3d` · push skipped (operator do-not-push)
-```
-
----
-
-## Operator overrides (session-scoped)
-
-| Phrase                          | Commit    | Push                  |
-| ------------------------------- | --------- | --------------------- |
-| _(default)_                     | auto      | auto at bout check-in |
-| `do not commit`                 | off       | unchanged             |
-| `do not push`                   | unchanged | off                   |
-| `do not commit` + `do not push` | off       | off                   |
-| `commit and push` / `push`      | on        | on now                |
-
-Overrides apply until the operator revokes them in-thread.
-
----
-
-## Commands (agents run — not operators)
-
-```bash
-git status --short
-git diff --stat
-git log --oneline -5
-git add <paths>
-git commit -m "$(cat <<'EOF'
-type(scope): subject
-EOF
-)"
-git push -u origin HEAD    # bout check-in default
-gh pr create               # only when operator asked for PR
+- FA-S6-02 — `pnpm vendor-evidence:verify-manifest` exit 0 · commit `a1b2c3d` · `git push -u origin HEAD` exit 0
 ```
 
 ---
 
 ## Cross-references
 
-| Doc                                                                  | Role                        |
-| -------------------------------------------------------------------- | --------------------------- |
-| [agent-execution-bout.md](./agent-execution-bout.md)                 | microCommitPerStory         |
-| [agent-universal-instructions.md](./agent-universal-instructions.md) | forbidden operator messages |
-| [agent-status-update-template.md](./agent-status-update-template.md) | Done evidence               |
-| P26 Proceed Brief                                                    | no path-approval menus      |
-| P27 Execution                                                        | run git in-session          |
+| Doc                                                                                               | Role                          |
+| ------------------------------------------------------------------------------------------------- | ----------------------------- |
+| [agent-execution-bout.md](./agent-execution-bout.md)                                              | `microCommitPerStory`         |
+| [cross-repo-agent-bridge.md](./coordination/cross-repo-agent-bridge.md)                           | Latest updates                |
+| [remaining-cross-repo-work-2026-06-02.md](./coordination/remaining-cross-repo-work-2026-06-02.md) | Open obligations              |
+| P24                                                                                               | Owner repo for implementation |
+| P26 / P27                                                                                         | No menus; run git in-session  |
 
 ---
 
-_Normative for all agents in gtcx-core. Rollout sibling repos via gtcx-agentic `ecosystem:rollout-universal`._
+_Normative for gtcx-core. Ecosystem rollout: gtcx-agentic `ecosystem:rollout-universal`._

@@ -55,6 +55,8 @@ const requiredScripts = [
   'quality:governance:check',
   'agent:check',
   'readiness:lanes:check',
+  'agent:cross-repo-deps:check',
+  'agent:coordination:check',
   'release:ga:evidence:check',
 ];
 

@@ -1,5 +1,5 @@
 ---
-description: Agent commit and push defaults — no operator menus (OPS-AGENT-GIT-001)
+description: Micro-commit + push after every commit; owner-repo gate (OPS-AGENT-GIT-001)
 globs:
 alwaysApply: true
 ---
@@ -8,12 +8,13 @@ alwaysApply: true
 
 Read: `docs/operations/agent-git-workflow.md`
 
-## Defaults (do not ask)
+## Defaults (never ask operator)
 
-1. **Commit** — micro-commit after each Class R story when gates pass. Never ask "should I commit?" or "commit or WIP?"
-2. **Push** — at bout check-in when branch is ahead; `git push -u origin HEAD`. Never say "say push if you want."
-3. **Overrides** — `do not commit` / `do not push` in user message wins for the session.
+1. **Micro-commit** immediately after each Class R story when gates pass.
+2. **Push** after every micro-commit: `git push -u origin HEAD` when branch is ahead.
+3. **Owner repo gate** — verify `git rev-parse --show-toplevel` + `package.json` name before `git add`. Wrong repo → P24 handoff, no commit here.
+4. **Cross-repo deps** — `pnpm agent:cross-repo-deps:check` at session start.
 
-## Report (P27)
+## Forbidden
 
-Status Update **Done**: `commit <sha>` · `git push` exit N — not delegation to operator.
+"Should I commit?", "Say push if you want", commit-or-WIP menus, push delegation without running `git push`.
