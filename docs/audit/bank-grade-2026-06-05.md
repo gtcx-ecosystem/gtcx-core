@@ -29,12 +29,12 @@ review_cycle: quarterly
 
 ## Readiness outcomes (from master audit)
 
-| Metric              |      Value | Source                                                     |
-| ------------------- | ---------: | ---------------------------------------------------------- |
-| Certified composite | **8.9/10** | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md) |
-| Investor lens       |        8.9 | §5.3                                                       |
-| Enterprise lens     |        8.7 | §5.3                                                       |
-| Sovereign / DFI     |        9.0 | §5.3                                                       |
+| Metric              |      Value | Source                                                             |
+| ------------------- | ---------: | ------------------------------------------------------------------ |
+| Certified composite | **8.9/10** | [bank-grade-audit-2026-06-07.md](./bank-grade-audit-2026-06-07.md) |
+| Investor lens       |        8.9 | §Lens table                                                        |
+| Enterprise lens     |        8.8 | §Lens table (+0.1 coordination)                                    |
+| Sovereign / DFI     |        9.0 | §Lens table                                                        |
 
 Machine-readable: [latest.json](./latest.json)
 
@@ -44,7 +44,8 @@ Machine-readable: [latest.json](./latest.json)
 
 | Audit                                                                        | Role                                                |
 | ---------------------------------------------------------------------------- | --------------------------------------------------- |
-| [master-audit-2026-06-03.md](./master-audit-2026-06-03.md)                   | **Latest** blended certification (refresh)          |
+| [bank-grade-audit-2026-06-07.md](./bank-grade-audit-2026-06-07.md)           | **Latest** lane-4 forensic (master-audit alias)     |
+| [master-audit-2026-06-03.md](./master-audit-2026-06-03.md)                   | Prior blended certification (refresh)               |
 | [master-audit-2026-05-28.md](./master-audit-2026-05-28.md)                   | Certified 8.9 reconciled with internal 10.0 signoff |
 | [full-audit-2026-06-04.md](./full-audit-2026-06-04.md)                       | Sprint synthesis feeding master narrative           |
 | [gtcx-ecosystem-rating-2026-05-08.md](./gtcx-ecosystem-rating-2026-05-08.md) | Ecosystem context                                   |

@@ -120,14 +120,15 @@
       "index": "docs/audit/industry-compliance-2026-06-05.md"
     },
     "bankGrade": {
-      "auditQuality1to10": 8.5,
+      "auditQuality1to10": 8.6,
       "readinessOutcome": {
         "certifiedComposite": 8.9,
         "investor": 8.9,
-        "enterprise": 8.7,
+        "enterprise": 8.8,
         "sovereignDfi": 9
       },
-      "index": "docs/audit/bank-grade-2026-06-05.md"
+      "index": "docs/audit/bank-grade-2026-06-05.md",
+      "forensic": "docs/audit/bank-grade-audit-2026-06-07.md"
     },
     "gtmReadiness": {
       "auditQuality1to10": 8,
@@ -144,7 +145,7 @@
     "note": "composite and internalReadiness are readiness outcomes in master-audit and signoff — not audit quality ranks",
     "internalReadiness": 10,
     "composite": 8.9,
-    "sourceAudit": "docs/audit/master-audit-2026-06-03.md",
+    "sourceAudit": "docs/audit/bank-grade-audit-2026-06-07.md",
     "renamedLanes": {
       "externalDependentCompliance": "industryCompliance",
       "gtm": "gtmReadiness"
@@ -157,5 +158,5 @@
   },
   "autoDevData": "docs/audit/auto-dev-data.json",
   "autoDevState": "docs/audit/auto-dev-state.md",
-  "updated": "2026-06-05"
+  "updated": "2026-06-07"
 }

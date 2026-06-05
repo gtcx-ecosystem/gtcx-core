@@ -14,12 +14,12 @@ focus: 'OI-X02 witness closure — Class S wall'
 
 ## Completed this session
 
-| Item                         | Evidence                                                                                                                                           |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OI-X02 witness close         | [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](../docs/operations/coordination/from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md) |
-| OPS-AUDIT-FM                 | **done** — `pnpm docs:check-frontmatter` 302/302 exit 0                                                                                            |
-| Tier-5 + remaining-work sync | OI-X02 **done**; EXT-INF-002 outbound-filed; CORE-004 ceremony-pending                                                                             |
-| Launch focus                 | `.baseline/launch-focus.json` witness count 0                                                                                                      |
+| Item                         | Evidence                                                                                                                                              |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OI-X02 witness close         | [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](../../docs/operations/coordination/from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md) |
+| OPS-AUDIT-FM                 | **done** — `pnpm docs:check-frontmatter` 302/302 exit 0                                                                                               |
+| Tier-5 + remaining-work sync | OI-X02 **done**; EXT-INF-002 outbound-filed; CORE-004 ceremony-pending                                                                                |
+| Launch focus                 | `.baseline/launch-focus.json` witness count 0                                                                                                         |
 
 ## Prior session (shipped on main)
 
