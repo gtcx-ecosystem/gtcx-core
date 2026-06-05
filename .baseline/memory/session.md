@@ -42,9 +42,9 @@ focus: 'execute-roadmap — FA-S6 vendor pack + Class S wall'
 **Custodian** — CORE-004-CEREMONY `artifacts/trusted-setup/transcript.seed` + verify-publish.  
 **Witness** — OI-X02 infra hub ack (gtcx-infrastructure).
 
-## Session bootstrap (2026-06-05 01:59:27 UTC)
+## Session bootstrap (2026-06-05 02:51:49 UTC)
 
 - **Command:** `pnpm agent:start`
 - **Next work:** unknown — Design-partner LOI or regulator letter
 - **Blocked:** yes
-- **Git:** 17 changed path(s)
+- **Git:** 1 changed path(s)
