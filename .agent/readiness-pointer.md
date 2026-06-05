@@ -4,7 +4,7 @@
 
 | Lane                   | Readiness (current)              | Index                                                       |
 | ---------------------- | -------------------------------- | ----------------------------------------------------------- |
-| 1 Engineering          | 9.5 / 10.0 signoff               | `docs/audit/engineering-completeness-quality-2026-06-05.md` |
+| 1 Engineering          | 9.5 completion / 9.0 signoff     | `docs/audit/engineering-completeness-quality-2026-06-05.md` |
 | 2 Internal compliance  | **9.0** (5 domains)              | `docs/audit/internal-compliance-2026-06-05.md`              |
 | 3 Industry Compliance  | **IC-T0** OPEN 0/12              | `docs/audit/industry-compliance-2026-06-05.md`              |
 | **GCR** (rollup L2+L3) | **GCR-T0** **BLOCKED**           | `docs/audit/global-compliance-rating-2026-06-05.md`         |

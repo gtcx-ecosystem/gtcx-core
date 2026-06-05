@@ -48,7 +48,7 @@ review_cycle: on-change
 
 | #   | Lane name (exact)                  | Audit quality | Readiness outcome                | Index                                                                                                     |
 | --- | ---------------------------------- | ------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 1   | Engineering completeness & quality | 8.5           | 9.5 / 10.0 signoff               | [engineering-completeness-quality-2026-06-05.md](../audit/engineering-completeness-quality-2026-06-05.md) |
+| 1   | Engineering completeness & quality | 8.5           | 9.5 completion / 9.0 signoff     | [engineering-completeness-quality-2026-06-05.md](../audit/engineering-completeness-quality-2026-06-05.md) |
 | 2   | Internal compliance                | 8.5           | **9.0** composite (5 domains)    | [internal-compliance-2026-06-05.md](../audit/internal-compliance-2026-06-05.md)                           |
 | 3   | **Industry Compliance**            | 8.0           | **IC-T0–IC-T4** + OPEN register  | [industry-compliance-2026-06-05.md](../audit/industry-compliance-2026-06-05.md)                           |
 | 4   | Bank-grade                         | 8.5           | **8.9** certified composite only | [bank-grade-2026-06-05.md](../audit/bank-grade-2026-06-05.md)                                             |

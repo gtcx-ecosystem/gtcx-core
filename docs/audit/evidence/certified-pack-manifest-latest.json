@@ -1,8 +1,8 @@
 {
   "schema": "gtcx.certifiedPackManifest.v1",
   "storyId": "DTF-5.5.2",
-  "generatedAt": "2026-06-05T03:17:00.341Z",
-  "repoHead": "b46dde49064e538dbba4ff9c090877dee70ae201",
+  "generatedAt": "2026-06-05T03:35:02.577Z",
+  "repoHead": "1e8a3a694bb209d743f4a3c336119591e8e5c682",
   "packCount": 5,
   "packs": [
     {

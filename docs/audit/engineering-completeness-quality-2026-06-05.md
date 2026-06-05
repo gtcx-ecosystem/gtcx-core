@@ -28,11 +28,14 @@ This file is a **rollup index**. The lane forensic is `engineering-audit-*`; his
 
 ## Readiness outcomes (from source audits)
 
-| Metric                          |       Value | Source audit                                                                         |
-| ------------------------------- | ----------: | ------------------------------------------------------------------------------------ |
-| Internal signoff (gates @ HEAD) | **10.0/10** | [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md)       |
-| Internal completion (packages)  |  **9.5/10** | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) |
-| DTF technical Tier 5            |    **~88%** | [tier-5 workplan](../operations/tier-5-workplan-2026-06.md)                          |
+| Metric                          |      Value | Source audit                                                                         |
+| ------------------------------- | ---------: | ------------------------------------------------------------------------------------ |
+| Internal signoff (gates @ HEAD) | **9.0/10** | [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md)                 |
+| Internal completion (packages)  | **9.5/10** | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) |
+| Weighted lane score             | **9.3/10** | [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md)                 |
+| DTF technical Tier 5            |   **~88%** | [tier-5 workplan](../operations/tier-5-workplan-2026-06.md)                          |
+
+> **Delta 2026-06-05:** Signoff down from 10.0 — `bundle:check-budgets` + `api:check` fail on Tier-5 KAT expansion. Prior 10.0: [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md).
 
 ---
 
@@ -40,7 +43,8 @@ This file is a **rollup index**. The lane forensic is `engineering-audit-*`; his
 
 | Audit                                                                                | Purpose                                    |
 | ------------------------------------------------------------------------------------ | ------------------------------------------ |
-| [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md)       | All deterministic CI gates @ HEAD          |
+| [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md)                 | **Current** lane-1 forensic @ HEAD         |
+| [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md)       | Historical 10.0 signoff (superseded gates) |
 | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) | 24/24 internal items; coverage; fuzz; FIPS |
 | [full-audit-2026-06-04.md](./full-audit-2026-06-04.md)                               | Six-phase architecture re-audit            |
 | [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md)                     | CI gate confirmation log                   |

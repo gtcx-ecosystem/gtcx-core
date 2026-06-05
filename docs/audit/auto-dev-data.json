@@ -38,7 +38,7 @@
   },
   "lanes": {
     "engineeringCompletenessQuality": {
-      "internalSignoff": 10,
+      "internalSignoff": 9,
       "completionAudit": 9.5,
       "index": "docs/audit/engineering-completeness-quality-2026-06-05.md"
     },
