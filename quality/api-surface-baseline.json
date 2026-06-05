@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-03T19:42:51.811Z",
+  "generatedAt": "2026-06-05T03:58:19.197Z",
   "packages": {
     "@gtcx/ai": {
       "version": "0.3.4",
@@ -170,7 +170,7 @@
       "version": "3.1.4",
       "dir": "packages/crypto",
       "typesPath": "packages/crypto/dist/index.d.ts",
-      "hash": "9c8b15b37ebddf3ea68d26460b1215e9699153fcb39a71b38555dff9f7cd8f20",
+      "hash": "44715377b06931bef35a33e817ca315e4eb95cc9ac2bac95a4ef03acca11a4ad",
       "exports": [
         "Backend",
         "batchVerify",
@@ -184,11 +184,13 @@
         "CircuitRegistryError",
         "CircuitRegistryErrorCode",
         "combineHashes",
+        "CommodityOriginKatLike",
         "CommodityOriginProfileId",
         "CommodityOriginProfileProof",
         "CommodityOriginProfileProofInput",
         "CommodityOriginProof",
         "CommodityOriginProofInput",
+        "commodityOriginPublicInputsJsonFromKat",
         "CommodityRangeProof",
         "CommodityRangeProofInput",
         "compressPublicKey",
@@ -232,6 +234,7 @@
         "isFipsMode",
         "isValidPrivateKey",
         "isValidPublicKey",
+        "katToCommodityOriginProfileProof",
         "KeyAlgorithm",
         "keyFormats",
         "KeyPairResult",
@@ -293,6 +296,7 @@
         "verifyDiamondOrigin",
         "verifyGhCocoaOrigin",
         "verifyGhGoldOrigin",
+        "verifyGroth16CommodityOriginKat",
         "verifyHash",
         "verifyHashValue",
         "verifyInclusion",
@@ -521,7 +525,7 @@
       "version": "0.1.0",
       "dir": "packages/eap",
       "typesPath": "packages/eap/dist/index.d.ts",
-      "hash": "c6c56c78e78459f09c0490c518182cb4087e75818c36fef7d664e8ee29232727",
+      "hash": "de4be5ea7e8f42b4b7873bc4fdb72d34d8081d164fcb24ce116efda7f510bea1",
       "exports": [
         "AuthKeysBundle",
         "AwsSecretsManagerWriter",
@@ -530,6 +534,7 @@
         "ClientCredentialRecord",
         "createEapAdminServer",
         "createEapAdminService",
+        "defaultEvidenceDir",
         "EapAdminServerOptions",
         "EapAdminService",
         "EapAdminServiceOptions",
@@ -545,7 +550,8 @@
         "parseAuthKeysBundle",
         "rebuildIntelligenceBundleFromEapSecrets",
         "startEapAdminServer",
-        "syncApiKeyToIntelligenceBundle"
+        "syncApiKeyToIntelligenceBundle",
+        "writeIssuanceEvidenceFile"
       ]
     },
     "@gtcx/events": {
@@ -1580,7 +1586,7 @@
       "version": "1.0.0",
       "dir": "packages/zkp-kat-vectors",
       "typesPath": "packages/zkp-kat-vectors/dist/index.d.ts",
-      "hash": "10926f54e5570a4279d65e4f0ad7fb354c34003bfc812aa3a54bbc5c242f7a75",
+      "hash": "6ac95fb3a150ba6b5150ebcfc7a3d9475be86abc2186999c667db4f0bec69978",
       "exports": [
         "bulletproofsAmountRange",
         "bulletproofsCommodityRange",
@@ -1590,10 +1596,12 @@
         "groth16AssetOwnership",
         "groth16CommodityOrigin",
         "groth16GciThreshold",
+        "groth16GhGoldOrigin",
         "Groth16KatArtifact",
         "Groth16KatPublicInputs",
         "Groth16KatWitness",
         "groth16LocationRegion",
+        "groth16ZwDiamondOrigin",
         "KatArtifact",
         "katArtifacts",
         "KatCircuitName",
