@@ -83,6 +83,20 @@ Template: `docs/operations/agent-proceed-brief-template.md` · **Forbidden:** Yo
 
 **Forbidden:** “verify locally”, “focus your terminal”, “run these commands”, “let me know when you've run”.
 
+## Agent git workflow — commit and push (P4 + P26 + P27)
+
+**Normative:** [agent-git-workflow.md](docs/operations/agent-git-workflow.md)
+
+| Action | Default | Ask operator? |
+| ------ | ------- | ------------- |
+| **Commit** Class R story (gates pass) | **yes** — micro-commit | **never** |
+| **Push** at bout check-in (branch ahead) | **yes** — `git push -u origin HEAD` | **never** |
+| Operator said `do not commit` / `do not push` | respect for session | — |
+
+**Forbidden:** "Should I commit?", "Say push if you want", "commit or WIP?", push delegation tables.
+
+**Report:** Status Update **Done** — `commit <sha>` · `git push` exit code (not "ready to commit").
+
 ## Session start (all terminals / LLMs — not IDE-specific)
 
 **First command every session:**
@@ -144,7 +158,7 @@ Runs Protocol 22 next-work, provisions **launch focus** + **execution bout**, **
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
-4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; micro-commit per story. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; **micro-commit per story; push at bout check-in** — see `docs/operations/agent-git-workflow.md`. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
 
 ## Build & Run
 
@@ -223,6 +237,8 @@ Use when audits must be **reconciled** into a living plan — not for session-by
 3. **Then ship** via **execution bout** (intrinsic): `docs/operations/agent-execution-bout.md` · `pnpm agent:session-start`
 
 **Do not** stop after planning. **Do not** use execute-roadmap as a substitute for `pnpm agent:next-work` + bout drain.
+
+**Git:** reconcile-only passes may defer commit until ship slice; implementation follows [agent-git-workflow.md](docs/operations/agent-git-workflow.md) (micro-commit; push at bout check-in; never ask operator).
 
 ## Execution bout (intrinsic — prefer over execute-roadmap for shipping)
 

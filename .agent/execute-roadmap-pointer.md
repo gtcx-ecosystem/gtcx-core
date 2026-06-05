@@ -7,3 +7,5 @@ Use when audits must be **reconciled** into a living plan — not for session-by
 3. **Then ship** via **execution bout** (intrinsic): `docs/operations/agent-execution-bout.md` · `pnpm agent:session-start`
 
 **Do not** stop after planning. **Do not** use execute-roadmap as a substitute for `pnpm agent:next-work` + bout drain.
+
+**Git:** reconcile-only passes may defer commit until ship slice; implementation follows [agent-git-workflow.md](docs/operations/agent-git-workflow.md) (micro-commit; push at bout check-in; never ask operator).

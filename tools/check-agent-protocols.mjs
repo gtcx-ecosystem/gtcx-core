@@ -87,7 +87,10 @@ requireContains('AGENTS.md', ['agent-execution-bout.md'], 'AGENTS execution bout
 requireFile('.cursor/rules/agent-protocols-enforcement.mdc', 'cursor agent protocols rule');
 requireFile('.agent/session-start-pointer.md', 'session-start pointer');
 requireFile('docs/operations/agent-universal-instructions.md', 'universal instructions (any LLM)');
+requireFile('docs/operations/agent-git-workflow.md', 'agent git workflow');
+requireFile('.agent/git-workflow-pointer.md', 'git workflow pointer');
 requireContains('AGENTS.md', ['agent-universal-instructions.md'], 'AGENTS universal');
+requireContains('AGENTS.md', ['agent-git-workflow.md'], 'AGENTS git workflow');
 
 const universalCheck = join(ROOT, '../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs');
 if (existsSync(universalCheck)) {
@@ -149,6 +152,7 @@ if (p27) {
   const p27Forbidden = p27.forbiddenPatterns ?? [];
   const skipDocs = new Set([
     'agent-universal-instructions.md',
+    'agent-git-workflow.md',
     'agent-protocols-enforcement.md',
     'agent-proceed-brief-template.md',
   ]);

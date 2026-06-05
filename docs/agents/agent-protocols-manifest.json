@@ -19,7 +19,12 @@
     "if you want all",
     "run these commands",
     "then pnpm agent:sync in the",
-    "from your terminal"
+    "from your terminal",
+    "Should I commit",
+    "Want me to commit",
+    "commit or WIP",
+    "left as local WIP",
+    "ready to commit"
   ],
   "startupPhases": {
     "5.4": "P22",

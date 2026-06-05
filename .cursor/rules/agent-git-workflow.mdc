@@ -1,0 +1,19 @@
+---
+description: Agent commit and push defaults — no operator menus (OPS-AGENT-GIT-001)
+globs:
+alwaysApply: true
+---
+
+# Agent git workflow (gtcx-core)
+
+Read: `docs/operations/agent-git-workflow.md`
+
+## Defaults (do not ask)
+
+1. **Commit** — micro-commit after each Class R story when gates pass. Never ask "should I commit?" or "commit or WIP?"
+2. **Push** — at bout check-in when branch is ahead; `git push -u origin HEAD`. Never say "say push if you want."
+3. **Overrides** — `do not commit` / `do not push` in user message wins for the session.
+
+## Report (P27)
+
+Status Update **Done**: `commit <sha>` · `git push` exit N — not delegation to operator.
