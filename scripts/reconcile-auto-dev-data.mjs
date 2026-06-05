@@ -48,6 +48,44 @@ function fetchP22() {
   return JSON.parse(out);
 }
 
+function oiX02WitnessStatus() {
+  const inboundAck = join(
+    ROOT,
+    'docs/operations/coordination/from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md',
+  );
+  if (existsSync(inboundAck)) return 'done';
+  const outbound = join(
+    ROOT,
+    'docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md',
+  );
+  return existsSync(outbound) ? 'outbound-filed' : 'open';
+}
+
+function buildCrossRepoWitness() {
+  const extInfManifest = join(
+    ROOT,
+    'docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json',
+  );
+  return [
+    {
+      storyId: 'OI-X02',
+      status: oiX02WitnessStatus(),
+      owner: 'gtcx-infrastructure',
+      path:
+        oiX02WitnessStatus() === 'done'
+          ? 'docs/operations/coordination/from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md'
+          : 'docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md',
+    },
+    {
+      storyId: 'EXT-INF-002',
+      status: existsSync(extInfManifest) ? 'outbound-filed' : 'open',
+      owner: 'gtcx-infrastructure',
+      coreInputReady: existsSync(extInfManifest),
+      manifest: 'docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json',
+    },
+  ];
+}
+
 function buildAutoDevData(p22, latest, launchFocus, roadmapMeta, gates) {
   const lanes = latest?.lanes ?? {};
   return {
@@ -118,23 +156,7 @@ function buildAutoDevData(p22, latest, launchFocus, roadmapMeta, gates) {
       authorityClass: h.authorityClass ?? 'S',
       owner: h.owner ?? 'Human',
     })),
-    crossRepoWitness: [
-      {
-        storyId: 'OI-X02',
-        status: 'outbound-filed',
-        owner: 'gtcx-infrastructure',
-        path: 'docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md',
-      },
-      {
-        storyId: 'EXT-INF-002',
-        status: 'open',
-        owner: 'gtcx-infrastructure',
-        coreInputReady: existsSync(
-          join(ROOT, 'docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json'),
-        ),
-        manifest: 'docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json',
-      },
-    ],
+    crossRepoWitness: buildCrossRepoWitness(),
     stories: {
       'LAUNCH-PLAN-01': 'done',
       'LAUNCH-PLAN-02': 'done',
@@ -169,6 +191,13 @@ function buildAutoDevMd(data, p22) {
     .join('\n');
   const gateRows = Object.entries(data.verificationGates ?? {})
     .map(([k, v]) => `| \`${k}\` | **${v.exitCode === 0 ? '0' : v.exitCode}** |`)
+    .join('\n');
+  const witnessRows = (data.crossRepoWitness ?? [])
+    .map((w) => {
+      const detail =
+        w.storyId === 'EXT-INF-002' && w.coreInputReady ? ' (core pack ready)' : '';
+      return `| ${w.storyId} | ${w.status}${detail} | ${w.owner} |`;
+    })
     .join('\n');
 
   return `---
@@ -235,8 +264,7 @@ ${gateRows}
 
 | ID | Status | Owner |
 | -- | ------ | ----- |
-| OI-X02 | outbound-filed | gtcx-infrastructure |
-| EXT-INF-002 | open (core pack ready) | gtcx-infrastructure |
+${witnessRows}
 
 ## Resume
 

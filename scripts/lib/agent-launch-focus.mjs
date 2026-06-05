@@ -242,6 +242,13 @@ export function buildLaunchFocus(repoRoot) {
       'docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md',
     ),
   );
+  const oiX02InboundAck = existsSync(
+    join(
+      repoRoot,
+      'docs/operations/coordination/from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md',
+    ),
+  );
+  const oiX02AwaitingAck = oiX02OutboundFiled && !oiX02InboundAck;
 
   const implement = dedupeById([
     ...tier5Implementable(session, workplan),
@@ -273,7 +280,7 @@ export function buildLaunchFocus(repoRoot) {
   const plan = PLANNING_QUEUE.filter((item) => !completedPlan.has(item.storyId));
   const witness = [
     ...witnessItems(human, {}),
-    ...(oiX02OutboundFiled
+    ...(oiX02AwaitingAck
       ? [
           {
             storyId: 'OI-X02',

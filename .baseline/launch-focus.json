@@ -2,7 +2,7 @@
   "schema": "gtcx.launchFocus.v1",
   "normativeDoc": "docs/operations/agent-launch-focus.md",
   "statePath": ".baseline/launch-focus.json",
-  "provisionedAt": "2026-06-05T02:53:07.071Z",
+  "provisionedAt": "2026-06-05T03:13:56.577Z",
   "repo": "gtcx-core",
   "northStar": {
     "outcome": "Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.",
@@ -25,15 +25,7 @@
   "workSet": {
     "implement": [],
     "plan": [],
-    "witness": [
-      {
-        "storyId": "OI-X02",
-        "title": "Await infra hub ack — core outbound filed 2026-06-03",
-        "path": "docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md",
-        "authorityClass": "A",
-        "owner": "gtcx-infrastructure"
-      }
-    ],
+    "witness": [],
     "human": [
       {
         "storyId": "DTF-5.5.4",
@@ -62,7 +54,7 @@
   "workSetCounts": {
     "implement": 0,
     "plan": 0,
-    "witness": 1,
+    "witness": 0,
     "human": 3
   },
   "sources": [

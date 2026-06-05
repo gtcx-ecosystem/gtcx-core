@@ -1,26 +1,26 @@
 {
   "schema": "gtcx.autoDevData.v1",
   "repo": "gtcx-core",
-  "updated": "2026-06-05T03:05:26.615Z",
+  "updated": "2026-06-05T03:13:07.285Z",
   "protocol": "execute-roadmap",
-  "baselineCommit": "a3fc33f6c93669e2a260ff711ecccc6becddb265",
+  "baselineCommit": "5beeac99eedee0f6612d467aa7d08cc15724c51e",
   "p22": {
-    "backlogClear": true,
-    "automatableExhausted": true,
-    "role": "witness_only",
+    "backlogClear": false,
+    "automatableExhausted": false,
+    "role": "implement",
     "certificationCeiling": "tier-5-commercial",
-    "nextStoryId": "DTF-5.5.4",
-    "nextStoryTitle": "Design-partner LOI or regulator letter",
-    "nextStoryStatus": "awaiting-human",
-    "message": "Launch plan bout complete. Commercial ceiling: DTF-5.5.4 LOI + CORE-004-CEREMONY (Class S)."
+    "nextStoryId": null,
+    "nextStoryTitle": "Merge duplicate frontmatter on historical audit files",
+    "nextStoryStatus": null,
+    "message": "Launch implement queue: 1 Class R items toward GTM."
   },
   "launchFocus": {
-    "sessionMode": "witness",
+    "sessionMode": "implement",
     "workSetCounts": {
-      "implement": 0,
+      "implement": 1,
       "plan": 0,
-      "witness": 1,
-      "human": 3
+      "witness": 0,
+      "human": 1
     },
     "statePath": ".baseline/launch-focus.json"
   },
@@ -75,30 +75,17 @@
       "notSameAs": ["GCI", "bankGrade.certifiedComposite", "internalCompliance.composite"]
     }
   },
-  "humanOnly": [
-    {
-      "storyId": "DTF-5.5.4",
-      "title": "Design-partner LOI or regulator letter",
-      "authorityClass": "S",
-      "owner": "Human / GTM"
-    },
-    {
-      "storyId": "CORE-004-CEREMONY",
-      "title": "ZKP trusted-setup transcript publish (sovereign ceremony)",
-      "authorityClass": "S",
-      "owner": "Custodian / human"
-    }
-  ],
+  "humanOnly": [],
   "crossRepoWitness": [
     {
       "storyId": "OI-X02",
-      "status": "outbound-filed",
+      "status": "done",
       "owner": "gtcx-infrastructure",
-      "path": "docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md"
+      "path": "docs/operations/coordination/from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md"
     },
     {
       "storyId": "EXT-INF-002",
-      "status": "open",
+      "status": "outbound-filed",
       "owner": "gtcx-infrastructure",
       "coreInputReady": true,
       "manifest": "docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json"
@@ -138,6 +125,6 @@
     "autoDevData": "docs/audit/auto-dev-data.json",
     "autoDevTier5": "docs/audit/auto-dev-state-tier5-commercial.md",
     "agentWorkSelection": "docs/operations/agent-work-selection.md",
-    "witness": "docs/operations/coordination/core-004-engineering-closeout-2026-06-06.md"
+    "witness": null
   }
 }

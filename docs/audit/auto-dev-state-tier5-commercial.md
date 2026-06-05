@@ -1,7 +1,7 @@
 ---
-updated: 2026-06-04
+updated: 2026-06-05
 owner: gtcx-core
-status: launch-focus-witness
+status: launch-focus-implement
 ---
 
 # Auto-dev state — launch / GTM (machine-generated)
@@ -13,17 +13,17 @@ status: launch-focus-witness
 - **Outcome:** Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.
 - **GTM library:** GR-T1 · **Sovereign:** below-GR-T2
 
-## Session mode: **WITNESS**
+## Session mode: **IMPLEMENT**
 
 | Bucket    | Count |
 | --------- | ----- |
-| implement | 0     |
+| implement | 1     |
 | plan      | 0     |
 | human     | 1     |
 
 ## Implement queue
 
-- _(empty — agent in PLAN mode)_
+- **OPS-AUDIT-FM** — Merge duplicate frontmatter on historical audit files
 
 ## Plan queue (when implement empty)
 

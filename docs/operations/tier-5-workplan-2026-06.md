@@ -44,13 +44,13 @@ tags: ['defensibility', 'tier-5', 'zkp', 'workplan', 'protocol-22']
 
 ## Ecosystem open items (not gtcx-core code — track only)
 
-| ID          | Item                       | Owner               | gtcx-core action                                 | Status             |
-| ----------- | -------------------------- | ------------------- | ------------------------------------------------ | ------------------ |
-| OI-X01      | ER-1-08 hub ack            | gtcx-core           | Protocols log row pushed (`518f2a2` audit chain) | **done** on remote |
-| OI-X02      | ER-1-08 hub ack            | gtcx-infrastructure | Outbound ticket; no duplicate evidence in core   | **pending**        |
-| OI-X06      | INT-S8-04 cost-router v1.1 | baseline-os         | Optional for intel env-fallback; link only       | **external**       |
-| EXT-INF-002 | Live-stack pen-test        | gtcx-infrastructure | Supply KAT/fuzz/threat-matrix pack (FA-S6)       | **external**       |
-| CORE-004    | Trusted-setup ceremony     | gtcx-core + human   | D3 M3.2 release-gated after XR-402               | **blocked**        |
+| ID          | Item                       | Owner               | gtcx-core action                                      | Status               |
+| ----------- | -------------------------- | ------------------- | ----------------------------------------------------- | -------------------- |
+| OI-X01      | ER-1-08 hub ack            | gtcx-core           | Protocols log row pushed (`518f2a2` audit chain)      | **done** on remote   |
+| OI-X02      | ER-1-08 hub ack            | gtcx-infrastructure | Inbound ack filed; witness closed                     | **done** 2026-06-04  |
+| OI-X06      | INT-S8-04 cost-router v1.1 | baseline-os         | Optional for intel env-fallback; link only            | **external**         |
+| EXT-INF-002 | Live-stack pen-test        | gtcx-infrastructure | Core pack delivered (FA-S6-02); await SOW (Class S)   | **outbound-filed**   |
+| CORE-004    | Trusted-setup ceremony     | gtcx-core + human   | Engineering green; ceremony `transcript.seed` Class S | **ceremony-pending** |
 
 Source: intelligence open-items register · [remaining-cross-repo-work](./coordination/remaining-cross-repo-work-2026-06-02.md)
 
