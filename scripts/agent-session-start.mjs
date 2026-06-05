@@ -8,6 +8,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildProgressGauge } from './lib/agent-bout-progress-gauge.mjs';
+import { buildRequiredReadsPayload } from '../../baseline-os/scripts/ecosystem/lib/required-agent-reads.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -124,6 +125,8 @@ const executionBout = nextWork?.executionBout ?? null;
 const launchFocus = nextWork?.launchFocus ?? null;
 const progressGauge = buildProgressGauge(ROOT);
 
+const { requiredReads, humanGateNavigation } = buildRequiredReadsPayload(ROOT);
+
 const output = {
   startedAt: now,
   gitStatus,
@@ -131,6 +134,8 @@ const output = {
   executionBout,
   launchFocus,
   progressGauge,
+  requiredReads,
+  humanGateNavigation,
   proceedBrief: {
     ...proceedBrief,
     launchOutcome: launchFocus?.northStar?.outcome,
@@ -222,6 +227,11 @@ if (nextWork?.backlogClear && nextWork?.statusUpdate) {
   if (su.approvalNeeded) log(`**Approval needed:** ${su.approvalNeeded}`);
   if (su.deferred) log(`**Deferred:** ${su.deferred}`);
   log('\nClose with Status Update ONLY — no "Say if you want" after Approval needed.\n');
+}
+if (requiredReads.length) {
+  log('\n--- Required reads (normative) ---\n');
+  for (const p of requiredReads) log(`  - ${p}`);
+  if (humanGateNavigation) log(`\n**Human gates:** ${humanGateNavigation.rule}`);
 }
 log('\nSession updated:', SESSION_PATH);
 log('Before claiming done: run V-ladder (AGENTS.md §7) and include attestation in PR/commit.\n');
