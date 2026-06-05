@@ -5,10 +5,22 @@
   "laneAuditsRegistry": "gtcx-docs/tools/audit/lane-audits/README.md",
   "domainAuditsRegistry": "gtcx-docs/tools/audit/domain-audits/README.md",
   "domainAudits": {
-    "sales": { "command": "sales-audit", "feeds": "gtm-audit" },
-    "partnerships": { "command": "partnership-audit", "feeds": "gtm-audit" },
-    "api": { "command": "api-audit", "feeds": "engineering-audit" },
-    "security": { "command": "security-audit", "feeds": "compliance-audit" },
+    "sales": {
+      "command": "sales-audit",
+      "feeds": "gtm-audit"
+    },
+    "partnerships": {
+      "command": "partnership-audit",
+      "feeds": "gtm-audit"
+    },
+    "api": {
+      "command": "api-audit",
+      "feeds": "engineering-audit"
+    },
+    "security": {
+      "command": "security-audit",
+      "feeds": "compliance-audit"
+    },
     "deployment": {
       "command": "deployment-audit",
       "feeds": ["engineering-audit", "bank-grade-audit"]
@@ -32,7 +44,10 @@
       "forensicGlob": "docs/audit/bank-grade-audit-*.md",
       "legacyGlob": "docs/audit/master-audit-*.md"
     },
-    "gtmReadiness": { "command": "gtm-audit", "forensicGlob": "docs/audit/gtm-audit-*.md" },
+    "gtmReadiness": {
+      "command": "gtm-audit",
+      "forensicGlob": "docs/audit/gtm-audit-*.md"
+    },
     "globalComplianceRating": {
       "command": "global-compliance-audit",
       "forensicGlob": "docs/audit/global-compliance-audit-*.md",
@@ -63,7 +78,7 @@
     "engineeringCompletenessQuality": {
       "auditQuality1to10": 8.5,
       "readinessOutcome": {
-        "internalSignoff": 10.0,
+        "internalSignoff": 10,
         "completionAudit": 9.5
       },
       "index": "docs/audit/engineering-completeness-quality-2026-06-05.md"
@@ -71,7 +86,7 @@
     "internalCompliance": {
       "auditQuality1to10": 8.5,
       "readinessOutcome": {
-        "composite": 9.0,
+        "composite": 9,
         "domains": {
           "repoHygieneOrganization": 9.8,
           "documentationQuality": 9.6,
@@ -90,7 +105,7 @@
       "index": "docs/audit/internal-compliance-2026-06-05.md"
     },
     "industryCompliance": {
-      "auditQuality1to10": 8.0,
+      "auditQuality1to10": 8,
       "readinessOutcome": null,
       "industryComplianceTier": "IC-T0",
       "industryComplianceStatus": {
@@ -110,12 +125,12 @@
         "certifiedComposite": 8.9,
         "investor": 8.9,
         "enterprise": 8.7,
-        "sovereignDfi": 9.0
+        "sovereignDfi": 9
       },
       "index": "docs/audit/bank-grade-2026-06-05.md"
     },
     "gtmReadiness": {
-      "auditQuality1to10": 8.0,
+      "auditQuality1to10": 8,
       "readinessOutcome": null,
       "gtmReadinessTier": {
         "library": "GR-T1",
@@ -127,7 +142,7 @@
   },
   "legacy": {
     "note": "composite and internalReadiness are readiness outcomes in master-audit and signoff — not audit quality ranks",
-    "internalReadiness": 10.0,
+    "internalReadiness": 10,
     "composite": 8.9,
     "sourceAudit": "docs/audit/master-audit-2026-06-03.md",
     "renamedLanes": {
@@ -139,5 +154,8 @@
       "repoHygiene": 9.6,
       "note": "superseded by internalCompliance.readinessOutcome.domains"
     }
-  }
+  },
+  "autoDevData": "docs/audit/auto-dev-data.json",
+  "autoDevState": "docs/audit/auto-dev-state.md",
+  "updated": "2026-06-05"
 }
