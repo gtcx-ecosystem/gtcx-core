@@ -22,6 +22,10 @@ related:
 **Authority:** Class **S** — GTM / Legal / sovereign program only  
 **Agent boundary:** witness and scaffold only — never sign or fabricate LOI text
 
+**H-554 packet (agent prep complete):** [`dtf-554-loi-h554-packet-2026-06-05.md`](./dtf-554-loi-h554-packet-2026-06-05.md)  
+**Evidence witness index:** [`dtf-554-loi-witness-index.md`](../../audit/evidence/dtf-554-loi-witness-index.md)  
+**Outbound (gtcx-agentic SoR):** [`to-gtcx-agentic-dtf-554-loi-2026-06-05.md`](../../coordination/outbound/to-gtcx-agentic-dtf-554-loi-2026-06-05.md)
+
 ---
 
 ## Engineering prerequisite (done)

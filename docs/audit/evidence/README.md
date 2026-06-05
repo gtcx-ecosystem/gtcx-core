@@ -19,6 +19,7 @@ Redacted evidence artifacts for cross-repo program closure. **No raw secrets.**
 | `minerals-board-uat-evidence-template.json` | DTF-5.3.3 schema template              | Copy to dated run artifact                                                                        |
 | `zkp-profile-load-*.json`                   | DTF-5.4.2 Groth16 verify throughput    | `pnpm perf:zkp-profile-load` (gate: >= 1000 verifications/min, verify mode)                       |
 | `zkp-profile-load-latest.json`              | DTF-5.4.2 symlink copy of latest run   | Auto-updated by bench wrapper                                                                     |
+| `dtf-554-loi-*.pdf` (redacted)              | DTF-5.5.4 LOI / regulator letter       | Witness index [`dtf-554-loi-witness-index.md`](./dtf-554-loi-witness-index.md) — Class S human    |
 
 **Canonical runtime smoke and deployment proofs** may also live in `gtcx-intelligence/docs/audit/evidence/` per [deployment-proof-index](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/audit/evidence/deployment-proof-index.md).
 

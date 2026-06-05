@@ -1,7 +1,7 @@
 {
   "$schema": "gtcx://coordination/human-gates-manifest/v1",
   "schema": "gtcx.humanGates.manifest.v1",
-  "updated": "2026-06-06",
+  "updated": "2026-06-05",
   "normativeDoc": "docs/operations/human-gates-system.md",
   "operatingModel": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/human-assurance-gates-operating-model-2026-06-06.md",
   "gates": [
@@ -53,7 +53,9 @@
       "blocksClaims": ["Tier 5 commercial close"],
       "blocksIR": false,
       "status": "awaiting-human",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md"
+      "oneLineAsk": "Sign design-partner LOI or regulator letter naming pilot scope and certified pack manifest SHA-256 set; Legal redacts; file witness index row.",
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md",
+      "packet": "https://github.com/gtcx-ecosystem/gtcx-core/blob/main/docs/operations/coordination/dtf-554-loi-h554-packet-2026-06-05.md"
     },
     {
       "id": "MOBILE-MAESTRO-01",

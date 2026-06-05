@@ -1,7 +1,14 @@
 {
   "$schema": "gtcx://workspace/gtm-scope/v1",
   "repo": "gtcx-core",
-  "updated": "2026-06-08",
+  "updated": "2026-06-05",
+  "commercialGate": {
+    "storyId": "DTF-5.5.4",
+    "status": "awaiting-human",
+    "authorityClass": "S",
+    "packet": "docs/operations/coordination/dtf-554-loi-h554-packet-2026-06-05.md",
+    "witnessIndex": "docs/audit/evidence/dtf-554-loi-witness-index.md"
+  },
   "penTest": {
     "inScope": [],
     "outOfScope": []
