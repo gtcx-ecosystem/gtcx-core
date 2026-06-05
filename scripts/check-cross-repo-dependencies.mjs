@@ -90,7 +90,21 @@ function siblingReposPresent() {
   });
 }
 
+function checkSuggestPersonaImport() {
+  const candidates = [
+    join(ROOT, '../gtcx-agentic/13-scripts/lib/suggest-persona.mjs'),
+    join(ROOT, '../gtcx-agentic/scripts/lib/suggest-persona.mjs'),
+    join(ROOT, '../baseline-os/scripts/ecosystem/lib/suggest-persona.mjs'),
+  ];
+  if (candidates.some((p) => existsSync(p))) return;
+  errors.push(
+    'suggest-persona.mjs missing — expected gtcx-agentic/13-scripts/lib or scripts/lib shim',
+  );
+}
+
 // --- checks ---
+checkSuggestPersonaImport();
+
 const identity = repoIdentity();
 if (!identity.ok) {
   errors.push('git toplevel !== cwd — run from repo root');

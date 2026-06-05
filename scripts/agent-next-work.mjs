@@ -6,7 +6,9 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { enrichWithPersona } from '../../gtcx-agentic/scripts/lib/suggest-persona.mjs';
+import { loadSuggestPersona } from './lib/resolve-suggest-persona.mjs';
+
+const { enrichWithPersona } = await loadSuggestPersona();
 import {
   attachExecutionBout,
   readRepoContext,

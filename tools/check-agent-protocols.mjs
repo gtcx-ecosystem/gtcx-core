@@ -6,6 +6,7 @@ import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { readRepoFile, runPnpmScript } from './lib/agent-check-utils.mjs';
+import { resolveAgenticScriptRel } from './lib/resolve-agentic-script.mjs';
 
 const ROOT = process.cwd();
 const failures = [];
@@ -92,11 +93,13 @@ requireFile('.agent/git-workflow-pointer.md', 'git workflow pointer');
 requireContains('AGENTS.md', ['agent-universal-instructions.md'], 'AGENTS universal');
 requireContains('AGENTS.md', ['agent-git-workflow.md'], 'AGENTS git workflow');
 
-const universalCheck = join(ROOT, '../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs');
-if (existsSync(universalCheck)) {
-  runNode('../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs', '--repo-only');
+const universalRel = resolveAgenticScriptRel('check-universal-agent-enforcement.mjs');
+if (universalRel) {
+  runNode(universalRel, '--repo-only');
 } else {
-  failures.push('Missing ../gtcx-agentic/scripts/check-universal-agent-enforcement.mjs (clone sibling)');
+  failures.push(
+    'Missing gtcx-agentic check-universal-agent-enforcement.mjs (scripts/ or 13-scripts/)',
+  );
 }
 
 // operator-delegation scan: delegated to gtcx-agentic check-universal-agent-enforcement --repo-only
