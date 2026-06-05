@@ -1,0 +1,155 @@
+{
+  "schema": "gtcx.vendorPenTestPackManifest.v1",
+  "storyId": "FA-S6-02",
+  "generatedAt": "2026-06-04T22:07:42.271Z",
+  "repoHead": "b797a917a410ca0049a3740a98a3fb5793118d10",
+  "purpose": "Library-scope pen-test vendor intake — KAT, fuzz, threat matrix, CI confirmation (gtcx-core only)",
+  "owner": "gtcx-core",
+  "externalGate": {
+    "storyId": "EXT-INF-002",
+    "owner": "gtcx-infrastructure",
+    "requirement": "Live-stack pen-test SOW + vendor report",
+    "status": "open"
+  },
+  "artifactCount": 22,
+  "artifacts": [
+    {
+      "category": "kat",
+      "path": "artifacts/kat/bulletproofs-amount-range.kat.json",
+      "sha256": "51ae5789c49d5af9075e4be98b665924f764cbd239171b3f57c397067944f611",
+      "bytes": 2385
+    },
+    {
+      "category": "kat",
+      "path": "artifacts/kat/bulletproofs-commodity-range.kat.json",
+      "sha256": "35b49ce93c3216a709426c821462173100ed04c623c4745e5dbb160a21aac704",
+      "bytes": 2750
+    },
+    {
+      "category": "kat",
+      "path": "artifacts/kat/groth16-asset-ownership.kat.json",
+      "sha256": "84961513d91c243d693e61de9429325b2fd9f8a167a1bfd8676c70f548335faa",
+      "bytes": 50747
+    },
+    {
+      "category": "kat",
+      "path": "artifacts/kat/groth16-commodity-origin.kat.json",
+      "sha256": "b1fc654a6045a4c016987b673dd2b6b9f489546522b835298dd8673cfea6915c",
+      "bytes": 84082
+    },
+    {
+      "category": "kat",
+      "path": "artifacts/kat/groth16-gci-threshold.kat.json",
+      "sha256": "c627586efea184b8e1ec5bd3be85bbd78221d654cc2634c2e048e569bc8c6a5e",
+      "bytes": 5241
+    },
+    {
+      "category": "kat",
+      "path": "artifacts/kat/groth16-gh-gold-origin.kat.json",
+      "sha256": "8a9d7b5f279c95d9061a9efba121204db96c4bad26342ec9890045cf54c56bf7",
+      "bytes": 84196
+    },
+    {
+      "category": "kat",
+      "path": "artifacts/kat/groth16-location-region.kat.json",
+      "sha256": "f70697d7397c23f1f68329fb02d905a7feee5a143ffce25c53af85c91b731aa3",
+      "bytes": 38353
+    },
+    {
+      "category": "kat",
+      "path": "artifacts/kat/groth16-zw-diamond-origin.kat.json",
+      "sha256": "d3d8a9decfc7c2b5387dfe9e59146f8d336e38423c705ca2a4c530766c3be846",
+      "bytes": 84194
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/security/threat-control-matrix.md",
+      "sha256": "2829924dd03c93aea7e5566c97775eba3bc431ab5b381253dd7d431d901161d2",
+      "bytes": 4774
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/security/threat-model.md",
+      "sha256": "6b931b9962d7d3fffb193bdbb02d9968bf9f3413cd104e789920a9779399d630",
+      "bytes": 19940
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/security/pen-test-scope.md",
+      "sha256": "39da75fd26a870800119b09c3f44443f339418ec3321754e7351a203dd4a90b8",
+      "bytes": 5195
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/security/pen-test-rfp-2026.md",
+      "sha256": "7b0c390aca746e9cd37ce40e473bc3c95952df4d928622b16fd478b5ec010646",
+      "bytes": 5662
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/security/attack-tree-signing.md",
+      "sha256": "133be7a962fe767cc93685dab99ce59ec2470519aa8cd870c591bc31511cc7d0",
+      "bytes": 9758
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/security/native-binding-audit-checklist.md",
+      "sha256": "892bbe927829207266d783488b8149f82bd4a39e52cae15dd27d9b0e4267a16f",
+      "bytes": 7585
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/security/internal-security-assessment.md",
+      "sha256": "2c07c22412b1f081f34203fe0583e48c99f20b4a279067c8467e1ceba0a0a6da",
+      "bytes": 18121
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/audit/fuzz-campaign-evidence-2026-05-21.md",
+      "sha256": "5f856071ef91f0707ebca0e0743a349552b4f80dec9ce5e2c72e0b1d4c07de11",
+      "bytes": 3699
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/audit/ci-confirmation-2026-06-01.md",
+      "sha256": "5c4922ad495feb6068ce5146db2a8c02527451f88c83386cf76a712ecf18c9fd",
+      "bytes": 6115
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/audit/evidence/certified-pack-manifest-latest.json",
+      "sha256": "c6770c4bc575570da58407313d06f54f0180014af7dde510d7b68136a14b6495",
+      "bytes": 1737
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/audit/evidence/zkp-profile-load-latest.json",
+      "sha256": "b18443e24ba1b6ea695e16b7ab6e1d23dc8231233b65440132374f768568c2ad",
+      "bytes": 732
+    },
+    {
+      "category": "security-evidence",
+      "path": "docs/governance/trust-portal-zkp-circuit-registry.md",
+      "sha256": "c8b3163ca4d980d3f62a5a90d4871c9e507b4e1c332066790b25e75352d81a68",
+      "bytes": 6001
+    },
+    {
+      "category": "security-evidence",
+      "path": "packages/crypto/circuit-registry.manifest.json",
+      "sha256": "96f6ac207716993529f0710897af4a0ae82d46da425c81d696bd29f6b591fb8e",
+      "bytes": 1226
+    },
+    {
+      "category": "security-evidence",
+      "path": "artifacts/provenance-manifest.json",
+      "sha256": "a16e087335e5d68c5d82ade365800c4d7d63591402471bf49da1fa3b86a22acf",
+      "bytes": 2622
+    }
+  ],
+  "gates": [
+    "pnpm security:threat-matrix",
+    "pnpm vendor-evidence:verify-manifest",
+    "pnpm test:kat-cross-impl"
+  ],
+  "deliveryNote": "Ship manifest JSON + referenced paths to pen-test vendor; infra owns live-stack scope."
+}

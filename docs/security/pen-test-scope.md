@@ -1,35 +1,15 @@
 ---
 title: 'External Penetration Test Scope'
-status: 'current'
-date: '2026-05-27'
-owner: 'gtcx-core'
-role: 'protocol-architect'
-agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
-trust_score: 60
-autonomy_level: 'permissioned'
-tier: 'standard'
-tags: ['documentation', 'security']
-review_cycle: 'on-change'
----
-
----
-
-title: 'Pen Test Scope'
-status: 'current'
-date: '2026-05-17'
-owner: 'crypto-security-engineer'
-role: 'crypto-security-engineer'
-tier: 'critical'
-tags: ['docs', 'security']
-review_cycle: 'quarterly'
-
+status: current
+date: 2026-05-27
+owner: gtcx-core
+role: crypto-security-engineer
+tier: critical
+tags: ['documentation', 'security', 'pen-test']
+review_cycle: on-change
 ---
 
 # External Penetration Test Scope
-
-> **Status:** Current
-> **Date:** 2026-05-10
-> **Owner:** Cryptographic Security Engineer
 
 Purpose: define a bank-grade third-party penetration test scope for
 `gtcx-core`, aligned to what this repo actually is: a cryptographic foundation
