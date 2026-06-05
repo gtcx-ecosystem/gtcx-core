@@ -86,10 +86,10 @@ Template: `01-docs/04-ops/agent-proceed-brief-template.md` · **Forbidden:** You
 
 **You run commands.** Dev servers, gates, `adb`, and probes are agent-run — not operator checklists.
 
-| Resource   | Path                                                                            |
-| ---------- | ------------------------------------------------------------------------------- |
+| Resource   | Path                                                                               |
+| ---------- | ---------------------------------------------------------------------------------- |
 | Hub spec   | `gtcx-docs/01-docs/governance/protocols/27-agent-execution-obligation/protocol.md` |
-| Local rule | `.cursor/rules/protocol-27-agent-execution-obligation.mdc`                      |
+| Local rule | `.cursor/rules/protocol-27-agent-execution-obligation.mdc`                         |
 
 **Before asking the human to run anything:** D1 Shell → D2 background → D3 `pnpm agent:git-push` (node spawn) → D4 owner repo → D5 `pnpm --dir ../gtcx-agentic ecosystem:push-all` → D6 Permission Unblock Report.
 
@@ -166,8 +166,8 @@ pnpm bundle:check-budgets
 
 **Read before citing scores:** `01-docs/01-agents/readiness-and-audit-lanes.md` · SSOT: `01-docs/05-audit/readiness-model.md` · `01-docs/05-audit/latest.json`
 
-| Lane                   | Readiness (current)              | Index                                                       |
-| ---------------------- | -------------------------------- | ----------------------------------------------------------- |
+| Lane                   | Readiness (current)              | Index                                                             |
+| ---------------------- | -------------------------------- | ----------------------------------------------------------------- |
 | 1 Engineering          | 9.5 completion / 10.0 signoff    | `01-docs/05-audit/engineering-completeness-quality-2026-06-05.md` |
 | 2 Internal compliance  | **9.0** (5 domains)              | `01-docs/05-audit/internal-compliance-2026-06-05.md`              |
 | 3 Industry Compliance  | **IC-T0** OPEN 0/12              | `01-docs/05-audit/industry-compliance-2026-06-05.md`              |
@@ -228,7 +228,7 @@ pnpm bundle:check-budgets
 | Route decisions + pricing     | `baseline-os`  | `baseline cost-route --prompt "..." --json`                   |
 | Token usage aggregate         | `baseline-os`  | `baseline cost-stats --json`                                  |
 | Agent vault (populate/verify) | `gtcx-agentic` | `pnpm agent:vault:verify`                                     |
-| Staging vs production keys    | `gtcx-agentic` | `01-docs/operators/vault-environments.md`                        |
+| Staging vs production keys    | `gtcx-agentic` | `01-docs/operators/vault-environments.md`                     |
 | Ecosystem coordination        | `baseline-os`  | `workstream/coordination/ECOSYSTEM-COST-ROUTER-2026-06-03.md` |
 
 **Do not** use `baseline-os/04-ship/docker/.env.staging` for production vault work.
@@ -306,13 +306,13 @@ pnpm agent:reconcile-launch
 
 When a story is **blocked on a sibling repo** or you **hand off** cross-repo work, follow these five steps in order:
 
-| Step                | Action                                                                                                                                                                                                                                                                         |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **1. Ack**          | Read open handoffs: `baseline-os/workstream/coordination/coordination-report-latest.md` (if present) and any `from-*` / `to-*` tickets naming this repo. Reply with `outbound-ack` template when you receive a durable inbound.                                                |
-| **2. Roadmap**      | Record ticket IDs and blocker repo in `01-docs/05-audit/auto-dev-state.md`, `.baseline/memory/dependencies.md`, and/or `01-docs/05-audit/agent-work-pointer.md` (if used). Do not leave blockers chat-only.                                                                                |
+| Step                | Action                                                                                                                                                                                                                                                                                        |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Ack**          | Read open handoffs: `baseline-os/workstream/coordination/coordination-report-latest.md` (if present) and any `from-*` / `to-*` tickets naming this repo. Reply with `outbound-ack` template when you receive a durable inbound.                                                               |
+| **2. Roadmap**      | Record ticket IDs and blocker repo in `01-docs/05-audit/auto-dev-state.md`, `.baseline/memory/dependencies.md`, and/or `01-docs/05-audit/agent-work-pointer.md` (if used). Do not leave blockers chat-only.                                                                                   |
 | **3. Inbound doc**  | File a durable handoff: `01-docs/08-gtm/inbound-tickets/from-<this-repo>-<topic>-YYYY-MM-DD.md` or `01-docs/06-coordination/<initiative>-coordination.md` ([template](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/reference/templates/agents/3-structure/coordination.md)). |
-| **4. Hub if P0**    | Ecosystem-critical path: from `baseline-os`, `pnpm ecosystem:repo:report-work --repo=<repo> --item="..." --status=blocked`. Use `gtcx-docs/01-docs/08-gtm/inbound-tickets/` only when the **docs hub** is the coordination witness (releases, standards).                            |
-| **5. No duplicate** | Link [deployment-proof-index](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/05-audit/evidence/deployment-proof-index.md) and protocol contracts — **do not** copy harness YAML, evidence indexes, or normative protocol text into product repos.                |
+| **4. Hub if P0**    | Ecosystem-critical path: from `baseline-os`, `pnpm ecosystem:repo:report-work --repo=<repo> --item="..." --status=blocked`. Use `gtcx-docs/01-docs/08-gtm/inbound-tickets/` only when the **docs hub** is the coordination witness (releases, standards).                                     |
+| **5. No duplicate** | Link [deployment-proof-index](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/05-audit/evidence/deployment-proof-index.md) and protocol contracts — **do not** copy harness YAML, evidence indexes, or normative protocol text into product repos.                         |
 
 **Not in this repo:** inbound archive SoR for ecosystem-wide weekly reports — that stays **`baseline-os`** (`workstream/coordination/`).
 
@@ -320,11 +320,11 @@ When a story is **blocked on a sibling repo** or you **hand off** cross-repo wor
 
 ## Agent protocols (P22–P28) — machine-enforced
 
-| Resource          | Path                                                      |
-| ----------------- | --------------------------------------------------------- |
-| Hub index         | `gtcx-docs/01-docs/governance/protocols/`                    |
-| Local manifest    | `01-docs/01-agents/agent-protocols-manifest.json`               |
-| Enforcement guide | `01-docs/01-agents/agent-protocols-enforcement.md`              |
+| Resource          | Path                                                     |
+| ----------------- | -------------------------------------------------------- |
+| Hub index         | `gtcx-docs/01-docs/governance/protocols/`                |
+| Local manifest    | `01-docs/01-agents/agent-protocols-manifest.json`        |
+| Enforcement guide | `01-docs/01-agents/agent-protocols-enforcement.md`       |
 | P22 manifest      | `01-docs/04-ops/agent-work-selection.md`                 |
 | P26 template      | `01-docs/04-ops/agent-proceed-brief-template.md`         |
 | P24 bridge        | `01-docs/04-ops/coordination/cross-repo-agent-bridge.md` |
@@ -373,13 +373,13 @@ Template: `01-docs/04-ops/agent-status-update-template.md` · Spec: P26 §3b (gt
 
 ### Read order
 
-| Step | Link                                                                                                                                                                                     |
-| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Step | Link                                                                                                                                                                                    |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1    | [Unblock playbook F1–F10](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/04-ops/coordination/ecosystem-unblock-playbook-2026-06.md)                                 |
 | 2    | [P26 Status Update + post-pilot gating](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/04-ops/coordination/agent-status-update-and-post-pilot-gating-2026-06-06.md) |
 | 3    | [Human-external register](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/01-docs/04-ops/coordination/human-external-blocker-register-2026-06.md)                              |
 | 4    | [Cross-repo bridge — Latest updates](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/04-ops/coordination/cross-repo-agent-bridge.md)                                 |
-| 5    | This repo `01-docs/04-ops/agent-work-selection.md` · `01-docs/05-audit/auto-dev-state.md`                                                                                                     |
+| 5    | This repo `01-docs/04-ops/agent-work-selection.md` · `01-docs/05-audit/auto-dev-state.md`                                                                                               |
 
 **End of turn:** one P26 Status Update (not a menu) → append [cross-repo-agent-log](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/04-ops/coordination/cross-repo-agent-log.md) if state changed.
 
