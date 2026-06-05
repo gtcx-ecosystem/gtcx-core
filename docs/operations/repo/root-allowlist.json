@@ -2,7 +2,7 @@
   "$schema": "https://gtcx.org/schemas/audit/root-allowlist.schema.json",
   "version": "1.0.0",
   "schema_version": "1.0.0",
-  "updated": "2026-06-03",
+  "updated": "2026-06-05",
   "description": "Repo-specific root allowlist for gtcx-core. Source of truth for CI root-cleanliness checks. Mirrors docs/operations/repo/repo-hygiene-protocol.md.",
 
   "required_files": ["README.md", "AGENTS.md"],
@@ -39,8 +39,10 @@
   ],
 
   "allowed_directories": [
+    "agents",
     "artifacts",
     "benchmarks",
+    "bin",
     "deploy",
     "docs",
     "packages",
@@ -48,7 +50,8 @@
     "rust",
     "scripts",
     "tests",
-    "tools"
+    "tools",
+    "workspace"
   ],
 
   "allowed_dot_directories": [
@@ -95,6 +98,9 @@
     "pm_artifacts": "docs/agile/",
     "repo_policy": "docs/operations/repo/",
     "performance_baselines": "benchmarks/",
-    "kat_fixtures": "artifacts/kat/"
+    "kat_fixtures": "artifacts/kat/",
+    "agent_cli": "bin/",
+    "agent_terminal_index": "agents/",
+    "operational_workspace": "workspace/"
   }
 }

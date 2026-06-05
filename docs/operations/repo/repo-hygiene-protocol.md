@@ -94,18 +94,21 @@ These files are generated/maintained by the agent-sync pipeline where noted. Do 
 
 ## Tier G — Top-level structural directories
 
-| Dir           | Purpose                                        | README required             |
-| ------------- | ---------------------------------------------- | --------------------------- |
-| `packages/`   | Shared `@gtcx/*` libraries + config presets    | ✓ — plus per-package README |
-| `rust/`       | Six `gtcx-*` Rust crates                       | ✓                           |
-| `docs/`       | All documentation                              | ✓                           |
-| `scripts/`    | Repo-wide automation scripts                   | ✓                           |
-| `tools/`      | Quality gates, checkers, operator utilities    | ✓                           |
-| `tests/`      | Integration tests                              | ✓                           |
-| `deploy/`     | Deployment manifests                           | ✓                           |
-| `benchmarks/` | Performance baselines and CI reports           | ✓                           |
-| `quality/`    | KPI exports and quality artifacts              | ✓                           |
-| `artifacts/`  | Intentional CI/KAT fixtures (`artifacts/kat/`) | ✓                           |
+| Dir           | Purpose                                              | README required             |
+| ------------- | ---------------------------------------------------- | --------------------------- |
+| `agents/`     | Terminal-specific agent routing (discoverable index) | ✓                           |
+| `bin/`        | Repo CLI entrypoints (`agent start` without pnpm)    | ✓                           |
+| `workspace/`  | P29 operational SoR (JSON manifests, nine domains)   | ✓                           |
+| `packages/`   | Shared `@gtcx/*` libraries + config presets          | ✓ — plus per-package README |
+| `rust/`       | Six `gtcx-*` Rust crates                             | ✓                           |
+| `docs/`       | All documentation                                    | ✓                           |
+| `scripts/`    | Repo-wide automation scripts                         | ✓                           |
+| `tools/`      | Quality gates, checkers, operator utilities          | ✓                           |
+| `tests/`      | Integration tests                                    | ✓                           |
+| `deploy/`     | Deployment manifests                                 | ✓                           |
+| `benchmarks/` | Performance baselines and CI reports                 | ✓                           |
+| `quality/`    | KPI exports and quality artifacts                    | ✓                           |
+| `artifacts/`  | Intentional CI/KAT fixtures (`artifacts/kat/`)       | ✓                           |
 
 ## Tier H — Human-owned (never agent-remediate)
 
