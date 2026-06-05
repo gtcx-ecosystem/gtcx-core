@@ -1,9 +1,9 @@
 {
   "schema": "gtcx.autoDevData.v1",
   "repo": "gtcx-core",
-  "updated": "2026-06-05T13:33:29.495Z",
+  "updated": "2026-06-05T13:46:13.515Z",
   "protocol": "execute-roadmap",
-  "baselineCommit": "b1d226f7066e9acfa839a6444184a09f1716b2ba",
+  "baselineCommit": "6082d2080d014a3b87b65bd9f1f15485c1d51d7a",
   "p22": {
     "backlogClear": true,
     "automatableExhausted": true,
@@ -135,7 +135,7 @@
   },
   "sessionMetrics": {
     "lastSessionStartedAt": "2026-06-05T12:08:01.701Z",
-    "sessionAgeMs": 5127794,
+    "sessionAgeMs": 5891814,
     "lastSessionGates": [
       {
         "command": "pnpm agent:protocols:check",
