@@ -11,7 +11,11 @@
       "Shell(gh **)",
       "Shell(pnpm **)",
       "Shell(node **)",
-      "Shell(npx **)"
+      "Shell(npx **)",
+      "Shell(baseline)",
+      "Shell(baseline **)",
+      "Shell(python3 **)",
+      "Shell(cargo **)"
     ],
     "deny": [
       "Shell(git push --force **)",

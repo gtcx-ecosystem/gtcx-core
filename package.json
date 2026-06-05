@@ -74,6 +74,7 @@
     "agent:check": "node scripts/agent-sync/sync.mjs --check",
     "agent:start": "node scripts/agent-session-start.mjs",
     "agent:session-start": "pnpm run agent:start",
+    "agent:environment:check": "node ../baseline-os/scripts/ecosystem/lib/agent-environment-autonomy.mjs --repo-path=.",
     "agent:cli:path": "node scripts/agent-cli-path.mjs",
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:bout": "node scripts/agent-execution-bout.mjs",
@@ -104,7 +105,10 @@
     "session": "node ../baseline-os/packages/baselineos/dist/cli/bin.js session",
     "next": "node ../baseline-os/scripts/ecosystem/work-next.mjs",
     "gates": "node ../baseline-os/scripts/ecosystem/human-gates-check.mjs",
-    "hub": "node ../baseline-os/scripts/ecosystem/hub-sync.mjs"
+    "hub": "node ../baseline-os/scripts/ecosystem/hub-sync.mjs",
+    "workspace:check": "node scripts/workspace/check.mjs",
+    "pm:sync": "node scripts/workspace/pm-sync.mjs",
+    "pm:status": "node scripts/workspace/pm-status.mjs"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",

@@ -10,6 +10,10 @@ import { fileURLToPath } from 'node:url';
 import { buildProgressGauge } from './lib/agent-bout-progress-gauge.mjs';
 import { buildRequiredReadsPayload } from '../../baseline-os/scripts/ecosystem/lib/required-agent-reads.mjs';
 import {
+  checkAgentEnvironmentAutonomy,
+  formatAgentEnvironmentAutonomyHuman,
+} from '../../baseline-os/scripts/ecosystem/lib/agent-environment-autonomy.mjs';
+import {
   buildSessionAuditContext,
   formatSessionAuditContextHuman,
 } from '../../baseline-os/scripts/ecosystem/lib/session-audit-context.mjs';
@@ -20,6 +24,7 @@ const SESSION_PATH = join(ROOT, '.baseline/memory/session.md');
 const SESSION_META = join(ROOT, '.baseline/memory/session-last-start.json');
 const QUIET = process.argv.includes('--quiet');
 const JSON_OUT = process.argv.includes('--json');
+const STRICT_AUTONOMY = process.argv.includes('--strict-autonomy');
 
 function run(cmd) {
   return execSync(cmd, { cwd: ROOT, encoding: 'utf8' }).trim();
@@ -131,6 +136,7 @@ const progressGauge = buildProgressGauge(ROOT);
 
 const { requiredReads, humanGateNavigation } = buildRequiredReadsPayload(ROOT);
 const sessionContext = buildSessionAuditContext(ROOT, { repoId: 'gtcx-core' });
+const agentAutonomy = checkAgentEnvironmentAutonomy(ROOT, { repoId: 'gtcx-core' });
 
 const output = {
   startedAt: now,
@@ -141,6 +147,7 @@ const output = {
   progressGauge,
   requiredReads,
   humanGateNavigation,
+  agentAutonomy,
   sessionContext,
   proceedBrief: {
     ...proceedBrief,
@@ -164,10 +171,14 @@ const output = {
 
 if (JSON_OUT) {
   console.log(JSON.stringify(output, null, 2));
-  process.exit(0);
+  const exitBlocked = agentAutonomy.autonomy === 'blocked';
+  const exitPartial = STRICT_AUTONOMY && !agentAutonomy.ok;
+  process.exit(exitBlocked || exitPartial ? 1 : 0);
 }
 
 log('=== GTCX agent:start ===\n');
+log(formatAgentEnvironmentAutonomyHuman(agentAutonomy));
+log('\n');
 log(formatSessionAuditContextHuman(sessionContext));
 log('\n');
 if (launchFocus) {

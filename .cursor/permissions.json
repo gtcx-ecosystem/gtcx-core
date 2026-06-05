@@ -10,13 +10,20 @@
     "git pull",
     "git fetch",
     "gh",
-    "pnpm"
+    "pnpm",
+    "node",
+    "npx",
+    "baseline",
+    "python3",
+    "cargo"
   ],
   "autoRun": {
     "allow_instructions": [
       "Allow git push when the user or sprint closure protocol explicitly requests pushing commits to origin.",
       "Allow gh pr create and gh pr view for pull request workflows when requested.",
-      "Allow pnpm install, pnpm test, pnpm typecheck, and pnpm build for monorepo quality gates."
+      "Allow pnpm install, pnpm test, pnpm typecheck, and pnpm build for monorepo quality gates.",
+      "Allow baseline start and baseline session for agent startup chains.",
+      "Allow node and python3 for ecosystem scripts and hygiene checkers."
     ]
   }
 }
