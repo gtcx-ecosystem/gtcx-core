@@ -9,6 +9,10 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildProgressGauge } from './lib/agent-bout-progress-gauge.mjs';
 import { buildRequiredReadsPayload } from '../../baseline-os/scripts/ecosystem/lib/required-agent-reads.mjs';
+import {
+  buildSessionAuditContext,
+  formatSessionAuditContextHuman,
+} from '../../baseline-os/scripts/ecosystem/lib/session-audit-context.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -126,6 +130,7 @@ const launchFocus = nextWork?.launchFocus ?? null;
 const progressGauge = buildProgressGauge(ROOT);
 
 const { requiredReads, humanGateNavigation } = buildRequiredReadsPayload(ROOT);
+const sessionContext = buildSessionAuditContext(ROOT, { repoId: 'gtcx-core' });
 
 const output = {
   startedAt: now,
@@ -136,6 +141,7 @@ const output = {
   progressGauge,
   requiredReads,
   humanGateNavigation,
+  sessionContext,
   proceedBrief: {
     ...proceedBrief,
     launchOutcome: launchFocus?.northStar?.outcome,
@@ -162,6 +168,8 @@ if (JSON_OUT) {
 }
 
 log('=== GTCX agent:start ===\n');
+log(formatSessionAuditContextHuman(sessionContext));
+log('\n');
 if (launchFocus) {
   log('--- LAUNCH FOCUS (GTM — read first; no audit needed) ---\n');
   log(`**Outcome:** ${launchFocus.northStar.outcome}`);
