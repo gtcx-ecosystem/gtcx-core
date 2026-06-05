@@ -17,7 +17,7 @@ review_cycle: on-change
 
 > **Status (2026-06-03):** Tier-5 **circuit ID column** for verifier and regulator UX. One underlying Groth16 R1CS (`CommodityOrigin`); rows below are **policy packs** with semver lifecycle — not separate arkworks circuits.
 
-**System-of-record:** [`03-platform/packages/crypto/circuit-registry.manifest.json`](../../03-platform/packages/crypto/circuit-registry.manifest.json) · TypeScript API [`circuit-registry.ts`](../../03-platform/packages/crypto/03-platform/src/circuit-registry.ts) · Spec [`zkp-circuit-profiles.md`](../specs/03-platform/packages/zkp-circuit-profiles.md)
+**System-of-record:** [`03-platform/packages/crypto/circuit-registry.manifest.json`](../../03-platform/packages/crypto/circuit-registry.manifest.json) · TypeScript API [`circuit-registry.ts`](../../03-platform/packages/crypto/src/circuit-registry.ts) · Spec [`zkp-circuit-profiles.md`](../specs/03-platform/packages/zkp-circuit-profiles.md)
 
 ### Circuit ID column (registry snapshot)
 

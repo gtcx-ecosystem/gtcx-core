@@ -6,7 +6,7 @@
 
 # Interface: TracedOptions
 
-Defined in: [traced.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L35)
+Defined in: [traced.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L35)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [traced.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **category**: `string`
 
-Defined in: [traced.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L36)
+Defined in: [traced.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L36)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [traced.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **logInput**: `boolean`
 
-Defined in: [traced.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L37)
+Defined in: [traced.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L37)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [traced.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **logOutput**: `boolean`
 
-Defined in: [traced.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L38)
+Defined in: [traced.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L38)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [traced.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [traced.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L39)
+Defined in: [traced.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L39)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [traced.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **parentSpanId**: `string`
 
-Defined in: [traced.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L43)
+Defined in: [traced.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L43)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [traced.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **sanitizeInput**: (`input`) => `unknown`
 
-Defined in: [traced.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L40)
+Defined in: [traced.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L40)
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: [traced.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **sanitizeOutput**: (`output`) => `unknown`
 
-Defined in: [traced.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L41)
+Defined in: [traced.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L41)
 
 #### Parameters
 
@@ -90,7 +90,7 @@ Defined in: [traced.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **spanEmitter**: [`SpanEmitter`](SpanEmitter.md)
 
-Defined in: [traced.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L51)
+Defined in: [traced.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L51)
 
 Optional span emitter for forwarding traces to external systems
 (OpenTelemetry, Honeycomb, custom backends). When set, overrides
@@ -104,4 +104,4 @@ Stderr JSON emission continues regardless — the emitter is additive.
 
 > `optional` **traceId**: `string`
 
-Defined in: [traced.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L42)
+Defined in: [traced.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L42)

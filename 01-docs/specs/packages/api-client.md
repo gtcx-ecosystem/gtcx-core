@@ -124,11 +124,11 @@ The `RequestSigner` type allows plugging in any signing scheme. A signer receive
 
 ## Implementation
 
-`03-platform/packages/api-client/03-platform/src/`
+`03-platform/packages/api-client/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/crypto.md`](./crypto.md) — Ed25519 request signing
+- [`01-docs/specs/packages/crypto.md`](./crypto.md) — Ed25519 request signing
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

@@ -6,7 +6,7 @@
 
 # Interface: ResourceContext
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L133)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L133)
 
 Resource context - COMMODITY-AGNOSTIC
 Applies to any commodity extraction site
@@ -17,7 +17,7 @@ Applies to any commodity extraction site
 
 > **commodityPotential**: `"high"` \| `"medium"` \| `"low"` \| `"none"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L135)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L135)
 
 Potential for the target commodity at this location
 
@@ -27,7 +27,7 @@ Potential for the target commodity at this location
 
 > `optional` **commodityType**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:137](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L137)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:137](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L137)
 
 Which commodity this assessment is for
 
@@ -37,7 +37,7 @@ Which commodity this assessment is for
 
 > **confidence**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L141)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L141)
 
 Confidence in the assessment (0-1)
 
@@ -47,7 +47,7 @@ Confidence in the assessment (0-1)
 
 > `optional` **formation**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L139)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L139)
 
 Geological formation or agricultural zone
 
@@ -57,6 +57,6 @@ Geological formation or agricultural zone
 
 > `optional` **source**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:143](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L143)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:143](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L143)
 
 Source of the assessment

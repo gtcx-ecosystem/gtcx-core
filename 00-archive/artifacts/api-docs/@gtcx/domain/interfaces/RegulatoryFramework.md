@@ -6,7 +6,7 @@
 
 # Interface: RegulatoryFramework
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:366](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L366)
+Defined in: [03-platform/packages/domain/src/types.ts:366](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L366)
 
 Regulatory framework
 
@@ -16,7 +16,7 @@ Regulatory framework
 
 > **authority**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:370](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L370)
+Defined in: [03-platform/packages/domain/src/types.ts:370](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L370)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:370](https://g
 
 > **category**: [`ComplianceCategory`](../type-aliases/ComplianceCategory.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:371](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L371)
+Defined in: [03-platform/packages/domain/src/types.ts:371](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L371)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:371](https://g
 
 > **code**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:367](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L367)
+Defined in: [03-platform/packages/domain/src/types.ts:367](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L367)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:367](https://g
 
 > `optional` **commodityTypes**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:373](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L373)
+Defined in: [03-platform/packages/domain/src/types.ts:373](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L373)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:373](https://g
 
 > **description**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:369](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L369)
+Defined in: [03-platform/packages/domain/src/types.ts:369](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L369)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:369](https://g
 
 > **effectiveDate**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:380](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L380)
+Defined in: [03-platform/packages/domain/src/types.ts:380](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L380)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:380](https://g
 
 > **jurisdiction**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:372](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L372)
+Defined in: [03-platform/packages/domain/src/types.ts:372](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L372)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:372](https://g
 
 > **lastUpdated**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:381](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L381)
+Defined in: [03-platform/packages/domain/src/types.ts:381](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L381)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:381](https://g
 
 > **penalties**: `object`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:375](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L375)
+Defined in: [03-platform/packages/domain/src/types.ts:375](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L375)
 
 #### fine?
 
@@ -100,7 +100,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:375](https://g
 
 > **requirements**: [`RegulatoryRequirement`](RegulatoryRequirement.md)[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:374](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L374)
+Defined in: [03-platform/packages/domain/src/types.ts:374](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L374)
 
 ***
 
@@ -108,4 +108,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:374](https://g
 
 > **title**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:368](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L368)
+Defined in: [03-platform/packages/domain/src/types.ts:368](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L368)

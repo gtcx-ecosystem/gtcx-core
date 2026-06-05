@@ -6,7 +6,7 @@
 
 # Interface: ConfidenceRules
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L116)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L116)
 
 Confidence scoring rules
 
@@ -16,7 +16,7 @@ Confidence scoring rules
 
 > **baseScore**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L117)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L117)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **decayModel**: `"linear"` \| `"exponential"` \| `"none"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L120)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L120)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **evidenceWeights**: `Record`\<`string`, `number`\>
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L118)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L118)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **halfLife**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L121)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L121)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **minimumThreshold**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L119)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L119)

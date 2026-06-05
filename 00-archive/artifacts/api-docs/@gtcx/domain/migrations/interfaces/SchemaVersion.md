@@ -6,7 +6,7 @@
 
 # Interface: SchemaVersion
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L13)
+Defined in: [03-platform/packages/domain/src/migrations.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L13)
 
 Schema Versioning and Migrations
 
@@ -19,7 +19,7 @@ Implements P11 (Data Evolution) principle.
 
 > **major**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L14)
+Defined in: [03-platform/packages/domain/src/migrations.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L14)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:14](https
 
 > **minor**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L15)
+Defined in: [03-platform/packages/domain/src/migrations.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L15)
 
 ***
 
@@ -35,4 +35,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:15](https
 
 > **patch**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L16)
+Defined in: [03-platform/packages/domain/src/migrations.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L16)

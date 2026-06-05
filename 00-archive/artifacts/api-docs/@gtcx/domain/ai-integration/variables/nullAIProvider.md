@@ -8,7 +8,7 @@
 
 > `const` **nullAIProvider**: [`IAIProvider`](../interfaces/IAIProvider.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:209](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L209)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:209](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L209)
 
 Null AI provider — intentional no-op for the foundation layer.
 

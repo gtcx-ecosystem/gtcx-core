@@ -6,7 +6,7 @@
 
 # Interface: ComplianceCheckStartedPayload
 
-Defined in: [types.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L170)
+Defined in: [types.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L170)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **checkId**: `string`
 
-Defined in: [types.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L171)
+Defined in: [types.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L171)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **entityId**: `string`
 
-Defined in: [types.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L172)
+Defined in: [types.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L172)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **entityType**: `"asset_lot"` \| `"transaction"` \| `"trader"` \| `"producer"`
 
-Defined in: [types.ts:173](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L173)
+Defined in: [types.ts:173](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L173)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [types.ts:173](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **jurisdiction**: `string`
 
-Defined in: [types.ts:174](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L174)
+Defined in: [types.ts:174](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L174)

@@ -6,7 +6,7 @@
 
 # Interface: ComplianceReport
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L69)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L69)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:6
 
 > **metadata**: `object`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L76)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L76)
 
 #### complianceScore
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:7
 
 > **report**: `object`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L70)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L70)
 
 #### actionItems
 

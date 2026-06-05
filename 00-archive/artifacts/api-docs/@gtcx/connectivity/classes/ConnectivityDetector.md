@@ -6,7 +6,7 @@
 
 # Class: ConnectivityDetector
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L47)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L47)
 
 ConnectivityDetector provides network status detection for offline-first operation (Principle P8).
 
@@ -19,7 +19,7 @@ A pluggable `checkFn` allows injecting custom connectivity probes.
 
 > **new ConnectivityDetector**(`options?`): `ConnectivityDetector`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L58)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L58)
 
 #### Parameters
 
@@ -37,7 +37,7 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:58](h
 
 > **destroy**(): `void`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L125)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L125)
 
 Clean up timers and listeners. The detector cannot be reused after destroy.
 
@@ -51,7 +51,7 @@ Clean up timers and listeners. The detector cannot be reused after destroy.
 
 > **forceCheck**(): `Promise`\<[`ConnectivityState`](../interfaces/ConnectivityState.md)\>
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L105)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L105)
 
 Trigger an immediate connectivity check.
 
@@ -65,7 +65,7 @@ Trigger an immediate connectivity check.
 
 > **getState**(): [`ConnectivityState`](../interfaces/ConnectivityState.md)
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L72)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L72)
 
 Get the current connectivity state.
 
@@ -79,7 +79,7 @@ Get the current connectivity state.
 
 > **onStateChange**(`listener`): () => `void`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L80)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L80)
 
 Subscribe to state changes. Returns an unsubscribe function.
 Listeners are only called when the state actually changes.
@@ -104,7 +104,7 @@ Listeners are only called when the state actually changes.
 
 > **setOnline**(`online`): `void`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L115)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L115)
 
 Manually set online/offline state. Useful for testing or manual override.
 When setting offline, profile is set to 'offline'.
@@ -126,7 +126,7 @@ When setting online, profile is set to 'standard' (with no measurement data).
 
 > **start**(): `void`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L88)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L88)
 
 Begin periodic connectivity checks.
 
@@ -140,7 +140,7 @@ Begin periodic connectivity checks.
 
 > **stop**(): `void`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/detector.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/detector.ts#L97)
+Defined in: [03-platform/packages/connectivity/src/detector.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/detector.ts#L97)
 
 Stop periodic connectivity checks.
 

@@ -6,7 +6,7 @@
 
 # Interface: QRCodeVerificationResult
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L52)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L52)
 
 QR code verification result
 
@@ -16,7 +16,7 @@ QR code verification result
 
 > `optional` **data**: [`QRCodeData`](QRCodeData.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L54)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L54)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **error**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L55)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L55)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **isValid**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L53)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L53)

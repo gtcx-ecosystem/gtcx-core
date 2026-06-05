@@ -6,7 +6,7 @@
 
 # Interface: IApiClient
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L123)
+Defined in: [03-platform/packages/api-client/src/types.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L123)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:123](https
 
 > **delete**\<`T`\>(`path`, `options?`): `Promise`\<[`QueuedResponse`](QueuedResponse.md) \| [`ApiResponse`](ApiResponse.md)\<`T`\>\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L140)
+Defined in: [03-platform/packages/api-client/src/types.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L140)
 
 #### Type Parameters
 
@@ -42,7 +42,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:140](https
 
 > **get**\<`T`\>(`path`, `options?`): `Promise`\<[`QueuedResponse`](QueuedResponse.md) \| [`ApiResponse`](ApiResponse.md)\<`T`\>\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L124)
+Defined in: [03-platform/packages/api-client/src/types.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L124)
 
 #### Type Parameters
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:124](https
 
 > **patch**\<`T`\>(`path`, `body`, `options?`): `Promise`\<[`QueuedResponse`](QueuedResponse.md) \| [`ApiResponse`](ApiResponse.md)\<`T`\>\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L135)
+Defined in: [03-platform/packages/api-client/src/types.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L135)
 
 #### Type Parameters
 
@@ -102,7 +102,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:135](https
 
 > **post**\<`T`\>(`path`, `body`, `options?`): `Promise`\<[`QueuedResponse`](QueuedResponse.md) \| [`ApiResponse`](ApiResponse.md)\<`T`\>\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L125)
+Defined in: [03-platform/packages/api-client/src/types.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L125)
 
 #### Type Parameters
 
@@ -134,7 +134,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:125](https
 
 > **put**\<`T`\>(`path`, `body`, `options?`): `Promise`\<[`QueuedResponse`](QueuedResponse.md) \| [`ApiResponse`](ApiResponse.md)\<`T`\>\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L130)
+Defined in: [03-platform/packages/api-client/src/types.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L130)
 
 #### Type Parameters
 

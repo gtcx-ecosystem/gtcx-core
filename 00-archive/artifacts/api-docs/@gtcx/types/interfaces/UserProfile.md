@@ -6,7 +6,7 @@
 
 # Interface: UserProfile
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L19)
+Defined in: [03-platform/packages/types/src/models/user.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L19)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:19](https
 
 > `optional` **avatar**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L23)
+Defined in: [03-platform/packages/types/src/models/user.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L23)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:23](https
 
 > `optional` **displayName**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L22)
+Defined in: [03-platform/packages/types/src/models/user.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L22)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:22](https
 
 > **firstName**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L20)
+Defined in: [03-platform/packages/types/src/models/user.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L20)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:20](https
 
 > **lastName**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L21)
+Defined in: [03-platform/packages/types/src/models/user.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L21)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:21](https
 
 > **locale**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L24)
+Defined in: [03-platform/packages/types/src/models/user.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L24)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:24](https
 
 > `optional` **organization**: [`OrganizationRef`](OrganizationRef.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L26)
+Defined in: [03-platform/packages/types/src/models/user.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L26)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:26](https
 
 > **timezone**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L25)
+Defined in: [03-platform/packages/types/src/models/user.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L25)

@@ -6,7 +6,7 @@
 
 # Interface: RouteCosts
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:219](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L219)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:219](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L219)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:219](ht
 
 > **currency**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:225](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L225)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:225](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L225)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:225](ht
 
 > **duties**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:222](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L222)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:222](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L222)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:222](ht
 
 > **fees**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:223](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L223)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:223](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L223)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:223](ht
 
 > **insurance**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:221](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L221)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:221](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L221)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:221](ht
 
 > **total**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:224](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L224)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:224](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L224)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:224](ht
 
 > **transport**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:220](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L220)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:220](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L220)

@@ -8,7 +8,7 @@
 
 > **parseProofBundle**(`serialized`, `onError?`): [`ProofBundle`](../interfaces/ProofBundle.md) \| `null`
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L184)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L184)
 
 Parse proof bundle from serialized string with schema validation.
 Returns null if JSON parsing or schema validation fails.

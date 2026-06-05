@@ -6,7 +6,7 @@
 
 # Interface: ComplianceConfig
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L32)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L32)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:3
 
 > **defaultCurrency**: `string`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L36)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L36)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:3
 
 > **defaultJurisdiction**: `string`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L33)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L33)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:3
 
 > `optional` **frameworks**: `RegulatoryFramework`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L37)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L37)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:3
 
 > **highValueThreshold**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L35)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L35)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:3
 
 > **supportedCommodities**: `string`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L34)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L34)

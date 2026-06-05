@@ -8,7 +8,7 @@
 
 > **getCommodityCategory**(`type`): [`AssetCategory`](../type-aliases/AssetCategory.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:343](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L343)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:343](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L343)
 
 Get category for a commodity
 

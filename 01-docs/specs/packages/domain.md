@@ -123,12 +123,12 @@ This is a resilience requirement, not an implementation detail: device clock dri
 
 ## Implementation
 
-`03-platform/packages/domain/03-platform/src/`
+`03-platform/packages/domain/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/services.md`](./services.md) — concrete service implementations
-- [`01-docs/specs/03-platform/packages/events.md`](./events.md) — event bus consuming domain event types
+- [`01-docs/specs/packages/services.md`](./services.md) — concrete service implementations
+- [`01-docs/specs/packages/events.md`](./events.md) — event bus consuming domain event types
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview and dependency rules

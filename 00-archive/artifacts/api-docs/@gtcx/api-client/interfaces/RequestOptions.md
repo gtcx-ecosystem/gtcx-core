@@ -6,7 +6,7 @@
 
 # Interface: RequestOptions
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:143](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L143)
+Defined in: [03-platform/packages/api-client/src/types.ts:143](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L143)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:143](https
 
 > `optional` **dedupeKey**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L150)
+Defined in: [03-platform/packages/api-client/src/types.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L150)
 
 Key for request deduplication — in-flight requests with the same key share the same promise
 
@@ -24,7 +24,7 @@ Key for request deduplication — in-flight requests with the same key share the
 
 > `optional` **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:144](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L144)
+Defined in: [03-platform/packages/api-client/src/types.ts:144](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L144)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:144](https
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L146)
+Defined in: [03-platform/packages/api-client/src/types.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L146)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:146](https
 
 > `optional` **signer**: [`RequestSigner`](../type-aliases/RequestSigner.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L147)
+Defined in: [03-platform/packages/api-client/src/types.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L147)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:147](https
 
 > `optional` **timeout**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:145](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L145)
+Defined in: [03-platform/packages/api-client/src/types.ts:145](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L145)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:145](https
 
 > `optional` **unsigned**: `boolean`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L148)
+Defined in: [03-platform/packages/api-client/src/types.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L148)

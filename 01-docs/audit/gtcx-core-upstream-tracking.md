@@ -36,13 +36,13 @@ review_cycle: 'quarterly'
 
 | #   | Capability                           | Target Package     | Source in Protocols                                                     | Effort | Priority |
 | --- | ------------------------------------ | ------------------ | ----------------------------------------------------------------------- | ------ | -------- |
-| 1   | ML-DSA-65 post-quantum signing       | `@gtcx/crypto`     | `03-platform/packages/crypto/03-platform/src/hybrid-signer.ts`          | High   | Medium   |
-| 2   | Hybrid signing (Ed25519 + ML-DSA-65) | `@gtcx/crypto`     | `03-platform/packages/crypto/03-platform/src/hybrid-signer.ts`          | High   | Medium   |
-| 3   | Key ceremony management              | `@gtcx/crypto`     | `03-platform/packages/crypto/03-platform/src/ceremony-manager.ts`       | Medium | Medium   |
-| 4   | Encryption-at-rest                   | `@gtcx/crypto`     | `03-platform/packages/crypto/03-platform/src/encryption-at-rest.ts`     | Low    | High     |
-| 5   | Password KDF (Argon2id / PBKDF2)     | `@gtcx/crypto`     | `03-platform/packages/crypto/03-platform/src/password-kdf.ts`           | Low    | High     |
-| 6   | Circuit breaker                      | `@gtcx/resilience` | `03-platform/packages/domain/03-platform/src/circuit-breaker.ts`        | Low    | High     |
-| 7   | Pluggable rate limiter               | `@gtcx/resilience` | `03-platform/packages/domain/03-platform/src/pluggable-rate-limiter.ts` | Low    | High     |
+| 1   | ML-DSA-65 post-quantum signing       | `@gtcx/crypto`     | `03-platform/packages/crypto/src/hybrid-signer.ts`          | High   | Medium   |
+| 2   | Hybrid signing (Ed25519 + ML-DSA-65) | `@gtcx/crypto`     | `03-platform/packages/crypto/src/hybrid-signer.ts`          | High   | Medium   |
+| 3   | Key ceremony management              | `@gtcx/crypto`     | `03-platform/packages/crypto/src/ceremony-manager.ts`       | Medium | Medium   |
+| 4   | Encryption-at-rest                   | `@gtcx/crypto`     | `03-platform/packages/crypto/src/encryption-at-rest.ts`     | Low    | High     |
+| 5   | Password KDF (Argon2id / PBKDF2)     | `@gtcx/crypto`     | `03-platform/packages/crypto/src/password-kdf.ts`           | Low    | High     |
+| 6   | Circuit breaker                      | `@gtcx/resilience` | `03-platform/packages/domain/src/circuit-breaker.ts`        | Low    | High     |
+| 7   | Pluggable rate limiter               | `@gtcx/resilience` | `03-platform/packages/domain/src/pluggable-rate-limiter.ts` | Low    | High     |
 
 ### 2.2 Recommended Order
 

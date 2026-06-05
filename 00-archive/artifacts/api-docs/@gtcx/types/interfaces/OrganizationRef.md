@@ -6,7 +6,7 @@
 
 # Interface: OrganizationRef
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L29)
+Defined in: [03-platform/packages/types/src/models/user.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L29)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:29](https
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L30)
+Defined in: [03-platform/packages/types/src/models/user.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L30)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:30](https
 
 > **name**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L31)
+Defined in: [03-platform/packages/types/src/models/user.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L31)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:31](https
 
 > `optional` **role**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L33)
+Defined in: [03-platform/packages/types/src/models/user.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L33)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:33](https
 
 > **type**: [`OrganizationType`](../type-aliases/OrganizationType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L32)
+Defined in: [03-platform/packages/types/src/models/user.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L32)

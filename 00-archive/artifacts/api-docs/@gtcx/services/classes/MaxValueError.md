@@ -6,7 +6,7 @@
 
 # Class: MaxValueError
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/errors.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/errors.ts#L19)
+Defined in: [03-platform/packages/services/src/trading/errors.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/errors.ts#L19)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/services/03-platform/src/trading/errors.ts:19]
 
 > **new MaxValueError**(`message`, `options?`): `MaxValueError`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/errors.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/errors.ts#L20)
+Defined in: [03-platform/packages/services/src/trading/errors.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/errors.ts#L20)
 
 #### Parameters
 

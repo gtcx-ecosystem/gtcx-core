@@ -133,13 +133,13 @@ GTCX uses a proprietary DID method: `did:gtcx:<multibase-encoded-public-key>`.
 
 ## Implementation
 
-`03-platform/packages/identity/03-platform/src/`
+`03-platform/packages/identity/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/crypto.md`](./crypto.md) — cryptographic primitives this package depends on
-- [`01-docs/specs/03-platform/packages/verification.md`](./verification.md) — consumes identity for certificate signing
+- [`01-docs/specs/packages/crypto.md`](./crypto.md) — cryptographic primitives this package depends on
+- [`01-docs/specs/packages/verification.md`](./verification.md) — consumes identity for certificate signing
 - [`01-docs/09-security/security-framework.md`](../../security/security-framework.md) — identity and key management policy
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

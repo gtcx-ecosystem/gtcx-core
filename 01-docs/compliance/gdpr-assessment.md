@@ -83,9 +83,9 @@ Although gtcx-core processes no personal data, its design supports downstream pr
 | --------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | Data minimization           | No telemetry, no analytics, no usage data collection                                | No network calls in source code                                                                          |
 | Purpose limitation          | Cryptographic operations only — no data interpretation                              | Package scope defined in specs                                                                           |
-| Storage limitation          | Key material zeroized after use via `secureWipe()` (TS) and `Zeroize` derive (Rust) | `03-platform/packages/crypto/03-platform/src/signing.ts`, `rust/gtcx-crypto/03-platform/src/keys/mod.rs` |
+| Storage limitation          | Key material zeroized after use via `secureWipe()` (TS) and `Zeroize` derive (Rust) | `03-platform/packages/crypto/src/signing.ts`, `rust/gtcx-crypto/03-platform/src/keys/mod.rs` |
 | Integrity & confidentiality | Ed25519 signing, AES-256-GCM encryption, constant-time comparison                   | `01-docs/09-security/security-framework.md`                                                              |
-| Pseudonymization            | DID-based identity (hash-derived, not PII-linked)                                   | `03-platform/packages/identity/03-platform/src/`                                                         |
+| Pseudonymization            | DID-based identity (hash-derived, not PII-linked)                                   | `03-platform/packages/identity/src/`                                                         |
 
 ---
 

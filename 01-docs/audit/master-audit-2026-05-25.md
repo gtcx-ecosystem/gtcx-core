@@ -59,7 +59,7 @@ Same as first-pass audit (`ada2c0f`). No new pre-existing findings introduced. S
 
 Key carry-forward:
 
-- **[P2] `03-platform/packages/api-client/03-platform/src/index.ts:1`** — `export *` barrel defeats tree-shaking. _(unchanged)_
+- **[P2] `03-platform/packages/api-client/src/index.ts:1`** — `export *` barrel defeats tree-shaking. _(unchanged)_
 - **[P2] `rust/gtcx-zkp/03-platform/src/tests.rs:470`** — 470 LOC; approaching 500 LOC limit. _(was 474 before cleanup)_
 
 ---
@@ -275,7 +275,7 @@ Phase 2 skipped — repo has only `/01-docs/` documentation root. No competing r
 | Threat matrix 12/12              | Validator passes        | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                            | Same (9.0)                      |
 | SLSA Build L3                    | Aspirational            | NPM_TOKEN present; provenance manifest generates clean; workflow ready                                  | Upgrade SLSA sub-score to 7.5   |
 | Coverage 95% branch              | 14 packages             | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                             | Same (9.5)                      |
-| USSD protocol                    | Config-only (P2)        | `03-platform/packages/connectivity/03-platform/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                      |
+| USSD protocol                    | Config-only (P2)        | `03-platform/packages/connectivity/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                      |
 | Groth16 refactor                 | 692 LOC single file     | File removed; refactored into modules per commit `1443f28`                                              | Same (9.5)                      |
 | rustls-webpki cargo audit        | 3 vulns, CI fails       | `cargo audit` passes with documented exceptions; `deny.toml` + `audit.toml`                             | Security +0.2 (CI unblocked)    |
 | ADR-012 predicate reconciliation | Not started             | Stage 0 complete: 47 predicates, migration helper, handoff doc                                          | Ecosystem +0.3                  |

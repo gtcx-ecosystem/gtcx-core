@@ -6,7 +6,7 @@
 
 # Interface: GciScoredData
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L140)
+Defined in: [03-platform/packages/types/src/common/events.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L140)
 
 GCI Score computed for a subject.
 
@@ -16,7 +16,7 @@ GCI Score computed for a subject.
 
 > **commodityType**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:152](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L152)
+Defined in: [03-platform/packages/types/src/common/events.ts:152](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L152)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:152](ht
 
 > **components**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:145](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L145)
+Defined in: [03-platform/packages/types/src/common/events.ts:145](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L145)
 
 #### communityTrust
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:145](ht
 
 > **compositeScore**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:143](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L143)
+Defined in: [03-platform/packages/types/src/common/events.ts:143](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L143)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:143](ht
 
 > **jurisdiction**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:151](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L151)
+Defined in: [03-platform/packages/types/src/common/events.ts:151](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L151)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:151](ht
 
 > **scoredAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:154](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L154)
+Defined in: [03-platform/packages/types/src/common/events.ts:154](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L154)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:154](ht
 
 > **scoreId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L141)
+Defined in: [03-platform/packages/types/src/common/events.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L141)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:141](ht
 
 > **subjectDid**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:142](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L142)
+Defined in: [03-platform/packages/types/src/common/events.ts:142](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L142)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:142](ht
 
 > **tier**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:144](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L144)
+Defined in: [03-platform/packages/types/src/common/events.ts:144](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L144)
 
 ***
 
@@ -96,4 +96,4 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:144](ht
 
 > **validUntil**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:153](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L153)
+Defined in: [03-platform/packages/types/src/common/events.ts:153](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L153)

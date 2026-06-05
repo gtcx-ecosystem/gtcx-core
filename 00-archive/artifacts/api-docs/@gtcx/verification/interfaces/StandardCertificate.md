@@ -6,7 +6,7 @@
 
 # Interface: StandardCertificate
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L108)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L108)
 
 Standard certificate (single signature)
 
@@ -20,7 +20,7 @@ Standard certificate (single signature)
 
 > **certificateId**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L96)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L96)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L102)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L102)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **dataHash**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L110)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L110)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **metadata**: [`CertificateMetadata`](CertificateMetadata.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L100)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L100)
 
 #### Inherited from
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **securityLevel**: `"standard"` \| `"enhanced"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L109)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L109)
 
 #### Overrides
 
@@ -76,7 +76,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L111)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L111)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **type**: [`CertificateType`](../type-aliases/CertificateType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L98)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L98)
 
 #### Inherited from
 
@@ -96,7 +96,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **verificationData**: [`CertificateVerificationData`](CertificateVerificationData.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L101)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L101)
 
 #### Inherited from
 
@@ -108,7 +108,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **version**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L97)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L97)
 
 #### Inherited from
 

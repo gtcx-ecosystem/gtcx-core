@@ -4,7 +4,7 @@ import {
   createHashCommitmentZkpEngine,
   NativeZkpEngine,
   type ZkProofInput,
-} from '../../03-platform/packages/crypto/03-platform/src/zkp';
+} from '../../03-platform/packages/crypto/src/zkp';
 
 /**
  * ZKP Parity Tests

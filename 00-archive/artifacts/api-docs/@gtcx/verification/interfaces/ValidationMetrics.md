@@ -6,7 +6,7 @@
 
 # Interface: ValidationMetrics
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L47)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L47)
 
 Validation metrics for certificate
 
@@ -16,7 +16,7 @@ Validation metrics for certificate
 
 > **confidenceLevel**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L50)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L50)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **integrityCheck**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L51)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L51)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **isJammed**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L48)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L48)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **isSpoofed**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L49)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L49)

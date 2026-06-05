@@ -6,7 +6,7 @@
 
 # Interface: IComplianceService
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:462](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L462)
+Defined in: [03-platform/packages/domain/src/types.ts:462](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L462)
 
 Compliance service interface
 
@@ -16,7 +16,7 @@ Compliance service interface
 
 > **checkCompliance**(`entityId`, `entityType`): `Promise`\<[`ComplianceRecord`](ComplianceRecord.md)[]\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:464](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L464)
+Defined in: [03-platform/packages/domain/src/types.ts:464](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L464)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:464](https://g
 
 > **validateLicenses**(`traderId`): `Promise`\<`boolean`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:463](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L463)
+Defined in: [03-platform/packages/domain/src/types.ts:463](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L463)
 
 #### Parameters
 

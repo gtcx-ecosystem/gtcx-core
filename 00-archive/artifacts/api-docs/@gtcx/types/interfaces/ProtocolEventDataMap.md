@@ -6,7 +6,7 @@
 
 # Interface: ProtocolEventDataMap
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L170)
+Defined in: [03-platform/packages/types/src/common/events.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L170)
 
 Map from protocol event types to their data shapes.
 
@@ -16,7 +16,7 @@ Map from protocol event types to their data shapes.
 
 > **gci.expired**: [`GciScoredData`](GciScoredData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L179)
+Defined in: [03-platform/packages/types/src/common/events.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L179)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:179](ht
 
 > **gci.scored**: [`GciScoredData`](GciScoredData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L177)
+Defined in: [03-platform/packages/types/src/common/events.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L177)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:177](ht
 
 > **gci.updated**: [`GciUpdatedData`](GciUpdatedData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:178](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L178)
+Defined in: [03-platform/packages/types/src/common/events.ts:178](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L178)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:178](ht
 
 > **geotag.disputed**: [`GeoTagVerifiedData`](GeoTagVerifiedData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:176](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L176)
+Defined in: [03-platform/packages/types/src/common/events.ts:176](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L176)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:176](ht
 
 > **geotag.recorded**: [`GeoTagRecordedData`](GeoTagRecordedData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:174](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L174)
+Defined in: [03-platform/packages/types/src/common/events.ts:174](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L174)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:174](ht
 
 > **geotag.verified**: [`GeoTagVerifiedData`](GeoTagVerifiedData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:175](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L175)
+Defined in: [03-platform/packages/types/src/common/events.ts:175](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L175)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:175](ht
 
 > **tradepass.expired**: [`TradePassRevokedData`](TradePassRevokedData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:173](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L173)
+Defined in: [03-platform/packages/types/src/common/events.ts:173](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L173)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:173](ht
 
 > **tradepass.issued**: [`TradePassIssuedData`](TradePassIssuedData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L171)
+Defined in: [03-platform/packages/types/src/common/events.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L171)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:171](ht
 
 > **tradepass.revoked**: [`TradePassRevokedData`](TradePassRevokedData.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L172)
+Defined in: [03-platform/packages/types/src/common/events.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L172)

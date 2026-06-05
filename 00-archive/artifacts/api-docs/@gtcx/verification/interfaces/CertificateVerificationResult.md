@@ -6,7 +6,7 @@
 
 # Interface: CertificateVerificationResult
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L201)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L201)
 
 Certificate verification result
 
@@ -16,7 +16,7 @@ Certificate verification result
 
 > `optional` **certificate**: [`Certificate`](Certificate.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:203](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L203)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:203](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L203)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **checks**: `object`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:206](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L206)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:206](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L206)
 
 #### hashValid
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **confidence**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:204](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L204)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:204](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L204)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **details**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:205](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L205)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:205](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L205)
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **isValid**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L202)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L202)

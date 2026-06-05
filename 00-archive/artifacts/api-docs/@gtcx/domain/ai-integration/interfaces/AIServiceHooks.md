@@ -6,7 +6,7 @@
 
 # Interface: AIServiceHooks
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:283](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L283)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:283](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L283)
 
 AI hooks that can be injected into services
 
@@ -16,7 +16,7 @@ AI hooks that can be injected into services
 
 > `optional` **onAfterRegistration**: (`assetLot`) => `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:292](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L292)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:292](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L292)
 
 Called after registration
 
@@ -36,7 +36,7 @@ Called after registration
 
 > `optional` **onAfterTrade**: (`transaction`) => `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:302](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L302)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:302](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L302)
 
 Called after trade execution
 
@@ -56,7 +56,7 @@ Called after trade execution
 
 > `optional` **onAnalysisCycle**: () => `Promise`\<[`AIAnalysisResult`](AIAnalysisResult.md)\<`unknown`\>[]\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:311](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L311)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:311](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L311)
 
 Called periodically for pattern analysis
 
@@ -70,7 +70,7 @@ Called periodically for pattern analysis
 
 > `optional` **onBeforeRegistration**: (`data`) => `Promise`\<\{ `modifications?`: `Record`\<`string`, `unknown`\>; `proceed`: `boolean`; `warnings?`: `string`[]; \}\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:285](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L285)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:285](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L285)
 
 Called before registration
 
@@ -90,7 +90,7 @@ Called before registration
 
 > `optional` **onBeforeTrade**: (`request`) => `Promise`\<\{ `proceed`: `boolean`; `riskLevel?`: `"low"` \| `"medium"` \| `"high"`; `warnings?`: `string`[]; \}\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:295](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L295)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:295](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L295)
 
 Called before trade execution
 
@@ -110,7 +110,7 @@ Called before trade execution
 
 > `optional` **onComplianceViolation**: (`record`) => `Promise`\<\{ `alertRecipients?`: `string`[]; `escalate`: `boolean`; \}\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:305](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L305)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:305](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L305)
 
 Called when compliance violation detected
 

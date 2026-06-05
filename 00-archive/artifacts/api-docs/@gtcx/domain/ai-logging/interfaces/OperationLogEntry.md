@@ -6,7 +6,7 @@
 
 # Interface: OperationLogEntry
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L32)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L32)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:32](https
 
 > `optional` **aiContext**: `object`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L64)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L64)
 
 AI analysis hints
 
@@ -48,7 +48,7 @@ Suggested follow-up operations
 
 > `optional` **correlationId**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L60)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L60)
 
 Correlation ID for distributed tracing
 
@@ -58,7 +58,7 @@ Correlation ID for distributed tracing
 
 > `optional` **duration**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L44)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L44)
 
 Duration (ms)
 
@@ -68,7 +68,7 @@ Duration (ms)
 
 > `optional` **endTime**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L42)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L42)
 
 End timestamp (ms)
 
@@ -78,7 +78,7 @@ End timestamp (ms)
 
 > `optional` **error**: `object`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L50)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L50)
 
 Error details if failed
 
@@ -100,7 +100,7 @@ Error details if failed
 
 > `optional` **input**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L46)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L46)
 
 Input summary (sanitized, no PII)
 
@@ -110,7 +110,7 @@ Input summary (sanitized, no PII)
 
 > **operationId**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L34)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L34)
 
 Unique operation ID
 
@@ -120,7 +120,7 @@ Unique operation ID
 
 > `optional` **output**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L48)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L48)
 
 Output summary
 
@@ -130,7 +130,7 @@ Output summary
 
 > `optional` **parentId**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L58)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L58)
 
 Parent operation ID for nested operations
 
@@ -140,7 +140,7 @@ Parent operation ID for nested operations
 
 > **startTime**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L40)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L40)
 
 Start timestamp (ms)
 
@@ -150,7 +150,7 @@ Start timestamp (ms)
 
 > **status**: [`OperationStatus`](../type-aliases/OperationStatus.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L38)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L38)
 
 Current status
 
@@ -160,7 +160,7 @@ Current status
 
 > `optional` **tags**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L62)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L62)
 
 Tags for filtering
 
@@ -170,6 +170,6 @@ Tags for filtering
 
 > **type**: [`OperationType`](../type-aliases/OperationType.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L36)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L36)
 
 Operation type

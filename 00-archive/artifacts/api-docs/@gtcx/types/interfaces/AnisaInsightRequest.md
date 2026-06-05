@@ -6,7 +6,7 @@
 
 # Interface: AnisaInsightRequest
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L170)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L170)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:170]
 
 > **context**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L172)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L172)
 
 #### industry?
 
@@ -34,7 +34,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:172]
 
 > `optional` **depth**: `"brief"` \| `"detailed"` \| `"comprehensive"`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L177)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L177)
 
 ***
 
@@ -42,4 +42,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:177]
 
 > **topic**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L171)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L171)

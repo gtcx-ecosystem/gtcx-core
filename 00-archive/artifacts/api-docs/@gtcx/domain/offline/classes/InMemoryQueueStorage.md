@@ -6,7 +6,7 @@
 
 # Class: InMemoryQueueStorage
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:468](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L468)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:468](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L468)
 
 ## Implements
 
@@ -28,7 +28,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:479](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L479)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:479](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L479)
 
 #### Returns
 
@@ -44,7 +44,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **load**(): `Promise`\<[`QueuedOperation`](../interfaces/QueuedOperation.md)\<`unknown`\>[]\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:475](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L475)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:475](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L475)
 
 #### Returns
 
@@ -60,7 +60,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **save**(`operations`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:471](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L471)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:471](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L471)
 
 #### Parameters
 

@@ -66,7 +66,7 @@ review_cycle: 'on-change'
 | Groth16 ZKP (commodity origin)     | **Beta**        | `rust/gtcx-zkp` tests pass; TS bindings in `03-platform/packages/crypto/`                         | `gtcx-markets`        |
 | Groth16 ZKP (diamond origin)       | **Beta**        | Thin wrapper over commodity origin circuit                                                        | `gtcx-markets`        |
 | Bulletproofs range proof           | **Production**  | `rust/gtcx-zkp` tests pass                                                                        | `gtcx-markets`        |
-| Bulletproofs commodity range       | **Beta**        | Commodity/unit hash binding; `03-platform/packages/crypto/03-platform/src/zkp-commodity-range.ts` | `gtcx-markets`        |
+| Bulletproofs commodity range       | **Beta**        | Commodity/unit hash binding; `03-platform/packages/crypto/src/zkp-commodity-range.ts` | `gtcx-markets`        |
 | Schnorr identity proof             | **Production**  | `rust/gtcx-zkp` tests pass                                                                        | `gtcx-protocols`      |
 | Offline queue with durable storage | **Production**  | `03-platform/packages/sync/tests/offline-queue.test.ts`                                           | `gtcx-markets` mobile |
 | Connectivity profile detection     | **Production**  | `03-platform/packages/connectivity/tests/connectivity.test.ts`                                    | All mobile clients    |
@@ -277,7 +277,7 @@ Detailed roadmap: [`01-docs/05-audit/10-10-roadmap-2026-05-11.md`](../audit/10-1
 | `01-docs/09-security/threat-control-matrix.md`                    | Security controls                   | Security engineers, auditors |
 | `01-docs/10-compliance/soc2-readiness.md`                         | SOC 2 evidence                      | Compliance, buyers           |
 | `01-docs/08-gtm/00-executive-brief.md`                            | Executive summary                   | Investors, board             |
-| `01-docs/specs/03-platform/packages/README.md`                    | Package specs                       | Engineers, integrators       |
+| `01-docs/specs/packages/README.md`                    | Package specs                       | Engineers, integrators       |
 | `01-docs/decisions/adr-index.md`                                  | Architecture decisions              | Engineers, architects        |
 | `CONTRIBUTING.md`                                                 | Contribution guide                  | Open-source contributors     |
 | `CLAUDE.md`                                                       | Agent context                       | AI agents, new developers    |

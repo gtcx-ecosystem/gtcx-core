@@ -8,7 +8,7 @@
 
 > **deprecated**(`info`): (`target`, `propertyKey`, `descriptor`) => `PropertyDescriptor`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L88)
+Defined in: [03-platform/packages/domain/src/versioning.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L88)
 
 Decorator to mark methods as deprecated
 Logs warning when method is called

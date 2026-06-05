@@ -6,7 +6,7 @@
 
 # Interface: SyncConflict\<T\>
 
-Defined in: [types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L25)
+Defined in: [types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L25)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **id**: `string`
 
-Defined in: [types.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L26)
+Defined in: [types.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L26)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **local**: [`SyncItem`](SyncItem.md)\<`T`\>[]
 
-Defined in: [types.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L27)
+Defined in: [types.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L27)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [types.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **remote**: [`SyncItem`](SyncItem.md)\<`T`\>
 
-Defined in: [types.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L28)
+Defined in: [types.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L28)

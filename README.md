@@ -41,7 +41,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./01-docs/te
 - HSM key storage traits implemented for PKCS11 (SoftHSM, AWS CloudHSM) and AWS KMS Cloud Custody
 - 500,000+ fuzz iterations across 6 cargo-fuzz targets, **zero crashes, zero panics, zero ASAN violations** ([evidence](./01-docs/05-audit/fuzz-campaign-evidence-2026-05-21.md))
 - `cargo deny` and `cargo audit` run in CI; known upstream advisories in the `ark-*` ecosystem are tracked in `rust/.cargo/audit.toml`
-- **24** TypeScript workspace packages under `03-platform/packages/` (see [package specs](./01-docs/specs/03-platform/packages/README.md)); **22** published to npm on the **3.1.4 train** — verify: `pnpm provenance:check-npm:strict`
+- **24** TypeScript workspace packages under `03-platform/packages/` (see [package specs](./01-docs/specs/packages/README.md)); **22** published to npm on the **3.1.4 train** — verify: `pnpm provenance:check-npm:strict`
 - SLSA: Source L2 enforced in CI; npm registry provenance via `release.yml` — see [trust portal](./01-docs/governance/trust-portal.md#published-versions)
 - Root `pnpm typecheck` / `pnpm build` green (turbo graph; FA-P0-1, 2026-06-04)
 
@@ -147,7 +147,7 @@ Coverage numbers reflect the [2026-05-21 internal completion audit](./01-docs/05
 
 ### Shared Config Workspace Packages (4)
 
-These live under [`03-platform/packages/config`](./03-platform/packages/config) and support the monorepo/tooling layer rather than the main runtime API surface:
+These live under [`03-platform/packages/config`](./packages/config) and support the monorepo/tooling layer rather than the main runtime API surface:
 
 | Package                                                                   | Description                               |
 | ------------------------------------------------------------------------- | ----------------------------------------- |
@@ -230,8 +230,8 @@ core/
 | [Safety Rules](./01-docs/01-agents/workflows/safety-rules.md)           | What requires human approval                      |
 | [Architecture Overview](./01-docs/architecture/overview.md)             | Layer map, trust boundaries, package graph        |
 | [ADR Index](./01-docs/decisions/README.md)                              | All 14 architecture decision records              |
-| [Package Specs](./01-docs/specs/03-platform/packages/README.md)         | Per-package API and responsibility specs          |
-| [Rust Crate Specs](./01-docs/specs/03-platform/packages/rust/)          | Rust crate specs and build targets                |
+| [Package Specs](./01-docs/specs/packages/README.md)         | Per-package API and responsibility specs          |
+| [Rust Crate Specs](./01-docs/specs/packages/rust/)          | Rust crate specs and build targets                |
 | [Security Framework](./01-docs/09-security/security-framework.md)       | Security architecture and controls                |
 | [Quality Runbook](./01-docs/devops/runbooks/quality-runbook.md)         | CI triage order and gate sequence                 |
 | [Release Checklist](./01-docs/devops/release-mgmt/release-checklist.md) | Release gate and evidence requirements            |

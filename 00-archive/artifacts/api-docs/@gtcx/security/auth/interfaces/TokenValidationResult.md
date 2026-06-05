@@ -6,7 +6,7 @@
 
 # Interface: TokenValidationResult
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L71)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L71)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:71](ht
 
 > `optional` **claims**: `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L75)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L75)
 
 #### aud?
 
@@ -74,7 +74,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:75](ht
 
 > `optional` **error**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L76)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L76)
 
 ***
 
@@ -82,7 +82,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:76](ht
 
 > **expired**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L73)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L73)
 
 ***
 
@@ -90,7 +90,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:73](ht
 
 > **notYetValid**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L74)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L74)
 
 ***
 
@@ -98,4 +98,4 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:74](ht
 
 > **valid**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L72)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L72)

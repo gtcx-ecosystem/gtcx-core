@@ -6,7 +6,7 @@
 
 # Interface: QRCodeConfig
 
-Defined in: [03-platform/packages/verification/03-platform/src/qr/generator.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/qr/generator.ts#L27)
+Defined in: [03-platform/packages/verification/src/qr/generator.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/qr/generator.ts#L27)
 
 Configuration for QR code generation
 
@@ -16,7 +16,7 @@ Configuration for QR code generation
 
 > **certificateIdPattern**: `RegExp`
 
-Defined in: [03-platform/packages/verification/03-platform/src/qr/generator.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/qr/generator.ts#L33)
+Defined in: [03-platform/packages/verification/src/qr/generator.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/qr/generator.ts#L33)
 
 Certificate ID pattern for validation
 
@@ -26,7 +26,7 @@ Certificate ID pattern for validation
 
 > **defaultSize**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/qr/generator.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/qr/generator.ts#L31)
+Defined in: [03-platform/packages/verification/src/qr/generator.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/qr/generator.ts#L31)
 
 Default QR code size in pixels
 
@@ -36,7 +36,7 @@ Default QR code size in pixels
 
 > **maxCertificateAge**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/qr/generator.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/qr/generator.ts#L35)
+Defined in: [03-platform/packages/verification/src/qr/generator.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/qr/generator.ts#L35)
 
 Maximum age for valid certificates (ms)
 
@@ -46,6 +46,6 @@ Maximum age for valid certificates (ms)
 
 > **verifyBaseUrl**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/qr/generator.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/qr/generator.ts#L29)
+Defined in: [03-platform/packages/verification/src/qr/generator.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/qr/generator.ts#L29)
 
 Base URL for verification endpoint

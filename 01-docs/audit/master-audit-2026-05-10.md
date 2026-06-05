@@ -37,7 +37,7 @@ _Score updated 2026-05-11 after Sprint 1 close: CloudKmsKeyStore shipped, Source
 
 - Implement the deferred cloud-managed `KeyStore` backend path after the Rust toolchain bump documented in `rust/gtcx-crypto/03-platform/src/keystore.rs:3-6` and `01-docs/09-security/cloud-kms-keystore.md:3-20`.
 - Enforce signed-commit provenance and move from Source Level 1 to Source Level 2 as documented in `01-docs/09-security/slsa-attestation.md:124-150`.
-- ~~Close the remaining structural debt in `03-platform/packages/verification/03-platform/src/types/schemas.ts:1` (605 LOC)~~ **CLOSED 2026-05-11.** Decomposed into `schemas/enums.ts`, `schemas/primitives.ts`, `schemas/entities.ts`, `schemas/commodity.ts`. Downstream imports preserved via barrel re-export. TypeScript typecheck and all 241 tests pass.
+- ~~Close the remaining structural debt in `03-platform/packages/verification/src/types/schemas.ts:1` (605 LOC)~~ **CLOSED 2026-05-11.** Decomposed into `schemas/enums.ts`, `schemas/primitives.ts`, `schemas/entities.ts`, `schemas/commodity.ts`. Downstream imports preserved via barrel re-export. TypeScript typecheck and all 241 tests pass.
 
 ---
 
@@ -311,7 +311,7 @@ Net result: no code regressions were introduced during the docs-standard work, a
 
 **Goal:** reduce maintainability hotspots.
 
-- Decompose `03-platform/packages/verification/03-platform/src/types/schemas.ts:1` into smaller modules.
+- Decompose `03-platform/packages/verification/src/types/schemas.ts:1` into smaller modules.
 - Acceptance: file length falls below the repo threshold or is formally exception-documented with rationale.
 
 ### Sprint 6
@@ -331,7 +331,7 @@ Net result: no code regressions were introduced during the docs-standard work, a
 | P1       | Ship `CloudKmsKeyStore` and required toolchain / algorithm work                                  | Cryptographic Security Engineer | Rust 1.91+ adoption          | 2026-06-15 | +0.3 core / +0.4 enterprise |
 | P1       | Enforce signed commits on `main` and document contributor signing flow                           | Repo maintainer                 | Human + bot key provisioning | 2026-05-24 | +0.2 core / +0.3 enterprise |
 | P1       | Engage external pen test and surface status in trust portal                                      | Repo lead                       | External vendor scheduling   | 2026-06-30 | +0.2 core / +0.4 enterprise |
-| P2       | Split `03-platform/packages/verification/03-platform/src/types/schemas.ts` or formally exempt it | Verification owner              | None                         | 2026-05-31 | +0.1 core / +0.1 investor   |
+| P2       | Split `03-platform/packages/verification/src/types/schemas.ts` or formally exempt it | Verification owner              | None                         | 2026-05-31 | +0.1 core / +0.1 investor   |
 | P2       | Rationalize remaining legacy docs top-level dirs                                                 | Protocol Architect              | Downstream link review       | 2026-08-10 | +0.1 core / +0.1 sovereign  |
 
 ---

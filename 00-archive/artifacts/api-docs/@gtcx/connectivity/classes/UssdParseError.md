@@ -6,7 +6,7 @@
 
 # Class: UssdParseError
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/parser.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/parser.ts#L4)
+Defined in: [03-platform/packages/connectivity/src/ussd/parser.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/parser.ts#L4)
 
 Error thrown when an incoming payload cannot be parsed as a valid USSD request.
 
@@ -20,7 +20,7 @@ Error thrown when an incoming payload cannot be parsed as a valid USSD request.
 
 > **new UssdParseError**(`message`): `UssdParseError`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/parser.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/parser.ts#L5)
+Defined in: [03-platform/packages/connectivity/src/ussd/parser.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/parser.ts#L5)
 
 #### Parameters
 

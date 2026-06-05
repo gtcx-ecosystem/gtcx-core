@@ -6,7 +6,7 @@
 
 # Interface: ZkFullVerifier
 
-Defined in: [zkp.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L39)
+Defined in: [zkp.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L39)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [zkp.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52
 
 > **getVerificationKey**(`proofType`): `Promise`\<`Uint8Array`\<`ArrayBufferLike`\>\>
 
-Defined in: [zkp.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L40)
+Defined in: [zkp.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L40)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [zkp.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52
 
 > **verify**(`proof`): `Promise`\<`boolean`\>
 
-Defined in: [zkp.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L36)
+Defined in: [zkp.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L36)
 
 #### Parameters
 

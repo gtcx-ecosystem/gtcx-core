@@ -8,7 +8,7 @@
 
 > **logComplianceEvent**(`event`): `void`
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/compliance.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/compliance.ts#L9)
+Defined in: [03-platform/packages/verification/src/traced/compliance.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/compliance.ts#L9)
 
 ## Parameters
 

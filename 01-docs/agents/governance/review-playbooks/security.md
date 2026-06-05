@@ -44,8 +44,8 @@ review_cycle: 'on-change'
 **Violation pattern:**
 
 - Diff adds a `traced(...)` call with `logInput: true` or `logOutput: true` and an explicit sanitizer that does not redact secrets
-- Diff modifies `03-platform/packages/ai/03-platform/src/index.ts` to remove `redactSecrets` from the default-sanitizer fallback
-- Diff weakens the `REDACTED_KEY_PATTERNS` list in `03-platform/packages/ai/03-platform/src/index.ts`
+- Diff modifies `03-platform/packages/ai/src/index.ts` to remove `redactSecrets` from the default-sanitizer fallback
+- Diff weakens the `REDACTED_KEY_PATTERNS` list in `03-platform/packages/ai/src/index.ts`
 
 **Category:** `redaction-bypass`
 **Severity:** `critical`
@@ -55,7 +55,7 @@ review_cycle: 'on-change'
 
 ## 2. STRIDE delta for security-surface changes
 
-**Rule:** Any diff touching `03-platform/packages/security/03-platform/src/` or `03-platform/packages/identity/03-platform/src/` requires a corresponding entry in the STRIDE table in `01-docs/09-security/threat-model.md` — either a new row for new attack surfaces, or a modification to an existing mitigation when the change alters how a threat is countered.
+**Rule:** Any diff touching `03-platform/packages/security/src/` or `03-platform/packages/identity/src/` requires a corresponding entry in the STRIDE table in `01-docs/09-security/threat-model.md` — either a new row for new attack surfaces, or a modification to an existing mitigation when the change alters how a threat is countered.
 
 **Violation pattern:**
 
@@ -70,11 +70,11 @@ review_cycle: 'on-change'
 
 ## 3. SecurityLogger strict-mode preserved
 
-**Rule:** `SecurityLogger` operates in strict mode in production paths. Diff must not introduce `strict: false` in `03-platform/packages/security/03-platform/src/audit/` or downstream production code.
+**Rule:** `SecurityLogger` operates in strict mode in production paths. Diff must not introduce `strict: false` in `03-platform/packages/security/src/audit/` or downstream production code.
 
 **Violation pattern:**
 
-- Diff adds `new SecurityLogger({ strict: false, ... })` in `03-platform/packages/security/03-platform/src/`
+- Diff adds `new SecurityLogger({ strict: false, ... })` in `03-platform/packages/security/src/`
 - Diff modifies the SecurityLogger constructor to make non-strict the default
 - Diff removes the strict-mode enforcement check
 
@@ -85,7 +85,7 @@ review_cycle: 'on-change'
 
 ## 4. Token lifecycle invariants
 
-**Rule:** Modifications to `03-platform/packages/security/03-platform/src/auth/` must preserve the four token lifecycle phases: creation, validation, expiry, revocation. Removing any phase or short-circuiting any check is a critical finding.
+**Rule:** Modifications to `03-platform/packages/security/src/auth/` must preserve the four token lifecycle phases: creation, validation, expiry, revocation. Removing any phase or short-circuiting any check is a critical finding.
 
 **Violation pattern:**
 
@@ -100,11 +100,11 @@ review_cycle: 'on-change'
 
 ## 5. AES-GCM nonce uniqueness
 
-**Rule:** Every encryption operation in `03-platform/packages/security/03-platform/src/offline/storage.ts` must use a fresh, unique IV. Reusing an IV with the same key catastrophically breaks AES-GCM confidentiality and authenticity.
+**Rule:** Every encryption operation in `03-platform/packages/security/src/offline/storage.ts` must use a fresh, unique IV. Reusing an IV with the same key catastrophically breaks AES-GCM confidentiality and authenticity.
 
 **Violation pattern:**
 
-- Diff adds an `encrypt(...)` call in `03-platform/packages/security/03-platform/src/offline/storage.ts` (or its decomposed children) where the IV is a constant, derived from a non-random source, or a counter that may collide across processes
+- Diff adds an `encrypt(...)` call in `03-platform/packages/security/src/offline/storage.ts` (or its decomposed children) where the IV is a constant, derived from a non-random source, or a counter that may collide across processes
 - Diff caches an IV in a closure or class instance and reuses it
 
 **Category:** `cryptographic-correctness`
@@ -118,7 +118,7 @@ review_cycle: 'on-change'
 
 **Violation pattern:**
 
-- Diff adds `===` or `!==` in `03-platform/packages/security/03-platform/src/`, `03-platform/packages/identity/03-platform/src/` comparing token strings, signature buffers, or password hashes
+- Diff adds `===` or `!==` in `03-platform/packages/security/src/`, `03-platform/packages/identity/src/` comparing token strings, signature buffers, or password hashes
 - The relevant import of `secureCompare` is missing
 
 **Category:** `constant-time`
@@ -128,11 +128,11 @@ review_cycle: 'on-change'
 
 ## 7. No `console.log` in production paths
 
-**Rule:** `03-platform/packages/*/03-platform/src/` may emit `console.warn` and `console.error` (allowed by ESLint rule `no-console`). `console.log` and `console.debug` are forbidden in source. They risk leaking secret values bypassing the redaction layer.
+**Rule:** `03-platform/packages/*/src/` may emit `console.warn` and `console.error` (allowed by ESLint rule `no-console`). `console.log` and `console.debug` are forbidden in source. They risk leaking secret values bypassing the redaction layer.
 
 **Violation pattern:**
 
-- Diff adds `console.log` or `console.debug` anywhere in `03-platform/packages/*/03-platform/src/`
+- Diff adds `console.log` or `console.debug` anywhere in `03-platform/packages/*/src/`
 
 **Category:** `secret-leakage`
 **Severity:** `medium`
@@ -142,7 +142,7 @@ review_cycle: 'on-change'
 
 ## 8. Audit events for privileged operations
 
-**Rule:** New functions in `03-platform/packages/security/03-platform/src/` or `03-platform/packages/identity/03-platform/src/` that perform privileged actions (token issuance, permission grant, credential rotation, key destruction) must emit a `logSecurityEvent` call.
+**Rule:** New functions in `03-platform/packages/security/src/` or `03-platform/packages/identity/src/` that perform privileged actions (token issuance, permission grant, credential rotation, key destruction) must emit a `logSecurityEvent` call.
 
 **Violation pattern:**
 
@@ -171,11 +171,11 @@ review_cycle: 'on-change'
 
 ## 10. Offline queue checksum metadata
 
-**Rule:** `03-platform/packages/security/03-platform/src/offline/` operations preserve checksum metadata on every queued item. Removing checksum write or read paths breaks tamper detection on sync.
+**Rule:** `03-platform/packages/security/src/offline/` operations preserve checksum metadata on every queued item. Removing checksum write or read paths breaks tamper detection on sync.
 
 **Violation pattern:**
 
-- Diff removes a checksum field from an interface in `03-platform/packages/security/03-platform/src/offline/types.ts`
+- Diff removes a checksum field from an interface in `03-platform/packages/security/src/offline/types.ts`
 - Diff removes a checksum write call in `storage.ts`
 - Diff adds a code path that reads queued items without verifying checksum
 
@@ -187,7 +187,7 @@ review_cycle: 'on-change'
 
 ## 11. DID resolution validates resolved documents
 
-**Rule:** `03-platform/packages/identity/03-platform/src/` resolution paths must run resolved DID documents through Zod schema validation before consumption. Skipping validation enables DID-document spoofing.
+**Rule:** `03-platform/packages/identity/src/` resolution paths must run resolved DID documents through Zod schema validation before consumption. Skipping validation enables DID-document spoofing.
 
 **Violation pattern:**
 

@@ -116,7 +116,7 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 
 | Field          | Value                                                                                                                                                                               |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Paths**      | `rust/gtcx-zkp/03-platform/src/circuit_profiles/`, `03-platform/packages/workproof/03-platform/src/circuit-profiles/`, `01-docs/specs/03-platform/packages/zkp-circuit-profiles.md` |
+| **Paths**      | `rust/gtcx-zkp/03-platform/src/circuit_profiles/`, `03-platform/packages/workproof/src/circuit-profiles/`, `01-docs/specs/packages/zkp-circuit-profiles.md` |
 | **Acceptance** | No forked circuit; profile config drives GPS bounds, purity/weight, cert mask; negative test per constraint group on `CommodityOrigin`                                              |
 | **Gates**      | `cargo test -p gtcx-zkp circuit_profiles`, `pnpm test --filter @gtcx/workproof`                                                                                                     |
 

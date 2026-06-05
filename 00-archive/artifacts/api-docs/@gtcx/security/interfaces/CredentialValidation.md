@@ -6,7 +6,7 @@
 
 # Interface: CredentialValidation
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L208)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L208)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > `optional` **message**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L212)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L212)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > `optional` **reason**: `"EXPIRED"` \| `"REVOKED"` \| `"OFFLINE_EXPIRED"` \| `"CHAIN_INVALID"`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:210](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L210)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:210](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L210)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > **valid**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:209](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L209)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:209](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L209)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > `optional` **warning**: `"REVOCATION_CHECK_STALE"`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:211](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L211)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:211](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L211)

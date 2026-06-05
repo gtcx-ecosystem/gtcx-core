@@ -6,7 +6,7 @@
 
 # Class: SecurityLoggerError
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L97)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L97)
 
 Error thrown when the security logger is misconfigured in strict mode.
 
@@ -20,7 +20,7 @@ Error thrown when the security logger is misconfigured in strict mode.
 
 > **new SecurityLoggerError**(`message`): `SecurityLoggerError`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L98)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L98)
 
 #### Parameters
 

@@ -8,7 +8,7 @@
 
 > **migrateAndUnwrap**\<`T`\>(`data`, `entityType`): `T`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:353](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L353)
+Defined in: [03-platform/packages/domain/src/migrations.ts:353](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L353)
 
 Migrate and unwrap in one step
 

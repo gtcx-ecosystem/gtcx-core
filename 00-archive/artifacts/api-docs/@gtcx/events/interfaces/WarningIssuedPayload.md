@@ -6,7 +6,7 @@
 
 # Interface: WarningIssuedPayload
 
-Defined in: [types.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L198)
+Defined in: [types.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L198)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **checkId**: `string`
 
-Defined in: [types.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L200)
+Defined in: [types.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L200)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **description**: `string`
 
-Defined in: [types.ts:205](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L205)
+Defined in: [types.ts:205](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L205)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:205](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **entityId**: `string`
 
-Defined in: [types.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L201)
+Defined in: [types.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L201)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **entityType**: `string`
 
-Defined in: [types.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L202)
+Defined in: [types.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L202)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [types.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **recordId**: `string`
 
-Defined in: [types.ts:199](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L199)
+Defined in: [types.ts:199](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L199)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [types.ts:199](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **regulationCode**: `string`
 
-Defined in: [types.ts:204](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L204)
+Defined in: [types.ts:204](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L204)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [types.ts:204](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **severity**: `"medium"` \| `"low"`
 
-Defined in: [types.ts:203](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L203)
+Defined in: [types.ts:203](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L203)

@@ -92,11 +92,11 @@ Schema changes that add required fields or change validation rules are breaking 
 
 ## Implementation
 
-`03-platform/packages/schemas/03-platform/src/`
+`03-platform/packages/schemas/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/types.md`](./types.md) — base types
+- [`01-docs/specs/packages/types.md`](./types.md) — base types
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

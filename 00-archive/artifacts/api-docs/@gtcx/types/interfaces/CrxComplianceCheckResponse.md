@@ -6,7 +6,7 @@
 
 # Interface: CrxComplianceCheckResponse
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L46)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L46)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:46](htt
 
 > `optional` **attestationId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L58)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L58)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:58](htt
 
 > **checkId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L47)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L47)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:47](htt
 
 > **passed**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L51)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L51)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:51](htt
 
 > **results**: `object`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L52)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L52)
 
 #### issues
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:52](htt
 
 > **score**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L49)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L49)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:49](htt
 
 > **subjectId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L48)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L48)
 
 ***
 
@@ -78,4 +78,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:48](htt
 
 > **tier**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L50)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L50)

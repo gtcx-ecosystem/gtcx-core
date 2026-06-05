@@ -6,7 +6,7 @@
 
 # Class: UssdSession
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L12)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L12)
 
 In-memory USSD session manager.
 
@@ -20,7 +20,7 @@ scale-out requires an external session store.
 
 > **new UssdSession**(`options?`): `UssdSession`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L16)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L16)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:1
 
 > **cleanup**(): `number`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:87](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L87)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:87](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L87)
 
 Remove all sessions that have exceeded their TTL. Returns the number removed.
 
@@ -52,7 +52,7 @@ Remove all sessions that have exceeded their TTL. Returns the number removed.
 
 > **clear**(): `void`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L117)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L117)
 
 Clear every session.
 
@@ -66,7 +66,7 @@ Clear every session.
 
 > **count**(): `number`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L100)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L100)
 
 Return the number of active (non-expired) sessions.
 
@@ -80,7 +80,7 @@ Return the number of active (non-expired) sessions.
 
 > **create**(`sessionId`, `phoneNumber`): [`UssdSessionData`](../interfaces/UssdSessionData.md)
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L25)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L25)
 
 Create a new session or replace an existing one.
 
@@ -106,7 +106,7 @@ The newly created session data.
 
 > **destroy**(`sessionId`): `boolean`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L75)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L75)
 
 Remove a session permanently.
 
@@ -126,7 +126,7 @@ Remove a session permanently.
 
 > **get**(`sessionId`): [`UssdSessionData`](../interfaces/UssdSessionData.md) \| `undefined`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L40)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L40)
 
 Retrieve a session by ID, or `undefined` if not found.
 
@@ -146,7 +146,7 @@ Retrieve a session by ID, or `undefined` if not found.
 
 > **isExpired**(`sessionId`): `boolean`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L80)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L80)
 
 Check whether a session has exceeded its TTL.
 
@@ -166,7 +166,7 @@ Check whether a session has exceeded its TTL.
 
 > **size**(): `number`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L112)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L112)
 
 Return the total number of sessions in the registry (including expired).
 
@@ -180,7 +180,7 @@ Return the total number of sessions in the registry (including expired).
 
 > **update**(`sessionId`, `updates`): [`UssdSessionData`](../interfaces/UssdSessionData.md) \| `undefined`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/session.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/session.ts#L50)
+Defined in: [03-platform/packages/connectivity/src/ussd/session.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/session.ts#L50)
 
 Update session state and/or accumulated data.
 

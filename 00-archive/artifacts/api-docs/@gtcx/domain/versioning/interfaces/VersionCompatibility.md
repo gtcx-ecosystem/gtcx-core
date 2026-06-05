@@ -6,7 +6,7 @@
 
 # Interface: VersionCompatibility
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L115)
+Defined in: [03-platform/packages/domain/src/versioning.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L115)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:115](http
 
 > **clientVersion**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L117)
+Defined in: [03-platform/packages/domain/src/versioning.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L117)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:117](http
 
 > **compatible**: `boolean`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L116)
+Defined in: [03-platform/packages/domain/src/versioning.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L116)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:116](http
 
 > `optional` **errors**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L120)
+Defined in: [03-platform/packages/domain/src/versioning.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L120)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:120](http
 
 > **serverVersion**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L118)
+Defined in: [03-platform/packages/domain/src/versioning.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L118)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:118](http
 
 > `optional` **warnings**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L119)
+Defined in: [03-platform/packages/domain/src/versioning.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L119)

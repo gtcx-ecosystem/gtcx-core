@@ -6,7 +6,7 @@
 
 # Interface: Migration
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L38)
+Defined in: [03-platform/packages/domain/src/migrations.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L38)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:38](https
 
 > **description**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L48)
+Defined in: [03-platform/packages/domain/src/migrations.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L48)
 
 Migration description
 
@@ -24,7 +24,7 @@ Migration description
 
 > **entityTypes**: [`EntityType`](../type-aliases/EntityType.md)[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L46)
+Defined in: [03-platform/packages/domain/src/migrations.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L46)
 
 Entity types this migration applies to
 
@@ -34,7 +34,7 @@ Entity types this migration applies to
 
 > **fromVersion**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L42)
+Defined in: [03-platform/packages/domain/src/migrations.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L42)
 
 Source version
 
@@ -44,7 +44,7 @@ Source version
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L40)
+Defined in: [03-platform/packages/domain/src/migrations.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L40)
 
 Migration ID (semver format)
 
@@ -54,7 +54,7 @@ Migration ID (semver format)
 
 > **migrate**: (`data`) => `unknown`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L50)
+Defined in: [03-platform/packages/domain/src/migrations.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L50)
 
 Migration function
 
@@ -74,7 +74,7 @@ Migration function
 
 > `optional` **rollback**: (`data`) => `unknown`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L52)
+Defined in: [03-platform/packages/domain/src/migrations.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L52)
 
 Rollback function (optional)
 
@@ -94,6 +94,6 @@ Rollback function (optional)
 
 > **toVersion**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L44)
+Defined in: [03-platform/packages/domain/src/migrations.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L44)
 
 Target version

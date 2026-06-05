@@ -6,7 +6,7 @@
 
 # Interface: TradePassRevokedData
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L105)
+Defined in: [03-platform/packages/types/src/common/events.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L105)
 
 TradePass credential revoked.
 
@@ -16,7 +16,7 @@ TradePass credential revoked.
 
 > `optional` **accumulatorEpoch**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L111)
+Defined in: [03-platform/packages/types/src/common/events.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L111)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:111](ht
 
 > **credentialId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L106)
+Defined in: [03-platform/packages/types/src/common/events.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L106)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:106](ht
 
 > **reason**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L109)
+Defined in: [03-platform/packages/types/src/common/events.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L109)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:109](ht
 
 > **revokedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L110)
+Defined in: [03-platform/packages/types/src/common/events.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L110)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:110](ht
 
 > **revokedBy**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L108)
+Defined in: [03-platform/packages/types/src/common/events.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L108)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:108](ht
 
 > **subjectDid**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L107)
+Defined in: [03-platform/packages/types/src/common/events.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L107)

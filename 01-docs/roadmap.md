@@ -513,7 +513,7 @@ A release-attached evaluation pipeline that emits a JSON **AI scorecard** and, o
 - [`01-docs/08-gtm/00-executive-brief.md`](./gtm/00-executive-brief.md) — Executive brief
 - [`01-docs/08-gtm/08-target-markets.md`](./gtm/08-target-markets.md) — Target markets
 - [`01-docs/decisions/`](./decisions/) — All 14 ADRs
-- [`01-docs/specs/03-platform/packages/`](./specs/03-platform/packages/) — Per-package specs
+- [`01-docs/specs/packages/`](./specs/03-platform/packages/) — Per-package specs
 - [`AGENTS.md`](../AGENTS.md) — Agent instructions
 
 ---

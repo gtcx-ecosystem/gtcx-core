@@ -6,7 +6,7 @@
 
 # Interface: ApiResponse\<T\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L102)
+Defined in: [03-platform/packages/api-client/src/types.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L102)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:102](https
 
 > **data**: `T`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L103)
+Defined in: [03-platform/packages/api-client/src/types.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L103)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:103](https
 
 > **durationMs**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L106)
+Defined in: [03-platform/packages/api-client/src/types.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L106)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:106](https
 
 > **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L105)
+Defined in: [03-platform/packages/api-client/src/types.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L105)
 
 ***
 
@@ -44,4 +44,4 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:105](https
 
 > **status**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L104)
+Defined in: [03-platform/packages/api-client/src/types.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L104)

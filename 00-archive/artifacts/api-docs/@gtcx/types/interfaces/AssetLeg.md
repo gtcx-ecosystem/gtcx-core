@@ -6,7 +6,7 @@
 
 # Interface: AssetLeg
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L117)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L117)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:117](ht
 
 > `optional` **confirmedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L123)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L123)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:123](ht
 
 > `optional` **custodyTransferId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L121)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L121)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:121](ht
 
 > **deliveryMethod**: [`DeliveryMethod`](../type-aliases/DeliveryMethod.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L122)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L122)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:122](ht
 
 > **from**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L118)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L118)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:118](ht
 
 > **lotId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L120)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L120)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:120](ht
 
 > `optional` **proof**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L124)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L124)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:124](ht
 
 > **to**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L119)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L119)

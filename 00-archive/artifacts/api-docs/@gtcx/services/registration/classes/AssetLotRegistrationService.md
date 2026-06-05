@@ -6,7 +6,7 @@
 
 # Class: AssetLotRegistrationService
 
-Defined in: [03-platform/packages/services/03-platform/src/registration.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration.ts#L60)
+Defined in: [03-platform/packages/services/src/registration.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration.ts#L60)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/registration.ts:60](h
 
 > **new AssetLotRegistrationService**(`dependencies`, `config?`): `AssetLotRegistrationService`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration.ts#L70)
+Defined in: [03-platform/packages/services/src/registration.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration.ts#L70)
 
 #### Parameters
 
@@ -58,7 +58,7 @@ Defined in: [03-platform/packages/services/03-platform/src/registration.ts:70](h
 
 > **calculateProgress**(`data`): `RegistrationProgress`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration.ts#L194)
+Defined in: [03-platform/packages/services/src/registration.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration.ts#L194)
 
 Calculate registration progress
 
@@ -78,7 +78,7 @@ Calculate registration progress
 
 > **getWorkflowSteps**(): `WorkflowStep`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/registration.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration.ts#L121)
+Defined in: [03-platform/packages/services/src/registration.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration.ts#L121)
 
 Get registration workflow steps
 Override-able per commodity type
@@ -93,7 +93,7 @@ Override-able per commodity type
 
 > **registerAssetLot**(`data`): `Promise`\<`AssetLot`\>
 
-Defined in: [03-platform/packages/services/03-platform/src/registration.ts:241](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration.ts#L241)
+Defined in: [03-platform/packages/services/src/registration.ts:241](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration.ts#L241)
 
 Register a new asset lot
 Performs validation, generates cryptographic proof, and stores the lot
@@ -114,7 +114,7 @@ Performs validation, generates cryptographic proof, and stores the lot
 
 > **validateRegistrationData**(`data`): `ValidationResult`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration.ts#L183)
+Defined in: [03-platform/packages/services/src/registration.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration.ts#L183)
 
 Validate registration data with Zod schema
 Returns detailed validation errors for UI feedback

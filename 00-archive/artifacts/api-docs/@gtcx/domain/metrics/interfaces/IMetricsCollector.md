@@ -6,7 +6,7 @@
 
 # Interface: IMetricsCollector
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:89](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L89)
+Defined in: [03-platform/packages/domain/src/metrics.ts:89](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L89)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:89](https://
 
 > **gauge**(`name`, `value`, `labels?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L94)
+Defined in: [03-platform/packages/domain/src/metrics.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L94)
 
 Set a gauge value
 
@@ -42,7 +42,7 @@ Set a gauge value
 
 > **getMetrics**(): [`Metric`](Metric.md)[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L103)
+Defined in: [03-platform/packages/domain/src/metrics.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L103)
 
 Get all metrics
 
@@ -56,7 +56,7 @@ Get all metrics
 
 > **histogram**(`name`, `value`, `labels?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L97)
+Defined in: [03-platform/packages/domain/src/metrics.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L97)
 
 Record a histogram observation
 
@@ -84,7 +84,7 @@ Record a histogram observation
 
 > **increment**(`name`, `labels?`, `value?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L91)
+Defined in: [03-platform/packages/domain/src/metrics.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L91)
 
 Increment a counter
 
@@ -112,7 +112,7 @@ Increment a counter
 
 > **reset**(): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L109)
+Defined in: [03-platform/packages/domain/src/metrics.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L109)
 
 Reset all metrics
 
@@ -126,7 +126,7 @@ Reset all metrics
 
 > **summary**(`name`, `value`, `labels?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L100)
+Defined in: [03-platform/packages/domain/src/metrics.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L100)
 
 Record a summary observation
 
@@ -154,7 +154,7 @@ Record a summary observation
 
 > **toPrometheus**(): `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L106)
+Defined in: [03-platform/packages/domain/src/metrics.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L106)
 
 Get metrics in Prometheus format
 

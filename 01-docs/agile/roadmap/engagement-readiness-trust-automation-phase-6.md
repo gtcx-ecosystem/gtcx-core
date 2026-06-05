@@ -24,7 +24,7 @@ Runs in parallel with Sprint 4 external compliance; does not block sovereign san
 | 6.1 | CI scorecard artifact   | `.github/workflows/ci.yml`, `03-platform/packages/ai-eval/`                       | M      | `pnpm ai:evaluate --output artifacts/ai-scorecard.json` uploaded per `main` build |
 | 6.2 | GA evidence integration | `03-platform/tools/generate-ga-evidence-summary.mjs`, `release:ga:evidence:check` | S      | Release evidence fails if scorecard missing or stale                              |
 | 6.3 | Trust portal link       | `01-docs/governance/trust-portal.md`                                              | S      | Regulators can download scorecard for each published npm version                  |
-| 6.4 | Spec-drift rules        | `03-platform/packages/ai-eval/03-platform/src/`                                   | M      | Scorecard flags README blockers + package-count drift vs `architecture:check`     |
+| 6.4 | Spec-drift rules        | `03-platform/packages/ai-eval/src/`                                   | M      | Scorecard flags README blockers + package-count drift vs `architecture:check`     |
 
 **Canonical roadmap:** [01-docs/roadmap.md §4.10](../../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat)
 

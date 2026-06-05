@@ -6,7 +6,7 @@
 
 # Interface: IPriceService
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:454](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L454)
+Defined in: [03-platform/packages/domain/src/types.ts:454](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L454)
 
 Price service interface
 
@@ -16,7 +16,7 @@ Price service interface
 
 > **getExchangeRate**(`from`, `to`): `Promise`\<`number`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:456](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L456)
+Defined in: [03-platform/packages/domain/src/types.ts:456](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L456)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:456](https://g
 
 > **getMarketPrice**(`commodityType`, `source?`): `Promise`\<`number`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:455](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L455)
+Defined in: [03-platform/packages/domain/src/types.ts:455](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L455)
 
 #### Parameters
 

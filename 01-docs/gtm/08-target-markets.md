@@ -111,7 +111,7 @@ Month 6:  Submit Zambia + Ghana applications
 | Emeralds  | —         | —         | Secondary | —         | —       |
 | Uranium   | —         | Primary   | —         | —         | —       |
 
-All 12 commodities above are already configured in gtcx-core's commodity-agnostic domain model (`03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts`). Zero code changes required per market.
+All 12 commodities above are already configured in gtcx-core's commodity-agnostic domain model (`03-platform/packages/verification/src/types/definitions/commodities.ts`). Zero code changes required per market.
 
 ---
 

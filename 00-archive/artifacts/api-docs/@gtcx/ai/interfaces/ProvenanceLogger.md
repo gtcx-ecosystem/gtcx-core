@@ -6,7 +6,7 @@
 
 # Interface: ProvenanceLogger
 
-Defined in: [provenance.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/provenance.ts#L59)
+Defined in: [provenance.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/provenance.ts#L59)
 
 Logger that emits structured provenance records to stderr.
 
@@ -18,7 +18,7 @@ Useful for audit trails and downstream policy-gate consumption.
 
 > **logEvaluation**(`provenance`, `action`, `reason`, `context?`): `void`
 
-Defined in: [provenance.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/provenance.ts#L61)
+Defined in: [provenance.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/provenance.ts#L61)
 
 #### Parameters
 
@@ -48,7 +48,7 @@ Defined in: [provenance.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/
 
 > **logProvenance**(`provenance`, `context?`): `void`
 
-Defined in: [provenance.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/provenance.ts#L60)
+Defined in: [provenance.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/provenance.ts#L60)
 
 #### Parameters
 

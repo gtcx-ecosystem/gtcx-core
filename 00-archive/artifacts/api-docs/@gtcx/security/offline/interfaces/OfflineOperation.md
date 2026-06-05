@@ -6,7 +6,7 @@
 
 # Interface: OfflineOperation
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:209](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L209)
+Defined in: [03-platform/packages/security/src/offline/types.ts:209](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L209)
 
 Offline operation record
 
@@ -16,7 +16,7 @@ Offline operation record
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:213](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L213)
+Defined in: [03-platform/packages/security/src/offline/types.ts:213](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L213)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:213]
 
 > **success**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L212)
+Defined in: [03-platform/packages/security/src/offline/types.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L212)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:212]
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:211](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L211)
+Defined in: [03-platform/packages/security/src/offline/types.ts:211](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L211)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:211]
 
 > **type**: [`OfflineOperationType`](../type-aliases/OfflineOperationType.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:210](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L210)
+Defined in: [03-platform/packages/security/src/offline/types.ts:210](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L210)

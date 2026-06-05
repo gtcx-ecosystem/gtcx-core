@@ -125,6 +125,6 @@ The weighted PBFT model tolerates up to ⅓ of total validator weight acting Byz
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/rust/gtcx-network.md`](./gtcx-network.md) — vote propagation transport
-- [`01-docs/specs/03-platform/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — vote signing
+- [`01-docs/specs/packages/rust/gtcx-network.md`](./gtcx-network.md) — vote propagation transport
+- [`01-docs/specs/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — vote signing
 - [`01-docs/specs/core-spec.md`](../../core-spec.md) — system overview

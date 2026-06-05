@@ -6,7 +6,7 @@
 
 # Interface: CulturalRecommendation
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L157)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L157)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:157]
 
 > **priority**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L159)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L159)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:159]
 
 > **rationale**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:161](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L161)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:161](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L161)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:161]
 
 > **recommendation**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:160](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L160)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:160](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L160)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:160]
 
 > **type**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:158](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L158)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:158](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L158)

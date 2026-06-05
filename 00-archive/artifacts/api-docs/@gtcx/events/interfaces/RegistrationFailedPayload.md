@@ -6,7 +6,7 @@
 
 # Interface: RegistrationFailedPayload
 
-Defined in: [types.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L91)
+Defined in: [types.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L91)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **commodityType**: `string`
 
-Defined in: [types.ts:93](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L93)
+Defined in: [types.ts:93](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L93)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:93](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **error**: `string`
 
-Defined in: [types.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L95)
+Defined in: [types.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L95)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **errorCode**: `string`
 
-Defined in: [types.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L96)
+Defined in: [types.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L96)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **producerId**: `string`
 
-Defined in: [types.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L94)
+Defined in: [types.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L94)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [types.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **sessionId**: `string`
 
-Defined in: [types.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L92)
+Defined in: [types.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L92)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [types.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **validationErrors**: `string`[]
 
-Defined in: [types.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L97)
+Defined in: [types.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L97)

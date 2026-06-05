@@ -8,7 +8,7 @@
 
 > **retry**\<`T`\>(`fn`, `options?`): `Promise`\<`T`\>
 
-Defined in: [index.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/utils/03-platform/src/index.ts#L122)
+Defined in: [index.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/utils/src/index.ts#L122)
 
 Retry a function with exponential backoff
 

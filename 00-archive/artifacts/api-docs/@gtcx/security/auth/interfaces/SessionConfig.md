@@ -6,7 +6,7 @@
 
 # Interface: SessionConfig
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L69)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L69)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:69](
 
 > **absoluteTimeoutSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L73)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L73)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:73](
 
 > **deviceBindingRequired**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L82)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L82)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:82](
 
 > **idleTimeoutSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L72)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L72)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:72](
 
 > **lockoutDurationSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L81)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L81)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:81](
 
 > **maxAgeSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L71)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L71)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:71](
 
 > **maxFailedAttempts**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L80)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L80)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:80](
 
 > **offlineMaxAgeSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L76)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L76)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:76](
 
 > **offlineSyncIntervalSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L77)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L77)
 
 ***
 
@@ -78,4 +78,4 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:77](
 
 > **rotationIntervalSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/sessions.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/sessions.ts#L85)
+Defined in: [03-platform/packages/security/src/auth/sessions.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/sessions.ts#L85)

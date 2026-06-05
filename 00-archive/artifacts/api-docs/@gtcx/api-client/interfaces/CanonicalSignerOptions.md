@@ -6,7 +6,7 @@
 
 # Interface: CanonicalSignerOptions
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L92)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L92)
 
 Options for creating a canonical signer.
 
@@ -20,7 +20,7 @@ Options for creating a canonical signer.
 
 > `optional` **algorithm**: `"ed25519"`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L54)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L54)
 
 Signing algorithm.
 
@@ -34,7 +34,7 @@ Signing algorithm.
 
 > `optional` **audience**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L96)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L96)
 
 Audience URL or origin. Defaults to request URL origin.
 
@@ -44,7 +44,7 @@ Audience URL or origin. Defaults to request URL origin.
 
 > `optional` **authScheme**: [`AuthScheme`](../type-aliases/AuthScheme.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L94)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L94)
 
 Authentication scheme to advertise.
 
@@ -54,7 +54,7 @@ Authentication scheme to advertise.
 
 > `optional` **clockSkewMs**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L56)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L56)
 
 Clock skew tolerance in milliseconds (default: 5 minutes).
 
@@ -68,7 +68,7 @@ Clock skew tolerance in milliseconds (default: 5 minutes).
 
 > `optional` **tokenTtlMs**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L98)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L98)
 
 Token TTL in milliseconds (default: 5 minutes).
 
@@ -78,7 +78,7 @@ Token TTL in milliseconds (default: 5 minutes).
 
 > `optional` **version**: `"v1"`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L52)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L52)
 
 Protocol version.
 

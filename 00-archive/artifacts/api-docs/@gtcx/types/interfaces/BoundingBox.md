@@ -6,7 +6,7 @@
 
 # Interface: BoundingBox
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:305](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L305)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:305](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L305)
 
 BoundingBox - Geographic boundary definition
 
@@ -16,7 +16,7 @@ BoundingBox - Geographic boundary definition
 
 > **east**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:308](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L308)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:308](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L308)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:308]
 
 > `optional` **maxAltitude**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:312](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L312)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:312](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L312)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:312]
 
 > `optional` **minAltitude**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:311](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L311)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:311](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L311)
 
 Optional altitude bounds
 
@@ -42,7 +42,7 @@ Optional altitude bounds
 
 > **north**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:306](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L306)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:306](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L306)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:306]
 
 > **south**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:307](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L307)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:307](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L307)
 
 ***
 
@@ -58,4 +58,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:307]
 
 > **west**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:309](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L309)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:309](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L309)

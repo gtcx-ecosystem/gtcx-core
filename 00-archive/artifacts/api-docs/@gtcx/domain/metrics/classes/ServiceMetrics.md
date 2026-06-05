@@ -6,7 +6,7 @@
 
 # Class: ServiceMetrics
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:407](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L407)
+Defined in: [03-platform/packages/domain/src/metrics.ts:407](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L407)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:407](https:/
 
 > **new ServiceMetrics**(`collector`, `prefix`): `ServiceMetrics`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:411](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L411)
+Defined in: [03-platform/packages/domain/src/metrics.ts:411](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L411)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:411](https:/
 
 > **failure**(`operation`, `duration`, `errorCode`, `labels?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:423](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L423)
+Defined in: [03-platform/packages/domain/src/metrics.ts:423](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L423)
 
 Record failed operation
 
@@ -68,7 +68,7 @@ Record failed operation
 
 > **recordValue**(`metric`, `value`, `labels?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:438](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L438)
+Defined in: [03-platform/packages/domain/src/metrics.ts:438](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L438)
 
 Record a value (e.g., trade volume)
 
@@ -96,7 +96,7 @@ Record a value (e.g., trade volume)
 
 > **setGauge**(`metric`, `value`, `labels?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:443](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L443)
+Defined in: [03-platform/packages/domain/src/metrics.ts:443](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L443)
 
 Set a gauge (e.g., queue size)
 
@@ -124,7 +124,7 @@ Set a gauge (e.g., queue size)
 
 > **startTimer**(): () => `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:448](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L448)
+Defined in: [03-platform/packages/domain/src/metrics.ts:448](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L448)
 
 Create a timer for measuring duration
 
@@ -142,7 +142,7 @@ Create a timer for measuring duration
 
 > **success**(`operation`, `duration`, `labels?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:417](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L417)
+Defined in: [03-platform/packages/domain/src/metrics.ts:417](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L417)
 
 Record successful operation
 

@@ -8,7 +8,7 @@
 
 > **evaluateProvenancePolicy**(`provenance`, `policy`): [`ProvenanceEvaluation`](../interfaces/ProvenanceEvaluation.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/provenance.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/provenance.ts#L208)
+Defined in: [03-platform/packages/types/src/common/provenance.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/provenance.ts#L208)
 
 Evaluate a provenance record against a policy.
 

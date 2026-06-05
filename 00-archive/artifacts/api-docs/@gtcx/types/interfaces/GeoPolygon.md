@@ -6,7 +6,7 @@
 
 # Interface: GeoPolygon
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L46)
+Defined in: [03-platform/packages/types/src/models/site.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L46)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:46](https
 
 > **coordinates**: `number`[][][]
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L48)
+Defined in: [03-platform/packages/types/src/models/site.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L48)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:48](https
 
 > **type**: `"Polygon"`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L47)
+Defined in: [03-platform/packages/types/src/models/site.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L47)

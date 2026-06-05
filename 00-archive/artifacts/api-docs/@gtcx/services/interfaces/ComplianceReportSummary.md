@@ -6,7 +6,7 @@
 
 # Interface: ComplianceReportSummary
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L61)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L61)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:6
 
 > **compliantRecords**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L63)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L63)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:6
 
 > **pendingReviews**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L66)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L66)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:6
 
 > **totalRecords**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L62)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L62)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:6
 
 > **violations**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L64)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L64)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:6
 
 > **warnings**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L65)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L65)

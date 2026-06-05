@@ -6,7 +6,7 @@
 
 # Interface: ComplianceCheckResult
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L55)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L55)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:5
 
 > **compliant**: `boolean`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L56)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L56)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:5
 
 > `optional` **details**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L58)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L58)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:5
 
 > `optional` **issue**: `string`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/types.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/types.ts#L57)
+Defined in: [03-platform/packages/services/src/compliance/types.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/types.ts#L57)

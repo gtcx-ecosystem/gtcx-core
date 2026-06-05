@@ -6,7 +6,7 @@
 
 # Interface: SyncEngineConfig\<T\>
 
-Defined in: [types.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L15)
+Defined in: [types.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L15)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **fetchRemote**: (`ids`) => `Promise`\<[`SyncItem`](SyncItem.md)\<`T`\>[]\>
 
-Defined in: [types.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L16)
+Defined in: [types.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L16)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **onAudit**: (`event`) => `void` \| `Promise`\<`void`\>
 
-Defined in: [types.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L21)
+Defined in: [types.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L21)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [types.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **onConflict**: (`conflict`) => `void` \| `Promise`\<`void`\>
 
-Defined in: [types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L19)
+Defined in: [types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L19)
 
 #### Parameters
 
@@ -74,7 +74,7 @@ Defined in: [types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **onMetrics**: (`metrics`) => `void` \| `Promise`\<`void`\>
 
-Defined in: [types.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L22)
+Defined in: [types.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L22)
 
 #### Parameters
 
@@ -92,7 +92,7 @@ Defined in: [types.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **onResolved**: (`items`) => `void` \| `Promise`\<`void`\>
 
-Defined in: [types.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L18)
+Defined in: [types.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L18)
 
 #### Parameters
 
@@ -110,7 +110,7 @@ Defined in: [types.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **pushLocal**: (`items`) => `Promise`\<`void`\>
 
-Defined in: [types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L17)
+Defined in: [types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L17)
 
 #### Parameters
 
@@ -128,7 +128,7 @@ Defined in: [types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **resolveConflict**: (`conflict`) => `Promise`\<[`SyncItem`](SyncItem.md)\<`T`\> \| `null`\>
 
-Defined in: [types.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L20)
+Defined in: [types.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L20)
 
 #### Parameters
 

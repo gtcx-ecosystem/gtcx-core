@@ -6,7 +6,7 @@
 
 # Interface: NotificationPreferences
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L63)
+Defined in: [03-platform/packages/types/src/models/user.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L63)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:63](https
 
 > **email**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L64)
+Defined in: [03-platform/packages/types/src/models/user.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L64)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:64](https
 
 > **push**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L66)
+Defined in: [03-platform/packages/types/src/models/user.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L66)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:66](https
 
 > **sms**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L65)
+Defined in: [03-platform/packages/types/src/models/user.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L65)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:65](https
 
 > **types**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L67)
+Defined in: [03-platform/packages/types/src/models/user.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L67)

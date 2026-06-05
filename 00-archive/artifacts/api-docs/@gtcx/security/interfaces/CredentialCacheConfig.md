@@ -6,7 +6,7 @@
 
 # Interface: CredentialCacheConfig
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L60)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L60)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > **autoCleanupEnabled**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L64)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L64)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > **maxCachedCredentials**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L63)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L63)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > **maxOfflineHours**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L61)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L61)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > **revocationCheckIntervalHours**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L62)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L62)

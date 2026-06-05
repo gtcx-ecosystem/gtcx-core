@@ -6,7 +6,7 @@
 
 # Interface: AgxDiscoveryRequest
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:145](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L145)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:145](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L145)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:145](ht
 
 > `optional` **certifications**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L159)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L159)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:159](ht
 
 > **commodity**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L146)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L146)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:146](ht
 
 > `optional` **complianceTier**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:158](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L158)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:158](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L158)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:158](ht
 
 > `optional` **origins**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L157)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L157)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:157](ht
 
 > `optional` **price**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:152](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L152)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:152](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L152)
 
 #### currency
 
@@ -66,7 +66,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:152](ht
 
 > `optional` **quantity**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L147)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L147)
 
 #### max?
 

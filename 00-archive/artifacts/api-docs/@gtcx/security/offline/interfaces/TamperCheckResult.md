@@ -6,7 +6,7 @@
 
 # Interface: TamperCheckResult
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L52)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L52)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > `optional` **details**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L62)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L62)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > `optional` **reason**: `"DATA_MODIFIED"` \| `"CHAIN_BROKEN"` \| `"SIGNATURE_INVALID"` \| `"HASH_MISMATCH"` \| `"ROOT_UNTRUSTED"` \| `"PROOF_MISSING"`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L55)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L55)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > **tamperedWith**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L54)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L54)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > **valid**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L53)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L53)

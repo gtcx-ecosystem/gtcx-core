@@ -8,7 +8,7 @@
 
 > **assertNotRevoked**(`certificate`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L112)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L112)
 
 Assert that a certificate is NOT revoked.
 

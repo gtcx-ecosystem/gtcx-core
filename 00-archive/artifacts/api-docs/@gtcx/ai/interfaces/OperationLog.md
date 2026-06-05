@@ -6,7 +6,7 @@
 
 # Interface: OperationLog\<TInput, TOutput\>
 
-Defined in: [traced.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L21)
+Defined in: [traced.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L21)
 
 ## Type Parameters
 
@@ -24,7 +24,7 @@ Defined in: [traced.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **category**: `string`
 
-Defined in: [traced.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L24)
+Defined in: [traced.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L24)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [traced.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **duration**: `number`
 
-Defined in: [traced.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L27)
+Defined in: [traced.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L27)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [traced.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **durationMs**: `number` \| `null`
 
-Defined in: [traced.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L28)
+Defined in: [traced.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L28)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [traced.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **error**: `object`
 
-Defined in: [traced.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L31)
+Defined in: [traced.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L31)
 
 #### message
 
@@ -68,7 +68,7 @@ Defined in: [traced.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **input**: `TInput`
 
-Defined in: [traced.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L25)
+Defined in: [traced.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L25)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [traced.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [traced.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L32)
+Defined in: [traced.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L32)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [traced.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **operationName**: `string`
 
-Defined in: [traced.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L22)
+Defined in: [traced.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L22)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [traced.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **output**: `TOutput`
 
-Defined in: [traced.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L26)
+Defined in: [traced.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L26)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [traced.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **success**: `boolean`
 
-Defined in: [traced.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L30)
+Defined in: [traced.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L30)
 
 ***
 
@@ -108,7 +108,7 @@ Defined in: [traced.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **timestamp**: `number`
 
-Defined in: [traced.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L29)
+Defined in: [traced.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L29)
 
 ***
 
@@ -116,4 +116,4 @@ Defined in: [traced.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **type**: `string`
 
-Defined in: [traced.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L23)
+Defined in: [traced.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L23)

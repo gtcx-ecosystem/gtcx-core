@@ -8,4 +8,4 @@
 
 > **CredentialCacheEntry** = `z.infer`\<*typeof* [`CredentialCacheEntrySchema`](../variables/CredentialCacheEntrySchema.md)\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L54)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L54)

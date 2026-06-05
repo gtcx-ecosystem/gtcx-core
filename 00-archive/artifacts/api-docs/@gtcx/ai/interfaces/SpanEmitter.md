@@ -6,7 +6,7 @@
 
 # Interface: SpanEmitter
 
-Defined in: [span-emitter.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L24)
+Defined in: [span-emitter.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L24)
 
 Pluggable span lifecycle emitter.
 
@@ -23,7 +23,7 @@ Implementations MUST:
 
 > **onSpanEnd**(`span`): `void`
 
-Defined in: [span-emitter.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L28)
+Defined in: [span-emitter.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L28)
 
 Called when a traced operation completes — success or failure.
 
@@ -43,7 +43,7 @@ Called when a traced operation completes — success or failure.
 
 > **onSpanStart**(`span`): `void`
 
-Defined in: [span-emitter.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L26)
+Defined in: [span-emitter.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L26)
 
 Called when a traced operation begins.
 

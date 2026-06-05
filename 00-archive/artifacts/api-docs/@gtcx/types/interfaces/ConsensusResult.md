@@ -6,7 +6,7 @@
 
 # Interface: ConsensusResult
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L34)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L34)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:34](
 
 > **abstaining**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L39)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L39)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:39](
 
 > **agreeing**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L37)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L37)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:37](
 
 > **breakdown**: [`VerifierVote`](VerifierVote.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L40)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L40)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:40](
 
 > **dissenting**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L38)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L38)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:38](
 
 > **threshold**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L36)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L36)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:36](
 
 > **totalWeight**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L35)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L35)

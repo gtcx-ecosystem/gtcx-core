@@ -6,7 +6,7 @@
 
 # Interface: LoggerConfig
 
-Defined in: [logger.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L63)
+Defined in: [logger.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L63)
 
 Configuration for creating a Logger instance.
 
@@ -16,7 +16,7 @@ Configuration for creating a Logger instance.
 
 > `optional` **correlationId**: `string`
 
-Defined in: [logger.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L69)
+Defined in: [logger.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L69)
 
 Correlation ID to include in every log entry
 
@@ -26,7 +26,7 @@ Correlation ID to include in every log entry
 
 > `optional` **level**: [`LogLevel`](../type-aliases/LogLevel.md)
 
-Defined in: [logger.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L67)
+Defined in: [logger.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L67)
 
 Minimum log level to output. Defaults to 'debug'.
 
@@ -36,7 +36,7 @@ Minimum log level to output. Defaults to 'debug'.
 
 > `optional` **output**: (`entry`) => `void`
 
-Defined in: [logger.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L71)
+Defined in: [logger.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L71)
 
 Custom output handler. Defaults to writing JSON to stdout/stderr.
 
@@ -56,6 +56,6 @@ Custom output handler. Defaults to writing JSON to stdout/stderr.
 
 > **service**: `string`
 
-Defined in: [logger.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L65)
+Defined in: [logger.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L65)
 
 Service or module name to include in every log entry

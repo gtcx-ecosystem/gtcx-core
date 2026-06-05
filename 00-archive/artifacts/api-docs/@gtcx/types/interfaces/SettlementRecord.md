@@ -6,7 +6,7 @@
 
 # Interface: SettlementRecord
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L79)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L79)
 
 Settlement record - the actual exchange
 
@@ -16,7 +16,7 @@ Settlement record - the actual exchange
 
 > **assetLeg**: [`AssetLeg`](AssetLeg.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L84)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L84)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:84](htt
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L80)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L80)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:80](htt
 
 > **paymentLeg**: [`PaymentLeg`](PaymentLeg.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L83)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L83)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:83](htt
 
 > **status**: [`SettlementStatus`](../type-aliases/SettlementStatus.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L82)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L82)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:82](htt
 
 > **timeline**: [`SettlementTimeline`](SettlementTimeline.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L85)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L85)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:85](htt
 
 > **tradeMatchId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L81)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L81)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:81](htt
 
 > **verification**: [`SettlementVerification`](SettlementVerification.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L86)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L86)

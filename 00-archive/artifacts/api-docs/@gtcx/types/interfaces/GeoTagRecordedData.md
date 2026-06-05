@@ -6,7 +6,7 @@
 
 # Interface: GeoTagRecordedData
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L115)
+Defined in: [03-platform/packages/types/src/common/events.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L115)
 
 GeoTag location claim recorded for a commodity lot.
 
@@ -16,7 +16,7 @@ GeoTag location claim recorded for a commodity lot.
 
 > **accuracy**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L121)
+Defined in: [03-platform/packages/types/src/common/events.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L121)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:121](ht
 
 > **chainHash**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L125)
+Defined in: [03-platform/packages/types/src/common/events.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L125)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:125](ht
 
 > **claimId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L116)
+Defined in: [03-platform/packages/types/src/common/events.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L116)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:116](ht
 
 > **commodityType**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L123)
+Defined in: [03-platform/packages/types/src/common/events.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L123)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:123](ht
 
 > **jurisdiction**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L124)
+Defined in: [03-platform/packages/types/src/common/events.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L124)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:124](ht
 
 > **latitude**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L119)
+Defined in: [03-platform/packages/types/src/common/events.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L119)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:119](ht
 
 > **longitude**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L120)
+Defined in: [03-platform/packages/types/src/common/events.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L120)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:120](ht
 
 > **lotId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L117)
+Defined in: [03-platform/packages/types/src/common/events.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L117)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:117](ht
 
 > **operatorDid**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L118)
+Defined in: [03-platform/packages/types/src/common/events.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L118)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:118](ht
 
 > **recordedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L126)
+Defined in: [03-platform/packages/types/src/common/events.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L126)
 
 ***
 
@@ -96,4 +96,4 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:126](ht
 
 > **source**: `"gps"` \| `"cell"` \| `"wifi"` \| `"nfc"` \| `"manual"`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L122)
+Defined in: [03-platform/packages/types/src/common/events.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L122)

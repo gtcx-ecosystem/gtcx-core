@@ -6,7 +6,7 @@
 
 # Interface: StoredItemMeta
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L96)
+Defined in: [03-platform/packages/security/src/offline/types.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L96)
 
 Stored item metadata
 
@@ -16,7 +16,7 @@ Stored item metadata
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L98)
+Defined in: [03-platform/packages/security/src/offline/types.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L98)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:98](
 
 > `optional` **expiresAt**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L100)
+Defined in: [03-platform/packages/security/src/offline/types.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L100)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:100]
 
 > **key**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L97)
+Defined in: [03-platform/packages/security/src/offline/types.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L97)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:97](
 
 > **updatedAt**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:99](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L99)
+Defined in: [03-platform/packages/security/src/offline/types.ts:99](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L99)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:99](
 
 > **version**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L101)
+Defined in: [03-platform/packages/security/src/offline/types.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L101)

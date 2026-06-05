@@ -67,7 +67,7 @@ review_cycle: 'quarterly'
 | ------------------ | ------: | ------------------------------------------------------------------ |
 | TypeScript hygiene | 10.0/10 | `pnpm format:check` passes; `pnpm lint` clean                      |
 | Rust hygiene       | 10.0/10 | `cargo clippy --workspace --lib` 0 warnings, 0 errors              |
-| TODO/FIXME debt    | 10.0/10 | 0 TODO/FIXME/HACK/XXX in `03-platform/packages/*/03-platform/src/` |
+| TODO/FIXME debt    | 10.0/10 | 0 TODO/FIXME/HACK/XXX in `03-platform/packages/*/src/` |
 | Unsafe code        | 10.0/10 | 0 unsafe blocks in Rust; explicitly prohibited in `lib.rs`         |
 | Dependency hygiene |  9.5/10 | `pnpm audit` clean; `security:crypto-deps` verified                |
 

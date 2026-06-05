@@ -4,7 +4,7 @@ title: Sprint 2 Algorithmic Moat — Feature-Specific Assessment
 date: 2026-06-02
 status: superseded-scores
 auditor: gtcx-core-agent
-scope: rust/gtcx-zkp, 03-platform/packages/crypto/03-platform/src/zkp-*
+scope: rust/gtcx-zkp, 03-platform/packages/crypto/src/zkp-*
 scores:
   circuit_correctness: 5
   bulletproofs_range: 8

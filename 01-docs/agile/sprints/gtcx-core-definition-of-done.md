@@ -56,7 +56,7 @@ Quality criteria that must be satisfied before any work item in `gtcx-core` is c
 
 ### Documentation
 
-- [ ] Affected package spec in `01-docs/specs/03-platform/packages/` updated if behavior changed
+- [ ] Affected package spec in `01-docs/specs/packages/` updated if behavior changed
 - [ ] ADR written if an architectural decision was made (status: `Proposed`)
 - [ ] UAT scenario documented if applicable
 - [ ] Trust-bearing behavior changes reflected in `01-docs/architecture/trust-contract-matrix.md` when applicable

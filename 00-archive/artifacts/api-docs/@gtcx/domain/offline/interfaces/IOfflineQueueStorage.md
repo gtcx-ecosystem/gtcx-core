@@ -6,7 +6,7 @@
 
 # Interface: IOfflineQueueStorage
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L94)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L94)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L97)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L97)
 
 #### Returns
 
@@ -26,7 +26,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **load**(): `Promise`\<[`QueuedOperation`](QueuedOperation.md)\<`unknown`\>[]\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L96)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L96)
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **save**(`operations`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L95)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L95)
 
 #### Parameters
 

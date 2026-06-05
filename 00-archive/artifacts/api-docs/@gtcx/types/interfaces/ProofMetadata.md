@@ -6,7 +6,7 @@
 
 # Interface: ProofMetadata
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L97)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L97)
 
 ## Indexable
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:97](
 
 > `optional` **accuracy**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L98)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L98)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:98](
 
 > `optional` **commodityType**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L104)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L104)
 
 Commodity type for asset-related proofs
 
@@ -36,7 +36,7 @@ Commodity type for asset-related proofs
 
 > `optional` **deviceId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L100)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L100)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:100]
 
 > `optional` **location**: [`GeoCoordinates`](GeoCoordinates.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:99](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L99)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:99](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L99)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:99](
 
 > `optional` **userRole**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L101)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L101)
 
 ***
 
@@ -60,4 +60,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:101]
 
 > `optional` **workflowContext**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L102)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L102)

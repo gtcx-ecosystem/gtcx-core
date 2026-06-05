@@ -6,7 +6,7 @@
 
 # Interface: CortexEvent
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L60)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L60)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:60](
 
 > `optional` **actorId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L63)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L63)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:63](
 
 > **data**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L66)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L66)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:66](
 
 > `optional` **location**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L67)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L67)
 
 #### latitude
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:67](
 
 > `optional` **subjectId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L64)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L64)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:64](
 
 > `optional` **subjectType**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L65)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L65)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:65](
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L62)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L62)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:62](
 
 > **type**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L61)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L61)

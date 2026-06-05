@@ -170,7 +170,7 @@ pnpm api:update-baseline
 
 ### COV-001: Tracing.ts coverage verification ✅
 
-**Closed 2026-05-11.** Added v8 ignore markers and tests for `03-platform/packages/crypto/03-platform/src/tracing.ts`; excluded `03-platform/packages/verification/03-platform/src/traced.ts` from coverage; `pnpm test:coverage:critical` passes all packages.
+**Closed 2026-05-11.** Added v8 ignore markers and tests for `03-platform/packages/crypto/src/tracing.ts`; excluded `03-platform/packages/verification/src/traced.ts` from coverage; `pnpm test:coverage:critical` passes all packages.
 
 ### Final docs refresh
 

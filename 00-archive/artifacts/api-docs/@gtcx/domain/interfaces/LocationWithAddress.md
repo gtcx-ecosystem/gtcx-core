@@ -6,7 +6,7 @@
 
 # Interface: LocationWithAddress
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L22)
+Defined in: [03-platform/packages/domain/src/types.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L22)
 
 @gtcx/domain - Core Domain Types
 
@@ -24,7 +24,7 @@ and any jurisdiction's regulatory framework.
 
 > **accuracy**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L16)
+Defined in: [03-platform/packages/domain/src/types.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L16)
 
 #### Inherited from
 
@@ -36,7 +36,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:16](https://gi
 
 > **address**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L23)
+Defined in: [03-platform/packages/domain/src/types.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L23)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:23](https://gi
 
 > `optional` **altitude**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L17)
+Defined in: [03-platform/packages/domain/src/types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L17)
 
 #### Inherited from
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:17](https://gi
 
 > `optional` **country**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L25)
+Defined in: [03-platform/packages/domain/src/types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L25)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:25](https://gi
 
 > **latitude**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L14)
+Defined in: [03-platform/packages/domain/src/types.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L14)
 
 #### Inherited from
 
@@ -76,7 +76,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:14](https://gi
 
 > **longitude**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L15)
+Defined in: [03-platform/packages/domain/src/types.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L15)
 
 #### Inherited from
 
@@ -88,7 +88,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:15](https://gi
 
 > `optional` **region**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L24)
+Defined in: [03-platform/packages/domain/src/types.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L24)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:24](https://gi
 
 > `optional` **source**: `"gps"` \| `"network"` \| `"manual"`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L19)
+Defined in: [03-platform/packages/domain/src/types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L19)
 
 #### Inherited from
 
@@ -108,7 +108,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:19](https://gi
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L18)
+Defined in: [03-platform/packages/domain/src/types.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L18)
 
 #### Inherited from
 

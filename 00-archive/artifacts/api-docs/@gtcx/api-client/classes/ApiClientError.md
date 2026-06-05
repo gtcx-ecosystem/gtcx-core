@@ -6,7 +6,7 @@
 
 # Class: ApiClientError
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:3](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L3)
+Defined in: [03-platform/packages/api-client/src/errors.ts:3](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L3)
 
 ## Extends
 
@@ -29,7 +29,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:3](https:
 
 > **new ApiClientError**(`message`, `options`): `ApiClientError`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L10)
+Defined in: [03-platform/packages/api-client/src/errors.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L10)
 
 #### Parameters
 
@@ -73,7 +73,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:10](https
 
 > **category**: [`ApiErrorCategory`](../type-aliases/ApiErrorCategory.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L6)
+Defined in: [03-platform/packages/api-client/src/errors.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L6)
 
 ***
 
@@ -81,7 +81,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:6](https:
 
 > `optional` **cause**: `unknown`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L8)
+Defined in: [03-platform/packages/api-client/src/errors.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L8)
 
 #### Overrides
 
@@ -93,7 +93,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:8](https:
 
 > **code**: [`ApiErrorCode`](../type-aliases/ApiErrorCode.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L5)
+Defined in: [03-platform/packages/api-client/src/errors.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L5)
 
 ***
 
@@ -125,7 +125,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > **retryable**: `boolean`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L7)
+Defined in: [03-platform/packages/api-client/src/errors.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L7)
 
 ***
 
@@ -145,7 +145,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > `optional` **status**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L4)
+Defined in: [03-platform/packages/api-client/src/errors.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L4)
 
 ***
 

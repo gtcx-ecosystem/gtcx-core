@@ -6,7 +6,7 @@
 
 # Interface: PriceHistory
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:481](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L481)
+Defined in: [03-platform/packages/domain/src/types.ts:481](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L481)
 
 Historical price data point
 
@@ -16,7 +16,7 @@ Historical price data point
 
 > **commodityType**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:482](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L482)
+Defined in: [03-platform/packages/domain/src/types.ts:482](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L482)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:482](https://g
 
 > **period**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:484](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L484)
+Defined in: [03-platform/packages/domain/src/types.ts:484](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L484)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:484](https://g
 
 > **prices**: `object`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:483](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L483)
+Defined in: [03-platform/packages/domain/src/types.ts:483](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L483)
 
 #### currency
 

@@ -6,7 +6,7 @@
 
 # Class: UssdParser
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/parser.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/parser.ts#L17)
+Defined in: [03-platform/packages/connectivity/src/ussd/parser.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/parser.ts#L17)
 
 USSD message parser and formatter.
 
@@ -29,7 +29,7 @@ objects and formats outgoing [UssdResponse](../interfaces/UssdResponse.md) paylo
 
 > **extractInput**(`dialString`, `serviceCode`): `string`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/parser.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/parser.ts#L79)
+Defined in: [03-platform/packages/connectivity/src/ussd/parser.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/parser.ts#L79)
 
 Extract user input from a raw dial string.
 
@@ -63,7 +63,7 @@ parser.extractInput('*384*123#');      // => ''
 
 > **formatResponse**(`text`, `sessionActive`): [`UssdResponse`](../interfaces/UssdResponse.md)
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/parser.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/parser.ts#L63)
+Defined in: [03-platform/packages/connectivity/src/ussd/parser.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/parser.ts#L63)
 
 Format a response for the gateway.
 
@@ -91,7 +91,7 @@ serialise as needed.
 
 > **parse**(`payload`): [`UssdRequest`](../interfaces/UssdRequest.md)
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/parser.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/parser.ts#L26)
+Defined in: [03-platform/packages/connectivity/src/ussd/parser.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/parser.ts#L26)
 
 Parse a raw gateway payload into a structured request.
 
@@ -118,7 +118,7 @@ when required fields are missing or invalid.
 
 > **parseDialString**(`dialString`): [`UssdParsedInput`](../interfaces/UssdParsedInput.md)
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/ussd/parser.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/ussd/parser.ts#L107)
+Defined in: [03-platform/packages/connectivity/src/ussd/parser.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/ussd/parser.ts#L107)
 
 Parse a full dial string into service code and user input.
 

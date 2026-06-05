@@ -6,7 +6,7 @@
 
 # Interface: KeyPairResult
 
-Defined in: [keys.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/keys.ts#L25)
+Defined in: [keys.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/keys.ts#L25)
 
 Result of key pair generation.
 
@@ -22,7 +22,7 @@ and cannot be securely wiped from memory. Callers MUST:
 
 > **algorithm**: [`KeyAlgorithm`](../type-aliases/KeyAlgorithm.md)
 
-Defined in: [keys.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/keys.ts#L28)
+Defined in: [keys.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/keys.ts#L28)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [keys.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b5
 
 > **privateKey**: `string`
 
-Defined in: [keys.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/keys.ts#L27)
+Defined in: [keys.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/keys.ts#L27)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [keys.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b5
 
 > **publicKey**: `string`
 
-Defined in: [keys.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/keys.ts#L26)
+Defined in: [keys.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/keys.ts#L26)

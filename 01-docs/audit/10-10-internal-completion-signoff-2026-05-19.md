@@ -49,7 +49,7 @@ All possible internal items for the 10/10 reference-grade roadmap have been comp
 
 **Dead code removed:**
 
-- `03-platform/packages/types/03-platform/src/common/provenance.ts` line 295: redundant `confidence < minConfidence` check in `jurisdictional_edge_case` branch (already caught by early return at line 269).
+- `03-platform/packages/types/src/common/provenance.ts` line 295: redundant `confidence < minConfidence` check in `jurisdictional_edge_case` branch (already caught by early return at line 269).
 
 ---
 

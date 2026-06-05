@@ -6,7 +6,7 @@
 
 # Interface: Location
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L13)
+Defined in: [03-platform/packages/domain/src/types.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L13)
 
 @gtcx/domain - Core Domain Types
 
@@ -24,7 +24,7 @@ and any jurisdiction's regulatory framework.
 
 > **accuracy**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L16)
+Defined in: [03-platform/packages/domain/src/types.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L16)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:16](https://gi
 
 > `optional` **altitude**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L17)
+Defined in: [03-platform/packages/domain/src/types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L17)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:17](https://gi
 
 > **latitude**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L14)
+Defined in: [03-platform/packages/domain/src/types.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L14)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:14](https://gi
 
 > **longitude**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L15)
+Defined in: [03-platform/packages/domain/src/types.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L15)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:15](https://gi
 
 > `optional` **source**: `"gps"` \| `"network"` \| `"manual"`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L19)
+Defined in: [03-platform/packages/domain/src/types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L19)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:19](https://gi
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L18)
+Defined in: [03-platform/packages/domain/src/types.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L18)

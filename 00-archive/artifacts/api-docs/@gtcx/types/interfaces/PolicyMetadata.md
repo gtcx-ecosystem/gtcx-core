@@ -6,7 +6,7 @@
 
 # Interface: PolicyMetadata
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L20)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L20)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:20](htt
 
 > **authority**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L21)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L21)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:21](htt
 
 > **description**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L22)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L22)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:22](htt
 
 > **tags**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L23)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L23)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:23](htt
 
 > **updatedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L24)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L24)

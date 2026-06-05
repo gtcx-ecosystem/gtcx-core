@@ -189,17 +189,17 @@ const fileSizeExceptions = {
   // Type-definition files: inherently large due to exhaustive schema coverage.
   // Zod schema files are not decomposable without losing the type-level
   // benefits of co-located schemas — accepted as a permanent exception.
-  '03-platform/packages/verification/03-platform/src/types/schemas.ts': {
+  '03-platform/packages/verification/src/types/schemas.ts': {
     reason: 'Zod schema definitions',
     target: 'permanent exception — co-located schemas required for type inference',
   },
   // Resolved exceptions:
-  // - 03-platform/packages/security/03-platform/src/offline/storage.ts — legacy 766-LOC monolith deleted on
+  // - 03-platform/packages/security/src/offline/storage.ts — legacy 766-LOC monolith deleted on
   //   2026-05-09; superseded by secure-storage.ts + secure-storage/ submodules.
-  // - 03-platform/packages/services/03-platform/src/registration.ts, trading.ts — decomposed in Sprint 6.
-  // - 03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts — decomposed in Sprint 6.
-  // - 03-platform/packages/verification/03-platform/src/traced.ts — decomposed into traced/ in Sprint 6.
-  // - 03-platform/packages/workproof/03-platform/src/predicates/registry.ts — decomposed into definitions/ in Sprint 6.
+  // - 03-platform/packages/services/src/registration.ts, trading.ts — decomposed in Sprint 6.
+  // - 03-platform/packages/services/src/compliance/UnifiedComplianceService.ts — decomposed in Sprint 6.
+  // - 03-platform/packages/verification/src/traced.ts — decomposed into traced/ in Sprint 6.
+  // - 03-platform/packages/workproof/src/predicates/registry.ts — decomposed into definitions/ in Sprint 6.
 };
 
 for (const [pkgName, files] of sourceFilesByPackage.entries()) {

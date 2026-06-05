@@ -6,7 +6,7 @@
 
 # Interface: ApiError
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L109)
+Defined in: [03-platform/packages/api-client/src/types.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L109)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:109](https
 
 > **category**: [`ApiErrorCategory`](../type-aliases/ApiErrorCategory.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L113)
+Defined in: [03-platform/packages/api-client/src/types.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L113)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:113](https
 
 > `optional` **cause**: `unknown`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L115)
+Defined in: [03-platform/packages/api-client/src/types.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L115)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:115](https
 
 > `optional` **code**: [`ApiErrorCode`](../type-aliases/ApiErrorCode.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L112)
+Defined in: [03-platform/packages/api-client/src/types.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L112)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:112](https
 
 > **message**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L110)
+Defined in: [03-platform/packages/api-client/src/types.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L110)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:110](https
 
 > **retryable**: `boolean`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L114)
+Defined in: [03-platform/packages/api-client/src/types.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L114)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:114](https
 
 > `optional` **status**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L111)
+Defined in: [03-platform/packages/api-client/src/types.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L111)

@@ -8,7 +8,7 @@
 
 > **deriveKeyPbkdf2**(`params`): `Promise`\<`string`\>
 
-Defined in: [key-derivation.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/key-derivation.ts#L64)
+Defined in: [key-derivation.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/key-derivation.ts#L64)
 
 PBKDF2-HMAC-SHA256 key derivation. Returns hex-encoded derived key.
 

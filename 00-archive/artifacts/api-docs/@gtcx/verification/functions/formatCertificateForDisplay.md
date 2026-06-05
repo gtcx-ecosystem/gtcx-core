@@ -8,7 +8,7 @@
 
 > **formatCertificateForDisplay**(`certificate`): `object`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:415](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L415)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:415](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L415)
 
 Format certificate for display
 

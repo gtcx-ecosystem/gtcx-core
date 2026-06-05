@@ -6,7 +6,7 @@
 
 # Interface: PermitFee
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L120)
+Defined in: [03-platform/packages/types/src/models/permit.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L120)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:120](ht
 
 > **amount**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L123)
+Defined in: [03-platform/packages/types/src/models/permit.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L123)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:123](ht
 
 > **currency**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L124)
+Defined in: [03-platform/packages/types/src/models/permit.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L124)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:124](ht
 
 > `optional` **dueDate**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L126)
+Defined in: [03-platform/packages/types/src/models/permit.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L126)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:126](ht
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L121)
+Defined in: [03-platform/packages/types/src/models/permit.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L121)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:121](ht
 
 > `optional` **paidAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:127](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L127)
+Defined in: [03-platform/packages/types/src/models/permit.ts:127](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L127)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:127](ht
 
 > `optional` **receipt**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:128](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L128)
+Defined in: [03-platform/packages/types/src/models/permit.ts:128](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L128)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:128](ht
 
 > **status**: `"pending"` \| `"refunded"` \| `"paid"` \| `"waived"`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L125)
+Defined in: [03-platform/packages/types/src/models/permit.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L125)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:125](ht
 
 > **type**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L122)
+Defined in: [03-platform/packages/types/src/models/permit.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L122)

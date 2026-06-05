@@ -6,7 +6,7 @@
 
 # Interface: InfrastructureInfo
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L115)
+Defined in: [03-platform/packages/types/src/models/site.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L115)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:115](http
 
 > `optional` **equipment**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L120)
+Defined in: [03-platform/packages/types/src/models/site.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L120)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:120](http
 
 > `optional` **facilities**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L121)
+Defined in: [03-platform/packages/types/src/models/site.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L121)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:121](http
 
 > **hasCommunications**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L119)
+Defined in: [03-platform/packages/types/src/models/site.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L119)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:119](http
 
 > **hasElectricity**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L117)
+Defined in: [03-platform/packages/types/src/models/site.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L117)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:117](http
 
 > **hasRoadAccess**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L116)
+Defined in: [03-platform/packages/types/src/models/site.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L116)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:116](http
 
 > **hasWater**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L118)
+Defined in: [03-platform/packages/types/src/models/site.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L118)

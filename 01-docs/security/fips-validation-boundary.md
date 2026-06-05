@@ -61,7 +61,7 @@ gtcx-core is a **cryptographic library**, not a cryptographic module. Per NIST S
 - Hashing uses only SHA-256/SHA-512 (BLAKE3 disabled)
 - All operations execute within the OpenSSL FIPS provider boundary
 
-**Implementation:** `03-platform/packages/crypto/03-platform/src/fips-backend.ts`
+**Implementation:** `03-platform/packages/crypto/src/fips-backend.ts`
 
 ### 2.2 Rust Path (Planned)
 

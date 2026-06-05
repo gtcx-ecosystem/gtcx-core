@@ -6,7 +6,7 @@
 
 # Interface: IComplianceRepository
 
-Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/repositories.ts#L28)
+Defined in: [03-platform/packages/services/src/repositories.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/repositories.ts#L28)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:28](h
 
 > **checkKYC**(`transaction`): `Promise`\<[`ComplianceCheckResult`](ComplianceCheckResult.md)\>
 
-Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/repositories.ts#L32)
+Defined in: [03-platform/packages/services/src/repositories.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/repositories.ts#L32)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:32](h
 
 > **checkLicense**(`id`, `type`): `Promise`\<[`ComplianceCheckResult`](ComplianceCheckResult.md)\>
 
-Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/repositories.ts#L30)
+Defined in: [03-platform/packages/services/src/repositories.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/repositories.ts#L30)
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:30](h
 
 > **checkLocation**(`location`): `Promise`\<[`ComplianceCheckResult`](ComplianceCheckResult.md)\>
 
-Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/repositories.ts#L31)
+Defined in: [03-platform/packages/services/src/repositories.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/repositories.ts#L31)
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:31](h
 
 > **getRecords**(`entityId?`, `entityType?`): `Promise`\<`ComplianceRecord`[]\>
 
-Defined in: [03-platform/packages/services/03-platform/src/repositories.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/repositories.ts#L29)
+Defined in: [03-platform/packages/services/src/repositories.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/repositories.ts#L29)
 
 #### Parameters
 

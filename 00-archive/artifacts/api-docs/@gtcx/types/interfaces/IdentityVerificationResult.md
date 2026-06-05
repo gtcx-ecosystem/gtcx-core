@@ -6,7 +6,7 @@
 
 # Interface: IdentityVerificationResult
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L132)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L132)
 
 Identity verification result
 
@@ -16,7 +16,7 @@ Identity verification result
 
 > `optional` **errors**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L135)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L135)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:13
 
 > `optional` **identity**: [`DigitalIdentity`](DigitalIdentity.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:134](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L134)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:134](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L134)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:13
 
 > **valid**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L133)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L133)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:13
 
 > **verifiedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:136](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L136)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:136](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L136)

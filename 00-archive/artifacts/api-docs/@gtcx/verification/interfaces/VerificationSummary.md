@@ -6,7 +6,7 @@
 
 # Interface: VerificationSummary
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/analytics.ts#L5)
+Defined in: [03-platform/packages/verification/src/traced/analytics.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/analytics.ts#L5)
 
 Verification analytics.
 
@@ -16,7 +16,7 @@ Verification analytics.
 
 > **averageLatencyMs**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/analytics.ts#L9)
+Defined in: [03-platform/packages/verification/src/traced/analytics.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/analytics.ts#L9)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.
 
 > **errorsByType**: `Record`\<`string`, `number`\>
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/analytics.ts#L11)
+Defined in: [03-platform/packages/verification/src/traced/analytics.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/analytics.ts#L11)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.
 
 > **failedVerifications**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/analytics.ts#L8)
+Defined in: [03-platform/packages/verification/src/traced/analytics.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/analytics.ts#L8)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.
 
 > **operationsByType**: `Record`\<`string`, `number`\>
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/analytics.ts#L10)
+Defined in: [03-platform/packages/verification/src/traced/analytics.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/analytics.ts#L10)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.
 
 > **successfulVerifications**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/analytics.ts#L7)
+Defined in: [03-platform/packages/verification/src/traced/analytics.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/analytics.ts#L7)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.
 
 > **totalOperations**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/analytics.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/analytics.ts#L6)
+Defined in: [03-platform/packages/verification/src/traced/analytics.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/analytics.ts#L6)

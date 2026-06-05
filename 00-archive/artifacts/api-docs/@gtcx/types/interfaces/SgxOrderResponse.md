@@ -6,7 +6,7 @@
 
 # Interface: SgxOrderResponse
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L113)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L113)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:113](ht
 
 > **currency**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L118)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L118)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:118](ht
 
 > **instructions**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L124)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L124)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:124](ht
 
 > **listingId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L115)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L115)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:115](ht
 
 > **orderId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L114)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L114)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:114](ht
 
 > **settlement**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L119)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L119)
 
 #### deliveryDeadline
 
@@ -66,7 +66,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:119](ht
 
 > **status**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L116)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L116)
 
 ***
 
@@ -74,4 +74,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:116](ht
 
 > **totalAmount**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L117)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L117)

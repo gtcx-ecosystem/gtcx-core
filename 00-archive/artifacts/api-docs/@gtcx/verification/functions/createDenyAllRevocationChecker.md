@@ -8,7 +8,7 @@
 
 > **createDenyAllRevocationChecker**(`reason?`): [`RevocationChecker`](../interfaces/RevocationChecker.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L171)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L171)
 
 Revocation checker that always reports "revoked" for every certificate.
 

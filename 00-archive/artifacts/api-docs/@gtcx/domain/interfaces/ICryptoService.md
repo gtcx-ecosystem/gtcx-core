@@ -6,7 +6,7 @@
 
 # Interface: ICryptoService
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:422](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L422)
+Defined in: [03-platform/packages/domain/src/types.ts:422](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L422)
 
 Crypto service interface for dependency injection
 
@@ -16,7 +16,7 @@ Crypto service interface for dependency injection
 
 > **createHash**(`data`): `Promise`\<`string`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:423](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L423)
+Defined in: [03-platform/packages/domain/src/types.ts:423](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L423)
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:423](https://g
 
 > **sign**(`data`): `Promise`\<`string`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:424](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L424)
+Defined in: [03-platform/packages/domain/src/types.ts:424](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L424)
 
 #### Parameters
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:424](https://g
 
 > **signTransaction**(`data`): `Promise`\<`string`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:426](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L426)
+Defined in: [03-platform/packages/domain/src/types.ts:426](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L426)
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:426](https://g
 
 > **verify**(`data`, `signature`): `Promise`\<`boolean`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:425](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L425)
+Defined in: [03-platform/packages/domain/src/types.ts:425](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L425)
 
 #### Parameters
 

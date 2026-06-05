@@ -6,7 +6,7 @@
 
 # Interface: LogEntry
 
-Defined in: [logger.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L31)
+Defined in: [logger.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L31)
 
 Structured log entry produced by the logger.
 
@@ -16,7 +16,7 @@ Structured log entry produced by the logger.
 
 > `optional` **correlationId**: `string`
 
-Defined in: [logger.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L41)
+Defined in: [logger.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L41)
 
 Optional correlation ID for tracing requests across services
 
@@ -26,7 +26,7 @@ Optional correlation ID for tracing requests across services
 
 > `optional` **data**: `Record`\<`string`, `unknown`\>
 
-Defined in: [logger.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L49)
+Defined in: [logger.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L49)
 
 Arbitrary structured data attached to the log entry
 
@@ -36,7 +36,7 @@ Arbitrary structured data attached to the log entry
 
 > `optional` **duration**: `number`
 
-Defined in: [logger.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L57)
+Defined in: [logger.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L57)
 
 Duration in milliseconds (for timed operations)
 
@@ -46,7 +46,7 @@ Duration in milliseconds (for timed operations)
 
 > `optional` **error**: `object`
 
-Defined in: [logger.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L51)
+Defined in: [logger.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L51)
 
 Serialized error information
 
@@ -68,7 +68,7 @@ Serialized error information
 
 > **level**: [`LogLevel`](../type-aliases/LogLevel.md)
 
-Defined in: [logger.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L35)
+Defined in: [logger.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L35)
 
 Severity level
 
@@ -78,7 +78,7 @@ Severity level
 
 > **message**: `string`
 
-Defined in: [logger.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L37)
+Defined in: [logger.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L37)
 
 Human-readable log message
 
@@ -88,7 +88,7 @@ Human-readable log message
 
 > `optional` **parentSpanId**: `string`
 
-Defined in: [logger.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L47)
+Defined in: [logger.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L47)
 
 Optional parent span ID for nested trace hierarchies
 
@@ -98,7 +98,7 @@ Optional parent span ID for nested trace hierarchies
 
 > **service**: `string`
 
-Defined in: [logger.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L39)
+Defined in: [logger.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L39)
 
 Service or module name
 
@@ -108,7 +108,7 @@ Service or module name
 
 > `optional` **spanId**: `string`
 
-Defined in: [logger.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L45)
+Defined in: [logger.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L45)
 
 Optional span ID within a trace
 
@@ -118,7 +118,7 @@ Optional span ID within a trace
 
 > **timestamp**: `string`
 
-Defined in: [logger.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L33)
+Defined in: [logger.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L33)
 
 ISO 8601 timestamp
 
@@ -128,6 +128,6 @@ ISO 8601 timestamp
 
 > `optional` **traceId**: `string`
 
-Defined in: [logger.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L43)
+Defined in: [logger.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L43)
 
 Optional distributed trace ID

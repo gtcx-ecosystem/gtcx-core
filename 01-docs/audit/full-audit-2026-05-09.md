@@ -38,13 +38,13 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 ### Findings
 
-- **[High] [Spec Fidelity] — Package matrix stale across 3 surfaces.** `README.md:60-92` lists 18 TS packages; `01-docs/specs/03-platform/packages/README.md:1-30` says "all 18 public TypeScript packages"; `01-docs/decisions/014-runtime-substrate.md:13` says "21 TypeScript packages". `find packages -name package.json -not -path "*config*"` returns 21. New packages: `resilience`, `runtime`, `telemetry`.
+- **[High] [Spec Fidelity] — Package matrix stale across 3 surfaces.** `README.md:60-92` lists 18 TS packages; `01-docs/specs/packages/README.md:1-30` says "all 18 public TypeScript packages"; `01-docs/decisions/014-runtime-substrate.md:13` says "21 TypeScript packages". `find packages -name package.json -not -path "*config*"` returns 21. New packages: `resilience`, `runtime`, `telemetry`.
 
 - **[High] [Spec Fidelity] — ADR count claim wrong.** `README.md:163` claims "All 17 architecture decision records". Actual count: 14 numbered ADRs (001-014).
 
 - ~~**[Medium] [Consistency] — Sprint 6 promise unmet.**~~ **Closed (Sprint 3, commit pending).** Legacy `security/03-platform/src/offline/storage.ts` (766 LOC, dead code superseded by `secure-storage.ts`) deleted along with its 989-LOC test file. Exception list in `03-platform/tools/check-package-boundaries.mjs` updated: only `verification/types/schemas.ts` remains, marked permanent (Zod schemas co-locate by design). Architecture check now passes with 217 source files (was 218).
 
-- **[Low] [Structural Integrity] — `runtime` package depends on 5 internal packages.** `03-platform/packages/runtime/03-platform/src/runtime.ts:8-30` imports `api-client`, `connectivity`, `logging`, `resilience`, `telemetry`. Permitted aggregation per ADR-014 but undocumented in boundary check.
+- **[Low] [Structural Integrity] — `runtime` package depends on 5 internal packages.** `03-platform/packages/runtime/src/runtime.ts:8-30` imports `api-client`, `connectivity`, `logging`, `resilience`, `telemetry`. Permitted aggregation per ADR-014 but undocumented in boundary check.
 
 ---
 
@@ -55,7 +55,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | Area                           | Status | Evidence                                                                                                             |
 | ------------------------------ | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | Authentication & Authorization | ✓      | Library has no auth surface; threat model correctly scopes this away                                                 |
-| Data Protection                | ✓      | `redactSecrets` default sanitizer; AES-GCM in `03-platform/packages/security/03-platform/src/offline/storage.ts`     |
+| Data Protection                | ✓      | `redactSecrets` default sanitizer; AES-GCM in `03-platform/packages/security/src/offline/storage.ts`     |
 | Input Validation               | ✓      | Zod schemas everywhere; 9.9M fuzz runs / 0 crashes                                                                   |
 | Dependency Security            | ✓      | `pnpm audit` clean; exact-version pinning on libp2p + undici; cargo-deny + cargo-audit in CI                         |
 | Cryptographic Correctness      | ✓      | Ed25519 via @noble/curves; STRIDE + attack tree complete                                                             |
@@ -65,15 +65,15 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 | ID              | Severity | File:Line                                                         | Status                   | Take                                                                                                                                                                                                                                                                                                                                 |
 | --------------- | -------- | ----------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| SA-002          | Medium   | `03-platform/packages/crypto/03-platform/src/zkp.ts:114-130`      | **Closed** (Sprint 2)    | `generate()` now throws unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`. Verify path remains open.                                                                                                                                                                                                                                         |
-| SA-004 / AT-002 | High     | `03-platform/packages/verification/03-platform/src/certificates/` | **Closed** (Sprint 2)    | `RevocationChecker` interface required on `tracedVerifyCertificate()`. Fail-closed on backend errors. Three factories provided: in-memory, deny-all, no-op.                                                                                                                                                                          |
+| SA-002          | Medium   | `03-platform/packages/crypto/src/zkp.ts:114-130`      | **Closed** (Sprint 2)    | `generate()` now throws unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`. Verify path remains open.                                                                                                                                                                                                                                         |
+| SA-004 / AT-002 | High     | `03-platform/packages/verification/src/certificates/` | **Closed** (Sprint 2)    | `RevocationChecker` interface required on `tracedVerifyCertificate()`. Fail-closed on backend errors. Three factories provided: in-memory, deny-all, no-op.                                                                                                                                                                          |
 | AT-005          | Medium   | `package.json` overrides                                          | **Closed** (Sprint 2)    | `pnpm.overrides` pins `@noble/curves@1` and `@noble/hashes@1`. `03-platform/tools/check-crypto-deps.mjs` enforces version allowlist + integrity hashes in CI.                                                                                                                                                                        |
 | AT-004          | Medium   | `rust/gtcx-crypto/03-platform/src/keystore.rs`                    | **Closed** (Sprints 2+5) | FIPS provider via aws-lc-rs shipped behind `--features fips` (CMVP #4816 inherited). PKCS#11 backend (`Pkcs11KeyStore`) shipped behind `--features pkcs11` — Ed25519 via CKM_EDDSA, supports SoftHSMv2 / AWS CloudHSM / hardware HSMs. Cloud KMS adapter is a Sprint 5+ hardening pass per `01-docs/09-security/pkcs11-keystore.md`. |
 
 ### New findings
 
 - ~~**[Medium] [Supply Chain]** — No `pnpm audit-signatures` in CI.~~ **Withdrawn.** `pnpm` has no `audit-signatures` subcommand (npm-only). The actual gap — content-pinning of crypto deps — is closed by `03-platform/tools/check-crypto-deps.mjs` (commit `ad78de6`) which enforces a version + sha512 integrity allowlist for `@noble/*` packages.
-- ~~**[Low] [Defense-in-Depth]** — `03-platform/packages/ai/03-platform/src/index.ts:36-39` uses `randomBytes(16).toString('hex')` for traceId. `crypto.randomUUID()` is more idiomatic and 5x faster.~~ **Withdrawn.** `randomBytes(16).toString('hex')` produces a 32-char hex traceId matching the W3C trace context spec; `randomUUID()` produces a 36-char dashed UUID and is not interchangeable. The existing code is correct.
+- ~~**[Low] [Defense-in-Depth]** — `03-platform/packages/ai/src/index.ts:36-39` uses `randomBytes(16).toString('hex')` for traceId. `crypto.randomUUID()` is more idiomatic and 5x faster.~~ **Withdrawn.** `randomBytes(16).toString('hex')` produces a 32-char hex traceId matching the W3C trace context spec; `randomUUID()` produces a 36-char dashed UUID and is not interchangeable. The existing code is correct.
 
 ---
 
@@ -149,7 +149,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 ### AI Trust Gaps Specific to This Product
 
-1. **Hash-commitment ZKP can be silently consumed.** `03-platform/packages/crypto/03-platform/src/zkp.ts:130-160` produces a "proof" indistinguishable from random bytes when Rust bindings unavailable. AI-driven verification pipelines may rate-limit warnings and miss the signal.
+1. **Hash-commitment ZKP can be silently consumed.** `03-platform/packages/crypto/src/zkp.ts:130-160` produces a "proof" indistinguishable from random bytes when Rust bindings unavailable. AI-driven verification pipelines may rate-limit warnings and miss the signal.
 2. ~~**No deterministic build attestation.** Provenance manifest is generated, but no reproducible-build harness. AI agent auditing supply chain cannot independently re-derive the npm tarball hash.~~ **Partially closed (Sprint 5 task 2, commit pending).** `pnpm build:reproducible` (`03-platform/tools/check-reproducible-build.mjs`) builds a target package twice from clean state and compares the resulting tarballs bit-for-bit. Packages without `workspace:*` runtime deps (e.g. `@gtcx/utils`) verify reproducible. Packages with `workspace:*` deps (e.g. `@gtcx/verification`) consistently fail because `pnpm pack` rewrites those deps to versions in non-deterministic order — a known upstream bug, not a gtcx-core issue. Tool correctly identifies the bug and prints workarounds. Full closure requires either an upstream pnpm fix, post-pack canonicalization in CI, or replacing `workspace:*` with pinned versions before publish.
 3. ~~**Ambient redaction has an opt-out.** Misconfigured downstream consumer can ship `sanitizeInput: (x) => x` and silently disable redaction. No telemetry that an explicit override fired.~~ **Closed (Sprint 5 task 4, commit pending).** `traced()` now emits a `sanitizer_override` event to stderr the moment a wrapper is created with explicit `sanitizeInput` or `sanitizeOutput`. One-shot per construction, not per call. Aggregators can grep `event=sanitizer_override` to surface every active override at deployment time.
 4. ~~**`@gtcx/ai` traces emit to stderr only.** No structured trace export to OTel by default. AI-native observability claim is partly aspirational.~~ **Closed (Sprint 5 task 3, commit pending).** `@gtcx/ai` now defines a `SpanEmitter` contract with `onSpanStart` / `onSpanEnd` lifecycle callbacks. `traced()` invokes the emitter (per-call override or process-wide default via `setDefaultSpanEmitter()`) on every span lifecycle event — start, success-end, failure-end. Stderr emission is preserved (additive, not replaced). Emitter exceptions are caught and surfaced via `event=span_emitter_error`. The bridge from `SpanEmitter` to OpenTelemetry's `Tracer` lives in `@gtcx/telemetry` (next commit) so `@gtcx/ai` keeps its zero-deps property.
@@ -268,7 +268,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | #   | Task                                            | Files                                                                                                                  | Effort           |
 | --- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | 1   | README package matrix → 21 + ADR count → 14     | `README.md:60-92,163`                                                                                                  | 30m              |
-| 2   | Spec README → 21 + add 3 spec files             | `01-docs/specs/03-platform/packages/README.md`, `01-docs/specs/03-platform/packages/{resilience,runtime,telemetry}.md` | 3h               |
+| 2   | Spec README → 21 + add 3 spec files             | `01-docs/specs/packages/README.md`, `01-docs/specs/packages/{resilience,runtime,telemetry}.md` | 3h               |
 | 3   | Push 15 unpushed commits OR document why staged | git                                                                                                                    | 5m               |
 | 4   | Resolve `_delete/` folder                       | `_delete/`                                                                                                             | 15m              |
 | 5   | Document AI-native CODEOWNER pattern            | `01-docs/01-agents/governance/`                                                                                        | DONE — `7537089` |
@@ -291,10 +291,10 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 | #   | Task                                           | Files                                                                               | Effort |
 | --- | ---------------------------------------------- | ----------------------------------------------------------------------------------- | ------ |
-| 1   | ZKP TS fallback default→throw                  | `03-platform/packages/crypto/03-platform/src/zkp.ts:114-160`                        | 4h     |
+| 1   | ZKP TS fallback default→throw                  | `03-platform/packages/crypto/src/zkp.ts:114-160`                        | 4h     |
 | 2   | `pnpm audit-signatures` in CI                  | `.github/workflows/ci.yml:43`                                                       | 30m    |
 | 3   | Hash-pin `@noble/*` via overrides              | `package.json`                                                                      | 2h     |
-| 4   | `RevocationChecker` interface                  | `03-platform/packages/verification/03-platform/src/certificates/types.ts` + callers | 1d     |
+| 4   | `RevocationChecker` interface                  | `03-platform/packages/verification/src/certificates/types.ts` + callers | 1d     |
 | 5   | `aws-lc-rs` provider behind `feature = "fips"` | `rust/gtcx-crypto/03-platform/src/provider/aws_lc.rs`                               | 2d     |
 
 **DoD:** SA-002 status: Documented → Closed. `cargo build --features fips` passes.
@@ -310,7 +310,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | 1   | Confirm gtcx-agent active; if blocked, escalate                    | external                                                                | 1h     |
 | 2   | `security-incident-runbook.md` with disclosure SLA                 | new file                                                                | 3h     |
 | 3   | SoftHSMv2 in CI + integration test                                 | `.github/workflows/ci.yml`, `rust/gtcx-crypto/tests/hsm_integration.rs` | 4h     |
-| 4   | Decompose `security/03-platform/src/offline/storage.ts` (766→<500) | `03-platform/packages/security/03-platform/src/offline/storage/*`       | 1d     |
+| 4   | Decompose `security/03-platform/src/offline/storage.ts` (766→<500) | `03-platform/packages/security/src/offline/storage/*`       | 1d     |
 | 5   | Build `gtcx-codeowner-action` per `01-docs/01-agents/governance/`  | new repo                                                                | 2d     |
 
 **DoD:** `gh api orgs/gtcx-ecosystem/members | grep gtcx-agent` non-empty. `03-platform/tools/check-package-boundaries.mjs` exception map empty (or only `verification/types/schemas.ts`). Action posts reviews on next 5 PRs.
@@ -341,8 +341,8 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | --- | --------------------------------------------------------- | ----------------------------------------------------------------- | ------ |
 | 1   | PKCS#11 / Cloud KMS backend for `KeyStore`                | `rust/gtcx-crypto/03-platform/src/keystore/cloud_kms.rs`          | 2d     |
 | 2   | Reproducible-build harness                                | `03-platform/tools/check-reproducible-build.mjs`                  | 1d     |
-| 3   | OTel exporter wired into `@gtcx/ai` traces by default     | `03-platform/packages/ai/03-platform/src/index.ts` + new exporter | 1d     |
-| 4   | Telemetry when explicit `sanitizeInput` overrides default | `03-platform/packages/ai/03-platform/src/index.ts`                | 4h     |
+| 3   | OTel exporter wired into `@gtcx/ai` traces by default     | `03-platform/packages/ai/src/index.ts` + new exporter | 1d     |
+| 4   | Telemetry when explicit `sanitizeInput` overrides default | `03-platform/packages/ai/src/index.ts`                | 4h     |
 | 5   | Launch `ai-native-governance` template repo               | new repo                                                          | 1d     |
 
 #### Sprint 6 — "Defense Stage Readiness"

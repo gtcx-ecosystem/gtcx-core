@@ -6,7 +6,7 @@
 
 # Interface: SiteReference
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:244](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L244)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:244](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L244)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:244]
 
 > `optional` **category**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:248](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L248)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:248](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L248)
 
 Site category (ExtractionSite, ProcessingFacility, etc.)
 
@@ -24,7 +24,7 @@ Site category (ExtractionSite, ProcessingFacility, etc.)
 
 > **country**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:252](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L252)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:252](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L252)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:252]
 
 > **name**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:246](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L246)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:246](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L246)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:246]
 
 > **region**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:251](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L251)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:251](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L251)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:251]
 
 > **siteId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:245](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L245)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:245](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L245)
 
 ***
 
@@ -56,6 +56,6 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:245]
 
 > `optional` **siteType**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:250](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L250)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:250](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L250)
 
 Site type (extraction-site, processing-site, etc.)

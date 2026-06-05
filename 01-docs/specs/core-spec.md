@@ -122,5 +122,5 @@ Shared config workspace packages live under `03-platform/packages/config/`:
 - [`01-docs/architecture/overview.md`](../architecture/overview.md) — layer map and trust boundaries
 - [`01-docs/decisions/`](../decisions/) — all ADRs
 - [`01-docs/09-security/security-framework.md`](../security/security-framework.md) — security framework
-- [`01-docs/specs/03-platform/packages/`](./03-platform/packages/) — per-package specifications
+- [`01-docs/specs/packages/`](./packages/) — per-package specifications
 - [`01-docs/devops/runbooks/quality-runbook.md`](../devops/runbooks/quality-runbook.md) — quality gates

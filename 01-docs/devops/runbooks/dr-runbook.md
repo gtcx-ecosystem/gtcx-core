@@ -90,7 +90,7 @@ npm view @gtcx/crypto@latest --json | jq '.dist.integrity' && \
 
 **Response:**
 
-1. **Revoke** — Add revoked key ID to `03-platform/packages/crypto/03-platform/src/revoked-keys.ts`
+1. **Revoke** — Add revoked key ID to `03-platform/packages/crypto/src/revoked-keys.ts`
 2. **Rotate** — Generate new key pair via `rust/gtcx-crypto` keygen with new key ID
 3. **Re-sign** — Re-sign all active release artifacts with new key
 4. **Publish** — Push revocation registry update as emergency patch release

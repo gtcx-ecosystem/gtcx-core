@@ -148,7 +148,7 @@ Validates `@gtcx/crypto-native` configuration changes. Enforces that the binding
 
 1. Read `01-docs/01-agents/onboarding/orientation.md`
 2. Read `01-docs/09-security/` — full threat control matrix and security framework
-3. Read the relevant package spec in `01-docs/specs/03-platform/packages/` for the package being worked on
+3. Read the relevant package spec in `01-docs/specs/packages/` for the package being worked on
 4. Read the relevant ADRs in `01-docs/decisions/` for any security-related decisions
 5. If reviewing a ZKP change: read the circuit spec before reading the implementation
 6. Read `01-docs/01-agents/workflows/safety-rules.md`
@@ -161,7 +161,7 @@ Validates `@gtcx/crypto-native` configuration changes. Enforces that the binding
 | Resource                    | Location                                        |
 | --------------------------- | ----------------------------------------------- |
 | Security framework          | `01-docs/09-security/`                          |
-| Package specifications      | `01-docs/specs/03-platform/packages/`           |
+| Package specifications      | `01-docs/specs/packages/`           |
 | ADRs (security-related)     | `01-docs/decisions/`                            |
 | Safety rules and escalation | `01-docs/01-agents/workflows/safety-rules.md`   |
 | Canonical archetype         | `1-agentic/archetypes/crypto-security-engineer` |

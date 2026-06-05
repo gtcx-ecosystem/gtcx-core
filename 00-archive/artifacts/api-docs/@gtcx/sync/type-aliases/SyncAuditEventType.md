@@ -8,4 +8,4 @@
 
 > **SyncAuditEventType** = `"sync.start"` \| `"sync.conflict"` \| `"sync.resolved"` \| `"sync.unresolved"` \| `"sync.complete"` \| `"sync.failed"` \| `"sync.cancelled"`
 
-Defined in: [types.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L31)
+Defined in: [types.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L31)

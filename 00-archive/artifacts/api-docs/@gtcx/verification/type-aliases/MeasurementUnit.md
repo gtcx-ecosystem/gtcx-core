@@ -8,6 +8,6 @@
 
 > **MeasurementUnit** = `"g"` \| `"kg"` \| `"oz"` \| `"troy_oz"` \| `"lb"` \| `"mt"` \| `"ct"` \| `"bag"` \| `"bale"` \| `"barrel"` \| `"l"` \| `"gal"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts:175](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts#L175)
+Defined in: [03-platform/packages/verification/src/types/definitions/primitives.ts:175](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/primitives.ts#L175)
 
 Measurement units - universal

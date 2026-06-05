@@ -6,7 +6,7 @@
 
 # Class: SecurityLogger
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L121)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L121)
 
 Security logger with batching and structured output
 
@@ -24,7 +24,7 @@ await logger.authSuccess('user-123', 'session-456');
 
 > **new SecurityLogger**(`config?`): `SecurityLogger`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:128](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L128)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:128](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L128)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:128](
 
 > **accessDenied**(`actorId`, `resource`, `action`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:266](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L266)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:266](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L266)
 
 Log access denied
 
@@ -70,7 +70,7 @@ Log access denied
 
 > **addBatchHandler**(`handler`): `void`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:142](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L142)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:142](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L142)
 
 Register a batch log handler
 
@@ -90,7 +90,7 @@ Register a batch log handler
 
 > **addHandler**(`handler`): `void`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L135)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L135)
 
 Register a log handler
 
@@ -110,7 +110,7 @@ Register a log handler
 
 > **authFailure**(`reason`, `actorId?`, `ip?`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:255](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L255)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:255](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L255)
 
 Log authentication failure
 
@@ -138,7 +138,7 @@ Log authentication failure
 
 > **authSuccess**(`actorId`, `sessionId`, `metadata?`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:240](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L240)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:240](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L240)
 
 Log authentication success
 
@@ -166,7 +166,7 @@ Log authentication success
 
 > **flush**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:205](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L205)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:205](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L205)
 
 Flush batched events
 
@@ -180,7 +180,7 @@ Flush batched events
 
 > **log**(`event`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L149)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L149)
 
 Log a security event
 
@@ -200,7 +200,7 @@ Log a security event
 
 > **logEvent**(`eventType`, `outcome`, `options?`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L193)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L193)
 
 Quick log method - creates event and logs it
 
@@ -228,7 +228,7 @@ Quick log method - creates event and logs it
 
 > **securityAlert**(`description`, `metadata?`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:300](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L300)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:300](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L300)
 
 Log security alert
 
@@ -252,7 +252,7 @@ Log security alert
 
 > **shutdown**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:225](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L225)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:225](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L225)
 
 Shutdown logger and flush remaining events
 
@@ -266,7 +266,7 @@ Shutdown logger and flush remaining events
 
 > **tamperDetected**(`dataId`, `dataType`, `reason`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:288](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L288)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:288](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L288)
 
 Log tamper detection
 
@@ -294,7 +294,7 @@ Log tamper detection
 
 > **validationFailure**(`resource`, `reason`, `actorId?`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/logger.ts:277](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/logger.ts#L277)
+Defined in: [03-platform/packages/security/src/audit/logger.ts:277](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/logger.ts#L277)
 
 Log validation failure
 

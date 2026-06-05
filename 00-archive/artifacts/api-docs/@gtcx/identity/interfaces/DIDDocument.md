@@ -6,7 +6,7 @@
 
 # Interface: DIDDocument
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L20)
+Defined in: [03-platform/packages/identity/src/did.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L20)
 
 DID Document structure (simplified W3C spec)
 
@@ -16,7 +16,7 @@ DID Document structure (simplified W3C spec)
 
 > **@context**: `string`[]
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L21)
+Defined in: [03-platform/packages/identity/src/did.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L21)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/did.ts:21](https://gi
 
 > `optional` **assertionMethod**: `string`[]
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L26)
+Defined in: [03-platform/packages/identity/src/did.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L26)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/did.ts:26](https://gi
 
 > **authentication**: `string`[]
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L25)
+Defined in: [03-platform/packages/identity/src/did.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L25)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/did.ts:25](https://gi
 
 > `optional` **controller**: `string`
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L23)
+Defined in: [03-platform/packages/identity/src/did.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L23)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/did.ts:23](https://gi
 
 > **created**: `string`
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L27)
+Defined in: [03-platform/packages/identity/src/did.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L27)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/did.ts:27](https://gi
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L22)
+Defined in: [03-platform/packages/identity/src/did.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L22)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/did.ts:22](https://gi
 
 > `optional` **updated**: `string`
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L28)
+Defined in: [03-platform/packages/identity/src/did.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L28)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [03-platform/packages/identity/03-platform/src/did.ts:28](https://gi
 
 > **verificationMethod**: [`VerificationMethod`](VerificationMethod.md)[]
 
-Defined in: [03-platform/packages/identity/03-platform/src/did.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/did.ts#L24)
+Defined in: [03-platform/packages/identity/src/did.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/did.ts#L24)

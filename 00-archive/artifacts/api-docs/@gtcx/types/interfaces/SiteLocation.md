@@ -6,7 +6,7 @@
 
 # Interface: SiteLocation
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L32)
+Defined in: [03-platform/packages/types/src/models/site.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L32)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:32](https
 
 > `optional` **accessNotes**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L43)
+Defined in: [03-platform/packages/types/src/models/site.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L43)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:43](https
 
 > `optional` **boundary**: [`GeoPolygon`](GeoPolygon.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L41)
+Defined in: [03-platform/packages/types/src/models/site.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L41)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:41](https
 
 > **coordinates**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L37)
+Defined in: [03-platform/packages/types/src/models/site.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L37)
 
 #### latitude
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:37](https
 
 > **country**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L33)
+Defined in: [03-platform/packages/types/src/models/site.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L33)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:33](https
 
 > `optional` **district**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L35)
+Defined in: [03-platform/packages/types/src/models/site.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L35)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:35](https
 
 > `optional` **elevation**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L42)
+Defined in: [03-platform/packages/types/src/models/site.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L42)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:42](https
 
 > `optional` **locality**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L36)
+Defined in: [03-platform/packages/types/src/models/site.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L36)
 
 ***
 
@@ -78,4 +78,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:36](https
 
 > **region**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L34)
+Defined in: [03-platform/packages/types/src/models/site.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L34)

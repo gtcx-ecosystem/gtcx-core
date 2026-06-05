@@ -66,7 +66,7 @@ Each thread closes when no open items remain on either side; the section moves t
 ### Outbound — what gtcx-core has committed to mobile
 
 - **W1-W8 sign-off convention** — no major bump to any linked-group member (`@gtcx/types`, `@gtcx/crypto`, `@gtcx/identity`, `@gtcx/verification`, `@gtcx/domain`, `@gtcx/schemas`, `@gtcx/security`) without explicit gtcx-mobile engineering-lead sign-off via PR description mention or PR comment. Operationalized via `ClickUp / baseline-os` post per [api-change-migration-policy.md §Time-Bound Consumer Sign-Off Conventions](../release/api-change-migration-policy.md#time-bound-consumer-sign-off-conventions). Auto-archives 2026-06-22.
-- **`deriveKeyPbkdf2` upstreamed** — shipped in commit `ab3f544`, exported from `@gtcx/crypto`, validated against RFC 7914 §11 vectors. Implementation is canonical-only (no iterated-SHA-256 fallback); see [JSDoc](../../03-platform/packages/crypto/03-platform/src/key-derivation.ts) for the React Native polyfill guidance landed in `3ca5eb2`.
+- **`deriveKeyPbkdf2` upstreamed** — shipped in commit `ab3f544`, exported from `@gtcx/crypto`, validated against RFC 7914 §11 vectors. Implementation is canonical-only (no iterated-SHA-256 fallback); see [JSDoc](../../03-platform/packages/crypto/src/key-derivation.ts) for the React Native polyfill guidance landed in `3ca5eb2`.
 - **Mobile-development-plan stub-comment correction** — mobile fixed their `mobile-development-plan.md:72` line on their side (commit `d10e3f9` in their repo).
 
 ### Inbound — what gtcx-mobile has committed to us

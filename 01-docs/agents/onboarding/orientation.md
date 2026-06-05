@@ -50,7 +50,7 @@ In this order — no exceptions:
 1. `01-docs/specs/core-spec.md` — scope, NFRs, design principles
 2. `01-docs/architecture/overview.md` — layer map and trust boundaries
 3. `01-docs/decisions/` — all ADRs (understand why things are the way they are)
-4. `01-docs/specs/03-platform/packages/` — spec for the package you are working in
+4. `01-docs/specs/packages/` — spec for the package you are working in
 5. `01-docs/01-agents/workflows/safety-rules.md` — before making any change
 6. `01-docs/01-agents/readiness-and-audit-lanes.md` — five audit lanes, scores, anti-drift (before citing 8.9 or “ready”)
 
@@ -116,7 +116,7 @@ See `01-docs/devops/runbooks/quality-runbook.md` for the full gate sequence and 
 | Need                    | Location                                                                                                                |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | System specification    | `01-docs/specs/core-spec.md`                                                                                            |
-| Package specs           | `01-docs/specs/03-platform/packages/`                                                                                   |
+| Package specs           | `01-docs/specs/packages/`                                                                                   |
 | System architecture     | `01-docs/architecture/`                                                                                                 |
 | Architecture decisions  | `01-docs/decisions/`                                                                                                    |
 | Security framework      | `01-docs/09-security/`                                                                                                  |

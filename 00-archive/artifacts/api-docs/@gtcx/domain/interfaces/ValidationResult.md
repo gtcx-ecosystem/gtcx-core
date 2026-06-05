@@ -6,7 +6,7 @@
 
 # Interface: ValidationResult
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:138](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L138)
+Defined in: [03-platform/packages/domain/src/types.ts:138](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L138)
 
 Validation result
 
@@ -16,7 +16,7 @@ Validation result
 
 > **errors**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L140)
+Defined in: [03-platform/packages/domain/src/types.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L140)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:140](https://g
 
 > **isValid**: `boolean`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L139)
+Defined in: [03-platform/packages/domain/src/types.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L139)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:139](https://g
 
 > `optional` **warnings**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L141)
+Defined in: [03-platform/packages/domain/src/types.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L141)

@@ -6,7 +6,7 @@
 
 # Interface: SiteMetadata
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L100)
+Defined in: [03-platform/packages/types/src/models/site.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L100)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:100](http
 
 > `optional` **environmental**: [`EnvironmentalInfo`](EnvironmentalInfo.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L104)
+Defined in: [03-platform/packages/types/src/models/site.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L104)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:104](http
 
 > `optional` **geologicalInfo**: [`GeologicalInfo`](GeologicalInfo.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L101)
+Defined in: [03-platform/packages/types/src/models/site.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L101)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:101](http
 
 > `optional` **infrastructure**: [`InfrastructureInfo`](InfrastructureInfo.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L102)
+Defined in: [03-platform/packages/types/src/models/site.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L102)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:102](http
 
 > `optional` **workforce**: [`WorkforceInfo`](WorkforceInfo.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L103)
+Defined in: [03-platform/packages/types/src/models/site.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L103)

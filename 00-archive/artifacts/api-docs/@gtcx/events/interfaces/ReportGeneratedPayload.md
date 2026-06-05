@@ -6,7 +6,7 @@
 
 # Interface: ReportGeneratedPayload
 
-Defined in: [types.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L208)
+Defined in: [types.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L208)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **complianceScore**: `number`
 
-Defined in: [types.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L212)
+Defined in: [types.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L212)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **criticalIssues**: `number`
 
-Defined in: [types.ts:213](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L213)
+Defined in: [types.ts:213](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L213)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:213](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **duration**: `number`
 
-Defined in: [types.ts:214](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L214)
+Defined in: [types.ts:214](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L214)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:214](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **format**: `"summary"` \| `"detailed"` \| `"export"`
 
-Defined in: [types.ts:210](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L210)
+Defined in: [types.ts:210](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L210)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [types.ts:210](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **recordCount**: `number`
 
-Defined in: [types.ts:211](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L211)
+Defined in: [types.ts:211](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L211)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [types.ts:211](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **reportId**: `string`
 
-Defined in: [types.ts:209](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L209)
+Defined in: [types.ts:209](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L209)

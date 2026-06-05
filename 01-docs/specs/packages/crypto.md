@@ -143,13 +143,13 @@ No dependency on `@gtcx/crypto-native` directly — backend selection via `nativ
 
 ## Implementation
 
-`03-platform/packages/crypto/03-platform/src/`
+`03-platform/packages/crypto/src/`
 
 ---
 
 ## Reference
 
 - [`01-docs/09-security/security-framework.md`](../../security/security-framework.md) — cryptographic standards and approved libraries
-- [`01-docs/specs/03-platform/packages/crypto-native.md`](./crypto-native.md) — native binding surface
-- [`01-docs/specs/03-platform/packages/rust/gtcx-crypto.md`](./rust/gtcx-crypto.md) — Rust crate spec
+- [`01-docs/specs/packages/crypto-native.md`](./crypto-native.md) — native binding surface
+- [`01-docs/specs/packages/rust/gtcx-crypto.md`](./rust/gtcx-crypto.md) — Rust crate spec
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview and dependency rules

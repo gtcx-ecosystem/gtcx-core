@@ -6,7 +6,7 @@
 
 # Interface: VerifierSignature
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L17)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L17)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:17](
 
 > **publicKey**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L20)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L20)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:20](
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L19)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L19)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:19](
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L21)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L21)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:21](
 
 > **verifierId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L18)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L18)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:18](
 
 > `optional` **weight**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L22)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L22)

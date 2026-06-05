@@ -40,7 +40,7 @@ Pre-flight, development, and pre-commit checklists for AI agents. Run the releva
 ### Context
 
 - [ ] Read `CLAUDE.md` (auto-loaded) — confirm repo identity, key paths, and pnpm commands
-- [ ] Read the relevant package spec in `01-docs/specs/03-platform/packages/` before changing package behavior
+- [ ] Read the relevant package spec in `01-docs/specs/packages/` before changing package behavior
 - [ ] If continuing prior work: read `,auto-dev-state.md`
 - [ ] Identify which agent role applies to this task — read the role file before acting
 

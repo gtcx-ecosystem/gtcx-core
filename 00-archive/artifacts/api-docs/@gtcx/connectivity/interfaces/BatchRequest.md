@@ -6,7 +6,7 @@
 
 # Interface: BatchRequest
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:3](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/batching.ts#L3)
+Defined in: [03-platform/packages/connectivity/src/batching.ts:3](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/batching.ts#L3)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:3](ht
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/batching.ts#L4)
+Defined in: [03-platform/packages/connectivity/src/batching.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/batching.ts#L4)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:4](ht
 
 > **payload**: `unknown`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/batching.ts#L5)
+Defined in: [03-platform/packages/connectivity/src/batching.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/batching.ts#L5)

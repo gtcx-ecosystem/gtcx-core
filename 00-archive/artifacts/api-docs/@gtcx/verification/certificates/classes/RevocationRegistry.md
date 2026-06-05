@@ -6,7 +6,7 @@
 
 # Class: RevocationRegistry
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L31)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L31)
 
 Revocation Registry Implementation
 
@@ -19,7 +19,7 @@ distributed ledger or a secure central registry.
 
 > **check**(`certificateId`): [`RevocationStatus`](../../interfaces/RevocationStatus.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L61)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L61)
 
 Check if a certificate is revoked
 
@@ -39,7 +39,7 @@ Check if a certificate is revoked
 
 > **clear**(): `void`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L77)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L77)
 
 Clear the registry (useful for tests)
 
@@ -53,7 +53,7 @@ Clear the registry (useful for tests)
 
 > **revoke**(`certificateId`, `reason`): `void`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L47)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L47)
 
 Mark a certificate as revoked
 
@@ -77,7 +77,7 @@ Mark a certificate as revoked
 
 > `static` **getInstance**(): `RevocationRegistry`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L37)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L37)
 
 #### Returns
 

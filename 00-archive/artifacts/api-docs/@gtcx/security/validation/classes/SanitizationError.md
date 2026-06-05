@@ -6,7 +6,7 @@
 
 # Class: SanitizationError
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:384](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L384)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:384](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L384)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.t
 
 > **new SanitizationError**(`message`, `code`): `SanitizationError`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:385](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L385)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:385](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L385)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > `readonly` **code**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:387](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L387)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:387](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L387)
 
 ***
 

@@ -69,7 +69,7 @@ Then read:
 Before creating any code, write the package spec at:
 
 ```
-01-docs/specs/03-platform/packages/<package-name>.md
+01-docs/specs/packages/<package-name>.md
 ```
 
 The spec must include:
@@ -142,7 +142,7 @@ Add an entry in `01-docs/10-compliance/spec-to-code-traceability.md` mapping the
 ### 8. Update indexes
 
 - `01-docs/decisions/README.md` — if an ADR was written
-- `01-docs/specs/03-platform/packages/README.md` — add the new package
+- `01-docs/specs/packages/README.md` — add the new package
 
 ---
 
@@ -163,7 +163,7 @@ All gates must pass before the package is considered complete.
 
 ## Post-Flight
 
-- [ ] Package spec exists at `01-docs/specs/03-platform/packages/<name>.md`
+- [ ] Package spec exists at `01-docs/specs/packages/<name>.md`
 - [ ] ADR exists if architectural boundary was changed
 - [ ] All CI gates pass
 - [ ] `pnpm-workspace.yaml` updated (with prior human approval)

@@ -6,7 +6,7 @@
 
 # Interface: CryptographicProof
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L147)
+Defined in: [03-platform/packages/domain/src/types.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L147)
 
 Cryptographic proof for asset verification
 
@@ -16,7 +16,7 @@ Cryptographic proof for asset verification
 
 > **certificate**: [`AssetCertificate`](AssetCertificate.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L150)
+Defined in: [03-platform/packages/domain/src/types.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L150)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:150](https://g
 
 > **hash**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L148)
+Defined in: [03-platform/packages/domain/src/types.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L148)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:148](https://g
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L149)
+Defined in: [03-platform/packages/domain/src/types.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L149)

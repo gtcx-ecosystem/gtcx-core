@@ -6,7 +6,7 @@
 
 # Interface: ConnectivityState
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/types.ts#L9)
+Defined in: [03-platform/packages/connectivity/src/types.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/types.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:9](https
 
 > `optional` **bandwidthKbps**: `number`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/types.ts#L14)
+Defined in: [03-platform/packages/connectivity/src/types.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/types.ts#L14)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:14](http
 
 > **lastChecked**: `number`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/types.ts#L12)
+Defined in: [03-platform/packages/connectivity/src/types.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/types.ts#L12)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:12](http
 
 > `optional` **latencyMs**: `number`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/types.ts#L13)
+Defined in: [03-platform/packages/connectivity/src/types.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/types.ts#L13)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:13](http
 
 > **online**: `boolean`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/types.ts#L10)
+Defined in: [03-platform/packages/connectivity/src/types.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/types.ts#L10)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:10](http
 
 > **profile**: [`ConnectivityProfile`](../type-aliases/ConnectivityProfile.md)
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/types.ts#L11)
+Defined in: [03-platform/packages/connectivity/src/types.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/types.ts#L11)

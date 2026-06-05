@@ -6,7 +6,7 @@
 
 # Interface: LotData
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:227](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L227)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:227](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L227)
 
 Lot data - COMMODITY-AGNOSTIC
 
@@ -16,7 +16,7 @@ Lot data - COMMODITY-AGNOSTIC
 
 > **commodity**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:230](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L230)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:230](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L230)
 
 Commodity type (gold, silver, cocoa, etc.)
 
@@ -26,7 +26,7 @@ Commodity type (gold, silver, cocoa, etc.)
 
 > `optional` **commoditySubtype**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:232](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L232)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:232](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L232)
 
 Commodity subtype (e.g., 'alluvial', 'lode', 'arabica')
 
@@ -36,7 +36,7 @@ Commodity subtype (e.g., 'alluvial', 'lode', 'arabica')
 
 > **discoveryDate**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:238](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L238)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:238](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L238)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:238]
 
 > **estimatedWeight**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:233](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L233)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:233](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L233)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:233]
 
 > **lotId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:228](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L228)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:228](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L228)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:228]
 
 > `optional` **producerId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:241](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L241)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:241](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L241)
 
 Producer identifier (was: minerId)
 
@@ -70,7 +70,7 @@ Producer identifier (was: minerId)
 
 > `optional` **purity**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:237](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L237)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:237](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L237)
 
 Purity percentage (0-100), primarily for metals
 
@@ -80,7 +80,7 @@ Purity percentage (0-100), primarily for metals
 
 > `optional` **quality**: [`QualityGrade`](../type-aliases/QualityGrade.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:235](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L235)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:235](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L235)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:235]
 
 > `optional` **site**: [`SiteReference`](SiteReference.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:239](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L239)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:239](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L239)
 
 ***
 
@@ -96,4 +96,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:239]
 
 > **unit**: [`MeasurementUnit`](../type-aliases/MeasurementUnit.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:234](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L234)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:234](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L234)

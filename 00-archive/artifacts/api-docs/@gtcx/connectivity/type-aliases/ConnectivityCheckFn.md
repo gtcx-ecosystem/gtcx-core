@@ -8,7 +8,7 @@
 
 > **ConnectivityCheckFn** = () => `Promise`\<[`ConnectivityCheckResult`](../interfaces/ConnectivityCheckResult.md)\>
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/types.ts#L25)
+Defined in: [03-platform/packages/connectivity/src/types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/types.ts#L25)
 
 ## Returns
 

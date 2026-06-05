@@ -6,7 +6,7 @@
 
 # Interface: ComplianceDashboard
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:387](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L387)
+Defined in: [03-platform/packages/domain/src/types.ts:387](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L387)
 
 Compliance dashboard
 
@@ -16,7 +16,7 @@ Compliance dashboard
 
 > **byCategory**: `Record`\<`string`, \{ `compliant`: `number`; `total`: `number`; `trend`: `"up"` \| `"down"` \| `"stable"`; `violations`: `number`; \}\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:397](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L397)
+Defined in: [03-platform/packages/domain/src/types.ts:397](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L397)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:397](https://g
 
 > **overview**: `object`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:388](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L388)
+Defined in: [03-platform/packages/domain/src/types.ts:388](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L388)
 
 #### complianceScore
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:388](https://g
 
 > **recentActivity**: [`ComplianceRecord`](ComplianceRecord.md)[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:408](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L408)
+Defined in: [03-platform/packages/domain/src/types.ts:408](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L408)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:408](https://g
 
 > **upcomingDeadlines**: `object`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:409](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L409)
+Defined in: [03-platform/packages/domain/src/types.ts:409](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L409)
 
 #### daysRemaining
 
@@ -80,4 +80,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:409](https://g
 
 > **urgentActions**: [`ComplianceRecord`](ComplianceRecord.md)[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:407](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L407)
+Defined in: [03-platform/packages/domain/src/types.ts:407](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L407)

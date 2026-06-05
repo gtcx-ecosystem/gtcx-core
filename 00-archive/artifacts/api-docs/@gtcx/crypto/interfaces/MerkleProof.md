@@ -6,7 +6,7 @@
 
 # Interface: MerkleProof
 
-Defined in: [proofs.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/proofs.ts#L8)
+Defined in: [proofs.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/proofs.ts#L8)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [proofs.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **leaf**: `string`
 
-Defined in: [proofs.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/proofs.ts#L10)
+Defined in: [proofs.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/proofs.ts#L10)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [proofs.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **leafIndex**: `number`
 
-Defined in: [proofs.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/proofs.ts#L11)
+Defined in: [proofs.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/proofs.ts#L11)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [proofs.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **root**: `string`
 
-Defined in: [proofs.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/proofs.ts#L9)
+Defined in: [proofs.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/proofs.ts#L9)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [proofs.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **siblings**: `object`[]
 
-Defined in: [proofs.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/proofs.ts#L12)
+Defined in: [proofs.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/proofs.ts#L12)
 
 #### hash
 

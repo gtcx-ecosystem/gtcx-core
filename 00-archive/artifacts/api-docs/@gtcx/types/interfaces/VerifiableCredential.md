@@ -6,7 +6,7 @@
 
 # Interface: VerifiableCredential
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L101)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L101)
 
 Verifiable credential structure
 
@@ -16,7 +16,7 @@ Verifiable credential structure
 
 > **@context**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L102)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L102)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:10
 
 > **credentialSubject**: [`CredentialSubject`](CredentialSubject.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L107)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L107)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:10
 
 > `optional` **expirationDate**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L106)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L106)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:10
 
 > **issuanceDate**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L105)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L105)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:10
 
 > **issuer**: `string` \| [`CredentialIssuer`](CredentialIssuer.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L104)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L104)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:10
 
 > `optional` **proof**: [`CredentialProof`](CredentialProof.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L108)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L108)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:10
 
 > **type**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L103)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L103)

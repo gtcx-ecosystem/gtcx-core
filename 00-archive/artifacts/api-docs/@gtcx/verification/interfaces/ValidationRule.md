@@ -6,7 +6,7 @@
 
 # Interface: ValidationRule
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/templates.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/templates.ts#L10)
+Defined in: [03-platform/packages/verification/src/types/definitions/templates.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/templates.ts#L10)
 
 Validation rule for certificate fields
 
@@ -16,7 +16,7 @@ Validation rule for certificate fields
 
 > **field**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/templates.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/templates.ts#L11)
+Defined in: [03-platform/packages/verification/src/types/definitions/templates.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/templates.ts#L11)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **max**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/templates.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/templates.ts#L13)
+Defined in: [03-platform/packages/verification/src/types/definitions/templates.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/templates.ts#L13)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **message**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/templates.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/templates.ts#L15)
+Defined in: [03-platform/packages/verification/src/types/definitions/templates.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/templates.ts#L15)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **min**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/templates.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/templates.ts#L12)
+Defined in: [03-platform/packages/verification/src/types/definitions/templates.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/templates.ts#L12)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **value**: `string` \| `number` \| `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/templates.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/templates.ts#L14)
+Defined in: [03-platform/packages/verification/src/types/definitions/templates.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/templates.ts#L14)

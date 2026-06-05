@@ -8,7 +8,7 @@
 
 > **getControlCount**(): `number`
 
-Defined in: [core12/schema.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/schema.ts#L32)
+Defined in: [core12/schema.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/schema.ts#L32)
 
 ## Returns
 

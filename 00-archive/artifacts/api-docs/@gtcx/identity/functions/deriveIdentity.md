@@ -8,7 +8,7 @@
 
 > **deriveIdentity**(`parentIdentity`, `context`, `options?`): `Promise`\<[`IdentityCreationResult`](../interfaces/IdentityCreationResult.md)\>
 
-Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:280](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/identity.ts#L280)
+Defined in: [03-platform/packages/identity/src/identity.ts:280](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/identity.ts#L280)
 
 Create a derived identity from existing identity
 Useful for creating role-specific or context-specific identities

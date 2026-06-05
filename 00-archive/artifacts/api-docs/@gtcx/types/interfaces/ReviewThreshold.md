@@ -6,7 +6,7 @@
 
 # Interface: ReviewThreshold
 
-Defined in: [03-platform/packages/types/03-platform/src/common/provenance.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/provenance.ts#L113)
+Defined in: [03-platform/packages/types/src/common/provenance.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/provenance.ts#L113)
 
 A single review threshold that policy gates evaluate against an
 [AgenticProvenance](AgenticProvenance.md) record.
@@ -17,7 +17,7 @@ A single review threshold that policy gates evaluate against an
 
 > **condition**: [`ReviewThresholdCondition`](../type-aliases/ReviewThresholdCondition.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/provenance.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/provenance.ts#L115)
+Defined in: [03-platform/packages/types/src/common/provenance.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/provenance.ts#L115)
 
 Named condition identifier
 
@@ -27,7 +27,7 @@ Named condition identifier
 
 > `optional` **description**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/provenance.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/provenance.ts#L123)
+Defined in: [03-platform/packages/types/src/common/provenance.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/provenance.ts#L123)
 
 Optional human-readable explanation
 
@@ -37,7 +37,7 @@ Optional human-readable explanation
 
 > **escalationLevel**: `"none"` \| `"urgent"` \| `"review"` \| `"approval"`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/provenance.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/provenance.ts#L121)
+Defined in: [03-platform/packages/types/src/common/provenance.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/provenance.ts#L121)
 
 Escalation level when this threshold fires
 
@@ -47,7 +47,7 @@ Escalation level when this threshold fires
 
 > **minConfidence**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/provenance.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/provenance.ts#L117)
+Defined in: [03-platform/packages/types/src/common/provenance.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/provenance.ts#L117)
 
 Minimum confidence required to avoid triggering this threshold
 
@@ -57,6 +57,6 @@ Minimum confidence required to avoid triggering this threshold
 
 > **requiredReviewerRole**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/provenance.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/provenance.ts#L119)
+Defined in: [03-platform/packages/types/src/common/provenance.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/provenance.ts#L119)
 
 Role required to clear a review triggered by this threshold

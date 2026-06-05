@@ -6,7 +6,7 @@
 
 # Interface: CertificateLocation
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L26)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L26)
 
 Location data for certificates
 
@@ -16,7 +16,7 @@ Location data for certificates
 
 > **accuracy**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L30)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L30)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **altitude**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L29)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L29)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **latitude**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L27)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L27)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **longitude**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L28)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L28)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L31)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L31)

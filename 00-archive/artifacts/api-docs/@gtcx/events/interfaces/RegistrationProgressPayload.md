@@ -6,7 +6,7 @@
 
 # Interface: RegistrationProgressPayload
 
-Defined in: [types.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L100)
+Defined in: [types.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L100)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **completedSteps**: `string`[]
 
-Defined in: [types.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L104)
+Defined in: [types.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L104)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **progress**: `number`
 
-Defined in: [types.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L103)
+Defined in: [types.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L103)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **sessionId**: `string`
 
-Defined in: [types.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L101)
+Defined in: [types.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L101)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [types.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **step**: `string`
 
-Defined in: [types.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L102)
+Defined in: [types.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L102)

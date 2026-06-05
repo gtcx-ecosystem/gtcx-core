@@ -113,5 +113,5 @@ Special-case tests required:
 ## See also
 
 - ADR-014 (`01-docs/decisions/014-runtime-substrate.md`)
-- `03-platform/packages/telemetry/03-platform/src/` — implementation
-- `03-platform/packages/runtime/03-platform/src/runtime.ts` — primary consumer that wires `MetricsCollector` + `Tracer` into the API client
+- `03-platform/packages/telemetry/src/` — implementation
+- `03-platform/packages/runtime/src/runtime.ts` — primary consumer that wires `MetricsCollector` + `Tracer` into the API client

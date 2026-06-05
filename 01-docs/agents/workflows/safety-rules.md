@@ -46,7 +46,7 @@ Governed by the Baseline Protocol (`ai-1-baseline`) and enforced through `1-agen
 - Write or update documentation in `01-docs/`
 - Write new tests for existing behavior
 - Fix failing tests where the fix is clearly scoped to the failing case
-- Update package docs in `01-docs/specs/03-platform/packages/`
+- Update package docs in `01-docs/specs/packages/`
 - Propose ADRs — status must remain `Proposed`; human approval required before `Accepted`
 - Commit completed work using conventional commit format — commit after each meaningful, self-contained unit of work; never accumulate multiple tasks into a single commit
 

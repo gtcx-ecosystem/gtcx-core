@@ -8,7 +8,7 @@
 
 > **attachProvenance**\<`T`\>(`data`, `provenance`): `object`
 
-Defined in: [provenance.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/provenance.ts#L47)
+Defined in: [provenance.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/provenance.ts#L47)
 
 Wrap raw output data with an AgenticProvenance envelope.
 

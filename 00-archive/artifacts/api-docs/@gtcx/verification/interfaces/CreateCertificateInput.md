@@ -6,7 +6,7 @@
 
 # Interface: CreateCertificateInput
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L59)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L59)
 
 Input for creating a certificate - COMMODITY-AGNOSTIC
 
@@ -16,7 +16,7 @@ Input for creating a certificate - COMMODITY-AGNOSTIC
 
 > `optional` **assetLotData**: [`AssetLotData`](AssetLotData.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L65)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L65)
 
 Primary: commodity-agnostic asset lot data
 
@@ -26,7 +26,7 @@ Primary: commodity-agnostic asset lot data
 
 > `optional` **commodityType**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L69)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L69)
 
 Commodity type (optional, can be inferred from assetLotData)
 
@@ -36,7 +36,7 @@ Commodity type (optional, can be inferred from assetLotData)
 
 > `optional` **complianceData**: [`ComplianceData`](ComplianceData.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L73)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L73)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **custodyData**: [`CustodyEntry`](CustodyEntry.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L74)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L74)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > **deviceId**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L63)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L63)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **environmentalFactors**: [`EnvironmentalFactors`](EnvironmentalFactors.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L80)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L80)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **expiresAt**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L82)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L82)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **geologicalContext**: [`GeologicalContext`](GeologicalContext.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L79)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L79)
 
 #### Deprecated
 
@@ -88,7 +88,7 @@ Use resourceContext instead
 
 > `optional` **goldLotData**: [`GoldLotData`](GoldLotData.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L67)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L67)
 
 #### Deprecated
 
@@ -100,7 +100,7 @@ Use assetLotData instead
 
 > **location**: [`CertificateLocation`](CertificateLocation.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L61)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L61)
 
 ***
 
@@ -108,7 +108,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **photoEvidence**: [`PhotoEvidenceRef`](PhotoEvidenceRef.md)[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L71)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L71)
 
 ***
 
@@ -116,7 +116,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **photoHash**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L70)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L70)
 
 ***
 
@@ -124,7 +124,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **resourceContext**: [`ResourceContext`](ResourceContext.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L77)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L77)
 
 Primary: commodity-agnostic resource context
 
@@ -134,7 +134,7 @@ Primary: commodity-agnostic resource context
 
 > `optional` **settlementData**: [`SettlementRecord`](SettlementRecord.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L75)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L75)
 
 ***
 
@@ -142,7 +142,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > **templateId**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L60)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L60)
 
 ***
 
@@ -150,7 +150,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > **userRole**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L62)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L62)
 
 ***
 
@@ -158,7 +158,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **validationMetrics**: [`ValidationMetrics`](ValidationMetrics.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L81)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L81)
 
 ***
 
@@ -166,4 +166,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/gene
 
 > `optional` **workflowContext**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L72)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L72)

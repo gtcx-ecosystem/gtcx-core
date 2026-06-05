@@ -6,7 +6,7 @@
 
 # Class: VerificationError
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/errors.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/errors.ts#L8)
+Defined in: [03-platform/packages/verification/src/certificates/errors.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/errors.ts#L8)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/erro
 
 > **new VerificationError**(`message`, `code?`, `details?`, `options?`): `VerificationError`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/errors.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/errors.ts#L9)
+Defined in: [03-platform/packages/verification/src/certificates/errors.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/errors.ts#L9)
 
 #### Parameters
 

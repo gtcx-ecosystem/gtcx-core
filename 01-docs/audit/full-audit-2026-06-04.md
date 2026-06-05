@@ -65,12 +65,12 @@ audit_date: '2026-06-04'
   **Fix:** README “Current State” — split **library readiness** vs **DTF Tier 5** with link to workplan.
 
 - **[Medium] [Code Quality] — Verification LOC near policy ceiling**  
-  **Evidence:** `03-platform/packages/verification/03-platform/src/certificates/templates.ts` ~468 LOC (per prior audit); new `commodity-origin-zk.ts` adds bridge layer.  
+  **Evidence:** `03-platform/packages/verification/src/certificates/templates.ts` ~468 LOC (per prior audit); new `commodity-origin-zk.ts` adds bridge layer.  
   **Impact:** 500 LOC gate risk on next sprint.  
   **Fix:** Extract template registry table to `templates/registry.ts` when touching certificates.
 
 - **[Low] [Consistency] — `export *` barrels resolved in crypto**  
-  **Evidence:** Prior master audit P1; `03-platform/packages/crypto/03-platform/src/index.ts` uses explicit exports (grep: no `export *`).  
+  **Evidence:** Prior master audit P1; `03-platform/packages/crypto/src/index.ts` uses explicit exports (grep: no `export *`).  
   **Impact:** Closed for crypto; verify `domain`/`security` if still flagged elsewhere.
 
 - **[Low] [Operational Readiness] — Rust P2P transport Phase 2**  
@@ -101,7 +101,7 @@ audit_date: '2026-06-04'
   **Fix:** Infra-owned vendor SOW; gtcx-core supplies KAT + threat matrix + fuzz evidence pack only.
 
 - **[Medium] [Data Protection] — Profile cert masks enforced pre-prove, not in-circuit**  
-  **Evidence:** `rust/gtcx-zkp/03-platform/src/circuit_profiles/validate.rs:64-83`; `01-docs/specs/03-platform/packages/zkp-circuit-profiles.md` — by design.  
+  **Evidence:** `rust/gtcx-zkp/03-platform/src/circuit_profiles/validate.rs:64-83`; `01-docs/specs/packages/zkp-circuit-profiles.md` — by design.  
   **Impact:** Verifiers must call policy gate; document in trust portal “off-circuit policy” section.  
   **Fix:** Trust portal column (DTF-5.4.3) — already scheduled.
 
@@ -144,7 +144,7 @@ Stages assessed per `01-docs/08-gtm/gtm-reality-check-2026-06-02.md` (foundation
 
 ### AI trust gaps
 
-- AI-native traced APIs exist (`03-platform/packages/verification/03-platform/src/traced.ts`) but **commodity-origin ZK path is not yet traced** — only structural + optional crypto verify.
+- AI-native traced APIs exist (`03-platform/packages/verification/src/traced.ts`) but **commodity-origin ZK path is not yet traced** — only structural + optional crypto verify.
 - `ai-eval` scorecard WARN non-blocking in CI — examiners may ask for hard gate on pilot branches.
 
 ### Competitive reality (90-day copy test)
@@ -250,7 +250,7 @@ Restore root `pnpm typecheck`/`build`; align README with Tier-5 status.
 | 1   | Extract verification↔workproof integration test to break turbo cycle      | Remediation | `03-platform/packages/verification/package.json`, new `tests/integration/commodity-origin-zk.test.ts` or `03-platform/packages/integration-tests/` | M      | Unblocks CI graph  |
 | 2   | Remove `@gtcx/workproof` devDep from verification if test moved           | Remediation | `03-platform/packages/verification/package.json`                                                                                                   | S      | Closes cycle       |
 | 3   | README: split library 9.x vs DTF Tier 5                                   | Remediation | `README.md`                                                                                                                                        | S      | Spec fidelity      |
-| 4   | Reconcile package count in `01-docs/specs/03-platform/packages/README.md` | Remediation | docs                                                                                                                                               | S      | Onboarding truth   |
+| 4   | Reconcile package count in `01-docs/specs/packages/README.md` | Remediation | docs                                                                                                                                               | S      | Onboarding truth   |
 | 5   | `pnpm agent:sync` or gitignore agent drift from format:check              | Evolution   | `.agent/`, `package.json` format ignore                                                                                                            | S      | Hygiene gate green |
 
 ### Definition of Done
@@ -371,7 +371,7 @@ DTF-5.4.1 registry semver; load-test evidence JSON (5.4.2).
 
 | #   | Task                                             | Layer      | Files                                                                                  | Effort | Why It Matters |
 | --- | ------------------------------------------------ | ---------- | -------------------------------------------------------------------------------------- | ------ | -------------- |
-| 1   | `CircuitRegistry` with semver + deprecation      | Innovation | new `03-platform/packages/crypto/03-platform/src/circuit-registry.ts` or rust registry | L      | Tier-5.4       |
+| 1   | `CircuitRegistry` with semver + deprecation      | Innovation | new `03-platform/packages/crypto/src/circuit-registry.ts` or rust registry | L      | Tier-5.4       |
 | 2   | Load test 1000 proofs/min script + evidence JSON | Innovation | `03-platform/tools/` or `benchmarks/`                                                  | M      | Trust portal   |
 | 3   | Trust portal circuit ID column doc (5.4.3)       | Evolution  | `01-docs/governance/trust-portal.md`                                                   | S      | Verifier UX    |
 

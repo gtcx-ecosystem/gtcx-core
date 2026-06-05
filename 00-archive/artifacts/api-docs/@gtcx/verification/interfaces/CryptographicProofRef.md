@@ -6,7 +6,7 @@
 
 # Interface: CryptographicProofRef
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L26)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L26)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **algorithm**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L27)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L27)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **dataHash**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L28)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L28)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **publicKey**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L30)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L30)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L29)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L29)

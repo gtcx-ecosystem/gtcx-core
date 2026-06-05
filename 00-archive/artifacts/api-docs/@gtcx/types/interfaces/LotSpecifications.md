@@ -6,7 +6,7 @@
 
 # Interface: LotSpecifications
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L146)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L146)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > `optional` **assayReport**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L149)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L149)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > `optional` **dimensions**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L150)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L150)
 
 #### height?
 
@@ -42,7 +42,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > `optional` **form**: `"bar"` \| `"nugget"` \| `"dust"` \| `"ore"` \| `"concentrate"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:155](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L155)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:155](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L155)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > `optional` **purity**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L148)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L148)
 
 ***
 
@@ -58,4 +58,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **weight**: [`WeightRecord`](WeightRecord.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L147)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L147)

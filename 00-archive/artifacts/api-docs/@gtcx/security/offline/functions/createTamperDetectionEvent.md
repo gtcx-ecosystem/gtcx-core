@@ -8,7 +8,7 @@
 
 > **createTamperDetectionEvent**(`dataId`, `dataType`, `checkType`, `result`, `deviceId?`): [`TamperDetectionEvent`](../interfaces/TamperDetectionEvent.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L212)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:212](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L212)
 
 Create tamper detection event for logging
 

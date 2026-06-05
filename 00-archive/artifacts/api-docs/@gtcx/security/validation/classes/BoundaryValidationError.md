@@ -6,7 +6,7 @@
 
 # Class: BoundaryValidationError
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:394](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L394)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:394](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L394)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.t
 
 > **new BoundaryValidationError**(`validationError`): `BoundaryValidationError`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:395](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L395)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:395](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L395)
 
 #### Parameters
 
@@ -102,7 +102,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > `readonly` **validationError**: `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:395](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L395)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:395](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L395)
 
 #### code
 

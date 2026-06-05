@@ -6,7 +6,7 @@
 
 # Class: LicenseValidationError
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/errors.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/errors.ts#L5)
+Defined in: [03-platform/packages/services/src/trading/errors.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/errors.ts#L5)
 
 Trading service error classes.
 
@@ -20,7 +20,7 @@ Trading service error classes.
 
 > **new LicenseValidationError**(`message`, `options?`): `LicenseValidationError`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/errors.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/errors.ts#L6)
+Defined in: [03-platform/packages/services/src/trading/errors.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/errors.ts#L6)
 
 #### Parameters
 

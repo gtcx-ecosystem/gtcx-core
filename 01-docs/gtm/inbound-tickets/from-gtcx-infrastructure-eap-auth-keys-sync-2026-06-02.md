@@ -17,7 +17,7 @@ Run EAP sync to populate `gtcx/intelligence/staging/auth-keys` with the
 
 ### New function: `rebuildIntelligenceBundleFromEapSecrets()`
 
-- **File:** `03-platform/packages/eap/03-platform/src/sync-intelligence.ts`
+- **File:** `03-platform/packages/eap/src/sync-intelligence.ts`
 - **What it does:**
   1. Lists all secrets in AWS Secrets Manager matching `gtcx/eap/staging/clients/*`
   2. Reads each secret, extracts `api_key`
@@ -27,7 +27,7 @@ Run EAP sync to populate `gtcx/intelligence/staging/auth-keys` with the
 
 ### New CLI script
 
-- **File:** `03-platform/packages/eap/03-platform/src/cli-sync-bundle.ts`
+- **File:** `03-platform/packages/eap/src/cli-sync-bundle.ts`
 - **Script:** `pnpm eap:sync-bundle` (from `03-platform/packages/eap/`)
 - **Env vars:**
   - `EAP_ENVIRONMENT` (default: `staging`)
@@ -71,6 +71,6 @@ by scanning all EAP client secrets — it is idempotent.
 
 ## References
 
-- `03-platform/packages/eap/03-platform/src/sync-intelligence.ts` — `rebuildIntelligenceBundleFromEapSecrets()`
-- `03-platform/packages/eap/03-platform/src/cli-sync-bundle.ts` — CLI entry point
+- `03-platform/packages/eap/src/sync-intelligence.ts` — `rebuildIntelligenceBundleFromEapSecrets()`
+- `03-platform/packages/eap/src/cli-sync-bundle.ts` — CLI entry point
 - `03-platform/packages/eap/package.json` — `eap:sync-bundle` script

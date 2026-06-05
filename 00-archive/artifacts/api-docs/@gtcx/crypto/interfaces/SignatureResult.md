@@ -6,7 +6,7 @@
 
 # Interface: SignatureResult
 
-Defined in: [signing.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/signing.ts#L14)
+Defined in: [signing.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/signing.ts#L14)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [signing.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba
 
 > **message**: `string`
 
-Defined in: [signing.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/signing.ts#L17)
+Defined in: [signing.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/signing.ts#L17)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [signing.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba
 
 > **publicKey**: `string`
 
-Defined in: [signing.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/signing.ts#L16)
+Defined in: [signing.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/signing.ts#L16)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [signing.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba
 
 > **signature**: `string`
 
-Defined in: [signing.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/signing.ts#L15)
+Defined in: [signing.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/signing.ts#L15)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [signing.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba
 
 > **timestamp**: `number`
 
-Defined in: [signing.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/signing.ts#L18)
+Defined in: [signing.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/signing.ts#L18)

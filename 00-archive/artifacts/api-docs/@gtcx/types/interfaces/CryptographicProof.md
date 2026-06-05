@@ -6,7 +6,7 @@
 
 # Interface: CryptographicProof
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:78](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L78)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:78](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L78)
 
 Cryptographic proof for any GeoTag data
 
@@ -16,7 +16,7 @@ Cryptographic proof for any GeoTag data
 
 > **algorithm**: `"Ed25519"` \| `"ECDSA-P256"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L80)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L80)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:80](
 
 > **dataHash**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L81)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L81)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:81](
 
 > **metadata**: [`ProofMetadata`](ProofMetadata.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L86)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L86)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:86](
 
 > **proofType**: [`GeoTagProofType`](../type-aliases/GeoTagProofType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L85)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L85)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:85](
 
 > **publicKey**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L83)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L83)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:83](
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L82)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L82)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:82](
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L84)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L84)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:84](
 
 > **version**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L79)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L79)

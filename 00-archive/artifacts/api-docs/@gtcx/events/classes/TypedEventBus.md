@@ -6,7 +6,7 @@
 
 # Class: TypedEventBus
 
-Defined in: [event-bus.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L24)
+Defined in: [event-bus.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L24)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [event-bus.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3
 
 > **new TypedEventBus**(`options?`): `TypedEventBus`
 
-Defined in: [event-bus.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L37)
+Defined in: [event-bus.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L37)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [event-bus.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3
 
 > **get** **isDestroyed**(): `boolean`
 
-Defined in: [event-bus.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L208)
+Defined in: [event-bus.ts:208](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L208)
 
 Whether the bus has been destroyed.
 
@@ -54,7 +54,7 @@ Whether the bus has been destroyed.
 
 > **get** **isOnline**(): `boolean`
 
-Defined in: [event-bus.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L51)
+Defined in: [event-bus.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L51)
 
 Whether the bus is currently online (dispatching events).
 
@@ -68,7 +68,7 @@ Whether the bus is currently online (dispatching events).
 
 > **clear**(): `void`
 
-Defined in: [event-bus.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L184)
+Defined in: [event-bus.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L184)
 
 Clear all event history.
 
@@ -82,7 +82,7 @@ Clear all event history.
 
 > **destroy**(): `void`
 
-Defined in: [event-bus.ts:197](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L197)
+Defined in: [event-bus.ts:197](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L197)
 
 Destroy the event bus, removing all subscriptions and clearing state.
 
@@ -96,7 +96,7 @@ Destroy the event bus, removing all subscriptions and clearing state.
 
 > **emit**(`event`): `void`
 
-Defined in: [event-bus.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L81)
+Defined in: [event-bus.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L81)
 
 Emit a domain event.
 If online, dispatches to handlers immediately.
@@ -122,7 +122,7 @@ If offline and buffering is enabled, stores for later replay.
 
 > **getHistory**(`type?`, `limit?`): [`DomainEvent`](../interfaces/DomainEvent.md)\<`unknown`\>[]
 
-Defined in: [event-bus.ts:160](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L160)
+Defined in: [event-bus.ts:160](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L160)
 
 Retrieve past events, optionally filtered by type and limited in count.
 
@@ -146,7 +146,7 @@ Retrieve past events, optionally filtered by type and limited in count.
 
 > **getOfflineBuffer**(): [`OfflineEventBuffer`](OfflineEventBuffer.md)
 
-Defined in: [event-bus.ts:217](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L217)
+Defined in: [event-bus.ts:217](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L217)
 
 Get the underlying offline buffer for direct inspection.
 
@@ -160,7 +160,7 @@ Get the underlying offline buffer for direct inspection.
 
 > **goOffline**(): `void`
 
-Defined in: [event-bus.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L68)
+Defined in: [event-bus.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L68)
 
 Set the bus to offline mode. Events will be buffered instead of dispatched.
 
@@ -174,7 +174,7 @@ Set the bus to offline mode. Events will be buffered instead of dispatched.
 
 > **goOnline**(): `Promise`\<`number`\>
 
-Defined in: [event-bus.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L59)
+Defined in: [event-bus.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L59)
 
 Set the bus to online mode. If offline buffering is enabled,
 buffered events are flushed automatically.
@@ -189,7 +189,7 @@ buffered events are flushed automatically.
 
 > **off**(`type`, `handler`): `void`
 
-Defined in: [event-bus.ts:137](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L137)
+Defined in: [event-bus.ts:137](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L137)
 
 Unsubscribe a handler from a specific event type.
 
@@ -213,7 +213,7 @@ Unsubscribe a handler from a specific event type.
 
 > **on**(`type`, `handler`): () => `void`
 
-Defined in: [event-bus.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L102)
+Defined in: [event-bus.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L102)
 
 Subscribe to a specific event type.
 Returns an unsubscribe function (IDomainEventEmitter contract)
@@ -247,7 +247,7 @@ and also provides an EventSubscription object.
 
 > **onAny**(`handler`): () => `void`
 
-Defined in: [event-bus.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L122)
+Defined in: [event-bus.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L122)
 
 Subscribe to all events.
 Returns an unsubscribe function.
@@ -276,7 +276,7 @@ Returns an unsubscribe function.
 
 > **once**(`type`, `handler`): () => `void`
 
-Defined in: [event-bus.ts:145](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/event-bus.ts#L145)
+Defined in: [event-bus.ts:145](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/event-bus.ts#L145)
 
 Subscribe to a specific event type for one-time delivery.
 The handler is automatically removed after its first invocation.

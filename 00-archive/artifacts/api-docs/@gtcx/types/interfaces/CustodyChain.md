@@ -6,7 +6,7 @@
 
 # Interface: CustodyChain
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L14)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L14)
 
 Chain of custody record
 
@@ -16,7 +16,7 @@ Chain of custody record
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L20)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L20)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:2
 
 > **currentHolder**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L18)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L18)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **entries**: [`CustodyEntry`](CustodyEntry.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L17)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L17)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L15)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L15)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **lotId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L16)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L16)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **status**: [`CustodyStatus`](../type-aliases/CustodyStatus.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L19)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L19)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **updatedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L21)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L21)

@@ -6,7 +6,7 @@
 
 # Interface: AttestorPattern
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L107)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L107)
 
 Attestor pattern for matching
 
@@ -16,7 +16,7 @@ Attestor pattern for matching
 
 > `optional` **credentialRequired**: [`CredentialType`](../type-aliases/CredentialType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L110)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L110)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **type**: `"exact"` \| `"pattern"` \| `"credential"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L108)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L108)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **value**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L109)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L109)

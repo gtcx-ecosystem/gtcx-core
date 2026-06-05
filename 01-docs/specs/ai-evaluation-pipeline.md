@@ -213,7 +213,7 @@ Options:
     "findings": [
       {
         "rule_id": "crypto-human-review",
-        "file": "03-platform/packages/crypto/03-platform/src/signing.ts",
+        "file": "03-platform/packages/crypto/src/signing.ts",
         "severity": "block",
         "message": "Crypto package modified without crypto-security-engineer approval"
       }

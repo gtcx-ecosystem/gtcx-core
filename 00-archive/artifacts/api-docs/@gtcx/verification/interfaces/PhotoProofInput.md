@@ -6,7 +6,7 @@
 
 # Interface: PhotoProofInput
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L57)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L57)
 
 Input for creating a photo proof
 
@@ -16,7 +16,7 @@ Input for creating a photo proof
 
 > **fileHash**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L59)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L59)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L60)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L60)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts
 
 > **uri**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L58)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L58)

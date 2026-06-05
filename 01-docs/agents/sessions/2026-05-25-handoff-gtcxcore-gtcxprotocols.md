@@ -55,17 +55,17 @@ status: 'complete'
 ### Files Touched in gtcx-core
 
 ```
-03-platform/packages/workproof/03-platform/src/predicates/definitions/entity.ts      (new)
-03-platform/packages/workproof/03-platform/src/predicates/uri.ts                     (+9 URIs)
-03-platform/packages/workproof/03-platform/src/predicates/types.ts                   (+EntityPredicateType, +Entity category)
-03-platform/packages/workproof/03-platform/src/predicates/schemas.ts                 (+9 schema entries)
-03-platform/packages/workproof/03-platform/src/predicates/registry.ts                (+9 imports, +9 entries)
-03-platform/packages/workproof/03-platform/src/index.ts                              (+EntityPredicateType export)
+03-platform/packages/workproof/src/predicates/definitions/entity.ts      (new)
+03-platform/packages/workproof/src/predicates/uri.ts                     (+9 URIs)
+03-platform/packages/workproof/src/predicates/types.ts                   (+EntityPredicateType, +Entity category)
+03-platform/packages/workproof/src/predicates/schemas.ts                 (+9 schema entries)
+03-platform/packages/workproof/src/predicates/registry.ts                (+9 imports, +9 entries)
+03-platform/packages/workproof/src/index.ts                              (+EntityPredicateType export)
 03-platform/packages/workproof/tests/entity.test.ts                      (new)
 03-platform/packages/workproof/tests/predicates.test.ts                  (count updates)
-03-platform/packages/verification/03-platform/src/migration/tradepass-aliases.ts     (new)
-03-platform/packages/verification/03-platform/src/migration/index.ts                 (new)
-03-platform/packages/verification/03-platform/src/index.ts                           (+migration export)
+03-platform/packages/verification/src/migration/tradepass-aliases.ts     (new)
+03-platform/packages/verification/src/migration/index.ts                 (new)
+03-platform/packages/verification/src/index.ts                           (+migration export)
 03-platform/packages/verification/package.json                           (+./migration export)
 03-platform/packages/verification/tsup.config.ts                         (+migration/index entry)
 ```
@@ -154,4 +154,4 @@ TradePass's existing `predicate-registry.ts`, `predicate-types.ts`, etc. should 
 
 - gtcx-intelligence ADR-012: `gtcx-intelligence/01-docs/adr/012-predicate-reconciliation-cross-repo.md`
 - gtcx-core predicate extension spec: `gtcx-intelligence/01-docs/specs/gtcx-core-predicate-extension-pr.md`
-- gtcx-core migration helper: `03-platform/packages/verification/03-platform/src/migration/tradepass-aliases.ts`
+- gtcx-core migration helper: `03-platform/packages/verification/src/migration/tradepass-aliases.ts`

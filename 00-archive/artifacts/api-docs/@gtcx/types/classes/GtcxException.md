@@ -6,7 +6,7 @@
 
 # Class: GtcxException
 
-Defined in: [03-platform/packages/types/03-platform/src/common/errors.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/errors.ts#L55)
+Defined in: [03-platform/packages/types/src/common/errors.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/errors.ts#L55)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/errors.ts:55](htt
 
 > **new GtcxException**(`code`, `message`, `details?`): `GtcxException`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/errors.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/errors.ts#L56)
+Defined in: [03-platform/packages/types/src/common/errors.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/errors.ts#L56)
 
 #### Parameters
 
@@ -60,7 +60,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > `readonly` **code**: [`ErrorCode`](../type-aliases/ErrorCode.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/errors.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/errors.ts#L57)
+Defined in: [03-platform/packages/types/src/common/errors.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/errors.ts#L57)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/errors.ts:57](htt
 
 > `readonly` `optional` **details**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/types/03-platform/src/common/errors.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/errors.ts#L59)
+Defined in: [03-platform/packages/types/src/common/errors.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/errors.ts#L59)
 
 ***
 
@@ -134,7 +134,7 @@ not capture any frames.
 
 > **toJSON**(): [`GtcxError`](../interfaces/GtcxError.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/errors.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/errors.ts#L65)
+Defined in: [03-platform/packages/types/src/common/errors.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/errors.ts#L65)
 
 #### Returns
 

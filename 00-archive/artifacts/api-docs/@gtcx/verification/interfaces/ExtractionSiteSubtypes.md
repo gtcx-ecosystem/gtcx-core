@@ -6,7 +6,7 @@
 
 # Interface: ExtractionSiteSubtypes
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts:260](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts#L260)
+Defined in: [03-platform/packages/verification/src/types/definitions/primitives.ts:260](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/primitives.ts#L260)
 
 Site subtypes for extraction sites
 
@@ -16,7 +16,7 @@ Site subtypes for extraction sites
 
 > **Farm**: `"Plantation"` \| `"Smallholder"` \| `"Commercial"` \| `"Cooperative"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts:262](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts#L262)
+Defined in: [03-platform/packages/verification/src/types/definitions/primitives.ts:262](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/primitives.ts#L262)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **Fishery**: `"Artisanal"` \| `"Commercial"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts:263](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts#L263)
+Defined in: [03-platform/packages/verification/src/types/definitions/primitives.ts:263](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/primitives.ts#L263)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **Forest**: `"Concession"` \| `"Community"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts:264](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts#L264)
+Defined in: [03-platform/packages/verification/src/types/definitions/primitives.ts:264](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/primitives.ts#L264)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **Mine**: `"Artisanal"` \| `"Alluvial"` \| `"OpenPit"` \| `"Underground"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts:261](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts#L261)
+Defined in: [03-platform/packages/verification/src/types/definitions/primitives.ts:261](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/primitives.ts#L261)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **Quarry**: `"Artisanal"` \| `"Commercial"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts:265](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/primitives.ts#L265)
+Defined in: [03-platform/packages/verification/src/types/definitions/primitives.ts:265](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/primitives.ts#L265)

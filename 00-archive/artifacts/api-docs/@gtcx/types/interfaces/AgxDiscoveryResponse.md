@@ -6,7 +6,7 @@
 
 # Interface: AgxDiscoveryResponse
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:162](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L162)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:162](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L162)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:162](ht
 
 > **aggregations**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:165](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L165)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:165](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L165)
 
 #### byOrigin
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:165](ht
 
 > **listings**: [`AgxListing`](AgxListing.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:163](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L163)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:163](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L163)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:163](ht
 
 > **totalCount**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:164](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L164)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:164](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L164)

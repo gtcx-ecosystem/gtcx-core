@@ -8,7 +8,7 @@
 
 > `const` **tracedVerifySignedMessage**: (...`args`) => [`VerificationResult`](../interfaces/VerificationResult.md)
 
-Defined in: [traced.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/traced.ts#L130)
+Defined in: [traced.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/traced.ts#L130)
 
 Verify a signed message object (traced)
 

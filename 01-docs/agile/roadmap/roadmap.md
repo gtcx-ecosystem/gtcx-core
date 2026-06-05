@@ -191,5 +191,5 @@ Canonical detail: [01-docs/roadmap.md §4.10](../../roadmap.md#410-gtcxai-eval--
 - [`01-docs/architecture/overview.md`](../../architecture/overview.md)
 - [`01-docs/decisions/007-offline-first-architecture.md`](../../decisions/007-offline-first-architecture.md)
 - [`01-docs/decisions/010-pbft-weighted-consensus.md`](../../decisions/010-pbft-weighted-consensus.md)
-- [`01-docs/specs/03-platform/packages/rust/gtcx-crypto.md`](../../specs/03-platform/packages/rust/gtcx-crypto.md)
-- [`01-docs/specs/03-platform/packages/rust/gtcx-zkp.md`](../../specs/03-platform/packages/rust/gtcx-zkp.md)
+- [`01-docs/specs/packages/rust/gtcx-crypto.md`](../../specs/03-platform/packages/rust/gtcx-crypto.md)
+- [`01-docs/specs/packages/rust/gtcx-zkp.md`](../../specs/03-platform/packages/rust/gtcx-zkp.md)

@@ -6,7 +6,7 @@
 
 # Interface: TelemetryHooks
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L57)
+Defined in: [03-platform/packages/api-client/src/types.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L57)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:57](https:
 
 > `optional` **onRequestComplete**(`context`): `void`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L59)
+Defined in: [03-platform/packages/api-client/src/types.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L59)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:59](https:
 
 > `optional` **onRequestError**(`context`): `void`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L66)
+Defined in: [03-platform/packages/api-client/src/types.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L66)
 
 #### Parameters
 
@@ -86,7 +86,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:66](https:
 
 > `optional` **onRequestStart**(`context`): `void`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L58)
+Defined in: [03-platform/packages/api-client/src/types.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L58)
 
 #### Parameters
 

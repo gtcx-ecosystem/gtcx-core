@@ -6,7 +6,7 @@
 
 # Interface: DeviceAttestation
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L122)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L122)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:122]
 
 > **attestationTime**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L126)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L126)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:126]
 
 > **deviceId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L123)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L123)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:123]
 
 > `optional` **integrityToken**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L125)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L125)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:125]
 
 > **platform**: `"ios"` \| `"android"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L124)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L124)

@@ -6,7 +6,7 @@
 
 # Interface: SignatureEnvelope
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L22)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L22)
 
 Parsed signature envelope components.
 
@@ -16,7 +16,7 @@ Parsed signature envelope components.
 
 > **algorithm**: `"ed25519"`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L26)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L26)
 
 Signing algorithm (e.g. 'ed25519').
 
@@ -26,7 +26,7 @@ Signing algorithm (e.g. 'ed25519').
 
 > **keyId**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L28)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L28)
 
 DID-formatted key identifier.
 
@@ -36,7 +36,7 @@ DID-formatted key identifier.
 
 > **nonce**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L32)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L32)
 
 Hex-encoded nonce.
 
@@ -46,7 +46,7 @@ Hex-encoded nonce.
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L34)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L34)
 
 Hex-encoded signature.
 
@@ -56,7 +56,7 @@ Hex-encoded signature.
 
 > **timestamp**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L30)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L30)
 
 ISO 8601 timestamp used when signing.
 
@@ -66,6 +66,6 @@ ISO 8601 timestamp used when signing.
 
 > **version**: `"v1"`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L24)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L24)
 
 Protocol version (e.g. 'v1').

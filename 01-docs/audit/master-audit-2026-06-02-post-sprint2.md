@@ -39,7 +39,7 @@ caps_fired: 0
 
 **Top 3 priorities for next sprint:**
 
-1. Close coverage gap on Sprint 2 ZKP wrappers — `03-platform/packages/crypto/03-platform/src/zkp-commodity-origin.ts` (41.17% stmts) and `zkp-diamond-origin.ts` (62.5% stmts) must reach 95% threshold (`03-platform/packages/crypto/vitest.config.ts:12-15`)
+1. Close coverage gap on Sprint 2 ZKP wrappers — `03-platform/packages/crypto/src/zkp-commodity-origin.ts` (41.17% stmts) and `zkp-diamond-origin.ts` (62.5% stmts) must reach 95% threshold (`03-platform/packages/crypto/vitest.config.ts:12-15`)
 2. Resolve `@gtcx/ai-eval` provenance publish (public repo visibility decision) or update trust portal to reflect unattested state
 3. Batch-fix ~315 docs with frontmatter errors via scripted enforcement (`pnpm docs:check-frontmatter`)
 
@@ -68,16 +68,16 @@ Phase 1 baseline is commit `9dbd483` (Sprint 2 just landed, before regression fi
 
 **P1:**
 
-- **[P1] Coverage regression from Sprint 2 ZKP wrappers** `03-platform/packages/crypto/03-platform/src/zkp-commodity-origin.ts:56-134` (41.17% stmts), `03-platform/packages/crypto/03-platform/src/zkp-diamond-origin.ts:82,106-119` (62.5% stmts) — new commodity-agnostic and diamond wrapper files fall well below the 95% threshold defined in `03-platform/packages/crypto/vitest.config.ts:12-15`. This causes `pnpm --filter @gtcx/crypto test:coverage` to fail. Fix: add unit tests that mock `loadNativeZkp()` to exercise validation paths and error branches without requiring the compiled NAPI binary; add integration tests under `GTCX_RUN_HEAVY_ZKP_TESTS` gate for end-to-end paths.
+- **[P1] Coverage regression from Sprint 2 ZKP wrappers** `03-platform/packages/crypto/src/zkp-commodity-origin.ts:56-134` (41.17% stmts), `03-platform/packages/crypto/src/zkp-diamond-origin.ts:82,106-119` (62.5% stmts) — new commodity-agnostic and diamond wrapper files fall well below the 95% threshold defined in `03-platform/packages/crypto/vitest.config.ts:12-15`. This causes `pnpm --filter @gtcx/crypto test:coverage` to fail. Fix: add unit tests that mock `loadNativeZkp()` to exercise validation paths and error branches without requiring the compiled NAPI binary; add integration tests under `GTCX_RUN_HEAVY_ZKP_TESTS` gate for end-to-end paths.
 
 - **[P1] Stale dist/ artifacts break typecheck on fresh checkout** `03-platform/packages/crypto/dist/index.d.ts` — after Sprint 2, downstream packages (`identity`, `security`, `services`, `verification`) cannot resolve `@gtcx/crypto` types until `pnpm build` regenerates dist artifacts. The commit message claimed "typecheck 42/42 pass" but this is only true after a prior build. Fix: add a `prepare` or `pretypecheck` build step for `@gtcx/crypto` and `@gtcx/crypto-native`, or ensure dist is regenerated in CI before typecheck.
 
-- **[P1] Package count drift across operational docs** `01-docs/specs/03-platform/packages/README.md:17`, `01-docs/devops/runbooks/quality-runbook.md:46-49`, `01-docs/stack/tech-stack.md:54` — claims 18, 21, or 22 packages inconsistently. Fix: scripted manifest from `pnpm-workspace.yaml`.
+- **[P1] Package count drift across operational docs** `01-docs/specs/packages/README.md:17`, `01-docs/devops/runbooks/quality-runbook.md:46-49`, `01-docs/stack/tech-stack.md:54` — claims 18, 21, or 22 packages inconsistently. Fix: scripted manifest from `pnpm-workspace.yaml`.
 
 **P2:**
 
-- **[P2] Verification templates.ts approaching LOC ceiling** `03-platform/packages/verification/03-platform/src/certificates/templates.ts:468` — future growth triggers gate failure.
-- **[P2] Offline queue ownership split** `03-platform/packages/sync/03-platform/src/index.ts` vs `03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:36,205` — integrator confusion.
+- **[P2] Verification templates.ts approaching LOC ceiling** `03-platform/packages/verification/src/certificates/templates.ts:468` — future growth triggers gate failure.
+- **[P2] Offline queue ownership split** `03-platform/packages/sync/src/index.ts` vs `03-platform/packages/domain/src/internal/offline-queue.ts:36,205` — integrator confusion.
 - **[P2] Rust P2P transport scaffolding only** `rust/gtcx-network/03-platform/src/lib.rs:15-18` — types only, integration planned Phase 2.
 
 ### 1.2 Security Audit
@@ -99,7 +99,7 @@ The commodity-agnostic circuit design is architecturally sound:
 - **R1CS constraints verified** — `CommodityOriginCircuit::generate_constraints` enforces: GPS bounds (4× `uint64_is_ge`), metric thresholds (2× `uint64_is_ge`), commitments (3× SHA-256), region hash (1× SHA-256), Merkle membership (`path.verify_membership`).
 - **Certification flags moved to public input** (line 341: `_certification_flags = UInt64::new_input`) — correct design. KP policy is verified off-chain by the verifier, not constrained in R1CS. This preserves policy flexibility and simplifies the circuit.
 - **NAPI bindings** validate bounds length (`bounds.len() != 4` → error at `rust/gtcx-node/03-platform/src/groth16.rs:138-142`) and decode hex inputs via `decode_32_bytes`.
-- **TypeScript wrappers** validate hex lengths (`assertHex64`, `assertHexEven`) before passing to native layer (`03-platform/packages/crypto/03-platform/src/zkp-commodity-origin.ts:46-58`).
+- **TypeScript wrappers** validate hex lengths (`assertHex64`, `assertHexEven`) before passing to native layer (`03-platform/packages/crypto/src/zkp-commodity-origin.ts:46-58`).
 
 **P1:**
 
@@ -109,7 +109,7 @@ The commodity-agnostic circuit design is architecturally sound:
 **P2:**
 
 - **[P2] Rust transitive advisories accepted** `rust/.cargo/audit.toml:11-41` — `derivative`, `paste`, `rustls-webpki` RUSTSECs. Track upstream migration.
-- **[P2] ai-eval uses `execSync` for git diff** `03-platform/packages/ai-eval/03-platform/src/safety.ts:35-38` — dev/CI tooling only; confined to eval CLI.
+- **[P2] ai-eval uses `execSync` for git diff** `03-platform/packages/ai-eval/src/safety.ts:35-38` — dev/CI tooling only; confined to eval CLI.
 
 ### 1.3 GTM Readiness
 
@@ -220,7 +220,7 @@ Phase 4 reflects the repo state after commit `c19cd19` (test regressions and bro
 
 - Structural integrity remains 10/10; `architecture:check` passes (22 packages, 254 source files).
 - Spec fidelity improved to 7/10 after link fixes, but stale dist/ typecheck issue remains on fresh checkout.
-- Architecture line-count violation **closed** — `03-platform/packages/crypto-native/03-platform/src/index.ts` extracted from 606→247 LOC, `zkp-bindings.ts` created at 427 LOC.
+- Architecture line-count violation **closed** — `03-platform/packages/crypto-native/src/index.ts` extracted from 606→247 LOC, `zkp-bindings.ts` created at 427 LOC.
 
 ### Updated Security
 

@@ -8,7 +8,7 @@
 
 > `const` **GOVERNMENT\_INSPECTOR\_TEMPLATE**: [`CertificateTemplate`](../interfaces/CertificateTemplate.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L85)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L85)
 
 Government Inspector Template
 Highest security for government inspection activities

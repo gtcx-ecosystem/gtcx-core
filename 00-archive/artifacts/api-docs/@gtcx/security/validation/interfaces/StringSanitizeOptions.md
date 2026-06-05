@@ -6,7 +6,7 @@
 
 # Interface: StringSanitizeOptions
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L14)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L14)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.t
 
 > `optional` **allowedPattern**: `RegExp`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L26)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L26)
 
 Allowed characters regex (strips everything else)
 
@@ -24,7 +24,7 @@ Allowed characters regex (strips everything else)
 
 > `optional` **maxLength**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L16)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L16)
 
 Maximum allowed length (truncates if exceeded)
 
@@ -34,7 +34,7 @@ Maximum allowed length (truncates if exceeded)
 
 > `optional` **normalizeUnicode**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L22)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L22)
 
 Normalize to NFC Unicode form
 
@@ -44,7 +44,7 @@ Normalize to NFC Unicode form
 
 > `optional` **stripControlChars**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L24)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L24)
 
 Replace control characters
 
@@ -54,7 +54,7 @@ Replace control characters
 
 > `optional` **stripHtml**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L18)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L18)
 
 Remove HTML tags
 
@@ -64,6 +64,6 @@ Remove HTML tags
 
 > `optional` **trimWhitespace**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L20)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L20)
 
 Trim leading/trailing whitespace

@@ -6,7 +6,7 @@
 
 # Class: ValidationError
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L8)
+Defined in: [03-platform/packages/services/src/registration/types.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L8)
 
 Service validation error. Shared across all GTCX services.
 
@@ -20,7 +20,7 @@ Service validation error. Shared across all GTCX services.
 
 > **new ValidationError**(`message`, `options?`): `ValidationError`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L10)
+Defined in: [03-platform/packages/services/src/registration/types.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L10)
 
 #### Parameters
 
@@ -88,7 +88,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > `readonly` **service**: `string`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L9)
+Defined in: [03-platform/packages/services/src/registration/types.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L9)
 
 ***
 

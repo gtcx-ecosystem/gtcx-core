@@ -6,7 +6,7 @@
 
 # Class: AIContextBuilder
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:340](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L340)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:340](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L340)
 
 Helper to build AI analysis context
 
@@ -26,7 +26,7 @@ Helper to build AI analysis context
 
 > **build**(): [`AIAnalysisContext`](../interfaces/AIAnalysisContext.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:384](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L384)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:384](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L384)
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:384](
 
 > **operation**(`op`): `this`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:343](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L343)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:343](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L343)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:343](
 
 > **withAssetLots**(`lots`): `this`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:348](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L348)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:348](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L348)
 
 #### Parameters
 
@@ -74,7 +74,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:348](
 
 > **withComplianceRecords**(`records`): `this`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:358](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L358)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:358](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L358)
 
 #### Parameters
 
@@ -92,7 +92,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:358](
 
 > **withHistory**(`events`, `operations`, `days?`): `this`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:373](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L373)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:373](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L373)
 
 #### Parameters
 
@@ -118,7 +118,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:373](
 
 > **withMarket**(`market`): `this`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:363](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L363)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:363](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L363)
 
 #### Parameters
 
@@ -136,7 +136,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:363](
 
 > **withTransactions**(`txs`): `this`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:353](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L353)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:353](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L353)
 
 #### Parameters
 
@@ -154,7 +154,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:353](
 
 > **withUser**(`user`): `this`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-integration.ts:368](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-integration.ts#L368)
+Defined in: [03-platform/packages/domain/src/ai-integration.ts:368](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-integration.ts#L368)
 
 #### Parameters
 

@@ -6,7 +6,7 @@
 
 # Interface: Transaction
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:189](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L189)
+Defined in: [03-platform/packages/domain/src/types.ts:189](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L189)
 
 Transaction record
 
@@ -16,7 +16,7 @@ Transaction record
 
 > **assetLotId**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:191](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L191)
+Defined in: [03-platform/packages/domain/src/types.ts:191](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L191)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:191](https://g
 
 > **cryptoSignature**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L200)
+Defined in: [03-platform/packages/domain/src/types.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L200)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:200](https://g
 
 > **currency**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:197](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L197)
+Defined in: [03-platform/packages/domain/src/types.ts:197](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L197)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:197](https://g
 
 > **fromTraderId**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:192](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L192)
+Defined in: [03-platform/packages/domain/src/types.ts:192](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L192)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:192](https://g
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:190](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L190)
+Defined in: [03-platform/packages/domain/src/types.ts:190](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L190)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:190](https://g
 
 > **location**: [`Location`](Location.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:199](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L199)
+Defined in: [03-platform/packages/domain/src/types.ts:199](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L199)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:199](https://g
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L202)
+Defined in: [03-platform/packages/domain/src/types.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L202)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:202](https://g
 
 > **price**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:196](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L196)
+Defined in: [03-platform/packages/domain/src/types.ts:196](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L196)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:196](https://g
 
 > **quantity**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L194)
+Defined in: [03-platform/packages/domain/src/types.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L194)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:194](https://g
 
 > **quantityUnit**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:195](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L195)
+Defined in: [03-platform/packages/domain/src/types.ts:195](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L195)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:195](https://g
 
 > **status**: `"pending"` \| `"confirmed"` \| `"completed"` \| `"disputed"` \| `"cancelled"`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L201)
+Defined in: [03-platform/packages/domain/src/types.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L201)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:201](https://g
 
 > **timestamp**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L198)
+Defined in: [03-platform/packages/domain/src/types.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L198)
 
 ***
 
@@ -112,4 +112,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:198](https://g
 
 > **toTraderId**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L193)
+Defined in: [03-platform/packages/domain/src/types.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L193)

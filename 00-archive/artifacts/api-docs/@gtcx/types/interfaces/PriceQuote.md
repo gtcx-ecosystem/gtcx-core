@@ -6,7 +6,7 @@
 
 # Interface: PriceQuote
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L23)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L23)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:23](htt
 
 > **amount**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L24)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L24)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:24](htt
 
 > **currency**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L25)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L25)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:25](htt
 
 > **pricePerUnit**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L26)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L26)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:26](htt
 
 > `optional` **source**: `"spot"` \| `"negotiated"` \| `"auction"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L29)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L29)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:29](htt
 
 > **unit**: `"g"` \| `"kg"` \| `"oz"` \| `"troy_oz"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L27)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L27)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:27](htt
 
 > **validUntil**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L28)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L28)

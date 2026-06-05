@@ -6,7 +6,7 @@
 
 # Class: SchemaMigrator
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L156)
+Defined in: [03-platform/packages/domain/src/migrations.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L156)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:156](http
 
 > **new SchemaMigrator**(`customMigrations?`): `SchemaMigrator`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L159)
+Defined in: [03-platform/packages/domain/src/migrations.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L159)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:159](http
 
 > **getCurrentVersion**(`entityType`): `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L177)
+Defined in: [03-platform/packages/domain/src/migrations.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L177)
 
 Get current schema version for entity type
 
@@ -52,7 +52,7 @@ Get current schema version for entity type
 
 > **migrate**\<`T`\>(`entity`): [`VersionedEntity`](../interfaces/VersionedEntity.md)\<`T`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:192](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L192)
+Defined in: [03-platform/packages/domain/src/migrations.ts:192](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L192)
 
 Migrate entity to current schema version
 
@@ -78,7 +78,7 @@ Migrate entity to current schema version
 
 > **migrateMany**\<`T`\>(`entities`): [`VersionedEntity`](../interfaces/VersionedEntity.md)\<`T`\>[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:226](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L226)
+Defined in: [03-platform/packages/domain/src/migrations.ts:226](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L226)
 
 Migrate multiple entities
 
@@ -104,7 +104,7 @@ Migrate multiple entities
 
 > **needsMigration**\<`T`\>(`entity`): `boolean`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L184)
+Defined in: [03-platform/packages/domain/src/migrations.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L184)
 
 Check if entity needs migration
 
@@ -130,7 +130,7 @@ Check if entity needs migration
 
 > **registerMigration**(`migration`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:166](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L166)
+Defined in: [03-platform/packages/domain/src/migrations.ts:166](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L166)
 
 Register a new migration
 
@@ -150,7 +150,7 @@ Register a new migration
 
 > **unwrap**\<`T`\>(`entity`): `T`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:244](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L244)
+Defined in: [03-platform/packages/domain/src/migrations.ts:244](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L244)
 
 Unwrap versioned entity to raw data
 
@@ -176,7 +176,7 @@ Unwrap versioned entity to raw data
 
 > **validate**\<`T`\>(`entity`, `validator`): `object`
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:251](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L251)
+Defined in: [03-platform/packages/domain/src/migrations.ts:251](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L251)
 
 Validate entity against current schema
 
@@ -218,7 +218,7 @@ Validate entity against current schema
 
 > **wrap**\<`T`\>(`data`, `entityType`, `version?`): [`VersionedEntity`](../interfaces/VersionedEntity.md)\<`T`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/migrations.ts:233](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/migrations.ts#L233)
+Defined in: [03-platform/packages/domain/src/migrations.ts:233](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/migrations.ts#L233)
 
 Wrap raw data as versioned entity
 

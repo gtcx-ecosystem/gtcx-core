@@ -59,7 +59,7 @@ Confirm with the human reviewer:
 
 Then read:
 
-- `01-docs/specs/03-platform/packages/rust/README.md` — existing crate inventory
+- `01-docs/specs/packages/rust/README.md` — existing crate inventory
 - `01-docs/decisions/001-rust-for-cryptographic-primitives.md` — why Rust, what it covers
 - The relevant crate spec if the new crate extends an existing one
 - `01-docs/01-agents/workflows/safety-rules.md`
@@ -75,7 +75,7 @@ If the crate implements any cryptographic operation: Cryptographic Security Engi
 Before creating any code, write the crate spec at:
 
 ```
-01-docs/specs/03-platform/packages/rust/<crate-name>.md
+01-docs/specs/packages/rust/<crate-name>.md
 ```
 
 The spec must include:
@@ -129,13 +129,13 @@ Add the new crate to the workspace `members` array.
 
 Coordinate with the owner of `rust/gtcx-node` and `@gtcx/crypto-native`. The binding surface must be reviewed by the Cryptographic Security Engineer before any binding is exposed.
 
-Update `01-docs/specs/03-platform/packages/rust/gtcx-node.md` to document the new binding dependency.
+Update `01-docs/specs/packages/rust/gtcx-node.md` to document the new binding dependency.
 
 ---
 
 ### 6. Update the crate spec index
 
-Add the new crate to `01-docs/specs/03-platform/packages/rust/README.md`.
+Add the new crate to `01-docs/specs/packages/rust/README.md`.
 
 ---
 
@@ -171,9 +171,9 @@ pnpm build
 
 ## Post-Flight
 
-- [ ] Crate spec exists at `01-docs/specs/03-platform/packages/rust/<crate-name>.md`
+- [ ] Crate spec exists at `01-docs/specs/packages/rust/<crate-name>.md`
 - [ ] ADR exists if a new protocol boundary was established
-- [ ] Crate listed in `01-docs/specs/03-platform/packages/rust/README.md`
+- [ ] Crate listed in `01-docs/specs/packages/rust/README.md`
 - [ ] `rust/Cargo.toml` workspace members updated
 - [ ] All Rust gates pass
 - [ ] All workspace gates pass
@@ -193,7 +193,7 @@ pnpm build
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/rust/`](../../../specs/03-platform/packages/rust/) — Rust crate specs
+- [`01-docs/specs/packages/rust/`](../../../specs/03-platform/packages/rust/) — Rust crate specs
 - [`01-docs/decisions/`](../../../decisions/) — ADR index
 - [`01-docs/01-agents/workflows/tasks/write-adr.md`](./write-adr.md) — ADR workflow
 - [`01-docs/09-security/`](../../../security/) — approved cryptographic libraries

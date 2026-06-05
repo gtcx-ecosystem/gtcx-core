@@ -6,7 +6,7 @@
 
 # Interface: PaginationInfo
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L37)
+Defined in: [03-platform/packages/types/src/api/common.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L37)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:37](https:
 
 > **hasMore**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L42)
+Defined in: [03-platform/packages/types/src/api/common.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L42)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:42](https:
 
 > **page**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L38)
+Defined in: [03-platform/packages/types/src/api/common.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L38)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:38](https:
 
 > **pageSize**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L39)
+Defined in: [03-platform/packages/types/src/api/common.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L39)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:39](https:
 
 > **totalItems**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L40)
+Defined in: [03-platform/packages/types/src/api/common.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L40)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:40](https:
 
 > **totalPages**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L41)
+Defined in: [03-platform/packages/types/src/api/common.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L41)

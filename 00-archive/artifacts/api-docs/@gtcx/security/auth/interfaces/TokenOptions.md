@@ -6,7 +6,7 @@
 
 # Interface: TokenOptions
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L194)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L194)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:194](h
 
 > `optional` **algorithm**: `"EdDSA"` \| `"ES256K"`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:195](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L195)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:195](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L195)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:195](h
 
 > `optional` **expiresInSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:197](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L197)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:197](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L197)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:197](h
 
 > `optional` **keyId**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:196](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L196)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:196](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L196)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:196](h
 
 > `optional` **offlineExpiresInSeconds**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L198)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L198)

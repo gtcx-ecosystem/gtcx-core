@@ -6,7 +6,7 @@
 
 # Interface: LotCertification
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L41)
+Defined in: [03-platform/packages/types/src/models/lot.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L41)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:41](https:
 
 > `optional` **documentUrl**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L47)
+Defined in: [03-platform/packages/types/src/models/lot.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L47)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:47](https:
 
 > `optional` **expiresAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L46)
+Defined in: [03-platform/packages/types/src/models/lot.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L46)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:46](https:
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L42)
+Defined in: [03-platform/packages/types/src/models/lot.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L42)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:42](https:
 
 > **issuedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L45)
+Defined in: [03-platform/packages/types/src/models/lot.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L45)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:45](https:
 
 > **issuer**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L44)
+Defined in: [03-platform/packages/types/src/models/lot.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L44)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:44](https:
 
 > **type**: [`CertificationType`](../type-aliases/CertificationType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L43)
+Defined in: [03-platform/packages/types/src/models/lot.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L43)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:43](https:
 
 > **verified**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L48)
+Defined in: [03-platform/packages/types/src/models/lot.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L48)

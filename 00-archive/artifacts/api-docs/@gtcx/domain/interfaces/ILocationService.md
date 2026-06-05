@@ -6,7 +6,7 @@
 
 # Interface: ILocationService
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:432](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L432)
+Defined in: [03-platform/packages/domain/src/types.ts:432](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L432)
 
 Location service interface
 
@@ -16,7 +16,7 @@ Location service interface
 
 > **getCurrentLocation**(`options`): `Promise`\<[`Location`](Location.md)\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:433](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L433)
+Defined in: [03-platform/packages/domain/src/types.ts:433](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L433)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:433](https://g
 
 > **reverseGeocode**(`latitude`, `longitude`): `Promise`\<\{ `formattedAddress`: `string`; \}\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:438](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L438)
+Defined in: [03-platform/packages/domain/src/types.ts:438](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L438)
 
 #### Parameters
 

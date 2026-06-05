@@ -6,7 +6,7 @@
 
 # Interface: AtomicSwap
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L179)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L179)
 
 Atomic swap for simultaneous exchange
 
@@ -16,7 +16,7 @@ Atomic swap for simultaneous exchange
 
 > `optional` **assetPreimage**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L185)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L185)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:185](ht
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:187](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L187)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:187](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L187)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:187](ht
 
 > `optional` **executedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:188](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L188)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:188](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L188)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:188](ht
 
 > **hashLock**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:182](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L182)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:182](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L182)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:182](ht
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L180)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L180)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:180](ht
 
 > `optional` **paymentPreimage**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L184)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L184)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:184](ht
 
 > **settlementId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L181)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L181)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:181](ht
 
 > **status**: [`SwapStatus`](../type-aliases/SwapStatus.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:186](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L186)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:186](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L186)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:186](ht
 
 > **timeLock**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L183)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L183)

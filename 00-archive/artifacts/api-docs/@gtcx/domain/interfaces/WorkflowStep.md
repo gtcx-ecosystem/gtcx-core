@@ -6,7 +6,7 @@
 
 # Interface: WorkflowStep
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L113)
+Defined in: [03-platform/packages/domain/src/types.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L113)
 
 Registration workflow step
 
@@ -16,7 +16,7 @@ Registration workflow step
 
 > **color**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L118)
+Defined in: [03-platform/packages/domain/src/types.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L118)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:118](https://g
 
 > **description**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L116)
+Defined in: [03-platform/packages/domain/src/types.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L116)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:116](https://g
 
 > **duration**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L119)
+Defined in: [03-platform/packages/domain/src/types.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L119)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:119](https://g
 
 > **icon**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L117)
+Defined in: [03-platform/packages/domain/src/types.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L117)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:117](https://g
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L114)
+Defined in: [03-platform/packages/domain/src/types.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L114)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:114](https://g
 
 > **isCompleted**: `boolean`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L121)
+Defined in: [03-platform/packages/domain/src/types.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L121)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:121](https://g
 
 > **isRequired**: `boolean`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L120)
+Defined in: [03-platform/packages/domain/src/types.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L120)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:120](https://g
 
 > **order**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L122)
+Defined in: [03-platform/packages/domain/src/types.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L122)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:122](https://g
 
 > **title**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L115)
+Defined in: [03-platform/packages/domain/src/types.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L115)

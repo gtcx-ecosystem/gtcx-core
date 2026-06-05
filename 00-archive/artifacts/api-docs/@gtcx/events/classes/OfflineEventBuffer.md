@@ -6,7 +6,7 @@
 
 # Class: OfflineEventBuffer
 
-Defined in: [offline-buffer.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/offline-buffer.ts#L32)
+Defined in: [offline-buffer.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/offline-buffer.ts#L32)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [offline-buffer.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/b
 
 > **new OfflineEventBuffer**(`options?`): `OfflineEventBuffer`
 
-Defined in: [offline-buffer.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/offline-buffer.ts#L36)
+Defined in: [offline-buffer.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/offline-buffer.ts#L36)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [offline-buffer.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/b
 
 > **droppedCount**: `number` = `0`
 
-Defined in: [offline-buffer.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/offline-buffer.ts#L41)
+Defined in: [offline-buffer.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/offline-buffer.ts#L41)
 
 Number of events dropped due to buffer overflow since creation.
 
@@ -44,7 +44,7 @@ Number of events dropped due to buffer overflow since creation.
 
 > **get** **size**(): `number`
 
-Defined in: [offline-buffer.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/offline-buffer.ts#L102)
+Defined in: [offline-buffer.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/offline-buffer.ts#L102)
 
 Get the number of buffered events.
 
@@ -58,7 +58,7 @@ Get the number of buffered events.
 
 > **buffer**(`event`): `void`
 
-Defined in: [offline-buffer.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/offline-buffer.ts#L47)
+Defined in: [offline-buffer.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/offline-buffer.ts#L47)
 
 Store an event for later dispatch.
 If the buffer is full, the oldest event is dropped and a warning is logged.
@@ -79,7 +79,7 @@ If the buffer is full, the oldest event is dropped and a warning is logged.
 
 > **clear**(): `void`
 
-Defined in: [offline-buffer.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/offline-buffer.ts#L109)
+Defined in: [offline-buffer.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/offline-buffer.ts#L109)
 
 Clear all buffered events.
 
@@ -93,7 +93,7 @@ Clear all buffered events.
 
 > **flush**(`emitFn`): `Promise`\<`number`\>
 
-Defined in: [offline-buffer.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/offline-buffer.ts#L72)
+Defined in: [offline-buffer.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/offline-buffer.ts#L72)
 
 Replay all buffered events through the provided emit function.
 Events are flushed in FIFO order. Each event's retryCount is
@@ -116,7 +116,7 @@ events stay in the buffer with incremented retry counts.
 
 > **getBuffered**(): [`BufferedEvent`](../interfaces/BufferedEvent.md)\<`unknown`\>[]
 
-Defined in: [offline-buffer.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/offline-buffer.ts#L95)
+Defined in: [offline-buffer.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/offline-buffer.ts#L95)
 
 Retrieve a copy of all currently buffered events.
 

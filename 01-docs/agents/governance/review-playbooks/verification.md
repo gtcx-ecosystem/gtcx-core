@@ -39,7 +39,7 @@ review_cycle: 'on-change'
 
 ## 1. Schema-evolution requires baseline + changeset
 
-**Rule:** Breaking changes to Zod schemas in `03-platform/packages/verification/03-platform/src/types/schemas.ts` and `03-platform/packages/workproof/03-platform/src/` (renamed fields, narrowed types, required → required-different, removed fields) require:
+**Rule:** Breaking changes to Zod schemas in `03-platform/packages/verification/src/types/schemas.ts` and `03-platform/packages/workproof/src/` (renamed fields, narrowed types, required → required-different, removed fields) require:
 
 - An updated API surface baseline (`pnpm api:update-baseline`)
 - A changeset entry in `.changeset/` with `major` bump
@@ -63,7 +63,7 @@ review_cycle: 'on-change'
 
 ## 2. Hash-chain integrity preserved in proof bundles
 
-**Rule:** Proof bundles in `03-platform/packages/verification/03-platform/src/proofs/` rely on hash-chain linkage. Every bundle entry's `prev_hash` must point to the previous entry. Modifications must not introduce a code path that produces a bundle without computing or signing over `prev_hash`.
+**Rule:** Proof bundles in `03-platform/packages/verification/src/proofs/` rely on hash-chain linkage. Every bundle entry's `prev_hash` must point to the previous entry. Modifications must not introduce a code path that produces a bundle without computing or signing over `prev_hash`.
 
 **Violation pattern:**
 
@@ -79,7 +79,7 @@ review_cycle: 'on-change'
 
 ## 3. QR proof bundle recency window
 
-**Rule:** `03-platform/packages/verification/03-platform/src/traced/qr.ts` enforces a recency window on QR-encoded proof bundles. Changes to the window value require:
+**Rule:** `03-platform/packages/verification/src/traced/qr.ts` enforces a recency window on QR-encoded proof bundles. Changes to the window value require:
 
 - A test vector update reflecting the new window
 - An entry in the threat model explaining the new window's rationale (replay-attack tradeoff)
@@ -98,7 +98,7 @@ review_cycle: 'on-change'
 
 ## 4. Certificate revocation path preserved
 
-**Rule:** `03-platform/packages/verification/03-platform/src/certificates/` accepts a `RevocationChecker` interface (post-Sprint 2) that callers must supply. Removing the interface, defaulting to a no-op, or short-circuiting the check is a critical finding.
+**Rule:** `03-platform/packages/verification/src/certificates/` accepts a `RevocationChecker` interface (post-Sprint 2) that callers must supply. Removing the interface, defaulting to a no-op, or short-circuiting the check is a critical finding.
 
 **Violation pattern:**
 
@@ -128,7 +128,7 @@ review_cycle: 'on-change'
 
 ## 6. Commodity migration helpers continue to round-trip
 
-**Rule:** Modifications to `03-platform/packages/verification/03-platform/src/commodities.ts` must preserve the round-trip property of `migrateGoldLotData` and `migrateLegacyLotData` for all existing fixtures in `03-platform/packages/verification/tests/`.
+**Rule:** Modifications to `03-platform/packages/verification/src/commodities.ts` must preserve the round-trip property of `migrateGoldLotData` and `migrateLegacyLotData` for all existing fixtures in `03-platform/packages/verification/tests/`.
 
 **Violation pattern:**
 
@@ -143,7 +143,7 @@ review_cycle: 'on-change'
 
 ## 7. API surface baseline updated for public additions
 
-**Rule:** New exports from `03-platform/packages/verification/03-platform/src/index.ts` and `03-platform/packages/workproof/03-platform/src/index.ts` require an updated `quality/api-surface-baseline.json`. The CI gate `api:check` will fail otherwise; flag preemptively.
+**Rule:** New exports from `03-platform/packages/verification/src/index.ts` and `03-platform/packages/workproof/src/index.ts` require an updated `quality/api-surface-baseline.json`. The CI gate `api:check` will fail otherwise; flag preemptively.
 
 **Violation pattern:**
 
@@ -157,7 +157,7 @@ review_cycle: 'on-change'
 
 ## 8. Test vectors for new proof types
 
-**Rule:** New proof types added to `03-platform/packages/verification/03-platform/src/proofs/` or `03-platform/packages/workproof/03-platform/src/predicates/` must include:
+**Rule:** New proof types added to `03-platform/packages/verification/src/proofs/` or `03-platform/packages/workproof/src/predicates/` must include:
 
 - At least one positive test vector (valid proof, accepted)
 - At least one negative test vector (tampered proof, rejected)
@@ -204,7 +204,7 @@ review_cycle: 'on-change'
 
 ## 11. WorkProof predicate registry consistency
 
-**Rule:** `03-platform/packages/workproof/03-platform/src/predicates/` registry has 47 predicates across 9 categories. Adding or removing predicates requires:
+**Rule:** `03-platform/packages/workproof/src/predicates/` registry has 47 predicates across 9 categories. Adding or removing predicates requires:
 
 - Updated TypeScript type union
 - Updated registry export
@@ -212,7 +212,7 @@ review_cycle: 'on-change'
 
 **Violation pattern:**
 
-- Diff adds or removes a predicate file in `03-platform/packages/workproof/03-platform/src/predicates/definitions/`
+- Diff adds or removes a predicate file in `03-platform/packages/workproof/src/predicates/definitions/`
 - The corresponding registry export or type union is not updated
 - No test added for new predicates
 
@@ -223,7 +223,7 @@ review_cycle: 'on-change'
 
 ## 12. AI validation types preserve attestation chain
 
-**Rule:** `03-platform/packages/workproof/03-platform/src/` AI validation types must preserve the attestation chain — the signing entity, the validator entity, and the timestamp must all be present and signed over.
+**Rule:** `03-platform/packages/workproof/src/` AI validation types must preserve the attestation chain — the signing entity, the validator entity, and the timestamp must all be present and signed over.
 
 **Violation pattern:**
 

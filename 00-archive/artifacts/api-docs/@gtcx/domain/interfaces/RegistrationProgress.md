@@ -6,7 +6,7 @@
 
 # Interface: RegistrationProgress
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:128](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L128)
+Defined in: [03-platform/packages/domain/src/types.ts:128](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L128)
 
 Registration progress tracking
 
@@ -16,7 +16,7 @@ Registration progress tracking
 
 > **completedSteps**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L130)
+Defined in: [03-platform/packages/domain/src/types.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L130)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:130](https://g
 
 > `optional` **estimatedTimeRemaining**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L132)
+Defined in: [03-platform/packages/domain/src/types.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L132)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:132](https://g
 
 > **nextStep**: `string` \| `null`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:131](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L131)
+Defined in: [03-platform/packages/domain/src/types.ts:131](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L131)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:131](https://g
 
 > **percentage**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:129](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L129)
+Defined in: [03-platform/packages/domain/src/types.ts:129](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L129)

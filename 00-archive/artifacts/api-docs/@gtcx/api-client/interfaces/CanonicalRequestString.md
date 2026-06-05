@@ -6,7 +6,7 @@
 
 # Interface: CanonicalRequestString
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L84)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L84)
 
 String-serialized canonical request for hashing.
 
@@ -16,7 +16,7 @@ String-serialized canonical request for hashing.
 
 > **canonical**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L86)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L86)
 
 The canonical string itself.
 
@@ -26,6 +26,6 @@ The canonical string itself.
 
 > **canonicalHash**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L88)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L88)
 
 The SHA-256 hex digest of the canonical string.

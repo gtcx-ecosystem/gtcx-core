@@ -6,7 +6,7 @@
 
 # Interface: PermitDocument
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:131](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L131)
+Defined in: [03-platform/packages/types/src/models/permit.ts:131](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L131)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:131](ht
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L132)
+Defined in: [03-platform/packages/types/src/models/permit.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L132)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:132](ht
 
 > **name**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:134](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L134)
+Defined in: [03-platform/packages/types/src/models/permit.ts:134](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L134)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:134](ht
 
 > **type**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L133)
+Defined in: [03-platform/packages/types/src/models/permit.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L133)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:133](ht
 
 > **uploadedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:136](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L136)
+Defined in: [03-platform/packages/types/src/models/permit.ts:136](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L136)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:136](ht
 
 > **uploadedBy**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:137](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L137)
+Defined in: [03-platform/packages/types/src/models/permit.ts:137](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L137)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:137](ht
 
 > **url**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L135)
+Defined in: [03-platform/packages/types/src/models/permit.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L135)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:135](ht
 
 > **verified**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:138](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L138)
+Defined in: [03-platform/packages/types/src/models/permit.ts:138](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L138)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:138](ht
 
 > `optional` **verifiedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L140)
+Defined in: [03-platform/packages/types/src/models/permit.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L140)
 
 ***
 
@@ -78,4 +78,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:140](ht
 
 > `optional` **verifiedBy**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/permit.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/permit.ts#L139)
+Defined in: [03-platform/packages/types/src/models/permit.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/permit.ts#L139)

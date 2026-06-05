@@ -6,7 +6,7 @@
 
 # Interface: GeoTagData
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:263](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L263)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:263](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L263)
 
 GeoTagData - Primary data structure for a verified location capture
 Alias for GeoTagSession for protocol layer convenience
@@ -17,7 +17,7 @@ Alias for GeoTagSession for protocol layer convenience
 
 > **accuracy**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:268](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L268)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:268](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L268)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:268]
 
 > `optional` **altitude**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:269](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L269)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:269](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L269)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:269]
 
 > `optional` **commodityType**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:271](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L271)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:271](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L271)
 
 ***
 
@@ -41,7 +41,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:271]
 
 > **coordinates**: [`GeoCoordinates`](GeoCoordinates.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:266](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L266)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:266](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L266)
 
 ***
 
@@ -49,7 +49,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:266]
 
 > `optional` **deviceAttestation**: [`DeviceAttestation`](DeviceAttestation.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:270](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L270)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:270](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L270)
 
 ***
 
@@ -57,7 +57,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:270]
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:264](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L264)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:264](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L264)
 
 ***
 
@@ -65,7 +65,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:264]
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:272](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L272)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:272](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L272)
 
 ***
 
@@ -73,7 +73,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:272]
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:267](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L267)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:267](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L267)
 
 ***
 
@@ -81,4 +81,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:267]
 
 > **tradePassId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:265](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L265)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:265](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L265)

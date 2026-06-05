@@ -6,7 +6,7 @@
 
 # Interface: TraceContext
 
-Defined in: [trace-context.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/trace-context.ts#L11)
+Defined in: [trace-context.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/trace-context.ts#L11)
 
 @gtcx/ai - AI Integration & Observability Utilities
 
@@ -32,7 +32,7 @@ This file is a barrel re-export of every public symbol.
 
 > `optional` **parentSpanId**: `string`
 
-Defined in: [trace-context.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/trace-context.ts#L14)
+Defined in: [trace-context.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/trace-context.ts#L14)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [trace-context.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/bl
 
 > **spanId**: `string`
 
-Defined in: [trace-context.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/trace-context.ts#L13)
+Defined in: [trace-context.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/trace-context.ts#L13)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [trace-context.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/bl
 
 > **traceId**: `string`
 
-Defined in: [trace-context.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/trace-context.ts#L12)
+Defined in: [trace-context.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/trace-context.ts#L12)

@@ -22,8 +22,8 @@ When using Cursor Composer for multi-file edits:
 
 | Context                                           | Rule                                                    |
 | ------------------------------------------------- | ------------------------------------------------------- |
-| `03-platform/packages/crypto/03-platform/src/`    | Suggest FIPS-aware implementations                      |
-| `03-platform/packages/*/03-platform/src/index.ts` | Suggest explicit named exports, NOT `export *`          |
+| `03-platform/packages/crypto/src/`    | Suggest FIPS-aware implementations                      |
+| `03-platform/packages/*/src/index.ts` | Suggest explicit named exports, NOT `export *`          |
 | `rust/*/03-platform/src/lib.rs`                   | Suggest `#![deny(unsafe_code, warnings, missing_docs)]` |
 | `01-docs/`                                        | Suggest YAML frontmatter on new files                   |
 | `tests/`                                          | Suggest vitest with coverage annotations                |
@@ -33,7 +33,7 @@ When using Cursor Composer for multi-file edits:
 ## 3. Chat Rules
 
 - **@codebase** — Reference `AGENTS.md` for high-level context
-- **@file** — Reference specific package specs from `01-docs/specs/03-platform/packages/`
+- **@file** — Reference specific package specs from `01-docs/specs/packages/`
 - **@web** — Use for market data, FIPS certification status, CMVP listings
 
 ---

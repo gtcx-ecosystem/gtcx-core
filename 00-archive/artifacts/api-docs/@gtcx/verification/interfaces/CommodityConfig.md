@@ -6,7 +6,7 @@
 
 # Interface: CommodityConfig
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L18)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L18)
 
 Commodity-specific configuration
 
@@ -16,7 +16,7 @@ Commodity-specific configuration
 
 > **allowedUnits**: [`MeasurementUnit`](../type-aliases/MeasurementUnit.md)[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L23)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L23)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **category**: [`AssetCategory`](../type-aliases/AssetCategory.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L20)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L20)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **defaultUnit**: [`MeasurementUnit`](../type-aliases/MeasurementUnit.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L22)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L22)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **displayName**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L21)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L21)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **hasPurity**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L24)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L24)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **primaryProducerRole**: [`OperatorRole`](../type-aliases/OperatorRole.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L26)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L26)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **primarySiteType**: [`SiteType`](../type-aliases/SiteType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L27)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L27)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **qualityGrades**: [`QualityGrade`](../type-aliases/QualityGrade.md)[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L25)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L25)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **settings**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L28)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L28)
 
 ***
 
@@ -88,4 +88,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **type**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/commodities.ts#L19)
+Defined in: [03-platform/packages/verification/src/types/definitions/commodities.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/commodities.ts#L19)

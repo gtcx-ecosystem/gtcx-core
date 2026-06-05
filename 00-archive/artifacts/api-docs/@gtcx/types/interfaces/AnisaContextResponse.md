@@ -6,7 +6,7 @@
 
 # Interface: AnisaContextResponse
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L139)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L139)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:139]
 
 > **adaptations**: [`UIAdaptation`](UIAdaptation.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:143](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L143)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:143](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L143)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:143]
 
 > **contextId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L140)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L140)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:140]
 
 > **culturalContext**: [`CulturalContext`](CulturalContext.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L141)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L141)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:141]
 
 > **recommendations**: [`CulturalRecommendation`](CulturalRecommendation.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:142](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L142)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:142](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L142)

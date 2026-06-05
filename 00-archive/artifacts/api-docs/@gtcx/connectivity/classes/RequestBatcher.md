@@ -6,7 +6,7 @@
 
 # Class: RequestBatcher
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/batching.ts#L35)
+Defined in: [03-platform/packages/connectivity/src/batching.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/batching.ts#L35)
 
 RequestBatcher queues requests and flushes them as a batch.
 
@@ -20,7 +20,7 @@ requests pass through immediately.
 
 > **new RequestBatcher**(`options`): `RequestBatcher`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/batching.ts#L45)
+Defined in: [03-platform/packages/connectivity/src/batching.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/batching.ts#L45)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:45](h
 
 > **add**(`request`): `Promise`\<[`BatchResponse`](../interfaces/BatchResponse.md)\>
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/batching.ts#L67)
+Defined in: [03-platform/packages/connectivity/src/batching.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/batching.ts#L67)
 
 Add a request to the batcher.
 
@@ -61,7 +61,7 @@ immediately. Otherwise it is queued for the next flush.
 
 > **destroy**(): `void`
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/batching.ts#L130)
+Defined in: [03-platform/packages/connectivity/src/batching.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/batching.ts#L130)
 
 Stop the auto-flush timer and reject all pending requests.
 
@@ -75,7 +75,7 @@ Stop the auto-flush timer and reject all pending requests.
 
 > **flush**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/batching.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/batching.ts#L94)
+Defined in: [03-platform/packages/connectivity/src/batching.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/batching.ts#L94)
 
 Flush all queued requests now.
 

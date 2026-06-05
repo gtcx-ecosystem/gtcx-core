@@ -6,7 +6,7 @@
 
 # Interface: CacheStatus
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:154](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L154)
+Defined in: [03-platform/packages/security/src/offline/types.ts:154](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L154)
 
 Credential cache status
 
@@ -16,7 +16,7 @@ Credential cache status
 
 > **expiresIn**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L156)
+Defined in: [03-platform/packages/security/src/offline/types.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L156)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:156]
 
 > **needsRefresh**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L157)
+Defined in: [03-platform/packages/security/src/offline/types.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L157)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:157]
 
 > **needsSync**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:158](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L158)
+Defined in: [03-platform/packages/security/src/offline/types.ts:158](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L158)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:158]
 
 > `optional` **reason**: [`CacheInvalidReason`](../type-aliases/CacheInvalidReason.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L159)
+Defined in: [03-platform/packages/security/src/offline/types.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L159)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:159]
 
 > **valid**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:155](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L155)
+Defined in: [03-platform/packages/security/src/offline/types.ts:155](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L155)

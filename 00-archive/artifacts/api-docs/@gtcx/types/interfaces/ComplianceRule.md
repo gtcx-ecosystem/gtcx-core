@@ -6,7 +6,7 @@
 
 # Interface: ComplianceRule
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L30)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L30)
 
 Individual compliance rule
 
@@ -16,7 +16,7 @@ Individual compliance rule
 
 > **condition**: [`RuleCondition`](RuleCondition.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L35)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L35)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:35](htt
 
 > **description**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L33)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L33)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:33](htt
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L31)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L31)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:31](htt
 
 > **name**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L32)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L32)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:32](htt
 
 > `optional` **remediation**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L38)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L38)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:38](htt
 
 > **required**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L37)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L37)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:37](htt
 
 > **type**: [`RuleType`](../type-aliases/RuleType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L34)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L34)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:34](htt
 
 > **weight**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L36)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L36)

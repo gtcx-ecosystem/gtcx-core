@@ -6,7 +6,7 @@
 
 # Class: HashCommitmentZkpEngine
 
-Defined in: [zkp.ts:163](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L163)
+Defined in: [zkp.ts:163](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L163)
 
 Hash-commitment proof engine — **PLACEHOLDER, NOT PRODUCTION ZK**.
 
@@ -52,7 +52,7 @@ For real ZK verification, use the Rust NAPI bindings via
 
 > `readonly` **supportsVerificationKeys**: `false` = `false`
 
-Defined in: [zkp.ts:165](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L165)
+Defined in: [zkp.ts:165](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L165)
 
 Hash-commitment engine does not produce verification keys. Use Rust NAPI bindings for full ZKP.
 
@@ -62,7 +62,7 @@ Hash-commitment engine does not produce verification keys. Use Rust NAPI binding
 
 > **generate**(`input`): `Promise`\<\{ `created`: `string`; `proof`: `string`; `proofType`: `string`; `publicInputs`: `string`[]; `system`: `"schnorr"` \| `"bulletproofs"` \| `"groth16"` \| `"plonk"`; `verificationKeyId`: `string`; \}\>
 
-Defined in: [zkp.ts:166](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L166)
+Defined in: [zkp.ts:166](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L166)
 
 #### Parameters
 
@@ -84,7 +84,7 @@ Defined in: [zkp.ts:166](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b5
 
 > **verify**(`proof`): `Promise`\<`boolean`\>
 
-Defined in: [zkp.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L193)
+Defined in: [zkp.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L193)
 
 Simplified hash-commitment verification only.
 Real ZKP verification requires Rust arkworks circuits via NAPI bindings.

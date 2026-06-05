@@ -6,7 +6,7 @@
 
 # Interface: PaginatedResponse\<T\>
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L33)
+Defined in: [03-platform/packages/types/src/api/common.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L33)
 
 Paginated response
 
@@ -26,7 +26,7 @@ Paginated response
 
 > `optional` **data**: `T`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L11)
+Defined in: [03-platform/packages/types/src/api/common.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L11)
 
 #### Inherited from
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:11](https:
 
 > `optional` **error**: [`ApiError`](ApiError.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L12)
+Defined in: [03-platform/packages/types/src/api/common.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L12)
 
 #### Inherited from
 
@@ -50,7 +50,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:12](https:
 
 > `optional` **meta**: [`ResponseMeta`](ResponseMeta.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L13)
+Defined in: [03-platform/packages/types/src/api/common.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L13)
 
 #### Inherited from
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:13](https:
 
 > **pagination**: [`PaginationInfo`](PaginationInfo.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L34)
+Defined in: [03-platform/packages/types/src/api/common.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L34)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:34](https:
 
 > **success**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L10)
+Defined in: [03-platform/packages/types/src/api/common.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L10)
 
 #### Inherited from
 

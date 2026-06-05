@@ -213,7 +213,7 @@ cargo run --bin generate-kat -- artifacts/kat/
 
 - [FIPS Validation Boundary Statement](../../01-docs/09-security/fips-validation-boundary.md)
 - [Security Framework](../../01-docs/09-security/security-framework.md)
-- [Crate Spec — gtcx-zkp](../../01-docs/specs/03-platform/packages/rust/gtcx-zkp.md)
+- [Crate Spec — gtcx-zkp](../../01-docs/specs/packages/rust/gtcx-zkp.md)
 - `03-platform/src/groth16/ops.rs` — key generation implementation
 - `03-platform/src/types.rs` — `Groth16Keys`, `Groth16CircuitType`
 - `03-platform/src/bin/generate-kat.rs` — KAT generation and `vk_hash` computation

@@ -17,7 +17,7 @@ review_cycle: 'on-change'
 
 ### PRD
 
-**Problem:** WorkProof predicates (`03-platform/packages/workproof/03-platform/src/predicates/definitions/`) describe _what_ to prove ("Origin Authenticated"), but the ZKP layer (`rust/gtcx-zkp/`) only proves generic hash commitments. A regulator asking "prove this gold came from Ghana without revealing the mine" has no circuit.
+**Problem:** WorkProof predicates (`03-platform/packages/workproof/src/predicates/definitions/`) describe _what_ to prove ("Origin Authenticated"), but the ZKP layer (`rust/gtcx-zkp/`) only proves generic hash commitments. A regulator asking "prove this gold came from Ghana without revealing the mine" has no circuit.
 
 **Solution:** Per-commodity, per-jurisdiction Groth16 circuits that encode:
 
@@ -89,7 +89,7 @@ proof + public inputs → verification (Rust/TypeScript via NAPI)
 
 ### PRD
 
-**Problem:** `03-platform/packages/domain/03-platform/src/internal/offline-queue.ts` replays events in sequence, but each event is independently signed. A downstream verifier must check N signatures to trust a chain of N events.
+**Problem:** `03-platform/packages/domain/src/internal/offline-queue.ts` replays events in sequence, but each event is independently signed. A downstream verifier must check N signatures to trust a chain of N events.
 
 **Solution:** Each sync event carries a **succinct recursive proof** that accumulates all prior valid events. Verifier checks ONE proof for the entire chain.
 

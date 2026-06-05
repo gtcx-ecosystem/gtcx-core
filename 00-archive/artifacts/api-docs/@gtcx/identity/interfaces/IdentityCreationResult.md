@@ -6,7 +6,7 @@
 
 # Interface: IdentityCreationResult
 
-Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/identity.ts#L45)
+Defined in: [03-platform/packages/identity/src/identity.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/identity.ts#L45)
 
 Result of identity creation
 Includes private key that must be stored securely
@@ -17,7 +17,7 @@ Includes private key that must be stored securely
 
 > **identity**: `DigitalIdentity`
 
-Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/identity.ts#L46)
+Defined in: [03-platform/packages/identity/src/identity.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/identity.ts#L46)
 
 ***
 
@@ -25,4 +25,4 @@ Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:46](https
 
 > **privateKey**: `string`
 
-Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/identity.ts#L47)
+Defined in: [03-platform/packages/identity/src/identity.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/identity.ts#L47)

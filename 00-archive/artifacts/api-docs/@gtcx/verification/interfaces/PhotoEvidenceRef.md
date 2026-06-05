@@ -6,7 +6,7 @@
 
 # Interface: PhotoEvidenceRef
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:178](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L178)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:178](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L178)
 
 Photo evidence reference
 
@@ -16,7 +16,7 @@ Photo evidence reference
 
 > **hash**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L180)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L180)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L179)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L179)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L181)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L181)

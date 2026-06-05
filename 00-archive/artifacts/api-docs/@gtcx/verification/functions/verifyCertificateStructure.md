@@ -8,7 +8,7 @@
 
 > **verifyCertificateStructure**(`certificate`): `object`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:338](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L338)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:338](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L338)
 
 Verify certificate structure (without cryptographic verification)
 Cryptographic verification must be done by platform-specific code

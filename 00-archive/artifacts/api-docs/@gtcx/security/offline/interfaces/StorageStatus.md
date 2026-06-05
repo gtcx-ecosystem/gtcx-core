@@ -6,7 +6,7 @@
 
 # Interface: StorageStatus
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L117)
+Defined in: [03-platform/packages/security/src/offline/types.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L117)
 
 Storage status
 
@@ -16,7 +16,7 @@ Storage status
 
 > **failedAttempts**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L120)
+Defined in: [03-platform/packages/security/src/offline/types.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L120)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:120]
 
 > **isUnlocked**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L118)
+Defined in: [03-platform/packages/security/src/offline/types.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L118)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:118]
 
 > **itemCount**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L119)
+Defined in: [03-platform/packages/security/src/offline/types.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L119)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:119]
 
 > `optional` **lastActivityAt**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L122)
+Defined in: [03-platform/packages/security/src/offline/types.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L122)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:122]
 
 > `optional` **lastUnlockAt**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/types.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/types.ts#L121)
+Defined in: [03-platform/packages/security/src/offline/types.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/types.ts#L121)

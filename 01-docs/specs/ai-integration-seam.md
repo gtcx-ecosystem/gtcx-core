@@ -64,7 +64,7 @@ gtcx-core                      gtcx-intelligence
 Each consuming package (`@gtcx/crypto`, `@gtcx/verification`) has a `tracing.ts` adapter:
 
 ```typescript
-// 03-platform/packages/crypto/03-platform/src/tracing.ts
+// 03-platform/packages/crypto/src/tracing.ts
 const noopTraced: TraceFn = (fn) => fn;
 let _traced: TraceFn = noopTraced;
 
@@ -206,5 +206,5 @@ When connecting gtcx-intelligence to gtcx-core:
 
 - [ADR-008: Optional Tracing via Peer Dependencies](../decisions/008-optional-tracing-peer-deps.md)
 - [Package Spec: @gtcx/ai](./03-platform/packages/ai.md)
-- [`03-platform/packages/crypto/03-platform/src/tracing.ts`](../../03-platform/packages/crypto/03-platform/src/tracing.ts) — adapter implementation
-- [`03-platform/packages/workproof/03-platform/src/ai/`](../../03-platform/packages/workproof/03-platform/src/ai/) — AI validation types
+- [`03-platform/packages/crypto/src/tracing.ts`](../../03-platform/packages/crypto/src/tracing.ts) — adapter implementation
+- [`03-platform/packages/workproof/src/ai/`](../../03-platform/packages/workproof/src/ai/) — AI validation types

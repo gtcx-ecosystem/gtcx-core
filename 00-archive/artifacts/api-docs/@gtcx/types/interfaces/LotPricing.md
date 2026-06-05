@@ -6,7 +6,7 @@
 
 # Interface: LotPricing
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L61)
+Defined in: [03-platform/packages/types/src/models/lot.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L61)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:61](https:
 
 > `optional` **askingPrice**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L63)
+Defined in: [03-platform/packages/types/src/models/lot.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L63)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:63](https:
 
 > **currency**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L64)
+Defined in: [03-platform/packages/types/src/models/lot.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L64)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:64](https:
 
 > **pricePerUnit**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L65)
+Defined in: [03-platform/packages/types/src/models/lot.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L65)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:65](https:
 
 > **spotPrice**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L62)
+Defined in: [03-platform/packages/types/src/models/lot.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L62)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:62](https:
 
 > **unit**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L66)
+Defined in: [03-platform/packages/types/src/models/lot.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L66)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:66](https:
 
 > **updatedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/lot.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/lot.ts#L67)
+Defined in: [03-platform/packages/types/src/models/lot.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/lot.ts#L67)

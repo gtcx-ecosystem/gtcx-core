@@ -133,4 +133,4 @@ The remaining gap is external-field validation, not undocumented local behavior.
 
 - [trust-contract-matrix.md](./trust-contract-matrix.md)
 - [10-10-readiness-sprint-roadmap.md](../agile/roadmap/10-10-readiness-sprint-roadmap.md)
-- [01-docs/specs/03-platform/packages/connectivity.md](../specs/03-platform/packages/connectivity.md)
+- [01-docs/specs/packages/connectivity.md](../specs/03-platform/packages/connectivity.md)

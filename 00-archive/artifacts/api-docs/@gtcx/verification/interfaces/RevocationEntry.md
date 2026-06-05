@@ -6,7 +6,7 @@
 
 # Interface: RevocationEntry
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L21)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L21)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/revo
 
 > **certificateId**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L22)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L22)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/revo
 
 > `optional` **reason**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L17)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L17)
 
 #### Inherited from
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/revo
 
 > `optional` **revocationId**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L18)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L18)
 
 #### Inherited from
 
@@ -50,7 +50,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/revo
 
 > **revoked**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L15)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L15)
 
 #### Inherited from
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/certificates/revo
 
 > `optional` **revokedAt**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L16)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L16)
 
 #### Inherited from
 

@@ -81,8 +81,8 @@ node .github/03-platform/scripts/codeowner-review/run.mjs
 The selector can be tested without API calls:
 
 ```bash
-echo "03-platform/packages/crypto/03-platform/src/zkp.ts
-03-platform/packages/security/03-platform/src/audit/events.ts" | node .github/03-platform/scripts/codeowner-review/select-playbooks.mjs | jq '.playbooks'
+echo "03-platform/packages/crypto/src/zkp.ts
+03-platform/packages/security/src/audit/events.ts" | node .github/03-platform/scripts/codeowner-review/select-playbooks.mjs | jq '.playbooks'
 # → ["crypto", "security"]
 ```
 

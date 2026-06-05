@@ -6,7 +6,7 @@
 
 # Interface: HealthCheckResult
 
-Defined in: [03-platform/packages/services/03-platform/src/health.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/health.ts#L18)
+Defined in: [03-platform/packages/services/src/health.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/health.ts#L18)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/health.ts:18](https:/
 
 > **checks**: `object`
 
-Defined in: [03-platform/packages/services/03-platform/src/health.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/health.ts#L20)
+Defined in: [03-platform/packages/services/src/health.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/health.ts#L20)
 
 #### crypto
 
@@ -34,7 +34,7 @@ Defined in: [03-platform/packages/services/03-platform/src/health.ts:20](https:/
 
 > **status**: `"healthy"` \| `"degraded"` \| `"unhealthy"`
 
-Defined in: [03-platform/packages/services/03-platform/src/health.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/health.ts#L19)
+Defined in: [03-platform/packages/services/src/health.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/health.ts#L19)
 
 ***
 
@@ -42,4 +42,4 @@ Defined in: [03-platform/packages/services/03-platform/src/health.ts:19](https:/
 
 > **timestamp**: `string`
 
-Defined in: [03-platform/packages/services/03-platform/src/health.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/health.ts#L25)
+Defined in: [03-platform/packages/services/src/health.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/health.ts#L25)

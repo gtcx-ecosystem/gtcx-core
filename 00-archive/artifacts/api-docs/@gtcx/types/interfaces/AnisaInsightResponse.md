@@ -6,7 +6,7 @@
 
 # Interface: AnisaInsightResponse
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L180)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L180)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:180]
 
 > **confidence**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:186](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L186)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:186](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L186)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:186]
 
 > **insightId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L181)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L181)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:181]
 
 > **insights**: [`Insight`](Insight.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L184)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L184)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:184]
 
 > `optional` **sources**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L185)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L185)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:185]
 
 > **summary**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L183)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L183)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:183]
 
 > **topic**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:182](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L182)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:182](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L182)

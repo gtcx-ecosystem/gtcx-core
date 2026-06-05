@@ -6,7 +6,7 @@
 
 # Interface: UserPreferences
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L56)
+Defined in: [03-platform/packages/types/src/models/user.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L56)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:56](https
 
 > **currency**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L58)
+Defined in: [03-platform/packages/types/src/models/user.ts:58](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L58)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:58](https
 
 > **language**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L57)
+Defined in: [03-platform/packages/types/src/models/user.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L57)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:57](https
 
 > **notifications**: [`NotificationPreferences`](NotificationPreferences.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L59)
+Defined in: [03-platform/packages/types/src/models/user.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L59)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:59](https
 
 > **privacy**: [`PrivacyPreferences`](PrivacyPreferences.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L60)
+Defined in: [03-platform/packages/types/src/models/user.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L60)

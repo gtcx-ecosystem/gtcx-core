@@ -6,7 +6,7 @@
 
 # Interface: Metric
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L15)
+Defined in: [03-platform/packages/domain/src/metrics.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L15)
 
 ## Extended by
 
@@ -19,7 +19,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:15](https://
 
 > **help**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L18)
+Defined in: [03-platform/packages/domain/src/metrics.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L18)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:18](https://
 
 > `optional` **labels**: `Record`\<`string`, `string`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L19)
+Defined in: [03-platform/packages/domain/src/metrics.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L19)
 
 ***
 
@@ -35,7 +35,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:19](https://
 
 > **name**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L16)
+Defined in: [03-platform/packages/domain/src/metrics.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L16)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:16](https://
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L21)
+Defined in: [03-platform/packages/domain/src/metrics.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L21)
 
 ***
 
@@ -51,7 +51,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:21](https://
 
 > **type**: [`MetricType`](../type-aliases/MetricType.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L17)
+Defined in: [03-platform/packages/domain/src/metrics.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L17)
 
 ***
 
@@ -59,4 +59,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:17](https://
 
 > **value**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/metrics.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/metrics.ts#L20)
+Defined in: [03-platform/packages/domain/src/metrics.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/metrics.ts#L20)

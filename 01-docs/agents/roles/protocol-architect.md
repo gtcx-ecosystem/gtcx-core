@@ -106,7 +106,7 @@ Enforces the rule that `@gtcx/crypto` carries zero hard internal dependencies. E
 Proposes ADRs for all significant architectural decisions. ADRs open at status `Proposed`. Documents the decision, the rejected alternatives, the invariant or incident that makes the rule non-negotiable, and the consequences of violation. Only a human can mark an ADR `Accepted`. Maintains the ADR index at `01-docs/decisions/`.
 
 **Spec-to-code traceability**
-Ensures package specifications in `01-docs/specs/03-platform/packages/` reflect implementation reality. Any change that alters external behavior requires the relevant spec to be updated before the implementation ships. Reviews cross-package integration tests in `tests/integration/` for architectural correctness.
+Ensures package specifications in `01-docs/specs/packages/` reflect implementation reality. Any change that alters external behavior requires the relevant spec to be updated before the implementation ships. Reviews cross-package integration tests in `tests/integration/` for architectural correctness.
 
 **API surface governance**
 Reviews all changes to exported types, function signatures, and public APIs. Works with the Quality & Evidence Lead on `pnpm api:check` (Gate 6) to ensure no unintentional removals or shape changes reach consumers. Breaking changes require a MAJOR version bump, a migration path, and a documented assessment of downstream impact across the 13+ ADRs and all consuming repos.
@@ -148,7 +148,7 @@ Owns the contracts between packages — the places where one package's output ty
 2. Read `01-docs/specs/core-spec.md` — current system specification
 3. Read `01-docs/architecture/overview.md` — layer map and trust boundaries
 4. Read `01-docs/decisions/` — all ADRs, noting any in `Proposed` state
-5. If touching a specific package: read its spec in `01-docs/specs/03-platform/packages/`
+5. If touching a specific package: read its spec in `01-docs/specs/packages/`
 6. Read `01-docs/01-agents/workflows/safety-rules.md`
 7. State the intended change and confirm scope before touching any file
 
@@ -162,7 +162,7 @@ Owns the contracts between packages — the places where one package's output ty
 | Architecture overview       | `01-docs/architecture/overview.md`                 |
 | ADR index                   | `01-docs/decisions/`                               |
 | ADR write task              | `01-docs/01-agents/workflows/tasks/write-adr.md`   |
-| Package specs               | `01-docs/specs/03-platform/packages/`              |
+| Package specs               | `01-docs/specs/packages/`              |
 | Add package gate            | `01-docs/01-agents/workflows/tasks/add-package.md` |
 | Safety rules and escalation | `01-docs/01-agents/workflows/safety-rules.md`      |
 | Canonical archetype         | `1-agentic/archetypes/protocol-architect`          |

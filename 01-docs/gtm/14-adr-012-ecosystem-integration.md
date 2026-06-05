@@ -101,8 +101,8 @@ This replaces manual document review with automated, cryptographically verifiabl
 
 - **WorkProof version:** 2.2
 - **Predicate count:** 47 across 9 categories
-- **Registry location:** `03-platform/packages/workproof/03-platform/src/predicates/registry.ts`
-- **Schema validation:** Zod schemas in `03-platform/packages/workproof/03-platform/src/predicates/schemas.ts`
+- **Registry location:** `03-platform/packages/workproof/src/predicates/registry.ts`
+- **Schema validation:** Zod schemas in `03-platform/packages/workproof/src/predicates/schemas.ts`
 - **Evidence types:** 14 types including new `corporate_registry`
 
 ---

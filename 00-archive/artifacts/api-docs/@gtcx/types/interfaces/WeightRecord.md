@@ -6,7 +6,7 @@
 
 # Interface: WeightRecord
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:90](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L90)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:90](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L90)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:9
 
 > `optional` **calibrationDate**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L98)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L98)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:9
 
 > `optional` **equipment**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L97)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L97)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:9
 
 > **gross**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L91)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L91)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:9
 
 > **measuredAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L95)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L95)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:9
 
 > **measuredBy**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L96)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L96)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:9
 
 > **net**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:93](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L93)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:93](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L93)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:9
 
 > **tare**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L92)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L92)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:9
 
 > **unit**: `"g"` \| `"kg"` \| `"oz"` \| `"troy_oz"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L94)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L94)

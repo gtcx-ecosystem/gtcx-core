@@ -6,7 +6,7 @@
 
 # Class: UnifiedComplianceService
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L46)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L46)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **new UnifiedComplianceService**(`dependencies`, `config?`): `UnifiedComplianceService`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L59)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L59)
 
 #### Parameters
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **checkAssetLotCompliance**(`assetLot`): `Promise`\<`ComplianceRecord`[]\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L141)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L141)
 
 #### Parameters
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **checkCompliance**(`entityId`, `entityType`): `Promise`\<\{ `checked`: `boolean`; `records`: `ComplianceRecord`[]; \}\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:462](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L462)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:462](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L462)
 
 #### Parameters
 
@@ -102,7 +102,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > `protected` **checkKYCCompliance**(`transaction`): `Promise`\<[`ComplianceCheckResult`](../interfaces/ComplianceCheckResult.md)\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:484](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L484)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:484](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L484)
 
 #### Parameters
 
@@ -120,7 +120,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > `protected` **checkProducerLicense**(`producerId`): `Promise`\<[`ComplianceCheckResult`](../interfaces/ComplianceCheckResult.md)\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:477](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L477)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:477](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L477)
 
 #### Parameters
 
@@ -138,7 +138,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > `protected` **checkTraderLicense**(`traderId`): `Promise`\<[`ComplianceCheckResult`](../interfaces/ComplianceCheckResult.md)\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:481](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L481)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:481](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L481)
 
 #### Parameters
 
@@ -156,7 +156,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **checkTransactionCompliance**(`transaction`): `Promise`\<`ComplianceRecord`[]\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:287](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L287)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:287](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L287)
 
 #### Parameters
 
@@ -174,7 +174,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **generateComplianceReport**(`options`): `Promise`\<[`ComplianceReport`](../interfaces/ComplianceReport.md)\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:402](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L402)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:402](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L402)
 
 #### Parameters
 
@@ -192,7 +192,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **getComplianceDashboard**(): `Promise`\<`ComplianceDashboard`\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L126)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L126)
 
 #### Returns
 
@@ -204,7 +204,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **getFrameworks**(): `RegulatoryFramework`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L112)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L112)
 
 #### Returns
 
@@ -216,7 +216,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **getFrameworksByJurisdiction**(`jurisdiction`): `RegulatoryFramework`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L116)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L116)
 
 #### Parameters
 
@@ -234,7 +234,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **registerFramework**(`framework`): `void`
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L97)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L97)
 
 #### Parameters
 
@@ -252,7 +252,7 @@ Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedCom
 
 > **validateLicenses**(`traderId`): `Promise`\<`boolean`\>
 
-Defined in: [03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts:457](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/compliance/UnifiedComplianceService.ts#L457)
+Defined in: [03-platform/packages/services/src/compliance/UnifiedComplianceService.ts:457](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/compliance/UnifiedComplianceService.ts#L457)
 
 #### Parameters
 

@@ -6,7 +6,7 @@
 
 # Class: OfflineQueue
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L100)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L100)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **new OfflineQueue**(`options?`): `OfflineQueue`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L108)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L108)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:375](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L375)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:375](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L375)
 
 Clear all operations
 
@@ -56,7 +56,7 @@ Clear all operations
 
 > **enqueue**\<`T`\>(`type`, `payload`, `options?`): `Promise`\<`string`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L146)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L146)
 
 Add operation to queue
 
@@ -124,7 +124,7 @@ Add operation to queue
 
 > **getConflicts**(): [`QueuedOperation`](../interfaces/QueuedOperation.md)\<`unknown`\>[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:325](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L325)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:325](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L325)
 
 Get all conflicts
 
@@ -138,7 +138,7 @@ Get all conflicts
 
 > **getFailed**(): [`QueuedOperation`](../interfaces/QueuedOperation.md)\<`unknown`\>[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:318](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L318)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:318](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L318)
 
 Get all failed operations
 
@@ -152,7 +152,7 @@ Get all failed operations
 
 > **getNext**(): [`QueuedOperation`](../interfaces/QueuedOperation.md)\<`unknown`\> \| `undefined`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L200)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L200)
 
 Get next operation to process
 
@@ -166,7 +166,7 @@ Get next operation to process
 
 > **getPending**(): [`QueuedOperation`](../interfaces/QueuedOperation.md)\<`unknown`\>[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:311](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L311)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:311](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L311)
 
 Get all pending operations
 
@@ -180,7 +180,7 @@ Get all pending operations
 
 > **getStats**(): `object`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:332](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L332)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:332](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L332)
 
 Get queue statistics
 
@@ -218,7 +218,7 @@ Get queue statistics
 
 > **initialize**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L121)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L121)
 
 Initialize queue from storage
 
@@ -232,7 +232,7 @@ Initialize queue from storage
 
 > **markCompleted**(`id`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:232](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L232)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:232](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L232)
 
 Mark operation as completed
 
@@ -252,7 +252,7 @@ Mark operation as completed
 
 > **markConflict**\<`T`\>(`id`, `serverData`): `Promise`\<[`ConflictResolution`](../interfaces/ConflictResolution.md)\<`T`\> \| `undefined`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:262](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L262)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:262](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L262)
 
 Mark operation as having a conflict
 
@@ -282,7 +282,7 @@ Mark operation as having a conflict
 
 > **markFailed**(`id`, `error`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:244](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L244)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:244](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L244)
 
 Mark operation as failed
 
@@ -306,7 +306,7 @@ Mark operation as failed
 
 > **markProcessing**(`id`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:217](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L217)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:217](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L217)
 
 Mark operation as processing.
 Serialized via persistLock to prevent race conditions with concurrent callers.
@@ -327,7 +327,7 @@ Serialized via persistLock to prevent race conditions with concurrent callers.
 
 > **pruneCompleted**(`maxAgeMs?`): `Promise`\<`number`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:354](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L354)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:354](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L354)
 
 Remove completed operations older than specified age
 

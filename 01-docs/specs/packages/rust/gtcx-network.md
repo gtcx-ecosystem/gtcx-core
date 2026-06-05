@@ -105,6 +105,6 @@ Full libp2p integration (QUIC transport, GossipSub) is planned for Phase 2. The 
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/network.md`](../network.md) — TypeScript P2P network package
-- [`01-docs/specs/03-platform/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — foundation crate
+- [`01-docs/specs/packages/network.md`](../network.md) — TypeScript P2P network package
+- [`01-docs/specs/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — foundation crate
 - [`01-docs/specs/core-spec.md`](../../core-spec.md) — system overview

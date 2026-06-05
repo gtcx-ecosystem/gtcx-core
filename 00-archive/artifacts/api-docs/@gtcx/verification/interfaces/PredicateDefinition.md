@@ -6,7 +6,7 @@
 
 # Interface: PredicateDefinition
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L32)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L32)
 
 Predicate definition structure
 Each predicate is a first-class entity, not just a string
@@ -17,7 +17,7 @@ Each predicate is a first-class entity, not just a string
 
 > **ai**: [`AIMetadata`](AIMetadata.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L54)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L54)
 
 AI metadata for reasoning
 
@@ -27,7 +27,7 @@ AI metadata for reasoning
 
 > **attestation**: [`AttestationRules`](AttestationRules.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L48)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L48)
 
 Attestation rules
 
@@ -37,7 +37,7 @@ Attestation rules
 
 > **confidence**: [`ConfidenceRules`](ConfidenceRules.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L50)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L50)
 
 Confidence scoring
 
@@ -47,7 +47,7 @@ Confidence scoring
 
 > **description**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L38)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L38)
 
 Description of what this predicate verifies
 
@@ -57,7 +57,7 @@ Description of what this predicate verifies
 
 > **domain**: [`PredicateDomain`](../type-aliases/PredicateDomain.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L40)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L40)
 
 Domain this predicate belongs to
 
@@ -67,7 +67,7 @@ Domain this predicate belongs to
 
 > **evidence**: [`EvidenceRequirements`](EvidenceRequirements.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L46)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L46)
 
 Evidence requirements
 
@@ -77,7 +77,7 @@ Evidence requirements
 
 > **name**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L36)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L36)
 
 Human-readable name
 
@@ -87,7 +87,7 @@ Human-readable name
 
 > **schema**: [`PredicateSchema`](PredicateSchema.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L44)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L44)
 
 Schema for the predicate value
 
@@ -97,7 +97,7 @@ Schema for the predicate value
 
 > **temporal**: [`TemporalRules`](TemporalRules.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L52)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L52)
 
 Temporal validity
 
@@ -107,7 +107,7 @@ Temporal validity
 
 > **uri**: `` `tradepass://${string}/${string}/${string}` ``
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L34)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L34)
 
 Unique predicate URI
 
@@ -117,6 +117,6 @@ Unique predicate URI
 
 > **version**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L42)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L42)
 
 Version for evolution

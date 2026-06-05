@@ -8,7 +8,7 @@
 
 > **createAssetLotQRData**(`certificateId`, `assetLotData`, `hash`, `config?`): [`QRCodeData`](../interfaces/QRCodeData.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/qr/generator.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/qr/generator.ts#L101)
+Defined in: [03-platform/packages/verification/src/qr/generator.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/qr/generator.ts#L101)
 
 Create QR code data structure for an asset lot - COMMODITY-AGNOSTIC
 Works for gold, silver, cocoa, coffee, or any other commodity

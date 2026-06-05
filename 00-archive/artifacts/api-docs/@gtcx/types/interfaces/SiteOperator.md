@@ -6,7 +6,7 @@
 
 # Interface: SiteOperator
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L51)
+Defined in: [03-platform/packages/types/src/models/site.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L51)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:51](https
 
 > `optional` **contactInfo**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L56)
+Defined in: [03-platform/packages/types/src/models/site.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L56)
 
 #### email?
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:56](https
 
 > **name**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L53)
+Defined in: [03-platform/packages/types/src/models/site.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L53)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:53](https
 
 > `optional` **organizationId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L55)
+Defined in: [03-platform/packages/types/src/models/site.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L55)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:55](https
 
 > **tradePassId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L52)
+Defined in: [03-platform/packages/types/src/models/site.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L52)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:52](https
 
 > **type**: `"individual"` \| `"cooperative"` \| `"company"`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L54)
+Defined in: [03-platform/packages/types/src/models/site.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L54)

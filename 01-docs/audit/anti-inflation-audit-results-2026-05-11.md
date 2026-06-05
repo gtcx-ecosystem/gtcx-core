@@ -121,7 +121,7 @@ Ran `pnpm vitest run --coverage` independently for all packages with threshold c
 
 | Check                                                                | Result                                              | Severity                 |
 | -------------------------------------------------------------------- | --------------------------------------------------- | ------------------------ |
-| TODO/FIXME/HACK/XXX in `03-platform/packages/*/03-platform/src/*.ts` | **0**                                               | ✅ Clean                 |
+| TODO/FIXME/HACK/XXX in `03-platform/packages/*/src/*.ts` | **0**                                               | ✅ Clean                 |
 | TODO/FIXME/HACK/XXX in `rust/*/03-platform/src/*.rs`                 | **0**                                               | ✅ Clean                 |
 | `unsafe {` blocks in Rust                                            | **0**                                               | ✅ Clean                 |
 | `#![deny(unsafe_code)]` in `rust/*/03-platform/src/lib.rs`           | **6/6 crates**                                      | ✅ Clean                 |

@@ -6,7 +6,7 @@
 
 # Interface: CortexAnalyticsResponse
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L109)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L109)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:109]
 
 > **data**: `object`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L111)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L111)
 
 #### dimensions?
 
@@ -34,7 +34,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:111]
 
 > **metric**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L110)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L110)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:110]
 
 > **summary**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L116)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L116)
 
 #### average
 

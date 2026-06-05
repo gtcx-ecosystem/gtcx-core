@@ -6,7 +6,7 @@
 
 # Interface: ObjectSanitizeOptions
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L86)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L86)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.t
 
 > `optional` **maxArrayLength**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L92)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L92)
 
 Maximum array length
 
@@ -24,7 +24,7 @@ Maximum array length
 
 > `optional` **maxDepth**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L88)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L88)
 
 Maximum nesting depth
 
@@ -34,7 +34,7 @@ Maximum nesting depth
 
 > `optional` **maxKeys**: `number`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:90](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L90)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:90](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L90)
 
 Maximum number of keys per object
 
@@ -44,7 +44,7 @@ Maximum number of keys per object
 
 > `optional` **stringOptions**: [`StringSanitizeOptions`](StringSanitizeOptions.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L98)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L98)
 
 String sanitization options for string values
 
@@ -54,7 +54,7 @@ String sanitization options for string values
 
 > `optional` **stripNullish**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L96)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:96](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L96)
 
 Remove null and undefined values
 
@@ -64,6 +64,6 @@ Remove null and undefined values
 
 > `optional` **stripProto**: `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L94)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L94)
 
 Remove __proto__ and constructor properties

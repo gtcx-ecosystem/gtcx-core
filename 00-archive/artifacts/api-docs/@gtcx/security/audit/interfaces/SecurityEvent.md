@@ -6,7 +6,7 @@
 
 # Interface: SecurityEvent
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L103)
+Defined in: [03-platform/packages/security/src/audit/events.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L103)
 
 Security event structure
 
@@ -22,7 +22,7 @@ Designed for:
 
 > `optional` **action**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L123)
+Defined in: [03-platform/packages/security/src/audit/events.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L123)
 
 What action was taken
 
@@ -32,7 +32,7 @@ What action was taken
 
 > `optional` **actor**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L117)
+Defined in: [03-platform/packages/security/src/audit/events.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L117)
 
 Who performed the action (user ID, service name, etc.)
 
@@ -42,7 +42,7 @@ Who performed the action (user ID, service name, etc.)
 
 > **eventType**: [`SecurityEventType`](../type-aliases/SecurityEventType.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L108)
+Defined in: [03-platform/packages/security/src/audit/events.ts:108](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L108)
 
 Event type
 
@@ -52,7 +52,7 @@ Event type
 
 > `optional` **geo**: `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:144](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L144)
+Defined in: [03-platform/packages/security/src/audit/events.ts:144](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L144)
 
 Geographic context
 
@@ -74,7 +74,7 @@ Geographic context
 
 > `optional` **ip**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:138](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L138)
+Defined in: [03-platform/packages/security/src/audit/events.ts:138](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L138)
 
 Client IP address (if applicable)
 
@@ -84,7 +84,7 @@ Client IP address (if applicable)
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L156)
+Defined in: [03-platform/packages/security/src/audit/events.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L156)
 
 Additional structured metadata
 
@@ -94,7 +94,7 @@ Additional structured metadata
 
 > **outcome**: [`SecurityOutcome`](../type-aliases/SecurityOutcome.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L114)
+Defined in: [03-platform/packages/security/src/audit/events.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L114)
 
 Event outcome
 
@@ -104,7 +104,7 @@ Event outcome
 
 > `optional` **protocol**: `"tradepass"` \| `"geotag"` \| `"vaultmark"` \| `"pvp"` \| `"gci"` \| `"panx"`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:153](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L153)
+Defined in: [03-platform/packages/security/src/audit/events.ts:153](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L153)
 
 Protocol context (which GTCX protocol)
 
@@ -114,7 +114,7 @@ Protocol context (which GTCX protocol)
 
 > `optional` **reason**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L126)
+Defined in: [03-platform/packages/security/src/audit/events.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L126)
 
 Reason for outcome (especially for failures)
 
@@ -124,7 +124,7 @@ Reason for outcome (especially for failures)
 
 > `optional` **requestId**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L135)
+Defined in: [03-platform/packages/security/src/audit/events.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L135)
 
 Request ID
 
@@ -134,7 +134,7 @@ Request ID
 
 > `optional` **resource**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L120)
+Defined in: [03-platform/packages/security/src/audit/events.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L120)
 
 What was accessed/modified (resource identifier)
 
@@ -144,7 +144,7 @@ What was accessed/modified (resource identifier)
 
 > `optional` **sessionId**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L132)
+Defined in: [03-platform/packages/security/src/audit/events.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L132)
 
 Session ID
 
@@ -154,7 +154,7 @@ Session ID
 
 > **severity**: [`SecuritySeverity`](../type-aliases/SecuritySeverity.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L111)
+Defined in: [03-platform/packages/security/src/audit/events.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L111)
 
 Severity level
 
@@ -164,7 +164,7 @@ Severity level
 
 > **timestamp**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L105)
+Defined in: [03-platform/packages/security/src/audit/events.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L105)
 
 ISO 8601 timestamp
 
@@ -174,7 +174,7 @@ ISO 8601 timestamp
 
 > `optional` **traceId**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:129](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L129)
+Defined in: [03-platform/packages/security/src/audit/events.ts:129](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L129)
 
 Correlation ID for distributed tracing
 
@@ -184,6 +184,6 @@ Correlation ID for distributed tracing
 
 > `optional` **userAgent**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L141)
+Defined in: [03-platform/packages/security/src/audit/events.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L141)
 
 User agent (if applicable)

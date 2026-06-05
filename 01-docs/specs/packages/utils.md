@@ -84,7 +84,7 @@ Do not add business logic, domain types, or `@gtcx/*` imports to this package.
 
 ## Implementation
 
-`03-platform/packages/utils/03-platform/src/`
+`03-platform/packages/utils/src/`
 
 ---
 

@@ -6,7 +6,7 @@
 
 # Interface: DIDResolverOptions
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L50)
+Defined in: [03-platform/packages/identity/src/resolver.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L50)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:50](https
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L52)
+Defined in: [03-platform/packages/identity/src/resolver.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L52)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:52](https
 
 > `optional` **timeoutMs**: `number`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L51)
+Defined in: [03-platform/packages/identity/src/resolver.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L51)

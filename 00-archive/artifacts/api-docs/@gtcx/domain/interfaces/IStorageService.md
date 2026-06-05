@@ -6,7 +6,7 @@
 
 # Interface: IStorageService
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:444](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L444)
+Defined in: [03-platform/packages/domain/src/types.ts:444](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L444)
 
 Storage service interface
 
@@ -16,7 +16,7 @@ Storage service interface
 
 > **getAssetLot**(`id`): `Promise`\<[`AssetLot`](AssetLot.md) \| `null`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:446](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L446)
+Defined in: [03-platform/packages/domain/src/types.ts:446](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L446)
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:446](https://g
 
 > **saveAssetLot**(`lot`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:445](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L445)
+Defined in: [03-platform/packages/domain/src/types.ts:445](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L445)
 
 #### Parameters
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:445](https://g
 
 > **saveCertificate**(`cert`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:447](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L447)
+Defined in: [03-platform/packages/domain/src/types.ts:447](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L447)
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:447](https://g
 
 > **saveTransaction**(`tx`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:448](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L448)
+Defined in: [03-platform/packages/domain/src/types.ts:448](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L448)
 
 #### Parameters
 

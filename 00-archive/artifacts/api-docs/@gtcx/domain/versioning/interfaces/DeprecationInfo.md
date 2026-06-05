@@ -6,7 +6,7 @@
 
 # Interface: DeprecationInfo
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L38)
+Defined in: [03-platform/packages/domain/src/versioning.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L38)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:38](https
 
 > **deprecatedIn**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L42)
+Defined in: [03-platform/packages/domain/src/versioning.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L42)
 
 Version when deprecated
 
@@ -24,7 +24,7 @@ Version when deprecated
 
 > **feature**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L40)
+Defined in: [03-platform/packages/domain/src/versioning.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L40)
 
 Feature/method being deprecated
 
@@ -34,7 +34,7 @@ Feature/method being deprecated
 
 > `optional` **migrationNotes**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L48)
+Defined in: [03-platform/packages/domain/src/versioning.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L48)
 
 Migration guide or notes
 
@@ -44,7 +44,7 @@ Migration guide or notes
 
 > **removeIn**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L44)
+Defined in: [03-platform/packages/domain/src/versioning.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L44)
 
 Version when it will be removed
 
@@ -54,6 +54,6 @@ Version when it will be removed
 
 > `optional` **replacement**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/versioning.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/versioning.ts#L46)
+Defined in: [03-platform/packages/domain/src/versioning.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/versioning.ts#L46)
 
 Replacement feature/method

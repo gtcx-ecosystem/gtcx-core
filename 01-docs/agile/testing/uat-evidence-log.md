@@ -110,7 +110,7 @@ Tracks user acceptance testing (UAT) evidence for features and sprints. Updated 
 **Type:** Feature UAT
 **Tested by:** Automated test suite
 **Status:** Pass
-**Evidence:** `03-platform/packages/api-client/03-platform/src/canonical/canonical.test.ts` — 29 tests covering sign+verify round-trip, nonce generation, DID/keyId formatting, canonical request construction
+**Evidence:** `03-platform/packages/api-client/src/canonical/canonical.test.ts` — 29 tests covering sign+verify round-trip, nonce generation, DID/keyId formatting, canonical request construction
 **Notes:** Mobile contract alignment verified. 9-line canonical format matches gtcx-mobile auth-token.ts. All 9 headers emitted and verified.
 
 ### [2026-05-07] Sprint 6 — Service Decomposition (registration + trading)

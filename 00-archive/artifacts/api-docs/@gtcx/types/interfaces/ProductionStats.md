@@ -6,7 +6,7 @@
 
 # Interface: ProductionStats
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L81)
+Defined in: [03-platform/packages/types/src/models/site.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L81)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:81](https
 
 > `optional` **averageDaily**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L88)
+Defined in: [03-platform/packages/types/src/models/site.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L88)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:88](https
 
 > **lastUpdated**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:89](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L89)
+Defined in: [03-platform/packages/types/src/models/site.ts:89](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L89)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:89](https
 
 > **period**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L84)
+Defined in: [03-platform/packages/types/src/models/site.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L84)
 
 #### end
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:84](https
 
 > **totalProduction**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L82)
+Defined in: [03-platform/packages/types/src/models/site.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L82)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:82](https
 
 > **unit**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/site.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/site.ts#L83)
+Defined in: [03-platform/packages/types/src/models/site.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/site.ts#L83)

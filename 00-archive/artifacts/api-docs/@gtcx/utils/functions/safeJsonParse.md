@@ -8,7 +8,7 @@
 
 > **safeJsonParse**\<`T`\>(`json`, `fallback`, `schema?`): `T`
 
-Defined in: [index.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/utils/03-platform/src/index.ts#L29)
+Defined in: [index.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/utils/src/index.ts#L29)
 
 Safely parse JSON with error handling.
 When a Zod schema is provided, the parsed value is validated at runtime.

@@ -76,7 +76,7 @@ review_cycle: 'on-change'
 | T2  | CI uploads `ai-scorecard.json`                 | ✅ Done | `.github/workflows/ci.yml` → `ci-ai-scorecard`               |
 | T3  | `release:ga:evidence:check` includes scorecard | ✅ Done | `03-platform/tools/check-ai-scorecard.mjs`                   |
 | T4  | Trust portal links scorecard per version       | ✅ Done | `01-docs/governance/trust-portal.md`                         |
-| T5  | Spec-drift rules (README, package count)       | ✅ Done | `03-platform/packages/ai-eval/03-platform/src/spec-drift.ts` |
+| T5  | Spec-drift rules (README, package count)       | ✅ Done | `03-platform/packages/ai-eval/src/spec-drift.ts` |
 
 Canonical spec: [ai-evaluation-pipeline.md](../specs/ai-evaluation-pipeline.md) · Moat: [roadmap.md §4.10](../roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat)
 

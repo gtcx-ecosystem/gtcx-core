@@ -67,7 +67,7 @@ Same as prior audit (`2e74573`). No new pre-existing findings introduced. Key ca
 - **[P2] `rust/.cargo/audit.toml:39-41`** — 3 `rustls-webpki` RUSTSECs (0098, 0099, 0104) mitigated via documented exceptions; upstream fix pending. _(unchanged)_
 - **[P2] `rust/.cargo/audit.toml:15,19`** — 2 unmaintained arkworks transitive dependencies (`derivative`, `paste`) tracked for 0.5 migration. _(unchanged)_
 - **[P2] `README.md:47`** — `@gtcx/crypto-native` odd-length-hex NAPI boundary edge case queued for Sprint 2. _(unchanged)_
-- **[P2] `03-platform/packages/api-client/03-platform/src/index.ts:1`** — `export *` barrel defeats tree-shaking. _(unchanged)_
+- **[P2] `03-platform/packages/api-client/src/index.ts:1`** — `export *` barrel defeats tree-shaking. _(unchanged)_
 
 ---
 
@@ -273,7 +273,7 @@ Phase 2 skipped — repo has only `/01-docs/` documentation root. No competing r
 | Threat matrix 12/12      | Validator passes | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                            | Same (9.0)                                                                        |
 | SLSA Build L3 (npm)      | Aspirational     | **Met 2026-06-01:** 21/21 Sigstore @ 3.1.4; `pnpm provenance:check-npm:strict`                          | Supply chain sub-score ↑ (see [ci-confirmation](./ci-confirmation-2026-06-01.md)) |
 | Coverage 95% branch      | 19 packages      | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                             | Same (9.5)                                                                        |
-| USSD protocol            | Config-only (P2) | `03-platform/packages/connectivity/03-platform/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                                                                        |
+| USSD protocol            | Config-only (P2) | `03-platform/packages/connectivity/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                                                                        |
 | Frontmatter compliance   | 261/261 valid    | 264/264 valid (3 new docs added: current.md + 2 existing fixed)                                         | Same (9.5)                                                                        |
 | Coordination contract    | Not present      | Added in AGENTS.md with baseline-os reporting and trust requirements                                    | Repo Hygiene +0.0 (already 9.5)                                                   |
 

@@ -167,7 +167,7 @@ Per `SCORING_FRAMEWORK.md` score anchors:
 | ID      | Finding                                                                                                                      | Severity | Dimension | Effort | Owner              |
 | ------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | --------- | ------ | ------------------ |
 | HYG-001 | 3 org secrets unset (`OPENAI_API_KEY`, `TURBO_TOKEN`, `TURBO_TEAM`) — `ops:check` shows 3 warns                              | P2       | Hygiene   | 0.5d   | DevOps             |
-| HYG-002 | 14 `export *` barrel files defeat tree-shaking — `03-platform/packages/api-client/03-platform/src/index.ts:1` is one example | P2       | Hygiene   | 3d     | Engineering Lead   |
+| HYG-002 | 14 `export *` barrel files defeat tree-shaking — `03-platform/packages/api-client/src/index.ts:1` is one example | P2       | Hygiene   | 3d     | Engineering Lead   |
 | HYG-003 | `01-docs/05-audit/agile/sprints/current.md` is a skeleton — no committed work items for Sprint S46                           | P2       | Hygiene   | 0.5d   | Protocol Architect |
 | HYG-004 | No `.gitattributes` for consistent line endings across OS                                                                    | P3       | Hygiene   | 0.5d   | DevOps             |
 | HYG-005 | `03-platform/packages/ai/` is scaffolding (50%+ coverage) but has no explicit maturity warning in README                     | P2       | Hygiene   | 0.5d   | Docs Lead          |

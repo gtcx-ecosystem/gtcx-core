@@ -6,7 +6,7 @@
 
 # Interface: ComplianceEvaluation
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L74)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L74)
 
 Compliance evaluation result
 
@@ -16,7 +16,7 @@ Compliance evaluation result
 
 > `optional` **attestation**: [`ComplianceAttestation`](ComplianceAttestation.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L83)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L83)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:83](htt
 
 > **evaluatedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L80)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L80)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:80](htt
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L75)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L75)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:75](htt
 
 > **policyId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:78](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L78)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:78](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L78)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:78](htt
 
 > **policyVersion**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L79)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L79)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:79](htt
 
 > **ruleResults**: [`RuleResult`](RuleResult.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L82)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L82)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:82](htt
 
 > **score**: [`ComplianceScore`](ComplianceScore.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L81)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L81)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:81](htt
 
 > **subjectId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L76)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L76)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:76](htt
 
 > **subjectType**: `"site"` \| `"tradepass"` \| `"lot"` \| `"transaction"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L77)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L77)

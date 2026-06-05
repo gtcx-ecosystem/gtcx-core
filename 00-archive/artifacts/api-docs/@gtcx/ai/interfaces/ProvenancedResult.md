@@ -6,7 +6,7 @@
 
 # Interface: ProvenancedResult\<T\>
 
-Defined in: [provenance.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/provenance.ts#L110)
+Defined in: [provenance.ts:110](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/provenance.ts#L110)
 
 Convenience type for any result that carries an
 AgenticProvenance envelope.
@@ -23,7 +23,7 @@ AgenticProvenance envelope.
 
 > **data**: `T`
 
-Defined in: [provenance.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/provenance.ts#L111)
+Defined in: [provenance.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/provenance.ts#L111)
 
 ***
 
@@ -31,4 +31,4 @@ Defined in: [provenance.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob
 
 > **provenance**: `AgenticProvenance`
 
-Defined in: [provenance.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/provenance.ts#L112)
+Defined in: [provenance.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/provenance.ts#L112)

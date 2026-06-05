@@ -6,7 +6,7 @@
 
 # Interface: EnhancedIdentity
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L66)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L66)
 
 Enhanced identity with multi-signature support
 
@@ -20,7 +20,7 @@ Enhanced identity with multi-signature support
 
 > `optional` **certificationChain**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L71)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L71)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:71
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L48)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L48)
 
 #### Inherited from
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:48
 
 > `optional` **did**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L45)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L45)
 
 #### Inherited from
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:45
 
 > `optional` **entropyValidation**: [`EntropyValidation`](EntropyValidation.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L70)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L70)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:70
 
 > `optional` **expiresAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L49)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L49)
 
 #### Inherited from
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:49
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L44)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L44)
 
 #### Inherited from
 
@@ -84,7 +84,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:44
 
 > `optional` **keyDerivation**: [`KeyDerivationParams`](KeyDerivationParams.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L69)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L69)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:69
 
 > **metadata**: [`IdentityMetadata`](IdentityMetadata.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L51)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L51)
 
 #### Inherited from
 
@@ -104,7 +104,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:51
 
 > **multiKeyPairs**: [`MultiKeyPairs`](MultiKeyPairs.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L67)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L67)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:67
 
 > `optional` **postQuantumHash**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L68)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L68)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:68
 
 > **privateKeyRef**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L47)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L47)
 
 #### Inherited from
 
@@ -132,7 +132,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:47
 
 > **publicKey**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L46)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L46)
 
 #### Inherited from
 
@@ -144,7 +144,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:46
 
 > **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/identity.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/identity.ts#L50)
+Defined in: [03-platform/packages/types/src/protocols/identity.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/identity.ts#L50)
 
 #### Inherited from
 

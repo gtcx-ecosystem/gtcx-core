@@ -6,7 +6,7 @@
 
 # Interface: TradeOrder
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L9)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L9)
 
 Trade order
 
@@ -16,7 +16,7 @@ Trade order
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L18)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L18)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:18](htt
 
 > `optional` **expiresAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L20)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L20)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:20](htt
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L10)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L10)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:10](htt
 
 > **lotId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L12)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L12)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:12](htt
 
 > **price**: [`PriceQuote`](PriceQuote.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L14)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L14)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:14](htt
 
 > **quantity**: [`QuantitySpec`](QuantitySpec.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L15)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L15)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:15](htt
 
 > **status**: [`OrderStatus`](../type-aliases/OrderStatus.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L17)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L17)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:17](htt
 
 > **terms**: [`TradeTerms`](TradeTerms.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L16)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L16)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:16](htt
 
 > **traderId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L13)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L13)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:13](htt
 
 > **type**: `"buy"` \| `"sell"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L11)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L11)
 
 ***
 
@@ -96,4 +96,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:11](htt
 
 > **updatedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L19)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L19)

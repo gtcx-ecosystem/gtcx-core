@@ -6,7 +6,7 @@
 
 # Interface: TradeAnalytics
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:253](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L253)
+Defined in: [03-platform/packages/domain/src/types.ts:253](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L253)
 
 Trade analytics
 
@@ -16,7 +16,7 @@ Trade analytics
 
 > **averagePrice**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:256](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L256)
+Defined in: [03-platform/packages/domain/src/types.ts:256](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L256)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:256](https://g
 
 > **currency**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:257](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L257)
+Defined in: [03-platform/packages/domain/src/types.ts:257](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L257)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:257](https://g
 
 > **liquidityScore**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:261](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L261)
+Defined in: [03-platform/packages/domain/src/types.ts:261](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L261)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:261](https://g
 
 > **marketTrend**: `"bullish"` \| `"bearish"` \| `"neutral"`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:260](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L260)
+Defined in: [03-platform/packages/domain/src/types.ts:260](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L260)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:260](https://g
 
 > **priceChange**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:258](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L258)
+Defined in: [03-platform/packages/domain/src/types.ts:258](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L258)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:258](https://g
 
 > **priceChangePeriod**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:259](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L259)
+Defined in: [03-platform/packages/domain/src/types.ts:259](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L259)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:259](https://g
 
 > **recommendations**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:263](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L263)
+Defined in: [03-platform/packages/domain/src/types.ts:263](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L263)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:263](https://g
 
 > **riskAssessment**: `"low"` \| `"medium"` \| `"high"`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:262](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L262)
+Defined in: [03-platform/packages/domain/src/types.ts:262](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L262)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:262](https://g
 
 > **totalVolume**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:254](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L254)
+Defined in: [03-platform/packages/domain/src/types.ts:254](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L254)
 
 ***
 
@@ -88,4 +88,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/types.ts:254](https://g
 
 > **volumeUnit**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/types.ts:255](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/types.ts#L255)
+Defined in: [03-platform/packages/domain/src/types.ts:255](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/types.ts#L255)

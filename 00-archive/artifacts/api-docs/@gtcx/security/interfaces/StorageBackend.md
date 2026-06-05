@@ -6,7 +6,7 @@
 
 # Interface: StorageBackend
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts#L34)
+Defined in: [03-platform/packages/security/src/offline/secure-storage/types.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage/types.ts#L34)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts#L39)
+Defined in: [03-platform/packages/security/src/offline/secure-storage/types.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage/types.ts#L39)
 
 #### Returns
 
@@ -26,7 +26,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **getAllKeys**(): `Promise`\<`string`[]\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts#L38)
+Defined in: [03-platform/packages/security/src/offline/secure-storage/types.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage/types.ts#L38)
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **getItem**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts#L35)
+Defined in: [03-platform/packages/security/src/offline/secure-storage/types.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage/types.ts#L35)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **removeItem**(`key`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts#L37)
+Defined in: [03-platform/packages/security/src/offline/secure-storage/types.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage/types.ts#L37)
 
 #### Parameters
 
@@ -74,7 +74,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **setItem**(`key`, `value`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage/types.ts#L36)
+Defined in: [03-platform/packages/security/src/offline/secure-storage/types.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage/types.ts#L36)
 
 #### Parameters
 

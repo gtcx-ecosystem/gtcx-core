@@ -6,7 +6,7 @@
 
 # Interface: ComplianceAttestation
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L113)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L113)
 
 Compliance attestation - signed statement of compliance
 
@@ -16,7 +16,7 @@ Compliance attestation - signed statement of compliance
 
 > **attestedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L117)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L117)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:117](ht
 
 > **attestedBy**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L116)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L116)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:116](ht
 
 > **evaluationId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L115)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L115)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:115](ht
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L114)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L114)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:114](ht
 
 > **publicKey**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L120)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:120](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L120)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:120](ht
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L119)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L119)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:119](ht
 
 > **validUntil**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L118)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:118](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L118)

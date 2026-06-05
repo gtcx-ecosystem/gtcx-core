@@ -6,7 +6,7 @@
 
 # Interface: ComplianceCheckCompletedPayload
 
-Defined in: [types.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L177)
+Defined in: [types.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L177)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **checkId**: `string`
 
-Defined in: [types.ts:178](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L178)
+Defined in: [types.ts:178](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L178)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:178](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **compliant**: `boolean`
 
-Defined in: [types.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L184)
+Defined in: [types.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L184)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **duration**: `number`
 
-Defined in: [types.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L185)
+Defined in: [types.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L185)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **entityId**: `string`
 
-Defined in: [types.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L179)
+Defined in: [types.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L179)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [types.ts:179](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **entityType**: `string`
 
-Defined in: [types.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L180)
+Defined in: [types.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L180)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [types.ts:180](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **recordCount**: `number`
 
-Defined in: [types.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L181)
+Defined in: [types.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L181)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [types.ts:181](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **violations**: `number`
 
-Defined in: [types.ts:182](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L182)
+Defined in: [types.ts:182](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L182)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [types.ts:182](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **warnings**: `number`
 
-Defined in: [types.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L183)
+Defined in: [types.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L183)

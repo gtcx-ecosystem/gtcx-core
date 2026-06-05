@@ -6,7 +6,7 @@
 
 # Interface: CategoryLogger
 
-Defined in: [category-logger.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/category-logger.ts#L8)
+Defined in: [category-logger.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/category-logger.ts#L8)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [category-logger.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/b
 
 > **debug**(`message`, `data?`): `void`
 
-Defined in: [category-logger.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/category-logger.ts#L12)
+Defined in: [category-logger.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/category-logger.ts#L12)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [category-logger.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/
 
 > **error**(`message`, `data?`): `void`
 
-Defined in: [category-logger.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/category-logger.ts#L11)
+Defined in: [category-logger.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/category-logger.ts#L11)
 
 #### Parameters
 
@@ -58,7 +58,7 @@ Defined in: [category-logger.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/
 
 > **info**(`message`, `data?`): `void`
 
-Defined in: [category-logger.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/category-logger.ts#L9)
+Defined in: [category-logger.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/category-logger.ts#L9)
 
 #### Parameters
 
@@ -80,7 +80,7 @@ Defined in: [category-logger.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/b
 
 > **warn**(`message`, `data?`): `void`
 
-Defined in: [category-logger.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/category-logger.ts#L10)
+Defined in: [category-logger.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/category-logger.ts#L10)
 
 #### Parameters
 

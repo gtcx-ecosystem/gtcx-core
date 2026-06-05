@@ -8,7 +8,7 @@
 
 > **createNoopRevocationChecker**(): [`RevocationChecker`](../interfaces/RevocationChecker.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L194)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L194)
 
 Revocation checker that always reports "not revoked" for every certificate.
 

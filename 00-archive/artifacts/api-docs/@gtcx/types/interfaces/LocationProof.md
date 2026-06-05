@@ -6,7 +6,7 @@
 
 # Interface: LocationProof
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L111)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L111)
 
 Location proof - cryptographically attested GPS capture
 
@@ -16,7 +16,7 @@ Location proof - cryptographically attested GPS capture
 
 > **coordinates**: [`GeoCoordinates`](GeoCoordinates.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L113)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L113)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:113]
 
 > **cryptographicProof**: [`CryptographicProof`](CryptographicProof.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L116)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L116)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:116]
 
 > `optional` **deviceAttestation**: [`DeviceAttestation`](DeviceAttestation.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L115)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L115)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:115]
 
 > `optional` **geologicalContext**: [`GeologicalContext`](GeologicalContext.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L119)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L119)
 
 #### Deprecated
 
@@ -52,7 +52,7 @@ Use resourceContext instead
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L112)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L112)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:112]
 
 > `optional` **resourceContext**: [`ResourceContext`](ResourceContext.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L117)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L117)
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:117]
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L114)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L114)

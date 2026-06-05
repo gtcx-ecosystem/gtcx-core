@@ -6,7 +6,7 @@
 
 # Interface: PriceCalculatedPayload
 
-Defined in: [types.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L111)
+Defined in: [types.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L111)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:111](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **adjustedPrice**: `number`
 
-Defined in: [types.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L115)
+Defined in: [types.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L115)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:115](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **adjustments**: `object`
 
-Defined in: [types.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L117)
+Defined in: [types.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L117)
 
 #### form
 
@@ -46,7 +46,7 @@ Defined in: [types.ts:117](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **assetLotId**: `string`
 
-Defined in: [types.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L112)
+Defined in: [types.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L112)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [types.ts:112](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **basePrice**: `number`
 
-Defined in: [types.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L114)
+Defined in: [types.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L114)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [types.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **commodityType**: `string`
 
-Defined in: [types.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L113)
+Defined in: [types.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L113)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [types.ts:113](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **currency**: `string`
 
-Defined in: [types.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L116)
+Defined in: [types.ts:116](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L116)

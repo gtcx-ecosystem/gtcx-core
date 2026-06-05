@@ -6,7 +6,7 @@
 
 # Interface: RegistrationStartedPayload
 
-Defined in: [types.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L64)
+Defined in: [types.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L64)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **commodityType**: `string`
 
-Defined in: [types.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L66)
+Defined in: [types.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L66)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **deviceId**: `string`
 
-Defined in: [types.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L68)
+Defined in: [types.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L68)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **producerId**: `string`
 
-Defined in: [types.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L67)
+Defined in: [types.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L67)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [types.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **sessionId**: `string`
 
-Defined in: [types.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L65)
+Defined in: [types.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L65)

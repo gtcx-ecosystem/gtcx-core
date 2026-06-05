@@ -6,7 +6,7 @@
 
 # Interface: SyncAuditEvent\<T\>
 
-Defined in: [types.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L40)
+Defined in: [types.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L40)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **error**: `string`
 
-Defined in: [types.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L48)
+Defined in: [types.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L48)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **id**: `string`
 
-Defined in: [types.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L44)
+Defined in: [types.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L44)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [types.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **localCount**: `number`
 
-Defined in: [types.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L45)
+Defined in: [types.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L45)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [types.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [types.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L49)
+Defined in: [types.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L49)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [types.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **remotePresent**: `boolean`
 
-Defined in: [types.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L46)
+Defined in: [types.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L46)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [types.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **strategy**: [`ConflictStrategy`](../type-aliases/ConflictStrategy.md)
 
-Defined in: [types.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L43)
+Defined in: [types.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L43)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [types.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **timestamp**: `string`
 
-Defined in: [types.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L42)
+Defined in: [types.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L42)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [types.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **type**: [`SyncAuditEventType`](../type-aliases/SyncAuditEventType.md)
 
-Defined in: [types.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L41)
+Defined in: [types.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L41)
 
 ***
 
@@ -84,4 +84,4 @@ Defined in: [types.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **winner**: [`SyncItem`](SyncItem.md)\<`T`\>
 
-Defined in: [types.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L47)
+Defined in: [types.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L47)

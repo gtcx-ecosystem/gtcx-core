@@ -6,7 +6,7 @@
 
 # Interface: AttestationRules
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L97)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L97)
 
 Attestation rules
 
@@ -16,7 +16,7 @@ Attestation rules
 
 > **allowedAttestors**: [`AttestorPattern`](AttestorPattern.md)[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L98)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:98](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L98)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **minimumAttestors**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L101)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L101)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **multiSignatureRequired**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L100)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L100)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **selfAttestation**: `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts:99](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/predicates.ts#L99)
+Defined in: [03-platform/packages/verification/src/types/definitions/predicates.ts:99](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/predicates.ts#L99)

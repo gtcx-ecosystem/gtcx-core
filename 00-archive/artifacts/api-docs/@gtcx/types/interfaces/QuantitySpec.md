@@ -6,7 +6,7 @@
 
 # Interface: QuantitySpec
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L32)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L32)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:32](htt
 
 > **amount**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L33)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L33)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:33](htt
 
 > `optional` **tolerance**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L35)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L35)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:35](htt
 
 > **unit**: `"g"` \| `"kg"` \| `"oz"` \| `"troy_oz"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L34)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L34)

@@ -6,7 +6,7 @@
 
 # Interface: RuleCondition
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L51)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L51)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:51](htt
 
 > **field**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L52)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L52)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:52](htt
 
 > `optional` **nested**: `RuleCondition`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L55)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L55)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:55](htt
 
 > **operator**: [`ConditionOperator`](../type-aliases/ConditionOperator.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L53)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L53)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:53](htt
 
 > **value**: `unknown`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/gci.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/gci.ts#L54)
+Defined in: [03-platform/packages/types/src/protocols/gci.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/gci.ts#L54)

@@ -65,12 +65,12 @@ caps_fired: 0
 
 **P1:**
 
-- **[P1] Package count drift across operational docs** `01-docs/specs/03-platform/packages/README.md:17`, `01-docs/devops/runbooks/quality-runbook.md:46-49`, `01-docs/stack/tech-stack.md:54` — claims 18, 21, or 22 packages inconsistently. Fix: scripted manifest from `pnpm-workspace.yaml`.
+- **[P1] Package count drift across operational docs** `01-docs/specs/packages/README.md:17`, `01-docs/devops/runbooks/quality-runbook.md:46-49`, `01-docs/stack/tech-stack.md:54` — claims 18, 21, or 22 packages inconsistently. Fix: scripted manifest from `pnpm-workspace.yaml`.
 
 **P2:**
 
-- **[P2] Verification templates.ts approaching LOC ceiling** `03-platform/packages/verification/03-platform/src/certificates/templates.ts:468` — future growth triggers gate failure.
-- **[P2] Offline queue ownership split** `03-platform/packages/sync/03-platform/src/index.ts` vs `03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:36,205` — integrator confusion.
+- **[P2] Verification templates.ts approaching LOC ceiling** `03-platform/packages/verification/src/certificates/templates.ts:468` — future growth triggers gate failure.
+- **[P2] Offline queue ownership split** `03-platform/packages/sync/src/index.ts` vs `03-platform/packages/domain/src/internal/offline-queue.ts:36,205` — integrator confusion.
 - **[P2] Rust P2P transport scaffolding only** `rust/gtcx-network/03-platform/src/lib.rs:15-18` — types only, integration planned Phase 2.
 
 ### 1.2 Security Audit
@@ -92,7 +92,7 @@ caps_fired: 0
 **P2:**
 
 - **[P2] Rust transitive advisories accepted** `rust/.cargo/audit.toml:11-41` — `derivative`, `paste`, `rustls-webpki` RUSTSECs. Track upstream migration.
-- **[P2] ai-eval uses `execSync` for git diff** `03-platform/packages/ai-eval/03-platform/src/safety.ts:35-38` — dev/CI tooling only; confined to eval CLI.
+- **[P2] ai-eval uses `execSync` for git diff** `03-platform/packages/ai-eval/src/safety.ts:35-38` — dev/CI tooling only; confined to eval CLI.
 
 ### 1.3 GTM Readiness
 

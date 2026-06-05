@@ -6,7 +6,7 @@
 
 # Interface: CulturalContext
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L146)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L146)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:146]
 
 > **communicationStyle**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:151](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L151)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:151](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L151)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:151]
 
 > **culturalNorms**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L150)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L150)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:150]
 
 > **formalityLevel**: `"formal"` \| `"semi_formal"` \| `"informal"`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:152](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L152)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:152](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L152)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:152]
 
 > **language**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L148)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L148)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:148]
 
 > **locale**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L147)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L147)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:147]
 
 > **region**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L149)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L149)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:149]
 
 > **timeOrientation**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:153](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L153)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:153](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L153)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:153]
 
 > **trustFactors**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:154](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L154)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:154](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L154)

@@ -6,7 +6,7 @@
 
 # Interface: ProofBundle
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L11)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L11)
 
 Bundled proof combining multiple verification elements
 
@@ -16,7 +16,7 @@ Bundled proof combining multiple verification elements
 
 > `optional` **certificate**: [`Certificate`](Certificate.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L20)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L20)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **claims**: [`Claim`](Claim.md)[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L23)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L23)
 
 Claims included in this bundle
 
@@ -34,7 +34,7 @@ Claims included in this bundle
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L12)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L12)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **proofs**: `object`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L15)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L15)
 
 #### cryptographicProof
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **qrCode**: [`GeneratedQRCode`](GeneratedQRCode.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L21)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L21)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L14)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L14)
 
 ***
 
@@ -78,4 +78,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **type**: `"location"` \| `"photo"` \| `"certificate"` \| `"workflow"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L13)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L13)

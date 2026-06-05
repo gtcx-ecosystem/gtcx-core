@@ -156,13 +156,13 @@ Commodity-agnostic abstractions for:
 
 ## Implementation
 
-`03-platform/packages/verification/03-platform/src/`
+`03-platform/packages/verification/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/crypto.md`](./crypto.md) — cryptographic primitives
-- [`01-docs/specs/03-platform/packages/identity.md`](./identity.md) — identity used in certificate signing
+- [`01-docs/specs/packages/crypto.md`](./crypto.md) — cryptographic primitives
+- [`01-docs/specs/packages/identity.md`](./identity.md) — identity used in certificate signing
 - [`01-docs/09-security/security-framework.md`](../../security/security-framework.md) — security framework
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

@@ -92,11 +92,11 @@ WorkProof credentials conform to the W3C Verifiable Credentials Data Model v1.1.
 
 ## Implementation
 
-`03-platform/packages/workproof/03-platform/src/`
+`03-platform/packages/workproof/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/verification.md`](./verification.md) — proof bundling dependency
+- [`01-docs/specs/packages/verification.md`](./verification.md) — proof bundling dependency
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

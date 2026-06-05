@@ -6,7 +6,7 @@
 
 # Interface: VaultLot
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L121)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:121](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L121)
 
 Lot record - physical asset being tracked
 
@@ -16,7 +16,7 @@ Lot record - physical asset being tracked
 
 > **certifications**: `string`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:127](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L127)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:127](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L127)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **commodity**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L123)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:123](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L123)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:129](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L129)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:129](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L129)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **currentCustody**: [`CustodyChain`](CustodyChain.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L125)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:125](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L125)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L122)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:122](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L122)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **origin**: [`LotOrigin`](LotOrigin.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L124)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L124)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **specifications**: [`LotSpecifications`](LotSpecifications.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L126)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L126)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **status**: [`LotStatus`](../type-aliases/LotStatus.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:128](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L128)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:128](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L128)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **updatedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L130)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L130)

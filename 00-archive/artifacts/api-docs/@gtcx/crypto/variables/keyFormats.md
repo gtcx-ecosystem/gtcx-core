@@ -8,7 +8,7 @@
 
 > `const` **keyFormats**: `object`
 
-Defined in: [keys.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/keys.ts#L177)
+Defined in: [keys.ts:177](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/keys.ts#L177)
 
 Convert key to different formats
 

@@ -8,7 +8,7 @@
 
 > **buildCanonicalRequest**(`context`, `did`, `keyId`, `timestamp`, `nonce`, `audience`): [`CanonicalRequestString`](../interfaces/CanonicalRequestString.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/hash.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/hash.ts#L26)
+Defined in: [03-platform/packages/api-client/src/canonical/hash.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/hash.ts#L26)
 
 Build the canonical request string and its hash.
 

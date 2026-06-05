@@ -6,7 +6,7 @@
 
 # Interface: CortexIngestResponse
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L73)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L73)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:73](
 
 > **accepted**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L74)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L74)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:74](
 
 > **batchId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L76)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L76)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:76](
 
 > `optional` **errors**: `object`[]
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L77)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L77)
 
 #### index
 
@@ -46,4 +46,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:77](
 
 > **rejected**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L75)
+Defined in: [03-platform/packages/types/src/api/intelligence.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/intelligence.ts#L75)

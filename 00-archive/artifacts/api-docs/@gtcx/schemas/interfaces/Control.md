@@ -6,7 +6,7 @@
 
 # Interface: Control
 
-Defined in: [core12/types.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L4)
+Defined in: [core12/types.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core12/types.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob
 
 > **description**: `string`
 
-Defined in: [core12/types.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L7)
+Defined in: [core12/types.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L7)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [core12/types.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob
 
 > **evidenceRequirements**: `object`
 
-Defined in: [core12/types.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L8)
+Defined in: [core12/types.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L8)
 
 #### primary
 
@@ -38,7 +38,7 @@ Defined in: [core12/types.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob
 
 > **id**: `string`
 
-Defined in: [core12/types.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L5)
+Defined in: [core12/types.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L5)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [core12/types.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob
 
 > **name**: `string`
 
-Defined in: [core12/types.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L6)
+Defined in: [core12/types.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L6)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [core12/types.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob
 
 > **scoringCriteria**: `object`
 
-Defined in: [core12/types.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L13)
+Defined in: [core12/types.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L13)
 
 #### complete
 
@@ -74,4 +74,4 @@ Defined in: [core12/types.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **verificationMethod**: `string`
 
-Defined in: [core12/types.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L12)
+Defined in: [core12/types.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L12)

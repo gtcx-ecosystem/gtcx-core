@@ -6,7 +6,7 @@
 
 # Class: TradingService
 
-Defined in: [03-platform/packages/services/03-platform/src/trading.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading.ts#L71)
+Defined in: [03-platform/packages/services/src/trading.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading.ts#L71)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/trading.ts:71](https:
 
 > **new TradingService**(`dependencies`, `config?`): `TradingService`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading.ts#L84)
+Defined in: [03-platform/packages/services/src/trading.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading.ts#L84)
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/services/03-platform/src/trading.ts:84](https:
 
 > **calculateFairPrice**(`assetLot`): `Promise`\<\{ `adjustedPrice`: `number`; `basePrice`: `number`; `breakdown`: \{ `formAdjustment`: `number`; `locationFactor`: `number`; `purityAdjustment`: `number`; `qualityPremium`: `number`; `total`: `number`; \}; `currency`: `string`; \}\>
 
-Defined in: [03-platform/packages/services/03-platform/src/trading.ts:164](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading.ts#L164)
+Defined in: [03-platform/packages/services/src/trading.ts:164](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading.ts#L164)
 
 #### Parameters
 
@@ -88,7 +88,7 @@ Defined in: [03-platform/packages/services/03-platform/src/trading.ts:164](https
 
 > **executeTrade**(`request`): `Promise`\<`Transaction`\>
 
-Defined in: [03-platform/packages/services/03-platform/src/trading.ts:299](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading.ts#L299)
+Defined in: [03-platform/packages/services/src/trading.ts:299](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading.ts#L299)
 
 #### Parameters
 
@@ -106,7 +106,7 @@ Defined in: [03-platform/packages/services/03-platform/src/trading.ts:299](https
 
 > **findTradingOpportunities**(`filters`): `Promise`\<`TradingOpportunity`[]\>
 
-Defined in: [03-platform/packages/services/03-platform/src/trading.ts:226](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading.ts#L226)
+Defined in: [03-platform/packages/services/src/trading.ts:226](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading.ts#L226)
 
 #### Parameters
 
@@ -124,7 +124,7 @@ Defined in: [03-platform/packages/services/03-platform/src/trading.ts:226](https
 
 > **getCurrentMarketPrices**(`commodityType`, `forms?`): `Promise`\<`MarketPrice`[]\>
 
-Defined in: [03-platform/packages/services/03-platform/src/trading.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading.ts#L124)
+Defined in: [03-platform/packages/services/src/trading.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading.ts#L124)
 
 #### Parameters
 
@@ -146,7 +146,7 @@ Defined in: [03-platform/packages/services/03-platform/src/trading.ts:124](https
 
 > **getTradeAnalytics**(`commodityType`, `period?`): `Promise`\<`TradeAnalytics`\>
 
-Defined in: [03-platform/packages/services/03-platform/src/trading.ts:379](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading.ts#L379)
+Defined in: [03-platform/packages/services/src/trading.ts:379](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading.ts#L379)
 
 #### Parameters
 

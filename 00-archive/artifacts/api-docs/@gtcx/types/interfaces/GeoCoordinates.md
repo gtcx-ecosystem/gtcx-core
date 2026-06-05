@@ -6,7 +6,7 @@
 
 # Interface: GeoCoordinates
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L65)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L65)
 
 Geographic coordinates with metadata
 
@@ -16,7 +16,7 @@ Geographic coordinates with metadata
 
 > **accuracy**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L69)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L69)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:69](
 
 > `optional` **altitude**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L68)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L68)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:68](
 
 > `optional` **altitudeAccuracy**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L70)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:70](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L70)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:70](
 
 > `optional` **heading**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L71)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L71)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:71](
 
 > **latitude**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L66)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L66)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:66](
 
 > **longitude**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L67)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L67)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:67](
 
 > `optional` **speed**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/geotag.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/geotag.ts#L72)
+Defined in: [03-platform/packages/types/src/protocols/geotag.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/geotag.ts#L72)

@@ -21,15 +21,15 @@ const rootDir = join(__dirname, '..');
 // ---------------------------------------------------------------------------
 
 const { classifyProfile } = await import(
-  join(rootDir, '03-platform/packages/connectivity/03-platform/src/profiles.ts')
+  join(rootDir, '03-platform/packages/connectivity/src/profiles.ts')
 );
 
 const { DEFAULT_PROFILE_CONFIG, adaptClientOptionsForProfile } = await import(
-  join(rootDir, '03-platform/packages/connectivity/03-platform/src/adapters/api-client.ts')
+  join(rootDir, '03-platform/packages/connectivity/src/adapters/api-client.ts')
 );
 
 const { RequestBatcher } = await import(
-  join(rootDir, '03-platform/packages/connectivity/03-platform/src/batching.ts')
+  join(rootDir, '03-platform/packages/connectivity/src/batching.ts')
 );
 
 // ---------------------------------------------------------------------------

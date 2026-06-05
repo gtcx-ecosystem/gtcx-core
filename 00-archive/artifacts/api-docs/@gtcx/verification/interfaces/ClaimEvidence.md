@@ -6,7 +6,7 @@
 
 # Interface: ClaimEvidence
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L34)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L34)
 
 Evidence attached to a claim
 
@@ -16,7 +16,7 @@ Evidence attached to a claim
 
 > **hash**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L36)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L36)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L38)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L38)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L37)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L37)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **type**: [`EvidenceType`](../type-aliases/EvidenceType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L35)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L35)

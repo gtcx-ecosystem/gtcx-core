@@ -6,7 +6,7 @@
 
 # Interface: ZkProver
 
-Defined in: [zkp.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L31)
+Defined in: [zkp.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L31)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [zkp.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52
 
 > **generate**(`input`): `Promise`\<\{ `created`: `string`; `proof`: `string`; `proofType`: `string`; `publicInputs`: `string`[]; `system`: `"schnorr"` \| `"bulletproofs"` \| `"groth16"` \| `"plonk"`; `verificationKeyId`: `string`; \}\>
 
-Defined in: [zkp.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/zkp.ts#L32)
+Defined in: [zkp.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/zkp.ts#L32)
 
 #### Parameters
 

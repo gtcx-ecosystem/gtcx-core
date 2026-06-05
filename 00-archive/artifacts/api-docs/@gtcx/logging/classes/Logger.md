@@ -6,7 +6,7 @@
 
 # Class: Logger
 
-Defined in: [logger.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L104)
+Defined in: [logger.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L104)
 
 Structured logger that produces JSON-formatted log entries.
 
@@ -19,7 +19,7 @@ error serialization, and timed operations.
 
 > **new Logger**(`config`): `Logger`
 
-Defined in: [logger.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L107)
+Defined in: [logger.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L107)
 
 #### Parameters
 
@@ -37,7 +37,7 @@ Defined in: [logger.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba
 
 > **child**(`overrides`): `Logger`
 
-Defined in: [logger.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L156)
+Defined in: [logger.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L156)
 
 Create a child logger that inherits the parent's configuration
 with optional overrides. Useful for adding context (e.g., a
@@ -59,7 +59,7 @@ correlation ID or sub-service name) to a subset of log entries.
 
 > **debug**(`message`, `data?`): `void`
 
-Defined in: [logger.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L119)
+Defined in: [logger.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L119)
 
 Log a debug-level message.
 
@@ -83,7 +83,7 @@ Log a debug-level message.
 
 > **error**(`message`, `error?`, `data?`): `void`
 
-Defined in: [logger.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L140)
+Defined in: [logger.ts:140](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L140)
 
 Log an error-level message with an optional Error object.
 
@@ -111,7 +111,7 @@ Log an error-level message with an optional Error object.
 
 > **fatal**(`message`, `error?`, `data?`): `void`
 
-Defined in: [logger.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L147)
+Defined in: [logger.ts:147](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L147)
 
 Log a fatal-level message with an optional Error object.
 
@@ -139,7 +139,7 @@ Log a fatal-level message with an optional Error object.
 
 > **info**(`message`, `data?`): `void`
 
-Defined in: [logger.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L126)
+Defined in: [logger.ts:126](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L126)
 
 Log an info-level message.
 
@@ -163,7 +163,7 @@ Log an info-level message.
 
 > **startTimer**(): () => `number`
 
-Defined in: [logger.ts:176](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L176)
+Defined in: [logger.ts:176](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L176)
 
 Start a timer and return a function that, when called, returns
 the elapsed duration in milliseconds. Useful for measuring
@@ -192,7 +192,7 @@ logger.info('Operation complete', { duration });
 
 > **warn**(`message`, `data?`): `void`
 
-Defined in: [logger.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L133)
+Defined in: [logger.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L133)
 
 Log a warn-level message.
 
@@ -216,7 +216,7 @@ Log a warn-level message.
 
 > `static` **generateCorrelationId**(): `string`
 
-Defined in: [logger.ts:186](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/03-platform/src/logger.ts#L186)
+Defined in: [logger.ts:186](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/logging/src/logger.ts#L186)
 
 Generate a unique correlation ID based on the current timestamp
 and random hex characters. Useful for tracing requests across

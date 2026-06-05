@@ -75,7 +75,7 @@ Budget violations block release. Do not raise budgets to unblock — refactor th
 **Before (anti-pattern):**
 
 ```typescript
-// 03-platform/packages/security/03-platform/src/index.ts
+// 03-platform/packages/security/src/index.ts
 export * from './validation';
 export * from './auth';
 export * from './offline';
@@ -85,7 +85,7 @@ export * from './audit';
 **After (correct):**
 
 ```typescript
-// 03-platform/packages/security/03-platform/src/index.ts
+// 03-platform/packages/security/src/index.ts
 // Only cross-cutting types and core exports
 export type { ValidationResult, ValidationOptions } from './validation';
 export { validateInput } from './validation';
@@ -200,7 +200,7 @@ pnpm why <package>
 | Gate                | Command                                                                    | Blocks Release? |
 | ------------------- | -------------------------------------------------------------------------- | --------------- |
 | Bundle size check   | `pnpm bundle:check-budgets`                                                | Yes             |
-| Barrel export audit | `grep -r "export \*" 03-platform/packages/*/03-platform/src/index.ts`      | Yes             |
+| Barrel export audit | `grep -r "export \*" 03-platform/packages/*/src/index.ts`      | Yes             |
 | Tree-shaking config | `grep -n "splitting\|treeshake" 03-platform/packages/config/tsup/base.mjs` | Yes             |
 | Rust size opts      | `grep -n "opt-level\|strip" rust/Cargo.toml`                               | Yes             |
 

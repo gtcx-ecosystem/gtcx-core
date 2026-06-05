@@ -6,7 +6,7 @@
 
 # Interface: Token
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L64)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:64](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L64)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:64](ht
 
 > **claims**: `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L66)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L66)
 
 #### aud?
 
@@ -74,7 +74,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:66](ht
 
 > **header**: `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L65)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L65)
 
 #### alg
 
@@ -94,7 +94,7 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:65](ht
 
 > **raw**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L68)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L68)
 
 ***
 
@@ -102,4 +102,4 @@ Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:68](ht
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L67)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L67)

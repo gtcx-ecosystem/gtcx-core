@@ -153,7 +153,7 @@ Maintains and monitors the SLOs for all four operational environments:
 ## Session Start Protocol
 
 1. Read `01-docs/01-agents/onboarding/orientation.md`
-2. Read package specs in `01-docs/specs/03-platform/packages/` for `@gtcx/sync`, `@gtcx/network`, `@gtcx/crypto-native`
+2. Read package specs in `01-docs/specs/packages/` for `@gtcx/sync`, `@gtcx/network`, `@gtcx/crypto-native`
 3. Read `01-docs/architecture/overview.md` — network and sync layer boundaries
 4. Read `benchmarks/` — current performance budgets and the last run results
 5. If working on a Rust crate: confirm cross-compilation targets and verify the current build status for all three targets
@@ -166,7 +166,7 @@ Maintains and monitors the SLOs for all four operational environments:
 
 | Resource                    | Location                                       |
 | --------------------------- | ---------------------------------------------- |
-| Package specifications      | `01-docs/specs/03-platform/packages/`          |
+| Package specifications      | `01-docs/specs/packages/`          |
 | Architecture overview       | `01-docs/architecture/overview.md`             |
 | Performance budgets         | `benchmarks/`                                  |
 | Safety rules and escalation | `01-docs/01-agents/workflows/safety-rules.md`  |

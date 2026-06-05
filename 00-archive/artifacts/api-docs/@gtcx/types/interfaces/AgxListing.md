@@ -6,7 +6,7 @@
 
 # Interface: AgxListing
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:173](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L173)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:173](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L173)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:173](ht
 
 > **availability**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L193)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L193)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:193](ht
 
 > **listingId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:174](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L174)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:174](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L174)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:174](ht
 
 > **lotSummary**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:176](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L176)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:176](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L176)
 
 #### commodity
 
@@ -58,7 +58,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:176](ht
 
 > **price**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L183)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:183](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L183)
 
 #### amount
 
@@ -78,7 +78,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:183](ht
 
 > **seller**: `object`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:188](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L188)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:188](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L188)
 
 #### id
 
@@ -98,4 +98,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:188](ht
 
 > **sgxId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/platforms.ts:175](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/platforms.ts#L175)
+Defined in: [03-platform/packages/types/src/api/platforms.ts:175](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/platforms.ts#L175)

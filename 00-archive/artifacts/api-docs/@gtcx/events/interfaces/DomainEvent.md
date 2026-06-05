@@ -6,7 +6,7 @@
 
 # Interface: DomainEvent\<T\>
 
-Defined in: [types.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L45)
+Defined in: [types.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L45)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > `optional` **correlationId**: `string`
 
-Defined in: [types.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L53)
+Defined in: [types.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L53)
 
 Correlation ID for distributed tracing
 
@@ -30,7 +30,7 @@ Correlation ID for distributed tracing
 
 > **payload**: `T`
 
-Defined in: [types.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L49)
+Defined in: [types.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L49)
 
 Event payload
 
@@ -40,7 +40,7 @@ Event payload
 
 > **source**: `"registration"` \| `"trading"` \| `"compliance"`
 
-Defined in: [types.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L55)
+Defined in: [types.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L55)
 
 Source service
 
@@ -50,7 +50,7 @@ Source service
 
 > **timestamp**: `number`
 
-Defined in: [types.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L51)
+Defined in: [types.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L51)
 
 Unix timestamp (ms)
 
@@ -60,7 +60,7 @@ Unix timestamp (ms)
 
 > **type**: [`DomainEventType`](../type-aliases/DomainEventType.md)
 
-Defined in: [types.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L47)
+Defined in: [types.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L47)
 
 Event type
 
@@ -70,6 +70,6 @@ Event type
 
 > **version**: `number`
 
-Defined in: [types.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L57)
+Defined in: [types.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L57)
 
 Schema version for evolution

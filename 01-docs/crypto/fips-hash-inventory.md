@@ -66,7 +66,7 @@ This document inventories every hash call in the gtcx-core codebase and classifi
 | `fipsSign`          | `03-platform/src/fips-backend.ts` | SHA-256 (message digest) | `node:crypto`                           | **Approved** | N/A — already FIPS path          |
 | `fipsVerify`        | `03-platform/src/fips-backend.ts` | SHA-256 (message digest) | `node:crypto`                           | **Approved** | N/A — already FIPS path          |
 
-**TypeScript BLAKE3 usage:** None in `03-platform/packages/crypto/03-platform/src/`. BLAKE3 is referenced in `03-platform/src/fips.ts` as a **warned** algorithm (logs a FIPS warning if used), but no production code path in `03-platform/packages/crypto/` calls BLAKE3. Downstream consumers (e.g., `@gtcx/crypto` consumers in other repos) may use BLAKE3 via direct `@noble/hashes/blake3` imports; those are outside this inventory.
+**TypeScript BLAKE3 usage:** None in `03-platform/packages/crypto/src/`. BLAKE3 is referenced in `03-platform/src/fips.ts` as a **warned** algorithm (logs a FIPS warning if used), but no production code path in `03-platform/packages/crypto/` calls BLAKE3. Downstream consumers (e.g., `@gtcx/crypto` consumers in other repos) may use BLAKE3 via direct `@noble/hashes/blake3` imports; those are outside this inventory.
 
 ---
 
@@ -178,10 +178,10 @@ When FIPS mode is **not** active:
 ## References
 
 - [FIPS Validation Boundary Statement](../security/fips-validation-boundary.md)
-- `03-platform/packages/crypto/03-platform/src/hashing.ts`
-- `03-platform/packages/crypto/03-platform/src/fips.ts`
-- `03-platform/packages/crypto/03-platform/src/fips-backend.ts`
-- `03-platform/packages/crypto/03-platform/src/proofs.ts`
+- `03-platform/packages/crypto/src/hashing.ts`
+- `03-platform/packages/crypto/src/fips.ts`
+- `03-platform/packages/crypto/src/fips-backend.ts`
+- `03-platform/packages/crypto/src/proofs.ts`
 - `rust/gtcx-crypto/03-platform/src/hashing/mod.rs`
 - `rust/gtcx-zkp/03-platform/src/utils.rs`
 - `rust/gtcx-zkp/03-platform/src/groth16/mod.rs`

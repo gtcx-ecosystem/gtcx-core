@@ -46,42 +46,42 @@ gtcx-core is a foundation library, not a deployed service. This mapping document
 
 | Control | Title                      | Implementation                                          | Evidence                                                                                         |
 | ------- | -------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| AC-3    | Access Enforcement         | Zone-based permission system with role checks           | `03-platform/packages/security/03-platform/src/auth/permissions.ts`                              |
-| AC-6    | Least Privilege            | Services use dependency injection; no ambient authority | `03-platform/packages/services/03-platform/src/*.ts` — all services accept injected dependencies |
-| AC-10   | Concurrent Session Control | Token TTL enforcement with configurable expiry          | `03-platform/packages/security/03-platform/src/auth/tokens.ts`                                   |
-| AC-12   | Session Termination        | Token expiration checks on every verification call      | `03-platform/packages/security/03-platform/src/auth/tokens.ts:verifyTokenSignature()`            |
+| AC-3    | Access Enforcement         | Zone-based permission system with role checks           | `03-platform/packages/security/src/auth/permissions.ts`                              |
+| AC-6    | Least Privilege            | Services use dependency injection; no ambient authority | `03-platform/packages/services/src/*.ts` — all services accept injected dependencies |
+| AC-10   | Concurrent Session Control | Token TTL enforcement with configurable expiry          | `03-platform/packages/security/src/auth/tokens.ts`                                   |
+| AC-12   | Session Termination        | Token expiration checks on every verification call      | `03-platform/packages/security/src/auth/tokens.ts:verifyTokenSignature()`            |
 
 ### AU — Audit and Accountability
 
 | Control | Title                           | Implementation                                                                  | Evidence                                                                                                                           |
 | ------- | ------------------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| AU-2    | Event Logging                   | Type-safe event bus emits all domain events (registration, trading, compliance) | `03-platform/packages/events/03-platform/src/event-bus.ts`, `03-platform/packages/events/03-platform/src/types.ts`                 |
-| AU-3    | Content of Audit Records        | Structured JSON logs with correlation IDs, timestamps, source, version          | `03-platform/packages/logging/03-platform/src/index.ts`                                                                            |
+| AU-2    | Event Logging                   | Type-safe event bus emits all domain events (registration, trading, compliance) | `03-platform/packages/events/src/event-bus.ts`, `03-platform/packages/events/src/types.ts`                 |
+| AU-3    | Content of Audit Records        | Structured JSON logs with correlation IDs, timestamps, source, version          | `03-platform/packages/logging/src/index.ts`                                                                            |
 | AU-6    | Audit Record Review             | KPI collection and export; CI-generated quality metrics                         | `03-platform/tools/collect-kpi-history.mjs`, `03-platform/tools/export-quality-kpis.mjs`                                           |
-| AU-8    | Time Stamps                     | All events include `timestamp: Date.now()` (millisecond precision)              | `03-platform/packages/events/03-platform/src/types.ts:DomainEvent`                                                                 |
-| AU-9    | Protection of Audit Information | Hash-chained proof bundles; tamper-evident via SHA-256 chains                   | `03-platform/packages/verification/03-platform/src/proofs/bundler.ts`, `rust/gtcx-crypto/03-platform/src/chain.rs`                 |
-| AU-10   | Non-repudiation                 | Ed25519/Secp256k1 digital signatures on all attestations                        | `03-platform/packages/crypto/03-platform/src/signing.ts`, `03-platform/packages/workproof/03-platform/src/workproof/operations.ts` |
-| AU-11   | Audit Record Retention          | Offline event buffer with configurable max size and overflow tracking           | `03-platform/packages/events/03-platform/src/offline-buffer.ts`                                                                    |
+| AU-8    | Time Stamps                     | All events include `timestamp: Date.now()` (millisecond precision)              | `03-platform/packages/events/src/types.ts:DomainEvent`                                                                 |
+| AU-9    | Protection of Audit Information | Hash-chained proof bundles; tamper-evident via SHA-256 chains                   | `03-platform/packages/verification/src/proofs/bundler.ts`, `rust/gtcx-crypto/03-platform/src/chain.rs`                 |
+| AU-10   | Non-repudiation                 | Ed25519/Secp256k1 digital signatures on all attestations                        | `03-platform/packages/crypto/src/signing.ts`, `03-platform/packages/workproof/src/workproof/operations.ts` |
+| AU-11   | Audit Record Retention          | Offline event buffer with configurable max size and overflow tracking           | `03-platform/packages/events/src/offline-buffer.ts`                                                                    |
 
 ### IA — Identification and Authentication
 
 | Control | Title                                                        | Implementation                                                                  | Evidence                                                                                                           |
 | ------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| IA-2    | Identification and Authentication                            | DID-based identity (`did:gtcx:*`) with cryptographic key binding                | `03-platform/packages/identity/03-platform/src/did.ts`                                                             |
-| IA-5    | Authenticator Management                                     | Key generation via OS CSPRNG; key derivation with validated salt (min 16 bytes) | `03-platform/packages/crypto/03-platform/src/keys.ts`, `03-platform/packages/identity/03-platform/src/identity.ts` |
-| IA-5(2) | PKI-Based Authentication                                     | Ed25519/Secp256k1 key pairs with public key fingerprinting                      | `03-platform/packages/identity/03-platform/src/identity.ts:createIdentity()`                                       |
-| IA-7    | Cryptographic Module Authentication                          | JWT tokens with Ed25519 signature verification, issuer/audience validation      | `03-platform/packages/security/03-platform/src/auth/tokens.ts`                                                     |
-| IA-8    | Identification and Authentication (Non-Organizational Users) | DID resolver infrastructure with pluggable adapters                             | `03-platform/packages/identity/03-platform/src/resolver.ts`                                                        |
+| IA-2    | Identification and Authentication                            | DID-based identity (`did:gtcx:*`) with cryptographic key binding                | `03-platform/packages/identity/src/did.ts`                                                             |
+| IA-5    | Authenticator Management                                     | Key generation via OS CSPRNG; key derivation with validated salt (min 16 bytes) | `03-platform/packages/crypto/src/keys.ts`, `03-platform/packages/identity/src/identity.ts` |
+| IA-5(2) | PKI-Based Authentication                                     | Ed25519/Secp256k1 key pairs with public key fingerprinting                      | `03-platform/packages/identity/src/identity.ts:createIdentity()`                                       |
+| IA-7    | Cryptographic Module Authentication                          | JWT tokens with Ed25519 signature verification, issuer/audience validation      | `03-platform/packages/security/src/auth/tokens.ts`                                                     |
+| IA-8    | Identification and Authentication (Non-Organizational Users) | DID resolver infrastructure with pluggable adapters                             | `03-platform/packages/identity/src/resolver.ts`                                                        |
 
 ### SC — System and Communications Protection
 
 | Control | Title                                          | Implementation                                                             | Evidence                                                                      |
 | ------- | ---------------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| SC-8    | Transmission Confidentiality and Integrity     | HMAC request signing for API calls; mTLS support in API client             | `03-platform/packages/api-client/03-platform/src/index.ts`                    |
+| SC-8    | Transmission Confidentiality and Integrity     | HMAC request signing for API calls; mTLS support in API client             | `03-platform/packages/api-client/src/index.ts`                    |
 | SC-12   | Cryptographic Key Establishment and Management | HD key derivation (BIP-32 style); purpose-based key separation             | `rust/gtcx-crypto/03-platform/src/keys/mod.rs`                                |
 | SC-13   | Cryptographic Protection                       | SHA-256 (FIPS 180-4), Secp256k1 ECDSA (FIPS 186-4), Ed25519 (RFC 8032)     | See `01-docs/09-security/fips-assessment.md`                                  |
-| SC-17   | Public Key Infrastructure Certificates         | W3C Verifiable Credential certificate generation with cryptographic proofs | `03-platform/packages/verification/03-platform/src/certificates/generator.ts` |
-| SC-28   | Protection of Information at Rest              | Encrypted offline storage interface with lockout protection (fail-closed)  | `03-platform/packages/security/03-platform/src/offline/secure-storage.ts`     |
+| SC-17   | Public Key Infrastructure Certificates         | W3C Verifiable Credential certificate generation with cryptographic proofs | `03-platform/packages/verification/src/certificates/generator.ts` |
+| SC-28   | Protection of Information at Rest              | Encrypted offline storage interface with lockout protection (fail-closed)  | `03-platform/packages/security/src/offline/secure-storage.ts`     |
 
 ### SI — System and Information Integrity
 
@@ -90,7 +90,7 @@ gtcx-core is a foundation library, not a deployed service. This mapping document
 | SI-2    | Flaw Remediation                              | Automated CVE scanning (Trivy) on every CI build; SBOM (CycloneDX) generated       | `.github/workflows/ci.yml` (security job)                                                                             |
 | SI-4    | System Monitoring                             | Performance budget enforcement with trend detection; API surface drift detection   | `03-platform/tools/check-performance-budgets.mjs`, `03-platform/tools/check-api-surface.mjs`                          |
 | SI-7    | Software, Firmware, and Information Integrity | Provenance manifest with SHA-256 hashes of all evidence artifacts                  | `03-platform/tools/generate-provenance-manifest.mjs`                                                                  |
-| SI-10   | Information Input Validation                  | Zod schema validation at all trust boundaries; recursive prototype pollution check | `03-platform/packages/domain/03-platform/src/schemas.ts`, `03-platform/packages/security/03-platform/src/validation/` |
+| SI-10   | Information Input Validation                  | Zod schema validation at all trust boundaries; recursive prototype pollution check | `03-platform/packages/domain/src/schemas.ts`, `03-platform/packages/security/src/validation/` |
 
 ### CM — Configuration Management
 

@@ -6,7 +6,7 @@
 
 # Interface: TamperDetectionEvent
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L194)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:194](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L194)
 
 Tamper detection event for audit logging
 
@@ -16,7 +16,7 @@ Tamper detection event for audit logging
 
 > **checkType**: `"SCHEDULED"` \| `"ON_ACCESS"` \| `"MANUAL"`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L198)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:198](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L198)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > **dataId**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:196](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L196)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:196](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L196)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > **dataType**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:197](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L197)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:197](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L197)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > `optional` **deviceId**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L200)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L200)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > `optional` **location**: `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L201)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L201)
 
 #### latitude
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > **result**: [`TamperCheckResult`](TamperCheckResult.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:199](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L199)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:199](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L199)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detect
 
 > **timestamp**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/tamper-detection.ts:195](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/tamper-detection.ts#L195)
+Defined in: [03-platform/packages/security/src/offline/tamper-detection.ts:195](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/tamper-detection.ts#L195)

@@ -6,7 +6,7 @@
 
 # Interface: CustodyVerification
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L101)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:101](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L101)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **method**: [`VerificationMethod`](../type-aliases/VerificationMethod.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L104)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:104](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L104)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > `optional` **notes**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L107)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:107](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L107)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **result**: `"pending"` \| `"failed"` \| `"verified"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L105)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L105)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L106)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L106)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **verifiedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L103)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:103](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L103)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:1
 
 > **verifierId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/vaultmark.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/vaultmark.ts#L102)
+Defined in: [03-platform/packages/types/src/protocols/vaultmark.ts:102](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/vaultmark.ts#L102)

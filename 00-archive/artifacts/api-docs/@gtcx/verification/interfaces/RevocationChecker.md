@@ -6,7 +6,7 @@
 
 # Interface: RevocationChecker
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L139)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:139](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L139)
 
 Pluggable revocation backend.
 
@@ -25,7 +25,7 @@ because a transient backend failure must not silently downgrade trust.
 
 > **check**(`certificate`): `Promise`\<[`RevocationStatus`](RevocationStatus.md)\>
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/revocation.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/revocation.ts#L148)
+Defined in: [03-platform/packages/verification/src/certificates/revocation.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/revocation.ts#L148)
 
 Check whether a certificate has been revoked.
 

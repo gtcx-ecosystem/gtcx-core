@@ -8,7 +8,7 @@
 
 > `const` **tracedGenerateQRCode**: (...`args`) => `Promise`
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/qr.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/qr.ts#L20)
+Defined in: [03-platform/packages/verification/src/traced/qr.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/qr.ts#L20)
 
 ## Parameters
 

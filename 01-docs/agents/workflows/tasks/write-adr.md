@@ -117,7 +117,7 @@ Add the superseded ADR to the new ADR's References section.
 
 ### 5. Link from affected specs
 
-If the ADR affects a package spec in `01-docs/specs/03-platform/packages/`, add a reference to the relevant section of that spec.
+If the ADR affects a package spec in `01-docs/specs/packages/`, add a reference to the relevant section of that spec.
 
 ---
 

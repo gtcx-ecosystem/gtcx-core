@@ -6,7 +6,7 @@
 
 # Interface: GenerateCertificateInput
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/sanitizers.ts#L20)
+Defined in: [03-platform/packages/verification/src/traced/sanitizers.ts:20](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/sanitizers.ts#L20)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers
 
 > `optional` **assetData**: [`AssetLotData`](AssetLotData.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/sanitizers.ts#L24)
+Defined in: [03-platform/packages/verification/src/traced/sanitizers.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/sanitizers.ts#L24)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers
 
 > `optional` **claims**: [`Claim`](Claim.md)[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/sanitizers.ts#L25)
+Defined in: [03-platform/packages/verification/src/traced/sanitizers.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/sanitizers.ts#L25)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers
 
 > **location**: [`CertificateLocation`](CertificateLocation.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/sanitizers.ts#L23)
+Defined in: [03-platform/packages/verification/src/traced/sanitizers.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/sanitizers.ts#L23)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers
 
 > **privateKey**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/sanitizers.ts#L26)
+Defined in: [03-platform/packages/verification/src/traced/sanitizers.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/sanitizers.ts#L26)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers
 
 > **publicKey**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/sanitizers.ts#L27)
+Defined in: [03-platform/packages/verification/src/traced/sanitizers.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/sanitizers.ts#L27)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers
 
 > **securityLevel**: [`CertificateSecurityLevel`](../type-aliases/CertificateSecurityLevel.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/sanitizers.ts#L22)
+Defined in: [03-platform/packages/verification/src/traced/sanitizers.ts:22](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/sanitizers.ts#L22)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers
 
 > **type**: [`CertificateType`](../type-aliases/CertificateType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/traced/sanitizers.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/traced/sanitizers.ts#L21)
+Defined in: [03-platform/packages/verification/src/traced/sanitizers.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/traced/sanitizers.ts#L21)

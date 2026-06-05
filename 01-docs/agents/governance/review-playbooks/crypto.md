@@ -50,7 +50,7 @@ The bot applies every check in this playbook to the diff. Each check states the 
 
 **Violation pattern:**
 
-- New file in `03-platform/packages/crypto/03-platform/src/` containing bitwise rotation operations on raw bytes
+- New file in `03-platform/packages/crypto/src/` containing bitwise rotation operations on raw bytes
 - New `fn` in `rust/gtcx-crypto/03-platform/src/` implementing constraint construction or polynomial arithmetic outside the approved arkworks crates
 - Inline implementations of HKDF, HMAC, PBKDF2 instead of imports
 
@@ -62,11 +62,11 @@ The bot applies every check in this playbook to the diff. Each check states the 
 
 ## 2. `Math.random()` ban in source
 
-**Rule:** `Math.random()` must never appear in `03-platform/packages/*/03-platform/src/`. Use `crypto.randomBytes` (Node) or `crypto.getRandomValues` (Web Crypto). Test files are exempt; ESLint already enforces this in `eslint.config.js` `no-restricted-properties`.
+**Rule:** `Math.random()` must never appear in `03-platform/packages/*/src/`. Use `crypto.randomBytes` (Node) or `crypto.getRandomValues` (Web Crypto). Test files are exempt; ESLint already enforces this in `eslint.config.js` `no-restricted-properties`.
 
 **Violation pattern:**
 
-- Diff adds `Math.random()` in any file under `03-platform/packages/*/03-platform/src/`
+- Diff adds `Math.random()` in any file under `03-platform/packages/*/src/`
 - Diff weakens the ESLint `no-restricted-properties` rule
 
 **Category:** `cryptographic-correctness`
@@ -80,7 +80,7 @@ The bot applies every check in this playbook to the diff. Each check states the 
 
 **Violation pattern:**
 
-- New `===`, `==`, `!==`, `!=` in `03-platform/packages/crypto/03-platform/src/`, `03-platform/packages/security/03-platform/src/`, `03-platform/packages/verification/03-platform/src/` comparing `Uint8Array`, `Buffer`, signature variables, or hex-string variables that hold cryptographic outputs
+- New `===`, `==`, `!==`, `!=` in `03-platform/packages/crypto/src/`, `03-platform/packages/security/src/`, `03-platform/packages/verification/src/` comparing `Uint8Array`, `Buffer`, signature variables, or hex-string variables that hold cryptographic outputs
 - New `if a == b` in `rust/gtcx-crypto/` comparing `&[u8]` or signature/key types where the import of `subtle` or `ConstantTimeEq` is missing
 
 **Category:** `constant-time`
@@ -106,11 +106,11 @@ The bot applies every check in this playbook to the diff. Each check states the 
 
 ## 5. ZKP TS fallback boundary preserved
 
-**Rule:** `HashCommitmentZkpEngine` in `03-platform/packages/crypto/03-platform/src/zkp.ts` is a placeholder, not a ZK proof system. Its presence is acceptable only with the `fipsWarn()` call, the placeholder warning comment, and (post-Sprint 2) the default-throw behavior unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1` is set.
+**Rule:** `HashCommitmentZkpEngine` in `03-platform/packages/crypto/src/zkp.ts` is a placeholder, not a ZK proof system. Its presence is acceptable only with the `fipsWarn()` call, the placeholder warning comment, and (post-Sprint 2) the default-throw behavior unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1` is set.
 
 **Violation pattern:**
 
-- Diff modifies `03-platform/packages/crypto/03-platform/src/zkp.ts` and removes any of: `fipsWarn()` call, `WARNING: This engine does NOT provide zero-knowledge proofs` comment block, the env-flag guard
+- Diff modifies `03-platform/packages/crypto/src/zkp.ts` and removes any of: `fipsWarn()` call, `WARNING: This engine does NOT provide zero-knowledge proofs` comment block, the env-flag guard
 - Diff exports `HashCommitmentZkpEngine` from a higher-level package (e.g., `@gtcx/verification`)
 - Diff renames the engine to remove the `Placeholder` / `HashCommitment` qualifier
 
@@ -168,7 +168,7 @@ The bot applies every check in this playbook to the diff. Each check states the 
 
 ## 9. Threat model delta required for crypto-surface changes
 
-**Rule:** Any diff touching `03-platform/packages/crypto/03-platform/src/`, `03-platform/packages/crypto-native/03-platform/src/`, `rust/gtcx-crypto/03-platform/src/`, or `rust/gtcx-zkp/03-platform/src/` requires a corresponding update to `01-docs/09-security/threat-model.md` — either a new STRIDE row, a modification to an existing mitigation, or an explicit reviewer note in the PR description stating "no threat-model change because <reason>".
+**Rule:** Any diff touching `03-platform/packages/crypto/src/`, `03-platform/packages/crypto-native/src/`, `rust/gtcx-crypto/03-platform/src/`, or `rust/gtcx-zkp/03-platform/src/` requires a corresponding update to `01-docs/09-security/threat-model.md` — either a new STRIDE row, a modification to an existing mitigation, or an explicit reviewer note in the PR description stating "no threat-model change because <reason>".
 
 **Violation pattern:**
 

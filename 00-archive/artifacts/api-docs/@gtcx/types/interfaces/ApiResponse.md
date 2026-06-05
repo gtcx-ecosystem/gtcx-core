@@ -6,7 +6,7 @@
 
 # Interface: ApiResponse\<T\>
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L9)
+Defined in: [03-platform/packages/types/src/api/common.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L9)
 
 Standard API response wrapper
 
@@ -26,7 +26,7 @@ Standard API response wrapper
 
 > `optional` **data**: `T`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L11)
+Defined in: [03-platform/packages/types/src/api/common.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L11)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:11](https:
 
 > `optional` **error**: [`ApiError`](ApiError.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L12)
+Defined in: [03-platform/packages/types/src/api/common.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L12)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:12](https:
 
 > `optional` **meta**: [`ResponseMeta`](ResponseMeta.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L13)
+Defined in: [03-platform/packages/types/src/api/common.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L13)
 
 ***
 
@@ -50,4 +50,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:13](https:
 
 > **success**: `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L10)
+Defined in: [03-platform/packages/types/src/api/common.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L10)

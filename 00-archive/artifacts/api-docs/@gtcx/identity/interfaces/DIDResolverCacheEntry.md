@@ -6,7 +6,7 @@
 
 # Interface: DIDResolverCacheEntry
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L60)
+Defined in: [03-platform/packages/identity/src/resolver.ts:60](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L60)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:60](https
 
 > **document**: [`DIDDocument`](DIDDocument.md) \| `null`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L61)
+Defined in: [03-platform/packages/identity/src/resolver.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L61)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:61](https
 
 > **expiresAt**: `number`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L62)
+Defined in: [03-platform/packages/identity/src/resolver.ts:62](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L62)

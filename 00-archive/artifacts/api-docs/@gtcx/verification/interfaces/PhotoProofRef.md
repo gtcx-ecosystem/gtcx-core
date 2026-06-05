@@ -6,7 +6,7 @@
 
 # Interface: PhotoProofRef
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L39)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L39)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **hash**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L42)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L42)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L40)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L40)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L43)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L43)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **uri**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/proofs.ts#L41)
+Defined in: [03-platform/packages/verification/src/types/definitions/proofs.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/proofs.ts#L41)

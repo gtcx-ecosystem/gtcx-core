@@ -6,7 +6,7 @@
 
 # Interface: ClaimProof
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L44)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L44)
 
 Cryptographic proof for a claim
 
@@ -16,7 +16,7 @@ Cryptographic proof for a claim
 
 > **created**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L46)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L46)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **proofValue**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L48)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:48](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L48)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **type**: `"Ed25519Signature2020"` \| `"EcdsaSecp256k1Signature2019"`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L45)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L45)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > **verificationMethod**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/claims.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/claims.ts#L47)
+Defined in: [03-platform/packages/verification/src/types/definitions/claims.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/claims.ts#L47)

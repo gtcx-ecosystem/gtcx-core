@@ -6,7 +6,7 @@
 
 # Interface: SyncResult
 
-Defined in: [types.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L71)
+Defined in: [types.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L71)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **conflicts**: `number`
 
-Defined in: [types.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L74)
+Defined in: [types.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L74)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **downloaded**: `number`
 
-Defined in: [types.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L73)
+Defined in: [types.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L73)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **durationMs**: `number`
 
-Defined in: [types.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L77)
+Defined in: [types.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L77)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **errors**: `string`[]
 
-Defined in: [types.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L76)
+Defined in: [types.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L76)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [types.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **resolved**: `number`
 
-Defined in: [types.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L75)
+Defined in: [types.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L75)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [types.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **uploaded**: `number`
 
-Defined in: [types.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/03-platform/src/types.ts#L72)
+Defined in: [types.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/sync/src/types.ts#L72)

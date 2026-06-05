@@ -6,7 +6,7 @@
 
 # Interface: GeoTagVerifiedData
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L130)
+Defined in: [03-platform/packages/types/src/common/events.ts:130](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L130)
 
 GeoTag location claim verified by cross-reference.
 
@@ -16,7 +16,7 @@ GeoTag location claim verified by cross-reference.
 
 > **claimId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:131](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L131)
+Defined in: [03-platform/packages/types/src/common/events.ts:131](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L131)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:131](ht
 
 > **confidence**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L135)
+Defined in: [03-platform/packages/types/src/common/events.ts:135](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L135)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:135](ht
 
 > **lotId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L132)
+Defined in: [03-platform/packages/types/src/common/events.ts:132](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L132)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:132](ht
 
 > **method**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:134](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L134)
+Defined in: [03-platform/packages/types/src/common/events.ts:134](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L134)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:134](ht
 
 > **verifiedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:136](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L136)
+Defined in: [03-platform/packages/types/src/common/events.ts:136](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L136)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:136](ht
 
 > **verifiedBy**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L133)
+Defined in: [03-platform/packages/types/src/common/events.ts:133](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L133)

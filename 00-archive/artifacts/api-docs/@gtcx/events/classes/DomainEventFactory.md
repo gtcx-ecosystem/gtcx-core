@@ -6,7 +6,7 @@
 
 # Class: DomainEventFactory
 
-Defined in: [types.ts:242](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L242)
+Defined in: [types.ts:242](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L242)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:242](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **new DomainEventFactory**(`correlationId?`): `DomainEventFactory`
 
-Defined in: [types.ts:245](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L245)
+Defined in: [types.ts:245](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L245)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [types.ts:245](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **compliance**\<`T`\>(`type`, `payload`, `correlationId?`): [`DomainEvent`](../interfaces/DomainEvent.md)\<`T`\>
 
-Defined in: [types.ts:292](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L292)
+Defined in: [types.ts:292](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L292)
 
 Create a compliance event
 
@@ -66,7 +66,7 @@ Create a compliance event
 
 > **getCorrelationId**(): `string` \| `undefined`
 
-Defined in: [types.ts:249](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L249)
+Defined in: [types.ts:249](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L249)
 
 #### Returns
 
@@ -78,7 +78,7 @@ Defined in: [types.ts:249](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **registration**\<`T`\>(`type`, `payload`, `correlationId?`): [`DomainEvent`](../interfaces/DomainEvent.md)\<`T`\>
 
-Defined in: [types.ts:256](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L256)
+Defined in: [types.ts:256](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L256)
 
 Create a registration event
 
@@ -112,7 +112,7 @@ Create a registration event
 
 > **trading**\<`T`\>(`type`, `payload`, `correlationId?`): [`DomainEvent`](../interfaces/DomainEvent.md)\<`T`\>
 
-Defined in: [types.ts:274](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L274)
+Defined in: [types.ts:274](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L274)
 
 Create a trading event
 

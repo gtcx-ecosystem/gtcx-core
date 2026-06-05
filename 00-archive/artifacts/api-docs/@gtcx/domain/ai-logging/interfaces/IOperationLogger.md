@@ -6,7 +6,7 @@
 
 # Interface: IOperationLogger
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L82)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L82)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:82](https
 
 > **addTags**(`operationId`, `tags`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L119)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:119](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L119)
 
 Add tags to an operation
 
@@ -38,7 +38,7 @@ Add tags to an operation
 
 > **fail**(`operationId`, `error`, `errorCode?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L109)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:109](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L109)
 
 Mark operation as failed
 
@@ -66,7 +66,7 @@ Mark operation as failed
 
 > **get**(`operationId`): [`OperationLogEntry`](OperationLogEntry.md) \| `undefined`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L124)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:124](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L124)
 
 Get operation entry
 
@@ -86,7 +86,7 @@ Get operation entry
 
 > **getByCorrelationId**(`correlationId`): [`OperationLogEntry`](OperationLogEntry.md)[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:129](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L129)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:129](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L129)
 
 Get all operations for a correlation ID
 
@@ -106,7 +106,7 @@ Get all operations for a correlation ID
 
 > **skip**(`operationId`, `reason`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L114)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:114](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L114)
 
 Mark operation as skipped
 
@@ -130,7 +130,7 @@ Mark operation as skipped
 
 > **start**(`type`, `input?`, `options?`): `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:87](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L87)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:87](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L87)
 
 Start a new operation
 
@@ -170,7 +170,7 @@ Operation ID
 
 > **success**(`operationId`, `output?`, `aiContext?`): `void`
 
-Defined in: [03-platform/packages/domain/03-platform/src/ai-logging.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/ai-logging.ts#L100)
+Defined in: [03-platform/packages/domain/src/ai-logging.ts:100](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/ai-logging.ts#L100)
 
 Mark operation as successful
 

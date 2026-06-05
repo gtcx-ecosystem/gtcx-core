@@ -6,7 +6,7 @@
 
 # Interface: ValidationError
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:189](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L189)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:189](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L189)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.t
 
 > **error**: `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:191](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L191)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:191](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L191)
 
 #### code
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.t
 
 > **success**: `false`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:190](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L190)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:190](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L190)

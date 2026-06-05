@@ -8,7 +8,7 @@
 
 > `const` **WORK\_SITE\_TEMPLATE**: [`CertificateTemplate`](../interfaces/CertificateTemplate.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L59)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L59)
 
 Work Site Verification Template
 Daily check-in verification for producers at extraction sites

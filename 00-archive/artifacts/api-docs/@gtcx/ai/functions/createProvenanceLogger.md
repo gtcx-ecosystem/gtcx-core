@@ -8,7 +8,7 @@
 
 > **createProvenanceLogger**(`category`): [`ProvenanceLogger`](../interfaces/ProvenanceLogger.md)
 
-Defined in: [provenance.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/provenance.ts#L75)
+Defined in: [provenance.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/provenance.ts#L75)
 
 Create a category-scoped provenance logger.
 

@@ -8,7 +8,7 @@
 
 > **sanitizeGenerateKeyPairOutput**(`output`): `Record`\<`string`, `unknown`\>
 
-Defined in: [traced-keys.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/traced-keys.ts#L30)
+Defined in: [traced-keys.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/traced-keys.ts#L30)
 
 Generate a new key pair (traced)
 

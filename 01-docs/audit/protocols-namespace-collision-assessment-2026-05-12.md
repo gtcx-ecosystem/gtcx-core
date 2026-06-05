@@ -177,8 +177,8 @@ Three packages collided on npm between `gtcx-core` (v2.0.0) and `gtcx-protocols`
 | Capability       | Location                                                                | Note                                                                                       |
 | ---------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Bulletproofs ZKP | `rust/gtcx-zkp` + `NativeZkpEngine`                                     | Already production via NAPI. Protocols may have different API — reconcile if needed.       |
-| Offline queue    | `03-platform/packages/domain/03-platform/src/internal/offline-queue.ts` | Already exists with 5 conflict strategies. Protocols version may have different semantics. |
-| Rate limiting    | `03-platform/packages/domain/03-platform/src/internal/utils.ts`         | Internal-only. Needs to be made public + pluggable (see upstream table).                   |
+| Offline queue    | `03-platform/packages/domain/src/internal/offline-queue.ts` | Already exists with 5 conflict strategies. Protocols version may have different semantics. |
+| Rate limiting    | `03-platform/packages/domain/src/internal/utils.ts`         | Internal-only. Needs to be made public + pluggable (see upstream table).                   |
 
 ---
 
@@ -226,7 +226,7 @@ This is non-negotiable. Two different codebases cannot share the same npm namesp
 
 - Encryption: Use `node:crypto` `createCipheriv` / `createDecipheriv` for FIPS mode, `@noble/ciphers` for pure-JS fallback. Export `encrypt(plaintext, key, aad?)` and `decrypt(ciphertext, key, aad?)`.
 - KDF: Use `@noble/hashes` `argon2id` or `pbkdf2`. Export `deriveKeyFromPassword(password, salt, options)`.
-- Rate limiter: Move from `03-platform/packages/domain/03-platform/src/internal/utils.ts` to `03-platform/packages/resilience/03-platform/src/rate-limiter.ts`. Add `IRateLimiter` interface with `allow(key): boolean`, `reset(key)`, `status(key)`.
+- Rate limiter: Move from `03-platform/packages/domain/src/internal/utils.ts` to `03-platform/packages/resilience/src/rate-limiter.ts`. Add `IRateLimiter` interface with `allow(key): boolean`, `reset(key)`, `status(key)`.
 - Circuit breaker: Add `CircuitBreaker` class with `execute(fn)`, `state: 'closed' | 'open' | 'half-open'`, `failureThreshold`, `recoveryTimeout`.
 
 ### 6.2 Phase 2: Medium-Effort Primitives (4-6 weeks)

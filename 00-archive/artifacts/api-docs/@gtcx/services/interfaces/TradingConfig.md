@@ -6,7 +6,7 @@
 
 # Interface: TradingConfig
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/config.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/config.ts#L5)
+Defined in: [03-platform/packages/services/src/trading/config.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/config.ts#L5)
 
 Trading service configuration.
 
@@ -16,7 +16,7 @@ Trading service configuration.
 
 > `optional` **allowedPaymentMethods**: `string`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/config.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/config.ts#L17)
+Defined in: [03-platform/packages/services/src/trading/config.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/config.ts#L17)
 
 Allowed payment methods
 
@@ -26,7 +26,7 @@ Allowed payment methods
 
 > **defaultCurrency**: `string`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/config.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/config.ts#L7)
+Defined in: [03-platform/packages/services/src/trading/config.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/config.ts#L7)
 
 Default currency for trades
 
@@ -36,7 +36,7 @@ Default currency for trades
 
 > **defaultSpread**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/config.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/config.ts#L9)
+Defined in: [03-platform/packages/services/src/trading/config.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/config.ts#L9)
 
 Default price spread percentage
 
@@ -46,7 +46,7 @@ Default price spread percentage
 
 > **highValueThreshold**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/config.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/config.ts#L13)
+Defined in: [03-platform/packages/services/src/trading/config.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/config.ts#L13)
 
 High value transaction threshold (requires enhanced KYC)
 
@@ -56,7 +56,7 @@ High value transaction threshold (requires enhanced KYC)
 
 > `optional` **marketSources**: `string`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/config.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/config.ts#L19)
+Defined in: [03-platform/packages/services/src/trading/config.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/config.ts#L19)
 
 Market data sources
 
@@ -66,7 +66,7 @@ Market data sources
 
 > `optional` **maxTransactionValue**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/config.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/config.ts#L15)
+Defined in: [03-platform/packages/services/src/trading/config.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/config.ts#L15)
 
 Maximum transaction value allowed
 
@@ -76,6 +76,6 @@ Maximum transaction value allowed
 
 > **sellerMarkup**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/config.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/config.ts#L11)
+Defined in: [03-platform/packages/services/src/trading/config.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/config.ts#L11)
 
 Default seller markup percentage

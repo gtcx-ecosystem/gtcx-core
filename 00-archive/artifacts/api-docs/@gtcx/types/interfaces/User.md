@@ -6,7 +6,7 @@
 
 # Interface: User
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L5)
+Defined in: [03-platform/packages/types/src/models/user.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L5)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:5](https:
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L14)
+Defined in: [03-platform/packages/types/src/models/user.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L14)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:14](https
 
 > `optional` **email**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L8)
+Defined in: [03-platform/packages/types/src/models/user.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L8)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:8](https:
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L6)
+Defined in: [03-platform/packages/types/src/models/user.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L6)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:6](https:
 
 > `optional` **lastActiveAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L16)
+Defined in: [03-platform/packages/types/src/models/user.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L16)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:16](https
 
 > `optional` **phone**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L9)
+Defined in: [03-platform/packages/types/src/models/user.ts:9](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L9)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:9](https:
 
 > **preferences**: [`UserPreferences`](UserPreferences.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L13)
+Defined in: [03-platform/packages/types/src/models/user.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L13)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:13](https
 
 > **profile**: [`UserProfile`](UserProfile.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L10)
+Defined in: [03-platform/packages/types/src/models/user.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L10)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:10](https
 
 > **roles**: [`UserRole`](UserRole.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L11)
+Defined in: [03-platform/packages/types/src/models/user.ts:11](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L11)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:11](https
 
 > **status**: [`UserStatus`](../type-aliases/UserStatus.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L12)
+Defined in: [03-platform/packages/types/src/models/user.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L12)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:12](https
 
 > **tradePassId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L7)
+Defined in: [03-platform/packages/types/src/models/user.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L7)
 
 ***
 
@@ -94,4 +94,4 @@ Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:7](https:
 
 > **updatedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/models/user.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/models/user.ts#L15)
+Defined in: [03-platform/packages/types/src/models/user.ts:15](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/models/user.ts#L15)

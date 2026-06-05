@@ -103,11 +103,11 @@ No service holds a direct reference to a database, network client, or platform A
 
 ## Implementation
 
-`03-platform/packages/services/03-platform/src/`
+`03-platform/packages/services/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/domain.md`](./domain.md) — domain models and service interfaces
+- [`01-docs/specs/packages/domain.md`](./domain.md) — domain models and service interfaces
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

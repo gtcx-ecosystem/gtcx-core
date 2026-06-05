@@ -6,7 +6,7 @@
 
 # Interface: FrameworkMapping
 
-Defined in: [core12/types.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L27)
+Defined in: [core12/types.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L27)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core12/types.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **clause**: `string`
 
-Defined in: [core12/types.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L30)
+Defined in: [core12/types.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L30)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [core12/types.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **frameworkId**: `string`
 
-Defined in: [core12/types.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L28)
+Defined in: [core12/types.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L28)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [core12/types.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **frameworkName**: `string`
 
-Defined in: [core12/types.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L29)
+Defined in: [core12/types.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L29)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [core12/types.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **mappingType**: `"direct"` \| `"partial"` \| `"interpretive"`
 
-Defined in: [core12/types.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L31)
+Defined in: [core12/types.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L31)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [core12/types.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **notes**: `string`
 
-Defined in: [core12/types.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/03-platform/src/core12/types.ts#L32)
+Defined in: [core12/types.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/schemas/src/core12/types.ts#L32)

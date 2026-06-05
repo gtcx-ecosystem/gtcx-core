@@ -6,7 +6,7 @@
 
 # Interface: EventEnvelope
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L200)
+Defined in: [03-platform/packages/types/src/common/events.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L200)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:200](ht
 
 > **event**: [`DomainEvent`](DomainEvent.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L201)
+Defined in: [03-platform/packages/types/src/common/events.ts:201](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L201)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:201](ht
 
 > `optional` **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:204](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L204)
+Defined in: [03-platform/packages/types/src/common/events.ts:204](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L204)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:204](ht
 
 > `optional` **key**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:203](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L203)
+Defined in: [03-platform/packages/types/src/common/events.ts:203](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L203)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:203](ht
 
 > `optional` **partition**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/events.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/events.ts#L202)
+Defined in: [03-platform/packages/types/src/common/events.ts:202](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/events.ts#L202)

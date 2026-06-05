@@ -129,7 +129,7 @@ Groth16/PLONK interfaces present; hash-commitment proof functional only.
 
 ### Low
 
-**[P3] `export *` barrels** `03-platform/packages/api-client/03-platform/src/index.ts`
+**[P3] `export *` barrels** `03-platform/packages/api-client/src/index.ts`
 
 Tree-shaking limitation; tracked in barrel-export docs.
 
@@ -139,7 +139,7 @@ Tree-shaking limitation; tracked in barrel-export docs.
 
 | Item                             | Resolution                                                                                                                                                                                           |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@gtcx/ai` silent no-op concern  | **Resolved** — `03-platform/packages/ai/03-platform/src/` implements `traced()`, `withTrace()`, `AsyncLocalStorage` trace propagation, provenance helpers; tests in `03-platform/packages/ai/tests/` |
+| `@gtcx/ai` silent no-op concern  | **Resolved** — `03-platform/packages/ai/src/` implements `traced()`, `withTrace()`, `AsyncLocalStorage` trace propagation, provenance helpers; tests in `03-platform/packages/ai/tests/` |
 | `@gtcx/workproof` zero consumers | **Partially resolved** — `gtcx-protocols/protocols/tradepass/03-platform/src/predicate-bridge.ts` imports `WORKPROOF_PREDICATES` from `@gtcx/workproof`                                              |
 | BaselineOS coordination          | **Improved** — `.baseline/` institutional memory initialized; `AGENTS.md` credential access docs expanded                                                                                            |
 

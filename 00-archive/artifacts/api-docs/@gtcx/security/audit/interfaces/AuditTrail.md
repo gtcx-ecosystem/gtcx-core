@@ -6,7 +6,7 @@
 
 # Interface: AuditTrail
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:313](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L313)
+Defined in: [03-platform/packages/security/src/audit/events.ts:313](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L313)
 
 Create an audit trail for a multi-step operation
 
@@ -26,7 +26,7 @@ await audit.finalize();
 
 > `readonly` **operationId**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:314](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L314)
+Defined in: [03-platform/packages/security/src/audit/events.ts:314](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L314)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:314](
 
 > `readonly` **operationType**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:315](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L315)
+Defined in: [03-platform/packages/security/src/audit/events.ts:315](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L315)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:315](
 
 > `readonly` **startedAt**: `string`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:316](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L316)
+Defined in: [03-platform/packages/security/src/audit/events.ts:316](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L316)
 
 ## Methods
 
@@ -50,7 +50,7 @@ Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:316](
 
 > **finalize**(`outcome?`, `reason?`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:319](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L319)
+Defined in: [03-platform/packages/security/src/audit/events.ts:319](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L319)
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:319](
 
 > **record**(`step`, `metadata?`): `void`
 
-Defined in: [03-platform/packages/security/03-platform/src/audit/events.ts:318](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/audit/events.ts#L318)
+Defined in: [03-platform/packages/security/src/audit/events.ts:318](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/audit/events.ts#L318)
 
 #### Parameters
 

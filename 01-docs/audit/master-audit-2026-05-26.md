@@ -63,7 +63,7 @@ Same as prior audit (`93368b9`). No new pre-existing findings introduced. Key ca
 - **[P2] `rust/.cargo/audit.toml:39-41`** — 3 `rustls-webpki` RUSTSECs (0098, 0099, 0104) mitigated via documented exceptions; upstream fix pending. _(unchanged)_
 - **[P2] `rust/.cargo/audit.toml:15,19`** — 2 unmaintained arkworks transitive dependencies (`derivative`, `paste`) tracked for 0.5 migration. _(unchanged)_
 - **[P2] `README.md:47`** — `@gtcx/crypto-native` odd-length-hex NAPI boundary edge case queued for Sprint 2. _(unchanged)_
-- **[P2] `03-platform/packages/api-client/03-platform/src/index.ts:1`** — `export *` barrel defeats tree-shaking. _(unchanged)_
+- **[P2] `03-platform/packages/api-client/src/index.ts:1`** — `export *` barrel defeats tree-shaking. _(unchanged)_
 - **[P2] `rust/gtcx-zkp/03-platform/src/tests.rs:470`** — 470 LOC; approaching 500 LOC limit. **RESOLVED in this delta.**
 
 ---
@@ -276,7 +276,7 @@ Phase 2 skipped — repo has only `/01-docs/` documentation root. No competing r
 | Threat matrix 12/12       | Validator passes    | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                            | Same (9.0)                          |
 | SLSA Build L3             | Aspirational        | NPM_TOKEN present; provenance manifest generates clean; workflow ready                                  | Same (7.5 sub-score)                |
 | Coverage 95% branch       | 19 packages         | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                             | Same (9.5)                          |
-| USSD protocol             | Config-only (P2)    | `03-platform/packages/connectivity/03-platform/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                          |
+| USSD protocol             | Config-only (P2)    | `03-platform/packages/connectivity/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                          |
 | gtcx-zkp tests.rs         | 470 LOC single file | Refactored into 7 focused modules per commit `05b38e1`                                                  | Code Quality +0.0 (already 9.5)     |
 | Continental predicates    | Not present         | 352-line `continental.ts` with 26 tests; integrates with migration bridge                               | Ecosystem +0.0 (already 9.3)        |
 | Pen-test vendor outreach  | Not started         | Drafted outreach emails with tracking tables in `01-docs/internal/`                                     | Security +0.0 (vendor not selected) |

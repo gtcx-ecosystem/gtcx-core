@@ -85,7 +85,7 @@ All type removals or renames require Protocol Architect approval and an updated 
 
 ## Implementation
 
-`03-platform/packages/types/03-platform/src/`
+`03-platform/packages/types/src/`
 
 ---
 

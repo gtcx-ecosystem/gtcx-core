@@ -8,7 +8,7 @@
 
 > **isCertificateExpired**(`certificate`): `boolean`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/generator.ts:383](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/generator.ts#L383)
+Defined in: [03-platform/packages/verification/src/certificates/generator.ts:383](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/generator.ts#L383)
 
 Check if certificate is expired
 

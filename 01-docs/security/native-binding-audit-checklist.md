@@ -122,6 +122,6 @@ nm -C rust/target/release/libgtcx_node.dylib 2>/dev/null | grep -E '\b(malloc|fr
 ## Related
 
 - `rust/gtcx-node/03-platform/src/lib.rs` — binding source
-- `03-platform/packages/crypto-native/03-platform/src/index.ts` — JS wrapper
+- `03-platform/packages/crypto-native/src/index.ts` — JS wrapper
 - `.github/workflows/crypto-native-ci.yml` — native CI pipeline
 - `,remediation-plan-2026-05-06.md` — Phase 5.2

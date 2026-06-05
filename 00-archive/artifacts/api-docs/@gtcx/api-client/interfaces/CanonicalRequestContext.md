@@ -6,7 +6,7 @@
 
 # Interface: CanonicalRequestContext
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L38)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L38)
 
 Context for building a canonical request string.
 
@@ -16,7 +16,7 @@ Context for building a canonical request string.
 
 > **body**: `string` \| `Uint8Array`\<`ArrayBufferLike`\> \| `null`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L46)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:46](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L46)
 
 Request body (string, Uint8Array, or null).
 
@@ -26,7 +26,7 @@ Request body (string, Uint8Array, or null).
 
 > **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L44)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:44](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L44)
 
 Headers already set on the request (case-insensitive keys).
 
@@ -36,7 +36,7 @@ Headers already set on the request (case-insensitive keys).
 
 > **method**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L40)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:40](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L40)
 
 HTTP method in uppercase.
 
@@ -46,6 +46,6 @@ HTTP method in uppercase.
 
 > **url**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/canonical/types.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/canonical/types.ts#L42)
+Defined in: [03-platform/packages/api-client/src/canonical/types.ts:42](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/canonical/types.ts#L42)
 
 Full request URL.

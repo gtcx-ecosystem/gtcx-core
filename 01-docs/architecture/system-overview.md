@@ -124,7 +124,7 @@ graph LR
     CRYPTO -->|"isHex() guard;<br/>false on malformed input"| RESULT["boolean"]
 ```
 
-NAPI-boundary hex validation lands in [`03-platform/packages/crypto-native/03-platform/src/key-derivation.ts`](../../03-platform/packages/crypto-native/03-platform/src/index.ts) per commit `28c03ce`. Verifier-as-predicate semantics (return `false`, don't throw) are documented in the [api-change-migration-policy](../release/api-change-migration-policy.md).
+NAPI-boundary hex validation lands in [`03-platform/packages/crypto-native/src/key-derivation.ts`](../../03-platform/packages/crypto-native/src/index.ts) per commit `28c03ce`. Verifier-as-predicate semantics (return `false`, don't throw) are documented in the [api-change-migration-policy](../release/api-change-migration-policy.md).
 
 ## Trust boundaries
 

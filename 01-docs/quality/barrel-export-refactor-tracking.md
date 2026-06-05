@@ -67,7 +67,7 @@ For each barrel file:
 
 ## Acceptance Criteria
 
-- [ ] Zero `export * from` statements in all `03-platform/packages/*/03-platform/src/index.ts`
+- [ ] Zero `export * from` statements in all `03-platform/packages/*/src/index.ts`
 - [ ] All explicit exports have JSDoc `@public` or `@beta` tags
 - [ ] API surface baseline updated (`pnpm api:update-baseline`)
 - [ ] Downstream smoke tests pass (`pnpm test` in `gtcx-protocols`, `gtcx-app`)

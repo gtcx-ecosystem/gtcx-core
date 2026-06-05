@@ -6,7 +6,7 @@
 
 # Interface: RegistrationValidatedPayload
 
-Defined in: [types.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L71)
+Defined in: [types.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L71)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:71](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **sessionId**: `string`
 
-Defined in: [types.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L72)
+Defined in: [types.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L72)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:72](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b
 
 > **validationResult**: `object`
 
-Defined in: [types.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L73)
+Defined in: [types.ts:73](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L73)
 
 #### errors
 

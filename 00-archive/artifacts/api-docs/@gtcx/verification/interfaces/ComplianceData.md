@@ -6,7 +6,7 @@
 
 # Interface: ComplianceData
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:187](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L187)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:187](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L187)
 
 Compliance data
 
@@ -16,7 +16,7 @@ Compliance data
 
 > `optional` **claims**: [`Claim`](Claim.md)[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:195](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L195)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:195](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L195)
 
 Associated claims
 
@@ -26,7 +26,7 @@ Associated claims
 
 > `optional` **complianceLevel**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:190](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L190)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:190](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L190)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **gciScore**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L193)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:193](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L193)
 
 GCI score if available
 
@@ -44,7 +44,7 @@ GCI score if available
 
 > `optional` **inspectorId**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:189](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L189)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:189](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L189)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **notes**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:191](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L191)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:191](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L191)
 
 ***
 
@@ -60,4 +60,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **permitNumber**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts:188](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/certificates.ts#L188)
+Defined in: [03-platform/packages/verification/src/types/definitions/certificates.ts:188](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/certificates.ts#L188)

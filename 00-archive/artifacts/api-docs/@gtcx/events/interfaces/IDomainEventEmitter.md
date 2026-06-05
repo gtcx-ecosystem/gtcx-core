@@ -6,7 +6,7 @@
 
 # Interface: IDomainEventEmitter
 
-Defined in: [types.ts:221](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L221)
+Defined in: [types.ts:221](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L221)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:221](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **emit**(`event`): `void`
 
-Defined in: [types.ts:225](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L225)
+Defined in: [types.ts:225](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L225)
 
 Emit a domain event
 
@@ -34,7 +34,7 @@ Emit a domain event
 
 > **on**(`type`, `handler`): () => `void`
 
-Defined in: [types.ts:230](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L230)
+Defined in: [types.ts:230](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L230)
 
 Subscribe to events by type
 
@@ -62,7 +62,7 @@ Subscribe to events by type
 
 > **onAny**(`handler`): () => `void`
 
-Defined in: [types.ts:235](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L235)
+Defined in: [types.ts:235](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L235)
 
 Subscribe to all events
 

@@ -6,7 +6,7 @@
 
 # Interface: MtlsOptions
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:165](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L165)
+Defined in: [03-platform/packages/api-client/src/types.ts:165](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L165)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:165](https
 
 > `optional` **ca**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:168](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L168)
+Defined in: [03-platform/packages/api-client/src/types.ts:168](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L168)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:168](https
 
 > **cert**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:167](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L167)
+Defined in: [03-platform/packages/api-client/src/types.ts:167](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L167)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:167](https
 
 > **key**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:166](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L166)
+Defined in: [03-platform/packages/api-client/src/types.ts:166](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L166)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:166](https
 
 > `optional` **passphrase**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:169](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L169)
+Defined in: [03-platform/packages/api-client/src/types.ts:169](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L169)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:169](https
 
 > `optional` **rejectUnauthorized**: `boolean`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L171)
+Defined in: [03-platform/packages/api-client/src/types.ts:171](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L171)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:171](https
 
 > `optional` **serverName**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L170)
+Defined in: [03-platform/packages/api-client/src/types.ts:170](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L170)

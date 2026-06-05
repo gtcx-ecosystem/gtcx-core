@@ -6,7 +6,7 @@
 
 # Interface: Pbkdf2Params
 
-Defined in: [key-derivation.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/key-derivation.ts#L8)
+Defined in: [key-derivation.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/key-derivation.ts#L8)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [key-derivation.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/bl
 
 > **iterations**: `number`
 
-Defined in: [key-derivation.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/key-derivation.ts#L14)
+Defined in: [key-derivation.ts:14](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/key-derivation.ts#L14)
 
 Iteration count. Mobile PIN-hashing uses 100_000.
 
@@ -24,7 +24,7 @@ Iteration count. Mobile PIN-hashing uses 100_000.
 
 > `optional` **keyLengthBits**: `number`
 
-Defined in: [key-derivation.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/key-derivation.ts#L16)
+Defined in: [key-derivation.ts:16](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/key-derivation.ts#L16)
 
 Output length in bits. Defaults to 256. Must be a positive multiple of 8.
 
@@ -34,7 +34,7 @@ Output length in bits. Defaults to 256. Must be a positive multiple of 8.
 
 > **password**: `string`
 
-Defined in: [key-derivation.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/key-derivation.ts#L10)
+Defined in: [key-derivation.ts:10](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/key-derivation.ts#L10)
 
 Arbitrary string input. May be low-entropy (e.g. a 6-digit PIN).
 
@@ -44,6 +44,6 @@ Arbitrary string input. May be low-entropy (e.g. a 6-digit PIN).
 
 > **salt**: `string`
 
-Defined in: [key-derivation.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/03-platform/src/key-derivation.ts#L12)
+Defined in: [key-derivation.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/crypto/src/key-derivation.ts#L12)
 
 Caller-provided salt. Should be unique per derivation.

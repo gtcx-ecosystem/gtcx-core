@@ -8,7 +8,7 @@
 
 > **decodeToken**(`token`): [`Token`](../interfaces/Token.md) \| `null`
 
-Defined in: [03-platform/packages/security/03-platform/src/auth/tokens.ts:87](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/auth/tokens.ts#L87)
+Defined in: [03-platform/packages/security/src/auth/tokens.ts:87](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/auth/tokens.ts#L87)
 
 Decode a JWT without verifying signature
 Use this only for inspection - always verify before trusting!

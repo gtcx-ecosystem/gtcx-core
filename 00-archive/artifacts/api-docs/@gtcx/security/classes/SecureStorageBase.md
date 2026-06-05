@@ -6,7 +6,7 @@
 
 # Abstract Class: SecureStorageBase
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L28)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L28)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **new SecureStorageBase**(`config?`): `SecureStorageBase`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L34)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L34)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > `protected` **config**: `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L29)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L29)
 
 #### argon2Iterations
 
@@ -84,7 +84,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > `protected` **encryptionKey**: `Uint8Array`\<`ArrayBufferLike`\> \| `null` = `null`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L31)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L31)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > `protected` **state**: [`SecureStorageState`](../interfaces/SecureStorageState.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L30)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L30)
 
 ## Methods
 
@@ -100,7 +100,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > `abstract` `protected` **decrypt**(`ciphertext`, `key`, `iv`, `tag`): `Promise`\<`Uint8Array`\<`ArrayBufferLike`\>\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L74)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:74](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L74)
 
 #### Parameters
 
@@ -130,7 +130,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > `abstract` `protected` **deriveKey**(`secret`, `salt`): `Promise`\<`Uint8Array`\<`ArrayBufferLike`\>\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L67)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L67)
 
 #### Parameters
 
@@ -152,7 +152,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > `abstract` `protected` **encrypt**(`plaintext`, `key`): `Promise`\<\{ `ciphertext`: `Uint8Array`; `iv`: `Uint8Array`; `tag`: `Uint8Array`; \}\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L69)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:69](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L69)
 
 #### Parameters
 
@@ -174,7 +174,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **get**\<`T`\>(`key`): `Promise`\<`T` \| `null`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:168](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L168)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:168](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L168)
 
 #### Type Parameters
 
@@ -198,7 +198,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > `abstract` `protected` **getDeviceSalt**(): `Promise`\<`Uint8Array`\<`ArrayBufferLike`\>\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L83)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L83)
 
 #### Returns
 
@@ -210,7 +210,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > `abstract` `protected` **getStorage**(): [`StorageBackend`](../interfaces/StorageBackend.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L81)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L81)
 
 #### Returns
 
@@ -222,7 +222,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **lock**(): `void`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:138](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L138)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:138](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L138)
 
 #### Returns
 
@@ -234,7 +234,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **needsSync**(): `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:230](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L230)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:230](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L230)
 
 #### Returns
 
@@ -246,7 +246,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **reinitialize**(`secret`): `Promise`\<[`UnlockResult`](../interfaces/UnlockResult.md)\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:300](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L300)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:300](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L300)
 
 #### Parameters
 
@@ -264,7 +264,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **remove**(`key`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:216](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L216)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:216](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L216)
 
 #### Parameters
 
@@ -282,7 +282,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **set**\<`T`\>(`key`, `data`, `expiresInHours?`): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L146)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:146](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L146)
 
 #### Type Parameters
 
@@ -314,7 +314,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **unlock**(`secret`): `Promise`\<[`UnlockResult`](../interfaces/UnlockResult.md)\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L85)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L85)
 
 #### Parameters
 
@@ -332,7 +332,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storag
 
 > **wipe**(): `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/secure-storage.ts:220](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/secure-storage.ts#L220)
+Defined in: [03-platform/packages/security/src/offline/secure-storage.ts:220](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/secure-storage.ts#L220)
 
 #### Returns
 

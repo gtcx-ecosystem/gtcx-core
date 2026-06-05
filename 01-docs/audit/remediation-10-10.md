@@ -27,7 +27,7 @@ review_cycle: 'quarterly'
 
 This plan exists because the previous session (cycle 6) was net-positive but lossy: 6 findings closed, 2 NEW findings introduced, and a deletion-and-restore loop on `_delete/` that should never have happened. The score moved 9.8 → 9.6 not because anything fundamental degraded, but because:
 
-- `03-platform/packages/ai/03-platform/src/index.ts` grew past the 500-LOC ceiling (551) when SpanEmitter contract + sanitizer-override telemetry were added
+- `03-platform/packages/ai/src/index.ts` grew past the 500-LOC ceiling (551) when SpanEmitter contract + sanitizer-override telemetry were added
 - Restoring `_delete/` brought back internal markdown links written for the files' original locations, which now break the link checker
 - The deletion-and-restore loop on `_delete/` left history with two unnecessary commits and ambiguity about what `_delete/` is supposed to be
 
@@ -62,7 +62,7 @@ Every finding from the cycle 6 close audit + carryovers from prior sessions, wit
 
 | #        | Finding                                                                                                       | Severity   | Source               | Owner                                   | Dependency                               |
 | -------- | ------------------------------------------------------------------------------------------------------------- | ---------- | -------------------- | --------------------------------------- | ---------------------------------------- |
-| ~~F-1~~  | ~~`03-platform/packages/ai/03-platform/src/index.ts` exceeds 500 LOC~~ **DONE** (decomposed to 54 LOC barrel) | **High**   | Phase 1 (cycle 6)    | Repo maintainer (technical)             | None                                     |
+| ~~F-1~~  | ~~`03-platform/packages/ai/src/index.ts` exceeds 500 LOC~~ **DONE** (decomposed to 54 LOC barrel) | **High**   | Phase 1 (cycle 6)    | Repo maintainer (technical)             | None                                     |
 | ~~F-2~~  | ~~`_delete/` files break `docs:check-links`~~ **DONE** (excluded in check-markdown-links.mjs)                 | **Medium** | Phase 1, 4 (cycle 6) | Repo maintainer (technical)             | F-3 (final state of `_delete/`)          |
 | ~~F-3~~  | ~~`_delete/` mixed state~~ **DONE** (re-gitignored 2026-05-11; files remain on disk, untracked)               | **Medium** | Phase 4 (cycle 6)    | Repo maintainer                         | None                                     |
 | ~~F-4~~  | ~~6 unpushed commits on `main`~~ **DONE** (all commits pushed, Source L2 enforced)                            | Low        | Phase 4 (cycle 6)    | Repo maintainer                         | None                                     |
@@ -93,17 +93,17 @@ Every finding from the cycle 6 close audit + carryovers from prior sessions, wit
 
 Eight findings. All technical. No external dependencies. Estimated total: **~8 hours** of focused work.
 
-### A.1 Decompose `03-platform/packages/ai/03-platform/src/index.ts` — closes F-1
+### A.1 Decompose `03-platform/packages/ai/src/index.ts` — closes F-1
 
 **Effort:** 2 hours
 **Files:**
 
-- `03-platform/packages/ai/03-platform/src/traced.ts` (new) — `traced()` + `withTrace()` (lines 344-547 of current index.ts)
-- `03-platform/packages/ai/03-platform/src/span-emitter.ts` (new) — `SpanEmitter` interface, `setDefaultSpanEmitter`, `getDefaultSpanEmitter`, internal slot (lines 121-152, 199-235)
-- `03-platform/packages/ai/03-platform/src/redaction.ts` (new) — `redactSecrets`, `REDACTED_KEY_PATTERNS` (lines 277-305)
-- `03-platform/packages/ai/03-platform/src/category-logger.ts` (new) — `CategoryLogger`, `createCategoryLogger`, `writeLog`, `safeEmit` (lines 149-242)
-- `03-platform/packages/ai/03-platform/src/trace-context.ts` (new) — `TraceContext`, `runWithTraceContext`, `getCurrentTraceContext`, async-local-storage helpers (lines 18-66)
-- `03-platform/packages/ai/03-platform/src/index.ts` — barrel re-export of all above (≤50 LOC)
+- `03-platform/packages/ai/src/traced.ts` (new) — `traced()` + `withTrace()` (lines 344-547 of current index.ts)
+- `03-platform/packages/ai/src/span-emitter.ts` (new) — `SpanEmitter` interface, `setDefaultSpanEmitter`, `getDefaultSpanEmitter`, internal slot (lines 121-152, 199-235)
+- `03-platform/packages/ai/src/redaction.ts` (new) — `redactSecrets`, `REDACTED_KEY_PATTERNS` (lines 277-305)
+- `03-platform/packages/ai/src/category-logger.ts` (new) — `CategoryLogger`, `createCategoryLogger`, `writeLog`, `safeEmit` (lines 149-242)
+- `03-platform/packages/ai/src/trace-context.ts` (new) — `TraceContext`, `runWithTraceContext`, `getCurrentTraceContext`, async-local-storage helpers (lines 18-66)
+- `03-platform/packages/ai/src/index.ts` — barrel re-export of all above (≤50 LOC)
 
 **Risk:** breaking changes to consumers if any imported from internal paths. Mitigation: keep `index.ts` as a barrel, no consumer-facing exports change.
 
@@ -138,7 +138,7 @@ Eight findings. All technical. No external dependencies. Estimated total: **~8 h
 ### A.4 Cover the `tracing.ts` dynamic-require branch — closes F-6
 
 **Effort:** 1 hour
-**Files:** `03-platform/packages/verification/03-platform/src/tracing.ts` (or wherever the 1%-uncovered branch lives — confirm via coverage report)
+**Files:** `03-platform/packages/verification/src/tracing.ts` (or wherever the 1%-uncovered branch lives — confirm via coverage report)
 
 **Approach:** identify the dynamic-require branch via `pnpm test:coverage:critical`, write a test that exercises both the success and failure path. If the branch is genuinely unreachable in normal operation, mark with `/* v8 ignore */` and document why.
 

@@ -6,7 +6,7 @@
 
 # Interface: ResponseMeta
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L23)
+Defined in: [03-platform/packages/types/src/api/common.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L23)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:23](https:
 
 > **processingTime**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L26)
+Defined in: [03-platform/packages/types/src/api/common.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L26)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:26](https:
 
 > **requestId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L24)
+Defined in: [03-platform/packages/types/src/api/common.ts:24](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L24)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:24](https:
 
 > **timestamp**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L25)
+Defined in: [03-platform/packages/types/src/api/common.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L25)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:25](https:
 
 > **version**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/api/common.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/common.ts#L27)
+Defined in: [03-platform/packages/types/src/api/common.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/api/common.ts#L27)

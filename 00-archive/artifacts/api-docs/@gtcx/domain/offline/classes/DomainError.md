@@ -6,7 +6,7 @@
 
 # Class: DomainError
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L18)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:18](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L18)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **new DomainError**(`message`, `options?`): `DomainError`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L19)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L19)
 
 #### Parameters
 

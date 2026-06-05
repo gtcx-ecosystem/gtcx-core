@@ -6,7 +6,7 @@
 
 # Interface: ValidationResult\<T\>
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L184)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:184](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L184)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.t
 
 > **data**: `T`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:186](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L186)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:186](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L186)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.t
 
 > **success**: `true`
 
-Defined in: [03-platform/packages/security/03-platform/src/validation/sanitize.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/validation/sanitize.ts#L185)
+Defined in: [03-platform/packages/security/src/validation/sanitize.ts:185](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/validation/sanitize.ts#L185)

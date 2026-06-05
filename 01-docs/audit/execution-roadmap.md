@@ -107,7 +107,7 @@ sources:
 | DTF-5.2.2       | Verification ZK bundle integration           | `6c313ea`                                                                      |
 | DTF-5.3.2       | Five-jurisdiction proof fixtures             | `tests/integration/tier5-jurisdiction-proofs.test.ts`                          |
 | DTF-5.3.3       | Minerals board UAT protocol + L0 evidence    | `01-docs/04-ops/minerals-board-uat-protocol.md`                                |
-| DTF-5.4.1       | CircuitRegistry semver + lifecycle           | `03-platform/packages/crypto/03-platform/src/circuit-registry.ts`              |
+| DTF-5.4.1       | CircuitRegistry semver + lifecycle           | `03-platform/packages/crypto/src/circuit-registry.ts`              |
 | DTF-5.4.2       | Load test 1603 verify/min (12 workers)       | `01-docs/05-audit/evidence/zkp-profile-load-2026-06-03.json`                   |
 | DTF-5.4.3       | Trust portal circuit ID + off-circuit policy | `01-docs/governance/trust-portal.md` § ZKP circuit registry                    |
 | DTF-5.4.4       | Protocols E2E per circuit profile ID         | gtcx-protocols `73eaff2b` · core `fc041a6` (`verifyGroth16CommodityOriginKat`) |

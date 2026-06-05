@@ -6,7 +6,7 @@
 
 # Interface: LocationProofInput
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L31)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L31)
 
 Input for creating a location proof
 
@@ -16,7 +16,7 @@ Input for creating a location proof
 
 > `optional` **algorithm**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L35)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L35)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts
 
 > **coordinates**: [`CertificateLocation`](CertificateLocation.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L32)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L32)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts
 
 > **publicKey**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L34)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L34)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts
 
 > **signature**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/proofs/bundler.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/proofs/bundler.ts#L33)
+Defined in: [03-platform/packages/verification/src/proofs/bundler.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/proofs/bundler.ts#L33)

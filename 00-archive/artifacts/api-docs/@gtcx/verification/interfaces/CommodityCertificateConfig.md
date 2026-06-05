@@ -6,7 +6,7 @@
 
 # Interface: CommodityCertificateConfig
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:302](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L302)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:302](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L302)
 
 Configuration overlay for commodity-specific certificate behavior
 
@@ -16,7 +16,7 @@ Configuration overlay for commodity-specific certificate behavior
 
 > `optional` **additionalRequiredFields**: `string`[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:322](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L322)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:322](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L322)
 
 Custom required fields beyond template defaults
 
@@ -26,7 +26,7 @@ Custom required fields beyond template defaults
 
 > `optional` **additionalValidation**: `object`[]
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:312](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L312)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:312](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L312)
 
 Additional validation rules specific to this commodity
 
@@ -56,7 +56,7 @@ Additional validation rules specific to this commodity
 
 > **commodityType**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:306](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L306)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:306](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L306)
 
 Commodity type
 
@@ -66,7 +66,7 @@ Commodity type
 
 > **defaultUnit**: [`MeasurementUnit`](../type-aliases/MeasurementUnit.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:308](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L308)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:308](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L308)
 
 Default measurement unit
 
@@ -76,7 +76,7 @@ Default measurement unit
 
 > **displayName**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:310](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L310)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:310](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L310)
 
 Display name for UI
 
@@ -86,6 +86,6 @@ Display name for UI
 
 > **templateId**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:304](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L304)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:304](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L304)
 
 Which template to use

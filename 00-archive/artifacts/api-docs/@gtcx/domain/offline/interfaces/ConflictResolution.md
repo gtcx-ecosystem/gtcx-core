@@ -6,7 +6,7 @@
 
 # Interface: ConflictResolution\<T\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L80)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L80)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **localData**: `T`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L83)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L83)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **operationId**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L81)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L81)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **resolvedAt**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:87](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L87)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:87](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L87)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **resolvedBy**: `"user"` \| `"auto"`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L86)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L86)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > `optional` **resolvedData**: `T`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L85)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L85)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **serverData**: `T`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L84)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L84)
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **strategy**: [`ConflictStrategy`](../type-aliases/ConflictStrategy.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L82)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L82)

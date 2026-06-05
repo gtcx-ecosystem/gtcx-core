@@ -6,7 +6,7 @@
 
 # Interface: TradeFailedPayload
 
-Defined in: [types.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L157)
+Defined in: [types.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L157)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **assetLotId**: `string`
 
-Defined in: [types.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L159)
+Defined in: [types.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L159)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:159](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **buyerId**: `string`
 
-Defined in: [types.ts:161](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L161)
+Defined in: [types.ts:161](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L161)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:161](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **error**: `string`
 
-Defined in: [types.ts:162](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L162)
+Defined in: [types.ts:162](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L162)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:162](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **errorCode**: `"compliance"` \| `"validation"` \| `"insufficient_funds"` \| `"system_error"`
 
-Defined in: [types.ts:163](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L163)
+Defined in: [types.ts:163](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L163)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [types.ts:163](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **sellerId**: `string`
 
-Defined in: [types.ts:160](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L160)
+Defined in: [types.ts:160](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L160)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [types.ts:160](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > `optional` **transactionId**: `string`
 
-Defined in: [types.ts:158](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L158)
+Defined in: [types.ts:158](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L158)

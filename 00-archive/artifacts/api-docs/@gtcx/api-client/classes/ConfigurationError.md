@@ -6,7 +6,7 @@
 
 # Class: ConfigurationError
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L79)
+Defined in: [03-platform/packages/api-client/src/errors.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L79)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:79](https
 
 > **new ConfigurationError**(`message`, `options`): `ConfigurationError`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L80)
+Defined in: [03-platform/packages/api-client/src/errors.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L80)
 
 #### Parameters
 
@@ -62,7 +62,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:80](https
 
 > **category**: [`ApiErrorCategory`](../type-aliases/ApiErrorCategory.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L6)
+Defined in: [03-platform/packages/api-client/src/errors.ts:6](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L6)
 
 #### Inherited from
 
@@ -74,7 +74,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:6](https:
 
 > `optional` **cause**: `unknown`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L8)
+Defined in: [03-platform/packages/api-client/src/errors.ts:8](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L8)
 
 #### Inherited from
 
@@ -86,7 +86,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:8](https:
 
 > **code**: [`ApiErrorCode`](../type-aliases/ApiErrorCode.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L5)
+Defined in: [03-platform/packages/api-client/src/errors.ts:5](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L5)
 
 #### Inherited from
 
@@ -122,7 +122,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > **retryable**: `boolean`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L7)
+Defined in: [03-platform/packages/api-client/src/errors.ts:7](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L7)
 
 #### Inherited from
 
@@ -146,7 +146,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > `optional` **status**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/errors.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/errors.ts#L4)
+Defined in: [03-platform/packages/api-client/src/errors.ts:4](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/errors.ts#L4)
 
 #### Inherited from
 

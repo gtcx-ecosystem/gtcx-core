@@ -8,7 +8,7 @@
 
 > **traced**\<`TArgs`, `TReturn`\>(`fn`, `operationName`, `options?`): (...`args`) => `TReturn`
 
-Defined in: [traced.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/traced.ts#L105)
+Defined in: [traced.ts:105](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/traced.ts#L105)
 
 Wrap a function with tracing instrumentation.
 

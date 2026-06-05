@@ -119,11 +119,11 @@ No `@gtcx/*` dependencies. This is a standalone utility with no production npm d
 
 ## Implementation
 
-`03-platform/packages/connectivity/03-platform/src/`
+`03-platform/packages/connectivity/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/sync.md`](./sync.md) — primary consumer
+- [`01-docs/specs/packages/sync.md`](./sync.md) — primary consumer
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview and operational SLOs

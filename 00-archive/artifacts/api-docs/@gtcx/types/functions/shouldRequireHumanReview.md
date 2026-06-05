@@ -8,7 +8,7 @@
 
 > **shouldRequireHumanReview**(`provenance`, `thresholds?`): `boolean`
 
-Defined in: [03-platform/packages/types/03-platform/src/common/provenance.ts:253](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/common/provenance.ts#L253)
+Defined in: [03-platform/packages/types/src/common/provenance.ts:253](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/common/provenance.ts#L253)
 
 Determine whether an [AgenticProvenance](../interfaces/AgenticProvenance.md) record should
 require human review given a set of review thresholds.

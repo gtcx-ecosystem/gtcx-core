@@ -92,12 +92,12 @@ All `@gtcx/domain` domain event types and the `DomainEventFactory` are re-export
 
 ## Implementation
 
-`03-platform/packages/events/03-platform/src/`
+`03-platform/packages/events/src/`
 
 ---
 
 ## Reference
 
-- [`01-docs/specs/03-platform/packages/domain.md`](./domain.md) — domain event types
-- [`01-docs/specs/03-platform/packages/sync.md`](./sync.md) — sync engine consumes events
+- [`01-docs/specs/packages/domain.md`](./domain.md) — domain event types
+- [`01-docs/specs/packages/sync.md`](./sync.md) — sync engine consumes events
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

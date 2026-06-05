@@ -6,7 +6,7 @@
 
 # Interface: EscrowAccount
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L148)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:148](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L148)
 
 Escrow account for holding funds/assets
 
@@ -16,7 +16,7 @@ Escrow account for holding funds/assets
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L149)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:149](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L149)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:149](ht
 
 > **lockedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:153](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L153)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:153](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L153)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:153](ht
 
 > **releaseConditions**: [`ReleaseCondition`](ReleaseCondition.md)[]
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:154](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L154)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:154](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L154)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:154](ht
 
 > `optional` **releasedAt**: `number`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:155](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L155)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:155](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L155)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:155](ht
 
 > `optional` **releasedTo**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L156)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:156](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L156)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:156](ht
 
 > **status**: [`EscrowStatus`](../type-aliases/EscrowStatus.md)
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:152](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L152)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:152](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L152)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:152](ht
 
 > **tradeMatchId**: `string`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L150)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:150](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L150)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:150](ht
 
 > **type**: `"payment"` \| `"asset"` \| `"both"`
 
-Defined in: [03-platform/packages/types/03-platform/src/protocols/pvp.ts:151](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/protocols/pvp.ts#L151)
+Defined in: [03-platform/packages/types/src/protocols/pvp.ts:151](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/src/protocols/pvp.ts#L151)

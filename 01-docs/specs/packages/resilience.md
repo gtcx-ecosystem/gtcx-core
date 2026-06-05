@@ -112,5 +112,5 @@ Special-case tests required:
 ## See also
 
 - ADR-014 (`01-docs/decisions/014-runtime-substrate.md`) — runtime substrate rationale
-- `03-platform/packages/resilience/03-platform/src/` — implementation
-- `03-platform/packages/runtime/03-platform/src/runtime.ts` — primary consumer
+- `03-platform/packages/resilience/src/` — implementation
+- `03-platform/packages/runtime/src/runtime.ts` — primary consumer

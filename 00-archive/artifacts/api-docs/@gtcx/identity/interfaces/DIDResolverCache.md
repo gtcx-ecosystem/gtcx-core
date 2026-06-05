@@ -6,7 +6,7 @@
 
 # Interface: DIDResolverCache
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L65)
+Defined in: [03-platform/packages/identity/src/resolver.ts:65](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L65)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:65](https
 
 > **delete**(`did`): `void` \| `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L68)
+Defined in: [03-platform/packages/identity/src/resolver.ts:68](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L68)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:68](https
 
 > **get**(`did`): [`DIDResolverCacheEntry`](DIDResolverCacheEntry.md) \| `Promise`\<[`DIDResolverCacheEntry`](DIDResolverCacheEntry.md) \| `null`\> \| `null`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L66)
+Defined in: [03-platform/packages/identity/src/resolver.ts:66](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L66)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:66](https
 
 > **set**(`did`, `entry`): `void` \| `Promise`\<`void`\>
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L67)
+Defined in: [03-platform/packages/identity/src/resolver.ts:67](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L67)
 
 #### Parameters
 

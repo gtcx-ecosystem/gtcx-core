@@ -8,7 +8,7 @@
 
 > **getEffectiveTemplate**(`templateId`, `commodityType?`): [`CertificateTemplate`](../interfaces/CertificateTemplate.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/certificates/templates.ts:429](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/certificates/templates.ts#L429)
+Defined in: [03-platform/packages/verification/src/certificates/templates.ts:429](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/certificates/templates.ts#L429)
 
 Get effective template with commodity-specific overrides
 

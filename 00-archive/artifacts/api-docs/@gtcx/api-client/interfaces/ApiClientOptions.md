@@ -6,7 +6,7 @@
 
 # Interface: ApiClientOptions
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L75)
+Defined in: [03-platform/packages/api-client/src/types.ts:75](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L75)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:75](https:
 
 > **baseUrl**: `string`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L76)
+Defined in: [03-platform/packages/api-client/src/types.ts:76](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L76)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:76](https:
 
 > `optional` **circuitBreaker**: `CircuitBreaker`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L91)
+Defined in: [03-platform/packages/api-client/src/types.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L91)
 
 Circuit breaker for preventing cascade failures
 
@@ -32,7 +32,7 @@ Circuit breaker for preventing cascade failures
 
 > `optional` **dedupe**: `boolean`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L95)
+Defined in: [03-platform/packages/api-client/src/types.ts:95](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L95)
 
 Deduplicate in-flight requests with the same key
 
@@ -42,7 +42,7 @@ Deduplicate in-flight requests with the same key
 
 > `optional` **dispatcher**: `Dispatcher`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L82)
+Defined in: [03-platform/packages/api-client/src/types.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L82)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:82](https:
 
 > `optional` **fetcher**: (`input`, `init?`) => `Promise`\<`Response`\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L81)
+Defined in: [03-platform/packages/api-client/src/types.ts:81](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L81)
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:81](https:
 
 > `optional` **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L79)
+Defined in: [03-platform/packages/api-client/src/types.ts:79](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L79)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:79](https:
 
 > `optional` **interceptors**: `object`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L86)
+Defined in: [03-platform/packages/api-client/src/types.ts:86](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L86)
 
 Request/response interceptors for cross-cutting concerns
 
@@ -98,7 +98,7 @@ Request/response interceptors for cross-cutting concerns
 
 > `optional` **mtls**: [`MtlsOptions`](MtlsOptions.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L83)
+Defined in: [03-platform/packages/api-client/src/types.ts:83](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L83)
 
 ***
 
@@ -106,7 +106,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:83](https:
 
 > `optional` **offline**: [`OfflineHandler`](OfflineHandler.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L84)
+Defined in: [03-platform/packages/api-client/src/types.ts:84](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L84)
 
 ***
 
@@ -114,7 +114,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:84](https:
 
 > `optional` **retries**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:78](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L78)
+Defined in: [03-platform/packages/api-client/src/types.ts:78](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L78)
 
 ***
 
@@ -122,7 +122,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:78](https:
 
 > `optional` **retryPolicy**: `RetryPolicy`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:93](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L93)
+Defined in: [03-platform/packages/api-client/src/types.ts:93](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L93)
 
 Adaptive retry policy (replaces fixed exponential backoff)
 
@@ -132,7 +132,7 @@ Adaptive retry policy (replaces fixed exponential backoff)
 
 > `optional` **signer**: [`RequestSigner`](../type-aliases/RequestSigner.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L80)
+Defined in: [03-platform/packages/api-client/src/types.ts:80](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L80)
 
 ***
 
@@ -140,7 +140,7 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:80](https:
 
 > `optional` **telemetry**: [`TelemetryHooks`](TelemetryHooks.md)
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L97)
+Defined in: [03-platform/packages/api-client/src/types.ts:97](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L97)
 
 Telemetry hooks for metrics/tracing integration
 
@@ -150,7 +150,7 @@ Telemetry hooks for metrics/tracing integration
 
 > `optional` **timeout**: `number`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L77)
+Defined in: [03-platform/packages/api-client/src/types.ts:77](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L77)
 
 ***
 
@@ -158,6 +158,6 @@ Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:77](https:
 
 > `optional` **traceContext**: `SpanContext` \| () => `SpanContext` \| `undefined`
 
-Defined in: [03-platform/packages/api-client/03-platform/src/types.ts:99](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/03-platform/src/types.ts#L99)
+Defined in: [03-platform/packages/api-client/src/types.ts:99](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/api-client/src/types.ts#L99)
 
 Inject W3C traceparent header automatically

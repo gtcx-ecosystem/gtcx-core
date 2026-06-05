@@ -6,7 +6,7 @@
 
 # Class: CredentialCache
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L82)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:82](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L82)
 
 Credential cache manager
 Uses SecureStorageBase for encrypted persistence
@@ -17,7 +17,7 @@ Uses SecureStorageBase for encrypted persistence
 
 > **new CredentialCache**(`config?`): `CredentialCache`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L85)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:85](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L85)
 
 #### Parameters
 
@@ -35,7 +35,7 @@ Defined in: [03-platform/packages/security/03-platform/src/offline/credential-ca
 
 > **calculateOfflineExpiry**(`issuedAt`): `Date`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:134](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L134)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:134](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L134)
 
 Calculate offline expiry from issuance
 
@@ -55,7 +55,7 @@ Calculate offline expiry from issuance
 
 > **findExpiredCredentials**(`credentials`): `object`[]
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:187](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L187)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:187](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L187)
 
 Find expired credentials for cleanup
 
@@ -75,7 +75,7 @@ Find expired credentials for cleanup
 
 > **hasValidSignatureChain**(`credential`): `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L200)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:200](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L200)
 
 Validate signature chain (basic check)
 Full verification should use @gtcx/crypto
@@ -146,7 +146,7 @@ Full verification should use @gtcx/crypto
 
 > **isCredentialValidOffline**(`credential`): [`CredentialValidation`](../interfaces/CredentialValidation.md)
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L92)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L92)
 
 Check if a credential is valid for offline use
 
@@ -216,7 +216,7 @@ Check if a credential is valid for offline use
 
 > **markSynced**(`credential`): `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L172)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:172](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L172)
 
 Mark credential as synced
 
@@ -338,7 +338,7 @@ Mark credential as synced
 
 > **needsSync**(`credential`): `boolean`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L141)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:141](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L141)
 
 Check if credential needs sync
 
@@ -408,7 +408,7 @@ Check if credential needs sync
 
 > **prepareForOffline**(`credential`): `object`
 
-Defined in: [03-platform/packages/security/03-platform/src/offline/credential-cache.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/03-platform/src/offline/credential-cache.ts#L157)
+Defined in: [03-platform/packages/security/src/offline/credential-cache.ts:157](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/security/src/offline/credential-cache.ts#L157)
 
 Prepare credential for offline caching
 

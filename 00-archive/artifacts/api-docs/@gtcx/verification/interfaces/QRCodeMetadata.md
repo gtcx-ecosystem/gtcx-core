@@ -6,7 +6,7 @@
 
 # Interface: QRCodeMetadata
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L26)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:26](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L26)
 
 QR code metadata - commodity-agnostic
 
@@ -16,7 +16,7 @@ QR code metadata - commodity-agnostic
 
 > `optional` **assetState**: [`AssetLifecycleState`](../type-aliases/AssetLifecycleState.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L31)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L31)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **assetUnit**: [`MeasurementUnit`](../type-aliases/MeasurementUnit.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L29)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L29)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **assetWeight**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L28)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:28](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L28)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **commodityType**: [`CommodityType`](../type-aliases/CommodityType.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L30)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:30](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L30)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **location**: `object`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L27)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L27)
 
 #### latitude
 
@@ -64,7 +64,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **operatorRole**: [`OperatorRole`](../type-aliases/OperatorRole.md)
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L34)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L34)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **producerId**: `string`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L33)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L33)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [03-platform/packages/verification/03-platform/src/types/definitions
 
 > `optional` **purity**: `number`
 
-Defined in: [03-platform/packages/verification/03-platform/src/types/definitions/qr.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/definitions/qr.ts#L32)
+Defined in: [03-platform/packages/verification/src/types/definitions/qr.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/src/types/definitions/qr.ts#L32)

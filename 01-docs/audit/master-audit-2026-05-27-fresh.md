@@ -127,8 +127,8 @@ Top priorities:
 - Rust crate roots use `#![deny(unsafe_code)]`, and source search found no `unsafe {` or `unsafe fn`.
 - `rust/gtcx-crypto/Cargo.toml:40-44` wires `aws-lc-rs` with `features = ["fips"]`, and `cargo test -p gtcx-crypto --features fips` passed.
 - AWS KMS support is real, not a placeholder: `rust/gtcx-crypto/03-platform/src/cloud_kms_keystore.rs:155-160` calls KMS `CreateKey`, lines 190-196 call KMS `Sign`, lines 218-220 call `GetPublicKey`, and lines 270-277 schedule key deletion.
-- Offline-first behavior is implemented in `03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:100` with bounded queues, dependencies, conflict states, persistence, and retry handling.
-- USSD parsing exists in `03-platform/packages/connectivity/03-platform/src/ussd/parser.ts:17`, accepting multiple gateway field styles and dial-string parsing for low-bandwidth channels.
+- Offline-first behavior is implemented in `03-platform/packages/domain/src/internal/offline-queue.ts:100` with bounded queues, dependencies, conflict states, persistence, and retry handling.
+- USSD parsing exists in `03-platform/packages/connectivity/src/ussd/parser.ts:17`, accepting multiple gateway field styles and dial-string parsing for low-bandwidth channels.
 - Documentation standards are enforced by executable gates: links passed across 420 markdown files and frontmatter passed across 278 docs.
 - Bundle-size budgets are now executable: `pnpm bundle:check-budgets` passes all 21 budgeted packages and supports `--package <name>`.
 

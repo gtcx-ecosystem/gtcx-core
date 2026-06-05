@@ -8,7 +8,7 @@
 
 > **classifyProfile**(`bandwidthKbps`, `latencyMs`): [`ConnectivityProfile`](../type-aliases/ConnectivityProfile.md)
 
-Defined in: [03-platform/packages/connectivity/03-platform/src/profiles.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/03-platform/src/profiles.ts#L19)
+Defined in: [03-platform/packages/connectivity/src/profiles.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/connectivity/src/profiles.ts#L19)
 
 Classify a connectivity profile based on bandwidth and latency measurements.
 

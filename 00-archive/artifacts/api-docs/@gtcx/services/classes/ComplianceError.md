@@ -6,7 +6,7 @@
 
 # Class: ComplianceError
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/errors.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/errors.ts#L12)
+Defined in: [03-platform/packages/services/src/trading/errors.ts:12](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/errors.ts#L12)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/services/03-platform/src/trading/errors.ts:12]
 
 > **new ComplianceError**(`message`, `options?`): `ComplianceError`
 
-Defined in: [03-platform/packages/services/03-platform/src/trading/errors.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/trading/errors.ts#L13)
+Defined in: [03-platform/packages/services/src/trading/errors.ts:13](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/trading/errors.ts#L13)
 
 #### Parameters
 

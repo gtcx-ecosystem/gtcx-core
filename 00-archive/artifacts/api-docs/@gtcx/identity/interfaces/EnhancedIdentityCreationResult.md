@@ -6,7 +6,7 @@
 
 # Interface: EnhancedIdentityCreationResult
 
-Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/identity.ts#L50)
+Defined in: [03-platform/packages/identity/src/identity.ts:50](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/identity.ts#L50)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:50](https
 
 > **identity**: `EnhancedIdentity`
 
-Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/identity.ts#L51)
+Defined in: [03-platform/packages/identity/src/identity.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/identity.ts#L51)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:51](https
 
 > **privateKeys**: `object`
 
-Defined in: [03-platform/packages/identity/03-platform/src/identity.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/identity.ts#L52)
+Defined in: [03-platform/packages/identity/src/identity.ts:52](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/identity.ts#L52)
 
 #### ed25519
 

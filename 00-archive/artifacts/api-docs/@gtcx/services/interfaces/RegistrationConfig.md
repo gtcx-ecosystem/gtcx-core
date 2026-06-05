@@ -6,7 +6,7 @@
 
 # Interface: RegistrationConfig
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L17)
+Defined in: [03-platform/packages/services/src/registration/types.ts:17](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L17)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts
 
 > **maxDiscoveryAgeDays**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L25)
+Defined in: [03-platform/packages/services/src/registration/types.ts:25](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L25)
 
 Maximum age of discovery in days
 
@@ -24,7 +24,7 @@ Maximum age of discovery in days
 
 > **maxPhotos**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L23)
+Defined in: [03-platform/packages/services/src/registration/types.ts:23](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L23)
 
 Maximum photos allowed
 
@@ -34,7 +34,7 @@ Maximum photos allowed
 
 > **minGpsAccuracy**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L19)
+Defined in: [03-platform/packages/services/src/registration/types.ts:19](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L19)
 
 Minimum GPS accuracy required in meters
 
@@ -44,7 +44,7 @@ Minimum GPS accuracy required in meters
 
 > **minPhotos**: `number`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L21)
+Defined in: [03-platform/packages/services/src/registration/types.ts:21](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L21)
 
 Minimum photos required
 
@@ -54,7 +54,7 @@ Minimum photos required
 
 > `optional` **requiredPhotoCategories**: `string`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L29)
+Defined in: [03-platform/packages/services/src/registration/types.ts:29](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L29)
 
 Required photo categories
 
@@ -64,7 +64,7 @@ Required photo categories
 
 > `optional` **verifyBaseUrl**: `string`
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L31)
+Defined in: [03-platform/packages/services/src/registration/types.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L31)
 
 Verification endpoint base URL
 
@@ -74,6 +74,6 @@ Verification endpoint base URL
 
 > `optional` **workflowSteps**: `WorkflowStep`[]
 
-Defined in: [03-platform/packages/services/03-platform/src/registration/types.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/03-platform/src/registration/types.ts#L27)
+Defined in: [03-platform/packages/services/src/registration/types.ts:27](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/services/src/registration/types.ts#L27)
 
 Custom workflow steps (optional override)

@@ -6,7 +6,7 @@
 
 # Interface: QueuedOperation\<T\>
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L33)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L33)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.
 
 > **attempts**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L45)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:45](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L45)
 
 Number of retry attempts
 
@@ -30,7 +30,7 @@ Number of retry attempts
 
 > `optional` **completedAt**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L53)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:53](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L53)
 
 Completed timestamp
 
@@ -40,7 +40,7 @@ Completed timestamp
 
 > **conflictStrategy**: [`ConflictStrategy`](../type-aliases/ConflictStrategy.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L61)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:61](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L61)
 
 Conflict resolution strategy
 
@@ -50,7 +50,7 @@ Conflict resolution strategy
 
 > **createdAt**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L49)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:49](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L49)
 
 Created timestamp
 
@@ -60,7 +60,7 @@ Created timestamp
 
 > `optional` **dependsOn**: `string`[]
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L59)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:59](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L59)
 
 Dependencies (other operation IDs that must complete first)
 
@@ -70,7 +70,7 @@ Dependencies (other operation IDs that must complete first)
 
 > **id**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L35)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L35)
 
 Unique operation ID
 
@@ -80,7 +80,7 @@ Unique operation ID
 
 > `optional` **lastAttemptAt**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L51)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:51](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L51)
 
 Last attempt timestamp
 
@@ -90,7 +90,7 @@ Last attempt timestamp
 
 > `optional` **lastError**: `string`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L55)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L55)
 
 Error from last attempt
 
@@ -100,7 +100,7 @@ Error from last attempt
 
 > **maxAttempts**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L47)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:47](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L47)
 
 Maximum retry attempts
 
@@ -110,7 +110,7 @@ Maximum retry attempts
 
 > `optional` **metadata**: `object`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L63)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:63](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L63)
 
 Metadata for conflict resolution
 
@@ -136,7 +136,7 @@ Metadata for conflict resolution
 
 > **payload**: `T`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L43)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:43](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L43)
 
 Operation payload
 
@@ -146,7 +146,7 @@ Operation payload
 
 > **priority**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L57)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L57)
 
 Priority (higher = more urgent)
 
@@ -156,7 +156,7 @@ Priority (higher = more urgent)
 
 > **sequence**: `number`
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L37)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L37)
 
 Monotonic logical sequence for replay ordering
 
@@ -166,7 +166,7 @@ Monotonic logical sequence for replay ordering
 
 > **status**: [`QueuedOperationStatus`](../type-aliases/QueuedOperationStatus.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L41)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:41](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L41)
 
 Current status
 
@@ -176,6 +176,6 @@ Current status
 
 > **type**: [`QueuedOperationType`](../type-aliases/QueuedOperationType.md)
 
-Defined in: [03-platform/packages/domain/03-platform/src/internal/offline-queue.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/03-platform/src/internal/offline-queue.ts#L39)
+Defined in: [03-platform/packages/domain/src/internal/offline-queue.ts:39](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/domain/src/internal/offline-queue.ts#L39)
 
 Operation type

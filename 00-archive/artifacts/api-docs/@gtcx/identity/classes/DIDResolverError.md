@@ -6,7 +6,7 @@
 
 # Class: DIDResolverError
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L88)
+Defined in: [03-platform/packages/identity/src/resolver.ts:88](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L88)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:88](https
 
 > **new DIDResolverError**(`message`, `code`, `options?`): `DIDResolverError`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L94)
+Defined in: [03-platform/packages/identity/src/resolver.ts:94](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L94)
 
 #### Parameters
 
@@ -58,7 +58,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:94](https
 
 > `optional` **cause**: `unknown`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L92)
+Defined in: [03-platform/packages/identity/src/resolver.ts:92](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L92)
 
 #### Overrides
 
@@ -70,7 +70,7 @@ Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:92](https
 
 > **code**: [`DIDResolverErrorCode`](../type-aliases/DIDResolverErrorCode.md)
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:89](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L89)
+Defined in: [03-platform/packages/identity/src/resolver.ts:89](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L89)
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > `optional` **retryable**: `boolean`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L91)
+Defined in: [03-platform/packages/identity/src/resolver.ts:91](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L91)
 
 ***
 
@@ -122,7 +122,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.2/node\_modules/typescript/lib/li
 
 > `optional` **status**: `number`
 
-Defined in: [03-platform/packages/identity/03-platform/src/resolver.ts:90](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/03-platform/src/resolver.ts#L90)
+Defined in: [03-platform/packages/identity/src/resolver.ts:90](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/identity/src/resolver.ts#L90)
 
 ***
 

@@ -6,7 +6,7 @@
 
 # Class: InMemoryEventEmitter
 
-Defined in: [types.ts:322](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L322)
+Defined in: [types.ts:322](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L322)
 
 ## Implements
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:322](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6
 
 > **clear**(): `void`
 
-Defined in: [types.ts:375](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L375)
+Defined in: [types.ts:375](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L375)
 
 Clear all events (for testing)
 
@@ -42,7 +42,7 @@ Clear all events (for testing)
 
 > **emit**(`event`): `void`
 
-Defined in: [types.ts:327](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L327)
+Defined in: [types.ts:327](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L327)
 
 Emit a domain event
 
@@ -66,7 +66,7 @@ Emit a domain event
 
 > **getEvents**(): [`DomainEvent`](../interfaces/DomainEvent.md)\<`unknown`\>[]
 
-Defined in: [types.ts:361](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L361)
+Defined in: [types.ts:361](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L361)
 
 Get all emitted events (for testing)
 
@@ -80,7 +80,7 @@ Get all emitted events (for testing)
 
 > **getEventsByType**(`type`): [`DomainEvent`](../interfaces/DomainEvent.md)\<`unknown`\>[]
 
-Defined in: [types.ts:368](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L368)
+Defined in: [types.ts:368](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L368)
 
 Get events by type (for testing)
 
@@ -100,7 +100,7 @@ Get events by type (for testing)
 
 > **on**(`type`, `handler`): () => `void`
 
-Defined in: [types.ts:340](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L340)
+Defined in: [types.ts:340](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L340)
 
 Subscribe to events by type
 
@@ -132,7 +132,7 @@ Subscribe to events by type
 
 > **onAny**(`handler`): () => `void`
 
-Defined in: [types.ts:351](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/03-platform/src/types.ts#L351)
+Defined in: [types.ts:351](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/events/src/types.ts#L351)
 
 Subscribe to all events
 

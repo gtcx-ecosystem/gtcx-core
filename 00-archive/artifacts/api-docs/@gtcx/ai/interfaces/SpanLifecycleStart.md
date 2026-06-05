@@ -6,7 +6,7 @@
 
 # Interface: SpanLifecycleStart
 
-Defined in: [span-emitter.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L31)
+Defined in: [span-emitter.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L31)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [span-emitter.ts:31](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **category**: `string`
 
-Defined in: [span-emitter.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L33)
+Defined in: [span-emitter.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L33)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [span-emitter.ts:33](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [span-emitter.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L38)
+Defined in: [span-emitter.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L38)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [span-emitter.ts:38](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **operationName**: `string`
 
-Defined in: [span-emitter.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L32)
+Defined in: [span-emitter.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L32)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [span-emitter.ts:32](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > `optional` **parentSpanId**: `string`
 
-Defined in: [span-emitter.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L36)
+Defined in: [span-emitter.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L36)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [span-emitter.ts:36](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **spanId**: `string`
 
-Defined in: [span-emitter.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L35)
+Defined in: [span-emitter.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L35)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [span-emitter.ts:35](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **startTimestamp**: `number`
 
-Defined in: [span-emitter.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L37)
+Defined in: [span-emitter.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L37)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [span-emitter.ts:37](https://github.com/gtcx-ecosystem/gtcx-core/blo
 
 > **traceId**: `string`
 
-Defined in: [span-emitter.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/03-platform/src/span-emitter.ts#L34)
+Defined in: [span-emitter.ts:34](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/ai/src/span-emitter.ts#L34)
