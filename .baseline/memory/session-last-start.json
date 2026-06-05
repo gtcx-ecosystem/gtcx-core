@@ -1,8 +1,258 @@
 {
-  "startedAt": "2026-06-04T21:19:42.547Z",
+  "startedAt": "2026-06-05T01:59:27.037Z",
   "nextWork": {
-    "error": "Command failed: node scripts/agent-next-work.mjs\nfile:///Users/amanianai/Sites/gtcx-ecosystem/gtcx-core/scripts/lib/agent-launch-focus.mjs:150\n    title: 'Trusted-setup transcript publish + KAT pin closeout',\n         ^\n\nSyntaxError: Unexpected token ':'\n    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)\n    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:107:18)\n    at #translate (node:internal/modules/esm/loader:536:12)\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:583:27)\n    at async ModuleJob._link (node:internal/modules/esm/module_job:162:19)\n\nNode.js v22.18.0\n"
+    "protocol": "22-agent-work-selection",
+    "repo": "gtcx-core",
+    "frame": "development",
+    "persona": {
+      "institutional": "compliance-officer",
+      "mcp": "reviewer",
+      "frame": "regulatory-audit",
+      "docUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/compliance-officer.md",
+      "bridgeUrl": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-persona-bridge-2026-06.md",
+      "instruction": "Read persona doc before work; re-select persona on task switch (Phase 4)."
+    },
+    "ok": true,
+    "backlogClear": true,
+    "automatableExhausted": true,
+    "certificationCeiling": "tier-5-commercial",
+    "message": "Launch plan bout complete. Commercial ceiling: DTF-5.5.4 LOI + CORE-004-CEREMONY (Class S).",
+    "witness": "docs/operations/coordination/core-004-engineering-closeout-2026-06-06.md",
+    "next": {
+      "storyId": "DTF-5.5.4",
+      "title": "Design-partner LOI or regulator letter",
+      "status": "awaiting-human",
+      "blocked": true,
+      "external": true,
+      "owner": "Human / GTM",
+      "implementationClass": "external"
+    },
+    "nextPriority": {
+      "owner": "Human / GTM",
+      "action": "DTF-5.5.4 — design-partner LOI or regulator letter (Class S)",
+      "outbound": "docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md",
+      "because": "Launch plan bout complete; automatable repo work exhausted"
+    },
+    "humanOnly": [
+      {
+        "storyId": "DTF-5.5.4",
+        "title": "Design-partner LOI or regulator letter",
+        "authorityClass": "S",
+        "owner": "Human / GTM"
+      },
+      {
+        "storyId": "CORE-004-CEREMONY",
+        "title": "ZKP trusted-setup transcript publish (sovereign ceremony)",
+        "authorityClass": "S",
+        "owner": "Custodian / human"
+      }
+    ],
+    "repoCompletable": null,
+    "deferred": [
+      "DTF-5.5.3 predicate-gated export keys (optional)",
+      "Production manifest Ed25519 via CSP ceremony (Legal)",
+      "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md"
+    ],
+    "selection": {
+      "tier": "external-attestation",
+      "reason": "DTF-5.5.2 pipeline done; Tier 5 commercial waits on LOI/regulator letter (5.5.4). · launch: witness (0 implement / 0 plan)",
+      "launchMode": "witness"
+    },
+    "statusUpdate": {
+      "done": "LAUNCH-PLAN bout complete — coordination + readiness lanes green",
+      "nextPriority": "**Human / GTM** — DTF-5.5.4 LOI (Class S); **Custodian** — CORE-004-CEREMONY",
+      "approvalNeeded": "**DTF-5.5.4** LOI (Class S); **CORE-004-CEREMONY** transcript publish (Class S, parallel)",
+      "deferred": "DTF-5.5.3 optional; sovereign ZKP ceremony publish"
+    },
+    "communicationPolicy": {
+      "protocol": "26-agent-proceed-confirmation",
+      "version": "1.1.0",
+      "forbiddenReplyPatterns": [
+        "Say if you want",
+        "Say which blocked track",
+        "Your call",
+        "Two options",
+        "Which do you prefer",
+        "anything on the P1 list"
+      ]
+    },
+    "agentInstructions": [
+      "Phase 4: adopt persona **compliance-officer** (regulatory-audit) — read https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/compliance-officer.md",
+      "Include **Active persona** + **Frame** in Proceed Brief and Status Update (P26).",
+      "Execution bout is provisioned — drain Class R stories in `stories[]` before bout check-in.",
+      "After each story: micro-commit, update session.md row, re-run `pnpm agent:next-work`.",
+      "Progress Status Update in chat every 2 completed stories (short Done bullets).",
+      "Do NOT end the session after one story while `remainingCount` > 0.",
+      "Do NOT ask operator to pick stories — P22 selects head; bout lists the drain queue.",
+      "Full Status Update + optional push only at bout check-in.",
+      "Normative: docs/operations/agent-execution-bout.md",
+      "Bout plan empty for Class R — check-in with humanOnly as Approval needed; witness only.",
+      "DTF-5.5.2 = Class R — run certified-pack commands in-session; never list 5.5.2 under Approval needed.",
+      "DTF-5.5.4 = Class S only — LOI/regulator letter; agents witness, do not sign.",
+      "Use executionBout: drain Class R stories before bout check-in — no stop after one story.",
+      "Do not ask the operator which story or repo to pick.",
+      "Witness: docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md",
+      "Emit progress Status Updates during bout; ONE full check-in Status Update when bout completes."
+    ],
+    "launchFocus": {
+      "schema": "gtcx.launchFocus.v1",
+      "normativeDoc": "docs/operations/agent-launch-focus.md",
+      "statePath": ".baseline/launch-focus.json",
+      "provisionedAt": "2026-06-05T01:59:26.928Z",
+      "repo": "gtcx-core",
+      "northStar": {
+        "outcome": "Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.",
+        "gtcxCoreRole": "Ship npm foundation + proof artifacts; do not build product UI here. Unblock sibling repos via packages, KATs, coordination tickets.",
+        "notTheGoal": "Re-run forensic audits or story menus to discover priorities — launch-focus.json is SoR.",
+        "gtmTier": {
+          "library": "GR-T1",
+          "integratorPilot": "GR-T2-partial",
+          "ecosystemSovereign": "below-GR-T2",
+          "index": "docs/audit/gtm-readiness-2026-06-05.md"
+        }
+      },
+      "sessionMode": "witness",
+      "activePhase": {
+        "id": "launch-gtm",
+        "label": "Launch downstream apps — foundation → GR-T2+ sovereign GTM",
+        "executionRoadmap": "docs/audit/execution-roadmap.md",
+        "gtmIndex": "docs/audit/gtm-readiness-2026-06-05.md"
+      },
+      "workSet": {
+        "implement": [],
+        "plan": [],
+        "witness": [
+          {
+            "storyId": "OI-X02",
+            "title": "Await infra hub ack — core outbound filed 2026-06-03",
+            "path": "docs/operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md",
+            "authorityClass": "A",
+            "owner": "gtcx-infrastructure"
+          }
+        ],
+        "human": [
+          {
+            "storyId": "DTF-5.5.4",
+            "title": "Design-partner LOI or regulator letter",
+            "authorityClass": "S",
+            "owner": "Human / GTM",
+            "lane": "p22-human"
+          },
+          {
+            "storyId": "CORE-004-CEREMONY",
+            "title": "ZKP trusted-setup transcript publish (sovereign ceremony)",
+            "authorityClass": "S",
+            "owner": "Custodian / human",
+            "lane": "p22-human"
+          },
+          {
+            "storyId": "EXT-INF-002",
+            "title": "Live-stack pen-test (vendor) — infrastructure owner",
+            "authorityClass": "S",
+            "owner": "gtcx-infrastructure",
+            "lane": "ecosystem-gtm"
+          }
+        ]
+      },
+      "activeWorkSet": [],
+      "workSetCounts": {
+        "implement": 0,
+        "plan": 0,
+        "witness": 1,
+        "human": 3
+      },
+      "sources": [
+        "docs/audit/execution-roadmap.md",
+        "docs/operations/tier-5-workplan-2026-06.md",
+        "docs/operations/coordination/remaining-cross-repo-work-2026-06-02.md",
+        "docs/audit/latest.json",
+        "docs/gtm/gtm-reality-check-2026-06-02.md"
+      ],
+      "forbidden": [
+        "Ask operator to run forensic audit before starting work",
+        "Ask operator to run execute-roadmap to discover priorities",
+        "Story menus or \"your call\" when launch-focus is provisioned",
+        "Treat gtcx-core as the deployable app — foundation only"
+      ],
+      "agentInstructions": [
+        "Launch focus is provisioned — read northStar + workSet before any audit/roadmap prompt.",
+        "Goal: finish foundation + coordination so sibling repos can ship apps and GTM can close deals.",
+        "Session mode WITNESS — human gates only; maintain indexes and outbound acks.",
+        "Full work set is in launch-focus.json — not a single story.",
+        "Normative: docs/operations/agent-launch-focus.md"
+      ]
+    },
+    "executionBout": {
+      "schema": "gtcx.executionBout.v1",
+      "statePath": ".baseline/execution-bout.json",
+      "normativeDoc": "docs/operations/agent-execution-bout.md",
+      "docPath": "docs/operations/agent-execution-bout.md",
+      "id": "bout-2026-06-05-auto",
+      "mode": "auto",
+      "provisionedAt": "2026-06-05T01:59:26.930Z",
+      "repo": "gtcx-core",
+      "frame": "development",
+      "launchMode": "witness",
+      "backlogClear": true,
+      "stories": [],
+      "humanOnly": [
+        {
+          "storyId": "DTF-5.5.4",
+          "title": "Design-partner LOI or regulator letter",
+          "authorityClass": "S",
+          "workClass": "external",
+          "source": "human-only"
+        },
+        {
+          "storyId": "CORE-004-CEREMONY",
+          "title": "ZKP trusted-setup transcript publish (sovereign ceremony)",
+          "authorityClass": "S",
+          "workClass": "external",
+          "source": "human-only"
+        }
+      ],
+      "currentStoryId": "DTF-5.5.4",
+      "remainingCount": 0,
+      "stopWhen": ["plan_complete", "class_s_only", "gate_failure", "operator_stop"],
+      "reportEveryStories": 2,
+      "policy": {
+        "microCommitPerStory": true,
+        "endOfTurn": "bout_check_in_only",
+        "continueAfterBacklogClear": true,
+        "reRunNextWorkAfterEachStory": true,
+        "progressReportInChat": true,
+        "fullStatusUpdateAt": "bout_check_in"
+      },
+      "checkInWhen": [
+        "all Class R stories in plan are done",
+        "next P22 head is Class S / external only",
+        "verification gate failed (fix or blocker report)",
+        "operator said stop"
+      ],
+      "agentInstructions": [
+        "Execution bout is provisioned — drain Class R stories in `stories[]` before bout check-in.",
+        "After each story: micro-commit, update session.md row, re-run `pnpm agent:next-work`.",
+        "Progress Status Update in chat every 2 completed stories (short Done bullets).",
+        "Do NOT end the session after one story while `remainingCount` > 0.",
+        "Do NOT ask operator to pick stories — P22 selects head; bout lists the drain queue.",
+        "Full Status Update + optional push only at bout check-in.",
+        "Normative: docs/operations/agent-execution-bout.md",
+        "Bout plan empty for Class R — check-in with humanOnly as Approval needed; witness only."
+      ],
+      "forbidden": [
+        "stop after single story when bout has Class R remaining",
+        "Say if you want to continue",
+        "backlogClear means go idle (it means commercial ceiling — keep draining repoCompletable)"
+      ],
+      "boutComplete": true,
+      "classSBlocks": true
+    },
+    "proceedBrief": {
+      "activePersona": "compliance-officer",
+      "frame": "regulatory-audit",
+      "personaDocUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/compliance-officer.md"
+    }
   },
-  "gitChanged": 10,
-  "authorityClass": "R"
+  "gitChanged": 17,
+  "authorityClass": "S"
 }

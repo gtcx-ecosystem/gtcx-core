@@ -1,15 +1,15 @@
 ---
 session_id: '2026-06-04-launch-gtm'
 agent: 'gtcx-core-agent'
-focus: 'LAUNCH-PLAN bout drain — GTM coordination (Class R)'
+focus: 'execute-roadmap — FA-S6 vendor pack + Class S wall'
 ---
 
 # Session: Launch GTM — gtcx-core
 
 ## State (2026-06-04)
 
-- **P22 head:** LAUNCH-PLAN bout **complete** → Class S wall (DTF-5.5.4, CORE-004-CEREMONY)
-- **Launch focus:** plan 0 / witness 1 / human 3
+- **P22 head:** FA-S6 core **done** → Class S wall (DTF-5.5.4, CORE-004-CEREMONY)
+- **Launch focus:** witness mode — implement 0 / plan 0
 - **Buyer stage:** S2-partial (GR-T1 library)
 
 ## Completed this session
@@ -22,15 +22,19 @@ focus: 'LAUNCH-PLAN bout drain — GTM coordination (Class R)'
 | LAUNCH-PLAN-03   | **done** — bridge Latest row (2026-06-04 LAUNCH-PLAN bout)                            |
 | LAUNCH-PLAN-04   | **done** — OI-X02 outbound refreshed (terminal W2 note, witness only)                 |
 | LAUNCH-PLAN-05   | **done** — `pnpm readiness:lanes:check` exit 0                                        |
+| FA-S6-02         | **done** — `pnpm vendor-evidence:verify-manifest` exit 0 (22 artifacts)               |
+| ER-AUTO-DEV-01   | **done** — `pnpm agent:reconcile-auto-dev` exit 0                                     |
 | CORE-004 Class R | **done** — `docs/operations/coordination/core-004-engineering-closeout-2026-06-06.md` |
 
 ## Verification
 
-| Command                       | Exit |
-| ----------------------------- | ---- |
-| `pnpm agent:reconcile-launch` | 0    |
-| `pnpm readiness:lanes:check`  | 0    |
-| `pnpm agent:protocols:check`  | 0    |
+| Command                                | Exit |
+| -------------------------------------- | ---- |
+| `pnpm agent:reconcile-launch`          | 0    |
+| `pnpm readiness:lanes:check`           | 0    |
+| `pnpm agent:protocols:check`           | 0    |
+| `pnpm vendor-evidence:verify-manifest` | 0    |
+| `pnpm test:kat-cross-impl`             | 0    |
 
 ## Next priority (Class S — human)
 
@@ -38,9 +42,9 @@ focus: 'LAUNCH-PLAN bout drain — GTM coordination (Class R)'
 **Custodian** — CORE-004-CEREMONY `artifacts/trusted-setup/transcript.seed` + verify-publish.  
 **Witness** — OI-X02 infra hub ack (gtcx-infrastructure).
 
-## Session bootstrap (2026-06-04 22:00 UTC)
+## Session bootstrap (2026-06-05 01:59:27 UTC)
 
-- **Command:** `pnpm agent:session-start`
-- **Next work:** LAUNCH-PLAN bout check-in complete
-- **Blocked:** no (Class S only)
-- **Git:** LAUNCH-PLAN doc + coordination updates pending commit
+- **Command:** `pnpm agent:start`
+- **Next work:** unknown — Design-partner LOI or regulator letter
+- **Blocked:** yes
+- **Git:** 17 changed path(s)
