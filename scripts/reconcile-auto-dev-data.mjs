@@ -14,6 +14,7 @@ const AUTO_DEV_MD = join(ROOT, 'docs/audit/auto-dev-state.md');
 const LATEST_JSON = join(ROOT, 'docs/audit/latest.json');
 const ROADMAP = join(ROOT, 'docs/audit/execution-roadmap.md');
 const LAUNCH_FOCUS = join(ROOT, '.baseline/launch-focus.json');
+const SESSION_LAST = join(ROOT, '.baseline/memory/session-last-start.json');
 
 function safeGit(cmd) {
   try {
@@ -101,7 +102,19 @@ function buildCrossRepoWitness() {
   ];
 }
 
-function buildAutoDevData(p22, latest, launchFocus, roadmapMeta, gates) {
+function buildSessionMetrics(gates) {
+  const session = readJson(SESSION_LAST);
+  const startedAt = session?.startedAt ?? null;
+  const sessionAgeMs = startedAt ? Date.now() - new Date(startedAt).getTime() : null;
+  return {
+    lastSessionStartedAt: startedAt,
+    sessionAgeMs,
+    lastSessionGates: gates.map((g) => ({ command: g.label, exitCode: g.exitCode })),
+    costStatsLink: 'baseline-os — baseline cost-stats --json',
+  };
+}
+
+function buildAutoDevData(p22, latest, launchFocus, roadmapMeta, gates, sessionMetrics) {
   const lanes = latest?.lanes ?? {};
   return {
     schema: 'gtcx.autoDevData.v1',
@@ -187,6 +200,7 @@ function buildAutoDevData(p22, latest, launchFocus, roadmapMeta, gates) {
       'CORE-004-CEREMONY': 'blocked',
     },
     verificationGates: Object.fromEntries(gates.map((g) => [g.label, { exitCode: g.exitCode }])),
+    sessionMetrics,
     paths: {
       latestJson: 'docs/audit/latest.json',
       autoDevState: 'docs/audit/auto-dev-state.md',
@@ -206,6 +220,9 @@ function buildAutoDevMd(data, p22) {
     .join('\n');
   const gateRows = Object.entries(data.verificationGates ?? {})
     .map(([k, v]) => `| \`${k}\` | **${v.exitCode === 0 ? '0' : v.exitCode}** |`)
+    .join('\n');
+  const sessionGateRows = (data.sessionMetrics?.lastSessionGates ?? [])
+    .map((g) => `| \`${g.command}\` | **${g.exitCode === 0 ? '0' : g.exitCode}** |`)
     .join('\n');
   const witnessRows = (data.crossRepoWitness ?? [])
     .map((w) => {
@@ -244,6 +261,13 @@ Run \`pnpm agent:next-work\` for authoritative selection. **${p22.message ?? ''}
 | certificationCeiling | ${data.p22.certificationCeiling} |
 | nextStoryId | **${data.p22.nextStoryId ?? '—'}** |
 | launchFocus mode | **${data.launchFocus?.sessionMode ?? '—'}** |
+| last session started | **${data.sessionMetrics?.lastSessionStartedAt ?? '—'}** |
+
+## Session gate telemetry (SIGNAL-E)
+
+| Command | Exit |
+| ------- | ---- |
+${sessionGateRows || '| — | — |'}
 
 ## Active phase
 
@@ -296,6 +320,14 @@ function patchLatestJson() {
   if (!latest) return;
   latest.autoDevData = 'docs/audit/auto-dev-data.json';
   latest.autoDevState = 'docs/audit/auto-dev-state.md';
+  latest.signalAssessment = {
+    path: 'docs/audit/signal-assessment-2026-06-05.md',
+    roadmap: 'docs/audit/signal-roadmap-2026-06-05.md',
+    date: '2026-06-05',
+    overall: 'L1-high',
+    target: 'L3-low',
+    axis: 'SIGNAL-E',
+  };
   latest.updated = new Date().toISOString().slice(0, 10);
   writeFileSync(LATEST_JSON, `${JSON.stringify(latest, null, 2)}\n`);
 }
@@ -328,7 +360,8 @@ function main() {
     runGate('pnpm docs:check-frontmatter', 'pnpm docs:check-frontmatter'),
   ];
 
-  const data = buildAutoDevData(p22, latest, launchFocus, roadmapMeta, gates);
+  const sessionMetrics = buildSessionMetrics(gates);
+  const data = buildAutoDevData(p22, latest, launchFocus, roadmapMeta, gates, sessionMetrics);
   writeFileSync(AUTO_DEV_JSON, `${JSON.stringify(data, null, 2)}\n`);
   writeFileSync(AUTO_DEV_MD, buildAutoDevMd(data, p22));
   patchLatestJson();

@@ -20,13 +20,23 @@ review_cycle: on-change
 
 Run `pnpm agent:next-work` for authoritative selection. **Launch plan bout complete. Commercial ceiling: DTF-5.5.4 LOI + CORE-004-CEREMONY (Class S).**
 
-| Field                | Value             |
-| -------------------- | ----------------- |
-| backlogClear         | **true**          |
-| role                 | witness_only      |
-| certificationCeiling | tier-5-commercial |
-| nextStoryId          | **DTF-5.5.4**     |
-| launchFocus mode     | **witness**       |
+| Field                | Value                        |
+| -------------------- | ---------------------------- |
+| backlogClear         | **true**                     |
+| role                 | witness_only                 |
+| certificationCeiling | tier-5-commercial            |
+| nextStoryId          | **DTF-5.5.4**                |
+| launchFocus mode     | **witness**                  |
+| last session started | **2026-06-05T12:08:01.701Z** |
+
+## Session gate telemetry (SIGNAL-E)
+
+| Command                                | Exit  |
+| -------------------------------------- | ----- |
+| `pnpm agent:protocols:check`           | **0** |
+| `pnpm readiness:lanes:check`           | **0** |
+| `pnpm vendor-evidence:verify-manifest` | **0** |
+| `pnpm docs:check-frontmatter`          | **1** |
 
 ## Active phase
 

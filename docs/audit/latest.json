@@ -160,5 +160,13 @@
   },
   "autoDevData": "docs/audit/auto-dev-data.json",
   "autoDevState": "docs/audit/auto-dev-state.md",
-  "updated": "2026-06-05"
+  "updated": "2026-06-05",
+  "signalAssessment": {
+    "path": "docs/audit/signal-assessment-2026-06-05.md",
+    "roadmap": "docs/audit/signal-roadmap-2026-06-05.md",
+    "date": "2026-06-05",
+    "overall": "L1-high",
+    "target": "L3-low",
+    "axis": "SIGNAL-E"
+  }
 }
