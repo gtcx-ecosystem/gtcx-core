@@ -8,4 +8,4 @@ Use when audits must be **reconciled** into a living plan — not for session-by
 
 **Do not** stop after planning. **Do not** use execute-roadmap as a substitute for `pnpm agent:next-work` + bout drain.
 
-**Git:** reconcile-only passes may defer commit until ship slice; implementation follows [agent-git-workflow.md](docs/operations/agent-git-workflow.md) (micro-commit; push at bout check-in; never ask operator).
+**Git:** reconcile-only passes may defer commit until ship slice; implementation follows [agent-git-workflow.md](docs/operations/agent-git-workflow.md) (micro-commit per story; push after each commit; never ask operator).

@@ -106,10 +106,10 @@ Template: `docs/operations/agent-proceed-brief-template.md` · **Forbidden:** Yo
 
 **Normative:** [agent-git-workflow.md](docs/operations/agent-git-workflow.md)
 
-| Action | Practice |
-| ------ | -------- |
-| **Commit** | Micro-commit **immediately** after each Class R story (gates pass) — **never ask** |
-| **Push** | **After every micro-commit** when branch ahead — preserve on origin — **never ask** |
+| Action         | Practice                                                                            |
+| -------------- | ----------------------------------------------------------------------------------- |
+| **Commit**     | Micro-commit **immediately** after each Class R story (gates pass) — **never ask**  |
+| **Push**       | **After every micro-commit** when branch ahead — preserve on origin — **never ask** |
 | **Owner repo** | Git writes **only** in owner checkout (P24); wrong repo → handoff, switch workspace |
 
 **Forbidden:** "Should I commit?", "Say push if you want", commit/WIP menus.
@@ -276,7 +276,7 @@ Use when audits must be **reconciled** into a living plan — not for session-by
 
 **Do not** stop after planning. **Do not** use execute-roadmap as a substitute for `pnpm agent:next-work` + bout drain.
 
-**Git:** reconcile-only passes may defer commit until ship slice; implementation follows [agent-git-workflow.md](docs/operations/agent-git-workflow.md) (micro-commit; push at bout check-in; never ask operator).
+**Git:** reconcile-only passes may defer commit until ship slice; implementation follows [agent-git-workflow.md](docs/operations/agent-git-workflow.md) (micro-commit per story; push after each commit; never ask operator).
 
 ## Execution bout (intrinsic — prefer over execute-roadmap for shipping)
 
