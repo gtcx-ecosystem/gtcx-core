@@ -71,30 +71,30 @@ Source: intelligence open-items register · [remaining-cross-repo-work](./coordi
 
 ## Master register
 
-| ID        | Title                                                                 | Sprint | Owner                      | Status   | Class            | Depends     | Blocks            |
-| --------- | --------------------------------------------------------------------- | ------ | -------------------------- | -------- | ---------------- | ----------- | ----------------- |
-| FA-P0-1   | Break workproof ↔ verification turbo cycle (root `typecheck`)         | FA-S1  | frontier-infra-engineer    | **done** | code             | —           | all DTF-5.2.3+    |
-| FA-P0-2   | README: library readiness vs DTF Tier 5 split                         | FA-S1  | protocol-architect         | **done** | ops-docs         | —           | —                 |
-| FA-P0-3   | Reconcile package count in specs README                               | FA-S1  | protocol-architect         | **done** | ops-docs         | —           | —                 |
-| DTF-5.1.1 | Witness builder: WorkProof → typed witness                            | S-T5-1 | protocol-engineer          | **done** | code             | —           | 5.1.2–5.1.4       |
-| DTF-5.1.2 | Commodity-origin R1CS + **`gh-gold-origin` profile** + negative tests | S-T5-1 | crypto-security-engineer   | **done** | code             | 5.1.1       | 5.1.3             |
-| DTF-5.1.3 | NAPI prove/verify (profile-aware, same R1CS)                          | S-T5-1 | frontier-infra-engineer    | **done** | code             | 5.1.2       | 5.1.4             |
-| DTF-5.1.4 | KAT `groth16-gh-gold-origin.kat.json` + CI                            | S-T5-1 | quality-evidence-lead      | **done** | code             | 5.1.3       | S-T5-2            |
-| DTF-5.2.1 | **`zw-diamond-origin` profile** (same R1CS)                           | S-T5-2 | crypto-security-engineer   | **done** | code             | S-T5-1 exit | 5.2.2             |
-| DTF-5.2.2 | Verification package integration test                                 | S-T5-2 | protocol-engineer          | **done** | code             | 5.2.1       | 5.2.3             |
-| DTF-5.2.3 | KATs for diamond + range circuits                                     | S-T5-2 | quality-evidence-lead      | **done** | code             | 5.2.2       | S-T5-3            |
-| DTF-5.3.1 | **`gh-cocoa-origin` profile** (same R1CS)                             | S-T5-3 | crypto-security-engineer   | **done** | code             | S-T5-2 exit | 5.3.2             |
-| DTF-5.3.2 | Five-jurisdiction integration fixtures (redacted)                     | S-T5-3 | protocol-engineer          | **done** | code             | 5.3.1       | 5.3.3             |
-| DTF-5.3.3 | Minerals board UAT protocol (evidence template)                       | S-T5-3 | quality-evidence-lead      | **done** | ops-docs         | 5.3.2       | S-T5-4            |
-| DTF-5.4.1 | `CircuitRegistry` with semver + deprecation                           | S-T5-4 | protocol-architect         | **done** | code             | S-T5-3 exit | 5.4.2–5.4.4       |
-| DTF-5.4.2 | Load test 1000 proofs/min + evidence JSON                             | S-T5-4 | frontier-infra-engineer    | **done** | code             | 5.4.1       | 5.4.3             |
-| DTF-5.4.3 | Trust portal circuit ID column                                        | S-T5-4 | protocol-architect         | **done** | ops-docs         | 5.4.1       | 5.4.4             |
-| DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID (witness `73eaff2b`)              | S-T5-4 | gtcx-protocols             | **done** | code             | 5.4.1       | **T5 technical**  |
-| DTF-5.5.1 | Jurisdiction pack Zod CI hardening                                    | S-T5-5 | protocol-engineer          | **done** | code             | —           | 5.5.2             |
-| DTF-5.5.2 | Certified pack pipeline (signed manifest)                             | S-T5-5 | Legal + protocol-architect | **done** | ops-docs         | 5.5.1       | 5.5.4             |
-| DTF-5.5.3 | Predicate-gated export keys (optional)                                | S-T5-5 | crypto-security-engineer   | deferred | code             | 5.5.1       | —                 |
-| DTF-5.5.4 | Design-partner LOI or regulator letter                                | S-T5-5 | GTM                        | pending  | evidence-capture | infra pilot | **T5 commercial** |
-| DTF-5.5.5 | Evidence index entry                                                  | S-T5-5 | quality-evidence-lead      | **done** | ops-docs         | 5.5.1       | CORE-004 blocked  |
+| ID        | Title                                                                 | Sprint | Owner                      | Status             | Class            | Depends     | Blocks            |
+| --------- | --------------------------------------------------------------------- | ------ | -------------------------- | ------------------ | ---------------- | ----------- | ----------------- |
+| FA-P0-1   | Break workproof ↔ verification turbo cycle (root `typecheck`)         | FA-S1  | frontier-infra-engineer    | **done**           | code             | —           | all DTF-5.2.3+    |
+| FA-P0-2   | README: library readiness vs DTF Tier 5 split                         | FA-S1  | protocol-architect         | **done**           | ops-docs         | —           | —                 |
+| FA-P0-3   | Reconcile package count in specs README                               | FA-S1  | protocol-architect         | **done**           | ops-docs         | —           | —                 |
+| DTF-5.1.1 | Witness builder: WorkProof → typed witness                            | S-T5-1 | protocol-engineer          | **done**           | code             | —           | 5.1.2–5.1.4       |
+| DTF-5.1.2 | Commodity-origin R1CS + **`gh-gold-origin` profile** + negative tests | S-T5-1 | crypto-security-engineer   | **done**           | code             | 5.1.1       | 5.1.3             |
+| DTF-5.1.3 | NAPI prove/verify (profile-aware, same R1CS)                          | S-T5-1 | frontier-infra-engineer    | **done**           | code             | 5.1.2       | 5.1.4             |
+| DTF-5.1.4 | KAT `groth16-gh-gold-origin.kat.json` + CI                            | S-T5-1 | quality-evidence-lead      | **done**           | code             | 5.1.3       | S-T5-2            |
+| DTF-5.2.1 | **`zw-diamond-origin` profile** (same R1CS)                           | S-T5-2 | crypto-security-engineer   | **done**           | code             | S-T5-1 exit | 5.2.2             |
+| DTF-5.2.2 | Verification package integration test                                 | S-T5-2 | protocol-engineer          | **done**           | code             | 5.2.1       | 5.2.3             |
+| DTF-5.2.3 | KATs for diamond + range circuits                                     | S-T5-2 | quality-evidence-lead      | **done**           | code             | 5.2.2       | S-T5-3            |
+| DTF-5.3.1 | **`gh-cocoa-origin` profile** (same R1CS)                             | S-T5-3 | crypto-security-engineer   | **done**           | code             | S-T5-2 exit | 5.3.2             |
+| DTF-5.3.2 | Five-jurisdiction integration fixtures (redacted)                     | S-T5-3 | protocol-engineer          | **done**           | code             | 5.3.1       | 5.3.3             |
+| DTF-5.3.3 | Minerals board UAT protocol (evidence template)                       | S-T5-3 | quality-evidence-lead      | **done**           | ops-docs         | 5.3.2       | S-T5-4            |
+| DTF-5.4.1 | `CircuitRegistry` with semver + deprecation                           | S-T5-4 | protocol-architect         | **done**           | code             | S-T5-3 exit | 5.4.2–5.4.4       |
+| DTF-5.4.2 | Load test 1000 proofs/min + evidence JSON                             | S-T5-4 | frontier-infra-engineer    | **done**           | code             | 5.4.1       | 5.4.3             |
+| DTF-5.4.3 | Trust portal circuit ID column                                        | S-T5-4 | protocol-architect         | **done**           | ops-docs         | 5.4.1       | 5.4.4             |
+| DTF-5.4.4 | `gtcx-protocols` E2E per circuit ID (witness `73eaff2b`)              | S-T5-4 | gtcx-protocols             | **done**           | code             | 5.4.1       | **T5 technical**  |
+| DTF-5.5.1 | Jurisdiction pack Zod CI hardening                                    | S-T5-5 | protocol-engineer          | **done**           | code             | —           | 5.5.2             |
+| DTF-5.5.2 | Certified pack pipeline (signed manifest)                             | S-T5-5 | Legal + protocol-architect | **done**           | ops-docs         | 5.5.1       | 5.5.4             |
+| DTF-5.5.3 | Predicate-gated export keys (optional)                                | S-T5-5 | crypto-security-engineer   | deferred           | code             | 5.5.1       | —                 |
+| DTF-5.5.4 | Design-partner LOI or regulator letter                                | S-T5-5 | GTM                        | **awaiting-human** | evidence-capture | infra pilot | **T5 commercial** |
+| DTF-5.5.5 | Evidence index entry                                                  | S-T5-5 | quality-evidence-lead      | **done**           | ops-docs         | 5.5.1       | —                 |
 
 **Cross-repo (S-T5-4 slice):** DTF-5.4.4 **done** — protocols [`73eaff2b`](https://github.com/gtcx-ecosystem/gtcx-protocols/commit/73eaff2b); inbound [`from-gtcx-core-dtf-5-4-4-inbound-2026-06-05.md`](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/from-gtcx-core-dtf-5-4-4-inbound-2026-06-05.md); core ack [`to-gtcx-protocols-dtf-5-4-4-witness-ack-2026-06-05.md`](./coordination/to-gtcx-protocols-dtf-5-4-4-witness-ack-2026-06-05.md); intelligence witness-only [`5142ff8`](https://github.com/gtcx-ecosystem/gtcx-intelligence/commit/5142ff8) · [`from-gtcx-core-dtf-5-4-4-witness-2026-06-05.md`](https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/operations/coordination/from-gtcx-core-dtf-5-4-4-witness-2026-06-05.md). **P22** P22-EVID-03 still blocked ↔ INT-S9-01/OI-B08; protocols unchanged.
 

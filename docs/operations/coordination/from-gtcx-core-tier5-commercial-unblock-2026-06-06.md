@@ -60,7 +60,8 @@ pnpm certified-pack:build-manifest
 pnpm certified-pack:verify-manifest
 ```
 
-Runbook: [`certified-pack-pipeline.md`](../certified-pack-pipeline.md)
+Runbook: [`certified-pack-pipeline.md`](../certified-pack-pipeline.md)  
+**Commercial gate tracker:** [`dtf-554-commercial-gate-tracker-2026-06-07.md`](./dtf-554-commercial-gate-tracker-2026-06-07.md)
 
 ## Sibling repos
 

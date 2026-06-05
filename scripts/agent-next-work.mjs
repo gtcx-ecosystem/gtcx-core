@@ -264,6 +264,8 @@ function selectBacklogClearGuidance() {
     'docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md';
   const blockerDoc =
     'docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md';
+  const commercialTracker =
+    'docs/operations/coordination/dtf-554-commercial-gate-tracker-2026-06-07.md';
   const engineeringCloseout = CORE_004_ENGINEERING_DONE;
   const packDone = certifiedPackManifestReady();
   const core004Done = core004EngineeringDone();
@@ -391,7 +393,7 @@ function selectBacklogClearGuidance() {
     deferred: [
       'DTF-5.5.3 predicate-gated export keys (optional)',
       'Production manifest Ed25519 via CSP ceremony (Legal)',
-      ...(core004Done ? [blockerDoc] : []),
+      ...(core004Done ? [commercialTracker] : [blockerDoc]),
     ],
     selection: {
       tier: packDone ? 'external-attestation' : 'ops-docs',
