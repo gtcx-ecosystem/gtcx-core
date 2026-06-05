@@ -10,6 +10,10 @@ import { fileURLToPath } from 'node:url';
 import { buildProgressGauge } from './lib/agent-bout-progress-gauge.mjs';
 import { buildRequiredReadsPayload } from '../../baseline-os/scripts/ecosystem/lib/required-agent-reads.mjs';
 import {
+  buildAgentCapabilityManifest,
+  formatAgentCapabilityManifestHuman,
+} from '../../baseline-os/scripts/ecosystem/lib/agent-capability-manifest.mjs';
+import {
   checkAgentEnvironmentAutonomy,
   formatAgentEnvironmentAutonomyHuman,
 } from '../../baseline-os/scripts/ecosystem/lib/agent-environment-autonomy.mjs';
@@ -137,6 +141,10 @@ const progressGauge = buildProgressGauge(ROOT);
 const { requiredReads, humanGateNavigation } = buildRequiredReadsPayload(ROOT);
 const sessionContext = buildSessionAuditContext(ROOT, { repoId: 'gtcx-core' });
 const agentAutonomy = checkAgentEnvironmentAutonomy(ROOT, { repoId: 'gtcx-core' });
+const agentCapabilities = buildAgentCapabilityManifest(ROOT, {
+  repoId: 'gtcx-core',
+  agentAutonomy,
+});
 
 const output = {
   startedAt: now,
@@ -148,6 +156,7 @@ const output = {
   requiredReads,
   humanGateNavigation,
   agentAutonomy,
+  agentCapabilities,
   sessionContext,
   proceedBrief: {
     ...proceedBrief,
@@ -178,6 +187,8 @@ if (JSON_OUT) {
 
 log('=== GTCX agent:start ===\n');
 log(formatAgentEnvironmentAutonomyHuman(agentAutonomy));
+log('\n');
+log(formatAgentCapabilityManifestHuman(agentCapabilities));
 log('\n');
 log(formatSessionAuditContextHuman(sessionContext));
 log('\n');

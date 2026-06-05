@@ -75,6 +75,7 @@
     "agent:start": "node scripts/agent-session-start.mjs",
     "agent:session-start": "pnpm run agent:start",
     "agent:environment:check": "node ../baseline-os/scripts/ecosystem/lib/agent-environment-autonomy.mjs --repo-path=.",
+    "agent:capabilities:check": "node ../baseline-os/scripts/ecosystem/lib/agent-capability-manifest.mjs --repo-path=.",
     "agent:cli:path": "node scripts/agent-cli-path.mjs",
     "agent:next-work": "node scripts/agent-next-work.mjs",
     "agent:bout": "node scripts/agent-execution-bout.mjs",
