@@ -207,13 +207,13 @@ Full template: `docs/04-operations/agent-status-update-template.md` (rolled out 
 
 ## 4. Protocol 27 — run commands yourself
 
-| You run                                                  | You do not ask                         |
-| -------------------------------------------------------- | -------------------------------------- |
-| `pnpm test`, lint, validate                              | "run locally"                          |
-| `aws` / `kubectl` / `terraform` / `scripts/staging/*.sh` | **"Your action needed"** + paste block |
-| `npx expo start` (background), Metro health              | "focus your terminal"                  |
-| `adb reverse`, `am start`                                | "press r/a" only                       |
-| `git push` when commits ready                            | "Say push if you want"                 |
+| You run                                                     | You do not ask                         |
+| ----------------------------------------------------------- | -------------------------------------- |
+| `pnpm test`, lint, validate                                 | "run locally"                          |
+| `aws` / `kubectl` / `terraform` / `13-scripts/staging/*.sh` | **"Your action needed"** + paste block |
+| `npx expo start` (background), Metro health                 | "focus your terminal"                  |
+| `adb reverse`, `am start`                                   | "press r/a" only                       |
+| `git push` when commits ready                               | "Say push if you want"                 |
 
 Report: **command + exit code** per step.
 
@@ -260,7 +260,7 @@ All synced from `gtcx-agentic` templates via `pnpm agent:sync`:
 | Copilot     | `.github/copilot/instructions.md`                                  |
 | Conventions | `CONVENTIONS.md`                                                   |
 
-**SoR for templates:** `gtcx-agentic/scripts/sync/templates/.agent/`
+**SoR for templates:** `gtcx-agentic/13-scripts/sync/templates/.agent/`
 
 **Maintainer gate (CI):** `pnpm ecosystem:rollout-universal:check` in gtcx-agentic. Agents run `ecosystem:rollout-universal` in-session when updating templates (P27) — never tell the operator to run sync/rollout.
 
