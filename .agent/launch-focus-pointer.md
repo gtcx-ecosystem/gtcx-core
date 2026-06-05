@@ -1,6 +1,6 @@
 ## Launch focus (GTM — every session, no audit required)
 
-**Normative:** `docs/operations/agent-launch-focus.md` · **SoR:** `.baseline/launch-focus.json`
+**Normative:** `01-docs/04-ops/agent-launch-focus.md` · **SoR:** `.baseline/launch-focus.json`
 
 **North star:** Finish **gtcx-core** foundation so **markets / intelligence / infrastructure** can launch apps → GTM closes sovereign deals (GR-T2+).
 

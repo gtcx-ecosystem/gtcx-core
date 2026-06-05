@@ -1,8 +1,8 @@
 {
   "schema": "gtcx.executionBout.v1",
   "statePath": ".baseline/execution-bout.json",
-  "normativeDoc": "docs/operations/agent-execution-bout.md",
-  "docPath": "docs/operations/agent-execution-bout.md",
+  "normativeDoc": "01-docs/04-ops/agent-execution-bout.md",
+  "docPath": "01-docs/04-ops/agent-execution-bout.md",
   "id": "bout-2026-06-05-auto",
   "mode": "auto",
   "provisionedAt": "2026-06-05T04:07:21.144Z",
@@ -52,7 +52,7 @@
     "Do NOT end the session after one story while `remainingCount` > 0.",
     "Do NOT ask operator to pick stories — P22 selects head; bout lists the drain queue.",
     "Full Status Update + optional push only at bout check-in.",
-    "Normative: docs/operations/agent-execution-bout.md",
+    "Normative: 01-docs/04-ops/agent-execution-bout.md",
     "Bout plan empty for Class R — check-in with humanOnly as Approval needed; witness only."
   ],
   "forbidden": [

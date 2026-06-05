@@ -60,7 +60,7 @@ chore(deps): bump vitest to 3.2
 
 `gtcx-core` enforces SLSA Source Level 2 on `main`. Signed commits are
 required — unsigned commits are rejected by branch protection. See
-[docs/security/slsa-attestation.md](./docs/security/slsa-attestation.md) for
+[01-docs/09-security/slsa-attestation.md](./01-docs/09-security/slsa-attestation.md) for
 verification commands and enforcement details.
 
 **All contributors must configure commit signing before pushing.**
@@ -171,7 +171,7 @@ This creates a markdown file in `.changeset/` describing the change and its semv
 ## Architecture Rules
 
 - **No circular dependencies** between packages
-- **No cross-package deep imports** (use the package, not `../../other-package/src/`)
+- **No cross-package deep imports** (use the package, not `../../other-package/03-platform/src/`)
 - **Zod validation at boundaries** — all external input validated with schemas
 - **workspace: protocol** for all internal `@gtcx/*` references
 - Security-sensitive packages (`crypto`, `security`, `identity`, `verification`, `crypto-native`) require review from the Cryptographic Security Engineer role

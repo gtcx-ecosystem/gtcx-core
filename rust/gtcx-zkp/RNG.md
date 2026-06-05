@@ -120,8 +120,8 @@ Generates 100 Groth16 proofs from the identical witness and asserts all proof by
 
 ## References
 
-- Code: `src/types.rs` (`zk_rng`), `src/utils.rs` (duplicate — to be consolidated)
-- Test: `src/tests/types.rs` (`test_zk_rng_non_deterministic`)
-- Heavy test: `src/tests/groth16.rs` (`test_proof_non_determinism`)
+- Code: `03-platform/src/types.rs` (`zk_rng`), `03-platform/src/utils.rs` (duplicate — to be consolidated)
+- Test: `03-platform/src/tests/types.rs` (`test_zk_rng_non_deterministic`)
+- Heavy test: `03-platform/src/tests/groth16.rs` (`test_proof_non_determinism`)
 - `getrandom` crate docs: <https://docs.rs/getrandom/0.2.17/getrandom/>
 - `rand::rngs::OsRng` docs: <https://docs.rs/rand/0.8.6/rand/rngs/struct.OsRng.html>

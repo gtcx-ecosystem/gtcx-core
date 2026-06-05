@@ -14,9 +14,9 @@ Run the GTCX **verification-audit** audit in **this repo** (`gtcx-core`).
 3. Follow scoring in command + prompt
 4. **Protocol 27:** Run verification gates in-session; report command + exit code
 5. Write forensic: `Verification report` (today's date)
-6. Update lane index + `docs/audit/latest.json` if readiness changed
+6. Update lane index + `01-docs/05-audit/latest.json` if readiness changed
 7. `pnpm readiness:lanes:check`
-8. Commit audit artifacts; push after each micro-commit per docs/operations/agent-git-workflow.md
+8. Commit audit artifacts; push after each micro-commit per 01-docs/04-ops/agent-git-workflow.md
 
 ## Registry
 

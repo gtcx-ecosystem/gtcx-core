@@ -1,6 +1,6 @@
 ## Agent git workflow — micro-commit and preserve (P4 + P24 + P26 + P27)
 
-**Normative:** [agent-git-workflow.md](docs/operations/agent-git-workflow.md)
+**Normative:** [agent-git-workflow.md](01-docs/04-ops/agent-git-workflow.md)
 
 | Action           | Practice                                                                             |
 | ---------------- | ------------------------------------------------------------------------------------ |

@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-05-08T19:37:20.192Z",
+  "windowDays": 30,
+  "since": "2026-04-08T19:37:20.192Z",
+  "repository": null,
+  "source": "local-or-missing-github-auth",
+  "warnings": ["Missing GITHUB_TOKEN or GITHUB_REPOSITORY; wrote empty KPI history snapshot."],
+  "workflows": [],
+  "summary": {
+    "totalRuns": 0,
+    "completedRuns": 0,
+    "successfulRuns": 0,
+    "rerunCount": 0,
+    "passRatePercent": 0,
+    "rerunRatePercent": 0,
+    "docsApiDriftIncidents": 0
+  },
+  "issueCounts": { "highSeverityEscapeDefectsMonth": 0, "securityPolicyViolationsMerged": 0 }
+}

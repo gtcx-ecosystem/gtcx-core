@@ -1,57 +1,57 @@
 packages:
   # Core type system and domain models
-  - 'packages/types'
-  - 'packages/domain'
-  - 'packages/schemas'
+  - '03-platform/packages/types'
+  - '03-platform/packages/domain'
+  - '03-platform/packages/schemas'
 
   # Cryptographic and security primitives
-  - 'packages/crypto'
-  - 'packages/crypto-native'
-  - 'packages/security'
-  - 'packages/identity'
-  - 'packages/verification'
-  - 'packages/workproof'
-  - 'packages/zkp-kat-vectors'
+  - '03-platform/packages/crypto'
+  - '03-platform/packages/crypto-native'
+  - '03-platform/packages/security'
+  - '03-platform/packages/identity'
+  - '03-platform/packages/verification'
+  - '03-platform/packages/workproof'
+  - '03-platform/packages/zkp-kat-vectors'
 
   # AI integration
-  - 'packages/ai'
-  - 'packages/ai-eval'
+  - '03-platform/packages/ai'
+  - '03-platform/packages/ai-eval'
 
   # Application services
-  - 'packages/services'
-  - 'packages/eap'
+  - '03-platform/packages/services'
+  - '03-platform/packages/eap'
 
   # Sync and API
-  - 'packages/sync'
-  - 'packages/api-client'
-  - 'packages/network'
+  - '03-platform/packages/sync'
+  - '03-platform/packages/api-client'
+  - '03-platform/packages/network'
 
   # Connectivity (offline-first, P8)
-  - 'packages/connectivity'
+  - '03-platform/packages/connectivity'
 
   # Event system
-  - 'packages/events'
+  - '03-platform/packages/events'
 
   # Resilience primitives
-  - 'packages/resilience'
+  - '03-platform/packages/resilience'
 
   # Telemetry (metrics, traces, logs)
-  - 'packages/telemetry'
+  - '03-platform/packages/telemetry'
 
   # Runtime substrate (batteries-included)
-  - 'packages/runtime'
+  - '03-platform/packages/runtime'
 
   # Common utilities
-  - 'packages/utils'
-  - 'packages/logging'
+  - '03-platform/packages/utils'
+  - '03-platform/packages/logging'
 
   # Configuration schemas
-  - 'packages/config/jurisdiction'
+  - '03-platform/packages/config/jurisdiction'
 
   # Build configuration
-  - 'packages/config/eslint'
-  - 'packages/config/typescript'
-  - 'packages/config/tsup'
+  - '03-platform/packages/config/eslint'
+  - '03-platform/packages/config/typescript'
+  - '03-platform/packages/config/tsup'
 
   # Integration tests
-  - 'tests/integration'
+  - '03-platform/tests/integration'

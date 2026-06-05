@@ -175,7 +175,7 @@ jobs:
           path: |
             artifacts/ci-history.json
             quality/kpi-metrics.json
-            docs/quality/10-10-remediation-tracker.md
+            01-docs/quality/10-10-remediation-tracker.md
 
       - name: Setup Rust
         if: >-
@@ -265,7 +265,7 @@ jobs:
             echo "::error::npm publish --provenance requires a public GitHub source repository."
             echo "::error::gtcx-core is '${visibility}'. npm returned E422: private repos cannot publish with provenance."
             echo "::error::Remediation: make gtcx-ecosystem/gtcx-core public (Settings → General → Change visibility), then re-run with provenance_republish=true."
-            echo "::error::Alternative (no registry attestations): publish without --provenance — see docs/audit/ci-confirmation-2026-06-01.md."
+            echo "::error::Alternative (no registry attestations): publish without --provenance — see 01-docs/05-audit/ci-confirmation-2026-06-01.md."
             exit 1
           fi
 
@@ -273,7 +273,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: |
           echo "provenance=true" >> "${NPM_CONFIG_USERCONFIG}"
-          node ./tools/publish-packages-provenance.mjs
+          node ./03-platform/tools/publish-packages-provenance.mjs
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_USERCONFIG: ${{ env.NPM_CONFIG_USERCONFIG }}
@@ -292,14 +292,14 @@ jobs:
         run: |
           MANIFEST=artifacts/npm-publish-manifest.json
           for attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
-            if node ./tools/check-npm-provenance.mjs --strict --manifest="${MANIFEST}"; then
+            if node ./03-platform/tools/check-npm-provenance.mjs --strict --manifest="${MANIFEST}"; then
               exit 0
             fi
             echo "Attestations not visible yet (attempt ${attempt}/12); waiting 20s..."
             sleep 20
           done
           echo "::warning::Some packages lack npm attestations after publish."
-          node ./tools/check-npm-provenance.mjs --manifest="${MANIFEST}"
+          node ./03-platform/tools/check-npm-provenance.mjs --manifest="${MANIFEST}"
           exit 1
 
       - name: Push release tags

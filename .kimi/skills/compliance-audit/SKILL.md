@@ -13,10 +13,10 @@ Run the GTCX **compliance-audit** audit in **this repo** (`gtcx-core`).
 2. Read prompt (BEGIN PROMPT → END PROMPT): `../gtcx-docs/tools/audit/audit-framework/prompts/lanes/compliance-audit-prompt.md`
 3. Read scoring protocol: `../gtcx-docs/tools/audit/lane-scoring/internal-compliance-scoring.md`
 4. **Protocol 27:** Run verification gates in-session; report command + exit code
-5. Write forensic: `docs/audit/compliance-audit-YYYY-MM-DD.md` (today's date)
-6. Update lane index + `docs/audit/latest.json` if readiness changed
+5. Write forensic: `01-docs/05-audit/compliance-audit-YYYY-MM-DD.md` (today's date)
+6. Update lane index + `01-docs/05-audit/latest.json` if readiness changed
 7. `pnpm readiness:lanes:check`
-8. Commit audit artifacts; push after each micro-commit per docs/operations/agent-git-workflow.md
+8. Commit audit artifacts; push after each micro-commit per 01-docs/04-ops/agent-git-workflow.md
 
 ## Registry
 

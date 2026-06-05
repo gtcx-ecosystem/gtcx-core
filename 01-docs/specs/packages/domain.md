@@ -1,0 +1,134 @@
+---
+title: 'Package Spec — `@gtcx/domain`'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
+trust_score: 60
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'specs']
+review_cycle: 'on-change'
+---
+
+---
+
+title: 'Domain'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs', 'specs']
+review_cycle: 'on-change'
+
+---
+
+# Package Spec — `@gtcx/domain`
+
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
+**Classification:** Standard — changes follow normal PR review process.
+
+---
+
+## Purpose
+
+Commodity-agnostic domain services for the GTCX protocol. Provides the foundational data models, service interfaces, event types, and domain logic shared across all platform services. Extracted from business service implementations to give consuming packages a stable, dependency-injection-friendly interface layer.
+
+---
+
+## Design Principles
+
+This package enforces 10/10 architectural compliance across 12 dimensions:
+
+| Principle            | Implementation                                                     |
+| -------------------- | ------------------------------------------------------------------ |
+| P1 Package structure | Clean `03-platform/src/` + `internal/` separation                  |
+| P2 Type safety       | Zod schemas at all boundaries                                      |
+| P3 Modularity        | Independent services with granular exports                         |
+| P4 Composability     | Full dependency injection                                          |
+| P5 AI-Native         | AI integration interfaces + operation logging                      |
+| P6 Asset abstraction | `commodityType: string` throughout — no hardcoded commodity types  |
+| P7 Documentation     | Complete API reference + threat model                              |
+| P8 Offline-first     | Offline queue with conflict resolution and logical replay ordering |
+| P9 Security          | Input sanitization, rate limiting hooks                            |
+| P10 API stability    | Versioning, deprecation markers, changelog                         |
+| P11 Data evolution   | Schema versioning + migrations                                     |
+| P12 Observability    | Events + metrics + AI logging                                      |
+
+---
+
+## Public API
+
+### Domain Models and Types
+
+Commodity-agnostic data models for asset lots, registrations, trades, compliance records, and all protocol entities. Types follow `commodityType: string` — commodity identity is an attribute, not a type branch.
+
+### Service Interfaces
+
+Dependency-injected interfaces for:
+
+- Asset lot registration
+- Trading and market operations
+- Compliance monitoring
+- Provenance tracking
+
+Concrete implementations live in `@gtcx/services`.
+
+### Event Types
+
+All domain events — registration, trade, compliance, provenance — with typed payload shapes. Consumed by `@gtcx/events`.
+
+### Offline Queue
+
+`OfflineQueue` is an experimental public export for buffering operations during disconnected periods.
+Replay order is defined by a monotonic logical sequence assigned at enqueue time, not by wall-clock timestamps.
+This is a resilience requirement, not an implementation detail: device clock drift, user-adjusted time, and battery-reset clocks must not reorder legally consequential operations.
+
+### API Versioning
+
+| Export                               | Description                                       |
+| ------------------------------------ | ------------------------------------------------- |
+| `API_VERSION`                        | Current API version string                        |
+| `MIN_SUPPORTED_VERSION`              | Minimum version downstream consumers must support |
+| `DEPRECATIONS`                       | Map of deprecated exports with removal versions   |
+| `API_STABILITY`                      | Stability tier for each export                    |
+| `CHANGELOG`                          | Programmatic changelog                            |
+| `checkVersionCompatibility(version)` | Verify version compatibility at runtime           |
+
+---
+
+## Dependencies
+
+| Dependency                   | Role                               |
+| ---------------------------- | ---------------------------------- |
+| `@gtcx/types` `workspace:*`  | Base protocol types                |
+| `@gtcx/crypto` `workspace:*` | Hashing for domain object identity |
+| `@gtcx/utils` `workspace:*`  | Shared utilities                   |
+| `zod` `^3.23.0`              | Schema validation                  |
+
+---
+
+## Non-Goals
+
+- Does not contain service implementations — those are in `@gtcx/services`
+- Does not manage network or sync — `@gtcx/network` and `@gtcx/sync`
+- Does not contain platform-specific code (mobile, web, server)
+
+---
+
+## Implementation
+
+`03-platform/packages/domain/03-platform/src/`
+
+---
+
+## Reference
+
+- [`01-docs/specs/03-platform/packages/services.md`](./services.md) — concrete service implementations
+- [`01-docs/specs/03-platform/packages/events.md`](./events.md) — event bus consuming domain event types
+- [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview and dependency rules

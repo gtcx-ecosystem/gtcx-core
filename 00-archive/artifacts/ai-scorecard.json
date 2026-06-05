@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "repo": "gtcx-core",
+    "agent_id": "unknown",
+    "timestamp": "2026-06-01T09:48:06.234Z",
+    "baseline_ref": "main",
+    "current_ref": "ba6ffe5"
+  },
+  "summary": {
+    "overall_status": "WARN",
+    "dimensions_scored": 4,
+    "dimensions_passed": 2,
+    "dimensions_failed": 0
+  },
+  "accuracy": {
+    "pass_rate": 1,
+    "baseline_pass_rate": 1,
+    "delta": 0,
+    "threshold": 0.95,
+    "status": "PASS",
+    "packages": [
+      {
+        "name": "@gtcx/ai",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/ai-eval",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/api-client",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/jurisdiction-config",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/connectivity",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/crypto",
+        "pass_rate": 1,
+        "threshold": 0.98,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/crypto-native",
+        "pass_rate": 1,
+        "threshold": 0.98,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/domain",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/events",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/identity",
+        "pass_rate": 1,
+        "threshold": 0.98,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/logging",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/network",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/resilience",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/runtime",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/schemas",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/security",
+        "pass_rate": 1,
+        "threshold": 0.98,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/services",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/sync",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/telemetry",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/types",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/utils",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/verification",
+        "pass_rate": 1,
+        "threshold": 0.98,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/workproof",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      },
+      {
+        "name": "@gtcx/integration-tests",
+        "pass_rate": 1,
+        "threshold": 0.95,
+        "status": "PASS"
+      }
+    ]
+  },
+  "safety": {
+    "violations": 0,
+    "status": "PASS",
+    "findings": []
+  },
+  "efficiency": {
+    "tokens_per_task": 0,
+    "baseline_tokens_per_task": 0,
+    "tokens_delta_pct": 0,
+    "duration_per_task_ms": 0,
+    "baseline_duration_ms": 0,
+    "duration_delta_pct": 0,
+    "threshold_tokens_pct": 10,
+    "threshold_duration_pct": 20,
+    "status": "WARN"
+  },
+  "context_utilization": {
+    "utilization_score": 0,
+    "avg_context_tokens": 0,
+    "max_context_tokens": 131072,
+    "truncation_events": 0,
+    "target_score": 0.7,
+    "status": "WARN"
+  }
+}

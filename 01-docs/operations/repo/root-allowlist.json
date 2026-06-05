@@ -1,0 +1,106 @@
+{
+  "$schema": "https://gtcx.org/schemas/audit/root-allowlist.schema.json",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "updated": "2026-06-05",
+  "description": "Repo-specific root allowlist for gtcx-core. Source of truth for CI root-cleanliness checks. Mirrors 01-docs/04-ops/repo/repo-hygiene-protocol.md.",
+
+  "required_files": ["README.md", "AGENTS.md"],
+
+  "allowed_files": [
+    "LICENSE",
+    "NOTICE",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    "CONVENTIONS.md",
+    "CODEX.md",
+    "KIMI.md",
+    "package.json",
+    "pnpm-workspace.yaml",
+    "pnpm-lock.yaml",
+    "turbo.json",
+    "tsconfig.json",
+    "vitest.workspace.ts",
+    "eslint.config.js",
+    "commitlint.config.js",
+    "typedoc.json",
+    "baseline.config.ts",
+    "Dockerfile",
+    ".gitignore",
+    ".gitattributes",
+    ".dockerignore",
+    ".editorconfig",
+    ".prettierrc",
+    ".prettierignore",
+    ".env.example"
+  ],
+
+  "allowed_directories": [
+    "agents",
+    "artifacts",
+    "benchmarks",
+    "bin",
+    "deploy",
+    "docs",
+    "packages",
+    "quality",
+    "rust",
+    "scripts",
+    "tests",
+    "tools",
+    "workspace"
+  ],
+
+  "allowed_dot_directories": [
+    ".github",
+    ".husky",
+    ".agent",
+    ".baseline",
+    ".cursor",
+    ".changeset",
+    ".claude",
+    ".gemini",
+    ".kimi"
+  ],
+
+  "ignored_prefixes": [".", "node_modules"],
+
+  "ignored_exact": ["node_modules"],
+
+  "deprecated_files": {},
+
+  "forbidden_root_names": {
+    "audit": "Move to 01-docs/05-audit/. The gitignored audit/ is a developer-local scratch dir and must never be tracked.",
+    "coverage": "Build artifact — gitignored. Never commit.",
+    "session-notes": "Use 01-docs/session-notes/.",
+    "_archive": "Gitignored historical tree; must not be committed at root."
+  },
+
+  "forbidden_name_prefixes": ["IMG_", "Screenshot", "Untitled"],
+
+  "human_owned_paths": {
+    "_delete": {
+      "owner": "repository maintainer (manual)",
+      "agent_action": "none — do not delete, move, empty, or schedule in sprints/PRs",
+      "ci_enforcement": "excluded from root-cleanliness check",
+      "audit_reporting": "may note as out-of-scope; never score as P0/P1",
+      "rationale": "Maintainer-managed terminal cleanup. Not present in this repo today; convention preserved for future use."
+    }
+  },
+
+  "relocate_hints": {
+    "audits": "01-docs/05-audit/",
+    "session_analysis": "01-docs/session-notes/",
+    "local_scratch": ".local/",
+    "pm_artifacts": "01-docs/05-audit/agile/",
+    "repo_policy": "01-docs/04-ops/repo/",
+    "performance_baselines": "benchmarks/",
+    "kat_fixtures": "artifacts/kat/",
+    "agent_cli": "bin/",
+    "agent_terminal_index": "agents/",
+    "operational_workspace": "workspace/"
+  }
+}

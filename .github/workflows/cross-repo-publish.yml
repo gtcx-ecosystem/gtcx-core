@@ -91,7 +91,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISHED_PACKAGES: ${{ needs.detect-publish.outputs.published_packages }}
-        run: tsx scripts/open-downstream-prs.ts
+        run: tsx 03-platform/scripts/open-downstream-prs.ts
 
       - name: Upload summary artifact
         uses: actions/upload-artifact@v4

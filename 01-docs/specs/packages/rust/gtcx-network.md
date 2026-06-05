@@ -1,0 +1,110 @@
+---
+title: 'Crate Spec — `gtcx-network`'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
+trust_score: 60
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'specs']
+review_cycle: 'on-change'
+---
+
+---
+
+title: 'Gtcx Network'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs', 'specs']
+review_cycle: 'on-change'
+
+---
+
+# Crate Spec — `gtcx-network`
+
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
+**Classification:** Standard — changes follow normal PR review process.
+
+---
+
+## Purpose
+
+P2P networking type system and message layer for the GTCX protocol in Rust. Provides typed peer identities, gossip topic management, message serialization, and PANX protocol message types. The transport layer (QUIC, libp2p) plugs into the types defined here — this crate does not implement transport directly.
+
+---
+
+## Public API
+
+### Peer Identity
+
+| Type       | Description                                                          |
+| ---------- | -------------------------------------------------------------------- |
+| `PeerId`   | Cryptographic peer identifier — Blake3 hash of the peer's public key |
+| `PeerInfo` | Peer metadata — `PeerId`, multiaddr, role, capabilities              |
+
+### Gossip Topics
+
+| Type          | Description                                               |
+| ------------- | --------------------------------------------------------- |
+| `GossipTopic` | Typed gossip topic — protocol enum mapped to topic string |
+| `TopicRouter` | Routes incoming messages to the correct handler by topic  |
+
+### Message Types
+
+| Type             | Description                                             |
+| ---------------- | ------------------------------------------------------- |
+| `NetworkMessage` | Envelope: topic, sender `PeerId`, payload bytes, TTL    |
+| `PanxMessage`    | PANX protocol messages — proposals, votes, attestations |
+
+### Errors
+
+| Type           | Description                                                                 |
+| -------------- | --------------------------------------------------------------------------- |
+| `NetworkError` | Enum: `InvalidPeerId`, `SerializationError`, `TopicError`, `TransportError` |
+
+---
+
+## Dependencies
+
+| Crate                  | Role                                  |
+| ---------------------- | ------------------------------------- |
+| `gtcx-crypto` (local)  | Blake3 hashing for peer ID generation |
+| `serde` + `serde_json` | Message serialization                 |
+| `tracing`              | Observability                         |
+| `thiserror`            | Error types                           |
+
+---
+
+## Phase 2 Roadmap
+
+Full libp2p integration (QUIC transport, GossipSub) is planned for Phase 2. The current implementation establishes the type system and message schema so that the transport layer can be added without breaking API changes.
+
+---
+
+## Non-Goals
+
+- Does not implement network transport — transport is an infrastructure concern
+- Does not manage consensus — that is `gtcx-consensus`
+- Does not expose NAPI bindings — networking runs in the Rust runtime
+
+---
+
+## Implementation
+
+`rust/gtcx-network/03-platform/src/`
+
+---
+
+## Reference
+
+- [`01-docs/specs/03-platform/packages/network.md`](../network.md) — TypeScript P2P network package
+- [`01-docs/specs/03-platform/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — foundation crate
+- [`01-docs/specs/core-spec.md`](../../core-spec.md) — system overview

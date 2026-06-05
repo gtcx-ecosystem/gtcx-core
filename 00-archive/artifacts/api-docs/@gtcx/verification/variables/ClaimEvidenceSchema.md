@@ -1,0 +1,11 @@
+[**GTCX Core API Reference**](../../../README.md)
+
+***
+
+[GTCX Core API Reference](../../../README.md) / [@gtcx/verification](../README.md) / [](../README.md) / ClaimEvidenceSchema
+
+# Variable: ClaimEvidenceSchema
+
+> `const` **ClaimEvidenceSchema**: `ZodObject`\<\{ `hash`: `ZodString`; `metadata`: `ZodOptional`\<`ZodRecord`\<`ZodString`, `ZodUnknown`\>\>; `timestamp`: `ZodNumber`; `type`: `ZodEnum`\<\[`"government_id"`, `"biometric_face"`, `"biometric_fingerprint"`, `"corporate_registry"`, `"trade_license"`, `"export_permit"`, `"origin_certificate"`, `"lab_assay"`, `"insurance_bond"`, `"bank_guarantee"`, `"shipping_manifest"`\]\>; \}, `"strip"`, `ZodTypeAny`, \{ `hash`: `string`; `metadata?`: `Record`\<`string`, `unknown`\>; `timestamp`: `number`; `type`: `"government_id"` \| `"biometric_face"` \| `"biometric_fingerprint"` \| `"corporate_registry"` \| `"sanctions_screening"` \| `"site_audit"` \| `"assay_report"` \| `"photo_evidence"` \| `"gps_location"` \| `"document_hash"` \| `"witness_attestation"` \| `"trade_license"` \| `"export_permit"` \| `"origin_certificate"` \| `"lab_assay"` \| `"insurance_bond"` \| `"bank_guarantee"` \| `"shipping_manifest"` \| `"customs_declaration"` \| `"warehouse_receipt"` \| `"quality_certificate"` \| `"chain_of_custody"` \| `"environmental_audit"` \| `"social_audit"`; \}, \{ `hash`: `string`; `metadata?`: `Record`\<`string`, `unknown`\>; `timestamp`: `number`; `type`: `"government_id"` \| `"biometric_face"` \| `"biometric_fingerprint"` \| `"corporate_registry"` \| `"sanctions_screening"` \| `"site_audit"` \| `"assay_report"` \| `"photo_evidence"` \| `"gps_location"` \| `"document_hash"` \| `"witness_attestation"` \| `"trade_license"` \| `"export_permit"` \| `"origin_certificate"` \| `"lab_assay"` \| `"insurance_bond"` \| `"bank_guarantee"` \| `"shipping_manifest"` \| `"customs_declaration"` \| `"warehouse_receipt"` \| `"quality_certificate"` \| `"chain_of_custody"` \| `"environmental_audit"` \| `"social_audit"`; \}\>
+
+Defined in: [03-platform/packages/verification/03-platform/src/types/schemas/entities.ts:106](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/verification/03-platform/src/types/schemas/entities.ts#L106)

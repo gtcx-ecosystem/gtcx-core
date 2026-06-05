@@ -1,0 +1,91 @@
+{
+  "schema": "gtcx.boutProgress.v1",
+  "repo": "exploration-os",
+  "normativeDoc": "gtcx-core/01-docs/04-ops/agent-bout-progress-gauge.md",
+  "antiDrift": "Repo scorecard 9.x ≠ buyer S3. Separate A/B/C in every standup.",
+  "dimensions": {
+    "engineering": {
+      "id": "A",
+      "label": "Repo engineering",
+      "current": 8.5,
+      "ceiling": 10,
+      "source": "01-docs/05-audit/repo-scorecard.md"
+    },
+    "workflow": {
+      "id": "B",
+      "label": "W1 pilot workflow (assess → SIR → finance)",
+      "current": 6.1,
+      "ceiling": 10,
+      "percent": 61,
+      "source": "01-docs/05-audit/end-to-end-workflow-assessment-2026-06-01.md"
+    },
+    "gtmBuyer": {
+      "id": "C",
+      "label": "GTM buyer stage (mobile-v2)",
+      "current": 5.5,
+      "ceiling": 10,
+      "buyerStage": "S2-partial",
+      "source": "01-docs/04-ops/production-readiness.md + /gtm assessment"
+    }
+  },
+  "weights": {
+    "engineering": 0.2,
+    "workflow": 0.5,
+    "gtmBuyer": 0.3
+  },
+  "tasks": [
+    {
+      "id": "EOS-UX-012",
+      "priority": "P1",
+      "repo": "exploration-os",
+      "title": "Intelligence summary — verify Evento metric strip",
+      "primaryFiles": [
+        "mobile-v2/components/intelligence/SummaryTab.tsx",
+        "mobile-v2/components/intelligence/IntelligenceMetricStrip.tsx"
+      ],
+      "doneWhen": "SummaryTab uses IntelligenceMetricStrip; no duplicate SmallCircleCard metric row",
+      "gtmLever": "B verify/close (+0.1)",
+      "boutDelta": { "workflow": 0.1 },
+      "traceability": "F-12 / W1 assess"
+    },
+    {
+      "id": "EOS-UX-052",
+      "priority": "P1",
+      "repo": "exploration-os",
+      "title": "Marketplace product-detail M8 body density",
+      "primaryFiles": [
+        "mobile-v2/app/screens/product-detail.tsx",
+        "mobile-v2/components/marketplace/EquipmentMetricStrip.tsx"
+      ],
+      "doneWhen": "Metric strip + MultiaFeatureRow blocks + sticky footer; parity with multia-main M8",
+      "gtmLever": "B +0.4 (pilot demo credibility)",
+      "boutDelta": { "workflow": 0.4 },
+      "traceability": "F-52 / W1"
+    },
+    {
+      "id": "EOS-UX-003",
+      "priority": "P2",
+      "repo": "exploration-os",
+      "title": "Onboarding permission screens — PermissionGateLayout",
+      "primaryFiles": [
+        "mobile-v2/app/screens/location-permission.tsx",
+        "mobile-v2/app/screens/notification-permission.tsx"
+      ],
+      "doneWhen": "Both use PermissionGateLayout + i18n + a11y labels",
+      "gtmLever": "B first-run trust",
+      "boutDelta": { "workflow": 0.2 },
+      "traceability": "F-01 / W3"
+    },
+    {
+      "id": "EOS-OPS-001",
+      "priority": "P3",
+      "repo": "gtcx-agentic",
+      "title": "Push exploration-os local commits",
+      "primaryFiles": ["03-platform/scripts/ecosystem/push-all-repos.mjs"],
+      "doneWhen": "exploration-os branch not ahead-only; dry-run clean",
+      "gtmLever": "Ops — reduces deploy risk; C unchanged",
+      "boutDelta": { "engineering": 0.05 },
+      "command": "node 03-platform/scripts/ecosystem/push-all-repos.mjs --dry-run"
+    }
+  ]
+}

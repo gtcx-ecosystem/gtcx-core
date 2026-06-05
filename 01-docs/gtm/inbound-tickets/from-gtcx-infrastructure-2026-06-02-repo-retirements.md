@@ -1,0 +1,50 @@
+---
+title: 'Inbound — ecosystem repo retirements (infra ADR-012)'
+status: 'current'
+date: '2026-06-02'
+owner: 'gtcx-core'
+tags: ['gtm', 'cross-repo', 'gtcx-infrastructure', 'ecosystem']
+---
+
+# Inbound — gtcx-infrastructure (2026-06-02)
+
+**Source:** [`gtcx-infrastructure/01-docs/architecture/decisions/ADR-012-deprecate-gtcx-core12-gtcx-amis.md`](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/01-docs/architecture/decisions/ADR-012-deprecate-gtcx-core12-gtcx-amis.md) (repo retirement ADR — not WorkProof ADR-012 in this repo).
+
+**Ask for gtcx-core:** Confirm no published docs, examples, or consumer guides still point at deleted GitHub repos; keep npm / package identity aligned with `sensei-ai` and `compliance-os` only.
+
+## Deletions completed
+
+| Repo                           | Deleted    | Superseded by                        | gtcx-core action |
+| ------------------------------ | ---------- | ------------------------------------ | ---------------- |
+| `gtcx-core12`                  | 2026-06-01 | `compliance-os` → `services/core12/` | None required    |
+| `gtcx-amis`                    | 2026-06-01 | `sensei-ai`                          | None required    |
+| `gtcx-complianceos`            | 2026-06-02 | `compliance-os`                      | None required    |
+| `sensei-ai-docs-*` (3 mirrors) | 2026-06-01 | `sensei-ai`                          | N/A              |
+| `agx-demo1`, `sgx-demo`        | 2026-06-01 | —                                    | N/A              |
+
+## Infrastructure ADR checklist (gtcx-core slice)
+
+| #   | Item                                                                                                                                                              | Status                                                                 |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| 1   | Grep `gtcx-core12`, `gtcx-amis`, `sensei-ai-docs` in `01-docs/`, `03-platform/packages/`, README                                                                  | ✅ Clean (2026-06-02)                                                  |
+| 2   | Downstream integration doc lists live consumers only                                                                                                              | ✅ See [07-downstream-integration.md](../07-downstream-integration.md) |
+| 3   | npm provenance guide does not cite deleted repos as publish sources                                                                                               | ✅ [15-slsa-provenance-guide.md](../15-slsa-provenance-guide.md)       |
+| 4   | Trust portal / package names remain `@gtcx/*` from **this** repo                                                                                                  | ✅ No rename to `gtcx-amis`                                            |
+| 5   | Cross-link ecosystem vision → `gtcx-docs` [retired-repositories](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/reference/retired-repositories.md) | Optional one-liner in GTM README                                       |
+
+## Pending (ecosystem — not gtcx-core blockers)
+
+| Item                        | Owner     | Tracker                                                                                                                                                            |
+| --------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Notify `#engineering` Slack | infra ADR | Open in [infra ADR-012](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/01-docs/architecture/decisions/ADR-012-deprecate-gtcx-core12-gtcx-amis.md) |
+
+## Backups
+
+`/Users/amanianai/Sites/gtcx-ecosystem/_local-backups/2026-06-01-retired-repos/` — all retired-repo bundles; copies on Desktop and iCloud (2026-06-02).
+
+## Related in gtcx-core
+
+| Doc                                                                           | Note                                              |
+| ----------------------------------------------------------------------------- | ------------------------------------------------- |
+| [14-adr-012-ecosystem-integration.md](../14-adr-012-ecosystem-integration.md) | **WorkProof** predicate ADR-012 — different topic |
+| [07-downstream-integration.md](../07-downstream-integration.md)               | npm provenance pins for ecosystem consumers       |

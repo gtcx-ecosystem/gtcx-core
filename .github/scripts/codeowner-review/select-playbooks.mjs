@@ -7,7 +7,7 @@
  *
  * Reads from stdin if no args. Outputs JSON: { playbooks: ["crypto", ...], filesReviewed: [...] }.
  *
- * Path-prefix rules match `docs/agents/governance/review-prompt.md` § Playbook Selection Rules.
+ * Path-prefix rules match `01-docs/01-agents/governance/review-prompt.md` § Playbook Selection Rules.
  */
 
 import fs from 'node:fs';
@@ -16,19 +16,24 @@ import path from 'node:path';
 const PLAYBOOK_RULES = [
   {
     name: 'crypto',
-    prefixes: ['packages/crypto/', 'packages/crypto-native/', 'rust/gtcx-crypto/', 'rust/gtcx-zkp/'],
+    prefixes: [
+      '03-platform/packages/crypto/',
+      '03-platform/packages/crypto-native/',
+      'rust/gtcx-crypto/',
+      'rust/gtcx-zkp/',
+    ],
   },
   {
     name: 'security',
-    prefixes: ['packages/security/', 'packages/identity/'],
+    prefixes: ['03-platform/packages/security/', '03-platform/packages/identity/'],
   },
   {
     name: 'verification',
-    prefixes: ['packages/verification/', 'packages/workproof/'],
+    prefixes: ['03-platform/packages/verification/', '03-platform/packages/workproof/'],
   },
   {
     name: 'ci',
-    prefixes: ['.github/workflows/', 'tools/check-'],
+    prefixes: ['.github/workflows/', '03-platform/tools/check-'],
   },
   {
     name: 'evidence',
@@ -69,7 +74,7 @@ function selectPlaybooks(changedFiles) {
 function loadPlaybook(name) {
   const playbookPath = path.join(
     process.cwd(),
-    'docs/agents/governance/review-playbooks',
+    '01-docs/01-agents/governance/review-playbooks',
     `${name}.md`
   );
   // ci and evidence playbooks ship in Sprint 3+ per README; tolerate absence

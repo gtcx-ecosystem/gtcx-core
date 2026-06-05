@@ -14,26 +14,26 @@ focus: 'OI-X02 witness closure — Class S wall'
 
 ## Completed this session
 
-| Item                         | Evidence                                                                                                                                              |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OI-X02 witness close         | [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](../../docs/operations/coordination/from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md) |
-| OPS-AUDIT-FM                 | **done** — `pnpm docs:check-frontmatter` 302/302 exit 0                                                                                               |
-| Tier-5 + remaining-work sync | OI-X02 **done**; EXT-INF-002 outbound-filed; CORE-004 ceremony-pending                                                                                |
-| Launch focus                 | `.baseline/launch-focus.json` witness count 0                                                                                                         |
+| Item                         | Evidence                                                                                                                                             |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OI-X02 witness close         | [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](../../01-docs/04-ops/coordination/from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md) |
+| OPS-AUDIT-FM                 | **done** — `pnpm docs:check-frontmatter` 302/302 exit 0                                                                                              |
+| Tier-5 + remaining-work sync | OI-X02 **done**; EXT-INF-002 outbound-filed; CORE-004 ceremony-pending                                                                               |
+| Launch focus                 | `.baseline/launch-focus.json` witness count 0                                                                                                        |
 
 ## Prior session (shipped on main)
 
-| Item                  | Evidence                                                       |
-| --------------------- | -------------------------------------------------------------- |
-| LAUNCH-PLAN-01        | **done** — `pnpm agent:reconcile-launch` exit 0                |
-| LAUNCH-PLAN-02        | **done** — execution-roadmap refresh                           |
-| LAUNCH-PLAN-03        | **done** — bridge Latest row                                   |
-| LAUNCH-PLAN-04        | **done** — OI-X02 outbound + inbound ack closed                |
-| LAUNCH-PLAN-05        | **done** — `pnpm readiness:lanes:check` exit 0                 |
-| OPS-AGENT-GIT-001     | `docs/operations/agent-git-workflow.md`, `pnpm agent:git-push` |
-| FA-S6-02 vendor pack  | 22 artifacts, `pnpm vendor-evidence:verify-manifest` exit 0    |
-| Infra rollup outbound | `to-gtcx-infrastructure-open-acks-rollup-2026-06-07.md`        |
-| Ecosystem push shims  | gtcx-agentic `ecosystem:git-push`, cursor permissions rollout  |
+| Item                  | Evidence                                                      |
+| --------------------- | ------------------------------------------------------------- |
+| LAUNCH-PLAN-01        | **done** — `pnpm agent:reconcile-launch` exit 0               |
+| LAUNCH-PLAN-02        | **done** — execution-roadmap refresh                          |
+| LAUNCH-PLAN-03        | **done** — bridge Latest row                                  |
+| LAUNCH-PLAN-04        | **done** — OI-X02 outbound + inbound ack closed               |
+| LAUNCH-PLAN-05        | **done** — `pnpm readiness:lanes:check` exit 0                |
+| OPS-AGENT-GIT-001     | `01-docs/04-ops/agent-git-workflow.md`, `pnpm agent:git-push` |
+| FA-S6-02 vendor pack  | 22 artifacts, `pnpm vendor-evidence:verify-manifest` exit 0   |
+| Infra rollup outbound | `to-gtcx-infrastructure-open-acks-rollup-2026-06-07.md`       |
+| Ecosystem push shims  | gtcx-agentic `ecosystem:git-push`, cursor permissions rollout |
 
 ## Open (Class S — human / owner)
 

@@ -35,6 +35,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^21.0.2
         version: 21.0.2
+      '@gtcx/eslint-config':
+        specifier: workspace:*
+        version: link:03-platform/packages/config/eslint
       '@multiformats/multiaddr':
         specifier: 12.5.1
         version: 12.5.1
@@ -81,7 +84,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/ai:
+  03-platform/packages/ai:
     dependencies:
       '@gtcx/types':
         specifier: workspace:*
@@ -106,7 +109,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.27.2)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/ai-eval:
+  03-platform/packages/ai-eval:
     dependencies:
       '@gtcx/types':
         specifier: workspace:*
@@ -134,7 +137,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/api-client:
+  03-platform/packages/api-client:
     dependencies:
       '@gtcx/crypto':
         specifier: workspace:*
@@ -168,7 +171,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/config/eslint:
+  03-platform/packages/config/eslint:
     dependencies:
       eslint:
         specifier: ^10.0.0
@@ -183,7 +186,7 @@ importers:
         specifier: ^8.60.1
         version: 8.60.1(eslint@10.4.1(jiti@2.6.1))(typescript@6.0.3)
 
-  packages/config/jurisdiction:
+  03-platform/packages/config/jurisdiction:
     dependencies:
       zod:
         specifier: 4.4.3
@@ -208,15 +211,15 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/config/tsup:
+  03-platform/packages/config/tsup:
     dependencies:
       tsup:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)
 
-  packages/config/typescript: {}
+  03-platform/packages/config/typescript: {}
 
-  packages/connectivity:
+  03-platform/packages/connectivity:
     dependencies:
       '@gtcx/api-client':
         specifier: workspace:*
@@ -244,7 +247,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/crypto:
+  03-platform/packages/crypto:
     dependencies:
       '@gtcx/ai':
         specifier: workspace:*
@@ -282,7 +285,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/crypto-native:
+  03-platform/packages/crypto-native:
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -303,7 +306,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/domain:
+  03-platform/packages/domain:
     dependencies:
       '@gtcx/events':
         specifier: workspace:*
@@ -337,7 +340,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/eap:
+  03-platform/packages/eap:
     dependencies:
       '@aws-sdk/client-secrets-manager':
         specifier: ^3.1060.0
@@ -365,7 +368,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/events:
+  03-platform/packages/events:
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -383,7 +386,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/identity:
+  03-platform/packages/identity:
     dependencies:
       '@gtcx/crypto':
         specifier: workspace:*
@@ -414,7 +417,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/logging:
+  03-platform/packages/logging:
     devDependencies:
       '@gtcx/ai':
         specifier: workspace:*
@@ -438,7 +441,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/network:
+  03-platform/packages/network:
     dependencies:
       '@chainsafe/libp2p-gossipsub':
         specifier: 14.1.2
@@ -490,7 +493,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/resilience:
+  03-platform/packages/resilience:
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -511,7 +514,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/runtime:
+  03-platform/packages/runtime:
     dependencies:
       '@gtcx/api-client':
         specifier: workspace:*
@@ -548,7 +551,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/schemas:
+  03-platform/packages/schemas:
     dependencies:
       '@gtcx/types':
         specifier: workspace:*
@@ -576,7 +579,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/security:
+  03-platform/packages/security:
     dependencies:
       '@gtcx/crypto':
         specifier: workspace:*
@@ -604,7 +607,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/services:
+  03-platform/packages/services:
     dependencies:
       '@gtcx/crypto':
         specifier: workspace:*
@@ -638,7 +641,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/sync:
+  03-platform/packages/sync:
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -659,7 +662,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/telemetry:
+  03-platform/packages/telemetry:
     dependencies:
       '@gtcx/logging':
         specifier: workspace:*
@@ -687,7 +690,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/types:
+  03-platform/packages/types:
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -708,7 +711,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/utils:
+  03-platform/packages/utils:
     dependencies:
       zod:
         specifier: 4.4.3
@@ -733,7 +736,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/verification:
+  03-platform/packages/verification:
     dependencies:
       '@gtcx/ai':
         specifier: workspace:*
@@ -767,7 +770,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/workproof:
+  03-platform/packages/workproof:
     dependencies:
       '@gtcx/crypto':
         specifier: workspace:*
@@ -801,7 +804,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  packages/zkp-kat-vectors:
+  03-platform/packages/zkp-kat-vectors:
     devDependencies:
       '@gtcx/tsup-config':
         specifier: workspace:*
@@ -819,7 +822,7 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))
 
-  tests/integration:
+  03-platform/tests/integration:
     devDependencies:
       '@gtcx/api-client':
         specifier: workspace:*

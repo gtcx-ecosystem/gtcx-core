@@ -1,6 +1,6 @@
 # AI CODEOWNER Review Action — Prototype
 
-This directory contains the operational implementation of the dual-AI CODEOWNER pattern documented in [`docs/agents/governance/`](../../../docs/agents/governance/).
+This directory contains the operational implementation of the dual-AI CODEOWNER pattern documented in [`01-docs/01-agents/governance/`](../../../01-docs/01-agents/governance/).
 
 ## What it does
 
@@ -8,7 +8,7 @@ On every pull request, the workflow at [`.github/workflows/ai-codeowner-review.y
 
 1. Detects which files changed in the PR
 2. Selects applicable playbooks via [`select-playbooks.mjs`](./select-playbooks.mjs) — path-prefix matching against `crypto/`, `security/`, `verification/`, `ci/`, `evidence/`
-3. Loads the system prompt from `docs/agents/governance/review-prompt.md` (the seven hard constraints, including never-approve)
+3. Loads the system prompt from `01-docs/01-agents/governance/review-prompt.md` (the seven hard constraints, including never-approve)
 4. Calls Anthropic Claude API with: prompt + selected playbooks + unified diff
 5. Validates the JSON response. **Hard-rejects any `decision=APPROVE`** as a security event (the bot is structurally forbidden from approving).
 6. Posts a structured PR review:
@@ -75,14 +75,14 @@ GITHUB_EVENT_PATH=/tmp/event.json \
 GITHUB_REPOSITORY=gtcx-ecosystem/gtcx-core \
 GITHUB_TOKEN=<token> \
 ANTHROPIC_API_KEY=<key> \
-node .github/scripts/codeowner-review/run.mjs
+node .github/03-platform/scripts/codeowner-review/run.mjs
 ```
 
 The selector can be tested without API calls:
 
 ```bash
-echo "packages/crypto/src/zkp.ts
-packages/security/src/audit/events.ts" | node .github/scripts/codeowner-review/select-playbooks.mjs | jq '.playbooks'
+echo "03-platform/packages/crypto/03-platform/src/zkp.ts
+03-platform/packages/security/03-platform/src/audit/events.ts" | node .github/03-platform/scripts/codeowner-review/select-playbooks.mjs | jq '.playbooks'
 # → ["crypto", "security"]
 ```
 
@@ -90,7 +90,7 @@ packages/security/src/audit/events.ts" | node .github/scripts/codeowner-review/s
 
 This is a prototype hosted in `gtcx-core` for the first 30+ PRs. Once the track record exists, extract to `gtcx-ecosystem/gtcx-codeowner-action` per the audit's Sprint 5 plan:
 
-1. Move `run.mjs` and `select-playbooks.mjs` to the new repo's `src/`
+1. Move `run.mjs` and `select-playbooks.mjs` to the new repo's `03-platform/src/`
 2. Add `action.yml` with input/output declarations
 3. Add `dist/index.js` bundle (esbuild) so consumers don't need to clone
 4. Update consumers (`gtcx-core` and downstream repos) to use `uses: gtcx-ecosystem/gtcx-codeowner-action@v1`
@@ -107,7 +107,7 @@ The MVP is intentionally limited:
 
 The runner enforces never-approve in three places:
 
-1. The schema (`docs/agents/governance/review-schema.json`) restricts `decision` to `["COMMENT", "REQUEST_CHANGES"]`
+1. The schema (`01-docs/01-agents/governance/review-schema.json`) restricts `decision` to `["COMMENT", "REQUEST_CHANGES"]`
 2. The prompt's first hard constraint forbids `APPROVE` output
 3. **`run.mjs:parseAndValidate()`** explicitly rejects any `decision=APPROVE` as a security event, even if the model emits it (defense in depth)
 
@@ -122,11 +122,11 @@ When the AI pipeline is broken or producing pathological output:
 3. Two human CODEOWNERS review instead of human + AI
 4. Add a retrospective entry to `quality/incidents/<id>/bypass-log.md` within 7 days
 
-Full procedure in [`SECURITY-INCIDENT.md`](../../../docs/security/security-incident-runbook.md) § AI Review Bypass.
+Full procedure in [`SECURITY-INCIDENT.md`](../../../01-docs/09-security/security-incident-runbook.md) § AI Review Bypass.
 
 ## See also
 
-- [`docs/agents/governance/review-prompt.md`](../../../docs/agents/governance/review-prompt.md) — system prompt with seven hard constraints
-- [`docs/agents/governance/review-schema.json`](../../../docs/agents/governance/review-schema.json) — output schema with never-approve enum
-- [`docs/agents/governance/review-playbooks/`](../../../docs/agents/governance/review-playbooks/) — three path-specific playbooks
-- [`SECURITY-INCIDENT.md`](../../../docs/security/security-incident-runbook.md) — bypass procedure, response runbook
+- [`01-docs/01-agents/governance/review-prompt.md`](../../../01-docs/01-agents/governance/review-prompt.md) — system prompt with seven hard constraints
+- [`01-docs/01-agents/governance/review-schema.json`](../../../01-docs/01-agents/governance/review-schema.json) — output schema with never-approve enum
+- [`01-docs/01-agents/governance/review-playbooks/`](../../../01-docs/01-agents/governance/review-playbooks/) — three path-specific playbooks
+- [`SECURITY-INCIDENT.md`](../../../01-docs/09-security/security-incident-runbook.md) — bypass procedure, response runbook

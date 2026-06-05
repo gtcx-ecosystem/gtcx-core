@@ -6,7 +6,7 @@ alwaysApply: true
 
 # Agent git workflow (gtcx-core)
 
-Read: `docs/operations/agent-git-workflow.md`
+Read: `01-docs/04-ops/agent-git-workflow.md`
 
 ## Defaults (never ask operator)
 

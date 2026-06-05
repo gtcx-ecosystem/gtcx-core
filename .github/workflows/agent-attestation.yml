@@ -4,15 +4,15 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'docs/agents/**'
+      - '01-docs/01-agents/**'
       - '.agent/**'
       - 'AGENTS.md'
-      - 'tools/check-agent*.mjs'
-      - 'tools/check-hub-protocol*.mjs'
-      - 'tools/check-foundation-protocol*.mjs'
-      - 'scripts/agent-*.mjs'
-      - 'scripts/check-agent*.mjs'
-      - 'scripts/check-coordination*.mjs'
+      - '03-platform/tools/check-agent*.mjs'
+      - '03-platform/tools/check-hub-protocol*.mjs'
+      - '03-platform/tools/check-foundation-protocol*.mjs'
+      - '03-platform/scripts/agent-*.mjs'
+      - '03-platform/scripts/check-agent*.mjs'
+      - '03-platform/scripts/check-coordination*.mjs'
 
 jobs:
   attestation:

@@ -1,6 +1,6 @@
 {
   "schema": "gtcx.launchFocus.v1",
-  "normativeDoc": "docs/operations/agent-launch-focus.md",
+  "normativeDoc": "01-docs/04-ops/agent-launch-focus.md",
   "statePath": ".baseline/launch-focus.json",
   "provisionedAt": "2026-06-05T04:07:21.139Z",
   "repo": "gtcx-core",
@@ -12,15 +12,15 @@
       "library": "GR-T1",
       "integratorPilot": "GR-T2-partial",
       "ecosystemSovereign": "below-GR-T2",
-      "index": "docs/audit/gtm-readiness-2026-06-05.md"
+      "index": "01-docs/05-audit/gtm-readiness-2026-06-05.md"
     }
   },
   "sessionMode": "witness",
   "activePhase": {
     "id": "launch-gtm",
     "label": "Launch downstream apps — foundation → GR-T2+ sovereign GTM",
-    "executionRoadmap": "docs/audit/execution-roadmap.md",
-    "gtmIndex": "docs/audit/gtm-readiness-2026-06-05.md"
+    "executionRoadmap": "01-docs/05-audit/execution-roadmap.md",
+    "gtmIndex": "01-docs/05-audit/gtm-readiness-2026-06-05.md"
   },
   "workSet": {
     "implement": [],
@@ -58,11 +58,11 @@
     "human": 3
   },
   "sources": [
-    "docs/audit/execution-roadmap.md",
-    "docs/operations/tier-5-workplan-2026-06.md",
-    "docs/operations/coordination/remaining-cross-repo-work-2026-06-02.md",
-    "docs/audit/latest.json",
-    "docs/gtm/gtm-reality-check-2026-06-02.md"
+    "01-docs/05-audit/execution-roadmap.md",
+    "01-docs/04-ops/tier-5-workplan-2026-06.md",
+    "01-docs/04-ops/coordination/remaining-cross-repo-work-2026-06-02.md",
+    "01-docs/05-audit/latest.json",
+    "01-docs/08-gtm/gtm-reality-check-2026-06-02.md"
   ],
   "forbidden": [
     "Ask operator to run forensic audit before starting work",
@@ -75,6 +75,6 @@
     "Goal: finish foundation + coordination so sibling repos can ship apps and GTM can close deals.",
     "Session mode WITNESS — human gates only; maintain indexes and outbound acks.",
     "Full work set is in launch-focus.json — not a single story.",
-    "Normative: docs/operations/agent-launch-focus.md"
+    "Normative: 01-docs/04-ops/agent-launch-focus.md"
   ]
 }

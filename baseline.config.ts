@@ -1,10 +1,10 @@
 export default {
   knowledge: {
-    paths: ['docs/'],
+    paths: ['01-docs/'],
     exclude: [
-      'docs/audit/_historical/**',
-      'docs/archive/**',
-      'docs/templates/**',
+      '01-docs/05-audit/_historical/**',
+      '01-docs/archive/**',
+      '01-docs/templates/**',
       '_archive/**',
       '_delete/**',
       '**/node_modules/**',

@@ -1,0 +1,53 @@
+# Jekyll config for local preview parity with GitBook rendering.
+#
+# Live docs are published via GitBook sync:
+# https://gtcx-protocol.gitbook.io/gtcx-open-source/
+#
+# See 01-docs/04-ops/trust-portal-hosting.md for GitBook setup.
+
+title: gtcx-core Trust Portal
+description: >-
+  Cryptographic foundation library for the GTCX ecosystem.
+  Trust portal, security evidence, audit history, and engagement readiness.
+url: https://gtcx-protocol.gitbook.io
+baseurl: /gtcx-open-source
+repository: gtcx-ecosystem/gtcx-core
+
+theme: minima
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-titles-from-headings
+  - jekyll-default-layout
+  - jekyll-readme-index
+
+relative_links:
+  enabled: true
+  collections: true
+
+optional_front_matter:
+  remove_originals: true
+
+titles_from_headings:
+  enabled: true
+  strip_title: true
+  collections: true
+
+readme_index:
+  enabled: true
+  remove_originals: false
+
+defaults:
+  - scope:
+      path: ''
+    values:
+      layout: page
+
+# Excluded: build artifacts, Jekyll cache, the empty historical bucket
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .jekyll-cache/
+  - node_modules/

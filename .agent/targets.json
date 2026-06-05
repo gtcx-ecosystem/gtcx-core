@@ -30,31 +30,7 @@
       ]
     },
     {
-      "path": "CLAUDE.md",
-      "partials": [
-        "universal-agent-behavior.md",
-        "persona-pointer.md",
-        "protocol-26-proceed-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
-        "base.md",
-        "readiness-pointer.md",
-        "audit-pointer.md",
-        "credentials-pointer.md",
-        "execute-roadmap-pointer.md",
-        "execution-bout-pointer.md",
-        "bout-progress-pointer.md",
-        "launch-focus-pointer.md",
-        "coordination-pointer.md",
-        "protocols-enforcement-pointer.md",
-        "claude.partial.md",
-        "agent-status-update-pointer.md",
-        "ecosystem-learning-pointer.md"
-      ]
-    },
-    {
-      "path": "GEMINI.md",
+      "path": ".claude/CLAUDE.md",
       "partials": [
         "universal-agent-behavior.md",
         "persona-pointer.md",
@@ -79,82 +55,7 @@
       "createIfMissing": true
     },
     {
-      "path": "KIMI.md",
-      "partials": [
-        "universal-agent-behavior.md",
-        "persona-pointer.md",
-        "protocol-26-proceed-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
-        "base.md",
-        "readiness-pointer.md",
-        "audit-pointer.md",
-        "credentials-pointer.md",
-        "execute-roadmap-pointer.md",
-        "execution-bout-pointer.md",
-        "bout-progress-pointer.md",
-        "launch-focus-pointer.md",
-        "coordination-pointer.md",
-        "protocols-enforcement-pointer.md",
-        "claude.partial.md",
-        "agent-status-update-pointer.md",
-        "ecosystem-learning-pointer.md"
-      ],
-      "createIfMissing": true
-    },
-    {
-      "path": "CODEX.md",
-      "partials": [
-        "universal-agent-behavior.md",
-        "persona-pointer.md",
-        "protocol-26-proceed-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
-        "base.md",
-        "readiness-pointer.md",
-        "audit-pointer.md",
-        "credentials-pointer.md",
-        "execute-roadmap-pointer.md",
-        "execution-bout-pointer.md",
-        "bout-progress-pointer.md",
-        "launch-focus-pointer.md",
-        "coordination-pointer.md",
-        "protocols-enforcement-pointer.md",
-        "claude.partial.md",
-        "agent-status-update-pointer.md",
-        "ecosystem-learning-pointer.md"
-      ],
-      "createIfMissing": true
-    },
-    {
-      "path": ".cursor/rules/main.mdc",
-      "partials": [
-        "universal-agent-behavior.md",
-        "persona-pointer.md",
-        "protocol-26-proceed-pointer.md",
-        "protocol-27-execution-pointer.md",
-        "git-workflow-pointer.md",
-        "session-start-pointer.md",
-        "base.md",
-        "readiness-pointer.md",
-        "audit-pointer.md",
-        "credentials-pointer.md",
-        "execute-roadmap-pointer.md",
-        "execution-bout-pointer.md",
-        "bout-progress-pointer.md",
-        "launch-focus-pointer.md",
-        "coordination-pointer.md",
-        "protocols-enforcement-pointer.md",
-        "claude.partial.md",
-        "agent-status-update-pointer.md",
-        "ecosystem-learning-pointer.md"
-      ],
-      "createIfMissing": true
-    },
-    {
-      "path": "CONVENTIONS.md",
+      "path": ".gemini/GEMINI.md",
       "partials": [
         "universal-agent-behavior.md",
         "persona-pointer.md",
@@ -196,6 +97,56 @@
         "bout-progress-pointer.md",
         "launch-focus-pointer.md",
         "coordination-pointer.md",
+        "claude.partial.md",
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
+      ],
+      "createIfMissing": true
+    },
+    {
+      "path": ".cursor/rules/main.mdc",
+      "partials": [
+        "universal-agent-behavior.md",
+        "persona-pointer.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "git-workflow-pointer.md",
+        "session-start-pointer.md",
+        "base.md",
+        "readiness-pointer.md",
+        "audit-pointer.md",
+        "credentials-pointer.md",
+        "execute-roadmap-pointer.md",
+        "execution-bout-pointer.md",
+        "bout-progress-pointer.md",
+        "launch-focus-pointer.md",
+        "coordination-pointer.md",
+        "protocols-enforcement-pointer.md",
+        "claude.partial.md",
+        "agent-status-update-pointer.md",
+        "ecosystem-learning-pointer.md"
+      ],
+      "createIfMissing": true
+    },
+    {
+      "path": "01-docs/conventions.md",
+      "partials": [
+        "universal-agent-behavior.md",
+        "persona-pointer.md",
+        "protocol-26-proceed-pointer.md",
+        "protocol-27-execution-pointer.md",
+        "git-workflow-pointer.md",
+        "session-start-pointer.md",
+        "base.md",
+        "readiness-pointer.md",
+        "audit-pointer.md",
+        "credentials-pointer.md",
+        "execute-roadmap-pointer.md",
+        "execution-bout-pointer.md",
+        "bout-progress-pointer.md",
+        "launch-focus-pointer.md",
+        "coordination-pointer.md",
+        "protocols-enforcement-pointer.md",
         "claude.partial.md",
         "agent-status-update-pointer.md",
         "ecosystem-learning-pointer.md"

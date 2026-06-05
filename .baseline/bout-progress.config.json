@@ -1,7 +1,7 @@
 {
   "schema": "gtcx.boutProgress.v1",
   "repo": "gtcx-core",
-  "normativeDoc": "docs/operations/agent-bout-progress-gauge.md",
+  "normativeDoc": "01-docs/04-ops/agent-bout-progress-gauge.md",
   "antiDrift": "Engineering 9.5 ≠ buyer S3. GR-T tiers for library GTM; S0–S6 for deployable products.",
   "dimensions": {
     "engineering": {
@@ -9,7 +9,7 @@
       "label": "Repo engineering",
       "current": 9.5,
       "ceiling": 10,
-      "source": "docs/audit/latest.json → lanes.engineeringCompletenessQuality.readinessOutcome.completionAudit",
+      "source": "01-docs/05-audit/latest.json → lanes.engineeringCompletenessQuality.readinessOutcome.completionAudit",
       "autoFromLatestJson": "lanes.engineeringCompletenessQuality.readinessOutcome.completionAudit"
     },
     "gtmBuyer": {
@@ -20,7 +20,7 @@
       "buyerStage": "S2-partial",
       "buyerStageNote": "Library GR-T1 — downstream apps pilot; not sovereign GA",
       "gtmTier": "GR-T1",
-      "source": "docs/audit/gtm-readiness-2026-06-05.md"
+      "source": "01-docs/05-audit/gtm-readiness-2026-06-05.md"
     }
   },
   "weights": {
@@ -33,7 +33,7 @@
       "priority": "P2",
       "repo": "gtcx-core",
       "title": "Ops docs frontmatter + audit hygiene",
-      "primaryFiles": ["docs/operations/", "docs/audit/full-audit-2026-05-09.md"],
+      "primaryFiles": ["01-docs/04-ops/", "01-docs/05-audit/full-audit-2026-05-09.md"],
       "doneWhen": "pnpm docs:check-frontmatter exit 0",
       "gtmLever": "A +0.05 — defensible launch claims",
       "boutDelta": { "engineering": 0.05 },
@@ -59,7 +59,7 @@
       "priority": "P0",
       "repo": "gtcx-core",
       "title": "Design-partner LOI or regulator letter",
-      "primaryFiles": ["docs/audit/evidence/"],
+      "primaryFiles": ["01-docs/05-audit/evidence/"],
       "doneWhen": "Redacted LOI or regulator letter on file; witness in tier-5 index",
       "gtmLever": "Tier 5 commercial gate 5-C2; C +1.0",
       "boutDelta": { "gtmBuyer": 1.0 },

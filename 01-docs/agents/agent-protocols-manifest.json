@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 2,
+  "repo": "gtcx-core",
+  "hubRepo": "gtcx-docs",
+  "hubLocalPath": "../gtcx-docs",
+  "hubProtocolsIndex": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/protocols/README.md",
+  "institutionalStartup": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/institutional/agent-startup-protocol.md",
+  "enforceCommand": "pnpm agent:protocols:check",
+  "sessionStartCommand": "pnpm agent:session-start",
+  "hubDriftCommand": "pnpm agent:hub-drift:check",
+  "attestationCommand": "pnpm agent:attestation:check",
+  "universalInstructionsPath": "01-docs/04-ops/agent-universal-instructions.md",
+  "universalCheckCommand": "pnpm agent:universal:check",
+  "operatorDelegationForbidden": [
+    "in the repo you are working in",
+    "Refresh after hub changes",
+    "you should run",
+    "Say push if you want",
+    "if you want all",
+    "run these commands",
+    "then pnpm agent:sync in the",
+    "from your terminal",
+    "Should I commit",
+    "Want me to commit",
+    "commit or WIP",
+    "left as local WIP",
+    "ready to commit"
+  ],
+  "startupPhases": {
+    "5.4": "P22",
+    "5.5": "P24",
+    "5.6": "P26+P28",
+    "5.7": "P27"
+  },
+  "protocols": [
+    {
+      "id": "P19",
+      "slug": "19-agent-credential-access",
+      "title": "Agent Credential Access",
+      "status": "reference",
+      "startupPhase": null,
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/protocols/19-agent-credential-access/protocol.md",
+      "localPointer": ".agent/credentials-pointer.md"
+    },
+    {
+      "id": "P22",
+      "slug": "22-agent-work-selection",
+      "title": "Agent Work Selection",
+      "status": "established",
+      "startupPhase": "5.4",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/protocols/22-agent-work-selection/protocol.md",
+      "localManifest": "01-docs/04-ops/agent-work-selection.md",
+      "localBrief": "01-docs/04-ops/agent-protocol-22-brief.md",
+      "checkScript": "agent:work-selection:check"
+    },
+    {
+      "id": "P24",
+      "slug": "24-cross-repo-coordination",
+      "title": "Cross-Repo Coordination",
+      "status": "established",
+      "startupPhase": "5.5",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/protocols/24-cross-repo-coordination/protocol.md",
+      "localPointer": ".agent/coordination-pointer.md",
+      "localBridge": "01-docs/04-ops/coordination/cross-repo-agent-bridge.md",
+      "checkScript": "agent:coordination:check"
+    },
+    {
+      "id": "P26",
+      "slug": "26-agent-proceed-confirmation",
+      "title": "Agent Proceed Confirmation",
+      "status": "established",
+      "startupPhase": "5.6",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/protocols/26-agent-proceed-confirmation/protocol.md",
+      "localTemplate": "01-docs/04-ops/agent-proceed-brief-template.md",
+      "cursorRule": ".cursor/rules/protocol-26-agent-proceed-confirmation.mdc",
+      "forbiddenPatterns": [
+        "Your call",
+        "Two options",
+        "natural transition point",
+        "Which do you prefer",
+        "Do you want me to work on",
+        "Say push if you want",
+        "if you want all"
+      ]
+    },
+    {
+      "id": "P27",
+      "slug": "27-agent-execution-obligation",
+      "title": "Agent Execution Obligation",
+      "status": "established",
+      "startupPhase": "5.7",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/protocols/27-agent-execution-obligation/protocol.md",
+      "cursorRule": ".cursor/rules/protocol-27-agent-execution-obligation.mdc",
+      "forbiddenPatterns": [
+        "Verify locally:",
+        "please run locally",
+        "Run this in your terminal and share",
+        "Let me know when you've run",
+        "Focus the Cursor terminal",
+        "run these commands",
+        "run on your Mac",
+        "press a to open",
+        "press r to reload",
+        "Your call",
+        "Two options",
+        "natural transition point",
+        "Which do you prefer",
+        "Say push if you want",
+        "if you want all"
+      ]
+    },
+    {
+      "id": "P28",
+      "slug": "28-agent-authority-classification",
+      "title": "Agent Authority Classification",
+      "status": "established",
+      "startupPhase": "5.6",
+      "hubUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/protocols/28-agent-authority-classification/protocol.md",
+      "authorityClasses": ["S", "A", "R"]
+    }
+  ],
+  "foundationProtocols": [
+    {
+      "id": "P1",
+      "slug": "1-docs-structure",
+      "title": "Docs Structure",
+      "localGate": "docs:check-frontmatter"
+    },
+    { "id": "P2", "slug": "2-repo-setup", "title": "Repo Setup", "localGate": "ops:check" },
+    {
+      "id": "P3",
+      "slug": "3-naming-conventions",
+      "title": "Naming Conventions",
+      "localGate": "architecture:check"
+    },
+    {
+      "id": "P4",
+      "slug": "4-git-workflow",
+      "title": "Git Workflow",
+      "localPath": ".husky/commit-msg"
+    },
+    { "id": "P5", "slug": "5-code-standards", "title": "Code Standards", "localGate": "lint" },
+    { "id": "P6", "slug": "6-testing", "title": "Testing", "localGate": "test" },
+    { "id": "P7", "slug": "7-ci-cd", "title": "CI/CD", "localPath": ".github/workflows/ci.yml" },
+    { "id": "P8", "slug": "8-security", "title": "Security", "localGate": "security:secret-scan" },
+    {
+      "id": "P9",
+      "slug": "9-sop-governance",
+      "title": "SOP Governance",
+      "localGate": "quality:governance:check"
+    },
+    {
+      "id": "P10",
+      "slug": "10-enterprise-standards",
+      "title": "Enterprise Standards",
+      "localGate": "quality:governance:check"
+    },
+    {
+      "id": "P11",
+      "slug": "11-enterprise-governance",
+      "title": "Enterprise Governance",
+      "localGate": "quality:governance:check"
+    },
+    { "id": "P12", "slug": "12-monitoring", "title": "Monitoring", "optional": true },
+    {
+      "id": "P13",
+      "slug": "13-architecture-diagrams",
+      "title": "Architecture Diagrams",
+      "optional": true
+    },
+    {
+      "id": "P14",
+      "slug": "14-folder-hygiene",
+      "title": "Folder Hygiene",
+      "localGate": "check:workspace-root-cleanliness"
+    },
+    { "id": "P15", "slug": "15-repo-hygiene", "title": "Repo Hygiene", "localGate": "ops:check" },
+    {
+      "id": "P16",
+      "slug": "16-audit-standard",
+      "title": "Audit Standard",
+      "localGate": "readiness:lanes:check",
+      "localPath": "01-docs/01-agents/readiness-and-audit-lanes.md"
+    },
+    {
+      "id": "P17",
+      "slug": "17-specs-standard",
+      "title": "Specs Standard",
+      "localPath": "01-docs/specs"
+    },
+    {
+      "id": "P18",
+      "slug": "18-machine-readable-docs",
+      "title": "Machine-Readable Docs",
+      "localGate": "docs:check-frontmatter"
+    },
+    {
+      "id": "P19",
+      "slug": "19-agent-credential-access",
+      "title": "Agent Credential Access",
+      "localPointer": ".agent/credentials-pointer.md"
+    },
+    {
+      "id": "P20",
+      "slug": "20-surface-experience",
+      "title": "Surface Experience",
+      "hubOnly": true
+    },
+    {
+      "id": "P21",
+      "slug": "21-ux-documentation-ops",
+      "title": "UX Documentation Ops",
+      "hubOnly": true
+    }
+  ]
+}

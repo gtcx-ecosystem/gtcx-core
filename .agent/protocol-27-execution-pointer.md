@@ -2,10 +2,10 @@
 
 **You run commands.** Dev servers, gates, `adb`, and probes are agent-run — not operator checklists.
 
-| Resource   | Path                                                                            |
-| ---------- | ------------------------------------------------------------------------------- |
-| Hub spec   | `gtcx-docs/docs/governance/protocols/27-agent-execution-obligation/protocol.md` |
-| Local rule | `.cursor/rules/protocol-27-agent-execution-obligation.mdc`                      |
+| Resource   | Path                                                                               |
+| ---------- | ---------------------------------------------------------------------------------- |
+| Hub spec   | `gtcx-docs/01-docs/governance/protocols/27-agent-execution-obligation/protocol.md` |
+| Local rule | `.cursor/rules/protocol-27-agent-execution-obligation.mdc`                         |
 
 **Before asking the human to run anything:** D1 Shell → D2 background → D3 `pnpm agent:git-push` (node spawn) → D4 owner repo → D5 `pnpm --dir ../gtcx-agentic ecosystem:push-all` → D6 Permission Unblock Report.
 

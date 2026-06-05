@@ -18,7 +18,7 @@ Reconcile audits/strategy into a living execution plan **and implement stories**
 
 ## Output
 
-Update `docs/strategy/execution-roadmap.md` or `docs/audit/execution-roadmap.md` in **gtcx-core**, then implement stories.
+Update `01-docs/strategy/execution-roadmap.md` or `01-docs/05-audit/execution-roadmap.md` in **gtcx-core**, then implement stories.
 
 ## Rules
 

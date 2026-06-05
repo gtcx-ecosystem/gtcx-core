@@ -1,0 +1,150 @@
+---
+title: 'Budget Readiness Plan — $0 Path to 10/10'
+status: 'current'
+date: '2026-05-27'
+owner: 'gtcx-core'
+role: 'protocol-architect'
+agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
+trust_score: 60
+autonomy_level: 'permissioned'
+tier: 'standard'
+tags: ['documentation', 'gtm']
+review_cycle: 'on-change'
+---
+
+---
+
+title: '06 Budget Readiness Plan'
+status: 'current'
+date: '2026-05-17'
+owner: 'protocol-architect'
+role: 'protocol-architect'
+tier: 'standard'
+tags: ['docs']
+review_cycle: 'on-change'
+
+---
+
+# Budget Readiness Plan — $0 Path to 10/10
+
+> **Status:** Current
+> **Date:** 2026-05-10
+> **Owner:** Protocol Architect
+
+**Current score:** 8.9/10
+**Target:** 10/10 bank-grade readiness
+**Budget:** $0 in **this repo** for library evidence. **Ecosystem XC costs** (pen-test $8–15K regional, infra ~$800/mo testnet, legal) are budgeted in [gtcx-infrastructure Global South plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/01-docs/08-gtm/plans/global-south-10x-plan.md).
+
+**Alignment:** [16-ecosystem-gtm-alignment.md](./16-ecosystem-gtm-alignment.md)
+
+---
+
+## What's Done (8.6 → 8.9, completed 2026-05-25)
+
+| Item                                              | Score Impact | Commit    |
+| ------------------------------------------------- | ------------ | --------- |
+| Default secret redaction in traced operations     | +0.1         | `2c1e26a` |
+| fast-uri CVE override (audit clean)               | +0.05        | `2c1e26a` |
+| KPI metrics refresh (was 78 days stale)           | +0.05        | `2c1e26a` |
+| Exact-version pinning (7 production deps)         | +0.05        | `a7f9ea2` |
+| Verification coverage 83→89% branches (+33 tests) | +0.05        | `a7f9ea2` |
+| Key ceremony document (NIST SP 800-57)            | +0.1         | `3bfefb6` |
+| Attack tree — signing forgery (20 leaf nodes)     | +0.1         | `3bfefb6` |
+| GDPR assessment (zero-PII determination)          | +0.05        | `02a83c3` |
+| PCI-DSS zero-scope declaration                    | +0.05        | `02a83c3` |
+| SOX ITGC controls mapping                         | +0.05        | `02a83c3` |
+| 5 new cargo-fuzz targets                          | +0.1         | `02a83c3` |
+| Internal security assessment                      | +0.15        | `02a83c3` |
+| FIPS validation boundary statement                | +0.1         | `02a83c3` |
+
+## What's Done (8.9 → 8.9, completed 2026-05-27)
+
+| Item                                                | Score Impact | Commit    |
+| --------------------------------------------------- | ------------ | --------- |
+| 15 packages published to npm via workflow_dispatch  | +0.0 (ops)   | `30996c6` |
+| API surface check made resilient to stale baselines | +0.0 (ops)   | `4ab22ce` |
+| Frontmatter + link validation gates fixed in CI     | +0.0 (docs)  | `5691109` |
+| rustls-webpki RUSTSECs resolved (cargo audit clean) | +0.0 (sec)   | `6cf003b` |
+| Pen-test vendor shortlist (3 vendors evaluated)     | +0.0 (sec)   | `30996c6` |
+| Regulator email renders complete (4 markets)        | +0.0 (gtm)   | `30996c6` |
+| SLSA provenance root cause identified (org policy)  | +0.0 (sec)   | `1f4a21b` |
+
+## What's Done (library supply chain — 2026-06-01)
+
+| Item                             | Evidence                                                                                                                        |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| npm Sigstore 21/21 @ 3.1.4 train | Release [26778909174](https://github.com/gtcx-ecosystem/gtcx-core/actions/runs/26778909174); `pnpm provenance:check-npm:strict` |
+| Downstream npm pinning           | `gtcx-protocols`, `gtcx-infrastructure/replay-protection`                                                                       |
+
+---
+
+## What Remains (library vs ecosystem)
+
+### gtcx-core only ($0)
+
+See Tier 1–3 tables below (fuzz campaigns, npm scope housekeeping).
+
+### Ecosystem XC (not $0 — infrastructure-owned)
+
+| Item                                | Cost       | Owner            | Reference                                                                                                                                         |
+| ----------------------------------- | ---------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Regional pen-test (live stack)      | $8–15K     | GTM + infra      | EXT-INF-002; [pentest-scope-rfp](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/01-docs/08-gtm/regulatory/pentest-scope-rfp.md)  |
+| Testnet deploy + DR proof           | ~$800/mo   | infra            | Global South Gap 1                                                                                                                                |
+| SOC 2 Type I (bank track)           | $15–45K    | quality-evidence | [soc2-readiness-checklist](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/01-docs/08-gtm/regulatory/soc2-readiness-checklist.md) |
+| Zimbabwe sandbox send + pilot legal | $0–5K fees | GTM + legal      | EXT-INF-013–015; [sandbox-intro template](./sandbox-intro-email-template.md)                                                                      |
+
+---
+
+## What Remains (9.4 → 10.0 library score)
+
+### Tier 1 — Can do this week ($0)
+
+| Item                                | Effort             | Score | Blocker                      |
+| ----------------------------------- | ------------------ | ----- | ---------------------------- |
+| Run 24hr fuzz campaigns (6 targets) | 1 day machine time | +0.1  | Needs nightly Rust toolchain |
+| Claim `@gtcx` npm scope             | 15 minutes         | +0.05 | npm account access           |
+| Add secondary CODEOWNER             | 30 minutes         | +0.05 | Team member identified       |
+
+### Tier 2 — Next 2 weeks ($0)
+
+| Item                                             | Effort   | Score | Blocker                             |
+| ------------------------------------------------ | -------- | ----- | ----------------------------------- |
+| Rust `SigningProvider` trait + aws-lc-rs backend | 2-3 days | +0.15 | aws-lc-rs build requires CMake + Go |
+| `KeyStore` trait + `MemoryKeyStore`              | 1-2 days | +0.1  | async-trait dependency decision     |
+| SoftHSMv2 CI integration                         | 4 hours  | +0.05 | Ubuntu CI runner (already have)     |
+| ADR-012 Stage 0 — 9 entity predicates            | Complete | +0.3  | Shipped 2026-05-25                  |
+| Migration bridge + property tests                | Complete | +0.1  | Shipped 2026-05-25                  |
+| rustls-webpki CI mitigation                      | Complete | +0.1  | Shipped 2026-05-25                  |
+
+### Tier 3 — When regulator asks ($0 - $5K)
+
+| Item                                     | Effort        | Score | Blocker              |
+| ---------------------------------------- | ------------- | ----- | -------------------- |
+| Pre-submission meeting with sandbox team | 1 hour        | +0.05 | Scheduling           |
+| Bug bounty program (HackerOne)           | 2 hours setup | +0.05 | $2-5K reserve        |
+| Execute SOC 2 evidence pipeline          | 4 hours       | +0.05 | Compliance team time |
+
+---
+
+## Scoring Trajectory
+
+```
+Today:       ██████████████████████████████████████████░░░░░░  8.9
++Tier 1:     ████████████████████████████████████████████░░░░  9.4
++Tier 2:     ██████████████████████████████████████████████░░  9.7
++Tier 3:     ████████████████████████████████████████████████  10.0
+```
+
+---
+
+## Why This Works Without Spending $200K
+
+| Traditional Requirement         | Why We Don't Need It                                                                                                              |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| $50-100K external pen test      | Internal assessment with 6 fuzz targets, CodeQL SAST, Trivy, cargo-audit. African sandbox regulators accept internal assessments. |
+| $100-200K FIPS certification    | Inherited from OpenSSL (CMVP #4282) and aws-lc-rs (CMVP #4816). NIST guidance supports inherited validation.                      |
+| $20-50K HSM hardware            | Cloud KMS at $1/key/month. SoftHSMv2 for CI testing ($0).                                                                         |
+| $10-20K legal compliance review | Library processes zero PII and zero CHD. Three scope declarations written in-house.                                               |
+| $5-10K SOC 2 audit preparation  | Evidence pipeline already automated. CI gates generate most evidence on every PR.                                                 |
+
+**The creative insight:** A library that delegates all crypto to CMVP-certified modules, proves its safety through automated fuzzing, and honestly declares its minimal compliance surface achieves the same auditable outcome as the $200K path — because the evidence is the same. The regulator cares about the evidence, not the receipt.

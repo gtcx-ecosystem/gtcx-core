@@ -7,7 +7,7 @@ alwaysApply: true
 
 # Execution bout (intrinsic)
 
-Read `docs/operations/agent-execution-bout.md` on session start.
+Read `01-docs/04-ops/agent-execution-bout.md` on session start.
 
 After `pnpm agent:session-start`, use JSON `executionBout`:
 

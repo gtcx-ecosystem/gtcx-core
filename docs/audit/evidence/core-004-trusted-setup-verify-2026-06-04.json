@@ -1,8 +1,0 @@
-{
-  "story_id": "CORE-004",
-  "gate": "cargo test -p gtcx-zkp --features trusted-setup-verify --release",
-  "exit_code": 0,
-  "recorded_at": "2026-06-04",
-  "note": "Engineering scaffold (mock 32-byte transcript tests). Production transcript.seed + KAT pin pending sovereign ZKP ceremony — not INF-86 XR-402 KMS.",
-  "blocker_doc": "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md"
-}

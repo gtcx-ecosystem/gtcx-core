@@ -1,0 +1,33 @@
+[**GTCX Core API Reference**](../../../README.md)
+
+***
+
+[GTCX Core API Reference](../../../README.md) / [@gtcx/types](../README.md) / CortexIngestRequest
+
+# Interface: CortexIngestRequest
+
+Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:54](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L54)
+
+## Properties
+
+### batchId?
+
+> `optional` **batchId**: `string`
+
+Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:57](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L57)
+
+***
+
+### events
+
+> **events**: [`CortexEvent`](CortexEvent.md)[]
+
+Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:55](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L55)
+
+***
+
+### source
+
+> **source**: `string`
+
+Defined in: [03-platform/packages/types/03-platform/src/api/intelligence.ts:56](https://github.com/gtcx-ecosystem/gtcx-core/blob/3ba6b52766dfe45fb9673e3b808e08e184b9256d/03-platform/packages/types/03-platform/src/api/intelligence.ts#L56)

@@ -7,7 +7,7 @@ alwaysApply: true
 
 # Launch focus (GTM)
 
-Read `docs/operations/agent-launch-focus.md` first every session.
+Read `01-docs/04-ops/agent-launch-focus.md` first every session.
 
 After `pnpm agent:session-start`, use JSON `launchFocus`:
 

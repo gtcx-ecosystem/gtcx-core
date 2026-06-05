@@ -4,7 +4,7 @@
 
 ## Stack
 
-- TypeScript packages under `packages/*`, built with `tsup`, tested with `vitest`, orchestrated by `turbo`.
+- TypeScript packages under `03-platform/packages/*`, built with `tsup`, tested with `vitest`, orchestrated by `turbo`.
 - Rust crates under `rust/*`, built and tested with Cargo.
 - Package manager: `pnpm@9.15.0`.
 - Runtime baseline: Node.js 20+ and Rust 1.91+.
@@ -14,7 +14,7 @@
 1. **Conventional commits** — `type(scope): subject`, lowercase, imperative.
 2. **No emojis** unless explicitly requested.
 3. **No going in circles** — read this file + the repo's own docs before exploring.
-4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; **micro-commit per story; push after each commit** — see `docs/operations/agent-git-workflow.md`. `pnpm agent:cross-repo-deps:check` at session start. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
+4. **Session start (ALL terminals / LLMs)** — run `pnpm agent:session-start` (alias `pnpm agent:start`; provisions **execution bout** via `pnpm agent:next-work`). Drain Class R stories in `.baseline/execution-bout.json` before bout check-in; **micro-commit per story; push after each commit** — see `01-docs/04-ops/agent-git-workflow.md`. `pnpm agent:cross-repo-deps:check` at session start. Never ask which roadmap story to pick. Verify: `pnpm agent:bout:check` · `pnpm agent:protocols:check`.
 
 ## Build & Run
 

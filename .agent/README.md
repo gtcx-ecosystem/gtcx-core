@@ -2,7 +2,7 @@
 
 This directory is the **source of truth** for synced sections in `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `KIMI.md`, `CODEX.md`, `CONVENTIONS.md`, `.cursor/rules/main.mdc`, `.github/copilot/instructions.md` (see `targets.json`).
 
-The generator at `scripts/agent-sync/sync.mjs` injects content from the partials below into target files, between `<!-- AGENT-SYNC:START -->` and `<!-- AGENT-SYNC:END -->` markers. Anything outside those markers is human-managed.
+The generator at `03-platform/scripts/agent-sync/sync.mjs` injects content from the partials below into target files, between `<!-- AGENT-SYNC:START -->` and `<!-- AGENT-SYNC:END -->` markers. Anything outside those markers is human-managed.
 
 ## Files
 
@@ -17,9 +17,9 @@ The generator at `scripts/agent-sync/sync.mjs` injects content from the partials
 | `claude.partial.md`          | Claude-only addenda                                               |
 | `targets.json`               | Maps target files → which partials to include                     |
 
-**Full agent guide (not synced — edit directly):** [`docs/agents/readiness-and-audit-lanes.md`](../docs/agents/readiness-and-audit-lanes.md)
+**Full agent guide (not synced — edit directly):** [`01-docs/01-agents/readiness-and-audit-lanes.md`](../01-docs/01-agents/readiness-and-audit-lanes.md)
 
-**Coverage matrix:** [`docs/agents/agent-sync-coverage.md`](../docs/agents/agent-sync-coverage.md) — Kimi CLI, Cursor, Codex, Copilot, Claude, Gemini
+**Coverage matrix:** [`01-docs/01-agents/agent-sync-coverage.md`](../01-docs/01-agents/agent-sync-coverage.md) — Kimi CLI, Cursor, Codex, Copilot, Claude, Gemini
 
 ## Commands
 
@@ -31,7 +31,7 @@ pnpm readiness:lanes:check   # latest.json + lane indexes + anti-drift hub scan
 
 ## Generator updates
 
-The generator `scripts/agent-sync/sync.mjs` is vendored from `gtcx-agentic/agent-sync/sync.mjs`. To pull the latest version across the ecosystem, run from gtcx-agentic:
+The generator `03-platform/scripts/agent-sync/sync.mjs` is vendored from `gtcx-agentic/agent-sync/sync.mjs`. To pull the latest version across the ecosystem, run from gtcx-agentic:
 
 ```bash
 node agent-sync/rollout.mjs --update-generator

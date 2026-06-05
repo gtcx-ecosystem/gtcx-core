@@ -189,7 +189,7 @@ jobs:
           path: |
             artifacts/ci-history.json
             quality/kpi-metrics.json
-            docs/quality/10-10-remediation-tracker.md
+            01-docs/quality/10-10-remediation-tracker.md
 
       - name: Generate provenance manifest
         run: pnpm provenance:generate
@@ -225,7 +225,7 @@ jobs:
           if-no-files-found: error
 
       - name: Validate AI scorecard artifact
-        run: node ./tools/check-ai-scorecard.mjs
+        run: node ./03-platform/tools/check-ai-scorecard.mjs
 
       - name: Validate GA release evidence
         run: pnpm release:ga:evidence:check
@@ -260,7 +260,7 @@ jobs:
 
       - name: Verify deny(unsafe_code) in all crates
         run: |
-          for lib in */src/lib.rs; do
+          for lib in */03-platform/src/lib.rs; do
             if ! grep -q 'deny(unsafe_code)' "$lib"; then
               echo "ERROR: $lib missing #![deny(unsafe_code)]"
               exit 1
@@ -302,7 +302,7 @@ jobs:
 
       - name: Capture benchmark results to JSON
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: node ./tools/capture-benchmark-results.mjs --source=ci:criterion
+        run: node ./03-platform/tools/capture-benchmark-results.mjs --source=ci:criterion
         working-directory: .
 
       - name: Upload Criterion results

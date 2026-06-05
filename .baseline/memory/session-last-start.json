@@ -8,8 +8,8 @@
       "institutional": "compliance-officer",
       "mcp": "reviewer",
       "frame": "regulatory-audit",
-      "docUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/compliance-officer.md",
-      "bridgeUrl": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-persona-bridge-2026-06.md",
+      "docUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/institutional/personas/compliance-officer.md",
+      "bridgeUrl": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/04-ops/coordination/ecosystem-persona-bridge-2026-06.md",
       "instruction": "Read persona doc before work; re-select persona on task switch (Phase 4)."
     },
     "ok": true,
@@ -17,7 +17,7 @@
     "automatableExhausted": true,
     "certificationCeiling": "tier-5-commercial",
     "message": "Launch plan bout complete. Commercial ceiling: DTF-5.5.4 LOI + CORE-004-CEREMONY (Class S).",
-    "witness": "docs/operations/coordination/core-004-engineering-closeout-2026-06-06.md",
+    "witness": "01-docs/04-ops/coordination/core-004-engineering-closeout-2026-06-06.md",
     "next": {
       "storyId": "DTF-5.5.4",
       "title": "Design-partner LOI or regulator letter",
@@ -30,7 +30,7 @@
     "nextPriority": {
       "owner": "Human / GTM",
       "action": "DTF-5.5.4 — design-partner LOI or regulator letter (Class S)",
-      "outbound": "docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md",
+      "outbound": "01-docs/04-ops/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md",
       "because": "Launch plan bout complete; automatable repo work exhausted"
     },
     "humanOnly": [
@@ -51,7 +51,7 @@
     "deferred": [
       "DTF-5.5.3 predicate-gated export keys (optional)",
       "Production manifest Ed25519 via CSP ceremony (Legal)",
-      "docs/operations/coordination/core-004-xr402-blocker-2026-06-04.md"
+      "01-docs/04-ops/coordination/core-004-xr402-blocker-2026-06-04.md"
     ],
     "selection": {
       "tier": "external-attestation",
@@ -77,7 +77,7 @@
       ]
     },
     "agentInstructions": [
-      "Phase 4: adopt persona **compliance-officer** (regulatory-audit) — read https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/compliance-officer.md",
+      "Phase 4: adopt persona **compliance-officer** (regulatory-audit) — read https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/institutional/personas/compliance-officer.md",
       "Include **Active persona** + **Frame** in Proceed Brief and Status Update (P26).",
       "Execution bout is provisioned — drain Class R stories in `stories[]` before bout check-in.",
       "After each story: micro-commit, update session.md row, re-run `pnpm agent:next-work`.",
@@ -85,18 +85,18 @@
       "Do NOT end the session after one story while `remainingCount` > 0.",
       "Do NOT ask operator to pick stories — P22 selects head; bout lists the drain queue.",
       "Full Status Update + optional push only at bout check-in.",
-      "Normative: docs/operations/agent-execution-bout.md",
+      "Normative: 01-docs/04-ops/agent-execution-bout.md",
       "Bout plan empty for Class R — check-in with humanOnly as Approval needed; witness only.",
       "DTF-5.5.2 = Class R — run certified-pack commands in-session; never list 5.5.2 under Approval needed.",
       "DTF-5.5.4 = Class S only — LOI/regulator letter; agents witness, do not sign.",
       "Use executionBout: drain Class R stories before bout check-in — no stop after one story.",
       "Do not ask the operator which story or repo to pick.",
-      "Witness: docs/operations/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md",
+      "Witness: 01-docs/04-ops/coordination/from-gtcx-core-tier5-commercial-unblock-2026-06-06.md",
       "Emit progress Status Updates during bout; ONE full check-in Status Update when bout completes."
     ],
     "launchFocus": {
       "schema": "gtcx.launchFocus.v1",
-      "normativeDoc": "docs/operations/agent-launch-focus.md",
+      "normativeDoc": "01-docs/04-ops/agent-launch-focus.md",
       "statePath": ".baseline/launch-focus.json",
       "provisionedAt": "2026-06-05T03:19:54.852Z",
       "repo": "gtcx-core",
@@ -108,15 +108,15 @@
           "library": "GR-T1",
           "integratorPilot": "GR-T2-partial",
           "ecosystemSovereign": "below-GR-T2",
-          "index": "docs/audit/gtm-readiness-2026-06-05.md"
+          "index": "01-docs/05-audit/gtm-readiness-2026-06-05.md"
         }
       },
       "sessionMode": "witness",
       "activePhase": {
         "id": "launch-gtm",
         "label": "Launch downstream apps — foundation → GR-T2+ sovereign GTM",
-        "executionRoadmap": "docs/audit/execution-roadmap.md",
-        "gtmIndex": "docs/audit/gtm-readiness-2026-06-05.md"
+        "executionRoadmap": "01-docs/05-audit/execution-roadmap.md",
+        "gtmIndex": "01-docs/05-audit/gtm-readiness-2026-06-05.md"
       },
       "workSet": {
         "implement": [],
@@ -154,11 +154,11 @@
         "human": 3
       },
       "sources": [
-        "docs/audit/execution-roadmap.md",
-        "docs/operations/tier-5-workplan-2026-06.md",
-        "docs/operations/coordination/remaining-cross-repo-work-2026-06-02.md",
-        "docs/audit/latest.json",
-        "docs/gtm/gtm-reality-check-2026-06-02.md"
+        "01-docs/05-audit/execution-roadmap.md",
+        "01-docs/04-ops/tier-5-workplan-2026-06.md",
+        "01-docs/04-ops/coordination/remaining-cross-repo-work-2026-06-02.md",
+        "01-docs/05-audit/latest.json",
+        "01-docs/08-gtm/gtm-reality-check-2026-06-02.md"
       ],
       "forbidden": [
         "Ask operator to run forensic audit before starting work",
@@ -171,14 +171,14 @@
         "Goal: finish foundation + coordination so sibling repos can ship apps and GTM can close deals.",
         "Session mode WITNESS — human gates only; maintain indexes and outbound acks.",
         "Full work set is in launch-focus.json — not a single story.",
-        "Normative: docs/operations/agent-launch-focus.md"
+        "Normative: 01-docs/04-ops/agent-launch-focus.md"
       ]
     },
     "executionBout": {
       "schema": "gtcx.executionBout.v1",
       "statePath": ".baseline/execution-bout.json",
-      "normativeDoc": "docs/operations/agent-execution-bout.md",
-      "docPath": "docs/operations/agent-execution-bout.md",
+      "normativeDoc": "01-docs/04-ops/agent-execution-bout.md",
+      "docPath": "01-docs/04-ops/agent-execution-bout.md",
       "id": "bout-2026-06-05-auto",
       "mode": "auto",
       "provisionedAt": "2026-06-05T03:19:54.854Z",
@@ -228,7 +228,7 @@
         "Do NOT end the session after one story while `remainingCount` > 0.",
         "Do NOT ask operator to pick stories — P22 selects head; bout lists the drain queue.",
         "Full Status Update + optional push only at bout check-in.",
-        "Normative: docs/operations/agent-execution-bout.md",
+        "Normative: 01-docs/04-ops/agent-execution-bout.md",
         "Bout plan empty for Class R — check-in with humanOnly as Approval needed; witness only."
       ],
       "forbidden": [
@@ -242,7 +242,7 @@
     "proceedBrief": {
       "activePersona": "compliance-officer",
       "frame": "regulatory-audit",
-      "personaDocUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/compliance-officer.md"
+      "personaDocUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/01-docs/governance/institutional/personas/compliance-officer.md"
     }
   },
   "gitChanged": 2,

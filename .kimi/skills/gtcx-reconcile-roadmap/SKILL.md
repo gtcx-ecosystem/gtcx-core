@@ -18,7 +18,7 @@ For reconcile + ship, use `/skill:execute-roadmap`.
 
 ## Output
 
-Update `docs/strategy/execution-roadmap.md` or `docs/audit/execution-roadmap.md`; set `Last reconciled: YYYY-MM-DD`.
+Update `01-docs/strategy/execution-roadmap.md` or `01-docs/05-audit/execution-roadmap.md`; set `Last reconciled: YYYY-MM-DD`.
 
 ## Rules
 

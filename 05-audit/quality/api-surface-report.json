@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-06-05T04:07:02.485Z",
+  "schemaVersion": 1,
+  "baseline": {
+    "path": "quality/api-surface-baseline.json",
+    "schemaVersion": 2
+  },
+  "current": {
+    "packageCount": 24
+  },
+  "drift": {
+    "changeCount": 0,
+    "changes": []
+  },
+  "policy": {
+    "referenceRef": null,
+    "referenceLoaded": false,
+    "enforceSemver": false,
+    "changeCount": 0,
+    "changes": [],
+    "violationCount": 0,
+    "violations": [],
+    "changesetBumps": {}
+  }
+}

@@ -6,7 +6,7 @@ alwaysApply: true
 
 # Agent Capability Awareness
 
-> **Normative:** `docs/operations/agent-capability-posture.md` · Session JSON: `agentCapabilities`
+> **Normative:** `01-docs/04-ops/agent-capability-posture.md` · Session JSON: `agentCapabilities`
 
 ## Default posture
 

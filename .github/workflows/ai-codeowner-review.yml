@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 # This workflow runs the dual-AI CODEOWNER review pattern documented in
-# docs/agents/governance/. It posts a structured review comment with findings
+# 01-docs/01-agents/governance/. It posts a structured review comment with findings
 # against the path-specific playbooks. The bot NEVER approves — a human
 # CODEOWNER must still approve before merge.
 #
@@ -47,5 +47,5 @@ jobs:
           # but logs a bus-factor warning when fallback is needed.
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
-        run: node .github/scripts/codeowner-review/run.mjs
+        run: node .github/03-platform/scripts/codeowner-review/run.mjs
         continue-on-error: true
