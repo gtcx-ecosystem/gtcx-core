@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-06-05T03:15:56.083Z",
+  "startedAt": "2026-06-05T03:16:42.551Z",
   "nextWork": {
     "protocol": "22-agent-work-selection",
     "repo": "gtcx-core",
@@ -98,7 +98,7 @@
       "schema": "gtcx.launchFocus.v1",
       "normativeDoc": "docs/operations/agent-launch-focus.md",
       "statePath": ".baseline/launch-focus.json",
-      "provisionedAt": "2026-06-05T03:15:55.908Z",
+      "provisionedAt": "2026-06-05T03:16:42.418Z",
       "repo": "gtcx-core",
       "northStar": {
         "outcome": "Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.",
@@ -181,7 +181,7 @@
       "docPath": "docs/operations/agent-execution-bout.md",
       "id": "bout-2026-06-05-auto",
       "mode": "auto",
-      "provisionedAt": "2026-06-05T03:15:55.910Z",
+      "provisionedAt": "2026-06-05T03:16:42.420Z",
       "repo": "gtcx-core",
       "frame": "development",
       "launchMode": "witness",
@@ -245,6 +245,6 @@
       "personaDocUrl": "https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/docs/governance/institutional/personas/compliance-officer.md"
     }
   },
-  "gitChanged": 4,
+  "gitChanged": 0,
   "authorityClass": "S"
 }
