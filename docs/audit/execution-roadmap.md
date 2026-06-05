@@ -1,8 +1,7 @@
 ---
-last_reconciled: 2026-06-04
+last_reconciled: 2026-06-05
 reconciliation_note: >-
-  Launch-focus reconcile 2026-06-04 — mode witness; implement 0 / plan 0.
-  engineering closed; ceremony Class S parallel. Kimi skills parity done.
+  execute-roadmap + auto-dev-data 2026-06-05 — ER-AUTO-DEV-01 synced; FA-S6 core done; Class S wall.
 sources:
   - docs/audit/full-audit-2026-06-04.md
   - docs/audit/repo-hygiene-2026-06-04.md
@@ -10,6 +9,7 @@ sources:
   - docs/operations/tier-5-workplan-2026-06.md
   - docs/operations/coordination/remaining-cross-repo-work-2026-06-02.md
   - docs/gtm/gtm-reality-check-2026-06-02.md
+  - docs/operations/coordination/core-004-engineering-closeout-2026-06-06.md
 ---
 
 # Execution roadmap — gtcx-core
@@ -17,24 +17,25 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest audit:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) · GitHub [#27](https://github.com/gtcx-ecosystem/gtcx-core/issues/27)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **S-T5-5** commercial (external) + **LAUNCH-PLAN** bout (GTM coordination)  
-**Protocol 22:** `pnpm agent:next-work` → **LAUNCH-PLAN-01..05** (Class R plan drain); **DTF-5.5.4** / **CORE-004-CEREMONY** Class S  
-**Last in-repo sprint:** **CORE-004 engineering closeout** + launch reconcile (2026-06-04)
+**Active phase:** **FA-S6** vendor evidence (core-side **done**) + **S-T5-5** commercial (Class S wall)  
+**Protocol 22:** `pnpm agent:next-work` → **DTF-5.5.4** / **CORE-004-CEREMONY** (Class S); witness mode  
+**Last in-repo sprint:** **FA-S6-02** vendor pen-test pack manifest (2026-06-04)
 
 ---
 
 ## Executive summary (2026-06-04)
 
-| Track                            | State           | Next                                                                                                                              |
-| -------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Internal engineering (S1–S5)     | **done**        | —                                                                                                                                 |
-| Algorithmic moat D1–D6 (in-repo) | **done**        | D3 ceremony — `transcript.seed` (Class S, custodian)                                                                              |
-| **DTF Tier 5 technical**         | **~88%**        | DTF-5.5.2 done; **5.5.4** LOI/regulator (Class S)                                                                                 |
-| **CORE-004 engineering**         | **done**        | Class R — [`core-004-engineering-closeout-2026-06-06.md`](../operations/coordination/core-004-engineering-closeout-2026-06-06.md) |
-| Bank-grade / sovereign pilot     | **Not Ready**   | EXT-INF-002 pen-test; OI-X02 infra hub ack (witness)                                                                              |
-| **Launch / GTM bout**            | **in progress** | LAUNCH-PLAN-01..05 — reconcile + bridge + readiness lanes                                                                         |
-| **Agent parity**                 | **done**        | 22 Kimi project skills — `pnpm kimi:skills:check`                                                                                 |
-| **P0 blocker**                   | **Closed**      | FA-P0-1 — integration test in `tests/integration/`                                                                                |
+| Track                            | State         | Next                                                                                                                              |
+| -------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Internal engineering (S1–S5)     | **done**      | —                                                                                                                                 |
+| Algorithmic moat D1–D6 (in-repo) | **done**      | D3 ceremony — `transcript.seed` (Class S, custodian)                                                                              |
+| **DTF Tier 5 technical**         | **~88%**      | DTF-5.5.2 done; **5.5.4** LOI/regulator (Class S)                                                                                 |
+| **CORE-004 engineering**         | **done**      | Class R — [`core-004-engineering-closeout-2026-06-06.md`](../operations/coordination/core-004-engineering-closeout-2026-06-06.md) |
+| Bank-grade / sovereign pilot     | **Not Ready** | EXT-INF-002 pen-test; OI-X02 infra hub ack (witness)                                                                              |
+| **Launch / GTM bout**            | **done**      | LAUNCH-PLAN-01..05 closed 2026-06-04                                                                                              |
+| **FA-S6 vendor pack (core)**     | **done**      | FA-S6-02 manifest — [`vendor-pen-test-pack-manifest-latest.json`](evidence/vendor-pen-test-pack-manifest-latest.json)             |
+| **Auto-dev hub sync**            | **done**      | ER-AUTO-DEV-01 — [`auto-dev-data.json`](auto-dev-data.json) · `pnpm agent:reconcile-auto-dev`                                     |
+| **P0 blocker**                   | **Closed**    | FA-P0-1 — integration test in `tests/integration/`                                                                                |
 
 **Risk (audit):** Do not equate npm library maturity with sovereign pilot clearance.  
 **Opportunity (audit):** Profile packs + KAT portability on one R1CS + WorkProof→verification chain.
@@ -70,13 +71,29 @@ sources:
 
 ## DTF Tier 5 — sprint status
 
-| Sprint | Theme                                  | Status   | Exit milestone                    |
-| ------ | -------------------------------------- | -------- | --------------------------------- |
-| S-T5-1 | gh-gold witness + profile + NAPI + KAT | **done** | DTF-5.1.4                         |
-| S-T5-2 | zw-diamond + verification + KATs       | **done** | DTF-5.2.3; 6/6 groth16 cross-impl |
-| S-T5-3 | gh-cocoa + jurisdiction fixtures       | **done** | DTF-5.3.3 UAT protocol            |
-| S-T5-4 | Circuit registry + perf                | **done** | Tier 5 technical candidate        |
-| S-T5-5 | Commercial / certified packs           | pending  | DTF-5.5.4 external                |
+| Sprint | Theme                                  | Status      | Exit milestone                    |
+| ------ | -------------------------------------- | ----------- | --------------------------------- |
+| S-T5-1 | gh-gold witness + profile + NAPI + KAT | **done**    | DTF-5.1.4                         |
+| S-T5-2 | zw-diamond + verification + KATs       | **done**    | DTF-5.2.3; 6/6 groth16 cross-impl |
+| S-T5-3 | gh-cocoa + jurisdiction fixtures       | **done**    | DTF-5.3.3 UAT protocol            |
+| S-T5-4 | Circuit registry + perf                | **done**    | Tier 5 technical candidate        |
+| S-T5-5 | Commercial / certified packs           | **blocked** | DTF-5.5.4 Class S                 |
+
+---
+
+## FA-S6 — Vendor evidence pack (full-audit week 6)
+
+**Source:** [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) Sprint 6 · **Status:** core-side **complete**; live pen-test remains **EXT-INF-002** (infra).
+
+| Story          | Title                                           | Owner                 | Status      | Acceptance / UAT                                                                      |
+| -------------- | ----------------------------------------------- | --------------------- | ----------- | ------------------------------------------------------------------------------------- |
+| FA-S6-01       | Tier-5 technical evidence index (DTF-5.5.5)     | quality-evidence-lead | **done**    | [evidence/README.md](./evidence/README.md) register                                   |
+| FA-S6-02       | KAT + fuzz + threat matrix vendor pack manifest | quality-evidence-lead | **done**    | `pnpm vendor-evidence:build-manifest` · `pnpm vendor-evidence:verify-manifest` exit 0 |
+| FA-S6-03       | Zimbabwe sandbox email + LOI tracker            | gtm-lead              | **blocked** | Human / GTM (Class S)                                                                 |
+| FA-S6-04       | CORE-004 ceremony publish                       | custodian + gtcx-core | **blocked** | Class S — `transcript.seed` + `pnpm ops:trusted-setup:verify-publish`                 |
+| ER-AUTO-DEV-01 | `auto-dev-data.json` + `auto-dev-state.md` sync | quality-evidence-lead | **done**    | `pnpm agent:reconcile-auto-dev` · JSON validates · mirrors `latest.json` + P22        |
+
+**Delivery:** Ship `docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json` to **gtcx-infrastructure** for EXT-INF-002 vendor SOW — does **not** mark pen-test done.
 
 ### Completed (2026-06-03 → 2026-06-04)
 
@@ -139,7 +156,7 @@ Aligned with [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) §6.3.
 | OI-X01             | ER-1-08 hub ack                    | gtcx-core           | **done**             | Protocols log; evidence on record                                                                                                                                          |
 | OI-X02             | ER-1-08 hub ack                    | gtcx-infrastructure | **outbound-filed**   | Core done — [`to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md`](../operations/coordination/to-gtcx-infrastructure-er-1-08-hub-ack-2026-06-03.md); await infra hub row |
 | OI-X06 / INT-S8-04 | cost-router v1.1                   | baseline-os         | **external**         | No implementation in core                                                                                                                                                  |
-| EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**             | Evidence pack input (FA-S6)                                                                                                                                                |
+| EXT-INF-002        | Live pen-test                      | gtcx-infrastructure | **open**             | Core vendor pack **ready** — [`vendor-pen-test-pack-manifest-latest.json`](evidence/vendor-pen-test-pack-manifest-latest.json); await vendor SOW                           |
 | CORE-004           | Trusted-setup transcript           | gtcx-core           | **engineering-done** | Class R closed — [`core-004-engineering-closeout-2026-06-06.md`](../operations/coordination/core-004-engineering-closeout-2026-06-06.md); ceremony Class S                 |
 | CORE-005–006       | Pen-test SOW / formal verification | baseline-os         | **blocked**          | Track only                                                                                                                                                                 |
 
@@ -199,7 +216,8 @@ cd rust && cargo test -p gtcx-zkp --lib
 ## Agent selection
 
 ```bash
-pnpm agent:next-work          # expect DTF-5.5.4 Class S; CORE-004 repoCompletable
+pnpm agent:next-work          # expect DTF-5.5.4 Class S; boutComplete
+pnpm vendor-evidence:verify-manifest
 pnpm ops:trusted-setup:verify-publish  # after transcript.seed published
 pnpm agent:work-selection:check
 pnpm agent:protocols:check
@@ -209,4 +227,4 @@ Refresh `.baseline/memory/session.md` after each milestone.
 
 ---
 
-_Last updated: 2026-06-04 — launch reconcile; Kimi skills; CORE-004 verify-publish gate; DTF-5.5.4 Class S_
+_Last updated: 2026-06-04 — execute-roadmap reconcile; FA-S6-02 vendor pack; LAUNCH-PLAN bout done; Class S wall_

@@ -68,12 +68,15 @@ if (existsSync(roadmapPath)) {
   if (roadmap.includes('last_reconciled:')) {
     roadmap = roadmap.replace(/last_reconciled:\s*\S+/, `last_reconciled: ${stamp}`);
   }
-  const note = `Launch-focus reconcile ${stamp} — mode ${lf.sessionMode}; implement ${lf.workSetCounts.implement} / plan ${lf.workSetCounts.plan}.`;
+  const note = `Launch-focus reconcile ${stamp} — mode ${lf.sessionMode}; implement ${lf.workSetCounts.implement} / plan ${lf.workSetCounts.plan}. Run pnpm agent:reconcile-auto-dev for hub JSON.`;
   if (roadmap.includes('reconciliation_note:')) {
-    roadmap = roadmap.replace(
-      /reconciliation_note:\s*>-\s*\n\s*[^\n]+/,
-      `reconciliation_note: >-\n  ${note}`,
-    );
+    const existing = roadmap.match(/reconciliation_note:\s*>-\s*\n([\s\S]*?)(?=\nsources:)/)?.[1] ?? '';
+    if (!/auto-dev-data|ER-AUTO-DEV/.test(existing)) {
+      roadmap = roadmap.replace(
+        /reconciliation_note:\s*>-\s*\n(?:\s+[^\n]+\n?)*/,
+        `reconciliation_note: >-\n  ${note}\n`,
+      );
+    }
   }
   writeFileSync(roadmapPath, roadmap);
 }

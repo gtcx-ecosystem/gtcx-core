@@ -20,21 +20,25 @@ adoption_status: established
 
 ## Canonical paths
 
-| Artifact                | Path                                                                                                          |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Execution roadmap**   | `docs/audit/execution-roadmap.md` (active phase FA-S1)                                                        |
-| **Full audit (latest)** | `docs/audit/full-audit-2026-06-04.md`                                                                         |
-| **Unified 10/10 index** | `docs/audit/moat-completion-reconciliation-2026-06-03.md`                                                     |
-| **Tier 5 work plan**    | `docs/operations/tier-5-workplan-2026-06.md`                                                                  |
-| **DTF framework**       | [DTF-001 v1.0.0](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0) |
-| 10/10 dimension roadmap | `docs/audit/moat-dimension-roadmap-10-10.md`                                                                  |
-| Session pointer         | `.baseline/memory/session.md`                                                                                 |
-| Selection script        | `scripts/agent-next-work.mjs`                                                                                 |
+| Artifact                 | Path                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| **Execution roadmap**    | `docs/audit/execution-roadmap.md` (active phase FA-S6)                                                        |
+| **Auto-dev data (JSON)** | `docs/audit/auto-dev-data.json`                                                                               |
+| **Auto-dev state**       | `docs/audit/auto-dev-state.md`                                                                                |
+| **Full audit (latest)**  | `docs/audit/full-audit-2026-06-04.md`                                                                         |
+| **Unified 10/10 index**  | `docs/audit/moat-completion-reconciliation-2026-06-03.md`                                                     |
+| **Tier 5 work plan**     | `docs/operations/tier-5-workplan-2026-06.md`                                                                  |
+| **DTF framework**        | [DTF-001 v1.0.0](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/frameworks/defensibility-tiers/v1.0.0) |
+| 10/10 dimension roadmap  | `docs/audit/moat-dimension-roadmap-10-10.md`                                                                  |
+| Session pointer          | `.baseline/memory/session.md`                                                                                 |
+| Selection script         | `scripts/agent-next-work.mjs`                                                                                 |
 
 ## Commands
 
 ```bash
 pnpm agent:next-work
+pnpm agent:reconcile-auto-dev   # auto-dev-data.json + auto-dev-state.md (execute-roadmap)
+pnpm agent:reconcile-launch     # tier5 commercial mirror + launch-focus
 pnpm agent:bout              # execution bout plan (Class R drain queue)
 pnpm agent:bout:check
 pnpm agent:work-selection:check
