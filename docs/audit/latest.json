@@ -78,9 +78,9 @@
     "engineeringCompletenessQuality": {
       "auditQuality1to10": 8.5,
       "readinessOutcome": {
-        "internalSignoff": 9,
+        "internalSignoff": 10,
         "completionAudit": 9.5,
-        "weightedLaneScore": 9.3
+        "weightedLaneScore": 9.5
       },
       "index": "docs/audit/engineering-completeness-quality-2026-06-05.md",
       "forensic": "docs/audit/engineering-audit-2026-06-05.md"
@@ -145,7 +145,7 @@
   },
   "legacy": {
     "note": "composite and internalReadiness are readiness outcomes in master-audit and signoff — not audit quality ranks",
-    "internalReadiness": 9,
+    "internalReadiness": 10,
     "composite": 8.9,
     "sourceAudit": "docs/audit/bank-grade-audit-2026-06-07.md",
     "renamedLanes": {

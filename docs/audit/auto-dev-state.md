@@ -30,7 +30,7 @@ Run `pnpm agent:next-work` for authoritative selection. **Launch plan bout compl
 
 ## Active phase
 
-**FA-S6** — automatable repo work **exhausted**; Class S wall.
+**ENG-S1** — automatable repo work **exhausted**; Class S wall.
 
 | Story                             | Status      | Owner             |
 | --------------------------------- | ----------- | ----------------- |
@@ -59,7 +59,7 @@ Run `pnpm agent:next-work` for authoritative selection. **Launch plan bout compl
 | -------------------------------------- | ----- |
 | `pnpm agent:protocols:check`           | **0** |
 | `pnpm readiness:lanes:check`           | **0** |
-| `pnpm vendor-evidence:verify-manifest` | **0** |
+| `pnpm vendor-evidence:verify-manifest` | **1** |
 | `pnpm docs:check-frontmatter`          | **0** |
 
 ## Cross-repo witness

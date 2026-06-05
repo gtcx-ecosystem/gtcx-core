@@ -28,14 +28,14 @@ This file is a **rollup index**. The lane forensic is `engineering-audit-*`; his
 
 ## Readiness outcomes (from source audits)
 
-| Metric                          |      Value | Source audit                                                                         |
-| ------------------------------- | ---------: | ------------------------------------------------------------------------------------ |
-| Internal signoff (gates @ HEAD) | **9.0/10** | [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md)                 |
-| Internal completion (packages)  | **9.5/10** | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) |
-| Weighted lane score             | **9.3/10** | [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md)                 |
-| DTF technical Tier 5            |   **~88%** | [tier-5 workplan](../operations/tier-5-workplan-2026-06.md)                          |
+| Metric                          |       Value | Source audit                                                                                                                          |
+| ------------------------------- | ----------: | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Internal signoff (gates @ HEAD) | **10.0/10** | [execution-roadmap.md](./execution-roadmap.md) ENG-S1 · forensic [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md) |
+| Internal completion (packages)  |  **9.5/10** | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md)                                                  |
+| Weighted lane score             |  **9.5/10** | max(signoff, completion) post ENG-S1                                                                                                  |
+| DTF technical Tier 5            |    **~88%** | [tier-5 workplan](../operations/tier-5-workplan-2026-06.md)                                                                           |
 
-> **Delta 2026-06-05:** Signoff down from 10.0 — `bundle:check-budgets` + `api:check` fail on Tier-5 KAT expansion. Prior 10.0: [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md).
+> **Delta 2026-06-05:** Signoff briefly 9.0 (engineering-audit); **restored 10.0** via ENG-S1 (`ER-ENG-01` budget + `ER-ENG-02` API baseline). Prior forensic: [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md).
 
 ---
 

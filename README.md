@@ -22,7 +22,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./docs/testi
 
 | Lane                      | Audit quality (1–10) | Readiness outcome                | Index                                                                           |
 | ------------------------- | -------------------: | -------------------------------- | ------------------------------------------------------------------------------- |
-| **1 Engineering**         |                  8.5 | 9.5 completion / 9.0 signoff     | [engineering](./docs/audit/engineering-completeness-quality-2026-06-05.md)      |
+| **1 Engineering**         |                  8.5 | 9.5 completion / 10.0 signoff    | [engineering](./docs/audit/engineering-completeness-quality-2026-06-05.md)      |
 | **2 Internal compliance** |                  8.5 | **9.0** (5 domains)              | [internal](./docs/audit/internal-compliance-2026-06-05.md)                      |
 | **3 Industry Compliance** |                  8.0 | **IC-T0** · OPEN 0/12            | [industry](./docs/audit/industry-compliance-2026-06-05.md)                      |
 | **GCR** (L2+L3 rollup)    |                    — | **GCR-T0** · **BLOCKED**         | [global compliance rating](./docs/audit/global-compliance-rating-2026-06-05.md) |

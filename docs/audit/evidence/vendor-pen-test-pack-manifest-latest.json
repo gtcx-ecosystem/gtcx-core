@@ -1,8 +1,8 @@
 {
   "schema": "gtcx.vendorPenTestPackManifest.v1",
   "storyId": "FA-S6-02",
-  "generatedAt": "2026-06-05T03:35:03.463Z",
-  "repoHead": "1e8a3a694bb209d743f4a3c336119591e8e5c682",
+  "generatedAt": "2026-06-05T04:03:25.817Z",
+  "repoHead": "a7373dc9cdcbae468e66b9b2826d8bb2d846519e",
   "purpose": "Library-scope pen-test vendor intake — KAT, fuzz, threat matrix, CI confirmation (gtcx-core only)",
   "owner": "gtcx-core",
   "externalGate": {
@@ -118,7 +118,7 @@
     {
       "category": "security-evidence",
       "path": "docs/audit/evidence/certified-pack-manifest-latest.json",
-      "sha256": "f6816f25517123649fef644203d261c4ed7f6bc998ab6598ac9fa9160e32375e",
+      "sha256": "1887c86a43eac4ff66975531cbe54df45baf9c5cce32ddfc70739bf7324197dd",
       "bytes": 1749
     },
     {

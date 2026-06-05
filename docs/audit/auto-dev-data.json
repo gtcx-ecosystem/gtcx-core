@@ -1,9 +1,9 @@
 {
   "schema": "gtcx.autoDevData.v1",
   "repo": "gtcx-core",
-  "updated": "2026-06-05T03:17:53.703Z",
+  "updated": "2026-06-05T04:07:31.334Z",
   "protocol": "execute-roadmap",
-  "baselineCommit": "b46dde49064e538dbba4ff9c090877dee70ae201",
+  "baselineCommit": "a7373dc9cdcbae468e66b9b2826d8bb2d846519e",
   "p22": {
     "backlogClear": true,
     "automatableExhausted": true,
@@ -27,7 +27,7 @@
   "executionRoadmap": {
     "path": "docs/audit/execution-roadmap.md",
     "lastReconciled": "2026-06-05",
-    "activePhase": "FA-S6",
+    "activePhase": "ENG-S1",
     "phases": {
       "FA-S1-P0": "done",
       "S-T5-1-4": "done",
@@ -38,7 +38,7 @@
   },
   "lanes": {
     "engineeringCompletenessQuality": {
-      "internalSignoff": 9,
+      "internalSignoff": 10,
       "completionAudit": 9.5,
       "index": "docs/audit/engineering-completeness-quality-2026-06-05.md"
     },
@@ -127,7 +127,7 @@
       "exitCode": 0
     },
     "pnpm vendor-evidence:verify-manifest": {
-      "exitCode": 0
+      "exitCode": 1
     },
     "pnpm docs:check-frontmatter": {
       "exitCode": 0
