@@ -101,10 +101,10 @@
     "agent:reconcile-bout-progress": "node scripts/reconcile-bout-progress.mjs",
     "check:workspace-root-cleanliness": "python3 scripts/ops/check-workspace-root-cleanliness.py",
     "check:workspace-root-cleanliness:strict": "python3 scripts/ops/check-workspace-root-cleanliness.py --strict",
-    "session": "pnpm --dir ../baseline-os session",
-    "next": "pnpm --dir ../baseline-os next",
-    "gates": "pnpm --dir ../baseline-os gates",
-    "hub": "pnpm --dir ../baseline-os hub"
+    "session": "node ../baseline-os/packages/baselineos/dist/cli/bin.js session",
+    "next": "node ../baseline-os/scripts/ecosystem/work-next.mjs",
+    "gates": "node ../baseline-os/scripts/ecosystem/human-gates-check.mjs",
+    "hub": "node ../baseline-os/scripts/ecosystem/hub-sync.mjs"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",
