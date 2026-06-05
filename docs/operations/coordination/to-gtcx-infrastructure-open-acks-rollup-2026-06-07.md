@@ -26,10 +26,10 @@ related:
 
 ## Open items (action required in owner repo)
 
-| ID              | Topic                      | Outbound ticket                                                                                                                  | Core status         | Infra action                                      |
-| --------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------- |
-| **OI-X02**      | ER-1-08 hub ack            | [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](./from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md)             | **done** 2026-06-04 | Closed — hub log `2026-06-04T23:50Z` (`f8e1425`)  |
-| **EXT-INF-002** | Pen-test vendor pack + SOW | [`to-gtcx-infrastructure-ext-inf-002-vendor-pack-2026-06-05.md`](./to-gtcx-infrastructure-ext-inf-002-vendor-pack-2026-06-05.md) | **outbound-filed**  | Ack pack receipt; attach to SensePost SOW kickoff |
+| ID              | Topic                      | Outbound ticket                                                                                                      | Core status               | Infra action                                     |
+| --------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------ |
+| **OI-X02**      | ER-1-08 hub ack            | [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](./from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md) | **done** 2026-06-04       | Closed — hub log `2026-06-04T23:50Z` (`f8e1425`) |
+| **EXT-INF-002** | Pen-test vendor pack + SOW | [`from-gtcx-infrastructure-ext-inf-002-ack-2026-06-07.md`](./from-gtcx-infrastructure-ext-inf-002-ack-2026-06-07.md) | **outbound-acknowledged** | Pack receipt done; SOW signature Class S (infra) |
 
 ---
 

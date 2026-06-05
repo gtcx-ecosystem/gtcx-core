@@ -115,21 +115,21 @@ Full register: `docs/operations/tier-5-workplan-2026-06.md` · sprint overlay: [
 
 ## Active phase
 
-| Track                  | Status                                               |
-| ---------------------- | ---------------------------------------------------- |
-| A — Internal 10/10 S5  | **Done** (22/22 provenance)                          |
-| B — AM-1, AM-2         | **Done**                                             |
-| **FA — Full-audit P0** | **Done** (FA-P0-1–3)                                 |
-| **T5 — Defensibility** | **~88% technical** — automatable slice **done**      |
-| Ceremony / vendors     | **CORE-004** blocked (XR-402); CORE-005–009 external |
+| Track                  | Status                                                                 |
+| ---------------------- | ---------------------------------------------------------------------- |
+| A — Internal 10/10 S5  | **Done** (22/22 provenance)                                            |
+| B — AM-1, AM-2         | **Done**                                                               |
+| **FA — Full-audit P0** | **Done** (FA-P0-1–3)                                                   |
+| **T5 — Defensibility** | **~88% technical** — automatable slice **done**                        |
+| Ceremony / vendors     | **CORE-004** engineering done; ceremony Class S; CORE-005–009 external |
 
 ## Critical handoffs
 
-| Handoff      | Item                                       | Status                      |
-| ------------ | ------------------------------------------ | --------------------------- |
-| CORE-003     | protocols KAT / DTF-5.4.4 E2E              | **done** (`73eaff2b`)       |
-| CORE-004     | D3 transcript verify                       | **blocked** XR-402 ceremony |
-| CORE-005–009 | pen-test, formal, lab, regulator, ZW email | external                    |
+| Handoff      | Item                                       | Status                                  |
+| ------------ | ------------------------------------------ | --------------------------------------- |
+| CORE-003     | protocols KAT / DTF-5.4.4 E2E              | **done** (`73eaff2b`)                   |
+| CORE-004     | D3 transcript verify + ceremony publish    | **engineering-done** — ceremony Class S |
+| CORE-005–009 | pen-test, formal, lab, regulator, ZW email | external                                |
 
 ## Implementation classes
 

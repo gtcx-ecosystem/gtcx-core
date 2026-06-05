@@ -18,28 +18,30 @@ review_cycle: on-change
 
 ## Next work (computed)
 
-Run `pnpm agent:next-work` for authoritative selection. **Launch implement queue: 1 Class R items toward GTM.**
+Run `pnpm agent:next-work` for authoritative selection. **Launch plan bout complete. Commercial ceiling: DTF-5.5.4 LOI + CORE-004-CEREMONY (Class S).**
 
 | Field                | Value             |
 | -------------------- | ----------------- |
-| backlogClear         | **false**         |
-| role                 | implement         |
+| backlogClear         | **true**          |
+| role                 | witness_only      |
 | certificationCeiling | tier-5-commercial |
-| nextStoryId          | **—**             |
-| launchFocus mode     | **implement**     |
+| nextStoryId          | **DTF-5.5.4**     |
+| launchFocus mode     | **witness**       |
 
 ## Active phase
 
 **FA-S6** — automatable repo work **exhausted**; Class S wall.
 
-| Story                             | Status      | Owner       |
-| --------------------------------- | ----------- | ----------- |
-| FA-S6-02 vendor pen-test pack     | **done**    | gtcx-core   |
-| ER-AUTO-DEV-01 auto-dev-data sync | **done**    | gtcx-core   |
-| FA-S6-03 Zimbabwe / LOI tracker   | **blocked** | gtm-lead    |
-| FA-S6-04 CORE-004 ceremony        | **blocked** | custodian   |
-| DTF-5.5.4 LOI / regulator letter  | **blocked** | Human / GTM |
-| CORE-004-CEREMONY transcript      | **blocked** | Custodian   |
+| Story                             | Status      | Owner             |
+| --------------------------------- | ----------- | ----------------- |
+| FA-S6-02 vendor pen-test pack     | **done**    | gtcx-core         |
+| ER-AUTO-DEV-01 auto-dev-data sync | **done**    | gtcx-core         |
+| FA-S6-03 Zimbabwe / LOI tracker   | **blocked** | gtm-lead          |
+| FA-S6-04 CORE-004 ceremony        | **blocked** | custodian         |
+| DTF-5.5.4 LOI / regulator letter  | **blocked** | Human / GTM       |
+| CORE-004-CEREMONY transcript      | **blocked** | Custodian         |
+| DTF-5.5.4                         | **blocked** | Human / GTM       |
+| CORE-004-CEREMONY                 | **blocked** | Custodian / human |
 
 ## Lane scores (summary)
 
@@ -62,10 +64,10 @@ Run `pnpm agent:next-work` for authoritative selection. **Launch implement queue
 
 ## Cross-repo witness
 
-| ID          | Status                           | Owner               |
-| ----------- | -------------------------------- | ------------------- |
-| OI-X02      | done                             | gtcx-infrastructure |
-| EXT-INF-002 | outbound-filed (core pack ready) | gtcx-infrastructure |
+| ID          | Status                                  | Owner               |
+| ----------- | --------------------------------------- | ------------------- |
+| OI-X02      | done                                    | gtcx-infrastructure |
+| EXT-INF-002 | outbound-acknowledged (core pack ready) | gtcx-infrastructure |
 
 ## Resume
 

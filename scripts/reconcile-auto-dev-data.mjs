@@ -61,11 +61,22 @@ function oiX02WitnessStatus() {
   return existsSync(outbound) ? 'outbound-filed' : 'open';
 }
 
+function extInf002WitnessStatus() {
+  const inboundAck = join(
+    ROOT,
+    'docs/operations/coordination/from-gtcx-infrastructure-ext-inf-002-ack-2026-06-07.md',
+  );
+  if (existsSync(inboundAck)) return 'outbound-acknowledged';
+  const manifest = join(ROOT, 'docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json');
+  return existsSync(manifest) ? 'outbound-filed' : 'open';
+}
+
 function buildCrossRepoWitness() {
   const extInfManifest = join(
     ROOT,
     'docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json',
   );
+  const extInfStatus = extInf002WitnessStatus();
   return [
     {
       storyId: 'OI-X02',
@@ -78,10 +89,14 @@ function buildCrossRepoWitness() {
     },
     {
       storyId: 'EXT-INF-002',
-      status: existsSync(extInfManifest) ? 'outbound-filed' : 'open',
+      status: extInfStatus,
       owner: 'gtcx-infrastructure',
       coreInputReady: existsSync(extInfManifest),
       manifest: 'docs/audit/evidence/vendor-pen-test-pack-manifest-latest.json',
+      path:
+        extInfStatus === 'outbound-acknowledged'
+          ? 'docs/operations/coordination/from-gtcx-infrastructure-ext-inf-002-ack-2026-06-07.md'
+          : 'docs/operations/coordination/to-gtcx-infrastructure-ext-inf-002-vendor-pack-2026-06-05.md',
     },
   ];
 }

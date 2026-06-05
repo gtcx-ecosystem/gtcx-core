@@ -26,12 +26,12 @@ Living register of **open** cross-repo items originating from or affecting `gtcx
 
 ## 0. Ecosystem coordination (2026-06-04)
 
-| ID                 | Item                                          | Owner               | Status              | gtcx-core action                                                                                                                                                                         |
-| ------------------ | --------------------------------------------- | ------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OI-X01 / ER-1-08   | Hub ack — trusted-setup / ER-1 evidence chain | gtcx-core           | **done** 2026-06-04 | Protocols hub log row; no further core code                                                                                                                                              |
-| OI-X02 / ER-1-08   | Hub ack — same initiative                     | gtcx-infrastructure | **done** 2026-06-04 | Inbound [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](./from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md); hub log `2026-06-04T23:50Z`                                |
-| OI-X06 / INT-S8-04 | cost-router v1.1                              | baseline-os         | **external**        | Track only; optional for intel env-fallback                                                                                                                                              |
-| EXT-INF-002        | Live-stack pen-test                           | gtcx-infrastructure | **outbound-filed**  | Rollup + [`to-gtcx-infrastructure-ext-inf-002-vendor-pack-2026-06-05.md`](./to-gtcx-infrastructure-ext-inf-002-vendor-pack-2026-06-05.md); linked infra pen-test-intake; await ack + SOW |
+| ID                 | Item                                          | Owner               | Status                    | gtcx-core action                                                                                                                                             |
+| ------------------ | --------------------------------------------- | ------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| OI-X01 / ER-1-08   | Hub ack — trusted-setup / ER-1 evidence chain | gtcx-core           | **done** 2026-06-04       | Protocols hub log row; no further core code                                                                                                                  |
+| OI-X02 / ER-1-08   | Hub ack — same initiative                     | gtcx-infrastructure | **done** 2026-06-04       | Inbound [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](./from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md); hub log `2026-06-04T23:50Z`    |
+| OI-X06 / INT-S8-04 | cost-router v1.1                              | baseline-os         | **external**              | Track only; optional for intel env-fallback                                                                                                                  |
+| EXT-INF-002        | Live-stack pen-test                           | gtcx-infrastructure | **outbound-acknowledged** | Pack ack [`from-gtcx-infrastructure-ext-inf-002-ack-2026-06-07.md`](./from-gtcx-infrastructure-ext-inf-002-ack-2026-06-07.md); SOW signature Class S (infra) |
 
 ---
 
