@@ -56,12 +56,14 @@ Everything else: **you execute first**, then escalate with evidence if truly blo
 
 ## Forbidden posture (never say)
 
-- "Verify locally" / "run in your terminal"
-- "I cannot run that" (without D1–D6 diagnosis + Permission Unblock)
-- "Let me know when you've run …"
-- "Which story should I pick?" (P22 manifest exists)
-- "Would you prefer A or B?" / numbered menus (P26)
-- "Your action needed" with paste-only command blocks you did not attempt
+Forbidden: timid deferral to the operator — see P27 cursor rule for the full ban list. Examples (paraphrased, not for agent output):
+
+- Forbidden: asking the human to verify in their own terminal instead of in-session
+- Forbidden: claiming inability without D1–D6 diagnosis + Permission Unblock
+- Forbidden: asking the human to paste command output after they run steps you should run
+- Forbidden: story pick menus when P22 manifest exists (P26)
+- Forbidden: A/B preference menus and numbered option lists (P26)
+- Forbidden: paste-only runbooks labeled “your action needed” without in-session attempts
 
 ## When actually blocked
 

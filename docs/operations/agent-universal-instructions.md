@@ -30,7 +30,13 @@ baseline start
 
 Build once if needed: `cd ../baseline-os && pnpm --filter baselineos build`
 
-**Chain:** gtcx-docs INST-003 → repo session (via `run-repo-session` / `bin/agent`) → repo gates → optional `--ingest` via gtcx-agile/baseline-os work-next.
+**Chain:** Phase 0 config preflight → **Phase 0b agent autonomy (P27)** → gtcx-docs INST-003 → repo session (via `run-repo-session` / `bin/agent`) → **audit context card** → repo gates → optional `--ingest` via gtcx-agile/baseline-os work-next.
+
+**Agent environment autonomy (`agentAutonomy` in JSON — Phase 0b):** Before implementing, verify Cursor shell allowlists (`.cursor/cli.json`, `.cursor/permissions.json`) and PATH cover `pnpm`, `node`, `git`, `gh`, `baseline` (+ `cargo` when Rust, `python3` for hygiene). Levels: `full` · `partial` · `blocked` · `terminal`. If `partial` or `blocked`, emit **Permission Unblock Report** (`docs/operations/agent-permission-unblock.md`) — do not defer V-ladder to the human. Standalone: `pnpm agent:environment:check`
+
+**Agent capability posture (`agentCapabilities` in JSON):** Assume **full execution power** in the owner repo unless `canExecute` is false. You CAN run gates, git, gh, cross-repo handoffs, forensic audits, and background servers — **execute first**. Timid deferral ("verify locally", "I cannot", story menus) is a protocol violation, not politeness. Read `docs/operations/agent-capability-posture.md`. Standalone: `pnpm agent:capabilities:check`
+
+**Audit context card (`sessionContext` in JSON):** At open, identify **master/bank-grade** scores from `docs/audit/latest.json` · last **full/engineering** forensic insight · **GTM status** (lane 5 GR tiers + `.baseline/launch-focus.json`) · **repo hygiene** + **document hygiene** (lane 2 domains + `repo-hygiene-*.md` / `docs-standard-compliance-*.md`) · **UX** audit (worldclass-ux / ux-audit when surface exists) · **SEF** status (Protocol 20 when `sef:check` or `docs/sef/`) · **human agent blockers** (repo-owned gates → raise via **gtcx-agentic** SoR) · **cross-repo dependencies** (`.baseline/memory/dependencies.md`, P24). Read listed `readPaths` before implementing.
 
 **Do not treat `pnpm agent:start` alone as session complete.** It runs repo P22 bootstrap (baseline-os `repo-session-core` or repo-specific `agent-session-start.mjs`). It does **not** run INST-003 or repo gates. Use **`baseline start`** for the full L1 chain.
 
