@@ -12,3 +12,4 @@
 - [ ] Tests added/updated
 - [ ] Docs updated (if needed)
 - [ ] Evidence links provided
+- [ ] **Agent path?** Complete [`docs/operations/agent-pr-checklist.md`](docs/operations/agent-pr-checklist.md) + Agent Context Attestation (P27)

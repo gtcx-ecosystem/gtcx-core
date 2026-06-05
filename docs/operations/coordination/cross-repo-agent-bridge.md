@@ -36,10 +36,31 @@ tags: ['coordination', 'bridge', 'agents', 'cross-repo']
 
 ---
 
+## Failure taxonomy (SIGNAL-E)
+
+Classify agent/coordination failures for bridge rows and remediation. **Do not** paste secrets.
+
+| Class               | When                                         | Example                                 | Remediation                        |
+| ------------------- | -------------------------------------------- | --------------------------------------- | ---------------------------------- |
+| `witness-drift`     | Witness doc stale vs hub state               | Outbound ack missing after infra deploy | File outbound + update Latest row  |
+| `gate-fail`         | V-ladder or `agent:protocols:check` exit ≠ 0 | protocols check failed                  | Fix in-session; log command + exit |
+| `class-s-violation` | Agent attempted Class S work                 | LOI signature by agent                  | Stop; witness only; human gate     |
+| `cross-repo-stale`  | Sibling repo layout drift                    | Missing shim import                     | Fix import + cross-repo-deps check |
+| `import-drift`      | Broken sibling script path                   | `suggest-persona.mjs` path              | Resolver + gtcx-agentic shim       |
+
+### Logged incidents
+
+| When (UTC) | Class          | Persona / agent | Gate / story                        | Remediation                               |
+| ---------- | -------------- | --------------- | ----------------------------------- | ----------------------------------------- |
+| 2026-06-05 | `import-drift` | Cursor agent    | `pnpm agent:protocols:check` exit 1 | SIGNAL-CORE-011 — resolver + agentic shim |
+
+---
+
 ## Latest updates (newest first)
 
 | When (UTC) | Agent / repo      | Update                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ---------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-06-05 | gtcx-core         | **SIGNAL Phase 1** — suggest-persona import resolver (SIGNAL-CORE-011); agent PR checklist; failure taxonomy; session gate metrics in auto-dev-data. Protocols gate restore pending verify. Human Lead still **TBD** (SIGNAL-CORE-001).                                                                                                                                                                                                                                               |
 | 2026-06-07 | gtcx-core         | **DTF-5.5.4 tracker** — [`dtf-554-commercial-gate-tracker-2026-06-07.md`](./dtf-554-commercial-gate-tracker-2026-06-07.md) (Class S witness). P22 backlog clear; commercial ceiling unchanged.                                                                                                                                                                                                                                                                                        |
 | 2026-06-07 | gtcx-core         | **EXT-INF-002 pack ack** — inbound [`from-gtcx-infrastructure-ext-inf-002-ack-2026-06-07.md`](./from-gtcx-infrastructure-ext-inf-002-ack-2026-06-07.md). Core automatable work **done**; SOW Class S remains infra. Manifests refreshed (`vendor-evidence` + `certified-pack` verify exit 0).                                                                                                                                                                                         |
 | 2026-06-07 | gtcx-core         | **OI-X02 closed** — inbound [`from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md`](./from-gtcx-infrastructure-er-1-08-hub-ack-2026-06-04.md) (infra hub log `2026-06-04T23:50Z`). Witness queue empty. **EXT-INF-002** still Class S on infra (SOW). P22 Class S wall: DTF-5.5.4, CORE-004-CEREMONY.                                                                                                                                                                              |
