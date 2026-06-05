@@ -5,11 +5,13 @@ reconciliation_note: >-
 sources:
   - docs/audit/engineering-audit-2026-06-05.md
   - docs/audit/bank-grade-audit-2026-06-07.md
+  - docs/audit/repo-hygiene-2026-06-05.md
   - docs/audit/signal-assessment-2026-06-07.md
   - docs/audit/full-audit-2026-06-04.md
   - docs/audit/moat-completion-reconciliation-2026-06-03.md
   - docs/operations/tier-5-workplan-2026-06.md
   - docs/operations/coordination/dtf-554-commercial-gate-tracker-2026-06-07.md
+  - docs/operations/coordination/dtf-554-loi-h554-packet-2026-06-05.md
   - docs/operations/coordination/core-004-engineering-closeout-2026-06-06.md
 ---
 
@@ -18,30 +20,27 @@ sources:
 **Unified index:** [moat-completion-reconciliation-2026-06-03.md](./moat-completion-reconciliation-2026-06-03.md)  
 **Latest lane-1 forensic:** [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md) · [bank-grade-audit-2026-06-07.md](./bank-grade-audit-2026-06-07.md)  
 **Tier 5 register:** [tier-5-workplan-2026-06.md](../operations/tier-5-workplan-2026-06.md)  
-**Active phase:** **ENG-S1** **complete** — Class S wall (**S-T5-5**) only remaining automatable ceiling  
+**Active phase:** **WIT-S1** witness + Class S prep — automatable backlog clear  
 **Protocol 22:** `pnpm agent:next-work` → **DTF-5.5.4** / **CORE-004-CEREMONY** (Class S); witness mode  
-**Last in-repo sprint:** **ENG-S1** complete (2026-06-05 execute-roadmap)
+**Last in-repo sprint:** **WIT-S1** hygiene + LOI packet + vendor manifest (2026-06-05 execute-roadmap pass 2)
 
 ---
 
-## Executive summary (2026-06-05)
+## Executive summary (2026-06-05 pass 2)
 
-| Track                            | State               | Next                                                                                                                              |
-| -------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Lane 1 signoff @ HEAD**        | **10.0** (restored) | ENG-S1 complete — `bundle:check-budgets` + `api:check` green @ HEAD                                                               |
-| Internal engineering (S1–S5)     | **done**            | —                                                                                                                                 |
-| Algorithmic moat D1–D6 (in-repo) | **done**            | D3 ceremony — `transcript.seed` (Class S, custodian)                                                                              |
-| **DTF Tier 5 technical**         | **~88%**            | DTF-5.5.2 done; **5.5.4** LOI/regulator (Class S)                                                                                 |
-| **CORE-004 engineering**         | **done**            | Class R — [`core-004-engineering-closeout-2026-06-06.md`](../operations/coordination/core-004-engineering-closeout-2026-06-06.md) |
-| Bank-grade / sovereign pilot     | **Not Ready**       | EXT-INF-002 pen-test SOW (Class S, infra); composite **8.9** unchanged                                                            |
-| **Launch / GTM bout**            | **done**            | LAUNCH-PLAN-01..05 closed 2026-06-04                                                                                              |
-| **FA-S6 vendor pack (core)**     | **done**            | FA-S6-02 manifest — [`vendor-pen-test-pack-manifest-latest.json`](evidence/vendor-pen-test-pack-manifest-latest.json)             |
-| **Auto-dev hub sync**            | **done**            | ER-AUTO-DEV-01 — run `pnpm agent:reconcile-auto-dev` after this reconcile                                                         |
-| **P0 blocker**                   | **Closed**          | FA-P0-1 turbo cycle resolved 2026-06-04                                                                                           |
-| **SIGNAL overall**               | **L1 high**         | Team cap — Human Lead TBD (`AGENTS.md`); optional Class R **ER-SIG-01**                                                           |
+| Track                           | State               | Next                                                       |
+| ------------------------------- | ------------------- | ---------------------------------------------------------- |
+| **Lane 1 signoff @ HEAD**       | **10.0**            | Hold — core gates green                                    |
+| **Repo hygiene strict checker** | **PASS**            | ER-HYG-01 @ `b1ab9c2`; forensic audit doc 7.4 until re-run |
+| **DTF Tier 5 technical**        | **~88%**            | DTF-5.5.2 done                                             |
+| **DTF-5.5.4 (Class S)**         | agent prep **done** | GTM/Legal sign LOI — H-554 packet `15edf3e`                |
+| **CORE-004 engineering**        | **done**            | Ceremony publish — custodian Class S                       |
+| Bank-grade / sovereign pilot    | **Not Ready**       | EXT-INF-002 SOW; composite **8.9**                         |
+| **FA-S6 vendor pack**           | **done**            | ER-VEND-01 — `vendor-evidence:verify-manifest` exit **0**  |
+| **P0 allowlist drift**          | **Closed**          | ER-HYG-01                                                  |
 
 **Risk (audit):** Do not equate npm library maturity with sovereign pilot clearance.  
-**Opportunity (audit):** Lane-1 signoff restored; Class S commercial wall is the only remaining ceiling.
+**Opportunity:** Class R witness gaps closed; **only human LOI signature** blocks Tier 5 commercial claims.
 
 ---
 
@@ -93,7 +92,7 @@ sources:
 | -------------- | ----------------------------------------------- | --------------------- | ----------- | ------------------------------------------------------------------------------------- |
 | FA-S6-01       | Tier-5 technical evidence index (DTF-5.5.5)     | quality-evidence-lead | **done**    | [evidence/README.md](./evidence/README.md) register                                   |
 | FA-S6-02       | KAT + fuzz + threat matrix vendor pack manifest | quality-evidence-lead | **done**    | `pnpm vendor-evidence:build-manifest` · `pnpm vendor-evidence:verify-manifest` exit 0 |
-| FA-S6-03       | Zimbabwe sandbox email + LOI tracker            | gtm-lead              | **blocked** | Human / GTM (Class S)                                                                 |
+| FA-S6-03       | Zimbabwe sandbox email + LOI tracker            | gtm-lead              | **blocked** | Human / GTM (Class S) — H-554 packet assembled; signature pending                     |
 | FA-S6-04       | CORE-004 ceremony publish                       | custodian + gtcx-core | **blocked** | Class S — `transcript.seed` + `pnpm ops:trusted-setup:verify-publish`                 |
 | ER-AUTO-DEV-01 | `auto-dev-data.json` + `auto-dev-state.md` sync | quality-evidence-lead | **done**    | `pnpm agent:reconcile-auto-dev` · JSON validates · mirrors `latest.json` + P22        |
 
@@ -116,13 +115,33 @@ sources:
 
 ### Next commercial (S-T5-5 — not in-repo code)
 
-| ID        | Title                                 | Owner                      | Status                                                                                                      |
-| --------- | ------------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| DTF-5.5.2 | Certified pack pipeline               | Legal + protocol-architect | **done** 2026-06-06 — [`certified-pack-manifest-latest.json`](evidence/certified-pack-manifest-latest.json) |
-| DTF-5.5.4 | Design-partner LOI / regulator letter | GTM                        | **awaiting-human** (Class S)                                                                                |
-| DTF-5.5.5 | Evidence index entry                  | quality-evidence-lead      | **done**                                                                                                    |
+| ID        | Title                                 | Owner                      | Status                                                                                                                                           |
+| --------- | ------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| DTF-5.5.2 | Certified pack pipeline               | Legal + protocol-architect | **done** 2026-06-06 — [`certified-pack-manifest-latest.json`](evidence/certified-pack-manifest-latest.json)                                      |
+| DTF-5.5.4 | Design-partner LOI / regulator letter | GTM                        | **awaiting-human** (Class S) — agent prep **done** [`dtf-554-loi-h554-packet`](../operations/coordination/dtf-554-loi-h554-packet-2026-06-05.md) |
+| DTF-5.5.5 | Evidence index entry                  | quality-evidence-lead      | **done**                                                                                                                                         |
 
 Technical milestones DTF-5.1.1–5.5.1 and DTF-5.4.4 are **done** — see Completed table above.
+
+---
+
+**Hygiene:** Strict checker **PASS** @ `b1ab9c2` — forensic [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md) still shows 7.4 (pre-remediation); re-audit optional.
+
+---
+
+## WIT-S1 — Witness sprint (2026-06-05 pass 2)
+
+**Source:** execute-roadmap reconcile after repo-hygiene P1 + DTF-5.5.4 packet + vendor manifest drift  
+**Goal:** Close Class **R** witness gaps while Class S wall unchanged.
+
+| Story          | Title                                            | Owner                 | Status   | Acceptance / UAT                                                                          |
+| -------------- | ------------------------------------------------ | --------------------- | -------- | ----------------------------------------------------------------------------------------- |
+| ER-HYG-01      | Root allowlist + P29 scaffold tracked            | protocol-architect    | **done** | `pnpm check:workspace-root-cleanliness:strict` exit **0** — `b1ab9c2`                     |
+| ER-DTF554-01   | H-554 LOI packet + witness index + agentic raise | protocol-architect    | **done** | Packet + outbound + manifest `oneLineAsk` — `15edf3e`                                     |
+| ER-VEND-01     | Refresh vendor pen-test pack manifest hashes     | quality-evidence-lead | **done** | `pnpm vendor-evidence:build-manifest` · `pnpm vendor-evidence:verify-manifest` exit **0** |
+| ER-AUTO-DEV-02 | `auto-dev-data.json` sync after WIT-S1           | quality-evidence-lead | **done** | `pnpm agent:reconcile-auto-dev` exit **0**                                                |
+
+**Blockers (Class S — unchanged):** DTF-5.5.4 human signature · CORE-004-CEREMONY · EXT-INF-002 SOW
 
 ---
 
@@ -181,7 +200,8 @@ pnpm api:check
 | ENG-P2   | Medium   | engineering-audit-2026-06-05              | **closed**   | ER-ENG-02 done                              |
 | ENG-P3   | Low      | engineering-audit-2026-06-05              | **closed**   | ER-ENG-03 done                              |
 | BG-P1-01 | High     | bank-grade-audit-2026-06-07               | **blocked**  | EXT-INF-002 SOW — infra Class S             |
-| BG-P1-02 | High     | bank-grade-audit-2026-06-07               | **blocked**  | DTF-5.5.4 — FA-S6-03 / tracker              |
+| HY-P0-1  | Critical | repo-hygiene-2026-06-05                   | **closed**   | ER-HYG-01 — strict PASS @ b1ab9c2           |
+| BG-P1-02 | High     | bank-grade-audit-2026-06-07               | **blocked**  | DTF-5.5.4 — agent prep done; human sign     |
 | BG-P1-03 | High     | bank-grade-audit-2026-06-07               | **blocked**  | CORE-004-CEREMONY — FA-S6-04                |
 | BG-P1-04 | High     | bank-grade-audit-2026-06-07               | **deferred** | IC-T0 ecosystem — lane 3                    |
 | BG-P2-01 | Medium   | bank-grade + signal-assessment-2026-06-07 | **blocked**  | ER-SIG-01 — Human Lead naming (Class R)     |
@@ -261,18 +281,18 @@ See [ci-confirmation-2026-06-01.md](./ci-confirmation-2026-06-01.md). Stories S1
 
 ## Deferred (external + human)
 
-| Item                             | Owner                 | Reason                                                                                                       |
-| -------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Pen-test report (live stack)     | gtcx-infrastructure   | EXT-INF-002; vendor SOW Class S (pack ack done)                                                              |
-| SOC 2 Type 1                     | quality-evidence-lead | CPA engagement                                                                                               |
-| Zimbabwe sandbox email           | gtm-lead              | Human approval                                                                                               |
-| Trusted-setup ceremony           | human + gtcx-core     | CORE-004 ZKP transcript (XR-402 KMS **done**)                                                                |
-| D8 formal verification           | baseline-os           | CORE-006                                                                                                     |
-| D9 third-party crypto audit      | baseline-os           | CORE-005                                                                                                     |
-| DTF-5.4.4 protocols E2E          | gtcx-protocols        | **done** — witness `73eaff2b` (protocols hub log)                                                            |
-| DTF-5.5.4 LOI / regulator letter | GTM                   | Tier 5 commercial gate — [tracker](../operations/coordination/dtf-554-commercial-gate-tracker-2026-06-07.md) |
-| Human Lead naming                | Leadership            | SIGNAL Team cap — `AGENTS.md` TBD                                                                            |
-| Industry Compliance IC-T0        | Ecosystem / Legal     | 0/12 register — caps GCR narrative                                                                           |
+| Item                             | Owner                 | Reason                                                                                                                                            |
+| -------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pen-test report (live stack)     | gtcx-infrastructure   | EXT-INF-002; vendor SOW Class S (pack ack done)                                                                                                   |
+| SOC 2 Type 1                     | quality-evidence-lead | CPA engagement                                                                                                                                    |
+| Zimbabwe sandbox email           | gtm-lead              | Human approval                                                                                                                                    |
+| Trusted-setup ceremony           | human + gtcx-core     | CORE-004 ZKP transcript (XR-402 KMS **done**)                                                                                                     |
+| D8 formal verification           | baseline-os           | CORE-006                                                                                                                                          |
+| D9 third-party crypto audit      | baseline-os           | CORE-005                                                                                                                                          |
+| DTF-5.4.4 protocols E2E          | gtcx-protocols        | **done** — witness `73eaff2b` (protocols hub log)                                                                                                 |
+| DTF-5.5.4 LOI / regulator letter | GTM                   | Tier 5 commercial — H-554 packet ready; **human signature** — [tracker](../operations/coordination/dtf-554-commercial-gate-tracker-2026-06-07.md) |
+| Human Lead naming                | Leadership            | SIGNAL Team cap — `AGENTS.md` TBD                                                                                                                 |
+| Industry Compliance IC-T0        | Ecosystem / Legal     | 0/12 register — caps GCR narrative                                                                                                                |
 
 ---
 
@@ -311,7 +331,23 @@ Refresh `.baseline/memory/session.md` after each milestone.
 
 ---
 
-## Reconcile report (Phase 2 — 2026-06-05)
+## Reconcile report (Phase 4 — 2026-06-05 pass 2)
+
+| Category        | Count | Notes                                                      |
+| --------------- | ----: | ---------------------------------------------------------- |
+| Stories added   |     4 | WIT-S1 ER-HYG-01, ER-DTF554-01, ER-VEND-01, ER-AUTO-DEV-02 |
+| Stories pending |     0 | —                                                          |
+| Stories done    |     4 | WIT-S1 complete (Class R witness)                          |
+| Stories blocked |     4 | DTF-5.5.4 human sign, CORE-004-CEREMONY, FA-S6-04, EXT-INF |
+| Deferred        |     3 | IC-T0, SIGNAL L2 path, SOC 2                               |
+
+**Next story ID:** **DTF-5.5.4** (Class S — GTM/Legal sign LOI per H-554 packet)
+
+**Human one-line ask:** Sign design-partner LOI or regulator letter naming pilot scope + pack SHA-256 set — [`dtf-554-loi-h554-packet-2026-06-05.md`](../operations/coordination/dtf-554-loi-h554-packet-2026-06-05.md)
+
+---
+
+## Reconcile report (Phase 2 — 2026-06-05 pass 1)
 
 | Category        | Count | Notes                                                  |
 | --------------- | ----: | ------------------------------------------------------ |
@@ -325,4 +361,4 @@ Refresh `.baseline/memory/session.md` after each milestone.
 
 ---
 
-_Last updated: 2026-06-05 — execute-roadmap; ENG-S1 complete; lane-1 signoff restored 10.0; Class S wall unchanged_
+_Last updated: 2026-06-05 — execute-roadmap pass 2; WIT-S1 complete; Class S wall — human LOI signature pending_

@@ -1,9 +1,9 @@
 {
   "$schema": "gtcx://coordination/human-gates-manifest/v1",
   "schema": "gtcx.humanGates.manifest.v1",
-  "updated": "2026-06-05",
-  "normativeDoc": "docs/operations/human-gates-system.md",
-  "operatingModel": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/human-assurance-gates-operating-model-2026-06-06.md",
+  "updated": "2026-06-06",
+  "normativeDoc": "docs/04-operations/human-gates-system.md",
+  "operatingModel": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/human-assurance-gates-operating-model-2026-06-06.md",
   "gates": [
     {
       "id": "H-03",
@@ -15,8 +15,8 @@
       "blocksIR": false,
       "status": "awaiting-human",
       "oneLineAsk": "Authorize first sovereign countersignature of gh/v1.0.0 with did:gtcx:auth:gh:bog; record chain export before ratified_at.",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/H-03-sovereign-countersign-prep-2026-06-06.md",
-      "packet": "https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/docs/operations/coordination/h03-sovereign-countersign-packet-2026-06-04.md"
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/H-03-sovereign-countersign-prep-2026-06-06.md",
+      "packet": "https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/docs/06-coordination/archive/h03-sovereign-countersign-packet-2026-06-04.md"
     },
     {
       "id": "H-05",
@@ -29,8 +29,8 @@
       "status": "awaiting-human",
       "aliases": ["EXT-INF-002", "INT-S12-01"],
       "oneLineAsk": "Select pen-test vendor from score matrix; authorize SOW kickoff per pen-test-rfp.md.",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/compliance/pen-test-rfp.md",
-      "packet": "https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/docs/operations/coordination/ext-inf-002-pen-test-h05-packet-2026-06-05.md"
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/10-compliance/pen-test-rfp.md",
+      "packet": "https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/docs/06-coordination/archive/ext-inf-002-pen-test-h05-packet-2026-06-05.md"
     },
     {
       "id": "INT-S12-03",
@@ -42,7 +42,7 @@
       "blocksIR": false,
       "status": "awaiting-human",
       "oneLineAsk": "Auditor engagement + Type I opinion letter; quarterly access review sign-off.",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/compliance/soc2-type1-gap-assessment-2026-06.md"
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/10-compliance/soc2-type1-gap-assessment-2026-06.md"
     },
     {
       "id": "DTF-5.5.4",
@@ -67,11 +67,11 @@
       "blocksIR": false,
       "status": "awaiting-human",
       "oneLineAsk": "Run pnpm maestro:jtbd on each pilot device; file evidence per maestro-field-lab-checklist.",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-mobile/blob/main/docs/operations/maestro-field-lab-checklist.md",
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-mobile/blob/main/docs/04-operations/maestro-field-lab-checklist.md",
       "command": "pnpm maestro:jtbd",
       "workRegister": {
         "repo": "gtcx-mobile",
-        "path": "docs/operations/agent-work-selection.md",
+        "path": "docs/04-operations/agents/agent-work-selection.md",
         "storyId": "MOBILE-MAESTRO-01"
       }
     },
@@ -84,10 +84,10 @@
       "blocksClaims": ["locale sign-off"],
       "blocksIR": false,
       "status": "awaiting-human",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-mobile/blob/main/docs/operations/translator-qa-checklist.md",
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-mobile/blob/main/docs/04-operations/translator-qa-checklist.md",
       "workRegister": {
         "repo": "gtcx-mobile",
-        "path": "docs/operations/agent-work-selection.md",
+        "path": "docs/04-operations/agents/agent-work-selection.md",
         "storyId": "MOBILE-I18N-01"
       }
     },
@@ -100,7 +100,7 @@
       "blocksClaims": ["pilot legal complete"],
       "blocksIR": false,
       "status": "awaiting-human",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-mobile/blob/main/docs/gtm/legal-pack-execution-checklist.md"
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-mobile/blob/main/docs/08-gtm/legal-pack-execution-checklist.md"
     },
     {
       "id": "PRD-003",
@@ -111,7 +111,7 @@
       "blocksClaims": ["ZW calibration captures"],
       "blocksIR": false,
       "status": "awaiting-human",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-mobile/blob/main/docs/operations/prd-003-coordinator-capture-brief.md"
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-mobile/blob/main/docs/04-operations/prd-003-coordinator-capture-brief.md"
     },
     {
       "id": "EOS-SEF-EVIDENCE",
@@ -134,7 +134,7 @@
       "blocksIR": false,
       "status": "prep-ready",
       "dependsOn": ["H-03"],
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/to-gtcx-infrastructure-issue-61-issuer-scale-2026-06-06.md"
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/to-gtcx-infrastructure-issue-61-issuer-scale-2026-06-06.md"
     },
     {
       "id": "XR-518",
@@ -158,11 +158,11 @@
       "status": "awaiting-human",
       "aliases": ["O-01", "S2-PILOT-01", "S5-04"],
       "oneLineAsk": "Sign one design-partner pilot LOI or nominate a named operator for S5-04 baseline publishing.",
-      "checklist": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/docs/specs/_project/pilots/reference-deployment-workflow.md",
+      "checklist": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/docs/02-architecture/specs/_project/pilots/reference-deployment-workflow.md",
       "packet": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/workstream/coordination/outbound/to-gtcx-agentic-human-gates-2026-06-05.md",
       "workRegister": {
         "repo": "baseline-os",
-        "path": "docs/operations/agent-work-selection.md",
+        "path": "docs/04-operations/agents/agent-work-selection.md",
         "storyId": "S5-04"
       }
     },
@@ -177,7 +177,7 @@
       "status": "awaiting-human",
       "aliases": ["S2-FEAT-007-RELEASE"],
       "oneLineAsk": "Create and push GitHub release tag v1.6.2 to match npm latest baselineos@1.6.2.",
-      "checklist": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/docs/audit/public-trust-links-2026-06-03.md"
+      "checklist": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/docs/05-audit/public-trust-links-2026-06-03.md"
     },
     {
       "id": "BL-SOC2-01",
@@ -190,7 +190,7 @@
       "status": "awaiting-human",
       "aliases": ["S3-SOC2-01"],
       "oneLineAsk": "Start SOC 2 Type I with named vendor and scope (baseline-os roadmap action 10).",
-      "checklist": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/docs/operations/compliance/soc2-type1-gap-analysis.md"
+      "checklist": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/docs/04-operations/compliance/soc2-type1-gap-analysis.md"
     },
     {
       "id": "BL-OPERATOR-01",
@@ -203,7 +203,7 @@
       "status": "awaiting-human",
       "aliases": ["R2-01", "S2-FEAT-002-OPERATOR"],
       "oneLineAsk": "Nominate a non-core operator and capture CLI/Desktop baseline setup evidence.",
-      "checklist": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/docs/audit/non-core-operator-proof-blocker-2026-06-04.md"
+      "checklist": "https://github.com/gtcx-ecosystem/baseline-os/blob/main/docs/05-audit/non-core-operator-proof-blocker-2026-06-04.md"
     },
     {
       "id": "SIGNAL-INT-001",
@@ -216,8 +216,8 @@
       "status": "awaiting-human",
       "aliases": ["INT-HUMAN-LEAD"],
       "oneLineAsk": "Name Human Lead and AI Reliability owner in gtcx-intelligence AGENTS.md coordination table.",
-      "checklist": "https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/audit/signal-assessment-2026-06-06.md",
-      "packet": "https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/operations/coordination/outbound/to-gtcx-agentic-blockers-pass21-2026-06-06.md"
+      "checklist": "https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/05-audit/signal-assessment-2026-06-06.md",
+      "packet": "https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/06-coordination/archive/outbound/to-gtcx-agentic-blockers-pass21-2026-06-06.md"
     }
   ],
   "reconciliationRules": [

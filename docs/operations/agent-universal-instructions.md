@@ -32,11 +32,11 @@ Build once if needed: `cd ../baseline-os && pnpm --filter baselineos build`
 
 **Chain:** Phase 0 config preflight → **Phase 0b agent autonomy (P27)** → gtcx-docs INST-003 → repo session (via `run-repo-session` / `bin/agent`) → **audit context card** → repo gates → optional `--ingest` via gtcx-agile/baseline-os work-next.
 
-**Agent environment autonomy (`agentAutonomy` in JSON — Phase 0b):** Before implementing, verify Cursor shell allowlists (`.cursor/cli.json`, `.cursor/permissions.json`) and PATH cover `pnpm`, `node`, `git`, `gh`, `baseline` (+ `cargo` when Rust, `python3` for hygiene). Levels: `full` · `partial` · `blocked` · `terminal`. If `partial` or `blocked`, emit **Permission Unblock Report** (`docs/operations/agent-permission-unblock.md`) — do not defer V-ladder to the human. Standalone: `pnpm agent:environment:check`
+**Agent environment autonomy (`agentAutonomy` in JSON — Phase 0b):** Before implementing, verify Cursor shell allowlists (`.cursor/cli.json`, `.cursor/permissions.json`) and PATH cover `pnpm`, `node`, `git`, `gh`, `baseline` (+ `cargo` when Rust, `python3` for hygiene). Levels: `full` · `partial` · `blocked` · `terminal`. If `partial` or `blocked`, emit **Permission Unblock Report** (`docs/04-operations/agent-permission-unblock.md`) — do not defer V-ladder to the human. Standalone: `pnpm agent:environment:check`
 
-**Agent capability posture (`agentCapabilities` in JSON):** Assume **full execution power** in the owner repo unless `canExecute` is false. You CAN run gates, git, gh, cross-repo handoffs, forensic audits, and background servers — **execute first**. Timid deferral ("verify locally", "I cannot", story menus) is a protocol violation, not politeness. Read `docs/operations/agent-capability-posture.md`. Standalone: `pnpm agent:capabilities:check`
+**Agent capability posture (`agentCapabilities` in JSON):** Assume **full execution power** in the owner repo unless `canExecute` is false. You CAN run gates, git, gh, cross-repo handoffs, forensic audits, and background servers — **execute first**. Timid deferral ("verify locally", "I cannot", story menus) is a protocol violation, not politeness. Read `docs/04-operations/agent-capability-posture.md`. Standalone: `pnpm agent:capabilities:check`
 
-**Audit context card (`sessionContext` in JSON):** At open, identify **master/bank-grade** scores from `docs/audit/latest.json` · last **full/engineering** forensic insight · **GTM status** (lane 5 GR tiers + `.baseline/launch-focus.json`) · **repo hygiene** + **document hygiene** (lane 2 domains + `repo-hygiene-*.md` / `docs-standard-compliance-*.md`) · **UX** audit (worldclass-ux / ux-audit when surface exists) · **SEF** status (Protocol 20 when `sef:check` or `docs/sef/`) · **human agent blockers** (repo-owned gates → raise via **gtcx-agentic** SoR) · **cross-repo dependencies** (`.baseline/memory/dependencies.md`, P24). Read listed `readPaths` before implementing.
+**Audit context card (`sessionContext` in JSON):** At open, identify **master/bank-grade** scores from `docs/05-audit/indexes/latest.json` · last **full/engineering** forensic insight · **GTM status** (lane 5 GR tiers + `.baseline/launch-focus.json`) · **repo hygiene** + **document hygiene** (lane 2 domains + `repo-hygiene-*.md` / `docs-standard-compliance-*.md`) · **UX** audit (worldclass-ux / ux-audit when surface exists) · **SEF** status (Protocol 20 when `sef:check` or `docs/sef/`) · **human agent blockers** (repo-owned gates → raise via **gtcx-agentic** SoR) · **cross-repo dependencies** (`.baseline/memory/dependencies.md`, P24). Read listed `readPaths` before implementing.
 
 **Do not treat `pnpm agent:start` alone as session complete.** It runs repo P22 bootstrap (baseline-os `repo-session-core` or repo-specific `agent-session-start.mjs`). It does **not** run INST-003 or repo gates. Use **`baseline start`** for the full L1 chain.
 
@@ -61,27 +61,27 @@ Legacy alias: `pnpm agent:session-start` (= `agent:start`).
 | gates    | `pnpm gates`                         |
 | hub      | `pnpm hub`                           |
 
-Index: `baseline-os/docs/cli/agent-cheatsheet.md` · repo copy: `docs/operations/agent-command-lookup.md`
+Index: `baseline-os/docs/cli/agent-cheatsheet.md` · repo copy: `docs/04-operations/agent-command-lookup.md`
 
 Read after start:
 
-| File                                      | Purpose                               |
-| ----------------------------------------- | ------------------------------------- |
-| `.baseline/memory/session.md`             | Session pointer                       |
-| `docs/operations/agent-work-selection.md` | P22 manifest (when present)           |
-| `AGENTS.md`                               | Repo-specific gates (synced partials) |
+| File                                                | Purpose                               |
+| --------------------------------------------------- | ------------------------------------- |
+| `.baseline/memory/session.md`                       | Session pointer                       |
+| `docs/04-operations/agents/agent-work-selection.md` | P22 manifest (when present)           |
+| `AGENTS.md`                                         | Repo-specific gates (synced partials) |
 
 ### Ecosystem learning card (normative — every repo)
 
 | Step | Resource                                                                                                                                                                   |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | [Unblock playbook](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-unblock-playbook-2026-06.md) (F1–F10)                 |
-| 2    | [P26 + post-pilot gating](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/agent-status-update-and-post-pilot-gating-2026-06-06.md) |
-| 3    | [Human-external register](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/docs/operations/coordination/human-external-blocker-register-2026-06.md)                |
-| 4    | [Cross-repo bridge](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/cross-repo-agent-bridge.md) — Latest updates                   |
+| 1    | [Unblock playbook](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/ecosystem-unblock-playbook-2026-06.md) (F1–F10)                 |
+| 2    | [P26 + post-pilot gating](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/agent-status-update-and-post-pilot-gating-2026-06-06.md) |
+| 3    | [Human-external register](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/docs/06-coordination/archive/human-external-blocker-register-2026-06.md)                |
+| 4    | [Cross-repo bridge](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/cross-repo-agent-bridge.md) — Latest updates                   |
 | 5    | This repo auto-dev-state + work-selection                                                                                                                                  |
 
-**End of turn:** Status Update (§3b) + one [log row](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/cross-repo-agent-log.md). **`backlogClear` on protocols does not stop IR here.** Never execute **H-03** / **XR-518 apply** from non-owner repos.
+**End of turn:** Status Update (§3b) + one [log row](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/cross-repo-agent-log.md). **`backlogClear` on protocols does not stop IR here.** Never execute **H-03** / **XR-518 apply** from non-owner repos.
 
 ---
 
@@ -93,7 +93,7 @@ Read after start:
 
 ### Execution bout (intrinsic — drain before check-in)
 
-Repos with bout wiring provision `executionBout` on every `agent:session-start` / `agent:next-work`. **gtcx-core** normative: `docs/operations/agent-execution-bout.md` · state: `.baseline/execution-bout.json`.
+Repos with bout wiring provision `executionBout` on every `agent:session-start` / `agent:next-work`. **gtcx-core** normative: `docs/04-operations/agent-execution-bout.md` · state: `.baseline/execution-bout.json`.
 
 | Rhythm          | Action                                               |
 | --------------- | ---------------------------------------------------- |
@@ -199,7 +199,7 @@ Read [`human-gate-navigation.md`](human-gate-navigation.md) before treating any 
 | **Next priority**   | One recommended follow-on (agent executes Class R)    |
 | **Approval needed** | Human gates only — parallel; never menus or "I can …" |
 
-Full template: `docs/operations/agent-status-update-template.md` (rolled out with universal instructions).
+Full template: `docs/04-operations/agent-status-update-template.md` (rolled out with universal instructions).
 
 **Start vs report:** Proceed Brief (§3) **before** work · Status Update (§3b) **after** work.
 

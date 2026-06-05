@@ -68,7 +68,7 @@ pnpm agent:next-work
 
 ### Approval needed
 
-- **EXT-INF-002 / H-05** — Security: sign pen-test SOW per [H-05 packet](docs/operations/coordination/ext-inf-002-pen-test-h05-packet-2026-06-05.md)
+- **EXT-INF-002 / H-05** — Security: sign pen-test SOW per [H-05 packet](docs/06-coordination/archive/ext-inf-002-pen-test-h05-packet-2026-06-05.md)
 ```
 
 ### Forbidden phrases (any repo)
@@ -89,7 +89,7 @@ pnpm agent:next-work
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **gtcx-agentic**        | Hub packets + register; `backlogClear` → witness                                                                                                                                                                  |
 | **gtcx-infrastructure** | Continue **IR-\*** / validate-all witness; S2-13 = human only                                                                                                                                                     |
-| **gtcx-intelligence**   | Drain **INT-R5-03/02** — [bank-grade ceiling unblock](https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/operations/coordination/from-gtcx-intelligence-bank-grade-ceiling-unblock-2026-06-06.md) |
+| **gtcx-intelligence**   | Drain **INT-R5-03/02** — [bank-grade ceiling unblock](https://github.com/gtcx-ecosystem/gtcx-intelligence/blob/main/docs/06-coordination/archive/from-gtcx-intelligence-bank-grade-ceiling-unblock-2026-06-06.md) |
 | **gtcx-protocols**      | validate / index / P22 cadence — H-05 under Approval needed                                                                                                                                                       |
 | **baseline-os**         | `backlogClear` → BL-WITNESS-\* or hub; BL-O-01 parallel                                                                                                                                                           |
 | **gtcx-mobile**         | Maestro/i18n = Approval needed; code stories continue until register clear                                                                                                                                        |
@@ -118,5 +118,5 @@ pnpm agent:human-gates:check    # exit 0
 | Manifest        | [`human-gates.manifest.json`](../coordination/human-gates.manifest.json)                                                                                                             |
 | Register        | [`human-external-blocker-register-2026-06.md`](coordination/human-external-blocker-register-2026-06.md)                                                                              |
 | H-05 packet     | [`ext-inf-002-pen-test-h05-packet-2026-06-05.md`](coordination/ext-inf-002-pen-test-h05-packet-2026-06-05.md)                                                                        |
-| Playbook F1–F7  | [ecosystem-unblock-playbook](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/ecosystem-unblock-playbook-2026-06-06.md)                       |
-| Operating model | [human-assurance-gates-operating-model](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/operations/coordination/human-assurance-gates-operating-model-2026-06-06.md) |
+| Playbook F1–F7  | [ecosystem-unblock-playbook](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/ecosystem-unblock-playbook-2026-06-06.md)                       |
+| Operating model | [human-assurance-gates-operating-model](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/docs/06-coordination/archive/human-assurance-gates-operating-model-2026-06-06.md) |

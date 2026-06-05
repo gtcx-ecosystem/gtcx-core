@@ -30,7 +30,7 @@ Run `pnpm agent:next-work` for authoritative selection. **Launch plan bout compl
 
 ## Active phase
 
-**ENG-S1** — automatable repo work **exhausted**; Class S wall.
+**WIT-S1** — automatable repo work **exhausted**; Class S wall.
 
 | Story                             | Status      | Owner             |
 | --------------------------------- | ----------- | ----------------- |
@@ -48,7 +48,7 @@ Run `pnpm agent:next-work` for authoritative selection. **Launch plan bout compl
 | Lane          | Metric              | Value                |
 | ------------- | ------------------- | -------------------- |
 | 1 Engineering | internal signoff    | **10**               |
-| 2 Internal    | composite           | **9**                |
+| 2 Internal    | composite           | **8.7**              |
 | 4 Bank-grade  | certified composite | **8.9**              |
 | 5 GTM         | library tier        | **GR-T1**            |
 | GCR           | tier                | **GCR-T0** (BLOCKED) |
@@ -59,8 +59,8 @@ Run `pnpm agent:next-work` for authoritative selection. **Launch plan bout compl
 | -------------------------------------- | ----- |
 | `pnpm agent:protocols:check`           | **0** |
 | `pnpm readiness:lanes:check`           | **0** |
-| `pnpm vendor-evidence:verify-manifest` | **1** |
-| `pnpm docs:check-frontmatter`          | **0** |
+| `pnpm vendor-evidence:verify-manifest` | **0** |
+| `pnpm docs:check-frontmatter`          | **1** |
 
 ## Cross-repo witness
 
