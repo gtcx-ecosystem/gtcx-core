@@ -64,4 +64,4 @@ review_cycle: on-change
 
 ## Commit
 
-Recorded at commit SHA in git log for this evidence file (see repository `main` after push).
+**SHA:** `d5e71db6` on `main`
