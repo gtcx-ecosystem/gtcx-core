@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Keep root toolchain files as real copies (no symlinks — Windows/Docker safe).
- * SoR: config/toolchain/*
+ * SoR: config/toolchain/* and config/baseline/baseline.config.json
  *
  * Usage:
  *   node 03-platform/scripts/config/sync-root-stubs.mjs
@@ -14,9 +14,22 @@ import { fileURLToPath } from 'node:url';
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const CHECK = process.argv.includes('--check');
 
-const COPY_PAIRS = [['config/toolchain/turbo.json', 'turbo.json']];
+/** Copied verbatim from config/ → root (skip when SoR missing) */
+const COPY_PAIRS = [
+  ['config/toolchain/turbo.json', 'turbo.json'],
+  ['config/toolchain/editorconfig', '.editorconfig'],
+  ['config/toolchain/nvmrc', '.nvmrc'],
+  ['config/toolchain/vitest.workspace.ts', 'vitest.workspace.ts'],
+  ['config/toolchain/Makefile', 'Makefile'],
+  ['config/baseline/baseline.config.json', 'baseline.config.json'],
+];
 
+/** One-line re-exports — must stay as real files at root (not symlinks) */
 const REEXPORT_STUBS = [
+  {
+    rel: 'eslint.config.js',
+    content: "module.exports = require('./config/toolchain/eslint.config.js');\n",
+  },
   {
     rel: 'tsconfig.json',
     content: `${JSON.stringify({ extends: './config/toolchain/tsconfig.base.json' }, null, 2)}\n`,
@@ -36,9 +49,10 @@ function replaceWithCopy(from, to) {
 }
 
 for (const [from, to] of COPY_PAIRS) {
+  if (!existsSync(join(REPO, from))) continue;
   const src = read(from);
   if (CHECK) {
-    if (read(to) !== src) {
+    if (!existsSync(join(REPO, to)) || read(to) !== src) {
       console.log('DRIFT', to, `(sync from ${from})`);
       drift++;
     }
@@ -54,8 +68,10 @@ function replaceStub(rel, content) {
 }
 
 for (const { rel, content } of REEXPORT_STUBS) {
+  if (rel === 'eslint.config.js' && !existsSync(join(REPO, 'config/toolchain/eslint.config.js'))) continue;
+  if (rel === 'tsconfig.json' && !existsSync(join(REPO, 'config/toolchain/tsconfig.base.json'))) continue;
   if (CHECK) {
-    if (read(rel) !== content) {
+    if (!existsSync(join(REPO, rel)) || read(rel) !== content) {
       console.log('DRIFT', rel);
       drift++;
     }
