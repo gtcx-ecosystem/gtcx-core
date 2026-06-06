@@ -7,30 +7,31 @@ import { execSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+import { AUDIT_EVIDENCE, REPO_ROOT } from '../../../config/paths.mjs';
+
+const ARTIFACTS_ROOT = path.join(REPO_ROOT, '00-archive/artifacts');
 const evidenceLatest = path.join(
-  root,
+  REPO_ROOT,
   '01-docs/05-audit/evidence/vendor-pen-test-pack-manifest-latest.json'
 );
-const artifactsManifest = path.join(root, 'artifacts/vendor-evidence/pen-test-pack-manifest.json');
+const artifactsManifest = path.join(ARTIFACTS_ROOT, 'vendor-evidence/pen-test-pack-manifest.json');
 
 const STATIC_PATHS = [
-  '01-docs/09-security/threat-control-matrix.md',
-  '01-docs/09-security/threat-model.md',
-  '01-docs/09-security/pen-test-scope.md',
-  '01-docs/09-security/pen-test-rfp-2026.md',
-  '01-docs/09-security/attack-tree-signing.md',
-  '01-docs/09-security/native-binding-audit-checklist.md',
-  '01-docs/09-security/internal-security-assessment.md',
+  '01-docs/security/threat-control-matrix.md',
+  '01-docs/security/threat-model.md',
+  '01-docs/security/pen-test-scope.md',
+  '01-docs/security/pen-test-rfp-2026.md',
+  '01-docs/security/attack-tree-signing.md',
+  '01-docs/security/native-binding-audit-checklist.md',
+  '01-docs/security/internal-security-assessment.md',
   '01-docs/05-audit/fuzz-campaign-evidence-2026-05-21.md',
   '01-docs/05-audit/ci-confirmation-2026-06-01.md',
   '01-docs/05-audit/evidence/certified-pack-manifest-latest.json',
   '01-docs/05-audit/evidence/zkp-profile-load-latest.json',
   '01-docs/governance/trust-portal-zkp-circuit-registry.md',
   '03-platform/packages/crypto/circuit-registry.manifest.json',
-  'artifacts/provenance-manifest.json',
+  '00-archive/artifacts/provenance-manifest.json',
 ];
 
 function sha256File(filePath) {
@@ -39,24 +40,24 @@ function sha256File(filePath) {
 
 function safeGit(cmd) {
   try {
-    return execSync(cmd, { cwd: root, encoding: 'utf8' }).trim();
+    return execSync(cmd, { cwd: REPO_ROOT, encoding: 'utf8' }).trim();
   } catch {
     return null;
   }
 }
 
 function listKatEntries() {
-  const katDir = path.join(root, 'artifacts/kat');
+  const katDir = path.join(ARTIFACTS_ROOT, 'kat');
   if (!fs.existsSync(katDir)) return [];
   return fs
     .readdirSync(katDir)
     .filter((f) => f.endsWith('.kat.json'))
     .sort()
-    .map((file) => path.join('artifacts/kat', file));
+    .map((file) => path.join('00-archive/artifacts/kat', file).replace(/\\/g, '/'));
 }
 
 function fileEntry(relativePath, category) {
-  const absolute = path.join(root, relativePath);
+  const absolute = path.join(REPO_ROOT, relativePath);
   if (!fs.existsSync(absolute)) {
     console.error(`[vendor-evidence] missing required path: ${relativePath}`);
     process.exit(1);
@@ -103,6 +104,7 @@ function main() {
 
   fs.mkdirSync(path.dirname(artifactsManifest), { recursive: true });
   fs.mkdirSync(path.dirname(evidenceLatest), { recursive: true });
+  fs.mkdirSync(AUDIT_EVIDENCE, { recursive: true });
   const json = `${JSON.stringify(body, null, 2)}\n`;
   fs.writeFileSync(artifactsManifest, json);
   fs.writeFileSync(evidenceLatest, json);
@@ -112,8 +114,8 @@ function main() {
       {
         ok: true,
         artifactCount: artifacts.length,
-        artifactsManifest: path.relative(root, artifactsManifest),
-        evidenceLatest: path.relative(root, evidenceLatest),
+        artifactsManifest: path.relative(REPO_ROOT, artifactsManifest),
+        evidenceLatest: path.relative(REPO_ROOT, evidenceLatest),
       },
       null,
       2

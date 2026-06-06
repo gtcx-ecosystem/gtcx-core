@@ -79,12 +79,12 @@ Downstream services that use gtcx-core to process personal data (e.g., binding D
 
 Although gtcx-core processes no personal data, its design supports downstream privacy compliance:
 
-| Principle                   | Implementation                                                                      | Evidence                                                                                                 |
-| --------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Data minimization           | No telemetry, no analytics, no usage data collection                                | No network calls in source code                                                                          |
-| Purpose limitation          | Cryptographic operations only — no data interpretation                              | Package scope defined in specs                                                                           |
+| Principle                   | Implementation                                                                      | Evidence                                                                                     |
+| --------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Data minimization           | No telemetry, no analytics, no usage data collection                                | No network calls in source code                                                              |
+| Purpose limitation          | Cryptographic operations only — no data interpretation                              | Package scope defined in specs                                                               |
 | Storage limitation          | Key material zeroized after use via `secureWipe()` (TS) and `Zeroize` derive (Rust) | `03-platform/packages/crypto/src/signing.ts`, `rust/gtcx-crypto/03-platform/src/keys/mod.rs` |
-| Integrity & confidentiality | Ed25519 signing, AES-256-GCM encryption, constant-time comparison                   | `01-docs/09-security/security-framework.md`                                                              |
+| Integrity & confidentiality | Ed25519 signing, AES-256-GCM encryption, constant-time comparison                   | `01-docs/09-security/security-framework.md`                                                  |
 | Pseudonymization            | DID-based identity (hash-derived, not PII-linked)                                   | `03-platform/packages/identity/src/`                                                         |
 
 ---

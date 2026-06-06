@@ -10,8 +10,8 @@
 | **Cursor**         | [`cursor/README.md`](./cursor/README.md)       | [`AGENTS.md`](../AGENTS.md), [`.cursor/`](../.cursor/) |
 | **Claude Code**    | [`claude/README.md`](./claude/README.md)       | [`CLAUDE.md`](../CLAUDE.md), [`.claude/`](../.claude/) |
 | **Gemini**         | [`gemini/README.md`](./gemini/README.md)       | [`GEMINI.md`](../GEMINI.md)                            |
-| **Kimi CLI**       | [`kimi/README.md`](./kimi/README.md)           | [`KIMI.md`](../KIMI.md)                                |
-| **Codex**          | [`codex/README.md`](./codex/README.md)         | [`CODEX.md`](../CODEX.md)                              |
+| **Kimi CLI**       | [`kimi/README.md`](./kimi/README.md)           | [`.kimi/AGENTS.md`](../../.kimi/AGENTS.md)             |
+| **Codex**          | [`codex/README.md`](./codex/README.md)         | [`codex/README.md`](./codex/README.md)                 |
 | **GitHub Copilot** | [`copilot/README.md`](./copilot/README.md)     | [`.github/copilot/`](../.github/copilot/)              |
 
 ## Layer map

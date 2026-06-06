@@ -51,11 +51,11 @@ The final docs blocker was resolved by upgrading TypeDoc from `0.28.17` to `0.28
 
 - [quality/api-surface-report.json](./api-surface-report.json)
 - [quality/api-surface-baseline.json](./api-surface-baseline.json)
-- [artifacts/provenance-manifest.json](../artifacts/provenance-manifest.json)
-- [01-docs/05-audit/auto-dev-state.md](../01-docs/05-audit/auto-dev-state.md)
-- [01-docs/05-audit/remediation-roadmap-10-10.md](../01-docs/05-audit/remediation-roadmap-10-10.md)
-- [01-docs/release/enterprise-release-artifact-pack.md](../01-docs/release/enterprise-release-artifact-pack.md)
-- [01-docs/release/downstream-production-readiness-checklist.md](../01-docs/release/downstream-production-readiness-checklist.md)
+- [artifacts/provenance-manifest.json](../../00-archive/artifacts/provenance-manifest.json)
+- [01-docs/05-audit/auto-dev-state.md](../../01-docs/05-audit/auto-dev-state.md)
+- [01-docs/05-audit/remediation-roadmap-10-10.md](../../01-docs/05-audit/remediation-roadmap-10-10.md)
+- [01-docs/release/enterprise-release-artifact-pack.md](../../01-docs/release/enterprise-release-artifact-pack.md)
+- [01-docs/release/downstream-production-readiness-checklist.md](../../01-docs/release/downstream-production-readiness-checklist.md)
 
 ## Residual Non-Code Work
 

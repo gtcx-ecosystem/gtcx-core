@@ -26,7 +26,7 @@ bus.on('registration.started', (e) => console.log(e));
 
 ## Related
 
-- [ADR-006: Hash-Chain Audit Trail](../../docs/decisions/006-hash-chain-audit-trail.md)
+- [ADR-006: Hash-Chain Audit Trail](../../../01-docs/decisions/006-hash-chain-audit-trail.md)
 
 ## License
 

@@ -106,10 +106,10 @@ Key material flows through: `@gtcx/crypto` (generation) → `@gtcx/identity` (DI
 
 ### Repudiation
 
-| Component            | Threat                          | Impact | Likelihood | Risk   | Current mitigation                                                               | Evidence                                               |
-| -------------------- | ------------------------------- | ------ | ---------- | ------ | -------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| Component            | Threat                          | Impact | Likelihood | Risk   | Current mitigation                                                               | Evidence                                   |
+| -------------------- | ------------------------------- | ------ | ---------- | ------ | -------------------------------------------------------------------------------- | ------------------------------------------ |
 | `@gtcx/security`     | Audit log tampering or omission | High   | Low        | Medium | Structured audit events with severity levels, batch flushing                     | `03-platform/packages/security/src/audit/` |
-| `@gtcx/verification` | Denial of certificate issuance  | Medium | Low        | Low    | Certificate ID includes timestamp + randomness; proof bundles are self-contained | TC-011                                                 |
+| `@gtcx/verification` | Denial of certificate issuance  | Medium | Low        | Low    | Certificate ID includes timestamp + randomness; proof bundles are self-contained | TC-011                                     |
 
 ### Information Disclosure
 
@@ -130,11 +130,11 @@ Key material flows through: `@gtcx/crypto` (generation) → `@gtcx/identity` (DI
 
 ### Elevation of Privilege
 
-| Component        | Threat                                    | Impact   | Likelihood | Risk   | Current mitigation                                                                                                                                                                                                                                                                        | Evidence                                                     |
-| ---------------- | ----------------------------------------- | -------- | ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `@gtcx/security` | Permission bypass via zone escalation     | High     | Low        | Medium | Zone-based permission system with explicit grants                                                                                                                                                                                                                                         | TC-006                                                       |
+| Component        | Threat                                    | Impact   | Likelihood | Risk   | Current mitigation                                                                                                                                                                                                                                                                        | Evidence                                         |
+| ---------------- | ----------------------------------------- | -------- | ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `@gtcx/security` | Permission bypass via zone escalation     | High     | Low        | Medium | Zone-based permission system with explicit grants                                                                                                                                                                                                                                         | TC-006                                           |
 | `@gtcx/crypto`   | JS fallback ZKP accepted as real ZK proof | Critical | Low        | Medium | `HashCommitmentZkpEngine.generate()` throws by default (SA-002 closed). Opt-in requires `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`. `createZkpEngine()` factory's no-native fallback path also fail-closes by default. `GTCX_REQUIRE_NATIVE=true` continues to surface the pointed error message. | `03-platform/packages/crypto/src/zkp.ts:113-152` |
-| `rust/gtcx-node` | Unsafe code in NAPI bridge                | Critical | Low        | High   | `#![deny(unsafe_code)]` enforced in all crates; CI verifies this                                                                                                                                                                                                                          | `ci.yml` unsafe_code check                                   |
+| `rust/gtcx-node` | Unsafe code in NAPI bridge                | Critical | Low        | High   | `#![deny(unsafe_code)]` enforced in all crates; CI verifies this                                                                                                                                                                                                                          | `ci.yml` unsafe_code check                       |
 
 ---
 

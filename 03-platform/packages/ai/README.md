@@ -53,7 +53,7 @@ logger.info('Done', { confidence: 0.97 });
 
 ## Related
 
-- [ADR-008: Optional Tracing via Peer Dependencies](../../docs/decisions/008-optional-tracing-peer-deps.md)
+- [ADR-008: Optional Tracing via Peer Dependencies](../../../01-docs/decisions/008-optional-tracing-peer-deps.md)
 
 ## License
 

@@ -86,7 +86,7 @@ chore(deps): bump vitest to 3.2
 
 `gtcx-core` enforces SLSA Source Level 2 on `main`. Signed commits are
 required — unsigned commits are rejected by branch protection. See
-[01-docs/09-security/slsa-attestation.md](./01-docs/09-security/slsa-attestation.md) for
+[01-docs/security/slsa-attestation.md](../../security/slsa-attestation.md) for
 verification commands and enforcement details.
 
 **All contributors must configure commit signing before pushing.**

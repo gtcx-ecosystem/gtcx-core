@@ -101,7 +101,7 @@ pnpm agent:next-work
 1. `human-gates.manifest.json` gate has **`blocksIR: false`**.
 2. `agent:next-work` — Class S gates in **`humanOnly`** / **`approvalNeeded`**, not `next.blocked: true` for whole repo.
 3. Work register **external** class = **non-selectable story**, not **repo frozen**.
-4. Status Update uses **four buckets** — [`human-gates-system.md`](human-gates-system.md) §2.
+4. Status Update uses **four buckets** — [post-pilot gating card](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/04-ops/coordination/agent-status-update-and-post-pilot-gating-2026-06-06.md) §2.
 5. Stale docs saying "block all IR merges" on INT-S12-01 — **delete or correct** (see protocols learning card errata).
 
 ```bash
@@ -116,7 +116,7 @@ pnpm agent:human-gates:check    # exit 0
 | Doc             | Path                                                                                                                                                                                    |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Manifest        | [`human-gates.manifest.json`](../coordination/human-gates.manifest.json)                                                                                                                |
-| Register        | [`human-external-blocker-register-2026-06.md`](coordination/human-external-blocker-register-2026-06.md)                                                                                 |
-| H-05 packet     | [`ext-inf-002-pen-test-h05-packet-2026-06-05.md`](coordination/ext-inf-002-pen-test-h05-packet-2026-06-05.md)                                                                           |
+| Register        | [human-external-blocker-register](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/01-docs/04-ops/coordination/human-external-blocker-register-2026-06.md)                      |
+| H-05 packet     | [`ext-inf-002-pen-test-h05-packet-2026-06-05.md`](./coordination/to-gtcx-infrastructure-ext-inf-002-vendor-pack-2026-06-05.md)                                                          |
 | Playbook F1–F7  | [ecosystem-unblock-playbook](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/06-coordination/archive/ecosystem-unblock-playbook-2026-06-06.md)                       |
 | Operating model | [human-assurance-gates-operating-model](https://github.com/gtcx-ecosystem/gtcx-protocols/blob/main/01-docs/06-coordination/archive/human-assurance-gates-operating-model-2026-06-06.md) |

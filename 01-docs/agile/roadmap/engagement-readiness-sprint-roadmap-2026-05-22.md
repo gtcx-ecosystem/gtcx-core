@@ -165,7 +165,7 @@ Per-task completion against the plan above. Updated on every meaningful state ch
 
 | #   | Task                                      | Status      | Evidence                                                                                                                                                    |
 | --- | ----------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done     | `03-platform/packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                     |
+| 2.1 | crypto-native odd-length-hex NAPI fix     | ✅ Done     | `03-platform/packages/crypto-native/src/index.ts` — `assertHex` / `isHex` wrappers; 19 hex-validation tests                                                 |
 | 2.2 | Changesets for foundation packages        | ✅ Done     | 6 changeset entries staged (connectivity, crypto, crypto-native, security, sync, workproof); linked group covers types/identity/verification/domain/schemas |
 | 2.3 | First `release.yml` end-to-end publish    | ✅ Complete | 18 of 21 packages published 2026-05-26. `@gtcx/workproof@1.0.0` live. Provenance attempted (attestations null — follow-up needed).                          |
 | 2.4 | Remaining 3 packages published            | ✅ Complete | `@gtcx/resilience@0.2.0`, `@gtcx/telemetry@0.2.0`, `@gtcx/runtime@0.2.2` on npm (2026-05-26–27). Trust portal updated 2026-06-01.                           |

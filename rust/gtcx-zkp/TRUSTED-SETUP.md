@@ -177,13 +177,13 @@ All of these expand the constraint system and therefore the proving key.
 
 ## 6. Artifact Storage and Distribution
 
-| Concern          | Policy                                                                                                         |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| Storage location | Versioned artifact repository (separate from source code)                                                      |
-| Access control   | Cryptographic Security Engineer and CI release pipeline only                                                   |
-| Integrity check  | SHA-256 of `vk_bytes` published in KAT and registry                                                            |
-| Rotation         | New circuit version → new ceremony → new artifact set                                                          |
-| Audit trail      | Ceremony date, participant identity, machine ID, and `vk_hash` logged in `01-docs/09-security/key-ceremony.md` |
+| Concern          | Policy                                                                                                      |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| Storage location | Versioned artifact repository (separate from source code)                                                   |
+| Access control   | Cryptographic Security Engineer and CI release pipeline only                                                |
+| Integrity check  | SHA-256 of `vk_bytes` published in KAT and registry                                                         |
+| Rotation         | New circuit version → new ceremony → new artifact set                                                       |
+| Audit trail      | Ceremony date, participant identity, machine ID, and `vk_hash` logged in `01-docs/security/key-ceremony.md` |
 
 ---
 
@@ -211,9 +211,9 @@ cargo run --bin generate-kat -- artifacts/kat/
 
 ## 9. References
 
-- [FIPS Validation Boundary Statement](../../01-docs/09-security/fips-validation-boundary.md)
-- [Security Framework](../../01-docs/09-security/security-framework.md)
-- [Crate Spec — gtcx-zkp](../../01-docs/specs/03-platform/packages/rust/gtcx-zkp.md)
+- [FIPS Validation Boundary Statement](../../01-docs/security/fips-validation-boundary.md)
+- [Security Framework](../../01-docs/security/security-framework.md)
+- [Crate Spec — gtcx-zkp](../../01-docs/specs/packages/rust/gtcx-zkp.md)
 - `03-platform/src/groth16/ops.rs` — key generation implementation
 - `03-platform/src/types.rs` — `Groth16Keys`, `Groth16CircuitType`
 - `03-platform/src/bin/generate-kat.rs` — KAT generation and `vk_hash` computation

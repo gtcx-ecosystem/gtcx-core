@@ -8,5 +8,5 @@ Standards gaps and compliance evidence index.
 | Evidence | [`evidence-index.json`](./evidence-index.json) |
 | Gaps     | [`gaps.json`](./gaps.json)                     |
 
-**Narrative:** [`01-docs/10-compliance/README.md`](../../01-docs/10-compliance/README.md)  
+**Narrative:** [`01-docs/compliance/README.md`](../../01-docs/compliance/README.md)  
 **Standards SoR:** [gtcx-docs compliance](https://github.com/gtcx-ecosystem/gtcx-docs/tree/main/01-docs/10-compliance/)

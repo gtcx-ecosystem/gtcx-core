@@ -45,7 +45,7 @@ If you need both, import protocol types from `@gtcx/types` and business logic ty
 
 ## Related
 
-- [Architecture Decision Records](../../docs/decisions/README.md)
+- [Architecture Decision Records](../../../01-docs/decisions/README.md)
 
 ## License
 

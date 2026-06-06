@@ -118,21 +118,21 @@ All W3C URLs are JSON-LD context identifiers embedded in credential documents pe
 
 CMMC Level 2 maps to NIST SP 800-171 Rev 2. The following controls are implemented at the library level:
 
-| CMMC Practice | NIST 800-171 | Implementation                                       | Evidence                                                                                                              |
-| ------------- | ------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| AC.L2-3.1.1   | 3.1.1        | Authorized access enforcement via permission system  | `03-platform/packages/security/src/auth/permissions.ts`                                                   |
-| AC.L2-3.1.2   | 3.1.2        | Transaction types limited to permitted operations    | `03-platform/packages/services/src/*.ts` (Zod validation)                                                 |
-| AU.L2-3.3.1   | 3.3.1        | System event logging with typed event bus            | `03-platform/packages/events/src/event-bus.ts`                                                            |
-| AU.L2-3.3.2   | 3.3.2        | Individual accountability via DID-based identity     | `03-platform/packages/identity/src/did.ts`                                                                |
-| IA.L2-3.5.1   | 3.5.1        | User identification via cryptographic identity       | `03-platform/packages/identity/src/identity.ts`                                                           |
-| IA.L2-3.5.2   | 3.5.2        | Authentication via Ed25519/Secp256k1 signatures      | `03-platform/packages/crypto/src/signing.ts`                                                              |
-| IA.L2-3.5.3   | 3.5.3        | Multi-factor (multi-key) identity support            | `03-platform/packages/identity/src/identity.ts:createEnhancedIdentity()`                                  |
-| SC.L2-3.13.1  | 3.13.1       | Communication boundary monitoring via API client     | `03-platform/packages/api-client/src/index.ts`                                                            |
-| SC.L2-3.13.8  | 3.13.8       | Cryptographic protection of CUI                      | `03-platform/packages/crypto/src/signing.ts`, FIPS pathway defined                                        |
-| SC.L2-3.13.11 | 3.13.11      | FIPS-validated crypto (pathway defined)              | `01-docs/09-security/fips-assessment.md`                                                                              |
-| SI.L2-3.14.1  | 3.14.1       | Flaw identification via automated scanning           | `.github/workflows/ci.yml` (Trivy)                                                                                    |
-| SI.L2-3.14.2  | 3.14.2       | Malicious code protection (deny unsafe_code in Rust) | All 6 Rust crate lib.rs files                                                                                         |
-| SI.L2-3.14.3  | 3.14.3       | Security alert monitoring via CVE scanning           | `pnpm audit`, `.github/workflows/ci.yml`                                                                              |
+| CMMC Practice | NIST 800-171 | Implementation                                       | Evidence                                                                                      |
+| ------------- | ------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| AC.L2-3.1.1   | 3.1.1        | Authorized access enforcement via permission system  | `03-platform/packages/security/src/auth/permissions.ts`                                       |
+| AC.L2-3.1.2   | 3.1.2        | Transaction types limited to permitted operations    | `03-platform/packages/services/src/*.ts` (Zod validation)                                     |
+| AU.L2-3.3.1   | 3.3.1        | System event logging with typed event bus            | `03-platform/packages/events/src/event-bus.ts`                                                |
+| AU.L2-3.3.2   | 3.3.2        | Individual accountability via DID-based identity     | `03-platform/packages/identity/src/did.ts`                                                    |
+| IA.L2-3.5.1   | 3.5.1        | User identification via cryptographic identity       | `03-platform/packages/identity/src/identity.ts`                                               |
+| IA.L2-3.5.2   | 3.5.2        | Authentication via Ed25519/Secp256k1 signatures      | `03-platform/packages/crypto/src/signing.ts`                                                  |
+| IA.L2-3.5.3   | 3.5.3        | Multi-factor (multi-key) identity support            | `03-platform/packages/identity/src/identity.ts:createEnhancedIdentity()`                      |
+| SC.L2-3.13.1  | 3.13.1       | Communication boundary monitoring via API client     | `03-platform/packages/api-client/src/index.ts`                                                |
+| SC.L2-3.13.8  | 3.13.8       | Cryptographic protection of CUI                      | `03-platform/packages/crypto/src/signing.ts`, FIPS pathway defined                            |
+| SC.L2-3.13.11 | 3.13.11      | FIPS-validated crypto (pathway defined)              | `01-docs/09-security/fips-assessment.md`                                                      |
+| SI.L2-3.14.1  | 3.14.1       | Flaw identification via automated scanning           | `.github/workflows/ci.yml` (Trivy)                                                            |
+| SI.L2-3.14.2  | 3.14.2       | Malicious code protection (deny unsafe_code in Rust) | All 6 Rust crate lib.rs files                                                                 |
+| SI.L2-3.14.3  | 3.14.3       | Security alert monitoring via CVE scanning           | `pnpm audit`, `.github/workflows/ci.yml`                                                      |
 | SI.L2-3.14.6  | 3.14.6       | Input validation at system boundaries                | `03-platform/packages/domain/src/schemas.ts`, `03-platform/packages/security/src/validation/` |
 
 ### CMMC Controls Not Applicable at Library Level

@@ -82,8 +82,8 @@ const ok = await engine.verify(proof);
 
 ## Related
 
-- [ADR-001: Rust for Cryptography](../../docs/decisions/001-rust-for-cryptography.md)
-- [ADR-005: Ed25519 over secp256k1](../../docs/decisions/005-ed25519-signing.md)
+- [ADR-001: Rust for Cryptography](../../../01-docs/decisions/001-rust-for-cryptography.md)
+- [ADR-005: Ed25519 over secp256k1](../../../01-docs/decisions/005-ed25519-signing.md)
 
 ## Supply Chain Verification
 
@@ -99,7 +99,7 @@ npm view @gtcx/crypto --json | jq '.dist.attestations'
 
 Expected output includes `predicateType: https://slsa.dev/provenance/v1` with a Sigstore-signed attestation describing the exact Git commit, build environment, and dependency versions used to produce the package.
 
-For enterprise procurement and regulator review, see the [SLSA Provenance Consumer Guide](../../docs/gtm/15-slsa-provenance-guide.md).
+For enterprise procurement and regulator review, see the [SLSA Provenance Consumer Guide](../../../01-docs/gtm/15-slsa-provenance-guide.md).
 
 ## License
 

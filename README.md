@@ -43,7 +43,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./01-docs/te
 - HSM key storage traits implemented for PKCS11 (SoftHSM, AWS CloudHSM) and AWS KMS Cloud Custody
 - 500,000+ fuzz iterations across 6 cargo-fuzz targets, **zero crashes, zero panics, zero ASAN violations** ([evidence](./01-docs/05-audit/fuzz-campaign-evidence-2026-05-21.md))
 - `cargo deny` and `cargo audit` run in CI; known upstream advisories in the `ark-*` ecosystem are tracked in `rust/.cargo/audit.toml`
-- **24** TypeScript workspace packages under `03-platform/packages/` (see [package specs](./01-docs/specs/03-platform/packages/README.md)); **22** published to npm on the **3.1.4 train** — verify: `pnpm provenance:check-npm:strict`
+- **24** TypeScript workspace packages under `03-platform/packages/` (see [package specs](./01-docs/specs/packages/README.md)); **22** published to npm on the **3.1.4 train** — verify: `pnpm provenance:check-npm:strict`
 - SLSA: Source L2 enforced in CI; npm registry provenance via `release.yml` — see [trust portal](./01-docs/governance/trust-portal.md#published-versions)
 - Root `pnpm typecheck` / `pnpm build` green (turbo graph; FA-P0-1, 2026-06-04)
 
@@ -59,7 +59,7 @@ For a detailed breakdown of these mandates, see [Quality Standards](./01-docs/te
 | S-T5-4 strict jurisdiction packs        | **done**    | `pnpm jurisdiction:validate-packs`                                                                   |
 | Ceremony (CORE-004)                     | **blocked** | Compliance lane — XR-402                                                                             |
 
-**Moat path (in-repo):** WorkProof witness → `@gtcx/crypto` profile prove → `@gtcx/verification` bundle (`commodity-origin-zk`). Cross-package test: [`tests/integration/commodity-origin-zk.test.ts`](./tests/integration/commodity-origin-zk.test.ts).
+**Moat path (in-repo):** WorkProof witness → `@gtcx/crypto` profile prove → `@gtcx/verification` bundle (`commodity-origin-zk`). Cross-package test: [`03-platform/tests/integration/commodity-origin-zk.test.ts`](./03-platform/tests/integration/commodity-origin-zk.test.ts).
 
 ### Internal compliance (lane 2)
 
@@ -80,7 +80,7 @@ Certified composite **8.9/10** — [master-audit-2026-06-03](./01-docs/05-audit/
 ### Active execution program
 
 - **FA-S1 / DTF Tier 5:** [execution-roadmap.md](./01-docs/05-audit/execution-roadmap.md)
-- **Engagement readiness:** [sprint roadmap 2026-05-22](./01-docs/05-audit/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)
+- **Engagement readiness:** [sprint roadmap 2026-05-22](./01-docs/agile/roadmap/engagement-readiness-sprint-roadmap-2026-05-22.md)
 
 ### Ecosystem blockers (compliance + GTM — not engineering)
 
@@ -91,9 +91,9 @@ Certified composite **8.9/10** — [master-audit-2026-06-03](./01-docs/05-audit/
 - regional pen-test on **live stack** ($8–15K, 4–6 weeks) — [EXT-INF-002](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/01-docs/05-audit/external-dependencies-register-2026-05-31.md)
 - ZWCMP pilot owner + DPA (EXT-INF-013–015)
 - testnet deploy + DR proof ([Global South plan](https://github.com/gtcx-ecosystem/gtcx-infrastructure/blob/main/01-docs/08-gtm/plans/global-south-10x-plan.md))
-- Zimbabwe sandbox intro — [`01-docs/08-gtm/sandbox-intro-email-template.md`](./01-docs/08-gtm/sandbox-intro-email-template.md) (human send)
+- Zimbabwe sandbox intro — [`01-docs/gtm/sandbox-intro-email-template.md`](./01-docs/gtm/sandbox-intro-email-template.md) (human send)
 
-**Bank track (optional, US/EU):** SOC 2 Type I ($15–45K). See [ecosystem GTM alignment](./01-docs/08-gtm/16-ecosystem-gtm-alignment.md) and [GTM reality check 2026-06-02](./01-docs/08-gtm/gtm-reality-check-2026-06-02.md).
+**Bank track (optional, US/EU):** SOC 2 Type I ($15–45K). See [ecosystem GTM alignment](./01-docs/gtm/16-ecosystem-gtm-alignment.md) and [GTM reality check 2026-06-02](./01-docs/gtm/gtm-reality-check-2026-06-02.md).
 
 **Internal (known, tracked):**
 
@@ -149,7 +149,7 @@ Coverage numbers reflect the [2026-05-21 internal completion audit](./01-docs/05
 
 ### Shared Config Workspace Packages (4)
 
-These live under [`03-platform/packages/config`](./packages/config) and support the monorepo/tooling layer rather than the main runtime API surface:
+These live under [`03-platform/packages/config`](./03-platform/packages/config) and support the monorepo/tooling layer rather than the main runtime API surface:
 
 | Package                                                                   | Description                               |
 | ------------------------------------------------------------------------- | ----------------------------------------- |
@@ -232,15 +232,15 @@ core/
 | [Safety Rules](./01-docs/01-agents/workflows/safety-rules.md)           | What requires human approval                      |
 | [Architecture Overview](./01-docs/architecture/overview.md)             | Layer map, trust boundaries, package graph        |
 | [ADR Index](./01-docs/decisions/README.md)                              | All 14 architecture decision records              |
-| [Package Specs](./01-docs/specs/03-platform/packages/README.md)         | Per-package API and responsibility specs          |
-| [Rust Crate Specs](./01-docs/specs/03-platform/packages/rust/)          | Rust crate specs and build targets                |
-| [Security Framework](./01-docs/09-security/security-framework.md)       | Security architecture and controls                |
+| [Package Specs](./01-docs/specs/packages/README.md)                     | Per-package API and responsibility specs          |
+| [Rust Crate Specs](./01-docs/specs/packages/rust/)                      | Rust crate specs and build targets                |
+| [Security Framework](./01-docs/security/security-framework.md)          | Security architecture and controls                |
 | [Quality Runbook](./01-docs/devops/runbooks/quality-runbook.md)         | CI triage order and gate sequence                 |
 | [Release Checklist](./01-docs/devops/release-mgmt/release-checklist.md) | Release gate and evidence requirements            |
 | [Roadmap](./01-docs/roadmap.md)                                         | Master roadmap + active FA/DTF execution          |
 | [Tier 5 workplan](./01-docs/04-ops/tier-5-workplan-2026-06.md)          | DTF-5.x register (Protocol 22)                    |
 | [Execution roadmap](./01-docs/05-audit/execution-roadmap.md)            | FA-S1–S6 sprint overlay                           |
-| [Agile roadmap](./01-docs/05-audit/agile/roadmap/roadmap.md)            | Delivery phases 0–7                               |
+| [Agile roadmap](./01-docs/agile/roadmap/roadmap.md)                     | Delivery phases 0–7                               |
 
 ## Dependencies
 

@@ -1,6 +1,6 @@
 # 03-platform/scripts/workspace/ — workspace domain checks
 
-Automation for [`workspace/`](../../workspace/) (P29 operational SoR).
+Automation for [`02-ops/pm/`](../../../02-ops/pm/) (P29 operational SoR).
 
 | Script                             | Command                |
 | ---------------------------------- | ---------------------- |

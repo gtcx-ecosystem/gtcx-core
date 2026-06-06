@@ -2,7 +2,7 @@
 
 AI evaluation pipeline for the GTCX ecosystem. Quantifies agent accuracy, safety, efficiency, and context utilization after every agent-driven change.
 
-**Strategic goal:** Ship machine-readable trust scorecards on every release — encoded GTCX safety rules and gate semantics that are hard to copy in 90 days. Roadmap: [docs/roadmap.md §4.10](../../docs/roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) · Spec: [ai-evaluation-pipeline.md](../../docs/specs/ai-evaluation-pipeline.md).
+**Strategic goal:** Ship machine-readable trust scorecards on every release — encoded GTCX safety rules and gate semantics that are hard to copy in 90 days. Roadmap: [docs/roadmap.md §4.10](../../../01-docs/roadmap.md#410-gtcxai-eval--machine-readable-trust-scorecards-strategic-moat) · Spec: [ai-evaluation-pipeline.md](../../../01-docs/specs/ai-evaluation-pipeline.md).
 
 ## Usage
 

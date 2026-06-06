@@ -23,7 +23,7 @@ pnpm trust:attest:xr401:write   # Class A — after preceremony
 pnpm test:trust-attestation
 ```
 
-Spec: [`../../security/trust-attestation-runners.md`](../../security/trust-attestation-runners.md) (agentic only).
+Spec: [trust attestation runners](https://github.com/gtcx-ecosystem/gtcx-agentic/blob/main/01-docs/04-ops/trust-attestation-runners.md) (agentic only).
 
 ## Other repos
 
