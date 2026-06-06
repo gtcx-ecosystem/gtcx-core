@@ -34,32 +34,32 @@ Scores rate **in-repo readiness** from forensic audits — not audit-document qu
 
 | Domain                          | Readiness | Primary audit / evidence                                                                                            |
 | ------------------------------- | --------: | ------------------------------------------------------------------------------------------------------------------- |
-| **Repo hygiene & organization** |   **7.4** | [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md) (P0 — allowlist drift on `bin/`, `workspace/`)           |
+| **Repo hygiene & organization** |   **9.7** | [repo-hygiene-2026-06-05.md](../05-audit/repo-hygiene-2026-06-05.md) (five-hub v2 — strict PASS)                    |
 | **Documentation quality**       |   **9.6** | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md)                                  |
 | **AI trust & safety**           |   **8.8** | [master-audit-2026-06-03.md](./master-audit-2026-06-03.md) · [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) |
 | **Security**                    |   **8.8** | Threat matrix · [full-audit-2026-06-04.md](./full-audit-2026-06-04.md) Phase 2                                      |
 | **Corporate readiness**         |   **8.2** | [soc2-readiness.md](../compliance/soc2-readiness.md) · [sox-controls.md](../compliance/sox-controls.md)             |
 
-**Weighted composite (15 / 25 / 15 / 25 / 20):** **8.7/10** (repo hygiene regression 2026-06-05 audit)
+**Weighted composite (15 / 25 / 15 / 25 / 20):** **9.0/10** (repo hygiene restored 9.7 — five-hub v2)
 
 ---
 
 ## 1 — Repo hygiene & organization
 
-**Readiness: 7.4/10** — [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md) (P0 cap — `bin/`, `workspace/` not in allowlist)
+**Readiness: 9.7/10** — [repo-hygiene-2026-06-05.md](../05-audit/repo-hygiene-2026-06-05.md) (five-hub v2 — strict PASS)
 
-| Axis                 |    Score | Notes                                           |
-| -------------------- | -------: | ----------------------------------------------- |
-| Root cleanliness     |  **7.0** | Strict checker **BLOCKED** — allowlist drift    |
-| Per-directory README |  **9.0** | Packages 100%; `bin/`, `workspace/` lack README |
-| Build artifacts      | **10.0** | Sidecar count 0                                 |
-| Archive handling     |  **9.5** | `_delete/` human-owned; allowlist documented    |
-| Naming               |  **8.5** | kebab-case ok; allowlist missing new dirs       |
-| Size / OS junk       | **10.0** | Sidecar count 0                                 |
-| Empty directories    | **10.0** | Sidecar count 0                                 |
-| Inventory accuracy   |     pass | `03-platform/packages/README.md` 24 + 4 config  |
+| Axis                 |    Score | Notes                                                |
+| -------------------- | -------: | ---------------------------------------------------- |
+| Root cleanliness     | **10.0** | Strict checker **PASS** — allowlist v2.0.0           |
+| Per-directory README |  **8.5** | Hub gaps: `00-archive/`, `03-platform/`, `05-audit/` |
+| Build artifacts      | **10.0** | Sidecar count 0                                      |
+| Archive handling     |  **9.5** | `_delete/` human-owned; `00-archive/` documented     |
+| Naming               |  **9.5** | Five-hub v2 kebab-case                               |
+| Size / OS junk       | **10.0** | Sidecar count 0                                      |
+| Empty directories    | **10.0** | Sidecar count 0                                      |
+| Inventory accuracy   |     pass | 25 packages under `03-platform/packages/`            |
 
-**Gates:** `pnpm check:workspace-root-cleanliness:strict` — exit **1** (2026-06-05)
+**Gates:** `pnpm check:workspace-root-cleanliness:strict` — exit **0** (2026-06-05 evening)
 
 ---
 

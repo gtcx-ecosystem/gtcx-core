@@ -1,4 +1,4 @@
 pnpm exec commitlint --edit "$1"
 
 # Protocol attestation when commit touches agent wiring (P26 attestation block)
-node tools/check-agent-attestation.mjs --commit-msg "$1" --staged || exit 1
+node 03-platform/tools/check-agent-attestation.mjs --commit-msg "$1" --staged || exit 1

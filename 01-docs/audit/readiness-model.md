@@ -94,7 +94,7 @@ Full mapping: [gtm-readiness-2026-06-05.md](./gtm-readiness-2026-06-05.md)
 
 | Domain                      | Readiness | Canonical audit                                                                    |
 | --------------------------- | --------: | ---------------------------------------------------------------------------------- |
-| Repo hygiene & organization |   **7.4** | [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)                         |
+| Repo hygiene & organization |   **9.7** | [repo-hygiene-2026-06-05.md](../05-audit/repo-hygiene-2026-06-05.md)               |
 | Documentation quality       |   **9.6** | [docs-standard-compliance-2026-06-05.md](./docs-standard-compliance-2026-06-05.md) |
 | AI trust & safety           |   **8.8** | master-audit agentic + full-audit AI gaps                                          |
 | Security (in-repo)          |   **8.8** | threat matrix + full-audit Phase 2                                                 |

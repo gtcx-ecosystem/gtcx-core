@@ -7,6 +7,8 @@ policy_source: '01-docs/04-ops/repo/repo-hygiene-protocol.md'
 allowlist_version: '1.0.0'
 schema_version: '1.0.0'
 overall_score: 7.4
+superseded_by: '01-docs/05-audit/repo-hygiene-2026-06-05.md'
+superseded_reason: 'Five-hub v2 restructure — evening re-run scored 9.7'
 branch: 'main'
 head: '598d168'
 axis_scores:
@@ -24,6 +26,8 @@ p0_cap_applied: true
 ---
 
 # gtcx-core — Repo Hygiene Audit
+
+> **Superseded:** Canonical report is [01-docs/05-audit/repo-hygiene-2026-06-05.md](../05-audit/repo-hygiene-2026-06-05.md) (evening re-run — **9.7/10**, strict PASS).
 
 **Audit date:** 2026-06-05  
 **Repo:** `gtcx-ecosystem/gtcx-core`  
@@ -207,6 +211,6 @@ Run `/execute-repo-hygiene` or say **"ship P1 fixes"** to allowlist `bin` + `wor
 
 ## Reference
 
-- Command: `gtcx-docs/tools/audit/audit-framework/commands/repo-hygiene.md`
+- Command: `gtcx-docs/03-platform/tools/audit/audit-framework/commands/repo-hygiene.md`
 - Prior execute pass: [repo-hygiene-2026-06-04.md](./repo-hygiene-2026-06-04.md)
 - Related: `doc-standard` for `/01-docs/` taxonomy only
