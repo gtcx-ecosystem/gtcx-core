@@ -28,14 +28,14 @@ This file is a **rollup index**. The lane forensic is `engineering-audit-*`; his
 
 ## Readiness outcomes (from source audits)
 
-| Metric                          |       Value | Source audit                                                                                                                          |
-| ------------------------------- | ----------: | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Internal signoff (gates @ HEAD) | **10.0/10** | [execution-roadmap.md](./execution-roadmap.md) ENG-S1 · forensic [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md) |
-| Internal completion (packages)  |  **9.5/10** | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md)                                                  |
-| Weighted lane score             |  **9.5/10** | max(signoff, completion) post ENG-S1                                                                                                  |
-| DTF technical Tier 5            |    **~88%** | [tier-5 workplan](../operations/tier-5-workplan-2026-06.md)                                                                           |
+| Metric                          |      Value | Source audit                                                                                            |
+| ------------------------------- | ---------: | ------------------------------------------------------------------------------------------------------- |
+| Internal signoff (gates @ HEAD) | **7.0/10** | [engineering-audit-2026-06-06.md](./engineering-audit-2026-06-06.md) — L2 v3 path drift in gate scripts |
+| Internal completion (packages)  | **9.5/10** | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md)                    |
+| Weighted lane score             | **7.5/10** | [engineering-audit-2026-06-06.md](./engineering-audit-2026-06-06.md)                                    |
+| DTF technical Tier 5            |   **~88%** | [tier-5 workplan](../04-ops/tier-5-workplan-2026-06.md)                                                 |
 
-> **Delta 2026-06-05:** Signoff briefly 9.0 (engineering-audit); **restored 10.0** via ENG-S1 (`ER-ENG-01` budget + `ER-ENG-02` API baseline). Prior forensic: [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md).
+> **Delta 2026-06-06:** Signoff **7.0** after L2 SoR convergence — gate scripts still reference pre-v3 `packages/`, `benchmarks/`, and doc paths. Prior forensic: [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md).
 
 ---
 
@@ -43,7 +43,8 @@ This file is a **rollup index**. The lane forensic is `engineering-audit-*`; his
 
 | Audit                                                                                | Purpose                                    |
 | ------------------------------------------------------------------------------------ | ------------------------------------------ |
-| [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md)                 | **Current** lane-1 forensic @ HEAD         |
+| [engineering-audit-2026-06-06.md](./engineering-audit-2026-06-06.md)                 | **Current** lane-1 forensic @ HEAD         |
+| [engineering-audit-2026-06-05.md](./engineering-audit-2026-06-05.md)                 | Prior forensic (pre L2 v3 gate regression) |
 | [internal-10-10-signoff-2026-05-28.md](./internal-10-10-signoff-2026-05-28.md)       | Historical 10.0 signoff (superseded gates) |
 | [internal-completion-audit-2026-05-21.md](./internal-completion-audit-2026-05-21.md) | 24/24 internal items; coverage; fuzz; FIPS |
 | [full-audit-2026-06-04.md](./full-audit-2026-06-04.md)                               | Six-phase architecture re-audit            |

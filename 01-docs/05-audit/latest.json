@@ -1,6 +1,6 @@
 {
   "repo": "gtcx-core",
-  "auditDate": "2026-06-05",
+  "auditDate": "2026-06-06",
   "readinessModel": "01-docs/05-audit/readiness-model.md",
   "laneAuditsRegistry": "gtcx-docs/03-platform/tools/audit/lane-audits/README.md",
   "domainAuditsRegistry": "gtcx-docs/03-platform/tools/audit/domain-audits/README.md",
@@ -78,12 +78,12 @@
     "engineeringCompletenessQuality": {
       "auditQuality1to10": 8.5,
       "readinessOutcome": {
-        "internalSignoff": 10,
+        "internalSignoff": 7,
         "completionAudit": 9.5,
-        "weightedLaneScore": 9.5
+        "weightedLaneScore": 7.5
       },
       "index": "01-docs/05-audit/engineering-completeness-quality-2026-06-05.md",
-      "forensic": "01-docs/05-audit/engineering-audit-2026-06-05.md"
+      "forensic": "01-docs/05-audit/engineering-audit-2026-06-06.md"
     },
     "internalCompliance": {
       "auditQuality1to10": 8.5,
@@ -160,7 +160,7 @@
   },
   "autoDevData": "01-docs/05-audit/auto-dev-data.json",
   "autoDevState": "01-docs/05-audit/auto-dev-state.md",
-  "updated": "2026-06-05",
+  "updated": "2026-06-06",
   "signalAssessment": {
     "path": "01-docs/05-audit/signal-assessment-2026-06-05.md",
     "roadmap": "01-docs/05-audit/signal-roadmap-2026-06-05.md",
