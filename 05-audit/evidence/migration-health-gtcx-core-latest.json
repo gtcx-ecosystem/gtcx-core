@@ -1,6 +1,6 @@
 {
   "name": "gtcx-core",
-  "date": "2026-06-06T17:25:33.679Z",
+  "date": "2026-06-06T17:51:17.935Z",
   "total": 100,
   "grade": "GREEN",
   "blockingPass": true,
@@ -33,6 +33,61 @@
     }
   },
   "worldClass": true,
+  "dimensions": [
+    {
+      "id": "S",
+      "name": "Structure",
+      "score": 15,
+      "max": 15,
+      "notes": [],
+      "blocking": true
+    },
+    {
+      "id": "P",
+      "name": "Path references",
+      "score": 20,
+      "max": 20,
+      "notes": [],
+      "blocking": true,
+      "driftHits": 0
+    },
+    {
+      "id": "L",
+      "name": "Links & docs",
+      "score": 15,
+      "max": 15,
+      "notes": [],
+      "blocking": false
+    },
+    {
+      "id": "O",
+      "name": "Ops & config",
+      "score": 10,
+      "max": 10,
+      "notes": [],
+      "blocking": false
+    },
+    {
+      "id": "B",
+      "name": "Build",
+      "score": 15,
+      "max": 15,
+      "notes": [],
+      "blocking": false,
+      "skipped": false
+    },
+    {
+      "id": "T",
+      "name": "Tests",
+      "score": 25,
+      "max": 25,
+      "notes": [],
+      "blocking": true,
+      "testScript": "test",
+      "exitCode": 0,
+      "failureClass": null
+    }
+  ],
   "policy": "read-only — no bulk moves",
   "witness": "gtcx-agentic/05-audit/evidence/migration-health-gtcx-core-latest.json"
 }

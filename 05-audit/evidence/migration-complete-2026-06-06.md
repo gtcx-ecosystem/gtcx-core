@@ -55,11 +55,16 @@ review_cycle: on-change
 | `pnpm layout:migrate:v6:check`                 | 0    |
 | `pnpm layout:strings:check`                    | 0    |
 | `pnpm agent:bootstrap:check`                   | 0    |
+| `pnpm docs:check-links`                        | 0    |
+| `pnpm security:threat-matrix`                  | 0    |
+| `pnpm vendor-evidence:verify-manifest`         | 0    |
 | `pnpm architecture:check`                      | 0    |
 | `pnpm bundle:check-budgets`                    | 0    |
 | `pnpm api:check`                               | 0    |
 | `pnpm certified-pack:verify-manifest`          | 0    |
 | `pnpm lint` / `typecheck` / `test` / `build`   | 0    |
+
+**Re-scored:** 2026-06-06T17:51:17Z (`pnpm --dir ../gtcx-agentic ecosystem:migration:score -- --repo gtcx-core`) — L2 **100/100**, L3 **100/100**, `worldClass: true`.
 
 ## Tool path retarget (ENG-P0)
 
@@ -70,8 +75,11 @@ Quality gates now resolve v3 paths via `config/paths.mjs`:
 - `01-docs/security/threat-control-matrix.md` (with legacy fallback)
 - Manifest tools use repo root (`../../..` from `03-platform/tools/*/`)
 
-## Deferred (non-blocking)
+## Compliance lane (non-layout — closed 2026-06-06)
 
-- `pnpm security:threat-matrix` — T09–T12 evidence gaps (lane 2/compliance, not layout v3)
-- `pnpm vendor-evidence:verify-manifest` — artifact paths under `00-archive/` (rebuild pending)
-- `pnpm docs:check-links` — README legacy link cleanup
+Deferred compliance gates from the initial L2/L3 close are now green at `d1c3999a`:
+
+- `pnpm security:threat-matrix` — T09–T12 evidence paths retargeted
+- `pnpm vendor-evidence:verify-manifest` — manifest rebuilt for `00-archive/artifacts/`
+- `pnpm docs:check-links` — v3 legacy resolution + README retarget
+- Stray `03-platform/artifacts/` removed (export path is `00-archive/artifacts/`)
