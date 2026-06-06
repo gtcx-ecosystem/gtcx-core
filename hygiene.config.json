@@ -15,8 +15,9 @@
       "01-docs",
       "02-ops",
       "03-platform",
-      "04-ship",
+      "04-deploy",
       "05-audit",
+      "06-workstream",
       "config",
       "node_modules",
       "rust"

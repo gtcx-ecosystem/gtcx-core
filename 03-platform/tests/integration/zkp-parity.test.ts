@@ -4,7 +4,7 @@ import {
   createHashCommitmentZkpEngine,
   NativeZkpEngine,
   type ZkProofInput,
-} from '../../03-platform/packages/crypto/src/zkp';
+} from '../../packages/crypto/src/zkp';
 
 /**
  * ZKP Parity Tests
@@ -29,7 +29,7 @@ describe('ZKP Engine Parity', () => {
   // Try to load native engine if available
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const nativeModule = require('../../03-platform/packages/crypto-native');
+    const nativeModule = require('../../packages/crypto-native');
     if (nativeModule) {
       engines.push({ name: 'Rust (Native)', engine: new NativeZkpEngine(nativeModule) });
     }
