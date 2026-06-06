@@ -326,13 +326,13 @@ Net result: no code regressions were introduced during the docs-standard work, a
 
 ## 7. Top 5 Remediation Items
 
-| Priority | Item                                                                                             | Owner                           | Dependency                   | Target     | Expected Score Lift         |
-| -------- | ------------------------------------------------------------------------------------------------ | ------------------------------- | ---------------------------- | ---------- | --------------------------- |
-| P1       | Ship `CloudKmsKeyStore` and required toolchain / algorithm work                                  | Cryptographic Security Engineer | Rust 1.91+ adoption          | 2026-06-15 | +0.3 core / +0.4 enterprise |
-| P1       | Enforce signed commits on `main` and document contributor signing flow                           | Repo maintainer                 | Human + bot key provisioning | 2026-05-24 | +0.2 core / +0.3 enterprise |
-| P1       | Engage external pen test and surface status in trust portal                                      | Repo lead                       | External vendor scheduling   | 2026-06-30 | +0.2 core / +0.4 enterprise |
+| Priority | Item                                                                                 | Owner                           | Dependency                   | Target     | Expected Score Lift         |
+| -------- | ------------------------------------------------------------------------------------ | ------------------------------- | ---------------------------- | ---------- | --------------------------- |
+| P1       | Ship `CloudKmsKeyStore` and required toolchain / algorithm work                      | Cryptographic Security Engineer | Rust 1.91+ adoption          | 2026-06-15 | +0.3 core / +0.4 enterprise |
+| P1       | Enforce signed commits on `main` and document contributor signing flow               | Repo maintainer                 | Human + bot key provisioning | 2026-05-24 | +0.2 core / +0.3 enterprise |
+| P1       | Engage external pen test and surface status in trust portal                          | Repo lead                       | External vendor scheduling   | 2026-06-30 | +0.2 core / +0.4 enterprise |
 | P2       | Split `03-platform/packages/verification/src/types/schemas.ts` or formally exempt it | Verification owner              | None                         | 2026-05-31 | +0.1 core / +0.1 investor   |
-| P2       | Rationalize remaining legacy docs top-level dirs                                                 | Protocol Architect              | Downstream link review       | 2026-08-10 | +0.1 core / +0.1 sovereign  |
+| P2       | Rationalize remaining legacy docs top-level dirs                                     | Protocol Architect              | Downstream link review       | 2026-08-10 | +0.1 core / +0.1 sovereign  |
 
 ---
 

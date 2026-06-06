@@ -125,7 +125,7 @@ When the engagement window relaxes (post-Sprint 2.3 publish + post-W8 mobile rol
    - `rg -l "01-docs/decisions"` → rewrite to `01-docs/architecture/decisions`
    - `rg -l "01-docs/stack"` → rewrite to `01-docs/architecture`
    - `rg -l "01-docs/operations"` → rewrite to `01-docs/devops`
-   - `rg -l "01-docs/remediation"` → rewrite to `01-docs/audit`
+   - `rg -l "01-docs/remediation"` → rewrite to `01-docs/05-audit`
    - `rg -l "01-docs/guides"` → rewrite to `01-docs/reference`
    - Run `pnpm docs:links:check` to confirm zero broken links
 

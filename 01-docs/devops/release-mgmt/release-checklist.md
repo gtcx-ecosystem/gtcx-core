@@ -145,4 +145,4 @@ For security-critical releases (crypto bug, key leak, signature bypass):
 
 - [`01-docs/devops/runbooks/quality-runbook.md`](../runbooks/quality-runbook.md) — full gate sequence and triage order
 - [`01-docs/testing/quality-standards.md`](../../testing/quality-standards.md) — coverage thresholds
-- [`01-docs/01-agents/workflows/tasks/cut-release.md`](../../agents/workflows/tasks/cut-release.md) — release task playbook
+- [`01-docs/01-agents/workflows/tasks/cut-release.md`](../../01-agents/workflows/tasks/cut-release.md) — release task playbook

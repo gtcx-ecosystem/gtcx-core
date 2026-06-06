@@ -36,7 +36,7 @@ Use this guide when you need to get productive in `gtcx-core` quickly.
 ## First 15 Minutes
 
 1. Read [`../../CLAUDE.md`](../../CLAUDE.md).
-2. Read [`../agents/onboarding/orientation.md`](../agents/onboarding/orientation.md).
+2. Read [`../01-agents/onboarding/orientation.md`](../01-agents/onboarding/orientation.md).
 3. Install dependencies and run the core gates:
 
 ```bash

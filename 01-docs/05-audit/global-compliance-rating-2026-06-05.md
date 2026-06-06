@@ -107,4 +107,4 @@ Agents update GCR whenever **IC tier** or **register status** changes.
 ## Related
 
 - [readiness-model.md](./readiness-model.md)
-- [readiness-and-audit-lanes.md](../agents/readiness-and-audit-lanes.md)
+- [readiness-and-audit-lanes.md](../01-agents/readiness-and-audit-lanes.md)

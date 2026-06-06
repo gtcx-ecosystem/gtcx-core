@@ -119,16 +119,16 @@ Ran `pnpm vitest run --coverage` independently for all packages with threshold c
 
 ## Phase 3 — Code Quality
 
-| Check                                                                | Result                                              | Severity                 |
-| -------------------------------------------------------------------- | --------------------------------------------------- | ------------------------ |
-| TODO/FIXME/HACK/XXX in `03-platform/packages/*/src/*.ts` | **0**                                               | ✅ Clean                 |
-| TODO/FIXME/HACK/XXX in `rust/*/03-platform/src/*.rs`                 | **0**                                               | ✅ Clean                 |
-| `unsafe {` blocks in Rust                                            | **0**                                               | ✅ Clean                 |
-| `#![deny(unsafe_code)]` in `rust/*/03-platform/src/lib.rs`           | **6/6 crates**                                      | ✅ Clean                 |
-| Clippy warnings (`cargo clippy --workspace --lib`)                   | **0**                                               | ✅ Clean                 |
-| ESLint (`pnpm lint`)                                                 | **39/39 pass**                                      | ✅ Clean                 |
-| Rust files >500 LOC                                                  | **6 files**                                         | ⚠️ Claimed "none exceed" |
-| Max single file                                                      | **1,977 lines** (`gtcx-zkp/03-platform/src/lib.rs`) | ⚠️ Needs refactoring     |
+| Check                                                      | Result                                              | Severity                 |
+| ---------------------------------------------------------- | --------------------------------------------------- | ------------------------ |
+| TODO/FIXME/HACK/XXX in `03-platform/packages/*/src/*.ts`   | **0**                                               | ✅ Clean                 |
+| TODO/FIXME/HACK/XXX in `rust/*/03-platform/src/*.rs`       | **0**                                               | ✅ Clean                 |
+| `unsafe {` blocks in Rust                                  | **0**                                               | ✅ Clean                 |
+| `#![deny(unsafe_code)]` in `rust/*/03-platform/src/lib.rs` | **6/6 crates**                                      | ✅ Clean                 |
+| Clippy warnings (`cargo clippy --workspace --lib`)         | **0**                                               | ✅ Clean                 |
+| ESLint (`pnpm lint`)                                       | **39/39 pass**                                      | ✅ Clean                 |
+| Rust files >500 LOC                                        | **6 files**                                         | ⚠️ Claimed "none exceed" |
+| Max single file                                            | **1,977 lines** (`gtcx-zkp/03-platform/src/lib.rs`) | ⚠️ Needs refactoring     |
 
 ### LOC Violations
 

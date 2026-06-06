@@ -34,8 +34,8 @@ review_cycle: 'quarterly'
 
 ### 2.1 Upstream Matrix
 
-| #   | Capability                           | Target Package     | Source in Protocols                                                     | Effort | Priority |
-| --- | ------------------------------------ | ------------------ | ----------------------------------------------------------------------- | ------ | -------- |
+| #   | Capability                           | Target Package     | Source in Protocols                                         | Effort | Priority |
+| --- | ------------------------------------ | ------------------ | ----------------------------------------------------------- | ------ | -------- |
 | 1   | ML-DSA-65 post-quantum signing       | `@gtcx/crypto`     | `03-platform/packages/crypto/src/hybrid-signer.ts`          | High   | Medium   |
 | 2   | Hybrid signing (Ed25519 + ML-DSA-65) | `@gtcx/crypto`     | `03-platform/packages/crypto/src/hybrid-signer.ts`          | High   | Medium   |
 | 3   | Key ceremony management              | `@gtcx/crypto`     | `03-platform/packages/crypto/src/ceremony-manager.ts`       | Medium | Medium   |

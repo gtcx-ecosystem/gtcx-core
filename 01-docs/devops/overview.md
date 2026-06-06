@@ -44,4 +44,4 @@ review_cycle: 'on-change'
 ## What This Does NOT Cover
 
 - Operator entrypoint. See [`../operations/runbook.md`](../operations/runbook.md).
-- Repo onboarding. See [`../agents/onboarding/orientation.md`](../agents/onboarding/orientation.md).
+- Repo onboarding. See [`../01-agents/onboarding/orientation.md`](../01-agents/onboarding/orientation.md).

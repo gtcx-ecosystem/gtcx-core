@@ -31,7 +31,7 @@ function parseFrontmatter(content: string): Record<string, unknown> {
 }
 
 function collectSessions(repo: string): SessionFrontmatter[] {
-  const sessionsDir = join(repo, 'docs/agents/sessions');
+  const sessionsDir = join(repo, '01-docs/01-agents/sessions');
   if (!existsSync(sessionsDir)) return [];
 
   const sessions: SessionFrontmatter[] = [];

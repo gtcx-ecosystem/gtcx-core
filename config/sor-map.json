@@ -1,0 +1,30 @@
+{
+  "schema": "gtcx.sorMap.v1",
+  "repo": "gtcx-core",
+  "repoKind": "library",
+  "updated": "2026-06-06",
+  "paths": {
+    "auditEntry": "05-audit/AGENT-START.md",
+    "auditEvidenceOps": "05-audit/evidence/",
+    "auditNarrativeIndex": "01-docs/05-audit/",
+    "auditMachineSsot": "01-docs/05-audit/latest.json",
+    "agentsCanonical": "01-docs/01-agents/",
+    "governanceTierB": "01-docs/operations/repo/",
+    "platformPackages": "03-platform/packages/",
+    "platformScripts": "03-platform/scripts/",
+    "platformTools": "03-platform/tools/",
+    "rustCrates": "rust/",
+    "toolchainSoR": "config/toolchain/",
+    "opsManifest": "config/ops.manifest.json",
+    "deploy": "04-deploy/",
+    "opsDomains": "02-ops/",
+    "workstream": "06-workstream/",
+    "archive": "00-archive/"
+  },
+  "deprecated": {
+    "01-docs/audit/": "redirect only — migrate readers to 01-docs/05-audit/",
+    "01-docs/agents/": "redirect only — migrate readers to 01-docs/01-agents/",
+    "docs/audit/": "pre-layout-v3 alias — use 01-docs/05-audit/",
+    "docs/agents/": "pre-layout-v3 alias — use 01-docs/01-agents/"
+  }
+}

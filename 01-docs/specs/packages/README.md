@@ -85,4 +85,4 @@ All packages follow the security framework in `01-docs/09-security/security-fram
 
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system specification
 - [`01-docs/09-security/security-framework.md`](../../security/security-framework.md) — security framework
-- [`01-docs/01-agents/roles/crypto-security-engineer.md`](../../agents/roles/crypto-security-engineer.md) — gatekeeper for security-sensitive packages
+- [`01-docs/01-agents/roles/crypto-security-engineer.md`](../../01-agents/roles/crypto-security-engineer.md) — gatekeeper for security-sensitive packages

@@ -40,7 +40,7 @@ function countTruncationEvents(content: string): number {
 }
 
 export async function evaluateContextUtilization(repo: string): Promise<ContextUtilizationResult> {
-  const sessionsDir = join(repo, 'docs/agents/sessions');
+  const sessionsDir = join(repo, '01-docs/01-agents/sessions');
   if (!existsSync(sessionsDir)) {
     return {
       utilization_score: 0,

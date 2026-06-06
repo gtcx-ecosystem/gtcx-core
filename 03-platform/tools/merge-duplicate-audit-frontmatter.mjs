@@ -6,7 +6,7 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const AUDIT_DIR = join(process.cwd(), '01-docs/audit');
+const AUDIT_DIR = join(process.cwd(), '01-docs/05-audit');
 const write = process.argv.includes('--write');
 
 const DUPLICATE_RE = /^---\r?\n[\s\S]*?\r?\n---\r?\n\r?\n---\r?\n\r?\n([\s\S]*?)\r?\n---\r?\n/;

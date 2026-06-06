@@ -11,7 +11,7 @@ AI evaluation pipeline for the GTCX ecosystem. Quantifies agent accuracy, safety
 pnpm ai:evaluate
 
 # Evaluate with custom baseline
-pnpm ai:evaluate --baseline docs/agents/evaluations/baseline-2026-05-01.json
+pnpm ai:evaluate --baseline 01-docs/01-agents/evaluations/baseline-2026-05-01.json
 
 # Evaluate only safety
 pnpm ai:evaluate --dimensions safety

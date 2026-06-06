@@ -169,4 +169,4 @@ Tracks user acceptance testing (UAT) evidence for features and sprints. Updated 
 ## Reference
 
 - [`01-docs/05-audit/agile/sprints/gtcx-core-definition-of-done.md`](../sprints/gtcx-core-definition-of-done.md) — sprint and release DoD
-- [`01-docs/01-agents/workflows/tasks/cut-release.md`](../../agents/workflows/tasks/cut-release.md) — release workflow that requires this log
+- [`01-docs/01-agents/workflows/tasks/cut-release.md`](../../01-agents/workflows/tasks/cut-release.md) — release workflow that requires this log

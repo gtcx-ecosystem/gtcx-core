@@ -43,5 +43,5 @@ This is the operator entrypoint for `gtcx-core`. Use it to find the correct proc
 
 ## What This Does NOT Cover
 
-- Contributor onboarding. See [`../agents/onboarding/orientation.md`](../agents/onboarding/orientation.md).
+- Contributor onboarding. See [`../01-agents/onboarding/orientation.md`](../01-agents/onboarding/orientation.md).
 - Package architecture. See [`../architecture/overview.md`](../architecture/overview.md).

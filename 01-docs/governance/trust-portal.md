@@ -142,7 +142,7 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 6. [Cloud KMS keystore](../security/cloud-kms-keystore.md) — AWS-first cloud-managed custody path behind `cargo --features cloud_kms`
 7. [Fuzz campaign results](../../quality/fuzz-results/campaign-summary.md) — 9.9M executions, 0 crashes across 6 targets with AddressSanitizer enabled
 8. [External penetration test scope](../security/pen-test-scope.md) — vendor-ready scope for third-party validation
-9. [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema + prompt + 3 playbooks; the bot is structurally forbidden from approving
+9. [Dual-AI CODEOWNER governance](../01-agents/governance/README.md) — schema + prompt + 3 playbooks; the bot is structurally forbidden from approving
 
 ---
 
@@ -150,7 +150,7 @@ Read these primary documents in order. They are mutually reinforcing — togethe
 
 **Status:** `@gtcx/ai-eval` baseline shipped; per-release scorecard attachment **planned Q2 2026**.
 
-GTCX is adding a **JSON AI scorecard** (`pnpm ai:evaluate`) to every release evidence bundle. The scorecard quantifies agent accuracy, safety (diff scan against [`safety-rules.json`](../agents/safety-rules.json)), efficiency, and context utilization. Regulators and vendor-risk teams can diff scorecards across versions without re-running the full test matrix.
+GTCX is adding a **JSON AI scorecard** (`pnpm ai:evaluate`) to every release evidence bundle. The scorecard quantifies agent accuracy, safety (diff scan against [`safety-rules.json`](../01-agents/safety-rules.json)), efficiency, and context utilization. Regulators and vendor-risk teams can diff scorecards across versions without re-running the full test matrix.
 
 | Artifact                      | Purpose                              | When available                            |
 | ----------------------------- | ------------------------------------ | ----------------------------------------- |
@@ -241,7 +241,7 @@ This portal is the entry point. The artifacts it points to are the source of tru
 | [GDPR / PCI / SOX](../compliance/)                                          | Compliance scope determinations         |
 | [SECURITY.md](../../SECURITY.md)                                            | Public disclosure policy                |
 | [SECURITY-INCIDENT.md](../security/security-incident-runbook.md)            | Internal response runbook               |
-| [Governance](../agents/governance/README.md)                                | Dual-AI CODEOWNER pattern               |
+| [Governance](../01-agents/governance/README.md)                             | Dual-AI CODEOWNER pattern               |
 | [Repo bootstrap](../operations/repo-bootstrap.md)                           | Live operational prerequisites          |
 | [GTM evidence pack](../gtm/)                                                | Sandbox-regulator-specific materials    |
 | [Full audit](../audit/full-audit-2026-06-04.md)                             | Six-phase audit (2026-06-04)            |

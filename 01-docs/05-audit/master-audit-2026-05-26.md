@@ -268,19 +268,19 @@ Phase 2 skipped — repo has only `/01-docs/` documentation root. No competing r
 
 ### 9.1 What Changed
 
-| Claim                     | Original            | Forensic Finding                                                                                        | Honest                              |
-| ------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| Test suite fully passing  | 45/45 tasks pass    | Verified: 363 workproof tests, 45 tasks, 0 failures                                                     | Same (9.5)                          |
-| FIPS 140-3 validated      | CMVP #4816          | `aws-lc-fips-sys` 0.13.14 in `Cargo.lock`; feature flag wired                                           | Same (9.5)                          |
-| `#![deny(unsafe_code)]`   | All 6 crates        | Verified in all 6 `lib.rs` files; `grep "unsafe {"` returns 0 matches                                   | Same (10.0)                         |
-| Threat matrix 12/12       | Validator passes    | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                            | Same (9.0)                          |
-| SLSA Build L3             | Aspirational        | NPM_TOKEN present; provenance manifest generates clean; workflow ready                                  | Same (7.5 sub-score)                |
-| Coverage 95% branch       | 19 packages         | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                             | Same (9.5)                          |
+| Claim                     | Original            | Forensic Finding                                                                            | Honest                              |
+| ------------------------- | ------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------- |
+| Test suite fully passing  | 45/45 tasks pass    | Verified: 363 workproof tests, 45 tasks, 0 failures                                         | Same (9.5)                          |
+| FIPS 140-3 validated      | CMVP #4816          | `aws-lc-fips-sys` 0.13.14 in `Cargo.lock`; feature flag wired                               | Same (9.5)                          |
+| `#![deny(unsafe_code)]`   | All 6 crates        | Verified in all 6 `lib.rs` files; `grep "unsafe {"` returns 0 matches                       | Same (10.0)                         |
+| Threat matrix 12/12       | Validator passes    | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                | Same (9.0)                          |
+| SLSA Build L3             | Aspirational        | NPM_TOKEN present; provenance manifest generates clean; workflow ready                      | Same (7.5 sub-score)                |
+| Coverage 95% branch       | 19 packages         | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                 | Same (9.5)                          |
 | USSD protocol             | Config-only (P2)    | `03-platform/packages/connectivity/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                          |
-| gtcx-zkp tests.rs         | 470 LOC single file | Refactored into 7 focused modules per commit `05b38e1`                                                  | Code Quality +0.0 (already 9.5)     |
-| Continental predicates    | Not present         | 352-line `continental.ts` with 26 tests; integrates with migration bridge                               | Ecosystem +0.0 (already 9.3)        |
-| Pen-test vendor outreach  | Not started         | Drafted outreach emails with tracking tables in `01-docs/internal/`                                     | Security +0.0 (vendor not selected) |
-| Performance budget trends | Not checked         | 13 metrics lack trend samples (warnings, not failures)                                                  | Enterprise -0.0 (still 8.5)         |
+| gtcx-zkp tests.rs         | 470 LOC single file | Refactored into 7 focused modules per commit `05b38e1`                                      | Code Quality +0.0 (already 9.5)     |
+| Continental predicates    | Not present         | 352-line `continental.ts` with 26 tests; integrates with migration bridge                   | Ecosystem +0.0 (already 9.3)        |
+| Pen-test vendor outreach  | Not started         | Drafted outreach emails with tracking tables in `01-docs/internal/`                         | Security +0.0 (vendor not selected) |
+| Performance budget trends | Not checked         | 13 metrics lack trend samples (warnings, not failures)                                      | Enterprise -0.0 (still 8.5)         |
 
 ### 9.2 Honest Dimension Scores
 

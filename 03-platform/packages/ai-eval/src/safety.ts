@@ -18,7 +18,10 @@ interface SafetyRules {
 }
 
 function loadSafetyRules(repo: string): SafetyRules | null {
-  const paths = [join(repo, 'docs/agents/safety-rules.json'), join(repo, 'safety-rules.json')];
+  const paths = [
+    join(repo, '01-docs/01-agents/safety-rules.json'),
+    join(repo, 'safety-rules.json'),
+  ];
   for (const p of paths) {
     if (existsSync(p)) {
       try {

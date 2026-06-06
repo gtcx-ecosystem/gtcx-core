@@ -174,9 +174,9 @@ Three packages collided on npm between `gtcx-core` (v2.0.0) and `gtcx-protocols`
 
 ### 4.3 Already in Core (No Action)
 
-| Capability       | Location                                                                | Note                                                                                       |
-| ---------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Bulletproofs ZKP | `rust/gtcx-zkp` + `NativeZkpEngine`                                     | Already production via NAPI. Protocols may have different API — reconcile if needed.       |
+| Capability       | Location                                                    | Note                                                                                       |
+| ---------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Bulletproofs ZKP | `rust/gtcx-zkp` + `NativeZkpEngine`                         | Already production via NAPI. Protocols may have different API — reconcile if needed.       |
 | Offline queue    | `03-platform/packages/domain/src/internal/offline-queue.ts` | Already exists with 5 conflict strategies. Protocols version may have different semantics. |
 | Rate limiting    | `03-platform/packages/domain/src/internal/utils.ts`         | Internal-only. Needs to be made public + pluggable (see upstream table).                   |
 

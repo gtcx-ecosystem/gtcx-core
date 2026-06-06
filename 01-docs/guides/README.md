@@ -41,5 +41,5 @@ Step-by-step guides for developers, operators, and contributors.
 
 ## Related
 
-- [Onboarding](../agents/onboarding/)
-- [Developer Setup](../agents/onboarding/developer-setup.md)
+- [Onboarding](../01-agents/onboarding/)
+- [Developer Setup](../01-agents/onboarding/developer-setup.md)

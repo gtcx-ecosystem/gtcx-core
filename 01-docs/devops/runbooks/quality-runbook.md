@@ -131,5 +131,5 @@ Resolve failures in this order — fix each before moving to the next:
 
 - [`01-docs/devops/release-mgmt/release-checklist.md`](../release-mgmt/release-checklist.md) — release gate checklist
 - [`01-docs/testing/quality-standards.md`](../../testing/quality-standards.md) — test coverage standards
-- [`01-docs/01-agents/roles/quality-evidence-lead.md`](../../agents/roles/quality-evidence-lead.md) — role that owns this runbook
-- [`01-docs/01-agents/workflows/tasks/investigate-ci-failure.md`](../../agents/workflows/tasks/investigate-ci-failure.md) — investigation protocol
+- [`01-docs/01-agents/roles/quality-evidence-lead.md`](../../01-agents/roles/quality-evidence-lead.md) — role that owns this runbook
+- [`01-docs/01-agents/workflows/tasks/investigate-ci-failure.md`](../../01-agents/workflows/tasks/investigate-ci-failure.md) — investigation protocol

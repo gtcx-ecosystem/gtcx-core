@@ -277,7 +277,7 @@ This framing is more credible than claiming SOC 2 compliance you don't have. It 
 - [`01-docs/09-security/internal-security-assessment.md`](../security/internal-security-assessment.md) — six assessment methods + residual risk
 - [`01-docs/09-security/fips-validation-boundary.md`](../security/fips-validation-boundary.md) — FIPS inheritance via aws-lc-rs CMVP #4816
 - [`01-docs/09-security/key-ceremony.md`](../security/key-ceremony.md) — NIST SP 800-57 key lifecycle
-- [`01-docs/01-agents/governance/`](../agents/governance/) — dual-AI CODEOWNER pattern
+- [`01-docs/01-agents/governance/`](../01-agents/governance/) — dual-AI CODEOWNER pattern
 - [`SECURITY.md`](../../SECURITY.md) — public disclosure policy
 - [`security-incident-runbook.md`](../security/security-incident-runbook.md) — internal response runbook
 - [`01-docs/10-compliance/gdpr-assessment.md`](./gdpr-assessment.md) — zero-PII determination

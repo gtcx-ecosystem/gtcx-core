@@ -28,4 +28,4 @@ Each card captures: model identity, capabilities, known limitations, safety boun
 
 **Audience:** AI governance reviewers, security auditors evaluating AI-contribution risk, downstream consumers asking "who/what touched this code path."
 
-Complements [`../../agents/governance/README.md`](../../agents/governance/README.md) (operational agent governance) with model-level identity documentation.
+Complements [`../../01-agents/governance/README.md`](../../01-agents/governance/README.md) (operational agent governance) with model-level identity documentation.

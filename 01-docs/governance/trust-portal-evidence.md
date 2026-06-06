@@ -57,7 +57,7 @@ review_cycle: on-change
 
 - [`.github/CODEOWNERS`](../../.github/CODEOWNERS) — dual-reviewer enforcement with `@amanianai` and `@gtcx-agent` on security-sensitive paths
 - Branch protection on `main` — required CODEOWNER review, required status checks (ci, rust, codeql, security)
-- [Dual-AI CODEOWNER governance](../agents/governance/README.md) — schema, system prompt, 3 path-specific playbooks
+- [Dual-AI CODEOWNER governance](../01-agents/governance/README.md) — schema, system prompt, 3 path-specific playbooks
 - AI CODEOWNER never approves — enforced in three layers (schema enum, prompt constraint, runner output filter)
 - AI CODEOWNER multi-provider — Anthropic primary, OpenAI fallback (closes single-provider bus-factor)
 

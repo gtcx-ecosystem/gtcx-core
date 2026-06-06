@@ -200,7 +200,7 @@ pnpm why <package>
 | Gate                | Command                                                                    | Blocks Release? |
 | ------------------- | -------------------------------------------------------------------------- | --------------- |
 | Bundle size check   | `pnpm bundle:check-budgets`                                                | Yes             |
-| Barrel export audit | `grep -r "export \*" 03-platform/packages/*/src/index.ts`      | Yes             |
+| Barrel export audit | `grep -r "export \*" 03-platform/packages/*/src/index.ts`                  | Yes             |
 | Tree-shaking config | `grep -n "splitting\|treeshake" 03-platform/packages/config/tsup/base.mjs` | Yes             |
 | Rust size opts      | `grep -n "opt-level\|strip" rust/Cargo.toml`                               | Yes             |
 

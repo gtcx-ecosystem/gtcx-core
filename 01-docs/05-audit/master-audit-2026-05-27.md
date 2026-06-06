@@ -265,17 +265,17 @@ Phase 2 skipped — repo has only `/01-docs/` documentation root. No competing r
 
 ### 9.1 What Changed
 
-| Claim                    | Original         | Forensic Finding                                                                                        | Honest                                                                            |
-| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Test suite fully passing | 45/45 tasks pass | Verified: 376 workproof tests, 45 tasks, 0 failures                                                     | Same (9.5)                                                                        |
-| FIPS 140-3 validated     | CMVP #4816       | `aws-lc-fips-sys` 0.13.14 in `Cargo.lock`; feature flag wired                                           | Same (9.5)                                                                        |
-| `#![deny(unsafe_code)]`  | All 6 crates     | Verified in all 6 `lib.rs` files; `grep "unsafe {"` returns 0 matches                                   | Same (10.0)                                                                       |
-| Threat matrix 12/12      | Validator passes | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                            | Same (9.0)                                                                        |
-| SLSA Build L3 (npm)      | Aspirational     | **Met 2026-06-01:** 21/21 Sigstore @ 3.1.4; `pnpm provenance:check-npm:strict`                          | Supply chain sub-score ↑ (see [ci-confirmation](./ci-confirmation-2026-06-01.md)) |
-| Coverage 95% branch      | 19 packages      | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                             | Same (9.5)                                                                        |
+| Claim                    | Original         | Forensic Finding                                                                            | Honest                                                                            |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Test suite fully passing | 45/45 tasks pass | Verified: 376 workproof tests, 45 tasks, 0 failures                                         | Same (9.5)                                                                        |
+| FIPS 140-3 validated     | CMVP #4816       | `aws-lc-fips-sys` 0.13.14 in `Cargo.lock`; feature flag wired                               | Same (9.5)                                                                        |
+| `#![deny(unsafe_code)]`  | All 6 crates     | Verified in all 6 `lib.rs` files; `grep "unsafe {"` returns 0 matches                       | Same (10.0)                                                                       |
+| Threat matrix 12/12      | Validator passes | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                | Same (9.0)                                                                        |
+| SLSA Build L3 (npm)      | Aspirational     | **Met 2026-06-01:** 21/21 Sigstore @ 3.1.4; `pnpm provenance:check-npm:strict`              | Supply chain sub-score ↑ (see [ci-confirmation](./ci-confirmation-2026-06-01.md)) |
+| Coverage 95% branch      | 19 packages      | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                 | Same (9.5)                                                                        |
 | USSD protocol            | Config-only (P2) | `03-platform/packages/connectivity/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                                                                        |
-| Frontmatter compliance   | 261/261 valid    | 264/264 valid (3 new docs added: current.md + 2 existing fixed)                                         | Same (9.5)                                                                        |
-| Coordination contract    | Not present      | Added in AGENTS.md with baseline-os reporting and trust requirements                                    | Repo Hygiene +0.0 (already 9.5)                                                   |
+| Frontmatter compliance   | 261/261 valid    | 264/264 valid (3 new docs added: current.md + 2 existing fixed)                             | Same (9.5)                                                                        |
+| Coordination contract    | Not present      | Added in AGENTS.md with baseline-os reporting and trust requirements                        | Repo Hygiene +0.0 (already 9.5)                                                   |
 
 ### 9.2 Honest Dimension Scores
 

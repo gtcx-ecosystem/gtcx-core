@@ -267,19 +267,19 @@ Phase 2 skipped — repo has only `/01-docs/` documentation root. No competing r
 
 ### 9.1 What Changed
 
-| Claim                            | Original                | Forensic Finding                                                                                        | Honest                          |
-| -------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| Test suite fully passing         | 45/45 tasks pass        | Verified: 336 workproof tests, 45 tasks, 0 failures                                                     | Same (9.5)                      |
-| FIPS 140-3 validated             | CMVP #4816              | `aws-lc-fips-sys` 0.13.14 in `Cargo.lock`; feature flag wired                                           | Same (9.5)                      |
-| `#![deny(unsafe_code)]`          | All 6 crates            | Verified in all 6 `lib.rs` files; `grep "unsafe {"` returns 0 matches                                   | Same (10.0)                     |
-| Threat matrix 12/12              | Validator passes        | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                            | Same (9.0)                      |
-| SLSA Build L3                    | Aspirational            | NPM_TOKEN present; provenance manifest generates clean; workflow ready                                  | Upgrade SLSA sub-score to 7.5   |
-| Coverage 95% branch              | 14 packages             | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                             | Same (9.5)                      |
+| Claim                            | Original                | Forensic Finding                                                                            | Honest                          |
+| -------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------- | ------------------------------- |
+| Test suite fully passing         | 45/45 tasks pass        | Verified: 336 workproof tests, 45 tasks, 0 failures                                         | Same (9.5)                      |
+| FIPS 140-3 validated             | CMVP #4816              | `aws-lc-fips-sys` 0.13.14 in `Cargo.lock`; feature flag wired                               | Same (9.5)                      |
+| `#![deny(unsafe_code)]`          | All 6 crates            | Verified in all 6 `lib.rs` files; `grep "unsafe {"` returns 0 matches                       | Same (10.0)                     |
+| Threat matrix 12/12              | Validator passes        | `03-platform/tools/check-threat-matrix.mjs` reads controls; validator passes                | Same (9.0)                      |
+| SLSA Build L3                    | Aspirational            | NPM_TOKEN present; provenance manifest generates clean; workflow ready                      | Upgrade SLSA sub-score to 7.5   |
+| Coverage 95% branch              | 14 packages             | Verified via `vitest.config.ts` thresholds; `test:coverage:critical` passes                 | Same (9.5)                      |
 | USSD protocol                    | Config-only (P2)        | `03-platform/packages/connectivity/src/ussd/` has parser.ts, session.ts, types.ts, index.ts | Same (9.0)                      |
-| Groth16 refactor                 | 692 LOC single file     | File removed; refactored into modules per commit `1443f28`                                              | Same (9.5)                      |
-| rustls-webpki cargo audit        | 3 vulns, CI fails       | `cargo audit` passes with documented exceptions; `deny.toml` + `audit.toml`                             | Security +0.2 (CI unblocked)    |
-| ADR-012 predicate reconciliation | Not started             | Stage 0 complete: 47 predicates, migration helper, handoff doc                                          | Ecosystem +0.3                  |
-| Property-based tests             | Only in crypto packages | Added to `@gtcx/workproof` (14 assertions, fast-check)                                                  | Code Quality +0.0 (already 9.5) |
+| Groth16 refactor                 | 692 LOC single file     | File removed; refactored into modules per commit `1443f28`                                  | Same (9.5)                      |
+| rustls-webpki cargo audit        | 3 vulns, CI fails       | `cargo audit` passes with documented exceptions; `deny.toml` + `audit.toml`                 | Security +0.2 (CI unblocked)    |
+| ADR-012 predicate reconciliation | Not started             | Stage 0 complete: 47 predicates, migration helper, handoff doc                              | Ecosystem +0.3                  |
+| Property-based tests             | Only in crypto packages | Added to `@gtcx/workproof` (14 assertions, fast-check)                                      | Code Quality +0.0 (already 9.5) |
 
 ### 9.2 Honest Dimension Scores
 

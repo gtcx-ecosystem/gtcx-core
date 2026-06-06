@@ -128,4 +128,4 @@ Before making a change that could break the API surface, run `pnpm api:check` an
 - [`01-docs/specs/core-spec.md`](../specs/core-spec.md) — system specification
 - [`01-docs/decisions/`](../decisions/) — all ADRs
 - [`01-docs/09-security/security-framework.md`](../security/security-framework.md) — security framework
-- [`01-docs/01-agents/workflows/safety-rules.md`](../agents/workflows/safety-rules.md) — what requires approval
+- [`01-docs/01-agents/workflows/safety-rules.md`](../01-agents/workflows/safety-rules.md) — what requires approval

@@ -22,7 +22,7 @@ tags: ['coordination', 'bridge', 'agents', 'cross-repo']
 | **This file**                                                                        | Live snapshot + communication rules     |
 | [`cross-repo-sprint-workplan-2026-06.md`](cross-repo-sprint-workplan-2026-06.md)     | Sprint backlog, XR-ID alignment         |
 | [`remaining-cross-repo-work-2026-06-02.md`](remaining-cross-repo-work-2026-06-02.md) | Open items with owner, priority, effort |
-| [`../../agents/sessions/index.md`](../../agents/sessions/index.md)                   | Agent handoff index                     |
+| [`../../01-agents/sessions/index.md`](../../01-agents/sessions/index.md)             | Agent handoff index                     |
 
 ---
 

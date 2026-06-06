@@ -20,7 +20,7 @@ axis_scores:
   axis_8_empty_dirs: 10.0
 remediation_status: audit-only
 p0_cap_applied: false
-supersedes: '01-docs/audit/repo-hygiene-2026-06-05.md (morning pass — P0 allowlist drift)'
+supersedes: '01-docs/05-audit/repo-hygiene-2026-06-05.md (morning pass — P0 allowlist drift)'
 ---
 
 # gtcx-core — Repo Hygiene Audit
@@ -112,10 +112,10 @@ None — strict checker exit **0**.
 
 ### P2 — nice-to-have
 
-| ID   | Item                  | Action                                             |
-| ---- | --------------------- | -------------------------------------------------- |
-| P2-1 | Untracked `.DS_Store` | Delete locally; verify `.gitignore` covers pattern |
-| P2-2 | Legacy audit path     | Keep `01-docs/audit/` index rows pointing here     |
+| ID   | Item                  | Action                                                                        |
+| ---- | --------------------- | ----------------------------------------------------------------------------- |
+| P2-1 | Untracked `.DS_Store` | Delete locally; verify `.gitignore` covers pattern                            |
+| P2-2 | Legacy audit redirect | `01-docs/audit/README.md` redirects here — do not add files under legacy path |
 
 ### Excluded (human-owned)
 
