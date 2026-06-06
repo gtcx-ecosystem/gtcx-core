@@ -56,12 +56,25 @@ review_cycle: on-change
 - P33 governance spine: README Governance/Agents sections; tier B frontmatter; AGENTS.md spine footer
 - ESLint shared config paths updated to `03-platform/packages/*`
 
-## Deferred (non-migration)
+## Status (2026-06-06 review)
 
-- `gtcx-core` registry entry in `gtcx-agentic/config/ecosystem-governance-spine.json` (local edit for P33 check — commit in gtcx-agentic separately)
-- Large agent-sync / docs WIP in working tree — not bulk-committed
-- `Makefile.local` recommended optional file
+All migration-scope work is committed and pushed to `origin/main`.
 
-## Commit
+| Commit     | Purpose                                         |
+| ---------- | ----------------------------------------------- |
+| `35167fc6` | Land layout v3 doc paths, hub stubs, agent sync |
+| `d5e71db6` | Layout v3 + governance spine migration          |
+| `393b52bd` | Repo-hygiene audit refresh                      |
 
-**SHA:** `d5e71db6` on `main`
+**gtcx-agentic registry:** `gtcx-core` in `config/ecosystem-governance-spine.json` at `origin/main` (`4f6e0fe`).
+
+## Deferred (non-migration — still open)
+
+- `pnpm readiness:lanes:check` — audit indexes not fully migrated to `01-docs/05-audit/` (lane gate, not migration scorecard)
+- Hub README stubs: `00-archive/`, `03-platform/` (repo-hygiene P1)
+- `Makefile.local` — optional P33 recommendation
+- gtcx-agentic local session artifacts (MCP JSON, session-hygiene evidence) — runtime, not committed
+
+## Primary migration commit
+
+**SHA:** `d5e71db6` · **Land commit:** `35167fc6` on `main`
