@@ -199,6 +199,77 @@ pnpm session --json
 
 Prints P22 next-work + P26 Proceed Brief skeleton. Not IDE-specific.
 
+## Launch focus (GTM — every session, no audit required)
+
+**Normative:** `01-docs/04-ops/agent-launch-focus.md` · **SoR:** `.baseline/launch-focus.json`
+
+**North star:** Finish **gtcx-core** foundation so **markets / intelligence / infrastructure** can launch apps → GTM closes sovereign deals (GR-T2+).
+
+| Mode          | Meaning                                                                |
+| ------------- | ---------------------------------------------------------------------- |
+| **implement** | Drain `workSet.implement` (bout)                                       |
+| **plan**      | No code queue — drain `workSet.plan` (reconcile roadmaps/coordination) |
+| **witness**   | Human gates only                                                       |
+
+```bash
+pnpm agent:session-start --json
+pnpm agent:reconcile-launch
+```
+
+**Forbidden:** Asking operator to run forensic audit or execute-roadmap to discover priorities.
+
+## Execution bout (intrinsic — prefer over execute-roadmap for shipping)
+
+**Normative:** `01-docs/04-ops/agent-execution-bout.md` · state: `.baseline/execution-bout.json`
+
+Every `pnpm agent:session-start` and `pnpm agent:next-work` provisions `executionBout` (Class R drain queue). **Drain the bout before check-in** — micro-commit per story; progress Status Update every 2 stories; full check-in at bout end.
+
+```bash
+pnpm agent:session-start --json   # includes executionBout
+pnpm agent:bout                   # human summary
+```
+
+`backlogClear` ≠ stop — continue `repoCompletable` Class R items in the bout plan.
+
+**Planning only:** `execute-roadmap` (gtcx-docs framework) reconciles audits into `01-docs/05-audit/execution-roadmap.md` — does not replace the bout loop for implementation.
+
+## Agent git workflow — micro-commit and preserve (P4 + P24 + P26 + P27)
+
+**Normative:** [agent-git-workflow.md](01-docs/04-ops/agent-git-workflow.md)
+
+| Action           | Practice                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| **Commit**       | Micro-commit **immediately** after each Class R story (gates pass) — **never ask**   |
+| **Push**         | **After every micro-commit** — `pnpm agent:git-push` when IDE blocks bare `git push` |
+| **Run commands** | P27 ladder D1→D6 — agents execute gates/probes/git; never defer to operator          |
+| **Owner repo**   | Git writes **only** in owner checkout (P24); wrong repo → handoff, switch workspace  |
+
+**IDE vs CLI:** Yolo (`~/.cursor/cli-config.json`) applies to **Cursor CLI**; Composer uses `pnpm agent:git-push`.
+
+**Forbidden:** "Should I commit?", "Say push if you want", "run in your terminal".
+
+**Cross-repo deps (session):** `pnpm agent:cross-repo-deps:check`
+
+**Report:** Status Update **Done** — `commit <sha>` · `pnpm agent:git-push` exit code.
+
+## Bout progress gauge + task backlog (all agents)
+
+**Normative:** [agent-bout-progress-gauge.md](01-docs/04-ops/agent-bout-progress-gauge.md) · [agent-task-backlog-format.md](01-docs/04-ops/agent-task-backlog-format.md)
+
+**Per repo:** `.baseline/bout-progress.config.json` — dimensions **A** (engineering), **B** (workflow, product repos), **C** (GTM buyer S0–S6).
+
+```bash
+pnpm agent:bout-progress              # standup composite + buyer stage
+pnpm agent:bout-progress --json
+pnpm agent:reconcile-bout-progress    # sync A from latest.json
+```
+
+**Status Update:** include `### Progress gauge` block (auto text from `pnpm agent:bout-progress`). Use **task IDs** (`EOS-UX-052`, `CORE-004`) — not “next slices”.
+
+**Product repo example:** [bout-progress-exploration-os.config.json](01-docs/04-ops/03-platform/examples/bout-progress-exploration-os.config.json) — copy to exploration-os `.baseline/`.
+
+**GTM stage assessment:** Cursor `/gtm` or `~/.claude/GTM.md` — buyer truth separate from bout composite.
+
 ## Protocol 26 — Proceed Brief (no menus)
 
 Template: `01-docs/04-ops/agent-proceed-brief-template.md` · **Forbidden:** Your call · Two options · Say push if you want.
@@ -261,6 +332,23 @@ Template: `01-docs/04-ops/agent-status-update-template.md` · Spec: P26 §3b (gt
 **MCP personas** (`builder`, `security`, …) apply when using BaselineOS MCP tools; **institutional** names apply in chat, commits, and hub docs.
 
 **Forbidden:** defaulting to generic coder voice for security, compliance, or coordination tasks.
+
+## Agent protocols (P22–P28) — machine-enforced
+
+| Resource          | Path                                                     |
+| ----------------- | -------------------------------------------------------- |
+| Hub index         | `gtcx-docs/01-docs/governance/protocols/`                |
+| Local manifest    | `01-docs/01-agents/agent-protocols-manifest.json`        |
+| Enforcement guide | `01-docs/01-agents/agent-protocols-enforcement.md`       |
+| P22 manifest      | `01-docs/04-ops/agent-work-selection.md`                 |
+| P26 template      | `01-docs/04-ops/agent-proceed-brief-template.md`         |
+| P24 bridge        | `01-docs/04-ops/coordination/cross-repo-agent-bridge.md` |
+
+**Startup phases (INST-003):** 5.4 P22 · 5.5 P24 · 5.6 P26+P28 · 5.7 P27
+
+**Session start (all LLMs):** `pnpm agent:session-start` — run before implementation (terminal, Kimi, Claude Code, Codex; not IDE-specific).
+
+**Verify wiring:** `pnpm agent:protocols:check` (CI + `pnpm quality:governance:check`).
 
 ## Ecosystem agent learning card (normative — read every session)
 

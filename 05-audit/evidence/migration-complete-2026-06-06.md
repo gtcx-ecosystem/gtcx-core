@@ -56,25 +56,31 @@ review_cycle: on-change
 - P33 governance spine: README Governance/Agents sections; tier B frontmatter; AGENTS.md spine footer
 - ESLint shared config paths updated to `03-platform/packages/*`
 
-## Status (2026-06-06 review)
+## Status (2026-06-06 L2 convergence)
 
 All migration-scope work is committed and pushed to `origin/main`.
 
 | Commit     | Purpose                                         |
 | ---------- | ----------------------------------------------- |
+| `b5663ff5` | Converge audit/agent doc trees + sor-map        |
 | `35167fc6` | Land layout v3 doc paths, hub stubs, agent sync |
 | `d5e71db6` | Layout v3 + governance spine migration          |
-| `393b52bd` | Repo-hygiene audit refresh                      |
 
-**gtcx-agentic registry:** `gtcx-core` in `config/ecosystem-governance-spine.json` at `origin/main` (`4f6e0fe`).
+**L2 ergonomics (2026-06-06):** Single SoR paths — `01-docs/05-audit/`, `01-docs/01-agents/`, `01-docs/04-ops/`; legacy redirects only; hub READMEs on all hubs.
 
-## Deferred (non-migration — still open)
+## Phase 5 gates (L2 convergence)
 
-- `pnpm readiness:lanes:check` — audit indexes not fully migrated to `01-docs/05-audit/` (lane gate, not migration scorecard)
-- Hub README stubs: `00-archive/`, `03-platform/` (repo-hygiene P1)
+| Command                      | Exit |
+| ---------------------------- | ---- |
+| `pnpm readiness:lanes:check` | 0    |
+| `pnpm agent:protocols:check` | 0    |
+| `pnpm workspace:check`       | 0    |
+
+## Deferred (non-blocking)
+
 - `Makefile.local` — optional P33 recommendation
-- gtcx-agentic local session artifacts (MCP JSON, session-hygiene evidence) — runtime, not committed
+- L2/L3 tier labels in agentic migration scorecard (ecosystem-wide)
 
 ## Primary migration commit
 
-**SHA:** `d5e71db6` · **Land commit:** `35167fc6` on `main`
+**SHA:** `d5e71db6` · **L2 land:** `b5663ff5` on `main`

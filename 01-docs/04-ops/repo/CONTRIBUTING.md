@@ -126,7 +126,7 @@ with SSH.
    git config --global commit.gpgsign true
    ```
 
-5. Verify locally:
+5. Verify commit signing:
 
    ```bash
    git commit --allow-empty -m "test(signing): verify local commit signing"

@@ -1,48 +1,21 @@
 ---
-title: 'Operations Documentation'
-status: 'current'
-date: '2026-05-27'
-owner: 'gtcx-core'
-role: 'protocol-architect'
-agent_id: 'agent://gtcx-core/2026-05-27/session-backfill'
-trust_score: 95
-autonomy_level: 'sovereign'
-tier: 'critical'
-tags: ['documentation', 'operations']
-review_cycle: 'on-change'
+title: 'Operations (legacy path — redirect)'
+status: current
+date: 2026-06-06
+owner: gtcx-core
+role: protocol-architect
+tier: advisory
+review_cycle: on-change
 ---
 
----
+# Moved — use `01-docs/04-ops/`
 
-title: 'Operations Documentation'
-status: 'current'
-date: '2026-05-17'
-owner: 'protocol-architect'
-role: 'protocol-architect'
-tier: 'standard'
-tags: ['operations', 'docs']
-review_cycle: 'on-change'
+Agent operations, coordination, and repo policy docs live at **[`../04-ops/`](../04-ops/)**.
 
----
+| Resource           | Canonical path                                                                                |
+| ------------------ | --------------------------------------------------------------------------------------------- |
+| P22 work selection | [`01-docs/04-ops/agent-work-selection.md`](../04-ops/agent-work-selection.md)                 |
+| P26 proceed brief  | [`01-docs/04-ops/agent-proceed-brief-template.md`](../04-ops/agent-proceed-brief-template.md) |
+| Root allowlist     | [`01-docs/04-ops/repo/root-allowlist.json`](../04-ops/repo/root-allowlist.json)               |
 
-# Operations Documentation
-
-Runbooks, SLO definitions, and operational procedures for running GTCX in production.
-
----
-
-## Key Docs
-
-| File                        | Purpose                                    |
-| --------------------------- | ------------------------------------------ |
-| `slo-definitions.md`        | Service level objectives and error budgets |
-| `runbook.md`                | Operational runbooks                       |
-| `repo-bootstrap.md`         | Repository bootstrap procedures            |
-| `phase-b-execution-pack.md` | Phase B execution checklist                |
-
----
-
-## Related
-
-- [DevOps](../devops/)
-- [DR Runbook](../devops/runbooks/dr-runbook.md)
+Do not add new files under `01-docs/04-ops/`. See [`config/sor-map.json`](../../config/sor-map.json).

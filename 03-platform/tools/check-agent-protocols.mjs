@@ -186,7 +186,7 @@ if (p27) {
     }
     return [...new Set(hits)];
   }
-  for (const dir of ['01-docs/01-agents', '01-docs/operations']) {
+  for (const dir of ['01-docs/01-agents', '01-docs/04-ops']) {
     const absDir = join(ROOT, dir);
     if (!existsSync(absDir)) continue;
     for (const file of readdirSync(absDir, { recursive: true })) {

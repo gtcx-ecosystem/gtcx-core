@@ -6,10 +6,9 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = join(__dirname, '../..');
+const REPO_ROOT = join(__dirname, '../../..');
 
 const CANDIDATES = [
-  join(REPO_ROOT, '../gtcx-agentic/13-03-platform/scripts/lib/suggest-persona.mjs'),
   join(REPO_ROOT, '../gtcx-agentic/03-platform/scripts/lib/suggest-persona.mjs'),
   join(REPO_ROOT, '../baseline-os/03-platform/scripts/ecosystem/lib/suggest-persona.mjs'),
 ];

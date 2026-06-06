@@ -2,7 +2,7 @@
   "schema": "gtcx.launchFocus.v1",
   "normativeDoc": "01-docs/04-ops/agent-launch-focus.md",
   "statePath": ".baseline/launch-focus.json",
-  "provisionedAt": "2026-06-05T04:07:21.139Z",
+  "provisionedAt": "2026-06-06T14:25:22.724Z",
   "repo": "gtcx-core",
   "northStar": {
     "outcome": "Finish foundation evidence and coordination so downstream apps (markets, intelligence, infrastructure) can launch — GTM closes GR-T2+ sovereign deals.",

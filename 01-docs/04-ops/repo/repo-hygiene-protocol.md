@@ -8,7 +8,7 @@ tier: 'standard'
 tags: ['operations', 'repo-hygiene', 'governance']
 review_cycle: 'on-change'
 related:
-  - 01-docs/operations/repo/root-allowlist.json
+  - 01-docs/04-ops/repo/root-allowlist.json
   - config/sor-map.json
   - 01-docs/05-audit/repo-hygiene-2026-06-05.md
 canonical_protocol: gtcx-docs/03-platform/tools/audit/audit-framework/prompts/hygiene/repo-hygiene-protocol-prompt.md
@@ -52,7 +52,7 @@ Edit synced blocks via `.agent/` partials — run `pnpm agent:sync`.
 | `CHANGELOG.md` | Release history                  |
 | `.github/`     | Workflows, CODEOWNERS, templates |
 
-Community policy lives in **`01-docs/operations/repo/`** (`CONTRIBUTING.md`, `SECURITY.md`) — not at root (P31).
+Community policy lives in **`01-docs/04-ops/repo/`** (`CONTRIBUTING.md`, `SECURITY.md`) — not at root (P31).
 
 ## Tier D — Monorepo spine
 

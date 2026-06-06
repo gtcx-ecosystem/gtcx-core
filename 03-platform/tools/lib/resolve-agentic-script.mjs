@@ -1,15 +1,17 @@
 /**
- * Resolve gtcx-agentic script paths across layout migrations (03-platform/scripts/ → 13-03-platform/scripts/).
+ * Resolve gtcx-agentic script paths across layout migrations.
  */
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = join(__dirname, '../..');
+const REPO_ROOT = join(__dirname, '../../..');
 
 export function resolveAgenticScript(name) {
   const candidates = [
+    join(REPO_ROOT, '../gtcx-agentic/03-platform/scripts/checks', name),
+    join(REPO_ROOT, '../gtcx-agentic/03-platform/scripts', name),
     join(REPO_ROOT, '../gtcx-agentic/scripts', name),
     join(REPO_ROOT, '../gtcx-agentic/13-scripts', name),
   ];
@@ -22,5 +24,8 @@ export function resolveAgenticScript(name) {
 export function resolveAgenticScriptRel(name) {
   const abs = resolveAgenticScript(name);
   if (!abs) return null;
-  return abs.replace(`${REPO_ROOT}/`, '');
+  if (abs.startsWith(`${REPO_ROOT}/`)) {
+    return abs.slice(REPO_ROOT.length + 1);
+  }
+  return abs;
 }

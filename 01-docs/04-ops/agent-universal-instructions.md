@@ -32,9 +32,9 @@ Build once if needed: `cd ../baseline-os && pnpm --filter baselineos build`
 
 **Chain:** Phase 0 config preflight → **Phase 0b agent autonomy (P27)** → gtcx-docs INST-003 → repo session (via `run-repo-session` / `bin/agent`) → **audit context card** → repo gates → optional `--ingest` via gtcx-agile/baseline-os work-next.
 
-**Agent environment autonomy (`agentAutonomy` in JSON — Phase 0b):** Before implementing, verify Cursor shell allowlists (`.cursor/cli.json`, `.cursor/permissions.json`) and PATH cover `pnpm`, `node`, `git`, `gh`, `baseline` (+ `cargo` when Rust, `python3` for hygiene). Levels: `full` · `partial` · `blocked` · `terminal`. If `partial` or `blocked`, emit **Permission Unblock Report** (`01-docs/04-operations/agent-permission-unblock.md`) — do not defer V-ladder to the human. Standalone: `pnpm agent:environment:check`
+**Agent environment autonomy (`agentAutonomy` in JSON — Phase 0b):** Before implementing, verify Cursor shell allowlists (`.cursor/cli.json`, `.cursor/permissions.json`) and PATH cover `pnpm`, `node`, `git`, `gh`, `baseline` (+ `cargo` when Rust, `python3` for hygiene). Levels: `full` · `partial` · `blocked` · `terminal`. If `partial` or `blocked`, emit **Permission Unblock Report** (`01-docs/04-ops/agent-permission-unblock.md`) — do not defer V-ladder to the human. Standalone: `pnpm agent:environment:check`
 
-**Agent capability posture (`agentCapabilities` in JSON):** Assume **full execution power** in the owner repo unless `canExecute` is false. You CAN run gates, git, gh, cross-repo handoffs, forensic audits, and background servers — **execute first**. Timid deferral ("verify locally", "I cannot", story menus) is a protocol violation, not politeness. Read `01-docs/04-operations/agent-capability-posture.md`. Standalone: `pnpm agent:capabilities:check`
+**Agent capability posture (`agentCapabilities` in JSON):** Assume **full execution power** in the owner repo unless `canExecute` is false. You CAN run gates, git, gh, cross-repo handoffs, forensic audits, and background servers — **execute first**. Timid deferral ("verify locally", "I cannot", story menus) is a protocol violation, not politeness. Read `01-docs/04-ops/agent-capability-posture.md`. Standalone: `pnpm agent:capabilities:check`
 
 **Audit context card (`sessionContext` in JSON):** At open, identify **master/bank-grade** scores from `01-docs/05-audit/indexes/latest.json` · last **full/engineering** forensic insight · **GTM status** (lane 5 GR tiers + `.baseline/launch-focus.json`) · **repo hygiene** + **document hygiene** (lane 2 domains + `repo-hygiene-*.md` / `docs-standard-compliance-*.md`) · **UX** audit (worldclass-ux / ux-audit when surface exists) · **SEF** status (Protocol 20 when `sef:check` or `01-docs/sef/`) · **human agent blockers** (repo-owned gates → raise via **gtcx-agentic** SoR) · **cross-repo dependencies** (`.baseline/memory/dependencies.md`, P24). Read listed `readPaths` before implementing.
 
@@ -61,15 +61,15 @@ Legacy alias: `pnpm agent:session-start` (= `agent:start`).
 | gates    | `pnpm gates`                         |
 | hub      | `pnpm hub`                           |
 
-Index: `baseline-os/01-docs/cli/agent-cheatsheet.md` · repo copy: `01-docs/04-operations/agent-command-lookup.md`
+Index: `baseline-os/01-docs/cli/agent-cheatsheet.md` · repo copy: `01-docs/04-ops/agent-command-lookup.md`
 
 Read after start:
 
-| File                                                   | Purpose                               |
-| ------------------------------------------------------ | ------------------------------------- |
-| `.baseline/memory/session.md`                          | Session pointer                       |
-| `01-docs/04-operations/agents/agent-work-selection.md` | P22 manifest (when present)           |
-| `AGENTS.md`                                            | Repo-specific gates (synced partials) |
+| File                                            | Purpose                               |
+| ----------------------------------------------- | ------------------------------------- |
+| `.baseline/memory/session.md`                   | Session pointer                       |
+| `01-docs/04-ops/agents/agent-work-selection.md` | P22 manifest (when present)           |
+| `AGENTS.md`                                     | Repo-specific gates (synced partials) |
 
 ### Ecosystem learning card (normative — every repo)
 
@@ -93,7 +93,7 @@ Read after start:
 
 ### Execution bout (intrinsic — drain before check-in)
 
-Repos with bout wiring provision `executionBout` on every `agent:session-start` / `agent:next-work`. **gtcx-core** normative: `01-docs/04-operations/agent-execution-bout.md` · state: `.baseline/execution-bout.json`.
+Repos with bout wiring provision `executionBout` on every `agent:session-start` / `agent:next-work`. **gtcx-core** normative: `01-docs/04-ops/agent-execution-bout.md` · state: `.baseline/execution-bout.json`.
 
 | Rhythm          | Action                                               |
 | --------------- | ---------------------------------------------------- |
@@ -199,7 +199,7 @@ Read [`human-gate-navigation.md`](human-gate-navigation.md) before treating any 
 | **Next priority**   | One recommended follow-on (agent executes Class R)    |
 | **Approval needed** | Human gates only — parallel; never menus or "I can …" |
 
-Full template: `01-docs/04-operations/agent-status-update-template.md` (rolled out with universal instructions).
+Full template: `01-docs/04-ops/agent-status-update-template.md` (rolled out with universal instructions).
 
 **Start vs report:** Proceed Brief (§3) **before** work · Status Update (§3b) **after** work.
 
@@ -207,13 +207,13 @@ Full template: `01-docs/04-operations/agent-status-update-template.md` (rolled o
 
 ## 4. Protocol 27 — run commands yourself
 
-| You run                                                                 | You do not ask                         |
-| ----------------------------------------------------------------------- | -------------------------------------- |
-| `pnpm test`, lint, validate                                             | "run locally"                          |
-| `aws` / `kubectl` / `terraform` / `13-03-platform/scripts/staging/*.sh` | **"Your action needed"** + paste block |
-| `npx expo start` (background), Metro health                             | "focus your terminal"                  |
-| `adb reverse`, `am start`                                               | "press r/a" only                       |
-| `git push` when commits ready                                           | "Say push if you want"                 |
+| You run                                                              | You do not ask                         |
+| -------------------------------------------------------------------- | -------------------------------------- |
+| `pnpm test`, lint, validate                                          | "run locally"                          |
+| `aws` / `kubectl` / `terraform` / `03-platform/scripts/staging/*.sh` | **"Your action needed"** + paste block |
+| `npx expo start` (background), Metro health                          | "focus your terminal"                  |
+| `adb reverse`, `am start`                                            | "press r/a" only                       |
+| `git push` when commits ready                                        | "Say push if you want"                 |
 
 Report: **command + exit code** per step.
 
@@ -260,7 +260,7 @@ All synced from `gtcx-agentic` templates via `pnpm agent:sync`:
 | Copilot     | `.github/copilot/instructions.md`                                  |
 | Conventions | `CONVENTIONS.md`                                                   |
 
-**SoR for templates:** `gtcx-agentic/13-03-platform/scripts/sync/templates/.agent/`
+**SoR for templates:** `gtcx-agentic/03-platform/scripts/sync/templates/.agent/`
 
 **Maintainer gate (CI):** `pnpm ecosystem:rollout-universal:check` in gtcx-agentic. Agents run `ecosystem:rollout-universal` in-session when updating templates (P27) — never tell the operator to run sync/rollout.
 

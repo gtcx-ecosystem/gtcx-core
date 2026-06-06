@@ -3,7 +3,7 @@ title: 'gtcx-core — Repo Hygiene Audit'
 date: '2026-06-05'
 command: 'repo-hygiene'
 workspace_type: 'monorepo'
-policy_source: '01-docs/operations/repo/repo-hygiene-protocol.md'
+policy_source: '01-docs/04-ops/repo/repo-hygiene-protocol.md'
 allowlist_version: '2.0.0'
 schema_version: '1.0.0'
 overall_score: 9.7
@@ -47,9 +47,9 @@ supersedes: '01-docs/05-audit/repo-hygiene-2026-06-05.md (morning pass — P0 al
 
 | Path                                                          | Present | Used                           |
 | ------------------------------------------------------------- | ------- | ------------------------------ |
-| `01-docs/operations/repo/repo-hygiene-protocol.md`            | **Yes** | SSOT (five-hub v2)             |
-| `01-docs/operations/repo/root-allowlist.json`                 | **Yes** | v2.0.0                         |
-| `01-docs/operations/repo/repo-root-conventions.md`            | No      | —                              |
+| `01-docs/04-ops/repo/repo-hygiene-protocol.md`                | **Yes** | SSOT (five-hub v2)             |
+| `01-docs/04-ops/repo/root-allowlist.json`                     | **Yes** | v2.0.0                         |
+| `01-docs/04-ops/repo/repo-root-conventions.md`                | No      | —                              |
 | `03-platform/scripts/ops/check-workspace-root-cleanliness.py` | **Yes** | strict + sidecar               |
 | `pnpm check:workspace-root-cleanliness:strict`                | **Yes** | `package.json`                 |
 | CI wired                                                      | **Yes** | `.github/workflows/ci.yml` L43 |
@@ -128,8 +128,8 @@ None — strict checker exit **0**.
 ```text
 $ pnpm check:workspace-root-cleanliness:strict
 # Workspace Root Cleanliness
-Policy: 01-docs/operations/repo/repo-hygiene-protocol.md
-Allowlist: 01-docs/operations/repo/root-allowlist.json (v2.0.0, schema v1.0.0)
+Policy: 01-docs/04-ops/repo/repo-hygiene-protocol.md
+Allowlist: 01-docs/04-ops/repo/root-allowlist.json (v2.0.0, schema v1.0.0)
 Status: PASS
 Repo root matches the canonical allowlist.
 exit 0
@@ -154,7 +154,7 @@ exit 0
 
 | Criterion               | ID     | Status      | Evidence                                                      |
 | ----------------------- | ------ | ----------- | ------------------------------------------------------------- |
-| Repo hygiene protocol   | P1     | **pass**    | `01-docs/operations/repo/repo-hygiene-protocol.md`            |
+| Repo hygiene protocol   | P1     | **pass**    | `01-docs/04-ops/repo/repo-hygiene-protocol.md`                |
 | Machine allowlist       | P2     | **pass**    | v2.0.0 — five-hub layout                                      |
 | Checker script          | P3     | **pass**    | `03-platform/scripts/ops/check-workspace-root-cleanliness.py` |
 | CI wired                | P4     | **pass**    | `.github/workflows/ci.yml`                                    |
