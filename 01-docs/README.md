@@ -16,7 +16,21 @@ review_cycle: 'on-change'
 
 **Master index:** [`README.md`](./README.md) · alias [`INDEX.md`](./INDEX.md)
 
-**Last updated:** 2026-06-05
+## Layout v3 IA map (agent)
+
+| Hub           | Path                              | Purpose                                              |
+| ------------- | --------------------------------- | ---------------------------------------------------- |
+| `01-docs`     | `01-docs/`                        | Specs, architecture, audit narratives, agent indexes |
+| `02-ops`      | `02-ops/`                         | PM, coordination, attestation domains                |
+| `03-platform` | `03-platform/packages/`           | `@gtcx/*` TypeScript packages + tools/scripts        |
+| `rust`        | `rust/`                           | `gtcx-*` cryptographic crates (foundation exception) |
+| `04-deploy`   | `04-deploy/`                      | Deploy evidence (minimal for library repo)           |
+| `05-audit`    | `05-audit/` + `01-docs/05-audit/` | Evidence ops + lane forensics                        |
+| `config`      | `config/`                         | `sor-map.json`, `paths.mjs`, toolchain SoR           |
+
+Machine-readable map: [`../config/sor-map.json`](../config/sor-map.json) · Bootstrap: `pnpm agent:bootstrap:check`
+
+**Last updated:** 2026-06-06
 **Five audit lanes + GCR:** [model](./audit/readiness-model.md) · [latest.json](./audit/latest.json) — **GCR-T0 BLOCKED** · IC-T0 · GR-T1. **Agents:** [readiness-and-audit-lanes](./agents/readiness-and-audit-lanes.md)
 **Conflict-free guarantee:** Canonical repo documentation lives under `01-docs/`. Generated artifacts and staged-delete material are intentionally excluded from the source-of-truth set.
 

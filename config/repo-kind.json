@@ -1,0 +1,14 @@
+{
+  "schema": "gtcx.repoKind.v1",
+  "repo": "gtcx-core",
+  "kind": "library",
+  "repoTier": 1,
+  "migrationTier": "stable",
+  "emphasis": ["03-platform/packages", "rust", "03-platform/tools", "01-docs/05-audit"],
+  "deemphasis": ["06-workstream", "04-deploy"],
+  "notes": "Cryptographic foundation library — TypeScript @gtcx/* packages + Rust gtcx-* crates. No product apps.",
+  "turbo": {
+    "testDependsOnBuild": true,
+    "packages": ["03-platform/packages/*"]
+  }
+}

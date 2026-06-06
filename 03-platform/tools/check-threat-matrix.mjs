@@ -16,13 +16,14 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { REPO_ROOT, threatMatrixPath } from '../../config/paths.mjs';
 
 // ---------------------------------------------------------------------------
 // Configuration
 // ---------------------------------------------------------------------------
 
-const MATRIX_PATH = '01-docs/09-security/threat-control-matrix.md';
-const REMEDIATION_PATH = '01-docs/remediation/REMEDIATION_PLAN.md';
+const MATRIX_PATH = threatMatrixPath();
+const REMEDIATION_PATH = resolve(REPO_ROOT, '01-docs/remediation/remediation-plan.md');
 const EXPECTED_CONTROLS = 12;
 const STALE_DAYS = 90;
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
@@ -231,7 +232,7 @@ for (const c of controls) {
   const missingEvidence = [];
   const foundEvidence = [];
   for (const p of c.evidencePaths) {
-    const abs = resolve(p);
+    const abs = resolve(REPO_ROOT, p);
     if (existsSync(abs)) {
       foundEvidence.push(p);
     } else {

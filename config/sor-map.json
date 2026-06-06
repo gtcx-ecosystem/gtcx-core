@@ -2,6 +2,7 @@
   "schema": "gtcx.sorMap.v1",
   "repo": "gtcx-core",
   "repoKind": "library",
+  "repoTier": 1,
   "updated": "2026-06-06",
   "paths": {
     "auditEntry": "05-audit/AGENT-START.md",

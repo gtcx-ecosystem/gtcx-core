@@ -3,9 +3,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
+import { PLATFORM_BENCHMARKS, PLATFORM_PACKAGES, REPO_ROOT } from '../../config/paths.mjs';
 
-const rootDir = process.cwd();
-const budgetsPath = path.join(rootDir, 'benchmarks/bundle-size-budgets.json');
+const rootDir = REPO_ROOT;
+const budgetsPath = path.join(PLATFORM_BENCHMARKS, 'bundle-size-budgets.json');
 const packageFilter = readOption('--package');
 
 function readOption(name) {
@@ -23,7 +24,7 @@ function readJson(filePath) {
 }
 
 function packageDir(packageName) {
-  return path.join(rootDir, 'packages', packageName.replace('@gtcx/', ''));
+  return path.join(PLATFORM_PACKAGES, packageName.replace('@gtcx/', ''));
 }
 
 function formatBytes(bytes) {

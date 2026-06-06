@@ -1,0 +1,38 @@
+{
+  "name": "gtcx-core",
+  "date": "2026-06-06T17:25:33.679Z",
+  "total": 100,
+  "grade": "GREEN",
+  "blockingPass": true,
+  "migrationComplete": true,
+  "tiers": {
+    "L1": {
+      "score": 100,
+      "max": 100,
+      "grade": "GREEN",
+      "complete": true,
+      "notes": ["Structure + paths + links + ops + build + tests (legacy scorecard)"]
+    },
+    "L2": {
+      "id": "L2",
+      "name": "Ergonomics",
+      "score": 100,
+      "max": 100,
+      "notes": [],
+      "blocking": false,
+      "complete": true
+    },
+    "L3": {
+      "id": "L3",
+      "name": "Agent bootstrap",
+      "score": 100,
+      "max": 100,
+      "notes": [],
+      "blocking": false,
+      "complete": true
+    }
+  },
+  "worldClass": true,
+  "policy": "read-only — no bulk moves",
+  "witness": "gtcx-agentic/05-audit/evidence/migration-health-gtcx-core-latest.json"
+}

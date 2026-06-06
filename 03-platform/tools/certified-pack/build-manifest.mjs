@@ -9,9 +9,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const packsDir = path.join(root, 'artifacts/certified-pack/packs');
-const artifactsManifest = path.join(root, 'artifacts/certified-pack/manifest.json');
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+const packsDir = path.join(root, '00-archive/artifacts/certified-pack/packs');
+const artifactsManifest = path.join(root, '00-archive/artifacts/certified-pack/manifest.json');
 const evidenceLatest = path.join(
   root,
   '01-docs/05-audit/evidence/certified-pack-manifest-latest.json'

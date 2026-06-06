@@ -9,7 +9,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const evidenceLatest = path.join(
   root,
   '01-docs/05-audit/evidence/vendor-pen-test-pack-manifest-latest.json'

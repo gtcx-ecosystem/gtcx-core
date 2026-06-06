@@ -2,9 +2,10 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { PLATFORM_PACKAGES, REPO_ROOT } from '../../config/paths.mjs';
 
-const rootDir = process.cwd();
-const packagesDir = path.join(rootDir, 'packages');
+const rootDir = REPO_ROOT;
+const packagesDir = PLATFORM_PACKAGES;
 
 const importRegexes = [
   /\bimport\s+(?:type\s+)?(?:[^'";]+?\s+from\s+)?['"]([^'"]+)['"]/g,

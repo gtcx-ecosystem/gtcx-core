@@ -3,8 +3,9 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { PLATFORM_PACKAGES, REPO_ROOT } from '../../config/paths.mjs';
 
-const rootDir = process.cwd();
+const rootDir = REPO_ROOT;
 const packageJsonPath = path.join(rootDir, 'package.json');
 const codeownersPath = path.join(rootDir, '.github/CODEOWNERS');
 const ciWorkflowPath = path.join(rootDir, '.github/workflows/ci.yml');
@@ -205,9 +206,9 @@ let anyCount = 0;
 
 function countAnyAnnotations() {
   const srcDirs = fs
-    .readdirSync(path.join(rootDir, 'packages'))
-    .filter((d) => fs.statSync(path.join(rootDir, 'packages', d)).isDirectory())
-    .map((d) => path.join(rootDir, 'packages', d, 'src'));
+    .readdirSync(PLATFORM_PACKAGES)
+    .filter((d) => fs.statSync(path.join(PLATFORM_PACKAGES, d)).isDirectory())
+    .map((d) => path.join(PLATFORM_PACKAGES, d, 'src'));
 
   for (const srcDir of srcDirs) {
     if (!fs.existsSync(srcDir)) continue;

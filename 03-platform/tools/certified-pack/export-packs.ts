@@ -3,12 +3,11 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
+import { REPO_ROOT } from '../../../config/paths.mjs';
 import { ENGAGEMENT_JURISDICTIONS } from '../../tests/integration/fixtures/jurisdiction-fixtures';
 
-const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const outDir = path.join(root, 'artifacts/certified-pack/packs');
+const outDir = path.join(REPO_ROOT, '00-archive/artifacts/certified-pack/packs');
 
 function canonicalJson(value: unknown): string {
   return `${JSON.stringify(value)}\n`;

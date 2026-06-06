@@ -6,11 +6,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import ts from 'typescript';
+import { PLATFORM_PACKAGES, REPO_ROOT } from '../../config/paths.mjs';
 
-const rootDir = process.cwd();
-const packagesDir = path.join(rootDir, 'packages');
-const baselinePath = path.join(rootDir, 'quality/api-surface-baseline.json');
-const reportPath = path.join(rootDir, 'quality/api-surface-report.json');
+const rootDir = REPO_ROOT;
+const packagesDir = PLATFORM_PACKAGES;
+const baselinePath = path.join(rootDir, '05-audit/quality/api-surface-baseline.json');
+const reportPath = path.join(rootDir, '05-audit/quality/api-surface-report.json');
 
 const args = process.argv.slice(2);
 const shouldUpdate = args.includes('--update');

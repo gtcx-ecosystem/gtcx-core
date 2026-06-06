@@ -1,0 +1,18 @@
+{
+  "schema": "gtcx.governanceSpine.v1",
+  "repo": "gtcx-core",
+  "syncedFrom": "gtcx-agentic/config/ecosystem-governance-spine.json",
+  "syncedAt": "2026-06-06",
+  "product_name": "GTCX Core",
+  "spdx": "MIT",
+  "security_email": "security@gtcx.trade",
+  "communityDocs": {
+    "contributing": "01-docs/04-ops/repo/CONTRIBUTING.md",
+    "codeOfConduct": "01-docs/04-ops/repo/CODE_OF_CONDUCT.md",
+    "security": "01-docs/04-ops/repo/SECURITY.md"
+  },
+  "agentDocs": {
+    "agentsMd": "AGENTS.md",
+    "readmeGovernanceSection": "README.md#governance-spine-protocol-33"
+  }
+}
