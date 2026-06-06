@@ -18,7 +18,7 @@ supersedes: 01-docs/05-audit/docs-standard-compliance-2026-05-22.md
 > **Owner:** Quality & Evidence Lead  
 > **Supersedes:** [docs-standard-compliance-2026-05-22.md](./docs-standard-compliance-2026-05-22.md)
 
-**Scope:** Re-application of `gtcx-docs/tools/audit/audit-framework/prompts/01-docs/forensic-doc-standard-prompt.md` to `gtcx-core` (`/01-docs/` only).
+**Scope:** Re-application of `gtcx-docs/03-platform/tools/audit/audit-framework/prompts/01-docs/forensic-doc-standard-prompt.md` to `gtcx-core` (`/01-docs/` only).
 
 **Reference standards:**
 
@@ -80,7 +80,7 @@ No P0 violations. The repo is at **~9.6/10** overall after P1+P2 execute passes 
 
 | File                                                                                | Error                                        |
 | ----------------------------------------------------------------------------------- | -------------------------------------------- |
-| `01-docs/specs/packages/zkp-circuit-profiles.md`                        | Missing `role`, `tier`                       |
+| `01-docs/specs/03-platform/packages/zkp-circuit-profiles.md`                        | Missing `role`, `tier`                       |
 | `01-docs/devops/runbooks/eap-staging-issuance-ceremony.md`                          | Missing `role`, `tier`                       |
 | `01-docs/04-ops/coordination/to-gtcx-protocols-dtf-5-4-4-witness-ack-2026-06-05.md` | Invalid tag `dtf-5.4` (must be `[a-z0-9-]+`) |
 

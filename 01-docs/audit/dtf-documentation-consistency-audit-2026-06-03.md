@@ -86,8 +86,8 @@ target_scope: 'gtcx-core, gtcx-docs DTF framework, cross-repo references'
 | File                                                        | Issue                               | Severity                    |
 | ----------------------------------------------------------- | ----------------------------------- | --------------------------- |
 | `01-docs/specs/ai-evaluation-pipeline.md`                   | “90-day copy test” for ai-eval moat | Medium — maps to **Tier 4** |
-| `01-docs/specs/packages/jurisdiction-config.md` | No DTF link; Tier 5 packs implied   | Low                         |
-| `01-docs/specs/packages/crypto.md`              | No DTF tier callout                 | Low                         |
+| `01-docs/specs/03-platform/packages/jurisdiction-config.md` | No DTF link; Tier 5 packs implied   | Low                         |
+| `01-docs/specs/03-platform/packages/crypto.md`              | No DTF tier callout                 | Low                         |
 
 **Finding DTF-C2 (Medium):** Package/spec moat language not tied to DTF tiers.
 

@@ -20,8 +20,8 @@ caps_fired: 0
 **Date:** 2026-06-02
 **Repo:** `gtcx-ecosystem/gtcx-core`
 **Auditor:** Kimi Code CLI (k1.6)
-**Methodology:** `gtcx-docs/tools/audit/audit-framework/prompts/master/comprehensive-audit-prompt.md`
-**Reference framework:** `gtcx-docs/tools/audit/audit-framework/SCORING_FRAMEWORK.md`
+**Methodology:** `gtcx-docs/03-platform/tools/audit/audit-framework/prompts/master/comprehensive-audit-prompt.md`
+**Reference framework:** `gtcx-docs/03-platform/tools/audit/audit-framework/SCORING_FRAMEWORK.md`
 **Prior master audit:** [master-audit-2026-05-27.md](./master-audit-2026-05-27.md) (composite 8.9)
 **Prior full audit:** [full-audit-2026-06-01.md](./full-audit-2026-06-01.md) (maturity 8.9)
 
@@ -65,7 +65,7 @@ caps_fired: 0
 
 **P1:**
 
-- **[P1] Package count drift across operational docs** `01-docs/specs/packages/README.md:17`, `01-docs/devops/runbooks/quality-runbook.md:46-49`, `01-docs/stack/tech-stack.md:54` — claims 18, 21, or 22 packages inconsistently. Fix: scripted manifest from `pnpm-workspace.yaml`.
+- **[P1] Package count drift across operational docs** `01-docs/specs/03-platform/packages/README.md:17`, `01-docs/devops/runbooks/quality-runbook.md:46-49`, `01-docs/stack/tech-stack.md:54` — claims 18, 21, or 22 packages inconsistently. Fix: scripted manifest from `pnpm-workspace.yaml`.
 
 **P2:**
 

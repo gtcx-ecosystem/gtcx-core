@@ -135,6 +135,6 @@ Key patterns:
 
 ## Reference
 
-- [`01-docs/specs/packages/crypto.md`](./crypto.md) — cryptographic primitives
+- [`01-docs/specs/03-platform/packages/crypto.md`](./crypto.md) — cryptographic primitives
 - [`01-docs/09-security/security-framework.md`](../../security/security-framework.md) — security architecture and threat model
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

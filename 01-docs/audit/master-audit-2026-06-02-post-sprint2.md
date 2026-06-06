@@ -18,8 +18,8 @@ caps_fired: 0
 **Date:** 2026-06-02
 **Repo:** `gtcx-ecosystem/gtcx-core`
 **Auditor:** Kimi Code CLI (k1.6)
-**Methodology:** `gtcx-docs/tools/audit/audit-framework/prompts/master/comprehensive-audit-prompt.md`
-**Reference framework:** `gtcx-docs/tools/audit/audit-framework/SCORING_FRAMEWORK.md`
+**Methodology:** `gtcx-docs/03-platform/tools/audit/audit-framework/prompts/master/comprehensive-audit-prompt.md`
+**Reference framework:** `gtcx-docs/03-platform/tools/audit/audit-framework/SCORING_FRAMEWORK.md`
 **Prior master audit:** [master-audit-2026-06-02.md](./master-audit-2026-06-02.md) (composite 8.5, commit `bc24da0`)
 **Current HEAD:** `c19cd19` (includes Sprint 2 + regression fixes)
 **Sprint 2 commit:** `9dbd483` (commodity-agnostic ZKP refactor)
@@ -72,7 +72,7 @@ Phase 1 baseline is commit `9dbd483` (Sprint 2 just landed, before regression fi
 
 - **[P1] Stale dist/ artifacts break typecheck on fresh checkout** `03-platform/packages/crypto/dist/index.d.ts` — after Sprint 2, downstream packages (`identity`, `security`, `services`, `verification`) cannot resolve `@gtcx/crypto` types until `pnpm build` regenerates dist artifacts. The commit message claimed "typecheck 42/42 pass" but this is only true after a prior build. Fix: add a `prepare` or `pretypecheck` build step for `@gtcx/crypto` and `@gtcx/crypto-native`, or ensure dist is regenerated in CI before typecheck.
 
-- **[P1] Package count drift across operational docs** `01-docs/specs/packages/README.md:17`, `01-docs/devops/runbooks/quality-runbook.md:46-49`, `01-docs/stack/tech-stack.md:54` — claims 18, 21, or 22 packages inconsistently. Fix: scripted manifest from `pnpm-workspace.yaml`.
+- **[P1] Package count drift across operational docs** `01-docs/specs/03-platform/packages/README.md:17`, `01-docs/devops/runbooks/quality-runbook.md:46-49`, `01-docs/stack/tech-stack.md:54` — claims 18, 21, or 22 packages inconsistently. Fix: scripted manifest from `pnpm-workspace.yaml`.
 
 **P2:**
 

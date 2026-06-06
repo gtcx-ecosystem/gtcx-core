@@ -126,6 +126,6 @@ SLOs for GPRS environment: sync completion within 30 seconds for a 50-item batch
 
 ## Reference
 
-- [`01-docs/specs/packages/network.md`](./network.md) — network transport layer
-- [`01-docs/specs/packages/connectivity.md`](./connectivity.md) — connectivity detection used to trigger sync
+- [`01-docs/specs/03-platform/packages/network.md`](./network.md) — network transport layer
+- [`01-docs/specs/03-platform/packages/connectivity.md`](./connectivity.md) — connectivity detection used to trigger sync
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview and operational SLOs

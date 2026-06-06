@@ -29,7 +29,7 @@ review_cycle: 'on-change'
 
 > **Status:** Draft — awaiting collision review and authority taxonomy specification
 > **Date:** 2026-05-25
-> **Target:** `gtcx-core/packages/workproof/`
+> **Target:** `gtcx-core/03-platform/packages/workproof/`
 > **Net change:** 47 → 57 predicates (+10 continental)
 
 ---
@@ -127,6 +127,6 @@ If approved, this needs a `@changesets/cli` changeset:
 
 ## Cross-References
 
-- ADR-012 Stage 0: `gtcx-core/packages/workproof/03-platform/src/predicates/definitions/entity.ts`
+- ADR-012 Stage 0: `gtcx-core/03-platform/packages/workproof/src/predicates/definitions/entity.ts`
 - Authority taxonomy spec (TBD): `gtcx-intelligence/01-docs/specs/authority-taxonomy-sadc.md`
-- Migration bridge: `gtcx-core/packages/verification/03-platform/src/migration/tradepass-aliases.ts`
+- Migration bridge: `gtcx-core/03-platform/packages/verification/src/migration/tradepass-aliases.ts`

@@ -147,6 +147,6 @@ Message TTL default: 8 hops.
 
 ## Reference
 
-- [`01-docs/specs/packages/sync.md`](./sync.md) — sync engine that uses this transport
-- [`01-docs/specs/packages/connectivity.md`](./connectivity.md) — connectivity layer
+- [`01-docs/specs/03-platform/packages/sync.md`](./sync.md) — sync engine that uses this transport
+- [`01-docs/specs/03-platform/packages/connectivity.md`](./connectivity.md) — connectivity layer
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

@@ -1,5 +1,5 @@
-import { HashCommitmentZkpEngine } from 'file:///Users/amanianai/Sites/gtcx-ecosystem/gtcx-core/packages/crypto/dist/index.mjs';
-import { UnifiedComplianceService } from 'file:///Users/amanianai/Sites/gtcx-ecosystem/gtcx-core/packages/services/dist/compliance.mjs';
+import { HashCommitmentZkpEngine } from 'file:///Users/amanianai/Sites/gtcx-ecosystem/gtcx-core/03-platform/packages/crypto/dist/index.mjs';
+import { UnifiedComplianceService } from 'file:///Users/amanianai/Sites/gtcx-ecosystem/gtcx-core/03-platform/packages/services/dist/compliance.mjs';
 
 const storageService = {
   saveAssetLot: async () => {},

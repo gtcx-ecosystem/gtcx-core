@@ -20,7 +20,10 @@ export function readJson(rel) {
 }
 
 function schemaVersion() {
-  const { data } = readJson('workspace/manifest.json');
+  const rel = existsSync(join(repoRoot(), '02-ops/manifest.json'))
+    ? '02-ops/manifest.json'
+    : 'workspace/manifest.json';
+  const { data } = readJson(rel);
   return data?.schema ?? 'gtcx.workspace.manifest.v1';
 }
 
@@ -32,11 +35,14 @@ const VALID_SCHEMAS = new Set([
 
 export function checkRootManifest() {
   const errors = [];
-  const { missing, parseError, data } = readJson('workspace/manifest.json');
+  const rel = existsSync(join(repoRoot(), '02-ops/manifest.json'))
+    ? '02-ops/manifest.json'
+    : 'workspace/manifest.json';
+  const { missing, parseError, data } = readJson(rel);
   if (missing) errors.push(missing);
   if (parseError) errors.push(parseError);
   if (data && !VALID_SCHEMAS.has(data.schema)) {
-    errors.push('workspace/manifest.json schema must be v1, v2, or v3');
+    errors.push(`${rel} schema must be v1, v2, or v3`);
   }
   return errors;
 }
@@ -131,8 +137,10 @@ export function checkGtm() {
   const scope = readJson('02-ops/gtm/scope.json');
   if (scope.missing) errors.push(scope.missing);
   if (scope.parseError) errors.push(scope.parseError);
-  if (!existsSync(join(repoRoot(), '01-docs/08-gtm/README.md')))
-    errors.push('01-docs/08-gtm/README.md');
+  const gtmReadme = ['01-docs/08-gtm/README.md', '01-docs/08-gtm/README.md'].find((p) =>
+    existsSync(join(repoRoot(), p)),
+  );
+  if (!gtmReadme) errors.push('01-docs/08-gtm/README.md');
   return errors;
 }
 
@@ -211,7 +219,6 @@ export function checkOperations() {
 function checkWorkspaceReadmes() {
   const errors = [];
   for (const rel of [
-    'workspace/README.md',
     '02-ops/coordination/README.md',
     '02-ops/pm/README.md',
     '02-ops/gtm/README.md',

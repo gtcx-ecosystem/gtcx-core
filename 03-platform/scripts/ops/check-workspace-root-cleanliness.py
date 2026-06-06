@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate that the repo root matches 01-docs/04-ops/repo/root-allowlist.json.
+"""Validate that the repo root matches 01-docs/operations/repo/root-allowlist.json.
 
 Two modes:
   --strict           exit non-zero on any cleanliness issue (CI)
@@ -52,7 +52,7 @@ WALKER_SKIP_PREFIXES = (
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Check root cleanliness against 01-docs/04-ops/repo/root-allowlist.json. "
+            "Check root cleanliness against 01-docs/operations/repo/root-allowlist.json. "
             "Optionally emit a deterministic JSON sidecar for repo-hygiene audits."
         )
     )
@@ -216,7 +216,7 @@ def find_issues(allowlist: dict, root: pathlib.Path | None = None) -> list[str]:
             continue
 
         if name not in allowed:
-            hint = " See 01-docs/04-ops/repo/repo-hygiene-protocol.md for canonical homes."
+            hint = " See 01-docs/operations/repo/repo-hygiene-protocol.md for canonical homes."
             issues.append(
                 f"Unexpected root entry `{name}` — not in root-allowlist.json.{hint}"
             )
@@ -354,9 +354,9 @@ def main(argv: list[str] | None = None) -> int:
 
     print("# Workspace Root Cleanliness")
     print("")
-    print("Policy: 01-docs/04-ops/repo/repo-hygiene-protocol.md")
+    print("Policy: 01-docs/operations/repo/repo-hygiene-protocol.md")
     print(
-        f"Allowlist: 01-docs/04-ops/repo/root-allowlist.json "
+        f"Allowlist: 01-docs/operations/repo/root-allowlist.json "
         f"(v{allowlist.get('version', '?')}, schema v{allowlist.get('schema_version', '?')})"
     )
     print("")
@@ -387,7 +387,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.json_out:
         sidecar = {
-            "policy_source": "01-docs/04-ops/repo/repo-hygiene-protocol.md",
+            "policy_source": "01-docs/operations/repo/repo-hygiene-protocol.md",
             "allowlist_path": str(ALLOWLIST_PATH.relative_to(ROOT)),
             "allowlist_version": allowlist.get("version"),
             "schema_version": allowlist.get("schema_version"),

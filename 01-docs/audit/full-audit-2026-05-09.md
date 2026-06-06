@@ -38,7 +38,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 ### Findings
 
-- **[High] [Spec Fidelity] — Package matrix stale across 3 surfaces.** `README.md:60-92` lists 18 TS packages; `01-docs/specs/packages/README.md:1-30` says "all 18 public TypeScript packages"; `01-docs/decisions/014-runtime-substrate.md:13` says "21 TypeScript packages". `find packages -name package.json -not -path "*config*"` returns 21. New packages: `resilience`, `runtime`, `telemetry`.
+- **[High] [Spec Fidelity] — Package matrix stale across 3 surfaces.** `README.md:60-92` lists 18 TS packages; `01-docs/specs/03-platform/packages/README.md:1-30` says "all 18 public TypeScript packages"; `01-docs/decisions/014-runtime-substrate.md:13` says "21 TypeScript packages". `find packages -name package.json -not -path "*config*"` returns 21. New packages: `resilience`, `runtime`, `telemetry`.
 
 - **[High] [Spec Fidelity] — ADR count claim wrong.** `README.md:163` claims "All 17 architecture decision records". Actual count: 14 numbered ADRs (001-014).
 
@@ -55,7 +55,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | Area                           | Status | Evidence                                                                                                             |
 | ------------------------------ | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | Authentication & Authorization | ✓      | Library has no auth surface; threat model correctly scopes this away                                                 |
-| Data Protection                | ✓      | `redactSecrets` default sanitizer; AES-GCM in `03-platform/packages/security/src/offline/storage.ts`     |
+| Data Protection                | ✓      | `redactSecrets` default sanitizer; AES-GCM in `03-platform/packages/security/src/offline/storage.ts`                 |
 | Input Validation               | ✓      | Zod schemas everywhere; 9.9M fuzz runs / 0 crashes                                                                   |
 | Dependency Security            | ✓      | `pnpm audit` clean; exact-version pinning on libp2p + undici; cargo-deny + cargo-audit in CI                         |
 | Cryptographic Correctness      | ✓      | Ed25519 via @noble/curves; STRIDE + attack tree complete                                                             |
@@ -63,12 +63,12 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 ### Open security findings
 
-| ID              | Severity | File:Line                                                         | Status                   | Take                                                                                                                                                                                                                                                                                                                                 |
-| --------------- | -------- | ----------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ID              | Severity | File:Line                                             | Status                   | Take                                                                                                                                                                                                                                                                                                                                 |
+| --------------- | -------- | ----------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | SA-002          | Medium   | `03-platform/packages/crypto/src/zkp.ts:114-130`      | **Closed** (Sprint 2)    | `generate()` now throws unless `GTCX_ALLOW_HASH_COMMITMENT_ZKP=1`. Verify path remains open.                                                                                                                                                                                                                                         |
 | SA-004 / AT-002 | High     | `03-platform/packages/verification/src/certificates/` | **Closed** (Sprint 2)    | `RevocationChecker` interface required on `tracedVerifyCertificate()`. Fail-closed on backend errors. Three factories provided: in-memory, deny-all, no-op.                                                                                                                                                                          |
-| AT-005          | Medium   | `package.json` overrides                                          | **Closed** (Sprint 2)    | `pnpm.overrides` pins `@noble/curves@1` and `@noble/hashes@1`. `03-platform/tools/check-crypto-deps.mjs` enforces version allowlist + integrity hashes in CI.                                                                                                                                                                        |
-| AT-004          | Medium   | `rust/gtcx-crypto/03-platform/src/keystore.rs`                    | **Closed** (Sprints 2+5) | FIPS provider via aws-lc-rs shipped behind `--features fips` (CMVP #4816 inherited). PKCS#11 backend (`Pkcs11KeyStore`) shipped behind `--features pkcs11` — Ed25519 via CKM_EDDSA, supports SoftHSMv2 / AWS CloudHSM / hardware HSMs. Cloud KMS adapter is a Sprint 5+ hardening pass per `01-docs/09-security/pkcs11-keystore.md`. |
+| AT-005          | Medium   | `package.json` overrides                              | **Closed** (Sprint 2)    | `pnpm.overrides` pins `@noble/curves@1` and `@noble/hashes@1`. `03-platform/tools/check-crypto-deps.mjs` enforces version allowlist + integrity hashes in CI.                                                                                                                                                                        |
+| AT-004          | Medium   | `rust/gtcx-crypto/03-platform/src/keystore.rs`        | **Closed** (Sprints 2+5) | FIPS provider via aws-lc-rs shipped behind `--features fips` (CMVP #4816 inherited). PKCS#11 backend (`Pkcs11KeyStore`) shipped behind `--features pkcs11` — Ed25519 via CKM_EDDSA, supports SoftHSMv2 / AWS CloudHSM / hardware HSMs. Cloud KMS adapter is a Sprint 5+ hardening pass per `01-docs/09-security/pkcs11-keystore.md`. |
 
 ### New findings
 
@@ -268,7 +268,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | #   | Task                                            | Files                                                                                                                  | Effort           |
 | --- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | 1   | README package matrix → 21 + ADR count → 14     | `README.md:60-92,163`                                                                                                  | 30m              |
-| 2   | Spec README → 21 + add 3 spec files             | `01-docs/specs/packages/README.md`, `01-docs/specs/packages/{resilience,runtime,telemetry}.md` | 3h               |
+| 2   | Spec README → 21 + add 3 spec files             | `01-docs/specs/03-platform/packages/README.md`, `01-docs/specs/03-platform/packages/{resilience,runtime,telemetry}.md` | 3h               |
 | 3   | Push 15 unpushed commits OR document why staged | git                                                                                                                    | 5m               |
 | 4   | Resolve `_delete/` folder                       | `_delete/`                                                                                                             | 15m              |
 | 5   | Document AI-native CODEOWNER pattern            | `01-docs/01-agents/governance/`                                                                                        | DONE — `7537089` |
@@ -289,13 +289,13 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 **Tasks**
 
-| #   | Task                                           | Files                                                                               | Effort |
-| --- | ---------------------------------------------- | ----------------------------------------------------------------------------------- | ------ |
+| #   | Task                                           | Files                                                                   | Effort |
+| --- | ---------------------------------------------- | ----------------------------------------------------------------------- | ------ |
 | 1   | ZKP TS fallback default→throw                  | `03-platform/packages/crypto/src/zkp.ts:114-160`                        | 4h     |
-| 2   | `pnpm audit-signatures` in CI                  | `.github/workflows/ci.yml:43`                                                       | 30m    |
-| 3   | Hash-pin `@noble/*` via overrides              | `package.json`                                                                      | 2h     |
+| 2   | `pnpm audit-signatures` in CI                  | `.github/workflows/ci.yml:43`                                           | 30m    |
+| 3   | Hash-pin `@noble/*` via overrides              | `package.json`                                                          | 2h     |
 | 4   | `RevocationChecker` interface                  | `03-platform/packages/verification/src/certificates/types.ts` + callers | 1d     |
-| 5   | `aws-lc-rs` provider behind `feature = "fips"` | `rust/gtcx-crypto/03-platform/src/provider/aws_lc.rs`                               | 2d     |
+| 5   | `aws-lc-rs` provider behind `feature = "fips"` | `rust/gtcx-crypto/03-platform/src/provider/aws_lc.rs`                   | 2d     |
 
 **DoD:** SA-002 status: Documented → Closed. `cargo build --features fips` passes.
 
@@ -310,7 +310,7 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 | 1   | Confirm gtcx-agent active; if blocked, escalate                    | external                                                                | 1h     |
 | 2   | `security-incident-runbook.md` with disclosure SLA                 | new file                                                                | 3h     |
 | 3   | SoftHSMv2 in CI + integration test                                 | `.github/workflows/ci.yml`, `rust/gtcx-crypto/tests/hsm_integration.rs` | 4h     |
-| 4   | Decompose `security/03-platform/src/offline/storage.ts` (766→<500) | `03-platform/packages/security/src/offline/storage/*`       | 1d     |
+| 4   | Decompose `security/03-platform/src/offline/storage.ts` (766→<500) | `03-platform/packages/security/src/offline/storage/*`                   | 1d     |
 | 5   | Build `gtcx-codeowner-action` per `01-docs/01-agents/governance/`  | new repo                                                                | 2d     |
 
 **DoD:** `gh api orgs/gtcx-ecosystem/members | grep gtcx-agent` non-empty. `03-platform/tools/check-package-boundaries.mjs` exception map empty (or only `verification/types/schemas.ts`). Action posts reviews on next 5 PRs.
@@ -337,13 +337,13 @@ This audit re-verifies the prior 9.8/10 score with fresh evidence and surfaces n
 
 **Tasks**
 
-| #   | Task                                                      | Files                                                             | Effort |
-| --- | --------------------------------------------------------- | ----------------------------------------------------------------- | ------ |
-| 1   | PKCS#11 / Cloud KMS backend for `KeyStore`                | `rust/gtcx-crypto/03-platform/src/keystore/cloud_kms.rs`          | 2d     |
-| 2   | Reproducible-build harness                                | `03-platform/tools/check-reproducible-build.mjs`                  | 1d     |
-| 3   | OTel exporter wired into `@gtcx/ai` traces by default     | `03-platform/packages/ai/src/index.ts` + new exporter | 1d     |
-| 4   | Telemetry when explicit `sanitizeInput` overrides default | `03-platform/packages/ai/src/index.ts`                | 4h     |
-| 5   | Launch `ai-native-governance` template repo               | new repo                                                          | 1d     |
+| #   | Task                                                      | Files                                                    | Effort |
+| --- | --------------------------------------------------------- | -------------------------------------------------------- | ------ |
+| 1   | PKCS#11 / Cloud KMS backend for `KeyStore`                | `rust/gtcx-crypto/03-platform/src/keystore/cloud_kms.rs` | 2d     |
+| 2   | Reproducible-build harness                                | `03-platform/tools/check-reproducible-build.mjs`         | 1d     |
+| 3   | OTel exporter wired into `@gtcx/ai` traces by default     | `03-platform/packages/ai/src/index.ts` + new exporter    | 1d     |
+| 4   | Telemetry when explicit `sanitizeInput` overrides default | `03-platform/packages/ai/src/index.ts`                   | 4h     |
+| 5   | Launch `ai-native-governance` template repo               | new repo                                                 | 1d     |
 
 #### Sprint 6 — "Defense Stage Readiness"
 

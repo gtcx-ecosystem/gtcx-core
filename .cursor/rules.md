@@ -20,20 +20,20 @@ When using Cursor Composer for multi-file edits:
 
 ## 2. Tab Completion Rules
 
-| Context                                           | Rule                                                    |
-| ------------------------------------------------- | ------------------------------------------------------- |
+| Context                               | Rule                                                    |
+| ------------------------------------- | ------------------------------------------------------- |
 | `03-platform/packages/crypto/src/`    | Suggest FIPS-aware implementations                      |
 | `03-platform/packages/*/src/index.ts` | Suggest explicit named exports, NOT `export *`          |
-| `rust/*/03-platform/src/lib.rs`                   | Suggest `#![deny(unsafe_code, warnings, missing_docs)]` |
-| `01-docs/`                                        | Suggest YAML frontmatter on new files                   |
-| `tests/`                                          | Suggest vitest with coverage annotations                |
+| `rust/*/03-platform/src/lib.rs`       | Suggest `#![deny(unsafe_code, warnings, missing_docs)]` |
+| `01-docs/`                            | Suggest YAML frontmatter on new files                   |
+| `tests/`                              | Suggest vitest with coverage annotations                |
 
 ---
 
 ## 3. Chat Rules
 
 - **@codebase** — Reference `AGENTS.md` for high-level context
-- **@file** — Reference specific package specs from `01-docs/specs/packages/`
+- **@file** — Reference specific package specs from `01-docs/specs/03-platform/packages/`
 - **@web** — Use for market data, FIPS certification status, CMVP listings
 
 ---

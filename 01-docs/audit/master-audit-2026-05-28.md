@@ -31,7 +31,7 @@ caps_fired: 0
 **Repo:** `gtcx-ecosystem/gtcx-core`
 **Auditor:** Cursor Agent (foundation audit session)
 **Methodology:** `gtcx-docs/01-docs/05-audit/prompts/forensic-master-prompt.md`
-**Reference framework:** `gtcx-docs/tools/audit/audit-framework/SCORING_FRAMEWORK.md`
+**Reference framework:** `gtcx-docs/03-platform/tools/audit/audit-framework/SCORING_FRAMEWORK.md`
 **Prior master audit:** [master-audit-2026-05-27.md](master-audit-2026-05-27.md) (8.9/10, commit `54903f3`)
 **Current HEAD:** `b89b15fb`
 **Working tree:** **Not clean** — extensive uncommitted doc/agent/baseline memory changes. Verification commands run against committed tree at HEAD.
@@ -121,7 +121,7 @@ Workflow ready; publish trigger pending operational window.
 
 **[P2] `@gtcx/sync` limited downstream adoption** ecosystem grep
 
-`@gtcx/sync` consumed in `gtcx-core/tests/integration/sync-convergence.test.ts` only; `@gtcx/connectivity` used in `gtcx-core/packages/runtime` and `gtcx-mobile/03-platform/packages/connectivity`.
+`@gtcx/sync` consumed in `gtcx-core/tests/integration/sync-convergence.test.ts` only; `@gtcx/connectivity` used in `gtcx-core/03-platform/packages/runtime` and `gtcx-mobile/packages/connectivity`.
 
 **[P2] ZKP production backends interface-only** `03-platform/packages/crypto`, `rust/gtcx-zkp`
 
@@ -137,11 +137,11 @@ Tree-shaking limitation; tracked in barrel-export docs.
 
 ## Resolved / Improved Since 2026-05-27
 
-| Item                             | Resolution                                                                                                                                                                                           |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Item                             | Resolution                                                                                                                                                                               |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `@gtcx/ai` silent no-op concern  | **Resolved** — `03-platform/packages/ai/src/` implements `traced()`, `withTrace()`, `AsyncLocalStorage` trace propagation, provenance helpers; tests in `03-platform/packages/ai/tests/` |
-| `@gtcx/workproof` zero consumers | **Partially resolved** — `gtcx-protocols/protocols/tradepass/03-platform/src/predicate-bridge.ts` imports `WORKPROOF_PREDICATES` from `@gtcx/workproof`                                              |
-| BaselineOS coordination          | **Improved** — `.baseline/` institutional memory initialized; `AGENTS.md` credential access docs expanded                                                                                            |
+| `@gtcx/workproof` zero consumers | **Partially resolved** — `gtcx-protocols/protocols/tradepass/03-platform/src/predicate-bridge.ts` imports `WORKPROOF_PREDICATES` from `@gtcx/workproof`                                  |
+| BaselineOS coordination          | **Improved** — `.baseline/` institutional memory initialized; `AGENTS.md` credential access docs expanded                                                                                |
 
 ---
 

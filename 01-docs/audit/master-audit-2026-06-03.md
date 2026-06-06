@@ -28,8 +28,8 @@ supersedes_note: 'Post-remediation refresh at bdfe7cb — doc-standard 9.6, repo
 **Repo:** `gtcx-ecosystem/gtcx-core`  
 **Branch:** `main` @ `bdfe7cb`  
 **Auditor:** Cursor agent (master-audit framework)  
-**Methodology:** `gtcx-docs/tools/audit/audit-framework/prompts/master/comprehensive-audit-prompt.md`  
-**Reference:** `gtcx-docs/tools/audit/audit-framework/SCORING_FRAMEWORK.md`  
+**Methodology:** `gtcx-docs/03-platform/tools/audit/audit-framework/prompts/master/comprehensive-audit-prompt.md`  
+**Reference:** `gtcx-docs/03-platform/tools/audit/audit-framework/SCORING_FRAMEWORK.md`  
 **Prior baseline:** morning pass (8.6 @ `6127da5`); [full-audit-2026-06-04.md](./full-audit-2026-06-04.md)
 
 ---

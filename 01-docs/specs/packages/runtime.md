@@ -146,4 +146,4 @@ Special-case tests required:
 
 - ADR-014 (`01-docs/decisions/014-runtime-substrate.md`) — established this package
 - `03-platform/packages/runtime/src/runtime.ts` — implementation
-- `01-docs/specs/packages/api-client.md`, `connectivity.md`, `resilience.md`, `telemetry.md`, `logging.md` — composed packages
+- `01-docs/specs/03-platform/packages/api-client.md`, `connectivity.md`, `resilience.md`, `telemetry.md`, `logging.md` — composed packages

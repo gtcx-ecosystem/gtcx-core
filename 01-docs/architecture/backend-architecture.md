@@ -253,5 +253,5 @@ Packages use shared build/config presets from `@gtcx/tsup-config` and `@gtcx/typ
 
 - [Architecture Overview](overview.md) — layer map and trust boundaries
 - [`01-docs/decisions/`](../decisions/) — all 17 ADRs
-- [`01-docs/specs/packages/`](../specs/03-platform/packages/) — per-package specs
+- [`01-docs/specs/03-platform/packages/`](../specs/03-platform/packages/) — per-package specs
 - [`01-docs/09-security/security-framework.md`](../security/security-framework.md) — security controls

@@ -204,7 +204,7 @@ Prints P22 next-work + P26 Proceed Brief skeleton. Not IDE-specific.
 
 ## Audits — lane + domain commands
 
-**Lane scores (run for readiness):** `gtcx-docs/tools/audit/lane-audits/README.md`
+**Lane scores (run for readiness):** `gtcx-docs/03-platform/tools/audit/lane-audits/README.md`
 
 | Goal                | Command                   |
 | ------------------- | ------------------------- |
@@ -215,7 +215,7 @@ Prints P22 next-work + P26 Proceed Brief skeleton. Not IDE-specific.
 | GTM                 | `gtm-audit`               |
 | GCR rollup          | `global-compliance-audit` |
 
-**Domain depth (run first, then lane):** `gtcx-docs/tools/audit/domain-audits/README.md`
+**Domain depth (run first, then lane):** `gtcx-docs/03-platform/tools/audit/domain-audits/README.md`
 
 | Domain       | Command             | Feeds                                   |
 | ------------ | ------------------- | --------------------------------------- |
@@ -227,11 +227,11 @@ Prints P22 next-work + P26 Proceed Brief skeleton. Not IDE-specific.
 
 **Kimi (this repo):** all GTCX-native commands live under `.kimi/skills/<name>/SKILL.md` — invoke `/skill:<name>` (see `.agent/kimi-skills-pointer.md`). Sync: `pnpm kimi:skills:sync` · check: `pnpm kimi:skills:check`. No bare `/master-audit` in Kimi.
 
-**Cursor/Claude:** global `~/.cursor/commands/` via `../gtcx-docs/tools/audit/agent-commands/install.sh` optional; project skills work without it.
+**Cursor/Claude:** global `~/.cursor/commands/` via `../gtcx-docs/03-platform/tools/audit/agent-commands/install.sh` optional; project skills work without it.
 
 **Aliases:** `master-audit` / `comprehensive-audit` → `bank-grade-audit` · `full-audit` / `forensic-audit` → `engineering-audit`.
 
-**How to run:** `gtcx-docs/tools/audit/audit-framework/AGENT-START.md` → `commands/<command>.md` → prompt → forensic → lane index + `latest.json` → `pnpm readiness:lanes:check`.
+**How to run:** `gtcx-docs/03-platform/tools/audit/audit-framework/AGENT-START.md` → `commands/<command>.md` → prompt → forensic → lane index + `latest.json` → `pnpm readiness:lanes:check`.
 
 ## Agent protocols (P22–P28) — machine-enforced
 
@@ -309,7 +309,7 @@ pnpm bundle:check-budgets
 
 Use when audits must be **reconciled** into a living plan — not for session-by-session implementation drain.
 
-1. Read `../gtcx-docs/tools/roadmap/roadmap-framework/AGENT-START.md`
+1. Read `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/AGENT-START.md`
 2. Command `execute-roadmap` — update `01-docs/05-audit/execution-roadmap.md`
 3. **Then ship** via **execution bout** (intrinsic): `01-docs/04-ops/agent-execution-bout.md` · `pnpm agent:session-start`
 

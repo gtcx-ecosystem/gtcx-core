@@ -171,7 +171,7 @@ Regional YAML files missing: LatAm, Asia
 - **Version drift risk**: Same scoped package names with different code in different repos. If ever published, this will cause resolution conflicts.
 - **Undici version mismatch**: gtcx-core pins `vite@8.0.10`; intelligence uses `^6.0.0`; protocols uses `^6.4.2`.
 - **No shared CI template**: Each repo maintains its own workflows. gtcx-protocols has zizmor; core and intelligence don't.
-- **Mobile contract reference**: gtcx-mobile references `gtcx-core/packages/api-client/03-platform/src/canonical/` but there's no automated sync mechanism.
+- **Mobile contract reference**: gtcx-mobile references `gtcx-core/03-platform/packages/api-client/src/canonical/` but there's no automated sync mechanism.
 
 ### Evidence
 

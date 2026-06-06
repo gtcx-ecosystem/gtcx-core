@@ -147,5 +147,5 @@ Never log private keys, tokens, or raw credential material. This package has no 
 
 ## Reference
 
-- [`01-docs/specs/packages/ai.md`](./ai.md) — AI-native traced operations for higher-level observability
+- [`01-docs/specs/03-platform/packages/ai.md`](./ai.md) — AI-native traced operations for higher-level observability
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

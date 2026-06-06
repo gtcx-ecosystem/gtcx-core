@@ -11,10 +11,10 @@ For reconcile + ship, use `/skill:execute-roadmap`.
 
 ## Execute (read in order)
 
-1. `../gtcx-docs/tools/roadmap/roadmap-framework/AGENT-START.md`
-2. `../gtcx-docs/tools/roadmap/roadmap-framework/commands/gtcx-reconcile-roadmap.md`
-3. `../gtcx-docs/tools/roadmap/roadmap-framework/prompts/roadmap/roadmap-reconcile-execute-prompt.md` — Phases 0–2 only (stop before Execute)
-4. `../gtcx-docs/tools/roadmap/roadmap-framework/ECOSYSTEM-CONTEXT.md`
+1. `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/AGENT-START.md`
+2. `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/commands/gtcx-reconcile-roadmap.md`
+3. `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/prompts/roadmap/roadmap-reconcile-execute-prompt.md` — Phases 0–2 only (stop before Execute)
+4. `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/ECOSYSTEM-CONTEXT.md`
 
 ## Output
 

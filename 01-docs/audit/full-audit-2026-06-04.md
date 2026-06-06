@@ -101,7 +101,7 @@ audit_date: '2026-06-04'
   **Fix:** Infra-owned vendor SOW; gtcx-core supplies KAT + threat matrix + fuzz evidence pack only.
 
 - **[Medium] [Data Protection] — Profile cert masks enforced pre-prove, not in-circuit**  
-  **Evidence:** `rust/gtcx-zkp/03-platform/src/circuit_profiles/validate.rs:64-83`; `01-docs/specs/packages/zkp-circuit-profiles.md` — by design.  
+  **Evidence:** `rust/gtcx-zkp/03-platform/src/circuit_profiles/validate.rs:64-83`; `01-docs/specs/03-platform/packages/zkp-circuit-profiles.md` — by design.  
   **Impact:** Verifiers must call policy gate; document in trust portal “off-circuit policy” section.  
   **Fix:** Trust portal column (DTF-5.4.3) — already scheduled.
 
@@ -250,7 +250,7 @@ Restore root `pnpm typecheck`/`build`; align README with Tier-5 status.
 | 1   | Extract verification↔workproof integration test to break turbo cycle      | Remediation | `03-platform/packages/verification/package.json`, new `tests/integration/commodity-origin-zk.test.ts` or `03-platform/packages/integration-tests/` | M      | Unblocks CI graph  |
 | 2   | Remove `@gtcx/workproof` devDep from verification if test moved           | Remediation | `03-platform/packages/verification/package.json`                                                                                                   | S      | Closes cycle       |
 | 3   | README: split library 9.x vs DTF Tier 5                                   | Remediation | `README.md`                                                                                                                                        | S      | Spec fidelity      |
-| 4   | Reconcile package count in `01-docs/specs/packages/README.md` | Remediation | docs                                                                                                                                               | S      | Onboarding truth   |
+| 4   | Reconcile package count in `01-docs/specs/03-platform/packages/README.md` | Remediation | docs                                                                                                                                               | S      | Onboarding truth   |
 | 5   | `pnpm agent:sync` or gitignore agent drift from format:check              | Evolution   | `.agent/`, `package.json` format ignore                                                                                                            | S      | Hygiene gate green |
 
 ### Definition of Done
@@ -369,11 +369,11 @@ DTF-5.4.1 registry semver; load-test evidence JSON (5.4.2).
 
 ### Tasks
 
-| #   | Task                                             | Layer      | Files                                                                                  | Effort | Why It Matters |
-| --- | ------------------------------------------------ | ---------- | -------------------------------------------------------------------------------------- | ------ | -------------- |
+| #   | Task                                             | Layer      | Files                                                                      | Effort | Why It Matters |
+| --- | ------------------------------------------------ | ---------- | -------------------------------------------------------------------------- | ------ | -------------- |
 | 1   | `CircuitRegistry` with semver + deprecation      | Innovation | new `03-platform/packages/crypto/src/circuit-registry.ts` or rust registry | L      | Tier-5.4       |
-| 2   | Load test 1000 proofs/min script + evidence JSON | Innovation | `03-platform/tools/` or `benchmarks/`                                                  | M      | Trust portal   |
-| 3   | Trust portal circuit ID column doc (5.4.3)       | Evolution  | `01-docs/governance/trust-portal.md`                                                   | S      | Verifier UX    |
+| 2   | Load test 1000 proofs/min script + evidence JSON | Innovation | `03-platform/tools/` or `benchmarks/`                                      | M      | Trust portal   |
+| 3   | Trust portal circuit ID column doc (5.4.3)       | Evolution  | `01-docs/governance/trust-portal.md`                                       | S      | Verifier UX    |
 
 ### Definition of Done
 

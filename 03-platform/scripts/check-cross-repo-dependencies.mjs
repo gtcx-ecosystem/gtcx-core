@@ -94,7 +94,7 @@ function checkSuggestPersonaImport() {
   const candidates = [
     join(ROOT, '../gtcx-agentic/13-03-platform/scripts/lib/suggest-persona.mjs'),
     join(ROOT, '../gtcx-agentic/03-platform/scripts/lib/suggest-persona.mjs'),
-    join(ROOT, '../baseline-os/scripts/ecosystem/lib/suggest-persona.mjs'),
+    join(ROOT, '../baseline-os/03-platform/scripts/ecosystem/lib/suggest-persona.mjs'),
   ];
   if (candidates.some((p) => existsSync(p))) return;
   errors.push(

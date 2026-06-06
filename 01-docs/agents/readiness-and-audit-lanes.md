@@ -29,7 +29,7 @@ review_cycle: on-change
 | 5        | Forensic audits (`01-docs/05-audit/*.md`, `01-docs/08-gtm/*.md`)     | Evidence; date-stamped                  |
 | 6        | Synced agent stubs (`.agent/*.md` → `AGENTS.md`, etc.)               | Pointers only — not score SoR           |
 
-**Cross-repo forensic prompts:** `../gtcx-docs/tools/audit/audit-framework/AGENT-START.md`
+**Cross-repo forensic prompts:** `../gtcx-docs/03-platform/tools/audit/audit-framework/AGENT-START.md`
 
 ---
 
@@ -129,7 +129,7 @@ After `AGENTS.md` Phase 1–3, before scoring or procurement claims:
 
 ## 7. Lane audits — one goal, one command (normative)
 
-**Registry:** [gtcx-docs/tools/audit/lane-audits/README.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/03-platform/tools/audit/lane-audits/README.md)
+**Registry:** [gtcx-docs/03-platform/tools/audit/lane-audits/README.md](https://github.com/gtcx-ecosystem/gtcx-docs/blob/main/03-platform/tools/audit/lane-audits/README.md)
 
 | Goal                    | Command                   | Scoring protocol                              | Forensic output                     | Index to update                      |
 | ----------------------- | ------------------------- | --------------------------------------------- | ----------------------------------- | ------------------------------------ |

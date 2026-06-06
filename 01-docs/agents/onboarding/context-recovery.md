@@ -113,7 +113,7 @@ Use when starting work in an unfamiliar area of the codebase:
 1. Complete Quick Recovery steps above
 2. Read `01-docs/01-agents/onboarding/orientation.md`
 3. Read the relevant architecture section in `01-docs/architecture/`
-4. Read the relevant package spec in `01-docs/specs/packages/`
+4. Read the relevant package spec in `01-docs/specs/03-platform/packages/`
 5. Read 2–3 test files to understand expected behavior patterns
 6. Summarize understanding before proceeding
 

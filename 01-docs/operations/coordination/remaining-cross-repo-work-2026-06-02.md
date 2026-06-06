@@ -67,7 +67,7 @@ Living register of **open** cross-repo items originating from or affecting `gtcx
 #### Execution evidence
 
 ```bash
-cd /Users/amanianai/Sites/gtcx-ecosystem/gtcx-core/packages/eap
+cd /Users/amanianai/Sites/gtcx-ecosystem/gtcx-core/03-platform/packages/eap
 EAP_ENVIRONMENT=staging AWS_REGION=us-east-1 pnpm eap:sync-bundle
 ```
 
@@ -216,7 +216,7 @@ Hub: gtcx-core/01-docs/04-ops/coordination/remaining-cross-repo-work-2026-06-02.
 
 - `gtcx-protocols/tests/cross-repo/zkp-kat-vectors-consumption.test.ts` — loads `bulletproofsAmountRange` KAT; verifies via `@gtcx/crypto` `createZkpEngine()` when `@gtcx/crypto-native` is present
 - `pnpm exec vitest run --config vitest.integration.config.ts tests/cross-repo/zkp-kat-vectors-consumption.test.ts` — exit 0 (2/2)
-- DevDep: `@gtcx/zkp-kat-vectors` via `link:../gtcx-core/packages/zkp-kat-vectors` (publish to npm unblocks CI without sibling checkout)
+- DevDep: `@gtcx/zkp-kat-vectors` via `link:../gtcx-core/03-platform/packages/zkp-kat-vectors` (publish to npm unblocks CI without sibling checkout)
 
 ---
 

@@ -11,10 +11,10 @@ Reconcile audits/strategy into a living execution plan **and implement stories**
 
 ## Execute (read in order)
 
-1. `../gtcx-docs/tools/roadmap/roadmap-framework/AGENT-START.md`
-2. `../gtcx-docs/tools/roadmap/roadmap-framework/commands/execute-roadmap.md`
-3. `../gtcx-docs/tools/roadmap/roadmap-framework/prompts/roadmap/roadmap-reconcile-execute-prompt.md` — all phases (reconcile + plan + ship)
-4. `../gtcx-docs/tools/roadmap/roadmap-framework/ECOSYSTEM-CONTEXT.md`
+1. `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/AGENT-START.md`
+2. `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/commands/execute-roadmap.md`
+3. `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/prompts/roadmap/roadmap-reconcile-execute-prompt.md` — all phases (reconcile + plan + ship)
+4. `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/ECOSYSTEM-CONTEXT.md`
 
 ## Output
 

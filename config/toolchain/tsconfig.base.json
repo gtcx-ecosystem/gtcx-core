@@ -18,6 +18,5 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "types": ["node", "vitest/globals"]
-  },
-  "exclude": ["node_modules", "dist", "build", "coverage"]
+  }
 }

@@ -152,6 +152,6 @@ Downstream consumers do not need to change when the full implementation is injec
 
 ## Reference
 
-- [`01-docs/specs/packages/crypto.md`](./crypto.md) — primary consumer of traced wrappers
-- [`01-docs/specs/packages/verification.md`](./verification.md) — secondary consumer
+- [`01-docs/specs/03-platform/packages/crypto.md`](./crypto.md) — primary consumer of traced wrappers
+- [`01-docs/specs/03-platform/packages/verification.md`](./verification.md) — secondary consumer
 - [`01-docs/specs/core-spec.md`](../core-spec.md) — system overview

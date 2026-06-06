@@ -142,6 +142,6 @@ The native binary must be built and tested on all four targets before release:
 
 ## Reference
 
-- [`01-docs/specs/packages/crypto.md`](./crypto.md) — TS crypto package that consumes this
+- [`01-docs/specs/03-platform/packages/crypto.md`](./crypto.md) — TS crypto package that consumes this
 - [`01-docs/09-security/security-framework.md`](../../security/security-framework.md) — cryptographic standards
 - [`01-docs/devops/ci-cd/ci-cd.md`](../../devops/ci-cd/ci-cd.md) — platform matrix CI

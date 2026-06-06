@@ -10,14 +10,14 @@ review_cycle: 'on-change'
 related:
   - 01-docs/04-ops/repo/root-allowlist.json
   - 01-docs/05-audit/repo-hygiene-2026-06-05.md
-canonical_protocol: gtcx-docs/tools/audit/audit-framework/prompts/hygiene/repo-hygiene-protocol-prompt.md
+canonical_protocol: gtcx-docs/03-platform/tools/audit/audit-framework/prompts/hygiene/repo-hygiene-protocol-prompt.md
 ---
 
 # Repo Hygiene Protocol — gtcx-core
 
 > **Workspace type:** Monorepo (pnpm + Turborepo, 24 TypeScript packages + 4 config packages, 6 Rust crates).
 > **Machine allowlist:** [`root-allowlist.json`](root-allowlist.json) — single source of truth for CI checks.
-> **Canonical protocol:** `gtcx-docs/tools/audit/audit-framework/prompts/hygiene/repo-hygiene-protocol-prompt.md` (this file is the repo-specific overlay).
+> **Canonical protocol:** `gtcx-docs/03-platform/tools/audit/audit-framework/prompts/hygiene/repo-hygiene-protocol-prompt.md` (this file is the repo-specific overlay).
 
 ## Purpose
 
@@ -54,17 +54,17 @@ These files are generated/maintained by the agent-sync pipeline where noted. Do 
 
 ## Tier D — Monorepo spine
 
-| File                   | Purpose                    |
-| ---------------------- | -------------------------- |
-| `package.json`         | Root workspace manifest    |
-| `pnpm-workspace.yaml`  | pnpm workspace definitions |
-| `pnpm-lock.yaml`       | Lockfile (committed)       |
-| `turbo.json`           | Turborepo task graph (stub — sync from `config/toolchain/`) |
+| File                   | Purpose                                                      |
+| ---------------------- | ------------------------------------------------------------ |
+| `package.json`         | Root workspace manifest                                      |
+| `pnpm-workspace.yaml`  | pnpm workspace definitions                                   |
+| `pnpm-lock.yaml`       | Lockfile (committed)                                         |
+| `turbo.json`           | Turborepo task graph (stub — sync from `config/toolchain/`)  |
 | `tsconfig.json`        | Root TypeScript stub → `config/toolchain/tsconfig.base.json` |
-| `eslint.config.js`     | ESLint flat config                                         |
-| `commitlint.config.js` | Conventional commit lint                                   |
-| `baseline.config.ts`   | BaselineOS RAG config                                      |
-| `hygiene.config.json`  | gtcx-hygiene root policy                                   |
+| `eslint.config.js`     | ESLint flat config                                           |
+| `commitlint.config.js` | Conventional commit lint                                     |
+| `baseline.config.ts`   | BaselineOS RAG config                                        |
+| `hygiene.config.json`  | gtcx-hygiene root policy                                     |
 
 TypeDoc, Vitest workspace, and Docker live under **`config/toolchain/`** and **`04-ship/docker/`** — not at repo root.
 
@@ -151,7 +151,7 @@ Any agent or CI can run:
 /repo-hygiene
 ```
 
-Registry: `gtcx-docs/tools/audit/audit-framework/commands/repo-hygiene.md`
+Registry: `gtcx-docs/03-platform/tools/audit/audit-framework/commands/repo-hygiene.md`
 
 To execute remediation (apply fixes to 10/10 DoD):
 

@@ -57,27 +57,27 @@ review_cycle: 'on-change'
 
 ### 2.2 Feature Matrix
 
-| Feature                            | Status          | Evidence                                                                                          | Consumed By           |
-| ---------------------------------- | --------------- | ------------------------------------------------------------------------------------------------- | --------------------- |
-| Ed25519 signing & verification     | **Production**  | `03-platform/packages/crypto/tests/signing.test.ts`                                               | All downstream        |
-| P256 FIPS-validated signing        | **Production**  | `cargo test --features fips` passes (30 tests)                                                    | All downstream        |
-| SHA-256 / SHA-512 / BLAKE3 hashing | **Production**  | `03-platform/packages/crypto/tests/hashing.test.ts`                                               | All downstream        |
-| Groth16 ZKP (GCI threshold)        | **Production**  | `rust/gtcx-zkp` tests pass (38 tests)                                                             | `gtcx-markets`        |
-| Groth16 ZKP (commodity origin)     | **Beta**        | `rust/gtcx-zkp` tests pass; TS bindings in `03-platform/packages/crypto/`                         | `gtcx-markets`        |
-| Groth16 ZKP (diamond origin)       | **Beta**        | Thin wrapper over commodity origin circuit                                                        | `gtcx-markets`        |
-| Bulletproofs range proof           | **Production**  | `rust/gtcx-zkp` tests pass                                                                        | `gtcx-markets`        |
+| Feature                            | Status          | Evidence                                                                              | Consumed By           |
+| ---------------------------------- | --------------- | ------------------------------------------------------------------------------------- | --------------------- |
+| Ed25519 signing & verification     | **Production**  | `03-platform/packages/crypto/tests/signing.test.ts`                                   | All downstream        |
+| P256 FIPS-validated signing        | **Production**  | `cargo test --features fips` passes (30 tests)                                        | All downstream        |
+| SHA-256 / SHA-512 / BLAKE3 hashing | **Production**  | `03-platform/packages/crypto/tests/hashing.test.ts`                                   | All downstream        |
+| Groth16 ZKP (GCI threshold)        | **Production**  | `rust/gtcx-zkp` tests pass (38 tests)                                                 | `gtcx-markets`        |
+| Groth16 ZKP (commodity origin)     | **Beta**        | `rust/gtcx-zkp` tests pass; TS bindings in `03-platform/packages/crypto/`             | `gtcx-markets`        |
+| Groth16 ZKP (diamond origin)       | **Beta**        | Thin wrapper over commodity origin circuit                                            | `gtcx-markets`        |
+| Bulletproofs range proof           | **Production**  | `rust/gtcx-zkp` tests pass                                                            | `gtcx-markets`        |
 | Bulletproofs commodity range       | **Beta**        | Commodity/unit hash binding; `03-platform/packages/crypto/src/zkp-commodity-range.ts` | `gtcx-markets`        |
-| Schnorr identity proof             | **Production**  | `rust/gtcx-zkp` tests pass                                                                        | `gtcx-protocols`      |
-| Offline queue with durable storage | **Production**  | `03-platform/packages/sync/tests/offline-queue.test.ts`                                           | `gtcx-markets` mobile |
-| Connectivity profile detection     | **Production**  | `03-platform/packages/connectivity/tests/connectivity.test.ts`                                    | All mobile clients    |
-| P2P transport (libp2p mesh)        | **Scaffolding** | In-memory transport only; libp2p Phase 2 — `03-platform/packages/network/README.md`               | —                     |
-| API client with mTLS + retry       | **Production**  | `03-platform/packages/api-client/tests/canonical/`                                                | All downstream        |
-| DID resolution                     | **Beta**        | `03-platform/packages/identity/tests/did.test.ts`                                                 | `gtcx-markets`        |
-| ZKP native NAPI bindings           | **Beta**        | `03-platform/packages/crypto-native/`                                                             | `gtcx-markets`        |
-| USSD protocol                      | **Scaffolding** | String enum only (`'ussd-only'` profile)                                                          | —                     |
-| Adaptive low-bandwidth mode        | **Production**  | Dynamic compression, image downsampling, batching                                                 | All mobile clients    |
-| HSM key storage                    | **Beta**        | PKCS#11 keystore implemented in `rust/gtcx-crypto`                                                | `gtcx-infrastructure` |
-| Cloud KMS integration              | **Beta**        | AWS KMS keystore implemented in `rust/gtcx-crypto`                                                | `gtcx-infrastructure` |
+| Schnorr identity proof             | **Production**  | `rust/gtcx-zkp` tests pass                                                            | `gtcx-protocols`      |
+| Offline queue with durable storage | **Production**  | `03-platform/packages/sync/tests/offline-queue.test.ts`                               | `gtcx-markets` mobile |
+| Connectivity profile detection     | **Production**  | `03-platform/packages/connectivity/tests/connectivity.test.ts`                        | All mobile clients    |
+| P2P transport (libp2p mesh)        | **Scaffolding** | In-memory transport only; libp2p Phase 2 — `03-platform/packages/network/README.md`   | —                     |
+| API client with mTLS + retry       | **Production**  | `03-platform/packages/api-client/tests/canonical/`                                    | All downstream        |
+| DID resolution                     | **Beta**        | `03-platform/packages/identity/tests/did.test.ts`                                     | `gtcx-markets`        |
+| ZKP native NAPI bindings           | **Beta**        | `03-platform/packages/crypto-native/`                                                 | `gtcx-markets`        |
+| USSD protocol                      | **Scaffolding** | String enum only (`'ussd-only'` profile)                                              | —                     |
+| Adaptive low-bandwidth mode        | **Production**  | Dynamic compression, image downsampling, batching                                     | All mobile clients    |
+| HSM key storage                    | **Beta**        | PKCS#11 keystore implemented in `rust/gtcx-crypto`                                    | `gtcx-infrastructure` |
+| Cloud KMS integration              | **Beta**        | AWS KMS keystore implemented in `rust/gtcx-crypto`                                    | `gtcx-infrastructure` |
 
 ### 2.3 Business Value Proposition
 
@@ -277,7 +277,7 @@ Detailed roadmap: [`01-docs/05-audit/10-10-roadmap-2026-05-11.md`](../audit/10-1
 | `01-docs/09-security/threat-control-matrix.md`                    | Security controls                   | Security engineers, auditors |
 | `01-docs/10-compliance/soc2-readiness.md`                         | SOC 2 evidence                      | Compliance, buyers           |
 | `01-docs/08-gtm/00-executive-brief.md`                            | Executive summary                   | Investors, board             |
-| `01-docs/specs/packages/README.md`                    | Package specs                       | Engineers, integrators       |
+| `01-docs/specs/03-platform/packages/README.md`                    | Package specs                       | Engineers, integrators       |
 | `01-docs/decisions/adr-index.md`                                  | Architecture decisions              | Engineers, architects        |
 | `CONTRIBUTING.md`                                                 | Contribution guide                  | Open-source contributors     |
 | `CLAUDE.md`                                                       | Agent context                       | AI agents, new developers    |

@@ -26,7 +26,7 @@ caps_fired: 0
 **Date:** 2026-05-27  
 **Auditor:** Codex CLI  
 **Repo:** `gtcx-core`  
-**Methodology:** Fresh forensic master audit using the local repo instructions plus the available audit framework under `../gtcx-docs/tools/audit/audit-framework/`. At audit start, the generated agent instructions still pointed at `../gtcx-agentic/audit/`; that same-session drift is now remediated.
+**Methodology:** Fresh forensic master audit using the local repo instructions plus the available audit framework under `../gtcx-docs/03-platform/tools/audit/audit-framework/`. At audit start, the generated agent instructions still pointed at `../gtcx-agentic/audit/`; that same-session drift is now remediated.
 
 ## Executive Summary
 
@@ -114,13 +114,13 @@ Top priorities:
 
 ### Closed Same-Session Findings
 
-| Original finding                                    | Resolution                                                                                                | Validation                                                                                 |
-| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Required M2 `bundle:check-budgets` script missing   | Added `03-platform/tools/check-bundle-budgets.mjs` and `package.json` script.                             | `pnpm bundle:check-budgets` passes 21/21 packages; `--package @gtcx/crypto` filter passes. |
-| Agent audit framework path stale                    | Updated `.agent/audit-pointer.md` to `../gtcx-docs/tools/audit/audit-framework/` and regenerated targets. | `pnpm agent:check` passes.                                                                 |
-| Generated agent-sync TODO placeholders              | Updated `.agent/base.md` with repo purpose, stack, and build/run commands; regenerated targets.           | `pnpm agent:check` passes.                                                                 |
-| Docs index stale latest-audit and file-size claims  | Updated `01-docs/README.md` to point at this audit and current file-size posture.                         | `pnpm docs:check-frontmatter`, `pnpm docs:check-links`, and `pnpm format:check` pass.      |
-| Agent sync check was non-idempotent for `AGENTS.md` | Trimmed post-marker trailing whitespace in `03-platform/scripts/agent-sync/sync.mjs`.                     | `pnpm agent:sync` followed by `pnpm agent:check` is stable.                                |
+| Original finding                                    | Resolution                                                                                                            | Validation                                                                                 |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Required M2 `bundle:check-budgets` script missing   | Added `03-platform/tools/check-bundle-budgets.mjs` and `package.json` script.                                         | `pnpm bundle:check-budgets` passes 21/21 packages; `--package @gtcx/crypto` filter passes. |
+| Agent audit framework path stale                    | Updated `.agent/audit-pointer.md` to `../gtcx-docs/03-platform/tools/audit/audit-framework/` and regenerated targets. | `pnpm agent:check` passes.                                                                 |
+| Generated agent-sync TODO placeholders              | Updated `.agent/base.md` with repo purpose, stack, and build/run commands; regenerated targets.                       | `pnpm agent:check` passes.                                                                 |
+| Docs index stale latest-audit and file-size claims  | Updated `01-docs/README.md` to point at this audit and current file-size posture.                                     | `pnpm docs:check-frontmatter`, `pnpm docs:check-links`, and `pnpm format:check` pass.      |
+| Agent sync check was non-idempotent for `AGENTS.md` | Trimmed post-marker trailing whitespace in `03-platform/scripts/agent-sync/sync.mjs`.                                 | `pnpm agent:sync` followed by `pnpm agent:check` is stable.                                |
 
 ## Positive Evidence
 

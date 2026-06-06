@@ -102,3 +102,6 @@ out/
 *.bundled_*.mjs
 .baseline/config.json
 baseline.config.json
+
+# Local session / audit sidecars (not committed)
+.local/

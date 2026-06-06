@@ -51,7 +51,7 @@ audit_date: '2026-06-01'
   **Fix:** Remove blocker lines from README; align Package Readiness Matrix note.
 
 - **[Medium] [Spec Fidelity] — Package count drift across operational docs**  
-  **Evidence:** `pnpm architecture:check` reports **22** packages; `01-docs/specs/packages/README.md:17` says 21; `01-docs/devops/runbooks/quality-runbook.md:46-49` says 18; `01-docs/stack/tech-stack.md:54` says "18 public + 3 config". New `@gtcx/ai-eval` not reflected everywhere.  
+  **Evidence:** `pnpm architecture:check` reports **22** packages; `01-docs/specs/03-platform/packages/README.md:17` says 21; `01-docs/devops/runbooks/quality-runbook.md:46-49` says 18; `01-docs/stack/tech-stack.md:54` says "18 public + 3 config". New `@gtcx/ai-eval` not reflected everywhere.  
   **Impact:** Onboarding and audit evidence disagree with CI truth.  
   **Fix:** Single source of truth in `01-docs/roadmap.md` + `pnpm ops:check --emit-doc` or scripted package manifest.
 
@@ -62,7 +62,7 @@ audit_date: '2026-06-01'
 
 - **[Low] [Structural Integrity] — Offline sync logic split across packages**  
   **Evidence:** `03-platform/packages/sync/src/index.ts` implements conflict strategies; `03-platform/packages/domain/src/internal/offline-queue.ts:36,205` owns logical-sequence replay (tests at `03-platform/packages/domain/tests/offline-queue.test.ts:114`).  
-  **Impact:** Integrators must know two surfaces; spec in `01-docs/specs/packages/sync.md` may overstate `sync` ownership.  
+  **Impact:** Integrators must know two surfaces; spec in `01-docs/specs/03-platform/packages/sync.md` may overstate `sync` ownership.  
   **Fix:** Document canonical import path in sync spec; consider re-export from `@gtcx/sync`.
 
 - **[Low] [Spec Fidelity] — Rust P2P transport explicitly Phase 2**  
@@ -74,14 +74,14 @@ audit_date: '2026-06-01'
 
 ## PHASE 2 — Security Audit
 
-| Area                           | Status                             | Evidence                                                                                                                                                                                             |
-| ------------------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authentication & Authorization | **N/A (correct)**                  | Library has no auth surface; scoped in threat model                                                                                                                                                  |
+| Area                           | Status                             | Evidence                                                                                                                                                                     |
+| ------------------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authentication & Authorization | **N/A (correct)**                  | Library has no auth surface; scoped in threat model                                                                                                                          |
 | Data Protection                | **Strong**                         | `sanitizeSecrets` / `redactSecrets` (`03-platform/packages/security/src/index.ts:58`, `03-platform/packages/ai/src/traced.ts:12`); AES-GCM offline paths in security package |
-| Input Validation               | **Strong**                         | Zod across schemas/verification; `assertHex` at NAPI (`03-platform/packages/crypto-native/src/index.ts:74-80`)                                                                           |
-| Dependency Security            | **Strong (TS) / Mitigated (Rust)** | `pnpm audit` clean; `rust/.cargo/audit.toml` documents 6 ignored advisories with justification                                                                                                       |
-| Cryptographic Correctness      | **Strong**                         | No custom primitives; `#![deny(unsafe_code)]` in Rust; SA-002 placeholder ZKP gated (`03-platform/packages/crypto/src/zkp.ts:109-121`)                                                   |
-| Compliance Posture             | **Partial**                        | Framework docs present; **external attestation not delivered**                                                                                                                                       |
+| Input Validation               | **Strong**                         | Zod across schemas/verification; `assertHex` at NAPI (`03-platform/packages/crypto-native/src/index.ts:74-80`)                                                               |
+| Dependency Security            | **Strong (TS) / Mitigated (Rust)** | `pnpm audit` clean; `rust/.cargo/audit.toml` documents 6 ignored advisories with justification                                                                               |
+| Cryptographic Correctness      | **Strong**                         | No custom primitives; `#![deny(unsafe_code)]` in Rust; SA-002 placeholder ZKP gated (`03-platform/packages/crypto/src/zkp.ts:109-121`)                                       |
+| Compliance Posture             | **Partial**                        | Framework docs present; **external attestation not delivered**                                                                                                               |
 
 ### Findings
 
@@ -239,7 +239,7 @@ Accurate regulator-facing docs; closed false blockers; ops warnings cleared.
 | 1   | Remove odd-length-hex from README blockers       | Remediation | `README.md`                                                                                      | XS     | Stops false P2 in regulator review    |
 | 2   | Align package counts to 22 (21 public + ai-eval) | Remediation | `quality-runbook.md`, `tech-stack.md`, `qa-process.md`                                           | S      | Single truth for audits               |
 | 3   | Set TURBO_TOKEN, TURBO_TEAM, OPENAI_API_KEY      | Remediation | gh org secrets                                                                                   | XS     | CI velocity + AI codeowner resilience |
-| 4   | Add ai-eval to architecture manifest             | Evolution   | `03-platform/tools/check-package-boundaries.mjs`, `01-docs/specs/packages/README.md` | S      | New package formally tracked          |
+| 4   | Add ai-eval to architecture manifest             | Evolution   | `03-platform/tools/check-package-boundaries.mjs`, `01-docs/specs/03-platform/packages/README.md` | S      | New package formally tracked          |
 
 ### Definition of Done
 
@@ -296,12 +296,12 @@ Five target jurisdictions have validated config paths; offline story documented.
 
 ### Tasks
 
-| #   | Task                                             | Layer       | Files                                                             | Effort | Why It Matters                         |
-| --- | ------------------------------------------------ | ----------- | ----------------------------------------------------------------- | ------ | -------------------------------------- |
-| 1   | E2E jurisdiction fixtures ZW/GH/NA/BW/CD         | Remediation | `03-platform/packages/config/jurisdiction/`, tests                | L      | Engagement roadmap #14                 |
-| 2   | Document offline canonical path (domain vs sync) | Evolution   | `01-docs/specs/packages/sync.md`, `domain.md`         | S      | Integrator confusion removed           |
-| 3   | Split verification templates if >500 LOC         | Evolution   | `03-platform/packages/verification/src/certificates/` | M      | Prevents LOC gate failure              |
-| 4   | Reference integration: runtime + offline queue   | Innovation  | `tests/integration/`                                              | L      | Moat — copyable code, hard integration |
+| #   | Task                                             | Layer       | Files                                                     | Effort | Why It Matters                         |
+| --- | ------------------------------------------------ | ----------- | --------------------------------------------------------- | ------ | -------------------------------------- |
+| 1   | E2E jurisdiction fixtures ZW/GH/NA/BW/CD         | Remediation | `03-platform/packages/config/jurisdiction/`, tests        | L      | Engagement roadmap #14                 |
+| 2   | Document offline canonical path (domain vs sync) | Evolution   | `01-docs/specs/03-platform/packages/sync.md`, `domain.md` | S      | Integrator confusion removed           |
+| 3   | Split verification templates if >500 LOC         | Evolution   | `03-platform/packages/verification/src/certificates/`     | M      | Prevents LOC gate failure              |
+| 4   | Reference integration: runtime + offline queue   | Innovation  | `tests/integration/`                                      | L      | Moat — copyable code, hard integration |
 
 ### Definition of Done
 
@@ -375,11 +375,11 @@ Every release ships machine-readable trust evidence.
 
 ### Tasks
 
-| #   | Task                                        | Layer      | Files                                           | Effort | Why It Matters               |
-| --- | ------------------------------------------- | ---------- | ----------------------------------------------- | ------ | ---------------------------- |
-| 1   | ai-eval gates README/spec drift             | Innovation | `03-platform/packages/ai-eval/src/` | M      | 90-day copy test — automated |
-| 2   | Published fuzz summary per release          | Innovation | `03-platform/tools/`, `01-docs/05-audit/`       | S      | Regulator-ready artifact     |
-| 3   | Signed trust-portal snapshot (external URL) | Innovation | `01-docs/governance/trust-portal.md`            | L      | Moat — operational evidence  |
+| #   | Task                                        | Layer      | Files                                     | Effort | Why It Matters               |
+| --- | ------------------------------------------- | ---------- | ----------------------------------------- | ------ | ---------------------------- |
+| 1   | ai-eval gates README/spec drift             | Innovation | `03-platform/packages/ai-eval/src/`       | M      | 90-day copy test — automated |
+| 2   | Published fuzz summary per release          | Innovation | `03-platform/tools/`, `01-docs/05-audit/` | S      | Regulator-ready artifact     |
+| 3   | Signed trust-portal snapshot (external URL) | Innovation | `01-docs/governance/trust-portal.md`      | L      | Moat — operational evidence  |
 
 ### Sprint Value Statement
 

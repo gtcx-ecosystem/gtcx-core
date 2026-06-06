@@ -10,7 +10,7 @@
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 
-import { findBaselineOsRoot } from '../../baseline-os/scripts/ecosystem/lib/resolve-baseline-os-root.mjs';
+import { findBaselineOsRoot } from '../../baseline-os/03-platform/scripts/ecosystem/lib/resolve-baseline-os-root.mjs';
 
 const baselineRoot = findBaselineOsRoot(process.cwd());
 if (!baselineRoot) {

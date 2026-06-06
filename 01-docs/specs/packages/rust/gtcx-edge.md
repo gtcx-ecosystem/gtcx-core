@@ -130,7 +130,7 @@ The edge runtime is designed for the GPRS field agent scenario:
 
 ## Reference
 
-- [`01-docs/specs/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — hash operations
-- [`01-docs/specs/packages/connectivity.md`](../connectivity.md) — connectivity detection
-- [`01-docs/specs/packages/sync.md`](../sync.md) — sync engine
+- [`01-docs/specs/03-platform/packages/rust/gtcx-crypto.md`](./gtcx-crypto.md) — hash operations
+- [`01-docs/specs/03-platform/packages/connectivity.md`](../connectivity.md) — connectivity detection
+- [`01-docs/specs/03-platform/packages/sync.md`](../sync.md) — sync engine
 - [`01-docs/specs/core-spec.md`](../../core-spec.md) — system overview and operational SLOs

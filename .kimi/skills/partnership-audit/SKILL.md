@@ -9,9 +9,9 @@ Run the GTCX **partnership-audit** audit in **this repo** (`gtcx-core`).
 
 ## Steps
 
-1. Read command spec: `../gtcx-docs/tools/audit/audit-framework/commands/partnership-audit.md`
-2. Read prompt (BEGIN PROMPT → END PROMPT): `../gtcx-docs/tools/audit/audit-framework/prompts/domains/partnership-audit-prompt.md`
-3. Read scoring protocol: `../gtcx-docs/tools/audit/audit-framework/../domain-scoring/partnership-scoring.md`
+1. Read command spec: `../gtcx-docs/03-platform/tools/audit/audit-framework/commands/partnership-audit.md`
+2. Read prompt (BEGIN PROMPT → END PROMPT): `../gtcx-docs/03-platform/tools/audit/audit-framework/prompts/domains/partnership-audit-prompt.md`
+3. Read scoring protocol: `../gtcx-docs/03-platform/tools/audit/audit-framework/../domain-scoring/partnership-scoring.md`
 4. **Protocol 27:** Run verification gates in-session; report command + exit code
 5. Write forensic: `01-docs/05-audit/partnership-audit-YYYY-MM-DD.md` (today's date)
 6. Update lane index + `01-docs/05-audit/latest.json` if readiness changed
@@ -20,8 +20,8 @@ Run the GTCX **partnership-audit** audit in **this repo** (`gtcx-core`).
 
 ## Registry
 
-- Framework: `../gtcx-docs/tools/audit/audit-framework/AGENT-START.md`
-- Lane audits: `../gtcx-docs/tools/audit/lane-audits/README.md`
-- Domain audits: `../gtcx-docs/tools/audit/domain-audits/README.md`
+- Framework: `../gtcx-docs/03-platform/tools/audit/audit-framework/AGENT-START.md`
+- Lane audits: `../gtcx-docs/03-platform/tools/audit/lane-audits/README.md`
+- Domain audits: `../gtcx-docs/03-platform/tools/audit/domain-audits/README.md`
 
 **Kimi invoke:** `/skill:partnership-audit` (not `/partnership-audit`).

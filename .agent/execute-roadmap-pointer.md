@@ -2,7 +2,7 @@
 
 Use when audits must be **reconciled** into a living plan — not for session-by-session implementation drain.
 
-1. Read `../gtcx-docs/tools/roadmap/roadmap-framework/AGENT-START.md`
+1. Read `../gtcx-docs/03-platform/tools/roadmap/roadmap-framework/AGENT-START.md`
 2. Command `execute-roadmap` — update `01-docs/05-audit/execution-roadmap.md`
 3. **Then ship** via **execution bout** (intrinsic): `01-docs/04-ops/agent-execution-bout.md` · `pnpm agent:session-start`
 

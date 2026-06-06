@@ -826,55 +826,55 @@ importers:
     devDependencies:
       '@gtcx/api-client':
         specifier: workspace:*
-        version: link:../../packages/api-client
+        version: link:../../03-platform/packages/api-client
       '@gtcx/connectivity':
         specifier: workspace:*
-        version: link:../../packages/connectivity
+        version: link:../../03-platform/packages/connectivity
       '@gtcx/crypto':
         specifier: workspace:*
-        version: link:../../packages/crypto
+        version: link:../../03-platform/packages/crypto
       '@gtcx/domain':
         specifier: workspace:*
-        version: link:../../packages/domain
+        version: link:../../03-platform/packages/domain
       '@gtcx/events':
         specifier: workspace:*
-        version: link:../../packages/events
+        version: link:../../03-platform/packages/events
       '@gtcx/identity':
         specifier: workspace:*
-        version: link:../../packages/identity
+        version: link:../../03-platform/packages/identity
       '@gtcx/jurisdiction-config':
         specifier: workspace:*
-        version: link:../../packages/config/jurisdiction
+        version: link:../../03-platform/packages/config/jurisdiction
       '@gtcx/logging':
         specifier: workspace:*
-        version: link:../../packages/logging
+        version: link:../../03-platform/packages/logging
       '@gtcx/resilience':
         specifier: workspace:*
-        version: link:../../packages/resilience
+        version: link:../../03-platform/packages/resilience
       '@gtcx/runtime':
         specifier: workspace:*
-        version: link:../../packages/runtime
+        version: link:../../03-platform/packages/runtime
       '@gtcx/schemas':
         specifier: workspace:*
-        version: link:../../packages/schemas
+        version: link:../../03-platform/packages/schemas
       '@gtcx/security':
         specifier: workspace:*
-        version: link:../../packages/security
+        version: link:../../03-platform/packages/security
       '@gtcx/sync':
         specifier: workspace:*
-        version: link:../../packages/sync
+        version: link:../../03-platform/packages/sync
       '@gtcx/telemetry':
         specifier: workspace:*
-        version: link:../../packages/telemetry
+        version: link:../../03-platform/packages/telemetry
       '@gtcx/types':
         specifier: workspace:*
-        version: link:../../packages/types
+        version: link:../../03-platform/packages/types
       '@gtcx/verification':
         specifier: workspace:*
-        version: link:../../packages/verification
+        version: link:../../03-platform/packages/verification
       '@gtcx/workproof':
         specifier: workspace:*
-        version: link:../../packages/workproof
+        version: link:../../03-platform/packages/workproof
       vitest:
         specifier: ^4.1.8
         version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@22.19.8)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@22.19.8)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.4)(yaml@2.9.0))

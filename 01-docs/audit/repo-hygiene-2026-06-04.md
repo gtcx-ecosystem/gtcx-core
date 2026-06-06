@@ -154,5 +154,5 @@ None for P0/P1. P2 items are optional polish; do not inflate score.
 
 ## Reference
 
-- Command: `gtcx-docs/tools/audit/audit-framework/commands/execute-repo-hygiene.md`
+- Command: `gtcx-docs/03-platform/tools/audit/audit-framework/commands/execute-repo-hygiene.md`
 - Prior audit: [repo-hygiene-2026-06-05.md](./repo-hygiene-2026-06-05.md)

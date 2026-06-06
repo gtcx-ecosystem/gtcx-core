@@ -9,8 +9,8 @@ Run the GTCX **doc-standard** audit in **this repo** (`gtcx-core`).
 
 ## Steps
 
-1. Read command spec: `../gtcx-docs/tools/audit/audit-framework/commands/doc-standard.md`
-2. Read prompt (BEGIN PROMPT → END PROMPT): `../gtcx-docs/tools/audit/audit-framework/prompts/01-docs/forensic-doc-standard-prompt.md`
+1. Read command spec: `../gtcx-docs/03-platform/tools/audit/audit-framework/commands/doc-standard.md`
+2. Read prompt (BEGIN PROMPT → END PROMPT): `../gtcx-docs/03-platform/tools/audit/audit-framework/prompts/01-docs/forensic-doc-standard-prompt.md`
 3. Follow scoring in command + prompt
 4. **Protocol 27:** Run verification gates in-session; report command + exit code
 5. Write forensic: `Standardized docs + INDEX` (today's date)
@@ -20,8 +20,8 @@ Run the GTCX **doc-standard** audit in **this repo** (`gtcx-core`).
 
 ## Registry
 
-- Framework: `../gtcx-docs/tools/audit/audit-framework/AGENT-START.md`
-- Lane audits: `../gtcx-docs/tools/audit/lane-audits/README.md`
-- Domain audits: `../gtcx-docs/tools/audit/domain-audits/README.md`
+- Framework: `../gtcx-docs/03-platform/tools/audit/audit-framework/AGENT-START.md`
+- Lane audits: `../gtcx-docs/03-platform/tools/audit/lane-audits/README.md`
+- Domain audits: `../gtcx-docs/03-platform/tools/audit/domain-audits/README.md`
 
 **Kimi invoke:** `/skill:doc-standard` (not `/doc-standard`).

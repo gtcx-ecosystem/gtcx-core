@@ -47,4 +47,4 @@ Agent will re-run `pnpm agent:environment:check` (or `baseline start`) in this s
 
 ## Canonical checker
 
-`baseline-os/scripts/ecosystem/lib/agent-environment-autonomy.mjs` — invoked at Phase 0b of `baseline start`.
+`baseline-os/03-platform/scripts/ecosystem/lib/agent-environment-autonomy.mjs` — invoked at Phase 0b of `baseline start`.

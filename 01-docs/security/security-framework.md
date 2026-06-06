@@ -127,6 +127,6 @@ Introducing a new cryptographic library requires: Cryptographic Security Enginee
 
 - [`01-docs/decisions/001-rust-for-cryptography.md`](../decisions/001-rust-for-cryptography.md) — why Rust for crypto
 - [`01-docs/decisions/005-ed25519-signing.md`](../decisions/005-ed25519-signing.md) — Ed25519 selection rationale
-- [`01-docs/specs/packages/`](../specs/03-platform/packages/) — crypto and security package specs
+- [`01-docs/specs/03-platform/packages/`](../specs/03-platform/packages/) — crypto and security package specs
 - [`01-docs/01-agents/roles/crypto-security-engineer.md`](../agents/roles/crypto-security-engineer.md) — gatekeeper role
 - [`01-docs/01-agents/workflows/safety-rules.md`](../agents/workflows/safety-rules.md) — what requires human approval

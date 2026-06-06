@@ -10,16 +10,16 @@ import { join } from 'node:path';
 import {
   buildAgentCapabilityManifest,
   formatAgentCapabilityManifestHuman,
-} from '../../../baseline-os/scripts/ecosystem/lib/agent-capability-manifest.mjs';
+} from '../../../baseline-os/03-platform/scripts/ecosystem/lib/agent-capability-manifest.mjs';
 import {
   checkAgentEnvironmentAutonomy,
   formatAgentEnvironmentAutonomyHuman,
-} from '../../../baseline-os/scripts/ecosystem/lib/agent-environment-autonomy.mjs';
-import { buildRequiredReadsPayload } from '../../../baseline-os/scripts/ecosystem/lib/required-agent-reads.mjs';
+} from '../../../baseline-os/03-platform/scripts/ecosystem/lib/agent-environment-autonomy.mjs';
+import { buildRequiredReadsPayload } from '../../../baseline-os/03-platform/scripts/ecosystem/lib/required-agent-reads.mjs';
 import {
   buildSessionAuditContext,
   formatSessionAuditContextHuman,
-} from '../../../baseline-os/scripts/ecosystem/lib/session-audit-context.mjs';
+} from '../../../baseline-os/03-platform/scripts/ecosystem/lib/session-audit-context.mjs';
 
 import { buildProgressGauge } from './lib/agent-bout-progress-gauge.mjs';
 import { REPO_ROOT } from './lib/repo-root.mjs';
