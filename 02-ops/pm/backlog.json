@@ -3,9 +3,28 @@
   "repo": "gtcx-core",
   "updated": "2026-06-06",
   "syncSource": "pnpm pm:sync",
-  "active": null,
-  "backlogClear": null,
-  "stories": [],
+  "active": {
+    "storyId": "DTF-5.5.4",
+    "title": "Design-partner LOI or regulator letter",
+    "status": "awaiting-human",
+    "owner": "Human / GTM",
+    "tier": "external-attestation"
+  },
+  "backlogClear": true,
+  "stories": [
+    {
+      "id": "CORE-004",
+      "status": "unknown",
+      "title": "gtcx-core",
+      "owner": "**engineering-done**"
+    },
+    {
+      "id": "S5-01",
+      "status": "unknown",
+      "title": "done",
+      "owner": null
+    }
+  ],
   "crossRepoRefs": [],
   "agileHub": {
     "repo": "gtcx-agile",
@@ -14,5 +33,5 @@
     "v1Tracker": "https://github.com/gtcx-ecosystem/gtcx-agile/blob/main/01-docs/v1-shipping/execution-tracker.json",
     "agentBridge": "https://github.com/gtcx-ecosystem/gtcx-agile/blob/main/01-docs/06-coordination/agent-bridge.md"
   },
-  "roadmapPath": null
+  "roadmapPath": "01-docs/05-audit/execution-roadmap.md"
 }
