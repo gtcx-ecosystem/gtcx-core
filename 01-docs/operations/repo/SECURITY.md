@@ -1,3 +1,13 @@
+---
+title: 'Security Policy — gtcx-core'
+status: current
+date: 2026-06-06
+owner: gtcx-core
+role: crypto-security-engineer
+tier: critical
+review_cycle: on-change
+---
+
 # Security Policy
 
 ## Reporting a Vulnerability
@@ -8,7 +18,7 @@ If you discover a security vulnerability in gtcx-core, please report it responsi
 
 Email: **security@gtcx.trade**
 
-The internal response process is documented in [`SECURITY-INCIDENT.md`](./01-docs/09-security/security-incident-runbook.md).
+The internal response process is documented in [`SECURITY-INCIDENT.md`](../../09-security/security-incident-runbook.md).
 
 Include:
 

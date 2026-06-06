@@ -18,10 +18,10 @@ module.exports = [
       '**/*.js.map',
       '**/*.d.ts',
       '**/*.d.ts.map',
-      'packages/*/src/**/*.js',
-      'packages/*/tests/**/*.js',
-      'packages/*/vitest.config.js',
-      'packages/*/tsup.config.js',
+      '03-platform/packages/*/src/**/*.js',
+      '03-platform/packages/*/tests/**/*.js',
+      '03-platform/packages/*/vitest.config.js',
+      '03-platform/packages/*/tsup.config.js',
       'vitest.workspace.js',
     ],
   },
@@ -29,7 +29,7 @@ module.exports = [
   prettierConfig,
   {
     // Allow require() in CJS config files
-    files: ['**/*.cjs', '**/eslint.config.js', 'packages/config/**/*.js'],
+    files: ['**/*.cjs', '**/eslint.config.js', '03-platform/packages/config/**/*.js'],
     rules: {
       '@typescript-eslint/no-require-imports': 'off',
     },

@@ -2,6 +2,12 @@
 
 All notable changes to the GTCX Core monorepo.
 
+## [Unreleased]
+
+### Changed
+
+- Layout v3 + governance spine migration (seven-hub root, Protocol 31–33).
+
 ## [1.0.0] — 2026-03-19
 
 ### Packages (19 TypeScript + 6 Rust)

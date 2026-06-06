@@ -19,7 +19,6 @@ const COPY_PAIRS = [
   ['config/toolchain/turbo.json', 'turbo.json'],
   ['config/toolchain/editorconfig', '.editorconfig'],
   ['config/toolchain/nvmrc', '.nvmrc'],
-  ['config/toolchain/vitest.workspace.ts', 'vitest.workspace.ts'],
   ['config/toolchain/Makefile', 'Makefile'],
   ['config/baseline/baseline.config.json', 'baseline.config.json'],
 ];

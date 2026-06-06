@@ -1,12 +1,16 @@
+---
+title: 'Contributing to gtcx-core'
+status: current
+date: 2026-06-06
+owner: gtcx-core
+role: protocol-architect
+tier: standard
+review_cycle: on-change
+---
+
 # Contributing to gtcx-core
 
-## Prerequisites
-
-- Node.js >= 20.0.0
-- pnpm >= 9.15.0
-- Rust 1.88.x (matches the workspace `rust-version`)
-
-## Setup
+## Quick Start
 
 ```bash
 git clone https://github.com/gtcx-ecosystem/gtcx-core.git
@@ -15,6 +19,26 @@ pnpm install
 pnpm build
 pnpm test
 ```
+
+- Node.js >= 20.0.0
+- pnpm >= 9.15.0
+- Rust 1.88.x (matches the workspace `rust-version`)
+
+## Quality Gates
+
+Must pass before every commit:
+
+```bash
+pnpm architecture:check
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+```
+
+Pre-commit hooks enforce these automatically via Husky.
+
+## Setup
 
 ## Development Workflow
 
@@ -38,14 +62,7 @@ pnpm build
 
 Pre-commit hooks enforce these automatically via Husky.
 
-## Making Changes
-
-1. Create a branch from `main`
-2. Make your changes
-3. Run quality gates locally
-4. Open a PR against `main`
-
-### Commit messages
+## Commit Convention
 
 Use conventional commits: `type(scope): subject`
 
@@ -55,6 +72,15 @@ feat(domain): add batch validation for asset lots
 test(security): add JWT audience mismatch test
 chore(deps): bump vitest to 3.2
 ```
+
+## Pull Request
+
+1. Create a branch from `main`
+2. Run quality gates locally
+3. Open a PR against `main` with a clear summary and test evidence
+4. Ensure CODEOWNERS paths are satisfied for security-sensitive packages
+
+### Commit messages (detail)
 
 ### Signed commits
 
@@ -179,6 +205,12 @@ This creates a markdown file in `.changeset/` describing the change and its semv
 ## Security
 
 See [SECURITY.md](./SECURITY.md) for vulnerability reporting.
+
+## Agents
+
+- Agent entry: [AGENTS.md](../../../AGENTS.md)
+- Audit start: [05-audit/AGENT-START.md](../../../05-audit/AGENT-START.md)
+- Work selection: `pnpm agent:next-work` (Protocol 22)
 
 Do not:
 

@@ -103,6 +103,7 @@
     "agent:reconcile-bout-progress": "node 03-platform/scripts/reconcile-bout-progress.mjs",
     "check:workspace-root-cleanliness": "python3 03-platform/scripts/ops/check-workspace-root-cleanliness.py",
     "check:workspace-root-cleanliness:strict": "python3 03-platform/scripts/ops/check-workspace-root-cleanliness.py --strict",
+    "layout:migrate:v6:check": "node 03-platform/scripts/layout-drift-check.mjs",
     "session": "node ../baseline-os/03-platform/packages/baselineos/dist/cli/bin.js session",
     "next": "node ../baseline-os/03-platform/scripts/ecosystem/work-next.mjs",
     "gates": "node ../baseline-os/03-platform/scripts/ecosystem/human-gates-check.mjs",
